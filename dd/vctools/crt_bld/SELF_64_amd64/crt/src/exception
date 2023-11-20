@@ -1,0 +1,8 @@
+// File Line: 379
+// RVA: 0x12DD8E8
+void __fastcall std::bad_alloc::~bad_alloc(std::bad_alloc *this)
+{
+  this->vfptr = (std::exceptionVtbl *)&std::bad_alloc::`vftable';
+  std::bad_cast::~bad_cast((std::exception *)&this->vfptr);
+}
+

@@ -1,0 +1,319 @@
+// File Line: 763
+// RVA: 0xF5CF0
+void __fastcall std::vector<RVO::Line,std::allocator<RVO::Line>>::_Construct<std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<RVO::Line>>>>(std::vector<RVO::Line,std::allocator<RVO::Line> > *this, std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<RVO::Line> > > _First, std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<RVO::Line> > > _Last)
+{
+  std::forward_iterator_tag __formal; // [rsp+68h] [rbp+20h]
+
+  std::vector<RVO::Line,std::allocator<RVO::Line>>::_Insert<std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<RVO::Line>>>>(
+    this,
+    (std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<RVO::Line> > >)this->_Myfirst,
+    _First,
+    _Last,
+    __formal);
+}
+
+// File Line: 767
+// RVA: 0x134AC50
+`std::vector<RVO::Line,std::allocator<RVO::Line> >::_Construct<std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<RVO::Line> > > >'::`1'::catch$0
+
+// File Line: 836
+// RVA: 0xF9D40
+void __fastcall std::vector<std::pair<float,RVO::Obstacle const *>,std::allocator<std::pair<float,RVO::Obstacle const *>>>::push_back(std::vector<std::pair<float,RVO::Obstacle const *>,std::allocator<std::pair<float,RVO::Obstacle const *> > > *this, std::pair<float,RVO::Obstacle const *> *_Val)
+{
+  std::pair<float,RVO::Obstacle const *> *v2; // rdi
+  std::vector<std::pair<float,RVO::Obstacle const *>,std::allocator<std::pair<float,RVO::Obstacle const *> > > *v3; // rbx
+  std::pair<float,RVO::Obstacle const *> *v4; // rax
+  std::pair<float,RVO::Obstacle const *> *v5; // rcx
+  signed __int64 v6; // rdi
+  unsigned __int64 v7; // rdi
+  std::pair<float,RVO::Obstacle const *> *v8; // rcx
+  std::pair<float,RVO::Obstacle const *> *v9; // rcx
+
+  v2 = _Val;
+  v3 = this;
+  v4 = this->_Mylast;
+  if ( _Val >= v4 || (v5 = this->_Myfirst, v5 > _Val) )
+  {
+    if ( v4 == v3->_Myend )
+      std::vector<std::pair<float,RVO::Obstacle const *>,std::allocator<std::pair<float,RVO::Obstacle const *>>>::_Reserve(
+        v3,
+        1ui64);
+    v9 = v3->_Mylast;
+    if ( v9 )
+    {
+      v9->first = v2->first;
+      v9->second = v2->second;
+    }
+  }
+  else
+  {
+    v6 = (char *)_Val - (char *)v5;
+    if ( v4 == v3->_Myend )
+      std::vector<std::pair<float,RVO::Obstacle const *>,std::allocator<std::pair<float,RVO::Obstacle const *>>>::_Reserve(
+        v3,
+        1ui64);
+    v7 = (unsigned __int64)v3->_Myfirst + (v6 & 0xFFFFFFFFFFFFFFF0ui64);
+    v8 = v3->_Mylast;
+    if ( v8 )
+    {
+      v8->first = *(float *)v7;
+      v8->second = *(RVO::Obstacle **)(v7 + 8);
+    }
+  }
+  ++v3->_Mylast;
+}
+
+// File Line: 899
+// RVA: 0xF79A0
+void __fastcall std::vector<std::pair<float,RVO::Agent const *>,std::allocator<std::pair<float,RVO::Agent const *>>>::~vector<std::pair<float,RVO::Agent const *>,std::allocator<std::pair<float,RVO::Agent const *>>>(std::vector<RVO::Line,std::allocator<RVO::Line> > *this)
+{
+  std::vector<RVO::Line,std::allocator<RVO::Line> > *v1; // rbx
+  RVO::Line *v2; // rcx
+
+  v1 = this;
+  v2 = this->_Myfirst;
+  if ( v2 )
+  {
+    operator delete[](v2);
+    v1->_Myfirst = 0i64;
+    v1->_Mylast = 0i64;
+    v1->_Myend = 0i64;
+  }
+}
+
+// File Line: 1184
+// RVA: 0xF9DF0
+void __fastcall std::vector<RVO::Line,std::allocator<RVO::Line>>::push_back(std::vector<RVO::Line,std::allocator<RVO::Line> > *this, RVO::Line *_Val)
+{
+  RVO::Line *v2; // rdi
+  std::vector<RVO::Line,std::allocator<RVO::Line> > *v3; // rbx
+  RVO::Line *v4; // rax
+  RVO::Line *v5; // rcx
+  signed __int64 v6; // rdi
+  float *v7; // rdi
+  RVO::Line *v8; // rcx
+  RVO::Line *v9; // rcx
+
+  v2 = _Val;
+  v3 = this;
+  v4 = this->_Mylast;
+  if ( _Val >= v4 || (v5 = this->_Myfirst, v5 > _Val) )
+  {
+    if ( v4 == v3->_Myend )
+      std::vector<RVO::Line,std::allocator<RVO::Line>>::_Reserve(v3, 1ui64);
+    v9 = v3->_Mylast;
+    if ( v9 )
+    {
+      v9->point.x_ = v2->point.x_;
+      v9->point.y_ = v2->point.y_;
+      v9->direction.x_ = v2->direction.x_;
+      v9->direction.y_ = v2->direction.y_;
+    }
+  }
+  else
+  {
+    v6 = (char *)_Val - (char *)v5;
+    if ( v4 == v3->_Myend )
+      std::vector<RVO::Line,std::allocator<RVO::Line>>::_Reserve(v3, 1ui64);
+    v7 = (float *)((char *)&v3->_Myfirst->point + (v6 & 0xFFFFFFFFFFFFFFF0ui64));
+    v8 = v3->_Mylast;
+    if ( v8 )
+    {
+      v8->point.x_ = *v7;
+      v8->point.y_ = v7[1];
+      v8->direction.x_ = v7[2];
+      v8->direction.y_ = v7[3];
+    }
+  }
+  ++v3->_Mylast;
+}
+
+// File Line: 1294
+// RVA: 0xF5D30
+void __fastcall std::vector<RVO::Line,std::allocator<RVO::Line>>::_Insert<std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<RVO::Line>>>>(std::vector<RVO::Line,std::allocator<RVO::Line> > *this, std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<RVO::Line> > > _Where, std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<RVO::Line> > > _First, std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<RVO::Line> > > _Last)
+{
+  RVO::Line *v4; // r11
+  std::vector<RVO::Line,std::allocator<RVO::Line> > *v5; // rsi
+  unsigned __int64 v6; // rdi
+  RVO::Line *v7; // rbx
+  RVO::Line *v8; // r8
+  RVO::Line *v9; // rcx
+  signed __int64 v10; // r8
+  unsigned __int64 v11; // rbx
+  unsigned __int64 v12; // rbx
+  char *v13; // r14
+  unsigned __int64 v14; // rdi
+  signed __int64 v15; // rdi
+  RVO::Line *v16; // rdx
+  RVO::Line *v17; // r8
+  char v18; // [rsp+30h] [rbp-38h]
+  char *v19; // [rsp+38h] [rbp-30h]
+  RVO::Line *v20; // [rsp+40h] [rbp-28h]
+  __int64 v21; // [rsp+48h] [rbp-20h]
+  RVO::Line *_Lasta; // [rsp+78h] [rbp+10h]
+  RVO::Line *_Firsta; // [rsp+80h] [rbp+18h]
+  RVO::Line *v24; // [rsp+88h] [rbp+20h]
+
+  v24 = _Last._Ptr;
+  _Firsta = _First._Ptr;
+  _Lasta = _Where._Ptr;
+  v21 = -2i64;
+  v4 = _First._Ptr;
+  v5 = this;
+  v6 = _Last._Ptr - _First._Ptr;
+  if ( v6 )
+  {
+    v7 = this->_Myend;
+    v8 = this->_Mylast;
+    if ( (_QWORD)((char *)this->_Myend - (char *)v8) >> 4 >= v6 )
+    {
+      std::_Uninit_copy<std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<RVO::Line>>>,RVO::Line *,std::allocator<RVO::Line>>(
+        (std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<RVO::Line> > >)v4,
+        _Last,
+        v8,
+        (std::_Wrap_alloc<std::allocator<RVO::Line> > *)&v18,
+        (std::_Nonscalar_ptr_iterator_tag)_Last._Ptr);
+      v15 = v6;
+      v16 = v5->_Mylast;
+      v17 = &v16[v15];
+      if ( _Lasta != v16 && v16 != v17 )
+        std::_Rotate<RVO::Line *,__int64,RVO::Line>(_Lasta, v16, v17, 0i64, 0i64);
+      v5->_Mylast = (RVO::Line *)((char *)v5->_Mylast + v15 * 16);
+    }
+    else
+    {
+      v9 = this->_Myfirst;
+      v10 = v8 - v9;
+      if ( 0xFFFFFFFFFFFFFFFi64 - v10 < v6 )
+        std::_Xlength_error("vector<T> too long");
+      v11 = v7 - v9;
+      if ( 0xFFFFFFFFFFFFFFFi64 - (v11 >> 1) >= v11 )
+        v12 = (v11 >> 1) + v11;
+      else
+        v12 = 0i64;
+      if ( v12 < v10 + v6 )
+        v12 = v10 + v6;
+      v13 = 0i64;
+      v19 = 0i64;
+      if ( v12 )
+      {
+        if ( v12 > 0xFFFFFFFFFFFFFFFi64
+          || (v13 = UFG::qMalloc(16 * v12, UFG::gGlobalNewName, 0i64), (v19 = v13) == 0i64) )
+        {
+          std::_Xbad_alloc();
+        }
+      }
+      v20 = std::_Uninit_move<RVO::Line *,RVO::Line *,std::allocator<RVO::Line>,RVO::Line>(
+              v5->_Myfirst,
+              _Lasta,
+              (RVO::Line *)v13,
+              (std::_Wrap_alloc<std::allocator<RVO::Line> > *)&v18,
+              0i64,
+              (std::_Nonscalar_ptr_iterator_tag)v24);
+      v20 = std::_Uninit_copy<std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<RVO::Line>>>,RVO::Line *,std::allocator<RVO::Line>>(
+              (std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<RVO::Line> > >)_Firsta,
+              (std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<RVO::Line> > >)v24,
+              v20,
+              (std::_Wrap_alloc<std::allocator<RVO::Line> > *)&v18,
+              (std::_Nonscalar_ptr_iterator_tag)v24);
+      std::_Uninit_move<RVO::Line *,RVO::Line *,std::allocator<RVO::Line>,RVO::Line>(
+        _Lasta,
+        v5->_Mylast,
+        v20,
+        (std::_Wrap_alloc<std::allocator<RVO::Line> > *)&v18,
+        0i64,
+        (std::_Nonscalar_ptr_iterator_tag)v24);
+      v14 = ((_QWORD)((char *)v5->_Mylast - (char *)v5->_Myfirst) >> 4) + v6;
+      if ( v5->_Myfirst )
+        operator delete[](v5->_Myfirst);
+      v5->_Myend = (RVO::Line *)&v13[16 * v12];
+      v5->_Mylast = (RVO::Line *)&v13[16 * v14];
+      v5->_Myfirst = (RVO::Line *)v13;
+    }
+  }
+}    v5->_Mylast = (RVO::Line *)&v13[16 * v14];
+     
+
+// File Line: 1325
+// RVA: 0x134AC70
+`std::vector<RVO::Line,std::allocator<RVO::Line> >::_Insert<std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<RVO::Line> > > >'::`1'::catch$0
+
+// File Line: 1500
+// RVA: 0xF7650
+void __fastcall std::vector<std::pair<float,RVO::Obstacle const *>,std::allocator<std::pair<float,RVO::Obstacle const *>>>::_Reallocate(std::vector<std::pair<float,RVO::Obstacle const *>,std::allocator<std::pair<float,RVO::Obstacle const *> > > *this, unsigned __int64 _Count)
+{
+  unsigned __int64 v2; // rdi
+  std::vector<std::pair<float,RVO::Obstacle const *>,std::allocator<std::pair<float,RVO::Obstacle const *> > > *v3; // r14
+  char *v4; // rsi
+  signed __int64 v5; // rbx
+  char v6; // [rsp+68h] [rbp+10h]
+  char *v7; // [rsp+70h] [rbp+18h]
+
+  v2 = _Count;
+  v3 = this;
+  v4 = 0i64;
+  v7 = 0i64;
+  if ( _Count )
+  {
+    if ( _Count > 0xFFFFFFFFFFFFFFFi64 || (v4 = UFG::qMalloc(16 * _Count, UFG::gGlobalNewName, 0i64), (v7 = v4) == 0i64) )
+      std::_Xbad_alloc();
+  }
+  std::_Uninit_move<std::pair<float,RVO::Agent const *> *,std::pair<float,RVO::Agent const *> *,std::allocator<std::pair<float,RVO::Agent const *>>,std::pair<float,RVO::Agent const *>>(
+    v3->_Myfirst,
+    v3->_Mylast,
+    (std::pair<float,RVO::Obstacle const *> *)v4,
+    (std::_Wrap_alloc<std::allocator<std::pair<float,RVO::Obstacle const *> > > *)&v6);
+  v5 = (char *)v3->_Mylast - (char *)v3->_Myfirst;
+  if ( v3->_Myfirst )
+    operator delete[](v3->_Myfirst);
+  v3->_Myend = (std::pair<float,RVO::Obstacle const *> *)&v4[16 * v2];
+  v3->_Mylast = (std::pair<float,RVO::Obstacle const *> *)&v4[v5 & 0xFFFFFFFFFFFFFFF0ui64];
+  v3->_Myfirst = (std::pair<float,RVO::Obstacle const *> *)v4;
+}
+
+// File Line: 1505
+// RVA: 0x134AF10
+`std::vector<RVO::Line,std::allocator<RVO::Line> >::_Reallocate'::`1'::catch$0
+
+// File Line: 1525
+// RVA: 0xF7880
+void __fastcall std::vector<std::pair<float,RVO::Obstacle const *>,std::allocator<std::pair<float,RVO::Obstacle const *>>>::_Reserve(std::vector<std::pair<float,RVO::Obstacle const *>,std::allocator<std::pair<float,RVO::Obstacle const *> > > *this, unsigned __int64 _Count)
+{
+  std::pair<float,RVO::Obstacle const *> *v2; // r8
+  unsigned __int64 v3; // r9
+  signed __int64 v4; // r8
+  unsigned __int64 v5; // r11
+  unsigned __int64 v6; // rdx
+  unsigned __int64 v7; // rdx
+  unsigned __int64 v8; // rdx
+
+  v2 = this->_Mylast;
+  v3 = _Count;
+  if ( (_QWORD)((char *)this->_Myend - (char *)v2) >> 4 < _Count )
+  {
+    v4 = v2 - this->_Myfirst;
+    if ( 0xFFFFFFFFFFFFFFFi64 - v4 < _Count )
+      std::_Xlength_error("vector<T> too long");
+    v5 = v4 + _Count;
+    v6 = (_QWORD)((char *)this->_Myend - (char *)this->_Myfirst) >> 4;
+    if ( 0xFFFFFFFFFFFFFFFi64 - (v6 >> 1) >= v6 )
+    {
+      v8 = (v6 >> 1) + v6;
+      if ( v8 < v5 )
+        v8 = v4 + v3;
+      std::vector<std::pair<float,RVO::Obstacle const *>,std::allocator<std::pair<float,RVO::Obstacle const *>>>::_Reallocate(
+        this,
+        v8);
+    }
+    else
+    {
+      v7 = 0i64;
+      if ( v5 > 0 )
+        v7 = v4 + v3;
+      std::vector<std::pair<float,RVO::Obstacle const *>,std::allocator<std::pair<float,RVO::Obstacle const *>>>::_Reallocate(
+        this,
+        v7);
+    }
+  }
+}
+

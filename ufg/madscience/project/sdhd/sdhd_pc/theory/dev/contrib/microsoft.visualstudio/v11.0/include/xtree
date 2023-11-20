@@ -1,0 +1,464 @@
+// File Line: 782
+// RVA: 0x841B0
+void __fastcall std::_Tree_alloc<0,std::_Tree_base_types<std::pair<Json::Value::CZString const,Json::Value>,std::allocator<std::pair<Json::Value::CZString const,Json::Value>>>>::~_Tree_alloc<0,std::_Tree_base_types<std::pair<Json::Value::CZString const,Json::Value>,std::allocator<std::pair<Json::Value::CZString const,Json::Value>>>>(std::_Tree_alloc<0,std::_Tree_base_types<std::pair<Json::Value::CZString const ,Json::Value>,std::allocator<std::pair<Json::Value::CZString const ,Json::Value> > > > *this)
+{
+  Illusion::ShaderParam::operator delete(this->_Myhead);
+}
+
+// File Line: 1188
+// RVA: 0x84170
+void __fastcall std::_Tree<std::_Tmap_traits<Json::Value::CZString,Json::Value,std::less<Json::Value::CZString>,std::allocator<std::pair<Json::Value::CZString const,Json::Value>>,0>>::~_Tree<std::_Tmap_traits<Json::Value::CZString,Json::Value,std::less<Json::Value::CZString>,std::allocator<std::pair<Json::Value::CZString const,Json::Value>>,0>>(std::_Tree<std::_Tmap_traits<Json::Value::CZString,Json::Value,std::less<Json::Value::CZString>,std::allocator<std::pair<Json::Value::CZString const ,Json::Value> >,0> > *this)
+{
+  std::_Tree<std::_Tmap_traits<Json::Value::CZString,Json::Value,std::less<Json::Value::CZString>,std::allocator<std::pair<Json::Value::CZString const ,Json::Value> >,0> > *v1; // rbx
+  std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<Json::Value::CZString const ,Json::Value> > > > result; // [rsp+48h] [rbp+10h]
+
+  v1 = this;
+  std::_Tree<std::_Tmap_traits<Json::Value::CZString,Json::Value,std::less<Json::Value::CZString>,std::allocator<std::pair<Json::Value::CZString const,Json::Value>>,0>>::erase(
+    this,
+    &result,
+    (std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<Json::Value::CZString const ,Json::Value> > > >)this->_Myhead->_Left,
+    (std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<Json::Value::CZString const ,Json::Value> > > >)this->_Myhead);
+  Illusion::ShaderParam::operator delete(v1->_Myhead);
+}
+
+// File Line: 1323
+// RVA: 0x846E0
+std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<Json::Value::CZString const ,Json::Value> > > > *__fastcall std::_Tree<std::_Tmap_traits<Json::Value::CZString,Json::Value,std::less<Json::Value::CZString>,std::allocator<std::pair<Json::Value::CZString const,Json::Value>>,0>>::erase(std::_Tree<std::_Tmap_traits<Json::Value::CZString,Json::Value,std::less<Json::Value::CZString>,std::allocator<std::pair<Json::Value::CZString const ,Json::Value> >,0> > *this, std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<Json::Value::CZString const ,Json::Value> > > > *result, std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<Json::Value::CZString const ,Json::Value> > > > _Where)
+{
+  std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<Json::Value::CZString const ,Json::Value> > > > *v3; // r15
+  std::_Tree<std::_Tmap_traits<Json::Value::CZString,Json::Value,std::less<Json::Value::CZString>,std::allocator<std::pair<Json::Value::CZString const ,Json::Value> >,0> > *v4; // rsi
+  std::_Tree_node<std::pair<Json::Value::CZString const ,Json::Value>,void *> *v5; // r14
+  std::_Tree_node<std::pair<Json::Value::CZString const ,Json::Value>,void *> **v6; // rcx
+  std::_Tree_node<std::pair<Json::Value::CZString const ,Json::Value>,void *> *i; // rdx
+  std::_Tree_node<std::pair<Json::Value::CZString const ,Json::Value>,void *> *v8; // rax
+  std::_Tree_node<std::pair<Json::Value::CZString const ,Json::Value>,void *> *v9; // rdi
+  std::_Tree_node<std::pair<Json::Value::CZString const ,Json::Value>,void *> *v10; // rbx
+  std::_Tree_node<std::pair<Json::Value::CZString const ,Json::Value>,void *> *v11; // rcx
+  std::_Tree_node<std::pair<Json::Value::CZString const ,Json::Value>,void *> *v12; // rax
+  std::_Tree_node<std::pair<Json::Value::CZString const ,Json::Value>,void *> *v13; // rcx
+  std::_Tree_node<std::pair<Json::Value::CZString const ,Json::Value>,void *> *j; // rax
+  std::_Tree_node<std::pair<Json::Value::CZString const ,Json::Value>,void *> *v15; // rax
+  char v16; // cl
+  std::_Tree_node<std::pair<Json::Value::CZString const ,Json::Value>,void *> *v17; // rcx
+  unsigned __int64 v18; // rax
+  std::_Tree_node<std::pair<Json::Value::CZString const ,Json::Value>,void *> *v20; // [rsp+60h] [rbp+18h]
+
+  v3 = result;
+  v4 = this;
+  if ( _Where._Ptr->_Isnil )
+    std::_Xout_of_range("invalid map/set<T> iterator");
+  v5 = _Where._Ptr;
+  v6 = &_Where._Ptr->_Right;
+  i = _Where._Ptr->_Right;
+  if ( i->_Isnil )
+  {
+    for ( i = _Where._Ptr->_Parent; !i->_Isnil; i = i->_Parent )
+    {
+      if ( _Where._Ptr != i->_Right )
+        break;
+      _Where._Ptr = i;
+    }
+  }
+  else
+  {
+    v8 = i->_Left;
+    if ( !i->_Left->_Isnil )
+    {
+      do
+      {
+        i = v8;
+        v8 = v8->_Left;
+      }
+      while ( !v8->_Isnil );
+    }
+  }
+  v20 = i;
+  if ( v5->_Left->_Isnil )
+  {
+    v9 = *v6;
+LABEL_15:
+    v10 = v5->_Parent;
+    if ( !v9->_Isnil )
+      v9->_Parent = v10;
+    if ( v4->_Myhead->_Parent == v5 )
+    {
+      v4->_Myhead->_Parent = v9;
+    }
+    else if ( v10->_Left == v5 )
+    {
+      v10->_Left = v9;
+    }
+    else
+    {
+      v10->_Right = v9;
+    }
+    if ( v4->_Myhead->_Left == v5 )
+    {
+      if ( v9->_Isnil )
+      {
+        v11 = v10;
+      }
+      else
+      {
+        v11 = v9;
+        v12 = v9->_Left;
+        if ( !v9->_Left->_Isnil )
+        {
+          do
+          {
+            v11 = v12;
+            v12 = v12->_Left;
+          }
+          while ( !v12->_Isnil );
+        }
+      }
+      v4->_Myhead->_Left = v11;
+    }
+    if ( v4->_Myhead->_Right == v5 )
+    {
+      if ( v9->_Isnil )
+      {
+        v13 = v10;
+      }
+      else
+      {
+        v13 = v9;
+        for ( j = v9->_Right; !j->_Isnil; j = j->_Right )
+          v13 = j;
+      }
+      v4->_Myhead->_Right = v13;
+    }
+    goto LABEL_45;
+  }
+  if ( (*v6)->_Isnil )
+  {
+    v9 = v5->_Left;
+    goto LABEL_15;
+  }
+  v9 = i->_Right;
+  if ( i == v5 )
+    goto LABEL_15;
+  v5->_Left->_Parent = i;
+  i->_Left = v5->_Left;
+  if ( i == *v6 )
+  {
+    v10 = i;
+  }
+  else
+  {
+    v10 = i->_Parent;
+    if ( !v9->_Isnil )
+      v9->_Parent = v10;
+    v10->_Left = v9;
+    i->_Right = *v6;
+    (*v6)->_Parent = i;
+  }
+  if ( v4->_Myhead->_Parent == v5 )
+  {
+    v4->_Myhead->_Parent = i;
+  }
+  else
+  {
+    v15 = v5->_Parent;
+    if ( v15->_Left == v5 )
+      v15->_Left = i;
+    else
+      v15->_Right = i;
+  }
+  i->_Parent = v5->_Parent;
+  v16 = i->_Color;
+  i->_Color = v5->_Color;
+  v5->_Color = v16;
+LABEL_45:
+  if ( v5->_Color == 1 )
+  {
+    while ( 1 )
+    {
+      if ( v9 == v4->_Myhead->_Parent || v9->_Color != 1 )
+      {
+LABEL_68:
+        v9->_Color = 1;
+        break;
+      }
+      v17 = v10->_Left;
+      if ( v9 == v10->_Left )
+      {
+        v17 = v10->_Right;
+        if ( !v17->_Color )
+        {
+          v17->_Color = 1;
+          v10->_Color = 0;
+          std::_Tree<std::_Tmap_traits<Json::Value::CZString,Json::Value,std::less<Json::Value::CZString>,std::allocator<std::pair<Json::Value::CZString const,Json::Value>>,0>>::_Lrotate(
+            v4,
+            v10);
+          v17 = v10->_Right;
+        }
+        if ( !v17->_Isnil )
+        {
+          if ( v17->_Left->_Color != 1 || v17->_Right->_Color != 1 )
+          {
+            if ( v17->_Right->_Color == 1 )
+            {
+              v17->_Left->_Color = 1;
+              v17->_Color = 0;
+              std::_Tree<std::_Tmap_traits<Json::Value::CZString,Json::Value,std::less<Json::Value::CZString>,std::allocator<std::pair<Json::Value::CZString const,Json::Value>>,0>>::_Rrotate(
+                v4,
+                v17);
+              v17 = v10->_Right;
+            }
+            v17->_Color = v10->_Color;
+            v10->_Color = 1;
+            v17->_Right->_Color = 1;
+            std::_Tree<std::_Tmap_traits<Json::Value::CZString,Json::Value,std::less<Json::Value::CZString>,std::allocator<std::pair<Json::Value::CZString const,Json::Value>>,0>>::_Lrotate(
+              v4,
+              v10);
+            goto LABEL_68;
+          }
+LABEL_60:
+          v17->_Color = 0;
+          goto LABEL_61;
+        }
+      }
+      else
+      {
+        if ( !v17->_Color )
+        {
+          v17->_Color = 1;
+          v10->_Color = 0;
+          std::_Tree<std::_Tmap_traits<Json::Value::CZString,Json::Value,std::less<Json::Value::CZString>,std::allocator<std::pair<Json::Value::CZString const,Json::Value>>,0>>::_Rrotate(
+            v4,
+            v10);
+          v17 = v10->_Left;
+        }
+        if ( !v17->_Isnil )
+        {
+          if ( v17->_Right->_Color != 1 || v17->_Left->_Color != 1 )
+          {
+            if ( v17->_Left->_Color == 1 )
+            {
+              v17->_Right->_Color = 1;
+              v17->_Color = 0;
+              std::_Tree<std::_Tmap_traits<Json::Value::CZString,Json::Value,std::less<Json::Value::CZString>,std::allocator<std::pair<Json::Value::CZString const,Json::Value>>,0>>::_Lrotate(
+                v4,
+                v17);
+              v17 = v10->_Left;
+            }
+            v17->_Color = v10->_Color;
+            v10->_Color = 1;
+            v17->_Left->_Color = 1;
+            std::_Tree<std::_Tmap_traits<Json::Value::CZString,Json::Value,std::less<Json::Value::CZString>,std::allocator<std::pair<Json::Value::CZString const,Json::Value>>,0>>::_Rrotate(
+              v4,
+              v10);
+            goto LABEL_68;
+          }
+          goto LABEL_60;
+        }
+      }
+LABEL_61:
+      v9 = v10;
+      v10 = v10->_Parent;
+    }
+  }
+  Json::Value::~Value(&v5->_Myval.second);
+  if ( v5->_Myval.first.cstr_ && v5->_Myval.first.index_ == 1 )
+  {
+    if ( !(_S1_13 & 1) )
+    {
+      _S1_13 |= 1u;
+      defaultAllocator.vfptr = (Json::ValueAllocatorVtbl *)&Json::DefaultValueAllocator::`vftable';
+      atexit(Json::valueAllocator_::_2_::_dynamic_atexit_destructor_for__defaultAllocator__);
+    }
+    valueAllocator->vfptr->releaseMemberName(valueAllocator, (char *)v5->_Myval.first.cstr_);
+  }
+  Illusion::ShaderParam::operator delete(v5);
+  v18 = v4->_Mysize;
+  if ( v18 )
+    v4->_Mysize = v18 - 1;
+  v3->_Ptr = v20;
+  return v3;
+}
+    }
+    valueAllocator->vfptr->releaseMemberName(valueAllocator, (char *)v5->_Myval.first.cstr_);
+  }
+  Illusion::Sha
+
+// File Line: 1508
+// RVA: 0x845E0
+std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<Json::Value::CZString const ,Json::Value> > > > *__fastcall std::_Tree<std::_Tmap_traits<Json::Value::CZString,Json::Value,std::less<Json::Value::CZString>,std::allocator<std::pair<Json::Value::CZString const,Json::Value>>,0>>::erase(std::_Tree<std::_Tmap_traits<Json::Value::CZString,Json::Value,std::less<Json::Value::CZString>,std::allocator<std::pair<Json::Value::CZString const ,Json::Value> >,0> > *this, std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<Json::Value::CZString const ,Json::Value> > > > *result, std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<Json::Value::CZString const ,Json::Value> > > > _First, std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<Json::Value::CZString const ,Json::Value> > > > _Last)
+{
+  std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<Json::Value::CZString const ,Json::Value> > > > *v4; // rdi
+  std::_Tree_node<std::pair<Json::Value::CZString const ,Json::Value>,void *> *v5; // rdx
+  std::_Tree<std::_Tmap_traits<Json::Value::CZString,Json::Value,std::less<Json::Value::CZString>,std::allocator<std::pair<Json::Value::CZString const ,Json::Value> >,0> > *v6; // rbx
+  std::_Tree_node<std::pair<Json::Value::CZString const ,Json::Value>,void *> *v7; // rax
+  std::_Tree_node<std::pair<Json::Value::CZString const ,Json::Value>,void *> *v8; // rcx
+  std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<Json::Value::CZString const ,Json::Value> > > > *v9; // rax
+  std::_Tree_node<std::pair<Json::Value::CZString const ,Json::Value>,void *> *v10; // rax
+  std::_Tree_node<std::pair<Json::Value::CZString const ,Json::Value>,void *> *v11; // rdx
+  std::_Tree_node<std::pair<Json::Value::CZString const ,Json::Value>,void *> *v12; // rcx
+  std::_Tree_node<std::pair<Json::Value::CZString const ,Json::Value>,void *> *i; // rcx
+  std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<Json::Value::CZString const ,Json::Value> > > > resulta; // [rsp+30h] [rbp+8h]
+  std::_Tree_node<std::pair<Json::Value::CZString const ,Json::Value>,void *> *v15; // [rsp+40h] [rbp+18h]
+  std::_Tree_node<std::pair<Json::Value::CZString const ,Json::Value>,void *> *v16; // [rsp+48h] [rbp+20h]
+
+  v16 = _Last._Ptr;
+  v15 = _First._Ptr;
+  v4 = result;
+  v5 = this->_Myhead;
+  v6 = this;
+  if ( _First._Ptr != this->_Myhead->_Left || _Last._Ptr != v5 )
+  {
+    if ( _First._Ptr != _Last._Ptr )
+    {
+      do
+      {
+        v10 = _First._Ptr;
+        if ( !_First._Ptr->_Isnil )
+        {
+          v11 = _First._Ptr->_Right;
+          if ( v11->_Isnil )
+          {
+            for ( i = _First._Ptr->_Parent; !i->_Isnil; i = i->_Parent )
+            {
+              if ( _First._Ptr != i->_Right )
+                break;
+              v15 = i;
+              _First._Ptr = i;
+            }
+            v15 = i;
+          }
+          else
+          {
+            v12 = v11->_Left;
+            if ( !v11->_Left->_Isnil )
+            {
+              do
+              {
+                v11 = v12;
+                v12 = v12->_Left;
+              }
+              while ( !v12->_Isnil );
+            }
+            v15 = v11;
+          }
+        }
+        std::_Tree<std::_Tmap_traits<Json::Value::CZString,Json::Value,std::less<Json::Value::CZString>,std::allocator<std::pair<Json::Value::CZString const,Json::Value>>,0>>::erase(
+          v6,
+          &resulta,
+          (std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<Json::Value::CZString const ,Json::Value> > > >)v10);
+        _First._Ptr = v15;
+      }
+      while ( v15 != v16 );
+    }
+    v4->_Ptr = _First._Ptr;
+    v9 = v4;
+  }
+  else
+  {
+    std::_Tree<std::_Tmap_traits<Json::Value::CZString,Json::Value,std::less<Json::Value::CZString>,std::allocator<std::pair<Json::Value::CZString const,Json::Value>>,0>>::_Erase(
+      this,
+      v5->_Parent);
+    v6->_Myhead->_Parent = v6->_Myhead;
+    v6->_Myhead->_Left = v6->_Myhead;
+    v6->_Myhead->_Right = v6->_Myhead;
+    v7 = v6->_Myhead;
+    v6->_Mysize = 0i64;
+    v8 = v7->_Left;
+    v9 = v4;
+    v4->_Ptr = v8;
+  }
+  return v9;
+}
+
+// File Line: 2060
+// RVA: 0x843E0
+void __fastcall std::_Tree<std::_Tmap_traits<Json::Value::CZString,Json::Value,std::less<Json::Value::CZString>,std::allocator<std::pair<Json::Value::CZString const,Json::Value>>,0>>::_Erase(std::_Tree<std::_Tmap_traits<Json::Value::CZString,Json::Value,std::less<Json::Value::CZString>,std::allocator<std::pair<Json::Value::CZString const ,Json::Value> >,0> > *this, std::_Tree_node<std::pair<Json::Value::CZString const ,Json::Value>,void *> *_Rootnode)
+{
+  std::_Tree_node<std::pair<Json::Value::CZString const ,Json::Value>,void *> *v2; // rsi
+  std::_Tree<std::_Tmap_traits<Json::Value::CZString,Json::Value,std::less<Json::Value::CZString>,std::allocator<std::pair<Json::Value::CZString const ,Json::Value> >,0> > *v3; // rbp
+  std::_Tree_node<std::pair<Json::Value::CZString const ,Json::Value>,void *> *i; // rdi
+
+  v2 = _Rootnode;
+  v3 = this;
+  for ( i = _Rootnode; !i->_Isnil; v2 = i )
+  {
+    std::_Tree<std::_Tmap_traits<Json::Value::CZString,Json::Value,std::less<Json::Value::CZString>,std::allocator<std::pair<Json::Value::CZString const,Json::Value>>,0>>::_Erase(
+      v3,
+      i->_Right);
+    i = i->_Left;
+    Json::Value::~Value(&v2->_Myval.second);
+    if ( v2->_Myval.first.cstr_ && v2->_Myval.first.index_ == 1 )
+    {
+      if ( !(_S1_13 & 1) )
+      {
+        _S1_13 |= 1u;
+        defaultAllocator.vfptr = (Json::ValueAllocatorVtbl *)&Json::DefaultValueAllocator::`vftable';
+        atexit(Json::valueAllocator_::_2_::_dynamic_atexit_destructor_for__defaultAllocator__);
+      }
+      valueAllocator->vfptr->releaseMemberName(valueAllocator, (char *)v2->_Myval.first.cstr_);
+    }
+    Illusion::ShaderParam::operator delete(v2);
+  }
+}
+
+// File Line: 2113
+// RVA: 0x844C0
+void __fastcall std::_Tree<std::_Tmap_traits<Json::Value::CZString,Json::Value,std::less<Json::Value::CZString>,std::allocator<std::pair<Json::Value::CZString const,Json::Value>>,0>>::_Lrotate(std::_Tree<std::_Tmap_traits<Json::Value::CZString,Json::Value,std::less<Json::Value::CZString>,std::allocator<std::pair<Json::Value::CZString const ,Json::Value> >,0> > *this, std::_Tree_node<std::pair<Json::Value::CZString const ,Json::Value>,void *> *_Wherenode)
+{
+  std::_Tree_node<std::pair<Json::Value::CZString const ,Json::Value>,void *> *v2; // r8
+  std::_Tree_node<std::pair<Json::Value::CZString const ,Json::Value>,void *> *v3; // rax
+
+  v2 = _Wherenode->_Right;
+  _Wherenode->_Right = v2->_Left;
+  if ( !v2->_Left->_Isnil )
+    v2->_Left->_Parent = _Wherenode;
+  v2->_Parent = _Wherenode->_Parent;
+  if ( _Wherenode == this->_Myhead->_Parent )
+  {
+    this->_Myhead->_Parent = v2;
+    v2->_Left = _Wherenode;
+    _Wherenode->_Parent = v2;
+  }
+  else
+  {
+    v3 = _Wherenode->_Parent;
+    if ( _Wherenode == v3->_Left )
+      v3->_Left = v2;
+    else
+      v3->_Right = v2;
+    v2->_Left = _Wherenode;
+    _Wherenode->_Parent = v2;
+  }
+}
+
+// File Line: 2143
+// RVA: 0x84520
+void __fastcall std::_Tree<std::_Tmap_traits<Json::Value::CZString,Json::Value,std::less<Json::Value::CZString>,std::allocator<std::pair<Json::Value::CZString const,Json::Value>>,0>>::_Rrotate(std::_Tree<std::_Tmap_traits<Json::Value::CZString,Json::Value,std::less<Json::Value::CZString>,std::allocator<std::pair<Json::Value::CZString const ,Json::Value> >,0> > *this, std::_Tree_node<std::pair<Json::Value::CZString const ,Json::Value>,void *> *_Wherenode)
+{
+  std::_Tree_node<std::pair<Json::Value::CZString const ,Json::Value>,void *> *v2; // r8
+  std::_Tree_node<std::pair<Json::Value::CZString const ,Json::Value>,void *> *v3; // rax
+  std::_Tree_node<std::pair<Json::Value::CZString const ,Json::Value>,void *> *v4; // rax
+
+  v2 = _Wherenode->_Left;
+  _Wherenode->_Left = _Wherenode->_Left->_Right;
+  v3 = v2->_Right;
+  if ( !v3->_Isnil )
+    v3->_Parent = _Wherenode;
+  v2->_Parent = _Wherenode->_Parent;
+  if ( _Wherenode == this->_Myhead->_Parent )
+  {
+    this->_Myhead->_Parent = v2;
+    v2->_Right = _Wherenode;
+    _Wherenode->_Parent = v2;
+  }
+  else
+  {
+    v4 = _Wherenode->_Parent;
+    if ( _Wherenode == v4->_Right )
+      v4->_Right = v2;
+    else
+      v4->_Left = v2;
+    v2->_Right = _Wherenode;
+    _Wherenode->_Parent = v2;
+  }
+}
+

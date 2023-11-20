@@ -1,0 +1,44 @@
+// File Line: 39
+// RVA: 0x853C0
+void __fastcall std::basic_ios<char,std::char_traits<char>>::~basic_ios<char,std::char_traits<char>>(std::basic_ios<char,std::char_traits<char> > *this)
+{
+  this->vfptr = (std::ios_baseVtbl *)&std::basic_ios<char,std::char_traits<char>>::`vftable';
+  this->vfptr = (std::ios_baseVtbl *)&std::ios_base::`vftable';
+  std::ios_base::_Ios_base_dtor((std::ios_base *)&this->vfptr);
+}
+
+// File Line: 174
+// RVA: 0x87970
+void __fastcall std::basic_ios<char,std::char_traits<char>>::init(std::basic_ios<char,std::char_traits<char> > *this, std::basic_streambuf<char,std::char_traits<char> > *_Strbuf, bool _Isstd)
+{
+  bool v3; // si
+  std::basic_streambuf<char,std::char_traits<char> > *v4; // rbx
+  std::basic_ios<char,std::char_traits<char> > *v5; // rdi
+  std::locale *v6; // rax
+  __int64 v7; // rdx
+  std::locale::facet *v8; // rbx
+  void (__fastcall ***v9)(_QWORD, signed __int64); // rax
+  std::locale result; // [rsp+40h] [rbp+8h]
+
+  v3 = _Isstd;
+  v4 = _Strbuf;
+  v5 = this;
+  std::ios_base::_Init((std::ios_base *)&this->vfptr);
+  v5->_Mystrbuf = v4;
+  v5->_Tiestr = 0i64;
+  v6 = std::ios_base::getloc((std::ios_base *)&v5->vfptr, &result);
+  v8 = std::use_facet<std::ctype<char>>(v6);
+  if ( result._Ptr )
+  {
+    v9 = (void (__fastcall ***)(_QWORD, signed __int64))((__int64 (__cdecl *)(std::locale::_Locimp *))result._Ptr->vfptr->_Decref)(result._Ptr);
+    if ( v9 )
+      (**v9)(v9, 1i64);
+  }
+  LOBYTE(v7) = 32;
+  v5->_Fillch = ((__int64 (__fastcall *)(std::locale::facet *, __int64))v8->vfptr[2]._Decref)(v8, v7);
+  if ( !v5->_Mystrbuf )
+    std::ios_base::clear((std::ios_base *)&v5->vfptr, v5->_Mystate | 4, 0);
+  if ( v3 )
+    std::ios_base::_Addstd((std::ios_base *)&v5->vfptr);
+}
+

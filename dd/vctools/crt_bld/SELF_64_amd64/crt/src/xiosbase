@@ -1,0 +1,44 @@
+// File Line: 615
+// RVA: 0x12DE278
+void __fastcall std::ios_base::_Tidy(std::ios_base *this)
+{
+  std::ios_base::_Fnarray *v1; // rbx
+  std::ios_base *v2; // rdi
+  std::ios_base::_Iosarray *v3; // rcx
+  std::ios_base::_Iosarray *v4; // rbx
+  std::ios_base::_Fnarray *v5; // rcx
+  std::ios_base::_Fnarray *v6; // rbx
+
+  v1 = this->_Calls;
+  v2 = this;
+  while ( v1 )
+  {
+    v1->_Pfn(0i64, v2, v1->_Index);
+    v1 = v1->_Next;
+  }
+  v3 = v2->_Arr;
+  if ( v3 )
+  {
+    do
+    {
+      v4 = v3->_Next;
+      Illusion::ShaderParam::operator delete(v3);
+      v3 = v4;
+    }
+    while ( v4 );
+  }
+  v5 = v2->_Calls;
+  v2->_Arr = 0i64;
+  if ( v5 )
+  {
+    do
+    {
+      v6 = v5->_Next;
+      Illusion::ShaderParam::operator delete(v5);
+      v5 = v6;
+    }
+    while ( v6 );
+  }
+  v2->_Calls = 0i64;
+}
+

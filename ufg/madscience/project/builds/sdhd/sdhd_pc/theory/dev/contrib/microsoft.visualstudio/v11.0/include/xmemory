@@ -1,0 +1,52 @@
+// File Line: 371
+// RVA: 0xF6050
+RVO::Line *__fastcall std::_Uninit_copy<std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<RVO::Line>>>,RVO::Line *,std::allocator<RVO::Line>>(std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<RVO::Line> > > _First, std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<RVO::Line> > > _Last, RVO::Line *_Dest, std::_Wrap_alloc<std::allocator<RVO::Line> > *_Al)
+{
+  RVO::Line *v4; // rax
+  RVO::Line *v6; // [rsp+40h] [rbp+8h]
+
+  v6 = _First._Ptr;
+  v4 = _First._Ptr;
+  while ( v4 != _Last._Ptr )
+  {
+    if ( _Dest )
+    {
+      _Dest->point.x_ = v4->point.x_;
+      _Dest->point.y_ = v4->point.y_;
+      _Dest->direction.x_ = v4->direction.x_;
+      _Dest->direction.y_ = v4->direction.y_;
+    }
+    ++_Dest;
+    v4 = v6 + 1;
+    ++v6;
+  }
+  return _Dest;
+}
+
+// File Line: 379
+// RVA: 0x134ACAC
+`std::_Uninit_copy<std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<RVO::Line> > >,RVO::Line * __ptr64,std::allocator<RVO::Line> >'::`1'::catch$0
+
+// File Line: 426
+// RVA: 0xF6120
+RVO::Line *__fastcall std::_Uninit_move<RVO::Line *,RVO::Line *,std::allocator<RVO::Line>,RVO::Line>(RVO::Line *_First, RVO::Line *_Last, RVO::Line *_Dest, std::_Wrap_alloc<std::allocator<RVO::Line> > *_Al)
+{
+  while ( _First != _Last )
+  {
+    if ( _Dest )
+    {
+      _Dest->point.x_ = _First->point.x_;
+      _Dest->point.y_ = _First->point.y_;
+      _Dest->direction.x_ = _First->direction.x_;
+      _Dest->direction.y_ = _First->direction.y_;
+    }
+    ++_Dest;
+    ++_First;
+  }
+  return _Dest;
+}
+
+// File Line: 434
+// RVA: 0x134ACEC
+`std::_Uninit_move<std::pair<float,RVO::Agent const * __ptr64> * __ptr64,std::pair<float,RVO::Agent const * __ptr64> * __ptr64,std::allocator<std::pair<float,RVO::Agent const * __ptr64> >,std::pair<float,RVO::Agent const * __ptr64> >'::`1'::catch$0
+

@@ -1,0 +1,104 @@
+// File Line: 76
+// RVA: 0x828C0
+void __fastcall std::_Locinfo::_Locinfo(std::_Locinfo *this, const char *_Pch)
+{
+  const char *v2; // rdi
+  std::_Locinfo *v3; // rbx
+  std::exception pExceptionObject; // [rsp+28h] [rbp-20h]
+  char *_What; // [rsp+58h] [rbp+10h]
+
+  v2 = _Pch;
+  v3 = this;
+  std::_Lockit::_Lockit(&this->_Lock, 0);
+  v3->_Days._Myptr = 0i64;
+  v3->_Days._Nul = 0;
+  v3->_Months._Myptr = 0i64;
+  v3->_Months._Nul = 0;
+  v3->_W_Days._Myptr = 0i64;
+  v3->_W_Days._Nul = 0;
+  v3->_W_Months._Myptr = 0i64;
+  v3->_W_Months._Nul = 0;
+  v3->_Oldlocname._Myptr = 0i64;
+  v3->_Oldlocname._Nul = 0;
+  v3->_Newlocname._Myptr = 0i64;
+  v3->_Newlocname._Nul = 0;
+  if ( !v2 )
+  {
+    _What = "bad locale name";
+    std::exception::exception(&pExceptionObject, (const char *const *)&_What);
+    pExceptionObject.vfptr = (std::exceptionVtbl *)&std::runtime_error::`vftable';
+    CxxThrowException(&pExceptionObject, &TI2_AVruntime_error_std__);
+  }
+  std::_Locinfo::_Locinfo_ctor(v3, v2);
+}
+
+// File Line: 94
+// RVA: 0x82C70
+void __fastcall std::_Locinfo::~_Locinfo(std::_Locinfo *this)
+{
+  std::_Locinfo *v1; // rbx
+  char *v2; // rcx
+  char *v3; // rcx
+  wchar_t *v4; // rcx
+  wchar_t *v5; // rcx
+  char *v6; // rcx
+  char *v7; // rcx
+
+  v1 = this;
+  std::_Locinfo::_Locinfo_dtor(this);
+  v2 = v1->_Newlocname._Myptr;
+  if ( v2 )
+    free(v2);
+  v1->_Newlocname._Myptr = 0i64;
+  v3 = v1->_Oldlocname._Myptr;
+  if ( v3 )
+    free(v3);
+  v1->_Oldlocname._Myptr = 0i64;
+  v4 = v1->_W_Months._Myptr;
+  if ( v4 )
+    free(v4);
+  v1->_W_Months._Myptr = 0i64;
+  v5 = v1->_W_Days._Myptr;
+  if ( v5 )
+    free(v5);
+  v1->_W_Days._Myptr = 0i64;
+  v6 = v1->_Months._Myptr;
+  if ( v6 )
+    free(v6);
+  v1->_Months._Myptr = 0i64;
+  v7 = v1->_Days._Myptr;
+  if ( v7 )
+    free(v7);
+  v1->_Days._Myptr = 0i64;
+  std::_Lockit::~_Lockit(&v1->_Lock);
+}
+
+// File Line: 121
+// RVA: 0x86170
+_Cvtvec *__fastcall std::_Locinfo::_Getcvt(std::_Locinfo *this, _Cvtvec *result)
+{
+  _Cvtvec *v2; // rbx
+  _Cvtvec *v3; // rax
+  _Cvtvec *v4; // r8
+  int v5; // ecx
+  _Cvtvec resulta; // [rsp+20h] [rbp-38h]
+
+  v2 = result;
+  v3 = Getcvt(&resulta);
+  v4 = v3;
+  v2->_Page = v3->_Page;
+  v2->_Mbcurmax = v3->_Mbcurmax;
+  v2->_Isclocale = v3->_Isclocale;
+  *(_DWORD *)v2->_Isleadbyte = *(_DWORD *)v3->_Isleadbyte;
+  *(_DWORD *)&v2->_Isleadbyte[4] = *(_DWORD *)&v3->_Isleadbyte[4];
+  v5 = *(_DWORD *)&v3->_Isleadbyte[8];
+  LODWORD(v3) = *(_DWORD *)&v3->_Isleadbyte[12];
+  *(_DWORD *)&v2->_Isleadbyte[8] = v5;
+  *(_DWORD *)&v2->_Isleadbyte[12] = (_DWORD)v3;
+  *(_DWORD *)&v2->_Isleadbyte[16] = *(_DWORD *)&v4->_Isleadbyte[16];
+  *(_DWORD *)&v2->_Isleadbyte[20] = *(_DWORD *)&v4->_Isleadbyte[20];
+  *(_DWORD *)&v2->_Isleadbyte[24] = *(_DWORD *)&v4->_Isleadbyte[24];
+  *(_DWORD *)&v2->_Isleadbyte[28] = *(_DWORD *)&v4->_Isleadbyte[28];
+  return v2;
+}
+

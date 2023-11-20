@@ -1,0 +1,111 @@
+// File Line: 127
+// RVA: 0x12B0D88
+void __fastcall std::exception::exception(std::exception *this, const char *const *_What)
+{
+  this->_Mywhat = 0i64;
+  this->_Mydofree = 0;
+  this->vfptr = (std::exceptionVtbl *)&std::exception::`vftable';
+  std::exception::_Copy_str(this, *_What);
+}
+
+// File Line: 132
+// RVA: 0x12B0DB8
+void __fastcall std::exception::exception(std::exception *this, const char *const *_What, int __formal)
+{
+  const char *v3; // rax
+
+  this->vfptr = (std::exceptionVtbl *)&std::exception::`vftable';
+  v3 = *_What;
+  this->_Mydofree = 0;
+  this->_Mywhat = v3;
+}
+
+// File Line: 136
+// RVA: 0x12B0DD4
+void __fastcall std::exception::exception(std::exception *this, std::exception *_That)
+{
+  this->_Mywhat = 0i64;
+  this->vfptr = (std::exceptionVtbl *)&std::exception::`vftable';
+  this->_Mydofree = 0;
+  std::exception::operator=(this, _That);
+}
+
+// File Line: 141
+// RVA: 0x12B0E10
+std::exception *__fastcall std::exception::operator=(std::exception *this, std::exception *_That)
+{
+  std::exception *v2; // rdi
+  std::exception *v3; // rbx
+
+  v2 = _That;
+  v3 = this;
+  if ( this != _That )
+  {
+    std::exception::_Tidy(this);
+    if ( v2->_Mydofree )
+      std::exception::_Copy_str(v3, v2->_Mywhat);
+    else
+      v3->_Mywhat = v2->_Mywhat;
+  }
+  return v3;
+}
+
+// File Line: 165
+// RVA: 0x12B0F14
+const char *__fastcall std::exception::what(std::exception *this)
+{
+  const char *result; // rax
+
+  result = "Unknown exception";
+  if ( this->_Mywhat )
+    result = this->_Mywhat;
+  return result;
+}
+
+// File Line: 171
+// RVA: 0x12B0E90
+void __fastcall std::exception::_Copy_str(std::exception *this, const char *_What)
+{
+  std::exception *v2; // rsi
+  const char *v3; // rbx
+  size_t v4; // rax
+  size_t v5; // rdi
+  char *v6; // rax
+
+  if ( _What )
+  {
+    v2 = this;
+    v3 = _What;
+    v4 = strlen(_What);
+    v5 = v4;
+    v6 = (char *)malloc(v4 + 1);
+    v2->_Mywhat = v6;
+    if ( v6 )
+    {
+      strcpy_s(v6, v5 + 1, v3);
+      v2->_Mydofree = 1;
+    }
+  }
+}
+
+// File Line: 187
+// RVA: 0x12B0EEC
+void __fastcall std::exception::_Tidy(std::exception *this)
+{
+  std::exception *v1; // rbx
+
+  v1 = this;
+  if ( this->_Mydofree )
+    free((void *)this->_Mywhat);
+  v1->_Mywhat = 0i64;
+  v1->_Mydofree = 0;
+}
+
+// File Line: 356
+// RVA: 0x12C3E14
+void __fastcall std::bad_exception::~bad_exception(std::bad_exception *this)
+{
+  this->vfptr = (std::exceptionVtbl *)&std::bad_exception::`vftable';
+  std::bad_cast::~bad_cast((std::exception *)&this->vfptr);
+}
+
