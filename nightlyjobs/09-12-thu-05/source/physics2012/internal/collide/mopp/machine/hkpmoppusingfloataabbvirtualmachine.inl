@@ -674,5 +674,5 @@ $propertyCopy_2:
         continue;
     }
   }
-}§§§§нннн@}Вrwt
+}
 

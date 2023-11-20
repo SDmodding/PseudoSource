@@ -776,7 +776,7 @@ void __fastcall hkcdTreeQueries<hkcdTreeQueriesStacks::Dynamic,64,0>::rayCastBat
     }
     while ( v8 < v5 );
   }
-}ýýýý
+}
 
 // File Line: 367
 // RVA: 0xDA1830

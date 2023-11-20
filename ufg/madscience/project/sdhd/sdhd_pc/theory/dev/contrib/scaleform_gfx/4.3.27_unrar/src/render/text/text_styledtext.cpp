@@ -4766,7 +4766,7 @@ LABEL_122:
   if ( v70->RTFlags & 1 )
     v4->RTFlags |= 1u;
   return v71;
-}§§§§ннннY}Вkr
+}
 
 // File Line: 2144
 // RVA: 0x9A8CE0
