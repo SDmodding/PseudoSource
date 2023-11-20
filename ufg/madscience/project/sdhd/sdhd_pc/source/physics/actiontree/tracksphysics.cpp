@@ -29,8 +29,8 @@ void __fastcall GravityTrack::GravityTrack(GravityTrack *this)
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, GravityTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<GravityTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&GravityTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<GravityTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&GravityTrack::`vftable;
   v1->mGravity = -9.8100004;
   v1->mBallisticMode = 0;
 }
@@ -54,8 +54,8 @@ void __fastcall DisableCollisionTrack::DisableCollisionTrack(DisableCollisionTra
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, DisableCollisionTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DisableCollisionTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DisableCollisionTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DisableCollisionTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&DisableCollisionTrack::`vftable;
 }
 
 // File Line: 95
@@ -85,8 +85,8 @@ void __fastcall PhysicsMotionTypeTrack::PhysicsMotionTypeTrack(PhysicsMotionType
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, PhysicsMotionTypeTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<PhysicsMotionTypeTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PhysicsMotionTypeTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<PhysicsMotionTypeTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PhysicsMotionTypeTrack::`vftable;
   v1->mMode.mValue = 0;
   v1->mCollisionGeoName.mUID = -1;
 }
@@ -100,8 +100,8 @@ void __fastcall PhysicsMotionTypeTrack::~PhysicsMotionTypeTrack(PhysicsMotionTyp
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&PhysicsMotionTypeTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&PhysicsMotionTypeTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -112,7 +112,7 @@ void __fastcall PhysicsMotionTypeTrack::~PhysicsMotionTypeTrack(PhysicsMotionTyp
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 128
@@ -146,8 +146,8 @@ void __fastcall CharacterPhysicsTrack::CharacterPhysicsTrack(CharacterPhysicsTra
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, CharacterPhysicsTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CharacterPhysicsTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CharacterPhysicsTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CharacterPhysicsTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CharacterPhysicsTrack::`vftable;
   v1->mMode.mValue = 1;
   v1->mMaster = 0;
 }
@@ -161,8 +161,8 @@ void __fastcall CharacterPhysicsTrack::~CharacterPhysicsTrack(CharacterPhysicsTr
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&CharacterPhysicsTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&CharacterPhysicsTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -173,7 +173,7 @@ void __fastcall CharacterPhysicsTrack::~CharacterPhysicsTrack(CharacterPhysicsTr
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 157
@@ -195,8 +195,8 @@ void __fastcall CharacterPhysicsSuperMassiveTrack::CharacterPhysicsSuperMassiveT
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, CharacterPhysicsSuperMassiveTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CharacterPhysicsSuperMassiveTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CharacterPhysicsSuperMassiveTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CharacterPhysicsSuperMassiveTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CharacterPhysicsSuperMassiveTrack::`vftable;
   v1->mMaster = 0;
 }
 
@@ -209,8 +209,8 @@ void __fastcall CharacterPhysicsSuperMassiveTrack::~CharacterPhysicsSuperMassive
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&CharacterPhysicsSuperMassiveTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&CharacterPhysicsSuperMassiveTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -221,7 +221,7 @@ void __fastcall CharacterPhysicsSuperMassiveTrack::~CharacterPhysicsSuperMassive
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 180
@@ -243,8 +243,8 @@ void __fastcall DetailedOnGroundTrack::DetailedOnGroundTrack(DetailedOnGroundTra
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, DetailedOnGroundTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DetailedOnGroundTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DetailedOnGroundTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DetailedOnGroundTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&DetailedOnGroundTrack::`vftable;
 }
 
 // File Line: 199
@@ -266,8 +266,8 @@ void __fastcall VelocitySlopeModeTrack::VelocitySlopeModeTrack(VelocitySlopeMode
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, VelocitySlopeModeTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<VelocitySlopeModeTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&VelocitySlopeModeTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<VelocitySlopeModeTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&VelocitySlopeModeTrack::`vftable;
   v1->mVelocityMode = 0;
 }
 
@@ -309,8 +309,8 @@ void __fastcall ExplosionTrack::ExplosionTrack(ExplosionTrack *this)
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, ExplosionTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<ExplosionTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ExplosionTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<ExplosionTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ExplosionTrack::`vftable;
   *(_QWORD *)&v1->m_AttachTo.mUID = UFG::gNullQSymbolUC.mUID;
 }
 
@@ -322,8 +322,8 @@ void __fastcall PhysicalDamageTrack::PhysicalDamageTrack(PhysicalDamageTrack *th
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, PhysicalDamageTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<PhysicalDamageTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PhysicalDamageTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<PhysicalDamageTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PhysicalDamageTrack::`vftable;
   v1->mDamageType = 0;
   v1->mDamage = 1.0;
   v1->mRigidBodyModelName.mUID = -1;
@@ -360,8 +360,8 @@ void __fastcall SensorComponentTrack::SensorComponentTrack(SensorComponentTrack 
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, SensorComponentTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<SensorComponentTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SensorComponentTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<SensorComponentTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&SensorComponentTrack::`vftable;
   v1->mMaster = 0;
 }
 
@@ -374,8 +374,8 @@ void __fastcall SensorComponentTrack::~SensorComponentTrack(SensorComponentTrack
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&SensorComponentTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&SensorComponentTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -386,7 +386,7 @@ void __fastcall SensorComponentTrack::~SensorComponentTrack(SensorComponentTrack
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 314
@@ -408,8 +408,8 @@ void __fastcall PairedGrappleTrack::PairedGrappleTrack(PairedGrappleTrack *this)
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, PairedGrappleTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<PairedGrappleTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PairedGrappleTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<PairedGrappleTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PairedGrappleTrack::`vftable;
   v1->mUseSmallGrapple = 0;
   v1->mMaster = 0;
 }
@@ -423,8 +423,8 @@ void __fastcall PairedGrappleTrack::~PairedGrappleTrack(PairedGrappleTrack *this
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&PairedGrappleTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&PairedGrappleTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -435,7 +435,7 @@ void __fastcall PairedGrappleTrack::~PairedGrappleTrack(PairedGrappleTrack *this
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 341

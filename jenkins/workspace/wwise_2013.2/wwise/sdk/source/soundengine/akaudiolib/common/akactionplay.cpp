@@ -6,7 +6,7 @@ void __fastcall CAkActionPlay::CAkActionPlay(CAkActionPlay *this, AkActionType i
 
   v3 = this;
   CAkAction::CAkAction((CAkAction *)&this->vfptr, in_eActionType, in_ulID);
-  v3->vfptr = (CAkIndexableVtbl *)&CAkActionPlay::`vftable';
+  v3->vfptr = (CAkIndexableVtbl *)&CAkActionPlay::`vftable;
   v3->m_fileID = -1;
 }
 
@@ -14,7 +14,7 @@ void __fastcall CAkActionPlay::CAkActionPlay(CAkActionPlay *this, AkActionType i
 // RVA: 0xA95490
 void __fastcall CAkActionPlay::~CAkActionPlay(CAkActionPlay *this)
 {
-  this->vfptr = (CAkIndexableVtbl *)&CAkActionPlay::`vftable';
+  this->vfptr = (CAkIndexableVtbl *)&CAkActionPlay::`vftable;
   CAkAction::~CAkAction((CAkAction *)&this->vfptr);
 }
 
@@ -135,7 +135,7 @@ CAkActionPlay *__fastcall CAkActionPlay::Create(AkActionType in_eActionType, uns
   if ( result )
   {
     CAkAction::CAkAction((CAkAction *)&result->vfptr, v2, v3);
-    v5->vfptr = (CAkIndexableVtbl *)&CAkActionPlay::`vftable';
+    v5->vfptr = (CAkIndexableVtbl *)&CAkActionPlay::`vftable;
     v5->m_fileID = -1;
     CAkAction::AddToIndex((CAkAction *)&v5->vfptr);
     result = v5;

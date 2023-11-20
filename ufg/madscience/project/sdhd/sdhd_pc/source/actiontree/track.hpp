@@ -7,7 +7,7 @@ void __fastcall ITrack::~ITrack(ITrack *this)
   unsigned __int64 v3; // rax
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(this->mMasterRate.text.mOffset) & 1) )
   {
@@ -18,7 +18,7 @@ void __fastcall ITrack::~ITrack(ITrack *this)
         operator delete[]((char *)v2 + v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 216
@@ -38,9 +38,9 @@ ITask *__fastcall Track<InteractionPointInteractWithBestTask>::CreateTask(Track<
     v5 = v3 + 8;
     *v5 = v5;
     v5[1] = v5;
-    v4->vfptr = (ITaskVtbl *)&ITask::`vftable';
-    v4->vfptr = (ITaskVtbl *)&Task<InteractionPointInteractWithBestTrack>::`vftable';
-    v4->vfptr = (ITaskVtbl *)&InteractionPointInteractWithBestTask::`vftable';
+    v4->vfptr = (ITaskVtbl *)&ITask::`vftable;
+    v4->vfptr = (ITaskVtbl *)&Task<InteractionPointInteractWithBestTrack>::`vftable;
+    v4->vfptr = (ITaskVtbl *)&InteractionPointInteractWithBestTask::`vftable;
   }
   else
   {

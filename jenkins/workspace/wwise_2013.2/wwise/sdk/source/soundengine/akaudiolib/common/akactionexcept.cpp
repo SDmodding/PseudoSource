@@ -6,7 +6,7 @@ void __fastcall CAkActionExcept::CAkActionExcept(CAkActionExcept *this, AkAction
 
   v3 = this;
   CAkAction::CAkAction((CAkAction *)&this->vfptr, in_eActionType, in_ulID);
-  v3->vfptr = (CAkIndexableVtbl *)&CAkActionExcept::`vftable';
+  v3->vfptr = (CAkIndexableVtbl *)&CAkActionExcept::`vftable;
   v3->m_listElementException.m_pItems = 0i64;
   *(_QWORD *)&v3->m_listElementException.m_uLength = 0i64;
 }
@@ -19,7 +19,7 @@ void __fastcall CAkActionExcept::~CAkActionExcept(CAkActionExcept *this)
   WwiseObjectIDext *v2; // rdx
 
   v1 = this;
-  this->vfptr = (CAkIndexableVtbl *)&CAkActionExcept::`vftable';
+  this->vfptr = (CAkIndexableVtbl *)&CAkActionExcept::`vftable;
   v2 = this->m_listElementException.m_pItems;
   if ( v2 )
   {

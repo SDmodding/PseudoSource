@@ -337,9 +337,9 @@ void __fastcall CameraAnimationTask::CameraAnimationTask(CameraAnimationTask *th
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<CameraAnimationTrack>::`vftable';
-  this->vfptr = (ITaskVtbl *)&CameraAnimationTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<CameraAnimationTrack>::`vftable;
+  this->vfptr = (ITaskVtbl *)&CameraAnimationTask::`vftable;
   v2 = &this->mController;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;

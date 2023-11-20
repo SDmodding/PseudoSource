@@ -17,7 +17,7 @@ void __fastcall AudioTrackSurfaceDetection::AudioTrackSurfaceDetection(AudioTrac
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, AudioTrackSurfaceDetection::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AudioTaskSurfaceDetection>::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AudioTaskSurfaceDetection>::`vftable;
   v1->m_RtpcVal = 0.0;
   v1->m_playPercent = 100.0;
   *(_QWORD *)&v1->m_audioTagId[4] = 0i64;
@@ -26,7 +26,7 @@ void __fastcall AudioTrackSurfaceDetection::AudioTrackSurfaceDetection(AudioTrac
   *(_QWORD *)&v1->m_audioTagUID[4] = 0i64;
   *(_QWORD *)&v1->m_audioTagUID[2] = 0i64;
   *(_QWORD *)v1->m_audioTagUID = 0i64;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AudioTrackSurfaceDetection::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AudioTrackSurfaceDetection::`vftable;
   *(_QWORD *)&v1->m_Bone = 8i64;
 }
 
@@ -39,8 +39,8 @@ void __fastcall AudioTrackSurfaceDetection::~AudioTrackSurfaceDetection(AudioTra
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&AudioTrackSurfaceDetection::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&AudioTrackSurfaceDetection::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -51,7 +51,7 @@ void __fastcall AudioTrackSurfaceDetection::~AudioTrackSurfaceDetection(AudioTra
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 50
@@ -85,7 +85,7 @@ __int64 dynamic_initializer_for__PoliceScannerAudioEventTrack::sClassNameUID__()
 // RVA: 0x2E3F40
 void __fastcall DialogueTrackBase::~DialogueTrackBase(DialogueTrackBase *this)
 {
-  this->vfptr = (DialogueTrackBaseVtbl *)&DialogueTrackBase::`vftable';
+  this->vfptr = (DialogueTrackBaseVtbl *)&DialogueTrackBase::`vftable;
 }
 
 // File Line: 137
@@ -195,8 +195,8 @@ void __fastcall DialogueTrack::DialogueTrack(DialogueTrack *this)
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, DialogueTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DialogueTask>::`vftable';
-  v1->vfptr = (DialogueTrackBaseVtbl *)&DialogueTrackBase::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DialogueTask>::`vftable;
+  v1->vfptr = (DialogueTrackBaseVtbl *)&DialogueTrackBase::`vftable;
   v1->m_playPercent = 100.0;
   v1->m_priority = 5;
   v2 = v1->m_dialogueTagUid;
@@ -209,8 +209,8 @@ void __fastcall DialogueTrack::DialogueTrack(DialogueTrack *this)
     --v3;
   }
   while ( v3 );
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DialogueTrack::`vftable'{for `Track<DialogueTask>'};
-  v1->vfptr = (DialogueTrackBaseVtbl *)&DialogueTrack::`vftable'{for `DialogueTrackBase'};
+  v1->vfptr = (Expression::IMemberMapVtbl *)&DialogueTrack::`vftable{for `Track<DialogueTask>};
+  v1->vfptr = (DialogueTrackBaseVtbl *)&DialogueTrack::`vftable{for `DialogueTrackBase};
 }
 
 // File Line: 206
@@ -222,10 +222,10 @@ void __fastcall DialogueTrack::~DialogueTrack(DialogueTrack *this)
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&DialogueTrack::`vftable'{for `Track<DialogueTask>'};
-  this->vfptr = (DialogueTrackBaseVtbl *)&DialogueTrack::`vftable'{for `DialogueTrackBase'};
-  this->vfptr = (DialogueTrackBaseVtbl *)&DialogueTrackBase::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&DialogueTrack::`vftable{for `Track<DialogueTask>};
+  this->vfptr = (DialogueTrackBaseVtbl *)&DialogueTrack::`vftable{for `DialogueTrackBase};
+  this->vfptr = (DialogueTrackBaseVtbl *)&DialogueTrackBase::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -236,7 +236,7 @@ void __fastcall DialogueTrack::~DialogueTrack(DialogueTrack *this)
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 219
@@ -260,8 +260,8 @@ void __fastcall DialogueTrackPOI::DialogueTrackPOI(DialogueTrackPOI *this)
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, DialogueTrackPOI::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DialogueTaskPOI>::`vftable';
-  v1->vfptr = (DialogueTrackBaseVtbl *)&DialogueTrackBase::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DialogueTaskPOI>::`vftable;
+  v1->vfptr = (DialogueTrackBaseVtbl *)&DialogueTrackBase::`vftable;
   v1->m_playPercent = 100.0;
   v1->m_priority = 5;
   v2 = v1->m_dialogueTagUid;
@@ -274,8 +274,8 @@ void __fastcall DialogueTrackPOI::DialogueTrackPOI(DialogueTrackPOI *this)
     --v3;
   }
   while ( v3 );
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DialogueTrackPOI::`vftable'{for `Track<DialogueTaskPOI>'};
-  v1->vfptr = (DialogueTrackBaseVtbl *)&DialogueTrackPOI::`vftable'{for `DialogueTrackBase'};
+  v1->vfptr = (Expression::IMemberMapVtbl *)&DialogueTrackPOI::`vftable{for `Track<DialogueTaskPOI>};
+  v1->vfptr = (DialogueTrackBaseVtbl *)&DialogueTrackPOI::`vftable{for `DialogueTrackBase};
 }
 
 // File Line: 239
@@ -287,10 +287,10 @@ void __fastcall DialogueTrackPOI::~DialogueTrackPOI(DialogueTrackPOI *this)
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&DialogueTrackPOI::`vftable'{for `Track<DialogueTaskPOI>'};
-  this->vfptr = (DialogueTrackBaseVtbl *)&DialogueTrackPOI::`vftable'{for `DialogueTrackBase'};
-  this->vfptr = (DialogueTrackBaseVtbl *)&DialogueTrackBase::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&DialogueTrackPOI::`vftable{for `Track<DialogueTaskPOI>};
+  this->vfptr = (DialogueTrackBaseVtbl *)&DialogueTrackPOI::`vftable{for `DialogueTrackBase};
+  this->vfptr = (DialogueTrackBaseVtbl *)&DialogueTrackBase::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -301,7 +301,7 @@ void __fastcall DialogueTrackPOI::~DialogueTrackPOI(DialogueTrackPOI *this)
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 252
@@ -325,8 +325,8 @@ void __fastcall DialogueTrackWeaponImpact::DialogueTrackWeaponImpact(DialogueTra
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, DialogueTrackWeaponImpact::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DialogueTaskWeaponImpact>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DialogueTrackWeaponImpact::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DialogueTaskWeaponImpact>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&DialogueTrackWeaponImpact::`vftable;
   v1->m_playPercent = 100.0;
   v1->m_priority = 5;
   v2 = v1->m_dialogueTagUid;
@@ -350,8 +350,8 @@ void __fastcall DialogueTrackWeaponImpact::~DialogueTrackWeaponImpact(DialogueTr
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&DialogueTrackWeaponImpact::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&DialogueTrackWeaponImpact::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -362,7 +362,7 @@ void __fastcall DialogueTrackWeaponImpact::~DialogueTrackWeaponImpact(DialogueTr
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 312
@@ -384,8 +384,8 @@ void __fastcall ConversationTrackCreate::ConversationTrackCreate(ConversationTra
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, ConversationTrackCreate::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<ConversationTaskCreate>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ConversationTrackCreate::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<ConversationTaskCreate>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ConversationTrackCreate::`vftable;
   v1->m_topic = 0;
 }
 

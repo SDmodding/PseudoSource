@@ -90,7 +90,7 @@ void __fastcall UFG::PhantomCallback::PhantomCallback(UFG::PhantomCallback *this
 {
   UFG::ThreadSafeQueue<UFG::PhantomCallbackData> *v1; // rbx
 
-  this->vfptr = (UFG::PhantomCallbackVtbl *)&UFG::PhantomCallback::`vftable';
+  this->vfptr = (UFG::PhantomCallbackVtbl *)&UFG::PhantomCallback::`vftable;
   v1 = &this->mPhantomCallbackQueue;
   UFG::qMutex::qMutex(&this->mPhantomCallbackQueue.mutex, &customWorldMapCaption);
   v1->head.next = &v1->tail;
@@ -112,7 +112,7 @@ void __fastcall UFG::PhantomCallback::~PhantomCallback(UFG::PhantomCallback *thi
   UFG::QueueNode<UFG::PhantomCallbackData> *v7; // rax
   bool v8; // bl
 
-  this->vfptr = (UFG::PhantomCallbackVtbl *)&UFG::PhantomCallback::`vftable';
+  this->vfptr = (UFG::PhantomCallbackVtbl *)&UFG::PhantomCallback::`vftable;
   v1 = &this->mPhantomCallbackQueue;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->mPhantomCallbackQueue.mutex);
   v2 = v1->head.next == &v1->tail;
@@ -264,16 +264,16 @@ hkpEntity *__fastcall UFG::PhantomCallback::CreatePhantom(hkpShape *phantomShape
   v11 = (*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v10[11] + 8i64))(v10[11], 40i64);
   if ( v11 )
   {
-    *(_QWORD *)v11 = &hkBaseObject::`vftable';
-    *(_QWORD *)v11 = &hkReferencedObject::`vftable';
+    *(_QWORD *)v11 = &hkBaseObject::`vftable;
+    *(_QWORD *)v11 = &hkReferencedObject::`vftable;
     *(_DWORD *)(v11 + 8) = 0x1FFFF;
-    *(_QWORD *)v11 = &hkcdShape::`vftable';
+    *(_QWORD *)v11 = &hkcdShape::`vftable;
     *(_DWORD *)(v11 + 16) = 1056;
-    *(_QWORD *)v11 = &hkpShapeBase::`vftable';
-    *(_QWORD *)v11 = &hkpShape::`vftable';
+    *(_QWORD *)v11 = &hkpShapeBase::`vftable;
+    *(_QWORD *)v11 = &hkpShape::`vftable;
     *(_QWORD *)(v11 + 24) = 0i64;
-    *(_QWORD *)v11 = &hkpPhantomCallbackShape::`vftable';
-    *(_QWORD *)v11 = &UFG::PhantomCallbackShape::`vftable';
+    *(_QWORD *)v11 = &hkpPhantomCallbackShape::`vftable;
+    *(_QWORD *)v11 = &UFG::PhantomCallbackShape::`vftable;
     *(_QWORD *)(v11 + 32) = v5;
   }
   else

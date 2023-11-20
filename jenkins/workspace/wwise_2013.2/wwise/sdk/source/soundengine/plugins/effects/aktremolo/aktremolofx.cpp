@@ -13,7 +13,7 @@ void __fastcall CreateTremoloFX(AK::IAkPluginMemAlloc *in_pAllocator)
 // RVA: 0xAF2BF0
 void __fastcall CAkTremoloFX::CAkTremoloFX(CAkTremoloFX *this)
 {
-  this->vfptr = (AK::IAkPluginVtbl *)&CAkTremoloFX::`vftable';
+  this->vfptr = (AK::IAkPluginVtbl *)&CAkTremoloFX::`vftable;
   *(_QWORD *)&this->m_lfo.m_arLfo[0].m_state.filter.fFFbk1 = 0i64;
   this->m_pSharedParams = 0i64;
   this->m_pAllocator = 0i64;
@@ -59,7 +59,7 @@ void __fastcall CAkTremoloFX::CAkTremoloFX(CAkTremoloFX *this)
 // RVA: 0xAF2CF0
 void __fastcall CAkTremoloFX::~CAkTremoloFX(CAkTremoloFX *this)
 {
-  this->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable';
+  this->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable;
 }
 
 // File Line: 52

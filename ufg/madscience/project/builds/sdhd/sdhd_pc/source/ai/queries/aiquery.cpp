@@ -2,7 +2,7 @@
 // RVA: 0x3347E0
 void __fastcall UFG::AIQuery::~AIQuery(UFG::AIQuery *this)
 {
-  this->vfptr = (UFG::AIQueryVtbl *)&UFG::AIQuery::`vftable';
+  this->vfptr = (UFG::AIQueryVtbl *)&UFG::AIQuery::`vftable;
 }
 
 // File Line: 34

@@ -35,7 +35,7 @@ void __fastcall finishLoadedObjecthkaiInvertedAabbVolume(void *p, int finishing)
   if ( p )
   {
     v2 = (hkGeometry *)((char *)p + 48);
-    v2[-1].vfptr = (hkBaseObjectVtbl *)&hkaiInvertedAabbVolume::`vftable';
+    v2[-1].vfptr = (hkBaseObjectVtbl *)&hkaiInvertedAabbVolume::`vftable;
     hkGeometry::hkGeometry(v2, (hkFinishLoadedObjectFlag)finishing);
   }
 }
@@ -54,7 +54,7 @@ void **__fastcall getVtablehkaiInvertedAabbVolume()
   hkGeometry v1; // [rsp+50h] [rbp-38h]
 
   hkGeometry::hkGeometry(&v1, 0);
-  return &hkaiInvertedAabbVolume::`vftable';
+  return &hkaiInvertedAabbVolume::`vftable;
 }
 
 // File Line: 99

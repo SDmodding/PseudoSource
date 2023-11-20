@@ -39,7 +39,7 @@ void UFG::WeaponManager::Destroy(void)
     if ( v1 )
     {
       v2 = &v1[-1].mComponent.m_pPointer;
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         v1,
         0x30ui64,
         (int)v1[-1].mComponent.m_pPointer,

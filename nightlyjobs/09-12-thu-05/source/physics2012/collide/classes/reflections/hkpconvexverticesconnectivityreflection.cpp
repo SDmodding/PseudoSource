@@ -31,7 +31,7 @@ hkClass *__fastcall hkpConvexVerticesConnectivity::staticClass()
 void __fastcall finishLoadedObjecthkpConvexVerticesConnectivity(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpConvexVerticesConnectivity::`vftable';
+    *(_QWORD *)p = &hkpConvexVerticesConnectivity::`vftable;
 }
 
 // File Line: 69
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkpConvexVerticesConnectivity(void *p)
 // RVA: 0xCEB7E0
 void **__fastcall getVtablehkpConvexVerticesConnectivity()
 {
-  return &hkpConvexVerticesConnectivity::`vftable';
+  return &hkpConvexVerticesConnectivity::`vftable;
 }
 
 // File Line: 95

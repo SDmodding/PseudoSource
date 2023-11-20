@@ -21,10 +21,10 @@ void __fastcall UFG::Stimulus::Stimulus(UFG::Stimulus *this, UFG::StimulusEmitte
   v5 = (UFG::qNode<UFG::Event,UFG::Event> *)&this->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  this->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+  this->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
   this->m_EventUID = v4;
   this->m_NamePTR = v3;
-  this->vfptr = (UFG::EventVtbl *)&UFG::Stimulus::`vftable';
+  this->vfptr = (UFG::EventVtbl *)&UFG::Stimulus::`vftable;
   v6 = UFG::qVector3::msZero.y;
   v7 = UFG::qVector3::msZero.z;
   this->m_StimulusParameters.m_StimulusProducerOffset.x = UFG::qVector3::msZero.x;

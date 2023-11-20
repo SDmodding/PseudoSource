@@ -6,8 +6,8 @@ void __fastcall hkpTransformShape::hkpTransformShape(hkpTransformShape *this, hk
 
   v2 = this;
   hkpShape::hkpShape((hkpShape *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpTransformShape::`vftable';
-  v2->m_childShape.vfptr = (hkpShapeContainerVtbl *)&hkpSingleShapeContainer::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpTransformShape::`vftable;
+  v2->m_childShape.vfptr = (hkpShapeContainerVtbl *)&hkpSingleShapeContainer::`vftable;
   v2->m_type.m_storage = 14;
 }
 
@@ -37,9 +37,9 @@ void __fastcall hkpTransformShape::hkpTransformShape(hkpTransformShape *this, hk
   this->m_userData = 0i64;
   v3 = this;
   v4 = transform;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpTransformShape::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpTransformShape::`vftable;
   this->m_childShape.m_childShape = childShape;
-  this->m_childShape.vfptr = (hkpShapeContainerVtbl *)&hkpSingleShapeContainer::`vftable';
+  this->m_childShape.vfptr = (hkpShapeContainerVtbl *)&hkpSingleShapeContainer::`vftable;
   hkReferencedObject::addReference((hkReferencedObject *)&childShape->vfptr);
   hkpTransformShape::setTransform(v3, v4);
 }

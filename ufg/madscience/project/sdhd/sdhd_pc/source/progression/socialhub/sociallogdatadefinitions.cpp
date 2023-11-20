@@ -12,7 +12,7 @@ void __fastcall UFG::SocialLogData_NewHighScore::SocialLogData_NewHighScore(UFG:
   v6 = timeStamp;
   v7 = this;
   UFG::SocialLogData::SocialLogData((UFG::SocialLogData *)&this->vfptr);
-  v7->vfptr = (UFG::OSuiteMessageVtbl *)&UFG::SocialLogData_NewHighScore::`vftable';
+  v7->vfptr = (UFG::OSuiteMessageVtbl *)&UFG::SocialLogData_NewHighScore::`vftable;
   v7->m_iHasSent = 0;
   v7->m_aData = 0i64;
   v7->m_iCommId = 0;
@@ -29,7 +29,7 @@ void __fastcall UFG::SocialLogData_NewHighScore::~SocialLogData_NewHighScore(UFG
   char *v2; // rcx
 
   v1 = this;
-  this->vfptr = (UFG::OSuiteMessageVtbl *)&UFG::SocialLogData_NewHighScore::`vftable';
+  this->vfptr = (UFG::OSuiteMessageVtbl *)&UFG::SocialLogData_NewHighScore::`vftable;
   v2 = this->m_aData;
   if ( v2 )
     operator delete[](v2);
@@ -122,7 +122,7 @@ void __fastcall UFG::SocialLogData_AwardAchieved::SocialLogData_AwardAchieved(UF
   v6 = timeStamp;
   v7 = this;
   UFG::SocialLogData::SocialLogData((UFG::SocialLogData *)&this->vfptr);
-  v7->vfptr = (UFG::OSuiteMessageVtbl *)&UFG::SocialLogData_AwardAchieved::`vftable';
+  v7->vfptr = (UFG::OSuiteMessageVtbl *)&UFG::SocialLogData_AwardAchieved::`vftable;
   v7->m_aData = 0i64;
   v7->m_iCommId = 1;
   v7->m_iTimeStamp = v6;
@@ -138,7 +138,7 @@ void __fastcall UFG::SocialLogData_AwardAchieved::~SocialLogData_AwardAchieved(U
   char *v2; // rcx
 
   v1 = this;
-  this->vfptr = (UFG::OSuiteMessageVtbl *)&UFG::SocialLogData_AwardAchieved::`vftable';
+  this->vfptr = (UFG::OSuiteMessageVtbl *)&UFG::SocialLogData_AwardAchieved::`vftable;
   v2 = this->m_aData;
   if ( v2 )
     operator delete[](v2);
@@ -225,7 +225,7 @@ void __fastcall UFG::SocialLogData_BeatChallenge::SocialLogData_BeatChallenge(UF
   v10 = timeStamp;
   v11 = this;
   UFG::SocialLogData::SocialLogData((UFG::SocialLogData *)&this->vfptr);
-  v11->vfptr = (UFG::OSuiteMessageVtbl *)&UFG::SocialLogData_BeatChallenge::`vftable';
+  v11->vfptr = (UFG::OSuiteMessageVtbl *)&UFG::SocialLogData_BeatChallenge::`vftable;
   v11->m_iHasSent = 0;
   v11->m_aData = 0i64;
   v11->m_iCommId = 3;
@@ -246,7 +246,7 @@ void __fastcall UFG::SocialLogData_BeatChallenge::~SocialLogData_BeatChallenge(U
   char *v2; // rcx
 
   v1 = this;
-  this->vfptr = (UFG::OSuiteMessageVtbl *)&UFG::SocialLogData_BeatChallenge::`vftable';
+  this->vfptr = (UFG::OSuiteMessageVtbl *)&UFG::SocialLogData_BeatChallenge::`vftable;
   v2 = this->m_aData;
   if ( v2 )
     operator delete[](v2);
@@ -417,7 +417,7 @@ void __fastcall UFG::SocialLogData_Challenge::SocialLogData_Challenge(UFG::Socia
   v10 = timeStamp;
   v11 = this;
   UFG::SocialLogData::SocialLogData((UFG::SocialLogData *)&this->vfptr);
-  v11->vfptr = (UFG::OSuiteMessageVtbl *)&UFG::SocialLogData_Challenge::`vftable';
+  v11->vfptr = (UFG::OSuiteMessageVtbl *)&UFG::SocialLogData_Challenge::`vftable;
   v11->m_iHasBeaten = 0;
   v11->m_aData = 0i64;
   v11->m_iCommId = 4;
@@ -438,7 +438,7 @@ void __fastcall UFG::SocialLogData_Challenge::~SocialLogData_Challenge(UFG::Soci
   char *v2; // rcx
 
   v1 = this;
-  this->vfptr = (UFG::OSuiteMessageVtbl *)&UFG::SocialLogData_Challenge::`vftable';
+  this->vfptr = (UFG::OSuiteMessageVtbl *)&UFG::SocialLogData_Challenge::`vftable;
   v2 = this->m_aData;
   if ( v2 )
     operator delete[](v2);

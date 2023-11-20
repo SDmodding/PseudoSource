@@ -684,7 +684,7 @@ void __fastcall UFG::NavAvoidanceStrategyRVO::NavAvoidanceStrategyRVO(UFG::NavAv
   v7 = pWorld;
   v8 = this;
   UFG::NavAvoidanceStrategy::NavAvoidanceStrategy((UFG::NavAvoidanceStrategy *)&this->vfptr);
-  v8->vfptr = (UFG::NavAvoidanceStrategyVtbl *)&UFG::NavAvoidanceStrategyRVO::`vftable';
+  v8->vfptr = (UFG::NavAvoidanceStrategyVtbl *)&UFG::NavAvoidanceStrategyRVO::`vftable;
   v8->mpWorld = v7;
   v9 = 0;
   v8->mAgentInfos.m_data = 0i64;
@@ -741,7 +741,7 @@ void __fastcall UFG::NavAvoidanceStrategyRVO::~NavAvoidanceStrategyRVO(UFG::NavA
   int v6; // er8
 
   v1 = this;
-  this->vfptr = (UFG::NavAvoidanceStrategyVtbl *)&UFG::NavAvoidanceStrategyRVO::`vftable';
+  this->vfptr = (UFG::NavAvoidanceStrategyVtbl *)&UFG::NavAvoidanceStrategyRVO::`vftable;
   this->mCommands.m_size = 0;
   v2 = this->mCommands.m_capacityAndFlags;
   if ( v2 >= 0 )

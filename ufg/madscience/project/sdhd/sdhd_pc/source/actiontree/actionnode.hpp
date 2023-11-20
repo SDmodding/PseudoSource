@@ -334,7 +334,7 @@ ActionNodeBank *__fastcall ActionNodeBank::Create()
     v2 = (UFG::qNode<ActionNodeBank,ActionNodeBank> *)&v1->mPrev;
     v2->mPrev = v2;
     v2->mNext = v2;
-    v1->vfptr = (Expression::IMemberMapVtbl *)&ActionNodeBank::`vftable';
+    v1->vfptr = (Expression::IMemberMapVtbl *)&ActionNodeBank::`vftable;
     v1->m_Level = 0;
     v1->mSignalMask = -1i64;
     result = v1;
@@ -354,7 +354,7 @@ ActionNodeImplementation *__fastcall ActionNodePlayable::Create()
   if ( !v0 )
     return 0i64;
   ActionNodeImplementation::ActionNodeImplementation((ActionNodeImplementation *)v0);
-  *(_QWORD *)v1 = &ActionNodePlayable::`vftable';
+  *(_QWORD *)v1 = &ActionNodePlayable::`vftable;
   return (ActionNodeImplementation *)v1;
 }
 
@@ -373,9 +373,9 @@ void __fastcall ActionNodeReference::ActionNodeReference(ActionNodeReference *th
   signed __int64 v3; // [rsp+50h] [rbp+18h]
 
   v2 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
-  this->vfptr = (Expression::IMemberMapVtbl *)&ActionNode::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&ActionNode::`vftable;
   this->mParent.mOffset = 0i64;
   this->mFirstCallback = 0i64;
   this->mMostUsedIndex = -1;
@@ -383,7 +383,7 @@ void __fastcall ActionNodeReference::ActionNodeReference(ActionNodeReference *th
   this->mID.mUID = UFG::qStringHashUpper32(name, 0xFFFFFFFF);
   *(_DWORD *)&v2->mBreakPoint = 0;
   v2->mPad2 = 0;
-  v2->vfptr = (Expression::IMemberMapVtbl *)&ActionNodeReference::`vftable';
+  v2->vfptr = (Expression::IMemberMapVtbl *)&ActionNodeReference::`vftable;
   v3 = (signed __int64)&v2->mAnyPathToNode;
   *(_DWORD *)v3 = 0;
   *(_QWORD *)(v3 + 8) = 0i64;
@@ -856,14 +856,14 @@ void __fastcall NodeRefTrack<ResourceOpportunityTask>::NodeRefTrack<ResourceOppo
 
   v2 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, class_name_uid);
-  v2->vfptr = (Expression::IMemberMapVtbl *)&Track<ResourceOpportunityTask>::`vftable';
-  v2->vfptr = (Expression::IMemberMapVtbl *)&NodeRefTrack<ResourceOpportunityTask>::`vftable';
+  v2->vfptr = (Expression::IMemberMapVtbl *)&Track<ResourceOpportunityTask>::`vftable;
+  v2->vfptr = (Expression::IMemberMapVtbl *)&NodeRefTrack<ResourceOpportunityTask>::`vftable;
   v3 = UFG::qMemoryPool2::Allocate(&gActionTreeMemoryPool, 0x50ui64, "ActionNodeReference", 0i64, 1u);
   v4 = v3;
   if ( v3 )
   {
     ActionNode::ActionNode((ActionNode *)v3);
-    *(_QWORD *)v4 = &ActionNodeReference::`vftable';
+    *(_QWORD *)v4 = &ActionNodeReference::`vftable;
     v8 = (signed __int64)(v4 + 56);
     v5 = 0i64;
     *(_DWORD *)v8 = 0;
@@ -897,7 +897,7 @@ void __fastcall NodeRefTrack<SetOpeningBranchTask>::~NodeRefTrack<SetOpeningBran
   char *v5; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&NodeRefTrack<SetOpeningBranchTask>::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&NodeRefTrack<SetOpeningBranchTask>::`vftable;
   v2 = this->mActionNodeReference.mOffset;
   if ( v2 )
   {
@@ -906,7 +906,7 @@ void __fastcall NodeRefTrack<SetOpeningBranchTask>::~NodeRefTrack<SetOpeningBran
       (*(void (__fastcall **)(char *, signed __int64))(*(_QWORD *)v3 + 8i64))(v3, 1i64);
   }
   v1->mActionNodeReference.mOffset = 0i64;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v4 = &v1->mMasterRate;
   if ( !(~LOBYTE(v1->mMasterRate.text.mOffset) & 1) )
   {
@@ -917,7 +917,7 @@ void __fastcall NodeRefTrack<SetOpeningBranchTask>::~NodeRefTrack<SetOpeningBran
         operator delete[](v5);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 1522
@@ -1041,25 +1041,25 @@ void __fastcall NodeRefCondition::NodeRefCondition(NodeRefCondition *this)
   signed __int64 v6; // [rsp+70h] [rbp+18h]
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
   this->mBreakPoint = 0;
-  this->vfptr = (Expression::IMemberMapVtbl *)&NodeRefCondition::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&NodeRefCondition::`vftable;
   v2 = UFG::qMemoryPool2::Allocate(&gActionTreeMemoryPool, 0x50ui64, "ActionNodeReference", 0i64, 1u);
   v3 = v2;
   if ( v2 )
   {
-    *(_QWORD *)v2 = &Expression::IMemberMap::`vftable';
+    *(_QWORD *)v2 = &Expression::IMemberMap::`vftable;
     *((_QWORD *)v2 + 1) = 0i64;
-    *(_QWORD *)v2 = &ActionNode::`vftable';
+    *(_QWORD *)v2 = &ActionNode::`vftable;
     *((_QWORD *)v2 + 2) = 0i64;
     *((_QWORD *)v2 + 3) = 0i64;
     *((_DWORD *)v2 + 8) = -1;
     *(_QWORD *)(v2 + 36) = 0i64;
     *((_DWORD *)v2 + 11) = 0;
     v2[48] = 0;
-    *(_QWORD *)v2 = &ActionNodeReference::`vftable';
+    *(_QWORD *)v2 = &ActionNodeReference::`vftable;
     v6 = (signed __int64)(v2 + 56);
     *(_DWORD *)v6 = 0;
     *(_QWORD *)(v6 + 8) = 0i64;
@@ -1086,7 +1086,7 @@ void __fastcall NodeRefCondition::~NodeRefCondition(NodeRefCondition *this)
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&NodeRefCondition::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&NodeRefCondition::`vftable;
   v2 = this->mActionNodeReference.mOffset;
   if ( v2 )
   {
@@ -1095,8 +1095,8 @@ void __fastcall NodeRefCondition::~NodeRefCondition(NodeRefCondition *this)
       (*(void (__fastcall **)(char *, signed __int64))(*(_QWORD *)v3 + 8i64))(v3, 1i64);
   }
   v1->mActionNodeReference.mOffset = 0i64;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 1630

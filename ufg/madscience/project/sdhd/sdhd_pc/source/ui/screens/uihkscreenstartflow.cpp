@@ -7,7 +7,7 @@ void __fastcall UFG::UIHKScreenStartFlow::UIHKScreenStartFlow(UFG::UIHKScreenSta
   v1 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -18,7 +18,7 @@ void __fastcall UFG::UIHKScreenStartFlow::UIHKScreenStartFlow(UFG::UIHKScreenSta
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenStartFlow::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenStartFlow::`vftable;
   *(_QWORD *)&this->mState = 0i64;
   this->mAutoSaveSlotIndex = 0;
 }
@@ -34,7 +34,7 @@ void __fastcall UFG::UIHKScreenStartFlow::~UIHKScreenStartFlow(UFG::UIHKScreenSt
   UFG::UIScreenTextureManager *v5; // rax
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenStartFlow::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenStartFlow::`vftable;
   v2 = UFG::UIHKScreenGlobalOverlay::mThis;
   if ( !UFG::UIHKScreenGlobalOverlay::mThis )
     v2 = &gGlobalOverlaySentinel;
@@ -375,7 +375,7 @@ void __fastcall UFG::UIHKScreenStartFlow::SetNewGameSlotText(UFG::UIHKScreenStar
 
   v26 = -2i64;
   v2 = movie;
-  `eh vector constructor iterator'(&v12, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&v12, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( (v14 >> 6) & 1 )
   {
     (*(void (__fastcall **)(__int64, char *, __int64))(*(_QWORD *)v13 + 16i64))(v13, &ptr, v15);
@@ -432,7 +432,7 @@ void __fastcall UFG::UIHKScreenStartFlow::SetNewGameSlotText(UFG::UIHKScreenStar
   }
   v8 = 0;
   Scaleform::GFx::Movie::Invoke(v2, "SetSlot", 0i64, (Scaleform::GFx::Value *)&ptr, 3u);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 348
@@ -470,7 +470,7 @@ void __fastcall UFG::UIHKScreenStartFlow::SetSaveFileSlotText(UFG::UIHKScreenSta
   v4 = date;
   v5 = slotNum;
   v6 = movie;
-  `eh vector constructor iterator'(&v16, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&v16, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( (v16 >> 6) & 1 )
   {
     (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v15 + 16i64))(
@@ -540,7 +540,7 @@ void __fastcall UFG::UIHKScreenStartFlow::SetSaveFileSlotText(UFG::UIHKScreenSta
   }
   v11 = 0;
   Scaleform::GFx::Movie::Invoke(v6, "SetSlot", 0i64, (Scaleform::GFx::Value *)&ptr, 3u);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 358
@@ -968,7 +968,7 @@ void __fastcall UFG::UIHKScreenStartFlow::UpdateHelpbar(UFG::UIHKScreenStartFlow
       data.Icons[5].mStringHashUpper32 = 0;
       UFG::UIHKHelpBarWidget::Show(v12, &data);
       UFG::qString::~qString((UFG::qString *)data.MessageIds);
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         &data.Captions[5].mMagic,
         0x28ui64,
         6,
@@ -997,7 +997,7 @@ void __fastcall UFG::UIHKScreenStartFlow::UpdateHelpbar(UFG::UIHKScreenStartFlow
       data.Icons[5].mStringHashUpper32 = 0;
       UFG::UIHKHelpBarWidget::Show(v17, &data);
       UFG::qString::~qString((UFG::qString *)data.MessageIds);
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         &data.Captions[5].mMagic,
         0x28ui64,
         6,
@@ -1030,12 +1030,12 @@ void __fastcall UFG::UIHKScreenStartFlow::UpdateHelpbar(UFG::UIHKScreenStartFlow
     *(_QWORD *)&data.Icons[5].mStringHash32 = 0i64;
     UFG::UIHKHelpBarWidget::Show(v4, &data);
     UFG::qString::~qString((UFG::qString *)data.MessageIds);
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       &data.Captions[5].mMagic,
       0x28ui64,
       6,
       (void (__fastcall *)(void *))UFG::qString::~qString);
   }
-  `eh vector destructor iterator'(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+  `eh vector destructor iterator(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
 }
 

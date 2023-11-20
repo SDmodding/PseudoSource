@@ -9,7 +9,7 @@ void __fastcall hkpMotion::hkpMotion(hkpMotion *this)
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpMotion::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpMotion::`vftable;
   position.m_quad = 0i64;
   v2 = &this->m_motionState;
   v2[1].m_transform.m_rotation.m_col1 = 0i64;
@@ -35,7 +35,7 @@ void __fastcall hkpMotion::hkpMotion(hkpMotion *this, hkVector4f *position, hkQu
 
   v4 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpMotion::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpMotion::`vftable;
   this->m_linearVelocity = 0i64;
   this->m_angularVelocity = 0i64;
   v5 = wantDeactivation;

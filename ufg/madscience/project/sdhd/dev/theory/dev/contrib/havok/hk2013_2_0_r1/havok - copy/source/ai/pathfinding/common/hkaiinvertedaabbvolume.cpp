@@ -10,12 +10,12 @@ void __fastcall hkaiInvertedAabbVolume::hkaiInvertedAabbVolume(hkaiInvertedAabbV
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v2 = this;
   v3 = &this->m_aabb;
-  v3[-1].m_max.m_quad.m128_u64[0] = (unsigned __int64)&hkaiInvertedAabbVolume::`vftable';
+  v3[-1].m_max.m_quad.m128_u64[0] = (unsigned __int64)&hkaiInvertedAabbVolume::`vftable;
   v3->m_min = aabb->m_min;
   v4.m_quad = (__m128)aabb->m_max;
   v5 = (signed __int64)&v2->m_geometry;
   v3->m_max = (hkVector4f)v4.m_quad;
-  *(_QWORD *)v5 = &hkGeometry::`vftable';
+  *(_QWORD *)v5 = &hkGeometry::`vftable;
   *(_DWORD *)(v5 + 8) = 0x1FFFF;
   *(_QWORD *)(v5 + 16) = 0i64;
   *(_DWORD *)(v5 + 24) = 0;

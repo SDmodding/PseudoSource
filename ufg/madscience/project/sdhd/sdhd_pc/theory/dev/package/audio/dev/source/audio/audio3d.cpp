@@ -6,7 +6,7 @@ void __fastcall UFG::Audio3D::~Audio3D(UFG::Audio3D *this)
   unsigned int *v2; // rcx
 
   v1 = this;
-  this->vfptr = (UFG::Audio3DVtbl *)&UFG::Audio3D::`vftable';
+  this->vfptr = (UFG::Audio3DVtbl *)&UFG::Audio3D::`vftable;
   v2 = this->m_myIds.p;
   if ( v2 )
     operator delete[](v2);
@@ -22,7 +22,7 @@ void __fastcall UFG::Audio3DListener::Audio3DListener(UFG::Audio3DListener *this
   UFG::qVector4 v2; // xmm2
   UFG::qVector4 v3; // xmm3
 
-  this->vfptr = (UFG::Audio3DVtbl *)&UFG::Audio3D::`vftable';
+  this->vfptr = (UFG::Audio3DVtbl *)&UFG::Audio3D::`vftable;
   this->m_myIds.p = 0i64;
   *(_QWORD *)&this->m_myIds.size = 0i64;
   v1 = UFG::qMatrix44::msIdentity.v1;
@@ -34,7 +34,7 @@ void __fastcall UFG::Audio3DListener::Audio3DListener(UFG::Audio3DListener *this
   this->m_matrix.v3 = v3;
   *(_QWORD *)&this->m_velocity.x = 0i64;
   this->m_velocity.z = 0.0;
-  this->vfptr = (UFG::Audio3DVtbl *)&UFG::Audio3DListener::`vftable';
+  this->vfptr = (UFG::Audio3DVtbl *)&UFG::Audio3DListener::`vftable;
 }
 
 // File Line: 102
@@ -46,13 +46,13 @@ void __fastcall UFG::Audio3DListener::~Audio3DListener(UFG::Audio3DListener *thi
   unsigned int *v3; // rcx
 
   v1 = this;
-  this->vfptr = (UFG::Audio3DVtbl *)&UFG::Audio3DListener::`vftable';
+  this->vfptr = (UFG::Audio3DVtbl *)&UFG::Audio3DListener::`vftable;
   v2 = this->m_myIds.p;
   if ( v2 )
     operator delete[](v2);
   v1->m_myIds.p = 0i64;
   *(_QWORD *)&v1->m_myIds.size = 0i64;
-  v1->vfptr = (UFG::Audio3DVtbl *)&UFG::Audio3D::`vftable';
+  v1->vfptr = (UFG::Audio3DVtbl *)&UFG::Audio3D::`vftable;
   v3 = v1->m_myIds.p;
   if ( v3 )
     operator delete[](v3);

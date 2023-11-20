@@ -7,7 +7,7 @@ AK::IAkPluginParam *__fastcall CreatePitchShifterFXParams(AK::IAkPluginMemAlloc 
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 56ui64);
   if ( result )
   {
-    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkPitchShifterFXParams::`vftable';
+    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkPitchShifterFXParams::`vftable;
     LOWORD(result[1].vfptr) = 0;
     HIDWORD(result[1].vfptr) = 0;
     LODWORD(result[2].vfptr) = 1065353216;
@@ -26,7 +26,7 @@ AK::IAkPluginParam *__fastcall CreatePitchShifterFXParams(AK::IAkPluginMemAlloc 
 // RVA: 0xAE9DB0
 void __fastcall CAkPitchShifterFXParams::CAkPitchShifterFXParams(CAkPitchShifterFXParams *this)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkPitchShifterFXParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkPitchShifterFXParams::`vftable;
   this->m_ParamChangeHandler = 0;
   this->m_Params.Voice.Filter.eFilterType = 0;
   this->m_Params.Voice.Filter.fFilterGain = 1.0;
@@ -43,14 +43,14 @@ void __fastcall CAkPitchShifterFXParams::CAkPitchShifterFXParams(CAkPitchShifter
 // RVA: 0xAE9E10
 void __fastcall CAkPitchShifterFXParams::~CAkPitchShifterFXParams(CAkPitchShifterFXParams *this)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable;
 }
 
 // File Line: 35
 // RVA: 0xAE9E30
 void __fastcall CAkPitchShifterFXParams::CAkPitchShifterFXParams(CAkPitchShifterFXParams *this, CAkPitchShifterFXParams *in_rCopy)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkPitchShifterFXParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkPitchShifterFXParams::`vftable;
   this->m_ParamChangeHandler = 0;
   this->m_Params.Voice.Filter.eFilterType = 0;
   this->m_Params.Voice.Filter.fFilterGain = 1.0;
@@ -81,7 +81,7 @@ AK::IAkPluginParam *__fastcall CAkPitchShifterFXParams::Clone(CAkPitchShifterFXP
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 56ui64);
   if ( result )
   {
-    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkPitchShifterFXParams::`vftable';
+    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkPitchShifterFXParams::`vftable;
     LOWORD(result[1].vfptr) = 0;
     HIDWORD(result[1].vfptr) = 0;
     LODWORD(result[2].vfptr) = 1065353216;

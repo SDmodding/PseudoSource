@@ -116,7 +116,7 @@ void __fastcall Scaleform::Render::Text::StyledText::~StyledText(Scaleform::Rend
   Scaleform::Render::Text::Allocator *v5; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::Render::Text::StyledText::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::Render::Text::StyledText::`vftable;
   Scaleform::Render::Text::StyledText::Clear(this);
   v2 = v1->pDefaultTextFormat.pObject;
   if ( v2 )
@@ -142,7 +142,7 @@ void __fastcall Scaleform::Render::Text::StyledText::~StyledText(Scaleform::Rend
     if ( v3 )
       v5->vfptr->__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v5->vfptr, 1u);
   }
-  v1->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable';
+  v1->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable;
 }
 
 // File Line: 573

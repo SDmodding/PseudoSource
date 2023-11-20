@@ -8,7 +8,7 @@ void __fastcall AkRumbleControllerDirectInput::AkRumbleControllerDirectInput(AkR
   v2 = this;
   this->m_pEffect = 0i64;
   this->m_pController = in_pController;
-  this->vfptr = (IAkRumbleControllerVtbl *)&AkRumbleControllerDirectInput::`vftable';
+  this->vfptr = (IAkRumbleControllerVtbl *)&AkRumbleControllerDirectInput::`vftable;
   if ( !in_pController || AkRumbleControllerDirectInput::CreateEffect(this) )
   {
     Scaleform::Render::DICommand_ApplyFilter::GetType((CAkSwitchCntr *)L"Unable to initialise rumble on a direct input device.");
@@ -153,7 +153,7 @@ signed __int64 __fastcall AkRumbleControllerDirectInput::Term(AkRumbleController
   v3 = this;
   if ( this )
   {
-    this->vfptr = (IAkRumbleControllerVtbl *)&AkRumbleControllerDirectInput::`vftable';
+    this->vfptr = (IAkRumbleControllerVtbl *)&AkRumbleControllerDirectInput::`vftable;
     v4 = this->m_pController;
     if ( v4 )
     {

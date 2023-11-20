@@ -16,7 +16,7 @@ void __fastcall hkIndexedTransformSetCinfo::hkIndexedTransformSetCinfo(hkIndexed
 // RVA: 0x131B5C0
 void __fastcall hkIndexedTransformSet::hkIndexedTransformSet(hkIndexedTransformSet *this, hkFinishLoadedObjectFlag flag)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkIndexedTransformSet::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkIndexedTransformSet::`vftable;
 }
 
 // File Line: 36
@@ -78,7 +78,7 @@ void __fastcall hkIndexedTransformSet::hkIndexedTransformSet(hkIndexedTransformS
   v6 = &this->m_indexMappings;
   v7 = info;
   v8 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkIndexedTransformSet::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkIndexedTransformSet::`vftable;
   v3->m_data = 0i64;
   v3->m_size = 0;
   v3->m_capacityAndFlags = 2147483648;

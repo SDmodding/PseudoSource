@@ -91,7 +91,7 @@ void __fastcall hkpIterativeLinearCastAgent::linearCast(hkpIterativeLinearCastAg
   v63 = *(_OWORD *)&input->m_dispatcher.m_storage;
   v11 = *(_OWORD *)&input->m_convexListFilter.m_storage;
   v72 = _mm_shuffle_ps(v72, _mm_unpackhi_ps(v72, (__m128)xmmword_141A712A0), 196);
-  v69 = &hkpClosestCdPointCollector::`vftable';
+  v69 = &hkpClosestCdPointCollector::`vftable;
   v73 = 0i64;
   v70 = 2139095022;
   HIDWORD(v63) = 1;
@@ -155,7 +155,7 @@ void __fastcall hkpIterativeLinearCastAgent::linearCast(hkpIterativeLinearCastAg
       {
         v30 = (__int128 *)v10->m_motion;
         v31 = (__m128)xmmword_141A712A0;
-        v57 = &hkpClosestCdPointCollector::`vftable';
+        v57 = &hkpClosestCdPointCollector::`vftable;
         v61 = 0i64;
         v58 = 2139095022;
         v32 = _mm_shuffle_ps(v17, _mm_unpackhi_ps(v17, v27), 196);
@@ -353,7 +353,7 @@ void __fastcall hkpIterativeLinearCastAgent::staticLinearCast(hkpCdBody *bodyA, 
   v9 = bodyA;
   v60 = v5;
   *(float *)&v5 = *(float *)&v5 + input->m_cachedPathLength;
-  v65 = &hkpClosestCdPointCollector::`vftable';
+  v65 = &hkpClosestCdPointCollector::`vftable;
   v69 = 0i64;
   v10 = collector;
   LODWORD(v60) = v5;
@@ -416,7 +416,7 @@ void __fastcall hkpIterativeLinearCastAgent::staticLinearCast(hkpCdBody *bodyA, 
                                  0)) )
       {
         v27 = (__int128 *)v9->m_motion;
-        v53 = &hkpClosestCdPointCollector::`vftable';
+        v53 = &hkpClosestCdPointCollector::`vftable;
         v57 = 0i64;
         v54 = 2139095022;
         v28 = _mm_sub_ps(v22, v24);

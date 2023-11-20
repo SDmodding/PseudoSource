@@ -29,8 +29,8 @@ void __fastcall UFG::FlowfieldComponent::FlowfieldComponent(UFG::FlowfieldCompon
 
   v2 = this;
   UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name_uid);
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable'{for `UFG::SimComponent'};
-  v2->vfptr = (UFG::StateInterfaceVtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable'{for `UFG::StateInterface'};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable{for `UFG::SimComponent};
+  v2->vfptr = (UFG::StateInterfaceVtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable{for `UFG::StateInterface};
   v2->mAutoActivate = 1;
   v2->mAge = 0.0;
   v3 = (UFG::qNode<UFG::FlowfieldComponent,UFG::FlowfieldComponent> *)&v2->mPrev;
@@ -40,8 +40,8 @@ void __fastcall UFG::FlowfieldComponent::FlowfieldComponent(UFG::FlowfieldCompon
   v9->mPrev = (UFG::qNode<UFG::qDebugable<UFG::FlowfieldComponent>,UFG::qDebugable<UFG::FlowfieldComponent> > *)&v9->mPrev;
   v9->mNext = (UFG::qNode<UFG::qDebugable<UFG::FlowfieldComponent>,UFG::qDebugable<UFG::FlowfieldComponent> > *)&v9->mPrev;
   v2->mThisRef = v2;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::FlowfieldComponent::`vftable'{for `UFG::SimComponent'};
-  v2->vfptr = (UFG::StateInterfaceVtbl *)&UFG::FlowfieldComponent::`vftable'{for `UFG::StateInterface'};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::FlowfieldComponent::`vftable{for `UFG::SimComponent};
+  v2->vfptr = (UFG::StateInterfaceVtbl *)&UFG::FlowfieldComponent::`vftable{for `UFG::StateInterface};
   v10 = &v2->m_Prints;
   v10->mNode.mPrev = &v10->mNode;
   v10->mNode.mNext = &v10->mNode;
@@ -100,8 +100,8 @@ void __fastcall UFG::FlowfieldComponent::~FlowfieldComponent(UFG::FlowfieldCompo
   UFG::qNode<UFG::FlowfieldComponent,UFG::FlowfieldComponent> *v20; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::FlowfieldComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::StateInterfaceVtbl *)&UFG::FlowfieldComponent::`vftable'{for `UFG::StateInterface'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::FlowfieldComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::StateInterfaceVtbl *)&UFG::FlowfieldComponent::`vftable{for `UFG::StateInterface};
   v2 = (UFG::qNode<UFG::FlowfieldComponent,UFG::FlowfieldComponent> **)&this->m_Prints.mNode.mNext[-3].mNext;
   v3 = (UFG::qNode<UFG::FlowfieldComponent,UFG::FlowfieldComponent> *)&v1->mPrev;
   if ( v2 != &v1->mPrev )
@@ -168,8 +168,8 @@ void __fastcall UFG::FlowfieldComponent::~FlowfieldComponent(UFG::FlowfieldCompo
   v20->mPrev = v19;
   v3->mPrev = v3;
   v1->mNext = (UFG::qNode<UFG::FlowfieldComponent,UFG::FlowfieldComponent> *)&v1->mPrev;
-  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable'{for `UFG::SimComponent'};
-  v1->vfptr = (UFG::StateInterfaceVtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable'{for `UFG::StateInterface'};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable{for `UFG::SimComponent};
+  v1->vfptr = (UFG::StateInterfaceVtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable{for `UFG::StateInterface};
   if ( (LOBYTE(v1->m_Flags) >> 2) & 1 )
   {
     v1->m_Flags |= 2u;

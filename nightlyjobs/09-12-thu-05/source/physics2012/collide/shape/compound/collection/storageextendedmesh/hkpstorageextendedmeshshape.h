@@ -14,7 +14,7 @@ void __fastcall hkpStorageExtendedMeshShape::MeshSubpartStorage::~MeshSubpartSto
   int v10; // er8
   int v11; // er8
 
-  this->vfptr = (hkBaseObjectVtbl *)&hkpStorageExtendedMeshShape::MeshSubpartStorage::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpStorageExtendedMeshShape::MeshSubpartStorage::`vftable;
   v1 = this->m_materialIndices16.m_capacityAndFlags;
   v2 = this;
   this->m_materialIndices16.m_size = 0;
@@ -100,7 +100,7 @@ void __fastcall hkpStorageExtendedMeshShape::MeshSubpartStorage::~MeshSubpartSto
       16 * v11);
   v2->m_vertices.m_data = 0i64;
   v2->m_vertices.m_capacityAndFlags = 2147483648;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 108
@@ -113,7 +113,7 @@ void __fastcall hkpStorageExtendedMeshShape::ShapeSubpartStorage::~ShapeSubpartS
   int v4; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpStorageExtendedMeshShape::ShapeSubpartStorage::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpStorageExtendedMeshShape::ShapeSubpartStorage::`vftable;
   v2 = this->m_materialIndices16.m_capacityAndFlags;
   this->m_materialIndices16.m_size = 0;
   if ( v2 >= 0 )
@@ -141,6 +141,6 @@ void __fastcall hkpStorageExtendedMeshShape::ShapeSubpartStorage::~ShapeSubpartS
       v4 & 0x3FFFFFFF);
   v1->m_materialIndices.m_data = 0i64;
   v1->m_materialIndices.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 

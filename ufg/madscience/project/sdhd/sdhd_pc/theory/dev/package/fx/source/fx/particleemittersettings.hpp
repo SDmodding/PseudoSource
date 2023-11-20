@@ -9,12 +9,12 @@ void __fastcall Render::ParticleEmitterSettings::ParticleEmitterSettings(Render:
   v1 = this;
   UFG::qResourceData::qResourceData((UFG::qResourceData *)&this->mNode);
   UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v1->mModel.mPrev);
-  v2 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  v2 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v3 = UFG::qResourceWarehouse::Instance();
     v2 = UFG::qResourceWarehouse::GetInventory(v3, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v2;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v2;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v1->mModel.mPrev, 0xA2ADCD77, v1->mModel.mNameUID, v2);
 }
@@ -33,12 +33,12 @@ void __fastcall Render::ParticleEmitterSettings::~ParticleEmitterSettings(Render
 
   v1 = this;
   v2 = (UFG::qResourceHandle *)&this->mModel.mPrev;
-  v3 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  v3 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v4 = UFG::qResourceWarehouse::Instance();
     v3 = UFG::qResourceWarehouse::GetInventory(v4, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v3;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v3;
   }
   UFG::qResourceHandle::Close(v2, v3);
   UFG::qResourceHandle::~qResourceHandle(v2);

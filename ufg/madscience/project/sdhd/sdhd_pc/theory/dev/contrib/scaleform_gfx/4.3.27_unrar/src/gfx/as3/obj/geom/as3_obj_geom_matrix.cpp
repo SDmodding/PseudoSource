@@ -225,7 +225,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_geom::Matrix::clone(Scaleform
     "flash.geom.Matrix",
     6u,
     &ptr);
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 6, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 6, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
 }
 
 // File Line: 133
@@ -416,7 +416,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_geom::Matrix::deltaTransformP
       "flash.geom.Point",
       2u,
       &ptr);
-    `eh vector destructor iterator'(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
   }
   else
   {
@@ -1116,7 +1116,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_geom::Matrix::transformPoint(
       "flash.geom.Point",
       2u,
       &ptr);
-    `eh vector destructor iterator'(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
   }
   else
   {
@@ -1219,8 +1219,8 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v5 )
   {
     Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, v2, &Scaleform::GFx::AS3::fl_geom::MatrixCI);
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable';
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_geom::Matrix::`vftable';
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable;
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_geom::Matrix::`vftable;
   }
   else
   {
@@ -1232,8 +1232,8 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v7 )
   {
     Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v7, v2, &Scaleform::GFx::AS3::fl_geom::MatrixCI);
-    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable';
-    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_geom::Matrix::`vftable';
+    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable;
+    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_geom::Matrix::`vftable;
   }
   else
   {

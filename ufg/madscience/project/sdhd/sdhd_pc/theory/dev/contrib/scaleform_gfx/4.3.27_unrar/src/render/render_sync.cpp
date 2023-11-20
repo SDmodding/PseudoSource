@@ -181,7 +181,7 @@ void __fastcall Scaleform::Render::RenderSync::~RenderSync(Scaleform::Render::Re
   Scaleform::ListAllocBase<Scaleform::Render::FenceFrame,127,Scaleform::AllocatorLH<Scaleform::Render::FenceFrame,2> >::PageType *v7; // rbx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::RenderSync::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::RenderSync::`vftable;
   Scaleform::Render::RenderSync::ReleaseOutstandingFrames(this);
   v2 = v1->FenceAlloc.FirstPage;
   if ( v2 )
@@ -216,7 +216,7 @@ void __fastcall Scaleform::Render::RenderSync::~RenderSync(Scaleform::Render::Re
     }
     while ( v7 );
   }
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
 }
 
 // File Line: 110

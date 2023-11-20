@@ -2,7 +2,7 @@
 // RVA: 0x82D80
 void __fastcall std::error_category::~error_category(std::error_category *this)
 {
-  this->vfptr = (std::error_categoryVtbl *)&std::error_category::`vftable';
+  this->vfptr = (std::error_categoryVtbl *)&std::error_category::`vftable;
 }
 
 // File Line: 401

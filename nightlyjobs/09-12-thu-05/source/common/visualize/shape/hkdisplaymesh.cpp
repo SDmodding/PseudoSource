@@ -16,12 +16,12 @@ void __fastcall hkDisplayMesh::hkDisplayMesh(hkDisplayMesh *this, hkMeshBody *me
   this->m_type = 11;
   v2 = mesh;
   v3 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkDisplayGeometry::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkDisplayGeometry::`vftable;
   this->m_transform.m_rotation.m_col0 = (hkVector4f)transform.m_quad;
   this->m_transform.m_rotation.m_col1 = (hkVector4f)direction.m_quad;
   this->m_transform.m_rotation.m_col2 = (hkVector4f)stru_141A71280.m_quad;
   this->m_transform.m_translation = 0i64;
-  this->vfptr = (hkBaseObjectVtbl *)&hkDisplayMesh::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkDisplayMesh::`vftable;
   if ( mesh )
     hkReferencedObject::addReference((hkReferencedObject *)&mesh->vfptr);
   v3->m_mesh.m_pntr = v2;
@@ -85,7 +85,7 @@ void __fastcall hkDisplayMesh::serializeMeshData(hkDisplayMesh *this)
   v3 = (hkClass *)(*(__int64 (__fastcall **)(__int64, hkMeshBody *))(*(_QWORD *)v2 + 40i64))(v2, v1->m_mesh.m_pntr);
   hkDataWorldNative::hkDataWorldNative(&v9, 0);
   hkDataWorldNative::setContents(&v9, v1->m_mesh.m_pntr, v3);
-  v7.vfptr = (hkBaseObjectVtbl *)&hkBinaryTagfileWriter::`vftable';
+  v7.vfptr = (hkBaseObjectVtbl *)&hkBinaryTagfileWriter::`vftable;
   *(_DWORD *)&v7.m_memSizeAndFlags = 0x1FFFF;
   *(_WORD *)&options.m_verbose.m_bool = 256;
   options.m_writeSerializeIgnored.m_bool = 0;

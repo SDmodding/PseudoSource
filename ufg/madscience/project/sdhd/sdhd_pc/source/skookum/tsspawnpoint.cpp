@@ -135,7 +135,7 @@ void __fastcall UFG::TSSpawnPoint::MthdC_spawn(SSInvokedMethod *pScope, SSInstan
       {
         v16 = UFG::TSSpawnPoint_spawnTypeStr(&result, v7)->i_str_ref_p->i_cstr_p;
         v17 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v7->i_name);
-        UFG::qPrintf("Warning: Low/medium priority spawn point %s couldn't spawn type %s.\n", v17, v16);
+        UFG::qPrintf("Warning: Low/medium priority spawn point %s couldnt spawn type %s.\n", v17, v16);
         v18 = result.i_str_ref_p;
         v19 = result.i_str_ref_p->i_ref_count == 1;
         --v18->i_ref_count;

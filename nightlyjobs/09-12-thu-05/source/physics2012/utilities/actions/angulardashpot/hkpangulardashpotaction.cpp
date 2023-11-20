@@ -10,7 +10,7 @@ void __fastcall hkpAngularDashpotAction::hkpAngularDashpotAction(hkpAngularDashp
     (hkpEntity *)&entityA->vfptr,
     (hkpEntity *)&entityB->vfptr,
     userData);
-  v4->m_vec.m_quad.m128_u64[0] = (unsigned __int64)&hkpAngularDashpotAction::`vftable';
+  v4->m_vec.m_quad.m128_u64[0] = (unsigned __int64)&hkpAngularDashpotAction::`vftable;
   v4[5].m_vec.m_quad.m128_i32[0] = 1036831949;
   v4[5].m_vec.m_quad.m128_i32[1] = 1008981770;
   v4[4] = (hkQuaternionf)qi.m_vec.m_quad;

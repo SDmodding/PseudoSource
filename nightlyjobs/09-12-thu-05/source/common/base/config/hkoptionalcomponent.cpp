@@ -88,6 +88,6 @@ void __fastcall hkOptionalComponent::writeReport(hkOstream *os)
     ++v3;
     ++v2;
   }
-  while ( (signed __int64)v3 < (signed __int64)&hkThreadPool `RTTI Type Descriptor' );
+  while ( (signed __int64)v3 < (signed __int64)&hkThreadPool `RTTI Type Descriptor );
 }
 

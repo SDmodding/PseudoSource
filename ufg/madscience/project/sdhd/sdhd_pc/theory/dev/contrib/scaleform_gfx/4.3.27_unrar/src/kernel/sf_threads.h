@@ -2,15 +2,15 @@
 // RVA: 0x48FF0
 void __fastcall Scaleform::AcquireInterface::~AcquireInterface(Scaleform::AcquireInterface *this)
 {
-  this->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable';
+  this->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable;
 }
 
 // File Line: 270
 // RVA: 0x49000
 void __fastcall Scaleform::DefaultAcquireInterface::~DefaultAcquireInterface(Scaleform::DefaultAcquireInterface *this)
 {
-  this->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::DefaultAcquireInterface::`vftable';
-  this->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable';
+  this->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::DefaultAcquireInterface::`vftable;
+  this->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable;
 }
 
 // File Line: 353

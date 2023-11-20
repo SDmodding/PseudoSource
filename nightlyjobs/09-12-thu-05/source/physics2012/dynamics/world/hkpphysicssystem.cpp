@@ -5,7 +5,7 @@ void __fastcall hkpPhysicsSystem::hkpPhysicsSystem(hkpPhysicsSystem *this)
   hkpPhysicsSystem *v1; // rbx
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpPhysicsSystem::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpPhysicsSystem::`vftable;
   this->m_rigidBodies.m_data = 0i64;
   this->m_rigidBodies.m_size = 0;
   this->m_rigidBodies.m_capacityAndFlags = 2147483648;
@@ -88,7 +88,7 @@ void __fastcall hkpPhysicsSystem::~hkpPhysicsSystem(hkpPhysicsSystem *this)
   int v5; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpPhysicsSystem::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpPhysicsSystem::`vftable;
   hkpPhysicsSystem::removeAll(this);
   hkStringPtr::~hkStringPtr(&v1->m_name);
   v2 = v1->m_phantoms.m_capacityAndFlags;
@@ -127,7 +127,7 @@ void __fastcall hkpPhysicsSystem::~hkpPhysicsSystem(hkpPhysicsSystem *this)
       8 * v5);
   v1->m_rigidBodies.m_data = 0i64;
   v1->m_rigidBodies.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 90

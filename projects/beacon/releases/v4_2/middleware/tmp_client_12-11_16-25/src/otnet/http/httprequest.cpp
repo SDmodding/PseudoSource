@@ -10,7 +10,7 @@ void __fastcall OSuite::ZHttpRequest::ZHttpRequest(OSuite::ZHttpRequest *this, O
   v6 = this;
   OSuite::ZHttpRequestBase::ZHttpRequestBase((OSuite::ZHttpRequestBase *)&this->vfptr, url, pParent, nTimeOut);
   v6->m_pHttpConnection = 0i64;
-  v6->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpRequest::`vftable';
+  v6->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpRequest::`vftable;
   OSuite::ZHttpResponse::ZHttpResponse(&v6->m_httpResponse);
   OSuite::ZHttpStreamWriter::ZHttpStreamWriter(&v6->m_streamWriter);
   v6->m_bKeepAliveOverride = v5;
@@ -34,7 +34,7 @@ void __fastcall OSuite::ZHttpRequest::~ZHttpRequest(OSuite::ZHttpRequest *this)
   OSuite::ZObjectAccessor *v2; // rax
 
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpRequest::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpRequest::`vftable;
   v2 = OSuite::TSingleton<OSuite::ZObjectAccessor>::Object();
   OSuite::ZObjectAccessor::UnRegisterObject(v2, v1->m_pParent);
   OSuite::ZHttpStreamWriter::~ZHttpStreamWriter(&v1->m_streamWriter);
@@ -471,15 +471,15 @@ bool __fastcall OSuite::ZHttpRequest::SendRequest(OSuite::ZHttpRequest *this)
     v41.m_pElement = 0i64;
     v41.m_parents.m_pList = 0i64;
     OSuite::ZRedBlackTreeBase::ZIteratorBase::ZIteratorBase(&other, (OSuite::ZRedBlackTreeBase *)&v1->m_headers.vfptr);
-    v39 = &OSuite::TConstIterator<OSuite::TOrderedMap<OSuite::ZString,OSuite::TList<OSuite::ZString>,OSuite::TOperatorComparer<OSuite::ZString>>::ZIterator,OSuite::TList<OSuite::ZString>,OSuite::ZString>::`vftable';
-    v40 = &OSuite::TOrderedMap<unsigned __int64,OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>,OSuite::TOperatorComparer<unsigned __int64>>::ZIterator::`vftable';
-    other.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZRedBlackTreeBase::TIterator<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZUsageTracker::ZResourceUsage *>>::`vftable';
+    v39 = &OSuite::TConstIterator<OSuite::TOrderedMap<OSuite::ZString,OSuite::TList<OSuite::ZString>,OSuite::TOperatorComparer<OSuite::ZString>>::ZIterator,OSuite::TList<OSuite::ZString>,OSuite::ZString>::`vftable;
+    v40 = &OSuite::TOrderedMap<unsigned __int64,OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>,OSuite::TOperatorComparer<unsigned __int64>>::ZIterator::`vftable;
+    other.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZRedBlackTreeBase::TIterator<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZUsageTracker::ZResourceUsage *>>::`vftable;
     OSuite::ZRedBlackTreeBase::ZIteratorBase::ZIteratorBase(&v41, &other);
-    other.m_parents.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable'{for `OSuite::ZObject'};
-    v41.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZRedBlackTreeBase::TIterator<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZUsageTracker::ZResourceUsage *>>::`vftable';
-    v34 = &OSuite::TOrderedMap<unsigned __int64,OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>,OSuite::TOperatorComparer<unsigned __int64>>::ZIterator::`vftable';
-    other.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZRedBlackTreeBase::TIterator<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZUsageTracker::ZResourceUsage *>>::`vftable';
-    other.m_parents.vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable'{for `OSuite::IHashable'};
+    other.m_parents.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable{for `OSuite::ZObject};
+    v41.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZRedBlackTreeBase::TIterator<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZUsageTracker::ZResourceUsage *>>::`vftable;
+    v34 = &OSuite::TOrderedMap<unsigned __int64,OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>,OSuite::TOperatorComparer<unsigned __int64>>::ZIterator::`vftable;
+    other.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZRedBlackTreeBase::TIterator<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZUsageTracker::ZResourceUsage *>>::`vftable;
+    other.m_parents.vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable{for `OSuite::IHashable};
     if ( other.m_parents.m_pList )
       other.m_parents.m_pList->vfptr->__vecDelDtor((OSuite::ZObject *)other.m_parents.m_pList, 1u);
     while ( !OSuite::ZString::IsNull((OSuite::ZString *)&v41) )
@@ -506,11 +506,11 @@ bool __fastcall OSuite::ZHttpRequest::SendRequest(OSuite::ZHttpRequest *this)
       OSuite::ZRedBlackTreeBase::ZIteratorBase::Next(&v41);
       OSuite::ZString::~ZString(&result);
     }
-    v40 = &OSuite::TOrderedMap<unsigned __int64,OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>,OSuite::TOperatorComparer<unsigned __int64>>::ZIterator::`vftable';
-    v39 = &OSuite::TConstIterator<OSuite::TOrderedMap<OSuite::ZString,OSuite::TList<OSuite::ZString>,OSuite::TOperatorComparer<OSuite::ZString>>::ZIterator,OSuite::TList<OSuite::ZString>,OSuite::ZString>::`vftable';
-    v41.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZRedBlackTreeBase::TIterator<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZUsageTracker::ZResourceUsage *>>::`vftable';
-    v41.m_parents.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable'{for `OSuite::ZObject'};
-    v41.m_parents.vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable'{for `OSuite::IHashable'};
+    v40 = &OSuite::TOrderedMap<unsigned __int64,OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>,OSuite::TOperatorComparer<unsigned __int64>>::ZIterator::`vftable;
+    v39 = &OSuite::TConstIterator<OSuite::TOrderedMap<OSuite::ZString,OSuite::TList<OSuite::ZString>,OSuite::TOperatorComparer<OSuite::ZString>>::ZIterator,OSuite::TList<OSuite::ZString>,OSuite::ZString>::`vftable;
+    v41.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZRedBlackTreeBase::TIterator<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZUsageTracker::ZResourceUsage *>>::`vftable;
+    v41.m_parents.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable{for `OSuite::ZObject};
+    v41.m_parents.vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable{for `OSuite::IHashable};
     if ( v41.m_parents.m_pList )
       v41.m_parents.m_pList->vfptr->__vecDelDtor((OSuite::ZObject *)v41.m_parents.m_pList, 1u);
     if ( !v19 )

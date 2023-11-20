@@ -10,7 +10,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::Editor::SpawnRacke
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::Editor::SpawnRacketWindow,UFG::DUIWindow>::sInventory.vfptr,
     "UFG::Editor::SpawnRacketWindow",
     v0);
-  UFG::qReflectObjectType<UFG::Editor::SpawnRacketWindow,UFG::DUIWindow>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::Editor::SpawnRacketWindow>::`vftable';
+  UFG::qReflectObjectType<UFG::Editor::SpawnRacketWindow,UFG::DUIWindow>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::Editor::SpawnRacketWindow>::`vftable;
   UFG::qReflectInventory<UFG::Editor::SpawnRacketWindow>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::Editor::SpawnRacketWindow,UFG::DUIWindow>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(

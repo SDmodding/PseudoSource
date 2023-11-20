@@ -29,12 +29,12 @@ void __fastcall Scaleform::GFx::KeyboardState::KeyboardState(Scaleform::GFx::Key
   Scaleform::KeyModifiers *v4; // rax
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::KeyboardState,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::KeyboardState::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::KeyboardState,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::KeyboardState::`vftable;
   v2 = &this->KeyQueue;
   v3 = 99;
   v4 = &v2->Buffer[0].keyMods;
@@ -65,7 +65,7 @@ bool __fastcall Scaleform::GFx::KeyboardState::IsKeyDown(Scaleform::GFx::Keyboar
 {
   bool result; // al
 
-  if ( code > (unsigned int)'ä' )
+  if ( code > (unsigned int)ä )
     result = 0;
   else
     result = ((unsigned __int8)(1 << (code - 8 * (code >> 3))) & this->Keymap[code >> 3]) != 0;

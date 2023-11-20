@@ -1190,7 +1190,7 @@ void __fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rebui
                 v88 = _mm_max_ps(v119, v88);
                 v113 = _mm_min_ps(v119, v113);
                 v120 = _mm_xor_si128(
-                         (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v119),
+                         (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v119),
                          _mm_cvttps_epi32(v119));
                 v121 = v262;
                 v122 = (signed __int64)_mm_cvtsi128_si32(v120) << 6;
@@ -1646,22 +1646,22 @@ void __fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rebui
                   else
                   {
                     v189[3].m128_u64[0] = (*((_QWORD *)&v277.m_axis
-                                           + (signed int)`hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rebuildBranchSAH'::`77'::lut[v220][0])
+                                           + (signed int)`hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rebuildBranchSAH::`77::lut[v220][0])
                                          - (_QWORD)v185) >> 6;
                     v190[2].m128_u64[1] = (signed __int64)(*((_QWORD *)&v277.m_axis
-                                                           + (signed int)`hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rebuildBranchSAH'::`77'::lut[v220][1])
+                                                           + (signed int)`hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rebuildBranchSAH::`77::lut[v220][1])
                                                          - (unsigned __int64)v7->m_nodes.m_data) >> 6;
                     v190[3].m128_u64[0] = (signed __int64)(*((_QWORD *)&v277.m_axis
-                                                           + (signed int)`hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rebuildBranchSAH'::`77'::lut[v220][2])
+                                                           + (signed int)`hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rebuildBranchSAH::`77::lut[v220][2])
                                                          - (unsigned __int64)v7->m_nodes.m_data) >> 6;
                     *(_QWORD *)(*((_QWORD *)&v277.m_axis
-                                + (signed int)`hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rebuildBranchSAH'::`77'::lut[v220][0])
+                                + (signed int)`hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rebuildBranchSAH::`77::lut[v220][0])
                               + 32i64) = ((char *)v189 - (char *)v7->m_nodes.m_data) >> 6;
                     *(_QWORD *)(*((_QWORD *)&v277.m_axis
-                                + (signed int)`hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rebuildBranchSAH'::`77'::lut[v220][1])
+                                + (signed int)`hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rebuildBranchSAH::`77::lut[v220][1])
                               + 32i64) = ((char *)v190 - (char *)v7->m_nodes.m_data) >> 6;
                     v221 = *((_QWORD *)&v277.m_axis
-                           + (signed int)`hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rebuildBranchSAH'::`77'::lut[v220][2]);
+                           + (signed int)`hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rebuildBranchSAH::`77::lut[v220][2]);
                     v186 = 1;
                     v222 = ((char *)v190 - (char *)v7->m_nodes.m_data) >> 6;
                     LOBYTE(result.m_enum) = 1;

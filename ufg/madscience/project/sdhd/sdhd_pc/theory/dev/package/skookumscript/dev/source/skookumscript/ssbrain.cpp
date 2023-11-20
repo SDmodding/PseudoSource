@@ -194,11 +194,11 @@ void __fastcall SSBrain::assign_binary(const void **binary_pp)
         v37 = v11;
         if ( v11 )
         {
-          *(_QWORD *)v11 = &SSClassDescBase::`vftable';
-          *(_QWORD *)v11 = &SSClassUnaryBase::`vftable';
+          *(_QWORD *)v11 = &SSClassDescBase::`vftable;
+          *(_QWORD *)v11 = &SSClassUnaryBase::`vftable;
           v11[2] = 0;
-          *(_QWORD *)v11 = &SSContextClassBase::`vftable';
-          *(_QWORD *)v11 = &SSTypedClass::`vftable';
+          *(_QWORD *)v11 = &SSContextClassBase::`vftable;
+          *(_QWORD *)v11 = &SSTypedClass::`vftable;
           *((_QWORD *)v11 + 3) = 0i64;
         }
         else
@@ -241,11 +241,11 @@ void __fastcall SSBrain::assign_binary(const void **binary_pp)
         v38 = v16;
         if ( v16 )
         {
-          *(_QWORD *)v16 = &SSClassDescBase::`vftable';
-          *(_QWORD *)v16 = &SSClassUnaryBase::`vftable';
+          *(_QWORD *)v16 = &SSClassDescBase::`vftable;
+          *(_QWORD *)v16 = &SSClassUnaryBase::`vftable;
           v16[2] = 0;
-          *(_QWORD *)v16 = &SSContextClassBase::`vftable';
-          *(_QWORD *)v16 = &SSInvokableClass::`vftable';
+          *(_QWORD *)v16 = &SSContextClassBase::`vftable;
+          *(_QWORD *)v16 = &SSInvokableClass::`vftable;
           *((_QWORD *)v16 + 3) = 0i64;
         }
         else
@@ -285,9 +285,9 @@ void __fastcall SSBrain::assign_binary(const void **binary_pp)
       result = (const void **)&v19->vfptr;
       if ( v19 )
       {
-        v19->vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable';
+        v19->vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable;
         v19->i_ref_count = 0;
-        v19->vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable';
+        v19->vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable;
         v19->i_common_class_p = 0i64;
         v19->i_union.i_count = 0;
         v19->i_union.i_array_p = 0i64;
@@ -527,7 +527,7 @@ LABEL_15:
         if ( v5 == -1 )
           v5 = 48;
         SSClass::SSClass(v20, v7, v6, v5);
-        v20->vfptr = (SSClassDescBaseVtbl *)&SSActorClass::`vftable';
+        v20->vfptr = (SSClassDescBaseVtbl *)&SSActorClass::`vftable;
         v21 = (signed __int64)&v20[1];
         *(_DWORD *)v21 = 0;
         *(_QWORD *)(v21 + 8) = 0i64;
@@ -579,8 +579,8 @@ void __fastcall SSBrain::register_bind_atomics_func(void (__fastcall *bind_atomi
   LODWORD(v3) = 0;
   if ( v2 )
   {
-    *(_QWORD *)v2 = &AFunctionBase::`vftable';
-    *(_QWORD *)v2 = &AFunction::`vftable';
+    *(_QWORD *)v2 = &AFunctionBase::`vftable;
+    *(_QWORD *)v2 = &AFunction::`vftable;
     *((_QWORD *)v2 + 1) = v1;
   }
   else
@@ -716,7 +716,7 @@ void __fastcall SSBrain::initialize_pre_load(unsigned int ensure_class_count)
     _S3_4 |= 1u;
     s_nil.i_class_p = 0i64;
     s_nil.i_ptr_id = ++SSObjectBase::c_ptr_id_prev;
-    s_nil.vfptr = (SSObjectBaseVtbl *)&SSInstanceUnreffed::`vftable';
+    s_nil.vfptr = (SSObjectBaseVtbl *)&SSInstanceUnreffed::`vftable;
     s_nil.i_ref_count = 1000000;
     atexit(SSBrain::initialize_pre_load_::_4_::_dynamic_atexit_destructor_for__s_nil__);
   }
@@ -762,7 +762,7 @@ void SSBrain::initialize_post_load(void)
     {
       do
       {
-         SSClassDescBase::`vcall'{8,{flat}}(*v0);
+         SSClassDescBase::`vcall{8,{flat}}(*v0);
         ++v0;
       }
       while ( v0 < (__int64 *)v1 );
@@ -798,7 +798,7 @@ void SSBrain::deinitialize(void)
     {
       do
       {
-         SSClass::`vcall'{280,{flat}}(*v0);
+         SSClass::`vcall{280,{flat}}(*v0);
         ++v0;
       }
       while ( v0 < (__int64 *)v1 );

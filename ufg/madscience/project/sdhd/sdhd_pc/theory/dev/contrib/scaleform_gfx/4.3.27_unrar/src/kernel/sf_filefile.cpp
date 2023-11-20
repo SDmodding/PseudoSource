@@ -15,13 +15,13 @@ void __fastcall Scaleform::FILEFile::FILEFile(Scaleform::FILEFile *this, Scalefo
 
   v4 = flags;
   v5 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::File,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::File::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::FILEFile::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::File,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::File::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::FILEFile::`vftable;
   Scaleform::String::String(&this->FileName, fileName);
   v5->OpenFlags = v4;
   Scaleform::FILEFile::init(v5);

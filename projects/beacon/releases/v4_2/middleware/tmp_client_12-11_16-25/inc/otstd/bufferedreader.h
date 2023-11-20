@@ -2,27 +2,27 @@
 // RVA: 0xEEB974
 OSuite::ZDateTime *__fastcall OSuite::ZBufferedReader::GetModificationDate(OSuite::ZBufferedReader *this)
 {
-  if ( !(`OSuite::ZBufferedReader::GetModificationDate'::`2'::`local static guard' & 1) )
+  if ( !(`OSuite::ZBufferedReader::GetModificationDate::`2::`local static guard & 1) )
   {
-    `OSuite::ZBufferedReader::GetModificationDate'::`2'::`local static guard' |= 1u;
-    OSuite::ZDateTime::ZDateTime(&`OSuite::ZBufferedReader::GetModificationDate'::`2'::foo);
-    atexit(`OSuite::ZBufferedReader::GetModificationDate'::`2'::`dynamic atexit destructor for 'foo'');
+    `OSuite::ZBufferedReader::GetModificationDate::`2::`local static guard |= 1u;
+    OSuite::ZDateTime::ZDateTime(&`OSuite::ZBufferedReader::GetModificationDate::`2::foo);
+    atexit(`OSuite::ZBufferedReader::GetModificationDate::`2::`dynamic atexit destructor for foo);
   }
-  return &`OSuite::ZBufferedReader::GetModificationDate'::`2'::foo;
+  return &`OSuite::ZBufferedReader::GetModificationDate::`2::foo;
 }
 
 // File Line: 33
 // RVA: 0xEEB9B0
 OSuite::ZString *__fastcall OSuite::ZBufferedReader::GetName(OSuite::ZBufferedReader *this)
 {
-  if ( !(`OSuite::ZBufferedReader::GetName'::`2'::`local static guard' & 1) )
+  if ( !(`OSuite::ZBufferedReader::GetName::`2::`local static guard & 1) )
   {
-    `OSuite::ZBufferedReader::GetName'::`2'::foo.m_pString = 0i64;
-    `OSuite::ZBufferedReader::GetName'::`2'::`local static guard' |= 1u;
-    OSuite::ZString::ZString(&`OSuite::ZBufferedReader::GetName'::`2'::foo, "ZBufferedReader");
-    atexit(`OSuite::ZBufferedReader::GetName'::`2'::`dynamic atexit destructor for 'foo'');
+    `OSuite::ZBufferedReader::GetName::`2::foo.m_pString = 0i64;
+    `OSuite::ZBufferedReader::GetName::`2::`local static guard |= 1u;
+    OSuite::ZString::ZString(&`OSuite::ZBufferedReader::GetName::`2::foo, "ZBufferedReader");
+    atexit(`OSuite::ZBufferedReader::GetName::`2::`dynamic atexit destructor for foo);
   }
-  return &`OSuite::ZBufferedReader::GetName'::`2'::foo;
+  return &`OSuite::ZBufferedReader::GetName::`2::foo;
 }
 
 // File Line: 54

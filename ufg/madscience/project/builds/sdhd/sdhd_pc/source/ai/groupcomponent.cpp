@@ -8,7 +8,7 @@ void __fastcall UFG::GroupFollower::~GroupFollower(UFG::GroupFollower *this)
   UFG::qNode<UFG::qSafePointerBase<UFG::GroupComponent>,UFG::qSafePointerNodeList> *v4; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::GroupComponent>,UFG::qSafePointerNodeList> *v5; // rax
 
-  this->vfptr = (UFG::GroupFollowerVtbl *)&UFG::GroupFollower::`vftable';
+  this->vfptr = (UFG::GroupFollowerVtbl *)&UFG::GroupFollower::`vftable;
   v1 = &this->mLeader;
   if ( this->mLeader.m_pPointer )
   {
@@ -95,9 +95,9 @@ void __fastcall UFG::GroupLeader::GroupLeader(UFG::GroupLeader *this)
   UFG::qFixedArray<UFG::qSafePointer<UFG::GroupComponent,UFG::GroupComponent>,4> *v2; // rbx
 
   v1 = this;
-  this->vfptr = (UFG::GroupLeaderVtbl *)&UFG::GroupLeader::`vftable';
+  this->vfptr = (UFG::GroupLeaderVtbl *)&UFG::GroupLeader::`vftable;
   v2 = &this->mFollowers;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     this->mFollowers.p,
     0x18ui64,
     4,
@@ -112,10 +112,10 @@ void __fastcall UFG::GroupLeader::~GroupLeader(UFG::GroupLeader *this)
 {
   UFG::qFixedArray<UFG::qSafePointer<UFG::GroupComponent,UFG::GroupComponent>,4> *v1; // rcx
 
-  this->vfptr = (UFG::GroupLeaderVtbl *)&UFG::GroupLeader::`vftable';
+  this->vfptr = (UFG::GroupLeaderVtbl *)&UFG::GroupLeader::`vftable;
   v1 = &this->mFollowers;
   v1->size = 0;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->p,
     0x18ui64,
     4,
@@ -144,7 +144,7 @@ void __fastcall UFG::GroupLeader::Reset(UFG::GroupLeader *this)
   v1 = this;
   if ( this->mFollowers.size )
   {
-    `eh vector constructor iterator'(
+    `eh vector constructor iterator(
       ptr,
       0x18ui64,
       4,
@@ -197,7 +197,7 @@ void __fastcall UFG::GroupLeader::Reset(UFG::GroupLeader *this)
       }
       while ( v9 < v2 );
     }
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       ptr,
       0x18ui64,
       4,
@@ -245,7 +245,7 @@ void __fastcall UFG::GroupLeader::UnregisterFarFollowers(UFG::GroupLeader *this,
   v4 = this;
   if ( this->mFollowers.size )
   {
-    `eh vector constructor iterator'(
+    `eh vector constructor iterator(
       ptr,
       0x18ui64,
       4,
@@ -335,7 +335,7 @@ void __fastcall UFG::GroupLeader::UnregisterFarFollowers(UFG::GroupLeader *this,
       }
       while ( v11 < v23 );
     }
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       ptr,
       0x18ui64,
       4,
@@ -530,16 +530,16 @@ void __fastcall UFG::GroupComponent::GroupComponent(UFG::GroupComponent *this, u
 
   v2 = this;
   UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name_uid);
-  v2->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::UpdateInterface::`vftable';
+  v2->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::UpdateInterface::`vftable;
   v3 = (UFG::qNode<UFG::GroupComponent,UFG::GroupComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
   UFG::qSafePointerNode<UFG::GroupComponent>::qSafePointerNode<UFG::GroupComponent>((UFG::qSafePointerNode<UFG::GroupComponent> *)&v2->vfptr);
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::GroupComponent::`vftable'{for `UFG::SimComponent'};
-  v2->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::GroupComponent::`vftable'{for `UFG::UpdateInterface'};
-  v2->vfptr = (UFG::qSafePointerNode<UFG::GroupComponent>Vtbl *)&UFG::GroupComponent::`vftable'{for `UFG::qSafePointerNode<UFG::GroupComponent>'};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::GroupComponent::`vftable{for `UFG::SimComponent};
+  v2->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::GroupComponent::`vftable{for `UFG::UpdateInterface};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::GroupComponent>Vtbl *)&UFG::GroupComponent::`vftable{for `UFG::qSafePointerNode<UFG::GroupComponent>};
   UFG::GroupLeader::GroupLeader(&v2->mGroupLeader);
-  v2->mGroupFollower.vfptr = (UFG::GroupFollowerVtbl *)&UFG::GroupFollower::`vftable';
+  v2->mGroupFollower.vfptr = (UFG::GroupFollowerVtbl *)&UFG::GroupFollower::`vftable;
   v5 = &v2->mGroupFollower.mLeader;
   v5->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::GroupComponent>,UFG::qSafePointerNodeList> *)&v5->mPrev;
   v5->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::GroupComponent>,UFG::qSafePointerNodeList> *)&v5->mPrev;
@@ -578,10 +578,10 @@ void __fastcall UFG::GroupComponent::~GroupComponent(UFG::GroupComponent *this)
   UFG::qNode<UFG::GroupComponent,UFG::GroupComponent> *v15; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::GroupComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::GroupComponent::`vftable'{for `UFG::UpdateInterface'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::GroupComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::GroupComponent::`vftable{for `UFG::UpdateInterface};
   v2 = (UFG::qSafePointerNode<UFG::ParkourHandle> *)&this->vfptr;
-  this->vfptr = (UFG::qSafePointerNode<UFG::GroupComponent>Vtbl *)&UFG::GroupComponent::`vftable'{for `UFG::qSafePointerNode<UFG::GroupComponent>'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::GroupComponent>Vtbl *)&UFG::GroupComponent::`vftable{for `UFG::qSafePointerNode<UFG::GroupComponent>};
   UFG::GroupComponent::Reset(this);
   if ( v1 == UFG::GroupComponent::s_GroupComponentpCurrentIterator )
     UFG::GroupComponent::s_GroupComponentpCurrentIterator = (UFG::GroupComponent *)&v1->mPrev[-6];
@@ -592,7 +592,7 @@ void __fastcall UFG::GroupComponent::~GroupComponent(UFG::GroupComponent *this)
   v5->mPrev = v4;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v1->mGroupFollower.vfptr = (UFG::GroupFollowerVtbl *)&UFG::GroupFollower::`vftable';
+  v1->mGroupFollower.vfptr = (UFG::GroupFollowerVtbl *)&UFG::GroupFollower::`vftable;
   v6 = &v1->mGroupFollower.mLeader;
   if ( v1->mGroupFollower.mLeader.m_pPointer )
   {
@@ -610,14 +610,14 @@ void __fastcall UFG::GroupComponent::~GroupComponent(UFG::GroupComponent *this)
   v10->mPrev = v9;
   v6->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::GroupComponent>,UFG::qSafePointerNodeList> *)&v6->mPrev;
   v1->mGroupFollower.mLeader.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::GroupComponent>,UFG::qSafePointerNodeList> *)&v1->mGroupFollower.mLeader.mPrev;
-  v1->mGroupLeader.vfptr = (UFG::GroupLeaderVtbl *)&UFG::GroupLeader::`vftable';
+  v1->mGroupLeader.vfptr = (UFG::GroupLeaderVtbl *)&UFG::GroupLeader::`vftable;
   v1->mGroupLeader.mFollowers.size = 0;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->mGroupLeader.mFollowers.p,
     0x18ui64,
     4,
     (void (__fastcall *)(void *))UFG::qSafePointer<AnimationGroup,AnimationGroup>::~qSafePointer<AnimationGroup,AnimationGroup>);
-  v2->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::GroupComponent>::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::GroupComponent>::`vftable;
   UFG::qSafePointerNode<UFG::DynamicCoverCorner>::SetAllPointersToNull(v2);
   v11 = &v2->m_SafePointerList;
   UFG::qList<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList,1,0>::DeleteNodes(v11);

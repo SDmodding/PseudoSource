@@ -31,7 +31,7 @@ hkClass *__fastcall hkpCharacterRigidBodyCinfo::staticClass()
 void __fastcall finishLoadedObjecthkpCharacterRigidBodyCinfo(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpCharacterRigidBodyCinfo::`vftable';
+    *(_QWORD *)p = &hkpCharacterRigidBodyCinfo::`vftable;
 }
 
 // File Line: 284
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkpCharacterRigidBodyCinfo(void *p)
 // RVA: 0xE0A690
 void **__fastcall getVtablehkpCharacterRigidBodyCinfo()
 {
-  return &hkpCharacterRigidBodyCinfo::`vftable';
+  return &hkpCharacterRigidBodyCinfo::`vftable;
 }
 
 // File Line: 310

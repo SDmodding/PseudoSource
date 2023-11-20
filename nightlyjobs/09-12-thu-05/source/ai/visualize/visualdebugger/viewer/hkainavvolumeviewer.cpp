@@ -6,10 +6,10 @@ void __fastcall hkaiNavVolumeViewer::hkaiNavVolumeViewer(hkaiNavVolumeViewer *th
 
   v2 = this;
   hkaiViewerBase::hkaiViewerBase((hkaiViewerBase *)&this->vfptr, contexts);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkaiNavVolumeViewer::`vftable'{for `hkReferencedObject'};
-  v2->vfptr = (hkProcessVtbl *)&hkaiNavVolumeViewer::`vftable'{for `hkProcess'};
-  v2->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiNavVolumeViewer::`vftable'{for `hkaiViewerContextWorldListener'};
-  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiNavVolumeViewer::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkaiNavVolumeViewer::`vftable{for `hkReferencedObject};
+  v2->vfptr = (hkProcessVtbl *)&hkaiNavVolumeViewer::`vftable{for `hkProcess};
+  v2->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiNavVolumeViewer::`vftable{for `hkaiViewerContextWorldListener};
+  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiNavVolumeViewer::`vftable;
   v2->m_navVolumeInfos.m_capacityAndFlags = 2147483648;
   v2->m_navVolumeInfos.m_data = 0i64;
   v2->m_navVolumeInfos.m_size = 0;
@@ -58,11 +58,11 @@ void __fastcall hkaiNavVolumeViewer::~hkaiNavVolumeViewer(hkaiNavVolumeViewer *t
   int v6; // eax
 
   v1 = this->m_navVolumeInfos.m_size == 0;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiNavVolumeViewer::`vftable'{for `hkReferencedObject'};
-  this->vfptr = (hkProcessVtbl *)&hkaiNavVolumeViewer::`vftable'{for `hkProcess'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiNavVolumeViewer::`vftable{for `hkReferencedObject};
+  this->vfptr = (hkProcessVtbl *)&hkaiNavVolumeViewer::`vftable{for `hkProcess};
   v2 = this;
-  this->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiNavVolumeViewer::`vftable'{for `hkaiViewerContextWorldListener'};
-  this->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiNavVolumeViewer::`vftable';
+  this->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiNavVolumeViewer::`vftable{for `hkaiViewerContextWorldListener};
+  this->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiNavVolumeViewer::`vftable;
   if ( !v1 )
   {
     do
@@ -93,7 +93,7 @@ void __fastcall hkaiNavVolumeViewer::~hkaiNavVolumeViewer(hkaiNavVolumeViewer *t
       24 * (v6 & 0x3FFFFFFF));
   v2->m_navVolumeInfos.m_data = 0i64;
   v2->m_navVolumeInfos.m_capacityAndFlags = 2147483648;
-  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiWorld::Listener::`vftable';
+  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiWorld::Listener::`vftable;
   hkaiViewerBase::~hkaiViewerBase((hkaiViewerBase *)&v2->vfptr);
 }
 
@@ -341,7 +341,7 @@ void __fastcall hkaiNavVolumeViewer::addNavVolume(hkaiNavVolumeViewer *this, hka
   if ( v7 )
   {
     *(_DWORD *)(v7 + 8) = 0x1FFFF;
-    *(_QWORD *)v7 = &hkGeometry::`vftable';
+    *(_QWORD *)v7 = &hkGeometry::`vftable;
     *(_QWORD *)(v7 + 16) = 0i64;
     *(_DWORD *)(v7 + 24) = 0;
     *(_DWORD *)(v7 + 28) = 2147483648;

@@ -233,8 +233,8 @@ void __fastcall HavokTempMemoryAllocator::HavokTempMemoryAllocator(HavokTempMemo
   char *v3; // rax
 
   v1 = this;
-  this->vfptr = (hkMemoryAllocatorVtbl *)&hkMemoryAllocator::`vftable';
-  this->vfptr = (hkMemoryAllocatorVtbl *)&HavokTempMemoryAllocator::`vftable';
+  this->vfptr = (hkMemoryAllocatorVtbl *)&hkMemoryAllocator::`vftable;
+  this->vfptr = (hkMemoryAllocatorVtbl *)&HavokTempMemoryAllocator::`vftable;
   v2 = UFG::qMalloc(9312ui64, "qMemoryPool", 2048ui64);
   if ( v2 )
     UFG::qMemoryPool::qMemoryPool((UFG::qMemoryPool *)v2);
@@ -254,7 +254,7 @@ void __fastcall HavokTempMemoryAllocator::~HavokTempMemoryAllocator(HavokTempMem
   UFG::qNode<UFG::qMemoryPool,UFG::qMemoryPool> *v4; // rax
 
   v1 = this;
-  this->vfptr = (hkMemoryAllocatorVtbl *)&HavokTempMemoryAllocator::`vftable';
+  this->vfptr = (hkMemoryAllocatorVtbl *)&HavokTempMemoryAllocator::`vftable;
   UFG::qMemoryPool::Close(this->mPool);
   v2 = v1->mPool;
   if ( v2 )
@@ -300,8 +300,8 @@ void __fastcall CustomHavokMemorySystem::CustomHavokMemorySystem(CustomHavokMemo
   CustomHavokMemorySystem *v1; // rbx
 
   v1 = this;
-  this->vfptr = (hkMemorySystemVtbl *)&hkMemorySystem::`vftable';
-  this->vfptr = (hkMemorySystemVtbl *)&CustomHavokMemorySystem::`vftable';
+  this->vfptr = (hkMemorySystemVtbl *)&hkMemorySystem::`vftable;
+  this->vfptr = (hkMemorySystemVtbl *)&CustomHavokMemorySystem::`vftable;
   this->m_frameInfo = 0i64;
   this->m_allocator = 0i64;
   hkMemoryRouter::hkMemoryRouter(&this->m_mainRouter);

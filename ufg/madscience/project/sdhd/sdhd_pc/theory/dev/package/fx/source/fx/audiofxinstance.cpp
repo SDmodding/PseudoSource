@@ -9,10 +9,10 @@ void __fastcall Render::AudioFXInstance::AudioFXInstance(Render::AudioFXInstance
   v2 = (UFG::qNode<Render::FXComponentInstance,Render::FXComponentInstance> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable';
+  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable;
   *(_QWORD *)&this->mForceSuspendState = 0i64;
   *(_WORD *)&this->mIsActive = 0;
-  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::AudioFXInstance::`vftable';
+  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::AudioFXInstance::`vftable;
   UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&this->mSettingsHandle.mPrev);
   v1->mOneShot.m_pOneShot = 0i64;
 }
@@ -27,14 +27,14 @@ void __fastcall Render::AudioFXInstance::Init(Render::AudioFXInstance *this, uns
   UFG::qResourceWarehouse *v5; // rax
 
   this->mSettingsId = settingsId;
-  v2 = `UFG::qGetResourceInventory<Render::AudioFXSettings>'::`2'::result;
+  v2 = `UFG::qGetResourceInventory<Render::AudioFXSettings>::`2::result;
   v3 = settingsId;
   v4 = this;
-  if ( !`UFG::qGetResourceInventory<Render::AudioFXSettings>'::`2'::result )
+  if ( !`UFG::qGetResourceInventory<Render::AudioFXSettings>::`2::result )
   {
     v5 = UFG::qResourceWarehouse::Instance();
     v2 = UFG::qResourceWarehouse::GetInventory(v5, 0xD77CCEB2);
-    `UFG::qGetResourceInventory<Render::AudioFXSettings>'::`2'::result = v2;
+    `UFG::qGetResourceInventory<Render::AudioFXSettings>::`2::result = v2;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v4->mSettingsHandle.mPrev, 0xD77CCEB2, v3, v2);
 }

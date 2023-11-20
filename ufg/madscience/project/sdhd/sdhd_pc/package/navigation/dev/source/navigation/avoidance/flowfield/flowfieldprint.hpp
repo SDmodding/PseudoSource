@@ -22,7 +22,7 @@ void __fastcall UFG::FlowfieldPrint::FlowfieldPrint(UFG::FlowfieldPrint *this, u
   v7 = (UFG::qNode<UFG::FlowfieldPrint,UFG::FFieldPrintCompList> *)&v5->mPrev;
   v7->mPrev = v7;
   v7->mNext = v7;
-  v5->vfptr = (UFG::qSafePointerNode<UFG::FlowfieldPrint>Vtbl *)&UFG::FlowfieldPrint::`vftable';
+  v5->vfptr = (UFG::qSafePointerNode<UFG::FlowfieldPrint>Vtbl *)&UFG::FlowfieldPrint::`vftable;
   v5->m_iPriority = v4;
   v5->m_fStrength = fStrength;
   *(_WORD *)&v5->m_Enabled = 1;
@@ -54,7 +54,7 @@ void __fastcall UFG::FFieldAvoidablePrint::FFieldAvoidablePrint(UFG::FFieldAvoid
   v4 = pAvoidable;
   v5 = this;
   UFG::FlowfieldPrint::FlowfieldPrint((UFG::FlowfieldPrint *)&this->vfptr, 0, iPriority, fStrength);
-  v5->vfptr = (UFG::qSafePointerNode<UFG::FlowfieldPrint>Vtbl *)&UFG::FFieldAvoidablePrint::`vftable';
+  v5->vfptr = (UFG::qSafePointerNode<UFG::FlowfieldPrint>Vtbl *)&UFG::FFieldAvoidablePrint::`vftable;
   v5->mpPathCurve = 0i64;
   v5->mParams.Priority = 3.0;
   v5->mParams.SidestepMaxDP = -1.0;

@@ -13,15 +13,15 @@ void __fastcall UFG::NavModuleLocal::NavModuleLocal(UFG::NavModuleLocal *this, U
   float v10; // xmm0_4
 
   this->m_navComponent = parent;
-  this->vfptr = (UFG::NavModuleLocalVtbl *)&UFG::NavModuleLocal::`vftable';
-  this->m_adjustedWaypoint.m_navPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable';
+  this->vfptr = (UFG::NavModuleLocalVtbl *)&UFG::NavModuleLocal::`vftable;
+  this->m_adjustedWaypoint.m_navPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable;
   v2 = this;
   v3 = UFG::qVector3::msZero.y;
   v4 = UFG::qVector3::msZero.z;
   this->m_adjustedWaypoint.m_navPosition.m_vPosition.x = UFG::qVector3::msZero.x;
   this->m_adjustedWaypoint.m_navPosition.m_vPosition.y = v3;
   this->m_adjustedWaypoint.m_navPosition.m_vPosition.z = v4;
-  this->m_adjustedWaypoint.m_navPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable';
+  this->m_adjustedWaypoint.m_navPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable;
   this->m_adjustedWaypoint.m_navPosition.m_bValid = 0;
   *(_QWORD *)&this->m_adjustedWaypoint.m_navPosition.m_packedKey = -1i64;
   this->m_adjustedWaypoint.m_navPosition.m_hkvMeshPosition.m_quad = _mm_unpacklo_ps(
@@ -247,7 +247,7 @@ void __fastcall UFG::NavModuleLocal::GetTargetPosition(UFG::NavModuleLocal *this
   v72 = UFG::qVector3::msZero.z;
   v77.m_vPosition = UFG::qVector3::msZero;
   BYTE2(v70) = 1;
-  v77.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable';
+  v77.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable;
   v77.m_bValid = 0;
   v78 = 0i64;
   v79 = 0;
@@ -362,11 +362,11 @@ void __fastcall UFG::NavModuleLocal::GetTargetPosition(UFG::NavModuleLocal *this
   if ( v41 )
     goto LABEL_33;
   v50 = *(hkVector4f **)(v83 + 8);
-  v82.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable';
+  v82.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable;
   v51 = v50[5].m_quad.m128_f32[3];
   v52 = v50[6].m_quad.m128_f32[0];
   v53 = v50[5].m_quad.m128_f32[2];
-  v82.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable';
+  v82.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable;
   v82.m_vPosition.x = v53;
   v82.m_vPosition.y = v51;
   v82.m_vPosition.z = v52;
@@ -383,7 +383,7 @@ void __fastcall UFG::NavModuleLocal::GetTargetPosition(UFG::NavModuleLocal *this
                      + (float)((float)(*(float *)(v83 + 152) - v53) * (float)(*(float *)(v83 + 152) - v53)))
              + (float)((float)(*(float *)(v83 + 160) - v52) * (float)(*(float *)(v83 + 160) - v52))) > (float)(*(float *)(v83 + 168) * *(float *)(v83 + 168)) )
   {
-    UFG::HavokNavPosition::`vftable'(&v77);
+    UFG::HavokNavPosition::`vftable(&v77);
     UFG::HavokNavPosition::Validate(&v82, 1.0, 1.0, 0.0);
     v56 = UFG::NavManager::ms_pInstance->vfptr->AIRayCastHits(
             UFG::NavManager::ms_pInstance,

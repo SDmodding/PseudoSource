@@ -21,10 +21,10 @@ void __fastcall hkpBreakOffPartsUtil::hkpBreakOffPartsUtil(hkpBreakOffPartsUtil 
   v2 = listenerInterface;
   v3 = this;
   hkpWorldExtension::hkpWorldExtension((hkpWorldExtension *)&this->vfptr, 1000);
-  v3->vfptr = (hkBaseObjectVtbl *)&hkpBreakOffPartsUtil::`vftable'{for `hkpWorldExtension'};
-  v3->vfptr = (hkpContactImpulseLimitBreachedListenerVtbl *)&hkpBreakOffPartsUtil::`vftable'{for `hkpContactImpulseLimitBreachedListener'};
-  v3->vfptr = (hkpEntityListenerVtbl *)&hkpBreakOffPartsUtil::`vftable'{for `hkpEntityListener'};
-  v3->vfptr = (hkpConstraintListenerVtbl *)&hkpBreakOffPartsUtil::`vftable'{for `hkpConstraintListener'};
+  v3->vfptr = (hkBaseObjectVtbl *)&hkpBreakOffPartsUtil::`vftable{for `hkpWorldExtension};
+  v3->vfptr = (hkpContactImpulseLimitBreachedListenerVtbl *)&hkpBreakOffPartsUtil::`vftable{for `hkpContactImpulseLimitBreachedListener};
+  v3->vfptr = (hkpEntityListenerVtbl *)&hkpBreakOffPartsUtil::`vftable{for `hkpEntityListener};
+  v3->vfptr = (hkpConstraintListenerVtbl *)&hkpBreakOffPartsUtil::`vftable{for `hkpConstraintListener};
   v4 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
   v5 = (hkCriticalSection *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v4[11] + 8i64))(v4[11], 40i64);
   if ( v5 )
@@ -38,7 +38,7 @@ void __fastcall hkpBreakOffPartsUtil::hkpBreakOffPartsUtil(hkpBreakOffPartsUtil 
   if ( v7 )
   {
     *(_DWORD *)(v7 + 8) = 0x1FFFF;
-    *(_QWORD *)v7 = &hkpBreakOffPartsUtil::GameControlFunctor::`vftable';
+    *(_QWORD *)v7 = &hkpBreakOffPartsUtil::GameControlFunctor::`vftable;
   }
   else
   {
@@ -64,10 +64,10 @@ void __fastcall hkpBreakOffPartsUtil::~hkpBreakOffPartsUtil(hkpBreakOffPartsUtil
 
   v1 = this->m_criticalSection;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpBreakOffPartsUtil::`vftable'{for `hkpWorldExtension'};
-  this->vfptr = (hkpContactImpulseLimitBreachedListenerVtbl *)&hkpBreakOffPartsUtil::`vftable'{for `hkpContactImpulseLimitBreachedListener'};
-  this->vfptr = (hkpEntityListenerVtbl *)&hkpBreakOffPartsUtil::`vftable'{for `hkpEntityListener'};
-  this->vfptr = (hkpConstraintListenerVtbl *)&hkpBreakOffPartsUtil::`vftable'{for `hkpConstraintListener'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkpBreakOffPartsUtil::`vftable{for `hkpWorldExtension};
+  this->vfptr = (hkpContactImpulseLimitBreachedListenerVtbl *)&hkpBreakOffPartsUtil::`vftable{for `hkpContactImpulseLimitBreachedListener};
+  this->vfptr = (hkpEntityListenerVtbl *)&hkpBreakOffPartsUtil::`vftable{for `hkpEntityListener};
+  this->vfptr = (hkpConstraintListenerVtbl *)&hkpBreakOffPartsUtil::`vftable{for `hkpConstraintListener};
   if ( v1 )
   {
     DeleteCriticalSection(&v1->m_section);
@@ -78,10 +78,10 @@ void __fastcall hkpBreakOffPartsUtil::~hkpBreakOffPartsUtil(hkpBreakOffPartsUtil
   if ( v4 )
     hkReferencedObject::removeReference(v4);
   v2->m_breakOffGameControlFunctor.m_pntr = 0i64;
-  v2->vfptr = (hkpConstraintListenerVtbl *)&hkpConstraintListener::`vftable';
-  v2->vfptr = (hkpEntityListenerVtbl *)&hkpEntityListener::`vftable';
-  v2->vfptr = (hkpContactImpulseLimitBreachedListenerVtbl *)&hkpContactImpulseLimitBreachedListener::`vftable';
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v2->vfptr = (hkpConstraintListenerVtbl *)&hkpConstraintListener::`vftable;
+  v2->vfptr = (hkpEntityListenerVtbl *)&hkpEntityListener::`vftable;
+  v2->vfptr = (hkpContactImpulseLimitBreachedListenerVtbl *)&hkpContactImpulseLimitBreachedListener::`vftable;
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 55
@@ -290,8 +290,8 @@ void __fastcall hkpBreakOffPartsUtil::LimitContactImpulseUtil::LimitContactImpul
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_entity = entity;
   this->m_maxConstraintImpulse = 3.40282e38;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpBreakOffPartsUtil::LimitContactImpulseUtil::`vftable'{for `hkReferencedObject'};
-  this->vfptr = (hkpContactListenerVtbl *)&hkpBreakOffPartsUtil::LimitContactImpulseUtil::`vftable'{for `hkpCollisionListener'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkpBreakOffPartsUtil::LimitContactImpulseUtil::`vftable{for `hkReferencedObject};
+  this->vfptr = (hkpContactListenerVtbl *)&hkpBreakOffPartsUtil::LimitContactImpulseUtil::`vftable{for `hkpCollisionListener};
   this->m_shapeKeyToMaxImpulse.m_map.m_hashMod = -1;
   this->m_shapeKeyToMaxImpulse.m_map.m_elem = 0i64;
   this->m_shapeKeyToMaxImpulse.m_map.m_numElems = 0;
@@ -309,15 +309,15 @@ void __fastcall hkpBreakOffPartsUtil::LimitContactImpulseUtil::~LimitContactImpu
   hkpBreakOffPartsUtil::LimitContactImpulseUtil *v1; // rdi
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpBreakOffPartsUtil::LimitContactImpulseUtil::`vftable'{for `hkReferencedObject'};
-  this->vfptr = (hkpContactListenerVtbl *)&hkpBreakOffPartsUtil::LimitContactImpulseUtil::`vftable'{for `hkpCollisionListener'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkpBreakOffPartsUtil::LimitContactImpulseUtil::`vftable{for `hkReferencedObject};
+  this->vfptr = (hkpContactListenerVtbl *)&hkpBreakOffPartsUtil::LimitContactImpulseUtil::`vftable{for `hkpCollisionListener};
   hkReferencedObject::removeReference((hkReferencedObject *)&this->m_breakOffUtil->vfptr);
   hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::clearAndDeallocate(
     (hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)&v1->m_shapeKeyToMaxImpulse.m_map.m_elem,
     (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr);
   _((AMD_HD3D *)&v1->m_shapeKeyToMaxImpulse);
-  v1->vfptr = (hkpContactListenerVtbl *)&hkpContactListener::`vftable';
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkpContactListenerVtbl *)&hkpContactListener::`vftable;
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 202
@@ -340,8 +340,8 @@ hkpBreakOffPartsUtil::LimitContactImpulseUtil *__fastcall hkpBreakOffPartsUtil::
   if ( result )
   {
     hkpBreakOffPartsUtil::LimitContactImpulseUtil::LimitContactImpulseUtil(result, v2, v3);
-    v6->vfptr = (hkBaseObjectVtbl *)&hkpBreakOffPartsUtil::LimitContactImpulseUtilDefault::`vftable'{for `hkReferencedObject'};
-    v6->vfptr = (hkpContactListenerVtbl *)&hkpBreakOffPartsUtil::LimitContactImpulseUtilDefault::`vftable'{for `hkpCollisionListener'};
+    v6->vfptr = (hkBaseObjectVtbl *)&hkpBreakOffPartsUtil::LimitContactImpulseUtilDefault::`vftable{for `hkReferencedObject};
+    v6->vfptr = (hkpContactListenerVtbl *)&hkpBreakOffPartsUtil::LimitContactImpulseUtilDefault::`vftable{for `hkpCollisionListener};
     result = v6;
     v3->m_limitContactImpulseUtilAndFlag = (void *)((_QWORD)v3->m_limitContactImpulseUtilAndFlag | 1i64);
   }

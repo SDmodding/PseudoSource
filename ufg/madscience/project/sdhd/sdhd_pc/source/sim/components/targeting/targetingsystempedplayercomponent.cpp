@@ -314,8 +314,8 @@ void __fastcall UFG::TargetingSystemPedPlayerComponent::TargetingSystemPedPlayer
   v5 = (UFG::qNode<UFG::TargetingSystemPedPlayerComponent,UFG::TargetingSystemPedPlayerComponent> *)&v4->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TargetingSystemPedPlayerComponent::`vftable'{for `UFG::SimComponent'};
-  v4->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::TargetingSystemPedPlayerComponent::`vftable'{for `UFG::UpdateInterface'};
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TargetingSystemPedPlayerComponent::`vftable{for `UFG::SimComponent};
+  v4->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::TargetingSystemPedPlayerComponent::`vftable{for `UFG::UpdateInterface};
   UFG::RebindingComponentHandle<UFG::CharacterAnimationComponent,0>::RebindingComponentHandle<UFG::CharacterAnimationComponent,0>(&v4->m_pCharacterAnimationComponent);
   UFG::RebindingComponentHandle<UFG::AimingPlayerComponent,0>::RebindingComponentHandle<UFG::AimingPlayerComponent,0>(&v4->m_pAimingPlayerComponent);
   UFG::RebindingComponentHandle<UFG::AttackRightsComponent,0>::RebindingComponentHandle<UFG::AttackRightsComponent,0>(&v4->m_pAttackRightsComponent);
@@ -354,7 +354,7 @@ void __fastcall UFG::TargetingSystemPedPlayerComponent::TargetingSystemPedPlayer
   v14->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v14->mPrev;
   v14->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v14->mPrev;
   v4->m_RimLighting.m_Target.m_pPointer = 0i64;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v4->m_VehicleCharacterRagdolls,
     0x18ui64,
     10,
@@ -428,8 +428,8 @@ void __fastcall UFG::TargetingSystemPedPlayerComponent::~TargetingSystemPedPlaye
   UFG::qNode<UFG::TargetingSystemPedPlayerComponent,UFG::TargetingSystemPedPlayerComponent> *v46; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TargetingSystemPedPlayerComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::TargetingSystemPedPlayerComponent::`vftable'{for `UFG::UpdateInterface'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TargetingSystemPedPlayerComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::TargetingSystemPedPlayerComponent::`vftable{for `UFG::UpdateInterface};
   UFG::TargetingSystemPedPlayerComponent::shutdown(this);
   if ( v1 == UFG::TargetingSystemPedPlayerComponent::s_TargetingSystemPedPlayerComponentpCurrentIterator )
     UFG::TargetingSystemPedPlayerComponent::s_TargetingSystemPedPlayerComponentpCurrentIterator = (UFG::TargetingSystemPedPlayerComponent *)&v1->mPrev[-174].mNext;
@@ -441,7 +441,7 @@ void __fastcall UFG::TargetingSystemPedPlayerComponent::~TargetingSystemPedPlaye
   v2->mPrev = v2;
   v2->mNext = v2;
   v1->m_CloseTargetsList.size = 0;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->m_VehicleCharacterRagdolls,
     0x18ui64,
     10,
@@ -7054,7 +7054,7 @@ LABEL_19:
       v1->m_pVehicleFocusTarget.mNext = &v2->m_SafePointerList.mNode;
       v2->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v11->mPrev;
     }
-    `eh vector constructor iterator'(
+    `eh vector constructor iterator(
       &ptr,
       0x18ui64,
       10,
@@ -7138,7 +7138,7 @@ LABEL_19:
       ++v25;
     }
     while ( v24 < 0xA );
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       &ptr,
       0x18ui64,
       10,

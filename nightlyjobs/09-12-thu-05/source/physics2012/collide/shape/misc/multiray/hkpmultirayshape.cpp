@@ -6,7 +6,7 @@ void __fastcall hkpMultiRayShape::hkpMultiRayShape(hkpMultiRayShape *this, hkFin
 
   v2 = this;
   hkpShape::hkpShape((hkpShape *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpMultiRayShape::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpMultiRayShape::`vftable;
   v2->m_type.m_storage = 33;
 }
 
@@ -37,7 +37,7 @@ void __fastcall hkpMultiRayShape::hkpMultiRayShape(hkpMultiRayShape *this, hkpMu
   v4 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   *(_DWORD *)&this->m_type.m_storage = 1057;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpMultiRayShape::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpMultiRayShape::`vftable;
   this->m_userData = 0i64;
   this->m_rays.m_data = 0i64;
   this->m_rays.m_size = 0;

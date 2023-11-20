@@ -183,7 +183,7 @@ void __fastcall UFG::UIHKMissionProgressWidget::Flash_UpdateSlot(UFG::UIHKMissio
     Scaleform::GFx::Movie::Invoke(v6, "TallyList_Resize", 0i64, &pargs, 1u);
     UFG::qString::Format(&v22, "mc_TallyList.slot%d._visible", (unsigned int)v5);
     Scaleform::GFx::Movie::SetVariable(v6, v22.mData, (Scaleform::GFx::Value *)((char *)&value + 24), 1i64);
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     switch ( v4->State )
     {
       case 3:
@@ -217,7 +217,7 @@ void __fastcall UFG::UIHKMissionProgressWidget::Flash_UpdateSlot(UFG::UIHKMissio
     v20 = 5;
     v21 = (double)v5;
     Scaleform::GFx::Movie::Invoke(v6, "TallyList_SetType", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     if ( ((unsigned int)pargs.Type >> 6) & 1 )
     {
       (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(

@@ -8,7 +8,7 @@ void __fastcall hkpSerializedDisplayMarkerList::~hkpSerializedDisplayMarkerList(
   int v4; // er8
 
   v1 = 0;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpSerializedDisplayMarkerList::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpSerializedDisplayMarkerList::`vftable;
   v2 = this;
   if ( this->m_markers.m_size > 0 )
   {
@@ -30,6 +30,6 @@ void __fastcall hkpSerializedDisplayMarkerList::~hkpSerializedDisplayMarkerList(
       8 * v4);
   v2->m_markers.m_data = 0i64;
   v2->m_markers.m_capacityAndFlags = 2147483648;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 

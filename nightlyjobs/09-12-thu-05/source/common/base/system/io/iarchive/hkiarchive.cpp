@@ -10,7 +10,7 @@ void __fastcall hkIArchive::hkIArchive(hkIArchive *this, hkStreamReader *sb, hkB
   v3 = sb;
   v4 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkIArchive::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkIArchive::`vftable;
   if ( sb )
   {
     hkReferencedObject::addReference((hkReferencedObject *)&sb->vfptr);
@@ -32,7 +32,7 @@ void __fastcall hkIArchive::hkIArchive(hkIArchive *this, const char *filename, h
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v3 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkIArchive::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkIArchive::`vftable;
   this->m_streamReader.m_pntr = 0i64;
   this->m_byteSwap = bs;
   v4 = (hkStreamReader **)((__int64 (__fastcall *)(hkFileSystem *, char *, const char *, signed __int64))hkSingleton<hkFileSystem>::s_instance->vfptr[1].__first_virtual_table_function__)(
@@ -62,7 +62,7 @@ void __fastcall hkIArchive::hkIArchive(hkIArchive *this, const void *mem, int me
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v4 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkIArchive::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkIArchive::`vftable;
   v5 = 0i64;
   v6 = memSize;
   this->m_streamReader.m_pntr = 0i64;
@@ -89,12 +89,12 @@ void __fastcall hkIArchive::~hkIArchive(hkIArchive *this)
   hkStreamReader *v2; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkIArchive::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkIArchive::`vftable;
   v2 = this->m_streamReader.m_pntr;
   if ( v2 )
     hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
   v1->m_streamReader.m_pntr = 0i64;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 36

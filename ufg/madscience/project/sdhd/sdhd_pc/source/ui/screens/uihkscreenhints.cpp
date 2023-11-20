@@ -7,7 +7,7 @@ void __fastcall UFG::UIHKScreenHints::UIHKScreenHints(UFG::UIHKScreenHints *this
   v1 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -18,7 +18,7 @@ void __fastcall UFG::UIHKScreenHints::UIHKScreenHints(UFG::UIHKScreenHints *this
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenHints::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenHints::`vftable;
   UFG::UIHKScreenHints::gAlreadyLoaded = 1;
 }
 

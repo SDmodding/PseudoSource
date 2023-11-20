@@ -2,7 +2,7 @@
 // RVA: 0x141300
 void __fastcall UFG::AudioFilePackageLUT::~AudioFilePackageLUT(UFG::AudioFilePackageLUT *this)
 {
-  this->vfptr = (UFG::AudioFilePackageLUTVtbl *)&UFG::AudioFilePackageLUT::`vftable';
+  this->vfptr = (UFG::AudioFilePackageLUTVtbl *)&UFG::AudioFilePackageLUT::`vftable;
 }
 
 // File Line: 43

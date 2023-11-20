@@ -38,10 +38,10 @@ void __fastcall hkaiTraversalAnnotationViewer::hkaiTraversalAnnotationViewer(hka
 
   v2 = this;
   hkaiViewerBase::hkaiViewerBase((hkaiViewerBase *)&this->vfptr, contexts);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkaiTraversalAnnotationViewer::`vftable'{for `hkReferencedObject'};
-  v2->vfptr = (hkProcessVtbl *)&hkaiTraversalAnnotationViewer::`vftable'{for `hkProcess'};
-  v2->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiTraversalAnnotationViewer::`vftable'{for `hkaiViewerContextWorldListener'};
-  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiTraversalAnnotationViewer::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkaiTraversalAnnotationViewer::`vftable{for `hkReferencedObject};
+  v2->vfptr = (hkProcessVtbl *)&hkaiTraversalAnnotationViewer::`vftable{for `hkProcess};
+  v2->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiTraversalAnnotationViewer::`vftable{for `hkaiViewerContextWorldListener};
+  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiTraversalAnnotationViewer::`vftable;
 }
 
 // File Line: 38
@@ -109,11 +109,11 @@ void __fastcall hkaiTraversalAnnotationViewer::~hkaiTraversalAnnotationViewer(hk
 
   v1 = 0;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiTraversalAnnotationViewer::`vftable'{for `hkReferencedObject'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiTraversalAnnotationViewer::`vftable{for `hkReferencedObject};
   v3 = 0;
-  this->vfptr = (hkProcessVtbl *)&hkaiTraversalAnnotationViewer::`vftable'{for `hkProcess'};
-  this->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiTraversalAnnotationViewer::`vftable'{for `hkaiViewerContextWorldListener'};
-  this->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiTraversalAnnotationViewer::`vftable';
+  this->vfptr = (hkProcessVtbl *)&hkaiTraversalAnnotationViewer::`vftable{for `hkProcess};
+  this->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiTraversalAnnotationViewer::`vftable{for `hkaiViewerContextWorldListener};
+  this->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiTraversalAnnotationViewer::`vftable;
   if ( this->m_context.m_pntr )
   {
     v4 = 0i64;
@@ -146,7 +146,7 @@ void __fastcall hkaiTraversalAnnotationViewer::~hkaiTraversalAnnotationViewer(hk
     }
     while ( v2->m_context.m_pntr );
   }
-  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiWorld::Listener::`vftable';
+  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiWorld::Listener::`vftable;
   hkaiViewerBase::~hkaiViewerBase((hkaiViewerBase *)&v2->vfptr);
 }
 

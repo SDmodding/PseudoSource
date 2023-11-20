@@ -161,8 +161,8 @@ void __fastcall UFG::AimingPlayerComponent::AimingPlayerComponent(UFG::AimingPla
   v6 = (UFG::qNode<UFG::AimingPlayerComponent,UFG::AimingPlayerComponent> *)&v5->mPrev;
   v6->mPrev = v6;
   v6->mNext = v6;
-  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AimingPlayerComponent::`vftable'{for `UFG::SimComponent'};
-  v5->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::AimingPlayerComponent::`vftable'{for `UFG::UpdateInterface'};
+  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AimingPlayerComponent::`vftable{for `UFG::SimComponent};
+  v5->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::AimingPlayerComponent::`vftable{for `UFG::UpdateInterface};
   UFG::RebindingComponentHandle<UFG::TargetingSystemPedPlayerComponent,0>::RebindingComponentHandle<UFG::TargetingSystemPedPlayerComponent,0>(&v5->m_pTSPPC);
   *(_DWORD *)&v5->m_bFocusTargetProbed = 0;
   *(_WORD *)&v5->m_bSupressReticle = 0;
@@ -429,8 +429,8 @@ void __fastcall UFG::AimingPlayerComponent::~AimingPlayerComponent(UFG::AimingPl
   UFG::qNode<UFG::AimingPlayerComponent,UFG::AimingPlayerComponent> *v25; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AimingPlayerComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::AimingPlayerComponent::`vftable'{for `UFG::UpdateInterface'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AimingPlayerComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::AimingPlayerComponent::`vftable{for `UFG::UpdateInterface};
   if ( this == UFG::AimingPlayerComponent::s_AimingPlayerComponentpCurrentIterator )
     UFG::AimingPlayerComponent::s_AimingPlayerComponentpCurrentIterator = (UFG::AimingPlayerComponent *)&this->mPrev[-26];
   v2 = (UFG::qNode<UFG::AimingPlayerComponent,UFG::AimingPlayerComponent> *)&this->mPrev;

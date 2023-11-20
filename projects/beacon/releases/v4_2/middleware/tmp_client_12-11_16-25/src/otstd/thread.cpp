@@ -19,7 +19,7 @@ void __fastcall OSuite::ZThread::ZThread(OSuite::ZThread *this, bool bAutoDestro
 {
   this->m_thread = 0i64;
   this->m_threadID = 0;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZThread::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZThread::`vftable;
   this->m_bAutoDestroy = bAutoDestroy;
   if ( bAutoDestroy )
     _InterlockedExchangeAdd(&OSuite::ZThread::s_nTotalRogueThreads, 1u);
@@ -32,7 +32,7 @@ void __fastcall OSuite::ZThread::~ZThread(OSuite::ZThread *this)
   bool v1; // zf
 
   v1 = this->m_bAutoDestroy == 0;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZThread::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZThread::`vftable;
   if ( !v1 )
     _InterlockedExchangeAdd(&OSuite::ZThread::s_nTotalRogueThreads, 0xFFFFFFFF);
   this->m_thread = 0i64;

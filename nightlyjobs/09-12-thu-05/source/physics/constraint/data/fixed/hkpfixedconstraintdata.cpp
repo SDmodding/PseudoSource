@@ -7,7 +7,7 @@ void __fastcall hkpFixedConstraintData::hkpFixedConstraintData(hkpFixedConstrain
   v1 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_userData = 0i64;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpFixedConstraintData::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpFixedConstraintData::`vftable;
   hkpFixedConstraintData::Atoms::Atoms(&this->m_atoms);
   v1->m_atoms.m_transforms.m_transformA.m_rotation.m_col0 = (hkVector4f)transform.m_quad;
   v1->m_atoms.m_transforms.m_transformA.m_rotation.m_col1 = (hkVector4f)direction.m_quad;

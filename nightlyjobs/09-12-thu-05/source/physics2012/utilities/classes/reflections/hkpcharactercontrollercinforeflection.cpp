@@ -31,7 +31,7 @@ hkClass *__fastcall hkpCharacterControllerCinfo::staticClass()
 void __fastcall finishLoadedObjecthkpCharacterControllerCinfo(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpCharacterControllerCinfo::`vftable';
+    *(_QWORD *)p = &hkpCharacterControllerCinfo::`vftable;
 }
 
 // File Line: 64
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkpCharacterControllerCinfo(void *p)
 // RVA: 0xE0A590
 void **__fastcall getVtablehkpCharacterControllerCinfo()
 {
-  return &hkpCharacterControllerCinfo::`vftable';
+  return &hkpCharacterControllerCinfo::`vftable;
 }
 
 // File Line: 90

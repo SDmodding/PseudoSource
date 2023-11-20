@@ -81,7 +81,7 @@ void __fastcall finishLoadedObjecthkxNode(void *p, int finishing)
   {
     v2 = (hkStringPtr *)p;
     v3 = (hkStringPtr *)((char *)p + 32);
-    v3[-4].m_stringAndFlag = (const char *)&hkxNode::`vftable';
+    v3[-4].m_stringAndFlag = (const char *)&hkxNode::`vftable;
     v4 = finishing;
     hkStringPtr::hkStringPtr(v3, (hkFinishLoadedObjectFlag)finishing);
     hkStringPtr::hkStringPtr(v2 + 14, (hkFinishLoadedObjectFlag)v4);
@@ -104,7 +104,7 @@ void **__fastcall getVtablehkxNode()
 
   hkStringPtr::hkStringPtr(&v1, 0);
   hkStringPtr::hkStringPtr(&v2, 0);
-  return &hkxNode::`vftable';
+  return &hkxNode::`vftable;
 }
 
 // File Line: 159

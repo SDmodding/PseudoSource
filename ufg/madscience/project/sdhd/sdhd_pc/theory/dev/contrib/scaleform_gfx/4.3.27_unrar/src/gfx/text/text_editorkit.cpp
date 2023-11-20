@@ -8,13 +8,13 @@ void __fastcall Scaleform::GFx::Text::EditorKit::EditorKit(Scaleform::GFx::Text:
 
   v2 = pdocview;
   v3 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,74>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::Text::EditorKitBase,74>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Text::EditorKitBase::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::Text::EditorKit::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,74>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::Text::EditorKitBase,74>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Text::EditorKitBase::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::Text::EditorKit::`vftable;
   if ( pdocview )
     Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)pdocview);
   v3->pDocView.pObject = v2;
@@ -52,14 +52,14 @@ void __fastcall Scaleform::GFx::Text::EditorKit::~EditorKit(Scaleform::GFx::Text
   Scaleform::Render::RenderBuffer *v5; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::Text::EditorKit::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::Text::EditorKit::`vftable;
   v2 = this->pRestrict.pObject;
   if ( v2 )
   {
     if ( v1->pRestrict.Owner )
     {
       v1->pRestrict.Owner = 0;
-      Scaleform::GFx::Text::EditorKit::RestrictParams::`scalar deleting destructor'(v2, 1u);
+      Scaleform::GFx::Text::EditorKit::RestrictParams::`scalar deleting destructor(v2, 1u);
     }
     v1->pRestrict.pObject = 0i64;
   }
@@ -73,7 +73,7 @@ void __fastcall Scaleform::GFx::Text::EditorKit::~EditorKit(Scaleform::GFx::Text
   v5 = (Scaleform::Render::RenderBuffer *)v1->pDocView.pObject;
   if ( v5 )
     Scaleform::RefCountImpl::Release(v5);
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Text::EditorKitBase::`vftable';
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Text::EditorKitBase::`vftable;
   Scaleform::RefCountImplCore::~RefCountImplCore((Scaleform::RefCountImplCore *)&v1->vfptr);
 }
 
@@ -2272,7 +2272,7 @@ char __fastcall Scaleform::GFx::Text::EditorKit::ParseRestrict(Scaleform::GFx::T
     if ( v8 && v5->pRestrict.Owner )
     {
       v5->pRestrict.Owner = 0;
-      Scaleform::GFx::Text::EditorKit::RestrictParams::`scalar deleting destructor'(v8, 1);
+      Scaleform::GFx::Text::EditorKit::RestrictParams::`scalar deleting destructor(v8, 1);
     }
     v5->pRestrict.pObject = (Scaleform::GFx::Text::EditorKit::RestrictParams *)v7;
   }

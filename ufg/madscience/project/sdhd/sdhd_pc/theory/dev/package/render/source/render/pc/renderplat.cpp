@@ -68,7 +68,7 @@ __int64 dynamic_initializer_for__sPendingCommandBuildersMutex__()
 // RVA: 0x69E660
 void __fastcall Stereo3D::~Stereo3D(Stereo3D *this)
 {
-  this->vfptr = (Stereo3DVtbl *)&Stereo3D::`vftable';
+  this->vfptr = (Stereo3DVtbl *)&Stereo3D::`vftable;
 }
 
 // File Line: 313
@@ -224,8 +224,8 @@ void __fastcall AMDStereo3D::AMDStereo3D(AMDStereo3D *this)
   AMDStereo3D *v1; // rbx
 
   v1 = this;
-  this->vfptr = (Stereo3DVtbl *)&Stereo3D::`vftable';
-  this->vfptr = (Stereo3DVtbl *)&AMDStereo3D::`vftable';
+  this->vfptr = (Stereo3DVtbl *)&Stereo3D::`vftable;
+  this->vfptr = (Stereo3DVtbl *)&AMDStereo3D::`vftable;
   AMD_HD3D::AMD_HD3D(&this->mHD3D);
   *(_WORD *)&v1->mAMDHD3D = 0;
 }
@@ -1300,8 +1300,8 @@ char __fastcall Render::InitD3D(Render *a1)
     v16 = v5;
     if ( v5 )
     {
-      v5->mNext = (UFG::allocator::free_link *)&Stereo3D::`vftable';
-      v5->mNext = (UFG::allocator::free_link *)&NVStereo3D::`vftable';
+      v5->mNext = (UFG::allocator::free_link *)&Stereo3D::`vftable;
+      v5->mNext = (UFG::allocator::free_link *)&NVStereo3D::`vftable;
       LOWORD(v5[2].mNext) = 0;
     }
     else
@@ -2824,7 +2824,7 @@ __int64 __fastcall Render::GetGPUCount()
 // RVA: 0x1587900
 __int64 Render::_dynamic_initializer_for__g_DefragMoves__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     Render::g_DefragMoves,
     0x40ui64,
     25,

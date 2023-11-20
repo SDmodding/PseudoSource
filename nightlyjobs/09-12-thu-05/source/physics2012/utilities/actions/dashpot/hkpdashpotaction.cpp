@@ -10,7 +10,7 @@ void __fastcall hkpDashpotAction::hkpDashpotAction(hkpDashpotAction *this, hkpRi
     (hkpEntity *)&entityA->vfptr,
     (hkpEntity *)&entityB->vfptr,
     userData);
-  v4->vfptr = (hkBaseObjectVtbl *)&hkpDashpotAction::`vftable';
+  v4->vfptr = (hkBaseObjectVtbl *)&hkpDashpotAction::`vftable;
   v4->m_strength = 0.1;
   v4->m_damping = 0.0099999998;
   v4->m_point[0] = 0i64;

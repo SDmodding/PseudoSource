@@ -28,7 +28,7 @@ void __fastcall hkRotationd::set(hkRotationd *this, hkQuaterniond *qi)
   v7 = v6;
   v8 = _mm_xor_pd(
          _mm_mul_pd(v6, v2),
-         (__m128d)`hkVector4UtilImpl<double>::convertQuaternionToRotation'::`2'::negateMaskX);
+         (__m128d)`hkVector4UtilImpl<double>::convertQuaternionToRotation::`2::negateMaskX);
   v9 = _mm_mul_pd(_mm_shuffle_pd(qi->m_vec.m_quad.xy, qi->m_vec.m_quad.xy, 1), _mm_unpckh_pd(v3, v3));
   v10.m128d_f64[1] = g_vectordConstants[28].xy.m128d_f64[1];
   v8.m128d_f64[0] = v8.m128d_f64[0] + 1.0;
@@ -36,7 +36,7 @@ void __fastcall hkRotationd::set(hkRotationd *this, hkQuaterniond *qi)
   v10.m128d_f64[0] = 1.0 - v5 - v9.m128d_f64[0];
   v11.m128d_f64[0] = -v11.m128d_f64[0];
   v11.m128d_f64[1] = -v11.m128d_f64[1];
-  v12 = _mm_xor_pd((__m128d)`hkVector4UtilImpl<double>::convertQuaternionToRotation'::`2'::negateMaskY, v9);
+  v12 = _mm_xor_pd((__m128d)`hkVector4UtilImpl<double>::convertQuaternionToRotation::`2::negateMaskY, v9);
   v13 = _mm_sub_pd(v8, v12);
   v12.m128d_f64[0] = v5;
   v14 = _mm_xor_pd(*(__m128d *)_xmm, _mm_mul_pd(v7, qi->m_vec.m_quad.xy));
@@ -47,7 +47,7 @@ void __fastcall hkRotationd::set(hkRotationd *this, hkQuaterniond *qi)
   v11.m128d_f64[1] = -v11.m128d_f64[1];
   v16 = _mm_sub_pd(v11, v14);
   v17 = _mm_sub_pd(
-          _mm_xor_pd(v8, (__m128d)`hkVector4UtilImpl<double>::convertQuaternionToRotation'::`2'::negateMaskY),
+          _mm_xor_pd(v8, (__m128d)`hkVector4UtilImpl<double>::convertQuaternionToRotation::`2::negateMaskY),
           v12);
   v18 = _mm_shuffle_pd(v16, v16, 1);
   this->m_col1.m_quad.xy = _mm_shuffle_pd(v17, v17, 1);

@@ -156,7 +156,7 @@ void __fastcall UFG::UIHKMapLabelManager::HandleScreenInit(UFG::UIHKMapLabelMana
               v2->mData.p[v14].mMaxZoom = v31;
               v2->mData.p[v14].mIsVisible = 0;
               v34 = UFG::UI::LocalizeText(v50.mData);
-              `eh vector constructor iterator'(
+              `eh vector constructor iterator(
                 &ptr,
                 0x30ui64,
                 2,
@@ -177,7 +177,7 @@ void __fastcall UFG::UIHKMapLabelManager::HandleScreenInit(UFG::UIHKMapLabelMana
               v47 = 6;
               v48 = v35;
               Scaleform::GFx::Movie::Invoke(v36, "MapLabels_CreateLabel", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-              `eh vector destructor iterator'(
+              `eh vector destructor iterator(
                 &ptr,
                 0x30ui64,
                 2,
@@ -301,7 +301,7 @@ void __fastcall UFG::UIHKMapLabelManager::update(UFG::UIHKMapLabelManager *this,
       v5 = pScreen->mRenderable->m_movie.pObject;
       if ( v5 )
       {
-        `eh vector constructor iterator'(&ptr, 0x30ui64, 5, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+        `eh vector constructor iterator(&ptr, 0x30ui64, 5, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
         v6 = 0;
         if ( v4->mNumLabels )
         {
@@ -386,7 +386,7 @@ void __fastcall UFG::UIHKMapLabelManager::update(UFG::UIHKMapLabelManager *this,
           }
           while ( v6 < v4->mNumLabels );
         }
-        `eh vector destructor iterator'(&ptr, 0x30ui64, 5, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+        `eh vector destructor iterator(&ptr, 0x30ui64, 5, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
       }
     }
   }

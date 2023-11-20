@@ -55,7 +55,7 @@ void __fastcall UFG::WaterPhantomComponent::WaterPhantomComponent(UFG::WaterPhan
   v3 = this;
   UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, instance->mInstanceGuid);
   v4 = (UFG::BasePhysicsObject *)&v3->vfptr;
-  v4->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::BasePhysicsObject::`vftable';
+  v4->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::BasePhysicsObject::`vftable;
   v3->mUserData.isBoat = 0;
   v35 = &v3->mUserData.simComponent;
   v35->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v35->mPrev;
@@ -64,16 +64,16 @@ void __fastcall UFG::WaterPhantomComponent::WaterPhantomComponent(UFG::WaterPhan
   v5 = (UFG::qNode<UFG::WaterPhantomComponent,UFG::WaterPhantomComponent> *)&v3->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::WaterPhantomComponent::`vftable'{for `UFG::SimComponent'};
-  v4->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::WaterPhantomComponent::`vftable'{for `UFG::BasePhysicsObject'};
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::WaterPhantomComponent::`vftable{for `UFG::SimComponent};
+  v4->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::WaterPhantomComponent::`vftable{for `UFG::BasePhysicsObject};
   UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v3->mCollisionMeshBundle.mPrev);
   v3->mCollisionMeshBundle.mOwner = 0i64;
   v3->mCollisionMeshBundle.mUnloading = 0;
   v3->mPhantom = 0i64;
   v33 = (signed __int64)&v3->mCollector;
-  *(_QWORD *)v33 = &hkpCdBodyPairCollector::`vftable';
+  *(_QWORD *)v33 = &hkpCdBodyPairCollector::`vftable;
   *(_BYTE *)(v33 + 8) = 0;
-  *(_QWORD *)v33 = &hkpAllCdBodyPairCollector::`vftable';
+  *(_QWORD *)v33 = &hkpAllCdBodyPairCollector::`vftable;
   v34 = (signed __int64)&v3->mCollector.m_hits;
   *(_QWORD *)v34 = (char *)v3 + 208;
   *(_DWORD *)(v34 + 8) = 0;
@@ -207,8 +207,8 @@ void __fastcall UFG::WaterPhantomComponent::~WaterPhantomComponent(UFG::WaterPha
   UFG::qNode<UFG::WaterPhantomComponent,UFG::WaterPhantomComponent> *v8; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::WaterPhantomComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::WaterPhantomComponent::`vftable'{for `UFG::BasePhysicsObject'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::WaterPhantomComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::WaterPhantomComponent::`vftable{for `UFG::BasePhysicsObject};
   if ( this == UFG::WaterPhantomComponent::s_WaterPhantomComponentpCurrentIterator )
     UFG::WaterPhantomComponent::s_WaterPhantomComponentpCurrentIterator = (UFG::WaterPhantomComponent *)&this->mPrev[-7].mNext;
   v2 = (UFG::qNode<UFG::WaterPhantomComponent,UFG::WaterPhantomComponent> *)&this->mPrev;

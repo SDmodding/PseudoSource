@@ -35,12 +35,12 @@ void __fastcall Scaleform::GFx::ResourceLib::ResourceLib(Scaleform::GFx::Resourc
   Scaleform::GFx::ResourceWeakLib *v5; // rax
 
   v2 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::ResourceLib,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ResourceLib::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::ResourceLib,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ResourceLib::`vftable;
   v3 = 0i64;
   this->PinSet.pTable = 0i64;
   this->DebugFlag = debug;
@@ -69,12 +69,12 @@ void __fastcall Scaleform::GFx::ResourceLib::ResourceSlot::ResourceSlot(Scalefor
   v3 = key;
   v4 = plib;
   v5 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::ResourceLib::ResourceSlot,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ResourceLib::ResourceSlot::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::ResourceLib::ResourceSlot,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ResourceLib::ResourceSlot::`vftable;
   this->pLib.pObject = 0i64;
   this->Key.pKeyInterface = 0i64;
   this->Key.hKeyData = 0i64;
@@ -109,7 +109,7 @@ void __fastcall Scaleform::GFx::ResourceLib::ResourceSlot::~ResourceSlot(Scalefo
   _RTL_CRITICAL_SECTION *lpCriticalSection; // [rsp+48h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ResourceLib::ResourceSlot::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ResourceLib::ResourceSlot::`vftable;
   lpCriticalSection = &this->pLib.pObject->ResourceLock.cs;
   EnterCriticalSection(lpCriticalSection);
   if ( v1->State )
@@ -273,13 +273,13 @@ void __fastcall Scaleform::GFx::ResourceWeakLib::ResourceWeakLib(Scaleform::GFx:
 
   v2 = pstrongLib;
   v3 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::ResourceLibBase,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ResourceLibBase::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ResourceWeakLib::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::ResourceLibBase,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ResourceLibBase::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ResourceWeakLib::`vftable;
   Scaleform::Lock::Lock(&this->ResourceLock, 0);
   v3->Resources.pTable = 0i64;
   v3->pImageHeap.pObject = 0i64;
@@ -325,7 +325,7 @@ void __fastcall Scaleform::GFx::ResourceWeakLib::~ResourceWeakLib(Scaleform::GFx
   __m128i v15; // [rsp+30h] [rbp-28h]
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ResourceWeakLib::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ResourceWeakLib::`vftable;
   v2 = &this->ResourceLock.cs;
   EnterCriticalSection(&this->ResourceLock.cs);
   v3 = (signed __int64)&v1->Resources;
@@ -750,12 +750,12 @@ void __fastcall Scaleform::GFx::ResourceFileInfo::ResourceFileInfo(Scaleform::GF
   Scaleform::GFx::ResourceFileInfo *v1; // rbx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseNTS<Scaleform::GFx::ResourceFileInfo,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::ResourceFileInfo::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseNTS<Scaleform::GFx::ResourceFileInfo,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::ResourceFileInfo::`vftable;
   Scaleform::String::String(&this->FileName);
   v1->Format = 1;
   v1->pExporterInfo = 0i64;
@@ -770,12 +770,12 @@ void __fastcall Scaleform::GFx::ResourceFileInfo::ResourceFileInfo(Scaleform::GF
 
   v2 = src;
   v3 = this;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseNTS<Scaleform::GFx::ResourceFileInfo,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::ResourceFileInfo::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseNTS<Scaleform::GFx::ResourceFileInfo,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::ResourceFileInfo::`vftable;
   Scaleform::String::String(&this->FileName, &src->FileName);
   v3->Format = v2->Format;
   v3->pExporterInfo = v2->pExporterInfo;

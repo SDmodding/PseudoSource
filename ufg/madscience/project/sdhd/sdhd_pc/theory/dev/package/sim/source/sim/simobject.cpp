@@ -50,7 +50,7 @@ void __fastcall UFG::SimComponent::SimComponent(UFG::SimComponent *this, unsigne
   v2 = name_uid;
   v3 = this;
   UFG::qSafePointerNode<UFG::SimComponent>::qSafePointerNode<UFG::SimComponent>((UFG::qSafePointerNode<UFG::SimComponent> *)&this->vfptr);
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SimComponent::`vftable';
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SimComponent::`vftable;
   v3->m_TypeUID = -1;
   v3->m_NameUID = v2;
   v3->m_Flags = 8;
@@ -77,7 +77,7 @@ void __fastcall UFG::SimComponent::~SimComponent(UFG::SimComponent *this)
   UFG::qList<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList,1,0> *v10; // [rsp+40h] [rbp+8h]
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SimComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SimComponent::`vftable;
   v2 = &this->m_BoundComponentHandles;
   v3 = (UFG::SimComponent *)this->m_BoundComponentHandles.mNode.mNext;
   if ( v3 != (UFG::SimComponent *)&this->m_BoundComponentHandles )
@@ -100,7 +100,7 @@ void __fastcall UFG::SimComponent::~SimComponent(UFG::SimComponent *this)
   v7->mPrev = v6;
   v2->mNode.mPrev = &v2->mNode;
   v2->mNode.mNext = &v2->mNode;
-  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::qSafePointerNode<UFG::SimComponent>::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::qSafePointerNode<UFG::SimComponent>::`vftable;
   UFG::qSafePointerNode<UFG::DynamicCoverCorner>::SetAllPointersToNull((UFG::qSafePointerNode<UFG::ParkourHandle> *)v1);
   v10 = &v1->m_SafePointerList;
   UFG::qList<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList,1,0>::DeleteNodes((UFG::qList<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList,1,0> *)&v1->m_SafePointerList);
@@ -274,7 +274,7 @@ void __fastcall UFG::SimObject::SimObject(UFG::SimObject *this, UFG::qSymbol *na
   this->mNode.mChild[1] = 0i64;
   this->mNode.mUID = v4;
   UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::qSafePointerNodeWithCallbacks<UFG::SimObject>((UFG::qSafePointerNodeWithCallbacks<UFG::SimObject> *)&this->vfptr);
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimObject>Vtbl *)&UFG::SimObject::`vftable';
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimObject>Vtbl *)&UFG::SimObject::`vftable;
   *(_QWORD *)&v3->m_Name.mUID = v2->mUID;
   v3->m_pSceneObj = 0i64;
   v3->m_pTransformNodeComponent = 0i64;
@@ -334,7 +334,7 @@ void __fastcall UFG::SimObject::~SimObject(UFG::SimObject *this)
   UFG::SimComponentHolder *v43; // rcx
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimObject>Vtbl *)&UFG::SimObject::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimObject>Vtbl *)&UFG::SimObject::`vftable;
   this->m_Flags |= 2u;
   v2 = &this->m_UnboundComponentHandles;
   if ( (UFG::qList<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase,1,0> *)this->m_UnboundComponentHandles.mNode.mNext != &this->m_UnboundComponentHandles )

@@ -16,7 +16,7 @@ void __fastcall hkpShapePhantom::hkpShapePhantom(hkpShapePhantom *this, hkpShape
   v4->m_phantomListeners.m_size = 0;
   v4->m_phantomListeners.m_capacityAndFlags = 2147483648;
   v4->m_collidable.m_ownerOffset = -32;
-  v4->vfptr = (hkBaseObjectVtbl *)&hkpShapePhantom::`vftable';
+  v4->vfptr = (hkBaseObjectVtbl *)&hkpShapePhantom::`vftable;
   hkQuaternionf::set(&rotation, &v3->m_rotation);
   hkMotionState::initMotionState(&v4->m_motionState, &v3->m_translation, &rotation);
   v4->m_collidable.m_motion = &v4->m_motionState;

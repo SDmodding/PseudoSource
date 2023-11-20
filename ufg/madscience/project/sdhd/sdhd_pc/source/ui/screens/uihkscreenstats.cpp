@@ -270,8 +270,8 @@ void __fastcall UFG::UIHKScreenStats::ShowHelpBarWidget(UFG::UIHKScreenStats *th
     *(_QWORD *)&data.MessageIds[4] = 0i64;
     UFG::UIHKHelpBarWidget::Show(v1, &data);
     UFG::qString::~qString(&data.CustomTexturePack);
-    `eh vector destructor iterator'(data.Icons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
-    `eh vector destructor iterator'(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+    `eh vector destructor iterator(data.Icons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+    `eh vector destructor iterator(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
   }
 }
 
@@ -285,7 +285,7 @@ void __fastcall UFG::UIHKScreenStats::UIHKScreenStats(UFG::UIHKScreenStats *this
   v1 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -296,7 +296,7 @@ void __fastcall UFG::UIHKScreenStats::UIHKScreenStats(UFG::UIHKScreenStats *this
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenStats::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenStats::`vftable;
   this->mPSSetData = 0i64;
   this->mCurrentCategory = 0;
   v2 = &this->mStatItems;
@@ -317,7 +317,7 @@ void __fastcall UFG::UIHKScreenStats::~UIHKScreenStats(UFG::UIHKScreenStats *thi
   UFG::qNode<UFG::UIHKStatItem,UFG::UIHKStatItem> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenStats::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenStats::`vftable;
   v2 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseScreen(v2, "Stats");
   if ( UFG::UIHKScreenGlobalOverlay::mThis )
@@ -462,7 +462,7 @@ void __fastcall UFG::UIHKScreenStats::PopulateList(UFG::UIHKScreenStats *this, i
     if ( (!v2 || v2 == *(_DWORD *)(v5 + 108))
       && !UFG::qString::operator==((UFG::qString *)(v5 + 64), "$STATS_TOTAL_STAT_GAMES_PLAYED") )
     {
-      `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       v7 = *(_QWORD *)(v5 + 88);
       if ( (v16 >> 6) & 1 )
       {
@@ -514,7 +514,7 @@ void __fastcall UFG::UIHKScreenStats::PopulateList(UFG::UIHKScreenStats *this, i
       v21 = v12;
       Scaleform::GFx::Movie::Invoke(v4, "StatList_AddItem", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
       UFG::qString::~qString(&v13);
-      `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+      `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     }
   }
   Scaleform::GFx::Movie::Invoke(v4, "Stats_Refresh", 0i64, 0i64, 0);

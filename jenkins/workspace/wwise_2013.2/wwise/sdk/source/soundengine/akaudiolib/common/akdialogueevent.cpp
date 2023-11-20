@@ -12,7 +12,7 @@ CAkDialogueEvent *__fastcall CAkDialogueEvent::Create(unsigned int in_ulID)
   if ( !v2 )
     return 0i64;
   CAkIndexable::CAkIndexable(v2, v1);
-  v3->vfptr = (CAkIndexableVtbl *)&CAkDialogueEvent::`vftable';
+  v3->vfptr = (CAkIndexableVtbl *)&CAkDialogueEvent::`vftable;
   AkDecisionTree::AkDecisionTree(&v3->m_decisionTree);
   if ( CAkDialogueEvent::Init(v3) != 1 )
   {

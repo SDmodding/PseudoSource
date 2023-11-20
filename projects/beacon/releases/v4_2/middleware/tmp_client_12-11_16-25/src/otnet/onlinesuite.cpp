@@ -13,10 +13,10 @@ void __fastcall OSuite::ZOnlineSuite::ZOnlineSuite(OSuite::ZOnlineSuite *this)
 
   this->m_pGameConfig = 0i64;
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOnlineSuite::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOnlineSuite::`vftable;
   OSuite::ZGameInterface::ZGameInterface(&this->m_gameInterface);
   v1->m_pszSessionId = 0i64;
-  v1->m_webServiceClientManager.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZWebServiceClientManager::`vftable';
+  v1->m_webServiceClientManager.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZWebServiceClientManager::`vftable;
   OSuite::ZMutex::ZMutex(&v1->m_webServiceClientManager.m_Mutex);
   OSuite::ZWebServiceClientManager::ZWebServiceClientList::ZWebServiceClientList(&v1->m_webServiceClientManager.m_webServiceList);
 }
@@ -244,8 +244,8 @@ char *__fastcall OSuite::ZOnlineSuite::GetSessionId(OSuite::ZOnlineSuite *this)
   if ( !this->m_pszSessionId )
   {
     result.m_pString = 0i64;
-    v6.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZUuid::`vftable'{for `OSuite::ZObject'};
-    v6.vfptr = (OSuite::IHashableVtbl *)&OSuite::ZUuid::`vftable'{for `OSuite::IHashable'};
+    v6.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZUuid::`vftable{for `OSuite::ZObject};
+    v6.vfptr = (OSuite::IHashableVtbl *)&OSuite::ZUuid::`vftable{for `OSuite::IHashable};
     OSuite::psock::uuid::create(v6.m_anUuid, 1);
     OSuite::ZUuid::ToString(&v6, &result);
     v2 = OSuite::ZString::Count(&result);

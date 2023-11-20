@@ -31,7 +31,7 @@ hkClass *__fastcall hkpShapeInfo::staticClass()
 void __fastcall finishLoadedObjecthkpShapeInfo(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpShapeInfo::`vftable';
+    *(_QWORD *)p = &hkpShapeInfo::`vftable;
 }
 
 // File Line: 78
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkpShapeInfo(void *p)
 // RVA: 0xCEBD50
 void **__fastcall getVtablehkpShapeInfo()
 {
-  return &hkpShapeInfo::`vftable';
+  return &hkpShapeInfo::`vftable;
 }
 
 // File Line: 104

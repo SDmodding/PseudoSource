@@ -139,7 +139,7 @@ __int64 __fastcall hkClassEnum::getSignature(hkClassEnum *this)
   int v3; // [rsp+30h] [rbp-18h]
 
   *(_DWORD *)&w.m_memSizeAndFlags = 0x1FFFF;
-  w.vfptr = (hkBaseObjectVtbl *)&hkCrc32StreamWriter::`vftable';
+  w.vfptr = (hkBaseObjectVtbl *)&hkCrc32StreamWriter::`vftable;
   v3 = -1;
   hkClassEnum::writeSignature(this, &w);
   return hkCrcStreamWriter<unsigned int,3988292384>::getCrc((hkCrcStreamWriter<unsigned int,3988292384> *)&w);

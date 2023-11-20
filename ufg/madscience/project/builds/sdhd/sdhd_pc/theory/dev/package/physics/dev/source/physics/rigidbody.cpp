@@ -131,14 +131,14 @@ void __fastcall UFG::RigidBody::RigidBody(UFG::RigidBody *this, UFG::CollisionMe
   v7 = this;
   UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, instance->mInstanceGuid);
   v8 = (UFG::BasePhysicsObject *)&v7->vfptr;
-  v8->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::BasePhysicsObject::`vftable';
+  v8->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::BasePhysicsObject::`vftable;
   v7->mUserData.isBoat = 0;
   v9 = &v7->mUserData.simComponent;
   v9->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v9->mPrev;
   v9->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v9->mPrev;
   v7->mUserData.simComponent.m_pPointer = 0i64;
-  v7->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::RigidBody::`vftable'{for `UFG::SimComponent'};
-  v8->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::RigidBody::`vftable'{for `UFG::BasePhysicsObject'};
+  v7->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::RigidBody::`vftable{for `UFG::SimComponent};
+  v8->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::RigidBody::`vftable{for `UFG::BasePhysicsObject};
   UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v7->mCollisionMeshBundle.mPrev);
   v7->mCollisionMeshBundle.mOwner = 0i64;
   v7->mCollisionMeshBundle.mUnloading = 0;
@@ -236,9 +236,9 @@ void __fastcall UFG::RigidBody::~RigidBody(UFG::RigidBody *this)
   UFG::SimObjectModifier v33; // [rsp+28h] [rbp-50h]
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::RigidBody::`vftable'{for `UFG::SimComponent'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::RigidBody::`vftable{for `UFG::SimComponent};
   v2 = (UFG::BasePhysicsObject *)&this->vfptr;
-  this->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::RigidBody::`vftable'{for `UFG::BasePhysicsObject'};
+  this->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::RigidBody::`vftable{for `UFG::BasePhysicsObject};
   v3 = this->mCollisionMeshData;
   if ( v3 )
   {
@@ -332,7 +332,7 @@ void __fastcall UFG::RigidBody::~RigidBody(UFG::RigidBody *this)
     if ( v22 )
     {
       v23 = &v22[-1].m_pPointer;
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         v22,
         0x18ui64,
         (int)v22[-1].m_pPointer,
@@ -360,7 +360,7 @@ void __fastcall UFG::RigidBody::~RigidBody(UFG::RigidBody *this)
   if ( v26 )
   {
     v27 = &v26[-1].m_pPointer;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v26,
       0x18ui64,
       (int)v26[-1].m_pPointer,
@@ -371,7 +371,7 @@ void __fastcall UFG::RigidBody::~RigidBody(UFG::RigidBody *this)
   *(_QWORD *)&v1->mConstraints.size = 0i64;
   UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>(&v1->mRootTransformComponent);
   UFG::qResourceHandle::~qResourceHandle((UFG::qResourceHandle *)&v1->mCollisionMeshBundle.mPrev);
-  v2->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::BasePhysicsObject::`vftable';
+  v2->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::BasePhysicsObject::`vftable;
   v28 = &v2->mUserData.simComponent;
   if ( v2->mUserData.simComponent.m_pPointer )
   {
@@ -728,9 +728,9 @@ LABEL_36:
     if ( v54 )
     {
       hkpSurfaceVelocityUtil::hkpSurfaceVelocityUtil(v54, v5->mBody, &surfaceVelocityWorld);
-      v55->vfptr = (hkBaseObjectVtbl *)&UFG::SurfaceVelocityUtil::`vftable'{for `hkReferencedObject'};
-      v55->vfptr = (hkpContactListenerVtbl *)&UFG::SurfaceVelocityUtil::`vftable'{for `hkpContactListener'};
-      v55->vfptr = (hkpEntityListenerVtbl *)&UFG::SurfaceVelocityUtil::`vftable'{for `hkpEntityListener'};
+      v55->vfptr = (hkBaseObjectVtbl *)&UFG::SurfaceVelocityUtil::`vftable{for `hkReferencedObject};
+      v55->vfptr = (hkpContactListenerVtbl *)&UFG::SurfaceVelocityUtil::`vftable{for `hkpContactListener};
+      v55->vfptr = (hkpEntityListenerVtbl *)&UFG::SurfaceVelocityUtil::`vftable{for `hkpEntityListener};
     }
     else
     {
@@ -1137,7 +1137,7 @@ __int64 __fastcall UFG::RigidBody::Deflate(UFG::RigidBody *this)
   if ( v15 )
   {
     v16 = &v15[-1].m_pPointer;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v15,
       0x18ui64,
       (int)v15[-1].m_pPointer,
@@ -2324,7 +2324,7 @@ void __fastcall UFG::RigidBody::DeleteAllConstraints(UFG::RigidBody *this)
   if ( v4 )
   {
     v5 = &v4[-1].m_pPointer;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v4,
       0x18ui64,
       (int)v4[-1].m_pPointer,

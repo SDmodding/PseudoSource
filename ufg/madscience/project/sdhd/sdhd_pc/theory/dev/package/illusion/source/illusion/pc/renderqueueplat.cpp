@@ -166,7 +166,7 @@ void __fastcall Illusion::IRenderQueuePlat::Execute(Illusion::IRenderQueuePlat *
             else
             {
               UFG::qPrintf(
-                "!!! ERROR !!! Trying to render with a buffer object (%s) that hasn't been fully created yet. This is an "
+                "!!! ERROR !!! Trying to render with a buffer object (%s) that hasnt been fully created yet. This is an "
                 "error in the PC D3D resource system.",
                 v9->mDebugName,
                 5368709120i64);
@@ -204,7 +204,7 @@ $LN34_21:
             else
             {
               UFG::qPrintf(
-                "!!! Error !!! Trying to render with a buffer object (%s) that hasn't been fully created yet. This is an "
+                "!!! Error !!! Trying to render with a buffer object (%s) that hasnt been fully created yet. This is an "
                 "error in the PC D3D resource system.",
                 v9->mDebugName,
                 5368709120i64);

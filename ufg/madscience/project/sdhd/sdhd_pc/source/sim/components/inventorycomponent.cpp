@@ -90,7 +90,7 @@ void __fastcall UFG::InventoryComponent::InventoryComponent(UFG::InventoryCompon
   v3 = (UFG::qNode<UFG::InventoryComponent,UFG::InventoryComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::InventoryComponent::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::InventoryComponent::`vftable;
   *(_DWORD *)&v2->m_EquipSlots.p[0].mCanDrop = 16843009;
   *(_WORD *)&v2->m_EquipSlots.p[4].mCanDrop = 257;
   v2->m_EquipSlots.size = 0;
@@ -128,7 +128,7 @@ void __fastcall UFG::InventoryComponent::~InventoryComponent(UFG::InventoryCompo
   UFG::qNode<UFG::InventoryComponent,UFG::InventoryComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::InventoryComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::InventoryComponent::`vftable;
   if ( this == UFG::InventoryComponent::s_InventoryComponentpCurrentIterator )
     UFG::InventoryComponent::s_InventoryComponentpCurrentIterator = (UFG::InventoryComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::InventoryComponent,UFG::InventoryComponent> *)&this->mPrev;
@@ -872,7 +872,7 @@ LABEL_86:
       {
         v45 = (UFG::qSymbolUC *)UFG::SimObjectWeaponPropertiesComponent::GetWeaponID(v22, &result);
         v46 = UFG::qSymbol::as_cstr_dbg(v45);
-        UFG::qPrintf("AudioWeaponType not defined for: '%s'\n", v46);
+        UFG::qPrintf("AudioWeaponType not defined for: %s\n", v46);
       }
     }
   }

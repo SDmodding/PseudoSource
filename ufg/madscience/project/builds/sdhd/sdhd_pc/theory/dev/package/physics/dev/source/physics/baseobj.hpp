@@ -37,7 +37,7 @@ void __fastcall UFG::BasePhysicsObject::~BasePhysicsObject(UFG::BasePhysicsObjec
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v4; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v5; // rax
 
-  this->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::BasePhysicsObject::`vftable';
+  this->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::BasePhysicsObject::`vftable;
   v1 = &this->mUserData.simComponent;
   if ( this->mUserData.simComponent.m_pPointer )
   {

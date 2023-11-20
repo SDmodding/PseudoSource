@@ -2,7 +2,7 @@
 // RVA: 0x152C170
 __int64 UFG::GameStatAction::_dynamic_initializer_for__g_CopScoreEventAffectors__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     g_CopScoreEventAffectors,
     0x50ui64,
     11,
@@ -14,7 +14,7 @@ __int64 UFG::GameStatAction::_dynamic_initializer_for__g_CopScoreEventAffectors_
 // RVA: 0x152C1B0
 __int64 UFG::GameStatAction::_dynamic_initializer_for__g_TriadScoreEventAffectors__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     g_TriadScoreEventAffectors,
     0x50ui64,
     14,

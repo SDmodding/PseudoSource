@@ -17,8 +17,8 @@ void __fastcall DriverPathfindToTargetTrack::DriverPathfindToTargetTrack(DriverP
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, DriverPathfindToTargetTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DriverPathfindToTargetTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DriverPathfindToTargetTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DriverPathfindToTargetTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&DriverPathfindToTargetTrack::`vftable;
   *(_WORD *)&v1->m_TargetType.mValue = 22;
   v1->m_ToleranceRadius = 20.0;
 }
@@ -32,8 +32,8 @@ void __fastcall DriverPathfindToTargetTrack::~DriverPathfindToTargetTrack(Driver
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&DriverPathfindToTargetTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&DriverPathfindToTargetTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -44,7 +44,7 @@ void __fastcall DriverPathfindToTargetTrack::~DriverPathfindToTargetTrack(Driver
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 60
@@ -66,8 +66,8 @@ void __fastcall DriverFollowTargetTrack::DriverFollowTargetTrack(DriverFollowTar
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, DriverFollowTargetTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DriverFollowTargetTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DriverFollowTargetTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DriverFollowTargetTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&DriverFollowTargetTrack::`vftable;
   v1->m_TargetType.mValue = 22;
 }
 
@@ -80,8 +80,8 @@ void __fastcall DriverFollowTargetTrack::~DriverFollowTargetTrack(DriverFollowTa
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&DriverFollowTargetTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&DriverFollowTargetTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -92,7 +92,7 @@ void __fastcall DriverFollowTargetTrack::~DriverFollowTargetTrack(DriverFollowTa
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 86
@@ -114,8 +114,8 @@ void __fastcall DriverChaseTargetTrack::DriverChaseTargetTrack(DriverChaseTarget
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, DriverChaseTargetTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DriverChaseTargetTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DriverChaseTargetTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DriverChaseTargetTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&DriverChaseTargetTrack::`vftable;
   v1->m_TargetType.mValue = 22;
 }
 
@@ -128,8 +128,8 @@ void __fastcall DriverChaseTargetTrack::~DriverChaseTargetTrack(DriverChaseTarge
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&DriverChaseTargetTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&DriverChaseTargetTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -140,7 +140,7 @@ void __fastcall DriverChaseTargetTrack::~DriverChaseTargetTrack(DriverChaseTarge
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 111
@@ -162,8 +162,8 @@ void __fastcall DriverWanderTrack::DriverWanderTrack(DriverWanderTrack *this)
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, DriverWanderTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DriverWanderTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DriverWanderTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DriverWanderTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&DriverWanderTrack::`vftable;
 }
 
 // File Line: 120
@@ -175,8 +175,8 @@ void __fastcall DriverWanderTrack::~DriverWanderTrack(DriverWanderTrack *this)
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&DriverWanderTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&DriverWanderTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -187,7 +187,7 @@ void __fastcall DriverWanderTrack::~DriverWanderTrack(DriverWanderTrack *this)
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 133
@@ -209,8 +209,8 @@ void __fastcall DriverStopTrack::DriverStopTrack(DriverStopTrack *this)
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, DriverStopTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DriverStopTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DriverStopTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DriverStopTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&DriverStopTrack::`vftable;
 }
 
 // File Line: 142
@@ -222,8 +222,8 @@ void __fastcall DriverStopTrack::~DriverStopTrack(DriverStopTrack *this)
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&DriverStopTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&DriverStopTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -234,6 +234,6 @@ void __fastcall DriverStopTrack::~DriverStopTrack(DriverStopTrack *this)
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 

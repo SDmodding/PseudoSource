@@ -47,8 +47,8 @@ void __fastcall Scaleform::Render::Matrix2x4<float>::SetToAppend(Scaleform::Rend
 
   v3 = *(__m128 *)&m1->M[1][0];
   v4 = *(__m128 *)&m0->M[1][0];
-  v5 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v;
-  v6 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v;
+  v5 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v;
+  v6 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v;
   v7 = _mm_mul_ps(_mm_shuffle_ps(v3, v3, 0), *(__m128 *)&m0->M[0][0]);
   *(__m128 *)&this->M[0][0] = _mm_and_ps(
                                 _mm_add_ps(
@@ -59,8 +59,8 @@ void __fastcall Scaleform::Render::Matrix2x4<float>::SetToAppend(Scaleform::Rend
                                       *(__m128 *)&m0->M[0][0])),
                                   _mm_and_ps(
                                     *(__m128 *)&m1->M[0][0],
-                                    (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v)),
-                                (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v);
+                                    (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v)),
+                                (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v);
   *(__m128 *)&this->M[1][0] = _mm_and_ps(
                                 _mm_add_ps(
                                   _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v3, v3, 85), v4), v7),
@@ -80,22 +80,22 @@ void __fastcall Scaleform::Render::Matrix2x4<float>::SetToAppend(Scaleform::Rend
   __m128 v9; // xmm0
 
   v4 = *(__m128 *)&m0->M[1][0];
-  v5 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v;
-  v6 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v;
+  v5 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v;
+  v6 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v;
   v7 = _mm_add_ps(
          _mm_add_ps(
            _mm_mul_ps(_mm_shuffle_ps(*(__m128 *)&m2->M[0][0], *(__m128 *)&m2->M[0][0], 85), *(__m128 *)&m1->M[1][0]),
            _mm_mul_ps(_mm_shuffle_ps(*(__m128 *)&m2->M[0][0], *(__m128 *)&m2->M[0][0], 0), *(__m128 *)&m1->M[0][0])),
          _mm_and_ps(
            *(__m128 *)&m2->M[0][0],
-           (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v));
+           (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v));
   v8 = _mm_add_ps(
          _mm_add_ps(
            _mm_mul_ps(_mm_shuffle_ps(*(__m128 *)&m2->M[1][0], *(__m128 *)&m2->M[1][0], 85), *(__m128 *)&m1->M[1][0]),
            _mm_mul_ps(_mm_shuffle_ps(*(__m128 *)&m2->M[1][0], *(__m128 *)&m2->M[1][0], 0), *(__m128 *)&m1->M[0][0])),
          _mm_and_ps(
            *(__m128 *)&m2->M[1][0],
-           (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v));
+           (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v));
   v9 = _mm_mul_ps(_mm_shuffle_ps(v8, v8, 0), *(__m128 *)&m0->M[0][0]);
   *(__m128 *)&this->M[0][0] = _mm_and_ps(
                                 _mm_add_ps(
@@ -104,8 +104,8 @@ void __fastcall Scaleform::Render::Matrix2x4<float>::SetToAppend(Scaleform::Rend
                                     _mm_mul_ps(_mm_shuffle_ps(v7, v7, 0), *(__m128 *)&m0->M[0][0])),
                                   _mm_and_ps(
                                     v7,
-                                    (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v)),
-                                (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v);
+                                    (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v)),
+                                (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v);
   *(__m128 *)&this->M[1][0] = _mm_and_ps(
                                 _mm_add_ps(
                                   _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v8, v8, 85), v4), v9),
@@ -127,10 +127,10 @@ Scaleform::Render::Matrix2x4<float> *__fastcall Scaleform::Render::Matrix2x4<flo
 
   v2 = *(__m128 *)&m->M[1][0];
   result = this;
-  v4 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v;
+  v4 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v;
   v5 = _mm_shuffle_ps(v2, v2, 0);
   v6 = _mm_shuffle_ps(*(__m128 *)&m->M[1][0], v2, 85);
-  v7 = _mm_and_ps(v2, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v);
+  v7 = _mm_and_ps(v2, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v);
   v8 = _mm_mul_ps(v5, *(__m128 *)&this->M[0][0]);
   *(__m128 *)&this->M[0][0] = _mm_and_ps(
                                 _mm_add_ps(
@@ -143,8 +143,8 @@ Scaleform::Render::Matrix2x4<float> *__fastcall Scaleform::Render::Matrix2x4<flo
                                       *(__m128 *)&this->M[0][0])),
                                   _mm_and_ps(
                                     *(__m128 *)&m->M[0][0],
-                                    (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v)),
-                                (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v);
+                                    (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v)),
+                                (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v);
   *(__m128 *)&this->M[1][0] = _mm_and_ps(_mm_add_ps(_mm_add_ps(_mm_mul_ps(v6, *(__m128 *)&this->M[1][0]), v8), v7), v4);
   return result;
 }

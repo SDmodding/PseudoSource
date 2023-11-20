@@ -10,9 +10,9 @@ void __fastcall CarStopTask::CarStopTask(CarStopTask *this)
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<CarStopTrack>::`vftable';
-  this->vfptr = (ITaskVtbl *)&CarStopTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<CarStopTrack>::`vftable;
+  this->vfptr = (ITaskVtbl *)&CarStopTask::`vftable;
   v2 = &this->m_pAIComponent;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
@@ -395,9 +395,9 @@ void __fastcall CarRaceTask::CarRaceTask(CarRaceTask *this)
   v2 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<CarRaceTrack>::`vftable';
-  this->vfptr = (ITaskVtbl *)&CarRaceTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<CarRaceTrack>::`vftable;
+  this->vfptr = (ITaskVtbl *)&CarRaceTask::`vftable;
   v3 = &this->m_pAIComponent;
   v3->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v3->mPrev;
   v3->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v3->mPrev;
@@ -2041,9 +2041,9 @@ void __fastcall CarNoDestinationTask::CarNoDestinationTask(CarNoDestinationTask 
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<CarNoDestinationTrack>::`vftable';
-  this->vfptr = (ITaskVtbl *)&CarNoDestinationTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<CarNoDestinationTrack>::`vftable;
+  this->vfptr = (ITaskVtbl *)&CarNoDestinationTask::`vftable;
   v2 = &this->m_pAIComponent;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
@@ -2198,9 +2198,9 @@ void __fastcall CarAttackTask::CarAttackTask(CarAttackTask *this)
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<CarAttackTrack>::`vftable';
-  this->vfptr = (ITaskVtbl *)&CarAttackTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<CarAttackTrack>::`vftable;
+  this->vfptr = (ITaskVtbl *)&CarAttackTask::`vftable;
   this->m_pActionContext = 0i64;
 }
 
@@ -2336,9 +2336,9 @@ void __fastcall CarFormationAttackTask::CarFormationAttackTask(CarFormationAttac
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<CarFormationAttackTrack>::`vftable';
-  this->vfptr = (ITaskVtbl *)&CarFormationAttackTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<CarFormationAttackTrack>::`vftable;
+  this->vfptr = (ITaskVtbl *)&CarFormationAttackTask::`vftable;
   this->m_pActionContext = 0i64;
 }
 
@@ -2453,9 +2453,9 @@ void __fastcall CarFormationTask::CarFormationTask(CarFormationTask *this)
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<CarFormationTrack>::`vftable';
-  this->vfptr = (ITaskVtbl *)&CarFormationTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<CarFormationTrack>::`vftable;
+  this->vfptr = (ITaskVtbl *)&CarFormationTask::`vftable;
   this->m_pActionContext = 0i64;
 }
 
@@ -2657,9 +2657,9 @@ void __fastcall CarOffsetDriveTask::CarOffsetDriveTask(CarOffsetDriveTask *this)
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<CarOffsetDriveTrack>::`vftable';
-  this->vfptr = (ITaskVtbl *)&CarOffsetDriveTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<CarOffsetDriveTrack>::`vftable;
+  this->vfptr = (ITaskVtbl *)&CarOffsetDriveTask::`vftable;
   v2 = &this->m_pAIComponent;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
@@ -2819,9 +2819,9 @@ void __fastcall CarFormationDriveTask::CarFormationDriveTask(CarFormationDriveTa
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<CarFormationDriveTrack>::`vftable';
-  this->vfptr = (ITaskVtbl *)&CarFormationDriveTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<CarFormationDriveTrack>::`vftable;
+  this->vfptr = (ITaskVtbl *)&CarFormationDriveTask::`vftable;
   v2 = &this->m_pAIComponent;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
@@ -3014,9 +3014,9 @@ void __fastcall CarOccupantAimTask::CarOccupantAimTask(CarOccupantAimTask *this)
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<CarOccupantAimTrack>::`vftable';
-  this->vfptr = (ITaskVtbl *)&CarOccupantAimTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<CarOccupantAimTrack>::`vftable;
+  this->vfptr = (ITaskVtbl *)&CarOccupantAimTask::`vftable;
   v2 = &this->m_pActiveAIEntityComponent;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
@@ -3937,8 +3937,8 @@ void __fastcall CarAttackTrack::CarAttackTrack(CarAttackTrack *this)
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, CarAttackTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CarAttackTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CarAttackTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CarAttackTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CarAttackTrack::`vftable;
   v1->mAttackType.mValue = 0;
   *(_QWORD *)&v1->mDuration = 0i64;
 }
@@ -3962,8 +3962,8 @@ void __fastcall CarFormationAttackTrack::CarFormationAttackTrack(CarFormationAtt
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, CarFormationAttackTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CarFormationAttackTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CarFormationAttackTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CarFormationAttackTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CarFormationAttackTrack::`vftable;
   v1->mAttackType.mValue = 0;
   *(_QWORD *)&v1->mDuration = 0i64;
 }
@@ -3987,8 +3987,8 @@ void __fastcall CarFormationTrack::CarFormationTrack(CarFormationTrack *this)
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, CarFormationTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CarFormationTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CarFormationTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CarFormationTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CarFormationTrack::`vftable;
   *(_DWORD *)v1->mPosition = 0;
   *(_WORD *)&v1->mPosition[4] = 0;
   v1->mPosition[6] = 0;
@@ -4013,8 +4013,8 @@ void __fastcall CarOffsetDriveTrack::CarOffsetDriveTrack(CarOffsetDriveTrack *th
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, CarOffsetDriveTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CarOffsetDriveTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CarOffsetDriveTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CarOffsetDriveTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CarOffsetDriveTrack::`vftable;
   v1->mTolerance = 0.0;
   *(_WORD *)&v1->mPosition.mValue = 768;
 }
@@ -4038,8 +4038,8 @@ void __fastcall CarFormationDriveTrack::CarFormationDriveTrack(CarFormationDrive
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, CarFormationDriveTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CarFormationDriveTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CarFormationDriveTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CarFormationDriveTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CarFormationDriveTrack::`vftable;
   v1->mTolerance = 0.0;
 }
 
@@ -4073,8 +4073,8 @@ void __fastcall CarOccupantIntentionTrack::CarOccupantIntentionTrack(CarOccupant
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, CarOccupantIntentionTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CarOccupantIntentionTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CarOccupantIntentionTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CarOccupantIntentionTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CarOccupantIntentionTrack::`vftable;
   v1->m_eTargetType.mValue = 4;
   v1->m_ActionRequest = gActionRequest_Action.m_EnumValue;
 }
@@ -4098,8 +4098,8 @@ void __fastcall CarOccupantsActionTrack::CarOccupantsActionTrack(CarOccupantsAct
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, CarOccupantsActionTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CarOccupantsActionTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CarOccupantsActionTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CarOccupantsActionTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CarOccupantsActionTrack::`vftable;
   v1->m_ActionRequest = gActionRequest_Action.m_EnumValue;
 }
 

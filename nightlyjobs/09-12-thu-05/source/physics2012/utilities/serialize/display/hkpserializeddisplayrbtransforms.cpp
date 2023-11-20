@@ -9,7 +9,7 @@ void __fastcall hkpSerializedDisplayRbTransforms::~hkpSerializedDisplayRbTransfo
 
   v1 = this->m_transforms.m_size;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpSerializedDisplayRbTransforms::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpSerializedDisplayRbTransforms::`vftable;
   if ( v1 > 0 )
   {
     v3 = 0i64;
@@ -30,6 +30,6 @@ void __fastcall hkpSerializedDisplayRbTransforms::~hkpSerializedDisplayRbTransfo
       80 * (v4 & 0x3FFFFFFF));
   v2->m_transforms.m_data = 0i64;
   v2->m_transforms.m_capacityAndFlags = 2147483648;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 

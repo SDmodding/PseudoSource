@@ -9,7 +9,7 @@ void __fastcall Scaleform::GFx::AS3::Classes::fl_gfx::GamePad::GamePad(Scaleform
   v4 = this;
   v2 = this;
   Scaleform::GFx::AS3::Class::Class((Scaleform::GFx::AS3::Class *)&this->vfptr, t);
-  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl_gfx::GamePad::`vftable';
+  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl_gfx::GamePad::`vftable;
   v3 = (signed __int64)&v2->PAD_NONE;
   *(_DWORD *)v3 = 0;
   *(_QWORD *)(v3 + 8) = 0i64;
@@ -134,8 +134,8 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v5 )
   {
     Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, v2, &Scaleform::GFx::AS3::fl_gfx::GamePadCI);
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable';
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_gfx::GamePad::`vftable';
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable;
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_gfx::GamePad::`vftable;
   }
   else
   {
@@ -147,7 +147,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v7 )
   {
     Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v7, v2, &Scaleform::GFx::AS3::fl_gfx::GamePadCI);
-    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable';
+    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable;
   }
   else
   {

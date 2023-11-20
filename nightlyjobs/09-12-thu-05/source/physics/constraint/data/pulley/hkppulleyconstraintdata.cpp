@@ -2,7 +2,7 @@
 // RVA: 0xD4A8B0
 void __fastcall hkpPulleyConstraintData::hkpPulleyConstraintData(hkpPulleyConstraintData *this)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkpPulleyConstraintData::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpPulleyConstraintData::`vftable;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_userData = 0i64;
   this->m_atoms.m_translations.m_type.m_storage = 3;

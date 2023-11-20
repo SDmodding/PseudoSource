@@ -76,7 +76,7 @@ void __fastcall UFG::UIHKScreenGameTracker::UIHKScreenGameTracker(UFG::UIHKScree
   v2 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -87,7 +87,7 @@ void __fastcall UFG::UIHKScreenGameTracker::UIHKScreenGameTracker(UFG::UIHKScree
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenGameTracker::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenGameTracker::`vftable;
   UFG::UIGfxTranslator::loadDictionary(UFG::UIScreenManager::s_instance->m_translator, "ITEMS");
   v1->m_eCurrentPage = 0;
   UFG::UIHKScreenGameTracker::m_iRowCollectedCount = 0;
@@ -510,7 +510,7 @@ LABEL_13:
     default:
       break;
   }
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   v5 = v7.mData;
   if ( (v10 >> 6) & 1 )
   {
@@ -536,7 +536,7 @@ LABEL_13:
     0i64,
     (Scaleform::GFx::Value *)&ptr,
     2u);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   UFG::qString::~qString(&v7);
 }
 
@@ -625,7 +625,7 @@ void __fastcall UFG::UIHKScreenGameTracker::PopulatePlayerMoves(UFG::UIHKScreenG
       sprintf(&string, "$GAMETRACKER_DEFENSIVE_MOVE_%d", (unsigned int)(v11 + 1));
       if ( v11 >= v10 )
       {
-        `eh vector constructor iterator'(&pargs, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+        `eh vector constructor iterator(&pargs, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
         if ( ((unsigned int)pargs.Type >> 6) & 1 )
         {
           (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
@@ -657,7 +657,7 @@ void __fastcall UFG::UIHKScreenGameTracker::PopulatePlayerMoves(UFG::UIHKScreenG
       }
       else
       {
-        `eh vector constructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+        `eh vector constructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
         if ( (v21 >> 6) & 1 )
         {
           (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v20 + 16i64))(v20, &ptr, v22);
@@ -690,7 +690,7 @@ void __fastcall UFG::UIHKScreenGameTracker::PopulatePlayerMoves(UFG::UIHKScreenG
         ++UFG::UIHKScreenGameTracker::m_iRowCollectedCount;
         v13 = (Scaleform::GFx::Value *)&ptr;
       }
-      `eh vector destructor iterator'(v13, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+      `eh vector destructor iterator(v13, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
       ++v11;
     }
     while ( v12 < 5 );
@@ -707,7 +707,7 @@ void __fastcall UFG::UIHKScreenGameTracker::PopulatePlayerMoves(UFG::UIHKScreenG
       sprintf(&string, "$GAMETRACKER_GUNPLAY_MOVE_%d", (unsigned int)(v16 + 1));
       if ( v16 >= v15 )
       {
-        `eh vector constructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+        `eh vector constructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
         if ( (v21 >> 6) & 1 )
         {
           (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v20 + 16i64))(v20, &ptr, v22);
@@ -741,7 +741,7 @@ void __fastcall UFG::UIHKScreenGameTracker::PopulatePlayerMoves(UFG::UIHKScreenG
       }
       else
       {
-        `eh vector constructor iterator'(&pargs, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+        `eh vector constructor iterator(&pargs, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
         if ( ((unsigned int)pargs.Type >> 6) & 1 )
         {
           (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
@@ -772,7 +772,7 @@ void __fastcall UFG::UIHKScreenGameTracker::PopulatePlayerMoves(UFG::UIHKScreenG
         ++UFG::UIHKScreenGameTracker::m_iRowCollectedCount;
         v18 = &pargs;
       }
-      `eh vector destructor iterator'(v18, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+      `eh vector destructor iterator(v18, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
       ++v16;
     }
     while ( v17 < 5 );
@@ -997,7 +997,7 @@ LABEL_40:
     pDtor = (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value;
     if ( v28 < 100 )
     {
-      `eh vector constructor iterator'(&pargs, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&pargs, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       if ( ((unsigned int)pargs.Type >> 6) & 1 )
       {
         (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
@@ -1029,7 +1029,7 @@ LABEL_40:
     }
     else
     {
-      `eh vector constructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       if ( ((unsigned int)v44 >> 6) & 1 )
       {
         (*(void (__fastcall **)(__int64, char *, UFG::qPropertySet *))(*(_QWORD *)v43 + 16i64))(
@@ -1064,7 +1064,7 @@ LABEL_40:
       ++UFG::UIHKScreenGameTracker::m_iRowCount;
       v34 = (Scaleform::GFx::Value *)&ptr;
     }
-    `eh vector destructor iterator'(v34, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(v34, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     UFG::UIHKScreenGameTracker::m_iRowCount = v29 + UFG::UIHKScreenGameTracker::m_iRowCount - 1;
     UFG::UIHKScreenGameTracker::m_iRowCollectedCount += v30;
     UFG::qString::~qString(&v64);
@@ -1131,7 +1131,7 @@ void UFG::UIHKScreenGameTracker::PopulateVehicles(void)
       while ( v9 );
       if ( UFG::StoreFront::IsOwned(v4, v5) )
       {
-        `eh vector constructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+        `eh vector constructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
         if ( (v12 >> 6) & 1 )
         {
           (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v11 + 16i64))(v11, &ptr, v13);
@@ -1162,7 +1162,7 @@ void UFG::UIHKScreenGameTracker::PopulateVehicles(void)
             3u);
         ++UFG::UIHKScreenGameTracker::m_iRowCount;
         ++UFG::UIHKScreenGameTracker::m_iRowCollectedCount;
-        `eh vector destructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+        `eh vector destructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
       }
       else
       {
@@ -1271,7 +1271,7 @@ void __fastcall UFG::UIHKScreenGameTracker::AddRow(char *pRowTitle, char *pRowSt
   v6 = pRowStatus;
   v7 = pRowTitle;
   pDtor = (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value;
-  `eh vector constructor iterator'(&v11, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&v11, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( (v11 >> 6) & 1 )
   {
     (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v10 + 16i64))(v10, &ptr, v12);
@@ -1303,7 +1303,7 @@ void __fastcall UFG::UIHKScreenGameTracker::AddRow(char *pRowTitle, char *pRowSt
   ++UFG::UIHKScreenGameTracker::m_iRowCount;
   if ( v5 )
     ++UFG::UIHKScreenGameTracker::m_iRowCollectedCount;
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 723
@@ -1606,8 +1606,8 @@ void __fastcall UFG::UIHKScreenGameTracker::ShowHelpBar(UFG::UIHKScreenGameTrack
     *(_QWORD *)&data.MessageIds[4] = 0i64;
     UFG::UIHKHelpBarWidget::Show(v1, &data);
     UFG::qString::~qString(&data.CustomTexturePack);
-    `eh vector destructor iterator'(data.Icons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
-    `eh vector destructor iterator'(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+    `eh vector destructor iterator(data.Icons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+    `eh vector destructor iterator(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
   }
 }
 

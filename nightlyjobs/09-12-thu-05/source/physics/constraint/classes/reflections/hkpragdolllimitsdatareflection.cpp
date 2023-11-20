@@ -80,7 +80,7 @@ void __fastcall finishLoadedObjecthkpRagdollLimitsData(void *p, int finishing)
     v2 = finishing;
     v3 = (hkpRagdollLimitsData *)p;
     hkpConstraintData::hkpConstraintData((hkpConstraintData *)p, (hkFinishLoadedObjectFlag)finishing);
-    v3->vfptr = (hkBaseObjectVtbl *)&hkpRagdollLimitsData::`vftable';
+    v3->vfptr = (hkBaseObjectVtbl *)&hkpRagdollLimitsData::`vftable;
     if ( v2 )
     {
       if ( v3->m_atoms.m_coneLimit.m_memOffsetToAngleOffset )
@@ -103,7 +103,7 @@ void **__fastcall getVtablehkpRagdollLimitsData()
   hkpConstraintData v1; // [rsp+20h] [rbp-F8h]
 
   hkpConstraintData::hkpConstraintData(&v1, 0);
-  return &hkpRagdollLimitsData::`vftable';
+  return &hkpRagdollLimitsData::`vftable;
 }
 
 // File Line: 169

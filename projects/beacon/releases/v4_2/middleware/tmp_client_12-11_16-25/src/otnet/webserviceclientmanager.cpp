@@ -26,8 +26,8 @@ void __fastcall OSuite::ZWebServiceClientManager::ZWebServiceClientList::ZWebSer
   v2 = this;
   OSuite::ZRedBlackTreeBase::ZElementBase::ZElementBase((OSuite::ZObject *)&this->vfptr, a2);
   v2->m_pList = 0i64;
-  v2->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZWebServiceClientManager::ZWebServiceClientList::`vftable'{for `OSuite::ZListBase'};
-  v2->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZWebServiceClientManager::ZWebServiceClientList::`vftable'{for `OSuite::IHashable'};
+  v2->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZWebServiceClientManager::ZWebServiceClientList::`vftable{for `OSuite::ZListBase};
+  v2->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZWebServiceClientManager::ZWebServiceClientList::`vftable{for `OSuite::IHashable};
   v3 = OSuite::TList<OSuite::ZWebServiceClientManager::ZWebServiceClientBucket>::AllocList(
          (OSuite::TList<OSuite::ZWebServiceClientManager::ZWebServiceClientBucket> *)&v2->vfptr,
          0i64,
@@ -35,8 +35,8 @@ void __fastcall OSuite::ZWebServiceClientManager::ZWebServiceClientList::ZWebSer
   v2->m_nTop = 0i64;
   v2->m_pList = v3;
   v2->m_nSize = 16i64;
-  v2->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZWebServiceClientManager::ZWebServiceClientList::`vftable'{for `OSuite::ZListBase'};
-  v2->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZWebServiceClientManager::ZWebServiceClientList::`vftable'{for `OSuite::IHashable'};
+  v2->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZWebServiceClientManager::ZWebServiceClientList::`vftable{for `OSuite::ZListBase};
+  v2->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZWebServiceClientManager::ZWebServiceClientList::`vftable{for `OSuite::IHashable};
 }
 
 // File Line: 35
@@ -66,7 +66,7 @@ OSuite::ZWebServiceClientManager::ZWebServiceClientBucket *__fastcall OSuite::ZW
   else
   {
     element.refCount = 0;
-    element.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZWebServiceClientManager::ZWebServiceClientBucket::`vftable';
+    element.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZWebServiceClientManager::ZWebServiceClientBucket::`vftable;
     OSuite::ZString::ZString(&element.name, &customWorldMapCaption);
     v7 = OSuite::TList<OSuite::ZWebServiceClientManager::ZWebServiceClientBucket>::Append(
            (OSuite::TList<OSuite::ZWebServiceClientManager::ZWebServiceClientBucket> *)&v5->vfptr,
@@ -95,7 +95,7 @@ OSuite::ZWebServiceClientManager::ZWebServiceClientBucket *__fastcall OSuite::ZW
   v10.m_pListBase = 0i64;
   v2 = key;
   OSuite::ZListBase::ZListIteratorBase::ZListIteratorBase(&v10, (OSuite::ZListBase *)&this->vfptr);
-  v10.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+  v10.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
   while ( 1 )
   {
     if ( OSuite::ZListBase::ZListIteratorBase::AtEnd(&v10) )
@@ -133,11 +133,11 @@ void __fastcall OSuite::ZWebServiceClientManager::~ZWebServiceClientManager(OSui
   OSuite::ZWebServiceClientManager::ZWebServiceClientBucket *v2; // rcx
 
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZWebServiceClientManager::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZWebServiceClientManager::`vftable;
   OSuite::ZWebServiceClientManager::Clean(this);
   v2 = v1->m_webServiceList.m_pList;
-  v1->m_webServiceList.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZWebServiceClientManager::ZWebServiceClientList::`vftable'{for `OSuite::ZListBase'};
-  v1->m_webServiceList.vfptr = (OSuite::IHashableVtbl *)&OSuite::ZWebServiceClientManager::ZWebServiceClientList::`vftable'{for `OSuite::IHashable'};
+  v1->m_webServiceList.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZWebServiceClientManager::ZWebServiceClientList::`vftable{for `OSuite::ZListBase};
+  v1->m_webServiceList.vfptr = (OSuite::IHashableVtbl *)&OSuite::ZWebServiceClientManager::ZWebServiceClientList::`vftable{for `OSuite::IHashable};
   if ( v2 )
   {
     if ( LODWORD(v2[-1].pWebServiceClient) )
@@ -167,7 +167,7 @@ void __fastcall OSuite::ZWebServiceClientManager::Clean(OSuite::ZWebServiceClien
   v11.m_pListBase = 0i64;
   v1 = &this->m_webServiceList;
   OSuite::ZListBase::ZListIteratorBase::ZListIteratorBase(&v11, (OSuite::ZListBase *)&this->m_webServiceList.vfptr);
-  v11.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+  v11.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
   while ( !OSuite::ZListBase::ZListIteratorBase::AtEnd(&v11) )
   {
     OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)v11.m_pListBase);

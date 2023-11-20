@@ -21,7 +21,7 @@ void __fastcall hkpSymmetricAgent<hkpMultiSphereAgent>::linearCast(hkpSymmetricA
   v6 = *(_OWORD *)&input->m_dispatcher.m_storage;
   v7 = *(_OWORD *)&input->m_tolerance.m_storage;
   v13.m_earlyOutDistance = 3.40282e38;
-  v13.vfptr = (hkpCdPointCollectorVtbl *)&hkpSymmetricAgentFlipCastCollector::`vftable';
+  v13.vfptr = (hkpCdPointCollectorVtbl *)&hkpSymmetricAgentFlipCastCollector::`vftable;
   *(_OWORD *)&inputa.m_dispatcher.m_storage = v6;
   v8 = *(_OWORD *)&input->m_convexListFilter.m_storage;
   *(_OWORD *)&inputa.m_tolerance.m_storage = v7;
@@ -45,7 +45,7 @@ void __fastcall hkpSymmetricAgent<hkpMultiSphereAgent>::linearCast(hkpSymmetricA
     v19 = startCollector;
     v17 = 2139095022;
     _mm_store_si128((__m128i *)&v18, (__m128i)v12.m_quad);
-    v16 = &hkpSymmetricAgentFlipCastCollector::`vftable';
+    v16 = &hkpSymmetricAgentFlipCastCollector::`vftable;
     hkpMultiSphereAgent::linearCast(
       (hkpMultiSphereAgent *)&this->vfptr,
       bodyB,

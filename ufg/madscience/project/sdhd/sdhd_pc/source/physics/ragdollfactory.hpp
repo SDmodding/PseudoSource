@@ -22,12 +22,12 @@ void __fastcall UFG::RagdollDefinition::RagdollDefinition(UFG::RagdollDefinition
   v3->mBaseNode.mNeighbours[0] = &v3->mBaseNode;
   v3->mBaseNode.mNeighbours[1] = &v3->mBaseNode;
   v3->mBaseNode.mUID = v4;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable;
   v5 = &this->mHandles;
   v5->mNode.mPrev = &v5->mNode;
   v5->mNode.mNext = &v5->mNode;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::RagdollDefinition,UFG::qReflectObject>::`vftable';
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::RagdollDefinition::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::RagdollDefinition,UFG::qReflectObject>::`vftable;
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::RagdollDefinition::`vftable;
   v10 = &this->mModelAsset;
   UFG::qReflectHandleBase::qReflectHandleBase((UFG::qList<UFG::qReflectHandleBase,UFG::qReflectHandleBase,1,0> *)&this->mModelAsset);
   v2->mBoneMappings.mData.mFlags = 2;

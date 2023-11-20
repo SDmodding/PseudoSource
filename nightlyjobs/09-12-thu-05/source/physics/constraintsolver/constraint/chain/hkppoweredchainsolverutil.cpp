@@ -1533,7 +1533,7 @@ void __fastcall hkPoweredChain_ScanAndEnableMotors(hkpChainSolverInfo *info, int
     out.m_lin.m_quad = _mm_add_ps(out.m_lin.m_quad, out.m_ang.m_quad);
     out.m_ang = (hkVector4f)v23.m_quad;
     v26 = *((unsigned __int8 *)v20->m128_u64 + v17);
-    v27 = (__m128 *)`hkVector4f::getComponent'::`2'::indexToMask;
+    v27 = (__m128 *)`hkVector4f::getComponent::`2::indexToMask;
     do
     {
       v28 = (v26 >> v24) & 3;

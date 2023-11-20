@@ -493,7 +493,7 @@ void __fastcall hkaiPhysics2012SilhouetteBuilder::createPointCloudFromShapeRecur
 
   v5 = verticesOut;
   v6 = sizesOut;
-  callback.vfptr = (hkpShapeHierarchyWalkerVtbl *)&hkaiSilhouetteHierarchyWalker::`vftable';
+  callback.vfptr = (hkpShapeHierarchyWalkerVtbl *)&hkaiSilhouetteHierarchyWalker::`vftable;
   hkpTraverseShapeHierarchy(shape, &callback, transform);
 }
 

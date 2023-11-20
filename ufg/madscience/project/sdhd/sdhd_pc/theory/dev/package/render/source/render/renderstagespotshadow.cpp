@@ -81,32 +81,32 @@ void __fastcall UFG::RenderStageSpotShadow::RenderStageSpotShadow(UFG::RenderSta
   v9 = UFG::qResourceWarehouse::Instance();
   UFG::qResourceWarehouse::Add(v9, (UFG::qResourceData *)&v6->mNode);
   v3->mMatDepthDownsampleSpotShadow = v6;
-  v10 = `UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result )
+  v10 = `UFG::qGetResourceInventory<Illusion::RasterState>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::RasterState>::`2::result )
   {
     v11 = UFG::qResourceWarehouse::Instance();
     v10 = UFG::qResourceWarehouse::GetInventory(v11, 0x3BC715E0u);
-    `UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result = v10;
+    `UFG::qGetResourceInventory<Illusion::RasterState>::`2::result = v10;
   }
   UFG::qResourceHandle::Init(v4, 0x3BC715E0u, 0x418CAF43u, v10);
-  v12 = `UFG::qGetResourceInventory<Illusion::AlphaState>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::AlphaState>'::`2'::result )
+  v12 = `UFG::qGetResourceInventory<Illusion::AlphaState>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::AlphaState>::`2::result )
   {
     v13 = UFG::qResourceWarehouse::Instance();
     v12 = UFG::qResourceWarehouse::GetInventory(v13, 0x12C800F2u);
-    `UFG::qGetResourceInventory<Illusion::AlphaState>'::`2'::result = v12;
+    `UFG::qGetResourceInventory<Illusion::AlphaState>::`2::result = v12;
   }
   UFG::qResourceHandle::Init(
     (UFG::qResourceHandle *)&v3->mAlphaStateNoColourWriteHandle.mPrev,
     0x12C800F2u,
     0x91A2DD53,
     v12);
-  v14 = `UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result )
+  v14 = `UFG::qGetResourceInventory<Illusion::RasterState>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::RasterState>::`2::result )
   {
     v15 = UFG::qResourceWarehouse::Instance();
     v14 = UFG::qResourceWarehouse::GetInventory(v15, 0x3BC715E0u);
-    `UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result = v14;
+    `UFG::qGetResourceInventory<Illusion::RasterState>::`2::result = v14;
   }
   UFG::qResourceHandle::Init(
     (UFG::qResourceHandle *)&v3->mRasterStateInvertCullingHandle.mPrev,
@@ -308,21 +308,21 @@ UFG::SpotShadowRenderQueueTaskResults *__fastcall UFG::RenderStageSpotShadow::Su
   if ( !simpleInit_0 )
   {
     v10 = UFG::qStringHashUpper32("DR_EmitDepthAlpha", 0xFFFFFFFF);
-    v11 = `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result )
+    v11 = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::Shader>::`2::result )
     {
       v12 = UFG::qResourceWarehouse::Instance();
       v11 = UFG::qResourceWarehouse::GetInventory(v12, 0x8B5561A1);
-      `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result = v11;
+      `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = v11;
     }
     UFG::qResourceHandle::Init((UFG::qResourceHandle *)&simpleHandleAlpha.mPrev, 0x8B5561A1, v10, v11);
     v13 = UFG::qStringHashUpper32("DR_EmitDepthFBX", 0xFFFFFFFF);
-    v14 = `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result )
+    v14 = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::Shader>::`2::result )
     {
       v15 = UFG::qResourceWarehouse::Instance();
       v14 = UFG::qResourceWarehouse::GetInventory(v15, 0x8B5561A1);
-      `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result = v14;
+      `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = v14;
     }
     UFG::qResourceHandle::Init((UFG::qResourceHandle *)&simpleHandle_0.mPrev, 0x8B5561A1, v13, v14);
     simpleInit_0 = 1;
@@ -743,7 +743,7 @@ UFG::SpotShadowRenderQueueSimResults *__fastcall UFG::RenderStageSpotShadow::Ren
     (Illusion::RenderQueue **)(v10 + 200),
     *(_DWORD *)v10);
   v60 = &ptr.mStateArgs;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     ptr.mStateArgs.mStateArgs,
     0x10ui64,
     128,
@@ -796,7 +796,7 @@ void __fastcall UFG::RenderStageSpotShadow::DownsampleShadows_Spotlight(UFG::Ren
   Render::View::EndTarget(&v11);
   RenderQueueLayer::SerializeRenderQueues(&v10);
   v14 = &ptr.mStateArgs;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     ptr.mStateArgs.mStateArgs,
     0x10ui64,
     128,
@@ -1342,7 +1342,7 @@ LABEL_37:
   v127->mPrev = v126;
   arg.mPrev = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
   arg.mNext = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     ptr.mStateArgs.mStateArgs,
     0x10ui64,
     128,
@@ -1373,7 +1373,7 @@ void __fastcall UFG::RenderStageSpotShadow::RenderBeforeSunShadows(UFG::RenderSt
   Render::View::BeginTarget(&v7, v4->mQuarterSizeVolumetricTarget, "VolumetricTargetClear", 0, 0, 0i64, 1, 0, 0, 0);
   Render::View::Clear(&v7, &UFG::qColour::Zero, 1u, 1.0, 0);
   Render::View::EndTarget(&v7);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     ptr.mStateArgs.mStateArgs,
     0x10ui64,
     128,

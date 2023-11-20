@@ -53,12 +53,12 @@ void __fastcall Scaleform::Render::Scale9GridInfo::Scale9GridInfo(Scaleform::Ren
   Scaleform::Render::Matrix2x4<float> v18; // [rsp+50h] [rbp-58h]
 
   v5 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::Scale9GridInfo,71>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Scale9GridInfo::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::Scale9GridInfo,71>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Scale9GridInfo::`vftable;
   *(_QWORD *)&this->Scale9.x1 = 0i64;
   *(_QWORD *)&this->Scale9.x2 = 0i64;
   *(_OWORD *)&this->S9gMatrix.M[0][0] = 0x3F800000ui64;
@@ -136,12 +136,12 @@ void __fastcall Scaleform::Render::Scale9GridInfo::Scale9GridInfo(Scaleform::Ren
   *(_OWORD *)&v18.M[0][0] = _xmm;
   *(__m128 *)&v18.M[1][0] = _xmm;
   Scaleform::Render::Matrix2x4<float>::SetInverse(&v18, &v5->ShapeMatrix);
-  v12 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v;
+  v12 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v;
   v13 = *(__m128 *)&v5->InverseMatrix.M[0][0];
   v14 = *(__m128 *)&v5->InverseMatrix.M[1][0];
   v15 = _mm_and_ps(
           *(__m128 *)&v18.M[1][0],
-          (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v);
+          (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v);
   v16 = _mm_add_ps(
           _mm_mul_ps(_mm_shuffle_ps(*(__m128 *)&v18.M[1][0], *(__m128 *)&v18.M[1][0], 0), v13),
           _mm_mul_ps(_mm_shuffle_ps(*(__m128 *)&v18.M[1][0], *(__m128 *)&v18.M[1][0], 85), v14));
@@ -156,8 +156,8 @@ void __fastcall Scaleform::Render::Scale9GridInfo::Scale9GridInfo(Scaleform::Ren
                                                   v14)),
                                               _mm_and_ps(
                                                 *(__m128 *)&v18.M[0][0],
-                                                (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v)),
-                                            (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v);
+                                                (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v)),
+                                            (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v);
   *(__m128 *)&v5->InverseMatrix.M[1][0] = _mm_and_ps(_mm_add_ps(v16, v15), v12);
   Scaleform::Render::Scale9GridInfo::Compute(v5);
 }
@@ -188,12 +188,12 @@ void __fastcall Scaleform::Render::Scale9GridInfo::Scale9GridInfo(Scaleform::Ren
   v3 = (__m128 *)viewMtx;
   v4 = s9g;
   v5 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::Scale9GridInfo,71>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Scale9GridInfo::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::Scale9GridInfo,71>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Scale9GridInfo::`vftable;
   *(_QWORD *)&this->Scale9.x1 = 0i64;
   *(_QWORD *)&this->Scale9.x2 = 0i64;
   v6 = &this->S9gMatrix;
@@ -281,10 +281,10 @@ void __fastcall Scaleform::Render::Scale9GridInfo::Scale9GridInfo(Scaleform::Ren
   *(_OWORD *)&v20.M[0][0] = _xmm;
   *(__m128 *)&v20.M[1][0] = _xmm;
   Scaleform::Render::Matrix2x4<float>::SetInverse(&v20, &v5->ShapeMatrix);
-  v13 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v;
+  v13 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v;
   v14 = _mm_and_ps(
           *(__m128 *)&v20.M[1][0],
-          (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v);
+          (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v);
   v15 = _mm_add_ps(
           _mm_mul_ps(
             *(__m128 *)&v5->InverseMatrix.M[1][0],
@@ -293,7 +293,7 @@ void __fastcall Scaleform::Render::Scale9GridInfo::Scale9GridInfo(Scaleform::Ren
             *(__m128 *)&v5->InverseMatrix.M[0][0],
             _mm_shuffle_ps(*(__m128 *)&v20.M[1][0], *(__m128 *)&v20.M[1][0], 0)));
   *(__m128 *)&v5->InverseMatrix.M[0][0] = _mm_and_ps(
-                                            (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v,
+                                            (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v,
                                             _mm_add_ps(
                                               _mm_add_ps(
                                                 _mm_mul_ps(
@@ -304,15 +304,15 @@ void __fastcall Scaleform::Render::Scale9GridInfo::Scale9GridInfo(Scaleform::Ren
                                                   _mm_shuffle_ps(*(__m128 *)&v20.M[0][0], *(__m128 *)&v20.M[0][0], 85))),
                                               _mm_and_ps(
                                                 *(__m128 *)&v20.M[0][0],
-                                                (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v)));
+                                                (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v)));
   *(__m128 *)&v5->InverseMatrix.M[1][0] = _mm_and_ps(v13, _mm_add_ps(v15, v14));
-  v16 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v;
-  v17 = _mm_and_ps(v3[1], (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v);
+  v16 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v;
+  v17 = _mm_and_ps(v3[1], (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v);
   v18 = _mm_add_ps(
           _mm_mul_ps(*(__m128 *)&v5->InverseMatrix.M[0][0], _mm_shuffle_ps(v3[1], v3[1], 0)),
           _mm_mul_ps(*(__m128 *)&v5->InverseMatrix.M[1][0], _mm_shuffle_ps(v3[1], v3[1], 85)));
   *(__m128 *)&v5->InverseMatrix.M[0][0] = _mm_and_ps(
-                                            (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v,
+                                            (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v,
                                             _mm_add_ps(
                                               _mm_add_ps(
                                                 _mm_mul_ps(
@@ -323,7 +323,7 @@ void __fastcall Scaleform::Render::Scale9GridInfo::Scale9GridInfo(Scaleform::Ren
                                                   _mm_shuffle_ps(*v3, *v3, 85))),
                                               _mm_and_ps(
                                                 *v3,
-                                                (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v)));
+                                                (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v)));
   *(__m128 *)&v5->InverseMatrix.M[1][0] = _mm_and_ps(v16, _mm_add_ps(v18, v17));
   Scaleform::Render::Scale9GridInfo::Compute(v5);
 }
@@ -1779,8 +1779,8 @@ void __fastcall Scaleform::Render::Scale9GridTess::Scale9GridTess(Scaleform::Ren
   toUV.M[1][3] = 0.0;
   dst[3] = -0.5;
   v178.m128_i32[3] = -1090519040;
-  v22 = (__m128)_mm_load_si128((const __m128i *)&`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v);
-  v23 = (__m128)_mm_load_si128((const __m128i *)&`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v);
+  v22 = (__m128)_mm_load_si128((const __m128i *)&`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v);
+  v23 = (__m128)_mm_load_si128((const __m128i *)&`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v);
   v24 = _mm_add_ps(
           _mm_mul_ps(*(__m128 *)dst, _mm_shuffle_ps(*(__m128 *)&toUV.M[1][0], *(__m128 *)&toUV.M[1][0], 0)),
           _mm_mul_ps(v178, _mm_shuffle_ps(*(__m128 *)&toUV.M[1][0], *(__m128 *)&toUV.M[1][0], 85)));

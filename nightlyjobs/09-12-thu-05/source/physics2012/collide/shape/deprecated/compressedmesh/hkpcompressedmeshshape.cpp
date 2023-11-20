@@ -14,8 +14,8 @@ void __fastcall hkpCompressedMeshShape::hkpCompressedMeshShape(hkpCompressedMesh
   v4->m_bitsPerIndex = v3;
   v4->m_radius = radius;
   v4->m_bitsPerWIndex = v3 + 1;
-  v4->vfptr = (hkBaseObjectVtbl *)&hkpCompressedMeshShape::`vftable'{for `hkpShape'};
-  v4->vfptr = (hkpShapeContainerVtbl *)&hkpCompressedMeshShape::`vftable'{for `hkpShapeContainer'};
+  v4->vfptr = (hkBaseObjectVtbl *)&hkpCompressedMeshShape::`vftable{for `hkpShape};
+  v4->vfptr = (hkpShapeContainerVtbl *)&hkpCompressedMeshShape::`vftable{for `hkpShapeContainer};
   v4->m_wIndexMask = (1 << (v3 + 1)) - 1;
   v4->m_indexMask = (1 << v3) - 1;
   v4->m_materials.m_data = 0i64;
@@ -62,8 +62,8 @@ void __fastcall hkpCompressedMeshShape::hkpCompressedMeshShape(hkpCompressedMesh
   v4 = flag.m_finishing;
   v2 = this;
   hkpShapeCollection::hkpShapeCollection((hkpShapeCollection *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpCompressedMeshShape::`vftable'{for `hkpShape'};
-  v2->vfptr = (hkpShapeContainerVtbl *)&hkpCompressedMeshShape::`vftable'{for `hkpShapeContainer'};
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpCompressedMeshShape::`vftable{for `hkpShape};
+  v2->vfptr = (hkpShapeContainerVtbl *)&hkpCompressedMeshShape::`vftable{for `hkpShapeContainer};
   if ( v4 )
   {
     v3 = v2->m_namedMaterials.m_size == 0;
@@ -978,7 +978,7 @@ hkpShape *__fastcall hkpCompressedMeshShape::getChildShape(hkpCompressedMeshShap
       *(_DWORD *)&(*buffer)[16] = 1026;
       *(float *)&(*buffer)[32] = v34;
       *(_QWORD *)&(*buffer)[24] = 0i64;
-      *(_QWORD *)buffer = &hkpTriangleShape::`vftable';
+      *(_QWORD *)buffer = &hkpTriangleShape::`vftable;
       *(_DWORD *)&(*buffer)[40] = 393216;
       *(_OWORD *)&(*buffer)[96] = 0i64;
     }

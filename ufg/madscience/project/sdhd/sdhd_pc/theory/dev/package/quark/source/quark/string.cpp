@@ -436,7 +436,7 @@ UFG::qString *__fastcall UFG::qIntToHex<unsigned __int64>(UFG::qString *result, 
   v3 = 0;
   *(_WORD *)format = 30768;
   v4 = &v8;
-  v5 = `UFG::qIntToHex<unsigned __int64>'::`2'::value_character;
+  v5 = `UFG::qIntToHex<unsigned __int64>::`2::value_character;
   do
   {
     *v4 = v5[(val >> v3) & 0xF];
@@ -2264,7 +2264,7 @@ UFG::qString *__fastcall UFG::qString::GetFilePathWithoutExtension(UFG::qString 
   v2 = result;
   v3 = this;
   v4 = this->mLength - 1;
-  if ( v4 >= 0 && this->mData[v4] == ':' )
+  if ( v4 >= 0 && this->mData[v4] == : )
     v4 = this->mLength - 2;
   for ( i = v4; i >= 0; --i )
   {

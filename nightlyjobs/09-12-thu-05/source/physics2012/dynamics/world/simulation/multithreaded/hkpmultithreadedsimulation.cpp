@@ -280,15 +280,15 @@ void __fastcall hkpMultiThreadedSimulation::hkpMultiThreadedSimulation(hkpMultiT
   v3 = this;
   hkpContinuousSimulation::hkpContinuousSimulation((hkpContinuousSimulation *)&this->vfptr, world);
   v4 = &v3->m_entityEntityBroadPhaseListener;
-  v3->vfptr = (hkBaseObjectVtbl *)&hkpMultiThreadedSimulation::`vftable';
+  v3->vfptr = (hkBaseObjectVtbl *)&hkpMultiThreadedSimulation::`vftable;
   v4->m_simulation = 0i64;
-  v4->vfptr = (hkpBroadPhaseListenerVtbl *)&hkpMultiThreadedSimulation::MtEntityEntityBroadPhaseListener::`vftable';
+  v4->vfptr = (hkpBroadPhaseListenerVtbl *)&hkpMultiThreadedSimulation::MtEntityEntityBroadPhaseListener::`vftable;
   v5 = &v3->m_phantomBroadPhaseListener;
-  v5->vfptr = (hkpBroadPhaseListenerVtbl *)&hkpMultiThreadedSimulation::MtPhantomBroadPhaseListener::`vftable';
+  v5->vfptr = (hkpBroadPhaseListenerVtbl *)&hkpMultiThreadedSimulation::MtPhantomBroadPhaseListener::`vftable;
   v5->m_criticalSection = 0i64;
   v6 = &v3->m_broadPhaseBorderListener;
   v6->m_criticalSection = 0i64;
-  v6->vfptr = (hkpBroadPhaseListenerVtbl *)&hkpMultiThreadedSimulation::MtBroadPhaseBorderListener::`vftable';
+  v6->vfptr = (hkpBroadPhaseListenerVtbl *)&hkpMultiThreadedSimulation::MtBroadPhaseBorderListener::`vftable;
   v3->m_addedCrossIslandPairs.m_data = 0i64;
   v3->m_addedCrossIslandPairs.m_size = 0;
   v3->m_addedCrossIslandPairs.m_capacityAndFlags = 2147483648;
@@ -328,7 +328,7 @@ void __fastcall hkpMultiThreadedSimulation::~hkpMultiThreadedSimulation(hkpMulti
 
   v1 = this;
   v2 = &this->m_phantomCriticalSection.m_section;
-  v2[-10].OwningThread = &hkpMultiThreadedSimulation::`vftable';
+  v2[-10].OwningThread = &hkpMultiThreadedSimulation::`vftable;
   DeleteCriticalSection(v2);
   DeleteCriticalSection(&v1->m_toiQueueCriticalSection.m_section);
   DeleteCriticalSection(&v1->m_removeCrossIslandPairCriticalSection.m_section);
@@ -351,9 +351,9 @@ void __fastcall hkpMultiThreadedSimulation::~hkpMultiThreadedSimulation(hkpMulti
       16 * v4);
   v1->m_addedCrossIslandPairs.m_data = 0i64;
   v1->m_addedCrossIslandPairs.m_capacityAndFlags = 2147483648;
-  v1->m_broadPhaseBorderListener.vfptr = (hkpBroadPhaseListenerVtbl *)&hkpBroadPhaseListener::`vftable';
-  v1->m_phantomBroadPhaseListener.vfptr = (hkpBroadPhaseListenerVtbl *)&hkpBroadPhaseListener::`vftable';
-  v1->m_entityEntityBroadPhaseListener.vfptr = (hkpBroadPhaseListenerVtbl *)&hkpBroadPhaseListener::`vftable';
+  v1->m_broadPhaseBorderListener.vfptr = (hkpBroadPhaseListenerVtbl *)&hkpBroadPhaseListener::`vftable;
+  v1->m_phantomBroadPhaseListener.vfptr = (hkpBroadPhaseListenerVtbl *)&hkpBroadPhaseListener::`vftable;
+  v1->m_entityEntityBroadPhaseListener.vfptr = (hkpBroadPhaseListenerVtbl *)&hkpBroadPhaseListener::`vftable;
   hkpContinuousSimulation::~hkpContinuousSimulation((hkpContinuousSimulation *)&v1->vfptr);
 }
 

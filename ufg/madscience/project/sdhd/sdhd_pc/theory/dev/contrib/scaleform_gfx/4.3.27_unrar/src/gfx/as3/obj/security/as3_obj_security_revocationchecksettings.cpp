@@ -23,7 +23,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
       v5,
       v2,
       &Scaleform::GFx::AS3::fl_security::RevocationCheckSettingsCI);
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_security::RevocationCheckSettings::`vftable';
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_security::RevocationCheckSettings::`vftable;
   }
   else
   {
@@ -44,7 +44,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v9 )
   {
     Scaleform::GFx::AS3::Class::Class(v9, v3->pV);
-    v10->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl_security::RevocationCheckSettings::`vftable';
+    v10->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl_security::RevocationCheckSettings::`vftable;
     LODWORD(v10[1].vfptr) = 0;
     v10[1].pRCCRaw = 0i64;
     v10[1].RefCount = 0;

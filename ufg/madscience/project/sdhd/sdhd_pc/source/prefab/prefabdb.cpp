@@ -2,7 +2,7 @@
 // RVA: 0x512EE0
 void __fastcall UFG::PrefabDB::RefObject::~RefObject(UFG::PrefabDB::RefObject *this)
 {
-  this->vfptr = (UFG::PrefabDB::RefObjectVtbl *)&UFG::PrefabDB::RefObject::`vftable';
+  this->vfptr = (UFG::PrefabDB::RefObjectVtbl *)&UFG::PrefabDB::RefObject::`vftable;
 }
 
 // File Line: 120
@@ -26,13 +26,13 @@ void __fastcall UFG::PrefabDB::DataHandle::DataHandle(UFG::PrefabDB::DataHandle 
 {
   UFG::DataStreamer::Handle *v4; // ST48_8
 
-  this->vfptr = (UFG::PrefabDB::RefObjectVtbl *)&UFG::PrefabDB::RefObject::`vftable';
+  this->vfptr = (UFG::PrefabDB::RefObjectVtbl *)&UFG::PrefabDB::RefObject::`vftable;
   this->mRefCount = 0;
   this->mNode.mParent = 0i64;
   this->mNode.mChild[0] = 0i64;
   this->mNode.mChild[1] = 0i64;
   this->mNode.mUID = uid;
-  this->vfptr = (UFG::PrefabDB::RefObjectVtbl *)&UFG::PrefabDB::DataHandle::`vftable';
+  this->vfptr = (UFG::PrefabDB::RefObjectVtbl *)&UFG::PrefabDB::DataHandle::`vftable;
   this->mIsLoaded = 0;
   v4 = &this->mHandle;
   v4->mPrev = (UFG::qNode<UFG::DataStreamer::Handle,UFG::DataStreamer::Handle> *)&v4->mPrev;
@@ -86,7 +86,7 @@ void __fastcall UFG::PrefabDB::PrefabRequest::PrefabRequest(UFG::PrefabDB::Prefa
 
   v3 = prefabEntry;
   v4 = sym_uid;
-  this->vfptr = (UFG::PrefabDB::RefObjectVtbl *)&UFG::PrefabDB::RefObject::`vftable';
+  this->vfptr = (UFG::PrefabDB::RefObjectVtbl *)&UFG::PrefabDB::RefObject::`vftable;
   v5 = 0i64;
   this->mRefCount = 0;
   v6 = (UFG::qNodeRB<UFG::PrefabDB::PrefabRequest> *)&this->mNode;
@@ -94,7 +94,7 @@ void __fastcall UFG::PrefabDB::PrefabRequest::PrefabRequest(UFG::PrefabDB::Prefa
   v6->mNode.mChild[0] = 0i64;
   v6->mNode.mChild[1] = 0i64;
   v6->mNode.mUID = v4;
-  this->vfptr = (UFG::PrefabDB::RefObjectVtbl *)&UFG::PrefabDB::PrefabRequest::`vftable';
+  this->vfptr = (UFG::PrefabDB::RefObjectVtbl *)&UFG::PrefabDB::PrefabRequest::`vftable;
   v7 = (UFG::qArray<UFG::qReflectInventoryBase *,0> *)&this->mHandles;
   v7->p = 0i64;
   *(_QWORD *)&v7->size = 0i64;
@@ -186,7 +186,7 @@ void __fastcall UFG::PrefabDB::PrefabRequest::~PrefabRequest(UFG::PrefabDB::Pref
   UFG::PrefabDB::DataHandle **v5; // rcx
 
   v1 = this;
-  this->vfptr = (UFG::PrefabDB::RefObjectVtbl *)&UFG::PrefabDB::PrefabRequest::`vftable';
+  this->vfptr = (UFG::PrefabDB::RefObjectVtbl *)&UFG::PrefabDB::PrefabRequest::`vftable;
   UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
     (UFG::qBaseTreeVariableRB<unsigned __int64> *)&UFG::PrefabDB::sPrefabRequests,
     (UFG::qBaseNodeVariableRB<unsigned __int64> *)&this->mNode);
@@ -208,7 +208,7 @@ void __fastcall UFG::PrefabDB::PrefabRequest::~PrefabRequest(UFG::PrefabDB::Pref
     operator delete[](v5);
   v1->mHandles.p = 0i64;
   *(_QWORD *)&v1->mHandles.size = 0i64;
-  v1->vfptr = (UFG::PrefabDB::RefObjectVtbl *)&UFG::PrefabDB::RefObject::`vftable';
+  v1->vfptr = (UFG::PrefabDB::RefObjectVtbl *)&UFG::PrefabDB::RefObject::`vftable;
 }
 
 // File Line: 214

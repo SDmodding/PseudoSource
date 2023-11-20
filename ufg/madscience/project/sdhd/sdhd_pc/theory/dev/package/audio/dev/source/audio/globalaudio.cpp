@@ -61,7 +61,7 @@ void __fastcall UFG::AmbienceAudio::AmbienceAudio(UFG::AmbienceAudio *this)
 
   v1 = this;
   UFG::AudioEntity::AudioEntity((UFG::AudioEntity *)&this->vfptr);
-  v1->vfptr = (UFG::AudioEntityVtbl *)&UFG::AmbienceAudio::`vftable';
+  v1->vfptr = (UFG::AudioEntityVtbl *)&UFG::AmbienceAudio::`vftable;
   v1->m_ambienceController.m_pEvent = 0i64;
   v2 = UFG::qSymbol::create_from_string(&result, "Ambience");
   UFG::AudioEntity::Init((UFG::AudioEntity *)&v1->vfptr, v2, &UFG::qMatrix44::msIdentity);
@@ -86,7 +86,7 @@ void __fastcall UFG::HudAudio::HudAudio(UFG::HudAudio *this)
 
   v1 = this;
   UFG::AudioEntity::AudioEntity((UFG::AudioEntity *)&this->vfptr);
-  v1->vfptr = (UFG::AudioEntityVtbl *)&UFG::HudAudio::`vftable';
+  v1->vfptr = (UFG::AudioEntityVtbl *)&UFG::HudAudio::`vftable;
   v2 = UFG::qSymbol::create_from_string(&result, "HUD");
   UFG::AudioEntity::Init((UFG::AudioEntity *)&v1->vfptr, v2, &UFG::qMatrix44::msIdentity);
   UFG::AudioEntity::SetShouldFollowListener((UFG::AudioEntity *)&v1->vfptr, 1);
@@ -102,7 +102,7 @@ void __fastcall UFG::Music::Music(UFG::Music *this)
 
   v1 = this;
   UFG::AudioEntity::AudioEntity((UFG::AudioEntity *)&this->vfptr);
-  v1->vfptr = (UFG::AudioEntityVtbl *)&UFG::Music::`vftable';
+  v1->vfptr = (UFG::AudioEntityVtbl *)&UFG::Music::`vftable;
   v2 = UFG::qSymbol::create_from_string(&result, "Music");
   UFG::AudioEntity::Init((UFG::AudioEntity *)&v1->vfptr, v2, &UFG::qMatrix44::msIdentity);
   UFG::AudioEntity::SetShouldFollowListener((UFG::AudioEntity *)&v1->vfptr, 1);
@@ -210,8 +210,8 @@ void __fastcall UFG::Music::AudioEntityUpdate(UFG::Music *this, float delta_sec)
       && ((unsigned int (*)(void))UFG::Music::sm_instance->vfptr->CountNumPlayingEvents)()
       && UFG::Music::sm_instance )
     {
-      v3 = &`UFG::Music::AudioEntityUpdate'::`2'::AreEventsPlayingMusic::`vftable';
-      v16 = &`UFG::Music::AudioEntityUpdate'::`2'::AreEventsPlayingMusic::`vftable';
+      v3 = &`UFG::Music::AudioEntityUpdate::`2::AreEventsPlayingMusic::`vftable;
+      v16 = &`UFG::Music::AudioEntityUpdate::`2::AreEventsPlayingMusic::`vftable;
       v4 = 0;
       v17 = 0;
       v5 = (UFG::Music *)&UFG::Music::sm_instance->m_events.mNode.mNext[-1].mNext;

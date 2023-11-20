@@ -43,15 +43,15 @@ void __fastcall UFG::CompositeDrawableComponent::CompositeDrawableComponent(UFG:
   v1 = this;
   UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, 0);
   v2 = (Render::IDecalScenery *)&v1->vfptr;
-  v2->vfptr = (Render::IDecalSceneryVtbl *)&Render::IDecalScenery::`vftable';
+  v2->vfptr = (Render::IDecalSceneryVtbl *)&Render::IDecalScenery::`vftable;
   v5 = &v1->mAttachedDecals;
   v5->mNode.mPrev = &v5->mNode;
   v5->mNode.mNext = &v5->mNode;
   v3 = (UFG::qNode<UFG::CompositeDrawableComponent,UFG::CompositeDrawableComponent> *)&v1->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CompositeDrawableComponent::`vftable'{for `UFG::SimComponent'};
-  v2->vfptr = (Render::IDecalSceneryVtbl *)&UFG::CompositeDrawableComponent::`vftable'{for `Render::IDecalScenery'};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CompositeDrawableComponent::`vftable{for `UFG::SimComponent};
+  v2->vfptr = (Render::IDecalSceneryVtbl *)&UFG::CompositeDrawableComponent::`vftable{for `Render::IDecalScenery};
   v1->mCompositeLook = 0i64;
   Illusion::MaterialModifierParams<10>::MaterialModifierParams<10>(&v1->mMaterialModifier);
   v1->mIsHidden = 0;
@@ -105,15 +105,15 @@ void __fastcall UFG::CompositeDrawableComponent::CompositeDrawableComponent(UFG:
   v3 = this;
   UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, 0);
   v4 = (Render::IDecalScenery *)&v3->vfptr;
-  v4->vfptr = (Render::IDecalSceneryVtbl *)&Render::IDecalScenery::`vftable';
+  v4->vfptr = (Render::IDecalSceneryVtbl *)&Render::IDecalScenery::`vftable;
   v14 = &v3->mAttachedDecals;
   v14->mNode.mPrev = &v14->mNode;
   v14->mNode.mNext = &v14->mNode;
   v5 = (UFG::qNode<UFG::CompositeDrawableComponent,UFG::CompositeDrawableComponent> *)&v3->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CompositeDrawableComponent::`vftable'{for `UFG::SimComponent'};
-  v4->vfptr = (Render::IDecalSceneryVtbl *)&UFG::CompositeDrawableComponent::`vftable'{for `Render::IDecalScenery'};
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CompositeDrawableComponent::`vftable{for `UFG::SimComponent};
+  v4->vfptr = (Render::IDecalSceneryVtbl *)&UFG::CompositeDrawableComponent::`vftable{for `Render::IDecalScenery};
   v3->mCompositeLook = 0i64;
   Illusion::MaterialModifierParams<10>::MaterialModifierParams<10>(&v3->mMaterialModifier);
   v3->mIsHidden = 0;
@@ -145,12 +145,12 @@ void __fastcall UFG::CompositeDrawableComponent::CompositeDrawableComponent(UFG:
   v3->mModelType[0] = v7;
   v3->mNumModelTypeLODs = v7 != 0i64;
   v8 = v2->mNode.mUID;
-  inventory = `UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result )
+  inventory = `UFG::qGetResourceInventory<UFG::RigResource>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::RigResource>::`2::result )
   {
     v10 = UFG::qResourceWarehouse::Instance();
     inventory = UFG::qResourceWarehouse::GetInventory(v10, 0x39BC0A7Eu);
-    `UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result = inventory;
+    `UFG::qGetResourceInventory<UFG::RigResource>::`2::result = inventory;
   }
   UFG::qResourceHandle::Init(
     (UFG::qResourceHandle *)&v3->mRigHandle.mPrev,
@@ -203,9 +203,9 @@ void __fastcall UFG::CompositeDrawableComponent::~CompositeDrawableComponent(UFG
   UFG::qNode<Render::Decal,Render::Decal> *v18; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CompositeDrawableComponent::`vftable'{for `UFG::SimComponent'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CompositeDrawableComponent::`vftable{for `UFG::SimComponent};
   v2 = (Render::IDecalScenery *)&this->vfptr;
-  this->vfptr = (Render::IDecalSceneryVtbl *)&UFG::CompositeDrawableComponent::`vftable'{for `Render::IDecalScenery'};
+  this->vfptr = (Render::IDecalSceneryVtbl *)&UFG::CompositeDrawableComponent::`vftable{for `Render::IDecalScenery};
   if ( this == UFG::CompositeDrawableComponent::s_CompositeDrawableComponentpCurrentIterator )
     UFG::CompositeDrawableComponent::s_CompositeDrawableComponentpCurrentIterator = (UFG::CompositeDrawableComponent *)&this->mPrev[-6].mNext;
   v3 = (UFG::qNode<UFG::CompositeDrawableComponent,UFG::CompositeDrawableComponent> *)&this->mPrev;
@@ -236,16 +236,16 @@ void __fastcall UFG::CompositeDrawableComponent::~CompositeDrawableComponent(UFG
     operator delete[](v8);
   v1->mActiveMultiMorphTargets.p = 0i64;
   *(_QWORD *)&v1->mActiveMultiMorphTargets.size = 0i64;
-  v9 = `UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result )
+  v9 = `UFG::qGetResourceInventory<UFG::RigResource>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::RigResource>::`2::result )
   {
     v10 = UFG::qResourceWarehouse::Instance();
     v9 = UFG::qResourceWarehouse::GetInventory(v10, 0x39BC0A7Eu);
-    `UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result = v9;
+    `UFG::qGetResourceInventory<UFG::RigResource>::`2::result = v9;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mRigHandle.mPrev, v9);
   UFG::qResourceHandle::~qResourceHandle((UFG::qResourceHandle *)&v1->mRigHandle.mPrev);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->mMaterialModifier.mOverrides,
     0x68ui64,
     10,
@@ -1307,22 +1307,22 @@ ModelType *__fastcall UFG::CompositeDrawableComponent::CreateModelType(UFG::Comp
     {
       v9 = v3->mSkinGuids[i];
       UFG::qResourceHandle::qResourceHandle(&v32);
-      v10 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+      v10 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+      if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
       {
         v11 = UFG::qResourceWarehouse::Instance();
         v10 = UFG::qResourceWarehouse::GetInventory(v11, 0xA2ADCD77);
-        `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v10;
+        `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v10;
       }
       UFG::qResourceHandle::Init(&v32, 0xA2ADCD77, v9, v10);
       v33 = 0i64;
       ModelType::AddSkinModelBinding(v7, (Illusion::ModelProxy *)&v32, &UFG::qMatrix44::msIdentity, 0, 0);
-      v12 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+      v12 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+      if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
       {
         v13 = UFG::qResourceWarehouse::Instance();
         v12 = UFG::qResourceWarehouse::GetInventory(v13, 0xA2ADCD77);
-        `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v12;
+        `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v12;
       }
       UFG::qResourceHandle::Close(&v32, v12);
       UFG::qResourceHandle::~qResourceHandle(&v32);
@@ -1353,12 +1353,12 @@ ModelType *__fastcall UFG::CompositeDrawableComponent::CreateModelType(UFG::Comp
         v21 = v3->mSkinMorphGuids[v15];
         v22 = *(unsigned int *)(v20 + 72);
         v23 = (UFG::qResourceHandle *)(v20 + 32 * v22);
-        v24 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-        if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+        v24 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+        if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
         {
           v25 = UFG::qResourceWarehouse::Instance();
           v24 = UFG::qResourceWarehouse::GetInventory(v25, 0xA2ADCD77);
-          `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v24;
+          `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v24;
         }
         UFG::qResourceHandle::Init(v23, 0xA2ADCD77, v21, v24);
         *(_DWORD *)(*(_QWORD *)(j + 80) + 4 * v22 + 64) = 0;
@@ -1375,12 +1375,12 @@ ModelType *__fastcall UFG::CompositeDrawableComponent::CreateModelType(UFG::Comp
       {
         v27 = v3->mModelMap[v26].modelGuid;
         UFG::qResourceHandle::qResourceHandle(&v32);
-        v28 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-        if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+        v28 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+        if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
         {
           v29 = UFG::qResourceWarehouse::Instance();
           v28 = UFG::qResourceWarehouse::GetInventory(v29, 0xA2ADCD77);
-          `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v28;
+          `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v28;
         }
         UFG::qResourceHandle::Init(&v32, 0xA2ADCD77, v27, v28);
         v33 = 0i64;
@@ -1390,12 +1390,12 @@ ModelType *__fastcall UFG::CompositeDrawableComponent::CreateModelType(UFG::Comp
           v3->mModelMap[v26].boneIndex,
           &UFG::qMatrix44::msIdentity,
           0);
-        v30 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-        if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+        v30 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+        if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
         {
           v31 = UFG::qResourceWarehouse::Instance();
           v30 = UFG::qResourceWarehouse::GetInventory(v31, 0xA2ADCD77);
-          `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v30;
+          `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v30;
         }
         UFG::qResourceHandle::Close(&v32, v30);
         UFG::qResourceHandle::~qResourceHandle(&v32);

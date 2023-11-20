@@ -1782,7 +1782,7 @@ void __fastcall hkGeometryUtility::calcObb(hkStridedVertices *stridedVertsIn, hk
   v4 = halfExtents;
   v5 = mode;
   v6 = transform;
-  geometryOut.vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable';
+  geometryOut.vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable;
   *(_DWORD *)&geometryOut.m_memSizeAndFlags = 0x1FFFF;
   geometryOut.m_vertices.m_data = (hkVector4f *)0x8000000000000000i64;
   *(_QWORD *)&geometryOut.m_vertices.m_size = 0i64;

@@ -31,7 +31,7 @@ hkClass *__fastcall hkpVehicleDefaultSimulation::staticClass()
 void __fastcall finishLoadedObjecthkpVehicleDefaultSimulation(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpVehicleDefaultSimulation::`vftable';
+    *(_QWORD *)p = &hkpVehicleDefaultSimulation::`vftable;
 }
 
 // File Line: 73
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkpVehicleDefaultSimulation(void *p)
 // RVA: 0xE25600
 void **__fastcall getVtablehkpVehicleDefaultSimulation()
 {
-  return &hkpVehicleDefaultSimulation::`vftable';
+  return &hkpVehicleDefaultSimulation::`vftable;
 }
 
 // File Line: 99

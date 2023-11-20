@@ -29,8 +29,8 @@ void __fastcall Scaleform::MutexImpl::MutexImpl(Scaleform::MutexImpl *this, Scal
 
   v3 = this;
   v5 = &this->AreadyLockedAcquire;
-  v5->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable';
-  *(_OWORD *)&v5->vfptr = (unsigned __int64)&Scaleform::Mutex_AreadyLockedAcquireInterface::`vftable';
+  v5->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable;
+  *(_OWORD *)&v5->vfptr = (unsigned __int64)&Scaleform::Mutex_AreadyLockedAcquireInterface::`vftable;
   this->AreadyLockedAcquire.pMutex = pmutex;
   this->Recursive = recursive;
   this->LockCount = 0;
@@ -83,9 +83,9 @@ void __fastcall Scaleform::Mutex::Mutex(Scaleform::Mutex *this, bool recursive, 
   v3 = recursive;
   v4 = this;
   Scaleform::Waitable::Waitable((Scaleform::Waitable *)&this->vfptr, multiWait);
-  v4->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable';
-  v4->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Mutex::`vftable'{for `Scaleform::Waitable'};
-  v4->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Mutex::`vftable'{for `Scaleform::AcquireInterface'};
+  v4->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable;
+  v4->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Mutex::`vftable{for `Scaleform::Waitable};
+  v4->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Mutex::`vftable{for `Scaleform::AcquireInterface};
   v5 = (Scaleform::MutexImpl *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
                                  Scaleform::Memory::pGlobalHeap,
                                  32i64);
@@ -102,16 +102,16 @@ void __fastcall Scaleform::Mutex::~Mutex(Scaleform::Mutex *this)
   Scaleform::MutexImpl *v2; // rdi
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Mutex::`vftable'{for `Scaleform::Waitable'};
-  this->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Mutex::`vftable'{for `Scaleform::AcquireInterface'};
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Mutex::`vftable{for `Scaleform::Waitable};
+  this->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Mutex::`vftable{for `Scaleform::AcquireInterface};
   v2 = this->pImpl;
   if ( v2 )
   {
     CloseHandle(v2->hMutexOrSemaphore);
-    v2->AreadyLockedAcquire.vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable';
+    v2->AreadyLockedAcquire.vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable;
     Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v2);
   }
-  v1->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable';
+  v1->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable;
   Scaleform::Waitable::~Waitable((Scaleform::Waitable *)&v1->vfptr);
 }
 
@@ -555,9 +555,9 @@ void __fastcall Scaleform::Thread::Thread(Scaleform::Thread *this, unsigned __in
   v4 = stackSize;
   v5 = this;
   Scaleform::Waitable::Waitable((Scaleform::Waitable *)&this->vfptr, 1);
-  v5->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable';
-  v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Thread::`vftable'{for `Scaleform::Waitable'};
-  v5->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Thread::`vftable'{for `Scaleform::AcquireInterface'};
+  v5->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable;
+  v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Thread::`vftable{for `Scaleform::Waitable};
+  v5->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Thread::`vftable{for `Scaleform::AcquireInterface};
   v6 = v5->ThreadFlags.Value;
   v7 = v5->ThreadFlags.Value;
   v8 = v5->SuspendCount.Value;
@@ -592,9 +592,9 @@ void __fastcall Scaleform::Thread::Thread(Scaleform::Thread *this, int (__fastca
   v8 = threadFunction;
   v9 = this;
   Scaleform::Waitable::Waitable((Scaleform::Waitable *)&this->vfptr, 1);
-  v9->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable';
-  v9->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Thread::`vftable'{for `Scaleform::Waitable'};
-  v9->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Thread::`vftable'{for `Scaleform::AcquireInterface'};
+  v9->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable;
+  v9->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Thread::`vftable{for `Scaleform::Waitable};
+  v9->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Thread::`vftable{for `Scaleform::AcquireInterface};
   v10 = v9->ThreadFlags.Value;
   v11 = v9->ThreadFlags.Value;
   v12 = v9->SuspendCount.Value;
@@ -627,9 +627,9 @@ void __fastcall Scaleform::Thread::Thread(Scaleform::Thread *this, Scaleform::Th
   v2 = params;
   v3 = this;
   Scaleform::Waitable::Waitable((Scaleform::Waitable *)&this->vfptr, 1);
-  v3->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable';
-  v3->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Thread::`vftable'{for `Scaleform::Waitable'};
-  v3->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Thread::`vftable'{for `Scaleform::AcquireInterface'};
+  v3->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable;
+  v3->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Thread::`vftable{for `Scaleform::Waitable};
+  v3->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Thread::`vftable{for `Scaleform::AcquireInterface};
   v4 = v3->ThreadFlags.Value;
   v5 = v3->ThreadFlags.Value;
   v6 = v3->SuspendCount.Value;
@@ -656,8 +656,8 @@ void __fastcall Scaleform::Thread::~Thread(Scaleform::Thread *this)
   void *v2; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Thread::`vftable'{for `Scaleform::Waitable'};
-  this->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Thread::`vftable'{for `Scaleform::AcquireInterface'};
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Thread::`vftable{for `Scaleform::Waitable};
+  this->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Thread::`vftable{for `Scaleform::AcquireInterface};
   v2 = this->ThreadHandle;
   if ( v2 )
   {
@@ -665,7 +665,7 @@ void __fastcall Scaleform::Thread::~Thread(Scaleform::Thread *this)
     v1->ThreadHandle = 0i64;
   }
   v1->ThreadHandle = 0i64;
-  v1->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable';
+  v1->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable;
   Scaleform::Waitable::~Waitable((Scaleform::Waitable *)&v1->vfptr);
 }
 

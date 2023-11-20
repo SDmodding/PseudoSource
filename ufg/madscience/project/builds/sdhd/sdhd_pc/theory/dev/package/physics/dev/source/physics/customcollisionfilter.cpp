@@ -11,13 +11,13 @@ void __fastcall UFG::CustomCollisionFilter::CustomCollisionFilter(UFG::CustomCol
 
   v1 = this;
   hkpGroupFilter::hkpGroupFilter((hkpGroupFilter *)&this->vfptr);
-  v1->vfptr = (hkpEntityListenerVtbl *)&hkpEntityListener::`vftable';
-  v1->vfptr = (hkBaseObjectVtbl *)&UFG::CustomCollisionFilter::`vftable'{for `hkReferencedObject'};
-  v1->vfptr = (hkpCollidableCollidableFilterVtbl *)&UFG::CustomCollisionFilter::`vftable'{for `hkpCollidableCollidableFilter'};
-  v1->vfptr = (hkpShapeCollectionFilterVtbl *)&UFG::CustomCollisionFilter::`vftable'{for `hkpShapeCollectionFilter'};
-  v1->vfptr = (hkpRayShapeCollectionFilterVtbl *)&UFG::CustomCollisionFilter::`vftable'{for `hkpRayShapeCollectionFilter'};
-  v1->vfptr = (hkpRayCollidableFilterVtbl *)&UFG::CustomCollisionFilter::`vftable'{for `hkpRayCollidableFilter'};
-  v1->vfptr = (hkpEntityListenerVtbl *)&UFG::CustomCollisionFilter::`vftable';
+  v1->vfptr = (hkpEntityListenerVtbl *)&hkpEntityListener::`vftable;
+  v1->vfptr = (hkBaseObjectVtbl *)&UFG::CustomCollisionFilter::`vftable{for `hkReferencedObject};
+  v1->vfptr = (hkpCollidableCollidableFilterVtbl *)&UFG::CustomCollisionFilter::`vftable{for `hkpCollidableCollidableFilter};
+  v1->vfptr = (hkpShapeCollectionFilterVtbl *)&UFG::CustomCollisionFilter::`vftable{for `hkpShapeCollectionFilter};
+  v1->vfptr = (hkpRayShapeCollectionFilterVtbl *)&UFG::CustomCollisionFilter::`vftable{for `hkpRayShapeCollectionFilter};
+  v1->vfptr = (hkpRayCollidableFilterVtbl *)&UFG::CustomCollisionFilter::`vftable{for `hkpRayCollidableFilter};
+  v1->vfptr = (hkpEntityListenerVtbl *)&UFG::CustomCollisionFilter::`vftable;
   v6 = &v1->mNonCollidable;
   v6->mNode.mPrev = &v6->mNode;
   v6->mNode.mNext = &v6->mNode;
@@ -57,12 +57,12 @@ void __fastcall UFG::CustomCollisionFilter::~CustomCollisionFilter(UFG::CustomCo
   UFG::qNode<UFG::FilterNode,UFG::FilterNode> *v10; // rax
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&UFG::CustomCollisionFilter::`vftable'{for `hkReferencedObject'};
-  this->vfptr = (hkpCollidableCollidableFilterVtbl *)&UFG::CustomCollisionFilter::`vftable'{for `hkpCollidableCollidableFilter'};
-  this->vfptr = (hkpShapeCollectionFilterVtbl *)&UFG::CustomCollisionFilter::`vftable'{for `hkpShapeCollectionFilter'};
-  this->vfptr = (hkpRayShapeCollectionFilterVtbl *)&UFG::CustomCollisionFilter::`vftable'{for `hkpRayShapeCollectionFilter'};
-  this->vfptr = (hkpRayCollidableFilterVtbl *)&UFG::CustomCollisionFilter::`vftable'{for `hkpRayCollidableFilter'};
-  this->vfptr = (hkpEntityListenerVtbl *)&UFG::CustomCollisionFilter::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&UFG::CustomCollisionFilter::`vftable{for `hkReferencedObject};
+  this->vfptr = (hkpCollidableCollidableFilterVtbl *)&UFG::CustomCollisionFilter::`vftable{for `hkpCollidableCollidableFilter};
+  this->vfptr = (hkpShapeCollectionFilterVtbl *)&UFG::CustomCollisionFilter::`vftable{for `hkpShapeCollectionFilter};
+  this->vfptr = (hkpRayShapeCollectionFilterVtbl *)&UFG::CustomCollisionFilter::`vftable{for `hkpRayShapeCollectionFilter};
+  this->vfptr = (hkpRayCollidableFilterVtbl *)&UFG::CustomCollisionFilter::`vftable{for `hkpRayCollidableFilter};
+  this->vfptr = (hkpEntityListenerVtbl *)&UFG::CustomCollisionFilter::`vftable;
   v2 = this->mAssignedSystemGroups;
   if ( v2 )
   {
@@ -94,7 +94,7 @@ void __fastcall UFG::CustomCollisionFilter::~CustomCollisionFilter(UFG::CustomCo
   v10->mPrev = v9;
   v3->mNode.mPrev = &v3->mNode;
   v1->mNonCollidable.mNode.mNext = &v1->mNonCollidable.mNode;
-  v1->vfptr = (hkpEntityListenerVtbl *)&hkpEntityListener::`vftable';
+  v1->vfptr = (hkpEntityListenerVtbl *)&hkpEntityListener::`vftable;
   hkpGroupFilter::~hkpGroupFilter((hkpGroupFilter *)&v1->vfptr);
 }
 

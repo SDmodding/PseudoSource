@@ -66,7 +66,7 @@ hkClass *__fastcall hkpVehicleDefaultBrake::staticClass()
 void __fastcall finishLoadedObjecthkpVehicleDefaultBrake(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpVehicleDefaultBrake::`vftable';
+    *(_QWORD *)p = &hkpVehicleDefaultBrake::`vftable;
 }
 
 // File Line: 119
@@ -80,7 +80,7 @@ void __fastcall cleanupLoadedObjecthkpVehicleDefaultBrake(void *p)
 // RVA: 0xE254C0
 void **__fastcall getVtablehkpVehicleDefaultBrake()
 {
-  return &hkpVehicleDefaultBrake::`vftable';
+  return &hkpVehicleDefaultBrake::`vftable;
 }
 
 // File Line: 145

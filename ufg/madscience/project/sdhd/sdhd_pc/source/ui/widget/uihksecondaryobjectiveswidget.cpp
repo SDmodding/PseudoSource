@@ -188,7 +188,7 @@ void __fastcall UFG::UIHKSecondaryObjectivesWidget::Flash_ShowObjective(UFG::UIH
       {
         UFG::qString::Set(&v19, v7);
       }
-      `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       v9 = v19.mData;
       if ( (v13 >> 6) & 1 )
       {
@@ -205,7 +205,7 @@ void __fastcall UFG::UIHKSecondaryObjectivesWidget::Flash_ShowObjective(UFG::UIH
       v17 = 2;
       LOBYTE(v18) = isCop;
       Scaleform::GFx::Movie::Invoke(v8, "SecondaryObjective_Show", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-      `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+      `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
       UFG::qString::~qString(&v19);
     }
   }
@@ -225,7 +225,7 @@ void __fastcall UFG::UIHKSecondaryObjectivesWidget::Flash_HideObjective(UFG::UIH
     v4 = pScreen->mRenderable->m_movie.pObject;
     if ( v4 )
     {
-      `eh vector constructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       if ( ((unsigned int)pargs.Type >> 6) & 1 )
       {
         (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
@@ -237,7 +237,7 @@ void __fastcall UFG::UIHKSecondaryObjectivesWidget::Flash_HideObjective(UFG::UIH
       pargs.Type = 2;
       pargs.mValue.BValue = v3;
       Scaleform::GFx::Movie::Invoke(v4, "SecondaryObjective_Hide", 0i64, &pargs, 1u);
-      `eh vector destructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+      `eh vector destructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     }
   }
 }

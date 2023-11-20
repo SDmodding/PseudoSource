@@ -98,7 +98,7 @@ void __fastcall hkaiPhysics2012ShapeVolume::hkaiPhysics2012ShapeVolume(hkaiPhysi
   v6 = dispatcher;
   v7 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiPhysics2012ShapeVolume::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiPhysics2012ShapeVolume::`vftable;
   if ( dispatcher )
     hkReferencedObject::addReference((hkReferencedObject *)&dispatcher->vfptr);
   v7->m_dispatcher.m_pntr = v6;
@@ -111,7 +111,7 @@ void __fastcall hkaiPhysics2012ShapeVolume::hkaiPhysics2012ShapeVolume(hkaiPhysi
   v7->m_shapeTransform.m_rotation.m_col2 = v5->m_rotation.m_col2;
   v7->m_shapeTransform.m_translation = v5->m_translation;
   *(_DWORD *)&v7->m_geometry.m_memSizeAndFlags = 0x1FFFF;
-  v7->m_geometry.vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable';
+  v7->m_geometry.vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable;
   v7->m_geometry.m_vertices.m_data = 0i64;
   v7->m_geometry.m_vertices.m_size = 0;
   v7->m_geometry.m_vertices.m_capacityAndFlags = 2147483648;
@@ -124,7 +124,7 @@ void __fastcall hkaiPhysics2012ShapeVolume::hkaiPhysics2012ShapeVolume(hkaiPhysi
     hkOstream::operator<<(
       (hkOstream *)&v12.vfptr,
       "Trying to use a shape in hkaiPhysics2012ShapeVolume that contains triangles. This might not give the expected resu"
-      "lts, as the inside of a triangle or triangle mesh isn't well-defined.");
+      "lts, as the inside of a triangle or triangle mesh isnt well-defined.");
     hkError::messageWarning(415712427, &buf, "Collide\\hkaiPhysics2012ShapeVolume.cpp", 130);
     hkOstream::~hkOstream((hkOstream *)&v12.vfptr);
   }
@@ -161,7 +161,7 @@ void __fastcall hkaiPhysics2012ShapeVolume::hkaiPhysics2012ShapeVolume(hkaiPhysi
   hkGeometry *v2; // rcx
 
   v2 = &this->m_geometry;
-  v2[-2].vfptr = (hkBaseObjectVtbl *)&hkaiPhysics2012ShapeVolume::`vftable';
+  v2[-2].vfptr = (hkBaseObjectVtbl *)&hkaiPhysics2012ShapeVolume::`vftable;
   hkGeometry::hkGeometry(v2, f);
 }
 
@@ -176,7 +176,7 @@ void __fastcall hkaiPhysics2012ShapeVolume::~hkaiPhysics2012ShapeVolume(hkaiPhys
 
   v1 = this;
   v2 = &this->m_geometry;
-  v2[-2].vfptr = (hkBaseObjectVtbl *)&hkaiPhysics2012ShapeVolume::`vftable';
+  v2[-2].vfptr = (hkBaseObjectVtbl *)&hkaiPhysics2012ShapeVolume::`vftable;
   hkGeometry::~hkGeometry(v2);
   v3 = (hkReferencedObject *)&v1->m_shape.m_pntr->vfptr;
   if ( v3 )
@@ -186,7 +186,7 @@ void __fastcall hkaiPhysics2012ShapeVolume::~hkaiPhysics2012ShapeVolume(hkaiPhys
   if ( v4 )
     hkReferencedObject::removeReference(v4);
   v1->m_dispatcher.m_pntr = 0i64;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 160
@@ -264,14 +264,14 @@ void __fastcall hkaiPhysics2012ShapeVolume::calcPointsInside(hkaiPhysics2012Shap
   hkpCollisionFilter::hkpCollisionFilter(&v31);
   v14 = v8->m_shape.m_pntr;
   v41 = FLOAT_0_001;
-  v31.vfptr = (hkBaseObjectVtbl *)&hkpNullCollisionFilter::`vftable'{for `hkReferencedObject'};
+  v31.vfptr = (hkBaseObjectVtbl *)&hkpNullCollisionFilter::`vftable{for `hkReferencedObject};
   v40 = 0;
-  v31.vfptr = (hkpCollidableCollidableFilterVtbl *)&hkpNullCollisionFilter::`vftable'{for `hkpCollidableCollidableFilter'};
+  v31.vfptr = (hkpCollidableCollidableFilterVtbl *)&hkpNullCollisionFilter::`vftable{for `hkpCollidableCollidableFilter};
   v15 = 1;
-  v31.vfptr = (hkpShapeCollectionFilterVtbl *)&hkpNullCollisionFilter::`vftable'{for `hkpShapeCollectionFilter'};
+  v31.vfptr = (hkpShapeCollectionFilterVtbl *)&hkpNullCollisionFilter::`vftable{for `hkpShapeCollectionFilter};
   v31.m_type.m_storage = 1;
-  v31.vfptr = (hkpRayShapeCollectionFilterVtbl *)&hkpNullCollisionFilter::`vftable'{for `hkpRayShapeCollectionFilter'};
-  v31.vfptr = (hkpRayCollidableFilterVtbl *)&hkpNullCollisionFilter::`vftable'{for `hkpRayCollidableFilter'};
+  v31.vfptr = (hkpRayShapeCollectionFilterVtbl *)&hkpNullCollisionFilter::`vftable{for `hkpRayShapeCollectionFilter};
+  v31.vfptr = (hkpRayCollidableFilterVtbl *)&hkpNullCollisionFilter::`vftable{for `hkpRayCollidableFilter};
   v42 = &v31;
   v39 = v8->m_dispatcher.m_pntr;
   ((void (__fastcall *)(hkpShape *, hkTransformf *, __int64, __m128 *))v14->vfptr[2].__vecDelDtor)(
@@ -310,10 +310,10 @@ void __fastcall hkaiPhysics2012ShapeVolume::calcPointsInside(hkaiPhysics2012Shap
             &v23,
             &v39,
             &v21,
-            &hkpFlagCdBodyPairCollector::`vftable');
+            &hkpFlagCdBodyPairCollector::`vftable);
           if ( v22 )
             v5->m_storage.m_words.m_data[v4 >> 5] |= v15;
-          v21 = &hkpCdBodyPairCollector::`vftable';
+          v21 = &hkpCdBodyPairCollector::`vftable;
         }
         v15 = __ROL4__(v15, 1);
         ++v4;

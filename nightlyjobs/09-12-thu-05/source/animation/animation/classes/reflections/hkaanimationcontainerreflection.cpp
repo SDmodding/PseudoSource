@@ -31,7 +31,7 @@ hkClass *__fastcall hkaAnimationContainer::staticClass()
 void __fastcall finishLoadedObjecthkaAnimationContainer(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaAnimationContainer::`vftable';
+    *(_QWORD *)p = &hkaAnimationContainer::`vftable;
 }
 
 // File Line: 79
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkaAnimationContainer(void *p)
 // RVA: 0xB1CEA0
 void **__fastcall getVtablehkaAnimationContainer()
 {
-  return &hkaAnimationContainer::`vftable';
+  return &hkaAnimationContainer::`vftable;
 }
 
 // File Line: 105

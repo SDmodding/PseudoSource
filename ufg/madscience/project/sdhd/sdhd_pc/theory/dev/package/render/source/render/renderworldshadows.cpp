@@ -222,12 +222,12 @@ void __fastcall FastShadowDraw_Dynamic(Render::ViewSettings *view_settings, int 
   if ( !simpleInit )
   {
     v8 = UFG::qStringHashUpper32("DR_EmitDepth", 0xFFFFFFFF);
-    v9 = `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result )
+    v9 = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::Shader>::`2::result )
     {
       v10 = UFG::qResourceWarehouse::Instance();
       v9 = UFG::qResourceWarehouse::GetInventory(v10, 0x8B5561A1);
-      `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result = v9;
+      `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = v9;
     }
     UFG::qResourceHandle::Init((UFG::qResourceHandle *)&simpleHandle.mPrev, 0x8B5561A1, v8, v9);
     simpleInit = 1;

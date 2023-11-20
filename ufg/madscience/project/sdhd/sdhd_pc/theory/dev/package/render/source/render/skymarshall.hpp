@@ -19,7 +19,7 @@ void __fastcall Render::SkyMarshall::WispIndexBuffer::WispIndexBuffer(Render::Sk
   Render::SkyMarshall::WispIndexBuffer *v1; // rbx
 
   v1 = this;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     this->mBufferHandle,
     0x20ui64,
     2,

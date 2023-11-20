@@ -163,7 +163,7 @@ __int64 dynamic_initializer_for__UFG::TidoGame::sm_tunnelEffectRegions__()
 // RVA: 0x1554C60
 __int64 dynamic_initializer_for__UFG::TidoGame::sm_currentSurfaceBankIds__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     UFG::TidoGame::sm_currentSurfaceBankIds,
     4ui64,
     5,
@@ -372,7 +372,7 @@ void __fastcall UFG::TidoGame::Init(UFG::TidoGame *this)
   if ( v19 )
   {
     UFG::AudioEntity::AudioEntity((UFG::AudioEntity *)v19);
-    v20->vfptr = (UFG::AudioEntityVtbl *)&UFG::NISAudio::`vftable';
+    v20->vfptr = (UFG::AudioEntityVtbl *)&UFG::NISAudio::`vftable;
     v20->m_controller.m_pEvent = 0i64;
     v21 = UFG::qSymbol::create_from_string(result, "NIS");
     UFG::AudioEntity::Init((UFG::AudioEntity *)&v20->vfptr, v21, &UFG::qMatrix44::msIdentity);
@@ -408,7 +408,7 @@ void __fastcall UFG::TidoGame::Init(UFG::TidoGame *this)
     v25 = (UFG::WorldAudioEmitterManager *)UFG::qMalloc(8ui64, "WorldAudioEmitter", 0i64);
     *(_QWORD *)&result[0].mUID = v25;
     if ( v25 )
-      v25->vfptr = (UFG::WorldAudioEmitterManagerVtbl *)&UFG::WorldAudioEmitterManager::`vftable';
+      v25->vfptr = (UFG::WorldAudioEmitterManagerVtbl *)&UFG::WorldAudioEmitterManager::`vftable;
     else
       v25 = 0i64;
     UFG::WorldAudioEmitterManager::mInstance = v25;
@@ -569,7 +569,7 @@ void __fastcall UFG::TidoGame::CreateAudioEntityRegionData(UFG::TidoGame *this, 
   if ( v3 )
   {
     UFG::AudioEntityRegionData::AudioEntityRegionData((UFG::AudioEntityRegionData *)v3, v2);
-    v4->mNext = (UFG::allocator::free_link *)&UFG::AudioEntityRegionDataGame::`vftable';
+    v4->mNext = (UFG::allocator::free_link *)&UFG::AudioEntityRegionDataGame::`vftable;
   }
 }
 
@@ -1310,12 +1310,12 @@ void __fastcall UFG::TidoGame::LoadingGameStart(UFG::TidoGame *this, UFG::qWiseS
       v10 = v4;
       if ( v4 )
       {
-        v4->mNext = (UFG::allocator::free_link *)&UFG::WwiseEventCallbackData::`vftable';
+        v4->mNext = (UFG::allocator::free_link *)&UFG::WwiseEventCallbackData::`vftable;
         v4[1].mNext = 0i64;
         LOBYTE(v4[2].mNext) = 0;
         v6 = (signed __int64)&v4[3];
-        *(_QWORD *)v6 = &UFG::WwiseCallbackOperation::`vftable';
-        *(_QWORD *)(v6 + 16) = &UFG::AudioEventInfo::`vftable';
+        *(_QWORD *)v6 = &UFG::WwiseCallbackOperation::`vftable;
+        *(_QWORD *)(v6 + 16) = &UFG::AudioEventInfo::`vftable;
         *(_DWORD *)(v6 + 24) = 0;
         *(_QWORD *)(v6 + 32) = 0i64;
         *(_DWORD *)(v6 + 40) = 0;
@@ -1865,7 +1865,7 @@ _BOOL8 __fastcall UFG::TidoGame::GetVoiceId(UFG::SimObject *simObject, UFG::Voic
     if ( result.mUID == -1 )
     {
       v6 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v3->m_Name);
-      UFG::qPrintf("Could not assign voice to: '%s'\n ", v6);
+      UFG::qPrintf("Could not assign voice to: %s\n ", v6);
       v4 = result.mUID == -1;
     }
   }

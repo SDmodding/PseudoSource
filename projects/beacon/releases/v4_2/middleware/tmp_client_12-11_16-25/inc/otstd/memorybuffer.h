@@ -2,27 +2,27 @@
 // RVA: 0xEE8158
 OSuite::ZDateTime *__fastcall OSuite::ZMemoryBufferChain::GetModificationDate(OSuite::ZMemoryBufferChain *this)
 {
-  if ( !(`OSuite::ZMemoryBufferChain::GetModificationDate'::`2'::`local static guard' & 1) )
+  if ( !(`OSuite::ZMemoryBufferChain::GetModificationDate::`2::`local static guard & 1) )
   {
-    `OSuite::ZMemoryBufferChain::GetModificationDate'::`2'::`local static guard' |= 1u;
-    OSuite::ZDateTime::ZDateTime(&`OSuite::ZMemoryBufferChain::GetModificationDate'::`2'::foo);
-    atexit(`OSuite::ZMemoryBufferChain::GetModificationDate'::`2'::`dynamic atexit destructor for 'foo'');
+    `OSuite::ZMemoryBufferChain::GetModificationDate::`2::`local static guard |= 1u;
+    OSuite::ZDateTime::ZDateTime(&`OSuite::ZMemoryBufferChain::GetModificationDate::`2::foo);
+    atexit(`OSuite::ZMemoryBufferChain::GetModificationDate::`2::`dynamic atexit destructor for foo);
   }
-  return &`OSuite::ZMemoryBufferChain::GetModificationDate'::`2'::foo;
+  return &`OSuite::ZMemoryBufferChain::GetModificationDate::`2::foo;
 }
 
 // File Line: 238
 // RVA: 0xEE8194
 OSuite::ZString *__fastcall OSuite::ZMemoryBufferChain::GetName(OSuite::ZMemoryBufferChain *this)
 {
-  if ( !(`OSuite::ZMemoryBufferChain::GetName'::`2'::`local static guard' & 1) )
+  if ( !(`OSuite::ZMemoryBufferChain::GetName::`2::`local static guard & 1) )
   {
-    `OSuite::ZMemoryBufferChain::GetName'::`2'::foo.m_pString = 0i64;
-    `OSuite::ZMemoryBufferChain::GetName'::`2'::`local static guard' |= 1u;
-    OSuite::ZString::ZString(&`OSuite::ZMemoryBufferChain::GetName'::`2'::foo, "ZMemoryBufferChain");
-    atexit(`OSuite::ZMemoryBufferChain::GetName'::`2'::`dynamic atexit destructor for 'foo'');
+    `OSuite::ZMemoryBufferChain::GetName::`2::foo.m_pString = 0i64;
+    `OSuite::ZMemoryBufferChain::GetName::`2::`local static guard |= 1u;
+    OSuite::ZString::ZString(&`OSuite::ZMemoryBufferChain::GetName::`2::foo, "ZMemoryBufferChain");
+    atexit(`OSuite::ZMemoryBufferChain::GetName::`2::`dynamic atexit destructor for foo);
   }
-  return &`OSuite::ZMemoryBufferChain::GetName'::`2'::foo;
+  return &`OSuite::ZMemoryBufferChain::GetName::`2::foo;
 }
 
 // File Line: 255

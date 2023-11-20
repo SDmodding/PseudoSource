@@ -49,15 +49,15 @@ void __fastcall CAkBusVolumes::SetNextVolume(CAkBusVolumes *this, float in_dBVol
   v2 = in_dBVolume * 0.050000001;
   if ( v2 >= -37.0 )
   {
-    if ( `AkMath::FastPow10'::`4'::`local static guard' & 1 )
+    if ( `AkMath::FastPow10::`4::`local static guard & 1 )
     {
-      v3 = *(float *)&`AkMath::FastPow10'::`4'::SCALE;
+      v3 = *(float *)&`AkMath::FastPow10::`4::SCALE;
     }
     else
     {
       v3 = FLOAT_2_7866352e7;
-      `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
-      `AkMath::FastPow10'::`4'::`local static guard' |= 1u;
+      `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
+      `AkMath::FastPow10::`4::`local static guard |= 1u;
     }
     LODWORD(v4) = ((signed int)(float)((float)(v2 * v3) + 1065353200.0) & 0x7FFFFF) + 1065353216;
     this->m_fNextVolume = (float)((float)((float)((float)(v4 * 0.32518977) + 0.020805772) * v4) + 0.65304345)
@@ -83,15 +83,15 @@ void __fastcall CAkBusVolumes::SetVolumeOffset(CAkBusVolumes *this, float in_Vol
   v3 = v2 * 0.050000001;
   if ( v3 >= -37.0 )
   {
-    if ( `AkMath::FastPow10'::`4'::`local static guard' & 1 )
+    if ( `AkMath::FastPow10::`4::`local static guard & 1 )
     {
-      v4 = *(float *)&`AkMath::FastPow10'::`4'::SCALE;
+      v4 = *(float *)&`AkMath::FastPow10::`4::SCALE;
     }
     else
     {
       v4 = FLOAT_2_7866352e7;
-      `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
-      `AkMath::FastPow10'::`4'::`local static guard' |= 1u;
+      `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
+      `AkMath::FastPow10::`4::`local static guard |= 1u;
     }
     LODWORD(v5) = ((signed int)(float)((float)(v4 * v3) + 1065353200.0) & 0x7FFFFF) + 1065353216;
     this->m_fNextVolume = (float)((float)((float)((float)(v5 * 0.32518977) + 0.020805772) * v5) + 0.65304345)

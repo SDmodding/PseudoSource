@@ -42,7 +42,7 @@ hkClass *__fastcall hkxIndexBuffer::staticClass()
 void __fastcall finishLoadedObjecthkxIndexBuffer(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkxIndexBuffer::`vftable';
+    *(_QWORD *)p = &hkxIndexBuffer::`vftable;
 }
 
 // File Line: 91
@@ -56,7 +56,7 @@ void __fastcall cleanupLoadedObjecthkxIndexBuffer(void *p)
 // RVA: 0xE31FC0
 void **__fastcall getVtablehkxIndexBuffer()
 {
-  return &hkxIndexBuffer::`vftable';
+  return &hkxIndexBuffer::`vftable;
 }
 
 // File Line: 117

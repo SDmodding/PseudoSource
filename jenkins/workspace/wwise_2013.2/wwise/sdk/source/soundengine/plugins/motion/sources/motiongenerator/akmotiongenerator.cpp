@@ -9,7 +9,7 @@ AK::IAkPluginParam *__fastcall AkCreateMotionGeneratorParams(AK::IAkPluginMemAll
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 128ui64);
   if ( !result )
     return 0i64;
-  result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkMotionGeneratorParams::`vftable';
+  result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkMotionGeneratorParams::`vftable;
   result[6].vfptr = 0i64;
   result[7].vfptr = 0i64;
   result[8].vfptr = 0i64;
@@ -33,7 +33,7 @@ void __fastcall CAkMotionGeneratorParams::CAkMotionGeneratorParams(CAkMotionGene
 
   v2 = 0;
   v3 = this;
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkMotionGeneratorParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkMotionGeneratorParams::`vftable;
   this->m_Params.m_Curves[0].m_pArrayGraphPoints = 0i64;
   *(_QWORD *)&this->m_Params.m_Curves[0].m_ulArraySize = 0i64;
   this->m_Params.m_Curves[1].m_pArrayGraphPoints = 0i64;
@@ -81,7 +81,7 @@ void __fastcall CAkMotionGeneratorParams::~CAkMotionGeneratorParams(CAkMotionGen
   signed __int64 v5; // rdi
 
   v1 = this;
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkMotionGeneratorParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkMotionGeneratorParams::`vftable;
   v2 = 0;
   if ( this->m_Params.m_uCurves > 0u )
   {
@@ -113,7 +113,7 @@ void __fastcall CAkMotionGeneratorParams::~CAkMotionGeneratorParams(CAkMotionGen
     --v5;
   }
   while ( v5 );
-  v1->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable';
+  v1->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable;
 }
 
 // File Line: 84
@@ -287,7 +287,7 @@ AK::IAkPlugin *__fastcall AkCreateMotionGenerator(AK::IAkPluginMemAlloc *in_pAll
   v2 = result;
   if ( result )
   {
-    result->vfptr = (AK::IAkPluginVtbl *)&CAkMotionGenerator::`vftable';
+    result->vfptr = (AK::IAkPluginVtbl *)&CAkMotionGenerator::`vftable;
     result[1].vfptr = 0i64;
     result[13].vfptr = 0i64;
     result[12].vfptr = 0i64;

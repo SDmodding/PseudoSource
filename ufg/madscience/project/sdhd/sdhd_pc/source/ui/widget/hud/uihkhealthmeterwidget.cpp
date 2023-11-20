@@ -102,7 +102,7 @@ void __fastcall UFG::UIHKHealthMeterWidget::Flash_UpdateHealthMeter(UFG::UIScree
   v2 = screen->mRenderable->m_movie.pObject;
   if ( v2 )
   {
-    `eh vector constructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( ((unsigned int)pargs.Type >> 6) & 1 )
     {
       (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
@@ -116,7 +116,7 @@ void __fastcall UFG::UIHKHealthMeterWidget::Flash_UpdateHealthMeter(UFG::UIScree
     Scaleform::GFx::Movie::Invoke(v2, "updateHealthMeter", 0i64, &pargs, 1u);
     if ( UFG::UIHKTweakables::ToggleHealthBarHide )
       Scaleform::GFx::Movie::Invoke(v2, "showHideHealthMeter", 0i64, 0i64, 0);
-    `eh vector destructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 
@@ -181,7 +181,7 @@ void __fastcall UFG::UIHKHealthMeterWidget::Flash_UIHighlight_Init(UFG::UIHKHeal
   v2 = screen->mRenderable->m_movie.pObject;
   if ( v2 )
   {
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( (v5 >> 6) & 1 )
     {
       (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v4 + 16i64))(v4, &ptr, v6);
@@ -197,7 +197,7 @@ void __fastcall UFG::UIHKHealthMeterWidget::Flash_UIHighlight_Init(UFG::UIHKHeal
     v9 = 6;
     v10 = "mc_HealthBar_highlight";
     Scaleform::GFx::Movie::Invoke(v2, "UIHighlight_Init", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 

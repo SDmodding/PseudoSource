@@ -16,7 +16,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_xml::XMLDocument> *__fast
     Scaleform::GFx::AS3::Instances::fl_xml::XMLNode::XMLNode(
       v4,
       (Scaleform::GFx::AS3::InstanceTraits::Traits *)&v2->vfptr);
-    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_xml::XMLDocument::`vftable';
+    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_xml::XMLDocument::`vftable;
     v5->docTypeDecl.pObject = 0i64;
     v5->idMap.pObject = 0i64;
     v5->ignoreWhite = 0;

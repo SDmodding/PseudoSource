@@ -9,11 +9,11 @@ void __fastcall hkpSurfaceVelocityUtil::hkpSurfaceVelocityUtil(hkpSurfaceVelocit
 
   v3 = surfaceVelocityWorld;
   v4 = body;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpSurfaceVelocityUtil::`vftable'{for `hkReferencedObject'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkpSurfaceVelocityUtil::`vftable{for `hkReferencedObject};
   v5 = this;
-  this->vfptr = (hkpContactListenerVtbl *)&hkpSurfaceVelocityUtil::`vftable'{for `hkpContactListener'};
+  this->vfptr = (hkpContactListenerVtbl *)&hkpSurfaceVelocityUtil::`vftable{for `hkpContactListener};
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkpEntityListenerVtbl *)&hkpSurfaceVelocityUtil::`vftable'{for `hkpEntityListener'};
+  this->vfptr = (hkpEntityListenerVtbl *)&hkpSurfaceVelocityUtil::`vftable{for `hkpEntityListener};
   hkReferencedObject::addReference((hkReferencedObject *)&this->vfptr);
   v5->m_rigidBody = v4;
   v4->m_responseModifierFlags |= 4u;
@@ -38,18 +38,18 @@ void __fastcall hkpSurfaceVelocityUtil::~hkpSurfaceVelocityUtil(hkpSurfaceVeloci
   hkpRigidBody *v2; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpSurfaceVelocityUtil::`vftable'{for `hkReferencedObject'};
-  this->vfptr = (hkpContactListenerVtbl *)&hkpSurfaceVelocityUtil::`vftable'{for `hkpContactListener'};
-  this->vfptr = (hkpEntityListenerVtbl *)&hkpSurfaceVelocityUtil::`vftable'{for `hkpEntityListener'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkpSurfaceVelocityUtil::`vftable{for `hkReferencedObject};
+  this->vfptr = (hkpContactListenerVtbl *)&hkpSurfaceVelocityUtil::`vftable{for `hkpContactListener};
+  this->vfptr = (hkpEntityListenerVtbl *)&hkpSurfaceVelocityUtil::`vftable{for `hkpEntityListener};
   v2 = this->m_rigidBody;
   if ( v2 )
   {
     hkpEntity::removeContactListener((hkpEntity *)&v2->vfptr, (hkpContactListener *)&v1->vfptr);
     hkpEntity::removeEntityListener((hkpEntity *)&v1->m_rigidBody->vfptr, (hkpEntityListener *)&v1->vfptr);
   }
-  v1->vfptr = (hkpEntityListenerVtbl *)&hkpEntityListener::`vftable';
-  v1->vfptr = (hkpContactListenerVtbl *)&hkpContactListener::`vftable';
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkpEntityListenerVtbl *)&hkpEntityListener::`vftable;
+  v1->vfptr = (hkpContactListenerVtbl *)&hkpContactListener::`vftable;
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 45

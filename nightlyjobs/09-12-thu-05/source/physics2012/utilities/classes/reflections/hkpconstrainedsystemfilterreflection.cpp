@@ -32,12 +32,12 @@ void __fastcall finishLoadedObjecthkpConstrainedSystemFilter(void *p, int finish
 {
   if ( p )
   {
-    *(_QWORD *)p = &hkpConstrainedSystemFilter::`vftable'{for `hkReferencedObject'};
-    *((_QWORD *)p + 2) = &hkpConstrainedSystemFilter::`vftable'{for `hkpCollidableCollidableFilter'};
-    *((_QWORD *)p + 3) = &hkpConstrainedSystemFilter::`vftable'{for `hkpShapeCollectionFilter'};
-    *((_QWORD *)p + 4) = &hkpConstrainedSystemFilter::`vftable'{for `hkpRayShapeCollectionFilter'};
-    *((_QWORD *)p + 5) = &hkpConstrainedSystemFilter::`vftable'{for `hkpRayCollidableFilter'};
-    *((_QWORD *)p + 9) = &hkpConstrainedSystemFilter::`vftable';
+    *(_QWORD *)p = &hkpConstrainedSystemFilter::`vftable{for `hkReferencedObject};
+    *((_QWORD *)p + 2) = &hkpConstrainedSystemFilter::`vftable{for `hkpCollidableCollidableFilter};
+    *((_QWORD *)p + 3) = &hkpConstrainedSystemFilter::`vftable{for `hkpShapeCollectionFilter};
+    *((_QWORD *)p + 4) = &hkpConstrainedSystemFilter::`vftable{for `hkpRayShapeCollectionFilter};
+    *((_QWORD *)p + 5) = &hkpConstrainedSystemFilter::`vftable{for `hkpRayCollidableFilter};
+    *((_QWORD *)p + 9) = &hkpConstrainedSystemFilter::`vftable;
   }
 }
 
@@ -52,7 +52,7 @@ void __fastcall cleanupLoadedObjecthkpConstrainedSystemFilter(void *p)
 // RVA: 0xE0A710
 void **__fastcall getVtablehkpConstrainedSystemFilter()
 {
-  return &hkpConstrainedSystemFilter::`vftable'{for `hkReferencedObject'};
+  return &hkpConstrainedSystemFilter::`vftable{for `hkReferencedObject};
 }
 
 // File Line: 96

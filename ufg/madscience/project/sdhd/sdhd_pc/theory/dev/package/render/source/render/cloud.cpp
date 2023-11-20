@@ -38,7 +38,7 @@ __int64 Render::_dynamic_initializer_for__gCloudSceneInventory__()
     0xD49B8DA4,
     0,
     0);
-  Render::gCloudSceneInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::CloudSceneInventory::`vftable';
+  Render::gCloudSceneInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::CloudSceneInventory::`vftable;
   return atexit(Render::_dynamic_atexit_destructor_for__gCloudSceneInventory__);
 }
 
@@ -70,12 +70,12 @@ void __fastcall Render::CloudSceneInventory::Add(Render::CloudSceneInventory *th
       else
         v6 = 0i64;
       v7 = (UFG::qResourceHandle *)(v6 + 192 * v4);
-      v8 = `UFG::qGetResourceInventory<Render::Cloud>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<Render::Cloud>'::`2'::result )
+      v8 = `UFG::qGetResourceInventory<Render::Cloud>::`2::result;
+      if ( !`UFG::qGetResourceInventory<Render::Cloud>::`2::result )
       {
         v9 = UFG::qResourceWarehouse::Instance();
         v8 = UFG::qResourceWarehouse::GetInventory(v9, 0x528C47E3u);
-        `UFG::qGetResourceInventory<Render::Cloud>'::`2'::result = v8;
+        `UFG::qGetResourceInventory<Render::Cloud>::`2::result = v8;
       }
       UFG::qResourceHandle::Init(v7 + 2, 0x528C47E3u, v7[2].mNameUID, v8);
       v4 = (unsigned int)(v4 + 1);
@@ -114,12 +114,12 @@ void __fastcall Render::CloudSceneInventory::Remove(Render::CloudSceneInventory 
         v5 = (signed __int64)&v2[1].mResourceHandles + (_QWORD)v4;
       else
         v5 = 0i64;
-      v6 = `UFG::qGetResourceInventory<Render::Cloud>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<Render::Cloud>'::`2'::result )
+      v6 = `UFG::qGetResourceInventory<Render::Cloud>::`2::result;
+      if ( !`UFG::qGetResourceInventory<Render::Cloud>::`2::result )
       {
         v7 = UFG::qResourceWarehouse::Instance();
         v6 = UFG::qResourceWarehouse::GetInventory(v7, 0x528C47E3u);
-        `UFG::qGetResourceInventory<Render::Cloud>'::`2'::result = v6;
+        `UFG::qGetResourceInventory<Render::Cloud>::`2::result = v6;
       }
       UFG::qResourceHandle::Close((UFG::qResourceHandle *)(v5 + 192 * v3 + 64), v6);
       v3 = (unsigned int)(v3 + 1);
@@ -163,7 +163,7 @@ __int64 Render::_dynamic_initializer_for__gCloudInventory__()
     0x6526B66u,
     0,
     0);
-  Render::gCloudInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::CloudInventory::`vftable';
+  Render::gCloudInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::CloudInventory::`vftable;
   return atexit(Render::_dynamic_atexit_destructor_for__gCloudInventory__);
 }
 
@@ -183,12 +183,12 @@ void __fastcall Render::CloudInventory::Add(Render::CloudInventory *this, UFG::q
     UFG::qResourceData::qResourceData(resource_data);
     UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v2[1].mTypeUID);
   }
-  v4 = `UFG::qGetResourceInventory<Illusion::Buffer>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Buffer>'::`2'::result )
+  v4 = `UFG::qGetResourceInventory<Illusion::Buffer>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Buffer>::`2::result )
   {
     v5 = UFG::qResourceWarehouse::Instance();
     v4 = UFG::qResourceWarehouse::GetInventory(v5, 0x92CDEC8F);
-    `UFG::qGetResourceInventory<Illusion::Buffer>'::`2'::result = v4;
+    `UFG::qGetResourceInventory<Illusion::Buffer>::`2::result = v4;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v2[1].mTypeUID, 0x92CDEC8F, *(_DWORD *)&v2[1].mDebugName[20], v4);
   UFG::qResourceInventory::Add((UFG::qResourceInventory *)&v3->vfptr, v2);
@@ -204,12 +204,12 @@ void __fastcall Render::CloudInventory::Remove(Render::CloudInventory *this, UFG
 
   v2 = (Render::Cloud *)resource_data;
   UFG::qResourceInventory::Remove((UFG::qResourceInventory *)&this->vfptr, resource_data);
-  v3 = `UFG::qGetResourceInventory<Illusion::Buffer>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Buffer>'::`2'::result )
+  v3 = `UFG::qGetResourceInventory<Illusion::Buffer>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Buffer>::`2::result )
   {
     v4 = UFG::qResourceWarehouse::Instance();
     v3 = UFG::qResourceWarehouse::GetInventory(v4, 0x92CDEC8F);
-    `UFG::qGetResourceInventory<Illusion::Buffer>'::`2'::result = v3;
+    `UFG::qGetResourceInventory<Illusion::Buffer>::`2::result = v3;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v2->mWispBuffer.mPrev, v3);
   Render::Cloud::~Cloud(v2);

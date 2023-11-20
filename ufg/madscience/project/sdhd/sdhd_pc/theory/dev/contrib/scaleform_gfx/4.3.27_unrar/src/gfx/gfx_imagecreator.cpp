@@ -7,14 +7,14 @@ void __fastcall Scaleform::GFx::ImageCreator::ImageCreator(Scaleform::GFx::Image
 
   v2 = textureManager;
   v3 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::State::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::State::`vftable;
   this->SType = 14;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ImageCreator::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ImageCreator::`vftable;
   if ( textureManager )
     Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)textureManager);
   v3->pTextureManager.pObject = v2;
@@ -282,18 +282,18 @@ void __fastcall Scaleform::GFx::ImageFileHandlerRegistry::ImageFileHandlerRegist
 
   v2 = init;
   v3 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::State::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::State::`vftable;
   this->SType = 15;
   Scaleform::Render::ImageFileHandlerRegistry::ImageFileHandlerRegistry(
     (Scaleform::Render::ImageFileHandlerRegistry *)&this->vfptr,
     0);
-  v3->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ImageFileHandlerRegistry::`vftable'{for `Scaleform::GFx::State'};
-  v3->vfptr = (Scaleform::Render::ImageFileHandlerRegistryVtbl *)&Scaleform::GFx::ImageFileHandlerRegistry::`vftable'{for `Scaleform::Render::ImageFileHandlerRegistry'};
+  v3->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ImageFileHandlerRegistry::`vftable{for `Scaleform::GFx::State};
+  v3->vfptr = (Scaleform::Render::ImageFileHandlerRegistryVtbl *)&Scaleform::GFx::ImageFileHandlerRegistry::`vftable{for `Scaleform::Render::ImageFileHandlerRegistry};
   if ( v2 == 1 )
   {
     Scaleform::Render::ImageFileHandlerRegistry::AddHandler(

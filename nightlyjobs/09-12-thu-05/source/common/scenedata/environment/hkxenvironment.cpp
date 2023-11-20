@@ -3,7 +3,7 @@
 void __fastcall hkxEnvironment::hkxEnvironment(hkxEnvironment *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkxEnvironment::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkxEnvironment::`vftable;
   this->m_variables.m_capacityAndFlags = 2147483648;
   this->m_variables.m_data = 0i64;
   this->m_variables.m_size = 0;
@@ -13,7 +13,7 @@ void __fastcall hkxEnvironment::hkxEnvironment(hkxEnvironment *this)
 // RVA: 0xE34250
 void __fastcall hkxEnvironment::hkxEnvironment(hkxEnvironment *this, hkFinishLoadedObjectFlag f)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkxEnvironment::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkxEnvironment::`vftable;
 }
 
 // File Line: 23
@@ -337,7 +337,7 @@ hkResult *__fastcall hkxEnvironment::interpretString(hkxEnvironment *this, hkRes
       }
       v14 += 4;
     }
-    while ( (signed __int64)v14 < (signed __int64)"r parsing environment string: '" );
+    while ( (signed __int64)v14 < (signed __int64)"r parsing environment string: " );
     switch ( v13 )
     {
       case 0:
@@ -389,9 +389,9 @@ $LN5_216:
         goto LABEL_34;
       case 6:
         hkErrStream::hkErrStream(&v30, &buf, 512);
-        v20 = hkOstream::operator<<((hkOstream *)&v30.vfptr, "Error parsing environment string: '");
+        v20 = hkOstream::operator<<((hkOstream *)&v30.vfptr, "Error parsing environment string: ");
         v21 = hkOstream::operator<<(v20, v4);
-        hkOstream::operator<<(v21, "'");
+        hkOstream::operator<<(v21, "");
         v22 = 308;
         v23 = -1413842815;
         break;
@@ -399,9 +399,9 @@ $LN5_216:
         hkErrStream::hkErrStream(&v30, &buf, 512);
         v24 = hkOstream::operator<<(
                 (hkOstream *)&v30.vfptr,
-                "Internal Error: Unknown action parsing environment string: '");
+                "Internal Error: Unknown action parsing environment string: ");
         v25 = hkOstream::operator<<(v24, v4);
-        hkOstream::operator<<(v25, "'");
+        hkOstream::operator<<(v25, "");
         v22 = 320;
         v23 = -1413873614;
         break;

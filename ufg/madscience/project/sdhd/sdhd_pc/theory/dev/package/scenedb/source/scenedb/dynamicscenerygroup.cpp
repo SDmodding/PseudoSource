@@ -40,7 +40,7 @@ void __fastcall UFG::DynamicSceneryInstance::DynamicSceneryInstance(UFG::Dynamic
   v5 = model_name_uid;
   v6 = instance_name_uid;
   v7 = this;
-  this->vfptr = (Render::IDecalSceneryVtbl *)&Render::IDecalScenery::`vftable';
+  this->vfptr = (Render::IDecalSceneryVtbl *)&Render::IDecalScenery::`vftable;
   v8 = &this->mAttachedDecals;
   v8->mNode.mPrev = &v8->mNode;
   v8->mNode.mNext = &v8->mNode;
@@ -48,8 +48,8 @@ void __fastcall UFG::DynamicSceneryInstance::DynamicSceneryInstance(UFG::Dynamic
   v9 = (UFG::qNode<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance> *)&v7->mPrev;
   v9->mPrev = v9;
   v9->mNext = v9;
-  v7->vfptr = (Render::IDecalSceneryVtbl *)&UFG::DynamicSceneryInstance::`vftable'{for `Render::IDecalScenery'};
-  v7->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::DynamicSceneryInstance::`vftable'{for `UFG::SimComponent'};
+  v7->vfptr = (Render::IDecalSceneryVtbl *)&UFG::DynamicSceneryInstance::`vftable{for `Render::IDecalScenery};
+  v7->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::DynamicSceneryInstance::`vftable{for `UFG::SimComponent};
   UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v7->mModelHandle.mPrev);
   v10 = UFG::DynamicSceneryInstance::s_DynamicSceneryInstanceList.mNode.mPrev;
   UFG::DynamicSceneryInstance::s_DynamicSceneryInstanceList.mNode.mPrev->mNext = (UFG::qNode<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance> *)&v7->mPrev;
@@ -72,12 +72,12 @@ void __fastcall UFG::DynamicSceneryInstance::DynamicSceneryInstance(UFG::Dynamic
     v7->mTransparencyState[0] = Render::TransparencySystem::msOpaqueIndex;
   v7->mTransparencyState[1] = Render::TransparencySystem::msOpaqueIndex;
   v7->mTransparencyState[2] = v11 + v11 / 255;
-  v12 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  v12 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v13 = UFG::qResourceWarehouse::Instance();
     v12 = UFG::qResourceWarehouse::GetInventory(v13, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v12;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v12;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v7->mModelHandle.mPrev, 0xA2ADCD77, v5, v12);
   v14 = (signed __int64)&v7->mLocalWorld;
@@ -121,8 +121,8 @@ void __fastcall UFG::DynamicSceneryInstance::~DynamicSceneryInstance(UFG::Dynami
   UFG::qNode<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance> *v11; // rax
 
   v1 = this;
-  this->vfptr = (Render::IDecalSceneryVtbl *)&UFG::DynamicSceneryInstance::`vftable'{for `Render::IDecalScenery'};
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::DynamicSceneryInstance::`vftable'{for `UFG::SimComponent'};
+  this->vfptr = (Render::IDecalSceneryVtbl *)&UFG::DynamicSceneryInstance::`vftable{for `Render::IDecalScenery};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::DynamicSceneryInstance::`vftable{for `UFG::SimComponent};
   if ( this == UFG::DynamicSceneryInstance::s_DynamicSceneryInstancepCurrentIterator )
     UFG::DynamicSceneryInstance::s_DynamicSceneryInstancepCurrentIterator = (UFG::DynamicSceneryInstance *)&this->mPrev[-6].mNext;
   v2 = (UFG::qNode<UFG::DynamicSceneryInstance,UFG::DynamicSceneryInstance> *)&this->mPrev;
@@ -132,23 +132,23 @@ void __fastcall UFG::DynamicSceneryInstance::~DynamicSceneryInstance(UFG::Dynami
   v4->mPrev = v3;
   v2->mPrev = v2;
   v2->mNext = v2;
-  v5 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  v5 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v6 = UFG::qResourceWarehouse::Instance();
     v5 = UFG::qResourceWarehouse::GetInventory(v6, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v5;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v5;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mModelHandle.mPrev, v5);
   Render::IDecalScenery::RemoveAttachedDecals((Render::IDecalScenery *)&v1->vfptr, 0xFFFFFFFF);
   v7 = CullManager::Instance();
   CullManager::FreePersistentCullInfo(v7, v1->mCullResults, v1->mCullInfo);
-  v8 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  v8 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v9 = UFG::qResourceWarehouse::Instance();
     v8 = UFG::qResourceWarehouse::GetInventory(v9, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v8;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v8;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mModelHandle.mPrev, v8);
   UFG::qResourceHandle::~qResourceHandle((UFG::qResourceHandle *)&v1->mModelHandle.mPrev);
@@ -516,13 +516,13 @@ void __fastcall UFG::TestDynamicSceneryForDecals(Render::DecalClipRequest *reque
           && min.z <= v2->mMax.z
           && max.z >= v2->mMin.z )
         {
-          v17 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
+          v17 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
           v18 = (unsigned int)v5[1].mNext;
-          if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+          if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
           {
             v19 = UFG::qResourceWarehouse::Instance();
             v17 = UFG::qResourceWarehouse::GetInventory(v19, 0xA2ADCD77);
-            `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v17;
+            `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v17;
           }
           UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v4->mModelProxy.mModelHandle.mPrev, 0xA2ADCD77, v18, v17);
           v4->mModelProxy.mRModel = 0i64;

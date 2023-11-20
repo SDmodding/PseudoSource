@@ -6,7 +6,7 @@ AK::IAkPluginParam *__fastcall CreateCompressorFXParams(AK::IAkPluginMemAlloc *i
 
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 32ui64);
   if ( result )
-    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkCompressorFXParams::`vftable';
+    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkCompressorFXParams::`vftable;
   return result;
 }
 
@@ -14,21 +14,21 @@ AK::IAkPluginParam *__fastcall CreateCompressorFXParams(AK::IAkPluginMemAlloc *i
 // RVA: 0xACFCF0
 void __fastcall CAkCompressorFXParams::CAkCompressorFXParams(CAkCompressorFXParams *this)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkCompressorFXParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkCompressorFXParams::`vftable;
 }
 
 // File Line: 30
 // RVA: 0xACFD10
 void __fastcall CAkCompressorFXParams::~CAkCompressorFXParams(CAkCompressorFXParams *this)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable;
 }
 
 // File Line: 35
 // RVA: 0xACFD30
 void __fastcall CAkCompressorFXParams::CAkCompressorFXParams(CAkCompressorFXParams *this, CAkCompressorFXParams *in_rCopy)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkCompressorFXParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkCompressorFXParams::`vftable;
   this->m_Params.fThreshold = in_rCopy->m_Params.fThreshold;
   this->m_Params.fRatio = in_rCopy->m_Params.fRatio;
   this->m_Params.fAttack = in_rCopy->m_Params.fAttack;
@@ -48,7 +48,7 @@ AK::IAkPluginParam *__fastcall CAkCompressorFXParams::Clone(CAkCompressorFXParam
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 32ui64);
   if ( result )
   {
-    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkCompressorFXParams::`vftable';
+    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkCompressorFXParams::`vftable;
     *(float *)&result[1].vfptr = v2->m_Params.fThreshold;
     HIDWORD(result[1].vfptr) = LODWORD(v2->m_Params.fRatio);
     *(float *)&result[2].vfptr = v2->m_Params.fAttack;

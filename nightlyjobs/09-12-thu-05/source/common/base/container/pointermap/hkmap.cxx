@@ -33,7 +33,7 @@ void __fastcall hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsi
 
 // File Line: 56
 // RVA: 0xDF2620
-void __fastcall hkMapBase<`anonymous namespace'::MapKey32,int,MapOperationsMapKey32::MapOperationsMapKey32>::clear(hkMapBase<MapKey32,int,A0x59affef2::MapOperationsMapKey32> *this)
+void __fastcall hkMapBase<`anonymous namespace::MapKey32,int,MapOperationsMapKey32::MapOperationsMapKey32>::clear(hkMapBase<MapKey32,int,A0x59affef2::MapOperationsMapKey32> *this)
 {
   int v1; // eax
   __int64 v2; // r8
@@ -269,7 +269,7 @@ hkResult *__fastcall hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations
 
 // File Line: 212
 // RVA: 0xE4A9C0
-__int64 __fastcall hkMapBase<hkDataObject_Handle,int,`anonymous namespace'::HandleOps>::getWithDefault(hkMapBase<hkDataObject_Handle,int,HandleOps> *this, hkDataObject_Handle *key, int def)
+__int64 __fastcall hkMapBase<hkDataObject_Handle,int,`anonymous namespace::HandleOps>::getWithDefault(hkMapBase<hkDataObject_Handle,int,HandleOps> *this, hkDataObject_Handle *key, int def)
 {
   int v3; // er11
   unsigned int v4; // edi
@@ -409,7 +409,7 @@ void __fastcall hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsi
 
 // File Line: 328
 // RVA: 0xE51900
-hkResult *__fastcall hkMapBase<hkDataObject_Handle,int,`anonymous namespace'::Writer::HandleOps>::resizeTable(hkMapBase<hkDataObject_Handle,int,HandleOps> *this, hkResult *result, hkMemoryAllocator *alloc, int newcap)
+hkResult *__fastcall hkMapBase<hkDataObject_Handle,int,`anonymous namespace::Writer::HandleOps>::resizeTable(hkMapBase<hkDataObject_Handle,int,HandleOps> *this, hkResult *result, hkMemoryAllocator *alloc, int newcap)
 {
   hkMapBase<hkDataObject_Handle,int,HandleOps>::Pair *v4; // rbp
   hkResult *v5; // r14

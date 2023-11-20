@@ -14,7 +14,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_system::LoaderContext> *_
   if ( v4 )
   {
     Scaleform::GFx::AS3::Instances::fl::Object::Object(v4, (Scaleform::GFx::AS3::InstanceTraits::Traits *)&v2->vfptr);
-    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_system::LoaderContext::`vftable';
+    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_system::LoaderContext::`vftable;
     v5->allowLoadBytesCodeExecution = 0;
     v5->applicationDomain.pObject = 0i64;
     v5->checkPolicyFile = 0;

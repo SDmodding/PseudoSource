@@ -2,27 +2,27 @@
 // RVA: 0xEE1E6C
 OSuite::ZDateTime *__fastcall OSuite::ZHttpStreamReader::GetModificationDate(OSuite::ZHttpStreamReader *this)
 {
-  if ( !(`OSuite::ZHttpStreamReader::GetModificationDate'::`2'::`local static guard' & 1) )
+  if ( !(`OSuite::ZHttpStreamReader::GetModificationDate::`2::`local static guard & 1) )
   {
-    `OSuite::ZHttpStreamReader::GetModificationDate'::`2'::`local static guard' |= 1u;
-    OSuite::ZDateTime::ZDateTime(&`OSuite::ZHttpStreamReader::GetModificationDate'::`2'::foo);
-    atexit(`OSuite::ZHttpStreamReader::GetModificationDate'::`2'::`dynamic atexit destructor for 'foo'');
+    `OSuite::ZHttpStreamReader::GetModificationDate::`2::`local static guard |= 1u;
+    OSuite::ZDateTime::ZDateTime(&`OSuite::ZHttpStreamReader::GetModificationDate::`2::foo);
+    atexit(`OSuite::ZHttpStreamReader::GetModificationDate::`2::`dynamic atexit destructor for foo);
   }
-  return &`OSuite::ZHttpStreamReader::GetModificationDate'::`2'::foo;
+  return &`OSuite::ZHttpStreamReader::GetModificationDate::`2::foo;
 }
 
 // File Line: 33
 // RVA: 0xEE1EA8
 OSuite::ZString *__fastcall OSuite::ZHttpStreamReader::GetName(OSuite::ZHttpStreamReader *this)
 {
-  if ( !(`OSuite::ZHttpStreamReader::GetName'::`2'::`local static guard' & 1) )
+  if ( !(`OSuite::ZHttpStreamReader::GetName::`2::`local static guard & 1) )
   {
-    `OSuite::ZHttpStreamReader::GetName'::`2'::foo.m_pString = 0i64;
-    `OSuite::ZHttpStreamReader::GetName'::`2'::`local static guard' |= 1u;
-    OSuite::ZString::ZString(&`OSuite::ZHttpStreamReader::GetName'::`2'::foo, "ZHttpStreamReader");
-    atexit(`OSuite::ZHttpStreamReader::GetName'::`2'::`dynamic atexit destructor for 'foo'');
+    `OSuite::ZHttpStreamReader::GetName::`2::foo.m_pString = 0i64;
+    `OSuite::ZHttpStreamReader::GetName::`2::`local static guard |= 1u;
+    OSuite::ZString::ZString(&`OSuite::ZHttpStreamReader::GetName::`2::foo, "ZHttpStreamReader");
+    atexit(`OSuite::ZHttpStreamReader::GetName::`2::`dynamic atexit destructor for foo);
   }
-  return &`OSuite::ZHttpStreamReader::GetName'::`2'::foo;
+  return &`OSuite::ZHttpStreamReader::GetName::`2::foo;
 }
 
 // File Line: 64

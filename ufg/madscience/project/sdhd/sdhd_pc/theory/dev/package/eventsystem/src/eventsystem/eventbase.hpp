@@ -7,7 +7,7 @@ void __fastcall UFG::Event::Event(UFG::Event *this, const char *name)
   v2 = (UFG::qNode<UFG::Event,UFG::Event> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+  this->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
   this->m_NamePTR = name;
   this->m_EventUID = UFG::qStringHash32(name, 0xFFFFFFFF);
 }

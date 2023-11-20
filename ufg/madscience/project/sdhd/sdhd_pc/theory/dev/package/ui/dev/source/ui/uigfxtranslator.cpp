@@ -19,12 +19,12 @@ void __fastcall UFG::UIDictionary::LoadDictionary(UFG::UIDictionary *this, const
 
   v2 = filename;
   v3 = this;
-  v4 = `UFG::qGetResourceInventory<UFG::UILocalizationChunk>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::UILocalizationChunk>'::`2'::result )
+  v4 = `UFG::qGetResourceInventory<UFG::UILocalizationChunk>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::UILocalizationChunk>::`2::result )
   {
     v5 = UFG::qResourceWarehouse::Instance();
     v4 = UFG::qResourceWarehouse::GetInventory(v5, 0x90CE6B7A);
-    `UFG::qGetResourceInventory<UFG::UILocalizationChunk>'::`2'::result = v4;
+    `UFG::qGetResourceInventory<UFG::UILocalizationChunk>::`2::result = v4;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v3->mDatabaseHandle.mPrev, v4);
   UFG::StreamResourceLoader::UnloadResourceFile(v3->mFilename);
@@ -35,12 +35,12 @@ void __fastcall UFG::UIDictionary::LoadDictionary(UFG::UIDictionary *this, const
   v7 = UFG::qString::GetFilenameWithoutExtension(&v14, &result);
   UFG::qString::Set(&v14, v7->mData, v7->mLength, 0i64, 0);
   UFG::qString::~qString(&result);
-  v8 = `UFG::qGetResourceInventory<UFG::UILocalizationChunk>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::UILocalizationChunk>'::`2'::result )
+  v8 = `UFG::qGetResourceInventory<UFG::UILocalizationChunk>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::UILocalizationChunk>::`2::result )
   {
     v9 = UFG::qResourceWarehouse::Instance();
     v8 = UFG::qResourceWarehouse::GetInventory(v9, 0x90CE6B7A);
-    `UFG::qGetResourceInventory<UFG::UILocalizationChunk>'::`2'::result = v8;
+    `UFG::qGetResourceInventory<UFG::UILocalizationChunk>::`2::result = v8;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v3->mDatabaseHandle.mPrev, v8);
   v11 = v14.mStringHashUpper32;
@@ -49,12 +49,12 @@ void __fastcall UFG::UIDictionary::LoadDictionary(UFG::UIDictionary *this, const
     v11 = UFG::qStringHashUpper32(v14.mData, v14.mStringHashUpper32 | v10);
     v14.mStringHashUpper32 = v11;
   }
-  v12 = `UFG::qGetResourceInventory<UFG::UILocalizationChunk>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::UILocalizationChunk>'::`2'::result )
+  v12 = `UFG::qGetResourceInventory<UFG::UILocalizationChunk>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::UILocalizationChunk>::`2::result )
   {
     v13 = UFG::qResourceWarehouse::Instance();
     v12 = UFG::qResourceWarehouse::GetInventory(v13, 0x90CE6B7A);
-    `UFG::qGetResourceInventory<UFG::UILocalizationChunk>'::`2'::result = v12;
+    `UFG::qGetResourceInventory<UFG::UILocalizationChunk>::`2::result = v12;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v3->mDatabaseHandle.mPrev, 0x90CE6B7A, v11, v12);
   if ( UFG::StreamFileWrapper::FileExists(v2) )
@@ -71,13 +71,13 @@ void __fastcall UFG::UIDictionary::UnloadDictionary(UFG::UIDictionary *this)
   UFG::UIDictionary *v2; // rbx
   UFG::qResourceWarehouse *v3; // rax
 
-  v1 = `UFG::qGetResourceInventory<UFG::UILocalizationChunk>'::`2'::result;
+  v1 = `UFG::qGetResourceInventory<UFG::UILocalizationChunk>::`2::result;
   v2 = this;
-  if ( !`UFG::qGetResourceInventory<UFG::UILocalizationChunk>'::`2'::result )
+  if ( !`UFG::qGetResourceInventory<UFG::UILocalizationChunk>::`2::result )
   {
     v3 = UFG::qResourceWarehouse::Instance();
     v1 = UFG::qResourceWarehouse::GetInventory(v3, 0x90CE6B7A);
-    `UFG::qGetResourceInventory<UFG::UILocalizationChunk>'::`2'::result = v1;
+    `UFG::qGetResourceInventory<UFG::UILocalizationChunk>::`2::result = v1;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v2->mDatabaseHandle.mPrev, v1);
   UFG::StreamResourceLoader::UnloadResourceFile(v2->mFilename);

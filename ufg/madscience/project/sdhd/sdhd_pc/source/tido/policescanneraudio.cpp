@@ -30,7 +30,7 @@ __int64 UFG::_dynamic_initializer_for__heat_voice__()
 __int64 dynamic_initializer_for__UFG::PoliceScannerAudio::sm_Instance__()
 {
   UFG::AudioEntity::AudioEntity((UFG::AudioEntity *)&UFG::PoliceScannerAudio::sm_Instance.vfptr);
-  UFG::PoliceScannerAudio::sm_Instance.vfptr = (UFG::AudioEntityVtbl *)&UFG::PoliceScannerAudio::`vftable';
+  UFG::PoliceScannerAudio::sm_Instance.vfptr = (UFG::AudioEntityVtbl *)&UFG::PoliceScannerAudio::`vftable;
   unk_14242F240 = 0;
   unk_14242F248 = 0i64;
   UFG::qBaseTreeRB::qBaseTreeRB(&stru_14242F250);
@@ -54,7 +54,7 @@ void __fastcall UFG::PoliceScannerAudio::~PoliceScannerAudio(UFG::PoliceScannerA
   UFG::AudioEvent *v2; // rcx
 
   v1 = this;
-  this->vfptr = (UFG::AudioEntityVtbl *)&UFG::PoliceScannerAudio::`vftable';
+  this->vfptr = (UFG::AudioEntityVtbl *)&UFG::PoliceScannerAudio::`vftable;
   v2 = this->m_Controller.m_pEvent;
   if ( v2 )
     UFG::AudioEvent::OnControllerDestroy(v2);
@@ -593,9 +593,9 @@ char __fastcall UFG::PoliceScannerAudio::PlayScenario(UFG::PoliceScannerAudio *t
   final_hash = v12;
   if ( v12 )
   {
-    v12->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::AudioEventCallbackObject::`vftable';
+    v12->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::AudioEventCallbackObject::`vftable;
     v12->m_next = 0i64;
-    v12->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::PoliceScannerCallback::`vftable';
+    v12->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::PoliceScannerCallback::`vftable;
   }
   else
   {

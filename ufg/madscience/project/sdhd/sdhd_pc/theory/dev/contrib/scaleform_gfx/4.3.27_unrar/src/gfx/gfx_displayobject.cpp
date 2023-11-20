@@ -4,16 +4,16 @@ void __fastcall Scaleform::GFx::DisplayObjectBase::DisplayObjectBase(Scaleform::
 {
   Scaleform::Render::TreeNode *v4; // rcx
 
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountWeakSupportImpl::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountWeakSupportImpl::`vftable;
   this->pWeakProxy = 0i64;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::`vftable';
-  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::DisplayObjectBase::`vftable'{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>'};
-  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::DisplayObjectBase::`vftable'{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>'};
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::`vftable;
+  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::DisplayObjectBase::`vftable{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>};
+  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::DisplayObjectBase::`vftable{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>};
   this->pASRoot = pasRoot;
   this->Id.Id = *(_DWORD *)id;
   this->Depth = -1;
@@ -40,8 +40,8 @@ void __fastcall Scaleform::GFx::DisplayObjectBase::~DisplayObjectBase(Scaleform:
   bool v4; // zf
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::DisplayObjectBase::`vftable'{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>'};
-  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::DisplayObjectBase::`vftable'{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>'};
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::DisplayObjectBase::`vftable{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>};
+  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::DisplayObjectBase::`vftable{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>};
   if ( this->pGeomData )
     ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
   if ( v1->pPerspectiveData )
@@ -58,7 +58,7 @@ void __fastcall Scaleform::GFx::DisplayObjectBase::~DisplayObjectBase(Scaleform:
     if ( v4 )
       Scaleform::Render::ContextImpl::Entry::destroyHelper(v3);
   }
-  v1->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>::`vftable';
+  v1->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>::`vftable;
   Scaleform::RefCountWeakSupportImpl::~RefCountWeakSupportImpl((Scaleform::RefCountWeakSupportImpl *)&v1->vfptr);
 }
 
@@ -4133,8 +4133,8 @@ void __fastcall Scaleform::GFx::DisplayObject::DisplayObject(Scaleform::GFx::Dis
     pasRoot,
     pparent,
     (Scaleform::GFx::ResourceId)&ida);
-  v4->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::DisplayObject::`vftable'{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>'};
-  v4->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::DisplayObject::`vftable'{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>'};
+  v4->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::DisplayObject::`vftable{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>};
+  v4->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::DisplayObject::`vftable{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>};
   v4->pNameHandle.pObject = 0i64;
   v4->pScrollRect = 0i64;
   v4->pMaskCharacter = 0i64;
@@ -4158,8 +4158,8 @@ void __fastcall Scaleform::GFx::DisplayObject::~DisplayObject(Scaleform::GFx::Di
   Scaleform::GFx::ASStringNode *v10; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::DisplayObject::`vftable'{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>'};
-  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::DisplayObject::`vftable'{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>'};
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::DisplayObject::`vftable{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>};
+  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::DisplayObject::`vftable{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>};
   v2 = this->pScrollRect;
   if ( v2 )
   {

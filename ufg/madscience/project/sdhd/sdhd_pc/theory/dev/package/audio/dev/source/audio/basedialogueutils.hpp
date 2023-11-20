@@ -6,7 +6,7 @@ void __fastcall UFG::DialogArgSet::~DialogArgSet(UFG::DialogArgSet *this)
   Render::SkinningCacheNode *v2; // rbx
   Render::SkinningCacheNode *v3; // rbx
 
-  this->vfptr = (UFG::DialogArgSetVtbl *)&UFG::DialogArgSet::`vftable';
+  this->vfptr = (UFG::DialogArgSetVtbl *)&UFG::DialogArgSet::`vftable;
   v1 = (Render::Skinning *)&this->m_argList;
   if ( this->m_argList.mTree.mCount )
   {
@@ -79,6 +79,6 @@ void __fastcall UFG::DialogEvent::Resize(UFG::DialogEvent *this, unsigned int si
 // RVA: 0x141390
 void __fastcall UFG::DialogArgList::~DialogArgList(UFG::DialogArgList *this)
 {
-  this->vfptr = (UFG::DialogArgListVtbl *)&UFG::DialogArgList::`vftable';
+  this->vfptr = (UFG::DialogArgListVtbl *)&UFG::DialogArgList::`vftable;
 }
 

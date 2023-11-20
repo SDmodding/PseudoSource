@@ -7,7 +7,7 @@ AK::IAkPluginParam *__fastcall CreateSoundSeedWooshParams(AK::IAkPluginMemAlloc 
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 208ui64);
   if ( result )
   {
-    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkSoundSeedWooshParams::`vftable';
+    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkSoundSeedWooshParams::`vftable;
     result[1].vfptr = 0i64;
     result[2].vfptr = 0i64;
     result[3].vfptr = 0i64;
@@ -30,7 +30,7 @@ AK::IAkPluginParam *__fastcall CreateSoundSeedWooshParams(AK::IAkPluginMemAlloc 
 // RVA: 0xAD8FB0
 void __fastcall CAkSoundSeedWooshParams::CAkSoundSeedWooshParams(CAkSoundSeedWooshParams *this)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkSoundSeedWooshParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkSoundSeedWooshParams::`vftable;
   this->m_Curves[0].m_pArrayGraphPoints = 0i64;
   *(_QWORD *)&this->m_Curves[0].m_ulArraySize = 0i64;
   this->m_Curves[1].m_pArrayGraphPoints = 0i64;
@@ -58,7 +58,7 @@ void __fastcall CAkSoundSeedWooshParams::~CAkSoundSeedWooshParams(CAkSoundSeedWo
 
   v1 = this->m_pDeflectors;
   v2 = this;
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkSoundSeedWooshParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkSoundSeedWooshParams::`vftable;
   if ( v1 )
     ((void (*)(void))this->m_pAllocator->vfptr->Free)();
   v3 = (signed __int64)v2->m_Curves;
@@ -77,7 +77,7 @@ void __fastcall CAkSoundSeedWooshParams::~CAkSoundSeedWooshParams(CAkSoundSeedWo
   while ( v4 );
   if ( v2->m_pPath )
     ((void (*)(void))v2->m_pAllocator->vfptr->Free)();
-  v2->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable';
+  v2->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable;
 }
 
 // File Line: 52
@@ -108,7 +108,7 @@ void __fastcall CAkSoundSeedWooshParams::CAkSoundSeedWooshParams(CAkSoundSeedWoo
 
   v3 = this;
   v4 = 0;
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkSoundSeedWooshParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkSoundSeedWooshParams::`vftable;
   this->m_Curves[0].m_pArrayGraphPoints = 0i64;
   *(_QWORD *)&this->m_Curves[0].m_ulArraySize = 0i64;
   this->m_Curves[1].m_pArrayGraphPoints = 0i64;

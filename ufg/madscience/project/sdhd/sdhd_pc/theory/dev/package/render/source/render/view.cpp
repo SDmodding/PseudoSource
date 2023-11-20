@@ -1,6 +1,6 @@
 // File Line: 65
 // RVA: 0x159E0
-Render::vDynamic *__fastcall `anonymous namespace'::GetVertsCircle(unsigned int segCount, UFG::qColour *colour)
+Render::vDynamic *__fastcall `anonymous namespace::GetVertsCircle(unsigned int segCount, UFG::qColour *colour)
 {
   UFG::qColour *v2; // rsi
   __int64 v3; // r15
@@ -81,7 +81,7 @@ Render::vDynamic *__fastcall `anonymous namespace'::GetVertsCircle(unsigned int 
 
 // File Line: 249
 // RVA: 0xD230
-__int64 __fastcall `anonymous namespace'::AngleToSegment(float angle, unsigned int segCount)
+__int64 __fastcall `anonymous namespace::AngleToSegment(float angle, unsigned int segCount)
 {
   __m128 v2; // xmm1
   signed int v3; // ecx
@@ -108,7 +108,7 @@ __int64 __fastcall `anonymous namespace'::AngleToSegment(float angle, unsigned i
 
 // File Line: 282
 // RVA: 0x155F0
-Render::vDynamic *__fastcall `anonymous namespace'::GetVertsAxes()
+Render::vDynamic *__fastcall `anonymous namespace::GetVertsAxes()
 {
   if ( !(_S3 & 1) )
     _S3 |= 1u;
@@ -407,12 +407,12 @@ void Render::Poly::DefaultModelInit(void)
   v37 = UFG::qResourceWarehouse::Instance();
   UFG::qResourceWarehouse::Add(v37, v3);
   v38 = Render::Poly::sModelUID;
-  v39 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  v39 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v40 = UFG::qResourceWarehouse::Instance();
     v39 = UFG::qResourceWarehouse::GetInventory(v40, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v39;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v39;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&Render::Poly::sModelHandle.mPrev, 0xA2ADCD77, v38, v39);
   UFG::qString::~qString(&v42);
@@ -677,7 +677,7 @@ void Render::View::InitShared(void)
 
   Render::View::mScreenOffset = 0i64;
   v0 = UFG::qStringHash32("ViewPlat.Primitive", 0xFFFFFFFF);
-  `anonymous namespace'::gSimpleMaterial = Illusion::Factory::NewMaterial(
+  `anonymous namespace::gSimpleMaterial = Illusion::Factory::NewMaterial(
                                              "ViewPlat.Primitive",
                                              v0,
                                              5u,
@@ -685,45 +685,45 @@ void Render::View::InitShared(void)
                                              0i64,
                                              0i64);
   v1 = UFG::qStringHash32("SIMPLE", 0xFFFFFFFF);
-  v2 = `anonymous namespace'::gSimpleMaterial;
+  v2 = `anonymous namespace::gSimpleMaterial;
   v3 = v1;
-  LOWORD(`anonymous namespace'::gSimpleMaterial[1].mNode.mChild[0]) = 0;
+  LOWORD(`anonymous namespace::gSimpleMaterial[1].mNode.mChild[0]) = 0;
   HIDWORD(v2[1].mNode.mParent) = UFG::qStringHash32("iShader", 0xFFFFFFFF);
   v4 = UFG::qStringHash32("iShader", 0xFFFFFFFF);
   v2[1].mTypeUID = -1957338719;
   LODWORD(v2[1].mResourceHandles.mNode.mNext) = v3;
   LODWORD(v2[1].mNode.mParent) = v4;
-  v5 = `anonymous namespace'::gSimpleMaterial;
-  *(_WORD *)&`anonymous namespace'::gSimpleMaterial[1].mDebugName[12] = 0;
+  v5 = `anonymous namespace::gSimpleMaterial;
+  *(_WORD *)&`anonymous namespace::gSimpleMaterial[1].mDebugName[12] = 0;
   *(_DWORD *)&v5[1].mDebugName[8] = UFG::qStringHash32("iTexture", 0xFFFFFFFF);
   v6 = UFG::qStringHash32("texDiffuse", 0xFFFFFFFF);
   LODWORD(v5[1].mStateBlockMask.mFlags[1]) = -1958479169;
   LODWORD(v5[1].mStateBlockMask.mFlags[0]) = -1324127765;
   *(_DWORD *)&v5[1].mDebugName[4] = v6;
-  v7 = `anonymous namespace'::gSimpleMaterial;
-  LOWORD(`anonymous namespace'::gSimpleMaterial[1].mMaterialUser.mOffset) = 0;
+  v7 = `anonymous namespace::gSimpleMaterial;
+  LOWORD(`anonymous namespace::gSimpleMaterial[1].mMaterialUser.mOffset) = 0;
   *(&v7[1].mNumParams + 1) = UFG::qStringHash32("iAlphaState", 0xFFFFFFFF);
   v8 = UFG::qStringHash32("iAlphaState", 0xFFFFFFFF);
   LODWORD(v7[2].mResourceHandles.mNode.mPrev) = 315097330;
   v7[2].mNode.mUID = -1551679522;
   v7[1].mNumParams = v8;
-  v9 = `anonymous namespace'::gSimpleMaterial;
-  LOWORD(`anonymous namespace'::gSimpleMaterial[2].mTypeUID) = 0;
+  v9 = `anonymous namespace::gSimpleMaterial;
+  LOWORD(`anonymous namespace::gSimpleMaterial[2].mTypeUID) = 0;
   HIDWORD(v9[2].mResourceHandles.mNode.mNext) = UFG::qStringHash32("iRasterState", 0xFFFFFFFF);
   v10 = UFG::qStringHash32("iRasterState", 0xFFFFFFFF);
   *((_DWORD *)&v9[2].0 + 22) = 1002903008;
   *(_DWORD *)&v9[2].mDebugName[28] = 1660426324;
   LODWORD(v9[2].mResourceHandles.mNode.mNext) = v10;
-  v11 = `anonymous namespace'::gSimpleMaterial;
-  LOWORD(`anonymous namespace'::gSimpleMaterial[2].mStateBlockMask.mFlags[1]) = 0;
+  v11 = `anonymous namespace::gSimpleMaterial;
+  LOWORD(`anonymous namespace::gSimpleMaterial[2].mStateBlockMask.mFlags[1]) = 0;
   HIDWORD(v11[2].mStateBlockMask.mFlags[0]) = UFG::qStringHash32("sbDepthBiasSortLayer", 0xFFFFFFFF);
   v12 = UFG::qStringHash32("sbDepthBiasSortLayer", 0xFFFFFFFF);
   LODWORD(v11[3].mNode.mChild[1]) = 1292158962;
   LODWORD(v11[2].mStateBlockMask.mFlags[0]) = v12;
   LODWORD(v11[3].mNode.mChild[0]) = 0;
   v13 = UFG::qResourceWarehouse::Instance();
-  UFG::qResourceWarehouse::Add(v13, (UFG::qResourceData *)&`anonymous namespace'::gSimpleMaterial->mNode);
-  v14 = `anonymous namespace'::GetVertsCircle(0x40u, &UFG::qColour::White);
+  UFG::qResourceWarehouse::Add(v13, (UFG::qResourceData *)&`anonymous namespace::gSimpleMaterial->mNode);
+  v14 = `anonymous namespace::GetVertsCircle(0x40u, &UFG::qColour::White);
   if ( v14 )
   {
     v15 = &v14[1].mPosition.x;
@@ -1399,12 +1399,12 @@ void __fastcall Render::View::Draw(Render::View *this, Render::Poly *poly, Illus
   if ( !vertex_decl_handle.mData )
   {
     v9 = UFG::qStringHash32("VertexDecl.Dynamic", 0xFFFFFFFF);
-    v10 = `UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result )
+    v10 = `UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result )
     {
       v11 = UFG::qResourceWarehouse::Instance();
       v10 = UFG::qResourceWarehouse::GetInventory(v11, 0x3E5FDA3Eu);
-      `UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result = v10;
+      `UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result = v10;
     }
     UFG::qResourceHandle::Init((UFG::qResourceHandle *)&vertex_decl_handle.mPrev, 0x3E5FDA3Eu, v9, v10);
     Render::Poly::DefaultModelInit();
@@ -2104,16 +2104,16 @@ Illusion::Material *__fastcall Render::View::CreateSimpleMaterial(const unsigned
   _WORD *v18; // rax
   __int64 v19; // rax
 
-  v4 = `anonymous namespace'::gSimpleMaterial;
+  v4 = `anonymous namespace::gSimpleMaterial;
   v5 = 0i64;
   v6 = alpha_state_uid;
   v7 = depth_bias;
   v8 = raster_state_uid;
-  if ( LODWORD(`anonymous namespace'::gSimpleMaterial[1].mStateBlockMask.mFlags[0]) != texture_name_uid )
+  if ( LODWORD(`anonymous namespace::gSimpleMaterial[1].mStateBlockMask.mFlags[0]) != texture_name_uid )
   {
     UFG::qResourceHandle::Init(
-      (UFG::qResourceHandle *)&`anonymous namespace'::gSimpleMaterial[1].mDebugName[20],
-      `anonymous namespace'::gSimpleMaterial[1].mStateBlockMask.mFlags[1],
+      (UFG::qResourceHandle *)&`anonymous namespace::gSimpleMaterial[1].mDebugName[20],
+      `anonymous namespace::gSimpleMaterial[1].mStateBlockMask.mFlags[1],
       texture_name_uid);
     v9 = v4->mMaterialUser.mOffset;
     if ( v9 )
@@ -2246,12 +2246,12 @@ void __fastcall Render::View::SetSimpleMaterialShader(unsigned int shader_uid)
   Illusion::Material *v1; // rbx
   __int64 v2; // rax
 
-  v1 = `anonymous namespace'::gSimpleMaterial;
-  if ( LODWORD(`anonymous namespace'::gSimpleMaterial[1].mResourceHandles.mNode.mNext) != shader_uid )
+  v1 = `anonymous namespace::gSimpleMaterial;
+  if ( LODWORD(`anonymous namespace::gSimpleMaterial[1].mResourceHandles.mNode.mNext) != shader_uid )
   {
     UFG::qResourceHandle::Init(
-      (UFG::qResourceHandle *)&`anonymous namespace'::gSimpleMaterial[1].mNode.mChild[1],
-      `anonymous namespace'::gSimpleMaterial[1].mTypeUID,
+      (UFG::qResourceHandle *)&`anonymous namespace::gSimpleMaterial[1].mNode.mChild[1],
+      `anonymous namespace::gSimpleMaterial[1].mTypeUID,
       shader_uid);
     v2 = v1->mMaterialUser.mOffset;
     if ( v2 )
@@ -2868,7 +2868,7 @@ void __fastcall Render::View::DrawArc(Render::View *this, UFG::qMatrix44 *xform,
   v7 = this;
   v8 = angleRadsStart;
   v9 = info;
-  v10 = `anonymous namespace'::GetVertsCircle(segCount, &info->mColour1) + 1;
+  v10 = `anonymous namespace::GetVertsCircle(segCount, &info->mColour1) + 1;
   if ( angleRadsStart >= 0.0 )
   {
     if ( angleRadsStart > 6.2831855 )
@@ -2925,8 +2925,8 @@ LABEL_30:
     Render::View::DrawDebugPrim(v17, DebugPrim_LineStrip, v22, v15);
     return;
   }
-  v18 = (unsigned int)`anonymous namespace'::AngleToSegment(v8, segCount);
-  v19 = `anonymous namespace'::AngleToSegment(v11, segCount);
+  v18 = (unsigned int)`anonymous namespace::AngleToSegment(v8, segCount);
+  v19 = `anonymous namespace::AngleToSegment(v11, segCount);
   v20 = v19;
   if ( v12 == 1 )
   {
@@ -2992,7 +2992,7 @@ void __fastcall Render::View::DrawArcSolid(Render::View *this, UFG::qMatrix44 *x
   v6 = this;
   v7 = info;
   v8 = angleRadsStart;
-  v9 = `anonymous namespace'::GetVertsCircle(segCount, &info->mColour1);
+  v9 = `anonymous namespace::GetVertsCircle(segCount, &info->mColour1);
   v10 = v9;
   vertices = v9;
   if ( angleRadsStart >= 0.0 )
@@ -3053,8 +3053,8 @@ LABEL_30:
     Render::View::DrawDebugPrim(v19, DebugPrim_TriangleFan, v17, v16);
     return;
   }
-  v20 = (unsigned int)`anonymous namespace'::AngleToSegment(v8, segCount);
-  v21 = `anonymous namespace'::AngleToSegment(v11, segCount);
+  v20 = (unsigned int)`anonymous namespace::AngleToSegment(v8, segCount);
+  v21 = `anonymous namespace::AngleToSegment(v11, segCount);
   if ( (_DWORD)v20 == v21 )
     return;
   v22 = vertices;
@@ -3118,7 +3118,7 @@ void __fastcall Render::View::DrawCircle(Render::View *this, UFG::qMatrix44 *xfo
   v5 = this;
   v6 = segCount;
   v7 = info;
-  v8 = `anonymous namespace'::GetVertsCircle(segCount, &info->mColour1);
+  v8 = `anonymous namespace::GetVertsCircle(segCount, &info->mColour1);
   v9 = 1660426324;
   v10 = v8;
   v11 = v7->mFaceCull;
@@ -4001,7 +4001,7 @@ void __fastcall Render::View::DrawSphere(Render::View *this, UFG::qMatrix44 *xfo
   xforma.v2.z = v40 * v42;
   xforma.v3.y = v77;
   v45 = 206781021;
-  v46 = `anonymous namespace'::GetVertsCircle(0x40u, &infoa.mColour1);
+  v46 = `anonymous namespace::GetVertsCircle(0x40u, &infoa.mColour1);
   if ( v4 )
   {
     v47 = 206781021;
@@ -4080,7 +4080,7 @@ void __fastcall Render::View::DrawSphere(Render::View *this, UFG::qMatrix44 *xfo
   xforma.v2.x = v68 * v71;
   xforma.v2.y = v69.m128_f32[0] * v71;
   xforma.v2.z = v67 * v71;
-  v72 = `anonymous namespace'::GetVertsCircle(0x40u, &infoa.mColour1);
+  v72 = `anonymous namespace::GetVertsCircle(0x40u, &infoa.mColour1);
   if ( v4 )
   {
     v73 = 543723269;
@@ -4274,7 +4274,7 @@ void __fastcall Render::View::DrawDebugPrim(Render::View *this, Render::DebugPri
   v9 = &v7->mStateArgs;
   v10 = v46;
   if ( !v46 )
-    v10 = `anonymous namespace'::gSimpleMaterial;
+    v10 = `anonymous namespace::gSimpleMaterial;
   if ( !(_S7 & 1) )
   {
     _S7 |= 1u;
@@ -4284,12 +4284,12 @@ void __fastcall Render::View::DrawDebugPrim(Render::View *this, Render::DebugPri
   if ( !vertex_decl_handle_0.mData )
   {
     v11 = UFG::qStringHash32("VertexDecl.Dynamic", 0xFFFFFFFF);
-    v12 = `UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result )
+    v12 = `UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result )
     {
       v13 = UFG::qResourceWarehouse::Instance();
       v12 = UFG::qResourceWarehouse::GetInventory(v13, 0x3E5FDA3Eu);
-      `UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result = v12;
+      `UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result = v12;
     }
     UFG::qResourceHandle::Init((UFG::qResourceHandle *)&vertex_decl_handle_0.mPrev, 0x3E5FDA3Eu, v11, v12);
   }
@@ -4633,13 +4633,13 @@ void __fastcall Render::View::DrawDebugPrimAABB(Render::View *this, UFG::qVector
     --v59;
   }
   while ( v59 );
-  v64 = `anonymous namespace'::gSimpleMaterial;
+  v64 = `anonymous namespace::gSimpleMaterial;
   v65 = 0i64;
-  if ( LODWORD(`anonymous namespace'::gSimpleMaterial[1].mStateBlockMask.mFlags[0]) != -1324127765 )
+  if ( LODWORD(`anonymous namespace::gSimpleMaterial[1].mStateBlockMask.mFlags[0]) != -1324127765 )
   {
     UFG::qResourceHandle::Init(
-      (UFG::qResourceHandle *)&`anonymous namespace'::gSimpleMaterial[1].mDebugName[20],
-      `anonymous namespace'::gSimpleMaterial[1].mStateBlockMask.mFlags[1],
+      (UFG::qResourceHandle *)&`anonymous namespace::gSimpleMaterial[1].mDebugName[20],
+      `anonymous namespace::gSimpleMaterial[1].mStateBlockMask.mFlags[1],
       0xB11369EB);
     v66 = v64->mMaterialUser.mOffset;
     if ( v66 )
@@ -5232,13 +5232,13 @@ void __fastcall Render::View::DrawDebugPrimCylinder(Render::View *this, UFG::qVe
     *(_DWORD *)(v55 - 80) = *(_DWORD *)(v53 + v54 - 32);
   }
   while ( v47 <= 20 );
-  v101 = `anonymous namespace'::gSimpleMaterial;
+  v101 = `anonymous namespace::gSimpleMaterial;
   v102 = 0i64;
-  if ( LODWORD(`anonymous namespace'::gSimpleMaterial[1].mStateBlockMask.mFlags[0]) != -1324127765 )
+  if ( LODWORD(`anonymous namespace::gSimpleMaterial[1].mStateBlockMask.mFlags[0]) != -1324127765 )
   {
     UFG::qResourceHandle::Init(
-      (UFG::qResourceHandle *)&`anonymous namespace'::gSimpleMaterial[1].mDebugName[20],
-      `anonymous namespace'::gSimpleMaterial[1].mStateBlockMask.mFlags[1],
+      (UFG::qResourceHandle *)&`anonymous namespace::gSimpleMaterial[1].mDebugName[20],
+      `anonymous namespace::gSimpleMaterial[1].mStateBlockMask.mFlags[1],
       0xB11369EB);
     v103 = v101->mMaterialUser.mOffset;
     if ( v103 )
@@ -5289,12 +5289,12 @@ void __fastcall Render::View::DrawDebugPrimCylinder(Render::View *this, UFG::qVe
   v111 = vars0;
   v112 = v156;
   Render::View::DrawDebugPrim(v156, DebugPrim_LineStrip, vertices, 21);
-  v113 = `anonymous namespace'::gSimpleMaterial;
-  if ( LODWORD(`anonymous namespace'::gSimpleMaterial[1].mStateBlockMask.mFlags[0]) != -1324127765 )
+  v113 = `anonymous namespace::gSimpleMaterial;
+  if ( LODWORD(`anonymous namespace::gSimpleMaterial[1].mStateBlockMask.mFlags[0]) != -1324127765 )
   {
     UFG::qResourceHandle::Init(
-      (UFG::qResourceHandle *)&`anonymous namespace'::gSimpleMaterial[1].mDebugName[20],
-      `anonymous namespace'::gSimpleMaterial[1].mStateBlockMask.mFlags[1],
+      (UFG::qResourceHandle *)&`anonymous namespace::gSimpleMaterial[1].mDebugName[20],
+      `anonymous namespace::gSimpleMaterial[1].mStateBlockMask.mFlags[1],
       0xB11369EB);
     v114 = v113->mMaterialUser.mOffset;
     if ( v114 )
@@ -5343,12 +5343,12 @@ void __fastcall Render::View::DrawDebugPrimCylinder(Render::View *this, UFG::qVe
     *v121 |= 0x20u;
   }
   Render::View::DrawDebugPrim(v112, DebugPrim_LineStrip, 0i64, 21);
-  v122 = `anonymous namespace'::gSimpleMaterial;
-  if ( LODWORD(`anonymous namespace'::gSimpleMaterial[1].mStateBlockMask.mFlags[0]) != -1324127765 )
+  v122 = `anonymous namespace::gSimpleMaterial;
+  if ( LODWORD(`anonymous namespace::gSimpleMaterial[1].mStateBlockMask.mFlags[0]) != -1324127765 )
   {
     UFG::qResourceHandle::Init(
-      (UFG::qResourceHandle *)&`anonymous namespace'::gSimpleMaterial[1].mDebugName[20],
-      `anonymous namespace'::gSimpleMaterial[1].mStateBlockMask.mFlags[1],
+      (UFG::qResourceHandle *)&`anonymous namespace::gSimpleMaterial[1].mDebugName[20],
+      `anonymous namespace::gSimpleMaterial[1].mStateBlockMask.mFlags[1],
       0xB11369EB);
     v123 = v122->mMaterialUser.mOffset;
     if ( v123 )
@@ -5397,12 +5397,12 @@ void __fastcall Render::View::DrawDebugPrimCylinder(Render::View *this, UFG::qVe
     *v130 |= 0x20u;
   }
   Render::View::DrawDebugPrim(v112, DebugPrim_LineStrip, v148, 21);
-  v131 = `anonymous namespace'::gSimpleMaterial;
-  if ( LODWORD(`anonymous namespace'::gSimpleMaterial[1].mStateBlockMask.mFlags[0]) != -1324127765 )
+  v131 = `anonymous namespace::gSimpleMaterial;
+  if ( LODWORD(`anonymous namespace::gSimpleMaterial[1].mStateBlockMask.mFlags[0]) != -1324127765 )
   {
     UFG::qResourceHandle::Init(
-      (UFG::qResourceHandle *)&`anonymous namespace'::gSimpleMaterial[1].mDebugName[20],
-      `anonymous namespace'::gSimpleMaterial[1].mStateBlockMask.mFlags[1],
+      (UFG::qResourceHandle *)&`anonymous namespace::gSimpleMaterial[1].mDebugName[20],
+      `anonymous namespace::gSimpleMaterial[1].mStateBlockMask.mFlags[1],
       0xB11369EB);
     v132 = v131->mMaterialUser.mOffset;
     if ( v132 )
@@ -5835,7 +5835,7 @@ void __fastcall Render::View::DrawAxes(Render::View *this, UFG::qMatrix44 *xform
   v5 = xform;
   v6 = this;
   v7 = scale;
-  v8 = `anonymous namespace'::GetVertsAxes();
+  v8 = `anonymous namespace::GetVertsAxes();
   v9 = 1660426324;
   v10 = v8;
   if ( v4 )

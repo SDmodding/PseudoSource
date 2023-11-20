@@ -187,11 +187,11 @@ void __fastcall UFG::TSNIS::MthdC_get_gameslice(SSInvokedMethod *pScope, SSInsta
 
   if ( ppResult )
   {
-    v2 = `anonymous namespace'::gpNISGameSlice.i_obj_p;
-    if ( `anonymous namespace'::gpNISGameSlice.i_obj_p
-      && `anonymous namespace'::gpNISGameSlice.i_ptr_id == `anonymous namespace'::gpNISGameSlice.i_obj_p->i_ptr_id )
+    v2 = `anonymous namespace::gpNISGameSlice.i_obj_p;
+    if ( `anonymous namespace::gpNISGameSlice.i_obj_p
+      && `anonymous namespace::gpNISGameSlice.i_ptr_id == `anonymous namespace::gpNISGameSlice.i_obj_p->i_ptr_id )
     {
-      ++`anonymous namespace'::gpNISGameSlice.i_obj_p->i_ref_count;
+      ++`anonymous namespace::gpNISGameSlice.i_obj_p->i_ref_count;
       *ppResult = (SSInstance *)&v2->vfptr;
     }
     else

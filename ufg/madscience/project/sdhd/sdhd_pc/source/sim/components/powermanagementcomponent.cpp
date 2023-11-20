@@ -73,8 +73,8 @@ void __fastcall UFG::PowerManagementComponent::PowerManagementComponent(UFG::Pow
   v4->mPrev = v4;
   v4->mNext = v4;
   UFG::qSafePointerNode<UFG::PowerManagementComponent>::qSafePointerNode<UFG::PowerManagementComponent>((UFG::qSafePointerNode<UFG::PowerManagementComponent> *)&v3->vfptr);
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::PowerManagementComponent::`vftable'{for `UFG::SimComponent'};
-  v3->vfptr = (UFG::qSafePointerNode<UFG::PowerManagementComponent>Vtbl *)&UFG::PowerManagementComponent::`vftable'{for `UFG::qSafePointerNode<UFG::PowerManagementComponent>'};
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::PowerManagementComponent::`vftable{for `UFG::SimComponent};
+  v3->vfptr = (UFG::qSafePointerNode<UFG::PowerManagementComponent>Vtbl *)&UFG::PowerManagementComponent::`vftable{for `UFG::qSafePointerNode<UFG::PowerManagementComponent>};
   v3->m_ePowerStateEnum = 0;
   v3->m_fSuspendDistanceSquared = -1.0;
   v3->m_fPreventSuspendTimeS = -1.0;
@@ -120,9 +120,9 @@ void __fastcall UFG::PowerManagementComponent::~PowerManagementComponent(UFG::Po
   UFG::qNode<UFG::PowerManagementComponent,UFG::PowerManagementComponent> *v10; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::PowerManagementComponent::`vftable'{for `UFG::SimComponent'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::PowerManagementComponent::`vftable{for `UFG::SimComponent};
   v2 = (UFG::qSafePointerNode<UFG::ParkourHandle> *)&this->vfptr;
-  this->vfptr = (UFG::qSafePointerNode<UFG::PowerManagementComponent>Vtbl *)&UFG::PowerManagementComponent::`vftable'{for `UFG::qSafePointerNode<UFG::PowerManagementComponent>'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::PowerManagementComponent>Vtbl *)&UFG::PowerManagementComponent::`vftable{for `UFG::qSafePointerNode<UFG::PowerManagementComponent>};
   if ( this == UFG::PowerManagementComponent::s_PowerManagementComponentpCurrentIterator )
     UFG::PowerManagementComponent::s_PowerManagementComponentpCurrentIterator = (UFG::PowerManagementComponent *)&this->mPrev[-6].mNext;
   v3 = (UFG::qNode<UFG::PowerManagementComponent,UFG::PowerManagementComponent> *)&this->mPrev;
@@ -133,7 +133,7 @@ void __fastcall UFG::PowerManagementComponent::~PowerManagementComponent(UFG::Po
   v3->mPrev = v3;
   v3->mNext = v3;
   UFG::qList<UFG::PowerManagedResource,UFG::PowerManagedResourceList,0,0>::~qList<UFG::PowerManagedResource,UFG::PowerManagedResourceList,0,0>((UFG::qList<ITask,ITask,0,0> *)&v1->m_PowerManagedResourceList);
-  v2->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::PowerManagementComponent>::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::PowerManagementComponent>::`vftable;
   UFG::qSafePointerNode<UFG::DynamicCoverCorner>::SetAllPointersToNull(v2);
   v6 = &v2->m_SafePointerList;
   UFG::qList<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList,1,0>::DeleteNodes(v6);
@@ -164,7 +164,7 @@ void __fastcall UFG::PowerManagementComponent::OnAttach(UFG::PowerManagementComp
   {
     v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&this->m_pSimObject->m_Name);
     UFG::qPrintf(
-      "WARNING: PowerManagementComponent for object '%s' is set negative (%f) - This will waste some memory and some CPU "
+      "WARNING: PowerManagementComponent for object %s is set negative (%f) - This will waste some memory and some CPU "
       "cycles.  Perhaps we can remove this component entirely from the property set?  Suspending.\n",
       v3,
       v2->m_fSuspendDistanceSquared);

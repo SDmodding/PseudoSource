@@ -51,7 +51,7 @@ void __fastcall UFG::WayStarSearch::WayStarSearch(UFG::WayStarSearch *this, UFG:
   v7 = (UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> *)&this->mPrev;
   v7->mPrev = v7;
   v7->mNext = v7;
-  this->vfptr = (UFG::WayStarSearchVtbl *)&UFG::WayStarSearch::`vftable';
+  this->vfptr = (UFG::WayStarSearchVtbl *)&UFG::WayStarSearch::`vftable;
   v8 = &this->m_OpenNodes;
   v8->mNode.mPrev = &v8->mNode;
   v8->mNode.mNext = &v8->mNode;
@@ -210,7 +210,7 @@ void __fastcall UFG::WayStarSearch::~WayStarSearch(UFG::WayStarSearch *this)
   UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> *v11; // rax
 
   v1 = this;
-  this->vfptr = (UFG::WayStarSearchVtbl *)&UFG::WayStarSearch::`vftable';
+  this->vfptr = (UFG::WayStarSearchVtbl *)&UFG::WayStarSearch::`vftable;
   v2 = this->m_SolutionNode;
   if ( v2 )
   {
@@ -278,7 +278,7 @@ void __fastcall UFG::WayFinderClient::WayFinderClient(UFG::WayFinderClient *this
   float v3; // xmm1_4
   float v4; // xmm2_4
 
-  this->vfptr = (UFG::WayFinderClientVtbl *)&UFG::WayFinderClient::`vftable';
+  this->vfptr = (UFG::WayFinderClientVtbl *)&UFG::WayFinderClient::`vftable;
   this->m_WayStartsWithTurnAround = 0;
   *(_DWORD *)&this->m_CurrWayEdge = 0;
   v1 = UFG::qVector3::msZero.y;
@@ -944,7 +944,7 @@ UFG::WayFinder *__fastcall UFG::GetWayFinder()
   if ( !(_S1_16 & 1) )
   {
     _S1_16 |= 1u;
-    WayFinderDummyGraph.vfptr = (UFG::WayGraphVtbl *)&UFG::WayGraph::`vftable';
+    WayFinderDummyGraph.vfptr = (UFG::WayGraphVtbl *)&UFG::WayGraph::`vftable;
     atexit(UFG::GetWayFinder_::_2_::_dynamic_atexit_destructor_for__WayFinderDummyGraph__);
     v0 = _S1_16;
   }

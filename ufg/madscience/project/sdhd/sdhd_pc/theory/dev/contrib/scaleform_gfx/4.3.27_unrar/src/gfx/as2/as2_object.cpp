@@ -5,7 +5,7 @@ void __fastcall Scaleform::GFx::AS2::ObjectInterface::~ObjectInterface(Scaleform
   Scaleform::GFx::AS2::Object *v1; // rcx
   unsigned int v2; // eax
 
-  this->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::ObjectInterface::`vftable';
+  this->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::ObjectInterface::`vftable;
   v1 = this->pProto.pObject;
   if ( v1 )
   {
@@ -111,15 +111,15 @@ void __fastcall Scaleform::GFx::AS2::Object::Object(Scaleform::GFx::AS2::Object 
   unsigned int v5; // eax
 
   v2 = this;
-  this->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::RefCountBaseGC<323>::`vftable';
+  this->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::RefCountBaseGC<323>::`vftable;
   this->pRCC = (Scaleform::GFx::AS2::RefCountCollector<323> *)&pcc->vfptr;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>::`vftable';
+  this->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>::`vftable;
   v3 = (Scaleform::GFx::AS2::ObjectInterface *)&this->vfptr;
-  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::ObjectInterface::`vftable';
+  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::ObjectInterface::`vftable;
   v3->pProto.pObject = 0i64;
-  this->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::Object::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::Object::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+  this->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::Object::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::Object::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   this->Members.mHash.pTable = 0i64;
   this->ResolveHandler.Flags = 0;
   this->ResolveHandler.Function = 0i64;
@@ -155,15 +155,15 @@ void __fastcall Scaleform::GFx::AS2::Object::Object(Scaleform::GFx::AS2::Object 
     v4 = (Scaleform::GFx::AS2::RefCountCollector<323> *)v3->pASMovieRoot.pObject[1].pMovieImpl->pLoadQueueHead;
   else
     v4 = 0i64;
-  this->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::RefCountBaseGC<323>::`vftable';
+  this->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::RefCountBaseGC<323>::`vftable;
   this->pRCC = v4;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>::`vftable';
+  this->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>::`vftable;
   v5 = (Scaleform::GFx::AS2::ObjectInterface *)&this->vfptr;
-  v5->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::ObjectInterface::`vftable';
+  v5->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::ObjectInterface::`vftable;
   v5->pProto.pObject = 0i64;
-  this->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::Object::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  v5->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::Object::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+  this->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::Object::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  v5->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::Object::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   this->Members.mHash.pTable = 0i64;
   this->ResolveHandler.Flags = 0;
   this->ResolveHandler.Function = 0i64;
@@ -197,15 +197,15 @@ void __fastcall Scaleform::GFx::AS2::Object::Object(Scaleform::GFx::AS2::Object 
     v5 = (Scaleform::GFx::AS2::RefCountCollector<323> *)v4->pASMovieRoot.pObject[1].pMovieImpl->pLoadQueueHead;
   else
     v5 = 0i64;
-  this->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::RefCountBaseGC<323>::`vftable';
+  this->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::RefCountBaseGC<323>::`vftable;
   this->pRCC = v5;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>::`vftable';
+  this->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>::`vftable;
   v6 = (Scaleform::GFx::AS2::ObjectInterface *)&this->vfptr;
-  v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::ObjectInterface::`vftable';
+  v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::ObjectInterface::`vftable;
   v6->pProto.pObject = 0i64;
-  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::Object::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::Object::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::Object::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::Object::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   v3->Members.mHash.pTable = 0i64;
   v3->ResolveHandler.Flags = 0;
   v3->ResolveHandler.Function = 0i64;
@@ -243,15 +243,15 @@ void __fastcall Scaleform::GFx::AS2::Object::Object(Scaleform::GFx::AS2::Object 
   {
     v6 = 0i64;
   }
-  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::RefCountBaseGC<323>::`vftable';
+  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::RefCountBaseGC<323>::`vftable;
   v3->pRCC = v6;
   v3->RefCount = 1;
-  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>::`vftable';
+  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>::`vftable;
   v7 = (Scaleform::GFx::AS2::ObjectInterface *)&v3->vfptr;
-  v7->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::ObjectInterface::`vftable';
+  v7->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::ObjectInterface::`vftable;
   v7->pProto.pObject = 0i64;
-  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::Object::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  v7->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::Object::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::Object::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  v7->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::Object::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   v3->Members.mHash.pTable = 0i64;
   v3->ResolveHandler.Flags = 0;
   v3->ResolveHandler.Function = 0i64;
@@ -277,9 +277,9 @@ void __fastcall Scaleform::GFx::AS2::Object::~Object(Scaleform::GFx::AS2::Object
   unsigned int v9; // eax
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::Object::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
+  this->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::Object::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
   v2 = (Scaleform::GFx::AS2::ObjectInterface *)&this->vfptr;
-  this->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::Object::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+  this->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::Object::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   v3 = this->pWatchpoints;
   if ( v3 )
   {
@@ -315,7 +315,7 @@ void __fastcall Scaleform::GFx::AS2::Object::~Object(Scaleform::GFx::AS2::Object
   }
   v1->ResolveHandler.pLocalFrame = 0i64;
   Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::AS2::Member,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::AS2::Member,Scaleform::GFx::ASStringHashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::AS2::Member,Scaleform::GFx::ASStringHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::ASString,324>,Scaleform::GFx::HashsetNodeEntry_GC<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::AS2::Member,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::AS2::Member,Scaleform::GFx::ASStringHashFunctor>::NodeHashF>>::~HashSetBase<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::AS2::Member,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::AS2::Member,Scaleform::GFx::ASStringHashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::AS2::Member,Scaleform::GFx::ASStringHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::ASString,324>,Scaleform::GFx::HashsetNodeEntry_GC<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::AS2::Member,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::AS2::Member,Scaleform::GFx::ASStringHashFunctor>::NodeHashF>>((Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::AS2::Value,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::AS2::Value,Scaleform::GFx::ASStringHashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::AS2::Value,Scaleform::GFx::ASStringHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::ASString,324>,Scaleform::GFx::HashsetNodeEntry_GC<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::AS2::Value,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::AS2::Value,Scaleform::GFx::ASStringHashFunctor>::NodeHashF> > *)&v1->Members);
-  v2->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::ObjectInterface::`vftable';
+  v2->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::ObjectInterface::`vftable;
   v8 = (Scaleform::GFx::AS2::RefCountBaseGC<323> *)&v2->pProto.pObject->vfptr;
   if ( v8 )
   {
@@ -326,7 +326,7 @@ void __fastcall Scaleform::GFx::AS2::Object::~Object(Scaleform::GFx::AS2::Object
       Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v8);
     }
   }
-  v1->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::RefCountBaseGC<323>::`vftable';
+  v1->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::RefCountBaseGC<323>::`vftable;
 }
 
 // File Line: 186
@@ -2019,7 +2019,7 @@ LABEL_43:
     v20 = ((_QWORD)((char *)v7->Stack.pCurrent - (char *)v7->Stack.pPageStart) >> 5)
         + 32 * v7->Stack.Pages.Data.Size
         - 32;
-    *(_QWORD *)&v25.T.Type = &Scaleform::GFx::AS2::FnCall::`vftable';
+    *(_QWORD *)&v25.T.Type = &Scaleform::GFx::AS2::FnCall::`vftable;
     v25.V.pStringNode = (Scaleform::GFx::ASStringNode *)&v31;
     *((_OWORD *)&v25.NV + 1) = (unsigned __int64)v19;
     v27 = 0;
@@ -2033,7 +2033,7 @@ LABEL_43:
       &v25,
       v14->Callback.pLocalFrame,
       0i64,
-      &Scaleform::GFx::AS2::FnCall::`vftable',
+      &Scaleform::GFx::AS2::FnCall::`vftable,
       &v31,
       v19,
       0i64,
@@ -2047,7 +2047,7 @@ LABEL_43:
     v22 = ((_QWORD)((char *)v7->Stack.pCurrent - (char *)v7->Stack.pPageStart) >> 5)
         + 32 * v7->Stack.Pages.Data.Size
         - 32;
-    *(_QWORD *)&v25.T.Type = &Scaleform::GFx::AS2::FnCall::`vftable';
+    *(_QWORD *)&v25.T.Type = &Scaleform::GFx::AS2::FnCall::`vftable;
     v25.V.pStringNode = (Scaleform::GFx::ASStringNode *)&v31;
     *((_OWORD *)&v25.NV + 1) = (unsigned __int64)v9;
     v27 = 0;
@@ -2061,7 +2061,7 @@ LABEL_43:
       &v25,
       v14->Callback.pLocalFrame,
       0i64,
-      &Scaleform::GFx::AS2::FnCall::`vftable',
+      &Scaleform::GFx::AS2::FnCall::`vftable,
       &v31,
       v9,
       0i64,
@@ -2109,7 +2109,7 @@ void __fastcall Scaleform::GFx::AS2::GASPrototypeBase::~GASPrototypeBase(Scalefo
   unsigned int v10; // eax
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::AS2::GASPrototypeBaseVtbl *)&Scaleform::GFx::AS2::GASPrototypeBase::`vftable';
+  this->vfptr = (Scaleform::GFx::AS2::GASPrototypeBaseVtbl *)&Scaleform::GFx::AS2::GASPrototypeBase::`vftable;
   v2 = this->pInterfaces;
   if ( v2 )
   {
@@ -2221,10 +2221,10 @@ void __fastcall Scaleform::GFx::AS2::GASPrototypeBase::InitFunctionMembers(Scale
       {
         v16 = *(Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl **)(v12 + 8);
         Scaleform::GFx::AS2::Object::Object(v14, v6);
-        v15->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-        v15->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
-        v15->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-        v15->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+        v15->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+        v15->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+        v15->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+        v15->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
         v15[1].vfptr = v16;
         Scaleform::GFx::AS2::Object::Set__proto__((Scaleform::GFx::AS2::Object *)((char *)v15 + 32), v6, v10);
       }
@@ -2777,9 +2777,9 @@ void __fastcall Scaleform::GFx::AS2::ObjectProto::ObjectProto(Scaleform::GFx::AS
     (Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::Object,Scaleform::GFx::AS2::Environment> *)&this->vfptr,
     psc,
     pprototype);
-  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::ObjectProto::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::ObjectProto::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
-  v3->vfptr = (Scaleform::GFx::AS2::GASPrototypeBaseVtbl *)&Scaleform::GFx::AS2::ObjectProto::`vftable';
+  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::ObjectProto::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::ObjectProto::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+  v3->vfptr = (Scaleform::GFx::AS2::GASPrototypeBaseVtbl *)&Scaleform::GFx::AS2::ObjectProto::`vftable;
 }
 
 // File Line: 962
@@ -2929,11 +2929,11 @@ void __fastcall Scaleform::GFx::AS2::ObjectProto::AddProperty(Scaleform::GFx::AS
       v46 = v23;
       if ( v23 )
       {
-        *(_QWORD *)v23 = &Scaleform::GFx::AS2::RefCountBaseGC<323>::`vftable';
+        *(_QWORD *)v23 = &Scaleform::GFx::AS2::RefCountBaseGC<323>::`vftable;
         *(_QWORD *)(v23 + 8) = v22;
         *(_DWORD *)(v23 + 24) = 1;
-        *(_QWORD *)v23 = &Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::ValueProperty>::`vftable';
-        *(_QWORD *)v23 = &Scaleform::GFx::AS2::ValueProperty::`vftable';
+        *(_QWORD *)v23 = &Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::ValueProperty>::`vftable;
+        *(_QWORD *)v23 = &Scaleform::GFx::AS2::ValueProperty::`vftable;
         v24 = (Scaleform::GFx::AS2::FunctionRefBase *)(v23 + 32);
         v24->Flags = 0;
         v24->Function = v39.Function;
@@ -3865,10 +3865,10 @@ Scaleform::GFx::AS2::Object *__fastcall Scaleform::GFx::AS2::FunctionCtorFunctio
   if ( !v3 )
     return 0i64;
   Scaleform::GFx::AS2::Object::Object(v3, v2);
-  v4->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  v4->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
-  v4->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  v4->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+  v4->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  v4->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+  v4->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  v4->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   v4[1].vfptr = 0i64;
   return v4;
 }

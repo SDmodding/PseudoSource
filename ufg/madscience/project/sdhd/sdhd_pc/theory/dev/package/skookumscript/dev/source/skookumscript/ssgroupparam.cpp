@@ -8,16 +8,16 @@ void __fastcall SSGroupParam::~SSGroupParam(SSGroupParam *this)
   unsigned __int64 i; // rsi
 
   v1 = this;
-  this->vfptr = (SSParameterBaseVtbl *)&SSGroupParam::`vftable';
+  this->vfptr = (SSParameterBaseVtbl *)&SSGroupParam::`vftable;
   v2 = this->i_class_pattern.i_count;
   if ( (_DWORD)v2 )
   {
     v3 = this->i_class_pattern.i_array_p;
     for ( i = (unsigned __int64)&v3[v2]; (unsigned __int64)v3 < i; ++v3 )
-       SSClassDescBase::`vcall'{16,{flat}}(*v3);
+       SSClassDescBase::`vcall{16,{flat}}(*v3);
   }
   AMemory::c_free_func(v1->i_class_pattern.i_array_p);
-  v1->vfptr = (SSParameterBaseVtbl *)&SSParameterBase::`vftable';
+  v1->vfptr = (SSParameterBaseVtbl *)&SSParameterBase::`vftable;
 }
 
 // File Line: 71
@@ -48,8 +48,8 @@ void __fastcall SSGroupParam::SSGroupParam(SSGroupParam *this, unsigned int clas
   v4 = class_count;
   v5 = this;
   this->i_name = (ASymbol)ASymbol::create_from_binary(&result, binary_pp)->i_uid;
-  v5->vfptr = (SSParameterBaseVtbl *)&SSParameterBase::`vftable';
-  v5->vfptr = (SSParameterBaseVtbl *)&SSGroupParam::`vftable';
+  v5->vfptr = (SSParameterBaseVtbl *)&SSParameterBase::`vftable;
+  v5->vfptr = (SSParameterBaseVtbl *)&SSGroupParam::`vftable;
   v5->i_class_pattern.i_count = 0;
   v5->i_class_pattern.i_array_p = 0i64;
   v5->i_class_pattern.i_size = 0;
@@ -231,8 +231,8 @@ SSParameterBase *__fastcall SSGroupParam::as_finalized_generic(SSGroupParam *thi
   if ( v4 )
   {
     v4[2] = v3->i_name.i_uid;
-    *(_QWORD *)v4 = &SSParameterBase::`vftable';
-    *(_QWORD *)v4 = &SSGroupParam::`vftable';
+    *(_QWORD *)v4 = &SSParameterBase::`vftable;
+    *(_QWORD *)v4 = &SSGroupParam::`vftable;
     v4[4] = 0;
     *((_QWORD *)v4 + 3) = 0i64;
     v4[8] = 0;

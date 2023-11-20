@@ -328,8 +328,8 @@ __int64 __fastcall Render::GenerateBoltsOnObject(Render::ElectrifiedObject *obje
         if ( v23 <= 0 || v74 <= 0 )
         {
 LABEL_67:
-          `eh vector destructor iterator'(&ptr, 0x18ui64, 2, (void (__fastcall *)(void *))_);
-          `eh vector destructor iterator'(&v82, 0x18ui64, 2, (void (__fastcall *)(void *))_);
+          `eh vector destructor iterator(&ptr, 0x18ui64, 2, (void (__fastcall *)(void *))_);
+          `eh vector destructor iterator(&v82, 0x18ui64, 2, (void (__fastcall *)(void *))_);
           return v8;
         }
         v24 = 0.0;

@@ -25,7 +25,7 @@ void __fastcall Render::DynamicLightComponent::DynamicLightComponent(Render::Dyn
   v3 = (UFG::qNode<Render::DynamicLightComponent,Render::DynamicLightComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&Render::DynamicLightComponent::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&Render::DynamicLightComponent::`vftable;
   v4 = Render::DynamicLightComponent::s_DynamicLightComponentList.mNode.mPrev;
   Render::DynamicLightComponent::s_DynamicLightComponentList.mNode.mPrev->mNext = (UFG::qNode<Render::DynamicLightComponent,Render::DynamicLightComponent> *)&v2->mPrev;
   v3->mPrev = v4;
@@ -49,7 +49,7 @@ void __fastcall Render::DynamicLightComponent::~DynamicLightComponent(Render::Dy
   UFG::qNode<Render::DynamicLightComponent,Render::DynamicLightComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&Render::DynamicLightComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&Render::DynamicLightComponent::`vftable;
   if ( this == Render::DynamicLightComponent::s_DynamicLightComponentpCurrentIterator )
     Render::DynamicLightComponent::s_DynamicLightComponentpCurrentIterator = (Render::DynamicLightComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<Render::DynamicLightComponent,Render::DynamicLightComponent> *)&this->mPrev;

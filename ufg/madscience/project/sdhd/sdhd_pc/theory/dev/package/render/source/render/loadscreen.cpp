@@ -350,9 +350,9 @@ void __fastcall Render::LoadScreen::RenderCallback(float delta_ms, void *param)
     }
     LayerSubmitContext::AddRenderCommand((LayerSubmitContext *)&view.mViewWorld.v2.z, 17, 0, v11);
   }
-  `Render::LoadScreen::RenderCallback'::`10'::elapsed_time = `Render::LoadScreen::RenderCallback'::`10'::elapsed_time
+  `Render::LoadScreen::RenderCallback::`10::elapsed_time = `Render::LoadScreen::RenderCallback::`10::elapsed_time
                                                            + delta_ms;
-  v12 = `Render::LoadScreen::RenderCallback'::`10'::elapsed_time;
+  v12 = `Render::LoadScreen::RenderCallback::`10::elapsed_time;
   v13 = (float *)UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x10u, 0x10u);
   v14 = v13;
   *v13 = v12;
@@ -388,7 +388,7 @@ void __fastcall Render::LoadScreen::RenderCallback(float delta_ms, void *param)
   RenderQueueLayer::SerializeRenderQueues(&Render::LoadScreen::mRenderLayer);
   Illusion::RenderQueueSystem::FlushRenderPhase(v3, 1u, 0, 0i64, 0);
   poly.mVertices = (Render::vDynamic *)&v20;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     &ptr,
     0x10ui64,
     128,
@@ -507,12 +507,12 @@ void __fastcall Render::InitLoadScreen(Render::LoadScreenInitParams *params)
     atexit(Render::InitLoadScreen_::_4_::_dynamic_atexit_destructor_for__StaticImageTexture__);
   }
   v6 = UFG::qStringHashUpper32(v1->mBackgroundName.mData, 0xFFFFFFFF);
-  v7 = `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result )
+  v7 = `UFG::qGetResourceInventory<Illusion::Texture>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Texture>::`2::result )
   {
     v8 = UFG::qResourceWarehouse::Instance();
     v7 = UFG::qResourceWarehouse::GetInventory(v8, 0x8B43FABF);
-    `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result = v7;
+    `UFG::qGetResourceInventory<Illusion::Texture>::`2::result = v7;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&StaticImageTexture.mPrev, 0x8B43FABF, v6, v7);
   v9 = _S1_9;

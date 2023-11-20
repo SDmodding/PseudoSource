@@ -8,13 +8,13 @@ void __fastcall NISNode::NISNode(NISNode *this, MemImageLoadFlag flag)
   __int64 v5; // rax
 
   v2 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   v3 = 0i64;
   v2->mResourceOwner = 0i64;
-  v2->vfptr = (Expression::IMemberMapVtbl *)&ActionNode::`vftable';
-  v2->vfptr = (Expression::IMemberMapVtbl *)&ActionNodeImplementation::`vftable';
-  v2->vfptr = (Expression::IMemberMapVtbl *)&ActionNodePlayable::`vftable';
-  v2->vfptr = (Expression::IMemberMapVtbl *)&NISNode::`vftable';
+  v2->vfptr = (Expression::IMemberMapVtbl *)&ActionNode::`vftable;
+  v2->vfptr = (Expression::IMemberMapVtbl *)&ActionNodeImplementation::`vftable;
+  v2->vfptr = (Expression::IMemberMapVtbl *)&ActionNodePlayable::`vftable;
+  v2->vfptr = (Expression::IMemberMapVtbl *)&NISNode::`vftable;
   v2->mLightGroupObject = 0i64;
   v4 = v2->mTracksAction.mOffset;
   if ( v4 && (UFG::qOffset64<TrackGroup *> *)((char *)&v2->mTracksAction + v4) )
@@ -57,12 +57,12 @@ void __fastcall NISActorNode::NISActorNode(NISActorNode *this, MemImageLoadFlag 
   UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v6; // rax
   UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v7; // rax
 
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
-  this->vfptr = (Expression::IMemberMapVtbl *)&ActionNode::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ActionNodeImplementation::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ActionNodePlayable::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&NISActorNode::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&ActionNode::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ActionNodeImplementation::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ActionNodePlayable::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&NISActorNode::`vftable;
   v2 = &this->mRightHandEquipSlot;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;

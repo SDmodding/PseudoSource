@@ -9,7 +9,7 @@ void __fastcall Scaleform::Render::D3D1x::HAL::HAL(Scaleform::Render::D3D1x::HAL
   Scaleform::Render::ShaderHAL<Scaleform::Render::D3D1x::ShaderManager,Scaleform::Render::D3D1x::ShaderInterface>::ShaderHAL<Scaleform::Render::D3D1x::ShaderManager,Scaleform::Render::D3D1x::ShaderInterface>(
     (Scaleform::Render::ShaderHAL<Scaleform::Render::D3D1x::ShaderManager,Scaleform::Render::D3D1x::ShaderInterface> *)&this->vfptr,
     commandQueue);
-  v2->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::D3D1x::HAL::`vftable';
+  v2->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::D3D1x::HAL::`vftable;
   v2->pDevice = 0i64;
   v2->pDeviceContext = 0i64;
   v2->pRenderTargetView.pObject = 0i64;
@@ -42,7 +42,7 @@ void __fastcall Scaleform::Render::D3D1x::HAL::~HAL(Scaleform::Render::D3D1x::HA
   ID3D11RenderTargetView *v4; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::D3D1x::HAL::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::D3D1x::HAL::`vftable;
   Scaleform::Render::D3D1x::HAL::ShutdownHAL(this);
   v2 = (Scaleform::Render::RenderBuffer *)v1->pTextureManager.pObject;
   if ( v2 )
@@ -1032,16 +1032,16 @@ Scaleform::Render::RenderBuffer *__fastcall Scaleform::Render::D3D1x::HAL::Creat
     v16 = v11;
     if ( v11 )
     {
-      *(_QWORD *)v11 = &Scaleform::RefCountImplCore::`vftable';
+      *(_QWORD *)v11 = &Scaleform::RefCountImplCore::`vftable;
       v11[2] = 1;
-      *(_QWORD *)v11 = &Scaleform::RefCountVImpl::`vftable';
-      *(_QWORD *)v11 = &Scaleform::Render::RenderBuffer::`vftable';
+      *(_QWORD *)v11 = &Scaleform::RefCountVImpl::`vftable;
+      *(_QWORD *)v11 = &Scaleform::Render::RenderBuffer::`vftable;
       v11[4] = 5;
       *((_QWORD *)v11 + 3) = 0i64;
       *((_QWORD *)v11 + 4) = 0i64;
       v11[10] = v9;
       v11[11] = v10;
-      *(_QWORD *)v11 = &Scaleform::Render::DepthStencilBuffer::`vftable';
+      *(_QWORD *)v11 = &Scaleform::Render::DepthStencilBuffer::`vftable;
       v6 = (Scaleform::Render::DepthStencilBuffer *)v11;
     }
     v14 = v6;
@@ -1629,17 +1629,17 @@ bool __fastcall Scaleform::Render::D3D1x::HAL::createDefaultRenderBuffer(Scalefo
   v19 = v5;
   if ( v5 )
   {
-    *(_QWORD *)v5 = &Scaleform::RefCountImplCore::`vftable';
+    *(_QWORD *)v5 = &Scaleform::RefCountImplCore::`vftable;
     v5[2] = 1;
-    *(_QWORD *)v5 = &Scaleform::RefCountVImpl::`vftable';
-    *(_QWORD *)v5 = &Scaleform::Render::RenderBuffer::`vftable';
+    *(_QWORD *)v5 = &Scaleform::RefCountVImpl::`vftable;
+    *(_QWORD *)v5 = &Scaleform::Render::RenderBuffer::`vftable;
     v5[4] = 1;
     *((_QWORD *)v5 + 3) = 0i64;
     *((_QWORD *)v5 + 4) = 0i64;
     v6 = v29;
     v5[10] = v28;
     v5[11] = v6;
-    *(_QWORD *)v5 = &Scaleform::Render::RenderTarget::`vftable';
+    *(_QWORD *)v5 = &Scaleform::Render::RenderTarget::`vftable;
     v7 = v29;
     v8 = v28;
     *((_QWORD *)v5 + 6) = 0i64;
@@ -1668,16 +1668,16 @@ bool __fastcall Scaleform::Render::D3D1x::HAL::createDefaultRenderBuffer(Scalefo
     v19 = v12;
     if ( v12 )
     {
-      *(_QWORD *)v12 = &Scaleform::RefCountImplCore::`vftable';
+      *(_QWORD *)v12 = &Scaleform::RefCountImplCore::`vftable;
       v12[2] = 1;
-      *(_QWORD *)v12 = &Scaleform::RefCountVImpl::`vftable';
-      *(_QWORD *)v12 = &Scaleform::Render::RenderBuffer::`vftable';
+      *(_QWORD *)v12 = &Scaleform::RefCountVImpl::`vftable;
+      *(_QWORD *)v12 = &Scaleform::Render::RenderBuffer::`vftable;
       v12[4] = 5;
       *((_QWORD *)v12 + 3) = 0i64;
       *((_QWORD *)v12 + 4) = 0i64;
       v12[10] = v10;
       v12[11] = v11;
-      *(_QWORD *)v12 = &Scaleform::Render::DepthStencilBuffer::`vftable';
+      *(_QWORD *)v12 = &Scaleform::Render::DepthStencilBuffer::`vftable;
       v4 = (Scaleform::Render::DepthStencilBuffer *)v12;
     }
     v18 = v4;

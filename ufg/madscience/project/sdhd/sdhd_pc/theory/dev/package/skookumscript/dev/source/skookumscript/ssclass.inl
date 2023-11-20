@@ -105,7 +105,7 @@ void __fastcall SSMetaClass::append_coroutine(SSMetaClass *this, SSCoroutineBase
   AErrMsg v4; // [rsp+78h] [rbp-40h]
   eAErrAction action_p; // [rsp+D0h] [rbp+18h]
 
-  if ( `SSMetaClass::append_coroutine'::`3'::_test )
+  if ( `SSMetaClass::append_coroutine::`3::_test )
   {
     AErrMsg::AErrMsg(&err_msg, "Class coroutines not yet implemented!", AErrLevel_error, 0i64, 0i64);
     AErrMsg::AErrMsg(
@@ -116,7 +116,7 @@ void __fastcall SSMetaClass::append_coroutine(SSMetaClass *this, SSCoroutineBase
       "d:\\ufg\\madscience\\project\\sdhd\\sdhd_pc\\theory\\dev\\package\\skookumscript\\dev\\source\\skookumscript\\ssclass.inl",
       0xA0u,
       1u);
-    if ( ADebug::resolve_error(v2, &action_p, &`SSMetaClass::append_coroutine'::`3'::_test) )
+    if ( ADebug::resolve_error(v2, &action_p, &`SSMetaClass::append_coroutine::`3::_test) )
       __debugbreak();
     if ( action_p != 3 )
       __debugbreak();
@@ -505,9 +505,9 @@ void __fastcall SSClassUnion::SSClassUnion(SSClassUnion *this, SSClassUnion *cla
 
   v2 = class_union;
   v3 = this;
-  this->vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable';
+  this->vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable;
   this->i_ref_count = 0;
-  this->vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable';
+  this->vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable;
   this->i_common_class_p = class_union->i_common_class_p;
   v4 = APArrayBase<SSClassUnaryBase>::alloc_array(class_union->i_union.i_count);
   v5 = v2->i_union.i_count;
@@ -523,7 +523,7 @@ void __fastcall SSClassUnion::SSClassUnion(SSClassUnion *this, SSClassUnion *cla
   {
     v8 = v3->i_union.i_array_p;
     for ( i = (unsigned __int64)&v8[v7]; (unsigned __int64)v8 < i; ++v8 )
-       SSClassDescBase::`vcall'{8,{flat}}(*v8);
+       SSClassDescBase::`vcall{8,{flat}}(*v8);
   }
 }
 
@@ -538,7 +538,7 @@ void __fastcall SSClassUnion::~SSClassUnion(SSClassUnion *this)
   unsigned __int64 i; // rsi
 
   v1 = this;
-  this->vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable';
+  this->vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable;
   v2 = this->i_common_class_p;
   if ( v2 )
     ((void (__cdecl *)(SSClassUnaryBase *))v2->vfptr->dereference_delay)(v2);
@@ -547,10 +547,10 @@ void __fastcall SSClassUnion::~SSClassUnion(SSClassUnion *this)
   {
     v4 = v1->i_union.i_array_p;
     for ( i = (unsigned __int64)&v4[v3]; (unsigned __int64)v4 < i; ++v4 )
-       SSClassDescBase::`vcall'{24,{flat}}(*v4);
+       SSClassDescBase::`vcall{24,{flat}}(*v4);
   }
   AMemory::c_free_func(v1->i_union.i_array_p);
-  v1->vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable';
+  v1->vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable;
 }
 
 // File Line: 674
@@ -584,14 +584,14 @@ SSClassUnion *__fastcall SSClassUnion::operator=(SSClassUnion *this, SSClassUnio
   {
     v7 = v3->i_union.i_array_p;
     for ( i = (unsigned __int64)&v7[v6]; (unsigned __int64)v7 < i; ++v7 )
-       SSClassDescBase::`vcall'{8,{flat}}(*v7);
+       SSClassDescBase::`vcall{8,{flat}}(*v7);
   }
   v9 = v4->i_union.i_count;
   if ( (_DWORD)v9 )
   {
     v10 = v4->i_union.i_array_p;
     for ( j = (unsigned __int64)&v10[v9]; (unsigned __int64)v10 < j; ++v10 )
-       SSClassDescBase::`vcall'{24,{flat}}(*v10);
+       SSClassDescBase::`vcall{24,{flat}}(*v10);
   }
   v12 = v3->i_union.i_count;
   v4->i_union.i_count = v12;
@@ -628,14 +628,14 @@ SSClassUnion *__fastcall SSClassUnion::from_binary_ref(const void **binary_pp)
   else
   {
     class_union.i_ref_count = 0;
-    class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable';
+    class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable;
     class_union.i_common_class_p = 0i64;
     class_union.i_union.i_count = 0;
     class_union.i_union.i_array_p = 0i64;
     class_union.i_union.i_size = 0;
     SSClassUnion::assign_binary(&class_union, binary_pp);
     v3 = SSClassUnion::get_or_create(&class_union);
-    class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable';
+    class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable;
     if ( class_union.i_common_class_p )
       ((void (__cdecl *)(SSClassUnaryBase *, SSClassDescBaseVtbl *, __int64))class_union.i_common_class_p->vfptr->dereference_delay)(
         class_union.i_common_class_p,
@@ -650,7 +650,7 @@ SSClassUnion *__fastcall SSClassUnion::from_binary_ref(const void **binary_pp)
       {
         do
         {
-           SSClassDescBase::`vcall'{24,{flat}}(*v6);
+           SSClassDescBase::`vcall{24,{flat}}(*v6);
           ++v6;
         }
         while ( v6 < (__int64 *)v7 );

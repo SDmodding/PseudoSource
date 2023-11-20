@@ -3,12 +3,12 @@
 void __fastcall hkaiPlaneVolume::hkaiPlaneVolume(hkaiPlaneVolume *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiPlaneVolume::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiPlaneVolume::`vftable;
   this->m_planes.m_data = 0i64;
   this->m_planes.m_size = 0;
   this->m_planes.m_capacityAndFlags = 2147483648;
   *(_DWORD *)&this->m_geometry.m_memSizeAndFlags = 0x1FFFF;
-  this->m_geometry.vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable';
+  this->m_geometry.vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable;
   this->m_geometry.m_vertices.m_data = 0i64;
   this->m_geometry.m_vertices.m_size = 0;
   this->m_geometry.m_vertices.m_capacityAndFlags = 2147483648;
@@ -33,7 +33,7 @@ void __fastcall hkaiPlaneVolume::hkaiPlaneVolume(hkaiPlaneVolume *this, hkFinish
   v4 = f.m_finishing;
   v2 = this;
   v3 = &this->m_geometry;
-  v3[-1].m_vertices.m_data = (hkVector4f *)&hkaiPlaneVolume::`vftable';
+  v3[-1].m_vertices.m_data = (hkVector4f *)&hkaiPlaneVolume::`vftable;
   hkGeometry::hkGeometry(v3, f);
   if ( v4 )
   {

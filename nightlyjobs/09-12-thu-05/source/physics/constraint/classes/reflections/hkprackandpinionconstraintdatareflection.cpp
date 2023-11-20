@@ -78,7 +78,7 @@ void __fastcall finishLoadedObjecthkpRackAndPinionConstraintData(void *p, int fi
   {
     v2 = p;
     hkpConstraintData::hkpConstraintData((hkpConstraintData *)p, (hkFinishLoadedObjectFlag)finishing);
-    *v2 = &hkpRackAndPinionConstraintData::`vftable';
+    *v2 = &hkpRackAndPinionConstraintData::`vftable;
   }
 }
 
@@ -96,7 +96,7 @@ void **__fastcall getVtablehkpRackAndPinionConstraintData()
   hkpConstraintData v1; // [rsp+20h] [rbp-C8h]
 
   hkpConstraintData::hkpConstraintData(&v1, 0);
-  return &hkpRackAndPinionConstraintData::`vftable';
+  return &hkpRackAndPinionConstraintData::`vftable;
 }
 
 // File Line: 165

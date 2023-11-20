@@ -134,12 +134,12 @@ __int64 __fastcall UFG::SweptSphereCapsuleQuery(float r0, UFG::qVector3 *p0, UFG
   v5 = p1;
   v6 = p0;
   v7 = 0;
-  v44 = &hkpClosestCdPointCollector::`vftable';
+  v44 = &hkpClosestCdPointCollector::`vftable;
   v8 = 0i64;
   v47 = 0i64;
   v46 = _mm_shuffle_ps(v46, _mm_unpackhi_ps(v46, (__m128)xmmword_141A712A0), 196);
   v45 = 2139095022;
-  v49 = &hkpClosestCdPointCollector::`vftable';
+  v49 = &hkpClosestCdPointCollector::`vftable;
   v52 = 0i64;
   v51 = _mm_shuffle_ps(v51, _mm_unpackhi_ps(v51, (__m128)xmmword_141A712A0), 196);
   v50 = 2139095022;

@@ -10,7 +10,7 @@ void __fastcall hkpVehicleManager::~hkpVehicleManager(hkpVehicleManager *this)
   v1 = this->m_registeredVehicles.m_size;
   v2 = 0i64;
   v3 = this;
-  for ( this->vfptr = (hkBaseObjectVtbl *)&hkpVehicleManager::`vftable'; v2 < v1; ++v2 )
+  for ( this->vfptr = (hkBaseObjectVtbl *)&hkpVehicleManager::`vftable; v2 < v1; ++v2 )
     hkReferencedObject::removeReference((hkReferencedObject *)&v3->m_registeredVehicles.m_data[v2]->vfptr);
   v4 = v3->m_registeredVehicles.m_capacityAndFlags;
   v3->m_registeredVehicles.m_size = 0;
@@ -21,7 +21,7 @@ void __fastcall hkpVehicleManager::~hkpVehicleManager(hkpVehicleManager *this)
       8 * v4);
   v3->m_registeredVehicles.m_data = 0i64;
   v3->m_registeredVehicles.m_capacityAndFlags = 2147483648;
-  v3->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v3->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 25

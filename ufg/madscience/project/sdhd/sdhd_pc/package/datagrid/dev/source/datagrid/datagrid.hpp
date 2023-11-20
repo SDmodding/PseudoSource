@@ -19,7 +19,7 @@ void __fastcall UFG::Grid<UFG::RoadNetworkSegment>::Init(UFG::Grid<UFG::RoadNetw
   if ( v7 )
   {
     v8 = &v7[-1].mNode.mNext;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v7,
       0x10ui64,
       (int)v7[-1].mNode.mNext,
@@ -51,7 +51,7 @@ void __fastcall UFG::Grid<UFG::RoadNetworkSegment>::Init(UFG::Grid<UFG::RoadNetw
   {
     *(_DWORD *)v15 = v11;
     v16 = (signed __int64)(v15 + 8);
-    `eh vector constructor iterator'(
+    `eh vector constructor iterator(
       v15 + 8,
       0x10ui64,
       v11,

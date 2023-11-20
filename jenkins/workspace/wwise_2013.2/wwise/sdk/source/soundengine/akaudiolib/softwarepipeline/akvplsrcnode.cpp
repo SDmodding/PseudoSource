@@ -3,7 +3,7 @@
 void __fastcall CAkVPLSrcNode::CAkVPLSrcNode(CAkVPLSrcNode *this, CAkPBI *in_pCtx)
 {
   *((_BYTE *)this + 32) &= 0xFCu;
-  this->vfptr = (CAkVPLNodeVtbl *)&CAkVPLSrcNode::`vftable';
+  this->vfptr = (CAkVPLNodeVtbl *)&CAkVPLSrcNode::`vftable;
   this->m_pInput = 0i64;
   this->m_pAnalysisData = 0i64;
   this->m_pCtx = in_pCtx;

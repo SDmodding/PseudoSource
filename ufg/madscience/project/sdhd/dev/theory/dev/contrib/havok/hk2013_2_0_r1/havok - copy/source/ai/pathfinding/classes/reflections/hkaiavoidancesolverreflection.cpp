@@ -96,7 +96,7 @@ hkClass *__fastcall hkaiAvoidanceProperties::staticClass()
 void __fastcall finishLoadedObjecthkaiAvoidanceProperties(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiAvoidanceProperties::`vftable';
+    *(_QWORD *)p = &hkaiAvoidanceProperties::`vftable;
 }
 
 // File Line: 258
@@ -110,7 +110,7 @@ void __fastcall cleanupLoadedObjecthkaiAvoidanceProperties(void *p)
 // RVA: 0xBB5F90
 void **__fastcall getVtablehkaiAvoidanceProperties()
 {
-  return &hkaiAvoidanceProperties::`vftable';
+  return &hkaiAvoidanceProperties::`vftable;
 }
 
 // File Line: 284
@@ -197,7 +197,7 @@ hkClass *__fastcall hkaiAvoidancePairProperties::staticClass()
 void __fastcall finishLoadedObjecthkaiAvoidancePairProperties(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiAvoidancePairProperties::`vftable';
+    *(_QWORD *)p = &hkaiAvoidancePairProperties::`vftable;
 }
 
 // File Line: 395
@@ -211,7 +211,7 @@ void __fastcall cleanupLoadedObjecthkaiAvoidancePairProperties(void *p)
 // RVA: 0xBB5FE0
 void **__fastcall getVtablehkaiAvoidancePairProperties()
 {
-  return &hkaiAvoidancePairProperties::`vftable';
+  return &hkaiAvoidancePairProperties::`vftable;
 }
 
 // File Line: 421

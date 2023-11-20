@@ -39,8 +39,8 @@ UFG::TidoFilePackage *__fastcall UFG::TidoFilePackage::Create(void *const *in_hF
   else
   {
     *(_QWORD *)(v13 + 8) = 0i64;
-    *(_QWORD *)v13 = &UFG::TidoFilePackage::`vftable';
-    *(_QWORD *)(v13 + 16) = &UFG::AudioFilePackageLUT::`vftable';
+    *(_QWORD *)v13 = &UFG::TidoFilePackage::`vftable;
+    *(_QWORD *)(v13 + 16) = &UFG::AudioFilePackageLUT::`vftable;
     *(_WORD *)(v13 + 24) = 0;
     *(_QWORD *)(v13 + 32) = 0i64;
     *(_QWORD *)(v13 + 40) = 0i64;
@@ -49,7 +49,7 @@ UFG::TidoFilePackage *__fastcall UFG::TidoFilePackage::Create(void *const *in_hF
     *(_DWORD *)(v13 + 68) = 0;
     *(_DWORD *)(v13 + 80) = v9;
     *(_QWORD *)(v13 + 88) = v11;
-    *(_DWORD *)(v13 + 64) = ++`UFG::TidoFilePackage::TidoFilePackage'::`2'::s_uPackageID;
+    *(_DWORD *)(v13 + 64) = ++`UFG::TidoFilePackage::TidoFilePackage::`2::s_uPackageID;
     *(_QWORD *)(v13 + 72) = 0i64;
   }
   dest = 0;

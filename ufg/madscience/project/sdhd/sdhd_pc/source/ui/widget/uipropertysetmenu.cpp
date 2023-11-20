@@ -17,9 +17,9 @@ void __fastcall UFG::UIPropertySetMenu::UIPropertySetMenu(UFG::UIPropertySetMenu
   UFG::UIPropertySetMenuData *v2; // [rsp+48h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (UFG::UIPropertySetMenuVtbl *)&UFG::UIPropertySetMenu::`vftable';
+  this->vfptr = (UFG::UIPropertySetMenuVtbl *)&UFG::UIPropertySetMenu::`vftable;
   v2 = &this->mInitData;
-  *(_OWORD *)&v2->vfptr = (unsigned __int64)&UFG::UIPropertySetMenuData::`vftable';
+  *(_OWORD *)&v2->vfptr = (unsigned __int64)&UFG::UIPropertySetMenuData::`vftable;
   UFG::qString::qString(&this->mInitData.mPropertySetName);
   UFG::qString::qString(&v2->mPathToWidget);
   v1->mState = -1;
@@ -39,7 +39,7 @@ void __fastcall UFG::UIPropertySetMenu::~UIPropertySetMenu(UFG::UIPropertySetMen
   UFG::UIPropertySetMenu *v1; // rbx
 
   v1 = this;
-  this->vfptr = (UFG::UIPropertySetMenuVtbl *)&UFG::UIPropertySetMenu::`vftable';
+  this->vfptr = (UFG::UIPropertySetMenuVtbl *)&UFG::UIPropertySetMenu::`vftable;
   UFG::qString::~qString(&this->mScriptFunc);
   UFG::qString::~qString(&v1->mOpDependant);
   UFG::qString::~qString(&v1->mOperation);
@@ -47,7 +47,7 @@ void __fastcall UFG::UIPropertySetMenu::~UIPropertySetMenu(UFG::UIPropertySetMen
   UFG::qString::~qString(&v1->mSelectedSubItem);
   UFG::qString::~qString(&v1->mSelectedItem);
   v1 = (UFG::UIPropertySetMenu *)((char *)v1 + 16);
-  v1->vfptr = (UFG::UIPropertySetMenuVtbl *)&UFG::UIPropertySetMenuData::`vftable';
+  v1->vfptr = (UFG::UIPropertySetMenuVtbl *)&UFG::UIPropertySetMenuData::`vftable;
   UFG::qString::~qString((UFG::qString *)((char *)&v1->mInitData.mPropertySetName + 24));
   UFG::qString::~qString((UFG::qString *)&v1->mInitData);
 }
@@ -965,7 +965,7 @@ void __fastcall UFG::UIPropertySetMenu::addItem(UFG::UIPropertySetMenu *this, co
   v4 = caption;
   v5 = this->mInitData.mScreen->mRenderable->m_movie.pObject;
   UFG::qString::qString(&v15, "%s.AddItem", this->mInitData.mPathToWidget.mData);
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( (v8 >> 6) & 1 )
   {
     (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v7 + 16i64))(v7, &ptr, v9);
@@ -981,7 +981,7 @@ void __fastcall UFG::UIPropertySetMenu::addItem(UFG::UIPropertySetMenu *this, co
   v12 = 2;
   LOBYTE(v13) = v3;
   Scaleform::GFx::Movie::Invoke(v5, v15.mData, 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   UFG::qString::~qString(&v15);
 }
 
@@ -1025,7 +1025,7 @@ void __fastcall UFG::UIPropertySetMenu::addSubmenuItem(UFG::UIPropertySetMenu *t
   v4 = caption;
   v5 = this->mInitData.mScreen->mRenderable->m_movie.pObject;
   UFG::qString::qString(&v15, "%s.AddSubMenuItem", this->mInitData.mPathToWidget.mData);
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( (v8 >> 6) & 1 )
   {
     (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v7 + 16i64))(v7, &ptr, v9);
@@ -1041,7 +1041,7 @@ void __fastcall UFG::UIPropertySetMenu::addSubmenuItem(UFG::UIPropertySetMenu *t
   v12 = 2;
   LOBYTE(v13) = v3;
   Scaleform::GFx::Movie::Invoke(v5, v15.mData, 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   UFG::qString::~qString(&v15);
 }
 
@@ -1072,7 +1072,7 @@ void __fastcall UFG::UIPropertySetMenu::setItemEnabled(UFG::UIPropertySetMenu *t
   v5 = this;
   v6 = this->mInitData.mScreen->mRenderable->m_movie.pObject;
   UFG::qString::qString(&v18, "%s.SetItemEnabled", this->mInitData.mPathToWidget.mData);
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( (v10 >> 6) & 1 )
   {
     (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v9 + 16i64))(v9, &ptr, v11);
@@ -1092,7 +1092,7 @@ void __fastcall UFG::UIPropertySetMenu::setItemEnabled(UFG::UIPropertySetMenu *t
   UFG::qString::qString(&v17, "%s.Refresh", v5->mInitData.mPathToWidget.mData);
   Scaleform::GFx::Movie::Invoke(v7->mRenderable->m_movie.pObject, v17.mData, 0i64, 0i64, 0);
   UFG::qString::~qString(&v17);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   UFG::qString::~qString(&v18);
 }
 
@@ -1117,7 +1117,7 @@ void __fastcall UFG::UIPropertySetMenu::removeItem(UFG::UIPropertySetMenu *this,
   v3 = this;
   v4 = this->mInitData.mScreen->mRenderable->m_movie.pObject;
   UFG::qString::qString(&v12, "%s.RemoveItem", this->mInitData.mPathToWidget.mData);
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( (v8 >> 6) & 1 )
   {
     (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v7 + 16i64))(v7, &ptr, v9);
@@ -1130,7 +1130,7 @@ void __fastcall UFG::UIPropertySetMenu::removeItem(UFG::UIPropertySetMenu *this,
   UFG::qString::qString(&v11, "%s.Refresh", v3->mInitData.mPathToWidget.mData);
   Scaleform::GFx::Movie::Invoke(v5->mRenderable->m_movie.pObject, v11.mData, 0i64, 0i64, 0);
   UFG::qString::~qString(&v11);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   UFG::qString::~qString(&v12);
 }
 
@@ -1338,7 +1338,7 @@ void __fastcall UFG::UIPropertySetMenu::Flash_HandleMouseMove(UFG::UIPropertySet
   v13 = -2i64;
   v4 = screen;
   UFG::qString::qString(&v14, "%s.HandleMouseMove", this->mInitData.mPathToWidget.mData);
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( (v7 >> 6) & 1 )
   {
     (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v6 + 16i64))(v6, &ptr, COERCE_DOUBLE(*(_QWORD *)&v8));
@@ -1354,7 +1354,7 @@ void __fastcall UFG::UIPropertySetMenu::Flash_HandleMouseMove(UFG::UIPropertySet
   v11 = 5;
   v12 = mouseY;
   Scaleform::GFx::Movie::Invoke(v4->mRenderable->m_movie.pObject, v14.mData, 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   UFG::qString::~qString(&v14);
 }
 
@@ -1377,7 +1377,7 @@ void __fastcall UFG::UIPropertySetMenu::Flash_HandleMouseClick(UFG::UIPropertySe
   v13 = -2i64;
   v4 = screen;
   UFG::qString::qString(&v14, "%s.HandleMouseClick", this->mInitData.mPathToWidget.mData);
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( (v7 >> 6) & 1 )
   {
     (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v6 + 16i64))(v6, &ptr, COERCE_DOUBLE(*(_QWORD *)&v8));
@@ -1393,7 +1393,7 @@ void __fastcall UFG::UIPropertySetMenu::Flash_HandleMouseClick(UFG::UIPropertySe
   v11 = 5;
   v12 = mouseY;
   Scaleform::GFx::Movie::Invoke(v4->mRenderable->m_movie.pObject, v14.mData, 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   UFG::qString::~qString(&v14);
 }
 
@@ -1469,7 +1469,7 @@ void __fastcall UFG::UIPropertySetMenuMainNav::updateHelpbar(UFG::UIPropertySetM
     *(_QWORD *)&data.Icons[5].mStringHash32 = 0i64;
     UFG::UIHKHelpBarWidget::Show(v6, &data);
     UFG::qString::~qString((UFG::qString *)data.MessageIds);
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       &data.Captions[5].mMagic,
       0x28ui64,
       6,
@@ -1498,13 +1498,13 @@ void __fastcall UFG::UIPropertySetMenuMainNav::updateHelpbar(UFG::UIPropertySetM
     data.Icons[5].mStringHashUpper32 = 0;
     UFG::UIHKHelpBarWidget::Show(v3, &data);
     UFG::qString::~qString((UFG::qString *)data.MessageIds);
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       &data.Captions[5].mMagic,
       0x28ui64,
       6,
       (void (__fastcall *)(void *))UFG::qString::~qString);
   }
-  `eh vector destructor iterator'(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+  `eh vector destructor iterator(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
   if ( UFG::UIHKScreenGlobalOverlay::mThis )
     v1 = UFG::UIHKScreenGlobalOverlay::mThis;
   v10 = (signed __int64)&v1->HelpBar;

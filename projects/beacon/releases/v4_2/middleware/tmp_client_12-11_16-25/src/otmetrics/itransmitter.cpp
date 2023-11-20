@@ -7,7 +7,7 @@ void __fastcall OSuite::ITransmitter::ITransmitter(OSuite::ITransmitter *this)
   unsigned __int64 clock; // [rsp+30h] [rbp+8h]
 
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ITransmitter::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ITransmitter::`vftable;
   v2 = &this->m_lastTransmitTime;
   v2[-3].m_clock = 0i64;
   v2[-2].m_clock = 0i64;
@@ -21,7 +21,7 @@ void __fastcall OSuite::ITransmitter::ITransmitter(OSuite::ITransmitter *this)
 // RVA: 0xEC3550
 void __fastcall OSuite::ITransmitter::~ITransmitter(OSuite::ITransmitter *this)
 {
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ITransmitter::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ITransmitter::`vftable;
   OSuite::ZOEdmBase::CleanTempData((_DWORD)this + 32);
 }
 

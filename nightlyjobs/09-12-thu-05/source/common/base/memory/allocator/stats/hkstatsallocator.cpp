@@ -7,7 +7,7 @@ void __fastcall hkStatsAllocator::hkStatsAllocator(hkStatsAllocator *this, hkMem
 
   v2 = a;
   v3 = this;
-  this->vfptr = (hkMemoryAllocatorVtbl *)&hkStatsAllocator::`vftable';
+  this->vfptr = (hkMemoryAllocatorVtbl *)&hkStatsAllocator::`vftable;
   hkCriticalSection::hkCriticalSection(&this->m_criticalSection, 1000);
   v3->m_alloc = v2;
   v3->m_stats.m_inUse = -1i64;

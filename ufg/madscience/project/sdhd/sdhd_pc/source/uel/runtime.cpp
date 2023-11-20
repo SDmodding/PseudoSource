@@ -71,7 +71,7 @@ void UFG::UELRuntime::Shutdown(void)
       &v0->mNode);
     if ( v0 )
     {
-      `eh vector destructor iterator'(&v0[1], 8ui64, 8, (void (__fastcall *)(void *))_);
+      `eh vector destructor iterator(&v0[1], 8ui64, 8, (void (__fastcall *)(void *))_);
       operator delete[](v0);
     }
   }

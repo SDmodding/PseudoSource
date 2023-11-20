@@ -7,7 +7,7 @@ void __fastcall UFG::UIHKScreenOptionsCalibration::UIHKScreenOptionsCalibration(
   v1 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -18,7 +18,7 @@ void __fastcall UFG::UIHKScreenOptionsCalibration::UIHKScreenOptionsCalibration(
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenOptionsCalibration::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenOptionsCalibration::`vftable;
   this->m_eState = 0;
 }
 
@@ -73,7 +73,7 @@ void __fastcall UFG::UIHKScreenOptionsCalibration::init(UFG::UIHKScreenOptionsCa
   if ( v3->mLanguage != 7 )
     UFG::GameStatTracker::SetStat(v4, Subtitles, 2);
   v6 = v2->mRenderable->m_movie.pObject;
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 6, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 6, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   v7 = (double)(signed int)UFG::GameStatTracker::GetStat(v5, VolumeSFX);
   if ( (v15 >> 6) & 1 )
   {
@@ -156,7 +156,7 @@ void __fastcall UFG::UIHKScreenOptionsCalibration::init(UFG::UIHKScreenOptionsCa
   v35 = 5;
   v36 = v12;
   Scaleform::GFx::Movie::Invoke(v6, "OptionList_PopulateCalibration", 0i64, (Scaleform::GFx::Value *)&ptr, 6u);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 6, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 6, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 107
@@ -411,7 +411,7 @@ void __fastcall UFG::UIHKScreenOptionsCalibration::SetState(UFG::UIHKScreenOptio
   v2 = this;
   this->m_eState = eState;
   v3 = this->mRenderable->m_movie.pObject;
-  `eh vector constructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   v4 = (double)(signed int)v2->m_eState;
   if ( ((unsigned int)pargs.Type >> 6) & 1 )
   {
@@ -424,7 +424,7 @@ void __fastcall UFG::UIHKScreenOptionsCalibration::SetState(UFG::UIHKScreenOptio
   pargs.Type = 5;
   pargs.mValue.NValue = v4;
   Scaleform::GFx::Movie::Invoke(v3, "OptionsCalibration_SetState", 0i64, &pargs, 1u);
-  `eh vector destructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 304
@@ -482,7 +482,7 @@ void __fastcall UFG::UIHKScreenOptionsCalibration::Flash_HandleMouseMove(UFG::UI
   v3 = this->mRenderable->m_movie.pObject;
   if ( v3 )
   {
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( (v6 >> 6) & 1 )
     {
       (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v5 + 16i64))(v5, &ptr, COERCE_DOUBLE(*(_QWORD *)&v7));
@@ -498,7 +498,7 @@ void __fastcall UFG::UIHKScreenOptionsCalibration::Flash_HandleMouseMove(UFG::UI
     v10 = 5;
     v11 = mouseY;
     Scaleform::GFx::Movie::Invoke(v3, "Calibration_HandleMouseMove", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 
@@ -519,7 +519,7 @@ void __fastcall UFG::UIHKScreenOptionsCalibration::Flash_HandleMouseClick(UFG::U
   v3 = this->mRenderable->m_movie.pObject;
   if ( v3 )
   {
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( (v6 >> 6) & 1 )
     {
       (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v5 + 16i64))(v5, &ptr, COERCE_DOUBLE(*(_QWORD *)&v7));
@@ -535,7 +535,7 @@ void __fastcall UFG::UIHKScreenOptionsCalibration::Flash_HandleMouseClick(UFG::U
     v10 = 5;
     v11 = mouseY;
     Scaleform::GFx::Movie::Invoke(v3, "Calibration_HandleMouseClick", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 

@@ -196,7 +196,7 @@ void __fastcall Scaleform::GFx::AS2::ColorProto::SetTransform(Scaleform::GFx::AS
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "Color");
   }
 }
@@ -431,7 +431,7 @@ void __fastcall Scaleform::GFx::AS2::ColorProto::GetTransform(Scaleform::GFx::AS
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "Color");
   }
 }
@@ -494,7 +494,7 @@ void __fastcall Scaleform::GFx::AS2::ColorProto::SetRGB(Scaleform::GFx::AS2::FnC
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "Color");
   }
 }
@@ -554,7 +554,7 @@ void __fastcall Scaleform::GFx::AS2::ColorProto::GetRGB(Scaleform::GFx::AS2::FnC
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "Color");
   }
 }
@@ -640,8 +640,8 @@ Scaleform::GFx::AS2::Object *__fastcall Scaleform::GFx::AS2::ColorCtorFunction::
   if ( !v3 )
     return 0i64;
   Scaleform::GFx::AS2::Object::Object(v3, v2);
-  v4->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::ColorObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  v4->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::ColorObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+  v4->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::ColorObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  v4->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::ColorObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   v4[1].vfptr = 0i64;
   v5 = Scaleform::GFx::AS2::GlobalContext::GetPrototype(v2->StringContext.pContext, ASBuiltin_Color);
   Scaleform::GFx::AS2::Object::Set__proto__((Scaleform::GFx::AS2::Object *)((char *)v4 + 32), &v2->StringContext, v5);
@@ -685,10 +685,10 @@ Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::ColorCtorFunct
   if ( v4 )
   {
     Scaleform::GFx::AS2::Object::Object(v4, &psc);
-    v6->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
-    v6->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+    v6->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+    v6->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
     v6[1].vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)Scaleform::GFx::AS2::ColorCtorFunction::GlobalCtor;
     v7 = Scaleform::GFx::AS2::GlobalContext::GetPrototype(psc.pContext, ASBuiltin_Function);
     if ( !v6->pProto.pObject )
@@ -717,8 +717,8 @@ Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::ColorCtorFunct
       }
     }
     v6->pProto.pObject = v7;
-    v6->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::ColorCtorFunction::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::ColorCtorFunction::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+    v6->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::ColorCtorFunction::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::ColorCtorFunction::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   }
   else
   {
@@ -736,8 +736,8 @@ Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::ColorCtorFunct
   {
     v10 = Scaleform::GFx::AS2::GlobalContext::GetPrototype(v2, ASBuiltin_Object);
     Scaleform::GFx::AS2::Object::Object((Scaleform::GFx::AS2::Object *)v9, &psc);
-    *(_QWORD *)v9 = &Scaleform::GFx::AS2::ColorObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    *(_QWORD *)(v9 + 32) = &Scaleform::GFx::AS2::ColorObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+    *(_QWORD *)v9 = &Scaleform::GFx::AS2::ColorObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    *(_QWORD *)(v9 + 32) = &Scaleform::GFx::AS2::ColorObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
     objproto.pObject = (Scaleform::GFx::AS2::Object *)(v9 + 96);
     *(_QWORD *)(v9 + 96) = 0i64;
     if ( !*(_QWORD *)(v9 + 40) )
@@ -768,7 +768,7 @@ Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::ColorCtorFunct
     *(_QWORD *)(v9 + 40) = v10;
     v13 = (Scaleform::MemoryHeap *)(v9 + 104);
     flags = v13;
-    v13->vfptr = (Scaleform::MemoryHeapVtbl *)&Scaleform::GFx::AS2::GASPrototypeBase::`vftable';
+    v13->vfptr = (Scaleform::MemoryHeapVtbl *)&Scaleform::GFx::AS2::GASPrototypeBase::`vftable;
     LOBYTE(v13->SelfSize) = 0;
     v13->pPrev = 0i64;
     v13->pNext = 0i64;
@@ -776,17 +776,17 @@ Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::ColorCtorFunct
     *(_QWORD *)(v9 + 136) = 0i64;
     *(_QWORD *)(v9 + 144) = 0i64;
     *(_QWORD *)(v9 + 160) = 0i64;
-    *(_QWORD *)v9 = &Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::ColorObject,Scaleform::GFx::AS2::Environment>::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    *(_QWORD *)(v9 + 32) = &Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::ColorObject,Scaleform::GFx::AS2::Environment>::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
-    v13->vfptr = (Scaleform::MemoryHeapVtbl *)&Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::ColorObject,Scaleform::GFx::AS2::Environment>::`vftable';
+    *(_QWORD *)v9 = &Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::ColorObject,Scaleform::GFx::AS2::Environment>::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    *(_QWORD *)(v9 + 32) = &Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::ColorObject,Scaleform::GFx::AS2::Environment>::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+    v13->vfptr = (Scaleform::MemoryHeapVtbl *)&Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::ColorObject,Scaleform::GFx::AS2::Environment>::`vftable;
     Scaleform::GFx::AS2::GASPrototypeBase::Init(
       (Scaleform::GFx::AS2::GASPrototypeBase *)(v9 + 104),
       (Scaleform::GFx::AS2::Object *)v9,
       &psc,
       v3);
-    *(_QWORD *)v9 = &Scaleform::GFx::AS2::ColorProto::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    *(_QWORD *)(v9 + 32) = &Scaleform::GFx::AS2::ColorProto::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
-    v13->vfptr = (Scaleform::MemoryHeapVtbl *)&Scaleform::GFx::AS2::ColorProto::`vftable';
+    *(_QWORD *)v9 = &Scaleform::GFx::AS2::ColorProto::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    *(_QWORD *)(v9 + 32) = &Scaleform::GFx::AS2::ColorProto::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+    v13->vfptr = (Scaleform::MemoryHeapVtbl *)&Scaleform::GFx::AS2::ColorProto::`vftable;
     LOBYTE(flags) = 1;
     Scaleform::GFx::AS2::GASPrototypeBase::InitFunctionMembers(
       (Scaleform::GFx::AS2::GASPrototypeBase *)(v9 + 104),

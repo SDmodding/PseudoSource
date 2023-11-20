@@ -105,7 +105,7 @@ void __fastcall UFG::UIHKHeatLevelWidget::Update(UFG::UIHKHeatLevelWidget *this,
         if ( v16 )
         {
           value.pNext = (Scaleform::GFx::Value *)Scaleform::GFx::Value::~Value;
-          `eh vector constructor iterator'(
+          `eh vector constructor iterator(
             &value,
             0x30ui64,
             2,
@@ -130,7 +130,7 @@ void __fastcall UFG::UIHKHeatLevelWidget::Update(UFG::UIHKHeatLevelWidget *this,
           v23 = 2;
           LOBYTE(v24) = v18;
           Scaleform::GFx::Movie::Invoke(v3, "Cops_SetHeatLevel", 0i64, &value, 2u);
-          `eh vector destructor iterator'(
+          `eh vector destructor iterator(
             &value,
             0x30ui64,
             2,

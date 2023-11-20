@@ -66,7 +66,7 @@ __int64 UFG::_dynamic_initializer_for__gSym_E_CTC_Spark02__()
 // RVA: 0x1582BC0
 __int64 UFG::_dynamic_initializer_for__gEffectMapping__()
 {
-  `eh vector constructor iterator'(gEffectMapping, 4ui64, 39, (void (__fastcall *)(void *))BackInfo::BackInfo);
+  `eh vector constructor iterator(gEffectMapping, 4ui64, 39, (void (__fastcall *)(void *))BackInfo::BackInfo);
   return atexit(UFG::_dynamic_atexit_destructor_for__gEffectMapping__);
 }
 
@@ -165,9 +165,9 @@ void __fastcall UFG::VehicleEffectsComponent::VehicleEffectsComponent(UFG::Vehic
   v6 = (UFG::qNode<UFG::VehicleEffectsComponent,UFG::VehicleEffectsComponent> *)&v5->mPrev;
   v6->mPrev = v6;
   v6->mNext = v6;
-  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleEffectsComponent::`vftable';
+  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleEffectsComponent::`vftable;
   v5->mDamageTransferUID = -1;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v5->mEffectStatusTable,
     0x18ui64,
     39,
@@ -1190,7 +1190,7 @@ void __fastcall UFG::VehicleEffectsComponent::~VehicleEffectsComponent(UFG::Vehi
   UFG::qNode<UFG::VehicleEffectsComponent,UFG::VehicleEffectsComponent> *v12; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleEffectsComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleEffectsComponent::`vftable;
   if ( this == UFG::VehicleEffectsComponent::s_VehicleEffectsComponentpCurrentIterator )
     UFG::VehicleEffectsComponent::s_VehicleEffectsComponentpCurrentIterator = (UFG::VehicleEffectsComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::VehicleEffectsComponent,UFG::VehicleEffectsComponent> *)&this->mPrev;
@@ -1241,7 +1241,7 @@ void __fastcall UFG::VehicleEffectsComponent::~VehicleEffectsComponent(UFG::Vehi
   UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->mFXComponent);
   UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->mDrawableComponent);
   UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->mWaterFloatingTrackerComponent);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->mEffectStatusTable,
     0x18ui64,
     39,

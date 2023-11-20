@@ -18,7 +18,7 @@ SSTypedClass *__fastcall SSTypedClass::from_binary_ref(const void **binary_pp)
   {
     SSTypedClass::SSTypedClass(&v5, binary_pp);
     v4 = SSTypedClass::get_or_create(v3);
-    v5.vfptr = (SSClassDescBaseVtbl *)&SSTypedClass::`vftable';
+    v5.vfptr = (SSClassDescBaseVtbl *)&SSTypedClass::`vftable;
     if ( v5.i_item_type_p )
     {
       ((void (__cdecl *)(SSClassDescBase *, SSClassDescBaseVtbl *))v5.i_item_type_p->vfptr->dereference_delay)(
@@ -177,14 +177,14 @@ SSTypedClass *__fastcall SSTypedClass::get_or_create(SSClass *class_p, SSClassDe
   (*(void (__fastcall **)(SSClassDescBase *))item_type_p->vfptr->gap8)(item_type_p);
   tclass.i_ref_count = 0;
   tclass.i_class_p = v3;
-  tclass.vfptr = (SSClassDescBaseVtbl *)&SSTypedClass::`vftable';
+  tclass.vfptr = (SSClassDescBaseVtbl *)&SSTypedClass::`vftable;
   tclass.i_item_type_p = v2;
   (*(void (__fastcall **)(SSClassDescBase *))v2->vfptr->gap8)(v2);
   v4 = SSTypedClass::get_or_create(&tclass);
-  tclass.vfptr = (SSClassDescBaseVtbl *)&SSTypedClass::`vftable';
+  tclass.vfptr = (SSClassDescBaseVtbl *)&SSTypedClass::`vftable;
   v2->vfptr->dereference_delay(v2);
   tclass.i_item_type_p = 0i64;
-  tclass.vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable';
+  tclass.vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable;
   v2->vfptr->dereference_delay(v2);
   return v4;
 }

@@ -339,7 +339,7 @@ Scaleform::Render::PVR::PVRFileImageSource *__fastcall Scaleform::Render::PVR::F
     if ( v5 )
     {
       Scaleform::Render::FileImageSource::FileImageSource(v5, v4, v3->Format, 0i64);
-      v6->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::PVR::PVRFileImageSource::`vftable';
+      v6->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::PVR::PVRFileImageSource::`vftable;
       v6->ImageDesc = 0;
     }
     else
@@ -357,7 +357,7 @@ Scaleform::Render::PVR::PVRFileImageSource *__fastcall Scaleform::Render::PVR::F
 // RVA: 0x159C660
 __int64 dynamic_initializer_for__Scaleform::Render::PVR::FileReader::Instance__()
 {
-  Scaleform::Render::PVR::FileReader::Instance.vfptr = (Scaleform::Render::ImageFileHandlerVtbl *)&Scaleform::Render::PVR::FileReader::`vftable';
+  Scaleform::Render::PVR::FileReader::Instance.vfptr = (Scaleform::Render::ImageFileHandlerVtbl *)&Scaleform::Render::PVR::FileReader::`vftable;
   return atexit(dynamic_atexit_destructor_for__Scaleform::Render::PVR::FileReader::Instance__);
 }
 

@@ -3020,7 +3020,7 @@ LABEL_36:
       LODWORD(sizeElema) = v13[v12].m_threadId;
       hkOstream::printf(
         v2,
-        "FrameInfo(heading='%s', frame=%i, thread_id=%i, time_counter=%i)\n",
+        "FrameInfo(heading=%s, frame=%i, thread_id=%i, time_counter=%i)\n",
         v13[v12].m_threadId,
         sizeElema,
         v37);
@@ -3065,7 +3065,7 @@ LABEL_34:
           LODWORD(v37) = *((_DWORD *)v18 + 3);
           v25 = *(_QWORD *)v18 + 2i64;
           LODWORD(sizeElema) = *((_DWORD *)v18 + 2);
-          hkOstream::printf(v2, "%sTimerEnd('%s',%u,%u)\n", *((_DWORD *)v18 + 2), sizeElema, v37);
+          hkOstream::printf(v2, "%sTimerEnd(%s,%u,%u)\n", *((_DWORD *)v18 + 2), sizeElema, v37);
           v18 += 16;
           goto LABEL_32;
         case 70:
@@ -3076,11 +3076,11 @@ LABEL_34:
         case 76:
           LODWORD(v37) = *((_DWORD *)v18 + 3);
           LODWORD(sizeElema) = *((_DWORD *)v18 + 2);
-          hkOstream::printf(v2, "%sTimerBegin('%s', %u, %u)\n", *((_DWORD *)v18 + 2), sizeElema, v37);
+          hkOstream::printf(v2, "%sTimerBegin(%s, %u, %u)\n", *((_DWORD *)v18 + 2), sizeElema, v37);
           v26 = (char *)*((_QWORD *)v18 + 2);
           LODWORD(v27) = *((_DWORD *)v18 + 3);
           LODWORD(v28) = *((_DWORD *)v18 + 2);
-          hkOstream::printf(v2, "%sTimerSplit('%s', %u, %u)\n", *((_DWORD *)v18 + 2), v28, v27);
+          hkOstream::printf(v2, "%sTimerSplit(%s, %u, %u)\n", *((_DWORD *)v18 + 2), v28, v27);
           array[v40 - 1] = 32;
           v29 = v40;
           if ( v40 == (v41 & 0x3FFFFFFF) )
@@ -3112,12 +3112,12 @@ LABEL_34:
           v31 = v20 - 2;
           v40 = v31;
           v32 = v31;
-          v22 = "%sTimerSplit('%s', %u, %u)\n";
+          v22 = "%sTimerSplit(%s, %u, %u)\n";
           array[v32 - 1] = 0;
           v33 = *(_QWORD *)v18 + 2i64;
           goto LABEL_16;
         case 84:
-          v22 = "%sTimerBegin('%s',%u,%u)\n";
+          v22 = "%sTimerBegin(%s,%u,%u)\n";
 LABEL_16:
           LODWORD(v37) = *((_DWORD *)v18 + 3);
           LODWORD(sizeElema) = *((_DWORD *)v18 + 2);
@@ -3148,7 +3148,7 @@ LABEL_16:
           LODWORD(v37) = *((_DWORD *)v18 + 3);
           v34 = *(_QWORD *)v18 + 2i64;
           LODWORD(sizeElema) = *((_DWORD *)v18 + 2);
-          hkOstream::printf(v2, "%sTimerEnd('%s', %u, %u)\n", *((_DWORD *)v18 + 2), sizeElema, v37);
+          hkOstream::printf(v2, "%sTimerEnd(%s, %u, %u)\n", *((_DWORD *)v18 + 2), sizeElema, v37);
           v18 += 16;
           goto LABEL_32;
         case 109:

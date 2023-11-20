@@ -7,7 +7,7 @@ void __fastcall CAkSrcPhysModel::CAkSrcPhysModel(CAkSrcPhysModel *this, CAkPBI *
   v2 = this;
   CAkVPLSrcNode::CAkVPLSrcNode((CAkVPLSrcNode *)&this->vfptr, in_pCtx);
   v2->m_FXID = -1;
-  v2->vfptr = (CAkVPLNodeVtbl *)&CAkSrcPhysModel::`vftable';
+  v2->vfptr = (CAkVPLNodeVtbl *)&CAkSrcPhysModel::`vftable;
   v2->m_pParam = 0i64;
   v2->m_pEffect = 0i64;
   v2->m_pSourceFXContext = 0i64;

@@ -89,7 +89,7 @@ LABEL_6:
       v11 = ((__int64 (__fastcall *)(Scaleform::Render::Font *))v3->vfptr[1].__vecDelDtor)(v3);
       Scaleform::Render::GlyphCache::LogWarning(
         v2,
-        "Font '%s%s%s': No hinting chars (any of 'HEFTUVWXZ' and 'zxvwy'). Auto-Hinting disabled.",
+        "Font %s%s%s: No hinting chars (any of HEFTUVWXZ and zxvwy). Auto-Hinting disabled.",
         v11,
         v9,
         v10);

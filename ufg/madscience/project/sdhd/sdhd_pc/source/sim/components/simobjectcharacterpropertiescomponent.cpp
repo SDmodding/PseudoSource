@@ -27,12 +27,12 @@ void __fastcall UFG::SimObjectCharacterPropertiesComponent::SimObjectCharacterPr
     (UFG::SimObjectPropertiesComponent *)&this->vfptr,
     name_uid,
     &dataPtr->0);
-  v5->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::UpdateInterface::`vftable';
+  v5->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::UpdateInterface::`vftable;
   v6 = (UFG::qNode<UFG::SimObjectCharacterPropertiesComponent,UFG::SimObjectCharacterPropertiesComponent> *)&v5->mPrev;
   v6->mPrev = v6;
   v6->mNext = v6;
-  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SimObjectCharacterPropertiesComponent::`vftable'{for `UFG::SimObjectPropertiesComponent'};
-  v5->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::SimObjectCharacterPropertiesComponent::`vftable'{for `UFG::UpdateInterface'};
+  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SimObjectCharacterPropertiesComponent::`vftable{for `UFG::SimObjectPropertiesComponent};
+  v5->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::SimObjectCharacterPropertiesComponent::`vftable{for `UFG::UpdateInterface};
   v5->mIsTired = 0;
   *(_QWORD *)&v5->m_eGender = 0i64;
   *(_QWORD *)&v5->m_eFightingClass = 0i64;
@@ -69,8 +69,8 @@ void __fastcall UFG::SimObjectCharacterPropertiesComponent::~SimObjectCharacterP
   UFG::qNode<UFG::SimObjectCharacterPropertiesComponent,UFG::SimObjectCharacterPropertiesComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SimObjectCharacterPropertiesComponent::`vftable'{for `UFG::SimObjectPropertiesComponent'};
-  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::SimObjectCharacterPropertiesComponent::`vftable'{for `UFG::UpdateInterface'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SimObjectCharacterPropertiesComponent::`vftable{for `UFG::SimObjectPropertiesComponent};
+  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::SimObjectCharacterPropertiesComponent::`vftable{for `UFG::UpdateInterface};
   if ( this == UFG::SimObjectCharacterPropertiesComponent::s_SimObjectCharacterPropertiesComponentpCurrentIterator )
     UFG::SimObjectCharacterPropertiesComponent::s_SimObjectCharacterPropertiesComponentpCurrentIterator = (UFG::SimObjectCharacterPropertiesComponent *)&this->mPrev[-10];
   v2 = (UFG::qNode<UFG::SimObjectCharacterPropertiesComponent,UFG::SimObjectCharacterPropertiesComponent> *)&this->mPrev;
@@ -216,7 +216,7 @@ void __fastcall UFG::SimObjectCharacterPropertiesComponent::OnDetach(UFG::SimObj
   if ( v2 )
   {
     v3 = v2 - 1;
-    `eh vector destructor iterator'(v2, 4ui64, v2[-1].mUID, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v2, 4ui64, v2[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v3);
   }
   v1->m_ClassTypeListArray.p = 0i64;

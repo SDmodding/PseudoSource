@@ -8,13 +8,13 @@ void __fastcall UFG::CollisionEvent::~CollisionEvent(UFG::CollisionEvent *this)
   UFG::qNode<UFG::Event,UFG::Event> *v4; // rax
 
   v1 = this;
-  this->vfptr = (UFG::EventVtbl *)&UFG::CollisionEvent::`vftable';
-  `eh vector destructor iterator'(
+  this->vfptr = (UFG::EventVtbl *)&UFG::CollisionEvent::`vftable;
+  `eh vector destructor iterator(
     this->mSimObject,
     0x18ui64,
     2,
     (void (__fastcall *)(void *))UFG::qSafePointer<AnimationGroup,AnimationGroup>::~qSafePointer<AnimationGroup,AnimationGroup>);
-  v1->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+  v1->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
   v2 = (UFG::qNode<UFG::Event,UFG::Event> *)&v1->mPrev;
   v3 = v1->mPrev;
   v4 = v1->mNext;
@@ -34,14 +34,14 @@ void __fastcall UFG::BulletCollisionEvent::~BulletCollisionEvent(UFG::BulletColl
   UFG::qNode<UFG::Event,UFG::Event> *v4; // rax
 
   v1 = this;
-  this->vfptr = (UFG::EventVtbl *)&UFG::BulletCollisionEvent::`vftable';
-  this->vfptr = (UFG::EventVtbl *)&UFG::CollisionEvent::`vftable';
-  `eh vector destructor iterator'(
+  this->vfptr = (UFG::EventVtbl *)&UFG::BulletCollisionEvent::`vftable;
+  this->vfptr = (UFG::EventVtbl *)&UFG::CollisionEvent::`vftable;
+  `eh vector destructor iterator(
     this->mSimObject,
     0x18ui64,
     2,
     (void (__fastcall *)(void *))UFG::qSafePointer<AnimationGroup,AnimationGroup>::~qSafePointer<AnimationGroup,AnimationGroup>);
-  v1->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+  v1->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
   v2 = (UFG::qNode<UFG::Event,UFG::Event> *)&v1->mPrev;
   v3 = v1->mPrev;
   v4 = v1->mNext;

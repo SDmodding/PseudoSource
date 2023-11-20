@@ -157,7 +157,7 @@ void __fastcall Illusion::TextureD3DResourceInventory::TextureD3DResourceInvento
     0x501B8E62u,
     0x3218EEB7u,
     0);
-  v1->vfptr = (UFG::qResourceInventoryVtbl *)&Illusion::TextureD3DResourceInventory::`vftable';
+  v1->vfptr = (UFG::qResourceInventoryVtbl *)&Illusion::TextureD3DResourceInventory::`vftable;
   UFG::qBaseTreeRB::qBaseTreeRB(&v1->mOnLoadQueue.mTree);
   UFG::qBaseTreeRB::qBaseTreeRB(&v1->mOnUnloadQueue.mTree);
   UFG::qBaseTreeRB::qBaseTreeRB(&v1->mHighPriorityLoadQueue.mTree);
@@ -357,7 +357,7 @@ LABEL_10:
           UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
             (UFG::qBaseTreeVariableRB<unsigned __int64> *)&v3->mOnLoadQueue,
             v7);
-          Illusion::TextureQueueNode::`scalar deleting destructor'((Illusion::TextureQueueNode *)v7, 1);
+          Illusion::TextureQueueNode::`scalar deleting destructor((Illusion::TextureQueueNode *)v7, 1);
         }
         return;
       }
@@ -376,7 +376,7 @@ LABEL_10:
     UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
       (UFG::qBaseTreeVariableRB<unsigned __int64> *)&v3->mLoadingQueue,
       v13);
-    Illusion::TextureQueueNode::`scalar deleting destructor'((Illusion::TextureQueueNode *)v13, 1);
+    Illusion::TextureQueueNode::`scalar deleting destructor((Illusion::TextureQueueNode *)v13, 1);
   }
   v15 = v2->mNode.mUID;
   if ( v15 && (v16 = UFG::qBaseTreeRB::Get(&v3->mOnUnloadQueue.mTree, v15)) != 0i64 )
@@ -581,9 +581,9 @@ void __fastcall Illusion::TextureD3DResourceInventory::ProcessQueuedLoads(Illusi
         v12 = v10 + 1;
         v12->mNext = v12;
         v12[1].mNext = v12;
-        v11->vfptr = (Illusion::AsyncD3DCreationTaskVtbl *)&Illusion::AsyncD3DCreationTask::`vftable';
+        v11->vfptr = (Illusion::AsyncD3DCreationTaskVtbl *)&Illusion::AsyncD3DCreationTask::`vftable;
         v11->mTask = 0i64;
-        v11->vfptr = (Illusion::AsyncD3DCreationTaskVtbl *)&Illusion::TextureLoader::`vftable';
+        v11->vfptr = (Illusion::AsyncD3DCreationTaskVtbl *)&Illusion::TextureLoader::`vftable;
         v11[1].vfptr = (Illusion::AsyncD3DCreationTaskVtbl *)v9;
       }
       else
@@ -684,9 +684,9 @@ void __fastcall Illusion::TextureD3DResourceInventory::ProcessQueuedLoads(Illusi
         v29 = v27 + 1;
         v29->mNext = v29;
         v29[1].mNext = v29;
-        v28->vfptr = (Illusion::AsyncD3DCreationTaskVtbl *)&Illusion::AsyncD3DCreationTask::`vftable';
+        v28->vfptr = (Illusion::AsyncD3DCreationTaskVtbl *)&Illusion::AsyncD3DCreationTask::`vftable;
         v28->mTask = 0i64;
-        v28->vfptr = (Illusion::AsyncD3DCreationTaskVtbl *)&Illusion::TextureLoader::`vftable';
+        v28->vfptr = (Illusion::AsyncD3DCreationTaskVtbl *)&Illusion::TextureLoader::`vftable;
         v28[1].vfptr = (Illusion::AsyncD3DCreationTaskVtbl *)v26;
       }
       else
@@ -1269,12 +1269,12 @@ void __fastcall Illusion::TexturePlat::OnLoad(Illusion::TexturePlat *this)
     UFG::qResourceHandle::Close((UFG::qResourceHandle *)(v2 + 152));
   }
   v6 = *(_DWORD *)&v1[-2].mPadding[64];
-  v7 = `UFG::qGetResourceInventory<Illusion::TextureD3DResource>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::TextureD3DResource>'::`2'::result )
+  v7 = `UFG::qGetResourceInventory<Illusion::TextureD3DResource>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::TextureD3DResource>::`2::result )
   {
     v8 = UFG::qResourceWarehouse::Instance();
     v7 = UFG::qResourceWarehouse::GetInventory(v8, 0xEF77C5F7);
-    `UFG::qGetResourceInventory<Illusion::TextureD3DResource>'::`2'::result = v7;
+    `UFG::qGetResourceInventory<Illusion::TextureD3DResource>::`2::result = v7;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v1->mTextureD3DResourceHandle.mPrev, 0xEF77C5F7, v6, v7);
   if ( v1->mTextureUserPlat.mOffset )

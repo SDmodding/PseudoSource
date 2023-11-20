@@ -35,7 +35,7 @@ void __fastcall Scaleform::GFx::AS3::ASVM::ASVM(Scaleform::GFx::AS3::ASVM *this,
   v33 = this;
   v5 = pmr;
   Scaleform::GFx::AS3::VM::VM((Scaleform::GFx::AS3::VM *)&this->vfptr, _ui, sm, gc);
-  v33->vfptr = (Scaleform::GFx::AS3::VMVtbl *)&Scaleform::GFx::AS3::ASVM::`vftable';
+  v33->vfptr = (Scaleform::GFx::AS3::VMVtbl *)&Scaleform::GFx::AS3::ASVM::`vftable;
   v33->pMovieRoot = v5;
   v33->GraphicsClass.pObject = 0i64;
   v33->TransformClass.pObject = 0i64;
@@ -408,7 +408,7 @@ void __fastcall Scaleform::GFx::AS3::MovieDefRootNode::~MovieDefRootNode(Scalefo
   Scaleform::Render::RenderBuffer *v10; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::MovieDefRootNodeVtbl *)&Scaleform::GFx::AS3::MovieDefRootNode::`vftable';
+  this->vfptr = (Scaleform::GFx::MovieDefRootNodeVtbl *)&Scaleform::GFx::AS3::MovieDefRootNode::`vftable;
   for ( i = this->AbcFiles.Data.Size - 1; i >= 0; --i )
   {
     v3 = (Scaleform::GFx::AS3::RefCountBaseGC<328> **)&v1->AbcFiles.Data.Data[i];
@@ -454,7 +454,7 @@ void __fastcall Scaleform::GFx::AS3::MovieDefRootNode::~MovieDefRootNode(Scalefo
     --j;
   }
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v1->AbcFiles.Data.Data);
-  v1->vfptr = (Scaleform::GFx::MovieDefRootNodeVtbl *)&Scaleform::GFx::MovieDefRootNode::`vftable';
+  v1->vfptr = (Scaleform::GFx::MovieDefRootNodeVtbl *)&Scaleform::GFx::MovieDefRootNode::`vftable;
   v10 = (Scaleform::Render::RenderBuffer *)v1->pFontManager.pObject;
   if ( v10 )
     Scaleform::RefCountImpl::Release(v10);
@@ -474,15 +474,15 @@ void __fastcall Scaleform::GFx::AS3::MovieRoot::MovieRoot(Scaleform::GFx::AS3::M
   v5 = (Scaleform::GFx::Resource *)memContext;
   v6 = this;
   Scaleform::GFx::ASMovieRootBase::ASMovieRootBase((Scaleform::GFx::ASMovieRootBase *)&this->vfptr, pas);
-  v6->vfptr = (Scaleform::GFx::AS3::FlashUIVtbl *)&Scaleform::GFx::AS3::FlashUI::`vftable';
+  v6->vfptr = (Scaleform::GFx::AS3::FlashUIVtbl *)&Scaleform::GFx::AS3::FlashUI::`vftable;
   v6->State = 0;
   v6->NeedToCheck = 0;
-  v6->vfptr = (Scaleform::GFx::KeyboardState::IListenerVtbl *)&Scaleform::GFx::KeyboardState::IListener::`vftable';
-  v6->vfptr = (Scaleform::GFx::MovieDefImpl::ReleaseNotifierVtbl *)&Scaleform::GFx::MovieDefImpl::ReleaseNotifier::`vftable';
-  v6->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS3::MovieRoot::`vftable'{for `Scaleform::GFx::ASMovieRootBase'};
-  v6->vfptr = (Scaleform::GFx::AS3::FlashUIVtbl *)&Scaleform::GFx::AS3::MovieRoot::`vftable'{for `Scaleform::GFx::AS3::FlashUI'};
-  v6->vfptr = (Scaleform::GFx::KeyboardState::IListenerVtbl *)&Scaleform::GFx::AS3::MovieRoot::`vftable'{for `Scaleform::GFx::KeyboardState::IListener'};
-  v6->vfptr = (Scaleform::GFx::MovieDefImpl::ReleaseNotifierVtbl *)&Scaleform::GFx::AS3::MovieRoot::`vftable'{for `Scaleform::GFx::MovieDefImpl::ReleaseNotifier'};
+  v6->vfptr = (Scaleform::GFx::KeyboardState::IListenerVtbl *)&Scaleform::GFx::KeyboardState::IListener::`vftable;
+  v6->vfptr = (Scaleform::GFx::MovieDefImpl::ReleaseNotifierVtbl *)&Scaleform::GFx::MovieDefImpl::ReleaseNotifier::`vftable;
+  v6->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS3::MovieRoot::`vftable{for `Scaleform::GFx::ASMovieRootBase};
+  v6->vfptr = (Scaleform::GFx::AS3::FlashUIVtbl *)&Scaleform::GFx::AS3::MovieRoot::`vftable{for `Scaleform::GFx::AS3::FlashUI};
+  v6->vfptr = (Scaleform::GFx::KeyboardState::IListenerVtbl *)&Scaleform::GFx::AS3::MovieRoot::`vftable{for `Scaleform::GFx::KeyboardState::IListener};
+  v6->vfptr = (Scaleform::GFx::MovieDefImpl::ReleaseNotifierVtbl *)&Scaleform::GFx::AS3::MovieRoot::`vftable{for `Scaleform::GFx::MovieDefImpl::ReleaseNotifier};
   v7 = (signed __int64)&v6->MemContext;
   if ( v5 )
     Scaleform::Render::RenderBuffer::AddRef(v5);
@@ -523,7 +523,7 @@ void __fastcall Scaleform::GFx::AS3::MovieRoot::MovieRoot(Scaleform::GFx::AS3::M
   Scaleform::GFx::AS3::StringManager::StringManager(
     &v6->BuiltinsMgr,
     *(Scaleform::GFx::ASStringManager **)(*(_QWORD *)v7 + 24i64));
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v6->mMouseState,
     0xE0ui64,
     6,
@@ -563,15 +563,15 @@ void __fastcall Scaleform::GFx::AS3::MovieRoot::~MovieRoot(Scaleform::GFx::AS3::
   Scaleform::Render::RenderBuffer *v9; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS3::MovieRoot::`vftable'{for `Scaleform::GFx::ASMovieRootBase'};
-  this->vfptr = (Scaleform::GFx::AS3::FlashUIVtbl *)&Scaleform::GFx::AS3::MovieRoot::`vftable'{for `Scaleform::GFx::AS3::FlashUI'};
-  this->vfptr = (Scaleform::GFx::KeyboardState::IListenerVtbl *)&Scaleform::GFx::AS3::MovieRoot::`vftable'{for `Scaleform::GFx::KeyboardState::IListener'};
-  this->vfptr = (Scaleform::GFx::MovieDefImpl::ReleaseNotifierVtbl *)&Scaleform::GFx::AS3::MovieRoot::`vftable'{for `Scaleform::GFx::MovieDefImpl::ReleaseNotifier'};
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS3::MovieRoot::`vftable{for `Scaleform::GFx::ASMovieRootBase};
+  this->vfptr = (Scaleform::GFx::AS3::FlashUIVtbl *)&Scaleform::GFx::AS3::MovieRoot::`vftable{for `Scaleform::GFx::AS3::FlashUI};
+  this->vfptr = (Scaleform::GFx::KeyboardState::IListenerVtbl *)&Scaleform::GFx::AS3::MovieRoot::`vftable{for `Scaleform::GFx::KeyboardState::IListener};
+  this->vfptr = (Scaleform::GFx::MovieDefImpl::ReleaseNotifierVtbl *)&Scaleform::GFx::AS3::MovieRoot::`vftable{for `Scaleform::GFx::MovieDefImpl::ReleaseNotifier};
   Scaleform::AutoPtr<Scaleform::ArrayLH<Scaleform::GFx::AS3::Instances::fl_sensors::Geolocation *,2,Scaleform::ArrayDefaultPolicy>>::~AutoPtr<Scaleform::ArrayLH<Scaleform::GFx::AS3::Instances::fl_sensors::Geolocation *,2,Scaleform::ArrayDefaultPolicy>>((Scaleform::AutoPtr<Scaleform::ArrayLH<Scaleform::GFx::AS3::Instances::fl_sensors::Geolocation *,2,Scaleform::ArrayDefaultPolicy> > *)&this->ExtensionContextArray);
   Scaleform::AutoPtr<Scaleform::ArrayLH<Scaleform::GFx::AS3::Instances::fl_sensors::Geolocation *,2,Scaleform::ArrayDefaultPolicy>>::~AutoPtr<Scaleform::ArrayLH<Scaleform::GFx::AS3::Instances::fl_sensors::Geolocation *,2,Scaleform::ArrayDefaultPolicy>>(&v1->GeolocationArray);
   Scaleform::AutoPtr<Scaleform::ArrayLH<Scaleform::GFx::AS3::Instances::fl_sensors::Geolocation *,2,Scaleform::ArrayDefaultPolicy>>::~AutoPtr<Scaleform::ArrayLH<Scaleform::GFx::AS3::Instances::fl_sensors::Geolocation *,2,Scaleform::ArrayDefaultPolicy>>((Scaleform::AutoPtr<Scaleform::ArrayLH<Scaleform::GFx::AS3::Instances::fl_sensors::Geolocation *,2,Scaleform::ArrayDefaultPolicy> > *)&v1->AccelerometerArray);
   Scaleform::HashSet<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::AllocatorLH<Scaleform::Render::GradientImage *,2>,Scaleform::HashsetCachedEntry<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor>>::~HashSet<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::AllocatorLH<Scaleform::Render::GradientImage *,2>,Scaleform::HashsetCachedEntry<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor>>((Scaleform::HashSet<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor> > *)&v1->LoadedMovieDefs);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->mMouseState,
     0xE0ui64,
     6,
@@ -627,10 +627,10 @@ void __fastcall Scaleform::GFx::AS3::MovieRoot::~MovieRoot(Scaleform::GFx::AS3::
   v8 = (Scaleform::Render::RenderBuffer *)v1->MemContext.pObject;
   if ( v8 )
     Scaleform::RefCountImpl::Release(v8);
-  v1->vfptr = (Scaleform::GFx::MovieDefImpl::ReleaseNotifierVtbl *)&Scaleform::GFx::MovieDefImpl::ReleaseNotifier::`vftable';
-  v1->vfptr = (Scaleform::GFx::KeyboardState::IListenerVtbl *)&Scaleform::GFx::KeyboardState::IListener::`vftable';
-  v1->vfptr = (Scaleform::GFx::AS3::FlashUIVtbl *)&Scaleform::GFx::AS3::FlashUI::`vftable';
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ASMovieRootBase::`vftable';
+  v1->vfptr = (Scaleform::GFx::MovieDefImpl::ReleaseNotifierVtbl *)&Scaleform::GFx::MovieDefImpl::ReleaseNotifier::`vftable;
+  v1->vfptr = (Scaleform::GFx::KeyboardState::IListenerVtbl *)&Scaleform::GFx::KeyboardState::IListener::`vftable;
+  v1->vfptr = (Scaleform::GFx::AS3::FlashUIVtbl *)&Scaleform::GFx::AS3::FlashUI::`vftable;
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ASMovieRootBase::`vftable;
   v9 = (Scaleform::Render::RenderBuffer *)v1->pASSupport.pObject;
   if ( v9 )
     Scaleform::RefCountImpl::Release(v9);
@@ -2628,12 +2628,12 @@ Scaleform::GFx::AS3::MovieDefRootNode *__fastcall Scaleform::GFx::AS3::MovieRoot
   v6 = ((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))pheap->vfptr->Alloc)(pheap, 88i64);
   if ( !v6 )
     return 0i64;
-  *(_QWORD *)v6 = &Scaleform::GFx::MovieDefRootNode::`vftable';
+  *(_QWORD *)v6 = &Scaleform::GFx::MovieDefRootNode::`vftable;
   *(_DWORD *)(v6 + 24) = 1;
   *(_QWORD *)(v6 + 32) = v5;
   *(_BYTE *)(v6 + 48) = v4;
   *(_QWORD *)(v6 + 56) = 0i64;
-  *(_QWORD *)v6 = &Scaleform::GFx::AS3::MovieDefRootNode::`vftable';
+  *(_QWORD *)v6 = &Scaleform::GFx::AS3::MovieDefRootNode::`vftable;
   v7 = (_QWORD *)(v6 + 64);
   *v7 = 0i64;
   v7[1] = 0i64;
@@ -3881,7 +3881,7 @@ LABEL_88:
           Scaleform::MsgFormat::MsgFormat(&v99, (Scaleform::MsgFormat::Sink *)&v96);
           Scaleform::MsgFormat::Parse(
             &v99,
-            "Token '{0}' in path '{1}' was not resolved to a valid Object! This may be caused by a property that is not o"
+            "Token {0} in path {1} was not resolved to a valid Object! This may be caused by a property that is not o"
             "f Object type, or by using reserved words/properties for MovieClip names in the display tree.");
           Scaleform::MsgFormat::FormatD1<Scaleform::StringDataPtr>(&v99, &v);
           Scaleform::MsgFormat::FormatD1<char const *>(&v99, &v102);
@@ -4388,12 +4388,12 @@ bool __fastcall Scaleform::GFx::AS3::MovieRoot::SetVariable(Scaleform::GFx::AS3:
       v28 = 0i64;
       goto LABEL_66;
     }
-    *(_QWORD *)v28 = &Scaleform::GFx::MovieImpl::StickyVarNode::`vftable';
+    *(_QWORD *)v28 = &Scaleform::GFx::MovieImpl::StickyVarNode::`vftable;
     *(_QWORD *)(v28 + 8) = v8;
     ++v8->RefCount;
     *(_QWORD *)(v28 + 16) = 0i64;
     *(_BYTE *)(v28 + 24) = v4 == 2;
-    *(_QWORD *)v28 = &Scaleform::GFx::AS3::MovieRoot::StickyVarNode::`vftable';
+    *(_QWORD *)v28 = &Scaleform::GFx::AS3::MovieRoot::StickyVarNode::`vftable;
     *(_DWORD *)(v28 + 32) = pval.Flags;
     *(_QWORD *)(v28 + 40) = v34;
     *(_QWORD *)(v28 + 48) = v35;
@@ -6545,7 +6545,7 @@ void __fastcall Scaleform::GFx::AS3::MovieRoot::ParseValueArguments(Scaleform::G
                 LODWORD(v66[0]) = v39;
                 Scaleform::GFx::LogBase<Scaleform::GFx::LogState>::LogScriptError(
                   (Scaleform::GFx::LogBase<Scaleform::GFx::LogState> *)&v70->vfptr,
-                  "ParseArguments('%s','%s') - invalid format '%%h%c'",
+                  "ParseArguments(%s,%s) - invalid format %%h%c",
                   v81,
                   v6,
                   v66[0]);
@@ -6742,7 +6742,7 @@ LABEL_175:
                 LODWORD(v66[0]) = v53;
                 Scaleform::GFx::LogBase<Scaleform::GFx::LogState>::LogScriptError(
                   (Scaleform::GFx::LogBase<Scaleform::GFx::LogState> *)&v70->vfptr,
-                  "ParseArguments('%s','%s') - invalid format '%%l%c'",
+                  "ParseArguments(%s,%s) - invalid format %%l%c",
                   v81,
                   v6,
                   v66[0]);
@@ -6755,7 +6755,7 @@ LABEL_175:
                 LODWORD(v66[0]) = v15;
                 Scaleform::GFx::LogBase<Scaleform::GFx::LogState>::LogScriptError(
                   (Scaleform::GFx::LogBase<Scaleform::GFx::LogState> *)&v70->vfptr,
-                  "ParseArguments('%s','%s') - invalid format '%%%c'",
+                  "ParseArguments(%s,%s) - invalid format %%%c",
                   v81,
                   v6,
                   v66[0]);
@@ -6769,7 +6769,7 @@ LABEL_175:
           LODWORD(v66[0]) = v9;
           Scaleform::GFx::LogBase<Scaleform::GFx::LogState>::LogScriptError(
             (Scaleform::GFx::LogBase<Scaleform::GFx::LogState> *)&v70->vfptr,
-            "ParseArguments('%s','%s') - invalid char '%c'",
+            "ParseArguments(%s,%s) - invalid char %c",
             v81,
             v6,
             v66[0]);
@@ -8601,7 +8601,7 @@ void __fastcall Scaleform::GFx::AS3::LoadQueueEntry::LoadQueueEntry(Scaleform::G
   else
     v9 = &customWorldMapCaption;
   Scaleform::String::String(&src, v9);
-  v8->vfptr = (Scaleform::GFx::LoadQueueEntryVtbl *)&Scaleform::GFx::LoadQueueEntry::`vftable';
+  v8->vfptr = (Scaleform::GFx::LoadQueueEntryVtbl *)&Scaleform::GFx::LoadQueueEntry::`vftable;
   Scaleform::String::String(&v8->URL);
   v8->Type = (src.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) == -12i64;
   v8->Method = v5;
@@ -8612,7 +8612,7 @@ void __fastcall Scaleform::GFx::AS3::LoadQueueEntry::LoadQueueEntry(Scaleform::G
   v8->Canceled = 0;
   if ( !_InterlockedDecrement((volatile signed __int32 *)((src.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
     ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
-  v8->vfptr = (Scaleform::GFx::LoadQueueEntryVtbl *)&Scaleform::GFx::AS3::LoadQueueEntry::`vftable';
+  v8->vfptr = (Scaleform::GFx::LoadQueueEntryVtbl *)&Scaleform::GFx::AS3::LoadQueueEntry::`vftable;
   v8->mLoader.pObject = 0i64;
   v8->mURLLoader.pObject = 0i64;
   v8->mURLRequest.pObject = 0i64;
@@ -8650,7 +8650,7 @@ void __fastcall Scaleform::GFx::AS3::LoadQueueEntry::LoadQueueEntry(Scaleform::G
   v6 = bytes;
   v7 = this;
   Scaleform::String::String(&src, &customWorldMapCaption);
-  v7->vfptr = (Scaleform::GFx::LoadQueueEntryVtbl *)&Scaleform::GFx::LoadQueueEntry::`vftable';
+  v7->vfptr = (Scaleform::GFx::LoadQueueEntryVtbl *)&Scaleform::GFx::LoadQueueEntry::`vftable;
   Scaleform::String::String(&v7->URL);
   v7->Type = (src.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) == -12i64;
   v7->Method = v4;
@@ -8660,7 +8660,7 @@ void __fastcall Scaleform::GFx::AS3::LoadQueueEntry::LoadQueueEntry(Scaleform::G
   *(_WORD *)&v7->QuietOpen = 0;
   if ( !_InterlockedDecrement((volatile signed __int32 *)((src.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
     ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
-  v7->vfptr = (Scaleform::GFx::LoadQueueEntryVtbl *)&Scaleform::GFx::AS3::LoadQueueEntry::`vftable';
+  v7->vfptr = (Scaleform::GFx::LoadQueueEntryVtbl *)&Scaleform::GFx::AS3::LoadQueueEntry::`vftable;
   v7->mLoader.pObject = 0i64;
   v7->mURLLoader.pObject = 0i64;
   v7->mURLRequest.pObject = 0i64;
@@ -8723,7 +8723,7 @@ void __fastcall Scaleform::GFx::AS3::LoadQueueEntry::LoadQueueEntry(Scaleform::G
   else
     v9 = &customWorldMapCaption;
   Scaleform::String::String(&src, v9);
-  v8->vfptr = (Scaleform::GFx::LoadQueueEntryVtbl *)&Scaleform::GFx::LoadQueueEntry::`vftable';
+  v8->vfptr = (Scaleform::GFx::LoadQueueEntryVtbl *)&Scaleform::GFx::LoadQueueEntry::`vftable;
   Scaleform::String::String(&v8->URL);
   v8->Type = 4;
   v8->Method = v5;
@@ -8734,7 +8734,7 @@ void __fastcall Scaleform::GFx::AS3::LoadQueueEntry::LoadQueueEntry(Scaleform::G
   v8->Canceled = 0;
   if ( !_InterlockedDecrement((volatile signed __int32 *)((src.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
     ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
-  v8->vfptr = (Scaleform::GFx::LoadQueueEntryVtbl *)&Scaleform::GFx::AS3::LoadQueueEntry::`vftable';
+  v8->vfptr = (Scaleform::GFx::LoadQueueEntryVtbl *)&Scaleform::GFx::AS3::LoadQueueEntry::`vftable;
   v8->mLoader.pObject = 0i64;
   v8->mURLLoader.pObject = 0i64;
   v8->mURLRequest.pObject = 0i64;
@@ -8769,7 +8769,7 @@ void __fastcall Scaleform::GFx::AS3::LoadQueueEntry::~LoadQueueEntry(Scaleform::
   unsigned int v9; // eax
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::LoadQueueEntryVtbl *)&Scaleform::GFx::AS3::LoadQueueEntry::`vftable';
+  this->vfptr = (Scaleform::GFx::LoadQueueEntryVtbl *)&Scaleform::GFx::AS3::LoadQueueEntry::`vftable;
   if ( this->NotifyLoadInitCInterface.pObject )
   {
     v2 = (Scaleform::Render::RenderBuffer *)this->NotifyLoadInitCInterface.pObject;
@@ -8832,7 +8832,7 @@ void __fastcall Scaleform::GFx::AS3::LoadQueueEntry::~LoadQueueEntry(Scaleform::
       }
     }
   }
-  v1->vfptr = (Scaleform::GFx::LoadQueueEntryVtbl *)&Scaleform::GFx::LoadQueueEntry::`vftable';
+  v1->vfptr = (Scaleform::GFx::LoadQueueEntryVtbl *)&Scaleform::GFx::LoadQueueEntry::`vftable;
   if ( !_InterlockedDecrement((volatile signed __int32 *)((v1->URL.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
     ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
 }
@@ -8859,7 +8859,7 @@ void __fastcall Scaleform::GFx::AS3::LoadQueueEntryMT_LoadMovie::LoadQueueEntryM
     (Scaleform::GFx::LoadQueueEntryMT *)&this->vfptr,
     (Scaleform::GFx::LoadQueueEntry *)&pqueueEntry->vfptr,
     pmovieRoot);
-  v4->vfptr = (Scaleform::GFx::LoadQueueEntryMTVtbl *)&Scaleform::GFx::AS3::LoadQueueEntryMT_LoadMovie::`vftable';
+  v4->vfptr = (Scaleform::GFx::LoadQueueEntryMTVtbl *)&Scaleform::GFx::AS3::LoadQueueEntryMT_LoadMovie::`vftable;
   v5 = 0i64;
   v4->pPreloadTask.pObject = 0i64;
   v4->CharSwitched = 0;
@@ -9727,7 +9727,7 @@ void __fastcall Scaleform::GFx::AS3::MovieRoot::ProcessLoadQueueEntry(Scaleform:
                     0),
             (v97 = v10) == 0i64) )
       {
-        Scaleform::SFsprintf(&dest, 0x400ui64, "Can't open %s", (pdest.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12);
+        Scaleform::SFsprintf(&dest, 0x400ui64, "Cant open %s", (pdest.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12);
         Scaleform::GFx::AS3::Instances::fl_net::URLLoader::ExecuteErrorEvent(
           (Scaleform::GFx::AS3::Instances::fl_net::URLLoader *)v4[1].pNext,
           &dest);
@@ -10316,7 +10316,7 @@ void __fastcall Scaleform::GFx::AS3::MovieRoot::ProcessLoadVarsMT(Scaleform::GFx
   }
   else
   {
-    Scaleform::SFsprintf(&dest, 0x400ui64, "Can't open %s", **(_QWORD **)(*(_QWORD *)&pentry[1].Type + 56i64));
+    Scaleform::SFsprintf(&dest, 0x400ui64, "Cant open %s", **(_QWORD **)(*(_QWORD *)&pentry[1].Type + 56i64));
     v8 = (Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher *)v7[1].pNext;
     Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::CreateIOErrorEventObject(v8, &result, &dest);
     Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_geom::Vector3D>::SetPtr(
@@ -10372,7 +10372,7 @@ void __fastcall Scaleform::GFx::AS3::MovieRoot::ProcessLoadBinaryMT(Scaleform::G
   }
   else
   {
-    Scaleform::SFsprintf(&dest, 0x400ui64, "Can't open %s", **(_QWORD **)(*(_QWORD *)&pentry[1].Type + 56i64), -2i64);
+    Scaleform::SFsprintf(&dest, 0x400ui64, "Cant open %s", **(_QWORD **)(*(_QWORD *)&pentry[1].Type + 56i64), -2i64);
     v7 = (Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher *)v6[1].pNext;
     Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::CreateIOErrorEventObject(v7, &result, &dest);
     Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_geom::Vector3D>::SetPtr(
@@ -10718,12 +10718,12 @@ LABEL_63:
       Scaleform::GFx::MovieImpl::UnregisterFonts(v70->pMovieImpl, v29);
       if ( v70->MemContext.pObject->TextAllocator.pObject )
       {
-        visitor.vfptr = (Scaleform::Render::Text::Allocator::TextFormatVisitorVtbl *)&`Scaleform::GFx::AS3::MovieRoot::UnloadMovie'::`39'::TextFormatVisitor::`vftable';
+        visitor.vfptr = (Scaleform::Render::Text::Allocator::TextFormatVisitorVtbl *)&`Scaleform::GFx::AS3::MovieRoot::UnloadMovie::`39::TextFormatVisitor::`vftable;
         v69 = v29;
         Scaleform::Render::Text::Allocator::VisitTextFormatCache(
           v70->MemContext.pObject->TextAllocator.pObject,
           &visitor);
-        visitor.vfptr = (Scaleform::Render::Text::Allocator::TextFormatVisitorVtbl *)&Scaleform::Render::Text::Allocator::TextFormatVisitor::`vftable';
+        visitor.vfptr = (Scaleform::Render::Text::Allocator::TextFormatVisitorVtbl *)&Scaleform::Render::Text::Allocator::TextFormatVisitor::`vftable;
       }
       v46 = (Scaleform::RefCountNTSImpl **)&v70->mMouseState[0].LastMouseOverObj;
       v47 = 6i64;

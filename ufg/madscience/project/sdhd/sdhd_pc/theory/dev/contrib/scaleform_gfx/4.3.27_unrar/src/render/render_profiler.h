@@ -2,7 +2,7 @@
 // RVA: 0x94C010
 void __fastcall Scaleform::Render::ProfileModifier::~ProfileModifier(Scaleform::Render::ProfileModifier *this)
 {
-  this->vfptr = (Scaleform::Render::ProfileModifierVtbl *)&Scaleform::Render::ProfileModifier::`vftable';
+  this->vfptr = (Scaleform::Render::ProfileModifierVtbl *)&Scaleform::Render::ProfileModifier::`vftable;
 }
 
 // File Line: 75
@@ -45,8 +45,8 @@ void __fastcall Scaleform::Render::ProfileModifier::SetFillFlags(Scaleform::Rend
 // RVA: 0x94C020
 void __fastcall Scaleform::Render::ProfileViews::~ProfileViews(Scaleform::Render::ProfileViews *this)
 {
-  this->vfptr = (Scaleform::Render::ProfileViewsVtbl *)&Scaleform::Render::ProfileViews::`vftable';
-  this->PMDefault.vfptr = (Scaleform::Render::ProfileModifierVtbl *)&Scaleform::Render::ProfileModifier::`vftable';
+  this->vfptr = (Scaleform::Render::ProfileViewsVtbl *)&Scaleform::Render::ProfileViews::`vftable;
+  this->PMDefault.vfptr = (Scaleform::Render::ProfileModifierVtbl *)&Scaleform::Render::ProfileModifier::`vftable;
 }
 
 // File Line: 246

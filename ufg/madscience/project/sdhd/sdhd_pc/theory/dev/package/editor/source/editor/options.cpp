@@ -24,7 +24,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::Editor::OptionsVie
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::Editor::OptionsView,UFG::qReflectObject>::sInventory.vfptr,
     "UFG::Editor::OptionsView",
     v0);
-  UFG::qReflectObjectType<UFG::Editor::OptionsView,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::Editor::OptionsView>::`vftable';
+  UFG::qReflectObjectType<UFG::Editor::OptionsView,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::Editor::OptionsView>::`vftable;
   UFG::qReflectInventory<UFG::Editor::OptionsView>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::Editor::OptionsView,UFG::qReflectObject>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -134,7 +134,7 @@ void __fastcall UFG::Editor::OptionsGlobal::Reset(UFG::Editor::OptionsGlobal *th
     if ( v2 )
     {
       v3 = &v2[-1].mVisible;
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         v2,
         0x28ui64,
         *(_DWORD *)&v2[-1].mVisible,
@@ -198,12 +198,12 @@ void __fastcall UFG::Editor::OptionsWindow::OptionsWindow(UFG::Editor::OptionsWi
 
   v1 = this;
   UFG::DUIWindow::DUIWindow((UFG::DUIWindow *)&this->vfptr);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::Editor::OptionsWindow,UFG::DUIWindow>::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::Editor::OptionsWindow,UFG::DUIWindow>::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::Editor::OptionsWindow,UFG::DUIWindow>::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::Editor::OptionsWindow,UFG::DUIWindow>::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v1->mBaseNode.mUID = -1i64;
   v1->mTypeUID = UFG::qStringHash64("UFG::Editor::OptionsWindow", 0xFFFFFFFFFFFFFFFFui64);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::OptionsWindow::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::OptionsWindow::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::OptionsWindow::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::OptionsWindow::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v1->mScrollPosition = 0i64;
   UFG::qString::Set(&v1->mTitle, "Options");
 }

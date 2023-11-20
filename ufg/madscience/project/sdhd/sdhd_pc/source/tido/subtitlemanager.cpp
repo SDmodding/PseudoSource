@@ -284,7 +284,7 @@ UFG::allocator::free_link *__fastcall UFG::SubtitleContainer::Create(__int64 set
       v4[1].mNext = 0i64;
       v4[2].mNext = 0i64;
       v4[3].mNext = 0i64;
-      v4->mNext = (UFG::allocator::free_link *)&UFG::SubtitleContainer::`vftable';
+      v4->mNext = (UFG::allocator::free_link *)&UFG::SubtitleContainer::`vftable;
       LODWORD(v4[6].mNext) = 1;
     }
     else
@@ -300,14 +300,14 @@ UFG::allocator::free_link *__fastcall UFG::SubtitleContainer::Create(__int64 set
       {
         v6 = v1->mUID;
         v7 = UFG::qSymbol::as_cstr_dbg(v1);
-        UFG::qPrintf("Subtitle set not found for: %u : '%s' \n", v6, v7);
+        UFG::qPrintf("Subtitle set not found for: %u : %s \n", v6, v7);
         return 0i64;
       }
       if ( UFG::SubtitleManager::sm_debugSubtitles )
       {
         v9.mUID = v1->mUID;
         v10 = UFG::qSymbol::as_cstr_dbg(v1);
-        UFG::qPrintf("Subtitle set loaded from : %u : '%s' \n", v9.mUID, v10);
+        UFG::qPrintf("Subtitle set loaded from : %u : %s \n", v9.mUID, v10);
       }
       v11 = v5->mNumElements;
       v12 = 0;
@@ -323,7 +323,7 @@ UFG::allocator::free_link *__fastcall UFG::SubtitleContainer::Create(__int64 set
           v15 = UFG::qPropertySet::Get<char const *>(v14, (UFG::qSymbol *)&TiDoSym_SampleName.mUID, DEPTH_RECURSE);
           v16 = UFG::qPropertySet::Get<char const *>(v14, (UFG::qSymbol *)&TiDoSym_Text.mUID, DEPTH_RECURSE);
           v17 = UFG::qStringHashUpper32(v15, 0xFFFFFFFF);
-          UFG::qPrintf("Subtitle Loaded: %s : %u :'%s' \n", v15, v17, v16);
+          UFG::qPrintf("Subtitle Loaded: %s : %u :%s \n", v15, v17, v16);
           ++v12;
         }
         while ( v12 < v11 );

@@ -8,7 +8,7 @@ void __fastcall AK::StreamMgr::CAkDeviceBase::CAkDeviceBase(AK::StreamMgr::CAkDe
   v2 = in_pLowLevelHook;
   v3 = this;
   AK::StreamMgr::CAkIOThread::CAkIOThread((AK::StreamMgr::CAkIOThread *)&this->vfptr);
-  v3->vfptr = (AK::StreamMgr::CAkIOThreadVtbl *)&AK::StreamMgr::CAkDeviceBase::`vftable';
+  v3->vfptr = (AK::StreamMgr::CAkIOThreadVtbl *)&AK::StreamMgr::CAkDeviceBase::`vftable;
   v3->m_listTasks.m_pFirst = 0i64;
   InitializeCriticalSection(&v3->m_lockTasksList.m_csLock);
   AK::StreamMgr::CAkIOMemMgr::CAkIOMemMgr(&v3->m_mgrMemIO);
@@ -26,7 +26,7 @@ void __fastcall AK::StreamMgr::CAkDeviceBase::~CAkDeviceBase(AK::StreamMgr::CAkD
 
   v1 = this;
   v2 = &this->m_mgrMemIO;
-  *(_QWORD *)&v2[-3].m_bUseCache = &AK::StreamMgr::CAkDeviceBase::`vftable';
+  *(_QWORD *)&v2[-3].m_bUseCache = &AK::StreamMgr::CAkDeviceBase::`vftable;
   AK::StreamMgr::CAkIOMemMgr::~CAkIOMemMgr(v2);
   DeleteCriticalSection(&v1->m_lockTasksList.m_csLock);
   AK::StreamMgr::CAkIOThread::~CAkIOThread((AK::StreamMgr::CAkIOThread *)&v1->vfptr);
@@ -591,7 +591,7 @@ void __fastcall AK::StreamMgr::CAkStmTask::~CAkStmTask(AK::StreamMgr::CAkStmTask
 
   v1 = (*((_BYTE *)this + 117) & 0x10) == 0;
   v2 = this;
-  this->vfptr = (AK::StreamMgr::CAkClientThreadAwareVtbl *)&AK::StreamMgr::CAkStmTask::`vftable';
+  this->vfptr = (AK::StreamMgr::CAkClientThreadAwareVtbl *)&AK::StreamMgr::CAkStmTask::`vftable;
   if ( !v1 )
     this->m_pDevice->m_pLowLevelHook->vfptr->Close(this->m_pDevice->m_pLowLevelHook, this->m_pFileDesc);
   v3 = v2->m_pDeferredOpenData;
@@ -705,14 +705,14 @@ void __fastcall AK::StreamMgr::CAkStdStmBase::CAkStdStmBase(AK::StreamMgr::CAkSt
 
   v1 = this;
   AK::StreamMgr::CAkClientThreadAware::CAkClientThreadAware((AK::StreamMgr::CAkClientThreadAware *)&this->vfptr);
-  v1->vfptr = (AK::StreamMgr::CAkClientThreadAwareVtbl *)&AK::StreamMgr::CAkStmTask::`vftable';
+  v1->vfptr = (AK::StreamMgr::CAkClientThreadAwareVtbl *)&AK::StreamMgr::CAkStmTask::`vftable;
   v1->m_pDeferredOpenData = 0i64;
   v1->m_pFileDesc = 0i64;
   InitializeCriticalSection(&v1->m_lockStatus.m_csLock);
   *((_BYTE *)&v1->0 + 117) &= 0x83u;
   v1->m_pszStreamName = 0i64;
-  v1->vfptr = (AK::StreamMgr::CAkClientThreadAwareVtbl *)&AK::StreamMgr::CAkStdStmBase::`vftable'{for `AK::StreamMgr::CAkStmTask'};
-  v1->vfptr = (AK::IAkStdStreamVtbl *)&AK::StreamMgr::CAkStdStmBase::`vftable'{for `AK::IAkStdStream'};
+  v1->vfptr = (AK::StreamMgr::CAkClientThreadAwareVtbl *)&AK::StreamMgr::CAkStdStmBase::`vftable{for `AK::StreamMgr::CAkStmTask};
+  v1->vfptr = (AK::IAkStdStreamVtbl *)&AK::StreamMgr::CAkStdStmBase::`vftable{for `AK::IAkStdStream};
   v1->m_memBlock.uPosition = 0i64;
   v1->m_memBlock.pData = 0i64;
   v1->m_memBlock.pNextBlock = 0i64;
@@ -734,11 +734,11 @@ void __fastcall AK::StreamMgr::CAkStdStmBase::~CAkStdStmBase(AK::StreamMgr::CAkS
 
   v1 = (*((_BYTE *)&this->0 + 117) & 0x20) == 0;
   v2 = this;
-  this->vfptr = (AK::StreamMgr::CAkClientThreadAwareVtbl *)&AK::StreamMgr::CAkStdStmBase::`vftable'{for `AK::StreamMgr::CAkStmTask'};
-  this->vfptr = (AK::IAkStdStreamVtbl *)&AK::StreamMgr::CAkStdStmBase::`vftable'{for `AK::IAkStdStream'};
+  this->vfptr = (AK::StreamMgr::CAkClientThreadAwareVtbl *)&AK::StreamMgr::CAkStdStmBase::`vftable{for `AK::StreamMgr::CAkStmTask};
+  this->vfptr = (AK::IAkStdStreamVtbl *)&AK::StreamMgr::CAkStdStmBase::`vftable{for `AK::IAkStdStream};
   if ( !v1 )
     AK::StreamMgr::CAkIOThread::StdSemDecr((AK::StreamMgr::CAkIOThread *)&this->m_pDevice->vfptr);
-  v2->vfptr = (AK::IAkStdStreamVtbl *)&AK::IAkStdStream::`vftable';
+  v2->vfptr = (AK::IAkStdStreamVtbl *)&AK::IAkStdStream::`vftable;
   AK::StreamMgr::CAkStmTask::~CAkStmTask((AK::StreamMgr::CAkStmTask *)&v2->vfptr);
 }
 
@@ -1228,7 +1228,7 @@ void __fastcall AK::StreamMgr::CAkAutoStmBase::CAkAutoStmBase(AK::StreamMgr::CAk
 
   v1 = this;
   AK::StreamMgr::CAkClientThreadAware::CAkClientThreadAware((AK::StreamMgr::CAkClientThreadAware *)&this->vfptr);
-  v1->vfptr = (AK::StreamMgr::CAkClientThreadAwareVtbl *)&AK::StreamMgr::CAkStmTask::`vftable';
+  v1->vfptr = (AK::StreamMgr::CAkClientThreadAwareVtbl *)&AK::StreamMgr::CAkStmTask::`vftable;
   v1->m_pDeferredOpenData = 0i64;
   v1->m_pFileDesc = 0i64;
   InitializeCriticalSection(&v1->m_lockStatus.m_csLock);
@@ -1236,8 +1236,8 @@ void __fastcall AK::StreamMgr::CAkAutoStmBase::CAkAutoStmBase(AK::StreamMgr::CAk
   v1->m_pszStreamName = 0i64;
   v1->m_fileID = -1;
   v1->m_uVirtualBufferingSize = 0;
-  v1->vfptr = (AK::StreamMgr::CAkClientThreadAwareVtbl *)&AK::StreamMgr::CAkAutoStmBase::`vftable'{for `AK::StreamMgr::CAkStmTask'};
-  v1->vfptr = (AK::IAkAutoStreamVtbl *)&AK::StreamMgr::CAkAutoStmBase::`vftable'{for `AK::IAkAutoStream'};
+  v1->vfptr = (AK::StreamMgr::CAkClientThreadAwareVtbl *)&AK::StreamMgr::CAkAutoStmBase::`vftable{for `AK::StreamMgr::CAkStmTask};
+  v1->vfptr = (AK::IAkAutoStreamVtbl *)&AK::StreamMgr::CAkAutoStmBase::`vftable{for `AK::IAkAutoStream};
   v1->m_listBuffers.m_ulNumListItems = 0;
   v1->m_listBuffers.m_pFirst = 0i64;
   v1->m_listBuffers.m_pLast = 0i64;
@@ -1256,11 +1256,11 @@ void __fastcall AK::StreamMgr::CAkAutoStmBase::~CAkAutoStmBase(AK::StreamMgr::CA
 
   v1 = (*((_BYTE *)&this->0 + 117) & 0x20) == 0;
   v2 = this;
-  this->vfptr = (AK::StreamMgr::CAkClientThreadAwareVtbl *)&AK::StreamMgr::CAkAutoStmBase::`vftable'{for `AK::StreamMgr::CAkStmTask'};
-  this->vfptr = (AK::IAkAutoStreamVtbl *)&AK::StreamMgr::CAkAutoStmBase::`vftable'{for `AK::IAkAutoStream'};
+  this->vfptr = (AK::StreamMgr::CAkClientThreadAwareVtbl *)&AK::StreamMgr::CAkAutoStmBase::`vftable{for `AK::StreamMgr::CAkStmTask};
+  this->vfptr = (AK::IAkAutoStreamVtbl *)&AK::StreamMgr::CAkAutoStmBase::`vftable{for `AK::IAkAutoStream};
   if ( !v1 )
     AK::StreamMgr::CAkIOThread::AutoSemDecr((AK::StreamMgr::CAkIOThread *)&this->m_pDevice->vfptr);
-  v2->vfptr = (AK::IAkAutoStreamVtbl *)&AK::IAkAutoStream::`vftable';
+  v2->vfptr = (AK::IAkAutoStreamVtbl *)&AK::IAkAutoStream::`vftable;
   AK::StreamMgr::CAkStmTask::~CAkStmTask((AK::StreamMgr::CAkStmTask *)&v2->vfptr);
 }
 

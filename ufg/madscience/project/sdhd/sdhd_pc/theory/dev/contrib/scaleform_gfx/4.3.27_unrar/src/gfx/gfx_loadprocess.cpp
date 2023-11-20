@@ -6,12 +6,12 @@ void __fastcall Scaleform::GFx::LoadStates::LoadStates(Scaleform::GFx::LoadState
   signed __int64 v2; // [rsp+48h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::LoadStates,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::LoadStates::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::LoadStates,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::LoadStates::`vftable;
   this->pBindStates.pObject = 0i64;
   this->pLog.pObject = 0i64;
   this->pParseControl.pObject = 0i64;
@@ -80,12 +80,12 @@ void __fastcall Scaleform::GFx::LoadStates::LoadStates(Scaleform::GFx::LoadState
   v5 = pstates;
   v6 = pimpl;
   v7 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::LoadStates,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::LoadStates::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::LoadStates,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::LoadStates::`vftable;
   v8 = 0i64;
   this->pBindStates.pObject = 0i64;
   this->pLog.pObject = 0i64;
@@ -235,7 +235,7 @@ void __fastcall Scaleform::GFx::LoadStates::~LoadStates(Scaleform::GFx::LoadStat
   Scaleform::Render::RenderBuffer *v13; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::LoadStates::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::LoadStates::`vftable;
   v2 = &this->SubstituteFontMovieDefs;
   Scaleform::ConstructorMov<Scaleform::Ptr<Scaleform::GFx::MovieDefImpl>>::DestructArray(
     this->SubstituteFontMovieDefs.Data.Data,
@@ -342,7 +342,7 @@ Scaleform::File *__fastcall Scaleform::GFx::LoadStates::OpenFile(Scaleform::GFx:
       if ( !_bittest((const signed int *)&loadConstants, 0x15u) )
         Scaleform::GFx::LogBase<Scaleform::GFx::LogState>::LogError(
           (Scaleform::GFx::LogBase<Scaleform::GFx::LogState> *)&v5->vfptr,
-          "Loader failed to open '%s', FileOpener not installe",
+          "Loader failed to open %s, FileOpener not installe",
           pfilename);
     }
     result = 0i64;
@@ -526,14 +526,14 @@ void __fastcall Scaleform::GFx::LoadProcess::LoadProcess(Scaleform::GFx::LoadPro
   v6 = pdataDef;
   v7 = this;
   Scaleform::GFx::LoaderTask::LoaderTask((Scaleform::GFx::LoaderTask *)&this->vfptr, pstates, Id_MovieDataLoad);
-  v7->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>Vtbl *)&Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>::`vftable';
-  v7->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::LoadProcess::`vftable'{for `Scaleform::GFx::LoaderTask'};
-  v7->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>Vtbl *)&Scaleform::GFx::LoadProcess::`vftable'{for `Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>'};
+  v7->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>Vtbl *)&Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>::`vftable;
+  v7->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::LoadProcess::`vftable{for `Scaleform::GFx::LoaderTask};
+  v7->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>Vtbl *)&Scaleform::GFx::LoadProcess::`vftable{for `Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>};
   v7->pBindProcess.pObject = 0i64;
   v7->pLoadData.pObject = 0i64;
   Scaleform::GFx::SWFProcessInfo::SWFProcessInfo(&v7->ProcessInfo, v6->pData.pObject->pHeap);
   v7->pJpegTables.pObject = 0i64;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v7->FrameTags,
     0x18ui64,
     2,
@@ -589,8 +589,8 @@ void __fastcall Scaleform::GFx::LoadProcess::~LoadProcess(Scaleform::GFx::LoadPr
   Scaleform::Render::RenderBuffer *v11; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::LoadProcess::`vftable'{for `Scaleform::GFx::LoaderTask'};
-  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>Vtbl *)&Scaleform::GFx::LoadProcess::`vftable'{for `Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>'};
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::LoadProcess::`vftable{for `Scaleform::GFx::LoaderTask};
+  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>Vtbl *)&Scaleform::GFx::LoadProcess::`vftable{for `Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>};
   v2 = (Scaleform::Render::RenderBuffer *)this->pJpegTables.pObject;
   if ( v2 )
     Scaleform::RefCountImpl::Release(v2);
@@ -625,7 +625,7 @@ void __fastcall Scaleform::GFx::LoadProcess::~LoadProcess(Scaleform::GFx::LoadPr
     Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v4);
   if ( v1->InitActionTags.Data.Data )
     ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->FrameTags,
     0x18ui64,
     2,
@@ -640,15 +640,15 @@ void __fastcall Scaleform::GFx::LoadProcess::~LoadProcess(Scaleform::GFx::LoadPr
   v10 = (Scaleform::Render::RenderBuffer *)v1->pBindProcess.pObject;
   if ( v10 )
     Scaleform::RefCountImpl::Release(v10);
-  v1->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>Vtbl *)&Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>::`vftable';
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::LoaderTask::`vftable';
+  v1->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>Vtbl *)&Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>::`vftable;
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::LoaderTask::`vftable;
   Scaleform::GFx::LoaderImpl::UnRegisterLoadProcess(
     v1->pLoadStates.pObject->pLoaderImpl.pObject,
     (Scaleform::GFx::LoaderTask *)&v1->vfptr);
   v11 = (Scaleform::Render::RenderBuffer *)v1->pLoadStates.pObject;
   if ( v11 )
     Scaleform::RefCountImpl::Release(v11);
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::Task::`vftable';
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::Task::`vftable;
   Scaleform::RefCountImplCore::~RefCountImplCore((Scaleform::RefCountImplCore *)&v1->vfptr);
 }
 
@@ -980,7 +980,7 @@ Scaleform::GFx::ResourceHandle *__fastcall Scaleform::GFx::LoadProcess::AddDataR
 // RVA: 0x159C300
 __int64 Scaleform::GFx::_dynamic_initializer_for__static_inst__()
 {
-  static_inst.vfptr = (Scaleform::GFx::ResourceData::DataInterfaceVtbl *)&Scaleform::GFx::FontResourceCreator::`vftable';
+  static_inst.vfptr = (Scaleform::GFx::ResourceData::DataInterfaceVtbl *)&Scaleform::GFx::FontResourceCreator::`vftable;
   return atexit(Scaleform::GFx::_dynamic_atexit_destructor_for__static_inst__);
 }
 
@@ -1167,7 +1167,7 @@ void __fastcall Scaleform::GFx::LoadProcess::AddImageResource(Scaleform::GFx::Lo
       v49 = 0i64;
       v23.RefCount = 1;
       v24 = 14;
-      v23.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ImageCreator::`vftable';
+      v23.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ImageCreator::`vftable;
       v25 = 0i64;
       v40 = 0i64;
       v41 = 0;
@@ -1222,7 +1222,7 @@ void __fastcall Scaleform::GFx::LoadProcess::AddImageResource(Scaleform::GFx::Lo
         ((void (__fastcall *)(Scaleform::Render::Image *))v17->vfptr[2].__vecDelDtor)(v17);
       if ( v25 )
         Scaleform::RefCountImpl::Release(v25);
-      v23.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::State::`vftable';
+      v23.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::State::`vftable;
       Scaleform::RefCountImplCore::~RefCountImplCore(&v23);
     }
   }
@@ -1340,7 +1340,7 @@ __int64 __fastcall Scaleform::GFx::ImageFileResourceCreator::CreateResource(Scal
   if ( v7 )
   {
     Scaleform::GFx::ResourceFileInfo::ResourceFileInfo(v7, (Scaleform::GFx::ResourceFileInfo *)v6);
-    *(_QWORD *)v8 = &Scaleform::GFx::ImageFileInfo::`vftable';
+    *(_QWORD *)v8 = &Scaleform::GFx::ImageFileInfo::`vftable;
     Scaleform::String::String((Scaleform::String *)(v8 + 48));
     *(_WORD *)(v8 + 40) = v6[20];
     *(_WORD *)(v8 + 42) = v6[21];
@@ -1502,9 +1502,9 @@ __int64 __fastcall Scaleform::GFx::ImageFileResourceCreator::CreateResource(Scal
     else
     {
 LABEL_70:
-      Scaleform::String::operator=(&v69, "Failed to load image '");
+      Scaleform::String::operator=(&v69, "Failed to load image ");
       Scaleform::String::operator+=(&v69, (Scaleform::String *)(v8 + 32));
-      Scaleform::String::AppendString(&v69, "'", -1i64);
+      Scaleform::String::AppendString(&v69, "", -1i64);
       Scaleform::GFx::ResourceLib::ResourceSlot::CancelResolve(
         phandle.pSlot,
         (const char *)((v69.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12));
@@ -1608,7 +1608,7 @@ Scaleform::GFx::ResourceData *__fastcall Scaleform::GFx::ImageFileResourceCreato
   if ( !(_S13_10 & 1) )
   {
     _S13_10 |= 1u;
-    inst.vfptr = (Scaleform::GFx::ResourceData::DataInterfaceVtbl *)&Scaleform::GFx::ImageFileResourceCreator::`vftable';
+    inst.vfptr = (Scaleform::GFx::ResourceData::DataInterfaceVtbl *)&Scaleform::GFx::ImageFileResourceCreator::`vftable;
     atexit(Scaleform::GFx::ImageFileResourceCreator::CreateImageFileResourceData_::_2_::_dynamic_atexit_destructor_for__inst__);
   }
   inst.vfptr->AddRef((Scaleform::GFx::ResourceData::DataInterface *)&inst, v2);
@@ -1746,7 +1746,7 @@ Scaleform::GFx::ResourceData *__fastcall Scaleform::GFx::ImageResourceCreator::C
   if ( !(_S14_7 & 1) )
   {
     _S14_7 |= 1u;
-    inst_0.vfptr = (Scaleform::GFx::ResourceData::DataInterfaceVtbl *)&Scaleform::GFx::ImageResourceCreator::`vftable';
+    inst_0.vfptr = (Scaleform::GFx::ResourceData::DataInterfaceVtbl *)&Scaleform::GFx::ImageResourceCreator::`vftable;
     atexit(Scaleform::GFx::ImageResourceCreator::CreateImageResourceData_::_2_::_dynamic_atexit_destructor_for__inst__);
   }
   if ( v2 )
@@ -1863,7 +1863,7 @@ Scaleform::GFx::ResourceData *__fastcall Scaleform::GFx::SubImageResourceCreator
   if ( !(_S15_7 & 1) )
   {
     _S15_7 |= 1u;
-    inst_1.vfptr = (Scaleform::GFx::ResourceData::DataInterfaceVtbl *)&Scaleform::GFx::SubImageResourceCreator::`vftable';
+    inst_1.vfptr = (Scaleform::GFx::ResourceData::DataInterfaceVtbl *)&Scaleform::GFx::SubImageResourceCreator::`vftable;
     atexit(Scaleform::GFx::SubImageResourceCreator::CreateSubImageResourceData_::_2_::_dynamic_atexit_destructor_for__inst__);
   }
   inst_1.vfptr->AddRef((Scaleform::GFx::ResourceData::DataInterface *)&inst_1, v2);

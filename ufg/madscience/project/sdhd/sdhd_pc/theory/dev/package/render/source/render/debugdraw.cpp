@@ -305,12 +305,12 @@ void __fastcall Render::DebugData::DebugData(Render::DebugData *this, int debug_
   UFG::qLinearAllocator::Init(&v3->mDebugMemory, v4, v3->mDebugPoolSize, 0i64, 0i64);
   v3->mHaveExceededPool = 0;
   v5 = UFG::qStringHash32("LucidaConsole", 0xFFFFFFFF);
-  v6 = `UFG::qGetResourceInventory<Render::Font>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Render::Font>'::`2'::result )
+  v6 = `UFG::qGetResourceInventory<Render::Font>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Render::Font>::`2::result )
   {
     v7 = UFG::qResourceWarehouse::Instance();
     v6 = UFG::qResourceWarehouse::GetInventory(v7, 0x69FCCB4Cu);
-    `UFG::qGetResourceInventory<Render::Font>'::`2'::result = v6;
+    `UFG::qGetResourceInventory<Render::Font>::`2::result = v6;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v3->mDebugFontHandle.mPrev, 0x69FCCB4Cu, v5, v6);
 }

@@ -4,7 +4,7 @@ __int64 dynamic_initializer_for__gSpawnTask__()
 {
   unk_142047568 = &unk_142047568;
   unk_142047570 = &unk_142047568;
-  gSpawnTask.vfptr = (ITaskVtbl *)&SpawnTask::`vftable';
+  gSpawnTask.vfptr = (ITaskVtbl *)&SpawnTask::`vftable;
   unk_142047578 = 0i64;
   unk_142047580 = &unk_142047580;
   unk_142047588 = &unk_142047580;
@@ -134,9 +134,9 @@ void __fastcall ActionController::ActionController(ActionController *this)
   UFG::qList<ITask,ITask,0,0> *v2; // [rsp+28h] [rbp+10h]
   UFG::qList<IFinishUpdate,IFinishUpdate,0,0> *v3; // [rsp+28h] [rbp+10h]
 
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
-  this->vfptr = (Expression::IMemberMapVtbl *)&ActionController::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&ActionController::`vftable;
   this->m_currentNode = 0i64;
   this->m_Context = 0i64;
   this->m_ActionNodePlayTime = 0.0;
@@ -171,14 +171,14 @@ void __fastcall ActionController::~ActionController(ActionController *this)
   ActionController *v1; // rbx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&ActionController::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&ActionController::`vftable;
   ActionController::nodeCleanup(this);
   v1->m_SequenceNode = 0i64;
   v1->m_previousNode = 0i64;
   UFG::qList<UFG::PowerManagedResource,UFG::PowerManagedResourceList,0,0>::~qList<UFG::PowerManagedResource,UFG::PowerManagedResourceList,0,0>((UFG::qList<ITask,ITask,0,0> *)&v1->m_FinishUpdateTasks);
   UFG::qList<UFG::PowerManagedResource,UFG::PowerManagedResourceList,0,0>::~qList<UFG::PowerManagedResource,UFG::PowerManagedResourceList,0,0>(&v1->m_SequencedTasks);
   UFG::qList<UFG::PowerManagedResource,UFG::PowerManagedResourceList,0,0>::~qList<UFG::PowerManagedResource,UFG::PowerManagedResourceList,0,0>(&v1->m_RunningTasks);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 309
@@ -538,7 +538,7 @@ void __fastcall ActionController::Play(ActionController *this, ActionNodePlayabl
                       v33 = *(_QWORD *)(v31 + 8 * v30) + v31 + 8 * v30;
                       v34 = (UFG::qNode<ITask,ITask> *)(*(__int64 (__fastcall **)(signed __int64, const char *))(*(_QWORD *)v33 + 80i64))(
                                                          v33,
-                                                         "ActionController::Play(): Parent's tasks");
+                                                         "ActionController::Play(): Parents tasks");
                       v35 = v32->mNode.mPrev;
                       v30 = (unsigned int)(v30 + 1);
                       v34 = (UFG::qNode<ITask,ITask> *)((char *)v34 + 8);

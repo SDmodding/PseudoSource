@@ -1070,8 +1070,8 @@ void __fastcall UFG::PartCompositeBuilder::BuildCommandList(UFG::PartCompositeBu
                 v19 = v17 + 8;
                 *v19 = v19;
                 v19[1] = v19;
-                *(_QWORD *)v17 = &UFG::BuildOp::`vftable';
-                *(_QWORD *)v17 = &UFG::ClearView::`vftable';
+                *(_QWORD *)v17 = &UFG::BuildOp::`vftable;
+                *(_QWORD *)v17 = &UFG::ClearView::`vftable;
               }
               else
               {
@@ -1108,8 +1108,8 @@ void __fastcall UFG::PartCompositeBuilder::BuildCommandList(UFG::PartCompositeBu
                 v25 = v23 + 8;
                 *v25 = v25;
                 v25[1] = v25;
-                *(_QWORD *)v23 = &UFG::BuildOp::`vftable';
-                *(_QWORD *)v23 = &UFG::RenderPartToTexture::`vftable';
+                *(_QWORD *)v23 = &UFG::BuildOp::`vftable;
+                *(_QWORD *)v23 = &UFG::RenderPartToTexture::`vftable;
               }
               else
               {
@@ -1141,8 +1141,8 @@ void __fastcall UFG::PartCompositeBuilder::BuildCommandList(UFG::PartCompositeBu
                 v32 = v30 + 8;
                 *v32 = v32;
                 v32[1] = v32;
-                *(_QWORD *)v30 = &UFG::BuildOp::`vftable';
-                *(_QWORD *)v30 = &UFG::DilateTexture::`vftable';
+                *(_QWORD *)v30 = &UFG::BuildOp::`vftable;
+                *(_QWORD *)v30 = &UFG::DilateTexture::`vftable;
               }
               else
               {
@@ -1200,7 +1200,7 @@ void __fastcall UFG::PartCompositeBuilder::Update(UFG::PartCompositeBuilder *thi
         v5(v4->mDefinition, v4->mCallbackParam);
       v6 = v3->mProcessingBuild;
       if ( v6 )
-        UFG::CompositeBuild::`scalar deleting destructor'(v6, 1);
+        UFG::CompositeBuild::`scalar deleting destructor(v6, 1);
       v3->mProcessingBuild = 0i64;
     }
   }

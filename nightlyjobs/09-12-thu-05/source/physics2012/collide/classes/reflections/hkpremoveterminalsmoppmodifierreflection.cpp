@@ -32,8 +32,8 @@ void __fastcall finishLoadedObjecthkpRemoveTerminalsMoppModifier(void *p, int fi
 {
   if ( p )
   {
-    *(_QWORD *)p = &hkpRemoveTerminalsMoppModifier::`vftable'{for `hkReferencedObject'};
-    *((_QWORD *)p + 2) = &hkpRemoveTerminalsMoppModifier::`vftable'{for `hkpMoppModifier'};
+    *(_QWORD *)p = &hkpRemoveTerminalsMoppModifier::`vftable{for `hkReferencedObject};
+    *((_QWORD *)p + 2) = &hkpRemoveTerminalsMoppModifier::`vftable{for `hkpMoppModifier};
   }
 }
 
@@ -48,7 +48,7 @@ void __fastcall cleanupLoadedObjecthkpRemoveTerminalsMoppModifier(void *p)
 // RVA: 0xCEBBA0
 void **__fastcall getVtablehkpRemoveTerminalsMoppModifier()
 {
-  return &hkpRemoveTerminalsMoppModifier::`vftable'{for `hkReferencedObject'};
+  return &hkpRemoveTerminalsMoppModifier::`vftable{for `hkReferencedObject};
 }
 
 // File Line: 100

@@ -22,7 +22,7 @@ void __fastcall UFG::UIMapBlipList::~UIMapBlipList(UFG::UIMapBlipList *this)
   UFG::UIMapBlip **v2; // rcx
 
   v1 = this;
-  this->vfptr = (UFG::UIMapBlipListVtbl *)&UFG::UIMapBlipList::`vftable';
+  this->vfptr = (UFG::UIMapBlipListVtbl *)&UFG::UIMapBlipList::`vftable;
   UFG::UIMapBlipList::DeleteAll(this);
   v2 = v1->mSortedIcons.p;
   if ( v2 )
@@ -169,7 +169,7 @@ void __fastcall UFG::UIMapBlipManager::UIMapBlipManager(UFG::UIMapBlipManager *t
   UFG::UIMapBlipManager *v1; // rbx
 
   v1 = this;
-  this->mIconList.vfptr = (UFG::UIMapBlipListVtbl *)&UFG::UIMapBlipList::`vftable';
+  this->mIconList.vfptr = (UFG::UIMapBlipListVtbl *)&UFG::UIMapBlipList::`vftable;
   UFG::qBaseTreeRB::qBaseTreeRB(&this->mIconList.mIconData.mTree);
   v1->mIconList.mSortedIcons.p = 0i64;
   *(_QWORD *)&v1->mIconList.mSortedIcons.size = 0i64;
@@ -194,7 +194,7 @@ void __fastcall UFG::UIMapBlipManager::~UIMapBlipManager(UFG::UIMapBlipManager *
   v2 = v1->mPlayerArrowIcon;
   if ( v2 )
   {
-    v2->vfptr = (UFG::UIMapBlipGraphicVtbl *)&UFG::UIMapBlipGraphic::`vftable';
+    v2->vfptr = (UFG::UIMapBlipGraphicVtbl *)&UFG::UIMapBlipGraphic::`vftable;
     v3 = (void **)&v2->mPolys[1];
     v4 = 4i64;
     do
@@ -210,7 +210,7 @@ void __fastcall UFG::UIMapBlipManager::~UIMapBlipManager(UFG::UIMapBlipManager *
     while ( v4 );
     operator delete[](v2);
   }
-  v1->mIconList.vfptr = (UFG::UIMapBlipListVtbl *)&UFG::UIMapBlipList::`vftable';
+  v1->mIconList.vfptr = (UFG::UIMapBlipListVtbl *)&UFG::UIMapBlipList::`vftable;
   UFG::UIMapBlipList::DeleteAll(&v1->mIconList);
   v5 = v1->mIconList.mSortedIcons.p;
   if ( v5 )

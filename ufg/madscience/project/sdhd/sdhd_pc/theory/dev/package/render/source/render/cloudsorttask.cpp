@@ -284,7 +284,7 @@ void __fastcall CloudSortTask(int workerId, UFG::qMemoryStreamer *memory_streame
     *(_QWORD *)&arg.mStateParamIndex = (char *)&arg + 24;
     arg.mWorldView = (UFG::qMatrix44 *)&arg.mStateParamIndex;
     v55 = &dest.mStateArgs;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       dest.mStateArgs.mStateArgs,
       0x10ui64,
       128,

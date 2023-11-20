@@ -15,7 +15,7 @@ CAkMusicSegment *__fastcall CAkMusicSegment::Create(unsigned int in_ulID)
   if ( result )
   {
     CAkMusicNode::CAkMusicNode((CAkMusicNode *)&result->vfptr, v1);
-    v3->vfptr = (CAkIndexableVtbl *)&CAkMusicSegment::`vftable';
+    v3->vfptr = (CAkIndexableVtbl *)&CAkMusicSegment::`vftable;
     v3->m_markers.m_pItems = 0i64;
     *(_QWORD *)&v3->m_markers.m_uLength = 0i64;
     v3->m_uDuration = 0;

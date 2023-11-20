@@ -165,7 +165,7 @@ __int64 dynamic_initializer_for__UFG::PedSpawnManager::msShouldBeActiveZoneList_
 // RVA: 0x14E9150
 __int64 dynamic_initializer_for__UFG::PedSpawnManager::msAmbientList__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     UFG::PedSpawnManager::msAmbientList,
     0x10ui64,
     6,
@@ -177,7 +177,7 @@ __int64 dynamic_initializer_for__UFG::PedSpawnManager::msAmbientList__()
 // RVA: 0x14E92A0
 __int64 dynamic_initializer_for__UFG::PedSpawnManager::msScriptedList__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     UFG::PedSpawnManager::msScriptedList,
     0x10ui64,
     6,
@@ -189,7 +189,7 @@ __int64 dynamic_initializer_for__UFG::PedSpawnManager::msScriptedList__()
 // RVA: 0x14E91F0
 __int64 dynamic_initializer_for__UFG::PedSpawnManager::msDisabledThugZones__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     &UFG::PedSpawnManager::msDisabledThugZones,
     8ui64,
     10,
@@ -201,7 +201,7 @@ __int64 dynamic_initializer_for__UFG::PedSpawnManager::msDisabledThugZones__()
 // RVA: 0x14E9230
 __int64 dynamic_initializer_for__UFG::PedSpawnManager::msLowLODHandles__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     &UFG::PedSpawnManager::msLowLODHandles,
     0x20ui64,
     15,
@@ -225,7 +225,7 @@ void __fastcall UFG::SpawnZone::SpawnZone(UFG::SpawnZone *this)
   v3->mPrev = v3;
   v3->mNext = v3;
   UFG::qSafePointerNode<UFG::SpawnZone>::qSafePointerNode<UFG::SpawnZone>((UFG::qSafePointerNode<UFG::SpawnZone> *)&this->vfptr);
-  v1->vfptr = (UFG::qSafePointerNode<UFG::SpawnZone>Vtbl *)&UFG::SpawnZone::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::SpawnZone>Vtbl *)&UFG::SpawnZone::`vftable;
   *(_QWORD *)&v1->mLocalAABB.mMin.x = 0i64;
   *(_QWORD *)&v1->mLocalAABB.mMin.z = 0i64;
   *(_QWORD *)&v1->mLocalAABB.mMax.y = 0i64;
@@ -258,8 +258,8 @@ void __fastcall UFG::SpawnZone::~SpawnZone(UFG::SpawnZone *this)
   UFG::qNode<UFG::SpawnZone,UFG::SpawnZoneList> *v9; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SpawnZone>Vtbl *)&UFG::SpawnZone::`vftable';
-  this->vfptr = (UFG::qSafePointerNode<UFG::SpawnZone>Vtbl *)&UFG::qSafePointerNode<UFG::SpawnZone>::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SpawnZone>Vtbl *)&UFG::SpawnZone::`vftable;
+  this->vfptr = (UFG::qSafePointerNode<UFG::SpawnZone>Vtbl *)&UFG::qSafePointerNode<UFG::SpawnZone>::`vftable;
   UFG::qSafePointerNode<UFG::DynamicCoverCorner>::SetAllPointersToNull((UFG::qSafePointerNode<UFG::ParkourHandle> *)this);
   UFG::qList<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList,1,0>::DeleteNodes((UFG::qList<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList,1,0> *)&v1->m_SafePointerList);
   v2 = v1->m_SafePointerList.mNode.mPrev;
@@ -718,7 +718,7 @@ void __fastcall UFG::PedSpawningInfo::PedSpawningInfo(UFG::PedSpawningInfo *this
   v4 = (UFG::qNode<UFG::PedSpawningInfo,UFG::PedSpawningInfo> *)&v1->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::PedSpawningInfo::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::PedSpawningInfo::`vftable;
   *(_QWORD *)&v1->mSuspendedTime = 0i64;
   v1->mPrevCulledTime = 0.0;
   v9 = &v1->mCreationSpawnZone;
@@ -754,7 +754,7 @@ void __fastcall UFG::PedSpawningInfo::PedSpawningInfo(UFG::PedSpawningInfo *this
   v1->mPropSetSymbol = UFG::gNullQSymbol;
   v1->mArchetypePropSetSymbol = UFG::gNullQSymbol;
   v1->mFactionSymbol.mUID = -1;
-  `eh vector constructor iterator'(v1->mAttachedPropNames, 4ui64, 4, (void (__fastcall *)(void *))BackInfo::BackInfo);
+  `eh vector constructor iterator(v1->mAttachedPropNames, 4ui64, 4, (void (__fastcall *)(void *))BackInfo::BackInfo);
   v1->mCanSuspendScripted = 1;
   v11 = &v1->mUpgradePOI;
   v11->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v11->mPrev;
@@ -807,7 +807,7 @@ void __fastcall UFG::PedSpawningInfo::~PedSpawningInfo(UFG::PedSpawningInfo *thi
   UFG::qNode<UFG::PedSpawningInfo,UFG::PedInfoList> *v22; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::PedSpawningInfo::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::PedSpawningInfo::`vftable;
   if ( this == UFG::PedSpawningInfo::s_PedSpawningInfopCurrentIterator )
     UFG::PedSpawningInfo::s_PedSpawningInfopCurrentIterator = (UFG::PedSpawningInfo *)&this->mPrev[-6];
   v2 = (UFG::qNode<UFG::PedSpawningInfo,UFG::PedSpawningInfo> *)&this->mPrev;
@@ -834,7 +834,7 @@ void __fastcall UFG::PedSpawningInfo::~PedSpawningInfo(UFG::PedSpawningInfo *thi
   v9->mPrev = v8;
   v5->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v5->mPrev;
   v1->mUpgradePOI.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->mUpgradePOI.mPrev;
-  `eh vector destructor iterator'(v1->mAttachedPropNames, 4ui64, 4, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(v1->mAttachedPropNames, 4ui64, 4, (void (__fastcall *)(void *))_);
   UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->mCharacterOccupantComponent);
   UFG::qSafePointerWithCallbacksBase<UFG::SimObject>::~qSafePointerWithCallbacksBase<UFG::SimObject>((UFG::qSafePointerWithCallbacksBase<UFG::SimObject> *)&v1->mSimObjectPtr.mPrev);
   v10 = &v1->mCreationSpawnZone;
@@ -2225,7 +2225,7 @@ void __fastcall UFG::PedSpawningInfo::SetPropListFromCurrentSimObject(UFG::PedSp
   if ( nameList.p )
   {
     v12 = nameList.p - 1;
-    `eh vector destructor iterator'(nameList.p, 4ui64, nameList.p[-1].mUID, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(nameList.p, 4ui64, nameList.p[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v12);
   }
 }
@@ -2315,18 +2315,18 @@ void __fastcall UFG::PedSpawnManager::PedSpawnManager(UFG::PedSpawnManager *this
   UFG::PedSpawnManager *v1; // rbx
 
   v1 = this;
-  this->vfptr = (UFG::PedSpawnManagerVtbl *)&UFG::PedSpawnManager::`vftable';
-  `eh vector constructor iterator'(
+  this->vfptr = (UFG::PedSpawnManagerVtbl *)&UFG::PedSpawnManager::`vftable;
+  `eh vector constructor iterator(
     this->mAmbientPed,
     0x338ui64,
     260,
     (void (__fastcall *)(void *))UFG::PedSpawningInfo::PedSpawningInfo);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v1->mScriptedPed,
     0x338ui64,
     120,
     (void (__fastcall *)(void *))UFG::PedSpawningInfo::PedSpawningInfo);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v1->mActiveSpawnSets,
     0x38ui64,
     40,
@@ -3481,138 +3481,138 @@ void __fastcall UFG::PedSpawnManager::Init(UFG::PedSpawnManager *this)
   v1 = this;
   unk_14207A98C = 3;
   v2 = UFG::qStringHash32("ULTRALOWPED_FRAME00", 0xFFFFFFFF);
-  v3 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  v3 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v4 = UFG::qResourceWarehouse::Instance();
     v3 = UFG::qResourceWarehouse::GetInventory(v4, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v3;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v3;
   }
   UFG::qResourceHandle::Init(&UFG::PedSpawnManager::msLowLODHandles, 0xA2ADCD77, v2, v3);
   v5 = UFG::qStringHash32("ULTRALOWPED_FRAME01", 0xFFFFFFFF);
-  v6 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  v6 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v7 = UFG::qResourceWarehouse::Instance();
     v6 = UFG::qResourceWarehouse::GetInventory(v7, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v6;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v6;
   }
   UFG::qResourceHandle::Init(&stru_1423DE6D0, 0xA2ADCD77, v5, v6);
   v8 = UFG::qStringHash32("ULTRALOWPED_FRAME02", 0xFFFFFFFF);
-  v9 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  v9 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v10 = UFG::qResourceWarehouse::Instance();
     v9 = UFG::qResourceWarehouse::GetInventory(v10, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v9;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v9;
   }
   UFG::qResourceHandle::Init(&stru_1423DE6F0, 0xA2ADCD77, v8, v9);
   v11 = UFG::qStringHash32("ULTRALOWPED_FRAME03", 0xFFFFFFFF);
-  v12 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  v12 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v13 = UFG::qResourceWarehouse::Instance();
     v12 = UFG::qResourceWarehouse::GetInventory(v13, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v12;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v12;
   }
   UFG::qResourceHandle::Init(&stru_1423DE710, 0xA2ADCD77, v11, v12);
   v14 = UFG::qStringHash32("ULTRALOWPED_FRAME04", 0xFFFFFFFF);
-  v15 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  v15 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v16 = UFG::qResourceWarehouse::Instance();
     v15 = UFG::qResourceWarehouse::GetInventory(v16, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v15;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v15;
   }
   UFG::qResourceHandle::Init(&stru_1423DE730, 0xA2ADCD77, v14, v15);
   v17 = UFG::qStringHash32("ULTRALOWPED_FRAME05", 0xFFFFFFFF);
-  v18 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  v18 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v19 = UFG::qResourceWarehouse::Instance();
     v18 = UFG::qResourceWarehouse::GetInventory(v19, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v18;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v18;
   }
   UFG::qResourceHandle::Init(&stru_1423DE750, 0xA2ADCD77, v17, v18);
   v20 = UFG::qStringHash32("ULTRALOWPED_FRAME06", 0xFFFFFFFF);
-  v21 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  v21 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v22 = UFG::qResourceWarehouse::Instance();
     v21 = UFG::qResourceWarehouse::GetInventory(v22, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v21;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v21;
   }
   UFG::qResourceHandle::Init(&stru_1423DE770, 0xA2ADCD77, v20, v21);
   v23 = UFG::qStringHash32("ULTRALOWPED_FRAME07", 0xFFFFFFFF);
-  v24 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  v24 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v25 = UFG::qResourceWarehouse::Instance();
     v24 = UFG::qResourceWarehouse::GetInventory(v25, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v24;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v24;
   }
   UFG::qResourceHandle::Init(&stru_1423DE790, 0xA2ADCD77, v23, v24);
   v26 = UFG::qStringHash32("ULTRALOWPED_FRAME08", 0xFFFFFFFF);
-  v27 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  v27 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v28 = UFG::qResourceWarehouse::Instance();
     v27 = UFG::qResourceWarehouse::GetInventory(v28, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v27;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v27;
   }
   UFG::qResourceHandle::Init(&stru_1423DE7B0, 0xA2ADCD77, v26, v27);
   v29 = UFG::qStringHash32("ULTRALOWPED_FRAME09", 0xFFFFFFFF);
-  v30 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  v30 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v31 = UFG::qResourceWarehouse::Instance();
     v30 = UFG::qResourceWarehouse::GetInventory(v31, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v30;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v30;
   }
   UFG::qResourceHandle::Init(&stru_1423DE7D0, 0xA2ADCD77, v29, v30);
   v32 = UFG::qStringHash32("ULTRALOWPED_FRAME10", 0xFFFFFFFF);
-  v33 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  v33 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v34 = UFG::qResourceWarehouse::Instance();
     v33 = UFG::qResourceWarehouse::GetInventory(v34, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v33;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v33;
   }
   UFG::qResourceHandle::Init(&stru_1423DE7F0, 0xA2ADCD77, v32, v33);
   v35 = UFG::qStringHash32("ULTRALOWPED_FRAME11", 0xFFFFFFFF);
-  v36 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  v36 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v37 = UFG::qResourceWarehouse::Instance();
     v36 = UFG::qResourceWarehouse::GetInventory(v37, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v36;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v36;
   }
   UFG::qResourceHandle::Init(&stru_1423DE810, 0xA2ADCD77, v35, v36);
   v38 = UFG::qStringHash32("ULTRALOWPED_FRAME12", 0xFFFFFFFF);
-  v39 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  v39 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v40 = UFG::qResourceWarehouse::Instance();
     v39 = UFG::qResourceWarehouse::GetInventory(v40, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v39;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v39;
   }
   UFG::qResourceHandle::Init(&stru_1423DE830, 0xA2ADCD77, v38, v39);
   v41 = UFG::qStringHash32("ULTRALOWPED_FRAME13", 0xFFFFFFFF);
-  v42 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  v42 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v43 = UFG::qResourceWarehouse::Instance();
     v42 = UFG::qResourceWarehouse::GetInventory(v43, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v42;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v42;
   }
   UFG::qResourceHandle::Init(&stru_1423DE850, 0xA2ADCD77, v41, v42);
   v44 = UFG::qStringHash32("ULTRALOWPED_FRAME14", 0xFFFFFFFF);
-  v45 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  v45 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v46 = UFG::qResourceWarehouse::Instance();
     v45 = UFG::qResourceWarehouse::GetInventory(v46, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v45;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v45;
   }
   UFG::qResourceHandle::Init(&stru_1423DE870, 0xA2ADCD77, v44, v45);
   v1->mTargetNumActive = 0;
@@ -3723,7 +3723,7 @@ void __fastcall UFG::PedSpawnManager::OnGameEnter(UFG::PedSpawnManager *this)
   {
     LODWORD(v8->mNext) = 900;
     v9 = (UFG::SpawnZone *)&v8[1];
-    `eh vector constructor iterator'(&v8[1], 0xB8ui64, 900, (void (__fastcall *)(void *))UFG::SpawnZone::SpawnZone);
+    `eh vector constructor iterator(&v8[1], 0xB8ui64, 900, (void (__fastcall *)(void *))UFG::SpawnZone::SpawnZone);
   }
   else
   {

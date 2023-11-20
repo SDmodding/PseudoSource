@@ -788,10 +788,10 @@ void __fastcall TargetPlayEffectTask::TargetPlayEffectTask(TargetPlayEffectTask 
   v2 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<TargetPlayEffectTrack>::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<TargetPlayEffectTrack>::`vftable;
   FX::HardwareOcclusionQuery::HardwareOcclusionQuery((FX::HardwareOcclusionQuery *)&this->mFXHandle);
-  v1->vfptr = (ITaskVtbl *)&TargetPlayEffectTask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&TargetPlayEffectTask::`vftable;
   v3 = &v1->m_pTSBC;
   v3->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v3->mPrev;
   v3->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v3->mPrev;
@@ -822,7 +822,7 @@ void __fastcall TargetPlayEffectTask::~TargetPlayEffectTask(TargetPlayEffectTask
   UFG::qNode<ITask,ITask> *v14; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&TargetPlayEffectTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&TargetPlayEffectTask::`vftable;
   v2 = &this->m_pTargetSimObject;
   if ( this->m_pTargetSimObject.m_pPointer )
   {
@@ -858,7 +858,7 @@ void __fastcall TargetPlayEffectTask::~TargetPlayEffectTask(TargetPlayEffectTask
   v7->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v7->mPrev;
   v1->m_pTSBC.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->m_pTSBC.mPrev;
   _((AMD_HD3D *)&v1->mFXHandle);
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v12 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v13 = v1->mPrev;
   v14 = v1->mNext;
@@ -2269,12 +2269,12 @@ void __fastcall TargetSteerToTask::TargetSteerToTask(TargetSteerToTask *this)
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<TargetSteerToTrack>::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<TargetSteerToTrack>::`vftable;
   v2 = (UFG::qNode<TargetSteerToTask,TargetingSystemTargetSteerToList> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (ITaskVtbl *)&TargetSteerToTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&TargetSteerToTask::`vftable;
   this->mContext = 0i64;
 }
 
@@ -4817,9 +4817,9 @@ void __fastcall TargetAttackRightsTask::TargetAttackRightsTask(TargetAttackRight
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<TargetAttackRightsTrack>::`vftable';
-  this->vfptr = (ITaskVtbl *)&TargetAttackRightsTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<TargetAttackRightsTrack>::`vftable;
+  this->vfptr = (ITaskVtbl *)&TargetAttackRightsTask::`vftable;
   v2 = &this->mTargetAttackRightsComponent;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
@@ -6637,8 +6637,8 @@ void __fastcall ProxyTargetSphereCastTask::ProxyTargetSphereCastTask(ProxyTarget
   v2 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<ProxyTargetSphereCastTrack>::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<ProxyTargetSphereCastTrack>::`vftable;
   v3 = (ProxyTargetBaseTask *)&this->mProxySimObject;
   v3->mProxySimObject.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v3->mProxySimObject.mPrev;
   v3->mProxySimObject.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v3->mProxySimObject.mPrev;
@@ -6651,7 +6651,7 @@ void __fastcall ProxyTargetSphereCastTask::ProxyTargetSphereCastTask(ProxyTarget
   v6->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v6->mPrev;
   v6->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v6->mPrev;
   v3->mProxyTargetingSystemComponent.m_pPointer = 0i64;
-  v1->vfptr = (ITaskVtbl *)&ProxyTargetSphereCastTask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ProxyTargetSphereCastTask::`vftable;
   v4 = &v1->mRelativeToTransformNodeComponent;
   v4->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v4->mPrev;
   v4->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v4->mPrev;
@@ -6673,7 +6673,7 @@ void __fastcall ProxyTargetSphereCastTask::~ProxyTargetSphereCastTask(ProxyTarge
   UFG::qNode<ITask,ITask> *v9; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&ProxyTargetSphereCastTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ProxyTargetSphereCastTask::`vftable;
   v2 = &this->mRelativeToTransformNodeComponent;
   if ( this->mRelativeToTransformNodeComponent.m_pPointer )
   {
@@ -6692,7 +6692,7 @@ void __fastcall ProxyTargetSphereCastTask::~ProxyTargetSphereCastTask(ProxyTarge
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   ProxyTargetBaseTask::~ProxyTargetBaseTask((ProxyTargetBaseTask *)&v1->mProxySimObject);
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v8 = v1->mPrev;
   v9 = v1->mNext;

@@ -4,7 +4,7 @@ void __fastcall UFG::AICoverQuery::CoverQueryRecord::CoverQueryRecord(UFG::AICov
 {
   this->m_pCoverPosition = 0i64;
   this->m_bPathFound = 0;
-  this->vfptr = (UFG::AICoverQuery::CoverQueryRecordVtbl *)&UFG::AICoverQuery::CoverQueryRecord::`vftable';
+  this->vfptr = (UFG::AICoverQuery::CoverQueryRecordVtbl *)&UFG::AICoverQuery::CoverQueryRecord::`vftable;
 }
 
 // File Line: 73
@@ -16,7 +16,7 @@ void __fastcall UFG::AICoverQuery::CoverQueryRecord::~CoverQueryRecord(UFG::AICo
   bool v3; // zf
 
   v1 = this;
-  this->vfptr = (UFG::AICoverQuery::CoverQueryRecordVtbl *)&UFG::AICoverQuery::CoverQueryRecord::`vftable';
+  this->vfptr = (UFG::AICoverQuery::CoverQueryRecordVtbl *)&UFG::AICoverQuery::CoverQueryRecord::`vftable;
   v2 = this->m_pCoverPosition;
   if ( v2 )
   {

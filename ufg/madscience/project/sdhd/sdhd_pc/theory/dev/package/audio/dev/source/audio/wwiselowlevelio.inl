@@ -2,9 +2,9 @@
 // RVA: 0x140CE0
 void __fastcall UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::~WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>(UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred> *this)
 {
-  this->vfptr = (AK::StreamMgr::IAkFileLocationResolverVtbl *)&UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::`vftable'{for `AK::StreamMgr::IAkFileLocationResolver'};
-  this->vfptr = (AK::StreamMgr::IAkLowLevelIOHookVtbl *)&UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::`vftable'{for `AK::StreamMgr::IAkIOHookDeferred'};
-  this->vfptr = (UFG::WwiseFileLocationBaseVtbl *)&UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::`vftable'{for `UFG::WwiseFileLocationBase'};
+  this->vfptr = (AK::StreamMgr::IAkFileLocationResolverVtbl *)&UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::`vftable{for `AK::StreamMgr::IAkFileLocationResolver};
+  this->vfptr = (AK::StreamMgr::IAkLowLevelIOHookVtbl *)&UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::`vftable{for `AK::StreamMgr::IAkIOHookDeferred};
+  this->vfptr = (UFG::WwiseFileLocationBaseVtbl *)&UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::`vftable{for `UFG::WwiseFileLocationBase};
   UFG::WwiseDefaultIOHookDeferred::~WwiseDefaultIOHookDeferred((UFG::WwiseDefaultIOHookDeferred *)&this->vfptr);
 }
 

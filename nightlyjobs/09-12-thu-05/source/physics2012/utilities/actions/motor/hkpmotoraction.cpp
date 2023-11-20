@@ -14,7 +14,7 @@ void __fastcall hkpMotorAction::hkpMotorAction(hkpMotorAction *this, hkpRigidBod
   v5 = axis;
   v6 = this;
   hkpUnaryAction::hkpUnaryAction((hkpUnaryAction *)&this->vfptr, (hkpEntity *)&body->vfptr, 0i64);
-  v6->vfptr = (hkBaseObjectVtbl *)&hkpMotorAction::`vftable';
+  v6->vfptr = (hkBaseObjectVtbl *)&hkpMotorAction::`vftable;
   v7 = v5->m_quad;
   v6->m_gain = gain;
   v6->m_spinRate = spinRate;

@@ -287,17 +287,17 @@ void __fastcall UFG::FlowfieldTask_FloatTheBoat(int worker_id, UFG::qMemoryStrea
   gpFlowTask_memstream = memory_streamer;
   v39 = *((_QWORD *)_params + 20);
   *((_QWORD *)_params + 4) = v39;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     &ptr,
     0x18ui64,
     34,
     (void (__fastcall *)(void *))UFG::qMemoryStream<UFG::AIInterestComponent,432>::qMemoryStream<UFG::AIInterestComponent,432>);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     &v44,
     0x18ui64,
     34,
     (void (__fastcall *)(void *))UFG::qMemoryStream<UFG::AIInterestComponent,432>::qMemoryStream<UFG::AIInterestComponent,432>);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     &v42,
     0x18ui64,
     34,
@@ -436,8 +436,8 @@ void __fastcall UFG::FlowfieldTask_FloatTheBoat(int worker_id, UFG::qMemoryStrea
     UFG::FlowfieldTask::SimulateFlowfieldMass(v28, v3);
     gpFlowTask_memstream = 0i64;
   }
-  `eh vector destructor iterator'(&v42, 0x18ui64, 34, (void (__fastcall *)(void *))_);
-  `eh vector destructor iterator'(&v44, 0x18ui64, 34, (void (__fastcall *)(void *))_);
-  `eh vector destructor iterator'(&ptr, 0x18ui64, 34, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(&v42, 0x18ui64, 34, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(&v44, 0x18ui64, 34, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(&ptr, 0x18ui64, 34, (void (__fastcall *)(void *))_);
 }
 

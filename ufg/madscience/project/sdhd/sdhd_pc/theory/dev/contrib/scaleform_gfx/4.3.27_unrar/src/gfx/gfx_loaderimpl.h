@@ -35,8 +35,8 @@ void __fastcall Scaleform::GFx::SWFProcessInfo::SWFProcessInfo(Scaleform::GFx::S
   Scaleform::Render::RenderBuffer *v3; // rcx
 
   v2 = this;
-  this->Stream.vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::Stream>Vtbl *)&Scaleform::GFx::LogBase<Scaleform::GFx::Stream>::`vftable';
-  this->Stream.vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::Stream>Vtbl *)&Scaleform::GFx::Stream::`vftable';
+  this->Stream.vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::Stream>Vtbl *)&Scaleform::GFx::LogBase<Scaleform::GFx::Stream>::`vftable;
+  this->Stream.vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::Stream>Vtbl *)&Scaleform::GFx::Stream::`vftable;
   this->Stream.pInput.pObject = 0i64;
   Scaleform::StringDH::StringDH(&this->Stream.FileName, pheap);
   v2->Stream.BufferSize = 512;
@@ -69,16 +69,16 @@ void __fastcall Scaleform::GFx::StateBagImpl::StateBagImpl(Scaleform::GFx::State
 
   v2 = pdelegate;
   v3 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::StateBagImpl,2>::`vftable';
-  this->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::StateBag::`vftable';
-  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::StateBagImpl>Vtbl *)&Scaleform::GFx::LogBase<Scaleform::GFx::StateBagImpl>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::StateBagImpl::`vftable'{for `Scaleform::RefCountBase<Scaleform::GFx::StateBagImpl,2>'};
-  this->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::StateBagImpl::`vftable'{for `Scaleform::GFx::StateBag'};
-  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::StateBagImpl>Vtbl *)&Scaleform::GFx::StateBagImpl::`vftable'{for `Scaleform::GFx::LogBase<Scaleform::GFx::StateBagImpl>'};
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::StateBagImpl,2>::`vftable;
+  this->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::StateBag::`vftable;
+  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::StateBagImpl>Vtbl *)&Scaleform::GFx::LogBase<Scaleform::GFx::StateBagImpl>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::StateBagImpl::`vftable{for `Scaleform::RefCountBase<Scaleform::GFx::StateBagImpl,2>};
+  this->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::StateBagImpl::`vftable{for `Scaleform::GFx::StateBag};
+  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::StateBagImpl>Vtbl *)&Scaleform::GFx::StateBagImpl::`vftable{for `Scaleform::GFx::LogBase<Scaleform::GFx::StateBagImpl>};
   this->pDelegate.pObject = 0i64;
   this->States.pTable = 0i64;
   Scaleform::Lock::Lock(&this->StateLock, 0);
@@ -98,16 +98,16 @@ void __fastcall Scaleform::GFx::StateBagImpl::~StateBagImpl(Scaleform::GFx::Stat
   Scaleform::Render::RenderBuffer *v2; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::StateBagImpl::`vftable'{for `Scaleform::RefCountBase<Scaleform::GFx::StateBagImpl,2>'};
-  this->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::StateBagImpl::`vftable'{for `Scaleform::GFx::StateBag'};
-  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::StateBagImpl>Vtbl *)&Scaleform::GFx::StateBagImpl::`vftable'{for `Scaleform::GFx::LogBase<Scaleform::GFx::StateBagImpl>'};
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::StateBagImpl::`vftable{for `Scaleform::RefCountBase<Scaleform::GFx::StateBagImpl,2>};
+  this->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::StateBagImpl::`vftable{for `Scaleform::GFx::StateBag};
+  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::StateBagImpl>Vtbl *)&Scaleform::GFx::StateBagImpl::`vftable{for `Scaleform::GFx::LogBase<Scaleform::GFx::StateBagImpl>};
   Scaleform::Lock::~Lock(&this->StateLock.cs);
   Scaleform::HashSetBase<Scaleform::GFx::StateBagImpl::StatePtr,Scaleform::GFx::StateBagImpl::StatePtrHashOp,Scaleform::GFx::StateBagImpl::StatePtrHashOp,Scaleform::AllocatorGH<Scaleform::GFx::StateBagImpl::StatePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::StateBagImpl::StatePtr,Scaleform::GFx::StateBagImpl::StatePtrHashOp>>::~HashSetBase<Scaleform::GFx::StateBagImpl::StatePtr,Scaleform::GFx::StateBagImpl::StatePtrHashOp,Scaleform::GFx::StateBagImpl::StatePtrHashOp,Scaleform::AllocatorGH<Scaleform::GFx::StateBagImpl::StatePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::StateBagImpl::StatePtr,Scaleform::GFx::StateBagImpl::StatePtrHashOp>>((Scaleform::HashSetBase<Scaleform::GFx::StateBagImpl::StatePtr,Scaleform::GFx::StateBagImpl::StatePtrHashOp,Scaleform::GFx::StateBagImpl::StatePtrHashOp,Scaleform::AllocatorGH<Scaleform::GFx::StateBagImpl::StatePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::StateBagImpl::StatePtr,Scaleform::GFx::StateBagImpl::StatePtrHashOp> > *)&v1->States.pTable);
   v2 = (Scaleform::Render::RenderBuffer *)v1->pDelegate.pObject;
   if ( v2 )
     Scaleform::RefCountImpl::Release(v2);
-  v1->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::StateBagImpl>Vtbl *)&Scaleform::GFx::LogBase<Scaleform::GFx::StateBagImpl>::`vftable';
-  v1->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::StateBag::`vftable';
+  v1->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::StateBagImpl>Vtbl *)&Scaleform::GFx::LogBase<Scaleform::GFx::StateBagImpl>::`vftable;
+  v1->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::StateBag::`vftable;
   Scaleform::RefCountImplCore::~RefCountImplCore((Scaleform::RefCountImplCore *)&v1->vfptr);
 }
 

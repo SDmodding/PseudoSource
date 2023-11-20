@@ -31,7 +31,7 @@ hkClass *__fastcall hkpVehicleDriverInputAnalogStatus::staticClass()
 void __fastcall finishLoadedObjecthkpVehicleDriverInputAnalogStatus(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpVehicleDriverInputAnalogStatus::`vftable';
+    *(_QWORD *)p = &hkpVehicleDriverInputAnalogStatus::`vftable;
 }
 
 // File Line: 71
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkpVehicleDriverInputAnalogStatus(void *p)
 // RVA: 0xE25410
 void **__fastcall getVtablehkpVehicleDriverInputAnalogStatus()
 {
-  return &hkpVehicleDriverInputAnalogStatus::`vftable';
+  return &hkpVehicleDriverInputAnalogStatus::`vftable;
 }
 
 // File Line: 97
@@ -97,7 +97,7 @@ hkClass *__fastcall hkpVehicleDefaultAnalogDriverInput::staticClass()
 void __fastcall finishLoadedObjecthkpVehicleDefaultAnalogDriverInput(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpVehicleDefaultAnalogDriverInput::`vftable';
+    *(_QWORD *)p = &hkpVehicleDefaultAnalogDriverInput::`vftable;
 }
 
 // File Line: 143
@@ -111,7 +111,7 @@ void __fastcall cleanupLoadedObjecthkpVehicleDefaultAnalogDriverInput(void *p)
 // RVA: 0xE25450
 void **__fastcall getVtablehkpVehicleDefaultAnalogDriverInput()
 {
-  return &hkpVehicleDefaultAnalogDriverInput::`vftable';
+  return &hkpVehicleDefaultAnalogDriverInput::`vftable;
 }
 
 // File Line: 169

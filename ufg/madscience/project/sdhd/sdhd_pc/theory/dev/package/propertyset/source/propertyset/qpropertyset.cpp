@@ -359,7 +359,7 @@ void __fastcall UFG::qPropertySetInventory::qPropertySetInventory(UFG::qProperty
     0x5B9BF81Eu,
     0,
     0);
-  v2->vfptr = (UFG::qResourceInventoryVtbl *)&UFG::qPropertySetInventory::`vftable';
+  v2->vfptr = (UFG::qResourceInventoryVtbl *)&UFG::qPropertySetInventory::`vftable;
   v1 = &v2->mPurgedResources;
   v2->mPurgedResources.p = 0i64;
   v1->size = 0;
@@ -674,7 +674,7 @@ void __fastcall UFG::qPropertySet::Destroy(UFG::qPropertySet *this)
     }
     else if ( v2 )
     {
-      UFG::qPropertySet::`scalar deleting destructor'(v2, 1);
+      UFG::qPropertySet::`scalar deleting destructor(v2, 1);
     }
   }
 }
@@ -936,7 +936,7 @@ void __fastcall UFG::qPropertySet::~qPropertySet(UFG::qPropertySet *this)
             v9 = (UFG::qPropertySet *)((char *)v5 + *v5);
           else
             v9 = 0i64;
-          UFG::qPropertySet::`scalar deleting destructor'(v9, 0);
+          UFG::qPropertySet::`scalar deleting destructor(v9, 0);
         }
         else if ( (unsigned int)UFG::qProperty::GetTypeUID(v3) == 25 )
         {
@@ -945,7 +945,7 @@ void __fastcall UFG::qPropertySet::~qPropertySet(UFG::qPropertySet *this)
             v11 = (UFG::qPropertyList *)((char *)v6 + *v6);
           else
             v11 = 0i64;
-          UFG::qPropertyList::`scalar deleting destructor'(v11, 0);
+          UFG::qPropertyList::`scalar deleting destructor(v11, 0);
         }
       }
     }
@@ -1267,7 +1267,7 @@ void __fastcall UFG::qPropertySet::ReleaseRef(UFG::qPropertySet *this)
     }
     else if ( v2 )
     {
-      UFG::qPropertySet::`scalar deleting destructor'(v2, 1);
+      UFG::qPropertySet::`scalar deleting destructor(v2, 1);
     }
   }
 }

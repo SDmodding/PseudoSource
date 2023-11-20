@@ -28,7 +28,7 @@ void __fastcall UFG::CopSystem::CopSystem(UFG::CopSystem *this)
 
   v1 = this;
   UFG::EncounterBase::EncounterBase((UFG::EncounterBase *)&this->vfptr);
-  v1->vfptr = (UFG::qSafePointerNode<UFG::EncounterBase>Vtbl *)&UFG::CopSystem::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::EncounterBase>Vtbl *)&UFG::CopSystem::`vftable;
   v1->mNumArrestAttempts = 0;
   v1->mAreRoadBlocksActive = 0;
   v1->mRoadBlockCooldownTimestamp = 0.0;
@@ -43,7 +43,7 @@ void __fastcall UFG::CopSystem::CopSystem(UFG::CopSystem *this)
   *(_QWORD *)&v1->mAudioHeatLevel.m_currentValue = 0i64;
   v1->mAudioHeatLevel.m_riseRate = 10000000.0;
   v1->mAudioHeatLevel.m_fallRate = 10000000.0;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v1->mHeatEvents,
     0xCui64,
     26,
@@ -103,7 +103,7 @@ void __fastcall UFG::CopSystem::~CopSystem(UFG::CopSystem *this)
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v11; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::EncounterBase>Vtbl *)&UFG::CopSystem::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::EncounterBase>Vtbl *)&UFG::CopSystem::`vftable;
   UFG::qString::~qString(&this->mLastHeatEventCaption);
   v2 = &v1->mpArrestRightHumanCop;
   if ( v1->mpArrestRightHumanCop.m_pPointer )
@@ -139,7 +139,7 @@ void __fastcall UFG::CopSystem::~CopSystem(UFG::CopSystem *this)
   v11->mPrev = v10;
   v7->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v7->mPrev;
   v1->mpAmbientSuspect.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v1->mpAmbientSuspect.mPrev;
-  `eh vector destructor iterator'(v1->mHeatEvents, 0xCui64, 26, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(v1->mHeatEvents, 0xCui64, 26, (void (__fastcall *)(void *))_);
   UFG::OneShotHandle::Release(&v1->mDistantSirens);
   UFG::EncounterBase::~EncounterBase((UFG::EncounterBase *)&v1->vfptr);
 }
@@ -161,7 +161,7 @@ void __fastcall UFG::CopSystem::Initialize(UFG::CopSystem *this)
   __int64 (__fastcall *v11)(__int64); // [rsp+40h] [rbp-18h]
 
   v1 = this;
-  v11 =  UFG::CopSystem::`vcall'{744,{flat}};
+  v11 =  UFG::CopSystem::`vcall{744,{flat}};
   v10 = Assembly::GetRCX(this);
   UFG::EventDispatcher::Register(
     &UFG::EventDispatcher::mInstance,
@@ -170,7 +170,7 @@ void __fastcall UFG::CopSystem::Initialize(UFG::CopSystem *this)
     UFG::gGameStatEventChannel.mName,
     0);
   v2 = Assembly::GetRCX(v1);
-  v11 =  UFG::CopSystem::`vcall'{736,{flat}};
+  v11 =  UFG::CopSystem::`vcall{736,{flat}};
   v10 = v2;
   UFG::EventDispatcher::Register(
     &UFG::EventDispatcher::mInstance,
@@ -250,14 +250,14 @@ void __fastcall UFG::CopSystem::Shutdown(UFG::CopSystem *this, __int64 a2)
   }
   v2->mAreRoadBlocksActive = 0;
   UFG::EncounterBase::Shutdown((UFG::EncounterBase *)&v2->vfptr);
-  v7 =  UFG::CopSystem::`vcall'{736,{flat}};
+  v7 =  UFG::CopSystem::`vcall{736,{flat}};
   v6 = Assembly::GetRCX(v2);
   UFG::EventDispatcher::UnRegister(
     &UFG::EventDispatcher::mInstance,
     (fastdelegate::FastDelegate1<UFG::Event *,void> *)&v6,
     UFG::gDestructionEventChannel.mUID);
   v5 = Assembly::GetRCX(v2);
-  v7 =  UFG::CopSystem::`vcall'{744,{flat}};
+  v7 =  UFG::CopSystem::`vcall{744,{flat}};
   v6 = v5;
   UFG::EventDispatcher::UnRegister(
     &UFG::EventDispatcher::mInstance,

@@ -17,12 +17,12 @@ void __fastcall Render::rIrradianceVolume::rIrradianceVolume(Render::rIrradiance
   v3->mBaseNode.mNeighbours[0] = &v3->mBaseNode;
   v3->mBaseNode.mNeighbours[1] = &v3->mBaseNode;
   v3->mBaseNode.mUID = v4;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable;
   v5 = &this->mHandles;
   v5->mNode.mPrev = &v5->mNode;
   v5->mNode.mNext = &v5->mNode;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<Render::rIrradianceVolume,UFG::qReflectObject>::`vftable';
-  this->vfptr = (UFG::qReflectObjectVtbl *)&Render::rIrradianceVolume::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<Render::rIrradianceVolume,UFG::qReflectObject>::`vftable;
+  this->vfptr = (UFG::qReflectObjectVtbl *)&Render::rIrradianceVolume::`vftable;
   UFG::qReflectHandleBase::qReflectHandleBase((UFG::qList<UFG::qReflectHandleBase,UFG::qReflectHandleBase,1,0> *)&this->mTexture0);
   UFG::qReflectHandleBase::qReflectHandleBase((UFG::qList<UFG::qReflectHandleBase,UFG::qReflectHandleBase,1,0> *)&v2->mTexture1);
   UFG::qReflectHandleBase::qReflectHandleBase((UFG::qList<UFG::qReflectHandleBase,UFG::qReflectHandleBase,1,0> *)&v2->mTexture2);
@@ -42,7 +42,7 @@ void __fastcall Render::rIrradianceVolume::rIrradianceVolume(Render::rIrradiance
 
   v1 = this;
   UFG::qReflectObjectType<Render::rIrradianceVolume,UFG::qReflectObject>::qReflectObjectType<Render::rIrradianceVolume,UFG::qReflectObject>((UFG::qReflectObjectType<Render::rIrradianceVolume,UFG::qReflectObject> *)&this->vfptr);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&Render::rIrradianceVolume::`vftable';
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&Render::rIrradianceVolume::`vftable;
   UFG::qReflectHandleBase::qReflectHandleBase((UFG::qReflectHandleBase *)&v1->mTexture0.mPrev);
   v3 = UFG::qReflectObjectType<Illusion::rTexture,UFG::qReflectObject>::GetTypeName(v2);
   v1->mTexture0.mTypeUID = UFG::qStringHash64(v3, 0xFFFFFFFFFFFFFFFFui64);

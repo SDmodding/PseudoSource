@@ -73,7 +73,7 @@ hkClass *__fastcall hkpTyremarksWheel::staticClass()
 void __fastcall finishLoadedObjecthkpTyremarksWheel(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpTyremarksWheel::`vftable';
+    *(_QWORD *)p = &hkpTyremarksWheel::`vftable;
 }
 
 // File Line: 125
@@ -87,7 +87,7 @@ void __fastcall cleanupLoadedObjecthkpTyremarksWheel(void *p)
 // RVA: 0xE25090
 void **__fastcall getVtablehkpTyremarksWheel()
 {
-  return &hkpTyremarksWheel::`vftable';
+  return &hkpTyremarksWheel::`vftable;
 }
 
 // File Line: 151
@@ -139,7 +139,7 @@ hkClass *__fastcall hkpTyremarksInfo::staticClass()
 void __fastcall finishLoadedObjecthkpTyremarksInfo(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpTyremarksInfo::`vftable';
+    *(_QWORD *)p = &hkpTyremarksInfo::`vftable;
 }
 
 // File Line: 195
@@ -153,7 +153,7 @@ void __fastcall cleanupLoadedObjecthkpTyremarksInfo(void *p)
 // RVA: 0xE250D0
 void **__fastcall getVtablehkpTyremarksInfo()
 {
-  return &hkpTyremarksInfo::`vftable';
+  return &hkpTyremarksInfo::`vftable;
 }
 
 // File Line: 221

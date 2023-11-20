@@ -6,7 +6,7 @@ void __fastcall OSuite::ZOEdmClientConfiguration::ZOEdmClientConfiguration(OSuit
 
   v1 = this;
   OSuite::ZOEdmBase::ZOEdmBase((OSuite::ZOEdmBase *)&this->vfptr);
-  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOEdmClientConfiguration::`vftable';
+  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOEdmClientConfiguration::`vftable;
   v1->m_nMetricsThreshold = 0i64;
   v1->m_nMetricsPriorityThreshold = 0i64;
   v1->m_bUsageTrackingEnabled = 0;

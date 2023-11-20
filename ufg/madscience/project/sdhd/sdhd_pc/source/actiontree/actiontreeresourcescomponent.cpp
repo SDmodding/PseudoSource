@@ -39,7 +39,7 @@ void __fastcall UFG::ActionTreeResourcesComponent::ActionTreeResourcesComponent(
   v4 = (UFG::qNode<UFG::ActionTreeResourcesComponent,UFG::ActionTreeResourcesComponent_UpdateList> *)&v2->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ActionTreeResourcesComponent::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ActionTreeResourcesComponent::`vftable;
   v7 = &v2->mAnimationBankRequests;
   v7->mNode.mPrev = &v7->mNode;
   v7->mNode.mNext = &v7->mNode;
@@ -83,7 +83,7 @@ void __fastcall UFG::ActionTreeResourcesComponent::~ActionTreeResourcesComponent
   UFG::qNode<UFG::ActionTreeResourcesComponent,UFG::ActionTreeResourcesComponent> *v14; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ActionTreeResourcesComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ActionTreeResourcesComponent::`vftable;
   v2 = &this->m_pActionTreeComponent;
   if ( this->m_pActionTreeComponent.m_pPointer )
   {
@@ -477,8 +477,8 @@ void __fastcall UFG::ActionTreeResourcesComponent::AnimationBankRequest::Animati
   v10 = (UFG::qNode<UFG::PowerManagedResource,UFG::PowerManagedResourceList> *)&this->mPrev;
   v10->mPrev = v10;
   v10->mNext = v10;
-  this->vfptr = (UFG::PowerManagedResourceVtbl *)&UFG::PowerManagedResource::`vftable';
-  this->vfptr = (UFG::PowerManagedResourceVtbl *)&UFG::ActionTreeResourcesComponent::AnimationBankRequest::`vftable';
+  this->vfptr = (UFG::PowerManagedResourceVtbl *)&UFG::PowerManagedResource::`vftable;
+  this->vfptr = (UFG::PowerManagedResourceVtbl *)&UFG::ActionTreeResourcesComponent::AnimationBankRequest::`vftable;
   AnimationGroupHandle::AnimationGroupHandle(&this->mAnimationGroupHandle);
   v11 = (signed __int64)&v8->mActionPath;
   *(_DWORD *)v11 = 0;
@@ -507,7 +507,7 @@ void __fastcall UFG::ActionTreeResourcesComponent::AnimationBankRequest::~Animat
   UFG::qNode<UFG::ActionTreeResourcesComponent::AnimationBankRequest,UFG::ActionTreeResourcesComponent::AnimationBankRequestList> *v11; // rax
 
   v1 = this;
-  this->vfptr = (UFG::PowerManagedResourceVtbl *)&UFG::ActionTreeResourcesComponent::AnimationBankRequest::`vftable';
+  this->vfptr = (UFG::PowerManagedResourceVtbl *)&UFG::ActionTreeResourcesComponent::AnimationBankRequest::`vftable;
   v2 = &this->mActionPath;
   if ( this->mActionPath.mPath.mCount >= 0 )
   {

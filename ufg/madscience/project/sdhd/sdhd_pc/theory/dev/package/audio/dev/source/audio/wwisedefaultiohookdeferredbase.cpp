@@ -29,14 +29,14 @@ void __fastcall UFG::WwiseDefaultIOHookDeferredBase::WwiseDefaultIOHookDeferredB
   AK::StreamMgr::IAkIOHookDeferred *v2; // [rsp+48h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (AK::StreamMgr::IAkFileLocationResolverVtbl *)&AK::StreamMgr::IAkFileLocationResolver::`vftable';
+  this->vfptr = (AK::StreamMgr::IAkFileLocationResolverVtbl *)&AK::StreamMgr::IAkFileLocationResolver::`vftable;
   v2 = (AK::StreamMgr::IAkIOHookDeferred *)&this->vfptr;
-  v2->vfptr = (AK::StreamMgr::IAkLowLevelIOHookVtbl *)&AK::StreamMgr::IAkLowLevelIOHook::`vftable';
-  v2->vfptr = (AK::StreamMgr::IAkLowLevelIOHookVtbl *)&AK::StreamMgr::IAkIOHookDeferred::`vftable';
+  v2->vfptr = (AK::StreamMgr::IAkLowLevelIOHookVtbl *)&AK::StreamMgr::IAkLowLevelIOHook::`vftable;
+  v2->vfptr = (AK::StreamMgr::IAkLowLevelIOHookVtbl *)&AK::StreamMgr::IAkIOHookDeferred::`vftable;
   UFG::WwiseFileLocationBase::WwiseFileLocationBase((UFG::WwiseFileLocationBase *)&this->vfptr);
-  v1->vfptr = (AK::StreamMgr::IAkFileLocationResolverVtbl *)&UFG::WwiseDefaultIOHookDeferredBase::`vftable'{for `AK::StreamMgr::IAkFileLocationResolver'};
-  v2->vfptr = (AK::StreamMgr::IAkLowLevelIOHookVtbl *)&UFG::WwiseDefaultIOHookDeferredBase::`vftable'{for `AK::StreamMgr::IAkIOHookDeferred'};
-  v1->vfptr = (UFG::WwiseFileLocationBaseVtbl *)&UFG::WwiseDefaultIOHookDeferredBase::`vftable'{for `UFG::WwiseFileLocationBase'};
+  v1->vfptr = (AK::StreamMgr::IAkFileLocationResolverVtbl *)&UFG::WwiseDefaultIOHookDeferredBase::`vftable{for `AK::StreamMgr::IAkFileLocationResolver};
+  v2->vfptr = (AK::StreamMgr::IAkLowLevelIOHookVtbl *)&UFG::WwiseDefaultIOHookDeferredBase::`vftable{for `AK::StreamMgr::IAkIOHookDeferred};
+  v1->vfptr = (UFG::WwiseFileLocationBaseVtbl *)&UFG::WwiseDefaultIOHookDeferredBase::`vftable{for `UFG::WwiseFileLocationBase};
   v1->m_blockSize = 0;
   v1->m_WwiseDevice = -1;
   v1->m_bAsyncOpen = 0;
@@ -53,15 +53,15 @@ void __fastcall UFG::WwiseDefaultIOHookDeferredBase::~WwiseDefaultIOHookDeferred
   UFG::WwiseFileLocationBase *v3; // rcx
 
   v1 = this;
-  this->vfptr = (AK::StreamMgr::IAkFileLocationResolverVtbl *)&UFG::WwiseDefaultIOHookDeferredBase::`vftable'{for `AK::StreamMgr::IAkFileLocationResolver'};
+  this->vfptr = (AK::StreamMgr::IAkFileLocationResolverVtbl *)&UFG::WwiseDefaultIOHookDeferredBase::`vftable{for `AK::StreamMgr::IAkFileLocationResolver};
   v2 = (AK::StreamMgr::IAkIOHookDeferred *)&this->vfptr;
-  this->vfptr = (AK::StreamMgr::IAkLowLevelIOHookVtbl *)&UFG::WwiseDefaultIOHookDeferredBase::`vftable'{for `AK::StreamMgr::IAkIOHookDeferred'};
+  this->vfptr = (AK::StreamMgr::IAkLowLevelIOHookVtbl *)&UFG::WwiseDefaultIOHookDeferredBase::`vftable{for `AK::StreamMgr::IAkIOHookDeferred};
   v3 = (UFG::WwiseFileLocationBase *)&this->vfptr;
-  v3->vfptr = (UFG::WwiseFileLocationBaseVtbl *)&UFG::WwiseDefaultIOHookDeferredBase::`vftable'{for `UFG::WwiseFileLocationBase'};
+  v3->vfptr = (UFG::WwiseFileLocationBaseVtbl *)&UFG::WwiseDefaultIOHookDeferredBase::`vftable{for `UFG::WwiseFileLocationBase};
   UFG::WwiseFileLocationBase::~WwiseFileLocationBase(v3);
-  v2->vfptr = (AK::StreamMgr::IAkLowLevelIOHookVtbl *)&AK::StreamMgr::IAkIOHookDeferred::`vftable';
-  v2->vfptr = (AK::StreamMgr::IAkLowLevelIOHookVtbl *)&AK::StreamMgr::IAkLowLevelIOHook::`vftable';
-  v1->vfptr = (AK::StreamMgr::IAkFileLocationResolverVtbl *)&AK::StreamMgr::IAkFileLocationResolver::`vftable';
+  v2->vfptr = (AK::StreamMgr::IAkLowLevelIOHookVtbl *)&AK::StreamMgr::IAkIOHookDeferred::`vftable;
+  v2->vfptr = (AK::StreamMgr::IAkLowLevelIOHookVtbl *)&AK::StreamMgr::IAkLowLevelIOHook::`vftable;
+  v1->vfptr = (AK::StreamMgr::IAkFileLocationResolverVtbl *)&AK::StreamMgr::IAkFileLocationResolver::`vftable;
 }
 
 // File Line: 50

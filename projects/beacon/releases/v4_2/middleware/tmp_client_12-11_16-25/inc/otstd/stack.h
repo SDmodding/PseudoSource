@@ -80,8 +80,8 @@ void __fastcall OSuite::TStack<int>::Push(OSuite::TStack<int> *this, const int *
         v5[4].vfptr = 0i64;
         OSuite::ZRedBlackTreeBase::ZElementBase::ZElementBase(v5, v6);
         v7[4].vfptr = 0i64;
-        v7->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<int>::`vftable'{for `OSuite::ZListBase'};
-        v7[3].vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<int>::`vftable'{for `OSuite::IHashable'};
+        v7->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<int>::`vftable{for `OSuite::ZListBase};
+        v7[3].vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<int>::`vftable{for `OSuite::IHashable};
         v8 = (OSuite::ZObjectVtbl *)OSuite::ZObject::malloc(v7, 0x40ui64, 0i64);
         v7[2].vfptr = 0i64;
         v7[1].vfptr = (OSuite::ZObjectVtbl *)16;

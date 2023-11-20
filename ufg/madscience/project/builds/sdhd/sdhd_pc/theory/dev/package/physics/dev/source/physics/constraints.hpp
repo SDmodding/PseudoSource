@@ -23,13 +23,13 @@ void __fastcall UFG::ConstraintDef::ConstraintDef(UFG::ConstraintDef *this, MemI
   v3->mBaseNode.mNeighbours[0] = &v3->mBaseNode;
   v3->mBaseNode.mNeighbours[1] = &v3->mBaseNode;
   v3->mBaseNode.mUID = v4;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable;
   v5 = &this->mHandles;
   v12 = &this->mHandles;
   v5->mNode.mPrev = &v5->mNode;
   v5->mNode.mNext = &v5->mNode;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::ConstraintDef,UFG::qReflectObject>::`vftable';
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::ConstraintDef::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::ConstraintDef,UFG::qReflectObject>::`vftable;
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::ConstraintDef::`vftable;
   _((AMD_HD3D *)this->mAudioEffect.mUID);
   v6 = UFG::qReflectObject::GetName((UFG::qReflectObject *)&v2->vfptr);
   UFG::qString::qString(&v11, v6);
@@ -65,9 +65,9 @@ void __fastcall UFG::ConstraintDef::~ConstraintDef(UFG::ConstraintDef *this)
   UFG::qList<UFG::qReflectHandleBase,UFG::qReflectHandleBase,1,0> *v4; // [rsp+40h] [rbp+8h]
 
   v1 = this;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::ConstraintDef::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::ConstraintDef::`vftable;
   _((AMD_HD3D *)this->mAudioEffect.mUID);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable';
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable;
   v4 = &v1->mHandles;
   UFG::qList<UFG::qReflectHandleBase,UFG::qReflectHandleBase,1,0>::DeleteNodes(&v1->mHandles);
   v2 = v1->mHandles.mNode.mPrev;
@@ -96,8 +96,8 @@ void __fastcall UFG::ConstraintDefRagdoll::ConstraintDefRagdoll(UFG::ConstraintD
 
   v2 = this;
   UFG::ConstraintDef::ConstraintDef((UFG::ConstraintDef *)&this->vfptr, f);
-  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::ConstraintDefRagdoll,UFG::ConstraintDef>::`vftable';
-  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::ConstraintDefRagdoll::`vftable';
+  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::ConstraintDefRagdoll,UFG::ConstraintDef>::`vftable;
+  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::ConstraintDefRagdoll::`vftable;
   v3 = (__m128)LODWORD(v2->mTwistAxis.x);
   v3.m128_f32[0] = (float)((float)(v3.m128_f32[0] * v3.m128_f32[0]) + (float)(v2->mTwistAxis.y * v2->mTwistAxis.y))
                  + (float)(v2->mTwistAxis.z * v2->mTwistAxis.z);

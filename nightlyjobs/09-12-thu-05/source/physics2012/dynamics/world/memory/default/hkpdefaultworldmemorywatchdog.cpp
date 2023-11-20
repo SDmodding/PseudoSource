@@ -4,7 +4,7 @@ void __fastcall hkpDefaultWorldMemoryWatchDog::hkpDefaultWorldMemoryWatchDog(hkp
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_freeHeapMemoryRequested = minMemoryAvailable;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpDefaultWorldMemoryWatchDog::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpDefaultWorldMemoryWatchDog::`vftable;
 }
 
 // File Line: 27

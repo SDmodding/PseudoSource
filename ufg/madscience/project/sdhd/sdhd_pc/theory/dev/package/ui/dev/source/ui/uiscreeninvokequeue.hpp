@@ -15,7 +15,7 @@ void __fastcall UFG::UIScreenInvoke::~UIScreenInvoke(UFG::UIScreenInvoke *this)
   UFG::qNode<UFG::UIScreenInvoke,UFG::UIScreenInvoke> *v4; // rax
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenInvokeVtbl *)&UFG::UIScreenInvoke::`vftable';
+  this->vfptr = (UFG::UIScreenInvokeVtbl *)&UFG::UIScreenInvoke::`vftable;
   UFG::qString::~qString(&this->command);
   v2 = (UFG::qNode<UFG::UIScreenInvoke,UFG::UIScreenInvoke> *)&v1->mPrev;
   v3 = v1->mPrev;
@@ -37,9 +37,9 @@ void __fastcall UFG::UIScreenInvokeValueArgs::UIScreenInvokeValueArgs(UFG::UIScr
   v2 = (UFG::qNode<UFG::UIScreenInvoke,UFG::UIScreenInvoke> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (UFG::UIScreenInvokeVtbl *)&UFG::UIScreenInvoke::`vftable';
+  this->vfptr = (UFG::UIScreenInvokeVtbl *)&UFG::UIScreenInvoke::`vftable;
   UFG::qString::qString(&this->command, &customWorldMapCaption);
-  v1->vfptr = (UFG::UIScreenInvokeVtbl *)&UFG::UIScreenInvokeValueArgs::`vftable';
+  v1->vfptr = (UFG::UIScreenInvokeVtbl *)&UFG::UIScreenInvokeValueArgs::`vftable;
   v1->args = 0i64;
   v1->numArgs = 0;
   v1->tempStrings = 0i64;
@@ -59,12 +59,12 @@ void __fastcall UFG::UIScreenInvokeValueArgs::~UIScreenInvokeValueArgs(UFG::UISc
   UFG::qNode<UFG::UIScreenInvoke,UFG::UIScreenInvoke> *v8; // rax
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenInvokeVtbl *)&UFG::UIScreenInvokeValueArgs::`vftable';
+  this->vfptr = (UFG::UIScreenInvokeVtbl *)&UFG::UIScreenInvokeValueArgs::`vftable;
   v2 = this->args;
   if ( v2 )
   {
     v3 = &v2[-1].DataAux;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v2,
       0x30ui64,
       v2[-1].DataAux,
@@ -75,14 +75,14 @@ void __fastcall UFG::UIScreenInvokeValueArgs::~UIScreenInvokeValueArgs(UFG::UISc
   if ( v4 )
   {
     v5 = &v4[-1].mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v4,
       0x28ui64,
       v4[-1].mStringHash32,
       (void (__fastcall *)(void *))UFG::qString::~qString);
     operator delete[](v5);
   }
-  v1->vfptr = (UFG::UIScreenInvokeVtbl *)&UFG::UIScreenInvoke::`vftable';
+  v1->vfptr = (UFG::UIScreenInvokeVtbl *)&UFG::UIScreenInvoke::`vftable;
   UFG::qString::~qString(&v1->command);
   v6 = (UFG::qNode<UFG::UIScreenInvoke,UFG::UIScreenInvoke> *)&v1->mPrev;
   v7 = v1->mPrev;
@@ -104,9 +104,9 @@ void __fastcall UFG::UIScreenInvokeStringArgs::UIScreenInvokeStringArgs(UFG::UIS
   v2 = (UFG::qNode<UFG::UIScreenInvoke,UFG::UIScreenInvoke> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (UFG::UIScreenInvokeVtbl *)&UFG::UIScreenInvoke::`vftable';
+  this->vfptr = (UFG::UIScreenInvokeVtbl *)&UFG::UIScreenInvoke::`vftable;
   UFG::qString::qString(&this->command, &customWorldMapCaption);
-  v1->vfptr = (UFG::UIScreenInvokeVtbl *)&UFG::UIScreenInvokeStringArgs::`vftable';
+  v1->vfptr = (UFG::UIScreenInvokeVtbl *)&UFG::UIScreenInvokeStringArgs::`vftable;
   UFG::qString::qString(&v1->args, &customWorldMapCaption);
   v1->numArgs = 0;
 }

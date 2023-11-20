@@ -3996,7 +3996,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::Object> *__fastcall Scaleform::GFx::AS3
       (Scaleform::GFx::AS3::InstanceTraits::CTraits *)v4,
       v3->pTraits.pObject->pVM,
       &Scaleform::GFx::AS3::fl::DateCI);
-    *(_QWORD *)v4 = &Scaleform::GFx::AS3::InstanceTraits::Prototype::`vftable';
+    *(_QWORD *)v4 = &Scaleform::GFx::AS3::InstanceTraits::Prototype::`vftable;
     Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_geom::Vector3D>::SetPtr(
       (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)(v4 + 136),
       v3);
@@ -4019,8 +4019,8 @@ Scaleform::Pickable<Scaleform::GFx::AS3::Object> *__fastcall Scaleform::GFx::AS3
   if ( v7 )
   {
     Scaleform::GFx::AS3::Instance::Instance(v7, (Scaleform::GFx::AS3::InstanceTraits::Traits *)v4);
-    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Object::`vftable';
-    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Date::`vftable';
+    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Object::`vftable;
+    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Date::`vftable;
     LODWORD(v8[1].vfptr) = 0;
     BYTE4(v8[1].vfptr) = 0;
     v8[1].pRCCRaw = 0i64;
@@ -4099,8 +4099,8 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v5 )
   {
     Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, v2, &Scaleform::GFx::AS3::fl::DateCI);
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable';
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Date::`vftable';
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable;
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Date::`vftable;
     v6->TraitsType = 9;
   }
   else
@@ -4113,8 +4113,8 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v7 )
   {
     Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v7, v2, &Scaleform::GFx::AS3::fl::DateCI);
-    v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable';
-    v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Date::`vftable';
+    v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable;
+    v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Date::`vftable;
     v8.pV->TraitsType = 9;
   }
   else
@@ -4129,7 +4129,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v9 )
   {
     Scaleform::GFx::AS3::Class::Class(v9, v3->pV);
-    v10->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl::Date::`vftable';
+    v10->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl::Date::`vftable;
   }
   return v3;
 }

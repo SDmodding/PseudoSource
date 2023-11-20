@@ -6,12 +6,12 @@ void __fastcall Scaleform::GFx::Movie::~Movie(Scaleform::GFx::Movie *this)
   Scaleform::Render::RenderBuffer *v2; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::Movie::`vftable'{for `Scaleform::RefCountBase<Scaleform::GFx::Movie,327>'};
-  this->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::Movie::`vftable'{for `Scaleform::GFx::StateBag'};
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::Movie::`vftable{for `Scaleform::RefCountBase<Scaleform::GFx::Movie,327>};
+  this->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::Movie::`vftable{for `Scaleform::GFx::StateBag};
   v2 = (Scaleform::Render::RenderBuffer *)this->pASMovieRoot.pObject;
   if ( v2 )
     Scaleform::RefCountImpl::Release(v2);
-  v1->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::StateBag::`vftable';
+  v1->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::StateBag::`vftable;
   Scaleform::RefCountImplCore::~RefCountImplCore((Scaleform::RefCountImplCore *)&v1->vfptr);
 }
 
@@ -154,17 +154,17 @@ void __fastcall Scaleform::GFx::MovieImpl::MovieImpl(Scaleform::GFx::MovieImpl *
   Scaleform::ArrayLH<Scaleform::GFx::MovieImpl::LevelInfo,327,Scaleform::ArrayDefaultPolicy> *v34; // [rsp+98h] [rbp+58h]
 
   v2 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::Movie,327>::`vftable';
-  this->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::StateBag::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::Movie::`vftable'{for `Scaleform::RefCountBase<Scaleform::GFx::Movie,327>'};
-  this->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::Movie::`vftable'{for `Scaleform::GFx::StateBag'};
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::Movie,327>::`vftable;
+  this->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::StateBag::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::Movie::`vftable{for `Scaleform::RefCountBase<Scaleform::GFx::Movie,327>};
+  this->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::Movie::`vftable{for `Scaleform::GFx::StateBag};
   this->pASMovieRoot.pObject = 0i64;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::MovieImpl::`vftable'{for `Scaleform::RefCountBase<Scaleform::GFx::Movie,327>'};
-  this->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::MovieImpl::`vftable'{for `Scaleform::GFx::StateBag'};
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::MovieImpl::`vftable{for `Scaleform::RefCountBase<Scaleform::GFx::Movie,327>};
+  this->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::MovieImpl::`vftable{for `Scaleform::GFx::StateBag};
   this->AdvanceStats.pObject = 0i64;
   this->pHeap = pheap;
   this->pMainMovieDef.pObject = 0i64;
@@ -219,7 +219,7 @@ void __fastcall Scaleform::GFx::MovieImpl::MovieImpl(Scaleform::GFx::MovieImpl *
   *(_WORD *)&v2->BackgroundColor.Channels.Green = 0;
   v2->BackgroundColor.Channels.Blue = 0;
   v2->BackgroundColor.Channels.Alpha = -1;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v2->mMouseState,
     0x50ui64,
     6,
@@ -227,7 +227,7 @@ void __fastcall Scaleform::GFx::MovieImpl::MovieImpl(Scaleform::GFx::MovieImpl *
   v2->MouseCursorCount = 1;
   v2->ControllerCount = 1;
   v2->UserData = 0i64;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v2->KeyboardStates,
     0x688ui64,
     6,
@@ -286,11 +286,11 @@ void __fastcall Scaleform::GFx::MovieImpl::MovieImpl(Scaleform::GFx::MovieImpl *
   v9->Data.Size = 0i64;
   v9->Data.Policy.Capacity = 0i64;
   v2->FocusRectContainerNode.pObject = 0i64;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v2->FocusGroups,
     0x60ui64,
     16,
-    (void (__fastcall *)(void *))Scaleform::GFx::FocusGroupDescr::`default constructor closure');
+    (void (__fastcall *)(void *))Scaleform::GFx::FocusGroupDescr::`default constructor closure);
   *(_QWORD *)&v2->Flags = 0i64;
   v10 = &v2->RegisteredFonts;
   v33 = (Scaleform::ArrayLH<Scaleform::GFx::MovieImpl::IndirectTransPair,2,Scaleform::ArrayDefaultPolicy> *)v10;
@@ -408,14 +408,14 @@ void __fastcall Scaleform::GFx::MovieImpl::MovieImpl(Scaleform::GFx::MovieImpl *
       v29 = (signed __int64)&v28->vfptr;
     else
       v29 = 0i64;
-    *(_QWORD *)v27 = &Scaleform::RefCountNTSImplCore::`vftable';
+    *(_QWORD *)v27 = &Scaleform::RefCountNTSImplCore::`vftable;
     *(_DWORD *)(v27 + 8) = 1;
-    *(_QWORD *)v27 = &Scaleform::RefCountNTSImpl::`vftable';
-    *(_QWORD *)v27 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,327>::`vftable';
-    *(_QWORD *)v27 = &Scaleform::RefCountBaseNTS<Scaleform::GFx::FontManagerStates,327>::`vftable';
-    *(_QWORD *)(v27 + 16) = &Scaleform::GFx::StateBag::`vftable';
-    *(_QWORD *)v27 = &Scaleform::GFx::FontManagerStates::`vftable'{for `Scaleform::RefCountBaseNTS<Scaleform::GFx::FontManagerStates,327>'};
-    *(_QWORD *)(v27 + 16) = &Scaleform::GFx::FontManagerStates::`vftable'{for `Scaleform::GFx::StateBag'};
+    *(_QWORD *)v27 = &Scaleform::RefCountNTSImpl::`vftable;
+    *(_QWORD *)v27 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,327>::`vftable;
+    *(_QWORD *)v27 = &Scaleform::RefCountBaseNTS<Scaleform::GFx::FontManagerStates,327>::`vftable;
+    *(_QWORD *)(v27 + 16) = &Scaleform::GFx::StateBag::`vftable;
+    *(_QWORD *)v27 = &Scaleform::GFx::FontManagerStates::`vftable{for `Scaleform::RefCountBaseNTS<Scaleform::GFx::FontManagerStates,327>};
+    *(_QWORD *)(v27 + 16) = &Scaleform::GFx::FontManagerStates::`vftable{for `Scaleform::GFx::StateBag};
     *(_QWORD *)(v27 + 24) = 0i64;
     *(_QWORD *)(v27 + 32) = 0i64;
     *(_QWORD *)(v27 + 40) = 0i64;
@@ -524,8 +524,8 @@ void __fastcall Scaleform::GFx::MovieImpl::~MovieImpl(Scaleform::GFx::MovieImpl 
   Scaleform::Render::RenderBuffer *v64; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::MovieImpl::`vftable'{for `Scaleform::RefCountBase<Scaleform::GFx::Movie,327>'};
-  this->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::MovieImpl::`vftable'{for `Scaleform::GFx::StateBag'};
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::MovieImpl::`vftable{for `Scaleform::RefCountBase<Scaleform::GFx::Movie,327>};
+  this->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::MovieImpl::`vftable{for `Scaleform::GFx::StateBag};
   v2 = this->FocusRectContainerNode.pObject;
   if ( v2 )
   {
@@ -743,7 +743,7 @@ void __fastcall Scaleform::GFx::MovieImpl::~MovieImpl(Scaleform::GFx::MovieImpl 
     --m;
   }
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v1->RegisteredFonts.Data.Data);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->FocusGroups,
     0x60ui64,
     16,
@@ -772,8 +772,8 @@ void __fastcall Scaleform::GFx::MovieImpl::~MovieImpl(Scaleform::GFx::MovieImpl 
   }
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, *v29);
   Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::ASString,324>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>::NodeHashF>>::~HashSetBase<Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::ASString,324>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>::NodeHashF>>((Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::ASString,324>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeHashF> > *)&v1->StickyVariables.mHash.pTable);
-  `eh vector destructor iterator'(v1->KeyboardStates, 0x688ui64, 6, (void (__fastcall *)(void *))Scaleform::File::~File);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(v1->KeyboardStates, 0x688ui64, 6, (void (__fastcall *)(void *))Scaleform::File::~File);
+  `eh vector destructor iterator(
     v1->mMouseState,
     0x50ui64,
     6,
@@ -834,12 +834,12 @@ void __fastcall Scaleform::GFx::MovieImpl::~MovieImpl(Scaleform::GFx::MovieImpl 
   v63 = (Scaleform::Render::RenderBuffer *)v1->AdvanceStats.pObject;
   if ( v63 )
     Scaleform::RefCountImpl::Release(v63);
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::Movie::`vftable'{for `Scaleform::RefCountBase<Scaleform::GFx::Movie,327>'};
-  v1->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::Movie::`vftable'{for `Scaleform::GFx::StateBag'};
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::Movie::`vftable{for `Scaleform::RefCountBase<Scaleform::GFx::Movie,327>};
+  v1->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::Movie::`vftable{for `Scaleform::GFx::StateBag};
   v64 = (Scaleform::Render::RenderBuffer *)v1->pASMovieRoot.pObject;
   if ( v64 )
     Scaleform::RefCountImpl::Release(v64);
-  v1->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::StateBag::`vftable';
+  v1->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::StateBag::`vftable;
   Scaleform::RefCountImplCore::~RefCountImplCore((Scaleform::RefCountImplCore *)&v1->vfptr);
 }
 
@@ -5631,7 +5631,7 @@ char __fastcall Scaleform::GFx::MovieImpl::GotoLabeledFrame(Scaleform::GFx::Movi
     if ( result.pObject )
       Scaleform::GFx::LogBase<Scaleform::GFx::LogState>::LogScriptError(
         (Scaleform::GFx::LogBase<Scaleform::GFx::LogState> *)&result.pObject->vfptr,
-        "MovieImpl::GotoLabeledFrame('%s') unknown label",
+        "MovieImpl::GotoLabeledFrame(%s) unknown label",
         v4);
     if ( result.pObject )
       Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)result.pObject);
@@ -8332,7 +8332,7 @@ unsigned __int64 __fastcall Scaleform::GFx::MovieImpl::GetASTimerMs(Scaleform::G
         v2,
         "timer",
         v8.ValueStr);
-      v8.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable';
+      v8.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable;
       Scaleform::Formatter::~Formatter((Scaleform::Formatter *)&v8.vfptr);
       result = v4;
     }

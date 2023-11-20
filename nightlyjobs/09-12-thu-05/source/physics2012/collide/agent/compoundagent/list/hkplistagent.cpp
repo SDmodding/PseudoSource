@@ -58,7 +58,7 @@ hkpListAgent *__fastcall hkpListAgent::createListAAgent(hkpCdBody *bodyA, hkpCdB
   if ( result )
   {
     hkpListAgent::hkpListAgent(result, v7, v4, v6, v5);
-    v10->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpListAgent>::`vftable';
+    v10->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpListAgent>::`vftable;
     result = (hkpListAgent *)v10;
   }
   return result;
@@ -96,7 +96,7 @@ void __fastcall hkpListAgent::hkpListAgent(hkpListAgent *this, hkpCdBody *bodyA,
   v5 = this;
   this->m_contactMgr = contactMgr;
   v6 = &this->m_agentTrack;
-  v6[-2].m_sectors.m_data = (hkpAgent1nSector **)&hkpListAgent::`vftable';
+  v6[-2].m_sectors.m_data = (hkpAgent1nSector **)&hkpListAgent::`vftable;
   v6->m_sectors.m_capacityAndFlags = 2147483648;
   v6->m_sectors.m_data = 0i64;
   v6->m_sectors.m_size = 0;

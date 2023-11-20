@@ -30,7 +30,7 @@ void __fastcall Scaleform::GFx::AS3::DoAbc::Execute(Scaleform::GFx::AS3::DoAbc *
              (Scaleform::GFx::StateBag *)&v3->pDispObj->pASRoot->pMovieImpl->vfptr,
              &result)->pObject;
       v9 = (*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v7 + 96i64))(v7);
-      Scaleform::Log::LogError(v8, "Can't execute ABC from %s", v9);
+      Scaleform::Log::LogError(v8, "Cant execute ABC from %s", v9);
       if ( result.pObject )
         Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)result.pObject);
     }
@@ -113,7 +113,7 @@ void __fastcall Scaleform::GFx::AS3::SymbolClassLoader(Scaleform::GFx::LoadProce
       v3->Pos = v9 + 2;
       Scaleform::StringDH::StringDH(&v29, v2->pLoadData.pObject->pHeap);
       Scaleform::GFx::Stream::ReadString(v3, (Scaleform::String *)&v29.0);
-      Scaleform::GFx::LogBase<Scaleform::GFx::Stream>::LogParseShape(v7, "       id = %d, symbol = '%s'\n");
+      Scaleform::GFx::LogBase<Scaleform::GFx::Stream>::LogParseShape(v7, "       id = %d, symbol = %s\n");
       phandle.HType = 0;
       phandle.pResource = 0i64;
       if ( !v10
@@ -236,7 +236,7 @@ LABEL_44:
       {
         Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>::LogError(
           (Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess> *)v7,
-          "SymbolClassLoader can't find Resource with id = %d, name = '%s'",
+          "SymbolClassLoader cant find Resource with id = %d, name = %s",
           v10,
           (v29.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12,
           v27,
@@ -311,12 +311,12 @@ void __fastcall Scaleform::GFx::AS3::DoAbcLoader(Scaleform::GFx::LoadProcess *p,
   v15 = v8;
   if ( v8 )
   {
-    *v8 = &Scaleform::RefCountImplCore::`vftable';
+    *v8 = &Scaleform::RefCountImplCore::`vftable;
     *((_DWORD *)v8 + 2) = 1;
-    *v8 = &Scaleform::RefCountImpl::`vftable';
-    *v8 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,263>::`vftable';
-    *v8 = &Scaleform::RefCountBase<Scaleform::GFx::AS3::AbcDataBuffer,263>::`vftable';
-    *v8 = &Scaleform::GFx::AS3::AbcDataBuffer::`vftable';
+    *v8 = &Scaleform::RefCountImpl::`vftable;
+    *v8 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,263>::`vftable;
+    *v8 = &Scaleform::RefCountBase<Scaleform::GFx::AS3::AbcDataBuffer,263>::`vftable;
+    *v8 = &Scaleform::GFx::AS3::AbcDataBuffer::`vftable;
     Scaleform::String::String((Scaleform::String *)v8 + 2, (Scaleform::String *)&v11.0);
     *((_DWORD *)v8 + 6) = v7;
     *((_BYTE *)v8 + 28) = v6;
@@ -348,7 +348,7 @@ void __fastcall Scaleform::GFx::AS3::DoAbcLoader(Scaleform::GFx::LoadProcess *p,
   {
     Scaleform::GFx::LogBase<Scaleform::GFx::Stream>::LogError(
       (Scaleform::GFx::LogBase<Scaleform::GFx::Stream> *)&v4->vfptr,
-      "Can't read completely ABCData at offset %d",
+      "Cant read completely ABCData at offset %d",
       (unsigned int)v2->TagOffset);
   }
   Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v8);
@@ -360,15 +360,15 @@ void __fastcall Scaleform::GFx::AS3::DoAbcLoader(Scaleform::GFx::LoadProcess *p,
 // RVA: 0x8945C0
 void __fastcall Scaleform::GFx::AS3Support::AS3Support(Scaleform::GFx::AS3Support *this)
 {
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::State::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::State::`vftable;
   this->SType = 39;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ASSupport::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS3Support::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ASSupport::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS3Support::`vftable;
   qword_1420AFDC0 = (__int64)Scaleform::GFx::AS3::SymbolClassLoader;
   qword_1420AFDF0 = (__int64)Scaleform::GFx::AS3::DoAbcLoader;
 }

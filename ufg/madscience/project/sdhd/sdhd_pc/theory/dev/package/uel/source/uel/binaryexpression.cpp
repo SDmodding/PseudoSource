@@ -18,12 +18,12 @@ void __fastcall UEL::BinaryExpression::BinaryExpression(UEL::BinaryExpression *t
   UFG::qOffset64<UEL::Expression *> *v6; // rax
   char *v7; // r9
 
-  this->vfptr = (UEL::ExpressionVtbl *)&UEL::Expression::`vftable';
+  this->vfptr = (UEL::ExpressionVtbl *)&UEL::Expression::`vftable;
   this->mType.mValue = 1;
   this->mValueType.mBaseType.mValue = 0;
   this->mValueType.mDetailedType = UFG::gNullQSymbol;
   *(_DWORD *)&this->mResolved = 0;
-  this->vfptr = (UEL::ExpressionVtbl *)&UEL::BinaryExpression::`vftable';
+  this->vfptr = (UEL::ExpressionVtbl *)&UEL::BinaryExpression::`vftable;
   v4 = &this->mLeftExpression;
   if ( leftExpression )
     v5 = (char *)((char *)leftExpression - (char *)v4);

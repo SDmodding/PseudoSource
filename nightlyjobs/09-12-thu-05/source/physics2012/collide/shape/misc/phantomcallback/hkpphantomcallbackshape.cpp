@@ -6,7 +6,7 @@ void __fastcall hkpPhantomCallbackShape::hkpPhantomCallbackShape(hkpPhantomCallb
 
   v2 = this;
   hkpShape::hkpShape((hkpShape *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpPhantomCallbackShape::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpPhantomCallbackShape::`vftable;
   v2->m_type.m_storage = 32;
 }
 

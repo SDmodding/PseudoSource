@@ -4,8 +4,8 @@ void __fastcall Scaleform::Render::GlyphFitter::GlyphFitter(Scaleform::Render::G
 {
   Scaleform::Render::LinearHeap *v3; // rax
 
-  this->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable';
-  this->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::GlyphFitter::`vftable';
+  this->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable;
+  this->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::GlyphFitter::`vftable;
   this->NominalFontHeight = nominalFontHeight;
   v3 = &this->LHeap;
   v3->pHeap = heap;

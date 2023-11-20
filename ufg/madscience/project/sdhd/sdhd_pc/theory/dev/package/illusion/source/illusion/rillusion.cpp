@@ -105,12 +105,12 @@ UFG::qResourceData *__fastcall Illusion::rMaterial::GetDefaultTexture(Illusion::
 
   if ( !Illusion::DefaultMaterialTexture.mNameUID )
   {
-    v1 = `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result )
+    v1 = `UFG::qGetResourceInventory<Illusion::Texture>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::Texture>::`2::result )
     {
       v2 = UFG::qResourceWarehouse::Instance();
       v1 = UFG::qResourceWarehouse::GetInventory(v2, 0x8B43FABF);
-      `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result = v1;
+      `UFG::qGetResourceInventory<Illusion::Texture>::`2::result = v1;
     }
     UFG::qResourceHandle::Init(
       (UFG::qResourceHandle *)&Illusion::DefaultMaterialTexture.mPrev,

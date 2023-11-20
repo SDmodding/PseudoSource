@@ -26,7 +26,7 @@ void __fastcall hkpBreakableMultiMaterial::hkpBreakableMultiMaterial(hkpBreakabl
   this->m_typeAndFlags = 2;
   v3 = 0i64;
   v4 = subMaterials;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpBreakableMultiMaterial::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpBreakableMultiMaterial::`vftable;
   this->m_properties = 0i64;
   this->m_subMaterials.m_data = 0i64;
   this->m_subMaterials.m_size = 0;
@@ -115,13 +115,13 @@ void __fastcall hkpBreakableMultiMaterial::hkpBreakableMultiMaterial(hkpBreakabl
   hkResult result; // [rsp+60h] [rbp+8h]
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpBreakableMaterial::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpBreakableMaterial::`vftable;
   v2 = this;
   this->m_strength = other->m_strength;
   v3 = other;
   this->m_typeAndFlags = other->m_typeAndFlags;
   this->m_properties = other->m_properties;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpBreakableMultiMaterial::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpBreakableMultiMaterial::`vftable;
   this->m_subMaterials.m_data = 0i64;
   this->m_subMaterials.m_size = 0;
   this->m_subMaterials.m_capacityAndFlags = 2147483648;
@@ -186,7 +186,7 @@ void __fastcall hkpBreakableMultiMaterial::hkpBreakableMultiMaterial(hkpBreakabl
 void __fastcall hkpBreakableMultiMaterial::InverseMapping::InverseMapping(hkpBreakableMultiMaterial::InverseMapping *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpBreakableMultiMaterial::InverseMapping::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpBreakableMultiMaterial::InverseMapping::`vftable;
   this->m_descriptors.m_capacityAndFlags = 2147483648;
   this->m_descriptors.m_data = 0i64;
   this->m_descriptors.m_size = 0;
@@ -199,14 +199,14 @@ void __fastcall hkpBreakableMultiMaterial::InverseMapping::InverseMapping(hkpBre
 // RVA: 0xD77880
 void __fastcall hkpBreakableMultiMaterial::hkpBreakableMultiMaterial(hkpBreakableMultiMaterial *this, hkFinishLoadedObjectFlag flag)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkpBreakableMultiMaterial::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpBreakableMultiMaterial::`vftable;
 }
 
 // File Line: 66
 // RVA: 0xD778E0
 void __fastcall hkpBreakableMultiMaterial::InverseMapping::InverseMapping(hkpBreakableMultiMaterial::InverseMapping *this, hkFinishLoadedObjectFlag flag)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkpBreakableMultiMaterial::InverseMapping::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpBreakableMultiMaterial::InverseMapping::`vftable;
 }
 
 // File Line: 72

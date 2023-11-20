@@ -5,7 +5,7 @@ void __fastcall hkpSerializedAgentNnEntry::hkpSerializedAgentNnEntry(hkpSerializ
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_bodyAId = -1i64;
   this->m_bodyBId = -1i64;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpSerializedAgentNnEntry::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpSerializedAgentNnEntry::`vftable;
   this->m_bodyA = 0i64;
   this->m_bodyB = 0i64;
   this->m_useEntityIds.m_bool = 0;

@@ -6,7 +6,7 @@ void __fastcall hkpFirstPersonGun::hkpFirstPersonGun(hkpFirstPersonGun *this)
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpFirstPersonGun::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpFirstPersonGun::`vftable;
   this->m_type.m_storage = 0;
   hkStringPtr::hkStringPtr(&this->m_name, &customWorldMapCaption);
   v1->m_keyboardKey.m_storage = 113;
@@ -100,7 +100,7 @@ hkResult *__fastcall hkpFirstPersonGun::sweepSphere(hkResult *result, hkpWorld *
   collA.m_shapeSizeOnSpu = 0;
   v26 = 0i64;
   input.m_maxExtraPenetration = 0.00000011920929;
-  castCollector.vfptr = (hkpCdPointCollectorVtbl *)&hkpClosestCdPointCollector::`vftable';
+  castCollector.vfptr = (hkpCdPointCollectorVtbl *)&hkpClosestCdPointCollector::`vftable;
   input.m_startPointTolerance = 0.00000011920929;
   hkpWorld::linearCast(v8, &collA, &input, &castCollector, 0i64);
   hkReferencedObject::removeReference((hkReferencedObject *)&v12->vfptr);

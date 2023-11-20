@@ -7,7 +7,7 @@ void __fastcall UFG::UIHKScreenDebugNISList::~UIHKScreenDebugNISList(UFG::UIHKSc
   UFG::UIScreenTextureManager *v3; // rax
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenDebugNISList::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenDebugNISList::`vftable;
   if ( UFG::gInputSystem )
   {
     if ( UFG::gActiveControllerNum != -1 )
@@ -125,7 +125,7 @@ void __fastcall UFG::UIHKScreenDebugNISList::AddItem(UFG::UIHKScreenDebugNISList
 
   v2 = caption;
   v3 = this->mRenderable->m_movie.pObject;
-  `eh vector constructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( ((unsigned int)pargs.Type >> 6) & 1 )
   {
     (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
@@ -137,7 +137,7 @@ void __fastcall UFG::UIHKScreenDebugNISList::AddItem(UFG::UIHKScreenDebugNISList
   pargs.Type = 6;
   *(_QWORD *)&pargs.mValue.NValue = v2;
   Scaleform::GFx::Movie::Invoke(v3, "List_AddItem", 0i64, &pargs, 1u);
-  `eh vector destructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 88

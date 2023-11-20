@@ -1239,7 +1239,7 @@ void __fastcall hkGeometryUtils::weldVertices(hkGeometry *meshGeometry, float th
 
 // File Line: 258
 // RVA: 0xCA28B0
-void __fastcall `anonymous namespace'::hkWeldVertices(hkArray<hkVector4f,hkContainerHeapAllocator> *vertsIn, hkArray<hkVector4f,hkContainerHeapAllocator> *uniqueVerts, hkArray<int,hkContainerHeapAllocator> *remap, hkArrayBase<hk1AxisSweep::AabbInt> *vertAabbs, hkArrayBase<hkRadixSort::SortData32> *sortData, hkArrayBase<hk1AxisSweep::AabbInt> *tempAabbs, float tol)
+void __fastcall `anonymous namespace::hkWeldVertices(hkArray<hkVector4f,hkContainerHeapAllocator> *vertsIn, hkArray<hkVector4f,hkContainerHeapAllocator> *uniqueVerts, hkArray<int,hkContainerHeapAllocator> *remap, hkArrayBase<hk1AxisSweep::AabbInt> *vertAabbs, hkArrayBase<hkRadixSort::SortData32> *sortData, hkArrayBase<hk1AxisSweep::AabbInt> *tempAabbs, float tol)
 {
   __int64 v7; // r13
   int v8; // eax
@@ -1396,7 +1396,7 @@ void __fastcall `anonymous namespace'::hkWeldVertices(hkArray<hkVector4f,hkConta
 
 // File Line: 327
 // RVA: 0xCA2B60
-bool __fastcall `anonymous namespace'::hkTriangle_isDegenerate(hkGeometry::Triangle *a)
+bool __fastcall `anonymous namespace::hkTriangle_isDegenerate(hkGeometry::Triangle *a)
 {
   int v1; // edx
   int v2; // eax
@@ -1797,7 +1797,7 @@ void __fastcall hkGeometryUtils::_weldVertices(hkGeometry *meshGeometry, float t
   sizeElem = sortData;
   v12->m_size = v9;
   v66 = (signed __int64)&v13->m_vertices;
-  `anonymous namespace'::hkWeldVertices(&v13->m_vertices, v20, v12, v17, sizeElem, tempAabbs, threshold);
+  `anonymous namespace::hkWeldVertices(&v13->m_vertices, v20, v12, v17, sizeElem, tempAabbs, threshold);
   v22 = 0i64;
   if ( v74 )
   {
@@ -1997,7 +1997,7 @@ void __fastcall hkGeometryUtils::_weldVertices(hkGeometry *meshGeometry, float t
       v53 = v51->m_data;
       LODWORD(v54) = -1;
       v55 = &v51->m_data[v52];
-      if ( !`anonymous namespace'::hkTriangle_isDegenerate(&v51->m_data[v52]) )
+      if ( !`anonymous namespace::hkTriangle_isDegenerate(&v51->m_data[v52]) )
       {
         v50->m_a = v55->m_a;
         v50->m_b = v55->m_b;
@@ -4633,23 +4633,23 @@ void __fastcall hkGeometryUtils::quantize(hkGeometry *mesh, int resolution)
       ++v9;
       ++v20;
       v22 = _mm_mul_ps(_mm_sub_ps(v21[v20 - 1].m_quad, v13), v19);
-      v23 = (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v22);
+      v23 = (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v22);
       v24 = _mm_or_si128(
               _mm_add_epi32(
                 _mm_cvttps_epi32(
                   _mm_max_ps(
-                    _mm_sub_ps(v22, _mm_and_ps((__m128)v23, *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31)),
+                    _mm_sub_ps(v22, _mm_and_ps((__m128)v23, *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31)),
                     (__m128)0i64)),
                 _mm_slli_epi32(v23, 0x1Fu)),
               (__m128i)_mm_cmpleps(
                          _mm_add_ps(
-                           *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31,
-                           *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31),
+                           *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31,
+                           *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31),
                          v22));
       v25 = _mm_add_ps(
               _mm_mul_ps(
                 _mm_cvtepi32_ps(_mm_srli_epi32(v24, 0x10u)),
-                (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                (__m128)`hkIntVector::convertU32ToF32::`2::two16),
               _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v24, 0x10u), 0x10u)));
       v26 = _mm_cmpltps(v25, v14);
       v21[v20 - 1].m_quad = _mm_add_ps(

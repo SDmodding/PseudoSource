@@ -811,7 +811,7 @@ void __fastcall UFG::InputSystem::InputSystem(UFG::InputSystem *this)
   UFG::JoyMoveWatcher *v2; // rax
 
   v1 = this;
-  this->vfptr = (UFG::InputSystemVtbl *)&UFG::InputSystem::`vftable';
+  this->vfptr = (UFG::InputSystemVtbl *)&UFG::InputSystem::`vftable;
   *(_WORD *)&this->mbSentDisconnectMsg = 0;
   this->mKeyboardIndex = -1;
   v2 = (UFG::JoyMoveWatcher *)UFG::qMalloc(0x10ui64, "JoyMoveWatcher", 0i64);
@@ -833,7 +833,7 @@ void __fastcall UFG::InputSystem::~InputSystem(UFG::InputSystem *this)
 {
   UFG::Controller *v1; // rcx
 
-  this->vfptr = (UFG::InputSystemVtbl *)&UFG::InputSystem::`vftable';
+  this->vfptr = (UFG::InputSystemVtbl *)&UFG::InputSystem::`vftable;
   v1 = this->mControllers[0];
   if ( v1 )
     ((void (__fastcall *)(UFG::Controller *, signed __int64))v1->vfptr->~Controller)(v1, 1i64);
@@ -1072,7 +1072,7 @@ void __fastcall UFG::Controller::Controller(UFG::Controller *this, int index)
   UFG::qList<UFG::ActionRemapInfo,UFG::ActionRemapInfo,1,0> *v8; // [rsp+50h] [rbp+18h]
 
   v2 = this;
-  this->vfptr = (UFG::ControllerVtbl *)&UFG::Controller::`vftable';
+  this->vfptr = (UFG::ControllerVtbl *)&UFG::Controller::`vftable;
   *(_WORD *)&this->mIsInitialized = 0;
   this->mControllerIndex = index;
   v7 = &this->mInputMessages;
@@ -1166,7 +1166,7 @@ void __fastcall UFG::Controller::~Controller(UFG::Controller *this)
   UFG::qNode<UFG::InputMessage,UFG::InputMessage> *v37; // rax
 
   v1 = this;
-  this->vfptr = (UFG::ControllerVtbl *)&UFG::Controller::`vftable';
+  this->vfptr = (UFG::ControllerVtbl *)&UFG::Controller::`vftable;
   v2 = this->mMultiInputMapEnable;
   v3 = this->mInputActionMaps;
   v4 = 32i64;

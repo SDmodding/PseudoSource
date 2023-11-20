@@ -336,7 +336,7 @@ void __fastcall hkTypeManager::hkTypeManager(hkTypeManager *this)
 
   v1 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkTypeManager::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkTypeManager::`vftable;
   hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>(
     &this->m_classMap.m_map,
     0);
@@ -388,12 +388,12 @@ void __fastcall hkTypeManager::~hkTypeManager(hkTypeManager *this)
 
   v1 = this;
   v2 = &this->m_typeFreeList;
-  v2[-2].m_elementAllocator = (hkMemoryAllocator *)&hkTypeManager::`vftable';
+  v2[-2].m_elementAllocator = (hkMemoryAllocator *)&hkTypeManager::`vftable;
   hkFreeList::freeAllMemory(v2);
   hkMultiMap<unsigned __int64,unsigned __int64,hkMultiMapOperations<unsigned __int64>,hkContainerHeapAllocator>::~hkMultiMap<unsigned __int64,unsigned __int64,hkMultiMapOperations<unsigned __int64>,hkContainerHeapAllocator>(&v1->m_typeMultiMap.m_map);
   hkStorageStringMap<hkTrackerLayoutHandler *,hkContainerHeapAllocator>::clear((hkStorageStringMap<int,hkContainerHeapAllocator> *)&v1->m_classMap);
   hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::~hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>(&v1->m_classMap.m_map);
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 250

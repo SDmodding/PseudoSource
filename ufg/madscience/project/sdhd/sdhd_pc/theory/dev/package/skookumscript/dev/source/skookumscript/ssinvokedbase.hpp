@@ -5,11 +5,11 @@ void __fastcall SSInvokedExpression::SSInvokedExpression(SSInvokedExpression *th
   AListNode<SSInvokedBase,SSInvokedBase> *v1; // rax
   AList<SSInvokedBase,SSInvokedBase> *v2; // [rsp+28h] [rbp+10h]
 
-  this->vfptr = (SSObjectBaseVtbl *)&SSObjectBase::`vftable';
+  this->vfptr = (SSObjectBaseVtbl *)&SSObjectBase::`vftable;
   v1 = (AListNode<SSInvokedBase,SSInvokedBase> *)&this->i_next_p;
   v1->i_prev_p = v1;
   v1->i_next_p = v1;
-  this->vfptr = (SSObjectBaseVtbl *)&SSInvokedBase::`vftable';
+  this->vfptr = (SSObjectBaseVtbl *)&SSInvokedBase::`vftable;
   this->i_scope_p.i_obj_p = 0i64;
   this->i_scope_p.i_ptr_id = 0;
   this->i_caller_p.i_obj_p = 0i64;
@@ -19,6 +19,6 @@ void __fastcall SSInvokedExpression::SSInvokedExpression(SSInvokedExpression *th
   v2->i_sentinel.i_next_p = &v2->i_sentinel;
   this->i_pending_count = 0;
   this->i_ptr_id = ++SSObjectBase::c_ptr_id_prev;
-  this->vfptr = (SSObjectBaseVtbl *)&SSInvokedExpression::`vftable';
+  this->vfptr = (SSObjectBaseVtbl *)&SSInvokedExpression::`vftable;
 }
 

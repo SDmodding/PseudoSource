@@ -9,7 +9,7 @@ void __fastcall hkpPoweredChainData::hkpPoweredChainData(hkpPoweredChainData *th
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_userData = 0i64;
   v2 = &this->m_atoms.m_bridgeAtom;
-  *(_QWORD *)&v2[-1].m_type.m_storage = &hkpPoweredChainData::`vftable';
+  *(_QWORD *)&v2[-1].m_type.m_storage = &hkpPoweredChainData::`vftable;
   v2->m_type.m_storage = 1;
   v1->m_infos.m_data = 0i64;
   v1->m_infos.m_size = 0;
@@ -34,7 +34,7 @@ void __fastcall hkpPoweredChainData::hkpPoweredChainData(hkpPoweredChainData *th
   v3 = f.m_finishing;
   v2 = this;
   hkpConstraintData::hkpConstraintData((hkpConstraintData *)&this->vfptr, f);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpPoweredChainData::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpPoweredChainData::`vftable;
   if ( v3 )
   {
     hkpBridgeConstraintAtom::init(&v2->m_atoms.m_bridgeAtom, v2->m_atoms.m_bridgeAtom.m_constraintData);
@@ -56,7 +56,7 @@ void __fastcall hkpPoweredChainData::~hkpPoweredChainData(hkpPoweredChainData *t
   int v7; // eax
 
   v1 = 0;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpPoweredChainData::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpPoweredChainData::`vftable;
   v2 = this;
   if ( this->m_infos.m_size > 0 )
   {
@@ -88,7 +88,7 @@ void __fastcall hkpPoweredChainData::~hkpPoweredChainData(hkpPoweredChainData *t
       96 * (v7 & 0x3FFFFFFF));
   v2->m_infos.m_data = 0i64;
   v2->m_infos.m_capacityAndFlags = 2147483648;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 73

@@ -12,12 +12,12 @@ void __fastcall Scaleform::GFx::AS3::AvmButton::AvmButton(Scaleform::GFx::AS3::A
     (Scaleform::GFx::AS3::AvmInteractiveObj *)&this->vfptr,
     (Scaleform::GFx::InteractiveObject *)&pbutton->vfptr);
   v4 = (Scaleform::GFx::AvmButtonBase *)&v3->vfptr;
-  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmDisplayObjBase::`vftable';
-  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmInteractiveObjBase::`vftable';
-  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmButtonBase::`vftable';
-  v3->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmButton::`vftable'{for `Scaleform::GFx::AS3::AvmDisplayObj'};
-  v3->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmButton::`vftable'{for `Scaleform::GFx::AvmInteractiveObjBase'};
-  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmButton::`vftable';
+  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmDisplayObjBase::`vftable;
+  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmInteractiveObjBase::`vftable;
+  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmButtonBase::`vftable;
+  v3->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmButton::`vftable{for `Scaleform::GFx::AS3::AvmDisplayObj};
+  v3->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmButton::`vftable{for `Scaleform::GFx::AvmInteractiveObjBase};
+  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmButton::`vftable;
   v2->Flags |= 0x60u;
 }
 

@@ -9,7 +9,7 @@ __int64 UFG::_dynamic_initializer_for__gCollisionInstanceInventory__()
     0xA0B2CC13,
     0,
     0);
-  UFG::gCollisionInstanceInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::CollisionInstanceInventory::`vftable';
+  UFG::gCollisionInstanceInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::CollisionInstanceInventory::`vftable;
   return atexit(UFG::_dynamic_atexit_destructor_for__gCollisionInstanceInventory__);
 }
 
@@ -24,7 +24,7 @@ __int64 UFG::_dynamic_initializer_for__gCollisionMeshBundleInventory__()
     0xBD226A08,
     0,
     0);
-  UFG::gCollisionMeshBundleInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::CollisionMeshBundleInventory::`vftable';
+  UFG::gCollisionMeshBundleInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::CollisionMeshBundleInventory::`vftable;
   return atexit(UFG::_dynamic_atexit_destructor_for__gCollisionMeshBundleInventory__);
 }
 

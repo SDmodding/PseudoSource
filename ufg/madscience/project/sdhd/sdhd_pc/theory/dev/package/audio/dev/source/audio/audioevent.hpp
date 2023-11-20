@@ -2,7 +2,7 @@
 // RVA: 0x593E30
 void __fastcall UFG::AudioEventCallbackObject::~AudioEventCallbackObject(UFG::AudioEventCallbackObject *this)
 {
-  this->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::AudioEventCallbackObject::`vftable';
+  this->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::AudioEventCallbackObject::`vftable;
 }
 
 // File Line: 121
@@ -14,7 +14,7 @@ void __fastcall UFG::AudioEventExternalSourceInfo::AudioEventExternalSourceInfo(
 
   v2 = numExternals;
   v3 = this;
-  this->vfptr = (UFG::AudioEventExternalSourceInfoVtbl *)&UFG::AudioEventExternalSourceInfo::`vftable';
+  this->vfptr = (UFG::AudioEventExternalSourceInfoVtbl *)&UFG::AudioEventExternalSourceInfo::`vftable;
   this->m_externals.p = 0i64;
   *(_QWORD *)&this->m_externals.size = 0i64;
   UFG::qArray<UFG::ExternalSourceInfoNode,0>::Reallocate(
@@ -34,7 +34,7 @@ void __fastcall UFG::AudioEventExternalSourceInfo::~AudioEventExternalSourceInfo
   UFG::ExternalSourceInfoNode *v3; // rdx
 
   v1 = this;
-  this->vfptr = (UFG::AudioEventExternalSourceInfoVtbl *)&UFG::AudioEventExternalSourceInfo::`vftable';
+  this->vfptr = (UFG::AudioEventExternalSourceInfoVtbl *)&UFG::AudioEventExternalSourceInfo::`vftable;
   v2 = this->m_externals.p;
   if ( v2 )
     UFG::qMemoryPool::Free(&g_AudioComponentPool, v2);

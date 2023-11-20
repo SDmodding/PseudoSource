@@ -36,7 +36,7 @@ void __fastcall finishLoadedObjecthkpSphereRepShape(void *p, int finishing)
   {
     v2 = p;
     hkpShape::hkpShape((hkpShape *)p, (hkFinishLoadedObjectFlag)finishing);
-    *(_QWORD *)v2 = &hkpSphereRepShape::`vftable';
+    *(_QWORD *)v2 = &hkpSphereRepShape::`vftable;
     v2[16] = 29;
   }
 }
@@ -55,7 +55,7 @@ void **__fastcall getVtablehkpSphereRepShape()
   hkpShape v1; // [rsp+20h] [rbp-28h]
 
   hkpShape::hkpShape(&v1, 0);
-  return &hkpSphereRepShape::`vftable';
+  return &hkpSphereRepShape::`vftable;
 }
 
 // File Line: 90

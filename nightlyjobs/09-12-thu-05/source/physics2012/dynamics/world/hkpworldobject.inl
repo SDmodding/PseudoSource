@@ -8,7 +8,7 @@ void __fastcall hkpWorldObject::~hkpWorldObject(hkpWorldObject *this)
   int v4; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpWorldObject::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpWorldObject::`vftable;
   v2 = this->m_collidable.m_shape;
   if ( v2 )
     hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
@@ -31,7 +31,7 @@ void __fastcall hkpWorldObject::~hkpWorldObject(hkpWorldObject *this)
       16 * v4);
   v1->m_collidable.m_collisionEntries.m_data = 0i64;
   v1->m_collidable.m_collisionEntries.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 196

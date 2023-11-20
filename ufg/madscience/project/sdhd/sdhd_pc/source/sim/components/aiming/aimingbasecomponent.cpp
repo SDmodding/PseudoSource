@@ -44,12 +44,12 @@ void __fastcall UFG::AimingBaseComponent::AimingBaseComponent(UFG::AimingBaseCom
   v4 = startSuspended;
   v5 = this;
   UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name_uid);
-  v5->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::UpdateInterface::`vftable';
+  v5->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::UpdateInterface::`vftable;
   v6 = (UFG::qNode<UFG::AimingBaseComponent,UFG::AimingBaseComponent> *)&v5->mPrev;
   v6->mPrev = v6;
   v6->mNext = v6;
-  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AimingBaseComponent::`vftable'{for `UFG::SimComponent'};
-  v5->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::AimingBaseComponent::`vftable'{for `UFG::UpdateInterface'};
+  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AimingBaseComponent::`vftable{for `UFG::SimComponent};
+  v5->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::AimingBaseComponent::`vftable{for `UFG::UpdateInterface};
   v5->m_fAimPositionDistance = 1.0;
   v5->m_fAimTransitionRadPerS = 3.0;
   v5->m_fAimTransitionMultiplier = 1.0;
@@ -117,8 +117,8 @@ void __fastcall UFG::AimingBaseComponent::~AimingBaseComponent(UFG::AimingBaseCo
   UFG::qNode<UFG::AimingBaseComponent,UFG::AimingBaseComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AimingBaseComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::AimingBaseComponent::`vftable'{for `UFG::UpdateInterface'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AimingBaseComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::AimingBaseComponent::`vftable{for `UFG::UpdateInterface};
   if ( this == UFG::AimingBaseComponent::s_AimingBaseComponentpCurrentIterator )
     UFG::AimingBaseComponent::s_AimingBaseComponentpCurrentIterator = (UFG::AimingBaseComponent *)&this->mPrev[-5].mNext;
   v2 = (UFG::qNode<UFG::AimingBaseComponent,UFG::AimingBaseComponent> *)&this->mPrev;

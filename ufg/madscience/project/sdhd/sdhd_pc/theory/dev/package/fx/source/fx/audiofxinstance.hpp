@@ -17,18 +17,18 @@ void __fastcall Render::AudioFXInstance::~AudioFXInstance(Render::AudioFXInstanc
   UFG::qNode<Render::FXComponentInstance,Render::FXComponentInstance> *v6; // rax
 
   v1 = this;
-  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::AudioFXInstance::`vftable';
+  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::AudioFXInstance::`vftable;
   UFG::OneShotHandle::Release(&this->mOneShot);
-  v2 = `UFG::qGetResourceInventory<Render::AudioFXSettings>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Render::AudioFXSettings>'::`2'::result )
+  v2 = `UFG::qGetResourceInventory<Render::AudioFXSettings>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Render::AudioFXSettings>::`2::result )
   {
     v3 = UFG::qResourceWarehouse::Instance();
     v2 = UFG::qResourceWarehouse::GetInventory(v3, 0xD77CCEB2);
-    `UFG::qGetResourceInventory<Render::AudioFXSettings>'::`2'::result = v2;
+    `UFG::qGetResourceInventory<Render::AudioFXSettings>::`2::result = v2;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mSettingsHandle.mPrev, v2);
   UFG::qResourceHandle::~qResourceHandle((UFG::qResourceHandle *)&v1->mSettingsHandle.mPrev);
-  v1->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable';
+  v1->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable;
   v4 = (UFG::qNode<Render::FXComponentInstance,Render::FXComponentInstance> *)&v1->mPrev;
   v5 = v1->mPrev;
   v6 = v1->mNext;

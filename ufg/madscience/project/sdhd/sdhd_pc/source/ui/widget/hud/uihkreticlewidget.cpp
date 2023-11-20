@@ -38,7 +38,7 @@ void __fastcall UFG::UIHKReticleWidget::HandleScreenInit(UFG::UIHKReticleWidget 
       Scaleform::GFx::Movie::GetVariable(v3, &pval, "mc_Reticle._y");
       v2->mScreenY = pval.mValue.NValue;
       UFG::qString::qString(&v20);
-      `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       v4 = UFG::gSimObjectWeaponReticleTracksEnum.m_enumLists.p;
       v5 = UFG::gSimObjectWeaponReticleTracksEnum.m_enumLists.size;
       if ( (UFG::gSimObjectWeaponReticleTracksEnum.m_enumLists.size & 0x80000000) != 0 )
@@ -97,7 +97,7 @@ void __fastcall UFG::UIHKReticleWidget::HandleScreenInit(UFG::UIHKReticleWidget 
           v5 = UFG::gSimObjectWeaponReticleTracksEnum.m_enumLists.size;
         }
       }
-      `eh vector destructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+      `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
       UFG::qString::~qString(&v20);
       if ( ((unsigned int)pval.Type >> 6) & 1 )
         (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pval.pObjectInterface->vfptr->gap8[8])(
@@ -497,7 +497,7 @@ LABEL_103:
             v4->mTypeChanged = 0;
             if ( v4->mType )
             {
-              `eh vector constructor iterator'(
+              `eh vector constructor iterator(
                 &ptr,
                 0x30ui64,
                 1,
@@ -514,7 +514,7 @@ LABEL_103:
               LODWORD(ppathToVar) = 6;
               v62 = v15;
               Scaleform::GFx::Movie::Invoke(v6, "setReticleType", 0i64, (Scaleform::GFx::Value *)&ptr, 1u);
-              `eh vector destructor iterator'(
+              `eh vector destructor iterator(
                 &ptr,
                 0x30ui64,
                 1,
@@ -531,7 +531,7 @@ LABEL_109:
           }
           v4->mFactionChanged = 0;
           UFG::qString::qString(&v69);
-          `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+          `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
           v11 = v4->mTargetFaction;
           if ( v11 )
           {
@@ -552,7 +552,7 @@ LABEL_24:
                 LODWORD(ppathToVar) = 6;
                 v62 = v14;
                 Scaleform::GFx::Movie::Invoke(v6, "setReticleFaction", 0i64, (Scaleform::GFx::Value *)&ptr, 1u);
-                `eh vector destructor iterator'(
+                `eh vector destructor iterator(
                   &ptr,
                   0x30ui64,
                   1,
@@ -577,7 +577,7 @@ LABEL_24:
         *(_WORD *)&v4->mStateChanged = 256;
         UFG::qString::qString(&v69, &customWorldMapCaption);
         UFG::GameStatTracker::Instance();
-        `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+        `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
         if ( v4->mState == 2 )
         {
           v9 = "free_aim";
@@ -598,7 +598,7 @@ LABEL_13:
             LODWORD(ppathToVar) = 6;
             v62 = v10;
             Scaleform::GFx::Movie::Invoke(v6, "setReticleState", 0i64, (Scaleform::GFx::Value *)&ptr, 1u);
-            `eh vector destructor iterator'(
+            `eh vector destructor iterator(
               &ptr,
               0x30ui64,
               1,

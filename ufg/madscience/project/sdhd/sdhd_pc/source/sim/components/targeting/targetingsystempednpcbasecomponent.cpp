@@ -37,8 +37,8 @@ void __fastcall UFG::TargetingSystemPedNPCBaseComponent::TargetingSystemPedNPCBa
   v5 = (UFG::qNode<UFG::TargetingSystemPedNPCBaseComponent,UFG::TargetingSystemPedNPCBaseComponent> *)&v4->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TargetingSystemPedNPCBaseComponent::`vftable'{for `UFG::SimComponent'};
-  v4->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::TargetingSystemPedNPCBaseComponent::`vftable'{for `UFG::UpdateInterface'};
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TargetingSystemPedNPCBaseComponent::`vftable{for `UFG::SimComponent};
+  v4->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::TargetingSystemPedNPCBaseComponent::`vftable{for `UFG::UpdateInterface};
   UFG::RebindingComponentHandle<UFG::AIActionTreeComponent,0>::RebindingComponentHandle<UFG::AIActionTreeComponent,0>(&v4->m_pAIActionTreeComponent);
   v6 = UFG::TargetingSystemPedNPCBaseComponent::s_TargetingSystemPedNPCBaseComponentList.mNode.mPrev;
   UFG::TargetingSystemPedNPCBaseComponent::s_TargetingSystemPedNPCBaseComponentList.mNode.mPrev->mNext = (UFG::qNode<UFG::TargetingSystemPedNPCBaseComponent,UFG::TargetingSystemPedNPCBaseComponent> *)&v4->mPrev;
@@ -64,8 +64,8 @@ void __fastcall UFG::TargetingSystemPedNPCBaseComponent::~TargetingSystemPedNPCB
   UFG::qNode<UFG::TargetingSystemPedNPCBaseComponent,UFG::TargetingSystemPedNPCBaseComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TargetingSystemPedNPCBaseComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::TargetingSystemPedNPCBaseComponent::`vftable'{for `UFG::UpdateInterface'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TargetingSystemPedNPCBaseComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::TargetingSystemPedNPCBaseComponent::`vftable{for `UFG::UpdateInterface};
   if ( this == UFG::TargetingSystemPedNPCBaseComponent::s_TargetingSystemPedNPCBaseComponentpCurrentIterator )
     UFG::TargetingSystemPedNPCBaseComponent::s_TargetingSystemPedNPCBaseComponentpCurrentIterator = (UFG::TargetingSystemPedNPCBaseComponent *)&this->mPrev[-174].mNext;
   v2 = (UFG::qNode<UFG::TargetingSystemPedNPCBaseComponent,UFG::TargetingSystemPedNPCBaseComponent> *)&this->mPrev;

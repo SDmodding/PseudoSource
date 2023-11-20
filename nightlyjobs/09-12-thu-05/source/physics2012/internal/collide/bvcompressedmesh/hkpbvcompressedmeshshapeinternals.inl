@@ -524,7 +524,7 @@ LABEL_67:
   v4->m_aabb.m_max = (hkVector4f)v72[1].m_quad;
   v73 = (hkReferencedObject *)v75.m_childShape.vfptr;
   v4->m_numVertices = v3->m_caches.m_data[v5]->m_vertices.m_size;
-  v75.m_childShape.vfptr = (hkpShapeContainerVtbl *)&hkpSingleShapeContainer::`vftable';
+  v75.m_childShape.vfptr = (hkpShapeContainerVtbl *)&hkpSingleShapeContainer::`vftable;
   if ( v73 )
     hkReferencedObject::removeReference(v73);
 }

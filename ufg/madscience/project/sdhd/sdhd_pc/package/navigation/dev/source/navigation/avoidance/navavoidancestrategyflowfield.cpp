@@ -6,7 +6,7 @@ void __fastcall UFG::NavAvoidanceStrategyFlowField::NavAvoidanceStrategyFlowFiel
 
   v1 = this;
   UFG::NavAvoidanceStrategy::NavAvoidanceStrategy((UFG::NavAvoidanceStrategy *)&this->vfptr);
-  v1->vfptr = (UFG::NavAvoidanceStrategyVtbl *)&UFG::NavAvoidanceStrategyFlowField::`vftable';
+  v1->vfptr = (UFG::NavAvoidanceStrategyVtbl *)&UFG::NavAvoidanceStrategyFlowField::`vftable;
 }
 
 // File Line: 22

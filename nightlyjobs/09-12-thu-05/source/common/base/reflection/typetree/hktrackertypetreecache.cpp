@@ -10,7 +10,7 @@ void __fastcall hkTrackerTypeTreeCache::hkTrackerTypeTreeCache(hkTrackerTypeTree
 
   v1 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkTrackerTypeTreeCache::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkTrackerTypeTreeCache::`vftable;
   v2 = (hkMemoryAllocator **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
   hkFreeList::hkFreeList(&v1->m_nodeFreeList, 0x30ui64, 8ui64, 0x400ui64, v2[11], 0i64);
   hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>(

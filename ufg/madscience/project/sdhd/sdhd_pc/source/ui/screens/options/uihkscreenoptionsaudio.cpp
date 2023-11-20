@@ -46,7 +46,7 @@ void __fastcall UFG::UIHKScreenOptionsAudio::UIHKScreenOptionsAudio(UFG::UIHKScr
   v1 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -57,12 +57,12 @@ void __fastcall UFG::UIHKScreenOptionsAudio::UIHKScreenOptionsAudio(UFG::UIHKScr
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenOptions::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenOptions::`vftable;
   *(_QWORD *)&this->mState = 0i64;
   this->mOptionChanged = 0;
   *(_QWORD *)&this->mSavingDialogTimer = 0i64;
   this->mHelpBarName = "OPTIONS";
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenOptionsAudio::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenOptionsAudio::`vftable;
   *(_QWORD *)&this->oldSFX = 0i64;
   *(_QWORD *)&this->oldDiag = 0i64;
 }
@@ -117,7 +117,7 @@ void __fastcall UFG::UIHKScreenOptionsAudio::init(UFG::UIHKScreenOptionsAudio *t
     v2->oldMusic = UFG::GameStatTracker::GetStat(v5, VolumeMusic);
     v2->oldDiag = UFG::GameStatTracker::GetStat(v5, VolumeDialogue);
     v2->oldCar = UFG::GameStatTracker::GetStat(v5, VolumeCarMusic);
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     v6 = (double)v2->oldSFX;
     if ( (v12 >> 6) & 1 )
     {
@@ -163,7 +163,7 @@ void __fastcall UFG::UIHKScreenOptionsAudio::init(UFG::UIHKScreenOptionsAudio *t
     v24 = v9;
     Scaleform::GFx::Movie::Invoke(v4, "OptionList_SetValues", 0i64, (Scaleform::GFx::Value *)&ptr, 4u);
     Scaleform::GFx::Movie::Invoke(v4, "OptionList_PlayIntro", 0i64, 0i64, 0);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
   if ( UFG::HudAudio::m_instance )
     UFG::AudioEntity::CreateAndPlayEvent(

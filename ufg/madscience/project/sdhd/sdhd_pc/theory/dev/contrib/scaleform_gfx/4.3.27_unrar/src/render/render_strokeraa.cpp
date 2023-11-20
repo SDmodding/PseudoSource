@@ -2,8 +2,8 @@
 // RVA: 0x9451D0
 void __fastcall Scaleform::Render::StrokerAA::StrokerAA(Scaleform::Render::StrokerAA *this, Scaleform::Render::LinearHeap *heap)
 {
-  this->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable';
-  this->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::StrokerAA::`vftable';
+  this->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable;
+  this->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::StrokerAA::`vftable;
   this->LineJoin = 2;
   this->StartLineCap = 2;
   this->EndLineCap = 2;

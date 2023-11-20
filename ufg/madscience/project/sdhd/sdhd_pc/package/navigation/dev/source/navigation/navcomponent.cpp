@@ -39,14 +39,14 @@ void __fastcall UFG::NavComponent::NavComponent(UFG::NavComponent *this, unsigne
   v3 = (UFG::qNode<UFG::NavComponent,UFG::NavComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::NavComponent::`vftable';
-  v2->m_navPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::NavComponent::`vftable;
+  v2->m_navPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable;
   v4 = UFG::qVector3::msZero.y;
   v5 = UFG::qVector3::msZero.z;
   v2->m_navPosition.m_vPosition.x = UFG::qVector3::msZero.x;
   v2->m_navPosition.m_vPosition.y = v4;
   v2->m_navPosition.m_vPosition.z = v5;
-  v2->m_navPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable';
+  v2->m_navPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable;
   v2->m_navPosition.m_bValid = 0;
   *(_QWORD *)&v2->m_navPosition.m_packedKey = -1i64;
   v2->m_navPosition.m_hkvMeshPosition.m_quad = _mm_unpacklo_ps(
@@ -101,7 +101,7 @@ void __fastcall UFG::NavComponent::~NavComponent(UFG::NavComponent *this)
   UFG::qNode<UFG::NavComponent,UFG::NavComponent> *v12; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::NavComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::NavComponent::`vftable;
   if ( this == UFG::NavComponent::s_NavComponentpCurrentIterator )
     UFG::NavComponent::s_NavComponentpCurrentIterator = (UFG::NavComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::NavComponent,UFG::NavComponent> *)&this->mPrev;
@@ -272,7 +272,7 @@ void __fastcall UFG::NavComponent::OnAttach(UFG::NavComponent *this, UFG::SimObj
     && LODWORD(v4[3].m_SafePointerList.mNode.mPrev) != 17 )
   {
     v3->m_TicketType = 5;
-    v16 =  UFG::NavComponent::`vcall'{128,{flat}};
+    v16 =  UFG::NavComponent::`vcall{128,{flat}};
     v15 = Assembly::GetRCX(v3);
     UFG::TicketBoothManager::Register(
       UFG::TicketBoothManager::mpSingleton,
@@ -285,7 +285,7 @@ void __fastcall UFG::NavComponent::OnAttach(UFG::NavComponent *this, UFG::SimObj
     v3->m_TicketType = 4;
     v16 = (__int64 (__fastcall *)(__int64))_;
     v15 = Assembly::GetRCX(v3);
-    v18 =  UFG::NavComponent::`vcall'{128,{flat}};
+    v18 =  UFG::NavComponent::`vcall{128,{flat}};
     v17 = Assembly::GetRCX(v3);
     UFG::TicketBoothManager::Register(
       UFG::TicketBoothManager::mpSingleton,
@@ -675,7 +675,7 @@ __int64 __fastcall UFG::NavComponent::AIRayCastHits(UFG::NavComponent *this, UFG
   v5 = (__m128)LODWORD(vEnd->z);
   v11 = 0;
   v13 = -1i64;
-  v7 = &UFG::HavokNavPosition::`vftable';
+  v7 = &UFG::HavokNavPosition::`vftable;
   v8 = v3.m128_i32[0];
   v9 = v4.m128_i32[0];
   v10 = v5.m128_i32[0];

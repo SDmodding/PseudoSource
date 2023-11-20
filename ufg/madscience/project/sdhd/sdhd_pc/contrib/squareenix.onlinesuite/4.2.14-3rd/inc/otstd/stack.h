@@ -4,8 +4,8 @@ void __fastcall OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::~TSta
 {
   OSuite::TList<OSuite::ZRedBlackTreeBase::ZElementBase *> *v1; // rcx
 
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable'{for `OSuite::ZObject'};
-  this->vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable'{for `OSuite::IHashable'};
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable{for `OSuite::ZObject};
+  this->vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable{for `OSuite::IHashable};
   v1 = this->m_pList;
   if ( v1 )
     v1->vfptr->__vecDelDtor((OSuite::ZObject *)&v1->vfptr, 1u);

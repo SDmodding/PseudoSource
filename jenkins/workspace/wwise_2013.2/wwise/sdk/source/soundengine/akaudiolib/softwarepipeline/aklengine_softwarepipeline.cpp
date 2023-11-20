@@ -315,15 +315,15 @@ void __fastcall CAkLEngine::SetBusVolume(unsigned int in_MixBusID, float in_Volu
       v7 = v6 * 0.050000001;
       if ( v7 >= -37.0 )
       {
-        if ( `AkMath::FastPow10'::`4'::`local static guard' & 1 )
+        if ( `AkMath::FastPow10::`4::`local static guard & 1 )
         {
-          v9 = *(float *)&`AkMath::FastPow10'::`4'::SCALE;
+          v9 = *(float *)&`AkMath::FastPow10::`4::SCALE;
         }
         else
         {
           v9 = FLOAT_2_7866352e7;
-          `AkMath::FastPow10'::`4'::`local static guard' |= 1u;
-          `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
+          `AkMath::FastPow10::`4::`local static guard |= 1u;
+          `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
         }
         v8 = (float)((float)((float)((float)(COERCE_FLOAT(
                                                ((signed int)(float)((float)(v9 * v7) + 1065353200.0) & 0x7FFFFF)
@@ -2096,15 +2096,15 @@ LABEL_12:
   {
     if ( (float)(v5 * 0.050000001) >= -37.0 )
     {
-      if ( `AkMath::FastPow10'::`4'::`local static guard' & 1 )
+      if ( `AkMath::FastPow10::`4::`local static guard & 1 )
       {
-        v23 = *(float *)&`AkMath::FastPow10'::`4'::SCALE;
+        v23 = *(float *)&`AkMath::FastPow10::`4::SCALE;
       }
       else
       {
         v23 = FLOAT_2_7866352e7;
-        `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
-        `AkMath::FastPow10'::`4'::`local static guard' |= 1u;
+        `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
+        `AkMath::FastPow10::`4::`local static guard |= 1u;
       }
       v24 = (signed int)(float)((float)((float)(v5 * 0.050000001) * v23) + 1065353200.0);
       LODWORD(out_fHdrThreshold) = (v24 & 0x7FFFFF) + 1065353216;

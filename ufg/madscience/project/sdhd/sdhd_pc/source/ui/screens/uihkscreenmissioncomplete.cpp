@@ -249,7 +249,7 @@ void __fastcall UFG::UIHKScreenMissionComplete::UIHKScreenMissionComplete(UFG::U
   v2 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -260,7 +260,7 @@ void __fastcall UFG::UIHKScreenMissionComplete::UIHKScreenMissionComplete(UFG::U
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenMissionComplete::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenMissionComplete::`vftable;
   UFG::UIHKDepthOfFieldWidget::UIHKDepthOfFieldWidget(&this->DoF);
   v1->mEnableUpgradesShortcut = 0;
   UFG::UIHKScreenMissionComplete::mState = 2;
@@ -278,7 +278,7 @@ void __fastcall UFG::UIHKScreenMissionComplete::~UIHKScreenMissionComplete(UFG::
   int v3; // eax
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenMissionComplete::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenMissionComplete::`vftable;
   if ( UFG::UIHKScreenMissionComplete::mLoadedBank )
   {
     UFG::SoundBankManager::QueueBankForUnload(&UFG::UIHKScreenMissionComplete::mStingerBank);
@@ -1501,7 +1501,7 @@ void __fastcall UFG::UIHKScreenMissionComplete::Flash_Init(UFG::UIHKScreenMissio
         if ( v42 )
         {
           *(_QWORD *)&value.Type = Scaleform::GFx::Value::~Value;
-          `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+          `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
           v43 = v42->mCaption.mData;
           if ( (LODWORD(ptr.mData) >> 6) & 1 )
           {
@@ -1514,7 +1514,7 @@ void __fastcall UFG::UIHKScreenMissionComplete::Flash_Init(UFG::UIHKScreenMissio
           LODWORD(ptr.mData) = 6;
           *(_QWORD *)&ptr.mStringHash32 = v43;
           Scaleform::GFx::Movie::Invoke(v2, "AddReward", 0i64, (Scaleform::GFx::Value *)&ptr, 1u);
-          `eh vector destructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+          `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
           v41 = UFG::UIHKScreenMissionComplete::mRewardQueue.size;
         }
         ++v40;
@@ -1522,7 +1522,7 @@ void __fastcall UFG::UIHKScreenMissionComplete::Flash_Init(UFG::UIHKScreenMissio
       while ( v40 < v41 );
     }
     *(_QWORD *)&value.Type = Scaleform::GFx::Value::~Value;
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( (LODWORD(ptr.mData) >> 6) & 1 )
     {
       (*(void (__fastcall **)(_QWORD, UFG::qString *, _QWORD))(**(_QWORD **)&ptr.mMagic + 16i64))(
@@ -1534,7 +1534,7 @@ void __fastcall UFG::UIHKScreenMissionComplete::Flash_Init(UFG::UIHKScreenMissio
     LODWORD(ptr.mData) = 6;
     *(_QWORD *)&ptr.mStringHash32 = v39;
     Scaleform::GFx::Movie::Invoke(v2, "Init", 0i64, (Scaleform::GFx::Value *)&ptr, 1u);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     UFG::UIHKScreenMissionComplete::Flash_InitHeader(v1);
     UFG::UIHKScreenMissionComplete::Flash_SetTitleCaption(v1);
     if ( ((unsigned int)value.Type >> 6) & 1 )
@@ -1619,7 +1619,7 @@ void __fastcall UFG::UIHKScreenMissionComplete::Flash_InitHeader(UFG::UIHKScreen
     {
       v3 = "mission";
     }
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( (v6 >> 6) & 1 )
     {
       (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v5 + 16i64))(v5, &ptr, v7);
@@ -1628,7 +1628,7 @@ void __fastcall UFG::UIHKScreenMissionComplete::Flash_InitHeader(UFG::UIHKScreen
     v6 = 6;
     v7 = v3;
     Scaleform::GFx::Movie::Invoke(v1, "Init_Header", 0i64, (Scaleform::GFx::Value *)&ptr, 1u);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 
@@ -1757,7 +1757,7 @@ void __fastcall UFG::UIHKScreenMissionComplete::SendRacerInfoToFlash(UFG::UIHKSc
   v1 = UFG::UIScreen::getMovieSafe((UFG::UIScreen *)&this->vfptr);
   if ( v1 )
   {
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 5, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 5, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     v2 = 0;
     v3 = (signed int *)&unk_1424312E8;
     do
@@ -1818,7 +1818,7 @@ void __fastcall UFG::UIHKScreenMissionComplete::SendRacerInfoToFlash(UFG::UIHKSc
       v3 += 14;
     }
     while ( v2 < 6 );
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 5, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 5, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 

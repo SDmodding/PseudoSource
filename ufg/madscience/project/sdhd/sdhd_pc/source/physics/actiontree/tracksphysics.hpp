@@ -7,8 +7,8 @@ void __fastcall GravityTrack::~GravityTrack(GravityTrack *this)
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&GravityTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&GravityTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -19,7 +19,7 @@ void __fastcall GravityTrack::~GravityTrack(GravityTrack *this)
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 27
@@ -42,8 +42,8 @@ void __fastcall DisableCollisionTrack::~DisableCollisionTrack(DisableCollisionTr
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&DisableCollisionTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&DisableCollisionTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -54,7 +54,7 @@ void __fastcall DisableCollisionTrack::~DisableCollisionTrack(DisableCollisionTr
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 50
@@ -106,8 +106,8 @@ void __fastcall DetailedOnGroundTrack::~DetailedOnGroundTrack(DetailedOnGroundTr
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&DetailedOnGroundTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&DetailedOnGroundTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -118,7 +118,7 @@ void __fastcall DetailedOnGroundTrack::~DetailedOnGroundTrack(DetailedOnGroundTr
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 124
@@ -141,8 +141,8 @@ void __fastcall VelocitySlopeModeTrack::~VelocitySlopeModeTrack(VelocitySlopeMod
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&VelocitySlopeModeTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&VelocitySlopeModeTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -153,7 +153,7 @@ void __fastcall VelocitySlopeModeTrack::~VelocitySlopeModeTrack(VelocitySlopeMod
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 139
@@ -172,8 +172,8 @@ void __fastcall SlopeLocomotionFixupTrack::~SlopeLocomotionFixupTrack(SlopeLocom
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&SlopeLocomotionFixupTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&SlopeLocomotionFixupTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -184,7 +184,7 @@ void __fastcall SlopeLocomotionFixupTrack::~SlopeLocomotionFixupTrack(SlopeLocom
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 159
@@ -199,8 +199,8 @@ SlopeLocomotionFixupTrack *__fastcall SlopeLocomotionFixupTrack::Create()
   if ( !v0 )
     return 0i64;
   ITrack::ITrack((ITrack *)v0, SlopeLocomotionFixupTrack::sClassNameUID);
-  *(_QWORD *)v1 = &Track<SlopeLocomotionFixupTask>::`vftable';
-  *(_QWORD *)v1 = &SlopeLocomotionFixupTrack::`vftable';
+  *(_QWORD *)v1 = &Track<SlopeLocomotionFixupTask>::`vftable;
+  *(_QWORD *)v1 = &SlopeLocomotionFixupTrack::`vftable;
   *((_DWORD *)v1 + 14) = 1060437492;
   v1[60] = 1;
   return (SlopeLocomotionFixupTrack *)v1;
@@ -215,8 +215,8 @@ void __fastcall ExplosionTrack::~ExplosionTrack(ExplosionTrack *this)
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&ExplosionTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&ExplosionTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -227,7 +227,7 @@ void __fastcall ExplosionTrack::~ExplosionTrack(ExplosionTrack *this)
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 182
@@ -275,8 +275,8 @@ void __fastcall CollisionDisableAgainstTargetTrack::~CollisionDisableAgainstTarg
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&CollisionDisableAgainstTargetTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&CollisionDisableAgainstTargetTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -287,7 +287,7 @@ void __fastcall CollisionDisableAgainstTargetTrack::~CollisionDisableAgainstTarg
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 276
@@ -307,8 +307,8 @@ CollisionDisableAgainstTargetTrack *__fastcall CollisionDisableAgainstTargetTrac
   if ( !v0 )
     return 0i64;
   ITrack::ITrack((ITrack *)v0, CollisionDisableAgainstTargetTrack::sClassNameUID);
-  *(_QWORD *)v1 = &Track<CollisionDisableAgainstTargetTask>::`vftable';
-  *(_QWORD *)v1 = &CollisionDisableAgainstTargetTrack::`vftable';
+  *(_QWORD *)v1 = &Track<CollisionDisableAgainstTargetTask>::`vftable;
+  *(_QWORD *)v1 = &CollisionDisableAgainstTargetTrack::`vftable;
   *((_DWORD *)v1 + 14) = 0;
   return (CollisionDisableAgainstTargetTrack *)v1;
 }

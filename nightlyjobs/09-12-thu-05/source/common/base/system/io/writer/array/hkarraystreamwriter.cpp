@@ -390,7 +390,7 @@ void __fastcall hkMemoryTrackStreamReader::hkMemoryTrackStreamReader(hkMemoryTra
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_memType = t;
-  this->vfptr = (hkBaseObjectVtbl *)&hkMemoryTrackStreamReader::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkMemoryTrackStreamReader::`vftable;
   this->m_track = track;
   this->m_overflowOffset = -1;
   this->m_unloadSectorsAfterRead = unloadSectorsAfterRead;
@@ -407,7 +407,7 @@ void __fastcall hkMemoryTrackStreamReader::~hkMemoryTrackStreamReader(hkMemoryTr
 
   v1 = this->m_memType == 1;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkMemoryTrackStreamReader::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkMemoryTrackStreamReader::`vftable;
   if ( v1 )
   {
     v3 = this->m_track;
@@ -416,16 +416,16 @@ void __fastcall hkMemoryTrackStreamReader::~hkMemoryTrackStreamReader(hkMemoryTr
       hkMemoryTrack::~hkMemoryTrack(this->m_track);
       v4 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
       (*(void (__fastcall **)(_QWORD *, hkMemoryTrack *, signed __int64))(*v4[11] + 16i64))(v4[11], v3, 32i64);
-      v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+      v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
     }
     else
     {
-      this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+      this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
     }
   }
   else
   {
-    this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+    this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
   }
 }
 

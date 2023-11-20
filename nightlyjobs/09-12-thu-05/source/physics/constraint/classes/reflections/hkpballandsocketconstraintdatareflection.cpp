@@ -78,7 +78,7 @@ void __fastcall finishLoadedObjecthkpBallAndSocketConstraintData(void *p, int fi
   {
     v2 = p;
     hkpConstraintData::hkpConstraintData((hkpConstraintData *)p, (hkFinishLoadedObjectFlag)finishing);
-    *v2 = &hkpBallAndSocketConstraintData::`vftable';
+    *v2 = &hkpBallAndSocketConstraintData::`vftable;
   }
 }
 
@@ -96,7 +96,7 @@ void **__fastcall getVtablehkpBallAndSocketConstraintData()
   hkpConstraintData v1; // [rsp+20h] [rbp-78h]
 
   hkpConstraintData::hkpConstraintData(&v1, 0);
-  return &hkpBallAndSocketConstraintData::`vftable';
+  return &hkpBallAndSocketConstraintData::`vftable;
 }
 
 // File Line: 154

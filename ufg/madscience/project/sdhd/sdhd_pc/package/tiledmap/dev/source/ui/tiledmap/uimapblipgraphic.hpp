@@ -11,7 +11,7 @@ void __fastcall UFG::UIMapBlipGraphicCop::UIMapBlipGraphicCop(UFG::UIMapBlipGrap
 {
   UFG::UIRenderQuad *v1; // rax
 
-  this->vfptr = (UFG::UIMapBlipGraphicVtbl *)&UFG::UIMapBlipGraphic::`vftable';
+  this->vfptr = (UFG::UIMapBlipGraphicVtbl *)&UFG::UIMapBlipGraphic::`vftable;
   this->mAnimateBlink = 0;
   *(_QWORD *)&this->mBlinkScale = 1065353216i64;
   this->mBlinkTimesMax = 5;
@@ -25,7 +25,7 @@ void __fastcall UFG::UIMapBlipGraphicCop::UIMapBlipGraphicCop(UFG::UIMapBlipGrap
   this->mPolys[2] = 0i64;
   this->mPolys[3] = 0i64;
   this->mPolys[4] = 0i64;
-  this->vfptr = (UFG::UIMapBlipGraphicVtbl *)&UFG::UIMapBlipGraphicCop::`vftable';
+  this->vfptr = (UFG::UIMapBlipGraphicVtbl *)&UFG::UIMapBlipGraphicCop::`vftable;
   *(_QWORD *)&this->mFrameCount = 0i64;
   this->mColor.r = UFG::qColour::DogerBlue.r;
   this->mColor.g = UFG::qColour::DogerBlue.g;
@@ -46,7 +46,7 @@ void __fastcall UFG::UIMapBlipGraphicWitness::UIMapBlipGraphicWitness(UFG::UIMap
 {
   UFG::UIRenderQuad *v1; // rax
 
-  this->vfptr = (UFG::UIMapBlipGraphicVtbl *)&UFG::UIMapBlipGraphic::`vftable';
+  this->vfptr = (UFG::UIMapBlipGraphicVtbl *)&UFG::UIMapBlipGraphic::`vftable;
   this->mAnimateBlink = 0;
   *(_QWORD *)&this->mBlinkScale = 1065353216i64;
   this->mBlinkTimesMax = 5;
@@ -60,7 +60,7 @@ void __fastcall UFG::UIMapBlipGraphicWitness::UIMapBlipGraphicWitness(UFG::UIMap
   this->mPolys[2] = 0i64;
   this->mPolys[3] = 0i64;
   this->mPolys[4] = 0i64;
-  this->vfptr = (UFG::UIMapBlipGraphicVtbl *)&UFG::UIMapBlipGraphicWitness::`vftable';
+  this->vfptr = (UFG::UIMapBlipGraphicVtbl *)&UFG::UIMapBlipGraphicWitness::`vftable;
   this->mAlpha = 1.0;
   this->mPulse = 0;
 }

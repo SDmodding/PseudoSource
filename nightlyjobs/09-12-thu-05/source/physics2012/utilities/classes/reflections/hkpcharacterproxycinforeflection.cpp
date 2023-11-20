@@ -31,7 +31,7 @@ hkClass *__fastcall hkpCharacterProxyCinfo::staticClass()
 void __fastcall finishLoadedObjecthkpCharacterProxyCinfo(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpCharacterProxyCinfo::`vftable';
+    *(_QWORD *)p = &hkpCharacterProxyCinfo::`vftable;
 }
 
 // File Line: 328
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkpCharacterProxyCinfo(void *p)
 // RVA: 0xE0A5E0
 void **__fastcall getVtablehkpCharacterProxyCinfo()
 {
-  return &hkpCharacterProxyCinfo::`vftable';
+  return &hkpCharacterProxyCinfo::`vftable;
 }
 
 // File Line: 354

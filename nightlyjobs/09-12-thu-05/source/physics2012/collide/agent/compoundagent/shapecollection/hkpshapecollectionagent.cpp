@@ -67,7 +67,7 @@ hkpShapeCollectionAgent *__fastcall hkpShapeCollectionAgent::createListBAgent(hk
   if ( result )
   {
     hkpShapeCollectionAgent::hkpShapeCollectionAgent(result, v7, v4, v6, v5);
-    v10->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpShapeCollectionAgent>::`vftable';
+    v10->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpShapeCollectionAgent>::`vftable;
     result = (hkpShapeCollectionAgent *)v10;
   }
   return result;
@@ -109,7 +109,7 @@ void __fastcall hkpShapeCollectionAgent::hkpShapeCollectionAgent(hkpShapeCollect
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v6 = (signed int *)&this->m_agents;
   this->m_contactMgr = v5;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpShapeCollectionAgent::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpShapeCollectionAgent::`vftable;
   v6[2] = 0;
   v6[3] = -2147483644;
   v29 = bodyA;

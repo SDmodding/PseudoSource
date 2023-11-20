@@ -34,7 +34,7 @@ void __fastcall UFG::TransformNodeComponent::TransformNodeComponent(UFG::Transfo
   v7 = (UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *)&v6->mPrev;
   v7->mPrev = v7;
   v7->mNext = v7;
-  v6->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TransformNodeComponent::`vftable';
+  v6->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TransformNodeComponent::`vftable;
   v16 = &v6->mChildren;
   v16->mNode.mPrev = &v16->mNode;
   v16->mNode.mNext = &v16->mNode;
@@ -109,7 +109,7 @@ void __fastcall UFG::TransformNodeComponent::~TransformNodeComponent(UFG::Transf
   UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *v16; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TransformNodeComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TransformNodeComponent::`vftable;
   v2 = &this->mChildren;
   if ( (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> **)&this->mChildren.mNode.mNext[-4] != &this->m_SafePointerList.mNode.mNext )
   {

@@ -7,12 +7,12 @@ void __fastcall Scaleform::GFx::XML::Node::Node(Scaleform::GFx::XML::Node *this,
 
   v3 = type;
   v4 = this;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,326>::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseNTS<Scaleform::GFx::XML::Node,326>::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::XML::Node::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,326>::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseNTS<Scaleform::GFx::XML::Node,326>::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::XML::Node::`vftable;
   if ( memMgr )
     ++memMgr->RefCount;
   this->MemoryManager.pObject = memMgr;
@@ -32,12 +32,12 @@ void __fastcall Scaleform::GFx::XML::Node::Node(Scaleform::GFx::XML::Node *this,
   Scaleform::GFx::XML::DOMStringNode *v5; // rcx
   bool v6; // zf
 
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,326>::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseNTS<Scaleform::GFx::XML::Node,326>::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::XML::Node::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,326>::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseNTS<Scaleform::GFx::XML::Node,326>::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::XML::Node::`vftable;
   if ( memMgr )
     ++memMgr->RefCount;
   this->MemoryManager.pObject = memMgr;
@@ -68,7 +68,7 @@ void __fastcall Scaleform::GFx::XML::Node::~Node(Scaleform::GFx::XML::Node *this
   Scaleform::RefCountNTSImpl *v6; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::XML::Node::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::XML::Node::`vftable;
   v2 = this->pShadow;
   if ( v2 )
     v2->vfptr->__vecDelDtor(v2, 1u);
@@ -106,7 +106,7 @@ void __fastcall Scaleform::GFx::XML::ElementNode::ElementNode(Scaleform::GFx::XM
     memMgr,
     1,
     (Scaleform::GFx::XML::DOMString)&valuea);
-  v5->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::XML::ElementNode::`vftable';
+  v5->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::XML::ElementNode::`vftable;
   Scaleform::GFx::XML::ObjectManager::EmptyString(v4, &v5->Prefix);
   Scaleform::GFx::XML::ObjectManager::EmptyString(v4, &v5->Namespace);
   v5->FirstAttribute = 0i64;
@@ -144,7 +144,7 @@ void __fastcall Scaleform::GFx::XML::ElementNode::~ElementNode(Scaleform::GFx::X
   Scaleform::GFx::XML::Attribute *v18; // [rsp+70h] [rbp+18h]
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::XML::ElementNode::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::XML::ElementNode::`vftable;
   for ( i = this->LastChild; i; i->NextSibling.pObject = 0i64 )
   {
     i->Parent = 0i64;
@@ -615,7 +615,7 @@ void __fastcall Scaleform::GFx::XML::TextNode::TextNode(Scaleform::GFx::XML::Tex
     memMgr,
     3,
     (Scaleform::GFx::XML::DOMString)&v7);
-  v4->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::XML::TextNode::`vftable';
+  v4->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::XML::TextNode::`vftable;
   v5 = (Scaleform::GFx::XML::DOMStringNode *)v3->pData;
   v6 = *((_DWORD *)v3->pData + 6) == 1;
   --v5->RefCount;
@@ -653,14 +653,14 @@ void __fastcall Scaleform::GFx::XML::Document::Document(Scaleform::GFx::XML::Doc
   v2 = memMgr;
   v3 = this;
   Scaleform::GFx::XML::Node::Node((Scaleform::GFx::XML::Node *)&this->vfptr, memMgr, 1);
-  v3->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::XML::ElementNode::`vftable';
+  v3->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::XML::ElementNode::`vftable;
   Scaleform::GFx::XML::ObjectManager::EmptyString(v2, &v3->Prefix);
   Scaleform::GFx::XML::ObjectManager::EmptyString(v2, &v3->Namespace);
   v3->FirstAttribute = 0i64;
   v3->LastAttribute = 0i64;
   v3->FirstChild.pObject = 0i64;
   v3->LastChild = 0i64;
-  v3->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::XML::Document::`vftable';
+  v3->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::XML::Document::`vftable;
   Scaleform::GFx::XML::ObjectManager::EmptyString(v3->MemoryManager.pObject, &v3->XMLVersion);
   Scaleform::GFx::XML::ObjectManager::EmptyString(v3->MemoryManager.pObject, &v3->Encoding);
   v3->Standalone = -1;

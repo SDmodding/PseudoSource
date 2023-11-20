@@ -1,6 +1,6 @@
 // File Line: 42
 // RVA: 0x5DDF0
-void __fastcall `anonymous namespace'::ApplyDiffuseTextureStateOverrides(Illusion::StateValues *state_values)
+void __fastcall `anonymous namespace::ApplyDiffuseTextureStateOverrides(Illusion::StateValues *state_values)
 {
   _QWORD *v1; // r8
   signed __int64 v2; // rdx
@@ -34,7 +34,7 @@ void __fastcall `anonymous namespace'::ApplyDiffuseTextureStateOverrides(Illusio
 
 // File Line: 85
 // RVA: 0x5DE50
-void __fastcall `anonymous namespace'::ApplyHKAlphaTestFixup(Illusion::StateValues *state_values, void *aReplacement_Remote, void *transparency_state)
+void __fastcall `anonymous namespace::ApplyHKAlphaTestFixup(Illusion::StateValues *state_values, void *aReplacement_Remote, void *transparency_state)
 {
   Illusion::StateValues *v3; // r9
   _BYTE *v4; // rcx
@@ -92,7 +92,7 @@ LABEL_14:
 
 // File Line: 123
 // RVA: 0x5E150
-void __fastcall `anonymous namespace'::InitializeGBufferShaderSelector(Illusion::StateValues *state_values, Illusion::ShaderSelector *shader_selector)
+void __fastcall `anonymous namespace::InitializeGBufferShaderSelector(Illusion::StateValues *state_values, Illusion::ShaderSelector *shader_selector)
 {
   void *v2; // rax
   void *v3; // r10
@@ -132,7 +132,7 @@ void __fastcall `anonymous namespace'::InitializeGBufferShaderSelector(Illusion:
 
 // File Line: 193
 // RVA: 0x5E050
-Illusion::RenderQueue *__fastcall `anonymous namespace'::GBufferChooseRenderQueue(Illusion::StateValues *state_values, UFG::qMemoryStream<Illusion::Shader,1160> *shader_stream, Render::CullMetrics *cull_metrics, RenderQueueLayer *rq_provider)
+Illusion::RenderQueue *__fastcall `anonymous namespace::GBufferChooseRenderQueue(Illusion::StateValues *state_values, UFG::qMemoryStream<Illusion::Shader,1160> *shader_stream, Render::CullMetrics *cull_metrics, RenderQueueLayer *rq_provider)
 {
   UFG::qMemoryStream<Illusion::Shader,1160> *v4; // r10
   float v5; // xmm2_4
@@ -199,7 +199,7 @@ LABEL_10:
 
 // File Line: 263
 // RVA: 0x5DF20
-Illusion::Shader *__fastcall `anonymous namespace'::ChooseDepthShader(Illusion::StateValues *state_values, Illusion::Shader *shader)
+Illusion::Shader *__fastcall `anonymous namespace::ChooseDepthShader(Illusion::StateValues *state_values, Illusion::Shader *shader)
 {
   Illusion::Shader *v2; // rbx
   __int64 v3; // rax
@@ -224,12 +224,12 @@ Illusion::Shader *__fastcall `anonymous namespace'::ChooseDepthShader(Illusion::
     if ( !simpleInit_2 )
     {
       v5 = UFG::qStringHashUpper32("DR_EmitDepthFBX", 0xFFFFFFFF);
-      v6 = `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result )
+      v6 = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
+      if ( !`UFG::qGetResourceInventory<Illusion::Shader>::`2::result )
       {
         v7 = UFG::qResourceWarehouse::Instance();
         v6 = UFG::qResourceWarehouse::GetInventory(v7, 0x8B5561A1);
-        `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result = v6;
+        `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = v6;
       }
       UFG::qResourceHandle::Init((UFG::qResourceHandle *)&simpleHandle_2.mPrev, 0x8B5561A1, v5, v6);
       simpleInit_2 = 1;
@@ -247,7 +247,7 @@ void __fastcall SimpleTaskSubmitContext::SimpleTaskSubmitContext(SimpleTaskSubmi
 
   v1 = this;
   Illusion::SubmitContext::SubmitContext((Illusion::SubmitContext *)&this->vfptr);
-  v1->vfptr = (Illusion::SubmitContextVtbl *)&SimpleTaskSubmitContext::`vftable';
+  v1->vfptr = (Illusion::SubmitContextVtbl *)&SimpleTaskSubmitContext::`vftable;
   v1->mRenderQueueProvider = 0i64;
 }
 
@@ -280,10 +280,10 @@ void __fastcall LayerSubmitContext::LayerSubmitContext(LayerSubmitContext *this)
 
   v1 = this;
   Illusion::SubmitContext::SubmitContext((Illusion::SubmitContext *)&this->vfptr);
-  v1->vfptr = (Illusion::SubmitContextVtbl *)&RenderSubmitContext::`vftable';
+  v1->vfptr = (Illusion::SubmitContextVtbl *)&RenderSubmitContext::`vftable;
   v1->mCullMetrics = 0i64;
   v1->mTransparencyState = 0i64;
-  v1->vfptr = (Illusion::SubmitContextVtbl *)&LayerSubmitContext::`vftable';
+  v1->vfptr = (Illusion::SubmitContextVtbl *)&LayerSubmitContext::`vftable;
   v1->mQueueMode = 1;
   v1->mRenderQueueProvider = 0i64;
 }
@@ -318,7 +318,7 @@ Illusion::RenderQueue *__fastcall LayerSubmitContext::ChooseRenderQueue(LayerSub
     return RenderQueueLayer::GetSolidRenderQueue(v3->mRenderQueueProvider, 1u);
   }
   if ( v5 == 1 )
-    result = `anonymous namespace'::GBufferChooseRenderQueue(
+    result = `anonymous namespace::GBufferChooseRenderQueue(
                &v3->mStateValues,
                shader_stream,
                cull_metrics,
@@ -357,7 +357,7 @@ Illusion::RenderQueue *__fastcall LayerSubmitContext::OnPreSubmit(LayerSubmitCon
     return RenderQueueLayer::GetSolidRenderQueue(v5->mRenderQueueProvider, 1u);
   }
   if ( v7 == 1 )
-    result = `anonymous namespace'::GBufferChooseRenderQueue(
+    result = `anonymous namespace::GBufferChooseRenderQueue(
                &v5->mStateValues,
                v4,
                v5->mCullMetrics,
@@ -375,13 +375,13 @@ void __fastcall GBufferSubmitContext::GBufferSubmitContext(GBufferSubmitContext 
 
   v1 = this;
   Illusion::SubmitContext::SubmitContext((Illusion::SubmitContext *)&this->vfptr);
-  v1->vfptr = (Illusion::SubmitContextVtbl *)&RenderSubmitContext::`vftable';
+  v1->vfptr = (Illusion::SubmitContextVtbl *)&RenderSubmitContext::`vftable;
   v1->mCullMetrics = 0i64;
   v1->mTransparencyState = 0i64;
-  v1->vfptr = (Illusion::SubmitContextVtbl *)&LayerSubmitContext::`vftable';
+  v1->vfptr = (Illusion::SubmitContextVtbl *)&LayerSubmitContext::`vftable;
   v1->mQueueMode = 1;
   v1->mRenderQueueProvider = 0i64;
-  v1->vfptr = (Illusion::SubmitContextVtbl *)&GBufferSubmitContext::`vftable';
+  v1->vfptr = (Illusion::SubmitContextVtbl *)&GBufferSubmitContext::`vftable;
 }
 
 // File Line: 398
@@ -461,9 +461,9 @@ Illusion::RenderQueue *__fastcall GBufferSubmitContext::OnPreSubmit(GBufferSubmi
         return 0i64;
     }
   }
-  `anonymous namespace'::ApplyHKAlphaTestFixup(v6, v5->mPerPhaseParams->alphaStatePunchThrough, v5->mTransparencyState);
-  `anonymous namespace'::InitializeGBufferShaderSelector(v6, v5->mShaderSelector);
-  v19 = `anonymous namespace'::GBufferChooseRenderQueue(v6, v4, v5->mCullMetrics, v5->mRenderQueueProvider);
+  `anonymous namespace::ApplyHKAlphaTestFixup(v6, v5->mPerPhaseParams->alphaStatePunchThrough, v5->mTransparencyState);
+  `anonymous namespace::InitializeGBufferShaderSelector(v6, v5->mShaderSelector);
+  v19 = `anonymous namespace::GBufferChooseRenderQueue(v6, v4, v5->mCullMetrics, v5->mRenderQueueProvider);
   if ( v19->mUserData )
     v20 = v5->mPerPhaseParams->compositeTargetParams;
   else
@@ -496,13 +496,13 @@ void __fastcall ForwardEnvMapSubmitContext::ForwardEnvMapSubmitContext(ForwardEn
 
   v1 = this;
   Illusion::SubmitContext::SubmitContext((Illusion::SubmitContext *)&this->vfptr);
-  v1->vfptr = (Illusion::SubmitContextVtbl *)&RenderSubmitContext::`vftable';
+  v1->vfptr = (Illusion::SubmitContextVtbl *)&RenderSubmitContext::`vftable;
   v1->mCullMetrics = 0i64;
   v1->mTransparencyState = 0i64;
-  v1->vfptr = (Illusion::SubmitContextVtbl *)&LayerSubmitContext::`vftable';
+  v1->vfptr = (Illusion::SubmitContextVtbl *)&LayerSubmitContext::`vftable;
   v1->mQueueMode = 1;
   v1->mRenderQueueProvider = 0i64;
-  v1->vfptr = (Illusion::SubmitContextVtbl *)&ForwardEnvMapSubmitContext::`vftable';
+  v1->vfptr = (Illusion::SubmitContextVtbl *)&ForwardEnvMapSubmitContext::`vftable;
   v1->mPerPhaseParams = 0i64;
 }
 
@@ -542,7 +542,7 @@ Illusion::RenderQueue *__fastcall ForwardEnvMapSubmitContext::OnPreSubmit(Forwar
   }
   else
   {
-    `anonymous namespace'::ApplyDiffuseTextureStateOverrides(&v4->mStateValues);
+    `anonymous namespace::ApplyDiffuseTextureStateOverrides(&v4->mStateValues);
   }
   v10 = v4->mStateValues.mParamValues[9];
   if ( v10 )
@@ -565,7 +565,7 @@ Illusion::RenderQueue *__fastcall ForwardEnvMapSubmitContext::OnPreSubmit(Forwar
   }
   if ( v12 != 1 )
     return 0i64;
-  return `anonymous namespace'::GBufferChooseRenderQueue(
+  return `anonymous namespace::GBufferChooseRenderQueue(
            &v4->mStateValues,
            v7,
            v4->mCullMetrics,
@@ -580,13 +580,13 @@ void __fastcall ForwardReflectedSubmitContext::ForwardReflectedSubmitContext(For
 
   v1 = this;
   Illusion::SubmitContext::SubmitContext((Illusion::SubmitContext *)&this->vfptr);
-  v1->vfptr = (Illusion::SubmitContextVtbl *)&RenderSubmitContext::`vftable';
+  v1->vfptr = (Illusion::SubmitContextVtbl *)&RenderSubmitContext::`vftable;
   v1->mCullMetrics = 0i64;
   v1->mTransparencyState = 0i64;
-  v1->vfptr = (Illusion::SubmitContextVtbl *)&LayerSubmitContext::`vftable';
+  v1->vfptr = (Illusion::SubmitContextVtbl *)&LayerSubmitContext::`vftable;
   v1->mQueueMode = 1;
   v1->mRenderQueueProvider = 0i64;
-  v1->vfptr = (Illusion::SubmitContextVtbl *)&ForwardReflectedSubmitContext::`vftable';
+  v1->vfptr = (Illusion::SubmitContextVtbl *)&ForwardReflectedSubmitContext::`vftable;
   v1->mPerPhaseParams = 0i64;
 }
 
@@ -677,38 +677,38 @@ Illusion::RenderQueue *__fastcall ForwardReflectedSubmitContext::OnPreSubmit(For
     if ( !(_S2_1 & 1) )
     {
       _S2_1 |= 1u;
-      `eh vector constructor iterator'(
+      `eh vector constructor iterator(
         table,
         (unsigned int)((_DWORD)mapTable + 40),
         (_DWORD)mapTable + 3,
-        (void (__fastcall *)(void *))`ForwardReflectedSubmitContext::OnPreSubmit'::`7'::MapEntry::MapEntry);
+        (void (__fastcall *)(void *))`ForwardReflectedSubmitContext::OnPreSubmit::`7::MapEntry::MapEntry);
       atexit(ForwardReflectedSubmitContext::OnPreSubmit_::_10_::_dynamic_atexit_destructor_for__table__);
     }
     table[0]._orgUID = 543723269;
-    v18 = `UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result )
+    v18 = `UFG::qGetResourceInventory<Illusion::RasterState>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::RasterState>::`2::result )
     {
       v19 = UFG::qResourceWarehouse::Instance();
       v18 = UFG::qResourceWarehouse::GetInventory(v19, 0x3BC715E0u);
-      `UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result = v18;
+      `UFG::qGetResourceInventory<Illusion::RasterState>::`2::result = v18;
     }
     UFG::qResourceHandle::Init(&stru_142137048, 0x3BC715E0u, 0xBC9FAF09, v18);
     dword_142137068 = -1810908948;
-    v20 = `UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result )
+    v20 = `UFG::qGetResourceInventory<Illusion::RasterState>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::RasterState>::`2::result )
     {
       v21 = UFG::qResourceWarehouse::Instance();
       v20 = UFG::qResourceWarehouse::GetInventory(v21, 0x3BC715E0u);
-      `UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result = v20;
+      `UFG::qGetResourceInventory<Illusion::RasterState>::`2::result = v20;
     }
     UFG::qResourceHandle::Init(&stru_142137070, 0x3BC715E0u, 0x940FB8EC, v20);
     dword_142137090 = -262489691;
-    v22 = `UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result )
+    v22 = `UFG::qGetResourceInventory<Illusion::RasterState>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::RasterState>::`2::result )
     {
       v23 = UFG::qResourceWarehouse::Instance();
       v22 = UFG::qResourceWarehouse::GetInventory(v23, 0x3BC715E0u);
-      `UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result = v22;
+      `UFG::qGetResourceInventory<Illusion::RasterState>::`2::result = v22;
     }
     UFG::qResourceHandle::Init(&stru_142137098, 0x3BC715E0u, 0x4B6C82C0u, v22);
     mapTable = table;
@@ -755,7 +755,7 @@ LABEL_38:
   }
   if ( v31 == 1 )
   {
-    v32 = `anonymous namespace'::GBufferChooseRenderQueue(
+    v32 = `anonymous namespace::GBufferChooseRenderQueue(
             &v5->mStateValues,
             v4,
             v5->mCullMetrics,
@@ -774,13 +774,13 @@ void __fastcall ForwardSubmitContext::ForwardSubmitContext(ForwardSubmitContext 
 
   v1 = this;
   Illusion::SubmitContext::SubmitContext((Illusion::SubmitContext *)&this->vfptr);
-  v1->vfptr = (Illusion::SubmitContextVtbl *)&RenderSubmitContext::`vftable';
+  v1->vfptr = (Illusion::SubmitContextVtbl *)&RenderSubmitContext::`vftable;
   v1->mCullMetrics = 0i64;
   v1->mTransparencyState = 0i64;
-  v1->vfptr = (Illusion::SubmitContextVtbl *)&LayerSubmitContext::`vftable';
+  v1->vfptr = (Illusion::SubmitContextVtbl *)&LayerSubmitContext::`vftable;
   v1->mQueueMode = 1;
   v1->mRenderQueueProvider = 0i64;
-  v1->vfptr = (Illusion::SubmitContextVtbl *)&ForwardSubmitContext::`vftable';
+  v1->vfptr = (Illusion::SubmitContextVtbl *)&ForwardSubmitContext::`vftable;
   v1->mPerPhaseParams = 0i64;
 }
 
@@ -858,7 +858,7 @@ Illusion::RenderQueue *__fastcall ForwardSubmitContext::OnPreSubmit(ForwardSubmi
     return RenderQueueLayer::GetSolidRenderQueue(v4->mRenderQueueProvider, 1u);
   }
   if ( v16 == 1 )
-    result = `anonymous namespace'::GBufferChooseRenderQueue(
+    result = `anonymous namespace::GBufferChooseRenderQueue(
                &v4->mStateValues,
                v6,
                v4->mCullMetrics,
@@ -876,13 +876,13 @@ void __fastcall ShadowSubmitContext::ShadowSubmitContext(ShadowSubmitContext *th
 
   v1 = this;
   Illusion::SubmitContext::SubmitContext((Illusion::SubmitContext *)&this->vfptr);
-  v1->vfptr = (Illusion::SubmitContextVtbl *)&RenderSubmitContext::`vftable';
+  v1->vfptr = (Illusion::SubmitContextVtbl *)&RenderSubmitContext::`vftable;
   v1->mCullMetrics = 0i64;
   v1->mTransparencyState = 0i64;
-  v1->vfptr = (Illusion::SubmitContextVtbl *)&LayerSubmitContext::`vftable';
+  v1->vfptr = (Illusion::SubmitContextVtbl *)&LayerSubmitContext::`vftable;
   v1->mQueueMode = 1;
   v1->mRenderQueueProvider = 0i64;
-  v1->vfptr = (Illusion::SubmitContextVtbl *)&ShadowSubmitContext::`vftable';
+  v1->vfptr = (Illusion::SubmitContextVtbl *)&ShadowSubmitContext::`vftable;
   v1->mPerPhaseParams = 0i64;
 }
 
@@ -920,7 +920,7 @@ Illusion::RenderQueue *__fastcall ShadowSubmitContext::OnPreSubmit(ShadowSubmitC
     v10 = v4->mPerPhaseParams->alphaStateNoColorWrite;
     v4->mStateValues.mSetValueMask.mFlags[0] |= 0x200ui64;
     v4->mStateValues.mParamValues[9] = v10;
-    v11 = `anonymous namespace'::ChooseDepthShader(
+    v11 = `anonymous namespace::ChooseDepthShader(
             &v4->mStateValues,
             (Illusion::Shader *)shader_stream->mMainMemoryAddress);
     v4->mStateValues.mSetValueMask.mFlags[0] |= 2ui64;
@@ -941,7 +941,7 @@ Illusion::RenderQueue *__fastcall ShadowSubmitContext::OnPreSubmit(ShadowSubmitC
     return RenderQueueLayer::GetSolidRenderQueue(v4->mRenderQueueProvider, 1u);
   }
   if ( v13 == 1 )
-    result = `anonymous namespace'::GBufferChooseRenderQueue(
+    result = `anonymous namespace::GBufferChooseRenderQueue(
                &v4->mStateValues,
                v8,
                v4->mCullMetrics,
@@ -959,13 +959,13 @@ void __fastcall ShadowFrontFaceSubmitContext::ShadowFrontFaceSubmitContext(Shado
 
   v1 = this;
   Illusion::SubmitContext::SubmitContext((Illusion::SubmitContext *)&this->vfptr);
-  v1->vfptr = (Illusion::SubmitContextVtbl *)&RenderSubmitContext::`vftable';
+  v1->vfptr = (Illusion::SubmitContextVtbl *)&RenderSubmitContext::`vftable;
   v1->mCullMetrics = 0i64;
   v1->mTransparencyState = 0i64;
-  v1->vfptr = (Illusion::SubmitContextVtbl *)&LayerSubmitContext::`vftable';
+  v1->vfptr = (Illusion::SubmitContextVtbl *)&LayerSubmitContext::`vftable;
   v1->mQueueMode = 1;
   v1->mRenderQueueProvider = 0i64;
-  v1->vfptr = (Illusion::SubmitContextVtbl *)&ShadowFrontFaceSubmitContext::`vftable';
+  v1->vfptr = (Illusion::SubmitContextVtbl *)&ShadowFrontFaceSubmitContext::`vftable;
   v1->mPerPhaseParams = 0i64;
 }
 
@@ -994,7 +994,7 @@ Illusion::RenderQueue *__fastcall ShadowFrontFaceSubmitContext::OnPreSubmit(Shad
   v8 = (void *)*((_QWORD *)v6[3].mParamValues[7] + 1);
   v6->mSetValueMask.mFlags[0] |= 0x200ui64;
   v6->mParamValues[9] = v8;
-  v9 = `anonymous namespace'::ChooseDepthShader(v6, (Illusion::Shader *)shader_stream->mMainMemoryAddress);
+  v9 = `anonymous namespace::ChooseDepthShader(v6, (Illusion::Shader *)shader_stream->mMainMemoryAddress);
   if ( !v9 )
     return 0i64;
   v4->mStateValues.mSetValueMask.mFlags[0] |= 2ui64;
@@ -1014,7 +1014,7 @@ Illusion::RenderQueue *__fastcall ShadowFrontFaceSubmitContext::OnPreSubmit(Shad
   }
   if ( v11 != 1 )
     return 0i64;
-  return `anonymous namespace'::GBufferChooseRenderQueue(
+  return `anonymous namespace::GBufferChooseRenderQueue(
            &v4->mStateValues,
            v3,
            v4->mCullMetrics,
@@ -1029,13 +1029,13 @@ void __fastcall CompositeSubmitContext::CompositeSubmitContext(CompositeSubmitCo
 
   v1 = this;
   Illusion::SubmitContext::SubmitContext((Illusion::SubmitContext *)&this->vfptr);
-  v1->vfptr = (Illusion::SubmitContextVtbl *)&RenderSubmitContext::`vftable';
+  v1->vfptr = (Illusion::SubmitContextVtbl *)&RenderSubmitContext::`vftable;
   v1->mCullMetrics = 0i64;
   v1->mTransparencyState = 0i64;
-  v1->vfptr = (Illusion::SubmitContextVtbl *)&LayerSubmitContext::`vftable';
+  v1->vfptr = (Illusion::SubmitContextVtbl *)&LayerSubmitContext::`vftable;
   v1->mQueueMode = 1;
   v1->mRenderQueueProvider = 0i64;
-  v1->vfptr = (Illusion::SubmitContextVtbl *)&CompositeSubmitContext::`vftable';
+  v1->vfptr = (Illusion::SubmitContextVtbl *)&CompositeSubmitContext::`vftable;
   v1->mOverrideMode = 0;
   v1->mHighlightParams = 0i64;
 }
@@ -1156,7 +1156,7 @@ LABEL_27:
   }
   if ( v28 == 1 )
   {
-    v29 = `anonymous namespace'::GBufferChooseRenderQueue(
+    v29 = `anonymous namespace::GBufferChooseRenderQueue(
             &v3->mStateValues,
             v6,
             v3->mCullMetrics,

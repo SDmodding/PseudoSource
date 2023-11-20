@@ -1141,7 +1141,7 @@ LABEL_104:
           v155[2].mNext = 0i64;
           v155[3].mNext = 0i64;
           LODWORD(v155[4].mNext) = v156;
-          v155->mNext = (UFG::allocator::free_link *)&UFG::ObjectiveHint::`vftable';
+          v155->mNext = (UFG::allocator::free_link *)&UFG::ObjectiveHint::`vftable;
           UFG::qString::qString((UFG::qString *)&v155[5], &collectionName);
         }
         else
@@ -1773,7 +1773,7 @@ void __fastcall UFG::ProgressionTracker::BindChallengeGameSlice(UFG::Progression
   if ( v15 )
   {
     v16 = (char *)&v15[-1].4;
-    `eh vector destructor iterator'(v15, 8ui64, v15[-1].mIntValue, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v15, 8ui64, v15[-1].mIntValue, (void (__fastcall *)(void *))_);
     operator delete[](v16);
   }
   v14->mValues.p = 0i64;
@@ -4284,7 +4284,7 @@ void __fastcall UFG::ProgressionTracker::ForceSliceChange(UFG::ProgressionTracke
   if ( v11 )
   {
     v12 = (char *)&v11[-1].4;
-    `eh vector destructor iterator'(v11, 8ui64, v11[-1].mIntValue, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v11, 8ui64, v11[-1].mIntValue, (void (__fastcall *)(void *))_);
     operator delete[](v12);
   }
   v10->mValues.p = 0i64;
@@ -4344,14 +4344,14 @@ void __fastcall UFG::ProgressionTracker::ProgressionTracker(UFG::ProgressionTrac
   v1->mObjectiveTracker.mDirty = 0;
   v1->mObjectiveTracker.mpFlashObjective = 0i64;
   v1->mObjectiveTracker.mLastLoadId = 0;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     &v1->mSecondaryObjectiveTracker,
     0x38ui64,
     2,
     (void (__fastcall *)(void *))UFG::SecondaryObjective::SecondaryObjective);
   UFG::qBaseTreeRB::qBaseTreeRB(&v1->mPDATriggerTracker.mPDATriggers.mTree);
   v2 = &v1->mCaseTracker;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v1->mCaseTracker.mCases.p,
     0x50ui64,
     20,
@@ -4413,7 +4413,7 @@ void __fastcall UFG::ProgressionTracker::~ProgressionTracker(UFG::ProgressionTra
 
   v1 = this;
   qSetBase<UFG::ProgressionTracker::LayerOwnershipInfo>::FreeAll((qSetBase<UFG::ProgressionTracker::LayerOwnershipInfo> *)&this->mLayerOwnership.mCount);
-  v1->mGameSetup.vfptr = (UFG::GameSetupVtbl *)&UFG::GameSetup::`vftable';
+  v1->mGameSetup.vfptr = (UFG::GameSetupVtbl *)&UFG::GameSetup::`vftable;
   v2 = &v1->mLastUsedVehicle;
   if ( v1->mLastUsedVehicle.m_pPointer )
   {
@@ -4448,13 +4448,13 @@ void __fastcall UFG::ProgressionTracker::~ProgressionTracker(UFG::ProgressionTra
   v9 = &v1->mCaseTracker;
   v9->mCases.size = 0;
   v9->mCases.size = 0;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->mCaseTracker.mCases.p,
     0x50ui64,
     20,
     (void (__fastcall *)(void *))UFG::CaseInfo::~CaseInfo);
   UFG::PDATriggerTracker::~PDATriggerTracker(&v1->mPDATriggerTracker);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     &v1->mSecondaryObjectiveTracker,
     0x38ui64,
     2,
@@ -4960,7 +4960,7 @@ void __fastcall UFG::ProgressionTracker::UpdateGameSlicesSnapshot(UFG::Progressi
   if ( v7 )
   {
     v8 = &v7[-1].4;
-    `eh vector destructor iterator'(v7, 8ui64, v7[-1].mIntValue, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v7, 8ui64, v7[-1].mIntValue, (void (__fastcall *)(void *))_);
     operator delete[](v8);
   }
   v6->mValues.p = 0i64;

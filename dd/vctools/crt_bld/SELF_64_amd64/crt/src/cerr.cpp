@@ -14,7 +14,7 @@ __int64 std::_dynamic_initializer_for__ferr__()
 
   v0 = _iob_func() + 2;
   std::basic_streambuf<char,std::char_traits<char>>::basic_streambuf<char,std::char_traits<char>>((std::basic_streambuf<char,std::char_traits<char> > *)&ferr.vfptr);
-  ferr.vfptr = (std::basic_streambuf<char,std::char_traits<char> >Vtbl *)&std::basic_filebuf<char,std::char_traits<char>>::`vftable';
+  ferr.vfptr = (std::basic_streambuf<char,std::char_traits<char> >Vtbl *)&std::basic_filebuf<char,std::char_traits<char>>::`vftable;
   std::basic_filebuf<char,std::char_traits<char>>::_Init(&ferr, v0, 0);
   return atexit(std::_dynamic_atexit_destructor_for__ferr__);
 }

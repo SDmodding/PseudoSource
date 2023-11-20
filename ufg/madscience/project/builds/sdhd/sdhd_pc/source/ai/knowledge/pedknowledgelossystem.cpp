@@ -5,7 +5,7 @@ void __fastcall UFG::PedKnowledgeLOSSystem::PedKnowledgeLOSSystem(UFG::PedKnowle
   UFG::PedKnowledgeLOSSystem *v1; // rbx
 
   v1 = this;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     this->m_aLOSData.p,
     0x40ui64,
     200,
@@ -19,7 +19,7 @@ void __fastcall UFG::PedKnowledgeLOSSystem::PedKnowledgeLOSSystem(UFG::PedKnowle
 void __fastcall UFG::PedKnowledgeLOSSystem::~PedKnowledgeLOSSystem(UFG::PedKnowledgeLOSSystem *this)
 {
   this->m_aLOSData.size = 0;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     this->m_aLOSData.p,
     0x40ui64,
     200,

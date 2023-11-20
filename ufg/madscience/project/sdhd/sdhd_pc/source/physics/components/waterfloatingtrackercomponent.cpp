@@ -272,8 +272,8 @@ void __fastcall UFG::WaterFloatingTrackerComponent::WaterFloatingTrackerComponen
   v5 = (UFG::qNode<UFG::WaterFloatingTrackerComponent,UFG::WaterFloatingTrackerComponent> *)&v4->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::WaterFloatingTrackerComponent::`vftable'{for `UFG::SimComponent'};
-  v4->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::WaterFloatingTrackerComponent::`vftable'{for `UFG::UpdateInterface'};
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::WaterFloatingTrackerComponent::`vftable{for `UFG::SimComponent};
+  v4->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::WaterFloatingTrackerComponent::`vftable{for `UFG::UpdateInterface};
   v4->mRippleGenerator = 0i64;
   v4->mBody = v3;
   *(_QWORD *)&v4->mInWaterState = 0i64;
@@ -311,8 +311,8 @@ void __fastcall UFG::WaterFloatingTrackerComponent::~WaterFloatingTrackerCompone
   UFG::qNode<UFG::WaterFloatingTrackerComponent,UFG::WaterFloatingTrackerComponent> *v9; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::WaterFloatingTrackerComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::WaterFloatingTrackerComponent::`vftable'{for `UFG::UpdateInterface'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::WaterFloatingTrackerComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::WaterFloatingTrackerComponent::`vftable{for `UFG::UpdateInterface};
   if ( this == UFG::WaterFloatingTrackerComponent::s_WaterFloatingTrackerComponentpCurrentIterator )
     UFG::WaterFloatingTrackerComponent::s_WaterFloatingTrackerComponentpCurrentIterator = (UFG::WaterFloatingTrackerComponent *)&this->mPrev[-6].mNext;
   v2 = (UFG::qNode<UFG::WaterFloatingTrackerComponent,UFG::WaterFloatingTrackerComponent> *)&this->mPrev;

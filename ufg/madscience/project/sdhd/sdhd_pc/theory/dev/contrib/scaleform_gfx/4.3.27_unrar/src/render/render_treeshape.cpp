@@ -266,7 +266,7 @@ LABEL_8:
         (Scaleform::Render::TreeNode *)&shapeNode->0,
         v7->pRenderer2D,
         v14);
-      v9->vfptr = (Scaleform::Render::TreeCacheNodeVtbl *)&Scaleform::Render::TreeCacheShape::`vftable';
+      v9->vfptr = (Scaleform::Render::TreeCacheNodeVtbl *)&Scaleform::Render::TreeCacheShape::`vftable;
     }
     else
     {
@@ -324,7 +324,7 @@ void __fastcall Scaleform::Render::TreeCacheShape::~TreeCacheShape(Scaleform::Re
   Scaleform::Render::TreeCacheNode *v4; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::Render::TreeCacheNodeVtbl *)&Scaleform::Render::TreeCacheShape::`vftable';
+  this->vfptr = (Scaleform::Render::TreeCacheNodeVtbl *)&Scaleform::Render::TreeCacheShape::`vftable;
   v2 = &this->Children;
   while ( 1 )
   {
@@ -577,7 +577,7 @@ void __fastcall Scaleform::Render::TreeCacheShapeLayer::~TreeCacheShapeLayer(Sca
   Scaleform::Render::MeshBase *v5; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::Render::TreeCacheNodeVtbl *)&Scaleform::Render::TreeCacheShapeLayer::`vftable';
+  this->vfptr = (Scaleform::Render::TreeCacheNodeVtbl *)&Scaleform::Render::TreeCacheShapeLayer::`vftable;
   v2 = this->pGradient.pObject;
   if ( v2 )
     ((void (__cdecl *)(Scaleform::Render::Image *))v2->vfptr[2].__vecDelDtor)(v2);
@@ -647,7 +647,7 @@ Scaleform::Render::TreeCacheMeshBase *__fastcall Scaleform::Render::TreeCacheSha
       &key,
       v8->pRenderer2D,
       v6);
-    v11->vfptr = (Scaleform::Render::TreeCacheNodeVtbl *)&Scaleform::Render::TreeCacheShapeLayer::`vftable';
+    v11->vfptr = (Scaleform::Render::TreeCacheNodeVtbl *)&Scaleform::Render::TreeCacheShapeLayer::`vftable;
     v11[1].vfptr = 0i64;
     v11[1].pPrev = 0i64;
     LOBYTE(v11[1].pNext) = key.pImpl->Type == 2;
@@ -1166,8 +1166,8 @@ __int64 __fastcall Scaleform::Render::TreeCacheShapeLayer::calcMeshKey(Scaleform
   v51 = _xmm;
   if ( !v12 )
     goto LABEL_45;
-  v15 = (__m128)_mm_load_si128((const __m128i *)&`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v);
-  v16 = (__m128)_mm_load_si128((const __m128i *)&`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v);
+  v15 = (__m128)_mm_load_si128((const __m128i *)&`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v);
+  v16 = (__m128)_mm_load_si128((const __m128i *)&`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v);
   while ( 1 )
   {
     v17 = *(_QWORD *)(*(_QWORD *)(((_QWORD)v12->pNode & 0xFFFFFFFFFFFFF000ui64) + 0x28)
@@ -1414,7 +1414,7 @@ char __fastcall Scaleform::Render::TreeCacheShapeLayer::updateMeshKey(Scaleform:
   if ( meshGenFlags & 2 )
     v12 |= 0x80u;
   __that.RefCount = 1;
-  __that.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Scale9GridData::`vftable';
+  __that.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Scale9GridData::`vftable;
   v13 = v12 | (unsigned __int64)Scaleform::Render::TreeCacheShapeLayer::calcMeshKey(
                                   this,
                                   provider,

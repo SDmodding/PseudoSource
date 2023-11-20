@@ -219,10 +219,10 @@ void __fastcall Scaleform::Render::MaskEffect::MaskEffect(Scaleform::Render::Mas
   v6 = mes;
   v7 = node;
   v8 = this;
-  this->vfptr = (Scaleform::Render::CacheEffectVtbl *)&Scaleform::Render::CacheEffect::`vftable';
+  this->vfptr = (Scaleform::Render::CacheEffectVtbl *)&Scaleform::Render::CacheEffect::`vftable;
   this->pNext = next;
   this->Length = 0;
-  this->vfptr = (Scaleform::Render::CacheEffectVtbl *)&Scaleform::Render::MaskEffect::`vftable';
+  this->vfptr = (Scaleform::Render::CacheEffectVtbl *)&Scaleform::Render::MaskEffect::`vftable;
   v9 = SortKeyMaskInterfaces[0];
   SortKeyMaskInterfaces[0]->vfptr->AddRef(SortKeyMaskInterfaces[0], 0i64);
   nexta = (Scaleform::Render::CacheEffect *)&v8->StartEntry;
@@ -508,10 +508,10 @@ void __fastcall Scaleform::Render::BlendModeEffect::BlendModeEffect(Scaleform::R
   v6 = m;
   v7 = node;
   v8 = this;
-  this->vfptr = (Scaleform::Render::CacheEffectVtbl *)&Scaleform::Render::CacheEffect::`vftable';
+  this->vfptr = (Scaleform::Render::CacheEffectVtbl *)&Scaleform::Render::CacheEffect::`vftable;
   this->pNext = next;
   this->Length = 0;
-  this->vfptr = (Scaleform::Render::CacheEffectVtbl *)&Scaleform::Render::BlendModeEffect::`vftable';
+  this->vfptr = (Scaleform::Render::CacheEffectVtbl *)&Scaleform::Render::BlendModeEffect::`vftable;
   v9 = state->DataValue;
   v10 = 24804;
   if ( v9 <= 0xE && _bittest(&v10, v9) )
@@ -785,11 +785,11 @@ void __fastcall Scaleform::Render::FilterEffect::FilterEffect(Scaleform::Render:
   v6 = m;
   v7 = node;
   v8 = this;
-  this->vfptr = (Scaleform::Render::CacheEffectVtbl *)&Scaleform::Render::CacheEffect::`vftable';
+  this->vfptr = (Scaleform::Render::CacheEffectVtbl *)&Scaleform::Render::CacheEffect::`vftable;
   this->pNext = next;
   v9 = 0;
   this->Length = 0;
-  this->vfptr = (Scaleform::Render::CacheEffectVtbl *)&Scaleform::Render::FilterEffect::`vftable';
+  this->vfptr = (Scaleform::Render::CacheEffectVtbl *)&Scaleform::Render::FilterEffect::`vftable;
   this->Contributing = 1;
   v10 = (Scaleform::Render::CacheEffect *)state->pData;
   Scaleform::Render::SKI_Filter::Start_Instance.vfptr->AddRef(
@@ -1091,8 +1091,8 @@ LABEL_47:
     *((_QWORD *)&v78 + 1) = __PAIR__(LODWORD(v66), LODWORD(v65));
     Scaleform::Render::Matrix2x4<float>::SetInverse(&v76, (Scaleform::Render::Matrix2x4<float> *)&Buf2);
     v67 = (Scaleform::Render::Matrix2x4<float> *)&v74;
-    v68 = (__m128)_mm_load_si128((const __m128i *)&`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v);
-    v69 = (__m128)_mm_load_si128((const __m128i *)&`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v);
+    v68 = (__m128)_mm_load_si128((const __m128i *)&`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v);
+    v69 = (__m128)_mm_load_si128((const __m128i *)&`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v);
     v70 = _mm_and_ps(
             _mm_add_ps(
               _mm_add_ps(
@@ -1373,10 +1373,10 @@ void __fastcall Scaleform::Render::ViewMatrix3DEffect::ViewMatrix3DEffect(Scalef
 
   v4 = node;
   v5 = this;
-  this->vfptr = (Scaleform::Render::CacheEffectVtbl *)&Scaleform::Render::CacheEffect::`vftable';
+  this->vfptr = (Scaleform::Render::CacheEffectVtbl *)&Scaleform::Render::CacheEffect::`vftable;
   this->pNext = next;
   this->Length = 0;
-  this->vfptr = (Scaleform::Render::CacheEffectVtbl *)&Scaleform::Render::ViewMatrix3DEffect::`vftable';
+  this->vfptr = (Scaleform::Render::CacheEffectVtbl *)&Scaleform::Render::ViewMatrix3DEffect::`vftable;
   v6 = state->pData;
   Scaleform::Render::SKI_ViewMatrix3D::Start_Instance.vfptr->AddRef(
     (Scaleform::Render::SortKeyInterface *)&Scaleform::Render::SKI_ViewMatrix3D::Start_Instance,
@@ -1479,10 +1479,10 @@ void __fastcall Scaleform::Render::ProjectionMatrix3DEffect::ProjectionMatrix3DE
 
   v4 = node;
   v5 = this;
-  this->vfptr = (Scaleform::Render::CacheEffectVtbl *)&Scaleform::Render::CacheEffect::`vftable';
+  this->vfptr = (Scaleform::Render::CacheEffectVtbl *)&Scaleform::Render::CacheEffect::`vftable;
   this->pNext = next;
   this->Length = 0;
-  this->vfptr = (Scaleform::Render::CacheEffectVtbl *)&Scaleform::Render::ProjectionMatrix3DEffect::`vftable';
+  this->vfptr = (Scaleform::Render::CacheEffectVtbl *)&Scaleform::Render::ProjectionMatrix3DEffect::`vftable;
   v6 = state->pData;
   Scaleform::Render::SKI_ProjectionMatrix3D::Start_Instance.vfptr->AddRef(
     (Scaleform::Render::SortKeyInterface *)&Scaleform::Render::SKI_ProjectionMatrix3D::Start_Instance,
@@ -1586,10 +1586,10 @@ void __fastcall Scaleform::Render::UserDataEffect::UserDataEffect(Scaleform::Ren
   v4 = state;
   v5 = node;
   v6 = this;
-  this->vfptr = (Scaleform::Render::CacheEffectVtbl *)&Scaleform::Render::CacheEffect::`vftable';
+  this->vfptr = (Scaleform::Render::CacheEffectVtbl *)&Scaleform::Render::CacheEffect::`vftable;
   this->pNext = next;
   this->Length = 0;
-  this->vfptr = (Scaleform::Render::CacheEffectVtbl *)&Scaleform::Render::UserDataEffect::`vftable';
+  this->vfptr = (Scaleform::Render::CacheEffectVtbl *)&Scaleform::Render::UserDataEffect::`vftable;
   Scaleform::Render::SKI_UserData::Start_Instance.vfptr->AddRef(
     (Scaleform::Render::SortKeyInterface *)&Scaleform::Render::SKI_UserData::Start_Instance,
     0i64);

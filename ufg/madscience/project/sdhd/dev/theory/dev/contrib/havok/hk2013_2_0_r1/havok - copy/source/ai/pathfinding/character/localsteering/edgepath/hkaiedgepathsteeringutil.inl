@@ -78,7 +78,7 @@ void __fastcall hkaiEdgePathSteeringUtil::calcTangentDirs(hkVector4f *p1, hkVect
   v38 = _mm_xor_ps((__m128)_mm_slli_epi32(_mm_srli_epi32(v28, 0x1Fu), 0x1Fu), _mm_shuffle_ps(v36, v36, 201));
   v39 = _mm_or_ps(
           _mm_andnot_ps(v37, _mm_mul_ps(_mm_shuffle_ps(v33, v34, 228), v34)),
-          _mm_and_ps(v37, `hkaiEdgePathSteeringUtil::calcTangentDirs'::`2'::insideLenFactorsQuad));
+          _mm_and_ps(v37, `hkaiEdgePathSteeringUtil::calcTangentDirs::`2::insideLenFactorsQuad));
   v40 = _mm_rsqrt_ps(v39);
   v41 = _mm_mul_ps(
           _mm_andnot_ps(

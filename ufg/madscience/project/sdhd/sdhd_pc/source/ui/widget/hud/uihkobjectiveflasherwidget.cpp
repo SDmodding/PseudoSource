@@ -158,7 +158,7 @@ void __fastcall UFG::UIHKObjectiveFlasherWidget::Flash_Show(UFG::UIHKObjectiveFl
   v8 = screen->mRenderable->m_movie.pObject;
   if ( v8 )
   {
-    `eh vector constructor iterator'(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( ((unsigned int)pargs.Type >> 6) & 1 )
     {
       (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
@@ -190,7 +190,7 @@ void __fastcall UFG::UIHKObjectiveFlasherWidget::Flash_Show(UFG::UIHKObjectiveFl
         Scaleform::GFx::Movie::Invoke(v9, "Smartphone_HideReminder", 0i64, 0i64, 0);
       }
     }
-    `eh vector destructor iterator'(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 
@@ -213,7 +213,7 @@ void __fastcall UFG::UIHKObjectiveFlasherWidget::Flash_ShowSmartphone(UFG::UIHKO
     v3 = v2->mRenderable->m_movie.pObject;
     if ( v3 )
     {
-      `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       v4 = UFG::gInputSystem->mControllers[UFG::gActiveControllerNum]->m_IsKeyboardController;
       if ( (v8 >> 6) & 1 )
       {
@@ -227,7 +227,7 @@ void __fastcall UFG::UIHKObjectiveFlasherWidget::Flash_ShowSmartphone(UFG::UIHKO
       v5 = UFG::TiDo::CalcWwiseUid("Play_alert");
       if ( UFG::HudAudio::m_instance )
         UFG::AudioEntity::CreateAndPlayEvent((UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr, v5, 0i64, 0, 0i64);
-      `eh vector destructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+      `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     }
   }
 }
@@ -299,7 +299,7 @@ void __fastcall UFG::UIHKObjectiveFlasherWidget::Flash_SetColor(UFG::UIHKObjecti
     v5 = (signed int)(float)(color->g * 255.0);
     v6 = (signed int)(float)(color->b * 255.0);
     pDtor = (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value;
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( (v10 >> 6) & 1 )
     {
       (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v9 + 16i64))(
@@ -331,7 +331,7 @@ void __fastcall UFG::UIHKObjectiveFlasherWidget::Flash_SetColor(UFG::UIHKObjecti
     v18 = 5;
     v19 = (double)(unsigned __int8)v6;
     Scaleform::GFx::Movie::Invoke(v3, "ObjectiveFlasher_SetColor", 0i64, (Scaleform::GFx::Value *)&ptr, 3u);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 

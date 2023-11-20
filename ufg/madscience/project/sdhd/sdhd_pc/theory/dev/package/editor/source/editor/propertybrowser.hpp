@@ -36,7 +36,7 @@ void __fastcall UFG::Editor::PropertyProxy::~PropertyProxy(UFG::Editor::Property
   UFG::qNode<UFG::Editor::PropertyProxy,UFG::Editor::PropertyProxy> *v2; // rcx
   UFG::qNode<UFG::Editor::PropertyProxy,UFG::Editor::PropertyProxy> *v3; // rax
 
-  this->vfptr = (UFG::Editor::PropertyProxyVtbl *)&UFG::Editor::PropertyProxy::`vftable';
+  this->vfptr = (UFG::Editor::PropertyProxyVtbl *)&UFG::Editor::PropertyProxy::`vftable;
   v1 = (UFG::qNode<UFG::Editor::PropertyProxy,UFG::Editor::PropertyProxy> *)&this->mPrev;
   v2 = this->mPrev;
   v3 = v1->mNext;
@@ -59,7 +59,7 @@ void __fastcall UFG::Editor::PropertyProxySimple::~PropertyProxySimple(UFG::Edit
   UFG::qNode<UFG::Editor::PropertyProxy,UFG::Editor::PropertyProxy> *v7; // rax
 
   v1 = this;
-  this->vfptr = (UFG::Editor::PropertyProxyVtbl *)&UFG::Editor::PropertyProxySimple::`vftable';
+  this->vfptr = (UFG::Editor::PropertyProxyVtbl *)&UFG::Editor::PropertyProxySimple::`vftable;
   v2 = this->mSuggestions.p;
   if ( v2 )
     operator delete[](v2);
@@ -73,7 +73,7 @@ void __fastcall UFG::Editor::PropertyProxySimple::~PropertyProxySimple(UFG::Edit
   v1->mSuggestionList.mNode.mPrev = &v1->mSuggestionList.mNode;
   v1->mSuggestionList.mNode.mNext = &v1->mSuggestionList.mNode;
   UFG::qString::~qString(&v1->mValueString);
-  v1->vfptr = (UFG::Editor::PropertyProxyVtbl *)&UFG::Editor::PropertyProxy::`vftable';
+  v1->vfptr = (UFG::Editor::PropertyProxyVtbl *)&UFG::Editor::PropertyProxy::`vftable;
   v5 = (UFG::qNode<UFG::Editor::PropertyProxy,UFG::Editor::PropertyProxy> *)&v1->mPrev;
   v6 = v1->mPrev;
   v7 = v1->mNext;
@@ -90,7 +90,7 @@ void __fastcall UFG::Editor::PropertyProxy_PropertySet::~PropertyProxy_PropertyS
   UFG::Editor::PropertyProxy_PropertySet *v1; // rbx
 
   v1 = this;
-  this->vfptr = (UFG::Editor::PropertyProxyVtbl *)&UFG::Editor::PropertyProxy_PropertySet::`vftable';
+  this->vfptr = (UFG::Editor::PropertyProxyVtbl *)&UFG::Editor::PropertyProxy_PropertySet::`vftable;
   UFG::qString::~qString(&this->mNewPropertyName);
   UFG::Editor::PropertyProxy_Container::~PropertyProxy_Container((UFG::Editor::PropertyProxy_Container *)&v1->vfptr);
 }
@@ -103,10 +103,10 @@ void __fastcall UFG::Editor::PropertyBrowserWindow::PropertyBrowserWindow(UFG::E
 
   v2 = this;
   UFG::DUIWindow::DUIWindow((UFG::DUIWindow *)&this->vfptr, f);
-  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::Editor::PropertyBrowserWindow,UFG::DUIWindow>::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::Editor::PropertyBrowserWindow,UFG::DUIWindow>::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
-  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::PropertyBrowserWindow::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::PropertyBrowserWindow::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::Editor::PropertyBrowserWindow,UFG::DUIWindow>::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::Editor::PropertyBrowserWindow,UFG::DUIWindow>::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
+  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::PropertyBrowserWindow::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::PropertyBrowserWindow::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   UFG::Editor::PropertyBrowser::PropertyBrowser(&v2->mBrowser);
   UFG::qString::qString(&v2->mLockedSelection);
   UFG::qString::qString(&v2->mDefaultSelection);
@@ -121,12 +121,12 @@ void __fastcall UFG::Editor::PropertyBrowserWindow::PropertyBrowserWindow(UFG::E
 
   v1 = this;
   UFG::DUIWindow::DUIWindow((UFG::DUIWindow *)&this->vfptr);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::Editor::PropertyBrowserWindow,UFG::DUIWindow>::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::Editor::PropertyBrowserWindow,UFG::DUIWindow>::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::Editor::PropertyBrowserWindow,UFG::DUIWindow>::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::Editor::PropertyBrowserWindow,UFG::DUIWindow>::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v1->mBaseNode.mUID = -1i64;
   v1->mTypeUID = UFG::qStringHash64("UFG::Editor::PropertyBrowserWindow", 0xFFFFFFFFFFFFFFFFui64);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::PropertyBrowserWindow::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::PropertyBrowserWindow::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::PropertyBrowserWindow::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::PropertyBrowserWindow::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   UFG::Editor::PropertyBrowser::PropertyBrowser(&v1->mBrowser);
   UFG::qString::qString(&v1->mLockedSelection);
   UFG::qString::qString(&v1->mDefaultSelection);

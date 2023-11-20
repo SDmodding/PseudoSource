@@ -196,13 +196,13 @@ void __fastcall Scaleform::HeapPT::SysAllocWrapper::SysAllocWrapper(Scaleform::H
 
   v2 = sysAlloc;
   v3 = this;
-  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocBase::`vftable';
-  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocPaged::`vftable';
-  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::HeapPT::SysAllocWrapper::`vftable';
+  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocBase::`vftable;
+  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocPaged::`vftable;
+  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::HeapPT::SysAllocWrapper::`vftable;
   v4 = &this->Allocator;
-  this->Allocator.vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocBase::`vftable';
-  v4->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocPaged::`vftable';
-  v4->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::HeapPT::SysAllocGranulator::`vftable';
+  this->Allocator.vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocBase::`vftable;
+  v4->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocPaged::`vftable;
+  v4->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::HeapPT::SysAllocGranulator::`vftable;
   this->Allocator.pGranulator = 0i64;
   this->Allocator.SysDirectThreshold = 0i64;
   this->Allocator.MinAlign = 0i64;
@@ -534,7 +534,7 @@ Scaleform::MemoryHeapPT *__fastcall Scaleform::HeapPT::HeapRoot::CreateHeap(Scal
   if ( !(v4->Flags & 4) )
     v13 |= 0x20u;
   Scaleform::MemoryHeap::MemoryHeap((Scaleform::MemoryHeap *)v12);
-  *(_QWORD *)v12 = &Scaleform::MemoryHeapPT::`vftable';
+  *(_QWORD *)v12 = &Scaleform::MemoryHeapPT::`vftable;
   *((_QWORD *)v12 + 25) = 0i64;
   *((_QWORD *)v12 + 26) = 0i64;
   if ( v12 == (char *)-216i64 )

@@ -9,7 +9,7 @@ __int64 UFG::_dynamic_initializer_for__gSceneryGroupInventory__()
     0x7480E00Bu,
     0,
     0);
-  UFG::gSceneryGroupInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::SceneryGroupInventory::`vftable';
+  UFG::gSceneryGroupInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::SceneryGroupInventory::`vftable;
   return atexit(UFG::_dynamic_atexit_destructor_for__gSceneryGroupInventory__);
 }
 
@@ -93,12 +93,12 @@ void __fastcall UFG::SceneryGroupInventory::Add(UFG::SceneryGroupInventory *this
       v19 = 32i64 * v17;
       if ( v19 + v8 + 16 )
         UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)(v19 + v8 + 16));
-      v20 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+      v20 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+      if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
       {
         v21 = UFG::qResourceWarehouse::Instance();
         v20 = UFG::qResourceWarehouse::GetInventory(v21, 0xA2ADCD77);
-        `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v20;
+        `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v20;
       }
       UFG::qResourceHandle::Init(v18, 0xA2ADCD77, v18->mNameUID, v20);
       ++v17;
@@ -154,12 +154,12 @@ void __fastcall UFG::SceneryGroupInventory::Remove(UFG::SceneryGroupInventory *t
       v9 = 2i64;
       do
       {
-        v10 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-        if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+        v10 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+        if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
         {
           v11 = UFG::qResourceWarehouse::Instance();
           v10 = UFG::qResourceWarehouse::GetInventory(v11, 0xA2ADCD77);
-          `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v10;
+          `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v10;
         }
         UFG::qResourceHandle::Close(v8, v10);
         ++v8;

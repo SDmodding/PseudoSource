@@ -406,7 +406,7 @@ Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Object> *__fastcall Scaleform::GF
     (Scaleform::GFx::AS3::Object *)v4[1].RegisterFile.pReserved,
     3u,
     &ptr);
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
   return v3;
 }
 
@@ -449,7 +449,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
       v5,
       v2,
       &Scaleform::GFx::AS3::fl_utils::TimerCI);
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_utils::Timer::`vftable';
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_utils::Timer::`vftable;
   }
   else
   {
@@ -464,7 +464,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
       v7,
       v2,
       &Scaleform::GFx::AS3::fl_utils::TimerCI);
-    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_utils::Timer::`vftable';
+    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_utils::Timer::`vftable;
   }
   else
   {

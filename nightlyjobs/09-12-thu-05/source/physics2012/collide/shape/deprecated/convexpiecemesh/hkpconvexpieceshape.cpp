@@ -5,9 +5,9 @@ void __fastcall hkpConvexPieceShape::hkpConvexPieceShape(hkpConvexPieceShape *th
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   *(_DWORD *)&this->m_type.m_storage = 1047;
   this->m_radius = radius;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpConvexPieceShape::`vftable'{for `hkpConvexShape'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkpConvexPieceShape::`vftable{for `hkpConvexShape};
   this->m_userData = 0i64;
-  this->vfptr = (hkpShapeContainerVtbl *)&hkpConvexPieceShape::`vftable'{for `hkpShapeContainer'};
+  this->vfptr = (hkpShapeContainerVtbl *)&hkpConvexPieceShape::`vftable{for `hkpShapeContainer};
 }
 
 // File Line: 24

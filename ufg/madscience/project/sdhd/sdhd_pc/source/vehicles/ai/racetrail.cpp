@@ -91,7 +91,7 @@ void __fastcall UFG::RaceTrail::RaceTrail(UFG::RaceTrail *this, int num_points, 
   v4 = num_points;
   v5 = this;
   UFG::qSafePointerNode<UFG::RaceTrail>::qSafePointerNode<UFG::RaceTrail>((UFG::qSafePointerNode<UFG::RaceTrail> *)&this->vfptr);
-  v5->vfptr = (UFG::qSafePointerNode<UFG::RaceTrail>Vtbl *)&UFG::RaceTrail::`vftable';
+  v5->vfptr = (UFG::qSafePointerNode<UFG::RaceTrail>Vtbl *)&UFG::RaceTrail::`vftable;
   *(_QWORD *)&v5->nLaps = 1i64;
   v6 = 0i64;
   v5->fLength = 0.0;
@@ -110,7 +110,7 @@ void __fastcall UFG::RaceTrail::RaceTrail(UFG::RaceTrail *this, int num_points, 
   {
     LODWORD(v10->mNext) = v4;
     v6 = (signed __int64)&v10->mNext + 4;
-    `eh vector constructor iterator'(
+    `eh vector constructor iterator(
       (char *)&v10->mNext + 4,
       0x38ui64,
       v4,
@@ -130,15 +130,15 @@ void __fastcall UFG::RaceTrail::~RaceTrail(UFG::RaceTrail *this)
   UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v5; // rax
 
   v1 = (UFG::qSafePointerNode<UFG::ParkourHandle> *)this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::RaceTrail>Vtbl *)&UFG::RaceTrail::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::RaceTrail>Vtbl *)&UFG::RaceTrail::`vftable;
   v2 = this->pRacePoints;
   if ( v2 )
   {
     v3 = &v2[-1].fTimeBonus;
-    `eh vector destructor iterator'(v2, 0x38ui64, LODWORD(v2[-1].fTimeBonus), (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v2, 0x38ui64, LODWORD(v2[-1].fTimeBonus), (void (__fastcall *)(void *))_);
     operator delete[](v3);
   }
-  v1->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::RaceTrail>::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::RaceTrail>::`vftable;
   UFG::qSafePointerNode<UFG::DynamicCoverCorner>::SetAllPointersToNull(v1);
   UFG::qList<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList,1,0>::DeleteNodes(&v1->m_SafePointerList);
   v4 = v1->m_SafePointerList.mNode.mPrev;
@@ -768,7 +768,7 @@ void __fastcall UFG::RaceManager::RaceManager(UFG::RaceManager *this)
 
   v1 = this;
   UFG::TSActor::TSActor((UFG::TSActor *)&this->vfptr, &UFG::RaceManager::mClass->i_name, UFG::RaceManager::mClass);
-  v1->vfptr = (SSObjectBaseVtbl *)&UFG::RaceManager::`vftable';
+  v1->vfptr = (SSObjectBaseVtbl *)&UFG::RaceManager::`vftable;
   v2 = UFG::RaceManager::aRaceTrails;
   v3 = 8i64;
   do

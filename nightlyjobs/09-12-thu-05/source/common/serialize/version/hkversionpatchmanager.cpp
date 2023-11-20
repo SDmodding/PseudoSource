@@ -21,7 +21,7 @@ void __fastcall hkDefaultClassWrapper::hkDefaultClassWrapper(hkDefaultClassWrapp
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v2 = nameReg;
-  this->vfptr = (hkBaseObjectVtbl *)&hkDefaultClassWrapper::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkDefaultClassWrapper::`vftable;
   v3 = this;
   this->m_nameReg.m_pntr = 0i64;
   if ( !nameReg )
@@ -236,7 +236,7 @@ void __fastcall hkVersionPatchManager::hkVersionPatchManager(hkVersionPatchManag
   __int64 v3; // rdi
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkVersionPatchManager::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkVersionPatchManager::`vftable;
   this->m_patchInfos.m_data = 0i64;
   this->m_patchInfos.m_size = 0;
   this->m_patchInfos.m_capacityAndFlags = 2147483648;
@@ -390,7 +390,7 @@ void __fastcall hkVersionPatchManager::~hkVersionPatchManager(hkVersionPatchMana
 
   v1 = this->m_uidFromClassVersion;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkVersionPatchManager::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkVersionPatchManager::`vftable;
   if ( v1 )
   {
     hkVersionPatchManager::UidFromClassVersion::~UidFromClassVersion(v1);
@@ -413,7 +413,7 @@ void __fastcall hkVersionPatchManager::~hkVersionPatchManager(hkVersionPatchMana
       8 * v4);
   v2->m_patchInfos.m_data = 0i64;
   v2->m_patchInfos.m_capacityAndFlags = 2147483648;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 214
@@ -2057,7 +2057,7 @@ LABEL_44:
   v74 = hkOstream::operator<<(v73, v45);
   hkOstream::operator<<(
     v74,
-    " is not registered. If this is a Havok class, make sure the class's product reflection is enabled near where hkProdu"
+    " is not registered. If this is a Havok class, make sure the classs product reflection is enabled near where hkProdu"
     "ctFeatures.cxx is included. Otherwise, check your own class registration.");
   v69 = 842;
   v70 = 1064951216;

@@ -2,7 +2,7 @@
 // RVA: 0x8A4320
 void __fastcall Scaleform::Render::Text::EditorKitBase::~EditorKitBase(Scaleform::Render::Text::EditorKitBase *this)
 {
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Text::EditorKitBase::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Text::EditorKitBase::`vftable;
   Scaleform::RefCountImplCore::~RefCountImplCore((Scaleform::RefCountImplCore *)&this->vfptr);
 }
 

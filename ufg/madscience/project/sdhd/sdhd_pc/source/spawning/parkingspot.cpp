@@ -20,7 +20,7 @@ void __fastcall UFG::VehicleSpot::VehicleSpot(UFG::VehicleSpot *this, UFG::qSymb
   v5 = (UFG::qNode<UFG::VehicleSpot,UFG::VehicleSpot> *)&v4->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleSpot::`vftable';
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleSpot::`vftable;
   v4->mNearOrOnIntersection = 0;
   v6 = &v4->mOccupier;
   v6->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v6->mPrev;
@@ -45,7 +45,7 @@ void __fastcall UFG::VehicleSpot::~VehicleSpot(UFG::VehicleSpot *this)
   UFG::qNode<UFG::VehicleSpot,UFG::VehicleSpot> *v9; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleSpot::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleSpot::`vftable;
   v2 = &this->mOccupier;
   if ( this->mOccupier.m_pPointer )
   {
@@ -206,7 +206,7 @@ UFG::VehicleSpot *__fastcall UFG::ParkingSpot::PropertiesOnActivate(UFG::SceneOb
     v6 = v3 + 1;
     v6->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)v6;
     v6->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)v6;
-    v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ParkingSpot::`vftable';
+    v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ParkingSpot::`vftable;
     UFG::SimComponent::AddType((UFG::SimComponent *)&v3->vfptr, UFG::ParkingSpot::_ParkingSpotTypeUID, "ParkingSpot");
     v3->mRoadSegmentID = -1;
   }

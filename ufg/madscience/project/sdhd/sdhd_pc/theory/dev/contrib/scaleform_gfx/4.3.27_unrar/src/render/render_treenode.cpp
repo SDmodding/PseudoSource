@@ -133,12 +133,12 @@ void __fastcall Scaleform::Render::TreeNode::NodeData::updateOriginalBoundState(
     {
       *(_QWORD *)(v4 + 16) = 0i64;
       *(_QWORD *)(v4 + 24) = 0i64;
-      *(_QWORD *)v4 = &Scaleform::RefCountImplCore::`vftable';
+      *(_QWORD *)v4 = &Scaleform::RefCountImplCore::`vftable;
       *(_DWORD *)(v4 + 8) = 1;
-      *(_QWORD *)v4 = &Scaleform::RefCountImpl::`vftable';
-      *(_QWORD *)v4 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-      *(_QWORD *)v4 = &Scaleform::RefCountBase<Scaleform::Render::Rect<float>,2>::`vftable';
-      *(_QWORD *)v4 = &Scaleform::Render::RectRef<float>::`vftable';
+      *(_QWORD *)v4 = &Scaleform::RefCountImpl::`vftable;
+      *(_QWORD *)v4 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+      *(_QWORD *)v4 = &Scaleform::RefCountBase<Scaleform::Render::Rect<float>,2>::`vftable;
+      *(_QWORD *)v4 = &Scaleform::Render::RectRef<float>::`vftable;
     }
     else
     {
@@ -772,12 +772,12 @@ void __fastcall Scaleform::Render::TreeNode::SetScale9Grid(Scaleform::Render::Tr
     v11 = v6;
     if ( v6 )
     {
-      *(_QWORD *)v6 = &Scaleform::RefCountImplCore::`vftable';
+      *(_QWORD *)v6 = &Scaleform::RefCountImplCore::`vftable;
       *((_DWORD *)v6 + 2) = 1;
-      *(_QWORD *)v6 = &Scaleform::RefCountImpl::`vftable';
-      *(_QWORD *)v6 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable';
-      *(_QWORD *)v6 = &Scaleform::RefCountBase<Scaleform::Render::Scale9GridRect,71>::`vftable';
-      *(_QWORD *)v6 = &Scaleform::Render::Scale9GridRect::`vftable';
+      *(_QWORD *)v6 = &Scaleform::RefCountImpl::`vftable;
+      *(_QWORD *)v6 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable;
+      *(_QWORD *)v6 = &Scaleform::RefCountBase<Scaleform::Render::Scale9GridRect,71>::`vftable;
+      *(_QWORD *)v6 = &Scaleform::Render::Scale9GridRect::`vftable;
       *((_QWORD *)v6 + 2) = 0i64;
       *((_QWORD *)v6 + 3) = 0i64;
     }
@@ -841,12 +841,12 @@ void __fastcall Scaleform::Render::TreeNode::SetViewMatrix3D(Scaleform::Render::
     *((_DWORD *)v6 + 4) = 1065353216;
     *((_DWORD *)v6 + 9) = 1065353216;
     *((_DWORD *)v6 + 14) = 1065353216;
-    *(_QWORD *)v6 = &Scaleform::RefCountImplCore::`vftable';
+    *(_QWORD *)v6 = &Scaleform::RefCountImplCore::`vftable;
     *((_DWORD *)v6 + 2) = 1;
-    *(_QWORD *)v6 = &Scaleform::RefCountImpl::`vftable';
-    *(_QWORD *)v6 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-    *(_QWORD *)v6 = &Scaleform::RefCountBase<Scaleform::Render::Matrix3x4<float>,2>::`vftable';
-    *(_QWORD *)v6 = &Scaleform::Render::Matrix3x4Ref<float>::`vftable';
+    *(_QWORD *)v6 = &Scaleform::RefCountImpl::`vftable;
+    *(_QWORD *)v6 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+    *(_QWORD *)v6 = &Scaleform::RefCountBase<Scaleform::Render::Matrix3x4<float>,2>::`vftable;
+    *(_QWORD *)v6 = &Scaleform::Render::Matrix3x4Ref<float>::`vftable;
   }
   else
   {
@@ -921,12 +921,12 @@ void __fastcall Scaleform::Render::TreeNode::SetProjectionMatrix3D(Scaleform::Re
     *((_DWORD *)v6 + 9) = 1065353216;
     *((_DWORD *)v6 + 14) = 1065353216;
     *((_DWORD *)v6 + 19) = 1065353216;
-    *(_QWORD *)v6 = &Scaleform::RefCountImplCore::`vftable';
+    *(_QWORD *)v6 = &Scaleform::RefCountImplCore::`vftable;
     *((_DWORD *)v6 + 2) = 1;
-    *(_QWORD *)v6 = &Scaleform::RefCountImpl::`vftable';
-    *(_QWORD *)v6 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-    *(_QWORD *)v6 = &Scaleform::RefCountBase<Scaleform::Render::Matrix4x4<float>,2>::`vftable';
-    *(_QWORD *)v6 = &Scaleform::Render::Matrix4x4Ref<float>::`vftable';
+    *(_QWORD *)v6 = &Scaleform::RefCountImpl::`vftable;
+    *(_QWORD *)v6 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+    *(_QWORD *)v6 = &Scaleform::RefCountBase<Scaleform::Render::Matrix4x4<float>,2>::`vftable;
+    *(_QWORD *)v6 = &Scaleform::Render::Matrix4x4Ref<float>::`vftable;
   }
   else
   {
@@ -1265,12 +1265,12 @@ void __fastcall Scaleform::Render::TreeNode::SetRendererString(Scaleform::Render
     v10 = v7;
     if ( v7 )
     {
-      *(_QWORD *)v7 = &Scaleform::RefCountImplCore::`vftable';
+      *(_QWORD *)v7 = &Scaleform::RefCountImplCore::`vftable;
       *((_DWORD *)v7 + 2) = 1;
-      *(_QWORD *)v7 = &Scaleform::RefCountImpl::`vftable';
-      *(_QWORD *)v7 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-      *(_QWORD *)v7 = &Scaleform::RefCountBase<Scaleform::Render::UserDataState::Data,2>::`vftable';
-      *(_QWORD *)v7 = &Scaleform::Render::UserDataState::Data::`vftable';
+      *(_QWORD *)v7 = &Scaleform::RefCountImpl::`vftable;
+      *(_QWORD *)v7 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+      *(_QWORD *)v7 = &Scaleform::RefCountBase<Scaleform::Render::UserDataState::Data,2>::`vftable;
+      *(_QWORD *)v7 = &Scaleform::Render::UserDataState::Data::`vftable;
       _InterlockedExchangeAdd(&Scaleform::String::NullData.RefCount, 1u);
       *((_QWORD *)v7 + 2) = (unsigned __int64)&Scaleform::String::NullData | 1;
       *((_DWORD *)v7 + 6) = 0;
@@ -1348,12 +1348,12 @@ void __fastcall Scaleform::Render::TreeNode::SetRendererFloat(Scaleform::Render:
     v8 = v5;
     if ( v5 )
     {
-      *(_QWORD *)v5 = &Scaleform::RefCountImplCore::`vftable';
+      *(_QWORD *)v5 = &Scaleform::RefCountImplCore::`vftable;
       *((_DWORD *)v5 + 2) = 1;
-      *(_QWORD *)v5 = &Scaleform::RefCountImpl::`vftable';
-      *(_QWORD *)v5 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-      *(_QWORD *)v5 = &Scaleform::RefCountBase<Scaleform::Render::UserDataState::Data,2>::`vftable';
-      *(_QWORD *)v5 = &Scaleform::Render::UserDataState::Data::`vftable';
+      *(_QWORD *)v5 = &Scaleform::RefCountImpl::`vftable;
+      *(_QWORD *)v5 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+      *(_QWORD *)v5 = &Scaleform::RefCountBase<Scaleform::Render::UserDataState::Data,2>::`vftable;
+      *(_QWORD *)v5 = &Scaleform::Render::UserDataState::Data::`vftable;
       _InterlockedExchangeAdd(&Scaleform::String::NullData.RefCount, 1u);
       *((_QWORD *)v5 + 2) = (unsigned __int64)&Scaleform::String::NullData | 1;
       *((_DWORD *)v5 + 6) = 0;
@@ -1429,12 +1429,12 @@ void __fastcall Scaleform::Render::TreeNode::DisableBatching(Scaleform::Render::
     v9 = v6;
     if ( v6 )
     {
-      *(_QWORD *)v6 = &Scaleform::RefCountImplCore::`vftable';
+      *(_QWORD *)v6 = &Scaleform::RefCountImplCore::`vftable;
       *((_DWORD *)v6 + 2) = 1;
-      *(_QWORD *)v6 = &Scaleform::RefCountImpl::`vftable';
-      *(_QWORD *)v6 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-      *(_QWORD *)v6 = &Scaleform::RefCountBase<Scaleform::Render::UserDataState::Data,2>::`vftable';
-      *(_QWORD *)v6 = &Scaleform::Render::UserDataState::Data::`vftable';
+      *(_QWORD *)v6 = &Scaleform::RefCountImpl::`vftable;
+      *(_QWORD *)v6 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+      *(_QWORD *)v6 = &Scaleform::RefCountBase<Scaleform::Render::UserDataState::Data,2>::`vftable;
+      *(_QWORD *)v6 = &Scaleform::Render::UserDataState::Data::`vftable;
       _InterlockedExchangeAdd(&Scaleform::String::NullData.RefCount, 1u);
       *((_QWORD *)v6 + 2) = (unsigned __int64)&Scaleform::String::NullData | 1;
       *((_DWORD *)v6 + 6) = 0;
@@ -2288,8 +2288,8 @@ Scaleform::Render::ContextImpl::Entry *__fastcall Scaleform::Render::TreeContain
     Scaleform::Render::TreeNode::NodeData::NodeData(
       v4,
       (Scaleform::Render::ContextImpl::NonlocalCloneArg<Scaleform::Render::TreeNode::NodeData>)&src);
-    v5->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::ContextImpl::ContextData_ImplMixin<Scaleform::Render::TreeContainer::NodeData,Scaleform::Render::TreeNode::NodeData>::`vftable';
-    v5->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::TreeContainer::NodeData::`vftable';
+    v5->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::ContextImpl::ContextData_ImplMixin<Scaleform::Render::TreeContainer::NodeData,Scaleform::Render::TreeNode::NodeData>::`vftable;
+    v5->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::TreeContainer::NodeData::`vftable;
     *(_QWORD *)&v5[1].Type = 0i64;
     v5[1].vfptr = 0i64;
   }

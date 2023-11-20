@@ -192,7 +192,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_geom::Transform::colorTransfo
   v3 = this;
   v4 = this->pTraits.pObject->pVM;
   pobj.pObject = 0i64;
-  `eh vector constructor iterator'(&ptr, 0x20ui64, 8, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x20ui64, 8, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::Value);
   v5 = (float *)Scaleform::GFx::DisplayObjectBase::GetCxform((Scaleform::GFx::DisplayObjectBase *)&v3->pDispObj->vfptr);
   Scaleform::GFx::AS3::Value::SetNumber((Scaleform::GFx::AS3::Value *)&ptr, *v5);
   Scaleform::GFx::AS3::Value::SetNumber(&v11, v5[1]);
@@ -232,7 +232,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_geom::Transform::colorTransfo
     }
     v2->pObject = v6;
   }
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 8, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 8, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
   if ( v6 )
   {
     if ( (unsigned __int8)v6 & 1 )
@@ -322,7 +322,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_geom::Transform::concatenated
   v3 = this;
   pobj.pObject = 0i64;
   Scaleform::Render::Cxform::Cxform(&v11);
-  `eh vector constructor iterator'(&ptr, 0x20ui64, 8, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x20ui64, 8, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::Value);
   v4 = v3->pTraits.pObject->pVM;
   for ( i = (Scaleform::GFx::DisplayObjectBase *)&v3->pDispObj->vfptr; i; i = i->pParentChar )
   {
@@ -367,7 +367,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_geom::Transform::concatenated
     }
     v2->pObject = v7;
   }
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 8, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 8, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
   if ( v7 )
   {
     if ( (unsigned __int8)v7 & 1 )
@@ -415,7 +415,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_geom::Transform::concatenated
   pobj.pObject = 0i64;
   *(_OWORD *)&v11.M[0][0] = _xmm;
   *(__m128 *)&v11.M[1][0] = _xmm;
-  `eh vector constructor iterator'(&ptr, 0x20ui64, 6, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x20ui64, 6, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::Value);
   v4 = v3->pTraits.pObject->pVM;
   for ( i = v3->pDispObj; i; i = (Scaleform::GFx::DisplayObject *)&i->pParent->vfptr )
   {
@@ -458,7 +458,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_geom::Transform::concatenated
     }
     v2->pObject = v7;
   }
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 6, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 6, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
   if ( v7 )
   {
     if ( (unsigned __int8)v7 & 1 )
@@ -506,7 +506,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_geom::Transform::matrixGet(Sc
   v3 = this;
   v4 = this->pTraits.pObject->pVM;
   pobj.pObject = 0i64;
-  `eh vector constructor iterator'(&ptr, 0x20ui64, 6, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x20ui64, 6, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::Value);
   v5 = (float *)((__int64 (__cdecl *)(Scaleform::GFx::DisplayObject *))v3->pDispObj->vfptr[2].__vecDelDtor)(v3->pDispObj);
   v6 = v5[1];
   v7 = v5[3];
@@ -549,7 +549,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_geom::Transform::matrixGet(Sc
     }
     v2->pObject = v11;
   }
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 6, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 6, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
   if ( v11 )
   {
     if ( (unsigned __int8)v11 & 1 )
@@ -698,7 +698,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_geom::Transform::matrix3DGet(
   {
     v4 = this->pTraits.pObject->pVM;
     pobj.pObject = 0i64;
-    `eh vector constructor iterator'(
+    `eh vector constructor iterator(
       (char *)&v37 + 8,
       0x20ui64,
       16,
@@ -789,7 +789,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_geom::Transform::matrix3DGet(
       }
       v2->pObject = v22;
     }
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       (char *)&v37 + 8,
       0x20ui64,
       16,
@@ -933,7 +933,7 @@ void __usercall Scaleform::GFx::AS3::Instances::fl_geom::Transform::perspectiveP
   {
     v6 = this->pTraits.pObject->pVM;
     pobj.pObject = 0i64;
-    `eh vector constructor iterator'(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::Value);
     v7 = v4->pDispObj;
     v8 = (*((__int64 (__fastcall **)(Scaleform::GFx::AS3::VMVtbl *, _QWORD))v6[1].vfptr->__vecDelDtor + 16))(
            v6[1].vfptr,
@@ -1014,7 +1014,7 @@ void __usercall Scaleform::GFx::AS3::Instances::fl_geom::Transform::perspectiveP
       }
       v3->pObject = v18;
     }
-    `eh vector destructor iterator'(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
     if ( v18 )
     {
       if ( (unsigned __int8)v18 & 1 )
@@ -1128,7 +1128,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_geom::Transform::pixelBoundsG
   {
     v4 = this->pTraits.pObject->pVM;
     pobj.pObject = 0i64;
-    `eh vector constructor iterator'(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::Value);
     v5 = v3->pDispObj;
     v6 = v5->vfptr;
     v7 = ((__int64 (__cdecl *)(Scaleform::GFx::DisplayObject *))v5->vfptr[2].__vecDelDtor)(v5);
@@ -1190,7 +1190,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_geom::Transform::pixelBoundsG
       }
       v2->pObject = v16;
     }
-    `eh vector destructor iterator'(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
     if ( v16 )
     {
       if ( (unsigned __int8)v16 & 1 )
@@ -1252,7 +1252,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_geom::Transform::getRelativeM
       relativeTo->vfptr[6].Finalize_GC((Scaleform::GFx::AS3::RefCountBaseGC<328> *)relativeTo);
     v9 = v5->pTraits.pObject->pVM;
     pobj.pObject = 0i64;
-    `eh vector constructor iterator'(&ptr, 0x20ui64, 16, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x20ui64, 16, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::Value);
     memset(&Dst, 0, 0x30ui64);
     Dst = 1065353216;
     v26 = 1065353216;
@@ -1337,7 +1337,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_geom::Transform::getRelativeM
       }
       v4->pObject = v16;
     }
-    `eh vector destructor iterator'(&ptr, 0x20ui64, 16, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x20ui64, 16, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
     if ( v16 )
     {
       if ( (unsigned __int8)v16 & 1 )
@@ -1406,8 +1406,8 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v5 )
   {
     Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, v2, &Scaleform::GFx::AS3::fl_geom::TransformCI);
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable';
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_geom::Transform::`vftable';
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable;
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_geom::Transform::`vftable;
   }
   else
   {
@@ -1419,8 +1419,8 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v7 )
   {
     Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v7, v2, &Scaleform::GFx::AS3::fl_geom::TransformCI);
-    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable';
-    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_geom::Transform::`vftable';
+    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable;
+    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_geom::Transform::`vftable;
   }
   else
   {

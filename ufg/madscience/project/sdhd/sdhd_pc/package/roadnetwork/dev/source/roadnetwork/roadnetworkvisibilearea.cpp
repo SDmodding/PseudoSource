@@ -2409,9 +2409,9 @@ void __fastcall UFG::RoadNetworkVisibleAreaEdgeManager::RoadNetworkVisibleAreaEd
   v2 = UFG::qMalloc(0x20ui64, "RoadNetworkVisibleAreaEdgeManager::EdgeStepIterator", 0i64);
   if ( v2 )
   {
-    *(_QWORD *)v2 = &UFG::EdgeIterator::`vftable';
+    *(_QWORD *)v2 = &UFG::EdgeIterator::`vftable;
     *((_QWORD *)v2 + 2) = v1;
-    *(_QWORD *)v2 = &UFG::EdgeStepIterator::`vftable';
+    *(_QWORD *)v2 = &UFG::EdgeStepIterator::`vftable;
     *((_DWORD *)v2 + 6) = -1;
     *((_DWORD *)v2 + 2) = -1;
   }
@@ -2423,12 +2423,12 @@ void __fastcall UFG::RoadNetworkVisibleAreaEdgeManager::RoadNetworkVisibleAreaEd
   v3 = UFG::qMalloc(0x20ui64, "RoadNetworkVisibleAreaEdgeManager::OuterEdgeIterator", 0i64);
   if ( v3 )
   {
-    *(_QWORD *)v3 = &UFG::EdgeIterator::`vftable';
+    *(_QWORD *)v3 = &UFG::EdgeIterator::`vftable;
     *((_QWORD *)v3 + 2) = v1;
-    *(_QWORD *)v3 = &UFG::EdgeStepIterator::`vftable';
+    *(_QWORD *)v3 = &UFG::EdgeStepIterator::`vftable;
     *((_DWORD *)v3 + 6) = -1;
     *((_DWORD *)v3 + 2) = -1;
-    *(_QWORD *)v3 = &UFG::OuterEdgeIterator::`vftable';
+    *(_QWORD *)v3 = &UFG::OuterEdgeIterator::`vftable;
   }
   else
   {
@@ -2438,9 +2438,9 @@ void __fastcall UFG::RoadNetworkVisibleAreaEdgeManager::RoadNetworkVisibleAreaEd
   v4 = UFG::qMalloc(0x20ui64, "RoadNetworkVisibleAreaEdgeManager::SpawnPointIterator", 0i64);
   if ( v4 )
   {
-    *(_QWORD *)v4 = &UFG::EdgeIterator::`vftable';
+    *(_QWORD *)v4 = &UFG::EdgeIterator::`vftable;
     *((_QWORD *)v4 + 2) = v1;
-    *(_QWORD *)v4 = &UFG::SpawnPointIterator::`vftable';
+    *(_QWORD *)v4 = &UFG::SpawnPointIterator::`vftable;
     *((_DWORD *)v4 + 6) = 0;
   }
   else
@@ -2547,8 +2547,8 @@ char __fastcall UFG::RoadNetworkVisibleAreaEdgeManager::ExpandOneStep(UFG::RoadN
 // RVA: 0xD0C90
 void __fastcall UFG::EdgeStepIterator::~EdgeStepIterator(UFG::EdgeStepIterator *this)
 {
-  this->vfptr = (UFG::EdgeIteratorVtbl *)&UFG::EdgeStepIterator::`vftable';
-  this->vfptr = (UFG::EdgeIteratorVtbl *)&UFG::EdgeIterator::`vftable';
+  this->vfptr = (UFG::EdgeIteratorVtbl *)&UFG::EdgeStepIterator::`vftable;
+  this->vfptr = (UFG::EdgeIteratorVtbl *)&UFG::EdgeIterator::`vftable;
 }
 
 // File Line: 1535
@@ -2732,7 +2732,7 @@ void __fastcall UFG::RoadNetworkVisibleAreaEdge::RoadNetworkVisibleAreaEdge(UFG:
   this->mPrev = (UFG::qNode<UFG::RoadNetworkVisibleAreaEdge,UFG::RoadNetworkVisibleAreaEdge> *)&this->mPrev;
   this->mNext = (UFG::qNode<UFG::RoadNetworkVisibleAreaEdge,UFG::RoadNetworkVisibleAreaEdge> *)&this->mPrev;
   this->mVisibleArea = visibleArea;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     this->mSpawnPoint,
     0x18ui64,
     6,
@@ -2804,7 +2804,7 @@ void __fastcall UFG::RoadNetworkVisibleAreaEdge::RoadNetworkVisibleAreaEdge(UFG:
   this->mPrev = (UFG::qNode<UFG::RoadNetworkVisibleAreaEdge,UFG::RoadNetworkVisibleAreaEdge> *)&this->mPrev;
   this->mNext = (UFG::qNode<UFG::RoadNetworkVisibleAreaEdge,UFG::RoadNetworkVisibleAreaEdge> *)&this->mPrev;
   this->mVisibleArea = visibleArea;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     this->mSpawnPoint,
     0x18ui64,
     6,
@@ -2857,7 +2857,7 @@ void __fastcall UFG::RoadNetworkVisibleAreaEdge::RoadNetworkVisibleAreaEdge(UFG:
   this->mPrev = (UFG::qNode<UFG::RoadNetworkVisibleAreaEdge,UFG::RoadNetworkVisibleAreaEdge> *)&this->mPrev;
   this->mNext = (UFG::qNode<UFG::RoadNetworkVisibleAreaEdge,UFG::RoadNetworkVisibleAreaEdge> *)&this->mPrev;
   this->mVisibleArea = visibleArea;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     this->mSpawnPoint,
     0x18ui64,
     6,
@@ -2926,7 +2926,7 @@ void __fastcall UFG::RoadNetworkVisibleAreaEdge::~RoadNetworkVisibleAreaEdge(UFG
     operator delete[](v5);
   v1->mNodesToStart.p = 0i64;
   *(_QWORD *)&v1->mNodesToStart.size = 0i64;
-  `eh vector destructor iterator'(v1->mSpawnPoint, 0x18ui64, 6, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(v1->mSpawnPoint, 0x18ui64, 6, (void (__fastcall *)(void *))_);
   v6 = v1->mPrev;
   v7 = v1->mNext;
   v6->mNext = v7;

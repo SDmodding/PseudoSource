@@ -11,7 +11,7 @@ void __fastcall OSuite::ZDateTime::ZDateTime(OSuite::ZDateTime *this, __int64 nT
   v3 = this;
   this->m_nMonth = 1;
   this->m_nDate = 1;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
   this->m_nYear = 1970;
   v4 = nTime;
   v5 = 86400 * ((OSuite::ZDateTime::IsLeapYear(1970) != 0) + 365);
@@ -34,7 +34,7 @@ void __fastcall OSuite::ZDateTime::ZDateTime(OSuite::ZDateTime *this, __int64 nT
 // RVA: 0xEE8750
 void __fastcall OSuite::ZJsonSerializer::~ZJsonSerializer(OSuite::ZDateTime *this)
 {
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
 }
 
 // File Line: 130
@@ -70,7 +70,7 @@ OSuite::ZDateTime *__fastcall OSuite::ZDateTime::Parse(OSuite::ZDateTime *result
 
   v2 = result;
   v3 = sDate;
-  result->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+  result->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
   if ( (unsigned __int8)OSuite::ZString::operator bool(sDate)
     && (OSuite::ZDateTime::ParseRFC3339(v2, v3)
      || OSuite::ZDateTime::ParseRFC1123(v2, v3)

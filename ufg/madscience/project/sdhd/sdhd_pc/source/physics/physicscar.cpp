@@ -108,7 +108,7 @@ void __fastcall UFG::PhysicsCar::PhysicsCar(UFG::PhysicsCar *this, UFG::VehicleP
     transform,
     velocity,
     wheelPositions);
-  v5->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::PhysicsCar::`vftable';
+  v5->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::PhysicsCar::`vftable;
   v6 = &v5->mAttachments;
   v6->mNode.mPrev = &v6->mNode;
   v6->mNode.mNext = &v6->mNode;
@@ -140,7 +140,7 @@ void __fastcall UFG::PhysicsCar::~PhysicsCar(UFG::PhysicsCar *this)
   UFG::qNode<UFG::VehicleAttachment,UFG::VehicleAttachment> *v3; // rax
 
   v1 = this;
-  this->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::PhysicsCar::`vftable';
+  this->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::PhysicsCar::`vftable;
   UFG::PhysicsCar::DestroyAllAttachments(this);
   UFG::qList<UFG::VehicleAttachment,UFG::VehicleAttachment,1,0>::DeleteNodes(&v1->mAttachments);
   v2 = v1->mAttachments.mNode.mPrev;
@@ -149,7 +149,7 @@ void __fastcall UFG::PhysicsCar::~PhysicsCar(UFG::PhysicsCar *this)
   v3->mPrev = v2;
   v1->mAttachments.mNode.mPrev = &v1->mAttachments.mNode;
   v1->mAttachments.mNode.mNext = &v1->mAttachments.mNode;
-  v1->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::PhysicsWheeledVehicle::`vftable';
+  v1->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::PhysicsWheeledVehicle::`vftable;
   UFG::PhysicsWheeledVehicle::DeleteWheeledVehicleComponents((UFG::PhysicsWheeledVehicle *)&v1->vfptr);
   UFG::PhysicsVehicle::~PhysicsVehicle((UFG::PhysicsVehicle *)&v1->vfptr);
 }

@@ -9,7 +9,7 @@ __int64 UFG::_dynamic_initializer_for__gSectionLayoutInventory__()
     0x3E50F7D5u,
     0,
     0);
-  UFG::gSectionLayoutInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::SectionLayoutInventory::`vftable';
+  UFG::gSectionLayoutInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::SectionLayoutInventory::`vftable;
   return atexit(UFG::_dynamic_atexit_destructor_for__gSectionLayoutInventory__);
 }
 
@@ -453,7 +453,7 @@ void __fastcall UFG::SectionLayoutEditorData::Close(UFG::SectionLayoutEditorData
   if ( v3 )
   {
     v4 = &v3[-1].p;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v3,
       0x10ui64,
       (int)v3[-1].p,
@@ -465,7 +465,7 @@ void __fastcall UFG::SectionLayoutEditorData::Close(UFG::SectionLayoutEditorData
   if ( v5 )
   {
     v6 = &v5[-1].p;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v5,
       0x10ui64,
       (int)v5[-1].p,

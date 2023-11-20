@@ -7,7 +7,7 @@ void __fastcall UFG::UIHKScreenNISPause::UIHKScreenNISPause(UFG::UIHKScreenNISPa
   v1 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -18,7 +18,7 @@ void __fastcall UFG::UIHKScreenNISPause::UIHKScreenNISPause(UFG::UIHKScreenNISPa
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenNISPause::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenNISPause::`vftable;
 }
 
 // File Line: 36
@@ -33,7 +33,7 @@ void __fastcall UFG::UIHKScreenNISPause::~UIHKScreenNISPause(UFG::UIHKScreenNISP
   unsigned int v6; // eax
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenNISPause::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenNISPause::`vftable;
   v2 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseScreen(v2, "NISPause");
   UFG::UIScreenManagerBase::queueMessage(
@@ -162,8 +162,8 @@ void __fastcall UFG::UIHKScreenNISPause::init(UFG::UIHKScreenNISPause *this, UFG
     *(_QWORD *)&dataa.MessageIds[4] = 0i64;
     UFG::UIHKHelpBarWidget::Show(v14, &dataa);
     UFG::qString::~qString(&dataa.CustomTexturePack);
-    `eh vector destructor iterator'(dataa.Icons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
-    `eh vector destructor iterator'(dataa.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+    `eh vector destructor iterator(dataa.Icons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+    `eh vector destructor iterator(dataa.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
     if ( UFG::UIHKScreenGlobalOverlay::mThis )
       v7 = UFG::UIHKScreenGlobalOverlay::mThis;
     v16 = (signed __int64)&v7->HelpBar;

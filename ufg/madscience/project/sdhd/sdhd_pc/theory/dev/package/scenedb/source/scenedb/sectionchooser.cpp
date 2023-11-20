@@ -245,7 +245,7 @@ LABEL_29:
     LODWORD(v15->mNext) = v11;
     v16 = (UFG::SectionChooser::SectionInfo *)&v15[1];
     pDtor = (void (__fastcall *)(void *))UFG::SectionChooser::SectionInfo::~SectionInfo;
-    `eh vector constructor iterator'(
+    `eh vector constructor iterator(
       &v15[1],
       0xB8ui64,
       v11,
@@ -272,7 +272,7 @@ LABEL_29:
     LODWORD(v21->mNext) = v18;
     v22 = (UFG::SectionChooser::ZoneInfo *)&v21[1];
     pDtor = (void (__fastcall *)(void *))UFG::SectionChooser::ZoneInfo::~ZoneInfo;
-    `eh vector constructor iterator'(
+    `eh vector constructor iterator(
       &v21[1],
       0x40ui64,
       v18,
@@ -414,7 +414,7 @@ void __fastcall UFG::SectionChooser::Destroy(UFG::SectionChooser *this)
   if ( UFG::SectionChooser::mZoneInfo )
   {
     v1 = &UFG::SectionChooser::mZoneInfo[-1].mhStreamHandleStdLOD.mFlags;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       UFG::SectionChooser::mZoneInfo,
       0x40ui64,
       *(_DWORD *)&UFG::SectionChooser::mZoneInfo[-1].mhStreamHandleStdLOD.mFlags,
@@ -425,7 +425,7 @@ void __fastcall UFG::SectionChooser::Destroy(UFG::SectionChooser *this)
   if ( UFG::SectionChooser::mSectionInfo )
   {
     v2 = &UFG::SectionChooser::mSectionInfo[-1].mSection;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       UFG::SectionChooser::mSectionInfo,
       0xB8ui64,
       (int)UFG::SectionChooser::mSectionInfo[-1].mSection,

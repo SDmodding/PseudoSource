@@ -31,7 +31,7 @@ void __fastcall hkaInterleavedUncompressedAnimation::hkaInterleavedUncompressedA
   v3 = this;
   hkaAnimation::hkaAnimation((hkaAnimation *)&this->vfptr, that);
   v4 = 0;
-  v3->vfptr = (hkBaseObjectVtbl *)&hkaInterleavedUncompressedAnimation::`vftable';
+  v3->vfptr = (hkBaseObjectVtbl *)&hkaInterleavedUncompressedAnimation::`vftable;
   v3->m_transforms.m_data = 0i64;
   v3->m_transforms.m_size = 0;
   v3->m_transforms.m_capacityAndFlags = 2147483648;
@@ -136,7 +136,7 @@ void __fastcall hkaInterleavedUncompressedAnimation::hkaInterleavedUncompressedA
   v3 = this;
   hkaAnimation::hkaAnimation((hkaAnimation *)&this->vfptr, (hkaAnimation *)&that->vfptr);
   v4 = 0i64;
-  v3->vfptr = (hkBaseObjectVtbl *)&hkaInterleavedUncompressedAnimation::`vftable';
+  v3->vfptr = (hkBaseObjectVtbl *)&hkaInterleavedUncompressedAnimation::`vftable;
   v3->m_transforms.m_data = 0i64;
   v3->m_transforms.m_size = 0;
   v3->m_transforms.m_capacityAndFlags = 2147483648;

@@ -10,7 +10,7 @@ void __fastcall Scaleform::GFx::SpriteDef::~SpriteDef(Scaleform::GFx::SpriteDef 
   void (__fastcall ***v6)(_QWORD, _QWORD); // rcx
 
   v1 = (Scaleform::HashSetBase<Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeHashF,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,2>,Scaleform::HashsetCachedNodeEntry<Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeHashF> > *)this;
-  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::SpriteDef::`vftable';
+  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::SpriteDef::`vftable;
   v2 = 0;
   if ( this->Playlist.Data.Size )
   {
@@ -32,8 +32,8 @@ void __fastcall Scaleform::GFx::SpriteDef::~SpriteDef(Scaleform::GFx::SpriteDef 
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v1[10].pTable);
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v1[7].pTable);
   Scaleform::HashSetBase<Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeHashF,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,2>,Scaleform::HashsetCachedNodeEntry<Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeHashF>>::Clear(v1 + 5);
-  v1->pTable = (Scaleform::HashSetBase<Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeHashF,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,2>,Scaleform::HashsetCachedNodeEntry<Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeHashF> >::TableType *)&Scaleform::GFx::CharacterDef::`vftable';
-  v1->pTable = (Scaleform::HashSetBase<Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeHashF,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,2>,Scaleform::HashsetCachedNodeEntry<Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeHashF> >::TableType *)&Scaleform::GFx::Resource::`vftable';
+  v1->pTable = (Scaleform::HashSetBase<Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeHashF,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,2>,Scaleform::HashsetCachedNodeEntry<Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeHashF> >::TableType *)&Scaleform::GFx::CharacterDef::`vftable;
+  v1->pTable = (Scaleform::HashSetBase<Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeHashF,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,2>,Scaleform::HashsetCachedNodeEntry<Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeHashF> >::TableType *)&Scaleform::GFx::Resource::`vftable;
 }
 
 // File Line: 62
@@ -67,7 +67,7 @@ void __fastcall Scaleform::GFx::SpriteDef::AddFrameName(Scaleform::GFx::SpriteDe
       LODWORD(v15[0]) = this->FrameCount;
       Scaleform::GFx::LogBase<Scaleform::GFx::LogState>::LogError(
         (Scaleform::GFx::LogBase<Scaleform::GFx::LogState> *)&v3->vfptr,
-        "AddFrameName(%d, '%s') -- frame is out of range (frameCount = %d; skipping",
+        "AddFrameName(%d, %s) -- frame is out of range (frameCount = %d; skipping",
         v4,
         (name->HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12,
         v15[0]);
@@ -83,7 +83,7 @@ void __fastcall Scaleform::GFx::SpriteDef::AddFrameName(Scaleform::GFx::SpriteDe
       LODWORD(v15[0]) = v7->SizeMask;
       Scaleform::GFx::LogBase<Scaleform::GFx::LogState>::LogError(
         (Scaleform::GFx::LogBase<Scaleform::GFx::LogState> *)&v3->vfptr,
-        "AddFrameName(%d, '%s') -- frame name already assigned to frame %d; overriding",
+        "AddFrameName(%d, %s) -- frame name already assigned to frame %d; overriding",
         (unsigned int)v6->LoadingFrame,
         (v5->HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12,
         v15[0]);
@@ -832,7 +832,7 @@ void __fastcall Scaleform::GFx::TimelineSnapshot::SourceTags::Unpack(Scaleform::
   v2 = data;
   v3 = this;
   ((void (*)(void))this->pMainTag->vfptr[1].__vecDelDtor)();
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     &ptr,
     0x90ui64,
     9,
@@ -1091,7 +1091,7 @@ void __fastcall Scaleform::GFx::TimelineSnapshot::SourceTags::Unpack(Scaleform::
     v2->Pos.pFilters.pObject = (Scaleform::Render::FilterSet *)(&v34)[18 * v6];
     v2->Pos.Flags.Flags |= 0x20u;
   }
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     &ptr,
     0x90ui64,
     9,
@@ -1392,8 +1392,8 @@ void __fastcall Scaleform::GFx::PlaceObjectTag::Unpack(Scaleform::GFx::PlaceObje
 // RVA: 0x8A7210
 void __fastcall Scaleform::GFx::PlaceObject2Tag::~PlaceObject2Tag(Scaleform::GFx::PlaceObject2Tag *this)
 {
-  this->vfptr = (Scaleform::GFx::ExecuteTagVtbl *)&Scaleform::GFx::PlaceObject2Tag::`vftable';
-  this->vfptr = (Scaleform::GFx::ExecuteTagVtbl *)&Scaleform::GFx::ExecuteTag::`vftable';
+  this->vfptr = (Scaleform::GFx::ExecuteTagVtbl *)&Scaleform::GFx::PlaceObject2Tag::`vftable;
+  this->vfptr = (Scaleform::GFx::ExecuteTagVtbl *)&Scaleform::GFx::ExecuteTag::`vftable;
 }
 
 // File Line: 747
@@ -1794,8 +1794,8 @@ void __fastcall Scaleform::GFx::PlaceObject2Tag::UnpackBase(Scaleform::GFx::Plac
 // RVA: 0x8A7320
 void __fastcall Scaleform::GFx::PlaceObject3Tag::~PlaceObject3Tag(Scaleform::GFx::PlaceObject3Tag *this)
 {
-  this->vfptr = (Scaleform::GFx::ExecuteTagVtbl *)&Scaleform::GFx::PlaceObject3Tag::`vftable';
-  this->vfptr = (Scaleform::GFx::ExecuteTagVtbl *)&Scaleform::GFx::ExecuteTag::`vftable';
+  this->vfptr = (Scaleform::GFx::ExecuteTagVtbl *)&Scaleform::GFx::PlaceObject3Tag::`vftable;
+  this->vfptr = (Scaleform::GFx::ExecuteTagVtbl *)&Scaleform::GFx::ExecuteTag::`vftable;
 }
 
 // File Line: 1075

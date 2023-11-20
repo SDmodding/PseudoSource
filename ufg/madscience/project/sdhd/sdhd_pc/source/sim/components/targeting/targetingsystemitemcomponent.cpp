@@ -58,8 +58,8 @@ void __fastcall UFG::TargetingSystemItemComponent::TargetingSystemItemComponent(
   v5 = (UFG::qNode<UFG::TargetingSystemItemComponent,UFG::TargetingSystemItemComponent> *)&v4->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TargetingSystemItemComponent::`vftable'{for `UFG::SimComponent'};
-  v4->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::TargetingSystemItemComponent::`vftable'{for `UFG::UpdateInterface'};
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TargetingSystemItemComponent::`vftable{for `UFG::SimComponent};
+  v4->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::TargetingSystemItemComponent::`vftable{for `UFG::UpdateInterface};
   v6 = UFG::TargetingSystemItemComponent::s_TargetingSystemItemComponentList.mNode.mPrev;
   UFG::TargetingSystemItemComponent::s_TargetingSystemItemComponentList.mNode.mPrev->mNext = (UFG::qNode<UFG::TargetingSystemItemComponent,UFG::TargetingSystemItemComponent> *)&v4->mPrev;
   v5->mPrev = v6;
@@ -83,8 +83,8 @@ void __fastcall UFG::TargetingSystemItemComponent::~TargetingSystemItemComponent
   UFG::qNode<UFG::TargetingSystemItemComponent,UFG::TargetingSystemItemComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TargetingSystemItemComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::TargetingSystemItemComponent::`vftable'{for `UFG::UpdateInterface'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TargetingSystemItemComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::TargetingSystemItemComponent::`vftable{for `UFG::UpdateInterface};
   if ( this == UFG::TargetingSystemItemComponent::s_TargetingSystemItemComponentpCurrentIterator )
     UFG::TargetingSystemItemComponent::s_TargetingSystemItemComponentpCurrentIterator = (UFG::TargetingSystemItemComponent *)&this->mPrev[-8].mNext;
   v2 = (UFG::qNode<UFG::TargetingSystemItemComponent,UFG::TargetingSystemItemComponent> *)&this->mPrev;

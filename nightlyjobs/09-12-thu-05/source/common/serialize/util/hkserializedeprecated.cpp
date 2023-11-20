@@ -142,7 +142,7 @@ hkSerializeDeprecated *__fastcall createInstance()
   {
     *(_DWORD *)&s_instance.m_memSizeAndFlags = 0x1FFFF;
     _S1_44 |= 1u;
-    s_instance.vfptr = (hkBaseObjectVtbl *)&hkSerializeDeprecated::`vftable';
+    s_instance.vfptr = (hkBaseObjectVtbl *)&hkSerializeDeprecated::`vftable;
     atexit(createInstance_::_2_::_dynamic_atexit_destructor_for__s_instance__);
   }
   hkReferencedObject::addReference((hkReferencedObject *)&s_instance.vfptr);

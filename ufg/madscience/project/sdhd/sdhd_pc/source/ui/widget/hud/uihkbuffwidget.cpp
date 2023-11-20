@@ -234,7 +234,7 @@ void __fastcall UFG::UIHKBuffData::Flash_Show(UFG::UIHKBuffData *this, UFG::UISc
     if ( v5 )
     {
       UFG::UIHKBuffData::GetBuffInfo(this->mType, (const char **)&texture, (const char **)&caption, &maxTime);
-      `eh vector constructor iterator'(&ptr, 0x30ui64, 6, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&ptr, 0x30ui64, 6, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       v6 = (double)(signed int)v4->mType;
       if ( (v12 >> 6) & 1 )
       {
@@ -290,7 +290,7 @@ void __fastcall UFG::UIHKBuffData::Flash_Show(UFG::UIHKBuffData *this, UFG::UISc
       v32 = 2;
       LOBYTE(v33) = v3;
       Scaleform::GFx::Movie::Invoke(v5, "Buffs_Add", 0i64, (Scaleform::GFx::Value *)&ptr, 6u);
-      `eh vector destructor iterator'(&ptr, 0x30ui64, 6, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+      `eh vector destructor iterator(&ptr, 0x30ui64, 6, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     }
   }
 }
@@ -318,7 +318,7 @@ void __fastcall UFG::UIHKBuffData::Flash_Refresh(UFG::UIHKBuffData *this, UFG::U
     v3 = screen->mRenderable->m_movie.pObject;
     if ( v3 )
     {
-      `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       v4 = (double)(signed int)v2->mType;
       if ( (v8 >> 6) & 1 )
       {
@@ -342,7 +342,7 @@ void __fastcall UFG::UIHKBuffData::Flash_Refresh(UFG::UIHKBuffData *this, UFG::U
       v12 = 5;
       v13 = v5;
       Scaleform::GFx::Movie::Invoke(v3, "Buffs_Refresh", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-      `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+      `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     }
   }
 }
@@ -360,7 +360,7 @@ void __fastcall UFG::UIHKBuffWidget::~UIHKBuffWidget(UFG::UIHKBuffWidget *this)
   v3 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseTexturePack(v3, v2);
   UFG::UIHKBuffWidget::mNumTextureLoaded = 0;
-  `eh vector destructor iterator'(v1->mIconLoaded, 0x28ui64, 7, (void (__fastcall *)(void *))UFG::qString::~qString);
+  `eh vector destructor iterator(v1->mIconLoaded, 0x28ui64, 7, (void (__fastcall *)(void *))UFG::qString::~qString);
   UFG::qString::~qString(&v1->mTexturePackFilename);
 }
 
@@ -524,7 +524,7 @@ void __fastcall UFG::UIHKBuffWidget::AddPerk(const char *perk)
         v3 = "$HUD_PERK_REDUCE_HEAT";
       }
       UFG::qString::Set(&v6, v3);
-      `eh vector constructor iterator'(
+      `eh vector constructor iterator(
         &ptr.mStringHash32,
         0x30ui64,
         6,
@@ -583,7 +583,7 @@ void __fastcall UFG::UIHKBuffWidget::AddPerk(const char *perk)
       v29 = 5;
       v30 = 0i64;
       Scaleform::GFx::Movie::Invoke(v2, "Buffs_Add", 0i64, (Scaleform::GFx::Value *)&ptr.mStringHash32, 6u);
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         &ptr.mStringHash32,
         0x30ui64,
         6,

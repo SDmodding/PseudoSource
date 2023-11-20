@@ -6,7 +6,7 @@ void __fastcall UFG::PedFormationProfile::Slot::Slot(UFG::PedFormationProfile::S
 
   v1 = this;
   UFG::qSafePointerNode<UFG::PedFormationProfile::Slot>::qSafePointerNode<UFG::PedFormationProfile::Slot>((UFG::qSafePointerNode<UFG::PedFormationProfile::Slot> *)&this->vfptr);
-  v1->vfptr = (UFG::qSafePointerNode<UFG::PedFormationProfile::Slot>Vtbl *)&UFG::PedFormationProfile::Slot::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::PedFormationProfile::Slot>Vtbl *)&UFG::PedFormationProfile::Slot::`vftable;
   v1->mFacingType = 0;
   v1->mAngle = 0;
   v1->mCanCrossLeader = 0;
@@ -211,7 +211,7 @@ void __fastcall UFG::PedFormationProfile::InitFromPropertySet(UFG::PedFormationP
         v15 = UFG::qPropertyList::GetValuePtr(v12, 0x1Au, v14);
         if ( !v15 || (v16 = (UFG::qPropertySet *)&v15[*(_QWORD *)v15], !*(_QWORD *)v15) )
           v16 = 0i64;
-        v28.vfptr = (UFG::qSafePointerNode<UFG::PedFormationProfile::Slot>Vtbl *)&UFG::qSafePointerNode<UFG::PedFormationProfile::Slot>::`vftable';
+        v28.vfptr = (UFG::qSafePointerNode<UFG::PedFormationProfile::Slot>Vtbl *)&UFG::qSafePointerNode<UFG::PedFormationProfile::Slot>::`vftable;
         v28.m_SafePointerList.mNode.mPrev = &v28.m_SafePointerList.mNode;
         v28.m_SafePointerList.mNode.mNext = &v28.m_SafePointerList.mNode;
         v17 = &v28.m_SafePointerList.mNode;
@@ -229,7 +229,7 @@ void __fastcall UFG::PedFormationProfile::InitFromPropertySet(UFG::PedFormationP
           }
           while ( (UFG::qList<UFG::qSafePointerBase<UFG::PedFormationProfile::Slot>,UFG::qSafePointerNodeList,1,0> *)v28.m_SafePointerList.mNode.mNext != &v28.m_SafePointerList );
         }
-        v28.vfptr = (UFG::qSafePointerNode<UFG::PedFormationProfile::Slot>Vtbl *)&UFG::PedFormationProfile::Slot::`vftable';
+        v28.vfptr = (UFG::qSafePointerNode<UFG::PedFormationProfile::Slot>Vtbl *)&UFG::PedFormationProfile::Slot::`vftable;
         v28.mFacingType = 0;
         v28.mAngle = 0;
         v28.mCanCrossLeader = 0;
@@ -260,7 +260,7 @@ void __fastcall UFG::PedFormationProfile::InitFromPropertySet(UFG::PedFormationP
         v3->mSlots.p[v20].mMaxLateralDistanceFromDesiredPositionHysteresis = v28.mMaxLateralDistanceFromDesiredPositionHysteresis;
         v3->mSlots.p[v20].mMaxLateralDistanceFromDesiredPositionHysteresisFar = v28.mMaxLateralDistanceFromDesiredPositionHysteresisFar;
         ++v3->mSlots.size;
-        v28.vfptr = (UFG::qSafePointerNode<UFG::PedFormationProfile::Slot>Vtbl *)&UFG::qSafePointerNode<UFG::PedFormationProfile::Slot>::`vftable';
+        v28.vfptr = (UFG::qSafePointerNode<UFG::PedFormationProfile::Slot>Vtbl *)&UFG::qSafePointerNode<UFG::PedFormationProfile::Slot>::`vftable;
         v21 = v28.m_SafePointerList.mNode.mNext;
         if ( (UFG::qList<UFG::qSafePointerBase<UFG::PedFormationProfile::Slot>,UFG::qSafePointerNodeList,1,0> *)v28.m_SafePointerList.mNode.mNext != &v28.m_SafePointerList )
         {
@@ -478,7 +478,7 @@ const char *__fastcall UFG::PedFormationManagerComponent::GetTypeName(UFG::PedFo
 // RVA: 0x14AEBC0
 __int64 dynamic_initializer_for__UFG::PedFormationManagerComponent::s_ProfilePool__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     &ptr,
     0x3A8ui64,
     16,
@@ -591,17 +591,17 @@ void __fastcall UFG::PedFormationManagerComponent::PedFormationManagerComponent(
 
   v3 = this;
   UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name_uid);
-  v3->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::UpdateInterface::`vftable';
+  v3->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::UpdateInterface::`vftable;
   v4 = (UFG::qNode<UFG::PedFormationManagerComponent,UFG::PedFormationManagerComponent> *)&v3->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::PedFormationManagerComponent::`vftable'{for `UFG::SimComponent'};
-  v3->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::PedFormationManagerComponent::`vftable'{for `UFG::UpdateInterface'};
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::PedFormationManagerComponent::`vftable{for `UFG::SimComponent};
+  v3->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::PedFormationManagerComponent::`vftable{for `UFG::UpdateInterface};
   UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0>::RebindingComponentHandle<UFG::TransformNodeComponent,0>(&v3->m_pTransformNodeComponent);
   UFG::RebindingComponentHandle<UFG::AIEntityComponent,0>::RebindingComponentHandle<UFG::AIEntityComponent,0>(&v3->m_pAIEntityComponent);
   UFG::RebindingComponentHandle<UFG::ActionTreeComponent,0>::RebindingComponentHandle<UFG::ActionTreeComponent,0>(&v3->m_pActionTreeComponent);
   UFG::RebindingComponentHandle<UFG::TargetingSystemBaseComponent,0>::RebindingComponentHandle<UFG::TargetingSystemBaseComponent,0>(&v3->m_pTargetingSystemBaseComponent);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v3->m_Slots.p,
     0xA0ui64,
     4,
@@ -612,7 +612,7 @@ void __fastcall UFG::PedFormationManagerComponent::PedFormationManagerComponent(
   *(_QWORD *)&v3->m_AngularVelocity = 0i64;
   *(_QWORD *)&v3->m_FormationForward.y = 0i64;
   v3->m_PrevFormationForward.y = 0.0;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v3->m_ProfileSlots.p,
     0x38ui64,
     9,
@@ -669,8 +669,8 @@ void __fastcall UFG::PedFormationManagerComponent::~PedFormationManagerComponent
   UFG::qNode<UFG::PedFormationManagerComponent,UFG::PedFormationManagerComponent> *v14; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::PedFormationManagerComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::PedFormationManagerComponent::`vftable'{for `UFG::UpdateInterface'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::PedFormationManagerComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::PedFormationManagerComponent::`vftable{for `UFG::UpdateInterface};
   if ( this == UFG::PedFormationManagerComponent::s_PedFormationManagerComponentpCurrentIterator )
     UFG::PedFormationManagerComponent::s_PedFormationManagerComponentpCurrentIterator = (UFG::PedFormationManagerComponent *)&this->mPrev[-5].mNext;
   v2 = (UFG::qNode<UFG::PedFormationManagerComponent,UFG::PedFormationManagerComponent> *)&this->mPrev;
@@ -705,13 +705,13 @@ void __fastcall UFG::PedFormationManagerComponent::~PedFormationManagerComponent
   v8->m_pPair.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v8->m_pPair.mPrev;
   v1->m_Pair.m_pPair.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v1->m_Pair.m_pPair.mPrev;
   v1->m_ProfileSlots.size = 0;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->m_ProfileSlots.p,
     0x38ui64,
     9,
     (void (__fastcall *)(void *))UFG::InterestPointUseDetails::~InterestPointUseDetails);
   v1->m_Slots.size = 0;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->m_Slots.p,
     0xA0ui64,
     4,
@@ -1218,7 +1218,7 @@ void __fastcall UFG::PedFormationManagerComponent::UpdateProfileSlots(UFG::PedFo
               v26 = v23[45];
               v27 = v23[46];
               npStartPos.m_hkvMeshPosition = v5->m_hkvMeshPosition;
-              npStartPos.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable';
+              npStartPos.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable;
               npStartPos.m_packedKey = v24;
               npStartPos.m_aiMeshUid = -1;
               v28 = v25 + *v19;
@@ -2628,7 +2628,7 @@ bool __fastcall UFG::PedFormationManagerComponent::DirectionIsClear(UFG::PedForm
   v24 = -1i64;
   v20 = v8.m128_i32[0];
   v21 = v9.m128_i32[0];
-  v18 = &UFG::HavokNavPosition::`vftable';
+  v18 = &UFG::HavokNavPosition::`vftable;
   v23 = _mm_unpacklo_ps(_mm_unpacklo_ps(v7, v9), _mm_unpacklo_ps(v8, (__m128)(unsigned int)FLOAT_1_0));
   v13 = *(__int64 *)((char *)&v11[2].m_BoundComponentHandles.mNode.mNext + 4);
   v25 = v13;

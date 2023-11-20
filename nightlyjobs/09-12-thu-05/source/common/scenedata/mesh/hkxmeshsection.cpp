@@ -27,7 +27,7 @@ void __fastcall hkxMeshSection::hkxMeshSection(hkxMeshSection *this, hkxMeshSect
   v2 = 0;
   v3 = &this->m_indexBuffers;
   v4 = &this->m_userChannels;
-  this->vfptr = (hkBaseObjectVtbl *)&hkxMeshSection::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkxMeshSection::`vftable;
   this->m_vertexBuffer.m_pntr = 0i64;
   v3->m_data = 0i64;
   v3->m_size = 0;

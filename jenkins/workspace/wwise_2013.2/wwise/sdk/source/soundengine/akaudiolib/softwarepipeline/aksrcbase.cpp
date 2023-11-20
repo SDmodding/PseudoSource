@@ -10,7 +10,7 @@ void __fastcall CAkSrcBaseEx::CAkSrcBaseEx(CAkSrcBaseEx *this, CAkPBI *in_pCtx)
   *(_QWORD *)&v2->m_uTotalSamples = 0i64;
   *(_QWORD *)&v2->m_uDataSize = 0i64;
   *(_QWORD *)&v2->m_uPCMLoopStart = 0i64;
-  v2->vfptr = (CAkVPLNodeVtbl *)&CAkSrcBaseEx::`vftable';
+  v2->vfptr = (CAkVPLNodeVtbl *)&CAkSrcBaseEx::`vftable;
   CAkMarkers::CAkMarkers(&v2->m_markers);
   v3 = v2->m_pCtx;
   v2->m_uLastEnvelopePtIdx = 0;
@@ -26,9 +26,9 @@ void __fastcall CAkSrcBaseEx::~CAkSrcBaseEx(CAkSrcBaseEx *this)
 
   v1 = this;
   v2 = (AMD_HD3D *)&this->m_markers;
-  *(_QWORD *)&v2[-2].mEnableStereo = &CAkSrcBaseEx::`vftable';
+  *(_QWORD *)&v2[-2].mEnableStereo = &CAkSrcBaseEx::`vftable;
   _(v2);
-  v1->vfptr = (CAkVPLNodeVtbl *)&CAkVPLNode::`vftable';
+  v1->vfptr = (CAkVPLNodeVtbl *)&CAkVPLNode::`vftable;
 }
 
 // File Line: 41

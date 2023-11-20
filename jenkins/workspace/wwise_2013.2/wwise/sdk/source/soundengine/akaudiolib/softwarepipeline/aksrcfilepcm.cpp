@@ -6,7 +6,7 @@ void __fastcall CAkSrcFilePCM::CAkSrcFilePCM(CAkSrcFilePCM *this, CAkPBI *in_pCt
 
   v2 = this;
   CAkSrcFileBase::CAkSrcFileBase((CAkSrcFileBase *)&this->vfptr, in_pCtx);
-  v2->vfptr = (CAkVPLNodeVtbl *)&CAkSrcFilePCM::`vftable';
+  v2->vfptr = (CAkVPLNodeVtbl *)&CAkSrcFilePCM::`vftable;
   v2->m_pStitchBuffer = 0i64;
   *(_QWORD *)&v2->m_uNumBytesBuffered = 0i64;
 }

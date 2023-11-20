@@ -39,7 +39,7 @@ void __fastcall hkCpuPairGetClosestPointsImplementation(hkpPairGetClosestPointsJ
   v28 = v5;
   v6 = collisionInput->m_filter.m_storage;
   v7 = collisionInput;
-  v24 = &hkpFixedBufferCdPointCollector::`vftable';
+  v24 = &hkpFixedBufferCdPointCollector::`vftable;
   v27 = 1i64;
   v25 = 2139095022;
   v31 = v6;
@@ -55,7 +55,7 @@ void __fastcall hkCpuPairGetClosestPointsImplementation(hkpPairGetClosestPointsJ
       v12 = v7->m_dispatcher.m_storage;
       v13 = *v10;
       v14 = *v11;
-      v24 = &hkpFixedBufferCdPointCollector::`vftable';
+      v24 = &hkpFixedBufferCdPointCollector::`vftable;
       v25 = 2139095022;
       v26 = &v32;
       (*((void (__fastcall **)(__int64 *, __int64 *, hkpCollisionDispatcher **, void ***, void **, _QWORD, char *, _QWORD, hkpCollisionDispatcher *))&v12->vfptr
@@ -65,7 +65,7 @@ void __fastcall hkCpuPairGetClosestPointsImplementation(hkpPairGetClosestPointsJ
         v11,
         &v28,
         &v24,
-        &hkpFixedBufferCdPointCollector::`vftable',
+        &hkpFixedBufferCdPointCollector::`vftable,
         *(_QWORD *)&v25,
         &v32,
         (unsigned int)*v9,

@@ -11,7 +11,7 @@ void __fastcall std::basic_filebuf<char,std::char_traits<char>>::~basic_filebuf<
 
   v1 = this->_Myfile == 0i64;
   v2 = this;
-  this->vfptr = (std::basic_streambuf<char,std::char_traits<char> >Vtbl *)&std::basic_filebuf<char,std::char_traits<char>>::`vftable';
+  this->vfptr = (std::basic_streambuf<char,std::char_traits<char> >Vtbl *)&std::basic_filebuf<char,std::char_traits<char>>::`vftable;
   if ( !v1 )
   {
     v3 = this->_IGfirst;
@@ -32,7 +32,7 @@ void __fastcall std::basic_filebuf<char,std::char_traits<char>>::~basic_filebuf<
     }
     std::basic_filebuf<char,std::char_traits<char>>::_Init(v2, 0i64, _Closefl);
   }
-  v2->vfptr = (std::basic_streambuf<char,std::char_traits<char> >Vtbl *)&std::basic_streambuf<char,std::char_traits<char>>::`vftable';
+  v2->vfptr = (std::basic_streambuf<char,std::char_traits<char> >Vtbl *)&std::basic_streambuf<char,std::char_traits<char>>::`vftable;
   v5 = v2->_Plocale;
   if ( v5 )
   {
@@ -592,7 +592,7 @@ void __fastcall std::basic_filebuf<char,std::char_traits<char>>::_Init(std::basi
     this->_IPcount = &_File->_cnt;
   }
   this->_Myfile = _File;
-  v3 = `std::basic_filebuf<char,std::char_traits<char>>::_Init'::`2'::_Stinit;
+  v3 = `std::basic_filebuf<char,std::char_traits<char>>::_Init::`2::_Stinit;
   this->_Pcvt = 0i64;
   this->_State = v3;
 }

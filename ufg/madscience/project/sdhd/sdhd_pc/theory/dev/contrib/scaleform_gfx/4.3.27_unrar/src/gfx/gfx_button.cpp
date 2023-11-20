@@ -19,10 +19,10 @@ void __fastcall Scaleform::GFx::Button::Button(Scaleform::GFx::Button *this, Sca
     pasRoot,
     parent,
     (Scaleform::GFx::ResourceId)&id);
-  v7->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::Button::`vftable'{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>'};
-  v7->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::Button::`vftable'{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>'};
+  v7->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::Button::`vftable{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>};
+  v7->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::Button::`vftable{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>};
   v7->pDef = v6;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v7->States,
     0x20ui64,
     4,

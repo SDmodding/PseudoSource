@@ -9,10 +9,10 @@ void __fastcall hkpTriggerVolume::hkpTriggerVolume(hkpTriggerVolume *this, hkpRi
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v2 = triggerBody;
   v3 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpTriggerVolume::`vftable'{for `hkReferencedObject'};
-  this->vfptr = (hkpContactListenerVtbl *)&hkpTriggerVolume::`vftable'{for `hkpContactListener'};
-  this->vfptr = (hkpWorldPostSimulationListenerVtbl *)&hkpTriggerVolume::`vftable'{for `hkpWorldPostSimulationListener'};
-  this->vfptr = (hkpEntityListenerVtbl *)&hkpTriggerVolume::`vftable'{for `hkpEntityListener'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkpTriggerVolume::`vftable{for `hkReferencedObject};
+  this->vfptr = (hkpContactListenerVtbl *)&hkpTriggerVolume::`vftable{for `hkpContactListener};
+  this->vfptr = (hkpWorldPostSimulationListenerVtbl *)&hkpTriggerVolume::`vftable{for `hkpWorldPostSimulationListener};
+  this->vfptr = (hkpEntityListenerVtbl *)&hkpTriggerVolume::`vftable{for `hkpEntityListener};
   this->m_overlappingBodies.m_capacityAndFlags = 2147483648;
   this->m_overlappingBodies.m_data = 0i64;
   this->m_overlappingBodies.m_size = 0;
@@ -42,10 +42,10 @@ void __fastcall hkpTriggerVolume::hkpTriggerVolume(hkpTriggerVolume *this, hkpRi
 // RVA: 0xE1A770
 void __fastcall hkpTriggerVolume::hkpTriggerVolume(hkpTriggerVolume *this, hkFinishLoadedObjectFlag f)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkpTriggerVolume::`vftable'{for `hkReferencedObject'};
-  this->vfptr = (hkpContactListenerVtbl *)&hkpTriggerVolume::`vftable'{for `hkpContactListener'};
-  this->vfptr = (hkpWorldPostSimulationListenerVtbl *)&hkpTriggerVolume::`vftable'{for `hkpWorldPostSimulationListener'};
-  this->vfptr = (hkpEntityListenerVtbl *)&hkpTriggerVolume::`vftable'{for `hkpEntityListener'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkpTriggerVolume::`vftable{for `hkReferencedObject};
+  this->vfptr = (hkpContactListenerVtbl *)&hkpTriggerVolume::`vftable{for `hkpContactListener};
+  this->vfptr = (hkpWorldPostSimulationListenerVtbl *)&hkpTriggerVolume::`vftable{for `hkpWorldPostSimulationListener};
+  this->vfptr = (hkpEntityListenerVtbl *)&hkpTriggerVolume::`vftable{for `hkpEntityListener};
 }
 
 // File Line: 43
@@ -486,10 +486,10 @@ void __fastcall hkpTriggerVolume::~hkpTriggerVolume(hkpTriggerVolume *this)
   hkSimplePropertyValue result; // [rsp+40h] [rbp+8h]
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpTriggerVolume::`vftable'{for `hkReferencedObject'};
-  this->vfptr = (hkpContactListenerVtbl *)&hkpTriggerVolume::`vftable'{for `hkpContactListener'};
-  this->vfptr = (hkpWorldPostSimulationListenerVtbl *)&hkpTriggerVolume::`vftable'{for `hkpWorldPostSimulationListener'};
-  this->vfptr = (hkpEntityListenerVtbl *)&hkpTriggerVolume::`vftable'{for `hkpEntityListener'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkpTriggerVolume::`vftable{for `hkReferencedObject};
+  this->vfptr = (hkpContactListenerVtbl *)&hkpTriggerVolume::`vftable{for `hkpContactListener};
+  this->vfptr = (hkpWorldPostSimulationListenerVtbl *)&hkpTriggerVolume::`vftable{for `hkpWorldPostSimulationListener};
+  this->vfptr = (hkpEntityListenerVtbl *)&hkpTriggerVolume::`vftable{for `hkpEntityListener};
   v2 = this->m_triggerBody;
   if ( v2 )
   {
@@ -552,10 +552,10 @@ void __fastcall hkpTriggerVolume::~hkpTriggerVolume(hkpTriggerVolume *this)
       8 * v8);
   v1->m_overlappingBodies.m_data = 0i64;
   v1->m_overlappingBodies.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkpEntityListenerVtbl *)&hkpEntityListener::`vftable';
-  v1->vfptr = (hkpWorldPostSimulationListenerVtbl *)&hkpWorldPostSimulationListener::`vftable';
-  v1->vfptr = (hkpContactListenerVtbl *)&hkpContactListener::`vftable';
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkpEntityListenerVtbl *)&hkpEntityListener::`vftable;
+  v1->vfptr = (hkpWorldPostSimulationListenerVtbl *)&hkpWorldPostSimulationListener::`vftable;
+  v1->vfptr = (hkpContactListenerVtbl *)&hkpContactListener::`vftable;
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 290

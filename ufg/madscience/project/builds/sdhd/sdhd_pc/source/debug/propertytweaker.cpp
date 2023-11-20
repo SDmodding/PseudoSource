@@ -10,7 +10,7 @@ __int64 dynamic_initializer_for__gNamedSetToEdit__()
 // RVA: 0x14E1930
 __int64 dynamic_initializer_for__BackButtonArray__()
 {
-  `eh vector constructor iterator'(BackButtonArray, 0x10ui64, 20, (void (__fastcall *)(void *))BackInfo::BackInfo);
+  `eh vector constructor iterator(BackButtonArray, 0x10ui64, 20, (void (__fastcall *)(void *))BackInfo::BackInfo);
   return atexit(dynamic_atexit_destructor_for__BackButtonArray__);
 }
 

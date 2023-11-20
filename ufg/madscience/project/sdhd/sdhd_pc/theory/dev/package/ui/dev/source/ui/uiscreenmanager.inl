@@ -17,7 +17,7 @@ void __fastcall UFG::UIScreenManagerBase::UIScreenManagerBase(UFG::UIScreenManag
 
   v2 = screenFactory;
   v3 = this;
-  this->vfptr = (UFG::UIScreenManagerBaseVtbl *)&UFG::UIScreenManagerBase::`vftable';
+  this->vfptr = (UFG::UIScreenManagerBaseVtbl *)&UFG::UIScreenManagerBase::`vftable;
   v4 = &this->m_screenStack;
   v4->mNode.mPrev = &v4->mNode;
   v4->mNode.mNext = &v4->mNode;
@@ -103,7 +103,7 @@ void __fastcall UFG::UIScreenManagerBase::~UIScreenManagerBase(UFG::UIScreenMana
   UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v22; // rax
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenManagerBaseVtbl *)&UFG::UIScreenManagerBase::`vftable';
+  this->vfptr = (UFG::UIScreenManagerBaseVtbl *)&UFG::UIScreenManagerBase::`vftable;
   UFG::qString::~qString(&this->mDebugStackPrint);
   UFG::qList<UFG::UITween,UFG::UITween,1,0>::DeleteNodes(&v1->m_activeTweens);
   v2 = v1->m_activeTweens.mNode.mPrev;

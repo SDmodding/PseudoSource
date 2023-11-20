@@ -7,12 +7,12 @@ void __fastcall DNA::DUIDNAInspector::DUIDNAInspector(DNA::DUIDNAInspector *this
 
   v2 = this;
   UFG::DUIWindow::DUIWindow((UFG::DUIWindow *)&this->vfptr);
-  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<DNA::DUIDNAInspector,UFG::DUIWindow>::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<DNA::DUIDNAInspector,UFG::DUIWindow>::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<DNA::DUIDNAInspector,UFG::DUIWindow>::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<DNA::DUIDNAInspector,UFG::DUIWindow>::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v2->mBaseNode.mUID = -1i64;
   v2->mTypeUID = UFG::qStringHash64("DNA::DUIDNAInspector", 0xFFFFFFFFFFFFFFFFui64);
-  v2->vfptr = (UFG::qReflectObjectVtbl *)&DNA::DUIDNAInspector::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&DNA::DUIDNAInspector::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v2->vfptr = (UFG::qReflectObjectVtbl *)&DNA::DUIDNAInspector::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&DNA::DUIDNAInspector::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v3 = (signed __int64)&v2->mWidget;
   *(_QWORD *)(v3 + 16) = 0i64;
   *(_QWORD *)(v3 + 8) = 0i64;
@@ -34,12 +34,12 @@ void __fastcall DNA::DUIDNAInspector::DUIDNAInspector(DNA::DUIDNAInspector *this
 
   v1 = this;
   UFG::DUIWindow::DUIWindow((UFG::DUIWindow *)&this->vfptr);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<DNA::DUIDNAInspector,UFG::DUIWindow>::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<DNA::DUIDNAInspector,UFG::DUIWindow>::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<DNA::DUIDNAInspector,UFG::DUIWindow>::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<DNA::DUIDNAInspector,UFG::DUIWindow>::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v1->mBaseNode.mUID = -1i64;
   v1->mTypeUID = UFG::qStringHash64("DNA::DUIDNAInspector", 0xFFFFFFFFFFFFFFFFui64);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&DNA::DUIDNAInspector::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&DNA::DUIDNAInspector::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&DNA::DUIDNAInspector::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&DNA::DUIDNAInspector::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v2 = (signed __int64)&v1->mWidget;
   *(_QWORD *)(v2 + 16) = 0i64;
   *(_QWORD *)(v2 + 8) = 0i64;
@@ -61,12 +61,12 @@ void __fastcall DNA::DUIReflectInspector::DUIReflectInspector(DNA::DUIReflectIns
 
   v1 = this;
   UFG::DUIWindow::DUIWindow((UFG::DUIWindow *)&this->vfptr);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<DNA::DUIReflectInspector,UFG::DUIWindow>::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<DNA::DUIReflectInspector,UFG::DUIWindow>::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<DNA::DUIReflectInspector,UFG::DUIWindow>::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<DNA::DUIReflectInspector,UFG::DUIWindow>::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v1->mBaseNode.mUID = -1i64;
   v1->mTypeUID = UFG::qStringHash64("DNA::DUIReflectInspector", 0xFFFFFFFFFFFFFFFFui64);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&DNA::DUIReflectInspector::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&DNA::DUIReflectInspector::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&DNA::DUIReflectInspector::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&DNA::DUIReflectInspector::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v2 = UFG::qStringHash64("UFG::qReflectObject", 0xFFFFFFFFFFFFFFFFui64);
   UFG::EditNotification::EditNotification(
     &v1->mNotification,
@@ -89,10 +89,10 @@ void __fastcall DNA::DUIReflectInspector::DUIReflectInspector(DNA::DUIReflectIns
 
   v2 = this;
   UFG::DUIWindow::DUIWindow((UFG::DUIWindow *)&this->vfptr, f);
-  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<DNA::DUIReflectInspector,UFG::DUIWindow>::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<DNA::DUIReflectInspector,UFG::DUIWindow>::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
-  v2->vfptr = (UFG::qReflectObjectVtbl *)&DNA::DUIReflectInspector::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&DNA::DUIReflectInspector::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<DNA::DUIReflectInspector,UFG::DUIWindow>::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<DNA::DUIReflectInspector,UFG::DUIWindow>::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
+  v2->vfptr = (UFG::qReflectObjectVtbl *)&DNA::DUIReflectInspector::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&DNA::DUIReflectInspector::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v3 = UFG::qStringHash64("UFG::qReflectObject", 0xFFFFFFFFFFFFFFFFui64);
   UFG::EditNotification::EditNotification(
     &v2->mNotification,

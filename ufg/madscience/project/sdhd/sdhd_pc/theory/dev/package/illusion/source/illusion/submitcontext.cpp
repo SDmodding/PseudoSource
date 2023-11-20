@@ -5,11 +5,11 @@ void __fastcall Illusion::SubmitContext::SubmitContext(Illusion::SubmitContext *
   Illusion::SubmitContext *v1; // rdi
 
   v1 = this;
-  this->vfptr = (Illusion::SubmitContextVtbl *)&Illusion::SubmitContext::`vftable';
+  this->vfptr = (Illusion::SubmitContextVtbl *)&Illusion::SubmitContext::`vftable;
   UFG::qMemSet(this->mStateValues.mParamValues, 0, 0x400u);
   v1->mStateValues.mSetValueMask.mFlags[1] = 0i64;
   v1->mStateValues.mSetValueMask.mFlags[0] = 0i64;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v1->mStateArgs.mStateArgs,
     0x10ui64,
     128,

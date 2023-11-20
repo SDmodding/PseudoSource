@@ -36,7 +36,7 @@ void __fastcall UFG::qArray<UFG::qSafePointer<UFG::SimComponent,UFG::SimComponen
     {
       LODWORD(v8->mNext) = v3;
       v10 = (signed __int64)&v8[1];
-      `eh vector constructor iterator'(
+      `eh vector constructor iterator(
         &v8[1],
         0x18ui64,
         v3,
@@ -81,7 +81,7 @@ void __fastcall UFG::qArray<UFG::qSafePointer<UFG::SimComponent,UFG::SimComponen
       if ( v17 )
       {
         v18 = &v17[-1].m_pPointer;
-        `eh vector destructor iterator'(
+        `eh vector destructor iterator(
           v17,
           0x18ui64,
           (int)v17[-1].m_pPointer,
@@ -107,7 +107,7 @@ void __fastcall UFG::qArray<DNA::DNAPropertyBagSerializer::CreateContext,0>::~qA
   if ( v2 )
   {
     v3 = &v2[-1].mName.mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v2,
       0x40ui64,
       v2[-1].mName.mStringHash32,

@@ -80,7 +80,7 @@ void __fastcall finishLoadedObjecthkpLimitedHingeConstraintData(void *p, int fin
     v2 = finishing;
     v3 = (char *)p;
     hkpConstraintData::hkpConstraintData((hkpConstraintData *)p, (hkFinishLoadedObjectFlag)finishing);
-    *(_QWORD *)v3 = &hkpLimitedHingeConstraintData::`vftable';
+    *(_QWORD *)v3 = &hkpLimitedHingeConstraintData::`vftable;
     hkpLimitedHingeConstraintData::Atoms::Atoms(
       (hkpLimitedHingeConstraintData::Atoms *)(v3 + 32),
       (hkFinishLoadedObjectFlag)v2);
@@ -102,7 +102,7 @@ hkBaseObjectVtbl *__fastcall getVtablehkpLimitedHingeConstraintData()
   hkpLimitedHingeConstraintData::Atoms v2; // [rsp+40h] [rbp-118h]
 
   hkpConstraintData::hkpConstraintData(&v1, 0);
-  v1.vfptr = (hkBaseObjectVtbl *)&hkpLimitedHingeConstraintData::`vftable';
+  v1.vfptr = (hkBaseObjectVtbl *)&hkpLimitedHingeConstraintData::`vftable;
   hkpLimitedHingeConstraintData::Atoms::Atoms(&v2, 0);
   return v1.vfptr;
 }

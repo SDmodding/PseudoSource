@@ -8,7 +8,7 @@ void __fastcall SubtitleTrack::~SubtitleTrack(SubtitleTrack *this)
   char *v4; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&SubtitleTrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&SubtitleTrack::`vftable;
   if ( !(~LOBYTE(this->mSubtitle.mOffset) & 1) )
   {
     if ( this->mSubtitle.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
@@ -18,7 +18,7 @@ void __fastcall SubtitleTrack::~SubtitleTrack(SubtitleTrack *this)
         operator delete[](v2);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v3 = &v1->mMasterRate;
   if ( !(~LOBYTE(v1->mMasterRate.text.mOffset) & 1) )
   {
@@ -29,7 +29,7 @@ void __fastcall SubtitleTrack::~SubtitleTrack(SubtitleTrack *this)
         operator delete[](v4);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 61
@@ -49,7 +49,7 @@ void __fastcall SubtitleGroupTrack::~SubtitleGroupTrack(SubtitleGroupTrack *this
   char *v4; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&SubtitleGroupTrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&SubtitleGroupTrack::`vftable;
   if ( !(~LOBYTE(this->mSubtitle.mOffset) & 1) )
   {
     if ( this->mSubtitle.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
@@ -59,7 +59,7 @@ void __fastcall SubtitleGroupTrack::~SubtitleGroupTrack(SubtitleGroupTrack *this
         operator delete[](v2);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v3 = &v1->mMasterRate;
   if ( !(~LOBYTE(v1->mMasterRate.text.mOffset) & 1) )
   {
@@ -70,7 +70,7 @@ void __fastcall SubtitleGroupTrack::~SubtitleGroupTrack(SubtitleGroupTrack *this
         operator delete[](v4);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 91
@@ -89,8 +89,8 @@ void __fastcall CurtainShowTrack::~CurtainShowTrack(CurtainShowTrack *this)
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&CurtainShowTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&CurtainShowTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -101,7 +101,7 @@ void __fastcall CurtainShowTrack::~CurtainShowTrack(CurtainShowTrack *this)
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 133
@@ -120,8 +120,8 @@ void __fastcall FastCurtainShowTrack::~FastCurtainShowTrack(FastCurtainShowTrack
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&FastCurtainShowTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&FastCurtainShowTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -132,7 +132,7 @@ void __fastcall FastCurtainShowTrack::~FastCurtainShowTrack(FastCurtainShowTrack
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 187
@@ -151,8 +151,8 @@ void __fastcall AudioTrackNIS::~AudioTrackNIS(AudioTrackNIS *this)
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&AudioTrackNIS::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&AudioTrackNIS::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -163,7 +163,7 @@ void __fastcall AudioTrackNIS::~AudioTrackNIS(AudioTrackNIS *this)
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 238
@@ -182,8 +182,8 @@ void __fastcall NISFadeOutTrack::~NISFadeOutTrack(NISFadeOutTrack *this)
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&NISFadeOutTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&NISFadeOutTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -194,7 +194,7 @@ void __fastcall NISFadeOutTrack::~NISFadeOutTrack(NISFadeOutTrack *this)
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 290
@@ -213,8 +213,8 @@ void __fastcall NISShadowCascadeTrack::~NISShadowCascadeTrack(NISShadowCascadeTr
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&NISShadowCascadeTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&NISShadowCascadeTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -225,7 +225,7 @@ void __fastcall NISShadowCascadeTrack::~NISShadowCascadeTrack(NISShadowCascadeTr
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 346
@@ -244,8 +244,8 @@ void __fastcall ActorAttachTrack::~ActorAttachTrack(ActorAttachTrack *this)
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&ActorAttachTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&ActorAttachTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -256,7 +256,7 @@ void __fastcall ActorAttachTrack::~ActorAttachTrack(ActorAttachTrack *this)
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 420
@@ -279,8 +279,8 @@ void __fastcall ActorDetachTrack::~ActorDetachTrack(ActorDetachTrack *this)
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&ActorDetachTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&ActorDetachTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -291,7 +291,7 @@ void __fastcall ActorDetachTrack::~ActorDetachTrack(ActorDetachTrack *this)
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 476
@@ -322,7 +322,7 @@ void __fastcall NISPlayMovieTrack::~NISPlayMovieTrack(NISPlayMovieTrack *this)
   char *v4; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&NISPlayMovieTrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&NISPlayMovieTrack::`vftable;
   if ( !(~LOBYTE(this->mMovieFilename.mOffset) & 1) )
   {
     if ( this->mMovieFilename.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
@@ -332,7 +332,7 @@ void __fastcall NISPlayMovieTrack::~NISPlayMovieTrack(NISPlayMovieTrack *this)
         operator delete[](v2);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v3 = &v1->mMasterRate;
   if ( !(~LOBYTE(v1->mMasterRate.text.mOffset) & 1) )
   {
@@ -343,7 +343,7 @@ void __fastcall NISPlayMovieTrack::~NISPlayMovieTrack(NISPlayMovieTrack *this)
         operator delete[](v4);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 558
@@ -362,8 +362,8 @@ void __fastcall NISAllowPlayerControlTrack::~NISAllowPlayerControlTrack(NISAllow
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&NISAllowPlayerControlTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&NISAllowPlayerControlTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -374,7 +374,7 @@ void __fastcall NISAllowPlayerControlTrack::~NISAllowPlayerControlTrack(NISAllow
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 598

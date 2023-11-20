@@ -13,7 +13,7 @@ void __fastcall UFG::UIHKScreenHackingMinigame::UIHKScreenHackingMinigame(UFG::U
   v2 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -24,12 +24,12 @@ void __fastcall UFG::UIHKScreenHackingMinigame::UIHKScreenHackingMinigame(UFG::U
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --v1->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKTaskableScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKTaskableScreen::`vftable;
   this->mFinished = 0;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKMinigameScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKMinigameScreen::`vftable;
   *(_QWORD *)&this->mfAlphaValue = 1109393408i64;
   ++UFG::UIHKMinigameScreen::mNumMinigameScreens;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenHackingMinigame::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenHackingMinigame::`vftable;
   this->mSavedControllerMode = UFG::gInputSystem->mControllers[UFG::gActiveControllerNum]->m_ActiveMapSet;
   UFG::SetInputMode(IM_UI_ONLY, UFG::gInputSystem->mControllers[UFG::gActiveControllerNum]->mControllerIndex);
   UFG::UIHKScreenHackingMinigame::m_bWon = 0;
@@ -55,7 +55,7 @@ void __fastcall UFG::UIHKScreenHackingMinigame::~UIHKScreenHackingMinigame(UFG::
   UFG::qWiseSymbol v7; // [rsp+60h] [rbp+18h]
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenHackingMinigame::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenHackingMinigame::`vftable;
   v2 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseScreen(v2, "HackingMinigame");
   UFG::SetInputMode(

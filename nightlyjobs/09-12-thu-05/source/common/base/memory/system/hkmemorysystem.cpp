@@ -30,7 +30,7 @@ hkMemorySystem *__fastcall hkMemorySystem::getInstancePtr()
 // RVA: 0xC62D70
 void __fastcall hkMemorySystem::~hkMemorySystem(hkMemorySystem *this)
 {
-  this->vfptr = (hkMemorySystemVtbl *)&hkMemorySystem::`vftable';
+  this->vfptr = (hkMemorySystemVtbl *)&hkMemorySystem::`vftable;
 }
 
 // File Line: 70

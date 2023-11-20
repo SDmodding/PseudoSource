@@ -24,19 +24,19 @@ void __fastcall OSuite::ZOEntry::ZOEntry(OSuite::ZOEntry *this, OSuite::ZOEdmEnt
   v4 = this;
   OSuite::ZAtomEntry::ZAtomEntry((OSuite::ZAtomEntry *)&this->vfptr, sFeedUrl);
   v4->m_pEdmEntityType = v3;
-  v4->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOEntry::`vftable';
+  v4->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOEntry::`vftable;
   OSuite::ZRedBlackTreeBase::ZElementBase::ZElementBase((OSuite::ZObject *)&v4->m_Properties.vfptr, v5);
   v4->m_Properties.m_pList = 0i64;
-  v4->m_Properties.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable'{for `OSuite::ZListBase'};
-  v4->m_Properties.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable'{for `OSuite::IHashable'};
+  v4->m_Properties.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
+  v4->m_Properties.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
   v6 = (OSuite::ZOProperty **)OSuite::ZObject::malloc((OSuite::ZObject *)&v4->m_Properties.vfptr, 0x80ui64, 0i64);
   v4->m_Properties.m_nTop = 0i64;
   v4->m_Properties.m_nSize = 16i64;
   v4->m_Properties.m_pList = v6;
   OSuite::ZRedBlackTreeBase::ZElementBase::ZElementBase((OSuite::ZObject *)&v4->m_NavProperties.vfptr, v7);
   v4->m_NavProperties.m_pList = 0i64;
-  v4->m_NavProperties.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable'{for `OSuite::ZListBase'};
-  v4->m_NavProperties.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable'{for `OSuite::IHashable'};
+  v4->m_NavProperties.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
+  v4->m_NavProperties.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
   v8 = (OSuite::ZONavigationProperty **)OSuite::ZObject::malloc(
                                           (OSuite::ZObject *)&v4->m_NavProperties.vfptr,
                                           0x80ui64,
@@ -69,19 +69,19 @@ void __fastcall OSuite::ZOEntry::ZOEntry(OSuite::ZOEntry *this, OSuite::IReader 
   v4 = this;
   OSuite::ZAtomEntry::ZAtomEntry((OSuite::ZAtomEntry *)&this->vfptr, sFeedUrl);
   v4->m_pEdmEntityType = 0i64;
-  v4->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOEntry::`vftable';
+  v4->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOEntry::`vftable;
   OSuite::ZRedBlackTreeBase::ZElementBase::ZElementBase((OSuite::ZObject *)&v4->m_Properties.vfptr, v5);
   v4->m_Properties.m_pList = 0i64;
-  v4->m_Properties.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable'{for `OSuite::ZListBase'};
-  v4->m_Properties.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable'{for `OSuite::IHashable'};
+  v4->m_Properties.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
+  v4->m_Properties.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
   v6 = (OSuite::ZOProperty **)OSuite::ZObject::malloc((OSuite::ZObject *)&v4->m_Properties.vfptr, 0x80ui64, 0i64);
   v4->m_Properties.m_nTop = 0i64;
   v4->m_Properties.m_pList = v6;
   v4->m_Properties.m_nSize = 16i64;
   OSuite::ZRedBlackTreeBase::ZElementBase::ZElementBase((OSuite::ZObject *)&v4->m_NavProperties.vfptr, v7);
   v4->m_NavProperties.m_pList = 0i64;
-  v4->m_NavProperties.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable'{for `OSuite::ZListBase'};
-  v4->m_NavProperties.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable'{for `OSuite::IHashable'};
+  v4->m_NavProperties.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
+  v4->m_NavProperties.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
   v8 = (OSuite::ZONavigationProperty **)OSuite::ZObject::malloc(
                                           (OSuite::ZObject *)&v4->m_NavProperties.vfptr,
                                           0x80ui64,
@@ -120,17 +120,17 @@ void __fastcall OSuite::ZOEntry::~ZOEntry(OSuite::ZOEntry *this)
   OSuite::ZOProperty **v5; // rdx
 
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOEntry::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOEntry::`vftable;
   OSuite::ZOEntry::Reset(this);
   v2 = &v1->m_NavProperties;
   v3 = v1->m_NavProperties.m_pList;
-  v2->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable'{for `OSuite::ZListBase'};
-  v2->vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable'{for `OSuite::IHashable'};
+  v2->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
+  v2->vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
   OSuite::ZObject::free((OSuite::ZObject *)&v1->m_NavProperties.vfptr, v3);
   v4 = &v1->m_Properties;
   v5 = v1->m_Properties.m_pList;
-  v4->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable'{for `OSuite::ZListBase'};
-  v4->vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable'{for `OSuite::IHashable'};
+  v4->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
+  v4->vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
   OSuite::ZObject::free((OSuite::ZObject *)&v1->m_Properties.vfptr, v5);
   OSuite::ZAtomEntry::~ZAtomEntry((OSuite::ZAtomEntry *)&v1->vfptr);
 }
@@ -153,7 +153,7 @@ OSuite::ZOProperty *__fastcall OSuite::ZOEntry::Property(OSuite::ZOEntry *this, 
   {
     v10.m_pListBase = 0i64;
     OSuite::ZListBase::ZListIteratorBase::ZListIteratorBase(&v10, (OSuite::ZListBase *)&this->m_Properties.vfptr);
-    v10.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+    v10.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
     while ( !OSuite::ZListBase::ZListIteratorBase::AtEnd(&v10) )
     {
       OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)v10.m_pListBase);
@@ -194,7 +194,7 @@ OSuite::TList<OSuite::ZOProperty *>::ZIterator *__fastcall OSuite::ZOEntry::Prop
   OSuite::ZListBase::ZListIteratorBase::ZListIteratorBase(
     (OSuite::ZListBase::ZListIteratorBase *)&result->vfptr,
     (OSuite::ZListBase *)&this->m_Properties.vfptr);
-  v2->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+  v2->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
   return v2;
 }
 
@@ -706,12 +706,12 @@ void __fastcall OSuite::ZOEntry::ToJsonWithProperties(OSuite::ZOEntry *this, OSu
   OSuite::ZListBase::ZListIteratorBase::ZListIteratorBase(
     (OSuite::ZListBase::ZListIteratorBase *)&sName,
     (OSuite::ZListBase *)&v6->vfptr);
-  sName.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
-  result.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TConstIterator<OSuite::TList<OSuite::ZOEdmEndRole *>::ZIterator,OSuite::ZOEdmEndRole *,int>::`vftable';
+  sName.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
+  result.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TConstIterator<OSuite::TList<OSuite::ZOEdmEndRole *>::ZIterator,OSuite::ZOEdmEndRole *,int>::`vftable;
   OSuite::ZListBase::ZListIteratorBase::ZListIteratorBase(
     (OSuite::ZListBase::ZListIteratorBase *)&result.vfptr,
     (OSuite::ZListBase::ZListIteratorBase *)&sName);
-  result.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+  result.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
   while ( !OSuite::ZListBase::ZListIteratorBase::AtEnd((OSuite::ZListBase::ZListIteratorBase *)&result.vfptr) )
   {
     OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)result.m_pString);
@@ -727,8 +727,8 @@ void __fastcall OSuite::ZOEntry::ToJsonWithProperties(OSuite::ZOEntry *this, OSu
     (*(void (__fastcall **)(__int64, OSuite::ZJsonObject *, _QWORD))(*(_QWORD *)v34 + 16i64))(v34, v8, (unsigned int)v7);
     OSuite::ZListBase::ZListIteratorBase::Next((OSuite::ZListBase::ZListIteratorBase *)&result.vfptr);
   }
-  result.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
-  result.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TConstIterator<OSuite::TList<OSuite::ZOEdmEndRole *>::ZIterator,OSuite::ZOEdmEndRole *,int>::`vftable';
+  result.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
+  result.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TConstIterator<OSuite::TList<OSuite::ZOEdmEndRole *>::ZIterator,OSuite::ZOEdmEndRole *,int>::`vftable;
   OSuite::ZOEdmBase::CleanTempData((int)v5);
 }
 
@@ -880,7 +880,7 @@ void __fastcall OSuite::ZOEntry::Reset(OSuite::ZOEntry *this)
   v1 = (OSuite::ZObject *)&this->m_Properties.vfptr;
   v2 = this;
   OSuite::ZListBase::ZListIteratorBase::ZListIteratorBase(&v16, (OSuite::ZListBase *)&this->m_Properties.vfptr);
-  v16.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+  v16.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
   while ( !OSuite::ZListBase::ZListIteratorBase::AtEnd(&v16) )
   {
     OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)v16.m_pListBase);
@@ -898,7 +898,7 @@ void __fastcall OSuite::ZOEntry::Reset(OSuite::ZOEntry *this)
     OSuite::ZListBase::ZListIteratorBase::Next(&v16);
   }
   v7 = v1[4].vfptr;
-  v16.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+  v16.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
   OSuite::ZObject::free(v1, v7);
   v8 = (OSuite::ZObjectVtbl *)OSuite::ZObject::malloc(v1, 0x80ui64, 0i64);
   v1[2].vfptr = 0i64;
@@ -907,7 +907,7 @@ void __fastcall OSuite::ZOEntry::Reset(OSuite::ZOEntry *this)
   v1[4].vfptr = v8;
   v1[1].vfptr = (OSuite::ZObjectVtbl *)16;
   OSuite::ZListBase::ZListIteratorBase::ZListIteratorBase(&v17, (OSuite::ZListBase *)&v2->m_NavProperties.vfptr);
-  v17.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+  v17.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
   while ( !OSuite::ZListBase::ZListIteratorBase::AtEnd(&v17) )
   {
     OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)v17.m_pListBase);
@@ -925,7 +925,7 @@ void __fastcall OSuite::ZOEntry::Reset(OSuite::ZOEntry *this)
     OSuite::ZListBase::ZListIteratorBase::Next(&v17);
   }
   v14 = v2->m_NavProperties.m_pList;
-  v17.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+  v17.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
   OSuite::ZObject::free(v9, v14);
   v15 = (OSuite::ZONavigationProperty **)OSuite::ZObject::malloc(v9, 0x80ui64, 0i64);
   v2->m_NavProperties.m_nTop = 0i64;

@@ -7,7 +7,7 @@ void __fastcall hkpRagdollConstraintData::hkpRagdollConstraintData(hkpRagdollCon
 
   v1 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpRagdollConstraintData::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpRagdollConstraintData::`vftable;
   v2 = &this->m_atoms;
   *(_QWORD *)&v2[-1].m_ballSocket.m_type.m_storage = 0i64;
   hkpRagdollConstraintData::Atoms::Atoms(v2);
@@ -423,7 +423,7 @@ void __fastcall hkpRagdollConstraintData::~hkpRagdollConstraintData(hkpRagdollCo
 
   v1 = this;
   v2 = (hkReferencedObject **)this->m_atoms.m_ragdollMotors.m_motors;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpRagdollConstraintData::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpRagdollConstraintData::`vftable;
   v3 = 3i64;
   do
   {
@@ -433,7 +433,7 @@ void __fastcall hkpRagdollConstraintData::~hkpRagdollConstraintData(hkpRagdollCo
     --v3;
   }
   while ( v3 );
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 257

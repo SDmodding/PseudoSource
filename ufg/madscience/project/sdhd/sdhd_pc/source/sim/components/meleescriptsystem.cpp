@@ -61,7 +61,7 @@ void __fastcall UFG::MeleeScriptSystemComponent::MeleeScriptSystemComponent(UFG:
   v5 = (UFG::qNode<UFG::MeleeScriptSystemComponent,UFG::MeleeScriptSystemComponent> *)&v4->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::MeleeScriptSystemComponent::`vftable';
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::MeleeScriptSystemComponent::`vftable;
   UFG::qString::qString(&v4->mActiveGameslices, &customWorldMapCaption);
   UFG::qString::qString(&v4->mSpawnGroup, &customWorldMapCaption);
   UFG::qString::qString(&v4->mStartTrigger, &customWorldMapCaption);
@@ -93,7 +93,7 @@ void __fastcall UFG::MeleeScriptSystemComponent::~MeleeScriptSystemComponent(UFG
   UFG::qNode<UFG::MeleeScriptSystemComponent,UFG::MeleeScriptSystemComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::MeleeScriptSystemComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::MeleeScriptSystemComponent::`vftable;
   if ( this == UFG::MeleeScriptSystemComponent::s_MeleeScriptSystemComponentpCurrentIterator )
     UFG::MeleeScriptSystemComponent::s_MeleeScriptSystemComponentpCurrentIterator = (UFG::MeleeScriptSystemComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::MeleeScriptSystemComponent,UFG::MeleeScriptSystemComponent> *)&this->mPrev;

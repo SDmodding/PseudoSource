@@ -442,19 +442,19 @@ void __fastcall hkgpCgoInternal::ICollapse::removeTriangle(hkgpCgoInternal::ICol
         _mm_store_si128((__m128i *)&v27, v23);
         hkgpCgoInternal::setEdgeInfo(v11, (hkgpIndexedMeshDefinitions::Edge *)&v27, 0i64);
         hkgpCgoInternal::removeEdgeInfoFromInvalidQueue(v4->m_instance, v9);
-        if ( `hkgpTopology::Edge<hkgpIndexedMeshDefinitions::Edge,hkgpIndexedMeshDefinitions::Vertex,hkgpIndexedMeshDefinitions::Triangle,hkgpIndexedMeshDefinitions::Vertex *>::null'::`2'::`local static guard' & 1 )
+        if ( `hkgpTopology::Edge<hkgpIndexedMeshDefinitions::Edge,hkgpIndexedMeshDefinitions::Vertex,hkgpIndexedMeshDefinitions::Triangle,hkgpIndexedMeshDefinitions::Vertex *>::null::`2::`local static guard & 1 )
         {
-          v12 = (hkgpIndexedMeshDefinitions::Triangle *)`hkgpTopology::Edge<hkgpIndexedMeshDefinitions::Edge,hkgpIndexedMeshDefinitions::Vertex,hkgpIndexedMeshDefinitions::Triangle,hkgpIndexedMeshDefinitions::Vertex *>::null'::`2'::e;
+          v12 = (hkgpIndexedMeshDefinitions::Triangle *)`hkgpTopology::Edge<hkgpIndexedMeshDefinitions::Edge,hkgpIndexedMeshDefinitions::Vertex,hkgpIndexedMeshDefinitions::Triangle,hkgpIndexedMeshDefinitions::Vertex *>::null::`2::e;
         }
         else
         {
-          DWORD2(`hkgpTopology::Edge<hkgpIndexedMeshDefinitions::Edge,hkgpIndexedMeshDefinitions::Vertex,hkgpIndexedMeshDefinitions::Triangle,hkgpIndexedMeshDefinitions::Vertex *>::null'::`2'::e) = 0;
-          `hkgpTopology::Edge<hkgpIndexedMeshDefinitions::Edge,hkgpIndexedMeshDefinitions::Vertex,hkgpIndexedMeshDefinitions::Triangle,hkgpIndexedMeshDefinitions::Vertex *>::null'::`2'::`local static guard' |= 1u;
+          DWORD2(`hkgpTopology::Edge<hkgpIndexedMeshDefinitions::Edge,hkgpIndexedMeshDefinitions::Vertex,hkgpIndexedMeshDefinitions::Triangle,hkgpIndexedMeshDefinitions::Vertex *>::null::`2::e) = 0;
+          `hkgpTopology::Edge<hkgpIndexedMeshDefinitions::Edge,hkgpIndexedMeshDefinitions::Vertex,hkgpIndexedMeshDefinitions::Triangle,hkgpIndexedMeshDefinitions::Vertex *>::null::`2::`local static guard |= 1u;
           v12 = 0i64;
-          *(_QWORD *)&`hkgpTopology::Edge<hkgpIndexedMeshDefinitions::Edge,hkgpIndexedMeshDefinitions::Vertex,hkgpIndexedMeshDefinitions::Triangle,hkgpIndexedMeshDefinitions::Vertex *>::null'::`2'::e = 0i64;
+          *(_QWORD *)&`hkgpTopology::Edge<hkgpIndexedMeshDefinitions::Edge,hkgpIndexedMeshDefinitions::Vertex,hkgpIndexedMeshDefinitions::Triangle,hkgpIndexedMeshDefinitions::Vertex *>::null::`2::e = 0i64;
         }
         v9->m_edge.m_triangle = v12;
-        *(_QWORD *)&v9->m_edge.m_index = *((_QWORD *)&`hkgpTopology::Edge<hkgpIndexedMeshDefinitions::Edge,hkgpIndexedMeshDefinitions::Vertex,hkgpIndexedMeshDefinitions::Triangle,hkgpIndexedMeshDefinitions::Vertex *>::null'::`2'::e
+        *(_QWORD *)&v9->m_edge.m_index = *((_QWORD *)&`hkgpTopology::Edge<hkgpIndexedMeshDefinitions::Edge,hkgpIndexedMeshDefinitions::Vertex,hkgpIndexedMeshDefinitions::Triangle,hkgpIndexedMeshDefinitions::Vertex *>::null::`2::e
                                          + 1);
       }
     }
@@ -546,18 +546,18 @@ void __fastcall hkgpCgoInternal::ICollapse::bind(hkgpCgoInternal::ICollapse *thi
     if ( v13 )
     {
       hkgpCgoInternal::removeEdgeInfoFromInvalidQueue(v4->m_instance, v13);
-      if ( `hkgpTopology::Edge<hkgpIndexedMeshDefinitions::Edge,hkgpIndexedMeshDefinitions::Vertex,hkgpIndexedMeshDefinitions::Triangle,hkgpIndexedMeshDefinitions::Vertex *>::null'::`2'::`local static guard' & 1 )
+      if ( `hkgpTopology::Edge<hkgpIndexedMeshDefinitions::Edge,hkgpIndexedMeshDefinitions::Vertex,hkgpIndexedMeshDefinitions::Triangle,hkgpIndexedMeshDefinitions::Vertex *>::null::`2::`local static guard & 1 )
       {
-        v14->m_edge.m_triangle = (hkgpIndexedMeshDefinitions::Triangle *)`hkgpTopology::Edge<hkgpIndexedMeshDefinitions::Edge,hkgpIndexedMeshDefinitions::Vertex,hkgpIndexedMeshDefinitions::Triangle,hkgpIndexedMeshDefinitions::Vertex *>::null'::`2'::e;
+        v14->m_edge.m_triangle = (hkgpIndexedMeshDefinitions::Triangle *)`hkgpTopology::Edge<hkgpIndexedMeshDefinitions::Edge,hkgpIndexedMeshDefinitions::Vertex,hkgpIndexedMeshDefinitions::Triangle,hkgpIndexedMeshDefinitions::Vertex *>::null::`2::e;
       }
       else
       {
-        DWORD2(`hkgpTopology::Edge<hkgpIndexedMeshDefinitions::Edge,hkgpIndexedMeshDefinitions::Vertex,hkgpIndexedMeshDefinitions::Triangle,hkgpIndexedMeshDefinitions::Vertex *>::null'::`2'::e) = 0;
-        *(_QWORD *)&`hkgpTopology::Edge<hkgpIndexedMeshDefinitions::Edge,hkgpIndexedMeshDefinitions::Vertex,hkgpIndexedMeshDefinitions::Triangle,hkgpIndexedMeshDefinitions::Vertex *>::null'::`2'::e = 0i64;
-        `hkgpTopology::Edge<hkgpIndexedMeshDefinitions::Edge,hkgpIndexedMeshDefinitions::Vertex,hkgpIndexedMeshDefinitions::Triangle,hkgpIndexedMeshDefinitions::Vertex *>::null'::`2'::`local static guard' |= 1u;
+        DWORD2(`hkgpTopology::Edge<hkgpIndexedMeshDefinitions::Edge,hkgpIndexedMeshDefinitions::Vertex,hkgpIndexedMeshDefinitions::Triangle,hkgpIndexedMeshDefinitions::Vertex *>::null::`2::e) = 0;
+        *(_QWORD *)&`hkgpTopology::Edge<hkgpIndexedMeshDefinitions::Edge,hkgpIndexedMeshDefinitions::Vertex,hkgpIndexedMeshDefinitions::Triangle,hkgpIndexedMeshDefinitions::Vertex *>::null::`2::e = 0i64;
+        `hkgpTopology::Edge<hkgpIndexedMeshDefinitions::Edge,hkgpIndexedMeshDefinitions::Vertex,hkgpIndexedMeshDefinitions::Triangle,hkgpIndexedMeshDefinitions::Vertex *>::null::`2::`local static guard |= 1u;
         v14->m_edge.m_triangle = 0i64;
       }
-      *(_QWORD *)&v14->m_edge.m_index = *((_QWORD *)&`hkgpTopology::Edge<hkgpIndexedMeshDefinitions::Edge,hkgpIndexedMeshDefinitions::Vertex,hkgpIndexedMeshDefinitions::Triangle,hkgpIndexedMeshDefinitions::Vertex *>::null'::`2'::e
+      *(_QWORD *)&v14->m_edge.m_index = *((_QWORD *)&`hkgpTopology::Edge<hkgpIndexedMeshDefinitions::Edge,hkgpIndexedMeshDefinitions::Vertex,hkgpIndexedMeshDefinitions::Triangle,hkgpIndexedMeshDefinitions::Vertex *>::null::`2::e
                                         + 1);
     }
   }
@@ -1673,7 +1673,7 @@ LABEL_88:
   }
   if ( v3->m_config.m_decimateComponents.m_bool )
   {
-    retaddr = &hkgpIndexedMesh::EdgeBarrier::`vftable';
+    retaddr = &hkgpIndexedMesh::EdgeBarrier::`vftable;
     hkgpIndexedMesh::computeSets(&v3->m_topology, (hkgpIndexedMesh::EdgeBarrier *)&retaddr);
     v158 = v3->m_topology.m_sets.m_size;
     v159 = 0;
@@ -2056,7 +2056,7 @@ bool __fastcall hkgpCgoInternal::update(hkgpCgoInternal *this)
         v7[1].vfptr = (hkgpJobQueue::IJobVtbl *)v1;
         v7[2].vfptr = (hkgpJobQueue::IJobVtbl *)v5;
         v7[3].vfptr = (hkgpJobQueue::IJobVtbl *)v8;
-        v7->vfptr = (hkgpJobQueue::IJobVtbl *)&hkgpJobQueue::Box<hkgpCgoInternal::UpdateJob>::`vftable';
+        v7->vfptr = (hkgpJobQueue::IJobVtbl *)&hkgpJobQueue::Box<hkgpCgoInternal::UpdateJob>::`vftable;
         hkgpJobQueue::push(&v1->m_jobQueue, v7);
       }
       else
@@ -3669,7 +3669,7 @@ char __fastcall hkgpCgoInternal::collapseEdge(hkgpCgoInternal *this, hkgpCgoInte
       v17 = (signed __int64)&v2->m_vertex;
     }
     v20 = (__int128)v2->m_edge;
-    v38.vfptr = (hkBaseObjectVtbl *)&hkgpCgoInternal::ICollapse::`vftable';
+    v38.vfptr = (hkBaseObjectVtbl *)&hkgpCgoInternal::ICollapse::`vftable;
     v21 = 0i64;
     v39 = v20;
     v22 = v3->m_config.m_buildClusters.m_bool == 0;
@@ -3731,7 +3731,7 @@ char __fastcall hkgpCgoInternal::collapseEdge(hkgpCgoInternal *this, hkgpCgoInte
         ring);
     }
     v36.m_size = 0;
-    v38.vfptr = (hkBaseObjectVtbl *)&hkgpIndexedMesh::IVertexRemoval::`vftable';
+    v38.vfptr = (hkBaseObjectVtbl *)&hkgpIndexedMesh::IVertexRemoval::`vftable;
     if ( v36.m_capacityAndFlags >= 0 )
       hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
         (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,

@@ -126,7 +126,7 @@ void __fastcall SSIExternalMethodCallWrapper::~SSIExternalMethodCallWrapper(SSIE
   SSMethodBase *v3; // rcx
 
   v1 = this;
-  this->vfptr = (SSObjectBaseVtbl *)&SSIExternalMethodCallWrapper::`vftable';
+  this->vfptr = (SSObjectBaseVtbl *)&SSIExternalMethodCallWrapper::`vftable;
   v2 = this->i_finished_p;
   if ( v2 )
     *v2 = 1;

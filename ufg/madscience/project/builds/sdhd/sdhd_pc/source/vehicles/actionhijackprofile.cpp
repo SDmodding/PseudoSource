@@ -205,7 +205,7 @@ float __fastcall UFG::ActionHijackProfile::GetDistanceToSideMax(UFG::ActionHijac
 // RVA: 0x157AFD0
 __int64 dynamic_initializer_for__UFG::ActionHijackProfiles::ms_ActionHijackProfilePool__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     UFG::ActionHijackProfiles::ms_ActionHijackProfilePool.p,
     0x40ui64,
     10,

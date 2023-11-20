@@ -2,6 +2,6 @@
 // RVA: 0x82C40
 void __fastcall std::_Facet_base::~_Facet_base(std::_Facet_base *this)
 {
-  this->vfptr = (std::_Facet_baseVtbl *)&std::_Facet_base::`vftable';
+  this->vfptr = (std::_Facet_baseVtbl *)&std::_Facet_base::`vftable;
 }
 

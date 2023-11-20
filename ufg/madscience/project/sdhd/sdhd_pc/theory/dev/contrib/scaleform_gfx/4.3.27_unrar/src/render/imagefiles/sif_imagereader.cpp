@@ -11,7 +11,7 @@ void __fastcall Scaleform::Render::SIF::SIFFileImageSource::SIFFileImageSource(S
     file,
     format,
     0i64);
-  v3->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::SIF::SIFFileImageSource::`vftable';
+  v3->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::SIF::SIFFileImageSource::`vftable;
   v4 = (signed __int64)&v3->Data;
   *(_QWORD *)v4 = 0i64;
   *(_DWORD *)(v4 + 8) = 0x10000;
@@ -34,7 +34,7 @@ void __fastcall Scaleform::Render::SIF::SIFFileImageSource::~SIFFileImageSource(
   Scaleform::File *v5; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::SIF::SIFFileImageSource::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::SIF::SIFFileImageSource::`vftable;
   v2 = &this->Data;
   v3 = this->Data.Flags;
   if ( v3 & 2 )
@@ -46,11 +46,11 @@ void __fastcall Scaleform::Render::SIF::SIFFileImageSource::~SIFFileImageSource(
   v4 = &v2->pPalette.pObject->RefCount.Value;
   if ( v4 && !_InterlockedDecrement(v4) )
     ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::FileImageSource::`vftable';
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::FileImageSource::`vftable;
   v5 = v1->pFile.pObject;
   if ( v5 && !_InterlockedDecrement(&v5->RefCount) && v5 )
     v5->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v5->vfptr, 1u);
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
 }
 
 // File Line: 39
@@ -397,7 +397,7 @@ Scaleform::Render::SIF::SIFFileImageSource *__fastcall Scaleform::Render::SIF::F
 // RVA: 0x159C6B0
 __int64 dynamic_initializer_for__Scaleform::Render::SIF::FileReader::Instance__()
 {
-  Scaleform::Render::SIF::FileReader::Instance.vfptr = (Scaleform::Render::ImageFileHandlerVtbl *)&Scaleform::Render::SIF::FileReader::`vftable';
+  Scaleform::Render::SIF::FileReader::Instance.vfptr = (Scaleform::Render::ImageFileHandlerVtbl *)&Scaleform::Render::SIF::FileReader::`vftable;
   return atexit(dynamic_atexit_destructor_for__Scaleform::Render::SIF::FileReader::Instance__);
 }
 

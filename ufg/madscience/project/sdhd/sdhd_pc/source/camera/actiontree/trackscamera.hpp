@@ -73,8 +73,8 @@ void __fastcall SubjectFollowOverrideTrack::SubjectFollowOverrideTrack(SubjectFo
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, SubjectFollowOverrideTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<SubjectFollowOverrideTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SubjectFollowOverrideTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<SubjectFollowOverrideTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&SubjectFollowOverrideTrack::`vftable;
   v1->mFollowContextOverride.mOffset = 1i64;
   BinString::Set(&v1->mFollowContextOverride, &customWorldMapCaption);
   v1->mFollowCameraType = 0;
@@ -96,8 +96,8 @@ void __fastcall SubjectFollowOverridePOITrack::SubjectFollowOverridePOITrack(Sub
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, SubjectFollowOverridePOITrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<SubjectFollowOverridePOITask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SubjectFollowOverridePOITrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<SubjectFollowOverridePOITask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&SubjectFollowOverridePOITrack::`vftable;
   v1->mFollowContextLeftOverride.mOffset = 1i64;
   BinString::Set(&v1->mFollowContextLeftOverride, &customWorldMapCaption);
   v1->mFollowContextRightOverride.mOffset = 1i64;
@@ -156,8 +156,8 @@ void __fastcall CameraSetSniperModeTrack::~CameraSetSniperModeTrack(CameraSetSni
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&CameraSetSniperModeTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&CameraSetSniperModeTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -168,7 +168,7 @@ void __fastcall CameraSetSniperModeTrack::~CameraSetSniperModeTrack(CameraSetSni
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 524
@@ -190,8 +190,8 @@ ITrack *__fastcall SubjectSprintTrack::Create()
   if ( !v0 )
     return 0i64;
   ITrack::ITrack((ITrack *)v0, SubjectSprintTrack::sClassNameUID);
-  *(_QWORD *)v1 = &Track<SubjectSprintTask>::`vftable';
-  *(_QWORD *)v1 = &SubjectSprintTrack::`vftable';
+  *(_QWORD *)v1 = &Track<SubjectSprintTask>::`vftable;
+  *(_QWORD *)v1 = &SubjectSprintTrack::`vftable;
   v1[56] = 0;
   return (ITrack *)v1;
 }

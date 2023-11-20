@@ -7,7 +7,7 @@ void __fastcall UFG::UIHKScreenOptionsGame::UIHKScreenOptionsGame(UFG::UIHKScree
   v1 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -18,12 +18,12 @@ void __fastcall UFG::UIHKScreenOptionsGame::UIHKScreenOptionsGame(UFG::UIHKScree
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenOptions::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenOptions::`vftable;
   *(_QWORD *)&this->mState = 0i64;
   this->mOptionChanged = 0;
   *(_QWORD *)&this->mSavingDialogTimer = 0i64;
   this->mHelpBarName = "OPTIONS";
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenOptionsGame::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenOptionsGame::`vftable;
   *(_QWORD *)&this->oldSubtitles = 0i64;
   *(_WORD *)&this->oldInvertY = 0;
   *(_QWORD *)&this->oldAimPitch = 0i64;
@@ -172,7 +172,7 @@ void __fastcall UFG::UIHKScreenOptionsGame::init(UFG::UIHKScreenOptionsGame *thi
     v2->oldMouseFreeLook = UFG::GameStatTracker::GetStat(v5, CameraFreeLook);
     v2->oldMouseInputRaw = UFG::GameStatTracker::GetStat(v5, PCMouseInputRaw);
     v2->oldMouseSensitivity = UFG::GameStatTracker::GetStat(v5, PCMouseSensitivity);
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 18, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 18, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     v7 = (double)(v2->oldSubtitles - 1);
     if ( (v27 >> 6) & 1 )
     {
@@ -371,7 +371,7 @@ void __fastcall UFG::UIHKScreenOptionsGame::init(UFG::UIHKScreenOptionsGame *thi
     v94 = 5;
     v95 = v24;
     Scaleform::GFx::Movie::Invoke(v4, "OptionList_SetValues", 0i64, (Scaleform::GFx::Value *)&ptr, 0x12u);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 18, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 18, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
   (*((void (__fastcall **)(UFG::UIHKScreenOptionsGame *))&v2->vfptr[1].__vecDelDtor + 1))(v2);
   if ( UFG::HudAudio::m_instance )

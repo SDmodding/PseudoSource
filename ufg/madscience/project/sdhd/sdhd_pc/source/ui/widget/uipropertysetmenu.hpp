@@ -5,7 +5,7 @@ void __fastcall UFG::UIPropertySetMenuData::~UIPropertySetMenuData(UFG::UIProper
   UFG::UIPropertySetMenuData *v1; // rbx
 
   v1 = this;
-  this->vfptr = (UFG::UIPropertySetMenuDataVtbl *)&UFG::UIPropertySetMenuData::`vftable';
+  this->vfptr = (UFG::UIPropertySetMenuDataVtbl *)&UFG::UIPropertySetMenuData::`vftable;
   UFG::qString::~qString(&this->mPathToWidget);
   UFG::qString::~qString(&v1->mPropertySetName);
 }

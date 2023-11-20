@@ -389,7 +389,7 @@ Scaleform::Render::TGA::TGAFileImageSource *__fastcall Scaleform::Render::TGA::F
   if ( v5 )
   {
     Scaleform::Render::FileImageSource::FileImageSource(v5, v4, v3->Format, 0i64);
-    v6->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::TGA::TGAFileImageSource::`vftable';
+    v6->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::TGA::TGAFileImageSource::`vftable;
     v6->SourceFormat = 0;
     v6->ImageDesc = 0;
     v6->pColorMap.pObject = 0i64;
@@ -416,7 +416,7 @@ Scaleform::Render::TGA::TGAFileImageSource *__fastcall Scaleform::Render::TGA::F
 // RVA: 0x159C700
 __int64 dynamic_initializer_for__Scaleform::Render::TGA::FileReader::Instance__()
 {
-  Scaleform::Render::TGA::FileReader::Instance.vfptr = (Scaleform::Render::ImageFileHandlerVtbl *)&Scaleform::Render::TGA::FileReader::`vftable';
+  Scaleform::Render::TGA::FileReader::Instance.vfptr = (Scaleform::Render::ImageFileHandlerVtbl *)&Scaleform::Render::TGA::FileReader::`vftable;
   return atexit(dynamic_atexit_destructor_for__Scaleform::Render::TGA::FileReader::Instance__);
 }
 

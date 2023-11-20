@@ -82,7 +82,7 @@ void __fastcall UFG::ScriptCameraComponent::ScriptCameraComponent(UFG::ScriptCam
   v4 = (UFG::qNode<UFG::ScriptCameraComponent,UFG::ScriptCameraComponent> *)&v3->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ScriptCameraComponent::`vftable';
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ScriptCameraComponent::`vftable;
   v5 = &v3->mCameraCreature;
   v5->mPrev = (UFG::qNode<UFG::qSafePointerBase<Creature>,UFG::qSafePointerNodeList> *)&v5->mPrev;
   v5->mNext = (UFG::qNode<UFG::qSafePointerBase<Creature>,UFG::qSafePointerNodeList> *)&v5->mPrev;
@@ -317,7 +317,7 @@ void __fastcall UFG::ScriptCameraComponent::~ScriptCameraComponent(UFG::ScriptCa
   UFG::qNode<UFG::ScriptCameraComponent,UFG::ScriptCameraComponent> *v21; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ScriptCameraComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ScriptCameraComponent::`vftable;
   if ( this == UFG::ScriptCameraComponent::s_ScriptCameraComponentpCurrentIterator )
     UFG::ScriptCameraComponent::s_ScriptCameraComponentpCurrentIterator = (UFG::ScriptCameraComponent *)&this->mPrev[-78];
   v2 = (UFG::qNode<UFG::ScriptCameraComponent,UFG::ScriptCameraComponent> *)&this->mPrev;

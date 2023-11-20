@@ -9,9 +9,9 @@ void __fastcall hkpBvShape::hkpBvShape(hkpBvShape *this, hkpShape *boundingVolum
   this->m_userData = 0i64;
   this->m_boundingVolumeShape = boundingVolumeShape;
   v3 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpBvShape::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpBvShape::`vftable;
   this->m_childShape.m_childShape = childShape;
-  this->m_childShape.vfptr = (hkpShapeContainerVtbl *)&hkpSingleShapeContainer::`vftable';
+  this->m_childShape.vfptr = (hkpShapeContainerVtbl *)&hkpSingleShapeContainer::`vftable;
   hkReferencedObject::addReference((hkReferencedObject *)&childShape->vfptr);
   hkReferencedObject::addReference((hkReferencedObject *)&v3->m_boundingVolumeShape->vfptr);
 }
@@ -24,8 +24,8 @@ void __fastcall hkpBvShape::hkpBvShape(hkpBvShape *this, hkFinishLoadedObjectFla
 
   v2 = this;
   hkpShape::hkpShape((hkpShape *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpBvShape::`vftable';
-  v2->m_childShape.vfptr = (hkpShapeContainerVtbl *)&hkpSingleShapeContainer::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpBvShape::`vftable;
+  v2->m_childShape.vfptr = (hkpShapeContainerVtbl *)&hkpSingleShapeContainer::`vftable;
   v2->m_type.m_storage = 30;
 }
 
@@ -37,14 +37,14 @@ void __fastcall hkpBvShape::~hkpBvShape(hkpBvShape *this)
   hkReferencedObject *v2; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpBvShape::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpBvShape::`vftable;
   hkReferencedObject::removeReference((hkReferencedObject *)&this->m_boundingVolumeShape->vfptr);
   v2 = (hkReferencedObject *)&v1->m_childShape.m_childShape->vfptr;
-  v1->m_childShape.vfptr = (hkpShapeContainerVtbl *)&hkpSingleShapeContainer::`vftable';
+  v1->m_childShape.vfptr = (hkpShapeContainerVtbl *)&hkpSingleShapeContainer::`vftable;
   if ( v2 )
     hkReferencedObject::removeReference(v2);
-  v1->m_childShape.vfptr = (hkpShapeContainerVtbl *)&hkpShapeContainer::`vftable';
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->m_childShape.vfptr = (hkpShapeContainerVtbl *)&hkpShapeContainer::`vftable;
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 46

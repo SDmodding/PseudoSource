@@ -178,7 +178,7 @@ void __fastcall CAkInsertFXContext::CAkInsertFXContext(CAkInsertFXContext *this,
   this->m_uFXIndex = in_uFXIndex;
   this->m_dataArray.m_pItems = 0i64;
   *(_QWORD *)&this->m_dataArray.m_uLength = 0i64;
-  this->vfptr = (AK::IAkPluginContextBaseVtbl *)&CAkInsertFXContext::`vftable';
+  this->vfptr = (AK::IAkPluginContextBaseVtbl *)&CAkInsertFXContext::`vftable;
   this->m_pContext = in_pCtx;
 }
 
@@ -245,7 +245,7 @@ void __fastcall CAkBusFXContext::CAkBusFXContext(CAkBusFXContext *this, CAkBusFX
   this->m_uFXIndex = in_uFXIndex;
   this->m_dataArray.m_pItems = 0i64;
   *(_QWORD *)&this->m_dataArray.m_uLength = 0i64;
-  this->vfptr = (AK::IAkPluginContextBaseVtbl *)&CAkBusFXContext::`vftable';
+  this->vfptr = (AK::IAkPluginContextBaseVtbl *)&CAkBusFXContext::`vftable;
   this->m_pBusFX = in_pBusFX;
   this->m_BuxCtx = (AK::CAkBusCtx)in_rBusContext->m_pBus;
 }
@@ -314,7 +314,7 @@ LABEL_12:
 void __fastcall CAkSourceFXContext::CAkSourceFXContext(CAkSourceFXContext *this, CAkPBI *in_pCtx)
 {
   this->m_pContext = in_pCtx;
-  this->vfptr = (AK::IAkPluginContextBaseVtbl *)&CAkSourceFXContext::`vftable';
+  this->vfptr = (AK::IAkPluginContextBaseVtbl *)&CAkSourceFXContext::`vftable;
   this->m_dataArray.m_pItems = 0i64;
   *(_QWORD *)&this->m_dataArray.m_uLength = 0i64;
 }

@@ -44,7 +44,7 @@ __int64 __fastcall CAkMMNotificationClient::Release(CAkMMNotificationClient *thi
   if ( v1 )
   {
     v4 = g_LEngineDefaultPoolId;
-    this->vfptr = (IUnknownVtbl *)&CAkMMNotificationClient::`vftable';
+    this->vfptr = (IUnknownVtbl *)&CAkMMNotificationClient::`vftable;
     ((void (__fastcall *)(IMMDeviceEnumerator *, CAkMMNotificationClient *))this->m_pEnumerator->vfptr[2].AddRef)(
       this->m_pEnumerator,
       this);
@@ -275,7 +275,7 @@ void CAkLEngine::RegisterDeviceChange(void)
       v1 = (IMMDeviceEnumerator *)ppv;
       v0->m_cRef = 1;
       v0->m_pEnumerator = v1;
-      v0->vfptr = (IUnknownVtbl *)&CAkMMNotificationClient::`vftable';
+      v0->vfptr = (IUnknownVtbl *)&CAkMMNotificationClient::`vftable;
       ((void (*)(void))v1->vfptr->AddRef)();
       ((void (__fastcall *)(IMMDeviceEnumerator *, CAkMMNotificationClient *))v0->m_pEnumerator->vfptr[2].QueryInterface)(
         v0->m_pEnumerator,

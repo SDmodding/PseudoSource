@@ -9,7 +9,7 @@ void __fastcall hkpEasePenetrationAction::hkpEasePenetrationAction(hkpEasePenetr
   v4 = this;
   hkpUnaryAction::hkpUnaryAction((hkpUnaryAction *)&this->vfptr, entity, 0i64);
   v4->m_duration = duration;
-  v4->vfptr = (hkBaseObjectVtbl *)&hkpEasePenetrationAction::`vftable';
+  v4->vfptr = (hkBaseObjectVtbl *)&hkpEasePenetrationAction::`vftable;
   v4->m_timePassed = 0.0;
   v4->m_originalAllowedPenetrationDepth = v3->m_collidable.m_allowedPenetrationDepth;
   *(_QWORD *)&v4->m_initialAllowedPenetrationDepthMultiplier = 1086324736i64;
@@ -24,7 +24,7 @@ void __fastcall hkpEasePenetrationAction::~hkpEasePenetrationAction(hkpEasePenet
   hkpEntity *v1; // rdx
 
   v1 = this->m_entity;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpEasePenetrationAction::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpEasePenetrationAction::`vftable;
   if ( v1 )
     v1->m_collidable.m_allowedPenetrationDepth = this->m_originalAllowedPenetrationDepth;
   hkpUnaryAction::~hkpUnaryAction((hkpUnaryAction *)&this->vfptr);

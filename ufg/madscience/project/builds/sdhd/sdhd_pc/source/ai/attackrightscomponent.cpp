@@ -29,28 +29,28 @@ void __fastcall UFG::AttackRightsComponent::AttackRightsComponent(UFG::AttackRig
   v5 = (UFG::qNode<UFG::AttackRightsComponent,UFG::AttackRightsComponent> *)&v4->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AttackRightsComponent::`vftable';
-  `eh vector constructor iterator'(
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AttackRightsComponent::`vftable;
+  `eh vector constructor iterator(
     v4->m_pAttackSlot,
     0x18ui64,
     384,
     (void (__fastcall *)(void *))UFG::qSafePointer<UFG::SimObject,UFG::SimObjectCharacter>::qSafePointer<UFG::SimObject,UFG::SimObjectCharacter>);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v4->m_pCachedNextAttacker,
     0x18ui64,
     3,
     (void (__fastcall *)(void *))UFG::qSafePointer<UFG::SimObject,UFG::SimObjectCharacter>::qSafePointer<UFG::SimObject,UFG::SimObjectCharacter>);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v4->m_pPreviousBestAttacker,
     0x18ui64,
     3,
     (void (__fastcall *)(void *))UFG::qSafePointer<UFG::SimObject,UFG::SimObjectCharacter>::qSafePointer<UFG::SimObject,UFG::SimObjectCharacter>);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v4->m_AttackSlotQueue,
     0x10ui64,
     3,
     (void (__fastcall *)(void *))UFG::TargetSphere::TargetSphere);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v4->m_FollowerAttackSlotQueue,
     0x10ui64,
     3,
@@ -70,7 +70,7 @@ void __fastcall UFG::AttackRightsComponent::AttackRightsComponent(UFG::AttackRig
   v8->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::HasAttackRequestNode>,UFG::qSafePointerNodeList> *)&v8->mPrev;
   v8->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::HasAttackRequestNode>,UFG::qSafePointerNodeList> *)&v8->mPrev;
   v4->m_pNextAttacker.m_pPointer = 0i64;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v4->m_pLastAttackRequest,
     0x18ui64,
     3,
@@ -115,7 +115,7 @@ void __fastcall UFG::AttackRightsComponent::~AttackRightsComponent(UFG::AttackRi
   UFG::qNode<UFG::AttackRightsComponent,UFG::AttackRightsComponent> *v11; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AttackRightsComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AttackRightsComponent::`vftable;
   if ( this == UFG::AttackRightsComponent::s_AttackRightsComponentpCurrentIterator )
     UFG::AttackRightsComponent::s_AttackRightsComponentpCurrentIterator = (UFG::AttackRightsComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::AttackRightsComponent,UFG::AttackRightsComponent> *)&this->mPrev;
@@ -126,7 +126,7 @@ void __fastcall UFG::AttackRightsComponent::~AttackRightsComponent(UFG::AttackRi
   v2->mPrev = v2;
   v2->mNext = v2;
   UFG::qString::~qString(&v1->m_DebugText);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->m_pLastAttackRequest,
     0x18ui64,
     3,
@@ -159,27 +159,27 @@ void __fastcall UFG::AttackRightsComponent::~AttackRightsComponent(UFG::AttackRi
   UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->m_pAIEntityComponent);
   UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>(&v1->m_pTransformNodeComponent);
   UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->m_pFormationManagerComponent);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->m_FollowerAttackSlotQueue,
     0x10ui64,
     3,
     (void (__fastcall *)(void *))UFG::qList<UFG::SoundBank,UFG::SoundBankGroupBankList,0,0>::~qList<UFG::SoundBank,UFG::SoundBankGroupBankList,0,0>);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->m_AttackSlotQueue,
     0x10ui64,
     3,
     (void (__fastcall *)(void *))UFG::qList<AimingSoftLockTask,AimingSoftLockList,0,0>::~qList<AimingSoftLockTask,AimingSoftLockList,0,0>);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->m_pPreviousBestAttacker,
     0x18ui64,
     3,
     (void (__fastcall *)(void *))UFG::qSafePointer<AnimationGroup,AnimationGroup>::~qSafePointer<AnimationGroup,AnimationGroup>);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->m_pCachedNextAttacker,
     0x18ui64,
     3,
     (void (__fastcall *)(void *))UFG::qSafePointer<AnimationGroup,AnimationGroup>::~qSafePointer<AnimationGroup,AnimationGroup>);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->m_pAttackSlot,
     0x18ui64,
     384,

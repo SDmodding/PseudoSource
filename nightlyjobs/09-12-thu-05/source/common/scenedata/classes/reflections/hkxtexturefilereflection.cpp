@@ -38,7 +38,7 @@ void __fastcall finishLoadedObjecthkxTextureFile(void *p, int finishing)
   {
     v2 = (hkStringPtr *)p;
     v3 = (hkStringPtr *)((char *)p + 16);
-    v3[-2].m_stringAndFlag = (const char *)&hkxTextureFile::`vftable';
+    v3[-2].m_stringAndFlag = (const char *)&hkxTextureFile::`vftable;
     v4 = finishing;
     hkStringPtr::hkStringPtr(v3, (hkFinishLoadedObjectFlag)finishing);
     hkStringPtr::hkStringPtr(v2 + 3, (hkFinishLoadedObjectFlag)v4);
@@ -64,7 +64,7 @@ void **__fastcall getVtablehkxTextureFile()
   hkStringPtr::hkStringPtr(&v1, 0);
   hkStringPtr::hkStringPtr(&v2, 0);
   hkStringPtr::hkStringPtr(&v3, 0);
-  return &hkxTextureFile::`vftable';
+  return &hkxTextureFile::`vftable;
 }
 
 // File Line: 96

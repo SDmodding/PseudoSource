@@ -49,7 +49,7 @@ void __fastcall UFG::UITiledMapTextureManager::UITiledMapTextureManager(UFG::UIT
   {
     *(_DWORD *)v13 = v9;
     v15 = (signed __int64)(v13 + 8);
-    `eh vector constructor iterator'(v13 + 8, 0x28ui64, v9, (void (__fastcall *)(void *))UFG::qString::qString);
+    `eh vector constructor iterator(v13 + 8, 0x28ui64, v9, (void (__fastcall *)(void *))UFG::qString::qString);
   }
   else
   {
@@ -73,7 +73,7 @@ void __fastcall UFG::UITiledMapTextureManager::UITiledMapTextureManager(UFG::UIT
   {
     *(_DWORD *)v20 = v17;
     v14 = (signed __int64)(v20 + 8);
-    `eh vector constructor iterator'(
+    `eh vector constructor iterator(
       v20 + 8,
       0x20ui64,
       v17,
@@ -99,7 +99,7 @@ void __fastcall UFG::UITiledMapTextureManager::~UITiledMapTextureManager(UFG::UI
   if ( v2 )
   {
     v3 = &v2[-1].mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v2,
       0x28ui64,
       v2[-1].mStringHash32,
@@ -113,7 +113,7 @@ void __fastcall UFG::UITiledMapTextureManager::~UITiledMapTextureManager(UFG::UI
   if ( v4 )
   {
     v5 = &v4[-1].mNameUID;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v4,
       0x20ui64,
       v4[-1].mNameUID,
@@ -244,12 +244,12 @@ void __fastcall UFG::UITiledMapTextureManager::SetPlayerPosition(UFG::UITiledMap
                                        0xFFFFFFFF);
                 v18 = v2->mTileUIDs[v11];
                 v19 = (UFG::qResourceHandle *)&v2->mTextureHandles[(unsigned int)v11].mPrev;
-                v20 = `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result;
-                if ( !`UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result )
+                v20 = `UFG::qGetResourceInventory<Illusion::Texture>::`2::result;
+                if ( !`UFG::qGetResourceInventory<Illusion::Texture>::`2::result )
                 {
                   v21 = UFG::qResourceWarehouse::Instance();
                   v20 = UFG::qResourceWarehouse::GetInventory(v21, 0x8B43FABF);
-                  `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result = v20;
+                  `UFG::qGetResourceInventory<Illusion::Texture>::`2::result = v20;
                 }
                 UFG::qResourceHandle::Init(v19, 0x8B43FABF, v18, v20);
                 for ( j = v2->mTileTextureInfo.mNode.mNext;

@@ -6,10 +6,10 @@ void __fastcall hkaiPathRequestViewer::hkaiPathRequestViewer(hkaiPathRequestView
 
   v2 = this;
   hkaiViewerBase::hkaiViewerBase((hkaiViewerBase *)&this->vfptr, contexts);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkaiPathRequestViewer::`vftable'{for `hkReferencedObject'};
-  v2->vfptr = (hkProcessVtbl *)&hkaiPathRequestViewer::`vftable'{for `hkProcess'};
-  v2->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiPathRequestViewer::`vftable'{for `hkaiViewerContextWorldListener'};
-  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiPathRequestViewer::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkaiPathRequestViewer::`vftable{for `hkReferencedObject};
+  v2->vfptr = (hkProcessVtbl *)&hkaiPathRequestViewer::`vftable{for `hkProcess};
+  v2->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiPathRequestViewer::`vftable{for `hkaiViewerContextWorldListener};
+  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiPathRequestViewer::`vftable;
 }
 
 // File Line: 22
@@ -23,10 +23,10 @@ void __fastcall hkaiPathRequestViewer::~hkaiPathRequestViewer(hkaiPathRequestVie
 
   v1 = 0;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiPathRequestViewer::`vftable'{for `hkReferencedObject'};
-  this->vfptr = (hkProcessVtbl *)&hkaiPathRequestViewer::`vftable'{for `hkProcess'};
-  this->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiPathRequestViewer::`vftable'{for `hkaiViewerContextWorldListener'};
-  this->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiPathRequestViewer::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiPathRequestViewer::`vftable{for `hkReferencedObject};
+  this->vfptr = (hkProcessVtbl *)&hkaiPathRequestViewer::`vftable{for `hkProcess};
+  this->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiPathRequestViewer::`vftable{for `hkaiViewerContextWorldListener};
+  this->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiPathRequestViewer::`vftable;
   if ( this->m_context.m_pntr )
   {
     v3 = 0i64;
@@ -41,7 +41,7 @@ void __fastcall hkaiPathRequestViewer::~hkaiPathRequestViewer(hkaiPathRequestVie
     }
     while ( v2->m_context.m_pntr );
   }
-  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiWorld::Listener::`vftable';
+  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiWorld::Listener::`vftable;
   hkaiViewerBase::~hkaiViewerBase((hkaiViewerBase *)&v2->vfptr);
 }
 

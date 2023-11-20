@@ -36,10 +36,10 @@ void __fastcall hkaiSensorViewer::hkaiSensorViewer(hkaiSensorViewer *this, hkArr
 
   v2 = this;
   hkaiViewerBase::hkaiViewerBase((hkaiViewerBase *)&this->vfptr, contexts);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkaiSensorViewer::`vftable'{for `hkReferencedObject'};
-  v2->vfptr = (hkProcessVtbl *)&hkaiSensorViewer::`vftable'{for `hkProcess'};
-  v2->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiSensorViewer::`vftable'{for `hkaiViewerContextWorldListener'};
-  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiSensorViewer::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkaiSensorViewer::`vftable{for `hkReferencedObject};
+  v2->vfptr = (hkProcessVtbl *)&hkaiSensorViewer::`vftable{for `hkProcess};
+  v2->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiSensorViewer::`vftable{for `hkaiViewerContextWorldListener};
+  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiSensorViewer::`vftable;
   v2->m_displayAabbs.m_capacityAndFlags = 2147483648;
   v2->m_displayAabbs.m_data = 0i64;
   v2->m_displayAabbs.m_size = 0;
@@ -89,12 +89,12 @@ void __fastcall hkaiSensorViewer::~hkaiSensorViewer(hkaiSensorViewer *this)
   signed __int64 v8; // rbp
   int v9; // eax
 
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiSensorViewer::`vftable'{for `hkReferencedObject'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiSensorViewer::`vftable{for `hkReferencedObject};
   v1 = 0;
-  this->vfptr = (hkProcessVtbl *)&hkaiSensorViewer::`vftable'{for `hkProcess'};
-  this->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiSensorViewer::`vftable'{for `hkaiViewerContextWorldListener'};
+  this->vfptr = (hkProcessVtbl *)&hkaiSensorViewer::`vftable{for `hkProcess};
+  this->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiSensorViewer::`vftable{for `hkaiViewerContextWorldListener};
   v2 = this;
-  this->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiSensorViewer::`vftable';
+  this->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiSensorViewer::`vftable;
   if ( this->m_context.m_pntr )
   {
     v3 = 0i64;
@@ -133,7 +133,7 @@ void __fastcall hkaiSensorViewer::~hkaiSensorViewer(hkaiSensorViewer *this)
       144 * (v9 & 0x3FFFFFFF));
   v2->m_displayAabbs.m_data = 0i64;
   v2->m_displayAabbs.m_capacityAndFlags = 2147483648;
-  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiWorld::Listener::`vftable';
+  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiWorld::Listener::`vftable;
   hkaiViewerBase::~hkaiViewerBase((hkaiViewerBase *)&v2->vfptr);
 }
 

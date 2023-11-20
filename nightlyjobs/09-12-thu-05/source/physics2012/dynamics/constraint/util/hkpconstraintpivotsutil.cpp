@@ -61,7 +61,7 @@ __int64 __fastcall hkpConstraintPivotsUtil::findClosestShapeKey(hkpWorld *world,
   v30 = FLOAT_3_40282e38;
   v31 = _mm_shuffle_ps(v31, _mm_unpackhi_ps(v31, (__m128)xmmword_141A712A0), 196);
   v16 = &transform;
-  v29 = &hkpClosestCdPointCollector::`vftable';
+  v29 = &hkpClosestCdPointCollector::`vftable;
   v10 = (void (__fastcall *)(hkpSphereShape **, hkpShape **, __int128 *, void ***, hkpShape *, _QWORD, hkVector4f *, _QWORD, hkpSphereShape *, _QWORD, __m128 *, _QWORD, void **))*((_QWORD *)&v7->vfptr + 5 * ((unsigned __int8)v7->m_agent2Types[(unsigned __int8)v38.m_type.m_storage][v8] + 79i64));
   v11 = (__int128 *)v3->m_collisionInput;
   v23 = *v11;
@@ -73,11 +73,11 @@ __int64 __fastcall hkpConstraintPivotsUtil::findClosestShapeKey(hkpWorld *world,
   *(float *)&v24 = FLOAT_1_70141e38;
   v28 = v12;
   hkpCollisionFilter::hkpCollisionFilter(&v22);
-  v22.vfptr = (hkpCollidableCollidableFilterVtbl *)&hkpNullCollisionFilter::`vftable'{for `hkpCollidableCollidableFilter'};
-  v22.vfptr = (hkpShapeCollectionFilterVtbl *)&hkpNullCollisionFilter::`vftable'{for `hkpShapeCollectionFilter'};
-  v22.vfptr = (hkpRayShapeCollectionFilterVtbl *)&hkpNullCollisionFilter::`vftable'{for `hkpRayShapeCollectionFilter'};
+  v22.vfptr = (hkpCollidableCollidableFilterVtbl *)&hkpNullCollisionFilter::`vftable{for `hkpCollidableCollidableFilter};
+  v22.vfptr = (hkpShapeCollectionFilterVtbl *)&hkpNullCollisionFilter::`vftable{for `hkpShapeCollectionFilter};
+  v22.vfptr = (hkpRayShapeCollectionFilterVtbl *)&hkpNullCollisionFilter::`vftable{for `hkpRayShapeCollectionFilter};
   v22.m_type.m_storage = 1;
-  v22.vfptr = (hkpRayCollidableFilterVtbl *)&hkpNullCollisionFilter::`vftable'{for `hkpRayCollidableFilter'};
+  v22.vfptr = (hkpRayCollidableFilterVtbl *)&hkpNullCollisionFilter::`vftable{for `hkpRayCollidableFilter};
   *((_QWORD *)&v24 + 1) = &v22;
   v10(
     &v18,
@@ -92,7 +92,7 @@ __int64 __fastcall hkpConstraintPivotsUtil::findClosestShapeKey(hkpWorld *world,
     *(_QWORD *)&v19,
     &v34,
     0i64,
-    &hkpNullCollisionFilter::`vftable'{for `hkReferencedObject'});
+    &hkpNullCollisionFilter::`vftable{for `hkReferencedObject});
   if ( v32 )
     v9 = v33;
   hkpNullCollisionFilter::~hkpNullCollisionFilter((hkpNullCollisionFilter *)&v22);

@@ -8,7 +8,7 @@ void __fastcall UFG::WorldBoundaries::~WorldBoundaries(UFG::WorldBoundaries *thi
   UFG::qVector3 *v4; // rcx
 
   v1 = this;
-  this->vfptr = (UFG::WorldBoundariesVtbl *)&UFG::WorldBoundaries::`vftable';
+  this->vfptr = (UFG::WorldBoundariesVtbl *)&UFG::WorldBoundaries::`vftable;
   v2 = (Render::Skinning *)&this->mMappings;
   if ( this->mMappings.mTree.mCount )
   {

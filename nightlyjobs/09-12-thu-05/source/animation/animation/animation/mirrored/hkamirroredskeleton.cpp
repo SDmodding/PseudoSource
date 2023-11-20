@@ -21,7 +21,7 @@ void __fastcall hkaMirroredSkeleton::hkaMirroredSkeleton(hkaMirroredSkeleton *th
 
   this->m_skeleton = skeleton;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaMirroredSkeleton::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaMirroredSkeleton::`vftable;
   v2 = skeleton;
   this->m_parentIndices = skeleton->m_parentIndices.m_data;
   v3 = this;
@@ -83,7 +83,7 @@ void __fastcall hkaMirroredSkeleton::~hkaMirroredSkeleton(hkaMirroredSkeleton *t
 
   v1 = this->m_partitionPairMap;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaMirroredSkeleton::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaMirroredSkeleton::`vftable;
   v3 = (hkMemoryAllocator **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
   hkMemoryRouter::alignedFree(v3[11], v1);
   v4 = v2->m_bonePairMap;
@@ -93,7 +93,7 @@ void __fastcall hkaMirroredSkeleton::~hkaMirroredSkeleton(hkaMirroredSkeleton *t
   v7 = (hkMemoryAllocator **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
   hkMemoryRouter::alignedFree(v7[11], v6);
   hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::~hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>(&v2->m_annotationNameMap.m_map);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 62
@@ -1077,7 +1077,7 @@ void __fastcall hkaMirroredSkeleton::canonicalize(hkaMirroredSkeleton *this, hkQ
     if ( COERCE_FLOAT((unsigned int)(2 * COERCE_SIGNED_INT(COERCE_FLOAT(_mm_shuffle_ps(v6, v6, 177)) + v6.m128_f32[0])) >> 1) >= (float)(1.0 - v3) )
       break;
     ++v4;
-    if ( (signed __int64)v4 >= (signed __int64)&hkaMirroredSkeleton `RTTI Type Descriptor' )
+    if ( (signed __int64)v4 >= (signed __int64)&hkaMirroredSkeleton `RTTI Type Descriptor )
       return;
   }
   *qInOut = (hkQuaternionf)v4->m_vec.m_quad;

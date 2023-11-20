@@ -19,7 +19,7 @@ hkBool *__fastcall UFG::RagdollPenetrationRaycastInterface::castRay(UFG::Ragdoll
   input.m_enableShapeCollectionFilter.m_bool = 0;
   input.m_filterInfo = 0;
   input.m_userData = 0i64;
-  collector.vfptr = (hkpRayHitCollectorVtbl *)&hkpClosestRayHitCollector::`vftable';
+  collector.vfptr = (hkpRayHitCollectorVtbl *)&hkpClosestRayHitCollector::`vftable;
   v14 = 0i64;
   v10 = 1065353216;
   v11 = -1;
@@ -490,14 +490,14 @@ void __fastcall UFG::Ragdoll::Ragdoll(UFG::Ragdoll *this, UFG::RagdollData *data
 
   v4 = data;
   v5 = this;
-  this->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::BasePhysicsObject::`vftable';
+  this->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::BasePhysicsObject::`vftable;
   this->mUserData.isBoat = 0;
   v23 = &this->mUserData.simComponent;
   v23->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v23->mPrev;
   v23->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v23->mPrev;
   v6 = 0i64;
   this->mUserData.simComponent.m_pPointer = 0i64;
-  this->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::Ragdoll::`vftable';
+  this->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::Ragdoll::`vftable;
   *(_QWORD *)&this->mMassProperties.m_volume = 0i64;
   this->mMassProperties.m_centerOfMass = 0i64;
   this->mMassProperties.m_inertiaTensor.m_col0 = 0i64;
@@ -655,7 +655,7 @@ void __fastcall UFG::Ragdoll::~Ragdoll(UFG::Ragdoll *this)
   hkResult result; // [rsp+48h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::Ragdoll::`vftable';
+  this->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::Ragdoll::`vftable;
   v2 = &this->mUserData.simComponent;
   if ( this->mUserData.simComponent.m_pPointer )
   {
@@ -3214,12 +3214,12 @@ void __fastcall UFG::Ragdoll::CreateRagdollPenetrationUtil(UFG::Ragdoll *this, h
   v16 = (*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v15[11] + 8i64))(v15[11], 32i64);
   if ( v16 )
   {
-    *(_QWORD *)v16 = &hkBaseObject::`vftable';
-    *(_QWORD *)v16 = &hkReferencedObject::`vftable';
+    *(_QWORD *)v16 = &hkBaseObject::`vftable;
+    *(_QWORD *)v16 = &hkReferencedObject::`vftable;
     *(_DWORD *)(v16 + 8) = 0x1FFFF;
-    *(_QWORD *)(v16 + 16) = &hkaRagdollRaycastInterface::`vftable';
-    *(_QWORD *)v16 = &UFG::RagdollPenetrationRaycastInterface::`vftable'{for `hkReferencedObject'};
-    *(_QWORD *)(v16 + 16) = &UFG::RagdollPenetrationRaycastInterface::`vftable'{for `hkaRagdollRaycastInterface'};
+    *(_QWORD *)(v16 + 16) = &hkaRagdollRaycastInterface::`vftable;
+    *(_QWORD *)v16 = &UFG::RagdollPenetrationRaycastInterface::`vftable{for `hkReferencedObject};
+    *(_QWORD *)(v16 + 16) = &UFG::RagdollPenetrationRaycastInterface::`vftable{for `hkaRagdollRaycastInterface};
     *(_QWORD *)(v16 + 24) = v2;
   }
   else

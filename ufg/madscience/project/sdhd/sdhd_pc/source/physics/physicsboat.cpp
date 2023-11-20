@@ -38,7 +38,7 @@ void __fastcall UFG::PhysicsBoat::PhysicsBoat(UFG::PhysicsBoat *this, UFG::Vehic
   v35 = -2i64;
   v4 = this;
   UFG::PhysicsVehicle::PhysicsVehicle((UFG::PhysicsVehicle *)&this->vfptr, param, transform, velocity);
-  v4->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::PhysicsBoat::`vftable';
+  v4->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::PhysicsBoat::`vftable;
   v4->mOustideWorldBoundaries = 0;
   v4->mEngineDamage = 0.0;
   v4->mChopFunction.bCircular = 0;
@@ -110,7 +110,7 @@ void __fastcall UFG::PhysicsBoat::PhysicsBoat(UFG::PhysicsBoat *this, UFG::Vehic
   if ( v15 )
   {
     hkpUnaryAction::hkpUnaryAction(v15, (hkpEntity *)&v4->mRigidBody->mBody->vfptr, 0i64);
-    v16->vfptr = (hkBaseObjectVtbl *)&UFG::BoatAction::`vftable';
+    v16->vfptr = (hkBaseObjectVtbl *)&UFG::BoatAction::`vftable;
     LODWORD(v16[1].vfptr) &= 0xFFFFFFF8;
     *(_QWORD *)&v16[1].m_memSizeAndFlags = v4;
   }

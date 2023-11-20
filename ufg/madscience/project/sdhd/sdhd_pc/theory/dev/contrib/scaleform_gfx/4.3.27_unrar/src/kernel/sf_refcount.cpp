@@ -2,14 +2,14 @@
 // RVA: 0x94C290
 void __fastcall Scaleform::RefCountImplCore::~RefCountImplCore(Scaleform::RefCountImplCore *this)
 {
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
 }
 
 // File Line: 52
 // RVA: 0x94C2A0
 void __fastcall Scaleform::RefCountNTSImplCore::~RefCountNTSImplCore(Scaleform::RefCountNTSImplCore *this)
 {
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable;
 }
 
 // File Line: 78
@@ -44,7 +44,7 @@ void __fastcall Scaleform::RefCountWeakSupportImpl::~RefCountWeakSupportImpl(Sca
   bool v4; // zf
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountWeakSupportImpl::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountWeakSupportImpl::`vftable;
   v2 = this->pWeakProxy;
   if ( v2 )
   {
@@ -54,7 +54,7 @@ void __fastcall Scaleform::RefCountWeakSupportImpl::~RefCountWeakSupportImpl(Sca
     if ( v4 )
       ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
   }
-  v1->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable';
+  v1->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable;
 }
 
 // File Line: 117

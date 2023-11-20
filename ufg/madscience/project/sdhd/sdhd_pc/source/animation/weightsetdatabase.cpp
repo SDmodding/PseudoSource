@@ -41,9 +41,9 @@ void WeightSetDataBase::Init(void)
   v0 = (WeightSetDataBase *)UFG::qMemoryPool2::Allocate(&gActionTreeMemoryPool, 0x20ui64, "WeightSetDataBase", 0i64, 1u);
   if ( v0 )
   {
-    v0->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+    v0->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
     v0->mResourceOwner = 0i64;
-    v0->vfptr = (Expression::IMemberMapVtbl *)&WeightSetDataBase::`vftable';
+    v0->vfptr = (Expression::IMemberMapVtbl *)&WeightSetDataBase::`vftable;
     v4 = &v0->mWeightSetGroups;
     v4->mNode.mPrev = &v4->mNode;
     v4->mNode.mNext = &v4->mNode;
@@ -341,9 +341,9 @@ __int64 dynamic_initializer_for__Weightset::sClassNameUID__()
 // RVA: 0x39EA90
 void __fastcall Weightset::Weightset(Weightset *this, MemImageLoadFlag flag)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Weightset::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Weightset::`vftable;
 }
 
 // File Line: 267
@@ -356,7 +356,7 @@ void __fastcall Weightset::~Weightset(Weightset *this)
   char *v4; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Weightset::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Weightset::`vftable;
   v2 = this->mRawWeightSet.mOffset;
   if ( v2 && (UFG::qOffset64<float *> *)((char *)&this->mRawWeightSet + v2) )
   {
@@ -368,7 +368,7 @@ void __fastcall Weightset::~Weightset(Weightset *this)
     operator delete[](v4);
   }
   BinPtrArray<JointReferences,1,0>::Clear((BinPtrArray<ITrack,1,0> *)&v1->mWeightsetEntires);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 318
@@ -733,7 +733,7 @@ void __fastcall WeightsetEntry::~WeightsetEntry(WeightsetEntry *this)
   char *v2; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&WeightsetEntry::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&WeightsetEntry::`vftable;
   if ( !(~LOBYTE(this->mName.mOffset) & 1) )
   {
     if ( this->mName.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
@@ -743,6 +743,6 @@ void __fastcall WeightsetEntry::~WeightsetEntry(WeightsetEntry *this)
         operator delete[](v2);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 

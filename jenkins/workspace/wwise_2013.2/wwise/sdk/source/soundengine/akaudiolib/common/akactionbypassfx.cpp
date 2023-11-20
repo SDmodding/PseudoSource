@@ -293,7 +293,7 @@ CAkActionBypassFX *__fastcall CAkActionBypassFX::Create(AkActionType in_eActionT
     CAkActionExcept::CAkActionExcept((CAkActionExcept *)&result->vfptr, v2, v3);
     v5->m_bIsBypass = 0;
     v5->m_uTargetMask = -1;
-    v5->vfptr = (CAkIndexableVtbl *)&CAkActionBypassFX::`vftable';
+    v5->vfptr = (CAkIndexableVtbl *)&CAkActionBypassFX::`vftable;
     CAkAction::AddToIndex((CAkAction *)&v5->vfptr);
     result = v5;
   }

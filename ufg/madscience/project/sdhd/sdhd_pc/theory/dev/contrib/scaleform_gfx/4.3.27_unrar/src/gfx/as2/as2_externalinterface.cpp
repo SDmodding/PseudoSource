@@ -9,8 +9,8 @@ void __fastcall Scaleform::GFx::AS2::ExternalInterface::ExternalInterface(Scalef
   v2 = penv;
   v3 = this;
   Scaleform::GFx::AS2::Object::Object((Scaleform::GFx::AS2::Object *)&this->vfptr, penv);
-  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::ExternalInterface::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::ExternalInterface::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::ExternalInterface::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::ExternalInterface::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   v4 = Scaleform::GFx::AS2::GlobalContext::GetPrototype(v2->StringContext.pContext, ASBuiltin_ExternalInterface);
   Scaleform::GFx::AS2::Object::Set__proto__((Scaleform::GFx::AS2::Object *)&v3->vfptr, &v2->StringContext, v4);
 }
@@ -34,8 +34,8 @@ void __fastcall Scaleform::GFx::AS2::ExternalInterfaceCtorFunction::ExternalInte
     (Scaleform::GFx::AS2::CFunctionObject *)&this->vfptr,
     psc,
     Scaleform::GFx::AS2::ExternalInterfaceCtorFunction::GlobalCtor);
-  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::ExternalInterfaceCtorFunction::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::ExternalInterfaceCtorFunction::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::ExternalInterfaceCtorFunction::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::ExternalInterfaceCtorFunction::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   v7.T.Type = 10;
   v4 = Scaleform::GFx::AS2::ASStringContext::CreateConstString(v2, &result, "available");
   v8 = 0;
@@ -517,9 +517,9 @@ Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::ExternalInterf
       &psc,
       v7,
       v3);
-    v6->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::ExternalInterfaceProto::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::ExternalInterfaceProto::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
-    v6->vfptr = (Scaleform::GFx::AS2::GASPrototypeBaseVtbl *)&Scaleform::GFx::AS2::ExternalInterfaceProto::`vftable';
+    v6->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::ExternalInterfaceProto::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::ExternalInterfaceProto::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+    v6->vfptr = (Scaleform::GFx::AS2::GASPrototypeBaseVtbl *)&Scaleform::GFx::AS2::ExternalInterfaceProto::`vftable;
     LOBYTE(flags) = 1;
     Scaleform::GFx::AS2::GASPrototypeBase::InitFunctionMembers(
       (Scaleform::GFx::AS2::GASPrototypeBase *)&v6->vfptr,

@@ -5,12 +5,12 @@ void __fastcall hkDisplayBox::hkDisplayBox(hkDisplayBox *this, hkVector4f *halfE
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_geometry = 0i64;
   this->m_type = 2;
-  this->vfptr = (hkBaseObjectVtbl *)&hkDisplayGeometry::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkDisplayGeometry::`vftable;
   this->m_transform.m_rotation.m_col0 = (hkVector4f)transform.m_quad;
   this->m_transform.m_rotation.m_col1 = (hkVector4f)direction.m_quad;
   this->m_transform.m_rotation.m_col2 = (hkVector4f)stru_141A71280.m_quad;
   this->m_transform.m_translation = 0i64;
-  this->vfptr = (hkBaseObjectVtbl *)&hkDisplayBox::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkDisplayBox::`vftable;
   this->m_halfExtents = (hkVector4f)halfExtents->m_quad;
   this->m_halfExtents = (hkVector4f)halfExtents->m_quad;
 }
@@ -22,13 +22,13 @@ void __fastcall hkDisplayBox::hkDisplayBox(hkDisplayBox *this)
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_geometry = 0i64;
   this->m_type = 2;
-  this->vfptr = (hkBaseObjectVtbl *)&hkDisplayGeometry::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkDisplayGeometry::`vftable;
   this->m_transform.m_rotation.m_col0 = (hkVector4f)transform.m_quad;
   this->m_transform.m_rotation.m_col1 = (hkVector4f)direction.m_quad;
   this->m_transform.m_rotation.m_col2 = (hkVector4f)stru_141A71280.m_quad;
   this->m_transform.m_translation = 0i64;
   this->m_halfExtents = 0i64;
-  this->vfptr = (hkBaseObjectVtbl *)&hkDisplayBox::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkDisplayBox::`vftable;
 }
 
 // File Line: 25
@@ -135,7 +135,7 @@ void __fastcall hkDisplayBox::buildGeometry(hkDisplayBox *this)
   if ( v3 )
   {
     *(_DWORD *)(v3 + 8) = 0x1FFFF;
-    *(_QWORD *)v3 = &hkGeometry::`vftable';
+    *(_QWORD *)v3 = &hkGeometry::`vftable;
     *(_QWORD *)(v3 + 16) = 0i64;
     *(_DWORD *)(v3 + 24) = 0;
     *(_DWORD *)(v3 + 28) = 2147483648;

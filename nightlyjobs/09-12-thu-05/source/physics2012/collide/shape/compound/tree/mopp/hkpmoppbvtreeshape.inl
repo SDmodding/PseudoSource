@@ -9,11 +9,11 @@ void __fastcall hkpMoppBvTreeShape::hkpMoppBvTreeShape(hkpMoppBvTreeShape *this,
   v4 = flag.m_finishing;
   v2 = this;
   hkpBvTreeShape::hkpBvTreeShape((hkpBvTreeShape *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkMoppBvTreeShapeBase::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkMoppBvTreeShapeBase::`vftable;
   if ( v4 )
     v2->m_bvTreeType.m_storage = 0;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpMoppBvTreeShape::`vftable';
-  v2->m_child.vfptr = (hkpShapeContainerVtbl *)&hkpSingleShapeContainer::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpMoppBvTreeShape::`vftable;
+  v2->m_child.vfptr = (hkpShapeContainerVtbl *)&hkpSingleShapeContainer::`vftable;
   if ( v4 == 1 )
   {
     v3 = v2->m_code;

@@ -602,7 +602,7 @@ void __fastcall hkQuaternionf::setBarycentric(hkQuaternionf *this, hkQuaternionf
                                                                       _mm_shuffle_ps(v7, v7, 0))),
                                                                   v7),
                                                                 (__m128)xmmword_141A6FC80))];
-  v9 = (__m128)`hkVector4f::getComponent'::`2'::indexToMask[v8];
+  v9 = (__m128)`hkVector4f::getComponent::`2::indexToMask[v8];
   v10 = qVerts[v8].m_vec.m_quad;
   v11 = v9;
   v12 = _mm_and_ps(v9, v5);

@@ -13,7 +13,7 @@ void __fastcall Scaleform::GFx::AS3::UserDefinedFunction::UserDefinedFunction(Sc
   Scaleform::GFx::AS3::Instances::FunctionBase::FunctionBase(
     (Scaleform::GFx::AS3::Instances::FunctionBase *)&this->vfptr,
     t);
-  v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::UserDefinedFunction::`vftable';
+  v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::UserDefinedFunction::`vftable;
   v6->pContext.pObject = 0i64;
   if ( v5 )
     Scaleform::Render::RenderBuffer::AddRef(v5);
@@ -1223,7 +1223,7 @@ __int64 __fastcall Scaleform::GFx::AS3ValueObjectInterface::SetMember(Scaleform:
       r.Type = 0;
       r.SinkData.pStr = &v36;
       Scaleform::MsgFormat::MsgFormat(&v46, &r);
-      Scaleform::MsgFormat::Parse(&v46, "Property '{0}' already exists as a DisplayObject. SetMember aborted.");
+      Scaleform::MsgFormat::Parse(&v46, "Property {0} already exists as a DisplayObject. SetMember aborted.");
       Scaleform::MsgFormat::FormatD1<char const *>(&v46, (const char *const *)&v);
       Scaleform::MsgFormat::FinishFormatD(&v46);
       Scaleform::MsgFormat::~MsgFormat(&v46);
@@ -4830,12 +4830,12 @@ void __fastcall Scaleform::GFx::AS3::MovieRoot::CreateObjectInterface(Scaleform:
                                                    32i64);
   if ( v3 )
   {
-    v3->vfptr = (Scaleform::GFx::Value::ObjectInterfaceVtbl *)&Scaleform::GFx::Value::ObjectInterface::`vftable';
+    v3->vfptr = (Scaleform::GFx::Value::ObjectInterfaceVtbl *)&Scaleform::GFx::Value::ObjectInterface::`vftable;
     v3->pMovieRoot = v2;
     v4 = &v3->ExternalObjRefs;
     v4->Root.pPrev = (Scaleform::GFx::Value *)v4;
     v4->Root.pNext = (Scaleform::GFx::Value *)v4;
-    v3->vfptr = (Scaleform::GFx::Value::ObjectInterfaceVtbl *)&Scaleform::GFx::AS3ValueObjectInterface::`vftable';
+    v3->vfptr = (Scaleform::GFx::Value::ObjectInterfaceVtbl *)&Scaleform::GFx::AS3ValueObjectInterface::`vftable;
     v2->pObjectInterface = v3;
   }
   else

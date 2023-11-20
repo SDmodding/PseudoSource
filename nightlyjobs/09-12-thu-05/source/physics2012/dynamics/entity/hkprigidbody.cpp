@@ -110,7 +110,7 @@ $LN11_128:
         goto LABEL_16;
       hkpMotion::hkpMotion((hkpMotion *)&motionBufferOut->vfptr, position, rotation, 0);
       v10->m_type.m_storage = 2;
-      v10->vfptr = (hkBaseObjectVtbl *)&hkpSphereMotion::`vftable';
+      v10->vfptr = (hkBaseObjectVtbl *)&hkpSphereMotion::`vftable;
       break;
     case 3:
 $LN10_149:
@@ -142,7 +142,7 @@ $LN10_149:
         goto LABEL_16;
       hkpMotion::hkpMotion((hkpMotion *)&motionBufferOut->vfptr, position, rotation, 0);
       v10->m_type.m_storage = 7;
-      v10->vfptr = (hkBaseObjectVtbl *)&hkpCharacterMotion::`vftable';
+      v10->vfptr = (hkBaseObjectVtbl *)&hkpCharacterMotion::`vftable;
       break;
     default:
       if ( motionBufferOut )
@@ -198,7 +198,7 @@ void __fastcall hkpRigidBody::hkpRigidBody(hkpRigidBody *this, hkpRigidBodyCinfo
   v2 = info;
   v3 = this;
   hkpEntity::hkpEntity((hkpEntity *)&this->vfptr, info->m_shape);
-  v3->vfptr = (hkBaseObjectVtbl *)&hkpRigidBody::`vftable';
+  v3->vfptr = (hkBaseObjectVtbl *)&hkpRigidBody::`vftable;
   v3->m_material.m_responseType.m_storage = v2->m_collisionResponse.m_storage;
   v3->m_contactPointCallbackDelay = v2->m_contactPointCallbackDelay;
   v3->m_collidable.m_broadPhaseHandle.m_collisionFilterInfo = v2->m_collisionFilterInfo;
@@ -304,14 +304,14 @@ void __fastcall hkpRigidBody::hkpRigidBody(hkpRigidBody *this, hkFinishLoadedObj
 
   v2 = this;
   hkpEntity::hkpEntity((hkpEntity *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpRigidBody::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpRigidBody::`vftable;
 }
 
 // File Line: 346
 // RVA: 0xD624A0
 void __fastcall hkpRigidBody::~hkpRigidBody(hkpRigidBody *this)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkpRigidBody::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpRigidBody::`vftable;
   hkpEntity::~hkpEntity((hkpEntity *)&this->vfptr);
 }
 
@@ -432,7 +432,7 @@ hkpWorldObject *__fastcall hkpRigidBody::clone(hkpRigidBody *this)
     {
       hkpMotion::hkpMotion(v11);
       v12->m_savedMotion = 0i64;
-      v12->vfptr = (hkBaseObjectVtbl *)&hkpMaxSizeMotion::`vftable';
+      v12->vfptr = (hkBaseObjectVtbl *)&hkpMaxSizeMotion::`vftable;
     }
     else
     {

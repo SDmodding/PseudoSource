@@ -214,15 +214,15 @@ float __fastcall dBToLinWithPositive(float in_fVal)
     v6 = in_fVal * 0.050000001;
     if ( v6 >= -37.0 )
     {
-      if ( `AkMath::FastPow10'::`4'::`local static guard' & 1 )
+      if ( `AkMath::FastPow10::`4::`local static guard & 1 )
       {
-        v7 = *(float *)&`AkMath::FastPow10'::`4'::SCALE;
+        v7 = *(float *)&`AkMath::FastPow10::`4::SCALE;
       }
       else
       {
         v7 = FLOAT_2_7866352e7;
-        `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
-        `AkMath::FastPow10'::`4'::`local static guard' |= 1u;
+        `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
+        `AkMath::FastPow10::`4::`local static guard |= 1u;
       }
       v1 = (float)((float)((float)((float)(COERCE_FLOAT(
                                              ((signed int)(float)((float)(v6 * v7) + 1065353200.0) & 0x7FFFFF)
@@ -239,7 +239,7 @@ float __fastcall dBToLinWithPositive(float in_fVal)
   {
     v2 = in_fVal * -0.050000001;
     if ( v2 < -37.0
-      || (`AkMath::FastPow10'::`4'::`local static guard' & 1 ? (v3 = *(float *)&`AkMath::FastPow10'::`4'::SCALE) : (v3 = FLOAT_2_7866352e7, `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7), `AkMath::FastPow10'::`4'::`local static guard' |= 1u),
+      || (`AkMath::FastPow10::`4::`local static guard & 1 ? (v3 = *(float *)&`AkMath::FastPow10::`4::SCALE) : (v3 = FLOAT_2_7866352e7, `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7), `AkMath::FastPow10::`4::`local static guard |= 1u),
           LODWORD(v8) = ((signed int)(float)((float)(v2 * v3) + 1065353200.0) & 0x7FFFFF) + 1065353216,
           v4 = (float)((float)((float)((float)(v8 * 0.32518977) + 0.020805772) * v8) + 0.65304345)
              * COERCE_FLOAT((signed int)(float)((float)(v2 * v3) + 1065353200.0) & 0xFF800000),
@@ -290,15 +290,15 @@ void __fastcall AkFeedbackParams::ComputePlayerVolumes(AkFeedbackParams *this, C
       v8 = (float)(CAkPBI::GetVoiceVolumedB(v3) + v3->m_EffectiveParams.Volume) * 0.050000001;
       if ( v8 >= -37.0 )
       {
-        if ( `AkMath::FastPow10'::`4'::`local static guard' & 1 )
+        if ( `AkMath::FastPow10::`4::`local static guard & 1 )
         {
-          v10 = *(float *)&`AkMath::FastPow10'::`4'::SCALE;
+          v10 = *(float *)&`AkMath::FastPow10::`4::SCALE;
         }
         else
         {
           v10 = FLOAT_2_7866352e7;
-          `AkMath::FastPow10'::`4'::`local static guard' |= 1u;
-          `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
+          `AkMath::FastPow10::`4::`local static guard |= 1u;
+          `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
         }
         v9 = (float)((float)((float)((float)(COERCE_FLOAT(
                                                ((signed int)(float)((float)(v10 * v8) + 1065353200.0) & 0x7FFFFF)

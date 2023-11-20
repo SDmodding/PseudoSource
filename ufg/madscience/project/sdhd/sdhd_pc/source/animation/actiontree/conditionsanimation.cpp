@@ -17,7 +17,7 @@ void __fastcall MotionPhase::MotionPhase(MotionPhase *this)
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&MotionPhase::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&MotionPhase::`vftable;
   *(_QWORD *)&v1->mPlayPriority = 0i64;
   v1->mInEqualityOperator.mValue = 3;
 }
@@ -135,7 +135,7 @@ char __fastcall ComparePhaseUtil(ActionContext *context, PhaseMark comparePhaseM
     result = CompareFloat(v4, comparePhase, v13.mPhase);
   else
     result = 0;
-  v13.vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v13.vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   return result;
 }
 
@@ -158,7 +158,7 @@ void __fastcall FootStepLeftCondition::FootStepLeftCondition(FootStepLeftConditi
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&FootStepLeftCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&FootStepLeftCondition::`vftable;
   v1->mPhase = 0.5;
   v1->mInEqualityOperator.mValue = 4;
 }
@@ -193,7 +193,7 @@ void __fastcall FootStepRightCondition::FootStepRightCondition(FootStepRightCond
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&FootStepRightCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&FootStepRightCondition::`vftable;
   v1->mPhase = 0.5;
   v1->mInEqualityOperator.mValue = 4;
 }
@@ -228,7 +228,7 @@ void __fastcall AnimationFrameCondition::AnimationFrameCondition(AnimationFrameC
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AnimationFrameCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AnimationFrameCondition::`vftable;
   v1->mFrame = 0.0;
   v1->mInEqualityOperator.mValue = 4;
 }
@@ -279,7 +279,7 @@ char __usercall AnimationFrameCondition::Match@<al>(AnimationFrameCondition *thi
   if ( !v8 )
     return 0;
   v12 = 1;
-  v11 = &FirstAnimationNode::`vftable';
+  v11 = &FirstAnimationNode::`vftable;
   v9 = v8->vfptr;
   v13 = 0i64;
   v9[1].FindWithOldPath((Expression::IMemberMap *)&v8->vfptr, (const char *)&v11);
@@ -309,7 +309,7 @@ void __fastcall AnimationBankRequestCondition::AnimationBankRequestCondition(Ani
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AnimationBankRequestCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AnimationBankRequestCondition::`vftable;
   v1->mAnimationBankName = UFG::gNullQSymbolUC;
   *(_WORD *)&v1->mRequestStream = 2561;
   v1->mNonPlayerAnimPriority.mValue = 7;
@@ -417,7 +417,7 @@ void __fastcall AnimationRequiredIsLoadedCondition::AnimationRequiredIsLoadedCon
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AnimationRequiredIsLoadedCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AnimationRequiredIsLoadedCondition::`vftable;
 }
 
 // File Line: 371

@@ -38,7 +38,7 @@ void __fastcall finishLoadedObjecthkpProjectileGun(void *p, int finishing)
   {
     v2 = p;
     v3 = (hkStringPtr *)((char *)p + 24);
-    v3[-3].m_stringAndFlag = (const char *)&hkpFirstPersonGun::`vftable';
+    v3[-3].m_stringAndFlag = (const char *)&hkpFirstPersonGun::`vftable;
     v4 = finishing;
     hkStringPtr::hkStringPtr(v3, (hkFinishLoadedObjectFlag)finishing);
     v2[13] = 2147483648;
@@ -46,7 +46,7 @@ void __fastcall finishLoadedObjecthkpProjectileGun(void *p, int finishing)
     v2[12] = 0;
     if ( v4 )
       *((_BYTE *)v2 + 16) = 0;
-    *(_QWORD *)v2 = &hkpProjectileGun::`vftable';
+    *(_QWORD *)v2 = &hkpProjectileGun::`vftable;
     *((_QWORD *)v2 + 9) = 0i64;
     v2[20] = 0;
     v2[21] = 2147483648;
@@ -67,7 +67,7 @@ void **__fastcall getVtablehkpProjectileGun()
   hkStringPtr v1; // [rsp+38h] [rbp-60h]
 
   hkStringPtr::hkStringPtr(&v1, 0);
-  return &hkpProjectileGun::`vftable';
+  return &hkpProjectileGun::`vftable;
 }
 
 // File Line: 146

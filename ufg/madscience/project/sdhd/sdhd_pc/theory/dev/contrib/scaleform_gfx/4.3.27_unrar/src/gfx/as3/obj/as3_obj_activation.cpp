@@ -25,9 +25,9 @@ void __fastcall Scaleform::GFx::AS3::InstanceTraits::Activation::Activation(Scal
   if ( v9 )
     v9->RefCount = (v9->RefCount + 1) & 0x8FBFFFFF;
   Scaleform::GFx::AS3::Traits::Traits((Scaleform::GFx::AS3::Traits *)&v7->vfptr, v5, 0i64, 1, 1);
-  v7->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::Traits::`vftable';
+  v7->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::Traits::`vftable;
   v7->Ns.pObject = v9;
-  v7->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::RTraits::`vftable';
+  v7->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::RTraits::`vftable;
   v10 = v8->pNode;
   v7->Name = (Scaleform::GFx::ASString)v8->pNode;
   ++v10->RefCount;
@@ -36,7 +36,7 @@ void __fastcall Scaleform::GFx::AS3::InstanceTraits::Activation::Activation(Scal
   --v11->RefCount;
   if ( v12 )
     Scaleform::GFx::ASStringNode::ReleaseNode(v11);
-  v7->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::Activation::`vftable';
+  v7->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::Activation::`vftable;
   v7->TraitsType = 20;
   Scaleform::GFx::AS3::Traits::AddSlots(
     (Scaleform::GFx::AS3::Traits *)&v7->vfptr,

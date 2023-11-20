@@ -5,7 +5,7 @@ void __fastcall UFG::WwiseFileLocationBase::WwiseFileLocationBase(UFG::WwiseFile
   UFG::WwiseFileLocationBase *v1; // rbx
 
   v1 = this;
-  this->vfptr = (UFG::WwiseFileLocationBaseVtbl *)&UFG::WwiseFileLocationBase::`vftable';
+  this->vfptr = (UFG::WwiseFileLocationBaseVtbl *)&UFG::WwiseFileLocationBase::`vftable;
   UFG::qString::qString(&this->m_WwiseBasePath, &customWorldMapCaption);
   UFG::qString::qString(&v1->m_WwiseBankPath, &customWorldMapCaption);
   UFG::qString::qString(&v1->m_WwiseLangPath, &customWorldMapCaption);
@@ -21,7 +21,7 @@ void __fastcall UFG::WwiseFileLocationBase::~WwiseFileLocationBase(UFG::WwiseFil
   UFG::WwiseFileLocationBase *v1; // rbx
 
   v1 = this;
-  this->vfptr = (UFG::WwiseFileLocationBaseVtbl *)&UFG::WwiseFileLocationBase::`vftable';
+  this->vfptr = (UFG::WwiseFileLocationBaseVtbl *)&UFG::WwiseFileLocationBase::`vftable;
   UFG::qString::~qString(&this->m_WwiseDLCPath);
   UFG::qString::~qString(&v1->m_WwiseExternalsPath);
   UFG::qString::~qString(&v1->m_WwiseSrcPath);

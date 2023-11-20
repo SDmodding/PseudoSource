@@ -6,9 +6,9 @@ void __fastcall OSuite::ZUrl::ZUrl(OSuite::ZUrl *this)
   OSuite::ZString *v2; // rcx
 
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZUrl::`vftable'{for `OSuite::ZObject'};
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZUrl::`vftable{for `OSuite::ZObject};
   v2 = &this->m_sProtocol;
-  v2[-1].m_pString = (OSuite::ZString::InternalString *)&OSuite::ZUrl::`vftable'{for `OSuite::IHashable'};
+  v2[-1].m_pString = (OSuite::ZString::InternalString *)&OSuite::ZUrl::`vftable{for `OSuite::IHashable};
   OSuite::ZString::ZString(v2);
   OSuite::ZString::ZString(&v1->m_sHost);
   OSuite::ZString::ZString(&v1->m_sFakeHost);
@@ -28,9 +28,9 @@ void __fastcall OSuite::ZUrl::ZUrl(OSuite::ZUrl *this, OSuite::ZUrl *other)
 
   v2 = this;
   v3 = other;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZUrl::`vftable'{for `OSuite::ZObject'};
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZUrl::`vftable{for `OSuite::ZObject};
   v4 = &this->m_sProtocol;
-  v4[-1].m_pString = (OSuite::ZString::InternalString *)&OSuite::ZUrl::`vftable'{for `OSuite::IHashable'};
+  v4[-1].m_pString = (OSuite::ZString::InternalString *)&OSuite::ZUrl::`vftable{for `OSuite::IHashable};
   OSuite::ZString::ZString(v4);
   OSuite::ZString::ZString(&v2->m_sHost);
   OSuite::ZString::ZString(&v2->m_sFakeHost);
@@ -51,9 +51,9 @@ void __fastcall OSuite::ZUrl::ZUrl(OSuite::ZUrl *this, OSuite::ZString *sPath)
 
   v2 = this;
   v3 = sPath;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZUrl::`vftable'{for `OSuite::ZObject'};
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZUrl::`vftable{for `OSuite::ZObject};
   v4 = &this->m_sProtocol;
-  v4[-1].m_pString = (OSuite::ZString::InternalString *)&OSuite::ZUrl::`vftable'{for `OSuite::IHashable'};
+  v4[-1].m_pString = (OSuite::ZString::InternalString *)&OSuite::ZUrl::`vftable{for `OSuite::IHashable};
   OSuite::ZString::ZString(v4);
   OSuite::ZString::ZString(&v2->m_sHost);
   OSuite::ZString::ZString(&v2->m_sFakeHost);
@@ -88,9 +88,9 @@ void __fastcall OSuite::ZUrl::ZUrl(OSuite::ZUrl *this, OSuite::ZUrl *that, OSuit
 
   v3 = this;
   v4 = sPath;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZUrl::`vftable'{for `OSuite::ZObject'};
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZUrl::`vftable{for `OSuite::ZObject};
   v5 = &this->m_sProtocol;
-  v5[-1].m_pString = (OSuite::ZString::InternalString *)&OSuite::ZUrl::`vftable'{for `OSuite::IHashable'};
+  v5[-1].m_pString = (OSuite::ZString::InternalString *)&OSuite::ZUrl::`vftable{for `OSuite::IHashable};
   v6 = that;
   OSuite::ZString::ZString(v5);
   OSuite::ZString::ZString(&v3->m_sHost);
@@ -148,9 +148,9 @@ void __fastcall OSuite::ZUrl::~ZUrl(OSuite::ZUrl *this)
   OSuite::ZUrlParameters *v2; // rcx
 
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZUrl::`vftable'{for `OSuite::ZObject'};
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZUrl::`vftable{for `OSuite::ZObject};
   v2 = &this->m_urlParameters;
-  v2[-2].m_arrayParameters.m_Comparer.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZUrl::`vftable'{for `OSuite::IHashable'};
+  v2[-2].m_arrayParameters.m_Comparer.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZUrl::`vftable{for `OSuite::IHashable};
   OSuite::ZUrlParameters::~ZUrlParameters(v2);
   OSuite::ZString::~ZString(&v1->m_sPath);
   OSuite::ZString::~ZString(&v1->m_sFakeHost);

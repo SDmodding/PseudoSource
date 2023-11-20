@@ -31,7 +31,7 @@ hkClass *__fastcall hkxCamera::staticClass()
 void __fastcall finishLoadedObjecthkxCamera(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkxCamera::`vftable';
+    *(_QWORD *)p = &hkxCamera::`vftable;
 }
 
 // File Line: 74
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkxCamera(void *p)
 // RVA: 0xE31BE0
 void **__fastcall getVtablehkxCamera()
 {
-  return &hkxCamera::`vftable';
+  return &hkxCamera::`vftable;
 }
 
 // File Line: 100

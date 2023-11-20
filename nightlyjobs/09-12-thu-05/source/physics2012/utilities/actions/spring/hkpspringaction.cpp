@@ -10,7 +10,7 @@ void __fastcall hkpSpringAction::hkpSpringAction(hkpSpringAction *this, hkpRigid
     (hkpEntity *)&entityA->vfptr,
     (hkpEntity *)&entityB->vfptr,
     userData);
-  v4->vfptr = (hkBaseObjectVtbl *)&hkpSpringAction::`vftable';
+  v4->vfptr = (hkBaseObjectVtbl *)&hkpSpringAction::`vftable;
   v4->m_restLength = 1.0;
   v4->m_strength = 1000.0;
   v4->m_damping = 0.1;

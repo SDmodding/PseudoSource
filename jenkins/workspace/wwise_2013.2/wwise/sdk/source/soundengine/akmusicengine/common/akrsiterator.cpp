@@ -9,7 +9,7 @@ void __fastcall CAkRSSub::~CAkRSSub(CAkRSSub *this)
   int v5; // esi
 
   v1 = this;
-  this->vfptr = (CAkRSNodeVtbl *)&CAkRSSub::`vftable';
+  this->vfptr = (CAkRSNodeVtbl *)&CAkRSSub::`vftable;
   v2 = this->m_pGlobalCntrBaseInfo;
   if ( v2 )
   {
@@ -39,7 +39,7 @@ void __fastcall CAkRSSub::~CAkRSSub(CAkRSSub *this)
     v1->m_listChildren.m_pItems = 0i64;
     v1->m_listChildren.m_ulReserved = 0;
   }
-  v1->vfptr = (CAkRSNodeVtbl *)&CAkRSNode::`vftable';
+  v1->vfptr = (CAkRSNodeVtbl *)&CAkRSNode::`vftable;
 }
 
 // File Line: 44

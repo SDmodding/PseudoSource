@@ -7,7 +7,7 @@ AK::IAkPlugin *__fastcall CreateCompressorFX(AK::IAkPluginMemAlloc *in_pAllocato
   result = (AK::IAkPlugin *)in_pAllocator->vfptr->Malloc(in_pAllocator, 80ui64);
   if ( result )
   {
-    result->vfptr = (AK::IAkPluginVtbl *)&CAkCompressorFX::`vftable';
+    result->vfptr = (AK::IAkPluginVtbl *)&CAkCompressorFX::`vftable;
     result[1].vfptr = 0i64;
     result[2].vfptr = 0i64;
     result[6].vfptr = 0i64;
@@ -19,7 +19,7 @@ AK::IAkPlugin *__fastcall CreateCompressorFX(AK::IAkPluginMemAlloc *in_pAllocato
 // RVA: 0xAD0070
 void __fastcall CAkCompressorFX::CAkCompressorFX(CAkCompressorFX *this)
 {
-  this->vfptr = (AK::IAkPluginVtbl *)&CAkCompressorFX::`vftable';
+  this->vfptr = (AK::IAkPluginVtbl *)&CAkCompressorFX::`vftable;
   this->m_pSharedParams = 0i64;
   this->m_fpPerformDSP = 0i64;
   this->m_pSideChain = 0i64;
@@ -29,7 +29,7 @@ void __fastcall CAkCompressorFX::CAkCompressorFX(CAkCompressorFX *this)
 // RVA: 0xAD00A0
 void __fastcall CAkCompressorFX::~CAkCompressorFX(CAkCompressorFX *this)
 {
-  this->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable';
+  this->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable;
 }
 
 // File Line: 62
@@ -286,8 +286,8 @@ void __fastcall CAkCompressorFX::Process(CAkCompressorFX *this, AkAudioBuffer *i
       v23 = v21[v16].fGainDb;
       if ( (unsigned __int64)v19 < v20 )
       {
-        v24 = *(float *)&`AkMath::FastPow10'::`4'::SCALE;
-        v25 = `AkMath::FastPow10'::`4'::`local static guard';
+        v24 = *(float *)&`AkMath::FastPow10::`4::SCALE;
+        v25 = `AkMath::FastPow10::`4::`local static guard;
         if ( (4i64 * v4->uValidFrames + 3) / 4 >= 4 )
         {
           do
@@ -317,8 +317,8 @@ void __fastcall CAkCompressorFX::Process(CAkCompressorFX *this, AkAudioBuffer *i
               {
                 v24 = FLOAT_2_7866352e7;
                 v25 |= 1u;
-                `AkMath::FastPow10'::`4'::`local static guard' = v25;
-                `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
+                `AkMath::FastPow10::`4::`local static guard = v25;
+                `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
               }
               v33 = (float)((float)((float)((float)(COERCE_FLOAT(
                                                       ((signed int)(float)((float)(v32 * v24) + 1065353200.0) & 0x7FFFFF)
@@ -360,8 +360,8 @@ void __fastcall CAkCompressorFX::Process(CAkCompressorFX *this, AkAudioBuffer *i
               {
                 v24 = FLOAT_2_7866352e7;
                 v25 |= 1u;
-                `AkMath::FastPow10'::`4'::`local static guard' = v25;
-                `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
+                `AkMath::FastPow10::`4::`local static guard = v25;
+                `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
               }
               v41 = (float)((float)((float)((float)(COERCE_FLOAT(
                                                       ((signed int)(float)((float)(v40 * v24) + 1065353200.0) & 0x7FFFFF)
@@ -403,8 +403,8 @@ void __fastcall CAkCompressorFX::Process(CAkCompressorFX *this, AkAudioBuffer *i
               {
                 v24 = FLOAT_2_7866352e7;
                 v25 |= 1u;
-                `AkMath::FastPow10'::`4'::`local static guard' = v25;
-                `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
+                `AkMath::FastPow10::`4::`local static guard = v25;
+                `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
               }
               v49 = (float)((float)((float)((float)(COERCE_FLOAT(
                                                       ((signed int)(float)((float)(v48 * v24) + 1065353200.0) & 0x7FFFFF)
@@ -446,8 +446,8 @@ void __fastcall CAkCompressorFX::Process(CAkCompressorFX *this, AkAudioBuffer *i
               {
                 v24 = FLOAT_2_7866352e7;
                 v25 |= 1u;
-                `AkMath::FastPow10'::`4'::`local static guard' = v25;
-                `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
+                `AkMath::FastPow10::`4::`local static guard = v25;
+                `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
               }
               v55 = (float)((float)((float)((float)(COERCE_FLOAT(
                                                       ((signed int)(float)((float)(v54 * v24) + 1065353200.0) & 0x7FFFFF)
@@ -520,8 +520,8 @@ void __fastcall CAkCompressorFX::Process(CAkCompressorFX *this, AkAudioBuffer *i
             *(v19 - 1) = v63;
           }
           while ( (unsigned __int64)v19 < v20 );
-          `AkMath::FastPow10'::`4'::SCALE = LODWORD(v24);
-          `AkMath::FastPow10'::`4'::`local static guard' = v25;
+          `AkMath::FastPow10::`4::SCALE = LODWORD(v24);
+          `AkMath::FastPow10::`4::`local static guard = v25;
         }
       }
       v12 = v64;
@@ -694,12 +694,12 @@ void __fastcall CAkCompressorFX::ProcessLinked(CAkCompressorFX *this, AkAudioBuf
     v35 = (float)(v17 * v7) * 0.050000001;
     if ( v35 >= -37.0 )
     {
-      if ( !(`AkMath::FastPow10'::`4'::`local static guard' & 1) )
+      if ( !(`AkMath::FastPow10::`4::`local static guard & 1) )
       {
-        `AkMath::FastPow10'::`4'::`local static guard' |= 1u;
-        `AkMath::FastPow10'::`4'::SCALE = 1272224376;
+        `AkMath::FastPow10::`4::`local static guard |= 1u;
+        `AkMath::FastPow10::`4::SCALE = 1272224376;
       }
-      v37 = (signed int)(float)((float)(v35 * *(float *)&`AkMath::FastPow10'::`4'::SCALE) + 1065353200.0);
+      v37 = (signed int)(float)((float)(v35 * *(float *)&`AkMath::FastPow10::`4::SCALE) + 1065353200.0);
       LODWORD(v51) = (v37 & 0x7FFFFF) + 1065353216;
       HIDWORD(v51) = v37 & 0xFF800000;
       v36 = (float)((float)((float)((float)(*(float *)&v51 * 0.32518977) + 0.020805772) * *(float *)&v51) + 0.65304345)

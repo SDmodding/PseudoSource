@@ -685,7 +685,7 @@ UFG::ComponentIDDesc *__fastcall UFG::SimObjectWeaponPropertiesComponent::GetDes
 // RVA: 0x1543CE0
 __int64 dynamic_initializer_for__UFG::SimObjectWeaponPropertiesComponent::sWeaponTypeInfos__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     UFG::SimObjectWeaponPropertiesComponent::sWeaponTypeInfos,
     0x18ui64,
     120,
@@ -997,7 +997,7 @@ void __fastcall UFG::SimObjectWeaponPropertiesComponent::SimObjectWeaponProperti
   v6 = (UFG::qNode<UFG::SimObjectWeaponPropertiesComponent,UFG::SimObjectWeaponPropertiesComponent> *)&v5->mPrev;
   v6->mPrev = v6;
   v6->mNext = v6;
-  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SimObjectWeaponPropertiesComponent::`vftable';
+  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SimObjectWeaponPropertiesComponent::`vftable;
   *(_QWORD *)&v5->mLastOwner = 0i64;
   v5->mWeaponTypeInfo = 0i64;
   *(_QWORD *)&v5->mUnloadTimeOut = 0i64;
@@ -1140,7 +1140,7 @@ void __fastcall UFG::SimObjectWeaponPropertiesComponent::~SimObjectWeaponPropert
   UFG::qWiseSymbol result; // [rsp+48h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SimObjectWeaponPropertiesComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SimObjectWeaponPropertiesComponent::`vftable;
   if ( this == UFG::SimObjectWeaponPropertiesComponent::s_SimObjectWeaponPropertiesComponentpCurrentIterator )
     UFG::SimObjectWeaponPropertiesComponent::s_SimObjectWeaponPropertiesComponentpCurrentIterator = (UFG::SimObjectWeaponPropertiesComponent *)&this->mPrev[-10].mNext;
   v2 = (UFG::qNode<UFG::SimObjectWeaponPropertiesComponent,UFG::SimObjectWeaponPropertiesComponent> *)&this->mPrev;

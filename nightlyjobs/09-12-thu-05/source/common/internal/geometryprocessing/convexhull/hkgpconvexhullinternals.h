@@ -7,7 +7,7 @@ void __fastcall hkgpConvexHullImpl::hkgpConvexHullImpl(hkgpConvexHullImpl *this)
   v1 = this;
   hkgpConvexHull::BuildConfig::BuildConfig(&this->m_config);
   *(_DWORD *)&v1->m_mesh.m_memSizeAndFlags = 0x1FFFF;
-  v1->m_mesh.vfptr = (hkBaseObjectVtbl *)&hkgpAbstractMesh<hkgpConvexHullImpl::Edge,hkgpConvexHullImpl::Vertex,hkgpConvexHullImpl::Triangle,hkContainerHeapAllocator>::`vftable';
+  v1->m_mesh.vfptr = (hkBaseObjectVtbl *)&hkgpAbstractMesh<hkgpConvexHullImpl::Edge,hkgpConvexHullImpl::Vertex,hkgpConvexHullImpl::Triangle,hkContainerHeapAllocator>::`vftable;
   v1->m_mesh.m_vertices.m_allocator.m_firstPool = 0i64;
   v1->m_mesh.m_vertices.m_used = 0i64;
   v1->m_mesh.m_vertices.m_numUsed = 0;
@@ -65,12 +65,12 @@ void __fastcall hkgpConvexHullImpl::~hkgpConvexHullImpl(hkgpConvexHullImpl *this
       v4 << 6);
   v1->m_pendings.m_data = 0i64;
   v1->m_pendings.m_capacityAndFlags = 2147483648;
-  v1->m_mesh.vfptr = (hkBaseObjectVtbl *)&hkgpAbstractMesh<hkgpConvexHullImpl::Edge,hkgpConvexHullImpl::Vertex,hkgpConvexHullImpl::Triangle,hkContainerHeapAllocator>::`vftable';
+  v1->m_mesh.vfptr = (hkBaseObjectVtbl *)&hkgpAbstractMesh<hkgpConvexHullImpl::Edge,hkgpConvexHullImpl::Vertex,hkgpConvexHullImpl::Triangle,hkContainerHeapAllocator>::`vftable;
   hkgpAbstractMeshDefinitions::List<hkgpMeshBase::Triangle,hkgpAbstractMeshDefinitions::List<hkgpMeshBase::Vertex,hkgpMeshBase::BaseVertex,hkGeometryProcessing::PoolAllocator<hkgpMeshBase::Vertex,32,hkContainerHeapAllocator>>::Item,hkGeometryProcessing::PoolAllocator<hkgpMeshBase::Triangle,32,hkContainerHeapAllocator>>::reset((hkgpAbstractMeshDefinitions::List<hkgpMeshBase::Triangle,hkgpAbstractMeshDefinitions::List<hkgpMeshBase::Vertex,hkgpMeshBase::BaseVertex,hkGeometryProcessing::PoolAllocator<hkgpMeshBase::Vertex,32,hkContainerHeapAllocator> >::Item,hkGeometryProcessing::PoolAllocator<hkgpMeshBase::Triangle,32,hkContainerHeapAllocator> > *)&v1->m_mesh.m_triangles);
   hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Triangle,32,hkContainerHeapAllocator>::~PoolAllocator<hkgpConvexHullImpl::Triangle,32,hkContainerHeapAllocator>((hkGeometryProcessing::PoolAllocator<hkgpMeshBase::Triangle,32,hkContainerHeapAllocator> *)&v1->m_mesh.m_triangles);
   hkgpAbstractMeshDefinitions::List<hkgpConvexHullImpl::Vertex,hkgpAbstractMeshDefinitions::List<hkgpConvexHullImpl::Vertex,hkgpConvexHull::Vertex,hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>>::Item,hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>>::reset(&v1->m_mesh.m_vertices);
   hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>::~PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>(&v1->m_mesh.m_vertices.m_allocator);
-  v1->m_mesh.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->m_mesh.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 247
@@ -2011,7 +2011,7 @@ char __fastcall hkgpConvexHullImpl::isPointInside(hkgpConvexHullImpl *this, hkVe
             _mm_andnot_ps(v10, _mm_add_ps(v9, (__m128)xmmword_141A711B0)),
             _mm_and_ps(_mm_sub_ps(v9, (__m128)xmmword_141A711B0), v10));
     v12 = _mm_xor_si128(
-            (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v11),
+            (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v11),
             _mm_cvttps_epi32(v11));
     v23 = v12.m128i_i64[0];
     v24 = (unsigned __int128)_mm_shuffle_epi32(v12, 170);
@@ -3950,7 +3950,7 @@ void __fastcall hkgpConvexHullImpl::refitDomainFromSources(hkgpConvexHullImpl *t
               _mm_andnot_ps(v14, _mm_add_ps(v13, (__m128)xmmword_141A711B0)),
               _mm_and_ps(_mm_sub_ps(v13, (__m128)xmmword_141A711B0), v14));
       v16 = _mm_xor_si128(
-              (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v15),
+              (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v15),
               _mm_cvttps_epi32(v15));
       v21 = v16.m128i_i64[0];
       v9[2].m128_u64[0] = v16.m128i_i64[0];
@@ -5050,7 +5050,7 @@ LABEL_149:
     return 1;
   if ( v10 < 2 )
     return 0;
-  geometry.vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable';
+  geometry.vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable;
   *(_DWORD *)&geometry.m_memSizeAndFlags = 0x1FFFF;
   geometry.m_vertices.m_data = 0i64;
   geometry.m_vertices.m_size = 0;
@@ -6240,7 +6240,7 @@ __int64 __fastcall hkgpConvexHullImpl::generateIndexedFaces<int,int>(hkgpConvexH
     v84 = v22;
     if ( v22 > 0i64 )
     {
-      v25 = `hkgpTopology::Edge<hkgpConvexHullImpl::Edge,hkgpConvexHullImpl::Vertex,hkgpConvexHullImpl::Triangle,hkgpConvexHullImpl::Vertex *>::null'::`2'::`local static guard';
+      v25 = `hkgpTopology::Edge<hkgpConvexHullImpl::Edge,hkgpConvexHullImpl::Vertex,hkgpConvexHullImpl::Triangle,hkgpConvexHullImpl::Vertex *>::null::`2::`local static guard;
       do
       {
         v26 = array[v24];
@@ -6249,12 +6249,12 @@ __int64 __fastcall hkgpConvexHullImpl::generateIndexedFaces<int,int>(hkgpConvexH
           if ( !(v25 & 1) )
           {
             v25 |= 1u;
-            *(_QWORD *)&`hkgpTopology::Edge<hkgpConvexHullImpl::Edge,hkgpConvexHullImpl::Vertex,hkgpConvexHullImpl::Triangle,hkgpConvexHullImpl::Vertex *>::null'::`2'::e = 0i64;
-            DWORD2(`hkgpTopology::Edge<hkgpConvexHullImpl::Edge,hkgpConvexHullImpl::Vertex,hkgpConvexHullImpl::Triangle,hkgpConvexHullImpl::Vertex *>::null'::`2'::e) = 0;
-            `hkgpTopology::Edge<hkgpConvexHullImpl::Edge,hkgpConvexHullImpl::Vertex,hkgpConvexHullImpl::Triangle,hkgpConvexHullImpl::Vertex *>::null'::`2'::`local static guard' = v25;
+            *(_QWORD *)&`hkgpTopology::Edge<hkgpConvexHullImpl::Edge,hkgpConvexHullImpl::Vertex,hkgpConvexHullImpl::Triangle,hkgpConvexHullImpl::Vertex *>::null::`2::e = 0i64;
+            DWORD2(`hkgpTopology::Edge<hkgpConvexHullImpl::Edge,hkgpConvexHullImpl::Vertex,hkgpConvexHullImpl::Triangle,hkgpConvexHullImpl::Vertex *>::null::`2::e) = 0;
+            `hkgpTopology::Edge<hkgpConvexHullImpl::Edge,hkgpConvexHullImpl::Vertex,hkgpConvexHullImpl::Triangle,hkgpConvexHullImpl::Vertex *>::null::`2::`local static guard = v25;
           }
           v27 = 0;
-          v82 = `hkgpTopology::Edge<hkgpConvexHullImpl::Edge,hkgpConvexHullImpl::Vertex,hkgpConvexHullImpl::Triangle,hkgpConvexHullImpl::Vertex *>::null'::`2'::e;
+          v82 = `hkgpTopology::Edge<hkgpConvexHullImpl::Edge,hkgpConvexHullImpl::Vertex,hkgpConvexHullImpl::Triangle,hkgpConvexHullImpl::Vertex *>::null::`2::e;
           while ( *(_DWORD *)((v26->m_links[v27] & 0xFFFFFFFFFFFFFFFCui64) + 88) == v10 )
           {
             if ( ++v27 >= 3 )
@@ -6318,7 +6318,7 @@ LABEL_32:
               hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v96, 4);
             v6 = v98;
             v96->m_data[v96->m_size++] = v5;
-            v25 = `hkgpTopology::Edge<hkgpConvexHullImpl::Edge,hkgpConvexHullImpl::Vertex,hkgpConvexHullImpl::Triangle,hkgpConvexHullImpl::Vertex *>::null'::`2'::`local static guard';
+            v25 = `hkgpTopology::Edge<hkgpConvexHullImpl::Edge,hkgpConvexHullImpl::Vertex,hkgpConvexHullImpl::Triangle,hkgpConvexHullImpl::Vertex *>::null::`2::`local static guard;
             ++v10;
             v5 = 0i64;
           }

@@ -10,7 +10,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::GangMemberStatData
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::GangMemberStatData,UFG::qReflectObject>::sInventory.vfptr,
     "UFG::GangMemberStatData",
     v0);
-  UFG::qReflectObjectType<UFG::GangMemberStatData,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::GangMemberStatData>::`vftable';
+  UFG::qReflectObjectType<UFG::GangMemberStatData,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::GangMemberStatData>::`vftable;
   UFG::qReflectInventory<UFG::GangMemberStatData>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::GangMemberStatData,UFG::qReflectObject>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -66,7 +66,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::PlayerStatData_UFG
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::PlayerStatData,UFG::qReflectObject>::sInventory.vfptr,
     "UFG::PlayerStatData",
     v0);
-  UFG::qReflectObjectType<UFG::PlayerStatData,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::PlayerStatData>::`vftable';
+  UFG::qReflectObjectType<UFG::PlayerStatData,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::PlayerStatData>::`vftable;
   UFG::qReflectInventory<UFG::PlayerStatData>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::PlayerStatData,UFG::qReflectObject>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(

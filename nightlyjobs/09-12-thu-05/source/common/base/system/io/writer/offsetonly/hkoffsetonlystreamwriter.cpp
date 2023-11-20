@@ -3,7 +3,7 @@
 void __fastcall hkOffsetOnlyStreamWriter::hkOffsetOnlyStreamWriter(hkOffsetOnlyStreamWriter *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkOffsetOnlyStreamWriter::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkOffsetOnlyStreamWriter::`vftable;
   *(_QWORD *)&this->m_offset = 0i64;
 }
 

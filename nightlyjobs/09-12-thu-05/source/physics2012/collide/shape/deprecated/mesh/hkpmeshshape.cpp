@@ -8,8 +8,8 @@ void __fastcall hkpMeshShape::hkpMeshShape(hkpMeshShape *this, float radius, int
   v3 = numBitsForSubpartIndex;
   v4 = this;
   hkpShapeCollection::hkpShapeCollection((hkpShapeCollection *)&this->vfptr, TRIANGLE_COLLECTION, COLLECTION_MESH_SHAPE);
-  v4->vfptr = (hkBaseObjectVtbl *)&hkpMeshShape::`vftable'{for `hkpShape'};
-  v4->vfptr = (hkpShapeContainerVtbl *)&hkpMeshShape::`vftable'{for `hkpShapeContainer'};
+  v4->vfptr = (hkBaseObjectVtbl *)&hkpMeshShape::`vftable{for `hkpShape};
+  v4->vfptr = (hkpShapeContainerVtbl *)&hkpMeshShape::`vftable{for `hkpShapeContainer};
   v4->m_subparts.m_capacityAndFlags = 2147483648;
   v4->m_subparts.m_data = 0i64;
   v4->m_subparts.m_size = 0;
@@ -35,8 +35,8 @@ void __fastcall hkpMeshShape::hkpMeshShape(hkpMeshShape *this, hkFinishLoadedObj
   v6 = flag.m_finishing;
   v2 = this;
   hkpShapeCollection::hkpShapeCollection((hkpShapeCollection *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpMeshShape::`vftable'{for `hkpShape'};
-  v2->vfptr = (hkpShapeContainerVtbl *)&hkpMeshShape::`vftable'{for `hkpShapeContainer'};
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpMeshShape::`vftable{for `hkpShape};
+  v2->vfptr = (hkpShapeContainerVtbl *)&hkpMeshShape::`vftable{for `hkpShapeContainer};
   if ( v6 )
   {
     v3 = 0;
@@ -312,7 +312,7 @@ hkpShape *__fastcall hkpMeshShape::getChildShape(hkpMeshShape *this, unsigned in
     *(_WORD *)&(*v5)[40] = v19;
     *(_WORD *)&(*v5)[42] = v21;
     *(_OWORD *)&(*v5)[96] = 0i64;
-    *(_QWORD *)v5 = &hkpTriangleShape::`vftable';
+    *(_QWORD *)v5 = &hkpTriangleShape::`vftable;
   }
   else
   {

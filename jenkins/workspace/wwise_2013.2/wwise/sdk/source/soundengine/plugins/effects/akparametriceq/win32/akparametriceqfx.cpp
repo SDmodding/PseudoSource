@@ -9,7 +9,7 @@ AK::IAkPlugin *__fastcall CreateParametricEQFX(AK::IAkPluginMemAlloc *in_pAlloca
   {
     result[9].vfptr = 0i64;
     result[11].vfptr = 0i64;
-    result->vfptr = (AK::IAkPluginVtbl *)&CAkParametricEQFX::`vftable';
+    result->vfptr = (AK::IAkPluginVtbl *)&CAkParametricEQFX::`vftable;
   }
   return result;
 }
@@ -18,7 +18,7 @@ AK::IAkPlugin *__fastcall CreateParametricEQFX(AK::IAkPluginMemAlloc *in_pAlloca
 // RVA: 0xACF050
 void __fastcall CAkParametricEQFX::CAkParametricEQFX(CAkParametricEQFX *this)
 {
-  this->vfptr = (AK::IAkPluginVtbl *)&CAkParametricEQFX::`vftable';
+  this->vfptr = (AK::IAkPluginVtbl *)&CAkParametricEQFX::`vftable;
   this->m_pSharedParams = 0i64;
   this->m_pfAllocatedMem = 0i64;
 }
@@ -27,7 +27,7 @@ void __fastcall CAkParametricEQFX::CAkParametricEQFX(CAkParametricEQFX *this)
 // RVA: 0xACF070
 void __fastcall CAkParametricEQFX::~CAkParametricEQFX(CAkParametricEQFX *this)
 {
-  this->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable';
+  this->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable;
 }
 
 // File Line: 70

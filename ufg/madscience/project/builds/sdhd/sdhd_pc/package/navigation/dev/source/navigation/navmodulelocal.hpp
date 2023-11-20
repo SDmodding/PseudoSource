@@ -2,7 +2,7 @@
 // RVA: 0xE62F0
 void __fastcall UFG::NavModuleLocal::~NavModuleLocal(UFG::NavModuleLocal *this)
 {
-  this->vfptr = (UFG::NavModuleLocalVtbl *)&UFG::NavModuleLocal::`vftable';
+  this->vfptr = (UFG::NavModuleLocalVtbl *)&UFG::NavModuleLocal::`vftable;
   _((AMD_HD3D *)&this->m_adjustedWaypoint);
 }
 

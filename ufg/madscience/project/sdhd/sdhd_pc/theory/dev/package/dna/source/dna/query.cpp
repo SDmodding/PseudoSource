@@ -15,7 +15,7 @@ void __fastcall DNA::IQueryParser::~IQueryParser(DNA::IQueryParser *this)
   UFG::qNode<DNA::IQueryParser,DNA::IQueryParser> *v4; // rcx
   UFG::qNode<DNA::IQueryParser,DNA::IQueryParser> *v5; // rax
 
-  this->vfptr = (DNA::IQueryParserVtbl *)&DNA::IQueryParser::`vftable';
+  this->vfptr = (DNA::IQueryParserVtbl *)&DNA::IQueryParser::`vftable;
   v1 = (UFG::qNode<DNA::IQueryParser,DNA::IQueryParser> *)&this->mPrev;
   v2 = this->mPrev;
   v3 = this->mNext;
@@ -135,7 +135,7 @@ __int64 dynamic_initializer_for__DNA::AllQueryNode::mParser__()
   UFG::qList<DNA::IQueryParser,DNA::IQueryParser,1,0> *i; // rax
   UFG::qNode<DNA::IQueryParser,DNA::IQueryParser> *v1; // rax
 
-  DNA::AllQueryNode::mParser.vfptr = (DNA::IQueryParserVtbl *)&DNA::IQueryParser::`vftable';
+  DNA::AllQueryNode::mParser.vfptr = (DNA::IQueryParserVtbl *)&DNA::IQueryParser::`vftable;
   UFG::qString::qString(&stru_14203D588, "All");
   for ( i = (UFG::qList<DNA::IQueryParser,DNA::IQueryParser,1,0> *)&DNA::IQueryParser::mParsers.mNode.mNext[-1].mNext;
         i != (UFG::qList<DNA::IQueryParser,DNA::IQueryParser,1,0> *)((char *)&DNA::IQueryParser::mParsers - 8);
@@ -148,7 +148,7 @@ __int64 dynamic_initializer_for__DNA::AllQueryNode::mParser__()
   off_14203D578 = v1;
   off_14203D580 = (void **)&DNA::IQueryParser::mParsers;
   DNA::IQueryParser::mParsers.mNode.mPrev = (UFG::qNode<DNA::IQueryParser,DNA::IQueryParser> *)&off_14203D578;
-  DNA::AllQueryNode::mParser.vfptr = (DNA::IQueryParserVtbl *)&DNA::AllQueryNode::Parser::`vftable';
+  DNA::AllQueryNode::mParser.vfptr = (DNA::IQueryParserVtbl *)&DNA::AllQueryNode::Parser::`vftable;
   return atexit(dynamic_atexit_destructor_for__DNA::AllQueryNode::mParser__);
 }
 
@@ -167,9 +167,9 @@ UFG::allocator::free_link *__fastcall DNA::AllQueryNode::Parser::Parse(DNA::AllQ
   v4 = v2 + 1;
   v4->mNext = v4;
   v4[1].mNext = v4;
-  v3->mNext = (UFG::allocator::free_link *)&DNA::IQueryNode::`vftable';
+  v3->mNext = (UFG::allocator::free_link *)&DNA::IQueryNode::`vftable;
   v3[3].mNext = (UFG::allocator::free_link *)&DNA::AllQueryNode::mParser;
-  v3->mNext = (UFG::allocator::free_link *)&DNA::AllQueryNode::`vftable';
+  v3->mNext = (UFG::allocator::free_link *)&DNA::AllQueryNode::`vftable;
   return v3;
 }
 
@@ -199,9 +199,9 @@ void __fastcall DNA::PropertyQueryNode::PropertyQueryNode(DNA::PropertyQueryNode
   v6 = (UFG::qNode<DNA::IQueryNode,DNA::IQueryNode> *)&this->mPrev;
   v6->mPrev = v6;
   v6->mNext = v6;
-  this->vfptr = (DNA::IQueryNodeVtbl *)&DNA::IQueryNode::`vftable';
+  this->vfptr = (DNA::IQueryNodeVtbl *)&DNA::IQueryNode::`vftable;
   this->mQueryParser = (DNA::IQueryParser *)&DNA::PropertyQueryNode::mParser;
-  this->vfptr = (DNA::IQueryNodeVtbl *)&DNA::PropertyQueryNode::`vftable';
+  this->vfptr = (DNA::IQueryNodeVtbl *)&DNA::PropertyQueryNode::`vftable;
   UFG::qString::qString(&this->mPropertyName);
   UFG::qString::qString(&v5->mPropertyValue);
   UFG::qString::Set(&v5->mPropertyName, v4);
@@ -239,7 +239,7 @@ __int64 dynamic_initializer_for__DNA::PropertyQueryNode::mParser__()
   UFG::qList<DNA::IQueryParser,DNA::IQueryParser,1,0> *i; // rax
   UFG::qNode<DNA::IQueryParser,DNA::IQueryParser> *v1; // rax
 
-  DNA::PropertyQueryNode::mParser.vfptr = (DNA::IQueryParserVtbl *)&DNA::IQueryParser::`vftable';
+  DNA::PropertyQueryNode::mParser.vfptr = (DNA::IQueryParserVtbl *)&DNA::IQueryParser::`vftable;
   UFG::qString::qString(&stru_14203D5C8, "Property");
   for ( i = (UFG::qList<DNA::IQueryParser,DNA::IQueryParser,1,0> *)&DNA::IQueryParser::mParsers.mNode.mNext[-1].mNext;
         i != (UFG::qList<DNA::IQueryParser,DNA::IQueryParser,1,0> *)((char *)&DNA::IQueryParser::mParsers - 8);
@@ -252,7 +252,7 @@ __int64 dynamic_initializer_for__DNA::PropertyQueryNode::mParser__()
   off_14203D5B8 = v1;
   off_14203D5C0 = (void **)&DNA::IQueryParser::mParsers;
   DNA::IQueryParser::mParsers.mNode.mPrev = (UFG::qNode<DNA::IQueryParser,DNA::IQueryParser> *)&off_14203D5B8;
-  DNA::PropertyQueryNode::mParser.vfptr = (DNA::IQueryParserVtbl *)&DNA::PropertyQueryNode::Parser::`vftable';
+  DNA::PropertyQueryNode::mParser.vfptr = (DNA::IQueryParserVtbl *)&DNA::PropertyQueryNode::Parser::`vftable;
   return atexit(dynamic_atexit_destructor_for__DNA::PropertyQueryNode::mParser__);
 }
 
@@ -362,9 +362,9 @@ void __fastcall DNA::ReferencedByQueryNode::ReferencedByQueryNode(DNA::Reference
   v5 = (UFG::qNode<DNA::IQueryNode,DNA::IQueryNode> *)&this->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  this->vfptr = (DNA::IQueryNodeVtbl *)&DNA::IQueryNode::`vftable';
+  this->vfptr = (DNA::IQueryNodeVtbl *)&DNA::IQueryNode::`vftable;
   this->mQueryParser = (DNA::IQueryParser *)&DNA::ReferencedByQueryNode::mParser;
-  this->vfptr = (DNA::IQueryNodeVtbl *)&DNA::ReferencedByQueryNode::`vftable';
+  this->vfptr = (DNA::IQueryNodeVtbl *)&DNA::ReferencedByQueryNode::`vftable;
   this->mRecursive = recursive;
   *(_QWORD *)&this->mInitialCount = 0i64;
   this->mSourceUIDs.p = 0i64;
@@ -445,9 +445,9 @@ void __fastcall DNA::ReferencedByQueryNode::ReferencedByQueryNode(DNA::Reference
   v4 = (UFG::qNode<DNA::IQueryNode,DNA::IQueryNode> *)&this->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  this->vfptr = (DNA::IQueryNodeVtbl *)&DNA::IQueryNode::`vftable';
+  this->vfptr = (DNA::IQueryNodeVtbl *)&DNA::IQueryNode::`vftable;
   this->mQueryParser = (DNA::IQueryParser *)&DNA::ReferencedByQueryNode::mParser;
-  this->vfptr = (DNA::IQueryNodeVtbl *)&DNA::ReferencedByQueryNode::`vftable';
+  this->vfptr = (DNA::IQueryNodeVtbl *)&DNA::ReferencedByQueryNode::`vftable;
   this->mRecursive = recursive;
   *(_QWORD *)&this->mInitialCount = 0i64;
   this->mSourceUIDs.p = 0i64;
@@ -961,7 +961,7 @@ __int64 dynamic_initializer_for__DNA::ReferencedByQueryNode::mParser__()
   UFG::qList<DNA::IQueryParser,DNA::IQueryParser,1,0> *i; // rax
   UFG::qNode<DNA::IQueryParser,DNA::IQueryParser> *v1; // rax
 
-  DNA::ReferencedByQueryNode::mParser.vfptr = (DNA::IQueryParserVtbl *)&DNA::IQueryParser::`vftable';
+  DNA::ReferencedByQueryNode::mParser.vfptr = (DNA::IQueryParserVtbl *)&DNA::IQueryParser::`vftable;
   UFG::qString::qString(&stru_14203D608, "ReferencedBy");
   for ( i = (UFG::qList<DNA::IQueryParser,DNA::IQueryParser,1,0> *)&DNA::IQueryParser::mParsers.mNode.mNext[-1].mNext;
         i != (UFG::qList<DNA::IQueryParser,DNA::IQueryParser,1,0> *)((char *)&DNA::IQueryParser::mParsers - 8);
@@ -974,7 +974,7 @@ __int64 dynamic_initializer_for__DNA::ReferencedByQueryNode::mParser__()
   off_14203D5F8 = v1;
   off_14203D600 = (void **)&DNA::IQueryParser::mParsers;
   DNA::IQueryParser::mParsers.mNode.mPrev = (UFG::qNode<DNA::IQueryParser,DNA::IQueryParser> *)&off_14203D5F8;
-  DNA::ReferencedByQueryNode::mParser.vfptr = (DNA::IQueryParserVtbl *)&DNA::ReferencedByQueryNode::Parser::`vftable';
+  DNA::ReferencedByQueryNode::mParser.vfptr = (DNA::IQueryParserVtbl *)&DNA::ReferencedByQueryNode::Parser::`vftable;
   return atexit(dynamic_atexit_destructor_for__DNA::ReferencedByQueryNode::mParser__);
 }
 
@@ -1169,7 +1169,7 @@ __int64 dynamic_initializer_for__DNA::UsedByQueryNode::mParser__()
   UFG::qList<DNA::IQueryParser,DNA::IQueryParser,1,0> *i; // rax
   UFG::qNode<DNA::IQueryParser,DNA::IQueryParser> *v1; // rax
 
-  DNA::UsedByQueryNode::mParser.vfptr = (DNA::IQueryParserVtbl *)&DNA::IQueryParser::`vftable';
+  DNA::UsedByQueryNode::mParser.vfptr = (DNA::IQueryParserVtbl *)&DNA::IQueryParser::`vftable;
   UFG::qString::qString(&stru_14203D648, "UsedBy");
   for ( i = (UFG::qList<DNA::IQueryParser,DNA::IQueryParser,1,0> *)&DNA::IQueryParser::mParsers.mNode.mNext[-1].mNext;
         i != (UFG::qList<DNA::IQueryParser,DNA::IQueryParser,1,0> *)((char *)&DNA::IQueryParser::mParsers - 8);
@@ -1182,7 +1182,7 @@ __int64 dynamic_initializer_for__DNA::UsedByQueryNode::mParser__()
   off_14203D638 = v1;
   off_14203D640 = (void **)&DNA::IQueryParser::mParsers;
   DNA::IQueryParser::mParsers.mNode.mPrev = (UFG::qNode<DNA::IQueryParser,DNA::IQueryParser> *)&off_14203D638;
-  DNA::UsedByQueryNode::mParser.vfptr = (DNA::IQueryParserVtbl *)&DNA::UsedByQueryNode::Parser::`vftable';
+  DNA::UsedByQueryNode::mParser.vfptr = (DNA::IQueryParserVtbl *)&DNA::UsedByQueryNode::Parser::`vftable;
   return atexit(dynamic_atexit_destructor_for__DNA::UsedByQueryNode::mParser__);
 }
 
@@ -1231,9 +1231,9 @@ UFG::allocator::free_link *__fastcall DNA::UsedByQueryNode::Parser::Parse(DNA::U
       v9 = v7 + 1;
       v9->mNext = v9;
       v9[1].mNext = v9;
-      v8->mNext = (UFG::allocator::free_link *)&DNA::IQueryNode::`vftable';
+      v8->mNext = (UFG::allocator::free_link *)&DNA::IQueryNode::`vftable;
       v8[3].mNext = (UFG::allocator::free_link *)&DNA::UsedByQueryNode::mParser;
-      v8->mNext = (UFG::allocator::free_link *)&DNA::UsedByQueryNode::`vftable';
+      v8->mNext = (UFG::allocator::free_link *)&DNA::UsedByQueryNode::`vftable;
       v8[4].mNext = (UFG::allocator::free_link *)v6;
     }
     else
@@ -1293,9 +1293,9 @@ void __fastcall DNA::DerivedTypeQueryNode::DerivedTypeQueryNode(DNA::DerivedType
   v4 = (UFG::qNode<DNA::IQueryNode,DNA::IQueryNode> *)&this->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  this->vfptr = (DNA::IQueryNodeVtbl *)&DNA::IQueryNode::`vftable';
+  this->vfptr = (DNA::IQueryNodeVtbl *)&DNA::IQueryNode::`vftable;
   this->mQueryParser = (DNA::IQueryParser *)&DNA::DerivedTypeQueryNode::mParser;
-  this->vfptr = (DNA::IQueryNodeVtbl *)&DNA::DerivedTypeQueryNode::`vftable';
+  this->vfptr = (DNA::IQueryNodeVtbl *)&DNA::DerivedTypeQueryNode::`vftable;
   DNA::Database::Instance();
   v3->mDerivedScemaType = (DNA::SchemaType *)DNA::Database::GetSchema(v5, v2);
 }
@@ -1331,7 +1331,7 @@ __int64 dynamic_initializer_for__DNA::DerivedTypeQueryNode::mParser__()
   UFG::qList<DNA::IQueryParser,DNA::IQueryParser,1,0> *i; // rax
   UFG::qNode<DNA::IQueryParser,DNA::IQueryParser> *v1; // rax
 
-  DNA::DerivedTypeQueryNode::mParser.vfptr = (DNA::IQueryParserVtbl *)&DNA::IQueryParser::`vftable';
+  DNA::DerivedTypeQueryNode::mParser.vfptr = (DNA::IQueryParserVtbl *)&DNA::IQueryParser::`vftable;
   UFG::qString::qString(&stru_14203D688, "DerivedType");
   for ( i = (UFG::qList<DNA::IQueryParser,DNA::IQueryParser,1,0> *)&DNA::IQueryParser::mParsers.mNode.mNext[-1].mNext;
         i != (UFG::qList<DNA::IQueryParser,DNA::IQueryParser,1,0> *)((char *)&DNA::IQueryParser::mParsers - 8);
@@ -1344,7 +1344,7 @@ __int64 dynamic_initializer_for__DNA::DerivedTypeQueryNode::mParser__()
   off_14203D678 = v1;
   off_14203D680 = (void **)&DNA::IQueryParser::mParsers;
   DNA::IQueryParser::mParsers.mNode.mPrev = (UFG::qNode<DNA::IQueryParser,DNA::IQueryParser> *)&off_14203D678;
-  DNA::DerivedTypeQueryNode::mParser.vfptr = (DNA::IQueryParserVtbl *)&DNA::DerivedTypeQueryNode::Parser::`vftable';
+  DNA::DerivedTypeQueryNode::mParser.vfptr = (DNA::IQueryParserVtbl *)&DNA::DerivedTypeQueryNode::Parser::`vftable;
   return atexit(dynamic_atexit_destructor_for__DNA::DerivedTypeQueryNode::mParser__);
 }
 
@@ -1437,7 +1437,7 @@ void __fastcall DNA::OrQueryNode::~OrQueryNode(DNA::OrQueryNode *this)
   UFG::qNode<DNA::IQueryNode,DNA::IQueryNode> *v7; // rax
 
   v1 = this;
-  this->vfptr = (DNA::IQueryNodeVtbl *)&DNA::OrQueryNode::`vftable';
+  this->vfptr = (DNA::IQueryNodeVtbl *)&DNA::OrQueryNode::`vftable;
   v2 = this->mNodes;
   if ( v2 )
   {
@@ -1450,7 +1450,7 @@ void __fastcall DNA::OrQueryNode::~OrQueryNode(DNA::OrQueryNode *this)
     v2->mNode.mNext = &v2->mNode;
     operator delete[](v2);
   }
-  v1->vfptr = (DNA::IQueryNodeVtbl *)&DNA::IQueryNode::`vftable';
+  v1->vfptr = (DNA::IQueryNodeVtbl *)&DNA::IQueryNode::`vftable;
   v5 = (UFG::qNode<DNA::IQueryNode,DNA::IQueryNode> *)&v1->mPrev;
   v6 = v1->mPrev;
   v7 = v1->mNext;
@@ -1491,7 +1491,7 @@ __int64 dynamic_initializer_for__DNA::OrQueryNode::mParser__()
   UFG::qList<DNA::IQueryParser,DNA::IQueryParser,1,0> *i; // rax
   UFG::qNode<DNA::IQueryParser,DNA::IQueryParser> *v1; // rax
 
-  DNA::OrQueryNode::mParser.vfptr = (DNA::IQueryParserVtbl *)&DNA::IQueryParser::`vftable';
+  DNA::OrQueryNode::mParser.vfptr = (DNA::IQueryParserVtbl *)&DNA::IQueryParser::`vftable;
   UFG::qString::qString(&stru_14203D6C8, "Or");
   for ( i = (UFG::qList<DNA::IQueryParser,DNA::IQueryParser,1,0> *)&DNA::IQueryParser::mParsers.mNode.mNext[-1].mNext;
         i != (UFG::qList<DNA::IQueryParser,DNA::IQueryParser,1,0> *)((char *)&DNA::IQueryParser::mParsers - 8);
@@ -1504,7 +1504,7 @@ __int64 dynamic_initializer_for__DNA::OrQueryNode::mParser__()
   off_14203D6B8 = v1;
   off_14203D6C0 = (void **)&DNA::IQueryParser::mParsers;
   DNA::IQueryParser::mParsers.mNode.mPrev = (UFG::qNode<DNA::IQueryParser,DNA::IQueryParser> *)&off_14203D6B8;
-  DNA::OrQueryNode::mParser.vfptr = (DNA::IQueryParserVtbl *)&DNA::OrQueryNode::Parser::`vftable';
+  DNA::OrQueryNode::mParser.vfptr = (DNA::IQueryParserVtbl *)&DNA::OrQueryNode::Parser::`vftable;
   return atexit(dynamic_atexit_destructor_for__DNA::OrQueryNode::mParser__);
 }
 
@@ -1582,9 +1582,9 @@ LABEL_21:
       v12 = v10 + 1;
       v12->mNext = v12;
       v12[1].mNext = v12;
-      v11->mNext = (UFG::allocator::free_link *)&DNA::IQueryNode::`vftable';
+      v11->mNext = (UFG::allocator::free_link *)&DNA::IQueryNode::`vftable;
       v11[3].mNext = (UFG::allocator::free_link *)&DNA::OrQueryNode::mParser;
-      v11->mNext = (UFG::allocator::free_link *)&DNA::OrQueryNode::`vftable';
+      v11->mNext = (UFG::allocator::free_link *)&DNA::OrQueryNode::`vftable;
       v11[4].mNext = v5;
     }
     else
@@ -1623,7 +1623,7 @@ void __fastcall DNA::AndQueryNode::~AndQueryNode(DNA::AndQueryNode *this)
   UFG::qNode<DNA::IQueryNode,DNA::IQueryNode> *v7; // rax
 
   v1 = this;
-  this->vfptr = (DNA::IQueryNodeVtbl *)&DNA::AndQueryNode::`vftable';
+  this->vfptr = (DNA::IQueryNodeVtbl *)&DNA::AndQueryNode::`vftable;
   v2 = this->mNodes;
   if ( v2 )
   {
@@ -1636,7 +1636,7 @@ void __fastcall DNA::AndQueryNode::~AndQueryNode(DNA::AndQueryNode *this)
     v2->mNode.mNext = &v2->mNode;
     operator delete[](v2);
   }
-  v1->vfptr = (DNA::IQueryNodeVtbl *)&DNA::IQueryNode::`vftable';
+  v1->vfptr = (DNA::IQueryNodeVtbl *)&DNA::IQueryNode::`vftable;
   v5 = (UFG::qNode<DNA::IQueryNode,DNA::IQueryNode> *)&v1->mPrev;
   v6 = v1->mPrev;
   v7 = v1->mNext;
@@ -1677,7 +1677,7 @@ __int64 dynamic_initializer_for__DNA::AndQueryNode::mParser__()
   UFG::qList<DNA::IQueryParser,DNA::IQueryParser,1,0> *i; // rax
   UFG::qNode<DNA::IQueryParser,DNA::IQueryParser> *v1; // rax
 
-  DNA::AndQueryNode::mParser.vfptr = (DNA::IQueryParserVtbl *)&DNA::IQueryParser::`vftable';
+  DNA::AndQueryNode::mParser.vfptr = (DNA::IQueryParserVtbl *)&DNA::IQueryParser::`vftable;
   UFG::qString::qString(&stru_14203D708, "And");
   for ( i = (UFG::qList<DNA::IQueryParser,DNA::IQueryParser,1,0> *)&DNA::IQueryParser::mParsers.mNode.mNext[-1].mNext;
         i != (UFG::qList<DNA::IQueryParser,DNA::IQueryParser,1,0> *)((char *)&DNA::IQueryParser::mParsers - 8);
@@ -1690,7 +1690,7 @@ __int64 dynamic_initializer_for__DNA::AndQueryNode::mParser__()
   off_14203D6F8 = v1;
   off_14203D700 = (void **)&DNA::IQueryParser::mParsers;
   DNA::IQueryParser::mParsers.mNode.mPrev = (UFG::qNode<DNA::IQueryParser,DNA::IQueryParser> *)&off_14203D6F8;
-  DNA::AndQueryNode::mParser.vfptr = (DNA::IQueryParserVtbl *)&DNA::AndQueryNode::Parser::`vftable';
+  DNA::AndQueryNode::mParser.vfptr = (DNA::IQueryParserVtbl *)&DNA::AndQueryNode::Parser::`vftable;
   return atexit(dynamic_atexit_destructor_for__DNA::AndQueryNode::mParser__);
 }
 
@@ -1768,9 +1768,9 @@ LABEL_21:
       v12 = v10 + 1;
       v12->mNext = v12;
       v12[1].mNext = v12;
-      v11->mNext = (UFG::allocator::free_link *)&DNA::IQueryNode::`vftable';
+      v11->mNext = (UFG::allocator::free_link *)&DNA::IQueryNode::`vftable;
       v11[3].mNext = (UFG::allocator::free_link *)&DNA::AndQueryNode::mParser;
-      v11->mNext = (UFG::allocator::free_link *)&DNA::AndQueryNode::`vftable';
+      v11->mNext = (UFG::allocator::free_link *)&DNA::AndQueryNode::`vftable;
       v11[4].mNext = v5;
     }
     else

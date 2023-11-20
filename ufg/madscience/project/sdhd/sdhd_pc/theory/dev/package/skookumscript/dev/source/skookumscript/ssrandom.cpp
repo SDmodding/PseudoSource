@@ -648,12 +648,12 @@ LABEL_23:
       v89 = v10;
       *(ASymbol *)(v10 + 8) = ASymbolX_ctor;
       *(_QWORD *)(v10 + 16) = v11;
-      *(_QWORD *)v10 = &SSInvokableBase::`vftable';
+      *(_QWORD *)v10 = &SSInvokableBase::`vftable;
       *(_QWORD *)(v10 + 24) = v12;
       if ( v12 )
         ++v12->i_ref_count;
-      *(_QWORD *)v10 = &SSMethodBase::`vftable';
-      *(_QWORD *)v10 = &SSMethodFunc::`vftable';
+      *(_QWORD *)v10 = &SSMethodBase::`vftable;
+      *(_QWORD *)v10 = &SSMethodFunc::`vftable;
       *(_QWORD *)(v10 + 32) = SSRandom::mthd_constructor;
       if ( v12 )
       {
@@ -736,12 +736,12 @@ LABEL_48:
       v89 = v18;
       *(ASymbol *)(v18 + 8) = ASymbolX_ctor_seed;
       *(_QWORD *)(v18 + 16) = v19;
-      *(_QWORD *)v18 = &SSInvokableBase::`vftable';
+      *(_QWORD *)v18 = &SSInvokableBase::`vftable;
       *(_QWORD *)(v18 + 24) = v20;
       if ( v20 )
         ++v20->i_ref_count;
-      *(_QWORD *)v18 = &SSMethodBase::`vftable';
-      *(_QWORD *)v18 = &SSMethodFunc::`vftable';
+      *(_QWORD *)v18 = &SSMethodBase::`vftable;
+      *(_QWORD *)v18 = &SSMethodFunc::`vftable;
       *(_QWORD *)(v18 + 32) = SSRandom::mthd_ctor_seed;
       if ( v20 )
       {
@@ -824,12 +824,12 @@ LABEL_73:
       v89 = v25;
       *(ASymbol *)(v25 + 8) = ASymbol_get_seed;
       *(_QWORD *)(v25 + 16) = v26;
-      *(_QWORD *)v25 = &SSInvokableBase::`vftable';
+      *(_QWORD *)v25 = &SSInvokableBase::`vftable;
       *(_QWORD *)(v25 + 24) = v27;
       if ( v27 )
         ++v27->i_ref_count;
-      *(_QWORD *)v25 = &SSMethodBase::`vftable';
-      *(_QWORD *)v25 = &SSMethodFunc::`vftable';
+      *(_QWORD *)v25 = &SSMethodBase::`vftable;
+      *(_QWORD *)v25 = &SSMethodFunc::`vftable;
       *(_QWORD *)(v25 + 32) = SSInteger::mthd_as_copy;
       if ( v27 )
       {
@@ -912,12 +912,12 @@ LABEL_98:
       v89 = v32;
       *(ASymbol *)(v32 + 8) = ASymbol_set_seed;
       *(_QWORD *)(v32 + 16) = v33;
-      *(_QWORD *)v32 = &SSInvokableBase::`vftable';
+      *(_QWORD *)v32 = &SSInvokableBase::`vftable;
       *(_QWORD *)(v32 + 24) = v34;
       if ( v34 )
         ++v34->i_ref_count;
-      *(_QWORD *)v32 = &SSMethodBase::`vftable';
-      *(_QWORD *)v32 = &SSMethodFunc::`vftable';
+      *(_QWORD *)v32 = &SSMethodBase::`vftable;
+      *(_QWORD *)v32 = &SSMethodFunc::`vftable;
       *(_QWORD *)(v32 + 32) = SSReal::mthd_ctor_copy;
       if ( v34 )
       {
@@ -1000,12 +1000,12 @@ LABEL_123:
       v89 = v39;
       *(ASymbol *)(v39 + 8) = ASymbol_coin_toss;
       *(_QWORD *)(v39 + 16) = v40;
-      *(_QWORD *)v39 = &SSInvokableBase::`vftable';
+      *(_QWORD *)v39 = &SSInvokableBase::`vftable;
       *(_QWORD *)(v39 + 24) = v41;
       if ( v41 )
         ++v41->i_ref_count;
-      *(_QWORD *)v39 = &SSMethodBase::`vftable';
-      *(_QWORD *)v39 = &SSMethodFunc::`vftable';
+      *(_QWORD *)v39 = &SSMethodBase::`vftable;
+      *(_QWORD *)v39 = &SSMethodFunc::`vftable;
       *(_QWORD *)(v39 + 32) = SSRandom::mthd_coin_toss;
       if ( v41 )
       {
@@ -1088,12 +1088,12 @@ LABEL_148:
       v89 = v46;
       *(ASymbol *)(v46 + 8) = ASymbol_uniform_int;
       *(_QWORD *)(v46 + 16) = v47;
-      *(_QWORD *)v46 = &SSInvokableBase::`vftable';
+      *(_QWORD *)v46 = &SSInvokableBase::`vftable;
       *(_QWORD *)(v46 + 24) = v48;
       if ( v48 )
         ++v48->i_ref_count;
-      *(_QWORD *)v46 = &SSMethodBase::`vftable';
-      *(_QWORD *)v46 = &SSMethodFunc::`vftable';
+      *(_QWORD *)v46 = &SSMethodBase::`vftable;
+      *(_QWORD *)v46 = &SSMethodFunc::`vftable;
       *(_QWORD *)(v46 + 32) = SSRandom::mthd_uniform_int;
       if ( v48 )
       {
@@ -1176,12 +1176,12 @@ LABEL_173:
       v89 = v53;
       *(ASymbol *)(v53 + 8) = ASymbol_triangle_int;
       *(_QWORD *)(v53 + 16) = v54;
-      *(_QWORD *)v53 = &SSInvokableBase::`vftable';
+      *(_QWORD *)v53 = &SSInvokableBase::`vftable;
       *(_QWORD *)(v53 + 24) = v55;
       if ( v55 )
         ++v55->i_ref_count;
-      *(_QWORD *)v53 = &SSMethodBase::`vftable';
-      *(_QWORD *)v53 = &SSMethodFunc::`vftable';
+      *(_QWORD *)v53 = &SSMethodBase::`vftable;
+      *(_QWORD *)v53 = &SSMethodFunc::`vftable;
       *(_QWORD *)(v53 + 32) = SSRandom::mthd_triangle_int;
       if ( v55 )
       {
@@ -1264,12 +1264,12 @@ LABEL_198:
       v89 = v60;
       *(ASymbol *)(v60 + 8) = ASymbol_normal_int;
       *(_QWORD *)(v60 + 16) = v61;
-      *(_QWORD *)v60 = &SSInvokableBase::`vftable';
+      *(_QWORD *)v60 = &SSInvokableBase::`vftable;
       *(_QWORD *)(v60 + 24) = v62;
       if ( v62 )
         ++v62->i_ref_count;
-      *(_QWORD *)v60 = &SSMethodBase::`vftable';
-      *(_QWORD *)v60 = &SSMethodFunc::`vftable';
+      *(_QWORD *)v60 = &SSMethodBase::`vftable;
+      *(_QWORD *)v60 = &SSMethodFunc::`vftable;
       *(_QWORD *)(v60 + 32) = SSRandom::mthd_normal_int;
       if ( v62 )
       {
@@ -1352,12 +1352,12 @@ LABEL_223:
       v89 = v67;
       *(ASymbol *)(v67 + 8) = ASymbol_up_slope_int;
       *(_QWORD *)(v67 + 16) = v68;
-      *(_QWORD *)v67 = &SSInvokableBase::`vftable';
+      *(_QWORD *)v67 = &SSInvokableBase::`vftable;
       *(_QWORD *)(v67 + 24) = v69;
       if ( v69 )
         ++v69->i_ref_count;
-      *(_QWORD *)v67 = &SSMethodBase::`vftable';
-      *(_QWORD *)v67 = &SSMethodFunc::`vftable';
+      *(_QWORD *)v67 = &SSMethodBase::`vftable;
+      *(_QWORD *)v67 = &SSMethodFunc::`vftable;
       *(_QWORD *)(v67 + 32) = SSRandom::mthd_up_slope_int;
       if ( v69 )
       {
@@ -1440,12 +1440,12 @@ LABEL_248:
       v89 = v74;
       *(ASymbol *)(v74 + 8) = ASymbol_down_slope_int;
       *(_QWORD *)(v74 + 16) = v75;
-      *(_QWORD *)v74 = &SSInvokableBase::`vftable';
+      *(_QWORD *)v74 = &SSInvokableBase::`vftable;
       *(_QWORD *)(v74 + 24) = v76;
       if ( v76 )
         ++v76->i_ref_count;
-      *(_QWORD *)v74 = &SSMethodBase::`vftable';
-      *(_QWORD *)v74 = &SSMethodFunc::`vftable';
+      *(_QWORD *)v74 = &SSMethodBase::`vftable;
+      *(_QWORD *)v74 = &SSMethodFunc::`vftable;
       *(_QWORD *)(v74 + 32) = SSRandom::mthd_down_slope_int;
       if ( v76 )
       {
@@ -1528,12 +1528,12 @@ LABEL_273:
       v89 = v81;
       *(ASymbol *)(v81 + 8) = ASymbol_thorn_int;
       *(_QWORD *)(v81 + 16) = v82;
-      *(_QWORD *)v81 = &SSInvokableBase::`vftable';
+      *(_QWORD *)v81 = &SSInvokableBase::`vftable;
       *(_QWORD *)(v81 + 24) = v83;
       if ( v83 )
         ++v83->i_ref_count;
-      *(_QWORD *)v81 = &SSMethodBase::`vftable';
-      *(_QWORD *)v81 = &SSMethodFunc::`vftable';
+      *(_QWORD *)v81 = &SSMethodBase::`vftable;
+      *(_QWORD *)v81 = &SSMethodFunc::`vftable;
       *(_QWORD *)(v81 + 32) = SSRandom::mthd_thorn_int;
       if ( v83 )
       {

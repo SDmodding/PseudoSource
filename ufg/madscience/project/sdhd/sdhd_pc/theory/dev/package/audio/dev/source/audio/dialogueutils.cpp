@@ -88,7 +88,7 @@ void __fastcall UFG::ArgumentSequencer::ArgumentSequencer(UFG::ArgumentSequencer
 
   v1 = this;
   UFG::ArgumentSequencerBase::ArgumentSequencerBase((UFG::ArgumentSequencerBase *)&this->vfptr);
-  v1->vfptr = (UFG::ArgumentSequencerBaseVtbl *)&UFG::ArgumentSequencer::`vftable';
+  v1->vfptr = (UFG::ArgumentSequencerBaseVtbl *)&UFG::ArgumentSequencer::`vftable;
 }
 
 // File Line: 83

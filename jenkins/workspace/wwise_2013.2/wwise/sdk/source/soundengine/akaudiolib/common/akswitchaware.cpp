@@ -2,14 +2,14 @@
 // RVA: 0xA9AD80
 void __fastcall CAkSwitchAware::CAkSwitchAware(CAkSwitchAware *this)
 {
-  this->vfptr = (CAkSwitchAwareVtbl *)&AkMusicAction::`vftable';
+  this->vfptr = (CAkSwitchAwareVtbl *)&AkMusicAction::`vftable;
 }
 
 // File Line: 31
 // RVA: 0xA9AD90
 void __fastcall CAkSwitchAware::~CAkSwitchAware(CAkSwitchAware *this)
 {
-  this->vfptr = (CAkSwitchAwareVtbl *)&AkMusicAction::`vftable';
+  this->vfptr = (CAkSwitchAwareVtbl *)&AkMusicAction::`vftable;
 }
 
 // File Line: 35

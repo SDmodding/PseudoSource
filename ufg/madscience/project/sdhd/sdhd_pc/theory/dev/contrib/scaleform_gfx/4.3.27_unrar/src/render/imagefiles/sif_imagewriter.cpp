@@ -154,7 +154,7 @@ char __fastcall Scaleform::Render::SIF::FileWriter::Write(Scaleform::Render::SIF
 // RVA: 0x159C750
 __int64 dynamic_initializer_for__Scaleform::Render::SIF::FileWriter::Instance__()
 {
-  Scaleform::Render::SIF::FileWriter::Instance.vfptr = (Scaleform::Render::ImageFileHandlerVtbl *)&Scaleform::Render::SIF::FileWriter::`vftable';
+  Scaleform::Render::SIF::FileWriter::Instance.vfptr = (Scaleform::Render::ImageFileHandlerVtbl *)&Scaleform::Render::SIF::FileWriter::`vftable;
   return atexit(dynamic_atexit_destructor_for__Scaleform::Render::SIF::FileWriter::Instance__);
 }
 

@@ -9,7 +9,7 @@ __int64 Render::_dynamic_initializer_for__gImposterGroupInventory__()
     0xAEDF1081,
     0,
     0);
-  Render::gImposterGroupInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::ImposterGroupInventory::`vftable';
+  Render::gImposterGroupInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::ImposterGroupInventory::`vftable;
   Render::gImposterGroupInventory.mAddImposterGroupCallback = 0i64;
   Render::gImposterGroupInventory.mRemoveImposterGroupCallback = 0i64;
   return atexit(Render::_dynamic_atexit_destructor_for__gImposterGroupInventory__);

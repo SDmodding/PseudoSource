@@ -20,10 +20,10 @@ void __fastcall UFG::Editor::StatusBar::StatusBar(UFG::Editor::StatusBar *this, 
 
   v2 = this;
   UFG::DUIWindow::DUIWindow((UFG::DUIWindow *)&this->vfptr, f);
-  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::Editor::StatusBar,UFG::DUIWindow>::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::Editor::StatusBar,UFG::DUIWindow>::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
-  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::StatusBar::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::StatusBar::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::Editor::StatusBar,UFG::DUIWindow>::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::Editor::StatusBar,UFG::DUIWindow>::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
+  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::StatusBar::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::StatusBar::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v2->mStyle = 257;
   v2->mMinItemWidths[0] = 18;
   v2->mMinItemWidths[1] = 300;
@@ -51,12 +51,12 @@ void __fastcall UFG::Editor::StatusBar::StatusBar(UFG::Editor::StatusBar *this)
 
   v1 = this;
   UFG::DUIWindow::DUIWindow((UFG::DUIWindow *)&this->vfptr);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::Editor::StatusBar,UFG::DUIWindow>::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::Editor::StatusBar,UFG::DUIWindow>::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::Editor::StatusBar,UFG::DUIWindow>::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::Editor::StatusBar,UFG::DUIWindow>::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v1->mBaseNode.mUID = -1i64;
   v1->mTypeUID = UFG::qStringHash64("UFG::Editor::StatusBar", 0xFFFFFFFFFFFFFFFFui64);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::StatusBar::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::StatusBar::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::StatusBar::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::StatusBar::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v1->mStyle = 257;
   v2 = v1->mMinItemWidths;
   v1->mMinItemWidths[0] = 18;

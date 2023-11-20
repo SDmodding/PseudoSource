@@ -468,7 +468,7 @@ void __fastcall UpdateFogTask(int workerId, UFG::qMemoryStreamer *memory_streame
             v78 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v77, v77, 153), v71), v16);
             v79 = v78;
             v80 = _mm_add_ps(
-                    _mm_mul_ps(_mm_add_ps(_mm_mul_ps(v78, v61), (__m128)_xmm), (__m128)`FogFunction'::`2'::neg_z),
+                    _mm_mul_ps(_mm_add_ps(_mm_mul_ps(v78, v61), (__m128)_xmm), (__m128)`FogFunction::`2::neg_z),
                     (__m128)0i64);
             v81 = _mm_shuffle_ps(
                     v80,
@@ -600,7 +600,7 @@ void __fastcall UpdateFogTask(int workerId, UFG::qMemoryStreamer *memory_streame
                      160);
             v132 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v131, v131, 153), v126), (__m128)0i64);
             v133 = _mm_add_ps(
-                     _mm_mul_ps(_mm_add_ps(_mm_mul_ps(v204, v132), (__m128)_xmm), (__m128)`FogFunction'::`2'::neg_z),
+                     _mm_mul_ps(_mm_add_ps(_mm_mul_ps(v204, v132), (__m128)_xmm), (__m128)`FogFunction::`2::neg_z),
                      (__m128)0i64);
             v134 = _mm_shuffle_ps(
                      v133,

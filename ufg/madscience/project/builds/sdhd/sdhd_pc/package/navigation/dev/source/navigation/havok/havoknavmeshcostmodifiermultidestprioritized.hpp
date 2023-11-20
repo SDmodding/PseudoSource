@@ -20,13 +20,13 @@ void __fastcall NavMeshCostModifierMultiDestPrioritized::NavMeshCostModifierMult
   float v17; // xmm0_4
 
   v2 = query;
-  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
-  this->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
+  this->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiAstarCostModifier::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiAstarCostModifier::`vftable;
   this->m_type.m_storage = 1;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiUFGNavMeshCostModifier::`vftable';
-  this->vfptr = (hkBaseObjectVtbl *)&NavMeshCostModifierMultiDestPrioritized::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiUFGNavMeshCostModifier::`vftable;
+  this->vfptr = (hkBaseObjectVtbl *)&NavMeshCostModifierMultiDestPrioritized::`vftable;
   v3 = 0;
   this->m_fMaxPriority = 0.0;
   this->m_Query = query;
@@ -85,10 +85,10 @@ void __fastcall NavMeshCostModifierMultiDestPrioritized::NavMeshCostModifierMult
 // RVA: 0xE62B0
 void __fastcall NavMeshCostModifierMultiDestPrioritized::~NavMeshCostModifierMultiDestPrioritized(NavMeshCostModifierMultiDestPrioritized *this)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&NavMeshCostModifierMultiDestPrioritized::`vftable';
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiAstarCostModifier::`vftable';
-  this->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable';
-  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&NavMeshCostModifierMultiDestPrioritized::`vftable;
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiAstarCostModifier::`vftable;
+  this->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable;
+  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 34

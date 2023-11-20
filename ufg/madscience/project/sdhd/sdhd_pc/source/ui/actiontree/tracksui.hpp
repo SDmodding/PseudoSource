@@ -8,7 +8,7 @@ void __fastcall UIEventTrack::~UIEventTrack(UIEventTrack *this)
   char *v4; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&UIEventTrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&UIEventTrack::`vftable;
   if ( !(~LOBYTE(this->mEventName.mOffset) & 1) )
   {
     if ( this->mEventName.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
@@ -18,7 +18,7 @@ void __fastcall UIEventTrack::~UIEventTrack(UIEventTrack *this)
         operator delete[](v2);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v3 = &v1->mMasterRate;
   if ( !(~LOBYTE(v1->mMasterRate.text.mOffset) & 1) )
   {
@@ -29,7 +29,7 @@ void __fastcall UIEventTrack::~UIEventTrack(UIEventTrack *this)
         operator delete[](v4);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 27
@@ -52,8 +52,8 @@ void __fastcall UIScreenTrack::~UIScreenTrack(UIScreenTrack *this)
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&UIScreenTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&UIScreenTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -64,7 +64,7 @@ void __fastcall UIScreenTrack::~UIScreenTrack(UIScreenTrack *this)
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 47
@@ -87,8 +87,8 @@ void __fastcall HUDSocialActionChargeTrack::~HUDSocialActionChargeTrack(HUDSocia
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&HUDSocialActionChargeTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&HUDSocialActionChargeTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -99,7 +99,7 @@ void __fastcall HUDSocialActionChargeTrack::~HUDSocialActionChargeTrack(HUDSocia
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 100
@@ -118,8 +118,8 @@ void __fastcall HUDSocialActionActivateTrack::~HUDSocialActionActivateTrack(HUDS
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&HUDSocialActionActivateTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&HUDSocialActionActivateTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -130,7 +130,7 @@ void __fastcall HUDSocialActionActivateTrack::~HUDSocialActionActivateTrack(HUDS
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 123
@@ -149,8 +149,8 @@ void __fastcall HUDSocialActionEnableTrack::~HUDSocialActionEnableTrack(HUDSocia
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&HUDSocialActionEnableTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&HUDSocialActionEnableTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -161,7 +161,7 @@ void __fastcall HUDSocialActionEnableTrack::~HUDSocialActionEnableTrack(HUDSocia
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 136

@@ -58,7 +58,7 @@ void __fastcall UFG::UIHK_PDAIncomingCallWidget::Update(UFG::UIHK_PDAIncomingCal
     this->mTimer = elapsed + this->mTimer;
     v4 = screen->mRenderable->m_movie.pObject;
     numArgs[0] = Scaleform::GFx::Value::~Value;
-    `eh vector constructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     v5 = (signed int)(float)(v3->mTimer * 1000.0);
     v6 = v5 / 1000 % 60;
     if ( v3->mOldSeconds != v6 )
@@ -78,7 +78,7 @@ void __fastcall UFG::UIHK_PDAIncomingCallWidget::Update(UFG::UIHK_PDAIncomingCal
       Scaleform::GFx::Movie::Invoke(v4, "ContactList_UpdatedConnectedTime", 0i64, &pargs, 1u);
     }
     v3->mOldSeconds = v6;
-    `eh vector destructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 
@@ -150,7 +150,7 @@ void __fastcall UFG::UIHK_PDAIncomingCallWidget::Activate(UFG::UIHK_PDAIncomingC
     {
       LODWORD(v14->mNext) = 1;
       v15 = (UFG::qString *)&v14[1];
-      `eh vector constructor iterator'(&v14[1], 0x28ui64, 1, (void (__fastcall *)(void *))UFG::qString::qString);
+      `eh vector constructor iterator(&v14[1], 0x28ui64, 1, (void (__fastcall *)(void *))UFG::qString::qString);
     }
     else
     {
@@ -165,7 +165,7 @@ void __fastcall UFG::UIHK_PDAIncomingCallWidget::Activate(UFG::UIHK_PDAIncomingC
     {
       LODWORD(v16->mNext) = 2;
       v17 = (signed __int64)&v16[1];
-      `eh vector constructor iterator'(&v16[1], 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&v16[1], 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     }
     else
     {
@@ -272,7 +272,7 @@ void __fastcall UFG::UIHK_PDAIncomingCallWidget::Answer(UFG::UIHK_PDAIncomingCal
     {
       LODWORD(v10->mNext) = 2;
       v11 = (UFG::qString *)&v10[1];
-      `eh vector constructor iterator'(&v10[1], 0x28ui64, 2, (void (__fastcall *)(void *))UFG::qString::qString);
+      `eh vector constructor iterator(&v10[1], 0x28ui64, 2, (void (__fastcall *)(void *))UFG::qString::qString);
     }
     else
     {
@@ -293,7 +293,7 @@ void __fastcall UFG::UIHK_PDAIncomingCallWidget::Answer(UFG::UIHK_PDAIncomingCal
     {
       LODWORD(v12->mNext) = 2;
       v13 = (signed __int64)&v12[1];
-      `eh vector constructor iterator'(&v12[1], 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&v12[1], 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     }
     else
     {
@@ -358,7 +358,7 @@ void __fastcall UFG::UIHK_PDAIncomingCallWidget::HangUp(UFG::UIHK_PDAIncomingCal
     v5 = v3 + 1;
     v5->mNext = v5;
     v5[1].mNext = v5;
-    v4->vfptr = (UFG::UIScreenInvokeVtbl *)&UFG::UIScreenInvoke::`vftable';
+    v4->vfptr = (UFG::UIScreenInvokeVtbl *)&UFG::UIScreenInvoke::`vftable;
     UFG::qString::qString(&v4->command, &customWorldMapCaption);
   }
   else
@@ -391,7 +391,7 @@ void __fastcall UFG::UIHK_PDAIncomingCallWidget::SetCallerName(UFG::UIHK_PDAInco
   v7 = this;
   if ( callerName )
   {
-    if ( *callerName == '$' )
+    if ( *callerName == $ )
       v6 = callerName + 1;
     v9 = UFG::qStringHashUpper32(v6, 0xFFFFFFFF);
     v10 = UFG::UIScreenManager::s_instance->m_translator;
@@ -420,7 +420,7 @@ void __fastcall UFG::UIHK_PDAIncomingCallWidget::ReleaseInputLock(UFG::UIHK_PDAI
   UFG::DeactivateInputSubMode(ISM_PHONE_CALL, UFG::gActiveControllerNum);
   if ( v3->mInputLocker.mAcquired )
   {
-    UFG::qPrintf("PDAInputLock released by '%s' through '%s'\n", v3->mInputLocker.mOwner.mData, v2);
+    UFG::qPrintf("PDAInputLock released by %s through %s\n", v3->mInputLocker.mOwner.mData, v2);
     if ( UFG::UIHK_PDAWidget::mInputLocked )
     {
       UFG::SetInputMode_PDA_Off(UFG::gActiveControllerNum);

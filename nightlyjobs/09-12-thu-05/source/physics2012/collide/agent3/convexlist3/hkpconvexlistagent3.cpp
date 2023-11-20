@@ -240,7 +240,7 @@ unsigned __int64 __fastcall hkConvexListAgent3::process(hkpAgent3ProcessInput *i
   {
     v15 = *(_OWORD *)&v5->m_bodyA.m_storage;
     v16 = *(_OWORD *)&v5->m_overrideBodyA.m_storage;
-    v56.m_aTb.m_storage = (hkTransformf *)&hkpMapPointsToSubShapeContactMgr::`vftable';
+    v56.m_aTb.m_storage = (hkTransformf *)&hkpMapPointsToSubShapeContactMgr::`vftable;
     v17 = (hkpConvexShape *)v5->m_contactMgr.m_storage;
     *(_OWORD *)&inputa.m_bodyA.m_storage = v15;
     v18 = *(_OWORD *)&v5->m_contactMgr.m_storage;

@@ -173,7 +173,7 @@ LABEL_47:
           if ( v14 >= 0x10000 )
           {
             v6 = v53;
-            UFG::qString::FormatEx(v53, "ERROR: CSV has more than 65536 rows!  filename='%s'", v54);
+            UFG::qString::FormatEx(v53, "ERROR: CSV has more than 65536 rows!  filename=%s", v54);
             v47 = 1;
             for ( j = (UFG::qString *)list.mNode.mNext;
                   (UFG::qList<UFG::qString,UFG::qString,1,0> *)list.mNode.mNext != &list;
@@ -279,7 +279,7 @@ LABEL_32:
             goto LABEL_32;
         }
         v6 = v53;
-        UFG::qString::FormatEx(v53, "ERROR: CSV has more than 65536 columns!  filename='%s'", v54);
+        UFG::qString::FormatEx(v53, "ERROR: CSV has more than 65536 columns!  filename=%s", v54);
         v47 = 1;
         for ( l = (UFG::qString *)v46.mNode.mNext;
               (UFG::qList<UFG::qString,UFG::qString,1,0> *)v46.mNode.mNext != &v46;
@@ -324,14 +324,14 @@ LABEL_49:
     }
     else
     {
-      UFG::qString::FormatEx(v6, "ERROR: File couldn't be loaded!  filename='%s'", v5);
+      UFG::qString::FormatEx(v6, "ERROR: File couldnt be loaded!  filename=%s", v5);
       v47 = 1;
     }
     UFG::qString::~qString(&v48);
   }
   else
   {
-    UFG::qString::FormatEx(v6, "ERROR: File not found!  filename='%s'", v5);
+    UFG::qString::FormatEx(v6, "ERROR: File not found!  filename=%s", v5);
     v47 = 1;
   }
   return v6;
@@ -1327,7 +1327,7 @@ void __fastcall UFG::BuildLabOptions::GetNames(UFG::BuildLabOptions *this, UFG::
             if ( (signed int)v9 <= 0 )
             {
               if ( v8->mEnableDiagnostics )
-                UFG::qPrintf("'%s'  ", *(_QWORD *)(v11 + 72));
+                UFG::qPrintf("%s  ", *(_QWORD *)(v11 + 72));
               v18 = UFG::qMalloc(0x28ui64, "BuildLabOptionString", 0i64);
               if ( v18 )
               {
@@ -1358,7 +1358,7 @@ void __fastcall UFG::BuildLabOptions::GetNames(UFG::BuildLabOptions *this, UFG::
               }
               UFG::qString::Set(v16, (const char *)(*(_QWORD *)(v11 + 72) + v9));
               if ( v8->mEnableDiagnostics )
-                UFG::qPrintf("'%s'  ", v16->mData);
+                UFG::qPrintf("%s  ", v16->mData);
               v17 = v7->mNode.mPrev;
               v17->mNext = (UFG::qNode<UFG::qString,UFG::qString> *)&v16->mPrev;
               v16->mPrev = v17;
@@ -1424,7 +1424,7 @@ LABEL_39:
               if ( (signed int)v9 <= 0 )
               {
                 if ( v8->mEnableDiagnostics )
-                  UFG::qPrintf("'%s'  ", *(_QWORD *)(v24 + 72));
+                  UFG::qPrintf("%s  ", *(_QWORD *)(v24 + 72));
                 v35 = UFG::qMalloc(0x28ui64, "BuildLabOptionString", 0i64);
                 if ( v35 )
                 {
@@ -1455,7 +1455,7 @@ LABEL_39:
                 }
                 UFG::qString::Set(v33, (const char *)(*(_QWORD *)(v24 + 72) + v9));
                 if ( v8->mEnableDiagnostics )
-                  UFG::qPrintf("'%s'  ", v33->mData);
+                  UFG::qPrintf("%s  ", v33->mData);
                 v34 = v7->mNode.mPrev;
                 v34->mNext = (UFG::qNode<UFG::qString,UFG::qString> *)&v33->mPrev;
                 v33->mPrev = v34;

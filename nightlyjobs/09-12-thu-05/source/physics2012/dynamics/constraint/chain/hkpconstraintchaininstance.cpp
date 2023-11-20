@@ -11,7 +11,7 @@ void __fastcall hkpConstraintChainInstance::hkpConstraintChainInstance(hkpConstr
   v2 = data;
   v3 = this;
   hkpConstraintInstance::hkpConstraintInstance((hkpConstraintInstance *)&this->vfptr, PRIORITY_PSI);
-  v3->vfptr = (hkBaseObjectVtbl *)&hkpConstraintChainInstance::`vftable';
+  v3->vfptr = (hkBaseObjectVtbl *)&hkpConstraintChainInstance::`vftable;
   v3->m_chainedEntities.m_data = 0i64;
   v3->m_chainedEntities.m_size = 0;
   v3->m_chainedEntities.m_capacityAndFlags = 2147483648;
@@ -28,9 +28,9 @@ void __fastcall hkpConstraintChainInstance::hkpConstraintChainInstance(hkpConstr
     *(_QWORD *)(v5 + 16) = 0i64;
     *(_QWORD *)(v5 + 24) = 0i64;
     *(_QWORD *)(v5 + 32) = 0i64;
-    *(_QWORD *)v5 = &hkpAction::`vftable';
+    *(_QWORD *)v5 = &hkpAction::`vftable;
     hkStringPtr::hkStringPtr((hkStringPtr *)(v5 + 40));
-    v6->vfptr = (hkBaseObjectVtbl *)&hkpConstraintChainInstanceAction::`vftable';
+    v6->vfptr = (hkBaseObjectVtbl *)&hkpConstraintChainInstanceAction::`vftable;
     v6->m_constraintInstance = v3;
   }
   else
@@ -73,7 +73,7 @@ void __fastcall hkpConstraintChainInstance::~hkpConstraintChainInstance(hkpConst
   int v4; // er8
 
   v1 = 0;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpConstraintChainInstance::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpConstraintChainInstance::`vftable;
   v2 = this;
   if ( this->m_chainedEntities.m_size > 0 )
   {

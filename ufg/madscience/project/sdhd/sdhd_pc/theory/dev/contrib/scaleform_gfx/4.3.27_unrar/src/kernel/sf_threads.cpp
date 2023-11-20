@@ -6,12 +6,12 @@ void __fastcall Scaleform::Waitable::Waitable(Scaleform::Waitable *this, bool en
   Scaleform::Waitable::HandlerArray *v3; // rax
 
   v2 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Waitable,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Waitable::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Waitable,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Waitable::`vftable;
   if ( enable )
   {
     v3 = (Scaleform::Waitable::HandlerArray *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
@@ -35,11 +35,11 @@ void __fastcall Scaleform::Waitable::~Waitable(Scaleform::Waitable *this)
   Scaleform::Waitable::HandlerArray *v2; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Waitable::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Waitable::`vftable;
   v2 = this->pHandlers;
   if ( v2 )
     Scaleform::Waitable::HandlerArray::Release(v2);
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
 }
 
 // File Line: 47
@@ -313,8 +313,8 @@ LABEL_6:
   }
   v44.RefCount = 1;
   v44.pHandlers = 0i64;
-  v44.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Event::`vftable'{for `Scaleform::Waitable'};
-  v44.vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Event::`vftable'{for `Scaleform::AcquireInterface'};
+  v44.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Event::`vftable{for `Scaleform::Waitable};
+  v44.vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Event::`vftable{for `Scaleform::AcquireInterface};
   Scaleform::Mutex::Mutex(&v44.StateMutex, 1, 0);
   Scaleform::WaitCondition::WaitCondition(&v44.StateWaitCondition);
   v44.State = 0;
@@ -518,15 +518,15 @@ LABEL_63:
     }
     while ( v7 );
   }
-  v44.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Event::`vftable'{for `Scaleform::Waitable'};
-  v44.vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Event::`vftable'{for `Scaleform::AcquireInterface'};
+  v44.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Event::`vftable{for `Scaleform::Waitable};
+  v44.vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Event::`vftable{for `Scaleform::AcquireInterface};
   Scaleform::WaitCondition::~WaitCondition(&v44.StateWaitCondition);
   Scaleform::Mutex::~Mutex(&v44.StateMutex);
-  v44.vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable';
-  v44.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Waitable::`vftable';
+  v44.vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable;
+  v44.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Waitable::`vftable;
   if ( v44.pHandlers )
     Scaleform::Waitable::HandlerArray::Release(v44.pHandlers);
-  v44.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  v44.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   v3 = 0;
   return v3 == 0;
 }
@@ -565,7 +565,7 @@ char __fastcall Scaleform::Waitable::Wait(Scaleform::Waitable *this, unsigned in
   v11.RefCount = 1;
   v5 = 0;
   v11.pHandlers = 0i64;
-  v11.vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Event::`vftable'{for `Scaleform::AcquireInterface'};
+  v11.vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Event::`vftable{for `Scaleform::AcquireInterface};
   Scaleform::Mutex::Mutex(&v11.StateMutex, 1, 0);
   Scaleform::WaitCondition::WaitCondition(&v11.StateWaitCondition);
   v11.State = 0;
@@ -610,11 +610,11 @@ LABEL_21:
   {
     v6 = 0;
   }
-  v11.vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Event::`vftable'{for `Scaleform::AcquireInterface'};
+  v11.vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Event::`vftable{for `Scaleform::AcquireInterface};
   Scaleform::WaitCondition::~WaitCondition(&v11.StateWaitCondition);
   Scaleform::Mutex::~Mutex(&v11.StateMutex);
-  v11.vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable';
-  v11.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Waitable::`vftable';
+  v11.vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable;
+  v11.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Waitable::`vftable;
   if ( v11.pHandlers )
     Scaleform::Waitable::HandlerArray::Release(v11.pHandlers);
   return v6;
@@ -627,7 +627,7 @@ Scaleform::DefaultAcquireInterface *__fastcall Scaleform::DefaultAcquireInterfac
   if ( !(_S2_12 & 1) )
   {
     _S2_12 |= 1u;
-    stru_1424523F8.vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::DefaultAcquireInterface::`vftable';
+    stru_1424523F8.vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::DefaultAcquireInterface::`vftable;
     atexit(Scaleform::DefaultAcquireInterface::GetDefaultAcquireInterface_::_2_::_dynamic_atexit_destructor_for__di__);
   }
   return &stru_1424523F8;
@@ -915,8 +915,8 @@ __int64 __fastcall Scaleform::AcquireInterface::AcquireMultipleObjects(Scaleform
   }
   v42.RefCount = 1;
   v42.pHandlers = 0i64;
-  v42.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Event::`vftable'{for `Scaleform::Waitable'};
-  v42.vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Event::`vftable'{for `Scaleform::AcquireInterface'};
+  v42.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Event::`vftable{for `Scaleform::Waitable};
+  v42.vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Event::`vftable{for `Scaleform::AcquireInterface};
   Scaleform::Mutex::Mutex(&v42.StateMutex, 1, 0);
   Scaleform::WaitCondition::WaitCondition((Scaleform::WaitCondition *)&v42.StateMutex);
   v42.State = 0;
@@ -1075,15 +1075,15 @@ LABEL_41:
   }
   v10 = 0;
 LABEL_59:
-  v42.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Event::`vftable'{for `Scaleform::Waitable'};
-  v42.vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Event::`vftable'{for `Scaleform::AcquireInterface'};
+  v42.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Event::`vftable{for `Scaleform::Waitable};
+  v42.vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Event::`vftable{for `Scaleform::AcquireInterface};
   Scaleform::WaitCondition::~WaitCondition((Scaleform::WaitCondition *)&v42.StateMutex);
   Scaleform::Mutex::~Mutex(&v42.StateMutex);
-  v42.vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable';
-  v42.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Waitable::`vftable';
+  v42.vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable;
+  v42.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Waitable::`vftable;
   if ( v42.pHandlers )
     Scaleform::Waitable::HandlerArray::Release(v42.pHandlers);
-  v42.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  v42.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
 LABEL_62:
   if ( pacquireList != (Scaleform::AcquireInterface **)&v44 )
     ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
@@ -1250,8 +1250,8 @@ LABEL_8:
     return 0xFFFFFFFFi64;
   v43.RefCount = 1;
   v43.pHandlers = 0i64;
-  v43.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Event::`vftable'{for `Scaleform::Waitable'};
-  v43.vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Event::`vftable'{for `Scaleform::AcquireInterface'};
+  v43.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Event::`vftable{for `Scaleform::Waitable};
+  v43.vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Event::`vftable{for `Scaleform::AcquireInterface};
   Scaleform::Mutex::Mutex(&v43.StateMutex, 1, 0);
   Scaleform::WaitCondition::WaitCondition(&v43.StateWaitCondition);
   v43.State = 0;
@@ -1414,12 +1414,12 @@ LABEL_39:
     while ( v12 );
   }
 LABEL_57:
-  v43.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Event::`vftable'{for `Scaleform::Waitable'};
-  v43.vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Event::`vftable'{for `Scaleform::AcquireInterface'};
+  v43.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Event::`vftable{for `Scaleform::Waitable};
+  v43.vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Event::`vftable{for `Scaleform::AcquireInterface};
   Scaleform::WaitCondition::~WaitCondition(&v43.StateWaitCondition);
   Scaleform::Mutex::~Mutex(&v43.StateMutex);
-  v43.vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable';
-  v43.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Waitable::`vftable';
+  v43.vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable;
+  v43.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Waitable::`vftable;
   if ( v43.pHandlers )
     Scaleform::Waitable::HandlerArray::Release(v43.pHandlers);
   return v6;
@@ -1435,9 +1435,9 @@ void __fastcall Scaleform::Event::Event(Scaleform::Event *this, bool setInitiall
   v3 = setInitially;
   v4 = this;
   Scaleform::Waitable::Waitable((Scaleform::Waitable *)&this->vfptr, multiWait);
-  v4->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable';
-  v4->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Event::`vftable'{for `Scaleform::Waitable'};
-  v4->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Event::`vftable'{for `Scaleform::AcquireInterface'};
+  v4->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable;
+  v4->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Event::`vftable{for `Scaleform::Waitable};
+  v4->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Event::`vftable{for `Scaleform::AcquireInterface};
   Scaleform::Mutex::Mutex(&v4->StateMutex, 1, 0);
   Scaleform::WaitCondition::WaitCondition(&v4->StateWaitCondition);
   v4->State = v3;
@@ -1452,16 +1452,16 @@ void __fastcall Scaleform::Event::~Event(Scaleform::Event *this)
   Scaleform::Waitable::HandlerArray *v2; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Event::`vftable'{for `Scaleform::Waitable'};
-  this->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Event::`vftable'{for `Scaleform::AcquireInterface'};
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Event::`vftable{for `Scaleform::Waitable};
+  this->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Event::`vftable{for `Scaleform::AcquireInterface};
   Scaleform::WaitCondition::~WaitCondition(&this->StateWaitCondition);
   Scaleform::Mutex::~Mutex(&v1->StateMutex);
-  v1->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable';
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Waitable::`vftable';
+  v1->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable;
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Waitable::`vftable;
   v2 = v1->pHandlers;
   if ( v2 )
     Scaleform::Waitable::HandlerArray::Release(v2);
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
 }
 
 // File Line: 541
@@ -1619,9 +1619,9 @@ void __fastcall Scaleform::Semaphore::Semaphore(Scaleform::Semaphore *this, int 
   v3 = maxValue;
   v4 = this;
   Scaleform::Waitable::Waitable((Scaleform::Waitable *)&this->vfptr, multiWait);
-  v4->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable';
-  v4->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Semaphore::`vftable'{for `Scaleform::Waitable'};
-  v4->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Semaphore::`vftable'{for `Scaleform::AcquireInterface'};
+  v4->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable;
+  v4->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Semaphore::`vftable{for `Scaleform::Waitable};
+  v4->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Semaphore::`vftable{for `Scaleform::AcquireInterface};
   Scaleform::Mutex::Mutex(&v4->ValueMutex, 1, 0);
   Scaleform::WaitCondition::WaitCondition(&v4->ValueWaitCondition);
   v4->MaxValue = v3;
@@ -1636,16 +1636,16 @@ void __fastcall Scaleform::Semaphore::~Semaphore(Scaleform::Semaphore *this)
   Scaleform::Waitable::HandlerArray *v2; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Semaphore::`vftable'{for `Scaleform::Waitable'};
-  this->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Semaphore::`vftable'{for `Scaleform::AcquireInterface'};
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Semaphore::`vftable{for `Scaleform::Waitable};
+  this->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Semaphore::`vftable{for `Scaleform::AcquireInterface};
   Scaleform::WaitCondition::~WaitCondition(&this->ValueWaitCondition);
   Scaleform::Mutex::~Mutex(&v1->ValueMutex);
-  v1->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable';
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Waitable::`vftable';
+  v1->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable;
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Waitable::`vftable;
   v2 = v1->pHandlers;
   if ( v2 )
     Scaleform::Waitable::HandlerArray::Release(v2);
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
 }
 
 // File Line: 682
@@ -1938,21 +1938,21 @@ void __fastcall Scaleform::SemaphoreWaitableIncrement::SemaphoreWaitableIncremen
   v3 = count;
   v4 = psemaphore;
   v5 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Waitable,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Waitable::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Waitable,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Waitable::`vftable;
   v6 = (Scaleform::Waitable::HandlerArray *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
                                               Scaleform::Memory::pGlobalHeap,
                                               72i64);
   if ( v6 )
     Scaleform::Waitable::HandlerArray::HandlerArray(v6);
   v5->pHandlers = v6;
-  v5->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable';
-  v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::SemaphoreWaitableIncrement::`vftable'{for `Scaleform::Waitable'};
-  v5->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::SemaphoreWaitableIncrement::`vftable'{for `Scaleform::AcquireInterface'};
+  v5->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable;
+  v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::SemaphoreWaitableIncrement::`vftable{for `Scaleform::Waitable};
+  v5->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::SemaphoreWaitableIncrement::`vftable{for `Scaleform::AcquireInterface};
   v5->pSemaphore = v4;
   v5->Count = v3;
   Scaleform::Waitable::AddWaitHandler((Scaleform::Waitable *)&v4->vfptr, Scaleform::Waitable::CallWaitHandlers, v5);
@@ -1966,18 +1966,18 @@ void __fastcall Scaleform::SemaphoreWaitableIncrement::~SemaphoreWaitableIncreme
   Scaleform::Waitable::HandlerArray *v2; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::SemaphoreWaitableIncrement::`vftable'{for `Scaleform::Waitable'};
-  this->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::SemaphoreWaitableIncrement::`vftable'{for `Scaleform::AcquireInterface'};
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::SemaphoreWaitableIncrement::`vftable{for `Scaleform::Waitable};
+  this->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::SemaphoreWaitableIncrement::`vftable{for `Scaleform::AcquireInterface};
   Scaleform::Waitable::RemoveWaitHandler(
     (Scaleform::Waitable *)&this->pSemaphore->vfptr,
     Scaleform::Waitable::CallWaitHandlers,
     this);
-  v1->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable';
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Waitable::`vftable';
+  v1->vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable;
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Waitable::`vftable;
   v2 = v1->pHandlers;
   if ( v2 )
     Scaleform::Waitable::HandlerArray::Release(v2);
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
 }
 
 // File Line: 894

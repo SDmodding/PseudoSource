@@ -130,7 +130,7 @@ void __fastcall UFG::ChaseCameraComponent::ChaseCameraComponent(UFG::ChaseCamera
   v2 = (UFG::qNode<UFG::ChaseCameraComponent,UFG::ChaseCameraComponent> *)&v47->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  v47->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ChaseCameraComponent::`vftable';
+  v47->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ChaseCameraComponent::`vftable;
   v3 = (signed __int64)&v47->mUp;
   *(_DWORD *)v3 = 1008981770;
   *(_DWORD *)(v3 + 4) = 1008981770;
@@ -425,7 +425,7 @@ void __fastcall UFG::ChaseCameraComponent::~ChaseCameraComponent(UFG::ChaseCamer
   UFG::qNode<UFG::ChaseCameraComponent,UFG::ChaseCameraComponent> *v7; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ChaseCameraComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ChaseCameraComponent::`vftable;
   --UFG::ChaseCameraComponent::mNumChaseCameraInstances;
   if ( this == UFG::ChaseCameraComponent::s_ChaseCameraComponentpCurrentIterator )
     UFG::ChaseCameraComponent::s_ChaseCameraComponentpCurrentIterator = (UFG::ChaseCameraComponent *)&this->mPrev[-78];

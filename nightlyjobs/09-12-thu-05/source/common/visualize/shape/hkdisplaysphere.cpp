@@ -12,12 +12,12 @@ void __fastcall hkDisplaySphere::hkDisplaySphere(hkDisplaySphere *this, hkSphere
   this->m_geometry = 0i64;
   this->m_referenceCount = 1;
   this->m_type = 1;
-  this->vfptr = (hkBaseObjectVtbl *)&hkDisplayGeometry::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkDisplayGeometry::`vftable;
   this->m_transform.m_rotation.m_col0 = (hkVector4f)transform.m_quad;
   this->m_transform.m_rotation.m_col1 = (hkVector4f)direction.m_quad;
   this->m_transform.m_rotation.m_col2 = (hkVector4f)stru_141A71280.m_quad;
   this->m_transform.m_translation = 0i64;
-  this->vfptr = (hkBaseObjectVtbl *)&hkDisplaySphere::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkDisplaySphere::`vftable;
   v6 = sphere->m_pos.m_quad;
   this->m_xRes = xRes;
   this->m_yRes = yRes;
@@ -233,7 +233,7 @@ void __fastcall hkDisplaySphere::buildGeometry(hkDisplaySphere *this)
   if ( v3 )
   {
     *(_DWORD *)(v3 + 8) = 0x1FFFF;
-    *(_QWORD *)v3 = &hkGeometry::`vftable';
+    *(_QWORD *)v3 = &hkGeometry::`vftable;
     *(_QWORD *)(v3 + 16) = 0i64;
     *(_DWORD *)(v3 + 24) = 0;
     *(_DWORD *)(v3 + 28) = 2147483648;

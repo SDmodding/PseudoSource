@@ -4,7 +4,7 @@ void __fastcall hkStaticClassNameRegistry::hkStaticClassNameRegistry(hkStaticCla
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_classes = classes;
-  this->vfptr = (hkBaseObjectVtbl *)&hkStaticClassNameRegistry::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkStaticClassNameRegistry::`vftable;
   this->m_classVersion = classVersion;
   this->m_ready = 0;
   this->m_name = name;
@@ -15,7 +15,7 @@ void __fastcall hkStaticClassNameRegistry::hkStaticClassNameRegistry(hkStaticCla
 void __fastcall hkStaticClassNameRegistry::hkStaticClassNameRegistry(hkStaticClassNameRegistry *this, hkClass *const *classes, int classVersion, const char *name)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkStaticClassNameRegistry::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkStaticClassNameRegistry::`vftable;
   this->m_classes = classes;
   this->m_classVersion = classVersion;
   this->m_ready = 1;

@@ -17,22 +17,22 @@ void __fastcall Scaleform::GFx::AS3::AvmSprite::AvmSprite(Scaleform::GFx::AS3::A
     (Scaleform::GFx::AS3::AvmInteractiveObj *)&this->vfptr,
     (Scaleform::GFx::InteractiveObject *)&psprite->vfptr);
   v3 = (Scaleform::GFx::AvmDisplayObjContainerBase *)&v2->vfptr;
-  v3->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmDisplayObjBase::`vftable';
-  v3->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmInteractiveObjBase::`vftable';
-  v3->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmDisplayObjContainerBase::`vftable';
-  v2->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmDisplayObjContainer::`vftable'{for `Scaleform::GFx::AS3::AvmDisplayObj'};
-  v2->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmDisplayObjContainer::`vftable'{for `Scaleform::GFx::AvmInteractiveObjBase'};
-  v3->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmDisplayObjContainer::`vftable';
+  v3->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmDisplayObjBase::`vftable;
+  v3->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmInteractiveObjBase::`vftable;
+  v3->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmDisplayObjContainerBase::`vftable;
+  v2->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmDisplayObjContainer::`vftable{for `Scaleform::GFx::AS3::AvmDisplayObj};
+  v2->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmDisplayObjContainer::`vftable{for `Scaleform::GFx::AvmInteractiveObjBase};
+  v3->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmDisplayObjContainer::`vftable;
   v4 = (Scaleform::GFx::AvmSpriteBase *)&v2->vfptr;
   v9 = v4;
-  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmDisplayObjBase::`vftable';
-  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmInteractiveObjBase::`vftable';
-  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmDisplayObjContainerBase::`vftable';
-  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmSpriteBase::`vftable';
-  v2->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmSprite::`vftable'{for `Scaleform::GFx::AS3::AvmDisplayObj'};
-  v2->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmSprite::`vftable'{for `Scaleform::GFx::AvmInteractiveObjBase'};
-  v3->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmSprite::`vftable'{for `Scaleform::GFx::AS3::AvmDisplayObjContainer'};
-  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmSprite::`vftable'{for `Scaleform::GFx::AvmSpriteBase'};
+  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmDisplayObjBase::`vftable;
+  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmInteractiveObjBase::`vftable;
+  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmDisplayObjContainerBase::`vftable;
+  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmSpriteBase::`vftable;
+  v2->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmSprite::`vftable{for `Scaleform::GFx::AS3::AvmDisplayObj};
+  v2->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmSprite::`vftable{for `Scaleform::GFx::AvmInteractiveObjBase};
+  v3->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmSprite::`vftable{for `Scaleform::GFx::AS3::AvmDisplayObjContainer};
+  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmSprite::`vftable{for `Scaleform::GFx::AvmSpriteBase};
   v5 = (*(__int64 (__cdecl **)(Scaleform::GFx::DisplayObject::ScrollRectInfo *))(*(_QWORD *)&v2->pDispObj[1].pScrollRect->Rectangle.x1
                                                                                + 80i64))(v2->pDispObj[1].pScrollRect);
   v6 = (signed __int64)&v2->InitActionsExecuted;
@@ -60,13 +60,13 @@ void __fastcall Scaleform::GFx::AS3::AvmSprite::~AvmSprite(Scaleform::GFx::AS3::
   Scaleform::GFx::AvmSpriteBase *v2; // rbx
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmSprite::`vftable'{for `Scaleform::GFx::AS3::AvmDisplayObj'};
-  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmSprite::`vftable'{for `Scaleform::GFx::AvmInteractiveObjBase'};
-  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmSprite::`vftable'{for `Scaleform::GFx::AS3::AvmDisplayObjContainer'};
+  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmSprite::`vftable{for `Scaleform::GFx::AS3::AvmDisplayObj};
+  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmSprite::`vftable{for `Scaleform::GFx::AvmInteractiveObjBase};
+  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmSprite::`vftable{for `Scaleform::GFx::AS3::AvmDisplayObjContainer};
   v2 = (Scaleform::GFx::AvmSpriteBase *)&this->vfptr;
-  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmSprite::`vftable'{for `Scaleform::GFx::AvmSpriteBase'};
+  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmSprite::`vftable{for `Scaleform::GFx::AvmSpriteBase};
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, this->InitActionsExecuted.pData);
-  v2->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmDisplayObjBase::`vftable';
+  v2->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmDisplayObjBase::`vftable;
   Scaleform::GFx::AS3::AvmDisplayObjContainer::~AvmDisplayObjContainer((Scaleform::GFx::AS3::AvmDisplayObjContainer *)&v1->vfptr);
 }
 

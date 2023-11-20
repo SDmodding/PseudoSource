@@ -19,8 +19,8 @@ void __fastcall Scaleform::Render::D3D1x::MeshCache::MeshCache(Scaleform::Render
   v4 = pheap;
   v5 = this;
   Scaleform::Render::MeshCache::MeshCache((Scaleform::Render::MeshCache *)&this->vfptr, pheap, params);
-  v5->vfptr = (Scaleform::Render::CacheBaseVtbl *)&Scaleform::Render::D3D1x::MeshCache::`vftable'{for `Scaleform::Render::CacheBase'};
-  v5->vfptr = (Scaleform::Render::MeshCacheConfigVtbl *)&Scaleform::Render::D3D1x::MeshCache::`vftable'{for `Scaleform::Render::MeshCacheConfig'};
+  v5->vfptr = (Scaleform::Render::CacheBaseVtbl *)&Scaleform::Render::D3D1x::MeshCache::`vftable{for `Scaleform::Render::CacheBase};
+  v5->vfptr = (Scaleform::Render::MeshCacheConfigVtbl *)&Scaleform::Render::D3D1x::MeshCache::`vftable{for `Scaleform::Render::MeshCacheConfig};
   v5->pDevice.pObject = 0i64;
   v5->pDeviceContext.pObject = 0i64;
   v5->CacheList.pCache = (Scaleform::Render::MeshCache *)&v5->vfptr;
@@ -45,24 +45,24 @@ void __fastcall Scaleform::Render::D3D1x::MeshCache::MeshCache(Scaleform::Render
   v6[5].Size = 0i64;
   v7 = 16 * ((unsigned __int64)(5 * (v3->MemGranularity >> 4) * (unsigned __int128)0xE38E38E38E38E38Fui64 >> 64) >> 3);
   v8 = &v5->VertexBuffers;
-  v8->vfptr = (Scaleform::Render::D3D1x::MeshBufferSetVtbl *)&Scaleform::Render::D3D1x::MeshBufferSet::`vftable';
+  v8->vfptr = (Scaleform::Render::D3D1x::MeshBufferSetVtbl *)&Scaleform::Render::D3D1x::MeshBufferSet::`vftable;
   v13 = (signed __int64)&v5->VertexBuffers.Buffers;
   *(_OWORD *)v13 = 0ui64;
   *(_QWORD *)(v13 + 16) = 0i64;
   Scaleform::AllocAddr::AllocAddr(&v5->VertexBuffers.Allocator, v4);
   v5->VertexBuffers.Granularity = v7;
   v5->VertexBuffers.TotalSize = 0i64;
-  v8->vfptr = (Scaleform::Render::D3D1x::MeshBufferSetVtbl *)&Scaleform::Render::D3D1x::MeshBufferSetImpl<Scaleform::Render::D3D1x::VertexBuffer>::`vftable';
+  v8->vfptr = (Scaleform::Render::D3D1x::MeshBufferSetVtbl *)&Scaleform::Render::D3D1x::MeshBufferSetImpl<Scaleform::Render::D3D1x::VertexBuffer>::`vftable;
   v9 = (v3->MemGranularity & 0xFFFFFFFFFFFFFFF0ui64) - (v5->VertexBuffers.Granularity & 0xFFFFFFFFFFFFFFF0ui64);
   v12 = &v5->IndexBuffers;
-  v12->vfptr = (Scaleform::Render::D3D1x::MeshBufferSetVtbl *)&Scaleform::Render::D3D1x::MeshBufferSet::`vftable';
+  v12->vfptr = (Scaleform::Render::D3D1x::MeshBufferSetVtbl *)&Scaleform::Render::D3D1x::MeshBufferSet::`vftable;
   v14 = (signed __int64)&v5->IndexBuffers.Buffers;
   *(_OWORD *)v14 = 0ui64;
   *(_QWORD *)(v14 + 16) = 0i64;
   Scaleform::AllocAddr::AllocAddr(&v5->IndexBuffers.Allocator, v4);
   v5->IndexBuffers.Granularity = v9;
   v5->IndexBuffers.TotalSize = 0i64;
-  v12->vfptr = (Scaleform::Render::D3D1x::MeshBufferSetVtbl *)&Scaleform::Render::D3D1x::MeshBufferSetImpl<Scaleform::Render::D3D1x::IndexBuffer>::`vftable';
+  v12->vfptr = (Scaleform::Render::D3D1x::MeshBufferSetVtbl *)&Scaleform::Render::D3D1x::MeshBufferSetImpl<Scaleform::Render::D3D1x::IndexBuffer>::`vftable;
   v5->Locked = 0;
   v5->VBSizeEvictedInLock = 0i64;
   v5->LockedBuffers.pFirst = 0i64;
@@ -89,16 +89,16 @@ void __fastcall Scaleform::Render::D3D1x::MeshCache::~MeshCache(Scaleform::Rende
   ID3D11Device *v4; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::Render::CacheBaseVtbl *)&Scaleform::Render::D3D1x::MeshCache::`vftable'{for `Scaleform::Render::CacheBase'};
-  this->vfptr = (Scaleform::Render::MeshCacheConfigVtbl *)&Scaleform::Render::D3D1x::MeshCache::`vftable'{for `Scaleform::Render::MeshCacheConfig'};
+  this->vfptr = (Scaleform::Render::CacheBaseVtbl *)&Scaleform::Render::D3D1x::MeshCache::`vftable{for `Scaleform::Render::CacheBase};
+  this->vfptr = (Scaleform::Render::MeshCacheConfigVtbl *)&Scaleform::Render::D3D1x::MeshCache::`vftable{for `Scaleform::Render::MeshCacheConfig};
   Scaleform::Render::D3D1x::MeshCache::Reset(this);
   v2 = v1->pMaskEraseBatchVertexBuffer.pObject;
   if ( v2 )
     ((void (__cdecl *)(ID3D11Buffer *))v2->vfptr->Release)(v2);
-  v1->IndexBuffers.vfptr = (Scaleform::Render::D3D1x::MeshBufferSetVtbl *)&Scaleform::Render::D3D1x::MeshBufferSet::`vftable';
+  v1->IndexBuffers.vfptr = (Scaleform::Render::D3D1x::MeshBufferSetVtbl *)&Scaleform::Render::D3D1x::MeshBufferSet::`vftable;
   Scaleform::AllocAddr::~AllocAddr(&v1->IndexBuffers.Allocator);
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v1->IndexBuffers.Buffers.Data.Data);
-  v1->VertexBuffers.vfptr = (Scaleform::Render::D3D1x::MeshBufferSetVtbl *)&Scaleform::Render::D3D1x::MeshBufferSet::`vftable';
+  v1->VertexBuffers.vfptr = (Scaleform::Render::D3D1x::MeshBufferSetVtbl *)&Scaleform::Render::D3D1x::MeshBufferSet::`vftable;
   Scaleform::AllocAddr::~AllocAddr(&v1->VertexBuffers.Allocator);
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v1->VertexBuffers.Buffers.Data.Data);
   v3 = v1->pDeviceContext.pObject;

@@ -38,7 +38,7 @@ void __fastcall finishLoadedObjecthkxMeshUserChannelInfo(void *p, int finishing)
   {
     v2 = (hkStringPtr *)p;
     v3 = (hkStringPtr *)((char *)p + 32);
-    v3[-4].m_stringAndFlag = (const char *)&hkxMesh::UserChannelInfo::`vftable';
+    v3[-4].m_stringAndFlag = (const char *)&hkxMesh::UserChannelInfo::`vftable;
     v4 = finishing;
     hkStringPtr::hkStringPtr(v3, (hkFinishLoadedObjectFlag)finishing);
     hkStringPtr::hkStringPtr(v2 + 5, (hkFinishLoadedObjectFlag)v4);
@@ -61,7 +61,7 @@ void **__fastcall getVtablehkxMeshUserChannelInfo()
 
   hkStringPtr::hkStringPtr(&v1, 0);
   hkStringPtr::hkStringPtr(&v2, 0);
-  return &hkxMesh::UserChannelInfo::`vftable';
+  return &hkxMesh::UserChannelInfo::`vftable;
 }
 
 // File Line: 98

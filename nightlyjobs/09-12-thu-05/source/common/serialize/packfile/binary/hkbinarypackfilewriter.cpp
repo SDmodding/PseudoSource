@@ -1,6 +1,6 @@
 // File Line: 82
 // RVA: 0xE4CC30
-unsigned __int64 __fastcall `anonymous namespace'::getArraySizeInBytes<hkPackfileSectionHeader>(hkArray<hkPackfileSectionHeader,hkContainerHeapAllocator> *a)
+unsigned __int64 __fastcall `anonymous namespace::getArraySizeInBytes<hkPackfileSectionHeader>(hkArray<hkPackfileSectionHeader,hkContainerHeapAllocator> *a)
 {
   return (unsigned __int64)(unsigned int)a->m_size << 6;
 }
@@ -79,7 +79,7 @@ void __fastcall hkBinaryPackfileWriter::hkBinaryPackfileWriter(hkBinaryPackfileW
 
   v2 = this;
   hkPackfileWriter::hkPackfileWriter((hkPackfileWriter *)&this->vfptr, options);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBinaryPackfileWriter::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBinaryPackfileWriter::`vftable;
   hkPackfileWriter::addSection((hkPackfileWriter *)&v2->vfptr, hkBinaryPackfileWriter::SECTION_TAG_CLASSNAMES);
   hkPackfileWriter::setSectionForClass(
     (hkPackfileWriter *)&v2->vfptr,
@@ -103,7 +103,7 @@ void __fastcall hkBinaryPackfileWriter::hkBinaryPackfileWriter(hkBinaryPackfileW
 // RVA: 0xE4B810
 void __fastcall hkBinaryPackfileWriter::~hkBinaryPackfileWriter(hkBinaryPackfileWriter *this)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkBinaryPackfileWriter::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkBinaryPackfileWriter::`vftable;
   hkPackfileWriter::~hkPackfileWriter((hkPackfileWriter *)&this->vfptr);
 }
 
@@ -152,7 +152,7 @@ void __fastcall hkBinaryPackfileWriter::fillSectionTags(hkBinaryPackfileWriter *
     while ( v10 );
   }
   v2->m_size = v3;
-  v11 = `anonymous namespace'::getArraySizeInBytes<hkPackfileSectionHeader>(v2);
+  v11 = `anonymous namespace::getArraySizeInBytes<hkPackfileSectionHeader>(v2);
   hkString::memSet(v2->m_data, -1, v11);
   v12 = 0;
   if ( v5->m_knownSections.m_size > 0 )
@@ -1149,7 +1149,7 @@ hkResult *__fastcall hkBinaryPackfileWriter::save(hkBinaryPackfileWriter *this, 
     v8 = v6->m_layout.m_rules.m_littleEndian;
     context.m_relocsBySect.m_data = 0i64;
     context.m_relocsBySect.m_size = 0;
-    v13 = &hkSubStreamWriter::`vftable';
+    v13 = &hkSubStreamWriter::`vftable;
     context.m_relocsBySect.m_capacityAndFlags = 2147483648;
     v14 = 0x1FFFF;
     context.m_endianSwapRequired.m_bool = hkStructureLayout::HostLayoutRules.m_littleEndian != v8;
@@ -1159,7 +1159,7 @@ hkResult *__fastcall hkBinaryPackfileWriter::save(hkBinaryPackfileWriter *this, 
     hkBinaryPackfileWriter::fillSectionTags(v5, &context);
     saveFileHeader(&context.m_writer, context.m_stream, v6, context.m_sectionHeaders.m_size);
     v9 = ((__int64 (__fastcall *)(void ***))v13[8])(&v13);
-    v10 = `anonymous namespace'::getArraySizeInBytes<hkPackfileSectionHeader>(&context.m_sectionHeaders);
+    v10 = `anonymous namespace::getArraySizeInBytes<hkPackfileSectionHeader>(&context.m_sectionHeaders);
     ((void (__fastcall *)(void ***, char *, _QWORD, signed __int64))v13[7])(&v13, &v18, v10, 1i64);
     hkBinaryPackfileWriter::writeAllObjects(v5, &context);
     v11 = ((__int64 (__fastcall *)(void ***))v13[8])(&v13);
@@ -1167,7 +1167,7 @@ hkResult *__fastcall hkBinaryPackfileWriter::save(hkBinaryPackfileWriter *this, 
     ((void (__fastcall *)(void ***, char *, _QWORD, _QWORD))v13[7])(&v13, &v18, v11, 0i64);
     ((void (__fastcall *)(void ***))v13[5])(&v13);
     v4->m_enum = *(_BYTE *)((__int64 (__fastcall *)(void ***, char *))v13[3])(&v13, &v18) == 0;
-    v13 = &hkBaseObject::`vftable';
+    v13 = &hkBaseObject::`vftable;
     hkBinaryPackfileWriter::SaveContext::~SaveContext(&context);
   }
   else

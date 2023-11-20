@@ -3,7 +3,7 @@
 void __fastcall hkaiNavVolumeInstance::hkaiNavVolumeInstance(hkaiNavVolumeInstance *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiNavVolumeInstance::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiNavVolumeInstance::`vftable;
   this->m_originalVolume.m_pntr = 0i64;
   this->m_cellMap.m_data = 0i64;
   this->m_cellMap.m_size = 0;
@@ -24,7 +24,7 @@ void __fastcall hkaiNavVolumeInstance::hkaiNavVolumeInstance(hkaiNavVolumeInstan
 {
   hkaiNavVolume *v2; // rdx
 
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiNavVolumeInstance::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiNavVolumeInstance::`vftable;
   if ( f.m_finishing )
   {
     v2 = this->m_originalVolume.m_pntr;

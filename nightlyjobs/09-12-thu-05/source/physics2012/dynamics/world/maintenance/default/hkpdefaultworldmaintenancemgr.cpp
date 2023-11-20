@@ -4,7 +4,7 @@ void __fastcall hkpDefaultWorldMaintenanceMgr::hkpDefaultWorldMaintenanceMgr(hkp
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_minAllowedTimeValue = 33.0;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpDefaultWorldMaintenanceMgr::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpDefaultWorldMaintenanceMgr::`vftable;
   this->m_maxAllowedTimeValue = 63.0;
 }
 

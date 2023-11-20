@@ -2,11 +2,11 @@
 // RVA: 0x945520
 void __fastcall Scaleform::SysAllocPagedMalloc::SysAllocPagedMalloc(Scaleform::SysAllocPagedMalloc *this, unsigned __int64 granularity)
 {
-  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocBase::`vftable';
-  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocPaged::`vftable';
-  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocBase_SingletonSupport<Scaleform::SysAllocPagedMalloc,Scaleform::SysAllocPaged>::`vftable';
+  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocBase::`vftable;
+  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocPaged::`vftable;
+  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocBase_SingletonSupport<Scaleform::SysAllocPagedMalloc,Scaleform::SysAllocPaged>::`vftable;
   this->pContainer = 0i64;
-  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocPagedMalloc::`vftable';
+  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocPagedMalloc::`vftable;
   this->Granularity = (granularity + 0xFFFF) & 0xFFFFFFFFFFFF0000ui64;
   this->Footprint = 0i64;
   this->Base = -1i64;

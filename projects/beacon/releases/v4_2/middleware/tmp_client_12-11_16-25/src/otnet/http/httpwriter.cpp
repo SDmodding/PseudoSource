@@ -7,8 +7,8 @@ void __fastcall OSuite::ZHttpWriter::ZHttpWriter(OSuite::ZHttpWriter *this)
 
   clock = 0i64;
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpWriter::`vftable'{for `OSuite::ZObject'};
-  this->vfptr = (OSuite::IWriterVtbl *)&OSuite::ZHttpWriter::`vftable'{for `OSuite::IWriter'};
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpWriter::`vftable{for `OSuite::ZObject};
+  this->vfptr = (OSuite::IWriterVtbl *)&OSuite::ZHttpWriter::`vftable{for `OSuite::IWriter};
   OSuite::ZClock::ZClock(&this->m_nNextSendTime, &clock);
   v1->m_nBytesWritten = 0i64;
   v1->m_nTotalLength = 0i64;
@@ -22,9 +22,9 @@ void __fastcall OSuite::ZHttpWriter::~ZHttpWriter(OSuite::ZHttpWriter *this)
 {
   OSuite::ZClock *v1; // rcx
 
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpWriter::`vftable'{for `OSuite::ZObject'};
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpWriter::`vftable{for `OSuite::ZObject};
   v1 = &this->m_nNextSendTime;
-  v1[-2].m_clock = (unsigned __int64)&OSuite::ZHttpWriter::`vftable'{for `OSuite::IWriter'};
+  v1[-2].m_clock = (unsigned __int64)&OSuite::ZHttpWriter::`vftable{for `OSuite::IWriter};
   OSuite::ZOEdmBase::CleanTempData((int)v1);
 }
 

@@ -45,14 +45,14 @@ void __fastcall UFG::WorldEffectsManager::WorldEffectsManager(UFG::WorldEffectsM
 
   v1 = this;
   v2 = 15i64;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     this,
     0x68ui64,
     15,
     (void (__fastcall *)(void *))UFG::WorldEffectsManager::UIElement::UIElement);
   v3 = v1->mWorldEffectElements;
   v4 = 5i64;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v1->mWorldEffectElements,
     0x90ui64,
     5,

@@ -8,7 +8,7 @@ void __fastcall CAkFxBase::~CAkFxBase(CAkFxBase *this)
   MapStruct<unsigned long,unsigned long> *v4; // rdx
   AK::IAkPluginParam *v5; // rcx
 
-  this->vfptr = (CAkIndexableVtbl *)&CAkFxBase::`vftable';
+  this->vfptr = (CAkIndexableVtbl *)&CAkFxBase::`vftable;
   v1 = this->m_rtpcsubs.m_pItems;
   v2 = this;
   if ( v1 != &v1[this->m_rtpcsubs.m_uLength] )
@@ -412,7 +412,7 @@ CAkFxShareSet *__fastcall CAkFxShareSet::Create(unsigned int in_ulID)
     *(_QWORD *)&v3->m_media.m_uLength = 0i64;
     v3->m_rtpcsubs.m_pItems = 0i64;
     *(_QWORD *)&v3->m_rtpcsubs.m_uLength = 0i64;
-    v3->vfptr = (CAkIndexableVtbl *)&CAkFxShareSet::`vftable';
+    v3->vfptr = (CAkIndexableVtbl *)&CAkFxShareSet::`vftable;
     v4 = &g_pIndex->m_idxFxShareSets;
     EnterCriticalSection(&g_pIndex->m_idxFxShareSets.m_IndexLock.m_csLock);
     v5 = v3->key % 0xC1;
@@ -490,7 +490,7 @@ CAkFxCustom *__fastcall CAkFxCustom::Create(unsigned int in_ulID)
     *(_QWORD *)&v3->m_media.m_uLength = 0i64;
     v3->m_rtpcsubs.m_pItems = 0i64;
     *(_QWORD *)&v3->m_rtpcsubs.m_uLength = 0i64;
-    v3->vfptr = (CAkIndexableVtbl *)&CAkFxCustom::`vftable';
+    v3->vfptr = (CAkIndexableVtbl *)&CAkFxCustom::`vftable;
     v4 = &g_pIndex->m_idxFxCustom;
     EnterCriticalSection(&g_pIndex->m_idxFxCustom.m_IndexLock.m_csLock);
     v5 = v3->key % 0xC1;

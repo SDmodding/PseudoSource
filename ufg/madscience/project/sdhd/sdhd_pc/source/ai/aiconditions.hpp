@@ -336,7 +336,7 @@ HasScriptedConversationCondition *__fastcall HasScriptedConversationCondition::C
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &HasScriptedConversationCondition::`vftable';
+  *(_QWORD *)v1 = &HasScriptedConversationCondition::`vftable;
   *((_DWORD *)v1 + 6) = 0;
   return (HasScriptedConversationCondition *)v1;
 }
@@ -372,7 +372,7 @@ ConversationFinishedCondition *__fastcall ConversationFinishedCondition::Create(
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &ConversationFinishedCondition::`vftable';
+  *(_QWORD *)v1 = &ConversationFinishedCondition::`vftable;
   return (ConversationFinishedCondition *)v1;
 }
 
@@ -400,7 +400,7 @@ ConversationIsListeningCondition *__fastcall ConversationIsListeningCondition::C
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &ConversationIsListeningCondition::`vftable';
+  *(_QWORD *)v1 = &ConversationIsListeningCondition::`vftable;
   return (ConversationIsListeningCondition *)v1;
 }
 
@@ -428,7 +428,7 @@ ConversationHasActionRequestsCondition *__fastcall ConversationHasActionRequests
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &ConversationHasActionRequestsCondition::`vftable';
+  *(_QWORD *)v1 = &ConversationHasActionRequestsCondition::`vftable;
   return (ConversationHasActionRequestsCondition *)v1;
 }
 
@@ -444,7 +444,7 @@ TargetPOIIsValidCondition *__fastcall TargetPOIIsValidCondition::Create()
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &TargetPOIIsValidCondition::`vftable';
+  *(_QWORD *)v1 = &TargetPOIIsValidCondition::`vftable;
   return (TargetPOIIsValidCondition *)v1;
 }
 
@@ -479,7 +479,7 @@ TargetPOIAllowsSocialCondition *__fastcall TargetPOIAllowsSocialCondition::Creat
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &TargetPOIAllowsSocialCondition::`vftable';
+  *(_QWORD *)v1 = &TargetPOIAllowsSocialCondition::`vftable;
   return (TargetPOIAllowsSocialCondition *)v1;
 }
 
@@ -562,13 +562,13 @@ void __fastcall CanAttackConditionGroup::CanAttackConditionGroup(CanAttackCondit
   CanAttackConditionGroup *v2; // rdi
 
   v2 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ConditionGroup::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ConditionGroup::`vftable;
   UFG::qSafePointerNode<CanAttackConditionGroup>::qSafePointerNode<CanAttackConditionGroup>((UFG::qSafePointerNode<CanAttackConditionGroup> *)&this->vfptr);
-  v2->vfptr = (Expression::IMemberMapVtbl *)&CanAttackConditionGroup::`vftable'{for `ConditionGroup'};
-  v2->vfptr = (UFG::qSafePointerNode<CanAttackConditionGroup>Vtbl *)&CanAttackConditionGroup::`vftable'{for `UFG::qSafePointerNode<CanAttackConditionGroup>'};
+  v2->vfptr = (Expression::IMemberMapVtbl *)&CanAttackConditionGroup::`vftable{for `ConditionGroup};
+  v2->vfptr = (UFG::qSafePointerNode<CanAttackConditionGroup>Vtbl *)&CanAttackConditionGroup::`vftable{for `UFG::qSafePointerNode<CanAttackConditionGroup>};
 }
 
 // File Line: 1103

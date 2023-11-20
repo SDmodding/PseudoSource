@@ -19,8 +19,8 @@ void __fastcall UFG::HavokBehaviourSteerToPath::HavokBehaviourSteerToPath(UFG::H
     (hkaiSingleCharacterBehavior *)&this->vfptr,
     pCharacter,
     pWorld);
-  v5->vfptr = (hkBaseObjectVtbl *)&UFG::HavokBehaviourSteerToPath::`vftable'{for `hkReferencedObject'};
-  v5->vfptr = (hkaiPathRequestInfoOwnerVtbl *)&UFG::HavokBehaviourSteerToPath::`vftable'{for `hkaiPathRequestInfoOwner'};
+  v5->vfptr = (hkBaseObjectVtbl *)&UFG::HavokBehaviourSteerToPath::`vftable{for `hkReferencedObject};
+  v5->vfptr = (hkaiPathRequestInfoOwnerVtbl *)&UFG::HavokBehaviourSteerToPath::`vftable{for `hkaiPathRequestInfoOwner};
   v5->m_pNavComponent = v4;
   v6 = UFG::qVector3::msZero.y;
   v7 = UFG::qVector3::msZero.z;

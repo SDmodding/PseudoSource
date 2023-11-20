@@ -2521,7 +2521,7 @@ void __fastcall hkaiIntervalPartition::contract(hkaiIntervalPartition *this, flo
   ContractFilter filter; // [rsp+38h] [rbp+10h]
 
   filter.m_maxContract = maxContract;
-  hkaiIntervalPartition::filterIntervals<`anonymous namespace'::ContractFilter>(this, &filter);
+  hkaiIntervalPartition::filterIntervals<`anonymous namespace::ContractFilter>(this, &filter);
 }
 
 // File Line: 1438

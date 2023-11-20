@@ -38,7 +38,7 @@ void __fastcall finishLoadedObjecthkxTextureInplace(void *p, int finishing)
   {
     v2 = (hkStringPtr *)p;
     v3 = (hkStringPtr *)((char *)p + 40);
-    v3[-5].m_stringAndFlag = (const char *)&hkxTextureInplace::`vftable';
+    v3[-5].m_stringAndFlag = (const char *)&hkxTextureInplace::`vftable;
     v4 = finishing;
     hkStringPtr::hkStringPtr(v3, (hkFinishLoadedObjectFlag)finishing);
     hkStringPtr::hkStringPtr(v2 + 6, (hkFinishLoadedObjectFlag)v4);
@@ -61,7 +61,7 @@ void **__fastcall getVtablehkxTextureInplace()
 
   hkStringPtr::hkStringPtr(&v1, 0);
   hkStringPtr::hkStringPtr(&v2, 0);
-  return &hkxTextureInplace::`vftable';
+  return &hkxTextureInplace::`vftable;
 }
 
 // File Line: 97

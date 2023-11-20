@@ -15,7 +15,7 @@ void __fastcall UFG::AICharacterControllerBaseComponent::AICharacterControllerBa
   UFG::CharacterControllerInterface::CharacterControllerInterface(
     (UFG::CharacterControllerInterface *)&this->vfptr,
     name_uid);
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AICharacterControllerBaseComponent::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AICharacterControllerBaseComponent::`vftable;
   Intention::Intention(&v2->m_Intention);
   v2->m_ActionRequestMask.mBits[0] = 0i64;
   v2->m_ActionRequestMask.mBits[1] = 0i64;
@@ -46,7 +46,7 @@ void __fastcall UFG::AICharacterControllerBaseComponent::AICharacterControllerBa
 // RVA: 0x333AA0
 void __fastcall UFG::AICharacterControllerBaseComponent::~AICharacterControllerBaseComponent(UFG::AICharacterControllerBaseComponent *this)
 {
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AICharacterControllerBaseComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AICharacterControllerBaseComponent::`vftable;
   UFG::CharacterControllerInterface::~CharacterControllerInterface((UFG::CharacterControllerInterface *)&this->vfptr);
 }
 
@@ -617,7 +617,7 @@ void __fastcall UFG::AICharacterControllerComponent::AICharacterControllerCompon
   v3 = (UFG::qNode<UFG::AICharacterControllerComponent,UFG::AICharacterControllerComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AICharacterControllerComponent::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AICharacterControllerComponent::`vftable;
   v2->m_ControllerID = 0;
   v2->m_ControllerID_Init = 0;
   v4 = UFG::AICharacterControllerComponent::s_AICharacterControllerComponentList.mNode.mPrev;
@@ -705,7 +705,7 @@ void __fastcall UFG::AICharacterControllerComponent::~AICharacterControllerCompo
   UFG::qNode<UFG::AICharacterControllerComponent,UFG::AICharacterControllerComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AICharacterControllerComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AICharacterControllerComponent::`vftable;
   if ( this == UFG::AICharacterControllerComponent::s_AICharacterControllerComponentpCurrentIterator )
     UFG::AICharacterControllerComponent::s_AICharacterControllerComponentpCurrentIterator = (UFG::AICharacterControllerComponent *)&this->mPrev[-68].mNext;
   v2 = (UFG::qNode<UFG::AICharacterControllerComponent,UFG::AICharacterControllerComponent> *)&this->mPrev;
@@ -721,7 +721,7 @@ void __fastcall UFG::AICharacterControllerComponent::~AICharacterControllerCompo
   v6->mPrev = v5;
   v2->mPrev = v2;
   v2->mNext = v2;
-  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AICharacterControllerBaseComponent::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AICharacterControllerBaseComponent::`vftable;
   UFG::CharacterControllerInterface::~CharacterControllerInterface((UFG::CharacterControllerInterface *)&v1->vfptr);
 }
 

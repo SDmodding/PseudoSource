@@ -6,7 +6,7 @@ void __fastcall hkaiPhysicsBodySilhouetteGeneratorBase::hkaiPhysicsBodySilhouett
 
   v1 = this;
   hkaiPointCloudSilhouetteGenerator::hkaiPointCloudSilhouetteGenerator((hkaiPointCloudSilhouetteGenerator *)&this->vfptr);
-  v1->vfptr = (hkBaseObjectVtbl *)&hkaiPhysicsBodySilhouetteGeneratorBase::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkaiPhysicsBodySilhouetteGeneratorBase::`vftable;
   v1->m_linearVelocityAndThreshold.m_quad = _mm_shuffle_ps(
                                               (__m128)0i64,
                                               _mm_unpackhi_ps((__m128)0i64, (__m128)xmmword_141A710E0),
@@ -23,14 +23,14 @@ void __fastcall hkaiPhysicsBodySilhouetteGeneratorBase::hkaiPhysicsBodySilhouett
   hkaiPointCloudSilhouetteGenerator::hkaiPointCloudSilhouetteGenerator(
     (hkaiPointCloudSilhouetteGenerator *)&this->vfptr,
     f);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkaiPhysicsBodySilhouetteGeneratorBase::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkaiPhysicsBodySilhouetteGeneratorBase::`vftable;
 }
 
 // File Line: 28
 // RVA: 0x12FB040
 void __fastcall hkaiPhysicsBodySilhouetteGeneratorBase::~hkaiPhysicsBodySilhouetteGeneratorBase(hkaiPhysicsBodySilhouetteGeneratorBase *this)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiPhysicsBodySilhouetteGeneratorBase::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiPhysicsBodySilhouetteGeneratorBase::`vftable;
   hkaiPointCloudSilhouetteGenerator::~hkaiPointCloudSilhouetteGenerator((hkaiPointCloudSilhouetteGenerator *)&this->vfptr);
 }
 

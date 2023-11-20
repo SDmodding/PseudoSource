@@ -723,8 +723,8 @@ hkResult *__fastcall hkaParameterizeAnimationUtil::fitCircle(hkResult *result, h
       ++v7;
       v33 = _mm_sub_ps(v32, v26);
       v34 = v33;
-      v35 = _mm_and_ps(v33, (__m128)`hkVector4f::getComponent'::`2'::indexToMask[v29]);
-      v36 = _mm_and_ps(v34, (__m128)`hkVector4f::getComponent'::`2'::indexToMask[v31]);
+      v35 = _mm_and_ps(v33, (__m128)`hkVector4f::getComponent::`2::indexToMask[v29]);
+      v36 = _mm_and_ps(v34, (__m128)`hkVector4f::getComponent::`2::indexToMask[v31]);
       v37 = _mm_or_ps(_mm_shuffle_ps(v36, v36, 78), v36);
       v38 = _mm_or_ps(_mm_shuffle_ps(v35, v35, 78), v35);
       v39 = _mm_or_ps(_mm_shuffle_ps(v37, v37, 177), v37);

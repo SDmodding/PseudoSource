@@ -2,7 +2,7 @@
 // RVA: 0xE2520
 void __fastcall UFG::WayGraph::~WayGraph(UFG::WayGraph *this)
 {
-  this->vfptr = (UFG::WayGraphVtbl *)&UFG::WayGraph::`vftable';
+  this->vfptr = (UFG::WayGraphVtbl *)&UFG::WayGraph::`vftable;
 }
 
 // File Line: 68
@@ -16,7 +16,7 @@ float __fastcall Scaleform::GFx::DisplayObjectBase::GetRatio(hkDataArrayImpl *th
 // RVA: 0xBD960
 void __fastcall UFG::WayFinderClient::~WayFinderClient(UFG::WayFinderClient *this)
 {
-  this->vfptr = (UFG::WayFinderClientVtbl *)&UFG::WayFinderClient::`vftable';
+  this->vfptr = (UFG::WayFinderClientVtbl *)&UFG::WayFinderClient::`vftable;
 }
 
 // File Line: 96

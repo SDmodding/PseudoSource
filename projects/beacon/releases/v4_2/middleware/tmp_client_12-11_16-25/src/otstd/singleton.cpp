@@ -16,12 +16,12 @@ void __fastcall OSuite::FDeleteSingletons(OSuite *this)
       0i64);
     v3.m_pList = 0i64;
     v3.m_pElement = 0i64;
-    v2.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+    v2.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
     OSuite::ZDoublyLinkedListBase::ZIteratorBase::ZIteratorBase(
       &v3,
       (OSuite::ZDoublyLinkedListBase *)&OSuite::s_pSingletons->vfptr,
       OSuite::s_pSingletons->m_pHead);
-    v3.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+    v3.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
     do
     {
       OSuite::ZDoublyLinkedListBase::ZIteratorBase::Previous(&v2);

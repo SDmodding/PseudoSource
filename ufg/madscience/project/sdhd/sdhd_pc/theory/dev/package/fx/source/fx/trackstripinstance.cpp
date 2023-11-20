@@ -9,10 +9,10 @@ void __fastcall Render::TrackStripInstance::TrackStripInstance(Render::TrackStri
   v2 = (UFG::qNode<Render::FXComponentInstance,Render::FXComponentInstance> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable';
+  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable;
   *(_QWORD *)&this->mForceSuspendState = 0i64;
   *(_WORD *)&this->mIsActive = 0;
-  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::TrackStripInstance::`vftable';
+  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::TrackStripInstance::`vftable;
   UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&this->mSettings.mPrev);
   *(_QWORD *)&v1->mStrength = 0i64;
   v1->mStrip = 0i64;
@@ -31,18 +31,18 @@ void __fastcall Render::TrackStripInstance::~TrackStripInstance(Render::TrackStr
   UFG::qNode<Render::FXComponentInstance,Render::FXComponentInstance> *v7; // rax
 
   v1 = this;
-  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::TrackStripInstance::`vftable';
+  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::TrackStripInstance::`vftable;
   v2 = (UFG::qResourceHandle *)&this->mSettings.mPrev;
-  v3 = `UFG::qGetResourceInventory<Render::TrackStripSettings>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Render::TrackStripSettings>'::`2'::result )
+  v3 = `UFG::qGetResourceInventory<Render::TrackStripSettings>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Render::TrackStripSettings>::`2::result )
   {
     v4 = UFG::qResourceWarehouse::Instance();
     v3 = UFG::qResourceWarehouse::GetInventory(v4, 0x69CE5438u);
-    `UFG::qGetResourceInventory<Render::TrackStripSettings>'::`2'::result = v3;
+    `UFG::qGetResourceInventory<Render::TrackStripSettings>::`2::result = v3;
   }
   UFG::qResourceHandle::Close(v2, v3);
   UFG::qResourceHandle::~qResourceHandle(v2);
-  v1->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable';
+  v1->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable;
   v5 = (UFG::qNode<Render::FXComponentInstance,Render::FXComponentInstance> *)&v1->mPrev;
   v6 = v1->mPrev;
   v7 = v1->mNext;
@@ -62,14 +62,14 @@ void __fastcall Render::TrackStripInstance::Init(Render::TrackStripInstance *thi
   UFG::qResourceWarehouse *v5; // rax
 
   this->mSettingsId = settingsId;
-  v2 = `UFG::qGetResourceInventory<Render::TrackStripSettings>'::`2'::result;
+  v2 = `UFG::qGetResourceInventory<Render::TrackStripSettings>::`2::result;
   v3 = settingsId;
   v4 = this;
-  if ( !`UFG::qGetResourceInventory<Render::TrackStripSettings>'::`2'::result )
+  if ( !`UFG::qGetResourceInventory<Render::TrackStripSettings>::`2::result )
   {
     v5 = UFG::qResourceWarehouse::Instance();
     v2 = UFG::qResourceWarehouse::GetInventory(v5, 0x69CE5438u);
-    `UFG::qGetResourceInventory<Render::TrackStripSettings>'::`2'::result = v2;
+    `UFG::qGetResourceInventory<Render::TrackStripSettings>::`2::result = v2;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v4->mSettings.mPrev, 0x69CE5438u, v3, v2);
 }

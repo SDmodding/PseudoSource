@@ -119,7 +119,7 @@ void __fastcall UFG::WireframePostEffect::WireframePostEffect(UFG::WireframePost
 
   v1 = this;
   UFG::RenderStagePlugin::RenderStagePlugin((UFG::RenderStagePlugin *)&this->vfptr);
-  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::WireframePostEffect::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::WireframePostEffect::`vftable;
   UFG::SimComponent::AddType(
     (UFG::SimComponent *)&v1->vfptr,
     UFG::WireframePostEffect::_WireframePostEffectTypeUID,
@@ -244,7 +244,7 @@ void __fastcall UFG::WireframePostEffect::RenderCompositePass(UFG::WireframePost
   {
     v7 = view->mSubmitContext;
     LayerSubmitContext::LayerSubmitContext(&ptr);
-    ptr.vfptr = (Illusion::SubmitContextVtbl *)&UFG::WireframeSubmitContext::`vftable';
+    ptr.vfptr = (Illusion::SubmitContextVtbl *)&UFG::WireframeSubmitContext::`vftable;
     ptr.mQueueMode = 0;
     ptr.mRenderPass = -1;
     ptr.mRenderQueueProvider = (RenderQueueLayer *)v7[1].mStateValues.mParamValues[0];
@@ -337,7 +337,7 @@ void __fastcall UFG::WireframePostEffect::RenderCompositePass(UFG::WireframePost
     Illusion::eRenderPass::CustomRenderPass::~CustomRenderPass(&v24);
     Illusion::eRenderPass::CustomRenderPass::~CustomRenderPass(&v25);
     v4->mSubmitContext = v7;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       ptr.mStateArgs.mStateArgs,
       0x10ui64,
       128,

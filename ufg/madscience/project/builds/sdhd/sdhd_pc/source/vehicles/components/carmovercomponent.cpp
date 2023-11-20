@@ -29,8 +29,8 @@ void __fastcall UFG::CarPhysicsMoverComponent::CarPhysicsMoverComponent(UFG::Car
   v4 = (UFG::qNode<UFG::CarPhysicsMoverComponent,UFG::CarPhysicsMoverComponent> *)&v3->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CarPhysicsMoverComponent::`vftable'{for `UFG::SimComponent'};
-  v3->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::CarPhysicsMoverComponent::`vftable'{for `UFG::UpdateInterface'};
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CarPhysicsMoverComponent::`vftable{for `UFG::SimComponent};
+  v3->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::CarPhysicsMoverComponent::`vftable{for `UFG::UpdateInterface};
   v3->mSupportsAttachments = 1;
   v5 = UFG::CarPhysicsMoverComponent::s_CarPhysicsMoverComponentList.mNode.mPrev;
   UFG::CarPhysicsMoverComponent::s_CarPhysicsMoverComponentList.mNode.mPrev->mNext = (UFG::qNode<UFG::CarPhysicsMoverComponent,UFG::CarPhysicsMoverComponent> *)&v3->mPrev;
@@ -55,8 +55,8 @@ void __fastcall UFG::CarPhysicsMoverComponent::~CarPhysicsMoverComponent(UFG::Ca
   UFG::qNode<UFG::CarPhysicsMoverComponent,UFG::CarPhysicsMoverComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CarPhysicsMoverComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::CarPhysicsMoverComponent::`vftable'{for `UFG::UpdateInterface'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CarPhysicsMoverComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::CarPhysicsMoverComponent::`vftable{for `UFG::UpdateInterface};
   if ( this == UFG::CarPhysicsMoverComponent::s_CarPhysicsMoverComponentpCurrentIterator )
     UFG::CarPhysicsMoverComponent::s_CarPhysicsMoverComponentpCurrentIterator = (UFG::CarPhysicsMoverComponent *)&this->mPrev[-58].mNext;
   v2 = (UFG::qNode<UFG::CarPhysicsMoverComponent,UFG::CarPhysicsMoverComponent> *)&this->mPrev;

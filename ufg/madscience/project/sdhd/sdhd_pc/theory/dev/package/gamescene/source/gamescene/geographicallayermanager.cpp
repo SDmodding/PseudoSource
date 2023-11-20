@@ -253,7 +253,7 @@ __int64 __fastcall UFG::GeographicalLayerManager::TestForActivateOnList(UFG::Geo
                         v39 = v36 + 1;
                         v39->mNext = v39;
                         v39[1].mNext = v39;
-                        v37->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+                        v37->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
                         v37->m_EventUID = v38;
                         v37->m_NamePTR = 0i64;
                       }
@@ -307,7 +307,7 @@ __int64 __fastcall UFG::GeographicalLayerManager::TestForActivateOnList(UFG::Geo
       }
       v8 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v7[1].mNext);
       UFG::qPrintf(
-        "WARNING: Geographical layer '%s' was activated/deactivated outside of the geo manager's control\n",
+        "WARNING: Geographical layer %s was activated/deactivated outside of the geo managers control\n",
         v8);
       v9 = v7;
       v7 = v7[2].mNext - 2;
@@ -395,7 +395,7 @@ void __fastcall UFG::GeographicalLayerManager::DeactivateActiveGeoLayers(UFG::Ge
         goto LABEL_13;
       }
       v4 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v3[1].mNext);
-      UFG::qPrintf("WARNING: Geographical layer '%s' was alread deactivated outside of the geo manager's control\n", v4);
+      UFG::qPrintf("WARNING: Geographical layer %s was alread deactivated outside of the geo managers control\n", v4);
       v5 = (signed __int64)&v3[2].mNext[-2];
       if ( (LODWORD(v3[3].mPrev) >> 15) & 1 )
       {

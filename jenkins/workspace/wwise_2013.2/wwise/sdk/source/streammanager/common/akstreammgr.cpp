@@ -38,7 +38,7 @@ AK::IAkStreamMgr *__fastcall AK::StreamMgr::Create(AkStreamMgrSettings *in_setti
     result = (AK::IAkStreamMgr *)AK::MemoryMgr::Malloc(v3, 8ui64);
     if ( result )
     {
-      result->vfptr = (AK::IAkStreamMgrVtbl *)&AK::StreamMgr::CAkStreamMgr::`vftable';
+      result->vfptr = (AK::IAkStreamMgrVtbl *)&AK::StreamMgr::CAkStreamMgr::`vftable;
       AK::IAkStreamMgr::m_pStreamMgr = result;
     }
     else

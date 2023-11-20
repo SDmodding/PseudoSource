@@ -25,12 +25,12 @@ void __fastcall OSuitePrivate::ConsumablesManager::ConsumablesManager(OSuitePriv
   this->m_pPlatformOnlyTransaction = 0i64;
   v2 = (OSuite::ZObject *)&this->m_TransactionRequested.vfptr;
   v3 = this;
-  this->vfptr = (OSuite::IConsumablesManagerVtbl *)&OSuitePrivate::ConsumablesManager::`vftable'{for `OSuite::IConsumablesManager'};
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuitePrivate::ConsumablesManager::`vftable'{for `OSuite::ZObject'};
+  this->vfptr = (OSuite::IConsumablesManagerVtbl *)&OSuitePrivate::ConsumablesManager::`vftable{for `OSuite::IConsumablesManager};
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuitePrivate::ConsumablesManager::`vftable{for `OSuite::ZObject};
   OSuite::ZRedBlackTreeBase::ZElementBase::ZElementBase((OSuite::ZObject *)&this->m_TransactionRequested.vfptr, a2);
   v2[4].vfptr = 0i64;
-  v2->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable'{for `OSuite::ZListBase'};
-  v2[3].vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable'{for `OSuite::IHashable'};
+  v2->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
+  v2[3].vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
   v4 = OSuite::ZObject::malloc(v2, 0x80ui64, 0i64);
   v2[2].vfptr = 0i64;
   v2[4].vfptr = (OSuite::ZObjectVtbl *)v4;
@@ -51,8 +51,8 @@ void __fastcall OSuitePrivate::ConsumablesManager::~ConsumablesManager(OSuitePri
   OSuite::IPlayerAccount **v4; // rdx
 
   v1 = this;
-  this->vfptr = (OSuite::IConsumablesManagerVtbl *)&OSuitePrivate::ConsumablesManager::`vftable'{for `OSuite::IConsumablesManager'};
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuitePrivate::ConsumablesManager::`vftable'{for `OSuite::ZObject'};
+  this->vfptr = (OSuite::IConsumablesManagerVtbl *)&OSuitePrivate::ConsumablesManager::`vftable{for `OSuite::IConsumablesManager};
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuitePrivate::ConsumablesManager::`vftable{for `OSuite::ZObject};
   v2 = this->m_pPlatformOnlyTransaction;
   if ( v2 )
   {
@@ -65,8 +65,8 @@ void __fastcall OSuitePrivate::ConsumablesManager::~ConsumablesManager(OSuitePri
   OSuite::ZMutex::~ZMutex(&v1->m_mutex);
   v3 = &v1->m_TransactionRequested;
   v4 = v1->m_TransactionRequested.m_pList;
-  v3->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable'{for `OSuite::ZListBase'};
-  v3->vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable'{for `OSuite::IHashable'};
+  v3->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
+  v3->vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
   OSuite::ZObject::free((OSuite::ZObject *)&v1->m_TransactionRequested.vfptr, v4);
 }
 
@@ -358,8 +358,8 @@ __int64 __fastcall OSuitePrivate::ConsumablesManager::NewTransaction(OSuitePriva
     if ( v10 )
     {
       *(_DWORD *)(v10 + 16) = 0;
-      *(_QWORD *)v10 = &OSuitePrivate::ZConsumableTransactionBase::`vftable'{for `OSuite::IConsumableTransaction'};
-      *(_QWORD *)(v10 + 8) = &OSuitePrivate::ZConsumableTransactionBase::`vftable'{for `OSuite::ZObject'};
+      *(_QWORD *)v10 = &OSuitePrivate::ZConsumableTransactionBase::`vftable{for `OSuite::IConsumableTransaction};
+      *(_QWORD *)(v10 + 8) = &OSuitePrivate::ZConsumableTransactionBase::`vftable{for `OSuite::ZObject};
     }
     v4->m_pPlatformOnlyTransaction = (OSuitePrivate::ZConsumableTransactionBase *)v10;
     v8 = v10 == 0 ? 0x80000004 : 0;
@@ -596,8 +596,8 @@ void __fastcall OSuitePrivate::ConsumablesManager::SendPurchasedData(OSuitePriva
   v7 = errState;
   ptr = 0i64;
   OSuite::ZRedBlackTreeBase::ZElementBase::ZElementBase(&v23, (OSuite::ZObject *)pPlayerAccount);
-  v23.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<int>::`vftable'{for `OSuite::ZListBase'};
-  v26 = &OSuite::TList<int>::`vftable'{for `OSuite::IHashable'};
+  v23.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<int>::`vftable{for `OSuite::ZListBase};
+  v26 = &OSuite::TList<int>::`vftable{for `OSuite::IHashable};
   ptr = 0i64;
   v8 = (void *)OSuite::ZObject::malloc(&v23, 0x40ui64, 0i64);
   v24 = 16i64;
@@ -660,8 +660,8 @@ LABEL_13:
     OSuitePrivate::ZEidosTransaction::UpdateToPurchased(v6, (OSuite::TList<int> *)&v23);
   else
     OSuitePrivate::ZEidosTransaction::SetCompletionState(v6, v7);
-  v23.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<int>::`vftable'{for `OSuite::ZListBase'};
-  v26 = &OSuite::TList<int>::`vftable'{for `OSuite::IHashable'};
+  v23.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<int>::`vftable{for `OSuite::ZListBase};
+  v26 = &OSuite::TList<int>::`vftable{for `OSuite::IHashable};
   OSuite::ZObject::free(&v23, ptr);
 }
 
@@ -971,8 +971,8 @@ void __fastcall OSuitePrivate::ConsumablesManager::TransferLostConsumables(OSuit
                 ptr = 0i64;
                 OSuite::ZRedBlackTreeBase::ZElementBase::ZElementBase(&v16, v7);
                 ptr = 0i64;
-                v16.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable'{for `OSuite::ZListBase'};
-                v19 = &OSuite::TList<OSuite::ZJsonObject *>::`vftable'{for `OSuite::IHashable'};
+                v16.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
+                v19 = &OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
                 v8 = (void *)OSuite::ZObject::malloc(&v16, 0x80ui64, 0i64);
                 v18 = 0i64;
                 v9 = 0;
@@ -1037,8 +1037,8 @@ void __fastcall OSuitePrivate::ConsumablesManager::TransferLostConsumables(OSuit
                     while ( v12 < OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&v16) );
                   }
                 }
-                v19 = &OSuite::TList<OSuite::ZJsonObject *>::`vftable'{for `OSuite::IHashable'};
-                v16.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable'{for `OSuite::ZListBase'};
+                v19 = &OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
+                v16.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
                 OSuite::ZObject::free(&v16, ptr);
               }
             }

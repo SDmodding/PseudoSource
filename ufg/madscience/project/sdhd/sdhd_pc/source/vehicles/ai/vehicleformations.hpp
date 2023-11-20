@@ -15,7 +15,7 @@ void __fastcall UFG::VehicleFormations::~VehicleFormations(UFG::VehicleFormation
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v11; // rax
 
   v1 = this;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     this->mSlots,
     0x18ui64,
     14,

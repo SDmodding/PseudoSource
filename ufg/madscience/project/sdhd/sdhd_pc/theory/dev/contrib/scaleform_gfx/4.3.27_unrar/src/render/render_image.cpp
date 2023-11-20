@@ -893,7 +893,7 @@ void __fastcall Scaleform::Render::Image::~Image(Scaleform::Render::Image *this)
   Scaleform::Render::Image *v1; // rdi
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Image::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Image::`vftable;
   _RBX = 0i64;
   __asm { xchg    rbx, [rcx+10h]; Exchange Register/Memory with Register }
   if ( _RBX )
@@ -904,7 +904,7 @@ void __fastcall Scaleform::Render::Image::~Image(Scaleform::Render::Image *this)
   }
   if ( v1->pInverseMatrix )
     ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
 }
 
 // File Line: 885
@@ -1054,15 +1054,15 @@ void __fastcall Scaleform::Render::Image::GetUVGenMatrix(Scaleform::Render::Imag
     if ( v4->vfptr[16].__vecDelDtor((Scaleform::RefCountImplCore *)&v4->vfptr, (unsigned int)&v15) )
     {
       (*(void (__fastcall **)(void *, __m128 *))(*(_QWORD *)v5 + 56i64))(v5, &v13);
-      v6 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v;
-      v7 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v;
+      v6 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v;
+      v7 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v;
       v8 = v14;
       v9 = _mm_mul_ps(_mm_shuffle_ps(v14, v14, 0), v15);
       *v3 = _mm_and_ps(
               _mm_add_ps(
                 _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v13, v13, 85), v16), _mm_mul_ps(_mm_shuffle_ps(v13, v13, 0), v15)),
-                _mm_and_ps(v13, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v)),
-              (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v);
+                _mm_and_ps(v13, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v)),
+              (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v);
       v3[1] = _mm_and_ps(
                 _mm_add_ps(_mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v8, v8, 85), v16), v9), _mm_and_ps(v8, v6)),
                 v7);
@@ -1353,7 +1353,7 @@ void __fastcall Scaleform::Render::RawImage::~RawImage(Scaleform::Render::RawIma
   volatile signed __int32 *v3; // rdx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::RawImage::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::RawImage::`vftable;
   Scaleform::Render::RawImage::freeData(this);
   v2 = v1->Data.Flags;
   if ( v2 & 2 )
@@ -2063,17 +2063,17 @@ char __fastcall Scaleform::Render::SubImage::GetMatrixInverse(Scaleform::Render:
     {
       v8 = v7[1];
       v9 = *v3;
-      v10 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v;
+      v10 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v;
       v11 = _mm_shuffle_ps(v8, v8, 0);
       v12 = _mm_shuffle_ps(v8, v8, 85);
-      v13 = _mm_and_ps(v8, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v);
+      v13 = _mm_and_ps(v8, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v);
       *v3 = _mm_and_ps(
               _mm_add_ps(
                 _mm_add_ps(
                   _mm_mul_ps(_mm_shuffle_ps(*v7, *v7, 85), v3[1]),
                   _mm_mul_ps(_mm_shuffle_ps(*v7, *v7, 0), *v3)),
-                _mm_and_ps(*v7, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v)),
-              (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v);
+                _mm_and_ps(*v7, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v)),
+              (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v);
       v3[1] = _mm_and_ps(_mm_add_ps(_mm_add_ps(_mm_mul_ps(v12, v3[1]), _mm_mul_ps(v11, v9)), v13), v10);
     }
   }
@@ -2286,23 +2286,23 @@ void __fastcall Scaleform::Render::TextureManager::TextureManager(Scaleform::Ren
   Scaleform::Render::ImageUpdateQueue *v18; // [rsp+68h] [rbp+20h]
 
   v4 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,72>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::TextureManager,72>::`vftable';
-  this->vfptr = (Scaleform::Render::ImageUpdateSyncVtbl *)&Scaleform::Render::ImageUpdateSync::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::TextureManager::`vftable'{for `Scaleform::RefCountBase<Scaleform::Render::TextureManager,72>'};
-  this->vfptr = (Scaleform::Render::ImageUpdateSyncVtbl *)&Scaleform::Render::TextureManager::`vftable'{for `Scaleform::Render::ImageUpdateSync'};
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,72>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::TextureManager,72>::`vftable;
+  this->vfptr = (Scaleform::Render::ImageUpdateSyncVtbl *)&Scaleform::Render::ImageUpdateSync::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::TextureManager::`vftable{for `Scaleform::RefCountBase<Scaleform::Render::TextureManager,72>};
+  this->vfptr = (Scaleform::Render::ImageUpdateSyncVtbl *)&Scaleform::Render::TextureManager::`vftable{for `Scaleform::Render::ImageUpdateSync};
   v5 = (Scaleform::ArrayLH<Scaleform::Render::TextureFormat *,2,Scaleform::ArrayDefaultPolicy> *)&this->ServiceCommandInstance;
   v17 = v5;
-  v5->Data.Data = (Scaleform::Render::TextureFormat **)&Scaleform::RefCountImplCore::`vftable';
+  v5->Data.Data = (Scaleform::Render::TextureFormat **)&Scaleform::RefCountImplCore::`vftable;
   LODWORD(v5->Data.Size) = 1;
-  v5->Data.Data = (Scaleform::Render::TextureFormat **)&Scaleform::RefCountImpl::`vftable';
-  v5->Data.Data = (Scaleform::Render::TextureFormat **)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  v5->Data.Data = (Scaleform::Render::TextureFormat **)&Scaleform::RefCountBase<Scaleform::Render::ThreadCommand,2>::`vftable';
-  v5->Data.Data = (Scaleform::Render::TextureFormat **)&Scaleform::Render::ThreadCommand::`vftable';
-  v5->Data.Data = (Scaleform::Render::TextureFormat **)&Scaleform::Render::TextureManager::ServiceCommand::`vftable';
+  v5->Data.Data = (Scaleform::Render::TextureFormat **)&Scaleform::RefCountImpl::`vftable;
+  v5->Data.Data = (Scaleform::Render::TextureFormat **)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  v5->Data.Data = (Scaleform::Render::TextureFormat **)&Scaleform::RefCountBase<Scaleform::Render::ThreadCommand,2>::`vftable;
+  v5->Data.Data = (Scaleform::Render::TextureFormat **)&Scaleform::Render::ThreadCommand::`vftable;
+  v5->Data.Data = (Scaleform::Render::TextureFormat **)&Scaleform::Render::TextureManager::ServiceCommand::`vftable;
   v4->ServiceCommandInstance.pManager = v4;
   this->RenderThreadId = renderThreadId;
   this->pRTCommandQueue = commandQueue;
@@ -2370,8 +2370,8 @@ void __fastcall Scaleform::Render::TextureManager::~TextureManager(Scaleform::Re
   Scaleform::Render::TextureCache *v7; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::TextureManager::`vftable'{for `Scaleform::RefCountBase<Scaleform::Render::TextureManager,72>'};
-  this->vfptr = (Scaleform::Render::ImageUpdateSyncVtbl *)&Scaleform::Render::TextureManager::`vftable'{for `Scaleform::Render::ImageUpdateSync'};
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::TextureManager::`vftable{for `Scaleform::RefCountBase<Scaleform::Render::TextureManager,72>};
+  this->vfptr = (Scaleform::Render::ImageUpdateSyncVtbl *)&Scaleform::Render::TextureManager::`vftable{for `Scaleform::Render::ImageUpdateSync};
   v2 = 0;
   if ( this->TextureFormats.Data.Size )
   {
@@ -2404,9 +2404,9 @@ void __fastcall Scaleform::Render::TextureManager::~TextureManager(Scaleform::Re
   v7 = v1->pTextureCache.pObject;
   if ( v7 && !_InterlockedDecrement(&v7->RefCount) && v7 )
     v7->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v7->vfptr, 1u);
-  v1->ServiceCommandInstance.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
-  v1->vfptr = (Scaleform::Render::ImageUpdateSyncVtbl *)&Scaleform::Render::ImageUpdateSync::`vftable';
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  v1->ServiceCommandInstance.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
+  v1->vfptr = (Scaleform::Render::ImageUpdateSyncVtbl *)&Scaleform::Render::ImageUpdateSync::`vftable;
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
 }
 
 // File Line: 1492
@@ -2727,7 +2727,7 @@ Scaleform::Render::ImageSwizzler *__fastcall Scaleform::Render::TextureManager::
   if ( !(_S6_9 & 1) )
   {
     _S6_9 |= 1u;
-    swizzler.vfptr = (Scaleform::Render::ImageSwizzlerVtbl *)&Scaleform::Render::ImageSwizzler::`vftable';
+    swizzler.vfptr = (Scaleform::Render::ImageSwizzlerVtbl *)&Scaleform::Render::ImageSwizzler::`vftable;
     atexit(Scaleform::Render::TextureManager::GetImageSwizzler_::_2_::_dynamic_atexit_destructor_for__swizzler__);
   }
   return &swizzler;

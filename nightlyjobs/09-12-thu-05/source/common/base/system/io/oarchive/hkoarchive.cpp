@@ -10,7 +10,7 @@ void __fastcall hkOArchive::hkOArchive(hkOArchive *this, hkStreamWriter *sw, hkB
   v3 = sw;
   v4 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkOArchive::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkOArchive::`vftable;
   if ( sw )
   {
     hkReferencedObject::addReference((hkReferencedObject *)&sw->vfptr);
@@ -32,7 +32,7 @@ void __fastcall hkOArchive::hkOArchive(hkOArchive *this, const char *filename, h
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v3 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkOArchive::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkOArchive::`vftable;
   this->m_writer.m_pntr = 0i64;
   this->m_byteSwap = bs;
   v4 = (hkStreamWriter **)((__int64 (__fastcall *)(hkFileSystem *, char *, const char *, signed __int64))hkSingleton<hkFileSystem>::s_instance->vfptr[2].__vecDelDtor)(
@@ -62,7 +62,7 @@ void __fastcall hkOArchive::hkOArchive(hkOArchive *this, void *mem, int memSize,
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v4 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkOArchive::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkOArchive::`vftable;
   v5 = 0i64;
   v6 = memSize;
   this->m_writer.m_pntr = 0i64;
@@ -95,7 +95,7 @@ void __fastcall hkOArchive::hkOArchive(hkOArchive *this, hkArray<char,hkContaine
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v3 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkOArchive::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkOArchive::`vftable;
   v4 = 0i64;
   v5 = arr;
   this->m_writer.m_pntr = 0i64;
@@ -121,12 +121,12 @@ void __fastcall hkOArchive::~hkOArchive(hkOArchive *this)
   hkStreamWriter *v2; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkOArchive::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkOArchive::`vftable;
   v2 = this->m_writer.m_pntr;
   if ( v2 )
     hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
   v1->m_writer.m_pntr = 0i64;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 48

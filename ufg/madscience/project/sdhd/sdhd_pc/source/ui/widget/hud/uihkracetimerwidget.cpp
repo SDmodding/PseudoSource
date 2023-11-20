@@ -80,7 +80,7 @@ void __fastcall UFG::UIHKRaceTimerWidget::Flash_SetTimer(UFG::UIHKRaceTimerWidge
   v21 = -2i64;
   v2 = screen;
   v3 = this;
-  `eh vector constructor iterator'(&v9, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&v9, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   v4 = (double)(signed int)v3->mMinutes;
   if ( (v11 >> 6) & 1 )
   {
@@ -117,6 +117,6 @@ void __fastcall UFG::UIHKRaceTimerWidget::Flash_SetTimer(UFG::UIHKRaceTimerWidge
   v7 = v2->mRenderable->m_movie.pObject;
   if ( v7 )
     Scaleform::GFx::Movie::Invoke(v7, "Race_SetTimer", 0i64, (Scaleform::GFx::Value *)&ptr, 3u);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 

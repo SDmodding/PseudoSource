@@ -2,8 +2,8 @@
 // RVA: 0x93DAD0
 void __fastcall Scaleform::Render::Hairliner::Hairliner(Scaleform::Render::Hairliner *this, Scaleform::Render::LinearHeap *heap)
 {
-  this->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable';
-  this->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::Hairliner::`vftable';
+  this->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable;
+  this->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::Hairliner::`vftable;
   this->pHeap = heap;
   this->Epsilon = 0.0;
   this->IntersectionEpsilon = 0.0099999998;

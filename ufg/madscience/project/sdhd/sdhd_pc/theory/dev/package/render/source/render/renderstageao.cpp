@@ -44,40 +44,40 @@ void __fastcall UFG::RenderStageAO::RenderStageAO(UFG::RenderStageAO *this, UFG:
   if ( outSettings.mFeatureLevel == 2 )
   {
     v4 = UFG::qStringHash32("HK_AO_HD_CS_HALFRES", 0xFFFFFFFF);
-    v5 = `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result )
+    v5 = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::Shader>::`2::result )
     {
       v6 = UFG::qResourceWarehouse::Instance();
       v5 = UFG::qResourceWarehouse::GetInventory(v6, 0x8B5561A1);
-      `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result = v5;
+      `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = v5;
     }
     UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v2->mHalfResAOCSShader.mPrev, 0x8B5561A1, v4, v5);
     v7 = UFG::qStringHash32("HK_AO_HD_CS_FULLRES", 0xFFFFFFFF);
-    v8 = `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result )
+    v8 = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::Shader>::`2::result )
     {
       v9 = UFG::qResourceWarehouse::Instance();
       v8 = UFG::qResourceWarehouse::GetInventory(v9, 0x8B5561A1);
-      `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result = v8;
+      `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = v8;
     }
     UFG::qResourceHandle::Init(v3, 0x8B5561A1, v7, v8);
     v2->mAOCSUAVParamIndex = Illusion::StateSystem::GetParam(&Illusion::gStateSystem, "AO_Output");
     v10 = UFG::qStringHash32("BILATERALBLURAMD_CS_X", 0xFFFFFFFF);
-    v11 = `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result )
+    v11 = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::Shader>::`2::result )
     {
       v12 = UFG::qResourceWarehouse::Instance();
       v11 = UFG::qResourceWarehouse::GetInventory(v12, 0x8B5561A1);
-      `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result = v11;
+      `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = v11;
     }
     UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v2->mBilateralXCSShader.mPrev, 0x8B5561A1, v10, v11);
     v13 = UFG::qStringHash32("BILATERALBLURAMD_CS_Y", 0xFFFFFFFF);
-    v14 = `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result )
+    v14 = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::Shader>::`2::result )
     {
       v15 = UFG::qResourceWarehouse::Instance();
       v14 = UFG::qResourceWarehouse::GetInventory(v15, 0x8B5561A1);
-      `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result = v14;
+      `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = v14;
     }
     UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v2->mBilateralYCSShader.mPrev, 0x8B5561A1, v13, v14);
   }
@@ -752,7 +752,7 @@ LABEL_23:
   arg.mPrev = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
   arg.mNext = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
   RenderQueueLayer::SerializeRenderQueues(&v39);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     ptr.mStateArgs.mStateArgs,
     0x10ui64,
     128,

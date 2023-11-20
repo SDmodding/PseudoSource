@@ -38,7 +38,7 @@ void __fastcall finishLoadedObjecthkpVehiclePerWheelSimulationWheelData(void *p,
     v2 = (char *)p + 48;
     v3 = finishing;
     hkpConstraintData::hkpConstraintData((hkpConstraintData *)p + 2, (hkFinishLoadedObjectFlag)finishing);
-    *v2 = &hkpWheelFrictionConstraintData::`vftable';
+    *v2 = &hkpWheelFrictionConstraintData::`vftable;
     if ( v3 )
     {
       *(_QWORD *)((char *)v2 + 196) = 0i64;
@@ -51,7 +51,7 @@ void __fastcall finishLoadedObjecthkpVehiclePerWheelSimulationWheelData(void *p,
 // RVA: 0xE25CD0
 void __fastcall cleanupLoadedObjecthkpVehiclePerWheelSimulationWheelData(void *p)
 {
-  *((_QWORD *)p + 6) = &hkBaseObject::`vftable';
+  *((_QWORD *)p + 6) = &hkBaseObject::`vftable;
 }
 
 // File Line: 123
@@ -88,8 +88,8 @@ void __fastcall finishLoadedObjecthkpVehiclePerWheelSimulation(void *p, int fini
 {
   if ( p )
   {
-    *(_QWORD *)p = &hkpVehiclePerWheelSimulation::`vftable'{for `hkpVehicleSimulation'};
-    *((_QWORD *)p + 2) = &hkpVehiclePerWheelSimulation::`vftable'{for `hkpWorldPostSimulationListener'};
+    *(_QWORD *)p = &hkpVehiclePerWheelSimulation::`vftable{for `hkpVehicleSimulation};
+    *((_QWORD *)p + 2) = &hkpVehiclePerWheelSimulation::`vftable{for `hkpWorldPostSimulationListener};
   }
 }
 
@@ -104,7 +104,7 @@ void __fastcall cleanupLoadedObjecthkpVehiclePerWheelSimulation(void *p)
 // RVA: 0xE25D30
 void **__fastcall getVtablehkpVehiclePerWheelSimulation()
 {
-  return &hkpVehiclePerWheelSimulation::`vftable'{for `hkpVehicleSimulation'};
+  return &hkpVehiclePerWheelSimulation::`vftable{for `hkpVehicleSimulation};
 }
 
 // File Line: 165

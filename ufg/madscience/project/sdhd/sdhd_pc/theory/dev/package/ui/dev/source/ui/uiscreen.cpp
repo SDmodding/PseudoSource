@@ -36,7 +36,7 @@ void __fastcall UFG::UIScreen::~UIScreen(UFG::UIScreen *this)
   UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v10; // rax
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   v2 = UFG::UIScreenManager::s_instance;
   v3 = UFG::UIScreenManager::s_instance->m_audioCallback;
   if ( v3 )

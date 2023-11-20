@@ -18,7 +18,7 @@ void __fastcall UFG::DestructionEvent::~DestructionEvent(UFG::DestructionEvent *
   UFG::qNode<UFG::Event,UFG::Event> *v14; // rax
 
   v1 = this;
-  this->vfptr = (UFG::EventVtbl *)&UFG::DestructionEvent::`vftable';
+  this->vfptr = (UFG::EventVtbl *)&UFG::DestructionEvent::`vftable;
   UFG::qReflectHandleBase::~qReflectHandleBase((UFG::qReflectHandleBase *)&this->objectProperty.mPrev);
   v2 = &v1->mBreakingBody;
   if ( v1->mBreakingBody.m_pPointer )
@@ -54,7 +54,7 @@ void __fastcall UFG::DestructionEvent::~DestructionEvent(UFG::DestructionEvent *
   v11->mPrev = v10;
   v7->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v7->mPrev;
   v1->mCollidingComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->mCollidingComponent.mPrev;
-  v1->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+  v1->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
   v12 = (UFG::qNode<UFG::Event,UFG::Event> *)&v1->mPrev;
   v13 = v1->mPrev;
   v14 = v1->mNext;

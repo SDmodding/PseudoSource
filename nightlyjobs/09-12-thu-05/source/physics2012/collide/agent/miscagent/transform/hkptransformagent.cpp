@@ -72,7 +72,7 @@ hkpCollisionAgent *__fastcall hkpTransformAgent::createTransformAAgent(hkpCdBody
   {
     *(_DWORD *)&result->m_memSizeAndFlags = 0x1FFFF;
     result->m_contactMgr = v5;
-    result->vfptr = (hkBaseObjectVtbl *)&hkpTransformAgent::`vftable';
+    result->vfptr = (hkBaseObjectVtbl *)&hkpTransformAgent::`vftable;
     v11 = v4[2];
     v12 = *v4;
     v13 = &Dst;
@@ -169,7 +169,7 @@ hkpCollisionAgent *__fastcall hkpTransformAgent::createTransformBAgent(hkpCdBody
   {
     *(_DWORD *)&result->m_memSizeAndFlags = 0x1FFFF;
     result->m_contactMgr = v5;
-    result->vfptr = (hkBaseObjectVtbl *)&hkpTransformAgent::`vftable';
+    result->vfptr = (hkBaseObjectVtbl *)&hkpTransformAgent::`vftable;
     v11 = v7[2];
     v12 = *v7;
     v13 = &Dst;
@@ -222,7 +222,7 @@ hkpCollisionAgent *__fastcall hkpTransformAgent::createTransformBAgent(hkpCdBody
                                          *(_QWORD *)&v23,
                                          v24,
                                          v25);
-    v10->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpTransformAgent>::`vftable';
+    v10->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpTransformAgent>::`vftable;
     result = v10;
   }
   return result;

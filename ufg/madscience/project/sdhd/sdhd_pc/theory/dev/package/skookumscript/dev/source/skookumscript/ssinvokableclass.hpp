@@ -6,12 +6,12 @@ void __fastcall SSInvokableClass::SSInvokableClass(SSInvokableClass *this, SSInv
   SSParameters *v3; // rax
 
   v2 = iclass->i_class_p;
-  this->vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable';
-  this->vfptr = (SSClassDescBaseVtbl *)&SSClassUnaryBase::`vftable';
+  this->vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable;
+  this->vfptr = (SSClassDescBaseVtbl *)&SSClassUnaryBase::`vftable;
   this->i_ref_count = 0;
-  this->vfptr = (SSClassDescBaseVtbl *)&SSContextClassBase::`vftable';
+  this->vfptr = (SSClassDescBaseVtbl *)&SSContextClassBase::`vftable;
   this->i_class_p = v2;
-  this->vfptr = (SSClassDescBaseVtbl *)&SSInvokableClass::`vftable';
+  this->vfptr = (SSClassDescBaseVtbl *)&SSInvokableClass::`vftable;
   this->i_params_p.i_obj_p = iclass->i_params_p.i_obj_p;
   v3 = iclass->i_params_p.i_obj_p;
   if ( v3 )
@@ -29,7 +29,7 @@ void __fastcall SSInvokableClass::~SSInvokableClass(SSInvokableClass *this)
   SSParameters *v4; // rbx
 
   v1 = this;
-  this->vfptr = (SSClassDescBaseVtbl *)&SSInvokableClass::`vftable';
+  this->vfptr = (SSClassDescBaseVtbl *)&SSInvokableClass::`vftable;
   v2 = this->i_params_p.i_obj_p;
   if ( v2 )
   {
@@ -53,6 +53,6 @@ void __fastcall SSInvokableClass::~SSInvokableClass(SSInvokableClass *this)
       AMemory::c_free_func(v4);
     }
   }
-  v1->vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable';
+  v1->vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable;
 }
 

@@ -9,7 +9,7 @@ void __fastcall CAkActionPlayAndContinue::CAkActionPlayAndContinue(CAkActionPlay
   v4 = in_spContList;
   v5 = this;
   CAkActionPlay::CAkActionPlay((CAkActionPlay *)&this->vfptr, in_eActionType, in_ulID);
-  v5->vfptr = (CAkIndexableVtbl *)&CAkActionPlayAndContinue::`vftable';
+  v5->vfptr = (CAkIndexableVtbl *)&CAkActionPlayAndContinue::`vftable;
   *((_BYTE *)&v5->m_PBTrans + 16) &= 0xFCu;
   v5->m_PBTrans.pvPSTrans = 0i64;
   v5->m_PBTrans.pvPRTrans = 0i64;
@@ -49,7 +49,7 @@ void __fastcall CAkActionPlayAndContinue::~CAkActionPlayAndContinue(CAkActionPla
 
   v1 = this->m_PBTrans.pvPSTrans;
   v2 = this;
-  this->vfptr = (CAkIndexableVtbl *)&CAkActionPlayAndContinue::`vftable';
+  this->vfptr = (CAkIndexableVtbl *)&CAkActionPlayAndContinue::`vftable;
   if ( v1 )
   {
     v3 = this->m_pTransitionOwner;

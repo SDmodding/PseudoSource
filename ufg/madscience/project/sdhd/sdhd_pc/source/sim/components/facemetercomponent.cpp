@@ -264,9 +264,9 @@ void __fastcall UFG::FaceMeterComponent::FaceMeterComponent(UFG::FaceMeterCompon
   v3 = (UFG::qNode<UFG::FaceMeterComponent,UFG::FaceMeterComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::FaceMeterComponent::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::FaceMeterComponent::`vftable;
   v4 = 107i64;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v2->mAffectors,
     0x50ui64,
     107,
@@ -306,7 +306,7 @@ void __fastcall UFG::FaceMeterComponent::~FaceMeterComponent(UFG::FaceMeterCompo
   UFG::qNode<UFG::FaceMeterComponent,UFG::FaceMeterComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::FaceMeterComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::FaceMeterComponent::`vftable;
   if ( this == UFG::FaceMeterComponent::s_FaceMeterComponentpCurrentIterator )
     UFG::FaceMeterComponent::s_FaceMeterComponentpCurrentIterator = (UFG::FaceMeterComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::FaceMeterComponent,UFG::FaceMeterComponent> *)&this->mPrev;
@@ -317,7 +317,7 @@ void __fastcall UFG::FaceMeterComponent::~FaceMeterComponent(UFG::FaceMeterCompo
   v2->mPrev = v2;
   v2->mNext = v2;
   UFG::PropertySetHandle::~PropertySetHandle(&v1->mProperties);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->mAffectors,
     0x50ui64,
     107,

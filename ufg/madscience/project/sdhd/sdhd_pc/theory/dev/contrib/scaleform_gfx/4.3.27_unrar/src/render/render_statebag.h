@@ -2,7 +2,7 @@
 // RVA: 0x94B190
 void __fastcall Scaleform::Render::StateData::Interface::~Interface(Scaleform::Render::StateData::Interface *this)
 {
-  this->vfptr = (Scaleform::Render::StateData::InterfaceVtbl *)&Scaleform::Render::StateData::Interface::`vftable';
+  this->vfptr = (Scaleform::Render::StateData::InterfaceVtbl *)&Scaleform::Render::StateData::Interface::`vftable;
 }
 
 // File Line: 115

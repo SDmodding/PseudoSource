@@ -6,7 +6,7 @@ AK::IAkPluginParam *__fastcall CreateTremoloFXParams(AK::IAkPluginMemAlloc *in_p
 
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 56ui64);
   if ( result )
-    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkTremoloFXParams::`vftable';
+    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkTremoloFXParams::`vftable;
   return result;
 }
 
@@ -14,21 +14,21 @@ AK::IAkPluginParam *__fastcall CreateTremoloFXParams(AK::IAkPluginMemAlloc *in_p
 // RVA: 0xAF2680
 void __fastcall CAkTremoloFXParams::CAkTremoloFXParams(CAkTremoloFXParams *this)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkTremoloFXParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkTremoloFXParams::`vftable;
 }
 
 // File Line: 28
 // RVA: 0xAF26A0
 void __fastcall CAkTremoloFXParams::~CAkTremoloFXParams(CAkTremoloFXParams *this)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable;
 }
 
 // File Line: 33
 // RVA: 0xAF26C0
 void __fastcall CAkTremoloFXParams::CAkTremoloFXParams(CAkTremoloFXParams *this, CAkTremoloFXParams *in_rCopy)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkTremoloFXParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkTremoloFXParams::`vftable;
   this->m_Params.RTPC.fModDepth = in_rCopy->m_Params.RTPC.fModDepth;
   this->m_Params.RTPC.modParams.lfoParams.eWaveform = in_rCopy->m_Params.RTPC.modParams.lfoParams.eWaveform;
   this->m_Params.RTPC.modParams.lfoParams.fFrequency = in_rCopy->m_Params.RTPC.modParams.lfoParams.fFrequency;
@@ -63,7 +63,7 @@ AK::IAkPluginParam *__fastcall CAkTremoloFXParams::Clone(CAkTremoloFXParams *thi
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 56ui64);
   if ( result )
   {
-    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkTremoloFXParams::`vftable';
+    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkTremoloFXParams::`vftable;
     *(float *)&result[1].vfptr = v2->m_Params.RTPC.fModDepth;
     HIDWORD(result[1].vfptr) = v2->m_Params.RTPC.modParams.lfoParams.eWaveform;
     *(float *)&result[2].vfptr = v2->m_Params.RTPC.modParams.lfoParams.fFrequency;

@@ -27,8 +27,8 @@ void __fastcall UFG::UIScreenDialogBox::UIScreenDialogBoxData::UIScreenDialogBox
   UFG::UIScreenDialogBox::UIScreenDialogBoxData *v1; // rbx
 
   v1 = this;
-  this->vfptr = (UFG::UICommandDataVtbl *)&UFG::UICommandData::`vftable';
-  this->vfptr = (UFG::UICommandDataVtbl *)&UFG::UIScreenDialogBox::UIScreenDialogBoxData::`vftable';
+  this->vfptr = (UFG::UICommandDataVtbl *)&UFG::UICommandData::`vftable;
+  this->vfptr = (UFG::UICommandDataVtbl *)&UFG::UIScreenDialogBox::UIScreenDialogBoxData::`vftable;
   this->mOwner = 0i64;
   this->mDefaultButton = 1;
   UFG::qString::qString(&this->mTitleText);

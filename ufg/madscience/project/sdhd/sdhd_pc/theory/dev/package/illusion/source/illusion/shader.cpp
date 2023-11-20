@@ -9,7 +9,7 @@ __int64 Illusion::_dynamic_initializer_for__gShaderInventory__()
     0,
     0,
     0);
-  Illusion::gShaderInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Illusion::iShaderInventory::`vftable';
+  Illusion::gShaderInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Illusion::iShaderInventory::`vftable;
   return atexit(Illusion::_dynamic_atexit_destructor_for__gShaderInventory__);
 }
 
@@ -57,7 +57,7 @@ __int64 Illusion::_dynamic_initializer_for__gShaderBinaryInventory__()
     0x985BE50C,
     0,
     0);
-  Illusion::gShaderBinaryInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Illusion::iShaderBinaryInventory::`vftable';
+  Illusion::gShaderBinaryInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Illusion::iShaderBinaryInventory::`vftable;
   return atexit(Illusion::_dynamic_atexit_destructor_for__gShaderBinaryInventory__);
 }
 

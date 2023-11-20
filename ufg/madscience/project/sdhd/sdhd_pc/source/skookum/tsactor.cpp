@@ -17,7 +17,7 @@ void __fastcall UFG::TSActorComponent::TSActorComponent(UFG::TSActorComponent *t
   v3 = className;
   v4 = this;
   UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name->mUID);
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TSActorComponent::`vftable';
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TSActorComponent::`vftable;
   v4->mpActor.i_obj_p = 0i64;
   v4->mpActor.i_ptr_id = 0;
   v4->mpActorClass = 0i64;
@@ -87,7 +87,7 @@ UFG::TSActor *__fastcall UFG::TSActorComponent::GetActor(UFG::TSActorComponent *
           if ( v8 )
           {
             SSActor::SSActor(v8, &name, v1->mpActorClass, 1);
-            v9->vfptr = (SSObjectBaseVtbl *)&UFG::TSActor::`vftable';
+            v9->vfptr = (SSObjectBaseVtbl *)&UFG::TSActor::`vftable;
             UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0>::RebindingComponentHandle<UFG::TransformNodeComponent,0>(&v9->mTransformNodeComponent);
             v9->mpComponent = 0i64;
             v9->m_audioController.m_pEvent = 0i64;
@@ -233,7 +233,7 @@ void __fastcall UFG::TSActorComponent::TSActorComponent(UFG::TSActorComponent *t
   v2 = pActor;
   v3 = this;
   UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, pActor->i_name.i_uid);
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TSActorComponent::`vftable';
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TSActorComponent::`vftable;
   v3->mpActor.i_obj_p = v2;
   v3->mpActor.i_ptr_id = v2->i_ptr_id;
   UFG::SimComponent::AddType(
@@ -372,14 +372,14 @@ void __fastcall UFG::StimulusNotifyScript::StimulusNotifyScript(UFG::StimulusNot
   v6 = (UFG::qNode<UFG::StimulusNotifyCallback,UFG::StimulusNotifyCallback> *)&this->mPrev;
   v6->mPrev = v6;
   v6->mNext = v6;
-  this->vfptr = (UFG::StimulusNotifyCallbackVtbl *)&UFG::StimulusNotifyCallback::`vftable';
+  this->vfptr = (UFG::StimulusNotifyCallbackVtbl *)&UFG::StimulusNotifyCallback::`vftable;
   this->m_type = notify_type;
   this->m_delegate.m_Closure.m_pthis = 0i64;
   this->m_delegate.m_Closure.m_pFunction = 0i64;
   v7 = (UFG::qNode<UFG::StimulusNotifyScript,UFG::StimulusNotifyScript> *)&this->mPrev;
   v7->mPrev = v7;
   v7->mNext = v7;
-  this->vfptr = (UFG::StimulusNotifyCallbackVtbl *)&UFG::StimulusNotifyScript::`vftable';
+  this->vfptr = (UFG::StimulusNotifyCallbackVtbl *)&UFG::StimulusNotifyScript::`vftable;
   this->mpICoroutine.i_obj_p = pICoroutine;
   if ( pICoroutine )
     v8 = pICoroutine->i_ptr_id;
@@ -531,7 +531,7 @@ void __fastcall UFG::TSActor::TSActor(UFG::TSActor *this, ASymbol *name, SSActor
 
   v3 = this;
   SSActor::SSActor((SSActor *)&this->vfptr, name, pClass, 1);
-  v3->vfptr = (SSObjectBaseVtbl *)&UFG::TSActor::`vftable';
+  v3->vfptr = (SSObjectBaseVtbl *)&UFG::TSActor::`vftable;
   UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0>::RebindingComponentHandle<UFG::TransformNodeComponent,0>(&v3->mTransformNodeComponent);
   v3->mpComponent = 0i64;
   v3->m_audioController.m_pEvent = 0i64;
@@ -554,7 +554,7 @@ void __fastcall UFG::TSActor::~TSActor(UFG::TSActor *this)
   UFG::AudioEvent *v7; // rcx
 
   v1 = this;
-  this->vfptr = (SSObjectBaseVtbl *)&UFG::TSActor::`vftable';
+  this->vfptr = (SSObjectBaseVtbl *)&UFG::TSActor::`vftable;
   v2 = &this->mpSimObj;
   if ( this->mpSimObj.m_pPointer )
   {
@@ -7520,7 +7520,7 @@ char __fastcall UFG::TSActor::Coro_invoke_aibehaviour(UFG::TSActor *this, SSInvo
     else
     {
       optResult.mId = -3;
-      optResult.mDesc = "Couldn't find behaviour node.";
+      optResult.mDesc = "Couldnt find behaviour node.";
       optResult.mBehaviour = 0i64;
     }
     UFG::InvokeBehaviourResult::ToString(&optResult, (UFG::qString *)&params);

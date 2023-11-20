@@ -23,8 +23,8 @@ Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl::Date> *__fastcall Scalef
   if ( v4 )
   {
     Scaleform::GFx::AS3::Instance::Instance(v4, (Scaleform::GFx::AS3::InstanceTraits::Traits *)&v2->vfptr);
-    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Object::`vftable';
-    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Date::`vftable';
+    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Object::`vftable;
+    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Date::`vftable;
     LODWORD(v5[1].vfptr) = 0;
     BYTE4(v5[1].vfptr) = 0;
     v5[1].pRCCRaw = 0i64;

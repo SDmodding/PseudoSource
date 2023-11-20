@@ -31,7 +31,7 @@ void __fastcall CAkFDNReverbFX::CAkFDNReverbFX(CAkFDNReverbFX *this)
   float **v2; // rcx
 
   v1 = this;
-  this->vfptr = (AK::IAkPluginVtbl *)&CAkFDNReverbFX::`vftable';
+  this->vfptr = (AK::IAkPluginVtbl *)&CAkFDNReverbFX::`vftable;
   v2 = this->m_pfDelayRead;
   *(v2 - 14) = 0i64;
   *((_DWORD *)v2 + 109) = -1;
@@ -93,7 +93,7 @@ void __fastcall CAkFDNReverbFX::CAkFDNReverbFX(CAkFDNReverbFX *this)
 // RVA: 0xAC1890
 void __fastcall CAkFDNReverbFX::~CAkFDNReverbFX(CAkFDNReverbFX *this)
 {
-  this->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable';
+  this->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable;
 }
 
 // File Line: 146

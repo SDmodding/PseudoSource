@@ -3,7 +3,7 @@
 void __fastcall hkaFootstepAnalysisInfoContainer::hkaFootstepAnalysisInfoContainer(hkaFootstepAnalysisInfoContainer *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaFootstepAnalysisInfoContainer::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaFootstepAnalysisInfoContainer::`vftable;
   this->m_previewInfo.m_capacityAndFlags = 2147483648;
   this->m_previewInfo.m_data = 0i64;
   this->m_previewInfo.m_size = 0;
@@ -21,7 +21,7 @@ void __fastcall hkaFootstepAnalysisInfoContainer::~hkaFootstepAnalysisInfoContai
   int v6; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaFootstepAnalysisInfoContainer::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaFootstepAnalysisInfoContainer::`vftable;
   v2 = this->m_previewInfo.m_data;
   v3 = this->m_previewInfo.m_size - 1;
   for ( i = v3; i >= 0; v2[i--].m_pntr = 0i64 )
@@ -39,7 +39,7 @@ void __fastcall hkaFootstepAnalysisInfoContainer::~hkaFootstepAnalysisInfoContai
       8 * v6);
   v1->m_previewInfo.m_data = 0i64;
   v1->m_previewInfo.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 32
@@ -105,7 +105,7 @@ void __fastcall hkaFootstepAnalysisInfo::hkaFootstepAnalysisInfo(hkaFootstepAnal
   v10 = 0i64;
   v11 = 2147483648;
   v12 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaFootstepAnalysisInfo::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaFootstepAnalysisInfo::`vftable;
   this->m_name.m_data = 0i64;
   this->m_name.m_size = 0;
   this->m_name.m_capacityAndFlags = 2147483648;
@@ -398,7 +398,7 @@ void __fastcall hkaFootstepAnalysisInfo::hkaFootstepAnalysisInfo(hkaFootstepAnal
 // RVA: 0xB352C0
 void __fastcall hkaFootstepAnalysisInfo::hkaFootstepAnalysisInfo(hkaFootstepAnalysisInfo *this, hkFinishLoadedObjectFlag f)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkaFootstepAnalysisInfo::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaFootstepAnalysisInfo::`vftable;
 }
 
 // File Line: 66
@@ -419,7 +419,7 @@ void __fastcall hkaFootstepAnalysisInfo::~hkaFootstepAnalysisInfo(hkaFootstepAna
   int v12; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaFootstepAnalysisInfo::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaFootstepAnalysisInfo::`vftable;
   v2 = this->m_anyBonesDown.m_capacityAndFlags;
   this->m_anyBonesDown.m_size = 0;
   if ( v2 >= 0 )
@@ -519,7 +519,7 @@ void __fastcall hkaFootstepAnalysisInfo::~hkaFootstepAnalysisInfo(hkaFootstepAna
       v12 & 0x3FFFFFFF);
   v1->m_name.m_data = 0i64;
   v1->m_name.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 70

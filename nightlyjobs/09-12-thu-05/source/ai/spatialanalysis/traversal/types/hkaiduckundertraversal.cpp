@@ -516,7 +516,7 @@ __int64 __fastcall hkaiDuckUnderUtils::getNumClearanceIntervals(hkaiTraversalAnn
 
 // File Line: 219
 // RVA: 0xC36480
-void __fastcall `anonymous namespace'::linePlaneIntersection(hkVector4f *origin, hkVector4f *dir, hkVector4f *plane, hkVector4f *intOut)
+void __fastcall `anonymous namespace::linePlaneIntersection(hkVector4f *origin, hkVector4f *dir, hkVector4f *plane, hkVector4f *intOut)
 {
   __m128 v4; // xmm2
   __m128 v5; // xmm1
@@ -678,9 +678,9 @@ void __fastcall hkaiDuckUnderUtils::getClearanceInterval(hkaiTraversalAnnotation
     &yVector,
     &leftOut,
     &origin);
-  `anonymous namespace'::linePlaneIntersection(&leftOut, &dir, (hkVector4f *)plane, v8);
-  `anonymous namespace'::linePlaneIntersection(&origin, &dir, (hkVector4f *)plane, intOut);
-  `anonymous namespace'::linePlaneIntersection(&leftOut, &dir, &v43, rightStartPointOut);
-  `anonymous namespace'::linePlaneIntersection(&origin, &dir, &v43, leftEndPointOut);
+  `anonymous namespace::linePlaneIntersection(&leftOut, &dir, (hkVector4f *)plane, v8);
+  `anonymous namespace::linePlaneIntersection(&origin, &dir, (hkVector4f *)plane, intOut);
+  `anonymous namespace::linePlaneIntersection(&leftOut, &dir, &v43, rightStartPointOut);
+  `anonymous namespace::linePlaneIntersection(&origin, &dir, &v43, leftEndPointOut);
 }
 

@@ -12,7 +12,7 @@ CAkEvent *__fastcall CAkEvent::CreateNoIndex(unsigned int in_ulID)
   if ( result )
   {
     CAkIndexable::CAkIndexable((CAkIndexable *)&result->vfptr, v1);
-    v3->vfptr = (CAkIndexableVtbl *)&CAkEvent::`vftable';
+    v3->vfptr = (CAkIndexableVtbl *)&CAkEvent::`vftable;
     v3->m_actions.m_pFirst = 0i64;
     v3->m_iPreparationCount = 0;
     result = v3;

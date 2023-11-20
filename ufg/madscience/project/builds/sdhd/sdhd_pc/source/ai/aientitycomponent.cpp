@@ -28,7 +28,7 @@ void __fastcall UFG::AIEntityComponent::AIEntityComponent(UFG::AIEntityComponent
 
   v4 = this;
   UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name_uid);
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIEntityComponent::`vftable';
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIEntityComponent::`vftable;
   UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0>::RebindingComponentHandle<UFG::TransformNodeComponent,0>(&v4->m_pTransformNodeComponent);
   UFG::RebindingComponentHandle<UFG::ActionTreeComponent,0>::RebindingComponentHandle<UFG::ActionTreeComponent,0>(&v4->m_pActionTreeComponent);
   UFG::RebindingComponentHandle<UFG::RigidBodyComponent,0>::RebindingComponentHandle<UFG::RigidBodyComponent,0>(&v4->m_pRigidBodyComponent);
@@ -40,7 +40,7 @@ void __fastcall UFG::AIEntityComponent::AIEntityComponent(UFG::AIEntityComponent
   UFG::RebindingComponentHandle<UFG::TargetingSystemPedBaseComponent,0>::RebindingComponentHandle<UFG::TargetingSystemPedBaseComponent,0>(&v4->m_pTargetingSystemBaseComponent);
   UFG::RebindingComponentHandle<UFG::CharacterOccupantComponent,0>::RebindingComponentHandle<UFG::CharacterOccupantComponent,0>(&v4->m_pCharacterOccupantComponent);
   v5 = (signed __int64)&v4->m_WanderData;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     &v4->m_WanderData,
     0x78ui64,
     2,
@@ -63,7 +63,7 @@ void __fastcall UFG::AIEntityComponent::AIEntityComponent(UFG::AIEntityComponent
   v9->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::CombatRegion>,UFG::qSafePointerNodeList> *)&v9->mPrev;
   v9->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::CombatRegion>,UFG::qSafePointerNodeList> *)&v9->mPrev;
   v4->m_pCombatRegion.m_pPointer = 0i64;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v4->m_ThreatTargets.p,
     0x20ui64,
     10,
@@ -109,7 +109,7 @@ void __fastcall UFG::AIEntityComponent::~AIEntityComponent(UFG::AIEntityComponen
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v18; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIEntityComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIEntityComponent::`vftable;
   v2 = &this->m_pCombatRegion;
   if ( this->m_pCombatRegion.m_pPointer )
   {
@@ -122,7 +122,7 @@ void __fastcall UFG::AIEntityComponent::~AIEntityComponent(UFG::AIEntityComponen
   }
   v2->m_pPointer = 0i64;
   v1->m_ThreatTargets.size = 0;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->m_ThreatTargets.p,
     0x20ui64,
     10,
@@ -1240,7 +1240,7 @@ void __fastcall UFG::ActiveAIEntityComponent::ActiveAIEntityComponent(UFG::Activ
   v5 = (UFG::qNode<UFG::ActiveAIEntityComponent,UFG::ActiveAIEntityComponent> *)&v4->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ActiveAIEntityComponent::`vftable';
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ActiveAIEntityComponent::`vftable;
   v6 = &v4->m_KnowledgeBase;
   v20 = (UFG::qList<UFG::SupplementaryAttackTarget,UFG::SupplementaryAttackTarget,1,0> *)v6;
   v6->m_pParentSimObject.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v6->m_pParentSimObject.mPrev;
@@ -1287,7 +1287,7 @@ void __fastcall UFG::ActiveAIEntityComponent::ActiveAIEntityComponent(UFG::Activ
   v11->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v11->mPrev;
   v11->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v11->mPrev;
   v4->m_pCurrentAttackTarget.m_pPointer = 0i64;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v4->m_pDesiredTarget,
     0x18ui64,
     91,
@@ -1405,7 +1405,7 @@ void __fastcall UFG::ActiveAIEntityComponent::~ActiveAIEntityComponent(UFG::Acti
   UFG::qNode<UFG::ActiveAIEntityComponent,UFG::ActiveAIEntityComponent> *v34; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ActiveAIEntityComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ActiveAIEntityComponent::`vftable;
   if ( this == UFG::ActiveAIEntityComponent::s_ActiveAIEntityComponentpCurrentIterator )
     UFG::ActiveAIEntityComponent::s_ActiveAIEntityComponentpCurrentIterator = (UFG::ActiveAIEntityComponent *)&this->mPrev[-84].mNext;
   v2 = (UFG::qNode<UFG::ActiveAIEntityComponent,UFG::ActiveAIEntityComponent> *)&this->mPrev;
@@ -1457,7 +1457,7 @@ void __fastcall UFG::ActiveAIEntityComponent::~ActiveAIEntityComponent(UFG::Acti
   v17->mPrev = v16;
   v5->mNode.mPrev = &v5->mNode;
   v1->m_SupplementaryAttackTargets.mNode.mNext = &v1->m_SupplementaryAttackTargets.mNode;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->m_pDesiredTarget,
     0x18ui64,
     91,
@@ -1579,7 +1579,7 @@ void __fastcall UFG::ActiveAIEntityComponent::Reset(UFG::ActiveAIEntityComponent
   if ( v8 )
   {
     v9 = (char *)&v8[-1] + 48;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v8,
       0x38ui64,
       *((_DWORD *)&v8[-1] + 12),

@@ -8,7 +8,7 @@ void __fastcall hkpBvTreeShape::hkpBvTreeShape(hkpBvTreeShape *this, hkFinishLoa
   v3 = flag.m_finishing;
   v2 = this;
   hkpShape::hkpShape((hkpShape *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpBvTreeShape::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpBvTreeShape::`vftable;
   if ( v3 )
   {
     v2->m_type.m_storage = 22;

@@ -580,7 +580,7 @@ void __fastcall CAkMatrixSequencer::CAkMatrixSequencer(CAkMatrixSequencer *this,
 
   this->m_pOwner = in_pOwner;
   v4 = this;
-  this->vfptr = (IAkTriggerAwareVtbl *)&CAkMatrixSequencer::`vftable';
+  this->vfptr = (IAkTriggerAwareVtbl *)&CAkMatrixSequencer::`vftable;
   v5 = in_pGameObj;
   this->m_uTime = 0i64;
   this->m_UserParams.m_PlayingID = 0;
@@ -615,7 +615,7 @@ void __fastcall CAkMatrixSequencer::~CAkMatrixSequencer(CAkMatrixSequencer *this
   int v4; // ebx
   AkExternalSourceArray *v5; // rcx
 
-  this->vfptr = (IAkTriggerAwareVtbl *)&CAkMatrixSequencer::`vftable';
+  this->vfptr = (IAkTriggerAwareVtbl *)&CAkMatrixSequencer::`vftable;
   v1 = this;
   CAkMatrixSequencer::RemoveAllPendingStingers(this);
   CAkStateMgr::UnregisterTrigger(g_pStateMgr, (IAkTriggerAware *)&v1->vfptr);

@@ -7,11 +7,11 @@ void __fastcall SSInvokedDeferrableMethod::SSInvokedDeferrableMethod(SSInvokedDe
   AList<SSInvokedBase,SSInvokedBase> *v5; // [rsp+28h] [rbp+10h]
   APArrayLogical<SSData,ASymbol> *v6; // [rsp+28h] [rbp+10h]
 
-  this->vfptr = (SSObjectBaseVtbl *)&SSObjectBase::`vftable';
+  this->vfptr = (SSObjectBaseVtbl *)&SSObjectBase::`vftable;
   v3 = (AListNode<SSInvokedBase,SSInvokedBase> *)&this->i_next_p;
   v3->i_prev_p = v3;
   v3->i_next_p = v3;
-  this->vfptr = (SSObjectBaseVtbl *)&SSInvokedBase::`vftable';
+  this->vfptr = (SSObjectBaseVtbl *)&SSInvokedBase::`vftable;
   this->i_scope_p.i_obj_p = scope_p;
   if ( scope_p )
     v4 = scope_p->i_ptr_id;
@@ -25,13 +25,13 @@ void __fastcall SSInvokedDeferrableMethod::SSInvokedDeferrableMethod(SSInvokedDe
   v5->i_sentinel.i_next_p = &v5->i_sentinel;
   this->i_pending_count = 0;
   this->i_ptr_id = ++SSObjectBase::c_ptr_id_prev;
-  this->vfptr = (SSObjectBaseVtbl *)&SSInvokedContextBase::`vftable';
+  this->vfptr = (SSObjectBaseVtbl *)&SSInvokedContextBase::`vftable;
   v6 = &this->i_data;
   v6->i_count = 0;
   v6->i_array_p = 0i64;
   v6->i_size = 0;
-  this->vfptr = (SSObjectBaseVtbl *)&SSInvokedMethod::`vftable';
+  this->vfptr = (SSObjectBaseVtbl *)&SSInvokedMethod::`vftable;
   this->i_method_p = method_p;
-  this->vfptr = (SSObjectBaseVtbl *)&SSInvokedDeferrableMethod::`vftable';
+  this->vfptr = (SSObjectBaseVtbl *)&SSInvokedDeferrableMethod::`vftable;
 }
 

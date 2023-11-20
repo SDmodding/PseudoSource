@@ -154,7 +154,7 @@ void __fastcall UFG::Editor::DAGPath::~DAGPath(UFG::Editor::DAGPath *this)
   if ( v2 )
   {
     v3 = &v2[-1].mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v2,
       0x28ui64,
       v2[-1].mStringHash32,
@@ -167,7 +167,7 @@ void __fastcall UFG::Editor::DAGPath::~DAGPath(UFG::Editor::DAGPath *this)
   if ( v4 )
   {
     v5 = (char *)(&v4[-1].mTypeId + 1);
-    `eh vector destructor iterator'(v4, 4ui64, *(&v4[-1].mTypeId + 1), (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v4, 4ui64, *(&v4[-1].mTypeId + 1), (void (__fastcall *)(void *))_);
     operator delete[](v5);
   }
   v1[1].mPtr = 0i64;
@@ -241,7 +241,7 @@ void __fastcall UFG::Editor::DAGPath::Clear(UFG::Editor::DAGPath *this)
   if ( v2 )
   {
     v3 = v2 - 1;
-    `eh vector destructor iterator'(v2, 4ui64, v2[-1].mUID, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v2, 4ui64, v2[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v3);
   }
   v1->mElements.p = 0i64;
@@ -251,7 +251,7 @@ void __fastcall UFG::Editor::DAGPath::Clear(UFG::Editor::DAGPath *this)
   if ( v4 )
   {
     v5 = &v4[-1].mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v4,
       0x28ui64,
       v4[-1].mStringHash32,

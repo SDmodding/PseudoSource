@@ -25,8 +25,8 @@ void __fastcall UFG::BoatHumanDriverComponent::BoatHumanDriverComponent(UFG::Boa
   v3 = (UFG::qNode<UFG::BoatHumanDriverComponent,UFG::BoatHumanDriverComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BoatHumanDriverComponent::`vftable'{for `UFG::SimComponent'};
-  v2->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::BoatHumanDriverComponent::`vftable'{for `UFG::UpdateInterface'};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BoatHumanDriverComponent::`vftable{for `UFG::SimComponent};
+  v2->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::BoatHumanDriverComponent::`vftable{for `UFG::UpdateInterface};
   v4 = UFG::BoatHumanDriverComponent::s_BoatHumanDriverComponentList.mNode.mPrev;
   UFG::BoatHumanDriverComponent::s_BoatHumanDriverComponentList.mNode.mPrev->mNext = (UFG::qNode<UFG::BoatHumanDriverComponent,UFG::BoatHumanDriverComponent> *)&v2->mPrev;
   v3->mPrev = v4;
@@ -50,8 +50,8 @@ void __fastcall UFG::BoatHumanDriverComponent::~BoatHumanDriverComponent(UFG::Bo
   UFG::qNode<UFG::BoatHumanDriverComponent,UFG::BoatHumanDriverComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BoatHumanDriverComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::BoatHumanDriverComponent::`vftable'{for `UFG::UpdateInterface'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BoatHumanDriverComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::BoatHumanDriverComponent::`vftable{for `UFG::UpdateInterface};
   if ( this == UFG::BoatHumanDriverComponent::s_BoatHumanDriverComponentpCurrentIterator )
     UFG::BoatHumanDriverComponent::s_BoatHumanDriverComponentpCurrentIterator = (UFG::BoatHumanDriverComponent *)&this->mPrev[-25];
   v2 = (UFG::qNode<UFG::BoatHumanDriverComponent,UFG::BoatHumanDriverComponent> *)&this->mPrev;

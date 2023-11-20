@@ -7,7 +7,7 @@ void __fastcall OSuite::IOnlineAuthentication::IOnlineAuthentication(OSuite::IOn
 
   this->m_eState = 0;
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::IOnlineAuthentication::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::IOnlineAuthentication::`vftable;
   this->m_bInitialized = 0;
   OSuite::ZString::ZString(&this->m_stTicket.m_strOwner);
   OSuite::ZString::ZString(&v1->m_stTicket.m_strTicketData);
@@ -33,7 +33,7 @@ void __fastcall OSuite::IOnlineAuthentication::~IOnlineAuthentication(OSuite::IO
   OSuite::IOnlineAuthentication *v1; // rbx
 
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::IOnlineAuthentication::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::IOnlineAuthentication::`vftable;
   OSuite::ZMutex::~ZMutex(&this->m_Mutex);
   OSuite::ZString::~ZString(&v1->m_stTicket.m_strAccessToken);
   OSuite::ZString::~ZString(&v1->m_stTicket.m_strTicketData);

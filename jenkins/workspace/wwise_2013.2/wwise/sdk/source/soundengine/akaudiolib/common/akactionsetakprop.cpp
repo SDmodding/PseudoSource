@@ -226,7 +226,7 @@ CAkActionSetAkProp *__fastcall CAkActionSetAkProp::Create(AkActionType in_eActio
   if ( result )
   {
     CAkActionSetValue::CAkActionSetValue((CAkActionSetValue *)&result->vfptr, v3, v4);
-    v7->vfptr = (CAkIndexableVtbl *)&CAkActionSetAkProp::`vftable';
+    v7->vfptr = (CAkIndexableVtbl *)&CAkActionSetAkProp::`vftable;
     *(_QWORD *)&v7->m_TargetValue.m_base = 0i64;
     v7->m_TargetValue.m_mod.m_max = 0.0;
     v7->m_eValueMeaning = 2;

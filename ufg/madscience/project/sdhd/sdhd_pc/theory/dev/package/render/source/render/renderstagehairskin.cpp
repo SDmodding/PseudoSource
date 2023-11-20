@@ -81,72 +81,72 @@ void __fastcall UFG::RenderStageHairSkin::RenderStageHairSkin(UFG::RenderStageHa
   v2->mHairIntensityFromSun = 2.0;
   v2->mHairIntensityPower = 0.30000001;
   v2->mHairMaxIntensity = 1.0;
-  v4 = `UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result )
+  v4 = `UFG::qGetResourceInventory<Illusion::RasterState>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::RasterState>::`2::result )
   {
     v5 = UFG::qResourceWarehouse::Instance();
     v4 = UFG::qResourceWarehouse::GetInventory(v5, 0x3BC715E0u);
-    `UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result = v4;
+    `UFG::qGetResourceInventory<Illusion::RasterState>::`2::result = v4;
   }
   UFG::qResourceHandle::Init(v3, 0x3BC715E0u, 0x455DCC70u, v4);
-  v6 = `UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result )
+  v6 = `UFG::qGetResourceInventory<Illusion::RasterState>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::RasterState>::`2::result )
   {
     v7 = UFG::qResourceWarehouse::Instance();
     v6 = UFG::qResourceWarehouse::GetInventory(v7, 0x3BC715E0u);
-    `UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result = v6;
+    `UFG::qGetResourceInventory<Illusion::RasterState>::`2::result = v6;
   }
   UFG::qResourceHandle::Init(
     (UFG::qResourceHandle *)&v2->mRasterStateHairBlurHandle.mPrev,
     0x3BC715E0u,
     0x418CAF43u,
     v6);
-  v8 = `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result )
+  v8 = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Shader>::`2::result )
   {
     v9 = UFG::qResourceWarehouse::Instance();
     v8 = UFG::qResourceWarehouse::GetInventory(v9, 0x8B5561A1);
-    `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result = v8;
+    `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = v8;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v2->mSkinSSShaderHandle.mPrev, 0x8B5561A1, 0x9E96F75B, v8);
-  v10 = `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result )
+  v10 = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Shader>::`2::result )
   {
     v11 = UFG::qResourceWarehouse::Instance();
     v10 = UFG::qResourceWarehouse::GetInventory(v11, 0x8B5561A1);
-    `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result = v10;
+    `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = v10;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v2->mSkinSSShaderPass2Handle.mPrev, 0x8B5561A1, 0x93D5D182, v10);
-  v12 = `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result )
+  v12 = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Shader>::`2::result )
   {
     v13 = UFG::qResourceWarehouse::Instance();
     v12 = UFG::qResourceWarehouse::GetInventory(v13, 0x8B5561A1);
-    `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result = v12;
+    `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = v12;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v2->mHairShaderHandle.mPrev, 0x8B5561A1, 0x6147A81Du, v12);
-  v14 = `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result )
+  v14 = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Shader>::`2::result )
   {
     v15 = UFG::qResourceWarehouse::Instance();
     v14 = UFG::qResourceWarehouse::GetInventory(v15, 0x8B5561A1);
-    `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result = v14;
+    `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = v14;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v2->mHairShaderPass2Handle.mPrev, 0x8B5561A1, 0x6C048EC4u, v14);
-  v16 = `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result )
+  v16 = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Shader>::`2::result )
   {
     v17 = UFG::qResourceWarehouse::Instance();
     v16 = UFG::qResourceWarehouse::GetInventory(v17, 0x8B5561A1);
-    `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result = v16;
+    `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = v16;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v2->mHairBlurShaderHandle.mPrev, 0x8B5561A1, 0x8742ECB1, v16);
-  v18 = `UFG::qGetResourceInventory<Illusion::AlphaState>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::AlphaState>'::`2'::result )
+  v18 = `UFG::qGetResourceInventory<Illusion::AlphaState>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::AlphaState>::`2::result )
   {
     v19 = UFG::qResourceWarehouse::Instance();
     v18 = UFG::qResourceWarehouse::GetInventory(v19, 0x12C800F2u);
-    `UFG::qGetResourceInventory<Illusion::AlphaState>'::`2'::result = v18;
+    `UFG::qGetResourceInventory<Illusion::AlphaState>::`2::result = v18;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v2->mHairAlphaStateHandle.mPrev, 0x12C800F2u, 0xC275D439, v18);
 }
@@ -628,7 +628,7 @@ void __fastcall UFG::RenderStageHairSkin::Render(UFG::RenderStageHairSkin *this,
   v7 = this;
   RenderQueueLayer::RenderQueueLayer((RenderQueueLayer *)((char *)&v21 + 40));
   LayerSubmitContext::LayerSubmitContext(&ptr);
-  ptr.vfptr = (Illusion::SubmitContextVtbl *)&UFG::HairSkinSubmitContext::`vftable';
+  ptr.vfptr = (Illusion::SubmitContextVtbl *)&UFG::HairSkinSubmitContext::`vftable;
   v23 = v6;
   v21.mSerializationList = v5;
   ptr.mRenderQueueProvider = &v21;
@@ -714,7 +714,7 @@ void __fastcall UFG::RenderStageHairSkin::Render(UFG::RenderStageHairSkin *this,
   arg.mPrev = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
   arg.mNext = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
   v25 = &ptr.mStateArgs;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     ptr.mStateArgs.mStateArgs,
     0x10ui64,
     128,
@@ -802,17 +802,17 @@ void __fastcall UFG::RenderStageHairSkin::RenderHairBlur(UFG::RenderStageHairSki
   v5 = view;
   v6 = render_context;
   LayerSubmitContext::LayerSubmitContext((LayerSubmitContext *)((char *)&ptr + 40));
-  ptr.vfptr = (Illusion::SubmitContextVtbl *)&UFG::HairBlurSubmitContext::`vftable';
+  ptr.vfptr = (Illusion::SubmitContextVtbl *)&UFG::HairBlurSubmitContext::`vftable;
   v30 = v6;
   v31 = v4;
   v33 = &v32;
   UFG::qResourceHandle::qResourceHandle(&v32);
-  v7 = `UFG::qGetResourceInventory<Illusion::AlphaState>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::AlphaState>'::`2'::result )
+  v7 = `UFG::qGetResourceInventory<Illusion::AlphaState>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::AlphaState>::`2::result )
   {
     v8 = UFG::qResourceWarehouse::Instance();
     v7 = UFG::qResourceWarehouse::GetInventory(v8, 0x12C800F2u);
-    `UFG::qGetResourceInventory<Illusion::AlphaState>'::`2'::result = v7;
+    `UFG::qGetResourceInventory<Illusion::AlphaState>::`2::result = v7;
   }
   UFG::qResourceHandle::Init(&v32, 0x12C800F2u, 0xA3833FDE, v7);
   v9 = Render::View::GetStateValues(v5)->mParamValues[11];
@@ -879,16 +879,16 @@ void __fastcall UFG::RenderStageHairSkin::RenderHairBlur(UFG::RenderStageHairSki
   v25.mNext = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&v25;
   RenderQueueLayer::~RenderQueueLayer(&v28);
   v37 = &v32;
-  v23 = `UFG::qGetResourceInventory<Illusion::AlphaState>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::AlphaState>'::`2'::result )
+  v23 = `UFG::qGetResourceInventory<Illusion::AlphaState>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::AlphaState>::`2::result )
   {
     v24 = UFG::qResourceWarehouse::Instance();
     v23 = UFG::qResourceWarehouse::GetInventory(v24, 0x12C800F2u);
-    `UFG::qGetResourceInventory<Illusion::AlphaState>'::`2'::result = v23;
+    `UFG::qGetResourceInventory<Illusion::AlphaState>::`2::result = v23;
   }
   UFG::qResourceHandle::Close(&v32, v23);
   UFG::qResourceHandle::~qResourceHandle(&v32);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     ptr.mStateArgs.mStateArgs,
     0x10ui64,
     128,

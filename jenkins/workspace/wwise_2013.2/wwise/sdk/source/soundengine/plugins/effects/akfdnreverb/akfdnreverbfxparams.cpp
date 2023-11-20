@@ -6,7 +6,7 @@ AK::IAkPluginParam *__fastcall CreateMatrixReverbFXParams(AK::IAkPluginMemAlloc 
 
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 112ui64);
   if ( result )
-    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkFDNReverbFXParams::`vftable';
+    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkFDNReverbFXParams::`vftable;
   return result;
 }
 
@@ -14,21 +14,21 @@ AK::IAkPluginParam *__fastcall CreateMatrixReverbFXParams(AK::IAkPluginMemAlloc 
 // RVA: 0xAC12B0
 void __fastcall CAkFDNReverbFXParams::CAkFDNReverbFXParams(CAkFDNReverbFXParams *this)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkFDNReverbFXParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkFDNReverbFXParams::`vftable;
 }
 
 // File Line: 28
 // RVA: 0xAC12D0
 void __fastcall CAkFDNReverbFXParams::~CAkFDNReverbFXParams(CAkFDNReverbFXParams *this)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable;
 }
 
 // File Line: 33
 // RVA: 0xAC12F0
 void __fastcall CAkFDNReverbFXParams::CAkFDNReverbFXParams(CAkFDNReverbFXParams *this, CAkFDNReverbFXParams *in_rCopy)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkFDNReverbFXParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkFDNReverbFXParams::`vftable;
   this->RTPC.fReverbTime = in_rCopy->RTPC.fReverbTime;
   this->RTPC.fHFRatio = in_rCopy->RTPC.fHFRatio;
   this->RTPC.fDryLevel = in_rCopy->RTPC.fDryLevel;

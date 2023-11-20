@@ -317,8 +317,8 @@ void __fastcall UFG::ActorAudioComponent::ActorAudioComponent(UFG::ActorAudioCom
   v2 = this;
   UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, pSceneObj->m_NameUID);
   UFG::AudioEntity::AudioEntity((UFG::AudioEntity *)&v2->vfptr);
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HkAudioEntityComponent::`vftable'{for `UFG::SimComponent'};
-  v2->vfptr = (UFG::AudioEntityVtbl *)&UFG::HkAudioEntityComponent::`vftable'{for `UFG::AudioEntity'};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HkAudioEntityComponent::`vftable{for `UFG::SimComponent};
+  v2->vfptr = (UFG::AudioEntityVtbl *)&UFG::HkAudioEntityComponent::`vftable{for `UFG::AudioEntity};
   UFG::SimComponent::AddType(
     (UFG::SimComponent *)&v2->vfptr,
     UFG::HkAudioEntityComponent::_HkAudioEntityComponentTypeUID,
@@ -326,8 +326,8 @@ void __fastcall UFG::ActorAudioComponent::ActorAudioComponent(UFG::ActorAudioCom
   v3 = (UFG::qNode<UFG::ActorAudioComponent,UFG::ActorAudioComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ActorAudioComponent::`vftable'{for `UFG::SimComponent'};
-  v2->vfptr = (UFG::AudioEntityVtbl *)&UFG::ActorAudioComponent::`vftable'{for `UFG::AudioEntity'};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ActorAudioComponent::`vftable{for `UFG::SimComponent};
+  v2->vfptr = (UFG::AudioEntityVtbl *)&UFG::ActorAudioComponent::`vftable{for `UFG::AudioEntity};
   v2->m_controller.m_pEvent = 0i64;
   v2->m_SFXEntity = 0i64;
   v2->m_activeAmbientConversationId = 0;
@@ -409,8 +409,8 @@ void __fastcall UFG::ActorAudioComponent::~ActorAudioComponent(UFG::ActorAudioCo
   UFG::qNode<UFG::ActorAudioComponent,UFG::ActorAudioComponent> *v24; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ActorAudioComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::AudioEntityVtbl *)&UFG::ActorAudioComponent::`vftable'{for `UFG::AudioEntity'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ActorAudioComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::AudioEntityVtbl *)&UFG::ActorAudioComponent::`vftable{for `UFG::AudioEntity};
   UFG::ActorAudioComponent::ClearDataMembers(this);
   v2 = v1->m_SFXEntity;
   if ( v2 )
@@ -493,8 +493,8 @@ void __fastcall UFG::ActorAudioComponent::~ActorAudioComponent(UFG::ActorAudioCo
   v24->mPrev = v23;
   v4->mPrev = v4;
   v1->mNext = (UFG::qNode<UFG::ActorAudioComponent,UFG::ActorAudioComponent> *)&v1->mPrev;
-  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HkAudioEntityComponent::`vftable'{for `UFG::SimComponent'};
-  v1->vfptr = (UFG::AudioEntityVtbl *)&UFG::HkAudioEntityComponent::`vftable'{for `UFG::AudioEntity'};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HkAudioEntityComponent::`vftable{for `UFG::SimComponent};
+  v1->vfptr = (UFG::AudioEntityVtbl *)&UFG::HkAudioEntityComponent::`vftable{for `UFG::AudioEntity};
   UFG::AudioEntity::~AudioEntity((UFG::AudioEntity *)&v1->vfptr);
   UFG::SimComponent::~SimComponent((UFG::SimComponent *)&v1->vfptr);
 }
@@ -1240,7 +1240,7 @@ UFG::qWiseSymbol *__fastcall UFG::ActorAudioComponent::GetVoiceProfile(UFG::Acto
       if ( !(unsigned __int8)UFG::TidoGame::GetVoiceId(this->m_pSimObject, &this->m_voiceProfile) )
       {
         v5 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v4->m_pSimObject->m_Name);
-        UFG::qPrintf("WARNING: Could not assign voice to: '%s'  \n", v5);
+        UFG::qPrintf("WARNING: Could not assign voice to: %s  \n", v5);
       }
       *((_BYTE *)v4 + 553) ^= (*((_BYTE *)v4 + 553) ^ ((UFG::IsFemale(v4->m_pSimObject) == 0) << 6)) & 0x40;
       if ( !(*((_BYTE *)v4 + 553) & 0x40) )
@@ -2746,7 +2746,7 @@ char __fastcall UFG::ActorAudioComponent::PlayPanic(UFG::ActorAudioComponent *th
   UFG::DialogArgList args; // [rsp+28h] [rbp-28h]
 
   v1 = this;
-  args.vfptr = (UFG::DialogArgListVtbl *)&UFG::DialogArgList::`vftable';
+  args.vfptr = (UFG::DialogArgListVtbl *)&UFG::DialogArgList::`vftable;
   UFG::qMemSet(args.m_args, 0, 0x18u);
   args.m_nArgs = 0;
   args.m_uDialogEventId = hashTags;
@@ -2861,9 +2861,9 @@ LABEL_21:
     }
     if ( v12 )
     {
-      v12->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::AudioEventCallbackObject::`vftable';
+      v12->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::AudioEventCallbackObject::`vftable;
       v12->m_next = 0i64;
-      v12->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::SpeechControlCallback::`vftable';
+      v12->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::SpeechControlCallback::`vftable;
     }
     if ( *v10 )
       UFG::AudioEvent::AddCallback(*v10, v12);
@@ -2935,7 +2935,7 @@ char __fastcall UFG::ActorAudioComponent::PlayScreamPain(UFG::ActorAudioComponen
   UFG::DialogArgList args; // [rsp+28h] [rbp-28h]
 
   v1 = this;
-  args.vfptr = (UFG::DialogArgListVtbl *)&UFG::DialogArgList::`vftable';
+  args.vfptr = (UFG::DialogArgListVtbl *)&UFG::DialogArgList::`vftable;
   UFG::qMemSet(args.m_args, 0, 0x18u);
   args.m_nArgs = 0;
   args.m_uDialogEventId = hashTags;
@@ -3050,9 +3050,9 @@ LABEL_21:
     }
     if ( v12 )
     {
-      v12->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::AudioEventCallbackObject::`vftable';
+      v12->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::AudioEventCallbackObject::`vftable;
       v12->m_next = 0i64;
-      v12->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::SpeechControlCallback::`vftable';
+      v12->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::SpeechControlCallback::`vftable;
     }
     if ( *v10 )
       UFG::AudioEvent::AddCallback(*v10, v12);
@@ -3441,9 +3441,9 @@ char __fastcall UFG::ActorAudioComponent::PlaySpeechExternal(UFG::ActorAudioComp
     }
     if ( v10 )
     {
-      v10->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::AudioEventCallbackObject::`vftable';
+      v10->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::AudioEventCallbackObject::`vftable;
       v10->m_next = 0i64;
-      v10->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::SpeechControlCallback::`vftable';
+      v10->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::SpeechControlCallback::`vftable;
     }
     if ( *v9 )
       UFG::AudioEvent::AddCallback(*v9, v10);
@@ -3466,9 +3466,9 @@ char __fastcall UFG::ActorAudioComponent::PlaySpeechExternal(UFG::ActorAudioComp
       }
       if ( v12 )
       {
-        v12->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::AudioEventCallbackObject::`vftable';
+        v12->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::AudioEventCallbackObject::`vftable;
         v12->m_next = 0i64;
-        v12->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::AACSubtitleCallback::`vftable';
+        v12->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::AACSubtitleCallback::`vftable;
       }
       if ( *v9 )
         UFG::AudioEvent::AddCallback(*v9, v12);
@@ -3585,9 +3585,9 @@ LABEL_5:
     }
     if ( v12 )
     {
-      v12->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::AudioEventCallbackObject::`vftable';
+      v12->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::AudioEventCallbackObject::`vftable;
       v12->m_next = 0i64;
-      v12->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::SpeechControlCallback::`vftable';
+      v12->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::SpeechControlCallback::`vftable;
     }
     if ( *v10 )
       UFG::AudioEvent::AddCallback(*v10, v12);
@@ -3598,9 +3598,9 @@ LABEL_5:
                                                "ActorAudioComponent.SubtitleCallback");
       if ( v14 )
       {
-        v14->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::AudioEventCallbackObject::`vftable';
+        v14->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::AudioEventCallbackObject::`vftable;
         v14->m_next = 0i64;
-        v14->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::AACSubtitleCallback::`vftable';
+        v14->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::AACSubtitleCallback::`vftable;
       }
       if ( *v10 )
         UFG::AudioEvent::AddCallback(*v10, v14);
@@ -4167,7 +4167,7 @@ signed __int64 UFG::_dynamic_initializer_for__effect_possessed_bypass__()
 // RVA: 0x15548D0
 __int64 dynamic_initializer_for__UFG::TaggedDialogueStateManager::m_states__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     UFG::TaggedDialogueStateManager::m_states,
     0x10ui64,
     3,

@@ -10,7 +10,7 @@ void __fastcall UFG::OneShot::OneShot(UFG::OneShot *this)
   v2 = (UFG::qNode<UFG::OneShot,UFG::OneShot> *)&v1->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  v1->vfptr = (UFG::AudioEntityVtbl *)&UFG::OneShot::`vftable';
+  v1->vfptr = (UFG::AudioEntityVtbl *)&UFG::OneShot::`vftable;
   v1->m_controller.m_pEvent = 0i64;
   v1->m_pOwnerHandle = 0i64;
   v1->m_eventCount = 0;

@@ -9,7 +9,7 @@ void __fastcall UELNode::~UELNode(UELNode *this)
   char *v5; // rcx
 
   v1 = (ActionNode *)this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&UELNode::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&UELNode::`vftable;
   v2 = this->mParent.mOffset;
   if ( v2 && (UFG::qOffset64<UELGroupNode *> *)((char *)&this->mParent + v2) )
   {
@@ -31,7 +31,7 @@ void __fastcall UELNode::~UELNode(UELNode *this)
         operator delete[](v5);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 55
@@ -53,14 +53,14 @@ void __fastcall UELFragmentNode::UELFragmentNode(UELFragmentNode *this)
   BinString *v2; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
-  this->vfptr = (Expression::IMemberMapVtbl *)&UELNode::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&UELNode::`vftable;
   v2 = &this->mHeader;
   v2->mOffset = 1i64;
   BinString::Set(v2, &customWorldMapCaption);
   v1->mParent.mOffset = 0i64;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&UELFragmentNode::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&UELFragmentNode::`vftable;
   v1->mBody.mOffset = 1i64;
   BinString::Set(&v1->mBody, &customWorldMapCaption);
   v1->mFragmentExpression.mOffset = 0i64;
@@ -77,7 +77,7 @@ void __fastcall UELFragmentNode::~UELFragmentNode(UELFragmentNode *this)
   char *v5; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&UELFragmentNode::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&UELFragmentNode::`vftable;
   v2 = this->mFragmentExpression.mOffset;
   if ( v2 && (UFG::qOffset64<UEL::FragmentExpression *> *)((char *)&this->mFragmentExpression + v2) )
   {
@@ -144,14 +144,14 @@ void __fastcall UELGroupNode::UELGroupNode(UELGroupNode *this)
   BinString *v2; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
-  this->vfptr = (Expression::IMemberMapVtbl *)&UELNode::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&UELNode::`vftable;
   v2 = &this->mHeader;
   v2->mOffset = 1i64;
   BinString::Set(v2, &customWorldMapCaption);
   v1->mParent.mOffset = 0i64;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&UELGroupNode::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&UELGroupNode::`vftable;
   v1->mChildren.mCount = 0;
   v1->mChildren.mData.mOffset = 0i64;
 }

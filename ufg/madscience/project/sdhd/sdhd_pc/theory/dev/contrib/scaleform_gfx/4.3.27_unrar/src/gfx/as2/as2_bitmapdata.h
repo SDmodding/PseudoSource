@@ -34,8 +34,8 @@ void __fastcall Scaleform::GFx::AS2::BitmapData::~BitmapData(Scaleform::GFx::AS2
   Scaleform::GFx::Resource *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::BitmapData::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  this->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::BitmapData::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+  this->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::BitmapData::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  this->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::BitmapData::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   v2 = this->pMovieDef.pObject;
   if ( v2 )
     Scaleform::GFx::Resource::Release((Scaleform::GFx::Resource *)&v2->vfptr);

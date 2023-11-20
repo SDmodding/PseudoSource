@@ -4,13 +4,13 @@ void __fastcall Scaleform::Render::RBGenericImpl::RenderBufferManager::RenderBuf
 {
   Scaleform::List<Scaleform::Render::RBGenericImpl::CacheData,Scaleform::Render::RBGenericImpl::CacheData> *v4; // rcx
 
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,72>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::RenderBufferManager,72>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::RenderBufferManager::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::RBGenericImpl::RenderBufferManager::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,72>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::RenderBufferManager,72>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::RenderBufferManager::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::RBGenericImpl::RenderBufferManager::`vftable;
   this->pTextureManager.pObject = 0i64;
   this->CtorReuseLimit = memReuseLimit;
   this->ReuseLimit = 0i64;
@@ -45,7 +45,7 @@ void __fastcall Scaleform::Render::RBGenericImpl::RenderBufferManager::~RenderBu
   Scaleform::Render::TextureManager *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::RBGenericImpl::RenderBufferManager::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::RBGenericImpl::RenderBufferManager::`vftable;
   ((void (__cdecl *)(Scaleform::Render::RBGenericImpl::RenderBufferManager *))this->vfptr[4].__vecDelDtor)(this);
   v1->DefImageFormat = 0;
   v2 = v1->pTextureManager.pObject;
@@ -55,8 +55,8 @@ void __fastcall Scaleform::Render::RBGenericImpl::RenderBufferManager::~RenderBu
   v3 = v1->pTextureManager.pObject;
   if ( v3 && !_InterlockedDecrement(&v3->RefCount) && v3 )
     v3->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v3->vfptr, 1u);
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::RenderBufferManager::`vftable';
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::RenderBufferManager::`vftable;
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
 }
 
 // File Line: 99
@@ -282,17 +282,17 @@ Scaleform::Render::RBGenericImpl::RenderTarget *__fastcall Scaleform::Render::RB
   v19 = v9;
   if ( v9 )
   {
-    *(_QWORD *)v9 = &Scaleform::RefCountImplCore::`vftable';
+    *(_QWORD *)v9 = &Scaleform::RefCountImplCore::`vftable;
     *(_DWORD *)(v9 + 8) = 1;
-    *(_QWORD *)v9 = &Scaleform::RefCountVImpl::`vftable';
-    *(_QWORD *)v9 = &Scaleform::Render::RenderBuffer::`vftable';
+    *(_QWORD *)v9 = &Scaleform::RefCountVImpl::`vftable;
+    *(_QWORD *)v9 = &Scaleform::Render::RenderBuffer::`vftable;
     *(_DWORD *)(v9 + 16) = v6;
     *(_QWORD *)(v9 + 24) = v8;
     *(_QWORD *)(v9 + 32) = 0i64;
     v10 = v7->Height;
     *(_DWORD *)(v9 + 40) = v7->Width;
     *(_DWORD *)(v9 + 44) = v10;
-    *(_QWORD *)v9 = &Scaleform::Render::RenderTarget::`vftable';
+    *(_QWORD *)v9 = &Scaleform::Render::RenderTarget::`vftable;
     v11 = v7->Height;
     v12 = v7->Width;
     *(_QWORD *)(v9 + 48) = 0i64;
@@ -303,7 +303,7 @@ Scaleform::Render::RBGenericImpl::RenderTarget *__fastcall Scaleform::Render::RB
     *(_QWORD *)(v9 + 80) = v9;
     *(_QWORD *)(v9 + 88) = 0i64;
     *(_QWORD *)(v9 + 96) = 0i64;
-    *(_QWORD *)v9 = &Scaleform::Render::RBGenericImpl::RenderTarget::`vftable';
+    *(_QWORD *)v9 = &Scaleform::Render::RBGenericImpl::RenderTarget::`vftable;
     *(_QWORD *)(v9 + 104) = 0i64;
     *(_DWORD *)(v9 + 112) = 0;
   }
@@ -583,23 +583,23 @@ Scaleform::Render::RBGenericImpl::DepthStencilBuffer *__fastcall Scaleform::Rend
         v33 = v22;
         if ( v22 )
         {
-          *(_QWORD *)v22 = &Scaleform::RefCountImplCore::`vftable';
+          *(_QWORD *)v22 = &Scaleform::RefCountImplCore::`vftable;
           v22[2] = 1;
-          *(_QWORD *)v22 = &Scaleform::RefCountVImpl::`vftable';
-          *(_QWORD *)v22 = &Scaleform::Render::RenderBuffer::`vftable';
+          *(_QWORD *)v22 = &Scaleform::RefCountVImpl::`vftable;
+          *(_QWORD *)v22 = &Scaleform::Render::RenderBuffer::`vftable;
           v22[4] = 6 - (v3 != 0);
           *((_QWORD *)v22 + 3) = v5;
           *((_QWORD *)v22 + 4) = 0i64;
           v23 = sizea.Height;
           v22[10] = sizea.Width;
           v22[11] = v23;
-          *(_QWORD *)v22 = &Scaleform::Render::DepthStencilBuffer::`vftable';
+          *(_QWORD *)v22 = &Scaleform::Render::DepthStencilBuffer::`vftable;
           *((_QWORD *)v22 + 6) = 0i64;
           *((_QWORD *)v22 + 7) = 0i64;
           *((_QWORD *)v22 + 8) = v22;
           *((_QWORD *)v22 + 9) = 0i64;
           *((_QWORD *)v22 + 10) = 0i64;
-          *(_QWORD *)v22 = &Scaleform::Render::RBGenericImpl::DepthStencilBuffer::`vftable';
+          *(_QWORD *)v22 = &Scaleform::Render::RBGenericImpl::DepthStencilBuffer::`vftable;
           *((_QWORD *)v22 + 11) = 0i64;
           v7 = (Scaleform::Render::RBGenericImpl::DepthStencilBuffer *)v22;
         }

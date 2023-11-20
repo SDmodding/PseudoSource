@@ -10,7 +10,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::StateMachineDefini
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::StateMachineDefinition,UFG::qReflectObject>::sInventory.vfptr,
     "UFG::StateMachineDefinition",
     v0);
-  UFG::qReflectObjectType<UFG::StateMachineDefinition,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::StateMachineDefinition>::`vftable';
+  UFG::qReflectObjectType<UFG::StateMachineDefinition,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::StateMachineDefinition>::`vftable;
   UFG::qReflectInventory<UFG::StateMachineDefinition>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::StateMachineDefinition,UFG::qReflectObject>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(

@@ -11,9 +11,9 @@ void __fastcall hkpConvexPieceMeshShape::hkpConvexPieceMeshShape(hkpConvexPieceM
   v6 = this;
   hkpShapeCollection::hkpShapeCollection((hkpShapeCollection *)&this->vfptr, COLLECTION, COLLECTION_USER);
   v6->m_radius = radius;
-  v6->vfptr = (hkBaseObjectVtbl *)&hkpConvexPieceMeshShape::`vftable'{for `hkpShape'};
+  v6->vfptr = (hkBaseObjectVtbl *)&hkpConvexPieceMeshShape::`vftable{for `hkpShape};
   v6->m_convexPieceStream = v5;
-  v6->vfptr = (hkpShapeContainerVtbl *)&hkpConvexPieceMeshShape::`vftable'{for `hkpShapeContainer'};
+  v6->vfptr = (hkpShapeContainerVtbl *)&hkpConvexPieceMeshShape::`vftable{for `hkpShapeContainer};
   v6->m_displayMesh = v4;
   hkReferencedObject::addReference((hkReferencedObject *)&v4->vfptr);
   hkReferencedObject::addReference((hkReferencedObject *)&v6->m_convexPieceStream->vfptr);
@@ -29,8 +29,8 @@ void __fastcall hkpConvexPieceMeshShape::hkpConvexPieceMeshShape(hkpConvexPieceM
   v3 = flag.m_finishing;
   v2 = this;
   hkpShapeCollection::hkpShapeCollection((hkpShapeCollection *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpConvexPieceMeshShape::`vftable'{for `hkpShape'};
-  v2->vfptr = (hkpShapeContainerVtbl *)&hkpConvexPieceMeshShape::`vftable'{for `hkpShapeContainer'};
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpConvexPieceMeshShape::`vftable{for `hkpShape};
+  v2->vfptr = (hkpShapeContainerVtbl *)&hkpConvexPieceMeshShape::`vftable{for `hkpShapeContainer};
   if ( v3 )
     v2->m_type.m_storage = 18;
 }
@@ -42,12 +42,12 @@ void __fastcall hkpConvexPieceMeshShape::~hkpConvexPieceMeshShape(hkpConvexPiece
   hkpConvexPieceMeshShape *v1; // rbx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpConvexPieceMeshShape::`vftable'{for `hkpShape'};
-  this->vfptr = (hkpShapeContainerVtbl *)&hkpConvexPieceMeshShape::`vftable'{for `hkpShapeContainer'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkpConvexPieceMeshShape::`vftable{for `hkpShape};
+  this->vfptr = (hkpShapeContainerVtbl *)&hkpConvexPieceMeshShape::`vftable{for `hkpShapeContainer};
   hkReferencedObject::removeReference((hkReferencedObject *)&this->m_displayMesh->vfptr);
   hkReferencedObject::removeReference((hkReferencedObject *)&v1->m_convexPieceStream->vfptr);
-  v1->vfptr = (hkpShapeContainerVtbl *)&hkpShapeContainer::`vftable';
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkpShapeContainerVtbl *)&hkpShapeContainer::`vftable;
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 73

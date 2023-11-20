@@ -17,7 +17,7 @@ void __fastcall UFG::UIGfxImageCreator::UIGfxImageCreator(UFG::UIGfxImageCreator
 
   v2 = this;
   Scaleform::GFx::ImageCreator::ImageCreator((Scaleform::GFx::ImageCreator *)&this->vfptr, textureManager);
-  v2->vfptr = (Scaleform::RefCountImplCoreVtbl *)&UFG::UIGfxImageCreator::`vftable';
+  v2->vfptr = (Scaleform::RefCountImplCoreVtbl *)&UFG::UIGfxImageCreator::`vftable;
 }
 
 // File Line: 33
@@ -109,12 +109,12 @@ Scaleform::Render::Image *__fastcall UFG::UIGfxImageCreator::LoadIllusionTexture
   v3 = this;
   v4 = UFG::qStringHashUpper32(textureName, 0xFFFFFFFF);
   UFG::qResourceHandle::qResourceHandle(&v26);
-  v5 = `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result )
+  v5 = `UFG::qGetResourceInventory<Illusion::Texture>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Texture>::`2::result )
   {
     v6 = UFG::qResourceWarehouse::Instance();
     v5 = UFG::qResourceWarehouse::GetInventory(v6, 0x8B43FABF);
-    `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result = v5;
+    `UFG::qGetResourceInventory<Illusion::Texture>::`2::result = v5;
   }
   UFG::qResourceHandle::Init(&v26, 0x8B43FABF, v4, v5);
   v7 = v26.mData;
@@ -122,12 +122,12 @@ Scaleform::Render::Image *__fastcall UFG::UIGfxImageCreator::LoadIllusionTexture
   if ( !v26.mData || (v9 = DEFAULT_TEXTURE, v26.mData->mNode.mUID == DEFAULT_TEXTURE) )
   {
     v10 = UFG::qToUInt32(v2, 0);
-    v11 = `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result )
+    v11 = `UFG::qGetResourceInventory<Illusion::Texture>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::Texture>::`2::result )
     {
       v12 = UFG::qResourceWarehouse::Instance();
       v11 = UFG::qResourceWarehouse::GetInventory(v12, 0x8B43FABF);
-      `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result = v11;
+      `UFG::qGetResourceInventory<Illusion::Texture>::`2::result = v11;
     }
     UFG::qResourceHandle::Init(&v26, 0x8B43FABF, v10, v11);
     v8 = (Illusion::Texture *)v26.mData;
@@ -148,20 +148,20 @@ Scaleform::Render::Image *__fastcall UFG::UIGfxImageCreator::LoadIllusionTexture
     v28 = v17;
     if ( v17 )
     {
-      *(_QWORD *)v17 = &Scaleform::RefCountImplCore::`vftable';
+      *(_QWORD *)v17 = &Scaleform::RefCountImplCore::`vftable;
       *(_DWORD *)(v17 + 8) = 1;
-      *(_QWORD *)v17 = &Scaleform::RefCountVImpl::`vftable';
-      *(_QWORD *)v17 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountVImpl,3>::`vftable';
-      *(_QWORD *)v17 = &Scaleform::RefCountBaseV<Scaleform::Render::Image,3>::`vftable';
-      *(_QWORD *)v17 = &Scaleform::Render::ImageBase::`vftable';
-      *(_QWORD *)v17 = &Scaleform::Render::Image::`vftable';
+      *(_QWORD *)v17 = &Scaleform::RefCountVImpl::`vftable;
+      *(_QWORD *)v17 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountVImpl,3>::`vftable;
+      *(_QWORD *)v17 = &Scaleform::RefCountBaseV<Scaleform::Render::Image,3>::`vftable;
+      *(_QWORD *)v17 = &Scaleform::Render::ImageBase::`vftable;
+      *(_QWORD *)v17 = &Scaleform::Render::Image::`vftable;
       v13 = 0i64;
       *(_QWORD *)(v17 + 16) = 0i64;
       v18 = *(_QWORD *)(v17 + 16);
       v19 = *(_QWORD *)(v17 + 16);
       *(_QWORD *)(v17 + 24) = 0i64;
       *(_QWORD *)(v17 + 32) = 0i64;
-      *(_QWORD *)v17 = &Scaleform::Render::TextureImage::`vftable';
+      *(_QWORD *)v17 = &Scaleform::Render::TextureImage::`vftable;
       *(_DWORD *)(v17 + 40) = 1;
       *(_DWORD *)(v17 + 44) = v15;
       *(_DWORD *)(v17 + 48) = v14;
@@ -187,7 +187,7 @@ Scaleform::Render::Image *__fastcall UFG::UIGfxImageCreator::LoadIllusionTexture
     if ( v21 )
     {
       Scaleform::Render::Image::Image(v21, v20, 0i64);
-      v22->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::TextureImage::`vftable';
+      v22->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::TextureImage::`vftable;
       LODWORD(v22[1].vfptr) = 1;
       HIDWORD(v22[1].vfptr) = v15;
       v22[1].RefCount = v14;
@@ -204,12 +204,12 @@ Scaleform::Render::Image *__fastcall UFG::UIGfxImageCreator::LoadIllusionTexture
     UFG::qPrintf("UI Warning: Could not find texture %s!\n", v2);
     v13 = 0i64;
   }
-  v23 = `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result )
+  v23 = `UFG::qGetResourceInventory<Illusion::Texture>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Texture>::`2::result )
   {
     v24 = UFG::qResourceWarehouse::Instance();
     v23 = UFG::qResourceWarehouse::GetInventory(v24, 0x8B43FABF);
-    `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result = v23;
+    `UFG::qGetResourceInventory<Illusion::Texture>::`2::result = v23;
   }
   UFG::qResourceHandle::Close(&v26, v23);
   UFG::qResourceHandle::~qResourceHandle(&v26);

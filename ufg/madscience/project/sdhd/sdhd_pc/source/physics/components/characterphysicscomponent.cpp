@@ -29,8 +29,8 @@ void __fastcall UFG::CharacterCollisionListener::CharacterCollisionListener(UFG:
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v4; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v5; // rax
 
-  this->vfptr = (hkpContactListenerVtbl *)&hkpContactListener::`vftable';
-  this->vfptr = (hkpContactListenerVtbl *)&UFG::CharacterCollisionListener::`vftable';
+  this->vfptr = (hkpContactListenerVtbl *)&hkpContactListener::`vftable;
+  this->vfptr = (hkpContactListenerVtbl *)&UFG::CharacterCollisionListener::`vftable;
   v2 = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&this->mCharacterPhysicsComponent.mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
@@ -206,7 +206,7 @@ void __fastcall UFG::CharacterPhysicsComponent::CharacterPhysicsComponent(UFG::C
   UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name_uid);
   v6 = (UFG::BasePhysicsObject *)&v5->vfptr;
   v45 = (hkpListShape *)v6;
-  v6->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::BasePhysicsObject::`vftable';
+  v6->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::BasePhysicsObject::`vftable;
   v43 = &v5->mUserData;
   v5->mUserData.isBoat = 0;
   v7 = &v5->mUserData.simComponent;
@@ -218,8 +218,8 @@ void __fastcall UFG::CharacterPhysicsComponent::CharacterPhysicsComponent(UFG::C
   v9 = (UFG::qNode<UFG::CharacterPhysicsComponent,UFG::CharacterPhysicsComponent> *)&v5->mPrev;
   v9->mPrev = v9;
   v9->mNext = v9;
-  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CharacterPhysicsComponent::`vftable'{for `UFG::SimComponent'};
-  v6->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::CharacterPhysicsComponent::`vftable'{for `UFG::BasePhysicsObject'};
+  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CharacterPhysicsComponent::`vftable{for `UFG::SimComponent};
+  v6->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::CharacterPhysicsComponent::`vftable{for `UFG::BasePhysicsObject};
   UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::RebindingComponentHandle<UFG::RagdollComponent,0>(&v5->mRagdollComponent);
   v10 = &v5->mWaterTracker;
   v10->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v10->mPrev;
@@ -325,7 +325,7 @@ void __fastcall UFG::CharacterPhysicsComponent::CharacterPhysicsComponent(UFG::C
     ++v20;
   }
   while ( (signed int)v19 < 14 );
-  info.vfptr = (hkBaseObjectVtbl *)&hkpCharacterRigidBodyCinfo::`vftable';
+  info.vfptr = (hkBaseObjectVtbl *)&hkpCharacterRigidBodyCinfo::`vftable;
   *(float *)&info.m_memSizeAndFlags = FLOAT_100_0;
   *(_DWORD *)(&info.m_referenceCount + 1) = 0;
   *(&info.m_collisionFilterInfo + 1) = 0xBDCCCCCD;
@@ -455,8 +455,8 @@ void __fastcall UFG::CharacterPhysicsComponent::~CharacterPhysicsComponent(UFG::
   UFG::qNode<UFG::CharacterPhysicsComponent,UFG::CharacterPhysicsComponent> *v21; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CharacterPhysicsComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::CharacterPhysicsComponent::`vftable'{for `UFG::BasePhysicsObject'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CharacterPhysicsComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::CharacterPhysicsComponent::`vftable{for `UFG::BasePhysicsObject};
   if ( this == UFG::CharacterPhysicsComponent::s_CharacterPhysicsComponentpCurrentIterator )
     UFG::CharacterPhysicsComponent::s_CharacterPhysicsComponentpCurrentIterator = (UFG::CharacterPhysicsComponent *)&this->mPrev[-7].mNext;
   v2 = (UFG::qNode<UFG::CharacterPhysicsComponent,UFG::CharacterPhysicsComponent> *)&this->mPrev;
@@ -2188,7 +2188,7 @@ void __fastcall UFG::CharacterPhysicsComponent::MagicCurbBullShitHack(UFG::Chara
     *(hkVector4f *)((char *)&direction + 8) = (hkVector4f)_xmm;
     hkVector4f::setRotatedDir(&rayEnd, &quat, (hkVector4f *)((char *)&direction + 8));
     v4 = FLOAT_0_1;
-    `eh vector constructor iterator'(ptr, 0xE0ui64, 10, (void (__fastcall *)(void *))UFG::RayCastData::RayCastData);
+    `eh vector constructor iterator(ptr, 0xE0ui64, 10, (void (__fastcall *)(void *))UFG::RayCastData::RayCastData);
     v5 = &v57;
     v6 = (UFG::RayCastData *)ptr;
     v7 = 10i64;
@@ -2375,7 +2375,7 @@ LABEL_50:
     if ( v10 )
       operator delete[](v10);
 LABEL_55:
-    `eh vector destructor iterator'(ptr, 0xE0ui64, 10, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(ptr, 0xE0ui64, 10, (void (__fastcall *)(void *))_);
   }
 }
 
@@ -2782,7 +2782,7 @@ void UFG::CharacterPhysicsComponentManager::Shutdown(void)
     if ( v1 )
     {
       v2 = &v1[-1].shape;
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         v1,
         0x70ui64,
         (int)v1[-1].shape,
@@ -2923,7 +2923,7 @@ LABEL_10:
     v64 = &geometryOut;
     *(_DWORD *)&geometryOut.m_memSizeAndFlags = 0x1FFFF;
     v12 = 1;
-    geometryOut.vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable';
+    geometryOut.vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable;
     geometryOut.m_vertices.m_data = 0i64;
     geometryOut.m_vertices.m_size = 0;
     geometryOut.m_vertices.m_capacityAndFlags = 2147483648;

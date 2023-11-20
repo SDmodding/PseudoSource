@@ -31,7 +31,7 @@ hkClass *__fastcall hkpBreakableBody::Controller::staticClass()
 void __fastcall finishLoadedObjecthkpBreakableBodyController(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpBreakableBody::Controller::`vftable';
+    *(_QWORD *)p = &hkpBreakableBody::Controller::`vftable;
 }
 
 // File Line: 92
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkpBreakableBodyController(void *p)
 // RVA: 0xD4FF70
 void **__fastcall getVtablehkpBreakableBodyController()
 {
-  return &hkpBreakableBody::Controller::`vftable';
+  return &hkpBreakableBody::Controller::`vftable;
 }
 
 // File Line: 118

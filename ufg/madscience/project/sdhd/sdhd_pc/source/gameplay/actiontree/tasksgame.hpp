@@ -13,7 +13,7 @@ void __fastcall ParkourSyncPositionTask::~ParkourSyncPositionTask(ParkourSyncPos
   UFG::qNode<ITask,ITask> *v9; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&ParkourSyncPositionTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ParkourSyncPositionTask::`vftable;
   v2 = &this->mParkourSimObject;
   if ( this->mParkourSimObject.m_pPointer )
   {
@@ -31,7 +31,7 @@ void __fastcall ParkourSyncPositionTask::~ParkourSyncPositionTask(ParkourSyncPos
   v6->mPrev = v5;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v8 = v1->mPrev;
   v9 = v1->mNext;
@@ -56,7 +56,7 @@ void __fastcall ParkourConstrainTask::~ParkourConstrainTask(ParkourConstrainTask
   UFG::qNode<ITask,ITask> *v9; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&ParkourConstrainTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ParkourConstrainTask::`vftable;
   v2 = &this->mParkourSimObject;
   if ( this->mParkourSimObject.m_pPointer )
   {
@@ -74,7 +74,7 @@ void __fastcall ParkourConstrainTask::~ParkourConstrainTask(ParkourConstrainTask
   v6->mPrev = v5;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v8 = v1->mPrev;
   v9 = v1->mNext;
@@ -99,7 +99,7 @@ void __fastcall AttackRightsTask::~AttackRightsTask(AttackRightsTask *this)
   UFG::qNode<ITask,ITask> *v9; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&AttackRightsTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&AttackRightsTask::`vftable;
   v2 = &this->mAttackRightsComponent;
   if ( this->mAttackRightsComponent.m_pPointer )
   {
@@ -117,7 +117,7 @@ void __fastcall AttackRightsTask::~AttackRightsTask(AttackRightsTask *this)
   v6->mPrev = v5;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v8 = v1->mPrev;
   v9 = v1->mNext;
@@ -142,7 +142,7 @@ void __fastcall ReticleSizeOverrideTask::~ReticleSizeOverrideTask(ReticleSizeOve
   UFG::qNode<ITask,ITask> *v9; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&ReticleSizeOverrideTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ReticleSizeOverrideTask::`vftable;
   v2 = &this->m_AimingPlayerComponent;
   if ( this->m_AimingPlayerComponent.m_pPointer )
   {
@@ -160,7 +160,7 @@ void __fastcall ReticleSizeOverrideTask::~ReticleSizeOverrideTask(ReticleSizeOve
   v6->mPrev = v5;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v8 = v1->mPrev;
   v9 = v1->mNext;
@@ -185,7 +185,7 @@ void __fastcall SetStateFlagTask::~SetStateFlagTask(SetStateFlagTask *this)
   UFG::qNode<ITask,ITask> *v9; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&SetStateFlagTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&SetStateFlagTask::`vftable;
   v2 = &this->m_pSOCPC;
   if ( this->m_pSOCPC.m_pPointer )
   {
@@ -203,7 +203,7 @@ void __fastcall SetStateFlagTask::~SetStateFlagTask(SetStateFlagTask *this)
   v6->mPrev = v5;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v8 = v1->mPrev;
   v9 = v1->mNext;

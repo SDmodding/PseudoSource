@@ -32,14 +32,14 @@ void __fastcall UEL::FragmentExpression::~FragmentExpression(UEL::FragmentExpres
   _QWORD *v6; // rcx
 
   v1 = this;
-  this->vfptr = (UEL::ExpressionVtbl *)&UEL::FragmentExpression::`vftable';
+  this->vfptr = (UEL::ExpressionVtbl *)&UEL::FragmentExpression::`vftable;
   v2 = this->mExpression.mOffset;
   if ( v2 )
   {
     v3 = (__int64 *)((char *)&this->mExpression.mOffset + v2);
     if ( v3 )
     {
-      *v3 = &UEL::Expression::`vftable';
+      *v3 = &UEL::Expression::`vftable;
       operator delete[](v3);
     }
   }
@@ -55,14 +55,14 @@ void __fastcall UEL::FragmentExpression::~FragmentExpression(UEL::FragmentExpres
         v6 = 0i64;
       if ( v6 )
       {
-        *v6 = &UEL::Expression::`vftable';
+        *v6 = &UEL::Expression::`vftable;
         operator delete[](v6);
       }
       ++v4;
     }
     while ( v4 < v1->mNumArguments );
   }
-  v1->vfptr = (UEL::ExpressionVtbl *)&UEL::Expression::`vftable';
+  v1->vfptr = (UEL::ExpressionVtbl *)&UEL::Expression::`vftable;
 }
 
 // File Line: 38
@@ -140,7 +140,7 @@ bool __fastcall UEL::FragmentExpression::Resolve(UEL::FragmentExpression *this, 
   if ( UEL::ArgumentUsageExpression::msActiveResolveArguments.p )
   {
     v16 = &UEL::ArgumentUsageExpression::msActiveResolveArguments.p[-1].expr;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       UEL::ArgumentUsageExpression::msActiveResolveArguments.p,
       0x10ui64,
       (int)UEL::ArgumentUsageExpression::msActiveResolveArguments.p[-1].expr,
@@ -191,12 +191,12 @@ void __fastcall UEL::FragmentInvocationExpression::FragmentInvocationExpression(
   v4 = args;
   v5 = numArgs;
   v6 = this;
-  this->vfptr = (UEL::ExpressionVtbl *)&UEL::Expression::`vftable';
+  this->vfptr = (UEL::ExpressionVtbl *)&UEL::Expression::`vftable;
   this->mType.mValue = 7;
   this->mValueType.mBaseType.mValue = 0;
   this->mValueType.mDetailedType = UFG::gNullQSymbol;
   *(_DWORD *)&this->mResolved = 0;
-  this->vfptr = (UEL::ExpressionVtbl *)&UEL::FragmentInvocationExpression::`vftable';
+  this->vfptr = (UEL::ExpressionVtbl *)&UEL::FragmentInvocationExpression::`vftable;
   this->mFragmentTableIndex = -1;
   UFG::qSymbol::create_from_string(&this->mName, name);
   v6->mNumArguments = v5;
@@ -374,7 +374,7 @@ UEL::Value *__fastcall UEL::FragmentInvocationExpression::Eval(UEL::FragmentInvo
   if ( v21.p )
   {
     v19 = &v21.p[-1].type.mDetailedType;
-    `eh vector destructor iterator'(v21.p, 0x20ui64, v21.p[-1].type.mDetailedType.mUID, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v21.p, 0x20ui64, v21.p[-1].type.mDetailedType.mUID, (void (__fastcall *)(void *))_);
     operator delete[](v19);
   }
   return v6;

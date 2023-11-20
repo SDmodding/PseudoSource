@@ -5,8 +5,8 @@ void __fastcall UFG::StateComponentI<UFG::SimComponent>::~StateComponentI<UFG::S
   UFG::StateComponentI<UFG::SimComponent> *v1; // rbx
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::StateInterfaceVtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable'{for `UFG::StateInterface'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::StateInterfaceVtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable{for `UFG::StateInterface};
   if ( (LOBYTE(this->m_Flags) >> 2) & 1 )
   {
     this->m_Flags |= 2u;

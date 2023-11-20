@@ -6,7 +6,7 @@ AK::IAkPluginParam *__fastcall CreateGainFXParams(AK::IAkPluginMemAlloc *in_pAll
 
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 16ui64);
   if ( result )
-    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkGainFXParams::`vftable';
+    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkGainFXParams::`vftable;
   return result;
 }
 
@@ -14,21 +14,21 @@ AK::IAkPluginParam *__fastcall CreateGainFXParams(AK::IAkPluginMemAlloc *in_pAll
 // RVA: 0xAF6320
 void __fastcall CAkGainFXParams::CAkGainFXParams(CAkGainFXParams *this)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkGainFXParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkGainFXParams::`vftable;
 }
 
 // File Line: 29
 // RVA: 0xAF6340
 void __fastcall CAkGainFXParams::~CAkGainFXParams(CAkGainFXParams *this)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable;
 }
 
 // File Line: 34
 // RVA: 0xAF6360
 void __fastcall CAkGainFXParams::CAkGainFXParams(CAkGainFXParams *this, CAkGainFXParams *in_rCopy)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkGainFXParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkGainFXParams::`vftable;
   this->m_Params = in_rCopy->m_Params;
 }
 
@@ -43,7 +43,7 @@ AK::IAkPluginParam *__fastcall CAkGainFXParams::Clone(CAkGainFXParams *this, AK:
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 16ui64);
   if ( result )
   {
-    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkGainFXParams::`vftable';
+    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkGainFXParams::`vftable;
     result[1].vfptr = (AK::IAkRTPCSubscriberVtbl *)v2->m_Params;
   }
   return result;

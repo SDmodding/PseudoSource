@@ -7,8 +7,8 @@ void __fastcall POIBehaviourActiveTrack::~POIBehaviourActiveTrack(POIBehaviourAc
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&POIBehaviourActiveTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&POIBehaviourActiveTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -19,7 +19,7 @@ void __fastcall POIBehaviourActiveTrack::~POIBehaviourActiveTrack(POIBehaviourAc
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 31
@@ -38,8 +38,8 @@ void __fastcall POIManagementTrack::~POIManagementTrack(POIManagementTrack *this
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&POIManagementTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&POIManagementTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -50,7 +50,7 @@ void __fastcall POIManagementTrack::~POIManagementTrack(POIManagementTrack *this
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 42
@@ -69,8 +69,8 @@ void __fastcall POIDisableSelfTrack::~POIDisableSelfTrack(POIDisableSelfTrack *t
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&POIDisableSelfTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&POIDisableSelfTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -81,7 +81,7 @@ void __fastcall POIDisableSelfTrack::~POIDisableSelfTrack(POIDisableSelfTrack *t
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 54
@@ -101,7 +101,7 @@ void __fastcall POIEnableChildTrack::~POIEnableChildTrack(POIEnableChildTrack *t
   char *v4; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&POIEnableChildTrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&POIEnableChildTrack::`vftable;
   if ( !(~LOBYTE(this->m_ChildName.mOffset) & 1) )
   {
     if ( this->m_ChildName.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
@@ -111,7 +111,7 @@ void __fastcall POIEnableChildTrack::~POIEnableChildTrack(POIEnableChildTrack *t
         operator delete[](v2);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v3 = &v1->mMasterRate;
   if ( !(~LOBYTE(v1->mMasterRate.text.mOffset) & 1) )
   {
@@ -122,7 +122,7 @@ void __fastcall POIEnableChildTrack::~POIEnableChildTrack(POIEnableChildTrack *t
         operator delete[](v4);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 76

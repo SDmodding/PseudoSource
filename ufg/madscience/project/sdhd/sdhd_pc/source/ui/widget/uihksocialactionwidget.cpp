@@ -598,7 +598,7 @@ LABEL_151:
           default:
             break;
         }
-        `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+        `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
         v28 = (__m128)LODWORD(v5->mChargeGameTimer);
         v28.m128_f32[0] = (float)(v28.m128_f32[0] / v27) * 100.0;
         v29 = (signed int)v28.m128_f32[0];
@@ -616,7 +616,7 @@ LABEL_151:
         v54.mMagic = 5;
         *(double *)&value.DataAux = v28.m128_f32[0];
         Scaleform::GFx::Movie::Invoke(v23, "ChargeGame_SetCharge", 0i64, (Scaleform::GFx::Value *)&ptr, 1u);
-        `eh vector destructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+        `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
       }
       v30 = UFG::ActionDef_UIBackReleased.mDataPerController[v25];
       if ( !v30 || !v30->mActionTrue )
@@ -819,7 +819,7 @@ LABEL_118:
         }
         goto LABEL_151;
       }
-      `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       v31 = v5->mChargeStatus;
       if ( v31 < 74.0 || v31 > 88.0 )
       {
@@ -857,7 +857,7 @@ LABEL_118:
       if ( v5->mActionComponent->mMinigameTimeWarpFactor >= 1.0 )
       {
 LABEL_94:
-        `eh vector destructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+        `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
         goto LABEL_95;
       }
       if ( UFG::Metrics::msInstance.mSimTimeScaleMax <= 1.0 )
@@ -918,7 +918,7 @@ void __fastcall UFG::UIHKSocialActionWidget::Flash_ShowChargeMeter(UFG::UIHKSoci
           v4 = *(float *)&FLOAT_1_0;
         v5 = v4 * 100.0;
         this->mChargeVisible = 1;
-        `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+        `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
         if ( (v10 >> 6) & 1 )
         {
           (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v9 + 16i64))(
@@ -944,7 +944,7 @@ void __fastcall UFG::UIHKSocialActionWidget::Flash_ShowChargeMeter(UFG::UIHKSoci
         }
         value.Type = 0;
         Scaleform::GFx::Movie::Invoke(v3, "FaceAction_showFaceCharge", 0i64, (Scaleform::GFx::Value *)&ptr, 1u);
-        `eh vector destructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+        `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
       }
     }
   }
@@ -1177,7 +1177,7 @@ LABEL_44:
       UFG::qString::Set((UFG::qString *)((char *)&data.Captions[1] + 32), "Icon_Interact");
       UFG::UIHKGameplayHelpWidget::Show(UFG::UIHKScreenHud::GameplayHelp, &data);
       UFG::qString::~qString((UFG::qString *)data.ChargeAnimState);
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         &data.Captions[1].mStringHash32,
         0x28ui64,
         2,
@@ -1206,13 +1206,13 @@ LABEL_38:
       UFG::qString::Set((UFG::qString *)((char *)&data.Captions[1] + 32), "Icon_Purchase");
       UFG::UIHKGameplayHelpWidget::Show(UFG::UIHKScreenHud::GameplayHelp, &data);
       UFG::qString::~qString((UFG::qString *)data.ChargeAnimState);
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         &data.Captions[1].mStringHash32,
         0x28ui64,
         2,
         (void (__fastcall *)(void *))UFG::qString::~qString);
     }
-    `eh vector destructor iterator'(data.Captions, 0x28ui64, 2, (void (__fastcall *)(void *))UFG::qString::~qString);
+    `eh vector destructor iterator(data.Captions, 0x28ui64, 2, (void (__fastcall *)(void *))UFG::qString::~qString);
     goto LABEL_46;
   }
   UFG::UIHKInfoPopupWidget::ShowPurchaseInfo(
@@ -1290,7 +1290,7 @@ void __fastcall UFG::UIHKSocialActionWidget::Flash_ShowCloseIcon(UFG::UIHKSocial
     {
       if ( this->mActionEnabled )
         UFG::UIHKSocialActionWidget::SetPipAction(this);
-      `eh vector constructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       v4 = (__int64)v2->mItemIcon.mData;
       if ( (v12 >> 6) & 1 )
       {
@@ -1333,7 +1333,7 @@ void __fastcall UFG::UIHKSocialActionWidget::Flash_ShowCloseIcon(UFG::UIHKSocial
       }
       value.Type = 0;
       Scaleform::GFx::Movie::Invoke(v3, "FaceAction_showCloseIcon", 0i64, (Scaleform::GFx::Value *)&ptr, 3u);
-      `eh vector destructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+      `eh vector destructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     }
   }
 }
@@ -1422,7 +1422,7 @@ void __fastcall UFG::UIHKSocialActionWidget::Flash_ShowFarIcon(UFG::UIHKSocialAc
     {
       if ( this->mActionEnabled )
         UFG::UIHKSocialActionWidget::SetPipAction(this);
-      `eh vector constructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       v4 = (__int64)v2->mItemIcon.mData;
       if ( (v12 >> 6) & 1 )
       {
@@ -1465,7 +1465,7 @@ void __fastcall UFG::UIHKSocialActionWidget::Flash_ShowFarIcon(UFG::UIHKSocialAc
       }
       value.Type = 0;
       Scaleform::GFx::Movie::Invoke(v3, "FaceAction_showFarIcon", 0i64, (Scaleform::GFx::Value *)&ptr, 3u);
-      `eh vector destructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+      `eh vector destructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     }
   }
 }

@@ -7,9 +7,9 @@ void __fastcall AudioTaskSurfaceDetection::AudioTaskSurfaceDetection(AudioTaskSu
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<AudioTrackSurfaceDetection>::`vftable';
-  this->vfptr = (ITaskVtbl *)&AudioTaskSurfaceDetection::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<AudioTrackSurfaceDetection>::`vftable;
+  this->vfptr = (ITaskVtbl *)&AudioTaskSurfaceDetection::`vftable;
   this->mContext = 0i64;
   this->m_oneShot.m_pOneShot = 0i64;
 }
@@ -307,14 +307,14 @@ void __fastcall DialogueTask::DialogueTask(DialogueTask *this)
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<DialogueTrack>::`vftable';
-  this->vfptr = (DialogueTaskBaseVtbl *)&DialogueTaskBase::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<DialogueTrack>::`vftable;
+  this->vfptr = (DialogueTaskBaseVtbl *)&DialogueTaskBase::`vftable;
   this->m_failTimer = 0.0;
   *((_BYTE *)&this->40 + 20) &= 0xFEu;
   this->mContext = 0i64;
-  this->vfptr = (ITaskVtbl *)&DialogueTask::`vftable'{for `Task<DialogueTrack>'};
-  this->vfptr = (DialogueTaskBaseVtbl *)&DialogueTask::`vftable'{for `DialogueTaskBase'};
+  this->vfptr = (ITaskVtbl *)&DialogueTask::`vftable{for `Task<DialogueTrack>};
+  this->vfptr = (DialogueTaskBaseVtbl *)&DialogueTask::`vftable{for `DialogueTaskBase};
 }
 
 // File Line: 306
@@ -422,14 +422,14 @@ void __fastcall DialogueTaskPOI::DialogueTaskPOI(DialogueTaskPOI *this)
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<DialogueTrackPOI>::`vftable';
-  this->vfptr = (DialogueTaskBaseVtbl *)&DialogueTaskBase::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<DialogueTrackPOI>::`vftable;
+  this->vfptr = (DialogueTaskBaseVtbl *)&DialogueTaskBase::`vftable;
   this->m_failTimer = 0.0;
   *((_BYTE *)&this->40 + 20) &= 0xFEu;
   this->mContext = 0i64;
-  this->vfptr = (ITaskVtbl *)&DialogueTaskPOI::`vftable'{for `Task<DialogueTrackPOI>'};
-  this->vfptr = (DialogueTaskBaseVtbl *)&DialogueTaskPOI::`vftable'{for `DialogueTaskBase'};
+  this->vfptr = (ITaskVtbl *)&DialogueTaskPOI::`vftable{for `Task<DialogueTrackPOI>};
+  this->vfptr = (DialogueTaskBaseVtbl *)&DialogueTaskPOI::`vftable{for `DialogueTaskBase};
 }
 
 // File Line: 386
@@ -534,14 +534,14 @@ void __fastcall DialogueTaskWeaponImpact::DialogueTaskWeaponImpact(DialogueTaskW
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<DialogueTrackWeaponImpact>::`vftable';
-  this->vfptr = (DialogueTaskBaseVtbl *)&DialogueTaskBase::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<DialogueTrackWeaponImpact>::`vftable;
+  this->vfptr = (DialogueTaskBaseVtbl *)&DialogueTaskBase::`vftable;
   this->m_failTimer = 0.0;
   *((_BYTE *)&this->40 + 20) &= 0xFEu;
   this->mContext = 0i64;
-  this->vfptr = (ITaskVtbl *)&DialogueTaskWeaponImpact::`vftable'{for `Task<DialogueTrackWeaponImpact>'};
-  this->vfptr = (DialogueTaskBaseVtbl *)&DialogueTaskWeaponImpact::`vftable'{for `DialogueTaskBase'};
+  this->vfptr = (ITaskVtbl *)&DialogueTaskWeaponImpact::`vftable{for `Task<DialogueTrackWeaponImpact>};
+  this->vfptr = (DialogueTaskBaseVtbl *)&DialogueTaskWeaponImpact::`vftable{for `DialogueTaskBase};
 }
 
 // File Line: 475
@@ -602,7 +602,7 @@ void __fastcall DialogueTaskWeaponImpact::Begin(DialogueTaskWeaponImpact *this, 
     v6 = v5;
     if ( v5 )
     {
-      args.vfptr = (UFG::DialogArgListVtbl *)&UFG::DialogArgList::`vftable';
+      args.vfptr = (UFG::DialogArgListVtbl *)&UFG::DialogArgList::`vftable;
       UFG::qMemSet(args.m_args, 0, 0x18u);
       args.m_nArgs = 0;
       args.m_uDialogEventId = qwsDTags.mUID;

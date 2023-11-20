@@ -13,7 +13,7 @@ void __fastcall POIManagementTask::~POIManagementTask(POIManagementTask *this)
   UFG::qNode<ITask,ITask> *v9; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&POIManagementTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&POIManagementTask::`vftable;
   v2 = &this->mpPOI;
   if ( this->mpPOI.m_pPointer )
   {
@@ -31,7 +31,7 @@ void __fastcall POIManagementTask::~POIManagementTask(POIManagementTask *this)
   v6->mPrev = v5;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v8 = v1->mPrev;
   v9 = v1->mNext;

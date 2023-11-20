@@ -68,9 +68,9 @@ void __fastcall OSuite::ZSocketManager::ZSocketManager(OSuite::ZSocketManager *t
   OSuite::ZSocketManager *v1; // rdi
 
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZSocketManager::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZSocketManager::`vftable;
   OSuite::ZDoublyLinkedListBase::ZDoublyLinkedListBase((OSuite::ZRedBlackTreeBase *)&this->m_socketList);
-  v1->m_socketList.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZSocketManager::InternalSocket>::`vftable';
+  v1->m_socketList.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZSocketManager::InternalSocket>::`vftable;
   OSuite::ZMutex::ZMutex(&v1->m_Mutex);
   v1->m_freeSocket = 0i64;
   v1->m_KeepAliveTimeoutMs = 25000i64;
@@ -95,16 +95,16 @@ void __fastcall OSuite::ZSocketManager::~ZSocketManager(OSuite::ZSocketManager *
   v7.m_pElement = 0i64;
   v1 = (OSuite::ZDoublyLinkedListBase *)&this->m_socketList.vfptr;
   v2 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZSocketManager::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZSocketManager::`vftable;
   OSuite::ZDoublyLinkedListBase::ZIteratorBase::ZIteratorBase(
     &v7,
     (OSuite::ZDoublyLinkedListBase *)&this->m_socketList.vfptr,
     this->m_socketList.m_pHead);
   v8.m_pList = 0i64;
   v8.m_pElement = 0i64;
-  v7.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+  v7.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
   OSuite::ZDoublyLinkedListBase::ZIteratorBase::ZIteratorBase(&v8, v1, 0i64);
-  v8.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+  v8.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
   while ( 1 )
   {
     v6 = OSuite::ZRedBlackTreeBase::ZIteratorBase::operator bool((OSuite::ZRedBlackTreeBase::ZIteratorBase *)&v8);
@@ -126,7 +126,7 @@ void __fastcall OSuite::ZSocketManager::~ZSocketManager(OSuite::ZSocketManager *
   }
   OSuite::ZDoublyLinkedListBase::Clear(v1);
   OSuite::ZMutex::~ZMutex(&v2->m_Mutex);
-  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZSocketManager::InternalSocket>::`vftable';
+  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZSocketManager::InternalSocket>::`vftable;
   OSuite::ZDoublyLinkedListBase::Clear(v1);
 }
 
@@ -180,12 +180,12 @@ OSuite::ZObjectVtbl *__fastcall OSuite::ZSocketManager::TryGetSocket(OSuite::ZSo
     v10);
   v29.m_pList = 0i64;
   v29.m_pElement = 0i64;
-  v28.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+  v28.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
   OSuite::ZDoublyLinkedListBase::ZIteratorBase::ZIteratorBase(
     &v29,
     (OSuite::ZDoublyLinkedListBase *)&v5->m_socketList.vfptr,
     0i64);
-  v29.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+  v29.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
   while ( !OSuite::ZString::IsNull((OSuite::ZString *)&v28) )
   {
     memset(&Dst, 0, 0xCui64);
@@ -211,8 +211,8 @@ OSuite::ZObjectVtbl *__fastcall OSuite::ZSocketManager::TryGetSocket(OSuite::ZSo
     }
     OSuite::ZDoublyLinkedListBase::ZIteratorBase::Next(&v28);
   }
-  v29.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
-  v28.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+  v29.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
+  v28.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
   if ( v9 )
   {
     v16 = OSuite::ZSocket::VerifyConnection((OSuite::ZSocket *)v9);
@@ -319,12 +319,12 @@ void __fastcall OSuite::ZSocketManager::ReleaseSocket(OSuite::ZSocketManager *th
           v9);
         v16.m_pList = 0i64;
         v16.m_pElement = 0i64;
-        v11.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+        v11.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
         OSuite::ZDoublyLinkedListBase::ZIteratorBase::ZIteratorBase(
           &v16,
           (OSuite::ZDoublyLinkedListBase *)&v4->m_socketList.vfptr,
           0i64);
-        v16.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+        v16.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
         while ( !OSuite::ZString::IsNull((OSuite::ZString *)&v11) )
         {
           if ( !LODWORD(v11.m_pElement[1].m_pPrev) )
@@ -343,7 +343,7 @@ void __fastcall OSuite::ZSocketManager::ReleaseSocket(OSuite::ZSocketManager *th
         v5);
     }
   }
-  result.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+  result.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
   OSuite::ZOEdmBase::CleanTempData((unsigned __int64)&v13);
   OSuite::ZOEdmBase::CleanTempData((unsigned __int64)&v12);
   OSuite::ZMutex::Unlock(v3);
@@ -394,12 +394,12 @@ void __fastcall OSuite::ZSocketManager::Update(OSuite::ZSocketManager *this)
       v3);
     v14.m_pList = 0i64;
     v14.m_pElement = 0i64;
-    v13.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+    v13.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
     OSuite::ZDoublyLinkedListBase::ZIteratorBase::ZIteratorBase(
       &v14,
       (OSuite::ZDoublyLinkedListBase *)&v1->m_socketList.vfptr,
       0i64);
-    v14.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+    v14.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
     while ( 1 )
     {
       if ( OSuite::ZString::IsNull((OSuite::ZString *)&v13) )

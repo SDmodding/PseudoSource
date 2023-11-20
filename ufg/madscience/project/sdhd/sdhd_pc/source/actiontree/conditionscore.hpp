@@ -17,7 +17,7 @@ NotCondition *__fastcall NotCondition::Create()
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &NotCondition::`vftable';
+  *(_QWORD *)v1 = &NotCondition::`vftable;
   return (NotCondition *)v1;
 }
 
@@ -33,7 +33,7 @@ ORCondition *__fastcall ORCondition::Create()
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &ORCondition::`vftable';
+  *(_QWORD *)v1 = &ORCondition::`vftable;
   return (ORCondition *)v1;
 }
 

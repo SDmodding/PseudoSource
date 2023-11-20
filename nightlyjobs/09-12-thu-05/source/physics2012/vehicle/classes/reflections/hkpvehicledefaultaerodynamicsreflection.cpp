@@ -31,7 +31,7 @@ hkClass *__fastcall hkpVehicleDefaultAerodynamics::staticClass()
 void __fastcall finishLoadedObjecthkpVehicleDefaultAerodynamics(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpVehicleDefaultAerodynamics::`vftable';
+    *(_QWORD *)p = &hkpVehicleDefaultAerodynamics::`vftable;
 }
 
 // File Line: 72
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkpVehicleDefaultAerodynamics(void *p)
 // RVA: 0xE253B0
 void **__fastcall getVtablehkpVehicleDefaultAerodynamics()
 {
-  return &hkpVehicleDefaultAerodynamics::`vftable';
+  return &hkpVehicleDefaultAerodynamics::`vftable;
 }
 
 // File Line: 98

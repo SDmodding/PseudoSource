@@ -11,9 +11,9 @@ void __fastcall SSCoroutineBase::SSCoroutineBase(SSCoroutineBase *this, ASymbol 
   v4 = this;
   this->i_name = (ASymbol)name->i_uid;
   this->i_scope_p = scope_p;
-  this->vfptr = (SSInvokableBaseVtbl *)&SSInvokableBase::`vftable';
+  this->vfptr = (SSInvokableBaseVtbl *)&SSInvokableBase::`vftable;
   this->i_params_p.i_obj_p = 0i64;
-  this->vfptr = (SSInvokableBaseVtbl *)&SSCoroutineBase::`vftable';
+  this->vfptr = (SSInvokableBaseVtbl *)&SSCoroutineBase::`vftable;
   v5 = SSParameters::get_or_create(binary_pp);
   v6 = v5;
   if ( v4->i_params_p.i_obj_p != v5 )
@@ -78,11 +78,11 @@ void __fastcall SSCoroutine::~SSCoroutine(SSCoroutine *this)
   bool v4; // zf
 
   v1 = this;
-  this->vfptr = (SSInvokableBaseVtbl *)&SSCoroutine::`vftable';
+  this->vfptr = (SSInvokableBaseVtbl *)&SSCoroutine::`vftable;
   v2 = this->i_expr_p;
   if ( v2 )
     v2->vfptr->__vecDelDtor(v2, 1u);
-  v1->vfptr = (SSInvokableBaseVtbl *)&SSInvokableBase::`vftable';
+  v1->vfptr = (SSInvokableBaseVtbl *)&SSInvokableBase::`vftable;
   v3 = v1->i_params_p.i_obj_p;
   if ( v3 )
   {

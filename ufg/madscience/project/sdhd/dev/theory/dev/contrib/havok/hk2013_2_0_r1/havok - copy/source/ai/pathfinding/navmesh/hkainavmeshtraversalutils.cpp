@@ -3035,7 +3035,7 @@ hkSimdFloat32 *__fastcall hkaiNavMeshTraversalUtils::computeGlobalClearance(hkSi
   __int64 v29; // [rsp+A0h] [rbp-38h]
   __m128 v30; // [rsp+B0h] [rbp-28h]
 
-  v18 = &SameSectionFilter::`vftable';
+  v18 = &SameSectionFilter::`vftable;
   v5 = result;
   v20 = meshInstance->m_runtimeId;
   v6 = meshInstance->m_numOriginalVertices;

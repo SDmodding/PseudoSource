@@ -33,14 +33,14 @@ void __fastcall UFG::CompositeDrawableComponent::SetRig(UFG::CompositeDrawableCo
   UFG::CompositeDrawableComponent *v4; // rdi
   UFG::qResourceWarehouse *v5; // rax
 
-  v2 = `UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result;
+  v2 = `UFG::qGetResourceInventory<UFG::RigResource>::`2::result;
   v3 = rig_uid;
   v4 = this;
-  if ( !`UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result )
+  if ( !`UFG::qGetResourceInventory<UFG::RigResource>::`2::result )
   {
     v5 = UFG::qResourceWarehouse::Instance();
     v2 = UFG::qResourceWarehouse::GetInventory(v5, 0x39BC0A7Eu);
-    `UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result = v2;
+    `UFG::qGetResourceInventory<UFG::RigResource>::`2::result = v2;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v4->mRigHandle.mPrev, 0x39BC0A7Eu, v3, v2);
 }

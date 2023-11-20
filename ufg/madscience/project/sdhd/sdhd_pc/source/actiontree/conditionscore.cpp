@@ -102,17 +102,17 @@ void __fastcall DebugTestCondition::DebugTestCondition(DebugTestCondition *this)
   IConditionInit *v1; // rdx
   UFG::qNode<IConditionInit,IConditionInit> *v2; // rax
 
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
   this->mBreakPoint = 0;
   v1 = (IConditionInit *)&this->vfptr;
   v2 = (UFG::qNode<IConditionInit,IConditionInit> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  v1->vfptr = (IConditionInitVtbl *)&IConditionInit::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&DebugTestCondition::`vftable'{for `Condition'};
-  v1->vfptr = (IConditionInitVtbl *)&DebugTestCondition::`vftable'{for `IConditionInit'};
+  v1->vfptr = (IConditionInitVtbl *)&IConditionInit::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&DebugTestCondition::`vftable{for `Condition};
+  v1->vfptr = (IConditionInitVtbl *)&DebugTestCondition::`vftable{for `IConditionInit};
 }
 
 // File Line: 129
@@ -179,11 +179,11 @@ void __fastcall PrintCondition::PrintCondition(PrintCondition *this)
   BinString *v2; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
   this->mBreakPoint = 0;
-  this->vfptr = (Expression::IMemberMapVtbl *)&PrintCondition::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&PrintCondition::`vftable;
   v2 = &this->m_Text;
   v2->mOffset = 1i64;
   BinString::Set(v2, &customWorldMapCaption);
@@ -250,7 +250,7 @@ void __fastcall QueryCondition::QueryCondition(QueryCondition *this)
 
   v1 = this;
   NodeRefCondition::NodeRefCondition((NodeRefCondition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&QueryCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&QueryCondition::`vftable;
   v1->mpQueryableNodeLocalRoot = 0i64;
   v1->mpQueryableNodeAbsoluteRoot = 0i64;
   v1->mpMyAbsoluteRoot = 0i64;
@@ -359,7 +359,7 @@ Expression::IMemberMap *__fastcall QueryCondition::CreateClone(QueryCondition *t
   if ( v2 )
   {
     NodeRefCondition::NodeRefCondition((NodeRefCondition *)v2);
-    *v3 = &QueryCondition::`vftable';
+    *v3 = &QueryCondition::`vftable;
     v3[4] = 0i64;
     v3[5] = 0i64;
     v3[6] = 0i64;

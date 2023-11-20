@@ -28,7 +28,7 @@ void __fastcall UFG::AIOutlineRegion::AIOutlineRegion(UFG::AIOutlineRegion *this
   v5 = (UFG::qNode<UFG::AIOutlineRegion,UFG::AIOutlineRegion> *)&v4->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIOutlineRegion::`vftable';
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIOutlineRegion::`vftable;
   UFG::SimComponent::AddType(
     (UFG::SimComponent *)&v4->vfptr,
     UFG::AIOutlineRegion::_AIOutlineRegionTypeUID,
@@ -67,7 +67,7 @@ void __fastcall UFG::AIOutlineRegion::~AIOutlineRegion(UFG::AIOutlineRegion *thi
   UFG::qNode<UFG::AIOutlineRegion,UFG::AIOutlineRegion> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIOutlineRegion::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIOutlineRegion::`vftable;
   if ( this == UFG::AIOutlineRegion::s_AIOutlineRegionpCurrentIterator )
     UFG::AIOutlineRegion::s_AIOutlineRegionpCurrentIterator = (UFG::AIOutlineRegion *)&this->mPrev[-7];
   v2 = (UFG::qNode<UFG::AIOutlineRegion,UFG::AIOutlineRegion> *)&this->mPrev;

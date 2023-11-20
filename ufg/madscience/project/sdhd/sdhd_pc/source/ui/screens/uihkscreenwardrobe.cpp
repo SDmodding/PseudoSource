@@ -43,7 +43,7 @@ void __fastcall UFG::UIHKScreenWardrobe::UIHKScreenWardrobe(UFG::UIHKScreenWardr
   v2 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -54,15 +54,15 @@ void __fastcall UFG::UIHKScreenWardrobe::UIHKScreenWardrobe(UFG::UIHKScreenWardr
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKTaskableScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKTaskableScreen::`vftable;
   this->mFinished = 0;
   v6 = (UFG::OnlineManagerObserver *)&this->vfptr;
   v3 = (UFG::qNode<UFG::OnlineManagerObserver,UFG::OnlineManagerObserver> *)&this->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v6->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::OnlineManagerObserver::`vftable';
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenWardrobe::`vftable'{for `UFG::UIHKTaskableScreen'};
-  v6->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::UIHKScreenWardrobe::`vftable'{for `UFG::OnlineManagerObserver'};
+  v6->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::OnlineManagerObserver::`vftable;
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenWardrobe::`vftable{for `UFG::UIHKTaskableScreen};
+  v6->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::UIHKScreenWardrobe::`vftable{for `UFG::OnlineManagerObserver};
   this->mState = 0;
   *(_WORD *)&this->mSfxPlayed = 0;
   this->mSuspendedPlayerVehicle = 0i64;
@@ -76,7 +76,7 @@ void __fastcall UFG::UIHKScreenWardrobe::UIHKScreenWardrobe(UFG::UIHKScreenWardr
   v1->mCameraTarget = 0i64;
   v1->mPlayerMark = 0i64;
   *(_DWORD *)&v1->mInfoTickerTextSet = 0;
-  `eh vector constructor iterator'(v1->mInitClothing, 4ui64, 14, (void (__fastcall *)(void *))BackInfo::BackInfo);
+  `eh vector constructor iterator(v1->mInitClothing, 4ui64, 14, (void (__fastcall *)(void *))BackInfo::BackInfo);
   v5 = UFG::UIHKScreenWardrobe::HandleDeferredTask;
   v4 = Assembly::GetRCX(v1);
   UFG::EventDispatcher::Register(
@@ -119,9 +119,9 @@ void __fastcall UFG::UIHKScreenWardrobe::~UIHKScreenWardrobe(UFG::UIHKScreenWard
   void (__fastcall *v26)(UFG::UIHKScreenWardrobe *, UFG::Event *); // [rsp+30h] [rbp-28h]
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenWardrobe::`vftable'{for `UFG::UIHKTaskableScreen'};
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenWardrobe::`vftable{for `UFG::UIHKTaskableScreen};
   v2 = (UFG::OnlineManagerObserver *)&this->vfptr;
-  this->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::UIHKScreenWardrobe::`vftable'{for `UFG::OnlineManagerObserver'};
+  this->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::UIHKScreenWardrobe::`vftable{for `UFG::OnlineManagerObserver};
   if ( this->mHasClothingChanged )
   {
     v3 = UFG::GameStatTracker::Instance();
@@ -203,9 +203,9 @@ void __fastcall UFG::UIHKScreenWardrobe::~UIHKScreenWardrobe(UFG::UIHKScreenWard
     v1->mPlayerMark = 0i64;
   }
   UFG::UIGfxTranslator::unloadDictionary(UFG::UIScreenManager::s_instance->m_translator, "ITEMS");
-  `eh vector destructor iterator'(v1->mInitClothing, 4ui64, 14, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(v1->mInitClothing, 4ui64, 14, (void (__fastcall *)(void *))_);
   UFG::qString::~qString(&v1->mSelectedCategoryCaption);
-  v2->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::OnlineManagerObserver::`vftable';
+  v2->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::OnlineManagerObserver::`vftable;
   v22 = (UFG::qNode<UFG::OnlineManagerObserver,UFG::OnlineManagerObserver> *)&v2->mPrev;
   v23 = v2->mPrev;
   v24 = v2->mNext;
@@ -276,7 +276,7 @@ void __fastcall UFG::UIHKScreenWardrobe::init(UFG::UIHKScreenWardrobe *this, UFG
   UFG::UIHK_NISOverlay::UpdateAudioMuteState();
   v3->mState = 7;
   UFG::UIGfxTranslator::loadDictionary(UFG::UIScreenManager::s_instance->m_translator, "ITEMS");
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( (v17 >> 6) & 1 )
   {
     (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v16 + 16i64))(v16, &ptr, v18);
@@ -318,7 +318,7 @@ void __fastcall UFG::UIHKScreenWardrobe::init(UFG::UIHKScreenWardrobe *this, UFG
       0i64);
   v14 = UFG::OnlineManager::Instance();
   UFG::OnlineManager::RegisterObserver(v14, (UFG::OnlineManagerObserver *)&v3->vfptr);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 286
@@ -387,14 +387,14 @@ void __fastcall UFG::UIHKScreenWardrobe::afterFadeToBlackInit(UFG::UIHKScreenWar
   v48 = v3;
   if ( v3 )
   {
-    v3->mPrev = (UFG::qNode<UFG::qString,UFG::qString> *)&Scaleform::RefCountImplCore::`vftable';
+    v3->mPrev = (UFG::qNode<UFG::qString,UFG::qString> *)&Scaleform::RefCountImplCore::`vftable;
     LODWORD(v3->mNext) = 1;
-    v3->mPrev = (UFG::qNode<UFG::qString,UFG::qString> *)&Scaleform::RefCountImpl::`vftable';
-    v3->mPrev = (UFG::qNode<UFG::qString,UFG::qString> *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-    v3->mPrev = (UFG::qNode<UFG::qString,UFG::qString> *)&Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable';
-    v3->mPrev = (UFG::qNode<UFG::qString,UFG::qString> *)&Scaleform::GFx::State::`vftable';
+    v3->mPrev = (UFG::qNode<UFG::qString,UFG::qString> *)&Scaleform::RefCountImpl::`vftable;
+    v3->mPrev = (UFG::qNode<UFG::qString,UFG::qString> *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+    v3->mPrev = (UFG::qNode<UFG::qString,UFG::qString> *)&Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable;
+    v3->mPrev = (UFG::qNode<UFG::qString,UFG::qString> *)&Scaleform::GFx::State::`vftable;
     v3->mMagic = 3;
-    v3->mPrev = (UFG::qNode<UFG::qString,UFG::qString> *)&Scaleform::GFx::ActionControl::`vftable';
+    v3->mPrev = (UFG::qNode<UFG::qString,UFG::qString> *)&Scaleform::GFx::ActionControl::`vftable;
     LODWORD(v3->mData) = 8;
   }
   else
@@ -585,7 +585,7 @@ void __fastcall UFG::UIHKScreenWardrobe::afterFadeToBlackInit(UFG::UIHKScreenWar
     UFG::UIHKScreenWardrobe::SetStoreTitle(v1, v34);
     UFG::UIHKScreenWardrobe::ShowCategorySelect(v1);
   }
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   v35 = v1->mIsStore;
   if ( (v43 >> 6) & 1 )
   {
@@ -623,7 +623,7 @@ LABEL_69:
         0);
   }
   UFG::UIHK_NISOverlay::UpdateAudioMuteState();
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v3);
 }
 
@@ -988,7 +988,7 @@ LABEL_19:
         break;
       default:
         UFG::qString::~qString((UFG::qString *)&data.MessageIds[4]);
-        `eh vector destructor iterator'(
+        `eh vector destructor iterator(
           &data.Captions[5].mStringHash32,
           0x28ui64,
           6,
@@ -1030,13 +1030,13 @@ LABEL_91:
       v59 = &gGlobalOverlaySentinel;
     UFG::UIHKHelpBarWidget::Show(&v59->HelpBar, &data);
     UFG::qString::~qString((UFG::qString *)&data.MessageIds[4]);
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       &data.Captions[5].mStringHash32,
       0x28ui64,
       6,
       (void (__fastcall *)(void *))UFG::qString::~qString);
 LABEL_95:
-    `eh vector destructor iterator'(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+    `eh vector destructor iterator(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
   }
 }
 
@@ -1984,7 +1984,7 @@ void __fastcall UFG::UIHKScreenWardrobe::RestoreNonPurchasedEquipment(UFG::UIHKS
   {
     v8 = UFG::GameStatTracker::Instance();
     pDtor = (void (__fastcall *)(void *))_;
-    `eh vector constructor iterator'(&ptr, 4ui64, 14, (void (__fastcall *)(void *))BackInfo::BackInfo);
+    `eh vector constructor iterator(&ptr, 4ui64, 14, (void (__fastcall *)(void *))BackInfo::BackInfo);
     v29 = UFG::GameStatTracker::GetStat(v8, CurrentLowerBody)->mValue.mUID;
     v30 = UFG::GameStatTracker::GetStat(v8, CurrentFootwear)->mValue.mUID;
     v31 = UFG::GameStatTracker::GetStat(v8, CurrentHeadgear)->mValue.mUID;
@@ -2051,7 +2051,7 @@ void __fastcall UFG::UIHKScreenWardrobe::RestoreNonPurchasedEquipment(UFG::UIHKS
       }
       v26 = 0;
     }
-    `eh vector destructor iterator'(&ptr, 4ui64, 14, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(&ptr, 4ui64, 14, (void (__fastcall *)(void *))_);
   }
 }
 
@@ -2480,7 +2480,7 @@ void __fastcall UFG::UIHKScreenWardrobe::PopulateCustomOutfits(UFG::UIHKScreenWa
       --v5;
     }
     while ( v5 );
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( (v17 >> 6) & 1 )
     {
       (*(void (__fastcall **)(__int64, char *, __int64))(*(_QWORD *)v16 + 16i64))(v16, &ptr, v18);
@@ -2490,7 +2490,7 @@ void __fastcall UFG::UIHKScreenWardrobe::PopulateCustomOutfits(UFG::UIHKScreenWa
     v18 = 0i64;
     Scaleform::GFx::Movie::Invoke(v2, "gWardrobeList.SetSelectedIndex", 0i64, (Scaleform::GFx::Value *)&ptr, 1u);
     Scaleform::GFx::Movie::Invoke(v2, "WardrobeList_Refresh", 0i64, 0i64, 0);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     if ( ((unsigned int)value.Type >> 6) & 1 )
       (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&value.pObjectInterface->vfptr->gap8[8])(
         value.pObjectInterface,
@@ -2796,7 +2796,7 @@ LABEL_22:
                                               v6,
                                               ItemCategory_LOWER_BODY,
                                               (__int64)&result);
-                UFG::qPrintf("item is part of a clothing set '%s', icon = '%s', desc = '%s'\n", v42, v44, v46);
+                UFG::qPrintf("item is part of a clothing set %s, icon = %s, desc = %s\n", v42, v44, v46);
                 v14 = v48;
               }
               ++v1->mNumItems;
@@ -2832,7 +2832,7 @@ LABEL_22:
           while ( v8 < v14 );
           v7 = v55;
         }
-        `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+        `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
         v47 = v1->mNumItems == 0;
         if ( (v52 >> 6) & 1 )
         {
@@ -2857,7 +2857,7 @@ LABEL_22:
         v53 = (double)v10;
         Scaleform::GFx::Movie::Invoke(v7, "gWardrobeList.SetSelectedIndex", 0i64, (Scaleform::GFx::Value *)&ptr, 1u);
         Scaleform::GFx::Movie::Invoke(v7, "WardrobeList_Refresh", 0i64, 0i64, 0);
-        `eh vector destructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+        `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
       }
     }
   }
@@ -2987,7 +2987,7 @@ void __fastcall UFG::UIHKScreenWardrobe::Flash_AddItem(UFG::UIHKScreenWardrobe *
   v117 = -2i64;
   v2 = info;
   v3 = this;
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 23, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 23, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   v4 = (double)v2->trackerIndex;
   if ( (v28 >> 6) & 1 )
   {
@@ -3192,7 +3192,7 @@ void __fastcall UFG::UIHKScreenWardrobe::Flash_AddItem(UFG::UIHKScreenWardrobe *
     0i64,
     (Scaleform::GFx::Value *)&ptr,
     0x17u);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 23, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 23, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 1739
@@ -3572,7 +3572,7 @@ LABEL_11:
   v6 = v3->mRenderable->m_movie.pObject;
   if ( v6 )
   {
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     v7 = (double)(signed int)v3->mNumCategories;
     if ( (v11 >> 6) & 1 )
     {
@@ -3605,7 +3605,7 @@ LABEL_11:
       }
       value.Type = 0;
     }
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 
@@ -3621,7 +3621,7 @@ void __fastcall UFG::UIHKScreenWardrobe::Flash_AddCategory(UFG::UIHKScreenWardro
   v3 = this->mRenderable->m_movie.pObject;
   if ( v3 )
   {
-    `eh vector constructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( ((unsigned int)pargs.Type >> 6) & 1 )
     {
       (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
@@ -3633,7 +3633,7 @@ void __fastcall UFG::UIHKScreenWardrobe::Flash_AddCategory(UFG::UIHKScreenWardro
     pargs.Type = 6;
     *(_QWORD *)&pargs.mValue.NValue = v2;
     Scaleform::GFx::Movie::Invoke(v3, "CategoryMenu_AddItem", 0i64, &pargs, 1u);
-    `eh vector destructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 
@@ -3740,7 +3740,7 @@ void __fastcall UFG::UIHKScreenWardrobe::UpdateMoney(UFG::UIHKScreenWardrobe *th
   UFG::qString::qString(&string);
   UFG::UI::FormatMoneyStr(v3, &string);
   pDtor = (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value;
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   v6 = string.mData;
   if ( (v10 >> 6) & 1 )
   {
@@ -3770,7 +3770,7 @@ void __fastcall UFG::UIHKScreenWardrobe::UpdateMoney(UFG::UIHKScreenWardrobe *th
   v18 = 5;
   v19 = (double)v5;
   Scaleform::GFx::Movie::Invoke(v1, "SetMoney", 0i64, (Scaleform::GFx::Value *)&ptr, 3u);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   UFG::qString::~qString(&string);
 }
 

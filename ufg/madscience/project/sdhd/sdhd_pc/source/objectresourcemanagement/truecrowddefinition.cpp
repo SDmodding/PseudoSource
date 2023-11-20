@@ -2,7 +2,7 @@
 // RVA: 0x438140
 void __fastcall UFG::TrueCrowdDefinition::~TrueCrowdDefinition(UFG::TrueCrowdDefinition *this)
 {
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     this->mEntities,
     0x50Cui64,
     25,

@@ -48,7 +48,7 @@ void __fastcall UFG::PhysicsRenderHelper::PhysicsRenderHelper(UFG::PhysicsRender
   v6 = (UFG::qNode<UFG::PhysicsRenderHelper,UFG::PhysicsRenderHelper> *)&v5->mPrev;
   v6->mPrev = v6;
   v6->mNext = v6;
-  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::PhysicsRenderHelper::`vftable';
+  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::PhysicsRenderHelper::`vftable;
   v7 = 0i64;
   v5->mNumSceneryInstances = 0;
   v5->mSceneryInstances = 0i64;
@@ -135,7 +135,7 @@ void __fastcall UFG::PhysicsRenderHelper::~PhysicsRenderHelper(UFG::PhysicsRende
   UFG::qNode<UFG::PhysicsRenderHelper,UFG::PhysicsRenderHelper> *v8; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::PhysicsRenderHelper::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::PhysicsRenderHelper::`vftable;
   if ( this == UFG::PhysicsRenderHelper::s_PhysicsRenderHelperpCurrentIterator )
     UFG::PhysicsRenderHelper::s_PhysicsRenderHelperpCurrentIterator = (UFG::PhysicsRenderHelper *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::PhysicsRenderHelper,UFG::PhysicsRenderHelper> *)&this->mPrev;
@@ -419,13 +419,13 @@ void __fastcall UFG::PhysicsRenderHelper::SwapRenderModel(UFG::PhysicsRenderHelp
   v3 = renderModelUID;
   if ( v2 )
   {
-    v4 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
+    v4 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
     v5 = *v2;
-    if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+    if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
     {
       v6 = UFG::qResourceWarehouse::Instance();
       v4 = UFG::qResourceWarehouse::GetInventory(v6, 0xA2ADCD77);
-      `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v4;
+      `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v4;
     }
     UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v5->mModelHandle.mPrev, 0xA2ADCD77, v3, v4);
   }

@@ -14,13 +14,13 @@ void __fastcall Scaleform::Render::D3D1x::FenceWrapper::FenceWrapper(Scaleform::
   v5 = this;
   this->pPrev = 0i64;
   this->pNext = 0i64;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,65>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::FenceWrapper,65>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::FenceWrapper::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::D3D1x::FenceWrapper::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,65>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::FenceWrapper,65>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::FenceWrapper::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::D3D1x::FenceWrapper::`vftable;
   this->pDeviceContext.pObject = 0i64;
   this->pQuery.pObject = 0i64;
   v6 = this->pQuery.pObject;
@@ -150,18 +150,18 @@ void __fastcall Scaleform::Render::D3D1x::RenderSync::RenderSync(Scaleform::Rend
 
   v1 = this;
   Scaleform::Render::RenderSync::RenderSync((Scaleform::Render::RenderSync *)&this->vfptr);
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::D3D1x::RenderSync::`vftable';
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::D3D1x::RenderSync::`vftable;
   v1->pNextEndFrameFence.pObject = 0i64;
   v1->pDevice.pObject = 0i64;
   v1->pDeviceContext.pObject = 0i64;
-  v1->QueryList.vfptr = (Scaleform::Render::FenceWrapperListVtbl *)&Scaleform::Render::FenceWrapperList::`vftable';
+  v1->QueryList.vfptr = (Scaleform::Render::FenceWrapperListVtbl *)&Scaleform::Render::FenceWrapperList::`vftable;
   v2 = (signed __int64)&v1->pDeviceContext;
   if ( v1 == (Scaleform::Render::D3D1x::RenderSync *)-200i64 )
     v2 = 0i64;
   v1->QueryList.WrapperList.Root.pPrev = (Scaleform::Render::FenceWrapper *)v2;
   v1->QueryList.WrapperList.Root.pNext = (Scaleform::Render::FenceWrapper *)v2;
   v1->QueryList.ReservePoolSize = 4;
-  v1->QueryList.vfptr = (Scaleform::Render::FenceWrapperListVtbl *)&Scaleform::Render::D3D1x::FenceWrapperList::`vftable';
+  v1->QueryList.vfptr = (Scaleform::Render::FenceWrapperListVtbl *)&Scaleform::Render::D3D1x::FenceWrapperList::`vftable;
   v1->QueryList.pDevice.pObject = 0i64;
   v1->QueryList.pDeviceCtx.pObject = 0i64;
 }

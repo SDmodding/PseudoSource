@@ -31,7 +31,7 @@ hkClass *__fastcall hkxBlob::staticClass()
 void __fastcall finishLoadedObjecthkxBlob(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkxBlob::`vftable';
+    *(_QWORD *)p = &hkxBlob::`vftable;
 }
 
 // File Line: 68
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkxBlob(void *p)
 // RVA: 0xE31980
 void **__fastcall getVtablehkxBlob()
 {
-  return &hkxBlob::`vftable';
+  return &hkxBlob::`vftable;
 }
 
 // File Line: 94

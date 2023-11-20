@@ -5,9 +5,9 @@ void __fastcall Scaleform::Render::TreeText::NodeData::NodeData(Scaleform::Rende
   Scaleform::Render::TreeText::NodeData *v1; // rdi
 
   v1 = this;
-  this->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::ContextImpl::EntryData::`vftable';
+  this->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::ContextImpl::EntryData::`vftable;
   *(_DWORD *)&this->Type = 65541;
-  this->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::TreeNode::NodeData::`vftable';
+  this->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::TreeNode::NodeData::`vftable;
   memset(&this->M34, 0, 0x30ui64);
   v1->M34.M[0][0] = 1.0;
   v1->M34.M[1][1] = 1.0;
@@ -24,8 +24,8 @@ void __fastcall Scaleform::Render::TreeText::NodeData::NodeData(Scaleform::Rende
   *(_QWORD *)&v1->AproxLocalBounds.y2 = 0i64;
   *(_QWORD *)&v1->AproxParentBounds.y1 = 0i64;
   v1->AproxParentBounds.y2 = 0.0;
-  v1->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::ContextImpl::ContextData_ImplMixin<Scaleform::Render::TreeText::NodeData,Scaleform::Render::TreeNode::NodeData>::`vftable';
-  v1->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::TreeText::NodeData::`vftable';
+  v1->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::ContextImpl::ContextData_ImplMixin<Scaleform::Render::TreeText::NodeData,Scaleform::Render::TreeNode::NodeData>::`vftable;
+  v1->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::TreeText::NodeData::`vftable;
   v1->pDocView.pObject = 0i64;
   v1->pLayout.pObject = 0i64;
   v1->TextFlags = 0;
@@ -49,8 +49,8 @@ void __fastcall Scaleform::Render::TreeText::NodeData::NodeData(Scaleform::Rende
   Scaleform::Render::TreeNode::NodeData::NodeData(
     (Scaleform::Render::TreeNode::NodeData *)&this->vfptr,
     (Scaleform::Render::ContextImpl::NonlocalCloneArg<Scaleform::Render::TreeNode::NodeData>)&srca);
-  v3->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::ContextImpl::ContextData_ImplMixin<Scaleform::Render::TreeText::NodeData,Scaleform::Render::TreeNode::NodeData>::`vftable';
-  v3->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::TreeText::NodeData::`vftable';
+  v3->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::ContextImpl::ContextData_ImplMixin<Scaleform::Render::TreeText::NodeData,Scaleform::Render::TreeNode::NodeData>::`vftable;
+  v3->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::TreeText::NodeData::`vftable;
   v4 = v2->vfptr;
   v5 = v2->vfptr[3].__vecDelDtor;
   if ( v5 )
@@ -74,7 +74,7 @@ void __fastcall Scaleform::Render::TreeText::NodeData::~NodeData(Scaleform::Rend
   Scaleform::Render::StateData::Interface *v4; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::TreeText::NodeData::`vftable';
+  this->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::TreeText::NodeData::`vftable;
   v2 = this->pLayout.pObject;
   if ( v2 && !_InterlockedDecrement(&v2->RefCount) && v2 )
     v2->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v2->vfptr, 1u);
@@ -95,7 +95,7 @@ void __fastcall Scaleform::Render::TreeText::NodeData::~NodeData(Scaleform::Rend
     v1->States.ArraySize = 0i64;
     v1->States.DataValue = 0i64;
   }
-  v1->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::ContextImpl::EntryData::`vftable';
+  v1->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::ContextImpl::EntryData::`vftable;
 }
 
 // File Line: 47
@@ -2338,7 +2338,7 @@ LABEL_12:
     {
       v15->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v15->vfptr, 1u);
     }
-    v19.vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable';
+    v19.vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable;
   }
   v16 = Scaleform::Render::ContextImpl::Entry::getWritableData((Scaleform::Render::ContextImpl::Entry *)&v5->0, 0x400u);
   LOBYTE(v16[10].vfptr) |= 1u;

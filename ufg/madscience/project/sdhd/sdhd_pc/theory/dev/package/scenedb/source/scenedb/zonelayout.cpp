@@ -17,7 +17,7 @@ __int64 UFG::_dynamic_initializer_for__gZoneLayoutInventory__()
     0x43FF83A9u,
     0,
     0);
-  UFG::gZoneLayoutInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::ZoneLayoutInventory::`vftable';
+  UFG::gZoneLayoutInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::ZoneLayoutInventory::`vftable;
   return atexit(UFG::_dynamic_atexit_destructor_for__gZoneLayoutInventory__);
 }
 
@@ -92,7 +92,7 @@ void __fastcall UFG::ZoneTag::Update(unsigned int visIndex)
       v3 = v1 + 1;
       v3->mNext = v3;
       v3[1].mNext = v3;
-      v2->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+      v2->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
       v2->m_NamePTR = "ZoneLayoutEvent";
       v2->m_EventUID = UFG::qStringHash32("ZoneLayoutEvent", 0xFFFFFFFF);
     }

@@ -24,7 +24,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::Editor::SceneLayer
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::Editor::SceneLayerPropertiesWindow,UFG::DUIWindow>::sInventory.vfptr,
     "UFG::Editor::SceneLayerPropertiesWindow",
     v0);
-  UFG::qReflectObjectType<UFG::Editor::SceneLayerPropertiesWindow,UFG::DUIWindow>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::Editor::SceneLayerPropertiesWindow>::`vftable';
+  UFG::qReflectObjectType<UFG::Editor::SceneLayerPropertiesWindow,UFG::DUIWindow>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::Editor::SceneLayerPropertiesWindow>::`vftable;
   UFG::qReflectInventory<UFG::Editor::SceneLayerPropertiesWindow>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::Editor::SceneLayerPropertiesWindow,UFG::DUIWindow>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -156,7 +156,7 @@ UFG::SceneLayer *__fastcall UFG::Editor::SceneManager::CreateSceneLayer(UFG::qSy
   if ( UFG::Editor::SceneManager::SceneLayerNameExists(v2) == 1 )
   {
     v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)v1);
-    UFG::qPrintf("Tried to create scene layer '%s', but a layer with the same name already exists!", v3);
+    UFG::qPrintf("Tried to create scene layer %s, but a layer with the same name already exists!", v3);
     v4 = UFG::Scene::FindLayer(&UFG::Scene::msDefault, v1);
     if ( !v4 )
       UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)v1);
@@ -393,7 +393,7 @@ LABEL_28:
   if ( path.mSubElements.p )
   {
     v18 = &path.mSubElements.p[-1].mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       path.mSubElements.p,
       0x28ui64,
       path.mSubElements.p[-1].mStringHash32,
@@ -405,7 +405,7 @@ LABEL_28:
   if ( path.mElements.p )
   {
     v19 = path.mElements.p - 1;
-    `eh vector destructor iterator'(path.mElements.p, 4ui64, path.mElements.p[-1].mUID, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(path.mElements.p, 4ui64, path.mElements.p[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v19);
   }
   path.mElements.p = 0i64;
@@ -460,7 +460,7 @@ UFG::SceneLayer *__fastcall UFG::Editor::SceneManager::DuplicateSceneLayer(UFG::
   v2 = newNameString;
   v3 = UFG::Editor::Core::OpenForEdit(layerToDuplicate);
   v16.mPropertyDepth = 0;
-  v16.vfptr = (UFG::Editor::SceneManager::SceneObjectVisitorVtbl *)&UFG::Editor::SceneManager::RenameSceneObjectVisitor::`vftable';
+  v16.vfptr = (UFG::Editor::SceneManager::SceneObjectVisitorVtbl *)&UFG::Editor::SceneManager::RenameSceneObjectVisitor::`vftable;
   UFG::qString::qString(&v17);
   UFG::qString::qString(&v18);
   v4 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v3->mNode.mUID);
@@ -633,7 +633,7 @@ void __fastcall UFG::Editor::SceneManager::SetSceneObjectWorldMatrix(UFG::qPrope
       v5 = v3 + 1;
       v5->mNext = v5;
       v5[1].mNext = v5;
-      v4->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+      v4->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
       v4->m_EventUID = 1707257979;
       v4->m_NamePTR = 0i64;
     }
@@ -671,7 +671,7 @@ UFG::qPropertySet *__fastcall UFG::Editor::SceneManager::CloneSceneObject(UFG::q
       v5 = v3 + 1;
       v5->mNext = v5;
       v5[1].mNext = v5;
-      v4->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+      v4->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
       v4->m_EventUID = 1707257979;
       v4->m_NamePTR = 0i64;
     }
@@ -799,7 +799,7 @@ LABEL_13:
   if ( path.mSubElements.p )
   {
     v15 = &path.mSubElements.p[-1].mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       path.mSubElements.p,
       0x28ui64,
       path.mSubElements.p[-1].mStringHash32,
@@ -811,7 +811,7 @@ LABEL_13:
   if ( path.mElements.p )
   {
     v16 = path.mElements.p - 1;
-    `eh vector destructor iterator'(path.mElements.p, 4ui64, path.mElements.p[-1].mUID, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(path.mElements.p, 4ui64, path.mElements.p[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v16);
   }
   path.mElements.p = 0i64;
@@ -1188,7 +1188,7 @@ void __fastcall UFG::Editor::SceneManager::SceneObjectVisitor::VisitRecurse(UFG:
   if ( v21 )
   {
     v22 = &v21[-1].mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v21,
       0x28ui64,
       v21[-1].mStringHash32,
@@ -1201,7 +1201,7 @@ void __fastcall UFG::Editor::SceneManager::SceneObjectVisitor::VisitRecurse(UFG:
   if ( v23 )
   {
     v24 = v23 - 1;
-    `eh vector destructor iterator'(v23, 4ui64, v23[-1].mUID, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v23, 4ui64, v23[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v24);
   }
   v4->mElements.p = 0i64;
@@ -1407,7 +1407,7 @@ void __fastcall UFG::Editor::SceneManager::SceneObjectVisitor::Visit(UFG::Editor
   if ( v36.p )
   {
     v22 = &v36.p[-1].mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v36.p,
       0x28ui64,
       v36.p[-1].mStringHash32,
@@ -1419,7 +1419,7 @@ void __fastcall UFG::Editor::SceneManager::SceneObjectVisitor::Visit(UFG::Editor
   if ( v34.p )
   {
     v23 = v34.p - 1;
-    `eh vector destructor iterator'(v34.p, 4ui64, v34.p[-1].mUID, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v34.p, 4ui64, v34.p[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v23);
   }
   v34.p = 0i64;
@@ -1695,8 +1695,8 @@ void __fastcall UFG::Editor::NewLayerDialog::NewLayerDialog(UFG::Editor::NewLaye
 
   v1 = this;
   UFG::Editor::EditorDialog::EditorDialog((UFG::Editor::EditorDialog *)&this->vfptr, "New Layer");
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::NewLayerDialog::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::NewLayerDialog::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::NewLayerDialog::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::NewLayerDialog::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   UFG::qString::qString(&v1->mLayerName);
 }
 
@@ -1779,8 +1779,8 @@ void __fastcall UFG::Editor::RenameLayerDialog::RenameLayerDialog(UFG::Editor::R
 
   v1 = this;
   UFG::Editor::EditorDialog::EditorDialog((UFG::Editor::EditorDialog *)&this->vfptr, "Rename Layer");
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::RenameLayerDialog::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::RenameLayerDialog::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::RenameLayerDialog::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::RenameLayerDialog::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   UFG::qString::qString(&v1->mNewLayerName);
   UFG::qString::qString(&v1->mPreviousName);
   v1->mFirstUpdate = 1;
@@ -1862,8 +1862,8 @@ void __fastcall UFG::Editor::DuplicateLayerDialog::DuplicateLayerDialog(UFG::Edi
 
   v1 = this;
   UFG::Editor::EditorDialog::EditorDialog((UFG::Editor::EditorDialog *)&this->vfptr, "Duplicate Layer");
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::DuplicateLayerDialog::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::DuplicateLayerDialog::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::DuplicateLayerDialog::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::DuplicateLayerDialog::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   UFG::qString::qString(&v1->mNewLayerName);
   UFG::qString::qString(&v1->mPreviousName);
 }
@@ -2084,7 +2084,7 @@ void __fastcall UFG::Editor::SceneLayerControl::UpdateToolbar(UFG::Editor::Scene
             v30 = v28 + 1;
             v30->mNext = v30;
             v30[1].mNext = v30;
-            v29->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+            v29->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
             v29->m_EventUID = 609910773;
             v29->m_NamePTR = 0i64;
           }
@@ -2103,7 +2103,7 @@ void __fastcall UFG::Editor::SceneLayerControl::UpdateToolbar(UFG::Editor::Scene
         if ( selectionSet.mDAGPaths.p )
         {
           v32 = &selectionSet.mDAGPaths.p[-1].mPathType;
-          `eh vector destructor iterator'(
+          `eh vector destructor iterator(
             selectionSet.mDAGPaths.p,
             0x58ui64,
             selectionSet.mDAGPaths.p[-1].mPathType,
@@ -2124,7 +2124,7 @@ void __fastcall UFG::Editor::SceneLayerControl::UpdateToolbar(UFG::Editor::Scene
     if ( item.mSubElements.p )
     {
       v35 = &item.mSubElements.p[-1].mStringHash32;
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         item.mSubElements.p,
         0x28ui64,
         item.mSubElements.p[-1].mStringHash32,
@@ -2136,7 +2136,7 @@ void __fastcall UFG::Editor::SceneLayerControl::UpdateToolbar(UFG::Editor::Scene
     if ( item.mElements.p )
     {
       v36 = item.mElements.p - 1;
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         item.mElements.p,
         4ui64,
         item.mElements.p[-1].mUID,
@@ -2459,7 +2459,7 @@ LABEL_33:
         v103 = v26;
         if ( v26 )
         {
-          v26->vfptr = (UFG::CommandContextVtbl *)&UFG::CommandContext::`vftable';
+          v26->vfptr = (UFG::CommandContextVtbl *)&UFG::CommandContext::`vftable;
           v101 = &v26->mDictionary;
           UFG::qBaseTreeRB::qBaseTreeRB(&v26->mDictionary.mTree);
         }
@@ -2486,8 +2486,8 @@ LABEL_33:
             v31[2].mNext = 0i64;
             v31[3].mNext = 0i64;
             LODWORD(v31[4].mNext) = v32;
-            v31->mNext = (UFG::allocator::free_link *)&UFG::ContextDataBase::`vftable';
-            v31->mNext = (UFG::allocator::free_link *)&UFG::ContextData<UFG::SceneLayer *>::`vftable';
+            v31->mNext = (UFG::allocator::free_link *)&UFG::ContextDataBase::`vftable;
+            v31->mNext = (UFG::allocator::free_link *)&UFG::ContextData<UFG::SceneLayer *>::`vftable;
             v31[5].mNext = (UFG::allocator::free_link *)v22;
           }
           else
@@ -2694,7 +2694,7 @@ LABEL_104:
           v58 = v56 + 1;
           v58->mNext = v58;
           v58[1].mNext = v58;
-          v57->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+          v57->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
           v57->m_EventUID = 609910773;
           v57->m_NamePTR = 0i64;
         }
@@ -2761,7 +2761,7 @@ LABEL_104:
             v69 = v67 + 1;
             v69->mNext = v69;
             v69[1].mNext = v69;
-            v68->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+            v68->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
             v68->m_EventUID = 609910773;
             v68->m_NamePTR = 0i64;
           }
@@ -2813,7 +2813,7 @@ LABEL_134:
           v75 = v73 + 1;
           v75->mNext = v75;
           v75[1].mNext = v75;
-          v74->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+          v74->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
           v74->m_EventUID = 609910773;
           v74->m_NamePTR = 0i64;
         }
@@ -2828,7 +2828,7 @@ LABEL_134:
         if ( item.mSubElements.p )
         {
           v76 = &item.mSubElements.p[-1].mStringHash32;
-          `eh vector destructor iterator'(
+          `eh vector destructor iterator(
             item.mSubElements.p,
             0x28ui64,
             item.mSubElements.p[-1].mStringHash32,
@@ -2840,7 +2840,7 @@ LABEL_134:
         if ( item.mElements.p )
         {
           v77 = item.mElements.p - 1;
-          `eh vector destructor iterator'(
+          `eh vector destructor iterator(
             item.mElements.p,
             4ui64,
             item.mElements.p[-1].mUID,
@@ -2922,14 +2922,14 @@ void __fastcall UFG::Editor::SceneLayerPropertiesWindow::SceneLayerPropertiesWin
 
   v1 = this;
   UFG::DUIWindow::DUIWindow((UFG::DUIWindow *)&this->vfptr);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::Editor::SceneLayerPropertiesWindow,UFG::DUIWindow>::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::Editor::SceneLayerPropertiesWindow,UFG::DUIWindow>::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::Editor::SceneLayerPropertiesWindow,UFG::DUIWindow>::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::Editor::SceneLayerPropertiesWindow,UFG::DUIWindow>::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v1->mBaseNode.mUID = -1i64;
   v1->mTypeUID = UFG::qStringHash64("UFG::Editor::SceneLayerPropertiesWindow", 0xFFFFFFFFFFFFFFFFui64);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::SceneLayerPropertiesWindow::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::SceneLayerPropertiesWindow::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::SceneLayerPropertiesWindow::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::SceneLayerPropertiesWindow::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v2 = &v1->mSceneObject_ExpandedItems;
-  v2->vfptr = (UFG::IDUICollectionViewVtbl *)&UFG::DUIIntArray::`vftable';
+  v2->vfptr = (UFG::IDUICollectionViewVtbl *)&UFG::DUIIntArray::`vftable;
   v2->mData.p = 0i64;
   *(_QWORD *)&v2->mData.size = 0i64;
   UFG::qString::qString(&v1->mLockedSelection);
@@ -3080,7 +3080,7 @@ void __fastcall UFG::Editor::SceneLayerPropertiesWindow::UpdateSceneObjectTree(U
   v3 = layer;
   v4 = dui;
   v5 = UFG::Editor::SelectionManager::mSelectionSets.mNode.mNext;
-  selected_items.vfptr = (UFG::IDUICollectionViewVtbl *)&UFG::DUIIntArray::`vftable';
+  selected_items.vfptr = (UFG::IDUICollectionViewVtbl *)&UFG::DUIIntArray::`vftable;
   v74.p = 0i64;
   *(_QWORD *)&v74.size = 0i64;
   v6 = 0;
@@ -3169,7 +3169,7 @@ LABEL_119:
   if ( v3 )
   {
     v76.mPropertyDepth = 1;
-    v76.vfptr = (UFG::Editor::SceneManager::SceneObjectVisitorVtbl *)&UFG::Editor::UpdateObjectTreeVisitor::`vftable';
+    v76.vfptr = (UFG::Editor::SceneManager::SceneObjectVisitorVtbl *)&UFG::Editor::UpdateObjectTreeVisitor::`vftable;
     v77 = v4;
     v78 = &v71;
     UFG::Editor::SceneManager::SceneObjectVisitor::Visit(&v76, v3);
@@ -3201,7 +3201,7 @@ LABEL_119:
     v27 = v25 + 1;
     v27->mNext = v27;
     v27[1].mNext = v27;
-    v26->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+    v26->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
     v26->m_EventUID = 609910773;
     v26->m_NamePTR = 0i64;
   }
@@ -3306,7 +3306,7 @@ LABEL_119:
           v46 = v44 + 1;
           v46->mNext = v46;
           v46[1].mNext = v46;
-          v45->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+          v45->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
           v45->m_EventUID = 609910773;
           v45->m_NamePTR = 0i64;
         }
@@ -3479,7 +3479,7 @@ LABEL_103:
     v69 = v67 + 1;
     v69->mNext = v69;
     v69[1].mNext = v69;
-    v68->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+    v68->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
     v68->m_EventUID = 609910773;
     v68->m_NamePTR = 0i64;
   }
@@ -3494,7 +3494,7 @@ LABEL_111:
   if ( ptr )
   {
     v70 = (char *)ptr - 8;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       ptr,
       0x58ui64,
       *((_DWORD *)ptr - 2),

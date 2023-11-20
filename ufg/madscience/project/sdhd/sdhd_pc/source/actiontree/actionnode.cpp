@@ -11,9 +11,9 @@ void ActionNode::Init(void)
   v0 = UFG::qMemoryPool2::Allocate(&gActionTreeMemoryPool, 0x78ui64, "ActionNode::Init", 0i64, 1u);
   if ( v0 )
   {
-    *(_QWORD *)v0 = &Expression::IMemberMap::`vftable';
+    *(_QWORD *)v0 = &Expression::IMemberMap::`vftable;
     *((_QWORD *)v0 + 1) = 0i64;
-    *(_QWORD *)v0 = &ActionNode::`vftable';
+    *(_QWORD *)v0 = &ActionNode::`vftable;
     *((_QWORD *)v0 + 2) = 0i64;
     *((_QWORD *)v0 + 3) = 0i64;
     *((_DWORD *)v0 + 8) = -1;
@@ -21,7 +21,7 @@ void ActionNode::Init(void)
     *((_DWORD *)v0 + 10) = UFG::qStringHashUpper32("Global", 0xFFFFFFFF);
     *((_DWORD *)v0 + 11) = 0;
     v0[48] = 0;
-    *(_QWORD *)v0 = &ActionNodeImplementation::`vftable';
+    *(_QWORD *)v0 = &ActionNodeImplementation::`vftable;
     *((_DWORD *)v0 + 18) = 0;
     *((_QWORD *)v0 + 10) = 0i64;
     *((_QWORD *)v0 + 7) = 0i64;
@@ -29,7 +29,7 @@ void ActionNode::Init(void)
     v1 = v0 + 88;
     *v1 = v1;
     v1[1] = v1;
-    *(_QWORD *)v0 = &ActionNodeBank::`vftable';
+    *(_QWORD *)v0 = &ActionNodeBank::`vftable;
     *((_WORD *)v0 + 52) = 0;
     v0[106] = 0;
     *((_QWORD *)v0 + 14) = -1i64;
@@ -182,9 +182,9 @@ __int64 dynamic_initializer_for__ActionNode::sClassNameUID__()
 // RVA: 0x268910
 void __fastcall ActionNode::ActionNode(ActionNode *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
-  this->vfptr = (Expression::IMemberMapVtbl *)&ActionNode::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&ActionNode::`vftable;
   this->mParent.mOffset = 0i64;
   this->mFirstCallback = 0i64;
   this->mMostUsedIndex = -1;
@@ -204,7 +204,7 @@ void __fastcall ActionNode::~ActionNode(ActionNode *this)
   ConditionCallback *v5; // rbx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&ActionNode::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&ActionNode::`vftable;
   v2 = this->mParent.mOffset;
   if ( v2 )
   {
@@ -223,7 +223,7 @@ void __fastcall ActionNode::~ActionNode(ActionNode *this)
     }
     while ( v5 );
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 627
@@ -667,9 +667,9 @@ void __fastcall ActionNodeImplementation::ActionNodeImplementation(ActionNodeImp
   ActionNodeImplementation *v1; // rbx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
-  this->vfptr = (Expression::IMemberMapVtbl *)&ActionNode::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&ActionNode::`vftable;
   this->mParent.mOffset = 0i64;
   this->mFirstCallback = 0i64;
   this->mMostUsedIndex = -1;
@@ -677,7 +677,7 @@ void __fastcall ActionNodeImplementation::ActionNodeImplementation(ActionNodeImp
   this->mID.mUID = UFG::qStringHashUpper32("NO_NAME", 0xFFFFFFFF);
   *(_DWORD *)&v1->mBreakPoint = 0;
   v1->mPad2 = 0;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ActionNodeImplementation::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ActionNodeImplementation::`vftable;
   v1->mChildren.mCount = 0;
   v1->mChildren.mData.mOffset = 0i64;
   v1->mConditions.mOffset = 0i64;
@@ -706,7 +706,7 @@ void __fastcall ActionNodeImplementation::~ActionNodeImplementation(ActionNodeIm
   char *v16; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&ActionNodeImplementation::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&ActionNodeImplementation::`vftable;
   v2 = this->mConditions.mOffset;
   if ( v2 )
   {
@@ -1089,7 +1089,7 @@ Expression::IMemberMap *__fastcall ActionNodeBank::CreateClone(ActionNodeBank *t
     v4 = v3 + 88;
     *v4 = v4;
     v4[1] = v4;
-    *(_QWORD *)v3 = &ActionNodeBank::`vftable';
+    *(_QWORD *)v3 = &ActionNodeBank::`vftable;
     *((_WORD *)v3 + 52) = 0;
     *((_QWORD *)v3 + 14) = -1i64;
   }
@@ -1492,7 +1492,7 @@ ActionNodeImplementation *__fastcall ActionNodePlayable::CreateClone(ActionNodeP
   if ( v2 )
   {
     ActionNodeImplementation::ActionNodeImplementation((ActionNodeImplementation *)v2);
-    v3->vfptr = (Expression::IMemberMapVtbl *)&ActionNodePlayable::`vftable';
+    v3->vfptr = (Expression::IMemberMapVtbl *)&ActionNodePlayable::`vftable;
   }
   else
   {
@@ -1572,7 +1572,7 @@ void __fastcall ActionNodeReference::~ActionNodeReference(ActionNodeReference *t
   char *v5; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&ActionNodeReference::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&ActionNodeReference::`vftable;
   v2 = &this->mAnyPathToNode;
   if ( this->mAnyPathToNode.mPath.mCount >= 0 )
   {
@@ -1620,16 +1620,16 @@ Expression::IMemberMap *__fastcall ActionNodeReference::CreateClone(ActionNodeRe
   v2 = UFG::qMemoryPool2::Allocate(&gActionTreeMemoryPool, 0x50ui64, "ActionNodeReference::CreateClone", 0i64, 1u);
   if ( v2 )
   {
-    *(_QWORD *)v2 = &Expression::IMemberMap::`vftable';
+    *(_QWORD *)v2 = &Expression::IMemberMap::`vftable;
     *((_QWORD *)v2 + 1) = 0i64;
-    *(_QWORD *)v2 = &ActionNode::`vftable';
+    *(_QWORD *)v2 = &ActionNode::`vftable;
     *((_QWORD *)v2 + 2) = 0i64;
     *((_QWORD *)v2 + 3) = 0i64;
     *((_DWORD *)v2 + 8) = -1;
     *(_QWORD *)(v2 + 36) = 0i64;
     *((_DWORD *)v2 + 11) = 0;
     v2[48] = 0;
-    *(_QWORD *)v2 = &ActionNodeReference::`vftable';
+    *(_QWORD *)v2 = &ActionNodeReference::`vftable;
     v4 = (signed __int64)(v2 + 56);
     *(_DWORD *)v4 = 0;
     *(_QWORD *)(v4 + 8) = 0i64;
@@ -1906,7 +1906,7 @@ void __fastcall ActionNodeFileReference::~ActionNodeFileReference(ActionNodeFile
   ConditionCallback *v14; // rbx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&ActionNodeFileReference::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&ActionNodeFileReference::`vftable;
   v2 = (UFG::qBaseNodeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&ActionNode::sActionTreeFileEntries);
   if ( v2 )
   {
@@ -1948,7 +1948,7 @@ LABEL_8:
         operator delete[](v6);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ActionNodeReference::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ActionNodeReference::`vftable;
   v7 = &v1->mAnyPathToNode;
   if ( v1->mAnyPathToNode.mPath.mCount >= 0 )
   {
@@ -1965,7 +1965,7 @@ LABEL_8:
     v1->mAnyPathToNode.mPath.mData.mOffset = 0i64;
     v7->mPath.mCount &= 0x80000000;
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ActionNode::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ActionNode::`vftable;
   v11 = v1->mParent.mOffset;
   if ( v11 )
   {
@@ -1984,7 +1984,7 @@ LABEL_8:
     }
     while ( v14 );
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 3291
@@ -2115,7 +2115,7 @@ Expression::IMemberMap *__fastcall ActionNodeFileReference::CreateClone(ActionNo
   if ( v2 )
   {
     ActionNodeReference::ActionNodeReference((ActionNodeReference *)v2, ActionNodeFileReference::sUnresolvedName);
-    *(_QWORD *)v3 = &ActionNodeFileReference::`vftable';
+    *(_QWORD *)v3 = &ActionNodeFileReference::`vftable;
     *((_QWORD *)v3 + 10) = 1i64;
     BinString::Set((BinString *)v3 + 10, &customWorldMapCaption);
     *((_WORD *)v3 + 44) = 1;
@@ -2412,7 +2412,7 @@ LABEL_7:
     v8 = "<NULL>";
     if ( v1 )
       v8 = v1;
-    UFG::qPrintf("WARNING: ActionNode::Load: couldn't find act file in binary: %s\n", v8);
+    UFG::qPrintf("WARNING: ActionNode::Load: couldnt find act file in binary: %s\n", v8);
   }
   return 0i64;
 }
@@ -2655,13 +2655,13 @@ void __fastcall ActionNodeRoot::ActionNodeRoot(ActionNodeRoot *this)
   v2 = (UFG::qNode<ActionNodeBank,ActionNodeBank> *)&v1->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ActionNodeBank::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ActionNodeBank::`vftable;
   v1->m_Level = 0;
   v1->mSignalMask = -1i64;
   v3 = (UFG::qNode<ActionNodeRoot,ActionNodeRootInitList> *)&v1->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ActionNodeRoot::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ActionNodeRoot::`vftable;
   v1->mToolVersion.mOffset = 1i64;
   BinString::Set(&v1->mToolVersion, &customWorldMapCaption);
   v4 = &v1->m_ConditionInitList;
@@ -2696,7 +2696,7 @@ void __fastcall ActionNodeRoot::~ActionNodeRoot(ActionNodeRoot *this)
   UFG::qNode<ActionNodeBank,ActionNodeBank> *v8; // rax
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&ActionNodeRoot::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&ActionNodeRoot::`vftable;
   UFG::qList<ActionNodeBank,ActionNodeBank,0,1>::~qList<ActionNodeBank,ActionNodeBank,0,1>(&this->m_BanksToBalance);
   UFG::qList<ActionNodeRoot,ActionNodeRootInitList,0,1>::~qList<ActionNodeRoot,ActionNodeRootInitList,0,1>(&v1->m_SubRoots);
   UFG::qList<UFG::PowerManagedResource,UFG::PowerManagedResourceList,0,0>::~qList<UFG::PowerManagedResource,UFG::PowerManagedResourceList,0,0>((UFG::qList<ITask,ITask,0,0> *)&v1->m_ConditionInitList);

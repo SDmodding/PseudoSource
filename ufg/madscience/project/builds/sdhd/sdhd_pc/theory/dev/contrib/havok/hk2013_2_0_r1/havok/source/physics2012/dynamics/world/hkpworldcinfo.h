@@ -8,7 +8,7 @@ void __fastcall hkpWorldCinfo::~hkpWorldCinfo(hkpWorldCinfo *this)
   hkReferencedObject *v4; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpWorldCinfo::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpWorldCinfo::`vftable;
   v2 = this->m_memoryWatchDog.m_pntr;
   if ( v2 )
     hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
@@ -21,7 +21,7 @@ void __fastcall hkpWorldCinfo::~hkpWorldCinfo(hkpWorldCinfo *this)
   if ( v4 )
     hkReferencedObject::removeReference(v4);
   v1->m_collisionFilter.m_pntr = 0i64;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable';
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable;
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 

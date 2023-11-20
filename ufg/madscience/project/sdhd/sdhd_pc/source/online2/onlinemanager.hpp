@@ -6,7 +6,7 @@ void __fastcall UFG::OnlineManagerObserver::~OnlineManagerObserver(UFG::OnlineMa
   UFG::qNode<UFG::OnlineManagerObserver,UFG::OnlineManagerObserver> *v2; // rcx
   UFG::qNode<UFG::OnlineManagerObserver,UFG::OnlineManagerObserver> *v3; // rax
 
-  this->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::OnlineManagerObserver::`vftable';
+  this->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::OnlineManagerObserver::`vftable;
   v1 = (UFG::qNode<UFG::OnlineManagerObserver,UFG::OnlineManagerObserver> *)&this->mPrev;
   v2 = this->mPrev;
   v3 = v1->mNext;

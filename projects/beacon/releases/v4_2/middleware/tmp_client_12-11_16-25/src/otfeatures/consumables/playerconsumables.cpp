@@ -15,25 +15,25 @@ void __fastcall OSuitePrivate::ZPlayerConsumableData::ZPlayerConsumableData(OSui
 
   v2 = this;
   this->m_pPlayerProfile = pPlayerAccount;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuitePrivate::ZPlayerConsumableData::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuitePrivate::ZPlayerConsumableData::`vftable;
   v3 = &this->m_prefixedUserId;
   LOBYTE(v3[-1].vfptr) = 0;
   v4 = pPlayerAccount;
   OSuite::ZString::ZString(v3);
   v2->m_pConsumablesData = 0i64;
   OSuite::ZRedBlackTreeBase::ZElementBase::ZElementBase((OSuite::ZObject *)&v2->m_ownedConsumables.vfptr, v5);
-  v2->m_ownedConsumables.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable'{for `OSuite::ZListBase'};
+  v2->m_ownedConsumables.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
   v2->m_ownedConsumables.m_pList = 0i64;
-  v2->m_ownedConsumables.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable'{for `OSuite::IHashable'};
+  v2->m_ownedConsumables.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
   v6 = OSuite::ZObject::malloc((OSuite::ZObject *)&v2->m_ownedConsumables.vfptr, 0x80ui64, 0i64);
   v2->m_ownedConsumables.m_nSize = 16i64;
   v2->m_ownedConsumables.m_nTop = 0i64;
   v2->m_ownedConsumables.m_pList = (OSuite::ZConsumableInfoBase **)v6;
   v2->m_bRequestInProgress = 0;
   OSuite::ZRedBlackTreeBase::ZElementBase::ZElementBase((OSuite::ZObject *)&v2->m_pendingRequests.vfptr, v7);
-  v2->m_pendingRequests.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable'{for `OSuite::ZListBase'};
+  v2->m_pendingRequests.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
   v2->m_pendingRequests.m_pList = 0i64;
-  v2->m_pendingRequests.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable'{for `OSuite::IHashable'};
+  v2->m_pendingRequests.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
   v8 = OSuite::ZObject::malloc((OSuite::ZObject *)&v2->m_pendingRequests.vfptr, 0x80ui64, 0i64);
   v2->m_pendingRequests.m_nSize = 16i64;
   v2->m_pendingRequests.m_nTop = 0i64;
@@ -66,17 +66,17 @@ void __fastcall OSuitePrivate::ZPlayerConsumableData::~ZPlayerConsumableData(OSu
   OSuite::ZConsumableInfoBase **v5; // rdx
 
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuitePrivate::ZPlayerConsumableData::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuitePrivate::ZPlayerConsumableData::`vftable;
   OSuitePrivate::ZPlayerConsumableData::TermData(this);
   v2 = &v1->m_pendingRequests;
   v3 = v1->m_pendingRequests.m_pList;
-  v2->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable'{for `OSuite::ZListBase'};
-  v2->vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable'{for `OSuite::IHashable'};
+  v2->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
+  v2->vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
   OSuite::ZObject::free((OSuite::ZObject *)&v1->m_pendingRequests.vfptr, v3);
   v4 = &v1->m_ownedConsumables;
   v5 = v1->m_ownedConsumables.m_pList;
-  v4->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable'{for `OSuite::ZListBase'};
-  v4->vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable'{for `OSuite::IHashable'};
+  v4->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
+  v4->vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
   OSuite::ZObject::free((OSuite::ZObject *)&v1->m_ownedConsumables.vfptr, v5);
   OSuite::ZString::~ZString(&v1->m_prefixedUserId);
 }
@@ -114,8 +114,8 @@ OSuite::ConsumableError __fastcall OSuitePrivate::ZPlayerConsumableData::GetInfo
       *(_QWORD *)(v5 + 32) = 0i64;
       v8 = (*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v7 + 8i64))(v7);
       v9 = (OSuite::ZString *)(**(__int64 (__fastcall ***)(__int64))v7)(v7);
-      *(_QWORD *)v6 = &OSuite::ZConsumableInfoBase::`vftable'{for `OSuite::IConsumableInfo'};
-      *(_QWORD *)(v6 + 8) = &OSuite::ZConsumableInfoBase::`vftable'{for `OSuite::ZObject'};
+      *(_QWORD *)v6 = &OSuite::ZConsumableInfoBase::`vftable{for `OSuite::IConsumableInfo};
+      *(_QWORD *)(v6 + 8) = &OSuite::ZConsumableInfoBase::`vftable{for `OSuite::ZObject};
       OSuite::ZString::ZString((OSuite::ZString *)(v6 + 16), v9);
       *(_DWORD *)(v6 + 40) = v8;
     }
@@ -177,8 +177,8 @@ __int64 __fastcall OSuitePrivate::ZPlayerConsumableData::GetNextInfo(OSuitePriva
       v12 = v3->m_pList[v9];
       v13 = ((__int64 (__fastcall *)(OSuite::ZRedBlackTreeBase::ZElementBase *))v11->vfptr[1].__vecDelDtor)(v11);
       v14 = (OSuite::ZString *)((__int64 (__fastcall *)(OSuite::ZRedBlackTreeBase::ZElementBase *))v12->vfptr->__vecDelDtor)(v12);
-      *(_QWORD *)v8 = &OSuite::ZConsumableInfoBase::`vftable'{for `OSuite::IConsumableInfo'};
-      *(_QWORD *)(v8 + 8) = &OSuite::ZConsumableInfoBase::`vftable'{for `OSuite::ZObject'};
+      *(_QWORD *)v8 = &OSuite::ZConsumableInfoBase::`vftable{for `OSuite::IConsumableInfo};
+      *(_QWORD *)(v8 + 8) = &OSuite::ZConsumableInfoBase::`vftable{for `OSuite::ZObject};
       OSuite::ZString::ZString((OSuite::ZString *)(v8 + 16), v14);
       *(_DWORD *)(v8 + 40) = v13;
     }
@@ -237,7 +237,7 @@ OSuite::ConsumableError __fastcall OSuitePrivate::ZPlayerConsumableData::Consume
         *(_QWORD *)(v10 + 24) = 0i64;
         v12 = v3->vfptr->GetQuantity(v3);
         v13 = (OSuite::ZString *)v3->vfptr->GetId(v3);
-        *(_QWORD *)v11 = &OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZJsonValue *>::`vftable';
+        *(_QWORD *)v11 = &OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZJsonValue *>::`vftable;
         OSuite::ZString::ZString((OSuite::ZString *)(v11 + 8), v13);
         *(_DWORD *)(v11 + 32) = v12;
         *(_QWORD *)(v11 + 40) = -1i64;
@@ -299,7 +299,7 @@ signed __int64 __fastcall OSuitePrivate::ZPlayerConsumableData::Acquire(OSuitePr
         v10 = v6->m_Infos.m_pList[v7];
         v11 = v10->vfptr->GetQuantity((OSuite::IConsumableInfo *)&v10->vfptr);
         v12 = (OSuite::ZString *)v10->vfptr->GetId((OSuite::IConsumableInfo *)&v10->vfptr);
-        *(_QWORD *)v9 = &OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZJsonValue *>::`vftable';
+        *(_QWORD *)v9 = &OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZJsonValue *>::`vftable;
         OSuite::ZString::ZString((OSuite::ZString *)(v9 + 8), v12);
         *(_DWORD *)(v9 + 32) = v11;
         *(_WORD *)(v9 + 36) = 0;
@@ -548,8 +548,8 @@ void __fastcall OSuitePrivate::ZPlayerConsumableData::ProcessRequests(OSuitePriv
     return;
   ptr = 0i64;
   OSuite::ZRedBlackTreeBase::ZElementBase::ZElementBase(&v15, v2);
-  v15.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable'{for `OSuite::ZListBase'};
-  v18 = &OSuite::TList<OSuite::ZJsonObject *>::`vftable'{for `OSuite::IHashable'};
+  v15.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
+  v18 = &OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
   ptr = 0i64;
   v3 = (void *)OSuite::ZObject::malloc(&v15, 0x80ui64, 0i64);
   v16 = 16i64;
@@ -640,7 +640,7 @@ LABEL_12:
       (OSuite::fastdelegate::FastDelegate2<OSuite::SCallbackData *,OSuite::ZWebServiceClient *,void> *)&key);
     v1->m_bRequestInProgress = 1;
     OSuite::ZOQuery::~ZOQuery(&query);
-    params.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TMap<OSuite::ZString,OSuite::ZString>::`vftable';
+    params.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TMap<OSuite::ZString,OSuite::ZString>::`vftable;
     if ( params.m_pLists )
     {
       if ( LODWORD(params.m_pLists[-1].m_Comparer.vfptr) )
@@ -653,8 +653,8 @@ LABEL_22:
   OSuite::ZUtf8Buffer::~ZUtf8Buffer(&v22);
   OSuite::ZUtf8Buffer::~ZUtf8Buffer(&v21);
 LABEL_23:
-  v15.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable'{for `OSuite::ZListBase'};
-  v18 = &OSuite::TList<OSuite::ZJsonObject *>::`vftable'{for `OSuite::IHashable'};
+  v15.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
+  v18 = &OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
   OSuite::ZObject::free(&v15, ptr);
 }
 
@@ -886,8 +886,8 @@ void __fastcall OSuitePrivate::ZPlayerConsumableData::UpdateConsumableData(OSuit
           {
             *(_QWORD *)(v8 + 32) = 0i64;
             v10 = outValue;
-            *(_QWORD *)v8 = &OSuite::ZConsumableInfoBase::`vftable'{for `OSuite::IConsumableInfo'};
-            *(_QWORD *)(v8 + 8) = &OSuite::ZConsumableInfoBase::`vftable'{for `OSuite::ZObject'};
+            *(_QWORD *)v8 = &OSuite::ZConsumableInfoBase::`vftable{for `OSuite::IConsumableInfo};
+            *(_QWORD *)(v8 + 8) = &OSuite::ZConsumableInfoBase::`vftable{for `OSuite::ZObject};
             OSuite::ZString::ZString((OSuite::ZString *)(v8 + 16), &that);
             v9->m_uiQuantity = v10;
           }

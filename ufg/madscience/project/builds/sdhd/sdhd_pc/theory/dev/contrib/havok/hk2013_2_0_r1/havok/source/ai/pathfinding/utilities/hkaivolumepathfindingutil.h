@@ -7,7 +7,7 @@ void __fastcall hkaiVolumePathfindingUtil::FindPathInput::~FindPathInput(hkaiVol
   int v3; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiVolumePathfindingUtil::FindPathInput::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiVolumePathfindingUtil::FindPathInput::`vftable;
   this->m_goalCellKeys.m_size = 0;
   v2 = this->m_goalCellKeys.m_capacityAndFlags;
   if ( v2 >= 0 )
@@ -26,7 +26,7 @@ void __fastcall hkaiVolumePathfindingUtil::FindPathInput::~FindPathInput(hkaiVol
       16 * v3);
   v1->m_goalPoints.m_data = 0i64;
   v1->m_goalPoints.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable';
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable;
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 

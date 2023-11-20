@@ -37,7 +37,7 @@ void __fastcall Render::IrradianceVolumeComponent::IrradianceVolumeComponent(Ren
   v5 = (UFG::qNode<Render::IrradianceVolumeComponent,Render::IrradianceVolumeComponent> *)&v4->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&Render::IrradianceVolumeComponent::`vftable';
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&Render::IrradianceVolumeComponent::`vftable;
   v4->mSceneObj = v3;
   UFG::qReflectHandleBase::qReflectHandleBase((UFG::qReflectHandleBase *)&v4->mIrradianceHandle.mPrev);
   v7 = UFG::qReflectObjectType<Render::rIrradianceVolume,UFG::qReflectObject>::GetStaticTypeName(v6);
@@ -65,7 +65,7 @@ void __fastcall Render::IrradianceVolumeComponent::~IrradianceVolumeComponent(Re
   UFG::qNode<Render::IrradianceVolumeComponent,Render::IrradianceVolumeComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&Render::IrradianceVolumeComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&Render::IrradianceVolumeComponent::`vftable;
   if ( this == Render::IrradianceVolumeComponent::s_IrradianceVolumeComponentpCurrentIterator )
     Render::IrradianceVolumeComponent::s_IrradianceVolumeComponentpCurrentIterator = (Render::IrradianceVolumeComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<Render::IrradianceVolumeComponent,Render::IrradianceVolumeComponent> *)&this->mPrev;

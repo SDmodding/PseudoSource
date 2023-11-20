@@ -6,10 +6,10 @@ void __fastcall hkaiNavMeshBaseViewer::hkaiNavMeshBaseViewer(hkaiNavMeshBaseView
 
   v2 = this;
   hkaiViewerBase::hkaiViewerBase((hkaiViewerBase *)&this->vfptr, contexts);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshBaseViewer::`vftable'{for `hkReferencedObject'};
-  v2->vfptr = (hkProcessVtbl *)&hkaiNavMeshBaseViewer::`vftable'{for `hkProcess'};
-  v2->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiNavMeshBaseViewer::`vftable'{for `hkaiViewerContextWorldListener'};
-  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiNavMeshBaseViewer::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshBaseViewer::`vftable{for `hkReferencedObject};
+  v2->vfptr = (hkProcessVtbl *)&hkaiNavMeshBaseViewer::`vftable{for `hkProcess};
+  v2->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiNavMeshBaseViewer::`vftable{for `hkaiViewerContextWorldListener};
+  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiNavMeshBaseViewer::`vftable;
   hkaiNavMeshDebugUtils::DebugInfo::DebugInfo(&v2->m_settings);
   *(_WORD *)&v2->m_settings.m_showFaces.m_bool = 0;
   v2->m_settings.m_showUserEdges.m_bool = 0;
@@ -56,11 +56,11 @@ void __fastcall hkaiNavMeshBaseViewer::~hkaiNavMeshBaseViewer(hkaiNavMeshBaseVie
   int v5; // er8
 
   v1 = 0;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshBaseViewer::`vftable'{for `hkReferencedObject'};
-  this->vfptr = (hkProcessVtbl *)&hkaiNavMeshBaseViewer::`vftable'{for `hkProcess'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshBaseViewer::`vftable{for `hkReferencedObject};
+  this->vfptr = (hkProcessVtbl *)&hkaiNavMeshBaseViewer::`vftable{for `hkProcess};
   v2 = this;
-  this->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiNavMeshBaseViewer::`vftable'{for `hkaiViewerContextWorldListener'};
-  this->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiNavMeshBaseViewer::`vftable';
+  this->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiNavMeshBaseViewer::`vftable{for `hkaiViewerContextWorldListener};
+  this->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiNavMeshBaseViewer::`vftable;
   if ( this->m_context.m_pntr )
   {
     v3 = 0i64;
@@ -85,7 +85,7 @@ void __fastcall hkaiNavMeshBaseViewer::~hkaiNavMeshBaseViewer(hkaiNavMeshBaseVie
   v2->m_settings.m_instanceEnabled.m_storage.m_words.m_data = 0i64;
   v2->m_settings.m_instanceEnabled.m_storage.m_words.m_capacityAndFlags = 2147483648;
   hkaiGraphDebugUtils::DebugInfo::~DebugInfo(&v2->m_settings.m_clusterGraphSettings);
-  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiWorld::Listener::`vftable';
+  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiWorld::Listener::`vftable;
   hkaiViewerBase::~hkaiViewerBase((hkaiViewerBase *)&v2->vfptr);
 }
 
@@ -179,10 +179,10 @@ void __fastcall hkaiNavMeshGeometryViewer::hkaiNavMeshGeometryViewer(hkaiNavMesh
 
   v2 = this;
   hkaiNavMeshBaseViewer::hkaiNavMeshBaseViewer((hkaiNavMeshBaseViewer *)&this->vfptr, contexts);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshGeometryViewer::`vftable'{for `hkReferencedObject'};
-  v2->vfptr = (hkProcessVtbl *)&hkaiNavMeshGeometryViewer::`vftable'{for `hkProcess'};
-  v2->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiNavMeshGeometryViewer::`vftable'{for `hkaiViewerContextWorldListener'};
-  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiNavMeshGeometryViewer::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshGeometryViewer::`vftable{for `hkReferencedObject};
+  v2->vfptr = (hkProcessVtbl *)&hkaiNavMeshGeometryViewer::`vftable{for `hkProcess};
+  v2->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiNavMeshGeometryViewer::`vftable{for `hkaiViewerContextWorldListener};
+  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiNavMeshGeometryViewer::`vftable;
   v2->m_navMeshInfos.m_capacityAndFlags = 2147483648;
   v2->m_navMeshInfos.m_data = 0i64;
   v2->m_navMeshInfos.m_size = 0;
@@ -203,11 +203,11 @@ void __fastcall hkaiNavMeshGeometryViewer::~hkaiNavMeshGeometryViewer(hkaiNavMes
   int v7; // eax
 
   v1 = this->m_navMeshInfos.m_size == 0;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshGeometryViewer::`vftable'{for `hkReferencedObject'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshGeometryViewer::`vftable{for `hkReferencedObject};
   v2 = this;
-  this->vfptr = (hkProcessVtbl *)&hkaiNavMeshGeometryViewer::`vftable'{for `hkProcess'};
-  this->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiNavMeshGeometryViewer::`vftable'{for `hkaiViewerContextWorldListener'};
-  this->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiNavMeshGeometryViewer::`vftable';
+  this->vfptr = (hkProcessVtbl *)&hkaiNavMeshGeometryViewer::`vftable{for `hkProcess};
+  this->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiNavMeshGeometryViewer::`vftable{for `hkaiViewerContextWorldListener};
+  this->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiNavMeshGeometryViewer::`vftable;
   if ( !v1 )
   {
     do
@@ -1090,7 +1090,7 @@ void __usercall hkaiNavMeshGeometryViewer::addFaceGeometry(hkaiNavMeshGeometryVi
   if ( v15 )
   {
     *(_DWORD *)(v15 + 8) = 0x1FFFF;
-    *(_QWORD *)v15 = &hkGeometry::`vftable';
+    *(_QWORD *)v15 = &hkGeometry::`vftable;
     *(_QWORD *)(v15 + 16) = 0i64;
     *(_DWORD *)(v15 + 24) = 0;
     *(_DWORD *)(v15 + 28) = 2147483648;
@@ -1590,10 +1590,10 @@ void __fastcall hkaiNavMeshVertexNormalsViewer::hkaiNavMeshVertexNormalsViewer(h
 
   v2 = this;
   hkaiNavMeshBaseViewer::hkaiNavMeshBaseViewer((hkaiNavMeshBaseViewer *)&this->vfptr, contexts);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshVertexNormalsViewer::`vftable'{for `hkReferencedObject'};
-  v2->vfptr = (hkProcessVtbl *)&hkaiNavMeshVertexNormalsViewer::`vftable'{for `hkProcess'};
-  v2->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiNavMeshVertexNormalsViewer::`vftable'{for `hkaiViewerContextWorldListener'};
-  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiNavMeshVertexNormalsViewer::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshVertexNormalsViewer::`vftable{for `hkReferencedObject};
+  v2->vfptr = (hkProcessVtbl *)&hkaiNavMeshVertexNormalsViewer::`vftable{for `hkProcess};
+  v2->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiNavMeshVertexNormalsViewer::`vftable{for `hkaiViewerContextWorldListener};
+  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiNavMeshVertexNormalsViewer::`vftable;
   v2->m_settings.m_showVertexNormals.m_bool = 1;
 }
 
@@ -1637,10 +1637,10 @@ void __fastcall hkaiNavMeshEdgeNormalsViewer::hkaiNavMeshEdgeNormalsViewer(hkaiN
 
   v2 = this;
   hkaiNavMeshBaseViewer::hkaiNavMeshBaseViewer((hkaiNavMeshBaseViewer *)&this->vfptr, contexts);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshEdgeNormalsViewer::`vftable'{for `hkReferencedObject'};
-  v2->vfptr = (hkProcessVtbl *)&hkaiNavMeshEdgeNormalsViewer::`vftable'{for `hkProcess'};
-  v2->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiNavMeshEdgeNormalsViewer::`vftable'{for `hkaiViewerContextWorldListener'};
-  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiNavMeshEdgeNormalsViewer::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshEdgeNormalsViewer::`vftable{for `hkReferencedObject};
+  v2->vfptr = (hkProcessVtbl *)&hkaiNavMeshEdgeNormalsViewer::`vftable{for `hkProcess};
+  v2->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiNavMeshEdgeNormalsViewer::`vftable{for `hkaiViewerContextWorldListener};
+  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiNavMeshEdgeNormalsViewer::`vftable;
   v2->m_settings.m_showEdgeNormals.m_bool = 1;
 }
 
@@ -1684,10 +1684,10 @@ void __fastcall hkaiNavMeshFaceNormalsViewer::hkaiNavMeshFaceNormalsViewer(hkaiN
 
   v2 = this;
   hkaiNavMeshBaseViewer::hkaiNavMeshBaseViewer((hkaiNavMeshBaseViewer *)&this->vfptr, contexts);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshFaceNormalsViewer::`vftable'{for `hkReferencedObject'};
-  v2->vfptr = (hkProcessVtbl *)&hkaiNavMeshFaceNormalsViewer::`vftable'{for `hkProcess'};
-  v2->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiNavMeshFaceNormalsViewer::`vftable'{for `hkaiViewerContextWorldListener'};
-  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiNavMeshFaceNormalsViewer::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshFaceNormalsViewer::`vftable{for `hkReferencedObject};
+  v2->vfptr = (hkProcessVtbl *)&hkaiNavMeshFaceNormalsViewer::`vftable{for `hkProcess};
+  v2->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiNavMeshFaceNormalsViewer::`vftable{for `hkaiViewerContextWorldListener};
+  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiNavMeshFaceNormalsViewer::`vftable;
   v2->m_settings.m_showNormals.m_bool = 1;
 }
 
@@ -1731,10 +1731,10 @@ void __fastcall hkaiNavMeshVertexLabelsViewer::hkaiNavMeshVertexLabelsViewer(hka
 
   v2 = this;
   hkaiNavMeshBaseViewer::hkaiNavMeshBaseViewer((hkaiNavMeshBaseViewer *)&this->vfptr, contexts);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshVertexLabelsViewer::`vftable'{for `hkReferencedObject'};
-  v2->vfptr = (hkProcessVtbl *)&hkaiNavMeshVertexLabelsViewer::`vftable'{for `hkProcess'};
-  v2->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiNavMeshVertexLabelsViewer::`vftable'{for `hkaiViewerContextWorldListener'};
-  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiNavMeshVertexLabelsViewer::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshVertexLabelsViewer::`vftable{for `hkReferencedObject};
+  v2->vfptr = (hkProcessVtbl *)&hkaiNavMeshVertexLabelsViewer::`vftable{for `hkProcess};
+  v2->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiNavMeshVertexLabelsViewer::`vftable{for `hkaiViewerContextWorldListener};
+  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiNavMeshVertexLabelsViewer::`vftable;
   v2->m_settings.m_labelVertices.m_bool = 1;
 }
 
@@ -1778,10 +1778,10 @@ void __fastcall hkaiNavMeshEdgeLabelsViewer::hkaiNavMeshEdgeLabelsViewer(hkaiNav
 
   v2 = this;
   hkaiNavMeshBaseViewer::hkaiNavMeshBaseViewer((hkaiNavMeshBaseViewer *)&this->vfptr, contexts);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshEdgeLabelsViewer::`vftable'{for `hkReferencedObject'};
-  v2->vfptr = (hkProcessVtbl *)&hkaiNavMeshEdgeLabelsViewer::`vftable'{for `hkProcess'};
-  v2->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiNavMeshEdgeLabelsViewer::`vftable'{for `hkaiViewerContextWorldListener'};
-  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiNavMeshEdgeLabelsViewer::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshEdgeLabelsViewer::`vftable{for `hkReferencedObject};
+  v2->vfptr = (hkProcessVtbl *)&hkaiNavMeshEdgeLabelsViewer::`vftable{for `hkProcess};
+  v2->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiNavMeshEdgeLabelsViewer::`vftable{for `hkaiViewerContextWorldListener};
+  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiNavMeshEdgeLabelsViewer::`vftable;
   v2->m_settings.m_labelEdges.m_bool = 1;
 }
 
@@ -1825,10 +1825,10 @@ void __fastcall hkaiNavMeshFaceLabelsViewer::hkaiNavMeshFaceLabelsViewer(hkaiNav
 
   v2 = this;
   hkaiNavMeshBaseViewer::hkaiNavMeshBaseViewer((hkaiNavMeshBaseViewer *)&this->vfptr, contexts);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshFaceLabelsViewer::`vftable'{for `hkReferencedObject'};
-  v2->vfptr = (hkProcessVtbl *)&hkaiNavMeshFaceLabelsViewer::`vftable'{for `hkProcess'};
-  v2->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiNavMeshFaceLabelsViewer::`vftable'{for `hkaiViewerContextWorldListener'};
-  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiNavMeshFaceLabelsViewer::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshFaceLabelsViewer::`vftable{for `hkReferencedObject};
+  v2->vfptr = (hkProcessVtbl *)&hkaiNavMeshFaceLabelsViewer::`vftable{for `hkProcess};
+  v2->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiNavMeshFaceLabelsViewer::`vftable{for `hkaiViewerContextWorldListener};
+  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiNavMeshFaceLabelsViewer::`vftable;
   v2->m_settings.m_labelFaces.m_bool = 1;
 }
 

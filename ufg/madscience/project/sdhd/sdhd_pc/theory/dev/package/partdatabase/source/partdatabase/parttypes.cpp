@@ -10,7 +10,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::PartDefinition_UFG
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::PartDefinition,UFG::qReflectObject>::sInventory.vfptr,
     "UFG::PartDefinition",
     v0);
-  UFG::qReflectObjectType<UFG::PartDefinition,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::PartDefinition>::`vftable';
+  UFG::qReflectObjectType<UFG::PartDefinition,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::PartDefinition>::`vftable;
   UFG::qReflectInventory<UFG::PartDefinition>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::PartDefinition,UFG::qReflectObject>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -38,7 +38,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::ScalingPreset_UFG:
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::ScalingPreset,UFG::qReflectObject>::sInventory.vfptr,
     "UFG::ScalingPreset",
     v0);
-  UFG::qReflectObjectType<UFG::ScalingPreset,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::ScalingPreset>::`vftable';
+  UFG::qReflectObjectType<UFG::ScalingPreset,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::ScalingPreset>::`vftable;
   UFG::qReflectInventory<UFG::ScalingPreset>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::ScalingPreset,UFG::qReflectObject>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -392,7 +392,7 @@ void __fastcall UFG::PartTemplateInstance::~PartTemplateInstance(UFG::PartTempla
   UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::PartTemplateInstance::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::PartTemplateInstance::`vftable;
   v2 = this->mTextureData;
   if ( v2 )
   {
@@ -410,7 +410,7 @@ void __fastcall UFG::PartTemplateInstance::~PartTemplateInstance(UFG::PartTempla
     if ( v3 )
     {
       v4 = &v3[-1].mLayers.mData.mNumItems;
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         v3,
         0x68ui64,
         v3[-1].mLayers.mData.mNumItems,
@@ -422,7 +422,7 @@ void __fastcall UFG::PartTemplateInstance::~PartTemplateInstance(UFG::PartTempla
   *(_QWORD *)&v1->mSlots.mData.mNumItems = 0i64;
   UFG::qReflectHandleBase::~qReflectHandleBase((UFG::qReflectHandleBase *)&v1->mScalingPreset.mPrev);
   UFG::qReflectHandleBase::~qReflectHandleBase((UFG::qReflectHandleBase *)&v1->mTemplate.mPrev);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable';
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable;
   UFG::qList<UFG::qReflectHandleBase,UFG::qReflectHandleBase,1,0>::DeleteNodes(&v1->mHandles);
   v5 = v1->mHandles.mNode.mPrev;
   v6 = v1->mHandles.mNode.mNext;

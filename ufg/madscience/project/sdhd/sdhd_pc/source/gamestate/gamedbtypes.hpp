@@ -15,13 +15,13 @@ void __fastcall UFG::PlayerStatData2::PlayerStatData2(UFG::PlayerStatData2 *this
   v2->mBaseNode.mNeighbours[0] = &v2->mBaseNode;
   v2->mBaseNode.mNeighbours[1] = &v2->mBaseNode;
   v2->mBaseNode.mUID = v3;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable;
   v4 = &this->mHandles;
   v4->mNode.mPrev = &v4->mNode;
   v4->mNode.mNext = &v4->mNode;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::PlayerStatData2,UFG::qReflectObject>::`vftable';
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::PlayerStatData2::`vftable';
-  `eh vector constructor iterator'(
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::PlayerStatData2,UFG::qReflectObject>::`vftable;
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::PlayerStatData2::`vftable;
+  `eh vector constructor iterator(
     this->mGangMembers,
     0x48ui64,
     10,
@@ -47,12 +47,12 @@ void __fastcall UFG::UpgradeType::UpgradeType(UFG::UpgradeType *this, MemImageLo
   v3->mBaseNode.mNeighbours[0] = &v3->mBaseNode;
   v3->mBaseNode.mNeighbours[1] = &v3->mBaseNode;
   v3->mBaseNode.mUID = v4;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable;
   v5 = &this->mHandles;
   v5->mNode.mPrev = &v5->mNode;
   v5->mNode.mNext = &v5->mNode;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::UpgradeType,UFG::qReflectObject>::`vftable';
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::UpgradeType::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::UpgradeType,UFG::qReflectObject>::`vftable;
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::UpgradeType::`vftable;
   UFG::qReflectHandleBase::qReflectHandleBase((UFG::qList<UFG::qReflectHandleBase,UFG::qReflectHandleBase,1,0> *)&this->mStatModifier);
   v2->mDependencies.mData.mFlags = 2;
 }
@@ -74,12 +74,12 @@ void __fastcall UFG::RacketCoreLevel::RacketCoreLevel(UFG::RacketCoreLevel *this
   v2->mBaseNode.mNeighbours[0] = &v2->mBaseNode;
   v2->mBaseNode.mNeighbours[1] = &v2->mBaseNode;
   v2->mBaseNode.mUID = v3;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable;
   v4 = &this->mHandles;
   v4->mNode.mPrev = &v4->mNode;
   v4->mNode.mNext = &v4->mNode;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::RacketCoreLevel,UFG::qReflectObject>::`vftable';
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::RacketCoreLevel::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::RacketCoreLevel,UFG::qReflectObject>::`vftable;
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::RacketCoreLevel::`vftable;
   this->mInteriorVariants.mData.mFlags = 2;
   this->mInteriorPropsVariants.mData.mFlags = 2;
   this->mInteriorDoorsVariants.mData.mFlags = 2;
@@ -109,12 +109,12 @@ void __fastcall UFG::RacketType::RacketType(UFG::RacketType *this, MemImageLoadF
   v3->mBaseNode.mNeighbours[0] = &v3->mBaseNode;
   v3->mBaseNode.mNeighbours[1] = &v3->mBaseNode;
   v3->mBaseNode.mUID = v4;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable;
   v6 = &this->mHandles;
   v6->mNode.mPrev = &v6->mNode;
   v6->mNode.mNext = &v6->mNode;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::RacketType,UFG::qReflectObject>::`vftable';
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::RacketType::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::RacketType,UFG::qReflectObject>::`vftable;
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::RacketType::`vftable;
   v5 = &this->mOutput;
   UFG::qReflectHandleBase::qReflectHandleBase((UFG::qReflectHandleBase *)&this->mOutput.mPrev);
   v5->mTypeUID = UFG::qStringHash64("UFG::CommodityType", 0xFFFFFFFFFFFFFFFFui64);
@@ -142,12 +142,12 @@ void __fastcall UFG::SafehouseBlock::SafehouseBlock(UFG::SafehouseBlock *this, M
   v3->mBaseNode.mNeighbours[0] = &v3->mBaseNode;
   v3->mBaseNode.mNeighbours[1] = &v3->mBaseNode;
   v3->mBaseNode.mUID = v4;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable;
   v5 = &this->mHandles;
   v5->mNode.mPrev = &v5->mNode;
   v5->mNode.mNext = &v5->mNode;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::SafehouseBlock,UFG::qReflectObject>::`vftable';
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::SafehouseBlock::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::SafehouseBlock,UFG::qReflectObject>::`vftable;
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::SafehouseBlock::`vftable;
   UFG::qReflectHandleBase::qReflectHandleBase((UFG::qList<UFG::qReflectHandleBase,UFG::qReflectHandleBase,1,0> *)&this->mSafehouse);
   UFG::qReflectHandleBase::qReflectHandleBase((UFG::qList<UFG::qReflectHandleBase,UFG::qReflectHandleBase,1,0> *)&v2->mGarageRacket);
   UFG::qReflectHandleBase::qReflectHandleBase((UFG::qList<UFG::qReflectHandleBase,UFG::qReflectHandleBase,1,0> *)&v2->mWarehouseRacket);
@@ -173,12 +173,12 @@ void __fastcall UFG::TurfTemplate::TurfTemplate(UFG::TurfTemplate *this, MemImag
   v3->mBaseNode.mNeighbours[0] = &v3->mBaseNode;
   v3->mBaseNode.mNeighbours[1] = &v3->mBaseNode;
   v3->mBaseNode.mUID = v4;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable;
   v5 = &this->mHandles;
   v5->mNode.mPrev = &v5->mNode;
   v5->mNode.mNext = &v5->mNode;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::TurfTemplate,UFG::qReflectObject>::`vftable';
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::TurfTemplate::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::TurfTemplate,UFG::qReflectObject>::`vftable;
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::TurfTemplate::`vftable;
   UFG::qReflectHandleBase::qReflectHandleBase((UFG::qList<UFG::qReflectHandleBase,UFG::qReflectHandleBase,1,0> *)&this->mSafehouseBlock);
   v2->mTurfBlocks.mData.mFlags = 2;
   v2->mPrimaryRoad.mData.mFlags = 2;
@@ -204,12 +204,12 @@ void __fastcall UFG::ContactType::ContactType(UFG::ContactType *this, MemImageLo
   v3->mBaseNode.mNeighbours[0] = &v3->mBaseNode;
   v3->mBaseNode.mNeighbours[1] = &v3->mBaseNode;
   v3->mBaseNode.mUID = v4;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable;
   v5 = &this->mHandles;
   v5->mNode.mPrev = &v5->mNode;
   v5->mNode.mNext = &v5->mNode;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::ContactType,UFG::qReflectObject>::`vftable';
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::ContactType::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::ContactType,UFG::qReflectObject>::`vftable;
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::ContactType::`vftable;
   this->mDisplayName.mText.mData.mFlags = 2;
   UFG::qReflectHandleBase::qReflectHandleBase((UFG::qList<UFG::qReflectHandleBase,UFG::qReflectHandleBase,1,0> *)&this->mIcon);
   v2->mStatModifiers.mData.mFlags = 2;
@@ -234,12 +234,12 @@ void __fastcall UFG::PlayerInstanceData2::PlayerInstanceData2(UFG::PlayerInstanc
   v2->mBaseNode.mNeighbours[0] = &v2->mBaseNode;
   v2->mBaseNode.mNeighbours[1] = &v2->mBaseNode;
   v2->mBaseNode.mUID = v3;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable;
   v5 = &this->mHandles;
   v5->mNode.mPrev = &v5->mNode;
   v5->mNode.mNext = &v5->mNode;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::PlayerInstanceData2,UFG::qReflectObject>::`vftable';
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::PlayerInstanceData2::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::PlayerInstanceData2,UFG::qReflectObject>::`vftable;
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::PlayerInstanceData2::`vftable;
   this->Name.mText.mData.mFlags = 2;
   this->Informants.mData.mFlags = 2;
   this->Contacts.mData.mFlags = 2;

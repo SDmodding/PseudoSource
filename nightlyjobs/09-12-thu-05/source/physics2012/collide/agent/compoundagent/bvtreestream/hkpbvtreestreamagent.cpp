@@ -10,7 +10,7 @@ void __fastcall hkpBvTreeStreamAgent::hkpBvTreeStreamAgent(hkpBvTreeStreamAgent 
   v5 = this;
   this->m_contactMgr = mgr;
   v6 = &this->m_agentTrack;
-  v6[-4].m_sectors.m_data = (hkpAgent1nSector **)&hkpBvTreeStreamAgent::`vftable';
+  v6[-4].m_sectors.m_data = (hkpAgent1nSector **)&hkpBvTreeStreamAgent::`vftable;
   v6->m_sectors.m_capacityAndFlags = 2147483648;
   v6->m_sectors.m_data = 0i64;
   v6->m_sectors.m_size = 0;
@@ -127,7 +127,7 @@ hkpBvTreeStreamAgent *__fastcall hkpBvTreeStreamAgent::dispatchBvTreeConvexList(
       return 0i64;
     hkpBvTreeStreamAgent::hkpBvTreeStreamAgent(v18, v6, v7, v5, 0i64);
 LABEL_13:
-    v16->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpBvTreeStreamAgent>::`vftable';
+    v16->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpBvTreeStreamAgent>::`vftable;
     return v16;
   }
   v8 = ((__int64 (__fastcall *)(hkpConvexListFilter *, hkpCdBody *, hkpCdBody *, hkpCollisionInput *))input->m_convexListFilter.m_storage->vfptr[1].__first_virtual_table_function__)(
@@ -163,7 +163,7 @@ LABEL_9:
   if ( !v12 )
     return 0i64;
   hkpShapeCollectionAgent::hkpShapeCollectionAgent(v12, v6, v7, v5, v4);
-  v13->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpShapeCollectionAgent>::`vftable';
+  v13->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpShapeCollectionAgent>::`vftable;
   return (hkpBvTreeStreamAgent *)v13;
 }
 
@@ -231,7 +231,7 @@ LABEL_8:
     if ( v15 )
     {
       hkpBvTreeStreamAgent::hkpBvTreeStreamAgent(v15, v6, v7, v5, 0i64);
-      v16->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpBvTreeStreamAgent>::`vftable';
+      v16->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpBvTreeStreamAgent>::`vftable;
     }
   }
 }
@@ -258,7 +258,7 @@ hkpBvTreeStreamAgent *__fastcall hkpBvTreeStreamAgent::createBvTreeShapeAgent(hk
   if ( result )
   {
     hkpBvTreeStreamAgent::hkpBvTreeStreamAgent(result, v7, v4, v6, v5);
-    v10->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpBvTreeStreamAgent>::`vftable';
+    v10->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpBvTreeStreamAgent>::`vftable;
     result = (hkpBvTreeStreamAgent *)v10;
   }
   return result;

@@ -260,7 +260,7 @@ LABEL_16:
   {
     *(_DWORD *)v28 = v24;
     v29 = (signed __int64)(v28 + 16);
-    `eh vector constructor iterator'(
+    `eh vector constructor iterator(
       v28 + 16,
       0x40ui64,
       v24,
@@ -294,65 +294,65 @@ LABEL_16:
       UFG::qResourceHandle::qResourceHandle(&v78);
       UFG::qResourceHandle::qResourceHandle(&v77);
       UFG::qResourceHandle::qResourceHandle(&v79);
-      v38 = `UFG::qGetResourceInventory<Illusion::ShaderBinary>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<Illusion::ShaderBinary>'::`2'::result )
+      v38 = `UFG::qGetResourceInventory<Illusion::ShaderBinary>::`2::result;
+      if ( !`UFG::qGetResourceInventory<Illusion::ShaderBinary>::`2::result )
       {
         v39 = UFG::qResourceWarehouse::Instance();
         v38 = UFG::qResourceWarehouse::GetInventory(v39, 0xE80F42E1);
-        `UFG::qGetResourceInventory<Illusion::ShaderBinary>'::`2'::result = v38;
+        `UFG::qGetResourceInventory<Illusion::ShaderBinary>::`2::result = v38;
       }
       UFG::qResourceHandle::Init(&v82, 0xE80F42E1, v33, v38);
       if ( v34 )
       {
-        v40 = `UFG::qGetResourceInventory<Illusion::ShaderBinary>'::`2'::result;
-        if ( !`UFG::qGetResourceInventory<Illusion::ShaderBinary>'::`2'::result )
+        v40 = `UFG::qGetResourceInventory<Illusion::ShaderBinary>::`2::result;
+        if ( !`UFG::qGetResourceInventory<Illusion::ShaderBinary>::`2::result )
         {
           v41 = UFG::qResourceWarehouse::Instance();
           v40 = UFG::qResourceWarehouse::GetInventory(v41, 0xE80F42E1);
-          `UFG::qGetResourceInventory<Illusion::ShaderBinary>'::`2'::result = v40;
+          `UFG::qGetResourceInventory<Illusion::ShaderBinary>::`2::result = v40;
         }
         UFG::qResourceHandle::Init(&v80, 0xE80F42E1, v34, v40);
       }
       if ( v35 )
       {
-        v42 = `UFG::qGetResourceInventory<Illusion::ShaderBinary>'::`2'::result;
-        if ( !`UFG::qGetResourceInventory<Illusion::ShaderBinary>'::`2'::result )
+        v42 = `UFG::qGetResourceInventory<Illusion::ShaderBinary>::`2::result;
+        if ( !`UFG::qGetResourceInventory<Illusion::ShaderBinary>::`2::result )
         {
           v43 = UFG::qResourceWarehouse::Instance();
           v42 = UFG::qResourceWarehouse::GetInventory(v43, 0xE80F42E1);
-          `UFG::qGetResourceInventory<Illusion::ShaderBinary>'::`2'::result = v42;
+          `UFG::qGetResourceInventory<Illusion::ShaderBinary>::`2::result = v42;
         }
         UFG::qResourceHandle::Init(&v78, 0xE80F42E1, v35, v42);
       }
       if ( v36 )
       {
-        v44 = `UFG::qGetResourceInventory<Illusion::ShaderBinary>'::`2'::result;
-        if ( !`UFG::qGetResourceInventory<Illusion::ShaderBinary>'::`2'::result )
+        v44 = `UFG::qGetResourceInventory<Illusion::ShaderBinary>::`2::result;
+        if ( !`UFG::qGetResourceInventory<Illusion::ShaderBinary>::`2::result )
         {
           v45 = UFG::qResourceWarehouse::Instance();
           v44 = UFG::qResourceWarehouse::GetInventory(v45, 0xE80F42E1);
-          `UFG::qGetResourceInventory<Illusion::ShaderBinary>'::`2'::result = v44;
+          `UFG::qGetResourceInventory<Illusion::ShaderBinary>::`2::result = v44;
         }
         UFG::qResourceHandle::Init(&v77, 0xE80F42E1, v36, v44);
       }
       if ( v37 )
       {
-        v46 = `UFG::qGetResourceInventory<Illusion::ShaderBinary>'::`2'::result;
-        if ( !`UFG::qGetResourceInventory<Illusion::ShaderBinary>'::`2'::result )
+        v46 = `UFG::qGetResourceInventory<Illusion::ShaderBinary>::`2::result;
+        if ( !`UFG::qGetResourceInventory<Illusion::ShaderBinary>::`2::result )
         {
           v47 = UFG::qResourceWarehouse::Instance();
           v46 = UFG::qResourceWarehouse::GetInventory(v47, 0xE80F42E1);
-          `UFG::qGetResourceInventory<Illusion::ShaderBinary>'::`2'::result = v46;
+          `UFG::qGetResourceInventory<Illusion::ShaderBinary>::`2::result = v46;
         }
         UFG::qResourceHandle::Init(&v79, 0xE80F42E1, v37, v46);
       }
       v48 = UFG::qStringHashUpper32((const char *)*v31, 0xFFFFFFFF);
-      v49 = `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result )
+      v49 = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
+      if ( !`UFG::qGetResourceInventory<Illusion::Shader>::`2::result )
       {
         v50 = UFG::qResourceWarehouse::Instance();
         v49 = UFG::qResourceWarehouse::GetInventory(v50, 0x8B5561A1);
-        `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result = v49;
+        `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = v49;
       }
       UFG::qResourceHandle::Init((UFG::qResourceHandle *)(v31 + 1), 0x8B5561A1, v48, v49);
       v51 = 0;
@@ -432,48 +432,48 @@ LABEL_62:
       }
       if ( VerboseShaderTemplate )
         UFG::qPrintf("Permutation %25s StateBlockMask=0x%016x64", *v31, v31[5]);
-      v66 = `UFG::qGetResourceInventory<Illusion::ShaderBinary>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<Illusion::ShaderBinary>'::`2'::result )
+      v66 = `UFG::qGetResourceInventory<Illusion::ShaderBinary>::`2::result;
+      if ( !`UFG::qGetResourceInventory<Illusion::ShaderBinary>::`2::result )
       {
         v67 = UFG::qResourceWarehouse::Instance();
         v66 = UFG::qResourceWarehouse::GetInventory(v67, 0xE80F42E1);
-        `UFG::qGetResourceInventory<Illusion::ShaderBinary>'::`2'::result = v66;
+        `UFG::qGetResourceInventory<Illusion::ShaderBinary>::`2::result = v66;
       }
       UFG::qResourceHandle::Close(&v79, v66);
       UFG::qResourceHandle::~qResourceHandle(&v79);
-      v68 = `UFG::qGetResourceInventory<Illusion::ShaderBinary>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<Illusion::ShaderBinary>'::`2'::result )
+      v68 = `UFG::qGetResourceInventory<Illusion::ShaderBinary>::`2::result;
+      if ( !`UFG::qGetResourceInventory<Illusion::ShaderBinary>::`2::result )
       {
         v69 = UFG::qResourceWarehouse::Instance();
         v68 = UFG::qResourceWarehouse::GetInventory(v69, 0xE80F42E1);
-        `UFG::qGetResourceInventory<Illusion::ShaderBinary>'::`2'::result = v68;
+        `UFG::qGetResourceInventory<Illusion::ShaderBinary>::`2::result = v68;
       }
       UFG::qResourceHandle::Close(&v77, v68);
       UFG::qResourceHandle::~qResourceHandle(&v77);
-      v70 = `UFG::qGetResourceInventory<Illusion::ShaderBinary>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<Illusion::ShaderBinary>'::`2'::result )
+      v70 = `UFG::qGetResourceInventory<Illusion::ShaderBinary>::`2::result;
+      if ( !`UFG::qGetResourceInventory<Illusion::ShaderBinary>::`2::result )
       {
         v71 = UFG::qResourceWarehouse::Instance();
         v70 = UFG::qResourceWarehouse::GetInventory(v71, 0xE80F42E1);
-        `UFG::qGetResourceInventory<Illusion::ShaderBinary>'::`2'::result = v70;
+        `UFG::qGetResourceInventory<Illusion::ShaderBinary>::`2::result = v70;
       }
       UFG::qResourceHandle::Close(&v78, v70);
       UFG::qResourceHandle::~qResourceHandle(&v78);
-      v72 = `UFG::qGetResourceInventory<Illusion::ShaderBinary>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<Illusion::ShaderBinary>'::`2'::result )
+      v72 = `UFG::qGetResourceInventory<Illusion::ShaderBinary>::`2::result;
+      if ( !`UFG::qGetResourceInventory<Illusion::ShaderBinary>::`2::result )
       {
         v73 = UFG::qResourceWarehouse::Instance();
         v72 = UFG::qResourceWarehouse::GetInventory(v73, 0xE80F42E1);
-        `UFG::qGetResourceInventory<Illusion::ShaderBinary>'::`2'::result = v72;
+        `UFG::qGetResourceInventory<Illusion::ShaderBinary>::`2::result = v72;
       }
       UFG::qResourceHandle::Close(&v80, v72);
       UFG::qResourceHandle::~qResourceHandle(&v80);
-      v74 = `UFG::qGetResourceInventory<Illusion::ShaderBinary>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<Illusion::ShaderBinary>'::`2'::result )
+      v74 = `UFG::qGetResourceInventory<Illusion::ShaderBinary>::`2::result;
+      if ( !`UFG::qGetResourceInventory<Illusion::ShaderBinary>::`2::result )
       {
         v75 = UFG::qResourceWarehouse::Instance();
         v74 = UFG::qResourceWarehouse::GetInventory(v75, 0xE80F42E1);
-        `UFG::qGetResourceInventory<Illusion::ShaderBinary>'::`2'::result = v74;
+        `UFG::qGetResourceInventory<Illusion::ShaderBinary>::`2::result = v74;
       }
       UFG::qResourceHandle::Close(&v82, v74);
       UFG::qResourceHandle::~qResourceHandle(&v82);
@@ -496,7 +496,7 @@ __int64 Illusion::_dynamic_initializer_for__gShaderTemplateInventory__()
     0xC46AEEFu,
     0,
     0);
-  Illusion::gShaderTemplateInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Illusion::iShaderTemplateInventory::`vftable';
+  Illusion::gShaderTemplateInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Illusion::iShaderTemplateInventory::`vftable;
   return atexit(Illusion::_dynamic_atexit_destructor_for__gShaderTemplateInventory__);
 }
 
@@ -527,7 +527,7 @@ void __fastcall Illusion::iShaderTemplateInventory::Remove(Illusion::iShaderTemp
   if ( v3 )
   {
     v4 = &v3[-1].mChild[1];
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v3,
       0x40ui64,
       (int)v3[-1].mChild[1],

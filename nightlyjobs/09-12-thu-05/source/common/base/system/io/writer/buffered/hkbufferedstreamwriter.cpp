@@ -30,7 +30,7 @@ void __fastcall hkBufferedStreamWriter::hkBufferedStreamWriter(hkBufferedStreamW
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_stream = s;
-  this->vfptr = (hkBaseObjectVtbl *)&hkBufferedStreamWriter::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkBufferedStreamWriter::`vftable;
   v3 = this;
   this->m_ownBuffer.m_bool = 1;
   v4 = bufSize;
@@ -49,7 +49,7 @@ void __fastcall hkBufferedStreamWriter::hkBufferedStreamWriter(hkBufferedStreamW
 {
   int v4; // eax
 
-  this->vfptr = (hkBaseObjectVtbl *)&hkBufferedStreamWriter::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkBufferedStreamWriter::`vftable;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_stream = 0i64;
   this->m_bufSize = 0;
@@ -73,7 +73,7 @@ void __fastcall hkBufferedStreamWriter::~hkBufferedStreamWriter(hkBufferedStream
   hkMemoryAllocator **v4; // rax
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkBufferedStreamWriter::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkBufferedStreamWriter::`vftable;
   hkBufferedStreamWriter::flush(this);
   v2 = (hkReferencedObject *)&v1->m_stream->vfptr;
   if ( v2 )
@@ -84,7 +84,7 @@ void __fastcall hkBufferedStreamWriter::~hkBufferedStreamWriter(hkBufferedStream
     v4 = (hkMemoryAllocator **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
     hkMemoryRouter::alignedFree(v4[11], v3);
   }
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 70

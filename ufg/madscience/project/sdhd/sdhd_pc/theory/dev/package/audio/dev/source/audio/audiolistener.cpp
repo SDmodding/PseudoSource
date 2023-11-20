@@ -13,7 +13,7 @@ void __fastcall UFG::AudioListener::AudioListener(UFG::AudioListener *this)
   float v9; // xmm2_4
 
   v1 = this;
-  this->vfptr = (UFG::AudioListenerVtbl *)&UFG::AudioListener::`vftable';
+  this->vfptr = (UFG::AudioListenerVtbl *)&UFG::AudioListener::`vftable;
   v2 = UFG::qVector3::msZero.y;
   v3 = UFG::qVector3::msZero.z;
   this->m_position.x = UFG::qVector3::msZero.x;

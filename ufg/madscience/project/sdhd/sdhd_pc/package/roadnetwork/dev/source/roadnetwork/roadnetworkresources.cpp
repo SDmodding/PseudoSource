@@ -246,7 +246,7 @@ __int64 dynamic_initializer_for__gRoadNetworkInventory__()
     0x94132761,
     0,
     0);
-  gRoadNetworkInventory.vfptr = (UFG::qResourceInventoryVtbl *)&RoadNetworkInventory::`vftable';
+  gRoadNetworkInventory.vfptr = (UFG::qResourceInventoryVtbl *)&RoadNetworkInventory::`vftable;
   return atexit(dynamic_atexit_destructor_for__gRoadNetworkInventory__);
 }
 

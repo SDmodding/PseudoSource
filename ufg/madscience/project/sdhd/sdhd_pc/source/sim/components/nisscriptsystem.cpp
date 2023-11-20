@@ -50,7 +50,7 @@ void __fastcall UFG::NISScriptSystemComponent::NISScriptSystemComponent(UFG::NIS
   v5 = (UFG::qNode<UFG::NISScriptSystemComponent,UFG::NISScriptSystemComponent> *)&v4->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::NISScriptSystemComponent::`vftable';
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::NISScriptSystemComponent::`vftable;
   UFG::qString::qString(&v4->mNISPath, &customWorldMapCaption);
   UFG::qString::qString(&v4->mActiveGameslices, &customWorldMapCaption);
   v6 = UFG::NISScriptSystemComponent::s_NISScriptSystemComponentList.mNode.mPrev;
@@ -81,7 +81,7 @@ void __fastcall UFG::NISScriptSystemComponent::~NISScriptSystemComponent(UFG::NI
   UFG::qNode<UFG::NISScriptSystemComponent,UFG::NISScriptSystemComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::NISScriptSystemComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::NISScriptSystemComponent::`vftable;
   if ( this == UFG::NISScriptSystemComponent::s_NISScriptSystemComponentpCurrentIterator )
     UFG::NISScriptSystemComponent::s_NISScriptSystemComponentpCurrentIterator = (UFG::NISScriptSystemComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::NISScriptSystemComponent,UFG::NISScriptSystemComponent> *)&this->mPrev;

@@ -9,7 +9,7 @@ void __fastcall CAkAction::CAkAction(CAkAction *this, AkActionType in_eActionTyp
   v3 = in_eActionType;
   v4 = this;
   CAkIndexable::CAkIndexable((CAkIndexable *)&this->vfptr, in_ulID);
-  v4->vfptr = (CAkIndexableVtbl *)&CAkAction::`vftable';
+  v4->vfptr = (CAkIndexableVtbl *)&CAkAction::`vftable;
   v4->pNextLightItem = 0i64;
   v4->m_props.m_pProps = 0i64;
   v4->m_ranges.m_pProps = 0i64;
@@ -28,7 +28,7 @@ void __fastcall CAkAction::~CAkAction(CAkAction *this)
   char *v3; // rdx
 
   v1 = this;
-  this->vfptr = (CAkIndexableVtbl *)&CAkAction::`vftable';
+  this->vfptr = (CAkIndexableVtbl *)&CAkAction::`vftable;
   v2 = this->m_ranges.m_pProps;
   if ( v2 )
     AK::MemoryMgr::Free(g_DefaultPoolId, v2);

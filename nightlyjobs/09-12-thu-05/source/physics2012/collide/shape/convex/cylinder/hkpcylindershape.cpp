@@ -10,7 +10,7 @@ void __fastcall hkpCylinderShape::hkpCylinderShape(hkpCylinderShape *this, hkVec
   this->m_userData = 0i64;
   this->m_radius = paddingRadius;
   v5 = 0.0;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpCylinderShape::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpCylinderShape::`vftable;
   v6 = this;
   if ( hkpCylinderShape::s_intRoundUpThreshold < 0.0 )
   {
@@ -44,7 +44,7 @@ void __fastcall hkpCylinderShape::hkpCylinderShape(hkpCylinderShape *this, hkFin
   v4 = flag.m_finishing;
   v2 = this;
   hkpConvexShape::hkpConvexShape((hkpConvexShape *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpCylinderShape::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpCylinderShape::`vftable;
   if ( v4 )
   {
     v3 = 0.0;

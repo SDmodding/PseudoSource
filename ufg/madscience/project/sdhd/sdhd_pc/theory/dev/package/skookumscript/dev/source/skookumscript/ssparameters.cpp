@@ -331,7 +331,7 @@ LABEL_12:
             if ( !v23 )
               return 0;
             param.i_name = (ASymbol)ASymbol::get_null()->i_uid;
-            param.vfptr = (SSParameterBaseVtbl *)&SSGroupParam::`vftable';
+            param.vfptr = (SSParameterBaseVtbl *)&SSGroupParam::`vftable;
             param.i_class_pattern.i_count = 0;
             param.i_class_pattern.i_array_p = 0i64;
             param.i_class_pattern.i_size = 0;
@@ -344,7 +344,7 @@ LABEL_12:
               SSGroupParam::~SSGroupParam(&param);
               return 0;
             }
-            param.vfptr = (SSParameterBaseVtbl *)&SSGroupParam::`vftable';
+            param.vfptr = (SSParameterBaseVtbl *)&SSGroupParam::`vftable;
             if ( param.i_class_pattern.i_count )
             {
               v24 = (__int64 *)param.i_class_pattern.i_array_p;
@@ -353,14 +353,14 @@ LABEL_12:
               {
                 do
                 {
-                   SSClassDescBase::`vcall'{16,{flat}}(*v24);
+                   SSClassDescBase::`vcall{16,{flat}}(*v24);
                   ++v24;
                 }
                 while ( v24 < (__int64 *)v25 );
               }
             }
             AMemory::c_free_func(param.i_class_pattern.i_array_p);
-            param.vfptr = (SSParameterBaseVtbl *)&SSParameterBase::`vftable';
+            param.vfptr = (SSParameterBaseVtbl *)&SSParameterBase::`vftable;
           }
           else
           {

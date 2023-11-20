@@ -57,7 +57,7 @@ void __fastcall hkpBreakableMaterial::~hkpBreakableMaterial(hkpBreakableMaterial
 
   v1 = this->m_properties;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpBreakableMaterial::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpBreakableMaterial::`vftable;
   if ( v1 && this->m_memSizeAndFlags )
   {
     hkRefCountedProperties::~hkRefCountedProperties(v1);
@@ -65,6 +65,6 @@ void __fastcall hkpBreakableMaterial::~hkpBreakableMaterial(hkpBreakableMaterial
     (*(void (__fastcall **)(_QWORD *, hkRefCountedProperties *, signed __int64))(*v3[11] + 16i64))(v3[11], v1, 16i64);
   }
   v2->m_properties = 0i64;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 

@@ -14,7 +14,7 @@ void __fastcall UFG::TicketBoothManager::TicketBoothManager(UFG::TicketBoothMana
   signed __int64 v10; // rax
 
   v1 = this;
-  `eh vector constructor iterator'(this, 0x28ui64, 10, (void (__fastcall *)(void *))UFG::TicketBooth::TicketBooth);
+  `eh vector constructor iterator(this, 0x28ui64, 10, (void (__fastcall *)(void *))UFG::TicketBooth::TicketBooth);
   v1->mBooths[0].mTickets.mNode.mPrev = (UFG::qNode<UFG::Ticket,UFG::Ticket> *)v1;
   v1->mBooths[0].mTickets.mNode.mNext = (UFG::qNode<UFG::Ticket,UFG::Ticket> *)v1;
   v1->mBooths[0].mpCurrentTicket = 0i64;

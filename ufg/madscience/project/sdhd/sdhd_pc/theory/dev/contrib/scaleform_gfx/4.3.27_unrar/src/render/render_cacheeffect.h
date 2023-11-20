@@ -2,7 +2,7 @@
 // RVA: 0x949000
 void __fastcall Scaleform::Render::CacheEffect::~CacheEffect(Scaleform::Render::CacheEffect *this)
 {
-  this->vfptr = (Scaleform::Render::CacheEffectVtbl *)&Scaleform::Render::CacheEffect::`vftable';
+  this->vfptr = (Scaleform::Render::CacheEffectVtbl *)&Scaleform::Render::CacheEffect::`vftable;
 }
 
 // File Line: 156

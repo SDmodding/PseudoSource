@@ -6,12 +6,12 @@ void __fastcall Scaleform::GFx::ShapeBaseCharacterDef::~ShapeBaseCharacterDef(Sc
   Scaleform::Render::ShapeMeshProvider *v2; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::ShapeBaseCharacterDef::`vftable';
+  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::ShapeBaseCharacterDef::`vftable;
   v2 = this->pShapeMeshProvider.pObject;
   if ( v2 )
     ((void (__cdecl *)(Scaleform::Render::MeshProviderVtbl **))v2->vfptr->Release)(&v2->vfptr);
-  v1->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::CharacterDef::`vftable';
-  v1->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::Resource::`vftable';
+  v1->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::CharacterDef::`vftable;
+  v1->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::Resource::`vftable;
 }
 
 // File Line: 126

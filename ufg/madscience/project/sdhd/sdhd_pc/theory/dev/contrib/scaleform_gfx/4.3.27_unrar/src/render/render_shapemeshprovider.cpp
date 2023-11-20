@@ -2,13 +2,13 @@
 // RVA: 0x93FD10
 void __fastcall Scaleform::Render::MorphInterpolator::MorphInterpolator(Scaleform::Render::MorphInterpolator *this, Scaleform::Render::ShapeDataInterface *shape, Scaleform::Render::MorphShapeData *morph, float ratio, Scaleform::Render::ShapePosInfo *pos2)
 {
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::ShapeDataInterface,71>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ShapeDataInterface::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::MorphInterpolator::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::ShapeDataInterface,71>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ShapeDataInterface::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::MorphInterpolator::`vftable;
   if ( shape )
     _InterlockedExchangeAdd(&shape->RefCount, 1u);
   this->pShapeData.pObject = shape;
@@ -357,12 +357,12 @@ void __fastcall Scaleform::Render::MorphShapeData::MorphShapeData(Scaleform::Ren
   signed __int64 v10; // [rsp+50h] [rbp+18h]
 
   v2 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::MorphShapeData,71>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::MorphShapeData::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::MorphShapeData,71>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::MorphShapeData::`vftable;
   if ( morphTo )
     _InterlockedExchangeAdd(&morphTo->RefCount, 1u);
   this->pMorphTo.pObject = morphTo;
@@ -375,13 +375,13 @@ void __fastcall Scaleform::Render::MorphShapeData::MorphShapeData(Scaleform::Ren
   v4->Data.Size = 0i64;
   v4->Data.Policy.Capacity = 0i64;
   v5 = &this->ShapeData1;
-  v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   v5->RefCount = 1;
-  v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable';
-  v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::ShapeDataInterface,71>::`vftable';
-  v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ShapeDataInterface::`vftable';
-  v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ShapeDataFloatTempl<Scaleform::ArrayLH_POD<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::`vftable';
+  v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable;
+  v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::ShapeDataInterface,71>::`vftable;
+  v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ShapeDataInterface::`vftable;
+  v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ShapeDataFloatTempl<Scaleform::ArrayLH_POD<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::`vftable;
   v5->Status = 0;
   v7 = (signed __int64)&v5->Fills;
   *(_OWORD *)v7 = 0ui64;
@@ -394,13 +394,13 @@ void __fastcall Scaleform::Render::MorphShapeData::MorphShapeData(Scaleform::Ren
   *(_QWORD *)&v5->StartY = 0i64;
   v5->LastY = 0.0;
   v6 = (signed __int64)&v2->ShapeData2;
-  *(_QWORD *)v6 = &Scaleform::RefCountImplCore::`vftable';
+  *(_QWORD *)v6 = &Scaleform::RefCountImplCore::`vftable;
   *(_DWORD *)(v6 + 8) = 1;
-  *(_QWORD *)v6 = &Scaleform::RefCountImpl::`vftable';
-  *(_QWORD *)v6 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable';
-  *(_QWORD *)v6 = &Scaleform::RefCountBase<Scaleform::Render::ShapeDataInterface,71>::`vftable';
-  *(_QWORD *)v6 = &Scaleform::Render::ShapeDataInterface::`vftable';
-  *(_QWORD *)v6 = &Scaleform::Render::ShapeDataFloatTempl<Scaleform::ArrayLH_POD<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::`vftable';
+  *(_QWORD *)v6 = &Scaleform::RefCountImpl::`vftable;
+  *(_QWORD *)v6 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable;
+  *(_QWORD *)v6 = &Scaleform::RefCountBase<Scaleform::Render::ShapeDataInterface,71>::`vftable;
+  *(_QWORD *)v6 = &Scaleform::Render::ShapeDataInterface::`vftable;
+  *(_QWORD *)v6 = &Scaleform::Render::ShapeDataFloatTempl<Scaleform::ArrayLH_POD<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::`vftable;
   v2->ShapeData2.Status = 0;
   v9 = (signed __int64)&v2->ShapeData2.Fills;
   *(_OWORD *)v9 = 0ui64;
@@ -434,23 +434,23 @@ void __fastcall Scaleform::Render::ShapeMeshProvider::ShapeMeshProvider(Scalefor
 
   v3 = shapeMorph;
   v4 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::MeshProvider_RCImpl,2>::`vftable';
-  this->vfptr = (Scaleform::Render::MeshProviderVtbl *)&Scaleform::Render::MeshProvider::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::MeshProvider_RCImpl::`vftable'{for `Scaleform::RefCountBase<Scaleform::Render::MeshProvider_RCImpl,2>'};
-  this->vfptr = (Scaleform::Render::MeshProviderVtbl *)&Scaleform::Render::MeshProvider_RCImpl::`vftable'{for `Scaleform::Render::MeshProvider'};
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::MeshProvider_KeySupport::`vftable'{for `Scaleform::RefCountBase<Scaleform::Render::MeshProvider_RCImpl,2>'};
-  this->vfptr = (Scaleform::Render::MeshProviderVtbl *)&Scaleform::Render::MeshProvider_KeySupport::`vftable'{for `Scaleform::Render::MeshProvider'};
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::MeshProvider_RCImpl,2>::`vftable;
+  this->vfptr = (Scaleform::Render::MeshProviderVtbl *)&Scaleform::Render::MeshProvider::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::MeshProvider_RCImpl::`vftable{for `Scaleform::RefCountBase<Scaleform::Render::MeshProvider_RCImpl,2>};
+  this->vfptr = (Scaleform::Render::MeshProviderVtbl *)&Scaleform::Render::MeshProvider_RCImpl::`vftable{for `Scaleform::Render::MeshProvider};
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::MeshProvider_KeySupport::`vftable{for `Scaleform::RefCountBase<Scaleform::Render::MeshProvider_RCImpl,2>};
+  this->vfptr = (Scaleform::Render::MeshProviderVtbl *)&Scaleform::Render::MeshProvider_KeySupport::`vftable{for `Scaleform::Render::MeshProvider};
   v5 = this->hKeySet.pManager.Value;
   v6 = 0i64;
   this->hKeySet.pManager.Value = 0i64;
   v7 = this->hKeySet.pManager.Value;
   this->hKeySet.pKeySet = 0i64;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ShapeMeshProvider::`vftable'{for `Scaleform::RefCountBase<Scaleform::Render::MeshProvider_RCImpl,2>'};
-  this->vfptr = (Scaleform::Render::MeshProviderVtbl *)&Scaleform::Render::ShapeMeshProvider::`vftable'{for `Scaleform::Render::MeshProvider'};
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ShapeMeshProvider::`vftable{for `Scaleform::RefCountBase<Scaleform::Render::MeshProvider_RCImpl,2>};
+  this->vfptr = (Scaleform::Render::MeshProviderVtbl *)&Scaleform::Render::ShapeMeshProvider::`vftable{for `Scaleform::Render::MeshProvider};
   v8 = &this->DrawLayers;
   v8->Data.Data = 0i64;
   v8->Data.Size = 0i64;
@@ -501,8 +501,8 @@ void __fastcall Scaleform::Render::ShapeMeshProvider::~ShapeMeshProvider(Scalefo
   Scaleform::Render::ShapeDataInterface *v6; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ShapeMeshProvider::`vftable'{for `Scaleform::RefCountBase<Scaleform::Render::MeshProvider_RCImpl,2>'};
-  this->vfptr = (Scaleform::Render::MeshProviderVtbl *)&Scaleform::Render::ShapeMeshProvider::`vftable'{for `Scaleform::Render::MeshProvider'};
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ShapeMeshProvider::`vftable{for `Scaleform::RefCountBase<Scaleform::Render::MeshProvider_RCImpl,2>};
+  this->vfptr = (Scaleform::Render::MeshProviderVtbl *)&Scaleform::Render::ShapeMeshProvider::`vftable{for `Scaleform::Render::MeshProvider};
   if ( this->hKeySet.pKeySet )
   {
     _RDX = &this->hKeySet;
@@ -2624,7 +2624,7 @@ LABEL_19:
   v25 = v48.pShapeData.pObject;
   if ( v48.pShapeData.pObject && !_InterlockedDecrement(&v48.pShapeData.pObject->RefCount) && v25 )
     v25->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v25->vfptr, 1u);
-  v48.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  v48.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   v26 = s1.pDashes.pObject;
   if ( s1.pDashes.pObject && !_InterlockedDecrement(&s1.pDashes.pObject->RefCount) && v26 )
     v26->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v26->vfptr, 1u);
@@ -3386,10 +3386,10 @@ __int64 __fastcall Scaleform::Render::ShapeMeshProvider::tessellateFill(Scalefor
   *(_OWORD *)&param.Scale9LowerScale = *(_OWORD *)&v8->Tolerances.Scale9LowerScale;
   *(_QWORD *)&param.MinDet3D = *(_QWORD *)&v8->Tolerances.MinDet3D;
   param.CurveRecursionLimit = v8->Tolerances.CurveRecursionLimit;
-  v52 = &Scaleform::Render::TransformerWrapper<Scaleform::Render::Matrix2x4<float>>::`vftable';
+  v52 = &Scaleform::Render::TransformerWrapper<Scaleform::Render::Matrix2x4<float>>::`vftable;
   v12 = 0;
   v53 = 0i64;
-  tr.vfptr = (Scaleform::Render::TransformerBaseVtbl *)&Scaleform::Render::TransformerWrapper<Scaleform::Render::Scale9GridInfo>::`vftable';
+  tr.vfptr = (Scaleform::Render::TransformerBaseVtbl *)&Scaleform::Render::TransformerWrapper<Scaleform::Render::Scale9GridInfo>::`vftable;
   v55 = 0i64;
   *(_OWORD *)&m2.M[0][0] = _xmm;
   *(__m128 *)&m2.M[1][0] = _xmm;
@@ -3849,22 +3849,22 @@ __int64 __fastcall Scaleform::Render::ShapeMeshProvider::tessellateStroke(Scalef
   *(_QWORD *)&mtx.M[0][2] = __PAIR__(v13.m128_u32[0], v12);
   *(_QWORD *)&mtx.M[1][0] = __PAIR__(v15.m128_u32[0], v14.m128_u32[0]);
   *(_QWORD *)&mtx.M[1][2] = __PAIR__(v17.m128_u32[0], v16);
-  v54 = &Scaleform::Render::TransformerWrapper<Scaleform::Render::Matrix2x4<float>>::`vftable';
+  v54 = &Scaleform::Render::TransformerWrapper<Scaleform::Render::Matrix2x4<float>>::`vftable;
   v55 = 0i64;
-  v52.vfptr = (Scaleform::Render::TransformerBaseVtbl *)&Scaleform::Render::TransformerWrapper<Scaleform::Render::Scale9GridInfo>::`vftable';
+  v52.vfptr = (Scaleform::Render::TransformerBaseVtbl *)&Scaleform::Render::TransformerWrapper<Scaleform::Render::Scale9GridInfo>::`vftable;
   *(_QWORD *)&mtx.M[0][0] = 0i64;
   if ( v5 )
   {
     v65 = v5;
     *(_QWORD *)&mtx.M[0][0] = v5;
-    v64 = &Scaleform::Render::TransformerBase::`vftable';
+    v64 = &Scaleform::Render::TransformerBase::`vftable;
     tr = &v52;
   }
   else
   {
     v67 = &mtx;
     v55 = &mtx;
-    v66 = &Scaleform::Render::TransformerBase::`vftable';
+    v66 = &Scaleform::Render::TransformerBase::`vftable;
     tr = (Scaleform::Render::TransformerBase *)&v54;
   }
   Scaleform::Render::MeshGenerator::Clear((Scaleform::Render::MeshGenerator *)v9);
@@ -4057,8 +4057,8 @@ LABEL_74:
                            (unsigned int)retaddr,
                            v35);
   Scaleform::Render::MeshGenerator::Clear((Scaleform::Render::MeshGenerator *)v9);
-  v52.vfptr = (Scaleform::Render::TransformerBaseVtbl *)&Scaleform::Render::TransformerBase::`vftable';
-  v54 = &Scaleform::Render::TransformerBase::`vftable';
+  v52.vfptr = (Scaleform::Render::TransformerBaseVtbl *)&Scaleform::Render::TransformerBase::`vftable;
+  v54 = &Scaleform::Render::TransformerBase::`vftable;
   v49 = v55;
   if ( v55 && !_InterlockedDecrement((volatile signed __int32 *)&v55->M[0][2]) && v49 )
     (**(void (__fastcall ***)(Scaleform::Render::Matrix2x4<float> *, signed __int64))&v49->M[0][0])(v49, 1i64);
@@ -4895,14 +4895,14 @@ void __fastcall Scaleform::Render::ShapeMeshProvider::GetFillMatrix(Scaleform::R
         v11->pImage.pObject,
         &result,
         v37);
-      v38 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v;
+      v38 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v;
       v39 = _mm_mul_ps(
               _mm_shuffle_ps(*(__m128 *)&result.M[1][0], *(__m128 *)&result.M[1][0], 0),
               *(__m128 *)&v7->M[0][0]);
       v40 = _mm_shuffle_ps(*(__m128 *)&result.M[1][0], *(__m128 *)&result.M[1][0], 85);
       v41 = _mm_and_ps(
               *(__m128 *)&result.M[1][0],
-              (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v);
+              (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v);
       *(__m128 *)&v7->M[0][0] = _mm_and_ps(
                                   _mm_add_ps(
                                     _mm_add_ps(
@@ -4914,8 +4914,8 @@ void __fastcall Scaleform::Render::ShapeMeshProvider::GetFillMatrix(Scaleform::R
                                         *(__m128 *)&v7->M[0][0])),
                                     _mm_and_ps(
                                       *(__m128 *)&result.M[0][0],
-                                      (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v)),
-                                  (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v);
+                                      (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v)),
+                                  (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v);
       *(__m128 *)&v7->M[1][0] = _mm_and_ps(
                                   _mm_add_ps(_mm_add_ps(_mm_mul_ps(v40, *(__m128 *)&v7->M[1][0]), v39), v41),
                                   v38);
@@ -5247,22 +5247,22 @@ __int64 __fastcall Scaleform::Render::ShapeMeshProvider::HitTestShape(Scaleform:
     v8->pMorphData.pObject,
     ratio,
     &pos2);
-  v17 = &Scaleform::Render::TransformerWrapper<Scaleform::Render::Matrix2x4<float>>::`vftable';
+  v17 = &Scaleform::Render::TransformerWrapper<Scaleform::Render::Matrix2x4<float>>::`vftable;
   v18 = 0i64;
-  trans.vfptr = (Scaleform::Render::TransformerBaseVtbl *)&Scaleform::Render::TransformerWrapper<Scaleform::Render::Scale9GridInfo>::`vftable';
+  trans.vfptr = (Scaleform::Render::TransformerBaseVtbl *)&Scaleform::Render::TransformerWrapper<Scaleform::Render::Scale9GridInfo>::`vftable;
   v16 = 0i64;
   if ( tol )
   {
     v20 = tol;
     v16 = tol;
-    *(_QWORD *)&pos2.Sfactor = &Scaleform::Render::TransformerBase::`vftable';
+    *(_QWORD *)&pos2.Sfactor = &Scaleform::Render::TransformerBase::`vftable;
     v9 = &trans;
   }
   else
   {
     v22 = v7;
     v18 = v7;
-    v21 = &Scaleform::Render::TransformerBase::`vftable';
+    v21 = &Scaleform::Render::TransformerBase::`vftable;
     v9 = (Scaleform::Render::TransformerBase *)&v17;
   }
   if ( !morphRatio )
@@ -5297,8 +5297,8 @@ LABEL_11:
   }
   v10 = 1;
 LABEL_12:
-  trans.vfptr = (Scaleform::Render::TransformerBaseVtbl *)&Scaleform::Render::TransformerBase::`vftable';
-  v17 = &Scaleform::Render::TransformerBase::`vftable';
+  trans.vfptr = (Scaleform::Render::TransformerBaseVtbl *)&Scaleform::Render::TransformerBase::`vftable;
+  v17 = &Scaleform::Render::TransformerBase::`vftable;
   v12 = v24.pMorphData.pObject;
   if ( v24.pMorphData.pObject && !_InterlockedDecrement(&v24.pMorphData.pObject->RefCount) && v12 )
     v12->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v12->vfptr, 1u);

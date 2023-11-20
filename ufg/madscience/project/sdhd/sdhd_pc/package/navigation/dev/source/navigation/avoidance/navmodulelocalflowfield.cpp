@@ -25,7 +25,7 @@ void __fastcall UFG::NavModuleLocalFlowField::NavModuleLocalFlowField(UFG::NavMo
   v2 = parent;
   v3 = this;
   UFG::NavModuleLocal::NavModuleLocal((UFG::NavModuleLocal *)&this->vfptr, parent);
-  v3->vfptr = (UFG::NavModuleLocalVtbl *)&UFG::NavModuleLocalFlowField::`vftable';
+  v3->vfptr = (UFG::NavModuleLocalVtbl *)&UFG::NavModuleLocalFlowField::`vftable;
   UFG::HermiteCurve::HermiteCurve(&v3->mPathCurve, 500, 0i64, 0i64);
   UFG::FFieldPathPrint::FFieldPathPrint(&v3->mPathPrint, &v3->mPathCurve, 0, 0.0);
   UFG::FlowfieldTaskParam::FlowfieldTaskParam(&v3->mTaskParams);
@@ -115,7 +115,7 @@ void __fastcall UFG::NavModuleLocalFlowField::~NavModuleLocalFlowField(UFG::NavM
   UFG::qNode<UFG::FlowfieldMass,UFG::FlowfieldMass> *v17; // rax
 
   v1 = this;
-  this->vfptr = (UFG::NavModuleLocalVtbl *)&UFG::NavModuleLocalFlowField::`vftable';
+  this->vfptr = (UFG::NavModuleLocalVtbl *)&UFG::NavModuleLocalFlowField::`vftable;
   v2 = 0i64;
   if ( UFG::NavModuleLocalFlowField::mpTaskGroup )
   {
@@ -238,7 +238,7 @@ void __fastcall UFG::NavModuleLocalFlowField::~NavModuleLocalFlowField(UFG::NavM
   v1->mTaskParams.FlowMass.mNext = (UFG::qNode<UFG::FlowfieldMass,UFG::FlowfieldMass> *)&v1->mTaskParams.FlowMass.mPrev;
   UFG::FlowfieldPrint::~FlowfieldPrint((UFG::FlowfieldPrint *)&v1->mPathPrint.vfptr);
   UFG::HermiteCurve::~HermiteCurve(&v1->mPathCurve);
-  v1->vfptr = (UFG::NavModuleLocalVtbl *)&UFG::NavModuleLocal::`vftable';
+  v1->vfptr = (UFG::NavModuleLocalVtbl *)&UFG::NavModuleLocal::`vftable;
   _((AMD_HD3D *)&v1->m_adjustedWaypoint);
 }
 

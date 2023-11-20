@@ -12,7 +12,7 @@ void __fastcall UFG::DynamicCoverCorner::DynamicCoverCorner(UFG::DynamicCoverCor
   v2->mNext = (UFG::qNode<UFG::CoverCorner,UFG::CoverCorner> *)&v2->mPrev;
   *(_DWORD *)&this->m_eCoverSide.mValue = 0;
   UFG::qSafePointerNode<UFG::DynamicCoverCorner>::qSafePointerNode<UFG::DynamicCoverCorner>((UFG::qSafePointerNode<UFG::DynamicCoverCorner> *)&this->vfptr);
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DynamicCoverCorner>Vtbl *)&UFG::DynamicCoverCorner::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DynamicCoverCorner>Vtbl *)&UFG::DynamicCoverCorner::`vftable;
   v3 = &v1->m_pParentInstance;
   v3->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v3->mPrev;
   v3->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v3->mPrev;

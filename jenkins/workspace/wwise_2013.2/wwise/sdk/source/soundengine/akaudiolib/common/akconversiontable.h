@@ -122,15 +122,15 @@ LABEL_13:
     case 3:
       if ( v8 >= -37.0 )
       {
-        if ( `AkMath::FastPow10'::`4'::`local static guard' & 1 )
+        if ( `AkMath::FastPow10::`4::`local static guard & 1 )
         {
-          v17 = *(float *)&`AkMath::FastPow10'::`4'::SCALE;
+          v17 = *(float *)&`AkMath::FastPow10::`4::SCALE;
         }
         else
         {
           v17 = FLOAT_2_7866352e7;
-          `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
-          `AkMath::FastPow10'::`4'::`local static guard' |= 1u;
+          `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
+          `AkMath::FastPow10::`4::`local static guard |= 1u;
         }
         v16 = (signed int)(float)((float)(v17 * v8) + 1065353200.0);
         goto LABEL_34;
@@ -142,15 +142,15 @@ LABEL_17:
       v12 = v8 * 0.050000001;
       if ( v12 < -37.0 )
         goto LABEL_17;
-      if ( `AkMath::FastPow10'::`4'::`local static guard' & 1 )
+      if ( `AkMath::FastPow10::`4::`local static guard & 1 )
       {
-        v15 = *(float *)&`AkMath::FastPow10'::`4'::SCALE;
+        v15 = *(float *)&`AkMath::FastPow10::`4::SCALE;
       }
       else
       {
         v15 = FLOAT_2_7866352e7;
-        `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
-        `AkMath::FastPow10'::`4'::`local static guard' |= 1u;
+        `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
+        `AkMath::FastPow10::`4::`local static guard |= 1u;
       }
       v16 = (signed int)(float)((float)(v12 * v15) + 1065353200.0);
 LABEL_34:

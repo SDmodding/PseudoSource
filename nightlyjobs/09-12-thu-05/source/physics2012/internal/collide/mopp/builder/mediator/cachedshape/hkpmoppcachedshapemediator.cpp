@@ -3,7 +3,7 @@
 void __fastcall hkpMoppCachedShapeMediator::hkpMoppCachedShapeMediator(hkpMoppCachedShapeMediator *this, hkpShapeContainer *shapeArray)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpMoppCachedShapeMediator::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpMoppCachedShapeMediator::`vftable;
   this->m_arrayConvexShapeData.m_capacityAndFlags = 2147483648;
   this->m_arrayConvexShapeData.m_data = 0i64;
   this->m_arrayConvexShapeData.m_size = 0;
@@ -20,7 +20,7 @@ void __fastcall hkpMoppCachedShapeMediator::~hkpMoppCachedShapeMediator(hkpMoppC
 
   this->m_shapeCollection = 0i64;
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpMoppCachedShapeMediator::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpMoppCachedShapeMediator::`vftable;
   v2 = this->m_arrayConvexShapeData.m_capacityAndFlags;
   this->m_arrayConvexShapeData.m_size = 0;
   if ( v2 >= 0 )
@@ -30,7 +30,7 @@ void __fastcall hkpMoppCachedShapeMediator::~hkpMoppCachedShapeMediator(hkpMoppC
       108 * (v2 & 0x3FFFFFFF));
   v1->m_arrayConvexShapeData.m_data = 0i64;
   v1->m_arrayConvexShapeData.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 35

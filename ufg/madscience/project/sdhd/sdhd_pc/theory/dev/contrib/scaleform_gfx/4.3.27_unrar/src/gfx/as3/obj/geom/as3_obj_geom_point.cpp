@@ -156,7 +156,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_geom::Point::add(Scaleform::G
       "flash.geom.Point",
       2u,
       &ptr);
-    `eh vector destructor iterator'(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
   }
   else
   {
@@ -199,7 +199,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_geom::Point::clone(Scaleform:
     "flash.geom.Point",
     2u,
     (Scaleform::GFx::AS3::Value *)&ptr);
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
 }
 
 // File Line: 89
@@ -300,7 +300,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_geom::Point::subtract(Scalefo
       "flash.geom.Point",
       2u,
       &ptr);
-    `eh vector destructor iterator'(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
   }
   else
   {
@@ -560,7 +560,7 @@ void __fastcall Scaleform::GFx::AS3::Classes::fl_geom::Point::interpolate(Scalef
     "flash.geom.Point",
     2u,
     (Scaleform::GFx::AS3::Value *)&ptr);
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
 }
 
 // File Line: 244
@@ -590,7 +590,7 @@ void __fastcall Scaleform::GFx::AS3::Classes::fl_geom::Point::polar(Scaleform::G
     "flash.geom.Point",
     2u,
     &ptr);
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
 }
 
 // File Line: 259
@@ -657,8 +657,8 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v5 )
   {
     Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, v2, &Scaleform::GFx::AS3::fl_geom::PointCI);
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable';
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_geom::Point::`vftable';
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable;
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_geom::Point::`vftable;
   }
   else
   {
@@ -670,8 +670,8 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v7 )
   {
     Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v7, v2, &Scaleform::GFx::AS3::fl_geom::PointCI);
-    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable';
-    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_geom::Point::`vftable';
+    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable;
+    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_geom::Point::`vftable;
   }
   else
   {
@@ -687,7 +687,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v9 )
   {
     Scaleform::GFx::AS3::Class::Class(v9, v3->pV);
-    v10->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl_geom::Point::`vftable';
+    v10->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl_geom::Point::`vftable;
   }
   return v3;
 }

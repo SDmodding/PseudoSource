@@ -31,27 +31,27 @@ void __fastcall Scaleform::Render::Renderer2DImpl::Renderer2DImpl(Scaleform::Ren
   v2 = hal;
   v3 = this;
   v4 = hal->pRTCommandQueue;
-  this->vfptr = (Scaleform::Render::ContextImpl::RenderNotifyVtbl *)&Scaleform::Render::ContextImpl::RenderNotify::`vftable';
+  this->vfptr = (Scaleform::Render::ContextImpl::RenderNotifyVtbl *)&Scaleform::Render::ContextImpl::RenderNotify::`vftable;
   v5 = &this->ActiveContextSet;
   v5->Root.pPrev = (Scaleform::Render::ContextImpl::RenderNotify::ContextNode *)v5;
   v5->Root.pNext = (Scaleform::Render::ContextImpl::RenderNotify::ContextNode *)v5;
   this->pRTCommandQueue = v4;
   v6 = &this->ServiceCommandInstance;
-  v6->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  v6->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   v6->RefCount = 1;
-  v6->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  v6->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  v6->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::ThreadCommand,2>::`vftable';
-  v6->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ThreadCommand::`vftable';
-  v6->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ContextImpl::RenderNotify::ServiceCommand::`vftable';
+  v6->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  v6->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  v6->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::ThreadCommand,2>::`vftable;
+  v6->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ThreadCommand::`vftable;
+  v6->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ContextImpl::RenderNotify::ServiceCommand::`vftable;
   v6->pNotify = (Scaleform::Render::ContextImpl::RenderNotify *)&this->vfptr;
   v7 = (Scaleform::Render::HALNotify *)&this->vfptr;
-  v7->vfptr = (Scaleform::Render::HALNotifyVtbl *)&Scaleform::Render::HALNotify::`vftable';
+  v7->vfptr = (Scaleform::Render::HALNotifyVtbl *)&Scaleform::Render::HALNotify::`vftable;
   v8 = 0i64;
   v7->pNext = 0i64;
   v7->pPrev = 0i64;
-  this->vfptr = (Scaleform::Render::ContextImpl::RenderNotifyVtbl *)&Scaleform::Render::Renderer2DImpl::`vftable'{for `Scaleform::Render::ContextImpl::RenderNotify'};
-  v7->vfptr = (Scaleform::Render::HALNotifyVtbl *)&Scaleform::Render::Renderer2DImpl::`vftable'{for `Scaleform::Render::HALNotify'};
+  this->vfptr = (Scaleform::Render::ContextImpl::RenderNotifyVtbl *)&Scaleform::Render::Renderer2DImpl::`vftable{for `Scaleform::Render::ContextImpl::RenderNotify};
+  v7->vfptr = (Scaleform::Render::HALNotifyVtbl *)&Scaleform::Render::Renderer2DImpl::`vftable{for `Scaleform::Render::HALNotify};
   _InterlockedExchangeAdd(&hal->RefCount, 1u);
   this->pHal.pObject = hal;
   v9 = Scaleform::Memory::pGlobalHeap->vfptr->GetAllocHeap(Scaleform::Memory::pGlobalHeap, this);
@@ -78,23 +78,23 @@ void __fastcall Scaleform::Render::Renderer2DImpl::Renderer2DImpl(Scaleform::Ren
   v3->Tolerances.MinScale3D = 0.050000001;
   v3->Tolerances.CurveRecursionLimit = 12;
   v11 = (signed __int64)&v3->FillManager;
-  *(_QWORD *)v11 = &Scaleform::RefCountImplCore::`vftable';
+  *(_QWORD *)v11 = &Scaleform::RefCountImplCore::`vftable;
   *(_DWORD *)(v11 + 8) = 1;
-  *(_QWORD *)v11 = &Scaleform::RefCountImpl::`vftable';
-  *(_QWORD *)v11 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable';
-  *(_QWORD *)v11 = &Scaleform::RefCountBase<Scaleform::Render::PrimitiveFillManager,71>::`vftable';
-  *(_QWORD *)v11 = &Scaleform::Render::PrimitiveFillManager::`vftable';
+  *(_QWORD *)v11 = &Scaleform::RefCountImpl::`vftable;
+  *(_QWORD *)v11 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable;
+  *(_QWORD *)v11 = &Scaleform::RefCountBase<Scaleform::Render::PrimitiveFillManager,71>::`vftable;
+  *(_QWORD *)v11 = &Scaleform::Render::PrimitiveFillManager::`vftable;
   v3->FillManager.pHAL = v2;
   v3->FillManager.FillSet.pTable = 0i64;
   v3->FillManager.Gradients.pTable = 0i64;
   v12 = Scaleform::Memory::pGlobalHeap->vfptr->GetAllocHeap(Scaleform::Memory::pGlobalHeap, v3);
   v26 = (signed __int64)&v3->MPool;
-  *(_QWORD *)v26 = &Scaleform::RefCountImplCore::`vftable';
+  *(_QWORD *)v26 = &Scaleform::RefCountImplCore::`vftable;
   *(_DWORD *)(v26 + 8) = 1;
-  *(_QWORD *)v26 = &Scaleform::RefCountImpl::`vftable';
-  *(_QWORD *)v26 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,73>::`vftable';
-  *(_QWORD *)v26 = &Scaleform::RefCountBase<Scaleform::Render::MatrixPoolImpl::MatrixPool,73>::`vftable';
-  *(_QWORD *)v26 = &Scaleform::Render::MatrixPoolImpl::MatrixPool::`vftable';
+  *(_QWORD *)v26 = &Scaleform::RefCountImpl::`vftable;
+  *(_QWORD *)v26 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,73>::`vftable;
+  *(_QWORD *)v26 = &Scaleform::RefCountBase<Scaleform::Render::MatrixPoolImpl::MatrixPool,73>::`vftable;
+  *(_QWORD *)v26 = &Scaleform::Render::MatrixPoolImpl::MatrixPool::`vftable;
   v3->MPool.pHeap = v12;
   v3->MPool.AllocatedSpace = 0i64;
   v3->MPool.DataPageCount = 0i64;
@@ -193,8 +193,8 @@ void __fastcall Scaleform::Render::Renderer2DImpl::~Renderer2DImpl(Scaleform::Re
   Scaleform::Render::HAL *v5; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::Render::ContextImpl::RenderNotifyVtbl *)&Scaleform::Render::Renderer2DImpl::`vftable'{for `Scaleform::Render::ContextImpl::RenderNotify'};
-  this->vfptr = (Scaleform::Render::HALNotifyVtbl *)&Scaleform::Render::Renderer2DImpl::`vftable'{for `Scaleform::Render::HALNotify'};
+  this->vfptr = (Scaleform::Render::ContextImpl::RenderNotifyVtbl *)&Scaleform::Render::Renderer2DImpl::`vftable{for `Scaleform::Render::ContextImpl::RenderNotify};
+  this->vfptr = (Scaleform::Render::HALNotifyVtbl *)&Scaleform::Render::Renderer2DImpl::`vftable{for `Scaleform::Render::HALNotify};
   Scaleform::Render::ContextImpl::RenderNotify::ReleaseAllContextData((Scaleform::Render::ContextImpl::RenderNotify *)&this->vfptr);
   Scaleform::Render::MeshKeyManager::DestroyAllKeys(v1->pMeshKeyManager.pObject);
   v1->pPrev->pNext = v1->pNext;
@@ -209,23 +209,23 @@ void __fastcall Scaleform::Render::Renderer2DImpl::~Renderer2DImpl(Scaleform::Re
     v3->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v3->vfptr, 1u);
   Scaleform::Render::MatrixPoolImpl::MatrixPool::~MatrixPool(&v1->MPool);
   v4 = &v1->FillManager;
-  v4->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::PrimitiveFillManager::`vftable';
+  v4->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::PrimitiveFillManager::`vftable;
   Scaleform::HashSet<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::AllocatorLH<Scaleform::Render::GradientImage *,2>,Scaleform::HashsetCachedEntry<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor>>::~HashSet<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::AllocatorLH<Scaleform::Render::GradientImage *,2>,Scaleform::HashsetCachedEntry<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor>>((Scaleform::HashSet<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor> > *)&v1->FillManager.Gradients);
   Scaleform::HashSet<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::AllocatorLH<Scaleform::Render::GradientImage *,2>,Scaleform::HashsetCachedEntry<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor>>::~HashSet<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::AllocatorLH<Scaleform::Render::GradientImage *,2>,Scaleform::HashsetCachedEntry<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor>>((Scaleform::HashSet<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor> > *)&v1->FillManager.FillSet);
-  v4->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
-  v1->StrokeGen.mPath.vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable';
-  v1->StrokeGen.mStrokeSorter.vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable';
-  v1->StrokeGen.mStroker.vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable';
+  v4->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
+  v1->StrokeGen.mPath.vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable;
+  v1->StrokeGen.mStrokeSorter.vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable;
+  v1->StrokeGen.mStroker.vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable;
   Scaleform::Render::LinearHeap::ClearAndRelease(&v1->StrokeGen.Heap2);
   Scaleform::Render::LinearHeap::ClearAndRelease(&v1->StrokeGen.Heap1);
   Scaleform::Render::MeshGenerator::~MeshGenerator(&v1->MeshGen);
   v5 = v1->pHal.pObject;
   if ( v5 && _InterlockedExchangeAdd(&v5->RefCount, 0xFFFFFFFF) == 1 && v5 )
     v5->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v5->vfptr, 1u);
-  v1->vfptr = (Scaleform::Render::HALNotifyVtbl *)&Scaleform::Render::HALNotify::`vftable';
-  v1->vfptr = (Scaleform::Render::ContextImpl::RenderNotifyVtbl *)&Scaleform::Render::ContextImpl::RenderNotify::`vftable';
+  v1->vfptr = (Scaleform::Render::HALNotifyVtbl *)&Scaleform::Render::HALNotify::`vftable;
+  v1->vfptr = (Scaleform::Render::ContextImpl::RenderNotifyVtbl *)&Scaleform::Render::ContextImpl::RenderNotify::`vftable;
   Scaleform::Render::ContextImpl::RenderNotify::ReleaseAllContextData((Scaleform::Render::ContextImpl::RenderNotify *)&v1->vfptr);
-  v1->ServiceCommandInstance.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  v1->ServiceCommandInstance.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
 }
 
 // File Line: 71
@@ -725,7 +725,7 @@ void __fastcall Scaleform::Render::Renderer2DImpl::UpdateComplexMeshes(Scaleform
               fd1.PrimFill = 4;
               fd1.FillMode.Fill = 0;
               fd1.pVFormat = &Scaleform::Render::VertexXY16iCF32::Format;
-              `eh vector constructor iterator'(
+              `eh vector constructor iterator(
                 &ptr,
                 8ui64,
                 2,
@@ -770,7 +770,7 @@ void __fastcall Scaleform::Render::Renderer2DImpl::UpdateComplexMeshes(Scaleform
                 if ( v15 )
                   v13->vfptr->__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v13->vfptr, 1u);
               }
-              `eh vector destructor iterator'(
+              `eh vector destructor iterator(
                 &ptr,
                 8ui64,
                 2,

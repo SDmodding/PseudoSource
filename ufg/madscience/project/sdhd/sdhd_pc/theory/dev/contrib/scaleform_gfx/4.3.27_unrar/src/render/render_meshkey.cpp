@@ -186,12 +186,12 @@ bool __fastcall Scaleform::Render::MeshKey::CalcMatrixKey(Scaleform::Render::Mat
   v9 = _mm_mul_ps(_mm_shuffle_ps(v4, *(__m128 *)&m->M[0][0], 0), _mm_sub_ps(v5, v6));
   v10 = _mm_rsqrt_ps(v7);
   v11 = _mm_sub_ps(_mm_shuffle_ps(v9, v9, 10), v9);
-  v12 = (__m128)_mm_load_si128((const __m128i *)&`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,0>'::`2'::v);
+  v12 = (__m128)_mm_load_si128((const __m128i *)&`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,0>::`2::v);
   v13 = _mm_mul_ps(
           _mm_unpacklo_ps(
             _mm_and_ps(
               v11,
-              (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<2147483647,2147483647,2147483647,2147483647>'::`2'::v),
+              (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<2147483647,2147483647,2147483647,2147483647>::`2::v),
             _mm_add_ps(_mm_shuffle_ps(v8, v8, 10), v8)),
           _mm_shuffle_ps(v10, v10, 0));
   v14 = _mm_shuffle_ps(v13, v13, 207);
@@ -200,7 +200,7 @@ bool __fastcall Scaleform::Render::MeshKey::CalcMatrixKey(Scaleform::Render::Mat
           _mm_shuffle_ps(
             _mm_sub_ps(
               v13,
-              _mm_and_ps(v14, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,0,0,0>'::`2'::v)),
+              _mm_and_ps(v14, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,0,0,0>::`2::v)),
             v10,
             72));
   v16 = _mm_add_ps(_mm_mul_ps(v15, v13), _xmm);
@@ -667,8 +667,8 @@ Scaleform::Render::MeshKey *__fastcall Scaleform::Render::MeshKeyManager::Create
                                              56i64);
     if ( v10 )
     {
-      v10->vfptr = (Scaleform::Render::MeshProviderVtbl *)&Scaleform::Render::MeshProvider::`vftable';
-      v10->vfptr = (Scaleform::Render::MeshProviderVtbl *)&Scaleform::Render::MeshKeySet::`vftable';
+      v10->vfptr = (Scaleform::Render::MeshProviderVtbl *)&Scaleform::Render::MeshProvider::`vftable;
+      v10->vfptr = (Scaleform::Render::MeshProviderVtbl *)&Scaleform::Render::MeshKeySet::`vftable;
       _InterlockedExchangeAdd(&v9->RefCount, 1u);
       v10->pManager.pObject = v9;
       v10->pDelegate = v8;

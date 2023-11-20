@@ -9,7 +9,7 @@ __int64 UFG::_dynamic_initializer_for__gDynamicCoverDataInventory__()
     0xE5150CC0,
     0,
     0);
-  UFG::gDynamicCoverDataInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::DynamicCoverDataInventory::`vftable';
+  UFG::gDynamicCoverDataInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::DynamicCoverDataInventory::`vftable;
   return atexit(UFG::_dynamic_atexit_destructor_for__gDynamicCoverDataInventory__);
 }
 
@@ -24,7 +24,7 @@ __int64 UFG::_dynamic_initializer_for__gDynamicCoverGroupBundleInventory__()
     0x7117991Bu,
     0,
     0);
-  UFG::gDynamicCoverGroupBundleInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::DynamicCoverGroupBundleInventory::`vftable';
+  UFG::gDynamicCoverGroupBundleInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::DynamicCoverGroupBundleInventory::`vftable;
   return atexit(UFG::_dynamic_atexit_destructor_for__gDynamicCoverGroupBundleInventory__);
 }
 

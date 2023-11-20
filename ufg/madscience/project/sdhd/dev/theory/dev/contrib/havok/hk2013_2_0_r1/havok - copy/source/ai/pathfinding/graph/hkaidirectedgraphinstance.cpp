@@ -3,7 +3,7 @@
 void __fastcall hkaiDirectedGraphInstance::hkaiDirectedGraphInstance(hkaiDirectedGraphInstance *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiDirectedGraphInstance::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiDirectedGraphInstance::`vftable;
   this->m_originalGraph.m_pntr = 0i64;
   this->m_nodeMap.m_data = 0i64;
   this->m_nodeMap.m_size = 0;
@@ -36,7 +36,7 @@ void __fastcall hkaiDirectedGraphInstance::hkaiDirectedGraphInstance(hkaiDirecte
 {
   hkaiDirectedGraphExplicitCost *v2; // rdx
 
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiDirectedGraphInstance::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiDirectedGraphInstance::`vftable;
   if ( f.m_finishing )
   {
     v2 = this->m_originalGraph.m_pntr;

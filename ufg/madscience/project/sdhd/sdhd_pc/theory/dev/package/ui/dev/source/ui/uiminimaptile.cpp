@@ -9,7 +9,7 @@ __int64 UFG::_dynamic_initializer_for__gMinimapTileInventory__()
     0x9F34FF46,
     0,
     0);
-  UFG::gMinimapTileInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::UIMinimapTileInventory::`vftable';
+  UFG::gMinimapTileInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::UIMinimapTileInventory::`vftable;
   return atexit(UFG::_dynamic_atexit_destructor_for__gMinimapTileInventory__);
 }
 
@@ -31,12 +31,12 @@ void __fastcall UFG::UIMinimapTileInventory::Add(UFG::UIMinimapTileInventory *th
     UFG::qResourceData::qResourceData(resource_data);
     UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v2[1].mNode.mChild[1]);
   }
-  v4 = `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result )
+  v4 = `UFG::qGetResourceInventory<Illusion::Texture>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Texture>::`2::result )
   {
     v5 = UFG::qResourceWarehouse::Instance();
     v4 = UFG::qResourceWarehouse::GetInventory(v5, 0x8B43FABF);
-    `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result = v4;
+    `UFG::qGetResourceInventory<Illusion::Texture>::`2::result = v4;
   }
   UFG::qResourceHandle::Init(
     (UFG::qResourceHandle *)&v2[1].mNode.mChild[1],
@@ -63,12 +63,12 @@ void __fastcall UFG::UIMinimapTileInventory::Remove(UFG::UIMinimapTileInventory 
 
   v2 = (UFG::UIMinimapTile *)resource_data;
   UFG::qResourceInventory::Remove((UFG::qResourceInventory *)&this->vfptr, resource_data);
-  v3 = `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result )
+  v3 = `UFG::qGetResourceInventory<Illusion::Texture>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Texture>::`2::result )
   {
     v4 = UFG::qResourceWarehouse::Instance();
     v3 = UFG::qResourceWarehouse::GetInventory(v4, 0x8B43FABF);
-    `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result = v3;
+    `UFG::qGetResourceInventory<Illusion::Texture>::`2::result = v3;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v2->mMapTileHandle.mPrev, v3);
   UFG::UIMinimapTile::~UIMinimapTile(v2);

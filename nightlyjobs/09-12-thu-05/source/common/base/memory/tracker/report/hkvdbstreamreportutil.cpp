@@ -7,9 +7,9 @@ void __fastcall writeModuleInfo(const char *text, void *context)
   hkOstream *v4; // rax
 
   v2 = text;
-  v3 = hkOstream::operator<<((hkOstream *)context, "Module( str=r'''");
+  v3 = hkOstream::operator<<((hkOstream *)context, "Module( str=r");
   v4 = hkOstream::operator<<(v3, v2);
-  hkOstream::operator<<(v4, "''' )\n");
+  hkOstream::operator<<(v4, " )\n");
 }
 
 // File Line: 32
@@ -58,9 +58,9 @@ void __fastcall writeMemorySystemStats(hkTrackerScanSnapshot *scanSnapshot, hkOs
   {
     for ( i = hkString::strChr(v3, 10); i; i = hkString::strChr(i + 1, 10) )
     {
-      hkOstream::operator<<(v2, "Statistics( str='");
+      hkOstream::operator<<(v2, "Statistics( str=");
       hkOstream::write(v2, v4, (unsigned int)((_DWORD)i - (_DWORD)v4));
-      hkOstream::operator<<(v2, "' )\n");
+      hkOstream::operator<<(v2, " )\n");
       v4 = i + 1;
     }
   }
@@ -226,7 +226,7 @@ void __fastcall hkVdbStreamReportUtil::generateReport(hkTrackerScanSnapshot *sca
     do
     {
       v12 = &v3->m_rawSnapshot.m_providers.m_data[v11];
-      hkOstream::printf(v4, "Provider( id=%i, name='%s', parIds=[", v9);
+      hkOstream::printf(v4, "Provider( id=%i, name=%s, parIds=[", v9);
       v14 = v2;
       if ( v12->m_parentIndices.m_size > 0 )
       {
@@ -371,9 +371,9 @@ void __fastcall hkVdbStreamReportUtil::generateReport(hkTrackerScanSnapshot *sca
         v39 = v88.m_numElems & 0x7FFFFFFF;
         v40 = hkOstream::operator<<(v4, "Type( id=");
         v41 = hkOstream::operator<<(v40, v39, (int)v40);
-        hkOstream::operator<<(v41, ", name='");
+        hkOstream::operator<<(v41, ", name=");
         hkTrackerTypeTreeNode::dumpType(v37->m_type, v4);
-        hkOstream::operator<<(v4, "' )\n");
+        hkOstream::operator<<(v4, " )\n");
         hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::insert(
           &v88,
           (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,

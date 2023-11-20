@@ -431,7 +431,7 @@ void __fastcall UFG::RingBuffer<UFG::Crumb>::RingBuffer<UFG::Crumb>(UFG::RingBuf
   {
     LODWORD(v8->mNext) = v4;
     v3 = (signed __int64)&v8->mNext + 4;
-    `eh vector constructor iterator'(
+    `eh vector constructor iterator(
       (char *)&v8->mNext + 4,
       0x20ui64,
       v4,

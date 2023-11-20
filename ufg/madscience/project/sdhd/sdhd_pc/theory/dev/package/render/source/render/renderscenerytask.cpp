@@ -536,7 +536,7 @@ LABEL_13:
   v37->mPrev = v36;
   arg.mPrev = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
   arg.mNext = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     dest.mStateArgs.mStateArgs,
     0x10ui64,
     128,

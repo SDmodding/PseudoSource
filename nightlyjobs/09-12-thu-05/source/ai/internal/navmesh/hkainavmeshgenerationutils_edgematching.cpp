@@ -253,7 +253,7 @@ LABEL_5:
 
 // File Line: 199
 // RVA: 0xB8EBE0
-void __fastcall `anonymous namespace'::SegmentPair::SegmentPair(SegmentPair *this, hkVector4f *SA, hkVector4f *EA, hkVector4f *SB, hkVector4f *EB)
+void __fastcall `anonymous namespace::SegmentPair::SegmentPair(SegmentPair *this, hkVector4f *SA, hkVector4f *EA, hkVector4f *SB, hkVector4f *EB)
 {
   hkSimdFloat32 tEB; // [rsp+30h] [rbp-48h]
   hkSimdFloat32 tSB; // [rsp+40h] [rbp-38h]
@@ -268,12 +268,12 @@ void __fastcall `anonymous namespace'::SegmentPair::SegmentPair(SegmentPair *thi
   tSB.m_real = aabbOut.m_quad;
   tEA.m_real = query.m_quad;
   tSA.m_real = aabbOut.m_quad;
-  `anonymous namespace'::SegmentPair::updateT(this, &tSA, &tEA, &tSB, &tEB);
+  `anonymous namespace::SegmentPair::updateT(this, &tSA, &tEA, &tSB, &tEB);
 }
 
 // File Line: 204
 // RVA: 0xB8EC60
-void __fastcall `anonymous namespace'::SegmentPair::updateT(SegmentPair *this, hkSimdFloat32 *tSA, hkSimdFloat32 *tEA, hkSimdFloat32 *tSB, hkSimdFloat32 *tEB)
+void __fastcall `anonymous namespace::SegmentPair::updateT(SegmentPair *this, hkSimdFloat32 *tSA, hkSimdFloat32 *tEA, hkSimdFloat32 *tSB, hkSimdFloat32 *tEB)
 {
   hkVector4f v5; // xmm2
   hkVector4f v6; // xmm3
@@ -300,7 +300,7 @@ void __fastcall `anonymous namespace'::SegmentPair::updateT(SegmentPair *this, h
 
 // File Line: 217
 // RVA: 0xB8ECE0
-void __fastcall `anonymous namespace'::SegmentPair::updateProjection(SegmentPair *this, hkVector4f *up, __int64 a3, hkVector4f *a4)
+void __fastcall `anonymous namespace::SegmentPair::updateProjection(SegmentPair *this, hkVector4f *up, __int64 a3, hkVector4f *a4)
 {
   SegmentPair *v4; // rbx
   hkVector4f *v5; // rdi
@@ -310,15 +310,15 @@ void __fastcall `anonymous namespace'::SegmentPair::updateProjection(SegmentPair
 
   v4 = this;
   v5 = up;
-  `anonymous namespace'::SegmentPair::projectPoint((SegmentPair *)((char *)this + 64), up, &this->m_pSAProjected, a4);
-  `anonymous namespace'::SegmentPair::projectPoint((SegmentPair *)((char *)v4 + 80), v5, &v4->m_pEAProjected, v6);
-  `anonymous namespace'::SegmentPair::projectPoint((SegmentPair *)((char *)v4 + 96), v5, &v4->m_pSBProjected, v7);
-  `anonymous namespace'::SegmentPair::projectPoint((SegmentPair *)((char *)v4 + 112), v5, &v4->m_pEBProjected, v8);
+  `anonymous namespace::SegmentPair::projectPoint((SegmentPair *)((char *)this + 64), up, &this->m_pSAProjected, a4);
+  `anonymous namespace::SegmentPair::projectPoint((SegmentPair *)((char *)v4 + 80), v5, &v4->m_pEAProjected, v6);
+  `anonymous namespace::SegmentPair::projectPoint((SegmentPair *)((char *)v4 + 96), v5, &v4->m_pSBProjected, v7);
+  `anonymous namespace::SegmentPair::projectPoint((SegmentPair *)((char *)v4 + 112), v5, &v4->m_pEBProjected, v8);
 }
 
 // File Line: 225
 // RVA: 0xB8F240
-void __fastcall `anonymous namespace'::SegmentPair::projectPoint(SegmentPair *this, hkVector4f *p, hkVector4f *up, hkVector4f *projOut)
+void __fastcall `anonymous namespace::SegmentPair::projectPoint(SegmentPair *this, hkVector4f *p, hkVector4f *up, hkVector4f *projOut)
 {
   __m128 v4; // xmm1
 
@@ -335,7 +335,7 @@ void __fastcall `anonymous namespace'::SegmentPair::projectPoint(SegmentPair *th
 
 // File Line: 256
 // RVA: 0xB8F280
-bool __fastcall `anonymous namespace'::SegmentPair::areIntervalsDisjoint(SegmentPair *this)
+bool __fastcall `anonymous namespace::SegmentPair::areIntervalsDisjoint(SegmentPair *this)
 {
   return COERCE_FLOAT(*(_OWORD *)&this->m_tEndA) <= this->m_tStartA.m_real.m128_f32[0]
       || COERCE_FLOAT(*(_OWORD *)&this->m_tEndB) <= this->m_tStartB.m_real.m128_f32[0];
@@ -343,7 +343,7 @@ bool __fastcall `anonymous namespace'::SegmentPair::areIntervalsDisjoint(Segment
 
 // File Line: 265
 // RVA: 0xB8ED50
-hkSimdFloat32 *__fastcall `anonymous namespace'::SegmentPair::clippedDistanceSquared(SegmentPair *this, hkSimdFloat32 *result, hkVector4f *closestAminusClosestB)
+hkSimdFloat32 *__fastcall `anonymous namespace::SegmentPair::clippedDistanceSquared(SegmentPair *this, hkSimdFloat32 *result, hkVector4f *closestAminusClosestB)
 {
   __m128 v3; // xmm13
   hkVector4f v4; // xmm14
@@ -435,7 +435,7 @@ hkSimdFloat32 *__fastcall `anonymous namespace'::SegmentPair::clippedDistanceSqu
 
 // File Line: 277
 // RVA: 0xB8EFC0
-hkSimdFloat32 *__fastcall `anonymous namespace'::SegmentPair::projectedDistanceSquared(SegmentPair *this, hkSimdFloat32 *result)
+hkSimdFloat32 *__fastcall `anonymous namespace::SegmentPair::projectedDistanceSquared(SegmentPair *this, hkSimdFloat32 *result)
 {
   __m128 v2; // xmm13
   hkVector4f v3; // xmm14
@@ -773,8 +773,8 @@ signed __int64 __fastcall clipToMaxDistance(SegmentPair *segPair, hkaiNavMeshEdg
   tSA.m_real = v39;
   tEB.m_real = _mm_add_ps(_mm_mul_ps(v41, v30), v40.m_real);
   tSB.m_real = _mm_add_ps(_mm_mul_ps(v41, v31), v40.m_real);
-  `anonymous namespace'::SegmentPair::updateT(segPair, &tSA, &tEA, &tSB, &tEB);
-  if ( `anonymous namespace'::SegmentPair::areIntervalsDisjoint(v6) )
+  `anonymous namespace::SegmentPair::updateT(segPair, &tSA, &tEA, &tSB, &tEB);
+  if ( `anonymous namespace::SegmentPair::areIntervalsDisjoint(v6) )
     return 5i64;
   v42 = _mm_sub_ps(v6->m_endA.m_quad, v6->m_startA.m_quad);
   v43 = _mm_mul_ps(v42, v42);
@@ -1055,7 +1055,7 @@ __int64 __usercall hkaiNavMeshGenerationUtils::_calculateConnectivity<hkaiNavMes
   result.m_real = v26;
   *(hkVector4f *)((char *)&SA + 8) = (hkVector4f)v26;
   furthestPointOut.m_quad = (__m128)v24[v27];
-  `anonymous namespace'::SegmentPair::SegmentPair(
+  `anonymous namespace::SegmentPair::SegmentPair(
     &segPair,
     &SA,
     &EA,
@@ -1238,15 +1238,15 @@ LABEL_17:
 LABEL_18:
   furthestPointOut.m_quad = _mm_sub_ps(query.m_quad, v82);
   SA.m_quad = _mm_sub_ps(query.m_quad, v81);
-  `anonymous namespace'::SegmentPair::updateT(
+  `anonymous namespace::SegmentPair::updateT(
     &segPair,
     (hkSimdFloat32 *)&SA.m_quad.m128_u16[4],
     (hkSimdFloat32 *)&EA,
     (hkSimdFloat32 *)&furthestPointOut,
     (hkSimdFloat32 *)&SA);
-  if ( `anonymous namespace'::SegmentPair::areIntervalsDisjoint(&segPair) )
+  if ( `anonymous namespace::SegmentPair::areIntervalsDisjoint(&segPair) )
     return 5i64;
-  `anonymous namespace'::SegmentPair::clippedDistanceSquared(&segPair, (hkSimdFloat32 *)&furthestPointOut, &SA);
+  `anonymous namespace::SegmentPair::clippedDistanceSquared(&segPair, (hkSimdFloat32 *)&furthestPointOut, &SA);
   v85 = _mm_mul_ps(SA.m_quad, v20->m_quad);
   if ( COERCE_FLOAT((unsigned int)(2
                                  * COERCE_SIGNED_INT(
@@ -1260,9 +1260,9 @@ LABEL_18:
     return 6i64;
   if ( v216 || (v52 = clipToMaxDistance(&segPair, (hkaiNavMeshEdgeMatchingParameters *)v17, v20, 0), (_DWORD)v52 == -1) )
   {
-    `anonymous namespace'::SegmentPair::updateProjection(&segPair, v20, v83, v84);
+    `anonymous namespace::SegmentPair::updateProjection(&segPair, v20, v83, v84);
     v86 = (__m128)COERCE_UNSIGNED_INT(*(float *)&v17[4] * *(float *)&v17[4]);
-    `anonymous namespace'::SegmentPair::projectedDistanceSquared(&segPair, (hkSimdFloat32 *)&SA);
+    `anonymous namespace::SegmentPair::projectedDistanceSquared(&segPair, (hkSimdFloat32 *)&SA);
     if ( SA.m_quad.m128_f32[0] > COERCE_FLOAT(_mm_shuffle_ps(v86, v86, 0)) )
       return 2i64;
     if ( v216
@@ -1275,7 +1275,7 @@ LABEL_18:
       v90 = segPair.m_tEndB.m_real.m128_f32[0];
       edgePair->m_tStartB = segPair.m_tStartB.m_real.m128_f32[0];
       edgePair->m_tEndB = v90;
-      `anonymous namespace'::SegmentPair::updateProjection(&segPair, v20, v87, v88);
+      `anonymous namespace::SegmentPair::updateProjection(&segPair, v20, v87, v88);
       v91 = _mm_sub_ps(segPair.m_pSBProjected.m_quad, segPair.m_pEBProjected.m_quad);
       v92 = _mm_sub_ps(
               segPair.m_pSBProjected.m_quad,
@@ -1467,12 +1467,12 @@ LABEL_18:
           {
             if ( v17[52] )
             {
-              `anonymous namespace'::SegmentPair::projectPoint(
+              `anonymous namespace::SegmentPair::projectPoint(
                 (SegmentPair *)&furthestPointOut,
                 v20,
                 &furthestPointOut,
                 v148);
-              `anonymous namespace'::SegmentPair::projectPoint(
+              `anonymous namespace::SegmentPair::projectPoint(
                 (SegmentPair *)&SA.m_quad.m128_u16[4],
                 v20,
                 (hkVector4f *)((char *)&SA + 8),

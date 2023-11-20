@@ -6,7 +6,7 @@ void __fastcall hkpEntity::hkpEntity(hkpEntity *this, hkpShape *shape)
 
   v2 = this;
   hkpWorldObject::hkpWorldObject((hkpWorldObject *)&this->vfptr, shape, BROAD_PHASE_ENTITY);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpEntity::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpEntity::`vftable;
   v2->m_material.m_friction = 0.5;
   v2->m_material.m_restitution = 0.40000001;
   v2->m_material.m_rollingFrictionMultiplier.m_value = 0;
@@ -22,7 +22,7 @@ void __fastcall hkpEntity::hkpEntity(hkpEntity *this, hkpShape *shape)
   *(_DWORD *)&v2->m_spuCollisionCallback.m_capacity = 16973824;
   hkpMotion::hkpMotion((hkpMotion *)&v2->m_motion.vfptr);
   v2->m_motion.m_savedMotion = 0i64;
-  v2->m_motion.vfptr = (hkBaseObjectVtbl *)&hkpMaxSizeMotion::`vftable';
+  v2->m_motion.vfptr = (hkBaseObjectVtbl *)&hkpMaxSizeMotion::`vftable;
   v2->m_contactListeners.m_data = 0i64;
   *(_DWORD *)&v2->m_contactListeners.m_size = 2147483648;
   v2->m_actions.m_data = 0i64;
@@ -53,7 +53,7 @@ void __fastcall hkpEntity::hkpEntity(hkpEntity *this, hkFinishLoadedObjectFlag f
   v2 = this;
   hkpWorldObject::hkpWorldObject((hkpWorldObject *)&this->vfptr, flag);
   v3 = &v2->m_motion.vfptr;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpEntity::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpEntity::`vftable;
   v2->m_constraintsMaster.m_data = 0i64;
   *(_DWORD *)&v2->m_constraintsMaster.m_size = 2147483648;
   v2->m_constraintsSlave.m_data = 0i64;
@@ -62,10 +62,10 @@ void __fastcall hkpEntity::hkpEntity(hkpEntity *this, hkFinishLoadedObjectFlag f
   v2->m_constraintRuntime.m_data = 0i64;
   v2->m_constraintRuntime.m_size = 0;
   v2->m_constraintRuntime.m_capacityAndFlags = 2147483648;
-  v2->m_motion.vfptr = (hkBaseObjectVtbl *)&hkpMotion::`vftable';
+  v2->m_motion.vfptr = (hkBaseObjectVtbl *)&hkpMotion::`vftable;
   if ( v5 )
     v2->m_motion.m_gravityFactor.m_value = 16256;
-  *v3 = &hkpMaxSizeMotion::`vftable';
+  *v3 = &hkpMaxSizeMotion::`vftable;
   v2->m_contactListeners.m_data = 0i64;
   *(_DWORD *)&v2->m_contactListeners.m_size = 2147483648;
   v2->m_actions.m_data = 0i64;
@@ -77,42 +77,42 @@ void __fastcall hkpEntity::hkpEntity(hkpEntity *this, hkFinishLoadedObjectFlag f
       case 2:
         if ( v2 != (hkpEntity *)-336i64 )
         {
-          v4 = &hkpSphereMotion::`vftable';
+          v4 = &hkpSphereMotion::`vftable;
           goto LABEL_17;
         }
         break;
       case 3:
         if ( v2 != (hkpEntity *)-336i64 )
         {
-          v4 = &hkpBoxMotion::`vftable';
+          v4 = &hkpBoxMotion::`vftable;
           goto LABEL_17;
         }
         break;
       case 4:
         if ( v2 != (hkpEntity *)-336i64 )
         {
-          v4 = &hkpKeyframedRigidMotion::`vftable';
+          v4 = &hkpKeyframedRigidMotion::`vftable;
           goto LABEL_17;
         }
         break;
       case 5:
         if ( v2 != (hkpEntity *)-336i64 )
         {
-          v4 = &hkpFixedRigidMotion::`vftable';
+          v4 = &hkpFixedRigidMotion::`vftable;
           goto LABEL_17;
         }
         break;
       case 6:
         if ( v2 != (hkpEntity *)-336i64 )
         {
-          v4 = &hkpThinBoxMotion::`vftable';
+          v4 = &hkpThinBoxMotion::`vftable;
           goto LABEL_17;
         }
         break;
       case 7:
         if ( v2 != (hkpEntity *)-336i64 )
         {
-          v4 = &hkpCharacterMotion::`vftable';
+          v4 = &hkpCharacterMotion::`vftable;
 LABEL_17:
           *v3 = v4;
           v2->m_motion.m_gravityFactor.m_value = 16256;
@@ -224,7 +224,7 @@ void __fastcall hkpEntity::~hkpEntity(hkpEntity *this)
 
   v1 = (unsigned __int64)this->m_limitContactImpulseUtilAndFlag;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpEntity::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpEntity::`vftable;
   v3 = v1 & 0xFFFFFFFFFFFFFFFEui64;
   if ( v3 )
   {
@@ -1169,7 +1169,7 @@ void __fastcall hkpEntity::sortConstraintsSlavesDeterministically(hkpEntity *thi
   {
     v2 = this->m_constraintsSlave.m_size;
     if ( v2 > 1 )
-      hkAlgorithm::quickSortRecursive<hkpConstraintInstance *,`anonymous namespace'::cmpLessConstraint>(
+      hkAlgorithm::quickSortRecursive<hkpConstraintInstance *,`anonymous namespace::cmpLessConstraint>(
         this->m_constraintsSlave.m_data,
         0,
         v2 - 1,

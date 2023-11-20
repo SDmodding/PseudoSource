@@ -48,7 +48,7 @@ void __fastcall hkpSimpleConstraintContactMgr::hkpSimpleConstraintContactMgr(hkp
   v5 = sm;
   v6 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpSimpleConstraintContactMgr::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpSimpleConstraintContactMgr::`vftable;
   v7 = bodyB;
   this->m_type = 0;
   v8 = bodyA;
@@ -83,7 +83,7 @@ void __fastcall hkpSimpleConstraintContactMgr::~hkpSimpleConstraintContactMgr(hk
   hkpSimpleConstraintContactMgr *v1; // rbx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpSimpleConstraintContactMgr::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpSimpleConstraintContactMgr::`vftable;
   if ( this->m_contactConstraintData.m_atom->m_numContactPoints )
     hkpWorldOperationUtil::removeConstraintImmediately(this->m_world, &this->m_constraint, DO_FIRE_CALLBACKS);
   v1->m_constraint.m_entities[0] = 0i64;
@@ -91,7 +91,7 @@ void __fastcall hkpSimpleConstraintContactMgr::~hkpSimpleConstraintContactMgr(hk
   v1->m_constraint.m_data = 0i64;
   hkpConstraintInstance::~hkpConstraintInstance(&v1->m_constraint);
   hkpSimpleContactConstraintData::~hkpSimpleContactConstraintData(&v1->m_contactConstraintData);
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 131
@@ -839,7 +839,7 @@ void __fastcall hkpSimpleConstraintContactMgr::Factory::Factory(hkpSimpleConstra
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_world = mgr;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpSimpleConstraintContactMgr::Factory::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpSimpleConstraintContactMgr::Factory::`vftable;
 }
 
 // File Line: 649

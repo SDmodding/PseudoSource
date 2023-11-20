@@ -334,7 +334,7 @@ __int64 __fastcall hkObjectSerialize::writeObject(hkStreamWriter *s, hkStructure
   v11 = destLayout;
   hkPlatformObjectWriter::hkPlatformObjectWriter(&v35, destLayout, cache, flags);
   v12 = 0i64;
-  writer.vfptr = (hkBaseObjectVtbl *)&hkArrayStreamWriter::`vftable';
+  writer.vfptr = (hkBaseObjectVtbl *)&hkArrayStreamWriter::`vftable;
   array = 0i64;
   v30 = &array;
   dataSize = 0;
@@ -404,7 +404,7 @@ __int64 __fastcall hkObjectSerialize::writeObject(hkStreamWriter *s, hkStructure
           &reloc,
           v11->m_rules.m_littleEndian != hkStructureLayout::HostLayoutRules.m_littleEndian);
   hkRelocationInfo::~hkRelocationInfo(&reloc);
-  writer.vfptr = (hkBaseObjectVtbl *)&hkArrayStreamWriter::`vftable';
+  writer.vfptr = (hkBaseObjectVtbl *)&hkArrayStreamWriter::`vftable;
   if ( !v33 )
   {
     v23 = (__int64)v30;
@@ -414,7 +414,7 @@ __int64 __fastcall hkObjectSerialize::writeObject(hkStreamWriter *s, hkStructure
       (*(void (__fastcall **)(_QWORD *, __int64, signed __int64))(*v24[11] + 16i64))(v24[11], v23, 16i64);
     }
   }
-  writer.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  writer.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
   dataSize = 0;
   if ( v28 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
@@ -552,7 +552,7 @@ LABEL_14:
       (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
       (unsigned __int64)key,
       (unsigned __int64)v11);
-    s.vfptr = (hkBaseObjectVtbl *)&hkArrayStreamWriter::`vftable';
+    s.vfptr = (hkBaseObjectVtbl *)&hkArrayStreamWriter::`vftable;
     v39 = &array;
     array = 0i64;
     nbytes = 0;
@@ -614,7 +614,7 @@ LABEL_14:
         }
       }
     }
-    s.vfptr = (hkBaseObjectVtbl *)&hkArrayStreamWriter::`vftable';
+    s.vfptr = (hkBaseObjectVtbl *)&hkArrayStreamWriter::`vftable;
     if ( !v42 )
     {
       v30 = (__int64)v39;
@@ -624,7 +624,7 @@ LABEL_14:
         (*(void (__fastcall **)(_QWORD *, __int64, signed __int64))(*v31[11] + 16i64))(v31[11], v30, 16i64);
       }
     }
-    s.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+    s.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
     nbytes = 0;
     if ( v36 >= 0 )
       hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
@@ -725,7 +725,7 @@ void __fastcall hkObjectSerialize::writeObject(hkDisplaySerializeOStream *stream
     {
       hkDataWorldNative::hkDataWorldNative(&v33, 0);
       hkDataWorldNative::setContents(&v33, v8, v15);
-      v28.vfptr = (hkBaseObjectVtbl *)&hkBinaryTagfileWriter::`vftable';
+      v28.vfptr = (hkBaseObjectVtbl *)&hkBinaryTagfileWriter::`vftable;
       *(_DWORD *)&v28.m_memSizeAndFlags = 0x1FFFF;
       *(_WORD *)&options.m_verbose.m_bool = 256;
       options.m_writeSerializeIgnored.m_bool = 0;

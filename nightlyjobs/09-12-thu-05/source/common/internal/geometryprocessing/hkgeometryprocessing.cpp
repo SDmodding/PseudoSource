@@ -1327,7 +1327,7 @@ __int64 __usercall hkGeometryProcessing::generateUniformDistribution@<rax>(hkGeo
     a5.m128_i32[0] = (signed int)FLOAT_1_0;
     _S1_43 |= 1u;
     LODWORD(unityFunction.m_value) = (_DWORD)FLOAT_1_0;
-    unityFunction.vfptr = (hkGeometryProcessing::IFunction<hkVector4f,float>Vtbl *)&hkGeometryProcessing::ConstFunction<hkGeometryProcessing::IFunction<hkVector4f,float>>::`vftable';
+    unityFunction.vfptr = (hkGeometryProcessing::IFunction<hkVector4f,float>Vtbl *)&hkGeometryProcessing::ConstFunction<hkGeometryProcessing::IFunction<hkVector4f,float>>::`vftable;
     atexit(hkGeometryProcessing::generateUniformDistribution_::_2_::_dynamic_atexit_destructor_for__unityFunction__);
   }
   v12 = &unityFunction;

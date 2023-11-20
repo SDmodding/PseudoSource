@@ -142,7 +142,7 @@ __int64 __fastcall hkaiNavMeshErosion::erode(hkaiNavMesh *mesh, hkaiNavMeshGener
   v9.m128_f32[0] = v9.m128_f32[0] * 0.5;
   v10 = (hkSimdFloat32 *)mesh;
   retaddr = originalSettings->m_wallClimbingSettings.m_enableWallClimbing.m_bool != 0;
-  _triMeshIn.vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable';
+  _triMeshIn.vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable;
   v11 = mesh->m_vertices.m_size;
   *(_DWORD *)&_triMeshIn.m_memSizeAndFlags = 0x1FFFF;
   _triMeshIn.m_vertices.m_data = 0i64;
@@ -483,7 +483,7 @@ __int64 __fastcall hkaiNavMeshErosion::erode(hkaiNavMesh *mesh, hkaiNavMeshGener
   input.m_materialMap.m_size = 0;
   input.m_defaultConstructionProperties.m_storage = 1;
   v100 = v7;
-  _callbacks.vfptr = (hkaiNavMeshGenerationProgressCallbackVtbl *)&ErosionWrapperCallbacks::`vftable';
+  _callbacks.vfptr = (hkaiNavMeshGenerationProgressCallbackVtbl *)&ErosionWrapperCallbacks::`vftable;
   hkaiNavMesh::hkaiNavMesh(&other);
   hkaiNavMeshGenerationOutputs::hkaiNavMeshGenerationOutputs(&outputs);
   outputs.m_navMesh = &other;
@@ -511,7 +511,7 @@ __int64 __fastcall hkaiNavMeshErosion::erode(hkaiNavMesh *mesh, hkaiNavMeshGener
   }
   hkaiNavMesh::~hkaiNavMesh(&other);
   v102.m_string.m_size = 0;
-  _callbacks.vfptr = (hkaiNavMeshGenerationProgressCallbackVtbl *)&hkaiNavMeshGenerationProgressCallback::`vftable';
+  _callbacks.vfptr = (hkaiNavMeshGenerationProgressCallbackVtbl *)&hkaiNavMeshGenerationProgressCallback::`vftable;
   if ( v102.m_string.m_capacityAndFlags >= 0 )
     hkContainerTempAllocator::s_alloc.vfptr->bufFree(
       (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,

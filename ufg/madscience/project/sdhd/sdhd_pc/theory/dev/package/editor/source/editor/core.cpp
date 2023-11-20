@@ -387,7 +387,7 @@ LABEL_41:
   if ( path.mSubElements.p )
   {
     v18 = &path.mSubElements.p[-1].mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       path.mSubElements.p,
       0x28ui64,
       path.mSubElements.p[-1].mStringHash32,
@@ -399,7 +399,7 @@ LABEL_41:
   if ( path.mElements.p )
   {
     v19 = path.mElements.p - 1;
-    `eh vector destructor iterator'(path.mElements.p, 4ui64, path.mElements.p[-1].mUID, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(path.mElements.p, 4ui64, path.mElements.p[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v19);
   }
   path.mElements.p = 0i64;
@@ -547,7 +547,7 @@ LABEL_30:
   if ( path.mSubElements.p )
   {
     v16 = &path.mSubElements.p[-1].mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       path.mSubElements.p,
       0x28ui64,
       path.mSubElements.p[-1].mStringHash32,
@@ -559,7 +559,7 @@ LABEL_30:
   if ( path.mElements.p )
   {
     v17 = path.mElements.p - 1;
-    `eh vector destructor iterator'(path.mElements.p, 4ui64, path.mElements.p[-1].mUID, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(path.mElements.p, 4ui64, path.mElements.p[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v17);
   }
   path.mElements.p = 0i64;
@@ -679,7 +679,7 @@ void __fastcall UFG::Editor::Core::DeleteSelection(UFG::Editor::SelectionSet *se
     v15 = v13 + 1;
     v15->mNext = v15;
     v15[1].mNext = v15;
-    v14->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+    v14->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
     v14->m_EventUID = 609910773;
     v14->m_NamePTR = 0i64;
   }

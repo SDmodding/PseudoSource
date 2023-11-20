@@ -128,7 +128,7 @@ std::locale::_Locimp *__fastcall std::locale::_Locimp::_New_Locimp(bool _Transpa
   *((_DWORD *)v2 + 8) = 0;
   v4 = (signed __int64)(v2 + 40);
   v2[36] = v1;
-  *(_QWORD *)v2 = &std::locale::_Locimp::`vftable';
+  *(_QWORD *)v2 = &std::locale::_Locimp::`vftable;
   *(_QWORD *)v4 = 0i64;
   *(_BYTE *)(v4 + 8) = 0;
   std::_Yarn<char>::operator=((std::_Yarn<char> *)(v2 + 40), pattern);

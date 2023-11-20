@@ -9,7 +9,7 @@ AK::IAkPlugin *__fastcall CreateSoundSeedWoosh(AK::IAkPluginMemAlloc *in_pAlloca
   v2 = result;
   if ( result )
   {
-    result->vfptr = (AK::IAkPluginVtbl *)&CAkSoundSeedWoosh::`vftable';
+    result->vfptr = (AK::IAkPluginVtbl *)&CAkSoundSeedWoosh::`vftable;
     result[1].vfptr = 0i64;
     result[2].vfptr = 0i64;
     result[3].vfptr = 0i64;
@@ -34,7 +34,7 @@ void __fastcall CAkSoundSeedWoosh::CAkSoundSeedWoosh(CAkSoundSeedWoosh *this)
 
   v1 = this;
   v2 = &this->m_WooshProcess;
-  *(_QWORD *)&v2[-1].m_NoiseGen.PurpleFilter.m_Memories.m_Memories.fFFwd1 = &CAkSoundSeedWoosh::`vftable';
+  *(_QWORD *)&v2[-1].m_NoiseGen.PurpleFilter.m_Memories.m_Memories.fFFwd1 = &CAkSoundSeedWoosh::`vftable;
   *(_QWORD *)&v2[-1].m_NoiseGen.PurpleFilter.m_Memories.m_Memories.fFFbk1 = 0i64;
   *(_QWORD *)&v2[-1].m_NoiseGen.m_NoiseColor = 0i64;
   *((_QWORD *)&v2[-1].m_NoiseGen.m_NoiseColor + 1) = 0i64;
@@ -56,9 +56,9 @@ void __fastcall CAkSoundSeedWoosh::~CAkSoundSeedWoosh(CAkSoundSeedWoosh *this)
 
   v1 = this;
   v2 = &this->m_WooshProcess;
-  *(_QWORD *)&v2[-1].m_NoiseGen.PurpleFilter.m_Memories.m_Memories.fFFwd1 = &CAkSoundSeedWoosh::`vftable';
+  *(_QWORD *)&v2[-1].m_NoiseGen.PurpleFilter.m_Memories.m_Memories.fFFwd1 = &CAkSoundSeedWoosh::`vftable;
   CAkSoundSeedWooshProcess::~CAkSoundSeedWooshProcess(v2);
-  v1->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable';
+  v1->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable;
 }
 
 // File Line: 53

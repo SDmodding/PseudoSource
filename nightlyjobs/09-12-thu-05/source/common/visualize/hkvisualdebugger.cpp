@@ -11,7 +11,7 @@ void __fastcall hkVisualDebugger::hkVisualDebugger(hkVisualDebugger *this, hkArr
   char buf; // [rsp+40h] [rbp-208h]
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkVisualDebugger::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkVisualDebugger::`vftable;
   v3 = 0;
   this->m_server = 0i64;
   this->s_SuppressPollForNewClients = 0;
@@ -103,7 +103,7 @@ void __fastcall hkVisualDebugger::~hkVisualDebugger(hkVisualDebugger *this)
   int v19; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkVisualDebugger::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkVisualDebugger::`vftable;
   hkVisualDebugger::shutdown(this);
   v2 = 0;
   if ( v1->m_contexts.m_size > 0 )
@@ -233,7 +233,7 @@ void __fastcall hkVisualDebugger::~hkVisualDebugger(hkVisualDebugger *this)
       16 * v19);
   v1->m_clients.m_data = 0i64;
   v1->m_clients.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 69
@@ -505,9 +505,9 @@ void __fastcall hkVisualDebugger::capture(hkVisualDebugger *this, const char *ca
                    &v13) )
   {
     hkErrStream::hkErrStream(&v10, &buf, 512);
-    v5 = hkOstream::operator<<((hkOstream *)&v10.vfptr, "Capturing simulation state to '");
+    v5 = hkOstream::operator<<((hkOstream *)&v10.vfptr, "Capturing simulation state to ");
     v6 = hkOstream::operator<<(v5, v3);
-    hkOstream::operator<<(v6, "'");
+    hkOstream::operator<<(v6, "");
     hkError::messageReport(-1, &buf, "hkVisualDebugger.cpp", 171);
     hkOstream::~hkOstream((hkOstream *)&v10.vfptr);
     hkVisualDebugger::createClient(v2, 0i64, 0i64, v4);
@@ -531,9 +531,9 @@ void __fastcall hkVisualDebugger::capture(hkVisualDebugger *this, const char *ca
   else
   {
     hkErrStream::hkErrStream(&v10, &buf, 512);
-    v8 = hkOstream::operator<<((hkOstream *)&v10.vfptr, "Capture file '");
+    v8 = hkOstream::operator<<((hkOstream *)&v10.vfptr, "Capture file ");
     v9 = hkOstream::operator<<(v8, v3);
-    hkOstream::operator<<(v9, "' could not be opened for writing");
+    hkOstream::operator<<(v9, " could not be opened for writing");
     hkError::messageReport(-1, &buf, "hkVisualDebugger.cpp", 186);
     hkOstream::~hkOstream((hkOstream *)&v10.vfptr);
   }
@@ -578,7 +578,7 @@ void __fastcall hkVisualDebugger::capture(hkVisualDebugger *this, hkMemoryTrack 
   {
     *(_DWORD *)(v7 + 8) = 0x1FFFF;
     *(_QWORD *)(v7 + 16) = v5;
-    *(_QWORD *)v7 = &hkMemoryTrackStreamWriter::`vftable';
+    *(_QWORD *)v7 = &hkMemoryTrackStreamWriter::`vftable;
     *(_DWORD *)(v7 + 24) = 1;
   }
   else
@@ -1123,9 +1123,9 @@ LABEL_5:
       1985369172i64,
       "removeDefaultProcess");
     hkErrStream::hkErrStream(&v13, &buf, 512);
-    v6 = hkOstream::operator<<((hkOstream *)&v13.vfptr, "The default Process'");
+    v6 = hkOstream::operator<<((hkOstream *)&v13.vfptr, "The default Process");
     v7 = hkOstream::operator<<(v6, v3);
-    hkOstream::operator<<(v7, "', cannot not be removed from the default process list as it cannot be found!");
+    hkOstream::operator<<(v7, ", cannot not be removed from the default process list as it cannot be found!");
     hkError::messageReport(-1, &buf, "hkVisualDebugger.cpp", 406);
     hkOstream::~hkOstream((hkOstream *)&v13.vfptr);
     ((void (*)(void))hkSingleton<hkError>::s_instance->vfptr[5].__vecDelDtor)();

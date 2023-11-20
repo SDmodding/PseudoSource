@@ -36,7 +36,7 @@ void __fastcall finishLoadedObjecthkaiSimpleObstacleGenerator(void *p, int finis
   {
     v2 = p;
     hkaiObstacleGenerator::hkaiObstacleGenerator((hkaiObstacleGenerator *)p, (hkFinishLoadedObjectFlag)finishing);
-    *v2 = &hkaiSimpleObstacleGenerator::`vftable';
+    *v2 = &hkaiSimpleObstacleGenerator::`vftable;
   }
 }
 
@@ -54,7 +54,7 @@ void **__fastcall getVtablehkaiSimpleObstacleGenerator()
   hkaiObstacleGenerator v1; // [rsp+20h] [rbp-B8h]
 
   hkaiObstacleGenerator::hkaiObstacleGenerator(&v1, 0);
-  return &hkaiSimpleObstacleGenerator::`vftable';
+  return &hkaiSimpleObstacleGenerator::`vftable;
 }
 
 // File Line: 97

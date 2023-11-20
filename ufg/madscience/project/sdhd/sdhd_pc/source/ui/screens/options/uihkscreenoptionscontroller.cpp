@@ -18,7 +18,7 @@ void __fastcall UFG::UIHKScreenOptionsController::UIHKScreenOptionsController(UF
   v1 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -29,7 +29,7 @@ void __fastcall UFG::UIHKScreenOptionsController::UIHKScreenOptionsController(UF
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenOptionsController::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenOptionsController::`vftable;
   this->mOptionChanged = 0;
   this->mNewDrivingConfig = 0;
 }
@@ -46,7 +46,7 @@ void __fastcall UFG::UIHKScreenOptionsController::~UIHKScreenOptionsController(U
   unsigned int v6; // eax
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenOptionsController::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenOptionsController::`vftable;
   if ( UFG::gInputSystem )
   {
     if ( UFG::gActiveControllerNum != -1 )
@@ -86,7 +86,7 @@ void __fastcall UFG::UIHKScreenOptionsController::init(UFG::UIHKScreenOptionsCon
   v3 = v2->mRenderable->m_movie.pObject;
   v4 = UFG::GameStatTracker::Instance();
   v5 = UFG::GameStatTracker::GetStat(v4, DrivingConfig);
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( (v9 >> 6) & 1 )
   {
     (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v8 + 16i64))(v8, &ptr, COERCE_DOUBLE(*(_QWORD *)&v10));
@@ -114,7 +114,7 @@ void __fastcall UFG::UIHKScreenOptionsController::init(UFG::UIHKScreenOptionsCon
       0i64,
       0,
       0i64);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 120
@@ -293,8 +293,8 @@ void __fastcall UFG::UIHKScreenOptionsController::ShowHelpBar(UFG::UIHKScreenOpt
   data.MessageIds[5] = 0;
   UFG::UIHKHelpBarWidget::Show(v2, &data);
   UFG::qString::~qString(&data.CustomTexturePack);
-  `eh vector destructor iterator'(data.Icons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
-  `eh vector destructor iterator'(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+  `eh vector destructor iterator(data.Icons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+  `eh vector destructor iterator(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
 }
 
 // File Line: 270

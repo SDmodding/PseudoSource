@@ -28,8 +28,8 @@ UFG::allocator::free_link *__fastcall AFunction::copy_new(AFunction *this)
   v21 = (AMD_HD3D *)v2;
   if ( v2 )
   {
-    v2->mNext = (UFG::allocator::free_link *)&AFunctionBase::`vftable';
-    v2->mNext = (UFG::allocator::free_link *)&AFunction::`vftable';
+    v2->mNext = (UFG::allocator::free_link *)&AFunctionBase::`vftable;
+    v2->mNext = (UFG::allocator::free_link *)&AFunction::`vftable;
     v2[1].mNext = (UFG::allocator::free_link *)v1->i_function_f;
   }
   else

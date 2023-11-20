@@ -4,7 +4,7 @@ void __fastcall hkpRackAndPinionConstraintData::hkpRackAndPinionConstraintData(h
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_userData = 0i64;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpRackAndPinionConstraintData::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpRackAndPinionConstraintData::`vftable;
   this->m_atoms.m_transforms.m_type.m_storage = 2;
   this->m_atoms.m_rackAndPinion.m_type.m_storage = 21;
   this->m_atoms.m_transforms.m_transformA.m_rotation.m_col0 = (hkVector4f)transform.m_quad;

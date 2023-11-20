@@ -10,10 +10,10 @@ void __fastcall UFG::UIHKMissionRewardsWidget::~UIHKMissionRewardsWidget(UFG::UI
   UFG::UIScreenTextureManager *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::UIHKMissionRewardsWidgetVtbl *)&UFG::UIHKMissionRewardsWidget::`vftable';
+  this->vfptr = (UFG::UIHKMissionRewardsWidgetVtbl *)&UFG::UIHKMissionRewardsWidget::`vftable;
   v2 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseTexturePack(v2, UFG::UIHKMissionRewardsWidget::gTexturePackFilename);
-  v1->Rewards.vfptr = (UFG::UIHKMissionRewardsFlasherWidgetVtbl *)&UFG::UIHKMissionRewardsFlasherWidget::`vftable';
+  v1->Rewards.vfptr = (UFG::UIHKMissionRewardsFlasherWidgetVtbl *)&UFG::UIHKMissionRewardsFlasherWidget::`vftable;
   v3 = (const char **)&UFG::UIHKMissionRewardsFlasherWidget::gTexturePackFilename[0].mData;
   v4 = 4i64;
   do
@@ -25,7 +25,7 @@ void __fastcall UFG::UIHKMissionRewardsWidget::~UIHKMissionRewardsWidget(UFG::UI
     --v4;
   }
   while ( v4 );
-  v1->Header.vfptr = (UFG::UIHKMissionRewardsHeaderWidgetVtbl *)&UFG::UIHKMissionRewardsHeaderWidget::`vftable';
+  v1->Header.vfptr = (UFG::UIHKMissionRewardsHeaderWidgetVtbl *)&UFG::UIHKMissionRewardsHeaderWidget::`vftable;
 }
 
 // File Line: 61

@@ -112,7 +112,7 @@ hkClass *__fastcall hkpMoppCode::staticClass()
 void __fastcall finishLoadedObjecthkpMoppCode(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpMoppCode::`vftable';
+    *(_QWORD *)p = &hkpMoppCode::`vftable;
 }
 
 // File Line: 201
@@ -126,7 +126,7 @@ void __fastcall cleanupLoadedObjecthkpMoppCode(void *p)
 // RVA: 0xD98F60
 void **__fastcall getVtablehkpMoppCode()
 {
-  return &hkpMoppCode::`vftable';
+  return &hkpMoppCode::`vftable;
 }
 
 // File Line: 227

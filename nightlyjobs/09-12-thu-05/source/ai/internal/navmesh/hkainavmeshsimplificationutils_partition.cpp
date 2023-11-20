@@ -3,7 +3,7 @@
 void __fastcall hkaiNavMeshSimplificationUtils::PlaneFitter::PlaneFitter(hkaiNavMeshSimplificationUtils::PlaneFitter *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshSimplificationUtils::PlaneFitter::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshSimplificationUtils::PlaneFitter::`vftable;
   hkaiNavMeshSimplificationUtils::PlaneFitter::reset(this);
 }
 
@@ -512,7 +512,7 @@ void __fastcall Partitioner::~Partitioner(Partitioner *this)
       16 * v2);
   v1->m_points.m_data = 0i64;
   v1->m_points.m_capacityAndFlags = 2147483648;
-  v1->m_fitter.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->m_fitter.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
   v3 = v1->m_partition.m_elem.m_capacityAndFlags;
   v1->m_partition.m_elem.m_size = 0;
   if ( v3 >= 0 )
@@ -742,7 +742,7 @@ char __fastcall Partitioner::canInclude(Partitioner *this, hkaiNavMesh *mesh, hk
   v19 = v8->m_minHeight.m_real;
   v20 = v8->m_maxHeight.m_real;
   _mm_store_si128((__m128i *)&v141.m_sum, v15);
-  v141.vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshSimplificationUtils::PlaneFitter::`vftable';
+  v141.vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshSimplificationUtils::PlaneFitter::`vftable;
   v141.m_numPoints = v8->m_fitter.m_numPoints;
   v21.m_quad = (__m128)v8->m_fitter.m_productSums.m_col0;
   v141.m_productSums.m_col1 = (hkVector4f)v16.m_quad;
@@ -802,7 +802,7 @@ LABEL_15:
         v7 = v142;
         v8->m_points.m_data[v8->m_points.m_size++].m_quad = v28;
         v13 = majorAxis;
-        v33 = _mm_and_ps((__m128)`hkVector4f::getComponent'::`2'::indexToMask[majorAxis], v28);
+        v33 = _mm_and_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[majorAxis], v28);
         v34 = _mm_or_ps(_mm_shuffle_ps(v33, v33, 78), v33);
         v35 = _mm_or_ps(_mm_shuffle_ps(v34, v34, 177), v34);
         v19 = _mm_min_ps(v19, v35);
@@ -1062,7 +1062,7 @@ LABEL_70:
           }
           while ( v89 < v14->m_numEdges );
         }
-        collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&Partitioner::BoundaryIntersectionQuery::`vftable';
+        collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&Partitioner::BoundaryIntersectionQuery::`vftable;
         v114 = _mm_shuffle_ps(
                  (__m128)LODWORD(hkaiNavMeshSimplificationUtils::s_triangulatorEpsilon),
                  (__m128)LODWORD(hkaiNavMeshSimplificationUtils::s_triangulatorEpsilon),
@@ -1079,7 +1079,7 @@ LABEL_70:
         {
 LABEL_84:
           v85 = 1;
-          collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&hkcdAabbTreeQueries::AabbCollector::`vftable';
+          collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&hkcdAabbTreeQueries::AabbCollector::`vftable;
         }
         else
         {
@@ -1108,7 +1108,7 @@ LABEL_84:
             v115 = v134;
           }
           v85 = 0;
-          collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&hkcdAabbTreeQueries::AabbCollector::`vftable';
+          collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&hkcdAabbTreeQueries::AabbCollector::`vftable;
         }
       }
       v125 = 0;
@@ -1264,10 +1264,10 @@ LABEL_9:
           }
           v9->m_points.m_data[v9->m_points.m_size++].m_quad = v22;
           v25 = majorAxis;
-          v26 = _mm_and_ps((__m128)`hkVector4f::getComponent'::`2'::indexToMask[majorAxis], v22);
+          v26 = _mm_and_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[majorAxis], v22);
           v27 = _mm_or_ps(_mm_shuffle_ps(v26, v26, 78), v26);
           v9->m_minHeight.m_real = _mm_min_ps(v9->m_minHeight.m_real, _mm_or_ps(_mm_shuffle_ps(v27, v27, 177), v27));
-          v28 = _mm_and_ps((__m128)`hkVector4f::getComponent'::`2'::indexToMask[v25], v22);
+          v28 = _mm_and_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[v25], v22);
           v29 = _mm_or_ps(_mm_shuffle_ps(v28, v28, 78), v28);
           v9->m_maxHeight.m_real = _mm_max_ps(v9->m_maxHeight.m_real, _mm_or_ps(_mm_shuffle_ps(v29, v29, 177), v29));
         }

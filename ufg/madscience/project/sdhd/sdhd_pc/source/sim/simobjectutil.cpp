@@ -47,7 +47,7 @@ void __fastcall UFG::SimObjectUtility::ResetSimObject(UFG::SimObject *pSimObject
     if ( v3 )
       v6 = "True";
     v8 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v5->m_Name);
-    UFG::qPrintf("ResetSimObject: '%s'(0x%x) Resetting '%s'(0x%x), Keep Items: '%s'\n", v8, v5, v7, v4, v6);
+    UFG::qPrintf("ResetSimObject: %s(0x%x) Resetting %s(0x%x), Keep Items: %s\n", v8, v5, v7, v4, v6);
   }
   if ( v5 )
   {
@@ -388,7 +388,7 @@ void __fastcall UFG::SimObjectUtility::ResetState(UFG::SimObject *pSimObjectToRe
     if ( bKeepItems )
       v6 = "True";
     v8 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&pSimObjectToReset->m_Name);
-    UFG::qPrintf("ResetState: '%s'(0x%x), Keep Items: '%s' Delete Items: '%s'\n", v8, v5, v6, v7);
+    UFG::qPrintf("ResetState: %s(0x%x), Keep Items: %s Delete Items: %s\n", v8, v5, v6, v7);
   }
   UFG::VehicleUtility::ExitVehicleNow((UFG::SimObject *)&v5->vfptr, 0, 1, 1);
   UFG::IsAnyLocalPlayer((UFG::SimObject *)&v5->vfptr);
@@ -1979,7 +1979,7 @@ char __fastcall UFG::SimObjectUtility::ReinitializeSimObject(UFG::SimObject *pSi
     if ( bDeleteItems )
       v6 = "True";
     v7 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&pSimObjectToReset->m_Name);
-    UFG::qPrintf("ReinitializeSimObject: '%s'(0x%x) Delete Items '%s'\n", v7, v4, v6);
+    UFG::qPrintf("ReinitializeSimObject: %s(0x%x) Delete Items %s\n", v7, v4, v6);
   }
   if ( v4 )
   {
@@ -3920,9 +3920,9 @@ __int64 __fastcall UFG::SimObjectUtility::FindSpawnCharacterPosition(UFG::qVecto
   UFG::SpawnTraversalImmediateQuery::SpawnTraversalImmediateQuery((UFG::SpawnTraversalImmediateQuery *)((char *)&v24 + 8));
   output.m_id = 0;
   *(_QWORD *)&output.m_internalType = 4i64;
-  output.vfptr = (UFG::DaemonQueryOutputVtbl *)&UFG::SpawnTraversalOutput::`vftable';
+  output.vfptr = (UFG::DaemonQueryOutputVtbl *)&UFG::SpawnTraversalOutput::`vftable;
   v19 = UFG::qVector3::msZero;
-  v18 = &UFG::HavokNavPosition::`vftable';
+  v18 = &UFG::HavokNavPosition::`vftable;
   v21 = -1i64;
   v20 = _mm_unpacklo_ps(
           _mm_unpacklo_ps((__m128)LODWORD(UFG::qVector3::msZero.x), (__m128)LODWORD(UFG::qVector3::msZero.z)),
@@ -4186,7 +4186,7 @@ __int64 __fastcall UFG::SimObjectUtility::FindSpawnVehicleTransformIterated(UFG:
     (UFG::VehicleWayFinderClient *)((char *)&v126 + 64),
     0i64,
     0xFFFFFFFF);
-  v126.vfptr = (UFG::WayFinderClientVtbl *)&UFG::WayTraversalClient::`vftable';
+  v126.vfptr = (UFG::WayFinderClientVtbl *)&UFG::WayTraversalClient::`vftable;
   v9 = UFG::WheeledVehicleNavigationData::GetRoadNetwork(v7->m_NavigationData);
   v10 = v9;
   v116 = v9;

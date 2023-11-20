@@ -10,7 +10,7 @@ AK::IAkPlugin *__fastcall CreateHarmonizerFX(AK::IAkPluginMemAlloc *in_pAllocato
   if ( result )
   {
     result[1].vfptr = 0i64;
-    result->vfptr = (AK::IAkPluginVtbl *)&CAkHarmonizerFX::`vftable';
+    result->vfptr = (AK::IAkPluginVtbl *)&CAkHarmonizerFX::`vftable;
     result[2].vfptr = 0i64;
     AkHarmonizerFXInfo::AkHarmonizerFXInfo((AkHarmonizerFXInfo *)&result[3]);
     result = v2;
@@ -25,7 +25,7 @@ void __fastcall CAkHarmonizerFX::CAkHarmonizerFX(CAkHarmonizerFX *this)
   AkHarmonizerFXInfo *v1; // rcx
 
   v1 = &this->m_FXInfo;
-  *(_QWORD *)&v1[-1].uNumProcessedChannels = &CAkHarmonizerFX::`vftable';
+  *(_QWORD *)&v1[-1].uNumProcessedChannels = &CAkHarmonizerFX::`vftable;
   *(_QWORD *)&v1[-1].uTotalNumChannels = 0i64;
   *(_QWORD *)&v1[-1].bWetPathEnabled = 0i64;
   AkHarmonizerFXInfo::AkHarmonizerFXInfo(v1);
@@ -41,7 +41,7 @@ void __fastcall CAkHarmonizerFX::~CAkHarmonizerFX(CAkHarmonizerFX *this)
 
   v1 = this;
   v2 = (DSP::AkFFTAllButterflies::CAkPhaseVocoder *)this->m_FXInfo.Filter;
-  this->vfptr = (AK::IAkPluginVtbl *)&CAkHarmonizerFX::`vftable';
+  this->vfptr = (AK::IAkPluginVtbl *)&CAkHarmonizerFX::`vftable;
   v3 = 1;
   do
   {
@@ -50,7 +50,7 @@ void __fastcall CAkHarmonizerFX::~CAkHarmonizerFX(CAkHarmonizerFX *this)
     --v3;
   }
   while ( v3 >= 0 );
-  v1->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable';
+  v1->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable;
 }
 
 // File Line: 52

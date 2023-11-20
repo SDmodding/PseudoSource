@@ -2,7 +2,7 @@
 // RVA: 0x4295B0
 void __fastcall OSuite::TList<OSuite::ZServiceOperationValue *>::ZIterator::~ZIterator(OSuite::TList<OSuite::ZServiceOperationValue *>::ZIterator *this)
 {
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZServiceOperationValue *>::ZIterator::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZServiceOperationValue *>::ZIterator::`vftable;
 }
 
 // File Line: 222
@@ -15,7 +15,7 @@ OSuite::TList<OSuite::ZServiceOperationValue *>::ZIterator *__fastcall OSuite::T
   OSuite::ZListBase::ZListIteratorBase::ZListIteratorBase(
     (OSuite::ZListBase::ZListIteratorBase *)&result->vfptr,
     (OSuite::ZListBase *)&this->vfptr);
-  v2->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZServiceOperationValue *>::ZIterator::`vftable';
+  v2->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZServiceOperationValue *>::ZIterator::`vftable;
   return v2;
 }
 
@@ -29,11 +29,11 @@ OSuite::TConstIterator<OSuite::TList<OSuite::ZServiceOperationValue *>::ZIterato
 
   v2 = result;
   v3 = OSuite::TList<OSuite::ZServiceOperationValue *>::Iterator(this, &resulta);
-  v2->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TConstIterator<OSuite::TList<OSuite::ZServiceOperationValue *>::ZIterator,OSuite::ZServiceOperationValue *,int>::`vftable';
+  v2->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TConstIterator<OSuite::TList<OSuite::ZServiceOperationValue *>::ZIterator,OSuite::ZServiceOperationValue *,int>::`vftable;
   OSuite::ZListBase::ZListIteratorBase::ZListIteratorBase(
     (OSuite::ZListBase::ZListIteratorBase *)&v2->m_iterator.vfptr,
     (OSuite::ZListBase::ZListIteratorBase *)&v3->vfptr);
-  v2->m_iterator.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZServiceOperationValue *>::ZIterator::`vftable';
+  v2->m_iterator.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZServiceOperationValue *>::ZIterator::`vftable;
   return v2;
 }
 

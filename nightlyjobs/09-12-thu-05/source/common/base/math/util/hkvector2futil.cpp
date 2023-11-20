@@ -1,6 +1,6 @@
 // File Line: 72
 // RVA: 0xC6E1A0
-void __fastcall hkVector2Util::`anonymous namespace'::Deque<int>::get(hkVector2Util::Deque<int> *this, hkArray<int,hkContainerHeapAllocator> *out)
+void __fastcall hkVector2Util::`anonymous namespace::Deque<int>::get(hkVector2Util::Deque<int> *this, hkArray<int,hkContainerHeapAllocator> *out)
 {
   hkArray<int,hkContainerHeapAllocator> *v2; // rdi
   int v3; // esi
@@ -213,7 +213,7 @@ void __fastcall hkVector2Util::convexHullSimplePolyline(hkArrayBase<hkVector2f> 
     }
     while ( v21 < v2 );
   }
-  hkVector2Util::`anonymous namespace'::Deque<int>::get(&v40, v4);
+  hkVector2Util::`anonymous namespace::Deque<int>::get(&v40, v4);
   v36 = (4 * v5 + 127) & 0xFFFFFF80;
   v37 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
   v38 = (v36 + 15) & 0xFFFFFFF0;
@@ -359,7 +359,7 @@ hkResult *__fastcall hkVector2Util::convexHullIndices(hkResult *result, hkArrayB
       while ( v16 < v3 );
     }
     if ( (signed int)v3 > 1 )
-      hkAlgorithm::quickSortRecursive<int,hkVector2Util::`anonymous namespace'::IndexedLess>(
+      hkAlgorithm::quickSortRecursive<int,hkVector2Util::`anonymous namespace::IndexedLess>(
         v12,
         0,
         v3 - 1,

@@ -10,7 +10,7 @@ void __fastcall hkpSerializedAgentNnEntry::~hkpSerializedAgentNnEntry(hkpSeriali
   int v6; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpSerializedAgentNnEntry::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpSerializedAgentNnEntry::`vftable;
   v2 = this->m_bodyA;
   if ( v2 )
     hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
@@ -45,7 +45,7 @@ void __fastcall hkpSerializedAgentNnEntry::~hkpSerializedAgentNnEntry(hkpSeriali
       v6 & 0x3FFFFFFF);
   v1->m_propertiesStream.m_data = 0i64;
   v1->m_propertiesStream.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 29

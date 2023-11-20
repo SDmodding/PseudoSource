@@ -99,20 +99,20 @@ void __fastcall Render::CloudVolumeManager::Init(Render::CloudVolumeManager *thi
   v19 = UFG::qResourceWarehouse::Instance();
   UFG::qResourceWarehouse::Add(v19, (UFG::qResourceData *)&v6->mNode);
   v2->mMatCloudVolumeFog = v6;
-  v20 = `UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result )
+  v20 = `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result )
   {
     v21 = UFG::qResourceWarehouse::Instance();
     v20 = UFG::qResourceWarehouse::GetInventory(v21, 0x4D04C7F2u);
-    `UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result = v20;
+    `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result = v20;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v2->mStateBlockSunny.mPrev, 0x4D04C7F2u, 0xF1D36000, v20);
-  v22 = `UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result )
+  v22 = `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result )
   {
     v23 = UFG::qResourceWarehouse::Instance();
     v22 = UFG::qResourceWarehouse::GetInventory(v23, 0x4D04C7F2u);
-    `UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result = v22;
+    `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result = v22;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v2->mStateBlockStormy.mPrev, 0x4D04C7F2u, 0x72CA2FF0u, v22);
   v24 = (_DWORD *)v2->mStormyStateValues;
@@ -1491,7 +1491,7 @@ LABEL_138:
   v112->mPrev = v111;
   arg.mPrev = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
   arg.mNext = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     ptr.mStateArgs.mStateArgs,
     0x10ui64,
     128,

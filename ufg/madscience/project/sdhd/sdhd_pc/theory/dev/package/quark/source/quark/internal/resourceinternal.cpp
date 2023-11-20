@@ -9,7 +9,7 @@ __int64 UFG::_dynamic_initializer_for__gResourceFileInventory__()
     0,
     0,
     0x40u);
-  UFG::gResourceFileInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::qResourceFileInventory::`vftable';
+  UFG::gResourceFileInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::qResourceFileInventory::`vftable;
   stru_14235B120.mNode.mPrev = (UFG::qNode<UFG::ResourceFile,UFG::ZeroRefResourceFile> *)&stru_14235B120;
   stru_14235B120.mNode.mNext = (UFG::qNode<UFG::ResourceFile,UFG::ZeroRefResourceFile> *)&stru_14235B120;
   return atexit(UFG::_dynamic_atexit_destructor_for__gResourceFileInventory__);
@@ -19,7 +19,7 @@ __int64 UFG::_dynamic_initializer_for__gResourceFileInventory__()
 // RVA: 0x1467AF0
 __int64 dynamic_initializer_for__UFG::AllocationProfile::sProfiles__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     UFG::AllocationProfile::sProfiles,
     0x10ui64,
     3,
@@ -631,7 +631,7 @@ void __fastcall UFG::ResourceSystem_OpennedFileCallback(UFG::qFileOp *file_op, v
     UFG::qPrintChannel::Print(
       &UFG::qChunkFileSystem::mResourceChannel,
       OUTPUT_LEVEL_WARNING,
-      "WARNING: Async qOpen returned an error on file '%s'\n");
+      "WARNING: Async qOpen returned an error on file %s\n");
   }
 }
 
@@ -1088,7 +1088,7 @@ void __fastcall UFG::LoadedChunkFile::LoadedChunkFile(UFG::LoadedChunkFile *this
   UFG::qPrintChannel::Print(
     &UFG::qChunkFileSystem::mResourceChannel,
     OUTPUT_LEVEL_WARNING,
-    "Created hotswap uid 0x%08x (%10u) for filename '%s'\n");
+    "Created hotswap uid 0x%08x (%10u) for filename %s\n");
   if ( result.mData != UFG::qString::sEmptyString && result.mData )
     UFG::qMemoryPool::Free(UFG::gMainMemoryPool, result.mData);
   v11 = result.mPrev;
@@ -1134,7 +1134,7 @@ bool __fastcall UFG::LoadedChunkFile::LoadSync(UFG::LoadedChunkFile *this)
     UFG::qPrintChannel::Print(
       &UFG::qChunkFileSystem::mResourceChannel,
       OUTPUT_LEVEL_ERROR,
-      "[Resource - LoadChunkFile] skipping uid=0x%08x, file '%s' does not exist or size is 0\n");
+      "[Resource - LoadChunkFile] skipping uid=0x%08x, file %s does not exist or size is 0\n");
     v1->mState = 2;
     LOBYTE(v4) = 0;
     return (char)v4;
@@ -1175,7 +1175,7 @@ LABEL_13:
   UFG::qPrintChannel::Print(
     &UFG::qChunkFileSystem::mResourceChannel,
     OUTPUT_LEVEL_WARNING,
-    "[Resource - LoadSync]     Starting read of 0x%08x64 bytes to buffer 0x%08x for uid:0x%08x from file '%s'\n");
+    "[Resource - LoadSync]     Starting read of 0x%08x64 bytes to buffer 0x%08x for uid:0x%08x from file %s\n");
   v15 = v1->mMemoryHandle.mAllocationProfile;
   if ( !v15 || v15->mProfileType == 1 && v1->mMemoryHandle.mVRAMemoryHandle.mData )
     UFG::qVRAMemoryPools::Lock(&v1->mMemoryHandle.mVRAMemoryHandle);
@@ -1925,7 +1925,7 @@ void __fastcall UFG::qResourceFileInventory::PrintContents(UFG::qResourceFileInv
   __int64 v25; // [rsp+28h] [rbp-40h]
 
   v1 = this;
-  UFG::qPrintf("Contents of Inventory '%.64s' %d items\n", this->mName, (unsigned int)this->mResourceDatas.mTree.mCount);
+  UFG::qPrintf("Contents of Inventory %.64s %d items\n", this->mName, (unsigned int)this->mResourceDatas.mTree.mCount);
   v2 = v1->mResourceDatas.mTree.mRoot.mChild[0];
   v3 = (signed __int64)&v1->mResourceDatas;
   v4 = v2->mChild[0];
@@ -1991,7 +1991,7 @@ LABEL_35:
       LODWORD(v25) = (_DWORD)v9;
       LODWORD(v24) = (_DWORD)v9;
       UFG::qPrintf(
-        "  - Resource DataUID:0x%08x Memory:0x%08x-0x%08x Size:0x%08x (%9u) Name:'%.36s'\n",
+        "  - Resource DataUID:0x%08x Memory:0x%08x-0x%08x Size:0x%08x (%9u) Name:%.36s\n",
         v6->mUID,
         v18,
         v19,

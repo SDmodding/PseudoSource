@@ -8,8 +8,8 @@ void __fastcall Scaleform::GFx::AS2::BitmapData::BitmapData(Scaleform::GFx::AS2:
   v2 = penv;
   v3 = this;
   Scaleform::GFx::AS2::Object::Object((Scaleform::GFx::AS2::Object *)&this->vfptr, penv);
-  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::BitmapData::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::BitmapData::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::BitmapData::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::BitmapData::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   v3->pImageRes.pObject = 0i64;
   v3->pMovieDef.pObject = 0i64;
   Scaleform::GFx::AS2::BitmapData::commonInit(v3, v2);
@@ -198,7 +198,7 @@ void __fastcall Scaleform::GFx::AS2::BitmapData::SetImage(Scaleform::GFx::AS2::B
   v7->pMovieDef.pObject = v4;
   v29 = 0i64;
   v5->pImage->vfptr[6].__vecDelDtor((Scaleform::RefCountImplCore *)&v5->pImage->vfptr, (unsigned int)&v18);
-  `eh vector constructor iterator'(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::Value);
   v.T.Type = 4;
   v.NV.Int32Value = 0;
   Scaleform::GFx::AS2::Value::operator=((Scaleform::GFx::AS2::Value *)&ptr, &v, 0i64);
@@ -253,7 +253,7 @@ void __fastcall Scaleform::GFx::AS2::BitmapData::SetImage(Scaleform::GFx::AS2::B
       Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal((Scaleform::GFx::AS2::RefCountBaseGC<323> *)&v10->vfptr);
     }
   }
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::~Value);
 }
 
 // File Line: 100
@@ -397,8 +397,8 @@ void __fastcall Scaleform::GFx::AS2::BitmapDataCtorFunction::GlobalCtor(Scalefor
   {
     v4 = v1->Env;
     Scaleform::GFx::AS2::Object::Object(v2, v1->Env);
-    v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::BitmapData::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::BitmapData::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+    v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::BitmapData::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::BitmapData::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
     v3->pImageRes.pObject = 0i64;
     v3->pMovieDef.pObject = 0i64;
     Scaleform::GFx::AS2::BitmapData::commonInit(v3, v4);
@@ -508,10 +508,10 @@ Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::BitmapDataCtor
   if ( v4 )
   {
     Scaleform::GFx::AS2::Object::Object(v4, &psc);
-    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    v6[2].vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
-    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    v6[2].vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    v6[2].vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    v6[2].vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
     v6[6].vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)Scaleform::GFx::AS2::BitmapDataCtorFunction::GlobalCtor;
     v7 = Scaleform::GFx::AS2::GlobalContext::GetPrototype(psc.pContext, ASBuiltin_Function);
     if ( !v6[2].pProto.pObject )
@@ -540,8 +540,8 @@ Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::BitmapDataCtor
       }
     }
     v6[2].pProto.pObject = v7;
-    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::BitmapDataCtorFunction::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    v6[2].vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::BitmapDataCtorFunction::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::BitmapDataCtorFunction::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    v6[2].vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::BitmapDataCtorFunction::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
     Scaleform::GFx::AS2::NameFunction::AddConstMembers(
       v6 + 2,
       &psc,
@@ -561,8 +561,8 @@ Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::BitmapDataCtor
   {
     v11 = Scaleform::GFx::AS2::GlobalContext::GetPrototype(v2, ASBuiltin_Object);
     Scaleform::GFx::AS2::Object::Object((Scaleform::GFx::AS2::Object *)v10, &psc);
-    *(_QWORD *)v10 = &Scaleform::GFx::AS2::BitmapData::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    *(_QWORD *)(v10 + 32) = &Scaleform::GFx::AS2::BitmapData::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+    *(_QWORD *)v10 = &Scaleform::GFx::AS2::BitmapData::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    *(_QWORD *)(v10 + 32) = &Scaleform::GFx::AS2::BitmapData::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
     *(_QWORD *)(v10 + 96) = 0i64;
     *(_QWORD *)(v10 + 104) = 0i64;
     if ( !*(_QWORD *)(v10 + 40) )
@@ -593,7 +593,7 @@ Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::BitmapDataCtor
     *(_QWORD *)(v10 + 40) = v11;
     v14 = (Scaleform::MemoryHeap *)(v10 + 112);
     flags = v14;
-    v14->vfptr = (Scaleform::MemoryHeapVtbl *)&Scaleform::GFx::AS2::GASPrototypeBase::`vftable';
+    v14->vfptr = (Scaleform::MemoryHeapVtbl *)&Scaleform::GFx::AS2::GASPrototypeBase::`vftable;
     LOBYTE(v14->SelfSize) = 0;
     v14->pPrev = 0i64;
     v14->pNext = 0i64;
@@ -601,17 +601,17 @@ Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::BitmapDataCtor
     *(_QWORD *)(v10 + 144) = 0i64;
     *(_QWORD *)(v10 + 152) = 0i64;
     *(_QWORD *)(v10 + 168) = 0i64;
-    *(_QWORD *)v10 = &Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::BitmapData,Scaleform::GFx::AS2::Environment>::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    *(_QWORD *)(v10 + 32) = &Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::BitmapData,Scaleform::GFx::AS2::Environment>::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
-    v14->vfptr = (Scaleform::MemoryHeapVtbl *)&Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::BitmapData,Scaleform::GFx::AS2::Environment>::`vftable';
+    *(_QWORD *)v10 = &Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::BitmapData,Scaleform::GFx::AS2::Environment>::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    *(_QWORD *)(v10 + 32) = &Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::BitmapData,Scaleform::GFx::AS2::Environment>::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+    v14->vfptr = (Scaleform::MemoryHeapVtbl *)&Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::BitmapData,Scaleform::GFx::AS2::Environment>::`vftable;
     Scaleform::GFx::AS2::GASPrototypeBase::Init(
       (Scaleform::GFx::AS2::GASPrototypeBase *)(v10 + 112),
       (Scaleform::GFx::AS2::Object *)v10,
       &psc,
       v3);
-    *(_QWORD *)v10 = &Scaleform::GFx::AS2::BitmapDataProto::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    *(_QWORD *)(v10 + 32) = &Scaleform::GFx::AS2::BitmapDataProto::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
-    v14->vfptr = (Scaleform::MemoryHeapVtbl *)&Scaleform::GFx::AS2::BitmapDataProto::`vftable';
+    *(_QWORD *)v10 = &Scaleform::GFx::AS2::BitmapDataProto::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    *(_QWORD *)(v10 + 32) = &Scaleform::GFx::AS2::BitmapDataProto::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+    v14->vfptr = (Scaleform::MemoryHeapVtbl *)&Scaleform::GFx::AS2::BitmapDataProto::`vftable;
     LOBYTE(flags) = 1;
     Scaleform::GFx::AS2::GASPrototypeBase::InitFunctionMembers(
       (Scaleform::GFx::AS2::GASPrototypeBase *)(v10 + 112),

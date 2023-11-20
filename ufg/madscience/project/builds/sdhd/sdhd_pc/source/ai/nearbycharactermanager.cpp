@@ -7,7 +7,7 @@ void UFG::NearbyCharacterManager::CreateInstance(void)
   v0 = (UFG::NearbyCharacterManager *)UFG::qMalloc(0x20ui64, "NearbyCharacterManager", 0i64);
   if ( v0 )
   {
-    `eh vector constructor iterator'(v0, 0x10ui64, 2, (void (__fastcall *)(void *))UFG::TargetSphere::TargetSphere);
+    `eh vector constructor iterator(v0, 0x10ui64, 2, (void (__fastcall *)(void *))UFG::TargetSphere::TargetSphere);
     UFG::NearbyCharacterManager::s_pInstance = v0;
   }
   else
@@ -25,7 +25,7 @@ void UFG::NearbyCharacterManager::DeleteInstance(void)
   v0 = UFG::NearbyCharacterManager::s_pInstance;
   if ( UFG::NearbyCharacterManager::s_pInstance )
   {
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       UFG::NearbyCharacterManager::s_pInstance,
       0x10ui64,
       2,

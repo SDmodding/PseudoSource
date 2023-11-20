@@ -44,14 +44,14 @@ void __fastcall UFG::AsyncShapeCasterCollector::AsyncShapeCasterCollector(UFG::A
 {
   UFG::qList<UFG::ShapeCasterCollector::HitInfo,UFG::ShapeCasterCollector::HitInfo,1,0> *v1; // [rsp+28h] [rbp+10h]
 
-  this->vfptr = (UFG::ShapeCasterCollectorVtbl *)&UFG::ShapeCasterCollector::`vftable';
+  this->vfptr = (UFG::ShapeCasterCollectorVtbl *)&UFG::ShapeCasterCollector::`vftable;
   v1 = &this->mHitList;
   v1->mNode.mPrev = &v1->mNode;
   v1->mNode.mNext = &v1->mNode;
   this->mPhantom = 0i64;
   this->mShape = 0i64;
   this->mRadius = 0.0;
-  this->vfptr = (UFG::ShapeCasterCollectorVtbl *)&UFG::AsyncShapeCasterCollector::`vftable';
+  this->vfptr = (UFG::ShapeCasterCollectorVtbl *)&UFG::AsyncShapeCasterCollector::`vftable;
   this->mInput.m_maxExtraPenetration = 0.00000011920929;
   this->mInput.m_startPointTolerance = 0.00000011920929;
 }
@@ -60,7 +60,7 @@ void __fastcall UFG::AsyncShapeCasterCollector::AsyncShapeCasterCollector(UFG::A
 // RVA: 0x9B490
 void __fastcall UFG::AsyncShapeCasterCollector::~AsyncShapeCasterCollector(UFG::AsyncShapeCasterCollector *this)
 {
-  this->vfptr = (UFG::ShapeCasterCollectorVtbl *)&UFG::AsyncShapeCasterCollector::`vftable';
+  this->vfptr = (UFG::ShapeCasterCollectorVtbl *)&UFG::AsyncShapeCasterCollector::`vftable;
   UFG::ShapeCasterCollector::~ShapeCasterCollector((UFG::ShapeCasterCollector *)&this->vfptr);
 }
 

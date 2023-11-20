@@ -6,7 +6,7 @@ void __fastcall SSInvokeClosureMethod::SSInvokeClosureMethod(SSInvokeClosureMeth
 
   v2 = this;
   SSInvokeClosureBase::SSInvokeClosureBase((SSInvokeClosureBase *)&this->vfptr, binary_pp);
-  v2->vfptr = (SSExpressionBaseVtbl *)&SSInvokeClosureMethod::`vftable';
+  v2->vfptr = (SSExpressionBaseVtbl *)&SSInvokeClosureMethod::`vftable;
 }
 
 // File Line: 155
@@ -17,6 +17,6 @@ void __fastcall SSInvokeClosureCoroutine::SSInvokeClosureCoroutine(SSInvokeClosu
 
   v2 = this;
   SSInvokeClosureBase::SSInvokeClosureBase((SSInvokeClosureBase *)&this->vfptr, binary_pp);
-  v2->vfptr = (SSExpressionBaseVtbl *)&SSInvokeClosureCoroutine::`vftable';
+  v2->vfptr = (SSExpressionBaseVtbl *)&SSInvokeClosureCoroutine::`vftable;
 }
 

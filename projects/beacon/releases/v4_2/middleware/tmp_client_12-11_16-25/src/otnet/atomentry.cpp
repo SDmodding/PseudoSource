@@ -10,8 +10,8 @@ void __fastcall OSuite::ZInternalAtomEntryDelegate::ZInternalAtomEntryDelegate(O
 
   v4 = pAtomEntry;
   v5 = this;
-  this->vfptr = (OSuite::ICallback<void,void>Vtbl *)&OSuite::ZInternalAtomEntryDelegate::`vftable'{for `OSuite::ICallback<void,void>'};
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZInternalAtomEntryDelegate::`vftable'{for `OSuite::ZObject'};
+  this->vfptr = (OSuite::ICallback<void,void>Vtbl *)&OSuite::ZInternalAtomEntryDelegate::`vftable{for `OSuite::ICallback<void,void>};
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZInternalAtomEntryDelegate::`vftable{for `OSuite::ZObject};
   v6 = &this->m_Status.URL;
   v6[-1].m_urlParameters.m_arrayParameters.m_Comparer.vfptr = (OSuite::ZObjectVtbl *)status->Status;
   v7 = status;
@@ -55,10 +55,10 @@ void __fastcall OSuite::MimeUploadRequest::~MimeUploadRequest(OSuite::MimeUpload
   OSuite::IReader *v3; // rcx
 
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::MimeUploadRequest::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::MimeUploadRequest::`vftable;
   OSuite::ZMimeMultipartEntity::~ZMimeMultipartEntity(&this->m_mime);
   v2 = v1->m_readerOwnership == 0;
-  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZAtomEntry::UploadRequest::`vftable';
+  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZAtomEntry::UploadRequest::`vftable;
   if ( !v2 )
   {
     v3 = v1->m_pAttachment;
@@ -66,7 +66,7 @@ void __fastcall OSuite::MimeUploadRequest::~MimeUploadRequest(OSuite::MimeUpload
       v3->vfptr->__vecDelDtor(v3, 1u);
   }
   OSuite::ZUtf8Buffer::~ZUtf8Buffer((OSuite::ZStringBuilder *)&v1->m_entrycontent);
-  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZAtomEntry::Request::`vftable';
+  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZAtomEntry::Request::`vftable;
   OSuite::SCallbackData::~SCallbackData(&v1->m_CbData);
 }
 
@@ -83,7 +83,7 @@ void __fastcall OSuite::ZAtomEntry::ZAtomEntry(OSuite::ZAtomEntry *this, OSuite:
   v2 = sFeedUrl;
   v3 = this;
   OSuite::ZAtomBase::ZAtomBase((OSuite::ZAtomBase *)&this->vfptr);
-  v3->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZAtomEntry::`vftable';
+  v3->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZAtomEntry::`vftable;
   OSuite::ZMutex::ZMutex(&v3->m_currentRequestMutex);
   OSuite::ZString::ZString(&v3->m_ETag);
   OSuite::ZString::ZString(&v3->m_sContentUrl);
@@ -105,7 +105,7 @@ void __fastcall OSuite::ZAtomEntry::~ZAtomEntry(OSuite::ZAtomEntry *this)
   OSuite::ZAtomEntry *v1; // rbx
 
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZAtomEntry::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZAtomEntry::`vftable;
   OSuite::ZAtomEntry::AbortCurrentOperation(this);
   OSuite::ZString::~ZString(&v1->m_sFeedURL);
   OSuite::ZString::~ZString(&v1->m_sContent);
@@ -156,7 +156,7 @@ void __fastcall OSuite::ZAtomEntry::PostTo(OSuite::ZAtomEntry *this, OSuite::fas
   if ( v6 )
   {
     OSuite::ZAtomEntry::UploadRequest::UploadRequest(v6, v4, 0i64);
-    v7->vfptr = (OSuite::ZObjectVtbl *)&OSuite::MimeUploadRequest::`vftable';
+    v7->vfptr = (OSuite::ZObjectVtbl *)&OSuite::MimeUploadRequest::`vftable;
     OSuite::ZMimeMultipartEntity::ZMimeMultipartEntity((OSuite::ZMimeMultipartEntity *)&v7[1]);
   }
   else

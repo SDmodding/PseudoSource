@@ -49,7 +49,7 @@ void __fastcall UFG::SimAsyncOcclusionQueryManager::SimAsyncOcclusionQueryManage
 
   v1 = this;
   v2 = 64i64;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     this,
     0x30ui64,
     64,
@@ -86,7 +86,7 @@ void __fastcall UFG::SimAsyncOcclusionQueryManager::~SimAsyncOcclusionQueryManag
     --v3;
   }
   while ( v3 );
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1,
     0x30ui64,
     64,

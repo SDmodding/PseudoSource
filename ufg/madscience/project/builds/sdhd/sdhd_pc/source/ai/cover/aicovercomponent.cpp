@@ -27,7 +27,7 @@ void __fastcall UFG::AICoverComponent::AICoverComponent(UFG::AICoverComponent *t
   v5 = (UFG::qNode<UFG::AICoverComponent,UFG::AICoverComponent> *)&v4->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AICoverComponent::`vftable';
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AICoverComponent::`vftable;
   v4->m_pQuery = 0i64;
   v4->m_pCoverObject = 0i64;
   v4->m_pTargetedCoverPosition = 0i64;
@@ -75,7 +75,7 @@ void __fastcall UFG::AICoverComponent::~AICoverComponent(UFG::AICoverComponent *
   UFG::qNode<UFG::AICoverComponent,UFG::AICoverComponent> *v16; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AICoverComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AICoverComponent::`vftable;
   UFG::AICoverComponent::CancelQuery(this);
   UFG::AICoverComponent::ClearCoverObjects(v1);
   UFG::AICoverComponent::RemoveSimTargets(v1);

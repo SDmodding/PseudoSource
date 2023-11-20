@@ -2886,7 +2886,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl::XMLList::~XMLList(Scaleform:
   unsigned int v7; // eax
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::XMLList::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::XMLList::`vftable;
   v2 = this->TargetProperty;
   if ( v2 )
   {
@@ -2929,7 +2929,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl::XMLList::~XMLList(Scaleform:
       }
     }
   }
-  v1->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instance::`vftable';
+  v1->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instance::`vftable;
   Scaleform::GFx::AS3::Traits::DestructTail(
     (Scaleform::GFx::AS3::Traits *)((_QWORD)v1->pTraits.pObject & 0xFFFFFFFFFFFFFFFEui64),
     (Scaleform::GFx::AS3::Object *)&v1->vfptr);
@@ -5371,8 +5371,8 @@ LABEL_242:
 // RVA: 0x78C270
 void __fastcall Scaleform::GFx::AS3::Instances::fl::ListGet::~ListGet(Scaleform::GFx::AS3::Instances::fl::ListGet *this)
 {
-  this->vfptr = (Scaleform::GFx::AS3::Instances::fl::XMLList::CallBackVtbl *)&Scaleform::GFx::AS3::Instances::fl::ListGet::`vftable';
-  this->vfptr = (Scaleform::GFx::AS3::Instances::fl::XMLList::CallBackVtbl *)&Scaleform::GFx::AS3::Instances::fl::XMLList::CallBack::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::Instances::fl::XMLList::CallBackVtbl *)&Scaleform::GFx::AS3::Instances::fl::ListGet::`vftable;
+  this->vfptr = (Scaleform::GFx::AS3::Instances::fl::XMLList::CallBackVtbl *)&Scaleform::GFx::AS3::Instances::fl::XMLList::CallBack::`vftable;
 }
 
 // File Line: 1840
@@ -5497,10 +5497,10 @@ Scaleform::GFx::AS3::CheckResult *__fastcall Scaleform::GFx::AS3::Instances::fl:
   else
   {
     cb.List = this;
-    cb.vfptr = (Scaleform::GFx::AS3::Instances::fl::XMLList::CallBackVtbl *)&Scaleform::GFx::AS3::Instances::fl::ListGet::`vftable';
+    cb.vfptr = (Scaleform::GFx::AS3::Instances::fl::XMLList::CallBackVtbl *)&Scaleform::GFx::AS3::Instances::fl::ListGet::`vftable;
     v14 = list;
     result->Result = (unsigned int)Scaleform::GFx::AS3::Instances::fl::XMLList::ForEachChild(this, prop_name, &cb) != 0;
-    cb.vfptr = (Scaleform::GFx::AS3::Instances::fl::XMLList::CallBackVtbl *)&Scaleform::GFx::AS3::Instances::fl::XMLList::CallBack::`vftable';
+    cb.vfptr = (Scaleform::GFx::AS3::Instances::fl::XMLList::CallBackVtbl *)&Scaleform::GFx::AS3::Instances::fl::XMLList::CallBack::`vftable;
   }
   return v6;
 }
@@ -5747,7 +5747,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl::XMLList::GetNextPropertyName
     --v8->RefCount;
     if ( v9 )
       Scaleform::GFx::ASStringNode::ReleaseNode(v8);
-    v10.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable';
+    v10.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable;
     Scaleform::Formatter::~Formatter((Scaleform::Formatter *)&v10.vfptr);
   }
 }
@@ -5872,8 +5872,8 @@ Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl::XMLList> *__fastcall Sca
   if ( v9 )
   {
     Scaleform::GFx::AS3::Instance::Instance(v9, v7);
-    v10->pObject = (Scaleform::GFx::AS3::Instances::fl::XMLList *)&Scaleform::GFx::AS3::Instances::fl::Object::`vftable';
-    v10->pObject = (Scaleform::GFx::AS3::Instances::fl::XMLList *)&Scaleform::GFx::AS3::Instances::fl::XMLList::`vftable';
+    v10->pObject = (Scaleform::GFx::AS3::Instances::fl::XMLList *)&Scaleform::GFx::AS3::Instances::fl::Object::`vftable;
+    v10->pObject = (Scaleform::GFx::AS3::Instances::fl::XMLList *)&Scaleform::GFx::AS3::Instances::fl::XMLList::`vftable;
     v10[7].pObject = 0i64;
     v10[8].pObject = 0i64;
     v10[9].pObject = 0i64;
@@ -6047,8 +6047,8 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v5 )
   {
     Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, v2, &Scaleform::GFx::AS3::fl::XMLListCI);
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable';
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::XMLList::`vftable';
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable;
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::XMLList::`vftable;
     v6->TraitsType = 19;
   }
   else
@@ -6061,8 +6061,8 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v7 )
   {
     Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v7, v2, &Scaleform::GFx::AS3::fl::XMLListCI);
-    v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable';
-    v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::XMLList::`vftable';
+    v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable;
+    v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::XMLList::`vftable;
     v8.pV->Flags |= 1ui64;
     v8.pV->TraitsType = 19;
   }
@@ -6078,7 +6078,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v9 )
   {
     Scaleform::GFx::AS3::Class::Class(v9, v3->pV);
-    v10->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl::XMLList::`vftable';
+    v10->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl::XMLList::`vftable;
   }
   return v3;
 }

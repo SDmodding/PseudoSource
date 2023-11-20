@@ -221,7 +221,7 @@ LABEL_43:
       v13 = -1;
   }
 LABEL_44:
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
   if ( (result.Flags & 0x1F) > 9 )
   {
     if ( (result.Flags >> 9) & 1 )
@@ -3748,8 +3748,8 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl::Array::Array(Scaleform::GFx:
   v2 = t;
   v3 = this;
   Scaleform::GFx::AS3::Instance::Instance((Scaleform::GFx::AS3::Instance *)&this->vfptr, t);
-  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Object::`vftable';
-  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Array::`vftable';
+  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Object::`vftable;
+  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Array::`vftable;
   v4 = v2->pVM->MHeap;
   v5 = (signed __int64)&v3->SA;
   *(_OWORD *)v5 = 0ui64;
@@ -4500,7 +4500,7 @@ LABEL_60:
   v70.Bonus.pWeakProxy = 0i64;
   v70.value.VNumber = 0.0;
   v70.value.VS._2 = v36;
-  f.vfptr = (Scaleform::GFx::AS3::Impl::ArrayFuncVtbl *)&Scaleform::GFx::AS3::Impl::ValuePtrCollector::`vftable';
+  f.vfptr = (Scaleform::GFx::AS3::Impl::ArrayFuncVtbl *)&Scaleform::GFx::AS3::Impl::ValuePtrCollector::`vftable;
   v72 = &v70;
   v37 = &v7->SA;
   v38 = v7->SA.ValueA.Data.Size;
@@ -4729,7 +4729,7 @@ LABEL_151:
         v6,
         (Scaleform::GFx::AS3::Instances::fl::XMLList *)v84.pV);
     }
-    f.vfptr = (Scaleform::GFx::AS3::Impl::ArrayFuncVtbl *)&Scaleform::GFx::AS3::Impl::ArrayFunc::`vftable';
+    f.vfptr = (Scaleform::GFx::AS3::Impl::ArrayFuncVtbl *)&Scaleform::GFx::AS3::Impl::ArrayFunc::`vftable;
     v84.pV = (Scaleform::GFx::AS3::Instances::fl::Array *)&v70;
     Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, *(void **)&v70.Flags);
     Scaleform::GFx::AS3::Impl::SparseArray::~SparseArray(&v81);
@@ -4763,7 +4763,7 @@ LABEL_151:
     }
     v6->pObject = 0i64;
   }
-  f.vfptr = (Scaleform::GFx::AS3::Impl::ArrayFuncVtbl *)&Scaleform::GFx::AS3::Impl::ArrayFunc::`vftable';
+  f.vfptr = (Scaleform::GFx::AS3::Impl::ArrayFuncVtbl *)&Scaleform::GFx::AS3::Impl::ArrayFunc::`vftable;
   v84.pV = (Scaleform::GFx::AS3::Instances::fl::Array *)&v70;
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, *(void **)&v70.Flags);
   v84.pV = (Scaleform::GFx::AS3::Instances::fl::Array *)&v81.ValueH;
@@ -5170,7 +5170,7 @@ LABEL_47:
         Scaleform::GFx::AS3::Value::ReleaseInternal(&resulta);
       }
     }
-    `eh vector destructor iterator'(&argv, 0x20ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+    `eh vector destructor iterator(&argv, 0x20ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
     ++v14;
     ++v15;
     if ( v14 >= v6->SA.Length )
@@ -5193,7 +5193,7 @@ LABEL_47:
     }
   }
 LABEL_65:
-  `eh vector destructor iterator'(&argv, 0x20ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&argv, 0x20ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
 LABEL_66:
   v22 = _this.Flags & 0x1F;
   if ( v22 > 9 )
@@ -5470,7 +5470,7 @@ LABEL_54:
         Scaleform::GFx::AS3::Value::ReleaseInternal(&v31);
       }
     }
-    `eh vector destructor iterator'(&argv, 0x20ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+    `eh vector destructor iterator(&argv, 0x20ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
     v18 = (Scaleform::GFx::AS3::Instances::fl::Array *)((char *)v18 + 1);
     ++v19;
     if ( (unsigned __int64)v18 >= v7->SA.Length )
@@ -5493,7 +5493,7 @@ LABEL_54:
     }
   }
 LABEL_73:
-  `eh vector destructor iterator'(&argv, 0x20ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&argv, 0x20ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
 LABEL_74:
   v27 = _this.Flags & 0x1F;
   if ( v27 > 9 )
@@ -5729,7 +5729,7 @@ LABEL_47:
         Scaleform::GFx::AS3::Value::ReleaseInternal(&resulta);
       }
     }
-    `eh vector destructor iterator'(&argv, 0x20ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+    `eh vector destructor iterator(&argv, 0x20ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
     ++v13;
     ++v14;
     if ( v13 >= v5->SA.Length )
@@ -5752,7 +5752,7 @@ LABEL_47:
     }
   }
 LABEL_63:
-  `eh vector destructor iterator'(&argv, 0x20ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&argv, 0x20ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
 LABEL_64:
   v21 = _this.Flags & 0x1F;
   if ( v21 > 9 )
@@ -6093,7 +6093,7 @@ LABEL_72:
         Scaleform::GFx::AS3::Value::ReleaseInternal(&v36);
       }
     }
-    `eh vector destructor iterator'(&ptr, 0x20ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x20ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
     v18 = (Scaleform::GFx::AS3::Instances::fl::Array *)((char *)v18 + 1);
     ++v19;
     if ( (unsigned __int64)v18 >= v7->SA.Length )
@@ -6116,7 +6116,7 @@ LABEL_72:
     }
   }
 LABEL_86:
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
 LABEL_87:
   v32 = _this.Flags & 0x1F;
   if ( v32 > 9 )
@@ -6420,7 +6420,7 @@ LABEL_47:
         }
       }
 LABEL_77:
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         &argv,
         0x20ui64,
         3,
@@ -6445,7 +6445,7 @@ LABEL_77:
         Scaleform::GFx::AS3::Value::ReleaseInternal(&resulta);
       }
     }
-    `eh vector destructor iterator'(&argv, 0x20ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+    `eh vector destructor iterator(&argv, 0x20ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
     ++v14;
     ++v15;
     if ( v14 >= v6->SA.Length )
@@ -6468,7 +6468,7 @@ LABEL_77:
       Scaleform::GFx::AS3::Value::ReleaseInternal(&resulta);
     }
   }
-  `eh vector destructor iterator'(&argv, 0x20ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&argv, 0x20ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
   if ( (_this.Flags & 0x1F) > 9 )
   {
     if ( (_this.Flags >> 9) & 1 )
@@ -7637,8 +7637,8 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v5 )
   {
     Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, v2, &Scaleform::GFx::AS3::fl::ArrayCI);
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable';
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Array::`vftable';
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable;
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Array::`vftable;
     v6->TraitsType = 7;
   }
   else
@@ -7651,8 +7651,8 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v7 )
   {
     Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v7, v2, &Scaleform::GFx::AS3::fl::ArrayCI);
-    v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable';
-    v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Array::`vftable';
+    v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable;
+    v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Array::`vftable;
     v8.pV->Flags |= 1ui64;
     v8.pV->TraitsType = 7;
   }
@@ -7668,7 +7668,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v9 )
   {
     Scaleform::GFx::AS3::Class::Class(v9, v3->pV);
-    v10->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl::Array::`vftable';
+    v10->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl::Array::`vftable;
     LODWORD(v10[1].vfptr) = 1;
     HIDWORD(v10[1].vfptr) = 2;
     LODWORD(v10[1]._pRCC) = 4;

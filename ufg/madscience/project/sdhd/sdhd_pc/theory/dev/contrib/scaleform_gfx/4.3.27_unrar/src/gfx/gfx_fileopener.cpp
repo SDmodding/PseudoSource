@@ -75,7 +75,7 @@ Scaleform::Render::RenderBuffer *__fastcall Scaleform::GFx::FileOpener::OpenFile
   if ( v7 && !(*(unsigned int (__fastcall **)(__int64))(*(_QWORD *)v7 + 64i64))(v7) )
     return v8;
   if ( v5 )
-    Scaleform::Log::LogError(v5, "Loader failed to open '%s'", v6);
+    Scaleform::Log::LogError(v5, "Loader failed to open %s", v6);
   if ( v8 )
     Scaleform::RefCountImpl::Release(v8);
   return 0i64;

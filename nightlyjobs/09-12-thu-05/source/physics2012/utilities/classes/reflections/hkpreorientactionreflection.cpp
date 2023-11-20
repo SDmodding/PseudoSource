@@ -37,9 +37,9 @@ void __fastcall finishLoadedObjecthkpReorientAction(void *p, int finishing)
   {
     v2 = p;
     v3 = (hkStringPtr *)((char *)p + 40);
-    v3[-5].m_stringAndFlag = (const char *)&hkpAction::`vftable';
+    v3[-5].m_stringAndFlag = (const char *)&hkpAction::`vftable;
     hkStringPtr::hkStringPtr(v3, (hkFinishLoadedObjectFlag)finishing);
-    *v2 = &hkpReorientAction::`vftable';
+    *v2 = &hkpReorientAction::`vftable;
   }
 }
 
@@ -57,7 +57,7 @@ void **__fastcall getVtablehkpReorientAction()
   hkStringPtr v1; // [rsp+48h] [rbp-50h]
 
   hkStringPtr::hkStringPtr(&v1, 0);
-  return &hkpReorientAction::`vftable';
+  return &hkpReorientAction::`vftable;
 }
 
 // File Line: 97

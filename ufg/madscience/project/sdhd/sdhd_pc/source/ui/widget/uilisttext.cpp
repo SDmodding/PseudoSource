@@ -35,11 +35,11 @@ void __fastcall UFG::UIListText::init(UFG::UIListText *this, UFG::UIList::UIList
       v8 = v5 + 1;
       v8->mNext = v8;
       v8[1].mNext = v8;
-      v6->mNext = (UFG::allocator::free_link *)&UFG::UISlot::`vftable';
+      v6->mNext = (UFG::allocator::free_link *)&UFG::UISlot::`vftable;
       v6[3].mNext = (UFG::allocator::free_link *)v7;
       UFG::qString::qString((UFG::qString *)&v6[4], &result);
       LOWORD(v6[10].mNext) = 0;
-      v6->mNext = (UFG::allocator::free_link *)&UFG::UISlotText::`vftable';
+      v6->mNext = (UFG::allocator::free_link *)&UFG::UISlotText::`vftable;
     }
     else
     {

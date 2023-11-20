@@ -262,7 +262,7 @@ __int64 __fastcall hkWin32FileSystem::stat(hkWin32FileSystem *this, const char *
 
 // File Line: 199
 // RVA: 0xC7F2A0
-char __fastcall `anonymous namespace'::Win32Impl::advance(Win32Impl *this, hkFileSystem::Entry *e)
+char __fastcall `anonymous namespace::Win32Impl::advance(Win32Impl *this, hkFileSystem::Entry *e)
 {
   hkFileSystem::Entry *v2; // r14
   Win32Impl *v3; // rbx
@@ -417,7 +417,7 @@ hkRefNew<hkFileSystem::Iterator::Impl> *__fastcall hkWin32FileSystem::createIter
   {
     *(_DWORD *)(v9 + 8) = 0x1FFFF;
     *(_QWORD *)(v9 + 16) = v4;
-    *(_QWORD *)v9 = &`anonymous namespace'::Win32Impl::`vftable';
+    *(_QWORD *)v9 = &`anonymous namespace::Win32Impl::`vftable;
     hkStringPtr::hkStringPtr((hkStringPtr *)(v9 + 24), v6);
     hkStringPtr::hkStringPtr(v10 + 4, v5);
     v10[5].m_stringAndFlag = 0i64;

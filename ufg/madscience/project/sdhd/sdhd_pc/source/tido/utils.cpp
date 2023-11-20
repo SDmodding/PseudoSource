@@ -94,7 +94,7 @@ void UFG::VisualEffectAudioManager::LoadProperties(void)
             v20 = v18 + 1;
             v20->mNext = v20;
             v20[1].mNext = v20;
-            v18->mNext = (UFG::allocator::free_link *)&UFG::VisualEffectAudioNode::`vftable';
+            v18->mNext = (UFG::allocator::free_link *)&UFG::VisualEffectAudioNode::`vftable;
             v18[3].mNext = 0i64;
             LODWORD(v18[4].mNext) = -1;
             _((AMD_HD3D *)0xFFFFFFFFi64);
@@ -592,7 +592,7 @@ LABEL_10:
         v11[1].mNext = 0i64;
         v11[2].mNext = 0i64;
         v11[3].mNext = 0i64;
-        v11->mNext = (UFG::allocator::free_link *)&UFG::SurfaceBankNode::`vftable';
+        v11->mNext = (UFG::allocator::free_link *)&UFG::SurfaceBankNode::`vftable;
         UFG::qBaseTreeRB::qBaseTreeRB((UFG::qBaseTreeRB *)&v11[5]);
         LODWORD(v12[4].mNext) = v13;
       }
@@ -625,7 +625,7 @@ LABEL_10:
               v19[1].mNext = 0i64;
               v19[2].mNext = 0i64;
               v19[3].mNext = 0i64;
-              v19->mNext = (UFG::allocator::free_link *)&UFG::BankNode::`vftable';
+              v19->mNext = (UFG::allocator::free_link *)&UFG::BankNode::`vftable;
               LODWORD(v19[5].mNext) = -1;
               _((AMD_HD3D *)0xFFFFFFFFi64);
               HIDWORD(v20[5].mNext) = -1;

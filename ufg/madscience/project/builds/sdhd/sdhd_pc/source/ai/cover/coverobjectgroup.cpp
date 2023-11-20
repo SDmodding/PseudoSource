@@ -11,7 +11,7 @@ void __fastcall UFG::CoverObjectGroup::~CoverObjectGroup(UFG::CoverObjectGroup *
   UFG::CoverObjectBase **v7; // rcx
 
   v1 = this;
-  this->vfptr = (UFG::CoverObjectBaseVtbl *)&UFG::CoverObjectGroup::`vftable';
+  this->vfptr = (UFG::CoverObjectBaseVtbl *)&UFG::CoverObjectGroup::`vftable;
   v2 = 0i64;
   if ( this->m_aChildObjects.size )
   {
@@ -34,7 +34,7 @@ void __fastcall UFG::CoverObjectGroup::~CoverObjectGroup(UFG::CoverObjectGroup *
     operator delete[](v7);
   v1->m_aChildObjects.p = 0i64;
   *(_QWORD *)&v1->m_aChildObjects.size = 0i64;
-  v1->vfptr = (UFG::CoverObjectBaseVtbl *)&UFG::CoverObjectBase::`vftable';
+  v1->vfptr = (UFG::CoverObjectBaseVtbl *)&UFG::CoverObjectBase::`vftable;
 }
 
 // File Line: 33

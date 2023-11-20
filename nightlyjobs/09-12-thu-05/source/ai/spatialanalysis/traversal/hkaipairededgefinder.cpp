@@ -12,7 +12,7 @@ void __fastcall hkaiPairedEdgeFinder::hkaiPairedEdgeFinder(hkaiPairedEdgeFinder 
   v7 = fromNavMeshInstance;
   v8 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiPairedEdgeFinder::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiPairedEdgeFinder::`vftable;
   if ( fromNavMeshInstance )
     hkReferencedObject::addReference((hkReferencedObject *)&fromNavMeshInstance->vfptr);
   v8->m_fromNavMeshInstance.m_pntr = v7;
@@ -38,7 +38,7 @@ void __fastcall hkaiPairedEdgeFinder::~hkaiPairedEdgeFinder(hkaiPairedEdgeFinder
   hkReferencedObject *v5; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiPairedEdgeFinder::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiPairedEdgeFinder::`vftable;
   v2 = this->m_toAccelerationData.m_pntr;
   if ( v2 )
     hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
@@ -55,7 +55,7 @@ void __fastcall hkaiPairedEdgeFinder::~hkaiPairedEdgeFinder(hkaiPairedEdgeFinder
   if ( v5 )
     hkReferencedObject::removeReference(v5);
   v1->m_fromNavMeshInstance.m_pntr = 0i64;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 42
@@ -278,7 +278,7 @@ signed __int64 __fastcall hkaiPairedEdgeFinder::matchEdgeEnds(hkVector4f *startL
 
 // File Line: 161
 // RVA: 0xC3D4E0
-hkSimdFloat32 *__fastcall `anonymous namespace'::cosAngleAboutAxis(hkSimdFloat32 *result, hkVector4f *a, hkVector4f *b, hkVector4f *u)
+hkSimdFloat32 *__fastcall `anonymous namespace::cosAngleAboutAxis(hkSimdFloat32 *result, hkVector4f *a, hkVector4f *b, hkVector4f *u)
 {
   hkSimdFloat32 *v4; // rax
   __m128 v5; // xmm1
@@ -355,7 +355,7 @@ signed __int64 __fastcall hkaiPairedEdgeFinder::slopeAnglesMatch(hkVector4f *sta
                  _mm_mul_ps(
                    _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v12, v11), v12)),
                    _mm_mul_ps(*(__m128 *)_xmm, v12))));
-  v13 = `anonymous namespace'::cosAngleAboutAxis(&result, &a, &b, &u)->m_real;
+  v13 = `anonymous namespace::cosAngleAboutAxis(&result, &a, &b, &u)->m_real;
   v14 = 0i64;
   if ( v13.m128_f32[0] > COERCE_FLOAT(_mm_shuffle_ps((__m128)LODWORD(cosMaxDeltaAngle), (__m128)LODWORD(cosMaxDeltaAngle), 0)) )
     v14 = 1i64;
@@ -728,7 +728,7 @@ hkaiPairedEdgeFinder::AccelerationData *__fastcall hkaiPairedEdgeFinder::buildAc
   if ( v5 )
   {
     *(_DWORD *)(v5 + 8) = 0x1FFFF;
-    *(_QWORD *)v5 = &hkaiPairedEdgeFinder::AccelerationData::`vftable';
+    *(_QWORD *)v5 = &hkaiPairedEdgeFinder::AccelerationData::`vftable;
     *(_QWORD *)(v5 + 16) = 0i64;
     *(_DWORD *)(v5 + 24) = 0;
     *(_DWORD *)(v5 + 28) = 2147483648;
@@ -931,7 +931,7 @@ void __fastcall hkaiPairedEdgeFinder::findExternalPairs(hkaiPairedEdgeFinder *th
     v9 = v8->m_sectionUid;
     v20 = v8;
     v10 = (signed __int64)&v4->m_toAccelerationData.m_pntr->m_boundaryEdges;
-    collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&hkaiPairedEdgeFinder::PairedEdgeQuery::`vftable';
+    collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&hkaiPairedEdgeFinder::PairedEdgeQuery::`vftable;
     v21 = v10;
     v24 = v7 == v9;
     v22 = &settings;

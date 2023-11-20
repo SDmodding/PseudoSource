@@ -3,11 +3,11 @@
 void __fastcall OSuite::ZJsonParser::ZJsonParser(OSuite::ZJsonParser *this, OSuite::ZJsonDocument *pRoot)
 {
   this->m_pRoot = (OSuite::ZJsonObject *)&pRoot->vfptr;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZJsonParser::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZJsonParser::`vftable;
   this->m_pCurrentElement = 0i64;
-  this->m_Stack.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<OSuite::ZJsonObject *>::`vftable'{for `OSuite::ZObject'};
+  this->m_Stack.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<OSuite::ZJsonObject *>::`vftable{for `OSuite::ZObject};
   this->m_Stack.m_nFree = 0i64;
-  this->m_Stack.vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<OSuite::ZJsonObject *>::`vftable'{for `OSuite::IHashable'};
+  this->m_Stack.vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
   this->m_Stack.m_pList = 0i64;
   this->m_nStage = 0;
 }
@@ -23,7 +23,7 @@ void __fastcall OSuite::ZJsonParser::~ZJsonParser(OSuite::ZJsonParser *this)
 
   v1 = this->m_Stack.m_nFree == 0;
   v2 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZJsonParser::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZJsonParser::`vftable;
   if ( !v1 )
   {
     do
@@ -35,11 +35,11 @@ void __fastcall OSuite::ZJsonParser::~ZJsonParser(OSuite::ZJsonParser *this)
     while ( v2->m_Stack.m_nFree );
   }
   v4 = v2->m_Stack.m_pList;
-  v2->m_Stack.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<OSuite::ZJsonObject *>::`vftable'{for `OSuite::ZObject'};
-  v2->m_Stack.vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<OSuite::ZJsonObject *>::`vftable'{for `OSuite::IHashable'};
+  v2->m_Stack.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<OSuite::ZJsonObject *>::`vftable{for `OSuite::ZObject};
+  v2->m_Stack.vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
   if ( v4 )
     v4->vfptr->__vecDelDtor((OSuite::ZObject *)&v4->vfptr, 1u);
-  v2->vfptr = (OSuite::ZObjectVtbl *)&OSuite::IParser::`vftable';
+  v2->vfptr = (OSuite::ZObjectVtbl *)&OSuite::IParser::`vftable;
 }
 
 // File Line: 69

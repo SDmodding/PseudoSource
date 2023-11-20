@@ -1,6 +1,6 @@
 // File Line: 517
 // RVA: 0xDC7500
-void __fastcall `anonymous namespace'::hkpStaticCompoundShape_RayHitCollectorWrapper::addRayHit(hkpStaticCompoundShape_RayHitCollectorWrapper *this, hkpCdBody *cdBody, hkpShapeRayCastCollectorOutput *hitInfo)
+void __fastcall `anonymous namespace::hkpStaticCompoundShape_RayHitCollectorWrapper::addRayHit(hkpStaticCompoundShape_RayHitCollectorWrapper *this, hkpCdBody *cdBody, hkpShapeRayCastCollectorOutput *hitInfo)
 {
   hkpStaticCompoundShape_Internals::RayCastQuery *v3; // rax
   __int128 v4; // xmm1

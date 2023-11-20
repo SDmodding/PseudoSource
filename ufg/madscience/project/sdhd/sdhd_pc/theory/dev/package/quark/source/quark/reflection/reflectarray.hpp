@@ -81,7 +81,7 @@ void __fastcall UFG::qReflectArray<UFG::PartTemplateInstance::PartEntry>::Resize
     {
       *(_DWORD *)v9 = v3;
       v5 = (signed __int64)(v9 + 8);
-      `eh vector constructor iterator'(
+      `eh vector constructor iterator(
         v9 + 8,
         0x50ui64,
         v3,
@@ -117,7 +117,7 @@ void __fastcall UFG::qReflectArray<UFG::PartTemplateInstance::PartEntry>::Resize
   if ( v4->mData.mItems && !(v4->mData.mFlags & 2) )
   {
     v15 = &v14[-1].mSpecularValues.mData.mNumItems;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v14,
       0x50ui64,
       v14[-1].mSpecularValues.mData.mNumItems,

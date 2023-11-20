@@ -131,12 +131,12 @@ void __fastcall UFG::RenderStageExposureMetering::RenderStageExposureMetering(UF
   UFG::qResourceWarehouse::Add(v10, (UFG::qResourceData *)&v8->mNode);
   v2->mMaterial = v8;
   v11 = UFG::qStringHashUpper32("ed80cbf8-430b-4546-962c-6ca13242c855", 0xFFFFFFFF);
-  v12 = `UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result )
+  v12 = `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result )
   {
     v13 = UFG::qResourceWarehouse::Instance();
     v12 = UFG::qResourceWarehouse::GetInventory(v13, 0x4D04C7F2u);
-    `UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result = v12;
+    `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result = v12;
   }
   UFG::qResourceHandle::Init(v3, 0x4D04C7F2u, v11, v12);
 }
@@ -617,7 +617,7 @@ void __fastcall UFG::RenderStageExposureMetering::Render(UFG::RenderStageExposur
         arg.mPrev = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
         arg.mNext = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
         v83 = &ptr.mStateArgs;
-        `eh vector destructor iterator'(
+        `eh vector destructor iterator(
           ptr.mStateArgs.mStateArgs,
           0x10ui64,
           128,

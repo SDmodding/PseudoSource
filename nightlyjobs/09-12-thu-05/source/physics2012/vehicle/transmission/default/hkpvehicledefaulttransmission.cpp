@@ -3,7 +3,7 @@
 void __fastcall hkpVehicleDefaultTransmission::hkpVehicleDefaultTransmission(hkpVehicleDefaultTransmission *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpVehicleDefaultTransmission::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpVehicleDefaultTransmission::`vftable;
   this->m_gearsRatio.m_capacityAndFlags = 2147483648;
   this->m_gearsRatio.m_data = 0i64;
   this->m_gearsRatio.m_size = 0;

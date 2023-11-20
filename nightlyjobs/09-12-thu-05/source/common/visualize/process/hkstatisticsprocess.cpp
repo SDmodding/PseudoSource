@@ -60,8 +60,8 @@ void __fastcall hkStatisticsProcess::hkStatisticsProcess(hkStatisticsProcess *th
   v2 = (signed int *)&this->m_infoBuffer;
   v3 = this;
   this->m_selectable.m_bool = 1;
-  this->vfptr = (hkBaseObjectVtbl *)&hkStatisticsProcess::`vftable'{for `hkReferencedObject'};
-  this->vfptr = (hkProcessVtbl *)&hkStatisticsProcess::`vftable'{for `hkProcess'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkStatisticsProcess::`vftable{for `hkReferencedObject};
+  this->vfptr = (hkProcessVtbl *)&hkStatisticsProcess::`vftable{for `hkProcess};
   this->m_contexts.m_data = 0i64;
   this->m_contexts.m_size = 0;
   this->m_contexts.m_capacityAndFlags = 2147483648;
@@ -87,7 +87,7 @@ void __fastcall hkStatisticsProcess::hkStatisticsProcess(hkStatisticsProcess *th
   globalFixups.m_capacityAndFlags = 2147483648;
   data.m_timerFactor0 = 1000.0 / v6;
   *(_DWORD *)&s.m_memSizeAndFlags = 0x1FFFF;
-  s.vfptr = (hkBaseObjectVtbl *)&hkArrayStreamWriter::`vftable';
+  s.vfptr = (hkBaseObjectVtbl *)&hkArrayStreamWriter::`vftable;
   v19 = v2;
   LODWORD(data.m_timerFactor1) = (_DWORD)FLOAT_1_0;
   v20 = &hkContainerHeapAllocator::s_alloc;
@@ -112,7 +112,7 @@ void __fastcall hkStatisticsProcess::hkStatisticsProcess(hkStatisticsProcess *th
     &globalFixups,
     0i64,
     (hkFlags<enum hkObjectCopier::ObjectCopierFlagBits,unsigned int>)2);
-  s.vfptr = (hkBaseObjectVtbl *)&hkArrayStreamWriter::`vftable';
+  s.vfptr = (hkBaseObjectVtbl *)&hkArrayStreamWriter::`vftable;
   if ( !v22 )
   {
     v10 = (__int64)v19;
@@ -123,7 +123,7 @@ void __fastcall hkStatisticsProcess::hkStatisticsProcess(hkStatisticsProcess *th
     }
   }
   globalFixups.m_size = 0;
-  s.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  s.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
   if ( globalFixups.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
       (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
@@ -171,8 +171,8 @@ void __fastcall hkStatisticsProcess::~hkStatisticsProcess(hkStatisticsProcess *t
   int v4; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkStatisticsProcess::`vftable'{for `hkReferencedObject'};
-  this->vfptr = (hkProcessVtbl *)&hkStatisticsProcess::`vftable'{for `hkProcess'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkStatisticsProcess::`vftable{for `hkReferencedObject};
+  this->vfptr = (hkProcessVtbl *)&hkStatisticsProcess::`vftable{for `hkProcess};
   v2 = this->m_strBuffer.m_capacityAndFlags;
   this->m_strBuffer.m_size = 0;
   if ( v2 >= 0 )
@@ -200,8 +200,8 @@ void __fastcall hkStatisticsProcess::~hkStatisticsProcess(hkStatisticsProcess *t
       8 * v4);
   v1->m_contexts.m_data = 0i64;
   v1->m_contexts.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkProcessVtbl *)&hkProcess::`vftable';
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkProcessVtbl *)&hkProcess::`vftable;
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 150
@@ -495,7 +495,7 @@ LABEL_19:
     v48 = (signed __int64)&v2->m_infoBuffer;
     v73 = v2->m_infoBuffer.m_size;
     *(_DWORD *)&s.m_memSizeAndFlags = 0x1FFFF;
-    s.vfptr = (hkBaseObjectVtbl *)&hkArrayStreamWriter::`vftable';
+    s.vfptr = (hkBaseObjectVtbl *)&hkArrayStreamWriter::`vftable;
     v71 = &v2->m_infoBuffer;
     v72 = &hkContainerHeapAllocator::s_alloc;
     v74 = 1;
@@ -525,7 +525,7 @@ LABEL_19:
       &globalFixups,
       0i64,
       (hkFlags<enum hkObjectCopier::ObjectCopierFlagBits,unsigned int>)2);
-    s.vfptr = (hkBaseObjectVtbl *)&hkArrayStreamWriter::`vftable';
+    s.vfptr = (hkBaseObjectVtbl *)&hkArrayStreamWriter::`vftable;
     if ( !v74 )
     {
       v52 = (__int64)v71;
@@ -536,7 +536,7 @@ LABEL_19:
       }
     }
     v54 = data.m_map.m_size - 1;
-    s.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+    s.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
     if ( data.m_map.m_size - 1 >= 0 )
     {
       v55 = &data.m_map.m_data[v54].m_string;

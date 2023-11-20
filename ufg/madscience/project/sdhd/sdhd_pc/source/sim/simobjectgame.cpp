@@ -232,7 +232,7 @@ void __fastcall UFG::SimObjectGame::SimObjectGame(UFG::SimObjectGame *this, UFG:
   v3 = type_table;
   v4 = this;
   UFG::SimObject::SimObject((UFG::SimObject *)&this->vfptr, name);
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimObject>Vtbl *)&UFG::SimObjectGame::`vftable';
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimObject>Vtbl *)&UFG::SimObjectGame::`vftable;
   v4->mComponentTableEntryCount = v3->mEntryCount;
   v4->mComponentTableEntries = v3->mEntries;
   v5 = LOBYTE(v4->mComponentTableEntryCount);

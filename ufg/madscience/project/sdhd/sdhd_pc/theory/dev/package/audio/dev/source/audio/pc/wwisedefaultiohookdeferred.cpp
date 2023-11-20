@@ -6,18 +6,18 @@ void __fastcall UFG::WwiseDefaultIOHookDeferred::WwiseDefaultIOHookDeferred(UFG:
 
   v1 = this;
   UFG::WwiseDefaultIOHookDeferredBase::WwiseDefaultIOHookDeferredBase((UFG::WwiseDefaultIOHookDeferredBase *)&this->vfptr);
-  v1->vfptr = (AK::StreamMgr::IAkFileLocationResolverVtbl *)&UFG::WwiseDefaultIOHookDeferred::`vftable'{for `AK::StreamMgr::IAkFileLocationResolver'};
-  v1->vfptr = (AK::StreamMgr::IAkLowLevelIOHookVtbl *)&UFG::WwiseDefaultIOHookDeferred::`vftable'{for `AK::StreamMgr::IAkIOHookDeferred'};
-  v1->vfptr = (UFG::WwiseFileLocationBaseVtbl *)&UFG::WwiseDefaultIOHookDeferred::`vftable'{for `UFG::WwiseFileLocationBase'};
+  v1->vfptr = (AK::StreamMgr::IAkFileLocationResolverVtbl *)&UFG::WwiseDefaultIOHookDeferred::`vftable{for `AK::StreamMgr::IAkFileLocationResolver};
+  v1->vfptr = (AK::StreamMgr::IAkLowLevelIOHookVtbl *)&UFG::WwiseDefaultIOHookDeferred::`vftable{for `AK::StreamMgr::IAkIOHookDeferred};
+  v1->vfptr = (UFG::WwiseFileLocationBaseVtbl *)&UFG::WwiseDefaultIOHookDeferred::`vftable{for `UFG::WwiseFileLocationBase};
 }
 
 // File Line: 71
 // RVA: 0xA34990
 void __fastcall UFG::WwiseDefaultIOHookDeferred::~WwiseDefaultIOHookDeferred(UFG::WwiseDefaultIOHookDeferred *this)
 {
-  this->vfptr = (AK::StreamMgr::IAkFileLocationResolverVtbl *)&UFG::WwiseDefaultIOHookDeferred::`vftable'{for `AK::StreamMgr::IAkFileLocationResolver'};
-  this->vfptr = (AK::StreamMgr::IAkLowLevelIOHookVtbl *)&UFG::WwiseDefaultIOHookDeferred::`vftable'{for `AK::StreamMgr::IAkIOHookDeferred'};
-  this->vfptr = (UFG::WwiseFileLocationBaseVtbl *)&UFG::WwiseDefaultIOHookDeferred::`vftable'{for `UFG::WwiseFileLocationBase'};
+  this->vfptr = (AK::StreamMgr::IAkFileLocationResolverVtbl *)&UFG::WwiseDefaultIOHookDeferred::`vftable{for `AK::StreamMgr::IAkFileLocationResolver};
+  this->vfptr = (AK::StreamMgr::IAkLowLevelIOHookVtbl *)&UFG::WwiseDefaultIOHookDeferred::`vftable{for `AK::StreamMgr::IAkIOHookDeferred};
+  this->vfptr = (UFG::WwiseFileLocationBaseVtbl *)&UFG::WwiseDefaultIOHookDeferred::`vftable{for `UFG::WwiseFileLocationBase};
   UFG::WwiseDefaultIOHookDeferredBase::~WwiseDefaultIOHookDeferredBase((UFG::WwiseDefaultIOHookDeferredBase *)&this->vfptr);
 }
 

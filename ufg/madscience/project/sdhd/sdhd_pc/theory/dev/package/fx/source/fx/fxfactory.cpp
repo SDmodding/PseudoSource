@@ -34,7 +34,7 @@ __int64 Render::_dynamic_initializer_for__gDecalSettingsInventory__()
     0xDCAEC503,
     0,
     0);
-  Render::gDecalSettingsInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::FXSettingsInventoryTemplate<Render::DecalSettings,2922524998,3702441219>::`vftable';
+  Render::gDecalSettingsInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::FXSettingsInventoryTemplate<Render::DecalSettings,2922524998,3702441219>::`vftable;
   return atexit(Render::_dynamic_atexit_destructor_for__gDecalSettingsInventory__);
 }
 
@@ -49,7 +49,7 @@ __int64 Render::_dynamic_initializer_for__gBeamSettingsInventory__()
     0x80EF0B08,
     0,
     0);
-  Render::gBeamSettingsInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::FXSettingsInventoryTemplate<Render::BeamSettings,2695553295,2163149576>::`vftable';
+  Render::gBeamSettingsInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::FXSettingsInventoryTemplate<Render::BeamSettings,2695553295,2163149576>::`vftable;
   return atexit(Render::_dynamic_atexit_destructor_for__gBeamSettingsInventory__);
 }
 
@@ -64,7 +64,7 @@ __int64 Render::_dynamic_initializer_for__gEffectEmitterSettingsInventory__()
     0xD9B10F14,
     0,
     0);
-  Render::gEffectEmitterSettingsInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::FXSettingsInventoryTemplate<Render::EffectEmitterSettings,4280231986,3652259604>::`vftable';
+  Render::gEffectEmitterSettingsInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::FXSettingsInventoryTemplate<Render::EffectEmitterSettings,4280231986,3652259604>::`vftable;
   return atexit(Render::_dynamic_atexit_destructor_for__gEffectEmitterSettingsInventory__);
 }
 
@@ -79,7 +79,7 @@ __int64 Render::_dynamic_initializer_for__gParticleSettingsInventory__()
     0xD05B6976,
     0,
     0);
-  Render::gParticleSettingsInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::FXSettingsInventoryTemplate<Render::ParticleEmitterSettings,1005461980,3495651702>::`vftable';
+  Render::gParticleSettingsInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::FXSettingsInventoryTemplate<Render::ParticleEmitterSettings,1005461980,3495651702>::`vftable;
   return atexit(Render::_dynamic_atexit_destructor_for__gParticleSettingsInventory__);
 }
 
@@ -94,7 +94,7 @@ __int64 Render::_dynamic_initializer_for__gFlareSettingsInventory__()
     0x83574C18,
     0,
     0);
-  Render::gFlareSettingsInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::FXSettingsInventoryTemplate<Render::FlareSettings,2790481851,2203536408>::`vftable';
+  Render::gFlareSettingsInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::FXSettingsInventoryTemplate<Render::FlareSettings,2790481851,2203536408>::`vftable;
   return atexit(Render::_dynamic_atexit_destructor_for__gFlareSettingsInventory__);
 }
 
@@ -109,7 +109,7 @@ __int64 Render::_dynamic_initializer_for__gFXSettingsInventory__()
     0x12289ADBu,
     0,
     0);
-  Render::gFXSettingsInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::FXSettingsInventoryTemplate<Render::FXSettings,3979614861,304650971>::`vftable';
+  Render::gFXSettingsInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::FXSettingsInventoryTemplate<Render::FXSettings,3979614861,304650971>::`vftable;
   return atexit(Render::_dynamic_atexit_destructor_for__gFXSettingsInventory__);
 }
 
@@ -124,7 +124,7 @@ __int64 Render::_dynamic_initializer_for__gAudioFXSettingsInventory__()
     0xAF8870AB,
     0,
     0);
-  Render::gAudioFXSettingsInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::FXSettingsInventoryTemplate<Render::AudioFXSettings,3615280818,2944954539>::`vftable';
+  Render::gAudioFXSettingsInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::FXSettingsInventoryTemplate<Render::AudioFXSettings,3615280818,2944954539>::`vftable;
   return atexit(Render::_dynamic_atexit_destructor_for__gAudioFXSettingsInventory__);
 }
 
@@ -139,7 +139,7 @@ __int64 Render::_dynamic_initializer_for__gCoronaFlareSettingsInventory__()
     0x9D6378CC,
     0,
     0);
-  Render::gCoronaFlareSettingsInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::FXSettingsInventoryTemplate<Render::CoronaFlareSettings,3077361592,2640541900>::`vftable';
+  Render::gCoronaFlareSettingsInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::FXSettingsInventoryTemplate<Render::CoronaFlareSettings,3077361592,2640541900>::`vftable;
   return atexit(Render::_dynamic_atexit_destructor_for__gCoronaFlareSettingsInventory__);
 }
 
@@ -154,7 +154,7 @@ __int64 Render::_dynamic_initializer_for__gDynamicLightSettingsInventory__()
     0x8D0E8333,
     0,
     0);
-  Render::gDynamicLightSettingsInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::FXSettingsInventoryTemplate<Render::DynamicLightSettings,3603788052,2366538547>::`vftable';
+  Render::gDynamicLightSettingsInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::FXSettingsInventoryTemplate<Render::DynamicLightSettings,3603788052,2366538547>::`vftable;
   return atexit(Render::_dynamic_atexit_destructor_for__gDynamicLightSettingsInventory__);
 }
 
@@ -169,7 +169,7 @@ __int64 Render::_dynamic_initializer_for__gDynamicLightGroupSettingsInventory__(
     0x230C8A9Cu,
     0,
     0);
-  Render::gDynamicLightGroupSettingsInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::FXSettingsInventoryTemplate<Render::DynamicLightGroupSettings,431332660,588024476>::`vftable';
+  Render::gDynamicLightGroupSettingsInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::FXSettingsInventoryTemplate<Render::DynamicLightGroupSettings,431332660,588024476>::`vftable;
   return atexit(Render::_dynamic_atexit_destructor_for__gDynamicLightGroupSettingsInventory__);
 }
 
@@ -184,7 +184,7 @@ __int64 Render::_dynamic_initializer_for__gFXForceInventory__()
     0x77554FC5u,
     0,
     0);
-  Render::gFXForceInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::FXSettingsInventoryTemplate<Render::FXForceSettings,1128192223,2002079685>::`vftable';
+  Render::gFXForceInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::FXSettingsInventoryTemplate<Render::FXForceSettings,1128192223,2002079685>::`vftable;
   return atexit(Render::_dynamic_atexit_destructor_for__gFXForceInventory__);
 }
 
@@ -199,7 +199,7 @@ __int64 Render::_dynamic_initializer_for__gScreenParticleSettingsInventory__()
     0x657192D6u,
     0,
     0);
-  Render::gScreenParticleSettingsInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::FXSettingsInventoryTemplate<Render::ScreenParticleEmitterSettings,894188764,1701941974>::`vftable';
+  Render::gScreenParticleSettingsInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::FXSettingsInventoryTemplate<Render::ScreenParticleEmitterSettings,894188764,1701941974>::`vftable;
   return atexit(Render::_dynamic_atexit_destructor_for__gScreenParticleSettingsInventory__);
 }
 
@@ -214,7 +214,7 @@ __int64 Render::_dynamic_initializer_for__gLightningInventory__()
     0xB4AEE124,
     0,
     0);
-  Render::gLightningInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::FXSettingsInventoryTemplate<Render::LightningSettings,565058660,3031359780>::`vftable';
+  Render::gLightningInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::FXSettingsInventoryTemplate<Render::LightningSettings,565058660,3031359780>::`vftable;
   return atexit(Render::_dynamic_atexit_destructor_for__gLightningInventory__);
 }
 
@@ -229,7 +229,7 @@ __int64 Render::_dynamic_initializer_for__gVolumetricEffectSettingsInventory__()
     0xA8EB0D0C,
     0,
     0);
-  Render::gVolumetricEffectSettingsInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::FXSettingsInventoryTemplate<Render::VolumetricEffectSettings,3837326442,2833976588>::`vftable';
+  Render::gVolumetricEffectSettingsInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::FXSettingsInventoryTemplate<Render::VolumetricEffectSettings,3837326442,2833976588>::`vftable;
   return atexit(Render::_dynamic_atexit_destructor_for__gVolumetricEffectSettingsInventory__);
 }
 

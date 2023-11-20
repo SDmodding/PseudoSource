@@ -2,7 +2,7 @@
 // RVA: 0x4914A0
 void __fastcall UFG::SecondaryObjectiveTracker::~SecondaryObjectiveTracker(UFG::SecondaryObjectiveTracker *this)
 {
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     this,
     0x38ui64,
     2,

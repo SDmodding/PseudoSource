@@ -67,7 +67,7 @@ void __fastcall finishLoadedObjecthkaQuantizedAnimation(void *p, int finishing)
 {
   if ( p )
   {
-    *(_QWORD *)p = &hkaQuantizedAnimation::`vftable';
+    *(_QWORD *)p = &hkaQuantizedAnimation::`vftable;
     JUMPOUT(finishing, 0, hkaQuantizedAnimation::handleEndian);
   }
 }
@@ -83,7 +83,7 @@ void __fastcall cleanupLoadedObjecthkaQuantizedAnimation(void *p)
 // RVA: 0xB1DBC0
 void **__fastcall getVtablehkaQuantizedAnimation()
 {
-  return &hkaQuantizedAnimation::`vftable';
+  return &hkaQuantizedAnimation::`vftable;
 }
 
 // File Line: 151

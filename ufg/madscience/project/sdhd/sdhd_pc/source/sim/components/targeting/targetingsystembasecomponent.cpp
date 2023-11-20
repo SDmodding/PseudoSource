@@ -54,12 +54,12 @@ void __fastcall UFG::TargetingSystemBaseComponent::TargetingSystemBaseComponent(
   v4 = pTargetingMap;
   v5 = this;
   UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name_uid);
-  v5->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::UpdateInterface::`vftable';
+  v5->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::UpdateInterface::`vftable;
   v6 = (UFG::qNode<UFG::TargetingSystemBaseComponent,UFG::TargetingSystemBaseComponent> *)&v5->mPrev;
   v6->mPrev = v6;
   v6->mNext = v6;
-  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TargetingSystemBaseComponent::`vftable'{for `UFG::SimComponent'};
-  v5->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::TargetingSystemBaseComponent::`vftable'{for `UFG::UpdateInterface'};
+  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TargetingSystemBaseComponent::`vftable{for `UFG::SimComponent};
+  v5->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::TargetingSystemBaseComponent::`vftable{for `UFG::UpdateInterface};
   v5->m_pTargetingMap = v4;
   v14 = &v5->m_TargetedBy;
   v14->mNode.mPrev = &v14->mNode;
@@ -86,7 +86,7 @@ void __fastcall UFG::TargetingSystemBaseComponent::TargetingSystemBaseComponent(
   {
     LODWORD(v12->mNext) = v8;
     v13 = (signed __int64)&v12[1];
-    `eh vector constructor iterator'(
+    `eh vector constructor iterator(
       &v12[1],
       0x38ui64,
       v8,
@@ -120,14 +120,14 @@ void __fastcall UFG::TargetingSystemBaseComponent::~TargetingSystemBaseComponent
   UFG::qNode<UFG::TargetingSystemBaseComponent,UFG::TargetingSystemBaseComponent> *v14; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TargetingSystemBaseComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::TargetingSystemBaseComponent::`vftable'{for `UFG::UpdateInterface'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TargetingSystemBaseComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::TargetingSystemBaseComponent::`vftable{for `UFG::UpdateInterface};
   UFG::TargetingSystemBaseComponent::shutdown(this);
   v2 = v1->m_pTargets;
   if ( v2 )
   {
     v3 = &v2[-1].m_eTargetType;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v2,
       0x38ui64,
       *(_DWORD *)&v2[-1].m_eTargetType.mValue,

@@ -9,10 +9,10 @@ void __fastcall Render::ParticleEmitterInstance::ParticleEmitterInstance(Render:
   v2 = (UFG::qNode<Render::FXComponentInstance,Render::FXComponentInstance> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable';
+  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable;
   *(_QWORD *)&this->mForceSuspendState = 0i64;
   *(_WORD *)&this->mIsActive = 0;
-  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::ParticleEmitterInstance::`vftable';
+  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::ParticleEmitterInstance::`vftable;
   this->mCurrentBuffer = 0i64;
   *(_QWORD *)&this->mActivateTime = 0i64;
   this->mPrevDistance = 0.0;
@@ -39,7 +39,7 @@ void __fastcall Render::ParticleEmitterInstance::~ParticleEmitterInstance(Render
   UFG::qNode<Render::FXComponentInstance,Render::FXComponentInstance> *v9; // rax
 
   v1 = this;
-  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::ParticleEmitterInstance::`vftable';
+  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::ParticleEmitterInstance::`vftable;
   if ( this->mIsActive )
   {
     this->mIsActive = 0;
@@ -49,26 +49,26 @@ void __fastcall Render::ParticleEmitterInstance::~ParticleEmitterInstance(Render
       v2->mOwner = 0i64;
       this->mCurrentBuffer = 0i64;
     }
-    v3 = `UFG::qGetResourceInventory<Render::ParticleEmitterSettings>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Render::ParticleEmitterSettings>'::`2'::result )
+    v3 = `UFG::qGetResourceInventory<Render::ParticleEmitterSettings>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Render::ParticleEmitterSettings>::`2::result )
     {
       v4 = UFG::qResourceWarehouse::Instance();
       v3 = UFG::qResourceWarehouse::GetInventory(v4, 0x3BEE21DCu);
-      `UFG::qGetResourceInventory<Render::ParticleEmitterSettings>'::`2'::result = v3;
+      `UFG::qGetResourceInventory<Render::ParticleEmitterSettings>::`2::result = v3;
     }
     UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mSettingsHandle.mPrev, v3);
   }
   --Render::ParticleEmitterInstance::mInstanceCount;
-  v5 = `UFG::qGetResourceInventory<Render::ParticleEmitterSettings>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Render::ParticleEmitterSettings>'::`2'::result )
+  v5 = `UFG::qGetResourceInventory<Render::ParticleEmitterSettings>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Render::ParticleEmitterSettings>::`2::result )
   {
     v6 = UFG::qResourceWarehouse::Instance();
     v5 = UFG::qResourceWarehouse::GetInventory(v6, 0x3BEE21DCu);
-    `UFG::qGetResourceInventory<Render::ParticleEmitterSettings>'::`2'::result = v5;
+    `UFG::qGetResourceInventory<Render::ParticleEmitterSettings>::`2::result = v5;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mSettingsHandle.mPrev, v5);
   UFG::qResourceHandle::~qResourceHandle((UFG::qResourceHandle *)&v1->mSettingsHandle.mPrev);
-  v1->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable';
+  v1->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable;
   v7 = (UFG::qNode<Render::FXComponentInstance,Render::FXComponentInstance> *)&v1->mPrev;
   v8 = v1->mPrev;
   v9 = v1->mNext;
@@ -96,12 +96,12 @@ __int64 __fastcall Render::GetNumVerticesInMeshEmissionBuffer(unsigned int meshE
   if ( !meshEmissionName )
     return 0i64;
   UFG::qResourceHandle::qResourceHandle(&v10);
-  v3 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  v3 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v4 = UFG::qResourceWarehouse::Instance();
     v3 = UFG::qResourceWarehouse::GetInventory(v4, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v3;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v3;
   }
   UFG::qResourceHandle::Init(&v10, 0xA2ADCD77, v1, v3);
   v5 = 0i64;
@@ -116,12 +116,12 @@ __int64 __fastcall Render::GetNumVerticesInMeshEmissionBuffer(unsigned int meshE
       v5 = (char *)v7 + *v7;
     LODWORD(v5) = *(_DWORD *)(*((_QWORD *)v5 + 14) + 108i64);
   }
-  v8 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  v8 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v9 = UFG::qResourceWarehouse::Instance();
     v8 = UFG::qResourceWarehouse::GetInventory(v9, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v8;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v8;
   }
   UFG::qResourceHandle::Close(&v10, v8);
   UFG::qResourceHandle::~qResourceHandle(&v10);
@@ -147,22 +147,22 @@ void __fastcall Render::ParticleEmitterInstance::Init(Render::ParticleEmitterIns
   this->mSettingsId = settingsId;
   if ( !v2 )
   {
-    v4 = `UFG::qGetResourceInventory<Render::ParticleEmitterSettings>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Render::ParticleEmitterSettings>'::`2'::result )
+    v4 = `UFG::qGetResourceInventory<Render::ParticleEmitterSettings>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Render::ParticleEmitterSettings>::`2::result )
     {
       v5 = UFG::qResourceWarehouse::Instance();
       v4 = UFG::qResourceWarehouse::GetInventory(v5, 0x3BEE21DCu);
-      `UFG::qGetResourceInventory<Render::ParticleEmitterSettings>'::`2'::result = v4;
+      `UFG::qGetResourceInventory<Render::ParticleEmitterSettings>::`2::result = v4;
     }
     UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v3->mSettingsHandle.mPrev, v4);
   }
-  v6 = `UFG::qGetResourceInventory<Render::ParticleEmitterSettings>'::`2'::result;
+  v6 = `UFG::qGetResourceInventory<Render::ParticleEmitterSettings>::`2::result;
   v7 = v3->mSettingsId;
-  if ( !`UFG::qGetResourceInventory<Render::ParticleEmitterSettings>'::`2'::result )
+  if ( !`UFG::qGetResourceInventory<Render::ParticleEmitterSettings>::`2::result )
   {
     v8 = UFG::qResourceWarehouse::Instance();
     v6 = UFG::qResourceWarehouse::GetInventory(v8, 0x3BEE21DCu);
-    `UFG::qGetResourceInventory<Render::ParticleEmitterSettings>'::`2'::result = v6;
+    `UFG::qGetResourceInventory<Render::ParticleEmitterSettings>::`2::result = v6;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v3->mSettingsHandle.mPrev, 0x3BEE21DCu, v7, v6);
   v9 = v3->mSettingsHandle.mData;
@@ -232,12 +232,12 @@ void __fastcall Render::ParticleEmitterInstance::Deactivate(Render::ParticleEmit
       v3->mOwner = 0i64;
       this->mCurrentBuffer = 0i64;
     }
-    v4 = `UFG::qGetResourceInventory<Render::ParticleEmitterSettings>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Render::ParticleEmitterSettings>'::`2'::result )
+    v4 = `UFG::qGetResourceInventory<Render::ParticleEmitterSettings>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Render::ParticleEmitterSettings>::`2::result )
     {
       v5 = UFG::qResourceWarehouse::Instance();
       v4 = UFG::qResourceWarehouse::GetInventory(v5, 0x3BEE21DCu);
-      `UFG::qGetResourceInventory<Render::ParticleEmitterSettings>'::`2'::result = v4;
+      `UFG::qGetResourceInventory<Render::ParticleEmitterSettings>::`2::result = v4;
     }
     UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v2->mSettingsHandle.mPrev, v4);
   }
@@ -280,13 +280,13 @@ void __fastcall Render::ParticleEmitterInstance::Resume(Render::ParticleEmitterI
   {
     if ( !this->mSettingsHandle.mData )
     {
-      v3 = `UFG::qGetResourceInventory<Render::ParticleEmitterSettings>'::`2'::result;
+      v3 = `UFG::qGetResourceInventory<Render::ParticleEmitterSettings>::`2::result;
       v4 = this->mSettingsId;
-      if ( !`UFG::qGetResourceInventory<Render::ParticleEmitterSettings>'::`2'::result )
+      if ( !`UFG::qGetResourceInventory<Render::ParticleEmitterSettings>::`2::result )
       {
         v5 = UFG::qResourceWarehouse::Instance();
         v3 = UFG::qResourceWarehouse::GetInventory(v5, 0x3BEE21DCu);
-        `UFG::qGetResourceInventory<Render::ParticleEmitterSettings>'::`2'::result = v3;
+        `UFG::qGetResourceInventory<Render::ParticleEmitterSettings>::`2::result = v3;
       }
       UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v2->mSettingsHandle.mPrev, 0x3BEE21DCu, v4, v3);
       *(_QWORD *)&v2->mActivateTime = LODWORD(sim_time);
@@ -426,13 +426,13 @@ void __fastcall Render::ParticleEmitterInstance::Update(Render::ParticleEmitterI
   v4 = sim_time;
   if ( !this->mSettingsHandle.mData )
   {
-    v5 = `UFG::qGetResourceInventory<Render::ParticleEmitterSettings>'::`2'::result;
+    v5 = `UFG::qGetResourceInventory<Render::ParticleEmitterSettings>::`2::result;
     v6 = this->mSettingsId;
-    if ( !`UFG::qGetResourceInventory<Render::ParticleEmitterSettings>'::`2'::result )
+    if ( !`UFG::qGetResourceInventory<Render::ParticleEmitterSettings>::`2::result )
     {
       v7 = UFG::qResourceWarehouse::Instance();
       v5 = UFG::qResourceWarehouse::GetInventory(v7, 0x3BEE21DCu);
-      `UFG::qGetResourceInventory<Render::ParticleEmitterSettings>'::`2'::result = v5;
+      `UFG::qGetResourceInventory<Render::ParticleEmitterSettings>::`2::result = v5;
     }
     UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v3->mSettingsHandle.mPrev, 0x3BEE21DCu, v6, v5);
     v8 = v3->mCurrentBuffer;

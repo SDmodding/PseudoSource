@@ -22,12 +22,12 @@ void __fastcall UFG::UELComponent::UELComponent(UFG::UELComponent *this, unsigne
 
   v2 = this;
   UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, uid);
-  v2->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::UpdateInterface::`vftable';
+  v2->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::UpdateInterface::`vftable;
   v3 = (UFG::qNode<UFG::UELComponent,UFG::UELComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::UELComponent::`vftable'{for `UFG::SimComponent'};
-  v2->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::UELComponent::`vftable'{for `UFG::UpdateInterface'};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::UELComponent::`vftable{for `UFG::SimComponent};
+  v2->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::UELComponent::`vftable{for `UFG::UpdateInterface};
   v2->mParameters.PropertiesUELLookup.m_Closure.m_pthis = 0i64;
   v2->mParameters.PropertiesUELLookup.m_Closure.m_pFunction = 0i64;
   v2->mParameters.GangMember2UELGetter.m_Closure.m_pthis = 0i64;
@@ -385,7 +385,7 @@ UEL::Value *__fastcall UFG::UELComponent::LookupProperties(UFG::UELComponent *th
   if ( v8 == 29 )
   {
     v35 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)v5);
-    v36 = "Warning: Couldn't find property %s when looking it up for an expression!\n";
+    v36 = "Warning: Couldnt find property %s when looking it up for an expression!\n";
 LABEL_31:
     UFG::qPrintf(v36, v35);
   }

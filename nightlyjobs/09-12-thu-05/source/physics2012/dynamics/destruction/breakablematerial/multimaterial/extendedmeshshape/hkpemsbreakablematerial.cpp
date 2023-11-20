@@ -12,7 +12,7 @@ void __fastcall hkpExtendedMeshShapeBreakableMaterial::hkpExtendedMeshShapeBreak
     subMaterials,
     strength);
   BYTE1(v5->m_typeAndFlags) = 0;
-  v5->vfptr = (hkBaseObjectVtbl *)&hkpExtendedMeshShapeBreakableMaterial::`vftable';
+  v5->vfptr = (hkBaseObjectVtbl *)&hkpExtendedMeshShapeBreakableMaterial::`vftable;
   v5->m_typeAndFlags = (v5->m_typeAndFlags | ((unsigned __int8)(32 - v4) << 8)) & 0xFFFFFF4F | 0x40;
 }
 
@@ -31,7 +31,7 @@ void __fastcall hkpExtendedMeshShapeBreakableMaterial::hkpExtendedMeshShapeBreak
 
   v2 = this;
   hkpBreakableMultiMaterial::hkpBreakableMultiMaterial((hkpBreakableMultiMaterial *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpExtendedMeshShapeBreakableMaterial::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpExtendedMeshShapeBreakableMaterial::`vftable;
 }
 
 // File Line: 42
@@ -44,7 +44,7 @@ void __fastcall hkpExtendedMeshShapeBreakableMaterial::hkpExtendedMeshShapeBreak
   hkpBreakableMultiMaterial::hkpBreakableMultiMaterial(
     (hkpBreakableMultiMaterial *)&this->vfptr,
     (hkpBreakableMultiMaterial *)&other->vfptr);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpExtendedMeshShapeBreakableMaterial::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpExtendedMeshShapeBreakableMaterial::`vftable;
 }
 
 // File Line: 48

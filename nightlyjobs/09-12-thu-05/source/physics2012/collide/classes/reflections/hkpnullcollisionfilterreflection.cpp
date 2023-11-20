@@ -32,11 +32,11 @@ void __fastcall finishLoadedObjecthkpNullCollisionFilter(void *p, int finishing)
 {
   if ( p )
   {
-    *(_QWORD *)p = &hkpNullCollisionFilter::`vftable'{for `hkReferencedObject'};
-    *((_QWORD *)p + 2) = &hkpNullCollisionFilter::`vftable'{for `hkpCollidableCollidableFilter'};
-    *((_QWORD *)p + 3) = &hkpNullCollisionFilter::`vftable'{for `hkpShapeCollectionFilter'};
-    *((_QWORD *)p + 4) = &hkpNullCollisionFilter::`vftable'{for `hkpRayShapeCollectionFilter'};
-    *((_QWORD *)p + 5) = &hkpNullCollisionFilter::`vftable'{for `hkpRayCollidableFilter'};
+    *(_QWORD *)p = &hkpNullCollisionFilter::`vftable{for `hkReferencedObject};
+    *((_QWORD *)p + 2) = &hkpNullCollisionFilter::`vftable{for `hkpCollidableCollidableFilter};
+    *((_QWORD *)p + 3) = &hkpNullCollisionFilter::`vftable{for `hkpShapeCollectionFilter};
+    *((_QWORD *)p + 4) = &hkpNullCollisionFilter::`vftable{for `hkpRayShapeCollectionFilter};
+    *((_QWORD *)p + 5) = &hkpNullCollisionFilter::`vftable{for `hkpRayCollidableFilter};
     if ( finishing )
       *((_DWORD *)p + 14) = 1;
   }
@@ -53,7 +53,7 @@ void __fastcall cleanupLoadedObjecthkpNullCollisionFilter(void *p)
 // RVA: 0xCEBB40
 void **__fastcall getVtablehkpNullCollisionFilter()
 {
-  return &hkpNullCollisionFilter::`vftable'{for `hkReferencedObject'};
+  return &hkpNullCollisionFilter::`vftable{for `hkReferencedObject};
 }
 
 // File Line: 90

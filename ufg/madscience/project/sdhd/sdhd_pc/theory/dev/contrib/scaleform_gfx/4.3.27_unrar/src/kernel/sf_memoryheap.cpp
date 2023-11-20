@@ -7,7 +7,7 @@ void __fastcall Scaleform::MemoryHeap::MemoryHeap(Scaleform::MemoryHeap *this)
   _QWORD *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::MemoryHeapVtbl *)&Scaleform::MemoryHeap::`vftable';
+  this->vfptr = (Scaleform::MemoryHeapVtbl *)&Scaleform::MemoryHeap::`vftable;
   v2 = 0i64;
   this->SelfSize = 0i64;
   this->RefCount = 1;

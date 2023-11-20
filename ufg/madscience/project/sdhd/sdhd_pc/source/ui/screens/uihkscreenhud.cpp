@@ -77,7 +77,7 @@ void UFG::UIHKScreenHud::Initialize(void)
                                      1u);
   if ( v0 )
   {
-    v0->vfptr = (UFG::UIScreenInvokeQueueVtbl *)&UFG::UIScreenInvokeQueue::`vftable';
+    v0->vfptr = (UFG::UIScreenInvokeQueueVtbl *)&UFG::UIScreenInvokeQueue::`vftable;
     v0->mNumCommandsPerFrame = -1;
     v44 = &v0->mCommandQueue;
     v44->mNode.mPrev = &v44->mNode;
@@ -117,7 +117,7 @@ void UFG::UIHKScreenHud::Initialize(void)
   if ( v9 )
   {
     LOWORD(v9->mNext) = 0;
-    `eh vector constructor iterator'(
+    `eh vector constructor iterator(
       &v9[1],
       0x30ui64,
       4,
@@ -280,10 +280,10 @@ void UFG::UIHKScreenHud::Initialize(void)
   v30 = UFG::qMalloc(0x48ui64, "UIHKScreenHud", 0i64);
   if ( v30 )
   {
-    v30->mNext = (UFG::allocator::free_link *)&UFG::UIHKMissionRewardsWidget::`vftable';
-    v30[1].mNext = (UFG::allocator::free_link *)&UFG::UIHKMissionRewardsHeaderWidget::`vftable';
+    v30->mNext = (UFG::allocator::free_link *)&UFG::UIHKMissionRewardsWidget::`vftable;
+    v30[1].mNext = (UFG::allocator::free_link *)&UFG::UIHKMissionRewardsHeaderWidget::`vftable;
     *(UFG::allocator::free_link **)((char *)&v30[2].mNext + 4) = 0i64;
-    v30[4].mNext = (UFG::allocator::free_link *)&UFG::UIHKMissionRewardsFlasherWidget::`vftable';
+    v30[4].mNext = (UFG::allocator::free_link *)&UFG::UIHKMissionRewardsFlasherWidget::`vftable;
     v30[5].mNext = 0i64;
     v30[6].mNext = 0i64;
     v30[7].mNext = 0i64;
@@ -375,7 +375,7 @@ void __fastcall UFG::UIHKScreenHud::UIHKScreenHud(UFG::UIHKScreenHud *this)
   v2 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -386,7 +386,7 @@ void __fastcall UFG::UIHKScreenHud::UIHKScreenHud(UFG::UIHKScreenHud *this)
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenHud::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenHud::`vftable;
   UFG::UITiledMapWidget::UITiledMapWidget(&this->Minimap);
   v1->HealthMeter.mHealthPercent = -1.0;
   v1->HealthMeter.mHealthPercentOfMaxPossible = -1.0;
@@ -411,7 +411,7 @@ void __fastcall UFG::UIHKScreenHud::UIHKScreenHud(UFG::UIHKScreenHud *this)
   v3 = UFG::GameStatTracker::Instance();
   v1->MoneyPopup.mMoney = UFG::GameStatTracker::GetStat(v3, Money);
   UFG::qString::qString(&v1->Buffs.mTexturePackFilename);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v1->Buffs.mIconLoaded,
     0x28ui64,
     7,
@@ -463,7 +463,7 @@ void __fastcall UFG::UIHKScreenHud::UIHKScreenHud(UFG::UIHKScreenHud *this)
   *(_WORD *)&v1->HeatLevel.mCopCooldown = 256;
   v1->HeatLevel.mVisibleChanged = 0;
   v1->TimeOfDay.mLightingConditions = 0;
-  v1->SniperWidget.vfptr = (UFG::UIHKSniperWidgetVtbl *)&UFG::UIHKSniperWidget::`vftable';
+  v1->SniperWidget.vfptr = (UFG::UIHKSniperWidgetVtbl *)&UFG::UIHKSniperWidget::`vftable;
   v1->SniperWidget.mState = 0;
   v1->SniperWidget.mSniperMode = 0;
   v1->mStatInfoTimer = 0.0;
@@ -498,7 +498,7 @@ void __fastcall UFG::UIHKScreenHud::~UIHKScreenHud(UFG::UIHKScreenHud *this)
   UFG::UIHKScreenGlobalOverlay *v12; // rax
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenHud::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenHud::`vftable;
   UFG::UIHKScreenHud::PopulatePDACache(this);
   v2 = v1->PDA;
   if ( v2 )
@@ -541,7 +541,7 @@ void __fastcall UFG::UIHKScreenHud::~UIHKScreenHud(UFG::UIHKScreenHud *this)
     }
     v9->mShowingInFlash = 0;
   }
-  v1->SniperWidget.vfptr = (UFG::UIHKSniperWidgetVtbl *)&UFG::UIHKSniperWidget::`vftable';
+  v1->SniperWidget.vfptr = (UFG::UIHKSniperWidgetVtbl *)&UFG::UIHKSniperWidget::`vftable;
   if ( UFG::UIHKScreenGlobalOverlay::mThis )
     v10 = UFG::UIHKScreenGlobalOverlay::mThis;
   UFG::UIHKHelpBarWidget::Hide(&v10->HelpBar, UI_HASH_SNIPER);
@@ -1632,7 +1632,7 @@ void UFG::UIHKScreenHud::PingMinimap(void)
     v2 = v0 + 1;
     v2->mNext = v2;
     v2[1].mNext = v2;
-    v1->vfptr = (UFG::UIScreenInvokeVtbl *)&UFG::UIScreenInvoke::`vftable';
+    v1->vfptr = (UFG::UIScreenInvokeVtbl *)&UFG::UIScreenInvoke::`vftable;
     UFG::qString::qString(&v1->command, &customWorldMapCaption);
   }
   else
@@ -2035,7 +2035,7 @@ void __fastcall UFG::UIHKScreenHud::SetMinimapHighlight(UFG::UIHKScreenHud *this
     v2 = this->mRenderable->m_movie.pObject;
     if ( v2 )
     {
-      `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       if ( (v5 >> 6) & 1 )
       {
         (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v4 + 16i64))(v4, &ptr, v6);
@@ -2051,7 +2051,7 @@ void __fastcall UFG::UIHKScreenHud::SetMinimapHighlight(UFG::UIHKScreenHud *this
       v9 = 6;
       v10 = "mc_HealthBar_highlight";
       Scaleform::GFx::Movie::Invoke(v2, "UIHighlight_Init", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-      `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+      `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     }
   }
 }
@@ -2132,7 +2132,7 @@ void __fastcall UFG::UIHKScreenHud::SetSocialAwardMedal(UFG::UIHKScreenHud *this
           v40 = "$HUD_SOCIAL_AWARDBRONZE";
           v41 = "$HUD_SOCIAL_AWARDSILVER";
           v42 = "$HUD_SOCIAL_AWARDGOLD";
-          `eh vector constructor iterator'(&ptr, 0x30ui64, 5, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+          `eh vector constructor iterator(&ptr, 0x30ui64, 5, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
           if ( (v21 >> 6) & 1 )
           {
             (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v20 + 16i64))(v20, &ptr, v22);
@@ -2176,7 +2176,7 @@ void __fastcall UFG::UIHKScreenHud::SetSocialAwardMedal(UFG::UIHKScreenHud *this
           Scaleform::GFx::Movie::Invoke(v10, "StatGame_SetStatAward", 0i64, (Scaleform::GFx::Value *)&ptr, 5u);
           v8->mStatInfoTimer = 5.0;
           v8->mStatSocialAwardActive = 1;
-          `eh vector destructor iterator'(&ptr, 0x30ui64, 5, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+          `eh vector destructor iterator(&ptr, 0x30ui64, 5, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
           UFG::qString::~qString(&v44);
         }
       }
@@ -2254,7 +2254,7 @@ void __fastcall UFG::UIHKScreenHud::SetStatGameInfo(UFG::UIHKScreenHud *this, co
             UFG::qString::qString(&v42);
             UFG::qString::Format(&v43, "%s: %s", v16, v6);
             UFG::qString::Format(&v42, "%s: %s", v17, leaderscore);
-            `eh vector constructor iterator'(
+            `eh vector constructor iterator(
               &ptr,
               0x30ui64,
               5,
@@ -2309,7 +2309,7 @@ void __fastcall UFG::UIHKScreenHud::SetStatGameInfo(UFG::UIHKScreenHud *this, co
                   0i64);
               v9->mStatGameInfoActive = 1;
             }
-            `eh vector destructor iterator'(
+            `eh vector destructor iterator(
               &ptr,
               0x30ui64,
               5,
@@ -2403,7 +2403,7 @@ void __fastcall UFG::UIHKScreenHud::SetStatGameBeatHim(UFG::UIHKScreenHud *this,
             v11 = UFG::UI::LocalizeText("LEADERBOARD_YOU_BEAT");
             UFG::qString::qString(&v22);
             UFG::qString::Format(&v22, "%s: %s", v11, v4);
-            `eh vector constructor iterator'(
+            `eh vector constructor iterator(
               &ptr,
               0x30ui64,
               2,
@@ -2424,7 +2424,7 @@ void __fastcall UFG::UIHKScreenHud::SetStatGameBeatHim(UFG::UIHKScreenHud *this,
             v19 = 6;
             v20 = v3;
             Scaleform::GFx::Movie::Invoke(v7, "StatGame_SetYouBeatHimInfo", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-            `eh vector destructor iterator'(
+            `eh vector destructor iterator(
               &ptr,
               0x30ui64,
               2,
@@ -2496,7 +2496,7 @@ void __fastcall UFG::UIHKScreenHud::SetStatGameFinalScore(UFG::UIHKScreenHud *th
         {
           if ( !v7->mStatSocialAwardActive )
           {
-            `eh vector constructor iterator'(
+            `eh vector constructor iterator(
               &ptr,
               0x30ui64,
               4,
@@ -2553,7 +2553,7 @@ void __fastcall UFG::UIHKScreenHud::SetStatGameFinalScore(UFG::UIHKScreenHud *th
             v7->mStatInfoTimer = 5.0;
             UFG::qString::~qString(&v34);
             UFG::qString::~qString(&v36);
-            `eh vector destructor iterator'(
+            `eh vector destructor iterator(
               &ptr,
               0x30ui64,
               4,

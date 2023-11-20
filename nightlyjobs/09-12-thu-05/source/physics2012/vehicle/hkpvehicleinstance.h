@@ -13,9 +13,9 @@ void __fastcall hkpVehicleInstance::hkpVehicleInstance(hkpVehicleInstance *this,
   v8 = f.m_finishing;
   v2 = this;
   v3 = &this->m_name;
-  v3[-5].m_stringAndFlag = (const char *)&hkpAction::`vftable';
+  v3[-5].m_stringAndFlag = (const char *)&hkpAction::`vftable;
   hkStringPtr::hkStringPtr(v3, f);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpVehicleInstance::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpVehicleInstance::`vftable;
   if ( v8 && !v2->m_vehicleSimulation )
   {
     v4 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);

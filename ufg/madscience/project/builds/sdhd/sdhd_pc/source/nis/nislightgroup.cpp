@@ -52,12 +52,12 @@ void __fastcall NISLightGroup::~NISLightGroup(NISLightGroup *this)
   v3 = v1->mSimObject.m_pPointer;
   if ( v3 )
     UFG::Simulation::DestroySimObject(&UFG::gSim, v3);
-  v4 = `UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result )
+  v4 = `UFG::qGetResourceInventory<UFG::RigResource>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::RigResource>::`2::result )
   {
     v5 = UFG::qResourceWarehouse::Instance();
     v4 = UFG::qResourceWarehouse::GetInventory(v5, 0x39BC0A7Eu);
-    `UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result = v4;
+    `UFG::qGetResourceInventory<UFG::RigResource>::`2::result = v4;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mRigResource.mPrev, v4);
   UFG::qResourceHandle::~qResourceHandle((UFG::qResourceHandle *)&v1->mRigResource.mPrev);
@@ -136,12 +136,12 @@ void __fastcall NISLightGroup::Play(NISLightGroup *this)
       v3 = UFG::qStringHash32(result.mData, result.mStringHash32 | v2);
       result.mStringHash32 = v3;
     }
-    v4 = `UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result )
+    v4 = `UFG::qGetResourceInventory<UFG::RigResource>::`2::result;
+    if ( !`UFG::qGetResourceInventory<UFG::RigResource>::`2::result )
     {
       v5 = UFG::qResourceWarehouse::Instance();
       v4 = UFG::qResourceWarehouse::GetInventory(v5, 0x39BC0A7Eu);
-      `UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result = v4;
+      `UFG::qGetResourceInventory<UFG::RigResource>::`2::result = v4;
     }
     UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v1->mRigResource.mPrev, 0x39BC0A7Eu, v3, v4);
     if ( v1->mRigResource.mData )

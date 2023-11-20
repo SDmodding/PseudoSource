@@ -39,8 +39,8 @@ void __fastcall InteractionPointInteractWithBestTrack::InteractionPointInteractW
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, InteractionPointInteractWithBestTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<InteractionPointInteractWithBestTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&InteractionPointInteractWithBestTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<InteractionPointInteractWithBestTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&InteractionPointInteractWithBestTrack::`vftable;
 }
 
 // File Line: 59
@@ -62,8 +62,8 @@ void __fastcall InteractionPointSetupTrack::InteractionPointSetupTrack(Interacti
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, InteractionPointSetupTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<InteractionPointSetupTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&InteractionPointSetupTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<InteractionPointSetupTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&InteractionPointSetupTrack::`vftable;
   *(_WORD *)&v1->m_eTargetType.mValue = 325;
   v1->m_eInteractionUpdate.mValue = 0;
   v1->m_fDistance = 0.0;
@@ -90,8 +90,8 @@ void __fastcall InteractionPointActivateTrack::InteractionPointActivateTrack(Int
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, InteractionPointActivateTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<InteractionPointActivateTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&InteractionPointActivateTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<InteractionPointActivateTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&InteractionPointActivateTrack::`vftable;
   *(_WORD *)&v1->m_eTargetType.mValue = 70;
 }
 
@@ -114,8 +114,8 @@ void __fastcall InteractionPointDeactivateTrack::InteractionPointDeactivateTrack
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, InteractionPointDeactivateTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<InteractionPointDeactivateTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&InteractionPointDeactivateTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<InteractionPointDeactivateTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&InteractionPointDeactivateTrack::`vftable;
   v1->m_eTargetType.mValue = 70;
 }
 
@@ -149,8 +149,8 @@ void __fastcall POIEnableChildTrack::POIEnableChildTrack(POIEnableChildTrack *th
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, POIEnableChildTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<POIEnableChildTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&POIEnableChildTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<POIEnableChildTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&POIEnableChildTrack::`vftable;
   v1->m_ChildName.mOffset = 1i64;
   BinString::Set(&v1->m_ChildName, &customWorldMapCaption);
   v1->m_Index = 0;

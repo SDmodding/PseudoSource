@@ -22,7 +22,7 @@ CAkActionTrigger *__fastcall CAkActionTrigger::Create(AkActionType in_eActionTyp
   if ( result )
   {
     CAkAction::CAkAction((CAkAction *)&result->vfptr, v2, v3);
-    v5->vfptr = (CAkIndexableVtbl *)&CAkActionTrigger::`vftable';
+    v5->vfptr = (CAkIndexableVtbl *)&CAkActionTrigger::`vftable;
     CAkAction::AddToIndex((CAkAction *)&v5->vfptr);
     result = v5;
   }

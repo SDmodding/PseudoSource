@@ -112,7 +112,7 @@ void __fastcall hkaiVelocityCandidateGenerator::generateCandidate(hkaiVelocityCa
     v24 = _mm_cvtepi32_ps(_mm_srli_epi32(v23, 0x10u));
     v25 = _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v23, 0x10u), 0x10u));
     v26.m_quad = (__m128)this->m_right;
-    v27 = _mm_add_ps(_mm_mul_ps(v24, (__m128)`hkIntVector::convertU32ToF32'::`2'::two16), v25);
+    v27 = _mm_add_ps(_mm_mul_ps(v24, (__m128)`hkIntVector::convertU32ToF32::`2::two16), v25);
     v28 = _mm_cvtepi32_ps(_mm_srli_epi32(v22, 0x10u));
     v29 = _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v22, 0x10u), 0x10u));
     v30 = _mm_mul_ps(
@@ -122,7 +122,7 @@ void __fastcall hkaiVelocityCandidateGenerator::generateCandidate(hkaiVelocityCa
     v32 = _mm_mul_ps(
             _mm_add_ps(
               _mm_mul_ps(
-                _mm_add_ps(_mm_mul_ps(v28, (__m128)`hkIntVector::convertU32ToF32'::`2'::two16), v29),
+                _mm_add_ps(_mm_mul_ps(v28, (__m128)`hkIntVector::convertU32ToF32::`2::two16), v29),
                 (__m128)xmmword_141A71230),
               g_vectorfConstants[0]),
             this->m_maxSpeed.m_real);
@@ -203,7 +203,7 @@ hkSimdFloat32 *__fastcall hkaiVelocityCandidateGenerator::generateProgressScore(
               _mm_add_ps(
                 _mm_mul_ps(
                   _mm_cvtepi32_ps(_mm_srli_epi32(v23, 0x10u)),
-                  (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                  (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                 _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v23, 0x10u), 0x10u))),
               (__m128)xmmword_141A71230),
             g_vectorfConstants[0]);
@@ -212,7 +212,7 @@ hkSimdFloat32 *__fastcall hkaiVelocityCandidateGenerator::generateProgressScore(
               _mm_add_ps(
                 _mm_mul_ps(
                   _mm_cvtepi32_ps(_mm_srli_epi32(v22, 0x10u)),
-                  (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                  (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                 _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v22, 0x10u), 0x10u))),
               (__m128)xmmword_141A71230),
             g_vectorfConstants[0]);
@@ -258,7 +258,7 @@ hkSimdFloat32 *__fastcall hkaiVelocityCandidateGenerator::generateProgressScore(
   }
   v26 = v11;
   v27 = _mm_and_ps(
-          (__m128)`hkVector4f::getComponent'::`2'::indexToMask[v15],
+          (__m128)`hkVector4f::getComponent::`2::indexToMask[v15],
           _mm_mul_ps(_mm_add_ps(v18, v19), this->m_maxSpeed.m_real));
   v28 = _mm_or_ps(_mm_shuffle_ps(v27, v27, 78), v27);
   v11->m_real = _mm_or_ps(_mm_shuffle_ps(v28, v28, 177), v28);

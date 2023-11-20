@@ -114,8 +114,8 @@ void __fastcall CameraAnimationTrack::CameraAnimationTrack(CameraAnimationTrack 
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, CameraAnimationTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CameraAnimationTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CameraAnimationTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CameraAnimationTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CameraAnimationTrack::`vftable;
   v1->mAnimationPlayMode.mValue = 0;
   v1->mStartFrame = 0.0;
   v1->mEndFrame = 1.0;
@@ -145,8 +145,8 @@ void __fastcall CameraAnimationTrack::~CameraAnimationTrack(CameraAnimationTrack
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&CameraAnimationTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&CameraAnimationTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -157,7 +157,7 @@ void __fastcall CameraAnimationTrack::~CameraAnimationTrack(CameraAnimationTrack
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 303
@@ -179,8 +179,8 @@ void __fastcall CameraDOFTrack::CameraDOFTrack(CameraDOFTrack *this)
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, CameraDOFTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CameraDOFTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CameraDOFTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CameraDOFTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CameraDOFTrack::`vftable;
   v1->rFocalRange = 10.0;
   v1->rNearRange = 1.0;
   v1->rFarRange = 10.0;
@@ -229,8 +229,8 @@ void __fastcall SubjectFollowOverrideChooseTrack::SubjectFollowOverrideChooseTra
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, SubjectFollowOverrideChooseTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<SubjectFollowOverrideChooseTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SubjectFollowOverrideChooseTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<SubjectFollowOverrideChooseTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&SubjectFollowOverrideChooseTrack::`vftable;
   v1->mFollowContextLeftOverride.mOffset = 1i64;
   BinString::Set(&v1->mFollowContextLeftOverride, &customWorldMapCaption);
   v1->mFollowContextRightOverride.mOffset = 1i64;
@@ -251,8 +251,8 @@ void __fastcall SubjectFollowOverrideChooseTrack::SubjectFollowOverrideChooseTra
 
   v2 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, flag);
-  v2->vfptr = (Expression::IMemberMapVtbl *)&Track<SubjectFollowOverrideChooseTask>::`vftable';
-  v2->vfptr = (Expression::IMemberMapVtbl *)&SubjectFollowOverrideChooseTrack::`vftable';
+  v2->vfptr = (Expression::IMemberMapVtbl *)&Track<SubjectFollowOverrideChooseTask>::`vftable;
+  v2->vfptr = (Expression::IMemberMapVtbl *)&SubjectFollowOverrideChooseTrack::`vftable;
 }
 
 // File Line: 432
@@ -274,8 +274,8 @@ void __fastcall CameraFollowGotoTrack::CameraFollowGotoTrack(CameraFollowGotoTra
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, CameraFollowGotoTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CameraFollowGotoTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CameraFollowGotoTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CameraFollowGotoTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CameraFollowGotoTrack::`vftable;
   v1->rGotoRise = 1.0;
   v1->rGotoRiseRate = 2.5;
   v1->rGotoRisePatience = 1.0;
@@ -308,8 +308,8 @@ void __fastcall CameraFollowTargetTrack::CameraFollowTargetTrack(CameraFollowTar
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, CameraFollowTargetTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CameraFollowTargetTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CameraFollowTargetTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CameraFollowTargetTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CameraFollowTargetTrack::`vftable;
   v1->m_TargetType = 1;
   v1->mFollowBoneName.mUID = -1;
 }
@@ -333,8 +333,8 @@ void __fastcall CameraSetSniperModeTrack::CameraSetSniperModeTrack(CameraSetSnip
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, CameraSetSniperModeTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CameraSetSniperModeTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CameraSetSniperModeTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CameraSetSniperModeTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CameraSetSniperModeTrack::`vftable;
   v1->m_Enabled = 0;
 }
 

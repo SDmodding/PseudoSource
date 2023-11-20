@@ -63,7 +63,7 @@ void __fastcall finishLoadedObjecthkLocalFrameGroup(void *p, int finishing)
   if ( p )
   {
     v2 = (hkStringPtr *)((char *)p + 16);
-    v2[-2].m_stringAndFlag = (const char *)&hkLocalFrameGroup::`vftable';
+    v2[-2].m_stringAndFlag = (const char *)&hkLocalFrameGroup::`vftable;
     hkStringPtr::hkStringPtr(v2, (hkFinishLoadedObjectFlag)finishing);
   }
 }
@@ -82,7 +82,7 @@ void **__fastcall getVtablehkLocalFrameGroup()
   hkStringPtr v1; // [rsp+30h] [rbp-18h]
 
   hkStringPtr::hkStringPtr(&v1, 0);
-  return &hkLocalFrameGroup::`vftable';
+  return &hkLocalFrameGroup::`vftable;
 }
 
 // File Line: 123
@@ -138,7 +138,7 @@ void __fastcall finishLoadedObjecthkSimpleLocalFrame(void *p, int finishing)
   if ( p )
   {
     v2 = (hkStringPtr *)((char *)p + 112);
-    v2[-14].m_stringAndFlag = (const char *)&hkSimpleLocalFrame::`vftable';
+    v2[-14].m_stringAndFlag = (const char *)&hkSimpleLocalFrame::`vftable;
     hkStringPtr::hkStringPtr(v2, (hkFinishLoadedObjectFlag)finishing);
   }
 }
@@ -157,7 +157,7 @@ void **__fastcall getVtablehkSimpleLocalFrame()
   hkStringPtr v1; // [rsp+90h] [rbp-18h]
 
   hkStringPtr::hkStringPtr(&v1, 0);
-  return &hkSimpleLocalFrame::`vftable';
+  return &hkSimpleLocalFrame::`vftable;
 }
 
 // File Line: 195

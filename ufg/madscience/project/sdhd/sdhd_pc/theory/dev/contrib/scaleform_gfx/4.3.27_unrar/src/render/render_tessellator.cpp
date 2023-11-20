@@ -2,8 +2,8 @@
 // RVA: 0x945A00
 void __fastcall Scaleform::Render::Tessellator::Tessellator(Scaleform::Render::Tessellator *this, Scaleform::Render::LinearHeap *heap1, Scaleform::Render::LinearHeap *heap2)
 {
-  this->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable';
-  this->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::Tessellator::`vftable';
+  this->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable;
+  this->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::Tessellator::`vftable;
   this->pHeap1 = heap1;
   this->pHeap2 = heap2;
   *(_QWORD *)&this->FillRule = 0i64;

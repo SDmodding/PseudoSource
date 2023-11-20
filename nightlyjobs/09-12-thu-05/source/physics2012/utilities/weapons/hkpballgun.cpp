@@ -13,7 +13,7 @@ void __fastcall hkpBallGun::hkpBallGun(hkpBallGun *this, int numBullets)
   v3->m_bulletOffsetFromCenter = 0i64;
   v3->m_bulletRadius = 0.2;
   v3->m_bulletVelocity = 40.0;
-  v3->vfptr = (hkBaseObjectVtbl *)&hkpBallGun::`vftable';
+  v3->vfptr = (hkBaseObjectVtbl *)&hkpBallGun::`vftable;
   v3->m_bulletMass = 50.0;
   v3->m_damageMultiplier = 50.0;
   v3->m_maxBulletsInWorld = v2;
@@ -45,7 +45,7 @@ void __fastcall hkpBallGun::~hkpBallGun(hkpBallGun *this)
   hkBool result; // [rsp+30h] [rbp+8h]
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpBallGun::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpBallGun::`vftable;
   while ( v1->m_addedBodies->m_elementsInUse )
   {
     v2 = v1->m_addedBodies;

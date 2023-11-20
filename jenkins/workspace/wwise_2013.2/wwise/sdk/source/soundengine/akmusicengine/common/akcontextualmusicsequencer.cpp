@@ -4,14 +4,14 @@ void __fastcall CAkContextualMusicSequencer::CAkContextualMusicSequencer(CAkCont
 {
   this->m_pFirst = 0i64;
   this->m_pLast = 0i64;
-  this->vfptr = (CAkContextualMusicSequencerVtbl *)&CAkContextualMusicSequencer::`vftable';
+  this->vfptr = (CAkContextualMusicSequencerVtbl *)&CAkContextualMusicSequencer::`vftable;
 }
 
 // File Line: 35
 // RVA: 0xAB4140
 void __fastcall CAkContextualMusicSequencer::~CAkContextualMusicSequencer(CAkContextualMusicSequencer *this)
 {
-  this->vfptr = (CAkContextualMusicSequencerVtbl *)&CAkContextualMusicSequencer::`vftable';
+  this->vfptr = (CAkContextualMusicSequencerVtbl *)&CAkContextualMusicSequencer::`vftable;
   this->m_pFirst = 0i64;
   this->m_pLast = 0i64;
 }

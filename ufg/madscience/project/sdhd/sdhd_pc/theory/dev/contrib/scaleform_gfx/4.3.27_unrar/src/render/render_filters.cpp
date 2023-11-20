@@ -30,7 +30,7 @@ Scaleform::Render::BlurFilterImpl *__fastcall Scaleform::Render::BlurFilter::Clo
   if ( !v5 )
     return 0i64;
   Scaleform::Render::BlurFilterImpl::BlurFilterImpl(v5, 0, &v4->Params);
-  v6->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::BlurFilter::`vftable';
+  v6->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::BlurFilter::`vftable;
   return v6;
 }
 
@@ -90,7 +90,7 @@ Scaleform::Render::BlurFilterImpl *__fastcall Scaleform::Render::GlowFilter::Clo
   if ( !v5 )
     return 0i64;
   Scaleform::Render::BlurFilterImpl::BlurFilterImpl(v5, Filter_Glow, &v4->Params);
-  v6->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::GlowFilter::`vftable';
+  v6->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::GlowFilter::`vftable;
   return v6;
 }
 
@@ -151,7 +151,7 @@ void __fastcall Scaleform::Render::GradientFilter::GradientFilter(Scaleform::Ren
   v8 = gradient;
   v9 = this;
   Scaleform::Render::BlurFilterImpl::BlurFilterImpl((Scaleform::Render::BlurFilterImpl *)&this->vfptr, type);
-  v9->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::GradientFilter::`vftable';
+  v9->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::GradientFilter::`vftable;
   v9->GradientImage.pObject = 0i64;
   v9->Params.BlurX = blurx * 20.0;
   v9->Params.BlurY = blury * 20.0;
@@ -179,7 +179,7 @@ void __fastcall Scaleform::Render::GradientFilter::GradientFilter(Scaleform::Ren
 
   v5 = this;
   Scaleform::Render::BlurFilterImpl::BlurFilterImpl((Scaleform::Render::BlurFilterImpl *)&this->vfptr, type, params);
-  v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::GradientFilter::`vftable';
+  v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::GradientFilter::`vftable;
   v5->GradientImage.pObject = 0i64;
   v5->Angle = angle;
   v5->Distance = dist * 20.0;
@@ -222,15 +222,15 @@ bool __fastcall Scaleform::Render::GradientFilter::IsContributing(Scaleform::Ren
 // RVA: 0x9396E0
 void __fastcall Scaleform::Render::ColorMatrixFilter::ColorMatrixFilter(Scaleform::Render::ColorMatrixFilter *this)
 {
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::Filter,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Filter::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::Filter,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Filter::`vftable;
   this->Type = 8;
   this->Frozen = 0;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ColorMatrixFilter::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ColorMatrixFilter::`vftable;
   *(_OWORD *)this->MatrixData = *(_OWORD *)ColorMatrix_Identity;
   *(_OWORD *)&this->MatrixData[4] = xmmword_1420BB580;
   *(_OWORD *)&this->MatrixData[8] = xmmword_1420BB590;
@@ -317,15 +317,15 @@ Scaleform::Render::Filter *__fastcall Scaleform::Render::CacheAsBitmapFilter::Cl
                                           24i64);
   if ( !result )
     return 0i64;
-  result->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  result->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   result->RefCount = 1;
-  result->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  result->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  result->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::Filter,2>::`vftable';
-  result->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Filter::`vftable';
+  result->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  result->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  result->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::Filter,2>::`vftable;
+  result->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Filter::`vftable;
   result->Type = 11;
   result->Frozen = 0;
-  result->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::CacheAsBitmapFilter::`vftable';
+  result->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::CacheAsBitmapFilter::`vftable;
   return result;
 }
 
@@ -343,15 +343,15 @@ void __fastcall Scaleform::Render::DisplacementMapFilter::DisplacementMapFilter(
   v10 = (float *)mapPoint;
   v11 = mapBitmap;
   v12 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::Filter,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Filter::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::Filter,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Filter::`vftable;
   this->Type = 10;
   this->Frozen = 0;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::DisplacementMapFilter::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::DisplacementMapFilter::`vftable;
   if ( mapBitmap )
     ((void (__fastcall *)(Scaleform::Render::Image *))mapBitmap->vfptr[1].__vecDelDtor)(mapBitmap);
   v12->DisplacementMap.pObject = v11;
@@ -420,12 +420,12 @@ void __fastcall Scaleform::Render::FilterSet::FilterSet(Scaleform::Render::Filte
 {
   Scaleform::Array<Scaleform::Ptr<Scaleform::Render::Filter>,2,Scaleform::ArrayDefaultPolicy> *v2; // [rsp+48h] [rbp+10h]
 
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::FilterSet,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::FilterSet::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::FilterSet,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::FilterSet::`vftable;
   v2 = &this->Filters;
   *(_OWORD *)&v2->Data.Data = 0ui64;
   v2->Data.Policy.Capacity = 0i64;
@@ -443,12 +443,12 @@ void __fastcall Scaleform::Render::FilterSet::~FilterSet(Scaleform::Render::Filt
   Scaleform::Render::CacheAsBitmapFilter *v2; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::FilterSet::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::FilterSet::`vftable;
   v2 = this->pCacheAsBitmapFilter.pObject;
   if ( v2 && !_InterlockedDecrement(&v2->RefCount) && v2 )
     v2->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v2->vfptr, 1u);
   Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::Render::Filter>,Scaleform::AllocatorGH<Scaleform::Ptr<Scaleform::Render::Filter>,2>,Scaleform::ArrayDefaultPolicy>::~ArrayDataBase<Scaleform::Ptr<Scaleform::Render::Filter>,Scaleform::AllocatorGH<Scaleform::Ptr<Scaleform::Render::Filter>,2>,Scaleform::ArrayDefaultPolicy>((Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::Render::Filter>,Scaleform::AllocatorGH<Scaleform::Ptr<Scaleform::Render::Filter>,2>,Scaleform::ArrayDefaultPolicy> *)&v1->Filters.Data.Data);
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
 }
 
 // File Line: 252
@@ -531,15 +531,15 @@ void __fastcall Scaleform::Render::FilterSet::SetCacheAsBitmap(Scaleform::Render
                24i64);
         if ( v3 )
         {
-          *(_QWORD *)v3 = &Scaleform::RefCountImplCore::`vftable';
+          *(_QWORD *)v3 = &Scaleform::RefCountImplCore::`vftable;
           *(_DWORD *)(v3 + 8) = 1;
-          *(_QWORD *)v3 = &Scaleform::RefCountImpl::`vftable';
-          *(_QWORD *)v3 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-          *(_QWORD *)v3 = &Scaleform::RefCountBase<Scaleform::Render::Filter,2>::`vftable';
-          *(_QWORD *)v3 = &Scaleform::Render::Filter::`vftable';
+          *(_QWORD *)v3 = &Scaleform::RefCountImpl::`vftable;
+          *(_QWORD *)v3 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+          *(_QWORD *)v3 = &Scaleform::RefCountBase<Scaleform::Render::Filter,2>::`vftable;
+          *(_QWORD *)v3 = &Scaleform::Render::Filter::`vftable;
           *(_DWORD *)(v3 + 16) = 11;
           *(_BYTE *)(v3 + 20) = 0;
-          *(_QWORD *)v3 = &Scaleform::Render::CacheAsBitmapFilter::`vftable';
+          *(_QWORD *)v3 = &Scaleform::Render::CacheAsBitmapFilter::`vftable;
         }
         else
         {
@@ -587,12 +587,12 @@ Scaleform::Render::FilterSet *__fastcall Scaleform::Render::FilterSet::Clone(Sca
   v6 = ((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))v3->vfptr->Alloc)(v3, 56i64);
   if ( v6 )
   {
-    *(_QWORD *)v6 = &Scaleform::RefCountImplCore::`vftable';
+    *(_QWORD *)v6 = &Scaleform::RefCountImplCore::`vftable;
     *(_DWORD *)(v6 + 8) = 1;
-    *(_QWORD *)v6 = &Scaleform::RefCountImpl::`vftable';
-    *(_QWORD *)v6 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-    *(_QWORD *)v6 = &Scaleform::RefCountBase<Scaleform::Render::FilterSet,2>::`vftable';
-    *(_QWORD *)v6 = &Scaleform::Render::FilterSet::`vftable';
+    *(_QWORD *)v6 = &Scaleform::RefCountImpl::`vftable;
+    *(_QWORD *)v6 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+    *(_QWORD *)v6 = &Scaleform::RefCountBase<Scaleform::Render::FilterSet,2>::`vftable;
+    *(_QWORD *)v6 = &Scaleform::Render::FilterSet::`vftable;
     v7 = (_QWORD *)(v6 + 16);
     v8 = 0i64;
     *v7 = 0i64;

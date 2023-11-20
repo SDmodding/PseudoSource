@@ -2,6 +2,6 @@
 // RVA: 0xC8D990
 void __fastcall hkcdShape::hkcdShape(hkcdShape *this, hkFinishLoadedObjectFlag flag)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkcdShape::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkcdShape::`vftable;
 }
 

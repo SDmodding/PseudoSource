@@ -13,10 +13,10 @@ void __fastcall UFG::EvtEntityDied::EvtEntityDied(UFG::EvtEntityDied *this, cons
   v5 = (UFG::qNode<UFG::Event,UFG::Event> *)&this->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  this->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+  this->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
   this->m_NamePTR = name;
   this->m_EventUID = UFG::qStringHash32(name, 0xFFFFFFFF);
-  v4->vfptr = (UFG::EventVtbl *)&UFG::EvtEntityDied::`vftable';
+  v4->vfptr = (UFG::EventVtbl *)&UFG::EvtEntityDied::`vftable;
   v6 = &v4->pSimObject;
   v6->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v6->mPrev;
   v6->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v6->mPrev;

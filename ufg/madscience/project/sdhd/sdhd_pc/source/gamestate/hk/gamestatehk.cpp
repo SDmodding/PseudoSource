@@ -28,8 +28,8 @@ void __fastcall UFG::CreateAndRegisterGameStates(UFG *this)
   if ( v1 )
   {
     UFG::GameState::GameState((UFG::GameState *)v1, "FrontEnd", uidGameStateFE_3);
-    v2->vfptr = (UFG::GameStateVtbl *)&GameStateHKBase::`vftable';
-    v2->vfptr = (UFG::GameStateVtbl *)&UFG::GameStateFE::`vftable';
+    v2->vfptr = (UFG::GameStateVtbl *)&GameStateHKBase::`vftable;
+    v2->vfptr = (UFG::GameStateVtbl *)&UFG::GameStateFE::`vftable;
   }
   else
   {
@@ -41,8 +41,8 @@ void __fastcall UFG::CreateAndRegisterGameStates(UFG *this)
   if ( v3 )
   {
     UFG::GameState::GameState((UFG::GameState *)v3, "Load Game", uidGameStateLoadGame_3);
-    v4->mNext = (UFG::allocator::free_link *)&GameStateHKBase::`vftable';
-    v4->mNext = (UFG::allocator::free_link *)&UFG::GameStateLoadGame::`vftable';
+    v4->mNext = (UFG::allocator::free_link *)&GameStateHKBase::`vftable;
+    v4->mNext = (UFG::allocator::free_link *)&UFG::GameStateLoadGame::`vftable;
     LODWORD(v4[13].mNext) = 0;
   }
   else
@@ -55,8 +55,8 @@ void __fastcall UFG::CreateAndRegisterGameStates(UFG *this)
   if ( v5 )
   {
     UFG::GameState::GameState((UFG::GameState *)v5, "In Game", uidGameStateInGame_3);
-    v6->mNext = (UFG::allocator::free_link *)&GameStateHKBase::`vftable';
-    v6->mNext = (UFG::allocator::free_link *)&UFG::GameStateInGame::`vftable';
+    v6->mNext = (UFG::allocator::free_link *)&GameStateHKBase::`vftable;
+    v6->mNext = (UFG::allocator::free_link *)&UFG::GameStateInGame::`vftable;
     LOBYTE(v6[13].mNext) = 1;
     *(UFG::allocator::free_link **)((char *)&v6[13].mNext + 4) = 0i64;
     v7 = UFG::qMalloc(0xB0ui64, "GameSetupStruct", 0i64);
@@ -76,8 +76,8 @@ void __fastcall UFG::CreateAndRegisterGameStates(UFG *this)
   if ( v9 )
   {
     UFG::GameState::GameState((UFG::GameState *)v9, "Change Location", uidGameStateChangeLocation_3);
-    v10->mNext = (UFG::allocator::free_link *)&GameStateHKBase::`vftable';
-    v10->mNext = (UFG::allocator::free_link *)&UFG::GameStateChangeLocation::`vftable';
+    v10->mNext = (UFG::allocator::free_link *)&GameStateHKBase::`vftable;
+    v10->mNext = (UFG::allocator::free_link *)&UFG::GameStateChangeLocation::`vftable;
     LODWORD(v10[13].mNext) = 0;
     BYTE4(v10[13].mNext) = 1;
   }
@@ -91,8 +91,8 @@ void __fastcall UFG::CreateAndRegisterGameStates(UFG *this)
   if ( v11 )
   {
     UFG::GameState::GameState((UFG::GameState *)v11, "Restore Checkpoint", uidGameStateRestoreCheckpoint_3);
-    v12->mNext = (UFG::allocator::free_link *)&GameStateHKBase::`vftable';
-    v12->mNext = (UFG::allocator::free_link *)&UFG::GameStateRestoreCheckpoint::`vftable';
+    v12->mNext = (UFG::allocator::free_link *)&GameStateHKBase::`vftable;
+    v12->mNext = (UFG::allocator::free_link *)&UFG::GameStateRestoreCheckpoint::`vftable;
     LODWORD(v12[13].mNext) = 0;
     BYTE4(v12[13].mNext) = 0;
   }
@@ -106,8 +106,8 @@ void __fastcall UFG::CreateAndRegisterGameStates(UFG *this)
   if ( v13 )
   {
     UFG::GameState::GameState((UFG::GameState *)v13, "Restore Checkpoint", uidGameStateUnloadGame_3);
-    v14->vfptr = (UFG::GameStateVtbl *)&GameStateHKBase::`vftable';
-    v14->vfptr = (UFG::GameStateVtbl *)&UFG::GameStateUnloadGame::`vftable';
+    v14->vfptr = (UFG::GameStateVtbl *)&GameStateHKBase::`vftable;
+    v14->vfptr = (UFG::GameStateVtbl *)&UFG::GameStateUnloadGame::`vftable;
   }
   else
   {
@@ -119,8 +119,8 @@ void __fastcall UFG::CreateAndRegisterGameStates(UFG *this)
   if ( v15 )
   {
     UFG::GameState::GameState((UFG::GameState *)v15, "Load Challenge", uidGameStateLoadChallenge_3);
-    v16->mNext = (UFG::allocator::free_link *)&GameStateHKBase::`vftable';
-    v16->mNext = (UFG::allocator::free_link *)&UFG::GameStateLoadChallenge::`vftable';
+    v16->mNext = (UFG::allocator::free_link *)&GameStateHKBase::`vftable;
+    v16->mNext = (UFG::allocator::free_link *)&UFG::GameStateLoadChallenge::`vftable;
     LODWORD(v16[13].mNext) = 0;
   }
   else
@@ -133,8 +133,8 @@ void __fastcall UFG::CreateAndRegisterGameStates(UFG *this)
   if ( v17 )
   {
     UFG::GameState::GameState((UFG::GameState *)v17, "Unload Challenge", uidGameStateUnloadChallenge_3);
-    v18->mNext = (UFG::allocator::free_link *)&GameStateHKBase::`vftable';
-    v18->mNext = (UFG::allocator::free_link *)&UFG::GameStateUnloadChallenge::`vftable';
+    v18->mNext = (UFG::allocator::free_link *)&GameStateHKBase::`vftable;
+    v18->mNext = (UFG::allocator::free_link *)&UFG::GameStateUnloadChallenge::`vftable;
     LODWORD(v18[13].mNext) = 0;
   }
   else
@@ -147,8 +147,8 @@ void __fastcall UFG::CreateAndRegisterGameStates(UFG *this)
   if ( v19 )
   {
     UFG::GameState::GameState((UFG::GameState *)v19, "Load NIS", uidGameStateLoadNIS_3);
-    v20->mNext = (UFG::allocator::free_link *)&GameStateHKBase::`vftable';
-    v20->mNext = (UFG::allocator::free_link *)&UFG::GameStateLoadNIS::`vftable';
+    v20->mNext = (UFG::allocator::free_link *)&GameStateHKBase::`vftable;
+    v20->mNext = (UFG::allocator::free_link *)&UFG::GameStateLoadNIS::`vftable;
     LODWORD(v20[13].mNext) = 1;
   }
   else

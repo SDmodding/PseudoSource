@@ -7,7 +7,7 @@ void __fastcall hkpReportContactMgr::hkpReportContactMgr(hkpReportContactMgr *th
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_type = 1;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpReportContactMgr::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpReportContactMgr::`vftable;
   v4 = bodyA->m_contactPointCallbackDelay;
   v5 = bodyB->m_contactPointCallbackDelay;
   this->m_world = sm;
@@ -22,7 +22,7 @@ void __fastcall hkpReportContactMgr::hkpReportContactMgr(hkpReportContactMgr *th
 // RVA: 0xD85570
 void __fastcall hkpReportContactMgr::~hkpReportContactMgr(hkpReportContactMgr *this)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 43
@@ -296,7 +296,7 @@ void __fastcall hkpReportContactMgr::Factory::Factory(hkpReportContactMgr::Facto
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_world = mgr;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpReportContactMgr::Factory::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpReportContactMgr::Factory::`vftable;
 }
 
 // File Line: 180

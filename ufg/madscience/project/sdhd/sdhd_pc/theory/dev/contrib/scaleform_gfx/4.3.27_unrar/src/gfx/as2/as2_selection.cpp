@@ -136,7 +136,7 @@ void __fastcall Scaleform::GFx::AS2::Selection::BroadcastOnSetFocus(Scaleform::G
         v21 = Scaleform::GFx::AS2::Environment::CreateConstString(v7, &result, "onSetFocus");
         v22 = ((_QWORD)((char *)v14->pCurrent - (char *)v14->pPageStart) >> 5) - 32 + 32 * v14->Pages.Data.Size;
         Scaleform::GFx::AS2::AsBroadcaster::BroadcastMessageWithCallback(v7, v9, v21, &pcallback);
-        pcallback.vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)&Scaleform::GFx::AS2::AsBroadcaster::InvokeCallback::`vftable';
+        pcallback.vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)&Scaleform::GFx::AS2::AsBroadcaster::InvokeCallback::`vftable;
         v23 = result.pNode;
         v24 = result.pNode->RefCount == 1;
         --v23->RefCount;

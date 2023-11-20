@@ -31,7 +31,7 @@ hkClass *__fastcall hkaiOverlapManagerSection::GeneratorData::staticClass()
 void __fastcall finishLoadedObjecthkaiOverlapManagerSectionGeneratorData(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiOverlapManagerSection::GeneratorData::`vftable';
+    *(_QWORD *)p = &hkaiOverlapManagerSection::GeneratorData::`vftable;
 }
 
 // File Line: 78
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkaiOverlapManagerSectionGeneratorData(void *
 // RVA: 0xBB6FB0
 void **__fastcall getVtablehkaiOverlapManagerSectionGeneratorData()
 {
-  return &hkaiOverlapManagerSection::GeneratorData::`vftable';
+  return &hkaiOverlapManagerSection::GeneratorData::`vftable;
 }
 
 // File Line: 104

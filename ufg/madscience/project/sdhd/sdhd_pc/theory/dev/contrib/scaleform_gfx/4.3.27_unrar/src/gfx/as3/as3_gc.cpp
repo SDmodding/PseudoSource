@@ -6,7 +6,7 @@ void __fastcall Scaleform::GFx::AS3::ASRefCountCollector::ASRefCountCollector(Sc
 
   v1 = this;
   Scaleform::GFx::AS3::RefCountCollector<328>::RefCountCollector<328>((Scaleform::GFx::AS3::RefCountCollector<328> *)&this->vfptr);
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS3::ASRefCountCollector::`vftable';
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS3::ASRefCountCollector::`vftable;
   v1->FrameCnt = 0;
   *(_QWORD *)&v1->PeakRootCount = 0i64;
   *(_QWORD *)&v1->LastCollectedRoots = 0i64;
@@ -382,7 +382,7 @@ void __fastcall Scaleform::GFx::AS3::GASRefCountBase::~GASRefCountBase(Scaleform
   Scaleform::GFx::AS3::GASRefCountBase *key; // [rsp+48h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::GASRefCountBase::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::GASRefCountBase::`vftable;
   if ( (this->RefCount >> 26) & 1 )
   {
     v2 = (Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::GFx::AS3::GASRefCountBase *,Scaleform::GFx::AS3::WeakProxy *,Scaleform::FixedSizeHash<Scaleform::GFx::AS3::GASRefCountBase *> >,Scaleform::HashNode<Scaleform::GFx::AS3::GASRefCountBase *,Scaleform::GFx::AS3::WeakProxy *,Scaleform::FixedSizeHash<Scaleform::GFx::AS3::GASRefCountBase *> >::NodeHashF,Scaleform::HashNode<Scaleform::GFx::AS3::GASRefCountBase *,Scaleform::GFx::AS3::WeakProxy *,Scaleform::FixedSizeHash<Scaleform::GFx::AS3::GASRefCountBase *> >::NodeAltHashF,Scaleform::AllocatorGH<Scaleform::GFx::AS3::GASRefCountBase *,2>,Scaleform::HashsetCachedNodeEntry<Scaleform::HashNode<Scaleform::GFx::AS3::GASRefCountBase *,Scaleform::GFx::AS3::WeakProxy *,Scaleform::FixedSizeHash<Scaleform::GFx::AS3::GASRefCountBase *> >,Scaleform::HashNode<Scaleform::GFx::AS3::GASRefCountBase *,Scaleform::GFx::AS3::WeakProxy *,Scaleform::FixedSizeHash<Scaleform::GFx::AS3::GASRefCountBase *> >::NodeHashF> > *)(this->pRCCRaw & 0xFFFFFFFFFFFFFFFCui64);
@@ -433,6 +433,6 @@ void __fastcall Scaleform::GFx::AS3::GASRefCountBase::~GASRefCountBase(Scaleform
     }
   }
 LABEL_17:
-  v1->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::RefCountBaseGC<328>::`vftable';
+  v1->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::RefCountBaseGC<328>::`vftable;
 }
 

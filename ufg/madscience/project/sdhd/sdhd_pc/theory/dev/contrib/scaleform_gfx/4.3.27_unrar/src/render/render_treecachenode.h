@@ -152,7 +152,7 @@ Scaleform::Render::Matrix4x4<float> *__fastcall Scaleform::Render::TransformArgs
   {
     v4 = (__m128 *)v2->pData;
     v5.m128_u64[0] = v4[1].m128_u64[0];
-    v6 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v;
+    v6 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v;
     v5.m128_u64[1] = v4[1].m128_u64[1];
     v7 = v4[2];
     v8.m128_u64[0] = v4[3].m128_u64[0];
@@ -172,9 +172,9 @@ Scaleform::Render::Matrix4x4<float> *__fastcall Scaleform::Render::TransformArgs
                          _mm_mul_ps(_mm_shuffle_ps(v11, v11, 85), v7),
                          _mm_mul_ps(_mm_shuffle_ps(v11, v11, 0), v5)),
                        _mm_mul_ps(_mm_shuffle_ps(v11, v11, 170), v8)),
-                     _mm_and_ps(v11, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v));
+                     _mm_and_ps(v11, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v));
     v16 = *((__m128 *)v10 + 4);
-    v17 = _mm_and_ps(v12, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v);
+    v17 = _mm_and_ps(v12, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v);
     LODWORD(v1->ViewProj.M[0][0]) = _mm_cvtsi128_si32(v15);
     v18 = (__m128i)_mm_add_ps(
                      _mm_add_ps(
@@ -292,7 +292,7 @@ void __fastcall Scaleform::Render::TreeCacheContainer::TreeCacheContainer(Scalef
 {
   Scaleform::Render::TreeCacheNode *v4; // rax
 
-  this->vfptr = (Scaleform::Render::TreeCacheNodeVtbl *)&Scaleform::Render::TreeCacheNode::`vftable';
+  this->vfptr = (Scaleform::Render::TreeCacheNodeVtbl *)&Scaleform::Render::TreeCacheNode::`vftable;
   this->pRoot = 0i64;
   this->pNode = pnode;
   this->pRenderer2D = prenderer2D;
@@ -307,7 +307,7 @@ void __fastcall Scaleform::Render::TreeCacheContainer::TreeCacheContainer(Scalef
   *(_QWORD *)&this->SortParentBounds.x2 = 0i64;
   this->pNext = 0i64;
   this->pPrev = 0i64;
-  this->vfptr = (Scaleform::Render::TreeCacheNodeVtbl *)&Scaleform::Render::TreeCacheContainer::`vftable';
+  this->vfptr = (Scaleform::Render::TreeCacheNodeVtbl *)&Scaleform::Render::TreeCacheContainer::`vftable;
   v4 = (Scaleform::Render::TreeCacheNode *)&this->SortParentBounds.x2;
   if ( this == (Scaleform::Render::TreeCacheContainer *)-112i64 )
     v4 = 0i64;
@@ -335,7 +335,7 @@ void __fastcall Scaleform::Render::TreeCacheRoot::TreeCacheRoot(Scaleform::Rende
     (Scaleform::Render::TreeNode *)&pnode->0,
     prenderer2D,
     flags);
-  v6->vfptr = (Scaleform::Render::TreeCacheNodeVtbl *)&Scaleform::Render::TreeCacheRoot::`vftable';
+  v6->vfptr = (Scaleform::Render::TreeCacheNodeVtbl *)&Scaleform::Render::TreeCacheRoot::`vftable;
   v6->pHAL = v5;
   *(_QWORD *)&v6->ViewCullRect.x1 = 0i64;
   *(_QWORD *)&v6->ViewCullRect.x2 = 0i64;
@@ -371,7 +371,7 @@ void __fastcall Scaleform::Render::TreeCacheRoot::~TreeCacheRoot(Scaleform::Rend
   Scaleform::Render::TreeCacheRoot *v1; // rbx
 
   v1 = this;
-  this->vfptr = (Scaleform::Render::TreeCacheNodeVtbl *)&Scaleform::Render::TreeCacheRoot::`vftable';
+  this->vfptr = (Scaleform::Render::TreeCacheNodeVtbl *)&Scaleform::Render::TreeCacheRoot::`vftable;
   if ( this->pPrev )
   {
     this->pPrev->pNext = this->pNext;

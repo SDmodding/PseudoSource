@@ -30,23 +30,23 @@ UFG::allocator::free_link *__fastcall UFG::SkookumMgr_Malloc(unsigned __int64 si
   UFG::allocator::free_link *result; // rax
   unsigned int v3; // eax
 
-  if ( `anonymous namespace'::gSkookumMgrMemoryModeLinear )
+  if ( `anonymous namespace::gSkookumMgrMemoryModeLinear )
   {
-    if ( `anonymous namespace'::gSkookumMgrMemoryLinearUsed + (unsigned int)size <= `anonymous namespace'::gSkookumMgrMemoryLinearBytes )
+    if ( `anonymous namespace::gSkookumMgrMemoryLinearUsed + (unsigned int)size <= `anonymous namespace::gSkookumMgrMemoryLinearBytes )
     {
-      result = (UFG::allocator::free_link *)((char *)`anonymous namespace'::gpSkookumMgrMemoryLinear
-                                           + `anonymous namespace'::gSkookumMgrMemoryLinearUsed);
-      `anonymous namespace'::gSkookumMgrMemoryLinearUsed += size;
+      result = (UFG::allocator::free_link *)((char *)`anonymous namespace::gpSkookumMgrMemoryLinear
+                                           + `anonymous namespace::gSkookumMgrMemoryLinearUsed);
+      `anonymous namespace::gSkookumMgrMemoryLinearUsed += size;
       return result;
     }
-    `anonymous namespace'::gSkookumMgrMemoryModeLinear = 0;
+    `anonymous namespace::gSkookumMgrMemoryModeLinear = 0;
     v3 = 0;
   }
   else
   {
-    v3 = `anonymous namespace'::gSkookumMgrMemoryPostLinearBytes;
+    v3 = `anonymous namespace::gSkookumMgrMemoryPostLinearBytes;
   }
-  `anonymous namespace'::gSkookumMgrMemoryPostLinearBytes = size + v3;
+  `anonymous namespace::gSkookumMgrMemoryPostLinearBytes = size + v3;
   return UFG::qMemoryPool::Allocate(&gSkookumMemoryPool, size, pAllocName, 0i64, 1u);
 }
 
@@ -55,10 +55,10 @@ UFG::allocator::free_link *__fastcall UFG::SkookumMgr_Malloc(unsigned __int64 si
 void __fastcall UFG::SkookumMgr_Free(void *pMemory)
 {
   if ( pMemory
-    && (!`anonymous namespace'::gpSkookumMgrMemoryLinear
-     || pMemory < `anonymous namespace'::gpSkookumMgrMemoryLinear
-     || pMemory >= (char *)`anonymous namespace'::gpSkookumMgrMemoryLinear
-                 + `anonymous namespace'::gSkookumMgrMemoryLinearBytes) )
+    && (!`anonymous namespace::gpSkookumMgrMemoryLinear
+     || pMemory < `anonymous namespace::gpSkookumMgrMemoryLinear
+     || pMemory >= (char *)`anonymous namespace::gpSkookumMgrMemoryLinear
+                 + `anonymous namespace::gSkookumMgrMemoryLinearBytes) )
   {
     UFG::qMemoryPool::Free(&gSkookumMemoryPool, pMemory);
   }
@@ -68,7 +68,7 @@ void __fastcall UFG::SkookumMgr_Free(void *pMemory)
 // RVA: 0x510460
 __int64 __fastcall UFG::SkookumMgr_SizeReq2Actual(unsigned int sizeRequested)
 {
-  if ( `anonymous namespace'::gSkookumMgrMemoryModeLinear )
+  if ( `anonymous namespace::gSkookumMgrMemoryModeLinear )
     return sizeRequested;
   if ( sizeRequested )
     return ((sizeRequested - 1) & 0xFFFFFFF0) + 16;
@@ -86,14 +86,14 @@ void __fastcall UFG::SkookumMgr_LinearAllocCallback(unsigned int bytesNeeded)
   if ( bytesNeeded )
   {
     v2 = UFG::qMemoryPool::Allocate(&gSkookumMemoryPool, bytesNeeded, "Skookum.static_code", 0i64, 1u);
-    `anonymous namespace'::gSkookumMgrMemoryLinearBytes = v1;
-    `anonymous namespace'::gSkookumMgrMemoryLinearUsed = 0;
-    `anonymous namespace'::gpSkookumMgrMemoryLinear = v2;
-    `anonymous namespace'::gSkookumMgrMemoryModeLinear = 1;
+    `anonymous namespace::gSkookumMgrMemoryLinearBytes = v1;
+    `anonymous namespace::gSkookumMgrMemoryLinearUsed = 0;
+    `anonymous namespace::gpSkookumMgrMemoryLinear = v2;
+    `anonymous namespace::gSkookumMgrMemoryModeLinear = 1;
   }
   else
   {
-    `anonymous namespace'::gSkookumMgrMemoryModeLinear = 0;
+    `anonymous namespace::gSkookumMgrMemoryModeLinear = 0;
   }
 }
 
@@ -563,12 +563,12 @@ SSInvokedDeferrableMethod *__fastcall UFG::SkookumMgr::RunExternalCodeBlock(SSCo
     v10 = SSParameters::get_or_create(&params_p);
     v9[2].mUID = qSymbol_External_Method_Call.mUID;
     *(_QWORD *)&v9[4].mUID = v7;
-    *(_QWORD *)&v9->mUID = &SSInvokableBase::`vftable';
+    *(_QWORD *)&v9->mUID = &SSInvokableBase::`vftable;
     *(_QWORD *)&v9[6].mUID = v10;
     if ( v10 )
       ++v10->i_ref_count;
-    *(_QWORD *)&v9->mUID = &SSMethodBase::`vftable';
-    *(_QWORD *)&v9->mUID = &SSMethod::`vftable';
+    *(_QWORD *)&v9->mUID = &SSMethodBase::`vftable;
+    *(_QWORD *)&v9->mUID = &SSMethod::`vftable;
     *(_QWORD *)&v9[8].mUID = v8;
   }
   else
@@ -580,7 +580,7 @@ SSInvokedDeferrableMethod *__fastcall UFG::SkookumMgr::RunExternalCodeBlock(SSCo
   if ( v11 )
   {
     SSInvokedDeferrableMethod::SSInvokedDeferrableMethod(v11, (SSObjectBase *)&v6->vfptr, (SSMethodBase *)v9);
-    v12->vfptr = (SSObjectBaseVtbl *)&SSIExternalMethodCallWrapper::`vftable';
+    v12->vfptr = (SSObjectBaseVtbl *)&SSIExternalMethodCallWrapper::`vftable;
     v12[1].vfptr = 0i64;
   }
   else

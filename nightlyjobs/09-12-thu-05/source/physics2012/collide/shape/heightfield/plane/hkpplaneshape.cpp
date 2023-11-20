@@ -6,7 +6,7 @@ void __fastcall hkpPlaneShape::hkpPlaneShape(hkpPlaneShape *this, hkFinishLoaded
 
   v2 = this;
   hkpShape::hkpShape((hkpShape *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpPlaneShape::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpPlaneShape::`vftable;
   v2->m_type.m_storage = 31;
 }
 
@@ -17,7 +17,7 @@ void __fastcall hkpPlaneShape::hkpPlaneShape(hkpPlaneShape *this, hkVector4f *pl
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   *(_DWORD *)&this->m_type.m_storage = 1055;
   this->m_userData = 0i64;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpPlaneShape::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpPlaneShape::`vftable;
   this->m_plane = (hkVector4f)plane->m_quad;
   this->m_aabbCenter.m_quad = _mm_mul_ps(_mm_add_ps(aabb->m_max.m_quad, aabb->m_min.m_quad), (__m128)xmmword_141A711B0);
   this->m_aabbHalfExtents.m_quad = _mm_mul_ps(
@@ -34,7 +34,7 @@ void __fastcall hkpPlaneShape::hkpPlaneShape(hkpPlaneShape *this, hkVector4f *di
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   *(_DWORD *)&this->m_type.m_storage = 1055;
   this->m_userData = 0i64;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpPlaneShape::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpPlaneShape::`vftable;
   v4 = _mm_mul_ps(center->m_quad, direction->m_quad);
   this->m_plane.m_quad = _mm_shuffle_ps(
                            direction->m_quad,

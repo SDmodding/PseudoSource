@@ -61,7 +61,7 @@ void __fastcall hkaiNavVolumeGraph::nextNode(hkaiNavVolumeGraph *this, int nid)
   v16 = _mm_mul_ps(
           v12[6],
           _mm_add_ps(
-            _mm_mul_ps(_mm_cvtepi32_ps(_mm_srli_epi32(v15, 0x10u)), (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+            _mm_mul_ps(_mm_cvtepi32_ps(_mm_srli_epi32(v15, 0x10u)), (__m128)`hkIntVector::convertU32ToF32::`2::two16),
             _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v15, 0x10u), 0x10u))));
   v17 = _mm_add_ps(v12[7], v6[7]);
   v18 = _mm_add_ps(
@@ -70,7 +70,7 @@ void __fastcall hkaiNavVolumeGraph::nextNode(hkaiNavVolumeGraph *this, int nid)
             _mm_add_ps(
               _mm_mul_ps(
                 _mm_cvtepi32_ps(_mm_srli_epi32(v14, 0x10u)),
-                (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                (__m128)`hkIntVector::convertU32ToF32::`2::two16),
               _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v14, 0x10u), 0x10u)))),
           v17);
   v19 = _mm_add_ps(v16, v17);
@@ -155,7 +155,7 @@ void __fastcall hkaiNavVolumeGraph::setAdjacentCachedCell(hkaiNavVolumeGraph *th
   v10 = _mm_mul_ps(
           v5[6],
           _mm_add_ps(
-            _mm_mul_ps(_mm_cvtepi32_ps(_mm_srli_epi32(v9, 0x10u)), (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+            _mm_mul_ps(_mm_cvtepi32_ps(_mm_srli_epi32(v9, 0x10u)), (__m128)`hkIntVector::convertU32ToF32::`2::two16),
             _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v9, 0x10u), 0x10u))));
   v11 = _mm_add_ps(v5[7], v2->m_translation.m_quad);
   v12.m_quad = _mm_add_ps(
@@ -164,7 +164,7 @@ void __fastcall hkaiNavVolumeGraph::setAdjacentCachedCell(hkaiNavVolumeGraph *th
                    _mm_add_ps(
                      _mm_mul_ps(
                        _mm_cvtepi32_ps(_mm_srli_epi32(v8, 0x10u)),
-                       (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                       (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                      _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v8, 0x10u), 0x10u)))),
                  v11);
   v13.m_quad = _mm_add_ps(v10, v11);

@@ -6,7 +6,7 @@ void __fastcall CAkActionDuck::CAkActionDuck(CAkActionDuck *this, AkActionType i
 
   v3 = this;
   CAkAction::CAkAction((CAkAction *)&this->vfptr, in_eActionType, in_ulID);
-  v3->vfptr = (CAkIndexableVtbl *)&CAkActionDuck::`vftable';
+  v3->vfptr = (CAkIndexableVtbl *)&CAkActionDuck::`vftable;
 }
 
 // File Line: 34

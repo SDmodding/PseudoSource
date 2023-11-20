@@ -12,12 +12,12 @@ hkReferencedObject *__fastcall hkDefaultClassNameRegistrycreate()
   if ( result )
   {
     *(_DWORD *)&result->m_memSizeAndFlags = 0x1FFFF;
-    result->vfptr = (hkBaseObjectVtbl *)&hkDynamicClassNameRegistry::`vftable';
+    result->vfptr = (hkBaseObjectVtbl *)&hkDynamicClassNameRegistry::`vftable;
     result[1].vfptr = (hkBaseObjectVtbl *)"hk_2013.2.0-r1";
     hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>(
       (hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator> *)&result[1].m_memSizeAndFlags,
       0);
-    v2->vfptr = (hkBaseObjectVtbl *)&hkDefaultClassNameRegistry::`vftable';
+    v2->vfptr = (hkBaseObjectVtbl *)&hkDefaultClassNameRegistry::`vftable;
     result = v2;
   }
   return result;

@@ -19,7 +19,7 @@ void __fastcall UFG::CharacterOccupantComponent::CharacterOccupantComponent(UFG:
   v5 = (UFG::qNode<UFG::CharacterOccupantComponent,UFG::_VehicleOccupantList> *)&v4->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CharacterOccupantComponent::`vftable';
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CharacterOccupantComponent::`vftable;
   UFG::RebindingComponentHandle<UFG::VehicleOccupantComponent,0>::RebindingComponentHandle<UFG::VehicleOccupantComponent,0>(&v4->mCurrentVOC);
   UFG::SimComponent::AddType(
     (UFG::SimComponent *)&v4->vfptr,
@@ -41,7 +41,7 @@ void __fastcall UFG::CharacterOccupantComponent::~CharacterOccupantComponent(UFG
   UFG::qNode<UFG::CharacterOccupantComponent,UFG::_VehicleOccupantList> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CharacterOccupantComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CharacterOccupantComponent::`vftable;
   v2 = (UFG::qNode<UFG::CharacterOccupantComponent,UFG::_VehicleOccupantList> *)&this->mPrev;
   v3 = this->mPrev;
   v4 = this->mNext;

@@ -7,12 +7,12 @@ void __fastcall Scaleform::Render::MatrixState::MatrixState(Scaleform::Render::M
 
   v2 = phal;
   v3 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,65>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::MatrixState,65>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::MatrixState::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,65>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::MatrixState,65>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::MatrixState::`vftable;
   *(_OWORD *)&this->View2D.M[0][0] = 0x3F800000ui64;
   this->View2D.M[1][0] = 0.0;
   *(_QWORD *)&this->View2D.M[1][1] = 1065353216i64;
@@ -98,12 +98,12 @@ void __fastcall Scaleform::Render::MatrixState::MatrixState(Scaleform::Render::M
   Scaleform::Render::MatrixState *v1; // rdi
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,65>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::MatrixState,65>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::MatrixState::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,65>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::MatrixState,65>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::MatrixState::`vftable;
   *(_OWORD *)&this->View2D.M[0][0] = 0x3F800000ui64;
   this->View2D.M[1][0] = 0.0;
   *(_QWORD *)&this->View2D.M[1][1] = 1065353216i64;
@@ -638,21 +638,21 @@ void __fastcall Scaleform::Render::MatrixState::recalculateUVPOC(Scaleform::Rend
               _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v19, v19, 85), v37), _mm_mul_ps(_mm_shuffle_ps(v19, v19, 0), Dst)),
               _mm_mul_ps(_mm_shuffle_ps(v19, v19, 170), v38)),
             _mm_mul_ps(_mm_shuffle_ps(v19, v19, 255), v39));
-    v30 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v;
+    v30 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v;
     v31 = (__m128i)_mm_add_ps(
                      _mm_add_ps(
                        _mm_add_ps(
                          _mm_mul_ps(_mm_shuffle_ps(v24, v24, 85), v26),
                          _mm_mul_ps(_mm_shuffle_ps(v24, v24, 0), v25)),
                        _mm_mul_ps(_mm_shuffle_ps(v24, v24, 170), v28)),
-                     _mm_and_ps(v24, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v));
+                     _mm_and_ps(v24, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v));
     v32 = (__m128i)_mm_add_ps(
                      _mm_add_ps(
                        _mm_add_ps(
                          _mm_mul_ps(_mm_shuffle_ps(v23, v23, 85), v26),
                          _mm_mul_ps(_mm_shuffle_ps(v23, v23, 0), v25)),
                        _mm_mul_ps(_mm_shuffle_ps(v23, v23, 170), v28)),
-                     _mm_and_ps(v23, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v));
+                     _mm_and_ps(v23, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v));
     LODWORD(v1->UVPO.M[0][0]) = _mm_cvtsi128_si32(v32);
     v33 = (__m128i)_mm_add_ps(
                      _mm_add_ps(
@@ -1094,12 +1094,12 @@ void __fastcall Scaleform::Render::HAL::HAL(Scaleform::Render::HAL *this, Scalef
   Scaleform::ArrayLH<Scaleform::Render::UserDataState::Data const *,2,Scaleform::ArrayConstPolicy<0,8,1> > *v13; // [rsp+28h] [rbp+10h]
 
   v2 = commandQueue;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,65>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::HAL,65>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::HAL::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,65>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::HAL,65>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::HAL::`vftable;
   this->FullSceneBlendTarget.pObject = 0i64;
   this->HALState = 0;
   this->CurrentPass = 3;
@@ -1110,8 +1110,8 @@ void __fastcall Scaleform::Render::HAL::HAL(Scaleform::Render::HAL *this, Scalef
   this->NotifyList.Root.pNext = v3;
   this->Matrices.pObject = 0i64;
   v5 = &this->Profiler;
-  v5->vfptr = (Scaleform::Render::ProfileViewsVtbl *)&Scaleform::Render::ProfileViews::`vftable';
-  v5->PMDefault.vfptr = (Scaleform::Render::ProfileModifierVtbl *)&Scaleform::Render::ProfileModifier::`vftable';
+  v5->vfptr = (Scaleform::Render::ProfileViewsVtbl *)&Scaleform::Render::ProfileViews::`vftable;
+  v5->PMDefault.vfptr = (Scaleform::Render::ProfileModifierVtbl *)&Scaleform::Render::ProfileModifier::`vftable;
   v5->PMDefault.FillFlags = 0;
   *(_QWORD *)&this->AccumulatedStats.Primitives = 0i64;
   *(_QWORD *)&this->AccumulatedStats.Triangles = 0i64;
@@ -1204,12 +1204,12 @@ char __fastcall Scaleform::Render::HAL::initHAL(Scaleform::Render::HAL *this, Sc
          40i64);
   if ( v4 )
   {
-    *(_QWORD *)v4 = &Scaleform::RefCountImplCore::`vftable';
+    *(_QWORD *)v4 = &Scaleform::RefCountImplCore::`vftable;
     *(_DWORD *)(v4 + 8) = 1;
-    *(_QWORD *)v4 = &Scaleform::RefCountImpl::`vftable';
-    *(_QWORD *)v4 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-    *(_QWORD *)v4 = &Scaleform::RefCountBase<Scaleform::Render::StereoImplBase,2>::`vftable';
-    *(_QWORD *)v4 = &Scaleform::Render::StereoImplBase::`vftable';
+    *(_QWORD *)v4 = &Scaleform::RefCountImpl::`vftable;
+    *(_QWORD *)v4 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+    *(_QWORD *)v4 = &Scaleform::RefCountBase<Scaleform::Render::StereoImplBase,2>::`vftable;
+    *(_QWORD *)v4 = &Scaleform::Render::StereoImplBase::`vftable;
     *(_DWORD *)(v4 + 16) = 0;
     *(_DWORD *)(v4 + 20) = 1061158912;
     *(_DWORD *)(v4 + 24) = 1112539136;
@@ -1382,7 +1382,7 @@ void __fastcall Scaleform::Render::HALEndDisplayItem::EmitToHAL(Scaleform::Rende
 // RVA: 0x159C7F0
 __int64 dynamic_initializer_for__Scaleform::Render::HALBeginDisplayItem::Instance__()
 {
-  Scaleform::Render::HALBeginDisplayItem::Instance.vfptr = (Scaleform::Render::RenderQueueItem::InterfaceVtbl *)&Scaleform::Render::HALBeginDisplayItem::`vftable';
+  Scaleform::Render::HALBeginDisplayItem::Instance.vfptr = (Scaleform::Render::RenderQueueItem::InterfaceVtbl *)&Scaleform::Render::HALBeginDisplayItem::`vftable;
   return atexit(dynamic_atexit_destructor_for__Scaleform::Render::HALBeginDisplayItem::Instance__);
 }
 
@@ -1390,7 +1390,7 @@ __int64 dynamic_initializer_for__Scaleform::Render::HALBeginDisplayItem::Instanc
 // RVA: 0x159C820
 __int64 dynamic_initializer_for__Scaleform::Render::HALEndDisplayItem::Instance__()
 {
-  Scaleform::Render::HALEndDisplayItem::Instance.vfptr = (Scaleform::Render::RenderQueueItem::InterfaceVtbl *)&Scaleform::Render::HALEndDisplayItem::`vftable';
+  Scaleform::Render::HALEndDisplayItem::Instance.vfptr = (Scaleform::Render::RenderQueueItem::InterfaceVtbl *)&Scaleform::Render::HALEndDisplayItem::`vftable;
   return atexit(dynamic_atexit_destructor_for__Scaleform::Render::HALEndDisplayItem::Instance__);
 }
 
@@ -2430,8 +2430,8 @@ void __fastcall Scaleform::Render::HAL::drawMaskClearRectangles(Scaleform::Rende
       if ( v7 )
       {
         v11 = (__m128 *)v6->Matrices.pObject;
-        v12 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v;
-        v13 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v;
+        v12 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v;
+        v13 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v;
         v14 = 0i64;
         do
         {
@@ -2828,7 +2828,7 @@ Scaleform::Render::RenderEvent *__fastcall Scaleform::Render::HAL::GetEvent(Scal
   if ( !(_S5_12 & 1) )
   {
     _S5_12 |= 1u;
-    defaultEvent.vfptr = (Scaleform::Render::RenderEventVtbl *)&Scaleform::Render::RenderEvent::`vftable';
+    defaultEvent.vfptr = (Scaleform::Render::RenderEventVtbl *)&Scaleform::Render::RenderEvent::`vftable;
     atexit(Scaleform::Render::HAL::GetEvent_::_2_::_dynamic_atexit_destructor_for__defaultEvent__);
   }
   return &defaultEvent;

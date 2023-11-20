@@ -31,7 +31,7 @@ hkClass *__fastcall hkxSkinBinding::staticClass()
 void __fastcall finishLoadedObjecthkxSkinBinding(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkxSkinBinding::`vftable';
+    *(_QWORD *)p = &hkxSkinBinding::`vftable;
 }
 
 // File Line: 76
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkxSkinBinding(void *p)
 // RVA: 0xE32DC0
 void **__fastcall getVtablehkxSkinBinding()
 {
-  return &hkxSkinBinding::`vftable';
+  return &hkxSkinBinding::`vftable;
 }
 
 // File Line: 102

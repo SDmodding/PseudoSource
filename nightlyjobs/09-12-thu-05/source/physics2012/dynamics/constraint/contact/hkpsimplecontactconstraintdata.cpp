@@ -112,7 +112,7 @@ void __fastcall hkpSimpleContactConstraintData::hkpSimpleContactConstraintData(h
   v4 = this;
   this->m_memSizeAndFlags = -1;
   this->m_userData = 0i64;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpSimpleContactConstraintData::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpSimpleContactConstraintData::`vftable;
   this->m_referenceCount = 1;
   this->m_idMgrA.m_values.m_data = this->m_idMgrA.m_values.m_storage;
   this->m_idMgrA.m_values.m_size = 0;

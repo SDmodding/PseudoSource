@@ -14,7 +14,7 @@ CAkActionSeek *__fastcall CAkActionSeek::Create(AkActionType in_eActionType, uns
   if ( result )
   {
     CAkActionExcept::CAkActionExcept((CAkActionExcept *)&result->vfptr, v2, v3);
-    v5->vfptr = (CAkIndexableVtbl *)&CAkActionSeek::`vftable';
+    v5->vfptr = (CAkIndexableVtbl *)&CAkActionSeek::`vftable;
     *(_QWORD *)&v5->m_position.m_base = 0i64;
     v5->m_position.m_mod.m_max = 0.0;
     *(_WORD *)&v5->m_bIsSeekRelativeToDuration = 0;

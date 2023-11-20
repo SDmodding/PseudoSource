@@ -247,7 +247,7 @@ signed __int64 __fastcall CAkListener::SetListenerSpatialization(unsigned int in
   *((_BYTE *)&CAkListener::m_listeners + 144 * in_uListener + 40) = in_bSpatialized;
   if ( in_pVolumeOffsets )
   {
-    v4 = `AkMath::FastPow10'::`4'::`local static guard';
+    v4 = `AkMath::FastPow10::`4::`local static guard;
     *((_DWORD *)&CAkListener::m_listeners + 36 * in_uListener + 12) = LODWORD(in_pVolumeOffsets->fFrontLeft);
     v5 = 0.0;
     *((_DWORD *)&CAkListener::m_listeners + 36 * in_uListener + 13) = LODWORD(in_pVolumeOffsets->fFrontRight);
@@ -262,14 +262,14 @@ signed __int64 __fastcall CAkListener::SetListenerSpatialization(unsigned int in
     {
       if ( v4 & 1 )
       {
-        v7 = *(float *)&`AkMath::FastPow10'::`4'::SCALE;
+        v7 = *(float *)&`AkMath::FastPow10::`4::SCALE;
       }
       else
       {
         v7 = FLOAT_2_7866352e7;
         v4 |= 1u;
-        `AkMath::FastPow10'::`4'::`local static guard' = v4;
-        `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
+        `AkMath::FastPow10::`4::`local static guard = v4;
+        `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
       }
       v8 = (float)((float)((float)((float)(COERCE_FLOAT(
                                              ((signed int)(float)((float)(v7 * v6) + 1065353200.0) & 0x7FFFFF)
@@ -282,7 +282,7 @@ signed __int64 __fastcall CAkListener::SetListenerSpatialization(unsigned int in
     }
     else
     {
-      v7 = *(float *)&`AkMath::FastPow10'::`4'::SCALE;
+      v7 = *(float *)&`AkMath::FastPow10::`4::SCALE;
       v8 = 0.0;
     }
     v9 = *((float *)&CAkListener::m_listeners + 36 * in_uListener + 13);
@@ -294,8 +294,8 @@ signed __int64 __fastcall CAkListener::SetListenerSpatialization(unsigned int in
       {
         v7 = FLOAT_2_7866352e7;
         v4 |= 1u;
-        `AkMath::FastPow10'::`4'::`local static guard' = v4;
-        `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
+        `AkMath::FastPow10::`4::`local static guard = v4;
+        `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
       }
       v11 = (float)((float)((float)((float)(COERCE_FLOAT(
                                               ((signed int)(float)((float)(v7 * v10) + 1065353200.0) & 0x7FFFFF)
@@ -319,8 +319,8 @@ signed __int64 __fastcall CAkListener::SetListenerSpatialization(unsigned int in
       {
         v7 = FLOAT_2_7866352e7;
         v4 |= 1u;
-        `AkMath::FastPow10'::`4'::`local static guard' = v4;
-        `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
+        `AkMath::FastPow10::`4::`local static guard = v4;
+        `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
       }
       v14 = (float)((float)((float)((float)(COERCE_FLOAT(
                                               ((signed int)(float)((float)(v7 * v13) + 1065353200.0) & 0x7FFFFF)
@@ -344,8 +344,8 @@ signed __int64 __fastcall CAkListener::SetListenerSpatialization(unsigned int in
       {
         v7 = FLOAT_2_7866352e7;
         v4 |= 1u;
-        `AkMath::FastPow10'::`4'::`local static guard' = v4;
-        `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
+        `AkMath::FastPow10::`4::`local static guard = v4;
+        `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
       }
       v17 = (float)((float)((float)((float)(COERCE_FLOAT(
                                               ((signed int)(float)((float)(v16 * v7) + 1065353200.0) & 0x7FFFFF)
@@ -369,8 +369,8 @@ signed __int64 __fastcall CAkListener::SetListenerSpatialization(unsigned int in
       {
         v7 = FLOAT_2_7866352e7;
         v4 |= 1u;
-        `AkMath::FastPow10'::`4'::`local static guard' = v4;
-        `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
+        `AkMath::FastPow10::`4::`local static guard = v4;
+        `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
       }
       v20 = (float)((float)((float)((float)(COERCE_FLOAT(
                                               ((signed int)(float)((float)(v19 * v7) + 1065353200.0) & 0x7FFFFF)
@@ -394,8 +394,8 @@ signed __int64 __fastcall CAkListener::SetListenerSpatialization(unsigned int in
       {
         v7 = FLOAT_2_7866352e7;
         v4 |= 1u;
-        `AkMath::FastPow10'::`4'::`local static guard' = v4;
-        `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
+        `AkMath::FastPow10::`4::`local static guard = v4;
+        `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
       }
       v23 = (float)((float)((float)((float)(COERCE_FLOAT(
                                               ((signed int)(float)((float)(v22 * v7) + 1065353200.0) & 0x7FFFFF)
@@ -419,8 +419,8 @@ signed __int64 __fastcall CAkListener::SetListenerSpatialization(unsigned int in
       {
         v7 = FLOAT_2_7866352e7;
         v4 |= 1u;
-        `AkMath::FastPow10'::`4'::`local static guard' = v4;
-        `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
+        `AkMath::FastPow10::`4::`local static guard = v4;
+        `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
       }
       v26 = (float)((float)((float)((float)(COERCE_FLOAT(
                                               ((signed int)(float)((float)(v25 * v7) + 1065353200.0) & 0x7FFFFF)
@@ -443,8 +443,8 @@ signed __int64 __fastcall CAkListener::SetListenerSpatialization(unsigned int in
       if ( !(v4 & 1) )
       {
         v7 = FLOAT_2_7866352e7;
-        `AkMath::FastPow10'::`4'::`local static guard' = v4 | 1;
-        `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
+        `AkMath::FastPow10::`4::`local static guard = v4 | 1;
+        `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
       }
       v5 = (float)((float)((float)((float)(COERCE_FLOAT(
                                              ((signed int)(float)((float)(v28 * v7) + 1065353200.0) & 0x7FFFFF)
@@ -529,15 +529,15 @@ void __usercall CAkListener::Get3DVolumes(AkPositionSourceType in_ePosType@<ecx>
   v9 = CAkPBI::GetOutputBusVolumeValuedB(in_pContext) * 0.050000001;
   if ( v9 >= -37.0 )
   {
-    if ( `AkMath::FastPow10'::`4'::`local static guard' & 1 )
+    if ( `AkMath::FastPow10::`4::`local static guard & 1 )
     {
-      v11 = *(float *)&`AkMath::FastPow10'::`4'::SCALE;
+      v11 = *(float *)&`AkMath::FastPow10::`4::SCALE;
     }
     else
     {
       v11 = FLOAT_2_7866352e7;
-      `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
-      `AkMath::FastPow10'::`4'::`local static guard' |= 1u;
+      `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
+      `AkMath::FastPow10::`4::`local static guard |= 1u;
     }
     v12 = (signed int)(float)((float)(v9 * v11) + 1065353200.0);
     LODWORD(out_fListenerVolumeDry) = (v12 & 0x7FFFFF) + 1065353216;

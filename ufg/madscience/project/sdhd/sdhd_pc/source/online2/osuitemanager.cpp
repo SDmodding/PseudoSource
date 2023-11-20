@@ -211,7 +211,7 @@ UFG::OSuiteManager *__fastcall UFG::OSuiteManager::Instance()
     _S6_8 |= 1u;
     unk_142401208 = &unk_142401208;
     unk_142401210 = &unk_142401208;
-    instance_0.vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::OSuiteManager::`vftable';
+    instance_0.vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::OSuiteManager::`vftable;
     unk_142401218 = 0;
     unk_14240121C = 0;
     unk_142401220 = 0i64;
@@ -377,10 +377,10 @@ void __fastcall UFG::OSuiteManager::UploadFriendsListToServer(UFG::OSuiteManager
         v23 = OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&params.m_pLists[v22].vfptr);
         params.m_nCount -= v23;
         v24 = &params.m_pLists[v22];
-        data.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable';
+        data.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable;
         OSuite::ZString::ZString(&data.m_First, (OSuite::ZString *)&result);
         OSuite::ZString::ZString(&data.m_Second, &that);
-        data.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString>::`vftable';
+        data.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString>::`vftable;
         v25 = (OSuite::ZRedBlackTreeBase::TElement<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString> > *)OSuite::ZObject::operator new(0x58ui64);
         v52 = v25;
         if ( v25 )
@@ -390,7 +390,7 @@ void __fastcall UFG::OSuiteManager::UploadFriendsListToServer(UFG::OSuiteManager
         else
           v26 = 0i64;
         OSuite::ZRedBlackTreeBase::InsertElementSet((OSuite::ZRedBlackTreeBase *)&v24->vfptr, v26);
-        data.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable';
+        data.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable;
         OSuite::ZString::~ZString(&data.m_Second);
         OSuite::ZString::~ZString(&data.m_First);
         v27 = OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&params.m_pLists[v22].vfptr);
@@ -404,10 +404,10 @@ void __fastcall UFG::OSuiteManager::UploadFriendsListToServer(UFG::OSuiteManager
         v30 = OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&params.m_pLists[v29].vfptr);
         params.m_nCount -= v30;
         v31 = &params.m_pLists[v29];
-        *(_QWORD *)&params.m_nHashSize = &OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable';
+        *(_QWORD *)&params.m_nHashSize = &OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable;
         OSuite::ZString::ZString((OSuite::ZString *)&params.m_nCount, (OSuite::ZString *)&result);
         OSuite::ZString::ZString((OSuite::ZString *)((char *)&that + 16), &that);
-        *(_QWORD *)&params.m_nHashSize = &OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString>::`vftable';
+        *(_QWORD *)&params.m_nHashSize = &OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString>::`vftable;
         v32 = (OSuite::ZRedBlackTreeBase::TElement<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString> > *)OSuite::ZObject::operator new(0x58ui64);
         v52 = v32;
         if ( v32 )
@@ -417,7 +417,7 @@ void __fastcall UFG::OSuiteManager::UploadFriendsListToServer(UFG::OSuiteManager
         else
           v33 = 0i64;
         OSuite::ZRedBlackTreeBase::InsertElementSet((OSuite::ZRedBlackTreeBase *)&v31->vfptr, v33);
-        *(_QWORD *)&params.m_nHashSize = &OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable';
+        *(_QWORD *)&params.m_nHashSize = &OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable;
         OSuite::ZString::~ZString((OSuite::ZString *)((char *)&that + 16));
         OSuite::ZString::~ZString((OSuite::ZString *)&params.m_nCount);
         v34 = OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&params.m_pLists[v29].vfptr);
@@ -434,7 +434,7 @@ void __fastcall UFG::OSuiteManager::UploadFriendsListToServer(UFG::OSuiteManager
           &query,
           (OSuite::fastdelegate::FastDelegate2<OSuite::SCallbackData *,OSuite::ZWebServiceClient *,void> *)&result);
         OSuitePrivate::ZEidosTransaction::GetState((OSuite::Statistics *)v1->m_pWebServiceClient);
-        params.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TMap<OSuite::ZString,OSuite::ZString>::`vftable';
+        params.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TMap<OSuite::ZString,OSuite::ZString>::`vftable;
         if ( params.m_pLists )
         {
           if ( LODWORD(params.m_pLists[-1].m_Comparer.vfptr) )
@@ -596,10 +596,10 @@ void __fastcall UFG::OSuiteManager::ProcessRemainingFriends(UFG::OSuiteManager *
         v20 = OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&params.m_pLists[v19].vfptr);
         params.m_nCount -= v20;
         v21 = &params.m_pLists[v19];
-        data.m_First.vfptr = (OSuite::IHashableVtbl *)&OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable';
+        data.m_First.vfptr = (OSuite::IHashableVtbl *)&OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable;
         OSuite::ZString::ZString((OSuite::ZString *)((char *)&data.m_First + 16), (OSuite::ZString *)&result);
         OSuite::ZString::ZString((OSuite::ZString *)((char *)&data.m_Second + 16), &that);
-        data.m_First.vfptr = (OSuite::IHashableVtbl *)&OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString>::`vftable';
+        data.m_First.vfptr = (OSuite::IHashableVtbl *)&OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString>::`vftable;
         v22 = (OSuite::ZRedBlackTreeBase::TElement<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString> > *)OSuite::ZObject::operator new(0x58ui64);
         v40 = v22;
         if ( v22 )
@@ -609,7 +609,7 @@ void __fastcall UFG::OSuiteManager::ProcessRemainingFriends(UFG::OSuiteManager *
         else
           v23 = 0i64;
         OSuite::ZRedBlackTreeBase::InsertElementSet((OSuite::ZRedBlackTreeBase *)&v21->vfptr, v23);
-        data.m_First.vfptr = (OSuite::IHashableVtbl *)&OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable';
+        data.m_First.vfptr = (OSuite::IHashableVtbl *)&OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable;
         OSuite::ZString::~ZString((OSuite::ZString *)((char *)&data.m_Second + 16));
         OSuite::ZString::~ZString((OSuite::ZString *)((char *)&data.m_First + 16));
         v24 = OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&params.m_pLists[v19].vfptr);
@@ -623,10 +623,10 @@ void __fastcall UFG::OSuiteManager::ProcessRemainingFriends(UFG::OSuiteManager *
         v27 = OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&params.m_pLists[v26].vfptr);
         params.m_nCount -= v27;
         v28 = &params.m_pLists[v26];
-        data.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable';
+        data.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable;
         OSuite::ZString::ZString(&data.m_First, (OSuite::ZString *)&result);
         OSuite::ZString::ZString((OSuite::ZString *)((char *)&that + 16), &that);
-        data.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString>::`vftable';
+        data.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString>::`vftable;
         v29 = (OSuite::ZRedBlackTreeBase::TElement<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString> > *)OSuite::ZObject::operator new(0x58ui64);
         v40 = v29;
         if ( v29 )
@@ -636,7 +636,7 @@ void __fastcall UFG::OSuiteManager::ProcessRemainingFriends(UFG::OSuiteManager *
         else
           v30 = 0i64;
         OSuite::ZRedBlackTreeBase::InsertElementSet((OSuite::ZRedBlackTreeBase *)&v28->vfptr, v30);
-        data.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable';
+        data.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable;
         OSuite::ZString::~ZString((OSuite::ZString *)((char *)&that + 16));
         OSuite::ZString::~ZString(&data.m_First);
         v31 = OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&params.m_pLists[v26].vfptr);
@@ -653,7 +653,7 @@ void __fastcall UFG::OSuiteManager::ProcessRemainingFriends(UFG::OSuiteManager *
           &query,
           (OSuite::fastdelegate::FastDelegate2<OSuite::SCallbackData *,OSuite::ZWebServiceClient *,void> *)&result);
         OSuitePrivate::ZEidosTransaction::GetState((OSuite::Statistics *)v1->m_pWebServiceClient);
-        params.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TMap<OSuite::ZString,OSuite::ZString>::`vftable';
+        params.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TMap<OSuite::ZString,OSuite::ZString>::`vftable;
         if ( params.m_pLists )
         {
           if ( LODWORD(params.m_pLists[-1].m_Comparer.vfptr) )
@@ -928,7 +928,7 @@ void __fastcall UFG::OsuiteGameConfig::OsuiteGameConfig(UFG::OsuiteGameConfig *t
   UFG::qString result; // [rsp+38h] [rbp-30h]
 
   v1 = this;
-  this->vfptr = (OSuite::IGameConfigVtbl *)&UFG::OsuiteGameConfig::`vftable';
+  this->vfptr = (OSuite::IGameConfigVtbl *)&UFG::OsuiteGameConfig::`vftable;
   UFG::qString::qString(&this->mBuildId);
   UFG::qString::qString(&v1->mGameVersion);
   v2 = UFG::qString::FormatEx(&result, "%d", (unsigned int)UFG::gCL_number);

@@ -27,18 +27,18 @@ void __fastcall UFG::Editor::Terminal::Terminal(UFG::Editor::Terminal *this)
 
   v1 = this;
   UFG::DUIWindow::DUIWindow((UFG::DUIWindow *)&this->vfptr);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::Editor::Terminal,UFG::DUIWindow>::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::Editor::Terminal,UFG::DUIWindow>::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::Editor::Terminal,UFG::DUIWindow>::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::Editor::Terminal,UFG::DUIWindow>::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v1->mBaseNode.mUID = -1i64;
   v1->mTypeUID = UFG::qStringHash64("UFG::Editor::Terminal", 0xFFFFFFFFFFFFFFFFui64);
   UFG::qSafePointerNode<UFG::Editor::Terminal>::qSafePointerNode<UFG::Editor::Terminal>((UFG::qSafePointerNode<UFG::Editor::Terminal> *)&v1->vfptr);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::Terminal::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::Terminal::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::Editor::Terminal>Vtbl *)&UFG::Editor::Terminal::`vftable';
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::Terminal::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::Terminal::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::Editor::Terminal>Vtbl *)&UFG::Editor::Terminal::`vftable;
   *(_WORD *)&v1->mFollowTail = 1;
   *(_QWORD *)&v1->mChannel = 3i64;
   v1->mScrollPos.mY = 0;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v1->mLines,
     0x30ui64,
     512,
@@ -149,10 +149,10 @@ void __fastcall UFG::Editor::Terminal::~Terminal(UFG::Editor::Terminal *this)
   UFG::qNode<UFG::qSafePointerBase<UFG::Editor::Terminal>,UFG::qSafePointerNodeList> *v13; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::Terminal::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  this->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::Terminal::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::Terminal::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  this->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::Terminal::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v2 = (UFG::qSafePointerNode<UFG::Editor::Terminal> *)&this->vfptr;
-  this->vfptr = (UFG::qSafePointerNode<UFG::Editor::Terminal>Vtbl *)&UFG::Editor::Terminal::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::Editor::Terminal>Vtbl *)&UFG::Editor::Terminal::`vftable;
   v3 = UFG::Editor::Terminal::sTerminals.mNode.mNext;
   if ( (UFG::qList<UFG::qValueNode<UFG::qSafePointer<UFG::Editor::Terminal,UFG::Editor::Terminal> >,UFG::qValueNode<UFG::qSafePointer<UFG::Editor::Terminal,UFG::Editor::Terminal> >,1,0> *)UFG::Editor::Terminal::sTerminals.mNode.mNext != &UFG::Editor::Terminal::sTerminals )
   {
@@ -173,12 +173,12 @@ void __fastcall UFG::Editor::Terminal::~Terminal(UFG::Editor::Terminal *this)
   }
 LABEL_6:
   UFG::qRemovePrintHandler(UFG::Editor::Terminal::PrintHandlerBridge, v1);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->mLines,
     0x30ui64,
     512,
     (void (__fastcall *)(void *))UFG::PersistentData::String::~String);
-  v2->vfptr = (UFG::qSafePointerNode<UFG::Editor::Terminal>Vtbl *)&UFG::qSafePointerNode<UFG::Editor::Terminal>::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::Editor::Terminal>Vtbl *)&UFG::qSafePointerNode<UFG::Editor::Terminal>::`vftable;
   v6 = &v2->m_SafePointerList;
   if ( (UFG::qList<UFG::qSafePointerBase<UFG::Editor::Terminal>,UFG::qSafePointerNodeList,1,0> *)v2->m_SafePointerList.mNode.mNext != &v2->m_SafePointerList )
   {

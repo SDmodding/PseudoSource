@@ -37,7 +37,7 @@ void __fastcall hkgpConvexHull::hkgpConvexHull(hkgpConvexHull *this)
 
   v1 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkgpConvexHull::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkgpConvexHull::`vftable;
   v2 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
   v3 = (hkgpConvexHullImpl *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v2[11] + 8i64))(v2[11], 496i64);
   if ( v3 )
@@ -58,7 +58,7 @@ void __fastcall hkgpConvexHull::~hkgpConvexHull(hkgpConvexHull *this)
 
   v1 = this->m_data;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkgpConvexHull::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkgpConvexHull::`vftable;
   if ( v1 )
   {
     hkgpConvexHullImpl::~hkgpConvexHullImpl(v1);
@@ -66,7 +66,7 @@ void __fastcall hkgpConvexHull::~hkgpConvexHull(hkgpConvexHull *this)
     (*(void (__fastcall **)(_QWORD *, hkgpConvexHullImpl *, signed __int64))(*v3[11] + 16i64))(v3[11], v1, 496i64);
   }
   hkgpConvexHull::deleteUserObject(v2);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 75
@@ -3214,7 +3214,7 @@ hkBool *__fastcall hkgpConvexHull::isVertexUsed(hkgpConvexHull *this, hkBool *re
          _mm_andnot_ps(v8, _mm_add_ps(v7, (__m128)xmmword_141A711B0)),
          _mm_and_ps(_mm_sub_ps(v7, (__m128)xmmword_141A711B0), v8));
   v11 = (unsigned __int128)_mm_xor_si128(
-                             (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v9),
+                             (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v9),
                              _mm_cvttps_epi32(v9));
   if ( v4 )
   {

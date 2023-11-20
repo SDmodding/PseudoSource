@@ -49,7 +49,7 @@ void __fastcall finishLoadedObjecthkxMaterialShader(void *p, int finishing)
   {
     v2 = (hkStringPtr *)p;
     v3 = (hkStringPtr *)((char *)p + 16);
-    v3[-2].m_stringAndFlag = (const char *)&hkxMaterialShader::`vftable';
+    v3[-2].m_stringAndFlag = (const char *)&hkxMaterialShader::`vftable;
     v4 = finishing;
     hkStringPtr::hkStringPtr(v3, (hkFinishLoadedObjectFlag)finishing);
     hkStringPtr::hkStringPtr(v2 + 4, (hkFinishLoadedObjectFlag)v4);
@@ -78,7 +78,7 @@ void **__fastcall getVtablehkxMaterialShader()
   hkStringPtr::hkStringPtr(&v2, 0);
   hkStringPtr::hkStringPtr(&v3, 0);
   hkStringPtr::hkStringPtr(&v4, 0);
-  return &hkxMaterialShader::`vftable';
+  return &hkxMaterialShader::`vftable;
 }
 
 // File Line: 120

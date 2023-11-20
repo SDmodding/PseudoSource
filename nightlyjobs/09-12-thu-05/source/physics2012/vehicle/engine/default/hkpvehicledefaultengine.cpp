@@ -4,7 +4,7 @@ void __fastcall hkpVehicleDefaultEngine::hkpVehicleDefaultEngine(hkpVehicleDefau
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_minRPM = 1000.0;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpVehicleDefaultEngine::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpVehicleDefaultEngine::`vftable;
   this->m_optRPM = 4000.0;
   *(_QWORD *)&this->m_resistanceFactorAtOptRPM = 0i64;
   this->m_maxRPM = 6000.0;

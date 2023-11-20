@@ -87,7 +87,7 @@ void UFG::WorldAudioEmitterManager::TurnOffAllEmitters(void)
   signed __int64 v1; // rbx
   void **v2; // [rsp+30h] [rbp+8h]
 
-  v2 = &`UFG::WorldAudioEmitterManager::TurnOffAllEmitters'::`2'::TurnOffEmittersFunctor::`vftable';
+  v2 = &`UFG::WorldAudioEmitterManager::TurnOffAllEmitters::`2::TurnOffEmittersFunctor::`vftable;
   for ( i = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::AudioEmitterMarker::msAudioEmitterMarkers);
         ;
         i = UFG::qBaseTreeRB::GetNext(

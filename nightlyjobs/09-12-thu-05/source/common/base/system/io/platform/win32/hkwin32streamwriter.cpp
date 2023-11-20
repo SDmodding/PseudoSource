@@ -41,7 +41,7 @@ void __fastcall hkWin32StreamWriter::hkWin32StreamWriter(hkWin32StreamWriter *th
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_handle = handle;
-  this->vfptr = (hkBaseObjectVtbl *)&hkWin32StreamWriter::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkWin32StreamWriter::`vftable;
 }
 
 // File Line: 37
@@ -62,9 +62,9 @@ void __fastcall hkWin32StreamWriter::~hkWin32StreamWriter(hkWin32StreamWriter *t
   hkWin32StreamWriter *v1; // rbx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkWin32StreamWriter::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkWin32StreamWriter::`vftable;
   hkWin32StreamWriter::close(this);
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 50

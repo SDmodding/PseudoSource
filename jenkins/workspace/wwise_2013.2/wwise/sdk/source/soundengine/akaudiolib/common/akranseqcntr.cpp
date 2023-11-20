@@ -8,7 +8,7 @@ void __fastcall CAkRanSeqCntr::CAkRanSeqCntr(CAkRanSeqCntr *this, unsigned int i
   v3 = in_ContainerMode;
   v4 = this;
   CAkContainerBase::CAkContainerBase((CAkContainerBase *)&this->vfptr, in_ulID);
-  v4->vfptr = (CAkIndexableVtbl *)&CAkRanSeqCntr::`vftable';
+  v4->vfptr = (CAkIndexableVtbl *)&CAkRanSeqCntr::`vftable;
   v4->m_pPlayList = 0i64;
   v4->m_mapObjectCntrInfo.m_pItems = 0i64;
   *(_QWORD *)&v4->m_mapObjectCntrInfo.m_uLength = 0i64;

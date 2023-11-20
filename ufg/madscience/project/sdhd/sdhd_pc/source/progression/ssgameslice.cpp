@@ -13,8 +13,8 @@ void __fastcall UFG::SSGameSlice::SSGameSlice(UFG::SSGameSlice *this, UFG::GameS
   v8 = this;
   UFG::qSafePointerNode<UFG::SSGameSlice>::qSafePointerNode<UFG::SSGameSlice>((UFG::qSafePointerNode<UFG::SSGameSlice> *)&this->vfptr);
   SSActor::SSActor((SSActor *)&v8->vfptr, v6, v5, addToInstanceList);
-  v8->vfptr = (UFG::qSafePointerNode<UFG::SSGameSlice>Vtbl *)&UFG::SSGameSlice::`vftable'{for `UFG::qSafePointerNode<UFG::SSGameSlice>'};
-  v8->vfptr = (SSObjectBaseVtbl *)&UFG::SSGameSlice::`vftable'{for `SSActor'};
+  v8->vfptr = (UFG::qSafePointerNode<UFG::SSGameSlice>Vtbl *)&UFG::SSGameSlice::`vftable{for `UFG::qSafePointerNode<UFG::SSGameSlice>};
+  v8->vfptr = (SSObjectBaseVtbl *)&UFG::SSGameSlice::`vftable{for `SSActor};
   v8->mpGameSlice = v7;
 }
 
@@ -29,12 +29,12 @@ void __fastcall UFG::SSGameSlice::~SSGameSlice(UFG::SSGameSlice *this)
   UFG::qList<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList,1,0> *v5; // [rsp+40h] [rbp+8h]
 
   v1 = (UFG::qSafePointerNode<UFG::ParkourHandle> *)this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SSGameSlice>Vtbl *)&UFG::SSGameSlice::`vftable'{for `UFG::qSafePointerNode<UFG::SSGameSlice>'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SSGameSlice>Vtbl *)&UFG::SSGameSlice::`vftable{for `UFG::qSafePointerNode<UFG::SSGameSlice>};
   v2 = (SSActor *)&this->vfptr;
-  v2->vfptr = (SSObjectBaseVtbl *)&UFG::SSGameSlice::`vftable'{for `SSActor'};
+  v2->vfptr = (SSObjectBaseVtbl *)&UFG::SSGameSlice::`vftable{for `SSActor};
   LODWORD(v1[6].m_SafePointerList.mNode.mPrev[22].mNext) = 2;
   SSActor::~SSActor(v2);
-  v1->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::SSGameSlice>::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::SSGameSlice>::`vftable;
   UFG::qSafePointerNode<UFG::DynamicCoverCorner>::SetAllPointersToNull(v1);
   v5 = &v1->m_SafePointerList;
   UFG::qList<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList,1,0>::DeleteNodes(&v1->m_SafePointerList);

@@ -18,20 +18,20 @@ void __fastcall OSuite::ZMetric::ZMetric(OSuite::ZMetric *this, OSuite::ZString 
 
   v3 = this;
   v4 = startTime;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZMetric::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZMetric::`vftable;
   v5 = sName;
   OSuite::ZString::ZString(&this->m_sName, sName);
   OSuite::ZDoublyLinkedListBase::ZDoublyLinkedListBase((OSuite::ZRedBlackTreeBase *)&v3->m_attributes.vfptr);
-  v3->m_attributes.m_Comparer.vfptr = (OSuite::IComparer<OSuite::ZString>Vtbl *)&OSuite::TKeyValueElementComparer<OSuite::ZString,OSuite::ZUsageTracker::ZResourceUsage *,OSuite::TOperatorComparer<OSuite::ZString>>::`vftable'{for `OSuite::IComparer<OSuite::ZString>'};
-  v3->m_attributes.m_Comparer.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TKeyValueElementComparer<OSuite::ZString,OSuite::TList<OSuite::ZString>,OSuite::TOperatorComparer<OSuite::ZString>>::`vftable'{for `OSuite::ZObject'};
-  v3->m_attributes.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TOrderedMap<OSuite::ZString,OSuite::ZMetric::IStoredData *,OSuite::TOperatorComparer<OSuite::ZString>>::`vftable';
+  v3->m_attributes.m_Comparer.vfptr = (OSuite::IComparer<OSuite::ZString>Vtbl *)&OSuite::TKeyValueElementComparer<OSuite::ZString,OSuite::ZUsageTracker::ZResourceUsage *,OSuite::TOperatorComparer<OSuite::ZString>>::`vftable{for `OSuite::IComparer<OSuite::ZString>};
+  v3->m_attributes.m_Comparer.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TKeyValueElementComparer<OSuite::ZString,OSuite::TList<OSuite::ZString>,OSuite::TOperatorComparer<OSuite::ZString>>::`vftable{for `OSuite::ZObject};
+  v3->m_attributes.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TOrderedMap<OSuite::ZString,OSuite::ZMetric::IStoredData *,OSuite::TOperatorComparer<OSuite::ZString>>::`vftable;
   OSuite::ZString::IndexOf(v5, 32, 0i64);
   v6 = OSuite::ZOnlineSuite::Instance();
   v7 = OSuite::ZOnlineSuite::GetGameConfig(v6);
   if ( !v7->vfptr->IsFinal(v7) )
   {
-    v15.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZUuid::`vftable'{for `OSuite::ZObject'};
-    v15.vfptr = (OSuite::IHashableVtbl *)&OSuite::ZUuid::`vftable'{for `OSuite::IHashable'};
+    v15.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZUuid::`vftable{for `OSuite::ZObject};
+    v15.vfptr = (OSuite::IHashableVtbl *)&OSuite::ZUuid::`vftable{for `OSuite::IHashable};
     OSuite::psock::uuid::create(v15.m_anUuid, 1);
     v8 = OSuite::ZUuid::ToString(&v15, &result);
     OSuite::ZMetric::SetProperty(v3, "s__UUID", v8);
@@ -58,12 +58,12 @@ void __fastcall OSuite::ZMetric::~ZMetric(OSuite::ZMetric *this)
   OSuite::TOrderedMap<OSuite::ZString,OSuite::ZMetric::IStoredData *,OSuite::TOperatorComparer<OSuite::ZString> > *v2; // rcx
 
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZMetric::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZMetric::`vftable;
   OSuite::ZMetric::Clear(this);
   v2 = &v1->m_attributes;
-  v2->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TRedBlackTree<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZMetric::IStoredData *>,1,OSuite::TKeyValueElementComparer<OSuite::ZString,OSuite::ZMetric::IStoredData *,OSuite::TOperatorComparer<OSuite::ZString>>>::`vftable';
-  v2->m_Comparer.vfptr = (OSuite::IComparer<OSuite::ZString>Vtbl *)&OSuite::TOperatorComparer<OSuite::ZString>::`vftable'{for `OSuite::IComparer<OSuite::ZString>'};
-  v2->m_Comparer.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TOperatorComparer<OSuite::ZString>::`vftable'{for `OSuite::ZObject'};
+  v2->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TRedBlackTree<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZMetric::IStoredData *>,1,OSuite::TKeyValueElementComparer<OSuite::ZString,OSuite::ZMetric::IStoredData *,OSuite::TOperatorComparer<OSuite::ZString>>>::`vftable;
+  v2->m_Comparer.vfptr = (OSuite::IComparer<OSuite::ZString>Vtbl *)&OSuite::TOperatorComparer<OSuite::ZString>::`vftable{for `OSuite::IComparer<OSuite::ZString>};
+  v2->m_Comparer.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TOperatorComparer<OSuite::ZString>::`vftable{for `OSuite::ZObject};
   OSuite::ZRedBlackTreeBase::~ZRedBlackTreeBase((OSuite::ZRedBlackTreeBase *)&v1->m_attributes.vfptr);
   OSuite::ZString::~ZString(&v1->m_sName);
 }
@@ -83,17 +83,17 @@ void __fastcall OSuite::ZMetric::Clear(OSuite::ZMetric *this)
   v7 = 0i64;
   v1 = this;
   _mm_store_si128((__m128i *)&v6, (__m128i)0i64);
-  that.m_parents.m_staticList[4] = (OSuite::ZRedBlackTreeBase::ZElementBase *)&OSuite::TOrderedMap<unsigned __int64,OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>,OSuite::TOperatorComparer<unsigned __int64>>::ZIterator::`vftable';
+  that.m_parents.m_staticList[4] = (OSuite::ZRedBlackTreeBase::ZElementBase *)&OSuite::TOrderedMap<unsigned __int64,OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>,OSuite::TOperatorComparer<unsigned __int64>>::ZIterator::`vftable;
   OSuite::ZRedBlackTreeBase::ZIteratorBase::ZIteratorBase((OSuite::ZRedBlackTreeBase::ZIteratorBase *)&v5);
-  that.m_parents.m_pList = (OSuite::TList<OSuite::ZRedBlackTreeBase::ZElementBase *> *)&OSuite::ZRedBlackTreeBase::TIterator<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZUsageTracker::ZResourceUsage *>>::`vftable';
+  that.m_parents.m_pList = (OSuite::TList<OSuite::ZRedBlackTreeBase::ZElementBase *> *)&OSuite::ZRedBlackTreeBase::TIterator<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZUsageTracker::ZResourceUsage *>>::`vftable;
   OSuite::ZRedBlackTreeBase::ZIteratorBase::ZIteratorBase(&that, (OSuite::ZRedBlackTreeBase *)&v1->m_attributes.vfptr);
-  that.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZRedBlackTreeBase::TIterator<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZUsageTracker::ZResourceUsage *>>::`vftable';
+  that.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZRedBlackTreeBase::TIterator<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZUsageTracker::ZResourceUsage *>>::`vftable;
   OSuite::ZRedBlackTreeBase::ZIteratorBase::operator=(
     (OSuite::ZRedBlackTreeBase::ZIteratorBase *)((char *)&that + 88),
     &that);
-  that.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZRedBlackTreeBase::TIterator<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZUsageTracker::ZResourceUsage *>>::`vftable';
-  that.m_parents.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable'{for `OSuite::ZObject'};
-  that.m_parents.vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable'{for `OSuite::IHashable'};
+  that.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZRedBlackTreeBase::TIterator<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZUsageTracker::ZResourceUsage *>>::`vftable;
+  that.m_parents.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable{for `OSuite::ZObject};
+  that.m_parents.vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable{for `OSuite::IHashable};
   if ( that.m_parents.m_staticList[2] )
     that.m_parents.m_staticList[2]->vfptr->__vecDelDtor((OSuite::ZObject *)that.m_parents.m_staticList[2], 1u);
   while ( !OSuite::ZString::IsNull((OSuite::ZString *)&that.m_parents.m_pList) )
@@ -103,10 +103,10 @@ void __fastcall OSuite::ZMetric::Clear(OSuite::ZMetric *this)
       (**v2)(v2, 1i64);
     OSuite::ZRedBlackTreeBase::ZIteratorBase::Next((OSuite::ZRedBlackTreeBase::ZIteratorBase *)((char *)&that + 88));
   }
-  that.m_parents.m_staticList[4] = (OSuite::ZRedBlackTreeBase::ZElementBase *)&OSuite::TOrderedMap<unsigned __int64,OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>,OSuite::TOperatorComparer<unsigned __int64>>::ZIterator::`vftable';
-  that.m_parents.m_pList = (OSuite::TList<OSuite::ZRedBlackTreeBase::ZElementBase *> *)&OSuite::ZRedBlackTreeBase::TIterator<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZUsageTracker::ZResourceUsage *>>::`vftable';
-  v5 = &OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable'{for `OSuite::ZObject'};
-  v6 = &OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable'{for `OSuite::IHashable'};
+  that.m_parents.m_staticList[4] = (OSuite::ZRedBlackTreeBase::ZElementBase *)&OSuite::TOrderedMap<unsigned __int64,OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>,OSuite::TOperatorComparer<unsigned __int64>>::ZIterator::`vftable;
+  that.m_parents.m_pList = (OSuite::TList<OSuite::ZRedBlackTreeBase::ZElementBase *> *)&OSuite::ZRedBlackTreeBase::TIterator<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZUsageTracker::ZResourceUsage *>>::`vftable;
+  v5 = &OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable{for `OSuite::ZObject};
+  v6 = &OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable{for `OSuite::IHashable};
   if ( v7 )
     (**v7)(v7, 1i64);
 }
@@ -158,7 +158,7 @@ void __fastcall OSuite::ZMetric::SetProperty(OSuite::ZMetric *this, const char *
     if ( v6 )
     {
       *((_QWORD *)v6 + 3) = 0i64;
-      *(_QWORD *)v6 = &OSuite::ZMetric::TStoredData<OSuite::ZString>::`vftable';
+      *(_QWORD *)v6 = &OSuite::ZMetric::TStoredData<OSuite::ZString>::`vftable;
       OSuite::ZString::ZString((OSuite::ZString *)(v6 + 8), &value);
       v8 = v7;
     }
@@ -203,7 +203,7 @@ void __fastcall OSuite::ZMetric::SetProperty(OSuite::ZMetric *this, const char *
     if ( v6 )
     {
       *((_QWORD *)v6 + 3) = 0i64;
-      *(_QWORD *)v6 = &OSuite::ZMetric::TStoredData<OSuite::ZString>::`vftable';
+      *(_QWORD *)v6 = &OSuite::ZMetric::TStoredData<OSuite::ZString>::`vftable;
       OSuite::ZString::ZString((OSuite::ZString *)(v6 + 8), &value);
       v8 = v7;
     }
@@ -245,7 +245,7 @@ void __fastcall OSuite::ZMetric::SetProperty(OSuite::ZMetric *this, const char *
     {
       LODWORD(v6->m_samplingInterval) = v5;
       v7 = v6;
-      v6->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZMetric::TStoredData<int>::`vftable';
+      v6->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZMetric::TStoredData<int>::`vftable;
     }
     else
     {
@@ -284,7 +284,7 @@ void __fastcall OSuite::ZMetric::SetProperty(OSuite::ZMetric *this, const char *
     {
       v6->m_samplingInterval = v5;
       v7 = v6;
-      v6->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZMetric::TStoredData<__int64>::`vftable';
+      v6->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZMetric::TStoredData<__int64>::`vftable;
     }
     else
     {
@@ -321,7 +321,7 @@ void __fastcall OSuite::ZMetric::SetProperty(OSuite::ZMetric *this, const char *
     {
       v5[1] = dValue;
       v6 = (OSuite::ZUsageTracker *)v5;
-      *(_QWORD *)v5 = &OSuite::ZMetric::TStoredData<double>::`vftable';
+      *(_QWORD *)v5 = &OSuite::ZMetric::TStoredData<double>::`vftable;
     }
     else
     {

@@ -3,8 +3,8 @@
 void __fastcall hkpVehiclePerWheelSimulation::hkpVehiclePerWheelSimulation(hkpVehiclePerWheelSimulation *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpVehiclePerWheelSimulation::`vftable'{for `hkpVehicleSimulation'};
-  this->vfptr = (hkpWorldPostSimulationListenerVtbl *)&hkpVehiclePerWheelSimulation::`vftable'{for `hkpWorldPostSimulationListener'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkpVehiclePerWheelSimulation::`vftable{for `hkpVehicleSimulation};
+  this->vfptr = (hkpWorldPostSimulationListenerVtbl *)&hkpVehiclePerWheelSimulation::`vftable{for `hkpWorldPostSimulationListener};
   this->m_wheelData.m_capacityAndFlags = 2147483648;
   this->m_wheelData.m_data = 0i64;
   this->m_wheelData.m_size = 0;
@@ -29,8 +29,8 @@ void __fastcall hkpVehiclePerWheelSimulation::~hkpVehiclePerWheelSimulation(hkpV
 
   v1 = this->m_world == 0i64;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpVehiclePerWheelSimulation::`vftable'{for `hkpVehicleSimulation'};
-  this->vfptr = (hkpWorldPostSimulationListenerVtbl *)&hkpVehiclePerWheelSimulation::`vftable'{for `hkpWorldPostSimulationListener'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkpVehiclePerWheelSimulation::`vftable{for `hkpVehicleSimulation};
+  this->vfptr = (hkpWorldPostSimulationListenerVtbl *)&hkpVehiclePerWheelSimulation::`vftable{for `hkpWorldPostSimulationListener};
   if ( !v1 )
     hkpVehiclePerWheelSimulation::removeFromWorld(this);
   v3 = v2->m_wheelData.m_size - 1;
@@ -41,7 +41,7 @@ void __fastcall hkpVehiclePerWheelSimulation::~hkpVehiclePerWheelSimulation(hkpV
     do
     {
       --v4;
-      v5->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+      v5->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
       v5 = (hkpWheelFrictionConstraintData *)((char *)v5 - 336);
     }
     while ( v4 >= 0 );
@@ -55,8 +55,8 @@ void __fastcall hkpVehiclePerWheelSimulation::~hkpVehiclePerWheelSimulation(hkpV
       336 * (v6 & 0x3FFFFFFF));
   v2->m_wheelData.m_data = 0i64;
   v2->m_wheelData.m_capacityAndFlags = 2147483648;
-  v2->vfptr = (hkpWorldPostSimulationListenerVtbl *)&hkpWorldPostSimulationListener::`vftable';
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v2->vfptr = (hkpWorldPostSimulationListenerVtbl *)&hkpWorldPostSimulationListener::`vftable;
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 40
@@ -111,7 +111,7 @@ void __fastcall hkpVehiclePerWheelSimulation::init(hkpVehiclePerWheelSimulation 
     do
     {
       --v9;
-      v10->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+      v10->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
       v10 = (hkpWheelFrictionConstraintData *)((char *)v10 - 336);
     }
     while ( v9 >= 0 );
@@ -127,7 +127,7 @@ void __fastcall hkpVehiclePerWheelSimulation::init(hkpVehiclePerWheelSimulation 
       {
         *((_DWORD *)v13 - 47) = 0x1FFFF;
         *(_QWORD *)((char *)v13 - 180) = 0i64;
-        *(_QWORD *)((char *)v13 - 196) = &hkpWheelFrictionConstraintData::`vftable';
+        *(_QWORD *)((char *)v13 - 196) = &hkpWheelFrictionConstraintData::`vftable;
         *((_WORD *)v13 - 82) = 2;
         *((_WORD *)v13 - 10) = 28;
         *((_BYTE *)v13 - 18) = 1;

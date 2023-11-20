@@ -10,7 +10,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::Editor::PropertyBr
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::Editor::PropertyBrowserWindow,UFG::DUIWindow>::sInventory.vfptr,
     "UFG::Editor::PropertyBrowserWindow",
     v0);
-  UFG::qReflectObjectType<UFG::Editor::PropertyBrowserWindow,UFG::DUIWindow>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::Editor::PropertyBrowserWindow>::`vftable';
+  UFG::qReflectObjectType<UFG::Editor::PropertyBrowserWindow,UFG::DUIWindow>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::Editor::PropertyBrowserWindow>::`vftable;
   UFG::qReflectInventory<UFG::Editor::PropertyBrowserWindow>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::Editor::PropertyBrowserWindow,UFG::DUIWindow>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -243,20 +243,20 @@ void __fastcall UFG::Editor::PropertyProxy_PropertySet::PropertyProxy_PropertySe
   v3 = (UFG::qNode<UFG::Editor::PropertyProxy,UFG::Editor::PropertyProxy> *)&this->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  this->vfptr = (UFG::Editor::PropertyProxyVtbl *)&UFG::Editor::PropertyProxy::`vftable';
+  this->vfptr = (UFG::Editor::PropertyProxyVtbl *)&UFG::Editor::PropertyProxy::`vftable;
   this->mDataType = 26;
   this->mPropertyName = (UFG::qSymbol)propertyName->mUID;
   this->mArrayIndex = arrayIndex;
   this->mParent = 0i64;
   *(_WORD *)&this->mIsLocal = 0;
   this->mIsListProperty = 0;
-  this->vfptr = (UFG::Editor::PropertyProxyVtbl *)&UFG::Editor::PropertyProxy_Container::`vftable';
+  this->vfptr = (UFG::Editor::PropertyProxyVtbl *)&UFG::Editor::PropertyProxy_Container::`vftable;
   v4 = &this->mChildren;
   v4->mChildrenOrdered.mNode.mPrev = &v4->mChildrenOrdered.mNode;
   v4->mChildrenOrdered.mNode.mNext = &v4->mChildrenOrdered.mNode;
   this->mHasGenerantedChildren = 0;
   this->mSelectedTypeOption = 0;
-  this->vfptr = (UFG::Editor::PropertyProxyVtbl *)&UFG::Editor::PropertyProxy_PropertySet::`vftable';
+  this->vfptr = (UFG::Editor::PropertyProxyVtbl *)&UFG::Editor::PropertyProxy_PropertySet::`vftable;
   UFG::qString::qString(&this->mNewPropertyName);
 }
 
@@ -1422,20 +1422,20 @@ void __fastcall UFG::Editor::PropertyProxy_PropertySet::GenerateChildren(UFG::Ed
           v21 = v20 + 1;
           v21->mNext = v21;
           v21[1].mNext = v21;
-          v19->mNext = (UFG::allocator::free_link *)&UFG::Editor::PropertyProxy::`vftable';
+          v19->mNext = (UFG::allocator::free_link *)&UFG::Editor::PropertyProxy::`vftable;
           LODWORD(v19[3].mNext) = 25;
           HIDWORD(v19[3].mNext) = result;
           LODWORD(v19[4].mNext) = -1;
           v19[5].mNext = 0i64;
           LOWORD(v19[6].mNext) = 0;
           BYTE2(v19[6].mNext) = 0;
-          v19->mNext = (UFG::allocator::free_link *)&UFG::Editor::PropertyProxy_Container::`vftable';
+          v19->mNext = (UFG::allocator::free_link *)&UFG::Editor::PropertyProxy_Container::`vftable;
           v22 = v19 + 7;
           v22->mNext = v22;
           v22[1].mNext = v22;
           LOBYTE(v19[9].mNext) = 0;
           HIDWORD(v19[9].mNext) = 0;
-          v19->mNext = (UFG::allocator::free_link *)&UFG::Editor::PropertyProxy_PropertyList::`vftable';
+          v19->mNext = (UFG::allocator::free_link *)&UFG::Editor::PropertyProxy_PropertyList::`vftable;
         }
         else
         {
@@ -1470,14 +1470,14 @@ LABEL_31:
         v28 = v27 + 1;
         v28->mNext = v28;
         v28[1].mNext = v28;
-        v19->mNext = (UFG::allocator::free_link *)&UFG::Editor::PropertyProxy::`vftable';
+        v19->mNext = (UFG::allocator::free_link *)&UFG::Editor::PropertyProxy::`vftable;
         LODWORD(v19[3].mNext) = v14;
         HIDWORD(v19[3].mNext) = result;
         LODWORD(v19[4].mNext) = v11;
         v19[5].mNext = 0i64;
         LOWORD(v19[6].mNext) = 0;
         BYTE2(v19[6].mNext) = 0;
-        v19->mNext = (UFG::allocator::free_link *)&UFG::Editor::PropertyProxySimple::`vftable';
+        v19->mNext = (UFG::allocator::free_link *)&UFG::Editor::PropertyProxySimple::`vftable;
         UFG::qString::qString((UFG::qString *)&v19[7]);
         LOBYTE(v19[12].mNext) = 0;
         v29 = v19 + 13;
@@ -1501,14 +1501,14 @@ LABEL_31:
       v24 = v23 + 1;
       v24->mNext = v24;
       v24[1].mNext = v24;
-      v19->mNext = (UFG::allocator::free_link *)&UFG::Editor::PropertyProxy::`vftable';
+      v19->mNext = (UFG::allocator::free_link *)&UFG::Editor::PropertyProxy::`vftable;
       LODWORD(v19[3].mNext) = v14;
       HIDWORD(v19[3].mNext) = result;
       LODWORD(v19[4].mNext) = v11;
       v19[5].mNext = 0i64;
       LOWORD(v19[6].mNext) = 0;
       BYTE2(v19[6].mNext) = 0;
-      v19->mNext = (UFG::allocator::free_link *)&UFG::Editor::PropertyProxyVectored::`vftable';
+      v19->mNext = (UFG::allocator::free_link *)&UFG::Editor::PropertyProxyVectored::`vftable;
       LODWORD(v19[7].mNext) = 0;
       v25 = 0i64;
       v26 = (_DWORD *)((char *)&v19[7].mNext + 4);
@@ -2319,7 +2319,7 @@ UFG::qPropertySet *__fastcall UFG::Editor::PropertyProxy_PropertySet::UpdatePare
               v32 = (UFG::qNode<UFG::Event,UFG::Event> *)&v31->mPrev;
               v32->mPrev = v32;
               v32->mNext = v32;
-              v31->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+              v31->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
               v31->m_EventUID = 609910773;
               v31->m_NamePTR = 0i64;
             }
@@ -2383,7 +2383,7 @@ UFG::qPropertySet *__fastcall UFG::Editor::PropertyProxy_PropertySet::UpdatePare
             if ( item.mSubElements.p )
             {
               v41 = &item.mSubElements.p[-1].mStringHash32;
-              `eh vector destructor iterator'(
+              `eh vector destructor iterator(
                 item.mSubElements.p,
                 0x28ui64,
                 item.mSubElements.p[-1].mStringHash32,
@@ -2395,7 +2395,7 @@ UFG::qPropertySet *__fastcall UFG::Editor::PropertyProxy_PropertySet::UpdatePare
             if ( item.mElements.p )
             {
               v42 = item.mElements.p - 1;
-              `eh vector destructor iterator'(
+              `eh vector destructor iterator(
                 item.mElements.p,
                 4ui64,
                 item.mElements.p[-1].mUID,
@@ -2537,14 +2537,14 @@ void __fastcall UFG::Editor::PropertyProxy_PropertyList::GenerateChildren(UFG::E
               v19 = v18 + 1;
               v19->mNext = v19;
               v19[1].mNext = v19;
-              v15->mNext = (UFG::allocator::free_link *)&UFG::Editor::PropertyProxy::`vftable';
+              v15->mNext = (UFG::allocator::free_link *)&UFG::Editor::PropertyProxy::`vftable;
               LODWORD(v15[3].mNext) = v5;
               HIDWORD(v15[3].mNext) = UFG::gNullQSymbol;
               LODWORD(v15[4].mNext) = v9;
               v15[5].mNext = 0i64;
               LOWORD(v15[6].mNext) = 0;
               BYTE2(v15[6].mNext) = 0;
-              v15->mNext = (UFG::allocator::free_link *)&UFG::Editor::PropertyProxyVectored::`vftable';
+              v15->mNext = (UFG::allocator::free_link *)&UFG::Editor::PropertyProxyVectored::`vftable;
               LODWORD(v15[7].mNext) = 0;
               v20 = 0i64;
               v21 = (_DWORD *)((char *)&v15[7].mNext + 4);
@@ -2595,14 +2595,14 @@ LABEL_32:
                 v23 = v22 + 1;
                 v23->mNext = v23;
                 v23[1].mNext = v23;
-                v15->mNext = (UFG::allocator::free_link *)&UFG::Editor::PropertyProxy::`vftable';
+                v15->mNext = (UFG::allocator::free_link *)&UFG::Editor::PropertyProxy::`vftable;
                 LODWORD(v15[3].mNext) = v5;
                 HIDWORD(v15[3].mNext) = UFG::gNullQSymbol;
                 LODWORD(v15[4].mNext) = v9;
                 v15[5].mNext = 0i64;
                 LOWORD(v15[6].mNext) = 0;
                 BYTE2(v15[6].mNext) = 0;
-                v15->mNext = (UFG::allocator::free_link *)&UFG::Editor::PropertyProxySimple::`vftable';
+                v15->mNext = (UFG::allocator::free_link *)&UFG::Editor::PropertyProxySimple::`vftable;
                 UFG::qString::qString((UFG::qString *)&v15[7]);
                 LOBYTE(v15[12].mNext) = 0;
                 v27 = v15 + 13;
@@ -2625,20 +2625,20 @@ LABEL_32:
               v17 = v16 + 1;
               v17->mNext = v17;
               v17[1].mNext = v17;
-              v15->mNext = (UFG::allocator::free_link *)&UFG::Editor::PropertyProxy::`vftable';
+              v15->mNext = (UFG::allocator::free_link *)&UFG::Editor::PropertyProxy::`vftable;
               LODWORD(v15[3].mNext) = 25;
               HIDWORD(v15[3].mNext) = UFG::gNullQSymbol;
               LODWORD(v15[4].mNext) = v9;
               v15[5].mNext = 0i64;
               LOWORD(v15[6].mNext) = 0;
               BYTE2(v15[6].mNext) = 0;
-              v15->mNext = (UFG::allocator::free_link *)&UFG::Editor::PropertyProxy_Container::`vftable';
+              v15->mNext = (UFG::allocator::free_link *)&UFG::Editor::PropertyProxy_Container::`vftable;
               v26 = v15 + 7;
               v26->mNext = v26;
               v26[1].mNext = v26;
               LOBYTE(v15[9].mNext) = 0;
               HIDWORD(v15[9].mNext) = 0;
-              v15->mNext = (UFG::allocator::free_link *)&UFG::Editor::PropertyProxy_PropertyList::`vftable';
+              v15->mNext = (UFG::allocator::free_link *)&UFG::Editor::PropertyProxy_PropertyList::`vftable;
             }
             else
             {
@@ -3043,7 +3043,7 @@ void __fastcall UFG::Editor::GetSharedProperties(UFG::qArray<UFG::Editor::Proper
   v45 = propertySets;
   _dst = shared_property_uids;
   v2 = propertySets;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     &ptr,
     0x10ui64,
     2,
@@ -3228,7 +3228,7 @@ LABEL_51:
     operator delete[](instances.p);
   instances.p = 0i64;
   *(_QWORD *)&instances.size = 0i64;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     &ptr,
     0x10ui64,
     2,
@@ -3297,20 +3297,20 @@ void __fastcall UFG::Editor::PropertyBrowser::PropertyBrowser(UFG::Editor::Prope
   v3 = (UFG::qNode<UFG::Editor::PropertyProxy,UFG::Editor::PropertyProxy> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::Editor::PropertyProxyVtbl *)&UFG::Editor::PropertyProxy::`vftable';
+  v2->vfptr = (UFG::Editor::PropertyProxyVtbl *)&UFG::Editor::PropertyProxy::`vftable;
   v2->mDataType = 26;
   v2->mPropertyName = UFG::gNullQSymbol;
   v2->mArrayIndex = -1;
   v2->mParent = 0i64;
   *(_WORD *)&v2->mIsLocal = 0;
   v2->mIsListProperty = 0;
-  v2->vfptr = (UFG::Editor::PropertyProxyVtbl *)&UFG::Editor::PropertyProxy_Container::`vftable';
+  v2->vfptr = (UFG::Editor::PropertyProxyVtbl *)&UFG::Editor::PropertyProxy_Container::`vftable;
   v4 = &v2->mChildren;
   v4->mChildrenOrdered.mNode.mPrev = &v4->mChildrenOrdered.mNode;
   v4->mChildrenOrdered.mNode.mNext = &v4->mChildrenOrdered.mNode;
   v2->mHasGenerantedChildren = 0;
   v2->mSelectedTypeOption = 0;
-  v2->vfptr = (UFG::Editor::PropertyProxyVtbl *)&UFG::Editor::PropertyProxy_PropertySet::`vftable';
+  v2->vfptr = (UFG::Editor::PropertyProxyVtbl *)&UFG::Editor::PropertyProxy_PropertySet::`vftable;
   UFG::qString::qString(&v2->mNewPropertyName);
   v1->mpSelection = 0i64;
   UFG::Editor::ValueChange::ValueChange(&v1->mPendingValueChange);
@@ -3410,7 +3410,7 @@ void __fastcall UFG::Editor::PropertyBrowser::~PropertyBrowser(UFG::Editor::Prop
   }
   UFG::qBaseTreeRB::~qBaseTreeRB((Render::Skinning *)&v1->mExpansionStates);
   UFG::Editor::ValueChange::~ValueChange(&v1->mPendingValueChange);
-  v1->mTopLevelProperties.vfptr = (UFG::Editor::PropertyProxyVtbl *)&UFG::Editor::PropertyProxy_PropertySet::`vftable';
+  v1->mTopLevelProperties.vfptr = (UFG::Editor::PropertyProxyVtbl *)&UFG::Editor::PropertyProxy_PropertySet::`vftable;
   UFG::qString::~qString(&v1->mTopLevelProperties.mNewPropertyName);
   UFG::Editor::PropertyProxy_Container::~PropertyProxy_Container((UFG::Editor::PropertyProxy_Container *)&v1->mTopLevelProperties.vfptr);
 }

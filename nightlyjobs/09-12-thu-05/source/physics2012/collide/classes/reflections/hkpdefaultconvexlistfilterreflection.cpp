@@ -31,7 +31,7 @@ hkClass *__fastcall hkpDefaultConvexListFilter::staticClass()
 void __fastcall finishLoadedObjecthkpDefaultConvexListFilter(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpDefaultConvexListFilter::`vftable';
+    *(_QWORD *)p = &hkpDefaultConvexListFilter::`vftable;
 }
 
 // File Line: 64
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkpDefaultConvexListFilter(void *p)
 // RVA: 0xCEB9E0
 void **__fastcall getVtablehkpDefaultConvexListFilter()
 {
-  return &hkpDefaultConvexListFilter::`vftable';
+  return &hkpDefaultConvexListFilter::`vftable;
 }
 
 // File Line: 90

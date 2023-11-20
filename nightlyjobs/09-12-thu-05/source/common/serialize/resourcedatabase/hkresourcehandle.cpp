@@ -6,7 +6,7 @@ void __fastcall hkMemoryResourceHandle::hkMemoryResourceHandle(hkMemoryResourceH
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkMemoryResourceHandle::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkMemoryResourceHandle::`vftable;
   this->m_variant.m_pntr = 0i64;
   hkStringPtr::hkStringPtr(&this->m_name);
   v1->m_references.m_data = 0i64;
@@ -21,7 +21,7 @@ void __fastcall hkMemoryResourceHandle::hkMemoryResourceHandle(hkMemoryResourceH
   hkStringPtr *v2; // rcx
 
   v2 = &this->m_name;
-  v2[-3].m_stringAndFlag = (const char *)&hkMemoryResourceHandle::`vftable';
+  v2[-3].m_stringAndFlag = (const char *)&hkMemoryResourceHandle::`vftable;
   hkStringPtr::hkStringPtr(v2, flag);
 }
 
@@ -38,7 +38,7 @@ void __fastcall hkMemoryResourceHandle::~hkMemoryResourceHandle(hkMemoryResource
   hkReferencedObject *v7; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkMemoryResourceHandle::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkMemoryResourceHandle::`vftable;
   v2 = this->m_references.m_size;
   v3 = this->m_references.m_data;
   v4 = v2 - 1;
@@ -68,7 +68,7 @@ void __fastcall hkMemoryResourceHandle::~hkMemoryResourceHandle(hkMemoryResource
   if ( v7 )
     hkReferencedObject::removeReference(v7);
   v1->m_variant.m_pntr = 0i64;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 31
@@ -571,7 +571,7 @@ void __fastcall hkMemoryResourceContainer::hkMemoryResourceContainer(hkMemoryRes
 
   v2 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkMemoryResourceContainer::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkMemoryResourceContainer::`vftable;
   hkStringPtr::hkStringPtr(&this->m_name, name);
   v2->m_parent = 0i64;
   v2->m_resourceHandles.m_data = 0i64;
@@ -595,7 +595,7 @@ void __fastcall hkMemoryResourceContainer::hkMemoryResourceContainer(hkMemoryRes
   v6 = flag.m_finishing;
   v2 = this;
   v3 = &this->m_name;
-  v3[-2].m_stringAndFlag = (const char *)&hkMemoryResourceContainer::`vftable';
+  v3[-2].m_stringAndFlag = (const char *)&hkMemoryResourceContainer::`vftable;
   hkStringPtr::hkStringPtr(v3, flag);
   if ( v6 )
   {
@@ -631,7 +631,7 @@ void __fastcall hkMemoryResourceContainer::~hkMemoryResourceContainer(hkMemoryRe
   int v11; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkMemoryResourceContainer::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkMemoryResourceContainer::`vftable;
   v2 = this->m_children.m_data;
   v3 = this->m_children.m_size - 1;
   for ( i = v3; i >= 0; v2[i--].m_pntr = 0i64 )
@@ -667,7 +667,7 @@ void __fastcall hkMemoryResourceContainer::~hkMemoryResourceContainer(hkMemoryRe
   v1->m_resourceHandles.m_data = 0i64;
   v1->m_resourceHandles.m_capacityAndFlags = 2147483648;
   hkStringPtr::~hkStringPtr(&v1->m_name);
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 269
@@ -1108,11 +1108,11 @@ hkResult *__fastcall hkMemoryResourceContainer::parentTo(hkMemoryResourceContain
         goto LABEL_4;
     }
     hkErrStream::hkErrStream(&v26, &buf, 512);
-    v22 = hkOstream::operator<<((hkOstream *)&v26.vfptr, "Cannot parent '");
+    v22 = hkOstream::operator<<((hkOstream *)&v26.vfptr, "Cannot parent ");
     v23 = hkOstream::operator<<(v22, &v5->m_name);
-    v24 = hkOstream::operator<<(v23, "' to '");
+    v24 = hkOstream::operator<<(v23, " to ");
     v25 = hkOstream::operator<<(v24, (hkStringPtr *)&v3[1]);
-    hkOstream::operator<<(v25, "' as this would create a circular dependency ");
+    hkOstream::operator<<(v25, " as this would create a circular dependency ");
     hkError::messageWarning(-1413855916, &buf, "ResourceDatabase\\hkResourceHandle.cpp", 408);
     hkOstream::~hkOstream((hkOstream *)&v26.vfptr);
     v4->m_enum = 1;
@@ -1202,7 +1202,7 @@ void __fastcall hkContainerResourceMap::hkContainerResourceMap(hkContainerResour
   char v12; // [rsp+40h] [rbp-98h]
 
   v2 = container;
-  this->vfptr = (hkResourceMapVtbl *)&hkContainerResourceMap::`vftable';
+  this->vfptr = (hkResourceMapVtbl *)&hkContainerResourceMap::`vftable;
   v3 = this;
   hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>(
     &this->m_resources.m_map,

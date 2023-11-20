@@ -7,7 +7,7 @@ void __fastcall UFG::NavModuleLocalORCA::NavModuleLocalORCA(UFG::NavModuleLocalO
 
   v2 = this;
   UFG::NavModuleLocal::NavModuleLocal((UFG::NavModuleLocal *)&this->vfptr, parent);
-  v2->vfptr = (UFG::NavModuleLocalVtbl *)&UFG::NavModuleLocalORCA::`vftable';
+  v2->vfptr = (UFG::NavModuleLocalVtbl *)&UFG::NavModuleLocalORCA::`vftable;
   v2->mpStrategy = 0i64;
   *(_QWORD *)&v2->mIndex = 0i64;
   v2->mStuckWaitTimer = 0.0;
@@ -49,7 +49,7 @@ void __fastcall UFG::NavModuleLocalORCA::Init(UFG::NavModuleLocalORCA *this, UFG
   v8 = UFG::qRandom(1.0, &UFG::qDefaultSeed);
   v3->mStuckWaitTimer = 0.0;
   v3->mWiggleRandomRange = v8;
-  v10 =  UFG::NavModuleLocalORCA::`vcall'{96,{flat}};
+  v10 =  UFG::NavModuleLocalORCA::`vcall{96,{flat}};
   v9 = v3;
   UFG::TicketBoothManager::Register(
     UFG::TicketBoothManager::mpSingleton,
@@ -67,7 +67,7 @@ void __fastcall UFG::NavModuleLocalORCA::~NavModuleLocalORCA(UFG::NavModuleLocal
   UFG::qNode<UFG::Ticket,UFG::Ticket> *v3; // rax
 
   v1 = this;
-  this->vfptr = (UFG::NavModuleLocalVtbl *)&UFG::NavModuleLocalORCA::`vftable';
+  this->vfptr = (UFG::NavModuleLocalVtbl *)&UFG::NavModuleLocalORCA::`vftable;
   UFG::NavAvoidanceStrategyORCA::ReturnAgentIndex(this->mpStrategy, this->mIndex);
   UFG::TicketBoothManager::Unregister(
     UFG::TicketBoothManager::mpSingleton,
@@ -79,7 +79,7 @@ void __fastcall UFG::NavModuleLocalORCA::~NavModuleLocalORCA(UFG::NavModuleLocal
   v3->mPrev = v2;
   v1->mGatherObstaclesTicket.mPrev = (UFG::qNode<UFG::Ticket,UFG::Ticket> *)&v1->mGatherObstaclesTicket.mPrev;
   v1->mGatherObstaclesTicket.mNext = (UFG::qNode<UFG::Ticket,UFG::Ticket> *)&v1->mGatherObstaclesTicket.mPrev;
-  v1->vfptr = (UFG::NavModuleLocalVtbl *)&UFG::NavModuleLocal::`vftable';
+  v1->vfptr = (UFG::NavModuleLocalVtbl *)&UFG::NavModuleLocal::`vftable;
   _((AMD_HD3D *)&v1->m_adjustedWaypoint);
 }
 

@@ -7,7 +7,7 @@ void __fastcall UFG::InteractionPoint::InteractionPoint(UFG::InteractionPoint *t
 
   v1 = this;
   UFG::qSafePointerNode<UFG::InteractionPoint>::qSafePointerNode<UFG::InteractionPoint>((UFG::qSafePointerNode<UFG::InteractionPoint> *)&this->vfptr);
-  v1->vfptr = (UFG::qSafePointerNode<UFG::InteractionPoint>Vtbl *)&UFG::InteractionPoint::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::InteractionPoint>Vtbl *)&UFG::InteractionPoint::`vftable;
   v1->m_InteractorList.p = 0i64;
   *(_QWORD *)&v1->m_InteractorList.size = 0i64;
   v1->m_eInteractionPointUpdate = 0;

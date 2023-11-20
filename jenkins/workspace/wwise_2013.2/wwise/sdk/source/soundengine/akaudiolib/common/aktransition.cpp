@@ -129,20 +129,20 @@ signed __int64 __fastcall CAkTransition::InitParameters(CAkTransition *this, Tra
   v6 = in_Params->fTargetValue;
   if ( in_Params->bdBs )
   {
-    v7 = `AkMath::FastPow10'::`4'::`local static guard';
+    v7 = `AkMath::FastPow10::`4::`local static guard;
     v8 = v5 * 0.050000001;
     if ( v8 >= -37.0 )
     {
-      if ( `AkMath::FastPow10'::`4'::`local static guard' & 1 )
+      if ( `AkMath::FastPow10::`4::`local static guard & 1 )
       {
-        v9 = *(float *)&`AkMath::FastPow10'::`4'::SCALE;
+        v9 = *(float *)&`AkMath::FastPow10::`4::SCALE;
       }
       else
       {
         v9 = FLOAT_2_7866352e7;
-        v7 = `AkMath::FastPow10'::`4'::`local static guard' | 1;
-        `AkMath::FastPow10'::`4'::`local static guard' |= 1u;
-        `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
+        v7 = `AkMath::FastPow10::`4::`local static guard | 1;
+        `AkMath::FastPow10::`4::`local static guard |= 1u;
+        `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
       }
       v5 = (float)((float)((float)((float)(COERCE_FLOAT(
                                              ((signed int)(float)((float)(v8 * v9) + 1065353200.0) & 0x7FFFFF)
@@ -155,7 +155,7 @@ signed __int64 __fastcall CAkTransition::InitParameters(CAkTransition *this, Tra
     }
     else
     {
-      v9 = *(float *)&`AkMath::FastPow10'::`4'::SCALE;
+      v9 = *(float *)&`AkMath::FastPow10::`4::SCALE;
       v5 = 0.0;
     }
     v10 = v6 * 0.050000001;
@@ -164,8 +164,8 @@ signed __int64 __fastcall CAkTransition::InitParameters(CAkTransition *this, Tra
       if ( !(v7 & 1) )
       {
         v9 = FLOAT_2_7866352e7;
-        `AkMath::FastPow10'::`4'::`local static guard' = v7 | 1;
-        `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
+        `AkMath::FastPow10::`4::`local static guard = v7 | 1;
+        `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
       }
       v6 = (float)((float)((float)((float)(COERCE_FLOAT(
                                              ((signed int)(float)((float)(v10 * v9) + 1065353200.0) & 0x7FFFFF)

@@ -172,8 +172,8 @@ Scaleform::GFx::SetBackgroundColorTag *__fastcall Scaleform::GFx::LoadProcess::A
   }
   if ( !v3 )
     return 0i64;
-  *(_QWORD *)v3 = &Scaleform::GFx::ExecuteTag::`vftable';
-  *(_QWORD *)v3 = &Scaleform::GFx::SetBackgroundColorTag::`vftable';
+  *(_QWORD *)v3 = &Scaleform::GFx::ExecuteTag::`vftable;
+  *(_QWORD *)v3 = &Scaleform::GFx::SetBackgroundColorTag::`vftable;
   return (Scaleform::GFx::SetBackgroundColorTag *)v3;
 }
 
@@ -201,11 +201,11 @@ Scaleform::GFx::AS2::PlaceObject2EHa *__fastcall Scaleform::GFx::LoadProcess::Al
   }
   if ( !v5 )
     return 0i64;
-  *v5 = &Scaleform::GFx::ExecuteTag::`vftable';
-  *v5 = &Scaleform::GFx::GFxPlaceObjectBase::`vftable';
-  *v5 = &Scaleform::GFx::PlaceObject2Tag::`vftable';
-  *v5 = &Scaleform::GFx::AS2::PlaceObject2EH::`vftable';
-  *v5 = &Scaleform::GFx::AS2::PlaceObject2EHa::`vftable';
+  *v5 = &Scaleform::GFx::ExecuteTag::`vftable;
+  *v5 = &Scaleform::GFx::GFxPlaceObjectBase::`vftable;
+  *v5 = &Scaleform::GFx::PlaceObject2Tag::`vftable;
+  *v5 = &Scaleform::GFx::AS2::PlaceObject2EH::`vftable;
+  *v5 = &Scaleform::GFx::AS2::PlaceObject2EHa::`vftable;
   return (Scaleform::GFx::AS2::PlaceObject2EHa *)v5;
 }
 

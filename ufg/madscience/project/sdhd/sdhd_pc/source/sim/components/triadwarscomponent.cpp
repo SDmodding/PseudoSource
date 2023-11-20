@@ -55,7 +55,7 @@ void __fastcall UFG::TriadWarsComponent::TriadWarsComponent(UFG::TriadWarsCompon
   v3 = (UFG::qNode<UFG::TriadWarsComponent,UFG::TriadWarsComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TriadWarsComponent::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TriadWarsComponent::`vftable;
   UFG::SimComponent::AddType(
     (UFG::SimComponent *)&v2->vfptr,
     UFG::TriadWarsComponent::_TriadWarsComponentTypeUID,

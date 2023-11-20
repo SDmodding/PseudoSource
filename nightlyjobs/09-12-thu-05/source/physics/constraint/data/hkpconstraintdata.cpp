@@ -2,7 +2,7 @@
 // RVA: 0xD44FF0
 void __fastcall hkpConstraintData::hkpConstraintData(hkpConstraintData *this, hkFinishLoadedObjectFlag f)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkpConstraintData::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpConstraintData::`vftable;
 }
 
 // File Line: 23

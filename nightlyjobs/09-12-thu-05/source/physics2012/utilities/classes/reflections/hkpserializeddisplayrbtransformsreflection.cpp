@@ -66,7 +66,7 @@ hkClass *__fastcall hkpSerializedDisplayRbTransforms::staticClass()
 void __fastcall finishLoadedObjecthkpSerializedDisplayRbTransforms(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpSerializedDisplayRbTransforms::`vftable';
+    *(_QWORD *)p = &hkpSerializedDisplayRbTransforms::`vftable;
 }
 
 // File Line: 118
@@ -80,7 +80,7 @@ void __fastcall cleanupLoadedObjecthkpSerializedDisplayRbTransforms(void *p)
 // RVA: 0xE0BB40
 void **__fastcall getVtablehkpSerializedDisplayRbTransforms()
 {
-  return &hkpSerializedDisplayRbTransforms::`vftable';
+  return &hkpSerializedDisplayRbTransforms::`vftable;
 }
 
 // File Line: 144

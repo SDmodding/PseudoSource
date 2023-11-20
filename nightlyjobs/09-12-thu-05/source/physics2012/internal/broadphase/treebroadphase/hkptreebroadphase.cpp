@@ -16,7 +16,7 @@ void __fastcall hkpTreeBroadPhase::hkpTreeBroadPhase(hkpTreeBroadPhase *this, hk
   v3 = this;
   hkpBroadPhase::hkpBroadPhase((hkpBroadPhase *)&this->vfptr, BROADPHASE_TREE_16BIT, 320, 7);
   v4 = (signed __int64)v3->m_handles;
-  v3->vfptr = (hkBaseObjectVtbl *)&hkpTreeBroadPhase::`vftable';
+  v3->vfptr = (hkBaseObjectVtbl *)&hkpTreeBroadPhase::`vftable;
   *(_QWORD *)v4 = 0i64;
   *(_DWORD *)(v4 + 8) = 0;
   *(_DWORD *)(v4 + 12) = 2147483648;
@@ -87,7 +87,7 @@ void __fastcall hkpTreeBroadPhase32::~hkpTreeBroadPhase32(hkpTreeBroadPhase32 *t
   int v8; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpTreeBroadPhase32::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpTreeBroadPhase32::`vftable;
   v2 = this->m_childBroadPhase;
   if ( v2 )
     hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);

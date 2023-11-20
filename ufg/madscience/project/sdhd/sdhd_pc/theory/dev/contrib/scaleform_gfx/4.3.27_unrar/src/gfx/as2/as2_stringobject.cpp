@@ -10,8 +10,8 @@ void __fastcall Scaleform::GFx::AS2::StringObject::StringObject(Scaleform::GFx::
   v2 = penv;
   v3 = this;
   Scaleform::GFx::AS2::Object::Object((Scaleform::GFx::AS2::Object *)&this->vfptr, penv);
-  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::StringObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::StringObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::StringObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::StringObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   v4 = *(Scaleform::GFx::ASStringNode **)&v2->StringContext.pContext->pMovieRoot->pASMovieRoot.pObject[7].AVMVersion;
   v3->sValue.pNode = v4;
   ++v4->RefCount;
@@ -174,7 +174,7 @@ void __fastcall Scaleform::GFx::AS2::StringProto::StringCharAt(Scaleform::GFx::A
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "String");
   }
 }
@@ -235,7 +235,7 @@ LABEL_18:
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "String");
   }
 }
@@ -311,7 +311,7 @@ void __fastcall Scaleform::GFx::AS2::StringProto::StringConcat(Scaleform::GFx::A
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "String");
   }
 }
@@ -449,7 +449,7 @@ LABEL_39:
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "String");
   }
 }
@@ -598,7 +598,7 @@ LABEL_36:
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "String");
   }
 }
@@ -636,7 +636,7 @@ void __fastcall Scaleform::GFx::AS2::StringProto::StringSlice(Scaleform::GFx::AS
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "String");
     return;
   }
@@ -792,7 +792,7 @@ void __fastcall Scaleform::GFx::AS2::StringProto::StringSplit(Scaleform::GFx::AS
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "String");
   }
 }
@@ -1142,7 +1142,7 @@ void __fastcall Scaleform::GFx::AS2::StringProto::StringSubstr(Scaleform::GFx::A
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "String");
   }
 }
@@ -1236,7 +1236,7 @@ void __fastcall Scaleform::GFx::AS2::StringProto::StringSubstring(Scaleform::GFx
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "String");
   }
 }
@@ -1283,7 +1283,7 @@ void __fastcall Scaleform::GFx::AS2::StringProto::StringToLowerCase(Scaleform::G
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "String");
   }
 }
@@ -1320,7 +1320,7 @@ void __fastcall Scaleform::GFx::AS2::StringProto::StringValueOf(Scaleform::GFx::
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "String");
   }
 }
@@ -1367,7 +1367,7 @@ void __fastcall Scaleform::GFx::AS2::StringProto::StringToUpperCase(Scaleform::G
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "String");
   }
 }
@@ -1448,7 +1448,7 @@ void __fastcall Scaleform::GFx::AS2::StringProto::StringLocaleCompare(Scaleform:
     {
       Scaleform::GFx::AS2::Environment::LogScriptError(
         v1->Env,
-        "Error: Null or invalid 'this' is used for a method of %s class.\n",
+        "Error: Null or invalid this is used for a method of %s class.\n",
         "String");
     }
   }
@@ -1704,10 +1704,10 @@ Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::StringCtorFunc
   if ( v4 )
   {
     Scaleform::GFx::AS2::Object::Object(v4, &psc);
-    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    v6[2].vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
-    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    v6[2].vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    v6[2].vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    v6[2].vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
     v6[6].vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)Scaleform::GFx::AS2::StringCtorFunction::GlobalCtor;
     v7 = Scaleform::GFx::AS2::GlobalContext::GetPrototype(psc.pContext, ASBuiltin_Function);
     if ( !v6[2].pProto.pObject )
@@ -1736,8 +1736,8 @@ Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::StringCtorFunc
       }
     }
     v6[2].pProto.pObject = v7;
-    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::StringCtorFunction::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    v6[2].vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::StringCtorFunction::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::StringCtorFunction::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    v6[2].vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::StringCtorFunction::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
     Scaleform::GFx::AS2::NameFunction::AddConstMembers(
       v6 + 2,
       &psc,
@@ -1757,8 +1757,8 @@ Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::StringCtorFunc
   {
     v11 = Scaleform::GFx::AS2::GlobalContext::GetPrototype(v2, ASBuiltin_Object);
     Scaleform::GFx::AS2::Object::Object((Scaleform::GFx::AS2::Object *)v10, &psc);
-    *(_QWORD *)v10 = &Scaleform::GFx::AS2::StringObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    *(_QWORD *)(v10 + 32) = &Scaleform::GFx::AS2::StringObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+    *(_QWORD *)v10 = &Scaleform::GFx::AS2::StringObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    *(_QWORD *)(v10 + 32) = &Scaleform::GFx::AS2::StringObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
     v12 = *(_QWORD *)&psc.pContext->pMovieRoot->pASMovieRoot.pObject[7].AVMVersion;
     *(_QWORD *)(v10 + 96) = v12;
     ++*(_DWORD *)(v12 + 24);
@@ -1790,7 +1790,7 @@ Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::StringCtorFunc
     *(_QWORD *)(v10 + 40) = v11;
     v15 = (Scaleform::MemoryHeap *)(v10 + 104);
     flags = v15;
-    v15->vfptr = (Scaleform::MemoryHeapVtbl *)&Scaleform::GFx::AS2::GASPrototypeBase::`vftable';
+    v15->vfptr = (Scaleform::MemoryHeapVtbl *)&Scaleform::GFx::AS2::GASPrototypeBase::`vftable;
     LOBYTE(v15->SelfSize) = 0;
     v15->pPrev = 0i64;
     v15->pNext = 0i64;
@@ -1798,17 +1798,17 @@ Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::StringCtorFunc
     *(_QWORD *)(v10 + 136) = 0i64;
     *(_QWORD *)(v10 + 144) = 0i64;
     *(_QWORD *)(v10 + 160) = 0i64;
-    *(_QWORD *)v10 = &Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::StringObject,Scaleform::GFx::AS2::Environment>::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    *(_QWORD *)(v10 + 32) = &Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::StringObject,Scaleform::GFx::AS2::Environment>::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
-    v15->vfptr = (Scaleform::MemoryHeapVtbl *)&Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::StringObject,Scaleform::GFx::AS2::Environment>::`vftable';
+    *(_QWORD *)v10 = &Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::StringObject,Scaleform::GFx::AS2::Environment>::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    *(_QWORD *)(v10 + 32) = &Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::StringObject,Scaleform::GFx::AS2::Environment>::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+    v15->vfptr = (Scaleform::MemoryHeapVtbl *)&Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::StringObject,Scaleform::GFx::AS2::Environment>::`vftable;
     Scaleform::GFx::AS2::GASPrototypeBase::Init(
       (Scaleform::GFx::AS2::GASPrototypeBase *)(v10 + 104),
       (Scaleform::GFx::AS2::Object *)v10,
       &psc,
       v3);
-    *(_QWORD *)v10 = &Scaleform::GFx::AS2::StringProto::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    *(_QWORD *)(v10 + 32) = &Scaleform::GFx::AS2::StringProto::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
-    v15->vfptr = (Scaleform::MemoryHeapVtbl *)&Scaleform::GFx::AS2::StringProto::`vftable';
+    *(_QWORD *)v10 = &Scaleform::GFx::AS2::StringProto::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    *(_QWORD *)(v10 + 32) = &Scaleform::GFx::AS2::StringProto::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+    v15->vfptr = (Scaleform::MemoryHeapVtbl *)&Scaleform::GFx::AS2::StringProto::`vftable;
     v16 = psc.pContext->pMovieRoot->pASMovieRoot.pObject[24].pASSupport.pObject;
     ++LODWORD(v16[1].vfptr);
     v17 = *(Scaleform::GFx::ASStringNode **)(v10 + 96);

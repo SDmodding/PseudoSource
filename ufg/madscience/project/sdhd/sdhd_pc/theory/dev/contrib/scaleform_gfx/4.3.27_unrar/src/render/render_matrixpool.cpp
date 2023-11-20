@@ -392,7 +392,7 @@ void __fastcall Scaleform::Render::MatrixPoolImpl::MatrixPool::~MatrixPool(Scale
   Scaleform::Render::MatrixPoolImpl::DataPage *v3; // rdi
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::MatrixPoolImpl::MatrixPool::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::MatrixPoolImpl::MatrixPool::`vftable;
   v2 = (char **)&this->DataPages;
   if ( (Scaleform::List<Scaleform::Render::MatrixPoolImpl::DataPage,Scaleform::Render::MatrixPoolImpl::DataPage> *)this->DataPages.Root.pNext != &this->DataPages )
   {
@@ -413,7 +413,7 @@ void __fastcall Scaleform::Render::MatrixPoolImpl::MatrixPool::~MatrixPool(Scale
   }
   if ( v1->pLastFreedPage )
     ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
 }
 
 // File Line: 419

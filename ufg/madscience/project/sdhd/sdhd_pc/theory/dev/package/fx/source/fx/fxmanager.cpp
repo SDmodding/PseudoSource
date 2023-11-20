@@ -343,12 +343,12 @@ void __fastcall Render::FXInstance::~FXInstance(Render::FXInstance *this, int a2
   v26->mPrev = v25;
   v20->mNode.mPrev = &v20->mNode;
   v3->mComponents.mNode.mNext = &v3->mComponents.mNode;
-  v27 = `UFG::qGetResourceInventory<Render::FXSettings>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Render::FXSettings>'::`2'::result )
+  v27 = `UFG::qGetResourceInventory<Render::FXSettings>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Render::FXSettings>::`2::result )
   {
     v28 = UFG::qResourceWarehouse::Instance();
     v27 = UFG::qResourceWarehouse::GetInventory(v28, 0xED341A8D);
-    `UFG::qGetResourceInventory<Render::FXSettings>'::`2'::result = v27;
+    `UFG::qGetResourceInventory<Render::FXSettings>::`2::result = v27;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v3->mSettings.mPrev, v27);
   UFG::qResourceHandle::~qResourceHandle((UFG::qResourceHandle *)&v3->mSettings.mPrev);
@@ -1781,12 +1781,12 @@ signed __int64 __fastcall Render::FXManager::CreateEffect(Render::FXManager *thi
   {
 LABEL_7:
     UFG::qResourceHandle::qResourceHandle(&v62);
-    v11 = `UFG::qGetResourceInventory<Render::FXSettings>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Render::FXSettings>'::`2'::result )
+    v11 = `UFG::qGetResourceInventory<Render::FXSettings>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Render::FXSettings>::`2::result )
     {
       v12 = UFG::qResourceWarehouse::Instance();
       v11 = UFG::qResourceWarehouse::GetInventory(v12, 0xED341A8D);
-      `UFG::qGetResourceInventory<Render::FXSettings>'::`2'::result = v11;
+      `UFG::qGetResourceInventory<Render::FXSettings>::`2::result = v11;
     }
     UFG::qResourceHandle::Init(&v62, 0xED341A8D, v5, v11);
     v13 = (Render::FXSettings *)v62.mData;
@@ -1795,12 +1795,12 @@ LABEL_7:
     {
       v14 = -1;
 LABEL_54:
-      v57 = `UFG::qGetResourceInventory<Render::FXSettings>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<Render::FXSettings>'::`2'::result )
+      v57 = `UFG::qGetResourceInventory<Render::FXSettings>::`2::result;
+      if ( !`UFG::qGetResourceInventory<Render::FXSettings>::`2::result )
       {
         v58 = UFG::qResourceWarehouse::Instance();
         v57 = UFG::qResourceWarehouse::GetInventory(v58, 0xED341A8D);
-        `UFG::qGetResourceInventory<Render::FXSettings>'::`2'::result = v57;
+        `UFG::qGetResourceInventory<Render::FXSettings>::`2::result = v57;
       }
       UFG::qResourceHandle::Close(&v62, v57);
       UFG::qResourceHandle::~qResourceHandle(&v62);
@@ -1879,12 +1879,12 @@ LABEL_54:
       }
     }
     v59 = v62.mNameUID;
-    v34 = `UFG::qGetResourceInventory<Render::FXSettings>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Render::FXSettings>'::`2'::result )
+    v34 = `UFG::qGetResourceInventory<Render::FXSettings>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Render::FXSettings>::`2::result )
     {
       v35 = UFG::qResourceWarehouse::Instance();
       v34 = UFG::qResourceWarehouse::GetInventory(v35, 0xED341A8D);
-      `UFG::qGetResourceInventory<Render::FXSettings>'::`2'::result = v34;
+      `UFG::qGetResourceInventory<Render::FXSettings>::`2::result = v34;
     }
     UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v31->mSettings.mPrev, 0xED341A8D, v59, v34);
     v31->mStartTime = 3.4028235e38;
@@ -1909,12 +1909,12 @@ LABEL_48:
       v50->mPrev = (UFG::qNode<Render::FXInstance,Render::FXInstance_UpdateList> *)&v49[1];
       v50->mNext = (UFG::qNode<Render::FXInstance,Render::FXInstance_UpdateList> *)v51;
       v51->mParent = (UFG::qBaseNodeRB *)&v31->mPrev;
-      v52 = `UFG::qGetResourceInventory<Render::FXSettings>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<Render::FXSettings>'::`2'::result )
+      v52 = `UFG::qGetResourceInventory<Render::FXSettings>::`2::result;
+      if ( !`UFG::qGetResourceInventory<Render::FXSettings>::`2::result )
       {
         v53 = UFG::qResourceWarehouse::Instance();
         v52 = UFG::qResourceWarehouse::GetInventory(v53, 0xED341A8D);
-        `UFG::qGetResourceInventory<Render::FXSettings>'::`2'::result = v52;
+        `UFG::qGetResourceInventory<Render::FXSettings>::`2::result = v52;
       }
       UFG::qResourceHandle::Close(&v62, v52);
       if ( v31->mAudioId && Track<TriggerRecoilPostEffectTask>::DeleteTaskWhenItReturnsFalse(v55, v54, v56) )
@@ -2265,7 +2265,7 @@ void __fastcall Render::FXComponentInstance::~FXComponentInstance(Render::FXComp
   UFG::qNode<Render::FXComponentInstance,Render::FXComponentInstance> *v2; // rcx
   UFG::qNode<Render::FXComponentInstance,Render::FXComponentInstance> *v3; // rax
 
-  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable';
+  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable;
   v1 = (UFG::qNode<Render::FXComponentInstance,Render::FXComponentInstance> *)&this->mPrev;
   v2 = this->mPrev;
   v3 = v1->mNext;

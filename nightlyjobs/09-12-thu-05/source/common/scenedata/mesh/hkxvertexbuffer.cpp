@@ -237,7 +237,7 @@ void __fastcall hkxVertexBuffer::hkxVertexBuffer(hkxVertexBuffer *this, hkFinish
   hkxVertexDescription *v2; // rcx
 
   v2 = &this->m_desc;
-  *(_QWORD *)&v2[-8].m_decls.m_size = &hkxVertexBuffer::`vftable';
+  *(_QWORD *)&v2[-8].m_decls.m_size = &hkxVertexBuffer::`vftable;
   hkxVertexDescription::hkxVertexDescription(v2, f);
 }
 

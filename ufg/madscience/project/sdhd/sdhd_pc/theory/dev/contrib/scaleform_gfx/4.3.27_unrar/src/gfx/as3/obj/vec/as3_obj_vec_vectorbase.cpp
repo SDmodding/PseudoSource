@@ -136,7 +136,7 @@ __int64 __fastcall Scaleform::GFx::AS3::Impl::CompareFunct(Scaleform::GFx::AS3::
       }
     }
   }
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
   if ( (result.Flags & 0x1F) > 9 )
   {
     if ( (result.Flags >> 9) & 1 )
@@ -151,7 +151,7 @@ __int64 __fastcall Scaleform::GFx::AS3::Impl::CompareFunct(Scaleform::GFx::AS3::
 // RVA: 0x8A3220
 void __fastcall Scaleform::GFx::AS3::ArrayBase::~ArrayBase(Scaleform::GFx::AS3::ArrayBase *this)
 {
-  this->vfptr = (Scaleform::GFx::AS3::ArrayBaseVtbl *)&Scaleform::GFx::AS3::ArrayBase::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::ArrayBaseVtbl *)&Scaleform::GFx::AS3::ArrayBase::`vftable;
 }
 
 // File Line: 94
@@ -1185,7 +1185,7 @@ bool __fastcall Scaleform::GFx::AS3::ArrayBase::Every(Scaleform::GFx::AS3::Array
         else
           Scaleform::GFx::AS3::Value::ReleaseInternal(&v18);
       }
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         &argv,
         0x20ui64,
         3,
@@ -1200,7 +1200,7 @@ bool __fastcall Scaleform::GFx::AS3::ArrayBase::Every(Scaleform::GFx::AS3::Array
       else
         Scaleform::GFx::AS3::Value::ReleaseInternal(&v18);
     }
-    `eh vector destructor iterator'(&argv, 0x20ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+    `eh vector destructor iterator(&argv, 0x20ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
   }
 LABEL_37:
   v16 = v9 == v14;
@@ -1300,7 +1300,7 @@ void __fastcall Scaleform::GFx::AS3::ArrayBase::ForEach(Scaleform::GFx::AS3::Arr
           else
             Scaleform::GFx::AS3::Value::ReleaseInternal(&v16);
         }
-        `eh vector destructor iterator'(
+        `eh vector destructor iterator(
           &argv,
           0x20ui64,
           3,
@@ -1315,7 +1315,7 @@ void __fastcall Scaleform::GFx::AS3::ArrayBase::ForEach(Scaleform::GFx::AS3::Arr
         else
           Scaleform::GFx::AS3::Value::ReleaseInternal(&v16);
       }
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         &argv,
         0x20ui64,
         3,
@@ -1430,7 +1430,7 @@ LABEL_34:
           else
             Scaleform::GFx::AS3::Value::ReleaseInternal(&v18);
         }
-        `eh vector destructor iterator'(
+        `eh vector destructor iterator(
           &argv,
           0x20ui64,
           3,
@@ -1444,7 +1444,7 @@ LABEL_34:
         else
           Scaleform::GFx::AS3::Value::ReleaseInternal(&v18);
       }
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         &argv,
         0x20ui64,
         3,
@@ -1459,7 +1459,7 @@ LABEL_34:
       else
         Scaleform::GFx::AS3::Value::ReleaseInternal(&v18);
     }
-    `eh vector destructor iterator'(&argv, 0x20ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+    `eh vector destructor iterator(&argv, 0x20ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
   }
 LABEL_44:
   v16 = 0;

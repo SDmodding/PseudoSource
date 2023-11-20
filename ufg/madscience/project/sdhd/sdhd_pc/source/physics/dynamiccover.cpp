@@ -37,7 +37,7 @@ void __fastcall UFG::DynamicCoverComponent::DynamicCoverComponent(UFG::DynamicCo
   v4 = (UFG::qNode<UFG::DynamicCoverComponent,UFG::DynamicCoverComponent> *)&v3->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::DynamicCoverComponent::`vftable';
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::DynamicCoverComponent::`vftable;
   UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v3->mDynamicCoverGroup.mPrev);
   v3->m_TransformNodeChangeID = -1;
   v3->mEnabled = 1;
@@ -50,12 +50,12 @@ void __fastcall UFG::DynamicCoverComponent::DynamicCoverComponent(UFG::DynamicCo
     (UFG::SimComponent *)&v3->vfptr,
     UFG::DynamicCoverComponent::_DynamicCoverComponentTypeUID,
     "DynamicCoverComponent");
-  v6 = `UFG::qGetResourceInventory<UFG::DynamicCoverGroup>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::DynamicCoverGroup>'::`2'::result )
+  v6 = `UFG::qGetResourceInventory<UFG::DynamicCoverGroup>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::DynamicCoverGroup>::`2::result )
   {
     v7 = UFG::qResourceWarehouse::Instance();
     v6 = UFG::qResourceWarehouse::GetInventory(v7, 0xE5150EE3);
-    `UFG::qGetResourceInventory<UFG::DynamicCoverGroup>'::`2'::result = v6;
+    `UFG::qGetResourceInventory<UFG::DynamicCoverGroup>::`2::result = v6;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v3->mDynamicCoverGroup.mPrev, 0xE5150EE3, v2, v6);
   v8 = LODWORD(v3->mDynamicCoverGroup.mData[1].mNode.mParent);
@@ -74,7 +74,7 @@ void __fastcall UFG::DynamicCoverComponent::DynamicCoverComponent(UFG::DynamicCo
   {
     LODWORD(v13->mNext) = v9;
     v15 = (signed __int64)&v13[1];
-    `eh vector constructor iterator'(
+    `eh vector constructor iterator(
       &v13[1],
       0x68ui64,
       v9,
@@ -111,7 +111,7 @@ void __fastcall UFG::DynamicCoverComponent::~DynamicCoverComponent(UFG::DynamicC
   UFG::qNode<UFG::DynamicCoverComponent,UFG::DynamicCoverComponent> *v9; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::DynamicCoverComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::DynamicCoverComponent::`vftable;
   if ( this == UFG::DynamicCoverComponent::s_DynamicCoverComponentpCurrentIterator )
     UFG::DynamicCoverComponent::s_DynamicCoverComponentpCurrentIterator = (UFG::DynamicCoverComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::DynamicCoverComponent,UFG::DynamicCoverComponent> *)&this->mPrev;
@@ -129,12 +129,12 @@ void __fastcall UFG::DynamicCoverComponent::~DynamicCoverComponent(UFG::DynamicC
     else
       operator delete[](&v5[-1].m_uGroupIndex);
   }
-  v6 = `UFG::qGetResourceInventory<UFG::DynamicCoverGroup>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::DynamicCoverGroup>'::`2'::result )
+  v6 = `UFG::qGetResourceInventory<UFG::DynamicCoverGroup>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::DynamicCoverGroup>::`2::result )
   {
     v7 = UFG::qResourceWarehouse::Instance();
     v6 = UFG::qResourceWarehouse::GetInventory(v7, 0xE5150EE3);
-    `UFG::qGetResourceInventory<UFG::DynamicCoverGroup>'::`2'::result = v6;
+    `UFG::qGetResourceInventory<UFG::DynamicCoverGroup>::`2::result = v6;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mDynamicCoverGroup.mPrev, v6);
   UFG::qResourceHandle::~qResourceHandle((UFG::qResourceHandle *)&v1->mDynamicCoverGroup.mPrev);

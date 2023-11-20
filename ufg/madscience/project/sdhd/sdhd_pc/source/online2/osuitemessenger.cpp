@@ -199,7 +199,7 @@ char __fastcall UFG::OSuiteMessenger::Send(UFG::OSuiteMessenger *this, UFG::OSui
       v14 = v12 + 1;
       v14->mNext = v14;
       v14[1].mNext = v14;
-      v13->vfptr = (UFG::OSuiteMessenger::CommandSendVtbl *)&UFG::OSuiteMessenger::CommandSend::`vftable';
+      v13->vfptr = (UFG::OSuiteMessenger::CommandSendVtbl *)&UFG::OSuiteMessenger::CommandSend::`vftable;
       v13->m_pMessage = v6;
       UFG::qString::qString(&v13->m_sReceivers, &text);
       v13->m_pCallback = v4;
@@ -303,7 +303,7 @@ bool __fastcall UFG::OSuiteMessenger::Recv(UFG::OSuiteMessenger *this, int num, 
   OSuite::ZString::~ZString(&key);
   OSuite::ZOQuery::ServiceOperation(&query, "GetMessagesTail", &params);
   v24 = OSuite::ZWebServiceClient::ExecuteQuery(v5->m_pWebServiceClient, &query, v3);
-  params.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TMap<OSuite::ZString,OSuite::ZString>::`vftable';
+  params.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TMap<OSuite::ZString,OSuite::ZString>::`vftable;
   if ( params.m_pLists )
   {
     if ( LODWORD(params.m_pLists[-1].m_Comparer.vfptr) )
@@ -396,7 +396,7 @@ bool __fastcall UFG::OSuiteMessenger::Delete(UFG::OSuiteMessenger *this, unsigne
   OSuite::ZString::~ZString(&key);
   OSuite::ZOQuery::ServiceOperation(&query, "DeleteMessagesByTimestamp", &params);
   v24 = OSuite::ZWebServiceClient::ExecuteQuery(v5->m_pWebServiceClient, &query, v3);
-  params.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TMap<OSuite::ZString,OSuite::ZString>::`vftable';
+  params.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TMap<OSuite::ZString,OSuite::ZString>::`vftable;
   if ( params.m_pLists )
   {
     if ( LODWORD(params.m_pLists[-1].m_Comparer.vfptr) )
@@ -431,8 +431,8 @@ void __fastcall UFG::OSuiteMessenger::OSuiteMessenger(UFG::OSuiteMessenger *this
   v2 = (UFG::qNode<UFG::OSuiteManagerObserver,UFG::OSuiteManagerObserver> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (UFG::OSuiteManagerObserverVtbl *)&UFG::OSuiteManagerObserver::`vftable';
-  this->vfptr = (UFG::OSuiteManagerObserverVtbl *)&UFG::OSuiteMessenger::`vftable';
+  this->vfptr = (UFG::OSuiteManagerObserverVtbl *)&UFG::OSuiteManagerObserver::`vftable;
+  this->vfptr = (UFG::OSuiteManagerObserverVtbl *)&UFG::OSuiteMessenger::`vftable;
   this->m_pWebServiceClient = 0i64;
   v6 = &this->m_lMessages;
   v6->mNode.mPrev = &v6->mNode;
@@ -466,7 +466,7 @@ void __fastcall UFG::OSuiteMessenger::~OSuiteMessenger(UFG::OSuiteMessenger *thi
   UFG::qNode<UFG::OSuiteManagerObserver,UFG::OSuiteManagerObserver> *v8; // rax
 
   v1 = this;
-  this->vfptr = (UFG::OSuiteManagerObserverVtbl *)&UFG::OSuiteMessenger::`vftable';
+  this->vfptr = (UFG::OSuiteManagerObserverVtbl *)&UFG::OSuiteMessenger::`vftable;
   UFG::OSuiteManager::Instance();
   v2 = (UFG::qNode<UFG::OSuiteManagerObserver,UFG::OSuiteManagerObserver> *)&v1->mPrev;
   v3 = v1->mPrev;
@@ -485,7 +485,7 @@ void __fastcall UFG::OSuiteMessenger::~OSuiteMessenger(UFG::OSuiteMessenger *thi
   v6->mPrev = v5;
   v1->m_lMessages.mNode.mPrev = &v1->m_lMessages.mNode;
   v1->m_lMessages.mNode.mNext = &v1->m_lMessages.mNode;
-  v1->vfptr = (UFG::OSuiteManagerObserverVtbl *)&UFG::OSuiteManagerObserver::`vftable';
+  v1->vfptr = (UFG::OSuiteManagerObserverVtbl *)&UFG::OSuiteManagerObserver::`vftable;
   v7 = v1->mPrev;
   v8 = v1->mNext;
   v7->mNext = v8;
@@ -620,7 +620,7 @@ void __fastcall UFG::OSuiteMessenger::UpdateThread(void *param)
         if ( v3 )
         {
           OSuite::ZOQuery::ZOQuery(&query);
-          params.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TMap<OSuite::ZString,OSuite::ZString>::`vftable';
+          params.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TMap<OSuite::ZString,OSuite::ZString>::`vftable;
           params.m_nHashSize = 16;
           params.m_nCount = 0i64;
           v5 = 640i64;
@@ -636,7 +636,7 @@ void __fastcall UFG::OSuiteMessenger::UpdateThread(void *param)
           {
             LODWORD(v8->mNode.mPrev) = 16;
             v9 = (OSuite::TOrderedMap<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString> > *)&v8->mNode.mNext;
-            `eh vector constructor iterator'(
+            `eh vector constructor iterator(
               &v8->mNode.mNext,
               0x28ui64,
               16,
@@ -657,10 +657,10 @@ void __fastcall UFG::OSuiteMessenger::UpdateThread(void *param)
           v16 = OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&params.m_pLists[v15].vfptr);
           params.m_nCount -= v16;
           v17 = &params.m_pLists[v15];
-          data.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable';
+          data.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable;
           OSuite::ZString::ZString(&data.m_First, &that);
           OSuite::ZString::ZString(&data.m_Second, v13);
-          data.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString>::`vftable';
+          data.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString>::`vftable;
           v18 = (OSuite::ZRedBlackTreeBase::TElement<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString> > *)OSuite::ZObject::operator new(0x58ui64);
           v64 = (UFG::qList<UFG::GUIObjectBase,UFG::GUIObjectBase,1,0> *)v18;
           if ( v18 )
@@ -670,7 +670,7 @@ void __fastcall UFG::OSuiteMessenger::UpdateThread(void *param)
           OSuite::ZRedBlackTreeBase::InsertElementSet(
             (OSuite::ZRedBlackTreeBase *)&v17->vfptr,
             (OSuite::ZRedBlackTreeBase::ZElementBase *)&v18->vfptr);
-          data.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable';
+          data.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable;
           OSuite::ZString::~ZString(&data.m_Second);
           OSuite::ZString::~ZString(&data.m_First);
           v19 = OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&params.m_pLists[v15].vfptr);
@@ -685,10 +685,10 @@ void __fastcall UFG::OSuiteMessenger::UpdateThread(void *param)
           v24 = OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&params.m_pLists[v23].vfptr);
           params.m_nCount -= v24;
           v25 = &params.m_pLists[v23];
-          v56.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable';
+          v56.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable;
           OSuite::ZString::ZString(&v56.m_First, &v50);
           OSuite::ZString::ZString(&v56.m_Second, v21);
-          v56.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString>::`vftable';
+          v56.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString>::`vftable;
           v26 = (OSuite::ZRedBlackTreeBase::TElement<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString> > *)OSuite::ZObject::operator new(0x58ui64);
           v64 = (UFG::qList<UFG::GUIObjectBase,UFG::GUIObjectBase,1,0> *)v26;
           if ( v26 )
@@ -698,7 +698,7 @@ void __fastcall UFG::OSuiteMessenger::UpdateThread(void *param)
           OSuite::ZRedBlackTreeBase::InsertElementSet(
             (OSuite::ZRedBlackTreeBase *)&v25->vfptr,
             (OSuite::ZRedBlackTreeBase::ZElementBase *)&v26->vfptr);
-          v56.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable';
+          v56.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable;
           OSuite::ZString::~ZString(&v56.m_Second);
           OSuite::ZString::~ZString(&v56.m_First);
           v27 = OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&params.m_pLists[v23].vfptr);
@@ -709,7 +709,7 @@ void __fastcall UFG::OSuiteMessenger::UpdateThread(void *param)
           if ( !(_S5_9 & 1) )
           {
             _S5_9 |= 1u;
-            instance.vfptr = (UFG::OnlineManagerVtbl *)&UFG::OnlineManager::`vftable';
+            instance.vfptr = (UFG::OnlineManagerVtbl *)&UFG::OnlineManager::`vftable;
             unk_1424011B8 = 0;
             v64 = &stru_1424011C0;
             stru_1424011C0.mNode.mPrev = (UFG::qNode<UFG::GUIObjectBase,UFG::GUIObjectBase> *)&stru_1424011C0;
@@ -726,10 +726,10 @@ void __fastcall UFG::OSuiteMessenger::UpdateThread(void *param)
           v34 = OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&params.m_pLists[v33].vfptr);
           params.m_nCount -= v34;
           v35 = &params.m_pLists[v33];
-          v53.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable';
+          v53.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable;
           OSuite::ZString::ZString(&v53.m_First, (OSuite::ZString *)((char *)&v50 + 16));
           OSuite::ZString::ZString(&v53.m_Second, v31);
-          v53.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString>::`vftable';
+          v53.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString>::`vftable;
           v36 = (OSuite::ZRedBlackTreeBase::TElement<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString> > *)OSuite::ZObject::operator new(0x58ui64);
           v64 = (UFG::qList<UFG::GUIObjectBase,UFG::GUIObjectBase,1,0> *)v36;
           if ( v36 )
@@ -739,7 +739,7 @@ void __fastcall UFG::OSuiteMessenger::UpdateThread(void *param)
           OSuite::ZRedBlackTreeBase::InsertElementSet(
             (OSuite::ZRedBlackTreeBase *)&v35->vfptr,
             (OSuite::ZRedBlackTreeBase::ZElementBase *)&v36->vfptr);
-          v53.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable';
+          v53.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable;
           OSuite::ZString::~ZString(&v53.m_Second);
           OSuite::ZString::~ZString(&v53.m_First);
           v37 = OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&params.m_pLists[v33].vfptr);
@@ -761,10 +761,10 @@ void __fastcall UFG::OSuiteMessenger::UpdateThread(void *param)
           v44 = OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&params.m_pLists[v43].vfptr);
           params.m_nCount -= v44;
           v45 = &params.m_pLists[v43];
-          v55.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable';
+          v55.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable;
           OSuite::ZString::ZString(&v55.m_First, &v52);
           OSuite::ZString::ZString(&v55.m_Second, v41);
-          v55.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString>::`vftable';
+          v55.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString>::`vftable;
           v46 = (OSuite::ZRedBlackTreeBase::TElement<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString> > *)OSuite::ZObject::operator new(0x58ui64);
           v64 = (UFG::qList<UFG::GUIObjectBase,UFG::GUIObjectBase,1,0> *)v46;
           if ( v46 )
@@ -774,7 +774,7 @@ void __fastcall UFG::OSuiteMessenger::UpdateThread(void *param)
           OSuite::ZRedBlackTreeBase::InsertElementSet(
             (OSuite::ZRedBlackTreeBase *)&v45->vfptr,
             (OSuite::ZRedBlackTreeBase::ZElementBase *)&v46->vfptr);
-          v55.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable';
+          v55.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable;
           OSuite::ZString::~ZString(&v55.m_Second);
           OSuite::ZString::~ZString(&v55.m_First);
           v47 = OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&params.m_pLists[v43].vfptr);
@@ -789,7 +789,7 @@ void __fastcall UFG::OSuiteMessenger::UpdateThread(void *param)
             *((OSuite::ZWebServiceClient **)v1 + 3),
             &query,
             (OSuite::fastdelegate::FastDelegate2<OSuite::SCallbackData *,OSuite::ZWebServiceClient *,void> *)&v50);
-          params.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TMap<OSuite::ZString,OSuite::ZString>::`vftable';
+          params.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TMap<OSuite::ZString,OSuite::ZString>::`vftable;
           if ( params.m_pLists )
           {
             if ( LODWORD(params.m_pLists[-1].m_Comparer.vfptr) )

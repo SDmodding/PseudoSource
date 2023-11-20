@@ -336,8 +336,8 @@ void __fastcall UFG::TargetingSystemPedBaseComponent::TargetingSystemPedBaseComp
   v5 = (UFG::qNode<UFG::TargetingSystemPedBaseComponent,UFG::TargetingSystemPedBaseComponent> *)&v4->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TargetingSystemPedBaseComponent::`vftable'{for `UFG::SimComponent'};
-  v4->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::TargetingSystemPedBaseComponent::`vftable'{for `UFG::UpdateInterface'};
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TargetingSystemPedBaseComponent::`vftable{for `UFG::SimComponent};
+  v4->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::TargetingSystemPedBaseComponent::`vftable{for `UFG::UpdateInterface};
   UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0>::RebindingComponentHandle<UFG::TransformNodeComponent,0>(&v4->m_pTransformNodeComponent);
   UFG::RebindingComponentHandle<UFG::AimingBaseComponent,0>::RebindingComponentHandle<UFG::AimingBaseComponent,0>(&v4->m_pAimingBaseComponent);
   UFG::RebindingComponentHandle<UFG::ActionTreeComponent,0>::RebindingComponentHandle<UFG::ActionTreeComponent,0>(&v4->m_pActionTreeComponent);
@@ -353,7 +353,7 @@ void __fastcall UFG::TargetingSystemPedBaseComponent::TargetingSystemPedBaseComp
   v7 = &v4->m_TargetSteerToTaskList;
   v7->mNode.mPrev = &v7->mNode;
   v7->mNode.mNext = &v7->mNode;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v4->m_CachedPedsList.p,
     0x18ui64,
     80,
@@ -394,8 +394,8 @@ void __fastcall UFG::TargetingSystemPedBaseComponent::~TargetingSystemPedBaseCom
   UFG::qNode<UFG::TargetingSystemPedBaseComponent,UFG::TargetingSystemPedBaseComponent> *v16; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TargetingSystemPedBaseComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::TargetingSystemPedBaseComponent::`vftable'{for `UFG::UpdateInterface'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TargetingSystemPedBaseComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::TargetingSystemPedBaseComponent::`vftable{for `UFG::UpdateInterface};
   v2 = &this->m_CachedPedsList;
   this->m_CachedPedsList.size = 0;
   v3 = this->m_pBucketList;
@@ -444,7 +444,7 @@ void __fastcall UFG::TargetingSystemPedBaseComponent::~TargetingSystemPedBaseCom
   v7->mNext = v7;
   v1->m_ClosePhysicalTargetsList.size = 0;
   v2->size = 0;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v2->p,
     0x18ui64,
     80,

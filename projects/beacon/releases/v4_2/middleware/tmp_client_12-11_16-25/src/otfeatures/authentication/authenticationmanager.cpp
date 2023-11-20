@@ -16,7 +16,7 @@ void __fastcall OSuite::AuthenticationManager::AuthenticationManager(OSuite::Aut
 
   v1 = this;
   v2 = 0i64;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::AuthenticationManager::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::AuthenticationManager::`vftable;
   this->m_onlineAuthentication = 0i64;
   v3 = (OSuite::SteamOnlineAuthentication *)OSuite::ZObject::operator new(0x80ui64);
   if ( v3 )
@@ -36,7 +36,7 @@ void __fastcall OSuite::AuthenticationManager::~AuthenticationManager(OSuite::Au
   OSuite::IOnlineAuthentication *v2; // rcx
 
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::AuthenticationManager::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::AuthenticationManager::`vftable;
   v2 = this->m_onlineAuthentication;
   if ( v2 )
     v2->vfptr->__vecDelDtor((OSuite::ZObject *)&v2->vfptr, 1u);

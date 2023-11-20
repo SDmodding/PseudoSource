@@ -51,8 +51,8 @@ void __fastcall UFG::AudioTriggerRegion::AudioTriggerRegion(UFG::AudioTriggerReg
   v5->mNode.mChild[0] = 0i64;
   v5->mNode.mChild[1] = 0i64;
   v5->mNode.mUID = v6;
-  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AudioTriggerRegion::`vftable'{for `UFG::TriggerRegion'};
-  v5->vfptr = (UFG::AudioEntityVtbl *)&UFG::AudioTriggerRegion::`vftable'{for `UFG::AudioEntity'};
+  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AudioTriggerRegion::`vftable{for `UFG::TriggerRegion};
+  v5->vfptr = (UFG::AudioEntityVtbl *)&UFG::AudioTriggerRegion::`vftable{for `UFG::AudioEntity};
   v7 = &v5->mTags;
   v7->mNode.mPrev = &v7->mNode;
   v7->mNode.mNext = &v7->mNode;
@@ -93,8 +93,8 @@ void __fastcall UFG::AudioTriggerRegion::~AudioTriggerRegion(UFG::AudioTriggerRe
   UFG::qNode<UFG::GUIObjectBase,UFG::GUIObjectBase> *v18; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AudioTriggerRegion::`vftable'{for `UFG::TriggerRegion'};
-  this->vfptr = (UFG::AudioEntityVtbl *)&UFG::AudioTriggerRegion::`vftable'{for `UFG::AudioEntity'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AudioTriggerRegion::`vftable{for `UFG::TriggerRegion};
+  this->vfptr = (UFG::AudioEntityVtbl *)&UFG::AudioTriggerRegion::`vftable{for `UFG::AudioEntity};
   v2 = (UFG::qList<UFG::GUIObjectBase,UFG::GUIObjectBase,1,0> *)&this->mTags;
   v3 = (unsigned int *)&this->mTags.mNode.mNext[-1].mNext;
   v4 = &this->mNode.mUID;
@@ -119,7 +119,7 @@ void __fastcall UFG::AudioTriggerRegion::~AudioTriggerRegion(UFG::AudioTriggerRe
   if ( v8 )
   {
     v9 = v8 - 1;
-    `eh vector destructor iterator'(v8, 4ui64, v8[-1].mUID, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v8, 4ui64, v8[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v9);
   }
   v1->m_regionsContainingMe.m_regionsContainedIn.p = 0i64;
@@ -128,7 +128,7 @@ void __fastcall UFG::AudioTriggerRegion::~AudioTriggerRegion(UFG::AudioTriggerRe
   if ( v10 )
   {
     v11 = v10 - 1;
-    `eh vector destructor iterator'(v10, 4ui64, v10[-1].mUID, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v10, 4ui64, v10[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v11);
   }
   v1->m_regionsIContain.m_regionsContainedIn.p = 0i64;
@@ -137,7 +137,7 @@ void __fastcall UFG::AudioTriggerRegion::~AudioTriggerRegion(UFG::AudioTriggerRe
   if ( v12 )
   {
     v13 = v12 - 1;
-    `eh vector destructor iterator'(v12, 4ui64, v12[-1].mUID, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v12, 4ui64, v12[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v13);
   }
   v1->m_thingsIContain.m_regionsContainedIn.p = 0i64;
@@ -243,7 +243,7 @@ LABEL_16:
       {
         UFG::AudioTriggerRegionEvent::AudioTriggerRegionEvent(&thisEvent, 0i64, v1, i);
         UFG::AudioTriggerRegion::RemoveAudioZoneListener(v1, &thisEvent);
-        thisEvent.vfptr = (UFG::AudioTriggerRegionEventVtbl *)&UFG::AudioTriggerRegionEvent::`vftable';
+        thisEvent.vfptr = (UFG::AudioTriggerRegionEventVtbl *)&UFG::AudioTriggerRegionEvent::`vftable;
         _((AMD_HD3D *)thisEvent.mAudioModeUid.mUID);
         _((AMD_HD3D *)thisEvent.mAudioUidOnExit.mUID);
         _((AMD_HD3D *)thisEvent.mAudioUidOnEnter.mUID);
@@ -574,7 +574,7 @@ void __fastcall UFG::AudioTriggerRegion::OnEntered(UFG::AudioTriggerRegion *this
         }
       }
     }
-    thisEvent.vfptr = (UFG::AudioTriggerRegionEventVtbl *)&UFG::AudioTriggerRegionEvent::`vftable';
+    thisEvent.vfptr = (UFG::AudioTriggerRegionEventVtbl *)&UFG::AudioTriggerRegionEvent::`vftable;
     _((AMD_HD3D *)thisEvent.mAudioModeUid.mUID);
     _((AMD_HD3D *)thisEvent.mAudioUidOnExit.mUID);
     _((AMD_HD3D *)thisEvent.mAudioUidOnEnter.mUID);
@@ -661,7 +661,7 @@ void __fastcall UFG::AudioTriggerRegion::OnExited(UFG::AudioTriggerRegion *this,
         }
       }
     }
-    thisEvent.vfptr = (UFG::AudioTriggerRegionEventVtbl *)&UFG::AudioTriggerRegionEvent::`vftable';
+    thisEvent.vfptr = (UFG::AudioTriggerRegionEventVtbl *)&UFG::AudioTriggerRegionEvent::`vftable;
     _((AMD_HD3D *)thisEvent.mAudioModeUid.mUID);
     _((AMD_HD3D *)thisEvent.mAudioUidOnExit.mUID);
     _((AMD_HD3D *)thisEvent.mAudioUidOnEnter.mUID);
@@ -1143,7 +1143,7 @@ LABEL_10:
             UFG::AudioTriggerRegionEvent::AudioTriggerRegionEvent(&thisEvent, 0i64, (UFG::AudioTriggerRegion *)v6, i);
             UFG::qWiseSymbol::operator=(&i->mAudioModeUidOnExit, &i->mAudioModeUidOnEnter);
             UFG::AudioTriggerRegion::ApplyAudioZoneListener((UFG::AudioTriggerRegion *)v6, &thisEvent);
-            thisEvent.vfptr = (UFG::AudioTriggerRegionEventVtbl *)&UFG::AudioTriggerRegionEvent::`vftable';
+            thisEvent.vfptr = (UFG::AudioTriggerRegionEventVtbl *)&UFG::AudioTriggerRegionEvent::`vftable;
             _((AMD_HD3D *)thisEvent.mAudioModeUid.mUID);
             _((AMD_HD3D *)thisEvent.mAudioUidOnExit.mUID);
             _((AMD_HD3D *)thisEvent.mAudioUidOnEnter.mUID);
@@ -1207,7 +1207,7 @@ LABEL_37:
           {
             UFG::AudioTriggerRegionEvent::AudioTriggerRegionEvent(&v29, 0i64, (UFG::AudioTriggerRegion *)v6, j);
             UFG::AudioTriggerRegion::RemoveAudioZoneListener((UFG::AudioTriggerRegion *)v6, &v29);
-            v29.vfptr = (UFG::AudioTriggerRegionEventVtbl *)&UFG::AudioTriggerRegionEvent::`vftable';
+            v29.vfptr = (UFG::AudioTriggerRegionEventVtbl *)&UFG::AudioTriggerRegionEvent::`vftable;
             _((AMD_HD3D *)v29.mAudioModeUid.mUID);
             _((AMD_HD3D *)v29.mAudioUidOnExit.mUID);
             _((AMD_HD3D *)v29.mAudioUidOnEnter.mUID);
@@ -1527,7 +1527,7 @@ LABEL_27:
     operator delete[](mem);
   if ( v9 )
   {
-    `eh vector destructor iterator'(v9, 4ui64, *(v9 - 1), (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v9, 4ui64, *(v9 - 1), (void (__fastcall *)(void *))_);
     operator delete[](v9 - 1);
   }
   return (UFG::AudioTriggerRegion *)v4;
@@ -1745,7 +1745,7 @@ void UFG::AudioTriggerRegion::UpdateContainmentHierarchy(void)
     if ( v2 )
     {
       v3 = v2 - 4;
-      `eh vector destructor iterator'(v2, 4ui64, *((_DWORD *)v2 - 1), (void (__fastcall *)(void *))_);
+      `eh vector destructor iterator(v2, 4ui64, *((_DWORD *)v2 - 1), (void (__fastcall *)(void *))_);
       operator delete[](v3);
     }
     *(_QWORD *)(v1 + 672) = 0i64;
@@ -1754,7 +1754,7 @@ void UFG::AudioTriggerRegion::UpdateContainmentHierarchy(void)
     if ( v4 )
     {
       v5 = v4 - 4;
-      `eh vector destructor iterator'(v4, 4ui64, *((_DWORD *)v4 - 1), (void (__fastcall *)(void *))_);
+      `eh vector destructor iterator(v4, 4ui64, *((_DWORD *)v4 - 1), (void (__fastcall *)(void *))_);
       operator delete[](v5);
     }
     *(_QWORD *)(v1 + 696) = 0i64;
@@ -2163,7 +2163,7 @@ void __fastcall UFG::AudioTriggerRegion::HandleRefCountedEvent(UFG::AudioTrigger
       {
         v13 = UFG::qWiseSymbol::as_cstr_dbg((UFG::qWiseSymbol *)&v7->mNULL.mChild[0][2].mChild[1] + 1);
         v14 = UFG::qWiseSymbol::as_cstr_dbg(&v15);
-        UFG::qPrintf("AudioTriggerRegion:: Triggering dynamic inverse event: '%s' %s\n", v14, v13);
+        UFG::qPrintf("AudioTriggerRegion:: Triggering dynamic inverse event: %s %s\n", v14, v13);
       }
       UFG::AudioEntity::CreateAndPlayEvent(
         (UFG::AudioEntity *)&UFG::AmbienceAudio::m_instance->vfptr,
@@ -2191,7 +2191,7 @@ void __fastcall UFG::AudioTriggerRegion::HandleRefCountedEvent(UFG::AudioTrigger
     if ( UFG::TiDo::sm_ambiencesInfo )
     {
       v9 = UFG::qWiseSymbol::as_cstr_dbg(&v15);
-      UFG::qPrintf("AudioTriggerRegion:: Triggering dynamic event: '%s'\n", v9);
+      UFG::qPrintf("AudioTriggerRegion:: Triggering dynamic event: %s\n", v9);
     }
     UFG::AudioEntity::CreateAndPlayEvent(
       (UFG::AudioEntity *)&UFG::AmbienceAudio::m_instance->vfptr,
@@ -2292,7 +2292,7 @@ char __fastcall UFG::AudioTriggerRegion::HandleMixRegionExit(UFG::AudioTriggerRe
     }
     UFG::AudioTriggerRegionEvent::AudioTriggerRegionEvent(&thisEvent, 0i64, v2, v4);
     UFG::AudioTriggerRegion::ApplyAudioZoneListener(v1, &thisEvent);
-    thisEvent.vfptr = (UFG::AudioTriggerRegionEventVtbl *)&UFG::AudioTriggerRegionEvent::`vftable';
+    thisEvent.vfptr = (UFG::AudioTriggerRegionEventVtbl *)&UFG::AudioTriggerRegionEvent::`vftable;
     _((AMD_HD3D *)thisEvent.mAudioModeUid.mUID);
     _((AMD_HD3D *)thisEvent.mAudioUidOnExit.mUID);
     _((AMD_HD3D *)thisEvent.mAudioUidOnEnter.mUID);
@@ -2517,7 +2517,7 @@ void __fastcall UFG::AudioTriggerRegionEvent::AudioTriggerRegionEvent(UFG::Audio
   v5 = regionEntity;
   v6 = triggeringEntity;
   v7 = this;
-  this->vfptr = (UFG::AudioTriggerRegionEventVtbl *)&UFG::AudioTriggerRegionEvent::`vftable';
+  this->vfptr = (UFG::AudioTriggerRegionEventVtbl *)&UFG::AudioTriggerRegionEvent::`vftable;
   this->mAudioUidOnEnter.mUID = -1;
   _((AMD_HD3D *)0xFFFFFFFFi64);
   v7->mAudioUidOnExit.mUID = -1;

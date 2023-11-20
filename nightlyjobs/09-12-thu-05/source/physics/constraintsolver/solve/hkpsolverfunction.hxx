@@ -442,14 +442,14 @@ void __fastcall hkpAtomSolverFunctions::computeInverseVirtualMass3D(hkQuaternion
   v16 = v13.m128_f32[0] * v14.m128_f32[0];
   v11.m128_f32[0] = (float)(1.0 - (float)(v13.m128_f32[0] * v14.m128_f32[0])) - v15.m128_f32[0];
   v17 = _mm_mul_ps(_mm_shuffle_ps(v13, v13, 254), _mm_shuffle_ps(v14, v14, 26));
-  v18 = _mm_xor_ps(v15, (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation'::`2'::negateMask0);
+  v18 = _mm_xor_ps(v15, (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation::`2::negateMask0);
   v19 = _mm_add_ps(v12, v12);
-  v20 = _mm_xor_ps(v17, (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation'::`2'::negateMask1);
+  v20 = _mm_xor_ps(v17, (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation::`2::negateMask1);
   v20.m128_f32[0] = v20.m128_f32[0] + 1.0;
   v21 = _mm_sub_ps(v20, v18);
   v18.m128_f32[0] = v16;
   v22 = _mm_sub_ps(
-          _mm_xor_ps(v20, (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation'::`2'::negateMask0),
+          _mm_xor_ps(v20, (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation::`2::negateMask0),
           v18);
   v23 = _mm_mul_ps(_mm_shuffle_ps(v12, v12, 65), _mm_shuffle_ps(v19, v19, 165));
   v24 = _mm_shuffle_ps(v22, v22, 177);
@@ -457,15 +457,15 @@ void __fastcall hkpAtomSolverFunctions::computeInverseVirtualMass3D(hkQuaternion
   v26 = _mm_shuffle_ps(_mm_movehl_ps(v21, v24), v11, 141);
   v27 = transform.m_quad;
   v27.m128_f32[0] = (float)(1.0 - (float)(v12.m128_f32[0] * v19.m128_f32[0])) - v23.m128_f32[0];
-  v28 = _mm_xor_ps(v23, (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation'::`2'::negateMask0);
+  v28 = _mm_xor_ps(v23, (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation::`2::negateMask0);
   v29 = _mm_xor_ps(
           _mm_mul_ps(_mm_shuffle_ps(v12, v12, 254), _mm_shuffle_ps(v19, v19, 26)),
-          (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation'::`2'::negateMask1);
+          (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation::`2::negateMask1);
   v29.m128_f32[0] = v29.m128_f32[0] + 1.0;
   v30 = _mm_sub_ps(v29, v28);
   v28.m128_f32[0] = v25;
   v31 = _mm_sub_ps(
-          _mm_xor_ps(v29, (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation'::`2'::negateMask0),
+          _mm_xor_ps(v29, (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation::`2::negateMask0),
           v28);
   v32 = _mm_shuffle_ps(v31, v31, 177);
   v33 = _mm_shuffle_ps(_mm_movehl_ps(v30, v32), v27, 141);
@@ -1323,15 +1323,15 @@ void __fastcall hkpAtomSolverFunctions::solveQuatAngular3D<hkpVelocityAccumulato
   v38 = _mm_mul_ps(_mm_shuffle_ps(v36, v36, 65), _mm_shuffle_ps(v37, v37, 165));
   v29.m128_f32[0] = v36.m128_f32[0] * v37.m128_f32[0];
   v34.m128_f32[0] = (float)(1.0 - (float)(v36.m128_f32[0] * v37.m128_f32[0])) - v38.m128_f32[0];
-  v39 = _mm_xor_ps(v38, (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation'::`2'::negateMask0);
+  v39 = _mm_xor_ps(v38, (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation::`2::negateMask0);
   v40 = _mm_xor_ps(
           _mm_mul_ps(_mm_shuffle_ps(v36, v36, 254), _mm_shuffle_ps(v37, v37, 26)),
-          (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation'::`2'::negateMask1);
+          (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation::`2::negateMask1);
   v40.m128_f32[0] = v40.m128_f32[0] + 1.0;
   v41 = _mm_sub_ps(v40, v39);
   v39.m128_f32[0] = v29.m128_f32[0];
   v42 = _mm_sub_ps(
-          _mm_xor_ps(v40, (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation'::`2'::negateMask0),
+          _mm_xor_ps(v40, (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation::`2::negateMask0),
           v39);
   scale.m_real = _mm_shuffle_ps(v42, v42, 177);
   v43 = _mm_shuffle_ps(_mm_movehl_ps(v41, scale.m_real), v34, 141);
@@ -1374,15 +1374,15 @@ void __fastcall hkpAtomSolverFunctions::solveQuatAngular3D<hkpVelocityAccumulato
   v73 = _mm_mul_ps(_mm_shuffle_ps(v71, v71, 165), _mm_shuffle_ps(v70, v70, 65));
   v66.m128_f32[0] = v70.m128_f32[0] * v71.m128_f32[0];
   v72.m128_f32[0] = (float)(1.0 - (float)(v70.m128_f32[0] * v71.m128_f32[0])) - v73.m128_f32[0];
-  v74 = _mm_xor_ps(v73, (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation'::`2'::negateMask0);
+  v74 = _mm_xor_ps(v73, (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation::`2::negateMask0);
   v75 = _mm_xor_ps(
           _mm_mul_ps(_mm_shuffle_ps(v70, v70, 254), _mm_shuffle_ps(v71, v71, 26)),
-          (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation'::`2'::negateMask1);
+          (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation::`2::negateMask1);
   v75.m128_f32[0] = v75.m128_f32[0] + 1.0;
   v76 = _mm_sub_ps(v75, v74);
   v74.m128_f32[0] = v66.m128_f32[0];
   v77 = _mm_sub_ps(
-          _mm_xor_ps(v75, (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation'::`2'::negateMask0),
+          _mm_xor_ps(v75, (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation::`2::negateMask0),
           v74);
   v78 = _mm_mul_ps(v76, v67);
   v79 = _mm_mul_ps(v76, v69);
@@ -2266,15 +2266,15 @@ void __fastcall hkpAtomSolverFunctions::solveDeformableAngConstraint<hkpVelocity
   v81 = _mm_mul_ps(_mm_shuffle_ps(v80, v80, 165), _mm_shuffle_ps(v78, v78, 65));
   v72.m128_f32[0] = v78.m128_f32[0] * v80.m128_f32[0];
   v79.m128_f32[0] = (float)(1.0 - (float)(v78.m128_f32[0] * v80.m128_f32[0])) - v81.m128_f32[0];
-  v82 = _mm_xor_ps(v81, (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation'::`2'::negateMask0);
+  v82 = _mm_xor_ps(v81, (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation::`2::negateMask0);
   v83 = _mm_xor_ps(
           _mm_mul_ps(_mm_shuffle_ps(v78, v78, 254), _mm_shuffle_ps(v80, v80, 26)),
-          (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation'::`2'::negateMask1);
+          (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation::`2::negateMask1);
   v83.m128_f32[0] = v83.m128_f32[0] + 1.0;
   v84 = _mm_sub_ps(v83, v82);
   v82.m128_f32[0] = v72.m128_f32[0];
   v85 = _mm_sub_ps(
-          _mm_xor_ps(v83, (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation'::`2'::negateMask0),
+          _mm_xor_ps(v83, (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation::`2::negateMask0),
           v82);
   v86 = _mm_shuffle_ps(v85, v85, 177);
   v87 = _mm_mul_ps(v84, v65);
@@ -2342,15 +2342,15 @@ void __fastcall hkpAtomSolverFunctions::solveDeformableAngConstraint<hkpVelocity
   v125 = _mm_mul_ps(_mm_shuffle_ps(v124, v124, 165), _mm_shuffle_ps(v122, v122, 65));
   v117.m128_f32[0] = v122.m128_f32[0] * v124.m128_f32[0];
   v123.m128_f32[0] = (float)(1.0 - (float)(v122.m128_f32[0] * v124.m128_f32[0])) - v125.m128_f32[0];
-  v126 = _mm_xor_ps(v125, (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation'::`2'::negateMask0);
+  v126 = _mm_xor_ps(v125, (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation::`2::negateMask0);
   v127 = _mm_xor_ps(
            _mm_mul_ps(_mm_shuffle_ps(v122, v122, 254), _mm_shuffle_ps(v124, v124, 26)),
-           (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation'::`2'::negateMask1);
+           (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation::`2::negateMask1);
   v127.m128_f32[0] = v127.m128_f32[0] + 1.0;
   v128 = _mm_sub_ps(v127, v126);
   v126.m128_f32[0] = v117.m128_f32[0];
   v129 = _mm_sub_ps(
-           _mm_xor_ps(v127, (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation'::`2'::negateMask0),
+           _mm_xor_ps(v127, (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation::`2::negateMask0),
            v126);
   v130 = _mm_mul_ps(v128, v114);
   v131 = _mm_shuffle_ps(v129, v129, 177);

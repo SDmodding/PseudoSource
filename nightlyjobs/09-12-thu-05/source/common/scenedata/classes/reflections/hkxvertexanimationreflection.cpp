@@ -81,7 +81,7 @@ void __fastcall finishLoadedObjecthkxVertexAnimation(void *p, int finishing)
   if ( p )
   {
     v2 = (hkxVertexBuffer *)((char *)p + 24);
-    *(_QWORD *)&v2[-1].m_data.m_uint16Stride = &hkxVertexAnimation::`vftable';
+    *(_QWORD *)&v2[-1].m_data.m_uint16Stride = &hkxVertexAnimation::`vftable;
     hkxVertexBuffer::hkxVertexBuffer(v2, (hkFinishLoadedObjectFlag)finishing);
   }
 }
@@ -100,7 +100,7 @@ void **__fastcall getVtablehkxVertexAnimation()
   hkxVertexBuffer v1; // [rsp+38h] [rbp-B0h]
 
   hkxVertexBuffer::hkxVertexBuffer(&v1, 0);
-  return &hkxVertexAnimation::`vftable';
+  return &hkxVertexAnimation::`vftable;
 }
 
 // File Line: 150

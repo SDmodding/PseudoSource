@@ -53,14 +53,14 @@ void __fastcall quantizeReal(hkVector4f *xInOut, hkSimdFloat32 *gridSize, hkSimd
   *xInOut = (hkVector4f)v4.m_quad;
   v5 = _mm_cvtepi32_ps(
          _mm_xor_si128(
-           (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v4.m_quad),
+           (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v4.m_quad),
            _mm_cvttps_epi32(v4.m_quad)));
   v6 = _mm_mul_ps(_mm_sub_ps(v4.m_quad, v5), invGridSize->m_real);
   xInOut->m_quad = _mm_add_ps(
                      _mm_mul_ps(
                        _mm_cvtepi32_ps(
                          _mm_xor_si128(
-                           (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v6),
+                           (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v6),
                            _mm_cvttps_epi32(v6))),
                        gridSize->m_real),
                      v5);
@@ -100,14 +100,14 @@ void __fastcall hkaiNavMeshGenerationUtils::quantize(hkGeometry *geomInOut, floa
       v7[v6 - 1] = (hkVector4f)v9;
       v10 = _mm_cvtepi32_ps(
               _mm_xor_si128(
-                (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v9),
+                (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v9),
                 _mm_cvttps_epi32(v9)));
       v11 = _mm_mul_ps(_mm_sub_ps(v9, v10), v5);
       v7[v6 - 1].m_quad = _mm_add_ps(
                             _mm_mul_ps(
                               _mm_cvtepi32_ps(
                                 _mm_xor_si128(
-                                  (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v11),
+                                  (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v11),
                                   _mm_cvttps_epi32(v11))),
                               v4),
                             v10);
@@ -1275,7 +1275,7 @@ __int64 __fastcall hkaiNavMeshGenerationUtils::_generateNavMesh(hkaiNavMeshGener
   if ( v6 )
     cb = (hkBitField *)v6;
   cuttingTriangles = cb;
-  v391 = &hkaiNavMeshGenerationProgressCallback::`vftable';
+  v391 = &hkaiNavMeshGenerationProgressCallback::`vftable;
   hkaiNavMeshGenerationProgressCallbackContext::hkaiNavMeshGenerationProgressCallbackContext(&cbCtx, v5);
   if ( !(*(unsigned __int64 (__fastcall **)(hkBitField *, _QWORD, hkaiNavMeshGenerationProgressCallbackContext *))cb->m_storage.m_words.m_data)(
           cb,
@@ -1542,7 +1542,7 @@ LABEL_535:
   v75 = v541;
   *(_DWORD *)(v74 + 8) = 0x1FFFF;
   v76 = (hkGeometry *)v74;
-  *(_QWORD *)v74 = &hkGeometry::`vftable';
+  *(_QWORD *)v74 = &hkGeometry::`vftable;
   *(_QWORD *)(v74 + 16) = 0i64;
   *(_DWORD *)(v74 + 24) = 0;
   *(_DWORD *)(v74 + 28) = 2147483648;
@@ -2275,7 +2275,7 @@ LABEL_232:
   cuttingGeom.m_vertices.m_data = 0i64;
   cuttingGeom.m_vertices.m_size = 0;
   cuttingGeom.m_vertices.m_capacityAndFlags = 2147483648;
-  cuttingGeom.vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable';
+  cuttingGeom.vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable;
   cuttingGeom.m_triangles.m_data = 0i64;
   cuttingGeom.m_triangles.m_size = 0;
   cuttingGeom.m_triangles.m_capacityAndFlags = 2147483648;
@@ -3801,7 +3801,7 @@ LABEL_538:
     v311 = &carvers.m_data[v310];
     do
     {
-      hkRefPtr<hkaiVolume const>::`scalar deleting destructor'(v311);
+      hkRefPtr<hkaiVolume const>::`scalar deleting destructor(v311);
       --v311;
       --v310;
     }
@@ -3826,7 +3826,7 @@ LABEL_544:
   array = 0i64;
   v354 = 2147483648;
 LABEL_548:
-  v391 = &hkaiNavMeshGenerationProgressCallback::`vftable';
+  v391 = &hkaiNavMeshGenerationProgressCallback::`vftable;
   hkReferencedObject::removeReference(v398);
   hkReferencedObject::removeReference(v400);
 LABEL_555:
@@ -4059,7 +4059,7 @@ bool __fastcall hkaiNavMeshGenerationUtils::isTriangleCutting(hkGeometry *triMes
 
 // File Line: 1361
 // RVA: 0xB78A20
-void __fastcall `anonymous namespace'::Prism::initFromExtrudedTriangle(Prism *this, hkVector4f *a, hkVector4f *b, hkVector4f *c, hkVector4f *normal, hkSimdFloat32 *extrusionLength)
+void __fastcall `anonymous namespace::Prism::initFromExtrudedTriangle(Prism *this, hkVector4f *a, hkVector4f *b, hkVector4f *c, hkVector4f *normal, hkSimdFloat32 *extrusionLength)
 {
   hkVector4f *v6; // r10
   __m128 v7; // xmm0
@@ -4225,7 +4225,7 @@ void __fastcall `anonymous namespace'::Prism::initFromExtrudedTriangle(Prism *th
 
 // File Line: 1391
 // RVA: 0xB78D60
-bool __fastcall `anonymous namespace'::Prism::testPlaneAgainstTri(Prism *this, hkVector4f *plane, hkVector4f *a, hkVector4f *b, hkVector4f *c, hkVector4f *testPoint)
+bool __fastcall `anonymous namespace::Prism::testPlaneAgainstTri(Prism *this, hkVector4f *plane, hkVector4f *a, hkVector4f *b, hkVector4f *c, hkVector4f *testPoint)
 {
   __m128 v6; // xmm1
   __m128 v7; // xmm1
@@ -4271,7 +4271,7 @@ bool __fastcall `anonymous namespace'::Prism::testPlaneAgainstTri(Prism *this, h
 
 // File Line: 1416
 // RVA: 0xB79060
-bool __fastcall `anonymous namespace'::Prism::hasSeparatingPlaneForTri(Prism *this, hkVector4f *a, hkVector4f *b, hkVector4f *c)
+bool __fastcall `anonymous namespace::Prism::hasSeparatingPlaneForTri(Prism *this, hkVector4f *a, hkVector4f *b, hkVector4f *c)
 {
   hkVector4f *v4; // rbp
   hkVector4f *testPoint; // r14
@@ -4285,20 +4285,20 @@ bool __fastcall `anonymous namespace'::Prism::hasSeparatingPlaneForTri(Prism *th
   v6 = c;
   v7 = b;
   v8 = this;
-  if ( `anonymous namespace'::Prism::testPlaneAgainstTriFast(this, &this->m_topPlane, a, b, c, &this->m_a)
-    || `anonymous namespace'::Prism::testPlaneAgainstTriFast(v8, &v8->m_planeAB, v4, v7, v6, &v8->m_c)
-    || `anonymous namespace'::Prism::testPlaneAgainstTriFast(v8, &v8->m_planeBC, v4, v7, v6, testPoint)
-    || `anonymous namespace'::Prism::testPlaneAgainstTriFast(v8, &v8->m_planeCA, v4, v7, v6, &v8->m_b) )
+  if ( `anonymous namespace::Prism::testPlaneAgainstTriFast(this, &this->m_topPlane, a, b, c, &this->m_a)
+    || `anonymous namespace::Prism::testPlaneAgainstTriFast(v8, &v8->m_planeAB, v4, v7, v6, &v8->m_c)
+    || `anonymous namespace::Prism::testPlaneAgainstTriFast(v8, &v8->m_planeBC, v4, v7, v6, testPoint)
+    || `anonymous namespace::Prism::testPlaneAgainstTriFast(v8, &v8->m_planeCA, v4, v7, v6, &v8->m_b) )
   {
     return 1;
   }
   v10.m_quad = _mm_add_ps(v8->m_normalTimesExtrusion.m_quad, testPoint->m_quad);
-  return `anonymous namespace'::Prism::testPlaneAgainstTriFast(v8, &v8->m_bottomPlane, v4, v7, v6, &v10) != 0;
+  return `anonymous namespace::Prism::testPlaneAgainstTriFast(v8, &v8->m_bottomPlane, v4, v7, v6, &v10) != 0;
 }
 
 // File Line: 1434
 // RVA: 0xB78E30
-bool __fastcall `anonymous namespace'::Prism::testPlaneAgainstTriFast(Prism *this, hkVector4f *plane, hkVector4f *a, hkVector4f *b, hkVector4f *c, hkVector4f *testPoint)
+bool __fastcall `anonymous namespace::Prism::testPlaneAgainstTriFast(Prism *this, hkVector4f *plane, hkVector4f *a, hkVector4f *b, hkVector4f *c, hkVector4f *testPoint)
 {
   __m128 v6; // xmm2
   __m128 v7; // xmm6
@@ -4329,7 +4329,7 @@ bool __fastcall `anonymous namespace'::Prism::testPlaneAgainstTriFast(Prism *thi
 
 // File Line: 1446
 // RVA: 0xB78ED0
-bool __fastcall `anonymous namespace'::Prism::testTriPlaneAgainstPrism(Prism *this, hkVector4f *ta, hkVector4f *tb, hkVector4f *tc)
+bool __fastcall `anonymous namespace::Prism::testTriPlaneAgainstPrism(Prism *this, hkVector4f *ta, hkVector4f *tb, hkVector4f *tc)
 {
   __m128 v4; // xmm1
   __m128 v5; // xmm5
@@ -4638,7 +4638,7 @@ LABEL_58:
                                (__m128)LODWORD(v8->m_characterHeight),
                                (__m128)LODWORD(v8->m_characterHeight),
                                0);
-    `anonymous namespace'::Prism::initFromExtrudedTriangle(&v86, &a, &b, &c, &normal, &extrusionLength);
+    `anonymous namespace::Prism::initFromExtrudedTriangle(&v86, &a, &b, &c, &normal, &extrusionLength);
     if ( v58 )
       hkaiNavMeshGenerationUtils::ExtrudedTriangleObb::makeBoxFromExtrudedTriangle(
         &v85,
@@ -4662,7 +4662,7 @@ LABEL_58:
           hkaiNavMeshGenerationUtils::getTriangleVerts(v10, input, v44, &vertsOut);
           if ( hkaiNavMeshUtils::triangleAabbCheck(aabb, &vertsOut, &triB, &triC) )
           {
-            if ( !`anonymous namespace'::Prism::hasSeparatingPlaneForTri(&v86, &vertsOut, &triB, &triC)
+            if ( !`anonymous namespace::Prism::hasSeparatingPlaneForTri(&v86, &vertsOut, &triB, &triC)
               && (!v30
                || hkaiNavMeshGenerationUtils::ExtrudedTriangleObb::doesTriangleIntersectObb(
                     &v85,
@@ -4931,7 +4931,7 @@ hkResult *__fastcall hkaiNavMeshGenerationUtils::raycastAgainstCuttingGeometry(h
   if ( sortedAabbs.m_size )
   {
     v8->m_enum = 1;
-    v100.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+    v100.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
     hkaiEdgeGeometryRaycaster::~hkaiEdgeGeometryRaycaster(&v101);
     v19 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
     v20 = v19[1];
@@ -4971,7 +4971,7 @@ hkResult *__fastcall hkaiNavMeshGenerationUtils::raycastAgainstCuttingGeometry(h
           array,
           32 * v26);
       array = 0i64;
-      v100.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+      v100.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
       v92 = 2147483648;
       hkaiEdgeGeometryRaycaster::~hkaiEdgeGeometryRaycaster(&v101);
       v27 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
@@ -5367,7 +5367,7 @@ LABEL_98:
   array = 0i64;
 LABEL_108:
   v92 = 2147483648;
-  v100.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v100.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
   hkaiEdgeGeometryRaycaster::~hkaiEdgeGeometryRaycaster(&v101);
   v86 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
   v87 = v86[1];

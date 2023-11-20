@@ -128,12 +128,12 @@ void __fastcall UEL::ParameterExpression::ParameterExpression(UEL::ParameterExpr
   char *v8; // r9
 
   v4 = this;
-  this->vfptr = (UEL::ExpressionVtbl *)&UEL::Expression::`vftable';
+  this->vfptr = (UEL::ExpressionVtbl *)&UEL::Expression::`vftable;
   this->mType.mValue = 4;
   this->mValueType.mBaseType.mValue = 0;
   this->mValueType.mDetailedType = UFG::gNullQSymbol;
   *(_DWORD *)&this->mResolved = 0;
-  this->vfptr = (UEL::ExpressionVtbl *)&UEL::ParameterExpression::`vftable';
+  this->vfptr = (UEL::ExpressionVtbl *)&UEL::ParameterExpression::`vftable;
   v5 = &this->mWithinParameter;
   if ( withinParameter )
     v6 = (char *)((char *)withinParameter - (char *)v5);

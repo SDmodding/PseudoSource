@@ -29,7 +29,7 @@ void __fastcall UELExpressionCondition::UELExpressionCondition(UELExpressionCond
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&UELExpressionCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&UELExpressionCondition::`vftable;
   v1->mExpressionText.mOffset = 1i64;
   BinString::Set(&v1->mExpressionText, &customWorldMapCaption);
   v1->mExpression.mOffset = 0i64;
@@ -45,14 +45,14 @@ void __fastcall UELExpressionCondition::~UELExpressionCondition(UELExpressionCon
   char *v4; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&UELExpressionCondition::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&UELExpressionCondition::`vftable;
   v2 = this->mExpression.mOffset;
   if ( v2 )
   {
     v3 = (__int64 *)((char *)&this->mExpression.mOffset + v2);
     if ( v3 )
     {
-      *v3 = &UEL::Expression::`vftable';
+      *v3 = &UEL::Expression::`vftable;
       operator delete[](v3);
     }
   }
@@ -65,8 +65,8 @@ void __fastcall UELExpressionCondition::~UELExpressionCondition(UELExpressionCon
         operator delete[](v4);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 331
@@ -209,7 +209,7 @@ void __fastcall FacialRequestCondition::FacialRequestCondition(FacialRequestCond
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&FacialRequestCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&FacialRequestCondition::`vftable;
   *(_DWORD *)&v1->mFacialRequest = 0;
 }
 
@@ -262,7 +262,7 @@ void __fastcall ActionRequestCondition::ActionRequestCondition(ActionRequestCond
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ActionRequestCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ActionRequestCondition::`vftable;
   v1->mActionRequest = gActionRequest_INVALID.m_EnumValue;
   v1->mRequestState.mValue = 0;
 }
@@ -328,7 +328,7 @@ void __fastcall ClothingPurchaseCondition::ClothingPurchaseCondition(ClothingPur
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ClothingPurchaseCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ClothingPurchaseCondition::`vftable;
   v1->mClothingPurchase = gActionRequest_Action.m_EnumValue;
 }
 
@@ -597,7 +597,7 @@ Expression::IMemberMap *__fastcall IsPlayingNodeCondition::CreateClone(IsPlaying
   if ( v2 )
   {
     NodeRefCondition::NodeRefCondition((NodeRefCondition *)v2);
-    *(_QWORD *)v3 = &IsPlayingNodeCondition::`vftable';
+    *(_QWORD *)v3 = &IsPlayingNodeCondition::`vftable;
     v3[32] = 0;
   }
   else
@@ -814,7 +814,7 @@ Expression::IMemberMap *__fastcall IsPlayingNodePreviousCondition::CreateClone(I
   if ( v2 )
   {
     NodeRefCondition::NodeRefCondition((NodeRefCondition *)v2);
-    *(_QWORD *)v3 = &IsPlayingNodePreviousCondition::`vftable';
+    *(_QWORD *)v3 = &IsPlayingNodePreviousCondition::`vftable;
     v3[32] = 1;
   }
   else
@@ -1330,7 +1330,7 @@ void __fastcall TargetIsFemaleCondition::TargetIsFemaleCondition(TargetIsFemaleC
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetIsFemaleCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetIsFemaleCondition::`vftable;
   v1->mTargetType.mValue = 0;
 }
 
@@ -1471,7 +1471,7 @@ void __fastcall RagdollHasConstraintsCondition::RagdollHasConstraintsCondition(R
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&RagdollHasConstraintsCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&RagdollHasConstraintsCondition::`vftable;
   v1->mAttachJointName.mUID = -1;
   v1->mAttachJointName.mUID = gStaticSymbolUC_none.mUID;
 }
@@ -1555,7 +1555,7 @@ void __fastcall MotionIntentionSpeed::MotionIntentionSpeed(MotionIntentionSpeed 
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&MotionIntentionSpeed::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&MotionIntentionSpeed::`vftable;
   v1->mSpeed = 0.0;
   v1->mInEqualityOperator.mValue = 3;
 }
@@ -1607,7 +1607,7 @@ void __fastcall MotionIntentionSpeedRaw::MotionIntentionSpeedRaw(MotionIntention
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&MotionIntentionSpeedRaw::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&MotionIntentionSpeedRaw::`vftable;
   v1->mSpeed = 0.0;
   v1->mInEqualityOperator.mValue = 3;
 }
@@ -1659,7 +1659,7 @@ void __fastcall FacingIntentionDirection::FacingIntentionDirection(FacingIntenti
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&FacingIntentionDirection::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&FacingIntentionDirection::`vftable;
   v1->mDirection = 0.0;
   v1->mAngleRange = 1.5707964;
 }
@@ -1715,7 +1715,7 @@ void __fastcall FacingPelvisDirection::FacingPelvisDirection(FacingPelvisDirecti
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&FacingPelvisDirection::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&FacingPelvisDirection::`vftable;
   v1->mDirection = 0.0;
   v1->mAngleRange = 1.5707964;
 }
@@ -1782,7 +1782,7 @@ void __fastcall MotionIntentionDirection::MotionIntentionDirection(MotionIntenti
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&MotionIntentionDirection::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&MotionIntentionDirection::`vftable;
   *(_QWORD *)&v1->mDirection = 0i64;
   v1->mDirectionCos = 1.0;
   v1->mAngleRange = 1.5707964;
@@ -1911,7 +1911,7 @@ void __fastcall MotionIntentionDirectionRaw::MotionIntentionDirectionRaw(MotionI
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&MotionIntentionDirectionRaw::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&MotionIntentionDirectionRaw::`vftable;
   *(_QWORD *)&v1->mDirection = 0i64;
   v1->mDirectionCos = 1.0;
   v1->mAngleRange = 1.5707964;
@@ -2040,7 +2040,7 @@ void __fastcall MotionIntentionDirectionRel::MotionIntentionDirectionRel(MotionI
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&MotionIntentionDirectionRel::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&MotionIntentionDirectionRel::`vftable;
   *(_QWORD *)&v1->mDirection = 0i64;
   v1->mDirectionCos = 1.0;
   v1->mAngleRange = 1.5707964;
@@ -2149,7 +2149,7 @@ void __fastcall MotionIntentionDirectionRelTarget::MotionIntentionDirectionRelTa
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&MotionIntentionDirectionRelTarget::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&MotionIntentionDirectionRelTarget::`vftable;
   v1->mTargetType.mValue = 22;
   *(_QWORD *)&v1->mDirection = 0i64;
   v1->mDirectionCos = 1.0;
@@ -2364,7 +2364,7 @@ void __fastcall AimIntentionRangeCondition::AimIntentionRangeCondition(AimIntent
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AimIntentionRangeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AimIntentionRangeCondition::`vftable;
   v1->m_fDirection = 0.0;
   v1->m_fAngleRange = 1.5707964;
 }
@@ -2430,7 +2430,7 @@ void __fastcall AimIntentionAngleCondition::AimIntentionAngleCondition(AimIntent
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AimIntentionAngleCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AimIntentionAngleCondition::`vftable;
   v1->m_fDirection = 0.0;
   v1->m_InEqualityOperator.mValue = 3;
 }
@@ -2494,7 +2494,7 @@ void __fastcall AimIntentionSpeedCondition::AimIntentionSpeedCondition(AimIntent
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AimIntentionSpeedCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AimIntentionSpeedCondition::`vftable;
   v1->m_fSpeed = 0.0;
   v1->m_InEqualityOperator.mValue = 3;
 }
@@ -2546,7 +2546,7 @@ void __fastcall MotionVelocityMagnitude::MotionVelocityMagnitude(MotionVelocityM
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&MotionVelocityMagnitude::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&MotionVelocityMagnitude::`vftable;
   v1->mSpeed = 0.0;
   v1->mInEqualityOperator.mValue = 3;
 }
@@ -2570,7 +2570,7 @@ void __fastcall MotionAngularVelocityMagnitude::MotionAngularVelocityMagnitude(M
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&MotionAngularVelocityMagnitude::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&MotionAngularVelocityMagnitude::`vftable;
   v1->mSpeed = 0.0;
   v1->mInEqualityOperator.mValue = 3;
 }
@@ -2622,7 +2622,7 @@ void __fastcall MotionRotationSignal::MotionRotationSignal(MotionRotationSignal 
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&MotionRotationSignal::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&MotionRotationSignal::`vftable;
   v1->mSpeed = 0.0;
   v1->mInEqualityOperator.mValue = 3;
 }
@@ -2688,7 +2688,7 @@ void __fastcall HealthCondition::HealthCondition(HealthCondition *this)
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&HealthCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&HealthCondition::`vftable;
   v1->mHealth.text.mOffset = 1i64;
   BinString::Set(&v1->mHealth.text, &customWorldMapCaption);
   v1->mHealth.expression.mOffset = 0i64;
@@ -2775,7 +2775,7 @@ void __fastcall HealthClampedToMinimumCondition::HealthClampedToMinimumCondition
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&HealthClampedToMinimumCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&HealthClampedToMinimumCondition::`vftable;
 }
 
 // File Line: 2221
@@ -2820,7 +2820,7 @@ void __fastcall TargetDistance::TargetDistance(TargetDistance *this)
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetDistance::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetDistance::`vftable;
   v1->m_eTargetTypeOrigin.mValue = 1;
   *(_QWORD *)&v1->m_eTargetType.mValue = 22i64;
   v1->m_eInEqualityOperator.mValue = 3;
@@ -3240,7 +3240,7 @@ void __fastcall TargetCloserThanTargetCondition::TargetCloserThanTargetCondition
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetCloserThanTargetCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetCloserThanTargetCondition::`vftable;
   *(_QWORD *)&v1->m_eTargetTypeA.mValue = 0i64;
   *(_WORD *)&v1->m_OrEqual = 1;
   v1->m_ZOnly = 0;
@@ -3380,7 +3380,7 @@ void __fastcall GroundDistance::GroundDistance(GroundDistance *this)
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&GroundDistance::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&GroundDistance::`vftable;
   v1->mDistance = 1.0;
   v1->mInEqualityOperator.mValue = 3;
 }
@@ -3432,7 +3432,7 @@ void __fastcall SpeedCondition::SpeedCondition(SpeedCondition *this)
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SpeedCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&SpeedCondition::`vftable;
   v1->m_fSpeed = 0.0;
   v1->m_InEqualityOperator.mValue = 3;
 }
@@ -3562,7 +3562,7 @@ void __fastcall TargetPhysicalMassCondition::TargetPhysicalMassCondition(TargetP
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetPhysicalMassCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetPhysicalMassCondition::`vftable;
   *(_QWORD *)&v1->m_eTargetType.mValue = 49i64;
   v1->m_eInEqualityOperator.mValue = 3;
 }
@@ -3654,7 +3654,7 @@ void __fastcall TargetPhysicalCollisionLayerCondition::TargetPhysicalCollisionLa
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetPhysicalCollisionLayerCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetPhysicalCollisionLayerCondition::`vftable;
   v1->m_eTargetType.mValue = 49;
   v1->m_eCollisionLayer.mValue = 19;
 }
@@ -3714,7 +3714,7 @@ void __fastcall TargetPhysicalAttackShootComboCondition::TargetPhysicalAttackSho
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetPhysicalAttackShootComboCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetPhysicalAttackShootComboCondition::`vftable;
   v1->m_eTargetType.mValue = 49;
 }
 
@@ -3824,7 +3824,7 @@ void __fastcall TargetPhysicalAttackVelocityCondition::TargetPhysicalAttackVeloc
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetPhysicalAttackVelocityCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetPhysicalAttackVelocityCondition::`vftable;
   v1->m_eTargetType.mValue = 49;
   *(_QWORD *)&v1->m_eInEqualityOperator.mValue = 3i64;
 }
@@ -3938,7 +3938,7 @@ void __fastcall TargetPhysicalDamageMultiplierCondition::TargetPhysicalDamageMul
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetPhysicalDamageMultiplierCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetPhysicalDamageMultiplierCondition::`vftable;
   *(_QWORD *)&v1->m_eTargetType.mValue = 49i64;
   *(_QWORD *)&v1->m_eInEqualityOperator.mValue = 3i64;
 }
@@ -4072,7 +4072,7 @@ void __fastcall TargetPhysicalDodgeableCondition::TargetPhysicalDodgeableConditi
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetPhysicalDodgeableCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetPhysicalDodgeableCondition::`vftable;
   v1->m_eTargetType.mValue = 49;
 }
 
@@ -4173,7 +4173,7 @@ void __fastcall TargetPhysicalMeleeAttackableCondition::TargetPhysicalMeleeAttac
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetPhysicalMeleeAttackableCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetPhysicalMeleeAttackableCondition::`vftable;
   v1->m_eTargetType.mValue = 49;
 }
 
@@ -4274,7 +4274,7 @@ void __fastcall VehicleSpeedCondition::VehicleSpeedCondition(VehicleSpeedConditi
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleSpeedCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleSpeedCondition::`vftable;
   v1->mSpeed = 0.0;
   *(_WORD *)&v1->mInEqualityOperator.mValue = 259;
 }
@@ -4343,7 +4343,7 @@ void __fastcall VehicleCollisionShouldTriggerExplosion::VehicleCollisionShouldTr
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleCollisionShouldTriggerExplosion::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleCollisionShouldTriggerExplosion::`vftable;
 }
 
 // File Line: 3161
@@ -4397,7 +4397,7 @@ void __fastcall VehicleIsRammingCondition::VehicleIsRammingCondition(VehicleIsRa
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleIsRammingCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleIsRammingCondition::`vftable;
 }
 
 // File Line: 3193
@@ -4451,7 +4451,7 @@ void __fastcall VehicleTrunkTypeCondition::VehicleTrunkTypeCondition(VehicleTrun
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleTrunkTypeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleTrunkTypeCondition::`vftable;
   v1->mType.mValue = 0;
 }
 
@@ -4514,7 +4514,7 @@ void __fastcall VehicleIsWreckedCondition::VehicleIsWreckedCondition(VehicleIsWr
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleIsWreckedCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleIsWreckedCondition::`vftable;
 }
 
 // File Line: 3252
@@ -4568,7 +4568,7 @@ void __fastcall VehicleAngularSpeedCondition::VehicleAngularSpeedCondition(Vehic
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleAngularSpeedCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleAngularSpeedCondition::`vftable;
   v1->mComparison.mValue = 3;
   v1->mSpeed = 0.0;
   v1->mAboutZOnly = 0;
@@ -4651,7 +4651,7 @@ void __fastcall VehicleVectorCompareCondition::VehicleVectorCompareCondition(Veh
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleVectorCompareCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleVectorCompareCondition::`vftable;
   *(_WORD *)&v1->mVector1.mValue = 1024;
   v1->mAngleRadians = 3.1415927;
   *(_DWORD *)&v1->mCheckMagnitude = 768;
@@ -4948,7 +4948,7 @@ void __fastcall VehicleDoorAngleCondition::VehicleDoorAngleCondition(VehicleDoor
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleDoorAngleCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleDoorAngleCondition::`vftable;
   *(_QWORD *)&v1->mAngle = 0i64;
   v1->mInEqualityOperator.mValue = 3;
 }
@@ -5032,7 +5032,7 @@ void __fastcall VehicleWheelSurfaceCondition::VehicleWheelSurfaceCondition(Vehic
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleWheelSurfaceCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleWheelSurfaceCondition::`vftable;
   *(_QWORD *)&v1->mSurfacePropertyName.mUID = -1i64;
   v1->mWheelType.mValue = 0;
   v1->mSurfacePropertyName = (UFG::qSymbolUC)UFG::qSymbolUC::create_from_string(&result, "TerrainType")->mUID;
@@ -5155,7 +5155,7 @@ void __fastcall CharacterSurfaceCondition::CharacterSurfaceCondition(CharacterSu
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CharacterSurfaceCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CharacterSurfaceCondition::`vftable;
   v1->mSurfacePropertyValue = UFG::gNullQSymbolUC;
 }
 
@@ -5784,7 +5784,7 @@ void __fastcall VehicleOccupantTypeCondition::VehicleOccupantTypeCondition(Vehic
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleOccupantTypeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleOccupantTypeCondition::`vftable;
   v1->m_eTargetType.mValue = 4;
 }
 
@@ -5834,7 +5834,7 @@ void __fastcall IsOccupantOfTargetVehicleCondition::IsOccupantOfTargetVehicleCon
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IsOccupantOfTargetVehicleCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&IsOccupantOfTargetVehicleCondition::`vftable;
   *(_WORD *)&v1->m_eOccupantTargetType.mValue = 7172;
 }
 
@@ -5922,7 +5922,7 @@ void __fastcall IsBoatInsideWorldCondition::IsBoatInsideWorldCondition(IsBoatIns
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IsBoatInsideWorldCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&IsBoatInsideWorldCondition::`vftable;
 }
 
 // File Line: 4124
@@ -7000,7 +7000,7 @@ void __fastcall VehicleCanOpenDoorCondition::VehicleCanOpenDoorCondition(Vehicle
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleCanOpenDoorCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleCanOpenDoorCondition::`vftable;
   v1->m_Door = 0;
 }
 
@@ -7563,7 +7563,7 @@ void __fastcall TargetRelativePosition::TargetRelativePosition(TargetRelativePos
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetRelativePosition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetRelativePosition::`vftable;
   v1->mTargetType.mValue = 0;
   v1->mDirection = 0.0;
   *(_QWORD *)&v1->mAngleRange = 1070141403i64;
@@ -7888,14 +7888,14 @@ void __fastcall TargetConditionGroup::TargetConditionGroup(TargetConditionGroup 
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetConditionGroup::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetConditionGroup::`vftable;
   v1->mTargetType.mValue = 0;
   v2 = UFG::qMemoryPool2::Allocate(&gActionTreeMemoryPool, 0x30ui64, "TargetConditionGroup.mConditions", 0i64, 1u);
   v3 = v2;
   if ( v2 )
   {
     Condition::Condition((Condition *)v2);
-    *(_QWORD *)v3 = &ConditionGroup::`vftable';
+    *(_QWORD *)v3 = &ConditionGroup::`vftable;
     *((_QWORD *)v3 + 3) = -1i64;
     *((_DWORD *)v3 + 8) = 0;
     *((_QWORD *)v3 + 5) = 0i64;
@@ -8183,7 +8183,7 @@ void __fastcall ParkourHandleCondition::ParkourHandleCondition(ParkourHandleCond
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ParkourHandleCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ParkourHandleCondition::`vftable;
   v1->mDirection = 0.0;
   *(_QWORD *)&v1->mRelativeAngle = 1061752795i64;
   *(_QWORD *)&v1->mDistanceXYMax = 0i64;
@@ -8599,7 +8599,7 @@ UFG::ParkourHandle *__fastcall ParkourHandleCondition::FindClosestParkourHandle(
   v18 = check;
   if ( !(check & 1) )
     goto LABEL_31;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     out.p,
     0x18ui64,
     768,
@@ -8657,7 +8657,7 @@ UFG::ParkourHandle *__fastcall ParkourHandleCondition::FindClosestParkourHandle(
     v16 = v36;
   }
   out.size = 0;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     out.p,
     0x18ui64,
     768,
@@ -9388,7 +9388,7 @@ void __fastcall ParkourHandleInfoCondition::ParkourHandleInfoCondition(ParkourHa
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ParkourHandleInfoCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ParkourHandleInfoCondition::`vftable;
   *(_WORD *)&v1->mCheckFocusHandle = 0;
   v1->mCheckLowCover = 0;
 }
@@ -9533,7 +9533,7 @@ void __fastcall ParkourHandleLatchedCloseToEdgeCondition::ParkourHandleLatchedCl
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ParkourHandleLatchedCloseToEdgeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ParkourHandleLatchedCloseToEdgeCondition::`vftable;
   v1->mEdgeDistance = 0.0;
   *(_WORD *)&v1->mInEqualityOperator.mValue = 1;
   v1->mCheckRight = 0;
@@ -9648,7 +9648,7 @@ void __fastcall ParkourHandleOwnerIsCondition::ParkourHandleOwnerIsCondition(Par
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ParkourHandleOwnerIsCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ParkourHandleOwnerIsCondition::`vftable;
   v1->mSimObjectType = 0;
 }
 
@@ -9704,7 +9704,7 @@ void __fastcall ParkourHandleSpeedCondition::ParkourHandleSpeedCondition(Parkour
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ParkourHandleSpeedCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ParkourHandleSpeedCondition::`vftable;
   v1->mSpeedInEqualityOperator.mValue = 1;
   v1->mSpeed = 0.0;
 }
@@ -9796,7 +9796,7 @@ void __fastcall ParkourSphereCastCondition::ParkourSphereCastCondition(ParkourSp
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ParkourSphereCastCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ParkourSphereCastCondition::`vftable;
   *(_QWORD *)&v1->mStart.x = 1056964608i64;
   v1->mStart.z = 1.0;
   *(_QWORD *)&v1->mEnd.x = 1075838976i64;
@@ -10229,7 +10229,7 @@ void __fastcall SphereCastCondition::SphereCastCondition(SphereCastCondition *th
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SphereCastCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&SphereCastCondition::`vftable;
   v1->mRadius = 0.30000001;
   *(_QWORD *)&v1->mStart.x = 1056964608i64;
   v1->mStart.z = 1.0;
@@ -10937,7 +10937,7 @@ void __fastcall BrokenVehicleGlassSphereCastCondition::BrokenVehicleGlassSphereC
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&BrokenVehicleGlassSphereCastCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&BrokenVehicleGlassSphereCastCondition::`vftable;
   v1->mRadius = 0.30000001;
   *(_QWORD *)&v1->mStart.x = 1056964608i64;
   v1->mStart.z = 1.0;
@@ -11627,7 +11627,7 @@ void __fastcall TargetParkourHandleCondition::TargetParkourHandleCondition(Targe
 
   v1 = this;
   ParkourHandleCondition::ParkourHandleCondition((ParkourHandleCondition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetParkourHandleCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetParkourHandleCondition::`vftable;
   v1->m_eTargetType.mValue = 0;
 }
 
@@ -12092,7 +12092,7 @@ void __fastcall DropoffCondition::DropoffCondition(DropoffCondition *this)
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DropoffCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&DropoffCondition::`vftable;
   *(_WORD *)&v1->mCheckDropoff = 1;
 }
 
@@ -12331,7 +12331,7 @@ void __fastcall HitTime::HitTime(HitTime *this)
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&HitTime::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&HitTime::`vftable;
   v1->mHitTime = 0.0;
   v1->mInEqualityOperator.mValue = 4;
 }
@@ -12355,7 +12355,7 @@ void __fastcall AttackType::AttackType(AttackType *this)
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AttackType::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AttackType::`vftable;
   v1->mAttackTypeID = 0;
 }
 
@@ -12405,7 +12405,7 @@ void __fastcall AttackLocationLateral::AttackLocationLateral(AttackLocationLater
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AttackLocationLateral::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AttackLocationLateral::`vftable;
   v1->mAttackLocationLateralID = 0;
 }
 
@@ -12455,7 +12455,7 @@ void __fastcall AttackLocationHorizontal::AttackLocationHorizontal(AttackLocatio
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AttackLocationHorizontal::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AttackLocationHorizontal::`vftable;
   v1->mAttackLocationHorizontalID = 0;
 }
 
@@ -12505,7 +12505,7 @@ void __fastcall AttackLocationRagdoll::AttackLocationRagdoll(AttackLocationRagdo
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AttackLocationRagdoll::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AttackLocationRagdoll::`vftable;
   v1->m_iRagdollComponentID = 0;
 }
 
@@ -12581,7 +12581,7 @@ void __fastcall CollisionTime::CollisionTime(CollisionTime *this)
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CollisionTime::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CollisionTime::`vftable;
   v1->mCollisionTime = 0.0;
   v1->mInEqualityOperator.mValue = 4;
 }
@@ -12633,7 +12633,7 @@ void __fastcall CollisionLayer::CollisionLayer(CollisionLayer *this)
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CollisionLayer::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CollisionLayer::`vftable;
   v1->mCollisionLayer = 1;
 }
 
@@ -12709,7 +12709,7 @@ void __fastcall CollisionSpeed::CollisionSpeed(CollisionSpeed *this)
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CollisionSpeed::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CollisionSpeed::`vftable;
   v1->mCollisionSpeed = 0.0;
   *(_WORD *)&v1->mInEqualityOperator.mValue = 1;
 }
@@ -12775,7 +12775,7 @@ void __fastcall CollisionEstimatedImpulseMagnitude::CollisionEstimatedImpulseMag
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CollisionEstimatedImpulseMagnitude::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CollisionEstimatedImpulseMagnitude::`vftable;
   v1->mEstimatedImpulseMagnitude = 0.0;
   v1->mInEqualityOperator.mValue = 1;
 }
@@ -12843,7 +12843,7 @@ void __fastcall CollisionMass::CollisionMass(CollisionMass *this)
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CollisionMass::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CollisionMass::`vftable;
   v1->mCollisionMass = 0.0;
   v1->mInEqualityOperator.mValue = 1;
 }
@@ -12923,7 +12923,7 @@ void __fastcall AttackTimerCondition::AttackTimerCondition(AttackTimerCondition 
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AttackTimerCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AttackTimerCondition::`vftable;
   v1->mAttackTime = 0.0;
   v1->mInEqualityOperator.mValue = 4;
 }
@@ -12975,7 +12975,7 @@ void __fastcall AttackPhaseCondition::AttackPhaseCondition(AttackPhaseCondition 
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AttackPhaseCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AttackPhaseCondition::`vftable;
   v1->m_eAttackPhase.mValue = 1;
 }
 
@@ -13025,7 +13025,7 @@ void __fastcall AttackInfoNumberHitsCondition::AttackInfoNumberHitsCondition(Att
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AttackInfoNumberHitsCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AttackInfoNumberHitsCondition::`vftable;
   v1->mInEqualityOperator.mValue = 1;
   v1->mQuantity = 0;
 }
@@ -13077,7 +13077,7 @@ void __fastcall AttackIntensityCondition::AttackIntensityCondition(AttackIntensi
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AttackIntensityCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AttackIntensityCondition::`vftable;
   v1->m_eAttackItensityType.mValue = 0;
 }
 
@@ -13127,7 +13127,7 @@ void __fastcall AttackDamageCondition::AttackDamageCondition(AttackDamageConditi
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AttackDamageCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AttackDamageCondition::`vftable;
   v1->mInEqualityOperator.mValue = 1;
   v1->mAmount = 0;
 }
@@ -13179,7 +13179,7 @@ void __fastcall InventoryQuantityCondition::InventoryQuantityCondition(Inventory
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&InventoryQuantityCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&InventoryQuantityCondition::`vftable;
   v1->mInventoryItem = 0;
   v1->mInEqualityOperator.mValue = 1;
   v1->mQuantity = 0;
@@ -13248,7 +13248,7 @@ void __fastcall InventoryIsItemEquipped::InventoryIsItemEquipped(InventoryIsItem
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&InventoryIsItemEquipped::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&InventoryIsItemEquipped::`vftable;
   v1->mInventoryItem = 0;
 }
 
@@ -13330,7 +13330,7 @@ void __fastcall InventoryCanDrop::InventoryCanDrop(InventoryCanDrop *this)
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&InventoryCanDrop::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&InventoryCanDrop::`vftable;
   v1->mEquipSlot.mValue = 0;
 }
 
@@ -13378,8 +13378,8 @@ void __fastcall RandomCondition::RandomCondition(RandomCondition *this)
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&RandomCondition::`vftable'{for `Condition'};
-  v1->vfptr = (IWeightedConditionVtbl *)&RandomCondition::`vftable'{for `IWeightedCondition'};
+  v1->vfptr = (Expression::IMemberMapVtbl *)&RandomCondition::`vftable{for `Condition};
+  v1->vfptr = (IWeightedConditionVtbl *)&RandomCondition::`vftable{for `IWeightedCondition};
   v1->m_pParentBank = 0i64;
   v1->mWeight = 50.0;
   v1->mNormalizedWeight = -1.0;
@@ -13489,7 +13489,7 @@ void __fastcall PersonalityTypeCondition::PersonalityTypeCondition(PersonalityTy
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PersonalityTypeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PersonalityTypeCondition::`vftable;
   v1->m_PersonalityTypeSymbol.mUID = -1;
   *(_QWORD *)&v1->m_PropertyValueUID = 0i64;
   v1->m_PersonalityTypeSymbol = UFG::gNullQSymbol;
@@ -13676,7 +13676,7 @@ void __fastcall AiBehaviourCondition::AiBehaviourCondition(AiBehaviourCondition 
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AiBehaviourCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AiBehaviourCondition::`vftable;
   v1->mMostUsedIndex = -1;
   v1->mCheckSpawns = 0;
 }
@@ -13778,7 +13778,7 @@ void __fastcall AiBehaviourTreeTypeCondition::AiBehaviourTreeTypeCondition(AiBeh
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AiBehaviourTreeTypeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AiBehaviourTreeTypeCondition::`vftable;
 }
 
 // File Line: 8978
@@ -13863,7 +13863,7 @@ void __fastcall AiEmotionCondition::AiEmotionCondition(AiEmotionCondition *this)
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AiEmotionCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AiEmotionCondition::`vftable;
   v1->mAIEmotion.mValue = 0;
 }
 
@@ -13911,7 +13911,7 @@ void __fastcall FacialEmotionCondition::FacialEmotionCondition(FacialEmotionCond
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&FacialEmotionCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&FacialEmotionCondition::`vftable;
   v1->mFacialEmotion.mValue = 0;
 }
 
@@ -14486,7 +14486,7 @@ void __fastcall TargetPropInteractAvailableCondition::TargetPropInteractAvailabl
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetPropInteractAvailableCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetPropInteractAvailableCondition::`vftable;
 }
 
 // File Line: 9460
@@ -14543,7 +14543,7 @@ void __fastcall TargetPropInteractOrientationCondition::TargetPropInteractOrient
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetPropInteractOrientationCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetPropInteractOrientationCondition::`vftable;
   v1->m_SyncName.mUID = -1;
   *(_QWORD *)&v1->m_fMaxDistance = 0i64;
 }
@@ -14880,7 +14880,7 @@ void __fastcall HitLocationTargettedCondition::HitLocationTargettedCondition(Hit
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&HitLocationTargettedCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&HitLocationTargettedCondition::`vftable;
 }
 
 // File Line: 9752
@@ -14925,7 +14925,7 @@ void __fastcall HitProjectileReactionCondition::HitProjectileReactionCondition(H
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&HitProjectileReactionCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&HitProjectileReactionCondition::`vftable;
   v1->m_eProjectileReaction.mValue = 0;
 }
 
@@ -14976,7 +14976,7 @@ void __fastcall HitProjectileIsExplosiveCondition::HitProjectileIsExplosiveCondi
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&HitProjectileIsExplosiveCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&HitProjectileIsExplosiveCondition::`vftable;
 }
 
 // File Line: 9830
@@ -15022,7 +15022,7 @@ void __fastcall HitProjectileWeaponTypeCondition::HitProjectileWeaponTypeConditi
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&HitProjectileWeaponTypeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&HitProjectileWeaponTypeCondition::`vftable;
   v1->m_eSimObjectWeaponType = 0;
 }
 
@@ -15072,7 +15072,7 @@ void __fastcall HitProjectileWeaponInventoryTypeCondition::HitProjectileWeaponIn
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&HitProjectileWeaponInventoryTypeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&HitProjectileWeaponInventoryTypeCondition::`vftable;
   v1->m_eInventoryItemType.mValue = 0;
 }
 
@@ -15155,7 +15155,7 @@ void __fastcall HitExplosionCanTriggerVehicleExplosion::HitExplosionCanTriggerVe
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&HitExplosionCanTriggerVehicleExplosion::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&HitExplosionCanTriggerVehicleExplosion::`vftable;
 }
 
 // File Line: 9949
@@ -15201,7 +15201,7 @@ void __fastcall HitDistanceFromExplosionCondition::HitDistanceFromExplosionCondi
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&HitDistanceFromExplosionCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&HitDistanceFromExplosionCondition::`vftable;
   v1->m_fDistance = 0.0;
   v1->m_InEqualityOperator.mValue = 3;
 }
@@ -15361,7 +15361,7 @@ void __fastcall IsCameraTypeCondition::IsCameraTypeCondition(IsCameraTypeConditi
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IsCameraTypeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&IsCameraTypeCondition::`vftable;
   v1->mCameraType.mValue = 0;
 }
 
@@ -15428,7 +15428,7 @@ void __fastcall IsClassTypeCondition::IsClassTypeCondition(IsClassTypeCondition 
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IsClassTypeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&IsClassTypeCondition::`vftable;
   v1->mClassType.mUID = -1;
   v1->mClassType = UFG::gNullQSymbol;
 }
@@ -15497,7 +15497,7 @@ void __fastcall PropertyConditionBase::PropertyConditionBase(PropertyConditionBa
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PropertyConditionBase::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PropertyConditionBase::`vftable;
   v1->m_PropertySymbol.mUID = -1;
   *(_WORD *)&v1->m_PeriodicallyRecachePropertyValue = 0;
   *(_QWORD *)&v1->m_PropertyValueUID = 0i64;
@@ -15702,7 +15702,7 @@ void __fastcall TargetPropertyConditionBase::TargetPropertyConditionBase(TargetP
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PropertyConditionBase::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PropertyConditionBase::`vftable;
   v1->m_PropertySymbol.mUID = -1;
   *(_WORD *)&v1->m_PeriodicallyRecachePropertyValue = 0;
   *(_QWORD *)&v1->m_PropertyValueUID = 0i64;
@@ -15711,7 +15711,7 @@ void __fastcall TargetPropertyConditionBase::TargetPropertyConditionBase(TargetP
   v1->m_MinTimeBeforeRecachePropertyValue = 1.0;
   v1->m_MaxTimeBeforeRecachePropertyValue = 2.0;
   v1->m_MyRoot.mOffset = 0i64;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetPropertyConditionBase::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetPropertyConditionBase::`vftable;
   v1->m_NestedPropertySet.mUID = -1;
   v1->m_TargetType.mValue = 0;
   v1->m_PreviousTargetUID = 0;
@@ -16148,7 +16148,7 @@ void __fastcall PropertyIntegerCondition::PropertyIntegerCondition(PropertyInteg
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PropertyConditionBase::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PropertyConditionBase::`vftable;
   v1->m_PropertySymbol.mUID = -1;
   *(_WORD *)&v1->m_PeriodicallyRecachePropertyValue = 0;
   *(_QWORD *)&v1->m_PropertyValueUID = 0i64;
@@ -16157,7 +16157,7 @@ void __fastcall PropertyIntegerCondition::PropertyIntegerCondition(PropertyInteg
   v1->m_MinTimeBeforeRecachePropertyValue = 1.0;
   v1->m_MaxTimeBeforeRecachePropertyValue = 2.0;
   v1->m_MyRoot.mOffset = 0i64;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PropertyIntegerCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PropertyIntegerCondition::`vftable;
   v1->m_Value = 0;
   v1->m_InEqualityOperator.mValue = 0;
 }
@@ -16290,7 +16290,7 @@ void __fastcall TargetPropertyIntegerCondition::TargetPropertyIntegerCondition(T
 
   v1 = this;
   TargetPropertyConditionBase::TargetPropertyConditionBase((TargetPropertyConditionBase *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetPropertyIntegerCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetPropertyIntegerCondition::`vftable;
   v1->m_Value = 0;
   v1->m_InEqualityOperator.mValue = 0;
 }
@@ -16407,7 +16407,7 @@ void __fastcall PropertyFloatCondition::PropertyFloatCondition(PropertyFloatCond
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PropertyConditionBase::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PropertyConditionBase::`vftable;
   v1->m_PropertySymbol.mUID = -1;
   *(_WORD *)&v1->m_PeriodicallyRecachePropertyValue = 0;
   *(_QWORD *)&v1->m_PropertyValueUID = 0i64;
@@ -16416,7 +16416,7 @@ void __fastcall PropertyFloatCondition::PropertyFloatCondition(PropertyFloatCond
   v1->m_MinTimeBeforeRecachePropertyValue = 1.0;
   v1->m_MaxTimeBeforeRecachePropertyValue = 2.0;
   v1->m_MyRoot.mOffset = 0i64;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PropertyFloatCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PropertyFloatCondition::`vftable;
   v1->m_Value = 0.0;
   v1->m_InEqualityOperator.mValue = 0;
 }
@@ -16553,7 +16553,7 @@ void __fastcall TargetPropertyFloatCondition::TargetPropertyFloatCondition(Targe
 
   v1 = this;
   TargetPropertyConditionBase::TargetPropertyConditionBase((TargetPropertyConditionBase *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetPropertyFloatCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetPropertyFloatCondition::`vftable;
   v1->m_Value = 0.0;
   v1->m_InEqualityOperator.mValue = 0;
 }
@@ -16938,7 +16938,7 @@ void __fastcall SkookumCondition::SkookumCondition(SkookumCondition *this)
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SkookumCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&SkookumCondition::`vftable;
   v2 = SkookumCondition::sDefaultScope;
   v1->mClassScopeText.mOffset = 1i64;
   BinString::Set(&v1->mClassScopeText, v2);
@@ -16956,10 +16956,10 @@ void __fastcall SkookumCondition::SkookumCondition(SkookumCondition *this, MemIm
   const char *v4; // rsi
 
   v2 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&SkookumCondition::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&SkookumCondition::`vftable;
   v3 = BinString::sEmptyString;
   if ( this->mClassScopeText.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
     v4 = (char *)&this->mClassScopeText + (this->mClassScopeText.mOffset & 0xFFFFFFFFFFFFFFFEui64);
@@ -16985,7 +16985,7 @@ void __fastcall SkookumCondition::~SkookumCondition(SkookumCondition *this)
   char *v4; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&SkookumCondition::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&SkookumCondition::`vftable;
   v2 = this->mpScript;
   if ( v2 )
   {
@@ -17010,8 +17010,8 @@ void __fastcall SkookumCondition::~SkookumCondition(SkookumCondition *this)
         operator delete[](v4);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 11346
@@ -17144,7 +17144,7 @@ void __fastcall FaceActionRequestCondition::FaceActionRequestCondition(FaceActio
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&FaceActionRequestCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&FaceActionRequestCondition::`vftable;
   *(_WORD *)&v1->mFaceAction.mValue = 5650;
 }
 
@@ -17250,7 +17250,7 @@ void __fastcall FaceActionAvailableCondition::FaceActionAvailableCondition(FaceA
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&FaceActionAvailableCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&FaceActionAvailableCondition::`vftable;
   *(_WORD *)&v1->mFaceAction.mValue = 274;
 }
 
@@ -17333,7 +17333,7 @@ void __fastcall FaceMeterCondition::FaceMeterCondition(FaceMeterCondition *this)
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&FaceMeterCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&FaceMeterCondition::`vftable;
   v1->mFaceValue = 0;
   v1->mInEqualityOperator.mValue = 3;
 }
@@ -17374,7 +17374,7 @@ void __fastcall FaceMeterActivatedCondition::FaceMeterActivatedCondition(FaceMet
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&FaceMeterActivatedCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&FaceMeterActivatedCondition::`vftable;
 }
 
 // File Line: 11557
@@ -17419,7 +17419,7 @@ void __fastcall PipLevelCondition::PipLevelCondition(PipLevelCondition *this)
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PipLevelCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PipLevelCondition::`vftable;
   v1->mPipLevel = 0;
   v1->mInEqualityOperator.mValue = 3;
 }
@@ -17457,7 +17457,7 @@ void __fastcall IsFactionStandingCondition::IsFactionStandingCondition(IsFaction
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IsFactionStandingCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&IsFactionStandingCondition::`vftable;
   *(_WORD *)&v1->mFactionStanding.mValue = 5632;
 }
 
@@ -17627,7 +17627,7 @@ void __fastcall IsTargetsTargetFactionStandingCondition::IsTargetsTargetFactionS
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IsTargetsTargetFactionStandingCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&IsTargetsTargetFactionStandingCondition::`vftable;
   *(_WORD *)&v1->mFactionStanding.mValue = 5632;
   v1->mTargetsTargetType.mValue = 23;
 }
@@ -17814,7 +17814,7 @@ void __fastcall IsExcludedFromScoring::IsExcludedFromScoring(IsExcludedFromScori
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IsExcludedFromScoring::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&IsExcludedFromScoring::`vftable;
   v1->mTargetType.mValue = 22;
 }
 
@@ -17853,7 +17853,7 @@ void __fastcall IsTargetingStandingCondition::IsTargetingStandingCondition(IsTar
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IsTargetingStandingCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&IsTargetingStandingCondition::`vftable;
   *(_WORD *)&v1->mFactionStanding.mValue = 5632;
 }
 
@@ -17929,7 +17929,7 @@ void __fastcall TargetValidCondition::TargetValidCondition(TargetValidCondition 
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetValidCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetValidCondition::`vftable;
   v1->mTargetType = 0;
 }
 
@@ -17959,7 +17959,7 @@ void __fastcall TargetIsEqualCondition::TargetIsEqualCondition(TargetIsEqualCond
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetIsEqualCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetIsEqualCondition::`vftable;
   *(_QWORD *)&v1->mTarget1Owner.mValue = 1i64;
   *(_QWORD *)&v1->mTarget2Owner.mValue = 1i64;
 }
@@ -18075,7 +18075,7 @@ void __fastcall TargetInventoryItemCondition::TargetInventoryItemCondition(Targe
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetInventoryItemCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetInventoryItemCondition::`vftable;
   *(_QWORD *)&v1->mTargetType = 0i64;
 }
 
@@ -18129,7 +18129,7 @@ void __fastcall TargetSimObjectTypeCondition::TargetSimObjectTypeCondition(Targe
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetSimObjectTypeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetSimObjectTypeCondition::`vftable;
   *(_QWORD *)&v1->mTargetType = 0i64;
 }
 
@@ -18179,7 +18179,7 @@ void __fastcall TargetSimObjectWeaponTypeCondition::TargetSimObjectWeaponTypeCon
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetSimObjectWeaponTypeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetSimObjectWeaponTypeCondition::`vftable;
   *(_QWORD *)&v1->mTargetType = 0i64;
 }
 
@@ -18240,7 +18240,7 @@ void __fastcall TargetSimObjectWeaponAmmoInventoryItemCondition::TargetSimObject
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetSimObjectWeaponAmmoInventoryItemCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetSimObjectWeaponAmmoInventoryItemCondition::`vftable;
   *(_QWORD *)&v1->mTargetType = 0i64;
 }
 
@@ -18330,7 +18330,7 @@ void __fastcall TargetSimObjectBooleanCondition::TargetSimObjectBooleanCondition
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetSimObjectBooleanCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetSimObjectBooleanCondition::`vftable;
   *(_QWORD *)&v1->mTargetType = 0i64;
   v1->mIsTrue = 1;
 }
@@ -18396,7 +18396,7 @@ void __fastcall TargetSimObjectWeaponBooleanCondition::TargetSimObjectWeaponBool
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetSimObjectWeaponBooleanCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetSimObjectWeaponBooleanCondition::`vftable;
   *(_QWORD *)&v1->mTargetType = 0i64;
   v1->mIsTrue = 1;
 }
@@ -18493,7 +18493,7 @@ void __fastcall TargetSimObjectCharacterBooleanCondition::TargetSimObjectCharact
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetSimObjectCharacterBooleanCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetSimObjectCharacterBooleanCondition::`vftable;
   *(_QWORD *)&v1->mTargetType = 0i64;
   v1->mIsTrue = 1;
 }
@@ -18586,7 +18586,7 @@ void __fastcall SimObjectCharacterBooleanCondition::SimObjectCharacterBooleanCon
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SimObjectCharacterBooleanCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&SimObjectCharacterBooleanCondition::`vftable;
   v1->mSimObjectCharacterBoolean = 0;
   v1->mIsTrue = 1;
 }
@@ -18650,7 +18650,7 @@ void __fastcall TargetSimObjectWeaponAmmoCondition::TargetSimObjectWeaponAmmoCon
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetSimObjectWeaponAmmoCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetSimObjectWeaponAmmoCondition::`vftable;
   v1->mTargetType = 0;
   *(_QWORD *)&v1->mInEqualityOperator.mValue = 1i64;
   *(_WORD *)&v1->mCheckClip = 1;
@@ -18816,7 +18816,7 @@ void __fastcall TargetWeaponAmmoCompatibleCondition::TargetWeaponAmmoCompatibleC
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetWeaponAmmoCompatibleCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetWeaponAmmoCompatibleCondition::`vftable;
   v1->mFirstTargetType = 17;
   v1->mSecondTargetType = 41;
 }
@@ -18967,7 +18967,7 @@ void __fastcall TargetSimObjectWeaponCanFireCondition::TargetSimObjectWeaponCanF
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetSimObjectWeaponCanFireCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetSimObjectWeaponCanFireCondition::`vftable;
   v1->mTargetType = 0;
 }
 
@@ -19059,7 +19059,7 @@ void __fastcall TargetSimObjectWeaponIsAutomaticCondition::TargetSimObjectWeapon
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetSimObjectWeaponIsAutomaticCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetSimObjectWeaponIsAutomaticCondition::`vftable;
   v1->mTargetType = 0;
 }
 
@@ -19150,7 +19150,7 @@ void __fastcall TargetSimObjectWeaponCanReloadCondition::TargetSimObjectWeaponCa
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetSimObjectWeaponCanReloadCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetSimObjectWeaponCanReloadCondition::`vftable;
   v1->mTargetType = 0;
 }
 
@@ -19211,7 +19211,7 @@ void __fastcall TargetSimObjectVehicleTypeCondition::TargetSimObjectVehicleTypeC
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetSimObjectVehicleTypeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetSimObjectVehicleTypeCondition::`vftable;
   *(_QWORD *)&v1->mTargetType = 28i64;
 }
 
@@ -19272,7 +19272,7 @@ void __fastcall SimObjectVehicleTypeCondition::SimObjectVehicleTypeCondition(Sim
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SimObjectVehicleTypeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&SimObjectVehicleTypeCondition::`vftable;
   v1->mSimObjectVehicleType = 0;
 }
 
@@ -19320,7 +19320,7 @@ void __fastcall TargetSimObjectBoatTypeCondition::TargetSimObjectBoatTypeConditi
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetSimObjectBoatTypeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetSimObjectBoatTypeCondition::`vftable;
   *(_QWORD *)&v1->mTargetType = 0i64;
 }
 
@@ -19381,7 +19381,7 @@ void __fastcall SimObjectBoatTypeCondition::SimObjectBoatTypeCondition(SimObject
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SimObjectBoatTypeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&SimObjectBoatTypeCondition::`vftable;
   v1->mSimObjectBoatType = 0;
 }
 
@@ -19429,7 +19429,7 @@ void __fastcall NumCharactersDeadCondition::NumCharactersDeadCondition(NumCharac
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&NumCharactersDeadCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&NumCharactersDeadCondition::`vftable;
   v1->m_Number = 0;
 }
 
@@ -19452,7 +19452,7 @@ void __fastcall CharacterIsAliveCondition::CharacterIsAliveCondition(CharacterIs
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CharacterIsAliveCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CharacterIsAliveCondition::`vftable;
   v1->m_Name.mOffset = 1i64;
   BinString::Set(&v1->m_Name, &customWorldMapCaption);
 }
@@ -19476,7 +19476,7 @@ void __fastcall IncomingAttackPhaseCondition::IncomingAttackPhaseCondition(Incom
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IncomingAttackPhaseCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&IncomingAttackPhaseCondition::`vftable;
   v1->m_eAttackPhase.mValue = 1;
 }
 
@@ -19526,7 +19526,7 @@ void __fastcall IncomingAttackTypeCondition::IncomingAttackTypeCondition(Incomin
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IncomingAttackTypeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&IncomingAttackTypeCondition::`vftable;
   v1->mAttackTypeID = 0;
 }
 
@@ -19576,7 +19576,7 @@ void __fastcall IncomingAttackLocationLateralCondition::IncomingAttackLocationLa
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IncomingAttackLocationLateralCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&IncomingAttackLocationLateralCondition::`vftable;
   v1->mAttackLocationLateralID = 0;
 }
 
@@ -19626,7 +19626,7 @@ void __fastcall IncomingAttackLocationHorizontalCondition::IncomingAttackLocatio
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IncomingAttackLocationHorizontalCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&IncomingAttackLocationHorizontalCondition::`vftable;
   v1->mAttackLocationHorizontalID = 0;
 }
 
@@ -19687,7 +19687,7 @@ void __fastcall PlayerMeleeUpgradeCondition::PlayerMeleeUpgradeCondition(PlayerM
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerMeleeUpgradeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerMeleeUpgradeCondition::`vftable;
   v1->mLevel = 0;
   *(_WORD *)&v1->mInEqualityOperator.mValue = 259;
 }
@@ -19727,7 +19727,7 @@ void __fastcall PlayerGunplayUpgradeCondition::PlayerGunplayUpgradeCondition(Pla
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerGunplayUpgradeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerGunplayUpgradeCondition::`vftable;
   v1->mLevel = 0;
   v1->mInEqualityOperator.mValue = 3;
 }
@@ -19765,7 +19765,7 @@ void __fastcall PlayerCopUpgradeCondition::PlayerCopUpgradeCondition(PlayerCopUp
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerCopUpgradeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerCopUpgradeCondition::`vftable;
   v1->mLevel = 0;
   *(_WORD *)&v1->mInEqualityOperator.mValue = 259;
 }
@@ -19805,7 +19805,7 @@ void __fastcall PlayerTriadUpgradeCondition::PlayerTriadUpgradeCondition(PlayerT
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerTriadUpgradeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerTriadUpgradeCondition::`vftable;
   v1->mLevel = 0;
   *(_WORD *)&v1->mInEqualityOperator.mValue = 259;
 }
@@ -19845,7 +19845,7 @@ void __fastcall StruggleCondition::StruggleCondition(StruggleCondition *this)
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&StruggleCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&StruggleCondition::`vftable;
   v1->mLevel = 1.0;
   v1->mInEqualityOperator.mValue = 3;
 }
@@ -19897,7 +19897,7 @@ void __fastcall InputSignalCondition::InputSignalCondition(InputSignalCondition 
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&InputSignalCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&InputSignalCondition::`vftable;
   v1->mValue = 1.0;
   *(_WORD *)&v1->mInEqualityOperator.mValue = 3;
   v1->mTargetType.mValue = 1;
@@ -20427,7 +20427,7 @@ void __fastcall PlayerHeatLevelCondition::PlayerHeatLevelCondition(PlayerHeatLev
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerHeatLevelCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerHeatLevelCondition::`vftable;
   *(_WORD *)&v1->mHeatLevel.mValue = 0;
 }
 
@@ -20491,7 +20491,7 @@ void __fastcall PlayerHeatLevelTimerCondition::PlayerHeatLevelTimerCondition(Pla
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerHeatLevelTimerCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerHeatLevelTimerCondition::`vftable;
   v1->mTimer = 0.0;
   v1->mInEqualityOperator.mValue = 3;
 }
@@ -20531,7 +20531,7 @@ void __fastcall HasAIAttackerCondition::HasAIAttackerCondition(HasAIAttackerCond
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&HasAIAttackerCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&HasAIAttackerCondition::`vftable;
   v1->mDistance = 10.0;
 }
 
@@ -20579,7 +20579,7 @@ void __fastcall NumAIAttackersCondition::NumAIAttackersCondition(NumAIAttackersC
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&NumAIAttackersCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&NumAIAttackersCondition::`vftable;
   v1->m_InEqualityOperator.mValue = 1;
   v1->mDistance = 10.0;
   v1->m_NumAttackers = 1;
@@ -20656,7 +20656,7 @@ void __fastcall PlayerIsInCombatCondition::PlayerIsInCombatCondition(PlayerIsInC
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsInCombatCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsInCombatCondition::`vftable;
   v1->m_CombatType.mValue = 0;
 }
 
@@ -20693,7 +20693,7 @@ void __fastcall PlayerIsInCombatConditionTU::PlayerIsInCombatConditionTU(PlayerI
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsInCombatConditionTU::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsInCombatConditionTU::`vftable;
   v1->m_CombatType.mValue = 0;
   v1->m_WithCharacterType.mValue = 0;
 }
@@ -20735,7 +20735,7 @@ void __fastcall IsTiredCondition::IsTiredCondition(IsTiredCondition *this)
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IsTiredCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&IsTiredCondition::`vftable;
 }
 
 // File Line: 13811
@@ -20780,7 +20780,7 @@ void __fastcall PlayerIsInCombatWithNumEnemiesCondition::PlayerIsInCombatWithNum
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsInCombatWithNumEnemiesCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsInCombatWithNumEnemiesCondition::`vftable;
   v1->mCombatType.mValue = 0;
   v1->mInEqualityOperator.mValue = 3;
   v1->mCount = 0;
@@ -20949,7 +20949,7 @@ void __fastcall CoverIsInCoverZoneCondition::CoverIsInCoverZoneCondition(CoverIs
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CoverIsInCoverZoneCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CoverIsInCoverZoneCondition::`vftable;
 }
 
 // File Line: 13972
@@ -21010,7 +21010,7 @@ void __fastcall CoverPositionsEquivalentCondition::CoverPositionsEquivalentCondi
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CoverPositionsEquivalentCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CoverPositionsEquivalentCondition::`vftable;
   *(_WORD *)&v1->m_eCoverComponentObjectA.mValue = 769;
 }
 
@@ -21092,7 +21092,7 @@ void __fastcall CoverProbeForCoverZoneCondition::CoverProbeForCoverZoneCondition
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CoverProbeForCoverZoneCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CoverProbeForCoverZoneCondition::`vftable;
   v1->m_MaxProbeDistance = 3.0;
   v1->m_BufferRegionSize = 0.30000001;
   v1->m_UseOffset = 0;
@@ -21325,7 +21325,7 @@ void __fastcall CoverDirectionCondition::CoverDirectionCondition(CoverDirectionC
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CoverDirectionCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CoverDirectionCondition::`vftable;
   *(_DWORD *)&v1->m_eCoverComponentObject.mValue = 65537;
   v1->m_CheckFacingDirection = 0;
   v1->m_Direction = 0.0;
@@ -21652,7 +21652,7 @@ void __fastcall CoverHeightCondition::CoverHeightCondition(CoverHeightCondition 
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CoverHeightCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CoverHeightCondition::`vftable;
   *(_WORD *)&v1->m_eCoverComponentObject.mValue = 257;
   v1->m_Low = 0;
 }
@@ -21744,7 +21744,7 @@ void __fastcall CoverTypeCondition::CoverTypeCondition(CoverTypeCondition *this)
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CoverTypeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CoverTypeCondition::`vftable;
   *(_DWORD *)&v1->m_eCoverComponentObject.mValue = 16777217;
 }
 
@@ -21824,7 +21824,7 @@ void __fastcall CoverCanTraverseInDirectionCondition::CoverCanTraverseInDirectio
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CoverCanTraverseInDirectionCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CoverCanTraverseInDirectionCondition::`vftable;
   *(_WORD *)&v1->m_bLeft = 0;
 }
 
@@ -21896,7 +21896,7 @@ void __fastcall WaterDepth::WaterDepth(WaterDepth *this)
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&WaterDepth::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&WaterDepth::`vftable;
   v1->mWaterDepth = 0.0;
   v1->mInEqualityOperator.mValue = 1;
 }
@@ -22439,7 +22439,7 @@ void __fastcall StateFlagCondition::StateFlagCondition(StateFlagCondition *this)
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&StateFlagCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&StateFlagCondition::`vftable;
   v1->m_FlagType.mValue = 0;
 }
 
@@ -22489,7 +22489,7 @@ void __fastcall SimObjectFlagCondition::SimObjectFlagCondition(SimObjectFlagCond
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SimObjectFlagCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&SimObjectFlagCondition::`vftable;
   v1->m_Flag.mValue = 0;
 }
 
@@ -22605,7 +22605,7 @@ void __fastcall PlayerIsInSpecificInterior::PlayerIsInSpecificInterior(PlayerIsI
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsInSpecificInterior::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsInSpecificInterior::`vftable;
   v1->mInterior.mValue = 0;
 }
 
@@ -22711,7 +22711,7 @@ void __fastcall IsLockboxContainingCondition::IsLockboxContainingCondition(IsLoc
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IsLockboxContainingCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&IsLockboxContainingCondition::`vftable;
   v1->mInventoryItemType.mValue = 0;
 }
 
@@ -22794,7 +22794,7 @@ void __fastcall IsGroupLeaderCondition::IsGroupLeaderCondition(IsGroupLeaderCond
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IsGroupLeaderCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&IsGroupLeaderCondition::`vftable;
 }
 
 // File Line: 15185
@@ -22823,7 +22823,7 @@ void __fastcall TargetIsGroupLeaderCondition::TargetIsGroupLeaderCondition(Targe
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetIsGroupLeaderCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetIsGroupLeaderCondition::`vftable;
   v1->mTargetType.mValue = 0;
 }
 
@@ -22878,7 +22878,7 @@ void __fastcall IsGroupFollowerCondition::IsGroupFollowerCondition(IsGroupFollow
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IsGroupFollowerCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&IsGroupFollowerCondition::`vftable;
 }
 
 // File Line: 15239
@@ -22907,7 +22907,7 @@ void __fastcall TargetIsGroupFollowerCondition::TargetIsGroupFollowerCondition(T
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetIsGroupFollowerCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetIsGroupFollowerCondition::`vftable;
   v1->mTargetType.mValue = 0;
 }
 
@@ -22962,7 +22962,7 @@ void __fastcall IsGroupMemberCondition::IsGroupMemberCondition(IsGroupMemberCond
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IsGroupMemberCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&IsGroupMemberCondition::`vftable;
 }
 
 // File Line: 15294
@@ -22991,7 +22991,7 @@ void __fastcall TargetIsGroupMemberCondition::TargetIsGroupMemberCondition(Targe
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetIsGroupMemberCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetIsGroupMemberCondition::`vftable;
   v1->mTargetType.mValue = 0;
 }
 
@@ -23046,7 +23046,7 @@ void __fastcall TargetIsInMyGroupCondition::TargetIsInMyGroupCondition(TargetIsI
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetIsInMyGroupCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetIsInMyGroupCondition::`vftable;
   v1->mTargetType.mValue = 0;
 }
 
@@ -23134,7 +23134,7 @@ void __fastcall NumGroupMemberAliveCondition::NumGroupMemberAliveCondition(NumGr
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&NumGroupMemberAliveCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&NumGroupMemberAliveCondition::`vftable;
   v1->m_eInEqualityOperator.mValue = 4;
   v1->m_Count = 1;
 }
@@ -23560,7 +23560,7 @@ void __fastcall InteractionPointFindBestCondition::InteractionPointFindBestCondi
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&InteractionPointFindBestCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&InteractionPointFindBestCondition::`vftable;
   *(_DWORD *)&v1->m_eOriginTargetType.mValue = 16777217;
   *(_DWORD *)&v1->m_bTEST_eTARGET_TYPE_INTERACTION_POINT2 = 16843009;
   v1->m_bIgnoreMeshTest = 0;
@@ -23729,7 +23729,7 @@ void __fastcall InteractionPointValidCondition::InteractionPointValidCondition(I
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&InteractionPointValidCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&InteractionPointValidCondition::`vftable;
   *(_WORD *)&v1->m_eTargetType.mValue = 17664;
   v1->m_bIgnoreMeshTest = 0;
 }
@@ -23863,7 +23863,7 @@ void __fastcall InteractionPointIsAccessable::InteractionPointIsAccessable(Inter
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&InteractionPointIsAccessable::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&InteractionPointIsAccessable::`vftable;
   v1->m_eInteractionPointTargetType.mValue = 69;
 }
 
@@ -23922,13 +23922,13 @@ char __fastcall InteractionPointIsAccessable::Match(InteractionPointIsAccessable
     goto LABEL_26;
   v9 = *(UFG::TransformNodeComponent **)(v8 + 88);
   UFG::TransformNodeComponent::UpdateWorldTransform(v9);
-  v14.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable';
+  v14.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable;
   v10 = v9->mWorldTransform.v3.y;
   v11 = v9->mWorldTransform.v3.z;
   v12 = v9->mWorldTransform.v3.x;
   v14.m_bValid = 0;
   *(_QWORD *)&v14.m_packedKey = -1i64;
-  v14.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable';
+  v14.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable;
   v14.m_vPosition.z = v11;
   v14.m_vPosition.y = v10;
   v14.m_vPosition.x = v12;
@@ -23974,7 +23974,7 @@ void __fastcall InteractionPointIsBestBusyCondition::InteractionPointIsBestBusyC
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&InteractionPointIsBestBusyCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&InteractionPointIsBestBusyCondition::`vftable;
 }
 
 // File Line: 15956
@@ -24020,7 +24020,7 @@ void __fastcall InteractionPointIsBestOfTypeCondition::InteractionPointIsBestOfT
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&InteractionPointIsBestOfTypeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&InteractionPointIsBestOfTypeCondition::`vftable;
   v1->m_eInteractionPointTargetType.mValue = 69;
 }
 
@@ -24092,7 +24092,7 @@ void __fastcall IfTargetsInteractionPointNotBusySetBestCondition::IfTargetsInter
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IfTargetsInteractionPointNotBusySetBestCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&IfTargetsInteractionPointNotBusySetBestCondition::`vftable;
   *(_WORD *)&v1->m_eTargetType.mValue = 17692;
   v1->m_bIgnoreMeshTest = 0;
 }
@@ -24272,7 +24272,7 @@ void __fastcall CharacterPhysicsCondition::CharacterPhysicsCondition(CharacterPh
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CharacterPhysicsCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CharacterPhysicsCondition::`vftable;
   v1->mMode.mValue = 5;
 }
 
@@ -24322,7 +24322,7 @@ void __fastcall SocialGreetSuccessfulCondition::SocialGreetSuccessfulCondition(S
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SocialGreetSuccessfulCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&SocialGreetSuccessfulCondition::`vftable;
 }
 
 // File Line: 16222
@@ -24429,7 +24429,7 @@ void __fastcall SocialChargeSuccessfulCondition::SocialChargeSuccessfulCondition
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SocialChargeSuccessfulCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&SocialChargeSuccessfulCondition::`vftable;
 }
 
 // File Line: 16276
@@ -24488,7 +24488,7 @@ void __fastcall SocialRequiresFastTalkCondition::SocialRequiresFastTalkCondition
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SocialRequiresFastTalkCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&SocialRequiresFastTalkCondition::`vftable;
 }
 
 // File Line: 16303
@@ -24547,7 +24547,7 @@ void __fastcall SocialCombatFastTalkSucceededCondition::SocialCombatFastTalkSucc
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SocialCombatFastTalkSucceededCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&SocialCombatFastTalkSucceededCondition::`vftable;
 }
 
 // File Line: 16330
@@ -24592,7 +24592,7 @@ void __fastcall SocialFastTalkOccurredCondition::SocialFastTalkOccurredCondition
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SocialFastTalkOccurredCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&SocialFastTalkOccurredCondition::`vftable;
 }
 
 // File Line: 16358
@@ -25033,7 +25033,7 @@ void __fastcall GameSliceIsActiveCondition::GameSliceIsActiveCondition(GameSlice
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&GameSliceIsActiveCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&GameSliceIsActiveCondition::`vftable;
   v1->mGameSliceId.mUID = -1;
 }
 
@@ -25072,7 +25072,7 @@ void __fastcall LastCompletedMissionCondition::LastCompletedMissionCondition(Las
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&LastCompletedMissionCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&LastCompletedMissionCondition::`vftable;
   v1->mMissionId.mUID = -1;
 }
 
@@ -25107,7 +25107,7 @@ void __fastcall UIPDAStateCondition::UIPDAStateCondition(UIPDAStateCondition *th
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&UIPDAStateCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&UIPDAStateCondition::`vftable;
   v1->mState.mValue = 0;
 }
 
@@ -25158,7 +25158,7 @@ void __fastcall IsPlayerUsingKeyboardCondition::IsPlayerUsingKeyboardCondition(I
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IsPlayerUsingKeyboardCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&IsPlayerUsingKeyboardCondition::`vftable;
 }
 
 // File Line: 16751
@@ -25187,7 +25187,7 @@ void __fastcall CollectibleIsCollectedCondition::CollectibleIsCollectedCondition
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CollectibleIsCollectedCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CollectibleIsCollectedCondition::`vftable;
   v1->mTargetType.mValue = 0;
 }
 
@@ -25323,7 +25323,7 @@ void __fastcall HasClothingBuffCondition::HasClothingBuffCondition(HasClothingBu
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&HasClothingBuffCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&HasClothingBuffCondition::`vftable;
   v1->mBuffType.mValue = 0;
 }
 
@@ -25358,7 +25358,7 @@ void __fastcall CouldShootSomeoneUnintendedCondition::CouldShootSomeoneUnintende
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CouldShootSomeoneUnintendedCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CouldShootSomeoneUnintendedCondition::`vftable;
   *(_WORD *)&v1->mIncludePedestrians = 256;
 }
 
@@ -25409,7 +25409,7 @@ void __fastcall IsSocialConversationActiveCondition::IsSocialConversationActiveC
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IsSocialConversationActiveCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&IsSocialConversationActiveCondition::`vftable;
   v1->mFaceActionResult.mValue = 0;
 }
 
@@ -25482,7 +25482,7 @@ void __fastcall SocialConversationHasActionRequestsCondition::SocialConversation
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SocialConversationHasActionRequestsCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&SocialConversationHasActionRequestsCondition::`vftable;
   v1->mFaceActionResult.mValue = 0;
 }
 
@@ -25756,7 +25756,7 @@ void __fastcall TargetAimingDirectionCondition::TargetAimingDirectionCondition(T
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetAimingDirectionCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetAimingDirectionCondition::`vftable;
   v1->mOriginTargetType = 22;
   v1->mTowardsTargetType = 1;
   v1->mInEqualityOperator.mValue = 3;
@@ -25888,7 +25888,7 @@ void __fastcall NumCollectiblesCollectedCondition::NumCollectiblesCollectedCondi
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&NumCollectiblesCollectedCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&NumCollectiblesCollectedCondition::`vftable;
   v1->mTypeName.mUID = -1;
   v1->mInEqualityOperator.mValue = 3;
   v1->mTarget = 0;

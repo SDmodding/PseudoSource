@@ -31,7 +31,7 @@ hkClass *__fastcall hkpDefaultWorldMemoryWatchDog::staticClass()
 void __fastcall finishLoadedObjecthkpDefaultWorldMemoryWatchDog(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpDefaultWorldMemoryWatchDog::`vftable';
+    *(_QWORD *)p = &hkpDefaultWorldMemoryWatchDog::`vftable;
 }
 
 // File Line: 68
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkpDefaultWorldMemoryWatchDog(void *p)
 // RVA: 0xD50BF0
 void **__fastcall getVtablehkpDefaultWorldMemoryWatchDog()
 {
-  return &hkpDefaultWorldMemoryWatchDog::`vftable';
+  return &hkpDefaultWorldMemoryWatchDog::`vftable;
 }
 
 // File Line: 94

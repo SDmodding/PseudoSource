@@ -320,7 +320,7 @@ void __fastcall UFG::EventDispatcher::EventDispatcher(UFG::EventDispatcher *this
   v1 = this;
   v2 = (Render::Skinning *)&this->m_ChannelTree;
   UFG::qBaseTreeRB::qBaseTreeRB(&this->m_ChannelTree.mTree);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v1->QueuedEventList,
     0x10ui64,
     2,
@@ -420,7 +420,7 @@ void __fastcall UFG::EventDispatcher::~EventDispatcher(UFG::EventDispatcher *thi
   v18->mPrev = v17;
   v3->mNode.mPrev = &v3->mNode;
   v3->mNode.mNext = &v3->mNode;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->QueuedEventList,
     0x10ui64,
     2,

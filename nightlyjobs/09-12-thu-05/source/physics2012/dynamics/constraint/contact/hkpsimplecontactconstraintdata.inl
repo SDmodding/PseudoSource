@@ -10,7 +10,7 @@ void __fastcall hkpSimpleContactConstraintData::~hkpSimpleContactConstraintData(
 
   v1 = this->m_atom;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpSimpleContactConstraintData::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpSimpleContactConstraintData::`vftable;
   if ( v1 )
   {
     v3 = atomSizeRoundUp(v1->m_sizeOfAllAtoms);
@@ -26,6 +26,6 @@ void __fastcall hkpSimpleContactConstraintData::~hkpSimpleContactConstraintData(
       v5 & 0x3FFFFFFF);
   v2->m_idMgrA.m_values.m_data = 0i64;
   v2->m_idMgrA.m_values.m_capacityAndFlags = 2147483648;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 

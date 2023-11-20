@@ -721,7 +721,7 @@ SimpleXML::XMLDocument *__fastcall SimpleXML::XMLDocument::Open(const char *file
   {
     v9 = UFG::qGetDirectory(&result);
     UFG::qPrintf(
-      "ERROR: SimpleXML::Open() - Insufficient memory to open file!\n       file = '%s'\n       dir  = '%s'\n",
+      "ERROR: SimpleXML::Open() - Insufficient memory to open file!\n       file = %s\n       dir  = %s\n",
       v5,
       v9->mData);
     UFG::qString::~qString(&result);
@@ -739,7 +739,7 @@ SimpleXML::XMLDocument *__fastcall SimpleXML::XMLDocument::Open(const char *file
   {
     v17 = UFG::qGetDirectory(&v20);
     UFG::qPrintf(
-      "ERROR: SimpleXML::Open() - File does not exist!\n       file = '%s'\n       dir  = '%s'\n",
+      "ERROR: SimpleXML::Open() - File does not exist!\n       file = %s\n       dir  = %s\n",
       v5,
       v17->mData);
     v15 = &v20;
@@ -750,7 +750,7 @@ SimpleXML::XMLDocument *__fastcall SimpleXML::XMLDocument::Open(const char *file
   {
     v16 = UFG::qGetDirectory(&v19);
     UFG::qPrintf(
-      "ERROR: SimpleXML::Open() - File could not be read!\n       file = '%s'\n       dir  = '%s'\n",
+      "ERROR: SimpleXML::Open() - File could not be read!\n       file = %s\n       dir  = %s\n",
       v5,
       v16->mData);
     v15 = &v19;
@@ -761,7 +761,7 @@ SimpleXML::XMLDocument *__fastcall SimpleXML::XMLDocument::Open(const char *file
   {
     v14 = UFG::qGetDirectory(&result);
     UFG::qPrintf(
-      "ERROR: SimpleXML::Open() - No memory to load file!\n       file = '%s'\n       dir  = '%s'\n",
+      "ERROR: SimpleXML::Open() - No memory to load file!\n       file = %s\n       dir  = %s\n",
       v5,
       v14->mData);
     v15 = &result;
@@ -1239,7 +1239,7 @@ void __fastcall SimpleXML::XMLWriter::XMLWriter(SimpleXML::XMLWriter *this)
   UFG::qStringCopy(v1->mReplacementMap[1].mNaturalString, 0x7FFFFFFF, "<", -1);
   UFG::qStringCopy(v1->mReplacementMap[2].mNaturalString, 0x7FFFFFFF, ">", -1);
   UFG::qStringCopy(v1->mReplacementMap[3].mNaturalString, 0x7FFFFFFF, "\"", -1);
-  UFG::qStringCopy(v1->mReplacementMap[4].mNaturalString, 0x7FFFFFFF, "'", -1);
+  UFG::qStringCopy(v1->mReplacementMap[4].mNaturalString, 0x7FFFFFFF, "", -1);
   UFG::qStringCopy(v1->mReplacementMap[0].mReplacementString, 0x7FFFFFFF, "&amp;", -1);
   UFG::qStringCopy(v1->mReplacementMap[1].mReplacementString, 0x7FFFFFFF, "&lt;", -1);
   UFG::qStringCopy(v1->mReplacementMap[2].mReplacementString, 0x7FFFFFFF, "&gt;", -1);

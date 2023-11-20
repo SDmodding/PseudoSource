@@ -988,7 +988,7 @@ bool __fastcall UFG::qSetDirectory(const char *directory)
 __int64 UFG::_dynamic_initializer_for__gPCFileDevice__()
 {
   UFG::qFileDevice::qFileDevice((UFG::qFileDevice *)&UFG::gPCFileDevice.vfptr, "pc_hdd", -1, 0x7FFFFFFF, 0);
-  UFG::gPCFileDevice.vfptr = (UFG::qFileDeviceVtbl *)&UFG::PCFileDevice::`vftable';
+  UFG::gPCFileDevice.vfptr = (UFG::qFileDeviceVtbl *)&UFG::PCFileDevice::`vftable;
   UFG::qFileIoThread::qFileIoThread(&stru_14249CB38, "pc_hdd");
   UFG::qFileOpList::qFileOpList(&stru_14249CBA8, "pc_hdd");
   return atexit(UFG::_dynamic_atexit_destructor_for__gPCFileDevice__);

@@ -30,7 +30,7 @@ void __fastcall UFG::HighlightComponent::HighlightComponent(UFG::HighlightCompon
   v2 = (UFG::qNode<UFG::HighlightComponent,UFG::HighlightComponent> *)&v1->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HighlightComponent::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HighlightComponent::`vftable;
   v1->mHighlightParams.mColour.r = UFG::qColour::White.r;
   v1->mHighlightParams.mColour.g = UFG::qColour::White.g;
   v1->mHighlightParams.mColour.b = UFG::qColour::White.b;
@@ -60,7 +60,7 @@ void __fastcall UFG::HighlightComponent::~HighlightComponent(UFG::HighlightCompo
   UFG::qNode<UFG::HighlightComponent,UFG::HighlightComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HighlightComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HighlightComponent::`vftable;
   if ( this == UFG::HighlightComponent::s_HighlightComponentpCurrentIterator )
     UFG::HighlightComponent::s_HighlightComponentpCurrentIterator = (UFG::HighlightComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::HighlightComponent,UFG::HighlightComponent> *)&this->mPrev;
@@ -113,28 +113,28 @@ void __fastcall UFG::HighlightSubmitContext::HighlightSubmitContext(UFG::Highlig
 
   v1 = this;
   LayerSubmitContext::LayerSubmitContext((LayerSubmitContext *)&this->vfptr);
-  v1->vfptr = (Illusion::SubmitContextVtbl *)&UFG::HighlightSubmitContext::`vftable';
+  v1->vfptr = (Illusion::SubmitContextVtbl *)&UFG::HighlightSubmitContext::`vftable;
   v1->mDiffuse2 = 0i64;
   UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v1->mDepthEnabledRasterStateHandle.mPrev);
   UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v1->mDepthDisabledRasterStateHandle.mPrev);
-  v2 = `UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result )
+  v2 = `UFG::qGetResourceInventory<Illusion::RasterState>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::RasterState>::`2::result )
   {
     v3 = UFG::qResourceWarehouse::Instance();
     v2 = UFG::qResourceWarehouse::GetInventory(v3, 0x3BC715E0u);
-    `UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result = v2;
+    `UFG::qGetResourceInventory<Illusion::RasterState>::`2::result = v2;
   }
   UFG::qResourceHandle::Init(
     (UFG::qResourceHandle *)&v1->mDepthEnabledRasterStateHandle.mPrev,
     0x3BC715E0u,
     0x20688F05u,
     v2);
-  v4 = `UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result )
+  v4 = `UFG::qGetResourceInventory<Illusion::RasterState>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::RasterState>::`2::result )
   {
     v5 = UFG::qResourceWarehouse::Instance();
     v4 = UFG::qResourceWarehouse::GetInventory(v5, 0x3BC715E0u);
-    `UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result = v4;
+    `UFG::qGetResourceInventory<Illusion::RasterState>::`2::result = v4;
   }
   UFG::qResourceHandle::Init(
     (UFG::qResourceHandle *)&v1->mDepthDisabledRasterStateHandle.mPrev,
@@ -258,7 +258,7 @@ void __fastcall UFG::HighlightPostEffect::HighlightPostEffect(UFG::HighlightPost
 
   v1 = this;
   UFG::RenderStagePlugin::RenderStagePlugin((UFG::RenderStagePlugin *)&this->vfptr);
-  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HighlightPostEffect::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HighlightPostEffect::`vftable;
   UFG::SimComponent::AddType(
     (UFG::SimComponent *)&v1->vfptr,
     UFG::HighlightPostEffect::_HighlightPostEffectTypeUID,
@@ -498,7 +498,7 @@ void __fastcall UFG::HighlightPostEffect::RenderPostEffect(UFG::HighlightPostEff
     *curr_target = *scratch_target;
     *scratch_target = v18;
     poly.mVertices = (Render::vDynamic *)&ptr.mStateArgs;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       ptr.mStateArgs.mStateArgs,
       0x10ui64,
       128,

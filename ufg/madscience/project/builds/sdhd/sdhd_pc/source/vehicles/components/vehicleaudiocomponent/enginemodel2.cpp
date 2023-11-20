@@ -1258,11 +1258,11 @@ void __fastcall UFG::EngineModelInputs::EngineModelInputs(UFG::EngineModelInputs
     v6[4].mNext = 0i64;
     v6[5].mNext = 0i64;
     LODWORD(v6[6].mNext) = (_DWORD)v8;
-    v6->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable';
+    v6->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
     v6[7].mNext = 0i64;
     LODWORD(v6[8].mNext) = EngineModelSym_speed;
     HIDWORD(v6[8].mNext) = 0;
-    v6->mNext = (UFG::allocator::free_link *)&UFG::SpeedInput::`vftable';
+    v6->mNext = (UFG::allocator::free_link *)&UFG::SpeedInput::`vftable;
   }
   else
   {
@@ -1292,11 +1292,11 @@ void __fastcall UFG::EngineModelInputs::EngineModelInputs(UFG::EngineModelInputs
     v13[4].mNext = 0i64;
     v13[5].mNext = 0i64;
     LODWORD(v13[6].mNext) = (_DWORD)v15;
-    v13->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable';
+    v13->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
     v13[7].mNext = 0i64;
     LODWORD(v13[8].mNext) = EngineModelSym_engine_damage;
     HIDWORD(v13[8].mNext) = 0;
-    v13->mNext = (UFG::allocator::free_link *)&UFG::EngineDamageInput::`vftable';
+    v13->mNext = (UFG::allocator::free_link *)&UFG::EngineDamageInput::`vftable;
   }
   else
   {
@@ -1325,11 +1325,11 @@ void __fastcall UFG::EngineModelInputs::EngineModelInputs(UFG::EngineModelInputs
     v19[4].mNext = 0i64;
     v19[5].mNext = 0i64;
     LODWORD(v19[6].mNext) = (_DWORD)v21;
-    v19->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable';
+    v19->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
     v19[7].mNext = 0i64;
     LODWORD(v19[8].mNext) = EngineModelSym_time_in_state;
     HIDWORD(v19[8].mNext) = 0;
-    v19->mNext = (UFG::allocator::free_link *)&UFG::TimeInStateInput::`vftable';
+    v19->mNext = (UFG::allocator::free_link *)&UFG::TimeInStateInput::`vftable;
   }
   else
   {
@@ -1358,11 +1358,11 @@ void __fastcall UFG::EngineModelInputs::EngineModelInputs(UFG::EngineModelInputs
     v25[4].mNext = 0i64;
     v25[5].mNext = 0i64;
     LODWORD(v25[6].mNext) = (_DWORD)v27;
-    v25->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable';
+    v25->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
     v25[7].mNext = 0i64;
     LODWORD(v25[8].mNext) = EngineModelSym_rpm;
     HIDWORD(v25[8].mNext) = 0;
-    v25->mNext = (UFG::allocator::free_link *)&UFG::RpmInput::`vftable';
+    v25->mNext = (UFG::allocator::free_link *)&UFG::RpmInput::`vftable;
   }
   else
   {
@@ -1391,11 +1391,11 @@ void __fastcall UFG::EngineModelInputs::EngineModelInputs(UFG::EngineModelInputs
     v31[4].mNext = 0i64;
     v31[5].mNext = 0i64;
     LODWORD(v31[6].mNext) = (_DWORD)v33;
-    v31->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable';
+    v31->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
     v31[7].mNext = 0i64;
     LODWORD(v31[8].mNext) = EngineModelSym_time_after_rpm_lookup;
     HIDWORD(v31[8].mNext) = 0;
-    v31->mNext = (UFG::allocator::free_link *)&UFG::TimeAfterRpmLookupInput::`vftable';
+    v31->mNext = (UFG::allocator::free_link *)&UFG::TimeAfterRpmLookupInput::`vftable;
   }
   else
   {
@@ -1424,11 +1424,11 @@ void __fastcall UFG::EngineModelInputs::EngineModelInputs(UFG::EngineModelInputs
     v37[4].mNext = 0i64;
     v37[5].mNext = 0i64;
     LODWORD(v37[6].mNext) = (_DWORD)v39;
-    v37->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable';
+    v37->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
     v37[7].mNext = 0i64;
     LODWORD(v37[8].mNext) = EngineModelSym_skid_strength;
     HIDWORD(v37[8].mNext) = 0;
-    v37->mNext = (UFG::allocator::free_link *)&UFG::SkidStrengthInput::`vftable';
+    v37->mNext = (UFG::allocator::free_link *)&UFG::SkidStrengthInput::`vftable;
   }
   else
   {
@@ -1457,11 +1457,11 @@ void __fastcall UFG::EngineModelInputs::EngineModelInputs(UFG::EngineModelInputs
     v43[4].mNext = 0i64;
     v43[5].mNext = 0i64;
     LODWORD(v43[6].mNext) = (_DWORD)v45;
-    v43->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable';
+    v43->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
     v43[7].mNext = 0i64;
     LODWORD(v43[8].mNext) = EngineModelSym_skid_angle;
     HIDWORD(v43[8].mNext) = 0;
-    v43->mNext = (UFG::allocator::free_link *)&UFG::SkidAngleInput::`vftable';
+    v43->mNext = (UFG::allocator::free_link *)&UFG::SkidAngleInput::`vftable;
   }
   else
   {
@@ -1490,11 +1490,11 @@ void __fastcall UFG::EngineModelInputs::EngineModelInputs(UFG::EngineModelInputs
     v49[4].mNext = 0i64;
     v49[5].mNext = 0i64;
     LODWORD(v49[6].mNext) = (_DWORD)v51;
-    v49->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable';
+    v49->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
     v49[7].mNext = 0i64;
     LODWORD(v49[8].mNext) = EngineModelSym_steering;
     HIDWORD(v49[8].mNext) = 0;
-    v49->mNext = (UFG::allocator::free_link *)&UFG::SteeringInput::`vftable';
+    v49->mNext = (UFG::allocator::free_link *)&UFG::SteeringInput::`vftable;
   }
   else
   {
@@ -1523,11 +1523,11 @@ void __fastcall UFG::EngineModelInputs::EngineModelInputs(UFG::EngineModelInputs
     v55[4].mNext = 0i64;
     v55[5].mNext = 0i64;
     LODWORD(v55[6].mNext) = (_DWORD)v57;
-    v55->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable';
+    v55->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
     v55[7].mNext = 0i64;
     LODWORD(v55[8].mNext) = EngineModelSym_gas;
     HIDWORD(v55[8].mNext) = 0;
-    v55->mNext = (UFG::allocator::free_link *)&UFG::GasInput::`vftable';
+    v55->mNext = (UFG::allocator::free_link *)&UFG::GasInput::`vftable;
     v55[10].mNext = 0i64;
     v55[11].mNext = 0i64;
   }
@@ -1558,11 +1558,11 @@ void __fastcall UFG::EngineModelInputs::EngineModelInputs(UFG::EngineModelInputs
     v61[4].mNext = 0i64;
     v61[5].mNext = 0i64;
     LODWORD(v61[6].mNext) = (_DWORD)v63;
-    v61->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable';
+    v61->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
     v61[7].mNext = 0i64;
     LODWORD(v61[8].mNext) = EngineModelSym_tmp_a;
     HIDWORD(v61[8].mNext) = 0;
-    v61->mNext = (UFG::allocator::free_link *)&UFG::TmpAInput::`vftable';
+    v61->mNext = (UFG::allocator::free_link *)&UFG::TmpAInput::`vftable;
   }
   else
   {
@@ -1591,11 +1591,11 @@ void __fastcall UFG::EngineModelInputs::EngineModelInputs(UFG::EngineModelInputs
     v67[4].mNext = 0i64;
     v67[5].mNext = 0i64;
     LODWORD(v67[6].mNext) = (_DWORD)v69;
-    v67->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable';
+    v67->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
     v67[7].mNext = 0i64;
     LODWORD(v67[8].mNext) = EngineModelSym_delta_speed;
     HIDWORD(v67[8].mNext) = 0;
-    v67->mNext = (UFG::allocator::free_link *)&UFG::DeltaSpeedInput::`vftable';
+    v67->mNext = (UFG::allocator::free_link *)&UFG::DeltaSpeedInput::`vftable;
     *(UFG::allocator::free_link **)((char *)&v67[8].mNext + 4) = 0i64;
   }
   else
@@ -1627,11 +1627,11 @@ void __fastcall UFG::EngineModelInputs::EngineModelInputs(UFG::EngineModelInputs
       v73[4].mNext = 0i64;
       v73[5].mNext = 0i64;
       LODWORD(v73[6].mNext) = (_DWORD)v75;
-      v73->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable';
+      v73->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
       v73[7].mNext = 0i64;
       LODWORD(v73[8].mNext) = EngineModelSym_pitch_angle;
       HIDWORD(v73[8].mNext) = 0;
-      v73->mNext = (UFG::allocator::free_link *)&UFG::PitchAngleInput::`vftable';
+      v73->mNext = (UFG::allocator::free_link *)&UFG::PitchAngleInput::`vftable;
     }
     else
     {
@@ -1660,11 +1660,11 @@ void __fastcall UFG::EngineModelInputs::EngineModelInputs(UFG::EngineModelInputs
       v79[4].mNext = 0i64;
       v79[5].mNext = 0i64;
       LODWORD(v79[6].mNext) = (_DWORD)v81;
-      v79->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable';
+      v79->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
       v79[7].mNext = 0i64;
       LODWORD(v79[8].mNext) = EngineModelSym_ramming;
       HIDWORD(v79[8].mNext) = 0;
-      v79->mNext = (UFG::allocator::free_link *)&UFG::RammingInput::`vftable';
+      v79->mNext = (UFG::allocator::free_link *)&UFG::RammingInput::`vftable;
       LODWORD(v79[10].mNext) = 0;
     }
     else
@@ -1694,11 +1694,11 @@ void __fastcall UFG::EngineModelInputs::EngineModelInputs(UFG::EngineModelInputs
       v85[4].mNext = 0i64;
       v85[5].mNext = 0i64;
       LODWORD(v85[6].mNext) = (_DWORD)v87;
-      v85->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable';
+      v85->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
       v85[7].mNext = 0i64;
       LODWORD(v85[8].mNext) = EngineModelSym_wheels_in_air;
       HIDWORD(v85[8].mNext) = 0;
-      v85->mNext = (UFG::allocator::free_link *)&UFG::WheelsInAirInput::`vftable';
+      v85->mNext = (UFG::allocator::free_link *)&UFG::WheelsInAirInput::`vftable;
     }
     else
     {
@@ -1727,11 +1727,11 @@ void __fastcall UFG::EngineModelInputs::EngineModelInputs(UFG::EngineModelInputs
       v91[4].mNext = 0i64;
       v91[5].mNext = 0i64;
       LODWORD(v91[6].mNext) = (_DWORD)v93;
-      v91->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable';
+      v91->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
       v91[7].mNext = 0i64;
       LODWORD(v91[8].mNext) = EngineModelSym_burnout;
       HIDWORD(v91[8].mNext) = 0;
-      v91->mNext = (UFG::allocator::free_link *)&UFG::BurnoutInput::`vftable';
+      v91->mNext = (UFG::allocator::free_link *)&UFG::BurnoutInput::`vftable;
     }
     else
     {
@@ -1760,11 +1760,11 @@ void __fastcall UFG::EngineModelInputs::EngineModelInputs(UFG::EngineModelInputs
       v97[4].mNext = 0i64;
       v97[5].mNext = 0i64;
       LODWORD(v97[6].mNext) = (_DWORD)v99;
-      v97->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable';
+      v97->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
       v97[7].mNext = 0i64;
       LODWORD(v97[8].mNext) = EngineModelSym_friction_multiplier;
       HIDWORD(v97[8].mNext) = 0;
-      v97->mNext = (UFG::allocator::free_link *)&UFG::FrictionMultiplierInput::`vftable';
+      v97->mNext = (UFG::allocator::free_link *)&UFG::FrictionMultiplierInput::`vftable;
     }
     else
     {
@@ -1823,10 +1823,10 @@ void __fastcall UFG::FrictionMultiplierOutput::WriteOutput(UFG::FrictionMultipli
 
   v3 = em;
   v4 = this;
-  if ( !(`UFG::FrictionMultiplierOutput::WriteOutput'::`2'::`local static guard' & 1) )
+  if ( !(`UFG::FrictionMultiplierOutput::WriteOutput::`2::`local static guard & 1) )
   {
-    `UFG::FrictionMultiplierOutput::WriteOutput'::`2'::`local static guard' |= 1u;
-    `UFG::FrictionMultiplierOutput::WriteOutput'::`2'::rtpcId = AK::SoundEngine::GetIDFromString("vehicle_friction_multiplier");
+    `UFG::FrictionMultiplierOutput::WriteOutput::`2::`local static guard |= 1u;
+    `UFG::FrictionMultiplierOutput::WriteOutput::`2::rtpcId = AK::SoundEngine::GetIDFromString("vehicle_friction_multiplier");
   }
   if ( !v4->frictionMultiplierInput )
   {
@@ -1857,7 +1857,7 @@ void __fastcall UFG::FrictionMultiplierOutput::WriteOutput(UFG::FrictionMultipli
     {
       UFG::AudioEntity::SetRtpcValue(
         (UFG::AudioEntity *)&v3->m_pVehAudComponent->vfptr,
-        `UFG::FrictionMultiplierOutput::WriteOutput'::`2'::rtpcId,
+        `UFG::FrictionMultiplierOutput::WriteOutput::`2::rtpcId,
         v4->m_rlf.m_currentValue);
       v4->m_prevSetValue = v10;
     }
@@ -1893,10 +1893,10 @@ void __fastcall UFG::LimiterThresholdOutput::WriteOutput(UFG::LimiterThresholdOu
 
   v3 = delta_sec;
   v4 = this;
-  if ( !(`UFG::LimiterThresholdOutput::WriteOutput'::`2'::`local static guard' & 1) )
+  if ( !(`UFG::LimiterThresholdOutput::WriteOutput::`2::`local static guard & 1) )
   {
-    `UFG::LimiterThresholdOutput::WriteOutput'::`2'::`local static guard' |= 1u;
-    `UFG::LimiterThresholdOutput::WriteOutput'::`2'::limiterRtpc = AK::SoundEngine::GetIDFromString("vehicle_limiter_threshold");
+    `UFG::LimiterThresholdOutput::WriteOutput::`2::`local static guard |= 1u;
+    `UFG::LimiterThresholdOutput::WriteOutput::`2::limiterRtpc = AK::SoundEngine::GetIDFromString("vehicle_limiter_threshold");
   }
   v4->m_rateLimitedValue.m_targetValue = v4->m_value;
   v5 = v4->m_rateLimitedValue.m_targetValue;
@@ -1906,15 +1906,15 @@ void __fastcall UFG::LimiterThresholdOutput::WriteOutput(UFG::LimiterThresholdOu
     v6 = v4->m_rateLimitedValue.m_riseRate;
   UFG::qApproach(&v4->m_rateLimitedValue.m_currentValue, v5, v6, v3);
   v7 = v4->m_rateLimitedValue.m_currentValue;
-  if ( `UFG::LimiterThresholdOutput::WriteOutput'::`2'::last_limiter_value != v7 )
+  if ( `UFG::LimiterThresholdOutput::WriteOutput::`2::last_limiter_value != v7 )
   {
     v8 = UFG::TiDo::GetInstance();
     UFG::TiDo::SetWwiseRtpcValue(
       v8,
-      `UFG::LimiterThresholdOutput::WriteOutput'::`2'::limiterRtpc,
+      `UFG::LimiterThresholdOutput::WriteOutput::`2::limiterRtpc,
       v7,
       0xFFFFFFFFFFFFFFFFui64);
-    `UFG::LimiterThresholdOutput::WriteOutput'::`2'::last_limiter_value = v4->m_rateLimitedValue.m_currentValue;
+    `UFG::LimiterThresholdOutput::WriteOutput::`2::last_limiter_value = v4->m_rateLimitedValue.m_currentValue;
   }
 }
 
@@ -1954,10 +1954,10 @@ void __fastcall UFG::RpmOutput::RpmOutput(UFG::RpmOutput *this, UFG::EngineModel
   this->mNode.mChild[0] = 0i64;
   this->mNode.mChild[1] = 0i64;
   this->mNode.mUID = (unsigned int)v4;
-  this->vfptr = (UFG::EngineModelOutputVtbl *)&UFG::EngineModelOutput::`vftable';
+  this->vfptr = (UFG::EngineModelOutputVtbl *)&UFG::EngineModelOutput::`vftable;
   this->mName.mUID = -1;
   this->m_value = 0.0;
-  this->vfptr = (UFG::EngineModelOutputVtbl *)&UFG::RpmOutput::`vftable';
+  this->vfptr = (UFG::EngineModelOutputVtbl *)&UFG::RpmOutput::`vftable;
   *(_QWORD *)&this->m_rateLimitedRPM.m_currentValue = 0i64;
   this->m_rateLimitedRPM.m_riseRate = 10000000.0;
   this->m_rateLimitedRPM.m_fallRate = 10000000.0;
@@ -2032,10 +2032,10 @@ void __fastcall UFG::RpmOutput::WriteOutput(UFG::RpmOutput *this, float delta_se
   v3 = em;
   v4 = delta_sec;
   v5 = this;
-  if ( !(`UFG::RpmOutput::WriteOutput'::`2'::`local static guard' & 1) )
+  if ( !(`UFG::RpmOutput::WriteOutput::`2::`local static guard & 1) )
   {
-    `UFG::RpmOutput::WriteOutput'::`2'::`local static guard' |= 1u;
-    `UFG::RpmOutput::WriteOutput'::`2'::rpmId = AK::SoundEngine::GetIDFromString("RPM_Vehicle");
+    `UFG::RpmOutput::WriteOutput::`2::`local static guard |= 1u;
+    `UFG::RpmOutput::WriteOutput::`2::rpmId = AK::SoundEngine::GetIDFromString("RPM_Vehicle");
   }
   v6 = (float)(v5->m_rpmScaleFactor * v5->m_value) + v5->m_rpmOffset;
   v5->m_rateLimitedRPM.m_targetValue = v6;
@@ -2054,7 +2054,7 @@ void __fastcall UFG::RpmOutput::WriteOutput(UFG::RpmOutput *this, float delta_se
   {
     UFG::AudioEntity::SetRtpcValue(
       (UFG::AudioEntity *)&v3->m_pVehAudComponent->vfptr,
-      `UFG::RpmOutput::WriteOutput'::`2'::rpmId,
+      `UFG::RpmOutput::WriteOutput::`2::rpmId,
       v5->m_rateLimitedRPM.m_currentValue);
     v5->m_prevSetValue = v9;
   }
@@ -2081,10 +2081,10 @@ void __fastcall UFG::LoadOutput::LoadOutput(UFG::LoadOutput *this, UFG::EngineMo
   this->mNode.mChild[0] = 0i64;
   this->mNode.mChild[1] = 0i64;
   this->mNode.mUID = (unsigned int)v3;
-  this->vfptr = (UFG::EngineModelOutputVtbl *)&UFG::EngineModelOutput::`vftable';
+  this->vfptr = (UFG::EngineModelOutputVtbl *)&UFG::EngineModelOutput::`vftable;
   this->mName.mUID = -1;
   this->m_value = 0.0;
-  this->vfptr = (UFG::EngineModelOutputVtbl *)&UFG::LoadOutput::`vftable';
+  this->vfptr = (UFG::EngineModelOutputVtbl *)&UFG::LoadOutput::`vftable;
   *(_QWORD *)&this->m_rateLimitedLoad.m_currentValue = 0i64;
   this->m_rateLimitedLoad.m_riseRate = 10000000.0;
   this->m_rateLimitedLoad.m_fallRate = 10000000.0;
@@ -2117,10 +2117,10 @@ void __fastcall UFG::LoadOutput::WriteOutput(UFG::LoadOutput *this, float delta_
   v3 = em;
   v4 = delta_sec;
   v5 = this;
-  if ( !(`UFG::LoadOutput::WriteOutput'::`2'::`local static guard' & 1) )
+  if ( !(`UFG::LoadOutput::WriteOutput::`2::`local static guard & 1) )
   {
-    `UFG::LoadOutput::WriteOutput'::`2'::`local static guard' |= 1u;
-    `UFG::LoadOutput::WriteOutput'::`2'::loadId = AK::SoundEngine::GetIDFromString("engine_load");
+    `UFG::LoadOutput::WriteOutput::`2::`local static guard |= 1u;
+    `UFG::LoadOutput::WriteOutput::`2::loadId = AK::SoundEngine::GetIDFromString("engine_load");
   }
   v5->m_rateLimitedLoad.m_targetValue = v5->m_value;
   v6 = v5->m_rateLimitedLoad.m_targetValue;
@@ -2138,7 +2138,7 @@ void __fastcall UFG::LoadOutput::WriteOutput(UFG::LoadOutput *this, float delta_
   {
     UFG::AudioEntity::SetRtpcValue(
       (UFG::AudioEntity *)&v3->m_pVehAudComponent->vfptr,
-      `UFG::LoadOutput::WriteOutput'::`2'::loadId,
+      `UFG::LoadOutput::WriteOutput::`2::loadId,
       v5->m_rateLimitedLoad.m_currentValue);
     v5->m_prevSetValue = v8;
   }
@@ -2151,14 +2151,14 @@ void __fastcall UFG::AccelerationFactorOutput::WriteOutput(UFG::AccelerationFact
   UFG::AccelerationFactorOutput *v3; // rbx
 
   v3 = this;
-  if ( `UFG::AccelerationFactorOutput::WriteOutput'::`2'::`local static guard' & 1 )
+  if ( `UFG::AccelerationFactorOutput::WriteOutput::`2::`local static guard & 1 )
   {
     this->m_prevValue = this->m_value;
   }
   else
   {
-    `UFG::AccelerationFactorOutput::WriteOutput'::`2'::`local static guard' |= 1u;
-    `UFG::AccelerationFactorOutput::WriteOutput'::`2'::acceleration_factor_id = AK::SoundEngine::GetIDFromString("acceleration_factor");
+    `UFG::AccelerationFactorOutput::WriteOutput::`2::`local static guard |= 1u;
+    `UFG::AccelerationFactorOutput::WriteOutput::`2::acceleration_factor_id = AK::SoundEngine::GetIDFromString("acceleration_factor");
     v3->m_prevValue = v3->m_value;
   }
 }
@@ -2280,10 +2280,10 @@ void __fastcall UFG::EngineModelOutputs::EngineModelOutputs(UFG::EngineModelOutp
     v18[4].mNext = 0i64;
     v18[5].mNext = 0i64;
     LODWORD(v18[6].mNext) = (_DWORD)v20;
-    v18->mNext = (UFG::allocator::free_link *)&UFG::EngineModelOutput::`vftable';
+    v18->mNext = (UFG::allocator::free_link *)&UFG::EngineModelOutput::`vftable;
     LODWORD(v18[7].mNext) = -1;
     HIDWORD(v18[7].mNext) = 0;
-    v18->mNext = (UFG::allocator::free_link *)&UFG::AccelerationFactorOutput::`vftable';
+    v18->mNext = (UFG::allocator::free_link *)&UFG::AccelerationFactorOutput::`vftable;
     HIDWORD(v18[7].mNext) = 1065353216;
     LODWORD(v18[8].mNext) = 1065353216;
   }
@@ -2314,10 +2314,10 @@ void __fastcall UFG::EngineModelOutputs::EngineModelOutputs(UFG::EngineModelOutp
     v24[4].mNext = 0i64;
     v24[5].mNext = 0i64;
     LODWORD(v24[6].mNext) = (_DWORD)v26;
-    v24->mNext = (UFG::allocator::free_link *)&UFG::EngineModelOutput::`vftable';
+    v24->mNext = (UFG::allocator::free_link *)&UFG::EngineModelOutput::`vftable;
     LODWORD(v24[7].mNext) = -1;
     HIDWORD(v24[7].mNext) = 0;
-    v24->mNext = (UFG::allocator::free_link *)&UFG::ModelledSpeedOutput::`vftable';
+    v24->mNext = (UFG::allocator::free_link *)&UFG::ModelledSpeedOutput::`vftable;
     LODWORD(v24[8].mNext) = -1082130432;
   }
   else
@@ -2349,10 +2349,10 @@ void __fastcall UFG::EngineModelOutputs::EngineModelOutputs(UFG::EngineModelOutp
       v30[4].mNext = 0i64;
       v30[5].mNext = 0i64;
       LODWORD(v30[6].mNext) = (_DWORD)v32;
-      v30->mNext = (UFG::allocator::free_link *)&UFG::EngineModelOutput::`vftable';
+      v30->mNext = (UFG::allocator::free_link *)&UFG::EngineModelOutput::`vftable;
       LODWORD(v30[7].mNext) = -1;
       HIDWORD(v30[7].mNext) = 0;
-      v30->mNext = (UFG::allocator::free_link *)&UFG::LimiterThresholdOutput::`vftable';
+      v30->mNext = (UFG::allocator::free_link *)&UFG::LimiterThresholdOutput::`vftable;
       v30[8].mNext = 0i64;
       LODWORD(v30[9].mNext) = 1259902592;
       HIDWORD(v30[9].mNext) = 1259902592;
@@ -2385,10 +2385,10 @@ void __fastcall UFG::EngineModelOutputs::EngineModelOutputs(UFG::EngineModelOutp
       v36[4].mNext = 0i64;
       v36[5].mNext = 0i64;
       LODWORD(v36[6].mNext) = (_DWORD)v38;
-      v36->mNext = (UFG::allocator::free_link *)&UFG::EngineModelOutput::`vftable';
+      v36->mNext = (UFG::allocator::free_link *)&UFG::EngineModelOutput::`vftable;
       LODWORD(v36[7].mNext) = -1;
       HIDWORD(v36[7].mNext) = 0;
-      v36->mNext = (UFG::allocator::free_link *)&UFG::FrictionMultiplierOutput::`vftable';
+      v36->mNext = (UFG::allocator::free_link *)&UFG::FrictionMultiplierOutput::`vftable;
       v36[8].mNext = 0i64;
       LODWORD(v36[9].mNext) = 1259902592;
       HIDWORD(v36[9].mNext) = 1259902592;
@@ -2426,10 +2426,10 @@ void __fastcall UFG::EngineModelOutputs::EngineModelOutputs(UFG::EngineModelOutp
     v42[4].mNext = 0i64;
     v42[5].mNext = 0i64;
     LODWORD(v42[6].mNext) = (_DWORD)v44;
-    v42->mNext = (UFG::allocator::free_link *)&UFG::EngineModelOutput::`vftable';
+    v42->mNext = (UFG::allocator::free_link *)&UFG::EngineModelOutput::`vftable;
     LODWORD(v42[7].mNext) = -1;
     HIDWORD(v42[7].mNext) = 0;
-    v42->mNext = (UFG::allocator::free_link *)&UFG::NoOutput::`vftable';
+    v42->mNext = (UFG::allocator::free_link *)&UFG::NoOutput::`vftable;
   }
   else
   {
@@ -2458,10 +2458,10 @@ void __fastcall UFG::EngineModelOutputs::EngineModelOutputs(UFG::EngineModelOutp
     v48[4].mNext = 0i64;
     v48[5].mNext = 0i64;
     LODWORD(v48[6].mNext) = (_DWORD)v50;
-    v48->mNext = (UFG::allocator::free_link *)&UFG::EngineModelOutput::`vftable';
+    v48->mNext = (UFG::allocator::free_link *)&UFG::EngineModelOutput::`vftable;
     LODWORD(v48[7].mNext) = -1;
     HIDWORD(v48[7].mNext) = 0;
-    v48->mNext = (UFG::allocator::free_link *)&UFG::TmpAOutput::`vftable';
+    v48->mNext = (UFG::allocator::free_link *)&UFG::TmpAOutput::`vftable;
   }
   else
   {
@@ -2617,8 +2617,8 @@ void __fastcall UFG::EngineModelBlendModes::EngineModelBlendModes(UFG::EngineMod
     v3 = v2 + 1;
     v3->mNext = v3;
     v3[1].mNext = v3;
-    v2->mNext = (UFG::allocator::free_link *)&UFG::EngineModelBlendMode::`vftable';
-    v2->mNext = (UFG::allocator::free_link *)&UFG::ReplaceBlendMode::`vftable';
+    v2->mNext = (UFG::allocator::free_link *)&UFG::EngineModelBlendMode::`vftable;
+    v2->mNext = (UFG::allocator::free_link *)&UFG::ReplaceBlendMode::`vftable;
   }
   v4 = (UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *)&v2[1];
   v5 = v1->m_modes.mNode.mNext;
@@ -2632,8 +2632,8 @@ void __fastcall UFG::EngineModelBlendModes::EngineModelBlendModes(UFG::EngineMod
     v7 = v6 + 1;
     v7->mNext = v7;
     v7[1].mNext = v7;
-    v6->mNext = (UFG::allocator::free_link *)&UFG::EngineModelBlendMode::`vftable';
-    v6->mNext = (UFG::allocator::free_link *)&UFG::AddBlendMode::`vftable';
+    v6->mNext = (UFG::allocator::free_link *)&UFG::EngineModelBlendMode::`vftable;
+    v6->mNext = (UFG::allocator::free_link *)&UFG::AddBlendMode::`vftable;
   }
   v8 = (UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *)&v6[1];
   v9 = v1->m_modes.mNode.mNext;
@@ -2647,8 +2647,8 @@ void __fastcall UFG::EngineModelBlendModes::EngineModelBlendModes(UFG::EngineMod
     v11 = v10 + 1;
     v11->mNext = v11;
     v11[1].mNext = v11;
-    v10->mNext = (UFG::allocator::free_link *)&UFG::EngineModelBlendMode::`vftable';
-    v10->mNext = (UFG::allocator::free_link *)&UFG::SubtractBlendMode::`vftable';
+    v10->mNext = (UFG::allocator::free_link *)&UFG::EngineModelBlendMode::`vftable;
+    v10->mNext = (UFG::allocator::free_link *)&UFG::SubtractBlendMode::`vftable;
   }
   v12 = (UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *)&v10[1];
   v13 = v1->m_modes.mNode.mNext;
@@ -2662,8 +2662,8 @@ void __fastcall UFG::EngineModelBlendModes::EngineModelBlendModes(UFG::EngineMod
     v15 = v14 + 1;
     v15->mNext = v15;
     v15[1].mNext = v15;
-    v14->mNext = (UFG::allocator::free_link *)&UFG::EngineModelBlendMode::`vftable';
-    v14->mNext = (UFG::allocator::free_link *)&UFG::MultiplyBlendMode::`vftable';
+    v14->mNext = (UFG::allocator::free_link *)&UFG::EngineModelBlendMode::`vftable;
+    v14->mNext = (UFG::allocator::free_link *)&UFG::MultiplyBlendMode::`vftable;
   }
   v16 = (UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *)&v14[1];
   v17 = v1->m_modes.mNode.mNext;
@@ -2677,8 +2677,8 @@ void __fastcall UFG::EngineModelBlendModes::EngineModelBlendModes(UFG::EngineMod
     v19 = v18 + 1;
     v19->mNext = v19;
     v19[1].mNext = v19;
-    v18->mNext = (UFG::allocator::free_link *)&UFG::EngineModelBlendMode::`vftable';
-    v18->mNext = (UFG::allocator::free_link *)&UFG::MaxBlendMode::`vftable';
+    v18->mNext = (UFG::allocator::free_link *)&UFG::EngineModelBlendMode::`vftable;
+    v18->mNext = (UFG::allocator::free_link *)&UFG::MaxBlendMode::`vftable;
   }
   v20 = (UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *)&v18[1];
   v21 = v1->m_modes.mNode.mNext;
@@ -2692,8 +2692,8 @@ void __fastcall UFG::EngineModelBlendModes::EngineModelBlendModes(UFG::EngineMod
     v23 = v22 + 1;
     v23->mNext = v23;
     v23[1].mNext = v23;
-    v22->mNext = (UFG::allocator::free_link *)&UFG::EngineModelBlendMode::`vftable';
-    v22->mNext = (UFG::allocator::free_link *)&UFG::MinBlendMode::`vftable';
+    v22->mNext = (UFG::allocator::free_link *)&UFG::EngineModelBlendMode::`vftable;
+    v22->mNext = (UFG::allocator::free_link *)&UFG::MinBlendMode::`vftable;
   }
   v24 = (UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *)&v22[1];
   v25 = v1->m_modes.mNode.mNext;
@@ -2707,8 +2707,8 @@ void __fastcall UFG::EngineModelBlendModes::EngineModelBlendModes(UFG::EngineMod
     v27 = v26 + 1;
     v27->mNext = v27;
     v27[1].mNext = v27;
-    v26->mNext = (UFG::allocator::free_link *)&UFG::EngineModelBlendMode::`vftable';
-    v26->mNext = (UFG::allocator::free_link *)&UFG::NoBlendMode::`vftable';
+    v26->mNext = (UFG::allocator::free_link *)&UFG::EngineModelBlendMode::`vftable;
+    v26->mNext = (UFG::allocator::free_link *)&UFG::NoBlendMode::`vftable;
   }
   v28 = (UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *)&v26[1];
   v29 = v1->m_modes.mNode.mNext;
@@ -4667,7 +4667,7 @@ void __fastcall UFG::EngineStateMachine::EngineStateMachine(UFG::EngineStateMach
   UFG::allocator::free_link *v18; // rax
 
   v2 = this;
-  this->vfptr = (UFG::EngineStateMachineVtbl *)&UFG::EngineStateMachine::`vftable';
+  this->vfptr = (UFG::EngineStateMachineVtbl *)&UFG::EngineStateMachine::`vftable;
   *(_QWORD *)&this->inputs.curGear = 0i64;
   this->m_curState = 0;
   this->m_findTimeFromRpm = 0;
@@ -4677,10 +4677,10 @@ void __fastcall UFG::EngineStateMachine::EngineStateMachine(UFG::EngineStateMach
   v3 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x18ui64, "EngineStateMachine.Off", 0i64, 1u);
   if ( v3 )
   {
-    v3->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable';
+    v3->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable;
     v3[1].mNext = 0i64;
     v3[2].mNext = (UFG::allocator::free_link *)v2;
-    v3->mNext = (UFG::allocator::free_link *)&UFG::Off_EngineState::`vftable';
+    v3->mNext = (UFG::allocator::free_link *)&UFG::Off_EngineState::`vftable;
   }
   else
   {
@@ -4690,10 +4690,10 @@ void __fastcall UFG::EngineStateMachine::EngineStateMachine(UFG::EngineStateMach
   v4 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x20ui64, "EngineStateMachine.Idle", 0i64, 1u);
   if ( v4 )
   {
-    v4->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable';
+    v4->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable;
     v4[1].mNext = 0i64;
     v4[2].mNext = (UFG::allocator::free_link *)v2;
-    v4->mNext = (UFG::allocator::free_link *)&UFG::Idle_EngineState::`vftable';
+    v4->mNext = (UFG::allocator::free_link *)&UFG::Idle_EngineState::`vftable;
   }
   else
   {
@@ -4703,11 +4703,11 @@ void __fastcall UFG::EngineStateMachine::EngineStateMachine(UFG::EngineStateMach
   v5 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x20ui64, "EngineStateMachine.Idle", 0i64, 1u);
   if ( v5 )
   {
-    v5->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable';
+    v5->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable;
     v5[1].mNext = 0i64;
     v5[2].mNext = (UFG::allocator::free_link *)v2;
-    v5->mNext = (UFG::allocator::free_link *)&UFG::Neutral_EngineState::`vftable';
-    v5->mNext = (UFG::allocator::free_link *)&UFG::InAir_EngineState::`vftable';
+    v5->mNext = (UFG::allocator::free_link *)&UFG::Neutral_EngineState::`vftable;
+    v5->mNext = (UFG::allocator::free_link *)&UFG::InAir_EngineState::`vftable;
   }
   else
   {
@@ -4717,11 +4717,11 @@ void __fastcall UFG::EngineStateMachine::EngineStateMachine(UFG::EngineStateMach
   v6 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x20ui64, "EngineStateMachine.Collision", 0i64, 1u);
   if ( v6 )
   {
-    v6->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable';
+    v6->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable;
     v6[1].mNext = 0i64;
     v6[2].mNext = (UFG::allocator::free_link *)v2;
-    v6->mNext = (UFG::allocator::free_link *)&UFG::Neutral_EngineState::`vftable';
-    v6->mNext = (UFG::allocator::free_link *)&UFG::Collision_EngineState::`vftable';
+    v6->mNext = (UFG::allocator::free_link *)&UFG::Neutral_EngineState::`vftable;
+    v6->mNext = (UFG::allocator::free_link *)&UFG::Collision_EngineState::`vftable;
   }
   else
   {
@@ -4731,10 +4731,10 @@ void __fastcall UFG::EngineStateMachine::EngineStateMachine(UFG::EngineStateMach
   v7 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x18ui64, "EngineStateMachine.Collision", 0i64, 1u);
   if ( v7 )
   {
-    v7->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable';
+    v7->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable;
     v7[1].mNext = 0i64;
     v7[2].mNext = (UFG::allocator::free_link *)v2;
-    v7->mNext = (UFG::allocator::free_link *)&UFG::Rev_EngineState::`vftable';
+    v7->mNext = (UFG::allocator::free_link *)&UFG::Rev_EngineState::`vftable;
   }
   else
   {
@@ -4744,10 +4744,10 @@ void __fastcall UFG::EngineStateMachine::EngineStateMachine(UFG::EngineStateMach
   v8 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x20ui64, "EngineStateMachine.Neutral", 0i64, 1u);
   if ( v8 )
   {
-    v8->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable';
+    v8->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable;
     v8[1].mNext = 0i64;
     v8[2].mNext = (UFG::allocator::free_link *)v2;
-    v8->mNext = (UFG::allocator::free_link *)&UFG::Neutral_EngineState::`vftable';
+    v8->mNext = (UFG::allocator::free_link *)&UFG::Neutral_EngineState::`vftable;
   }
   else
   {
@@ -4757,10 +4757,10 @@ void __fastcall UFG::EngineStateMachine::EngineStateMachine(UFG::EngineStateMach
   v9 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x20ui64, "EngineStateMachine.Gas", 0i64, 1u);
   if ( v9 )
   {
-    v9->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable';
+    v9->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable;
     v9[1].mNext = 0i64;
     v9[2].mNext = (UFG::allocator::free_link *)v2;
-    v9->mNext = (UFG::allocator::free_link *)&UFG::Accel_EngineState::`vftable';
+    v9->mNext = (UFG::allocator::free_link *)&UFG::Accel_EngineState::`vftable;
   }
   else
   {
@@ -4770,10 +4770,10 @@ void __fastcall UFG::EngineStateMachine::EngineStateMachine(UFG::EngineStateMach
   v10 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x20ui64, "EngineStateMachine.Decel", 0i64, 1u);
   if ( v10 )
   {
-    v10->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable';
+    v10->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable;
     v10[1].mNext = 0i64;
     v10[2].mNext = (UFG::allocator::free_link *)v2;
-    v10->mNext = (UFG::allocator::free_link *)&UFG::Decel_EngineState::`vftable';
+    v10->mNext = (UFG::allocator::free_link *)&UFG::Decel_EngineState::`vftable;
   }
   else
   {
@@ -4783,11 +4783,11 @@ void __fastcall UFG::EngineStateMachine::EngineStateMachine(UFG::EngineStateMach
   v11 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x28ui64, "EngineStateMachine.Brake", 0i64, 1u);
   if ( v11 )
   {
-    v11->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable';
+    v11->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable;
     v11[1].mNext = 0i64;
     v11[2].mNext = (UFG::allocator::free_link *)v2;
-    v11->mNext = (UFG::allocator::free_link *)&UFG::Neutral_EngineState::`vftable';
-    v11->mNext = (UFG::allocator::free_link *)&UFG::Brake_EngineState::`vftable';
+    v11->mNext = (UFG::allocator::free_link *)&UFG::Neutral_EngineState::`vftable;
+    v11->mNext = (UFG::allocator::free_link *)&UFG::Brake_EngineState::`vftable;
     v11[4].mNext = 0i64;
   }
   else
@@ -4798,10 +4798,10 @@ void __fastcall UFG::EngineStateMachine::EngineStateMachine(UFG::EngineStateMach
   v12 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x20ui64, "EngineStateMachine.Reverse", 0i64, 1u);
   if ( v12 )
   {
-    v12->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable';
+    v12->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable;
     v12[1].mNext = 0i64;
     v12[2].mNext = (UFG::allocator::free_link *)v2;
-    v12->mNext = (UFG::allocator::free_link *)&UFG::Reverse_EngineState::`vftable';
+    v12->mNext = (UFG::allocator::free_link *)&UFG::Reverse_EngineState::`vftable;
     BYTE4(v12[3].mNext) = 0;
   }
   else
@@ -4812,10 +4812,10 @@ void __fastcall UFG::EngineStateMachine::EngineStateMachine(UFG::EngineStateMach
   v13 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x18ui64, "EngineStateMachine.Upshift", 0i64, 1u);
   if ( v13 )
   {
-    v13->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable';
+    v13->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable;
     v13[1].mNext = 0i64;
     v13[2].mNext = (UFG::allocator::free_link *)v2;
-    v13->mNext = (UFG::allocator::free_link *)&UFG::Upshift_EngineState::`vftable';
+    v13->mNext = (UFG::allocator::free_link *)&UFG::Upshift_EngineState::`vftable;
   }
   else
   {
@@ -4825,10 +4825,10 @@ void __fastcall UFG::EngineStateMachine::EngineStateMachine(UFG::EngineStateMach
   v14 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x18ui64, "EngineStateMachine.Downshift", 0i64, 1u);
   if ( v14 )
   {
-    v14->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable';
+    v14->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable;
     v14[1].mNext = 0i64;
     v14[2].mNext = (UFG::allocator::free_link *)v2;
-    v14->mNext = (UFG::allocator::free_link *)&UFG::Downshift_EngineState::`vftable';
+    v14->mNext = (UFG::allocator::free_link *)&UFG::Downshift_EngineState::`vftable;
   }
   else
   {
@@ -4838,10 +4838,10 @@ void __fastcall UFG::EngineStateMachine::EngineStateMachine(UFG::EngineStateMach
   v15 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x20ui64, "EngineStateMachine.RevLimit", 0i64, 1u);
   if ( v15 )
   {
-    v15->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable';
+    v15->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable;
     v15[1].mNext = 0i64;
     v15[2].mNext = (UFG::allocator::free_link *)v2;
-    v15->mNext = (UFG::allocator::free_link *)&UFG::RevLimit_EngineState::`vftable';
+    v15->mNext = (UFG::allocator::free_link *)&UFG::RevLimit_EngineState::`vftable;
   }
   else
   {
@@ -4851,10 +4851,10 @@ void __fastcall UFG::EngineStateMachine::EngineStateMachine(UFG::EngineStateMach
   v16 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x18ui64, "EngineStateMachine.Transition", 0i64, 1u);
   if ( v16 )
   {
-    v16->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable';
+    v16->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable;
     v16[1].mNext = 0i64;
     v16[2].mNext = (UFG::allocator::free_link *)v2;
-    v16->mNext = (UFG::allocator::free_link *)&UFG::Transition_EngineState::`vftable';
+    v16->mNext = (UFG::allocator::free_link *)&UFG::Transition_EngineState::`vftable;
   }
   else
   {
@@ -4864,10 +4864,10 @@ void __fastcall UFG::EngineStateMachine::EngineStateMachine(UFG::EngineStateMach
   v17 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x28ui64, "EngineStateMachine.Drifting", 0i64, 1u);
   if ( v17 )
   {
-    v17->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable';
+    v17->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable;
     v17[1].mNext = 0i64;
     v17[2].mNext = (UFG::allocator::free_link *)v2;
-    v17->mNext = (UFG::allocator::free_link *)&UFG::Drifting_EngineState::`vftable';
+    v17->mNext = (UFG::allocator::free_link *)&UFG::Drifting_EngineState::`vftable;
   }
   else
   {
@@ -4877,10 +4877,10 @@ void __fastcall UFG::EngineStateMachine::EngineStateMachine(UFG::EngineStateMach
   v18 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x20ui64, "EngineStateMachine.Wheelie", 0i64, 1u);
   if ( v18 )
   {
-    v18->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable';
+    v18->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable;
     v18[1].mNext = 0i64;
     v18[2].mNext = (UFG::allocator::free_link *)v2;
-    v18->mNext = (UFG::allocator::free_link *)&UFG::Wheelie_EngineState::`vftable';
+    v18->mNext = (UFG::allocator::free_link *)&UFG::Wheelie_EngineState::`vftable;
     LODWORD(v18[3].mNext) = 0;
   }
   else
@@ -5844,7 +5844,7 @@ void __fastcall UFG::EngineModel2::EvaluateCurveSet(UFG::EngineModel2 *this, UFG
       v14 = (UFG::AudioCurveSymbolManager *)v13;
       if ( v13 )
       {
-        `eh vector constructor iterator'(v13, 4ui64, 255, (void (__fastcall *)(void *))BackInfo::BackInfo);
+        `eh vector constructor iterator(v13, 4ui64, 255, (void (__fastcall *)(void *))BackInfo::BackInfo);
         v14->m_numSymbols = 1;
         v15 = (UFG::qSymbol *)v14;
         v16 = 254i64;

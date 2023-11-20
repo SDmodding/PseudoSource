@@ -38,7 +38,7 @@ void __fastcall UFG::InfoFlasherBase::InfoFlasherBase(UFG::InfoFlasherBase *this
   v7 = (UFG::qNode<UFG::InfoFlasherBase,UFG::InfoFlasherBase> *)&this->mPrev;
   v7->mPrev = v7;
   v7->mNext = v7;
-  this->vfptr = (UFG::InfoFlasherBaseVtbl *)&UFG::InfoFlasherBase::`vftable';
+  this->vfptr = (UFG::InfoFlasherBaseVtbl *)&UFG::InfoFlasherBase::`vftable;
   this->m_eState = 0;
   UFG::qString::qString(&this->m_sHintTxt, text);
   v6->m_fDisplayTime = displayTime;
@@ -60,7 +60,7 @@ void __fastcall UFG::InfoFlasherBase::~InfoFlasherBase(UFG::InfoFlasherBase *thi
   UFG::qNode<UFG::InfoFlasherBase,UFG::InfoFlasherBase> *v4; // rax
 
   v1 = this;
-  this->vfptr = (UFG::InfoFlasherBaseVtbl *)&UFG::InfoFlasherBase::`vftable';
+  this->vfptr = (UFG::InfoFlasherBaseVtbl *)&UFG::InfoFlasherBase::`vftable;
   if ( ((unsigned int)this->mGFxMovie.Type >> 6) & 1 )
   {
     (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&this->mGFxMovie.pObjectInterface->vfptr->gap8[8])(
@@ -181,7 +181,7 @@ void __fastcall UFG::InfoFlasherRaidInfo::InfoFlasherRaidInfo(UFG::InfoFlasherRa
   v5 = rival_name;
   v6 = this;
   UFG::InfoFlasherBase::InfoFlasherBase((UFG::InfoFlasherBase *)&this->vfptr, caption, duration, 0, 3.0);
-  v6->vfptr = (UFG::InfoFlasherBaseVtbl *)&UFG::InfoFlasherRaidInfo::`vftable';
+  v6->vfptr = (UFG::InfoFlasherBaseVtbl *)&UFG::InfoFlasherRaidInfo::`vftable;
   UFG::qString::qString(&v6->mRivalName, v5);
   UFG::qString::qString(&v6->mIconPath, icon_path);
 }
@@ -247,7 +247,7 @@ void __usercall UFG::InfoFlasherRaidInfo::show(UFG::InfoFlasherRaidInfo *this@<r
       v3->mGFxMovie.pObjectInterface,
       v3->mGFxMovie.mValue.pStringManaged,
       (Scaleform::GFx::Value::DisplayInfo *)&v21);
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     v4 = (__int64)v3->m_sHintTxt.mData;
     if ( (v10 >> 6) & 1 )
     {
@@ -289,7 +289,7 @@ void __usercall UFG::InfoFlasherRaidInfo::show(UFG::InfoFlasherRaidInfo *this@<r
         0,
         0i64);
     v3->m_eState = 2;
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 

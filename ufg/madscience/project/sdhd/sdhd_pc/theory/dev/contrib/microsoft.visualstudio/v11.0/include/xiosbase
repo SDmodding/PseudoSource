@@ -33,12 +33,12 @@ void __fastcall std::ios_base::failure::failure(std::ios_base::failure *this, co
     v6 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v8._Bx._Ptr;
   _What = (char *)v6;
   std::exception::exception((std::exception *)&v4->vfptr, (const char *const *)&_What);
-  v4->vfptr = (std::exceptionVtbl *)&std::runtime_error::`vftable';
-  v4->vfptr = (std::exceptionVtbl *)&std::system_error::`vftable';
+  v4->vfptr = (std::exceptionVtbl *)&std::runtime_error::`vftable;
+  v4->vfptr = (std::exceptionVtbl *)&std::system_error::`vftable;
   v4->_Mycode = v7;
   if ( v8._Myres >= 0x10 )
     Illusion::ShaderParam::operator delete(v8._Bx._Ptr);
-  v4->vfptr = (std::exceptionVtbl *)&std::ios_base::failure::`vftable';
+  v4->vfptr = (std::exceptionVtbl *)&std::ios_base::failure::`vftable;
 }
 
 // File Line: 301
@@ -97,7 +97,7 @@ std::locale *__fastcall std::ios_base::getloc(std::ios_base *this, std::locale *
 // RVA: 0x853F0
 void __fastcall std::ios_base::~ios_base(std::ios_base *this)
 {
-  this->vfptr = (std::ios_baseVtbl *)&std::ios_base::`vftable';
+  this->vfptr = (std::ios_baseVtbl *)&std::ios_base::`vftable;
   std::ios_base::_Ios_base_dtor(this);
 }
 

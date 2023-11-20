@@ -7,7 +7,7 @@ AK::IAkPluginParam *__fastcall CreateAkSoundSeedImpactFXParams(AK::IAkPluginMemA
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 72ui64);
   if ( result )
   {
-    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkModalSynthParams::`vftable';
+    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkModalSynthParams::`vftable;
     result[1].vfptr = 0i64;
     result[7].vfptr = 0i64;
     LODWORD(result[8].vfptr) = 0;
@@ -19,7 +19,7 @@ AK::IAkPluginParam *__fastcall CreateAkSoundSeedImpactFXParams(AK::IAkPluginMemA
 // RVA: 0xADE820
 void __fastcall CAkModalSynthParams::CAkModalSynthParams(CAkModalSynthParams *this)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkModalSynthParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkModalSynthParams::`vftable;
   this->m_pAllocator = 0i64;
   this->m_pModes = 0i64;
   this->m_cModes = 0;
@@ -34,15 +34,15 @@ void __fastcall CAkModalSynthParams::~CAkModalSynthParams(CAkModalSynthParams *t
 
   v1 = this->m_pModes;
   v2 = this;
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkModalSynthParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkModalSynthParams::`vftable;
   if ( v1 )
   {
     ((void (*)(void))this->m_pAllocator->vfptr->Free)();
-    v2->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable';
+    v2->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable;
   }
   else
   {
-    this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable';
+    this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable;
   }
 }
 
@@ -63,7 +63,7 @@ void __fastcall CAkModalSynthParams::CAkModalSynthParams(CAkModalSynthParams *th
 
   v2 = this;
   v3 = in_rCopy;
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkModalSynthParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkModalSynthParams::`vftable;
   v4 = in_rCopy->m_pAllocator;
   v2->m_pAllocator = v4;
   v2->m_Params.fResidualLevel = in_rCopy->m_Params.fResidualLevel;

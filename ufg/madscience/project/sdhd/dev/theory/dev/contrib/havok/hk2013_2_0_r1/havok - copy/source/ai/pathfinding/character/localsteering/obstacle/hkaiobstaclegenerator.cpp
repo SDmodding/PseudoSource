@@ -3,7 +3,7 @@
 void __fastcall hkaiObstacleGenerator::hkaiObstacleGenerator(hkaiObstacleGenerator *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiObstacleGenerator::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiObstacleGenerator::`vftable;
   *(_WORD *)&this->m_useSpheres.m_bool = 257;
   this->m_clipBoundaries.m_bool = 1;
   this->m_spheres.m_capacityAndFlags = 2147483648;
@@ -23,7 +23,7 @@ void __fastcall hkaiObstacleGenerator::hkaiObstacleGenerator(hkaiObstacleGenerat
 // RVA: 0xBF3EE0
 void __fastcall hkaiObstacleGenerator::hkaiObstacleGenerator(hkaiObstacleGenerator *this, hkFinishLoadedObjectFlag f)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiObstacleGenerator::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiObstacleGenerator::`vftable;
 }
 
 // File Line: 39

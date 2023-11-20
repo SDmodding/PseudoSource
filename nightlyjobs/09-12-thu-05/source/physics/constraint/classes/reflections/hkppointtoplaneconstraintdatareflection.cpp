@@ -78,7 +78,7 @@ void __fastcall finishLoadedObjecthkpPointToPlaneConstraintData(void *p, int fin
   {
     v2 = p;
     hkpConstraintData::hkpConstraintData((hkpConstraintData *)p, (hkFinishLoadedObjectFlag)finishing);
-    *v2 = &hkpPointToPlaneConstraintData::`vftable';
+    *v2 = &hkpPointToPlaneConstraintData::`vftable;
   }
 }
 
@@ -96,7 +96,7 @@ void **__fastcall getVtablehkpPointToPlaneConstraintData()
   hkpConstraintData v1; // [rsp+20h] [rbp-C8h]
 
   hkpConstraintData::hkpConstraintData(&v1, 0);
-  return &hkpPointToPlaneConstraintData::`vftable';
+  return &hkpPointToPlaneConstraintData::`vftable;
 }
 
 // File Line: 152

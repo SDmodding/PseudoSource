@@ -6,9 +6,9 @@ void __fastcall CAkMatrixAwareCtx::CAkMatrixAwareCtx(CAkMatrixAwareCtx *this, CA
 
   v2 = this;
   CAkMusicCtx::CAkMusicCtx((CAkMusicCtx *)&this->vfptr, in_parent);
-  v2->vfptr = (CAkChildCtxVtbl *)&CAkMatrixAwareCtx::`vftable'{for `CAkChildCtx'};
-  v2->vfptr = (CAkTransportAwareVtbl *)&CAkMatrixAwareCtx::`vftable'{for `CAkTransportAware'};
-  v2->vfptr = (ITransitionableVtbl *)&CAkSegmentCtx::`vftable'{for `ITransitionable'};
+  v2->vfptr = (CAkChildCtxVtbl *)&CAkMatrixAwareCtx::`vftable{for `CAkChildCtx};
+  v2->vfptr = (CAkTransportAwareVtbl *)&CAkMatrixAwareCtx::`vftable{for `CAkTransportAware};
+  v2->vfptr = (ITransitionableVtbl *)&CAkSegmentCtx::`vftable{for `ITransitionable};
   v2->m_pSequencer = 0i64;
   v2->m_iLocalTime = 0i64;
 }
@@ -17,9 +17,9 @@ void __fastcall CAkMatrixAwareCtx::CAkMatrixAwareCtx(CAkMatrixAwareCtx *this, CA
 // RVA: 0xAAB300
 void __fastcall CAkMatrixAwareCtx::~CAkMatrixAwareCtx(CAkMatrixAwareCtx *this)
 {
-  this->vfptr = (CAkChildCtxVtbl *)&CAkMatrixAwareCtx::`vftable'{for `CAkChildCtx'};
-  this->vfptr = (CAkTransportAwareVtbl *)&CAkMatrixAwareCtx::`vftable'{for `CAkTransportAware'};
-  this->vfptr = (ITransitionableVtbl *)&CAkSegmentCtx::`vftable'{for `ITransitionable'};
+  this->vfptr = (CAkChildCtxVtbl *)&CAkMatrixAwareCtx::`vftable{for `CAkChildCtx};
+  this->vfptr = (CAkTransportAwareVtbl *)&CAkMatrixAwareCtx::`vftable{for `CAkTransportAware};
+  this->vfptr = (ITransitionableVtbl *)&CAkSegmentCtx::`vftable{for `ITransitionable};
   CAkMusicCtx::~CAkMusicCtx((CAkMusicCtx *)&this->vfptr);
 }
 

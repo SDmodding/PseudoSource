@@ -35,9 +35,9 @@ void __fastcall hkaiViewerContext::hkaiViewerContext(hkaiViewerContext *this)
   this->m_monitorStreamEnds.m_size = 0;
   this->m_monitorStreamEnds.m_capacityAndFlags = -2147483642;
   this->m_monitorStreamEnds.m_data = this->m_monitorStreamEnds.m_storage;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiViewerContext::`vftable'{for `hkReferencedObject'};
-  this->vfptr = (hkProcessContextVtbl *)&hkaiViewerContext::`vftable'{for `hkProcessContext'};
-  this->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiViewerContext::`vftable'{for `hkaiWorld::Listener'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiViewerContext::`vftable{for `hkReferencedObject};
+  this->vfptr = (hkProcessContextVtbl *)&hkaiViewerContext::`vftable{for `hkProcessContext};
+  this->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiViewerContext::`vftable{for `hkaiWorld::Listener};
   this->m_worlds.m_data = 0i64;
   this->m_worlds.m_size = 0;
   this->m_worlds.m_capacityAndFlags = 2147483648;
@@ -66,9 +66,9 @@ void __fastcall hkaiViewerContext::~hkaiViewerContext(hkaiViewerContext *this)
 
   v1 = this->m_worlds.m_size == 0;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiViewerContext::`vftable'{for `hkReferencedObject'};
-  this->vfptr = (hkProcessContextVtbl *)&hkaiViewerContext::`vftable'{for `hkProcessContext'};
-  this->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiViewerContext::`vftable'{for `hkaiWorld::Listener'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiViewerContext::`vftable{for `hkReferencedObject};
+  this->vfptr = (hkProcessContextVtbl *)&hkaiViewerContext::`vftable{for `hkProcessContext};
+  this->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiViewerContext::`vftable{for `hkaiWorld::Listener};
   if ( !v1 )
   {
     do
@@ -110,9 +110,9 @@ void __fastcall hkaiViewerContext::~hkaiViewerContext(hkaiViewerContext *this)
       8 * v9);
   v2->m_worlds.m_data = 0i64;
   v2->m_worlds.m_capacityAndFlags = 2147483648;
-  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiWorld::Listener::`vftable';
+  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiWorld::Listener::`vftable;
   hkProcessContext::~hkProcessContext((hkProcessContext *)&v2->vfptr);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 56

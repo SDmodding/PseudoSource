@@ -6,7 +6,7 @@ void __fastcall hkpFixedRigidMotion::hkpFixedRigidMotion(hkpFixedRigidMotion *th
 
   v3 = this;
   hkpKeyframedRigidMotion::hkpKeyframedRigidMotion((hkpKeyframedRigidMotion *)&this->vfptr, position, rotation);
-  v3->vfptr = (hkBaseObjectVtbl *)&hkpFixedRigidMotion::`vftable';
+  v3->vfptr = (hkBaseObjectVtbl *)&hkpFixedRigidMotion::`vftable;
   v3->m_type.m_storage = 5;
 }
 

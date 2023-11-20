@@ -6,7 +6,7 @@ void __fastcall CAkSrcBankADPCM::CAkSrcBankADPCM(CAkSrcBankADPCM *this, CAkPBI *
 
   v2 = this;
   CAkSrcBaseEx::CAkSrcBaseEx((CAkSrcBaseEx *)&this->vfptr, in_pCtx);
-  v2->vfptr = (CAkVPLNodeVtbl *)&CAkSrcBankADPCM::`vftable';
+  v2->vfptr = (CAkVPLNodeVtbl *)&CAkSrcBankADPCM::`vftable;
   v2->m_pucData = 0i64;
   v2->m_pOutBuffer = 0i64;
 }

@@ -842,7 +842,7 @@ LABEL_11:
     v18 = v17;
     v706 = v17;
     if ( v17 )
-      `eh vector constructor iterator'(v17 + 944, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::qString);
+      `eh vector constructor iterator(v17 + 944, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::qString);
     else
       v18 = 0i64;
     v13->mEnvCubeMap = (Render::EnvCubeMap *)v18;

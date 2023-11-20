@@ -10,7 +10,7 @@ UFG::allocator::free_link *__fastcall UFG::CreateRoadNetworkLookahead()
   if ( !v0 )
     return 0i64;
   UFG::SectionChooser::Lookahead::Lookahead((UFG::SectionChooser::Lookahead *)v0);
-  v1->mNext = (UFG::allocator::free_link *)&UFG::RoadnetworkLookahead::`vftable';
+  v1->mNext = (UFG::allocator::free_link *)&UFG::RoadnetworkLookahead::`vftable;
   LODWORD(v1[8].mNext) = 0;
   return v1;
 }

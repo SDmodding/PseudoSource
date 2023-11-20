@@ -90,7 +90,7 @@ void __fastcall Scaleform::GFx::AS3::ReadArgs::ReadArgs(Scaleform::GFx::AS3::Rea
   this->VMRef = vm;
   this->OpStack = &vm->OpStack;
   this->ArgNum = arg_count;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     this->FixedArr,
     0x20ui64,
     8,

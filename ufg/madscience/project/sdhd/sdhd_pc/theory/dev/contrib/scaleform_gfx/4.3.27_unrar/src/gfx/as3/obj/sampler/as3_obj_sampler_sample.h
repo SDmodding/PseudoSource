@@ -14,7 +14,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_sampler::Sample> *__fastc
   if ( v4 )
   {
     Scaleform::GFx::AS3::Instances::fl::Object::Object(v4, (Scaleform::GFx::AS3::InstanceTraits::Traits *)&v2->vfptr);
-    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_sampler::Sample::`vftable';
+    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_sampler::Sample::`vftable;
     v5->stack.pObject = 0i64;
     v5->time = 0.0;
   }

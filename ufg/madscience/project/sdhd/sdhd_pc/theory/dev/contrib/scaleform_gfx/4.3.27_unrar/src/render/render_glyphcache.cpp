@@ -15,25 +15,25 @@ void __fastcall Scaleform::Render::GlyphTextureImage::GlyphTextureImage(Scalefor
   unsigned int v8; // ecx
 
   v5 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountVImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountVImpl,3>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseV<Scaleform::Render::Image,3>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ImageBase::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Image::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountVImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountVImpl,3>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseV<Scaleform::Render::Image,3>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ImageBase::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Image::`vftable;
   this->pTexture.Value = 0i64;
   v6 = this->pTexture.Value;
   v7 = this->pTexture.Value;
   this->pUpdateSync = 0i64;
   this->pInverseMatrix = 0i64;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::TextureImage::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::TextureImage::`vftable;
   this->Format = 9;
   v8 = size->Height;
   v5->Size.Width = size->Width;
   v5->Size.Height = v8;
   v5->Use = use;
-  v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::GlyphTextureImage::`vftable';
+  v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::GlyphTextureImage::`vftable;
   v5->pCache = cache;
   v5->TextureId = textureId;
 }
@@ -176,7 +176,7 @@ _BOOL8 __fastcall Scaleform::Render::GlyphTextureMapper::Create(Scaleform::Rende
     {
       v13 = (__int64)v10->vfptr[21].__vecDelDtor((Scaleform::RefCountImplCore *)&v10->vfptr, (unsigned int)v5);
       pheap = (Scaleform::MemoryHeap *)Scaleform::Ptr<Scaleform::Render::StereoImplBase>::~Ptr<Scaleform::Render::StereoImplBase>;
-      `eh vector constructor iterator'(
+      `eh vector constructor iterator(
         &ptr,
         8ui64,
         2,
@@ -204,7 +204,7 @@ _BOOL8 __fastcall Scaleform::Render::GlyphTextureMapper::Create(Scaleform::Rende
       v8->pFill.pObject = v16;
       v19 = &ptr;
 LABEL_42:
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         v19,
         8ui64,
         2,
@@ -240,7 +240,7 @@ LABEL_42:
                                             (unsigned int)v5);
       *(_QWORD *)&initdata.Type = 12i64;
       pheap = (Scaleform::MemoryHeap *)Scaleform::Ptr<Scaleform::Render::StereoImplBase>::~Ptr<Scaleform::Render::StereoImplBase>;
-      `eh vector constructor iterator'(
+      `eh vector constructor iterator(
         initdata.Textures,
         8ui64,
         2,
@@ -347,17 +347,17 @@ void __fastcall Scaleform::Render::GlyphCache::GlyphCache(Scaleform::Render::Gly
 
   v2 = heap;
   v3 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   v4 = 1;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::GlyphCache,2>::`vftable';
-  this->vfptr = (Scaleform::Render::CacheBaseVtbl *)&Scaleform::Render::CacheBase::`vftable';
-  this->vfptr = (Scaleform::Render::GlyphCacheConfigVtbl *)&Scaleform::Render::GlyphCacheConfig::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::GlyphCache::`vftable'{for `Scaleform::RefCountBase<Scaleform::Render::GlyphCache,2>'};
-  this->vfptr = (Scaleform::Render::CacheBaseVtbl *)&Scaleform::Render::GlyphCache::`vftable'{for `Scaleform::Render::CacheBase'};
-  this->vfptr = (Scaleform::Render::GlyphCacheConfigVtbl *)&Scaleform::Render::GlyphCache::`vftable'{for `Scaleform::Render::GlyphCacheConfig'};
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::GlyphCache,2>::`vftable;
+  this->vfptr = (Scaleform::Render::CacheBaseVtbl *)&Scaleform::Render::CacheBase::`vftable;
+  this->vfptr = (Scaleform::Render::GlyphCacheConfigVtbl *)&Scaleform::Render::GlyphCacheConfig::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::GlyphCache::`vftable{for `Scaleform::RefCountBase<Scaleform::Render::GlyphCache,2>};
+  this->vfptr = (Scaleform::Render::CacheBaseVtbl *)&Scaleform::Render::GlyphCache::`vftable{for `Scaleform::Render::CacheBase};
+  this->vfptr = (Scaleform::Render::GlyphCacheConfigVtbl *)&Scaleform::Render::GlyphCache::`vftable{for `Scaleform::Render::GlyphCacheConfig};
   this->Param.TextureWidth = 1024;
   this->Param.TextureHeight = 1024;
   this->Param.NumTextures = 1;
@@ -383,7 +383,7 @@ void __fastcall Scaleform::Render::GlyphCache::GlyphCache(Scaleform::Render::Gly
   *(_QWORD *)&this->SlotPadding = 0i64;
   this->ScaleV = 0.0;
   this->ShadowQuality = 1.0;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     this->Textures,
     0x80ui64,
     32,
@@ -412,8 +412,8 @@ void __fastcall Scaleform::Render::GlyphCache::GlyphCache(Scaleform::Render::Gly
   v3->TextInPin.Root.pPrev = (Scaleform::Render::TextMeshProvider *)v7;
   v3->TextInPin.Root.pNext = (Scaleform::Render::TextMeshProvider *)v7;
   v18 = &v3->Notifier;
-  v18->vfptr = (Scaleform::Render::GlyphEvictNotifierVtbl *)&Scaleform::Render::GlyphEvictNotifier::`vftable';
-  v18->vfptr = (Scaleform::Render::GlyphEvictNotifierVtbl *)&Scaleform::Render::GlyphCache::EvictNotifier::`vftable';
+  v18->vfptr = (Scaleform::Render::GlyphEvictNotifierVtbl *)&Scaleform::Render::GlyphEvictNotifier::`vftable;
+  v18->vfptr = (Scaleform::Render::GlyphEvictNotifierVtbl *)&Scaleform::Render::GlyphCache::EvictNotifier::`vftable;
   v3->pFontHandleManager.pObject = 0i64;
   v3->pRQCaches = 0i64;
   v8 = (signed __int64)&v3->Notifier;
@@ -456,8 +456,8 @@ void __fastcall Scaleform::Render::GlyphCache::GlyphCache(Scaleform::Render::Gly
   v10->pLastPage = 0i64;
   v10->MaxPages = 0i64;
   v11 = &v3->mStroker;
-  v11->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable';
-  v11->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::Stroker::`vftable';
+  v11->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable;
+  v11->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::Stroker::`vftable;
   v3->mStroker.pHeap = &v3->LHeap2;
   v3->mStroker.Path.Path.pHeap = &v3->LHeap2;
   v3->mStroker.Path.Path.Size = 0i64;
@@ -473,8 +473,8 @@ void __fastcall Scaleform::Render::GlyphCache::GlyphCache(Scaleform::Render::Gly
   v3->mStroker.IntersectionEpsilon = 0.0099999998;
   v3->mStroker.Closed = 0;
   v12 = &v3->TmpPath1;
-  v12->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable';
-  v12->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::VertexPath::`vftable';
+  v12->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable;
+  v12->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::VertexPath::`vftable;
   v3->TmpPath1.Vertices.pHeap = &v3->LHeap1;
   v3->TmpPath1.Vertices.Size = 0i64;
   v3->TmpPath1.Vertices.NumPages = 0i64;
@@ -486,8 +486,8 @@ void __fastcall Scaleform::Render::GlyphCache::GlyphCache(Scaleform::Render::Gly
   v3->TmpPath1.Paths.MaxPages = 0i64;
   v3->TmpPath1.Paths.Pages = 0i64;
   v24 = &v3->TmpPath2;
-  v24->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable';
-  v24->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::VertexPath::`vftable';
+  v24->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable;
+  v24->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::VertexPath::`vftable;
   v3->TmpPath2.Vertices.pHeap = &v3->LHeap2;
   v3->TmpPath2.Vertices.Size = 0i64;
   v3->TmpPath2.Vertices.NumPages = 0i64;
@@ -539,13 +539,13 @@ void __fastcall Scaleform::Render::GlyphCache::~GlyphCache(Scaleform::Render::Gl
   Scaleform::Render::RawImage *v6; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::GlyphCache::`vftable'{for `Scaleform::RefCountBase<Scaleform::Render::GlyphCache,2>'};
-  this->vfptr = (Scaleform::Render::CacheBaseVtbl *)&Scaleform::Render::GlyphCache::`vftable'{for `Scaleform::Render::CacheBase'};
-  this->vfptr = (Scaleform::Render::GlyphCacheConfigVtbl *)&Scaleform::Render::GlyphCache::`vftable'{for `Scaleform::Render::GlyphCacheConfig'};
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::GlyphCache::`vftable{for `Scaleform::RefCountBase<Scaleform::Render::GlyphCache,2>};
+  this->vfptr = (Scaleform::Render::CacheBaseVtbl *)&Scaleform::Render::GlyphCache::`vftable{for `Scaleform::Render::CacheBase};
+  this->vfptr = (Scaleform::Render::GlyphCacheConfigVtbl *)&Scaleform::Render::GlyphCache::`vftable{for `Scaleform::Render::GlyphCacheConfig};
   Scaleform::Render::GlyphCache::Destroy(this);
-  v1->TmpPath2.vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable';
-  v1->TmpPath1.vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable';
-  v1->mStroker.vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable';
+  v1->TmpPath2.vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable;
+  v1->TmpPath1.vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable;
+  v1->mStroker.vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable;
   Scaleform::Render::LinearHeap::ClearAndRelease(&v1->LHeap2);
   Scaleform::Render::LinearHeap::ClearAndRelease(&v1->LHeap1);
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v1->BlurSum.Data.Data);
@@ -554,9 +554,9 @@ void __fastcall Scaleform::Render::GlyphCache::~GlyphCache(Scaleform::Render::Gl
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v1->RasterDataSrc.Data.Data);
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v1->RasterData.Data.Data);
   Scaleform::Render::LinearHeap::ClearAndRelease(&v1->Ras.LHeap);
-  v1->Ras.vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable';
+  v1->Ras.vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable;
   Scaleform::Render::LinearHeap::ClearAndRelease(&v1->Fitter.LHeap);
-  v1->Fitter.vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable';
+  v1->Fitter.vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable;
   v2 = v1->pMaskFill.pObject;
   if ( v2 )
   {
@@ -575,21 +575,21 @@ void __fastcall Scaleform::Render::GlyphCache::~GlyphCache(Scaleform::Render::Gl
   v5 = v1->pFontHandleManager.pObject;
   if ( v5 && !_InterlockedDecrement(&v5->RefCount) && v5 )
     v5->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v5->vfptr, 1u);
-  v1->Notifier.vfptr = (Scaleform::Render::GlyphEvictNotifierVtbl *)&Scaleform::Render::GlyphEvictNotifier::`vftable';
+  v1->Notifier.vfptr = (Scaleform::Render::GlyphEvictNotifierVtbl *)&Scaleform::Render::GlyphEvictNotifier::`vftable;
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v1->RectsToUpdate.Data);
   Scaleform::ArrayPagedBase<Scaleform::Render::GlyphCache::UpdateRect,6,16,Scaleform::AllocatorPagedLH_POD<Scaleform::Render::GlyphCache::UpdateRect,2>>::ClearAndRelease((Scaleform::ArrayPagedBase<Scaleform::GFx::AS2::RefCountBaseGC<323> *,10,5,Scaleform::AllocatorPagedLH_POD<Scaleform::GFx::AS2::RefCountBaseGC<323> *,2> > *)&v1->GlyphsToUpdate);
   v6 = v1->UpdateBuffer.pObject;
   if ( v6 )
     ((void (__cdecl *)(Scaleform::Render::RawImage *))v6->vfptr[2].__vecDelDtor)(v6);
   Scaleform::Render::GlyphQueue::~GlyphQueue(&v1->Queue);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->Textures,
     0x80ui64,
     32,
     (void (__fastcall *)(void *))Scaleform::Render::GlyphTextureMapper::~GlyphTextureMapper);
-  v1->vfptr = (Scaleform::Render::GlyphCacheConfigVtbl *)&Scaleform::Render::GlyphCacheConfig::`vftable';
-  v1->vfptr = (Scaleform::Render::CacheBaseVtbl *)&Scaleform::Render::CacheBase::`vftable';
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  v1->vfptr = (Scaleform::Render::GlyphCacheConfigVtbl *)&Scaleform::Render::GlyphCacheConfig::`vftable;
+  v1->vfptr = (Scaleform::Render::CacheBaseVtbl *)&Scaleform::Render::CacheBase::`vftable;
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
 }
 
 // File Line: 273
@@ -857,7 +857,7 @@ void __fastcall Scaleform::Render::GlyphCache::initialize(Scaleform::Render::Gly
   }
   *(_QWORD *)&initdata.Type = 4i64;
   *(_WORD *)&initdata.FillModes[0].Fill = 0;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     initdata.Textures,
     8ui64,
     2,
@@ -865,7 +865,7 @@ void __fastcall Scaleform::Render::GlyphCache::initialize(Scaleform::Render::Gly
   initdata.pFormat = &Scaleform::Render::VertexXY16iCF32::Format;
   *(_QWORD *)&ptr.Type = 1i64;
   *(_WORD *)&ptr.FillModes[0].Fill = 0;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     ptr.Textures,
     8ui64,
     2,
@@ -899,12 +899,12 @@ void __fastcall Scaleform::Render::GlyphCache::initialize(Scaleform::Render::Gly
           textureId);
   v1->pRQCaches = (Scaleform::Render::RQCacheInterface *)v31;
   *(_QWORD *)(v31 + 8) = (char *)v1 + 16;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     ptr.Textures,
     8ui64,
     2,
     (void (__fastcall *)(void *))Scaleform::Ptr<Scaleform::Render::StereoImplBase>::~Ptr<Scaleform::Render::StereoImplBase>);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     initdata.Textures,
     8ui64,
     2,
@@ -2006,8 +2006,8 @@ void __fastcall Scaleform::Render::GlyphCache::copyAndTransformShape(Scaleform::
                                      (__m128)_xmm)),
                                  _mm_and_ps(
                                    (__m128)*(unsigned __int64 *)&pos.Pos,
-                                   (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v)),
-                               (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v);
+                                   (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v)),
+                               (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v);
     *(__m128 *)&pos.StrokeBase = _mm_and_ps(
                                    _mm_add_ps(
                                      _mm_add_ps(
@@ -2017,8 +2017,8 @@ void __fastcall Scaleform::Render::GlyphCache::copyAndTransformShape(Scaleform::
                                        _mm_mul_ps(_mm_shuffle_ps(*(__m128 *)level, *(__m128 *)level, 0), (__m128)_xmm)),
                                      _mm_and_ps(
                                        *(__m128 *)level,
-                                       (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v)),
-                                   (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v);
+                                       (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v)),
+                                   (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v);
     v13 = COERCE_FLOAT(_mm_shuffle_ps(*(__m128 *)&pos.StrokeBase, *(__m128 *)&pos.StrokeBase, 255)) - *(float *)&retaddr;
   }
   else
@@ -2056,7 +2056,7 @@ void __fastcall Scaleform::Render::GlyphCache::copyAndTransformShape(Scaleform::
       v10 = *(float *)v143 * v7->Param.FauxBoldRatio;
     v39 = FLOAT_0_5;
     v7->mStroker.Width = v10 * 0.5;
-    *(_QWORD *)&pos.Pos = &Scaleform::Render::StrokeScaler::`vftable';
+    *(_QWORD *)&pos.Pos = &Scaleform::Render::StrokeScaler::`vftable;
     *(_QWORD *)&pos.StartY = (char *)v7 + 7032;
     level[0] = 1065353216;
     *(float *)&level[1] = FLOAT_1000_0;
@@ -2823,12 +2823,12 @@ LABEL_88:
     v66 = v50;
     if ( v50 )
     {
-      *(_QWORD *)v50 = &Scaleform::RefCountNTSImplCore::`vftable';
+      *(_QWORD *)v50 = &Scaleform::RefCountNTSImplCore::`vftable;
       *(_DWORD *)(v50 + 8) = 1;
-      *(_QWORD *)v50 = &Scaleform::RefCountNTSImpl::`vftable';
-      *(_QWORD *)v50 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,75>::`vftable';
-      *(_QWORD *)v50 = &Scaleform::RefCountBaseNTS<Scaleform::Render::GlyphRaster,75>::`vftable';
-      *(_QWORD *)v50 = &Scaleform::Render::GlyphRaster::`vftable';
+      *(_QWORD *)v50 = &Scaleform::RefCountNTSImpl::`vftable;
+      *(_QWORD *)v50 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,75>::`vftable;
+      *(_QWORD *)v50 = &Scaleform::RefCountBaseNTS<Scaleform::Render::GlyphRaster,75>::`vftable;
+      *(_QWORD *)v50 = &Scaleform::Render::GlyphRaster::`vftable;
       v51 = (_QWORD *)(v50 + 16);
       v68 = (Scaleform::Render::GlyphShape *)(v50 + 16);
       *v51 = 0i64;

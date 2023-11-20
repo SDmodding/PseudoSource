@@ -67,12 +67,12 @@ void __fastcall finishLoadedObjecthkpVehicleLinearCastWheelCollide(void *p, int 
 {
   if ( p )
   {
-    *(_QWORD *)p = &hkpVehicleWheelCollide::`vftable';
+    *(_QWORD *)p = &hkpVehicleWheelCollide::`vftable;
     if ( finishing )
       *((_BYTE *)p + 17) = 0;
-    *(_QWORD *)p = &hkpVehicleLinearCastWheelCollide::`vftable';
-    *((_QWORD *)p + 6) = &hkpRejectChassisListener::`vftable'{for `hkReferencedObject'};
-    *((_QWORD *)p + 8) = &hkpRejectChassisListener::`vftable'{for `hkpPhantomOverlapListener'};
+    *(_QWORD *)p = &hkpVehicleLinearCastWheelCollide::`vftable;
+    *((_QWORD *)p + 6) = &hkpRejectChassisListener::`vftable{for `hkReferencedObject};
+    *((_QWORD *)p + 8) = &hkpRejectChassisListener::`vftable{for `hkpPhantomOverlapListener};
     if ( finishing )
       *((_BYTE *)p + 17) = 2;
   }
@@ -89,7 +89,7 @@ void __fastcall cleanupLoadedObjecthkpVehicleLinearCastWheelCollide(void *p)
 // RVA: 0xE25BA0
 void **__fastcall getVtablehkpVehicleLinearCastWheelCollide()
 {
-  return &hkpVehicleLinearCastWheelCollide::`vftable';
+  return &hkpVehicleLinearCastWheelCollide::`vftable;
 }
 
 // File Line: 152

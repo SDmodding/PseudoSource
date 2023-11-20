@@ -6,7 +6,7 @@ void __fastcall UFG::UIHKPopUpNotifier::~UIHKPopUpNotifier(UFG::UIHKPopUpNotifie
   UFG::qNode<UFG::PopUpMessage,UFG::PopUpMessage> *v2; // rcx
   UFG::qNode<UFG::PopUpMessage,UFG::PopUpMessage> *v3; // rax
 
-  this->vfptr = (UFG::UIHKPopUpNotifierVtbl *)&UFG::UIHKPopUpNotifier::`vftable';
+  this->vfptr = (UFG::UIHKPopUpNotifierVtbl *)&UFG::UIHKPopUpNotifier::`vftable;
   v1 = &this->m_MessageQueue;
   UFG::qList<UFG::PopUpMessage,UFG::PopUpMessage,1,0>::DeleteNodes((UFG::qList<UFG::MissionWorkStatus,UFG::MissionWorkStatus,1,0> *)&this->m_MessageQueue);
   v2 = v1->mNode.mPrev;
@@ -106,7 +106,7 @@ void __fastcall UFG::UIHKPopUpNotifier::update(UFG::UIHKPopUpNotifier *this, UFG
       v9->mPrev = v8;
       v7->mPrev = v7;
       v7->mNext = v7;
-      `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       v10 = (__int64)v7[2].mNext;
       if ( (v16 >> 6) & 1 )
       {
@@ -141,7 +141,7 @@ void __fastcall UFG::UIHKPopUpNotifier::update(UFG::UIHKPopUpNotifier *this, UFG
       --v4->m_iNumMessages;
       v4->m_fElapsedTime = 0.0;
       v4->m_eState = 2;
-      `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+      `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     }
     else
     {

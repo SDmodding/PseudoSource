@@ -13,7 +13,7 @@ void __fastcall UFG::UIHKScreenSpyPC::UIHKScreenSpyPC(UFG::UIHKScreenSpyPC *this
   v2 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -24,9 +24,9 @@ void __fastcall UFG::UIHKScreenSpyPC::UIHKScreenSpyPC(UFG::UIHKScreenSpyPC *this
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKTaskableScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKTaskableScreen::`vftable;
   this->mFinished = 0;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenSpyPC::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenSpyPC::`vftable;
   this->mState = 0;
   UFG::PropertySetHandle::PropertySetHandle(&this->mProperties);
   v1->mCurrentTime = 0;
@@ -63,7 +63,7 @@ void __fastcall UFG::UIHKScreenSpyPC::~UIHKScreenSpyPC(UFG::UIHKScreenSpyPC *thi
   UFG::qWiseSymbol result; // [rsp+48h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenSpyPC::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenSpyPC::`vftable;
   v2 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseTexturePack(v2, UFG::UIHKScreenSpyPC::gGridTexturePackFilename);
   v3 = UFG::UIScreenTextureManager::Instance();
@@ -132,7 +132,7 @@ void __fastcall UFG::UIHKScreenSpyPC::init(UFG::UIHKScreenSpyPC *this, UFG::UICo
   UFG::UIScreen::init((UFG::UIScreen *)&this->vfptr, data);
   v2->mState = 1;
   v3 = v2->mRenderable->m_movie.pObject;
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   v4 = (double)(signed int)v2->mState;
   if ( (LODWORD(v13) >> 6) & 1 )
   {
@@ -143,7 +143,7 @@ void __fastcall UFG::UIHKScreenSpyPC::init(UFG::UIHKScreenSpyPC *this, UFG::UICo
     v12 = 0i64;
   }
   v13 = v4;
-  `eh vector constructor iterator'(&v14, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&v14, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   v7 = (double)(signed int)UFG::UIHKScreenSpyPC::GetDefaultNeighborhood(v2);
   if ( ((unsigned int)v14.Type >> 6) & 1 )
   {
@@ -190,8 +190,8 @@ void __fastcall UFG::UIHKScreenSpyPC::init(UFG::UIHKScreenSpyPC *this, UFG::UICo
       0i64,
       0,
       0i64);
-  `eh vector destructor iterator'(&v14, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&v14, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 127
@@ -279,7 +279,7 @@ signed __int64 __fastcall UFG::UIHKScreenSpyPC::GetDefaultNeighborhood(UFG::UIHK
                           v11,
                           (UFG::qSymbol *)&SpyCamSymbol_Neighborhood_1.mUID,
                           DEPTH_RECURSE);
-                  `eh vector constructor iterator'(
+                  `eh vector constructor iterator(
                     &ptr,
                     0x30ui64,
                     1,
@@ -297,7 +297,7 @@ signed __int64 __fastcall UFG::UIHKScreenSpyPC::GetDefaultNeighborhood(UFG::UIHK
                   v23 = v18;
                   if ( v3 )
                     Scaleform::GFx::Movie::Invoke(v3, "setForTW", 0i64, (Scaleform::GFx::Value *)&ptr, 1u);
-                  `eh vector destructor iterator'(
+                  `eh vector destructor iterator(
                     &ptr,
                     0x30ui64,
                     1,
@@ -613,7 +613,7 @@ LABEL_77:
     if ( UFG::HudAudio::m_instance )
       UFG::AudioEntity::CreateAndPlayEvent((UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr, v16, 0i64, 0, 0i64);
     *(_QWORD *)&v41.mMagic = Scaleform::GFx::Value::~Value;
-    `eh vector constructor iterator'(&pval, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&pval, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     v17 = (double)(signed int)v5->mState;
     if ( ((unsigned int)pval.Type >> 6) & 1 )
     {
@@ -629,7 +629,7 @@ LABEL_77:
     Scaleform::GFx::Movie::Invoke(v9, "resetNeighborhoodScreen", 0i64, 0i64, 0);
     v18 = UFG::UIScreenTextureManager::Instance();
     UFG::UIScreenTextureManager::ReleaseTexturePack(v18, UFG::UIHKScreenSpyPC::gGridTexturePackFilename);
-    `eh vector destructor iterator'(&pval, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&pval, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     goto LABEL_78;
   }
   if ( msgId != UI_HASH_BUTTON_ACCEPT_PRESSED_30 )
@@ -818,7 +818,7 @@ void __fastcall UFG::UIHKScreenSpyPC::HandleTextureLoaded(UFG::UIHKScreenSpyPC *
 
   v1 = this;
   v2 = this->mRenderable->m_movie.pObject;
-  `eh vector constructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   v3 = (double)(signed int)v1->mState;
   if ( ((unsigned int)pargs.Type >> 6) & 1 )
   {
@@ -833,7 +833,7 @@ void __fastcall UFG::UIHKScreenSpyPC::HandleTextureLoaded(UFG::UIHKScreenSpyPC *
   if ( v2 )
     Scaleform::GFx::Movie::Invoke(v2, "setState", 0i64, &pargs, 1u);
   UFG::UIHKScreenSpyPC::processUnlockedCameras(v1);
-  `eh vector destructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 528
@@ -946,7 +946,7 @@ void __fastcall UFG::UIHKScreenSpyPC::processUnlockedCameras(UFG::UIHKScreenSpyP
         }
         v16 = UFG::qPropertySet::Get<long>(v14, (UFG::qSymbol *)&SpyCamSymbol_Index_1.mUID, DEPTH_RECURSE);
         v17 = UFG::qPropertySet::Get<char const *>(v14, (UFG::qSymbol *)&SpyCamSymbol_Name_1.mUID, DEPTH_RECURSE);
-        `eh vector constructor iterator'(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+        `eh vector constructor iterator(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
         v18 = (double)*v16;
         if ( (v27 >> 6) & 1 )
         {
@@ -1015,7 +1015,7 @@ void __fastcall UFG::UIHKScreenSpyPC::processUnlockedCameras(UFG::UIHKScreenSpyP
           }
         }
         Scaleform::GFx::Movie::Invoke(v24, "addCameras", 0i64, (Scaleform::GFx::Value *)&ptr, 4u);
-        `eh vector destructor iterator'(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+        `eh vector destructor iterator(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
       }
 LABEL_39:
       ++v10;

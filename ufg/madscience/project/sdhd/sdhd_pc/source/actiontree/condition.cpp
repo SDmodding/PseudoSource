@@ -22,11 +22,11 @@ ConditionGroup *__fastcall ConditionGroup::CreateClone(ConditionGroup *this)
   v3 = (ConditionGroup *)v2;
   if ( v2 )
   {
-    *(_QWORD *)v2 = &Expression::IMemberMap::`vftable';
+    *(_QWORD *)v2 = &Expression::IMemberMap::`vftable;
     *((_QWORD *)v2 + 1) = 0i64;
-    *(_QWORD *)v2 = &Condition::`vftable';
+    *(_QWORD *)v2 = &Condition::`vftable;
     v2[23] = 0;
-    *(_QWORD *)v2 = &ConditionGroup::`vftable';
+    *(_QWORD *)v2 = &ConditionGroup::`vftable;
     *((_QWORD *)v2 + 3) = -1i64;
     *((_DWORD *)v2 + 8) = 0;
     *((_QWORD *)v2 + 5) = 0i64;
@@ -234,7 +234,7 @@ void __fastcall ConditionGroup::ResortEntries(ConditionGroup *this)
 __int64 dynamic_initializer_for__gOrCondition__()
 {
   gOrCondition.mBreakPoint = 0;
-  gOrCondition.vfptr = (Expression::IMemberMapVtbl *)&ORCondition::`vftable';
+  gOrCondition.vfptr = (Expression::IMemberMapVtbl *)&ORCondition::`vftable;
   return atexit(dynamic_atexit_destructor_for__gOrCondition__);
 }
 
@@ -243,7 +243,7 @@ __int64 dynamic_initializer_for__gOrCondition__()
 __int64 dynamic_initializer_for__gNotCondition__()
 {
   gNotCondition.mBreakPoint = 0;
-  gNotCondition.vfptr = (Expression::IMemberMapVtbl *)&NotCondition::`vftable';
+  gNotCondition.vfptr = (Expression::IMemberMapVtbl *)&NotCondition::`vftable;
   return atexit(dynamic_atexit_destructor_for__gNotCondition__);
 }
 
@@ -421,9 +421,9 @@ LABEL_37:
 // RVA: 0x268B80
 void __fastcall Condition::Condition(Condition *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
   this->mBreakPoint = 0;
 }
 

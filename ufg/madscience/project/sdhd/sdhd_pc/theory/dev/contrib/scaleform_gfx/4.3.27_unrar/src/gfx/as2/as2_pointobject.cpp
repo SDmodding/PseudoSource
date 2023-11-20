@@ -37,7 +37,7 @@ void __fastcall Scaleform::GFx::AS2::GFxObject_GetPointProperties(Scaleform::GFx
   v3 = pt;
   v4 = pobj;
   v5 = penv;
-  `eh vector constructor iterator'(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::Value);
   ((void (__fastcall *)(Scaleform::GFx::AS2::ObjectInterfaceVtbl **, Scaleform::GFx::AS2::ASStringContext *, Scaleform::Ptr<Scaleform::GFx::ASSupport> *, Scaleform::GFx::AS2::Value *, void (__fastcall *)(Scaleform::GFx::AS2::Value *)))v4->vfptr->GetMemberRaw)(
     &v4->vfptr,
     &v5->StringContext,
@@ -52,7 +52,7 @@ void __fastcall Scaleform::GFx::AS2::GFxObject_GetPointProperties(Scaleform::GFx
   v6 = Scaleform::GFx::AS2::Value::ToNumber(&v8, v5);
   v3->x = Scaleform::GFx::AS2::Value::ToNumber(&ptr, v5);
   v3->y = v6;
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::~Value);
 }
 
 // File Line: 67
@@ -67,8 +67,8 @@ void __fastcall Scaleform::GFx::AS2::PointObject::PointObject(Scaleform::GFx::AS
   v2 = (Scaleform::GFx::AS2::ASStringContext *)penv;
   v3 = this;
   Scaleform::GFx::AS2::Object::Object((Scaleform::GFx::AS2::Object *)&this->vfptr, penv);
-  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::PointObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::PointObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::PointObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::PointObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   v2 = (Scaleform::GFx::AS2::ASStringContext *)((char *)v2 + 232);
   v4 = Scaleform::GFx::AS2::GlobalContext::GetPrototype(v2->pContext, ASBuiltin_Point);
   Scaleform::GFx::AS2::Object::Set__proto__((Scaleform::GFx::AS2::Object *)&v3->vfptr, v2, v4);
@@ -133,7 +133,7 @@ void __fastcall Scaleform::GFx::AS2::PointObject::GetProperties(Scaleform::GFx::
   v3 = pt;
   v4 = penv;
   v5 = this;
-  `eh vector constructor iterator'(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::Value);
   ((void (__fastcall *)(Scaleform::GFx::AS2::ObjectInterfaceVtbl **, Scaleform::GFx::AS2::ASStringContext *, Scaleform::Ptr<Scaleform::GFx::ASSupport> *, Scaleform::GFx::AS2::Value *, void (__fastcall *)(Scaleform::GFx::AS2::Value *)))v5->vfptr->GetMemberRaw)(
     &v5->vfptr,
     &v4->StringContext,
@@ -148,7 +148,7 @@ void __fastcall Scaleform::GFx::AS2::PointObject::GetProperties(Scaleform::GFx::
   v6 = Scaleform::GFx::AS2::Value::ToNumber(&v8, v4);
   v3->x = Scaleform::GFx::AS2::Value::ToNumber(&ptr, v4);
   v3->y = v6;
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::~Value);
 }
 
 // File Line: 135
@@ -214,9 +214,9 @@ void __fastcall Scaleform::GFx::AS2::PointProto::PointProto(Scaleform::GFx::AS2:
     psc,
     pprototype,
     constructor);
-  v5->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::PointProto::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  v5->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::PointProto::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
-  v5->vfptr = (Scaleform::GFx::AS2::GASPrototypeBaseVtbl *)&Scaleform::GFx::AS2::PointProto::`vftable';
+  v5->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::PointProto::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  v5->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::PointProto::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+  v5->vfptr = (Scaleform::GFx::AS2::GASPrototypeBaseVtbl *)&Scaleform::GFx::AS2::PointProto::`vftable;
   flags.Flags = 6;
   Scaleform::GFx::AS2::GASPrototypeBase::InitFunctionMembers(
     (Scaleform::GFx::AS2::GASPrototypeBase *)&v5->vfptr,
@@ -293,7 +293,7 @@ void __fastcall Scaleform::GFx::AS2::PointProto::Add(Scaleform::GFx::AS2::FnCall
     {
       Scaleform::GFx::AS2::Environment::LogScriptError(
         v1->Env,
-        "Error: Null or invalid 'this' is used for a method of %s class.\n",
+        "Error: Null or invalid this is used for a method of %s class.\n",
         "Point");
       goto LABEL_16;
     }
@@ -378,7 +378,7 @@ void __fastcall Scaleform::GFx::AS2::PointProto::Clone(Scaleform::GFx::AS2::FnCa
     }
     v14 = (Scaleform::GFx::AS2::PointObject *)v5;
     v9 = (signed __int64)&v1->Env->StringContext;
-    `eh vector constructor iterator'(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::Value);
     (*(void (__fastcall **)(signed __int64, signed __int64, signed __int64, char *, void (__fastcall *)(Scaleform::GFx::AS2::Value *)))(*(_QWORD *)(v6 + 32) + 88i64))(
       v6 + 32,
       v9,
@@ -405,7 +405,7 @@ void __fastcall Scaleform::GFx::AS2::PointProto::Clone(Scaleform::GFx::AS2::FnCa
       &v12,
       (Scaleform::GFx::AS2::PropFlags *)&v13);
     Scaleform::GFx::AS2::Value::SetAsObject(v1->Result, v5);
-    `eh vector destructor iterator'(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::~Value);
     v10 = v5->RefCount;
     if ( v10 & 0x3FFFFFF )
     {
@@ -417,7 +417,7 @@ void __fastcall Scaleform::GFx::AS2::PointProto::Clone(Scaleform::GFx::AS2::FnCa
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "Point");
   }
 }
@@ -476,7 +476,7 @@ LABEL_13:
   }
   Scaleform::GFx::AS2::Environment::LogScriptError(
     v2->Env,
-    "Error: Null or invalid 'this' is used for a method of %s class.\n",
+    "Error: Null or invalid this is used for a method of %s class.\n",
     "Point");
 }
 
@@ -549,7 +549,7 @@ void __fastcall Scaleform::GFx::AS2::PointProto::Normalize(Scaleform::GFx::AS2::
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "Point");
   }
 }
@@ -622,7 +622,7 @@ void __fastcall Scaleform::GFx::AS2::PointProto::Offset(Scaleform::GFx::AS2::FnC
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "Point");
   }
 }
@@ -682,7 +682,7 @@ void __fastcall Scaleform::GFx::AS2::PointProto::Subtract(Scaleform::GFx::AS2::F
     {
       Scaleform::GFx::AS2::Environment::LogScriptError(
         v1->Env,
-        "Error: Null or invalid 'this' is used for a method of %s class.\n",
+        "Error: Null or invalid this is used for a method of %s class.\n",
         "Point");
       goto LABEL_16;
     }
@@ -758,7 +758,7 @@ void __fastcall Scaleform::GFx::AS2::PointProto::ToString(Scaleform::GFx::AS2::F
       v4 = (signed __int64)&v3[-2];
       if ( v3 != (Scaleform::GFx::AS2::ObjectInterface *)32 )
       {
-        `eh vector constructor iterator'(
+        `eh vector constructor iterator(
           &ptr,
           0x20ui64,
           2,
@@ -800,12 +800,12 @@ void __fastcall Scaleform::GFx::AS2::PointProto::ToString(Scaleform::GFx::AS2::F
                (volatile signed __int32 *)((str.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8),
                0xFFFFFFFF) == 1 )
           ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
-        `eh vector destructor iterator'(
+        `eh vector destructor iterator(
           &result,
           8ui64,
           2,
           (void (__fastcall *)(void *))Scaleform::GFx::ASString::~ASString);
-        `eh vector destructor iterator'(
+        `eh vector destructor iterator(
           &ptr,
           0x20ui64,
           2,
@@ -817,7 +817,7 @@ void __fastcall Scaleform::GFx::AS2::PointProto::ToString(Scaleform::GFx::AS2::F
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "Point");
   }
 }
@@ -895,12 +895,12 @@ void __fastcall Scaleform::GFx::AS2::PointCtorFunction::Distance(Scaleform::GFx:
       if ( (*(unsigned int (__fastcall **)(signed __int64))(*(_QWORD *)v13 + 16i64))(v13) == 16
         || (*(unsigned int (**)(void))&v12->vfptr->gap8[8])() == 16 )
       {
-        `eh vector constructor iterator'(
+        `eh vector constructor iterator(
           &ptr,
           0x20ui64,
           2,
           (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::Value);
-        `eh vector constructor iterator'(
+        `eh vector constructor iterator(
           &v34.NV + 1,
           0x20ui64,
           2,
@@ -964,12 +964,12 @@ void __fastcall Scaleform::GFx::AS2::PointCtorFunction::Distance(Scaleform::GFx:
           Scaleform::GFx::AS2::Value::DropRefs(&v32);
         if ( v31.T.Type >= 5u )
           Scaleform::GFx::AS2::Value::DropRefs(&v31);
-        `eh vector destructor iterator'(
+        `eh vector destructor iterator(
           &v34.NV + 1,
           0x20ui64,
           2,
           (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::~Value);
-        `eh vector destructor iterator'(
+        `eh vector destructor iterator(
           &ptr,
           0x20ui64,
           2,
@@ -1260,7 +1260,7 @@ void __fastcall Scaleform::GFx::AS2::PointCtorFunction::GlobalCtor(Scaleform::GF
   Scaleform::GFx::AS2::Value::SetAsObject(v1->Result, v5);
   if ( v1->NArgs > 0 )
   {
-    `eh vector constructor iterator'(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::Value);
     v8 = v1->FirstArgBottomIndex;
     v9 = v1->Env;
     v10 = 0i64;
@@ -1292,7 +1292,7 @@ void __fastcall Scaleform::GFx::AS2::PointCtorFunction::GlobalCtor(Scaleform::GF
       (Scaleform::GFx::ASString *)&v13->StringContext.pContext->pMovieRoot->pASMovieRoot.pObject[33].AVMVersion,
       &v16,
       (Scaleform::GFx::AS2::PropFlags *)&v17);
-    `eh vector destructor iterator'(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::~Value);
   }
   if ( v5 )
   {
@@ -1358,10 +1358,10 @@ Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::PointCtorFunct
   if ( v4 )
   {
     Scaleform::GFx::AS2::Object::Object(v4, &psc);
-    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    v6[2].vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
-    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    v6[2].vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    v6[2].vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    v6[2].vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
     v6[6].vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)Scaleform::GFx::AS2::PointCtorFunction::GlobalCtor;
     v7 = Scaleform::GFx::AS2::GlobalContext::GetPrototype(psc.pContext, ASBuiltin_Function);
     if ( !v6[2].pProto.pObject )
@@ -1390,8 +1390,8 @@ Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::PointCtorFunct
       }
     }
     v6[2].pProto.pObject = v7;
-    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::PointCtorFunction::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    v6[2].vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::PointCtorFunction::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::PointCtorFunction::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    v6[2].vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::PointCtorFunction::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
     Scaleform::GFx::AS2::NameFunction::AddConstMembers(
       v6 + 2,
       &psc,

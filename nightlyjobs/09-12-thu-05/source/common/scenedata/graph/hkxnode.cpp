@@ -18,7 +18,7 @@ void __fastcall hkxNode::~hkxNode(hkxNode *this)
 
   v1 = this;
   v2 = &this->m_userProperties;
-  v2[-14].m_stringAndFlag = (const char *)&hkxNode::`vftable';
+  v2[-14].m_stringAndFlag = (const char *)&hkxNode::`vftable;
   hkStringPtr::~hkStringPtr(v2);
   v3 = v1->m_linearKeyFrameHints.m_capacityAndFlags;
   v1->m_linearKeyFrameHints.m_size = 0;

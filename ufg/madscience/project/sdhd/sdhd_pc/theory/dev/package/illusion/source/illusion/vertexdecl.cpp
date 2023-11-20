@@ -9,7 +9,7 @@ __int64 Illusion::_dynamic_initializer_for__gVertexDeclInventory__()
     0xF7FC6B2D,
     0,
     0);
-  Illusion::gVertexDeclInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Illusion::VertexDeclInventory::`vftable';
+  Illusion::gVertexDeclInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Illusion::VertexDeclInventory::`vftable;
   return atexit(Illusion::_dynamic_atexit_destructor_for__gVertexDeclInventory__);
 }
 

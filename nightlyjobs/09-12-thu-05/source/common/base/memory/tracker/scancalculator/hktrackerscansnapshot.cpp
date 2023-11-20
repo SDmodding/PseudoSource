@@ -9,7 +9,7 @@ void __fastcall hkTrackerScanSnapshot::hkTrackerScanSnapshot(hkTrackerScanSnapsh
   int v7; // eax
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkTrackerScanSnapshot::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkTrackerScanSnapshot::`vftable;
   this->m_blocks.m_data = 0i64;
   this->m_blocks.m_size = 0;
   this->m_blocks.m_capacityAndFlags = 2147483648;
@@ -62,7 +62,7 @@ void __fastcall hkTrackerScanSnapshot::hkTrackerScanSnapshot(hkTrackerScanSnapsh
   hkTrackerScanSnapshot *v1; // rbx
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkTrackerScanSnapshot::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkTrackerScanSnapshot::`vftable;
   this->m_blocks.m_data = 0i64;
   this->m_blocks.m_size = 0;
   this->m_blocks.m_capacityAndFlags = 2147483648;
@@ -103,7 +103,7 @@ void __fastcall hkTrackerScanSnapshot::~hkTrackerScanSnapshot(hkTrackerScanSnaps
   int v7; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkTrackerScanSnapshot::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkTrackerScanSnapshot::`vftable;
   hkTrackerScanSnapshot::clear(this);
   v2 = v1->m_memSysStatistics.m_capacityAndFlags;
   v1->m_memSysStatistics.m_size = 0;
@@ -164,7 +164,7 @@ void __fastcall hkTrackerScanSnapshot::~hkTrackerScanSnapshot(hkTrackerScanSnaps
       8 * v7);
   v1->m_blocks.m_data = 0i64;
   v1->m_blocks.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 51

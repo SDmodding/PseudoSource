@@ -22,7 +22,7 @@ void __fastcall UFG::UIHKScreenPhoneSignalMinigame::UIHKScreenPhoneSignalMinigam
   v2 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   v3 = 0i64;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
@@ -34,12 +34,12 @@ void __fastcall UFG::UIHKScreenPhoneSignalMinigame::UIHKScreenPhoneSignalMinigam
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKTaskableScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKTaskableScreen::`vftable;
   this->mFinished = 0;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKMinigameScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKMinigameScreen::`vftable;
   *(_QWORD *)&this->mfAlphaValue = 1109393408i64;
   ++UFG::UIHKMinigameScreen::mNumMinigameScreens;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenPhoneSignalMinigame::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenPhoneSignalMinigame::`vftable;
   v4 = &this->mpPlayerTNC;
   v4->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v4->mPrev;
   v4->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v4->mPrev;
@@ -96,7 +96,7 @@ void __fastcall UFG::UIHKScreenPhoneSignalMinigame::~UIHKScreenPhoneSignalMiniga
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v12; // rax
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenPhoneSignalMinigame::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenPhoneSignalMinigame::`vftable;
   v2 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseScreen(v2, "PhoneSignalMinigame");
   if ( LocalPlayer )
@@ -371,7 +371,7 @@ void __fastcall UFG::UIHKScreenPhoneSignalMinigame::calcArrowPresentation(UFG::U
     if ( !v20 || (v21 = 1, !v20->mActionTrue) )
       v21 = 0;
     v3->mbAButton = v21;
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 6, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 6, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( (v26 >> 6) & 1 )
     {
       (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v25 + 16i64))(
@@ -432,7 +432,7 @@ void __fastcall UFG::UIHKScreenPhoneSignalMinigame::calcArrowPresentation(UFG::U
     v23 = v3->mRenderable->m_movie.pObject;
     if ( v23 )
       Scaleform::GFx::Movie::Invoke(v23, "mainLoop", 0i64, (Scaleform::GFx::Value *)&ptr, 6u);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 6, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 6, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 

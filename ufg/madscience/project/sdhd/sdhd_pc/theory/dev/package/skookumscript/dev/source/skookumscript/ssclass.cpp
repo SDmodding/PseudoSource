@@ -386,10 +386,10 @@ void __fastcall SSClass::SSClass(SSClass *this, ASymbol *name, SSClass *supercla
   SSMetaClass *v13; // [rsp+48h] [rbp+10h]
   SSInstanceUnreffed *v14; // [rsp+50h] [rbp+18h]
 
-  this->vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable';
-  this->vfptr = (SSClassDescBaseVtbl *)&SSClassUnaryBase::`vftable';
+  this->vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable;
+  this->vfptr = (SSClassDescBaseVtbl *)&SSClassUnaryBase::`vftable;
   this->i_name = (ASymbol)name->i_uid;
-  this->vfptr = (SSClassDescBaseVtbl *)&SSClass::`vftable';
+  this->vfptr = (SSClassDescBaseVtbl *)&SSClass::`vftable;
   this->i_flags = flags;
   this->i_superclass_p = superclass_p;
   v5 = &this->i_subclasses;
@@ -428,19 +428,19 @@ void __fastcall SSClass::SSClass(SSClass *this, ASymbol *name, SSClass *supercla
   v12->i_array_p = 0i64;
   v12->i_size = 0;
   v13 = &this->i_metaclass;
-  v13->vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable';
-  v13->vfptr = (SSClassDescBaseVtbl *)&SSClassUnaryBase::`vftable';
+  v13->vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable;
+  v13->vfptr = (SSClassDescBaseVtbl *)&SSClassUnaryBase::`vftable;
   v4 = SSBrain::c_class_class_p;
   v14 = (SSInstanceUnreffed *)&this->i_metaclass.vfptr;
-  v14->vfptr = (SSObjectBaseVtbl *)&SSObjectBase::`vftable';
+  v14->vfptr = (SSObjectBaseVtbl *)&SSObjectBase::`vftable;
   v13->i_ref_count = 0;
-  v14->vfptr = (SSObjectBaseVtbl *)&SSInstance::`vftable';
+  v14->vfptr = (SSObjectBaseVtbl *)&SSInstance::`vftable;
   v13->i_class_p = v4;
   v13->i_ptr_id = ++SSObjectBase::c_ptr_id_prev;
-  v14->vfptr = (SSObjectBaseVtbl *)&SSInstanceUnreffed::`vftable';
+  v14->vfptr = (SSObjectBaseVtbl *)&SSInstanceUnreffed::`vftable;
   v13->i_ref_count = 1000000;
-  v13->vfptr = (SSClassDescBaseVtbl *)&SSMetaClass::`vftable'{for `SSClassUnaryBase'};
-  v14->vfptr = (SSObjectBaseVtbl *)&SSMetaClass::`vftable'{for `SSInstanceUnreffed'};
+  v13->vfptr = (SSClassDescBaseVtbl *)&SSMetaClass::`vftable{for `SSClassUnaryBase};
+  v14->vfptr = (SSObjectBaseVtbl *)&SSMetaClass::`vftable{for `SSInstanceUnreffed};
   this->i_metaclass.i_class_info_p = 0i64;
   this->i_metaclass.i_class_info_p = this;
   if ( superclass_p )
@@ -459,14 +459,14 @@ void __fastcall SSClass::~SSClass(SSClass *this)
   SSInstanceUnreffed *v3; // [rsp+50h] [rbp+18h]
 
   v1 = this;
-  this->vfptr = (SSClassDescBaseVtbl *)&SSClass::`vftable';
+  this->vfptr = (SSClassDescBaseVtbl *)&SSClass::`vftable;
   SSClass::clear_members(this);
   v2 = (signed __int64)&v1->i_metaclass;
   v3 = (SSInstanceUnreffed *)&v1->i_metaclass.vfptr;
-  v3->vfptr = (SSObjectBaseVtbl *)&SSInstance::`vftable';
+  v3->vfptr = (SSObjectBaseVtbl *)&SSInstance::`vftable;
   *(_DWORD *)(v2 + 16) = 0;
-  v3->vfptr = (SSObjectBaseVtbl *)&SSObjectBase::`vftable';
-  *(_QWORD *)v2 = &SSClassDescBase::`vftable';
+  v3->vfptr = (SSObjectBaseVtbl *)&SSObjectBase::`vftable;
+  *(_QWORD *)v2 = &SSClassDescBase::`vftable;
   AMemory::c_free_func(v1->i_class_methods.i_array_p);
   AMemory::c_free_func(v1->i_class_data_table.i_array_p);
   AMemory::c_free_func(v1->i_class_data.i_array_p);
@@ -475,7 +475,7 @@ void __fastcall SSClass::~SSClass(SSClass *this)
   AMemory::c_free_func(v1->i_data_table.i_array_p);
   AMemory::c_free_func(v1->i_data.i_array_p);
   AMemory::c_free_func(v1->i_subclasses.i_array_p);
-  v1->vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable';
+  v1->vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable;
 }
 
 // File Line: 600
@@ -1181,7 +1181,7 @@ LABEL_84:
           else
           {
             tclass.i_ref_count = 0;
-            tclass.vfptr = (SSClassDescBaseVtbl *)&SSTypedClass::`vftable';
+            tclass.vfptr = (SSClassDescBaseVtbl *)&SSTypedClass::`vftable;
             tclass.i_item_type_p = 0i64;
             v55 = ASymbol::create_from_binary(&result, (const void **)v30);
             if ( SSBrain::c_classes.i_count )
@@ -1224,10 +1224,10 @@ LABEL_72:
             (*(void (__fastcall **)(SSClassDescBase *))v64->vfptr->gap8)(v64);
             tclass.i_item_type_p = v64;
             v53 = SSTypedClass::get_or_create(&tclass);
-            tclass.vfptr = (SSClassDescBaseVtbl *)&SSTypedClass::`vftable';
+            tclass.vfptr = (SSClassDescBaseVtbl *)&SSTypedClass::`vftable;
             v64->vfptr->dereference_delay(v64);
             tclass.i_item_type_p = 0i64;
-            tclass.vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable';
+            tclass.vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable;
           }
           goto LABEL_96;
         }
@@ -1356,9 +1356,9 @@ LABEL_96:
         {
           LODWORD(v109->i_type_p.i_obj_p) = v95;
           v109->i_data_p = (SSInstance *)v198;
-          *(_QWORD *)&v109->i_name.i_uid = &SSInvokableBase::`vftable';
+          *(_QWORD *)&v109->i_name.i_uid = &SSInvokableBase::`vftable;
           *(_QWORD *)&v109[1].i_name.i_uid = 0i64;
-          *(_QWORD *)&v109->i_name.i_uid = &SSMethodBase::`vftable';
+          *(_QWORD *)&v109->i_name.i_uid = &SSMethodBase::`vftable;
           SSParameters::SSParameters(&v196, v85);
           v110 = SSParameters::get_or_create(&v196);
           v111 = v196.i_params.i_array_p;
@@ -1408,7 +1408,7 @@ LABEL_96:
             }
             v97->i_params_p.i_obj_p = v110;
           }
-          v97->vfptr = (SSInvokableBaseVtbl *)&SSMethodMthd::`vftable';
+          v97->vfptr = (SSInvokableBaseVtbl *)&SSMethodMthd::`vftable;
           tclass.i_ref_count = 0;
           v97[1].vfptr = 0i64;
           *(_QWORD *)&v97[1].i_name.i_uid = *(_QWORD *)&tclass.i_ref_count;
@@ -1431,9 +1431,9 @@ LABEL_96:
         {
           LODWORD(v96->i_type_p.i_obj_p) = v95;
           v96->i_data_p = (SSInstance *)v198;
-          *(_QWORD *)&v96->i_name.i_uid = &SSInvokableBase::`vftable';
+          *(_QWORD *)&v96->i_name.i_uid = &SSInvokableBase::`vftable;
           *(_QWORD *)&v96[1].i_name.i_uid = 0i64;
-          *(_QWORD *)&v96->i_name.i_uid = &SSMethodBase::`vftable';
+          *(_QWORD *)&v96->i_name.i_uid = &SSMethodBase::`vftable;
           SSParameters::SSParameters(&params_p, v85);
           v98 = SSParameters::get_or_create(&params_p);
           v99 = params_p.i_params.i_array_p;
@@ -1483,7 +1483,7 @@ LABEL_96:
             }
             v97->i_params_p.i_obj_p = v98;
           }
-          v97->vfptr = (SSInvokableBaseVtbl *)&SSMethodFunc::`vftable';
+          v97->vfptr = (SSInvokableBaseVtbl *)&SSMethodFunc::`vftable;
           v97[1].vfptr = 0i64;
           v85 = (const void **)sym_binary_pp;
           v88 = *(APSorted<SSMethodBase,ASymbol,ACompareLogical<ASymbol> > **)&v190[0].i_uid;
@@ -1505,9 +1505,9 @@ LABEL_96:
       {
         LODWORD(v120->i_type_p.i_obj_p) = v95;
         v120->i_data_p = (SSInstance *)v198;
-        *(_QWORD *)&v120->i_name.i_uid = &SSInvokableBase::`vftable';
+        *(_QWORD *)&v120->i_name.i_uid = &SSInvokableBase::`vftable;
         *(_QWORD *)&v120[1].i_name.i_uid = 0i64;
-        *(_QWORD *)&v120->i_name.i_uid = &SSMethodBase::`vftable';
+        *(_QWORD *)&v120->i_name.i_uid = &SSMethodBase::`vftable;
         SSParameters::SSParameters(&v193, v85);
         v121 = SSParameters::get_or_create(&v193);
         v187 = v121;
@@ -1587,7 +1587,7 @@ LABEL_96:
           }
           v97->i_params_p.i_obj_p = v121;
         }
-        v97->vfptr = (SSInvokableBaseVtbl *)&SSMethod::`vftable';
+        v97->vfptr = (SSInvokableBaseVtbl *)&SSMethod::`vftable;
         v85 = (const void **)sym_binary_pp;
         v136 = *(unsigned __int8 *)*sym_binary_pp;
         v137 = (char *)*sym_binary_pp + 1;
@@ -1673,9 +1673,9 @@ LABEL_284:
         {
           v154->i_name.i_uid = v148;
           v154->i_scope_p = v139;
-          v154->vfptr = (SSInvokableBaseVtbl *)&SSInvokableBase::`vftable';
+          v154->vfptr = (SSInvokableBaseVtbl *)&SSInvokableBase::`vftable;
           v154->i_params_p.i_obj_p = 0i64;
-          v154->vfptr = (SSInvokableBaseVtbl *)&SSMethodBase::`vftable';
+          v154->vfptr = (SSInvokableBaseVtbl *)&SSMethodBase::`vftable;
           v155 = SSParameters::get_or_create(v85);
           v156 = v155;
           if ( v150->i_params_p.i_obj_p != v155 )
@@ -1695,7 +1695,7 @@ LABEL_284:
             }
             v150->i_params_p.i_obj_p = v156;
           }
-          v150->vfptr = (SSInvokableBaseVtbl *)&SSMethodMthd::`vftable';
+          v150->vfptr = (SSInvokableBaseVtbl *)&SSMethodMthd::`vftable;
           tclass.i_ref_count = 0;
           v150[1].vfptr = 0i64;
           *(_QWORD *)&v150[1].i_name.i_uid = *(_QWORD *)&tclass.i_ref_count;
@@ -1715,9 +1715,9 @@ LABEL_284:
         {
           v149->i_name.i_uid = v148;
           v149->i_scope_p = v139;
-          v149->vfptr = (SSInvokableBaseVtbl *)&SSInvokableBase::`vftable';
+          v149->vfptr = (SSInvokableBaseVtbl *)&SSInvokableBase::`vftable;
           v149->i_params_p.i_obj_p = 0i64;
-          v149->vfptr = (SSInvokableBaseVtbl *)&SSMethodBase::`vftable';
+          v149->vfptr = (SSInvokableBaseVtbl *)&SSMethodBase::`vftable;
           v151 = SSParameters::get_or_create(v85);
           v152 = v151;
           if ( v150->i_params_p.i_obj_p != v151 )
@@ -1737,7 +1737,7 @@ LABEL_284:
             }
             v150->i_params_p.i_obj_p = v152;
           }
-          v150->vfptr = (SSInvokableBaseVtbl *)&SSMethodFunc::`vftable';
+          v150->vfptr = (SSInvokableBaseVtbl *)&SSMethodFunc::`vftable;
           v150[1].vfptr = 0i64;
           v143 = *(APSorted<SSMethodBase,ASymbol,ACompareLogical<ASymbol> > **)&v188[0].i_uid;
         }
@@ -1756,9 +1756,9 @@ LABEL_284:
       {
         v158->i_name.i_uid = v148;
         v158->i_scope_p = v139;
-        v158->vfptr = (SSInvokableBaseVtbl *)&SSInvokableBase::`vftable';
+        v158->vfptr = (SSInvokableBaseVtbl *)&SSInvokableBase::`vftable;
         v158->i_params_p.i_obj_p = 0i64;
-        v158->vfptr = (SSInvokableBaseVtbl *)&SSMethodBase::`vftable';
+        v158->vfptr = (SSInvokableBaseVtbl *)&SSMethodBase::`vftable;
         SSParameters::SSParameters(&v193, v85);
         v159 = SSParameters::get_or_create(&v193);
         v160 = v193.i_params.i_array_p;
@@ -1837,7 +1837,7 @@ LABEL_284:
           }
           v150->i_params_p.i_obj_p = v159;
         }
-        v150->vfptr = (SSInvokableBaseVtbl *)&SSMethod::`vftable';
+        v150->vfptr = (SSInvokableBaseVtbl *)&SSMethod::`vftable;
         v174 = *(unsigned __int8 *)*v85;
         v175 = (signed __int64)*v85 + 1;
         *v85 = (const void *)v175;
@@ -1884,7 +1884,7 @@ LABEL_284:
       if ( v182 )
       {
         SSCoroutineBase::SSCoroutineBase(v182, &name, v139, v85);
-        v180->vfptr = (SSInvokableBaseVtbl *)&SSCoroutine::`vftable';
+        v180->vfptr = (SSInvokableBaseVtbl *)&SSCoroutine::`vftable;
         v183 = *(unsigned __int8 *)*v85;
         v184 = (signed __int64)*v85 + 1;
         *v85 = (const void *)v184;
@@ -1912,7 +1912,7 @@ LABEL_284:
       if ( v181 )
       {
         SSCoroutineBase::SSCoroutineBase(v181, &name, v139, v85);
-        v180->vfptr = (SSInvokableBaseVtbl *)&SSCoroutineMthd::`vftable';
+        v180->vfptr = (SSInvokableBaseVtbl *)&SSCoroutineMthd::`vftable;
         tclass.i_ref_count = 0;
         v180[1].vfptr = 0i64;
         *(_QWORD *)&v180[1].i_name.i_uid = *(_QWORD *)&tclass.i_ref_count;
@@ -1930,7 +1930,7 @@ LABEL_284:
       if ( v179 )
       {
         SSCoroutineBase::SSCoroutineBase(v179, &name, v139, v85);
-        v180->vfptr = (SSInvokableBaseVtbl *)&SSCoroutineFunc::`vftable';
+        v180->vfptr = (SSInvokableBaseVtbl *)&SSCoroutineFunc::`vftable;
         v180[1].vfptr = 0i64;
       }
       else
@@ -3388,7 +3388,7 @@ SSClassUnion *__fastcall SSClassUnion::as_finalized_generic(SSClassUnion *this, 
   if ( !((unsigned __int8 (__cdecl *)(SSClassUnion *))this->vfptr->is_generic)(this) )
     return v3;
   class_union.i_ref_count = 0;
-  class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable';
+  class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable;
   class_union.i_common_class_p = 0i64;
   class_union.i_union.i_count = 0;
   class_union.i_union.i_array_p = 0i64;
@@ -3432,7 +3432,7 @@ SSClassUnion *__fastcall SSClassUnion::as_finalized_generic(SSClassUnion *this, 
   if ( !v5 )
   {
 LABEL_35:
-    class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable';
+    class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable;
     if ( class_union.i_common_class_p )
       ((void (*)(void))class_union.i_common_class_p->vfptr->dereference_delay)();
     if ( class_union.i_union.i_count )
@@ -3443,21 +3443,21 @@ LABEL_35:
       {
         do
         {
-           SSClassDescBase::`vcall'{24,{flat}}(*v15);
+           SSClassDescBase::`vcall{24,{flat}}(*v15);
           ++v15;
         }
         while ( v15 < (__int64 *)v16 );
       }
     }
     AMemory::c_free_func(class_union.i_union.i_array_p);
-    class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable';
+    class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable;
     return v3;
   }
   if ( class_union.i_union.i_count > 1 )
     v11 = (SSClassUnaryBase *)SSClassUnion::get_or_create(&class_union);
   else
     v11 = class_union.i_common_class_p;
-  class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable';
+  class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable;
   if ( class_union.i_common_class_p )
     ((void (*)(void))class_union.i_common_class_p->vfptr->dereference_delay)();
   if ( class_union.i_union.i_count )
@@ -3468,14 +3468,14 @@ LABEL_35:
     {
       do
       {
-         SSClassDescBase::`vcall'{24,{flat}}(*v12);
+         SSClassDescBase::`vcall{24,{flat}}(*v12);
         ++v12;
       }
       while ( v12 < (__int64 *)v13 );
     }
   }
   AMemory::c_free_func(class_union.i_union.i_array_p);
-  class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable';
+  class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable;
   return (SSClassUnion *)v11;
 }
 
@@ -3570,7 +3570,7 @@ SSClassUnaryBase *__fastcall SSClassUnion::get_merge(SSClassDescBase *class1, SS
   v3 = (SSClassUnion *)class2;
   v4 = (SSClassUnion *)class1;
   class_union.i_ref_count = 0;
-  class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable';
+  class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable;
   class_union.i_common_class_p = 0i64;
   class_union.i_union.i_count = 0;
   class_union.i_union.i_array_p = 0i64;
@@ -3621,7 +3621,7 @@ SSClassUnaryBase *__fastcall SSClassUnion::get_merge(SSClassDescBase *class1, SS
     {
       do
       {
-         SSClassDescBase::`vcall'{24,{flat}}(*v10);
+         SSClassDescBase::`vcall{24,{flat}}(*v10);
         ++v10;
       }
       while ( v10 < (__int64 *)v11 );
@@ -3636,7 +3636,7 @@ SSClassUnaryBase *__fastcall SSClassUnion::get_merge(SSClassDescBase *class1, SS
   class_union.i_common_class_p = 0i64;
   v4->vfptr->dereference_delay((SSClassDescBase *)&v4->vfptr);
   v3->vfptr->dereference_delay((SSClassDescBase *)&v3->vfptr);
-  class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable';
+  class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable;
   AMemory::c_free_func(class_union.i_union.i_array_p);
   return v9;
 }
@@ -3687,7 +3687,7 @@ SSClassUnaryBase *__fastcall SSClassUnion::get_merge(APArrayBase<SSClassDescBase
     v5 = (unsigned __int64)&v4[v3];
     v6 = (SSClassUnion *)*v4;
     class_union.i_ref_count = 0;
-    class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable';
+    class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable;
     class_union.i_common_class_p = 0i64;
     class_union.i_union.i_count = 0;
     v7 = 0i64;
@@ -3748,7 +3748,7 @@ LABEL_9:
           {
             do
             {
-               SSClassDescBase::`vcall'{24,{flat}}(*v17);
+               SSClassDescBase::`vcall{24,{flat}}(*v17);
               ++v17;
             }
             while ( (unsigned __int64)v17 < v18 );
@@ -3766,11 +3766,11 @@ LABEL_9:
         {
           v20 = (__int64 *)v2->i_array_p;
           for ( j = (unsigned __int64)&v20[v19]; (unsigned __int64)v20 < j; ++v20 )
-             SSClassDescBase::`vcall'{24,{flat}}(*v20);
+             SSClassDescBase::`vcall{24,{flat}}(*v20);
         }
-        class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable';
+        class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable;
         AMemory::c_free_func(v7);
-        class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable';
+        class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable;
         return v16;
       }
       SSClassUnion::operator=(&class_union, v6);

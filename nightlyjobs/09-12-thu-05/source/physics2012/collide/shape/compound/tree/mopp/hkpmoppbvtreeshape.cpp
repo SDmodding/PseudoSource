@@ -13,7 +13,7 @@ void __fastcall hkMoppBvTreeShapeBase::hkMoppBvTreeShapeBase(hkMoppBvTreeShapeBa
   this->m_bvTreeType.m_storage = 0;
   v3 = code;
   v4 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkMoppBvTreeShapeBase::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkMoppBvTreeShapeBase::`vftable;
   this->m_code = code;
   hkReferencedObject::addReference((hkReferencedObject *)&code->vfptr);
   v4->m_codeInfoCopy = (hkVector4f)v3->m_info;
@@ -110,9 +110,9 @@ void __fastcall hkpMoppBvTreeShape::hkpMoppBvTreeShape(hkpMoppBvTreeShape *this,
   v3 = collection;
   v4 = this;
   hkMoppBvTreeShapeBase::hkMoppBvTreeShapeBase((hkMoppBvTreeShapeBase *)&this->vfptr, MOPP, code);
-  v4->vfptr = (hkBaseObjectVtbl *)&hkpMoppBvTreeShape::`vftable';
+  v4->vfptr = (hkBaseObjectVtbl *)&hkpMoppBvTreeShape::`vftable;
   v4->m_child.m_childShape = (hkpShape *)&v3->vfptr;
-  v4->m_child.vfptr = (hkpShapeContainerVtbl *)&hkpSingleShapeContainer::`vftable';
+  v4->m_child.vfptr = (hkpShapeContainerVtbl *)&hkpSingleShapeContainer::`vftable;
   hkReferencedObject::addReference((hkReferencedObject *)&v3->vfptr);
 }
 
@@ -125,16 +125,16 @@ void __fastcall hkpMoppBvTreeShape::~hkpMoppBvTreeShape(hkpMoppBvTreeShape *this
   hkReferencedObject *v3; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpMoppBvTreeShape::`vftable';
-  this->m_child.vfptr = (hkpShapeContainerVtbl *)&hkpSingleShapeContainer::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpMoppBvTreeShape::`vftable;
+  this->m_child.vfptr = (hkpShapeContainerVtbl *)&hkpSingleShapeContainer::`vftable;
   v2 = this->m_child.m_childShape;
   if ( v2 )
     hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
-  v1->m_child.vfptr = (hkpShapeContainerVtbl *)&hkpShapeContainer::`vftable';
+  v1->m_child.vfptr = (hkpShapeContainerVtbl *)&hkpShapeContainer::`vftable;
   v3 = (hkReferencedObject *)&v1->m_code->vfptr;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkMoppBvTreeShapeBase::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkMoppBvTreeShapeBase::`vftable;
   hkReferencedObject::removeReference(v3);
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 139

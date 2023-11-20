@@ -9,7 +9,7 @@ void __fastcall hkpShapeInfo::~hkpShapeInfo(hkpShapeInfo *this)
   int v5; // er8
   hkReferencedObject *v6; // rcx
 
-  this->vfptr = (hkBaseObjectVtbl *)&hkpShapeInfo::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpShapeInfo::`vftable;
   v1 = this->m_childTransforms.m_capacityAndFlags;
   v2 = this;
   this->m_childTransforms.m_size = 0;
@@ -45,6 +45,6 @@ void __fastcall hkpShapeInfo::~hkpShapeInfo(hkpShapeInfo *this)
   if ( v6 )
     hkReferencedObject::removeReference(v6);
   v2->m_shape.m_pntr = 0i64;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 

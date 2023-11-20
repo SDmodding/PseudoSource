@@ -8,7 +8,7 @@ void __fastcall hkaiRemoveUnreachableHitFilter::~hkaiRemoveUnreachableHitFilter(
   hkReferencedObject *v4; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiRemoveUnreachableHitFilter::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiRemoveUnreachableHitFilter::`vftable;
   v2 = this->m_triOffsets.m_capacityAndFlags;
   this->m_triOffsets.m_size = 0;
   if ( v2 >= 0 )
@@ -35,6 +35,6 @@ void __fastcall hkaiRemoveUnreachableHitFilter::~hkaiRemoveUnreachableHitFilter(
   if ( v4 )
     hkReferencedObject::removeReference(v4);
   v1->m_walkableGeom.m_pntr = 0i64;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 

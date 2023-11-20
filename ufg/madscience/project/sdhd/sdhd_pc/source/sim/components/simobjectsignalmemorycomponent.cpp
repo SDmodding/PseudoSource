@@ -22,12 +22,12 @@ void __fastcall UFG::SimObjectSignalMemoryComponent::SimObjectSignalMemoryCompon
 
   v4 = this;
   UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name_uid);
-  v4->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::UpdateInterface::`vftable';
+  v4->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::UpdateInterface::`vftable;
   v5 = (UFG::qNode<UFG::SimObjectSignalMemoryComponent,UFG::SimObjectSignalMemoryComponent> *)&v4->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SimObjectSignalMemoryComponent::`vftable'{for `UFG::SimComponent'};
-  v4->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::SimObjectSignalMemoryComponent::`vftable'{for `UFG::UpdateInterface'};
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SimObjectSignalMemoryComponent::`vftable{for `UFG::SimComponent};
+  v4->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::SimObjectSignalMemoryComponent::`vftable{for `UFG::UpdateInterface};
   v6 = UFG::SimObjectSignalMemoryComponent::s_SimObjectSignalMemoryComponentList.mNode.mPrev;
   UFG::SimObjectSignalMemoryComponent::s_SimObjectSignalMemoryComponentList.mNode.mPrev->mNext = (UFG::qNode<UFG::SimObjectSignalMemoryComponent,UFG::SimObjectSignalMemoryComponent> *)&v4->mPrev;
   v5->mPrev = v6;
@@ -54,8 +54,8 @@ void __fastcall UFG::SimObjectSignalMemoryComponent::~SimObjectSignalMemoryCompo
   UFG::qNode<UFG::SimObjectSignalMemoryComponent,UFG::SimObjectSignalMemoryComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SimObjectSignalMemoryComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::SimObjectSignalMemoryComponent::`vftable'{for `UFG::UpdateInterface'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SimObjectSignalMemoryComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::SimObjectSignalMemoryComponent::`vftable{for `UFG::UpdateInterface};
   if ( this == UFG::SimObjectSignalMemoryComponent::s_SimObjectSignalMemoryComponentpCurrentIterator )
     UFG::SimObjectSignalMemoryComponent::s_SimObjectSignalMemoryComponentpCurrentIterator = (UFG::SimObjectSignalMemoryComponent *)&this->mPrev[-5].mNext;
   v2 = (UFG::qNode<UFG::SimObjectSignalMemoryComponent,UFG::SimObjectSignalMemoryComponent> *)&this->mPrev;

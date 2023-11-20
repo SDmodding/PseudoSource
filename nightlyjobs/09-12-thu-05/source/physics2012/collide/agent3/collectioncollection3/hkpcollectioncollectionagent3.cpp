@@ -231,36 +231,36 @@ LABEL_22:
         v65 = _mm_max_ps(
                 _mm_min_ps(_mm_mul_ps(_mm_add_ps(v61, v10[3]), v10[5]), hkAabbUtil::hkAabbUint32MaxVal),
                 (__m128)0i64);
-        v66 = (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v65);
+        v66 = (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v65);
         _mm_store_si128(
           v64,
           _mm_or_si128(
             _mm_add_epi32(
               _mm_cvttps_epi32(
                 _mm_max_ps(
-                  _mm_sub_ps(v65, _mm_and_ps((__m128)v66, *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31)),
+                  _mm_sub_ps(v65, _mm_and_ps((__m128)v66, *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31)),
                   (__m128)0i64)),
               _mm_slli_epi32(v66, 0x1Fu)),
             (__m128i)_mm_cmpleps(
                        _mm_add_ps(
-                         *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31,
-                         *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31),
+                         *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31,
+                         *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31),
                        v65)));
         v67 = _mm_max_ps(_mm_min_ps(_mm_mul_ps(_mm_add_ps(v62, v10[4]), v10[5]), v63), (__m128)0i64);
-        v68 = (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v67);
+        v68 = (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v67);
         _mm_store_si128(
           v64 + 1,
           _mm_or_si128(
             _mm_add_epi32(
               _mm_cvttps_epi32(
                 _mm_max_ps(
-                  _mm_sub_ps(v67, _mm_and_ps((__m128)v68, *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31)),
+                  _mm_sub_ps(v67, _mm_and_ps((__m128)v68, *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31)),
                   (__m128)0i64)),
               _mm_slli_epi32(v68, 0x1Fu)),
             (__m128i)_mm_cmpleps(
                        _mm_add_ps(
-                         *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31,
-                         *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31),
+                         *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31,
+                         *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31),
                        v67)));
         HIDWORD(v64->m128i_i64[1]) = v37;
         v37 = v8->vfptr->getNextKey(v8, v37);
@@ -553,31 +553,31 @@ void __fastcall hkCollectionBvTreeAgent3_calcAabbs(hkpAgent3ProcessInput *input,
       ++v6;
       v41 = v53-- == 1;
       v42 = _mm_add_ps(
-              *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31,
-              *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31);
+              *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31,
+              *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31);
       v43 = _mm_max_ps(
               _mm_min_ps(_mm_mul_ps(_mm_add_ps(v40[3], v38), v40[5]), hkAabbUtil::hkAabbUint32MaxVal),
               (__m128)0i64);
-      v44 = (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v43);
+      v44 = (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v43);
       v45 = _mm_or_si128(
               _mm_add_epi32(
                 _mm_cvttps_epi32(
                   _mm_max_ps(
-                    _mm_sub_ps(v43, _mm_and_ps((__m128)v44, *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31)),
+                    _mm_sub_ps(v43, _mm_and_ps((__m128)v44, *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31)),
                     (__m128)0i64)),
                 _mm_slli_epi32(v44, 0x1Fu)),
               (__m128i)_mm_cmpleps(v42, v43));
       v46 = _mm_add_ps(v40[4], v39);
       _mm_store_si128((__m128i *)&v13[-1], v45);
       v47 = _mm_max_ps(_mm_min_ps(_mm_mul_ps(v46, v40[5]), hkAabbUtil::hkAabbUint32MaxVal), (__m128)0i64);
-      v48 = (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v47);
+      v48 = (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v47);
       _mm_store_si128(
         (__m128i *)v13[-1].m_max,
         _mm_or_si128(
           _mm_add_epi32(
             _mm_cvttps_epi32(
               _mm_max_ps(
-                _mm_sub_ps(v47, _mm_and_ps((__m128)v48, *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31)),
+                _mm_sub_ps(v47, _mm_and_ps((__m128)v48, *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31)),
                 (__m128)0i64)),
             _mm_slli_epi32(v48, 0x1Fu)),
           (__m128i)_mm_cmpleps(v42, v47)));
@@ -1001,20 +1001,20 @@ __int64 __fastcall hkpCollectionCollectionAgent3::process_gatherShapeKeys(hkpAge
                   _mm_mul_ps(_mm_add_ps(v70, v66), v68->m_aabb32Info.m_bitScale.m_quad),
                   hkAabbUtil::hkAabbUint32MaxVal),
                 (__m128)0i64);
-        v73 = (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v72);
+        v73 = (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v72);
         _mm_store_si128(
           (__m128i *)&v34[v71],
           _mm_or_si128(
             _mm_add_epi32(
               _mm_cvttps_epi32(
                 _mm_max_ps(
-                  _mm_sub_ps(v72, _mm_and_ps((__m128)v73, *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31)),
+                  _mm_sub_ps(v72, _mm_and_ps((__m128)v73, *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31)),
                   (__m128)0i64)),
               _mm_slli_epi32(v73, 0x1Fu)),
             (__m128i)_mm_cmpleps(
                        _mm_add_ps(
-                         *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31,
-                         *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31),
+                         *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31,
+                         *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31),
                        v72)));
         v74 = _mm_max_ps(
                 _mm_min_ps(
@@ -1023,20 +1023,20 @@ __int64 __fastcall hkpCollectionCollectionAgent3::process_gatherShapeKeys(hkpAge
                     v68->m_aabb32Info.m_bitScale.m_quad),
                   v69),
                 (__m128)0i64);
-        v75 = (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v74);
+        v75 = (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v74);
         _mm_store_si128(
           (__m128i *)v34[v71].m_max,
           _mm_or_si128(
             _mm_add_epi32(
               _mm_cvttps_epi32(
                 _mm_max_ps(
-                  _mm_sub_ps(v74, _mm_and_ps((__m128)v75, *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31)),
+                  _mm_sub_ps(v74, _mm_and_ps((__m128)v75, *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31)),
                   (__m128)0i64)),
               _mm_slli_epi32(v75, 0x1Fu)),
             (__m128i)_mm_cmpleps(
                        _mm_add_ps(
-                         *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31,
-                         *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31),
+                         *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31,
+                         *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31),
                        v74)));
         *v137 = v136;
         v137 += 8;

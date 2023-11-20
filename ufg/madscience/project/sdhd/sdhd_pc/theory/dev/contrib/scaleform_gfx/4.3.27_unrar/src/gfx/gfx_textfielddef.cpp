@@ -8,14 +8,14 @@ void __fastcall Scaleform::GFx::TextFieldDef::TextFieldDef(Scaleform::GFx::TextF
   Scaleform::GFx::ResourcePtr<Scaleform::GFx::FontResource> *v4; // [rsp+48h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::Resource::`vftable';
+  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::Resource::`vftable;
   v2 = this->RefCount.Value;
   v3 = (unsigned int)this->RefCount.Value;
   this->RefCount.Value = 1;
   this->pLib = 0i64;
-  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::CharacterDef::`vftable';
+  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::CharacterDef::`vftable;
   this->Id.Id = 0x40000;
-  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::TextFieldDef::`vftable';
+  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::TextFieldDef::`vftable;
   v4 = &this->pFont;
   v4->HType = 0;
   v4->pResource = 0i64;
@@ -47,7 +47,7 @@ void __fastcall Scaleform::GFx::TextFieldDef::~TextFieldDef(Scaleform::GFx::Text
   Scaleform::GFx::ResourceLibBase *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::TextFieldDef::`vftable';
+  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::TextFieldDef::`vftable;
   if ( !_InterlockedDecrement((volatile signed __int32 *)((this->VariableName.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
     ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
   if ( !_InterlockedDecrement((volatile signed __int32 *)((v1->DefaultText.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
@@ -71,8 +71,8 @@ void __fastcall Scaleform::GFx::TextFieldDef::~TextFieldDef(Scaleform::GFx::Text
       }
     }
   }
-  v1->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::CharacterDef::`vftable';
-  v1->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::Resource::`vftable';
+  v1->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::CharacterDef::`vftable;
+  v1->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::Resource::`vftable;
 }
 
 // File Line: 54

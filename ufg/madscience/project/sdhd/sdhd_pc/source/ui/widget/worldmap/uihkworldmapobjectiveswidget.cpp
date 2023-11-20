@@ -107,7 +107,7 @@ void __fastcall UFG::UIHKWorldMapObjectivesWidget::Flash_AddObjective(UFG::UIHKW
     {
       v7 = 0i64;
     }
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( (v12 >> 6) & 1 )
     {
       (*(void (__fastcall **)(__int64, char *, __int64))(*(_QWORD *)v11 + 16i64))(v11, &ptr, v13);
@@ -123,7 +123,7 @@ void __fastcall UFG::UIHKWorldMapObjectivesWidget::Flash_AddObjective(UFG::UIHKW
     v16 = 2;
     LOBYTE(v17) = v4;
     Scaleform::GFx::Movie::Invoke(v6, "Objectives_AddObjective", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 
@@ -164,7 +164,7 @@ void __fastcall UFG::UIHKWorldMapObjectivesWidget::Flash_AddMission(UFG::UIHKWor
     {
       v7 = 0i64;
     }
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( (v12 >> 6) & 1 )
     {
       (*(void (__fastcall **)(__int64, char *, __int64))(*(_QWORD *)v11 + 16i64))(v11, &ptr, v13);
@@ -180,7 +180,7 @@ void __fastcall UFG::UIHKWorldMapObjectivesWidget::Flash_AddMission(UFG::UIHKWor
     v16 = 6;
     v17 = v4;
     Scaleform::GFx::Movie::Invoke(v6, "Objectives_AddMission", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 

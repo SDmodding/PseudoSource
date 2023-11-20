@@ -344,7 +344,7 @@ void __fastcall UFG::qChunkFileSystem::Load(const char *filename, UFG::qMemoryPo
   UFG::qPrintChannel::Print(
     &UFG::qChunkFileSystem::mResourceChannel,
     OUTPUT_LEVEL_WARNING,
-    "[Resource - SingleLoad] uid=0x%08x MemoryPool(%p) params(%u64) '%s'\n");
+    "[Resource - SingleLoad] uid=0x%08x MemoryPool(%p) params(%u64) %s\n");
   v13 = UFG::gMainMemoryPool;
   if ( !UFG::gMainMemoryPool )
   {
@@ -428,7 +428,7 @@ void __fastcall UFG::qChunkFileSystem::Unload(unsigned int filename_uid, const c
   UFG::qPrintChannel::Print(
     &UFG::qChunkFileSystem::mResourceChannel,
     OUTPUT_LEVEL_WARNING,
-    "[Resource - SingleUnload] uid=0x%08x '%s'\n");
+    "[Resource - SingleUnload] uid=0x%08x %s\n");
   if ( v2 )
   {
     v3 = &UFG::qChunkFileSystem::mSingleFileLoadTables;
@@ -561,7 +561,7 @@ void __fastcall UFG::qChunkFileSystem::Unload(UFG::LoadedChunkFile *chunk_file)
     UFG::qPrintChannel::Print(
       &UFG::qChunkFileSystem::mResourceChannel,
       OUTPUT_LEVEL_DEBUG,
-      "[Resource - Unload] loaded_chunk_file_uid=0x%08x refs=%4d '%s'\n");
+      "[Resource - Unload] loaded_chunk_file_uid=0x%08x refs=%4d %s\n");
     v6 = v2->mRefs-- == 1;
     if ( v6 )
     {
@@ -799,7 +799,7 @@ LABEL_9:
         UFG::qPrintChannel::Print(
           &UFG::qChunkFileSystem::mResourceChannel,
           OUTPUT_LEVEL_WARNING,
-          "[Resource - FileSizeCallback]     Starting read of 0x%08x64 bytes for uid:0x%08x from file '%s'\n");
+          "[Resource - FileSizeCallback]     Starting read of 0x%08x64 bytes for uid:0x%08x from file %s\n");
         v10 = (const char *)v6[7].mChild[0];
         if ( !v10 )
           v10 = (char *)&v6[1].mChild[1] + 4;
@@ -828,7 +828,7 @@ LABEL_9:
       UFG::qPrintChannel::Print(
         &UFG::qChunkFileSystem::mResourceChannel,
         OUTPUT_LEVEL_ERROR,
-        "[Resource - LoadChunkFile] skipping uid=0x%08x, file '%s' does not exist or size is 0\n");
+        "[Resource - LoadChunkFile] skipping uid=0x%08x, file %s does not exist or size is 0\n");
     }
     else
     {
@@ -836,7 +836,7 @@ LABEL_9:
       UFG::qPrintChannel::Print(
         &UFG::qChunkFileSystem::mResourceChannel,
         OUTPUT_LEVEL_ERROR,
-        "[Resource - LoadChunkFile] Error Getting file size for '%s'\n");
+        "[Resource - LoadChunkFile] Error Getting file size for %s\n");
       if ( HIDWORD(v6[5].mChild[0]) )
         return;
     }
@@ -1019,7 +1019,7 @@ LABEL_6:
         UFG::qPrintChannel::Print(
           &UFG::qChunkFileSystem::mResourceChannel,
           OUTPUT_LEVEL_WARNING,
-          "[Resource - Service]       Closing unused file handle uid:0x%08x '%s'\n");
+          "[Resource - Service]       Closing unused file handle uid:0x%08x %s\n");
         UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
           (UFG::qBaseTreeVariableRB<unsigned __int64> *)&UFG::qChunkFileSystem::mFileHandles,
           (UFG::qBaseNodeVariableRB<unsigned __int64> *)v7);
@@ -1599,7 +1599,7 @@ LABEL_94:
               UFG::qPrintChannel::Print(
                 &UFG::qChunkFileSystem::mResourceChannel,
                 OUTPUT_LEVEL_WARNING,
-                "[Resource - Internal_Load]   Couldn't find index or filename for 0x%08x %s\n");
+                "[Resource - Internal_Load]   Couldnt find index or filename for 0x%08x %s\n");
             }
 LABEL_158:
             v5 = (signed __int64)&v1->mTableEntries;
@@ -1794,7 +1794,7 @@ LABEL_159:
     UFG::qPrintChannel::Print(
       &UFG::qChunkFileSystem::mResourceChannel,
       OUTPUT_LEVEL_WARNING,
-      "[Resource - Internal_Load]     Starting read of 0x%08x bytes to buffer %p for uid:0x%08x from file '%s'\n");
+      "[Resource - Internal_Load]     Starting read of 0x%08x bytes to buffer %p for uid:0x%08x from file %s\n");
     if ( load_tablea->mCallbacks.mFilename )
     {
       UFG::ResourceFile::AddWaitingTable((UFG::ResourceFile *)v10, load_tablea);

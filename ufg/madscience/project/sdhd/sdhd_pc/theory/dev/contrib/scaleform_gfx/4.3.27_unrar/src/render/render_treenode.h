@@ -5,10 +5,10 @@ void __fastcall Scaleform::Render::TreeNode::NodeData::NodeData(Scaleform::Rende
   Scaleform::Render::TreeNode::NodeData *v2; // rdi
 
   v2 = this;
-  this->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::ContextImpl::EntryData::`vftable';
+  this->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::ContextImpl::EntryData::`vftable;
   this->Type = type;
   this->Flags = 1;
-  this->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::TreeNode::NodeData::`vftable';
+  this->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::TreeNode::NodeData::`vftable;
   memset(&this->M34, 0, 0x30ui64);
   v2->M34.M[0][0] = 1.0;
   v2->M34.M[1][1] = 1.0;
@@ -40,10 +40,10 @@ void __fastcall Scaleform::Render::TreeNode::NodeData::NodeData(Scaleform::Rende
 
   v2 = this;
   v3 = src.pC->vfptr;
-  this->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::ContextImpl::EntryData::`vftable';
+  this->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::ContextImpl::EntryData::`vftable;
   this->Type = (unsigned __int16)v3->ConstructCopy;
   this->Flags = WORD1(v3->ConstructCopy) & 0xFFCF;
-  this->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::TreeNode::NodeData::`vftable';
+  this->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::TreeNode::NodeData::`vftable;
   v4 = src.pC->vfptr;
   v2->M34.M[0][0] = *(float *)&src.pC->vfptr->CopyTo;
   v2->M34.M[0][1] = *((float *)&v4->CopyTo + 1);
@@ -363,12 +363,12 @@ void __fastcall Scaleform::Render::TreeRoot::NodeData::NodeData(Scaleform::Rende
 
   v1 = this;
   Scaleform::Render::TreeNode::NodeData::NodeData((Scaleform::Render::TreeNode::NodeData *)&this->vfptr, ET_Root);
-  v1->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::ContextImpl::ContextData_ImplMixin<Scaleform::Render::TreeContainer::NodeData,Scaleform::Render::TreeNode::NodeData>::`vftable';
-  v1->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::TreeContainer::NodeData::`vftable';
+  v1->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::ContextImpl::ContextData_ImplMixin<Scaleform::Render::TreeContainer::NodeData,Scaleform::Render::TreeNode::NodeData>::`vftable;
+  v1->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::TreeContainer::NodeData::`vftable;
   v1->Children.pData[1] = 0i64;
   v1->Children.pData[0] = 0i64;
-  v1->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::ContextImpl::ContextData_ImplMixin<Scaleform::Render::TreeRoot::NodeData,Scaleform::Render::TreeContainer::NodeData>::`vftable';
-  v1->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::TreeRoot::NodeData::`vftable';
+  v1->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::ContextImpl::ContextData_ImplMixin<Scaleform::Render::TreeRoot::NodeData,Scaleform::Render::TreeContainer::NodeData>::`vftable;
+  v1->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::TreeRoot::NodeData::`vftable;
   *(_QWORD *)&v1->VP.BufferWidth = 0i64;
   *(_QWORD *)&v1->VP.Left = 0i64;
   v1->VP.Height = 1;

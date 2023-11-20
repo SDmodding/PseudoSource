@@ -37,7 +37,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl::XMLList::Apppend(Scaleform::
 // RVA: 0x789CC0
 void __fastcall Scaleform::GFx::AS3::Instances::fl::XMLList::CallBack::~CallBack(Scaleform::GFx::AS3::Instances::fl::XMLList::CallBack *this)
 {
-  this->vfptr = (Scaleform::GFx::AS3::Instances::fl::XMLList::CallBackVtbl *)&Scaleform::GFx::AS3::Instances::fl::XMLList::CallBack::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::Instances::fl::XMLList::CallBackVtbl *)&Scaleform::GFx::AS3::Instances::fl::XMLList::CallBack::`vftable;
 }
 
 // File Line: 383
@@ -83,8 +83,8 @@ Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl::XMLList> *__fastcall Sca
   if ( v4 )
   {
     Scaleform::GFx::AS3::Instance::Instance(v4, (Scaleform::GFx::AS3::InstanceTraits::Traits *)&v2->vfptr);
-    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Object::`vftable';
-    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::XMLList::`vftable';
+    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Object::`vftable;
+    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::XMLList::`vftable;
     v5->TargetObject.pObject = 0i64;
     v5->TargetProperty = 0i64;
     v5->TargetNamespace.pObject = 0i64;

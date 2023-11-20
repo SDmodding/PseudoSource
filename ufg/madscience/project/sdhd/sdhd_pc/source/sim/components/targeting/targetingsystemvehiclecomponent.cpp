@@ -164,8 +164,8 @@ void __fastcall UFG::TargetingSystemVehicleComponent::TargetingSystemVehicleComp
   v6 = (UFG::qNode<UFG::TargetingSystemVehicleComponent,UFG::TargetingSystemVehicleComponent> *)&v5->mPrev;
   v6->mPrev = v6;
   v6->mNext = v6;
-  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TargetingSystemVehicleComponent::`vftable'{for `UFG::SimComponent'};
-  v5->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::TargetingSystemVehicleComponent::`vftable'{for `UFG::UpdateInterface'};
+  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TargetingSystemVehicleComponent::`vftable{for `UFG::SimComponent};
+  v5->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::TargetingSystemVehicleComponent::`vftable{for `UFG::UpdateInterface};
   v7 = 0i64;
   v5->m_pActionHijackProfile = 0i64;
   v8 = UFG::TargetingSystemVehicleComponent::s_TargetingSystemVehicleComponentList.mNode.mPrev;
@@ -201,8 +201,8 @@ void __fastcall UFG::TargetingSystemVehicleComponent::~TargetingSystemVehicleCom
   UFG::qNode<UFG::TargetingSystemVehicleComponent,UFG::TargetingSystemVehicleComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TargetingSystemVehicleComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::TargetingSystemVehicleComponent::`vftable'{for `UFG::UpdateInterface'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TargetingSystemVehicleComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::TargetingSystemVehicleComponent::`vftable{for `UFG::UpdateInterface};
   if ( this == UFG::TargetingSystemVehicleComponent::s_TargetingSystemVehicleComponentpCurrentIterator )
     UFG::TargetingSystemVehicleComponent::s_TargetingSystemVehicleComponentpCurrentIterator = (UFG::TargetingSystemVehicleComponent *)&this->mPrev[-8].mNext;
   v2 = (UFG::qNode<UFG::TargetingSystemVehicleComponent,UFG::TargetingSystemVehicleComponent> *)&this->mPrev;

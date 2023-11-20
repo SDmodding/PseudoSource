@@ -66,7 +66,7 @@ hkClass *__fastcall hkpVehicleData::staticClass()
 void __fastcall finishLoadedObjecthkpVehicleData(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpVehicleData::`vftable';
+    *(_QWORD *)p = &hkpVehicleData::`vftable;
 }
 
 // File Line: 163
@@ -80,7 +80,7 @@ void __fastcall cleanupLoadedObjecthkpVehicleData(void *p)
 // RVA: 0xE25250
 void **__fastcall getVtablehkpVehicleData()
 {
-  return &hkpVehicleData::`vftable';
+  return &hkpVehicleData::`vftable;
 }
 
 // File Line: 189

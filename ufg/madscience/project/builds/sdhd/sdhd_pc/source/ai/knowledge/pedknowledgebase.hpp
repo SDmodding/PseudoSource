@@ -49,7 +49,7 @@ void __fastcall UFG::PedKnowledgeBase::~PedKnowledgeBase(UFG::PedKnowledgeBase *
   if ( v7 )
   {
     v8 = (char *)&v7[-1] + 48;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v7,
       0x38ui64,
       *((_DWORD *)&v7[-1] + 12),

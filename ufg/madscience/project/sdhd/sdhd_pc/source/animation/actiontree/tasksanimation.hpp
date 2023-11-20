@@ -18,7 +18,7 @@ void __fastcall AnimationTask::~AnimationTask(AnimationTask *this)
   UFG::qNode<ITask,ITask> *v14; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&AnimationTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&AnimationTask::`vftable;
   v2 = &this->mSplitBodyBlend;
   if ( this->mSplitBodyBlend.m_pPointer )
   {
@@ -53,7 +53,7 @@ void __fastcall AnimationTask::~AnimationTask(AnimationTask *this)
   v11->mPrev = v10;
   v7->mPrev = (UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *)&v7->mPrev;
   v1->mController.mNext = (UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *)&v1->mController.mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v12 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v13 = v1->mPrev;
   v14 = v1->mNext;
@@ -83,7 +83,7 @@ void __fastcall AnimationRefPoseTask::~AnimationRefPoseTask(AnimationRefPoseTask
   UFG::qNode<ITask,ITask> *v14; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&AnimationRefPoseTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&AnimationRefPoseTask::`vftable;
   v2 = &this->mSplitBodyBlend;
   if ( this->mSplitBodyBlend.m_pPointer )
   {
@@ -118,7 +118,7 @@ void __fastcall AnimationRefPoseTask::~AnimationRefPoseTask(AnimationRefPoseTask
   v11->mPrev = v10;
   v7->mPrev = (UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *)&v7->mPrev;
   v1->mController.mNext = (UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *)&v1->mController.mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v12 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v13 = v1->mPrev;
   v14 = v1->mNext;
@@ -148,7 +148,7 @@ void __fastcall BlendTreeTask::~BlendTreeTask(BlendTreeTask *this)
   UFG::qNode<ITask,ITask> *v14; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&BlendTreeTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&BlendTreeTask::`vftable;
   UFG::qList<UFG::PowerManagedResource,UFG::PowerManagedResourceList,0,0>::~qList<UFG::PowerManagedResource,UFG::PowerManagedResourceList,0,0>((UFG::qList<ITask,ITask,0,0> *)&this->mActiveControllers);
   v2 = &v1->mSplitBodyBlend;
   if ( v1->mSplitBodyBlend.m_pPointer )
@@ -184,7 +184,7 @@ void __fastcall BlendTreeTask::~BlendTreeTask(BlendTreeTask *this)
   v11->mPrev = v10;
   v7->mPrev = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v7->mPrev;
   v1->mPlayingTree.mNext = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v1->mPlayingTree.mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v12 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v13 = v1->mPrev;
   v14 = v1->mNext;
@@ -202,7 +202,7 @@ void __fastcall IBlendTreeControllerTask::~IBlendTreeControllerTask(IBlendTreeCo
   UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask> *v2; // rcx
   UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask> *v3; // rax
 
-  this->vfptr = (IBlendTreeControllerTaskVtbl *)&IBlendTreeControllerTask::`vftable';
+  this->vfptr = (IBlendTreeControllerTaskVtbl *)&IBlendTreeControllerTask::`vftable;
   v1 = (UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask> *)&this->mPrev;
   v2 = this->mPrev;
   v3 = v1->mNext;
@@ -223,15 +223,15 @@ void __fastcall AnimationBankReferenceTask::AnimationBankReferenceTask(Animation
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<AnimationBankReferenceTrack>::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<AnimationBankReferenceTrack>::`vftable;
   v3 = (UFG::PowerManagedResource *)&this->vfptr;
   v2 = (UFG::qNode<UFG::PowerManagedResource,UFG::PowerManagedResourceList> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  v3->vfptr = (UFG::PowerManagedResourceVtbl *)&UFG::PowerManagedResource::`vftable';
-  this->vfptr = (ITaskVtbl *)&AnimationBankReferenceTask::`vftable'{for `Task<AnimationBankReferenceTrack>'};
-  v3->vfptr = (UFG::PowerManagedResourceVtbl *)&AnimationBankReferenceTask::`vftable'{for `UFG::PowerManagedResource'};
+  v3->vfptr = (UFG::PowerManagedResourceVtbl *)&UFG::PowerManagedResource::`vftable;
+  this->vfptr = (ITaskVtbl *)&AnimationBankReferenceTask::`vftable{for `Task<AnimationBankReferenceTrack>};
+  v3->vfptr = (UFG::PowerManagedResourceVtbl *)&AnimationBankReferenceTask::`vftable{for `UFG::PowerManagedResource};
   AnimationGroupHandle::AnimationGroupHandle(&this->mAnimationGroupHandle);
 }
 
@@ -249,9 +249,9 @@ void __fastcall AnimationBankReferenceTask::~AnimationBankReferenceTask(Animatio
   UFG::qNode<ITask,ITask> *v8; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&AnimationBankReferenceTask::`vftable'{for `Task<AnimationBankReferenceTrack>'};
+  this->vfptr = (ITaskVtbl *)&AnimationBankReferenceTask::`vftable{for `Task<AnimationBankReferenceTrack>};
   v2 = (UFG::PowerManagedResource *)&this->vfptr;
-  this->vfptr = (UFG::PowerManagedResourceVtbl *)&AnimationBankReferenceTask::`vftable'{for `UFG::PowerManagedResource'};
+  this->vfptr = (UFG::PowerManagedResourceVtbl *)&AnimationBankReferenceTask::`vftable{for `UFG::PowerManagedResource};
   AnimationGroupHandle::~AnimationGroupHandle(&this->mAnimationGroupHandle);
   v3 = (UFG::qNode<UFG::PowerManagedResource,UFG::PowerManagedResourceList> *)&v2->mPrev;
   v4 = v2->mPrev;
@@ -260,7 +260,7 @@ void __fastcall AnimationBankReferenceTask::~AnimationBankReferenceTask(Animatio
   v5->mPrev = v4;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v6 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v7 = v1->mPrev;
   v8 = v1->mNext;

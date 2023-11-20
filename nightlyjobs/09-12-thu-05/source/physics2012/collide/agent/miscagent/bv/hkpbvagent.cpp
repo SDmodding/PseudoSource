@@ -19,7 +19,7 @@ void __fastcall hkpBvAgent::hkpBvAgent(hkpBvAgent *this, hkpCdBody *bodyA, hkpCd
   v16 = bodyA;
   v5 = this;
   this->m_contactMgr = mgr;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpBvAgent::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpBvAgent::`vftable;
   v6 = input->m_createPredictiveAgents.m_storage == 0;
   v7 = input->m_dispatcher.m_storage;
   v15 = bodyA->m_motion;
@@ -104,7 +104,7 @@ hkpBvAgent *__fastcall hkpBvAgent::createShapeBvAgent(hkpCdBody *A, hkpCdBody *B
   if ( result )
   {
     hkpBvAgent::hkpBvAgent(result, v7, v4, v6, v5);
-    v10->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpBvAgent>::`vftable';
+    v10->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpBvAgent>::`vftable;
     result = (hkpBvAgent *)v10;
   }
   return result;
@@ -263,7 +263,7 @@ void __fastcall hkpBvAgent::processCollision(hkpBvAgent *this, hkpCdBody *bodyAi
   v30 = (__int64)v13[1].vfptr;
   v31 = -1;
   v29 = 0;
-  v28 = &hkpFlagCdBodyPairCollector::`vftable';
+  v28 = &hkpFlagCdBodyPairCollector::`vftable;
   ((void (__fastcall *)(hkpCollisionAgent *, __int64 *, hkpCdBody *, hkpProcessCollisionInput *, void ***))v14->vfptr[1].__first_virtual_table_function__)(
     v14,
     &v30,
@@ -388,7 +388,7 @@ void __fastcall hkpBvAgent::linearCast(hkpBvAgent *this, hkpCdBody *bodyA, hkpCd
   v33 = FLOAT_3_40282e38;
   v35 = _mm_shuffle_ps(v35, _mm_unpackhi_ps(v35, (__m128)xmmword_141A712A0), 196);
   v29 = -1;
-  v32 = &hkpSimpleClosestContactCollector::`vftable';
+  v32 = &hkpSimpleClosestContactCollector::`vftable;
   v34 = 0;
   ((void (__fastcall *)(hkpCollisionAgent *, __int64 *, hkpCdBody *, hkpLinearCastCollisionInput *, void ***, void ***, __int64, _QWORD, const void *, hkpCdBody *, void **, _QWORD))v15->vfptr[2].__first_virtual_table_function__)(
     v15,
@@ -401,7 +401,7 @@ void __fastcall hkpBvAgent::linearCast(hkpBvAgent *this, hkpCdBody *bodyA, hkpCd
     *(_QWORD *)&v29,
     v30,
     v9,
-    &hkpSimpleClosestContactCollector::`vftable',
+    &hkpSimpleClosestContactCollector::`vftable,
     *(_QWORD *)&v33);
   if ( v34 )
   {
@@ -519,7 +519,7 @@ void __fastcall hkpBvAgent::staticLinearCast(hkpCdBody *bodyA, hkpCdBody *bodyB,
   v18 = v13->m_agent2Func[(unsigned __int8)v13->m_agent2Types[*(unsigned __int8 *)(v16 + 16)][v17]].m_linearCastFunc;
   v34 = FLOAT_3_40282e38;
   v36 = _mm_shuffle_ps(v36, _mm_unpackhi_ps(v36, (__m128)xmmword_141A712A0), 196);
-  v33 = &hkpSimpleClosestContactCollector::`vftable';
+  v33 = &hkpSimpleClosestContactCollector::`vftable;
   v35 = 0;
   v18((hkpCdBody *)&v29, v8, v7, (hkpCdPointCollector *)&v33, (hkpCdPointCollector *)&v33);
   if ( v35 )
@@ -612,7 +612,7 @@ void __fastcall hkpBvAgent::getClosestPoints(hkpBvAgent *this, hkpCdBody *bodyA,
   v29 = (__int64)v13[1].vfptr;
   v30 = -1;
   v28 = 0;
-  v27 = &hkpFlagCdBodyPairCollector::`vftable';
+  v27 = &hkpFlagCdBodyPairCollector::`vftable;
   ((void (__fastcall *)(hkpCollisionAgent *, __int64 *, hkpCdBody *, hkpCollisionInput *, void ***))v14->vfptr[1].__first_virtual_table_function__)(
     v14,
     &v29,
@@ -734,7 +734,7 @@ void __fastcall hkpBvAgent::staticGetClosestPoints(hkpCdBody *bodyA, hkpCdBody *
     v7,
     v6,
     &v28,
-    &hkpFlagCdBodyPairCollector::`vftable');
+    &hkpFlagCdBodyPairCollector::`vftable);
   if ( v29 )
   {
     v18 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
@@ -825,7 +825,7 @@ void __fastcall hkpBvAgent::getPenetrations(hkpBvAgent *this, hkpCdBody *bodyA, 
   v29 = (__int64)v13[1].vfptr;
   v30 = -1;
   v28 = 0;
-  v27 = &hkpFlagCdBodyPairCollector::`vftable';
+  v27 = &hkpFlagCdBodyPairCollector::`vftable;
   ((void (__fastcall *)(hkpCollisionAgent *, __int64 *, hkpCdBody *, hkpCollisionInput *, void ***))v14->vfptr[1].__first_virtual_table_function__)(
     v14,
     &v29,
@@ -947,7 +947,7 @@ void __fastcall hkpBvAgent::staticGetPenetrations(hkpCdBody *bodyA, hkpCdBody *b
     v7,
     v6,
     &v28,
-    &hkpFlagCdBodyPairCollector::`vftable');
+    &hkpFlagCdBodyPairCollector::`vftable);
   if ( v29 )
   {
     v18 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);

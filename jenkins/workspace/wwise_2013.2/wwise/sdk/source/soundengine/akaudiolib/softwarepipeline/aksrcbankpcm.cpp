@@ -6,7 +6,7 @@ void __fastcall CAkSrcBankPCM::CAkSrcBankPCM(CAkSrcBankPCM *this, CAkPBI *in_pCt
 
   v2 = this;
   CAkSrcBaseEx::CAkSrcBaseEx((CAkSrcBaseEx *)&this->vfptr, in_pCtx);
-  v2->vfptr = (CAkVPLNodeVtbl *)&CAkSrcBankPCM::`vftable';
+  v2->vfptr = (CAkVPLNodeVtbl *)&CAkSrcBankPCM::`vftable;
 }
 
 // File Line: 55

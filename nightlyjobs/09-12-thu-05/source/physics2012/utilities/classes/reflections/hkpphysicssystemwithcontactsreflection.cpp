@@ -37,9 +37,9 @@ void __fastcall finishLoadedObjecthkpPhysicsSystemWithContacts(void *p, int fini
   {
     v2 = p;
     v3 = (hkStringPtr *)((char *)p + 80);
-    v3[-10].m_stringAndFlag = (const char *)&hkpPhysicsSystem::`vftable';
+    v3[-10].m_stringAndFlag = (const char *)&hkpPhysicsSystem::`vftable;
     hkStringPtr::hkStringPtr(v3, (hkFinishLoadedObjectFlag)finishing);
-    *v2 = &hkpPhysicsSystemWithContacts::`vftable';
+    *v2 = &hkpPhysicsSystemWithContacts::`vftable;
   }
 }
 
@@ -57,7 +57,7 @@ void **__fastcall getVtablehkpPhysicsSystemWithContacts()
   hkStringPtr v1; // [rsp+70h] [rbp-38h]
 
   hkStringPtr::hkStringPtr(&v1, 0);
-  return &hkpPhysicsSystemWithContacts::`vftable';
+  return &hkpPhysicsSystemWithContacts::`vftable;
 }
 
 // File Line: 97

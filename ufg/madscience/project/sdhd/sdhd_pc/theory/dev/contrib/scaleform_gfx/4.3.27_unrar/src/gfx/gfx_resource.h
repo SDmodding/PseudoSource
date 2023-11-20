@@ -2,7 +2,7 @@
 // RVA: 0x8A50A0
 void __fastcall Scaleform::GFx::ResourceKey::KeyInterface::~KeyInterface(Scaleform::GFx::ResourceKey::KeyInterface *this)
 {
-  this->vfptr = (Scaleform::GFx::ResourceKey::KeyInterfaceVtbl *)&Scaleform::GFx::ResourceKey::KeyInterface::`vftable';
+  this->vfptr = (Scaleform::GFx::ResourceKey::KeyInterfaceVtbl *)&Scaleform::GFx::ResourceKey::KeyInterface::`vftable;
 }
 
 // File Line: 277
@@ -22,7 +22,7 @@ void __fastcall Scaleform::GFx::ResourceData::~ResourceData(Scaleform::GFx::Reso
 // RVA: 0x6D2510
 void __fastcall Scaleform::GFx::Resource::~Resource(Scaleform::GFx::Resource *this)
 {
-  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::Resource::`vftable';
+  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::Resource::`vftable;
 }
 
 // File Line: 442
@@ -40,7 +40,7 @@ Scaleform::GFx::ResourceKey *__fastcall Scaleform::GFx::Resource::GetKey(Scalefo
 // RVA: 0x8A7400
 void __fastcall Scaleform::GFx::ResourceReport::~ResourceReport(Scaleform::GFx::ResourceReport *this)
 {
-  this->vfptr = (Scaleform::GFx::ResourceReportVtbl *)&Scaleform::GFx::ResourceReport::`vftable';
+  this->vfptr = (Scaleform::GFx::ResourceReportVtbl *)&Scaleform::GFx::ResourceReport::`vftable;
 }
 
 // File Line: 692

@@ -2,7 +2,7 @@
 // RVA: 0x9C910
 void __fastcall UFG::PhantomBase::~PhantomBase(UFG::PhantomBase *this)
 {
-  this->vfptr = (UFG::PhantomBaseVtbl *)&UFG::PhantomBase::`vftable';
+  this->vfptr = (UFG::PhantomBaseVtbl *)&UFG::PhantomBase::`vftable;
 }
 
 // File Line: 75
@@ -18,8 +18,8 @@ void __fastcall UFG::AabbPhantom::AabbPhantom(UFG::AabbPhantom *this, hkAabb *aa
   v4 = collisionFilterInfo;
   v5 = aabb;
   v6 = this;
-  this->vfptr = (UFG::PhantomBaseVtbl *)&UFG::PhantomBase::`vftable';
-  this->vfptr = (UFG::PhantomBaseVtbl *)&UFG::AabbPhantom::`vftable';
+  this->vfptr = (UFG::PhantomBaseVtbl *)&UFG::PhantomBase::`vftable;
+  this->vfptr = (UFG::PhantomBaseVtbl *)&UFG::AabbPhantom::`vftable;
   this->mAabb.m_min = aabb->m_min;
   this->mAabb.m_max = aabb->m_max;
   v7 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
@@ -48,7 +48,7 @@ void __fastcall UFG::AabbPhantom::~AabbPhantom(UFG::AabbPhantom *this)
   hkArray<hkpPhantom *,hkContainerHeapAllocator> *v11; // rdi
 
   v1 = this;
-  this->vfptr = (UFG::PhantomBaseVtbl *)&UFG::AabbPhantom::`vftable';
+  this->vfptr = (UFG::PhantomBaseVtbl *)&UFG::AabbPhantom::`vftable;
   v2 = this->mAabbPhantom;
   v3 = UFG::BasePhysicsSystem::mInstance;
   v4 = 0i64;
@@ -105,7 +105,7 @@ LABEL_17:
     }
   }
   hkReferencedObject::removeReference((hkReferencedObject *)&v1->mAabbPhantom->vfptr);
-  v1->vfptr = (UFG::PhantomBaseVtbl *)&UFG::PhantomBase::`vftable';
+  v1->vfptr = (UFG::PhantomBaseVtbl *)&UFG::PhantomBase::`vftable;
 }
 
 // File Line: 102
@@ -205,12 +205,12 @@ void __fastcall UFG::ShapePhantom::ShapePhantom(UFG::ShapePhantom *this, hkpShap
   v5 = xform;
   v6 = shape;
   v7 = this;
-  this->vfptr = (UFG::PhantomBaseVtbl *)&UFG::PhantomBase::`vftable';
-  this->vfptr = (UFG::PhantomBaseVtbl *)&UFG::ShapePhantom::`vftable';
+  this->vfptr = (UFG::PhantomBaseVtbl *)&UFG::PhantomBase::`vftable;
+  this->vfptr = (UFG::PhantomBaseVtbl *)&UFG::ShapePhantom::`vftable;
   v8 = &this->mCollector;
-  v8->vfptr = (hkpCdBodyPairCollectorVtbl *)&hkpCdBodyPairCollector::`vftable';
+  v8->vfptr = (hkpCdBodyPairCollectorVtbl *)&hkpCdBodyPairCollector::`vftable;
   v8->m_earlyOut.m_bool = 0;
-  v8->vfptr = (hkpCdBodyPairCollectorVtbl *)&hkpAllCdBodyPairCollector::`vftable';
+  v8->vfptr = (hkpCdBodyPairCollectorVtbl *)&hkpAllCdBodyPairCollector::`vftable;
   v9 = &this->mCollector.m_hits;
   v9->m_data = this->mCollector.m_hits.m_storage;
   v10 = 0i64;
@@ -252,7 +252,7 @@ void __fastcall UFG::ShapePhantom::~ShapePhantom(UFG::ShapePhantom *this)
   int v12; // er8
 
   v1 = this;
-  this->vfptr = (UFG::PhantomBaseVtbl *)&UFG::ShapePhantom::`vftable';
+  this->vfptr = (UFG::PhantomBaseVtbl *)&UFG::ShapePhantom::`vftable;
   v2 = this->mSimpleShapePhantom;
   v3 = UFG::BasePhysicsSystem::mInstance;
   v4 = 0;
@@ -319,7 +319,7 @@ LABEL_17:
   v1->mInternalOverlappingCollidables.m_data = 0i64;
   v1->mInternalOverlappingCollidables.m_capacityAndFlags = 2147483648;
   hkpAllCdBodyPairCollector::~hkpAllCdBodyPairCollector(&v1->mCollector);
-  v1->vfptr = (UFG::PhantomBaseVtbl *)&UFG::PhantomBase::`vftable';
+  v1->vfptr = (UFG::PhantomBaseVtbl *)&UFG::PhantomBase::`vftable;
 }
 
 // File Line: 203
@@ -475,7 +475,7 @@ void __fastcall UFG::SensorPhantom::SensorPhantom(UFG::SensorPhantom *this, hkAa
   v5 = collisionFilterInfo;
   v6 = aabb;
   v7 = this;
-  this->vfptr = (UFG::SensorPhantomVtbl *)&UFG::SensorPhantom::`vftable';
+  this->vfptr = (UFG::SensorPhantomVtbl *)&UFG::SensorPhantom::`vftable;
   this->mType = 0;
   v8 = *((_QWORD *)NtCurrentTeb()->Reserved1[11] + tls_index) + 16i64;
   v9 = ++*(_BYTE *)(v8 + 80);
@@ -532,7 +532,7 @@ void __fastcall UFG::SensorPhantom::SensorPhantom(UFG::SensorPhantom *this, hkpS
   v4 = collisionFilterInfo;
   v5 = shape;
   v6 = this;
-  this->vfptr = (UFG::SensorPhantomVtbl *)&UFG::SensorPhantom::`vftable';
+  this->vfptr = (UFG::SensorPhantomVtbl *)&UFG::SensorPhantom::`vftable;
   this->mType = 1;
   hkTransformf::set4x4ColumnMajor(&xform, &mat->v0.x);
   v7 = *((_QWORD *)NtCurrentTeb()->Reserved1[11] + tls_index) + 16i64;
@@ -576,7 +576,7 @@ void __fastcall UFG::SensorPhantom::~SensorPhantom(UFG::SensorPhantom *this)
 {
   UFG::PhantomBase *v1; // rcx
 
-  this->vfptr = (UFG::SensorPhantomVtbl *)&UFG::SensorPhantom::`vftable';
+  this->vfptr = (UFG::SensorPhantomVtbl *)&UFG::SensorPhantom::`vftable;
   v1 = this->mPhantom;
   if ( v1 )
     v1->vfptr->__vecDelDtor(v1, 1u);
@@ -604,7 +604,7 @@ void __fastcall UFG::SensorPhantomIterator::SensorPhantomIterator(UFG::SensorPha
 
   v3 = this;
   v4 = iteratorType;
-  this->vfptr = (UFG::SensorPhantomIteratorVtbl *)&UFG::SensorPhantomIterator::`vftable';
+  this->vfptr = (UFG::SensorPhantomIteratorVtbl *)&UFG::SensorPhantomIterator::`vftable;
   v5 = ((__int64 (*)(void))sensor->mPhantom->vfptr->GetOverlappingCollidables)();
   v3->mType = v4;
   v3->mIndex = -1;
@@ -643,7 +643,7 @@ void __fastcall UFG::SensorPhantomIterator::SensorPhantomIterator(UFG::SensorPha
 // RVA: 0x9D2C0
 void __fastcall UFG::SensorPhantomIterator::~SensorPhantomIterator(UFG::SensorPhantomIterator *this)
 {
-  this->vfptr = (UFG::SensorPhantomIteratorVtbl *)&UFG::SensorPhantomIterator::`vftable';
+  this->vfptr = (UFG::SensorPhantomIteratorVtbl *)&UFG::SensorPhantomIterator::`vftable;
 }
 
 // File Line: 938

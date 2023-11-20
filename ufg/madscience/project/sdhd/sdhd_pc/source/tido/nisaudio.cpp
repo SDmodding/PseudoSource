@@ -46,9 +46,9 @@ void __fastcall UFG::NISAudio::Play(UFG::NISAudio *this, unsigned int eventId, U
       }
       if ( v4 )
       {
-        v4->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::AudioEventCallbackObject::`vftable';
+        v4->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::AudioEventCallbackObject::`vftable;
         v4->m_next = 0i64;
-        v4->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::NISCallback::`vftable';
+        v4->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::NISCallback::`vftable;
       }
       else
       {

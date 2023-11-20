@@ -17,12 +17,12 @@ void __fastcall UFG::DebugGUIManager::DebugGUIManager(UFG::DebugGUIManager *this
   *(_QWORD *)&v1->mMouseButtons = 0i64;
   *(_QWORD *)&v1->mMenuItemCheckWidth = 0i64;
   v3 = UFG::qStringHash32("GUIMenu", 0xFFFFFFFF);
-  v4 = `UFG::qGetResourceInventory<Render::Font>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Render::Font>'::`2'::result )
+  v4 = `UFG::qGetResourceInventory<Render::Font>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Render::Font>::`2::result )
   {
     v5 = UFG::qResourceWarehouse::Instance();
     v4 = UFG::qResourceWarehouse::GetInventory(v5, 0x69FCCB4Cu);
-    `UFG::qGetResourceInventory<Render::Font>'::`2'::result = v4;
+    `UFG::qGetResourceInventory<Render::Font>::`2::result = v4;
   }
   UFG::qResourceHandle::Init(v2, 0x69FCCB4Cu, v3, v4);
 }

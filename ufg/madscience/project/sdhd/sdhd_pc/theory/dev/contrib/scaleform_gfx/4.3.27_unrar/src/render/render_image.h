@@ -69,12 +69,12 @@ void __fastcall Scaleform::Render::TextureManagerLocks::TextureManagerLocks(Scal
   Scaleform::Render::TextureManagerLocks *v2; // rbx
 
   v2 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,72>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::TextureManagerLocks,72>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::TextureManagerLocks::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,72>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::TextureManagerLocks,72>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::TextureManagerLocks::`vftable;
   this->pManager = pmanager;
   Scaleform::Lock::Lock(&this->ImageLock, 0);
   Scaleform::Mutex::Mutex(&v2->TextureMutex, 1, 0);
@@ -90,7 +90,7 @@ void __fastcall Scaleform::Render::MappedTextureBase::MappedTextureBase(Scalefor
   Scaleform::Render::ImageData *v3; // [rsp+28h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (Scaleform::Render::MappedTextureBaseVtbl *)&Scaleform::Render::MappedTextureBase::`vftable';
+  this->vfptr = (Scaleform::Render::MappedTextureBaseVtbl *)&Scaleform::Render::MappedTextureBase::`vftable;
   this->pTexture = 0i64;
   *(_QWORD *)&this->StartMipLevel = 0i64;
   v3 = &this->Data;
@@ -128,7 +128,7 @@ void __fastcall Scaleform::Render::MappedTextureBase::~MappedTextureBase(Scalefo
   Scaleform::Render::ImageData *v1; // rbx
   volatile signed __int32 *v2; // rdx
 
-  this->vfptr = (Scaleform::Render::MappedTextureBaseVtbl *)&Scaleform::Render::MappedTextureBase::`vftable';
+  this->vfptr = (Scaleform::Render::MappedTextureBaseVtbl *)&Scaleform::Render::MappedTextureBase::`vftable;
   v1 = &this->Data;
   Scaleform::Render::ImageData::freePlanes(&this->Data);
   v2 = &v1->pPalette.pObject->RefCount.Value;
@@ -153,14 +153,14 @@ void __fastcall Scaleform::Render::Texture::Texture(Scaleform::Render::Texture *
   v8 = size;
   v9 = pmanagerLocks;
   v10 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,72>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::Texture,72>::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,72>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::Texture,72>::`vftable;
   this->pPrev = 0i64;
   this->pNext = 0i64;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Texture::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Texture::`vftable;
   if ( pmanagerLocks )
     Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)pmanagerLocks);
   v10->pManagerLocks.pObject = v9;
@@ -185,7 +185,7 @@ void __fastcall Scaleform::Render::Texture::~Texture(Scaleform::Render::Texture 
   Scaleform::Render::RenderBuffer *v2; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Texture::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Texture::`vftable;
   v2 = (Scaleform::Render::RenderBuffer *)this->pManagerLocks.pObject;
   if ( v2 )
     Scaleform::RefCountImpl::Release(v2);
@@ -233,12 +233,12 @@ void __fastcall Scaleform::Render::DepthStencilSurface::DepthStencilSurface(Scal
   v3 = size;
   v4 = pmanagerLocks;
   v5 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,72>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::DepthStencilSurface,72>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::DepthStencilSurface::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,72>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::DepthStencilSurface,72>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::DepthStencilSurface::`vftable;
   if ( pmanagerLocks )
     Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)pmanagerLocks);
   v5->pManagerLocks.pObject = v4;
@@ -264,7 +264,7 @@ Scaleform::Render::TextureManager *__fastcall Scaleform::Render::DepthStencilSur
 // RVA: 0x94B170
 void __fastcall Scaleform::Render::ImageUpdateSync::~ImageUpdateSync(Scaleform::Render::ImageUpdateSync *this)
 {
-  this->vfptr = (Scaleform::Render::ImageUpdateSyncVtbl *)&Scaleform::Render::ImageUpdateSync::`vftable';
+  this->vfptr = (Scaleform::Render::ImageUpdateSyncVtbl *)&Scaleform::Render::ImageUpdateSync::`vftable;
 }
 
 // File Line: 1105
@@ -299,13 +299,13 @@ void __fastcall Scaleform::Render::Image::Image(Scaleform::Render::Image *this, 
   Scaleform::Render::Texture *volatile v3; // rt1
   Scaleform::Render::Texture *volatile v4; // rax
 
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountVImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountVImpl,3>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseV<Scaleform::Render::Image,3>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ImageBase::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Image::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountVImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountVImpl,3>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseV<Scaleform::Render::Image,3>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ImageBase::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Image::`vftable;
   this->pTexture.Value = ptexture;
   v3 = this->pTexture.Value;
   v4 = this->pTexture.Value;
@@ -541,14 +541,14 @@ void __fastcall Scaleform::Render::WrapperImageSource::WrapperImageSource(Scalef
 
   v2 = pdelegate;
   v3 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountVImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountVImpl,3>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseV<Scaleform::Render::Image,3>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ImageBase::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ImageSource::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::WrapperImageSource::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountVImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountVImpl,3>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseV<Scaleform::Render::Image,3>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ImageBase::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ImageSource::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::WrapperImageSource::`vftable;
   if ( pdelegate )
     ((void (__fastcall *)(Scaleform::Render::Image *))pdelegate->vfptr[1].__vecDelDtor)(pdelegate);
   v3->pDelegate.pObject = v2;
@@ -601,19 +601,19 @@ void __fastcall Scaleform::Render::RawImage::RawImage(Scaleform::Render::RawImag
   Scaleform::Render::ImageData *v5; // [rsp+28h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountVImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountVImpl,3>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseV<Scaleform::Render::Image,3>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ImageBase::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Image::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountVImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountVImpl,3>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseV<Scaleform::Render::Image,3>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ImageBase::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Image::`vftable;
   this->pTexture.Value = 0i64;
   v2 = this->pTexture.Value;
   v3 = this->pTexture.Value;
   this->pUpdateSync = 0i64;
   this->pInverseMatrix = 0i64;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::RawImage::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::RawImage::`vftable;
   v5 = &this->Data;
   *(_QWORD *)&v5->Format = 0i64;
   *(_DWORD *)&v5->Flags = 0x10000;
@@ -667,7 +667,7 @@ void __fastcall Scaleform::Render::TextureImage::TextureImage(Scaleform::Render:
   v8 = format;
   v9 = this;
   Scaleform::Render::Image::Image((Scaleform::Render::Image *)&this->vfptr, ptexture, psync);
-  v9->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::TextureImage::`vftable';
+  v9->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::TextureImage::`vftable;
   v9->Format = v8;
   v10 = v7->Height;
   v9->Size.Width = v7->Width;
@@ -728,19 +728,19 @@ void __fastcall Scaleform::Render::SubImage::SubImage(Scaleform::Render::SubImag
   v3 = rect;
   v4 = pimage;
   v5 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountVImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountVImpl,3>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseV<Scaleform::Render::Image,3>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ImageBase::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Image::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountVImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountVImpl,3>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseV<Scaleform::Render::Image,3>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ImageBase::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Image::`vftable;
   this->pTexture.Value = 0i64;
   v6 = this->pTexture.Value;
   v7 = this->pTexture.Value;
   this->pUpdateSync = 0i64;
   this->pInverseMatrix = 0i64;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::SubImage::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::SubImage::`vftable;
   if ( pimage )
     ((void (__fastcall *)(Scaleform::Render::Image *))pimage->vfptr[1].__vecDelDtor)(pimage);
   v5->pImage.pObject = v4;
@@ -791,7 +791,7 @@ Scaleform::Render::Texture *__fastcall Scaleform::Render::ImageDelegate::GetText
 // RVA: 0xA0E2E0
 void __fastcall Scaleform::Render::TextureFormat::~TextureFormat(Scaleform::Render::TextureFormat *this)
 {
-  this->vfptr = (Scaleform::Render::TextureFormatVtbl *)&Scaleform::Render::TextureFormat::`vftable';
+  this->vfptr = (Scaleform::Render::TextureFormatVtbl *)&Scaleform::Render::TextureFormat::`vftable;
 }
 
 // File Line: 1811

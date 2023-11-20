@@ -3,7 +3,7 @@
 void __fastcall hkpVehicleDefaultAnalogDriverInput::hkpVehicleDefaultAnalogDriverInput(hkpVehicleDefaultAnalogDriverInput *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpVehicleDefaultAnalogDriverInput::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpVehicleDefaultAnalogDriverInput::`vftable;
   *(_QWORD *)&this->m_slopeChangePointX = 0i64;
   this->m_deadZone = 0.0;
   this->m_autoReverse.m_bool = 0;
@@ -25,7 +25,7 @@ hkpVehicleDriverInputStatus *__fastcall hkpVehicleDriverInputAnalogStatus::clone
   if ( result )
   {
     *(_DWORD *)&result->m_memSizeAndFlags = 0x1FFFF;
-    result->vfptr = (hkBaseObjectVtbl *)&hkpVehicleDriverInputAnalogStatus::`vftable';
+    result->vfptr = (hkBaseObjectVtbl *)&hkpVehicleDriverInputAnalogStatus::`vftable;
   }
   *(float *)&result[1].vfptr = v1->m_positionX;
   HIDWORD(result[1].vfptr) = LODWORD(v1->m_positionY);

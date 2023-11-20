@@ -130,7 +130,7 @@ void __fastcall UFG::TSUI_MissionComplete::MthdC_add_racers(SSInvokedMethod *pSc
   if ( racerNames.p )
   {
     v9 = &racerNames.p[-1].mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       racerNames.p,
       0x28ui64,
       racerNames.p[-1].mStringHash32,

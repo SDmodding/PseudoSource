@@ -10,7 +10,7 @@ void __fastcall hkaReferencePoseAnimation::hkaReferencePoseAnimation(hkaReferenc
   hkReferencedObject *v9; // rcx
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaAnimation::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaAnimation::`vftable;
   *(_QWORD *)&this->m_type.m_storage = 0i64;
   this->m_extractedMotion.m_pntr = 0i64;
   this->m_annotationTracks.m_data = 0i64;
@@ -25,7 +25,7 @@ void __fastcall hkaReferencePoseAnimation::hkaReferencePoseAnimation(hkaReferenc
   if ( v5 )
     hkReferencedObject::removeReference((hkReferencedObject *)&v5->vfptr);
   v4->m_extractedMotion.m_pntr = 0i64;
-  v4->vfptr = (hkBaseObjectVtbl *)&hkaReferencePoseAnimation::`vftable';
+  v4->vfptr = (hkBaseObjectVtbl *)&hkaReferencePoseAnimation::`vftable;
   v4->m_skeleton.m_pntr = 0i64;
   v4->m_type.m_storage = 6;
   if ( v8 )

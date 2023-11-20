@@ -8,6 +8,6 @@ void __fastcall Scaleform::GFx::AS3::AvmStaticText::AvmStaticText(Scaleform::GFx
   Scaleform::GFx::AS3::AvmDisplayObj::AvmDisplayObj(
     (Scaleform::GFx::AS3::AvmDisplayObj *)&this->vfptr,
     (Scaleform::GFx::DisplayObject *)&pch->vfptr);
-  v2->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmStaticText::`vftable';
+  v2->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmStaticText::`vftable;
 }
 

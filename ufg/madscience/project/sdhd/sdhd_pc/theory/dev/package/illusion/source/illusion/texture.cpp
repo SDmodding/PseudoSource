@@ -69,7 +69,7 @@ __int64 Illusion::_dynamic_initializer_for__gTextureInventory__()
     0xCDBFA090,
     0x3218EEB7u,
     0x100u);
-  Illusion::gTextureInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Illusion::iTextureInventory::`vftable';
+  Illusion::gTextureInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Illusion::iTextureInventory::`vftable;
   return atexit(Illusion::_dynamic_atexit_destructor_for__gTextureInventory__);
 }
 

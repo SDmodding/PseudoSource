@@ -34,7 +34,7 @@ void __fastcall UFG::PropInteractComponent::PropInteractComponent(UFG::PropInter
   v5 = (UFG::qNode<UFG::PropInteractComponent,UFG::PropInteractComponent> *)&v4->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::PropInteractComponent::`vftable';
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::PropInteractComponent::`vftable;
   UFG::RebindingComponentHandle<UFG::ActionTreeComponent,0>::RebindingComponentHandle<UFG::ActionTreeComponent,0>(&v4->mActionTreeComponent);
   v6 = &v4->mInteractingSimObject;
   v6->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v6->mPrev;
@@ -141,7 +141,7 @@ void __fastcall UFG::PropInteractComponent::~PropInteractComponent(UFG::PropInte
   UFG::qNode<UFG::PropInteractComponent,UFG::PropInteractComponent> *v11; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::PropInteractComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::PropInteractComponent::`vftable;
   if ( this == UFG::PropInteractComponent::s_PropInteractComponentpCurrentIterator )
     UFG::PropInteractComponent::s_PropInteractComponentpCurrentIterator = (UFG::PropInteractComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::PropInteractComponent,UFG::PropInteractComponent> *)&this->mPrev;

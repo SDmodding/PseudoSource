@@ -2,7 +2,7 @@
 // RVA: 0x94A930
 void __fastcall Scaleform::Render::GlyphEvictNotifier::~GlyphEvictNotifier(Scaleform::Render::GlyphEvictNotifier *this)
 {
-  this->vfptr = (Scaleform::Render::GlyphEvictNotifierVtbl *)&Scaleform::Render::GlyphEvictNotifier::`vftable';
+  this->vfptr = (Scaleform::Render::GlyphEvictNotifierVtbl *)&Scaleform::Render::GlyphEvictNotifier::`vftable;
 }
 
 // File Line: 216

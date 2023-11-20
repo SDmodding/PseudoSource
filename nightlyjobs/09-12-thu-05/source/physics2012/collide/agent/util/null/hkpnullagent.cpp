@@ -12,7 +12,7 @@ void __fastcall hkpNullAgent::hkpNullAgent(hkpNullAgent *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_contactMgr = 0i64;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpNullAgent::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpNullAgent::`vftable;
 }
 
 // File Line: 25

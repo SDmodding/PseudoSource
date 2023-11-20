@@ -12,7 +12,7 @@ CAkSrcFileBase *__fastcall CreateVorbisFilePlugin(void *in_pCtx)
   if ( result )
   {
     CAkSrcFileBase::CAkSrcFileBase(result, v1);
-    v3->vfptr = (CAkVPLNodeVtbl *)&CAkSrcFileVorbis::`vftable';
+    v3->vfptr = (CAkVPLNodeVtbl *)&CAkSrcFileVorbis::`vftable;
     v3[26].m_pInput = 0i64;
     v3[27].vfptr = 0i64;
     v3[27].m_pInput = 0i64;
@@ -34,7 +34,7 @@ void __fastcall CAkSrcFileVorbis::~CAkSrcFileVorbis(CAkSrcFileVorbis *this)
 
   v1 = this->m_VorbisState.TremorInfo.pucData;
   v2 = this;
-  this->vfptr = (CAkVPLNodeVtbl *)&CAkSrcFileVorbis::`vftable';
+  this->vfptr = (CAkVPLNodeVtbl *)&CAkSrcFileVorbis::`vftable;
   if ( v1 )
   {
     v3 = this->m_VorbisState.TremorInfo.uChannelMask;

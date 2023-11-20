@@ -81,7 +81,7 @@ void __fastcall hkMemoryMeshBody::hkMemoryMeshBody(hkMemoryMeshBody *this, hkMes
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v5 = 0i64;
   v6 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkMemoryMeshBody::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkMemoryMeshBody::`vftable;
   this->m_transformSet.m_pntr = 0i64;
   this->m_shape.m_pntr = 0i64;
   this->m_vertexBuffers.m_data = 0i64;
@@ -407,7 +407,7 @@ void __fastcall hkMemoryMeshBody::hkMemoryMeshBody(hkMemoryMeshBody *this, hkFin
   hkStringPtr *v2; // rcx
 
   v2 = &this->m_name;
-  v2[-14].m_stringAndFlag = (const char *)&hkMemoryMeshBody::`vftable';
+  v2[-14].m_stringAndFlag = (const char *)&hkMemoryMeshBody::`vftable;
   hkStringPtr::hkStringPtr(v2, flag);
 }
 
@@ -422,7 +422,7 @@ void __fastcall hkMemoryMeshBody::~hkMemoryMeshBody(hkMemoryMeshBody *this)
   hkReferencedObject *v5; // rcx
   hkReferencedObject *v6; // rcx
 
-  this->vfptr = (hkBaseObjectVtbl *)&hkMemoryMeshBody::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkMemoryMeshBody::`vftable;
   v1 = this;
   v2 = 0;
   if ( this->m_vertexBuffers.m_size > 0 )
@@ -454,6 +454,6 @@ void __fastcall hkMemoryMeshBody::~hkMemoryMeshBody(hkMemoryMeshBody *this)
   if ( v6 )
     hkReferencedObject::removeReference(v6);
   v1->m_transformSet.m_pntr = 0i64;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 

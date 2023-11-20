@@ -361,15 +361,15 @@ void __fastcall Scaleform::GFx::XML::ObjectManager::ObjectManager(Scaleform::GFx
   Scaleform::GFx::XML::ObjectManager *v2; // rbx
 
   v2 = this;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,326>::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseNTS<Scaleform::GFx::XML::ObjectManager,326>::`vftable';
-  this->vfptr = (Scaleform::GFx::ExternalLibPtrVtbl *)&Scaleform::GFx::ExternalLibPtr::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,326>::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseNTS<Scaleform::GFx::XML::ObjectManager,326>::`vftable;
+  this->vfptr = (Scaleform::GFx::ExternalLibPtrVtbl *)&Scaleform::GFx::ExternalLibPtr::`vftable;
   this->pOwner = powner;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::XML::ObjectManager::`vftable'{for `Scaleform::RefCountBaseNTS<Scaleform::GFx::XML::ObjectManager,326>'};
-  this->vfptr = (Scaleform::GFx::ExternalLibPtrVtbl *)&Scaleform::GFx::XML::ObjectManager::`vftable'{for `Scaleform::GFx::ExternalLibPtr'};
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::XML::ObjectManager::`vftable{for `Scaleform::RefCountBaseNTS<Scaleform::GFx::XML::ObjectManager,326>};
+  this->vfptr = (Scaleform::GFx::ExternalLibPtrVtbl *)&Scaleform::GFx::XML::ObjectManager::`vftable{for `Scaleform::GFx::ExternalLibPtr};
   Scaleform::GFx::XML::DOMStringManager::DOMStringManager(&this->StringPool);
   v2->pHeap = Scaleform::Memory::pGlobalHeap->vfptr->GetAllocHeap(Scaleform::Memory::pGlobalHeap, v2);
 }
@@ -592,12 +592,12 @@ Scaleform::GFx::XML::RootNode *__fastcall Scaleform::GFx::XML::ObjectManager::Cr
                                               24i64);
   if ( !result )
     return 0i64;
-  result->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable';
+  result->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable;
   result->RefCount = 1;
-  result->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable';
-  result->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,326>::`vftable';
-  result->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseNTS<Scaleform::GFx::XML::RootNode,326>::`vftable';
-  result->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::XML::RootNode::`vftable';
+  result->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable;
+  result->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,326>::`vftable;
+  result->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseNTS<Scaleform::GFx::XML::RootNode,326>::`vftable;
+  result->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::XML::RootNode::`vftable;
   if ( v2 )
     ++v2->RefCount;
   result->pDOMTree.pObject = v2;

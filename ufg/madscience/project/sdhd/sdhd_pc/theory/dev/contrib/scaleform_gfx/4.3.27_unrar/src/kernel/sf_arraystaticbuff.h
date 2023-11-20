@@ -115,7 +115,7 @@ void __fastcall Scaleform::ArrayStaticBuff<Scaleform::GFx::AS3::SPtr<Scaleform::
 
   v1 = this;
   Scaleform::ArrayStaticBuff<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,32,2>::Clear(this);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->Static,
     8ui64,
     32,

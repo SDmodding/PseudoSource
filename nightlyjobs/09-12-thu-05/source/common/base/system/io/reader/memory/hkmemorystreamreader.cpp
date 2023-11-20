@@ -12,7 +12,7 @@ void __fastcall hkMemoryStreamReader::hkMemoryStreamReader(hkMemoryStreamReader 
   this->m_bufCurrent = 0;
   this->m_bufSize = memSize;
   this->m_memType = mt;
-  this->vfptr = (hkBaseObjectVtbl *)&hkMemoryStreamReader::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkMemoryStreamReader::`vftable;
   this->m_hitEof.m_bool = 0;
   v4 = memSize;
   v5 = mem;
@@ -43,17 +43,17 @@ void __fastcall hkMemoryStreamReader::~hkMemoryStreamReader(hkMemoryStreamReader
   v1 = this->m_memType < 1u;
   v2 = this->m_memType == 1;
   v3 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkMemoryStreamReader::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkMemoryStreamReader::`vftable;
   if ( v1 || v2 )
   {
     v4 = this->m_buf;
     v5 = (hkMemoryAllocator **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
     hkMemoryRouter::easyFree(v5[11], v4);
-    v3->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+    v3->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
   }
   else
   {
-    this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+    this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
   }
 }
 

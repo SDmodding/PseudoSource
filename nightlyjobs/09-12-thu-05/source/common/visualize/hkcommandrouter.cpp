@@ -6,7 +6,7 @@ void __fastcall hkReplayStreamReader::~hkReplayStreamReader(hkReplayStreamReader
   int v2; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkReplayStreamReader::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkReplayStreamReader::`vftable;
   hkReferencedObject::removeReference((hkReferencedObject *)&this->m_stream->vfptr);
   v2 = v1->m_buf.m_capacityAndFlags;
   v1->m_buf.m_size = 0;
@@ -17,7 +17,7 @@ void __fastcall hkReplayStreamReader::~hkReplayStreamReader(hkReplayStreamReader
       v2 & 0x3FFFFFFF);
   v1->m_buf.m_data = 0i64;
   v1->m_buf.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 36
@@ -210,7 +210,7 @@ hkBool *__fastcall hkCommandRouter::consumeCommands(hkCommandRouter *this, hkBoo
       {
         *(_DWORD *)(v11 + 8) = 0x1FFFF;
         *(_QWORD *)(v11 + 16) = v9;
-        *(_QWORD *)v11 = &hkReplayStreamReader::`vftable';
+        *(_QWORD *)v11 = &hkReplayStreamReader::`vftable;
         *(_DWORD *)(v11 + 24) = 0;
         *(_QWORD *)(v11 + 32) = 0i64;
         *(_DWORD *)(v11 + 40) = 0;

@@ -6,7 +6,7 @@ void __fastcall hkPackfileWriter::hkPackfileWriter(hkPackfileWriter *this, hkPac
   hkPackfileWriter *v3; // rsi
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkPackfileWriter::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkPackfileWriter::`vftable;
   this->m_pendingWrites.m_data = 0i64;
   this->m_pendingWrites.m_size = 0;
   this->m_pendingWrites.m_capacityAndFlags = 2147483648;
@@ -85,7 +85,7 @@ void __fastcall hkPackfileWriter::~hkPackfileWriter(hkPackfileWriter *this)
   int v9; // eax
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkPackfileWriter::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkPackfileWriter::`vftable;
   v2 = 0;
   if ( this->m_knownSections.m_size > 0 )
   {
@@ -163,7 +163,7 @@ void __fastcall hkPackfileWriter::~hkPackfileWriter(hkPackfileWriter *this)
       40 * (v9 & 0x3FFFFFFF));
   v1->m_pendingWrites.m_data = 0i64;
   v1->m_pendingWrites.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 52
@@ -427,7 +427,7 @@ void __fastcall chasePointers(const void *pointer, hkClass *klass, hkRelocationI
   hkPlatformObjectWriter::hkPlatformObjectWriter(&v11, &layout, 0i64, v7);
   hkOffsetOnlyStreamWriter::hkOffsetOnlyStreamWriter(&v10);
   hkPlatformObjectWriter::writeObject(&v11, &result, (hkStreamWriter *)&v10.vfptr, v4, v6, v5);
-  v10.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v10.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
   hkPlatformObjectWriter::~hkPlatformObjectWriter(&v11);
 }
 

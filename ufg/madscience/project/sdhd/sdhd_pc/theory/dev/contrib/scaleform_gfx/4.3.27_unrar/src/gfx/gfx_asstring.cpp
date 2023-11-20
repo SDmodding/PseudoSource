@@ -590,12 +590,12 @@ void __fastcall Scaleform::GFx::ASStringManager::ASStringManager(Scaleform::GFx:
   Scaleform::GFx::ASStringNode *key; // [rsp+58h] [rbp+10h]
 
   v2 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,324>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::ASStringManager,324>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ASStringManager::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,324>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::ASStringManager,324>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ASStringManager::`vftable;
   v3 = (Scaleform::GFx::ASStringNode *)&this->StringSet;
   key = v3;
   v3->pData = 0i64;
@@ -650,7 +650,7 @@ void __fastcall Scaleform::GFx::ASStringManager::~ASStringManager(Scaleform::GFx
   Scaleform::StringBuffer v17; // [rsp+28h] [rbp-60h]
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ASStringManager::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ASStringManager::`vftable;
   Scaleform::StringBuffer::StringBuffer(&v17, Scaleform::Memory::pGlobalHeap);
   v2 = 0;
   while ( v1->pStringNodePages )
@@ -665,12 +665,12 @@ void __fastcall Scaleform::GFx::ASStringManager::~ASStringManager(Scaleform::GFx
       {
         if ( v2 < 0x10 )
         {
-          v6 = "'";
+          v6 = "";
           if ( v2 )
-            v6 = ", '";
+            v6 = ", ";
           Scaleform::StringBuffer::AppendString(&v17, v6, -1i64);
           Scaleform::StringBuffer::AppendString(&v17, v4->Nodes[0].pData, -1i64);
-          Scaleform::StringBuffer::AppendString(&v17, "'", -1i64);
+          Scaleform::StringBuffer::AppendString(&v17, "", -1i64);
         }
         ++v2;
         if ( !(v4->Nodes[0].HashFlags & 0x40000000) )
@@ -707,7 +707,7 @@ void __fastcall Scaleform::GFx::ASStringManager::~ASStringManager(Scaleform::GFx
     {
       Scaleform::GFx::LogBase<Scaleform::GFx::LogState>::LogScriptError(
         v10 + 3,
-        "ActionScript Memory leaks in movie '%s', including %d string nodes",
+        "ActionScript Memory leaks in movie %s, including %d string nodes",
         (v1->FileName.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12,
         v2,
         -2i64);

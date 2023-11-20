@@ -11,9 +11,9 @@ void __fastcall hkpStaticCompoundShape::hkpStaticCompoundShape(hkpStaticCompound
   this->m_numBitsForChildShapeKey = -1;
   this->m_referencePolicy = ref;
   this->m_childShapeKeyMask = 0;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpStaticCompoundShape::`vftable'{for `hkpBvTreeShape'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkpStaticCompoundShape::`vftable{for `hkpBvTreeShape};
   v2 = (__m128 *)this;
-  this->vfptr = (hkpShapeContainerVtbl *)&hkpStaticCompoundShape::`vftable'{for `hkpShapeContainer'};
+  this->vfptr = (hkpShapeContainerVtbl *)&hkpStaticCompoundShape::`vftable{for `hkpShapeContainer};
   this->m_instances.m_data = 0i64;
   this->m_instances.m_size = 0;
   this->m_instances.m_capacityAndFlags = 2147483648;
@@ -42,8 +42,8 @@ void __fastcall hkpStaticCompoundShape::hkpStaticCompoundShape(hkpStaticCompound
   flaga = flag.m_finishing;
   v2 = this;
   hkpBvTreeShape::hkpBvTreeShape((hkpBvTreeShape *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpStaticCompoundShape::`vftable'{for `hkpBvTreeShape'};
-  v2->vfptr = (hkpShapeContainerVtbl *)&hkpStaticCompoundShape::`vftable'{for `hkpShapeContainer'};
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpStaticCompoundShape::`vftable{for `hkpBvTreeShape};
+  v2->vfptr = (hkpShapeContainerVtbl *)&hkpStaticCompoundShape::`vftable{for `hkpShapeContainer};
   hkpShapeKeyTable::hkpShapeKeyTable(&v2->m_disabledLargeShapeKeyTable, (hkFinishLoadedObjectFlag)flaga);
   if ( flaga )
   {
@@ -70,9 +70,9 @@ void __fastcall hkpStaticCompoundShape::~hkpStaticCompoundShape(hkpStaticCompoun
   int v6; // er8
   int v7; // eax
 
-  this->vfptr = (hkBaseObjectVtbl *)&hkpStaticCompoundShape::`vftable'{for `hkpBvTreeShape'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkpStaticCompoundShape::`vftable{for `hkpBvTreeShape};
   v1 = this;
-  this->vfptr = (hkpShapeContainerVtbl *)&hkpStaticCompoundShape::`vftable'{for `hkpShapeContainer'};
+  this->vfptr = (hkpShapeContainerVtbl *)&hkpStaticCompoundShape::`vftable{for `hkpShapeContainer};
   v2 = *(_DWORD *)&this->m_tree[12];
   *(_DWORD *)&this->m_tree[8] = 0;
   if ( v2 >= 0 )
@@ -119,8 +119,8 @@ void __fastcall hkpStaticCompoundShape::~hkpStaticCompoundShape(hkpStaticCompoun
       80 * (v7 & 0x3FFFFFFF));
   v1->m_instances.m_data = 0i64;
   v1->m_instances.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkpShapeContainerVtbl *)&hkpShapeContainer::`vftable';
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkpShapeContainerVtbl *)&hkpShapeContainer::`vftable;
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 82

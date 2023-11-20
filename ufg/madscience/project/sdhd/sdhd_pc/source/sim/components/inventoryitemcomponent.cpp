@@ -32,7 +32,7 @@ void __fastcall UFG::InventoryItemComponent::InventoryItemComponent(UFG::Invento
   v7 = (UFG::qNode<UFG::InventoryItemComponent,UFG::InventoryItemComponent> *)&v6->mPrev;
   v7->mPrev = v7;
   v7->mNext = v7;
-  v6->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::InventoryItemComponent::`vftable';
+  v6->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::InventoryItemComponent::`vftable;
   v8 = &v6->m_pOwnerInventoryComponent;
   v8->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v8->mPrev;
   v8->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v8->mPrev;
@@ -80,7 +80,7 @@ void __fastcall UFG::InventoryItemComponent::~InventoryItemComponent(UFG::Invent
   UFG::qNode<UFG::InventoryItemComponent,UFG::InventoryItemComponent> *v11; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::InventoryItemComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::InventoryItemComponent::`vftable;
   if ( this == UFG::InventoryItemComponent::s_InventoryItemComponentpCurrentIterator )
     UFG::InventoryItemComponent::s_InventoryItemComponentpCurrentIterator = (UFG::InventoryItemComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::InventoryItemComponent,UFG::InventoryItemComponent> *)&this->mPrev;

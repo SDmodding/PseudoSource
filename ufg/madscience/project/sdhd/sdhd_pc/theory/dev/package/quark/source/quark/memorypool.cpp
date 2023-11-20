@@ -137,7 +137,7 @@ void __fastcall UFG::qFixedAllocator::Close(UFG::qFixedAllocator *this)
 // RVA: 0x17ACA0
 void __fastcall UFG::qFixedAllocator::ReportFull(UFG::qFixedAllocator *this)
 {
-  UFG::qPrintf("* Fixed allocator pool '%s' out of memory.\n", this->mName);
+  UFG::qPrintf("* Fixed allocator pool %s out of memory.\n", this->mName);
 }
 
 // File Line: 259
@@ -610,7 +610,7 @@ LABEL_16:
       if ( v3 == v5 )
       {
         UFG::qPrintf(
-          "Attempting to free something that isn't in any memory pool (ptr: 0x%8X, %s: 0x%8X - 0x%8X)",
+          "Attempting to free something that isnt in any memory pool (ptr: 0x%8X, %s: 0x%8X - 0x%8X)",
           v4,
           v3->mData->mAllocator.mName,
           v3->mStart,
@@ -819,7 +819,7 @@ void __fastcall UFG::qMemoryPool2::DoneWithLinearAllocations(UFG::qMemoryPool2 *
     v2 = (unsigned int)this->mLostBytes;
     if ( (_DWORD)v2 )
       UFG::qPrintf(
-        "qMemoryPool2::DoneWithLinearAllocations(): WARNING: lost %d bytes to Free() in the linear allocation region (pool = '%s')\n",
+        "qMemoryPool2::DoneWithLinearAllocations(): WARNING: lost %d bytes to Free() in the linear allocation region (pool = %s)\n",
         v2,
         this->mName);
     v3 = v1->mLinearAllocator;
@@ -921,7 +921,7 @@ void __fastcall UFG::qMemoryPool2::Free(UFG::qMemoryPool2 *this, void *p, unsign
       v8 = v6 >> 2;
       if ( (signed int)(v6 >> 2) >= 16 )
       {
-        UFG::qPrintf("qMemoryPool2::Free(): WARNING: couldn't free %d bytes (pool = '%s')\n", v6, this->mName);
+        UFG::qPrintf("qMemoryPool2::Free(): WARNING: couldnt free %d bytes (pool = %s)\n", v6, this->mName);
       }
       else
       {

@@ -10,7 +10,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::PartCustomizer_UFG
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::PartCustomizer,UFG::DUIWindow>::sInventory.vfptr,
     "UFG::PartCustomizer",
     v0);
-  UFG::qReflectObjectType<UFG::PartCustomizer,UFG::DUIWindow>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::PartCustomizer>::`vftable';
+  UFG::qReflectObjectType<UFG::PartCustomizer,UFG::DUIWindow>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::PartCustomizer>::`vftable;
   UFG::qReflectInventory<UFG::PartCustomizer>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::PartCustomizer,UFG::DUIWindow>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -36,12 +36,12 @@ void __fastcall UFG::PartCustomizer::PartCustomizer(UFG::PartCustomizer *this)
 
   v1 = this;
   UFG::DUIWindow::DUIWindow((UFG::DUIWindow *)&this->vfptr);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::PartCustomizer,UFG::DUIWindow>::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::PartCustomizer,UFG::DUIWindow>::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::PartCustomizer,UFG::DUIWindow>::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::PartCustomizer,UFG::DUIWindow>::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v1->mBaseNode.mUID = -1i64;
   v1->mTypeUID = UFG::qStringHash64("UFG::PartCustomizer", 0xFFFFFFFFFFFFFFFFui64);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::PartCustomizer::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::PartCustomizer::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::PartCustomizer::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::PartCustomizer::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v2 = UFG::qStringHash64("UFG::PartDefinition", 0xFFFFFFFFFFFFFFFFui64);
   UFG::EditNotification::EditNotification(
     &v1->mNotification,
@@ -78,13 +78,13 @@ void __fastcall UFG::PartCustomizer::~PartCustomizer(UFG::PartCustomizer *this)
   UFG::qNode<UFG::PartCustomizer::PartSelectionHelper,UFG::PartCustomizer::PartSelectionHelper> *v3; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::PartCustomizer::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  this->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::PartCustomizer::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::PartCustomizer::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  this->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::PartCustomizer::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   UFG::PartCustomizer::sCustomizeComplete(this->mSimObject, this->mInstance);
   UFG::PartCustomizer::sSetCameraOperation(v1->mSimObject, 0i64);
   UFG::PartCustomizer::sInstance = 0i64;
   UFG::PartLoader::Unload(&v1->mPartLoader);
-  `eh vector destructor iterator'(v1->mPartLoader.mTextureSets, 4ui64, 32, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(v1->mPartLoader.mTextureSets, 4ui64, 32, (void (__fastcall *)(void *))_);
   UFG::qList<UFG::PartCustomizer::PartSelectionHelper,UFG::PartCustomizer::PartSelectionHelper,1,0>::DeleteNodes(&v1->mSelectedParts);
   v2 = v1->mSelectedParts.mNode.mPrev;
   v3 = v1->mSelectedParts.mNode.mNext;
@@ -1736,7 +1736,7 @@ void __fastcall UFG::PartCustomizer::ApplyCustomization(UFG::PartCustomizer *thi
           if ( v16 )
           {
             v17 = (char *)&v16[-1].mLayers.mData.mNumItems;
-            `eh vector destructor iterator'(
+            `eh vector destructor iterator(
               v16,
               0x68ui64,
               v16[-1].mLayers.mData.mNumItems,

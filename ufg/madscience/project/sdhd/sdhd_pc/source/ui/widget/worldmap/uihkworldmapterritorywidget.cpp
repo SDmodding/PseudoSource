@@ -10,7 +10,7 @@ void __fastcall UFG::UIHKWorldMapTerritoryWidget::UIHKWorldMapTerritoryWidget(UF
   *(_WORD *)&this->mChanged = 257;
   *(_QWORD *)&this->mPlayerPos.x = 0i64;
   this->mPlayerPos.z = 0.0;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     this->mData,
     0x30ui64,
     20,
@@ -222,7 +222,7 @@ void __fastcall UFG::UIHKWorldMapTerritoryWidget::Flash_SetTerritoryOwner(UFG::U
     {
       if ( owner )
       {
-        `eh vector constructor iterator'(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+        `eh vector constructor iterator(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
         if ( ((unsigned int)pargs.Type >> 6) & 1 )
         {
           (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
@@ -241,7 +241,7 @@ void __fastcall UFG::UIHKWorldMapTerritoryWidget::Flash_SetTerritoryOwner(UFG::U
         v10 = 6;
         v11 = v4;
         Scaleform::GFx::Movie::Invoke(v6, "SetTerritoryOwner", 0i64, &pargs, 2u);
-        `eh vector destructor iterator'(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+        `eh vector destructor iterator(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
       }
     }
   }

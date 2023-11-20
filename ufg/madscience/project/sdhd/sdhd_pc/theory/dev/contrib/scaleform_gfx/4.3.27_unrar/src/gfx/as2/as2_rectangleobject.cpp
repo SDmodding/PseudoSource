@@ -301,8 +301,8 @@ void __fastcall Scaleform::GFx::AS2::RectangleObject::RectangleObject(Scaleform:
   v2 = penv;
   v3 = this;
   Scaleform::GFx::AS2::Object::Object((Scaleform::GFx::AS2::Object *)&this->vfptr, penv);
-  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::RectangleObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::RectangleObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::RectangleObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::RectangleObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   v4 = Scaleform::GFx::AS2::GlobalContext::GetPrototype(v2->StringContext.pContext, ASBuiltin_Rectangle);
   Scaleform::GFx::AS2::Object::Set__proto__((Scaleform::GFx::AS2::Object *)&v3->vfptr, &v2->StringContext, v4);
   Scaleform::GFx::AS2::RectangleObject::SetProperties(v3, &v2->StringContext, Rectangle_DefaultParams);
@@ -766,7 +766,7 @@ void __fastcall Scaleform::GFx::AS2::RectangleObject::GetProperties(Scaleform::G
   v4 = penv;
   v5 = this;
   v6 = &penv->StringContext;
-  `eh vector constructor iterator'(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::Value);
   v7 = (signed __int64)&v5->vfptr;
   v8 = Scaleform::GFx::AS2::ASStringContext::CreateConstString(v6, &result, "x");
   (*(void (__fastcall **)(signed __int64, Scaleform::GFx::AS2::ASStringContext *, Scaleform::GFx::ASString *, char *, void (__fastcall *)(Scaleform::GFx::AS2::Value *)))(*(_QWORD *)v7 + 88i64))(
@@ -821,7 +821,7 @@ void __fastcall Scaleform::GFx::AS2::RectangleObject::GetProperties(Scaleform::G
   v3->y1 = v19;
   v3->x2 = v18 + v20;
   v3->y2 = v19 + v17;
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::~Value);
 }
 
 // File Line: 333
@@ -1035,9 +1035,9 @@ void __fastcall Scaleform::GFx::AS2::RectangleProto::RectangleProto(Scaleform::G
     psc,
     pprototype,
     constructor);
-  v5->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::RectangleProto::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  v5->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::RectangleProto::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
-  v5->vfptr = (Scaleform::GFx::AS2::GASPrototypeBaseVtbl *)&Scaleform::GFx::AS2::RectangleProto::`vftable';
+  v5->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::RectangleProto::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  v5->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::RectangleProto::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+  v5->vfptr = (Scaleform::GFx::AS2::GASPrototypeBaseVtbl *)&Scaleform::GFx::AS2::RectangleProto::`vftable;
   flags.Flags = 6;
   Scaleform::GFx::AS2::GASPrototypeBase::InitFunctionMembers(
     (Scaleform::GFx::AS2::GASPrototypeBase *)&v5->vfptr,
@@ -1163,11 +1163,11 @@ void __fastcall Scaleform::GFx::AS2::RectangleProto::Clone(Scaleform::GFx::AS2::
       Scaleform::GFx::AS2::RectangleObject::RectangleObject(v7, v1->Env);
       v5 = v8;
     }
-    `eh vector constructor iterator'(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::Value);
     Scaleform::GFx::AS2::RectangleObject::GetProperties(v6, &v1->Env->StringContext, (Scaleform::GFx::AS2::Value *)&ptr);
     Scaleform::GFx::AS2::RectangleObject::SetProperties(v5, &v1->Env->StringContext, (Scaleform::GFx::AS2::Value *)&ptr);
     Scaleform::GFx::AS2::Value::SetAsObject(v1->Result, (Scaleform::GFx::AS2::Object *)&v5->vfptr);
-    `eh vector destructor iterator'(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::~Value);
     if ( v5 )
     {
       v9 = v5->RefCount;
@@ -1182,7 +1182,7 @@ void __fastcall Scaleform::GFx::AS2::RectangleProto::Clone(Scaleform::GFx::AS2::
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "Rectangle");
   }
 }
@@ -1274,7 +1274,7 @@ void __fastcall Scaleform::GFx::AS2::RectangleProto::Contains(Scaleform::GFx::AS
     {
       Scaleform::GFx::AS2::Environment::LogScriptError(
         v1->Env,
-        "Error: Null or invalid 'this' is used for a method of %s class.\n",
+        "Error: Null or invalid this is used for a method of %s class.\n",
         "Rectangle");
     }
     if ( v17.T.Type >= 5u )
@@ -1330,7 +1330,7 @@ void __fastcall Scaleform::GFx::AS2::RectangleProto::ContainsPoint(Scaleform::GF
         r.y1 = 0.0;
         r.x2 = 0.0;
         r.y2 = 0.0;
-        `eh vector constructor iterator'(
+        `eh vector constructor iterator(
           &ptr,
           0x20ui64,
           2,
@@ -1373,7 +1373,7 @@ void __fastcall Scaleform::GFx::AS2::RectangleProto::ContainsPoint(Scaleform::GF
           }
           v13->T.Type = 2;
         }
-        `eh vector destructor iterator'(
+        `eh vector destructor iterator(
           &ptr,
           0x20ui64,
           2,
@@ -1383,7 +1383,7 @@ void __fastcall Scaleform::GFx::AS2::RectangleProto::ContainsPoint(Scaleform::GF
       {
         Scaleform::GFx::AS2::Environment::LogScriptError(
           v1->Env,
-          "Error: Null or invalid 'this' is used for a method of %s class.\n",
+          "Error: Null or invalid this is used for a method of %s class.\n",
           "Rectangle");
       }
     }
@@ -1440,7 +1440,7 @@ void __fastcall Scaleform::GFx::AS2::RectangleProto::ContainsRectangle(Scaleform
         r.y1 = 0.0;
         r.x2 = 0.0;
         r.y2 = 0.0;
-        `eh vector constructor iterator'(
+        `eh vector constructor iterator(
           &ptr,
           0x20ui64,
           4,
@@ -1467,7 +1467,7 @@ void __fastcall Scaleform::GFx::AS2::RectangleProto::ContainsRectangle(Scaleform
           v14->T.Type = 2;
           v14->V.BooleanValue = v4;
         }
-        `eh vector destructor iterator'(
+        `eh vector destructor iterator(
           &ptr,
           0x20ui64,
           4,
@@ -1477,7 +1477,7 @@ void __fastcall Scaleform::GFx::AS2::RectangleProto::ContainsRectangle(Scaleform
       {
         Scaleform::GFx::AS2::Environment::LogScriptError(
           v1->Env,
-          "Error: Null or invalid 'this' is used for a method of %s class.\n",
+          "Error: Null or invalid this is used for a method of %s class.\n",
           "Rectangle");
       }
     }
@@ -1525,7 +1525,7 @@ void __fastcall Scaleform::GFx::AS2::RectangleProto::Equals(Scaleform::GFx::AS2:
         {
           Scaleform::GFx::AS2::Environment::LogScriptError(
             v1->Env,
-            "Error: Null or invalid 'this' is used for a method of %s class.\n",
+            "Error: Null or invalid this is used for a method of %s class.\n",
             "Rectangle");
           return;
         }
@@ -1628,7 +1628,7 @@ void __fastcall Scaleform::GFx::AS2::RectangleProto::Inflate(Scaleform::GFx::AS2
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "Rectangle");
   }
   if ( (unsigned __int8)v2 >= 5u )
@@ -1697,7 +1697,7 @@ void __fastcall Scaleform::GFx::AS2::RectangleProto::InflatePoint(Scaleform::GFx
     {
       Scaleform::GFx::AS2::Environment::LogScriptError(
         v1->Env,
-        "Error: Null or invalid 'this' is used for a method of %s class.\n",
+        "Error: Null or invalid this is used for a method of %s class.\n",
         "Rectangle");
     }
   }
@@ -1772,7 +1772,7 @@ void __fastcall Scaleform::GFx::AS2::RectangleProto::Intersection(Scaleform::GFx
         r.y1 = 0.0;
         r.x2 = 0.0;
         r.y2 = 0.0;
-        `eh vector constructor iterator'(
+        `eh vector constructor iterator(
           &ptr.y1,
           0x20ui64,
           4,
@@ -1842,7 +1842,7 @@ LABEL_39:
           v24.y1 = 0.0;
           v24.x1 = 0.0;
         }
-        `eh vector destructor iterator'(
+        `eh vector destructor iterator(
           &ptr.y1,
           0x20ui64,
           4,
@@ -1876,7 +1876,7 @@ LABEL_39:
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "Rectangle");
   }
 }
@@ -1937,7 +1937,7 @@ void __fastcall Scaleform::GFx::AS2::RectangleProto::Intersects(Scaleform::GFx::
         r.y1 = 0.0;
         r.x2 = 0.0;
         r.y2 = 0.0;
-        `eh vector constructor iterator'(
+        `eh vector constructor iterator(
           &ptr.y2,
           0x20ui64,
           4,
@@ -2010,7 +2010,7 @@ void __fastcall Scaleform::GFx::AS2::RectangleProto::Intersects(Scaleform::GFx::
         if ( !Scaleform::GFx::AS2::IsRectValid(&v21) || v18 - v16 == 0.0 || v19 - v17 == 0.0 )
 LABEL_36:
           v3 = 0;
-        `eh vector destructor iterator'(
+        `eh vector destructor iterator(
           &ptr.y2,
           0x20ui64,
           4,
@@ -2026,7 +2026,7 @@ LABEL_36:
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "Rectangle");
   }
 }
@@ -2058,7 +2058,7 @@ void __fastcall Scaleform::GFx::AS2::RectangleProto::IsEmpty(Scaleform::GFx::AS2
       v4 = (Scaleform::GFx::AS2::RectangleObject *)&v3[-2];
     else
       v4 = 0i64;
-    `eh vector constructor iterator'(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::Value);
     Scaleform::GFx::AS2::RectangleObject::GetProperties(v4, &v1->Env->StringContext, (Scaleform::GFx::AS2::Value *)&ptr);
     v5 = Scaleform::GFx::AS2::Value::ToNumber(&v12, v1->Env);
     v8 = 1;
@@ -2078,13 +2078,13 @@ void __fastcall Scaleform::GFx::AS2::RectangleProto::IsEmpty(Scaleform::GFx::AS2
     Scaleform::GFx::AS2::Value::DropRefs(v9);
     v9->T.Type = 2;
     v9->V.BooleanValue = v8;
-    `eh vector destructor iterator'(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::~Value);
   }
   else
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "Rectangle");
   }
 }
@@ -2147,7 +2147,7 @@ void __fastcall Scaleform::GFx::AS2::RectangleProto::Offset(Scaleform::GFx::AS2:
     v11 = v1->ThisPtr;
     if ( v11 )
       v4 = (Scaleform::GFx::AS2::RectangleObject *)&v11[-2];
-    `eh vector constructor iterator'(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::Value);
     Scaleform::GFx::AS2::RectangleObject::GetProperties(v4, &v1->Env->StringContext, (Scaleform::GFx::AS2::Value *)&ptr);
     v12 = Scaleform::GFx::AS2::Value::ToNumber((Scaleform::GFx::AS2::Value *)&ptr, v1->Env);
     v13 = Scaleform::GFx::AS2::Value::ToNumber(&v18, v1->Env);
@@ -2164,7 +2164,7 @@ void __fastcall Scaleform::GFx::AS2::RectangleProto::Offset(Scaleform::GFx::AS2:
     if ( v.T.Type >= 5u )
       Scaleform::GFx::AS2::Value::DropRefs(&v);
     Scaleform::GFx::AS2::RectangleObject::SetProperties(v4, &v1->Env->StringContext, (Scaleform::GFx::AS2::Value *)&ptr);
-    `eh vector destructor iterator'(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::~Value);
     if ( (unsigned __int8)v3 >= 5u )
       Scaleform::GFx::AS2::Value::DropRefs(&v17);
     if ( v18.T.Type >= 5u )
@@ -2174,7 +2174,7 @@ void __fastcall Scaleform::GFx::AS2::RectangleProto::Offset(Scaleform::GFx::AS2:
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "Rectangle");
   }
 }
@@ -2224,7 +2224,7 @@ void __fastcall Scaleform::GFx::AS2::RectangleProto::OffsetPoint(Scaleform::GFx:
                + (unsigned int)((_QWORD)((char *)v7->Stack.pCurrent - (char *)v7->Stack.pPageStart) >> 5) )
         v4 = &v7->Stack.Pages.Data.Data[v6 >> 5]->Values[v6 & 0x1F];
       v8 = Scaleform::GFx::AS2::Value::ToObject(v4, v7);
-      `eh vector constructor iterator'(
+      `eh vector constructor iterator(
         &params.NV.8,
         0x20ui64,
         4,
@@ -2251,14 +2251,14 @@ void __fastcall Scaleform::GFx::AS2::RectangleProto::OffsetPoint(Scaleform::GFx:
           &v1->Env->StringContext,
           (Scaleform::GFx::AS2::Value *)((char *)&params + 8));
 LABEL_25:
-        `eh vector destructor iterator'(
+        `eh vector destructor iterator(
           &params.NV.8,
           0x20ui64,
           4,
           (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::~Value);
         return;
       }
-      `eh vector constructor iterator'(
+      `eh vector constructor iterator(
         &ptr,
         0x20ui64,
         2,
@@ -2298,7 +2298,7 @@ LABEL_25:
           v5,
           &v1->Env->StringContext,
           (Scaleform::GFx::AS2::Value *)((char *)&params + 8));
-        `eh vector destructor iterator'(
+        `eh vector destructor iterator(
           &ptr,
           0x20ui64,
           2,
@@ -2327,12 +2327,12 @@ LABEL_25:
         v5,
         &v1->Env->StringContext,
         (Scaleform::GFx::AS2::Value *)((char *)&params + 8));
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         &ptr,
         0x20ui64,
         2,
         (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::~Value);
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         &params.NV.8,
         0x20ui64,
         4,
@@ -2342,7 +2342,7 @@ LABEL_25:
     {
       Scaleform::GFx::AS2::Environment::LogScriptError(
         v1->Env,
-        "Error: Null or invalid 'this' is used for a method of %s class.\n",
+        "Error: Null or invalid this is used for a method of %s class.\n",
         "Rectangle");
     }
   }
@@ -2379,7 +2379,7 @@ void __fastcall Scaleform::GFx::AS2::RectangleProto::SetEmpty(Scaleform::GFx::AS
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "Rectangle");
   }
 }
@@ -2421,7 +2421,7 @@ void __fastcall Scaleform::GFx::AS2::RectangleProto::ToString(Scaleform::GFx::AS
       if ( v3 != (Scaleform::GFx::AS2::ObjectInterface *)32 )
       {
         pDtor = (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::~Value;
-        `eh vector constructor iterator'(
+        `eh vector constructor iterator(
           &ptr,
           0x20ui64,
           4,
@@ -2461,12 +2461,12 @@ void __fastcall Scaleform::GFx::AS2::RectangleProto::ToString(Scaleform::GFx::AS
                (volatile signed __int32 *)((str.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8),
                0xFFFFFFFF) == 1 )
           ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
-        `eh vector destructor iterator'(
+        `eh vector destructor iterator(
           &result,
           8ui64,
           4,
           (void (__fastcall *)(void *))Scaleform::GFx::ASString::~ASString);
-        `eh vector destructor iterator'(
+        `eh vector destructor iterator(
           &ptr,
           0x20ui64,
           4,
@@ -2478,10 +2478,10 @@ void __fastcall Scaleform::GFx::AS2::RectangleProto::ToString(Scaleform::GFx::AS
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "Rectangle");
   }
-}rror: Null or invalid 'this' is used for a method of %s class.\n",
+}rror: Null or invalid this is used for a method of %s class.\n",
       "Rectangle")
 
 // File Line: 863
@@ -2568,7 +2568,7 @@ void __fastcall Scaleform::GFx::AS2::RectangleProto::Union(Scaleform::GFx::AS2::
         *(_OWORD *)&r.x1 = 0ui64;
         r.x2 = 0.0;
         r.y2 = 0.0;
-        `eh vector constructor iterator'(
+        `eh vector constructor iterator(
           &ptr.y1,
           0x20ui64,
           4,
@@ -2608,7 +2608,7 @@ void __fastcall Scaleform::GFx::AS2::RectangleProto::Union(Scaleform::GFx::AS2::
         v28 = v20;
         if ( (*(_QWORD *)&v20 & 0x7FF0000000000000i64) == 9218868437227405312i64 && *(_QWORD *)&v20 & 0xFFFFFFFFFFFFFi64 )
           v22.y1 = Scaleform::GFx::NumberUtil::NaN();
-        `eh vector destructor iterator'(
+        `eh vector destructor iterator(
           &ptr.y1,
           0x20ui64,
           4,
@@ -2630,7 +2630,7 @@ void __fastcall Scaleform::GFx::AS2::RectangleProto::Union(Scaleform::GFx::AS2::
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "Rectangle");
   }
 }
@@ -2700,7 +2700,7 @@ void __fastcall Scaleform::GFx::AS2::RectangleCtorFunction::GlobalCtor(Scaleform
   Scaleform::GFx::AS2::Value::SetAsObject(v1->Result, (Scaleform::GFx::AS2::Object *)&v5->vfptr);
   if ( v1->NArgs > 0 )
   {
-    `eh vector constructor iterator'(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::Value);
     v8 = v1->FirstArgBottomIndex;
     v9 = v1->Env;
     v10 = 0i64;
@@ -2738,7 +2738,7 @@ void __fastcall Scaleform::GFx::AS2::RectangleCtorFunction::GlobalCtor(Scaleform
       }
     }
     Scaleform::GFx::AS2::RectangleObject::SetProperties(v5, &v1->Env->StringContext, (Scaleform::GFx::AS2::Value *)&ptr);
-    `eh vector destructor iterator'(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::~Value);
   }
   if ( v5 )
   {
@@ -2803,10 +2803,10 @@ Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::RectangleCtorF
   if ( v4 )
   {
     Scaleform::GFx::AS2::Object::Object(v4, &psc);
-    v6->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
-    v6->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+    v6->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+    v6->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
     v6[1].vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)Scaleform::GFx::AS2::RectangleCtorFunction::GlobalCtor;
     v7 = Scaleform::GFx::AS2::GlobalContext::GetPrototype(psc.pContext, ASBuiltin_Function);
     if ( !v6->pProto.pObject )
@@ -2835,8 +2835,8 @@ Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::RectangleCtorF
       }
     }
     v6->pProto.pObject = v7;
-    v6->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::RectangleCtorFunction::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::RectangleCtorFunction::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+    v6->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::RectangleCtorFunction::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::RectangleCtorFunction::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   }
   else
   {

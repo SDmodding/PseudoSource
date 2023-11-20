@@ -74,9 +74,9 @@ void RigInfoDataBase::Init(void)
   v0 = (RigInfoDataBase *)UFG::qMemoryPool2::Allocate(&gActionTreeMemoryPool, 0x20ui64, "RigInfoDataBase", 0i64, 1u);
   if ( v0 )
   {
-    v0->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+    v0->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
     v0->mResourceOwner = 0i64;
-    v0->vfptr = (Expression::IMemberMapVtbl *)&RigInfoDataBase::`vftable';
+    v0->vfptr = (Expression::IMemberMapVtbl *)&RigInfoDataBase::`vftable;
     v4 = &v0->mRigInfos;
     v4->mNode.mPrev = &v4->mNode;
     v4->mNode.mNext = &v4->mNode;
@@ -327,7 +327,7 @@ void __fastcall BoneInfo::~BoneInfo(BoneInfo *this)
   char *v2; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&BoneInfo::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&BoneInfo::`vftable;
   if ( !(~LOBYTE(this->mName.mOffset) & 1) )
   {
     if ( this->mName.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
@@ -337,6 +337,6 @@ void __fastcall BoneInfo::~BoneInfo(BoneInfo *this)
         operator delete[](v2);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 

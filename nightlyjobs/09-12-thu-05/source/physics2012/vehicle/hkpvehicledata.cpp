@@ -3,7 +3,7 @@
 void __fastcall hkpVehicleData::hkpVehicleData(hkpVehicleData *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpVehicleData::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpVehicleData::`vftable;
   this->m_wheelParams.m_capacityAndFlags = 2147483648;
   this->m_wheelParams.m_data = 0i64;
   this->m_wheelParams.m_size = 0;

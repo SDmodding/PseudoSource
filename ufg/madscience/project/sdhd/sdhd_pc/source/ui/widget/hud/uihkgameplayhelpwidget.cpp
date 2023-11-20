@@ -23,8 +23,8 @@ void __fastcall UFG::UIHKGameplayHelpData::UIHKGameplayHelpData(UFG::UIHKGamepla
   this->remapContext = 0;
   this->isWeaponPickup = 0;
   v2 = 2i64;
-  `eh vector constructor iterator'(this->Captions, 0x28ui64, 2, (void (__fastcall *)(void *))UFG::qString::qString);
-  `eh vector constructor iterator'(v1->Icons, 0x28ui64, 2, (void (__fastcall *)(void *))UFG::qString::qString);
+  `eh vector constructor iterator(this->Captions, 0x28ui64, 2, (void (__fastcall *)(void *))UFG::qString::qString);
+  `eh vector constructor iterator(v1->Icons, 0x28ui64, 2, (void (__fastcall *)(void *))UFG::qString::qString);
   UFG::qString::qString(&v1->CustomTexturePack);
   v3 = v1->ChargeAnimState;
   do
@@ -137,12 +137,12 @@ void __fastcall UFG::UIHKGameplayHelpWidget::~UIHKGameplayHelpWidget(UFG::UIHKGa
   UFG::qString::Set(&v1->mTexturePackName, &customWorldMapCaption);
   UFG::qString::~qString(&v1->mTexturePackName);
   UFG::qString::~qString(&v1->mOneFrameData.CustomTexturePack);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->mOneFrameData.Icons,
     0x28ui64,
     2,
     (void (__fastcall *)(void *))UFG::qString::~qString);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->mOneFrameData.Captions,
     0x28ui64,
     2,
@@ -457,8 +457,8 @@ void __fastcall UFG::UIHKGameplayHelpWidget::Show(UFG::UIHKGameplayHelpWidget *t
   UFG::qString::Set(&data.Captions[1], caption1);
   UFG::UIHKGameplayHelpWidget::Show(v9, &data);
   UFG::qString::~qString(&data.CustomTexturePack);
-  `eh vector destructor iterator'(data.Icons, 0x28ui64, 2, (void (__fastcall *)(void *))UFG::qString::~qString);
-  `eh vector destructor iterator'(data.Captions, 0x28ui64, 2, (void (__fastcall *)(void *))UFG::qString::~qString);
+  `eh vector destructor iterator(data.Icons, 0x28ui64, 2, (void (__fastcall *)(void *))UFG::qString::~qString);
+  `eh vector destructor iterator(data.Captions, 0x28ui64, 2, (void (__fastcall *)(void *))UFG::qString::~qString);
 }
 
 // File Line: 330
@@ -488,8 +488,8 @@ void __fastcall UFG::UIHKGameplayHelpWidget::Hide(UFG::UIHKGameplayHelpWidget *t
         if ( v6 )
         {
           UFG::qString::~qString(&v6->CustomTexturePack);
-          `eh vector destructor iterator'(v6->Icons, 0x28ui64, 2, (void (__fastcall *)(void *))UFG::qString::~qString);
-          `eh vector destructor iterator'(
+          `eh vector destructor iterator(v6->Icons, 0x28ui64, 2, (void (__fastcall *)(void *))UFG::qString::~qString);
+          `eh vector destructor iterator(
             v6->Captions,
             0x28ui64,
             2,
@@ -625,8 +625,8 @@ void __fastcall UFG::UIHKGameplayHelpWidget::ClearAll(UFG::UIHKGameplayHelpWidge
         if ( v4 )
         {
           UFG::qString::~qString(&v4->CustomTexturePack);
-          `eh vector destructor iterator'(v4->Icons, 0x28ui64, 2, (void (__fastcall *)(void *))UFG::qString::~qString);
-          `eh vector destructor iterator'(
+          `eh vector destructor iterator(v4->Icons, 0x28ui64, 2, (void (__fastcall *)(void *))UFG::qString::~qString);
+          `eh vector destructor iterator(
             v4->Captions,
             0x28ui64,
             2,
@@ -763,7 +763,7 @@ void __fastcall UFG::UIHKGameplayHelpWidget::Flash_Show(UFG::UIHKGameplayHelpWid
      && (v5 = v4->mTexturePackName.mData,
          v6 = UFG::UIScreenTextureManager::Instance(),
          UFG::UIScreenTextureManager::IsTexturePackLoaded(v6, v5));
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 8, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 8, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   v7 = &v29;
   v8 = 8i64;
   do
@@ -919,7 +919,7 @@ LABEL_49:
     value.pObjectInterface = 0i64;
   }
   value.Type = 0;
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 8, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 8, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 604
@@ -971,7 +971,7 @@ void __fastcall UFG::UIHKGameplayHelpWidget::Flash_PlayChargeAnim(UFG::UIHKGamep
   v4 = screen->mRenderable->m_movie.pObject;
   if ( v4 )
   {
-    `eh vector constructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( ((unsigned int)pargs.Type >> 6) & 1 )
     {
       (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
@@ -983,7 +983,7 @@ void __fastcall UFG::UIHKGameplayHelpWidget::Flash_PlayChargeAnim(UFG::UIHKGamep
     pargs.Type = 5;
     pargs.mValue.NValue = (double)v3;
     Scaleform::GFx::Movie::Invoke(v4, "GameplayHelp_PlayButtonCharge", 0i64, &pargs, 1u);
-    `eh vector destructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 
@@ -999,7 +999,7 @@ void __fastcall UFG::UIHKGameplayHelpWidget::Flash_StopChargeAnim(UFG::UIHKGamep
   v4 = screen->mRenderable->m_movie.pObject;
   if ( v4 )
   {
-    `eh vector constructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( ((unsigned int)pargs.Type >> 6) & 1 )
     {
       (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
@@ -1011,7 +1011,7 @@ void __fastcall UFG::UIHKGameplayHelpWidget::Flash_StopChargeAnim(UFG::UIHKGamep
     pargs.Type = 5;
     pargs.mValue.NValue = (double)v3;
     Scaleform::GFx::Movie::Invoke(v4, "GameplayHelp_StopButtonCharge", 0i64, &pargs, 1u);
-    `eh vector destructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 

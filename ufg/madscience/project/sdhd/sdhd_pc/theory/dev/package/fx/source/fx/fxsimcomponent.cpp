@@ -26,7 +26,7 @@ void __fastcall Render::FXSimComponent::FXSimComponent(Render::FXSimComponent *t
   v2 = (UFG::qNode<Render::FXSimComponent,Render::FXSimComponent> *)&v1->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&Render::FXSimComponent::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&Render::FXSimComponent::`vftable;
   v4 = &v1->mEffects;
   v4->mNode.mPrev = &v4->mNode;
   v4->mNode.mNext = &v4->mNode;
@@ -57,7 +57,7 @@ void __fastcall Render::FXSimComponent::~FXSimComponent(Render::FXSimComponent *
   UFG::qNode<Render::FXSimComponent,Render::FXSimComponent> *v8; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&Render::FXSimComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&Render::FXSimComponent::`vftable;
   if ( this == Render::FXSimComponent::s_FXSimComponentpCurrentIterator )
     Render::FXSimComponent::s_FXSimComponentpCurrentIterator = (Render::FXSimComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<Render::FXSimComponent,Render::FXSimComponent> *)&this->mPrev;
@@ -406,12 +406,12 @@ void __fastcall Render::FXSimComponent::DetachEffect(Render::FXSimComponent *thi
     }
     UFG::qResourceHandle::qResourceHandle(&v13);
     v7 = v4->mFXSettingsId;
-    v8 = `UFG::qGetResourceInventory<Render::FXSettings>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Render::FXSettings>'::`2'::result )
+    v8 = `UFG::qGetResourceInventory<Render::FXSettings>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Render::FXSettings>::`2::result )
     {
       v9 = UFG::qResourceWarehouse::Instance();
       v8 = UFG::qResourceWarehouse::GetInventory(v9, 0xED341A8D);
-      `UFG::qGetResourceInventory<Render::FXSettings>'::`2'::result = v8;
+      `UFG::qGetResourceInventory<Render::FXSettings>::`2::result = v8;
     }
     UFG::qResourceHandle::Init(&v13, 0xED341A8D, v7, v8);
     v10 = *((float *)&v13.mData[1].mNode.mUID + 1);
@@ -426,12 +426,12 @@ void __fastcall Render::FXSimComponent::DetachEffect(Render::FXSimComponent *thi
       Render::FXManager::KillEffect(&Render::gFXManager, v4->mEffectHandle, v3);
       v4->mEffectHandle = -1;
     }
-    v11 = `UFG::qGetResourceInventory<Render::FXSettings>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Render::FXSettings>'::`2'::result )
+    v11 = `UFG::qGetResourceInventory<Render::FXSettings>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Render::FXSettings>::`2::result )
     {
       v12 = UFG::qResourceWarehouse::Instance();
       v11 = UFG::qResourceWarehouse::GetInventory(v12, 0xED341A8D);
-      `UFG::qGetResourceInventory<Render::FXSettings>'::`2'::result = v11;
+      `UFG::qGetResourceInventory<Render::FXSettings>::`2::result = v11;
     }
     UFG::qResourceHandle::Close(&v13, v11);
     UFG::qResourceHandle::~qResourceHandle(&v13);

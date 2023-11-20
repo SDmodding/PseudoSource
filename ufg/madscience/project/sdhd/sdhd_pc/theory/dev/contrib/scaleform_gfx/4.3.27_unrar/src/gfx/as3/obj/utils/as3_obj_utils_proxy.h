@@ -14,7 +14,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_utils::Proxy> *__fastcall
   if ( v4 )
   {
     Scaleform::GFx::AS3::Instances::fl::Object::Object(v4, (Scaleform::GFx::AS3::InstanceTraits::Traits *)&v2->vfptr);
-    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_utils::Proxy::`vftable';
+    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_utils::Proxy::`vftable;
     *(_QWORD *)&v5->callPropertyInd = -1i64;
     *(_QWORD *)&v5->getDescendantsInd = -1i64;
     *(_QWORD *)&v5->hasPropertyInd = -1i64;

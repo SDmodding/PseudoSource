@@ -15,14 +15,14 @@ void __fastcall UFG::Editor::Terminal::Terminal(UFG::Editor::Terminal *this, Mem
 
   v2 = this;
   UFG::DUIWindow::DUIWindow((UFG::DUIWindow *)&this->vfptr, f);
-  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::Editor::Terminal,UFG::DUIWindow>::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::Editor::Terminal,UFG::DUIWindow>::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::Editor::Terminal,UFG::DUIWindow>::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::Editor::Terminal,UFG::DUIWindow>::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   UFG::qSafePointerNode<UFG::Editor::Terminal>::qSafePointerNode<UFG::Editor::Terminal>((UFG::qSafePointerNode<UFG::Editor::Terminal> *)&v2->vfptr);
-  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::Terminal::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::Terminal::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
-  v2->vfptr = (UFG::qSafePointerNode<UFG::Editor::Terminal>Vtbl *)&UFG::Editor::Terminal::`vftable';
+  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::Terminal::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::Terminal::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::Editor::Terminal>Vtbl *)&UFG::Editor::Terminal::`vftable;
   v2->mScrollPos = 0i64;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v2->mLines,
     0x30ui64,
     512,

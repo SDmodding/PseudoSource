@@ -321,9 +321,9 @@ void __fastcall Scaleform::Render::TextPrimitiveBundle::TextPrimitiveBundle(Scal
 
   v1 = this;
   Scaleform::Render::Bundle::Bundle((Scaleform::Render::Bundle *)&this->vfptr, 0i64);
-  v1->vfptr = (Scaleform::Render::RenderQueueItem::InterfaceVtbl *)&Scaleform::Render::RenderQueueItem::Interface::`vftable';
-  v1->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::Render::TextPrimitiveBundle::`vftable'{for `Scaleform::Render::Bundle'};
-  v1->vfptr = (Scaleform::Render::RenderQueueItem::InterfaceVtbl *)&Scaleform::Render::TextPrimitiveBundle::`vftable'{for `Scaleform::Render::RenderQueueItem::Interface'};
+  v1->vfptr = (Scaleform::Render::RenderQueueItem::InterfaceVtbl *)&Scaleform::Render::RenderQueueItem::Interface::`vftable;
+  v1->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::Render::TextPrimitiveBundle::`vftable{for `Scaleform::Render::Bundle};
+  v1->vfptr = (Scaleform::Render::RenderQueueItem::InterfaceVtbl *)&Scaleform::Render::TextPrimitiveBundle::`vftable{for `Scaleform::Render::RenderQueueItem::Interface};
   v1->Layers.Size = 0i64;
   v1->pMaskPrimitive.pObject = 0i64;
 }
@@ -336,16 +336,16 @@ void __fastcall Scaleform::Render::TextPrimitiveBundle::~TextPrimitiveBundle(Sca
   Scaleform::Render::MaskPrimitive *v2; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::Render::TextPrimitiveBundle::`vftable'{for `Scaleform::Render::Bundle'};
-  this->vfptr = (Scaleform::Render::RenderQueueItem::InterfaceVtbl *)&Scaleform::Render::TextPrimitiveBundle::`vftable'{for `Scaleform::Render::RenderQueueItem::Interface'};
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::Render::TextPrimitiveBundle::`vftable{for `Scaleform::Render::Bundle};
+  this->vfptr = (Scaleform::Render::RenderQueueItem::InterfaceVtbl *)&Scaleform::Render::TextPrimitiveBundle::`vftable{for `Scaleform::Render::RenderQueueItem::Interface};
   v2 = this->pMaskPrimitive.pObject;
   if ( v2 && !_InterlockedDecrement(&v2->RefCount) && v2 )
     v2->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v2->vfptr, 1u);
   Scaleform::Render::ArrayReserveLH_Mov<Scaleform::Ptr<Scaleform::Render::TextLayerPrimitive>,2>::~ArrayReserveLH_Mov<Scaleform::Ptr<Scaleform::Render::TextLayerPrimitive>,2>(&v1->Layers);
-  v1->vfptr = (Scaleform::Render::RenderQueueItem::InterfaceVtbl *)&Scaleform::Render::RenderQueueItem::Interface::`vftable';
-  v1->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::Render::Bundle::`vftable';
+  v1->vfptr = (Scaleform::Render::RenderQueueItem::InterfaceVtbl *)&Scaleform::Render::RenderQueueItem::Interface::`vftable;
+  v1->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::Render::Bundle::`vftable;
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v1->Entries.Data.Data);
-  v1->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable';
+  v1->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable;
 }
 
 // File Line: 406
@@ -653,8 +653,8 @@ char __fastcall Scaleform::Render::TextPrimitiveBundle::addAndPinBatchLayers(Sca
           (Scaleform::Render::Primitive *)v12,
           v17->pHal.pObject,
           *((Scaleform::Render::PrimitiveFill **)v8 + 6));
-        *(_QWORD *)v12 = &Scaleform::Render::TextLayerPrimitive::`vftable'{for `Scaleform::RefCountBase<Scaleform::Render::Primitive,67>'};
-        *((_QWORD *)v12 + 2) = &Scaleform::Render::TextLayerPrimitive::`vftable'{for `Scaleform::Render::RenderQueueItem::Interface'};
+        *(_QWORD *)v12 = &Scaleform::Render::TextLayerPrimitive::`vftable{for `Scaleform::RefCountBase<Scaleform::Render::Primitive,67>};
+        *((_QWORD *)v12 + 2) = &Scaleform::Render::TextLayerPrimitive::`vftable{for `Scaleform::Render::RenderQueueItem::Interface};
         *((_DWORD *)v12 + 24) = v18;
         v19 = (Scaleform::Ptr<Scaleform::Render::TextLayerPrimitive> *)(v12 + 104);
         v39 = v19;
@@ -743,14 +743,14 @@ LABEL_37:
                       (Scaleform::AllocInfo *)&v34);
     if ( v27 )
     {
-      *(_QWORD *)v27 = &Scaleform::RefCountImplCore::`vftable';
+      *(_QWORD *)v27 = &Scaleform::RefCountImplCore::`vftable;
       v27[2] = 1;
-      *(_QWORD *)v27 = &Scaleform::RefCountImpl::`vftable';
-      *(_QWORD *)v27 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,67>::`vftable';
-      *(_QWORD *)v27 = &Scaleform::RefCountBase<Scaleform::Render::MaskPrimitive,67>::`vftable';
-      *((_QWORD *)v27 + 2) = &Scaleform::Render::RenderQueueItem::Interface::`vftable';
-      *(_QWORD *)v27 = &Scaleform::Render::MaskPrimitive::`vftable'{for `Scaleform::RefCountBase<Scaleform::Render::MaskPrimitive,67>'};
-      *((_QWORD *)v27 + 2) = &Scaleform::Render::MaskPrimitive::`vftable'{for `Scaleform::Render::RenderQueueItem::Interface'};
+      *(_QWORD *)v27 = &Scaleform::RefCountImpl::`vftable;
+      *(_QWORD *)v27 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,67>::`vftable;
+      *(_QWORD *)v27 = &Scaleform::RefCountBase<Scaleform::Render::MaskPrimitive,67>::`vftable;
+      *((_QWORD *)v27 + 2) = &Scaleform::Render::RenderQueueItem::Interface::`vftable;
+      *(_QWORD *)v27 = &Scaleform::Render::MaskPrimitive::`vftable{for `Scaleform::RefCountBase<Scaleform::Render::MaskPrimitive,67>};
+      *((_QWORD *)v27 + 2) = &Scaleform::Render::MaskPrimitive::`vftable{for `Scaleform::Render::RenderQueueItem::Interface};
       v45 = (signed __int64)(v27 + 6);
       v37 = (Scaleform::Ptr<Scaleform::Render::TextLayerPrimitive> *)(v27 + 6);
       *(_OWORD *)v45 = 0ui64;
@@ -1029,7 +1029,7 @@ void __fastcall Scaleform::Render::SKI_TextPrimitive::DrawBundleEntry(Scaleform:
 // RVA: 0x159C8F0
 __int64 dynamic_initializer_for__Scaleform::Render::SKI_TextPrimitive::Instance__()
 {
-  Scaleform::Render::SKI_TextPrimitive::Instance.vfptr = (Scaleform::Render::SortKeyInterfaceVtbl *)&Scaleform::Render::SKI_TextPrimitive::`vftable';
+  Scaleform::Render::SKI_TextPrimitive::Instance.vfptr = (Scaleform::Render::SortKeyInterfaceVtbl *)&Scaleform::Render::SKI_TextPrimitive::`vftable;
   return atexit(dynamic_atexit_destructor_for__Scaleform::Render::SKI_TextPrimitive::Instance__);
 }
 
@@ -1037,7 +1037,7 @@ __int64 dynamic_initializer_for__Scaleform::Render::SKI_TextPrimitive::Instance_
 // RVA: 0x159C5E0
 __int64 dynamic_initializer_for__Scaleform::Render::SKI_TextPrimitive::Instance3D__()
 {
-  Scaleform::Render::SKI_TextPrimitive::Instance3D.vfptr = (Scaleform::Render::SortKeyInterfaceVtbl *)&Scaleform::Render::SKI_TextPrimitive::`vftable';
+  Scaleform::Render::SKI_TextPrimitive::Instance3D.vfptr = (Scaleform::Render::SortKeyInterfaceVtbl *)&Scaleform::Render::SKI_TextPrimitive::`vftable;
   return atexit(dynamic_atexit_destructor_for__Scaleform::Render::SKI_TextPrimitive::Instance3D__);
 }
 

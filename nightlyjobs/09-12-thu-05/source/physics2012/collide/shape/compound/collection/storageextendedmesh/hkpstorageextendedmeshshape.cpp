@@ -2,14 +2,14 @@
 // RVA: 0xD15B50
 void __fastcall hkpStorageExtendedMeshShape::MeshSubpartStorage::MeshSubpartStorage(hkpStorageExtendedMeshShape::MeshSubpartStorage *this, hkFinishLoadedObjectFlag flag)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkpStorageExtendedMeshShape::MeshSubpartStorage::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpStorageExtendedMeshShape::MeshSubpartStorage::`vftable;
 }
 
 // File Line: 27
 // RVA: 0xD15B70
 void __fastcall hkpStorageExtendedMeshShape::ShapeSubpartStorage::ShapeSubpartStorage(hkpStorageExtendedMeshShape::ShapeSubpartStorage *this, hkFinishLoadedObjectFlag flag)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkpStorageExtendedMeshShape::ShapeSubpartStorage::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpStorageExtendedMeshShape::ShapeSubpartStorage::`vftable;
 }
 
 // File Line: 32
@@ -39,8 +39,8 @@ void __fastcall hkpStorageExtendedMeshShape::hkpStorageExtendedMeshShape(hkpStor
   flaga = flag.m_finishing;
   v2 = this;
   hkpExtendedMeshShape::hkpExtendedMeshShape((hkpExtendedMeshShape *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpStorageExtendedMeshShape::`vftable'{for `hkpShape'};
-  v2->vfptr = (hkpShapeContainerVtbl *)&hkpStorageExtendedMeshShape::`vftable'{for `hkpShapeContainer'};
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpStorageExtendedMeshShape::`vftable{for `hkpShape};
+  v2->vfptr = (hkpShapeContainerVtbl *)&hkpStorageExtendedMeshShape::`vftable{for `hkpShapeContainer};
   if ( flaga )
   {
     v3 = 0;
@@ -122,8 +122,8 @@ void __fastcall hkpStorageExtendedMeshShape::hkpStorageExtendedMeshShape(hkpStor
 
   v3 = this;
   hkpExtendedMeshShape::hkpExtendedMeshShape((hkpExtendedMeshShape *)&this->vfptr, radius, numbits);
-  v3->vfptr = (hkBaseObjectVtbl *)&hkpStorageExtendedMeshShape::`vftable'{for `hkpShape'};
-  v3->vfptr = (hkpShapeContainerVtbl *)&hkpStorageExtendedMeshShape::`vftable'{for `hkpShapeContainer'};
+  v3->vfptr = (hkBaseObjectVtbl *)&hkpStorageExtendedMeshShape::`vftable{for `hkpShape};
+  v3->vfptr = (hkpShapeContainerVtbl *)&hkpStorageExtendedMeshShape::`vftable{for `hkpShapeContainer};
   v3->m_meshstorage.m_capacityAndFlags = 2147483648;
   v3->m_meshstorage.m_data = 0i64;
   v3->m_meshstorage.m_size = 0;
@@ -147,9 +147,9 @@ void __fastcall hkpStorageExtendedMeshShape::~hkpStorageExtendedMeshShape(hkpSto
   int v9; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpStorageExtendedMeshShape::`vftable'{for `hkpShape'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkpStorageExtendedMeshShape::`vftable{for `hkpShape};
   v2 = 0;
-  this->vfptr = (hkpShapeContainerVtbl *)&hkpStorageExtendedMeshShape::`vftable'{for `hkpShapeContainer'};
+  this->vfptr = (hkpShapeContainerVtbl *)&hkpStorageExtendedMeshShape::`vftable{for `hkpShapeContainer};
   if ( this->m_meshstorage.m_size > 0 )
   {
     v3 = 0i64;
@@ -246,8 +246,8 @@ void __fastcall hkpStorageExtendedMeshShape::hkpStorageExtendedMeshShape(hkpStor
     mesh->m_numBitsForSubpartIndex);
   v4 = 0;
   v5 = 0;
-  v3->vfptr = (hkBaseObjectVtbl *)&hkpStorageExtendedMeshShape::`vftable'{for `hkpShape'};
-  v3->vfptr = (hkpShapeContainerVtbl *)&hkpStorageExtendedMeshShape::`vftable'{for `hkpShapeContainer'};
+  v3->vfptr = (hkBaseObjectVtbl *)&hkpStorageExtendedMeshShape::`vftable{for `hkpShape};
+  v3->vfptr = (hkpShapeContainerVtbl *)&hkpStorageExtendedMeshShape::`vftable{for `hkpShapeContainer};
   v3->m_meshstorage.m_data = 0i64;
   v3->m_meshstorage.m_size = 0;
   v3->m_meshstorage.m_capacityAndFlags = 2147483648;
@@ -441,7 +441,7 @@ void __fastcall hkpStorageExtendedMeshShape::addTrianglesSubpart(hkpStorageExten
   if ( v7 )
   {
     *(_DWORD *)(v7 + 8) = 0x1FFFF;
-    *(_QWORD *)v7 = &hkpStorageExtendedMeshShape::MeshSubpartStorage::`vftable';
+    *(_QWORD *)v7 = &hkpStorageExtendedMeshShape::MeshSubpartStorage::`vftable;
     *(_QWORD *)(v7 + 16) = 0i64;
     *(_DWORD *)(v7 + 24) = 0;
     *(_DWORD *)(v7 + 28) = 2147483648;
@@ -946,7 +946,7 @@ __int64 __fastcall hkpStorageExtendedMeshShape::addShapesSubpart(hkpStorageExten
   if ( v6 )
   {
     *(_DWORD *)(v6 + 8) = 0x1FFFF;
-    *(_QWORD *)v6 = &hkpStorageExtendedMeshShape::ShapeSubpartStorage::`vftable';
+    *(_QWORD *)v6 = &hkpStorageExtendedMeshShape::ShapeSubpartStorage::`vftable;
     *(_QWORD *)(v6 + 16) = 0i64;
     *(_DWORD *)(v6 + 24) = 0;
     *(_DWORD *)(v6 + 28) = 2147483648;

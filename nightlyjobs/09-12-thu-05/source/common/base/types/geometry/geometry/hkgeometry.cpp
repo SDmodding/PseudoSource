@@ -18,7 +18,7 @@ void __fastcall hkGeometry::hkGeometry(hkGeometry *this, hkGeometry *other)
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v2 = other;
-  this->vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable;
   this->m_vertices.m_capacityAndFlags = 2147483648;
   this->m_vertices.m_data = 0i64;
   this->m_vertices.m_size = 0;
@@ -93,7 +93,7 @@ void __fastcall hkGeometry::hkGeometry(hkGeometry *this, hkGeometry *other)
 // RVA: 0xC6F110
 void __fastcall hkGeometry::hkGeometry(hkGeometry *this, hkFinishLoadedObjectFlag f)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable;
 }
 
 // File Line: 32

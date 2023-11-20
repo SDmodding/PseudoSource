@@ -2,7 +2,7 @@
 // RVA: 0xBE37D0
 void __fastcall hkaiNavMesh::hkaiNavMesh(hkaiNavMesh *this, hkFinishLoadedObjectFlag f)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiNavMesh::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiNavMesh::`vftable;
 }
 
 // File Line: 34
@@ -10,7 +10,7 @@ void __fastcall hkaiNavMesh::hkaiNavMesh(hkaiNavMesh *this, hkFinishLoadedObject
 void __fastcall hkaiNavMesh::hkaiNavMesh(hkaiNavMesh *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiNavMesh::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiNavMesh::`vftable;
   this->m_faces.m_data = 0i64;
   this->m_faces.m_size = 0;
   this->m_faces.m_capacityAndFlags = 2147483648;
@@ -54,7 +54,7 @@ void __fastcall hkaiNavMesh::~hkaiNavMesh(hkaiNavMesh *this)
   int v8; // eax
   int v9; // er8
 
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiNavMesh::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiNavMesh::`vftable;
   v1 = this->m_edgeData.m_capacityAndFlags;
   v2 = this;
   this->m_edgeData.m_size = 0;
@@ -122,7 +122,7 @@ void __fastcall hkaiNavMesh::~hkaiNavMesh(hkaiNavMesh *this)
       16 * v9);
   v2->m_faces.m_data = 0i64;
   v2->m_faces.m_capacityAndFlags = 2147483648;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 50

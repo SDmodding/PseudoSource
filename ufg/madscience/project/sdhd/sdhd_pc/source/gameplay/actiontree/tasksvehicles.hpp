@@ -13,7 +13,7 @@ void __fastcall VehicleOverrideWheelFrictionMultiplierTask::~VehicleOverrideWhee
   UFG::qNode<ITask,ITask> *v9; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&VehicleOverrideWheelFrictionMultiplierTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&VehicleOverrideWheelFrictionMultiplierTask::`vftable;
   v2 = &this->mPhysicsMoverInterface;
   if ( this->mPhysicsMoverInterface.m_pPointer )
   {
@@ -31,7 +31,7 @@ void __fastcall VehicleOverrideWheelFrictionMultiplierTask::~VehicleOverrideWhee
   v6->mPrev = v5;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v8 = v1->mPrev;
   v9 = v1->mNext;
@@ -56,7 +56,7 @@ void __fastcall VehicleSetCollisionShouldTriggerExplosionTask::~VehicleSetCollis
   UFG::qNode<ITask,ITask> *v9; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&VehicleSetCollisionShouldTriggerExplosionTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&VehicleSetCollisionShouldTriggerExplosionTask::`vftable;
   v2 = &this->mPhysicsMoverInterface;
   if ( this->mPhysicsMoverInterface.m_pPointer )
   {
@@ -74,7 +74,7 @@ void __fastcall VehicleSetCollisionShouldTriggerExplosionTask::~VehicleSetCollis
   v6->mPrev = v5;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v8 = v1->mPrev;
   v9 = v1->mNext;
@@ -99,7 +99,7 @@ void __fastcall VehicleLockHighLODTask::~VehicleLockHighLODTask(VehicleLockHighL
   UFG::qNode<ITask,ITask> *v9; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&VehicleLockHighLODTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&VehicleLockHighLODTask::`vftable;
   v2 = &this->mPhysicsMoverInterface;
   if ( this->mPhysicsMoverInterface.m_pPointer )
   {
@@ -117,7 +117,7 @@ void __fastcall VehicleLockHighLODTask::~VehicleLockHighLODTask(VehicleLockHighL
   v6->mPrev = v5;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v8 = v1->mPrev;
   v9 = v1->mNext;
@@ -142,7 +142,7 @@ void __fastcall BikePhysicsEnableConstraintTask::~BikePhysicsEnableConstraintTas
   UFG::qNode<ITask,ITask> *v9; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&BikePhysicsEnableConstraintTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&BikePhysicsEnableConstraintTask::`vftable;
   v2 = &this->m_pBikePhysicsMoverComponent;
   if ( this->m_pBikePhysicsMoverComponent.m_pPointer )
   {
@@ -160,7 +160,7 @@ void __fastcall BikePhysicsEnableConstraintTask::~BikePhysicsEnableConstraintTas
   v6->mPrev = v5;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v8 = v1->mPrev;
   v9 = v1->mNext;
@@ -185,7 +185,7 @@ void __fastcall VehiclePreventWheelieTask::~VehiclePreventWheelieTask(VehiclePre
   UFG::qNode<ITask,ITask> *v9; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&VehiclePreventWheelieTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&VehiclePreventWheelieTask::`vftable;
   v2 = &this->mPhysicsMoverInterface;
   if ( this->mPhysicsMoverInterface.m_pPointer )
   {
@@ -203,7 +203,7 @@ void __fastcall VehiclePreventWheelieTask::~VehiclePreventWheelieTask(VehiclePre
   v6->mPrev = v5;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v8 = v1->mPrev;
   v9 = v1->mNext;
@@ -228,7 +228,7 @@ void __fastcall VehicleInteractTask::~VehicleInteractTask(VehicleInteractTask *t
   UFG::qNode<ITask,ITask> *v9; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&VehicleInteractTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&VehicleInteractTask::`vftable;
   v2 = &this->mVehicleTarget;
   if ( this->mVehicleTarget.m_pPointer )
   {
@@ -246,7 +246,7 @@ void __fastcall VehicleInteractTask::~VehicleInteractTask(VehicleInteractTask *t
   v6->mPrev = v5;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v8 = v1->mPrev;
   v9 = v1->mNext;
@@ -271,7 +271,7 @@ void __fastcall VehicleMassScaleForCollisionsTask::~VehicleMassScaleForCollision
   UFG::qNode<ITask,ITask> *v9; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&VehicleMassScaleForCollisionsTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&VehicleMassScaleForCollisionsTask::`vftable;
   v2 = &this->m_PMI;
   if ( this->m_PMI.m_pPointer )
   {
@@ -289,7 +289,7 @@ void __fastcall VehicleMassScaleForCollisionsTask::~VehicleMassScaleForCollision
   v6->mPrev = v5;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v8 = v1->mPrev;
   v9 = v1->mNext;

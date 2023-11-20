@@ -19,15 +19,15 @@ float __fastcall CAkVPLSrcNode::GetMakeupGain(CAkVPLSrcNode *this)
   v2 = v1->m_EffectiveParams.normalization.fMakeUpGain * 0.050000001;
   if ( v2 >= -37.0 )
   {
-    if ( `AkMath::FastPow10'::`4'::`local static guard' & 1 )
+    if ( `AkMath::FastPow10::`4::`local static guard & 1 )
     {
-      v4 = *(float *)&`AkMath::FastPow10'::`4'::SCALE;
+      v4 = *(float *)&`AkMath::FastPow10::`4::SCALE;
     }
     else
     {
       v4 = FLOAT_2_7866352e7;
-      `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
-      `AkMath::FastPow10'::`4'::`local static guard' |= 1u;
+      `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
+      `AkMath::FastPow10::`4::`local static guard |= 1u;
     }
     v3 = (float)((float)((float)((float)(COERCE_FLOAT(
                                            ((signed int)(float)((float)(v4 * v2) + 1065353200.0) & 0x7FFFFF)

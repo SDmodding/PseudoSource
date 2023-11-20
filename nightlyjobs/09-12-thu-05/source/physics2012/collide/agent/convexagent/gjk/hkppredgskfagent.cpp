@@ -36,7 +36,7 @@ void __fastcall hkpPredGskfAgent::createPredGskfAgent(hkpCdBody *bodyA, hkpCdBod
     if ( v8 )
     {
       hkpGskfAgent::hkpGskfAgent(v8, v4, v6, v5);
-      v9->vfptr = (hkBaseObjectVtbl *)&hkpPredGskfAgent::`vftable';
+      v9->vfptr = (hkBaseObjectVtbl *)&hkpPredGskfAgent::`vftable;
     }
   }
   else

@@ -25,7 +25,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_events::NativeDragEvent> 
     Scaleform::GFx::AS3::Instances::fl_events::MouseEvent::MouseEvent(
       v4,
       (Scaleform::GFx::AS3::InstanceTraits::Traits *)&v2->vfptr);
-    v5->pNode = (Scaleform::GFx::ASStringNode *)&Scaleform::GFx::AS3::Instances::fl_events::NativeDragEvent::`vftable';
+    v5->pNode = (Scaleform::GFx::ASStringNode *)&Scaleform::GFx::AS3::Instances::fl_events::NativeDragEvent::`vftable;
     v5[16].pNode = 0i64;
     v5[17].pNode = 0i64;
     Scaleform::GFx::AS3::DefaultValue<Scaleform::GFx::ASString const &>(

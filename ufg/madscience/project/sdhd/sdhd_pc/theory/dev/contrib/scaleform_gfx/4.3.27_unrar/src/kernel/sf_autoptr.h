@@ -12,7 +12,7 @@ void __fastcall Scaleform::AutoPtr<Scaleform::GFx::AS3::VTable>::~AutoPtr<Scalef
     if ( v1->Owner )
     {
       v1->Owner = 0;
-      Scaleform::GFx::AS3::VTable::`scalar deleting destructor'(v2, 1u);
+      Scaleform::GFx::AS3::VTable::`scalar deleting destructor(v2, 1u);
     }
     v1->pObject = 0i64;
   }

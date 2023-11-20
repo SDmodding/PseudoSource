@@ -6,8 +6,8 @@ void __fastcall hkpFastMeshShape::hkpFastMeshShape(hkpFastMeshShape *this, float
 
   v3 = this;
   hkpMeshShape::hkpMeshShape((hkpMeshShape *)&this->vfptr, radius, numBitsForSubpartIndex);
-  v3->vfptr = (hkBaseObjectVtbl *)&hkpFastMeshShape::`vftable'{for `hkpShape'};
-  v3->vfptr = (hkpShapeContainerVtbl *)&hkpFastMeshShape::`vftable'{for `hkpShapeContainer'};
+  v3->vfptr = (hkBaseObjectVtbl *)&hkpFastMeshShape::`vftable{for `hkpShape};
+  v3->vfptr = (hkpShapeContainerVtbl *)&hkpFastMeshShape::`vftable{for `hkpShapeContainer};
 }
 
 // File Line: 25
@@ -20,8 +20,8 @@ void __fastcall hkpFastMeshShape::hkpFastMeshShape(hkpFastMeshShape *this, hkFin
   v3 = flag.m_finishing;
   v2 = this;
   hkpMeshShape::hkpMeshShape((hkpMeshShape *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpFastMeshShape::`vftable'{for `hkpShape'};
-  v2->vfptr = (hkpShapeContainerVtbl *)&hkpFastMeshShape::`vftable'{for `hkpShapeContainer'};
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpFastMeshShape::`vftable{for `hkpShape};
+  v2->vfptr = (hkpShapeContainerVtbl *)&hkpFastMeshShape::`vftable{for `hkpShapeContainer};
   if ( v3 )
     v2->m_type.m_storage = 27;
 }
@@ -68,7 +68,7 @@ hkpShape *__fastcall hkpFastMeshShape::getChildShape(hkpFastMeshShape *this, uns
     *(_WORD *)&(*v4)[40] = v12;
     *(_WORD *)&(*v4)[42] = v14;
     *(_OWORD *)&(*v4)[96] = 0i64;
-    *(_QWORD *)v4 = &hkpTriangleShape::`vftable';
+    *(_QWORD *)v4 = &hkpTriangleShape::`vftable;
   }
   else
   {

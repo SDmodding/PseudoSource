@@ -10,7 +10,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::PhysicsObjectPrope
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::PhysicsObjectProperties,UFG::qReflectObject>::sInventory.vfptr,
     "UFG::PhysicsObjectProperties",
     v0);
-  UFG::qReflectObjectType<UFG::PhysicsObjectProperties,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::PhysicsObjectProperties>::`vftable';
+  UFG::qReflectObjectType<UFG::PhysicsObjectProperties,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::PhysicsObjectProperties>::`vftable;
   UFG::qReflectInventory<UFG::PhysicsObjectProperties>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::PhysicsObjectProperties,UFG::qReflectObject>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(

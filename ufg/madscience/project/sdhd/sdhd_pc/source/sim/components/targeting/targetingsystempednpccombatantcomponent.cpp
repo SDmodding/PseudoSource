@@ -314,8 +314,8 @@ void __fastcall UFG::TargetingSystemPedNPCCombatantComponent::TargetingSystemPed
   v5 = (UFG::qNode<UFG::TargetingSystemPedNPCCombatantComponent,UFG::TargetingSystemPedNPCCombatantComponent> *)&v4->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TargetingSystemPedNPCCombatantComponent::`vftable'{for `UFG::SimComponent'};
-  v4->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::TargetingSystemPedNPCCombatantComponent::`vftable'{for `UFG::UpdateInterface'};
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TargetingSystemPedNPCCombatantComponent::`vftable{for `UFG::SimComponent};
+  v4->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::TargetingSystemPedNPCCombatantComponent::`vftable{for `UFG::UpdateInterface};
   UFG::RebindingComponentHandle<UFG::AttackRightsComponent,0>::RebindingComponentHandle<UFG::AttackRightsComponent,0>(&v4->m_pAttackRightsComponent);
   v6 = UFG::TargetingSystemPedNPCCombatantComponent::s_TargetingSystemPedNPCCombatantComponentList.mNode.mPrev;
   UFG::TargetingSystemPedNPCCombatantComponent::s_TargetingSystemPedNPCCombatantComponentList.mNode.mPrev->mNext = (UFG::qNode<UFG::TargetingSystemPedNPCCombatantComponent,UFG::TargetingSystemPedNPCCombatantComponent> *)&v4->mPrev;
@@ -340,8 +340,8 @@ void __fastcall UFG::TargetingSystemPedNPCCombatantComponent::~TargetingSystemPe
   UFG::qNode<UFG::TargetingSystemPedNPCCombatantComponent,UFG::TargetingSystemPedNPCCombatantComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TargetingSystemPedNPCCombatantComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::TargetingSystemPedNPCCombatantComponent::`vftable'{for `UFG::UpdateInterface'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TargetingSystemPedNPCCombatantComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::TargetingSystemPedNPCCombatantComponent::`vftable{for `UFG::UpdateInterface};
   if ( this == UFG::TargetingSystemPedNPCCombatantComponent::s_TargetingSystemPedNPCCombatantComponentpCurrentIterator )
     UFG::TargetingSystemPedNPCCombatantComponent::s_TargetingSystemPedNPCCombatantComponentpCurrentIterator = (UFG::TargetingSystemPedNPCCombatantComponent *)&this->mPrev[-178].mNext;
   v2 = (UFG::qNode<UFG::TargetingSystemPedNPCCombatantComponent,UFG::TargetingSystemPedNPCCombatantComponent> *)&this->mPrev;

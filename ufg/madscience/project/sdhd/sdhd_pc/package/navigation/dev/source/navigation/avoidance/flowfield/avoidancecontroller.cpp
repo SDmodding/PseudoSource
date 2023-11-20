@@ -335,15 +335,15 @@ void __fastcall UFG::AvoidanceController::AvoidanceController(UFG::AvoidanceCont
 
   v2 = this;
   UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name_uid);
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable'{for `UFG::SimComponent'};
-  v2->vfptr = (UFG::StateInterfaceVtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable'{for `UFG::StateInterface'};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable{for `UFG::SimComponent};
+  v2->vfptr = (UFG::StateInterfaceVtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable{for `UFG::StateInterface};
   v2->mAutoActivate = 1;
   v2->mAge = 0.0;
   v3 = (UFG::qNode<UFG::AvoidanceController,UFG::AvoidanceController> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AvoidanceController::`vftable'{for `UFG::SimComponent'};
-  v2->vfptr = (UFG::StateInterfaceVtbl *)&UFG::AvoidanceController::`vftable'{for `UFG::StateInterface'};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AvoidanceController::`vftable{for `UFG::SimComponent};
+  v2->vfptr = (UFG::StateInterfaceVtbl *)&UFG::AvoidanceController::`vftable{for `UFG::StateInterface};
   v2->mParams.MaxUpdateTimePerFrame = 0.0024999999;
   v2->mParams.MMFrontDP.x = -0.1;
   v2->mParams.MMFrontDP.y = 0.80000001;
@@ -599,8 +599,8 @@ void __fastcall UFG::AvoidanceController::~AvoidanceController(UFG::AvoidanceCon
   UFG::qNode<UFG::AvoidanceController,UFG::AvoidanceController> *v13; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AvoidanceController::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::StateInterfaceVtbl *)&UFG::AvoidanceController::`vftable'{for `UFG::StateInterface'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AvoidanceController::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::StateInterfaceVtbl *)&UFG::AvoidanceController::`vftable{for `UFG::StateInterface};
   if ( this == UFG::AvoidanceController::s_AvoidanceControllerpCurrentIterator )
     UFG::AvoidanceController::s_AvoidanceControllerpCurrentIterator = (UFG::AvoidanceController *)&this->mPrev[-5];
   v2 = (UFG::qNode<UFG::AvoidanceController,UFG::AvoidanceController> *)&this->mPrev;
@@ -631,7 +631,7 @@ void __fastcall UFG::AvoidanceController::~AvoidanceController(UFG::AvoidanceCon
   if ( v10 )
   {
     v11 = &v10[-1].mAvoidable.m_pPointer;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v10,
       0x40ui64,
       (int)v10[-1].mAvoidable.m_pPointer,
@@ -646,8 +646,8 @@ void __fastcall UFG::AvoidanceController::~AvoidanceController(UFG::AvoidanceCon
   v13->mPrev = v12;
   v2->mPrev = v2;
   v2->mNext = v2;
-  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable'{for `UFG::SimComponent'};
-  v1->vfptr = (UFG::StateInterfaceVtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable'{for `UFG::StateInterface'};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable{for `UFG::SimComponent};
+  v1->vfptr = (UFG::StateInterfaceVtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable{for `UFG::StateInterface};
   if ( (LOBYTE(v1->m_Flags) >> 2) & 1 )
   {
     v1->m_Flags |= 2u;

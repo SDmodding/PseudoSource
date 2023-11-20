@@ -106,13 +106,13 @@ LABEL_16:
     }
     else
     {
-      UFG::qPrintf("ERROR: Could not find root node '%s' in filename '%s'\n", "HostInfo", v1);
+      UFG::qPrintf("ERROR: Could not find root node %s in filename %s\n", "HostInfo", v1);
       result = 0;
     }
   }
   else
   {
-    UFG::qPrintf("ERROR: Could not open filename '%s'\n", v1);
+    UFG::qPrintf("ERROR: Could not open filename %s\n", v1);
     result = 0;
   }
   return result;

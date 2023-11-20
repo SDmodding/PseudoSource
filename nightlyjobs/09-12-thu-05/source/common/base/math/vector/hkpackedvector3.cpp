@@ -16,7 +16,7 @@ void __fastcall hkPackedVector3::pack(hkPackedVector3 *this, hkVector4f *vIn)
   v6 = (__m128)_mm_add_epi32(v5, v2);
   v7 = _mm_add_epi32(
          _mm_xor_si128(
-           (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v6),
+           (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v6),
            _mm_cvttps_epi32(v6)),
          *(__m128i *)roundingCorrection);
   this->m_values[0] = _mm_extract_epi16(v7, 1);
@@ -65,7 +65,7 @@ void __fastcall hkPackedVector3::pack(hkPackedVector3 *this, hkVector4d *vIn)
   v8 = (__m128)_mm_add_epi32(_mm_load_si128(&v11), v7);
   v9 = _mm_add_epi32(
          _mm_xor_si128(
-           (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v8),
+           (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v8),
            _mm_cvttps_epi32(v8)),
          *(__m128i *)roundingCorrection);
   this->m_values[0] = _mm_extract_epi16(v9, 1);
@@ -92,7 +92,7 @@ void __fastcall hkPackedVector8_3::pack(hkPackedVector8_3 *this, hkVector4f *vIn
   v6 = (__m128)_mm_add_epi32(v5, v2);
   v7 = _mm_add_epi32(
          _mm_xor_si128(
-           (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v6),
+           (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v6),
            _mm_cvttps_epi32(v6)),
          *(__m128i *)roundingCorrection_0);
   this->m_values[0] = _mm_cvtsi128_si32(_mm_srli_si128(v7, 3));

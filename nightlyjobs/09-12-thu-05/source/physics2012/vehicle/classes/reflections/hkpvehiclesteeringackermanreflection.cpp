@@ -31,7 +31,7 @@ hkClass *__fastcall hkpVehicleSteeringAckerman::staticClass()
 void __fastcall finishLoadedObjecthkpVehicleSteeringAckerman(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpVehicleSteeringAckerman::`vftable';
+    *(_QWORD *)p = &hkpVehicleSteeringAckerman::`vftable;
 }
 
 // File Line: 75
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkpVehicleSteeringAckerman(void *p)
 // RVA: 0xE25F20
 void **__fastcall getVtablehkpVehicleSteeringAckerman()
 {
-  return &hkpVehicleSteeringAckerman::`vftable';
+  return &hkpVehicleSteeringAckerman::`vftable;
 }
 
 // File Line: 101

@@ -7,7 +7,7 @@ AK::IAkPluginParam *__fastcall CreateConvolutionReverbFXParams(AK::IAkPluginMemA
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 56ui64);
   if ( !result )
     return 0i64;
-  result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkConvolutionReverbFXParams::`vftable';
+  result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkConvolutionReverbFXParams::`vftable;
   LODWORD(result[2].vfptr) = 1127481344;
   *(AK::IAkRTPCSubscriberVtbl **)((char *)&result[2].vfptr + 4) = (AK::IAkRTPCSubscriberVtbl *)1065353216;
   HIDWORD(result[3].vfptr) = 1065353216;
@@ -23,7 +23,7 @@ AK::IAkPluginParam *__fastcall CreateConvolutionReverbFXParams(AK::IAkPluginMemA
 // RVA: 0xB160E0
 void __fastcall CAkConvolutionReverbFXParams::CAkConvolutionReverbFXParams(CAkConvolutionReverbFXParams *this)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkConvolutionReverbFXParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkConvolutionReverbFXParams::`vftable;
   this->m_Params.fStereoWidth = 180.0;
   *(_QWORD *)&this->m_Params.fPreDelay = 0i64;
   *(_QWORD *)&this->m_Params.fInputCenterLevel = 1065353216i64;
@@ -38,14 +38,14 @@ void __fastcall CAkConvolutionReverbFXParams::CAkConvolutionReverbFXParams(CAkCo
 // RVA: 0xB16130
 void __fastcall CAkConvolutionReverbFXParams::~CAkConvolutionReverbFXParams(CAkConvolutionReverbFXParams *this)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable;
 }
 
 // File Line: 33
 // RVA: 0xB16150
 void __fastcall CAkConvolutionReverbFXParams::CAkConvolutionReverbFXParams(CAkConvolutionReverbFXParams *this, CAkConvolutionReverbFXParams *in_rCopy)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkConvolutionReverbFXParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkConvolutionReverbFXParams::`vftable;
   this->m_Params.fStereoWidth = 180.0;
   *(_QWORD *)&this->m_Params.fInputCenterLevel = 1065353216i64;
   this->m_Params.fFrontLevel = 1.0;
@@ -79,7 +79,7 @@ AK::IAkPluginParam *__fastcall CAkConvolutionReverbFXParams::Clone(CAkConvolutio
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 56ui64);
   if ( result )
   {
-    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkConvolutionReverbFXParams::`vftable';
+    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkConvolutionReverbFXParams::`vftable;
     LODWORD(result[2].vfptr) = 1127481344;
     *(AK::IAkRTPCSubscriberVtbl **)((char *)&result[2].vfptr + 4) = (AK::IAkRTPCSubscriberVtbl *)1065353216;
     HIDWORD(result[3].vfptr) = 1065353216;

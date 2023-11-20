@@ -13,11 +13,11 @@ void __fastcall Scaleform::GFx::AS3::VMFile::VMFile(Scaleform::GFx::AS3::VMFile 
 
   v3 = this;
   v4 = vm->GC.GC;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::RefCountBaseGC<328>::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::RefCountBaseGC<328>::`vftable;
   this->RefCount = 1;
   this->pRCCRaw = (unsigned __int64)v4;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::GASRefCountBase::`vftable';
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::VMFile::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::GASRefCountBase::`vftable;
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::VMFile::`vftable;
   this->VMRef = vm;
   this->AppDomain.pObject = appDomain;
   if ( appDomain )
@@ -66,7 +66,7 @@ void __fastcall Scaleform::GFx::AS3::VMFile::~VMFile(Scaleform::GFx::AS3::VMFile
   unsigned int v3; // eax
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::VMFile::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::VMFile::`vftable;
   Scaleform::HashSetBase<Scaleform::Ptr<Scaleform::GFx::ASStringNode>,Scaleform::GFx::AS3::ASStringNodePtrHashFunc,Scaleform::GFx::AS3::ASStringNodePtrHashFunc,Scaleform::AllocatorLH<Scaleform::Ptr<Scaleform::GFx::ASStringNode>,340>,Scaleform::HashsetEntry<Scaleform::Ptr<Scaleform::GFx::ASStringNode>,Scaleform::GFx::AS3::ASStringNodePtrHashFunc>>::~HashSetBase<Scaleform::Ptr<Scaleform::GFx::ASStringNode>,Scaleform::GFx::AS3::ASStringNodePtrHashFunc,Scaleform::GFx::AS3::ASStringNodePtrHashFunc,Scaleform::AllocatorLH<Scaleform::Ptr<Scaleform::GFx::ASStringNode>,340>,Scaleform::HashsetEntry<Scaleform::Ptr<Scaleform::GFx::ASStringNode>,Scaleform::GFx::AS3::ASStringNodePtrHashFunc>>((Scaleform::HashSetBase<Scaleform::Ptr<Scaleform::GFx::ASStringNode>,Scaleform::GFx::AS3::ASStringNodePtrHashFunc,Scaleform::GFx::AS3::ASStringNodePtrHashFunc,Scaleform::AllocatorLH<Scaleform::Ptr<Scaleform::GFx::ASStringNode>,340>,Scaleform::HashsetEntry<Scaleform::Ptr<Scaleform::GFx::ASStringNode>,Scaleform::GFx::AS3::ASStringNodePtrHashFunc> > *)&this->ASStringNodeSet.pTable);
   Scaleform::ArrayDataBase<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::VMAbcFile>,Scaleform::AllocatorLH<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::VMAbcFile>,2>,Scaleform::ArrayDefaultPolicy>::~ArrayDataBase<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::VMAbcFile>,Scaleform::AllocatorLH<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::VMAbcFile>,2>,Scaleform::ArrayDefaultPolicy>((Scaleform::ArrayDataBase<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLAttr>,Scaleform::AllocatorLH<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLAttr>,2>,Scaleform::ArrayDefaultPolicy> *)&v1->LoadedClasses);
   Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::GFx::AS3::Abc::MbiInd,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::InstanceTraits::Traits>,Scaleform::FixedSizeHash<Scaleform::GFx::AS3::Abc::MbiInd>>,Scaleform::HashNode<Scaleform::GFx::AS3::Abc::MbiInd,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::InstanceTraits::Traits>,Scaleform::FixedSizeHash<Scaleform::GFx::AS3::Abc::MbiInd>>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::AS3::Abc::MbiInd,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::InstanceTraits::Traits>,Scaleform::FixedSizeHash<Scaleform::GFx::AS3::Abc::MbiInd>>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::AS3::Abc::MbiInd,340>,Scaleform::HashsetCachedNodeEntry<Scaleform::HashNode<Scaleform::GFx::AS3::Abc::MbiInd,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::InstanceTraits::Traits>,Scaleform::FixedSizeHash<Scaleform::GFx::AS3::Abc::MbiInd>>,Scaleform::HashNode<Scaleform::GFx::AS3::Abc::MbiInd,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::InstanceTraits::Traits>,Scaleform::FixedSizeHash<Scaleform::GFx::AS3::Abc::MbiInd>>::NodeHashF>>::~HashSetBase<Scaleform::HashNode<Scaleform::GFx::AS3::Abc::MbiInd,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::InstanceTraits::Traits>,Scaleform::FixedSizeHash<Scaleform::GFx::AS3::Abc::MbiInd>>,Scaleform::HashNode<Scaleform::GFx::AS3::Abc::MbiInd,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::InstanceTraits::Traits>,Scaleform::FixedSizeHash<Scaleform::GFx::AS3::Abc::MbiInd>>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::AS3::Abc::MbiInd,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::InstanceTraits::Traits>,Scaleform::FixedSizeHash<Scaleform::GFx::AS3::Abc::MbiInd>>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::AS3::Abc::MbiInd,340>,Scaleform::HashsetCachedNodeEntry<Scaleform::HashNode<Scaleform::GFx::AS3::Abc::MbiInd,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::InstanceTraits::Traits>,Scaleform::FixedSizeHash<Scaleform::GFx::AS3::Abc::MbiInd>>,Scaleform::HashNode<Scaleform::GFx::AS3::Abc::MbiInd,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::InstanceTraits::Traits>,Scaleform::FixedSizeHash<Scaleform::GFx::AS3::Abc::MbiInd>>::NodeHashF>>((Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::GFx::AS3::Abc::MbiInd,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::InstanceTraits::Traits>,Scaleform::FixedSizeHash<Scaleform::GFx::AS3::Abc::MbiInd> >,Scaleform::HashNode<Scaleform::GFx::AS3::Abc::MbiInd,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::InstanceTraits::Traits>,Scaleform::FixedSizeHash<Scaleform::GFx::AS3::Abc::MbiInd> >::NodeHashF,Scaleform::HashNode<Scaleform::GFx::AS3::Abc::MbiInd,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::InstanceTraits::Traits>,Scaleform::FixedSizeHash<Scaleform::GFx::AS3::Abc::MbiInd> >::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::AS3::Abc::MbiInd,340>,Scaleform::HashsetCachedNodeEntry<Scaleform::HashNode<Scaleform::GFx::AS3::Abc::MbiInd,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::InstanceTraits::Traits>,Scaleform::FixedSizeHash<Scaleform::GFx::AS3::Abc::MbiInd> >,Scaleform::HashNode<Scaleform::GFx::AS3::Abc::MbiInd,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::InstanceTraits::Traits>,Scaleform::Fix)&v1->ActivationTraitsCache.mHash.pTable);
@@ -558,7 +558,7 @@ void __fastcall Scaleform::GFx::AS3::VMAbcFile::VMAbcFile(Scaleform::GFx::AS3::V
   v5 = vm;
   v6 = this;
   Scaleform::GFx::AS3::VMFile::VMFile((Scaleform::GFx::AS3::VMFile *)&this->vfptr, vm, appDomain);
-  v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::VMAbcFile::`vftable';
+  v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::VMAbcFile::`vftable;
   if ( *v4 )
     Scaleform::Render::RenderBuffer::AddRef(*v4);
   v6->File.pObject = (Scaleform::GFx::AS3::Abc::File *)*v4;
@@ -621,7 +621,7 @@ void __fastcall Scaleform::GFx::AS3::VMAbcFile::~VMAbcFile(Scaleform::GFx::AS3::
   __m128i v30; // [rsp+30h] [rbp-48h]
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::VMAbcFile::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::VMAbcFile::`vftable;
   v2 = this->VMRef;
   v3 = (void **)&this->AliasClass.pTable;
   v4 = this->AliasClass.pTable;
@@ -887,11 +887,11 @@ Scaleform::Pickable<Scaleform::GFx::AS3::NamespaceSet> *__fastcall Scaleform::GF
   if ( v6 )
   {
     v7 = v5->VMRef->GC.GC;
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::RefCountBaseGC<328>::`vftable';
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::RefCountBaseGC<328>::`vftable;
     v6->RefCount = 1;
     v6->pRCCRaw = (unsigned __int64)v7;
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::GASRefCountBase::`vftable';
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::NamespaceSet::`vftable';
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::GASRefCountBase::`vftable;
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::NamespaceSet::`vftable;
     v21 = (signed __int64)&v6->Namespaces;
     *(_OWORD *)v21 = 0ui64;
     *(_QWORD *)(v21 + 16) = 0i64;
@@ -1799,7 +1799,7 @@ bool __fastcall Scaleform::GFx::AS3::VMAbcFile::RegisterScrips(Scaleform::GFx::A
       if ( v9 )
       {
         Scaleform::GFx::AS3::InstanceTraits::fl::GlobalObject::GlobalObject(v9, v4);
-        v10->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::GlobalObjectScript::`vftable';
+        v10->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::GlobalObjectScript::`vftable;
         v10[1].FirstOwnSlotNum = (unsigned __int64)v3;
         v3->RefCount = (v3->RefCount + 1) & 0x8FBFFFFF;
         v10[1].Parent = (Scaleform::GFx::AS3::Slots *)v8;
@@ -2323,7 +2323,7 @@ Scaleform::GFx::AS3::Abc::Multiname *__fastcall Scaleform::GFx::AS3::VMAbcFile::
 // RVA: 0x7900E0
 void __fastcall Scaleform::GFx::AS3::XMLSupport::~XMLSupport(Scaleform::GFx::AS3::XMLSupport *this)
 {
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::XMLSupport::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::XMLSupport::`vftable;
   Scaleform::GFx::AS3::GASRefCountBase::~GASRefCountBase((Scaleform::GFx::AS3::GASRefCountBase *)&this->vfptr);
 }
 
@@ -3450,11 +3450,11 @@ void __fastcall Scaleform::GFx::AS3::VMAppDomain::VMAppDomain(Scaleform::GFx::AS
 
   v3 = this;
   v4 = vm->GC.GC;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::RefCountBaseGC<328>::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::RefCountBaseGC<328>::`vftable;
   this->RefCount = 1;
   this->pRCCRaw = (unsigned __int64)v4;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::GASRefCountBase::`vftable';
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::VMAppDomain::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::GASRefCountBase::`vftable;
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::VMAppDomain::`vftable;
   this->ParentDomain = 0i64;
   v5 = vm->MHeap;
   v3->ClassTraitsSet.Entries.mHash.pTable = 0i64;
@@ -3474,7 +3474,7 @@ void __fastcall Scaleform::GFx::AS3::VMAppDomain::~VMAppDomain(Scaleform::GFx::A
   Scaleform::GFx::AS3::VMAppDomain *v1; // rdi
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::VMAppDomain::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::VMAppDomain::`vftable;
   Scaleform::ArrayDataBase<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::VMAbcFile>,Scaleform::AllocatorLH<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::VMAbcFile>,2>,Scaleform::ArrayDefaultPolicy>::~ArrayDataBase<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::VMAbcFile>,Scaleform::AllocatorLH<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::VMAbcFile>,2>,Scaleform::ArrayDefaultPolicy>((Scaleform::ArrayDataBase<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLAttr>,Scaleform::AllocatorLH<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLAttr>,2>,Scaleform::ArrayDefaultPolicy> *)&this->ChildDomains);
   Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::GFx::AS3::MultinameHash<Scaleform::GFx::AS3::ClassTraits::Traits *,329>::Key,Scaleform::GFx::AS3::ClassTraits::Traits *,Scaleform::GFx::AS3::MultinameHash<Scaleform::GFx::AS3::ClassTraits::Traits *,329>::Key::HashFunctor>,Scaleform::HashNode<Scaleform::GFx::AS3::MultinameHash<Scaleform::GFx::AS3::ClassTraits::Traits *,329>::Key,Scaleform::GFx::AS3::ClassTraits::Traits *,Scaleform::GFx::AS3::MultinameHash<Scaleform::GFx::AS3::ClassTraits::Traits *,329>::Key::HashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::AS3::MultinameHash<Scaleform::GFx::AS3::ClassTraits::Traits *,329>::Key,Scaleform::GFx::AS3::ClassTraits::Traits *,Scaleform::GFx::AS3::MultinameHash<Scaleform::GFx::AS3::ClassTraits::Traits *,329>::Key::HashFunctor>::NodeAltHashF,Scaleform::AllocatorDH<Scaleform::HashNode<Scaleform::GFx::AS3::MultinameHash<Scaleform::GFx::AS3::ClassTraits::Traits *,329>::Key,Scaleform::GFx::AS3::ClassTraits::Traits *,Scaleform::GFx::AS3::MultinameHash<Scaleform::GFx::AS3::ClassTraits::Traits *,329>::Key::HashFunctor>,329>,Scaleform::HashsetCachedNodeEntry<Scaleform::HashNode<Scaleform::GFx::AS3::MultinameHash<Scaleform::GFx::AS3::ClassTraits::Traits *,329>::Key,Scaleform::GFx::AS3::ClassTraits::Traits *,Scaleform::GFx::AS3::MultinameHash<Scaleform::GFx::AS3::ClassTraits::Traits *,329>::Key::HashFunctor>,Scaleform::HashNode<Scaleform::GFx::AS3::MultinameHash<Scaleform::GFx::AS3::ClassTraits::Traits *,329>::Key,Scaleform::GFx::AS3::ClassTraits::Traits *,Scaleform::GFx::AS3::MultinameHash<Scaleform::GFx::AS3::ClassTraits::Traits *,329>::Key::HashFunctor>::NodeHashF>>::Clear((Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::GFx::AS3::MultinameHash<bool,2>::Key,bool,Scaleform::GFx::AS3::MultinameHash<bool,2>::Key::HashFunctor>,Scaleform::HashNode<Scaleform::GFx::AS3::MultinameHash<bool,2>::Key,bool,Scaleform::GFx::AS3::MultinameHash<bool,2>::Key::HashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::AS3::MultinameHash<bool,2>::Key,bool,Scaleform::GFx::AS3::MultinameHash<bool,2>::Key::HashFunctor>::NodeAltHashF,Scaleform::AllocatorDH<Scaleform::HashNode<Scaleform::GFx::AS3::MultinameHash<bool,2>::Key,bool,Scaleform::GFx::AS3::MultinameHash<bool,2>::Key::HashFunctor>,2>,Scaleform::HashsetCachedNodeEntry<Scaleform::HashNode<Scaleform::GFx::AS3::MultinameHash<bool,2>::Key,bool,Scaleform::GFx::AS3::MultinameHash<bool,2>::Key::HashFunctor>,Scaleform::HashNode<Scaleform::GFx::AS3::MultinameHash<bool,2>::Key,bool,Scaleform::GFx::AS3::MultinameHash<bool,2>::Key::HashFunctor>::NodeHashF> > *)&v1->ClassTraitsSet);
   Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::GFx::AS3::MultinameHash<Scaleform::GFx::AS3::ClassTraits::Traits *,329>::Key,Scaleform::GFx::AS3::ClassTraits::Traits *,Scaleform::GFx::AS3::MultinameHash<Scaleform::GFx::AS3::ClassTraits::Traits *,329>::Key::HashFunctor>,Scaleform::HashNode<Scaleform::GFx::AS3::MultinameHash<Scaleform::GFx::AS3::ClassTraits::Traits *,329>::Key,Scaleform::GFx::AS3::ClassTraits::Traits *,Scaleform::GFx::AS3::MultinameHash<Scaleform::GFx::AS3::ClassTraits::Traits *,329>::Key::HashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::AS3::MultinameHash<Scaleform::GFx::AS3::ClassTraits::Traits *,329>::Key,Scaleform::GFx::AS3::ClassTraits::Traits *,Scaleform::GFx::AS3::MultinameHash<Scaleform::GFx::AS3::ClassTraits::Traits *,329>::Key::HashFunctor>::NodeAltHashF,Scaleform::AllocatorDH<Scaleform::HashNode<Scaleform::GFx::AS3::MultinameHash<Scaleform::GFx::AS3::ClassTraits::Traits *,329>::Key,Scaleform::GFx::AS3::ClassTraits::Traits *,Scaleform::GFx::AS3::MultinameHash<Scaleform::GFx::AS3::ClassTraits::Traits *,329>::Key::HashFunctor>,329>,Scaleform::HashsetCachedNodeEntry<Scaleform::HashNode<Scaleform::GFx::AS3::MultinameHash<Scaleform::GFx::AS3::ClassTraits::Traits *,329>::Key,Scaleform::GFx::AS3::ClassTraits::Traits *,Scaleform::GFx::AS3::MultinameHash<Scaleform::GFx::AS3::ClassTraits::Traits *,329>::Key::HashFunctor>,Scaleform::HashNode<Scaleform::GFx::AS3::MultinameHash<Scaleform::GFx::AS3::ClassTraits::Traits *,329>::Key,Scaleform::GFx::AS3::ClassTraits::Traits *,Scaleform::GFx::AS3::MultinameHash<Scaleform::GFx::AS3::ClassTraits::Traits *,329>::Key::HashFunctor>::NodeHashF>>::Clear((Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::GFx::AS3::MultinameHash<bool,2>::Key,bool,Scaleform::GFx::AS3::MultinameHash<bool,2>::Key::HashFunctor>,Scaleform::HashNode<Scaleform::GFx::AS3::MultinameHash<bool,2>::Key,bool,Scaleform::GFx::AS3::MultinameHash<bool,2>::Key::HashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::AS3::MultinameHash<bool,2>::Key,bool,Scaleform::GFx::AS3::MultinameHash<bool,2>::Key::HashFunctor>::NodeAltHashF,Scaleform::AllocatorDH<Scaleform::HashNode<Scaleform::GFx::AS3::MultinameHash<bool,2>::Key,bool,Scaleform::GFx::AS3::MultinameHash<bool,2>::Key::HashFunctor>,2>,Scaleform::HashsetCachedNodeEntry<Scaleform::HashNode<Scaleform::GFx::AS3::MultinameHash<bool,2>::Key,bool,Scaleform::GFx::AS3::MultinameHash<bool,2>::Key::HashFunctor>,Scaleform::HashNode<Scaleform::GFx::AS3::MultinameHash<bool,2>::Key,bool,Scaleform::GFx::AS3::MultinameHash<bool,2>::Key::HashFunctor>::NodeHashF> > *)&v1->ClassTraitsSet);
@@ -3820,7 +3820,7 @@ void __fastcall Scaleform::GFx::AS3::VM::VM(Scaleform::GFx::AS3::VM *this, Scale
 
   v114 = -2i64;
   v4 = this;
-  this->vfptr = (Scaleform::GFx::AS3::VMVtbl *)&Scaleform::GFx::AS3::VM::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::VMVtbl *)&Scaleform::GFx::AS3::VM::`vftable;
   *(_WORD *)&this->Initialized = 0;
   this->LoadingAbcFile = 0;
   this->StringManagerRef = sm;
@@ -3840,11 +3840,11 @@ void __fastcall Scaleform::GFx::AS3::VM::VM(Scaleform::GFx::AS3::VM *this, Scale
   if ( v6 )
   {
     v7 = v4->GC.GC;
-    *(_QWORD *)v6 = &Scaleform::GFx::AS3::RefCountBaseGC<328>::`vftable';
+    *(_QWORD *)v6 = &Scaleform::GFx::AS3::RefCountBaseGC<328>::`vftable;
     *(_DWORD *)(v6 + 32) = 1;
     *(_QWORD *)(v6 + 8) = v7;
-    *(_QWORD *)v6 = &Scaleform::GFx::AS3::GASRefCountBase::`vftable';
-    *(_QWORD *)v6 = &Scaleform::GFx::AS3::XMLSupport::`vftable';
+    *(_QWORD *)v6 = &Scaleform::GFx::AS3::GASRefCountBase::`vftable;
+    *(_QWORD *)v6 = &Scaleform::GFx::AS3::XMLSupport::`vftable;
     *(_BYTE *)(v6 + 40) = 0;
   }
   else
@@ -3909,11 +3909,11 @@ void __fastcall Scaleform::GFx::AS3::VM::VM(Scaleform::GFx::AS3::VM *this, Scale
   if ( v15 )
   {
     v18 = v4->GC.GC;
-    *(_QWORD *)v15 = &Scaleform::GFx::AS3::RefCountBaseGC<328>::`vftable';
+    *(_QWORD *)v15 = &Scaleform::GFx::AS3::RefCountBaseGC<328>::`vftable;
     *(_DWORD *)(v15 + 32) = 1;
     *(_QWORD *)(v15 + 8) = v18;
-    *(_QWORD *)v15 = &Scaleform::GFx::AS3::GASRefCountBase::`vftable';
-    *(_QWORD *)v15 = &Scaleform::GFx::AS3::VMAppDomain::`vftable';
+    *(_QWORD *)v15 = &Scaleform::GFx::AS3::GASRefCountBase::`vftable;
+    *(_QWORD *)v15 = &Scaleform::GFx::AS3::VMAppDomain::`vftable;
     *(_QWORD *)(v15 + 40) = 0i64;
     v16 = v4->MHeap;
     v113 = v15 + 48;
@@ -4009,11 +4009,11 @@ void __fastcall Scaleform::GFx::AS3::VM::VM(Scaleform::GFx::AS3::VM *this, Scale
   if ( v28 )
   {
     v31 = v4->GC.GC;
-    *(_QWORD *)v28 = &Scaleform::GFx::AS3::RefCountBaseGC<328>::`vftable';
+    *(_QWORD *)v28 = &Scaleform::GFx::AS3::RefCountBaseGC<328>::`vftable;
     *(_DWORD *)(v28 + 32) = 1;
     *(_QWORD *)(v28 + 8) = v31;
-    *(_QWORD *)v28 = &Scaleform::GFx::AS3::GASRefCountBase::`vftable';
-    *(_QWORD *)v28 = &Scaleform::GFx::AS3::Instances::fl::Namespace::`vftable';
+    *(_QWORD *)v28 = &Scaleform::GFx::AS3::GASRefCountBase::`vftable;
+    *(_QWORD *)v28 = &Scaleform::GFx::AS3::Instances::fl::Namespace::`vftable;
     *(_QWORD *)(v28 + 40) &= 0xFFFFFFFFFFFFFFE0ui64;
     *(_QWORD *)(v28 + 48) = v4;
     Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
@@ -4190,7 +4190,7 @@ void __fastcall Scaleform::GFx::AS3::VM::VM(Scaleform::GFx::AS3::VM *this, Scale
   if ( v90 )
   {
     Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v90, v4, &Scaleform::GFx::AS3::fl::FunctionCICpp);
-    v92->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::Function::`vftable';
+    v92->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::Function::`vftable;
     LODWORD(v92[1].vfptr) = 0;
     v92[1].pRCCRaw = 0i64;
     v92[1].pNext = 0i64;
@@ -4388,7 +4388,7 @@ void __fastcall Scaleform::GFx::AS3::VM::~VM(Scaleform::GFx::AS3::VM *this)
   unsigned int v72; // eax
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::AS3::VMVtbl *)&Scaleform::GFx::AS3::VM::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::VMVtbl *)&Scaleform::GFx::AS3::VM::`vftable;
   this->InDestructor = 1;
   Scaleform::GFx::AS3::VM::UnregisterAllAbcFiles(this);
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v1->VMAbcFilesWeak.Data.Data);
@@ -7021,7 +7021,7 @@ LABEL_92:
   *(_QWORD *)&v32[0].Result = (char *)&ptr + 280;
   Scaleform::ConstructorMov<Scaleform::GFx::AS3::Value>::DestructArray(ptr.CallArgs.Data.Data, ptr.CallArgs.Data.Size);
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, ptr.CallArgs.Data.Data);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     ptr.FixedArr,
     0x20ui64,
     8,
@@ -7422,7 +7422,7 @@ LABEL_55:
   *(_QWORD *)&v32[0].Result = (char *)&ptr + 280;
   Scaleform::ConstructorMov<Scaleform::GFx::AS3::Value>::DestructArray(ptr.CallArgs.Data.Data, ptr.CallArgs.Data.Size);
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, ptr.CallArgs.Data.Data);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     ptr.FixedArr,
     0x20ui64,
     8,
@@ -7718,7 +7718,7 @@ LABEL_55:
   *(_QWORD *)&v31[0].Result = (char *)&ptr + 280;
   Scaleform::ConstructorMov<Scaleform::GFx::AS3::Value>::DestructArray(ptr.CallArgs.Data.Data, ptr.CallArgs.Data.Size);
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, ptr.CallArgs.Data.Data);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     ptr.FixedArr,
     0x20ui64,
     8,
@@ -7798,7 +7798,7 @@ void __fastcall Scaleform::GFx::AS3::VM::exec_callmethod(Scaleform::GFx::AS3::VM
     (Scaleform::GFx::AS3::Value *)ptr.FixedArr[7].value.VS._2.VObj,
     (unsigned __int64)ptr.CallArgs.Data.Data);
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, ptr.FixedArr[7].value.VS._2.VObj);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     ptr.FixedArr,
     0x20ui64,
     8,
@@ -7943,7 +7943,7 @@ void __fastcall Scaleform::GFx::AS3::VM::exec_callsupermethod(Scaleform::GFx::AS
       Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, ptr.FixedArr[7].Bonus.pWeakProxy);
     }
   }
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     ptr.FixedArr,
     0x20ui64,
     8,
@@ -8118,7 +8118,7 @@ void __fastcall Scaleform::GFx::AS3::VM::exec_callgetter(Scaleform::GFx::AS3::VM
   v28 = &v25;
   Scaleform::ConstructorMov<Scaleform::GFx::AS3::Value>::DestructArray(v25, v26);
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v25);
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 8, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 8, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
 }
 
 // File Line: 3008
@@ -8391,7 +8391,7 @@ LABEL_76:
   Scaleform::ConstructorMov<Scaleform::GFx::AS3::Value>::DestructArray(ptr.CallArgs.Data.Data, ptr.CallArgs.Data.Size);
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, ptr.CallArgs.Data.Data);
 LABEL_83:
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     ptr.FixedArr,
     0x20ui64,
     8,
@@ -8614,7 +8614,7 @@ void __fastcall Scaleform::GFx::AS3::VM::exec_callstatic(Scaleform::GFx::AS3::VM
   v36 = &ptr.CallArgs;
   Scaleform::ConstructorMov<Scaleform::GFx::AS3::Value>::DestructArray(ptr.CallArgs.Data.Data, ptr.CallArgs.Data.Size);
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, ptr.CallArgs.Data.Data);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     ptr.FixedArr,
     0x20ui64,
     8,
@@ -8850,7 +8850,7 @@ void __fastcall Scaleform::GFx::AS3::VM::exec_call(Scaleform::GFx::AS3::VM *this
     (Scaleform::GFx::AS3::Value *)ptr.FixedArr[7].Bonus.pWeakProxy,
     (unsigned __int64)ptr.FixedArr[7].value.VS._1.VStr);
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, ptr.FixedArr[7].Bonus.pWeakProxy);
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 8, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 8, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
 }
 
 // File Line: 3140
@@ -8915,7 +8915,7 @@ void __fastcall Scaleform::GFx::AS3::VM::exec_callobject(Scaleform::GFx::AS3::VM
   }
   Scaleform::ConstructorMov<Scaleform::GFx::AS3::Value>::DestructArray(ptr.CallArgs.Data.Data, ptr.CallArgs.Data.Size);
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, ptr.CallArgs.Data.Data);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     ptr.FixedArr,
     0x20ui64,
     8,
@@ -9169,7 +9169,7 @@ void __fastcall Scaleform::GFx::AS3::VM::exec_callsuper(Scaleform::GFx::AS3::VM 
       Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v25);
     }
   }
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 8, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 8, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
 }
 
 // File Line: 3184
@@ -9419,7 +9419,7 @@ void __fastcall Scaleform::GFx::AS3::VM::exec_callsupervoid(Scaleform::GFx::AS3:
       Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v25);
     }
   }
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 8, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 8, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
 }
 
 // File Line: 3213
@@ -9544,7 +9544,7 @@ void __fastcall Scaleform::GFx::AS3::VM::exec_construct(Scaleform::GFx::AS3::VM 
       Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, ptr.FixedArr[7].value.VS._2.VObj);
     }
   }
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     ptr.FixedArr,
     0x20ui64,
     8,
@@ -9633,7 +9633,7 @@ void __fastcall Scaleform::GFx::AS3::VM::exec_constructsuper(Scaleform::GFx::AS3
     (Scaleform::GFx::AS3::Value *)ptr.FixedArr[7].value.VS._2.VObj,
     (unsigned __int64)ptr.CallArgs.Data.Data);
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, ptr.FixedArr[7].value.VS._2.VObj);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     ptr.FixedArr,
     0x20ui64,
     8,
@@ -9956,7 +9956,7 @@ LABEL_89:
     Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v33);
   }
 LABEL_90:
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 8, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 8, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
 }
 
 // File Line: 3360
@@ -12466,7 +12466,7 @@ void __fastcall Scaleform::GFx::AS3::VM::exec_applytype(Scaleform::GFx::AS3::VM 
     Scaleform::ConstructorMov<Scaleform::GFx::AS3::Value>::DestructArray(ptr.CallArgs.Data.Data, ptr.CallArgs.Data.Size);
     Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, ptr.CallArgs.Data.Data);
   }
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     ptr.FixedArr,
     0x20ui64,
     8,
@@ -15033,7 +15033,7 @@ void __fastcall Scaleform::GFx::AS3::VM::ThrowErrorInternal(Scaleform::GFx::AS3:
     &ptr);
   v5->HandleException = 1;
   Scaleform::GFx::AS3::Value::Assign(&v5->ExceptionObj, &other);
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
   if ( (other.Flags & 0x1F) > 9 )
   {
     if ( (other.Flags >> 9) & 1 )

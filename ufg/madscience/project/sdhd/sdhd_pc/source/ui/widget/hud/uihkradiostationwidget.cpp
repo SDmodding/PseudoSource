@@ -20,7 +20,7 @@ void __fastcall UFG::UIHKRadioStationWidget::~UIHKRadioStationWidget(UFG::UIHKRa
   if ( v4 )
   {
     v5 = &v4[-1].texture.mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v4,
       0x50ui64,
       v4[-1].texture.mStringHash32,
@@ -34,7 +34,7 @@ void __fastcall UFG::UIHKRadioStationWidget::~UIHKRadioStationWidget(UFG::UIHKRa
   if ( v6 )
   {
     v7 = &v6[-1].texture.mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v6,
       0x50ui64,
       v6[-1].texture.mStringHash32,
@@ -239,7 +239,7 @@ void __fastcall UFG::UIHKRadioStationWidget::Flash_SetTexture(UFG::UIHKRadioStat
   v4 = screen->mRenderable->m_movie.pObject;
   if ( v4 )
   {
-    `eh vector constructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( ((unsigned int)pargs.Type >> 6) & 1 )
     {
       (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
@@ -251,7 +251,7 @@ void __fastcall UFG::UIHKRadioStationWidget::Flash_SetTexture(UFG::UIHKRadioStat
     pargs.Type = 6;
     *(_QWORD *)&pargs.mValue.NValue = v3;
     Scaleform::GFx::Movie::Invoke(v4, "mc_RadioStations.SetTexture", 0i64, &pargs, 1u);
-    `eh vector destructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 
@@ -277,7 +277,7 @@ void __fastcall UFG::UIHKRadioStationWidget::Flash_SetSongTitle(UFG::UIHKRadioSt
     v3 = UFG::RadioFullyControlled::GetCurrentlyPlayingSong(UFG::RadioFullyControlled::sm_playerRadio);
     v4 = UFG::UI::LocalizeText(v3);
     UFG::qString::qString(&v6, v4);
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     v5 = v6.mData;
     if ( (v9 >> 6) & 1 )
     {
@@ -287,7 +287,7 @@ void __fastcall UFG::UIHKRadioStationWidget::Flash_SetSongTitle(UFG::UIHKRadioSt
     v9 = 6;
     v10 = v5;
     Scaleform::GFx::Movie::Invoke(v2, "mc_RadioStations.SetSongTitle", 0i64, (Scaleform::GFx::Value *)&ptr, 1u);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     UFG::qString::~qString(&v6);
   }
 }
@@ -310,7 +310,7 @@ void __fastcall UFG::UIHKRadioStationWidget::Flash_SetStationName(UFG::UIHKRadio
   {
     v3 = UFG::UI::LocalizeText(UFG::RadioFullyControlled::sm_playerRadio->m_curStation->m_name);
     UFG::qString::qString(&v5, v3);
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     v4 = v5.mData;
     if ( (v8 >> 6) & 1 )
     {
@@ -320,7 +320,7 @@ void __fastcall UFG::UIHKRadioStationWidget::Flash_SetStationName(UFG::UIHKRadio
     v8 = 6;
     v9 = v4;
     Scaleform::GFx::Movie::Invoke(v2, "mc_RadioStations.SetStationName", 0i64, (Scaleform::GFx::Value *)&ptr, 1u);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     UFG::qString::~qString(&v5);
   }
 }

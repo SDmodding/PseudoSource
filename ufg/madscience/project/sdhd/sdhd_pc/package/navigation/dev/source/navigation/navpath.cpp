@@ -13,7 +13,7 @@ void __fastcall UFG::NavPath::~NavPath(UFG::NavPath *this)
   UFG::NavObject **v9; // rbx
 
   v1 = this;
-  this->vfptr = (UFG::NavPathVtbl *)&UFG::NavPath::`vftable';
+  this->vfptr = (UFG::NavPathVtbl *)&UFG::NavPath::`vftable;
   v2 = 0;
   if ( this->m_aWaypoints.size )
   {
@@ -45,7 +45,7 @@ void __fastcall UFG::NavPath::~NavPath(UFG::NavPath *this)
   if ( v8 )
   {
     v9 = &v8[-1].m_pNavObject;
-    `eh vector destructor iterator'(v8, 0x50ui64, (int)v8[-1].m_pNavObject, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v8, 0x50ui64, (int)v8[-1].m_pNavObject, (void (__fastcall *)(void *))_);
     operator delete[](v9);
   }
   v1->m_aWaypoints.p = 0i64;

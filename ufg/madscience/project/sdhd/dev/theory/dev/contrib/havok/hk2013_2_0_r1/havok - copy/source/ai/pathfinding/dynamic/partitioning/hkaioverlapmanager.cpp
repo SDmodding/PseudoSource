@@ -8,9 +8,9 @@ void __fastcall hkaiOverlapManager::hkaiOverlapManager(hkaiOverlapManager *this,
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v3 = referenceFrameAndExtrusion;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiOverlapManager::`vftable'{for `hkReferencedObject'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiOverlapManager::`vftable{for `hkReferencedObject};
   v4 = navMeshCollection;
-  this->vfptr = (hkaiNavMeshSilhouetteSelectorVtbl *)&hkaiOverlapManager::`vftable'{for `hkaiNavMeshSilhouetteSelector'};
+  this->vfptr = (hkaiNavMeshSilhouetteSelectorVtbl *)&hkaiOverlapManager::`vftable{for `hkaiNavMeshSilhouetteSelector};
   v5 = this;
   this->m_referenceFrameAndExtrusion.m_up = referenceFrameAndExtrusion->m_up;
   *(_OWORD *)&this->m_referenceFrameAndExtrusion.m_cellExtrusion = *(_OWORD *)&referenceFrameAndExtrusion->m_cellExtrusion;
@@ -60,8 +60,8 @@ void __fastcall hkaiOverlapManager::setSilhouetteFilter(hkaiOverlapManager *this
 // RVA: 0xBF5500
 void __fastcall hkaiOverlapManager::hkaiOverlapManager(hkaiOverlapManager *this, hkFinishLoadedObjectFlag f)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiOverlapManager::`vftable'{for `hkReferencedObject'};
-  this->vfptr = (hkaiNavMeshSilhouetteSelectorVtbl *)&hkaiOverlapManager::`vftable'{for `hkaiNavMeshSilhouetteSelector'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiOverlapManager::`vftable{for `hkReferencedObject};
+  this->vfptr = (hkaiNavMeshSilhouetteSelectorVtbl *)&hkaiOverlapManager::`vftable{for `hkaiNavMeshSilhouetteSelector};
   this->m_silhouetteFilter.m_pntr = 0i64;
   this->m_priorityController.m_pntr = 0i64;
   if ( f.m_finishing )
@@ -81,10 +81,10 @@ void __fastcall hkaiOverlapManager::~hkaiOverlapManager(hkaiOverlapManager *this
   int v7; // eax
   hkReferencedObject *v8; // rcx
 
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiOverlapManager::`vftable'{for `hkReferencedObject'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiOverlapManager::`vftable{for `hkReferencedObject};
   v1 = this;
   v2 = 0;
-  for ( this->vfptr = (hkaiNavMeshSilhouetteSelectorVtbl *)&hkaiOverlapManager::`vftable'{for `hkaiNavMeshSilhouetteSelector'};
+  for ( this->vfptr = (hkaiNavMeshSilhouetteSelectorVtbl *)&hkaiOverlapManager::`vftable{for `hkaiNavMeshSilhouetteSelector};
         v2 < v1->m_sections.m_size;
         ++v2 )
   {
@@ -123,8 +123,8 @@ void __fastcall hkaiOverlapManager::~hkaiOverlapManager(hkaiOverlapManager *this
   if ( v8 )
     hkReferencedObject::removeReference(v8);
   v1->m_navMeshCollection.m_pntr = 0i64;
-  v1->vfptr = (hkaiNavMeshSilhouetteSelectorVtbl *)&hkaiNavMeshSilhouetteSelector::`vftable';
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkaiNavMeshSilhouetteSelectorVtbl *)&hkaiNavMeshSilhouetteSelector::`vftable;
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 81
@@ -381,7 +381,7 @@ void __fastcall hkaiOverlapManager::updateSectionFacesForGenerator(hkaiOverlapMa
   *(_DWORD *)&v80.m_memSizeAndFlags = 0x1FFFF;
   v24 = (hkReferencedObject *)&v82->m_priorityController.m_pntr->vfptr;
   v25 = 1;
-  v80.vfptr = (hkBaseObjectVtbl *)&hkaiDefaultSilhouettePriorityController::`vftable';
+  v80.vfptr = (hkBaseObjectVtbl *)&hkaiDefaultSilhouettePriorityController::`vftable;
   if ( v24 )
   {
     hkReferencedObject::addReference(v24);
@@ -634,7 +634,7 @@ LABEL_59:
     v62,
     v61);
   v68 = (4 * (_DWORD)faceKeys + 127) & 0xFFFFFF80;
-  v80.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v80.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
   v69 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
   v70 = (v68 + 15) & 0xFFFFFFF0;
   if ( v68 > v69->m_slabSize || (char *)v62 + v70 != v69->m_cur || v69->m_firstNonLifoEnd == v62 )
@@ -901,7 +901,7 @@ void __usercall hkaiOverlapManager::removeSilhouetteGenerator(hkaiOverlapManager
   v6 = (hkReferencedObject *)&v5->m_priorityController.m_pntr->vfptr;
   *(_DWORD *)&v14.m_memSizeAndFlags = 0x1FFFF;
   v7 = 1;
-  v14.vfptr = (hkBaseObjectVtbl *)&hkaiDefaultSilhouettePriorityController::`vftable';
+  v14.vfptr = (hkBaseObjectVtbl *)&hkaiDefaultSilhouettePriorityController::`vftable;
   if ( v6 )
   {
     hkReferencedObject::addReference(v6);
@@ -1915,7 +1915,7 @@ void __fastcall hkaiOverlapManager::gatherSilhouettesForFace(hkaiOverlapManager 
   referenceAxis.m_quad.m128_u64[0] = v7 + 72i64 * *(_QWORD *)faceIndex;
   v55 = faceKey & 0x3FFFFF;
   *(_DWORD *)&v50.m_memSizeAndFlags = 0x1FFFF;
-  v50.vfptr = (hkBaseObjectVtbl *)&hkaiDefaultSilhouettePriorityController::`vftable';
+  v50.vfptr = (hkBaseObjectVtbl *)&hkaiDefaultSilhouettePriorityController::`vftable;
   if ( v8 )
   {
     v12 = 1;
@@ -2101,7 +2101,7 @@ void __fastcall hkaiOverlapManager::setupJobForFace(hkaiOverlapManager *this, un
   v8 = faceKey;
   *(_DWORD *)&v16.m_memSizeAndFlags = 0x1FFFF;
   v9 = 1;
-  v16.vfptr = (hkBaseObjectVtbl *)&hkaiDefaultSilhouettePriorityController::`vftable';
+  v16.vfptr = (hkBaseObjectVtbl *)&hkaiDefaultSilhouettePriorityController::`vftable;
   if ( v4 )
   {
     hkReferencedObject::addReference(v4);

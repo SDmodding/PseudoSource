@@ -152,7 +152,7 @@ void __fastcall hkaDefaultAnimatedReferenceFrame::hkaDefaultAnimatedReferenceFra
   v3 = 0;
   v4 = options;
   v5 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaDefaultAnimatedReferenceFrame::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaDefaultAnimatedReferenceFrame::`vftable;
   this->m_referenceFrameSamples.m_data = 0i64;
   this->m_referenceFrameSamples.m_size = 0;
   this->m_referenceFrameSamples.m_capacityAndFlags = 2147483648;

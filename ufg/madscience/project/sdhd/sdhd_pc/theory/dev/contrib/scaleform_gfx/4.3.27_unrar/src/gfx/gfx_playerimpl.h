@@ -4,7 +4,7 @@ void __fastcall Scaleform::GFx::MovieDefRootNode::~MovieDefRootNode(Scaleform::G
 {
   Scaleform::Render::RenderBuffer *v1; // rcx
 
-  this->vfptr = (Scaleform::GFx::MovieDefRootNodeVtbl *)&Scaleform::GFx::MovieDefRootNode::`vftable';
+  this->vfptr = (Scaleform::GFx::MovieDefRootNodeVtbl *)&Scaleform::GFx::MovieDefRootNode::`vftable;
   v1 = (Scaleform::Render::RenderBuffer *)this->pFontManager.pObject;
   if ( v1 )
     Scaleform::RefCountImpl::Release(v1);
@@ -123,7 +123,7 @@ bool __fastcall Scaleform::GFx::AutoTabSortFunctor::operator()(Scaleform::GFx::A
 // RVA: 0x6D0A70
 void __fastcall Scaleform::GFx::ASIntervalTimerIntf::~ASIntervalTimerIntf(Scaleform::GFx::ASIntervalTimerIntf *this)
 {
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ASIntervalTimerIntf::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ASIntervalTimerIntf::`vftable;
   Scaleform::RefCountImplCore::~RefCountImplCore((Scaleform::RefCountImplCore *)&this->vfptr);
 }
 
@@ -160,12 +160,12 @@ _BOOL8 __fastcall Scaleform::GFx::FocusGroupDescr::IsFocused(Scaleform::GFx::Foc
 // RVA: 0x6CD9F0
 void __fastcall Scaleform::GFx::MovieImpl::WideStringStorage::WideStringStorage(Scaleform::GFx::MovieImpl::WideStringStorage *this, Scaleform::GFx::ASStringNode *pnode, unsigned __int64 dataSz)
 {
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::MovieImpl::WideStringStorage,327>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::MovieImpl::WideStringStorage::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::MovieImpl::WideStringStorage,327>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::MovieImpl::WideStringStorage::`vftable;
   this->pNode = pnode;
   ++pnode->RefCount;
   Scaleform::UTF8Util::DecodeStringSafe((wchar_t *)this->pData, dataSz, this->pNode->pData, this->pNode->Size);
@@ -235,7 +235,7 @@ void __fastcall Scaleform::GFx::MovieImpl::StickyVarNode::~StickyVarNode(Scalefo
   Scaleform::GFx::ASStringNode *v1; // rcx
   bool v2; // zf
 
-  this->vfptr = (Scaleform::GFx::MovieImpl::StickyVarNodeVtbl *)&Scaleform::GFx::MovieImpl::StickyVarNode::`vftable';
+  this->vfptr = (Scaleform::GFx::MovieImpl::StickyVarNodeVtbl *)&Scaleform::GFx::MovieImpl::StickyVarNode::`vftable;
   v1 = this->Name.pNode;
   v2 = v1->RefCount-- == 1;
   if ( v2 )

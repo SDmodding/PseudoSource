@@ -15,7 +15,7 @@ CAkFeedbackNode *__fastcall CAkFeedbackNode::Create(unsigned int in_ulID)
   if ( result )
   {
     CAkSoundBase::CAkSoundBase((CAkSoundBase *)&result->vfptr, v1);
-    v3->vfptr = (CAkIndexableVtbl *)&CAkFeedbackNode::`vftable';
+    v3->vfptr = (CAkIndexableVtbl *)&CAkFeedbackNode::`vftable;
     v3->m_arSrcInfo.m_pItems = 0i64;
     *(_QWORD *)&v3->m_arSrcInfo.m_uLength = 0i64;
     v4 = v3->vfptr[3].Release((CAkIndexable *)&v3->vfptr);

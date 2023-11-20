@@ -253,7 +253,7 @@ void __fastcall UFG::UIHKInfoPopupWidget::ShowPurchaseInfo(UFG::UIHKInfoPopupWid
     LODWORD(v23) = v5;
     UFG::qString::Format(
       &v24,
-      "%s<br>%s<br><br><img src='Icon_Global_Money' width='26' height='26' vspace='-16'> HK $%d<br>%s",
+      "%s<br>%s<br><br><img src=Icon_Global_Money width=26 height=26 vspace=-16> HK $%d<br>%s",
       v9,
       v12,
       v23,

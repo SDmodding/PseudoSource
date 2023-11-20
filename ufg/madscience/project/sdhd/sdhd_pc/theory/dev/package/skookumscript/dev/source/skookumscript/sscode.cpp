@@ -6,12 +6,12 @@ void __fastcall SSCode::~SSCode(SSCode *this)
   void **v2; // rbx
 
   v1 = this;
-  this->vfptr = (SSExpressionBaseVtbl *)&SSCode::`vftable';
+  this->vfptr = (SSExpressionBaseVtbl *)&SSCode::`vftable;
   v2 = (void **)&this->i_statements;
   APCompactArrayBase<SSParameterBase>::free_all((APCompactArrayBase<SSParameterBase> *)&this->i_statements);
   AMemory::c_free_func(v2[1]);
   AMemory::c_free_func(v1->i_temp_vars.i_array_p);
-  v1->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
+  v1->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
 }
 
 // File Line: 65
@@ -371,8 +371,8 @@ void __fastcall SSConcurrentSync::SSConcurrentSync(SSConcurrentSync *this, const
 
   v2 = binary_pp;
   v3 = this;
-  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-  this->vfptr = (SSExpressionBaseVtbl *)&SSConcurrentSync::`vftable';
+  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+  this->vfptr = (SSExpressionBaseVtbl *)&SSConcurrentSync::`vftable;
   v10 = &this->i_exprs;
   v10->i_count = 0;
   v10->i_array_p = 0i64;
@@ -522,8 +522,8 @@ void __fastcall SSConcurrentRace::SSConcurrentRace(SSConcurrentRace *this, const
 
   v2 = binary_pp;
   v3 = this;
-  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-  this->vfptr = (SSExpressionBaseVtbl *)&SSConcurrentRace::`vftable';
+  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+  this->vfptr = (SSExpressionBaseVtbl *)&SSConcurrentRace::`vftable;
   v10 = &this->i_exprs;
   v10->i_count = 0;
   v10->i_array_p = 0i64;

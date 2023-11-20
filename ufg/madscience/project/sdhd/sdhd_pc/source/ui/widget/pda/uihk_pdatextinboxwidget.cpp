@@ -2,7 +2,7 @@
 // RVA: 0x1567370
 __int64 dynamic_initializer_for__UFG::UIHK_PDATextInboxWidget::mSavedMessages__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     UFG::UIHK_PDATextInboxWidget::mSavedMessages,
     0x80ui64,
     1,
@@ -164,7 +164,7 @@ void __fastcall UFG::UIHK_PDATextInboxWidget::Flash_Show(UFG::UIHK_PDATextInboxW
 
   v38 = -2i64;
   v2 = screen->mRenderable->m_movie.pObject;
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   UFG::qString::qString(&v40);
   UFG::qString::qString(&v39);
   v3 = &UFG::UIHK_PDATextInboxWidget::mSavedMessages[(unsigned __int64)UFG::UIHK_PDATextInboxWidget::mLastSavedMessageIndex];
@@ -278,6 +278,6 @@ void __fastcall UFG::UIHK_PDATextInboxWidget::Flash_Show(UFG::UIHK_PDATextInboxW
   Scaleform::GFx::Movie::Invoke(v2, "TextInbox_Show", 0i64, (Scaleform::GFx::Value *)&ptr, 4u);
   UFG::qString::~qString(&v39);
   UFG::qString::~qString(&v40);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 

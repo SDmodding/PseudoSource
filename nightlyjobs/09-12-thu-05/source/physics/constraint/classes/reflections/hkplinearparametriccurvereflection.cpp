@@ -31,7 +31,7 @@ hkClass *__fastcall hkpLinearParametricCurve::staticClass()
 void __fastcall finishLoadedObjecthkpLinearParametricCurve(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpLinearParametricCurve::`vftable';
+    *(_QWORD *)p = &hkpLinearParametricCurve::`vftable;
 }
 
 // File Line: 75
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkpLinearParametricCurve(void *p)
 // RVA: 0xD43D60
 void **__fastcall getVtablehkpLinearParametricCurve()
 {
-  return &hkpLinearParametricCurve::`vftable';
+  return &hkpLinearParametricCurve::`vftable;
 }
 
 // File Line: 101

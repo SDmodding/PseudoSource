@@ -426,8 +426,8 @@ void __fastcall Scaleform::Render::TextMeshProvider::TextMeshProvider(Scaleform:
   Scaleform::ArrayDH<Scaleform::Render::TextMeshLayer,2,Scaleform::ArrayDefaultPolicy> *v8; // rax
 
   v2 = this;
-  this->vfptr = (Scaleform::Render::MeshProviderVtbl *)&Scaleform::Render::MeshProvider::`vftable';
-  this->vfptr = (Scaleform::Render::MeshProviderVtbl *)&Scaleform::Render::TextMeshProvider::`vftable';
+  this->vfptr = (Scaleform::Render::MeshProviderVtbl *)&Scaleform::Render::MeshProvider::`vftable;
+  this->vfptr = (Scaleform::Render::MeshProviderVtbl *)&Scaleform::Render::TextMeshProvider::`vftable;
   this->pCache = cache;
   this->Flags = 0;
   v3 = cache->pHeap;
@@ -473,7 +473,7 @@ void __fastcall Scaleform::Render::TextMeshProvider::~TextMeshProvider(Scaleform
   __int64 v5; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::Render::MeshProviderVtbl *)&Scaleform::Render::TextMeshProvider::`vftable';
+  this->vfptr = (Scaleform::Render::MeshProviderVtbl *)&Scaleform::Render::TextMeshProvider::`vftable;
   Scaleform::Render::TextMeshProvider::Clear(this);
   v2 = v1->ClearBounds.pHandle;
   if ( v2 != &Scaleform::Render::MatrixPoolImpl::HMatrix::NullHandle )
@@ -492,7 +492,7 @@ void __fastcall Scaleform::Render::TextMeshProvider::~TextMeshProvider(Scaleform
   Scaleform::ArrayDataDH<Scaleform::Render::TextMeshLayer,Scaleform::AllocatorDH<Scaleform::Render::TextMeshLayer,2>,Scaleform::ArrayDefaultPolicy>::~ArrayDataDH<Scaleform::Render::TextMeshLayer,Scaleform::AllocatorDH<Scaleform::Render::TextMeshLayer,2>,Scaleform::ArrayDefaultPolicy>(&v1->Layers.Data);
   Scaleform::ArrayDataBase<Scaleform::Render::TextMeshEntry,Scaleform::AllocatorDH<Scaleform::Render::TextMeshEntry,2>,Scaleform::ArrayDefaultPolicy>::~ArrayDataBase<Scaleform::Render::TextMeshEntry,Scaleform::AllocatorDH<Scaleform::Render::TextMeshEntry,2>,Scaleform::ArrayDefaultPolicy>((Scaleform::ArrayDataBase<Scaleform::Render::TextMeshEntry,Scaleform::AllocatorDH<Scaleform::Render::TextMeshEntry,2>,Scaleform::ArrayDefaultPolicy> *)&v1->Entries.Data.Data);
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v1->Notifiers.Data.Data);
-  v1->vfptr = (Scaleform::Render::MeshProviderVtbl *)&Scaleform::Render::MeshProvider::`vftable';
+  v1->vfptr = (Scaleform::Render::MeshProviderVtbl *)&Scaleform::Render::MeshProvider::`vftable;
 }
 
 // File Line: 323
@@ -2581,7 +2581,7 @@ Scaleform::Render::MatrixPoolImpl::HMatrix *__fastcall Scaleform::Render::TextMe
   {
     v33 = _mm_and_ps(
             *(__m128 *)&v10[v11 + 4].pHeader,
-            (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v);
+            (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v);
     v34 = _mm_add_ps(
             _mm_mul_ps(
               *(__m128 *)&m.M[1][0],
@@ -2590,7 +2590,7 @@ Scaleform::Render::MatrixPoolImpl::HMatrix *__fastcall Scaleform::Render::TextMe
               *(__m128 *)&m.M[0][0],
               _mm_shuffle_ps(*(__m128 *)&v10[v11 + 4].pHeader, *(__m128 *)&v10[v11 + 4].pHeader, 0)));
     *(__m128 *)&m.M[0][0] = _mm_and_ps(
-                              (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v,
+                              (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v,
                               _mm_add_ps(
                                 _mm_add_ps(
                                   _mm_mul_ps(
@@ -2607,9 +2607,9 @@ Scaleform::Render::MatrixPoolImpl::HMatrix *__fastcall Scaleform::Render::TextMe
                                       0))),
                                 _mm_and_ps(
                                   *(__m128 *)&v10[v11 + 2].pHeader,
-                                  (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v)));
+                                  (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v)));
     *(__m128 *)&m.M[1][0] = _mm_and_ps(
-                              (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v,
+                              (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v,
                               _mm_add_ps(v34, v33));
     v27 = &v5->ClearBounds;
     if ( v5->ClearBounds.pHandle != &Scaleform::Render::MatrixPoolImpl::HMatrix::NullHandle )
@@ -2650,20 +2650,20 @@ Scaleform::Render::MatrixPoolImpl::HMatrix *__fastcall Scaleform::Render::TextMe
           _mm_add_ps(
             _mm_mul_ps(_mm_shuffle_ps(v42, v42, 0), *(__m128 *)&m.M[0][0]),
             _mm_mul_ps(_mm_shuffle_ps(v42, v42, 85), *(__m128 *)&m.M[1][0])),
-          _mm_and_ps((__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,4294967295,4294967295>'::`2'::v, v42));
+          _mm_and_ps((__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,4294967295,4294967295>::`2::v, v42));
   v26 = (__int128)_mm_add_ps(
                     _mm_add_ps(
                       _mm_mul_ps(_mm_shuffle_ps(*(__m128 *)dst, *(__m128 *)dst, 0), *(__m128 *)&m.M[0][0]),
                       _mm_mul_ps(_mm_shuffle_ps(*(__m128 *)dst, *(__m128 *)dst, 85), *(__m128 *)&m.M[1][0])),
                     _mm_and_ps(
-                      (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,4294967295,4294967295>'::`2'::v,
+                      (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,4294967295,4294967295>::`2::v,
                       *(__m128 *)dst));
   *(__m128 *)&m.M[0][0] = _mm_add_ps(
                             _mm_add_ps(
                               _mm_mul_ps(_mm_shuffle_ps(*(__m128 *)src, *(__m128 *)src, 0), *(__m128 *)&m.M[0][0]),
                               _mm_mul_ps(_mm_shuffle_ps(*(__m128 *)src, *(__m128 *)src, 85), *(__m128 *)&m.M[1][0])),
                             _mm_and_ps(
-                              (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,4294967295,4294967295>'::`2'::v,
+                              (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,4294967295,4294967295>::`2::v,
                               *(__m128 *)src));
   *(__m128 *)&m.M[1][0] = v25;
   *(__m128 *)((char *)&v42 + 8) = (__m128)v26;
@@ -3625,7 +3625,7 @@ void __fastcall Scaleform::Render::TextMeshProvider::addImage(Scaleform::Render:
                                         (Scaleform::RefCountImplCore *)img,
                                         (unsigned int)v6->pCache->pTexMan);
   initdata.pFormat = (Scaleform::Render::VertexFormat *)Scaleform::Ptr<Scaleform::Render::StereoImplBase>::~Ptr<Scaleform::Render::StereoImplBase>;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     initdata.Textures,
     8ui64,
     2,
@@ -3662,7 +3662,7 @@ void __fastcall Scaleform::Render::TextMeshProvider::addImage(Scaleform::Render:
   *(_QWORD *)&v20[v19].EntryData.MaskData.Coord[2] = v25;
   v20[v19].EntryData.RasterData.pGlyph = (Scaleform::Render::GlyphNode *)v4;
   ++v5->Entries.Size;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     initdata.Textures,
     8ui64,
     2,
@@ -3917,7 +3917,7 @@ void __fastcall Scaleform::Render::TextMeshProvider::addTextureGlyph(Scaleform::
                                           (Scaleform::RefCountImplCore *)&v17->vfptr,
                                           (unsigned int)v7->pCache->pTexMan);
     *(_QWORD *)&initdata.Type = 13i64;
-    `eh vector constructor iterator'(
+    `eh vector constructor iterator(
       initdata.Textures,
       8ui64,
       2,
@@ -3951,7 +3951,7 @@ void __fastcall Scaleform::Render::TextMeshProvider::addTextureGlyph(Scaleform::
                                             (Scaleform::RefCountImplCore *)&v24->vfptr,
                                             (unsigned int)v26);
       *(_QWORD *)&v36.Type = 12i64;
-      `eh vector constructor iterator'(
+      `eh vector constructor iterator(
         v36.Textures,
         8ui64,
         2,
@@ -3977,7 +3977,7 @@ void __fastcall Scaleform::Render::TextMeshProvider::addTextureGlyph(Scaleform::
                                             (Scaleform::RefCountImplCore *)&v24->vfptr,
                                             (unsigned int)v26);
       *(_QWORD *)&initdata.Type = 11i64;
-      `eh vector constructor iterator'(
+      `eh vector constructor iterator(
         initdata.Textures,
         8ui64,
         2,
@@ -3998,7 +3998,7 @@ void __fastcall Scaleform::Render::TextMeshProvider::addTextureGlyph(Scaleform::
       v22 = initdata.Textures;
     }
   }
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v22,
     8ui64,
     2,
@@ -4473,7 +4473,7 @@ __int64 __fastcall Scaleform::Render::TextMeshProvider::CalcVectorParams(Scalefo
               _mm_mul_ps(_mm_shuffle_ps(*(__m128 *)&v49[16], *(__m128 *)&v49[16], 0), *(__m128 *)&v49[8]),
               _mm_mul_ps(_mm_shuffle_ps(*(__m128 *)&v49[16], *(__m128 *)&v49[16], 85), *(__m128 *)&v49[24])),
             _mm_and_ps(
-              (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,4294967295,4294967295>'::`2'::v,
+              (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,4294967295,4294967295>::`2::v,
               *(__m128 *)&v49[16]));
     *(__m128 *)&v51.M[0][0] = _mm_add_ps(
                                 _mm_add_ps(
@@ -4484,14 +4484,14 @@ __int64 __fastcall Scaleform::Render::TextMeshProvider::CalcVectorParams(Scalefo
                                     _mm_shuffle_ps(*(__m128 *)&v51.M[0][0], *(__m128 *)&v51.M[0][0], 85),
                                     *(__m128 *)&v49[24])),
                                 _mm_and_ps(
-                                  (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,4294967295,4294967295>'::`2'::v,
+                                  (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,4294967295,4294967295>::`2::v,
                                   *(__m128 *)&v51.M[0][0]));
     *(__m128 *)v49 = _mm_add_ps(
                        _mm_add_ps(
                          _mm_mul_ps(_mm_shuffle_ps(*(__m128 *)v49, *(__m128 *)v49, 0), *(__m128 *)&v49[8]),
                          _mm_mul_ps(_mm_shuffle_ps(*(__m128 *)v49, *(__m128 *)v49, 85), *(__m128 *)&v49[24])),
                        _mm_and_ps(
-                         (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,4294967295,4294967295>'::`2'::v,
+                         (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,4294967295,4294967295>::`2::v,
                          *(__m128 *)v49));
     *(__m128 *)&v49[16] = v23;
     v24 = (Scaleform::Render::MatrixPoolImpl::HMatrix *)&result.pHandle[5];
@@ -4760,8 +4760,8 @@ LABEL_8:
         0.0,
         0,
         v31);
-      *(_QWORD *)v22 = &Scaleform::Render::Mesh::`vftable'{for `Scaleform::RefCountBase<Scaleform::Render::MeshBase,68>'};
-      *((_QWORD *)v22 + 2) = &Scaleform::Render::Mesh::`vftable'{for `Scaleform::Render::MeshStagingNode'};
+      *(_QWORD *)v22 = &Scaleform::Render::Mesh::`vftable{for `Scaleform::RefCountBase<Scaleform::Render::MeshBase,68>};
+      *((_QWORD *)v22 + 2) = &Scaleform::Render::Mesh::`vftable{for `Scaleform::Render::MeshStagingNode};
       *((_QWORD *)v22 + 20) = 0i64;
       *((_QWORD *)v22 + 24) = 1065353216i64;
       *((_QWORD *)v22 + 25) = 0i64;
@@ -5339,8 +5339,8 @@ LABEL_76:
             0.0,
             v73,
             vars0);
-          *(_QWORD *)v78 = &Scaleform::Render::Mesh::`vftable'{for `Scaleform::RefCountBase<Scaleform::Render::MeshBase,68>'};
-          *((_QWORD *)v78 + 2) = &Scaleform::Render::Mesh::`vftable'{for `Scaleform::Render::MeshStagingNode'};
+          *(_QWORD *)v78 = &Scaleform::Render::Mesh::`vftable{for `Scaleform::RefCountBase<Scaleform::Render::MeshBase,68>};
+          *((_QWORD *)v78 + 2) = &Scaleform::Render::Mesh::`vftable{for `Scaleform::Render::MeshStagingNode};
           *((_QWORD *)v78 + 20) = 0i64;
           *((_QWORD *)v78 + 24) = 1065353216i64;
           *((_QWORD *)v78 + 25) = 0i64;

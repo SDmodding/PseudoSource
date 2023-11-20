@@ -7,7 +7,7 @@ void __fastcall hkaSkeletonMapper::hkaSkeletonMapper(hkaSkeletonMapper *this, hk
 
   v2 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaSkeletonMapper::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaSkeletonMapper::`vftable;
   v3 = mapping;
   hkaSkeletonMapperData::hkaSkeletonMapperData(&this->m_mapping);
   hkaSkeletonMapperData::operator=(&v2->m_mapping, v3);
@@ -22,9 +22,9 @@ void __fastcall hkaSkeletonMapper::~hkaSkeletonMapper(hkaSkeletonMapper *this)
 
   v1 = this;
   v2 = &this->m_mapping;
-  *(_QWORD *)&v2[-1].m_keepUnmappedLocal.m_bool = &hkaSkeletonMapper::`vftable';
+  *(_QWORD *)&v2[-1].m_keepUnmappedLocal.m_bool = &hkaSkeletonMapper::`vftable;
   hkaSkeletonMapperData::~hkaSkeletonMapperData(v2);
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 46

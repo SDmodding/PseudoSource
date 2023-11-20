@@ -34,12 +34,12 @@ void __fastcall UFG::CoverCornerHandle::Reset(UFG::CoverCornerHandle *this)
 
   v1 = this;
   this->m_uCoverCornerIndex = -1;
-  v2 = `UFG::qGetResourceInventory<UFG::CoverDataResource>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::CoverDataResource>'::`2'::result )
+  v2 = `UFG::qGetResourceInventory<UFG::CoverDataResource>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::CoverDataResource>::`2::result )
   {
     v3 = UFG::qResourceWarehouse::Instance();
     v2 = UFG::qResourceWarehouse::GetInventory(v3, 0x8DADDB7E);
-    `UFG::qGetResourceInventory<UFG::CoverDataResource>'::`2'::result = v2;
+    `UFG::qGetResourceInventory<UFG::CoverDataResource>::`2::result = v2;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->m_ResourceHandle.mPrev, v2);
   v4 = &v1->m_pDynamicCoverCorner;

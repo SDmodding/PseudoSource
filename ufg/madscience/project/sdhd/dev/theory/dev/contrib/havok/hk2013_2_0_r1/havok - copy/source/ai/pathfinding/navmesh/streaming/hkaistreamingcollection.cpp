@@ -2,7 +2,7 @@
 // RVA: 0xBBB2B0
 void __fastcall hkaiStreamingCollection::hkaiStreamingCollection(hkaiStreamingCollection *this, hkFinishLoadedObjectFlag f)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiStreamingCollection::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiStreamingCollection::`vftable;
 }
 
 // File Line: 44
@@ -10,7 +10,7 @@ void __fastcall hkaiStreamingCollection::hkaiStreamingCollection(hkaiStreamingCo
 void __fastcall hkaiStreamingCollection::hkaiStreamingCollection(hkaiStreamingCollection *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiStreamingCollection::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiStreamingCollection::`vftable;
   this->m_isTemporary.m_bool = 0;
   this->m_tree.m_pntr = 0i64;
   this->m_instances.m_data = 0i64;
@@ -183,7 +183,7 @@ void __fastcall hkaiStreamingCollection::~hkaiStreamingCollection(hkaiStreamingC
   hkReferencedObject *v3; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiStreamingCollection::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiStreamingCollection::`vftable;
   hkaiStreamingCollection::clear(this);
   v2 = v1->m_instances.m_capacityAndFlags;
   v1->m_instances.m_size = 0;
@@ -198,7 +198,7 @@ void __fastcall hkaiStreamingCollection::~hkaiStreamingCollection(hkaiStreamingC
   if ( v3 )
     hkReferencedObject::removeReference(v3);
   v1->m_tree.m_pntr = 0i64;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 112

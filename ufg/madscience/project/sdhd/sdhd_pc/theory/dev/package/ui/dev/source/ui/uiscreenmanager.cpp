@@ -66,9 +66,9 @@ void __fastcall UFG::UIScreenManagerBase::baseInit(UFG::UIScreenManagerBase *thi
                                     1u);
   if ( v3 )
   {
-    v3->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocBase::`vftable';
-    v3->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAlloc::`vftable';
-    v3->vfptr = (Scaleform::SysAllocBaseVtbl *)&UIGfxAllocator::`vftable';
+    v3->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocBase::`vftable;
+    v3->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAlloc::`vftable;
+    v3->vfptr = (Scaleform::SysAllocBaseVtbl *)&UIGfxAllocator::`vftable;
   }
   else
   {
@@ -94,15 +94,15 @@ void __fastcall UFG::UIScreenManagerBase::baseInit(UFG::UIScreenManagerBase *thi
                                               0i64);
     if ( v5 )
     {
-      v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+      v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
       v5->RefCount = 1;
-      v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-      v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-      v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable';
-      v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::State::`vftable';
+      v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+      v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+      v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable;
+      v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::State::`vftable;
       v5->SType = 29;
-      v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ZlibSupportBase::`vftable';
-      v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ZlibSupport::`vftable';
+      v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ZlibSupportBase::`vftable;
+      v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ZlibSupport::`vftable;
     }
     else
     {
@@ -114,16 +114,16 @@ void __fastcall UFG::UIScreenManagerBase::baseInit(UFG::UIScreenManagerBase *thi
            24i64);
     if ( v6 )
     {
-      *(_QWORD *)v6 = &Scaleform::RefCountImplCore::`vftable';
+      *(_QWORD *)v6 = &Scaleform::RefCountImplCore::`vftable;
       *(_DWORD *)(v6 + 8) = 1;
-      *(_QWORD *)v6 = &Scaleform::RefCountImpl::`vftable';
-      *(_QWORD *)v6 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-      *(_QWORD *)v6 = &Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable';
-      *(_QWORD *)v6 = &Scaleform::GFx::State::`vftable';
+      *(_QWORD *)v6 = &Scaleform::RefCountImpl::`vftable;
+      *(_QWORD *)v6 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+      *(_QWORD *)v6 = &Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable;
+      *(_QWORD *)v6 = &Scaleform::GFx::State::`vftable;
       *(_DWORD *)(v6 + 16) = 12;
-      *(_QWORD *)v6 = &Scaleform::GFx::FileOpenerBase::`vftable';
+      *(_QWORD *)v6 = &Scaleform::GFx::FileOpenerBase::`vftable;
       GFx_Compile_with_SF_BUILD_DEBUG = 0;
-      *(_QWORD *)v6 = &Scaleform::GFx::FileOpener::`vftable';
+      *(_QWORD *)v6 = &Scaleform::GFx::FileOpener::`vftable;
     }
     else
     {
@@ -154,17 +154,17 @@ void __fastcall UFG::UIScreenManagerBase::baseInit(UFG::UIScreenManagerBase *thi
   v9 = v8;
   if ( v8 )
   {
-    v8->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+    v8->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
     v8->RefCount = 1;
-    v8->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-    v8->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-    v8->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable';
-    v8->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::State::`vftable';
+    v8->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+    v8->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+    v8->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable;
+    v8->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::State::`vftable;
     v8->SType = 12;
-    v8->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::FileOpenerBase::`vftable';
+    v8->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::FileOpenerBase::`vftable;
     GFx_Compile_with_SF_BUILD_DEBUG = 0;
-    v8->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::FileOpener::`vftable';
-    v8->vfptr = (Scaleform::RefCountImplCoreVtbl *)&UFG::UIGfxFileOpener::`vftable';
+    v8->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::FileOpener::`vftable;
+    v8->vfptr = (Scaleform::RefCountImplCoreVtbl *)&UFG::UIGfxFileOpener::`vftable;
     v8->mUsingChunkFiles = 0;
   }
   else
@@ -183,13 +183,13 @@ void __fastcall UFG::UIScreenManagerBase::baseInit(UFG::UIScreenManagerBase *thi
   v11 = (Scaleform::Log *)v10;
   if ( v10 )
   {
-    *(_QWORD *)v10 = &Scaleform::RefCountImplCore::`vftable';
+    *(_QWORD *)v10 = &Scaleform::RefCountImplCore::`vftable;
     *(_DWORD *)(v10 + 8) = 1;
-    *(_QWORD *)v10 = &Scaleform::RefCountImpl::`vftable';
-    *(_QWORD *)v10 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-    *(_QWORD *)v10 = &Scaleform::RefCountBase<Scaleform::Log,2>::`vftable';
-    *(_QWORD *)v10 = &Scaleform::Log::`vftable';
-    *(_QWORD *)v10 = &UFG::UIGfxLog::`vftable';
+    *(_QWORD *)v10 = &Scaleform::RefCountImpl::`vftable;
+    *(_QWORD *)v10 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+    *(_QWORD *)v10 = &Scaleform::RefCountBase<Scaleform::Log,2>::`vftable;
+    *(_QWORD *)v10 = &Scaleform::Log::`vftable;
+    *(_QWORD *)v10 = &UFG::UIGfxLog::`vftable;
   }
   else
   {
@@ -205,15 +205,15 @@ void __fastcall UFG::UIScreenManagerBase::baseInit(UFG::UIScreenManagerBase *thi
   v13 = (Scaleform::Render::RenderBuffer *)v12;
   if ( v12 )
   {
-    *(_QWORD *)v12 = &Scaleform::RefCountImplCore::`vftable';
+    *(_QWORD *)v12 = &Scaleform::RefCountImplCore::`vftable;
     *(_DWORD *)(v12 + 8) = 1;
-    *(_QWORD *)v12 = &Scaleform::RefCountImpl::`vftable';
-    *(_QWORD *)v12 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-    *(_QWORD *)v12 = &Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable';
-    *(_QWORD *)v12 = &Scaleform::GFx::State::`vftable';
+    *(_QWORD *)v12 = &Scaleform::RefCountImpl::`vftable;
+    *(_QWORD *)v12 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+    *(_QWORD *)v12 = &Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable;
+    *(_QWORD *)v12 = &Scaleform::GFx::State::`vftable;
     *(_DWORD *)(v12 + 16) = 5;
-    *(_QWORD *)v12 = &Scaleform::GFx::FSCommandHandler::`vftable';
-    *(_QWORD *)v12 = &UFG::UIGfxFsCommandHandler::`vftable';
+    *(_QWORD *)v12 = &Scaleform::GFx::FSCommandHandler::`vftable;
+    *(_QWORD *)v12 = &UFG::UIGfxFsCommandHandler::`vftable;
   }
   else
   {
@@ -232,15 +232,15 @@ void __fastcall UFG::UIScreenManagerBase::baseInit(UFG::UIScreenManagerBase *thi
   v15 = (Scaleform::Render::RenderBuffer *)v14;
   if ( v14 )
   {
-    *(_QWORD *)v14 = &Scaleform::RefCountImplCore::`vftable';
+    *(_QWORD *)v14 = &Scaleform::RefCountImplCore::`vftable;
     *(_DWORD *)(v14 + 8) = 1;
-    *(_QWORD *)v14 = &Scaleform::RefCountImpl::`vftable';
-    *(_QWORD *)v14 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-    *(_QWORD *)v14 = &Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable';
-    *(_QWORD *)v14 = &Scaleform::GFx::State::`vftable';
+    *(_QWORD *)v14 = &Scaleform::RefCountImpl::`vftable;
+    *(_QWORD *)v14 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+    *(_QWORD *)v14 = &Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable;
+    *(_QWORD *)v14 = &Scaleform::GFx::State::`vftable;
     *(_DWORD *)(v14 + 16) = 6;
-    *(_QWORD *)v14 = &Scaleform::GFx::ExternalInterface::`vftable';
-    *(_QWORD *)v14 = &UFG::UIGfxExternalInterface::`vftable';
+    *(_QWORD *)v14 = &Scaleform::GFx::ExternalInterface::`vftable;
+    *(_QWORD *)v14 = &UFG::UIGfxExternalInterface::`vftable;
   }
   else
   {
@@ -279,15 +279,15 @@ void __fastcall UFG::UIScreenManagerBase::baseInit(UFG::UIScreenManagerBase *thi
   v20 = (Scaleform::Render::RenderBuffer *)v19;
   if ( v19 )
   {
-    *(_QWORD *)v19 = &Scaleform::RefCountImplCore::`vftable';
+    *(_QWORD *)v19 = &Scaleform::RefCountImplCore::`vftable;
     *(_DWORD *)(v19 + 8) = 1;
-    *(_QWORD *)v19 = &Scaleform::RefCountImpl::`vftable';
-    *(_QWORD *)v19 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-    *(_QWORD *)v19 = &Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable';
-    *(_QWORD *)v19 = &Scaleform::GFx::State::`vftable';
+    *(_QWORD *)v19 = &Scaleform::RefCountImpl::`vftable;
+    *(_QWORD *)v19 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+    *(_QWORD *)v19 = &Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable;
+    *(_QWORD *)v19 = &Scaleform::GFx::State::`vftable;
     *(_DWORD *)(v19 + 16) = 38;
-    *(_QWORD *)v19 = &Scaleform::GFx::ASSupport::`vftable';
-    *(_QWORD *)v19 = &Scaleform::GFx::AS2Support::`vftable';
+    *(_QWORD *)v19 = &Scaleform::GFx::ASSupport::`vftable;
+    *(_QWORD *)v19 = &Scaleform::GFx::AS2Support::`vftable;
   }
   else
   {
@@ -318,8 +318,8 @@ void __fastcall UFG::UIScreenManagerBase::baseInit(UFG::UIScreenManagerBase *thi
   v24 = UFG::qMalloc(0x18ui64, UFG::gGlobalNewName, 0i64);
   if ( v24 )
   {
-    v24->mNext = (UFG::allocator::free_link *)&Scaleform::Render::ThreadCommandQueue::`vftable';
-    v24->mNext = (UFG::allocator::free_link *)&UFG::UIThreadCommandQueue::`vftable';
+    v24->mNext = (UFG::allocator::free_link *)&Scaleform::Render::ThreadCommandQueue::`vftable;
+    v24->mNext = (UFG::allocator::free_link *)&UFG::UIThreadCommandQueue::`vftable;
   }
   else
   {
@@ -1325,11 +1325,11 @@ void __fastcall UFG::UIScreenManagerBase::baseUpdate(UFG::UIScreenManagerBase *t
               1u);
       if ( v10 )
       {
-        v10->mNext = (UFG::allocator::free_link *)&UFG::UIFlow::`vftable';
+        v10->mNext = (UFG::allocator::free_link *)&UFG::UIFlow::`vftable;
         LODWORD(v10[1].mNext) = -1;
         v10[2].mNext = 0i64;
         v10[3].mNext = 0i64;
-        v10->mNext = (UFG::allocator::free_link *)&UFG::UIFlowRoot::`vftable';
+        v10->mNext = (UFG::allocator::free_link *)&UFG::UIFlowRoot::`vftable;
       }
       else
       {
@@ -1359,15 +1359,15 @@ void __fastcall UFG::UIScreenManagerBase::baseUpdate(UFG::UIScreenManagerBase *t
             v19 = v13 + 1;
             v19->mNext = v19;
             v19[1].mNext = v19;
-            v14->mNext = (UFG::allocator::free_link *)&UFG::UICommand::`vftable';
+            v14->mNext = (UFG::allocator::free_link *)&UFG::UICommand::`vftable;
             LODWORD(v14[3].mNext) = -1;
             v14[4].mNext = 0i64;
-            v14->mNext = (UFG::allocator::free_link *)&UFG::UIMessage::`vftable';
+            v14->mNext = (UFG::allocator::free_link *)&UFG::UIMessage::`vftable;
             LODWORD(v14[5].mNext) = UI_HASH_TWEEN_COMPLETE_35;
             HIDWORD(v14[5].mNext) = 0;
             v14[6].mNext = (UFG::allocator::free_link *)-1i64;
             LODWORD(v14[3].mNext) = 5;
-            v14->mNext = (UFG::allocator::free_link *)&UFG::UIMessageTweenComplete::`vftable';
+            v14->mNext = (UFG::allocator::free_link *)&UFG::UIMessageTweenComplete::`vftable;
             v14[7].mNext = (UFG::allocator::free_link *)v18;
             UFG::qString::qString((UFG::qString *)&v14[8], v17);
             LODWORD(v14[13].mNext) = v16;
@@ -1494,10 +1494,10 @@ UFG::allocator::free_link *__fastcall UFG::UIScreenManagerBase::queuePopScreen(U
     v6 = v4 + 1;
     v6->mNext = v6;
     v6[1].mNext = v6;
-    v5->mNext = (UFG::allocator::free_link *)&UFG::UICommand::`vftable';
+    v5->mNext = (UFG::allocator::free_link *)&UFG::UICommand::`vftable;
     LODWORD(v5[3].mNext) = -1;
     v5[4].mNext = 0i64;
-    v5->mNext = (UFG::allocator::free_link *)&UFG::UICommandScreenPop::`vftable';
+    v5->mNext = (UFG::allocator::free_link *)&UFG::UICommandScreenPop::`vftable;
     LODWORD(v5[3].mNext) = 1;
     LOBYTE(v5[5].mNext) = 0;
     HIDWORD(v5[5].mNext) = v2;
@@ -1567,10 +1567,10 @@ UFG::allocator::free_link *__fastcall UFG::UIScreenManagerBase::queuePopAllScree
     v4 = v2 + 1;
     v4->mNext = v4;
     v4[1].mNext = v4;
-    v3->mNext = (UFG::allocator::free_link *)&UFG::UICommand::`vftable';
+    v3->mNext = (UFG::allocator::free_link *)&UFG::UICommand::`vftable;
     LODWORD(v3[3].mNext) = -1;
     v3[4].mNext = 0i64;
-    v3->mNext = (UFG::allocator::free_link *)&UFG::UICommandScreenPop::`vftable';
+    v3->mNext = (UFG::allocator::free_link *)&UFG::UICommandScreenPop::`vftable;
     LODWORD(v3[3].mNext) = 1;
     LOBYTE(v3[5].mNext) = 1;
     HIDWORD(v3[5].mNext) = -1;
@@ -1767,10 +1767,10 @@ UFG::allocator::free_link *__fastcall UFG::UIScreenManagerBase::queuePopOverlay(
     v6 = v4 + 1;
     v6->mNext = v6;
     v6[1].mNext = v6;
-    v5->mNext = (UFG::allocator::free_link *)&UFG::UICommand::`vftable';
+    v5->mNext = (UFG::allocator::free_link *)&UFG::UICommand::`vftable;
     LODWORD(v5[3].mNext) = -1;
     v5[4].mNext = 0i64;
-    v5->mNext = (UFG::allocator::free_link *)&UFG::UICommandOverlayPop::`vftable';
+    v5->mNext = (UFG::allocator::free_link *)&UFG::UICommandOverlayPop::`vftable;
     LODWORD(v5[5].mNext) = v2;
     BYTE4(v5[5].mNext) = 0;
     LODWORD(v5[3].mNext) = 4;
@@ -1835,10 +1835,10 @@ UFG::allocator::free_link *__fastcall UFG::UIScreenManagerBase::queueMessage(UFG
     v8 = v6 + 1;
     v8->mNext = v8;
     v8[1].mNext = v8;
-    v7->mNext = (UFG::allocator::free_link *)&UFG::UICommand::`vftable';
+    v7->mNext = (UFG::allocator::free_link *)&UFG::UICommand::`vftable;
     LODWORD(v7[3].mNext) = -1;
     v7[4].mNext = 0i64;
-    v7->mNext = (UFG::allocator::free_link *)&UFG::UIMessage::`vftable';
+    v7->mNext = (UFG::allocator::free_link *)&UFG::UIMessage::`vftable;
     LODWORD(v7[5].mNext) = v4;
     HIDWORD(v7[5].mNext) = 0;
     LODWORD(v7[6].mNext) = v3;
@@ -2176,15 +2176,15 @@ void __fastcall UFG::UIScreenManagerBase::popScreen(UFG::UIScreenManagerBase *th
           v11 = v8 + 1;
           v11->mNext = v11;
           v11[1].mNext = v11;
-          v9->mNext = (UFG::allocator::free_link *)&UFG::UICommand::`vftable';
+          v9->mNext = (UFG::allocator::free_link *)&UFG::UICommand::`vftable;
           LODWORD(v9[3].mNext) = -1;
           v9[4].mNext = 0i64;
-          v9->mNext = (UFG::allocator::free_link *)&UFG::UIMessage::`vftable';
+          v9->mNext = (UFG::allocator::free_link *)&UFG::UIMessage::`vftable;
           LODWORD(v9[5].mNext) = UI_HASH_SCREEN_POPPED_35;
           HIDWORD(v9[5].mNext) = 0;
           v9[6].mNext = (UFG::allocator::free_link *)-1i64;
           LODWORD(v9[3].mNext) = 5;
-          v9->mNext = (UFG::allocator::free_link *)&UFG::UIMessageScreenPopped::`vftable';
+          v9->mNext = (UFG::allocator::free_link *)&UFG::UIMessageScreenPopped::`vftable;
           LODWORD(v9[7].mNext) = v10;
         }
         else
@@ -2216,15 +2216,15 @@ void __fastcall UFG::UIScreenManagerBase::popScreen(UFG::UIScreenManagerBase *th
         v16 = v14 + 1;
         v16->mNext = v16;
         v16[1].mNext = v16;
-        v14->mNext = (UFG::allocator::free_link *)&UFG::UICommand::`vftable';
+        v14->mNext = (UFG::allocator::free_link *)&UFG::UICommand::`vftable;
         LODWORD(v14[3].mNext) = -1;
         v14[4].mNext = 0i64;
-        v14->mNext = (UFG::allocator::free_link *)&UFG::UIMessage::`vftable';
+        v14->mNext = (UFG::allocator::free_link *)&UFG::UIMessage::`vftable;
         LODWORD(v14[5].mNext) = UI_HASH_SCREEN_POPPED_35;
         HIDWORD(v14[5].mNext) = 0;
         v14[6].mNext = (UFG::allocator::free_link *)-1i64;
         LODWORD(v14[3].mNext) = 5;
-        v14->mNext = (UFG::allocator::free_link *)&UFG::UIMessageScreenPopped::`vftable';
+        v14->mNext = (UFG::allocator::free_link *)&UFG::UIMessageScreenPopped::`vftable;
         LODWORD(v14[7].mNext) = v15;
       }
       else
@@ -2245,15 +2245,15 @@ void __fastcall UFG::UIScreenManagerBase::popScreen(UFG::UIScreenManagerBase *th
       v20 = v18 + 1;
       v20->mNext = v20;
       v20[1].mNext = v20;
-      v19->mNext = (UFG::allocator::free_link *)&UFG::UICommand::`vftable';
+      v19->mNext = (UFG::allocator::free_link *)&UFG::UICommand::`vftable;
       LODWORD(v19[3].mNext) = -1;
       v19[4].mNext = 0i64;
-      v19->mNext = (UFG::allocator::free_link *)&UFG::UIMessage::`vftable';
+      v19->mNext = (UFG::allocator::free_link *)&UFG::UIMessage::`vftable;
       LODWORD(v19[5].mNext) = UI_HASH_SCREEN_POPPED_35;
       HIDWORD(v19[5].mNext) = 0;
       v19[6].mNext = (UFG::allocator::free_link *)-1i64;
       LODWORD(v19[3].mNext) = 5;
-      v19->mNext = (UFG::allocator::free_link *)&UFG::UIMessageScreenPopped::`vftable';
+      v19->mNext = (UFG::allocator::free_link *)&UFG::UIMessageScreenPopped::`vftable;
       LODWORD(v19[7].mNext) = v17;
     }
     else
@@ -2343,7 +2343,7 @@ UFG::UIScreen *__fastcall UFG::UIScreenManagerBase::switchScreen(UFG::UIScreenMa
   popScreenCommand.mPrev = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&popScreenCommand.mPrev;
   popScreenCommand.mNext = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&popScreenCommand.mPrev;
   popScreenCommand.m_commandData = 0i64;
-  popScreenCommand.vfptr = (UFG::UICommandVtbl *)&UFG::UICommandScreenPop::`vftable';
+  popScreenCommand.vfptr = (UFG::UICommandVtbl *)&UFG::UICommandScreenPop::`vftable;
   popScreenCommand.m_commandType = 1;
   popScreenCommand.m_popAll = 0;
   popScreenCommand.m_screenUID = v4;
@@ -2353,7 +2353,7 @@ UFG::UIScreen *__fastcall UFG::UIScreenManagerBase::switchScreen(UFG::UIScreenMa
   pushScreenCommand.mPrev = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&pushScreenCommand.mPrev;
   pushScreenCommand.mNext = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&pushScreenCommand.mPrev;
   *(_QWORD *)&pushScreenCommand.m_commandType = 0i64;
-  pushScreenCommand.vfptr = (UFG::UICommandVtbl *)&UFG::UICommandScreenPush::`vftable';
+  pushScreenCommand.vfptr = (UFG::UICommandVtbl *)&UFG::UICommandScreenPush::`vftable;
   *(_DWORD *)&pushScreenCommand.m_screenName[120] = v6;
   *(_DWORD *)&pushScreenCommand.m_screenName[124] = v5;
   *(_QWORD *)&pushScreenCommand.m_screenUID = 0i64;
@@ -2798,7 +2798,7 @@ void __fastcall UFG::UIScreenManagerBase::updateScreenCommandQueue(UFG::UIScreen
           if ( v17 )
           {
             v18 = v2->m_gfxMovieLoader;
-            v17->mNext = (UFG::allocator::free_link *)&UFG::UIScreenRenderable::`vftable';
+            v17->mNext = (UFG::allocator::free_link *)&UFG::UIScreenRenderable::`vftable;
             v17[1].mNext = 0i64;
             LOBYTE(v17[2].mNext) = 0;
             v17[39].mNext = 0i64;
@@ -2845,7 +2845,7 @@ void __fastcall UFG::UIScreenManagerBase::updateScreenCommandQueue(UFG::UIScreen
           if ( v17 )
           {
             v24 = v2->m_gfxMovieLoader;
-            v17->mNext = (UFG::allocator::free_link *)&UFG::UIScreenRenderable::`vftable';
+            v17->mNext = (UFG::allocator::free_link *)&UFG::UIScreenRenderable::`vftable;
             v17[1].mNext = 0i64;
             LOBYTE(v17[2].mNext) = 0;
             v17[39].mNext = 0i64;
@@ -2898,7 +2898,7 @@ LABEL_30:
     if ( v17 )
     {
       v30 = v2->m_gfxMovieLoader;
-      v17->mNext = (UFG::allocator::free_link *)&UFG::UIScreenRenderable::`vftable';
+      v17->mNext = (UFG::allocator::free_link *)&UFG::UIScreenRenderable::`vftable;
       v17[1].mNext = 0i64;
       LOBYTE(v17[2].mNext) = 0;
       v17[39].mNext = 0i64;

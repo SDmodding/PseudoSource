@@ -651,15 +651,15 @@ void __fastcall Scaleform::GFx::StaticTextCharacter::StaticTextCharacter(Scalefo
     pasRoot,
     v90,
     (__int64)&v72);
-  v6->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::DisplayObject::`vftable'{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>'};
-  v6->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::DisplayObject::`vftable'{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>'};
+  v6->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::DisplayObject::`vftable{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>};
+  v6->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::DisplayObject::`vftable{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>};
   v6->pNameHandle.pObject = 0i64;
   v6->pScrollRect = 0i64;
   v6->pMaskCharacter = 0i64;
   v6->Flags |= 0x100u;
   v6->Flags = 10;
-  v6->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::StaticTextCharacter::`vftable'{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>'};
-  v6->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::StaticTextCharacter::`vftable'{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>'};
+  v6->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::StaticTextCharacter::`vftable{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>};
+  v6->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::StaticTextCharacter::`vftable{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>};
   if ( v5 )
     _InterlockedExchangeAdd(&v5->RefCount.Value, 1u);
   v6->pDef.pObject = v5;
@@ -772,12 +772,12 @@ void __fastcall Scaleform::GFx::StaticTextCharacter::StaticTextCharacter(Scalefo
       if ( v21 )
       {
         v22 = (Scaleform::GFx::Resource *)v14[1].vfptr;
-        v21->Lines.Data.Data = (Scaleform::Render::Text::LineBuffer::Line **)&Scaleform::RefCountImplCore::`vftable';
+        v21->Lines.Data.Data = (Scaleform::Render::Text::LineBuffer::Line **)&Scaleform::RefCountImplCore::`vftable;
         LODWORD(v21->Lines.Data.Size) = 1;
-        v21->Lines.Data.Data = (Scaleform::Render::Text::LineBuffer::Line **)&Scaleform::RefCountImpl::`vftable';
-        v21->Lines.Data.Data = (Scaleform::Render::Text::LineBuffer::Line **)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,74>::`vftable';
-        v21->Lines.Data.Data = (Scaleform::Render::Text::LineBuffer::Line **)&Scaleform::RefCountBase<Scaleform::Render::Text::FontHandle,74>::`vftable';
-        v21->Lines.Data.Data = (Scaleform::Render::Text::LineBuffer::Line **)&Scaleform::Render::Text::FontHandle::`vftable';
+        v21->Lines.Data.Data = (Scaleform::Render::Text::LineBuffer::Line **)&Scaleform::RefCountImpl::`vftable;
+        v21->Lines.Data.Data = (Scaleform::Render::Text::LineBuffer::Line **)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,74>::`vftable;
+        v21->Lines.Data.Data = (Scaleform::Render::Text::LineBuffer::Line **)&Scaleform::RefCountBase<Scaleform::Render::Text::FontHandle,74>::`vftable;
+        v21->Lines.Data.Data = (Scaleform::Render::Text::LineBuffer::Line **)&Scaleform::Render::Text::FontHandle::`vftable;
         v21->Lines.Data.Policy.Capacity = 0i64;
         *((_DWORD *)&v21->Lines + 6) = 0;
         Scaleform::StringLH::StringLH((Scaleform::StringLH *)&v21->Geom);
@@ -785,7 +785,7 @@ void __fastcall Scaleform::GFx::StaticTextCharacter::StaticTextCharacter(Scalefo
         if ( v22 )
           Scaleform::Render::RenderBuffer::AddRef(v22);
         *(_QWORD *)&v21->Geom.VisibleRect.x1 = v22;
-        v21->Lines.Data.Data = (Scaleform::Render::Text::LineBuffer::Line **)&Scaleform::GFx::FontHandle::`vftable';
+        v21->Lines.Data.Data = (Scaleform::Render::Text::LineBuffer::Line **)&Scaleform::GFx::FontHandle::`vftable;
         *(_QWORD *)&v21->Geom.VisibleRect.x2 = 0i64;
       }
       else
@@ -1047,8 +1047,8 @@ void __fastcall Scaleform::GFx::StaticTextCharacter::~StaticTextCharacter(Scalef
   Scaleform::GFx::ResourceLibBase *v5; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::StaticTextCharacter::`vftable'{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>'};
-  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::StaticTextCharacter::`vftable'{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>'};
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::StaticTextCharacter::`vftable{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>};
+  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::StaticTextCharacter::`vftable{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>};
   v2 = this->pHighlight;
   if ( v2 )
   {
@@ -1280,14 +1280,14 @@ void __fastcall Scaleform::GFx::GFx_DefineTextLoader(Scaleform::GFx::LoadProcess
   v15 = v7;
   if ( v7 )
   {
-    *(_QWORD *)v7 = &Scaleform::GFx::Resource::`vftable';
+    *(_QWORD *)v7 = &Scaleform::GFx::Resource::`vftable;
     v9 = *(_DWORD *)(v7 + 8);
     v10 = *(unsigned int *)(v7 + 8);
     *(_DWORD *)(v8 + 8) = 1;
     *(_QWORD *)(v8 + 16) = 0i64;
-    *(_QWORD *)v8 = &Scaleform::GFx::CharacterDef::`vftable';
+    *(_QWORD *)v8 = &Scaleform::GFx::CharacterDef::`vftable;
     *(_DWORD *)(v8 + 24) = 0x40000;
-    *(_QWORD *)v8 = &Scaleform::GFx::StaticTextDef::`vftable';
+    *(_QWORD *)v8 = &Scaleform::GFx::StaticTextDef::`vftable;
     *(_QWORD *)(v8 + 32) = 0i64;
     *(_QWORD *)(v8 + 40) = 0i64;
     *(_QWORD *)(v8 + 48) = 1065353216i64;

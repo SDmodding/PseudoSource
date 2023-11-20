@@ -142,7 +142,7 @@ void __fastcall Scaleform::GFx::AS3::Abc::File::~File(Scaleform::GFx::AS3::Abc::
   Scaleform::GFx::AS3::Abc::File *v1; // rbx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS3::Abc::File::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS3::Abc::File::`vftable;
   Scaleform::GFx::AS3::Abc::MethodBodyTable::~MethodBodyTable(&this->MethodBodies);
   Scaleform::GFx::AS3::Abc::ScriptTable::~ScriptTable(&v1->Scripts);
   Scaleform::GFx::AS3::Abc::ClassTable::~ClassTable(&v1->AS3_Classes);
@@ -175,7 +175,7 @@ void __fastcall Scaleform::GFx::AS3::Abc::MethodBodyTable::~MethodBodyTable(Scal
       if ( v4 )
       {
         Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v4->exception.info.Data.Data);
-        v4->code.vfptr = (Scaleform::GFx::AS3::Abc::CodeVtbl *)&Scaleform::GFx::AS3::Abc::Code::`vftable';
+        v4->code.vfptr = (Scaleform::GFx::AS3::Abc::CodeVtbl *)&Scaleform::GFx::AS3::Abc::Code::`vftable;
         Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v4->obj_traits.Data.Data);
         Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v4);
       }

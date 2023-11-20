@@ -102,7 +102,7 @@ void __fastcall UFG::FireModeInfo::FireModeInfo(UFG::FireModeInfo *this)
   if ( v13 )
   {
     v14 = v13 - 1;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v13,
       4ui64,
       v13[-1].mUID,

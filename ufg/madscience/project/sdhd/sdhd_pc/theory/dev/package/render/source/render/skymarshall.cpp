@@ -170,7 +170,7 @@ void __fastcall Render::SkyMarshall::LoadSkydomeList(Render::SkyMarshall *this)
     }
     while ( v6 );
   }
-  `eh vector destructor iterator'(&name, 4ui64, 4, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(&name, 4ui64, 4, (void (__fastcall *)(void *))_);
 }
 
 // File Line: 179
@@ -253,12 +253,12 @@ void __fastcall Render::SkyMarshall::SkyMarshall(Render::SkyMarshall *this)
   UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v1->mRimMaterial.mPrev);
   UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v1->mWispModel.mPrev);
   v1->mEnableDome = 1;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v1->mCloudSceneHandle,
     0x20ui64,
     4,
     (void (__fastcall *)(void *))Render::CloudSceneHandle::CloudSceneHandle);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v1->mWispIndexBuffer,
     0x58ui64,
     17,
@@ -295,7 +295,7 @@ void __fastcall Render::SkyMarshall::SkyMarshall(Render::SkyMarshall *this)
     "qArray.Reallocate(Constructor)");
   v1->mLockSkydome = 0;
   *(_QWORD *)&v1->mFadeInDuration = 0i64;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v1->mSkydomeModel,
     0x20ui64,
     6,
@@ -520,13 +520,13 @@ LABEL_9:
           v2->mSkydomeState = 3;
           for ( i = 0; i < *(_DWORD *)(v11 + 52); ++i )
           {
-            v13 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
+            v13 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
             v14 = *(_DWORD *)(v11 + 8i64 * i + 4);
-            if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+            if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
             {
               v15 = UFG::qResourceWarehouse::Instance();
               v13 = UFG::qResourceWarehouse::GetInventory(v15, 0xA2ADCD77);
-              `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v13;
+              `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v13;
             }
             UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v2->mSkydomeModel[i].mPrev, 0xA2ADCD77, v14, v13);
           }
@@ -624,12 +624,12 @@ LABEL_9:
     v26 = v25;
     if ( v2->mCloudSceneHandle[v26].mData )
     {
-      v27 = `UFG::qGetResourceInventory<Render::CloudScene>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<Render::CloudScene>'::`2'::result )
+      v27 = `UFG::qGetResourceInventory<Render::CloudScene>::`2::result;
+      if ( !`UFG::qGetResourceInventory<Render::CloudScene>::`2::result )
       {
         v28 = UFG::qResourceWarehouse::Instance();
         v27 = UFG::qResourceWarehouse::GetInventory(v28, 0x4438A32Fu);
-        `UFG::qGetResourceInventory<Render::CloudScene>'::`2'::result = v27;
+        `UFG::qGetResourceInventory<Render::CloudScene>::`2::result = v27;
       }
       UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v2->mCloudSceneHandle[v26].mPrev, v27);
     }
@@ -938,12 +938,12 @@ void __fastcall Render::SkyMarshall::RenderFar(Render::SkyMarshall *this, Render
   if ( !hMatSky.mData )
   {
     v5 = UFG::qStringHashUpper32("DR_SkyboxMaterial", 0xFFFFFFFF);
-    v6 = `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::Material>'::`2'::result )
+    v6 = `UFG::qGetResourceInventory<Illusion::Material>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::Material>::`2::result )
     {
       v7 = UFG::qResourceWarehouse::Instance();
       v6 = UFG::qResourceWarehouse::GetInventory(v7, 0xB4C26312);
-      `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result = v6;
+      `UFG::qGetResourceInventory<Illusion::Material>::`2::result = v6;
     }
     UFG::qResourceHandle::Init((UFG::qResourceHandle *)&hMatSky.mPrev, 0xB4C26312, v5, v6);
     v4 = _S2_2;
@@ -1088,12 +1088,12 @@ LABEL_6:
     UFG::qPrintf(v8, v2, v6);
     return 4i64;
   }
-  v10 = `UFG::qGetResourceInventory<Render::CloudScene>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Render::CloudScene>'::`2'::result )
+  v10 = `UFG::qGetResourceInventory<Render::CloudScene>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Render::CloudScene>::`2::result )
   {
     v11 = UFG::qResourceWarehouse::Instance();
     v10 = UFG::qResourceWarehouse::GetInventory(v11, 0x4438A32Fu);
-    `UFG::qGetResourceInventory<Render::CloudScene>'::`2'::result = v10;
+    `UFG::qGetResourceInventory<Render::CloudScene>::`2::result = v10;
   }
   v12 = v5;
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v3->mCloudSceneHandle[v12].mPrev, 0x4438A32Fu, v7, v10);
@@ -1134,12 +1134,12 @@ void __fastcall Render::SkyMarshall::UnloadCloudScene(Render::SkyMarshall *this,
       return;
     }
   }
-  v7 = `UFG::qGetResourceInventory<Render::CloudScene>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Render::CloudScene>'::`2'::result )
+  v7 = `UFG::qGetResourceInventory<Render::CloudScene>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Render::CloudScene>::`2::result )
   {
     v8 = UFG::qResourceWarehouse::Instance();
     v7 = UFG::qResourceWarehouse::GetInventory(v8, 0x4438A32Fu);
-    `UFG::qGetResourceInventory<Render::CloudScene>'::`2'::result = v7;
+    `UFG::qGetResourceInventory<Render::CloudScene>::`2::result = v7;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v3->mCloudSceneHandle[v5].mPrev, v7);
 }
@@ -1242,12 +1242,12 @@ void __fastcall Render::SkyMarshall::InitWispModel(Render::SkyMarshall *this)
   *((_QWORD *)v6 + 30) = "SkyMarshall.TheWisp";
   *((_DWORD *)v6 + 30) = v8;
   *((_DWORD *)v6 + 14) = Scaleform::Render::ShapeMeshProvider::GetLayerCount((hkDataClassDict *)&Render::gCloudWispDescriptor);
-  v14 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  v14 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v15 = UFG::qResourceWarehouse::Instance();
     v14 = UFG::qResourceWarehouse::GetInventory(v15, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v14;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v14;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v1->mWispModel.mPrev, 0xA2ADCD77, 0xA952ACC5, v14);
   UFG::qString::~qString(&alloc_name);
@@ -1290,21 +1290,21 @@ void __fastcall Render::SkyMarshall::InitCloudResources(Render::SkyMarshall *thi
 
   v1 = this;
   v2 = UFG::qStringHashUpper32("SKY_Clouds_001", 0xFFFFFFFF);
-  v3 = `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result )
+  v3 = `UFG::qGetResourceInventory<Illusion::Texture>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Texture>::`2::result )
   {
     v4 = UFG::qResourceWarehouse::Instance();
     v3 = UFG::qResourceWarehouse::GetInventory(v4, 0x8B43FABF);
-    `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result = v3;
+    `UFG::qGetResourceInventory<Illusion::Texture>::`2::result = v3;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v1->mTexture.mPrev, 0x8B43FABF, v2, v3);
   v5 = UFG::qStringHashUpper32("SKY_Noise_001", 0xFFFFFFFF);
-  v6 = `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result )
+  v6 = `UFG::qGetResourceInventory<Illusion::Texture>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Texture>::`2::result )
   {
     v7 = UFG::qResourceWarehouse::Instance();
     v6 = UFG::qResourceWarehouse::GetInventory(v7, 0x8B43FABF);
-    `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result = v6;
+    `UFG::qGetResourceInventory<Illusion::Texture>::`2::result = v6;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v1->mNoiseTexture.mPrev, 0x8B43FABF, v5, v6);
   v8 = 0i64;
@@ -1381,12 +1381,12 @@ void __fastcall Render::SkyMarshall::InitCloudResources(Render::SkyMarshall *thi
       v8 = (_WORD *)((char *)&v13->mMaterialUser + v24);
     *v8 |= 0x20u;
   }
-  v25 = `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Material>'::`2'::result )
+  v25 = `UFG::qGetResourceInventory<Illusion::Material>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Material>::`2::result )
   {
     v26 = UFG::qResourceWarehouse::Instance();
     v25 = UFG::qResourceWarehouse::GetInventory(v26, 0xB4C26312);
-    `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result = v25;
+    `UFG::qGetResourceInventory<Illusion::Material>::`2::result = v25;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v1->mCloudMaterial.mPrev, 0xB4C26312, v12, v25);
   Render::SkyMarshall::InitWispModel(v1);
@@ -1496,23 +1496,23 @@ void __fastcall Render::SkyMarshall::WispIndexBuffer::InitBufferHandles(Render::
   UFG::qResourceInventory *v8; // rax
   UFG::qResourceWarehouse *v9; // rax
 
-  v3 = `UFG::qGetResourceInventory<Illusion::Buffer>'::`2'::result;
+  v3 = `UFG::qGetResourceInventory<Illusion::Buffer>::`2::result;
   v4 = bufferB;
   v5 = bufferA;
   v6 = this;
-  if ( !`UFG::qGetResourceInventory<Illusion::Buffer>'::`2'::result )
+  if ( !`UFG::qGetResourceInventory<Illusion::Buffer>::`2::result )
   {
     v7 = UFG::qResourceWarehouse::Instance();
     v3 = UFG::qResourceWarehouse::GetInventory(v7, 0x92CDEC8F);
-    `UFG::qGetResourceInventory<Illusion::Buffer>'::`2'::result = v3;
+    `UFG::qGetResourceInventory<Illusion::Buffer>::`2::result = v3;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)v6->mBufferHandle, 0x92CDEC8F, v5, v3);
-  v8 = `UFG::qGetResourceInventory<Illusion::Buffer>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Buffer>'::`2'::result )
+  v8 = `UFG::qGetResourceInventory<Illusion::Buffer>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Buffer>::`2::result )
   {
     v9 = UFG::qResourceWarehouse::Instance();
     v8 = UFG::qResourceWarehouse::GetInventory(v9, 0x92CDEC8F);
-    `UFG::qGetResourceInventory<Illusion::Buffer>'::`2'::result = v8;
+    `UFG::qGetResourceInventory<Illusion::Buffer>::`2::result = v8;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v6->mBufferHandle[1].mPrev, 0x92CDEC8F, v4, v8);
 }

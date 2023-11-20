@@ -150,12 +150,12 @@ LABEL_12:
       }
       *(ASymbol *)(v6 + 8) = ASymbol_String;
       *(_QWORD *)(v6 + 16) = v7;
-      *(_QWORD *)v6 = &SSInvokableBase::`vftable';
+      *(_QWORD *)v6 = &SSInvokableBase::`vftable;
       *(_QWORD *)(v6 + 24) = v8;
       if ( v8 )
         ++v8->i_ref_count;
-      *(_QWORD *)v6 = &SSMethodBase::`vftable';
-      *(_QWORD *)v6 = &SSMethodFunc::`vftable';
+      *(_QWORD *)v6 = &SSMethodBase::`vftable;
+      *(_QWORD *)v6 = &SSMethodFunc::`vftable;
       *(_QWORD *)(v6 + 32) = SSInvokedMethod::mthd_String;
       if ( v8 )
       {

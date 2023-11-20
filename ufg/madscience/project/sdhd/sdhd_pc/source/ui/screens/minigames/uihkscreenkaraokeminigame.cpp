@@ -16,7 +16,7 @@ void __fastcall UFG::UIHKScreenKaraokeMinigame::UIHKScreenKaraokeMinigame(UFG::U
   v2 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   v3 = 0i64;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
@@ -28,12 +28,12 @@ void __fastcall UFG::UIHKScreenKaraokeMinigame::UIHKScreenKaraokeMinigame(UFG::U
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKTaskableScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKTaskableScreen::`vftable;
   this->mFinished = 0;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKMinigameScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKMinigameScreen::`vftable;
   *(_QWORD *)&this->mfAlphaValue = 1109393408i64;
   ++UFG::UIHKMinigameScreen::mNumMinigameScreens;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenKaraokeMinigame::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenKaraokeMinigame::`vftable;
   this->mBankID.mUID = -1;
   _((AMD_HD3D *)0xFFFFFFFFi64);
   v4 = UFG::qVector3::msZero.y;
@@ -81,7 +81,7 @@ void __fastcall UFG::UIHKScreenKaraokeMinigame::~UIHKScreenKaraokeMinigame(UFG::
   UFG::qWiseSymbol result; // [rsp+48h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenKaraokeMinigame::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenKaraokeMinigame::`vftable;
   v2 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseScreen(v2, "KaraokeMinigame");
   UFG::Music::sm_bRecievedMarker = 0;
@@ -129,7 +129,7 @@ void __fastcall UFG::UIHKScreenKaraokeMinigame::init(UFG::UIHKScreenKaraokeMinig
       v6 = UFG::GameStatTracker::Instance();
       v7 = UFG::GameStatTracker::GetStat(v6, 0, v5);
       *(_QWORD *)&pargs.Type = Scaleform::GFx::Value::~Value;
-      `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       if ( (v11 >> 6) & 1 )
       {
         (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v10 + 16i64))(
@@ -151,13 +151,13 @@ void __fastcall UFG::UIHKScreenKaraokeMinigame::init(UFG::UIHKScreenKaraokeMinig
       v15 = 5;
       v16 = (double)v7;
       Scaleform::GFx::Movie::Invoke(v3, "initHighScores", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-      `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+      `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
       ++v4;
     }
     while ( v4 < v2->mnSongs );
   }
   *(_QWORD *)&pargs.Type = Scaleform::GFx::Value::~Value;
-  `eh vector constructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( ((unsigned int)pargs.Type >> 6) & 1 )
   {
     (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
@@ -168,7 +168,7 @@ void __fastcall UFG::UIHKScreenKaraokeMinigame::init(UFG::UIHKScreenKaraokeMinig
   }
   pargs.mValue.NValue = 0.0;
   Scaleform::GFx::Movie::Invoke(v3, "highlightSelected", 0i64, &pargs, 1u);
-  `eh vector destructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 124
@@ -265,7 +265,7 @@ void __fastcall UFG::UIHKScreenKaraokeMinigame::update(UFG::UIHKScreenKaraokeMin
       if ( !v18 || !v18->mActionTrue )
         v3->m_fLeftStickY = v5 * 0.5;
     }
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     v20 = v3->m_fLeftStickX;
     if ( (v30 >> 6) & 1 )
     {
@@ -336,7 +336,7 @@ void __fastcall UFG::UIHKScreenKaraokeMinigame::update(UFG::UIHKScreenKaraokeMin
       {
         v3->minigameState = 2;
         UFG::UIHKScreenKaraokeMinigame::stopAllStimuli(v3);
-        `eh vector constructor iterator'(&pval, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+        `eh vector constructor iterator(&pval, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
         if ( ((unsigned int)pval.Type >> 6) & 1 )
         {
           (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pval.pObjectInterface->vfptr->gap8[8])(
@@ -350,7 +350,7 @@ void __fastcall UFG::UIHKScreenKaraokeMinigame::update(UFG::UIHKScreenKaraokeMin
         Scaleform::GFx::Movie::Invoke(v24, "setState", 0i64, &pval, 1u);
         UFG::TiDo::UnloadWwiseBank(&v3->mBankID);
         v3->mbMusicStarted = 0;
-        `eh vector destructor iterator'(&pval, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+        `eh vector destructor iterator(&pval, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
       }
     }
     else
@@ -375,7 +375,7 @@ void __fastcall UFG::UIHKScreenKaraokeMinigame::update(UFG::UIHKScreenKaraokeMin
       }
     }
     UFG::UIScreen::update((UFG::UIScreen *)&v3->vfptr, v2);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 
@@ -494,7 +494,7 @@ LABEL_13:
             UFG::TiDo::LoadWwiseBank(&v5->mBankID);
             v5->mbSongSelected = 1;
             externalSourceInfo = (UFG::AudioEventExternalSourceInfo *)Scaleform::GFx::Value::~Value;
-            `eh vector constructor iterator'(
+            `eh vector constructor iterator(
               &ptr,
               0x30ui64,
               1,
@@ -519,7 +519,7 @@ LABEL_13:
             v15 = v5->mPlayerAISIC;
             if ( v15 )
               UFG::AIScriptInterfaceComponent::StartHoldingActionRequest(v15, "KaraokeInstrumental2");
-            `eh vector destructor iterator'(
+            `eh vector destructor iterator(
               &ptr,
               0x30ui64,
               1,
@@ -774,7 +774,7 @@ void __fastcall UFG::UIHKScreenKaraokeMinigame::initSongList(UFG::UIHKScreenKara
 
   v24 = -2i64;
   v1 = this;
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   v2 = v1->mRenderable->m_movie.pObject;
   v3 = 0;
   if ( v1->mnSongs )
@@ -830,7 +830,7 @@ void __fastcall UFG::UIHKScreenKaraokeMinigame::initSongList(UFG::UIHKScreenKara
     }
     while ( v3 < v1->mnSongs );
   }
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 450

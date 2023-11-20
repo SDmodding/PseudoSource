@@ -2,7 +2,7 @@
 // RVA: 0xA23A60
 void __fastcall Scaleform::Render::ThreadCommandQueue::~ThreadCommandQueue(Scaleform::Render::ThreadCommandQueue *this)
 {
-  this->vfptr = (Scaleform::Render::ThreadCommandQueueVtbl *)&Scaleform::Render::ThreadCommandQueue::`vftable';
+  this->vfptr = (Scaleform::Render::ThreadCommandQueueVtbl *)&Scaleform::Render::ThreadCommandQueue::`vftable;
 }
 
 // File Line: 92

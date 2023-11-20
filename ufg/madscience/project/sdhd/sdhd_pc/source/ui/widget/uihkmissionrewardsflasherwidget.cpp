@@ -328,7 +328,7 @@ __int64 dynamic_initializer_for__UFG::UIHKMissionRewardsFlasherWidget::mRewardQu
 // RVA: 0x1566DC0
 __int64 dynamic_initializer_for__UFG::UIHKMissionRewardsFlasherWidget::gTexturePackFilename__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     UFG::UIHKMissionRewardsFlasherWidget::gTexturePackFilename,
     0x28ui64,
     4,
@@ -347,7 +347,7 @@ void __fastcall UFG::UIHKMissionRewardsFlasherWidget::~UIHKMissionRewardsFlasher
 
   v1 = (const char **)&UFG::UIHKMissionRewardsFlasherWidget::gTexturePackFilename[0].mData;
   v2 = 4i64;
-  this->vfptr = (UFG::UIHKMissionRewardsFlasherWidgetVtbl *)&UFG::UIHKMissionRewardsFlasherWidget::`vftable';
+  this->vfptr = (UFG::UIHKMissionRewardsFlasherWidgetVtbl *)&UFG::UIHKMissionRewardsFlasherWidget::`vftable;
   do
   {
     v3 = *v1;
@@ -739,7 +739,7 @@ void __fastcall UFG::UIHKMissionRewardsFlasherWidget::Flash_Show(UFG::UIHKMissio
         {
           v7 = UFG::UIHKMissionRewardsFlasherWidget::GetIconTextureName(v2, v6->mIcon);
           UFG::qString::qString(&v19, "img://%s", v7);
-          `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+          `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
           v8 = (__int64)v6->mText.mData;
           if ( (v12 >> 6) & 1 )
           {
@@ -757,7 +757,7 @@ void __fastcall UFG::UIHKMissionRewardsFlasherWidget::Flash_Show(UFG::UIHKMissio
           v16 = 6;
           v17 = v9;
           Scaleform::GFx::Movie::Invoke(v3, "Rewards_Add", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-          `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+          `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
           UFG::qString::~qString(&v19);
           v5 = UFG::UIHKMissionRewardsFlasherWidget::mRewardQueue.size;
         }

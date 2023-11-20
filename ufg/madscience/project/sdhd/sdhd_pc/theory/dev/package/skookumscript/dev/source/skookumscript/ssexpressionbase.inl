@@ -50,8 +50,8 @@ void __fastcall SSConditional::SSConditional(SSConditional *this, const void **b
 {
   APCompactArrayFree<SSClause,SSClause,ACompareAddress<SSClause> > *v2; // [rsp+50h] [rbp+18h]
 
-  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-  this->vfptr = (SSExpressionBaseVtbl *)&SSConditional::`vftable';
+  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+  this->vfptr = (SSExpressionBaseVtbl *)&SSConditional::`vftable;
   v2 = &this->i_clauses;
   v2->i_count = 0;
   v2->i_array_p = 0i64;
@@ -64,8 +64,8 @@ void __fastcall SSCase::SSCase(SSCase *this, const void **binary_pp)
 {
   APCompactArrayFree<SSClause,SSClause,ACompareAddress<SSClause> > *v2; // [rsp+50h] [rbp+18h]
 
-  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-  this->vfptr = (SSExpressionBaseVtbl *)&SSCase::`vftable';
+  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+  this->vfptr = (SSExpressionBaseVtbl *)&SSCase::`vftable;
   v2 = &this->i_clauses;
   v2->i_count = 0;
   v2->i_array_p = 0i64;
@@ -84,8 +84,8 @@ void __fastcall SSLoop::SSLoop(SSLoop *this, const void **binary_pp)
 
   v2 = binary_pp;
   v3 = this;
-  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-  this->vfptr = (SSExpressionBaseVtbl *)&SSLoop::`vftable';
+  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+  this->vfptr = (SSExpressionBaseVtbl *)&SSLoop::`vftable;
   ASymbol::create_from_binary(&this->i_name, binary_pp);
   v4 = *(unsigned __int8 *)*v2;
   v5 = (signed __int64)*v2 + 1;
@@ -106,8 +106,8 @@ void __fastcall SSLoop::SSLoop(SSLoop *this, const void **binary_pp)
 // RVA: 0x105F40
 void __fastcall SSLoopExit::SSLoopExit(SSLoopExit *this, const void **binary_pp)
 {
-  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-  this->vfptr = (SSExpressionBaseVtbl *)&SSLoopExit::`vftable';
+  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+  this->vfptr = (SSExpressionBaseVtbl *)&SSLoopExit::`vftable;
   ASymbol::create_from_binary(&this->i_name, binary_pp);
 }
 
@@ -115,8 +115,8 @@ void __fastcall SSLoopExit::SSLoopExit(SSLoopExit *this, const void **binary_pp)
 // RVA: 0x104CE0
 void __fastcall SSConversion::SSConversion(SSConversion *this, const void **binary_pp)
 {
-  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-  this->vfptr = (SSExpressionBaseVtbl *)&SSConversion::`vftable';
+  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+  this->vfptr = (SSExpressionBaseVtbl *)&SSConversion::`vftable;
   this->i_type_p = 0i64;
   this->i_expr_p = 0i64;
   SSConversion::assign_binary(this, binary_pp);
@@ -131,8 +131,8 @@ void __fastcall SSCast::SSCast(SSCast *this, SSClassDescBase *type_p, SSExpressi
 
   v3 = expr_p;
   v4 = this;
-  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-  this->vfptr = (SSExpressionBaseVtbl *)&SSCast::`vftable';
+  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+  this->vfptr = (SSExpressionBaseVtbl *)&SSCast::`vftable;
   this->i_type_p.i_obj_p = type_p;
   if ( type_p )
     (*(void (__fastcall **)(SSClassDescBase *))type_p->vfptr->gap8)(type_p);
@@ -143,8 +143,8 @@ void __fastcall SSCast::SSCast(SSCast *this, SSClassDescBase *type_p, SSExpressi
 // RVA: 0x104340
 void __fastcall SSCast::SSCast(SSCast *this, const void **binary_pp)
 {
-  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-  this->vfptr = (SSExpressionBaseVtbl *)&SSCast::`vftable';
+  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+  this->vfptr = (SSExpressionBaseVtbl *)&SSCast::`vftable;
   this->i_type_p.i_obj_p = 0i64;
   this->i_expr_p = 0i64;
   SSCast::assign_binary(this, binary_pp);

@@ -6,7 +6,7 @@ AK::IAkPluginParam *__fastcall CreateMcDSPFutzBoxFXParams(AK::IAkPluginMemAlloc 
 
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 176ui64);
   if ( result )
-    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CMcDSPFutzBoxFXParams::`vftable';
+    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CMcDSPFutzBoxFXParams::`vftable;
   return result;
 }
 
@@ -14,14 +14,14 @@ AK::IAkPluginParam *__fastcall CreateMcDSPFutzBoxFXParams(AK::IAkPluginMemAlloc 
 // RVA: 0xB02FC0
 void __fastcall CMcDSPFutzBoxFXParams::CMcDSPFutzBoxFXParams(CMcDSPFutzBoxFXParams *this)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CMcDSPFutzBoxFXParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CMcDSPFutzBoxFXParams::`vftable;
 }
 
 // File Line: 27
 // RVA: 0xB030C0
 void __fastcall CMcDSPFutzBoxFXParams::~CMcDSPFutzBoxFXParams(CMcDSPFutzBoxFXParams *this)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable;
 }
 
 // File Line: 32
@@ -36,7 +36,7 @@ void __fastcall CMcDSPFutzBoxFXParams::CMcDSPFutzBoxFXParams(CMcDSPFutzBoxFXPara
 
   v2 = &in_rCopy->m_Params;
   v3 = this;
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CMcDSPFutzBoxFXParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CMcDSPFutzBoxFXParams::`vftable;
   v4 = &this->m_Params;
   if ( ((unsigned __int8)v4 | (unsigned __int8)v2) & 0xF )
   {

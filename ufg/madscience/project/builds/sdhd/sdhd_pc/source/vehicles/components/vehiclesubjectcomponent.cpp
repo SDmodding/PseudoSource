@@ -44,7 +44,7 @@ void __fastcall UFG::VehicleSubjectComponent::VehicleSubjectComponent(UFG::Vehic
   v3 = (UFG::qNode<UFG::VehicleSubjectComponent,UFG::VehicleSubjectComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleSubjectComponent::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleSubjectComponent::`vftable;
   UFG::RebindingComponentHandle<UFG::AiDriverComponent,0>::RebindingComponentHandle<UFG::AiDriverComponent,0>(&v2->pAiDriver);
   UFG::RebindingComponentHandle<UFG::RoadSpaceComponent,0>::RebindingComponentHandle<UFG::RoadSpaceComponent,0>(&v2->pRoadSpace);
   UFG::RebindingComponentHandle<UFG::PhysicsMoverInterface,0>::RebindingComponentHandle<UFG::PhysicsMoverInterface,0>(&v2->pPhysicsMover);
@@ -158,7 +158,7 @@ void __fastcall UFG::VehicleSubjectComponent::~VehicleSubjectComponent(UFG::Vehi
   UFG::qNode<UFG::VehicleSubjectComponent,UFG::VehicleSubjectComponent> *v8; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleSubjectComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleSubjectComponent::`vftable;
   if ( this == UFG::VehicleSubjectComponent::s_VehicleSubjectComponentpCurrentIterator )
     UFG::VehicleSubjectComponent::s_VehicleSubjectComponentpCurrentIterator = (UFG::VehicleSubjectComponent *)&this->mPrev[-18];
   v2 = (UFG::qNode<UFG::VehicleSubjectComponent,UFG::VehicleSubjectComponent> *)&this->mPrev;

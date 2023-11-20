@@ -78,7 +78,7 @@ void __fastcall finishLoadedObjecthkpStiffSpringConstraintData(void *p, int fini
   {
     v2 = p;
     hkpConstraintData::hkpConstraintData((hkpConstraintData *)p, (hkFinishLoadedObjectFlag)finishing);
-    *v2 = &hkpStiffSpringConstraintData::`vftable';
+    *v2 = &hkpStiffSpringConstraintData::`vftable;
   }
 }
 
@@ -96,7 +96,7 @@ void **__fastcall getVtablehkpStiffSpringConstraintData()
   hkpConstraintData v1; // [rsp+20h] [rbp-78h]
 
   hkpConstraintData::hkpConstraintData(&v1, 0);
-  return &hkpStiffSpringConstraintData::`vftable';
+  return &hkpStiffSpringConstraintData::`vftable;
 }
 
 // File Line: 154

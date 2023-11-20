@@ -13,7 +13,7 @@ void __fastcall hkpShapeDisplayBuilder::hkpShapeDisplayBuilder(hkpShapeDisplayBu
   hkpShapeDisplayBuilder::hkpShapeDisplayBuilderEnvironment v2; // rax
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpShapeDisplayBuilder::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpShapeDisplayBuilder::`vftable;
   v2 = *env;
   this->m_currentGeometry = 0i64;
   this->m_environment = v2;
@@ -687,7 +687,7 @@ void __fastcall hkpShapeDisplayBuilder::buildShapeDisplay_BvCompressedMeshShape(
   v6 = transform;
   v7 = hkpShapeDisplayBuilder::getCurrentRawGeometry(this, displayGeometries)->m_geometry;
   *(_DWORD *)&geometryOut.m_memSizeAndFlags = 0x1FFFF;
-  geometryOut.vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable';
+  geometryOut.vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable;
   geometryOut.m_vertices.m_data = 0i64;
   geometryOut.m_vertices.m_size = 0;
   geometryOut.m_vertices.m_capacityAndFlags = 2147483648;
@@ -1041,7 +1041,7 @@ void __fastcall hkpShapeDisplayBuilder::buildShapeDisplay_CompressedMeshShape(hk
     do
     {
       a.m_translation.m_quad.m128_i32[2] = 0x1FFFF;
-      a.m_translation.m_quad.m128_u64[0] = (unsigned __int64)&hkGeometry::`vftable';
+      a.m_translation.m_quad.m128_u64[0] = (unsigned __int64)&hkGeometry::`vftable;
       a.m_rotation.m_vec.m_quad.m128_u64[0] = 0i64;
       a.m_rotation.m_vec.m_quad.m128_u64[1] = 0x8000000000000000i64;
       a.m_scale.m_quad.m128_u64[0] = 0i64;
@@ -1753,7 +1753,7 @@ void __fastcall hkpShapeDisplayBuilder::buildShapeDisplay_Plane(hkpShapeDisplayB
   v11 = (unsigned __int8)hkVector4Comparison_maskToLastIndex[v9];
   v12 = (__m128 *)(16 * v11);
   sizeElem = (__m128 *)(16 * v11);
-  v13 = _mm_and_ps((__m128)`hkVector4f::getComponent'::`2'::indexToMask[v11], planeShape->m_plane.m_quad);
+  v13 = _mm_and_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[v11], planeShape->m_plane.m_quad);
   v14 = _mm_or_ps(_mm_shuffle_ps(v13, v13, 78), v13);
   v15 = (v10 + 1) % 3;
   v16 = (v10 + 2) % 3;
@@ -1800,7 +1800,7 @@ void __fastcall hkpShapeDisplayBuilder::buildShapeDisplay_Plane(hkpShapeDisplayB
   }
   v29 = 0;
   *(_OWORD *)(v26 + 16i64 * SLODWORD(v27)) = v28;
-  v30 = (__m128)`hkVector4f::getComponent'::`2'::indexToMask[v11];
+  v30 = (__m128)`hkVector4f::getComponent::`2::indexToMask[v11];
   v31 = v4->m_aabbHalfExtents.m_quad;
   v32 = array.m128_i32[2] + 1;
   v33 = 0i64;
@@ -2625,7 +2625,7 @@ void __fastcall hkpShapeDisplayBuilder::buildShapeDisplay_ConvexVertices(hkpShap
     if ( v22 )
     {
       *(_DWORD *)(v22 + 8) = 0x1FFFF;
-      *(_QWORD *)v22 = &hkGeometry::`vftable';
+      *(_QWORD *)v22 = &hkGeometry::`vftable;
       *(_QWORD *)(v22 + 16) = 0i64;
       *(_DWORD *)(v22 + 24) = 0;
       *(_DWORD *)(v22 + 28) = 2147483648;
@@ -2736,7 +2736,7 @@ void __fastcall hkpShapeDisplayBuilder::buildShapeDisplay_ConvexPiece(hkpShapeDi
   if ( v7 )
   {
     *(_DWORD *)(v7 + 8) = 0x1FFFF;
-    *(_QWORD *)v7 = &hkGeometry::`vftable';
+    *(_QWORD *)v7 = &hkGeometry::`vftable;
     *(_QWORD *)(v7 + 16) = 0i64;
     *(_DWORD *)(v7 + 24) = 0;
     *(_DWORD *)(v7 + 28) = 2147483648;
@@ -3867,7 +3867,7 @@ hkReferencedObject *__fastcall hkpShapeDisplayBuilder::getInitialContinueData(hk
   if ( result )
   {
     *(_DWORD *)&result->m_memSizeAndFlags = 0x1FFFF;
-    result->vfptr = (hkBaseObjectVtbl *)&hkpShapeContinueData::`vftable';
+    result->vfptr = (hkBaseObjectVtbl *)&hkpShapeContinueData::`vftable;
     result[1].vfptr = 0i64;
     *(_DWORD *)&result[1].m_memSizeAndFlags = 0;
     *(_QWORD *)(&result[1].m_referenceCount + 1) = -2147483648i64;
@@ -3901,7 +3901,7 @@ hkDisplayGeometry *__fastcall hkpShapeDisplayBuilder::getCurrentRawGeometry(hkpS
   if ( v5 )
   {
     *(_DWORD *)(v5 + 8) = 0x1FFFF;
-    *(_QWORD *)v5 = &hkGeometry::`vftable';
+    *(_QWORD *)v5 = &hkGeometry::`vftable;
     *(_QWORD *)(v5 + 16) = 0i64;
     *(_DWORD *)(v5 + 24) = 0;
     *(_DWORD *)(v5 + 28) = 2147483648;
@@ -3946,7 +3946,7 @@ hkReferencedObject *__fastcall hkpUserShapeDisplayBuildercreate()
   if ( result )
   {
     *(_DWORD *)&result->m_memSizeAndFlags = 0x1FFFF;
-    result->vfptr = (hkBaseObjectVtbl *)&hkpUserShapeDisplayBuilder::`vftable';
+    result->vfptr = (hkBaseObjectVtbl *)&hkpUserShapeDisplayBuilder::`vftable;
     result[1].vfptr = 0i64;
     *(_DWORD *)&result[1].m_memSizeAndFlags = 0;
     *(_DWORD *)(&result[1].m_referenceCount + 1) = 2147483648;

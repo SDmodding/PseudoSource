@@ -31,8 +31,8 @@ void __fastcall UFG::RagdollComponent::RagdollComponent(UFG::RagdollComponent *t
   v3->mPrev = v3;
   v3->mNext = v3;
   UFG::qSafePointerNode<UFG::RagdollComponent>::qSafePointerNode<UFG::RagdollComponent>((UFG::qSafePointerNode<UFG::RagdollComponent> *)&v2->vfptr);
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::RagdollComponent::`vftable'{for `UFG::SimComponent'};
-  v2->vfptr = (UFG::qSafePointerNode<UFG::RagdollComponent>Vtbl *)&UFG::RagdollComponent::`vftable'{for `UFG::qSafePointerNode<UFG::RagdollComponent>'};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::RagdollComponent::`vftable{for `UFG::SimComponent};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::RagdollComponent>Vtbl *)&UFG::RagdollComponent::`vftable{for `UFG::qSafePointerNode<UFG::RagdollComponent>};
   v2->mRagdoll = 0i64;
   v2->mPose = 0i64;
   *(_QWORD *)&v2->mRagDollWeight = 0i64;
@@ -45,7 +45,7 @@ void __fastcall UFG::RagdollComponent::RagdollComponent(UFG::RagdollComponent *t
   *(_QWORD *)&v2->mReferenceCount = 1i64;
   UFG::RebindingComponentHandle<UFG::CharacterAnimationComponent,0>::RebindingComponentHandle<UFG::CharacterAnimationComponent,0>(&v2->mAnimationComponent);
   v5 = v2->mConstraint;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v2->mConstraint,
     0x18ui64,
     4,
@@ -100,9 +100,9 @@ void __fastcall UFG::RagdollComponent::~RagdollComponent(UFG::RagdollComponent *
   UFG::qNode<UFG::RagdollComponent,UFG::RagdollComponent> *v11; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::RagdollComponent::`vftable'{for `UFG::SimComponent'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::RagdollComponent::`vftable{for `UFG::SimComponent};
   v2 = (UFG::qSafePointerNode<UFG::ParkourHandle> *)&this->vfptr;
-  this->vfptr = (UFG::qSafePointerNode<UFG::RagdollComponent>Vtbl *)&UFG::RagdollComponent::`vftable'{for `UFG::qSafePointerNode<UFG::RagdollComponent>'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::RagdollComponent>Vtbl *)&UFG::RagdollComponent::`vftable{for `UFG::qSafePointerNode<UFG::RagdollComponent>};
   UFG::RagdollComponent::ClearConstraints(this);
   --UFG::RagdollComponent::mNumRagdollComponents;
   v3 = v1->mRagdoll;
@@ -126,13 +126,13 @@ void __fastcall UFG::RagdollComponent::~RagdollComponent(UFG::RagdollComponent *
   v7->mPrev = v6;
   v5->mPrev = v5;
   v5->mNext = v5;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->mConstraint,
     0x18ui64,
     4,
     (void (__fastcall *)(void *))UFG::qSafePointer<AnimationGroup,AnimationGroup>::~qSafePointer<AnimationGroup,AnimationGroup>);
   UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->mAnimationComponent);
-  v2->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::RagdollComponent>::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::RagdollComponent>::`vftable;
   UFG::qSafePointerNode<UFG::DynamicCoverCorner>::SetAllPointersToNull(v2);
   UFG::qList<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList,1,0>::DeleteNodes(&v2->m_SafePointerList);
   v8 = v2->m_SafePointerList.mNode.mPrev;

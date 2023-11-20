@@ -75,8 +75,8 @@ void __fastcall CurtainShowTrack::CurtainShowTrack(CurtainShowTrack *this)
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, CurtainShowTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CurtainShowTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CurtainShowTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CurtainShowTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CurtainShowTrack::`vftable;
   *(_WORD *)&v1->mFadeIn = 257;
   v1->mFadeInTime = 1.0;
   v1->mFadeOutTime = 1.0;
@@ -134,8 +134,8 @@ void __fastcall NISShadowCascadeTrack::NISShadowCascadeTrack(NISShadowCascadeTra
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, NISShadowCascadeTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<NISShadowCascadeTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&NISShadowCascadeTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<NISShadowCascadeTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&NISShadowCascadeTrack::`vftable;
   v1->mCascade0 = -1.0;
   v1->mCascade1 = -1.0;
   v1->mCascade2 = -1.0;
@@ -164,8 +164,8 @@ void __fastcall ActorAttachTrack::ActorAttachTrack(ActorAttachTrack *this)
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, ActorAttachTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<ActorAttachTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ActorAttachTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<ActorAttachTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ActorAttachTrack::`vftable;
   v1->mActorID.mUID = -1;
   v1->mAttachToActor = 0;
   v1->mBlendInTime = 0.0;
@@ -194,8 +194,8 @@ void __fastcall ActorDetachTrack::ActorDetachTrack(ActorDetachTrack *this)
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, ActorDetachTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<ActorDetachTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ActorDetachTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<ActorDetachTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ActorDetachTrack::`vftable;
   v1->mActorID.mUID = -1;
   *(_WORD *)&v1->mDetachFromActor = 256;
   v1->mBlendOutTime = 0.0;
@@ -232,8 +232,8 @@ void __fastcall NISLightGroupAnimationTrack::~NISLightGroupAnimationTrack(NISLig
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&NISLightGroupAnimationTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&NISLightGroupAnimationTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -244,7 +244,7 @@ void __fastcall NISLightGroupAnimationTrack::~NISLightGroupAnimationTrack(NISLig
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 511
@@ -266,8 +266,8 @@ void __fastcall NISPlayMovieTrack::NISPlayMovieTrack(NISPlayMovieTrack *this)
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, NISPlayMovieTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<NISPlayMovieTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&NISPlayMovieTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<NISPlayMovieTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&NISPlayMovieTrack::`vftable;
   v1->mMovieFilename.mOffset = 1i64;
   BinString::Set(&v1->mMovieFilename, &customWorldMapCaption);
   *(_WORD *)&v1->mPauseSound = 1;
@@ -892,9 +892,9 @@ void __fastcall NISLightGroupAnimationTask::NISLightGroupAnimationTask(NISLightG
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<NISLightGroupAnimationTrack>::`vftable';
-  this->vfptr = (ITaskVtbl *)&NISLightGroupAnimationTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<NISLightGroupAnimationTrack>::`vftable;
+  this->vfptr = (ITaskVtbl *)&NISLightGroupAnimationTask::`vftable;
   v2 = &this->mController;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
@@ -916,7 +916,7 @@ void __fastcall NISLightGroupAnimationTask::~NISLightGroupAnimationTask(NISLight
   UFG::qNode<ITask,ITask> *v9; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&NISLightGroupAnimationTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&NISLightGroupAnimationTask::`vftable;
   v2 = &this->mController;
   if ( this->mController.m_pPointer )
   {
@@ -934,7 +934,7 @@ void __fastcall NISLightGroupAnimationTask::~NISLightGroupAnimationTask(NISLight
   v6->mPrev = v5;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v8 = v1->mPrev;
   v9 = v1->mNext;
@@ -1070,9 +1070,9 @@ void __fastcall NISPlayMovieTask::NISPlayMovieTask(NISPlayMovieTask *this)
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<NISPlayMovieTrack>::`vftable';
-  this->vfptr = (ITaskVtbl *)&NISPlayMovieTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<NISPlayMovieTrack>::`vftable;
+  this->vfptr = (ITaskVtbl *)&NISPlayMovieTask::`vftable;
   this->mPlayer = 0i64;
 }
 
@@ -1217,9 +1217,9 @@ void __fastcall NISAllowPlayerControlTask::NISAllowPlayerControlTask(NISAllowPla
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<NISAllowPlayerControlTrack>::`vftable';
-  this->vfptr = (ITaskVtbl *)&NISAllowPlayerControlTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<NISAllowPlayerControlTrack>::`vftable;
+  this->vfptr = (ITaskVtbl *)&NISAllowPlayerControlTask::`vftable;
 }
 
 // File Line: 1161

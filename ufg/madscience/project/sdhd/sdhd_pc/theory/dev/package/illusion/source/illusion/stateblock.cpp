@@ -9,7 +9,7 @@ __int64 Illusion::_dynamic_initializer_for__gStateBlockInventory__()
     0xAF015A94,
     0,
     0);
-  Illusion::gStateBlockInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Illusion::StateBlockInventory::`vftable';
+  Illusion::gStateBlockInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Illusion::StateBlockInventory::`vftable;
   stru_142167250.mNode.mPrev = (UFG::qNode<Illusion::StateBlock,Illusion::StateBlock> *)&stru_142167250;
   stru_142167250.mNode.mNext = (UFG::qNode<Illusion::StateBlock,Illusion::StateBlock> *)&stru_142167250;
   return atexit(Illusion::_dynamic_atexit_destructor_for__gStateBlockInventory__);

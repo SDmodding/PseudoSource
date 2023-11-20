@@ -525,7 +525,7 @@ float __fastcall getCostBetweenFaces(hkaiNavMeshFaceGraph *graph, __int64 nstart
             (__m128)xmmword_141A71390);
     v22 = _mm_add_epi32(
             _mm_xor_si128(
-              (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v21),
+              (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v21),
               _mm_cvttps_epi32(v21)),
             _mm_loadu_si128((const __m128i *)hkPackedUnitVector_m_offset));
     input.m_searchParameters.m_up.m_vec[0] = _mm_extract_epi16(v22, 1);
@@ -537,7 +537,7 @@ float __fastcall getCostBetweenFaces(hkaiNavMeshFaceGraph *graph, __int64 nstart
   input.m_searchParameters.m_outputPathFlags.m_storage = 0;
   *(_DWORD *)&output.m_memSizeAndFlags = 0x1FFFF;
   output.m_visitedEdges.m_data = 0i64;
-  output.vfptr = (hkBaseObjectVtbl *)&hkaiPathfindingUtil::FindPathOutput::`vftable';
+  output.vfptr = (hkBaseObjectVtbl *)&hkaiPathfindingUtil::FindPathOutput::`vftable;
   output.m_visitedEdges.m_size = 0;
   output.m_visitedEdges.m_capacityAndFlags = 2147483648;
   output.m_pathOut.m_data = 0i64;
@@ -563,10 +563,10 @@ float __fastcall getCostBetweenFaces(hkaiNavMeshFaceGraph *graph, __int64 nstart
       output.m_visitedEdges.m_data,
       4 * output.m_visitedEdges.m_capacityAndFlags);
   output.m_visitedEdges.m_data = 0i64;
-  output.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  output.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
   output.m_visitedEdges.m_capacityAndFlags = 2147483648;
   input.m_goalFaceKeys.m_size = 0;
-  input.vfptr = (hkBaseObjectVtbl *)&hkaiPathfindingUtil::FindPathInput::`vftable';
+  input.vfptr = (hkBaseObjectVtbl *)&hkaiPathfindingUtil::FindPathInput::`vftable;
   if ( input.m_goalFaceKeys.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
       (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
@@ -2193,7 +2193,7 @@ void __fastcall hkaiHierarchyUtils::buildAbstractGraphFromClusterInfo(hkaiNavMes
   v7 = 0i64;
   v8 = graph;
   v9 = groupRepresentative;
-  v120.vfptr = (hkaiGraphBuilderVtbl *)&hkaiDirectedGraphExplicitCostBuilder::`vftable';
+  v120.vfptr = (hkaiGraphBuilderVtbl *)&hkaiDirectedGraphExplicitCostBuilder::`vftable;
   v120.m_positions.m_data = (hkVector4f *)0x8000000000000000i64;
   *(_QWORD *)&v120.m_positions.m_size = 0i64;
   v120.m_links.m_data = (hkaiDirectedGraphExplicitCostBuilder::Link *)0x8000000000000000i64;

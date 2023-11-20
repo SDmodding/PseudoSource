@@ -4,7 +4,7 @@ void __fastcall hkpRotationalConstraintData::hkpRotationalConstraintData(hkpRota
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_userData = 0i64;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpRotationalConstraintData::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpRotationalConstraintData::`vftable;
   this->m_atoms.m_rotations.m_type.m_storage = 4;
   this->m_atoms.m_ang.m_type.m_storage = 13;
   this->m_atoms.m_rotations.m_rotationA.m_col0 = (hkVector4f)transform.m_quad;

@@ -17,7 +17,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::StatModifierTypeBa
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::StatModifierTypeBase,UFG::qReflectObject>::sInventory.vfptr,
     "UFG::StatModifierTypeBase",
     v0);
-  UFG::qReflectObjectType<UFG::StatModifierTypeBase,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::StatModifierTypeBase>::`vftable';
+  UFG::qReflectObjectType<UFG::StatModifierTypeBase,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::StatModifierTypeBase>::`vftable;
   UFG::qReflectInventory<UFG::StatModifierTypeBase>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::StatModifierTypeBase,UFG::qReflectObject>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -73,7 +73,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::RangedWeaponStatMo
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::RangedWeaponStatModifierType,UFG::StatModifierTypeBase>::sInventory.vfptr,
     "UFG::RangedWeaponStatModifierType",
     v0);
-  UFG::qReflectObjectType<UFG::RangedWeaponStatModifierType,UFG::StatModifierTypeBase>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::RangedWeaponStatModifierType>::`vftable';
+  UFG::qReflectObjectType<UFG::RangedWeaponStatModifierType,UFG::StatModifierTypeBase>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::RangedWeaponStatModifierType>::`vftable;
   UFG::qReflectInventory<UFG::RangedWeaponStatModifierType>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::RangedWeaponStatModifierType,UFG::StatModifierTypeBase>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -94,7 +94,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::ThrownWeaponStatMo
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::ThrownWeaponStatModifierType,UFG::StatModifierTypeBase>::sInventory.vfptr,
     "UFG::ThrownWeaponStatModifierType",
     v0);
-  UFG::qReflectObjectType<UFG::ThrownWeaponStatModifierType,UFG::StatModifierTypeBase>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::ThrownWeaponStatModifierType>::`vftable';
+  UFG::qReflectObjectType<UFG::ThrownWeaponStatModifierType,UFG::StatModifierTypeBase>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::ThrownWeaponStatModifierType>::`vftable;
   UFG::qReflectInventory<UFG::ThrownWeaponStatModifierType>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::ThrownWeaponStatModifierType,UFG::StatModifierTypeBase>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -129,7 +129,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::UpgradeType_UFG::q
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::UpgradeType,UFG::qReflectObject>::sInventory.vfptr,
     "UFG::UpgradeType",
     v0);
-  UFG::qReflectObjectType<UFG::UpgradeType,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::UpgradeType>::`vftable';
+  UFG::qReflectObjectType<UFG::UpgradeType,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::UpgradeType>::`vftable;
   UFG::qReflectInventory<UFG::UpgradeType>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::UpgradeType,UFG::qReflectObject>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -192,7 +192,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::RacketCoreLevel_UF
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::RacketCoreLevel,UFG::qReflectObject>::sInventory.vfptr,
     "UFG::RacketCoreLevel",
     v0);
-  UFG::qReflectObjectType<UFG::RacketCoreLevel,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::RacketCoreLevel>::`vftable';
+  UFG::qReflectObjectType<UFG::RacketCoreLevel,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::RacketCoreLevel>::`vftable;
   UFG::qReflectInventory<UFG::RacketCoreLevel>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::RacketCoreLevel,UFG::qReflectObject>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -213,7 +213,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::RacketCorePrefabs_
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::RacketCorePrefabs,UFG::qReflectObject>::sInventory.vfptr,
     "UFG::RacketCorePrefabs",
     v0);
-  UFG::qReflectObjectType<UFG::RacketCorePrefabs,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::RacketCorePrefabs>::`vftable';
+  UFG::qReflectObjectType<UFG::RacketCorePrefabs,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::RacketCorePrefabs>::`vftable;
   UFG::qReflectInventory<UFG::RacketCorePrefabs>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::RacketCorePrefabs,UFG::qReflectObject>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -234,7 +234,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::RacketLevel_UFG::q
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::RacketLevel,UFG::qReflectObject>::sInventory.vfptr,
     "UFG::RacketLevel",
     v0);
-  UFG::qReflectObjectType<UFG::RacketLevel,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::RacketLevel>::`vftable';
+  UFG::qReflectObjectType<UFG::RacketLevel,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::RacketLevel>::`vftable;
   UFG::qReflectInventory<UFG::RacketLevel>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::RacketLevel,UFG::qReflectObject>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -269,7 +269,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::TurfBlock_UFG::qRe
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::TurfBlock,UFG::qReflectObject>::sInventory.vfptr,
     "UFG::TurfBlock",
     v0);
-  UFG::qReflectObjectType<UFG::TurfBlock,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::TurfBlock>::`vftable';
+  UFG::qReflectObjectType<UFG::TurfBlock,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::TurfBlock>::`vftable;
   UFG::qReflectInventory<UFG::TurfBlock>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::TurfBlock,UFG::qReflectObject>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(

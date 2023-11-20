@@ -22,7 +22,7 @@ void __fastcall UFG::UIHKScreenPokerDiceMinigame::UIHKScreenPokerDiceMinigame(UF
   v2 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   v3 = 0i64;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
@@ -34,12 +34,12 @@ void __fastcall UFG::UIHKScreenPokerDiceMinigame::UIHKScreenPokerDiceMinigame(UF
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKTaskableScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKTaskableScreen::`vftable;
   this->mFinished = 0;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKMinigameScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKMinigameScreen::`vftable;
   *(_QWORD *)&this->mfAlphaValue = 1109393408i64;
   ++UFG::UIHKMinigameScreen::mNumMinigameScreens;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenPokerDiceMinigame::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenPokerDiceMinigame::`vftable;
   UFG::UIHKDepthOfFieldWidget::UIHKDepthOfFieldWidget(&this->DOF);
   v4 = UFG::GameStatTracker::Instance();
   v5 = UFG::GameStatTracker::GetTimeStat(v4, TimeSpentPlayingPokerDice);
@@ -103,7 +103,7 @@ void __fastcall UFG::UIHKScreenPokerDiceMinigame::~UIHKScreenPokerDiceMinigame(U
   UFG::qWiseSymbol result; // [rsp+48h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenPokerDiceMinigame::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenPokerDiceMinigame::`vftable;
   v2 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseScreen(v2, "PokerDiceMinigame");
   v3 = UFG::GameStatTracker::Instance();
@@ -160,7 +160,7 @@ void __fastcall UFG::UIHKScreenPokerDiceMinigame::init(UFG::UIHKScreenPokerDiceM
   v3 = v2->mRenderable->m_movie.pObject;
   v4 = UFG::GameStatTracker::Instance();
   v5 = UFG::GameStatTracker::GetStat(v4, Money);
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( (LODWORD(v13) >> 6) & 1 )
   {
     (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v12 + 16i64))(
@@ -213,7 +213,7 @@ void __fastcall UFG::UIHKScreenPokerDiceMinigame::init(UFG::UIHKScreenPokerDiceM
     UFG::UIHKScreenHud::InfoPopup->mState = 0;
   if ( v9->mState )
     v9->mState = 1;
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 133
@@ -380,7 +380,7 @@ _BOOL8 __fastcall UFG::UIHKScreenPokerDiceMinigame::handleMessage(UFG::UIHKScree
     {
       if ( !v71.mValue.BValue || v5->mbKidnapperCase || v7 )
         goto LABEL_113;
-      `eh vector constructor iterator'(&v64, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&v64, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       v66 = 0i64;
       v67 = 5;
       v68 = DOUBLE_N1_0;
@@ -469,7 +469,7 @@ _BOOL8 __fastcall UFG::UIHKScreenPokerDiceMinigame::handleMessage(UFG::UIHKScree
                 {
 LABEL_40:
                   Scaleform::GFx::Movie::Invoke(v6, "setTransitionMode", 0i64, 0i64, 0);
-                  `eh vector constructor iterator'(
+                  `eh vector constructor iterator(
                     &ptr,
                     0x30ui64,
                     1,
@@ -754,7 +754,7 @@ LABEL_54:
       }
       if ( !v71.mValue.BValue || v5->mbKidnapperCase || v7 )
         goto LABEL_113;
-      `eh vector constructor iterator'(&v64, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&v64, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       v66 = 0i64;
       v67 = 5;
       v68 = DOUBLE_1_0;
@@ -779,7 +779,7 @@ LABEL_54:
     }
     v27 = &v64;
 LABEL_112:
-    `eh vector destructor iterator'(v27, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(v27, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     goto LABEL_113;
   }
   if ( !Scaleform::Render::Text::DocView::DocumentListener::View_OnLineFormat(v9, v8) )
@@ -840,7 +840,7 @@ void __fastcall UFG::UIHKScreenPokerDiceMinigame::lockSelectedTile(UFG::UIHKScre
 
   v2 = selectedTile;
   v3 = this->mRenderable->m_movie.pObject;
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   v5 = 0i64;
   v6 = 5;
   v7 = (double)v2;
@@ -868,7 +868,7 @@ void __fastcall UFG::UIHKScreenPokerDiceMinigame::lockSelectedTile(UFG::UIHKScre
   v6 = 0;
   if ( v3 )
     Scaleform::GFx::Movie::Invoke(v3, "lockSelectedDie", 0i64, (Scaleform::GFx::Value *)&ptr, 1u);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 488
@@ -989,7 +989,7 @@ void __fastcall UFG::UIHKScreenPokerDiceMinigame::setAcceptButtonCoords(UFG::UIH
   UFG::Camera::GetScreenCoord(v8, &result, v4, &viewport_scale, (bool *)&is_on_screen);
   v9 = v5->mRenderable->m_movie.pObject;
   v5->mCurrentTile = v3;
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   v11 = 0i64;
   v12 = 5;
   v13 = result.x;
@@ -1076,7 +1076,7 @@ void __fastcall UFG::UIHKScreenPokerDiceMinigame::setAcceptButtonCoords(UFG::UIH
   v12 = 0;
   if ( v9 )
     Scaleform::GFx::Movie::Invoke(v9, "setAcceptButtonPos", 0i64, (Scaleform::GFx::Value *)&ptr, 3u);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 572

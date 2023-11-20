@@ -9,12 +9,12 @@ void __fastcall UFG::HavokNavManager::HavokNavManager(UFG::HavokNavManager *this
 
   v1 = this;
   UFG::NavManager::NavManager((UFG::NavManager *)&this->vfptr);
-  v1->vfptr = (UFG::NavManagerVtbl *)&UFG::HavokNavManager::`vftable';
+  v1->vfptr = (UFG::NavManagerVtbl *)&UFG::HavokNavManager::`vftable;
   v2 = &v1->m_manager;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
-  v2->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
+  v2->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable;
   *(_DWORD *)&v1->m_manager.m_memSizeAndFlags = 0x1FFFF;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkaiStreamingManager::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkaiStreamingManager::`vftable;
   v1->m_world = 0i64;
   v1->m_cells.m_data = 0i64;
   v1->m_cells.m_size = 0;
@@ -24,19 +24,19 @@ void __fastcall UFG::HavokNavManager::HavokNavManager(UFG::HavokNavManager *this
   v1->m_StitchInstances.m_capacityAndFlags = 2147483648;
   v1->m_listener.m_pntr = 0i64;
   v3 = &v1->m_costModifier;
-  v3->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
-  v3->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable';
+  v3->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
+  v3->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable;
   *(_DWORD *)&v1->m_costModifier.m_memSizeAndFlags = 0x1FFFF;
-  v3->vfptr = (hkBaseObjectVtbl *)&hkaiAstarCostModifier::`vftable';
+  v3->vfptr = (hkBaseObjectVtbl *)&hkaiAstarCostModifier::`vftable;
   v1->m_costModifier.m_type.m_storage = 1;
-  v3->vfptr = (hkBaseObjectVtbl *)&hkaiUFGNavMeshCostModifier::`vftable';
+  v3->vfptr = (hkBaseObjectVtbl *)&hkaiUFGNavMeshCostModifier::`vftable;
   v4 = &v1->m_edgeFilter;
-  v4->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
-  v4->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable';
+  v4->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
+  v4->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable;
   *(_DWORD *)&v1->m_edgeFilter.m_memSizeAndFlags = 0x1FFFF;
-  v4->vfptr = (hkBaseObjectVtbl *)&hkaiAstarEdgeFilter::`vftable';
+  v4->vfptr = (hkBaseObjectVtbl *)&hkaiAstarEdgeFilter::`vftable;
   v1->m_edgeFilter.m_type.m_storage = 1;
-  v4->vfptr = (hkBaseObjectVtbl *)&hkaiUFGAStarEdgeFilter::`vftable';
+  v4->vfptr = (hkBaseObjectVtbl *)&hkaiUFGAStarEdgeFilter::`vftable;
   v1->m_dynamicOutlines.p = 0i64;
   *(_QWORD *)&v1->m_dynamicOutlines.size = 0i64;
   v1->m_dynamicOutlinesAdditionQueue.p = 0i64;
@@ -76,7 +76,7 @@ void __fastcall UFG::HavokNavManager::~HavokNavManager(UFG::HavokNavManager *thi
   hkaiStreamingManager *v14; // [rsp+58h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (UFG::NavManagerVtbl *)&UFG::HavokNavManager::`vftable';
+  this->vfptr = (UFG::NavManagerVtbl *)&UFG::HavokNavManager::`vftable;
   v2 = this->m_aTmpTesselationData.p;
   if ( v2 )
     operator delete[](v2);
@@ -121,14 +121,14 @@ void __fastcall UFG::HavokNavManager::~HavokNavManager(UFG::HavokNavManager *thi
   v1->m_dynamicOutlines.p = 0i64;
   *(_QWORD *)&v1->m_dynamicOutlines.size = 0i64;
   v12 = &v1->m_edgeFilter;
-  v12->vfptr = (hkBaseObjectVtbl *)&hkaiUFGAStarEdgeFilter::`vftable';
-  v12->vfptr = (hkBaseObjectVtbl *)&hkaiAstarEdgeFilter::`vftable';
-  v12->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable';
-  v12->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v12->vfptr = (hkBaseObjectVtbl *)&hkaiUFGAStarEdgeFilter::`vftable;
+  v12->vfptr = (hkBaseObjectVtbl *)&hkaiAstarEdgeFilter::`vftable;
+  v12->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable;
+  v12->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
   v13 = &v1->m_costModifier;
-  v13->vfptr = (hkBaseObjectVtbl *)&hkaiAstarCostModifier::`vftable';
-  v13->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable';
-  v13->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v13->vfptr = (hkBaseObjectVtbl *)&hkaiAstarCostModifier::`vftable;
+  v13->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable;
+  v13->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
   v9 = (hkReferencedObject *)&v1->m_listener.m_pntr->vfptr;
   if ( v9 )
     hkReferencedObject::removeReference(v9);
@@ -152,8 +152,8 @@ void __fastcall UFG::HavokNavManager::~HavokNavManager(UFG::HavokNavManager *thi
   v1->m_cells.m_data = 0i64;
   v1->m_cells.m_capacityAndFlags = 2147483648;
   v14 = &v1->m_manager;
-  v14->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable';
-  v14->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v14->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable;
+  v14->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
   UFG::NavManager::~NavManager((UFG::NavManager *)&v1->vfptr);
 }
 
@@ -365,8 +365,8 @@ void __fastcall UFG::HavokNavManager::Init(UFG::HavokNavManager *this)
   result = v21;
   if ( v21 )
   {
-    v21->vfptr = (hkExternalJobProfilerVtbl *)&hkExternalJobProfiler::`vftable';
-    v21->vfptr = (hkExternalJobProfilerVtbl *)&HavokJobMemoryPoolTagger::`vftable';
+    v21->vfptr = (hkExternalJobProfilerVtbl *)&hkExternalJobProfiler::`vftable;
+    v21->vfptr = (hkExternalJobProfilerVtbl *)&HavokJobMemoryPoolTagger::`vftable;
   }
   else
   {
@@ -424,12 +424,12 @@ void __fastcall UFG::HavokNavManager::Init(UFG::HavokNavManager *this)
   result = (HavokJobMemoryPoolTagger *)v31;
   if ( v31 )
   {
-    *(_QWORD *)v31 = &hkBaseObject::`vftable';
-    *(_QWORD *)v31 = &hkReferencedObject::`vftable';
+    *(_QWORD *)v31 = &hkBaseObject::`vftable;
+    *(_QWORD *)v31 = &hkReferencedObject::`vftable;
     *(_DWORD *)(v31 + 8) = 0x1FFFF;
-    *(_QWORD *)(v31 + 16) = &hkaiWorld::Listener::`vftable';
-    *(_QWORD *)v31 = &UFG::HavokNavManager::AiListener::`vftable'{for `hkReferencedObject'};
-    *(_QWORD *)(v31 + 16) = &UFG::HavokNavManager::AiListener::`vftable'{for `hkaiWorld::Listener'};
+    *(_QWORD *)(v31 + 16) = &hkaiWorld::Listener::`vftable;
+    *(_QWORD *)v31 = &UFG::HavokNavManager::AiListener::`vftable{for `hkReferencedObject};
+    *(_QWORD *)(v31 + 16) = &UFG::HavokNavManager::AiListener::`vftable{for `hkaiWorld::Listener};
     *(_QWORD *)(v31 + 24) = v1;
   }
   else
@@ -2157,7 +2157,7 @@ __int64 __fastcall UFG::HavokNavManager::AIRayCastHits(UFG::HavokNavManager *thi
   v6 = (__m128)LODWORD(vEnd->y);
   v7 = (__m128)LODWORD(vEnd->z);
   v8 = this->vfptr;
-  v10 = &UFG::HavokNavPosition::`vftable';
+  v10 = &UFG::HavokNavPosition::`vftable;
   v14 = 0;
   v11 = v5.m128_i32[0];
   v12 = v6.m128_i32[0];
@@ -2389,7 +2389,7 @@ bool __fastcall UFG::HavokNavManager::AIRayCastHits(UFG::HavokNavManager *this, 
             v35 = _mm_shuffle_ps(hkvNewPosition.m_quad, hkvNewPosition.m_quad, 85);
             v55 = v35.m128_f32[0];
             v36 = _mm_shuffle_ps(hkvNewPosition.m_quad, hkvNewPosition.m_quad, 170);
-            v56 = &UFG::HavokNavPosition::`vftable';
+            v56 = &UFG::HavokNavPosition::`vftable;
             hkvPreviousPoint.m_quad = (__m128)v6->m_hkvMeshPosition;
             v37 = v6->m_packedKey;
             v63 = v37;

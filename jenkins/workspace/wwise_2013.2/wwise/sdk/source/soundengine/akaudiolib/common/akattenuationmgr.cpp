@@ -12,7 +12,7 @@ CAkIndexable *__fastcall CAkAttenuation::Create(unsigned int in_ulID)
   if ( !v2 )
     return 0i64;
   CAkIndexable::CAkIndexable(v2, v1);
-  v3->vfptr = (CAkIndexableVtbl *)&CAkAttenuation::`vftable';
+  v3->vfptr = (CAkIndexableVtbl *)&CAkAttenuation::`vftable;
   *(_QWORD *)&v3[1].key = 0i64;
   v3[2].vfptr = 0i64;
   v3[2].pNextItem = 0i64;
@@ -193,7 +193,7 @@ void __fastcall CAkAttenuation::~CAkAttenuation(CAkAttenuation *this)
   signed __int64 v4; // rdi
 
   v1 = this;
-  this->vfptr = (CAkIndexableVtbl *)&CAkAttenuation::`vftable';
+  this->vfptr = (CAkIndexableVtbl *)&CAkAttenuation::`vftable;
   CAkAttenuation::ClearRTPCs(this);
   v2 = v1->m_rtpcsubs.m_pItems;
   if ( v2 )

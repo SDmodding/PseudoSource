@@ -39,8 +39,8 @@ void __fastcall UFG::ActionTreeComponent::ActionTreeComponent(UFG::ActionTreeCom
   UFG::ActionTreeComponentBase::ActionTreeComponentBase(
     (UFG::ActionTreeComponentBase *)&v6->vfptr,
     eACTION_TREE_TYPE_ACTION);
-  v6->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ActionTreeComponent::`vftable'{for `UFG::SimComponent'};
-  v6->vfptr = (UFG::ActionTreeComponentBaseVtbl *)&UFG::ActionTreeComponent::`vftable'{for `UFG::ActionTreeComponentBase'};
+  v6->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ActionTreeComponent::`vftable{for `UFG::SimComponent};
+  v6->vfptr = (UFG::ActionTreeComponentBaseVtbl *)&UFG::ActionTreeComponent::`vftable{for `UFG::ActionTreeComponentBase};
   v8 = 0i64;
   v6->mActionTreeFileName = 0i64;
   ActionController::ActionController(&v6->mActionController);
@@ -101,8 +101,8 @@ void __fastcall UFG::ActionTreeComponent::~ActionTreeComponent(UFG::ActionTreeCo
   UFG::qNode<UFG::ActionTreeComponent,UFG::ActionTreeComponent> *v15; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ActionTreeComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::ActionTreeComponentBaseVtbl *)&UFG::ActionTreeComponent::`vftable'{for `UFG::ActionTreeComponentBase'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ActionTreeComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::ActionTreeComponentBaseVtbl *)&UFG::ActionTreeComponent::`vftable{for `UFG::ActionTreeComponentBase};
   if ( this == UFG::ActionTreeComponent::s_ActionTreeComponentpCurrentIterator )
     UFG::ActionTreeComponent::s_ActionTreeComponentpCurrentIterator = (UFG::ActionTreeComponent *)&this->mPrev[-10].mNext;
   v2 = (UFG::qNode<UFG::ActionTreeComponent,UFG::ActionTreeComponent> *)&this->mPrev;
@@ -252,7 +252,7 @@ void __fastcall UFG::ActionTreeComponent::InitActionTree(UFG::ActionTreeComponen
       {
         v4 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v1->m_pSimObject->m_Name);
         UFG::qPrintf(
-          "WARNING: ActionTreeComponent::InitActionTree: Could Not Find Opening Branch: '%s' for SimObject: '%s'\n",
+          "WARNING: ActionTreeComponent::InitActionTree: Could Not Find Opening Branch: %s for SimObject: %s\n",
           v1->mActionTreeFileName,
           v4);
       }

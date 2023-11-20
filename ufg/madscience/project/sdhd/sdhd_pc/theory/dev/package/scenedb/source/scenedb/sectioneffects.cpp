@@ -20,12 +20,12 @@ void __fastcall SectionEffects::SectionEffects(SectionEffects *this)
       v4 = (UFG::qResourceHandle *)((char *)&v1[1] + v3);
       if ( (SectionEffects *)((char *)&v1[1] + v3) )
         UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)((char *)&v1[1] + v3));
-      v5 = `UFG::qGetResourceInventory<Render::FXSettings>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<Render::FXSettings>'::`2'::result )
+      v5 = `UFG::qGetResourceInventory<Render::FXSettings>::`2::result;
+      if ( !`UFG::qGetResourceInventory<Render::FXSettings>::`2::result )
       {
         v6 = UFG::qResourceWarehouse::Instance();
         v5 = UFG::qResourceWarehouse::GetInventory(v6, 0xED341A8D);
-        `UFG::qGetResourceInventory<Render::FXSettings>'::`2'::result = v5;
+        `UFG::qGetResourceInventory<Render::FXSettings>::`2::result = v5;
       }
       UFG::qResourceHandle::Init(v4, 0xED341A8D, v4->mNameUID, v5);
       ++v2;
@@ -57,12 +57,12 @@ void __fastcall SectionEffects::~SectionEffects(SectionEffects *this)
     do
     {
       v3 = (UFG::qResourceHandle *)((char *)&v1[1] + 120 * v2);
-      v4 = `UFG::qGetResourceInventory<Render::FXSettings>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<Render::FXSettings>'::`2'::result )
+      v4 = `UFG::qGetResourceInventory<Render::FXSettings>::`2::result;
+      if ( !`UFG::qGetResourceInventory<Render::FXSettings>::`2::result )
       {
         v5 = UFG::qResourceWarehouse::Instance();
         v4 = UFG::qResourceWarehouse::GetInventory(v5, 0xED341A8D);
-        `UFG::qGetResourceInventory<Render::FXSettings>'::`2'::result = v4;
+        `UFG::qGetResourceInventory<Render::FXSettings>::`2::result = v4;
       }
       UFG::qResourceHandle::Close(v3, v4);
       UFG::qResourceHandle::~qResourceHandle(v3);
@@ -107,7 +107,7 @@ __int64 dynamic_initializer_for__gSectionEffectsInventory__()
     0x89A7BDF7,
     0,
     0);
-  gSectionEffectsInventory.vfptr = (UFG::qResourceInventoryVtbl *)&SectionEffectsInventory::`vftable';
+  gSectionEffectsInventory.vfptr = (UFG::qResourceInventoryVtbl *)&SectionEffectsInventory::`vftable;
   return atexit(dynamic_atexit_destructor_for__gSectionEffectsInventory__);
 }
 

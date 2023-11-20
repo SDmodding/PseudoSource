@@ -21,7 +21,7 @@ void __fastcall UFG::UIHKScreenPhoneTraceMinigame::UIHKScreenPhoneTraceMinigame(
   v2 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -32,12 +32,12 @@ void __fastcall UFG::UIHKScreenPhoneTraceMinigame::UIHKScreenPhoneTraceMinigame(
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKTaskableScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKTaskableScreen::`vftable;
   this->mFinished = 0;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKMinigameScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKMinigameScreen::`vftable;
   *(_QWORD *)&this->mfAlphaValue = 1109393408i64;
   ++UFG::UIHKMinigameScreen::mNumMinigameScreens;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenPhoneTraceMinigame::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenPhoneTraceMinigame::`vftable;
   UFG::UIHKDepthOfFieldWidget::UIHKDepthOfFieldWidget(&this->DOF);
   v1->mSavedControllerMode = UFG::gInputSystem->mControllers[UFG::gActiveControllerNum]->m_ActiveMapSet;
   UFG::SetInputMode(IM_UI_ONLY, UFG::gInputSystem->mControllers[UFG::gActiveControllerNum]->mControllerIndex);
@@ -66,7 +66,7 @@ void __fastcall UFG::UIHKScreenPhoneTraceMinigame::~UIHKScreenPhoneTraceMinigame
   UFG::qWiseSymbol v7; // [rsp+60h] [rbp+18h]
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenPhoneTraceMinigame::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenPhoneTraceMinigame::`vftable;
   v2 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseScreen(v2, "PhoneTraceMinigame");
   UFG::SetInputMode(
@@ -141,7 +141,7 @@ void __fastcall UFG::UIHKScreenPhoneTraceMinigame::init(UFG::UIHKScreenPhoneTrac
   v2->DOF.mFocus.mFarRange = FLOAT_10_0;
   v2->DOF.mFocus.mFarBlurRadius = FLOAT_20_0;
   v3 = v2->mRenderable->m_movie.pObject;
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   v4 = UFG::UIHKScreenPhoneTraceMinigame::mNeighborhood.mData;
   if ( (v12 >> 6) & 1 )
   {
@@ -191,7 +191,7 @@ void __fastcall UFG::UIHKScreenPhoneTraceMinigame::init(UFG::UIHKScreenPhoneTrac
     }
     pargs.Type = 0;
   }
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 129
@@ -310,7 +310,7 @@ LABEL_67:
       if ( !v24 || (v25 = 1, !v24->mActionTrue) )
         v25 = 0;
       v3->mbXButton = v25;
-      `eh vector constructor iterator'(&v36, 0x30ui64, 5, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&v36, 0x30ui64, 5, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       v26 = v3->mfLeftStickX;
       if ( ((unsigned int)v36.Type >> 6) & 1 )
       {
@@ -418,7 +418,7 @@ LABEL_67:
         _((AMD_HD3D *)(unsigned int)retaddr);
       }
       v8 = v3->mRenderable->m_movie.pObject;
-      `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       if ( (ptr >> 6) & 1 )
       {
         (*(void (__fastcall **)(__int64, unsigned int *, double))(*(_QWORD *)v35 + 16i64))(
@@ -451,7 +451,7 @@ LABEL_67:
       v10 = 1;
       v11 = (Scaleform::GFx::Value *)&ptr;
     }
-    `eh vector destructor iterator'(v11, 0x30ui64, v10, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(v11, 0x30ui64, v10, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     goto LABEL_67;
   }
 }
@@ -511,7 +511,7 @@ bool __fastcall UFG::UIHKScreenPhoneTraceMinigame::handleMessage(UFG::UIHKScreen
   if ( v4 == UI_HASH_BUTTON_ACCEPT_PRESSED_30 )
   {
     v7 = v5->mRenderable->m_movie.pObject;
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( ((unsigned int)name >> 6) & 1 )
     {
       (*(void (__fastcall **)(__int64, char *, long double))(*(_QWORD *)v22 + 16i64))(
@@ -525,13 +525,13 @@ bool __fastcall UFG::UIHKScreenPhoneTraceMinigame::handleMessage(UFG::UIHKScreen
     if ( v7 )
       Scaleform::GFx::Movie::Invoke(v7, "scanningNeighborhood", 0i64, (Scaleform::GFx::Value *)&ptr, 1u);
 LABEL_16:
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     goto LABEL_17;
   }
   if ( v4 == UI_HASH_BUTTON_ACCEPT_RELEASED_30 )
   {
     v8 = v5->mRenderable->m_movie.pObject;
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( ((unsigned int)name >> 6) & 1 )
     {
       (*(void (__fastcall **)(__int64, char *, long double))(*(_QWORD *)v22 + 16i64))(
@@ -554,7 +554,7 @@ LABEL_17:
       v14 = v5->mRenderable->m_movie.pObject;
       if ( v14 )
       {
-        `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+        `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
         if ( ((unsigned int)name >> 6) & 1 )
         {
           (*(void (__fastcall **)(__int64, char *, long double))(*(_QWORD *)v22 + 16i64))(
@@ -586,7 +586,7 @@ LABEL_17:
       v9 = v5->mRenderable->m_movie.pObject;
       if ( v9 )
       {
-        `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+        `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
         if ( ((unsigned int)name >> 6) & 1 )
         {
           (*(void (__fastcall **)(__int64, char *, long double))(*(_QWORD *)v22 + 16i64))(
@@ -610,7 +610,7 @@ LABEL_17:
               0i64);
         }
 LABEL_35:
-        `eh vector destructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+        `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
         return 1;
       }
       return 1;

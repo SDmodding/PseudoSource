@@ -95,7 +95,7 @@ __int64 UFG::_dynamic_initializer_for__gMovieResourceDataInventory__()
     0xE9453F67,
     0,
     0);
-  gMovieResourceDataInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::MovieResourceDataInventory::`vftable';
+  gMovieResourceDataInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::MovieResourceDataInventory::`vftable;
   return atexit(UFG::_dynamic_atexit_destructor_for__gMovieResourceDataInventory__);
 }
 
@@ -195,7 +195,7 @@ signed __int64 __fastcall UFG::MoviePlayer::Init(UFG::MoviePlayer *this, const c
   v5 = target;
   v6 = fname;
   v7 = this;
-  UFG::qPrintf("Initialize full-screen Bink movie '%s'\n");
+  UFG::qPrintf("Initialize full-screen Bink movie %s\n");
   v8 = UFG::qMalloc(0x140ui64, "MovieData", 0i64);
   v9 = v8;
   if ( v8 )
@@ -295,12 +295,12 @@ signed __int64 __fastcall UFG::MoviePlayer::Init(UFG::MoviePlayer *this, const c
     }
     v28 = UFG::qStringHashUpper32("MovieNoAlpha", 0xFFFFFFFF);
     v29 = (UFG::qResourceHandle *)v7->mMovieData;
-    v30 = `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::Material>'::`2'::result )
+    v30 = `UFG::qGetResourceInventory<Illusion::Material>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::Material>::`2::result )
     {
       v31 = UFG::qResourceWarehouse::Instance();
       v30 = UFG::qResourceWarehouse::GetInventory(v31, 0xB4C26312);
-      `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result = v30;
+      `UFG::qGetResourceInventory<Illusion::Material>::`2::result = v30;
     }
     UFG::qResourceHandle::Init(v29 + 2, 0xB4C26312, v28, v30);
     if ( !v7->mMovieData->mMaterial.mData )
@@ -340,12 +340,12 @@ signed __int64 __fastcall UFG::MoviePlayer::Init(UFG::MoviePlayer *this, const c
       v34 = UFG::qResourceWarehouse::Instance();
       UFG::qResourceWarehouse::Add(v34, (UFG::qResourceData *)&v32->mNode);
       v35 = (UFG::qResourceHandle *)v7->mMovieData;
-      v36 = `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<Illusion::Material>'::`2'::result )
+      v36 = `UFG::qGetResourceInventory<Illusion::Material>::`2::result;
+      if ( !`UFG::qGetResourceInventory<Illusion::Material>::`2::result )
       {
         v37 = UFG::qResourceWarehouse::Instance();
         v36 = UFG::qResourceWarehouse::GetInventory(v37, 0xB4C26312);
-        `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result = v36;
+        `UFG::qGetResourceInventory<Illusion::Material>::`2::result = v36;
       }
       UFG::qResourceHandle::Init(v35 + 2, 0xB4C26312, v28, v36);
     }
@@ -450,12 +450,12 @@ signed __int64 __fastcall UFG::MoviePlayer::InitInMemory(UFG::MoviePlayer *this,
     }
     v16 = UFG::qStringHashUpper32("MovieNoAlpha", 0xFFFFFFFF);
     v17 = (UFG::qResourceHandle *)v4->mMovieData;
-    v18 = `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::Material>'::`2'::result )
+    v18 = `UFG::qGetResourceInventory<Illusion::Material>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::Material>::`2::result )
     {
       v19 = UFG::qResourceWarehouse::Instance();
       v18 = UFG::qResourceWarehouse::GetInventory(v19, 0xB4C26312);
-      `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result = v18;
+      `UFG::qGetResourceInventory<Illusion::Material>::`2::result = v18;
     }
     UFG::qResourceHandle::Init(v17 + 2, 0xB4C26312, v16, v18);
     if ( !v4->mMovieData->mMaterial.mData )
@@ -495,12 +495,12 @@ signed __int64 __fastcall UFG::MoviePlayer::InitInMemory(UFG::MoviePlayer *this,
       v22 = UFG::qResourceWarehouse::Instance();
       UFG::qResourceWarehouse::Add(v22, (UFG::qResourceData *)&v20->mNode);
       v23 = (UFG::qResourceHandle *)v4->mMovieData;
-      v24 = `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<Illusion::Material>'::`2'::result )
+      v24 = `UFG::qGetResourceInventory<Illusion::Material>::`2::result;
+      if ( !`UFG::qGetResourceInventory<Illusion::Material>::`2::result )
       {
         v25 = UFG::qResourceWarehouse::Instance();
         v24 = UFG::qResourceWarehouse::GetInventory(v25, 0xB4C26312);
-        `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result = v24;
+        `UFG::qGetResourceInventory<Illusion::Material>::`2::result = v24;
       }
       UFG::qResourceHandle::Init(v23 + 2, 0xB4C26312, v16, v24);
     }
@@ -840,12 +840,12 @@ void __fastcall UFG::MoviePlayer::Close(UFG::MoviePlayer *this)
     v10 = (UFG::qResourceHandle *)v1->mMovieData;
     if ( v10 )
     {
-      v11 = `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<Illusion::Material>'::`2'::result )
+      v11 = `UFG::qGetResourceInventory<Illusion::Material>::`2::result;
+      if ( !`UFG::qGetResourceInventory<Illusion::Material>::`2::result )
       {
         v12 = UFG::qResourceWarehouse::Instance();
         v11 = UFG::qResourceWarehouse::GetInventory(v12, 0xB4C26312);
-        `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result = v11;
+        `UFG::qGetResourceInventory<Illusion::Material>::`2::result = v11;
       }
       UFG::qResourceHandle::Close(v10 + 2, v11);
       UFG::qResourceHandle::~qResourceHandle(v10 + 2);

@@ -65,8 +65,8 @@ void __fastcall UFG::qInsertionSort<UFG::InterestPointQuery::Candidate,bool (*)(
         if ( !v14->m_uRefCount )
           v14->vfptr->__vecDelDtor(v14, 1u);
       }
-      __that.output.vfptr = (UFG::DaemonQueryOutputVtbl *)&UFG::DaemonQueryOutput::`vftable';
-      __that.input.vfptr = (UFG::DaemonQueryInputVtbl *)&UFG::DaemonQueryInput::`vftable';
+      __that.output.vfptr = (UFG::DaemonQueryOutputVtbl *)&UFG::DaemonQueryOutput::`vftable;
+      __that.input.vfptr = (UFG::DaemonQueryInputVtbl *)&UFG::DaemonQueryInput::`vftable;
       ++v7;
       ++v6;
     }
@@ -201,8 +201,8 @@ void __fastcall UFG::qQuickSortImpl<UFG::InterestPointQuery::Candidate,bool (*)(
           if ( !LODWORD(v17[5].__vecDelDtor) )
             (*(void (__fastcall **)(UFG::DaemonQueryOutputVtbl *, signed __int64))v17->__vecDelDtor)(v17, 1i64);
         }
-        *(_QWORD *)(&v19.input.m_npTo.m_aiMeshUid + 1) = &UFG::DaemonQueryOutput::`vftable';
-        v19.input.vfptr = (UFG::DaemonQueryInputVtbl *)&UFG::DaemonQueryInput::`vftable';
+        *(_QWORD *)(&v19.input.m_npTo.m_aiMeshUid + 1) = &UFG::DaemonQueryOutput::`vftable;
+        v19.input.vfptr = (UFG::DaemonQueryInputVtbl *)&UFG::DaemonQueryInput::`vftable;
         ++v4;
         v22 = v4;
         --v9;

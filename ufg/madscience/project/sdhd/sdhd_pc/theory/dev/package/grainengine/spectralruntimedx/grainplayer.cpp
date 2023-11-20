@@ -2,8 +2,8 @@
 // RVA: 0x15C2C0
 void __fastcall SpectralEngineCoreDX::GrainPlayerSource::GrainPlayerSource(SpectralEngineCoreDX::GrainPlayerSource *this)
 {
-  this->vfptr = (SpectralEngineCoreDX::AudioSourceVtbl *)&SpectralEngineCoreDX::AudioSource::`vftable';
-  this->vfptr = (SpectralEngineCoreDX::AudioSourceVtbl *)&SpectralEngineCoreDX::GrainPlayerSource::`vftable';
+  this->vfptr = (SpectralEngineCoreDX::AudioSourceVtbl *)&SpectralEngineCoreDX::AudioSource::`vftable;
+  this->vfptr = (SpectralEngineCoreDX::AudioSourceVtbl *)&SpectralEngineCoreDX::GrainPlayerSource::`vftable;
   this->CurrentlyPlayingGrain.pGrainData = 0i64;
   *(_QWORD *)&this->CurrentlyPlayingGrain.nextSampleIndex = 0i64;
   *(_QWORD *)&this->CurrentlyPlayingGrain.targetFrequency = 0i64;

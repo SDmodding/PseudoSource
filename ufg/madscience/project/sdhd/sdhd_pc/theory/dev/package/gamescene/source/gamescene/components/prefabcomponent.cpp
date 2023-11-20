@@ -27,7 +27,7 @@ void __fastcall UFG::PrefabComponent::PrefabComponent(UFG::PrefabComponent *this
   v5 = (UFG::qNode<UFG::PrefabComponent,UFG::PrefabComponent> *)&v4->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::PrefabComponent::`vftable';
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::PrefabComponent::`vftable;
   v4->mData = v3;
   v4->mObjects.p = 0i64;
   *(_QWORD *)&v4->mObjects.size = 0i64;
@@ -57,7 +57,7 @@ void __fastcall UFG::PrefabComponent::~PrefabComponent(UFG::PrefabComponent *thi
   UFG::qNode<UFG::PrefabComponent,UFG::PrefabComponent> *v9; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::PrefabComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::PrefabComponent::`vftable;
   if ( this == UFG::PrefabComponent::s_PrefabComponentpCurrentIterator )
     UFG::PrefabComponent::s_PrefabComponentpCurrentIterator = (UFG::PrefabComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::PrefabComponent,UFG::PrefabComponent> *)&this->mPrev;

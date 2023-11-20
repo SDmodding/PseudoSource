@@ -48,12 +48,12 @@ void __fastcall UEL::ConstantExpression::ConstantExpression(UEL::ConstantExpress
   v5 = text2;
   v6 = text;
   v7 = this;
-  this->vfptr = (UEL::ExpressionVtbl *)&UEL::Expression::`vftable';
+  this->vfptr = (UEL::ExpressionVtbl *)&UEL::Expression::`vftable;
   this->mType.mValue = 2;
   this->mValueType.mBaseType.mValue = 0;
   this->mValueType.mDetailedType = UFG::gNullQSymbol;
   *(_DWORD *)&this->mResolved = 0;
-  this->vfptr = (UEL::ExpressionVtbl *)&UEL::ConstantExpression::`vftable';
+  this->vfptr = (UEL::ExpressionVtbl *)&UEL::ConstantExpression::`vftable;
   this->mEntry.mUID = -1;
   this->mResolvedValue.type.mBaseType.mValue = 0;
   this->mResolvedValue.type.mDetailedType = UFG::gNullQSymbol;

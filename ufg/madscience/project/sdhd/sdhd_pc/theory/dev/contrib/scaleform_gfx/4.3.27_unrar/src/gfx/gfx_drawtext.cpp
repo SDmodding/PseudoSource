@@ -726,13 +726,13 @@ void __fastcall Scaleform::GFx::DrawTextImpl::DrawTextImpl(Scaleform::GFx::DrawT
 
   v2 = pdtMgr;
   v3 = this;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,325>::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseNTS<Scaleform::GFx::DrawText,325>::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::DrawText::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::DrawTextImpl::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,325>::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseNTS<Scaleform::GFx::DrawText,325>::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::DrawText::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::DrawTextImpl::`vftable;
   if ( pdtMgr )
     ++pdtMgr->RefCount;
   this->pDrawTextCtxt.pObject = pdtMgr;
@@ -775,7 +775,7 @@ void __fastcall Scaleform::GFx::DrawTextImpl::~DrawTextImpl(Scaleform::GFx::Draw
   Scaleform::RefCountNTSImpl *v5; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::DrawTextImpl::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::DrawTextImpl::`vftable;
   v2 = Scaleform::GFx::DrawTextImpl::GetDepth(this);
   if ( v2 != -1 )
     Scaleform::Render::TreeContainer::Remove(
@@ -792,7 +792,7 @@ void __fastcall Scaleform::GFx::DrawTextImpl::~DrawTextImpl(Scaleform::GFx::Draw
   v5 = (Scaleform::RefCountNTSImpl *)&v1->pDrawTextCtxt.pObject->vfptr;
   if ( v5 )
     Scaleform::RefCountNTSImpl::Release(v5);
-  v1->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::DrawText::`vftable';
+  v1->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::DrawText::`vftable;
   Scaleform::RefCountNTSImplCore::~RefCountNTSImplCore((Scaleform::RefCountNTSImplCore *)&v1->vfptr);
 }
 
@@ -978,7 +978,7 @@ void __fastcall Scaleform::GFx::DrawTextImpl::ProcessImageTags(Scaleform::Render
         v16 = Scaleform::GFx::StateBag::GetLog(v6, &v69);
         Scaleform::Log::LogWarning(
           v16->pObject,
-          "DrawText::ProcessImageTags: can't find a resource since there is no moviedef\n");
+          "DrawText::ProcessImageTags: cant find a resource since there is no moviedef\n");
         if ( v69.pObject )
           Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v69.pObject);
       }
@@ -1009,7 +1009,7 @@ void __fastcall Scaleform::GFx::DrawTextImpl::ProcessImageTags(Scaleform::Render
         v20 = Scaleform::GFx::StateBag::GetLog(v6, &v66);
         Scaleform::Log::LogWarning(
           v20->pObject,
-          "DrawText::ProcessImageTags: can't find a resource for export name '%s'\n",
+          "DrawText::ProcessImageTags: cant find a resource for export name %s\n",
           (v12->HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12);
         if ( v66.pObject )
           Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v66.pObject);
@@ -1043,7 +1043,7 @@ void __fastcall Scaleform::GFx::DrawTextImpl::ProcessImageTags(Scaleform::Render
         v25 = Scaleform::GFx::StateBag::GetLog(v6, &v68);
         Scaleform::Log::LogWarning(
           v25->pObject,
-          "DrawText::ProcessImageTags: can't load the image '%s'\n",
+          "DrawText::ProcessImageTags: cant load the image %s\n",
           (v12->HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12);
         if ( v68.pObject )
           Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v68.pObject);
@@ -1103,7 +1103,7 @@ LABEL_68:
       id.Id = 135168;
       Scaleform::LogDebugMessage(
         (Scaleform::LogMessageId)&id,
-        "Image '%s' wasn't created in ProcessImageTags",
+        "Image %s wasnt created in ProcessImageTags",
         v39 + 12);
       v40 = pdata.pResource.pObject;
       if ( pdata.pResource.pObject && !_InterlockedDecrement(&pdata.pResource.pObject->RefCount.Value) )
@@ -1294,14 +1294,14 @@ void __fastcall Scaleform::GFx::DrawTextManager::DrawTextManager(Scaleform::GFx:
   v75 = -2i64;
   v2 = ploader;
   v3 = this;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseNTS<Scaleform::GFx::DrawTextManager,2>::`vftable';
-  this->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::StateBag::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::DrawTextManager::`vftable'{for `Scaleform::RefCountBaseNTS<Scaleform::GFx::DrawTextManager,2>'};
-  this->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::DrawTextManager::`vftable'{for `Scaleform::GFx::StateBag'};
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseNTS<Scaleform::GFx::DrawTextManager,2>::`vftable;
+  this->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::StateBag::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::DrawTextManager::`vftable{for `Scaleform::RefCountBaseNTS<Scaleform::GFx::DrawTextManager,2>};
+  this->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::DrawTextManager::`vftable{for `Scaleform::GFx::StateBag};
   v67 = *(_DWORD *)((__int64)Scaleform::Memory::pGlobalHeap->vfptr->GetAllocHeap(Scaleform::Memory::pGlobalHeap, this)
                   + 56) & 0x1000;
   v68 = 16i64;
@@ -1379,12 +1379,12 @@ void __fastcall Scaleform::GFx::DrawTextManager::DrawTextManager(Scaleform::GFx:
   v66 = v18;
   if ( v18 )
   {
-    v18->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+    v18->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
     v18->RefCount = 1;
-    v18->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-    v18->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-    v18->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Log,2>::`vftable';
-    v18->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Log::`vftable';
+    v18->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+    v18->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+    v18->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Log,2>::`vftable;
+    v18->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Log::`vftable;
   }
   else
   {
@@ -1426,14 +1426,14 @@ LABEL_25:
       v26 = (signed __int64)&v25->vfptr;
     else
       v26 = 0i64;
-    *(_QWORD *)v24 = &Scaleform::RefCountNTSImplCore::`vftable';
+    *(_QWORD *)v24 = &Scaleform::RefCountNTSImplCore::`vftable;
     *(_DWORD *)(v24 + 8) = 1;
-    *(_QWORD *)v24 = &Scaleform::RefCountNTSImpl::`vftable';
-    *(_QWORD *)v24 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,327>::`vftable';
-    *(_QWORD *)v24 = &Scaleform::RefCountBaseNTS<Scaleform::GFx::FontManagerStates,327>::`vftable';
-    *(_QWORD *)(v24 + 16) = &Scaleform::GFx::StateBag::`vftable';
-    *(_QWORD *)v24 = &Scaleform::GFx::FontManagerStates::`vftable'{for `Scaleform::RefCountBaseNTS<Scaleform::GFx::FontManagerStates,327>'};
-    *(_QWORD *)(v24 + 16) = &Scaleform::GFx::FontManagerStates::`vftable'{for `Scaleform::GFx::StateBag'};
+    *(_QWORD *)v24 = &Scaleform::RefCountNTSImpl::`vftable;
+    *(_QWORD *)v24 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,327>::`vftable;
+    *(_QWORD *)v24 = &Scaleform::RefCountBaseNTS<Scaleform::GFx::FontManagerStates,327>::`vftable;
+    *(_QWORD *)(v24 + 16) = &Scaleform::GFx::StateBag::`vftable;
+    *(_QWORD *)v24 = &Scaleform::GFx::FontManagerStates::`vftable{for `Scaleform::RefCountBaseNTS<Scaleform::GFx::FontManagerStates,327>};
+    *(_QWORD *)(v24 + 16) = &Scaleform::GFx::FontManagerStates::`vftable{for `Scaleform::GFx::StateBag};
     *(_QWORD *)(v24 + 24) = 0i64;
     *(_QWORD *)(v24 + 32) = 0i64;
     *(_QWORD *)(v24 + 40) = 0i64;
@@ -1613,8 +1613,8 @@ void __fastcall Scaleform::GFx::DrawTextManager::~DrawTextManager(Scaleform::GFx
   Scaleform::GFx::DrawTextManagerImpl *v2; // rdi
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::DrawTextManager::`vftable'{for `Scaleform::RefCountBaseNTS<Scaleform::GFx::DrawTextManager,2>'};
-  this->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::DrawTextManager::`vftable'{for `Scaleform::GFx::StateBag'};
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::DrawTextManager::`vftable{for `Scaleform::RefCountBaseNTS<Scaleform::GFx::DrawTextManager,2>};
+  this->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::DrawTextManager::`vftable{for `Scaleform::GFx::StateBag};
   v2 = this->pImpl;
   if ( v2 )
   {
@@ -1622,7 +1622,7 @@ void __fastcall Scaleform::GFx::DrawTextManager::~DrawTextManager(Scaleform::GFx
     Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v2);
   }
   ((void (__cdecl *)(Scaleform::MemoryHeap *))v1->pHeap->vfptr->Release)(v1->pHeap);
-  v1->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::StateBag::`vftable';
+  v1->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::StateBag::`vftable;
   Scaleform::RefCountNTSImplCore::~RefCountNTSImplCore((Scaleform::RefCountNTSImplCore *)&v1->vfptr);
 }
 

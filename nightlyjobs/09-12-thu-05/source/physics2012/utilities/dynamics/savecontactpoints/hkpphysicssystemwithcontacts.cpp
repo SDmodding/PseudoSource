@@ -10,7 +10,7 @@ void __fastcall hkpPhysicsSystemWithContacts::~hkpPhysicsSystemWithContacts(hkpP
   v1 = this->m_contacts.m_size;
   v2 = 0i64;
   v3 = this;
-  for ( this->vfptr = (hkBaseObjectVtbl *)&hkpPhysicsSystemWithContacts::`vftable'; v2 < v1; ++v2 )
+  for ( this->vfptr = (hkBaseObjectVtbl *)&hkpPhysicsSystemWithContacts::`vftable; v2 < v1; ++v2 )
     hkReferencedObject::removeReference((hkReferencedObject *)&v3->m_contacts.m_data[v2]->vfptr);
   v4 = v3->m_contacts.m_capacityAndFlags;
   v3->m_contacts.m_size = 0;

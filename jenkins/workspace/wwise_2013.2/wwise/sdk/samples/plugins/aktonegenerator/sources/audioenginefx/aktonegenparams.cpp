@@ -6,7 +6,7 @@ AK::IAkPluginParam *__fastcall CreateToneSourceParams(AK::IAkPluginMemAlloc *in_
 
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 80ui64);
   if ( result )
-    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkToneGenParams::`vftable';
+    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkToneGenParams::`vftable;
   return result;
 }
 
@@ -21,7 +21,7 @@ AK::IAkPluginParam *__fastcall CAkToneGenParams::Clone(CAkToneGenParams *this, A
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 80ui64);
   if ( result )
   {
-    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkToneGenParams::`vftable';
+    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkToneGenParams::`vftable;
     *(float *)&result[1].vfptr = v2->m_Params.fGain;
     HIDWORD(result[1].vfptr) = LODWORD(v2->m_Params.fStartFreq);
     *(float *)&result[2].vfptr = v2->m_Params.fStopFreq;

@@ -222,7 +222,7 @@ hkResult *__fastcall hkTrackerSnapshot::init(hkTrackerSnapshot *this, hkResult *
     v13 = v4->m_memSysStatistics.m_size + 1;
     v38 = v4->m_memSysStatistics.m_size;
     *(_DWORD *)&sw.m_memSizeAndFlags = 0x1FFFF;
-    sw.vfptr = (hkBaseObjectVtbl *)&hkArrayStreamWriter::`vftable';
+    sw.vfptr = (hkBaseObjectVtbl *)&hkArrayStreamWriter::`vftable;
     v36 = (signed int *)&v4->m_memSysStatistics;
     v37 = v11;
     v39 = 1;
@@ -239,7 +239,7 @@ hkResult *__fastcall hkTrackerSnapshot::init(hkTrackerSnapshot *this, hkResult *
     hkOstream::hkOstream(&v34, &sw);
     v6->vfptr->printStatistics(v6, &v34);
     hkOstream::~hkOstream(&v34);
-    sw.vfptr = (hkBaseObjectVtbl *)&hkArrayStreamWriter::`vftable';
+    sw.vfptr = (hkBaseObjectVtbl *)&hkArrayStreamWriter::`vftable;
     if ( !v39 )
     {
       v16 = (__int64)v36;

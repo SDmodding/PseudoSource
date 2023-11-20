@@ -9,7 +9,7 @@ void __fastcall hkcdDynamicAabbTree::hkcdDynamicAabbTree(hkcdDynamicAabbTree *th
 
   v1 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkcdDynamicAabbTree::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkcdDynamicAabbTree::`vftable;
   v2 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
   v3 = (hkcdDynamicTree::DefaultTree48Storage *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v2[11] + 8i64))(
                                                   v2[11],
@@ -30,7 +30,7 @@ void __fastcall hkcdDynamicAabbTree::hkcdDynamicAabbTree(hkcdDynamicAabbTree *th
 // RVA: 0xC8F6F0
 void __fastcall hkcdDynamicAabbTree::hkcdDynamicAabbTree(hkcdDynamicAabbTree *this, hkFinishLoadedObjectFlag f)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkcdDynamicAabbTree::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkcdDynamicAabbTree::`vftable;
   if ( f.m_finishing )
     this->m_shouldDeleteTree.m_bool = this->m_memSizeAndFlags != 0;
 }
@@ -43,11 +43,11 @@ void __fastcall hkcdDynamicAabbTree::~hkcdDynamicAabbTree(hkcdDynamicAabbTree *t
   hkcdDynamicTree::DefaultTree48Storage *v2; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkcdDynamicAabbTree::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkcdDynamicAabbTree::`vftable;
   v2 = (hkcdDynamicTree::DefaultTree48Storage *)this->m_treePtr;
   if ( v2 && v1->m_shouldDeleteTree.m_bool )
-    hkcdDynamicTree::DefaultTree48Storage::`scalar deleting destructor'(v2, 1);
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+    hkcdDynamicTree::DefaultTree48Storage::`scalar deleting destructor(v2, 1);
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 40

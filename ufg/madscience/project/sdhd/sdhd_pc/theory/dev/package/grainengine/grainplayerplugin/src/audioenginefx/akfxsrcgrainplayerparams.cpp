@@ -7,9 +7,9 @@ AK::IAkPluginParam *__fastcall CreateGrainPlayerSourceParams(AK::IAkPluginMemAll
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 48ui64);
   if ( !result )
     return 0i64;
-  result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable';
-  result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkPluginParam::`vftable';
-  result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkFxSrcGrainPlayerParams::`vftable';
+  result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable;
+  result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkPluginParam::`vftable;
+  result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkFxSrcGrainPlayerParams::`vftable;
   result[4].vfptr = 0i64;
   return result;
 }
@@ -50,9 +50,9 @@ AK::IAkPluginParam *__fastcall CAkFxSrcGrainPlayerParams::Clone(CAkFxSrcGrainPla
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 48ui64);
   if ( !result )
     return 0i64;
-  result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable';
-  result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkPluginParam::`vftable';
-  result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkFxSrcGrainPlayerParams::`vftable';
+  result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable;
+  result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkPluginParam::`vftable;
+  result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkFxSrcGrainPlayerParams::`vftable;
   v4 = v2->m_dataBlock;
   result[4].vfptr = (AK::IAkRTPCSubscriberVtbl *)v4;
   result[1].vfptr = *(AK::IAkRTPCSubscriberVtbl **)&v2->m_Params.fFrequency;

@@ -25,7 +25,7 @@ void __fastcall Scaleform::GFx::FontProviderWin32::FontProviderWin32(Scaleform::
   Scaleform::GFx::FontProvider::FontProvider((Scaleform::GFx::FontProvider *)&v3->vfptr, v6);
   if ( v6 )
     Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v6);
-  v3->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::FontProviderWin32::`vftable';
+  v3->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::FontProviderWin32::`vftable;
 }
 
 // File Line: 67

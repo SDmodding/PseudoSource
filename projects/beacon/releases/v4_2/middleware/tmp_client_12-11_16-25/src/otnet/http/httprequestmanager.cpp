@@ -14,11 +14,11 @@ void __fastcall OSuite::ZHttpRequestManager::ZHttpRequestManager(OSuite::ZHttpRe
   OSuite::ZStringBuilder v10; // [rsp+38h] [rbp-38h]
 
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpRequestManager::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpRequestManager::`vftable;
   OSuite::ZDoublyLinkedListBase::ZDoublyLinkedListBase((OSuite::ZRedBlackTreeBase *)&this->m_scheduledForDeleteHttpRequestsList);
-  v1->m_scheduledForDeleteHttpRequestsList.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZSocketManager::InternalSocket>::`vftable';
+  v1->m_scheduledForDeleteHttpRequestsList.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZSocketManager::InternalSocket>::`vftable;
   OSuite::ZDoublyLinkedListBase::ZDoublyLinkedListBase((OSuite::ZRedBlackTreeBase *)&v1->m_pendingHttpRequestsList);
-  v1->m_pendingHttpRequestsList.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZSocketManager::InternalSocket>::`vftable';
+  v1->m_pendingHttpRequestsList.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZSocketManager::InternalSocket>::`vftable;
   OSuite::ZMutex::ZMutex(&v1->m_RequestMutex);
   OSuite::ZString::ZString(&v1->m_osPlatform);
   OSuite::ZString::ZString(&v1->m_userAgent);
@@ -65,7 +65,7 @@ void __fastcall OSuite::ZHttpRequestManager::~ZHttpRequestManager(OSuite::ZHttpR
 
   v1 = &this->m_RequestMutex;
   v2 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpRequestManager::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpRequestManager::`vftable;
   OSuite::ZMutex::Lock(&this->m_RequestMutex);
   v6.m_pList = 0i64;
   v6.m_pElement = 0i64;
@@ -73,7 +73,7 @@ void __fastcall OSuite::ZHttpRequestManager::~ZHttpRequestManager(OSuite::ZHttpR
     &v6,
     (OSuite::ZDoublyLinkedListBase *)&v2->m_pendingHttpRequestsList.vfptr,
     v2->m_pendingHttpRequestsList.m_pHead);
-  v6.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+  v6.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
   while ( !OSuite::ZString::IsNull((OSuite::ZString *)&v6) )
   {
     OSuite::ZHttpRequestManager::ShutdownHttpRequest(v2, (OSuite::IHttpRequest *)v6.m_pElement[1].vfptr);
@@ -89,7 +89,7 @@ void __fastcall OSuite::ZHttpRequestManager::~ZHttpRequestManager(OSuite::ZHttpR
     &that,
     (OSuite::ZDoublyLinkedListBase *)&v2->m_scheduledForDeleteHttpRequestsList.vfptr,
     v2->m_scheduledForDeleteHttpRequestsList.m_pHead);
-  that.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+  that.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
   OSuite::ZDoublyLinkedListBase::ZIteratorBase::operator=(&v6, &that);
   while ( !OSuite::ZString::IsNull((OSuite::ZString *)&v6) )
   {
@@ -107,9 +107,9 @@ void __fastcall OSuite::ZHttpRequestManager::~ZHttpRequestManager(OSuite::ZHttpR
   OSuite::ZString::~ZString(&v2->m_userAgent);
   OSuite::ZString::~ZString(&v2->m_osPlatform);
   OSuite::ZMutex::~ZMutex(v1);
-  v2->m_pendingHttpRequestsList.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZSocketManager::InternalSocket>::`vftable';
+  v2->m_pendingHttpRequestsList.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZSocketManager::InternalSocket>::`vftable;
   OSuite::ZDoublyLinkedListBase::Clear((OSuite::ZDoublyLinkedListBase *)&v2->m_pendingHttpRequestsList.vfptr);
-  v2->m_scheduledForDeleteHttpRequestsList.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZSocketManager::InternalSocket>::`vftable';
+  v2->m_scheduledForDeleteHttpRequestsList.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZSocketManager::InternalSocket>::`vftable;
   OSuite::ZDoublyLinkedListBase::Clear((OSuite::ZDoublyLinkedListBase *)&v2->m_scheduledForDeleteHttpRequestsList.vfptr);
 }
 
@@ -146,9 +146,9 @@ void __fastcall OSuite::ZHttpRequestManager::Update(OSuite::ZHttpRequestManager 
   v21 = 0i64;
   OSuite::ZRedBlackTreeBase::ZElementBase::ZElementBase((OSuite::ZObject *)&v23.m_pTop, a2);
   v23.m_pTop = 0i64;
-  v19.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+  v19.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
   OSuite::ZDoublyLinkedListBase::ZDoublyLinkedListBase(&v23);
-  v23.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZSocketManager::InternalSocket>::`vftable';
+  v23.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZSocketManager::InternalSocket>::`vftable;
   OSuite::ZMutex::Lock(&v2->m_RequestMutex);
   if ( OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&v2->m_scheduledForDeleteHttpRequestsList) )
   {
@@ -265,7 +265,7 @@ void __fastcall OSuite::ZHttpRequestManager::Update(OSuite::ZHttpRequestManager 
                                        (OSuite::TDoublyLinkedList<OSuite::IHttpRequest *>::ZIterator *)&that,
                                        &data);
             v13 = OSuite::ZString::IsNull(v12);
-            that.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+            that.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
             if ( v13 )
               OSuite::TDoublyLinkedList<OSuite::ZMetricAppender *>::Append(
                 (OSuite::TDoublyLinkedList<OSuite::ManagedCallback *> *)&v2->m_scheduledForDeleteHttpRequestsList,
@@ -324,7 +324,7 @@ LABEL_25:
   }
   OSuite::ZMutex::Unlock(&v2->m_RequestMutex);
 LABEL_51:
-  v23.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZSocketManager::InternalSocket>::`vftable';
+  v23.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZSocketManager::InternalSocket>::`vftable;
   OSuite::ZDoublyLinkedListBase::Clear((OSuite::ZDoublyLinkedListBase *)&v23);
 }
 

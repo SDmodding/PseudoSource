@@ -105,7 +105,7 @@ void __fastcall UFG::HavokNavDaemon::HavokNavDaemon(UFG::HavokNavDaemon *this)
   v96 = this;
   v1 = this;
   UFG::Daemon::Daemon((UFG::Daemon *)&this->vfptr, 0, 0, 5u);
-  v1->vfptr = (UFG::DaemonVtbl *)&UFG::HavokNavDaemon::`vftable';
+  v1->vfptr = (UFG::DaemonVtbl *)&UFG::HavokNavDaemon::`vftable;
   v1->m_PathRequests.p = 0i64;
   *(_QWORD *)&v1->m_PathRequests.size = 0i64;
   v2 = (signed __int64)&v1->m_outputs;
@@ -608,7 +608,7 @@ void __fastcall UFG::HavokNavDaemon::~HavokNavDaemon(UFG::HavokNavDaemon *this)
   UFG::DaemonQueryInput **v15; // rcx
 
   v1 = this;
-  this->vfptr = (UFG::DaemonVtbl *)&UFG::HavokNavDaemon::`vftable';
+  this->vfptr = (UFG::DaemonVtbl *)&UFG::HavokNavDaemon::`vftable;
   this->m_havokResults.m_size = 0;
   v2 = this->m_havokResults.m_capacityAndFlags;
   if ( v2 >= 0 )
@@ -1897,7 +1897,7 @@ void __fastcall UFG::HavokNavDaemon::FindPathImmediate(UFG::HavokNavDaemon *this
     v15 = _mm_add_epi32(
             _mm_xor_si128(
               _mm_cvttps_epi32(v14),
-              (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v14)),
+              (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v14)),
             _mm_loadu_si128((const __m128i *)hkPackedUnitVector_m_offset));
     LOWORD(input.m_startFaceKey) = _mm_extract_epi16(v15, 1);
     HIWORD(input.m_startFaceKey) = _mm_extract_epi16(v15, 3);
@@ -1972,7 +1972,7 @@ void __fastcall UFG::HavokNavDaemon::FindPathImmediate(UFG::HavokNavDaemon *this
           v25 = v23;
         *(_BYTE *)(v10 + 81) = v25;
         *(_DWORD *)&output[8] = 0x1FFFF;
-        *(_QWORD *)output = &hkaiPathfindingUtil::FindPathOutput::`vftable';
+        *(_QWORD *)output = &hkaiPathfindingUtil::FindPathOutput::`vftable;
         *(_QWORD *)&output[16] = 0i64;
         *(_DWORD *)&output[24] = 0;
         *(_DWORD *)&output[28] = 2147483648;
@@ -2014,7 +2014,7 @@ void __fastcall UFG::HavokNavDaemon::FindPathImmediate(UFG::HavokNavDaemon *this
           v35 = v31;
           if ( v31 )
           {
-            *(_QWORD *)v31 = &UFG::NavPath::`vftable';
+            *(_QWORD *)v31 = &UFG::NavPath::`vftable;
             *((_QWORD *)v31 + 2) = 0i64;
             *((_QWORD *)v31 + 1) = 0i64;
             *((_QWORD *)v31 + 4) = 0i64;
@@ -2212,7 +2212,7 @@ char __fastcall UFG::HavokNavDaemon::FindPathMultiDestPrioritizedImmediateSubRan
     v28 = v26;
   *(_BYTE *)(v25 + 81) = v28;
   *(_DWORD *)&output.m_memSizeAndFlags = 0x1FFFF;
-  output.vfptr = (hkBaseObjectVtbl *)&hkaiPathfindingUtil::FindPathOutput::`vftable';
+  output.vfptr = (hkBaseObjectVtbl *)&hkaiPathfindingUtil::FindPathOutput::`vftable;
   output.m_visitedEdges.m_data = 0i64;
   output.m_visitedEdges.m_size = 0;
   output.m_visitedEdges.m_capacityAndFlags = 2147483648;
@@ -2337,7 +2337,7 @@ char __fastcall UFG::HavokNavDaemon::FindPathMultiDestPrioritizedImmediateSubRan
   v56 = v48;
   if ( v48 )
   {
-    *(_QWORD *)v48 = &UFG::NavPath::`vftable';
+    *(_QWORD *)v48 = &UFG::NavPath::`vftable;
     *((_QWORD *)v48 + 2) = 0i64;
     *((_QWORD *)v48 + 1) = 0i64;
     *((_QWORD *)v48 + 4) = 0i64;
@@ -2496,7 +2496,7 @@ void __fastcall UFG::HavokNavDaemon::FindPathMultiDestPrioritizedImmediate(UFG::
     v17 = _mm_add_epi32(
             _mm_xor_si128(
               _mm_cvttps_epi32(v16),
-              (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v16)),
+              (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v16)),
             _mm_loadu_si128((const __m128i *)hkPackedUnitVector_m_offset));
     v37.m_searchParameters.m_up.m_vec[0] = _mm_extract_epi16(v17, 1);
     v37.m_searchParameters.m_up.m_vec[1] = _mm_extract_epi16(v17, 3);
@@ -2509,7 +2509,7 @@ void __fastcall UFG::HavokNavDaemon::FindPathMultiDestPrioritizedImmediate(UFG::
     v37.m_searchParameters.m_costModifier = (hkaiAstarCostModifier *)&v39;
     v35 = 0x1FFFF;
     v36 = 1;
-    v34 = &hkaiUFGAStarEdgeFilter::`vftable';
+    v34 = &hkaiUFGAStarEdgeFilter::`vftable;
     v37.m_searchParameters.m_edgeFilter = (hkaiAstarEdgeFilter *)&v34;
     v41 = v40[3].vfptr;
     v37.m_startPoint = v2->m_npFrom.m_hkvMeshPosition;
@@ -2612,9 +2612,9 @@ void __fastcall UFG::HavokNavDaemon::FindPathMultiDestPrioritizedImmediate(UFG::
       if ( v29 )
         v42->m_status = 3;
     }
-    v34 = &hkBaseObject::`vftable';
-    v39.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
-    v37.vfptr = (hkBaseObjectVtbl *)&hkaiPathfindingUtil::FindPathInput::`vftable';
+    v34 = &hkBaseObject::`vftable;
+    v39.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
+    v37.vfptr = (hkBaseObjectVtbl *)&hkaiPathfindingUtil::FindPathInput::`vftable;
     v37.m_goalFaceKeys.m_size = 0;
     if ( v37.m_goalFaceKeys.m_capacityAndFlags >= 0 )
       hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
@@ -2759,7 +2759,7 @@ void __fastcall UFG::HavokNavDaemon::FindPathToRegionImmediate(UFG::HavokNavDaem
       if ( v17 > v19 )
         v19 = v17;
       *(_BYTE *)(v3 + 81) = v19;
-      callback.vfptr = (hkaiPathfindingUtil::NearestFeatureCallbackVtbl *)&UFG::HavokRegionNearestFeatureCallback::`vftable';
+      callback.vfptr = (hkaiPathfindingUtil::NearestFeatureCallbackVtbl *)&UFG::HavokRegionNearestFeatureCallback::`vftable;
       v25 = 0;
       v26 = UFG::qVector3::msZero;
       v24 = v2->m_pRegionComponent;
@@ -2876,7 +2876,7 @@ void __fastcall UFG::HavokNavDaemon::FleeTraversalImmediate(UFG::HavokNavDaemon 
         v10 = v2[6].m_quad.m128_u32[0],
         v10 != -1) )
   {
-    callback.vfptr = (hkaiPathfindingUtil::NearestFeatureCallbackVtbl *)&UFG::FleeTraversalNearestFeatureCallback::`vftable';
+    callback.vfptr = (hkaiPathfindingUtil::NearestFeatureCallbackVtbl *)&UFG::FleeTraversalNearestFeatureCallback::`vftable;
     v32 = UFG::qVector3::msZero.x;
     input.m_startFaceKey = LODWORD(UFG::qVector3::msZero.y);
     *(&input.m_startFaceKey + 1) = LODWORD(UFG::qVector3::msZero.z);
@@ -2889,7 +2889,7 @@ void __fastcall UFG::HavokNavDaemon::FleeTraversalImmediate(UFG::HavokNavDaemon 
     v31 = (float)(v2[7].m_quad.m128_f32[0] - v12) * (float)(v2[7].m_quad.m128_f32[0] - v12);
     v36 = 0x1FFFF;
     v37 = 1;
-    v35 = &UFG::FleeTraversalCostModifier::`vftable';
+    v35 = &UFG::FleeTraversalCostModifier::`vftable;
     v38 = 0;
     v42 = FLOAT_5000_0;
     v41 = v31;
@@ -2929,7 +2929,7 @@ void __fastcall UFG::HavokNavDaemon::FleeTraversalImmediate(UFG::HavokNavDaemon 
                           _mm_unpacklo_ps((__m128)LODWORD(UFG::qVector3::msAxisZ.y), (__m128)0i64));
     v23 = 0x1FFFF;
     v24 = 1;
-    v22 = &hkaiUFGAStarEdgeFilter::`vftable';
+    v22 = &hkaiUFGAStarEdgeFilter::`vftable;
     input.m_edgeFilter = (hkaiAstarEdgeFilter *)&v22;
     hkaiPathfindingUtil::findNearestEdges((hkaiStreamingCollection *)v8->LowHealthDefrag, &input, &callback, 0i64);
     if ( v29
@@ -3043,14 +3043,14 @@ void __fastcall UFG::HavokNavDaemon::SpawnTraversalImmediate(UFG::HavokNavDaemon
         v10 = v2[6].m_quad.m128_u32[0],
         v10 != -1) )
   {
-    callback.vfptr = (hkaiPathfindingUtil::NearestFeatureCallbackVtbl *)&UFG::SpawnTraversalNearestFeatureCallback::`vftable';
+    callback.vfptr = (hkaiPathfindingUtil::NearestFeatureCallbackVtbl *)&UFG::SpawnTraversalNearestFeatureCallback::`vftable;
     v24 = UFG::qVector3::msZero;
     v25 = 0;
     v22.m_quad = (__m128)input.m_startPoint;
     v23 = v2[7].m_quad.m128_f32[3] * v2[7].m_quad.m128_f32[3];
     v27 = 0x1FFFF;
     v28 = 1;
-    v26 = &UFG::SpawnTraversalCostModifier::`vftable';
+    v26 = &UFG::SpawnTraversalCostModifier::`vftable;
     v29 = FLOAT_5000_0;
     v30.m_quad = 0i64;
     v31 = (__m128)_xmm;
@@ -3077,7 +3077,7 @@ void __fastcall UFG::HavokNavDaemon::SpawnTraversalImmediate(UFG::HavokNavDaemon
                           _mm_unpacklo_ps((__m128)LODWORD(UFG::qVector3::msAxisZ.y), (__m128)0i64));
     v16 = 0x1FFFF;
     v17 = 1;
-    v15 = &hkaiUFGAStarEdgeFilter::`vftable';
+    v15 = &hkaiUFGAStarEdgeFilter::`vftable;
     input.m_edgeFilter = (hkaiAstarEdgeFilter *)&v15;
     hkaiPathfindingUtil::findNearestEdges((hkaiStreamingCollection *)v8->LowHealthDefrag, &input, &callback, 0i64);
     if ( v25
@@ -3598,7 +3598,7 @@ LABEL_37:
             v33 = _mm_add_epi32(
                     _mm_xor_si128(
                       _mm_cvttps_epi32(v32),
-                      (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v32)),
+                      (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v32)),
                     _mm_loadu_si128((const __m128i *)hkPackedUnitVector_m_offset));
             LOWORD(v60) = _mm_extract_epi16(v33, 1);
             HIWORD(v60) = _mm_extract_epi16(v33, 3);
@@ -3606,7 +3606,7 @@ LABEL_37:
             v62 = v3 + 14;
             output.m_id = 0x1FFFF;
             LOBYTE(output.m_status) = 1;
-            output.vfptr = (UFG::DaemonQueryOutputVtbl *)&hkaiUFGAStarEdgeFilter::`vftable';
+            output.vfptr = (UFG::DaemonQueryOutputVtbl *)&hkaiUFGAStarEdgeFilter::`vftable;
             v63 = v3 + 20;
             v34 = 0;
             if ( v12 )
@@ -3623,7 +3623,7 @@ LABEL_37:
               }
               while ( v34 < v12 );
             }
-            output.vfptr = (UFG::DaemonQueryOutputVtbl *)&hkBaseObject::`vftable';
+            output.vfptr = (UFG::DaemonQueryOutputVtbl *)&hkBaseObject::`vftable;
 LABEL_65:
             v6 = v56;
             goto LABEL_66;
@@ -3662,7 +3662,7 @@ LABEL_26:
           UFG::FindPathImmediateQuery::FindPathImmediateQuery((UFG::FindPathImmediateQuery *)&job);
           *(_QWORD *)&output.m_id = 0i64;
           output.m_status = 0;
-          output.vfptr = (UFG::DaemonQueryOutputVtbl *)&UFG::FindPathOutput::`vftable';
+          output.vfptr = (UFG::DaemonQueryOutputVtbl *)&UFG::FindPathOutput::`vftable;
           v55 = 0i64;
           v39 = v37[1].m_internalType;
           v40 = v37[1].m_mode;
@@ -3726,8 +3726,8 @@ LABEL_26:
             if ( !*(_DWORD *)(v46 + 40) )
               (**(void (__fastcall ***)(__int64, signed __int64))v46)(v46, 1i64);
           }
-          output.vfptr = (UFG::DaemonQueryOutputVtbl *)&UFG::DaemonQueryOutput::`vftable';
-          *(_QWORD *)&job.m_jobSubType = &UFG::DaemonQueryInput::`vftable';
+          output.vfptr = (UFG::DaemonQueryOutputVtbl *)&UFG::DaemonQueryOutput::`vftable;
+          *(_QWORD *)&job.m_jobSubType = &UFG::DaemonQueryInput::`vftable;
           ++v36;
           --v9;
         }
@@ -3933,7 +3933,7 @@ void __fastcall UFG::HavokNavDaemon::ReadDeferredPathJobs(UFG::HavokNavDaemon *t
               v18 = v17;
               if ( v17 )
               {
-                *(_QWORD *)v17 = &UFG::NavPath::`vftable';
+                *(_QWORD *)v17 = &UFG::NavPath::`vftable;
                 *((_QWORD *)v17 + 2) = 0i64;
                 *((_QWORD *)v17 + 1) = 0i64;
                 *((_QWORD *)v17 + 4) = 0i64;

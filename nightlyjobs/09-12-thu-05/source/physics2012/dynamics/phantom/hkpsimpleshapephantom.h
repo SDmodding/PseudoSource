@@ -12,7 +12,7 @@ void __fastcall hkpSimpleShapePhantom::hkpSimpleShapePhantom(hkpSimpleShapePhant
   v2->m_phantomListeners.m_data = 0i64;
   v2->m_phantomListeners.m_size = 0;
   v2->m_phantomListeners.m_capacityAndFlags = 2147483648;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpSimpleShapePhantom::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpSimpleShapePhantom::`vftable;
   v2->m_collisionDetails.m_data = 0i64;
   v2->m_collisionDetails.m_size = 0;
   v2->m_collisionDetails.m_capacityAndFlags = 2147483648;

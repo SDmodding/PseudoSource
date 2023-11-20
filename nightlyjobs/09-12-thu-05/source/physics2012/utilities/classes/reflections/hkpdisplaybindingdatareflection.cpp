@@ -31,7 +31,7 @@ hkClass *__fastcall hkpDisplayBindingData::RigidBody::staticClass()
 void __fastcall finishLoadedObjecthkpDisplayBindingDataRigidBody(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpDisplayBindingData::RigidBody::`vftable';
+    *(_QWORD *)p = &hkpDisplayBindingData::RigidBody::`vftable;
 }
 
 // File Line: 75
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkpDisplayBindingDataRigidBody(void *p)
 // RVA: 0xE0AA90
 void **__fastcall getVtablehkpDisplayBindingDataRigidBody()
 {
-  return &hkpDisplayBindingData::RigidBody::`vftable';
+  return &hkpDisplayBindingData::RigidBody::`vftable;
 }
 
 // File Line: 101
@@ -97,7 +97,7 @@ hkClass *__fastcall hkpDisplayBindingData::PhysicsSystem::staticClass()
 void __fastcall finishLoadedObjecthkpDisplayBindingDataPhysicsSystem(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpDisplayBindingData::PhysicsSystem::`vftable';
+    *(_QWORD *)p = &hkpDisplayBindingData::PhysicsSystem::`vftable;
 }
 
 // File Line: 143
@@ -111,7 +111,7 @@ void __fastcall cleanupLoadedObjecthkpDisplayBindingDataPhysicsSystem(void *p)
 // RVA: 0xE0AAD0
 void **__fastcall getVtablehkpDisplayBindingDataPhysicsSystem()
 {
-  return &hkpDisplayBindingData::PhysicsSystem::`vftable';
+  return &hkpDisplayBindingData::PhysicsSystem::`vftable;
 }
 
 // File Line: 169
@@ -163,7 +163,7 @@ hkClass *__fastcall hkpDisplayBindingData::staticClass()
 void __fastcall finishLoadedObjecthkpDisplayBindingData(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpDisplayBindingData::`vftable';
+    *(_QWORD *)p = &hkpDisplayBindingData::`vftable;
 }
 
 // File Line: 212
@@ -177,7 +177,7 @@ void __fastcall cleanupLoadedObjecthkpDisplayBindingData(void *p)
 // RVA: 0xE0AB10
 void **__fastcall getVtablehkpDisplayBindingData()
 {
-  return &hkpDisplayBindingData::`vftable';
+  return &hkpDisplayBindingData::`vftable;
 }
 
 // File Line: 238

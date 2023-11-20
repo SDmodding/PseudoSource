@@ -36,7 +36,7 @@ void __fastcall UFG::AudioEmitterComponent::AudioEmitterComponent(UFG::AudioEmit
   v5 = (UFG::qNode<UFG::AudioEmitterComponent,UFG::AudioEmitterComponent> *)&v4->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AudioEmitterComponent::`vftable';
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AudioEmitterComponent::`vftable;
   UFG::qReflectHandleBase::qReflectHandleBase((UFG::qReflectHandleBase *)&v4->m_audioEmitterDefinition.mPrev);
   v7 = UFG::qReflectObjectType<UFG::AudioEmitterDefinition,UFG::qReflectObject>::GetTypeName(v6);
   v4->m_audioEmitterDefinition.mTypeUID = UFG::qStringHash64(v7, 0xFFFFFFFFFFFFFFFFui64);
@@ -97,7 +97,7 @@ void __fastcall UFG::AudioEmitterComponent::~AudioEmitterComponent(UFG::AudioEmi
   UFG::qNode<UFG::AudioEmitterComponent,UFG::AudioEmitterComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AudioEmitterComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AudioEmitterComponent::`vftable;
   if ( this == UFG::AudioEmitterComponent::s_AudioEmitterComponentpCurrentIterator )
     UFG::AudioEmitterComponent::s_AudioEmitterComponentpCurrentIterator = (UFG::AudioEmitterComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::AudioEmitterComponent,UFG::AudioEmitterComponent> *)&this->mPrev;

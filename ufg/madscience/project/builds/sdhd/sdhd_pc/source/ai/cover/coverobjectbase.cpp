@@ -9,7 +9,7 @@ __int64 dynamic_initializer_for__UFG::CoverObjectBase::ms_listUsers__()
 // RVA: 0x335DC0
 void __fastcall UFG::CoverObjectBase::~CoverObjectBase(UFG::CoverObjectBase *this)
 {
-  this->vfptr = (UFG::CoverObjectBaseVtbl *)&UFG::CoverObjectBase::`vftable';
+  this->vfptr = (UFG::CoverObjectBaseVtbl *)&UFG::CoverObjectBase::`vftable;
 }
 
 // File Line: 64

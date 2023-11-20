@@ -19,7 +19,7 @@ void __fastcall CAkToneGen::CAkToneGen(CAkToneGen *this)
 
   v1 = this;
   v2 = this->m_LpFilters;
-  this->vfptr = (AK::IAkPluginVtbl *)&CAkToneGen::`vftable';
+  this->vfptr = (AK::IAkPluginVtbl *)&CAkToneGen::`vftable;
   v3 = 2;
   do
   {

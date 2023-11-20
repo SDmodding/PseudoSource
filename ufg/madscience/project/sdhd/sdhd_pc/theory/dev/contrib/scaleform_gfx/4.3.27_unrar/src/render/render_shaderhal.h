@@ -17,7 +17,7 @@ void __fastcall Scaleform::Render::ShaderHAL<Scaleform::Render::D3D1x::ShaderMan
 
   v2 = this;
   Scaleform::Render::HAL::HAL((Scaleform::Render::HAL *)&this->vfptr, commandQueue);
-  v2->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ShaderHAL<Scaleform::Render::D3D1x::ShaderManager,Scaleform::Render::D3D1x::ShaderInterface>::`vftable';
+  v2->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ShaderHAL<Scaleform::Render::D3D1x::ShaderManager,Scaleform::Render::D3D1x::ShaderInterface>::`vftable;
   v2->Shader.pVS = 0i64;
   v2->Shader.pVDesc = 0i64;
   v2->Shader.pFS = 0i64;
@@ -120,10 +120,10 @@ signed __int64 __fastcall Scaleform::Render::ShaderHAL<Scaleform::Render::D3D1x:
   else
   {
     result = 1i64;
-    v4 = `Scaleform::Render::ShaderHAL<Scaleform::Render::D3D1x::ShaderManager,Scaleform::Render::D3D1x::ShaderInterface>::GetMaximumBatchCount'::`6'::warned;
-    if ( !`Scaleform::Render::ShaderHAL<Scaleform::Render::D3D1x::ShaderManager,Scaleform::Render::D3D1x::ShaderInterface>::GetMaximumBatchCount'::`6'::warned )
+    v4 = `Scaleform::Render::ShaderHAL<Scaleform::Render::D3D1x::ShaderManager,Scaleform::Render::D3D1x::ShaderInterface>::GetMaximumBatchCount::`6::warned;
+    if ( !`Scaleform::Render::ShaderHAL<Scaleform::Render::D3D1x::ShaderManager,Scaleform::Render::D3D1x::ShaderInterface>::GetMaximumBatchCount::`6::warned )
       v4 = 1;
-    `Scaleform::Render::ShaderHAL<Scaleform::Render::D3D1x::ShaderManager,Scaleform::Render::D3D1x::ShaderInterface>::GetMaximumBatchCount'::`6'::warned = v4;
+    `Scaleform::Render::ShaderHAL<Scaleform::Render::D3D1x::ShaderManager,Scaleform::Render::D3D1x::ShaderInterface>::GetMaximumBatchCount::`6::warned = v4;
   }
   return result;
 }
@@ -204,7 +204,7 @@ void __fastcall Scaleform::Render::ShaderHAL<Scaleform::Render::D3D1x::ShaderMan
   v7 = 0;
   if ( !v2->pPrimitive.pObject || !v2->pRenderTarget.pObject )
     return;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     &ptr,
     8ui64,
     3,
@@ -232,7 +232,7 @@ void __fastcall Scaleform::Render::ShaderHAL<Scaleform::Render::D3D1x::ShaderMan
   v3->vfptr[41].__vecDelDtor((Scaleform::RefCountImplCore *)&v3->vfptr, v11);
   v54 = 8i64;
   v55 = 0;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     &v56,
     0x30ui64,
     3,
@@ -473,12 +473,12 @@ LABEL_61:
   }
   while ( v36 );
   v3->AccumulatedStats.Filters += BasicArrayImplementation<hkDataArrayImpl *>::getSize((BasicArrayImplementation<hkDataObjectImpl *> *)v48);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     &v56,
     0x30ui64,
     3,
     (void (__fastcall *)(void *))Scaleform::Render::BlurFilterParams::~BlurFilterParams);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     &ptr,
     8ui64,
     3,
@@ -549,7 +549,7 @@ void __fastcall Scaleform::Render::ShaderHAL<Scaleform::Render::D3D1x::ShaderMan
   v3->vfptr[41].__vecDelDtor((Scaleform::RefCountImplCore *)&v3->vfptr, v4);
   v45 = 8i64;
   v46 = 0;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     &ptr,
     0x30ui64,
     3,
@@ -697,7 +697,7 @@ LABEL_24:
           v22,
           v3->FillFlags,
           &passes);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v,
     8ui64,
     3,
@@ -775,13 +775,13 @@ LABEL_24:
     --v30;
   }
   while ( v30 );
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v,
     8ui64,
     3,
     (void (__fastcall *)(void *))ARefPtr<SSClassDescBase>::~ARefPtr<SSClassDescBase>);
 LABEL_41:
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     &ptr,
     0x30ui64,
     3,
@@ -920,8 +920,8 @@ void __fastcall Scaleform::Render::ShaderHAL<Scaleform::Render::D3D1x::ShaderMan
           }
           while ( v28 >= 0 );
         }
-        if ( !`Scaleform::Render::ShaderHAL<Scaleform::Render::D3D1x::ShaderManager,Scaleform::Render::D3D1x::ShaderInterface>::PushBlendMode'::`26'::warned )
-          `Scaleform::Render::ShaderHAL<Scaleform::Render::D3D1x::ShaderManager,Scaleform::Render::D3D1x::ShaderInterface>::PushBlendMode'::`26'::warned = v27 < 0;
+        if ( !`Scaleform::Render::ShaderHAL<Scaleform::Render::D3D1x::ShaderManager,Scaleform::Render::D3D1x::ShaderInterface>::PushBlendMode::`26::warned )
+          `Scaleform::Render::ShaderHAL<Scaleform::Render::D3D1x::ShaderManager,Scaleform::Render::D3D1x::ShaderInterface>::PushBlendMode::`26::warned = v27 < 0;
         if ( v27 < 0 )
         {
           v4 = 19;
@@ -1307,8 +1307,8 @@ LABEL_27:
             v19,
             0i64,
             &v57);
-          if ( !`Scaleform::Render::ShaderHAL<Scaleform::Render::D3D1x::ShaderManager,Scaleform::Render::D3D1x::ShaderInterface>::PopBlendMode'::`22'::warned )
-            `Scaleform::Render::ShaderHAL<Scaleform::Render::D3D1x::ShaderManager,Scaleform::Render::D3D1x::ShaderInterface>::PopBlendMode'::`22'::warned = v59 != 2 && (!v26 || !(*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v26 + 24i64))(v26));
+          if ( !`Scaleform::Render::ShaderHAL<Scaleform::Render::D3D1x::ShaderManager,Scaleform::Render::D3D1x::ShaderInterface>::PopBlendMode::`22::warned )
+            `Scaleform::Render::ShaderHAL<Scaleform::Render::D3D1x::ShaderManager,Scaleform::Render::D3D1x::ShaderInterface>::PopBlendMode::`22::warned = v59 != 2 && (!v26 || !(*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v26 + 24i64))(v26));
           if ( v26 && (*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v26 + 24i64))(v26)
             || v9 && (*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v9 + 24i64))(v9) )
           {

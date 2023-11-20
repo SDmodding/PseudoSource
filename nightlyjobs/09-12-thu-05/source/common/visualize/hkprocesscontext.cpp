@@ -94,7 +94,7 @@ void __fastcall hkProcessContext::~hkProcessContext(hkProcessContext *this)
   int v4; // er8
 
   v1 = this;
-  this->vfptr = (hkProcessContextVtbl *)&hkProcessContext::`vftable';
+  this->vfptr = (hkProcessContextVtbl *)&hkProcessContext::`vftable;
   v2 = this->m_owner;
   if ( v2 )
     hkVisualDebugger::removeContext(v2, v1);

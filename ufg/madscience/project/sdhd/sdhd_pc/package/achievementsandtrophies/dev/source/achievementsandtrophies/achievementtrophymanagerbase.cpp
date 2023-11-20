@@ -6,7 +6,7 @@ void __fastcall UFG::AchievementTrophyManagerBase::AchievementTrophyManagerBase(
   UFG::qList<UFG::TrophyUnlockNode,UFG::TrophyUnlockNode,1,0> *v2; // [rsp+48h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (UFG::AchievementTrophyManagerBaseVtbl *)&UFG::AchievementTrophyManagerBase::`vftable';
+  this->vfptr = (UFG::AchievementTrophyManagerBaseVtbl *)&UFG::AchievementTrophyManagerBase::`vftable;
   v2 = &this->mTrophyUnlockList;
   v2->mNode.mPrev = &v2->mNode;
   v2->mNode.mNext = &v2->mNode;
@@ -37,7 +37,7 @@ void __fastcall UFG::AchievementTrophyManagerBase::~AchievementTrophyManagerBase
   UFG::qNode<Render::DebugTriStrip,Render::DebugTriStrip> *v11; // rax
 
   v1 = this;
-  this->vfptr = (UFG::AchievementTrophyManagerBaseVtbl *)&UFG::AchievementTrophyManagerBase::`vftable';
+  this->vfptr = (UFG::AchievementTrophyManagerBaseVtbl *)&UFG::AchievementTrophyManagerBase::`vftable;
   v2 = (_RTL_CRITICAL_SECTION *)&this->mTrophyUnlockMutex;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->mTrophyUnlockMutex);
   v3 = (UFG::qList<Render::DebugTriStrip,Render::DebugTriStrip,1,0> *)&v1->mTrophyUnlockList;

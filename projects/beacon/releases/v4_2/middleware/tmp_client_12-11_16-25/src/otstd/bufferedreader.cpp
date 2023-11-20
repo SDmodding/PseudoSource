@@ -9,8 +9,8 @@ void __fastcall OSuite::ZBufferedReader::ZBufferedReader(OSuite::ZBufferedReader
 
   v4 = pSource;
   v5 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZBufferedReader::`vftable'{for `OSuite::ZObject'};
-  this->vfptr = (OSuite::IReaderVtbl *)&OSuite::ZBufferedReader::`vftable'{for `OSuite::IBufferedReader'};
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZBufferedReader::`vftable{for `OSuite::ZObject};
+  this->vfptr = (OSuite::IReaderVtbl *)&OSuite::ZBufferedReader::`vftable{for `OSuite::IBufferedReader};
   v6 = bReaderOwnership;
   v7 = prefetchSize;
   OSuite::ZMemoryBufferChain::ZMemoryBufferChain(&this->m_memoryBufferChain, 1);
@@ -31,8 +31,8 @@ void __fastcall OSuite::ZBufferedReader::~ZBufferedReader(OSuite::ZBufferedReade
 
   v1 = this->m_bReaderOwnership == 0;
   v2 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZBufferedReader::`vftable'{for `OSuite::ZObject'};
-  this->vfptr = (OSuite::IReaderVtbl *)&OSuite::ZBufferedReader::`vftable'{for `OSuite::IBufferedReader'};
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZBufferedReader::`vftable{for `OSuite::ZObject};
+  this->vfptr = (OSuite::IReaderVtbl *)&OSuite::ZBufferedReader::`vftable{for `OSuite::IBufferedReader};
   if ( !v1 )
   {
     v3 = this->m_pSource;
@@ -41,7 +41,7 @@ void __fastcall OSuite::ZBufferedReader::~ZBufferedReader(OSuite::ZBufferedReade
   }
   OSuite::ZMemoryBufferChain::~ZMemoryBufferChain(&v2->m_memoryBufferChain);
   v4 = v2->m_pDecoder;
-  v2->vfptr = (OSuite::IReaderVtbl *)&OSuite::IBufferedReader::`vftable';
+  v2->vfptr = (OSuite::IReaderVtbl *)&OSuite::IBufferedReader::`vftable;
   if ( v4 )
     v4->vfptr->__vecDelDtor((OSuite::ZObject *)&v4->vfptr, 1u);
   v2->m_pDecoder = 0i64;

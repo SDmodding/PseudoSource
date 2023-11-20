@@ -28,7 +28,7 @@ void __fastcall hkpHeightFieldAgent::hkpHeightFieldAgent(hkpHeightFieldAgent *th
   v6 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_contactMgr = v5;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpHeightFieldAgent::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpHeightFieldAgent::`vftable;
   this->m_contactPointId.m_capacityAndFlags = 2147483648;
   this->m_contactPointId.m_data = 0i64;
   this->m_contactPointId.m_size = 0;
@@ -136,7 +136,7 @@ hkpHeightFieldAgent *__fastcall hkpHeightFieldAgent::createHeightFieldAAgent(hkp
   if ( result )
   {
     hkpHeightFieldAgent::hkpHeightFieldAgent(result, v7, v4, v6, v5);
-    v10->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpHeightFieldAgent>::`vftable';
+    v10->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpHeightFieldAgent>::`vftable;
     result = (hkpHeightFieldAgent *)v10;
   }
   return result;
@@ -1051,7 +1051,7 @@ void __fastcall hkpHeightFieldAgent::staticLinearCast(hkpCdBody *csBody, hkpCdBo
   v54 = 0i64;
   v62 = v5;
   _mm_store_si128((__m128i *)&v61, (__m128i)v6->m_path.m_quad);
-  v57 = &hkHeightFieldRayForwardingCollector::`vftable';
+  v57 = &hkHeightFieldRayForwardingCollector::`vftable;
   v63 = v65;
   if ( (signed int)v17 > 0 )
   {

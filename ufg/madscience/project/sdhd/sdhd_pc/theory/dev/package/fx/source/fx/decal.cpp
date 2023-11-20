@@ -2,7 +2,7 @@
 // RVA: 0x146B110
 __int64 Render::_dynamic_initializer_for__gClipQueryManager__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     Render::gClipQueryManager.mDecalClipQueryQueue,
     0x10ui64,
     2,
@@ -121,13 +121,13 @@ void __fastcall Render::DecalClipRequest::Reset(Render::DecalClipRequest *this)
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v5; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v6; // rax
 
-  v1 = `UFG::qGetResourceInventory<Render::DecalSettings>'::`2'::result;
+  v1 = `UFG::qGetResourceInventory<Render::DecalSettings>::`2::result;
   v2 = this;
-  if ( !`UFG::qGetResourceInventory<Render::DecalSettings>'::`2'::result )
+  if ( !`UFG::qGetResourceInventory<Render::DecalSettings>::`2::result )
   {
     v3 = UFG::qResourceWarehouse::Instance();
     v1 = UFG::qResourceWarehouse::GetInventory(v3, 0xAE323146);
-    `UFG::qGetResourceInventory<Render::DecalSettings>'::`2'::result = v1;
+    `UFG::qGetResourceInventory<Render::DecalSettings>::`2::result = v1;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v2->mSettingsHandle.mPrev, v1);
   v4 = &v2->mComponentPtr;
@@ -184,22 +184,22 @@ Render::DecalClipRequest *__fastcall Render::DecalClipRequest::operator=(Render:
   this->mLocalToWorld.v1 = v7;
   this->mLocalToWorld.v2 = v8;
   this->mLocalToWorld.v3 = v9;
-  v10 = `UFG::qGetResourceInventory<Render::DecalSettings>'::`2'::result;
+  v10 = `UFG::qGetResourceInventory<Render::DecalSettings>::`2::result;
   v11 = rhs->mSettingsHandle.mNameUID;
-  if ( !`UFG::qGetResourceInventory<Render::DecalSettings>'::`2'::result )
+  if ( !`UFG::qGetResourceInventory<Render::DecalSettings>::`2::result )
   {
     v12 = UFG::qResourceWarehouse::Instance();
     v10 = UFG::qResourceWarehouse::GetInventory(v12, 0xAE323146);
-    `UFG::qGetResourceInventory<Render::DecalSettings>'::`2'::result = v10;
+    `UFG::qGetResourceInventory<Render::DecalSettings>::`2::result = v10;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v5->mSettingsHandle.mPrev, 0xAE323146, v11, v10);
-  v13 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
+  v13 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
   v14 = v4->mModelProxy.mModelHandle.mNameUID;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v15 = UFG::qResourceWarehouse::Instance();
     v13 = UFG::qResourceWarehouse::GetInventory(v15, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v13;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v13;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v5->mModelProxy.mModelHandle.mPrev, 0xA2ADCD77, v14, v13);
   v16 = &v5->mComponentPtr;
@@ -290,13 +290,13 @@ void __fastcall Render::DecalClipRequestQueue::Init(Render::DecalClipRequestQueu
     v9 = 0i64;
     do
     {
-      v10 = `UFG::qGetResourceInventory<Render::DecalSettings>'::`2'::result;
+      v10 = `UFG::qGetResourceInventory<Render::DecalSettings>::`2::result;
       v11 = v5->mQueue.p;
-      if ( !`UFG::qGetResourceInventory<Render::DecalSettings>'::`2'::result )
+      if ( !`UFG::qGetResourceInventory<Render::DecalSettings>::`2::result )
       {
         v12 = UFG::qResourceWarehouse::Instance();
         v10 = UFG::qResourceWarehouse::GetInventory(v12, 0xAE323146);
-        `UFG::qGetResourceInventory<Render::DecalSettings>'::`2'::result = v10;
+        `UFG::qGetResourceInventory<Render::DecalSettings>::`2::result = v10;
       }
       UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v11[v9].mSettingsHandle.mPrev, v10);
       v13 = &v11[v9].mComponentPtr;
@@ -1538,12 +1538,12 @@ void __fastcall Render::DecalManager::Init(Render::DecalManager *this)
       v5 = (_WORD *)((char *)&v12->mMaterialUser + v26);
     *v5 |= 0x20u;
   }
-  v27 = `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Material>'::`2'::result )
+  v27 = `UFG::qGetResourceInventory<Illusion::Material>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Material>::`2::result )
   {
     v28 = UFG::qResourceWarehouse::Instance();
     v27 = UFG::qResourceWarehouse::GetInventory(v28, 0xB4C26312);
-    `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result = v27;
+    `UFG::qGetResourceInventory<Illusion::Material>::`2::result = v27;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v1->mDecalMat.mPrev, 0xB4C26312, v11, v27);
   v1->mStateBlockIndex = (unsigned __int16)Illusion::StateSystem::AddParam(
@@ -1687,12 +1687,12 @@ void __fastcall Render::DecalManager::CreateDecal(Render::DecalManager *this, un
   if ( !this->mEnableDecals )
     return;
   UFG::qResourceHandle::qResourceHandle(&v66);
-  v8 = `UFG::qGetResourceInventory<Render::DecalSettings>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Render::DecalSettings>'::`2'::result )
+  v8 = `UFG::qGetResourceInventory<Render::DecalSettings>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Render::DecalSettings>::`2::result )
   {
     v9 = UFG::qResourceWarehouse::Instance();
     v8 = UFG::qResourceWarehouse::GetInventory(v9, 0xAE323146);
-    `UFG::qGetResourceInventory<Render::DecalSettings>'::`2'::result = v8;
+    `UFG::qGetResourceInventory<Render::DecalSettings>::`2::result = v8;
   }
   UFG::qResourceHandle::Init(&v66, 0xAE323146, v6, v8);
   v10 = v66.mData;
@@ -1832,12 +1832,12 @@ LABEL_23:
         v68.mMatrix.v2 = v64;
         v68.mMatrix.v3 = v65;
         v53 = v10->mNode.mUID;
-        v54 = `UFG::qGetResourceInventory<Render::DecalSettings>'::`2'::result;
-        if ( !`UFG::qGetResourceInventory<Render::DecalSettings>'::`2'::result )
+        v54 = `UFG::qGetResourceInventory<Render::DecalSettings>::`2::result;
+        if ( !`UFG::qGetResourceInventory<Render::DecalSettings>::`2::result )
         {
           v55 = UFG::qResourceWarehouse::Instance();
           v54 = UFG::qResourceWarehouse::GetInventory(v55, 0xAE323146);
-          `UFG::qGetResourceInventory<Render::DecalSettings>'::`2'::result = v54;
+          `UFG::qGetResourceInventory<Render::DecalSettings>::`2::result = v54;
         }
         UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v68.mSettingsHandle.mPrev, 0xAE323146, v53, v54);
         v68.mRadius = v45;
@@ -1888,12 +1888,12 @@ LABEL_40:
     goto LABEL_23;
   }
 LABEL_35:
-  v58 = `UFG::qGetResourceInventory<Render::DecalSettings>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Render::DecalSettings>'::`2'::result )
+  v58 = `UFG::qGetResourceInventory<Render::DecalSettings>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Render::DecalSettings>::`2::result )
   {
     v59 = UFG::qResourceWarehouse::Instance();
     v58 = UFG::qResourceWarehouse::GetInventory(v59, 0xAE323146);
-    `UFG::qGetResourceInventory<Render::DecalSettings>'::`2'::result = v58;
+    `UFG::qGetResourceInventory<Render::DecalSettings>::`2::result = v58;
   }
   UFG::qResourceHandle::Close(&v66, v58);
   UFG::qResourceHandle::~qResourceHandle(&v66);
@@ -2050,12 +2050,12 @@ __int64 __fastcall Render::DecalManager::GetSkinnedDecalMaterialUID(Render::Deca
   {
     material_init = 1;
     v1 = sSDTextureUID;
-    v2 = `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result )
+    v2 = `UFG::qGetResourceInventory<Illusion::Texture>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::Texture>::`2::result )
     {
       v3 = UFG::qResourceWarehouse::Instance();
       v2 = UFG::qResourceWarehouse::GetInventory(v3, 0x8B43FABF);
-      `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result = v2;
+      `UFG::qGetResourceInventory<Illusion::Texture>::`2::result = v2;
     }
     UFG::qResourceHandle::Init((UFG::qResourceHandle *)&decal_tex.mPrev, 0x8B43FABF, v1, v2);
     v4 = Illusion::Factory::NewRasterState(sSDRasterStateName, sSDRasterStateUID, 0i64, 0i64, 0i64);
@@ -2167,12 +2167,12 @@ void __fastcall Render::DecalManager::DrawPrimitive(Render::DecalManager *this, 
   if ( !vertex_decl_handle_2.mData )
   {
     v10 = UFG::qStringHash32("VertexDecl.Decal", 0xFFFFFFFF);
-    v11 = `UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result )
+    v11 = `UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result )
     {
       v12 = UFG::qResourceWarehouse::Instance();
       v11 = UFG::qResourceWarehouse::GetInventory(v12, 0x3E5FDA3Eu);
-      `UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result = v11;
+      `UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result = v11;
     }
     UFG::qResourceHandle::Init((UFG::qResourceHandle *)&vertex_decl_handle_2.mPrev, 0x3E5FDA3Eu, v10, v11);
   }

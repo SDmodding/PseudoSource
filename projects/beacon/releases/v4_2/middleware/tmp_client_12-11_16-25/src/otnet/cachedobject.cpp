@@ -9,13 +9,13 @@ void __fastcall OSuite::ZCachedObject::ZCachedObject(OSuite::ZCachedObject *this
 
   v4 = url;
   v5 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZCachedObject::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZCachedObject::`vftable;
   v6 = httpMethod;
   v7 = format;
   OSuite::ZEvent::ZEvent(&this->m_UpdatedEvent, 0);
-  v5->m_Callbacks.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDelegateList<OSuite::fastdelegate::FastDelegate1<OSuite::SCallbackData *,void>>::`vftable';
+  v5->m_Callbacks.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDelegateList<OSuite::fastdelegate::FastDelegate1<OSuite::SCallbackData *,void>>::`vftable;
   OSuite::ZDoublyLinkedListBase::ZDoublyLinkedListBase((OSuite::ZRedBlackTreeBase *)&v5->m_Callbacks.m_delegates);
-  v5->m_Callbacks.m_delegates.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZSocketManager::InternalSocket>::`vftable';
+  v5->m_Callbacks.m_delegates.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZSocketManager::InternalSocket>::`vftable;
   OSuite::SCallbackData::SCallbackData(&v5->m_cbData);
   OSuite::ZString::ZString(&v5->m_Format, v7);
   OSuite::ZString::ZString(&v5->m_HttpMethod, v6);
@@ -34,7 +34,7 @@ void __fastcall OSuite::ZCachedObject::~ZCachedObject(OSuite::ZCachedObject *thi
   OSuite::ZAtomBase *v3; // rcx
 
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZCachedObject::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZCachedObject::`vftable;
   v2 = this->m_pAtomObject;
   if ( v2 )
     v2->vfptr->__vecDelDtor((OSuite::ZObject *)&v2->vfptr, 1u);
@@ -44,8 +44,8 @@ void __fastcall OSuite::ZCachedObject::~ZCachedObject(OSuite::ZCachedObject *thi
   OSuite::ZString::~ZString(&v1->m_HttpMethod);
   OSuite::ZString::~ZString(&v1->m_Format);
   OSuite::SCallbackData::~SCallbackData(&v1->m_cbData);
-  v1->m_Callbacks.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDelegateList<OSuite::fastdelegate::FastDelegate1<OSuite::SCallbackData *,void>>::`vftable';
-  v1->m_Callbacks.m_delegates.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZSocketManager::InternalSocket>::`vftable';
+  v1->m_Callbacks.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDelegateList<OSuite::fastdelegate::FastDelegate1<OSuite::SCallbackData *,void>>::`vftable;
+  v1->m_Callbacks.m_delegates.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZSocketManager::InternalSocket>::`vftable;
   OSuite::ZDoublyLinkedListBase::Clear((OSuite::ZDoublyLinkedListBase *)&v1->m_Callbacks.m_delegates.vfptr);
   OSuite::ZEvent::~ZEvent(&v1->m_UpdatedEvent);
 }
@@ -108,10 +108,10 @@ void __fastcall OSuite::ZCachedObject::CallCallbacks(OSuite::ZCachedObject *this
     &v3,
     (OSuite::ZDoublyLinkedListBase *)&this->m_Callbacks.m_delegates.vfptr,
     v1);
-  v3.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
-  v4 = &OSuite::TConstIterator<OSuite::TList<OSuite::ZOEdmEndRole *>::ZIterator,OSuite::ZOEdmEndRole *,int>::`vftable';
+  v3.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
+  v4 = &OSuite::TConstIterator<OSuite::TList<OSuite::ZOEdmEndRole *>::ZIterator,OSuite::ZOEdmEndRole *,int>::`vftable;
   OSuite::ZListBase::ZListIteratorBase::ZListIteratorBase(&v5, (OSuite::ZListBase::ZListIteratorBase *)&v3);
-  v5.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+  v5.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
   while ( !OSuite::ZString::IsNull((OSuite::ZString *)&v5) )
   {
     (*(void (__fastcall **)(_QWORD, OSuite::SCallbackData *))(v5.m_nIndex + 32))(

@@ -344,7 +344,7 @@ void __fastcall UFG::UIHKWorldMapCursorWidget::Open(UFG::UIHKWorldMapCursorWidge
       v15 = v13 + 1;
       v15->mNext = v15;
       v15[1].mNext = v15;
-      v14->vfptr = (UFG::UIScreenInvokeVtbl *)&UFG::UIScreenInvoke::`vftable';
+      v14->vfptr = (UFG::UIScreenInvokeVtbl *)&UFG::UIScreenInvoke::`vftable;
       UFG::qString::qString(&v14->command, &customWorldMapCaption);
     }
     else
@@ -406,7 +406,7 @@ void __fastcall UFG::UIHKWorldMapCursorWidget::Close(UFG::UIHKWorldMapCursorWidg
       v3 = v1 + 1;
       v3->mNext = v3;
       v3[1].mNext = v3;
-      v2->vfptr = (UFG::UIScreenInvokeVtbl *)&UFG::UIScreenInvoke::`vftable';
+      v2->vfptr = (UFG::UIScreenInvokeVtbl *)&UFG::UIScreenInvoke::`vftable;
       UFG::qString::qString(&v2->command, &customWorldMapCaption);
     }
     else

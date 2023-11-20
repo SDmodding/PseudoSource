@@ -16,21 +16,21 @@ void __fastcall Render::FlareInstance::Init(Render::FlareInstance *this, unsigne
   this->mSettingsId = settingsId;
   if ( !v2 )
   {
-    v5 = `UFG::qGetResourceInventory<Render::FlareSettings>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Render::FlareSettings>'::`2'::result )
+    v5 = `UFG::qGetResourceInventory<Render::FlareSettings>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Render::FlareSettings>::`2::result )
     {
       v6 = UFG::qResourceWarehouse::Instance();
       v5 = UFG::qResourceWarehouse::GetInventory(v6, 0xA6535FBB);
-      `UFG::qGetResourceInventory<Render::FlareSettings>'::`2'::result = v5;
+      `UFG::qGetResourceInventory<Render::FlareSettings>::`2::result = v5;
     }
     UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v4->mFlare.mSettings.mPrev, v5);
   }
-  v7 = `UFG::qGetResourceInventory<Render::FlareSettings>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Render::FlareSettings>'::`2'::result )
+  v7 = `UFG::qGetResourceInventory<Render::FlareSettings>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Render::FlareSettings>::`2::result )
   {
     v8 = UFG::qResourceWarehouse::Instance();
     v7 = UFG::qResourceWarehouse::GetInventory(v8, 0xA6535FBB);
-    `UFG::qGetResourceInventory<Render::FlareSettings>'::`2'::result = v7;
+    `UFG::qGetResourceInventory<Render::FlareSettings>::`2::result = v7;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v4->mFlare.mSettings.mPrev, 0xA6535FBB, v3, v7);
 }

@@ -2,8 +2,8 @@
 // RVA: 0x269D60
 void __fastcall Condition::~Condition(Condition *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 212
@@ -13,10 +13,10 @@ void __fastcall ConditionGroup::~ConditionGroup(ConditionGroup *this)
   ConditionGroup *v1; // rbx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&ConditionGroup::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&ConditionGroup::`vftable;
   BinPtrArray<JointReferences,1,0>::Clear((BinPtrArray<ITrack,1,0> *)&this->mConditions);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 241

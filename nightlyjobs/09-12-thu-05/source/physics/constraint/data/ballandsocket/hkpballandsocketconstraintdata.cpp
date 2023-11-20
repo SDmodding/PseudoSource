@@ -7,7 +7,7 @@ void __fastcall hkpBallAndSocketConstraintData::hkpBallAndSocketConstraintData(h
   v1 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_userData = 0i64;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpBallAndSocketConstraintData::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpBallAndSocketConstraintData::`vftable;
   hkpBallAndSocketConstraintData::Atoms::Atoms(&this->m_atoms);
   v1->m_atoms.m_pivots.m_translationA = 0i64;
   v1->m_atoms.m_pivots.m_translationB = 0i64;

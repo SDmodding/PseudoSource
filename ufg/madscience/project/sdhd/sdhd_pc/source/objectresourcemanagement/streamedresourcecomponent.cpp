@@ -96,7 +96,7 @@ void __fastcall UFG::StreamedResourceComponent::StreamedResourceComponent(UFG::S
   v4 = (UFG::qNode<UFG::StreamedResourceComponent,UFG::StreamedResourceComponent> *)&v3->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StreamedResourceComponent::`vftable';
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StreamedResourceComponent::`vftable;
   v3->mUseMeshLoader = 1;
   UFG::MeshResourceLoader::MeshResourceLoader(&v3->mMeshLoader);
   v3->mResourcesBound = 0;
@@ -323,7 +323,7 @@ void __fastcall UFG::StreamedResourceComponent::~StreamedResourceComponent(UFG::
   UFG::qNode<UFG::StreamedResourceComponent,UFG::StreamedResourceComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StreamedResourceComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StreamedResourceComponent::`vftable;
   if ( this == UFG::StreamedResourceComponent::s_StreamedResourceComponentpCurrentIterator )
     UFG::StreamedResourceComponent::s_StreamedResourceComponentpCurrentIterator = (UFG::StreamedResourceComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::StreamedResourceComponent,UFG::StreamedResourceComponent> *)&this->mPrev;
@@ -1524,12 +1524,12 @@ LABEL_7:
         v6->mNumModelTypeLODs = v19;
       }
       UFG::qResourceHandle::qResourceHandle(&v24);
-      v20 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+      v20 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+      if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
       {
         v21 = UFG::qResourceWarehouse::Instance();
         v20 = UFG::qResourceWarehouse::GetInventory(v21, 0xA2ADCD77);
-        `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v20;
+        `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v20;
       }
       UFG::qResourceHandle::Init(&v24, 0xA2ADCD77, 0, v20);
       v25 = v15;
@@ -1539,12 +1539,12 @@ LABEL_7:
         &UFG::qMatrix44::msIdentity,
         v4,
         0);
-      v22 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+      v22 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+      if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
       {
         v23 = UFG::qResourceWarehouse::Instance();
         v22 = UFG::qResourceWarehouse::GetInventory(v23, 0xA2ADCD77);
-        `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v22;
+        `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v22;
       }
       UFG::qResourceHandle::Close(&v24, v22);
       UFG::qResourceHandle::~qResourceHandle(&v24);
@@ -1610,22 +1610,22 @@ LABEL_7:
         do
         {
           UFG::qResourceHandle::qResourceHandle(&v19);
-          v15 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-          if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+          v15 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+          if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
           {
             v16 = UFG::qResourceWarehouse::Instance();
             v15 = UFG::qResourceWarehouse::GetInventory(v16, 0xA2ADCD77);
-            `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v15;
+            `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v15;
           }
           UFG::qResourceHandle::Init(&v19, 0xA2ADCD77, 0, v15);
           v20 = v13;
           ModelType::RemoveModelBinding(v4->mModelType[v14], (Illusion::ModelProxy *)&v19);
-          v17 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-          if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+          v17 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+          if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
           {
             v18 = UFG::qResourceWarehouse::Instance();
             v17 = UFG::qResourceWarehouse::GetInventory(v18, 0xA2ADCD77);
-            `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v17;
+            `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v17;
           }
           UFG::qResourceHandle::Close(&v19, v17);
           UFG::qResourceHandle::~qResourceHandle(&v19);
@@ -1693,22 +1693,22 @@ void __fastcall UFG::StreamedResourceComponent::UnbindModelResource(UFG::Streame
             {
               v14 = *(_DWORD *)(v12 + 16i64 * v10 + 8);
               UFG::qResourceHandle::qResourceHandle(&v19);
-              v15 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-              if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+              v15 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+              if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
               {
                 v16 = UFG::qResourceWarehouse::Instance();
                 v15 = UFG::qResourceWarehouse::GetInventory(v16, 0xA2ADCD77);
-                `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v15;
+                `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v15;
               }
               UFG::qResourceHandle::Init(&v19, 0xA2ADCD77, v14, v15);
               v20 = 0i64;
               ModelType::RemoveModelBinding(v13, (Illusion::ModelProxy *)&v19);
-              v17 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-              if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+              v17 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+              if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
               {
                 v18 = UFG::qResourceWarehouse::Instance();
                 v17 = UFG::qResourceWarehouse::GetInventory(v18, 0xA2ADCD77);
-                `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v17;
+                `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v17;
               }
               UFG::qResourceHandle::Close(&v19, v17);
               UFG::qResourceHandle::~qResourceHandle(&v19);
@@ -1963,12 +1963,12 @@ void __fastcall UFG::StreamedResourceComponent::BindModelResource(UFG::StreamedR
             v22 = Skeleton::GetBoneID((Skeleton *)v58->mRigHandle.mData[3].mNode.mParent, *v20);
             v23 = *(_DWORD *)(v19 + 8);
             UFG::qResourceHandle::qResourceHandle(&v53);
-            v24 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-            if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+            v24 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+            if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
             {
               v25 = UFG::qResourceWarehouse::Instance();
               v24 = UFG::qResourceWarehouse::GetInventory(v25, 0xA2ADCD77);
-              `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v24;
+              `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v24;
             }
             UFG::qResourceHandle::Init(&v53, 0xA2ADCD77, v23, v24);
             v54 = 0i64;
@@ -1978,12 +1978,12 @@ void __fastcall UFG::StreamedResourceComponent::BindModelResource(UFG::StreamedR
               v22,
               &UFG::qMatrix44::msIdentity,
               model_index);
-            v26 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-            if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+            v26 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+            if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
             {
               v27 = UFG::qResourceWarehouse::Instance();
               v26 = UFG::qResourceWarehouse::GetInventory(v27, 0xA2ADCD77);
-              `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v26;
+              `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v26;
             }
             UFG::qResourceHandle::Close(&v53, v26);
             UFG::qResourceHandle::~qResourceHandle(&v53);
@@ -2009,12 +2009,12 @@ LABEL_28:
       goto LABEL_28;
     v28 = *(_DWORD *)(v19 + 8);
     UFG::qResourceHandle::qResourceHandle(&v51);
-    v29 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+    v29 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
     {
       v30 = UFG::qResourceWarehouse::Instance();
       v29 = UFG::qResourceWarehouse::GetInventory(v30, 0xA2ADCD77);
-      `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v29;
+      `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v29;
     }
     UFG::qResourceHandle::Init(&v51, 0xA2ADCD77, v28, v29);
     v52 = 0i64;
@@ -2025,12 +2025,12 @@ LABEL_28:
             &UFG::qMatrix44::msIdentity,
             model_index,
             lod);
-    v32 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+    v32 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
     {
       v33 = UFG::qResourceWarehouse::Instance();
       v32 = UFG::qResourceWarehouse::GetInventory(v33, 0xA2ADCD77);
-      `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v32;
+      `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v32;
     }
     UFG::qResourceHandle::Close(&v51, v32);
     UFG::qResourceHandle::~qResourceHandle(&v51);
@@ -2064,12 +2064,12 @@ LABEL_28:
             v31->mMorphTargets->mMorphWeights[v40] = v57->mMeshLoader.mTrueCrowdInstance.mMorphWeights[v40];
             v42 = *(_DWORD *)(v37 + 8);
             v43 = (UFG::qResourceHandle *)&v31->mMorphTargets->mModelHandles[v41].mPrev;
-            v44 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-            if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+            v44 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+            if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
             {
               v45 = UFG::qResourceWarehouse::Instance();
               v44 = UFG::qResourceWarehouse::GetInventory(v45, 0xA2ADCD77);
-              `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v44;
+              `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v44;
             }
             UFG::qResourceHandle::Init(v43, 0xA2ADCD77, v42, v44);
             v46 = v40 + 1;
@@ -2975,8 +2975,8 @@ void __fastcall UFG::AttachmentRecord::AttachmentRecord(UFG::AttachmentRecord *t
   UFG::AttachmentRecord *v1; // rbx
 
   v1 = this;
-  `eh vector constructor iterator'(this->mRegularAttachment, 4ui64, 10, (void (__fastcall *)(void *))BackInfo::BackInfo);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(this->mRegularAttachment, 4ui64, 10, (void (__fastcall *)(void *))BackInfo::BackInfo);
+  `eh vector constructor iterator(
     v1->mEffectorAttachment,
     0xCui64,
     10,
@@ -3057,7 +3057,7 @@ void __fastcall UFG::StreamedResourceComponent::SwapVehicleRig(UFG::SimObject *p
   v61 = pUpgradingObject;
   v52 = -2i64;
   v1 = (UFG::SimObjectGame *)pUpgradingObject;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     &ptr,
     0xB8ui64,
     10,
@@ -3437,7 +3437,7 @@ LABEL_46:
   if ( BYTE1(v41[3].vfptr) || !*(_QWORD *)&v41[1].m_Flags )
     LOBYTE(v2) = 1;
   UFG::StreamedResourceComponent::BindAllModels(v62, v32, v2);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     &ptr,
     0xB8ui64,
     10,
@@ -3461,7 +3461,7 @@ void __fastcall UFG::ResourcePriorityLockComponent::ResourcePriorityLockComponen
   v1 = this;
   v2 = UFG::qStringHash32("ResourcePriorityLockComponent", 0xFFFFFFFF);
   UFG::SimComponent::SimComponent((UFG::SimComponent *)&v1->vfptr, v2);
-  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ResourcePriorityLockComponent::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ResourcePriorityLockComponent::`vftable;
   UFG::SimComponent::AddType(
     (UFG::SimComponent *)&v1->vfptr,
     UFG::ResourcePriorityLockComponent::_ResourcePriorityLockComponentTypeUID,

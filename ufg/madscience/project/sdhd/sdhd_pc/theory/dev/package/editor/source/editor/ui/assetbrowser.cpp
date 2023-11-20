@@ -16,7 +16,7 @@ void dynamic_initializer_for__UFG::qReflectObjectType_UFG::Editor::AssetBrowser_
 // RVA: 0x146D720
 __int64 dynamic_initializer_for__UFG::Editor::AssetBrowser::sSelectedAssets__()
 {
-  UFG::Editor::AssetBrowser::sSelectedAssets.vfptr = (UFG::IDUICollectionViewVtbl *)&UFG::DUIIntArray::`vftable';
+  UFG::Editor::AssetBrowser::sSelectedAssets.vfptr = (UFG::IDUICollectionViewVtbl *)&UFG::DUIIntArray::`vftable;
   return atexit(dynamic_atexit_destructor_for__UFG::Editor::AssetBrowser::sSelectedAssets__);
 }
 
@@ -32,20 +32,20 @@ void __fastcall UFG::Editor::AssetBrowser::AssetBrowser(UFG::Editor::AssetBrowse
 
   v1 = this;
   UFG::DUIWindow::DUIWindow((UFG::DUIWindow *)&this->vfptr);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::Editor::AssetBrowser,UFG::DUIWindow>::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::Editor::AssetBrowser,UFG::DUIWindow>::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::Editor::AssetBrowser,UFG::DUIWindow>::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::Editor::AssetBrowser,UFG::DUIWindow>::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v1->mBaseNode.mUID = -1i64;
   v1->mTypeUID = UFG::qStringHash64("UFG::Editor::AssetBrowser", 0xFFFFFFFFFFFFFFFFui64);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::AssetBrowser::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::AssetBrowser::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::AssetBrowser::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::AssetBrowser::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v1->mTypesFilterScrollPos = 0i64;
   v1->mTagFilterScrollPos = 0i64;
   v3 = &v1->mSelectedTypes;
-  v3->vfptr = (UFG::IDUICollectionViewVtbl *)&UFG::DUIIntArray::`vftable';
+  v3->vfptr = (UFG::IDUICollectionViewVtbl *)&UFG::DUIIntArray::`vftable;
   v3->mData.p = 0i64;
   *(_QWORD *)&v3->mData.size = 0i64;
   v4 = &v1->mSelectedTags;
-  v4->vfptr = (UFG::IDUICollectionViewVtbl *)&UFG::DUIIntArray::`vftable';
+  v4->vfptr = (UFG::IDUICollectionViewVtbl *)&UFG::DUIIntArray::`vftable;
   v4->mData.p = 0i64;
   *(_QWORD *)&v4->mData.size = 0i64;
   v5 = &v1->mSearchText;
@@ -552,7 +552,7 @@ LABEL_90:
       v62 = v60 + 1;
       v62->mNext = v62;
       v62[1].mNext = v62;
-      v61->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+      v61->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
       v61->m_EventUID = 609910773;
       v61->m_NamePTR = 0i64;
     }
@@ -686,7 +686,7 @@ LABEL_90:
             v83 = v81 + 1;
             v83->mNext = v83;
             v83[1].mNext = v83;
-            v82->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+            v82->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
             v82->m_EventUID = 609910773;
             v82->m_NamePTR = 0i64;
           }
@@ -700,7 +700,7 @@ LABEL_90:
         if ( item.mSubElements.p )
         {
           v84 = &item.mSubElements.p[-1].mStringHash32;
-          `eh vector destructor iterator'(
+          `eh vector destructor iterator(
             item.mSubElements.p,
             0x28ui64,
             item.mSubElements.p[-1].mStringHash32,
@@ -712,7 +712,7 @@ LABEL_90:
         if ( item.mElements.p )
         {
           v85 = item.mElements.p - 1;
-          `eh vector destructor iterator'(
+          `eh vector destructor iterator(
             item.mElements.p,
             4ui64,
             item.mElements.p[-1].mUID,

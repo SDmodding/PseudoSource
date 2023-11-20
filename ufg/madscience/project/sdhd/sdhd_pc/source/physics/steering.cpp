@@ -6,7 +6,7 @@ void __fastcall UFG::Steering::~Steering(UFG::Steering *this)
   int v2; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&UFG::Steering::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&UFG::Steering::`vftable;
   this->mWheelSteeringMultiplier.m_size = 0;
   v2 = this->mWheelSteeringMultiplier.m_capacityAndFlags;
   if ( v2 >= 0 )
@@ -16,8 +16,8 @@ void __fastcall UFG::Steering::~Steering(UFG::Steering *this)
       4 * v2);
   v1->mWheelSteeringMultiplier.m_data = 0i64;
   v1->mWheelSteeringMultiplier.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable';
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable;
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 47

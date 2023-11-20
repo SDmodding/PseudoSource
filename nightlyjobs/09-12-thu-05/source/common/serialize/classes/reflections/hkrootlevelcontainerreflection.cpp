@@ -88,6 +88,6 @@ void __fastcall finishLoadedObjecthkRootLevelContainer(void *p, int finishing)
 // RVA: 0xE39200
 void __fastcall cleanupLoadedObjecthkRootLevelContainer(void *p)
 {
-  hkRootLevelContainer::`scalar deleting destructor'((hkRootLevelContainer *)p, 0);
+  hkRootLevelContainer::`scalar deleting destructor((hkRootLevelContainer *)p, 0);
 }
 

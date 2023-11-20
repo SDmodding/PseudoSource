@@ -16,7 +16,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_ui::ContextMenu> *__fastc
     Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::EventDispatcher(
       v4,
       (Scaleform::GFx::AS3::InstanceTraits::Traits *)&v2->vfptr);
-    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_ui::ContextMenu::`vftable';
+    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_ui::ContextMenu::`vftable;
   }
   else
   {

@@ -9,7 +9,7 @@ void __fastcall UFG::UIHKScreenOptionsDisplayAdvanced::UIHKScreenOptionsDisplayA
   v2 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -20,12 +20,12 @@ void __fastcall UFG::UIHKScreenOptionsDisplayAdvanced::UIHKScreenOptionsDisplayA
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenOptions::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenOptions::`vftable;
   *(_QWORD *)&this->mState = 0i64;
   this->mOptionChanged = 0;
   *(_QWORD *)&this->mSavingDialogTimer = 0i64;
   this->mHelpBarName = "OPTIONS";
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenOptionsDisplayAdvanced::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenOptionsDisplayAdvanced::`vftable;
   this->mState = 0;
   Render::RenderOutputParams::RenderOutputParams(&this->mOldDisplaySettings);
   Render::RenderOutputParams::RenderOutputParams(&v1->mCurrentDisplaySettings);
@@ -188,7 +188,7 @@ void __fastcall UFG::UIHKScreenOptionsDisplayAdvanced::init(UFG::UIHKScreenOptio
   v5 = v2->mRenderable->m_movie.pObject;
   if ( v5 )
   {
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 21, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 21, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     v6 = v2->mOldDisplaySettings.mAAQuality;
     if ( v6 )
     {
@@ -446,7 +446,7 @@ LABEL_13:
         UFG::qString::~qString(&v122);
         UFG::qString::~qString(&v124);
         UFG::qString::~qString(&result);
-        `eh vector destructor iterator'(&ptr, 0x30ui64, 21, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+        `eh vector destructor iterator(&ptr, 0x30ui64, 21, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
         return;
       }
     }
@@ -942,7 +942,7 @@ LABEL_17:
     v17 = &gGlobalOverlaySentinel;
   UFG::UIHKHelpBarWidget::Show(&v17->HelpBar, &data);
   UFG::qString::~qString(&data.CustomTexturePack);
-  `eh vector destructor iterator'(data.Icons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
-  `eh vector destructor iterator'(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+  `eh vector destructor iterator(data.Icons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+  `eh vector destructor iterator(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
 }
 

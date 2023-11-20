@@ -10,7 +10,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_Render::rIrradianceVolu
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<Render::rIrradianceVolume,UFG::qReflectObject>::sInventory.vfptr,
     "Render::rIrradianceVolume",
     v0);
-  UFG::qReflectObjectType<Render::rIrradianceVolume,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<Render::rIrradianceVolume>::`vftable';
+  UFG::qReflectObjectType<Render::rIrradianceVolume,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<Render::rIrradianceVolume>::`vftable;
   UFG::qReflectInventory<Render::rIrradianceVolume>::OnAddToWarehouse(&UFG::qReflectObjectType<Render::rIrradianceVolume,UFG::qReflectObject>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -523,10 +523,10 @@ char __fastcall Render::AddLightContributionToHarmonic(Render::SphericalHarmonic
   v13 = v12;
   v13.m128_f32[0] = (float)((float)(v12.m128_f32[0] * v12.m128_f32[0]) + (float)(v11 * v11)) + (float)(v10 * v10);
   LODWORD(v14) = (unsigned __int128)_mm_sqrt_ps(v13);
-  if ( !(`Render::Light::LuminanceAndColourAtDistanceApprox'::`2'::`local static guard' & 1) )
+  if ( !(`Render::Light::LuminanceAndColourAtDistanceApprox::`2::`local static guard & 1) )
   {
-    `Render::Light::LuminanceAndColourAtDistanceApprox'::`2'::`local static guard' |= 1u;
-    `Render::Light::LuminanceAndColourAtDistanceApprox'::`2'::luminance_mul = LODWORD(FLOAT_0_30000001);
+    `Render::Light::LuminanceAndColourAtDistanceApprox::`2::`local static guard |= 1u;
+    `Render::Light::LuminanceAndColourAtDistanceApprox::`2::luminance_mul = LODWORD(FLOAT_0_30000001);
     dword_142134D0C = LODWORD(FLOAT_0_5);
     dword_142134D10 = LODWORD(FLOAT_0_2);
   }
@@ -560,7 +560,7 @@ char __fastcall Render::AddLightContributionToHarmonic(Render::SphericalHarmonic
   v27 = v40;
   v28 = v25 * v7->mColor.z;
   if ( (float)((float)((float)(v40 * *(float *)&dword_142134D0C)
-                     + (float)(v39 * *(float *)&`Render::Light::LuminanceAndColourAtDistanceApprox'::`2'::luminance_mul))
+                     + (float)(v39 * *(float *)&`Render::Light::LuminanceAndColourAtDistanceApprox::`2::luminance_mul))
              + (float)(v28 * *(float *)&dword_142134D10)) <= luminance_threshold )
     return 0;
   v29 = (float)(1.0 / v14) * v12.m128_f32[0];

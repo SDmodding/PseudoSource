@@ -275,8 +275,8 @@ void __fastcall UFG::VehicleAudioComponent::VehicleAudioComponent(UFG::VehicleAu
   v5 = (UFG::qNode<UFG::VehicleAudioComponent,UFG::VehicleAudioComponent> *)&v4->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleAudioComponent::`vftable'{for `UFG::SimComponent'};
-  v4->vfptr = (UFG::AudioEntityVtbl *)&UFG::VehicleAudioComponent::`vftable'{for `UFG::AudioEntity'};
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleAudioComponent::`vftable{for `UFG::SimComponent};
+  v4->vfptr = (UFG::AudioEntityVtbl *)&UFG::VehicleAudioComponent::`vftable{for `UFG::AudioEntity};
   v4->m_bMissionPlaylist = 0;
   v4->m_entScrape = 0i64;
   v6 = (AMD_HD3D *)UFG::qWiseSymbol::get_null()->mUID;
@@ -363,8 +363,8 @@ void __fastcall UFG::VehicleAudioComponent::~VehicleAudioComponent(UFG::VehicleA
   UFG::qNode<UFG::VehicleAudioComponent,UFG::VehicleAudioComponent> *v22; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleAudioComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::AudioEntityVtbl *)&UFG::VehicleAudioComponent::`vftable'{for `UFG::AudioEntity'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleAudioComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::AudioEntityVtbl *)&UFG::VehicleAudioComponent::`vftable{for `UFG::AudioEntity};
   if ( this == UFG::VehicleAudioComponent::s_VehicleAudioComponentpCurrentIterator )
     UFG::VehicleAudioComponent::s_VehicleAudioComponentpCurrentIterator = (UFG::VehicleAudioComponent *)&this->mPrev[-24];
   v2 = (UFG::qNode<UFG::VehicleAudioComponent,UFG::VehicleAudioComponent> *)&this->mPrev;
@@ -3054,7 +3054,7 @@ void __fastcall UFG::VehicleAudioComponent::ImpactEntity::ImpactEntity(UFG::Vehi
 
   v1 = this;
   UFG::AudioEntity::AudioEntity((UFG::AudioEntity *)&this->vfptr);
-  v1->vfptr = (UFG::AudioEntityVtbl *)&UFG::VehicleAudioComponent::ImpactEntity::`vftable';
+  v1->vfptr = (UFG::AudioEntityVtbl *)&UFG::VehicleAudioComponent::ImpactEntity::`vftable;
   v2 = UFG::qVector3::msZero.y;
   v3 = UFG::qVector3::msZero.z;
   v1->m_vLocalPos.x = UFG::qVector3::msZero.x;
@@ -3199,7 +3199,7 @@ void __fastcall UFG::VehicleAudioComponent::ScrapeImpactEntity::ScrapeImpactEnti
 
   v1 = this;
   UFG::VehicleAudioComponent::ImpactEntity::ImpactEntity((UFG::VehicleAudioComponent::ImpactEntity *)&this->vfptr);
-  v1->vfptr = (UFG::AudioEntityVtbl *)&UFG::VehicleAudioComponent::ScrapeImpactEntity::`vftable';
+  v1->vfptr = (UFG::AudioEntityVtbl *)&UFG::VehicleAudioComponent::ScrapeImpactEntity::`vftable;
   *(_QWORD *)&v1->m_myPrevAudioProperty = 0i64;
   v1->m_fScrapeCountdown = 0.0;
 }

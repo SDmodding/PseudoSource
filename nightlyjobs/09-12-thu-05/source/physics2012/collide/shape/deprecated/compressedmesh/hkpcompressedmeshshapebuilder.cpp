@@ -280,10 +280,10 @@ void __fastcall hkpCompressedMeshShapeBuilder::addGeometry(hkpCompressedMeshShap
       {
         v32 = v12->m_left;
         if ( v32 )
-          hkpCompressedMeshShapeBuilder::MappingTree::`scalar deleting destructor'(v32, 1u);
+          hkpCompressedMeshShapeBuilder::MappingTree::`scalar deleting destructor(v32, 1u);
         v33 = v12->m_right;
         if ( v33 )
-          hkpCompressedMeshShapeBuilder::MappingTree::`scalar deleting destructor'(v33, 1u);
+          hkpCompressedMeshShapeBuilder::MappingTree::`scalar deleting destructor(v33, 1u);
         v34 = v12->m_triangles.m_capacityAndFlags;
         v12->m_triangles.m_size = 0;
         if ( v34 >= 0 )
@@ -926,8 +926,8 @@ void __fastcall hkpCompressedMeshShapeBuilder::addChunk(hkpCompressedMeshShapeBu
     }
     LODWORD(v13) = *(_DWORD *)&out2[48];
   }
-  *(_QWORD *)&out2[40] = &hkGeometry::`vftable';
-  *(_QWORD *)out2 = &hkGeometry::`vftable';
+  *(_QWORD *)&out2[40] = &hkGeometry::`vftable;
+  *(_QWORD *)out2 = &hkGeometry::`vftable;
   *(__m128 *)v43 = _mm_mul_ps(_mm_add_ps(v10.m_quad, aabbOut.m_min.m_quad), (__m128)xmmword_141A711B0);
   *(float *)&half = v43[(signed int)v13];
   v29 = 0i64;
@@ -1028,7 +1028,7 @@ LABEL_33:
       16 * *(_DWORD *)&out2[28]);
   *(_QWORD *)&out2[16] = 0i64;
   *(_DWORD *)&out2[28] = 2147483648;
-  *(_QWORD *)out2 = &hkBaseObject::`vftable';
+  *(_QWORD *)out2 = &hkBaseObject::`vftable;
   v33 = 0;
   if ( v34 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
@@ -1063,7 +1063,7 @@ void __fastcall hkpCompressedMeshShapeBuilder::snapToGrid(hkVector4f *v, float e
   v6 = _mm_mul_ps(
          _mm_cvtepi32_ps(
            _mm_xor_si128(
-             (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v5),
+             (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v5),
              _mm_cvttps_epi32(v5))),
          v2);
   v->m_quad = _mm_shuffle_ps(v6, _mm_unpackhi_ps(v6, v4.m_quad), 196);

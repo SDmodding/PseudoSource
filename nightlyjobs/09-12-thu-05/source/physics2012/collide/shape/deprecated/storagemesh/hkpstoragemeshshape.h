@@ -11,7 +11,7 @@ void __fastcall hkpStorageMeshShape::SubpartStorage::~SubpartStorage(hkpStorageM
   int v7; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpStorageMeshShape::SubpartStorage::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpStorageMeshShape::SubpartStorage::`vftable;
   v2 = this->m_materialIndices16.m_capacityAndFlags;
   this->m_materialIndices16.m_size = 0;
   if ( v2 >= 0 )
@@ -66,6 +66,6 @@ void __fastcall hkpStorageMeshShape::SubpartStorage::~SubpartStorage(hkpStorageM
       4 * v7);
   v1->m_vertices.m_data = 0i64;
   v1->m_vertices.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 

@@ -33,7 +33,7 @@ void __fastcall Scaleform::Render::MeshCacheListSet::PushListToFront(Scaleform::
 // RVA: 0xA066D0
 void __fastcall Scaleform::Render::MeshBuffer::~MeshBuffer(Scaleform::Render::MeshBuffer *this)
 {
-  this->vfptr = (Scaleform::Render::MeshBufferVtbl *)&Scaleform::Render::MeshBuffer::`vftable';
+  this->vfptr = (Scaleform::Render::MeshBufferVtbl *)&Scaleform::Render::MeshBuffer::`vftable;
 }
 
 // File Line: 527

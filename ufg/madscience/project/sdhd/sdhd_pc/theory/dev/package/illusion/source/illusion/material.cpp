@@ -119,7 +119,7 @@ __int64 Illusion::_dynamic_initializer_for__gMaterialInventory__()
     0xF5F8516F,
     0,
     0x40u);
-  Illusion::gMaterialInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Illusion::MaterialInventory::`vftable';
+  Illusion::gMaterialInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Illusion::MaterialInventory::`vftable;
   return atexit(Illusion::_dynamic_atexit_destructor_for__gMaterialInventory__);
 }
 
@@ -199,12 +199,12 @@ void __fastcall Illusion::MaterialTable::OnLoad(Illusion::MaterialTable *this)
       v5 = (UFG::qResourceHandle *)((char *)&v1[1] + v4);
       if ( (Illusion::MaterialTable *)((char *)&v1[1] + v4) )
         UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)((char *)&v1[1] + v4));
-      v6 = `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<Illusion::Material>'::`2'::result )
+      v6 = `UFG::qGetResourceInventory<Illusion::Material>::`2::result;
+      if ( !`UFG::qGetResourceInventory<Illusion::Material>::`2::result )
       {
         v7 = UFG::qResourceWarehouse::Instance();
         v6 = UFG::qResourceWarehouse::GetInventory(v7, 0xB4C26312);
-        `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result = v6;
+        `UFG::qGetResourceInventory<Illusion::Material>::`2::result = v6;
       }
       UFG::qResourceHandle::Init(v5, 0xB4C26312, v5->mNameUID, v6);
       ++v3;
@@ -232,12 +232,12 @@ void __fastcall Illusion::MaterialTable::OnUnload(Illusion::MaterialTable *this)
   v2 = this;
   for ( i = 0; i < v2->mNumMaterials; ++i )
   {
-    v4 = `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::Material>'::`2'::result )
+    v4 = `UFG::qGetResourceInventory<Illusion::Material>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::Material>::`2::result )
     {
       v5 = UFG::qResourceWarehouse::Instance();
       v4 = UFG::qResourceWarehouse::GetInventory(v5, 0xB4C26312);
-      `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result = v4;
+      `UFG::qGetResourceInventory<Illusion::Material>::`2::result = v4;
     }
     UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v2[1].mNode + i, v4);
   }
@@ -258,7 +258,7 @@ __int64 Illusion::_dynamic_initializer_for__gMaterialTableInventory__()
     0xEB9FE716,
     0,
     0);
-  Illusion::gMaterialTableInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Illusion::MaterialTableInventory::`vftable';
+  Illusion::gMaterialTableInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Illusion::MaterialTableInventory::`vftable;
   return atexit(Illusion::_dynamic_atexit_destructor_for__gMaterialTableInventory__);
 }
 

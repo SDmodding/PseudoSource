@@ -2,7 +2,7 @@
 // RVA: 0x193040
 void __fastcall UFG::ContextDataBase::~ContextDataBase(UFG::ContextDataBase *this)
 {
-  this->vfptr = (UFG::ContextDataBaseVtbl *)&UFG::ContextDataBase::`vftable';
+  this->vfptr = (UFG::ContextDataBaseVtbl *)&UFG::ContextDataBase::`vftable;
 }
 
 // File Line: 49
@@ -20,8 +20,8 @@ void __fastcall UFG::ContextData<UFG::DUIPopupMenuWindow *>::ContextData<UFG::DU
   v4->mNode.mChild[0] = 0i64;
   v4->mNode.mChild[1] = 0i64;
   v4->mNode.mUID = v5;
-  v4->vfptr = (UFG::ContextDataBaseVtbl *)&UFG::ContextDataBase::`vftable';
-  v4->vfptr = (UFG::ContextDataBaseVtbl *)&UFG::ContextData<UFG::DUIPopupMenuWindow *>::`vftable';
+  v4->vfptr = (UFG::ContextDataBaseVtbl *)&UFG::ContextDataBase::`vftable;
+  v4->vfptr = (UFG::ContextDataBaseVtbl *)&UFG::ContextData<UFG::DUIPopupMenuWindow *>::`vftable;
   v4->mData = *v3;
 }
 
@@ -42,8 +42,8 @@ UFG::allocator::free_link *__fastcall UFG::ContextData<UFG::DUIPoint>::NewClone(
   result[2].mNext = 0i64;
   result[3].mNext = 0i64;
   LODWORD(result[4].mNext) = v3;
-  result->mNext = (UFG::allocator::free_link *)&UFG::ContextDataBase::`vftable';
-  result->mNext = (UFG::allocator::free_link *)&UFG::ContextData<UFG::DUIPoint>::`vftable';
+  result->mNext = (UFG::allocator::free_link *)&UFG::ContextDataBase::`vftable;
+  result->mNext = (UFG::allocator::free_link *)&UFG::ContextData<UFG::DUIPoint>::`vftable;
   result[5].mNext = (UFG::allocator::free_link *)v1->mData;
   return result;
 }
@@ -60,7 +60,7 @@ void __fastcall UFG::CommandContext::CommandContext(UFG::CommandContext *this, U
   UFG::qBaseNodeRB *v7; // rdx
 
   v2 = context;
-  this->vfptr = (UFG::CommandContextVtbl *)&UFG::CommandContext::`vftable';
+  this->vfptr = (UFG::CommandContextVtbl *)&UFG::CommandContext::`vftable;
   v3 = &this->mDictionary.mTree;
   UFG::qBaseTreeRB::qBaseTreeRB(&this->mDictionary.mTree);
   for ( i = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&v2->mDictionary);
@@ -85,7 +85,7 @@ void __fastcall UFG::CommandContext::~CommandContext(UFG::CommandContext *this)
 {
   Render::Skinning *v1; // rbx
 
-  this->vfptr = (UFG::CommandContextVtbl *)&UFG::CommandContext::`vftable';
+  this->vfptr = (UFG::CommandContextVtbl *)&UFG::CommandContext::`vftable;
   v1 = (Render::Skinning *)&this->mDictionary;
   UFG::qTreeRB<UFG::ContextDataBase,UFG::ContextDataBase,1>::DeleteAll(&this->mDictionary);
   UFG::qBaseTreeRB::~qBaseTreeRB(v1);
@@ -141,7 +141,7 @@ void __fastcall UFG::Command::~Command(UFG::Command *this)
   UFG::qNode<UFG::Command,UFG::Command> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::CommandVtbl *)&UFG::Command::`vftable';
+  this->vfptr = (UFG::CommandVtbl *)&UFG::Command::`vftable;
   UFG::qString::~qString(&this->mUserType);
   UFG::qList<UFG::qString,UFG::qString,1,0>::DeleteNodes(&v1->mTags);
   v2 = v1->mTags.mNode.mPrev;

@@ -254,7 +254,7 @@ void __fastcall UFG::DynamicCoverCorner::~DynamicCoverCorner(UFG::DynamicCoverCo
   UFG::qList<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList,1,0> *v14; // [rsp+48h] [rbp+10h]
 
   v1 = (UFG::qSafePointerNode<UFG::ParkourHandle> *)this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::DynamicCoverCorner>Vtbl *)&UFG::DynamicCoverCorner::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::DynamicCoverCorner>Vtbl *)&UFG::DynamicCoverCorner::`vftable;
   v2 = (UFG::CoverCorner *)&this->mPrev;
   v3 = this->mPrev;
   v4 = this->mNext;
@@ -279,7 +279,7 @@ void __fastcall UFG::DynamicCoverCorner::~DynamicCoverCorner(UFG::DynamicCoverCo
   v9->mPrev = v8;
   v5->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v5->mPrev;
   v5->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v5->mPrev;
-  v1->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::DynamicCoverCorner>::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::DynamicCoverCorner>::`vftable;
   UFG::qSafePointerNode<UFG::DynamicCoverCorner>::SetAllPointersToNull(v1);
   v14 = &v1->m_SafePointerList;
   UFG::qList<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList,1,0>::DeleteNodes(&v1->m_SafePointerList);

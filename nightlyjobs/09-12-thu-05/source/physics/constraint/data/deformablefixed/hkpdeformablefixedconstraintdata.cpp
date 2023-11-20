@@ -6,7 +6,7 @@ void __fastcall hkpDeformableFixedConstraintData::hkpDeformableFixedConstraintDa
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_userData = 0i64;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpDeformableFixedConstraintData::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpDeformableFixedConstraintData::`vftable;
   this->m_atoms.m_transforms.m_type.m_storage = 2;
   this->m_atoms.m_lin.m_type.m_storage = 25;
   this->m_atoms.m_lin.m_offset = 0i64;

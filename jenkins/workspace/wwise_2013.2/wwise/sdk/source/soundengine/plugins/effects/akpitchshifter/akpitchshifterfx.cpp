@@ -10,7 +10,7 @@ AK::IAkPlugin *__fastcall CreatePitchShifterFX(AK::IAkPluginMemAlloc *in_pAlloca
   if ( result )
   {
     result[1].vfptr = 0i64;
-    result->vfptr = (AK::IAkPluginVtbl *)&CAkPitchShifterFX::`vftable';
+    result->vfptr = (AK::IAkPluginVtbl *)&CAkPitchShifterFX::`vftable;
     result[2].vfptr = 0i64;
     AkPitchShifterFXInfo::AkPitchShifterFXInfo((AkPitchShifterFXInfo *)&result[3]);
     result = v2;
@@ -25,7 +25,7 @@ void __fastcall CAkPitchShifterFX::CAkPitchShifterFX(CAkPitchShifterFX *this)
   AkPitchShifterFXInfo *v1; // rcx
 
   v1 = &this->m_FXInfo;
-  *(_QWORD *)&v1[-1].uNumProcessedChannels = &CAkPitchShifterFX::`vftable';
+  *(_QWORD *)&v1[-1].uNumProcessedChannels = &CAkPitchShifterFX::`vftable;
   *(_QWORD *)&v1[-1].uTotalNumChannels = 0i64;
   *(_QWORD *)&v1[-1].uTailLength = 0i64;
   AkPitchShifterFXInfo::AkPitchShifterFXInfo(v1);
@@ -35,7 +35,7 @@ void __fastcall CAkPitchShifterFX::CAkPitchShifterFX(CAkPitchShifterFX *this)
 // RVA: 0xAEA320
 void __fastcall CAkPitchShifterFX::~CAkPitchShifterFX(CAkPitchShifterFX *this)
 {
-  this->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable';
+  this->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable;
 }
 
 // File Line: 53

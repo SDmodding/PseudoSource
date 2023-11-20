@@ -73,7 +73,7 @@ void __fastcall Render::LightningManager::LightningManager(Render::LightningMana
   UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&this->mLightningMat.mPrev);
   v2 = v1->mLMJoints;
   v3 = 4i64;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v1->mLMJoints,
     0x10ui64,
     4,
@@ -120,18 +120,18 @@ void __fastcall Render::LightningManager::~LightningManager(Render::LightningMan
   v4->mPrev = v3;
   v2->mNode.mPrev = &v2->mNode;
   v2->mNode.mNext = &v2->mNode;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->mLMJoints,
     0x10ui64,
     4,
     (void (__fastcall *)(void *))UFG::qArray<UFG::PartRequest *,0>::~qArray<UFG::PartRequest *,0>);
   v5 = (UFG::qResourceHandle *)&v1->mLightningMat.mPrev;
-  v6 = `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Material>'::`2'::result )
+  v6 = `UFG::qGetResourceInventory<Illusion::Material>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Material>::`2::result )
   {
     v7 = UFG::qResourceWarehouse::Instance();
     v6 = UFG::qResourceWarehouse::GetInventory(v7, 0xB4C26312);
-    `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result = v6;
+    `UFG::qGetResourceInventory<Illusion::Material>::`2::result = v6;
   }
   UFG::qResourceHandle::Close(v5, v6);
   UFG::qResourceHandle::~qResourceHandle(v5);
@@ -226,12 +226,12 @@ void __fastcall Render::LightningManager::Init(Render::LightningManager *this, U
   *(_DWORD *)&v5[2].mDebugName[28] = 1099738947;
   v8 = UFG::qResourceWarehouse::Instance();
   UFG::qResourceWarehouse::Add(v8, (UFG::qResourceData *)&v5->mNode);
-  v9 = `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Material>'::`2'::result )
+  v9 = `UFG::qGetResourceInventory<Illusion::Material>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Material>::`2::result )
   {
     v10 = UFG::qResourceWarehouse::Instance();
     v9 = UFG::qResourceWarehouse::GetInventory(v10, 0xB4C26312);
-    `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result = v9;
+    `UFG::qGetResourceInventory<Illusion::Material>::`2::result = v9;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v2->mLightningMat.mPrev, 0xB4C26312, v4, v9);
   v11 = v2->mLightningMat.mData;
@@ -858,12 +858,12 @@ void __fastcall Render::LightningManager::Render(Render::LightningManager *this,
         atexit(declHandle::LightningManager::Render_::_9_::_dynamic_atexit_destructor_for__declHandle__);
       }
       v10 = UFG::qStringHash32("VertexDecl.Lightning", 0xFFFFFFFF);
-      v11 = `UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result )
+      v11 = `UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result;
+      if ( !`UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result )
       {
         v12 = UFG::qResourceWarehouse::Instance();
         v11 = UFG::qResourceWarehouse::GetInventory(v12, 0x3E5FDA3Eu);
-        `UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result = v11;
+        `UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result = v11;
       }
       UFG::qResourceHandle::Init((UFG::qResourceHandle *)&declHandle.mPrev, 0x3E5FDA3Eu, v10, v11);
       Illusion::Primitive::SetBuffers(

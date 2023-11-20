@@ -6,7 +6,7 @@ void __fastcall hkpBvCompressedMeshAgent::hkpBvCompressedMeshAgent(hkpBvCompress
 
   v2 = this;
   hkpBvTreeAgent::hkpBvTreeAgent((hkpBvTreeAgent *)&this->vfptr, mgr);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpBvCompressedMeshAgent::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpBvCompressedMeshAgent::`vftable;
 }
 
 // File Line: 39
@@ -97,7 +97,7 @@ void __fastcall hkpBvCompressedMeshAgent::createStaticMeshVsStaticMeshAgent(hkpC
     if ( v10 )
     {
       hkpBvCompressedMeshAgent::hkpBvCompressedMeshAgent(v10, v5);
-      v11->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpBvCompressedMeshAgent>::`vftable';
+      v11->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpBvCompressedMeshAgent>::`vftable;
     }
   }
   else
@@ -164,7 +164,7 @@ void __fastcall hkpBvCompressedMeshAgent::staticLinearCast(hkpCdBody *bodyA, hkp
   v13 = v5[2];
   v14 = _mm_unpacklo_ps(*v5, v5[1]);
   v15 = _mm_shuffle_ps(_mm_unpackhi_ps(*v5, v5[1]), v13, 228);
-  v22 = &hkpBvTreeAgent::LinearCastAabbCastCollector::`vftable';
+  v22 = &hkpBvTreeAgent::LinearCastAabbCastCollector::`vftable;
   v24 = v7;
   v16 = _mm_movelh_ps(v14, v13);
   v17 = _mm_movehl_ps(v16, v14);

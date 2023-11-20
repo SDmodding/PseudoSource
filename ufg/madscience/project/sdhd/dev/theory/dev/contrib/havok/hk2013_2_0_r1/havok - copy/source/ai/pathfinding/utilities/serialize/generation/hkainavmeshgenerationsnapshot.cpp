@@ -12,7 +12,7 @@ void __fastcall hkaiNavMeshGenerationSnapshot::hkaiNavMeshGenerationSnapshot(hka
 
   *(_DWORD *)&this->m_geometry.m_memSizeAndFlags = 0x1FFFF;
   v3 = this;
-  this->m_geometry.vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable';
+  this->m_geometry.vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable;
   this->m_geometry.m_vertices.m_capacityAndFlags = 2147483648;
   this->m_geometry.m_vertices.m_data = 0i64;
   this->m_geometry.m_vertices.m_size = 0;

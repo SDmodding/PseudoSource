@@ -1,6 +1,6 @@
 // File Line: 37
 // RVA: 0x6CDE0
-bool __fastcall `anonymous namespace'::ClipPolyVertexCompare(ClipPolyVertex *a, ClipPolyVertex *b)
+bool __fastcall `anonymous namespace::ClipPolyVertexCompare(ClipPolyVertex *a, ClipPolyVertex *b)
 {
   return b->mAngle < a->mAngle;
 }
@@ -113,8 +113,8 @@ void __fastcall ClipCube::ClipToPlane(ClipCube *this, UFG::qVector4 *plane)
   v9 = plane->w;
   do
   {
-    v10 = &`anonymous namespace'::gUnitCubeVertices[`anonymous namespace'::gUnitCubeEdges[v5 / 2].mStartVertex];
-    v11 = &`anonymous namespace'::gUnitCubeVertices[`anonymous namespace'::gUnitCubeEdges[v5 / 2].mEndVertex];
+    v10 = &`anonymous namespace::gUnitCubeVertices[`anonymous namespace::gUnitCubeEdges[v5 / 2].mStartVertex];
+    v11 = &`anonymous namespace::gUnitCubeVertices[`anonymous namespace::gUnitCubeEdges[v5 / 2].mEndVertex];
     v12 = v11->y;
     v13 = v11->x;
     v14 = v11->z;
@@ -142,7 +142,7 @@ void __fastcall ClipCube::ClipToPlane(ClipCube *this, UFG::qVector4 *plane)
   while ( v6 );
   v24 = v68;
   v25 = v67;
-  v26 = `anonymous namespace'::gUnitCubeSides;
+  v26 = `anonymous namespace::gUnitCubeSides;
   v27 = 6i64;
   v28 = v66;
   do
@@ -157,10 +157,10 @@ void __fastcall ClipCube::ClipToPlane(ClipCube *this, UFG::qVector4 *plane)
       if ( *v30 )
       {
         v34 = 1.0 - *(float *)&v70[2 * v33];
-        v35 = `anonymous namespace'::gUnitCubeVertices[`anonymous namespace'::gUnitCubeEdges[v33].mEndVertex].x;
-        v36 = `anonymous namespace'::gUnitCubeVertices[`anonymous namespace'::gUnitCubeEdges[v33].mEndVertex].y;
-        v37 = `anonymous namespace'::gUnitCubeVertices[`anonymous namespace'::gUnitCubeEdges[v33].mEndVertex].z;
-        v42 = &`anonymous namespace'::gUnitCubeVertices[`anonymous namespace'::gUnitCubeEdges[v33].mStartVertex];
+        v35 = `anonymous namespace::gUnitCubeVertices[`anonymous namespace::gUnitCubeEdges[v33].mEndVertex].x;
+        v36 = `anonymous namespace::gUnitCubeVertices[`anonymous namespace::gUnitCubeEdges[v33].mEndVertex].y;
+        v37 = `anonymous namespace::gUnitCubeVertices[`anonymous namespace::gUnitCubeEdges[v33].mEndVertex].z;
+        v42 = &`anonymous namespace::gUnitCubeVertices[`anonymous namespace::gUnitCubeEdges[v33].mStartVertex];
         v38 = (unsigned int)*(&v69 + 2 * v33) >> 1;
         v39 = v42->x;
         v40 = v42->y;
@@ -171,12 +171,12 @@ void __fastcall ClipCube::ClipToPlane(ClipCube *this, UFG::qVector4 *plane)
       {
         LOBYTE(v38) = *((_BYTE *)&v69 + 8 * v33);
         v34 = *(float *)&v70[2 * v33];
-        v35 = `anonymous namespace'::gUnitCubeVertices[`anonymous namespace'::gUnitCubeEdges[v33].mStartVertex].x;
-        v36 = `anonymous namespace'::gUnitCubeVertices[`anonymous namespace'::gUnitCubeEdges[v33].mStartVertex].y;
-        v37 = `anonymous namespace'::gUnitCubeVertices[`anonymous namespace'::gUnitCubeEdges[v33].mStartVertex].z;
-        v39 = `anonymous namespace'::gUnitCubeVertices[`anonymous namespace'::gUnitCubeEdges[v33].mEndVertex].x;
-        v40 = `anonymous namespace'::gUnitCubeVertices[`anonymous namespace'::gUnitCubeEdges[v33].mEndVertex].y;
-        v41 = `anonymous namespace'::gUnitCubeVertices[`anonymous namespace'::gUnitCubeEdges[v33].mEndVertex].z;
+        v35 = `anonymous namespace::gUnitCubeVertices[`anonymous namespace::gUnitCubeEdges[v33].mStartVertex].x;
+        v36 = `anonymous namespace::gUnitCubeVertices[`anonymous namespace::gUnitCubeEdges[v33].mStartVertex].y;
+        v37 = `anonymous namespace::gUnitCubeVertices[`anonymous namespace::gUnitCubeEdges[v33].mStartVertex].z;
+        v39 = `anonymous namespace::gUnitCubeVertices[`anonymous namespace::gUnitCubeEdges[v33].mEndVertex].x;
+        v40 = `anonymous namespace::gUnitCubeVertices[`anonymous namespace::gUnitCubeEdges[v33].mEndVertex].y;
+        v41 = `anonymous namespace::gUnitCubeVertices[`anonymous namespace::gUnitCubeEdges[v33].mEndVertex].z;
         LODWORD(v42) = (unsigned int)*(&v69 + 2 * v33) >> 1;
       }
       v43 = (unsigned __int8)v42 & 1;
@@ -624,7 +624,7 @@ __int64 __fastcall ClipCube::GenerateCCWClipVerts(ClipCube *this, UFG::qVector3 
   ___qQuickSortImpl_UClipPolyVertex__A0xe5afcb50__P6A_NAEBU12_0_Z_UFG__YAXPEAUClipPolyVertex__A0xe5afcb50__0P6A_NAEBU12_1_Z_Z(
     left,
     &right + (signed int)v6,
-    `anonymous namespace'::ClipPolyVertexCompare);
+    `anonymous namespace::ClipPolyVertexCompare);
   v56 = 0i64;
   if ( (signed int)v6 >= 4 )
   {

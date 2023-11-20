@@ -3,7 +3,7 @@
 void __fastcall hkpTyremarksWheel::hkpTyremarksWheel(hkpTyremarksWheel *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpTyremarksWheel::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpTyremarksWheel::`vftable;
   this->m_tyremarkPoints.m_capacityAndFlags = 2147483648;
   this->m_tyremarkPoints.m_data = 0i64;
   *(_QWORD *)&this->m_currentPosition = 0i64;
@@ -111,7 +111,7 @@ void __fastcall hkpTyremarksInfo::hkpTyremarksInfo(hkpTyremarksInfo *this, hkpVe
   hkResult result; // [rsp+60h] [rbp+8h]
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpTyremarksInfo::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpTyremarksInfo::`vftable;
   this->m_tyremarksWheel.m_data = 0i64;
   this->m_tyremarksWheel.m_size = 0;
   this->m_tyremarksWheel.m_capacityAndFlags = 2147483648;
@@ -170,7 +170,7 @@ void __fastcall hkpTyremarksInfo::~hkpTyremarksInfo(hkpTyremarksInfo *this)
   int v4; // er8
 
   v1 = 0;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpTyremarksInfo::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpTyremarksInfo::`vftable;
   v2 = this;
   if ( this->m_tyremarksWheel.m_size > 0 )
   {
@@ -192,7 +192,7 @@ void __fastcall hkpTyremarksInfo::~hkpTyremarksInfo(hkpTyremarksInfo *this)
       8 * v4);
   v2->m_tyremarksWheel.m_data = 0i64;
   v2->m_tyremarksWheel.m_capacityAndFlags = 2147483648;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 94

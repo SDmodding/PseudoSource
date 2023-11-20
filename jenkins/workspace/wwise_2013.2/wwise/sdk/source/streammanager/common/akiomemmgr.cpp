@@ -2,7 +2,7 @@
 // RVA: 0xAA8700
 void __fastcall AK::StreamMgr::CAkIOMemMgr::CAkIOMemMgr(AK::StreamMgr::CAkIOMemMgr *this)
 {
-  this->vfptr = (AK::StreamMgr::CAkIOMemMgrVtbl *)&AK::StreamMgr::CAkIOMemMgr::`vftable';
+  this->vfptr = (AK::StreamMgr::CAkIOMemMgrVtbl *)&AK::StreamMgr::CAkIOMemMgr::`vftable;
   this->m_pIOMemory = 0i64;
   this->m_pMemBlocks = 0i64;
   this->m_listFreeBuffers.m_ulNumListItems = 0;
@@ -19,7 +19,7 @@ void __fastcall AK::StreamMgr::CAkIOMemMgr::CAkIOMemMgr(AK::StreamMgr::CAkIOMemM
 // RVA: 0xAA8740
 void __fastcall AK::StreamMgr::CAkIOMemMgr::~CAkIOMemMgr(AK::StreamMgr::CAkIOMemMgr *this)
 {
-  this->vfptr = (AK::StreamMgr::CAkIOMemMgrVtbl *)&AK::StreamMgr::CAkIOMemMgr::`vftable';
+  this->vfptr = (AK::StreamMgr::CAkIOMemMgrVtbl *)&AK::StreamMgr::CAkIOMemMgr::`vftable;
 }
 
 // File Line: 40

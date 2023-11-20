@@ -9,7 +9,7 @@ void __fastcall hkXmlParser::StartElement::StartElement(hkXmlParser::StartElemen
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->type = 1;
   v3 = &this->name;
-  v3[-3].m_stringAndFlag = (const char *)&hkXmlParser::StartElement::`vftable';
+  v3[-3].m_stringAndFlag = (const char *)&hkXmlParser::StartElement::`vftable;
   hkStringPtr::hkStringPtr(v3, n);
   v2->attributes.m_data = 0i64;
   v2->attributes.m_size = 0;
@@ -22,7 +22,7 @@ void __fastcall hkXmlParser::EndElement::EndElement(hkXmlParser::EndElement *thi
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->type = 2;
-  this->vfptr = (hkBaseObjectVtbl *)&hkXmlParser::EndElement::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkXmlParser::EndElement::`vftable;
   hkStringPtr::hkStringPtr(&this->name, n);
 }
 
@@ -32,7 +32,7 @@ void __fastcall hkXmlParser::Characters::Characters(hkXmlParser::Characters *thi
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->type = 3;
-  this->vfptr = (hkBaseObjectVtbl *)&hkXmlParser::Characters::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkXmlParser::Characters::`vftable;
   hkStringPtr::hkStringPtr(&this->text, s, len);
 }
 

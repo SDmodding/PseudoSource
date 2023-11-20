@@ -17,15 +17,15 @@ float __fastcall EvalLPFCutoff(float in_fCurrentLPFPar, bool in_bIsForFeedbackPi
   }
   else if ( in_fCurrentLPFPar >= 30.0 )
   {
-    if ( `FastPowOfBeta'::`2'::`local static guard' & 1 )
+    if ( `FastPowOfBeta::`2::`local static guard & 1 )
     {
-      v4 = *(float *)&`FastPowOfBeta'::`2'::SCALE;
+      v4 = *(float *)&`FastPowOfBeta::`2::SCALE;
     }
     else
     {
       v4 = FLOAT_1042939_9;
-      `FastPowOfBeta'::`2'::SCALE = LODWORD(FLOAT_1042939_9);
-      `FastPowOfBeta'::`2'::`local static guard' |= 1u;
+      `FastPowOfBeta::`2::SCALE = LODWORD(FLOAT_1042939_9);
+      `FastPowOfBeta::`2::`local static guard |= 1u;
     }
     result = (float)((float)((float)((float)((float)(COERCE_FLOAT(
                                                        ((signed int)(float)((float)((float)(100.0 - in_fCurrentLPFPar)

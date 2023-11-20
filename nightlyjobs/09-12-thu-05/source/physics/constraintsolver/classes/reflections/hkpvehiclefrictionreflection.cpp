@@ -66,7 +66,7 @@ hkClass *__fastcall hkpVehicleFrictionDescription::staticClass()
 void __fastcall finishLoadedObjecthkpVehicleFrictionDescription(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpVehicleFrictionDescription::`vftable';
+    *(_QWORD *)p = &hkpVehicleFrictionDescription::`vftable;
 }
 
 // File Line: 128
@@ -80,7 +80,7 @@ void __fastcall cleanupLoadedObjecthkpVehicleFrictionDescription(void *p)
 // RVA: 0xD4E270
 void **__fastcall getVtablehkpVehicleFrictionDescription()
 {
-  return &hkpVehicleFrictionDescription::`vftable';
+  return &hkpVehicleFrictionDescription::`vftable;
 }
 
 // File Line: 154

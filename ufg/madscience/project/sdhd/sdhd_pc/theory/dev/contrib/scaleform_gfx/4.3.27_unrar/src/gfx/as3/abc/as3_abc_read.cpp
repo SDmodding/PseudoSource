@@ -3318,7 +3318,7 @@ char __fastcall Scaleform::GFx::AS3::Abc::Reader::Read(Scaleform::GFx::AS3::Abc:
       *(_QWORD *)(v15 + 24) = -1i64;
       *(_QWORD *)(v15 + 32) = -1i64;
       *(_DWORD *)(v15 + 40) = -1;
-      *(_QWORD *)(v15 + 48) = &Scaleform::GFx::AS3::Abc::Code::`vftable';
+      *(_QWORD *)(v15 + 48) = &Scaleform::GFx::AS3::Abc::Code::`vftable;
       *(_QWORD *)(v15 + 56) = Scaleform::GFx::AS3::Abc::StringView::Empty;
       v29 = (_QWORD *)(v15 + 64);
       v28 = v15 + 64;
@@ -3367,7 +3367,7 @@ LABEL_16:
   if ( v21 )
   {
     Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, *(void **)(v21 + 64));
-    *(_QWORD *)(v21 + 48) = &Scaleform::GFx::AS3::Abc::Code::`vftable';
+    *(_QWORD *)(v21 + 48) = &Scaleform::GFx::AS3::Abc::Code::`vftable;
     v31 = v21;
     Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, *(void **)v21);
     Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, (void *)v21);

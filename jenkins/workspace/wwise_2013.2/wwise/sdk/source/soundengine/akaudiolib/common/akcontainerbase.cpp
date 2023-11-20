@@ -8,7 +8,7 @@ void __fastcall CAkContainerBase::CAkContainerBase(CAkContainerBase *this, unsig
   CAkParameterNode::CAkParameterNode((CAkParameterNode *)&this->vfptr, in_ulID);
   v2->m_mapChildId.m_pItems = 0i64;
   *(_QWORD *)&v2->m_mapChildId.m_uLength = 0i64;
-  v2->vfptr = (CAkIndexableVtbl *)&CAkContainerBase::`vftable';
+  v2->vfptr = (CAkIndexableVtbl *)&CAkContainerBase::`vftable;
 }
 
 // File Line: 32
@@ -19,7 +19,7 @@ void __fastcall CAkContainerBase::~CAkContainerBase(CAkContainerBase *this)
   CAkParameterNodeBase **v2; // rdx
 
   v1 = this;
-  this->vfptr = (CAkIndexableVtbl *)&CAkParentNode<CAkParameterNode>::`vftable';
+  this->vfptr = (CAkIndexableVtbl *)&CAkParentNode<CAkParameterNode>::`vftable;
   v2 = this->m_mapChildId.m_pItems;
   if ( v2 )
   {

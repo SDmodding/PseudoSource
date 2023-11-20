@@ -85,7 +85,7 @@ void __fastcall UFG::AnimationLODComponent::AnimationLODComponent(UFG::Animation
   v3 = (UFG::qNode<UFG::AnimationLODComponent,UFG::AnimationLODComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AnimationLODComponent::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AnimationLODComponent::`vftable;
   v2->mHasBeenUpdatedOnce = 0;
   v2->mUpdatePeriod = 1;
   v2->mMinUpdatePeriod = -1;
@@ -134,7 +134,7 @@ void __fastcall UFG::AnimationLODComponent::~AnimationLODComponent(UFG::Animatio
   UFG::qNode<UFG::AnimationLODComponent,UFG::AnimationLODComponent> *v11; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AnimationLODComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AnimationLODComponent::`vftable;
   if ( this == UFG::AnimationLODComponent::s_AnimationLODComponentpCurrentIterator )
     UFG::AnimationLODComponent::s_AnimationLODComponentpCurrentIterator = (UFG::AnimationLODComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::AnimationLODComponent,UFG::AnimationLODComponent> *)&this->mPrev;

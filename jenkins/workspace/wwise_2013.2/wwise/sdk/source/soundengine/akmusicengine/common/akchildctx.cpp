@@ -3,14 +3,14 @@
 void __fastcall CAkChildCtx::CAkChildCtx(CAkChildCtx *this, CAkMusicCtx *in_pParentCtx)
 {
   this->m_pParentCtx = in_pParentCtx;
-  this->vfptr = (CAkChildCtxVtbl *)&CAkChildCtx::`vftable';
+  this->vfptr = (CAkChildCtxVtbl *)&CAkChildCtx::`vftable;
 }
 
 // File Line: 24
 // RVA: 0xAAD890
 void __fastcall CAkChildCtx::~CAkChildCtx(CAkChildCtx *this)
 {
-  this->vfptr = (CAkChildCtxVtbl *)&CAkChildCtx::`vftable';
+  this->vfptr = (CAkChildCtxVtbl *)&CAkChildCtx::`vftable;
 }
 
 // File Line: 28

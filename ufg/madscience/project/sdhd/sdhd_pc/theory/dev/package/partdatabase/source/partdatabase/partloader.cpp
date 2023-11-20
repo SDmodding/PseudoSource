@@ -7,7 +7,7 @@ void __fastcall UFG::PartLoader::PartLoader(UFG::PartLoader *this)
   v1 = this;
   this->mPartsDirty = 0;
   *(_QWORD *)&this->mPartCount = 0i64;
-  `eh vector constructor iterator'(this->mTextureSets, 4ui64, 32, (void (__fastcall *)(void *))BackInfo::BackInfo);
+  `eh vector constructor iterator(this->mTextureSets, 4ui64, 32, (void (__fastcall *)(void *))BackInfo::BackInfo);
   v1->mRequestsLoadedFlags.mBits[0] = 0i64;
   v1->mRequestsDispatchEventFlags.mBits[0] = 0i64;
   v1->mPriority = 4;
@@ -24,7 +24,7 @@ void __fastcall UFG::PartLoader::~PartLoader(UFG::PartLoader *this)
 
   v1 = this;
   UFG::PartLoader::Unload(this);
-  `eh vector destructor iterator'(v1->mTextureSets, 4ui64, 32, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(v1->mTextureSets, 4ui64, 32, (void (__fastcall *)(void *))_);
 }
 
 // File Line: 37

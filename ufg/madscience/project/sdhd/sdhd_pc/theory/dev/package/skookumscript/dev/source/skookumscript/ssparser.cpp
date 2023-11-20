@@ -108,8 +108,8 @@ LABEL_7:
     v12 = AMemory::c_malloc_func(0x18ui64, "SSBind");
     if ( v12 )
     {
-      *v12 = &SSExpressionBase::`vftable';
-      *v12 = &SSBind::`vftable';
+      *v12 = &SSExpressionBase::`vftable;
+      *v12 = &SSBind::`vftable;
       v12[1] = v3;
       v12[2] = v11;
       v7 = v12;
@@ -253,7 +253,7 @@ SSCase *__fastcall SSParser::parse_case_tail(SSParser *this, SSParser::Args *arg
   v37 = v3->i_str_ref_p->i_length;
   v13 = v12->i_cstr_p;
   class_union.i_ref_count = 0;
-  class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable';
+  class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable;
   class_union.i_common_class_p = 0i64;
   class_union.i_union.i_count = 0;
   class_union.i_union.i_array_p = 0i64;
@@ -272,8 +272,8 @@ SSCase *__fastcall SSParser::parse_case_tail(SSParser *this, SSParser::Args *arg
     v46 = v14;
     if ( v14 )
     {
-      *(_QWORD *)v14 = &SSExpressionBase::`vftable';
-      *(_QWORD *)v14 = &SSCase::`vftable';
+      *(_QWORD *)v14 = &SSExpressionBase::`vftable;
+      *(_QWORD *)v14 = &SSCase::`vftable;
       *((_QWORD *)v14 + 1) = 0i64;
       v15 = (signed __int64)(v14 + 16);
       v47 = v15;
@@ -391,7 +391,7 @@ SSCase *__fastcall SSParser::parse_case_tail(SSParser *this, SSParser::Args *arg
             v44 = v27;
             if ( v27 )
             {
-              v27->vfptr = (SSClauseVtbl *)&SSClause::`vftable';
+              v27->vfptr = (SSClauseVtbl *)&SSClause::`vftable;
               v27->i_test_p = v19;
               v27->i_clause_p = (SSExpressionBase *)&v26->vfptr;
             }
@@ -1040,7 +1040,7 @@ __int64 __fastcall SSParser::parse_class_union(SSParser *this, unsigned int star
     if ( v9[start_pos] == 60 )
     {
       class_union.i_ref_count = 0;
-      class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable';
+      class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable;
       class_union.i_common_class_p = 0i64;
       class_union.i_union.i_count = 0;
       class_union.i_union.i_array_p = 0i64;
@@ -1090,7 +1090,7 @@ __int64 __fastcall SSParser::parse_class_union(SSParser *this, unsigned int star
         }
       }
 LABEL_19:
-      class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable';
+      class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable;
       if ( class_union.i_common_class_p )
         ((void (*)(void))class_union.i_common_class_p->vfptr->dereference_delay)();
       v14 = class_union.i_union.i_array_p;
@@ -1102,14 +1102,14 @@ LABEL_19:
         {
           do
           {
-             SSClassDescBase::`vcall'{24,{flat}}(*v15);
+             SSClassDescBase::`vcall{24,{flat}}(*v15);
             ++v15;
           }
           while ( v15 < (__int64 *)v16 );
         }
       }
       AMemory::c_free_func(v14);
-      class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable';
+      class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable;
     }
   }
   result = v8;
@@ -1309,8 +1309,8 @@ LABEL_22:
       *(_QWORD *)&find_pos_p = v18;
       if ( v18 )
       {
-        v18->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-        v18->vfptr = (SSExpressionBaseVtbl *)&SSConversion::`vftable';
+        v18->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+        v18->vfptr = (SSExpressionBaseVtbl *)&SSConversion::`vftable;
         v18[1].vfptr = (SSExpressionBaseVtbl *)v17;
         v18[2].vfptr = (SSExpressionBaseVtbl *)v4;
         v9 = v18;
@@ -1386,7 +1386,7 @@ SSLiteralClosure *__fastcall SSParser::parse_closure(SSParser *this, SSParser::A
     return 0i64;
   }
   LODWORD(v47) = 3;
-  closure_method_p.vfptr = (SSExpressionBaseVtbl *)&SSLiteralClosure::`vftable';
+  closure_method_p.vfptr = (SSExpressionBaseVtbl *)&SSLiteralClosure::`vftable;
   v6 = 0i64;
   closure_method_p.i_receiver_p = 0i64;
   closure_method_p.i_info_p.i_obj_p = 0i64;
@@ -1397,8 +1397,8 @@ SSLiteralClosure *__fastcall SSParser::parse_closure(SSParser *this, SSParser::A
   v38.i_scope_p = SSBrain::c_object_class_p;
   v38.i_params_p.i_obj_p = 0i64;
   v38.i_expr_p = 0i64;
-  v35 = &SSClosureInfoMethod::`vftable'{for `SSClosureInfoBase'};
-  v38.vfptr = (SSInvokableBaseVtbl *)&SSClosureInfoMethod::`vftable'{for `SSMethod'};
+  v35 = &SSClosureInfoMethod::`vftable{for `SSClosureInfoBase};
+  v38.vfptr = (SSInvokableBaseVtbl *)&SSClosureInfoMethod::`vftable{for `SSMethod};
   v36 = 1;
   if ( 0i64 != &v35 )
   {
@@ -1613,13 +1613,13 @@ LABEL_62:
   v2->i_result = 82;
 LABEL_71:
   SSParser::parse_closure_::_2_::NestedDtor::_NestedDtor((__int64)&v40);
-  v35 = &SSClosureInfoMethod::`vftable'{for `SSClosureInfoBase'};
-  v38.vfptr = (SSInvokableBaseVtbl *)&SSClosureInfoMethod::`vftable'{for `SSMethod'};
+  v35 = &SSClosureInfoMethod::`vftable{for `SSClosureInfoBase};
+  v38.vfptr = (SSInvokableBaseVtbl *)&SSClosureInfoMethod::`vftable{for `SSMethod};
   SSMethod::~SSMethod(&v38);
-  v35 = &SSClosureInfoBase::`vftable';
+  v35 = &SSClosureInfoBase::`vftable;
   v47 = &captured_p;
   AMemory::c_free_func(captured_p.i_array_p);
-  closure_method_p.vfptr = (SSExpressionBaseVtbl *)&SSLiteralClosure::`vftable';
+  closure_method_p.vfptr = (SSExpressionBaseVtbl *)&SSLiteralClosure::`vftable;
   if ( closure_method_p.i_receiver_p )
     closure_method_p.i_receiver_p->vfptr->__vecDelDtor(closure_method_p.i_receiver_p, 1u);
   v33 = closure_method_p.i_info_p.i_obj_p;
@@ -1745,8 +1745,8 @@ SSCode *__fastcall SSParser::parse_code_block(SSParser *this, SSParser::Args *ar
     v7 = v12;
     if ( v12 )
     {
-      v12->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-      v12->vfptr = (SSExpressionBaseVtbl *)&SSCode::`vftable';
+      v12->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+      v12->vfptr = (SSExpressionBaseVtbl *)&SSCode::`vftable;
       v13 = (signed __int64)&v12->i_temp_vars;
       *(_DWORD *)v13 = 0;
       *(_QWORD *)(v13 + 8) = 0i64;
@@ -1793,7 +1793,7 @@ LABEL_42:
       switch ( v18 )
       {
         case 37:
-          ++`anonymous namespace'::SSParser_old_branch_delimiter;
+          ++`anonymous namespace::SSParser_old_branch_delimiter;
           if ( v7 )
           {
             v19 = v7->i_statements.i_count;
@@ -1811,8 +1811,8 @@ LABEL_42:
             *(_QWORD *)&end_pos_p = v21;
             if ( v21 )
             {
-              v21->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-              v21->vfptr = (SSExpressionBaseVtbl *)&SSConcurrentBranch::`vftable';
+              v21->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+              v21->vfptr = (SSExpressionBaseVtbl *)&SSConcurrentBranch::`vftable;
               v21[1].vfptr = v20;
             }
             APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase>>::append(
@@ -1960,8 +1960,8 @@ SSCode *__fastcall SSParser::parse_code_block_optimized(SSParser *this, SSParser
       v5 = (SSCode *)AMemory::c_malloc_func(0x18ui64, "SSLiteral");
       if ( v5 )
       {
-        v5->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-        v5->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable';
+        v5->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+        v5->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable;
         *(_QWORD *)&v5->i_temp_vars.i_count = 0i64;
         LODWORD(v5->i_temp_vars.i_array_p) = 7;
       }
@@ -2124,7 +2124,7 @@ SSConditional *__fastcall SSParser::parse_conditional_tail(SSParser *this, SSPar
   v5 = this->i_str_ref_p->i_cstr_p;
   v6 = 0i64;
   class_union.i_ref_count = 0;
-  class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable';
+  class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable;
   class_union.i_common_class_p = 0i64;
   class_union.i_union.i_count = 0;
   class_union.i_union.i_array_p = 0i64;
@@ -2145,8 +2145,8 @@ SSConditional *__fastcall SSParser::parse_conditional_tail(SSParser *this, SSPar
   v33 = (void (__fastcall ***)(_QWORD, signed __int64))v9;
   if ( v9 )
   {
-    *v9 = &SSExpressionBase::`vftable';
-    *v9 = &SSConditional::`vftable';
+    *v9 = &SSExpressionBase::`vftable;
+    *v9 = &SSConditional::`vftable;
     v43 = (signed __int64)(v9 + 1);
     *(_DWORD *)v43 = 0;
     *(_QWORD *)(v43 + 8) = 0i64;
@@ -2258,7 +2258,7 @@ LABEL_85:
               v40 = v17;
               if ( v17 )
               {
-                v17->vfptr = (SSClauseVtbl *)&SSClause::`vftable';
+                v17->vfptr = (SSClauseVtbl *)&SSClause::`vftable;
                 v17->i_test_p = v6;
                 v17->i_clause_p = (SSExpressionBase *)&v16->vfptr;
               }
@@ -2381,7 +2381,7 @@ LABEL_59:
   v2->i_end_pos = v32;
   AMemory::c_free_func(sorted.i_array_p);
   AMemory::c_free_func(v21);
-  class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable';
+  class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable;
   if ( v22 )
     v22->vfptr->dereference_delay((SSClassDescBase *)&v22->vfptr);
   v28 = class_union.i_union.i_array_p;
@@ -2393,7 +2393,7 @@ LABEL_59:
     {
       do
       {
-         SSClassDescBase::`vcall'{24,{flat}}(*v29);
+         SSClassDescBase::`vcall{24,{flat}}(*v29);
         ++v29;
       }
       while ( v29 < (__int64 *)v30 );
@@ -2458,10 +2458,10 @@ ASymbol *__fastcall SSParser::parse_data_member(SSParser *this, SSParser::Args *
         v15 = v10;
         if ( v10 )
         {
-          *(_QWORD *)&v10->i_uid = &SSExpressionBase::`vftable';
-          *(_QWORD *)&v10->i_uid = &SSIdentifier::`vftable';
+          *(_QWORD *)&v10->i_uid = &SSExpressionBase::`vftable;
+          *(_QWORD *)&v10->i_uid = &SSIdentifier::`vftable;
           v10[2].i_uid = name_p.i_uid;
-          *(_QWORD *)&v10->i_uid = &SSIdentifierMember::`vftable';
+          *(_QWORD *)&v10->i_uid = &SSIdentifierMember::`vftable;
           *(_QWORD *)&v10[4].i_uid = v3;
           v6 = v10;
         }
@@ -2472,12 +2472,12 @@ ASymbol *__fastcall SSParser::parse_data_member(SSParser *this, SSParser::Args *
         v15 = v11;
         if ( v11 )
         {
-          *(_QWORD *)&v11->i_uid = &SSExpressionBase::`vftable';
-          *(_QWORD *)&v11->i_uid = &SSIdentifier::`vftable';
+          *(_QWORD *)&v11->i_uid = &SSExpressionBase::`vftable;
+          *(_QWORD *)&v11->i_uid = &SSIdentifier::`vftable;
           v11[2].i_uid = name_p.i_uid;
-          *(_QWORD *)&v11->i_uid = &SSIdentifierMember::`vftable';
+          *(_QWORD *)&v11->i_uid = &SSIdentifierMember::`vftable;
           *(_QWORD *)&v11[4].i_uid = v3;
-          *(_QWORD *)&v11->i_uid = &SSIdentifierClassMember::`vftable';
+          *(_QWORD *)&v11->i_uid = &SSIdentifierClassMember::`vftable;
           v6 = v11;
         }
       }
@@ -2571,8 +2571,8 @@ SSLiteralList *__fastcall SSParser::parse_expression(SSParser *this, SSParser::A
             ch_p = v13;
             if ( v13 )
             {
-              v13->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-              v13->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable';
+              v13->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+              v13->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable;
               v13->i_item_exprs.i_count = 4;
               v39 = &v13->i_ctor_p;
               if ( v13 != (SSLiteralList *)-8i64 )
@@ -2637,8 +2637,8 @@ SSLiteralList *__fastcall SSParser::parse_expression(SSParser *this, SSParser::A
             ch_p = v13;
             if ( v13 )
             {
-              v13->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-              v13->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable';
+              v13->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+              v13->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable;
               v13->i_item_exprs.i_count = 5;
               elem = (AStringRef *)&v13->i_ctor_p;
               if ( v13 != (SSLiteralList *)-8i64 )
@@ -2715,8 +2715,8 @@ LABEL_38:
             ch_p = v13;
             if ( v13 )
             {
-              v13->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-              v13->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable';
+              v13->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+              v13->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable;
               v13->i_ctor_p = (SSMethodCall *)v25;
               v13->i_item_exprs.i_count = 1;
             }
@@ -2983,8 +2983,8 @@ LABEL_125:
             *(_QWORD *)&op_name.i_uid = v19;
             if ( v19 )
             {
-              v19->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-              v19->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable';
+              v19->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+              v19->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable;
               *(_QWORD *)&v19->i_name.i_uid = v18;
               LODWORD(v19->i_class_p) = 6;
               v6 = v19;
@@ -3145,8 +3145,8 @@ LABEL_121:
                 *(_QWORD *)&result.i_uid = v43;
                 if ( v43 )
                 {
-                  v43->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-                  v43->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable';
+                  v43->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+                  v43->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable;
                   *(_QWORD *)&v43->i_name.i_uid = 0i64;
                   LODWORD(v43->i_class_p) = 0;
                   v6 = v43;
@@ -3181,8 +3181,8 @@ LABEL_121:
                 *(_QWORD *)&result.i_uid = v44;
                 if ( v44 )
                 {
-                  v44->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-                  v44->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable';
+                  v44->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+                  v44->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable;
                   *(_QWORD *)&v44->i_name.i_uid = 0i64;
                   LODWORD(v44->i_class_p) = 8;
                   v6 = v44;
@@ -3197,8 +3197,8 @@ LABEL_121:
                 *(_QWORD *)&result.i_uid = v45;
                 if ( v45 )
                 {
-                  v45->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-                  v45->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable';
+                  v45->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+                  v45->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable;
                   *(_QWORD *)&v45->i_name.i_uid = 0i64;
                   LODWORD(v45->i_class_p) = 9;
                   v6 = v45;
@@ -3215,8 +3215,8 @@ LABEL_121:
                 *(_QWORD *)&result.i_uid = v46;
                 if ( v46 )
                 {
-                  v46->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-                  v46->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable';
+                  v46->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+                  v46->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable;
                   *(_QWORD *)&v46->i_name.i_uid = 0i64;
                   LODWORD(v46->i_class_p) = 10;
                   v6 = v46;
@@ -3243,8 +3243,8 @@ LABEL_121:
                 *(_QWORD *)&result.i_uid = v41;
                 if ( v41 )
                 {
-                  v41->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-                  v41->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable';
+                  v41->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+                  v41->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable;
                   *(_QWORD *)&v41->i_name.i_uid = 1i64;
                   LODWORD(v41->i_class_p) = 0;
                   v6 = v41;
@@ -3259,8 +3259,8 @@ LABEL_121:
                 *(_QWORD *)&result.i_uid = v49;
                 if ( v49 )
                 {
-                  v49->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-                  v49->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable';
+                  v49->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+                  v49->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable;
                   *(_QWORD *)&v49->i_name.i_uid = 0i64;
                   LODWORD(v49->i_class_p) = 7;
                   v6 = v49;
@@ -3301,8 +3301,8 @@ LABEL_106:
             *(_QWORD *)&result.i_uid = v53;
             if ( v53 )
             {
-              *(_QWORD *)&v53->i_uid = &SSExpressionBase::`vftable';
-              *(_QWORD *)&v53->i_uid = &SSIdentifier::`vftable';
+              *(_QWORD *)&v53->i_uid = &SSExpressionBase::`vftable;
+              *(_QWORD *)&v53->i_uid = &SSIdentifier::`vftable;
               v53[2].i_uid = op_name.i_uid;
               v6 = (SSObjectId *)v53;
             }
@@ -3314,10 +3314,10 @@ LABEL_106:
           *(_QWORD *)&result.i_uid = v54;
           if ( v54 )
           {
-            *(_QWORD *)&v54->i_uid = &SSExpressionBase::`vftable';
-            *(_QWORD *)&v54->i_uid = &SSIdentifier::`vftable';
+            *(_QWORD *)&v54->i_uid = &SSExpressionBase::`vftable;
+            *(_QWORD *)&v54->i_uid = &SSIdentifier::`vftable;
             v54[2].i_uid = op_name.i_uid;
-            *(_QWORD *)&v54->i_uid = &SSIdentifierMember::`vftable';
+            *(_QWORD *)&v54->i_uid = &SSIdentifierMember::`vftable;
             *(_QWORD *)&v54[4].i_uid = 0i64;
             v6 = (SSObjectId *)v54;
           }
@@ -3329,12 +3329,12 @@ LABEL_106:
         *(_QWORD *)&result.i_uid = v55;
         if ( v55 )
         {
-          *(_QWORD *)&v55->i_uid = &SSExpressionBase::`vftable';
-          *(_QWORD *)&v55->i_uid = &SSIdentifier::`vftable';
+          *(_QWORD *)&v55->i_uid = &SSExpressionBase::`vftable;
+          *(_QWORD *)&v55->i_uid = &SSIdentifier::`vftable;
           v55[2].i_uid = op_name.i_uid;
-          *(_QWORD *)&v55->i_uid = &SSIdentifierMember::`vftable';
+          *(_QWORD *)&v55->i_uid = &SSIdentifierMember::`vftable;
           *(_QWORD *)&v55[4].i_uid = 0i64;
-          *(_QWORD *)&v55->i_uid = &SSIdentifierClassMember::`vftable';
+          *(_QWORD *)&v55->i_uid = &SSIdentifierClassMember::`vftable;
           v6 = (SSObjectId *)v55;
         }
       }
@@ -3408,8 +3408,8 @@ SSLiteralList *__fastcall SSParser::parse_instantiate_or_list(SSParser *this, SS
       if ( v9 )
       {
         v10 = (__int64)v6->vfptr->get_key_class((SSClassDescBase *)&v6->vfptr);
-        v9->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-        v9->vfptr = (SSExpressionBaseVtbl *)&SSInstantiate::`vftable';
+        v9->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+        v9->vfptr = (SSExpressionBaseVtbl *)&SSInstantiate::`vftable;
         v9[1].vfptr = (SSExpressionBaseVtbl *)v10;
         v9[2].vfptr = (SSExpressionBaseVtbl *)ctor_p;
         v4 = v9;
@@ -3637,8 +3637,8 @@ LABEL_43:
       v29 = (SSExpressionBase *)AMemory::c_malloc_func(0x18ui64, "SSInvocation");
       if ( v29 )
       {
-        v29->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-        v29->vfptr = (SSExpressionBaseVtbl *)&SSInvocation::`vftable';
+        v29->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+        v29->vfptr = (SSExpressionBaseVtbl *)&SSInvocation::`vftable;
         v29[1].vfptr = (SSExpressionBaseVtbl *)v16;
         v29[2].vfptr = (SSExpressionBaseVtbl *)v33;
         v16 = v29;
@@ -4175,8 +4175,8 @@ LABEL_67:
       *(_QWORD *)v57 = v14;
       if ( v14 )
       {
-        *(_QWORD *)&v14->i_count = &SSExpressionBase::`vftable';
-        *(_QWORD *)&v14->i_count = &SSLiteralList::`vftable';
+        *(_QWORD *)&v14->i_count = &SSExpressionBase::`vftable;
+        *(_QWORD *)&v14->i_count = &SSLiteralList::`vftable;
         v14->i_array_p = 0i64;
         v14[1].i_count = 0;
         v14[1].i_array_p = 0i64;
@@ -4595,11 +4595,11 @@ LABEL_21:
       v20 = AMemory::c_malloc_func(0x18ui64, "SSInvokeSync");
       if ( v20 )
       {
-        *v20 = &SSExpressionBase::`vftable';
-        *v20 = &SSInvocation::`vftable';
+        *v20 = &SSExpressionBase::`vftable;
+        *v20 = &SSInvocation::`vftable;
         v20[1] = v3;
         v20[2] = v18;
-        *v20 = &SSInvokeSync::`vftable';
+        *v20 = &SSInvokeSync::`vftable;
         v9 = v20;
       }
     }
@@ -4714,11 +4714,11 @@ LABEL_21:
       v19 = AMemory::c_malloc_func(0x18ui64, "SSInvokeRace");
       if ( v19 )
       {
-        *v19 = &SSExpressionBase::`vftable';
-        *v19 = &SSInvocation::`vftable';
+        *v19 = &SSExpressionBase::`vftable;
+        *v19 = &SSInvocation::`vftable;
         v19[1] = v3;
         v19[2] = v17;
-        *v19 = &SSInvokeRace::`vftable';
+        *v19 = &SSInvokeRace::`vftable;
         v9 = v19;
       }
     }
@@ -4776,8 +4776,8 @@ SSInvokeCascade *__fastcall SSParser::parse_invoke_cascade(SSParser *this, SSPar
         *(_QWORD *)&end_pos_p = v11;
         if ( v11 )
         {
-          v11->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-          v11->vfptr = (SSExpressionBaseVtbl *)&SSInvokeCascade::`vftable';
+          v11->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+          v11->vfptr = (SSExpressionBaseVtbl *)&SSInvokeCascade::`vftable;
           v11->i_receiver_p = v3;
           v13 = (signed __int64)&v11->i_invoke_calls;
           v19 = v13;
@@ -4909,8 +4909,8 @@ APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBas
         v11 = (APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase> > *)AMemory::c_malloc_func(0x30ui64, "SSInvokeClosureMethod");
         if ( v11 )
         {
-          *(_QWORD *)&v11->i_count = &SSExpressionBase::`vftable';
-          *(_QWORD *)&v11->i_count = &SSInvokeClosureBase::`vftable';
+          *(_QWORD *)&v11->i_count = &SSExpressionBase::`vftable;
+          *(_QWORD *)&v11->i_count = &SSInvokeClosureBase::`vftable;
           v11->i_array_p = (SSExpressionBase **)v3;
           v11[1] = args_p;
           args_p.i_count = 0;
@@ -4918,7 +4918,7 @@ APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBas
           v11[2] = (APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase> >)ret_args_p;
           ret_args_p.i_count = 0;
           ret_args_p.i_array_p = 0i64;
-          *(_QWORD *)&v11->i_count = &SSInvokeClosureMethod::`vftable';
+          *(_QWORD *)&v11->i_count = &SSInvokeClosureMethod::`vftable;
           v7 = v11;
         }
       }
@@ -4927,8 +4927,8 @@ APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBas
         v12 = (APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase> > *)AMemory::c_malloc_func(0x30ui64, "SSInvokeClosureCoroutine");
         if ( v12 )
         {
-          *(_QWORD *)&v12->i_count = &SSExpressionBase::`vftable';
-          *(_QWORD *)&v12->i_count = &SSInvokeClosureBase::`vftable';
+          *(_QWORD *)&v12->i_count = &SSExpressionBase::`vftable;
+          *(_QWORD *)&v12->i_count = &SSInvokeClosureBase::`vftable;
           v12->i_array_p = (SSExpressionBase **)v3;
           v12[1] = args_p;
           args_p.i_count = 0;
@@ -4936,7 +4936,7 @@ APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBas
           v12[2] = (APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase> >)ret_args_p;
           ret_args_p.i_count = 0;
           ret_args_p.i_array_p = 0i64;
-          *(_QWORD *)&v12->i_count = &SSInvokeClosureCoroutine::`vftable';
+          *(_QWORD *)&v12->i_count = &SSInvokeClosureCoroutine::`vftable;
           v7 = v12;
         }
       }
@@ -5028,12 +5028,12 @@ LABEL_31:
         {
           *((_DWORD *)v11 + 2) = v17;
           v11[2] = 0i64;
-          *v11 = (void (__fastcall **)(_QWORD, signed __int64))&SSInvokeBase::`vftable';
+          *v11 = (void (__fastcall **)(_QWORD, signed __int64))&SSInvokeBase::`vftable;
           *((_DWORD *)v11 + 6) = 0;
           v11[4] = 0i64;
           *((_DWORD *)v11 + 10) = 0;
           v11[6] = 0i64;
-          *v11 = (void (__fastcall **)(_QWORD, signed __int64))&SSMethodCall::`vftable';
+          *v11 = (void (__fastcall **)(_QWORD, signed __int64))&SSMethodCall::`vftable;
         }
         else
         {
@@ -5177,12 +5177,12 @@ LABEL_32:
       {
         *((_DWORD *)v20 + 2) = v27;
         v20[2] = (void (__fastcall **)(_QWORD, signed __int64))v6;
-        *v20 = (void (__fastcall **)(_QWORD, signed __int64))&SSInvokeBase::`vftable';
+        *v20 = (void (__fastcall **)(_QWORD, signed __int64))&SSInvokeBase::`vftable;
         *((_DWORD *)v20 + 6) = 0;
         v20[4] = 0i64;
         *((_DWORD *)v20 + 10) = 0;
         v20[6] = 0i64;
-        *v20 = (void (__fastcall **)(_QWORD, signed __int64))&SSMethodCall::`vftable';
+        *v20 = (void (__fastcall **)(_QWORD, signed __int64))&SSMethodCall::`vftable;
       }
       else
       {
@@ -5599,12 +5599,12 @@ LABEL_95:
           {
             v26[2] = v31;
             *((_QWORD *)v26 + 2) = 0i64;
-            *(_QWORD *)v26 = &SSInvokeBase::`vftable';
+            *(_QWORD *)v26 = &SSInvokeBase::`vftable;
             v26[6] = 0;
             *((_QWORD *)v26 + 4) = 0i64;
             v26[10] = 0;
             *((_QWORD *)v26 + 6) = 0i64;
-            *(_QWORD *)v26 = &SSMethodCall::`vftable';
+            *(_QWORD *)v26 = &SSMethodCall::`vftable;
             v5 = v26;
           }
           if ( v21 )
@@ -5712,12 +5712,12 @@ LABEL_24:
       {
         *((_DWORD *)v18 + 2) = v26;
         v18[2] = (void (__fastcall **)(_QWORD, signed __int64))v6;
-        *v18 = (void (__fastcall **)(_QWORD, signed __int64))&SSInvokeBase::`vftable';
+        *v18 = (void (__fastcall **)(_QWORD, signed __int64))&SSInvokeBase::`vftable;
         *((_DWORD *)v18 + 6) = 0;
         v18[4] = 0i64;
         *((_DWORD *)v18 + 10) = 0;
         v18[6] = 0i64;
-        *v18 = (void (__fastcall **)(_QWORD, signed __int64))&SSCoroutineCall::`vftable';
+        *v18 = (void (__fastcall **)(_QWORD, signed __int64))&SSCoroutineCall::`vftable;
       }
       else
       {
@@ -6172,7 +6172,7 @@ LABEL_14:
         else
         {
           class_union.i_ref_count = 0;
-          class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable';
+          class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable;
           class_union.i_common_class_p = 0i64;
           class_union.i_union.i_count = 0;
           class_union.i_union.i_array_p = 0i64;
@@ -6186,8 +6186,8 @@ LABEL_14:
             v9 = (SSLiteralList *)AMemory::c_malloc_func(0x20ui64, "SSLiteralList");
             if ( v9 )
             {
-              v9->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-              v9->vfptr = (SSExpressionBaseVtbl *)&SSLiteralList::`vftable';
+              v9->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+              v9->vfptr = (SSExpressionBaseVtbl *)&SSLiteralList::`vftable;
               v9->i_ctor_p = v17;
               v9->i_item_exprs.i_count = 0;
               v9->i_item_exprs.i_array_p = 0i64;
@@ -6365,8 +6365,8 @@ SSLiteral *__fastcall SSParser::parse_literal_number(SSParser *this, SSParser::A
         if ( v5 )
         {
           LODWORD(v16) = (_DWORD)v12;
-          *v5 = &SSExpressionBase::`vftable';
-          *v5 = &SSLiteral::`vftable';
+          *v5 = &SSExpressionBase::`vftable;
+          *v5 = &SSLiteral::`vftable;
           v5[1] = v16;
           *((_DWORD *)v5 + 4) = 2;
         }
@@ -6389,8 +6389,8 @@ SSLiteral *__fastcall SSParser::parse_literal_number(SSParser *this, SSParser::A
       if ( v5 )
       {
         end_pos_p = v17;
-        *v5 = &SSExpressionBase::`vftable';
-        *v5 = &SSLiteral::`vftable';
+        *v5 = &SSExpressionBase::`vftable;
+        *v5 = &SSLiteral::`vftable;
         v5[1] = *(_QWORD *)&end_pos_p;
         *((_DWORD *)v5 + 4) = 3;
       }
@@ -6957,8 +6957,8 @@ SSLoopExit *__fastcall SSParser::parse_loop_exit(SSParser *this, SSParser::Args 
         v11 = (SSLoopExit *)AMemory::c_malloc_func(0x10ui64, "SSLoopExit");
         if ( v11 )
         {
-          v11->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-          v11->vfptr = (SSExpressionBaseVtbl *)&SSLoopExit::`vftable';
+          v11->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+          v11->vfptr = (SSExpressionBaseVtbl *)&SSLoopExit::`vftable;
           v11->i_name.i_uid = v14;
           v7 = v11;
         }
@@ -7042,8 +7042,8 @@ LABEL_18:
         *(_QWORD *)&start_pos = v10;
         if ( v10 )
         {
-          v10->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-          v10->vfptr = (SSExpressionBaseVtbl *)&SSLoop::`vftable';
+          v10->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+          v10->vfptr = (SSExpressionBaseVtbl *)&SSLoop::`vftable;
           v10->i_name.i_uid = v14;
           v10->i_expr_p = (SSExpressionBase *)&v9->vfptr;
           v7 = v10;
@@ -7396,7 +7396,7 @@ __int64 __fastcall SSParser::parse_parameter(SSParser *this, unsigned int start_
     if ( v8[start_pos] == 123 )
     {
       gparam_p.i_name = (ASymbol)ASymbol::get_null()->i_uid;
-      gparam_p.vfptr = (SSParameterBaseVtbl *)&SSGroupParam::`vftable';
+      gparam_p.vfptr = (SSParameterBaseVtbl *)&SSGroupParam::`vftable;
       v9 = 0;
       gparam_p.i_class_pattern.i_count = 0;
       gparam_p.i_class_pattern.i_array_p = 0i64;
@@ -7415,8 +7415,8 @@ __int64 __fastcall SSParser::parse_parameter(SSParser *this, unsigned int start_
         if ( v11 )
         {
           v11->i_name.i_uid = gparam_p.i_name.i_uid;
-          v11->vfptr = (SSParameterBaseVtbl *)&SSParameterBase::`vftable';
-          v11->vfptr = (SSParameterBaseVtbl *)&SSGroupParam::`vftable';
+          v11->vfptr = (SSParameterBaseVtbl *)&SSParameterBase::`vftable;
+          v11->vfptr = (SSParameterBaseVtbl *)&SSGroupParam::`vftable;
           LODWORD(v11->i_type_p.i_obj_p) = gparam_p.i_class_pattern.i_count;
           v11->i_default_p = (SSExpressionBase *)gparam_p.i_class_pattern.i_array_p;
           LODWORD(v11[1].vfptr) = gparam_p.i_class_pattern.i_size;
@@ -7433,7 +7433,7 @@ __int64 __fastcall SSParser::parse_parameter(SSParser *this, unsigned int start_
         }
         *v4 = v12;
       }
-      gparam_p.vfptr = (SSParameterBaseVtbl *)&SSGroupParam::`vftable';
+      gparam_p.vfptr = (SSParameterBaseVtbl *)&SSGroupParam::`vftable;
       if ( v9 )
       {
         v14 = (__int64 *)v13;
@@ -7442,19 +7442,19 @@ __int64 __fastcall SSParser::parse_parameter(SSParser *this, unsigned int start_
         {
           do
           {
-             SSClassDescBase::`vcall'{16,{flat}}(*v14);
+             SSClassDescBase::`vcall{16,{flat}}(*v14);
             ++v14;
           }
           while ( (unsigned __int64)v14 < v15 );
         }
       }
       AMemory::c_free_func(v13);
-      gparam_p.vfptr = (SSParameterBaseVtbl *)&SSParameterBase::`vftable';
+      gparam_p.vfptr = (SSParameterBaseVtbl *)&SSParameterBase::`vftable;
     }
     else
     {
       gparam_p.i_name = (ASymbol)ASymbol::get_null()->i_uid;
-      gparam_p.vfptr = (SSParameterBaseVtbl *)&SSUnaryParam::`vftable';
+      gparam_p.vfptr = (SSParameterBaseVtbl *)&SSUnaryParam::`vftable;
       *(_QWORD *)&gparam_p.i_class_pattern.i_count = SSBrain::c_object_class_p;
       if ( SSBrain::c_object_class_p )
         (*(void (__cdecl **)(SSClass *, __int64, __int64))SSBrain::c_object_class_p->vfptr->gap8)(
@@ -7475,7 +7475,7 @@ __int64 __fastcall SSParser::parse_parameter(SSParser *this, unsigned int start_
         }
         *v4 = v18;
       }
-      gparam_p.vfptr = (SSParameterBaseVtbl *)&SSUnaryParam::`vftable';
+      gparam_p.vfptr = (SSParameterBaseVtbl *)&SSUnaryParam::`vftable;
       if ( gparam_p.i_class_pattern.i_array_p )
         (**(void (__fastcall ***)(SSClassDescBase **, signed __int64))gparam_p.i_class_pattern.i_array_p)(
           gparam_p.i_class_pattern.i_array_p,
@@ -7485,7 +7485,7 @@ __int64 __fastcall SSParser::parse_parameter(SSParser *this, unsigned int start_
           *(_QWORD *)&gparam_p.i_class_pattern.i_count,
           v19,
           v20);
-      gparam_p.vfptr = (SSParameterBaseVtbl *)&SSParameterBase::`vftable';
+      gparam_p.vfptr = (SSParameterBaseVtbl *)&SSParameterBase::`vftable;
     }
   }
   else
@@ -8352,8 +8352,8 @@ LABEL_6:
         type_pp = v15;
         if ( v15 )
         {
-          v15->vfptr = (SSClassDescBaseVtbl *)&SSExpressionBase::`vftable';
-          v15->vfptr = (SSClassDescBaseVtbl *)&SSLiteral::`vftable';
+          v15->vfptr = (SSClassDescBaseVtbl *)&SSExpressionBase::`vftable;
+          v15->vfptr = (SSClassDescBaseVtbl *)&SSLiteral::`vftable;
           v15[1].vfptr = 0i64;
           LODWORD(v15[2].vfptr) = 7;
           v7 = (SSExpressionBase *)v15;
@@ -8418,7 +8418,7 @@ __int64 __fastcall SSParser::preparse_parameter(SSParser *this, unsigned int sta
   v6 = start_pos;
   v7 = this;
   uparam_p.i_name = (ASymbol)ASymbol::get_null()->i_uid;
-  uparam_p.vfptr = (SSParameterBaseVtbl *)&SSUnaryParam::`vftable';
+  uparam_p.vfptr = (SSParameterBaseVtbl *)&SSUnaryParam::`vftable;
   uparam_p.i_type_p.i_obj_p = (SSClassDescBase *)&SSBrain::c_object_class_p->vfptr;
   if ( SSBrain::c_object_class_p )
     (*(void (__cdecl **)(SSClass *, __int64, __int64))SSBrain::c_object_class_p->vfptr->gap8)(
@@ -8442,7 +8442,7 @@ __int64 __fastcall SSParser::preparse_parameter(SSParser *this, unsigned int sta
   if ( end_pos_pa == v6 )
   {
     gparam_p.i_name = (ASymbol)ASymbol::get_null()->i_uid;
-    gparam_p.vfptr = (SSParameterBaseVtbl *)&SSGroupParam::`vftable';
+    gparam_p.vfptr = (SSParameterBaseVtbl *)&SSGroupParam::`vftable;
     gparam_p.i_class_pattern.i_count = 0;
     gparam_p.i_class_pattern.i_array_p = 0i64;
     gparam_p.i_class_pattern.i_size = 0;
@@ -8460,8 +8460,8 @@ __int64 __fastcall SSParser::preparse_parameter(SSParser *this, unsigned int sta
       if ( v17 )
       {
         v17->i_name.i_uid = gparam_p.i_name.i_uid;
-        v17->vfptr = (SSParameterBaseVtbl *)&SSParameterBase::`vftable';
-        v17->vfptr = (SSParameterBaseVtbl *)&SSGroupParam::`vftable';
+        v17->vfptr = (SSParameterBaseVtbl *)&SSParameterBase::`vftable;
+        v17->vfptr = (SSParameterBaseVtbl *)&SSGroupParam::`vftable;
         LODWORD(v17->i_type_p.i_obj_p) = gparam_p.i_class_pattern.i_count;
         v17->i_default_p = (SSExpressionBase *)gparam_p.i_class_pattern.i_array_p;
         LODWORD(v17[1].vfptr) = gparam_p.i_class_pattern.i_size;
@@ -8478,7 +8478,7 @@ __int64 __fastcall SSParser::preparse_parameter(SSParser *this, unsigned int sta
       }
       *v4 = v18;
     }
-    gparam_p.vfptr = (SSParameterBaseVtbl *)&SSGroupParam::`vftable';
+    gparam_p.vfptr = (SSParameterBaseVtbl *)&SSGroupParam::`vftable;
     if ( v10 )
     {
       v20 = (__int64 *)v19;
@@ -8487,19 +8487,19 @@ __int64 __fastcall SSParser::preparse_parameter(SSParser *this, unsigned int sta
       {
         do
         {
-           SSClassDescBase::`vcall'{16,{flat}}(*v20);
+           SSClassDescBase::`vcall{16,{flat}}(*v20);
           ++v20;
         }
         while ( (unsigned __int64)v20 < v21 );
       }
     }
     AMemory::c_free_func(v19);
-    gparam_p.vfptr = (SSParameterBaseVtbl *)&SSParameterBase::`vftable';
+    gparam_p.vfptr = (SSParameterBaseVtbl *)&SSParameterBase::`vftable;
     v16 = end_pos_pa;
   }
   if ( v5 )
     *v5 = v16;
-  uparam_p.vfptr = (SSParameterBaseVtbl *)&SSUnaryParam::`vftable';
+  uparam_p.vfptr = (SSParameterBaseVtbl *)&SSUnaryParam::`vftable;
   if ( uparam_p.i_default_p )
     uparam_p.i_default_p->vfptr->__vecDelDtor(uparam_p.i_default_p, 1u);
   if ( uparam_p.i_type_p.i_obj_p )
@@ -8837,16 +8837,16 @@ AString *__fastcall SSParser::get_result_string(AString *result, SSParser::eResu
       v3 = "Expected a digit or letter [depending on the radix/base] but did not receive one.";
       break;
     case 10:
-      v3 = "A binding must begin with a colon ':'.";
+      v3 = "A binding must begin with a colon :.";
       break;
     case 11:
       v3 = "Expected a code block [ ], but did not find one.";
       break;
     case 12:
-      v3 = "Expected the class cast operator '<>', but it was not found.";
+      v3 = "Expected the class cast operator <>, but it was not found.";
       break;
     case 13:
-      v3 = "A character escape sequence must begin with a backslash character '\\'.";
+      v3 = "A character escape sequence must begin with a backslash character \\.";
       break;
     case 14:
       v3 = "A character escape sequence that uses a number must have ASCII value between 0 and 255.";
@@ -8858,41 +8858,41 @@ AString *__fastcall SSParser::get_result_string(AString *result, SSParser::eResu
       v3 = "Expected class, list-class, invoke class, metaclass or class union and did not find one.";
       break;
     case 17:
-      v3 = "A List class descriptor must follow the list class type with braces/curly brackets '{}' optionally enclosed a"
+      v3 = "A List class descriptor must follow the list class type with braces/curly brackets {} optionally enclosed a"
            "round an item type.";
       break;
     case 18:
-      v3 = "A List class descriptor must end with a closing brace/curly bracket '}'.";
+      v3 = "A List class descriptor must end with a closing brace/curly bracket }.";
       break;
     case 19:
       v3 = "Expected a class, list-class or invoke class and did not find one.";
       break;
     case 20:
-      v3 = "A metaclass descriptor must begin with an angle bracket '<'.";
+      v3 = "A metaclass descriptor must begin with an angle bracket <.";
       break;
     case 21:
-      v3 = "A metaclass descriptor must end with a closing angle bracket '>'.";
+      v3 = "A metaclass descriptor must end with a closing angle bracket >.";
       break;
     case 22:
-      v3 = "A class union descriptor must begin with an opening angle bracket '<'.";
+      v3 = "A class union descriptor must begin with an opening angle bracket <.";
       break;
     case 23:
-      v3 = "A class union descriptor must end with a closing angle bracket '>'.";
+      v3 = "A class union descriptor must end with a closing angle bracket >.";
       break;
     case 24:
       v3 = "Expected a clause code block [ ], but did not receive one.";
       break;
     case 25:
-      v3 = "A code block must start with an opening square bracket '['.";
+      v3 = "A code block must start with an opening square bracket [.";
       break;
     case 26:
-      v3 = "Multiple line comment missing closing delimiters '*//' .";
+      v3 = "Multiple line comment missing closing delimiters *// .";
       break;
     case 27:
-      v3 = "Expected the class conversion operator '>>', but it was not found.";
+      v3 = "Expected the class conversion operator >>, but it was not found.";
       break;
     case 28:
-      v3 = "A data definition statement must start with an exclamation mark '!'.";
+      v3 = "A data definition statement must start with an exclamation mark !.";
       break;
     case 29:
       v3 = "Expected a digit, but did not receive one.";
@@ -8901,35 +8901,35 @@ AString *__fastcall SSParser::get_result_string(AString *result, SSParser::eResu
       v3 = "Expected an expression, but did not find one.";
       break;
     case 31:
-      v3 = "A group parameter specification must begin with an opening brace '{'.";
+      v3 = "A group parameter specification must begin with an opening brace {.";
       break;
     case 32:
       v3 = "Instance name must begin with a lowercase letter.";
       break;
     case 33:
-      v3 = "Expected a negative sign '-' or a digit, but received neither.";
+      v3 = "Expected a negative sign - or a digit, but received neither.";
       break;
     case 34:
-      v3 = "An invocation apply must begin with a percent sign '%' character.";
+      v3 = "An invocation apply must begin with a percent sign % character.";
       break;
     case 35:
-      v3 = "An invocation argument list must begin with an opening parenthesis (bracket) '('.\n[Missing a period?]";
+      v3 = "An invocation argument list must begin with an opening parenthesis (bracket) (.\n[Missing a period?]";
       break;
     case 36:
-      v3 = "An argument in an invocation argument list must be followed by a comma ',' argument delimiter, semi-colon ';'"
-           " return argument delimiter or an ending parenthesis (bracket) ')'.";
+      v3 = "An argument in an invocation argument list must be followed by a comma , argument delimiter, semi-colon ;"
+           " return argument delimiter or an ending parenthesis (bracket) ).";
       break;
     case 37:
-      v3 = "An invocation return argument list must begin with an opening brace '{'.";
+      v3 = "An invocation return argument list must begin with an opening brace {.";
       break;
     case 38:
-      v3 = "Expected cascaded invocations - i.e. a receiver followed by '.' then '[' then two or more invocations and end"
-           "ing in ']' and did not find any.";
+      v3 = "Expected cascaded invocations - i.e. a receiver followed by . then [ then two or more invocations and end"
+           "ing in ] and did not find any.";
       break;
     case 39:
-      v3 = "Expected cascaded invocations - i.e. a receiver followed '.' then '[' then two or more invocations and ending"
-           " in ']' and only found one invocation.\n"
-           "[If only one invocation is desired, then just use '.' - i.e. receiver.invoke()].\n";
+      v3 = "Expected cascaded invocations - i.e. a receiver followed . then [ then two or more invocations and ending"
+           " in ] and only found one invocation.\n"
+           "[If only one invocation is desired, then just use . - i.e. receiver.invoke()].\n";
       break;
     case 40:
       v3 = "Expected an invocation selector - i.e. a method call or coroutine call,\nbut found neither.";
@@ -8939,39 +8939,39 @@ AString *__fastcall SSParser::get_result_string(AString *result, SSParser::eResu
            "or coroutine call, but found neither.";
       break;
     case 42:
-      v3 = "A character literal must begin with an accent [`] character - the one beneath the tilde '~'.";
+      v3 = "A character literal must begin with an accent [`] character - the one beneath the tilde ~.";
       break;
     case 43:
-      v3 = "Expected a List literal opening brace/curly bracket '{', but did not receive one.";
+      v3 = "Expected a List literal opening brace/curly bracket {, but did not receive one.";
       break;
     case 44:
-      v3 = "An item delimiter ',' or a closing brace/curly bracket '}' was expected while parsing a List literal, but did"
+      v3 = "An item delimiter , or a closing brace/curly bracket } was expected while parsing a List literal, but did"
            " not receive either.";
       break;
     case 45:
       v3 = "A string literal must begin with a double quote [\"]";
       break;
     case 46:
-      v3 = "A symbol literal must begin with a single quote ['].";
+      v3 = "A symbol literal must begin with a single quote [].";
       break;
     case 47:
-      v3 = "A symbol literal must end with a single quote ['].";
+      v3 = "A symbol literal must end with a single quote [].";
       break;
     case 48:
       v3 = "Expected a loop code block [ ], but did not receive one.";
       break;
     case 49:
-      v3 = "A loop exit must begin with 'exit'.";
+      v3 = "A loop exit must begin with exit.";
       break;
     case 50:
       v3 = "Expected a class meta key name (demand_load or object_id_lookup).";
       break;
     case 52:
-      v3 = "A constructor method name must begin with an exclamation mark '!' and be optionally followed by an identifier"
+      v3 = "A constructor method name must begin with an exclamation mark ! and be optionally followed by an identifier"
            " starting with a lowercase letter.";
       break;
     case 53:
-      v3 = "A method name must begin with a lowercase letter or an exclamation mark '!'";
+      v3 = "A method name must begin with a lowercase letter or an exclamation mark !";
       break;
     case 54:
       v3 = "Expected a named argument specifier (arg_name#) and did not find one.";
@@ -8980,47 +8980,47 @@ AString *__fastcall SSParser::get_result_string(AString *result, SSParser::eResu
       v3 = "Expected an operator method call, but did not find one.";
       break;
     case 56:
-      v3 = "Expected an operator id, but did not find the '@' or '@?' symbols.";
+      v3 = "Expected an operator id, but did not find the @ or @? symbols.";
       break;
     case 57:
-      v3 = "A parameter list must start with an opening parenthesis (bracket) '('.";
+      v3 = "A parameter list must start with an opening parenthesis (bracket) (.";
       break;
     case 58:
       v3 = "Argument descriptors must be named and no name was found.";
       break;
     case 59:
-      v3 = "Expected a 'race' code block [ ], but did not find one.";
+      v3 = "Expected a race code block [ ], but did not find one.";
       break;
     case 60:
-      v3 = "While parsing a real number, expected a fractional part ('.' digit {digit}),\n"
-           "an exponent part ('E' | 'e' ['-'] digits), or both, but received neither.";
+      v3 = "While parsing a real number, expected a fractional part (. digit {digit}),\n"
+           "an exponent part (E | e [-] digits), or both, but received neither.";
       break;
     case 61:
-      v3 = "A script name must begin with an underscore '_' and then a lowercase letter.";
+      v3 = "A script name must begin with an underscore _ and then a lowercase letter.";
       break;
     case 62:
       v3 = "Expected a scope resolution operator to follow the given class scope.";
       break;
     case 63:
-      v3 = "String literal missing closing double quotation mark '\"'.";
+      v3 = "String literal missing closing double quotation mark \".";
       break;
     case 64:
-      v3 = "A strategy name must begin with a dollar sign '$' and then a lowercase letter.";
+      v3 = "A strategy name must begin with a dollar sign $ and then a lowercase letter.";
       break;
     case 65:
-      v3 = "String literal missing closing quotation mark (').";
+      v3 = "String literal missing closing quotation mark ().";
       break;
     case 66:
-      v3 = "A create temporary variable statement must start with an exclamation mark '!'.";
+      v3 = "A create temporary variable statement must start with an exclamation mark !.";
       break;
     case 67:
-      v3 = "Expected a 'sync' code block [ ], but did not find one.";
+      v3 = "Expected a sync code block [ ], but did not find one.";
       break;
     case 68:
       v3 = "Whitespace required - expected some combination of whitespace characters and/or comments.";
       break;
     case 69:
-      v3 = "Invocation expected ',' ')' or an expression.";
+      v3 = "Invocation expected , ) or an expression.";
       break;
     case 70:
       v3 = "A variable rebind to an instance may only be applied to an identifier.";
@@ -9030,19 +9030,19 @@ AString *__fastcall SSParser::get_result_string(AString *result, SSParser::eResu
            "and may take more than one frame to execute such as a coroutine call.";
       break;
     case 72:
-      v3 = "While parsing for a 'create temporary variable statement', a constructor or a destructor call was found instead.";
+      v3 = "While parsing for a create temporary variable statement, a constructor or a destructor call was found instead.";
       break;
     case 73:
       v3 = "Expected a particular character or type of character, but did not receive it.";
       break;
     case 74:
-      v3 = "The metaclass '<Object>' should be used instead of the class instance 'Class'.";
+      v3 = "The metaclass <Object> should be used instead of the class instance Class.";
       break;
     case 75:
-      v3 = "Group parameter descriptor expected a class name or '}', but neither were found.";
+      v3 = "Group parameter descriptor expected a class name or }, but neither were found.";
       break;
     case 76:
-      v3 = "Found a trailing concurrency delimiter ',' at the end of a code block.\n"
+      v3 = "Found a trailing concurrency delimiter , at the end of a code block.\n"
            "A concurrency delimiter is valid only when it is between two statements.";
       break;
     case 79:
@@ -9053,7 +9053,7 @@ AString *__fastcall SSParser::get_result_string(AString *result, SSParser::eResu
       v3 = "An else / default clause may not be the sole clause - there must be at least one more prior to it.";
       break;
     case 81:
-      v3 = "Found an 'else' without a matching 'if' or 'case'.";
+      v3 = "Found an else without a matching if or case.";
       break;
     case 82:
       v3 = "Hit end of file prior to the completion of a parse.\n[Mismatched brackets [] {} ()?]";
@@ -9062,25 +9062,25 @@ AString *__fastcall SSParser::get_result_string(AString *result, SSParser::eResu
       v3 = "Found a loop exit in an invalid location.";
       break;
     case 84:
-      v3 = "Operator calls may not be used with an implicit 'this' - otherwise it is more error\n"
+      v3 = "Operator calls may not be used with an implicit this - otherwise it is more error\n"
            "prone and even when used correctly code is more difficult to understand.";
       break;
     case 85:
       v3 = "[A named specifier must appear before an argument rather than after - arg_name#arg.]\n"
-           "An argument in an invocation argument list must be followed by a comma ',' argument delimiter, semi-colon ';'"
-           " return argument delimiter or an ending parenthesis (bracket) ')'.";
+           "An argument in an invocation argument list must be followed by a comma , argument delimiter, semi-colon ;"
+           " return argument delimiter or an ending parenthesis (bracket) ).";
       break;
     case 86:
       v3 = "Found an object-identifier when a closure was expected.";
       break;
     case 87:
-      v3 = "The parameter list expected ',' or ')', but neither were found.";
+      v3 = "The parameter list expected , or ), but neither were found.";
       break;
     case 88:
-      v3 = "The parameter list did not expect an extra semi-colon ';'!  Return parameters already started.";
+      v3 = "The parameter list did not expect an extra semi-colon ;!  Return parameters already started.";
       break;
     case 90:
-      v3 = "The code block expected another statement or the end of the code block ']'.";
+      v3 = "The code block expected another statement or the end of the code block ].";
       break;
     case 91:
       v3 = "A class union descriptor must union two or more classes.";
@@ -9108,7 +9108,7 @@ AString *__fastcall SSParser::get_result_string(AString *result, SSParser::eResu
       v3 = "A symbol literal may be no more than 255 characters long.";
       break;
     case 97:
-      v3 = "The case comparison expression must resolve to a class type that has an equals operator '='.";
+      v3 = "The case comparison expression must resolve to a class type that has an equals operator =.";
       break;
     case 98:
       v3 = "A conversion method may not have any parameters [this may change in the future].";
@@ -9129,7 +9129,7 @@ AString *__fastcall SSParser::get_result_string(AString *result, SSParser::eResu
       v3 = "Argument with the same name already present in the return parameter list.";
       break;
     case 105:
-      v3 = "Expected the end of the invocation list ')', but did not find it.\n[Too many arguments supplied?]";
+      v3 = "Expected the end of the invocation list ), but did not find it.\n[Too many arguments supplied?]";
       break;
     case 110:
       v3 = "Once a named argument is used, any following arguments must also be named.";
@@ -9156,7 +9156,7 @@ AString *__fastcall SSParser::get_result_string(AString *result, SSParser::eResu
       v3 = "The class scope for coroutines and strategies must be an Actor class or an Actor subclass.";
       break;
     case 126:
-      v3 = "The result class type of a case test expression must be compatible as an operand to the equals operator '=' o"
+      v3 = "The result class type of a case test expression must be compatible as an operand to the equals operator = o"
            "f the comparison expression.";
       break;
     case 128:
@@ -9183,7 +9183,7 @@ AString *__fastcall SSParser::get_result_string(AString *result, SSParser::eResu
       break;
     case 138:
       v3 = "The specified class scope qualifier is not the same class or a superclass of the class of the receiver expres"
-           "sion (or implied 'this').  Note that a NilClass may only have a scope qualifier of 'Object'.";
+           "sion (or implied this).  Note that a NilClass may only have a scope qualifier of Object.";
       break;
     case 139:
       v3 = "This class union descriptor is trivial.\n"
@@ -9955,8 +9955,8 @@ SSDivert *__fastcall SSParser::parse_divert_block(SSParser *this, SSParser::Args
       *(_QWORD *)&end_pos_p = v8;
       if ( v8 )
       {
-        v8->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-        v8->vfptr = (SSExpressionBaseVtbl *)&SSDivert::`vftable';
+        v8->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+        v8->vfptr = (SSExpressionBaseVtbl *)&SSDivert::`vftable;
         v8->i_statement_p = (SSExpressionBase *)&v6->vfptr;
         v7 = v8;
       }
@@ -9998,7 +9998,7 @@ ASymbol *__fastcall SSParser::parse_object_id_tail(SSParser *this, SSParser::Arg
   if ( (unsigned int)v6 < this->i_str_ref_p->i_length && v7[v6] == 64 )
   {
     v8 = v6 + 1;
-    v17 = &SSObjectId::`vftable';
+    v17 = &SSObjectId::`vftable;
     sym_p.i_uid = -1;
     v9 = 0i64;
     v19 = 0i64;
@@ -10044,8 +10044,8 @@ LABEL_10:
           v15 = v14;
           if ( v14 )
           {
-            *(_QWORD *)&v14->i_uid = &SSExpressionBase::`vftable';
-            *(_QWORD *)&v14->i_uid = &SSObjectId::`vftable';
+            *(_QWORD *)&v14->i_uid = &SSExpressionBase::`vftable;
+            *(_QWORD *)&v14->i_uid = &SSObjectId::`vftable;
             v14[2].i_uid = sym_p.i_uid;
             *(_QWORD *)&v14[4].i_uid = v19;
             *(_QWORD *)&v14[6].i_uid = v20;
@@ -10059,7 +10059,7 @@ LABEL_10:
 LABEL_23:
           v9 = v15;
 LABEL_24:
-          v17 = &SSExpressionBase::`vftable';
+          v17 = &SSExpressionBase::`vftable;
           return v9;
         }
         v4->i_result = 118;
@@ -10128,19 +10128,19 @@ SSInvocation *__fastcall SSParser::parse_prefix_operator_expr(SSParser *this, AS
       {
         v13[2].i_uid = v4->i_uid;
         *(_QWORD *)&v13[4].i_uid = 0i64;
-        *(_QWORD *)&v13->i_uid = &SSInvokeBase::`vftable';
+        *(_QWORD *)&v13->i_uid = &SSInvokeBase::`vftable;
         v13[6].i_uid = 0;
         *(_QWORD *)&v13[8].i_uid = 0i64;
         v13[10].i_uid = 0;
         *(_QWORD *)&v13[12].i_uid = 0i64;
-        *(_QWORD *)&v13->i_uid = &SSMethodCall::`vftable';
+        *(_QWORD *)&v13->i_uid = &SSMethodCall::`vftable;
       }
       else
       {
         v13 = 0i64;
       }
-      *v12 = &SSExpressionBase::`vftable';
-      *v12 = &SSInvocation::`vftable';
+      *v12 = &SSExpressionBase::`vftable;
+      *v12 = &SSInvocation::`vftable;
       v12[1] = v7;
       v12[2] = v13;
       v11 = v12;
@@ -10201,8 +10201,8 @@ SSConcurrentBranch *__fastcall SSParser::parse_concurrent_branch_block(SSParser 
           *(_QWORD *)&end_pos_p = v8;
           if ( v8 )
           {
-            v8->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-            v8->vfptr = (SSExpressionBaseVtbl *)&SSConcurrentBranch::`vftable';
+            v8->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+            v8->vfptr = (SSExpressionBaseVtbl *)&SSConcurrentBranch::`vftable;
             v8->i_statement_p = (SSExpressionBase *)&v7->vfptr;
             v5 = v8;
           }
@@ -10268,8 +10268,8 @@ SSConcurrentSync *__fastcall SSParser::parse_concurrent_sync_block(SSParser *thi
           *(_QWORD *)&end_pos_p = v8;
           if ( v8 )
           {
-            v8->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-            v8->vfptr = (SSExpressionBaseVtbl *)&SSConcurrentSync::`vftable';
+            v8->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+            v8->vfptr = (SSExpressionBaseVtbl *)&SSConcurrentSync::`vftable;
             v9 = (signed __int64)&v8->i_exprs;
             v13 = v9;
             v10 = v6->i_statements.i_array_p;
@@ -10342,8 +10342,8 @@ SSConcurrentRace *__fastcall SSParser::parse_concurrent_race_block(SSParser *thi
           *(_QWORD *)&end_pos_p = v8;
           if ( v8 )
           {
-            v8->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-            v8->vfptr = (SSExpressionBaseVtbl *)&SSConcurrentRace::`vftable';
+            v8->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+            v8->vfptr = (SSExpressionBaseVtbl *)&SSConcurrentRace::`vftable;
             v9 = (signed __int64)&v8->i_exprs;
             v13 = v9;
             v10 = v6->i_statements.i_array_p;
@@ -10548,8 +10548,8 @@ char __fastcall SSParser::parse_temporary_append(SSParser *this, SSParser::Args 
     expr_pp = v9;
     if ( v9 )
     {
-      v9->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-      v9->vfptr = (SSExpressionBaseVtbl *)&SSIdentifier::`vftable';
+      v9->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+      v9->vfptr = (SSExpressionBaseVtbl *)&SSIdentifier::`vftable;
       LODWORD(v9[1].vfptr) = ident_p;
     }
     else
@@ -10560,8 +10560,8 @@ char __fastcall SSParser::parse_temporary_append(SSParser *this, SSParser::Args 
     expr_pp = v11;
     if ( v11 )
     {
-      v11->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-      v11->vfptr = (SSExpressionBaseVtbl *)&SSBind::`vftable';
+      v11->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+      v11->vfptr = (SSExpressionBaseVtbl *)&SSBind::`vftable;
       v11[1].vfptr = v10;
       v11[2].vfptr = (SSExpressionBaseVtbl *)v8;
     }

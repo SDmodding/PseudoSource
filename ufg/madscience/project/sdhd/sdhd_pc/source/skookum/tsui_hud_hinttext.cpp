@@ -85,7 +85,7 @@ void __fastcall UFG::TSUI_HUD_HintText::MthdC_show_raid_start_popup(SSInvokedMet
     if ( v5 )
     {
       UFG::InfoFlasherBase::InfoFlasherBase((UFG::InfoFlasherBase *)v5, *(const char **)v3->i_user_data, v4, 0, 3.0);
-      v5->mNext = (UFG::allocator::free_link *)&UFG::InfoFlasherRaidStart::`vftable';
+      v5->mNext = (UFG::allocator::free_link *)&UFG::InfoFlasherRaidStart::`vftable;
     }
     else
     {
@@ -115,7 +115,7 @@ void __fastcall UFG::TSUI_HUD_HintText::MthdC_show_racket_finished_popup(SSInvok
     if ( v5 )
     {
       UFG::InfoFlasherBase::InfoFlasherBase((UFG::InfoFlasherBase *)v5, *(const char **)v3->i_user_data, v4, 0, 3.0);
-      v5->mNext = (UFG::allocator::free_link *)&UFG::InfoFlasherRacketFinished::`vftable';
+      v5->mNext = (UFG::allocator::free_link *)&UFG::InfoFlasherRacketFinished::`vftable;
     }
     else
     {
@@ -186,7 +186,7 @@ void __fastcall UFG::TSUI_HUD_HintText::MthdC_show_raid_bonus_popup(SSInvokedMet
     if ( v5 )
     {
       UFG::InfoFlasherBase::InfoFlasherBase((UFG::InfoFlasherBase *)v5, *(const char **)v3->i_user_data, v4, 0, 3.0);
-      v5->mNext = (UFG::allocator::free_link *)&UFG::InfoFlasherRaidBonus::`vftable';
+      v5->mNext = (UFG::allocator::free_link *)&UFG::InfoFlasherRaidBonus::`vftable;
     }
     else
     {
@@ -216,7 +216,7 @@ void __fastcall UFG::TSUI_HUD_HintText::MthdC_show_raid_warning_popup(SSInvokedM
     if ( v5 )
     {
       UFG::InfoFlasherBase::InfoFlasherBase((UFG::InfoFlasherBase *)v5, *(const char **)v3->i_user_data, v4, 0, 3.0);
-      v5->mNext = (UFG::allocator::free_link *)&UFG::InfoFlasherRaidWarning::`vftable';
+      v5->mNext = (UFG::allocator::free_link *)&UFG::InfoFlasherRaidWarning::`vftable;
     }
     else
     {

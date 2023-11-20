@@ -33,7 +33,7 @@ void __fastcall Render::SimpleDrawableComponent::SimpleDrawableComponent(Render:
 
   v2 = model_data_uid;
   v3 = this;
-  this->vfptr = (Render::IDecalSceneryVtbl *)&Render::IDecalScenery::`vftable';
+  this->vfptr = (Render::IDecalSceneryVtbl *)&Render::IDecalScenery::`vftable;
   v15 = &this->mAttachedDecals;
   v15->mNode.mPrev = &v15->mNode;
   v15->mNode.mNext = &v15->mNode;
@@ -41,8 +41,8 @@ void __fastcall Render::SimpleDrawableComponent::SimpleDrawableComponent(Render:
   v4 = (UFG::qNode<Render::SimpleDrawableComponent,Render::SimpleDrawableComponent> *)&v3->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  v3->vfptr = (Render::IDecalSceneryVtbl *)&Render::SimpleDrawableComponent::`vftable'{for `Render::IDecalScenery'};
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&Render::SimpleDrawableComponent::`vftable'{for `UFG::SimComponent'};
+  v3->vfptr = (Render::IDecalSceneryVtbl *)&Render::SimpleDrawableComponent::`vftable{for `Render::IDecalScenery};
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&Render::SimpleDrawableComponent::`vftable{for `UFG::SimComponent};
   v5 = (__int64 *)&v3->mModelWrappers;
   *v5 = (__int64)v5;
   v5[1] = (__int64)v5;
@@ -133,7 +133,7 @@ void __fastcall Render::SimpleDrawableComponent::SimpleDrawableComponent(Render:
   v3 = nameUidFilter;
   v4 = model_data_uid;
   v5 = this;
-  this->vfptr = (Render::IDecalSceneryVtbl *)&Render::IDecalScenery::`vftable';
+  this->vfptr = (Render::IDecalSceneryVtbl *)&Render::IDecalScenery::`vftable;
   v6 = &this->mAttachedDecals;
   v6->mNode.mPrev = &v6->mNode;
   v6->mNode.mNext = &v6->mNode;
@@ -141,8 +141,8 @@ void __fastcall Render::SimpleDrawableComponent::SimpleDrawableComponent(Render:
   v7 = (UFG::qNode<Render::SimpleDrawableComponent,Render::SimpleDrawableComponent> *)&v5->mPrev;
   v7->mPrev = v7;
   v7->mNext = v7;
-  v5->vfptr = (Render::IDecalSceneryVtbl *)&Render::SimpleDrawableComponent::`vftable'{for `Render::IDecalScenery'};
-  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&Render::SimpleDrawableComponent::`vftable'{for `UFG::SimComponent'};
+  v5->vfptr = (Render::IDecalSceneryVtbl *)&Render::SimpleDrawableComponent::`vftable{for `Render::IDecalScenery};
+  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&Render::SimpleDrawableComponent::`vftable{for `UFG::SimComponent};
   v8 = &v5->mModelWrappers;
   v8->mNode.mPrev = &v8->mNode;
   v8->mNode.mNext = &v8->mNode;
@@ -238,8 +238,8 @@ void __fastcall Render::SimpleDrawableComponent::~SimpleDrawableComponent(Render
   UFG::qNode<Render::SimpleDrawableComponent,Render::SimpleDrawableComponent> *v10; // rax
 
   v1 = this;
-  this->vfptr = (Render::IDecalSceneryVtbl *)&Render::SimpleDrawableComponent::`vftable'{for `Render::IDecalScenery'};
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&Render::SimpleDrawableComponent::`vftable'{for `UFG::SimComponent'};
+  this->vfptr = (Render::IDecalSceneryVtbl *)&Render::SimpleDrawableComponent::`vftable{for `Render::IDecalScenery};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&Render::SimpleDrawableComponent::`vftable{for `UFG::SimComponent};
   if ( this == Render::SimpleDrawableComponent::s_SimpleDrawableComponentpCurrentIterator )
     Render::SimpleDrawableComponent::s_SimpleDrawableComponentpCurrentIterator = (Render::SimpleDrawableComponent *)&this->mPrev[-6].mNext;
   v2 = (UFG::qNode<Render::SimpleDrawableComponent,Render::SimpleDrawableComponent> *)&this->mPrev;
@@ -624,12 +624,12 @@ void __fastcall Render::TestSimpleDrawableForDecals(Render::DecalClipRequest *re
             v16 = (signed __int64)&v18[7 * v17];
           }
 LABEL_21:
-          v20 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-          if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+          v20 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+          if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
           {
             v21 = UFG::qResourceWarehouse::Instance();
             v20 = UFG::qResourceWarehouse::GetInventory(v21, 0xA2ADCD77);
-            `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v20;
+            `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v20;
           }
           UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v4->mModelProxy.mModelHandle.mPrev, 0xA2ADCD77, 0, v20);
           v4->mModelProxy.mRModel = (Illusion::rModel *)v16;

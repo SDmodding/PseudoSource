@@ -3,7 +3,7 @@
 __int64 Scaleform::Render::_dynamic_initializer_for__StateNone_InterfaceImpl__()
 {
   StateType_Interfaces[0] = (Scaleform::Render::StateData::Interface *)&Scaleform::Render::StateNone_InterfaceImpl;
-  Scaleform::Render::StateNone_InterfaceImpl.vfptr = (Scaleform::Render::StateData::InterfaceVtbl *)&Scaleform::Render::StateData::Interface_Value::`vftable';
+  Scaleform::Render::StateNone_InterfaceImpl.vfptr = (Scaleform::Render::StateData::InterfaceVtbl *)&Scaleform::Render::StateData::Interface_Value::`vftable;
   return atexit(Scaleform::Render::_dynamic_atexit_destructor_for__StateNone_InterfaceImpl__);
 }
 
@@ -12,7 +12,7 @@ __int64 Scaleform::Render::_dynamic_initializer_for__StateNone_InterfaceImpl__()
 __int64 dynamic_initializer_for__Scaleform::Render::BlendState::InterfaceImpl__()
 {
   qword_142451A48 = (__int64)&Scaleform::Render::BlendState::InterfaceImpl;
-  Scaleform::Render::BlendState::InterfaceImpl.vfptr = (Scaleform::Render::StateData::InterfaceVtbl *)&Scaleform::Render::StateData::Interface_Value::`vftable';
+  Scaleform::Render::BlendState::InterfaceImpl.vfptr = (Scaleform::Render::StateData::InterfaceVtbl *)&Scaleform::Render::StateData::Interface_Value::`vftable;
   return atexit(dynamic_atexit_destructor_for__Scaleform::Render::BlendState::InterfaceImpl__);
 }
 
@@ -38,7 +38,7 @@ bool __fastcall Scaleform::Render::BlendState::IsTargetAllocationNeededForBlendM
 __int64 dynamic_initializer_for__Scaleform::Render::Scale9State::InterfaceImpl__()
 {
   qword_142451A50 = (__int64)&Scaleform::Render::Scale9State::InterfaceImpl;
-  Scaleform::Render::Scale9State::InterfaceImpl.vfptr = (Scaleform::Render::StateData::InterfaceVtbl *)&Scaleform::Render::StateData::Interface_RefCountImpl::`vftable';
+  Scaleform::Render::Scale9State::InterfaceImpl.vfptr = (Scaleform::Render::StateData::InterfaceVtbl *)&Scaleform::Render::StateData::Interface_RefCountImpl::`vftable;
   return atexit(dynamic_atexit_destructor_for__Scaleform::Render::Scale9State::InterfaceImpl__);
 }
 
@@ -47,7 +47,7 @@ __int64 dynamic_initializer_for__Scaleform::Render::Scale9State::InterfaceImpl__
 __int64 dynamic_initializer_for__Scaleform::Render::ViewMatrix3DState::InterfaceImpl__()
 {
   qword_142451A68 = (__int64)&Scaleform::Render::ViewMatrix3DState::InterfaceImpl;
-  Scaleform::Render::ViewMatrix3DState::InterfaceImpl.vfptr = (Scaleform::Render::StateData::InterfaceVtbl *)&Scaleform::Render::StateData::Interface_RefCountImpl::`vftable';
+  Scaleform::Render::ViewMatrix3DState::InterfaceImpl.vfptr = (Scaleform::Render::StateData::InterfaceVtbl *)&Scaleform::Render::StateData::Interface_RefCountImpl::`vftable;
   return atexit(dynamic_atexit_destructor_for__Scaleform::Render::ViewMatrix3DState::InterfaceImpl__);
 }
 
@@ -56,7 +56,7 @@ __int64 dynamic_initializer_for__Scaleform::Render::ViewMatrix3DState::Interface
 __int64 dynamic_initializer_for__Scaleform::Render::ProjectionMatrix3DState::InterfaceImpl__()
 {
   qword_142451A70 = (__int64)&Scaleform::Render::ProjectionMatrix3DState::InterfaceImpl;
-  Scaleform::Render::ProjectionMatrix3DState::InterfaceImpl.vfptr = (Scaleform::Render::StateData::InterfaceVtbl *)&Scaleform::Render::StateData::Interface_RefCountImpl::`vftable';
+  Scaleform::Render::ProjectionMatrix3DState::InterfaceImpl.vfptr = (Scaleform::Render::StateData::InterfaceVtbl *)&Scaleform::Render::StateData::Interface_RefCountImpl::`vftable;
   return atexit(dynamic_atexit_destructor_for__Scaleform::Render::ProjectionMatrix3DState::InterfaceImpl__);
 }
 
@@ -65,7 +65,7 @@ __int64 dynamic_initializer_for__Scaleform::Render::ProjectionMatrix3DState::Int
 __int64 dynamic_initializer_for__Scaleform::Render::UserDataState::InterfaceImpl__()
 {
   qword_142451A78 = (__int64)&Scaleform::Render::UserDataState::InterfaceImpl;
-  Scaleform::Render::UserDataState::InterfaceImpl.vfptr = (Scaleform::Render::StateData::InterfaceVtbl *)&Scaleform::Render::StateData::Interface_RefCountImpl::`vftable';
+  Scaleform::Render::UserDataState::InterfaceImpl.vfptr = (Scaleform::Render::StateData::InterfaceVtbl *)&Scaleform::Render::StateData::Interface_RefCountImpl::`vftable;
   return atexit(dynamic_atexit_destructor_for__Scaleform::Render::UserDataState::InterfaceImpl__);
 }
 
@@ -74,7 +74,7 @@ __int64 dynamic_initializer_for__Scaleform::Render::UserDataState::InterfaceImpl
 __int64 dynamic_initializer_for__Scaleform::Render::OrigScale9ParentState::InterfaceImpl__()
 {
   qword_142451A80 = (__int64)&Scaleform::Render::OrigScale9ParentState::InterfaceImpl;
-  Scaleform::Render::OrigScale9ParentState::InterfaceImpl.vfptr = (Scaleform::Render::StateData::InterfaceVtbl *)&Scaleform::Render::OrigScale9ParentState::Interface::`vftable';
+  Scaleform::Render::OrigScale9ParentState::InterfaceImpl.vfptr = (Scaleform::Render::StateData::InterfaceVtbl *)&Scaleform::Render::OrigScale9ParentState::Interface::`vftable;
   return atexit(dynamic_atexit_destructor_for__Scaleform::Render::OrigScale9ParentState::InterfaceImpl__);
 }
 
@@ -83,7 +83,7 @@ __int64 dynamic_initializer_for__Scaleform::Render::OrigScale9ParentState::Inter
 __int64 dynamic_initializer_for__Scaleform::Render::MaskNodeState::InterfaceImpl__()
 {
   qword_142451A60 = (__int64)&Scaleform::Render::MaskNodeState::InterfaceImpl;
-  Scaleform::Render::MaskNodeState::InterfaceImpl.vfptr = (Scaleform::Render::StateData::InterfaceVtbl *)&Scaleform::Render::MaskNodeState::Interface::`vftable';
+  Scaleform::Render::MaskNodeState::InterfaceImpl.vfptr = (Scaleform::Render::StateData::InterfaceVtbl *)&Scaleform::Render::MaskNodeState::Interface::`vftable;
   return atexit(dynamic_atexit_destructor_for__Scaleform::Render::MaskNodeState::InterfaceImpl__);
 }
 
@@ -114,7 +114,7 @@ void __fastcall Scaleform::Render::MaskNodeState::Interface::Release(Scaleform::
 __int64 dynamic_initializer_for__Scaleform::Render::Internal_MaskOwnerState::InterfaceImpl__()
 {
   qword_142451A88 = (__int64)&Scaleform::Render::Internal_MaskOwnerState::InterfaceImpl;
-  Scaleform::Render::Internal_MaskOwnerState::InterfaceImpl.vfptr = (Scaleform::Render::StateData::InterfaceVtbl *)&Scaleform::Render::StateData::Interface_Value::`vftable';
+  Scaleform::Render::Internal_MaskOwnerState::InterfaceImpl.vfptr = (Scaleform::Render::StateData::InterfaceVtbl *)&Scaleform::Render::StateData::Interface_Value::`vftable;
   return atexit(dynamic_atexit_destructor_for__Scaleform::Render::Internal_MaskOwnerState::InterfaceImpl__);
 }
 
@@ -123,7 +123,7 @@ __int64 dynamic_initializer_for__Scaleform::Render::Internal_MaskOwnerState::Int
 __int64 dynamic_initializer_for__Scaleform::Render::FilterState::InterfaceImpl__()
 {
   qword_142451A58 = (__int64)&Scaleform::Render::FilterState::InterfaceImpl;
-  Scaleform::Render::FilterState::InterfaceImpl.vfptr = (Scaleform::Render::StateData::InterfaceVtbl *)&Scaleform::Render::StateData::Interface_RefCountImpl::`vftable';
+  Scaleform::Render::FilterState::InterfaceImpl.vfptr = (Scaleform::Render::StateData::InterfaceVtbl *)&Scaleform::Render::StateData::Interface_RefCountImpl::`vftable;
   return atexit(dynamic_atexit_destructor_for__Scaleform::Render::FilterState::InterfaceImpl__);
 }
 
@@ -132,7 +132,7 @@ __int64 dynamic_initializer_for__Scaleform::Render::FilterState::InterfaceImpl__
 __int64 dynamic_initializer_for__Scaleform::Render::OrigNodeBoundsState::InterfaceImpl__()
 {
   qword_142451A90 = (__int64)&Scaleform::Render::OrigNodeBoundsState::InterfaceImpl;
-  Scaleform::Render::OrigNodeBoundsState::InterfaceImpl.vfptr = (Scaleform::Render::StateData::InterfaceVtbl *)&Scaleform::Render::StateData::Interface_RefCountImpl::`vftable';
+  Scaleform::Render::OrigNodeBoundsState::InterfaceImpl.vfptr = (Scaleform::Render::StateData::InterfaceVtbl *)&Scaleform::Render::StateData::Interface_RefCountImpl::`vftable;
   return atexit(dynamic_atexit_destructor_for__Scaleform::Render::OrigNodeBoundsState::InterfaceImpl__);
 }
 

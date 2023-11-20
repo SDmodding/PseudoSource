@@ -9,7 +9,7 @@ void __fastcall Render::vFBXDescriptor::vFBXDescriptor(Render::vFBXDescriptor *t
     (Illusion::VertexStreamDescriptor *)&this->vfptr,
     "VertexDecl.FBX",
     0xEE711E17);
-  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vFBXDescriptor::`vftable';
+  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vFBXDescriptor::`vftable;
   Illusion::VertexStreamDescriptor::AddElement((Illusion::VertexStreamDescriptor *)&v1->vfptr, 0, 0, 0, 0i64);
   Illusion::VertexStreamDescriptor::AddElement(
     (Illusion::VertexStreamDescriptor *)&v1->vfptr,
@@ -66,7 +66,7 @@ void __fastcall Render::vFBX2Descriptor::vFBX2Descriptor(Render::vFBX2Descriptor
     (Illusion::VertexStreamDescriptor *)&this->vfptr,
     "VertexDecl.FBX2",
     0x5589C78Du);
-  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vFBX2Descriptor::`vftable';
+  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vFBX2Descriptor::`vftable;
   Illusion::VertexStreamDescriptor::AddElement((Illusion::VertexStreamDescriptor *)&v1->vfptr, 0, 0, 0, 0i64);
   Illusion::VertexStreamDescriptor::AddElement(
     (Illusion::VertexStreamDescriptor *)&v1->vfptr,
@@ -123,7 +123,7 @@ void __fastcall Render::vDynamicDescriptor::vDynamicDescriptor(Render::vDynamicD
     (Illusion::VertexStreamDescriptor *)&this->vfptr,
     "VertexDecl.Dynamic",
     0x64A43DAEu);
-  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vDynamicDescriptor::`vftable';
+  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vDynamicDescriptor::`vftable;
   Illusion::VertexStreamDescriptor::AddElement((Illusion::VertexStreamDescriptor *)&v1->vfptr, 0, 0, 0, 0i64);
   Illusion::VertexStreamDescriptor::AddElement(
     (Illusion::VertexStreamDescriptor *)&v1->vfptr,
@@ -168,7 +168,7 @@ void __fastcall Render::vSkinnedDescriptor::vSkinnedDescriptor(Render::vSkinnedD
     (Illusion::VertexStreamDescriptor *)&this->vfptr,
     "VertexDecl.Skinned",
     0x276B9567u);
-  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vSkinnedDescriptor::`vftable';
+  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vSkinnedDescriptor::`vftable;
   Illusion::VertexStreamDescriptor::AddElement(
     (Illusion::VertexStreamDescriptor *)&v1->vfptr,
     0,
@@ -237,7 +237,7 @@ void __fastcall Render::vScreenParticleDescriptor::vScreenParticleDescriptor(Ren
     (Illusion::VertexStreamDescriptor *)&this->vfptr,
     "VertexDecl.ScreenParticle",
     0x3D339245u);
-  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vScreenParticleDescriptor::`vftable';
+  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vScreenParticleDescriptor::`vftable;
   Illusion::VertexStreamDescriptor::AddElement((Illusion::VertexStreamDescriptor *)&v1->vfptr, 0, 0, 0, 0i64);
   Illusion::VertexStreamDescriptor::AddElement(
     (Illusion::VertexStreamDescriptor *)&v1->vfptr,
@@ -264,7 +264,7 @@ void __fastcall Render::vLightCardDescriptor::vLightCardDescriptor(Render::vLigh
     (Illusion::VertexStreamDescriptor *)&this->vfptr,
     "VertexDecl.LightCard",
     0x6FA1A436u);
-  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vLightCardDescriptor::`vftable';
+  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vLightCardDescriptor::`vftable;
   Illusion::VertexStreamDescriptor::AddElement((Illusion::VertexStreamDescriptor *)&v1->vfptr, 0, 0, 0, 0i64);
   Illusion::VertexStreamDescriptor::AddElement(
     (Illusion::VertexStreamDescriptor *)&v1->vfptr,
@@ -297,7 +297,7 @@ void __fastcall Render::vSkinnedDecalDescriptor::vSkinnedDecalDescriptor(Render:
     (Illusion::VertexStreamDescriptor *)&this->vfptr,
     "VertexDecl.SkinnedDecal",
     0x23F36527u);
-  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vSkinnedDecalDescriptor::`vftable';
+  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vSkinnedDecalDescriptor::`vftable;
   Illusion::VertexStreamDescriptor::AddElement(
     (Illusion::VertexStreamDescriptor *)&v1->vfptr,
     0,
@@ -335,7 +335,7 @@ void __fastcall Render::vVehicleUVNTDescriptor::vVehicleUVNTDescriptor(Render::v
     (Illusion::VertexStreamDescriptor *)&this->vfptr,
     "VertexDecl.VehicleUVNTC",
     0xE234EF7A);
-  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vVehicleUVNTDescriptor::`vftable';
+  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vVehicleUVNTDescriptor::`vftable;
   Illusion::VertexStreamDescriptor::AddElement(
     (Illusion::VertexStreamDescriptor *)&v1->vfptr,
     0,
@@ -385,7 +385,7 @@ void __fastcall Render::vVehicleUV2NTDescriptor::vVehicleUV2NTDescriptor(Render:
     (Illusion::VertexStreamDescriptor *)&this->vfptr,
     "VertexDecl.VehicleUV2NTC",
     0xBF900E9E);
-  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vVehicleUV2NTDescriptor::`vftable';
+  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vVehicleUV2NTDescriptor::`vftable;
   Illusion::VertexStreamDescriptor::AddElement(
     (Illusion::VertexStreamDescriptor *)&v1->vfptr,
     0,
@@ -441,7 +441,7 @@ void __fastcall Render::vVehicleGlassUV2NTCDescriptor::vVehicleGlassUV2NTCDescri
     (Illusion::VertexStreamDescriptor *)&this->vfptr,
     "VertexDecl.VehicleGlassUV2NTC",
     0xD08FF31A);
-  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vVehicleGlassUV2NTCDescriptor::`vftable';
+  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vVehicleGlassUV2NTCDescriptor::`vftable;
   Illusion::VertexStreamDescriptor::AddElement(
     (Illusion::VertexStreamDescriptor *)&v1->vfptr,
     0,
@@ -503,7 +503,7 @@ void __fastcall Render::vSkinnedUVNTDescriptor::vSkinnedUVNTDescriptor(Render::v
     (Illusion::VertexStreamDescriptor *)&this->vfptr,
     "VertexDecl.SkinnedUVNT",
     0xAC5D89E2);
-  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vSkinnedUVNTDescriptor::`vftable';
+  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vSkinnedUVNTDescriptor::`vftable;
   Illusion::VertexStreamDescriptor::AddElement(
     (Illusion::VertexStreamDescriptor *)&v1->vfptr,
     0,
@@ -553,7 +553,7 @@ void __fastcall Render::vUV2Descriptor::vUV2Descriptor(Render::vUV2Descriptor *t
     (Illusion::VertexStreamDescriptor *)&this->vfptr,
     "VertexDecl.UV2",
     0x27C88915u);
-  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vUV2Descriptor::`vftable';
+  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vUV2Descriptor::`vftable;
   Illusion::VertexStreamDescriptor::AddElement((Illusion::VertexStreamDescriptor *)&v1->vfptr, 0, 0, 0, 0i64);
   Illusion::VertexStreamDescriptor::AddElement(
     (Illusion::VertexStreamDescriptor *)&v1->vfptr,
@@ -581,7 +581,7 @@ void __fastcall Render::vUV2NTCDescriptor::vUV2NTCDescriptor(Render::vUV2NTCDesc
     (Illusion::VertexStreamDescriptor *)&this->vfptr,
     "VertexDecl.UV2NTC",
     0x78921EA0u);
-  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vUV2NTCDescriptor::`vftable';
+  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vUV2NTCDescriptor::`vftable;
   *(_QWORD *)&default_value.x = 0i64;
   default_value.z = 0.0;
   LODWORD(default_value.w) = (_DWORD)FLOAT_1_0;
@@ -629,7 +629,7 @@ void __fastcall Render::vUV2NTDescriptor::vUV2NTDescriptor(Render::vUV2NTDescrip
     (Illusion::VertexStreamDescriptor *)&this->vfptr,
     "VertexDecl.UV2NT",
     0xA0B0781E);
-  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vUV2NTDescriptor::`vftable';
+  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vUV2NTDescriptor::`vftable;
   Illusion::VertexStreamDescriptor::AddElement((Illusion::VertexStreamDescriptor *)&v1->vfptr, 0, 0, 0, 0i64);
   Illusion::VertexStreamDescriptor::AddElement(
     (Illusion::VertexStreamDescriptor *)&v1->vfptr,
@@ -668,7 +668,7 @@ void __fastcall Render::vUV2NCDescriptor::vUV2NCDescriptor(Render::vUV2NCDescrip
     (Illusion::VertexStreamDescriptor *)&this->vfptr,
     "VertexDecl.UV2NC",
     0xF2E6F36B);
-  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vUV2NCDescriptor::`vftable';
+  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vUV2NCDescriptor::`vftable;
   Illusion::VertexStreamDescriptor::AddElement((Illusion::VertexStreamDescriptor *)&v1->vfptr, 0, 0, 0, 0i64);
   Illusion::VertexStreamDescriptor::AddElement(
     (Illusion::VertexStreamDescriptor *)&v1->vfptr,
@@ -707,7 +707,7 @@ void __fastcall Render::vUV2NDescriptor::vUV2NDescriptor(Render::vUV2NDescriptor
     (Illusion::VertexStreamDescriptor *)&this->vfptr,
     "VertexDecl.UV2N",
     0x46E52398u);
-  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vUV2NDescriptor::`vftable';
+  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vUV2NDescriptor::`vftable;
   Illusion::VertexStreamDescriptor::AddElement((Illusion::VertexStreamDescriptor *)&v1->vfptr, 0, 0, 0, 0i64);
   Illusion::VertexStreamDescriptor::AddElement(
     (Illusion::VertexStreamDescriptor *)&v1->vfptr,
@@ -741,7 +741,7 @@ void __fastcall Render::vUVNTCDescriptor::vUVNTCDescriptor(Render::vUVNTCDescrip
     (Illusion::VertexStreamDescriptor *)&this->vfptr,
     "VertexDecl.UVNTC",
     0x911E1A51);
-  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vUVNTCDescriptor::`vftable';
+  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vUVNTCDescriptor::`vftable;
   *(_QWORD *)&default_value.x = 0i64;
   default_value.z = 0.0;
   LODWORD(default_value.w) = (_DWORD)FLOAT_1_0;
@@ -783,7 +783,7 @@ void __fastcall Render::vUVNTDescriptor::vUVNTDescriptor(Render::vUVNTDescriptor
     (Illusion::VertexStreamDescriptor *)&this->vfptr,
     "VertexDecl.UVNT",
     0x9BA68DBC);
-  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vUVNTDescriptor::`vftable';
+  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vUVNTDescriptor::`vftable;
   Illusion::VertexStreamDescriptor::AddElement((Illusion::VertexStreamDescriptor *)&v1->vfptr, 0, 0, 0, 0i64);
   Illusion::VertexStreamDescriptor::AddElement(
     (Illusion::VertexStreamDescriptor *)&v1->vfptr,
@@ -816,7 +816,7 @@ void __fastcall Render::vUVNDescriptor::vUVNDescriptor(Render::vUVNDescriptor *t
     (Illusion::VertexStreamDescriptor *)&this->vfptr,
     "VertexDecl.UVN",
     0xF2700F96);
-  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vUVNDescriptor::`vftable';
+  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vUVNDescriptor::`vftable;
   Illusion::VertexStreamDescriptor::AddElement((Illusion::VertexStreamDescriptor *)&v1->vfptr, 0, 0, 0, 0i64);
   Illusion::VertexStreamDescriptor::AddElement(
     (Illusion::VertexStreamDescriptor *)&v1->vfptr,
@@ -843,7 +843,7 @@ void __fastcall Render::vUVCDescriptor::vUVCDescriptor(Render::vUVCDescriptor *t
     (Illusion::VertexStreamDescriptor *)&this->vfptr,
     "VertexDecl.UVC",
     0xC3BD8945);
-  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vUVCDescriptor::`vftable';
+  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vUVCDescriptor::`vftable;
   Illusion::VertexStreamDescriptor::AddElement((Illusion::VertexStreamDescriptor *)&v1->vfptr, 0, 0, 0, 0i64);
   Illusion::VertexStreamDescriptor::AddElement(
     (Illusion::VertexStreamDescriptor *)&v1->vfptr,
@@ -870,7 +870,7 @@ void __fastcall Render::vUVCNPackedDescriptor::vUVCNPackedDescriptor(Render::vUV
     (Illusion::VertexStreamDescriptor *)&this->vfptr,
     "VertexDecl.UVCNPacked",
     0xF0D9B822);
-  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vUVCNPackedDescriptor::`vftable';
+  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vUVCNPackedDescriptor::`vftable;
   Illusion::VertexStreamDescriptor::AddElement(
     (Illusion::VertexStreamDescriptor *)&v1->vfptr,
     0,
@@ -915,7 +915,7 @@ void __fastcall Render::vUVNPackedDescriptor::vUVNPackedDescriptor(Render::vUVNP
     (Illusion::VertexStreamDescriptor *)&this->vfptr,
     "VertexDecl.UVNPacked",
     0x720788F7u);
-  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vUVNPackedDescriptor::`vftable';
+  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vUVNPackedDescriptor::`vftable;
   Illusion::VertexStreamDescriptor::AddElement(
     (Illusion::VertexStreamDescriptor *)&v1->vfptr,
     0,
@@ -954,7 +954,7 @@ void __fastcall Render::vUV2CDescriptor::vUV2CDescriptor(Render::vUV2CDescriptor
     (Illusion::VertexStreamDescriptor *)&this->vfptr,
     "VertexDecl.UV2C",
     0x7728A54Bu);
-  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vUV2CDescriptor::`vftable';
+  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vUV2CDescriptor::`vftable;
   Illusion::VertexStreamDescriptor::AddElement((Illusion::VertexStreamDescriptor *)&v1->vfptr, 0, 0, 0, 0i64);
   Illusion::VertexStreamDescriptor::AddElement(
     (Illusion::VertexStreamDescriptor *)&v1->vfptr,
@@ -995,7 +995,7 @@ void __fastcall Render::vNCDescriptor::vNCDescriptor(Render::vNCDescriptor *this
     (Illusion::VertexStreamDescriptor *)&this->vfptr,
     "VertexDecl.NC",
     0x34AB04E6u);
-  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vNCDescriptor::`vftable';
+  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vNCDescriptor::`vftable;
   default_value.x = 0.5;
   default_value.y = 0.5;
   default_value.z = 0.5;
@@ -1026,7 +1026,7 @@ void __fastcall Render::vCloudWispDescriptor::vCloudWispDescriptor(Render::vClou
     (Illusion::VertexStreamDescriptor *)&this->vfptr,
     "VertexDecl.CloudWisp",
     0xE7CFFC61);
-  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vCloudWispDescriptor::`vftable';
+  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vCloudWispDescriptor::`vftable;
   Illusion::VertexStreamDescriptor::AddElement(
     (Illusion::VertexStreamDescriptor *)&v1->vfptr,
     0,
@@ -1070,7 +1070,7 @@ void __fastcall Render::vWaterSurfaceDescriptor::vWaterSurfaceDescriptor(Render:
     (Illusion::VertexStreamDescriptor *)&this->vfptr,
     "VertexDecl.WaterSurface",
     0xD3798DFD);
-  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vWaterSurfaceDescriptor::`vftable';
+  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vWaterSurfaceDescriptor::`vftable;
   Illusion::VertexStreamDescriptor::AddElement(
     (Illusion::VertexStreamDescriptor *)&v1->vfptr,
     0,
@@ -1102,7 +1102,7 @@ void __fastcall Render::vParticleDescriptor::vParticleDescriptor(Render::vPartic
     (Illusion::VertexStreamDescriptor *)&this->vfptr,
     "VertexDecl.Particle",
     0xD7A5C4C7);
-  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vParticleDescriptor::`vftable';
+  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vParticleDescriptor::`vftable;
   Illusion::VertexStreamDescriptor::AddElement(
     (Illusion::VertexStreamDescriptor *)&v1->vfptr,
     0,
@@ -1171,7 +1171,7 @@ void __fastcall Render::vGeoParticleDescriptor::vGeoParticleDescriptor(Render::v
     (Illusion::VertexStreamDescriptor *)&this->vfptr,
     "VertexDecl.GeoParticle",
     0x25586179u);
-  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vGeoParticleDescriptor::`vftable';
+  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vGeoParticleDescriptor::`vftable;
   Illusion::VertexStreamDescriptor::SetIndexStreamMultiplier((Illusion::VertexStreamDescriptor *)&v1->vfptr, 4);
   Illusion::VertexStreamDescriptor::SetIndexStreamAsVertexStream((Illusion::VertexStreamDescriptor *)&v1->vfptr);
   Illusion::VertexStreamDescriptor::AddElement((Illusion::VertexStreamDescriptor *)&v1->vfptr, 0, 0, 0, 0i64);
@@ -1255,7 +1255,7 @@ void __fastcall Render::vDecalDescriptor::vDecalDescriptor(Render::vDecalDescrip
     (Illusion::VertexStreamDescriptor *)&this->vfptr,
     "VertexDecl.Decal",
     0x128206B2u);
-  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vDecalDescriptor::`vftable';
+  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vDecalDescriptor::`vftable;
   Illusion::VertexStreamDescriptor::AddElement((Illusion::VertexStreamDescriptor *)&v1->vfptr, 0, 0, 0, 0i64);
   Illusion::VertexStreamDescriptor::AddElement(
     (Illusion::VertexStreamDescriptor *)&v1->vfptr,
@@ -1288,7 +1288,7 @@ void __fastcall Render::vLightningDescriptor::vLightningDescriptor(Render::vLigh
     (Illusion::VertexStreamDescriptor *)&this->vfptr,
     "VertexDecl.Lightning",
     0x811776u);
-  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vLightningDescriptor::`vftable';
+  v1->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vLightningDescriptor::`vftable;
   Illusion::VertexStreamDescriptor::AddElement((Illusion::VertexStreamDescriptor *)&v1->vfptr, 0, 0, 0, 0i64);
   Illusion::VertexStreamDescriptor::AddElement(
     (Illusion::VertexStreamDescriptor *)&v1->vfptr,

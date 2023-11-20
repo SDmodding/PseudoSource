@@ -5,7 +5,7 @@ void __fastcall UFG::GameLogManager::cGameLogCircularArray::cGameLogCircularArra
   UFG::GameLogManager::cGameLogCircularArray *v1; // rbx
 
   v1 = this;
-  `eh vector constructor iterator'(this, 8ui64, 100, (void (__fastcall *)(void *))BackInfo::BackInfo);
+  `eh vector constructor iterator(this, 8ui64, 100, (void (__fastcall *)(void *))BackInfo::BackInfo);
   v1->mCapacity = 100;
   *(_QWORD *)&v1->mHeadIndex = -1i64;
 }

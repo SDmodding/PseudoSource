@@ -9,6 +9,6 @@ void __fastcall hkpCdBodyPairCollector::reset(hkpCdBodyPairCollector *this)
 // RVA: 0x9DC40
 void __fastcall hkpCdBodyPairCollector::~hkpCdBodyPairCollector(hkpCdBodyPairCollector *this)
 {
-  this->vfptr = (hkpCdBodyPairCollectorVtbl *)&hkpCdBodyPairCollector::`vftable';
+  this->vfptr = (hkpCdBodyPairCollectorVtbl *)&hkpCdBodyPairCollector::`vftable;
 }
 

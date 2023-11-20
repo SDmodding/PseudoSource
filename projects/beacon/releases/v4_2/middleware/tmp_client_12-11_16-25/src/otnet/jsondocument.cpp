@@ -6,7 +6,7 @@ void __fastcall OSuite::ZJsonDocument::ZJsonDocument(OSuite::ZJsonDocument *this
 
   v1 = this;
   OSuite::ZJsonObject::ZJsonObject((OSuite::ZJsonObject *)&this->vfptr);
-  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZJsonDocument::`vftable';
+  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZJsonDocument::`vftable;
   v1->m_bIsValid = 0;
 }
 
@@ -14,7 +14,7 @@ void __fastcall OSuite::ZJsonDocument::ZJsonDocument(OSuite::ZJsonDocument *this
 // RVA: 0xED050C
 void __fastcall OSuite::ZJsonDocument::~ZJsonDocument(OSuite::ZJsonDocument *this)
 {
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZJsonDocument::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZJsonDocument::`vftable;
   OSuite::ZJsonObject::~ZJsonObject((OSuite::ZJsonObject *)&this->vfptr);
 }
 
@@ -29,7 +29,7 @@ void __fastcall OSuite::ZJsonDocument::ZJsonDocument(OSuite::ZJsonDocument *this
   v2 = pReader;
   v3 = this;
   OSuite::ZJsonObject::ZJsonObject((OSuite::ZJsonObject *)&this->vfptr);
-  v3->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZJsonDocument::`vftable';
+  v3->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZJsonDocument::`vftable;
   v4.m_pRoot = 0i64;
   v4.m_pCurrentElement = 0i64;
   v4.m_Stack.m_pList = 0i64;

@@ -99,9 +99,9 @@ AK::IAkPlugin *__fastcall CreateMP3Source(AK::IAkPluginMemAlloc *in_pAllocator)
   v2 = result;
   if ( result )
   {
-    result->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable';
-    result->vfptr = (AK::IAkPluginVtbl *)&AK::IAkSourcePlugin::`vftable';
-    result->vfptr = (AK::IAkPluginVtbl *)&CAkFXSrcMP3::`vftable';
+    result->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable;
+    result->vfptr = (AK::IAkPluginVtbl *)&AK::IAkSourcePlugin::`vftable;
+    result->vfptr = (AK::IAkPluginVtbl *)&CAkFXSrcMP3::`vftable;
     result[1].vfptr = 0i64;
     result[2].vfptr = 0i64;
     result[3].vfptr = 0i64;

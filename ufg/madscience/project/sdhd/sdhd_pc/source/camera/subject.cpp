@@ -13,7 +13,7 @@ void __fastcall UFG::CameraSubject::CameraSubject(UFG::CameraSubject *this, unsi
 
   v2 = this;
   UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name_uid);
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CameraSubject::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CameraSubject::`vftable;
   UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0>::RebindingComponentHandle<UFG::TransformNodeComponent,0>(&v2->pTransformNodeComponent);
   UFG::SimComponent::AddType(
     (UFG::SimComponent *)&v2->vfptr,
@@ -29,7 +29,7 @@ void __fastcall UFG::CameraSubject::~CameraSubject(UFG::CameraSubject *this)
   UFG::CameraSubject *v1; // rbx
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CameraSubject::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CameraSubject::`vftable;
   UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>(&this->pTransformNodeComponent);
   UFG::SimComponent::~SimComponent((UFG::SimComponent *)&v1->vfptr);
 }

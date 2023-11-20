@@ -27,7 +27,7 @@ void __fastcall hkpSimulationIsland::hkpSimulationIsland(hkpSimulationIsland *th
   this->m_world = world;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   *((_BYTE *)this + 50) = 5;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpSimulationIsland::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpSimulationIsland::`vftable;
   this->m_dirtyListIndex = -1;
   this->m_multiThreadCheck.m_threadId = -15;
   this->m_multiThreadCheck.m_markCount = -32768;
@@ -67,7 +67,7 @@ void __fastcall hkpSimulationIsland::~hkpSimulationIsland(hkpSimulationIsland *t
   int v5; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpSimulationIsland::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpSimulationIsland::`vftable;
   v2 = this->m_narrowphaseAgentTrack.m_sectors.m_capacityAndFlags;
   this->m_narrowphaseAgentTrack.m_sectors.m_size = 0;
   if ( v2 >= 0 )
@@ -104,7 +104,7 @@ void __fastcall hkpSimulationIsland::~hkpSimulationIsland(hkpSimulationIsland *t
       8 * v5);
   v1->m_actions.m_data = 0i64;
   v1->m_actions.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 117

@@ -81,7 +81,7 @@ void __fastcall UFG::UIHKRacePositionWidget::Flash_SetPlayerPosition(UFG::UIHKRa
 
   v2 = screen;
   v3 = this;
-  `eh vector constructor iterator'(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   v4 = (double)(signed int)v3->mPlayerRank;
   if ( ((unsigned int)pargs.Type >> 6) & 1 )
   {
@@ -104,6 +104,6 @@ void __fastcall UFG::UIHKRacePositionWidget::Flash_SetPlayerPosition(UFG::UIHKRa
   v6 = v2->mRenderable->m_movie.pObject;
   if ( v6 )
     Scaleform::GFx::Movie::Invoke(v6, "Race_SetPlayerPosition", 0i64, &pargs, 2u);
-  `eh vector destructor iterator'(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 

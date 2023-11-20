@@ -91,9 +91,9 @@ void __fastcall UFG::BehaviourControllerComponent::BehaviourControllerComponent(
   v4 = (UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent> *)&v3->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BehaviourControllerComponent::`vftable'{for `UFG::SimComponent'};
-  v3->vfptr = (UFG::StateInterfaceVtbl *)&UFG::BehaviourControllerComponent::`vftable'{for `UFG::StateInterface'};
-  v3->vfptr = (UFG::ActionTreeComponentBaseVtbl *)&UFG::BehaviourControllerComponent::`vftable';
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BehaviourControllerComponent::`vftable{for `UFG::SimComponent};
+  v3->vfptr = (UFG::StateInterfaceVtbl *)&UFG::BehaviourControllerComponent::`vftable{for `UFG::StateInterface};
+  v3->vfptr = (UFG::ActionTreeComponentBaseVtbl *)&UFG::BehaviourControllerComponent::`vftable;
   v3->mExclusiveBehaviour = 0i64;
   v6 = &v3->mParallelBehaviours;
   v6->mNode.mPrev = &v6->mNode;
@@ -133,9 +133,9 @@ void __fastcall UFG::BehaviourControllerComponent::~BehaviourControllerComponent
   UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent> *v12; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BehaviourControllerComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::StateInterfaceVtbl *)&UFG::BehaviourControllerComponent::`vftable'{for `UFG::StateInterface'};
-  this->vfptr = (UFG::ActionTreeComponentBaseVtbl *)&UFG::BehaviourControllerComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BehaviourControllerComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::StateInterfaceVtbl *)&UFG::BehaviourControllerComponent::`vftable{for `UFG::StateInterface};
+  this->vfptr = (UFG::ActionTreeComponentBaseVtbl *)&UFG::BehaviourControllerComponent::`vftable;
   if ( this == UFG::BehaviourControllerComponent::s_BehaviourControllerComponentpCurrentIterator )
     UFG::BehaviourControllerComponent::s_BehaviourControllerComponentpCurrentIterator = (UFG::BehaviourControllerComponent *)&this->mPrev[-104].mNext;
   v2 = (UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent> *)&this->mPrev;
@@ -796,7 +796,7 @@ UFG::Behaviour *__fastcall UFG::BehaviourControllerComponent::CreateBehaviour(UF
     if ( v8 && v8->mParams.mNode == params->mNode && v4 )
     {
       v4->mId = -5;
-      v4->mDesc = "Invoked behaviour already running as exclusive, this shouldn't happen, bad logic!!";
+      v4->mDesc = "Invoked behaviour already running as exclusive, this shouldnt happen, bad logic!!";
       v4->mBehaviour = v8;
       v4->mInvokeParams = *params;
     }

@@ -88,12 +88,12 @@ void __fastcall UFG::ModelData::Create(UFG::ModelData *this, UFG::SimObject *sim
       UFG::SimObjectModifier::Close(&v41);
       UFG::SimObjectModifier::~SimObjectModifier(&v41);
       v20 = v14->mNode.mUID;
-      v21 = `UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result )
+      v21 = `UFG::qGetResourceInventory<UFG::RigResource>::`2::result;
+      if ( !`UFG::qGetResourceInventory<UFG::RigResource>::`2::result )
       {
         v22 = UFG::qResourceWarehouse::Instance();
         v21 = UFG::qResourceWarehouse::GetInventory(v22, 0x39BC0A7Eu);
-        `UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result = v21;
+        `UFG::qGetResourceInventory<UFG::RigResource>::`2::result = v21;
       }
       UFG::qResourceHandle::Init((UFG::qResourceHandle *)(v19 + 1352), 0x39BC0A7Eu, v20, v21);
       v23 = UFG::qMalloc(0xA0ui64, "ModelDataBase::ModelType", 0x800ui64);
@@ -118,22 +118,22 @@ void __fastcall UFG::ModelData::Create(UFG::ModelData *this, UFG::SimObject *sim
       {
         v27 = (signed __int64)&v5->mModels.mData.mItems[i];
         UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v41);
-        v28 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-        if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+        v28 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+        if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
         {
           v29 = UFG::qResourceWarehouse::Instance();
           v28 = UFG::qResourceWarehouse::GetInventory(v29, 0xA2ADCD77);
-          `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v28;
+          `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v28;
         }
         UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v41, 0xA2ADCD77, 0, v28);
         v42 = v27;
         ModelType::AddModelBinding(v25, (Illusion::ModelProxy *)&v41, &UFG::qMatrix44::msIdentity, 0, 0);
-        v30 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-        if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+        v30 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+        if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
         {
           v31 = UFG::qResourceWarehouse::Instance();
           v30 = UFG::qResourceWarehouse::GetInventory(v31, 0xA2ADCD77);
-          `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v30;
+          `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v30;
         }
         UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v41, v30);
         UFG::qResourceHandle::~qResourceHandle((UFG::qResourceHandle *)&v41);

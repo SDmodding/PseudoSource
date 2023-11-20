@@ -47,9 +47,9 @@ void __fastcall hkpRemoveTerminalsMoppModifier::hkpRemoveTerminalsMoppModifier(h
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v4 = shapesToRemove;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpRemoveTerminalsMoppModifier::`vftable'{for `hkReferencedObject'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkpRemoveTerminalsMoppModifier::`vftable{for `hkReferencedObject};
   v5 = shapeContainer;
-  this->vfptr = (hkpMoppModifierVtbl *)&hkpRemoveTerminalsMoppModifier::`vftable'{for `hkpMoppModifier'};
+  this->vfptr = (hkpMoppModifierVtbl *)&hkpRemoveTerminalsMoppModifier::`vftable{for `hkpMoppModifier};
   this->m_removeInfo.m_data = 0i64;
   this->m_removeInfo.m_size = 0;
   this->m_removeInfo.m_capacityAndFlags = 2147483648;
@@ -92,8 +92,8 @@ void __fastcall hkpRemoveTerminalsMoppModifier::hkpRemoveTerminalsMoppModifier(h
 
   v4 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpRemoveTerminalsMoppModifier::`vftable'{for `hkReferencedObject'};
-  this->vfptr = (hkpMoppModifierVtbl *)&hkpRemoveTerminalsMoppModifier::`vftable'{for `hkpMoppModifier'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkpRemoveTerminalsMoppModifier::`vftable{for `hkReferencedObject};
+  this->vfptr = (hkpMoppModifierVtbl *)&hkpRemoveTerminalsMoppModifier::`vftable{for `hkpMoppModifier};
   this->m_removeInfo.m_data = 0i64;
   this->m_removeInfo.m_size = 0;
   this->m_removeInfo.m_capacityAndFlags = 2147483648;
@@ -110,8 +110,8 @@ void __fastcall hkpRemoveTerminalsMoppModifier::~hkpRemoveTerminalsMoppModifier(
   int v2; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpRemoveTerminalsMoppModifier::`vftable'{for `hkReferencedObject'};
-  this->vfptr = (hkpMoppModifierVtbl *)&hkpRemoveTerminalsMoppModifier::`vftable'{for `hkpMoppModifier'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkpRemoveTerminalsMoppModifier::`vftable{for `hkReferencedObject};
+  this->vfptr = (hkpMoppModifierVtbl *)&hkpRemoveTerminalsMoppModifier::`vftable{for `hkpMoppModifier};
   v2 = this->m_removeInfo.m_capacityAndFlags;
   this->m_removeInfo.m_size = 0;
   if ( v2 >= 0 )
@@ -121,8 +121,8 @@ void __fastcall hkpRemoveTerminalsMoppModifier::~hkpRemoveTerminalsMoppModifier(
       4 * v2);
   v1->m_removeInfo.m_data = 0i64;
   v1->m_removeInfo.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkpMoppModifierVtbl *)&hkpMoppModifier::`vftable';
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkpMoppModifierVtbl *)&hkpMoppModifier::`vftable;
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 93
@@ -267,8 +267,8 @@ void __fastcall hkpRemoveTerminalsMoppModifier2::hkpRemoveTerminalsMoppModifier2
   aabb.m_max = (hkVector4f)_xmm;
   aabb.m_min = (hkVector4f)_xmm_d01502f9d01502f9d01502f9d01502f9;
   this->m_enabledKeys = enabledKeys;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpRemoveTerminalsMoppModifier2::`vftable'{for `hkReferencedObject'};
-  this->vfptr = (hkpMoppModifierVtbl *)&hkpRemoveTerminalsMoppModifier2::`vftable'{for `hkpMoppModifier'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkpRemoveTerminalsMoppModifier2::`vftable{for `hkReferencedObject};
+  this->vfptr = (hkpMoppModifierVtbl *)&hkpRemoveTerminalsMoppModifier2::`vftable{for `hkpMoppModifier};
   hkMoppModifyVirtualMachine_queryAabb(moppCode, &aabb, (hkpMoppModifier *)&this->vfptr);
   v3->m_enabledKeys = 0i64;
 }

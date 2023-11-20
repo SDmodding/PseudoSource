@@ -9,8 +9,8 @@ void __fastcall Scaleform::GFx::AS3::AvmDisplayObj::AvmDisplayObj(Scaleform::GFx
 
   v2 = pdispObj;
   v3 = this;
-  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmDisplayObjBase::`vftable';
-  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmDisplayObj::`vftable';
+  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmDisplayObjBase::`vftable;
+  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmDisplayObj::`vftable;
   this->pAS3CollectiblePtr.pObject = 0i64;
   this->pDispObj = pdispObj;
   this->pClassName = 0i64;
@@ -41,7 +41,7 @@ void __fastcall Scaleform::GFx::AS3::AvmDisplayObj::~AvmDisplayObj(Scaleform::GF
   unsigned int v3; // eax
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmDisplayObj::`vftable';
+  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmDisplayObj::`vftable;
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, (void *)this->pClassName);
   v2 = v1->pAS3CollectiblePtr.pObject;
   if ( v2 )
@@ -60,7 +60,7 @@ void __fastcall Scaleform::GFx::AS3::AvmDisplayObj::~AvmDisplayObj(Scaleform::GF
       }
     }
   }
-  v1->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmDisplayObjBase::`vftable';
+  v1->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmDisplayObjBase::`vftable;
 }
 
 // File Line: 59
@@ -2430,9 +2430,9 @@ void __fastcall Scaleform::GFx::AS3::ShapeObject::ShapeObject(Scaleform::GFx::AS
   Scaleform::GFx::AS3::AvmDisplayObj::AvmDisplayObj(
     (Scaleform::GFx::AS3::AvmDisplayObj *)&v6->vfptr,
     (Scaleform::GFx::DisplayObject *)&v6->vfptr);
-  v6->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::AS3::ShapeObject::`vftable'{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>'};
-  v6->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::AS3::ShapeObject::`vftable'{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>'};
-  v6->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::ShapeObject::`vftable';
+  v6->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::AS3::ShapeObject::`vftable{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>};
+  v6->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::AS3::ShapeObject::`vftable{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>};
+  v6->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::ShapeObject::`vftable;
   if ( v5 )
     Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)&v5->vfptr);
   v6->pDef.pObject = (Scaleform::GFx::ShapeBaseCharacterDef *)v5;
@@ -2448,9 +2448,9 @@ void __fastcall Scaleform::GFx::AS3::ShapeObject::~ShapeObject(Scaleform::GFx::A
   Scaleform::GFx::Resource *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::AS3::ShapeObject::`vftable'{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>'};
-  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::AS3::ShapeObject::`vftable'{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>'};
-  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::ShapeObject::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::AS3::ShapeObject::`vftable{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>};
+  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::AS3::ShapeObject::`vftable{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>};
+  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::ShapeObject::`vftable;
   this->AvmObjOffset = 0;
   v2 = this->pDrawing.pObject;
   if ( v2 )

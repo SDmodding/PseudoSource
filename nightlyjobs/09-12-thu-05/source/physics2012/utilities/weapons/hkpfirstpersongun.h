@@ -8,7 +8,7 @@ void __fastcall hkpFirstPersonGun::~hkpFirstPersonGun(hkpFirstPersonGun *this)
   int v4; // er8
 
   v1 = 0;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpFirstPersonGun::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpFirstPersonGun::`vftable;
   v2 = this;
   if ( this->m_listeners.m_size > 0 )
   {
@@ -31,6 +31,6 @@ void __fastcall hkpFirstPersonGun::~hkpFirstPersonGun(hkpFirstPersonGun *this)
   v2->m_listeners.m_data = 0i64;
   v2->m_listeners.m_capacityAndFlags = 2147483648;
   hkStringPtr::~hkStringPtr(&v2->m_name);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 

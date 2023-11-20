@@ -7,7 +7,7 @@ AK::IAkPlugin *__fastcall CreateFlangerFX(AK::IAkPluginMemAlloc *in_pAllocator)
   result = (AK::IAkPlugin *)in_pAllocator->vfptr->Malloc(in_pAllocator, 192ui64);
   if ( !result )
     return 0i64;
-  result->vfptr = (AK::IAkPluginVtbl *)&CAkFlangerFX::`vftable';
+  result->vfptr = (AK::IAkPluginVtbl *)&CAkFlangerFX::`vftable;
   result[1].vfptr = 0i64;
   result[2].vfptr = 0i64;
   result[3].vfptr = 0i64;
@@ -38,7 +38,7 @@ AK::IAkPlugin *__fastcall CreateFlangerFX(AK::IAkPluginMemAlloc *in_pAllocator)
 // RVA: 0xAF9970
 void __fastcall CAkFlangerFX::CAkFlangerFX(CAkFlangerFX *this)
 {
-  this->vfptr = (AK::IAkPluginVtbl *)&CAkFlangerFX::`vftable';
+  this->vfptr = (AK::IAkPluginVtbl *)&CAkFlangerFX::`vftable;
   this->m_pUniCombs = 0i64;
   this->m_pLFO = 0i64;
   this->m_pSharedParams = 0i64;
@@ -68,7 +68,7 @@ void __fastcall CAkFlangerFX::CAkFlangerFX(CAkFlangerFX *this)
 // RVA: 0xAF9A00
 void __fastcall CAkFlangerFX::~CAkFlangerFX(CAkFlangerFX *this)
 {
-  this->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable';
+  this->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable;
 }
 
 // File Line: 65

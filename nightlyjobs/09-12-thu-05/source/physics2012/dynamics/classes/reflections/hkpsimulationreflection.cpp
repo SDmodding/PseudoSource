@@ -42,7 +42,7 @@ hkClass *__fastcall hkpSimulation::staticClass()
 void __fastcall finishLoadedObjecthkpSimulation(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpSimulation::`vftable';
+    *(_QWORD *)p = &hkpSimulation::`vftable;
 }
 
 // File Line: 117
@@ -56,7 +56,7 @@ void __fastcall cleanupLoadedObjecthkpSimulation(void *p)
 // RVA: 0xD51140
 void **__fastcall getVtablehkpSimulation()
 {
-  return &hkpSimulation::`vftable';
+  return &hkpSimulation::`vftable;
 }
 
 // File Line: 143

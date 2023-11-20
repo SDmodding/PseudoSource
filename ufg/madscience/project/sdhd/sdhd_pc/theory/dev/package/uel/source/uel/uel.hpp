@@ -177,7 +177,7 @@ void __fastcall UEL::InvocableBindingEntry::InvocableBindingEntry(UEL::Invocable
   this->mNode.mChild[1] = 0i64;
   this->mNode.mUID = v16;
   this->name.mUID = -1;
-  `eh vector constructor iterator'(this->args, 8ui64, 8, (void (__fastcall *)(void *))UEL::Value::Type::Type);
+  `eh vector constructor iterator(this->args, 8ui64, 8, (void (__fastcall *)(void *))UEL::Value::Type::Type);
   v14->functionTableIndex = v13;
   v14->returnType.mBaseType.mValue = **(_WORD **)&v12;
   v14->returnType.mDetailedType.mUID = *(_DWORD *)(*(_QWORD *)&v12 + 4i64);
@@ -252,7 +252,7 @@ void __fastcall UEL::ParameterBindingEntry::~ParameterBindingEntry(UEL::Paramete
 // RVA: 0x1933A0
 void __fastcall UEL::Expression::~Expression(UEL::Expression *this)
 {
-  this->vfptr = (UEL::ExpressionVtbl *)&UEL::Expression::`vftable';
+  this->vfptr = (UEL::ExpressionVtbl *)&UEL::Expression::`vftable;
 }
 
 // File Line: 652

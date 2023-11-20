@@ -3,7 +3,7 @@
 void __fastcall hkpVehicleDefaultAerodynamics::hkpVehicleDefaultAerodynamics(hkpVehicleDefaultAerodynamics *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpVehicleDefaultAerodynamics::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpVehicleDefaultAerodynamics::`vftable;
   this->m_extraGravityws = 0i64;
   *(_QWORD *)&this->m_airDensity = 0i64;
   *(_QWORD *)&this->m_dragCoefficient = 0i64;

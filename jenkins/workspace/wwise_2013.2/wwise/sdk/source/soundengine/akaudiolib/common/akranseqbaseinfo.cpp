@@ -22,7 +22,7 @@ void __fastcall CAkRandomInfo::CAkRandomInfo(CAkRandomInfo *this, unsigned __int
 
   this->m_wRemainingItemsToPlay = in_wItemCount;
   this->m_wCounter = in_wItemCount;
-  this->vfptr = (CAkContainerBaseInfoVtbl *)&CAkRandomInfo::`vftable';
+  this->vfptr = (CAkContainerBaseInfoVtbl *)&CAkRandomInfo::`vftable;
   v2 = 50000 * in_wItemCount;
   this->m_ulTotalWeight = v2;
   this->m_ulRemainingWeight = v2;
@@ -98,7 +98,7 @@ CAkContainerBaseInfo *__fastcall CAkRandomInfo::Clone(CAkRandomInfo *this, unsig
     return 0i64;
   v5[8] = v2;
   v5[9] = v2;
-  *(_QWORD *)v5 = &CAkRandomInfo::`vftable';
+  *(_QWORD *)v5 = &CAkRandomInfo::`vftable;
   v7 = 50000 * v2;
   *((_DWORD *)v6 + 2) = v7;
   *((_DWORD *)v6 + 3) = v7;
@@ -233,7 +233,7 @@ __int64 __fastcall CAkRandomInfo::GetRandomValue(CAkRandomInfo *this)
 void __fastcall CAkSequenceInfo::CAkSequenceInfo(CAkSequenceInfo *this)
 {
   this->m_bIsForward = 1;
-  this->vfptr = (CAkContainerBaseInfoVtbl *)&CAkSequenceInfo::`vftable';
+  this->vfptr = (CAkContainerBaseInfoVtbl *)&CAkSequenceInfo::`vftable;
   this->m_i16LastPositionChosen = -1;
 }
 
@@ -249,7 +249,7 @@ CAkContainerBaseInfo *__fastcall CAkSequenceInfo::Clone(CAkSequenceInfo *this, u
   if ( result )
   {
     LOBYTE(result[1].vfptr) = 1;
-    result->vfptr = (CAkContainerBaseInfoVtbl *)&CAkSequenceInfo::`vftable';
+    result->vfptr = (CAkContainerBaseInfoVtbl *)&CAkSequenceInfo::`vftable;
     WORD1(result[1].vfptr) = -1;
     LOBYTE(result[1].vfptr) = v2->m_bIsForward;
     WORD1(result[1].vfptr) = v2->m_i16LastPositionChosen;

@@ -5,7 +5,7 @@ void __fastcall SSInvokeBase::~SSInvokeBase(SSInvokeBase *this)
   SSInvokeBase *v1; // rbx
 
   v1 = this;
-  this->vfptr = (SSInvokeBaseVtbl *)&SSInvokeBase::`vftable';
+  this->vfptr = (SSInvokeBaseVtbl *)&SSInvokeBase::`vftable;
   APCompactArrayBase<SSParameterBase>::free_all((APCompactArrayBase<SSParameterBase> *)&this->i_arguments);
   APCompactArrayBase<SSParameterBase>::free_all((APCompactArrayBase<SSParameterBase> *)&v1->i_return_args);
   AMemory::c_free_func(v1->i_return_args.i_array_p);
@@ -142,14 +142,14 @@ void __fastcall SSInvocation::~SSInvocation(SSInvocation *this)
   SSInvokeBase *v3; // rcx
 
   v1 = this;
-  this->vfptr = (SSExpressionBaseVtbl *)&SSInvocation::`vftable';
+  this->vfptr = (SSExpressionBaseVtbl *)&SSInvocation::`vftable;
   v2 = this->i_receiver_p;
   if ( v2 )
     v2->vfptr->__vecDelDtor(v2, 1u);
   v3 = v1->i_call_p;
   if ( v3 )
     v3->vfptr->__vecDelDtor(v3, 1u);
-  v1->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
+  v1->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
 }
 
 // File Line: 665
@@ -523,8 +523,8 @@ void __fastcall SSInvokeCascade::SSInvokeCascade(SSInvokeCascade *this, const vo
 
   v2 = binary_pp;
   v3 = this;
-  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-  this->vfptr = (SSExpressionBaseVtbl *)&SSInvokeCascade::`vftable';
+  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+  this->vfptr = (SSExpressionBaseVtbl *)&SSInvokeCascade::`vftable;
   v4 = &this->i_invoke_calls;
   v4->i_count = 0;
   v4->i_array_p = 0i64;
@@ -564,12 +564,12 @@ void __fastcall SSInvokeCascade::SSInvokeCascade(SSInvokeCascade *this, const vo
         {
           v11->i_name = (ASymbol)ASymbol::get_null()->i_uid;
           v11->i_scope_p = 0i64;
-          v11->vfptr = (SSInvokeBaseVtbl *)&SSInvokeBase::`vftable';
+          v11->vfptr = (SSInvokeBaseVtbl *)&SSInvokeBase::`vftable;
           v11->i_arguments.i_count = 0;
           v11->i_arguments.i_array_p = 0i64;
           v11->i_return_args.i_count = 0;
           v11->i_return_args.i_array_p = 0i64;
-          v11->vfptr = (SSInvokeBaseVtbl *)&SSCoroutineCall::`vftable';
+          v11->vfptr = (SSInvokeBaseVtbl *)&SSCoroutineCall::`vftable;
           SSInvokeBase::assign_binary(v11, v2);
         }
         else
@@ -589,12 +589,12 @@ void __fastcall SSInvokeCascade::SSInvokeCascade(SSInvokeCascade *this, const vo
       {
         v11->i_name = (ASymbol)ASymbol::get_null()->i_uid;
         v11->i_scope_p = 0i64;
-        v11->vfptr = (SSInvokeBaseVtbl *)&SSInvokeBase::`vftable';
+        v11->vfptr = (SSInvokeBaseVtbl *)&SSInvokeBase::`vftable;
         v11->i_arguments.i_count = 0;
         v11->i_arguments.i_array_p = 0i64;
         v11->i_return_args.i_count = 0;
         v11->i_return_args.i_array_p = 0i64;
-        v11->vfptr = (SSInvokeBaseVtbl *)&SSMethodCall::`vftable';
+        v11->vfptr = (SSInvokeBaseVtbl *)&SSMethodCall::`vftable;
         SSInvokeBase::assign_binary(v11, v2);
       }
       else
@@ -834,8 +834,8 @@ void __fastcall SSInstantiate::SSInstantiate(SSInstantiate *this, const void **b
 
   v2 = binary_pp;
   v3 = this;
-  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-  this->vfptr = (SSExpressionBaseVtbl *)&SSInstantiate::`vftable';
+  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+  this->vfptr = (SSExpressionBaseVtbl *)&SSInstantiate::`vftable;
   v4 = ASymbol::create_from_binary(&result, binary_pp);
   v3->i_class_p = SSBrain::get_class(v4);
   v5 = (SSMethodCall *)AMemory::c_malloc_func(0x38ui64, "SSMethodCall");

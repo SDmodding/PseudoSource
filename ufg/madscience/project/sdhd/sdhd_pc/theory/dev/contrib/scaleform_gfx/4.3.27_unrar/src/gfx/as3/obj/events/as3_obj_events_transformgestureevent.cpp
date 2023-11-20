@@ -176,7 +176,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_events::TransformGestureEvent
   Scaleform::GFx::AS3::Instances::fl_events::GestureEvent::GestureEvent(
     (Scaleform::GFx::AS3::Instances::fl_events::GestureEvent *)&this->vfptr,
     t);
-  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_events::TransformGestureEvent::`vftable';
+  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_events::TransformGestureEvent::`vftable;
   v2->LocalOffsetY = 0.0;
   v2->LocalOffsetX = 0.0;
   v2->OffsetY = 0.0;
@@ -850,7 +850,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_events::TransformGestureEvent
     0x13u,
     &argv);
   Scaleform::GFx::AS3::Value::Convert2String(&v65, (Scaleform::GFx::AS3::CheckResult *)&resulta, v2);
-  `eh vector destructor iterator'(&argv, 0x20ui64, 19, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&argv, 0x20ui64, 19, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
   v63 = v65.Flags;
   if ( (v65.Flags & 0x1F) > 9 )
   {
@@ -868,7 +868,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_events::TransformGestureEvent
       Scaleform::GFx::AS3::Value::ReleaseInternal(&v65);
     }
   }
-}iterator'(&argv, 0x20ui64, 19, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+}iterator(&argv, 0x20ui64, 19, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
   v63 = v65.Flags;
   if ( (v65.Flags & 0x1F) > 9 )
   {
@@ -1155,10 +1155,10 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v5 )
   {
     Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, v2, &Scaleform::GFx::AS3::fl_events::TransformGestureEventCI);
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable';
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_events::Event::`vftable';
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_events::GestureEvent::`vftable';
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_events::TransformGestureEvent::`vftable';
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable;
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_events::Event::`vftable;
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_events::GestureEvent::`vftable;
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_events::TransformGestureEvent::`vftable;
   }
   else
   {
@@ -1173,10 +1173,10 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
       v7,
       v2,
       &Scaleform::GFx::AS3::fl_events::TransformGestureEventCI);
-    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable';
-    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_events::Event::`vftable';
-    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_events::GestureEvent::`vftable';
-    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_events::TransformGestureEvent::`vftable';
+    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable;
+    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_events::Event::`vftable;
+    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_events::GestureEvent::`vftable;
+    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_events::TransformGestureEvent::`vftable;
   }
   else
   {
@@ -1192,7 +1192,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v9 )
   {
     Scaleform::GFx::AS3::Class::Class(v9, v3->pV);
-    v10->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl_events::TransformGestureEvent::`vftable';
+    v10->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl_events::TransformGestureEvent::`vftable;
     v10[1].vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)"gesturePan";
     v10[1].pRCCRaw = (unsigned __int64)"gestureRotate";
     v10[1].pNext = (Scaleform::GFx::AS3::RefCountBaseGC<328> *)"gestureSwipe";

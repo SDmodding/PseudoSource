@@ -99,13 +99,13 @@ void __fastcall Scaleform::Render::D3D1x::RenderTargetData::RenderTargetData(Sca
   v5 = pdsb;
   v6 = prt;
   v7 = this;
-  this->vfptr = (Scaleform::Render::RenderBuffer::RenderTargetDataVtbl *)&Scaleform::Render::RenderBuffer::RenderTargetData::`vftable';
+  this->vfptr = (Scaleform::Render::RenderBuffer::RenderTargetDataVtbl *)&Scaleform::Render::RenderBuffer::RenderTargetData::`vftable;
   this->pBuffer = buffer;
   if ( pdsb )
     ((void (__fastcall *)(Scaleform::Render::DepthStencilBuffer *))pdsb->vfptr[1].__vecDelDtor)(pdsb);
   v7->pDepthStencilBuffer.pObject = v5;
   v7->CacheID = 0i64;
-  v7->vfptr = (Scaleform::Render::RenderBuffer::RenderTargetDataVtbl *)&Scaleform::Render::D3D1x::RenderTargetData::`vftable';
+  v7->vfptr = (Scaleform::Render::RenderBuffer::RenderTargetDataVtbl *)&Scaleform::Render::D3D1x::RenderTargetData::`vftable;
   v7->pRenderSurface = v6;
   v7->pDSSurface = pdss;
   if ( v6 )

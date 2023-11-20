@@ -59,7 +59,7 @@ void __fastcall UFG::VehicleOccupantComponent::VehicleOccupantComponent(UFG::Veh
   v4 = (UFG::qNode<UFG::VehicleOccupantComponent,UFG::VehicleOccupantComponent> *)&v3->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleOccupantComponent::`vftable';
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleOccupantComponent::`vftable;
   v3->mpParkingSpot = 0i64;
   v36 = &v3->mpDriver;
   v36->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v36->mPrev;
@@ -69,7 +69,7 @@ void __fastcall UFG::VehicleOccupantComponent::VehicleOccupantComponent(UFG::Veh
   v37->mNode.mPrev = &v37->mNode;
   v37->mNode.mNext = &v37->mNode;
   v5 = v3->mpReservations;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v3->mpReservations,
     0x18ui64,
     10,
@@ -218,7 +218,7 @@ void __fastcall UFG::VehicleOccupantComponent::~VehicleOccupantComponent(UFG::Ve
   UFG::qNode<UFG::VehicleOccupantComponent,UFG::VehicleOccupantComponent> *v16; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleOccupantComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleOccupantComponent::`vftable;
   v2 = this->mPassengers.mNode.mNext - 4;
   v3 = &this->m_BoundComponentHandles;
   if ( v2 != (UFG::qNode<UFG::CharacterOccupantComponent,UFG::_VehicleOccupantList> *)&this->m_BoundComponentHandles )
@@ -245,7 +245,7 @@ void __fastcall UFG::VehicleOccupantComponent::~VehicleOccupantComponent(UFG::Ve
   v9->mPrev = v8;
   v7->mPrev = v7;
   v7->mNext = v7;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->mpReservations,
     0x18ui64,
     10,

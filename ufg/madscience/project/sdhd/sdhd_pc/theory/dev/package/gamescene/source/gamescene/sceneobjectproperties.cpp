@@ -27,7 +27,7 @@ void __fastcall UFG::SceneObjectProperties::SceneObjectProperties(UFG::SceneObje
   v10 = (UFG::qNode<UFG::SceneObjectProperties,UFG::SceneObjectProperties> *)&v9->mPrev;
   v10->mPrev = v10;
   v10->mNext = v10;
-  v9->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SceneObjectProperties::`vftable';
+  v9->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SceneObjectProperties::`vftable;
   v14 = &v9->mpOwner;
   v14->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v14->mPrev;
   v14->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v14->mPrev;
@@ -92,7 +92,7 @@ void __fastcall UFG::SceneObjectProperties::SceneObjectProperties(UFG::SceneObje
   v6 = (UFG::qNode<UFG::SceneObjectProperties,UFG::SceneObjectProperties> *)&v5->mPrev;
   v6->mPrev = v6;
   v6->mNext = v6;
-  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SceneObjectProperties::`vftable';
+  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SceneObjectProperties::`vftable;
   v10 = &v5->mpOwner;
   v10->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v10->mPrev;
   v10->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v10->mPrev;
@@ -263,7 +263,7 @@ void __fastcall UFG::SceneObjectProperties::~SceneObjectProperties(UFG::SceneObj
   UFG::qNode<UFG::SceneObjectProperties,UFG::SceneObjectProperties> *v23; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SceneObjectProperties::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SceneObjectProperties::`vftable;
   v2 = &this->mChildren;
   v3 = this->mChildren.mCount;
   if ( v3 )
@@ -458,7 +458,7 @@ UFG::SceneObjectProperties *__fastcall UFG::SceneObjectProperties::Create(unsign
     v10 = (UFG::qNode<UFG::SceneObjectProperties,UFG::SceneObjectProperties> *)&v9->mPrev;
     v10->mPrev = v10;
     v10->mNext = v10;
-    v9->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SceneObjectProperties::`vftable';
+    v9->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SceneObjectProperties::`vftable;
     v11 = &v9->mpOwner;
     v11->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v11->mPrev;
     v11->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v11->mPrev;

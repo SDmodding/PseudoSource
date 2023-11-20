@@ -23,8 +23,8 @@ void __fastcall CAkContinuousPBI::CAkContinuousPBI(CAkContinuousPBI *this, CAkSo
     0,
     in_pAMLimiter,
     in_pBusLimiter);
-  v14->vfptr = (CAkTransportAwareVtbl *)&CAkContinuousPBI::`vftable'{for `CAkTransportAware'};
-  v14->vfptr = (ITransitionableVtbl *)&CAkContinuousPBI::`vftable'{for `ITransitionable'};
+  v14->vfptr = (CAkTransportAwareVtbl *)&CAkContinuousPBI::`vftable{for `CAkTransportAware};
+  v14->vfptr = (ITransitionableVtbl *)&CAkContinuousPBI::`vftable{for `ITransitionable};
   v15 = in_Cparameters->spContList.m_pT;
   v14->m_spContList.m_pT = v15;
   if ( v15 )
@@ -164,8 +164,8 @@ void __fastcall CAkContinuousPBI::~CAkContinuousPBI(CAkContinuousPBI *this)
   CAkContinuationList *v2; // rcx
 
   v1 = this;
-  this->vfptr = (CAkTransportAwareVtbl *)&CAkContinuousPBI::`vftable'{for `CAkTransportAware'};
-  this->vfptr = (ITransitionableVtbl *)&CAkContinuousPBI::`vftable'{for `ITransitionable'};
+  this->vfptr = (CAkTransportAwareVtbl *)&CAkContinuousPBI::`vftable{for `CAkTransportAware};
+  this->vfptr = (ITransitionableVtbl *)&CAkContinuousPBI::`vftable{for `ITransitionable};
   ((void (*)(void))this->m_pInstigator->vfptr->Release)();
   v2 = v1->m_spContList.m_pT;
   if ( v2 )

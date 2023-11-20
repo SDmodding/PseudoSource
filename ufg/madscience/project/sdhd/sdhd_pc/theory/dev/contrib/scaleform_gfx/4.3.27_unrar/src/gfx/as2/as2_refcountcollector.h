@@ -17,7 +17,7 @@ void __fastcall Scaleform::GFx::AS2::RefCountBaseGC<323>::RemoveFromList(Scalefo
 // RVA: 0x6D0920
 void __fastcall Scaleform::GFx::AS2::RefCountBaseGC<323>::~RefCountBaseGC<323>(Scaleform::GFx::AS2::RefCountBaseGC<323> *this)
 {
-  this->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::RefCountBaseGC<323>::`vftable';
+  this->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::RefCountBaseGC<323>::`vftable;
 }
 
 // File Line: 397
@@ -27,12 +27,12 @@ void __fastcall Scaleform::GFx::AS2::RefCountCollector<323>::RefCountCollector<3
   Scaleform::ArrayPagedLH_POD<Scaleform::GFx::AS2::RefCountBaseGC<323> *,10,5,2> *v1; // [rsp+28h] [rbp+10h]
   Scaleform::GFx::AS2::RefCountCollector<323>::Root *v2; // [rsp+28h] [rbp+10h]
 
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,323>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::AS2::RefCountCollector<323>,323>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS2::RefCountCollector<323>::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,323>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::AS2::RefCountCollector<323>,323>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS2::RefCountCollector<323>::`vftable;
   v1 = &this->Roots;
   v1->Size = 0i64;
   v1->NumPages = 0i64;
@@ -40,9 +40,9 @@ void __fastcall Scaleform::GFx::AS2::RefCountCollector<323>::RefCountCollector<3
   v1->Pages = 0i64;
   this->FirstFreeRootIndex = -1i64;
   v2 = &this->ListRoot;
-  *(_OWORD *)&v2->vfptr = (unsigned __int64)&Scaleform::GFx::AS2::RefCountBaseGC<323>::`vftable';
+  *(_OWORD *)&v2->vfptr = (unsigned __int64)&Scaleform::GFx::AS2::RefCountBaseGC<323>::`vftable;
   v2->RefCount = 1;
-  v2->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::RefCountCollector<323>::Root::`vftable';
+  v2->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::RefCountCollector<323>::Root::`vftable;
   this->Flags = 0;
   this->pLastPtr = (Scaleform::GFx::AS2::RefCountBaseGC<323> *)&this->ListRoot.vfptr;
 }
@@ -54,9 +54,9 @@ void __fastcall Scaleform::GFx::AS2::RefCountCollector<323>::~RefCountCollector<
   Scaleform::GFx::AS2::RefCountCollector<323> *v1; // rbx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS2::RefCountCollector<323>::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS2::RefCountCollector<323>::`vftable;
   Scaleform::GFx::AS2::RefCountCollector<323>::Collect(this, 0i64);
-  v1->ListRoot.vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::RefCountBaseGC<323>::`vftable';
+  v1->ListRoot.vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::RefCountBaseGC<323>::`vftable;
   Scaleform::ArrayPagedBase<Scaleform::Render::GlyphCache::UpdateRect,6,16,Scaleform::AllocatorPagedLH_POD<Scaleform::Render::GlyphCache::UpdateRect,2>>::ClearAndRelease((Scaleform::ArrayPagedBase<Scaleform::GFx::AS2::RefCountBaseGC<323> *,10,5,Scaleform::AllocatorPagedLH_POD<Scaleform::GFx::AS2::RefCountBaseGC<323> *,2> > *)v1->Roots.gap0);
   Scaleform::RefCountImplCore::~RefCountImplCore((Scaleform::RefCountImplCore *)&v1->vfptr);
 }

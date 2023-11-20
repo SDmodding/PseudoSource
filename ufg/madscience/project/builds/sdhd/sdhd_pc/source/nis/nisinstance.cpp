@@ -22,7 +22,7 @@ void __fastcall NISInstance::NISInstance(NISInstance *this, const char *pathName
   v4->mPrev = v4;
   v4->mNext = v4;
   UFG::qSafePointerNode<NISInstance>::qSafePointerNode<NISInstance>((UFG::qSafePointerNode<NISInstance> *)&this->vfptr);
-  v3->vfptr = (UFG::qSafePointerNode<NISInstance>Vtbl *)&NISInstance::`vftable';
+  v3->vfptr = (UFG::qSafePointerNode<NISInstance>Vtbl *)&NISInstance::`vftable;
   v3->mSoundbankSymbol.mUID = -1;
   _((AMD_HD3D *)0xFFFFFFFFi64);
   AnimationGroupHandle::AnimationGroupHandle(&v3->mAnimationGroupHandle);
@@ -89,7 +89,7 @@ void __fastcall NISInstance::~NISInstance(NISInstance *this)
   UFG::qNode<NISInstance,NISInstanceMasterList> *v10; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<NISInstance>Vtbl *)&NISInstance::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<NISInstance>Vtbl *)&NISInstance::`vftable;
   NISInstance::Unload(this, 0);
   v2 = v1->mpNISNode;
   if ( v2 )
@@ -106,7 +106,7 @@ void __fastcall NISInstance::~NISInstance(NISInstance *this)
   if ( v4 )
   {
     v5 = &v4[-1].mUserContext;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v4,
       0x1E8ui64,
       (int)v4[-1].mUserContext,
@@ -119,7 +119,7 @@ void __fastcall NISInstance::~NISInstance(NISInstance *this)
   AnimationGroupHandle::~AnimationGroupHandle(&v1->mFacialAnimGroupHandle);
   AnimationGroupHandle::~AnimationGroupHandle(&v1->mAnimationGroupHandle);
   _((AMD_HD3D *)v1->mSoundbankSymbol.mUID);
-  v1->vfptr = (UFG::qSafePointerNode<NISInstance>Vtbl *)&UFG::qSafePointerNode<NISInstance>::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<NISInstance>Vtbl *)&UFG::qSafePointerNode<NISInstance>::`vftable;
   UFG::qSafePointerNode<UFG::DynamicCoverCorner>::SetAllPointersToNull((UFG::qSafePointerNode<UFG::ParkourHandle> *)v1);
   UFG::qList<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList,1,0>::DeleteNodes((UFG::qList<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList,1,0> *)&v1->m_SafePointerList);
   v6 = v1->m_SafePointerList.mNode.mPrev;

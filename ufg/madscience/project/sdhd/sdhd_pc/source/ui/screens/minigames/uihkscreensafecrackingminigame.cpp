@@ -14,7 +14,7 @@ void __fastcall UFG::UIHKScreenSafeCrackingMinigame::UIHKScreenSafeCrackingMinig
   v2 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -25,12 +25,12 @@ void __fastcall UFG::UIHKScreenSafeCrackingMinigame::UIHKScreenSafeCrackingMinig
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --v1->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKTaskableScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKTaskableScreen::`vftable;
   this->mFinished = 0;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKMinigameScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKMinigameScreen::`vftable;
   *(_QWORD *)&this->mfAlphaValue = 1109393408i64;
   ++UFG::UIHKMinigameScreen::mNumMinigameScreens;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenSafeCrackingMinigame::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenSafeCrackingMinigame::`vftable;
   this->mSavedControllerMode = UFG::gInputSystem->mControllers[UFG::gActiveControllerNum]->m_ActiveMapSet;
   UFG::SetInputMode(IM_UI_ONLY, UFG::gInputSystem->mControllers[UFG::gActiveControllerNum]->mControllerIndex);
   UFG::UIHKScreenSafeCrackingMinigame::m_bWon = 0;
@@ -65,7 +65,7 @@ void __fastcall UFG::UIHKScreenSafeCrackingMinigame::~UIHKScreenSafeCrackingMini
   UFG::qWiseSymbol v11; // [rsp+60h] [rbp+18h]
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenSafeCrackingMinigame::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenSafeCrackingMinigame::`vftable;
   v2 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseScreen(v2, "SafeCrackingMinigame");
   UFG::SetInputMode(
@@ -265,7 +265,7 @@ LABEL_22:
     }
     v8 = 1;
   }
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     &pargs.mValue,
     0x30ui64,
     2,
@@ -322,7 +322,7 @@ LABEL_22:
   }
   UFG::UIHKMissionProgressWidget::Update(UFG::UIHKScreenHud::MissionProgress, (UFG::UIScreen *)&v3->vfptr);
   UFG::UIScreen::update((UFG::UIScreen *)&v3->vfptr, v2);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     &pargs.mValue,
     0x30ui64,
     2,

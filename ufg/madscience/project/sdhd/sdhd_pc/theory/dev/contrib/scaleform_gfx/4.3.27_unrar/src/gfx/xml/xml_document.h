@@ -2,7 +2,7 @@
 // RVA: 0x6D2580
 void __fastcall Scaleform::GFx::XML::ShadowRefBase::~ShadowRefBase(Scaleform::GFx::XML::ShadowRefBase *this)
 {
-  this->vfptr = (Scaleform::GFx::XML::ShadowRefBaseVtbl *)&Scaleform::GFx::XML::ShadowRefBase::`vftable';
+  this->vfptr = (Scaleform::GFx::XML::ShadowRefBaseVtbl *)&Scaleform::GFx::XML::ShadowRefBase::`vftable;
 }
 
 // File Line: 59
@@ -48,12 +48,12 @@ void __fastcall Scaleform::GFx::XML::Prefix::Prefix(Scaleform::GFx::XML::Prefix 
   Scaleform::GFx::XML::DOMStringNode *v8; // rcx
 
   v3 = value.pNode;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,326>::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseNTS<Scaleform::GFx::XML::Prefix,326>::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::XML::Prefix::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,326>::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseNTS<Scaleform::GFx::XML::Prefix,326>::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::XML::Prefix::`vftable;
   v4 = name.pNode->pData;
   this->Name.pNode = (Scaleform::GFx::XML::DOMStringNode *)name.pNode->pData;
   ++*((_DWORD *)v4 + 6);

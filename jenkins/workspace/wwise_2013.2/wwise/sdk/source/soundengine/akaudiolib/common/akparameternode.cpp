@@ -6,7 +6,7 @@ void __fastcall CAkParameterNode::CAkParameterNode(CAkParameterNode *this, unsig
 
   v2 = this;
   CAkParameterNodeBase::CAkParameterNodeBase((CAkParameterNodeBase *)&this->vfptr, in_ulID);
-  v2->vfptr = (CAkIndexableVtbl *)&CAkParameterNode::`vftable';
+  v2->vfptr = (CAkIndexableVtbl *)&CAkParameterNode::`vftable;
   v2->m_pMapSIS = 0i64;
   v2->m_p3DParameters = 0i64;
   v2->m_ranges.m_pProps = 0i64;
@@ -40,7 +40,7 @@ void __fastcall CAkParameterNode::~CAkParameterNode(CAkParameterNode *this)
   char *v17; // rdx
 
   v1 = this;
-  this->vfptr = (CAkIndexableVtbl *)&CAkParameterNode::`vftable';
+  this->vfptr = (CAkIndexableVtbl *)&CAkParameterNode::`vftable;
   v2 = this->m_pMapSIS;
   if ( v2 )
   {
@@ -2165,7 +2165,7 @@ signed __int64 __fastcall CAkParameterNode::Enable3DPosParams(CAkParameterNode *
     return 52i64;
   CAkGen3DParams::CAkGen3DParams(v2);
   result = 1i64;
-  v3->vfptr = (CAkGen3DParamsVtbl *)&CAkGen3DParamsEx::`vftable';
+  v3->vfptr = (CAkGen3DParamsVtbl *)&CAkGen3DParamsEx::`vftable;
   v3->m_PathState.ulCurrentListIndex = 0;
   v3->m_PathState.pbPlayed = 0i64;
   v3->m_Params.m_ID = v1->key;
@@ -2310,7 +2310,7 @@ CAkSIS *__fastcall CAkParameterNode::GetSIS(CAkParameterNode *this, CAkRegistere
       {
         v16->m_pParamNode = (CAkParameterNodeBase *)&v3->vfptr;
         v16->m_pGameObj = 0i64;
-        v16->vfptr = (ITransitionableVtbl *)&CAkSIS::`vftable';
+        v16->vfptr = (ITransitionableVtbl *)&CAkSIS::`vftable;
         v16->m_values.m_pProps = 0i64;
         v16->m_bitsFXBypass = v15;
       }
@@ -2361,7 +2361,7 @@ LABEL_34:
     {
       v12->m_pParamNode = (CAkParameterNodeBase *)&v3->vfptr;
       v12->m_pGameObj = v2;
-      v12->vfptr = (ITransitionableVtbl *)&CAkSIS::`vftable';
+      v12->vfptr = (ITransitionableVtbl *)&CAkSIS::`vftable;
       v12->m_values.m_pProps = 0i64;
       v12->m_bitsFXBypass = v11;
       if ( CAkKeyArray<CAkRegisteredObj *,CAkSIS *,4>::Set(

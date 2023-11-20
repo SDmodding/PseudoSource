@@ -555,22 +555,22 @@ void __fastcall Scaleform::Render::ShapeDataPacked<Scaleform::ArrayLH_POD<unsign
   }
   else
   {
-    if ( !(`Scaleform::Render::ShapeDataPacked<Scaleform::ArrayLH_POD<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::GetFillStyle'::`5'::`local static guard' & 1) )
+    if ( !(`Scaleform::Render::ShapeDataPacked<Scaleform::ArrayLH_POD<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::GetFillStyle::`5::`local static guard & 1) )
     {
-      `Scaleform::Render::ShapeDataPacked<Scaleform::ArrayLH_POD<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::GetFillStyle'::`5'::`local static guard' |= 1u;
-      `Scaleform::Render::ShapeDataPacked<Scaleform::ArrayLH_POD<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::GetFillStyle'::`5'::defaultFillStyle.Color = 0;
-      `Scaleform::Render::ShapeDataPacked<Scaleform::ArrayLH_POD<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::GetFillStyle'::`5'::defaultFillStyle.pFill.pObject = 0i64;
-      atexit(`Scaleform::Render::ShapeDataPacked<Scaleform::ArrayLH_POD<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::GetFillStyle'::`5'::`dynamic atexit destructor for 'defaultFillStyle'');
+      `Scaleform::Render::ShapeDataPacked<Scaleform::ArrayLH_POD<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::GetFillStyle::`5::`local static guard |= 1u;
+      `Scaleform::Render::ShapeDataPacked<Scaleform::ArrayLH_POD<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::GetFillStyle::`5::defaultFillStyle.Color = 0;
+      `Scaleform::Render::ShapeDataPacked<Scaleform::ArrayLH_POD<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::GetFillStyle::`5::defaultFillStyle.pFill.pObject = 0i64;
+      atexit(`Scaleform::Render::ShapeDataPacked<Scaleform::ArrayLH_POD<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::GetFillStyle::`5::`dynamic atexit destructor for defaultFillStyle);
     }
-    v3->Color = `Scaleform::Render::ShapeDataPacked<Scaleform::ArrayLH_POD<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::GetFillStyle'::`5'::defaultFillStyle.Color;
-    if ( `Scaleform::Render::ShapeDataPacked<Scaleform::ArrayLH_POD<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::GetFillStyle'::`5'::defaultFillStyle.pFill.pObject )
+    v3->Color = `Scaleform::Render::ShapeDataPacked<Scaleform::ArrayLH_POD<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::GetFillStyle::`5::defaultFillStyle.Color;
+    if ( `Scaleform::Render::ShapeDataPacked<Scaleform::ArrayLH_POD<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::GetFillStyle::`5::defaultFillStyle.pFill.pObject )
       _InterlockedExchangeAdd(
-        &`Scaleform::Render::ShapeDataPacked<Scaleform::ArrayLH_POD<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::GetFillStyle'::`5'::defaultFillStyle.pFill.pObject->RefCount,
+        &`Scaleform::Render::ShapeDataPacked<Scaleform::ArrayLH_POD<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::GetFillStyle::`5::defaultFillStyle.pFill.pObject->RefCount,
         1u);
     v4 = v3->pFill.pObject;
     if ( v4 && !_InterlockedDecrement(&v4->RefCount) && v4 )
       v4->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v4->vfptr, 1u);
-    v5 = `Scaleform::Render::ShapeDataPacked<Scaleform::ArrayLH_POD<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::GetFillStyle'::`5'::defaultFillStyle.pFill.pObject;
+    v5 = `Scaleform::Render::ShapeDataPacked<Scaleform::ArrayLH_POD<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::GetFillStyle::`5::defaultFillStyle.pFill.pObject;
   }
   v3->pFill.pObject = v5;
 }
@@ -592,17 +592,17 @@ void __fastcall Scaleform::Render::ShapeDataPacked<Scaleform::ArrayDH<unsigned c
   }
   else
   {
-    if ( !(`Scaleform::Render::ShapeDataPacked<Scaleform::ArrayDH<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::GetStrokeStyle'::`5'::`local static guard' & 1) )
+    if ( !(`Scaleform::Render::ShapeDataPacked<Scaleform::ArrayDH<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::GetStrokeStyle::`5::`local static guard & 1) )
     {
-      `Scaleform::Render::ShapeDataPacked<Scaleform::ArrayDH<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::GetStrokeStyle'::`5'::`local static guard' |= 1u;
-      *(_QWORD *)&`Scaleform::Render::ShapeDataPacked<Scaleform::ArrayDH<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::GetStrokeStyle'::`5'::defaultStrokeStyle.Width = 0i64;
+      `Scaleform::Render::ShapeDataPacked<Scaleform::ArrayDH<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::GetStrokeStyle::`5::`local static guard |= 1u;
+      *(_QWORD *)&`Scaleform::Render::ShapeDataPacked<Scaleform::ArrayDH<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::GetStrokeStyle::`5::defaultStrokeStyle.Width = 0i64;
       *(_QWORD *)&dword_142441120 = 0i64;
       unk_142441128 = 0;
       stru_142441130.pObject = 0i64;
       unk_142441138 = 0i64;
-      atexit(`Scaleform::Render::ShapeDataPacked<Scaleform::ArrayDH<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::GetStrokeStyle'::`5'::`dynamic atexit destructor for 'defaultStrokeStyle'');
+      atexit(`Scaleform::Render::ShapeDataPacked<Scaleform::ArrayDH<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::GetStrokeStyle::`5::`dynamic atexit destructor for defaultStrokeStyle);
     }
-    v3->Width = `Scaleform::Render::ShapeDataPacked<Scaleform::ArrayDH<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::GetStrokeStyle'::`5'::defaultStrokeStyle.Width;
+    v3->Width = `Scaleform::Render::ShapeDataPacked<Scaleform::ArrayDH<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::GetStrokeStyle::`5::defaultStrokeStyle.Width;
     LODWORD(v3->Units) = unk_14244111C;
     v3->Flags = dword_142441120;
     LODWORD(v3->Miter) = unk_142441124;

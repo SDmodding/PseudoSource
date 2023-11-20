@@ -108,14 +108,14 @@ __int64 dynamic_initializer_for___stackTracerWin32DataBuf__()
 // RVA: 0xC7C9B0
 void __fastcall hkStackTracer::hkStackTracer(hkStackTracer *this)
 {
-  this->vfptr = (hkStackTracerVtbl *)&hkStackTracer::`vftable';
+  this->vfptr = (hkStackTracerVtbl *)&hkStackTracer::`vftable;
 }
 
 // File Line: 177
 // RVA: 0xC7C9D0
 void __fastcall hkStackTracer::~hkStackTracer(hkStackTracer *this)
 {
-  this->vfptr = (hkStackTracerVtbl *)&hkStackTracer::`vftable';
+  this->vfptr = (hkStackTracerVtbl *)&hkStackTracer::`vftable;
 }
 
 // File Line: 181
@@ -180,7 +180,7 @@ void __fastcall hkStackTracer::dumpStackTrace(hkStackTracer *this, const unsigne
       LODWORD(v15) = 40;
       s_impl->pSymGetLineFromAddr64(v10, v11, (unsigned __int64 *)&v14, (_IMAGEHLP_LINE64 *)&v15);
       LODWORD(v13) = v17;
-      snprintf(&string, 0x800ui64, "%s(%i):'%s'\n", (_QWORD)v18, v13, &v21);
+      snprintf(&string, 0x800ui64, "%s(%i):%s\n", (_QWORD)v18, v13, &v21);
       v5(&string, context);
       ++v8;
     }

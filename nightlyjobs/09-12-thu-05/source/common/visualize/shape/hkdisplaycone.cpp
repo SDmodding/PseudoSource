@@ -7,12 +7,12 @@ void __fastcall hkDisplayCone::hkDisplayCone(hkDisplayCone *this, const float co
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_geometry = 0i64;
   this->m_type = 4;
-  this->vfptr = (hkBaseObjectVtbl *)&hkDisplayGeometry::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkDisplayGeometry::`vftable;
   this->m_transform.m_rotation.m_col0 = (hkVector4f)transform.m_quad;
   this->m_transform.m_rotation.m_col1 = (hkVector4f)direction.m_quad;
   this->m_transform.m_rotation.m_col2 = (hkVector4f)stru_141A71280.m_quad;
   this->m_transform.m_translation = 0i64;
-  this->vfptr = (hkBaseObjectVtbl *)&hkDisplayCone::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkDisplayCone::`vftable;
   this->m_startPos = (hkVector4f)startPos->m_quad;
   v6 = coneAxis->m_quad;
   this->m_coneAngle = coneAngle;
@@ -28,13 +28,13 @@ void __fastcall hkDisplayCone::hkDisplayCone(hkDisplayCone *this)
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_type = 4;
   this->m_geometry = 0i64;
-  this->vfptr = (hkBaseObjectVtbl *)&hkDisplayGeometry::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkDisplayGeometry::`vftable;
   this->m_transform.m_rotation.m_col0 = (hkVector4f)transform.m_quad;
   this->m_transform.m_rotation.m_col1 = (hkVector4f)direction.m_quad;
   this->m_transform.m_rotation.m_col2 = (hkVector4f)stru_141A71280.m_quad;
   this->m_transform.m_translation = 0i64;
   this->m_startPos = 0i64;
-  this->vfptr = (hkBaseObjectVtbl *)&hkDisplayCone::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkDisplayCone::`vftable;
   *(_QWORD *)&this->m_numSegments = 0i64;
   this->m_coneHeight = 0.0;
   this->m_coneAxis = 0i64;
@@ -177,7 +177,7 @@ void __fastcall hkDisplayCone::buildGeometry(hkDisplayCone *this)
   if ( v3 )
   {
     v3->m_size = 0x1FFFF;
-    v3->m_data = (hkVector4f *)&hkGeometry::`vftable';
+    v3->m_data = (hkVector4f *)&hkGeometry::`vftable;
     v3[1].m_data = 0i64;
     v3[1].m_size = 0;
     v3[1].m_capacityAndFlags = 2147483648;

@@ -197,7 +197,7 @@ void __fastcall UFG::UIHKScreenSocialHub::UIHKScreenSocialHub(UFG::UIHKScreenSoc
   v2 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -212,15 +212,15 @@ void __fastcall UFG::UIHKScreenSocialHub::UIHKScreenSocialHub(UFG::UIHKScreenSoc
   v4 = (UFG::qNode<UFG::OnlineManagerObserver,UFG::OnlineManagerObserver> *)&this->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  v3->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::OnlineManagerObserver::`vftable';
+  v3->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::OnlineManagerObserver::`vftable;
   v5 = (UFG::OSuiteManagerObserver *)&this->vfptr;
   v6 = (UFG::qNode<UFG::OSuiteManagerObserver,UFG::OSuiteManagerObserver> *)&v5->mPrev;
   v6->mPrev = v6;
   v6->mNext = v6;
-  v5->vfptr = (UFG::OSuiteManagerObserverVtbl *)&UFG::OSuiteManagerObserver::`vftable';
-  v1->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenSocialHub::`vftable'{for `UFG::UIScreen'};
-  v3->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::UIHKScreenSocialHub::`vftable'{for `UFG::OnlineManagerObserver'};
-  v5->vfptr = (UFG::OSuiteManagerObserverVtbl *)&UFG::UIHKScreenSocialHub::`vftable'{for `UFG::OSuiteManagerObserver'};
+  v5->vfptr = (UFG::OSuiteManagerObserverVtbl *)&UFG::OSuiteManagerObserver::`vftable;
+  v1->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenSocialHub::`vftable{for `UFG::UIScreen};
+  v3->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::UIHKScreenSocialHub::`vftable{for `UFG::OnlineManagerObserver};
+  v5->vfptr = (UFG::OSuiteManagerObserverVtbl *)&UFG::UIHKScreenSocialHub::`vftable{for `UFG::OSuiteManagerObserver};
   v7 = (UFG::qArray<UFG::UIHKScreenMainMenu::SocialWidgetProperty,0> *)&v1->mSocialHubProperties;
   v7->p = 0i64;
   *(_QWORD *)&v7->size = 0i64;
@@ -265,11 +265,11 @@ void __fastcall UFG::UIHKScreenSocialHub::~UIHKScreenSocialHub(UFG::UIHKScreenSo
   UFG::qNode<UFG::OnlineManagerObserver,UFG::OnlineManagerObserver> *v21; // rax
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenSocialHub::`vftable'{for `UFG::UIScreen'};
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenSocialHub::`vftable{for `UFG::UIScreen};
   v2 = (UFG::OnlineManagerObserver *)&this->vfptr;
-  this->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::UIHKScreenSocialHub::`vftable'{for `UFG::OnlineManagerObserver'};
+  this->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::UIHKScreenSocialHub::`vftable{for `UFG::OnlineManagerObserver};
   v3 = (UFG::OnlineManagerObserver *)&this->vfptr;
-  this->vfptr = (UFG::OSuiteManagerObserverVtbl *)&UFG::UIHKScreenSocialHub::`vftable'{for `UFG::OSuiteManagerObserver'};
+  this->vfptr = (UFG::OSuiteManagerObserverVtbl *)&UFG::UIHKScreenSocialHub::`vftable{for `UFG::OSuiteManagerObserver};
   if ( UFG::UIHKScreenGlobalOverlay::mThis )
   {
     v4 = &UFG::UIHKScreenGlobalOverlay::mThis->HelpBar;
@@ -333,7 +333,7 @@ void __fastcall UFG::UIHKScreenSocialHub::~UIHKScreenSocialHub(UFG::UIHKScreenSo
     operator delete[](v15);
   v1->mSocialHubProperties.p = 0i64;
   *(_QWORD *)&v1->mSocialHubProperties.size = 0i64;
-  v3->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::OSuiteManagerObserver::`vftable';
+  v3->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::OSuiteManagerObserver::`vftable;
   v16 = (UFG::qNode<UFG::OnlineManagerObserver,UFG::OnlineManagerObserver> *)&v3->mPrev;
   v17 = v3->mPrev;
   v18 = v3->mNext;
@@ -341,7 +341,7 @@ void __fastcall UFG::UIHKScreenSocialHub::~UIHKScreenSocialHub(UFG::UIHKScreenSo
   v18->mPrev = v17;
   v16->mPrev = v16;
   v16->mNext = v16;
-  v2->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::OnlineManagerObserver::`vftable';
+  v2->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::OnlineManagerObserver::`vftable;
   v19 = (UFG::qNode<UFG::OnlineManagerObserver,UFG::OnlineManagerObserver> *)&v2->mPrev;
   v20 = v2->mPrev;
   v21 = v2->mNext;
@@ -574,7 +574,7 @@ LABEL_44:
   }
 LABEL_52:
   v42 = v2->mRenderable->m_movie.pObject;
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   v43 = v51;
   if ( (v52 >> 6) & 1 )
   {
@@ -617,7 +617,7 @@ LABEL_52:
     UFG::GameStatTracker::SetStat(v46, SocialHubVisited, 1);
     UFG::UIHKScreenSocialHub::ShowFirstTimeIntro(v2);
   }
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 386
@@ -781,7 +781,7 @@ void __fastcall UFG::UIHKScreenSocialHub::NetworkSignedOut(UFG::UIHKScreenSocial
   v18 = -2i64;
   v1 = this;
   v2 = *(Scaleform::GFx::Movie **)(*(_QWORD *)&this[-1].mTimeElapsedAfterMoving + 320i64);
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( (v8 >> 6) & 1 )
   {
     (*(void (__fastcall **)(__int64, char *, __int64))(*(_QWORD *)v7 + 16i64))(v7, &ptr, v9);
@@ -828,7 +828,7 @@ void __fastcall UFG::UIHKScreenSocialHub::NetworkSignedOut(UFG::UIHKScreenSocial
   }
   UFG::UIHKScreenSocialHub::PopulateOnlineStatusIcon((UFG::UIHKScreenSocialHub *)((char *)v1 - 144));
   UFG::qString::~qString(&result);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 604
@@ -1192,12 +1192,12 @@ LABEL_85:
   *(_DWORD *)(v73 + 612) = -1046478848;
 LABEL_90:
   UFG::qString::~qString((UFG::qString *)data.MessageIds);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     &data.Captions[5].mMagic,
     0x28ui64,
     6,
     (void (__fastcall *)(void *))UFG::qString::~qString);
-  `eh vector destructor iterator'(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+  `eh vector destructor iterator(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
 }
 
 // File Line: 769
@@ -1311,7 +1311,7 @@ void __fastcall UFG::UIHKScreenSocialHub::PopulateOnlineStatusIcon(UFG::UIHKScre
   }
   UFG::qString::Set(&v15, v6);
 LABEL_13:
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( (v18 >> 6) & 1 )
   {
     (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v17 + 16i64))(v17, &ptr, v19);
@@ -1328,7 +1328,7 @@ LABEL_13:
   v22 = 6;
   v23 = v14;
   Scaleform::GFx::Movie::Invoke(v1, "SocialHubOnlineStatusIcon_Show", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   UFG::qString::~qString(&v15);
 }
 
@@ -1565,7 +1565,7 @@ void __fastcall UFG::UIHKScreenSocialHub::PopulateLhsList(UFG::UIHKScreenSocialH
         v105 = v179->mSocialHubProperties.p;
         if ( v98 == v105[v104].mLBD->mCategory && v105[v104].mUIItemIndex != -1 )
         {
-          `eh vector constructor iterator'(
+          `eh vector constructor iterator(
             &putf8str,
             0x30ui64,
             3,
@@ -1597,7 +1597,7 @@ void __fastcall UFG::UIHKScreenSocialHub::PopulateLhsList(UFG::UIHKScreenSocialH
           v159 = "icon";
           Scaleform::GFx::Movie::Invoke(v181, "SocialHubLhsList_AddItem", 0i64, (Scaleform::GFx::Value *)&putf8str, 3u);
           ++v179->mLHSItemCount;
-          `eh vector destructor iterator'(
+          `eh vector destructor iterator(
             &putf8str,
             0x30ui64,
             3,
@@ -1905,7 +1905,7 @@ LABEL_36:
 LABEL_94:
           v37 = (char *)gIconSocialHubChallenge_21;
 LABEL_95:
-          `eh vector constructor iterator'(&ptr, 0x30ui64, 8, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+          `eh vector constructor iterator(&ptr, 0x30ui64, 8, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
           v93 = (double)*(signed int *)(v10 + 44);
           if ( (v117 >> 6) & 1 )
           {
@@ -1978,7 +1978,7 @@ LABEL_95:
           v146 = v97;
           Scaleform::GFx::Movie::Invoke(v181, "SocialLogList_AddItem", 0i64, (Scaleform::GFx::Value *)&ptr, 8u);
           ++v179->mLHSItemCount;
-          `eh vector destructor iterator'(&ptr, 0x30ui64, 8, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+          `eh vector destructor iterator(&ptr, 0x30ui64, 8, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
           goto LABEL_93;
         }
         v36 = (char *)gIconSocialHubAvatarFriend_ChallengeIncoming_21;
@@ -2072,7 +2072,7 @@ void __fastcall UFG::UIHKScreenSocialHub::PopulateRhsSubHeadDesc(UFG::UIHKScreen
     v3 = (signed int)pval.mValue.NValue;
     UFG::UIHKScreenSocialHub::LoadTexturePack(v1, (signed int)pval.mValue.NValue);
     pDtor = (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value;
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     v4 = v3;
     v5 = v1->mSocialHubProperties.p[v4].mLBD->mCaption.mData;
     if ( (v12 >> 6) & 1 )
@@ -2120,7 +2120,7 @@ void __fastcall UFG::UIHKScreenSocialHub::PopulateRhsSubHeadDesc(UFG::UIHKScreen
     v16 = 5;
     v17 = v8;
     Scaleform::GFx::Movie::Invoke(v2, "SocialHubRhsView_SetMissionScore", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     if ( ((unsigned int)pval.Type >> 6) & 1 )
       (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pval.pObjectInterface->vfptr->gap8[8])(
         pval.pObjectInterface,
@@ -2234,7 +2234,7 @@ void __fastcall UFG::UIHKScreenSocialHub::PopulateRhsSocialAwardMedal(UFG::UIHKS
       UFG::qString::Format(&v37, v11, scoreStr.mData);
       UFG::qString::Format(&v42, v14, v38.mData);
       UFG::qString::Format(&v39, v17, v41.mData);
-      `eh vector constructor iterator'(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       if ( (v23 >> 6) & 1 )
       {
         (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v22 + 16i64))(v22, &ptr, v24);
@@ -2267,7 +2267,7 @@ void __fastcall UFG::UIHKScreenSocialHub::PopulateRhsSocialAwardMedal(UFG::UIHKS
       v34 = 6;
       v35 = v20;
       Scaleform::GFx::Movie::Invoke(v5, "SocialHubRhsList_SetAwardIconDesc", 0i64, (Scaleform::GFx::Value *)&ptr, 4u);
-      `eh vector destructor iterator'(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+      `eh vector destructor iterator(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
       UFG::qString::~qString(&v39);
       UFG::qString::~qString(&v42);
       UFG::qString::~qString(&v37);
@@ -2300,7 +2300,7 @@ void __fastcall UFG::UIHKScreenSocialHub::PopulateRhsListHeader(UFG::UIHKScreenS
   {
     v3 = "$HUD_SOCIAL_FRIENDBOARD";
   }
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( (v6 >> 6) & 1 )
   {
     (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v5 + 16i64))(v5, &ptr, v7);
@@ -2309,7 +2309,7 @@ void __fastcall UFG::UIHKScreenSocialHub::PopulateRhsListHeader(UFG::UIHKScreenS
   v6 = 6;
   v7 = v3;
   Scaleform::GFx::Movie::Invoke(v2, "SocialHubRhsView_SetSubHeader2", 0i64, (Scaleform::GFx::Value *)&ptr, 1u);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 1240
@@ -2449,7 +2449,7 @@ void __fastcall UFG::UIHKScreenSocialHub::PopulateChallengeListCallback(OSuite::
         v15 = OSuite::ZString::c_str((OSuite::ZString *)(*(_QWORD *)(v12[1].m_nSize + 8 * v13) + 160i64));
         frnd.mPrev = (UFG::qNode<UFG::OnlineFriend,UFG::OnlineFriend> *)&frnd.mPrev;
         frnd.mNext = (UFG::qNode<UFG::OnlineFriend,UFG::OnlineFriend> *)&frnd.mPrev;
-        frnd.vfptr = (UFG::OnlineFriendVtbl *)&UFG::OnlineFriend::`vftable';
+        frnd.vfptr = (UFG::OnlineFriendVtbl *)&UFG::OnlineFriend::`vftable;
         frnd.m_cOnlineId.mPrev = (UFG::qNode<UFG::OnlineId,UFG::OnlineId> *)&frnd.m_cOnlineId.mPrev;
         frnd.m_cOnlineId.mNext = (UFG::qNode<UFG::OnlineId,UFG::OnlineId> *)&frnd.m_cOnlineId.mPrev;
         frnd.m_cOnlineId.m_SteamId.m_steamid.m_unAll64Bits = __PAIR__(
@@ -2505,7 +2505,7 @@ void __fastcall UFG::UIHKScreenSocialHub::PopulateChallengeListCallback(OSuite::
             v4 &= 0xFFFFFFFE;
             UFG::qString::~qString(&v33);
           }
-          frnd.vfptr = (UFG::OnlineFriendVtbl *)&UFG::OnlineFriend::`vftable';
+          frnd.vfptr = (UFG::OnlineFriendVtbl *)&UFG::OnlineFriend::`vftable;
           UFG::qString::~qString(&frnd.m_sOnlineName);
           v24 = frnd.m_cOnlineId.mPrev;
           v25 = frnd.m_cOnlineId.mNext;
@@ -2516,7 +2516,7 @@ void __fastcall UFG::UIHKScreenSocialHub::PopulateChallengeListCallback(OSuite::
         }
         else
         {
-          frnd.vfptr = (UFG::OnlineFriendVtbl *)&UFG::OnlineFriend::`vftable';
+          frnd.vfptr = (UFG::OnlineFriendVtbl *)&UFG::OnlineFriend::`vftable;
           UFG::qString::~qString(&frnd.m_sOnlineName);
           v19 = frnd.m_cOnlineId.mPrev;
           v20 = frnd.m_cOnlineId.mNext;
@@ -2533,8 +2533,8 @@ void __fastcall UFG::UIHKScreenSocialHub::PopulateChallengeListCallback(OSuite::
         frnd.mNext = (UFG::qNode<UFG::OnlineFriend,UFG::OnlineFriend> *)&frnd.mPrev;
         OSuite::ZListBase::ZListIteratorBase::Next((OSuite::ZListBase::ZListIteratorBase *)&result.m_iterator.vfptr);
       }
-      result.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TConstIterator<OSuite::TList<OSuite::ZServiceOperationValue *>::ZIterator,OSuite::ZServiceOperationValue *,int>::`vftable';
-      result.m_iterator.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZServiceOperationValue *>::ZIterator::`vftable';
+      result.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TConstIterator<OSuite::TList<OSuite::ZServiceOperationValue *>::ZIterator,OSuite::ZServiceOperationValue *,int>::`vftable;
+      result.m_iterator.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZServiceOperationValue *>::ZIterator::`vftable;
     }
   }
   else
@@ -2743,7 +2743,7 @@ void __fastcall UFG::UIHKScreenSocialHub::PopulateRhsListAsync(UFG::UIHKScreenSo
   if ( !v43 || !(_BYTE)v11 || v9 || !v13 )
   {
     *(_QWORD *)numArgs = Scaleform::GFx::Value::~Value;
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     v24 = v7;
     v25 = (UFG::qSymbol *)v3->mSocialHubProperties.p[v7].mLBD;
     v26 = UFG::GameStatTracker::Instance();
@@ -2805,7 +2805,7 @@ LABEL_34:
     Scaleform::GFx::Movie::Invoke(v5, "SocialHubRhsList_SetErrorMessage", 0i64, (Scaleform::GFx::Value *)&ptr, 1u);
     Scaleform::GFx::Movie::Invoke(v5, "SocialHubRhsList_Refresh", 0i64, 0i64, 0);
     UFG::qString::~qString(&formatted);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     goto LABEL_37;
   }
   v3->mHandleMessageDisabled = 1;
@@ -3026,7 +3026,7 @@ void __fastcall UFG::UIHKScreenSocialHub::UpdateOnlineName(UFG::UIHKScreenSocial
     v3 = Scaleform::Render::Text::DocView::DocumentListener::View_OnLineFormat(0i64, v1);
     v4 = UFG::OnlineManager::Instance();
     v5 = UFG::OnlineManager::IsNetworkSignedIn(v4);
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     v6 = v5 && !v3;
     if ( (v12 >> 6) & 1 )
     {
@@ -3055,7 +3055,7 @@ void __fastcall UFG::UIHKScreenSocialHub::UpdateOnlineName(UFG::UIHKScreenSocial
     v21 = v9;
     Scaleform::GFx::Movie::Invoke(v2, "SetIsOnline", 0i64, (Scaleform::GFx::Value *)&ptr, 3u);
     UFG::qString::~qString(&result);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 
@@ -3270,7 +3270,7 @@ LABEL_115:
     v10 = UFG::GameStatTracker::GetStat(v9, LeaderboardScoreIntList, v8 + 12);
     if ( !v10 )
     {
-      `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       if ( (v135 >> 6) & 1 )
       {
         (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v134 + 16i64))(v134, &ptr, v136);
@@ -3290,7 +3290,7 @@ LABEL_115:
       Scaleform::GFx::Movie::Invoke(v4, "SocialHubRhsList_Refresh", 0i64, 0i64, 0);
       v1->mHandleMessageDisabled = 0;
       Scaleform::GFx::Movie::Invoke(v4, "SocialHubLoadingIcon_Hide", 0i64, 0i64, 0);
-      `eh vector destructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+      `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
       goto LABEL_111;
     }
     v11 = UFG::OnlineManager::Instance();
@@ -3635,7 +3635,7 @@ LABEL_71:
           {
             frnd.mPrev = (UFG::qNode<UFG::OnlineFriend,UFG::OnlineFriend> *)&frnd.mPrev;
             frnd.mNext = (UFG::qNode<UFG::OnlineFriend,UFG::OnlineFriend> *)&frnd.mPrev;
-            frnd.vfptr = (UFG::OnlineFriendVtbl *)&UFG::OnlineFriend::`vftable';
+            frnd.vfptr = (UFG::OnlineFriendVtbl *)&UFG::OnlineFriend::`vftable;
             v139 = &frnd.m_cOnlineId;
             frnd.m_cOnlineId.mPrev = (UFG::qNode<UFG::OnlineId,UFG::OnlineId> *)&frnd.m_cOnlineId.mPrev;
             frnd.m_cOnlineId.mNext = (UFG::qNode<UFG::OnlineId,UFG::OnlineId> *)&frnd.m_cOnlineId.mPrev;
@@ -3677,7 +3677,7 @@ LABEL_71:
               entry.mPrev = (UFG::qNode<UFG::CachedLeaderboard::Entry,UFG::CachedLeaderboard::Entry> *)&entry;
               entry.mNext = (UFG::qNode<UFG::CachedLeaderboard::Entry,UFG::CachedLeaderboard::Entry> *)&entry;
             }
-            frnd.vfptr = (UFG::OnlineFriendVtbl *)&UFG::OnlineFriend::`vftable';
+            frnd.vfptr = (UFG::OnlineFriendVtbl *)&UFG::OnlineFriend::`vftable;
             UFG::qString::~qString(&frnd.m_sOnlineName);
             v165 = &frnd.m_cOnlineId;
             v87 = frnd.m_cOnlineId.mPrev;
@@ -3728,7 +3728,7 @@ LABEL_84:
           UFG::qString::Set((UFG::qString *)(v67 + 7), v95->mData, v95->mLength, 0i64, 0);
           UFG::qString::~qString(&v173);
         }
-        `eh vector constructor iterator'(&pargs, 0x30ui64, 5, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+        `eh vector constructor iterator(&pargs, 0x30ui64, 5, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
         v96 = v143.mData;
         if ( ((unsigned int)pargs.Type >> 6) & 1 )
         {
@@ -3789,7 +3789,7 @@ LABEL_84:
         v160 = v102;
         Scaleform::GFx::Movie::Invoke(v178, "SocialHubRhsList_AddItem", 0i64, &pargs, 5u);
         ++v66;
-        `eh vector destructor iterator'(&pargs, 0x30ui64, 5, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+        `eh vector destructor iterator(&pargs, 0x30ui64, 5, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
       }
       UFG::qString::~qString(&formatted);
       UFG::qString::~qString(&v169);
@@ -3799,7 +3799,7 @@ LABEL_84:
         goto LABEL_101;
     }
   }
-  `eh vector constructor iterator'(&v142, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&v142, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   UFG::qString::qString(&v168);
   UFG::UIHKScreenSocialHub::FormatScore(v1, &v168, v1->mSocialHubProperties.p[v177].mLBD, v24);
   v103 = "-";
@@ -3823,7 +3823,7 @@ LABEL_84:
   Scaleform::GFx::Movie::Invoke(v178, "SocialHubLoadingIcon_Hide", 0i64, 0i64, 0);
   UFG::UIHKScreenSocialHub::ShowHelpBarWidget(v1, v1->mCurrentScreenType, 1);
   UFG::qString::~qString(&v168);
-  `eh vector destructor iterator'(&v142, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&v142, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   for ( i = (char *)mem; mem != &v113; i = (char *)mem )
   {
     v105 = *(_QWORD *)i;
@@ -4715,10 +4715,10 @@ void __fastcall UFG::UIHKScreenSocialHub::SetFlagAsSentForNewHighScoreSaveEntry(
   v19 = -2i64;
   v2 = message;
   UFG::SocialLogData::SocialLogData((UFG::SocialLogData *)&v21);
-  *(_QWORD *)&v20.m_sDstOnlineName.mStringHash32 = &UFG::SocialLogData_Challenge::`vftable';
+  *(_QWORD *)&v20.m_sDstOnlineName.mStringHash32 = &UFG::SocialLogData_Challenge::`vftable;
   v23 = 0;
   v24 = 0i64;
-  v3 = ((__int64 (__fastcall *)(unsigned int *))*(&UFG::SocialLogData_Challenge::`vftable' + 4))(&v20.m_sDstOnlineName.mStringHash32);
+  v3 = ((__int64 (__fastcall *)(unsigned int *))*(&UFG::SocialLogData_Challenge::`vftable + 4))(&v20.m_sDstOnlineName.mStringHash32);
   v4 = UFG::qMalloc(v3 + 8, "UIHKScreenSocialHub", 0i64);
   v5 = v2->vfptr->Size(v2);
   v6 = v2->vfptr->Serialize(v2);
@@ -4745,7 +4745,7 @@ void __fastcall UFG::UIHKScreenSocialHub::SetFlagAsSentForNewHighScoreSaveEntry(
     if ( dest )
       goto LABEL_8;
     UFG::SocialLogData::SocialLogData(&v20);
-    v20.vfptr = (UFG::OSuiteMessageVtbl *)&UFG::SocialLogData_NewHighScore::`vftable';
+    v20.vfptr = (UFG::OSuiteMessageVtbl *)&UFG::SocialLogData_NewHighScore::`vftable;
     v20.m_sDstOnlineName.mMagic = 0;
     v20.m_sDstOnlineName.mData = 0i64;
     UFG::SocialLogData_NewHighScore::Deserialize((UFG::SocialLogData_NewHighScore *)&v20, v10);
@@ -4814,7 +4814,7 @@ bool __fastcall UFG::UIHKScreenSocialHub::IsNewHighScoreEntryUsedForChallenge(UF
         if ( !dest )
         {
           UFG::SocialLogData::SocialLogData(&v14);
-          v14.vfptr = (UFG::OSuiteMessageVtbl *)&UFG::SocialLogData_NewHighScore::`vftable';
+          v14.vfptr = (UFG::OSuiteMessageVtbl *)&UFG::SocialLogData_NewHighScore::`vftable;
           v15 = 0;
           v16 = 0i64;
           UFG::SocialLogData_NewHighScore::Deserialize((UFG::SocialLogData_NewHighScore *)&v14, v9);
@@ -5132,7 +5132,7 @@ void __fastcall UFG::UIHKScreenSocialHub::Flash_HandleMouseMove(UFG::UIHKScreenS
   v3 = UFG::UIScreen::getMovieSafe((UFG::UIScreen *)&this->vfptr);
   if ( v3 )
   {
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( (v6 >> 6) & 1 )
     {
       (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v5 + 16i64))(v5, &ptr, COERCE_DOUBLE(*(_QWORD *)&v7));
@@ -5148,7 +5148,7 @@ void __fastcall UFG::UIHKScreenSocialHub::Flash_HandleMouseMove(UFG::UIHKScreenS
     v10 = 5;
     v11 = mouseY;
     Scaleform::GFx::Movie::Invoke(v3, "HandleMouseMove", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 
@@ -5169,7 +5169,7 @@ void __fastcall UFG::UIHKScreenSocialHub::Flash_HandleMouseClick(UFG::UIHKScreen
   v3 = UFG::UIScreen::getMovieSafe((UFG::UIScreen *)&this->vfptr);
   if ( v3 )
   {
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( (v6 >> 6) & 1 )
     {
       (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v5 + 16i64))(v5, &ptr, COERCE_DOUBLE(*(_QWORD *)&v7));
@@ -5185,7 +5185,7 @@ void __fastcall UFG::UIHKScreenSocialHub::Flash_HandleMouseClick(UFG::UIHKScreen
     v10 = 5;
     v11 = mouseY;
     Scaleform::GFx::Movie::Invoke(v3, "HandleMouseClick", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 
@@ -5266,7 +5266,7 @@ void __fastcall UFG::UIHKScreenSocialHub::ShowFirstTimeIntro(UFG::UIHKScreenSoci
   Scaleform::GFx::Value pargs; // [rsp+38h] [rbp-40h]
 
   v1 = this;
-  `eh vector constructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   v2 = v1->mRenderable->m_movie.pObject;
   if ( ((unsigned int)pargs.Type >> 6) & 1 )
   {
@@ -5280,6 +5280,6 @@ void __fastcall UFG::UIHKScreenSocialHub::ShowFirstTimeIntro(UFG::UIHKScreenSoci
   *(_QWORD *)&pargs.mValue.NValue = "$SOCIAL_HUB_INFO";
   Scaleform::GFx::Movie::Invoke(v2, "ShowFirstTimeIntro", 0i64, &pargs, 1u);
   v1->mPopupActive = 1;
-  `eh vector destructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 

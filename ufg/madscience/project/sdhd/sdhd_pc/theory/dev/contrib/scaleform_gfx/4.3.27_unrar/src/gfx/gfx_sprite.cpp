@@ -36,8 +36,8 @@ void __fastcall Scaleform::GFx::Sprite::Sprite(Scaleform::GFx::Sprite *this, Sca
     pr,
     pparent,
     (Scaleform::GFx::ResourceId)&id);
-  v10->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::Sprite::`vftable'{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>'};
-  v10->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::Sprite::`vftable'{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>'};
+  v10->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::Sprite::`vftable{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>};
+  v10->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::Sprite::`vftable{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>};
   if ( v9 )
     _InterlockedExchangeAdd(&v9->RefCount.Value, 1u);
   v10->pDef.pObject = v9;
@@ -116,8 +116,8 @@ void __fastcall Scaleform::GFx::Sprite::~Sprite(Scaleform::GFx::Sprite *this)
   Scaleform::GFx::ResourceLibBase *v9; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::Sprite::`vftable'{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>'};
-  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::Sprite::`vftable'{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>'};
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::Sprite::`vftable{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>};
+  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::Sprite::`vftable{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>};
   Scaleform::GFx::DisplayList::Clear(&this->mDisplayList, (Scaleform::GFx::DisplayObjectBase *)&this->vfptr);
   v2 = v1->pHitAreaHandle.pObject;
   if ( v2 )
@@ -932,7 +932,7 @@ char __fastcall Scaleform::GFx::Sprite::GotoLabeledFrame(Scaleform::GFx::Sprite 
   {
     Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>::LogWarning(
       (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase> *)&v3->vfptr,
-      "MovieImpl::GotoLabeledFrame('%s') unknown label",
+      "MovieImpl::GotoLabeledFrame(%s) unknown label",
       v6);
     result = 0;
   }

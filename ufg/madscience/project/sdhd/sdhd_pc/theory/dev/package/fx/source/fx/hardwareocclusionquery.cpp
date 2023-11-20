@@ -61,12 +61,12 @@ void FX::HardwareOcclusionQuery::InitSystem(void)
   {
     FX::HardwareOcclusionQuery::InitMaterial();
     v0 = UFG::qStringHashUpper32("DR_Sphere", 0xFFFFFFFF);
-    v1 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+    v1 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
     {
       v2 = UFG::qResourceWarehouse::Instance();
       v1 = UFG::qResourceWarehouse::GetInventory(v2, 0xA2ADCD77);
-      `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v1;
+      `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v1;
     }
     UFG::qResourceHandle::Init(
       (UFG::qResourceHandle *)&FX::HardwareOcclusionQuery::mFlareProbe.mPrev,
@@ -353,12 +353,12 @@ void FX::HardwareOcclusionQuery::InitMaterial(void)
     v9 = UFG::qStringHashUpper32(v20.mData, v20.mStringHashUpper32 | v8);
     v20.mStringHashUpper32 = v9;
   }
-  v10 = `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Material>'::`2'::result )
+  v10 = `UFG::qGetResourceInventory<Illusion::Material>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Material>::`2::result )
   {
     v11 = UFG::qResourceWarehouse::Instance();
     v10 = UFG::qResourceWarehouse::GetInventory(v11, 0xB4C26312);
-    `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result = v10;
+    `UFG::qGetResourceInventory<Illusion::Material>::`2::result = v10;
   }
   UFG::qResourceHandle::Init(
     (UFG::qResourceHandle *)&FX::HardwareOcclusionQuery::mUnculledMat.mPrev,
@@ -391,12 +391,12 @@ void FX::HardwareOcclusionQuery::InitMaterial(void)
   v16[2].mNode.mUID = 585532811;
   v17 = UFG::qResourceWarehouse::Instance();
   UFG::qResourceWarehouse::Add(v17, (UFG::qResourceData *)&v16->mNode);
-  v18 = `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Material>'::`2'::result )
+  v18 = `UFG::qGetResourceInventory<Illusion::Material>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Material>::`2::result )
   {
     v19 = UFG::qResourceWarehouse::Instance();
     v18 = UFG::qResourceWarehouse::GetInventory(v19, 0xB4C26312);
-    `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result = v18;
+    `UFG::qGetResourceInventory<Illusion::Material>::`2::result = v18;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&FX::HardwareOcclusionQuery::mProbeMat.mPrev, 0xB4C26312, v15, v18);
 }

@@ -19,7 +19,7 @@ void __fastcall hkxAttributeHolder::hkxAttributeHolder(hkxAttributeHolder *this,
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v2 = other;
-  this->vfptr = (hkBaseObjectVtbl *)&hkxAttributeHolder::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkxAttributeHolder::`vftable;
   this->m_attributeGroups.m_capacityAndFlags = 2147483648;
   this->m_attributeGroups.m_data = 0i64;
   this->m_attributeGroups.m_size = 0;
@@ -101,7 +101,7 @@ void __fastcall hkxAttributeHolder::~hkxAttributeHolder(hkxAttributeHolder *this
   int v6; // eax
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkxAttributeHolder::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkxAttributeHolder::`vftable;
   v2 = this->m_attributeGroups.m_size;
   v3 = this->m_attributeGroups.m_data;
   v4 = v2 - 1;
@@ -125,7 +125,7 @@ void __fastcall hkxAttributeHolder::~hkxAttributeHolder(hkxAttributeHolder *this
       24 * (v6 & 0x3FFFFFFF));
   v1->m_attributeGroups.m_data = 0i64;
   v1->m_attributeGroups.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 25

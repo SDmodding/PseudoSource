@@ -35,7 +35,7 @@ void __fastcall finishLoadedObjecthkaSkeletonMapper(void *p, int finishing)
   if ( p )
   {
     v2 = (hkaSkeletonMapperData *)((char *)p + 16);
-    *(_QWORD *)&v2[-1].m_keepUnmappedLocal.m_bool = &hkaSkeletonMapper::`vftable';
+    *(_QWORD *)&v2[-1].m_keepUnmappedLocal.m_bool = &hkaSkeletonMapper::`vftable;
     hkaSkeletonMapperData::hkaSkeletonMapperData(v2, (hkFinishLoadedObjectFlag)finishing);
   }
 }
@@ -54,7 +54,7 @@ void **__fastcall getVtablehkaSkeletonMapper()
   hkaSkeletonMapperData v1; // [rsp+30h] [rbp-B8h]
 
   hkaSkeletonMapperData::hkaSkeletonMapperData(&v1, 0);
-  return &hkaSkeletonMapper::`vftable';
+  return &hkaSkeletonMapper::`vftable;
 }
 
 // File Line: 111

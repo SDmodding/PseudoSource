@@ -2269,7 +2269,7 @@ LABEL_53:
                               if ( v45 >= v44 )
                                 v45 = v44;
                               closeTargetsList.size = 0;
-                              `eh vector constructor iterator'(
+                              `eh vector constructor iterator(
                                 cachedPedsList.p,
                                 0x18ui64,
                                 80,
@@ -2359,7 +2359,7 @@ LABEL_53:
                               filteredCloseTargetsList.size = 0;
                               filteredClosePedsList.size = 0;
                               cachedPedsList.size = 0;
-                              `eh vector destructor iterator'(
+                              `eh vector destructor iterator(
                                 cachedPedsList.p,
                                 0x18ui64,
                                 80,
@@ -2942,9 +2942,9 @@ void __fastcall VehicleStopTask::VehicleStopTask(VehicleStopTask *this)
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<VehicleStopTrack>::`vftable';
-  this->vfptr = (ITaskVtbl *)&VehicleStopTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<VehicleStopTrack>::`vftable;
+  this->vfptr = (ITaskVtbl *)&VehicleStopTask::`vftable;
   v2 = &this->m_pPhysicsMI;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
@@ -2966,7 +2966,7 @@ void __fastcall VehicleStopTask::~VehicleStopTask(VehicleStopTask *this)
   UFG::qNode<ITask,ITask> *v9; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&VehicleStopTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&VehicleStopTask::`vftable;
   v2 = &this->m_pPhysicsMI;
   if ( this->m_pPhysicsMI.m_pPointer )
   {
@@ -2984,7 +2984,7 @@ void __fastcall VehicleStopTask::~VehicleStopTask(VehicleStopTask *this)
   v6->mPrev = v5;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v8 = v1->mPrev;
   v9 = v1->mNext;
@@ -3237,9 +3237,9 @@ void __fastcall VehicleSteerTask::VehicleSteerTask(VehicleSteerTask *this)
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<VehicleSteerTrack>::`vftable';
-  this->vfptr = (ITaskVtbl *)&VehicleSteerTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<VehicleSteerTrack>::`vftable;
+  this->vfptr = (ITaskVtbl *)&VehicleSteerTask::`vftable;
   v2 = &this->m_pPhysicsMI;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
@@ -3261,7 +3261,7 @@ void __fastcall VehicleSteerTask::~VehicleSteerTask(VehicleSteerTask *this)
   UFG::qNode<ITask,ITask> *v9; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&VehicleSteerTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&VehicleSteerTask::`vftable;
   v2 = &this->m_pPhysicsMI;
   if ( this->m_pPhysicsMI.m_pPointer )
   {
@@ -3279,7 +3279,7 @@ void __fastcall VehicleSteerTask::~VehicleSteerTask(VehicleSteerTask *this)
   v6->mPrev = v5;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v8 = v1->mPrev;
   v9 = v1->mNext;
@@ -3821,9 +3821,9 @@ void __fastcall VehicleDoorPhysicsTask::VehicleDoorPhysicsTask(VehicleDoorPhysic
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<VehicleDoorPhysicsTrack>::`vftable';
-  this->vfptr = (ITaskVtbl *)&VehicleDoorPhysicsTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<VehicleDoorPhysicsTrack>::`vftable;
+  this->vfptr = (ITaskVtbl *)&VehicleDoorPhysicsTask::`vftable;
   this->mContext = 0i64;
 }
 

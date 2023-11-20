@@ -416,11 +416,11 @@ void __fastcall PlayEffectTask::PlayEffectTask(PlayEffectTask *this)
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<PlayEffectTrack>::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<PlayEffectTrack>::`vftable;
   *(_QWORD *)&this->mFXHandle = -1i64;
   this->mContext = 0i64;
-  this->vfptr = (ITaskVtbl *)&PlayEffectTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&PlayEffectTask::`vftable;
 }
 
 // File Line: 336
@@ -1407,9 +1407,9 @@ void __fastcall VisualTreatmentTask::VisualTreatmentTask(VisualTreatmentTask *th
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<VisualTreatmentTrack>::`vftable';
-  this->vfptr = (ITaskVtbl *)&VisualTreatmentTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<VisualTreatmentTrack>::`vftable;
+  this->vfptr = (ITaskVtbl *)&VisualTreatmentTask::`vftable;
   this->mContext = 0i64;
   this->mVisualTreatmentId = -1;
 }

@@ -31,7 +31,7 @@ void __fastcall hkaSplineCompressedAnimation::hkaSplineCompressedAnimation(hkaSp
   v2 = raw;
   v3 = this;
   hkaAnimation::hkaAnimation((hkaAnimation *)&this->vfptr, (hkaAnimation *)&raw->vfptr);
-  v3->vfptr = (hkBaseObjectVtbl *)&hkaSplineCompressedAnimation::`vftable';
+  v3->vfptr = (hkBaseObjectVtbl *)&hkaSplineCompressedAnimation::`vftable;
   v3->m_blockOffsets.m_capacityAndFlags = 2147483648;
   v3->m_blockOffsets.m_data = 0i64;
   v3->m_blockOffsets.m_size = 0;
@@ -66,7 +66,7 @@ void __fastcall hkaSplineCompressedAnimation::hkaSplineCompressedAnimation(hkaSp
   v6 = raw;
   v7 = this;
   hkaAnimation::hkaAnimation((hkaAnimation *)&this->vfptr, (hkaAnimation *)&raw->vfptr);
-  v7->vfptr = (hkBaseObjectVtbl *)&hkaSplineCompressedAnimation::`vftable';
+  v7->vfptr = (hkBaseObjectVtbl *)&hkaSplineCompressedAnimation::`vftable;
   v7->m_blockOffsets.m_capacityAndFlags = 2147483648;
   v7->m_blockOffsets.m_data = 0i64;
   v7->m_blockOffsets.m_size = 0;
@@ -99,7 +99,7 @@ void __fastcall hkaSplineCompressedAnimation::hkaSplineCompressedAnimation(hkaSp
   v6 = raw;
   v7 = this;
   hkaAnimation::hkaAnimation((hkaAnimation *)&this->vfptr, (hkaAnimation *)&raw->vfptr);
-  v7->vfptr = (hkBaseObjectVtbl *)&hkaSplineCompressedAnimation::`vftable';
+  v7->vfptr = (hkBaseObjectVtbl *)&hkaSplineCompressedAnimation::`vftable;
   v7->m_blockOffsets.m_capacityAndFlags = 2147483648;
   v7->m_blockOffsets.m_data = 0i64;
   v7->m_blockOffsets.m_size = 0;

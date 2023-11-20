@@ -9,7 +9,7 @@ __int64 UFG::_dynamic_initializer_for__gAISidewalkInventory__()
     0x2C81C14Bu,
     0,
     0);
-  UFG::gAISidewalkInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::AISidewalkInventory::`vftable';
+  UFG::gAISidewalkInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::AISidewalkInventory::`vftable;
   return atexit(UFG::_dynamic_atexit_destructor_for__gAISidewalkInventory__);
 }
 
@@ -27,26 +27,26 @@ void __fastcall UFG::SidewalkCommonHandle<UFG::AISidewalkNode_Game>::_Set(UFG::S
   UFG::qResourceWarehouse *v11; // rax
 
   this->mPtr = 0i64;
-  v4 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
+  v4 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
   v5 = index;
   v6 = cellUID;
   v7 = objUID;
   v8 = this;
-  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
   {
     v9 = UFG::qResourceWarehouse::Instance();
     v4 = UFG::qResourceWarehouse::GetInventory(v9, 0x43E99F7Eu);
-    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v4;
+    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v4;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v8->mPrev, v4);
   v8->mIndex = v5;
   v8->mObjUID = v7;
-  v10 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+  v10 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
   {
     v11 = UFG::qResourceWarehouse::Instance();
     v10 = UFG::qResourceWarehouse::GetInventory(v11, 0x43E99F7Eu);
-    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v10;
+    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v10;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v8->mPrev, 0x43E99F7Eu, v6, v10);
 }
@@ -64,25 +64,25 @@ void __fastcall UFG::SidewalkCommonHandle<UFG::AISidewalkEdge_Game>::_Set(UFG::S
   UFG::qResourceWarehouse *v9; // rax
 
   this->mPtr = 0i64;
-  v3 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
+  v3 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
   v4 = cellUID;
   v5 = objUID;
   v6 = this;
-  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
   {
     v7 = UFG::qResourceWarehouse::Instance();
     v3 = UFG::qResourceWarehouse::GetInventory(v7, 0x43E99F7Eu);
-    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v3;
+    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v3;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v6->mPrev, v3);
   v6->mObjUID = v5;
   v6->mIndex = -1;
-  v8 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+  v8 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
   {
     v9 = UFG::qResourceWarehouse::Instance();
     v8 = UFG::qResourceWarehouse::GetInventory(v9, 0x43E99F7Eu);
-    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v8;
+    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v8;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v6->mPrev, 0x43E99F7Eu, v4, v8);
 }
@@ -168,13 +168,13 @@ void __fastcall UFG::AISidewalkSectionResource::InitHandles(UFG::AISidewalkSecti
         v4 = (signed __int64)&v1->mNodeHandles + v3;
       else
         v4 = 0i64;
-      v5 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
+      v5 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
       v6 = (UFG::qResourceHandle *)(v4 + 48i64 * v2);
-      if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+      if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
       {
         v7 = UFG::qResourceWarehouse::Instance();
         v5 = UFG::qResourceWarehouse::GetInventory(v7, 0x43E99F7Eu);
-        `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v5;
+        `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v5;
       }
       UFG::qResourceHandle::Init(v6, 0x43E99F7Eu, v6->mNameUID, v5);
       ++v2;
@@ -191,13 +191,13 @@ void __fastcall UFG::AISidewalkSectionResource::InitHandles(UFG::AISidewalkSecti
         v10 = (signed __int64)&v1->mEdgeHandles + v9;
       else
         v10 = 0i64;
-      v11 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
+      v11 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
       v12 = (UFG::qResourceHandle *)(v10 + 48i64 * v8);
-      if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+      if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
       {
         v13 = UFG::qResourceWarehouse::Instance();
         v11 = UFG::qResourceWarehouse::GetInventory(v13, 0x43E99F7Eu);
-        `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v11;
+        `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v11;
       }
       UFG::qResourceHandle::Init(v12, 0x43E99F7Eu, v12->mNameUID, v11);
       ++v8;
@@ -237,12 +237,12 @@ void __fastcall UFG::AISidewalkSectionResource::CloseHandles(UFG::AISidewalkSect
         v4 = 0i64;
       v5 = (UFG::qResourceHandle *)(v4 + 48i64 * v2);
       v5[1].mNext = 0i64;
-      v6 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+      v6 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+      if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
       {
         v7 = UFG::qResourceWarehouse::Instance();
         v6 = UFG::qResourceWarehouse::GetInventory(v7, 0x43E99F7Eu);
-        `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v6;
+        `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v6;
       }
       UFG::qResourceHandle::Close(v5, v6);
       ++v2;
@@ -261,12 +261,12 @@ void __fastcall UFG::AISidewalkSectionResource::CloseHandles(UFG::AISidewalkSect
         v10 = 0i64;
       v11 = (UFG::qResourceHandle *)(v10 + 48i64 * v8);
       v11[1].mNext = 0i64;
-      v12 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+      v12 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+      if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
       {
         v13 = UFG::qResourceWarehouse::Instance();
         v12 = UFG::qResourceWarehouse::GetInventory(v13, 0x43E99F7Eu);
-        `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v12;
+        `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v12;
       }
       UFG::qResourceHandle::Close(v11, v12);
       ++v8;

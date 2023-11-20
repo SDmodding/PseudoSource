@@ -58,17 +58,17 @@ void __fastcall Scaleform::GFx::AS3::ClassTraits::ClassClass::ClassClass(Scalefo
   v2 = vm;
   v3 = this;
   Scaleform::GFx::AS3::Traits::Traits((Scaleform::GFx::AS3::Traits *)&this->vfptr, vm);
-  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::Traits::`vftable';
+  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::Traits::`vftable;
   v3->ITraits.pObject = 0i64;
   v3->Flags |= 0x20ui64;
-  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::ClassClass::`vftable';
+  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::ClassClass::`vftable;
   v4 = v2->MHeap;
   v5 = (Scaleform::GFx::AS3::InstanceTraits::CTraits *)v4->vfptr->Alloc(v2->MHeap, 240ui64, 0i64);
   v6 = v5;
   if ( v5 )
   {
     Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v5, v2, &Scaleform::GFx::AS3::fl::ClassCI);
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::ClassClass::`vftable';
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::ClassClass::`vftable;
   }
   else
   {
@@ -84,7 +84,7 @@ void __fastcall Scaleform::GFx::AS3::ClassTraits::ClassClass::ClassClass(Scalefo
   if ( v7 )
   {
     Scaleform::GFx::AS3::Class::Class(v7, (Scaleform::GFx::AS3::ClassTraits::Traits *)&v3->vfptr);
-    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::ClassClass::`vftable';
+    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::ClassClass::`vftable;
   }
   else
   {

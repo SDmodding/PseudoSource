@@ -12,7 +12,7 @@ void __fastcall Scaleform::GFx::LoadQueueEntry::LoadQueueEntry(Scaleform::GFx::L
   v6 = method;
   v7 = url;
   v8 = this;
-  this->vfptr = (Scaleform::GFx::LoadQueueEntryVtbl *)&Scaleform::GFx::LoadQueueEntry::`vftable';
+  this->vfptr = (Scaleform::GFx::LoadQueueEntryVtbl *)&Scaleform::GFx::LoadQueueEntry::`vftable;
   Scaleform::String::String(&this->URL);
   if ( v5 )
     v9 = 4;
@@ -30,7 +30,7 @@ void __fastcall Scaleform::GFx::LoadQueueEntry::LoadQueueEntry(Scaleform::GFx::L
 // RVA: 0x6D1DB0
 void __fastcall Scaleform::GFx::LoadQueueEntry::~LoadQueueEntry(Scaleform::GFx::LoadQueueEntry *this)
 {
-  this->vfptr = (Scaleform::GFx::LoadQueueEntryVtbl *)&Scaleform::GFx::LoadQueueEntry::`vftable';
+  this->vfptr = (Scaleform::GFx::LoadQueueEntryVtbl *)&Scaleform::GFx::LoadQueueEntry::`vftable;
   if ( !_InterlockedDecrement((volatile signed __int32 *)((this->URL.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
     ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
 }

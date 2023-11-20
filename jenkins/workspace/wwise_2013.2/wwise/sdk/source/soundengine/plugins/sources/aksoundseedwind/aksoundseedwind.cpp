@@ -16,7 +16,7 @@ void __fastcall CAkSoundSeedWind::CAkSoundSeedWind(CAkSoundSeedWind *this)
   CAkSoundSeedWind *v1; // rbx
 
   v1 = this;
-  this->vfptr = (AK::IAkPluginVtbl *)&CAkSoundSeedWind::`vftable';
+  this->vfptr = (AK::IAkPluginVtbl *)&CAkSoundSeedWind::`vftable;
   this->m_pSharedParams = 0i64;
   this->m_pAllocator = 0i64;
   this->m_pDeflectorInfo = 0i64;
@@ -41,9 +41,9 @@ void __fastcall CAkSoundSeedWind::~CAkSoundSeedWind(CAkSoundSeedWind *this)
 
   v1 = this;
   v2 = &this->m_WindProcess;
-  *(_QWORD *)&v2[-1].m_NoiseGen.m_DCFilter.m_fFbk1 = &CAkSoundSeedWind::`vftable';
+  *(_QWORD *)&v2[-1].m_NoiseGen.m_DCFilter.m_fFbk1 = &CAkSoundSeedWind::`vftable;
   CAkSoundSeedWindProcess::~CAkSoundSeedWindProcess(v2);
-  v1->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable';
+  v1->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable;
 }
 
 // File Line: 52

@@ -22,7 +22,7 @@ OSuite::ZDoublyLinkedListBase::ZElementBase *__fastcall OSuite::TDoublyLinkedLis
   if ( v4 )
   {
     OSuite::ZRedBlackTreeBase::ZElementBase::ZElementBase(v4, v5);
-    v6->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZObject *>::ZElement::`vftable';
+    v6->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZObject *>::ZElement::`vftable;
     v6[1].vfptr = (OSuite::ZObjectVtbl *)*v2;
   }
   else

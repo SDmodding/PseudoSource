@@ -7,7 +7,7 @@ void __fastcall UFG::UIHKScreenSplash::UIHKScreenSplash(UFG::UIHKScreenSplash *t
   v1 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -18,7 +18,7 @@ void __fastcall UFG::UIHKScreenSplash::UIHKScreenSplash(UFG::UIHKScreenSplash *t
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenSplash::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenSplash::`vftable;
   *(_QWORD *)&this->mState = 0i64;
   *(_WORD *)&this->mInAttractMode = 0;
   this->mDeviceSelected = 0;
@@ -35,7 +35,7 @@ void __fastcall UFG::UIHKScreenSplash::~UIHKScreenSplash(UFG::UIHKScreenSplash *
   UFG::UIScreenTextureManager *v2; // rax
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenSplash::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenSplash::`vftable;
   UFG::MoviePlayer::Close(&this->HKUIMovie);
   v2 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseScreen(v2, "Splash");
@@ -304,7 +304,7 @@ void __fastcall UFG::UIHKScreenSplash::SetScreenVisible(UFG::UIHKScreenSplash *t
   if ( v3 )
   {
     v4 = UFG::gInputSystem->mControllers[UFG::gActiveControllerNum]->m_IsKeyboardController;
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( (v16 >> 6) & 1 )
     {
       (*(void (__fastcall **)(__int64, unsigned int *, long double))(*(_QWORD *)v15 + 16i64))(
@@ -323,7 +323,7 @@ void __fastcall UFG::UIHKScreenSplash::SetScreenVisible(UFG::UIHKScreenSplash *t
     v20 = 5;
     v21 = 0i64;
     Scaleform::GFx::Movie::Invoke(v3, "SetVersionText", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-    `eh vector constructor iterator'(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( ((unsigned int)pargs.Type >> 6) & 1 )
     {
       (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
@@ -361,8 +361,8 @@ void __fastcall UFG::UIHKScreenSplash::SetScreenVisible(UFG::UIHKScreenSplash *t
     v12 = v7;
     Scaleform::GFx::Movie::Invoke(v3, "SetVisible", 0i64, &pargs, 2u);
     UFG::qString::~qString(&v23);
-    `eh vector destructor iterator'(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 

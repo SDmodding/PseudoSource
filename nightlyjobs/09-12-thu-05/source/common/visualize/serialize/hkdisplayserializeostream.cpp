@@ -6,7 +6,7 @@ void __fastcall hkDisplaySerializeOStream::hkDisplaySerializeOStream(hkDisplaySe
 
   v2 = this;
   hkOArchive::hkOArchive((hkOArchive *)&this->vfptr, writer, 0);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkDisplaySerializeOStream::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkDisplaySerializeOStream::`vftable;
 }
 
 // File Line: 33
@@ -17,7 +17,7 @@ void __fastcall hkDisplaySerializeOStream::hkDisplaySerializeOStream(hkDisplaySe
 
   v2 = this;
   hkOArchive::hkOArchive((hkOArchive *)&this->vfptr, buf, 0);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkDisplaySerializeOStream::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkDisplaySerializeOStream::`vftable;
 }
 
 // File Line: 37

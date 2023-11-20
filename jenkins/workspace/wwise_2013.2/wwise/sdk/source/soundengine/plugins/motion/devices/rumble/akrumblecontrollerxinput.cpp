@@ -3,7 +3,7 @@
 void __fastcall AkRumbleControllerXInput::AkRumbleControllerXInput(AkRumbleControllerXInput *this, char in_iPlayer)
 {
   this->m_iPlayer = in_iPlayer;
-  this->vfptr = (IAkRumbleControllerVtbl *)&AkRumbleControllerXInput::`vftable';
+  this->vfptr = (IAkRumbleControllerVtbl *)&AkRumbleControllerXInput::`vftable;
 }
 
 // File Line: 22

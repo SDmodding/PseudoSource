@@ -126,44 +126,44 @@ char *__fastcall ActionPath::GetString_DBG(ActionPath *this)
   v1 = this;
   if ( !(this->mPath.mCount & 0x7FFFFFFF) )
     return &customWorldMapCaption;
-  v3 = `ActionPath::GetString_DBG'::`5'::`local static guard';
-  if ( !(`ActionPath::GetString_DBG'::`5'::`local static guard' & 1) )
+  v3 = `ActionPath::GetString_DBG::`5::`local static guard;
+  if ( !(`ActionPath::GetString_DBG::`5::`local static guard & 1) )
   {
-    `ActionPath::GetString_DBG'::`5'::`local static guard' |= 1u;
-    `eh vector constructor iterator'(
-      `ActionPath::GetString_DBG'::`5'::sPathHack,
+    `ActionPath::GetString_DBG::`5::`local static guard |= 1u;
+    `eh vector constructor iterator(
+      `ActionPath::GetString_DBG::`5::sPathHack,
       0x28ui64,
       8,
       (void (__fastcall *)(void *))UFG::qString::qString);
-    atexit(`ActionPath::GetString_DBG'::`5'::`dynamic atexit destructor for 'sPathHack'');
-    v3 = `ActionPath::GetString_DBG'::`5'::`local static guard';
+    atexit(`ActionPath::GetString_DBG::`5::`dynamic atexit destructor for sPathHack);
+    v3 = `ActionPath::GetString_DBG::`5::`local static guard;
   }
   if ( !(v3 & 2) )
   {
-    `ActionPath::GetString_DBG'::`5'::`local static guard' = v3 | 2;
+    `ActionPath::GetString_DBG::`5::`local static guard = v3 | 2;
     v4 = UFG::qStringHashUpper32(".", 0xFFFFFFFF);
-    UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&`ActionPath::GetString_DBG'::`5'::symDot, v4);
-    atexit(`ActionPath::GetString_DBG'::`5'::`dynamic atexit destructor for 'symDot'');
-    v3 = `ActionPath::GetString_DBG'::`5'::`local static guard';
+    UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&`ActionPath::GetString_DBG::`5::symDot, v4);
+    atexit(`ActionPath::GetString_DBG::`5::`dynamic atexit destructor for symDot);
+    v3 = `ActionPath::GetString_DBG::`5::`local static guard;
   }
   if ( !(v3 & 4) )
   {
-    `ActionPath::GetString_DBG'::`5'::`local static guard' = v3 | 4;
+    `ActionPath::GetString_DBG::`5::`local static guard = v3 | 4;
     v5 = UFG::qStringHashUpper32("..", 0xFFFFFFFF);
-    UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&`ActionPath::GetString_DBG'::`5'::symDotDot, v5);
-    atexit(`ActionPath::GetString_DBG'::`5'::`dynamic atexit destructor for 'symDotDot'');
+    UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&`ActionPath::GetString_DBG::`5::symDotDot, v5);
+    atexit(`ActionPath::GetString_DBG::`5::`dynamic atexit destructor for symDotDot);
   }
-  v6 = ((_BYTE)`ActionPath::GetString_DBG'::`5'::sPathIndex + 1) & 7;
-  `ActionPath::GetString_DBG'::`5'::sPathIndex = ((_BYTE)`ActionPath::GetString_DBG'::`5'::sPathIndex + 1) & 7;
-  v7 = &`ActionPath::GetString_DBG'::`5'::sPathHack[v6];
+  v6 = ((_BYTE)`ActionPath::GetString_DBG::`5::sPathIndex + 1) & 7;
+  `ActionPath::GetString_DBG::`5::sPathIndex = ((_BYTE)`ActionPath::GetString_DBG::`5::sPathIndex + 1) & 7;
+  v7 = &`ActionPath::GetString_DBG::`5::sPathHack[v6];
   v8 = v1->mPath.mData.mOffset;
   if ( v8 )
     v9 = (_DWORD *)((char *)&v1->mPath.mData + v8);
   else
     v9 = 0i64;
-  if ( *v9 == `ActionPath::GetString_DBG'::`5'::symDot.mUID
+  if ( *v9 == `ActionPath::GetString_DBG::`5::symDot.mUID
     || (!v8 ? (v10 = 0i64) : (v10 = (_DWORD *)((char *)&v1->mPath.mData + v8)),
-        v11 = *v10 == `ActionPath::GetString_DBG'::`5'::symDotDot.mUID,
+        v11 = *v10 == `ActionPath::GetString_DBG::`5::symDotDot.mUID,
         v12 = "\\",
         v11) )
   {

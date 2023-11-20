@@ -12,12 +12,12 @@ void __fastcall UFG::UIMinimapTile::~UIMinimapTile(UFG::UIMinimapTile *this)
 
   v1 = this;
   v2 = (UFG::qResourceHandle *)&this->mMapTileHandle.mPrev;
-  v3 = `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result )
+  v3 = `UFG::qGetResourceInventory<Illusion::Texture>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Texture>::`2::result )
   {
     v4 = UFG::qResourceWarehouse::Instance();
     v3 = UFG::qResourceWarehouse::GetInventory(v4, 0x8B43FABF);
-    `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result = v3;
+    `UFG::qGetResourceInventory<Illusion::Texture>::`2::result = v3;
   }
   UFG::qResourceHandle::Close(v2, v3);
   UFG::qResourceHandle::~qResourceHandle(v2);

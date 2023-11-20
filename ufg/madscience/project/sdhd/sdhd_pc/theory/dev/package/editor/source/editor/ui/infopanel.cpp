@@ -20,12 +20,12 @@ void __fastcall UFG::Editor::InfoPanel::InfoPanel(UFG::Editor::InfoPanel *this)
 
   v1 = this;
   UFG::DUIWindow::DUIWindow((UFG::DUIWindow *)&this->vfptr);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::Editor::InfoPanel,UFG::DUIWindow>::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::Editor::InfoPanel,UFG::DUIWindow>::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::Editor::InfoPanel,UFG::DUIWindow>::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::Editor::InfoPanel,UFG::DUIWindow>::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v1->mBaseNode.mUID = -1i64;
   v1->mTypeUID = UFG::qStringHash64("UFG::Editor::InfoPanel", 0xFFFFFFFFFFFFFFFFui64);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::InfoPanel::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::InfoPanel::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::InfoPanel::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::InfoPanel::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v1->mScrollPosition = 0i64;
   UFG::qString::Set(&v1->mTitle, "Info");
 }
@@ -532,7 +532,7 @@ LABEL_78:
   if ( path.mSubElements.p )
   {
     v70 = &path.mSubElements.p[-1].mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       path.mSubElements.p,
       0x28ui64,
       path.mSubElements.p[-1].mStringHash32,
@@ -544,7 +544,7 @@ LABEL_78:
   if ( path.mElements.p )
   {
     v71 = path.mElements.p - 1;
-    `eh vector destructor iterator'(path.mElements.p, 4ui64, path.mElements.p[-1].mUID, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(path.mElements.p, 4ui64, path.mElements.p[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v71);
   }
   path.mElements.p = 0i64;

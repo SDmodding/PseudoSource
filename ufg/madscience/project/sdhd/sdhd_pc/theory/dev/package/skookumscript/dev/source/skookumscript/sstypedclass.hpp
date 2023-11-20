@@ -6,12 +6,12 @@ void __fastcall SSTypedClass::SSTypedClass(SSTypedClass *this, SSTypedClass *tcl
   SSClassDescBase *v3; // rcx
 
   v2 = this;
-  this->vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable';
-  this->vfptr = (SSClassDescBaseVtbl *)&SSClassUnaryBase::`vftable';
+  this->vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable;
+  this->vfptr = (SSClassDescBaseVtbl *)&SSClassUnaryBase::`vftable;
   this->i_ref_count = 0;
-  this->vfptr = (SSClassDescBaseVtbl *)&SSContextClassBase::`vftable';
+  this->vfptr = (SSClassDescBaseVtbl *)&SSContextClassBase::`vftable;
   this->i_class_p = tclass->i_class_p;
-  this->vfptr = (SSClassDescBaseVtbl *)&SSTypedClass::`vftable';
+  this->vfptr = (SSClassDescBaseVtbl *)&SSTypedClass::`vftable;
   v3 = tclass->i_item_type_p;
   v2->i_item_type_p = v3;
   if ( v3 )
@@ -26,14 +26,14 @@ void __fastcall SSTypedClass::~SSTypedClass(SSTypedClass *this)
   SSClassDescBase *v2; // rcx
 
   v1 = this;
-  this->vfptr = (SSClassDescBaseVtbl *)&SSTypedClass::`vftable';
+  this->vfptr = (SSClassDescBaseVtbl *)&SSTypedClass::`vftable;
   v2 = this->i_item_type_p;
   if ( v2 )
   {
     ((void (__cdecl *)(SSClassDescBase *))v2->vfptr->dereference_delay)(v2);
     v1->i_item_type_p = 0i64;
   }
-  v1->vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable';
+  v1->vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable;
 }
 
 // File Line: 61
@@ -50,11 +50,11 @@ void __fastcall SSTypedClass::SSTypedClass(SSTypedClass *this, const void **bina
 
   v2 = binary_pp;
   v3 = this;
-  this->vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable';
-  this->vfptr = (SSClassDescBaseVtbl *)&SSClassUnaryBase::`vftable';
+  this->vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable;
+  this->vfptr = (SSClassDescBaseVtbl *)&SSClassUnaryBase::`vftable;
   this->i_ref_count = 0;
-  this->vfptr = (SSClassDescBaseVtbl *)&SSContextClassBase::`vftable';
-  this->vfptr = (SSClassDescBaseVtbl *)&SSTypedClass::`vftable';
+  this->vfptr = (SSClassDescBaseVtbl *)&SSContextClassBase::`vftable;
+  this->vfptr = (SSClassDescBaseVtbl *)&SSTypedClass::`vftable;
   this->i_item_type_p = 0i64;
   v4 = ASymbol::create_from_binary(&result, binary_pp);
   v3->i_class_p = SSBrain::get_class(v4);

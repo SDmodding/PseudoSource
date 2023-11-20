@@ -130,7 +130,7 @@ void __fastcall finishLoadedObjecthkpSerializedAgentNnEntry(void *p, int finishi
   if ( p )
   {
     v2 = (hkpSimpleContactConstraintAtom *)((char *)p + 64);
-    *(_QWORD *)v2[-2].m_info.m_data = &hkpSerializedAgentNnEntry::`vftable';
+    *(_QWORD *)v2[-2].m_info.m_data = &hkpSerializedAgentNnEntry::`vftable;
     hkpSimpleContactConstraintAtom::hkpSimpleContactConstraintAtom(v2, (hkFinishLoadedObjectFlag)finishing);
   }
 }
@@ -149,7 +149,7 @@ void **__fastcall getVtablehkpSerializedAgentNnEntry()
   hkpSimpleContactConstraintAtom v1; // [rsp+60h] [rbp-158h]
 
   hkpSimpleContactConstraintAtom::hkpSimpleContactConstraintAtom(&v1, 0);
-  return &hkpSerializedAgentNnEntry::`vftable';
+  return &hkpSerializedAgentNnEntry::`vftable;
 }
 
 // File Line: 242

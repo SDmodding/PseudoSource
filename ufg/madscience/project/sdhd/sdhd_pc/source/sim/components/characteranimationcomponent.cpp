@@ -28,7 +28,7 @@ void __fastcall UFG::CharacterAnimationComponent::CharacterAnimationComponent(UF
   v4 = (UFG::qNode<UFG::CharacterAnimationComponent,UFG::CharacterAnimationComponent> *)&v3->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CharacterAnimationComponent::`vftable';
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CharacterAnimationComponent::`vftable;
   v3->mEnableUpdateTransforms = 1;
   v3->mDamageRig = 0i64;
   v5 = UFG::CharacterAnimationComponent::s_CharacterAnimationComponentList.mNode.mPrev;
@@ -60,7 +60,7 @@ void __fastcall UFG::CharacterAnimationComponent::CharacterAnimationComponent(UF
   v4 = (UFG::qNode<UFG::CharacterAnimationComponent,UFG::CharacterAnimationComponent> *)&v3->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CharacterAnimationComponent::`vftable';
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CharacterAnimationComponent::`vftable;
   v3->mEnableUpdateTransforms = 1;
   v3->mDamageRig = 0i64;
   v5 = UFG::CharacterAnimationComponent::s_CharacterAnimationComponentList.mNode.mPrev;
@@ -73,12 +73,12 @@ void __fastcall UFG::CharacterAnimationComponent::CharacterAnimationComponent(UF
     UFG::CharacterAnimationComponent::_CharacterAnimationComponentTypeUID,
     "CharacterAnimationComponent");
   v6 = v2->mNode.mUID;
-  inventory = `UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result )
+  inventory = `UFG::qGetResourceInventory<UFG::RigResource>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::RigResource>::`2::result )
   {
     v8 = UFG::qResourceWarehouse::Instance();
     inventory = UFG::qResourceWarehouse::GetInventory(v8, 0x39BC0A7Eu);
-    `UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result = inventory;
+    `UFG::qGetResourceInventory<UFG::RigResource>::`2::result = inventory;
   }
   UFG::qResourceHandle::Init(
     (UFG::qResourceHandle *)&v3->mRigHandle.mPrev,
@@ -101,7 +101,7 @@ void __fastcall UFG::CharacterAnimationComponent::~CharacterAnimationComponent(U
   UFG::qNode<UFG::CharacterAnimationComponent,UFG::CharacterAnimationComponent> *v7; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CharacterAnimationComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CharacterAnimationComponent::`vftable;
   if ( this == UFG::CharacterAnimationComponent::s_CharacterAnimationComponentpCurrentIterator )
     UFG::CharacterAnimationComponent::s_CharacterAnimationComponentpCurrentIterator = (UFG::CharacterAnimationComponent *)&this->mPrev[-13].mNext;
   v2 = (UFG::qNode<UFG::CharacterAnimationComponent,UFG::CharacterAnimationComponent> *)&this->mPrev;
@@ -706,7 +706,7 @@ void __fastcall UFG::CameraAnimationComponent::CameraAnimationComponent(UFG::Cam
   v4 = (UFG::qNode<UFG::CameraAnimationComponent,UFG::CameraAnimationComponent> *)&v3->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CameraAnimationComponent::`vftable';
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CameraAnimationComponent::`vftable;
   v5 = UFG::CameraAnimationComponent::s_CameraAnimationComponentList.mNode.mPrev;
   UFG::CameraAnimationComponent::s_CameraAnimationComponentList.mNode.mPrev->mNext = (UFG::qNode<UFG::CameraAnimationComponent,UFG::CameraAnimationComponent> *)&v3->mPrev;
   v4->mPrev = v5;
@@ -730,7 +730,7 @@ void __fastcall UFG::CameraAnimationComponent::~CameraAnimationComponent(UFG::Ca
   UFG::qNode<UFG::CameraAnimationComponent,UFG::CameraAnimationComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CameraAnimationComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CameraAnimationComponent::`vftable;
   if ( this == UFG::CameraAnimationComponent::s_CameraAnimationComponentpCurrentIterator )
     UFG::CameraAnimationComponent::s_CameraAnimationComponentpCurrentIterator = (UFG::CameraAnimationComponent *)&this->mPrev[-13].mNext;
   v2 = (UFG::qNode<UFG::CameraAnimationComponent,UFG::CameraAnimationComponent> *)&this->mPrev;
@@ -828,7 +828,7 @@ void __fastcall UFG::LightGroupComponent::LightGroupComponent(UFG::LightGroupCom
   v2 = (UFG::qNode<UFG::LightGroupComponent,UFG::LightGroupComponent> *)&v1->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::LightGroupComponent::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::LightGroupComponent::`vftable;
   v1->mData = 0i64;
   v1->mDisabled = 0;
   v3 = UFG::LightGroupComponent::s_LightGroupComponentList.mNode.mPrev;
@@ -856,7 +856,7 @@ void __fastcall UFG::LightGroupComponent::~LightGroupComponent(UFG::LightGroupCo
   UFG::qNode<UFG::LightGroupComponent,UFG::LightGroupComponent> *v8; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::LightGroupComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::LightGroupComponent::`vftable;
   if ( this == UFG::LightGroupComponent::s_LightGroupComponentpCurrentIterator )
     UFG::LightGroupComponent::s_LightGroupComponentpCurrentIterator = (UFG::LightGroupComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::LightGroupComponent,UFG::LightGroupComponent> *)&this->mPrev;
@@ -1240,7 +1240,7 @@ void __fastcall UFG::LightGroupAnimationComponent::LightGroupAnimationComponent(
   v3 = (UFG::qNode<UFG::LightGroupAnimationComponent,UFG::LightGroupAnimationComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::LightGroupAnimationComponent::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::LightGroupAnimationComponent::`vftable;
   UFG::RebindingComponentHandle<UFG::LightGroupComponent,0>::RebindingComponentHandle<UFG::LightGroupComponent,0>(&v2->mLightGroupComponent);
   v2->mLightInfo = 0i64;
   v4 = UFG::LightGroupAnimationComponent::s_LightGroupAnimationComponentList.mNode.mPrev;
@@ -1266,7 +1266,7 @@ void __fastcall UFG::LightGroupAnimationComponent::~LightGroupAnimationComponent
   UFG::qNode<UFG::LightGroupAnimationComponent,UFG::LightGroupAnimationComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::LightGroupAnimationComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::LightGroupAnimationComponent::`vftable;
   if ( this == UFG::LightGroupAnimationComponent::s_LightGroupAnimationComponentpCurrentIterator )
     UFG::LightGroupAnimationComponent::s_LightGroupAnimationComponentpCurrentIterator = (UFG::LightGroupAnimationComponent *)&this->mPrev[-13].mNext;
   v2 = (UFG::qNode<UFG::LightGroupAnimationComponent,UFG::LightGroupAnimationComponent> *)&this->mPrev;

@@ -2,7 +2,7 @@
 // RVA: 0x106FC0
 void __fastcall SSExpressionBase::~SSExpressionBase(SSExpressionBase *this)
 {
-  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
+  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
 }
 
 // File Line: 219
@@ -225,7 +225,7 @@ void __fastcall SSConditional::assign_binary(SSConditional *this, const void **b
     v8 = v7;
     if ( v7 )
     {
-      v7->vfptr = (SSClauseVtbl *)&SSClause::`vftable';
+      v7->vfptr = (SSClauseVtbl *)&SSClause::`vftable;
       v9 = *(unsigned __int8 *)*v2;
       v10 = (signed __int64)*v2 + 1;
       *v2 = (const void *)v10;
@@ -406,13 +406,13 @@ void __fastcall SSCase::~SSCase(SSCase *this)
   SSExpressionBase *v2; // rcx
 
   v1 = this;
-  this->vfptr = (SSExpressionBaseVtbl *)&SSCase::`vftable';
+  this->vfptr = (SSExpressionBaseVtbl *)&SSCase::`vftable;
   v2 = this->i_compare_expr_p;
   if ( v2 )
     v2->vfptr->__vecDelDtor(v2, 1u);
   APCompactArrayBase<SSClause>::free_all((APCompactArrayBase<SSClause> *)&v1->i_clauses.i_count);
   AMemory::c_free_func(v1->i_clauses.i_array_p);
-  v1->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
+  v1->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
 }
 
 // File Line: 1159
@@ -461,7 +461,7 @@ void __fastcall SSCase::assign_binary(SSCase *this, const void **binary_pp)
     v11 = v10;
     if ( v10 )
     {
-      v10->vfptr = (SSClauseVtbl *)&SSClause::`vftable';
+      v10->vfptr = (SSClauseVtbl *)&SSClause::`vftable;
       v12 = *(unsigned __int8 *)*v2;
       v13 = (signed __int64)*v2 + 1;
       *v2 = (const void *)v13;
@@ -1030,14 +1030,14 @@ SSInvokedBase *__fastcall SSConversion::invoke(SSConversion *this, SSObjectBase 
         v21.i_array_p = 0i64;
         v22.i_count = 0;
         v22.i_array_p = 0i64;
-        v18 = &SSMethodCall::`vftable';
+        v18 = &SSMethodCall::`vftable;
         (*(void (__fastcall **)(_DWORD *, void ***, SSObjectBase *, SSInvokedBase *, SSInstance **))(*(_QWORD *)v10 + 96i64))(
           v10,
           &v18,
           v6,
           v5,
           &v23);
-        v18 = &SSInvokeBase::`vftable';
+        v18 = &SSInvokeBase::`vftable;
         APCompactArrayBase<SSParameterBase>::free_all(&v21);
         APCompactArrayBase<SSParameterBase>::free_all(&v22);
         AMemory::c_free_func(v22.i_array_p);

@@ -674,7 +674,7 @@ LABEL_16:
     }
     while ( v60 );
   }
-  v63 = &`hkVector4f::getComponent'::`2'::indexToMask;
+  v63 = &`hkVector4f::getComponent::`2::indexToMask;
   v64 = (__m128)_mm_cmpeq_epi32(
                   _mm_unpacklo_epi16(
                     _mm_unpacklo_epi8((__m128i)*(unsigned int *)(v56 + v55), (__m128i)0i64),
@@ -684,7 +684,7 @@ LABEL_16:
   if ( v56 < v18 )
   {
     v66 = &boneWeightsOut[v56];
-    v67 = &`hkVector4f::getComponent'::`2'::indexToMask;
+    v67 = &`hkVector4f::getComponent::`2::indexToMask;
     v68 = (unsigned int)(v18 - v56);
     do
     {

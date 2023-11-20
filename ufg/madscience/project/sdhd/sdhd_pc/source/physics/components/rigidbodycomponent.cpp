@@ -41,8 +41,8 @@ void __fastcall UFG::RigidBodyComponent::RigidBodyComponent(UFG::RigidBodyCompon
   v6 = (UFG::qNode<UFG::RigidBodyComponent,UFG::RigidBodyComponent> *)&v5->mPrev;
   v6->mPrev = v6;
   v6->mNext = v6;
-  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::RigidBodyComponent::`vftable'{for `UFG::SimComponent'};
-  v5->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::RigidBodyComponent::`vftable'{for `UFG::BasePhysicsObject'};
+  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::RigidBodyComponent::`vftable{for `UFG::SimComponent};
+  v5->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::RigidBodyComponent::`vftable{for `UFG::BasePhysicsObject};
   v7 = &v5->mParkourComponent;
   v7->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v7->mPrev;
   v7->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v7->mPrev;
@@ -123,8 +123,8 @@ void __fastcall UFG::RigidBodyComponent::~RigidBodyComponent(UFG::RigidBodyCompo
   UFG::qNode<UFG::RigidBodyComponent,UFG::RigidBodyComponent> *v33; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::RigidBodyComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::RigidBodyComponent::`vftable'{for `UFG::BasePhysicsObject'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::RigidBodyComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::RigidBodyComponent::`vftable{for `UFG::BasePhysicsObject};
   v2 = 0;
   if ( this->mInstanceData->mNumParts )
   {

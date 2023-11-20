@@ -18,7 +18,7 @@ void __fastcall CAkRoomVerbFX::CAkRoomVerbFX(CAkRoomVerbFX *this)
 
   v1 = this;
   v2 = &this->m_Reverb;
-  *(_QWORD *)v2[-1].uTCFilterIndex = &CAkRoomVerbFX::`vftable';
+  *(_QWORD *)v2[-1].uTCFilterIndex = &CAkRoomVerbFX::`vftable;
   ReverbState::ReverbState(v2);
   v1->m_pParams = 0i64;
   v1->m_pAllocator = 0i64;
@@ -40,7 +40,7 @@ void __fastcall CAkRoomVerbFX::CAkRoomVerbFX(CAkRoomVerbFX *this)
 // RVA: 0xAE1140
 void __fastcall CAkRoomVerbFX::~CAkRoomVerbFX(CAkRoomVerbFX *this)
 {
-  this->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable';
+  this->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable;
 }
 
 // File Line: 82

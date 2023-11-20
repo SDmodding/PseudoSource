@@ -32,10 +32,10 @@ void __fastcall finishLoadedObjecthkpKeyframedRigidMotion(void *p, int finishing
 {
   if ( p )
   {
-    *(_QWORD *)p = &hkpMotion::`vftable';
+    *(_QWORD *)p = &hkpMotion::`vftable;
     if ( finishing )
       *((_WORD *)p + 153) = 16256;
-    *(_QWORD *)p = &hkpKeyframedRigidMotion::`vftable';
+    *(_QWORD *)p = &hkpKeyframedRigidMotion::`vftable;
   }
 }
 
@@ -50,7 +50,7 @@ void __fastcall cleanupLoadedObjecthkpKeyframedRigidMotion(void *p)
 // RVA: 0xD4FDB0
 void **__fastcall getVtablehkpKeyframedRigidMotion()
 {
-  return &hkpKeyframedRigidMotion::`vftable';
+  return &hkpKeyframedRigidMotion::`vftable;
 }
 
 // File Line: 90
@@ -103,10 +103,10 @@ void __fastcall finishLoadedObjecthkpMaxSizeMotion(void *p, int finishing)
 {
   if ( p )
   {
-    *(_QWORD *)p = &hkpMotion::`vftable';
+    *(_QWORD *)p = &hkpMotion::`vftable;
     if ( finishing )
       *((_WORD *)p + 153) = 16256;
-    *(_QWORD *)p = &hkpMaxSizeMotion::`vftable';
+    *(_QWORD *)p = &hkpMaxSizeMotion::`vftable;
   }
 }
 
@@ -121,7 +121,7 @@ void __fastcall cleanupLoadedObjecthkpMaxSizeMotion(void *p)
 // RVA: 0xD4FE10
 void **__fastcall getVtablehkpMaxSizeMotion()
 {
-  return &hkpMaxSizeMotion::`vftable';
+  return &hkpMaxSizeMotion::`vftable;
 }
 
 // File Line: 154

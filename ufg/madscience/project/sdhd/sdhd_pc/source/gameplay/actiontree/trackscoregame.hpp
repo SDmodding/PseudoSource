@@ -32,8 +32,8 @@ void __fastcall JumpTrack::~JumpTrack(JumpTrack *this)
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&JumpTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&JumpTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -44,7 +44,7 @@ void __fastcall JumpTrack::~JumpTrack(JumpTrack *this)
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 139
@@ -63,8 +63,8 @@ void __fastcall TimeWarpTrack::~TimeWarpTrack(TimeWarpTrack *this)
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&TimeWarpTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&TimeWarpTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -75,7 +75,7 @@ void __fastcall TimeWarpTrack::~TimeWarpTrack(TimeWarpTrack *this)
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 173
@@ -93,8 +93,8 @@ void __fastcall DamageTrack::DamageTrack(DamageTrack *this)
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, DamageTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DamageTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DamageTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DamageTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&DamageTrack::`vftable;
   v1->mDamage.text.mOffset = 1i64;
   BinString::Set(&v1->mDamage.text, &customWorldMapCaption);
   v1->mDamage.expression.mOffset = 0i64;
@@ -113,7 +113,7 @@ void __fastcall DamageTrack::~DamageTrack(DamageTrack *this)
   char *v5; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&DamageTrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&DamageTrack::`vftable;
   v2 = &this->mDamage;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -124,7 +124,7 @@ void __fastcall DamageTrack::~DamageTrack(DamageTrack *this)
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v4 = &v1->mMasterRate;
   if ( !(~LOBYTE(v1->mMasterRate.text.mOffset) & 1) )
   {
@@ -135,7 +135,7 @@ void __fastcall DamageTrack::~DamageTrack(DamageTrack *this)
         operator delete[](v5);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 225
@@ -156,7 +156,7 @@ void __fastcall HandleDamageTrack::~HandleDamageTrack(HandleDamageTrack *this)
   char *v5; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&HandleDamageTrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&HandleDamageTrack::`vftable;
   v2 = &this->mDamageMultiplyer;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -167,7 +167,7 @@ void __fastcall HandleDamageTrack::~HandleDamageTrack(HandleDamageTrack *this)
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v4 = &v1->mMasterRate;
   if ( !(~LOBYTE(v1->mMasterRate.text.mOffset) & 1) )
   {
@@ -178,7 +178,7 @@ void __fastcall HandleDamageTrack::~HandleDamageTrack(HandleDamageTrack *this)
         operator delete[](v5);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 251
@@ -197,8 +197,8 @@ void __fastcall HealthSetPercentageTrack::~HealthSetPercentageTrack(HealthSetPer
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&HealthSetPercentageTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&HealthSetPercentageTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -209,7 +209,7 @@ void __fastcall HealthSetPercentageTrack::~HealthSetPercentageTrack(HealthSetPer
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 274
@@ -228,8 +228,8 @@ void __fastcall ObjectReferenceTrack::~ObjectReferenceTrack(ObjectReferenceTrack
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&ObjectReferenceTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&ObjectReferenceTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -240,7 +240,7 @@ void __fastcall ObjectReferenceTrack::~ObjectReferenceTrack(ObjectReferenceTrack
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 294
@@ -263,8 +263,8 @@ void __fastcall ObjectCreateTrack::~ObjectCreateTrack(ObjectCreateTrack *this)
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&ObjectCreateTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&ObjectCreateTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -275,7 +275,7 @@ void __fastcall ObjectCreateTrack::~ObjectCreateTrack(ObjectCreateTrack *this)
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 316
@@ -294,8 +294,8 @@ void __fastcall ObjectCreateFromPropertiesTrack::~ObjectCreateFromPropertiesTrac
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&ObjectCreateFromPropertiesTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&ObjectCreateFromPropertiesTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -306,7 +306,7 @@ void __fastcall ObjectCreateFromPropertiesTrack::~ObjectCreateFromPropertiesTrac
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 338
@@ -325,8 +325,8 @@ void __fastcall HideTrack::~HideTrack(HideTrack *this)
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&HideTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&HideTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -337,7 +337,7 @@ void __fastcall HideTrack::~HideTrack(HideTrack *this)
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 372
@@ -356,8 +356,8 @@ void __fastcall UnhideTrack::~UnhideTrack(UnhideTrack *this)
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&UnhideTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&UnhideTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -368,7 +368,7 @@ void __fastcall UnhideTrack::~UnhideTrack(UnhideTrack *this)
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 386
@@ -391,8 +391,8 @@ void __fastcall InputSignalFilterTrack::~InputSignalFilterTrack(InputSignalFilte
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&InputSignalFilterTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&InputSignalFilterTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -403,7 +403,7 @@ void __fastcall InputSignalFilterTrack::~InputSignalFilterTrack(InputSignalFilte
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 406
@@ -422,8 +422,8 @@ void __fastcall InputSignalLerpFilterTrack::~InputSignalLerpFilterTrack(InputSig
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&InputSignalLerpFilterTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&InputSignalLerpFilterTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -434,7 +434,7 @@ void __fastcall InputSignalLerpFilterTrack::~InputSignalLerpFilterTrack(InputSig
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 479
@@ -453,8 +453,8 @@ void __fastcall InputEnableMappingTrack::~InputEnableMappingTrack(InputEnableMap
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&InputEnableMappingTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&InputEnableMappingTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -465,7 +465,7 @@ void __fastcall InputEnableMappingTrack::~InputEnableMappingTrack(InputEnableMap
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 543
@@ -484,8 +484,8 @@ void __fastcall ReadControllerInputTrack::~ReadControllerInputTrack(ReadControll
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&ReadControllerInputTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&ReadControllerInputTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -496,7 +496,7 @@ void __fastcall ReadControllerInputTrack::~ReadControllerInputTrack(ReadControll
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 574

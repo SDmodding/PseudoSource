@@ -37,12 +37,12 @@ void __fastcall hkpBroadPhaseBorder::hkpBroadPhaseBorder(hkpBroadPhaseBorder *th
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v4 = 0i64;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpBroadPhaseBorder::`vftable'{for `hkReferencedObject'};
-  this->vfptr = (hkpWorldDeletionListenerVtbl *)&hkpBroadPhaseBorder::`vftable'{for `hkpWorldDeletionListener'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkpBroadPhaseBorder::`vftable{for `hkReferencedObject};
+  this->vfptr = (hkpWorldDeletionListenerVtbl *)&hkpBroadPhaseBorder::`vftable{for `hkpWorldDeletionListener};
   v5 = world;
-  this->vfptr = (hkpPhantomOverlapListenerVtbl *)&hkpBroadPhaseBorder::`vftable'{for `hkpPhantomOverlapListener'};
+  this->vfptr = (hkpPhantomOverlapListenerVtbl *)&hkpBroadPhaseBorder::`vftable{for `hkpPhantomOverlapListener};
   v6 = this;
-  this->vfptr = (hkpWorldPostSimulationListenerVtbl *)&hkpBroadPhaseBorder::`vftable'{for `hkpWorldPostSimulationListener'};
+  this->vfptr = (hkpWorldPostSimulationListenerVtbl *)&hkpBroadPhaseBorder::`vftable{for `hkpWorldPostSimulationListener};
   this->m_entitiesExitingBroadPhase.m_data = 0i64;
   this->m_entitiesExitingBroadPhase.m_size = 0;
   this->m_entitiesExitingBroadPhase.m_capacityAndFlags = 2147483648;
@@ -174,11 +174,11 @@ void __fastcall hkpBroadPhaseBorder::~hkpBroadPhaseBorder(hkpBroadPhaseBorder *t
 
   v1 = this;
   v2 = (hkReferencedObject **)this->m_phantoms;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpBroadPhaseBorder::`vftable'{for `hkReferencedObject'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkpBroadPhaseBorder::`vftable{for `hkReferencedObject};
   v3 = 6i64;
-  this->vfptr = (hkpWorldDeletionListenerVtbl *)&hkpBroadPhaseBorder::`vftable'{for `hkpWorldDeletionListener'};
-  this->vfptr = (hkpPhantomOverlapListenerVtbl *)&hkpBroadPhaseBorder::`vftable'{for `hkpPhantomOverlapListener'};
-  this->vfptr = (hkpWorldPostSimulationListenerVtbl *)&hkpBroadPhaseBorder::`vftable'{for `hkpWorldPostSimulationListener'};
+  this->vfptr = (hkpWorldDeletionListenerVtbl *)&hkpBroadPhaseBorder::`vftable{for `hkpWorldDeletionListener};
+  this->vfptr = (hkpPhantomOverlapListenerVtbl *)&hkpBroadPhaseBorder::`vftable{for `hkpPhantomOverlapListener};
+  this->vfptr = (hkpWorldPostSimulationListenerVtbl *)&hkpBroadPhaseBorder::`vftable{for `hkpWorldPostSimulationListener};
   do
   {
     if ( *v2 )
@@ -199,10 +199,10 @@ void __fastcall hkpBroadPhaseBorder::~hkpBroadPhaseBorder(hkpBroadPhaseBorder *t
       8 * v4);
   v1->m_entitiesExitingBroadPhase.m_data = 0i64;
   v1->m_entitiesExitingBroadPhase.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkpWorldPostSimulationListenerVtbl *)&hkpWorldPostSimulationListener::`vftable';
-  v1->vfptr = (hkpPhantomOverlapListenerVtbl *)&hkpPhantomOverlapListener::`vftable';
-  v1->vfptr = (hkpWorldDeletionListenerVtbl *)&hkpWorldDeletionListener::`vftable';
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkpWorldPostSimulationListenerVtbl *)&hkpWorldPostSimulationListener::`vftable;
+  v1->vfptr = (hkpPhantomOverlapListenerVtbl *)&hkpPhantomOverlapListener::`vftable;
+  v1->vfptr = (hkpWorldDeletionListenerVtbl *)&hkpWorldDeletionListener::`vftable;
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 110

@@ -79,7 +79,7 @@ void __fastcall UFG::SceneSettings::~SceneSettings(UFG::SceneSettings *this)
   if ( v2 )
   {
     v3 = &v2[-1].mLoadingScreen.mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v2,
       0x30ui64,
       v2[-1].mLoadingScreen.mStringHash32,
@@ -92,7 +92,7 @@ void __fastcall UFG::SceneSettings::~SceneSettings(UFG::SceneSettings *this)
   if ( v4 )
   {
     v5 = &v4[-1].mLoadingScreen.mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v4,
       0x30ui64,
       v4[-1].mLoadingScreen.mStringHash32,
@@ -105,7 +105,7 @@ void __fastcall UFG::SceneSettings::~SceneSettings(UFG::SceneSettings *this)
   if ( v6 )
   {
     v7 = &v6[-1].mHintString.mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v6,
       0x30ui64,
       v6[-1].mHintString.mStringHash32,
@@ -118,7 +118,7 @@ void __fastcall UFG::SceneSettings::~SceneSettings(UFG::SceneSettings *this)
   if ( v8 )
   {
     v9 = &v8[-1].mHintString.mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v8,
       0x30ui64,
       v8[-1].mHintString.mStringHash32,
@@ -131,7 +131,7 @@ void __fastcall UFG::SceneSettings::~SceneSettings(UFG::SceneSettings *this)
   if ( v10 )
   {
     v11 = &v10[-1].mEnableWardrobe;
-    `eh vector destructor iterator'(v10, 8ui64, *(_DWORD *)&v10[-1].mEnableWardrobe, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v10, 8ui64, *(_DWORD *)&v10[-1].mEnableWardrobe, (void (__fastcall *)(void *))_);
     operator delete[](v11);
   }
   v1->mDisguiseSetupOnEnd.p = 0i64;
@@ -140,7 +140,7 @@ void __fastcall UFG::SceneSettings::~SceneSettings(UFG::SceneSettings *this)
   if ( v12 )
   {
     v13 = &v12[-1].mEnableWardrobe;
-    `eh vector destructor iterator'(v12, 8ui64, *(_DWORD *)&v12[-1].mEnableWardrobe, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v12, 8ui64, *(_DWORD *)&v12[-1].mEnableWardrobe, (void (__fastcall *)(void *))_);
     operator delete[](v13);
   }
   v1->mDisguiseSetupOnStart.p = 0i64;
@@ -149,7 +149,7 @@ void __fastcall UFG::SceneSettings::~SceneSettings(UFG::SceneSettings *this)
   if ( v14 )
   {
     v15 = &v14[-1].mEnable;
-    `eh vector destructor iterator'(v14, 8ui64, *(_DWORD *)&v14[-1].mEnable, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v14, 8ui64, *(_DWORD *)&v14[-1].mEnable, (void (__fastcall *)(void *))_);
     operator delete[](v15);
   }
   v1->mVendorSetupOnEnd.p = 0i64;
@@ -158,7 +158,7 @@ void __fastcall UFG::SceneSettings::~SceneSettings(UFG::SceneSettings *this)
   if ( v16 )
   {
     v17 = &v16[-1].mEnable;
-    `eh vector destructor iterator'(v16, 8ui64, *(_DWORD *)&v16[-1].mEnable, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v16, 8ui64, *(_DWORD *)&v16[-1].mEnable, (void (__fastcall *)(void *))_);
     operator delete[](v17);
   }
   v1->mVendorSetupOnStart.p = 0i64;
@@ -167,7 +167,7 @@ void __fastcall UFG::SceneSettings::~SceneSettings(UFG::SceneSettings *this)
   if ( v18 )
   {
     v19 = &v18[-1].mFlush;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v18,
       0x30ui64,
       *(_DWORD *)&v18[-1].mFlush,
@@ -180,7 +180,7 @@ void __fastcall UFG::SceneSettings::~SceneSettings(UFG::SceneSettings *this)
   if ( v20 )
   {
     v21 = &v20[-1].mFlush;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v20,
       0x30ui64,
       *(_DWORD *)&v20[-1].mFlush,
@@ -193,7 +193,7 @@ void __fastcall UFG::SceneSettings::~SceneSettings(UFG::SceneSettings *this)
   if ( v22 )
   {
     v23 = &v22[-1].mGeoSettingsPresent;
-    `eh vector destructor iterator'(v22, 8ui64, *(_DWORD *)&v22[-1].mGeoSettingsPresent, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v22, 8ui64, *(_DWORD *)&v22[-1].mGeoSettingsPresent, (void (__fastcall *)(void *))_);
     operator delete[](v23);
   }
   v1->mLayerSetupOnEnd.p = 0i64;
@@ -202,7 +202,7 @@ void __fastcall UFG::SceneSettings::~SceneSettings(UFG::SceneSettings *this)
   if ( v24 )
   {
     v25 = &v24[-1].mGeoSettingsPresent;
-    `eh vector destructor iterator'(v24, 8ui64, *(_DWORD *)&v24[-1].mGeoSettingsPresent, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v24, 8ui64, *(_DWORD *)&v24[-1].mGeoSettingsPresent, (void (__fastcall *)(void *))_);
     operator delete[](v25);
   }
   v1->mLayerSetupOnStart.p = 0i64;

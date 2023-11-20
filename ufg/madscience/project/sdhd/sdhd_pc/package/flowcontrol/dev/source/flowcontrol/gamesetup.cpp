@@ -6,7 +6,7 @@ void __fastcall UFG::GameSetup::GameSetup(UFG::GameSetup *this)
 
   v1 = this;
   this->mMultiplayer = 0;
-  this->vfptr = (UFG::GameSetupVtbl *)&UFG::GameSetup::`vftable';
+  this->vfptr = (UFG::GameSetupVtbl *)&UFG::GameSetup::`vftable;
   UFG::qStringCopy(this->mConfig, 0x7FFFFFFF, &customWorldMapCaption, -1);
   UFG::qStringCopy(v1->mLocationDir, 0x7FFFFFFF, &customWorldMapCaption, -1);
   UFG::qSPrintf(v1->mLocationDir, 32, "%s", &customWorldMapCaption);

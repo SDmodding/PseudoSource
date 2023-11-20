@@ -442,7 +442,7 @@ unsigned int __fastcall hkClass::getSignature(hkClass *this, int signatureFlags)
   *(_DWORD *)&w.m_memSizeAndFlags = 0x1FFFF;
   v6 = -1;
   v3 = ~(_BYTE)signatureFlags & 1;
-  for ( w.vfptr = (hkBaseObjectVtbl *)&hkCrc32StreamWriter::`vftable'; v2; v2 = hkClass::getParent(v2) )
+  for ( w.vfptr = (hkBaseObjectVtbl *)&hkCrc32StreamWriter::`vftable; v2; v2 = hkClass::getParent(v2) )
   {
     hkClass::writeSignature(v2, &w);
     if ( !v3 )

@@ -105,7 +105,7 @@ void __fastcall UFG::UISubtitleMessageQueue::UpdateSubtitle(UFG::UISubtitleMessa
   {
     if ( v4->state == 3 || (float)(v4->lifetime + 10.0) < v4->age )
     {
-      UFG::UISubtitleMessage::`scalar deleting destructor'(v4, 1);
+      UFG::UISubtitleMessage::`scalar deleting destructor(v4, 1);
       *v6 = 0i64;
     }
     v8 = elapsed + v4->age;
@@ -300,7 +300,7 @@ void __fastcall UFG::UIHKTextOverlay::UIHKTextOverlay(UFG::UIHKTextOverlay *this
   UFG::qList<UFG::UISubtitleMessage,UFG::UISubtitleMessage,1,0> *v8; // rax
   UFG::qSafePointer<UFG::SimObject,UFG::SimObjectVehicle> *v9; // rax
 
-  this->vfptr = (UFG::UIHKTextOverlayVtbl *)&UFG::UIHKTextOverlay::`vftable';
+  this->vfptr = (UFG::UIHKTextOverlayVtbl *)&UFG::UIHKTextOverlay::`vftable;
   *(_WORD *)&this->mChanged = 256;
   this->mScreen = 0i64;
   v1 = &this->mSubtitleQueue;
@@ -378,7 +378,7 @@ void __fastcall UFG::UIHKTextOverlay::~UIHKTextOverlay(UFG::UIHKTextOverlay *thi
   UFG::qNode<UFG::UISubtitleMessage,UFG::UISubtitleMessage> *v21; // rax
 
   v1 = this;
-  this->vfptr = (UFG::UIHKTextOverlayVtbl *)&UFG::UIHKTextOverlay::`vftable';
+  this->vfptr = (UFG::UIHKTextOverlayVtbl *)&UFG::UIHKTextOverlay::`vftable;
   v2 = this->mMissionComplete;
   if ( v2 )
   {
@@ -513,7 +513,7 @@ void __fastcall UFG::UIHKTextOverlay::update(UFG::UIHKTextOverlay *this, UFG::UI
           else if ( v7->state == 3 )
           {
             if ( v7 )
-              UFG::UISubtitleMessage::`scalar deleting destructor'(v7, 1);
+              UFG::UISubtitleMessage::`scalar deleting destructor(v7, 1);
             v4->mMissionComplete = 0i64;
           }
         }
@@ -544,12 +544,12 @@ void __fastcall UFG::UIHKTextOverlay::update(UFG::UIHKTextOverlay *this, UFG::UI
             *(_QWORD *)&data.MessageIds[4] = 0i64;
             UFG::UIHKHelpBarWidget::Show(v10, &data);
             UFG::qString::~qString(&data.CustomTexturePack);
-            `eh vector destructor iterator'(
+            `eh vector destructor iterator(
               data.Icons,
               0x28ui64,
               6,
               (void (__fastcall *)(void *))UFG::qString::~qString);
-            `eh vector destructor iterator'(
+            `eh vector destructor iterator(
               data.Captions,
               0x28ui64,
               6,
@@ -935,7 +935,7 @@ void __fastcall UFG::UIHKTextOverlay::OnStartFadeIn(UFG::UIHKTextOverlay *this, 
           if ( v12 )
             UFG::qString::Set(&v46, v12);
         }
-        `eh vector constructor iterator'(
+        `eh vector constructor iterator(
           &ptr.mData,
           0x30ui64,
           5,
@@ -1021,7 +1021,7 @@ void __fastcall UFG::UIHKTextOverlay::OnStartFadeIn(UFG::UIHKTextOverlay *this, 
           }
 LABEL_40:
           Scaleform::GFx::Movie::Invoke(v6, v18, 0i64, (Scaleform::GFx::Value *)&ptr.mData, 5u);
-          `eh vector destructor iterator'(
+          `eh vector destructor iterator(
             &ptr.mData,
             0x30ui64,
             5,
@@ -1150,7 +1150,7 @@ LABEL_24:
   {
     v11 = v3->mMissionComplete;
     if ( v11 )
-      UFG::UISubtitleMessage::`scalar deleting destructor'(v11, 1);
+      UFG::UISubtitleMessage::`scalar deleting destructor(v11, 1);
     v3->mMissionComplete = v2;
     v2->state = 4;
     v12 = &v3->mMissionObjQueue;
@@ -1171,7 +1171,7 @@ LABEL_24:
     v8 = v3->mScreen->mRenderable->m_movie.pObject;
     if ( v8 )
     {
-      `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       v9 = (__int64)v2->mText.mData;
       if ( (v18 >> 6) & 1 )
       {
@@ -1189,7 +1189,7 @@ LABEL_24:
       v22 = 6;
       v23 = v10;
       Scaleform::GFx::Movie::Invoke(v8, "Rewards_Add", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-      `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+      `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
       return v2->id;
     }
     return 0i64;
@@ -1253,7 +1253,7 @@ void __fastcall UFG::UIHKTextOverlay::StartMissionComplete(UFG::UIHKTextOverlay 
       v3 = v2->mRenderable->m_movie.pObject;
       if ( v3 )
       {
-        `eh vector constructor iterator'(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+        `eh vector constructor iterator(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
         v4 = *(double *)&v1->mMissionComplete->mText.mData;
         if ( ((unsigned int)pargs.Type >> 6) & 1 )
         {
@@ -1275,7 +1275,7 @@ void __fastcall UFG::UIHKTextOverlay::StartMissionComplete(UFG::UIHKTextOverlay 
         v10 = v5;
         Scaleform::GFx::Movie::Invoke(v3, "showMissionComplete", 0i64, &pargs, 2u);
         v1->mMissionComplete->state = 0;
-        `eh vector destructor iterator'(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+        `eh vector destructor iterator(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
       }
     }
   }

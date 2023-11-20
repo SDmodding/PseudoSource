@@ -3,7 +3,7 @@
 void __fastcall hkpVehicleSteeringAckerman::hkpVehicleSteeringAckerman(hkpVehicleSteeringAckerman *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpVehicleSteeringAckerman::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpVehicleSteeringAckerman::`vftable;
   this->m_doesWheelSteer.m_capacityAndFlags = 2147483648;
   this->m_doesWheelSteer.m_data = 0i64;
   this->m_doesWheelSteer.m_size = 0;

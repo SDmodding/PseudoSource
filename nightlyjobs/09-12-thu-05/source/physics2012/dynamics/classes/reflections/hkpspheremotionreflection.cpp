@@ -32,10 +32,10 @@ void __fastcall finishLoadedObjecthkpSphereMotion(void *p, int finishing)
 {
   if ( p )
   {
-    *(_QWORD *)p = &hkpMotion::`vftable';
+    *(_QWORD *)p = &hkpMotion::`vftable;
     if ( finishing )
       *((_WORD *)p + 153) = 16256;
-    *(_QWORD *)p = &hkpSphereMotion::`vftable';
+    *(_QWORD *)p = &hkpSphereMotion::`vftable;
   }
 }
 
@@ -50,7 +50,7 @@ void __fastcall cleanupLoadedObjecthkpSphereMotion(void *p)
 // RVA: 0xD51210
 void **__fastcall getVtablehkpSphereMotion()
 {
-  return &hkpSphereMotion::`vftable';
+  return &hkpSphereMotion::`vftable;
 }
 
 // File Line: 90

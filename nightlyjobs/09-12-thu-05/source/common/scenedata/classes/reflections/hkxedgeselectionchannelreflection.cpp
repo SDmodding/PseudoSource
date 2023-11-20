@@ -31,7 +31,7 @@ hkClass *__fastcall hkxEdgeSelectionChannel::staticClass()
 void __fastcall finishLoadedObjecthkxEdgeSelectionChannel(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkxEdgeSelectionChannel::`vftable';
+    *(_QWORD *)p = &hkxEdgeSelectionChannel::`vftable;
 }
 
 // File Line: 68
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkxEdgeSelectionChannel(void *p)
 // RVA: 0xE31C30
 void **__fastcall getVtablehkxEdgeSelectionChannel()
 {
-  return &hkxEdgeSelectionChannel::`vftable';
+  return &hkxEdgeSelectionChannel::`vftable;
 }
 
 // File Line: 94

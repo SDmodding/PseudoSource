@@ -24,9 +24,9 @@ void __fastcall Scaleform::GFx::AS2::StageCtorFunction::StageCtorFunction(Scalef
     (Scaleform::GFx::AS2::CFunctionObject *)&this->vfptr,
     psc,
     Scaleform::GFx::AS2::StageCtorFunction::GlobalCtor);
-  v5->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::StageCtorFunction::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
+  v5->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::StageCtorFunction::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
   v6 = (signed __int64)&v5->vfptr;
-  v5->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::StageCtorFunction::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+  v5->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::StageCtorFunction::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   v5->pMovieRoot = v3;
   if ( v5 != (Scaleform::GFx::AS2::StageCtorFunction *)-32i64 )
     Scaleform::GFx::AS2::NameFunction::AddConstMembers(
@@ -867,11 +867,11 @@ void __usercall Scaleform::GFx::AS2::StageCtorFunction::NotifyOnResize(Scaleform
        - 32;
     if ( v7 )
     {
-      pcallback.vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)`Scaleform::GFx::AS2::AsBroadcaster::BroadcastMessage'::`4'::LocalInvokeCallback::`vftable';
+      pcallback.vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)`Scaleform::GFx::AS2::AsBroadcaster::BroadcastMessage::`4::LocalInvokeCallback::`vftable;
       LODWORD(v17) = 1;
       HIDWORD(v17) = v9;
       Scaleform::GFx::AS2::AsBroadcaster::BroadcastMessageWithCallback(v3, v7, v8, &pcallback);
-      pcallback.vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)&Scaleform::GFx::AS2::AsBroadcaster::InvokeCallback::`vftable';
+      pcallback.vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)&Scaleform::GFx::AS2::AsBroadcaster::InvokeCallback::`vftable;
     }
     v10 = v20.pNode;
     v11 = v20.pNode->RefCount == 1;
@@ -895,10 +895,10 @@ void __usercall Scaleform::GFx::AS2::StageCtorFunction::NotifyOnResize(Scaleform
     v14 = Scaleform::GFx::AS2::Environment::CreateConstString(penv, &v20, "onResize");
     if ( v13 )
     {
-      pcallback.vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)`Scaleform::GFx::AS2::AsBroadcaster::BroadcastMessage'::`4'::LocalInvokeCallback::`vftable';
+      pcallback.vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)`Scaleform::GFx::AS2::AsBroadcaster::BroadcastMessage::`4::LocalInvokeCallback::`vftable;
       v17 = 0i64;
       Scaleform::GFx::AS2::AsBroadcaster::BroadcastMessageWithCallback(v3, v13, v14, &pcallback);
-      pcallback.vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)&Scaleform::GFx::AS2::AsBroadcaster::InvokeCallback::`vftable';
+      pcallback.vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)&Scaleform::GFx::AS2::AsBroadcaster::InvokeCallback::`vftable;
     }
     v15 = v20.pNode;
     v11 = v20.pNode->RefCount == 1;
@@ -984,9 +984,9 @@ Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::StageCtorFunct
       &psc,
       v7,
       v3);
-    v6->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::StageProto::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::StageProto::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
-    v6->vfptr = (Scaleform::GFx::AS2::GASPrototypeBaseVtbl *)&Scaleform::GFx::AS2::StageProto::`vftable';
+    v6->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::StageProto::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::StageProto::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+    v6->vfptr = (Scaleform::GFx::AS2::GASPrototypeBaseVtbl *)&Scaleform::GFx::AS2::StageProto::`vftable;
     LOBYTE(flags) = 1;
     Scaleform::GFx::AS2::GASPrototypeBase::InitFunctionMembers(
       (Scaleform::GFx::AS2::GASPrototypeBase *)&v6->vfptr,

@@ -42,7 +42,7 @@ void __fastcall UFG::AmbientContextManager::~AmbientContextManager(UFG::AmbientC
   if ( v2 )
   {
     v3 = &v2[-1].m_lastIdx;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v2,
       8ui64,
       *(_DWORD *)&v2[-1].m_lastIdx,
@@ -55,7 +55,7 @@ void __fastcall UFG::AmbientContextManager::~AmbientContextManager(UFG::AmbientC
   if ( v4 )
   {
     v5 = &v4[-1].m_lastIdx;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v4,
       8ui64,
       *(_DWORD *)&v4[-1].m_lastIdx,
@@ -75,7 +75,7 @@ void __fastcall UFG::TaggedDialogueState::TaggedDialogueState(UFG::TaggedDialogu
   AMD_HD3D *v3; // rcx
 
   v1 = this;
-  this->vfptr = (UFG::TaggedDialogueStateVtbl *)&UFG::TaggedDialogueState::`vftable';
+  this->vfptr = (UFG::TaggedDialogueStateVtbl *)&UFG::TaggedDialogueState::`vftable;
   v2 = (AMD_HD3D *)UFG::qWiseSymbol::get_null()->mUID;
   v1->m_arg.mUID = (unsigned int)v2;
   _(v2);
@@ -91,7 +91,7 @@ void __fastcall UFG::TaggedDialogueState::~TaggedDialogueState(UFG::TaggedDialog
   UFG::TaggedDialogueState *v1; // rbx
 
   v1 = this;
-  this->vfptr = (UFG::TaggedDialogueStateVtbl *)&UFG::TaggedDialogueState::`vftable';
+  this->vfptr = (UFG::TaggedDialogueStateVtbl *)&UFG::TaggedDialogueState::`vftable;
   _((AMD_HD3D *)this->m_bank.mUID);
   _((AMD_HD3D *)v1->m_arg.mUID);
 }

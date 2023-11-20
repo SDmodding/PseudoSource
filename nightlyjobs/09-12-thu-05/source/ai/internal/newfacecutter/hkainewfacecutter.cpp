@@ -266,12 +266,12 @@ signed __int64 __fastcall hkaiNewFaceCutter::computeConvexDecomposition(hkaiNewF
         v37 = _mm_and_si128(v35, v25);
         v38 = _mm_srli_epi32(v36, 0x10u);
         v39 = _mm_add_ps(
-                _mm_mul_ps(_mm_cvtepi32_ps(v38), (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                _mm_mul_ps(_mm_cvtepi32_ps(v38), (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                 _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v38, 0x10u), 0x10u)));
         v40 = _mm_add_ps(
                 _mm_mul_ps(
                   _mm_cvtepi32_ps(_mm_srli_epi32(v37, 0x10u)),
-                  (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                  (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                 _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v37, 0x10u), 0x10u)));
         *(__m128 *)(v32 - 96) = _mm_add_ps(
                                   _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v39, v39, 0), v28), v30),

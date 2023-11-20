@@ -3,7 +3,7 @@
 void __fastcall hkaiAabbTreeNavVolumeMediator::hkaiAabbTreeNavVolumeMediator(hkaiAabbTreeNavVolumeMediator *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiAabbTreeNavVolumeMediator::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiAabbTreeNavVolumeMediator::`vftable;
   this->m_navVolume.m_pntr = 0i64;
   this->m_tree.m_pntr = 0i64;
 }
@@ -12,7 +12,7 @@ void __fastcall hkaiAabbTreeNavVolumeMediator::hkaiAabbTreeNavVolumeMediator(hka
 // RVA: 0xBE6880
 void __fastcall hkaiAabbTreeNavVolumeMediator::hkaiAabbTreeNavVolumeMediator(hkaiAabbTreeNavVolumeMediator *this, hkFinishLoadedObjectFlag f)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiAabbTreeNavVolumeMediator::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiAabbTreeNavVolumeMediator::`vftable;
 }
 
 // File Line: 35
@@ -24,7 +24,7 @@ void __fastcall hkaiAabbTreeNavVolumeMediator::~hkaiAabbTreeNavVolumeMediator(hk
   hkReferencedObject *v3; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiAabbTreeNavVolumeMediator::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiAabbTreeNavVolumeMediator::`vftable;
   v2 = this->m_tree.m_pntr;
   if ( v2 )
     hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
@@ -33,7 +33,7 @@ void __fastcall hkaiAabbTreeNavVolumeMediator::~hkaiAabbTreeNavVolumeMediator(hk
   if ( v3 )
     hkReferencedObject::removeReference(v3);
   v1->m_navVolume.m_pntr = 0i64;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 39
@@ -87,7 +87,7 @@ void __fastcall hkaiAabbTreeNavVolumeMediator::build(hkaiAabbTreeNavVolumeMediat
         v11 = _mm_cvtepi32_ps(_mm_srli_epi32(v10, 0x10u));
         v12 = _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v10, 0x10u), 0x10u));
         v13 = v2->m_quantizationScale.m_quad;
-        v14 = _mm_add_ps(_mm_mul_ps(v11, (__m128)`hkIntVector::convertU32ToF32'::`2'::two16), v12);
+        v14 = _mm_add_ps(_mm_mul_ps(v11, (__m128)`hkIntVector::convertU32ToF32::`2::two16), v12);
         v15 = _mm_unpackhi_epi16(v9, (__m128i)0i64);
         aabb.m_min.m_quad = _mm_add_ps(_mm_mul_ps(v2->m_quantizationScale.m_quad, v14), v2->m_quantizationOffset.m_quad);
         aabb.m_max.m_quad = _mm_add_ps(
@@ -96,7 +96,7 @@ void __fastcall hkaiAabbTreeNavVolumeMediator::build(hkaiAabbTreeNavVolumeMediat
                                 _mm_add_ps(
                                   _mm_mul_ps(
                                     _mm_cvtepi32_ps(_mm_srli_epi32(v15, 0x10u)),
-                                    (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                                    (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                                   _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v15, 0x10u), 0x10u)))),
                               v2->m_quantizationOffset.m_quad);
         hkcdDynamicAabbTree::insert(&dynTree, &aabb, v7++);
@@ -196,7 +196,7 @@ hkSimdFloat32 *__fastcall NavVolumeClosestPointCollector::processLeaf(NavVolumeC
                          _mm_add_ps(
                            _mm_mul_ps(
                              _mm_cvtepi32_ps(_mm_srli_epi32(v15, 0x10u)),
-                             (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                             (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                            _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v15, 0x10u), 0x10u))),
                          v12[6]),
                        v12[7])),
@@ -205,7 +205,7 @@ hkSimdFloat32 *__fastcall NavVolumeClosestPointCollector::processLeaf(NavVolumeC
                        _mm_add_ps(
                          _mm_mul_ps(
                            _mm_cvtepi32_ps(_mm_srli_epi32(v16, 0x10u)),
-                           (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                           (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                          _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v16, 0x10u), 0x10u))),
                        v12[6]),
                      v12[7]));
@@ -277,7 +277,7 @@ signed __int64 __fastcall hkaiAabbTreeNavVolumeMediator::getClosestPoint(hkaiAab
   }
   v7 = v6->m_position.m_quad;
   v18 = v6;
-  collector.vfptr = (hkcdAabbTreeQueries::ClosestPointCollectorVtbl *)&NavVolumeClosestPointCollector::`vftable';
+  collector.vfptr = (hkcdAabbTreeQueries::ClosestPointCollectorVtbl *)&NavVolumeClosestPointCollector::`vftable;
   v8 = (__int64)v3->m_navVolume.m_pntr;
   point.m_quad = v7;
   v17 = v8;

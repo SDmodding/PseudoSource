@@ -1,6 +1,6 @@
 // File Line: 64
 // RVA: 0x12E6850
-signed __int64 __fastcall `anonymous namespace'::GeometryCastSegmentQuery::processLeaf(GeometryCastSegmentQuery *this, unsigned int leafKey, hkAabb *leafAabb)
+signed __int64 __fastcall `anonymous namespace::GeometryCastSegmentQuery::processLeaf(GeometryCastSegmentQuery *this, unsigned int leafKey, hkAabb *leafAabb)
 {
   int triangleIndex; // ebx
   GeometryCastSegmentQuery *v4; // rdi
@@ -37,7 +37,7 @@ signed __int64 __fastcall `anonymous namespace'::GeometryCastSegmentQuery::proce
 
 // File Line: 129
 // RVA: 0x12E6650
-signed __int64 __fastcall `anonymous namespace'::DoubledGeometryCastSegmentQuery::processLeaf(DoubledGeometryCastSegmentQuery *this, unsigned int leafKey, hkAabb *leafAabb)
+signed __int64 __fastcall `anonymous namespace::DoubledGeometryCastSegmentQuery::processLeaf(DoubledGeometryCastSegmentQuery *this, unsigned int leafKey, hkAabb *leafAabb)
 {
   unsigned int triangleIndex; // esi
   DoubledGeometryCastSegmentQuery *v4; // rbx
@@ -99,7 +99,7 @@ signed __int64 __fastcall `anonymous namespace'::DoubledGeometryCastSegmentQuery
 
 // File Line: 222
 // RVA: 0x12E6B50
-signed __int64 __fastcall `anonymous namespace'::GeometryExtrusionCastSegmentQuery::processLeaf(GeometryExtrusionCastSegmentQuery *this, unsigned int leafKey, hkAabb *leafAabb)
+signed __int64 __fastcall `anonymous namespace::GeometryExtrusionCastSegmentQuery::processLeaf(GeometryExtrusionCastSegmentQuery *this, unsigned int leafKey, hkAabb *leafAabb)
 {
   hkGeometry *v3; // r10
   GeometryExtrusionCastSegmentQuery *v4; // rbx
@@ -145,7 +145,7 @@ signed __int64 __fastcall `anonymous namespace'::GeometryExtrusionCastSegmentQue
 
 // File Line: 296
 // RVA: 0x12E6D20
-signed __int64 __fastcall `anonymous namespace'::GeometryTurnedSegmentQuery::processLeaf(GeometryTurnedSegmentQuery *this, unsigned int leafKey, hkAabb *leafAabb)
+signed __int64 __fastcall `anonymous namespace::GeometryTurnedSegmentQuery::processLeaf(GeometryTurnedSegmentQuery *this, unsigned int leafKey, hkAabb *leafAabb)
 {
   int triangleIndex; // ebx
   GeometryTurnedSegmentQuery *v4; // rdi
@@ -183,7 +183,7 @@ signed __int64 __fastcall `anonymous namespace'::GeometryTurnedSegmentQuery::pro
 
 // File Line: 367
 // RVA: 0x12E6740
-signed __int64 __fastcall `anonymous namespace'::DoubledGeometryTurnedSegmentQuery::processLeaf(DoubledGeometryTurnedSegmentQuery *this, unsigned int leafKey, hkAabb *leafAabb)
+signed __int64 __fastcall `anonymous namespace::DoubledGeometryTurnedSegmentQuery::processLeaf(DoubledGeometryTurnedSegmentQuery *this, unsigned int leafKey, hkAabb *leafAabb)
 {
   unsigned int triangleIndex; // esi
   DoubledGeometryTurnedSegmentQuery *v4; // rbx
@@ -247,7 +247,7 @@ signed __int64 __fastcall `anonymous namespace'::DoubledGeometryTurnedSegmentQue
 
 // File Line: 467
 // RVA: 0x12E6C30
-signed __int64 __fastcall `anonymous namespace'::GeometryExtrusionTurnedSegmentQuery::processLeaf(GeometryExtrusionTurnedSegmentQuery *this, unsigned int leafKey, hkAabb *leafAabb)
+signed __int64 __fastcall `anonymous namespace::GeometryExtrusionTurnedSegmentQuery::processLeaf(GeometryExtrusionTurnedSegmentQuery *this, unsigned int leafKey, hkAabb *leafAabb)
 {
   hkGeometry *v3; // r10
   GeometryExtrusionTurnedSegmentQuery *v4; // rbx
@@ -294,7 +294,7 @@ signed __int64 __fastcall `anonymous namespace'::GeometryExtrusionTurnedSegmentQ
 
 // File Line: 538
 // RVA: 0x12E68E0
-signed __int64 __fastcall `anonymous namespace'::GeometryExtremalProfileQuery::processLeaf(GeometryExtremalProfileQuery *this, unsigned int leafKey, hkAabb *leafAabb)
+signed __int64 __fastcall `anonymous namespace::GeometryExtremalProfileQuery::processLeaf(GeometryExtremalProfileQuery *this, unsigned int leafKey, hkAabb *leafAabb)
 {
   hkGeometry *v3; // r10
   unsigned int v4; // edi
@@ -524,7 +524,7 @@ hkaiGeometrySegmentCaster::AccelerationData *__fastcall hkaiGeometrySegmentCaste
   if ( v6 )
   {
     *(_DWORD *)(v6 + 8) = 0x1FFFF;
-    *(_QWORD *)v6 = &hkaiGeometrySegmentCaster::AccelerationData::`vftable';
+    *(_QWORD *)v6 = &hkaiGeometrySegmentCaster::AccelerationData::`vftable;
     *(_QWORD *)(v6 + 16) = 0i64;
     *(_QWORD *)(v6 + 24) = 0i64;
     *(_DWORD *)(v6 + 32) = 0;
@@ -1016,7 +1016,7 @@ LABEL_113:
 void __fastcall hkaiGeometrySegmentCaster::hkaiGeometrySegmentCaster(hkaiGeometrySegmentCaster *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiGeometrySegmentCaster::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiGeometrySegmentCaster::`vftable;
   this->m_geometries.m_capacityAndFlags = 2147483648;
   this->m_geometries.m_data = 0i64;
   this->m_geometries.m_size = 0;
@@ -1035,7 +1035,7 @@ void __fastcall hkaiGeometrySegmentCaster::~hkaiGeometrySegmentCaster(hkaiGeomet
   int v7; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiGeometrySegmentCaster::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiGeometrySegmentCaster::`vftable;
   v2 = this->m_geometries.m_size;
   v3 = this->m_geometries.m_data;
   v4 = v2 - 1;
@@ -1062,7 +1062,7 @@ void __fastcall hkaiGeometrySegmentCaster::~hkaiGeometrySegmentCaster(hkaiGeomet
       16 * v7);
   v1->m_geometries.m_data = 0i64;
   v1->m_geometries.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 710
@@ -1142,7 +1142,7 @@ void __fastcall hkaiGeometrySegmentCaster::castSegment(hkaiGeometrySegmentCaster
       _mm_store_si128((__m128i *)&v19, *v9);
       v17 = (__m128i)v7->m_quad;
       v22 = v16;
-      collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&`anonymous namespace'::GeometryCastSegmentQuery::`vftable';
+      collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&`anonymous namespace::GeometryCastSegmentQuery::`vftable;
       v23 = v6;
       _mm_store_si128((__m128i *)&v20, v15);
       _mm_store_si128((__m128i *)&v21, v17);
@@ -1245,7 +1245,7 @@ void __fastcall hkaiGeometrySegmentCaster::castSegmentExtruded(hkaiGeometrySegme
       _mm_store_si128((__m128i *)&v26, *v9);
       v19 = displacement->m_quad;
       v31 = v18;
-      collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&`anonymous namespace'::DoubledGeometryCastSegmentQuery::`vftable';
+      collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&`anonymous namespace::DoubledGeometryCastSegmentQuery::`vftable;
       v32 = v7;
       _mm_store_si128((__m128i *)&v27, v17);
       _mm_store_si128((__m128i *)&v30, (__m128i)v19);
@@ -1265,7 +1265,7 @@ void __fastcall hkaiGeometrySegmentCaster::castSegmentExtruded(hkaiGeometrySegme
       v24 = v21[v16].m_accelerationData.m_pntr;
       _mm_store_si128((__m128i *)&v36, *v9);
       _mm_store_si128((__m128i *)&v37, v22);
-      v35.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&`anonymous namespace'::GeometryExtrusionCastSegmentQuery::`vftable';
+      v35.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&`anonymous namespace::GeometryExtrusionCastSegmentQuery::`vftable;
       v40 = v23;
       v42 = v7;
       _mm_store_si128((__m128i *)&v38, *v46);
@@ -1295,7 +1295,7 @@ void __fastcall hkaiGeometrySegmentCaster::castSegmentExtruded(hkaiGeometrySegme
           20 * (v43.m_intervals.m_capacityAndFlags & 0x3FFFFFFF));
       v43.m_intervals.m_data = 0i64;
       v43.m_intervals.m_capacityAndFlags = 2147483648;
-      v35.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&hkcdAabbTreeQueries::AabbCollector::`vftable';
+      v35.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&hkcdAabbTreeQueries::AabbCollector::`vftable;
       other.m_intervals.m_size = 0;
       if ( other.m_intervals.m_capacityAndFlags >= 0 )
         hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
@@ -1385,7 +1385,7 @@ void __usercall hkaiGeometrySegmentCaster::castSegmentExtrudedEdges(hkaiGeometry
       v25 = (__m128i)v9->m_quad;
       _mm_store_si128((__m128i *)&v29, v22);
       v26 = *(__m128i *)v17;
-      collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&`anonymous namespace'::GeometryExtrusionCastSegmentQuery::`vftable';
+      collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&`anonymous namespace::GeometryExtrusionCastSegmentQuery::`vftable;
       v33 = v10;
       v32 = &v24->m_edges;
       _mm_store_si128((__m128i *)((char *)&v29 + 8), v25);
@@ -1476,7 +1476,7 @@ void __usercall hkaiGeometrySegmentCaster::turnSegment(hkaiGeometrySegmentCaster
       _mm_store_si128((__m128i *)&v23, (__m128i)leftStart->m_quad);
       v20 = (__m128i)v10->m_quad;
       v27 = v19;
-      collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&`anonymous namespace'::GeometryTurnedSegmentQuery::`vftable';
+      collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&`anonymous namespace::GeometryTurnedSegmentQuery::`vftable;
       v28 = v9;
       _mm_store_si128((__m128i *)&v24, v18);
       v21 = *(__m128i *)v14;
@@ -1596,7 +1596,7 @@ void __usercall hkaiGeometrySegmentCaster::turnSegmentExtruded(hkaiGeometrySegme
       _mm_store_si128((__m128i *)&v42, *v11);
       v21 = (__m128i)v14->m_quad;
       v50 = v20;
-      collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&`anonymous namespace'::DoubledGeometryTurnedSegmentQuery::`vftable';
+      collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&`anonymous namespace::DoubledGeometryTurnedSegmentQuery::`vftable;
       _mm_store_si128((__m128i *)&v43, v19);
       v22 = *(__m128i *)v12;
       _mm_store_si128((__m128i *)&v44, v21);
@@ -1624,7 +1624,7 @@ void __usercall hkaiGeometrySegmentCaster::turnSegmentExtruded(hkaiGeometrySegme
       _mm_store_si128((__m128i *)&v33, *v11);
       v31 = (__m128i)v14->m_quad;
       _mm_store_si128((__m128i *)&v34, v28);
-      v32.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&`anonymous namespace'::GeometryExtrusionTurnedSegmentQuery::`vftable';
+      v32.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&`anonymous namespace::GeometryExtrusionTurnedSegmentQuery::`vftable;
       v36 = v29;
       _mm_store_si128((__m128i *)&v35, v31);
       DWORD2(v37) = v13;
@@ -1655,7 +1655,7 @@ void __usercall hkaiGeometrySegmentCaster::turnSegmentExtruded(hkaiGeometrySegme
           20 * (v38.m_intervals.m_capacityAndFlags & 0x3FFFFFFF));
       v38.m_intervals.m_data = 0i64;
       v38.m_intervals.m_capacityAndFlags = 2147483648;
-      v32.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&hkcdAabbTreeQueries::AabbCollector::`vftable';
+      v32.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&hkcdAabbTreeQueries::AabbCollector::`vftable;
       other.m_intervals.m_size = 0;
       if ( other.m_intervals.m_capacityAndFlags >= 0 )
         hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
@@ -1826,7 +1826,7 @@ void __usercall hkaiGeometrySegmentCaster::findExtremalProfile(hkaiGeometrySegme
       _mm_store_si128((__m128i *)&v75, v38);
       v74 = &v81;
       v76 = v39;
-      collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&`anonymous namespace'::GeometryExtremalProfileQuery::`vftable';
+      collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&`anonymous namespace::GeometryExtremalProfileQuery::`vftable;
       v78 = v35;
       v77 = &v40->m_edges;
       hkaiIntervalPartition::hkaiIntervalPartition(&v79);

@@ -25,12 +25,12 @@ void __fastcall Scaleform::GFx::AS2::AvmTextField::AvmTextField(Scaleform::GFx::
     (Scaleform::GFx::AS2::AvmCharacter *)&this->vfptr,
     (Scaleform::GFx::InteractiveObject *)&ptf->vfptr);
   v17 = (Scaleform::GFx::AvmTextFieldBase *)&v3->vfptr;
-  v17->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmDisplayObjBase::`vftable';
-  v17->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmInteractiveObjBase::`vftable';
-  v17->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmTextFieldBase::`vftable';
-  v3->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS2::AvmTextField::`vftable'{for `Scaleform::GFx::AvmInteractiveObjBase'};
-  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::AvmTextField::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
-  v17->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS2::AvmTextField::`vftable';
+  v17->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmDisplayObjBase::`vftable;
+  v17->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmInteractiveObjBase::`vftable;
+  v17->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmTextFieldBase::`vftable;
+  v3->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS2::AvmTextField::`vftable{for `Scaleform::GFx::AvmInteractiveObjBase};
+  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::AvmTextField::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+  v17->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS2::AvmTextField::`vftable;
   v4 = (Scaleform::String *)v2->pDef.pObject;
   v5 = Scaleform::GFx::InteractiveObject::GetStringManager((Scaleform::GFx::InteractiveObject *)&v2->vfptr);
   Scaleform::GFx::ASStringManager::CreateString(v5, &v3->VariableName, v4 + 15);
@@ -2348,14 +2348,14 @@ void __fastcall Scaleform::GFx::AS2::AvmTextField::NotifyChanged(Scaleform::GFx:
   v15 = ((_QWORD)((char *)v4->Stack.pCurrent - (char *)v4->Stack.pPageStart) >> 5) + 32 * v4->Stack.Pages.Data.Size - 32;
   if ( v11 )
   {
-    *(_QWORD *)&v.T.Type = `Scaleform::GFx::AS2::AsBroadcaster::BroadcastMessage'::`4'::LocalInvokeCallback::`vftable';
+    *(_QWORD *)&v.T.Type = `Scaleform::GFx::AS2::AsBroadcaster::BroadcastMessage::`4::LocalInvokeCallback::`vftable;
     v.V.pStringNode = (Scaleform::GFx::ASStringNode *)__PAIR__(v15, (unsigned int)v5);
     Scaleform::GFx::AS2::AsBroadcaster::BroadcastMessageWithCallback(
       v4,
       v11,
       v14,
       (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallback *)&v);
-    *(_QWORD *)&v.T.Type = &Scaleform::GFx::AS2::AsBroadcaster::InvokeCallback::`vftable';
+    *(_QWORD *)&v.T.Type = &Scaleform::GFx::AS2::AsBroadcaster::InvokeCallback::`vftable;
   }
   v16 = result.pNode;
   v17 = result.pNode->RefCount == 1;
@@ -2406,11 +2406,11 @@ void __fastcall Scaleform::GFx::AS2::AvmTextField::BroadcastMessage(Scaleform::G
   v8 = v1->ThisPtr;
   if ( v8 )
   {
-    pcallback.vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)`Scaleform::GFx::AS2::AsBroadcaster::BroadcastMessage'::`4'::LocalInvokeCallback::`vftable';
+    pcallback.vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)`Scaleform::GFx::AS2::AsBroadcaster::BroadcastMessage::`4::LocalInvokeCallback::`vftable;
     v12 = v7;
     v13 = v6;
     Scaleform::GFx::AS2::AsBroadcaster::BroadcastMessageWithCallback(v5, v8, &result, &pcallback);
-    pcallback.vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)&Scaleform::GFx::AS2::AsBroadcaster::InvokeCallback::`vftable';
+    pcallback.vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)&Scaleform::GFx::AS2::AsBroadcaster::InvokeCallback::`vftable;
   }
   v9 = result.pNode;
   v10 = result.pNode->RefCount == 1;
@@ -2964,7 +2964,7 @@ LABEL_72:
           v70 = Scaleform::GFx::AS3::AvmDisplayObj::GetName((Scaleform::GFx::AS2::AvmCharacter *)&v6->vfptr, &result);
           Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>::LogScriptWarning(
             (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase> *)&v75->vfptr,
-            "%s.setImageSubstitutions() failed for #%d element - 'image' is not specified or not a BitmapData",
+            "%s.setImageSubstitutions() failed for #%d element - image is not specified or not a BitmapData",
             v70->pNode->pData,
             v4,
             v74.pNode);
@@ -3120,7 +3120,7 @@ void __fastcall Scaleform::GFx::AS2::AvmTextField::SetImageSubstitutions(Scalefo
           v16 = Scaleform::GFx::DisplayObject::GetName((Scaleform::GFx::DisplayObject *)&v6->vfptr, &result);
           Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>::LogScriptWarning(
             (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase> *)&v6->vfptr,
-            "%s.setImageSubstitutions() failed: parameter should be either 'null', object or array",
+            "%s.setImageSubstitutions() failed: parameter should be either null, object or array",
             v16->pNode->pData);
           v17 = result.pNode;
           v18 = result.pNode->RefCount == 1;
@@ -5061,8 +5061,8 @@ void __fastcall Scaleform::GFx::AS2::TextFieldObject::TextFieldObject(Scaleform:
   v4 = psc;
   v5 = this;
   Scaleform::GFx::AS2::Object::Object((Scaleform::GFx::AS2::Object *)&this->vfptr, psc);
-  v5->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::TextFieldObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  v5->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::TextFieldObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+  v5->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::TextFieldObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  v5->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::TextFieldObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   v5->pTextField.pProxy.pObject = 0i64;
   v5->pIMECompositionStringStyles = 0i64;
   Scaleform::GFx::AS2::Object::Set__proto__((Scaleform::GFx::AS2::Object *)&v5->vfptr, v4, v3);
@@ -5079,8 +5079,8 @@ void __fastcall Scaleform::GFx::AS2::TextFieldObject::TextFieldObject(Scaleform:
   v2 = penv;
   v3 = this;
   Scaleform::GFx::AS2::Object::Object((Scaleform::GFx::AS2::Object *)&this->vfptr, penv);
-  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::TextFieldObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::TextFieldObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::TextFieldObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::TextFieldObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   v3->pTextField.pProxy.pObject = 0i64;
   v3->pIMECompositionStringStyles = 0i64;
   v4 = Scaleform::GFx::AS2::GlobalContext::GetPrototype(v2->StringContext.pContext, ASBuiltin_TextField);
@@ -5112,8 +5112,8 @@ void __fastcall Scaleform::GFx::AS2::TextFieldObject::TextFieldObject(Scaleform:
   else
     v6 = 0i64;
   Scaleform::GFx::AS2::Object::Object((Scaleform::GFx::AS2::Object *)&this->vfptr, v6);
-  v4->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::TextFieldObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  v4->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::TextFieldObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+  v4->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::TextFieldObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  v4->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::TextFieldObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   v14 = &v4->pTextField;
   if ( v3 )
     v7 = Scaleform::RefCountWeakSupportImpl::CreateWeakProxy((Scaleform::RefCountWeakSupportImpl *)&v3->vfptr);
@@ -5161,8 +5161,8 @@ void __fastcall Scaleform::GFx::AS2::TextFieldObject::~TextFieldObject(Scaleform
   bool v3; // zf
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::TextFieldObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  this->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::TextFieldObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+  this->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::TextFieldObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  this->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::TextFieldObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, this->pIMECompositionStringStyles);
   v2 = v1->pTextField.pProxy.pObject;
   if ( v2 )
@@ -5362,10 +5362,10 @@ void __fastcall Scaleform::GFx::AS2::TextFieldProto::TextFieldProto(Scaleform::G
     psc,
     prototype,
     constructor);
-  v5->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::TextFieldProto::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
+  v5->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::TextFieldProto::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
   v6 = (signed __int64)&v5->vfptr;
-  v5->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::TextFieldProto::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
-  v5->vfptr = (Scaleform::GFx::AS2::GASPrototypeBaseVtbl *)&Scaleform::GFx::AS2::TextFieldProto::`vftable';
+  v5->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::TextFieldProto::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+  v5->vfptr = (Scaleform::GFx::AS2::GASPrototypeBaseVtbl *)&Scaleform::GFx::AS2::TextFieldProto::`vftable;
   if ( v5 != (Scaleform::GFx::AS2::TextFieldProto *)-32i64 )
     Scaleform::GFx::AS2::NameFunction::AddConstMembers(
       (Scaleform::GFx::AS2::ObjectInterface *)&v5->vfptr,
@@ -5907,15 +5907,15 @@ void __fastcall Scaleform::GFx::AS2::TextFieldCtorFunction::TextFieldCtorFunctio
   v2 = psc;
   v3 = this;
   Scaleform::GFx::AS2::Object::Object((Scaleform::GFx::AS2::Object *)&this->vfptr, psc);
-  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
-  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   v3->pFunction = (void (__fastcall *)(Scaleform::GFx::AS2::FnCall *))_;
   v4 = Scaleform::GFx::AS2::GlobalContext::GetPrototype(v2->pContext, ASBuiltin_Function);
   Scaleform::GFx::AS2::Object::Set__proto__((Scaleform::GFx::AS2::Object *)&v3->vfptr, v2, v4);
-  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::TextFieldCtorFunction::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::TextFieldCtorFunction::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::TextFieldCtorFunction::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::TextFieldCtorFunction::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   Scaleform::GFx::AS2::NameFunction::AddConstMembers(
     (Scaleform::GFx::AS2::ObjectInterface *)&v3->vfptr,
     v2,
@@ -6097,7 +6097,7 @@ void __fastcall Scaleform::GFx::AS2::TextFieldCtorFunction::GetFontList(Scalefor
   v4 = ((__int64 (__fastcall *)(Scaleform::GFx::MovieImpl *))v3->vfptr->~StateBag)(v2->pASRoot->pMovieImpl);
   v45 = &fontnames;
   fontnames.mHash.pTable = 0i64;
-  v37 = (void **)`Scaleform::GFx::AS2::TextFieldCtorFunction::GetFontList'::`2'::FontsVisitor::`vftable';
+  v37 = (void **)`Scaleform::GFx::AS2::TextFieldCtorFunction::GetFontList::`2::FontsVisitor::`vftable;
   v38 = &fontnames;
   (*(void (__fastcall **)(__int64, void ***, signed __int64))(*(_QWORD *)v4 + 208i64))(v4, &v37, 1i64);
   v5 = v3 + 2;
@@ -6234,7 +6234,7 @@ LABEL_33:
       Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal((Scaleform::GFx::AS2::RefCountBaseGC<323> *)v11);
     }
   }
-  v37 = &Scaleform::GFx::MovieDef::ResourceVisitor::`vftable';
+  v37 = &Scaleform::GFx::MovieDef::ResourceVisitor::`vftable;
   v31 = fontnames.mHash.pTable;
   if ( fontnames.mHash.pTable )
   {

@@ -9,7 +9,7 @@ void __fastcall UFG::UIHK_XPFlasherWidget::UIHK_XPFlasherWidget(UFG::UIHK_XPFlas
   v1 = this;
   *(_QWORD *)&this->mState = 0i64;
   v2 = 3i64;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     this->mData,
     0x40ui64,
     3,
@@ -131,7 +131,7 @@ void __fastcall UFG::UIHK_XPFlasherWidget::Flash_ShowCopXP(UFG::UIHK_XPFlasherWi
   v5 = points;
   v6 = screen->mRenderable->m_movie.pObject;
   v7 = UFG::GameStatAction::MissionScoring::GetCopScorePercentage();
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( (v10 >> 6) & 1 )
   {
     (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v9 + 16i64))(v9, &ptr, COERCE_DOUBLE(*(_QWORD *)&v11));
@@ -157,7 +157,7 @@ void __fastcall UFG::UIHK_XPFlasherWidget::Flash_ShowCopXP(UFG::UIHK_XPFlasherWi
   v18 = 5;
   v19 = v7;
   Scaleform::GFx::Movie::Invoke(v6, "XPFlasher_ShowCopXP", 0i64, (Scaleform::GFx::Value *)&ptr, 3u);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 154
@@ -187,7 +187,7 @@ void __fastcall UFG::UIHK_XPFlasherWidget::Flash_ShowTriadXP(UFG::UIHK_XPFlasher
   v5 = points;
   v6 = screen->mRenderable->m_movie.pObject;
   v7 = UFG::GameStatAction::MissionScoring::GetTriadScorePercentage();
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( (v10 >> 6) & 1 )
   {
     (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v9 + 16i64))(v9, &ptr, COERCE_DOUBLE(*(_QWORD *)&v11));
@@ -213,7 +213,7 @@ void __fastcall UFG::UIHK_XPFlasherWidget::Flash_ShowTriadXP(UFG::UIHK_XPFlasher
   v18 = 5;
   v19 = v7;
   Scaleform::GFx::Movie::Invoke(v6, "XPFlasher_ShowTriadXP", 0i64, (Scaleform::GFx::Value *)&ptr, 3u);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 170

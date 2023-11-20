@@ -9,7 +9,7 @@ __int64 UFG::_dynamic_initializer_for__gRigInventory__()
     0x1418DD74u,
     0,
     0);
-  UFG::gRigInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::RigInventory::`vftable';
+  UFG::gRigInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::RigInventory::`vftable;
   return atexit(UFG::_dynamic_atexit_destructor_for__gRigInventory__);
 }
 

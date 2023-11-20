@@ -5,7 +5,7 @@ void __fastcall OSuite::ZHttpConnection::ZHttpConnection(OSuite::ZHttpConnection
   OSuite::ZHttpConnection *v1; // rbx
 
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpConnection::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpConnection::`vftable;
   OSuite::ZUrl::ZUrl(&this->m_url);
   v1->m_socket = 0i64;
   *(_WORD *)&v1->m_bAborted = 0;

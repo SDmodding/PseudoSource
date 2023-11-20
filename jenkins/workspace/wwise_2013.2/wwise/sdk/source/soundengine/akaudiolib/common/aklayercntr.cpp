@@ -9,7 +9,7 @@ void __fastcall CAkLayerCntr::~CAkLayerCntr(CAkLayerCntr *this)
 
   v1 = this->m_layers.m_pItems;
   v2 = this;
-  this->vfptr = (CAkIndexableVtbl *)&CAkLayerCntr::`vftable';
+  this->vfptr = (CAkIndexableVtbl *)&CAkLayerCntr::`vftable;
   for ( i = (signed __int64)&v1[this->m_layers.m_uLength]; v1 != (CAkLayer **)i; ++v1 )
   {
     CAkLayer::SetOwner(*v1, 0i64);
@@ -167,7 +167,7 @@ CAkMultiPlayNode *__fastcall CAkLayerCntr::Create(unsigned int in_ulID)
   if ( !v2 )
     return 0i64;
   CAkMultiPlayNode::CAkMultiPlayNode(v2, v1);
-  v3->vfptr = (CAkIndexableVtbl *)&CAkLayerCntr::`vftable';
+  v3->vfptr = (CAkIndexableVtbl *)&CAkLayerCntr::`vftable;
   v3[1].vfptr = 0i64;
   v3[1].pNextItem = 0i64;
   if ( CAkMultiPlayNode::Init(v3) == 1 )

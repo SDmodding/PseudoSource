@@ -15,10 +15,10 @@ void __fastcall hkaiViewerBase::hkaiViewerBase(hkaiViewerBase *this, hkArray<hkP
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_selectable.m_bool = 1;
   v2 = 0i64;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiViewerBase::`vftable'{for `hkReferencedObject'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiViewerBase::`vftable{for `hkReferencedObject};
   v3 = 0;
-  this->vfptr = (hkProcessVtbl *)&hkaiViewerBase::`vftable'{for `hkProcess'};
-  this->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiViewerBase::`vftable'{for `hkaiViewerContextWorldListener'};
+  this->vfptr = (hkProcessVtbl *)&hkaiViewerBase::`vftable{for `hkProcess};
+  this->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiViewerBase::`vftable{for `hkaiViewerContextWorldListener};
   this->m_context.m_pntr = 0i64;
   v4 = contexts;
   v5 = this;
@@ -61,9 +61,9 @@ void __fastcall hkaiViewerBase::~hkaiViewerBase(hkaiViewerBase *this)
   hkReferencedObject *v4; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiViewerBase::`vftable'{for `hkReferencedObject'};
-  this->vfptr = (hkProcessVtbl *)&hkaiViewerBase::`vftable'{for `hkProcess'};
-  this->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiViewerBase::`vftable'{for `hkaiViewerContextWorldListener'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiViewerBase::`vftable{for `hkReferencedObject};
+  this->vfptr = (hkProcessVtbl *)&hkaiViewerBase::`vftable{for `hkProcess};
+  this->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiViewerBase::`vftable{for `hkaiViewerContextWorldListener};
   v2 = this->m_context.m_pntr;
   if ( v2 )
   {
@@ -77,8 +77,8 @@ void __fastcall hkaiViewerBase::~hkaiViewerBase(hkaiViewerBase *this)
   if ( v4 )
     hkReferencedObject::removeReference(v4);
   v1->m_context.m_pntr = 0i64;
-  v1->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiViewerContextWorldListener::`vftable';
-  v1->vfptr = (hkProcessVtbl *)&hkProcess::`vftable';
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiViewerContextWorldListener::`vftable;
+  v1->vfptr = (hkProcessVtbl *)&hkProcess::`vftable;
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 

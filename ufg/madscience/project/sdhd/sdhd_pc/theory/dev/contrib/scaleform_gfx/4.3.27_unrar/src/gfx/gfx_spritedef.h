@@ -85,7 +85,7 @@ void __fastcall Scaleform::GFx::SpriteDef::SetLoadingPlaylistFrame(Scaleform::GF
       v9 = Scaleform::Log::GetGlobalLog();
     Scaleform::Log::LogError(
       v9,
-      "Invalid SWF file: failed to load sprite's frame #%d since total frames counter is %d",
+      "Invalid SWF file: failed to load sprites frame #%d since total frames counter is %d",
       (unsigned int)(v8->LoadingFrame + 1),
       (unsigned int)v10,
       a5,

@@ -1035,8 +1035,8 @@ void __fastcall Render::Softbody::CollisionShapeCollection::AddSphere(Render::So
     v7 = v6 + 8;
     *v7 = v7;
     v7[1] = v7;
-    *(_QWORD *)v6 = &Render::SoftbodyCollisionShape::`vftable';
-    *(_QWORD *)v6 = &Render::SoftbodyCollisionSphere::`vftable';
+    *(_QWORD *)v6 = &Render::SoftbodyCollisionShape::`vftable;
+    *(_QWORD *)v6 = &Render::SoftbodyCollisionSphere::`vftable;
     v8 = v4->y;
     v9 = v4->z;
     *((_DWORD *)v6 + 6) = LODWORD(v4->x);

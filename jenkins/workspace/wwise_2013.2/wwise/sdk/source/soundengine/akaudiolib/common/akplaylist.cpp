@@ -2,7 +2,7 @@
 // RVA: 0xA9B640
 void __fastcall CAkPlayListRandom::CAkPlayListRandom(CAkPlayListRandom *this)
 {
-  this->vfptr = (CAkPlayListVtbl *)&CAkPlayListRandom::`vftable';
+  this->vfptr = (CAkPlayListVtbl *)&CAkPlayListRandom::`vftable;
   this->m_PlayList.m_pItems = 0i64;
   *(_QWORD *)&this->m_PlayList.m_uLength = 0i64;
 }
@@ -191,7 +191,7 @@ char __fastcall CAkPlayListRandom::GetPosition(CAkPlayListRandom *this, unsigned
 // RVA: 0xA9B660
 void __fastcall CAkPlayListSequence::CAkPlayListSequence(CAkPlayListSequence *this)
 {
-  this->vfptr = (CAkPlayListVtbl *)&CAkPlayListSequence::`vftable';
+  this->vfptr = (CAkPlayListVtbl *)&CAkPlayListSequence::`vftable;
   this->m_PlayList.m_pItems = 0i64;
   *(_QWORD *)&this->m_PlayList.m_uLength = 0i64;
 }

@@ -3,7 +3,7 @@
 void __fastcall hkPaddedAllocator::hkPaddedAllocator(hkPaddedAllocator *this)
 {
   this->m_next = 0i64;
-  this->vfptr = (hkMemoryAllocatorVtbl *)&hkPaddedAllocator::`vftable';
+  this->vfptr = (hkMemoryAllocatorVtbl *)&hkPaddedAllocator::`vftable;
   this->m_cinfo.m_numQuadsPad = 1;
   this->m_cinfo.m_padPattern = 2147331501;
   this->m_cinfo.m_bodyPattern = 2147094796;

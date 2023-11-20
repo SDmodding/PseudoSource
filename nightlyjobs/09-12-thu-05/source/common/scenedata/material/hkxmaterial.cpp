@@ -16,7 +16,7 @@ void __fastcall hkxMaterial::~hkxMaterial(hkxMaterial *this)
   int v12; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkxMaterial::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkxMaterial::`vftable;
   v2 = this->m_properties.m_capacityAndFlags;
   this->m_properties.m_size = 0;
   if ( v2 >= 0 )

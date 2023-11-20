@@ -6,7 +6,7 @@ void __fastcall SSInvokeClosureBase::~SSInvokeClosureBase(SSInvokeClosureBase *t
   SSExpressionBase *v2; // rcx
 
   v1 = this;
-  this->vfptr = (SSExpressionBaseVtbl *)&SSInvokeClosureBase::`vftable';
+  this->vfptr = (SSExpressionBaseVtbl *)&SSInvokeClosureBase::`vftable;
   v2 = this->i_receiver_p;
   if ( v2 )
     v2->vfptr->__vecDelDtor(v2, 1u);
@@ -14,7 +14,7 @@ void __fastcall SSInvokeClosureBase::~SSInvokeClosureBase(SSInvokeClosureBase *t
   APCompactArrayBase<SSParameterBase>::free_all((APCompactArrayBase<SSParameterBase> *)&v1->i_return_args);
   AMemory::c_free_func(v1->i_return_args.i_array_p);
   AMemory::c_free_func(v1->i_arguments.i_array_p);
-  v1->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
+  v1->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
 }
 
 // File Line: 68
@@ -43,8 +43,8 @@ void __fastcall SSInvokeClosureBase::SSInvokeClosureBase(SSInvokeClosureBase *th
 
   v2 = binary_pp;
   v3 = this;
-  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-  this->vfptr = (SSExpressionBaseVtbl *)&SSInvokeClosureBase::`vftable';
+  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+  this->vfptr = (SSExpressionBaseVtbl *)&SSInvokeClosureBase::`vftable;
   this->i_arguments.i_count = 0;
   this->i_arguments.i_array_p = 0i64;
   this->i_return_args.i_count = 0;

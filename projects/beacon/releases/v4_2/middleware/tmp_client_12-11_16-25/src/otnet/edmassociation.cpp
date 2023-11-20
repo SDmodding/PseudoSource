@@ -9,7 +9,7 @@ void __fastcall OSuite::ZOEdmEndRole::ZOEdmEndRole(OSuite::ZOEdmEndRole *this, O
   v5 = entityTypeName;
   v6 = this;
   OSuite::ZOEdmBase::ZOEdmBase((OSuite::ZOEdmBase *)&this->vfptr, schemaName, name);
-  v6->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOEdmEndRole::`vftable';
+  v6->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOEdmEndRole::`vftable;
   v6->m_Multiplicity = eMultiplicity;
   v7 = (OSuite::ZString *)OSuite::ZObject::operator new(0x18ui64);
   if ( v7 )
@@ -31,11 +31,11 @@ void __fastcall OSuite::ZOEdmAssociation::ZOEdmAssociation(OSuite::ZOEdmAssociat
 
   v3 = this;
   OSuite::ZOEdmBase::ZOEdmBase((OSuite::ZOEdmBase *)&this->vfptr, schemaName, name);
-  v3->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOEdmAssociation::`vftable';
+  v3->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOEdmAssociation::`vftable;
   OSuite::ZRedBlackTreeBase::ZElementBase::ZElementBase((OSuite::ZObject *)&v3->m_EndRoles.vfptr, v4);
   v3->m_EndRoles.m_pList = 0i64;
-  v3->m_EndRoles.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable'{for `OSuite::ZListBase'};
-  v3->m_EndRoles.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable'{for `OSuite::IHashable'};
+  v3->m_EndRoles.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
+  v3->m_EndRoles.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
   v5 = (OSuite::ZOEdmEndRole **)OSuite::ZObject::malloc((OSuite::ZObject *)&v3->m_EndRoles.vfptr, 0x80ui64, 0i64);
   v3->m_EndRoles.m_nTop = 0i64;
   v3->m_EndRoles.m_nSize = 16i64;
@@ -57,10 +57,10 @@ void __fastcall OSuite::ZOEdmAssociation::~ZOEdmAssociation(OSuite::ZOEdmAssocia
 
   v8.m_pListBase = 0i64;
   v1 = (OSuite::ZObject *)&this->m_EndRoles.vfptr;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOEdmAssociation::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOEdmAssociation::`vftable;
   v2 = this;
   OSuite::ZListBase::ZListIteratorBase::ZListIteratorBase(&v8, (OSuite::ZListBase *)&this->m_EndRoles.vfptr);
-  v8.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+  v8.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
   while ( !OSuite::ZListBase::ZListIteratorBase::AtEnd(&v8) )
   {
     OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)v8.m_pListBase);
@@ -78,8 +78,8 @@ void __fastcall OSuite::ZOEdmAssociation::~ZOEdmAssociation(OSuite::ZOEdmAssocia
     OSuite::ZListBase::ZListIteratorBase::Next(&v8);
   }
   v7 = v1[4].vfptr;
-  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable'{for `OSuite::ZListBase'};
-  v1[3].vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable'{for `OSuite::IHashable'};
+  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
+  v1[3].vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
   OSuite::ZObject::free(v1, v7);
   OSuite::ZOEdmBase::~ZOEdmBase((OSuite::ZOEdmBase *)&v2->vfptr);
 }
@@ -114,10 +114,10 @@ void __fastcall OSuite::ZOEdmAssociation::ParseJsonValue(OSuite::ZOEdmAssociatio
   {
     v21.m_pListBase = 0i64;
     OSuite::ZListBase::ZListIteratorBase::ZListIteratorBase(&that, (OSuite::ZListBase *)&v4->m_array.vfptr);
-    that.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
-    v20 = &OSuite::TConstIterator<OSuite::TList<OSuite::ZOEdmEndRole *>::ZIterator,OSuite::ZOEdmEndRole *,int>::`vftable';
+    that.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
+    v20 = &OSuite::TConstIterator<OSuite::TList<OSuite::ZOEdmEndRole *>::ZIterator,OSuite::ZOEdmEndRole *,int>::`vftable;
     OSuite::ZListBase::ZListIteratorBase::ZListIteratorBase(&v21, &that);
-    v21.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+    v21.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
     while ( !OSuite::ZListBase::ZListIteratorBase::AtEnd(&v21) )
     {
       OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)v21.m_pListBase);
@@ -192,7 +192,7 @@ OSuite::ZOEdmEndRole *__fastcall OSuite::ZOEdmAssociation::EndRole(OSuite::ZOEdm
   v8.m_pListBase = 0i64;
   v2 = roleName;
   OSuite::ZListBase::ZListIteratorBase::ZListIteratorBase(&v8, (OSuite::ZListBase *)&this->m_EndRoles.vfptr);
-  v8.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+  v8.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
   while ( 1 )
   {
     if ( OSuite::ZListBase::ZListIteratorBase::AtEnd(&v8) )

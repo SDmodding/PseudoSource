@@ -23,8 +23,8 @@ Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_display::GraphicsPath> *_
   if ( v4 )
   {
     Scaleform::GFx::AS3::Instance::Instance(v4, (Scaleform::GFx::AS3::InstanceTraits::Traits *)&v2->vfptr);
-    v5->pNode = (Scaleform::GFx::ASStringNode *)&Scaleform::GFx::AS3::Instances::fl::Object::`vftable';
-    v5->pNode = (Scaleform::GFx::ASStringNode *)&Scaleform::GFx::AS3::Instances::fl_display::GraphicsPath::`vftable';
+    v5->pNode = (Scaleform::GFx::ASStringNode *)&Scaleform::GFx::AS3::Instances::fl::Object::`vftable;
+    v5->pNode = (Scaleform::GFx::ASStringNode *)&Scaleform::GFx::AS3::Instances::fl_display::GraphicsPath::`vftable;
     v5[7].pNode = 0i64;
     v5[8].pNode = 0i64;
     Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateString(

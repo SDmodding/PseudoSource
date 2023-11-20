@@ -119,7 +119,7 @@ CarFormationIsCustom *__fastcall CarFormationIsCustom::Create()
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &CarFormationIsCustom::`vftable';
+  *(_QWORD *)v1 = &CarFormationIsCustom::`vftable;
   return (CarFormationIsCustom *)v1;
 }
 
@@ -142,7 +142,7 @@ CarOccupantHasTarget *__fastcall CarOccupantHasTarget::Create()
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &CarOccupantHasTarget::`vftable';
+  *(_QWORD *)v1 = &CarOccupantHasTarget::`vftable;
   v1[24] = 4;
   return (CarOccupantHasTarget *)v1;
 }
@@ -155,7 +155,7 @@ void __fastcall CarOccupantTargetInFrustum::CarOccupantTargetInFrustum(CarOccupa
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CarOccupantTargetInFrustum::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CarOccupantTargetInFrustum::`vftable;
   v1->m_eTargetType.mValue = 4;
   v1->m_fNearDistance = 0.0;
   v1->m_fFarDistance = 10.0;

@@ -7,9 +7,9 @@ void __fastcall AudioTask::AudioTask(AudioTask *this)
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<AudioTrack>::`vftable';
-  this->vfptr = (ITaskVtbl *)&AudioTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<AudioTrack>::`vftable;
+  this->vfptr = (ITaskVtbl *)&AudioTask::`vftable;
   this->m_oneShot.m_pOneShot = 0i64;
   this->mContext = 0i64;
 }
@@ -576,9 +576,9 @@ void __fastcall AudioTaskSoundbankIO::AudioTaskSoundbankIO(AudioTaskSoundbankIO 
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<AudioTrackSoundbankIO>::`vftable';
-  this->vfptr = (ITaskVtbl *)&AudioTaskSoundbankIO::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<AudioTrackSoundbankIO>::`vftable;
+  this->vfptr = (ITaskVtbl *)&AudioTaskSoundbankIO::`vftable;
 }
 
 // File Line: 511
@@ -624,9 +624,9 @@ void __fastcall AudioTaskMusicState::AudioTaskMusicState(AudioTaskMusicState *th
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<AudioTrackMusicState>::`vftable';
-  this->vfptr = (ITaskVtbl *)&AudioTaskMusicState::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<AudioTrackMusicState>::`vftable;
+  this->vfptr = (ITaskVtbl *)&AudioTaskMusicState::`vftable;
 }
 
 // File Line: 549

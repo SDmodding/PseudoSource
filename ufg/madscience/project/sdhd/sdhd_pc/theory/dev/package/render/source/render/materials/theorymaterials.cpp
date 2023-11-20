@@ -10,7 +10,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_Render::UberMaterial_Il
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<Render::UberMaterial,Illusion::rMaterial>::sInventory.vfptr,
     "Render::UberMaterial",
     v0);
-  UFG::qReflectObjectType<Render::UberMaterial,Illusion::rMaterial>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<Render::UberMaterial>::`vftable';
+  UFG::qReflectObjectType<Render::UberMaterial,Illusion::rMaterial>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<Render::UberMaterial>::`vftable;
   UFG::qReflectInventory<Render::UberMaterial>::OnAddToWarehouse(&UFG::qReflectObjectType<Render::UberMaterial,Illusion::rMaterial>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -31,7 +31,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_Render::CharacterMateri
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<Render::CharacterMaterial,Render::UberMaterial>::sInventory.vfptr,
     "Render::CharacterMaterial",
     v0);
-  UFG::qReflectObjectType<Render::CharacterMaterial,Render::UberMaterial>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<Render::CharacterMaterial>::`vftable';
+  UFG::qReflectObjectType<Render::CharacterMaterial,Render::UberMaterial>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<Render::CharacterMaterial>::`vftable;
   UFG::qReflectInventory<Render::CharacterMaterial>::OnAddToWarehouse(&UFG::qReflectObjectType<Render::CharacterMaterial,Render::UberMaterial>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -80,8 +80,8 @@ void __fastcall Render::UberMaterial::UberMaterial(Render::UberMaterial *this, M
 
   v2 = this;
   Illusion::rMaterial::rMaterial((Illusion::rMaterial *)&this->vfptr, f);
-  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<Render::UberMaterial,Illusion::rMaterial>::`vftable';
-  v2->vfptr = (UFG::qReflectObjectVtbl *)&Render::UberMaterial::`vftable';
+  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<Render::UberMaterial,Illusion::rMaterial>::`vftable;
+  v2->vfptr = (UFG::qReflectObjectVtbl *)&Render::UberMaterial::`vftable;
   UFG::qReflectHandleBase::qReflectHandleBase((UFG::qList<UFG::qReflectHandleBase,UFG::qReflectHandleBase,1,0> *)&v2->DiffuseTexture);
   UFG::qReflectHandleBase::qReflectHandleBase((UFG::qList<UFG::qReflectHandleBase,UFG::qReflectHandleBase,1,0> *)&v2->NormalTexture);
   UFG::qReflectHandleBase::qReflectHandleBase((UFG::qList<UFG::qReflectHandleBase,UFG::qReflectHandleBase,1,0> *)&v2->GlossinessTexture);
@@ -103,7 +103,7 @@ void __fastcall Render::UberMaterial::UberMaterial(Render::UberMaterial *this, M
 // RVA: 0x1452840
 __int64 Render::_dynamic_initializer_for__sUberMaterialStaticRenderPass__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     &sUberMaterialStaticRenderPass,
     0x20ui64,
     4,
@@ -126,36 +126,36 @@ Illusion::eRenderPass::StaticPassData *__fastcall Render::UberMaterial::InitStat
 
   if ( unk_142128D20 )
     return &sUberMaterialStaticRenderPass;
-  v1 = `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result )
+  v1 = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Shader>::`2::result )
   {
     v2 = UFG::qResourceWarehouse::Instance();
     v1 = UFG::qResourceWarehouse::GetInventory(v2, 0x8B5561A1);
-    `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result = v1;
+    `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = v1;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&sUberMaterialStaticRenderPass, 0x8B5561A1, 0xBCF15161, v1);
-  v3 = `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result )
+  v3 = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Shader>::`2::result )
   {
     v4 = UFG::qResourceWarehouse::Instance();
     v3 = UFG::qResourceWarehouse::GetInventory(v4, 0x8B5561A1);
-    `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result = v3;
+    `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = v3;
   }
   UFG::qResourceHandle::Init(&stru_142128D30, 0x8B5561A1, 0xBCF15161, v3);
-  v5 = `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result )
+  v5 = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Shader>::`2::result )
   {
     v6 = UFG::qResourceWarehouse::Instance();
     v5 = UFG::qResourceWarehouse::GetInventory(v6, 0x8B5561A1);
-    `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result = v5;
+    `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = v5;
   }
   UFG::qResourceHandle::Init(&stru_142128D70, 0x8B5561A1, 0x1F228C2Au, v5);
-  v7 = `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result )
+  v7 = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Shader>::`2::result )
   {
     v8 = UFG::qResourceWarehouse::Instance();
     v7 = UFG::qResourceWarehouse::GetInventory(v8, 0x8B5561A1);
-    `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result = v7;
+    `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = v7;
   }
   UFG::qResourceHandle::Init(&stru_142128D50, 0x8B5561A1, 0xBA39D8E9, v7);
   return &sUberMaterialStaticRenderPass;
@@ -509,12 +509,12 @@ LABEL_10:
   this->cbUberParams.DepthBiasSortLayer[3] = this->mRenderState.mAlphaDistanceBias;
   if ( this->mRenderState.mDecalLayer )
   {
-    v18 = `UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result )
+    v18 = `UFG::qGetResourceInventory<Illusion::RasterState>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::RasterState>::`2::result )
     {
       v19 = UFG::qResourceWarehouse::Instance();
       v18 = UFG::qResourceWarehouse::GetInventory(v19, 0x3BC715E0u);
-      `UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result = v18;
+      `UFG::qGetResourceInventory<Illusion::RasterState>::`2::result = v18;
     }
     UFG::qResourceHandle::Init(
       (UFG::qResourceHandle *)&v3->mRenderPass[0].mRasterStateHandle.mPrev,
@@ -641,7 +641,7 @@ LABEL_10:
 // RVA: 0x14527F0
 __int64 Render::_dynamic_initializer_for__sCharacterMaterialStaticRenderPass__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     &sCharacterMaterialStaticRenderPass,
     0x20ui64,
     4,
@@ -664,36 +664,36 @@ Illusion::eRenderPass::StaticPassData *__fastcall Render::CharacterMaterial::Ini
 
   if ( unk_142128DE0 )
     return &sCharacterMaterialStaticRenderPass;
-  v1 = `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result )
+  v1 = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Shader>::`2::result )
   {
     v2 = UFG::qResourceWarehouse::Instance();
     v1 = UFG::qResourceWarehouse::GetInventory(v2, 0x8B5561A1);
-    `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result = v1;
+    `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = v1;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&sCharacterMaterialStaticRenderPass, 0x8B5561A1, 0x2D2AC914u, v1);
-  v3 = `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result )
+  v3 = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Shader>::`2::result )
   {
     v4 = UFG::qResourceWarehouse::Instance();
     v3 = UFG::qResourceWarehouse::GetInventory(v4, 0x8B5561A1);
-    `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result = v3;
+    `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = v3;
   }
   UFG::qResourceHandle::Init(&stru_142128DF0, 0x8B5561A1, 0x2D2AC914u, v3);
-  v5 = `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result )
+  v5 = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Shader>::`2::result )
   {
     v6 = UFG::qResourceWarehouse::Instance();
     v5 = UFG::qResourceWarehouse::GetInventory(v6, 0x8B5561A1);
-    `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result = v5;
+    `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = v5;
   }
   UFG::qResourceHandle::Init(&stru_142128E30, 0x8B5561A1, 0xC495D9CD, v5);
-  v7 = `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result )
+  v7 = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Shader>::`2::result )
   {
     v8 = UFG::qResourceWarehouse::Instance();
     v7 = UFG::qResourceWarehouse::GetInventory(v8, 0x8B5561A1);
-    `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result = v7;
+    `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = v7;
   }
   UFG::qResourceHandle::Init(&stru_142128E10, 0x8B5561A1, 0x4D9D1983u, v7);
   return &sCharacterMaterialStaticRenderPass;

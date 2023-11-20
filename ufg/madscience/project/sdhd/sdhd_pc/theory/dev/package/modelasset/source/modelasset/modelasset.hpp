@@ -15,12 +15,12 @@ void __fastcall UFG::ModelAsset::ModelAsset(UFG::ModelAsset *this, MemImageLoadF
   v2->mBaseNode.mNeighbours[0] = &v2->mBaseNode;
   v2->mBaseNode.mNeighbours[1] = &v2->mBaseNode;
   v2->mBaseNode.mUID = v3;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable;
   v4 = &this->mHandles;
   v4->mNode.mPrev = &v4->mNode;
   v4->mNode.mNext = &v4->mNode;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::ModelAsset,UFG::qReflectObject>::`vftable';
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::ModelAsset::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::ModelAsset,UFG::qReflectObject>::`vftable;
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::ModelAsset::`vftable;
   this->mFilePath.mText.mData.mFlags = 2;
   this->mModelInfo.mData.mFlags = 2;
   this->mCustomDataSlotArray.mData.mFlags = 2;

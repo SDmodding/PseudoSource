@@ -61,7 +61,7 @@ void __fastcall UFG::UIHK_PDAPhoneContactsWidget::UIHK_PDAPhoneContactsWidget(UF
   UFG::qSymbol result; // [rsp+48h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (UFG::UIHK_PDAPhoneContactsWidgetVtbl *)&UFG::UIHK_PDAPhoneContactsWidget::`vftable';
+  this->vfptr = (UFG::UIHK_PDAPhoneContactsWidgetVtbl *)&UFG::UIHK_PDAPhoneContactsWidget::`vftable;
   *(_QWORD *)&this->mState = 0i64;
   *(_QWORD *)&this->mSelectedIndex = 0i64;
   UFG::qString::qString(&this->mSelectedName);
@@ -105,14 +105,14 @@ void __fastcall UFG::UIHK_PDAPhoneContactsWidget::~UIHK_PDAPhoneContactsWidget(U
   unsigned int *v12; // rbx
 
   v1 = this;
-  this->vfptr = (UFG::UIHK_PDAPhoneContactsWidgetVtbl *)&UFG::UIHK_PDAPhoneContactsWidget::`vftable';
+  this->vfptr = (UFG::UIHK_PDAPhoneContactsWidgetVtbl *)&UFG::UIHK_PDAPhoneContactsWidget::`vftable;
   v2 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseTexturePack(v2, UFG::UIHK_PDAPhoneContactsWidget::gTexturePackFilename);
   v3 = v1->mPortraitList.p;
   if ( v3 )
   {
     v4 = &v3[-1].mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v3,
       0x28ui64,
       v3[-1].mStringHash32,
@@ -125,7 +125,7 @@ void __fastcall UFG::UIHK_PDAPhoneContactsWidget::~UIHK_PDAPhoneContactsWidget(U
   if ( v5 )
   {
     v6 = &v5[-1].mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v5,
       0x28ui64,
       v5[-1].mStringHash32,
@@ -138,7 +138,7 @@ void __fastcall UFG::UIHK_PDAPhoneContactsWidget::~UIHK_PDAPhoneContactsWidget(U
   if ( v7 )
   {
     v8 = v7 - 1;
-    `eh vector destructor iterator'(v7, 4ui64, v7[-1].mUID, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v7, 4ui64, v7[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v8);
   }
   v1->mSymbolList.p = 0i64;
@@ -149,7 +149,7 @@ void __fastcall UFG::UIHK_PDAPhoneContactsWidget::~UIHK_PDAPhoneContactsWidget(U
   if ( v9 )
   {
     v10 = &v9[-1].symbol;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v9,
       0x30ui64,
       v9[-1].symbol.mUID,
@@ -162,7 +162,7 @@ void __fastcall UFG::UIHK_PDAPhoneContactsWidget::~UIHK_PDAPhoneContactsWidget(U
   if ( v11 )
   {
     v12 = &v11[-1].mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v11,
       0x28ui64,
       v11[-1].mStringHash32,
@@ -555,7 +555,7 @@ void __fastcall UFG::UIHK_PDAPhoneContactsWidget::ScrollPrev(UFG::UIHK_PDAPhoneC
     v3 = v1 + 1;
     v3->mNext = v3;
     v3[1].mNext = v3;
-    v2->vfptr = (UFG::UIScreenInvokeVtbl *)&UFG::UIScreenInvoke::`vftable';
+    v2->vfptr = (UFG::UIScreenInvokeVtbl *)&UFG::UIScreenInvoke::`vftable;
     UFG::qString::qString(&v2->command, &customWorldMapCaption);
   }
   else
@@ -590,7 +590,7 @@ void __fastcall UFG::UIHK_PDAPhoneContactsWidget::ScrollNext(UFG::UIHK_PDAPhoneC
     v3 = v1 + 1;
     v3->mNext = v3;
     v3[1].mNext = v3;
-    v2->vfptr = (UFG::UIScreenInvokeVtbl *)&UFG::UIScreenInvoke::`vftable';
+    v2->vfptr = (UFG::UIScreenInvokeVtbl *)&UFG::UIScreenInvoke::`vftable;
     UFG::qString::qString(&v2->command, &customWorldMapCaption);
   }
   else
@@ -639,7 +639,7 @@ void __fastcall UFG::UIHK_PDAPhoneContactsWidget::Exit(UFG::UIHK_PDAPhoneContact
       if ( v6 )
       {
         v7 = &v6[-1].mStringHash32;
-        `eh vector destructor iterator'(
+        `eh vector destructor iterator(
           v6,
           0x28ui64,
           v6[-1].mStringHash32,
@@ -652,7 +652,7 @@ void __fastcall UFG::UIHK_PDAPhoneContactsWidget::Exit(UFG::UIHK_PDAPhoneContact
       if ( v8 )
       {
         v9 = v8 - 1;
-        `eh vector destructor iterator'(v8, 4ui64, v8[-1].mUID, (void (__fastcall *)(void *))_);
+        `eh vector destructor iterator(v8, 4ui64, v8[-1].mUID, (void (__fastcall *)(void *))_);
         operator delete[](v9);
       }
       v5->mSymbolList.p = 0i64;
@@ -661,7 +661,7 @@ void __fastcall UFG::UIHK_PDAPhoneContactsWidget::Exit(UFG::UIHK_PDAPhoneContact
       if ( v10 )
       {
         v11 = &v10[-1].mStringHash32;
-        `eh vector destructor iterator'(
+        `eh vector destructor iterator(
           v10,
           0x28ui64,
           v10[-1].mStringHash32,
@@ -674,7 +674,7 @@ void __fastcall UFG::UIHK_PDAPhoneContactsWidget::Exit(UFG::UIHK_PDAPhoneContact
       if ( v12 )
       {
         v13 = &v12[-1].mStringHash32;
-        `eh vector destructor iterator'(
+        `eh vector destructor iterator(
           v12,
           0x28ui64,
           v12[-1].mStringHash32,
@@ -753,7 +753,7 @@ void __fastcall UFG::UIHK_PDAPhoneContactsWidget::AddContact(UFG::UIHK_PDAPhoneC
       UFG::qArray<UFG::qString,0>::Add(&v6->mPortraitList, v9, "qArray.Add");
       UFG::qString::~qString(&v22);
       sprintf(&string, "%s%s", v5, "_img32");
-      `eh vector constructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       if ( (v12 >> 6) & 1 )
       {
         (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v11 + 16i64))(v11, &ptr, v13);
@@ -777,7 +777,7 @@ void __fastcall UFG::UIHK_PDAPhoneContactsWidget::AddContact(UFG::UIHK_PDAPhoneC
       v20 = v25;
       Scaleform::GFx::Movie::Invoke(v7, "ContactList_AddContact", 0i64, (Scaleform::GFx::Value *)&ptr, 3u);
       ++v6->mNumContacts;
-      `eh vector destructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+      `eh vector destructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     }
   }
 }
@@ -931,7 +931,7 @@ void __fastcall UFG::UIHK_PDAPhoneContactsWidget::UpdateContactMethod(UFG::UIHK_
       v4 = screen->mRenderable->m_movie.pObject;
       if ( v4 )
       {
-        `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+        `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
         UFG::UIHK_PDAPhoneContactsWidget::GetSectedIndex(v3, v2);
         v5 = v3->mTraceSymbol.mUID;
         if ( v5 == -1 || (v6 = v3->mSelectedIndex, v3->mSymbolList.size <= v6) || v5 != v3->mSymbolList.p[v6].mUID )
@@ -970,7 +970,7 @@ void __fastcall UFG::UIHK_PDAPhoneContactsWidget::UpdateContactMethod(UFG::UIHK_
         v11 = 6;
         v12 = v7;
         Scaleform::GFx::Movie::Invoke(v4, "Smartphone_SetHelpbar", 0i64, (Scaleform::GFx::Value *)&ptr, 1u);
-        `eh vector destructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+        `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
       }
     }
   }
@@ -1028,7 +1028,7 @@ void __fastcall UFG::UIHK_PDAPhoneContactsWidget::SetSubMenuIcon(UFG::UIHK_PDAPh
     v6 = screen->mRenderable->m_movie.pObject;
     if ( v6 )
     {
-      `eh vector constructor iterator'(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       if ( ((unsigned int)pargs.Type >> 6) & 1 )
       {
         (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
@@ -1047,7 +1047,7 @@ void __fastcall UFG::UIHK_PDAPhoneContactsWidget::SetSubMenuIcon(UFG::UIHK_PDAPh
       v10 = 6;
       v11 = v4;
       Scaleform::GFx::Movie::Invoke(v6, "AccordionContactList.SetSubMenuIcon", 0i64, &pargs, 2u);
-      `eh vector destructor iterator'(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+      `eh vector destructor iterator(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     }
   }
 }

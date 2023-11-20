@@ -10,7 +10,7 @@ void __fastcall UFG::SpawnedRacket::SpawnedRacket(UFG::SpawnedRacket *this, unsi
   UFG::qSafePointer<UFG::SimComponent,UFG::SceneObjectProperties> *v7; // [rsp+50h] [rbp+18h]
 
   v2 = this;
-  this->vfptr = (UFG::SpawnedRacketVtbl *)&UFG::SpawnedRacket::`vftable';
+  this->vfptr = (UFG::SpawnedRacketVtbl *)&UFG::SpawnedRacket::`vftable;
   this->mRacketID = racketId;
   UFG::RacketInstance2::RacketInstance2(&this->mRacket);
   v2->m_PrefabInstances.p = 0i64;
@@ -71,7 +71,7 @@ void __fastcall UFG::SpawnedRacket::~SpawnedRacket(UFG::SpawnedRacket *this)
   char *v28; // rbx
 
   v1 = (UFG::qReflectHandleBase *)this;
-  this->vfptr = (UFG::SpawnedRacketVtbl *)&UFG::SpawnedRacket::`vftable';
+  this->vfptr = (UFG::SpawnedRacketVtbl *)&UFG::SpawnedRacket::`vftable;
   v2 = &this->m_AmbientPrefabInstance;
   if ( this->m_AmbientPrefabInstance.m_pPointer )
   {
@@ -161,7 +161,7 @@ void __fastcall UFG::SpawnedRacket::~SpawnedRacket(UFG::SpawnedRacket *this)
   if ( v27 )
   {
     v28 = v27 - 8;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v27,
       0x18ui64,
       *((_DWORD *)v27 - 2),

@@ -27,14 +27,14 @@ void __fastcall UFG::CopRoadBlock::CopRoadBlock(UFG::CopRoadBlock *this, UFG::qS
 
   v3 = this;
   UFG::MarkerBase::MarkerBase((UFG::MarkerBase *)&this->vfptr, name, pSimObj, 0x30000u);
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SpawnPointInterface::`vftable';
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SpawnPointInterface::`vftable;
   v4 = (UFG::qNode<UFG::CopRoadBlock,UFG::CopRoadBlock> *)&v3->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CopRoadBlock::`vftable';
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CopRoadBlock::`vftable;
   v5 = v3->mObjects;
   v6 = 6i64;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v3->mObjects,
     0x18ui64,
     6,
@@ -85,7 +85,7 @@ void __fastcall UFG::CopRoadBlock::~CopRoadBlock(UFG::CopRoadBlock *this)
   UFG::qNode<UFG::CopRoadBlock,UFG::CopRoadBlock> *v11; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CopRoadBlock::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CopRoadBlock::`vftable;
   if ( this == UFG::CopRoadBlock::s_CopRoadBlockpCurrentIterator )
     UFG::CopRoadBlock::s_CopRoadBlockpCurrentIterator = (UFG::CopRoadBlock *)&this->mPrev[-7];
   v2 = (UFG::qNode<UFG::CopRoadBlock,UFG::CopRoadBlock> *)&this->mPrev;
@@ -112,7 +112,7 @@ void __fastcall UFG::CopRoadBlock::~CopRoadBlock(UFG::CopRoadBlock *this)
   v9->mPrev = v8;
   v5->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v5->mPrev;
   v1->mPositionToDefendObject.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v1->mPositionToDefendObject.mPrev;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->mObjects,
     0x18ui64,
     6,

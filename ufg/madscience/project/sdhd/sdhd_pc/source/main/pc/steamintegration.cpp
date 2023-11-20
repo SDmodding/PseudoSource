@@ -12,7 +12,7 @@ void __fastcall SteamImplementation::SteamImplementation(SteamImplementation *th
   v4 = &this->mDLCInstalledCallback;
   v4->m_nCallbackFlags = 0;
   v4->m_iCallback = 0;
-  v4->vfptr = (CCallbackBaseVtbl *)&CCallback<SteamImplementation,DlcInstalled_t,0>::`vftable';
+  v4->vfptr = (CCallbackBaseVtbl *)&CCallback<SteamImplementation,DlcInstalled_t,0>::`vftable;
   v4->m_pObj = v3;
   v4->m_Func = SteamImplementation::OnDLCInstalled;
   if ( SteamImplementation::OnDLCInstalled )
@@ -24,7 +24,7 @@ void __fastcall SteamImplementation::SteamImplementation(SteamImplementation *th
   v5 = (signed __int64)&v3->mRegisterActivationCodeCallback;
   *(_BYTE *)(v5 + 8) = 0;
   *(_DWORD *)(v5 + 12) = 0;
-  *(_QWORD *)v5 = &CCallback<SteamImplementation,RegisterActivationCodeResponse_t,0>::`vftable';
+  *(_QWORD *)v5 = &CCallback<SteamImplementation,RegisterActivationCodeResponse_t,0>::`vftable;
   *(_QWORD *)(v5 + 16) = v3;
   *(_QWORD *)(v5 + 24) = SteamImplementation::OnRegisterActivationCode;
   if ( SteamImplementation::OnRegisterActivationCode )
@@ -130,10 +130,10 @@ void __fastcall SteamIntegration::CloseAPI(__int64 a1)
   if ( sImplementation )
   {
     v2 = &sImplementation->mRegisterActivationCodeCallback;
-    sImplementation->mRegisterActivationCodeCallback.vfptr = (CCallbackBaseVtbl *)&CCallback<SteamImplementation,RegisterActivationCodeResponse_t,0>::`vftable';
+    sImplementation->mRegisterActivationCodeCallback.vfptr = (CCallbackBaseVtbl *)&CCallback<SteamImplementation,RegisterActivationCodeResponse_t,0>::`vftable;
     if ( v1->mRegisterActivationCodeCallback.m_nCallbackFlags & 1 )
       SteamAPI_UnregisterCallback(v2);
-    v1->mDLCInstalledCallback.vfptr = (CCallbackBaseVtbl *)&CCallback<SteamImplementation,DlcInstalled_t,0>::`vftable';
+    v1->mDLCInstalledCallback.vfptr = (CCallbackBaseVtbl *)&CCallback<SteamImplementation,DlcInstalled_t,0>::`vftable;
     if ( v1->mDLCInstalledCallback.m_nCallbackFlags & 1 )
       SteamAPI_UnregisterCallback(&v1->mDLCInstalledCallback);
     operator delete[](v1);

@@ -5,9 +5,9 @@ void __fastcall OSuite::ZHttpConnectionManager::ZHttpConnectionManager(OSuite::Z
   OSuite::ZHttpConnectionManager *v1; // rdi
 
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpConnectionManager::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpConnectionManager::`vftable;
   OSuite::ZDoublyLinkedListBase::ZDoublyLinkedListBase((OSuite::ZRedBlackTreeBase *)&this->m_freeHttpConnectionsList);
-  v1->m_freeHttpConnectionsList.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZSocketManager::InternalSocket>::`vftable';
+  v1->m_freeHttpConnectionsList.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZSocketManager::InternalSocket>::`vftable;
   OSuite::ZMutex::ZMutex(&v1->m_ConnectionMutex);
   v1->m_MaxHttpConnection = 16i64;
 }
@@ -27,16 +27,16 @@ void __fastcall OSuite::ZHttpConnectionManager::~ZHttpConnectionManager(OSuite::
   v5.m_pElement = 0i64;
   v1 = (OSuite::ZDoublyLinkedListBase *)&this->m_freeHttpConnectionsList.vfptr;
   v2 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpConnectionManager::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpConnectionManager::`vftable;
   OSuite::ZDoublyLinkedListBase::ZIteratorBase::ZIteratorBase(
     &v5,
     (OSuite::ZDoublyLinkedListBase *)&this->m_freeHttpConnectionsList.vfptr,
     this->m_freeHttpConnectionsList.m_pHead);
   v6.m_pList = 0i64;
   v6.m_pElement = 0i64;
-  v5.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+  v5.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
   OSuite::ZDoublyLinkedListBase::ZIteratorBase::ZIteratorBase(&v6, v1, 0i64);
-  v6.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+  v6.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
   while ( 1 )
   {
     v4 = OSuite::ZRedBlackTreeBase::ZIteratorBase::operator bool((OSuite::ZRedBlackTreeBase::ZIteratorBase *)&v6);
@@ -49,7 +49,7 @@ void __fastcall OSuite::ZHttpConnectionManager::~ZHttpConnectionManager(OSuite::
   }
   OSuite::ZDoublyLinkedListBase::Clear(v1);
   OSuite::ZMutex::~ZMutex(&v2->m_ConnectionMutex);
-  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZSocketManager::InternalSocket>::`vftable';
+  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZSocketManager::InternalSocket>::`vftable;
   OSuite::ZDoublyLinkedListBase::Clear(v1);
 }
 
@@ -87,12 +87,12 @@ OSuite::ZHttpConnection *__fastcall OSuite::ZHttpConnectionManager::CreateHttpCo
       v7);
     v16.m_pList = 0i64;
     v16.m_pElement = 0i64;
-    v15.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+    v15.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
     OSuite::ZDoublyLinkedListBase::ZIteratorBase::ZIteratorBase(
       &v16,
       (OSuite::ZDoublyLinkedListBase *)&v3->m_freeHttpConnectionsList.vfptr,
       0i64);
-    v16.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+    v16.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
     while ( 1 )
     {
       v8 = OSuite::ZRedBlackTreeBase::ZIteratorBase::operator bool((OSuite::ZRedBlackTreeBase::ZIteratorBase *)&v16);
@@ -124,8 +124,8 @@ OSuite::ZHttpConnection *__fastcall OSuite::ZHttpConnectionManager::CreateHttpCo
       }
       OSuite::ZDoublyLinkedListBase::ZIteratorBase::Next(&v15);
     }
-    v16.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
-    v15.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+    v16.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
+    v15.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
   }
   OSuite::ZMutex::Unlock(&v3->m_ConnectionMutex);
   if ( v6 )

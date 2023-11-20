@@ -11,12 +11,12 @@ void __fastcall OSuite::ZRedBlackTreeBase::TElement<OSuite::TKeyValueElement<OSu
   OSuite::ZRedBlackTreeBase::ZElementBase::ZElementBase(
     (OSuite::ZObject *)&this->vfptr,
     (OSuite::ZObject *)&data->vfptr);
-  v3->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZRedBlackTreeBase::TElement<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString>>::`vftable';
+  v3->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZRedBlackTreeBase::TElement<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString>>::`vftable;
   v4 = &v3->m_data;
-  v4->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable';
+  v4->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable;
   OSuite::ZString::ZString(&v3->m_data.m_First, &v2->m_First);
   OSuite::ZString::ZString(&v3->m_data.m_Second, &v2->m_Second);
-  v4->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString>::`vftable';
+  v4->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString>::`vftable;
 }
 
 // File Line: 66
@@ -25,10 +25,10 @@ void __fastcall OSuite::ZRedBlackTreeBase::TElement<OSuite::TKeyValueElement<OSu
 {
   OSuite::TKeyValueElement<OSuite::ZUrl,OSuite::ZCachedObject *> *v1; // rcx
 
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZRedBlackTreeBase::TElement<OSuite::TKeyValueElement<OSuite::ZUrl,OSuite::ZCachedObject *>>::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZRedBlackTreeBase::TElement<OSuite::TKeyValueElement<OSuite::ZUrl,OSuite::ZCachedObject *>>::`vftable;
   v1 = &this->m_data;
-  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TKeyValueElement<OSuite::ZUrl,OSuite::ZCachedObject *>::`vftable';
-  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<OSuite::ZUrl,OSuite::ZCachedObject *>::`vftable';
+  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TKeyValueElement<OSuite::ZUrl,OSuite::ZCachedObject *>::`vftable;
+  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<OSuite::ZUrl,OSuite::ZCachedObject *>::`vftable;
   OSuite::ZUrl::~ZUrl(&v1->m_First);
 }
 
@@ -80,8 +80,8 @@ void __fastcall OSuite::ZRedBlackTreeBase::ZIteratorBase::~ZIteratorBase(OSuite:
 {
   OSuite::TList<OSuite::ZRedBlackTreeBase::ZElementBase *> *v1; // rcx
 
-  this->m_parents.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable'{for `OSuite::ZObject'};
-  this->m_parents.vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable'{for `OSuite::IHashable'};
+  this->m_parents.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable{for `OSuite::ZObject};
+  this->m_parents.vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable{for `OSuite::IHashable};
   v1 = this->m_parents.m_pList;
   if ( v1 )
     v1->vfptr->__vecDelDtor((OSuite::ZObject *)&v1->vfptr, 1u);
@@ -93,9 +93,9 @@ void __fastcall OSuite::ZRedBlackTreeBase::TIterator<OSuite::TKeyValueElement<OS
 {
   OSuite::TList<OSuite::ZRedBlackTreeBase::ZElementBase *> *v1; // rcx
 
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZRedBlackTreeBase::TIterator<OSuite::TKeyValueElement<OSuite::ZUrl,OSuite::ZCachedObject *>>::`vftable';
-  this->m_parents.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable'{for `OSuite::ZObject'};
-  this->m_parents.vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable'{for `OSuite::IHashable'};
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZRedBlackTreeBase::TIterator<OSuite::TKeyValueElement<OSuite::ZUrl,OSuite::ZCachedObject *>>::`vftable;
+  this->m_parents.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable{for `OSuite::ZObject};
+  this->m_parents.vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable{for `OSuite::IHashable};
   v1 = this->m_parents.m_pList;
   if ( v1 )
     v1->vfptr->__vecDelDtor((OSuite::ZObject *)&v1->vfptr, 1u);
@@ -107,12 +107,12 @@ void __fastcall OSuite::TRedBlackTree<OSuite::TKeyValueElement<OSuite::ZString,O
 {
   OSuite::TKeyValueElementComparer<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString> > *v1; // [rsp+48h] [rbp+10h]
 
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TRedBlackTree<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString>,1,OSuite::TKeyValueElementComparer<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString>>>::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TRedBlackTree<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString>,1,OSuite::TKeyValueElementComparer<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString>>>::`vftable;
   v1 = &this->m_Comparer;
-  v1->vfptr = (OSuite::IComparer<OSuite::ZString>Vtbl *)&OSuite::TKeyValueElementComparer<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString>>::`vftable'{for `OSuite::IComparer<OSuite::ZString>'};
-  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TKeyValueElementComparer<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString>>::`vftable'{for `OSuite::ZObject'};
-  v1->vfptr = (OSuite::IComparer<OSuite::ZString>Vtbl *)&OSuite::TOperatorComparer<OSuite::ZString>::`vftable'{for `OSuite::IComparer<OSuite::ZString>'};
-  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TOperatorComparer<OSuite::ZString>::`vftable'{for `OSuite::ZObject'};
+  v1->vfptr = (OSuite::IComparer<OSuite::ZString>Vtbl *)&OSuite::TKeyValueElementComparer<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString>>::`vftable{for `OSuite::IComparer<OSuite::ZString>};
+  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TKeyValueElementComparer<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString>>::`vftable{for `OSuite::ZObject};
+  v1->vfptr = (OSuite::IComparer<OSuite::ZString>Vtbl *)&OSuite::TOperatorComparer<OSuite::ZString>::`vftable{for `OSuite::IComparer<OSuite::ZString>};
+  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TOperatorComparer<OSuite::ZString>::`vftable{for `OSuite::ZObject};
   OSuite::ZRedBlackTreeBase::~ZRedBlackTreeBase((OSuite::ZRedBlackTreeBase *)&this->vfptr);
 }
 
@@ -128,7 +128,7 @@ OSuite::ZRedBlackTreeBase::TIterator<OSuite::TKeyValueElement<OSuite::ZUrl,OSuit
     (OSuite::ZRedBlackTreeBase *)&this->vfptr,
     0i64,
     0i64);
-  v2->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZRedBlackTreeBase::TIterator<OSuite::TKeyValueElement<OSuite::ZUrl,OSuite::ZCachedObject *>>::`vftable';
+  v2->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZRedBlackTreeBase::TIterator<OSuite::TKeyValueElement<OSuite::ZUrl,OSuite::ZCachedObject *>>::`vftable;
   return v2;
 }
 
@@ -151,17 +151,17 @@ OSuite::ZRedBlackTreeBase::TIterator<OSuite::TKeyValueElement<OSuite::ZUrl,OSuit
   v4 = result;
   v5 = this;
   OSuite::ZRedBlackTreeBase::ZElementBase::ZElementBase(&v9, (OSuite::ZObject *)&result->vfptr);
-  v9.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZRedBlackTreeBase::TElement<OSuite::TKeyValueElement<OSuite::ZUrl,OSuite::ZCachedObject *>>::`vftable';
-  v10 = &OSuite::TPair<OSuite::ZUrl,OSuite::ZCachedObject *>::`vftable';
+  v9.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZRedBlackTreeBase::TElement<OSuite::TKeyValueElement<OSuite::ZUrl,OSuite::ZCachedObject *>>::`vftable;
+  v10 = &OSuite::TPair<OSuite::ZUrl,OSuite::ZCachedObject *>::`vftable;
   OSuite::ZUrl::ZUrl(&v11, &v3->m_First);
   v12 = v3->m_Second;
-  v10 = &OSuite::TKeyValueElement<OSuite::ZUrl,OSuite::ZCachedObject *>::`vftable';
+  v10 = &OSuite::TKeyValueElement<OSuite::ZUrl,OSuite::ZCachedObject *>::`vftable;
   OSuite::ZRedBlackTreeBase::FindKeyElement(
     (OSuite::ZRedBlackTreeBase *)&v5->vfptr,
     &resulta,
     (OSuite::ZRedBlackTreeBase::ZElementBase *)&v9);
-  v9.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZRedBlackTreeBase::TElement<OSuite::TKeyValueElement<OSuite::ZUrl,OSuite::ZCachedObject *>>::`vftable';
-  v10 = &OSuite::TPair<OSuite::ZUrl,OSuite::ZCachedObject *>::`vftable';
+  v9.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZRedBlackTreeBase::TElement<OSuite::TKeyValueElement<OSuite::ZUrl,OSuite::ZCachedObject *>>::`vftable;
+  v10 = &OSuite::TPair<OSuite::ZUrl,OSuite::ZCachedObject *>::`vftable;
   OSuite::ZUrl::~ZUrl(&v11);
   if ( resulta.m_First )
   {
@@ -170,7 +170,7 @@ OSuite::ZRedBlackTreeBase::TIterator<OSuite::TKeyValueElement<OSuite::ZUrl,OSuit
       (OSuite::ZRedBlackTreeBase *)&v5->vfptr,
       resulta.m_First,
       resulta.m_Second);
-    v4->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZRedBlackTreeBase::TIterator<OSuite::TKeyValueElement<OSuite::ZUrl,OSuite::ZCachedObject *>>::`vftable';
+    v4->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZRedBlackTreeBase::TIterator<OSuite::TKeyValueElement<OSuite::ZUrl,OSuite::ZCachedObject *>>::`vftable;
   }
   else
   {

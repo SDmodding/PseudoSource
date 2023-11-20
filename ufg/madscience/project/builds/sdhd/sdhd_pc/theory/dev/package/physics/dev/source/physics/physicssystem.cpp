@@ -72,7 +72,7 @@ void __fastcall UFG::BasePhysicsSystem::BasePhysicsSystem(UFG::BasePhysicsSystem
 
   v2 = memPool;
   v3 = this;
-  this->vfptr = (UFG::BasePhysicsSystemVtbl *)&UFG::BasePhysicsSystem::`vftable';
+  this->vfptr = (UFG::BasePhysicsSystemVtbl *)&UFG::BasePhysicsSystem::`vftable;
   result = &this->mCollisionModels;
   UFG::qBaseTreeRB::qBaseTreeRB(&this->mCollisionModels.mTree);
   UFG::ActiveRegionManager::ActiveRegionManager(&v3->mActiveRegionManager);
@@ -103,7 +103,7 @@ void __fastcall UFG::BasePhysicsSystem::BasePhysicsSystem(UFG::BasePhysicsSystem
   *(_DWORD *)(v4 + 8) = 0;
   *(_DWORD *)(v4 + 12) = 2147483648;
   v3->mRayCastSemaphore = 0i64;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v3->mRaycastBatches,
     0xAE50ui64,
     2,
@@ -114,7 +114,7 @@ void __fastcall UFG::BasePhysicsSystem::BasePhysicsSystem(UFG::BasePhysicsSystem
   *(_DWORD *)(v5 + 12) = 2147483648;
   v3->mShapeCastSemaphore = 0i64;
   result = (UFG::qTreeRB<UFG::CollisionMeshData,UFG::CollisionMeshData,1> *)&v3->mShapecastBatch;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     &v3->mShapecastBatch,
     0xD0ui64,
     48,
@@ -327,7 +327,7 @@ void __fastcall UFG::BasePhysicsSystem::~BasePhysicsSystem(UFG::BasePhysicsSyste
   int v25; // er8
 
   v1 = this;
-  this->vfptr = (UFG::BasePhysicsSystemVtbl *)&UFG::BasePhysicsSystem::`vftable';
+  this->vfptr = (UFG::BasePhysicsSystemVtbl *)&UFG::BasePhysicsSystem::`vftable;
   if ( UFG::Destruction::mInstance )
   {
     UFG::Destruction::mInstance->vfptr->__vecDelDtor((hkpBreakOffPartsListener *)UFG::Destruction::mInstance, 1u);
@@ -442,7 +442,7 @@ void __fastcall UFG::BasePhysicsSystem::~BasePhysicsSystem(UFG::BasePhysicsSyste
       v17 << 6);
   v1->mShapeCastCommands.m_data = 0i64;
   v1->mShapeCastCommands.m_capacityAndFlags = 2147483648;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     &v1->mShapecastBatch,
     0xD0ui64,
     48,
@@ -456,7 +456,7 @@ void __fastcall UFG::BasePhysicsSystem::~BasePhysicsSystem(UFG::BasePhysicsSyste
       v18 << 6);
   v1->mShapeCastCommands.m_data = 0i64;
   v1->mShapeCastCommands.m_capacityAndFlags = 2147483648;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->mRaycastBatches,
     0xAE50ui64,
     2,
@@ -541,7 +541,7 @@ void UFG::BasePhysicsSystem::InitMemory(void)
   if ( !(_S7_1 & 1) )
   {
     _S7_1 |= 1u;
-    customAllocator.vfptr = (hkMemoryAllocatorVtbl *)&CustomHavokMemoryAllocator::`vftable';
+    customAllocator.vfptr = (hkMemoryAllocatorVtbl *)&CustomHavokMemoryAllocator::`vftable;
     atexit(UFG::BasePhysicsSystem::InitMemory_::_2_::_dynamic_atexit_destructor_for__customAllocator__);
   }
   CustomHavokMemoryAllocator::initDefaultPools(&customAllocator, UFG::BasePhysicsSystem::mParam.maxLoadedBodies);
@@ -698,10 +698,10 @@ void __fastcall UFG::BasePhysicsSystem::InitWorld(UFG::BasePhysicsSystem *this)
   if ( v15 )
   {
     hkpBroadPhaseBorder::hkpBroadPhaseBorder(v15, v1->mWorld, BROADPHASE_BORDER_DO_NOTHING, 0);
-    v16->vfptr = (hkBaseObjectVtbl *)&UFG::BroadPhaseHandler::`vftable'{for `hkReferencedObject'};
-    v16->vfptr = (hkpWorldDeletionListenerVtbl *)&UFG::BroadPhaseHandler::`vftable'{for `hkpWorldDeletionListener'};
-    v16->vfptr = (hkpPhantomOverlapListenerVtbl *)&UFG::BroadPhaseHandler::`vftable'{for `hkpPhantomOverlapListener'};
-    v16->vfptr = (hkpWorldPostSimulationListenerVtbl *)&UFG::BroadPhaseHandler::`vftable'{for `hkpWorldPostSimulationListener'};
+    v16->vfptr = (hkBaseObjectVtbl *)&UFG::BroadPhaseHandler::`vftable{for `hkReferencedObject};
+    v16->vfptr = (hkpWorldDeletionListenerVtbl *)&UFG::BroadPhaseHandler::`vftable{for `hkpWorldDeletionListener};
+    v16->vfptr = (hkpPhantomOverlapListenerVtbl *)&UFG::BroadPhaseHandler::`vftable{for `hkpPhantomOverlapListener};
+    v16->vfptr = (hkpWorldPostSimulationListenerVtbl *)&UFG::BroadPhaseHandler::`vftable{for `hkpWorldPostSimulationListener};
     v16->mCallback = 0i64;
   }
   else
@@ -836,8 +836,8 @@ void __fastcall UFG::BasePhysicsSystem::InitWorld(UFG::BasePhysicsSystem *this)
     v66 = v42;
     if ( v42 )
     {
-      v42->vfptr = (hkExternalJobProfilerVtbl *)&hkExternalJobProfiler::`vftable';
-      v42->vfptr = (hkExternalJobProfilerVtbl *)&HavokJobMemoryPoolTagger::`vftable';
+      v42->vfptr = (hkExternalJobProfilerVtbl *)&hkExternalJobProfiler::`vftable;
+      v42->vfptr = (hkExternalJobProfilerVtbl *)&HavokJobMemoryPoolTagger::`vftable;
     }
     else
     {
@@ -911,7 +911,7 @@ void __fastcall UFG::BasePhysicsSystem::InitWorld(UFG::BasePhysicsSystem *this)
     ci.m_hardwareThreadIds.m_capacityAndFlags = 2147483648;
   }
   hkpWorld::unlock(v1->mWorld);
-  *(_QWORD *)&v56.m_spuSchedulePolicy = &hkpWorldCinfo::`vftable';
+  *(_QWORD *)&v56.m_spuSchedulePolicy = &hkpWorldCinfo::`vftable;
   if ( v64 )
     hkReferencedObject::removeReference(v64);
   v64 = 0i64;
@@ -1934,7 +1934,7 @@ bool __fastcall UFG::BasePhysicsSystem::CastShape(UFG::BasePhysicsSystem *this, 
   {
     if ( (unsigned int)((_DWORD)retaddr - 1) <= 1 )
     {
-      v23.vfptr = (hkpCdPointCollectorVtbl *)&hkpAllCdPointCollector::`vftable';
+      v23.vfptr = (hkpCdPointCollectorVtbl *)&hkpAllCdPointCollector::`vftable;
       v24 = &v23.m_hits;
       v23.m_hits.m_data = v23.m_hits.m_storage;
       v23.m_hits.m_capacityAndFlags = -2147483640;
@@ -1952,7 +1952,7 @@ bool __fastcall UFG::BasePhysicsSystem::CastShape(UFG::BasePhysicsSystem *this, 
           v6,
           &v23.m_hits.m_data[(signed __int64)i],
           (_DWORD)retaddr == 1);
-      v23.vfptr = (hkpCdPointCollectorVtbl *)&hkpAllCdPointCollector::`vftable';
+      v23.vfptr = (hkpCdPointCollectorVtbl *)&hkpAllCdPointCollector::`vftable;
       v24 = &v23.m_hits;
       v23.m_hits.m_size = 0;
       if ( v23.m_hits.m_capacityAndFlags >= 0 )
@@ -1962,12 +1962,12 @@ bool __fastcall UFG::BasePhysicsSystem::CastShape(UFG::BasePhysicsSystem *this, 
           v23.m_hits.m_capacityAndFlags << 6);
       v23.m_hits.m_data = 0i64;
       v23.m_hits.m_capacityAndFlags = 2147483648;
-      v23.vfptr = (hkpCdPointCollectorVtbl *)&hkpCdPointCollector::`vftable';
+      v23.vfptr = (hkpCdPointCollectorVtbl *)&hkpCdPointCollector::`vftable;
     }
   }
   else
   {
-    v19.m128_u64[1] = (unsigned __int64)&hkpClosestCdPointCollector::`vftable';
+    v19.m128_u64[1] = (unsigned __int64)&hkpClosestCdPointCollector::`vftable;
     v20 = 0i64;
     v19 = _mm_shuffle_ps(v19, _mm_unpackhi_ps(v19, (__m128)xmmword_141A712A0), 196);
     LODWORD(v20) = 2139095022;
@@ -1982,7 +1982,7 @@ bool __fastcall UFG::BasePhysicsSystem::CastShape(UFG::BasePhysicsSystem *this, 
       LOBYTE(v13) = 1;
       (*(void (__fastcall **)(hkpPhantom **, char *, __int64))&(*v6)->m_memSizeAndFlags)(v6, &v21, v13);
     }
-    v19.m128_u64[1] = (unsigned __int64)&hkpCdPointCollector::`vftable';
+    v19.m128_u64[1] = (unsigned __int64)&hkpCdPointCollector::`vftable;
   }
   v14 = v8->mNode.mNext != (UFG::qNode<UFG::ShapeCasterCollector::HitInfo,UFG::ShapeCasterCollector::HitInfo> *)v8;
   if ( v26 )

@@ -12,7 +12,7 @@ void __fastcall OSuite::ZOEdmEntitySet::ZOEdmEntitySet(OSuite::ZOEdmEntitySet *t
   v5 = this;
   OSuite::ZOEdmBase::ZOEdmBase((OSuite::ZOEdmBase *)&this->vfptr, schema, entitySetName);
   v6 = 0i64;
-  v5->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOEdmEntitySet::`vftable';
+  v5->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOEdmEntitySet::`vftable;
   v5->m_EntityType = 0i64;
   v7 = (OSuite::ZString *)OSuite::ZObject::operator new(0x18ui64);
   if ( v7 )

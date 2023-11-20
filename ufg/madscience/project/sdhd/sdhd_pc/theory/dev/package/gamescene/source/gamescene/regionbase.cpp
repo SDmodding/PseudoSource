@@ -19,9 +19,9 @@ UFG::allocator::free_link *__fastcall UFG::RegionSphere::Clone(UFG::RegionSphere
   result = UFG::qMalloc(0x18ui64, UFG::gGlobalNewName, 0i64);
   if ( !result )
     return 0i64;
-  result->mNext = (UFG::allocator::free_link *)&UFG::RegionBase::`vftable';
+  result->mNext = (UFG::allocator::free_link *)&UFG::RegionBase::`vftable;
   LODWORD(result[1].mNext) = 0;
-  result->mNext = (UFG::allocator::free_link *)&UFG::RegionSphere::`vftable';
+  result->mNext = (UFG::allocator::free_link *)&UFG::RegionSphere::`vftable;
   *(float *)&result[2].mNext = v1->mRadius;
   return result;
 }
@@ -480,9 +480,9 @@ UFG::allocator::free_link *__fastcall UFG::RegionBox::Clone(UFG::RegionBox *this
   result = UFG::qMalloc(0x28ui64, UFG::gGlobalNewName, 0i64);
   if ( !result )
     return 0i64;
-  result->mNext = (UFG::allocator::free_link *)&UFG::RegionBase::`vftable';
+  result->mNext = (UFG::allocator::free_link *)&UFG::RegionBase::`vftable;
   LODWORD(result[1].mNext) = 0;
-  result->mNext = (UFG::allocator::free_link *)&UFG::RegionBox::`vftable';
+  result->mNext = (UFG::allocator::free_link *)&UFG::RegionBox::`vftable;
   v3 = v1->mBox.mMin.y;
   v4 = LODWORD(v1->mBox.mMin.z);
   *(float *)&result[2].mNext = v1->mBox.mMin.x;
@@ -984,9 +984,9 @@ UFG::allocator::free_link *__fastcall UFG::RegionDisc::Clone(UFG::RegionDisc *th
   result = UFG::qMalloc(0x20ui64, UFG::gGlobalNewName, 0i64);
   if ( !result )
     return 0i64;
-  result->mNext = (UFG::allocator::free_link *)&UFG::RegionBase::`vftable';
+  result->mNext = (UFG::allocator::free_link *)&UFG::RegionBase::`vftable;
   LODWORD(result[1].mNext) = 0;
-  result->mNext = (UFG::allocator::free_link *)&UFG::RegionDisc::`vftable';
+  result->mNext = (UFG::allocator::free_link *)&UFG::RegionDisc::`vftable;
   *(float *)&result[2].mNext = v1->mRadius;
   HIDWORD(result[2].mNext) = LODWORD(v1->mExtentAbove);
   *(float *)&result[3].mNext = v1->mExtentBelow;

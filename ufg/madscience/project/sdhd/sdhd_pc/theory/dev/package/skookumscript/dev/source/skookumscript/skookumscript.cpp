@@ -171,7 +171,7 @@ LABEL_13:
       if ( v10 )
         v11 = v10;
       SSDataInstance::SSDataInstance((SSDataInstance *)&v9->vfptr, (SSClass *)&v11->vfptr);
-      v9->vfptr = (SSObjectBaseVtbl *)&SSActor::`vftable';
+      v9->vfptr = (SSObjectBaseVtbl *)&SSActor::`vftable;
       v9->i_icoroutines_to_update.i_count = 0;
       v9->i_icoroutines_to_update.i_array_p = 0i64;
       v9->i_icoroutines_to_update.i_size = 0;

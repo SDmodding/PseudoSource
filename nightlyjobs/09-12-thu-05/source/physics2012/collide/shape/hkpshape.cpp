@@ -8,7 +8,7 @@ void __fastcall hkpShape::hkpShape(hkpShape *this, hkFinishLoadedObjectFlag flag
   v3 = flag.m_finishing;
   v2 = this;
   hkpShapeBase::hkpShapeBase((hkpShapeBase *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpShape::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpShape::`vftable;
   if ( v3 )
     v2->m_type.m_storage = 34;
 }

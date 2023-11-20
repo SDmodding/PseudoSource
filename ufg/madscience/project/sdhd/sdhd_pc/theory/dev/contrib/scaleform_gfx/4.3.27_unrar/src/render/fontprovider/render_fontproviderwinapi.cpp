@@ -15,7 +15,7 @@ void __fastcall Scaleform::Render::ExternalFontWinAPI::~ExternalFontWinAPI(Scale
   Scaleform::Render::RenderBuffer *v4; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ExternalFontWinAPI::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ExternalFontWinAPI::`vftable;
   v2 = this->HintedFont;
   if ( v2 )
     DeleteObject(v2);
@@ -33,7 +33,7 @@ void __fastcall Scaleform::Render::ExternalFontWinAPI::~ExternalFontWinAPI(Scale
   v4 = (Scaleform::Render::RenderBuffer *)v1->pFontProvider.pObject;
   if ( v4 )
     Scaleform::RefCountImpl::Release(v4);
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Font::`vftable';
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Font::`vftable;
   Scaleform::Render::FontCacheHandleRef::releaseFont(&v1->hRef);
   Scaleform::RefCountImplCore::~RefCountImplCore((Scaleform::RefCountImplCore *)&v1->vfptr);
 }
@@ -86,12 +86,12 @@ void __fastcall Scaleform::Render::ExternalFontWinAPI::ExternalFontWinAPI(Scalef
   v7 = sysData;
   v8 = pprovider;
   v9 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,75>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::Font,75>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Font::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,75>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::Font,75>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Font::`vftable;
   *(_QWORD *)&this->Ascent = 0i64;
   this->Leading = 0.0;
   this->Flags = fontFlags;
@@ -100,7 +100,7 @@ void __fastcall Scaleform::Render::ExternalFontWinAPI::ExternalFontWinAPI(Scalef
   this->hRef.pManager.Value = 0i64;
   v11 = this->hRef.pManager.Value;
   this->hRef.pFontHandle = 0i64;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ExternalFontWinAPI::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ExternalFontWinAPI::`vftable;
   if ( pprovider )
     Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)pprovider);
   v9->pFontProvider.pObject = v8;
@@ -1471,13 +1471,13 @@ void __fastcall Scaleform::Render::FontProviderWinAPI::FontProviderWinAPI(Scalef
   int v7; // [rsp+38h] [rbp-20h]
   int v8; // [rsp+3Ch] [rbp-1Ch]
 
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,75>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::FontProvider,75>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::FontProvider::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::FontProviderWinAPI::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,75>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::FontProvider,75>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::FontProvider::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::FontProviderWinAPI::`vftable;
   v2 = &this->SysData;
   v2->GlyphBuffer.Data.Data = 0i64;
   v2->GlyphBuffer.Data.Size = 0i64;
@@ -1515,12 +1515,12 @@ void __fastcall Scaleform::Render::FontProviderWinAPI::~FontProviderWinAPI(Scale
   Scaleform::Render::FontProviderWinAPI *v1; // rbx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::FontProviderWinAPI::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::FontProviderWinAPI::`vftable;
   Scaleform::Lock::~Lock(&this->FontLock.cs);
   Scaleform::ArrayDataBase<Scaleform::Render::Font::NativeHintingType,Scaleform::AllocatorGH<Scaleform::Render::Font::NativeHintingType,2>,Scaleform::ArrayDefaultPolicy>::~ArrayDataBase<Scaleform::Render::Font::NativeHintingType,Scaleform::AllocatorGH<Scaleform::Render::Font::NativeHintingType,2>,Scaleform::ArrayDefaultPolicy>((Scaleform::ArrayDataBase<Scaleform::Render::Font::NativeHintingType,Scaleform::AllocatorGH<Scaleform::Render::Font::NativeHintingType,2>,Scaleform::ArrayDefaultPolicy> *)&v1->NativeHinting.Data.Data);
   if ( v1->SysData.GlyphBuffer.Data.Data )
     ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::FontProvider::`vftable';
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::FontProvider::`vftable;
   Scaleform::RefCountImplCore::~RefCountImplCore((Scaleform::RefCountImplCore *)&v1->vfptr);
 }
 

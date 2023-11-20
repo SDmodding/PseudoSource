@@ -21,7 +21,7 @@ char __fastcall UFG::CommandManager::ExecuteCommand(UFG::CommandManager *this, c
   if ( v4 == (UFG::qTree64Base *)24 )
     return 0;
   v10 = 0;
-  v8 = &UFG::CommandContext::`vftable';
+  v8 = &UFG::CommandContext::`vftable;
   v11 = &v9;
   UFG::qBaseTreeRB::qBaseTreeRB(&v9);
   if ( (*(unsigned int (__fastcall **)(signed __int64, void ***, int *))(*(_QWORD *)v5 + 8i64))(v5, &v8, &v10) == 1 )
@@ -33,7 +33,7 @@ char __fastcall UFG::CommandManager::ExecuteCommand(UFG::CommandManager *this, c
   {
     v6 = 0;
   }
-  v8 = &UFG::CommandContext::`vftable';
+  v8 = &UFG::CommandContext::`vftable;
   v11 = &v9;
   UFG::qTreeRB<UFG::ContextDataBase,UFG::ContextDataBase,1>::DeleteAll((UFG::qTreeRB<UFG::ContextDataBase,UFG::ContextDataBase,1> *)&v9);
   UFG::qBaseTreeRB::~qBaseTreeRB((Render::Skinning *)&v9);

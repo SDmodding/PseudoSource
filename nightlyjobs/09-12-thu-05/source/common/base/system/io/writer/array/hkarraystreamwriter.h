@@ -9,7 +9,7 @@ void __fastcall hkMemoryTrackStreamWriter::~hkMemoryTrackStreamWriter(hkMemoryTr
 
   v1 = this->m_ownerShip == 0;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkMemoryTrackStreamWriter::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkMemoryTrackStreamWriter::`vftable;
   if ( v1 )
   {
     v3 = this->m_track;
@@ -18,16 +18,16 @@ void __fastcall hkMemoryTrackStreamWriter::~hkMemoryTrackStreamWriter(hkMemoryTr
       hkMemoryTrack::~hkMemoryTrack(this->m_track);
       v4 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
       (*(void (__fastcall **)(_QWORD *, hkMemoryTrack *, signed __int64))(*v4[11] + 16i64))(v4[11], v3, 32i64);
-      v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+      v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
     }
     else
     {
-      this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+      this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
     }
   }
   else
   {
-    this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+    this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
   }
 }
 
@@ -72,7 +72,7 @@ void __fastcall hkArrayStreamWriter::hkArrayStreamWriter(hkArrayStreamWriter *th
   this->m_memSizeAndFlags = -1;
   this->m_arr = (hkArrayBase<char> *)&arr->m_data;
   this->m_allocator = (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc;
-  this->vfptr = (hkBaseObjectVtbl *)&hkArrayStreamWriter::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkArrayStreamWriter::`vftable;
   this->m_referenceCount = 1;
   this->m_offset = arr->m_size;
   this->m_ownerShip = o;
@@ -99,7 +99,7 @@ void __fastcall hkArrayStreamWriter::~hkArrayStreamWriter(hkArrayStreamWriter *t
 
   v1 = this->m_ownerShip == 0;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkArrayStreamWriter::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkArrayStreamWriter::`vftable;
   if ( v1 )
   {
     v3 = this->m_arr;
@@ -107,16 +107,16 @@ void __fastcall hkArrayStreamWriter::~hkArrayStreamWriter(hkArrayStreamWriter *t
     {
       v4 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
       (*(void (__fastcall **)(_QWORD *, hkArrayBase<char> *, signed __int64))(*v4[11] + 16i64))(v4[11], v3, 16i64);
-      v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+      v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
     }
     else
     {
-      this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+      this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
     }
   }
   else
   {
-    this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+    this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
   }
 }
 

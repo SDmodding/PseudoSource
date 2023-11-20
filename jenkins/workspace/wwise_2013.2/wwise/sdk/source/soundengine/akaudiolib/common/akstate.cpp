@@ -12,7 +12,7 @@ CAkState *__fastcall CAkState::Create(unsigned int in_ulID)
   if ( result )
   {
     CAkIndexable::CAkIndexable((CAkIndexable *)&result->vfptr, v1);
-    v3->vfptr = (CAkIndexableVtbl *)&CAkState::`vftable';
+    v3->vfptr = (CAkIndexableVtbl *)&CAkState::`vftable;
     v3->m_props.m_pProps = 0i64;
     v3->m_pParentToNotify = 0i64;
     CAkState::AddToIndex(v3);

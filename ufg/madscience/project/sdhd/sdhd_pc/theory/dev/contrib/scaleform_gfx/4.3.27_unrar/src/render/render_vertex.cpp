@@ -380,12 +380,12 @@ LABEL_7:
 // RVA: 0x963580
 void __fastcall Scaleform::Render::ConvertIndices(unsigned __int16 *pdest, unsigned __int16 *psource, unsigned int count, unsigned __int16 delta)
 {
-  if ( !(`Scaleform::SIMD::SSE::InstructionSet::SupportsIntegerIntrinsics'::`2'::`local static guard' & 1) )
+  if ( !(`Scaleform::SIMD::SSE::InstructionSet::SupportsIntegerIntrinsics::`2::`local static guard & 1) )
   {
-    `Scaleform::SIMD::SSE::InstructionSet::SupportsIntegerIntrinsics'::`2'::`local static guard' |= 1u;
-    `Scaleform::SIMD::SSE::InstructionSet::SupportsIntegerIntrinsics'::`2'::HasSSE2 = 1;
+    `Scaleform::SIMD::SSE::InstructionSet::SupportsIntegerIntrinsics::`2::`local static guard |= 1u;
+    `Scaleform::SIMD::SSE::InstructionSet::SupportsIntegerIntrinsics::`2::HasSSE2 = 1;
   }
-  if ( `Scaleform::SIMD::SSE::InstructionSet::SupportsIntegerIntrinsics'::`2'::HasSSE2 )
+  if ( `Scaleform::SIMD::SSE::InstructionSet::SupportsIntegerIntrinsics::`2::HasSSE2 )
     Scaleform::Render::ConvertIndices_SIMD(pdest, psource, count, delta);
   else
     Scaleform::Render::ConvertIndices_NonOpt(pdest, psource, count, delta);
@@ -395,8 +395,8 @@ void __fastcall Scaleform::Render::ConvertIndices(unsigned __int16 *pdest, unsig
 // RVA: 0x94D020
 void __fastcall Scaleform::Render::SystemVertexFormat::~SystemVertexFormat(Scaleform::Render::SystemVertexFormat *this)
 {
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::SystemVertexFormat::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::SystemVertexFormat::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
 }
 
 // File Line: 442

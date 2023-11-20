@@ -7,10 +7,10 @@ void __fastcall OSuite::ZMutex::ZMutex(OSuite::ZMutex *this)
 
   this->m_nLockCount = 0;
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZMutex::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZMutex::`vftable;
   v2 = OSuite::ZObject::operator new(0x30ui64);
   if ( v2 )
-    *(_QWORD *)v2 = &OSuite::InternalMutex::`vftable';
+    *(_QWORD *)v2 = &OSuite::InternalMutex::`vftable;
   v1->m_pInternalMutex = (OSuite::InternalMutex *)v2;
   InitializeCriticalSection((LPCRITICAL_SECTION)(v2 + 8));
 }
@@ -23,7 +23,7 @@ void __fastcall OSuite::ZMutex::~ZMutex(OSuite::ZMutex *this)
   OSuite::InternalMutex *v2; // rcx
 
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZMutex::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZMutex::`vftable;
   DeleteCriticalSection(&this->m_pInternalMutex->m_mutex);
   v2 = v1->m_pInternalMutex;
   if ( v2 )

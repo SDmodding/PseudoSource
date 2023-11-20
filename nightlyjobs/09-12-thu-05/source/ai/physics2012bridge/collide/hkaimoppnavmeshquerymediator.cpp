@@ -17,7 +17,7 @@ hkpMoppCode *__fastcall hkaiMoppNavMeshQueryMediator::buildCode(hkaiNavMesh *nav
 // RVA: 0xC2E590
 void __fastcall hkaiMoppNavMeshQueryMediator::hkaiMoppNavMeshQueryMediator(hkaiMoppNavMeshQueryMediator *this, hkFinishLoadedObjectFlag f)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiMoppNavMeshQueryMediator::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiMoppNavMeshQueryMediator::`vftable;
 }
 
 // File Line: 39
@@ -29,7 +29,7 @@ void __fastcall hkaiMoppNavMeshQueryMediator::~hkaiMoppNavMeshQueryMediator(hkai
   hkReferencedObject *v3; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiMoppNavMeshQueryMediator::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiMoppNavMeshQueryMediator::`vftable;
   v2 = this->m_navMesh.m_pntr;
   if ( v2 )
     hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
@@ -38,7 +38,7 @@ void __fastcall hkaiMoppNavMeshQueryMediator::~hkaiMoppNavMeshQueryMediator(hkai
   if ( v3 )
     hkReferencedObject::removeReference(v3);
   v1->m_code.m_pntr = 0i64;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 42
@@ -53,7 +53,7 @@ void __fastcall hkaiMoppNavMeshQueryMediator::hkaiMoppNavMeshQueryMediator(hkaiM
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v3 = navMesh;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiMoppNavMeshQueryMediator::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiMoppNavMeshQueryMediator::`vftable;
   v4 = code;
   this->m_code.m_pntr = 0i64;
   this->m_navMesh.m_pntr = 0i64;
@@ -203,7 +203,7 @@ __int64 __fastcall hkaiMoppNavMeshQueryMediator::castRay(hkaiMoppNavMeshQueryMed
     v17 = &transform;
     if ( v15 )
       v17 = &v15->m_rotation.m_col0;
-    v41 = &hkaiMoppNavMeshFilter::`vftable';
+    v41 = &hkaiMoppNavMeshFilter::`vftable;
     v18 = _mm_sub_ps(v16, v17[3].m_quad);
     v19 = v17[2].m_quad;
     v20 = _mm_unpacklo_ps(v17->m_quad, v17[1].m_quad);
@@ -256,7 +256,7 @@ __int64 __fastcall hkaiMoppNavMeshQueryMediator::castRay(hkaiMoppNavMeshQueryMed
       v34 = _mm_shuffle_ps(v33, v33, 0);
     }
     v4->m_hitFraction.m_real = v34;
-    v41 = &hkpRayShapeCollectionFilter::`vftable';
+    v41 = &hkpRayShapeCollectionFilter::`vftable;
     hkaiNavMeshShapeCollection::~hkaiNavMeshShapeCollection(&v49);
   }
   v35 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);

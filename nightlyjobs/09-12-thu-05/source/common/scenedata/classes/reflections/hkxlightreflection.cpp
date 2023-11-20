@@ -42,7 +42,7 @@ hkClass *__fastcall hkxLight::staticClass()
 void __fastcall finishLoadedObjecthkxLight(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkxLight::`vftable';
+    *(_QWORD *)p = &hkxLight::`vftable;
 }
 
 // File Line: 95
@@ -56,7 +56,7 @@ void __fastcall cleanupLoadedObjecthkxLight(void *p)
 // RVA: 0xE32110
 void **__fastcall getVtablehkxLight()
 {
-  return &hkxLight::`vftable';
+  return &hkxLight::`vftable;
 }
 
 // File Line: 121

@@ -24,15 +24,15 @@ void __fastcall UFG::UIGfxFsCommandHandler::Callback(UFG::UIGfxFsCommandHandler 
     v10 = v8 + 1;
     v10->mNext = v10;
     v10[1].mNext = v10;
-    v8->mNext = (UFG::allocator::free_link *)&UFG::UICommand::`vftable';
+    v8->mNext = (UFG::allocator::free_link *)&UFG::UICommand::`vftable;
     LODWORD(v8[3].mNext) = -1;
     v8[4].mNext = 0i64;
-    v8->mNext = (UFG::allocator::free_link *)&UFG::UIMessage::`vftable';
+    v8->mNext = (UFG::allocator::free_link *)&UFG::UIMessage::`vftable;
     LODWORD(v8[5].mNext) = v9;
     HIDWORD(v8[5].mNext) = 0;
     v8[6].mNext = (UFG::allocator::free_link *)-1i64;
     LODWORD(v8[3].mNext) = 5;
-    v8->mNext = (UFG::allocator::free_link *)&UFG::UIMessageFlash::`vftable';
+    v8->mNext = (UFG::allocator::free_link *)&UFG::UIMessageFlash::`vftable;
     UFG::qString::qString((UFG::qString *)&v8[7], &text);
     v8[12].mNext = (UFG::allocator::free_link *)v6;
     LODWORD(v8[3].mNext) = 7;

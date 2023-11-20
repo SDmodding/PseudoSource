@@ -14,12 +14,12 @@ void __fastcall Scaleform::GFx::ImageFileInfoKeyData::ImageFileInfoKeyData(Scale
   v6 = pfileOpener;
   v7 = pfileInfo;
   v8 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::ImageFileInfoKeyData,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ImageFileInfoKeyData::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::ImageFileInfoKeyData,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ImageFileInfoKeyData::`vftable;
   this->pFileOpener.pObject = 0i64;
   this->pImageCreator.pObject = 0i64;
   this->pFileInfo.pObject = 0i64;
@@ -61,7 +61,7 @@ unsigned __int64 __fastcall Scaleform::GFx::ImageFileInfoKeyData::GetHashCode(Sc
 // RVA: 0x159C2D0
 __int64 Scaleform::GFx::_dynamic_initializer_for__ImageFileKeyInterface_Instance__()
 {
-  ImageFileKeyInterface_Instance.vfptr = (Scaleform::GFx::ResourceKey::KeyInterfaceVtbl *)&Scaleform::GFx::ImageFileKeyInterface::`vftable';
+  ImageFileKeyInterface_Instance.vfptr = (Scaleform::GFx::ResourceKey::KeyInterfaceVtbl *)&Scaleform::GFx::ImageFileKeyInterface::`vftable;
   return atexit(Scaleform::GFx::_dynamic_atexit_destructor_for__ImageFileKeyInterface_Instance__);
 }
 

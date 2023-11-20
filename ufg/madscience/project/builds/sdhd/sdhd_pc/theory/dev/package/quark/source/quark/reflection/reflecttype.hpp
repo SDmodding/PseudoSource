@@ -13,12 +13,12 @@ void __fastcall UFG::qReflectObjectType<UFG::PhysicsVolumeProperties,UFG::qRefle
   v2->mBaseNode.mNeighbours[0] = &v2->mBaseNode;
   v2->mBaseNode.mNeighbours[1] = &v2->mBaseNode;
   v2->mBaseNode.mUID = uid;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable;
   this->mTypeUID = -1i64;
   v3 = &this->mHandles;
   v3->mNode.mPrev = &v3->mNode;
   v3->mNode.mNext = &v3->mNode;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::PhysicsVolumeProperties,UFG::qReflectObject>::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::PhysicsVolumeProperties,UFG::qReflectObject>::`vftable;
   v2->mBaseNode.mUID = uid;
   this->mTypeUID = UFG::qStringHash64("UFG::PhysicsVolumeProperties", 0xFFFFFFFFFFFFFFFFui64);
 }
@@ -47,8 +47,8 @@ void __fastcall UFG::OnLoadClass<UFG::ConstraintDefFixed>(char *object_data)
   if ( object_data )
   {
     UFG::ConstraintDef::ConstraintDef((UFG::ConstraintDef *)object_data, 0);
-    *(_QWORD *)v1 = &UFG::qReflectObjectType<UFG::ConstraintDefFixed,UFG::ConstraintDef>::`vftable';
-    *(_QWORD *)v1 = &UFG::ConstraintDefFixed::`vftable';
+    *(_QWORD *)v1 = &UFG::qReflectObjectType<UFG::ConstraintDefFixed,UFG::ConstraintDef>::`vftable;
+    *(_QWORD *)v1 = &UFG::ConstraintDefFixed::`vftable;
   }
 }
 

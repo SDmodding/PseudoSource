@@ -142,8 +142,8 @@ Scaleform::StringDataPtr *__fastcall Scaleform::SwitchFormatter::GetResult(Scale
 // RVA: 0x94A5B0
 void __fastcall Scaleform::Formatter::~Formatter(Scaleform::Formatter *this)
 {
-  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::Formatter::`vftable';
-  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::FmtResource::`vftable';
+  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::Formatter::`vftable;
+  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::FmtResource::`vftable;
 }
 
 // File Line: 247
@@ -152,11 +152,11 @@ void __fastcall Scaleform::StrFormatter::StrFormatter(Scaleform::StrFormatter *t
 {
   unsigned __int64 v3; // rax
 
-  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::FmtResource::`vftable';
-  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::Formatter::`vftable';
+  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::FmtResource::`vftable;
+  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::Formatter::`vftable;
   this->pParentFmt = f;
   this->IsConverted = 0;
-  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::StrFormatter::`vftable';
+  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::StrFormatter::`vftable;
   this->Value.pStr = v;
   if ( v )
   {
@@ -176,11 +176,11 @@ void __fastcall Scaleform::StrFormatter::StrFormatter(Scaleform::StrFormatter *t
 // RVA: 0x944980
 void __fastcall Scaleform::StrFormatter::StrFormatter(Scaleform::StrFormatter *this, Scaleform::MsgFormat *f, Scaleform::StringDataPtr *v)
 {
-  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::FmtResource::`vftable';
-  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::Formatter::`vftable';
+  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::FmtResource::`vftable;
+  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::Formatter::`vftable;
   this->pParentFmt = f;
   this->IsConverted = 0;
-  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::StrFormatter::`vftable';
+  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::StrFormatter::`vftable;
   this->Value = *v;
 }
 
@@ -188,11 +188,11 @@ void __fastcall Scaleform::StrFormatter::StrFormatter(Scaleform::StrFormatter *t
 // RVA: 0x944910
 void __fastcall Scaleform::StrFormatter::StrFormatter(Scaleform::StrFormatter *this, Scaleform::MsgFormat *f, Scaleform::String *v)
 {
-  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::FmtResource::`vftable';
-  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::Formatter::`vftable';
+  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::FmtResource::`vftable;
+  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::Formatter::`vftable;
   this->pParentFmt = f;
   this->IsConverted = 0;
-  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::StrFormatter::`vftable';
+  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::StrFormatter::`vftable;
   this->Value.pStr = (const char *)((v->HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12);
   this->Value.Size = *(_QWORD *)(v->HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) & 0x7FFFFFFFFFFFFFFFi64;
 }
@@ -803,8 +803,8 @@ void __fastcall Scaleform::NumericBase::ULong2String(Scaleform::NumericBase *thi
 // RVA: 0x93E390
 void __fastcall Scaleform::LongFormatter::LongFormatter(Scaleform::LongFormatter *this, unsigned int v)
 {
-  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::FmtResource::`vftable';
-  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::Formatter::`vftable';
+  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::FmtResource::`vftable;
+  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::Formatter::`vftable;
   this->pParentFmt = 0i64;
   this->IsConverted = 0;
   *(_DWORD *)&this->32 &= 0xFFFFFC21;
@@ -814,9 +814,9 @@ void __fastcall Scaleform::LongFormatter::LongFormatter(Scaleform::LongFormatter
   *((_BYTE *)&this->32 + 5) = 0;
   *((_BYTE *)&this->32 + 6) = *((_BYTE *)&this->32 + 6) & 0xF1 | 1;
   this->ValueStr = 0i64;
-  this->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable';
-  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::LongFormatter::`vftable'{for `Scaleform::Formatter'};
-  this->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::LongFormatter::`vftable'{for `Scaleform::String::InitStruct'};
+  this->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable;
+  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::LongFormatter::`vftable{for `Scaleform::Formatter};
+  this->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::LongFormatter::`vftable{for `Scaleform::String::InitStruct};
   *((_DWORD *)this + 12) &= 0xFFFFFFEA;
   *((_DWORD *)this + 12) |= 0xAu;
   *((_BYTE *)this + 52) &= 0xFCu;
@@ -829,8 +829,8 @@ void __fastcall Scaleform::LongFormatter::LongFormatter(Scaleform::LongFormatter
 // RVA: 0x93E2E0
 void __fastcall Scaleform::LongFormatter::LongFormatter(Scaleform::LongFormatter *this, int v)
 {
-  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::FmtResource::`vftable';
-  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::Formatter::`vftable';
+  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::FmtResource::`vftable;
+  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::Formatter::`vftable;
   this->pParentFmt = 0i64;
   this->IsConverted = 0;
   *(_DWORD *)&this->32 &= 0xFFFFFC21;
@@ -840,9 +840,9 @@ void __fastcall Scaleform::LongFormatter::LongFormatter(Scaleform::LongFormatter
   *((_BYTE *)&this->32 + 5) = 0;
   *((_BYTE *)&this->32 + 6) = *((_BYTE *)&this->32 + 6) & 0xF1 | 1;
   this->ValueStr = 0i64;
-  this->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable';
-  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::LongFormatter::`vftable'{for `Scaleform::Formatter'};
-  this->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::LongFormatter::`vftable'{for `Scaleform::String::InitStruct'};
+  this->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable;
+  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::LongFormatter::`vftable{for `Scaleform::Formatter};
+  this->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::LongFormatter::`vftable{for `Scaleform::String::InitStruct};
   *((_DWORD *)this + 12) &= 0xFFFFFFEA;
   *((_DWORD *)this + 12) |= 0xAu;
   *((_BYTE *)this + 52) = *((_BYTE *)this + 52) & 0xFD | 1;
@@ -855,8 +855,8 @@ void __fastcall Scaleform::LongFormatter::LongFormatter(Scaleform::LongFormatter
 // RVA: 0x93E430
 void __fastcall Scaleform::LongFormatter::LongFormatter(Scaleform::LongFormatter *this, unsigned __int64 v)
 {
-  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::FmtResource::`vftable';
-  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::Formatter::`vftable';
+  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::FmtResource::`vftable;
+  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::Formatter::`vftable;
   this->pParentFmt = 0i64;
   this->IsConverted = 0;
   *(_DWORD *)&this->32 &= 0xFFFFFC21;
@@ -866,9 +866,9 @@ void __fastcall Scaleform::LongFormatter::LongFormatter(Scaleform::LongFormatter
   *((_BYTE *)&this->32 + 5) = 0;
   *((_BYTE *)&this->32 + 6) = *((_BYTE *)&this->32 + 6) & 0xF1 | 1;
   this->ValueStr = 0i64;
-  this->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable';
-  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::LongFormatter::`vftable'{for `Scaleform::Formatter'};
-  this->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::LongFormatter::`vftable'{for `Scaleform::String::InitStruct'};
+  this->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable;
+  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::LongFormatter::`vftable{for `Scaleform::Formatter};
+  this->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::LongFormatter::`vftable{for `Scaleform::String::InitStruct};
   *((_DWORD *)this + 12) &= 0xFFFFFFEA;
   *((_DWORD *)this + 12) |= 0xAu;
   *((_BYTE *)this + 52) &= 0xFEu;
@@ -882,8 +882,8 @@ void __fastcall Scaleform::LongFormatter::LongFormatter(Scaleform::LongFormatter
 // RVA: 0x93E190
 void __fastcall Scaleform::LongFormatter::LongFormatter(Scaleform::LongFormatter *this, Scaleform::MsgFormat *f, int v)
 {
-  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::FmtResource::`vftable';
-  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::Formatter::`vftable';
+  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::FmtResource::`vftable;
+  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::Formatter::`vftable;
   this->pParentFmt = f;
   this->IsConverted = 0;
   *(_DWORD *)&this->32 &= 0xFFFFFC21;
@@ -893,9 +893,9 @@ void __fastcall Scaleform::LongFormatter::LongFormatter(Scaleform::LongFormatter
   *((_BYTE *)&this->32 + 5) = 0;
   *((_BYTE *)&this->32 + 6) = *((_BYTE *)&this->32 + 6) & 0xF1 | 1;
   this->ValueStr = 0i64;
-  this->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable';
-  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::LongFormatter::`vftable'{for `Scaleform::Formatter'};
-  this->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::LongFormatter::`vftable'{for `Scaleform::String::InitStruct'};
+  this->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable;
+  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::LongFormatter::`vftable{for `Scaleform::Formatter};
+  this->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::LongFormatter::`vftable{for `Scaleform::String::InitStruct};
   *((_DWORD *)this + 12) &= 0xFFFFFFEA;
   *((_DWORD *)this + 12) |= 0xAu;
   *((_BYTE *)this + 52) = *((_BYTE *)this + 52) & 0xFD | 1;
@@ -908,8 +908,8 @@ void __fastcall Scaleform::LongFormatter::LongFormatter(Scaleform::LongFormatter
 // RVA: 0x93E240
 void __fastcall Scaleform::LongFormatter::LongFormatter(Scaleform::LongFormatter *this, Scaleform::MsgFormat *f, unsigned int v)
 {
-  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::FmtResource::`vftable';
-  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::Formatter::`vftable';
+  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::FmtResource::`vftable;
+  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::Formatter::`vftable;
   this->pParentFmt = f;
   this->IsConverted = 0;
   *(_DWORD *)&this->32 &= 0xFFFFFC21;
@@ -919,9 +919,9 @@ void __fastcall Scaleform::LongFormatter::LongFormatter(Scaleform::LongFormatter
   *((_BYTE *)&this->32 + 5) = 0;
   *((_BYTE *)&this->32 + 6) = *((_BYTE *)&this->32 + 6) & 0xF1 | 1;
   this->ValueStr = 0i64;
-  this->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable';
-  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::LongFormatter::`vftable'{for `Scaleform::Formatter'};
-  this->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::LongFormatter::`vftable'{for `Scaleform::String::InitStruct'};
+  this->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable;
+  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::LongFormatter::`vftable{for `Scaleform::Formatter};
+  this->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::LongFormatter::`vftable{for `Scaleform::String::InitStruct};
   *((_DWORD *)this + 12) &= 0xFFFFFFEA;
   *((_DWORD *)this + 12) |= 0xAu;
   *((_BYTE *)this + 52) &= 0xFCu;
@@ -1127,11 +1127,11 @@ LABEL_41:
         {
           v25 = v3->Value;
           v26 = v3->pParentFmt;
-          v6->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::FmtResource::`vftable';
-          v6->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::Formatter::`vftable';
+          v6->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::FmtResource::`vftable;
+          v6->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::Formatter::`vftable;
           v6->pParentFmt = v26;
           v6->IsConverted = 0;
-          v6->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::SwitchFormatter::`vftable';
+          v6->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::SwitchFormatter::`vftable;
           LODWORD(v6[1].vfptr) = v25;
           v32 = &v6[1].pParentFmt;
           v6[1].pParentFmt = 0i64;
@@ -1402,8 +1402,8 @@ void __fastcall Scaleform::LongFormatter::AppendSignCharLeft(Scaleform::LongForm
 // RVA: 0x93B3B0
 void __fastcall Scaleform::DoubleFormatter::DoubleFormatter(Scaleform::DoubleFormatter *this, long double v)
 {
-  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::FmtResource::`vftable';
-  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::Formatter::`vftable';
+  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::FmtResource::`vftable;
+  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::Formatter::`vftable;
   this->pParentFmt = 0i64;
   this->IsConverted = 0;
   *(_DWORD *)&this->32 &= 0xFFFFFC21;
@@ -1413,9 +1413,9 @@ void __fastcall Scaleform::DoubleFormatter::DoubleFormatter(Scaleform::DoubleFor
   *((_BYTE *)&this->32 + 5) = 0;
   *((_BYTE *)&this->32 + 6) = *((_BYTE *)&this->32 + 6) & 0xF1 | 1;
   this->ValueStr = 0i64;
-  this->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable';
-  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::DoubleFormatter::`vftable'{for `Scaleform::Formatter'};
-  this->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::DoubleFormatter::`vftable'{for `Scaleform::String::InitStruct'};
+  this->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable;
+  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::DoubleFormatter::`vftable{for `Scaleform::Formatter};
+  this->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::DoubleFormatter::`vftable{for `Scaleform::String::InitStruct};
   this->Type = 0;
   this->Value = v;
   this->Len = 0i64;
@@ -1429,8 +1429,8 @@ void __fastcall Scaleform::DoubleFormatter::DoubleFormatter(Scaleform::DoubleFor
 // RVA: 0x93B310
 void __fastcall Scaleform::DoubleFormatter::DoubleFormatter(Scaleform::DoubleFormatter *this, Scaleform::MsgFormat *f, long double v)
 {
-  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::FmtResource::`vftable';
-  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::Formatter::`vftable';
+  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::FmtResource::`vftable;
+  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::Formatter::`vftable;
   this->pParentFmt = f;
   this->IsConverted = 0;
   *(_DWORD *)&this->32 &= 0xFFFFFC21;
@@ -1440,9 +1440,9 @@ void __fastcall Scaleform::DoubleFormatter::DoubleFormatter(Scaleform::DoubleFor
   *((_BYTE *)&this->32 + 5) = 0;
   *((_BYTE *)&this->32 + 6) = *((_BYTE *)&this->32 + 6) & 0xF1 | 1;
   this->ValueStr = 0i64;
-  this->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable';
-  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::DoubleFormatter::`vftable'{for `Scaleform::Formatter'};
-  this->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::DoubleFormatter::`vftable'{for `Scaleform::String::InitStruct'};
+  this->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable;
+  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::DoubleFormatter::`vftable{for `Scaleform::Formatter};
+  this->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::DoubleFormatter::`vftable{for `Scaleform::String::InitStruct};
   this->Type = 0;
   this->Value = v;
   this->Len = 0i64;
@@ -1680,11 +1680,11 @@ LABEL_45:
           else
             v26 = v25 + 0.5;
           v27 = v3->pParentFmt;
-          v5->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::FmtResource::`vftable';
-          v5->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::Formatter::`vftable';
+          v5->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::FmtResource::`vftable;
+          v5->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::Formatter::`vftable;
           v5->pParentFmt = v27;
           v5->IsConverted = 0;
-          v5->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::SwitchFormatter::`vftable';
+          v5->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::SwitchFormatter::`vftable;
           LODWORD(v5[1].vfptr) = (signed int)v26;
           v46 = &v5[1].pParentFmt;
           v30 = &v5[1].pParentFmt;
@@ -1878,9 +1878,9 @@ void __fastcall Scaleform::DoubleFormatter::InitString(Scaleform::LongFormatter 
 // RVA: 0x94C860
 void __fastcall Scaleform::ResourceFormatter::~ResourceFormatter(Scaleform::ResourceFormatter *this)
 {
-  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::ResourceFormatter::`vftable';
-  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::Formatter::`vftable';
-  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::FmtResource::`vftable';
+  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::ResourceFormatter::`vftable;
+  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::Formatter::`vftable;
+  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::FmtResource::`vftable;
 }
 
 // File Line: 1471
@@ -2016,8 +2016,8 @@ void __fastcall Scaleform::MsgFormat::MsgFormat(Scaleform::MsgFormat *this, Scal
   char *v2; // rax
   Scaleform::ArrayPOD<Scaleform::MsgFormat::fmt_record,2,Scaleform::ArrayDefaultPolicy> *v3; // [rsp+30h] [rbp+18h]
 
-  this->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable';
-  this->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::MsgFormat::`vftable';
+  this->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable;
+  this->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::MsgFormat::`vftable;
   *(_WORD *)&this->EscapeChar = 37;
   *(_DWORD *)&this->NonPosParamNum = -65536;
   this->StrSize = 0i64;
@@ -2048,7 +2048,7 @@ void __fastcall Scaleform::MsgFormat::~MsgFormat(Scaleform::MsgFormat *this)
   void (__fastcall ***v8)(void *, _QWORD); // rbx
 
   v1 = this;
-  this->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::MsgFormat::`vftable';
+  this->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::MsgFormat::`vftable;
   v2 = &this->Data;
   v3 = this->Data.Size;
   v4 = 0i64;
@@ -2085,7 +2085,7 @@ void __fastcall Scaleform::MsgFormat::~MsgFormat(Scaleform::MsgFormat *this)
   }
   if ( v2->DynamicArray.Data.Data )
     ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
-  v1->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable';
+  v1->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable;
 }
 
 // File Line: 1564
@@ -2526,7 +2526,7 @@ void __fastcall Scaleform::MsgFormat::BindNonPos(Scaleform::MsgFormat *this)
   LOBYTE(v11) = 1;
   v13 = this;
   v14 = 0;
-  v12 = &Scaleform::ResourceFormatter::`vftable';
+  v12 = &Scaleform::ResourceFormatter::`vftable;
   v15 = 0i64;
   v16 = v11;
   v17 = 0i64;

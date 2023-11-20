@@ -7,7 +7,7 @@ void __fastcall Illusion::MaterialModifierParams<10>::MaterialModifierParams<10>
 
   v1 = this;
   v2 = this->mOverrides;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     this->mOverrides,
     0x68ui64,
     10,

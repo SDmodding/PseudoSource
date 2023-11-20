@@ -439,7 +439,7 @@ LABEL_43:
                   v24 = Scaleform::Render::Text::SGMLElementDesc::FindElem<wchar_t>(
                           v23,
                           v22,
-                          (unsigned __int64)`Scaleform::Render::Text::StyledText::ParseHtmlImpl<wchar_t>'::`2'::elementsTable,
+                          (unsigned __int64)`Scaleform::Render::Text::StyledText::ParseHtmlImpl<wchar_t>::`2::elementsTable,
                           (Scaleform::Render::Text::SGMLElementDesc *)0xD,
                           (unsigned __int64)pdefTextFmt);
                   v25 = v24;
@@ -615,7 +615,7 @@ LABEL_293:
     v42 = Scaleform::Render::Text::SGMLElementDesc::FindElem<wchar_t>(
             v144,
             lookForElemName,
-            (unsigned __int64)`Scaleform::Render::Text::StyledText::ParseHtmlImpl<wchar_t>'::`2'::elementsTable,
+            (unsigned __int64)`Scaleform::Render::Text::StyledText::ParseHtmlImpl<wchar_t>::`2::elementsTable,
             (Scaleform::Render::Text::SGMLElementDesc *)0xD,
             (unsigned __int64)pdefTextFmt);
     v10 = (__int64)v42;
@@ -690,7 +690,7 @@ LABEL_293:
             v48 = Scaleform::Render::Text::SGMLElementDesc::FindElem<wchar_t>(
                     (Scaleform::Render::Text::SGMLElementDesc *)ppattrName,
                     (const wchar_t *)pattrNameSz,
-                    (unsigned __int64)`Scaleform::Render::Text::StyledText::ParseHtmlImpl<wchar_t>'::`2'::attributesTable,
+                    (unsigned __int64)`Scaleform::Render::Text::StyledText::ParseHtmlImpl<wchar_t>::`2::attributesTable,
                     (Scaleform::Render::Text::SGMLElementDesc *)0x1B,
                     (unsigned __int64)pdefTextFmt);
             if ( v48
@@ -705,7 +705,7 @@ LABEL_293:
                   v50 = Scaleform::Render::Text::SGMLElementDesc::FindElem<wchar_t>(
                           (Scaleform::Render::Text::SGMLElementDesc *)ppattrValue,
                           (const wchar_t *)pattrValueSz,
-                          (unsigned __int64)`Scaleform::Render::Text::StyledText::ParseHtmlImpl<wchar_t>'::`2'::attributesTable,
+                          (unsigned __int64)`Scaleform::Render::Text::StyledText::ParseHtmlImpl<wchar_t>::`2::attributesTable,
                           (Scaleform::Render::Text::SGMLElementDesc *)0x1B,
                           (unsigned __int64)pdefTextFmt);
                   if ( v50 )
@@ -932,7 +932,7 @@ LABEL_287:
           v72 = Scaleform::Render::Text::SGMLElementDesc::FindElem<wchar_t>(
                   v174,
                   v163,
-                  (unsigned __int64)`Scaleform::Render::Text::StyledText::ParseHtmlImpl<wchar_t>'::`2'::attributesTable,
+                  (unsigned __int64)`Scaleform::Render::Text::StyledText::ParseHtmlImpl<wchar_t>::`2::attributesTable,
                   (Scaleform::Render::Text::SGMLElementDesc *)0x1B,
                   (unsigned __int64)pdefTextFmt);
           if ( v72
@@ -961,7 +961,7 @@ LABEL_287:
             v87 = Scaleform::Render::Text::SGMLElementDesc::FindElem<wchar_t>(
                     v166,
                     v164,
-                    (unsigned __int64)`Scaleform::Render::Text::StyledText::ParseHtmlImpl<wchar_t>'::`2'::attributesTable,
+                    (unsigned __int64)`Scaleform::Render::Text::StyledText::ParseHtmlImpl<wchar_t>::`2::attributesTable,
                     (Scaleform::Render::Text::SGMLElementDesc *)0x1B,
                     (unsigned __int64)pdefTextFmt);
             if ( v87
@@ -1085,7 +1085,7 @@ LABEL_195:
                 v81 = Scaleform::Render::Text::SGMLElementDesc::FindElem<wchar_t>(
                         v170,
                         v173,
-                        (unsigned __int64)`Scaleform::Render::Text::StyledText::ParseHtmlImpl<wchar_t>'::`2'::attributesTable,
+                        (unsigned __int64)`Scaleform::Render::Text::StyledText::ParseHtmlImpl<wchar_t>::`2::attributesTable,
                         (Scaleform::Render::Text::SGMLElementDesc *)0x1B,
                         (unsigned __int64)pdefTextFmt);
                 if ( v81 )
@@ -1099,7 +1099,7 @@ LABEL_195:
                     v82 = Scaleform::Render::Text::SGMLElementDesc::FindElem<wchar_t>(
                             v186,
                             v182,
-                            (unsigned __int64)`Scaleform::Render::Text::StyledText::ParseHtmlImpl<wchar_t>'::`2'::attributesTable,
+                            (unsigned __int64)`Scaleform::Render::Text::StyledText::ParseHtmlImpl<wchar_t>::`2::attributesTable,
                             (Scaleform::Render::Text::SGMLElementDesc *)0x1B,
                             (unsigned __int64)pdefTextFmt);
                     if ( v82 )
@@ -1192,7 +1192,7 @@ LABEL_195:
             v88 = Scaleform::Render::Text::SGMLElementDesc::FindElem<wchar_t>(
                     v168,
                     v171,
-                    (unsigned __int64)`Scaleform::Render::Text::StyledText::ParseHtmlImpl<wchar_t>'::`2'::attributesTable,
+                    (unsigned __int64)`Scaleform::Render::Text::StyledText::ParseHtmlImpl<wchar_t>::`2::attributesTable,
                     (Scaleform::Render::Text::SGMLElementDesc *)0x1B,
                     (unsigned __int64)pdefTextFmt);
             if ( v88

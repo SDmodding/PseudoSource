@@ -17,7 +17,7 @@ Scaleform::GFx::AS3::CheckResult *__fastcall Scaleform::GFx::AS3::ArrayBase::OfC
 // RVA: 0x8A3230
 void __fastcall Scaleform::GFx::AS3::VectorBase<long>::ArrayFunc::~ArrayFunc(Scaleform::GFx::AS3::VectorBase<long>::ArrayFunc *this)
 {
-  this->vfptr = (Scaleform::GFx::AS3::VectorBase<long>::ArrayFuncVtbl *)&Scaleform::GFx::AS3::VectorBase<long>::ArrayFunc::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::VectorBase<long>::ArrayFuncVtbl *)&Scaleform::GFx::AS3::VectorBase<long>::ArrayFunc::`vftable;
 }
 
 // File Line: 250
@@ -566,7 +566,7 @@ void __fastcall Scaleform::GFx::AS3::VectorBase<unsigned long>::Map<Scaleform::G
           else
             Scaleform::GFx::AS3::Value::ReleaseInternal(&resulta);
         }
-        `eh vector destructor iterator'(
+        `eh vector destructor iterator(
           &ptr,
           0x20ui64,
           3,
@@ -581,7 +581,7 @@ void __fastcall Scaleform::GFx::AS3::VectorBase<unsigned long>::Map<Scaleform::G
         else
           Scaleform::GFx::AS3::Value::ReleaseInternal(&resulta);
       }
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         &ptr,
         0x20ui64,
         3,
@@ -801,7 +801,7 @@ void __fastcall Scaleform::GFx::AS3::VectorBase<Scaleform::Ptr<Scaleform::GFx::A
           else
             Scaleform::GFx::AS3::Value::ReleaseInternal((Scaleform::GFx::AS3::Value *)((char *)&_this + 8));
         }
-        `eh vector destructor iterator'(
+        `eh vector destructor iterator(
           &ptr,
           0x20ui64,
           3,
@@ -816,7 +816,7 @@ void __fastcall Scaleform::GFx::AS3::VectorBase<Scaleform::Ptr<Scaleform::GFx::A
         else
           Scaleform::GFx::AS3::Value::ReleaseInternal((Scaleform::GFx::AS3::Value *)((char *)&_this + 8));
       }
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         &ptr,
         0x20ui64,
         3,
@@ -1195,7 +1195,7 @@ LABEL_7:
       end = 0i64;
       *(_QWORD *)v93 = 0i64;
       v94.Data = v16;
-      v94.Size = (unsigned __int64)&Scaleform::GFx::AS3::VectorBase<double>::ValuePtrCollector::`vftable';
+      v94.Size = (unsigned __int64)&Scaleform::GFx::AS3::VectorBase<double>::ValuePtrCollector::`vftable;
       v94.Policy.Capacity = (unsigned __int64)&v96;
       v17 = v7->ValueA.Data.Size;
       v18 = 0;
@@ -1253,7 +1253,7 @@ LABEL_7:
             }
             v6->pObject = 0i64;
           }
-          v94.Size = (unsigned __int64)&Scaleform::GFx::AS3::VectorBase<double>::ArrayFunc::`vftable';
+          v94.Size = (unsigned __int64)&Scaleform::GFx::AS3::VectorBase<double>::ArrayFunc::`vftable;
           *(_QWORD *)&resulta[0].Result = &v96;
 LABEL_56:
           Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, *(void **)&v96.ID);
@@ -1269,7 +1269,7 @@ LABEL_27:
       if ( enda <= 0 )
       {
 LABEL_38:
-        v94.Size = (unsigned __int64)&Scaleform::GFx::AS3::VectorBase<double>::ArrayFunc::`vftable';
+        v94.Size = (unsigned __int64)&Scaleform::GFx::AS3::VectorBase<double>::ArrayFunc::`vftable;
         *(_QWORD *)&resulta[0].Result = &v96;
         v30 = *(void **)&v96.ID;
         goto LABEL_117;
@@ -1318,7 +1318,7 @@ LABEL_35:
       endb = 0i64;
       *(_QWORD *)v93 = 0i64;
       v94.Data = v31;
-      v94.Size = (unsigned __int64)&Scaleform::GFx::AS3::VectorBase<double>::Value2NumberCollector::`vftable';
+      v94.Size = (unsigned __int64)&Scaleform::GFx::AS3::VectorBase<double>::Value2NumberCollector::`vftable;
       v94.Policy.Capacity = (unsigned __int64)&v96;
       v32 = v7->ValueA.Data.Size;
       v33 = 0;
@@ -1370,7 +1370,7 @@ LABEL_35:
             }
             v6->pObject = 0i64;
           }
-          v94.Size = (unsigned __int64)&Scaleform::GFx::AS3::VectorBase<double>::ArrayFunc::`vftable';
+          v94.Size = (unsigned __int64)&Scaleform::GFx::AS3::VectorBase<double>::ArrayFunc::`vftable;
           *(_QWORD *)&resulta[0].Result = &v96;
           goto LABEL_56;
         }
@@ -1419,7 +1419,7 @@ LABEL_65:
         {
           v6 = v103;
 LABEL_69:
-          v94.Size = (unsigned __int64)&Scaleform::GFx::AS3::VectorBase<double>::ArrayFunc::`vftable';
+          v94.Size = (unsigned __int64)&Scaleform::GFx::AS3::VectorBase<double>::ArrayFunc::`vftable;
           *(_QWORD *)&resulta[0].Result = &v96;
           v30 = *(void **)&v96.ID;
 LABEL_117:
@@ -1554,7 +1554,7 @@ LABEL_142:
     v97 = 0i64;
     v98 = v31;
     v47 = v7->VMRef;
-    *(_QWORD *)&v100 = &Scaleform::GFx::AS3::VectorBase<double>::Value2StrCollector::`vftable';
+    *(_QWORD *)&v100 = &Scaleform::GFx::AS3::VectorBase<double>::Value2StrCollector::`vftable;
     *((_QWORD *)&v100 + 1) = v47;
     v101 = &v96;
     v48 = v7->ValueA.Data.Size;
@@ -1652,7 +1652,7 @@ LABEL_87:
           }
           v6->pObject = 0i64;
         }
-        *(_QWORD *)&v100 = &Scaleform::GFx::AS3::VectorBase<double>::ArrayFunc::`vftable';
+        *(_QWORD *)&v100 = &Scaleform::GFx::AS3::VectorBase<double>::ArrayFunc::`vftable;
         *(_QWORD *)&resulta[0].Result = &v96;
         Scaleform::ArrayDataBase<Scaleform::Pair<Scaleform::GFx::ASString,unsigned long>,Scaleform::AllocatorDH<Scaleform::Pair<Scaleform::GFx::ASString,unsigned long>,2>,Scaleform::ArrayDefaultPolicy>::~ArrayDataBase<Scaleform::Pair<Scaleform::GFx::ASString,unsigned long>,Scaleform::AllocatorDH<Scaleform::Pair<Scaleform::GFx::ASString,unsigned long>,2>,Scaleform::ArrayDefaultPolicy>((Scaleform::ArrayDataBase<Scaleform::Pair<Scaleform::GFx::ASString,unsigned long>,Scaleform::AllocatorDH<Scaleform::Pair<Scaleform::GFx::ASString,unsigned long>,2>,Scaleform::ArrayDefaultPolicy> *)&v96);
         goto LABEL_99;
@@ -1702,7 +1702,7 @@ LABEL_108:
       {
         v6 = v103;
 LABEL_112:
-        *(_QWORD *)&v100 = &Scaleform::GFx::AS3::VectorBase<double>::ArrayFunc::`vftable';
+        *(_QWORD *)&v100 = &Scaleform::GFx::AS3::VectorBase<double>::ArrayFunc::`vftable;
         v72 = v96.Message.pNode;
         v30 = *(void **)&v96.ID;
         v73 = 16i64 * (_QWORD)v96.Message.pNode + *(_QWORD *)&v96.ID - 16i64;

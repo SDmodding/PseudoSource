@@ -14,7 +14,7 @@ void __fastcall hkaiPathfindingUtil::FindPathInput::FindPathInput(hkaiPathfindin
 
   v2 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiPathfindingUtil::FindPathInput::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiPathfindingUtil::FindPathInput::`vftable;
   *(_QWORD *)&this->m_goalPoints.m_capacityAndFlags = -2147483648i64;
   this->m_goalPoints.m_data = 0i64;
   this->m_goalPoints.m_size = 0;
@@ -82,7 +82,7 @@ void __fastcall hkaiPathfindingUtil::FindPathInput::FindPathInput(hkaiPathfindin
 // RVA: 0xBBC820
 void __fastcall hkaiPathfindingUtil::FindPathInput::FindPathInput(hkaiPathfindingUtil::FindPathInput *this, hkFinishLoadedObjectFlag f)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiPathfindingUtil::FindPathInput::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiPathfindingUtil::FindPathInput::`vftable;
   this->m_searchBuffers.m_openSetBuffer = 0i64;
   this->m_searchBuffers.m_searchStateBuffer = 0i64;
   this->m_hierarchySearchBuffers.m_openSetBuffer = 0i64;
@@ -93,7 +93,7 @@ void __fastcall hkaiPathfindingUtil::FindPathInput::FindPathInput(hkaiPathfindin
 // RVA: 0xBBC870
 void __fastcall hkaiPathfindingUtil::FindPathOutput::FindPathOutput(hkaiPathfindingUtil::FindPathOutput *this, hkFinishLoadedObjectFlag f)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiPathfindingUtil::FindPathOutput::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiPathfindingUtil::FindPathOutput::`vftable;
 }
 
 // File Line: 84
@@ -1514,9 +1514,9 @@ void __fastcall hkaiPathfindingUtil::_findNearestFeature(hkaiStreamingCollection
     v18.m128_f32[0] = v19;
     v65 = _mm_shuffle_ps(v18, v18, 0);
     v48 = 0x1FFFF;
-    v47 = &FaceCallbackCostModifierWrapper::`vftable';
+    v47 = &FaceCallbackCostModifierWrapper::`vftable;
     v49 = 1;
-    v58 = &FaceCallbackEdgeFilterWrapper::`vftable';
+    v58 = &FaceCallbackEdgeFilterWrapper::`vftable;
     v50 = v21;
     v51 = v6;
     v52 = 0i64;
@@ -1636,7 +1636,7 @@ LABEL_35:
       *(_DWORD *)(v42 - 8) = v41;
       v39[1] = v42;
     }
-    v58 = &hkBaseObject::`vftable';
+    v58 = &hkBaseObject::`vftable;
     v53 = 0;
     if ( v54 >= 0 )
       hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
@@ -1645,7 +1645,7 @@ LABEL_35:
         4 * v54);
     v52 = 0i64;
     v54 = 2147483648;
-    v47 = &hkBaseObject::`vftable';
+    v47 = &hkBaseObject::`vftable;
     v45.m_size = 0;
     if ( v45.m_capacityAndFlags >= 0 )
       hkContainerTempAllocator::s_alloc.vfptr->bufFree(

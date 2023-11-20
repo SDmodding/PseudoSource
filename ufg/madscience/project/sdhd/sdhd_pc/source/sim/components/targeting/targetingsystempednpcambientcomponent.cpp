@@ -163,8 +163,8 @@ UFG::SimComponent *__fastcall UFG::TargetingSystemPedNPCAmbientComponent::Proper
       &UFG::TargetingSystemPedNPCAmbientComponent::ms_TargetingMap,
       v1->m_NameUID,
       v7);
-    v6->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TargetingSystemPedNPCAmbientComponent::`vftable'{for `UFG::SimComponent'};
-    v6[1].vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TargetingSystemPedNPCAmbientComponent::`vftable'{for `UFG::UpdateInterface'};
+    v6->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TargetingSystemPedNPCAmbientComponent::`vftable{for `UFG::SimComponent};
+    v6[1].vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TargetingSystemPedNPCAmbientComponent::`vftable{for `UFG::UpdateInterface};
     UFG::SimComponent::AddType(
       v6,
       UFG::TargetingSystemPedNPCAmbientComponent::_TargetingSystemPedNPCAmbientComponentTypeUID,

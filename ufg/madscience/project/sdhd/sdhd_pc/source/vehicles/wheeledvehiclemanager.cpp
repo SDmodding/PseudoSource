@@ -90,19 +90,19 @@ void __fastcall UFG::WheeledVehicleManager::WheeledVehicleManager(UFG::WheeledVe
   this->mCurrentTrafficRegion.m_pPointer = 0i64;
   this->m_TrafficSetOverride = UFG::gNullQSymbol;
   this->m_SimObject = 0i64;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     this->mCarsWithDeletionPending,
     0x18ui64,
     100,
     (void (__fastcall *)(void *))UFG::qSafePointer<UFG::SimObject,UFG::SimObjectCharacter>::qSafePointer<UFG::SimObject,UFG::SimObjectCharacter>);
   *(_QWORD *)&v1->mTotalNumParkedCarsCreated = 0i64;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v1->mParkedCar,
     0x40ui64,
     100,
     (void (__fastcall *)(void *))UFG::qSafePointerWithCallbacks<UFG::SimObject,UFG::SimObjectVehicle>::qSafePointerWithCallbacks<UFG::SimObject,UFG::SimObjectVehicle>);
   *(_QWORD *)&v1->mTotalNumTrafficCarsCreated = 0i64;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v1->mTrafficCar,
     0x40ui64,
     100,
@@ -2786,7 +2786,7 @@ void __fastcall UFG::WheeledVehicleManager::InitLevelData(UFG::WheeledVehicleMan
       v3,
       (ASymbol *)&UFG::WheeledVehicleManagerScriptInterface::mInstanceNameSymbol,
       UFG::WheeledVehicleManagerScriptInterface::mClass);
-    v4->vfptr = (SSObjectBaseVtbl *)&UFG::WheeledVehicleManagerScriptInterface::`vftable';
+    v4->vfptr = (SSObjectBaseVtbl *)&UFG::WheeledVehicleManagerScriptInterface::`vftable;
     v4->m_WheeledVehicleManager = v1;
     UFG::WheeledVehicleManagerScriptInterface::mScriptInterfaceInstance = v4;
   }

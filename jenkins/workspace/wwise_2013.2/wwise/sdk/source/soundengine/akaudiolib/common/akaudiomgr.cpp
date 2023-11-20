@@ -458,7 +458,7 @@ LABEL_90:
                   v12 = v11;
                   if ( v11 )
                   {
-                    v11->vfptr = (ITransitionableVtbl *)&AkPendingAction::`vftable';
+                    v11->vfptr = (ITransitionableVtbl *)&AkPendingAction::`vftable;
                     v11->UserParam.m_PlayingID = 0;
                     v11->UserParam.m_CustomParam.customParam = 0i64;
                     v11->UserParam.m_CustomParam.ui32Reserved = 0;
@@ -476,7 +476,7 @@ LABEL_90:
                 v12 = v13;
                 if ( v13 )
                 {
-                  v13->vfptr = (ITransitionableVtbl *)&AkPendingAction::`vftable';
+                  v13->vfptr = (ITransitionableVtbl *)&AkPendingAction::`vftable;
                   v13->UserParam.m_PlayingID = 0;
                   v13->UserParam.m_CustomParam.customParam = 0i64;
                   v13->UserParam.m_CustomParam.ui32Reserved = 0;
@@ -790,7 +790,7 @@ LABEL_149:
             if ( v78 == -1i64 )
             {
               v85 = v79;
-              v111.vfptr = (ITransitionableVtbl *)&AkPendingAction::`vftable';
+              v111.vfptr = (ITransitionableVtbl *)&AkPendingAction::`vftable;
               v86 = v79->vfptr;
               v111.UserParam.m_PlayingID = 0;
               v111.UserParam.m_CustomParam.customParam = 0i64;
@@ -814,7 +814,7 @@ LABEL_149:
                 v111.UserParam.m_CustomParam.pExternalSrcs = 0i64;
                 v111.TargetPlayingID = 0;
                 v111.pGameObj = v81;
-                v111.vfptr = (ITransitionableVtbl *)&AkPendingAction::`vftable';
+                v111.vfptr = (ITransitionableVtbl *)&AkPendingAction::`vftable;
                 *((_DWORD *)v81 + 30) ^= (*((_DWORD *)v81 + 30) ^ (*((_DWORD *)v81 + 30) + 1)) & 0x3FFFFFFF;
                 v80->vfptr[2].__vecDelDtor((CAkIndexable *)&v80->vfptr, (unsigned int)&v111);
                 v83 = *((_DWORD *)v82 + 30) ^ (*((_DWORD *)v82 + 30) ^ (*((_DWORD *)v82 + 30) - 1)) & 0x3FFFFFFF;
@@ -900,19 +900,19 @@ LABEL_86:
             v103 = v6[12];
             if ( v102 <= 0.0 )
             {
-              if ( (float)(v102 * 0.050000001) >= -37.0 && !(`AkMath::FastPow10'::`4'::`local static guard' & 1) )
+              if ( (float)(v102 * 0.050000001) >= -37.0 && !(`AkMath::FastPow10::`4::`local static guard & 1) )
               {
-                `AkMath::FastPow10'::`4'::`local static guard' |= 1u;
-                `AkMath::FastPow10'::`4'::SCALE = 1272224376;
+                `AkMath::FastPow10::`4::`local static guard |= 1u;
+                `AkMath::FastPow10::`4::SCALE = 1272224376;
               }
             }
             else
             {
               v104 = v102 * -0.050000001;
-              if ( v104 >= -37.0 && !(`AkMath::FastPow10'::`4'::`local static guard' & 1) )
+              if ( v104 >= -37.0 && !(`AkMath::FastPow10::`4::`local static guard & 1) )
               {
-                `AkMath::FastPow10'::`4'::`local static guard' |= 1u;
-                `AkMath::FastPow10'::`4'::SCALE = 1272224376;
+                `AkMath::FastPow10::`4::`local static guard |= 1u;
+                `AkMath::FastPow10::`4::SCALE = 1272224376;
               }
             }
             v105 = 0;
@@ -3683,7 +3683,7 @@ void __fastcall CAkAudioMgr::Stop(CAkAudioMgr *this)
 // RVA: 0xA47770
 void __fastcall AkPendingAction::AkPendingAction(AkPendingAction *this, CAkRegisteredObj *in_pGameObj)
 {
-  this->vfptr = (ITransitionableVtbl *)&AkPendingAction::`vftable';
+  this->vfptr = (ITransitionableVtbl *)&AkPendingAction::`vftable;
   this->UserParam.m_PlayingID = 0;
   this->UserParam.m_CustomParam.customParam = 0i64;
   this->UserParam.m_CustomParam.ui32Reserved = 0;
@@ -3706,7 +3706,7 @@ void __fastcall AkPendingAction::~AkPendingAction(AkPendingAction *this)
 
   v1 = this->pGameObj;
   v2 = this;
-  this->vfptr = (ITransitionableVtbl *)&AkPendingAction::`vftable';
+  this->vfptr = (ITransitionableVtbl *)&AkPendingAction::`vftable;
   if ( v1 )
   {
     v3 = *((_DWORD *)v1 + 30) ^ (*((_DWORD *)v1 + 30) ^ (*((_DWORD *)v1 + 30) - 1)) & 0x3FFFFFFF;

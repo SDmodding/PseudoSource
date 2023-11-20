@@ -12,26 +12,26 @@ void __fastcall Render::GeoInstance::Init(Render::GeoInstance *this, unsigned in
   UFG::qResourceWarehouse *v9; // rax
 
   this->mSettingsId = settingsId;
-  v2 = `UFG::qGetResourceInventory<Render::GeoSettings>'::`2'::result;
+  v2 = `UFG::qGetResourceInventory<Render::GeoSettings>::`2::result;
   v3 = settingsId;
   v4 = this;
-  if ( !`UFG::qGetResourceInventory<Render::GeoSettings>'::`2'::result )
+  if ( !`UFG::qGetResourceInventory<Render::GeoSettings>::`2::result )
   {
     v5 = UFG::qResourceWarehouse::Instance();
     v2 = UFG::qResourceWarehouse::GetInventory(v5, 0xF1734D8E);
-    `UFG::qGetResourceInventory<Render::GeoSettings>'::`2'::result = v2;
+    `UFG::qGetResourceInventory<Render::GeoSettings>::`2::result = v2;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v4->mSettingsHandle.mPrev, 0xF1734D8E, v3, v2);
   v6 = v4->mSettingsHandle.mData;
   if ( v6 )
   {
     v7 = *(_DWORD *)&v6[2].mDebugName[20];
-    v8 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+    v8 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
     {
       v9 = UFG::qResourceWarehouse::Instance();
       v8 = UFG::qResourceWarehouse::GetInventory(v9, 0xA2ADCD77);
-      `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v8;
+      `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v8;
     }
     UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v4->mModelHandle.mPrev, 0xA2ADCD77, v7, v8);
   }

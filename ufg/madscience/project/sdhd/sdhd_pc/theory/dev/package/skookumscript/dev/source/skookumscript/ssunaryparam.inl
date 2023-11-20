@@ -11,8 +11,8 @@ void __fastcall SSUnaryParam::SSUnaryParam(SSUnaryParam *this, SSUnaryParam *upa
   v2 = uparam_p;
   v3 = this;
   this->i_name.i_uid = uparam_p->i_name.i_uid;
-  this->vfptr = (SSParameterBaseVtbl *)&SSParameterBase::`vftable';
-  this->vfptr = (SSParameterBaseVtbl *)&SSUnaryParam::`vftable';
+  this->vfptr = (SSParameterBaseVtbl *)&SSParameterBase::`vftable;
+  this->vfptr = (SSParameterBaseVtbl *)&SSUnaryParam::`vftable;
   this->i_type_p.i_obj_p = uparam_p->i_type_p.i_obj_p;
   v4 = uparam_p->i_type_p.i_obj_p;
   if ( v4 )

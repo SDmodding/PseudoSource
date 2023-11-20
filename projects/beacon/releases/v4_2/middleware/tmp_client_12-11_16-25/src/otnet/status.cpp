@@ -14,7 +14,7 @@ void __fastcall OSuite::OSError::OSError(OSuite::OSError *this, int thatErrorId,
   v5 = thatErrorMessage;
   v6 = this;
   this->errorId = thatErrorId;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::OSError::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::OSError::`vftable;
   if ( thatErrorMessage )
   {
     v7 = strlen(thatErrorMessage);
@@ -40,7 +40,7 @@ void __fastcall OSuite::OSError::~OSError(OSuite::OSError *this)
 
   v1 = this->pErrorMessage;
   v2 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::OSError::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::OSError::`vftable;
   OSuite::ZObject::free((OSuite::ZObject *)&this->vfptr, v1);
   OSuite::ZObject::free((OSuite::ZObject *)&v2->vfptr, v2->pErrorDetails);
 }
@@ -97,8 +97,8 @@ void __fastcall OSuite::SCallbackData::SCallbackData(OSuite::SCallbackData *this
   OSuite::ZUrl::ZUrl(&this->URL);
   OSuite::ZRedBlackTreeBase::ZElementBase::ZElementBase((OSuite::ZObject *)&v1->OSErrors.vfptr, v2);
   v1->OSErrors.m_pList = 0i64;
-  v1->OSErrors.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::OSError>::`vftable'{for `OSuite::ZListBase'};
-  v1->OSErrors.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::OSError>::`vftable'{for `OSuite::IHashable'};
+  v1->OSErrors.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::OSError>::`vftable{for `OSuite::ZListBase};
+  v1->OSErrors.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::OSError>::`vftable{for `OSuite::IHashable};
   v3 = OSuite::TList<OSuite::OSError>::AllocList(&v1->OSErrors, 0i64, 0x10ui64);
   v1->OSErrors.m_nTop = 0i64;
   v1->OSErrors.m_nSize = 16i64;
@@ -115,8 +115,8 @@ void __fastcall OSuite::SCallbackData::~SCallbackData(OSuite::SCallbackData *thi
   v1 = this;
   OSuite::SCallbackData::Clear(this);
   v2 = v1->OSErrors.m_pList;
-  v1->OSErrors.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::OSError>::`vftable'{for `OSuite::ZListBase'};
-  v1->OSErrors.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::OSError>::`vftable'{for `OSuite::IHashable'};
+  v1->OSErrors.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::OSError>::`vftable{for `OSuite::ZListBase};
+  v1->OSErrors.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::OSError>::`vftable{for `OSuite::IHashable};
   if ( v2 )
   {
     if ( LODWORD(v2[-1].pErrorDetails) )

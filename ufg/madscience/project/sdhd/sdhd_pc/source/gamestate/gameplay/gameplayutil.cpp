@@ -124,7 +124,7 @@ char __fastcall UFG::GameplayUtil::ChooseSpawnTarget(UFG::qSymbol *targetNameOut
   v26->mUID = (unsigned int)v8[(unsigned int)UFG::qRandom(v9, &UFG::qDefaultSeed)];
   if ( v8 )
   {
-    `eh vector destructor iterator'(v8, 4ui64, v8[-1].mUID, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v8, 4ui64, v8[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](&v8[-1]);
   }
   v23.p = 0i64;

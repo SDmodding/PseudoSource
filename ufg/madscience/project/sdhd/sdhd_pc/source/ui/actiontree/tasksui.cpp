@@ -143,7 +143,7 @@ void __fastcall UIScreenTask::Begin(UIScreenTask *this, ActionContext *pContext)
       {
         LODWORD(v15->mNext) = 3;
         v16 = (UFG::qString *)&v15[1];
-        `eh vector constructor iterator'(&v15[1], 0x28ui64, 3, (void (__fastcall *)(void *))UFG::qString::qString);
+        `eh vector constructor iterator(&v15[1], 0x28ui64, 3, (void (__fastcall *)(void *))UFG::qString::qString);
       }
       else
       {
@@ -160,7 +160,7 @@ void __fastcall UIScreenTask::Begin(UIScreenTask *this, ActionContext *pContext)
       {
         LODWORD(v17->mNext) = 3;
         v18 = (signed __int64)&v17[1];
-        `eh vector constructor iterator'(
+        `eh vector constructor iterator(
           &v17[1],
           0x30ui64,
           3,

@@ -7,7 +7,7 @@ void __fastcall UFG::UIHKScreenPCBenchmark::UIHKScreenPCBenchmark(UFG::UIHKScree
   v1 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -18,7 +18,7 @@ void __fastcall UFG::UIHKScreenPCBenchmark::UIHKScreenPCBenchmark(UFG::UIHKScree
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenPCBenchmark::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenPCBenchmark::`vftable;
 }
 
 // File Line: 58
@@ -146,7 +146,7 @@ void __usercall UFG::UIHKScreenPCBenchmark::init(UFG::UIHKScreenPCBenchmark *thi
     UFG::qString::FormatEx(&v105, v6, result.averageFPS);
     UFG::qString::FormatEx(&v104, v6, result.maxFPS);
     UFG::qString::FormatEx(&v106, v6, result.minFPS);
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 19, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 19, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     v7 = v105.mData;
     if ( (v28 >> 6) & 1 )
     {
@@ -345,7 +345,7 @@ void __usercall UFG::UIHKScreenPCBenchmark::init(UFG::UIHKScreenPCBenchmark *thi
     UFG::qString::~qString(&v107);
     UFG::qString::~qString(&v109);
     UFG::qString::~qString(&v103);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 19, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 19, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     UFG::qString::~qString(&v106);
     UFG::qString::~qString(&v104);
     UFG::qString::~qString(&v105);

@@ -16,7 +16,7 @@ void __fastcall Scaleform::GFx::MemoryBufferZlibImage::MemoryBufferZlibImage(Sca
     file,
     filePos,
     length);
-  v12->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::MemoryBufferZlibImage::`vftable';
+  v12->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::MemoryBufferZlibImage::`vftable;
   if ( v11 )
     Scaleform::Render::RenderBuffer::AddRef(v11);
   v12->Zlib.pObject = (Scaleform::GFx::ZlibSupportBase *)v11;

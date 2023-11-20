@@ -21,7 +21,7 @@ void __fastcall UFG::UIHKScreenScriptableList::~UIHKScreenScriptableList(UFG::UI
   UFG::UIScreenTextureManager *v2; // rax
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenScriptableList::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenScriptableList::`vftable;
   v2 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseScreen(v2, "ScriptableList");
   UFG::UIScreen::~UIScreen((UFG::UIScreen *)&v1->vfptr);
@@ -148,7 +148,7 @@ void __fastcall UFG::UIHKScreenScriptableList::AddItem(const char *caption)
     {
       LODWORD(v5->mNext) = 1;
       v6 = (UFG::qString *)&v5[1];
-      `eh vector constructor iterator'(&v5[1], 0x28ui64, 1, (void (__fastcall *)(void *))UFG::qString::qString);
+      `eh vector constructor iterator(&v5[1], 0x28ui64, 1, (void (__fastcall *)(void *))UFG::qString::qString);
     }
     else
     {
@@ -163,7 +163,7 @@ void __fastcall UFG::UIHKScreenScriptableList::AddItem(const char *caption)
     {
       LODWORD(v7->mNext) = 1;
       v8 = (signed __int64)&v7[1];
-      `eh vector constructor iterator'(&v7[1], 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&v7[1], 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     }
     else
     {

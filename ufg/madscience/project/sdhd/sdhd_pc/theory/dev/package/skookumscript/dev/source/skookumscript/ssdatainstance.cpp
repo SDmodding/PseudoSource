@@ -6,13 +6,13 @@ void __fastcall SSDataInstance::~SSDataInstance(SSDataInstance *this)
   void **v2; // rbx
 
   v1 = this;
-  this->vfptr = (SSObjectBaseVtbl *)&SSDataInstance::`vftable';
+  this->vfptr = (SSObjectBaseVtbl *)&SSDataInstance::`vftable;
   v2 = (void **)&this->i_data;
   SSData::empty_table(&this->i_data);
   AMemory::c_free_func(v2[1]);
-  v1->vfptr = (SSObjectBaseVtbl *)&SSInstance::`vftable';
+  v1->vfptr = (SSObjectBaseVtbl *)&SSInstance::`vftable;
   v1->i_ptr_id = 0;
-  v1->vfptr = (SSObjectBaseVtbl *)&SSObjectBase::`vftable';
+  v1->vfptr = (SSObjectBaseVtbl *)&SSObjectBase::`vftable;
 }
 
 // File Line: 42

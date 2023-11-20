@@ -42,7 +42,7 @@ hkClass *__fastcall hkxVertexFloatDataChannel::staticClass()
 void __fastcall finishLoadedObjecthkxVertexFloatDataChannel(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkxVertexFloatDataChannel::`vftable';
+    *(_QWORD *)p = &hkxVertexFloatDataChannel::`vftable;
 }
 
 // File Line: 86
@@ -56,7 +56,7 @@ void __fastcall cleanupLoadedObjecthkxVertexFloatDataChannel(void *p)
 // RVA: 0xE33B00
 void **__fastcall getVtablehkxVertexFloatDataChannel()
 {
-  return &hkxVertexFloatDataChannel::`vftable';
+  return &hkxVertexFloatDataChannel::`vftable;
 }
 
 // File Line: 112

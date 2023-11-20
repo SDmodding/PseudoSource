@@ -13,7 +13,7 @@ hkpCollisionAgent *__fastcall hkpCapsuleCapsuleAgent::createCapsuleCapsuleAgent(
   {
     *(_DWORD *)&result->m_memSizeAndFlags = 0x1FFFF;
     result->m_contactMgr = v4;
-    result->vfptr = (hkBaseObjectVtbl *)&hkpCapsuleCapsuleAgent::`vftable';
+    result->vfptr = (hkBaseObjectVtbl *)&hkpCapsuleCapsuleAgent::`vftable;
     LODWORD(result[1].vfptr) = -1;
     WORD2(result[1].vfptr) = -1;
   }

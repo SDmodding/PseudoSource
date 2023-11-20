@@ -105,10 +105,10 @@ __int64 __fastcall hkCpuWorldGetClosestPointsJob(hkJobQueue *jobQueue, hkJobQueu
   v32 = 1i64;
   v30 = 2139095022;
   v45 = FLOAT_1_1920929eN7;
-  v29 = &hkpFixedBufferCdPointCollector::`vftable';
+  v29 = &hkpFixedBufferCdPointCollector::`vftable;
   v31 = 0i64;
   v11 = 0;
-  v33 = &hkCpuWorldGetClosestPointsCollector::`vftable';
+  v33 = &hkCpuWorldGetClosestPointsCollector::`vftable;
   v34 = *(_QWORD *)(v9 + 24);
   v35 = &v29;
   v39 = *(_QWORD *)v9;
@@ -131,7 +131,7 @@ __int64 __fastcall hkCpuWorldGetClosestPointsJob(hkJobQueue *jobQueue, hkJobQueu
       v14 = *(float *)&v3->m_data[40];
       v15 = *(_QWORD *)(v12 + v13 + 8);
       v16 = *(_DWORD *)(v12 + v13 + 16);
-      v29 = &hkpFixedBufferCdPointCollector::`vftable';
+      v29 = &hkpFixedBufferCdPointCollector::`vftable;
       v31 = v15;
       v17 = *(_QWORD *)&v3->m_data[16];
       v32 = v16;

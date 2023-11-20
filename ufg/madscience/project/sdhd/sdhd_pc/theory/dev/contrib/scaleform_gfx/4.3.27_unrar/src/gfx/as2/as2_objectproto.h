@@ -151,11 +151,11 @@ void __fastcall Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::RectangleObj
   v6 = psc;
   v7 = this;
   Scaleform::GFx::AS2::Object::Object((Scaleform::GFx::AS2::Object *)&this->vfptr, psc);
-  v7->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::RectangleObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  v7->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::RectangleObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+  v7->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::RectangleObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  v7->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::RectangleObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   Scaleform::GFx::AS2::Object::Set__proto__((Scaleform::GFx::AS2::Object *)&v7->vfptr, v6, v5);
   v8 = (signed __int64)&v7->vfptr;
-  *(_QWORD *)v8 = &Scaleform::GFx::AS2::GASPrototypeBase::`vftable';
+  *(_QWORD *)v8 = &Scaleform::GFx::AS2::GASPrototypeBase::`vftable;
   *(_BYTE *)(v8 + 24) = 0;
   *(_QWORD *)(v8 + 8) = 0i64;
   *(_QWORD *)(v8 + 16) = 0i64;
@@ -163,9 +163,9 @@ void __fastcall Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::RectangleObj
   v7->__Constructor__.Function = 0i64;
   v7->__Constructor__.pLocalFrame = 0i64;
   v7->pInterfaces = 0i64;
-  v7->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::RectangleObject,Scaleform::GFx::AS2::Environment>::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  v7->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::RectangleObject,Scaleform::GFx::AS2::Environment>::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
-  *(_QWORD *)v8 = &Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::RectangleObject,Scaleform::GFx::AS2::Environment>::`vftable';
+  v7->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::RectangleObject,Scaleform::GFx::AS2::Environment>::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  v7->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::RectangleObject,Scaleform::GFx::AS2::Environment>::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+  *(_QWORD *)v8 = &Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::RectangleObject,Scaleform::GFx::AS2::Environment>::`vftable;
   Scaleform::GFx::AS2::GASPrototypeBase::Init(
     (Scaleform::GFx::AS2::GASPrototypeBase *)&v7->vfptr,
     (Scaleform::GFx::AS2::Object *)&v7->vfptr,
@@ -183,7 +183,7 @@ void __fastcall Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::Object,Scale
   v3 = this;
   Scaleform::GFx::AS2::Object::Object((Scaleform::GFx::AS2::Object *)&this->vfptr, psc, pprototype);
   v4 = (signed __int64)&v3->vfptr;
-  *(_QWORD *)v4 = &Scaleform::GFx::AS2::GASPrototypeBase::`vftable';
+  *(_QWORD *)v4 = &Scaleform::GFx::AS2::GASPrototypeBase::`vftable;
   *(_BYTE *)(v4 + 24) = 0;
   *(_QWORD *)(v4 + 8) = 0i64;
   *(_QWORD *)(v4 + 16) = 0i64;
@@ -191,9 +191,9 @@ void __fastcall Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::Object,Scale
   v3->__Constructor__.Function = 0i64;
   v3->__Constructor__.pLocalFrame = 0i64;
   v3->pInterfaces = 0i64;
-  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::Object,Scaleform::GFx::AS2::Environment>::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::Object,Scaleform::GFx::AS2::Environment>::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
-  *(_QWORD *)v4 = &Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::Object,Scaleform::GFx::AS2::Environment>::`vftable';
+  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::Object,Scaleform::GFx::AS2::Environment>::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::Object,Scaleform::GFx::AS2::Environment>::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+  *(_QWORD *)v4 = &Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::Object,Scaleform::GFx::AS2::Environment>::`vftable;
 }
 
 // File Line: 195
@@ -204,10 +204,10 @@ void __fastcall Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::RectangleObj
   Scaleform::GFx::AS2::GASPrototypeBase *v2; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::RectangleObject,Scaleform::GFx::AS2::Environment>::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  this->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::RectangleObject,Scaleform::GFx::AS2::Environment>::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+  this->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::RectangleObject,Scaleform::GFx::AS2::Environment>::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  this->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::RectangleObject,Scaleform::GFx::AS2::Environment>::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   v2 = (Scaleform::GFx::AS2::GASPrototypeBase *)&this->vfptr;
-  v2->vfptr = (Scaleform::GFx::AS2::GASPrototypeBaseVtbl *)&Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::RectangleObject,Scaleform::GFx::AS2::Environment>::`vftable';
+  v2->vfptr = (Scaleform::GFx::AS2::GASPrototypeBaseVtbl *)&Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::RectangleObject,Scaleform::GFx::AS2::Environment>::`vftable;
   Scaleform::GFx::AS2::GASPrototypeBase::~GASPrototypeBase(v2);
   Scaleform::GFx::AS2::Object::~Object((Scaleform::GFx::AS2::Object *)&v1->vfptr);
 }
@@ -319,13 +319,13 @@ void __fastcall Scaleform::GFx::AS2::FunctionProto::~FunctionProto(Scaleform::GF
   Scaleform::GFx::AS2::GASPrototypeBase *v2; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::FunctionProto::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  this->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::FunctionProto::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+  this->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::FunctionProto::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  this->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::FunctionProto::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   v2 = (Scaleform::GFx::AS2::GASPrototypeBase *)&this->vfptr;
-  v2->vfptr = (Scaleform::GFx::AS2::GASPrototypeBaseVtbl *)&Scaleform::GFx::AS2::FunctionProto::`vftable';
-  v1->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::Object,Scaleform::GFx::AS2::Environment>::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  v1->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::Object,Scaleform::GFx::AS2::Environment>::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
-  v2->vfptr = (Scaleform::GFx::AS2::GASPrototypeBaseVtbl *)&Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::Object,Scaleform::GFx::AS2::Environment>::`vftable';
+  v2->vfptr = (Scaleform::GFx::AS2::GASPrototypeBaseVtbl *)&Scaleform::GFx::AS2::FunctionProto::`vftable;
+  v1->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::Object,Scaleform::GFx::AS2::Environment>::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  v1->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::Object,Scaleform::GFx::AS2::Environment>::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+  v2->vfptr = (Scaleform::GFx::AS2::GASPrototypeBaseVtbl *)&Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::Object,Scaleform::GFx::AS2::Environment>::`vftable;
   Scaleform::GFx::AS2::GASPrototypeBase::~GASPrototypeBase(v2);
   Scaleform::GFx::AS2::Object::~Object((Scaleform::GFx::AS2::Object *)&v1->vfptr);
 }
@@ -443,8 +443,8 @@ void __fastcall Scaleform::GFx::AS2::SuperObject::SuperObject(Scaleform::GFx::AS
   Scaleform::GFx::AS2::Object::Object(
     (Scaleform::GFx::AS2::Object *)&this->vfptr,
     (Scaleform::GFx::AS2::ASRefCountCollector *)superProto->pRCC);
-  v7->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::SuperObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  v7->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::SuperObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+  v7->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::SuperObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  v7->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::SuperObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   v6->RefCount = (v6->RefCount + 1) & 0x8FFFFFFF;
   v7->SuperProto.pObject = v6;
   v7->SavedProto.pObject = 0i64;

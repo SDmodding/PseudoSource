@@ -12,12 +12,12 @@ void __fastcall Scaleform::GFx::AS3::AvmTextField::AvmTextField(Scaleform::GFx::
     (Scaleform::GFx::AS3::AvmInteractiveObj *)&this->vfptr,
     (Scaleform::GFx::InteractiveObject *)&ptf->vfptr);
   v4 = (Scaleform::GFx::AvmTextFieldBase *)&v3->vfptr;
-  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmDisplayObjBase::`vftable';
-  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmInteractiveObjBase::`vftable';
-  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmTextFieldBase::`vftable';
-  v3->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmTextField::`vftable'{for `Scaleform::GFx::AS3::AvmDisplayObj'};
-  v3->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmTextField::`vftable'{for `Scaleform::GFx::AvmInteractiveObjBase'};
-  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmTextField::`vftable';
+  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmDisplayObjBase::`vftable;
+  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmInteractiveObjBase::`vftable;
+  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmTextFieldBase::`vftable;
+  v3->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmTextField::`vftable{for `Scaleform::GFx::AS3::AvmDisplayObj};
+  v3->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmTextField::`vftable{for `Scaleform::GFx::AvmInteractiveObjBase};
+  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmTextField::`vftable;
   v2->Flags |= 2u;
   Scaleform::GFx::TextField::SetSelection(v2, 0i64, 0i64);
 }
@@ -166,7 +166,7 @@ char __fastcall Scaleform::GFx::AS3::AvmTextField::OnMouseEvent(Scaleform::GFx::
                 (Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher *)v9,
                 (Scaleform::GFx::AS3::Instances::fl_events::Event *)&v12->vfptr,
                 (Scaleform::GFx::DisplayObject *)v3[-1].pClassName);
-              `eh vector destructor iterator'(
+              `eh vector destructor iterator(
                 &ptr,
                 0x20ui64,
                 3,
@@ -329,7 +329,7 @@ void __fastcall Scaleform::GFx::AS3::AvmTextField::OnLinkEventEx(Scaleform::GFx:
         (Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher *)v11,
         (Scaleform::GFx::AS3::Instances::fl_events::Event *)&v13->vfptr,
         (Scaleform::GFx::DisplayObject *)v7[-1].pClassName);
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         &argv,
         0x20ui64,
         3,
@@ -699,7 +699,7 @@ char __fastcall Scaleform::GFx::AS3::AvmTextField::OnEditorInsertingText(Scalefo
     (Scaleform::GFx::AS3::Instances::fl_events::Event *)&v12->vfptr,
     v13);
   v14 = ~(*((_BYTE *)&v12->0 + 84) >> 2) & 1;
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
   if ( (unsigned __int8)v12 & 1 )
   {
     pobj.pObject = (Scaleform::GFx::AS3::Object *)((char *)&v12[-1].Text.pNode + 7);
@@ -1264,7 +1264,7 @@ LABEL_204:
     v90 = Scaleform::GFx::AS3::AvmDisplayObj::GetName(v118, &v120);
     Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>::LogScriptWarning(
       (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase> *)&adr[24],
-      "%s.setImageSubstitutions() failed for #%d element - 'image' is not specified or not a BitmapData",
+      "%s.setImageSubstitutions() failed for #%d element - image is not specified or not a BitmapData",
       v90->pNode->pData,
       v119,
       v93.pNode);

@@ -44,7 +44,7 @@ char *__fastcall AK::VirtualAllocHook(void *in_pMemAddress, unsigned __int64 in_
 // RVA: 0x1465600
 __int64 UFG::_dynamic_initializer_for__gAudioListener__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     gAudioListener,
     0x70ui64,
     8,
@@ -137,7 +137,7 @@ void __fastcall UFG::InitAudioMemPool(unsigned int size)
 // RVA: 0x140AB0
 void __fastcall UFG::TiDo::TiDo(UFG::TiDo *this)
 {
-  this->vfptr = (UFG::TiDoVtbl *)&UFG::TiDo::`vftable';
+  this->vfptr = (UFG::TiDoVtbl *)&UFG::TiDo::`vftable;
   UFG::qFixedAllocator::Init(&UFG::gAudioEventPool, 77824, 152, "AudioEventPool", 0i64);
   UFG::qFixedAllocator::Init(&UFG::gAudioEventCallbackObjectPool, 0x4000, 16, "AudioEventCallbackObject", 0i64);
 }
@@ -146,7 +146,7 @@ void __fastcall UFG::TiDo::TiDo(UFG::TiDo *this)
 // RVA: 0x141700
 void __fastcall UFG::TiDo::~TiDo(UFG::TiDo *this)
 {
-  this->vfptr = (UFG::TiDoVtbl *)&UFG::TiDo::`vftable';
+  this->vfptr = (UFG::TiDoVtbl *)&UFG::TiDo::`vftable;
   if ( UFG::TiDo::m_pInstance )
     UFG::TiDo::m_pInstance->vfptr->__vecDelDtor(UFG::TiDo::m_pInstance, 1u);
   if ( g_AudioMemoryPool.mInitializedUID == 878077251 )
@@ -333,7 +333,7 @@ void __fastcall UFG::TiDo::GetInitParams(UFG::TiDo *this, UFG::SoundEngineInitPa
         v12 = v10 + 8;
         *v12 = v12;
         v12[1] = v12;
-        *(_QWORD *)v10 = &UFG::SoundEngineDeviceSettings::`vftable';
+        *(_QWORD *)v10 = &UFG::SoundEngineDeviceSettings::`vftable;
         *((_DWORD *)v10 + 6) = -1;
       }
       else
@@ -410,9 +410,9 @@ void UFG::TiDo::MarkAllOcclusionInfosDirty(void)
   UFG::qList<UFG::AudioEntity,UFG::AudioEntity,0,1> *v1; // rbx
   __int64 (__fastcall **v2)(); // [rsp+30h] [rbp+8h]
 
-  v0 = &`UFG::TiDo::MarkAllOcclusionInfosDirty'::`2'::MakeOcclusionDirtyFunctor::`vftable';
+  v0 = &`UFG::TiDo::MarkAllOcclusionInfosDirty::`2::MakeOcclusionDirtyFunctor::`vftable;
   v1 = (UFG::qList<UFG::AudioEntity,UFG::AudioEntity,0,1> *)&UFG::AudioEntityManager::sm_EntityList.mNode.mNext[-1].mNext;
-  v2 = &`UFG::TiDo::MarkAllOcclusionInfosDirty'::`2'::MakeOcclusionDirtyFunctor::`vftable';
+  v2 = &`UFG::TiDo::MarkAllOcclusionInfosDirty::`2::MakeOcclusionDirtyFunctor::`vftable;
   if ( &UFG::AudioEntityManager::sm_EntityList.mNode.mNext[-1].mNext != (UFG::qNode<UFG::AudioEntity,UFG::AudioEntity> **)((char *)&UFG::AudioEntityManager::sm_EntityList - 8) )
   {
     while ( 1 )
@@ -465,7 +465,7 @@ void __fastcall UFG::TiDo::Close(UFG::TiDo *this)
 // RVA: 0x148D90
 void __fastcall UFG::TiDo::LoadingGameStart(UFG::TiDo *this, UFG::qWiseSymbol *loadingMixState)
 {
-  `anonymous namespace'::gLoadingGame = 1;
+  `anonymous namespace::gLoadingGame = 1;
 }
 
 // File Line: 936
@@ -474,7 +474,7 @@ char __fastcall UFG::TiDo::LoadingGameEnd(UFG::TiDo *this, UFG::qWiseSymbol *end
 {
   if ( UFG::WwiseInterface::smLoadScreen )
     return 0;
-  `anonymous namespace'::gLoadingGame = 0;
+  `anonymous namespace::gLoadingGame = 0;
   return 1;
 }
 

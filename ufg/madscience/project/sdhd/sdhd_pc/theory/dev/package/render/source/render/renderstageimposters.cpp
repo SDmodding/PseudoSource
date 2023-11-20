@@ -53,7 +53,7 @@ void __fastcall UFG::RenderStageImposters::RenderStageImposters(UFG::RenderStage
 
   v2 = this;
   v3 = this->mImposterGroupBuckets;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     this->mImposterGroupBuckets,
     0x2404ui64,
     8,
@@ -144,12 +144,12 @@ void __fastcall UFG::RenderStageImposters::RenderStageImposters(UFG::RenderStage
   v19 = UFG::qResourceWarehouse::Instance();
   UFG::qResourceWarehouse::Add(v19, (UFG::qResourceData *)&v2->mFarGroundImposterMaterial->mNode);
   v20 = UFG::qStringHashUpper32("dr_imposter", 0xFFFFFFFF);
-  v21 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  v21 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v22 = UFG::qResourceWarehouse::Instance();
     v21 = UFG::qResourceWarehouse::GetInventory(v22, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v21;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v21;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v2->mImposterModel.mPrev, 0xA2ADCD77, v20, v21);
 }

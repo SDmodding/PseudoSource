@@ -864,12 +864,12 @@ LABEL_9:
   }
   Illusion::RenderQueueBuilder::Close((Illusion::RenderQueueBuilder *)&ptr._shadow_queue.mMaxActiveRenderQueues);
   retaddr = &ptr._shadow_queue_streams;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     ptr._shadow_queue_streams.mQueueCommandBucketStreams,
     0x18ui64,
     1,
     (void (__fastcall *)(void *))_);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     ptr._shadow_queue_streams.mActiveRenderQueueStreams,
     0x18ui64,
     1,

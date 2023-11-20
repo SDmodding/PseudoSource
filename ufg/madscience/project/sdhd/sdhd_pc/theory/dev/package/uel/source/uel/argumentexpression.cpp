@@ -46,12 +46,12 @@ void __fastcall UEL::ArgumentUsageExpression::ArgumentUsageExpression(UEL::Argum
 {
   UFG::qSymbol result; // [rsp+50h] [rbp+18h]
 
-  this->vfptr = (UEL::ExpressionVtbl *)&UEL::Expression::`vftable';
+  this->vfptr = (UEL::ExpressionVtbl *)&UEL::Expression::`vftable;
   this->mType.mValue = 8;
   this->mValueType.mBaseType.mValue = 0;
   this->mValueType.mDetailedType = UFG::gNullQSymbol;
   *(_DWORD *)&this->mResolved = 0;
-  this->vfptr = (UEL::ExpressionVtbl *)&UEL::ArgumentUsageExpression::`vftable';
+  this->vfptr = (UEL::ExpressionVtbl *)&UEL::ArgumentUsageExpression::`vftable;
   this->mName.mUID = -1;
   this->mName = (UFG::qSymbol)UFG::qSymbol::create_from_string(&result, name)->mUID;
 }

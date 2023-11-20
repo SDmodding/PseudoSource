@@ -85,8 +85,8 @@ void __fastcall UFG::AIActionTreeComponent::AIActionTreeComponent(UFG::AIActionT
   v3 = actName;
   v4 = this;
   UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name_uid);
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable'{for `UFG::SimComponent'};
-  v4->vfptr = (UFG::StateInterfaceVtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable'{for `UFG::StateInterface'};
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable{for `UFG::SimComponent};
+  v4->vfptr = (UFG::StateInterfaceVtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable{for `UFG::StateInterface};
   v4->mAutoActivate = 1;
   v4->mAge = 0.0;
   v5 = (UFG::qNode<UFG::AIActionTreeComponent,UFG::AIActionTreeComponent> *)&v4->mPrev;
@@ -95,9 +95,9 @@ void __fastcall UFG::AIActionTreeComponent::AIActionTreeComponent(UFG::AIActionT
   UFG::ActionTreeComponentBase::ActionTreeComponentBase(
     (UFG::ActionTreeComponentBase *)&v4->vfptr,
     eACTION_TREE_TYPE_AI);
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIActionTreeComponent::`vftable'{for `UFG::SimComponent'};
-  v4->vfptr = (UFG::StateInterfaceVtbl *)&UFG::AIActionTreeComponent::`vftable'{for `UFG::StateInterface'};
-  v4->vfptr = (UFG::ActionTreeComponentBaseVtbl *)&UFG::AIActionTreeComponent::`vftable';
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIActionTreeComponent::`vftable{for `UFG::SimComponent};
+  v4->vfptr = (UFG::StateInterfaceVtbl *)&UFG::AIActionTreeComponent::`vftable{for `UFG::StateInterface};
+  v4->vfptr = (UFG::ActionTreeComponentBaseVtbl *)&UFG::AIActionTreeComponent::`vftable;
   UFG::qSharedString::qSharedString(&v4->m_ActionTreeFileName);
   ActionController::ActionController(&v4->m_ActionController);
   v7 = &v4->m_Ticket;
@@ -172,9 +172,9 @@ void __fastcall UFG::AIActionTreeComponent::~AIActionTreeComponent(UFG::AIAction
   UFG::qNode<UFG::AIActionTreeComponent,UFG::AIActionTreeComponent> *v18; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIActionTreeComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::StateInterfaceVtbl *)&UFG::AIActionTreeComponent::`vftable'{for `UFG::StateInterface'};
-  this->vfptr = (UFG::ActionTreeComponentBaseVtbl *)&UFG::AIActionTreeComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIActionTreeComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::StateInterfaceVtbl *)&UFG::AIActionTreeComponent::`vftable{for `UFG::StateInterface};
+  this->vfptr = (UFG::ActionTreeComponentBaseVtbl *)&UFG::AIActionTreeComponent::`vftable;
   if ( this == UFG::AIActionTreeComponent::s_AIActionTreeComponentpCurrentIterator )
     UFG::AIActionTreeComponent::s_AIActionTreeComponentpCurrentIterator = (UFG::AIActionTreeComponent *)&this->mPrev[-11].mNext;
   v2 = (UFG::qNode<UFG::AIActionTreeComponent,UFG::AIActionTreeComponent> *)&this->mPrev;
@@ -255,8 +255,8 @@ void __fastcall UFG::AIActionTreeComponent::~AIActionTreeComponent(UFG::AIAction
   v18->mPrev = v17;
   v2->mPrev = v2;
   v2->mNext = v2;
-  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable'{for `UFG::SimComponent'};
-  v1->vfptr = (UFG::StateInterfaceVtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable'{for `UFG::StateInterface'};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable{for `UFG::SimComponent};
+  v1->vfptr = (UFG::StateInterfaceVtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable{for `UFG::StateInterface};
   if ( (LOBYTE(v1->m_Flags) >> 2) & 1 )
   {
     v1->m_Flags |= 2u;
@@ -529,12 +529,12 @@ void __fastcall UFG::AIActionTreeComponent::SetActionTreeFileName(UFG::AIActionT
     goto LABEL_17;
   do
   {
-    if ( v2 == '/' || v2 == '\\' )
+    if ( v2 == / || v2 == \\ )
     {
       v3 = (signed __int64)v7;
       v4 = 0i64;
     }
-    else if ( v2 == '.' && !v4 )
+    else if ( v2 == . && !v4 )
     {
       v4 = v7;
     }
@@ -613,7 +613,7 @@ void __fastcall UFG::AIActionTreeComponent::OnAttach(UFG::AIActionTreeComponent 
       v3->m_PreserveLastFrameInformation = 1;
       v33 = UFG::AIActionTreeComponent::InactiveTicketUpdate;
       v32 = Assembly::GetRCX(v3);
-      v35 =  SSClassDescBase::`vcall'{8,{flat}};
+      v35 =  SSClassDescBase::`vcall{8,{flat}};
       v34 = Assembly::GetRCX(&v3->vfptr);
       UFG::TicketBoothManager::Register(
         UFG::TicketBoothManager::mpSingleton,
@@ -625,7 +625,7 @@ void __fastcall UFG::AIActionTreeComponent::OnAttach(UFG::AIActionTreeComponent 
     else
     {
       v6 = v2 != (UFG::SimObjectCVBase *)LocalPlayer;
-      v35 =  SSClassDescBase::`vcall'{8,{flat}};
+      v35 =  SSClassDescBase::`vcall{8,{flat}};
       v3->m_TicketType = v6;
       v34 = Assembly::GetRCX(&v3->vfptr);
       UFG::TicketBoothManager::Register(
@@ -638,7 +638,7 @@ void __fastcall UFG::AIActionTreeComponent::OnAttach(UFG::AIActionTreeComponent 
   else
   {
     v3->m_TicketType = TICKETBOOTH_VEHICLE_AIACTIONTREEUPDATE;
-    v35 =  SSClassDescBase::`vcall'{8,{flat}};
+    v35 =  SSClassDescBase::`vcall{8,{flat}};
     v34 = Assembly::GetRCX(&v3->vfptr);
     UFG::TicketBoothManager::Register(
       UFG::TicketBoothManager::mpSingleton,
@@ -1120,7 +1120,7 @@ void __fastcall UFG::AIActionTreeComponent::EnsureTicketBoothCriticalPriority(UF
   {
     UFG::TicketBoothManager::Unregister(UFG::TicketBoothManager::mpSingleton, v1, &this->m_Ticket);
     v2->m_TicketType = 1;
-    v4 =  SSClassDescBase::`vcall'{8,{flat}};
+    v4 =  SSClassDescBase::`vcall{8,{flat}};
     v3 = Assembly::GetRCX(&v2->vfptr);
     UFG::TicketBoothManager::Register(
       UFG::TicketBoothManager::mpSingleton,

@@ -1591,12 +1591,12 @@ void __fastcall UFG::UITiledMapWidget::RenderMinimapPrimitive(UFG::UITiledMapWid
   if ( !vertex_decl_handle_1.mData )
   {
     v87 = UFG::qStringHash32("VertexDecl.Dynamic", 0xFFFFFFFF);
-    v88 = `UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result )
+    v88 = `UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result )
     {
       v89 = UFG::qResourceWarehouse::Instance();
       v88 = UFG::qResourceWarehouse::GetInventory(v89, 0x3E5FDA3Eu);
-      `UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result = v88;
+      `UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result = v88;
     }
     UFG::qResourceHandle::Init((UFG::qResourceHandle *)&vertex_decl_handle_1.mPrev, 0x3E5FDA3Eu, v87, v88);
   }

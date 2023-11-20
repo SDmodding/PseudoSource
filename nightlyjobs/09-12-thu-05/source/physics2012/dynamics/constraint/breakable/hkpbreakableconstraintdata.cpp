@@ -11,7 +11,7 @@ void __fastcall hkpBreakableConstraintData::hkpBreakableConstraintData(hkpBreaka
   this->m_memSizeAndFlags = -1;
   this->m_userData = 0i64;
   this->m_referenceCount = 1;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpBreakableConstraintData::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpBreakableConstraintData::`vftable;
   this->m_atoms.m_bridgeAtom.m_type.m_storage = 1;
   this->m_constraintData = constraintData;
   this->m_solverResultLimit = 10.0;
@@ -37,7 +37,7 @@ void __fastcall hkpBreakableConstraintData::hkpBreakableConstraintData(hkpBreaka
   v3 = f.m_finishing;
   v2 = this;
   hkpConstraintData::hkpConstraintData((hkpConstraintData *)&this->vfptr, f);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpBreakableConstraintData::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpBreakableConstraintData::`vftable;
   if ( v3 )
   {
     hkpBridgeConstraintAtom::init(&v2->m_atoms.m_bridgeAtom, v2->m_atoms.m_bridgeAtom.m_constraintData);
@@ -53,9 +53,9 @@ void __fastcall hkpBreakableConstraintData::~hkpBreakableConstraintData(hkpBreak
   hkpBreakableConstraintData *v1; // rbx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpBreakableConstraintData::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpBreakableConstraintData::`vftable;
   hkReferencedObject::removeReference((hkReferencedObject *)&this->m_constraintData->vfptr);
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 53

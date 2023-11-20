@@ -205,7 +205,7 @@ void __fastcall UFG::UIHKRegionIndicatorWidget::Flash_Show(UFG::UIHKRegionIndica
     }
     UFG::qString::qString(&timeStr);
     UFG::UIHKRegionIndicatorWidget::GetTimeString(time, &timeStr);
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( (v10 >> 6) & 1 )
     {
       (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v9 + 16i64))(v9, &ptr, v11);
@@ -229,7 +229,7 @@ void __fastcall UFG::UIHKRegionIndicatorWidget::Flash_Show(UFG::UIHKRegionIndica
     v18 = 6;
     v19 = v7;
     Scaleform::GFx::Movie::Invoke(v4, "ShowRegion", 0i64, (Scaleform::GFx::Value *)&ptr, 3u);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     UFG::qString::~qString(&timeStr);
   }
 }

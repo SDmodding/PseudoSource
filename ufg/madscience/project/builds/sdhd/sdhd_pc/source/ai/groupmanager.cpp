@@ -251,7 +251,7 @@ char __fastcall UFG::GroupManager::SpawnTask::JoinGroup(UFG::GroupManager::Spawn
     return 1;
   }
   v11 = 0i64;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     &ptr,
     0x20ui64,
     10,
@@ -341,11 +341,11 @@ LABEL_39:
     if ( v22 >= v21->mMaxFollowers )
       ++v5->mNumCompletedGroups;
 LABEL_41:
-    `eh vector destructor iterator'(&ptr, 0x20ui64, 10, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(&ptr, 0x20ui64, 10, (void (__fastcall *)(void *))_);
     return 1;
   }
 LABEL_42:
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 10, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 10, (void (__fastcall *)(void *))_);
   return 0;
 }
 
@@ -356,7 +356,7 @@ void __fastcall UFG::GroupManager::Profile::Profile(UFG::GroupManager::Profile *
   UFG::GroupManager::Profile *v1; // rbx
 
   v1 = this;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     this->mSpawnTasks.p,
     0x28ui64,
     8,
@@ -372,7 +372,7 @@ void __fastcall UFG::GroupManager::Profile::~Profile(UFG::GroupManager::Profile 
 {
   this->mDesiredGroupRatios.size = 0;
   this->mSpawnTasks.size = 0;
-  `eh vector destructor iterator'(this->mSpawnTasks.p, 0x28ui64, 8, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(this->mSpawnTasks.p, 0x28ui64, 8, (void (__fastcall *)(void *))_);
 }
 
 // File Line: 362
@@ -756,13 +756,13 @@ void __fastcall UFG::GroupManager::GroupManager(UFG::GroupManager *this)
   UFG::GroupManager *v1; // rdi
 
   v1 = this;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     this->mProfiles.p,
     0x168ui64,
     2,
     (void (__fastcall *)(void *))UFG::GroupManager::Profile::Profile);
   v1->mProfiles.size = 0;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v1->mRestrictions.p,
     8ui64,
     8,
@@ -942,7 +942,7 @@ bool __fastcall UFG::GroupManager::JoinGroup(UFG::GroupManager *this, UFG::PedSp
             || newPed.mGroupComponent->mGroupLeader.mFollowers.size < v5->mMaxFollowers
             || v5 && !v5->mMaxFollowers )
           {
-            `eh vector constructor iterator'(
+            `eh vector constructor iterator(
               ptr,
               0x20ui64,
               10,
@@ -971,11 +971,11 @@ bool __fastcall UFG::GroupManager::JoinGroup(UFG::GroupManager *this, UFG::PedSp
                      &newPed,
                      (UFG::qFixedArray<UFG::GroupManager::ValidatedPed,10> *)&newPed.mPropertySet);
               LODWORD(newPed.mPropertySet) = 0;
-              `eh vector destructor iterator'(ptr, 0x20ui64, 10, (void (__fastcall *)(void *))_);
+              `eh vector destructor iterator(ptr, 0x20ui64, 10, (void (__fastcall *)(void *))_);
               return v8;
             }
             LODWORD(newPed.mPropertySet) = 0;
-            `eh vector destructor iterator'(ptr, 0x20ui64, 10, (void (__fastcall *)(void *))_);
+            `eh vector destructor iterator(ptr, 0x20ui64, 10, (void (__fastcall *)(void *))_);
           }
         }
       }

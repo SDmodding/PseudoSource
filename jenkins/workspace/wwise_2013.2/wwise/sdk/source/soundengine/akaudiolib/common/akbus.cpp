@@ -8,7 +8,7 @@ void __fastcall CAkBus::CAkBus(CAkBus *this, unsigned int in_ulID)
   CAkParameterNodeBase::CAkParameterNodeBase((CAkParameterNodeBase *)&this->vfptr, in_ulID);
   v2->m_mapChildId.m_pItems = 0i64;
   *(_QWORD *)&v2->m_mapChildId.m_uLength = 0i64;
-  v2->vfptr = (CAkIndexableVtbl *)&CAkBus::`vftable';
+  v2->vfptr = (CAkIndexableVtbl *)&CAkBus::`vftable;
   v2->m_mapBusChildId.m_pItems = 0i64;
   *(_QWORD *)&v2->m_mapBusChildId.m_uLength = 0i64;
   v2->m_RecoveryTime = 0;
@@ -56,7 +56,7 @@ void __fastcall CAkBus::~CAkBus(CAkBus *this)
 
   v1 = this->m_DuckedVolumeList.m_pFirst;
   v2 = this;
-  for ( this->vfptr = (CAkIndexableVtbl *)&CAkBus::`vftable'; v1; v1 = v1->pNextListItem )
+  for ( this->vfptr = (CAkIndexableVtbl *)&CAkBus::`vftable; v1; v1 = v1->pNextListItem )
     CAkDuckItem::Term(&v1->Item.item);
   if ( v2->m_DuckedVolumeList.m_ulMaxNumListItems )
   {
@@ -214,7 +214,7 @@ void __fastcall CAkBus::~CAkBus(CAkBus *this)
     v2->m_mapBusChildId.m_pItems = 0i64;
     v2->m_mapBusChildId.m_ulReserved = 0;
   }
-  v2->vfptr = (CAkIndexableVtbl *)&CAkParentNode<CAkParameterNodeBase>::`vftable';
+  v2->vfptr = (CAkIndexableVtbl *)&CAkParentNode<CAkParameterNodeBase>::`vftable;
   v25 = v2->m_mapChildId.m_pItems;
   if ( v25 )
   {
@@ -2696,7 +2696,7 @@ CAkSIS *__fastcall CAkBus::GetSIS(CAkBus *this, CAkRegisteredObj *__formal)
     {
       result->m_pParamNode = (CAkParameterNodeBase *)&v2->vfptr;
       result->m_pGameObj = 0i64;
-      result->vfptr = (ITransitionableVtbl *)&CAkSIS::`vftable';
+      result->vfptr = (ITransitionableVtbl *)&CAkSIS::`vftable;
       result->m_values.m_pProps = 0i64;
       result->m_bitsFXBypass = v3;
       v2->m_pGlobalSIS = result;

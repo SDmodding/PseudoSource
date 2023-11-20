@@ -34,11 +34,11 @@ void __fastcall UFG::TrafficRegion::TrafficRegion(UFG::TrafficRegion *this, UFG:
   v3 = pSimObj;
   v4 = this;
   UFG::MarkerBase::MarkerBase((UFG::MarkerBase *)&this->vfptr, name, pSimObj, 0x30000u);
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SpawnPointInterface::`vftable';
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SpawnPointInterface::`vftable;
   v5 = (UFG::qNode<UFG::TrafficRegion,UFG::TrafficRegion> *)&v4->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TrafficRegion::`vftable';
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TrafficRegion::`vftable;
   *(_QWORD *)&v4->mSpawnSet.mUID = -1i64;
   v4->mActiveSpawnSet.mUID = -1;
   v6 = UFG::qVector3::msZero.y;
@@ -160,7 +160,7 @@ void __fastcall UFG::TrafficRegion::~TrafficRegion(UFG::TrafficRegion *this)
   UFG::qNode<UFG::TrafficRegion,UFG::TrafficRegion> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TrafficRegion::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TrafficRegion::`vftable;
   if ( this == UFG::TrafficRegion::s_TrafficRegionpCurrentIterator )
     UFG::TrafficRegion::s_TrafficRegionpCurrentIterator = (UFG::TrafficRegion *)&this->mPrev[-7];
   v2 = (UFG::qNode<UFG::TrafficRegion,UFG::TrafficRegion> *)&this->mPrev;

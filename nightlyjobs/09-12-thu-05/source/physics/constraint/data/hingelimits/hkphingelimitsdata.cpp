@@ -4,7 +4,7 @@ void __fastcall hkpHingeLimitsData::hkpHingeLimitsData(hkpHingeLimitsData *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_userData = 0i64;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpHingeLimitsData::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpHingeLimitsData::`vftable;
   this->m_atoms.m_rotations.m_type.m_storage = 4;
   this->m_atoms.m_angLimit.m_type.m_storage = 14;
   this->m_atoms.m_angLimit.m_isEnabled = 1;

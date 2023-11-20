@@ -35,7 +35,7 @@ void __fastcall finishLoadedObjecthkpPhysicsSystem(void *p, int finishing)
   if ( p )
   {
     v2 = (hkStringPtr *)((char *)p + 80);
-    v2[-10].m_stringAndFlag = (const char *)&hkpPhysicsSystem::`vftable';
+    v2[-10].m_stringAndFlag = (const char *)&hkpPhysicsSystem::`vftable;
     hkStringPtr::hkStringPtr(v2, (hkFinishLoadedObjectFlag)finishing);
   }
 }
@@ -54,7 +54,7 @@ void **__fastcall getVtablehkpPhysicsSystem()
   hkStringPtr v1; // [rsp+70h] [rbp-28h]
 
   hkStringPtr::hkStringPtr(&v1, 0);
-  return &hkpPhysicsSystem::`vftable';
+  return &hkpPhysicsSystem::`vftable;
 }
 
 // File Line: 142

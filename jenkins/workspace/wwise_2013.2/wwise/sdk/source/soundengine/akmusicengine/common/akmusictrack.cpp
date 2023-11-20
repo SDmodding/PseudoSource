@@ -6,7 +6,7 @@ void __fastcall CAkMusicTrack::CAkMusicTrack(CAkMusicTrack *this, unsigned int i
 
   v2 = this;
   CAkSoundBase::CAkSoundBase((CAkSoundBase *)&this->vfptr, in_ulID);
-  v2->vfptr = (CAkIndexableVtbl *)&CAkMusicTrack::`vftable';
+  v2->vfptr = (CAkIndexableVtbl *)&CAkMusicTrack::`vftable;
   v2->m_arSrcInfo.m_pItems = 0i64;
   *(_QWORD *)&v2->m_arSrcInfo.m_uLength = 0i64;
   v2->m_arClipAutomation.m_pItems = 0i64;
@@ -27,7 +27,7 @@ void __fastcall CAkMusicTrack::~CAkMusicTrack(CAkMusicTrack *this)
   AkTrackSrc *v3; // rdx
 
   v1 = this;
-  this->vfptr = (CAkIndexableVtbl *)&CAkMusicTrack::`vftable';
+  this->vfptr = (CAkIndexableVtbl *)&CAkMusicTrack::`vftable;
   CAkMusicTrack::RemoveAllSourcesNoCheck(this);
   v2 = v1->m_arSrcInfo.m_pItems;
   if ( v2 )

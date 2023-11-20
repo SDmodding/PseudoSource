@@ -94,7 +94,7 @@ void __fastcall UFG::IncrementalActivateManager::Service(float fDelta)
         v17 = v14 + 1;
         v17->mNext = v17;
         v17[1].mNext = v17;
-        v15->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+        v15->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
         v15->m_EventUID = v16;
         v15->m_NamePTR = 0i64;
       }
@@ -209,7 +209,7 @@ char __fastcall UFG::IncrementalActivateManager::Flush()
     v16 = v13 + 1;
     v16->mNext = v16;
     v16[1].mNext = v16;
-    v14->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+    v14->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
     v14->m_EventUID = v15;
     v14->m_NamePTR = 0i64;
   }
@@ -297,7 +297,7 @@ void __fastcall UFG::IncrementalActivateManager::Activate(UFG::SceneLayerResourc
       v20 = v17 + 1;
       v20->mNext = v20;
       v20[1].mNext = v20;
-      v18->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+      v18->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
       v18->m_EventUID = v19;
       v18->m_NamePTR = 0i64;
     }
@@ -542,7 +542,7 @@ LABEL_45:
     v38 = v35 + 1;
     v38->mNext = v38;
     v38[1].mNext = v38;
-    v36->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+    v36->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
     v36->m_EventUID = v37;
     v36->m_NamePTR = 0i64;
   }

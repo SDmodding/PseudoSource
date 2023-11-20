@@ -9,8 +9,8 @@ void __fastcall Scaleform::GFx::AS2::NumberObject::NumberObject(Scaleform::GFx::
   v2 = penv;
   v3 = (Scaleform::StringLH *)this;
   Scaleform::GFx::AS2::Object::Object((Scaleform::GFx::AS2::Object *)&this->vfptr, penv);
-  v3->HeapTypeBits = (unsigned __int64)&Scaleform::GFx::AS2::NumberObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  v3[4].HeapTypeBits = (unsigned __int64)&Scaleform::GFx::AS2::NumberObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+  v3->HeapTypeBits = (unsigned __int64)&Scaleform::GFx::AS2::NumberObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  v3[4].HeapTypeBits = (unsigned __int64)&Scaleform::GFx::AS2::NumberObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   v3[12].HeapTypeBits = 0i64;
   Scaleform::StringLH::StringLH(v3 + 13);
   v4 = Scaleform::GFx::AS2::GlobalContext::GetPrototype(v2->StringContext.pContext, ASBuiltin_Number);
@@ -116,7 +116,7 @@ void __fastcall Scaleform::GFx::AS2::GAS_NumberToString(Scaleform::GFx::AS2::FnC
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "Number");
   }
 }
@@ -159,7 +159,7 @@ void __fastcall Scaleform::GFx::AS2::GAS_NumberValueOf(Scaleform::GFx::AS2::FnCa
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "Number");
   }
 }
@@ -186,8 +186,8 @@ void __usercall Scaleform::GFx::AS2::NumberCtorFunction::NumberCtorFunction(Scal
     (Scaleform::GFx::AS2::CFunctionObject *)&this->vfptr,
     psc,
     Scaleform::GFx::AS2::NumberCtorFunction::GlobalCtor);
-  v4->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::NumberCtorFunction::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  v4->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::NumberCtorFunction::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+  v4->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::NumberCtorFunction::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  v4->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::NumberCtorFunction::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   v5 = 0i64;
   if ( GASNumberConstTable[0].Name )
   {
@@ -365,8 +365,8 @@ Scaleform::GFx::AS2::FunctionRef *__usercall Scaleform::GFx::AS2::NumberCtorFunc
   {
     v9 = Scaleform::GFx::AS2::GlobalContext::GetPrototype(v3, ASBuiltin_Object);
     Scaleform::GFx::AS2::Object::Object((Scaleform::GFx::AS2::Object *)v8, &psc);
-    *(_QWORD *)v8 = &Scaleform::GFx::AS2::NumberObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    *(_QWORD *)(v8 + 32) = &Scaleform::GFx::AS2::NumberObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+    *(_QWORD *)v8 = &Scaleform::GFx::AS2::NumberObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    *(_QWORD *)(v8 + 32) = &Scaleform::GFx::AS2::NumberObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
     *(_QWORD *)(v8 + 96) = 0i64;
     Scaleform::StringLH::StringLH((Scaleform::StringLH *)(v8 + 104));
     if ( !*(_QWORD *)(v8 + 40) )
@@ -397,7 +397,7 @@ Scaleform::GFx::AS2::FunctionRef *__usercall Scaleform::GFx::AS2::NumberCtorFunc
     *(_QWORD *)(v8 + 40) = v9;
     v12 = v8 + 112;
     flags = v12;
-    *(_QWORD *)v12 = &Scaleform::GFx::AS2::GASPrototypeBase::`vftable';
+    *(_QWORD *)v12 = &Scaleform::GFx::AS2::GASPrototypeBase::`vftable;
     *(_BYTE *)(v12 + 24) = 0;
     *(_QWORD *)(v12 + 8) = 0i64;
     *(_QWORD *)(v12 + 16) = 0i64;
@@ -405,17 +405,17 @@ Scaleform::GFx::AS2::FunctionRef *__usercall Scaleform::GFx::AS2::NumberCtorFunc
     *(_QWORD *)(v8 + 144) = 0i64;
     *(_QWORD *)(v8 + 152) = 0i64;
     *(_QWORD *)(v8 + 168) = 0i64;
-    *(_QWORD *)v8 = &Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::NumberObject,Scaleform::GFx::AS2::Environment>::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    *(_QWORD *)(v8 + 32) = &Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::NumberObject,Scaleform::GFx::AS2::Environment>::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
-    *(_QWORD *)v12 = &Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::NumberObject,Scaleform::GFx::AS2::Environment>::`vftable';
+    *(_QWORD *)v8 = &Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::NumberObject,Scaleform::GFx::AS2::Environment>::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    *(_QWORD *)(v8 + 32) = &Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::NumberObject,Scaleform::GFx::AS2::Environment>::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+    *(_QWORD *)v12 = &Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::NumberObject,Scaleform::GFx::AS2::Environment>::`vftable;
     Scaleform::GFx::AS2::GASPrototypeBase::Init(
       (Scaleform::GFx::AS2::GASPrototypeBase *)(v8 + 112),
       (Scaleform::GFx::AS2::Object *)v8,
       &psc,
       v4);
-    *(_QWORD *)v8 = &Scaleform::GFx::AS2::NumberProto::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    *(_QWORD *)(v8 + 32) = &Scaleform::GFx::AS2::NumberProto::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
-    *(_QWORD *)v12 = &Scaleform::GFx::AS2::NumberProto::`vftable';
+    *(_QWORD *)v8 = &Scaleform::GFx::AS2::NumberProto::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    *(_QWORD *)(v8 + 32) = &Scaleform::GFx::AS2::NumberProto::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+    *(_QWORD *)v12 = &Scaleform::GFx::AS2::NumberProto::`vftable;
     LOBYTE(flags) = 1;
     Scaleform::GFx::AS2::GASPrototypeBase::InitFunctionMembers(
       (Scaleform::GFx::AS2::GASPrototypeBase *)(v8 + 112),

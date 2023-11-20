@@ -35,6 +35,6 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_LOADING_ICON_HIDE__()
 // RVA: 0x5C9790
 void __fastcall UFG::UIHKLoadingOverlay::~UIHKLoadingOverlay(UFG::UIHKLoadingOverlay *this)
 {
-  this->vfptr = (UFG::UIHKLoadingOverlayVtbl *)&UFG::UIHKLoadingOverlay::`vftable';
+  this->vfptr = (UFG::UIHKLoadingOverlayVtbl *)&UFG::UIHKLoadingOverlay::`vftable;
 }
 

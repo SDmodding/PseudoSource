@@ -32,7 +32,7 @@ void __fastcall hkpMoppDefaultAssembler::hkpMoppDefaultAssembler(hkpMoppDefaultA
   int v19; // [rsp+70h] [rbp+8h]
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpMoppDefaultAssembler::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpMoppDefaultAssembler::`vftable;
   this->m_directions.m_data = 0i64;
   this->m_directions.m_size = 0;
   v4 = ap;
@@ -121,7 +121,7 @@ void __fastcall hkpMoppDefaultAssembler::~hkpMoppDefaultAssembler(hkpMoppDefault
   int v2; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpMoppDefaultAssembler::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpMoppDefaultAssembler::`vftable;
   v2 = this->m_directions.m_capacityAndFlags;
   this->m_directions.m_size = 0;
   if ( v2 >= 0 )
@@ -131,7 +131,7 @@ void __fastcall hkpMoppDefaultAssembler::~hkpMoppDefaultAssembler(hkpMoppDefault
       32 * v2);
   v1->m_directions.m_data = 0i64;
   v1->m_directions.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 101

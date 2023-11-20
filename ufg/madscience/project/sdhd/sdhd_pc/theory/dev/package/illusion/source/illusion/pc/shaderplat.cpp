@@ -184,7 +184,7 @@ void __fastcall Illusion::IShaderPlat::AddShaderStage(Illusion::IShaderPlat *thi
   }
   else
   {
-    UFG::qPrintf("Warning: couldn't create shader stage %s, hw may not support the feature level.\n", v2->mDebugName);
+    UFG::qPrintf("Warning: couldnt create shader stage %s, hw may not support the feature level.\n", v2->mDebugName);
   }
 }
 
@@ -606,7 +606,7 @@ void __usercall Illusion::ShaderSystemPlat::ValidShaderStageInputs(Illusion::Sha
               {
 LABEL_27:
                 UFG::qPrintf(
-                  "ERROR: Pixel shader input %d doesn't match previous stage shader output %d for '%s'\n",
+                  "ERROR: Pixel shader input %d doesnt match previous stage shader output %d for %s\n",
                   v8,
                   v7,
                   v5->mDebugName,
@@ -764,7 +764,7 @@ void __fastcall Illusion::StageShader::ReleaseResources(Illusion::StageShader *t
   if ( v11 )
   {
     v12 = &v11[-1].mVarInfo;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v11,
       0x38ui64,
       (int)v11[-1].mVarInfo,
@@ -976,7 +976,7 @@ LABEL_29:
           {
             LODWORD(v23->mNext) = v18;
             v24 = (signed __int64)&v23[1];
-            `eh vector constructor iterator'(
+            `eh vector constructor iterator(
               &v23[1],
               0x38ui64,
               v18,

@@ -245,7 +245,7 @@ LABEL_7:
   }
 LABEL_8:
   if ( v8->mCurrentParamIndex == 128 )
-    UFG::qPrintf("Illusion: Run out of state blocks.  Size=%d\n (tried to add param name '%s')", 128i64);
+    UFG::qPrintf("Illusion: Run out of state blocks.  Size=%d\n (tried to add param name %s)", 128i64);
   v14 = (signed __int64)&v8->mStateParamDescs[v8->mCurrentParamIndex];
   *(_DWORD *)v14 = v7;
   *(_WORD *)(v14 + 8) = v8->mCurrentParamIndex;

@@ -20,13 +20,13 @@ void __fastcall Scaleform::GFx::AS2::AvmSprite::AvmSprite(Scaleform::GFx::AS2::A
     (Scaleform::GFx::AS2::AvmCharacter *)&this->vfptr,
     (Scaleform::GFx::InteractiveObject *)&psprite->vfptr);
   v4 = (Scaleform::GFx::AvmSpriteBase *)&v3->vfptr;
-  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmDisplayObjBase::`vftable';
-  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmInteractiveObjBase::`vftable';
-  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmDisplayObjContainerBase::`vftable';
-  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmSpriteBase::`vftable';
-  v3->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS2::AvmSprite::`vftable'{for `Scaleform::GFx::AvmInteractiveObjBase'};
-  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::AvmSprite::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
-  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS2::AvmSprite::`vftable';
+  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmDisplayObjBase::`vftable;
+  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmInteractiveObjBase::`vftable;
+  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmDisplayObjContainerBase::`vftable;
+  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmSpriteBase::`vftable;
+  v3->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS2::AvmSprite::`vftable{for `Scaleform::GFx::AvmInteractiveObjBase};
+  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::AvmSprite::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS2::AvmSprite::`vftable;
   Scaleform::GFx::AS2::Environment::Environment(&v3->ASEnvironment);
   v3->Level = -1;
   v5 = 0i64;
@@ -82,10 +82,10 @@ void __fastcall Scaleform::GFx::AS2::AvmSprite::~AvmSprite(Scaleform::GFx::AS2::
   unsigned int v4; // eax
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS2::AvmSprite::`vftable'{for `Scaleform::GFx::AvmInteractiveObjBase'};
-  this->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::AvmSprite::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS2::AvmSprite::`vftable{for `Scaleform::GFx::AvmInteractiveObjBase};
+  this->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::AvmSprite::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   v2 = (Scaleform::GFx::AvmSpriteBase *)&this->vfptr;
-  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS2::AvmSprite::`vftable';
+  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS2::AvmSprite::`vftable;
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, this->InitActionsExecuted.Data.Data);
   v3 = (Scaleform::GFx::AS2::RefCountBaseGC<323> *)&v1->ASMovieClipObj.pObject->vfptr;
   if ( v3 )
@@ -98,7 +98,7 @@ void __fastcall Scaleform::GFx::AS2::AvmSprite::~AvmSprite(Scaleform::GFx::AS2::
     }
   }
   Scaleform::GFx::AS2::Environment::~Environment(&v1->ASEnvironment);
-  v2->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmDisplayObjBase::`vftable';
+  v2->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmDisplayObjBase::`vftable;
   Scaleform::GFx::AS2::AvmCharacter::~AvmCharacter((Scaleform::GFx::AS2::AvmCharacter *)&v1->vfptr);
 }
 
@@ -263,7 +263,7 @@ void __fastcall Scaleform::GFx::AS2::AvmSprite::CallFrameActions(Scaleform::GFx:
   {
     Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>::LogError(
       (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase> *)&v3->pDispObj->vfptr,
-      "CallFrame('%d') - unknown frame",
+      "CallFrame(%d) - unknown frame",
       v2);
   }
   else
@@ -1163,7 +1163,7 @@ void __fastcall Scaleform::GFx::AS2::AvmSprite::InitObjectMembers(Scaleform::GFx
       v6 = &v5->Stack.Pages.Data.Data[v4 >> 5]->Values[v4 & 0x1F];
     v7 = Scaleform::GFx::AS2::Value::ToObjectInterface(v6, v5);
     v8 = (__int64)v1->Env;
-    v9 = (void **)`Scaleform::GFx::AS2::AvmSprite::InitObjectMembers'::`4'::InitVisitor::`vftable';
+    v9 = (void **)`Scaleform::GFx::AS2::AvmSprite::InitObjectMembers::`4::InitVisitor::`vftable;
     v10 = v8;
     v11 = v3;
     v7->vfptr->VisitMembers(
@@ -1172,7 +1172,7 @@ void __fastcall Scaleform::GFx::AS2::AvmSprite::InitObjectMembers(Scaleform::GFx
       (Scaleform::GFx::AS2::ObjectInterface::MemberVisitor *)&v9,
       0,
       0i64);
-    v9 = &Scaleform::GFx::AS2::ObjectInterface::MemberVisitor::`vftable';
+    v9 = &Scaleform::GFx::AS2::ObjectInterface::MemberVisitor::`vftable;
   }
   if ( v3 )
     Scaleform::RefCountNTSImpl::Release(v3);
@@ -3406,13 +3406,13 @@ void __fastcall Scaleform::GFx::AS2::AvmSprite::VisitMembers(Scaleform::GFx::AS2
   v7 = this;
   if ( visitFlags & 2 )
   {
-    v8 = (void **)&`Scaleform::GFx::AS2::AvmSprite::VisitMembers'::`5'::Visitor::`vftable';
+    v8 = (void **)&`Scaleform::GFx::AS2::AvmSprite::VisitMembers::`5::Visitor::`vftable;
     v9 = pvisitor;
     v10 = visitFlags;
     Scaleform::GFx::DisplayList::VisitMembers(
       (Scaleform::GFx::DisplayList *)&this->pProto.pObject[2].RefCount,
       (Scaleform::GFx::DisplayList::MemberVisitor *)&v8);
-    v8 = &Scaleform::GFx::DisplayList::MemberVisitor::`vftable';
+    v8 = &Scaleform::GFx::DisplayList::MemberVisitor::`vftable;
   }
   Scaleform::GFx::AS2::AvmCharacter::VisitMembers((Scaleform::GFx::AS2::AvmCharacter *)&v7->vfptr, v6, v5, v4);
 }
@@ -8172,7 +8172,7 @@ void __fastcall Scaleform::GFx::AS2::MovieClipObject::Set__proto__(Scaleform::GF
   Scaleform::GFx::AS2::Object::Set__proto__((Scaleform::GFx::AS2::Object *)&this->vfptr, psc, protoObj);
   if ( v3 && (*(unsigned int (**)(void))&v3->vfptr->gap8[8])() != 11 )
   {
-    v8 = &`Scaleform::GFx::AS2::MovieClipObject::Set__proto__'::`5'::MemberVisitor::`vftable';
+    v8 = &`Scaleform::GFx::AS2::MovieClipObject::Set__proto__::`5::MemberVisitor::`vftable;
     if ( v5 != (Scaleform::GFx::AS2::MovieClipObject *)32 )
       LODWORD((&v5[-1].pWatchpoints)[3]) = (LODWORD((&v5[-1].pWatchpoints)[3]) + 1) & 0x8FFFFFFF;
     v9 = (Scaleform::GFx::AS2::RefCountBaseGC<323> *)&v5[-1].pWatchpoints;
@@ -8434,9 +8434,9 @@ void __fastcall Scaleform::GFx::AS2::MovieClipProto::MovieClipProto(Scaleform::G
     psc,
     prototype,
     constructor);
-  v5->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::MovieClipProto::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  v5->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::MovieClipProto::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
-  v5->vfptr = (Scaleform::GFx::AS2::GASPrototypeBaseVtbl *)&Scaleform::GFx::AS2::MovieClipProto::`vftable';
+  v5->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::MovieClipProto::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  v5->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::MovieClipProto::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+  v5->vfptr = (Scaleform::GFx::AS2::GASPrototypeBaseVtbl *)&Scaleform::GFx::AS2::MovieClipProto::`vftable;
   flags.Flags = 1;
   Scaleform::GFx::AS2::GASPrototypeBase::InitFunctionMembers(
     (Scaleform::GFx::AS2::GASPrototypeBase *)&v5->vfptr,

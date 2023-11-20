@@ -22,10 +22,10 @@ void __fastcall DNA::PropertyData::SetValueAction::SetValueAction(DNA::PropertyD
   v4 = (UFG::qNode<DNA::IAction,DNA::IAction> *)&this->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  this->vfptr = (DNA::IActionVtbl *)&DNA::IAction::`vftable';
+  this->vfptr = (DNA::IActionVtbl *)&DNA::IAction::`vftable;
   this->mIsValid = 1;
   *(_QWORD *)&this->mTypeId = 724266166i64;
-  this->vfptr = (DNA::IActionVtbl *)&DNA::PropertyData::SetValueAction::`vftable';
+  this->vfptr = (DNA::IActionVtbl *)&DNA::PropertyData::SetValueAction::`vftable;
   UFG::qString::qString(&this->mOldValue, &value->mData);
   UFG::qString::qString(&v3->mNewValue);
   v3->mValue = v2;
@@ -42,7 +42,7 @@ void __fastcall DNA::PropertyData::AddValueAction::~AddValueAction(DNA::Property
   UFG::qNode<DNA::IAction,DNA::IAction> *v5; // rax
 
   v1 = this;
-  this->vfptr = (DNA::IActionVtbl *)&DNA::PropertyData::AddValueAction::`vftable';
+  this->vfptr = (DNA::IActionVtbl *)&DNA::PropertyData::AddValueAction::`vftable;
   if ( this->mState == 2 )
   {
     v2 = this->mValue;
@@ -52,7 +52,7 @@ void __fastcall DNA::PropertyData::AddValueAction::~AddValueAction(DNA::Property
       operator delete[](v2);
     }
   }
-  v1->vfptr = (DNA::IActionVtbl *)&DNA::IAction::`vftable';
+  v1->vfptr = (DNA::IActionVtbl *)&DNA::IAction::`vftable;
   v3 = (UFG::qNode<DNA::IAction,DNA::IAction> *)&v1->mPrev;
   v4 = v1->mPrev;
   v5 = v1->mNext;

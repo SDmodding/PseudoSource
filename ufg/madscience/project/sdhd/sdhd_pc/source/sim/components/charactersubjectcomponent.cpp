@@ -67,24 +67,24 @@ void __fastcall UFG::CharacterSubjectComponent::CharacterSubjectComponent(UFG::C
   v3 = (UFG::qNode<UFG::CharacterSubjectComponent,UFG::CharacterSubjectComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CharacterSubjectComponent::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CharacterSubjectComponent::`vftable;
   v4 = 4i64;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v2->mContextOverrideScriptGlobal,
     8ui64,
     4,
     (void (__fastcall *)(void *))BackInfo::BackInfo);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v2->mContextOverrideFreemanNPC,
     8ui64,
     4,
     (void (__fastcall *)(void *))BackInfo::BackInfo);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v2->mContextOverrideFreemanPlayer,
     8ui64,
     4,
     (void (__fastcall *)(void *))BackInfo::BackInfo);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v2->mContextOverrideScriptLocal,
     8ui64,
     4,
@@ -277,7 +277,7 @@ void __fastcall UFG::CharacterSubjectComponent::~CharacterSubjectComponent(UFG::
   UFG::qNode<UFG::CharacterSubjectComponent,UFG::CharacterSubjectComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CharacterSubjectComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CharacterSubjectComponent::`vftable;
   if ( this == UFG::CharacterSubjectComponent::s_CharacterSubjectComponentpCurrentIterator )
     UFG::CharacterSubjectComponent::s_CharacterSubjectComponentpCurrentIterator = (UFG::CharacterSubjectComponent *)&this->mPrev[-18];
   v2 = (UFG::qNode<UFG::CharacterSubjectComponent,UFG::CharacterSubjectComponent> *)&this->mPrev;
@@ -291,10 +291,10 @@ void __fastcall UFG::CharacterSubjectComponent::~CharacterSubjectComponent(UFG::
   UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->pTargetingSystemBaseComponent);
   UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->pCharacterAnimationComponent);
   UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->pCharacterPhysicsComponent);
-  `eh vector destructor iterator'(v1->mContextOverrideScriptLocal, 8ui64, 4, (void (__fastcall *)(void *))_);
-  `eh vector destructor iterator'(v1->mContextOverrideFreemanPlayer, 8ui64, 4, (void (__fastcall *)(void *))_);
-  `eh vector destructor iterator'(v1->mContextOverrideFreemanNPC, 8ui64, 4, (void (__fastcall *)(void *))_);
-  `eh vector destructor iterator'(v1->mContextOverrideScriptGlobal, 8ui64, 4, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(v1->mContextOverrideScriptLocal, 8ui64, 4, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(v1->mContextOverrideFreemanPlayer, 8ui64, 4, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(v1->mContextOverrideFreemanNPC, 8ui64, 4, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(v1->mContextOverrideScriptGlobal, 8ui64, 4, (void (__fastcall *)(void *))_);
   v5 = v2->mPrev;
   v6 = v2->mNext;
   v5->mNext = v6;
@@ -2460,7 +2460,7 @@ char __fastcall UFG::CharacterSubjectComponent::IsOverrideSymbolValid(__int64 _o
     if ( !(_S13_6 & 1) )
     {
       _S13_6 |= 1u;
-      `eh vector constructor iterator'(cached_names, 4ui64, 106, (void (__fastcall *)(void *))BackInfo::BackInfo);
+      `eh vector constructor iterator(cached_names, 4ui64, 106, (void (__fastcall *)(void *))BackInfo::BackInfo);
       atexit(UFG::CharacterSubjectComponent::IsOverrideSymbolValid_::_4_::_dynamic_atexit_destructor_for__cached_names__);
     }
     if ( !init_1 )

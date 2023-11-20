@@ -6,7 +6,7 @@ void __fastcall hkpVehicleInstance::hkpVehicleInstance(hkpVehicleInstance *this,
 
   v2 = this;
   hkpUnaryAction::hkpUnaryAction((hkpUnaryAction *)&this->vfptr, (hkpEntity *)&chassis->vfptr, 0i64);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpVehicleInstance::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpVehicleInstance::`vftable;
   v2->m_wheelsInfo.m_capacityAndFlags = 2147483648;
   v2->m_wheelsInfo.m_data = 0i64;
   v2->m_wheelsInfo.m_size = 0;
@@ -83,7 +83,7 @@ void __fastcall hkpVehicleInstance::~hkpVehicleInstance(hkpVehicleInstance *this
   int v17; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpVehicleInstance::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpVehicleInstance::`vftable;
   v2 = this->m_data;
   if ( v2 )
     hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);

@@ -8,7 +8,7 @@ void __fastcall hkpSimpleShapePhantom::hkpSimpleShapePhantom(hkpSimpleShapePhant
   v4 = collisionFilterInfo;
   v5 = this;
   hkpShapePhantom::hkpShapePhantom((hkpShapePhantom *)&this->vfptr, shape, transform);
-  v5->vfptr = (hkBaseObjectVtbl *)&hkpSimpleShapePhantom::`vftable';
+  v5->vfptr = (hkBaseObjectVtbl *)&hkpSimpleShapePhantom::`vftable;
   v5->m_collisionDetails.m_capacityAndFlags = 2147483648;
   v5->m_collisionDetails.m_data = 0i64;
   v5->m_collisionDetails.m_size = 0;
@@ -24,7 +24,7 @@ void __fastcall hkpSimpleShapePhantom::~hkpSimpleShapePhantom(hkpSimpleShapePhan
   int v2; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpSimpleShapePhantom::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpSimpleShapePhantom::`vftable;
   v2 = this->m_collisionDetails.m_capacityAndFlags;
   this->m_collisionDetails.m_size = 0;
   if ( v2 >= 0 )

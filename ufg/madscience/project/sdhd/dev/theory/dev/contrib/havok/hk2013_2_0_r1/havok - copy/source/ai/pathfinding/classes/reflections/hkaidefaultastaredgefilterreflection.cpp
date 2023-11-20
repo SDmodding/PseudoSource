@@ -31,7 +31,7 @@ hkClass *__fastcall hkaiDefaultAstarEdgeFilter::staticClass()
 void __fastcall finishLoadedObjecthkaiDefaultAstarEdgeFilter(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiDefaultAstarEdgeFilter::`vftable';
+    *(_QWORD *)p = &hkaiDefaultAstarEdgeFilter::`vftable;
 }
 
 // File Line: 69
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkaiDefaultAstarEdgeFilter(void *p)
 // RVA: 0xBB6530
 void **__fastcall getVtablehkaiDefaultAstarEdgeFilter()
 {
-  return &hkaiDefaultAstarEdgeFilter::`vftable';
+  return &hkaiDefaultAstarEdgeFilter::`vftable;
 }
 
 // File Line: 95

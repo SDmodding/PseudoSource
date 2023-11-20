@@ -3,7 +3,7 @@
 void __fastcall hkpWheelConstraintData::hkpWheelConstraintData(hkpWheelConstraintData *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpWheelConstraintData::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpWheelConstraintData::`vftable;
   this->m_userData = 0i64;
   this->m_atoms.m_suspensionBase.m_type.m_storage = 2;
   this->m_atoms.m_lin0Limit.m_type.m_storage = 9;

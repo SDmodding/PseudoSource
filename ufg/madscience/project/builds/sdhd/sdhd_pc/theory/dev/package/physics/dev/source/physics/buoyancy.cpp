@@ -311,7 +311,7 @@ void __fastcall UFG::BuoyancyAction::BuoyancyAction(UFG::BuoyancyAction *this, h
   v7 = body;
   v8 = (__m128 *)this;
   hkpUnaryAction::hkpUnaryAction((hkpUnaryAction *)&this->vfptr, (hkpEntity *)&body->vfptr, 0i64);
-  v8->m128_u64[0] = (unsigned __int64)&UFG::BuoyancyAction::`vftable';
+  v8->m128_u64[0] = (unsigned __int64)&UFG::BuoyancyAction::`vftable;
   v8[19].m128_f32[0] = waterElevation;
   v8[19].m128_f32[1] = buoyancyFactor;
   v8[19].m128_f32[2] = buoyancyDecayRate;

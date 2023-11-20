@@ -40,7 +40,7 @@ void __fastcall Copier::~Copier(Copier *this)
   hkMapBase<hkDataObject_Handle,Copier::LiveObjectInfo,hkMapOperations<hkDataObject_Handle>>::clearAndDeallocate(
     (hkMapBase<hkDataObject_Handle,Copier::LiveObjectInfo,hkMapOperations<hkDataObject_Handle> > *)&v1->m_liveInfoFromHandle.m_elem,
     (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr);
-  hkMapBase<hkDataObject_Handle,int,`anonymous namespace'::Writer::HandleOps>::clearAndDeallocate(
+  hkMapBase<hkDataObject_Handle,int,`anonymous namespace::Writer::HandleOps>::clearAndDeallocate(
     (hkMapBase<hkDataObject_Handle,int,HandleOps> *)&v1->m_pointerPatchesFromHandle.m_indexMap,
     (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr);
   v6 = v1->m_pointerPatchesFromHandle.m_valueChain.m_capacityAndFlags;

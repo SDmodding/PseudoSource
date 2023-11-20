@@ -39,7 +39,7 @@ void __fastcall UFG::SensorComponent::SensorComponent(UFG::SensorComponent *this
   v5 = (UFG::qNode<UFG::SensorComponent,UFG::SensorComponent> *)&v4->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SensorComponent::`vftable';
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SensorComponent::`vftable;
   v17 = &v4->mWallRunningRequests;
   v17->mNode.mPrev = &v17->mNode;
   v17->mNode.mNext = &v17->mNode;
@@ -216,7 +216,7 @@ void __fastcall UFG::SensorComponent::~SensorComponent(UFG::SensorComponent *thi
   UFG::qNode<UFG::SensorComponent,UFG::SensorComponent> *v19; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SensorComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SensorComponent::`vftable;
   if ( this == UFG::SensorComponent::s_SensorComponentpCurrentIterator )
     UFG::SensorComponent::s_SensorComponentpCurrentIterator = (UFG::SensorComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::SensorComponent,UFG::SensorComponent> *)&this->mPrev;

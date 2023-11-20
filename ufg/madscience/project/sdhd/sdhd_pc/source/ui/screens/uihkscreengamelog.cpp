@@ -38,7 +38,7 @@ UFG::GameLogManager *__fastcall UFG::GameLogManager::getInstance()
   if ( !(_S15_5 & 1) )
   {
     _S15_5 |= 1u;
-    glManager.vfptr = (UFG::GameLogManagerVtbl *)&UFG::GameLogManager::`vftable';
+    glManager.vfptr = (UFG::GameLogManagerVtbl *)&UFG::GameLogManager::`vftable;
     atexit(UFG::GameLogManager::getInstance_::_2_::_dynamic_atexit_destructor_for__glManager__);
   }
   return &glManager;
@@ -295,7 +295,7 @@ void __fastcall UFG::UIHKScreenGameLog::UIHKScreenGameLog(UFG::UIHKScreenGameLog
   v2 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -306,7 +306,7 @@ void __fastcall UFG::UIHKScreenGameLog::UIHKScreenGameLog(UFG::UIHKScreenGameLog
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenGameLog::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenGameLog::`vftable;
   this->m_bShouldRefesh = 0;
   this->mCurrentTab = 0;
   this->m_aCurrentTabItems.mCapacity = 100;
@@ -333,7 +333,7 @@ void __fastcall UFG::UIHKScreenGameLog::~UIHKScreenGameLog(UFG::UIHKScreenGameLo
   UFG::qMemoryPool *v6; // rcx
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenGameLog::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenGameLog::`vftable;
   v2 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseScreen(v2, "GameLog");
   v3 = UFG::UIHKScreenGlobalOverlay::mThis;
@@ -432,12 +432,12 @@ LABEL_11:
   }
   pargs.Type = 0;
   UFG::qString::~qString((UFG::qString *)dataa.MessageIds);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     &dataa.Captions[5].mMagic,
     0x28ui64,
     6,
     (void (__fastcall *)(void *))UFG::qString::~qString);
-  `eh vector destructor iterator'(dataa.Buttons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+  `eh vector destructor iterator(dataa.Buttons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
 }
 
 // File Line: 224
@@ -646,7 +646,7 @@ void __fastcall UFG::UIHKScreenGameLog::UpdateList(UFG::UIHKScreenGameLog *this)
   if ( !(_S15_5 & 1) )
   {
     _S15_5 |= 1u;
-    glManager.vfptr = (UFG::GameLogManagerVtbl *)&UFG::GameLogManager::`vftable';
+    glManager.vfptr = (UFG::GameLogManagerVtbl *)&UFG::GameLogManager::`vftable;
     atexit(UFG::GameLogManager::getInstance_::_2_::_dynamic_atexit_destructor_for__glManager__);
   }
   switch ( v1->mCurrentTab )
@@ -719,7 +719,7 @@ void __fastcall UFG::UIHKScreenGameLog::Refresh(UFG::UIHKScreenGameLog *this)
     }
     if ( i >= v4 )
       break;
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( (v17 >> 6) & 1 )
     {
       (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v16 + 16i64))(
@@ -779,7 +779,7 @@ void __fastcall UFG::UIHKScreenGameLog::Refresh(UFG::UIHKScreenGameLog *this)
     }
     v21 = 6;
     Scaleform::GFx::Movie::Invoke(v1->m_Movie, "AddSlot", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
   Scaleform::GFx::Movie::Invoke(v1->m_Movie, "GameLog_Refresh", 0i64, 0i64, 0);
   UFG::UIHKScreenGameLog::Flash_SetSelectedTab(v1, v1->mCurrentTab);
@@ -795,7 +795,7 @@ void __fastcall UFG::UIHKScreenGameLog::Flash_SetSelectedTab(UFG::UIHKScreenGame
 
   v2 = index;
   v3 = this->mRenderable->m_movie.pObject;
-  `eh vector constructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( ((unsigned int)pargs.Type >> 6) & 1 )
   {
     (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
@@ -807,7 +807,7 @@ void __fastcall UFG::UIHKScreenGameLog::Flash_SetSelectedTab(UFG::UIHKScreenGame
   pargs.Type = 5;
   pargs.mValue.NValue = (double)v2;
   Scaleform::GFx::Movie::Invoke(v3, "TabMenuWidgetList_JumpToItemIndex", 0i64, &pargs, 1u);
-  `eh vector destructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 389
@@ -857,7 +857,7 @@ void __fastcall UFG::UIHKScreenSaveLoad::Flash_HandleMouseClick(UFG::UIHKScreenU
   v3 = this->mRenderable->m_movie.pObject;
   if ( v3 )
   {
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( (v6 >> 6) & 1 )
     {
       (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v5 + 16i64))(v5, &ptr, COERCE_DOUBLE(*(_QWORD *)&v7));
@@ -873,7 +873,7 @@ void __fastcall UFG::UIHKScreenSaveLoad::Flash_HandleMouseClick(UFG::UIHKScreenU
     v10 = 5;
     v11 = mouseY;
     Scaleform::GFx::Movie::Invoke(v3, "HandleMouseClick", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 

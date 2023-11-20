@@ -35,8 +35,8 @@ void __fastcall finishLoadedObjecthkxBlobMeshShape(void *p, int finishing)
   if ( p )
   {
     v2 = (hkStringPtr *)((char *)p + 48);
-    v2[-6].m_stringAndFlag = (const char *)&hkxBlobMeshShape::`vftable';
-    v2[-4].m_stringAndFlag = (const char *)&hkxBlob::`vftable';
+    v2[-6].m_stringAndFlag = (const char *)&hkxBlobMeshShape::`vftable;
+    v2[-4].m_stringAndFlag = (const char *)&hkxBlob::`vftable;
     hkStringPtr::hkStringPtr(v2, (hkFinishLoadedObjectFlag)finishing);
   }
 }
@@ -55,7 +55,7 @@ void **__fastcall getVtablehkxBlobMeshShape()
   hkStringPtr v1; // [rsp+50h] [rbp-18h]
 
   hkStringPtr::hkStringPtr(&v1, 0);
-  return &hkxBlobMeshShape::`vftable';
+  return &hkxBlobMeshShape::`vftable;
 }
 
 // File Line: 98

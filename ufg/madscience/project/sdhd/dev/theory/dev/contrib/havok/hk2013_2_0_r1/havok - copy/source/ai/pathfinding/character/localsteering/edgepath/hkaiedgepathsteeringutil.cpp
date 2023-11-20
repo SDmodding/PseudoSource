@@ -405,7 +405,7 @@ LABEL_15:
         v71 = _mm_cmpleps(v70, (__m128)0i64);
         v72 = _mm_or_ps(
                 _mm_andnot_ps(v71, _mm_mul_ps(_mm_shuffle_ps(v69, v70, 228), v70)),
-                _mm_and_ps(v71, `hkaiEdgePathSteeringUtil::calcTangentDirs'::`2'::insideLenFactorsQuad));
+                _mm_and_ps(v71, `hkaiEdgePathSteeringUtil::calcTangentDirs::`2::insideLenFactorsQuad));
         v73 = _mm_rsqrt_ps(v72);
         v74 = _mm_mul_ps(
                 _mm_andnot_ps(
@@ -710,7 +710,7 @@ LABEL_28:
         v167 = _mm_cmpleps(v166, (__m128)0i64);
         v168 = _mm_or_ps(
                  _mm_andnot_ps(v167, _mm_mul_ps(_mm_shuffle_ps(v165, v166, 228), v166)),
-                 _mm_and_ps(v167, `hkaiEdgePathSteeringUtil::calcTangentDirs'::`2'::insideLenFactorsQuad));
+                 _mm_and_ps(v167, `hkaiEdgePathSteeringUtil::calcTangentDirs::`2::insideLenFactorsQuad));
         v169 = _mm_rsqrt_ps(v168);
         v170 = _mm_mul_ps(
                  _mm_andnot_ps(

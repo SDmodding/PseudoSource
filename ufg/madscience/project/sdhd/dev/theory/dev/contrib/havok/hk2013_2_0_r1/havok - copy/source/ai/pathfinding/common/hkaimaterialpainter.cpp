@@ -9,7 +9,7 @@ void __fastcall hkaiMaterialPainter::hkaiMaterialPainter(hkaiMaterialPainter *th
   v4 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_material = material;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiMaterialPainter::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiMaterialPainter::`vftable;
   if ( volume )
   {
     hkReferencedObject::addReference((hkReferencedObject *)&volume->vfptr);
@@ -25,7 +25,7 @@ void __fastcall hkaiMaterialPainter::hkaiMaterialPainter(hkaiMaterialPainter *th
 // RVA: 0xBECFC0
 void __fastcall hkaiMaterialPainter::hkaiMaterialPainter(hkaiMaterialPainter *this, hkFinishLoadedObjectFlag f)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiMaterialPainter::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiMaterialPainter::`vftable;
 }
 
 // File Line: 23
@@ -36,12 +36,12 @@ void __fastcall hkaiMaterialPainter::~hkaiMaterialPainter(hkaiMaterialPainter *t
   hkaiVolume *v2; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiMaterialPainter::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiMaterialPainter::`vftable;
   v2 = this->m_volume.m_pntr;
   if ( v2 )
     hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
   v1->m_volume.m_pntr = 0i64;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 27

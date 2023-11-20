@@ -42,7 +42,7 @@ hkClass *__fastcall hkxAnimatedFloat::staticClass()
 void __fastcall finishLoadedObjecthkxAnimatedFloat(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkxAnimatedFloat::`vftable';
+    *(_QWORD *)p = &hkxAnimatedFloat::`vftable;
 }
 
 // File Line: 72
@@ -56,7 +56,7 @@ void __fastcall cleanupLoadedObjecthkxAnimatedFloat(void *p)
 // RVA: 0xE316D0
 void **__fastcall getVtablehkxAnimatedFloat()
 {
-  return &hkxAnimatedFloat::`vftable';
+  return &hkxAnimatedFloat::`vftable;
 }
 
 // File Line: 98

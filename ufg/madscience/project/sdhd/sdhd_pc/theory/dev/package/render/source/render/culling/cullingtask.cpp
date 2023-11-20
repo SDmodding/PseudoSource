@@ -601,7 +601,7 @@ void __fastcall Render::CullManager_CullBucketTask(int worker_id, UFG::qMemorySt
   v117 = &v112;
   _R13 = 0i64;
   v142 = 0i64;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     &ptr,
     0x18ui64,
     2,
@@ -1011,7 +1011,7 @@ LABEL_70:
     }
   }
 LABEL_75:
-  `eh vector destructor iterator'(&ptr, 0x18ui64, 2, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(&ptr, 0x18ui64, 2, (void (__fastcall *)(void *))_);
 }
 
 // File Line: 1718

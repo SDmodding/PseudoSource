@@ -9,13 +9,13 @@ void UFG::NavManager::Initialize(void)
 // RVA: 0x2627D0
 void __fastcall UFG::NavManager::NavManager(UFG::NavManager *this)
 {
-  this->vfptr = (UFG::NavManagerVtbl *)&UFG::NavManager::`vftable';
+  this->vfptr = (UFG::NavManagerVtbl *)&UFG::NavManager::`vftable;
 }
 
 // File Line: 22
 // RVA: 0x262E90
 void __fastcall UFG::NavManager::~NavManager(UFG::NavManager *this)
 {
-  this->vfptr = (UFG::NavManagerVtbl *)&UFG::NavManager::`vftable';
+  this->vfptr = (UFG::NavManagerVtbl *)&UFG::NavManager::`vftable;
 }
 

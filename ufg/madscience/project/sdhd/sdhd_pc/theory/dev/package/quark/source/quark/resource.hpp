@@ -68,12 +68,12 @@ void __fastcall UFG::qTypedResourceHandle<2161242425,Illusion::MaterialTable>::~
   UFG::qResourceWarehouse *v3; // rax
 
   v1 = this;
-  v2 = `UFG::qGetResourceInventory<Illusion::MaterialTable>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::MaterialTable>'::`2'::result )
+  v2 = `UFG::qGetResourceInventory<Illusion::MaterialTable>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::MaterialTable>::`2::result )
   {
     v3 = UFG::qResourceWarehouse::Instance();
     v2 = UFG::qResourceWarehouse::GetInventory(v3, 0x80D1F139);
-    `UFG::qGetResourceInventory<Illusion::MaterialTable>'::`2'::result = v2;
+    `UFG::qGetResourceInventory<Illusion::MaterialTable>::`2::result = v2;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mPrev, v2);
   UFG::qResourceHandle::~qResourceHandle((UFG::qResourceHandle *)&v1->mPrev);
@@ -89,15 +89,15 @@ void __fastcall UFG::qTypedResourceHandle<968624766,UFG::RigResource>::Init(UFG:
   UFG::qTypedResourceHandle<968624766,UFG::RigResource> *v6; // rsi
   UFG::qResourceWarehouse *v7; // rax
 
-  inventory = `UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result;
+  inventory = `UFG::qGetResourceInventory<UFG::RigResource>::`2::result;
   v4 = resource_data;
   v5 = name_uid;
   v6 = this;
-  if ( !`UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result )
+  if ( !`UFG::qGetResourceInventory<UFG::RigResource>::`2::result )
   {
     v7 = UFG::qResourceWarehouse::Instance();
     inventory = UFG::qResourceWarehouse::GetInventory(v7, 0x39BC0A7Eu);
-    `UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result = inventory;
+    `UFG::qGetResourceInventory<UFG::RigResource>::`2::result = inventory;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v6->mPrev, 0x39BC0A7Eu, v5, v4, inventory);
 }
@@ -111,14 +111,14 @@ void __fastcall UFG::qTypedResourceHandle<2729299319,Illusion::Model>::Init(UFG:
   UFG::qTypedResourceHandle<2729299319,Illusion::Model> *v4; // rdi
   UFG::qResourceWarehouse *v5; // rax
 
-  v2 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
+  v2 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
   v3 = name_uid;
   v4 = this;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v5 = UFG::qResourceWarehouse::Instance();
     v2 = UFG::qResourceWarehouse::GetInventory(v5, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v2;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v2;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v4->mPrev, 0xA2ADCD77, v3, v2);
 }
@@ -153,13 +153,13 @@ UFG::qResourceInventory *__fastcall UFG::qGetResourceInventory<UFG::qPropertySet
   unsigned int type_uid; // [rsp+30h] [rbp+8h]
 
   type_uid = typeUID;
-  if ( !`UFG::qGetResourceInventory<UFG::qPropertySetResource>'::`2'::result )
+  if ( !`UFG::qGetResourceInventory<UFG::qPropertySetResource>::`2::result )
   {
     v1 = UFG::qResourceWarehouse::Instance();
-    `UFG::qGetResourceInventory<UFG::qPropertySetResource>'::`2'::result = UFG::qResourceWarehouse::GetInventory(
+    `UFG::qGetResourceInventory<UFG::qPropertySetResource>::`2::result = UFG::qResourceWarehouse::GetInventory(
                                                                              v1,
                                                                              type_uid);
   }
-  return `UFG::qGetResourceInventory<UFG::qPropertySetResource>'::`2'::result;
+  return `UFG::qGetResourceInventory<UFG::qPropertySetResource>::`2::result;
 }
 

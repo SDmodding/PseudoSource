@@ -4,7 +4,7 @@ void __fastcall hkpVehicleDefaultVelocityDamper::hkpVehicleDefaultVelocityDamper
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_collisionThreshold = 1.0;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpVehicleDefaultVelocityDamper::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpVehicleDefaultVelocityDamper::`vftable;
   *(_QWORD *)&this->m_normalSpinDamping = 0i64;
 }
 

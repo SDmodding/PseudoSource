@@ -46,7 +46,7 @@ void __fastcall UFG::NavComponent::SetControllerModule<UFG::NavModuleControllerP
   v3 = UFG::qMalloc(0x28ui64, "SetControllerModule", 0i64);
   if ( v3 )
   {
-    v3->mNext = (UFG::allocator::free_link *)&UFG::NavModuleController::`vftable';
+    v3->mNext = (UFG::allocator::free_link *)&UFG::NavModuleController::`vftable;
     v3[1].mNext = (UFG::allocator::free_link *)v1;
     v4 = UFG::qVector3::msZero.y;
     v5 = UFG::qVector3::msZero.z;
@@ -54,7 +54,7 @@ void __fastcall UFG::NavComponent::SetControllerModule<UFG::NavModuleControllerP
     *((float *)&v3[2].mNext + 1) = v4;
     *(float *)&v3[3].mNext = v5;
     HIDWORD(v3[3].mNext) = 0;
-    v3->mNext = (UFG::allocator::free_link *)&UFG::NavModuleControllerPedestrian::`vftable';
+    v3->mNext = (UFG::allocator::free_link *)&UFG::NavModuleControllerPedestrian::`vftable;
     LOBYTE(v3[4].mNext) = 0;
     HIDWORD(v3[4].mNext) = -1082130432;
     v1->m_pNavModuleController = (UFG::NavModuleController *)v3;

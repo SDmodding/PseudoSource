@@ -1,13 +1,13 @@
 // File Line: 30
 // RVA: 0xE6AC70
-bool __fastcall `anonymous namespace'::inRange(int num, int lo, int hi)
+bool __fastcall `anonymous namespace::inRange(int num, int lo, int hi)
 {
   return num >= lo && num < hi;
 }
 
 // File Line: 35
 // RVA: 0xE6B2F0
-__int64 __fastcall `anonymous namespace'::min2<int>(int a, int b)
+__int64 __fastcall `anonymous namespace::min2<int>(int a, int b)
 {
   if ( a < b )
     b = a;
@@ -21,7 +21,7 @@ void __fastcall hkObjectCopier::hkObjectCopier(hkObjectCopier *this, hkStructure
   hkStructureLayout v4; // eax
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkObjectCopier::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkObjectCopier::`vftable;
   this->m_layoutIn = *layoutIn;
   v4 = *layoutOut;
   this->m_flags = flags;
@@ -33,7 +33,7 @@ void __fastcall hkObjectCopier::hkObjectCopier(hkObjectCopier *this, hkStructure
 // RVA: 0xE68BA0
 void __fastcall hkObjectCopier::~hkObjectCopier(hkObjectCopier *this)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 74
@@ -680,7 +680,7 @@ LABEL_21:
         v40 = objectCopier_calcCArraySize(member);
         v41 = objectCopier_calcCArraySize(v118);
         v42 = hkClassMember::getSizeInBytes(v118);
-        v43 = `anonymous namespace'::min2<int>(v40, v41);
+        v43 = `anonymous namespace::min2<int>(v40, v41);
         v44 = v42 / v41;
         v6 = oa;
         writePodArray(oa, (hkClassMember::Type)(unsigned __int8)v118->m_type.m_storage, v44, v43, startAddress);
@@ -721,7 +721,7 @@ LABEL_21:
             hkErrStream::hkErrStream(&v132, &description, 512);
             v58 = member->m_name;
             v59 = hkClass::getName(v140);
-            v60 = hkOstream::operator<<((hkOstream *)&v132.vfptr, "Can't copy homogeneous array. No hkClass for ");
+            v60 = hkOstream::operator<<((hkOstream *)&v132.vfptr, "Cant copy homogeneous array. No hkClass for ");
             v61 = hkOstream::operator<<(v60, v59);
             v62 = hkOstream::operator<<(v61, "::");
             v63 = hkOstream::operator<<(v62, v58);
@@ -754,7 +754,7 @@ LABEL_21:
           {
             v48 = objectCopier_calcCArraySize(member);
             v49 = objectCopier_calcCArraySize(v11);
-            v105 = `anonymous namespace'::min2<int>(v48, v49);
+            v105 = `anonymous namespace::min2<int>(v48, v49);
             ptr = (hkClassMember *)hkClassMember::getEnumClass(member);
             v113 = hkClassMember::getEnumClass(v11);
             v50 = (signed int)hkClassMember::getSizeInBytes(member) / v48;
@@ -801,7 +801,7 @@ LABEL_21:
           {
             v76 = objectCopier_calcCArraySize(v11);
             v77 = objectCopier_calcCArraySize(member);
-            v78 = `anonymous namespace'::min2<int>(v77, v76);
+            v78 = `anonymous namespace::min2<int>(v77, v76);
             v79 = 0;
             v105 = v78;
             if ( v78 > 0 )
@@ -822,7 +822,7 @@ LABEL_21:
         v136 = 0i64;
         v82 = objectCopier_calcCArraySize(v11);
         v83 = objectCopier_calcCArraySize(member);
-        v84 = `anonymous namespace'::min2<int>(v83, v82);
+        v84 = `anonymous namespace::min2<int>(v83, v82);
         if ( v84 > 0 )
         {
           v85 = (unsigned int)v84;
@@ -837,7 +837,7 @@ LABEL_21:
       case 30:
         v45 = objectCopier_calcCArraySize(member);
         v46 = objectCopier_calcCArraySize(v11);
-        v47 = `anonymous namespace'::min2<int>(v45, v46);
+        v47 = `anonymous namespace::min2<int>(v45, v46);
         writeUlongArray(v6, (unsigned __int8)v138->m_layoutOut.m_rules.m_bytesInPointer, v47, startAddress);
         break;
       case 31:
@@ -847,7 +847,7 @@ LABEL_21:
           {
             v86 = objectCopier_calcCArraySize(member);
             v87 = objectCopier_calcCArraySize(v11);
-            v105 = `anonymous namespace'::min2<int>(v86, v87);
+            v105 = `anonymous namespace::min2<int>(v86, v87);
             v130 = hkClassMember::getEnumClass(member);
             v88 = hkClassMember::getEnumClass(v11);
             v89 = member;
@@ -1353,7 +1353,7 @@ void __fastcall hkObjectCopier::saveExtras(hkObjectCopier *this, const void *dat
             case 0x14:
               v20 = objectCopier_calcCArraySize(member);
               v21 = objectCopier_calcCArraySize(v128);
-              v22 = (hkClass *)`anonymous namespace'::min2<int>(v21, v20);
+              v22 = (hkClass *)`anonymous namespace::min2<int>(v21, v20);
               v23 = objectCopier_calcCArraySize(v128);
               v24 = hkClassMember::getSizeInBytes(v128);
               v25 = 0;
@@ -1691,7 +1691,7 @@ void __fastcall hkObjectCopier::saveExtras(hkObjectCopier *this, const void *dat
                 v126 = classStart + member->m_offset;
                 v87 = objectCopier_calcCArraySize(v128);
                 v88 = objectCopier_calcCArraySize(member);
-                v89 = `anonymous namespace'::min2<int>(v87, v88);
+                v89 = `anonymous namespace::min2<int>(v87, v88);
                 v90 = 0;
                 memberb = v89;
                 for ( k = 0; v90 < memberb; k = v90 )
@@ -1761,7 +1761,7 @@ void __fastcall hkObjectCopier::saveExtras(hkObjectCopier *this, const void *dat
             case 0x1C:
               v93 = objectCopier_calcCArraySize(v128);
               v94 = objectCopier_calcCArraySize(member);
-              v95 = `anonymous namespace'::min2<int>(v93, v94);
+              v95 = `anonymous namespace::min2<int>(v93, v94);
               v96 = 0;
               v97 = 0i64;
               v115 = 0;
@@ -1938,7 +1938,7 @@ hkResult *__fastcall hkObjectCopier::copyObject(hkObjectCopier *this, hkResult *
     v14->m_cur = (void *)v16;
   zeroArray.m_data = v15;
   zeroArray.m_localMemory = v15;
-  sw.vfptr = (hkBaseObjectVtbl *)&hkArrayStreamWriter::`vftable';
+  sw.vfptr = (hkBaseObjectVtbl *)&hkArrayStreamWriter::`vftable;
   v17 = &array;
   v18 = v38 + 1;
   v46 = v38;
@@ -1971,7 +1971,7 @@ hkResult *__fastcall hkObjectCopier::copyObject(hkObjectCopier *this, hkResult *
   hkArrayStreamWriter::clear((hkArrayStreamWriter *)&sw);
   v10->m_enum = hkOArchive::isOk(&v48, (hkBool *)&dataOut)->m_bool == 0;
   hkOArchive::~hkOArchive(&v48);
-  sw.vfptr = (hkBaseObjectVtbl *)&hkArrayStreamWriter::`vftable';
+  sw.vfptr = (hkBaseObjectVtbl *)&hkArrayStreamWriter::`vftable;
   if ( !v47 )
   {
     v24 = (__int64)v44;
@@ -1982,7 +1982,7 @@ hkResult *__fastcall hkObjectCopier::copyObject(hkObjectCopier *this, hkResult *
     }
   }
   v26 = zeroArray.m_localMemory;
-  sw.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  sw.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
   v27 = zeroArray.m_size;
   if ( zeroArray.m_localMemory == zeroArray.m_data )
     v27 = 0;

@@ -12,7 +12,7 @@ void __fastcall SSInvokedBase::~SSInvokedBase(SSInvokedBase *this)
   AListNode<SSInvokedBase,SSInvokedBase> *v8; // rax
 
   v1 = this;
-  this->vfptr = (SSObjectBaseVtbl *)&SSInvokedBase::`vftable';
+  this->vfptr = (SSObjectBaseVtbl *)&SSInvokedBase::`vftable;
   this->i_ptr_id = 0;
   v2 = &this->i_calls;
   v3 = this->i_calls.i_sentinel.i_next_p;
@@ -47,7 +47,7 @@ void __fastcall SSInvokedBase::~SSInvokedBase(SSInvokedBase *this)
     v1->i_prev_p = (AListNode<SSInvokedBase,SSInvokedBase> *)&v1->i_next_p;
     v1->i_next_p = (AListNode<SSInvokedBase,SSInvokedBase> *)&v1->i_next_p;
   }
-  v1->vfptr = (SSObjectBaseVtbl *)&SSObjectBase::`vftable';
+  v1->vfptr = (SSObjectBaseVtbl *)&SSObjectBase::`vftable;
 }
 
 // File Line: 59

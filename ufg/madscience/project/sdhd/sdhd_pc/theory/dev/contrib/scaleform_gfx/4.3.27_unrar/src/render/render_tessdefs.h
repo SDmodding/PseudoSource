@@ -2,7 +2,7 @@
 // RVA: 0x94D0D0
 void __fastcall Scaleform::Render::TessBase::~TessBase(Scaleform::Render::TessBase *this)
 {
-  this->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable';
+  this->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable;
 }
 
 // File Line: 116
@@ -23,6 +23,6 @@ float __fastcall Scaleform::Render::VertexPath::GetLastY(Scaleform::Render::Vert
 // RVA: 0x8A8710
 void __fastcall Scaleform::Render::TransformerBase::~TransformerBase(Scaleform::Render::TransformerBase *this)
 {
-  this->vfptr = (Scaleform::Render::TransformerBaseVtbl *)&Scaleform::Render::TransformerBase::`vftable';
+  this->vfptr = (Scaleform::Render::TransformerBaseVtbl *)&Scaleform::Render::TransformerBase::`vftable;
 }
 

@@ -9,7 +9,7 @@ __int64 Render::_dynamic_initializer_for__gTrackStripSettingsInventory__()
     0x86DE69F6,
     0,
     0);
-  Render::gTrackStripSettingsInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::TrackStripSettingsInventory::`vftable';
+  Render::gTrackStripSettingsInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::TrackStripSettingsInventory::`vftable;
   return atexit(Render::_dynamic_atexit_destructor_for__gTrackStripSettingsInventory__);
 }
 

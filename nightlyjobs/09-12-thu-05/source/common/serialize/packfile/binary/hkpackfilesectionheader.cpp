@@ -1,6 +1,6 @@
 // File Line: 15
 // RVA: 0xE67370
-__int64 __fastcall `anonymous namespace'::extractAndAdvance<int>(const void *p, int *off)
+__int64 __fastcall `anonymous namespace::extractAndAdvance<int>(const void *p, int *off)
 {
   __int64 v2; // r8
 
@@ -11,7 +11,7 @@ __int64 __fastcall `anonymous namespace'::extractAndAdvance<int>(const void *p, 
 
 // File Line: 22
 // RVA: 0xE67330
-const char *__fastcall `anonymous namespace'::extractAndAdvanceString(const void *p, int *off)
+const char *__fastcall `anonymous namespace::extractAndAdvanceString(const void *p, int *off)
 {
   int *v2; // r9
   __int64 v3; // rdx
@@ -69,11 +69,11 @@ void __fastcall hkPackfileSectionHeader::getExports(hkPackfileSectionHeader *thi
   {
     do
     {
-      v9 = `anonymous namespace'::extractAndAdvance<int>(v8, &off);
+      v9 = `anonymous namespace::extractAndAdvance<int>(v8, &off);
       v10 = v9;
       if ( v9 == -1 )
         break;
-      v11 = `anonymous namespace'::extractAndAdvanceString(v8, &off);
+      v11 = `anonymous namespace::extractAndAdvanceString(v8, &off);
       if ( v3->m_size == (v3->m_capacityAndFlags & 0x3FFFFFFF) )
         hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v3, 16);
       v12 = &v3->m_data[v3->m_size++];
@@ -111,11 +111,11 @@ void __fastcall hkPackfileSectionHeader::getImports(hkPackfileSectionHeader *thi
   {
     do
     {
-      v9 = `anonymous namespace'::extractAndAdvance<int>(v8, &off);
+      v9 = `anonymous namespace::extractAndAdvance<int>(v8, &off);
       v10 = v9;
       if ( v9 == -1 )
         break;
-      v11 = `anonymous namespace'::extractAndAdvanceString(v8, &off);
+      v11 = `anonymous namespace::extractAndAdvanceString(v8, &off);
       if ( v3->m_size == (v3->m_capacityAndFlags & 0x3FFFFFFF) )
         hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v3, 16);
       v12 = &v3->m_data[v3->m_size++];

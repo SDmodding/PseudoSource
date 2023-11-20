@@ -34,7 +34,7 @@ void __fastcall TracksEnum<unsigned long>::~TracksEnum<unsigned long>(TracksEnum
   UFG::qNode<TracksEnumBinding<float>,TracksEnumBinding<float> > *v7; // rax
 
   v1 = (UFG::qList<TracksEnumBinding<float>,TracksEnumBinding<float>,1,0> *)this;
-  this->vfptr = (TracksEnum<unsigned long>Vtbl *)&TracksEnum<unsigned long>::`vftable';
+  this->vfptr = (TracksEnum<unsigned long>Vtbl *)&TracksEnum<unsigned long>::`vftable;
   TracksEnum<unsigned long>::Unload((TracksEnum<float> *)this);
   UFG::qList<TracksEnumBinding<float>,TracksEnumBinding<float>,1,0>::DeleteNodes(v1 + 3);
   v2 = v1[3].mNode.mPrev;
@@ -68,25 +68,25 @@ void __fastcall TracksEnum<float>::TracksEnum<float>(TracksEnum<float> *this, co
   v2 = (UFG::qNode<UFG::qString,UFG::qString> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (TracksEnum<float>Vtbl *)&TracksEnum<float>::`vftable';
+  this->vfptr = (TracksEnum<float>Vtbl *)&TracksEnum<float>::`vftable;
   this->m_enumLists.p = 0i64;
   *(_QWORD *)&this->m_enumLists.size = 0i64;
   this->m_fileName = pFileName;
   v4 = &this->m_UnresolvedTracksEnumBindingList;
   v4->mNode.mPrev = &v4->mNode;
   v4->mNode.mNext = &v4->mNode;
-  if ( !(`TracksEnum<float>::GetTracksEnumList'::`2'::`local static guard' & 1) )
+  if ( !(`TracksEnum<float>::GetTracksEnumList::`2::`local static guard & 1) )
   {
-    `TracksEnum<float>::GetTracksEnumList'::`2'::`local static guard' |= 1u;
-    `TracksEnum<float>::GetTracksEnumList'::`2'::m_TracksEnumList.mPrev = &`TracksEnum<float>::GetTracksEnumList'::`2'::m_TracksEnumList;
-    `TracksEnum<float>::GetTracksEnumList'::`2'::m_TracksEnumList.mNext = &`TracksEnum<float>::GetTracksEnumList'::`2'::m_TracksEnumList;
+    `TracksEnum<float>::GetTracksEnumList::`2::`local static guard |= 1u;
+    `TracksEnum<float>::GetTracksEnumList::`2::m_TracksEnumList.mPrev = &`TracksEnum<float>::GetTracksEnumList::`2::m_TracksEnumList;
+    `TracksEnum<float>::GetTracksEnumList::`2::m_TracksEnumList.mNext = &`TracksEnum<float>::GetTracksEnumList::`2::m_TracksEnumList;
     atexit(TracksEnum_float_::GetTracksEnumList_::_2_::_dynamic_atexit_destructor_for__m_TracksEnumList__);
   }
-  v3 = `TracksEnum<float>::GetTracksEnumList'::`2'::m_TracksEnumList.mPrev;
-  `TracksEnum<float>::GetTracksEnumList'::`2'::m_TracksEnumList.mPrev->mNext = v2;
+  v3 = `TracksEnum<float>::GetTracksEnumList::`2::m_TracksEnumList.mPrev;
+  `TracksEnum<float>::GetTracksEnumList::`2::m_TracksEnumList.mPrev->mNext = v2;
   v2->mPrev = v3;
-  v2->mNext = &`TracksEnum<float>::GetTracksEnumList'::`2'::m_TracksEnumList;
-  `TracksEnum<float>::GetTracksEnumList'::`2'::m_TracksEnumList.mPrev = v2;
+  v2->mNext = &`TracksEnum<float>::GetTracksEnumList::`2::m_TracksEnumList;
+  `TracksEnum<float>::GetTracksEnumList::`2::m_TracksEnumList.mPrev = v2;
 }
 
 // File Line: 162
@@ -170,7 +170,7 @@ void __fastcall TracksEnum<unsigned long>::TracksEnum<unsigned long>(TracksEnum<
   v6 = (UFG::qNode<UFG::qString,UFG::qString> *)&this->mPrev;
   v6->mPrev = v6;
   v6->mNext = v6;
-  this->vfptr = (TracksEnum<unsigned long>Vtbl *)&TracksEnum<unsigned long>::`vftable';
+  this->vfptr = (TracksEnum<unsigned long>Vtbl *)&TracksEnum<unsigned long>::`vftable;
   v7 = 0;
   this->m_enumLists.p = 0i64;
   *(_QWORD *)&this->m_enumLists.size = 0i64;
@@ -178,18 +178,18 @@ void __fastcall TracksEnum<unsigned long>::TracksEnum<unsigned long>(TracksEnum<
   v8 = &this->m_UnresolvedTracksEnumBindingList;
   v8->mNode.mPrev = &v8->mNode;
   v8->mNode.mNext = &v8->mNode;
-  if ( !(`TracksEnum<unsigned long>::GetTracksEnumList'::`2'::`local static guard' & 1) )
+  if ( !(`TracksEnum<unsigned long>::GetTracksEnumList::`2::`local static guard & 1) )
   {
-    `TracksEnum<unsigned long>::GetTracksEnumList'::`2'::`local static guard' |= 1u;
-    `TracksEnum<unsigned long>::GetTracksEnumList'::`2'::m_TracksEnumList.mPrev = &`TracksEnum<unsigned long>::GetTracksEnumList'::`2'::m_TracksEnumList;
-    `TracksEnum<unsigned long>::GetTracksEnumList'::`2'::m_TracksEnumList.mNext = &`TracksEnum<unsigned long>::GetTracksEnumList'::`2'::m_TracksEnumList;
+    `TracksEnum<unsigned long>::GetTracksEnumList::`2::`local static guard |= 1u;
+    `TracksEnum<unsigned long>::GetTracksEnumList::`2::m_TracksEnumList.mPrev = &`TracksEnum<unsigned long>::GetTracksEnumList::`2::m_TracksEnumList;
+    `TracksEnum<unsigned long>::GetTracksEnumList::`2::m_TracksEnumList.mNext = &`TracksEnum<unsigned long>::GetTracksEnumList::`2::m_TracksEnumList;
     atexit(TracksEnum_unsigned_long_::GetTracksEnumList_::_2_::_dynamic_atexit_destructor_for__m_TracksEnumList__);
   }
-  v9 = `TracksEnum<unsigned long>::GetTracksEnumList'::`2'::m_TracksEnumList.mPrev;
-  `TracksEnum<unsigned long>::GetTracksEnumList'::`2'::m_TracksEnumList.mPrev->mNext = v6;
+  v9 = `TracksEnum<unsigned long>::GetTracksEnumList::`2::m_TracksEnumList.mPrev;
+  `TracksEnum<unsigned long>::GetTracksEnumList::`2::m_TracksEnumList.mPrev->mNext = v6;
   v6->mPrev = v9;
-  v6->mNext = &`TracksEnum<unsigned long>::GetTracksEnumList'::`2'::m_TracksEnumList;
-  `TracksEnum<unsigned long>::GetTracksEnumList'::`2'::m_TracksEnumList.mPrev = v6;
+  v6->mNext = &`TracksEnum<unsigned long>::GetTracksEnumList::`2::m_TracksEnumList;
+  `TracksEnum<unsigned long>::GetTracksEnumList::`2::m_TracksEnumList.mPrev = v6;
   v10 = UFG::qMalloc(0x48ui64, "TRACKSENUM", 0i64);
   v11 = v10;
   v67 = (EnumList<unsigned long> *)v10;
@@ -271,29 +271,29 @@ void __fastcall TracksEnum<unsigned long>::TracksEnum<unsigned long>(TracksEnum<
       }
       *v12 = v17;
       *(_DWORD *)(*((_QWORD *)v12 + 1) + 4 * v16) = v15;
-      if ( !(`UFG::qStaticInitAllocator::Instance'::`2'::`local static guard' & 1) )
+      if ( !(`UFG::qStaticInitAllocator::Instance::`2::`local static guard & 1) )
       {
-        `UFG::qStaticInitAllocator::Instance'::`2'::`local static guard' |= 1u;
-        UFG::qStaticInitAllocator::qStaticInitAllocator(&`UFG::qStaticInitAllocator::Instance'::`2'::instance);
-        atexit(`UFG::qStaticInitAllocator::Instance'::`2'::`dynamic atexit destructor for 'instance'');
+        `UFG::qStaticInitAllocator::Instance::`2::`local static guard |= 1u;
+        UFG::qStaticInitAllocator::qStaticInitAllocator(&`UFG::qStaticInitAllocator::Instance::`2::instance);
+        atexit(`UFG::qStaticInitAllocator::Instance::`2::`dynamic atexit destructor for instance);
       }
       v24 = -1i64;
       do
         ++v24;
       while ( v70[v13][v24] );
       v25 = v24 + 1;
-      v26 = `UFG::qStaticInitAllocator::Instance'::`2'::instance.mNextAlloc;
-      if ( !`UFG::qStaticInitAllocator::Instance'::`2'::instance.mBlocks
-        || &`UFG::qStaticInitAllocator::Instance'::`2'::instance.mNextAlloc[v25] > `UFG::qStaticInitAllocator::Instance'::`2'::instance.mEndBlock )
+      v26 = `UFG::qStaticInitAllocator::Instance::`2::instance.mNextAlloc;
+      if ( !`UFG::qStaticInitAllocator::Instance::`2::instance.mBlocks
+        || &`UFG::qStaticInitAllocator::Instance::`2::instance.mNextAlloc[v25] > `UFG::qStaticInitAllocator::Instance::`2::instance.mEndBlock )
       {
         v27 = UFG::qMalloc(0x1FF0ui64, "gStaticInitAllocator", 1ui64);
-        v27->mNext = (UFG::allocator::free_link *)`UFG::qStaticInitAllocator::Instance'::`2'::instance.mBlocks;
-        `UFG::qStaticInitAllocator::Instance'::`2'::instance.mBlocks = (UFG::qRegionAllocator<UFG::qMainPoolAllocator<1>,0>::Block *)v27;
+        v27->mNext = (UFG::allocator::free_link *)`UFG::qStaticInitAllocator::Instance::`2::instance.mBlocks;
+        `UFG::qStaticInitAllocator::Instance::`2::instance.mBlocks = (UFG::qRegionAllocator<UFG::qMainPoolAllocator<1>,0>::Block *)v27;
         v26 = (char *)&v27[1];
-        `UFG::qStaticInitAllocator::Instance'::`2'::instance.mEndBlock = (char *)&v27[1022];
+        `UFG::qStaticInitAllocator::Instance::`2::instance.mEndBlock = (char *)&v27[1022];
       }
-      `UFG::qStaticInitAllocator::Instance'::`2'::instance.mNextAlloc = &v26[v25];
-      ++`UFG::qStaticInitAllocator::Instance'::`2'::instance.mTotalAlloc;
+      `UFG::qStaticInitAllocator::Instance::`2::instance.mNextAlloc = &v26[v25];
+      ++`UFG::qStaticInitAllocator::Instance::`2::instance.mTotalAlloc;
       v28 = v70[v13];
       v29 = v26;
       do
@@ -477,39 +477,39 @@ void __fastcall TracksEnum<unsigned long>::Initialize(const char *dataPath)
   UFG::qNode<UFG::qString,UFG::qString> *i; // rbx
 
   UFG::qString::Set(&TracksEnum<unsigned long>::mDataPath, dataPath);
-  v1 = `TracksEnum<unsigned long>::GetTracksEnumList'::`2'::`local static guard';
-  if ( !(`TracksEnum<unsigned long>::GetTracksEnumList'::`2'::`local static guard' & 1) )
+  v1 = `TracksEnum<unsigned long>::GetTracksEnumList::`2::`local static guard;
+  if ( !(`TracksEnum<unsigned long>::GetTracksEnumList::`2::`local static guard & 1) )
   {
-    `TracksEnum<unsigned long>::GetTracksEnumList'::`2'::`local static guard' |= 1u;
-    `TracksEnum<unsigned long>::GetTracksEnumList'::`2'::m_TracksEnumList.mPrev = &`TracksEnum<unsigned long>::GetTracksEnumList'::`2'::m_TracksEnumList;
-    `TracksEnum<unsigned long>::GetTracksEnumList'::`2'::m_TracksEnumList.mNext = &`TracksEnum<unsigned long>::GetTracksEnumList'::`2'::m_TracksEnumList;
+    `TracksEnum<unsigned long>::GetTracksEnumList::`2::`local static guard |= 1u;
+    `TracksEnum<unsigned long>::GetTracksEnumList::`2::m_TracksEnumList.mPrev = &`TracksEnum<unsigned long>::GetTracksEnumList::`2::m_TracksEnumList;
+    `TracksEnum<unsigned long>::GetTracksEnumList::`2::m_TracksEnumList.mNext = &`TracksEnum<unsigned long>::GetTracksEnumList::`2::m_TracksEnumList;
     atexit(TracksEnum_unsigned_long_::GetTracksEnumList_::_2_::_dynamic_atexit_destructor_for__m_TracksEnumList___0);
-    v1 = `TracksEnum<unsigned long>::GetTracksEnumList'::`2'::`local static guard';
+    v1 = `TracksEnum<unsigned long>::GetTracksEnumList::`2::`local static guard;
   }
-  for ( i = (UFG::qNode<UFG::qString,UFG::qString> *)((char *)`TracksEnum<unsigned long>::GetTracksEnumList'::`2'::m_TracksEnumList.mNext
+  for ( i = (UFG::qNode<UFG::qString,UFG::qString> *)((char *)`TracksEnum<unsigned long>::GetTracksEnumList::`2::m_TracksEnumList.mNext
                                                     - 8);
         ;
         i = (UFG::qNode<UFG::qString,UFG::qString> *)((char *)i[1].mPrev - 8) )
   {
     if ( !(v1 & 1) )
     {
-      `TracksEnum<unsigned long>::GetTracksEnumList'::`2'::`local static guard' = v1 | 1;
-      `TracksEnum<unsigned long>::GetTracksEnumList'::`2'::m_TracksEnumList.mPrev = &`TracksEnum<unsigned long>::GetTracksEnumList'::`2'::m_TracksEnumList;
-      `TracksEnum<unsigned long>::GetTracksEnumList'::`2'::m_TracksEnumList.mNext = &`TracksEnum<unsigned long>::GetTracksEnumList'::`2'::m_TracksEnumList;
+      `TracksEnum<unsigned long>::GetTracksEnumList::`2::`local static guard = v1 | 1;
+      `TracksEnum<unsigned long>::GetTracksEnumList::`2::m_TracksEnumList.mPrev = &`TracksEnum<unsigned long>::GetTracksEnumList::`2::m_TracksEnumList;
+      `TracksEnum<unsigned long>::GetTracksEnumList::`2::m_TracksEnumList.mNext = &`TracksEnum<unsigned long>::GetTracksEnumList::`2::m_TracksEnumList;
       atexit(TracksEnum_unsigned_long_::GetTracksEnumList_::_2_::_dynamic_atexit_destructor_for__m_TracksEnumList___0);
     }
-    if ( i == (UFG::qNode<UFG::qString,UFG::qString> *)((char *)&`TracksEnum<unsigned long>::GetTracksEnumList'::`2'::m_TracksEnumList
+    if ( i == (UFG::qNode<UFG::qString,UFG::qString> *)((char *)&`TracksEnum<unsigned long>::GetTracksEnumList::`2::m_TracksEnumList
                                                       - 8) )
       break;
     TracksEnum<unsigned long>::LoadFromFile((TracksEnum<unsigned long> *)i);
-    v1 = `TracksEnum<unsigned long>::GetTracksEnumList'::`2'::`local static guard';
-    if ( !(`TracksEnum<unsigned long>::GetTracksEnumList'::`2'::`local static guard' & 1) )
+    v1 = `TracksEnum<unsigned long>::GetTracksEnumList::`2::`local static guard;
+    if ( !(`TracksEnum<unsigned long>::GetTracksEnumList::`2::`local static guard & 1) )
     {
-      `TracksEnum<unsigned long>::GetTracksEnumList'::`2'::`local static guard' |= 1u;
-      `TracksEnum<unsigned long>::GetTracksEnumList'::`2'::m_TracksEnumList.mPrev = &`TracksEnum<unsigned long>::GetTracksEnumList'::`2'::m_TracksEnumList;
-      `TracksEnum<unsigned long>::GetTracksEnumList'::`2'::m_TracksEnumList.mNext = &`TracksEnum<unsigned long>::GetTracksEnumList'::`2'::m_TracksEnumList;
+      `TracksEnum<unsigned long>::GetTracksEnumList::`2::`local static guard |= 1u;
+      `TracksEnum<unsigned long>::GetTracksEnumList::`2::m_TracksEnumList.mPrev = &`TracksEnum<unsigned long>::GetTracksEnumList::`2::m_TracksEnumList;
+      `TracksEnum<unsigned long>::GetTracksEnumList::`2::m_TracksEnumList.mNext = &`TracksEnum<unsigned long>::GetTracksEnumList::`2::m_TracksEnumList;
       atexit(TracksEnum_unsigned_long_::GetTracksEnumList_::_2_::_dynamic_atexit_destructor_for__m_TracksEnumList___0);
-      v1 = `TracksEnum<unsigned long>::GetTracksEnumList'::`2'::`local static guard';
+      v1 = `TracksEnum<unsigned long>::GetTracksEnumList::`2::`local static guard;
     }
   }
 }
@@ -685,11 +685,11 @@ void __usercall TracksEnum<float>::LoadFromFile(TracksEnum<float> *this@<rcx>, i
                     do
                     {
                       v18 = SimpleXML::XMLNode::GetAttribute(v17, "name");
-                      if ( !(`UFG::qStaticInitAllocator::Instance'::`2'::`local static guard' & 1) )
+                      if ( !(`UFG::qStaticInitAllocator::Instance::`2::`local static guard & 1) )
                       {
-                        `UFG::qStaticInitAllocator::Instance'::`2'::`local static guard' |= 1u;
-                        UFG::qStaticInitAllocator::qStaticInitAllocator(&`UFG::qStaticInitAllocator::Instance'::`2'::instance);
-                        atexit(`UFG::qStaticInitAllocator::Instance'::`2'::`dynamic atexit destructor for 'instance'');
+                        `UFG::qStaticInitAllocator::Instance::`2::`local static guard |= 1u;
+                        UFG::qStaticInitAllocator::qStaticInitAllocator(&`UFG::qStaticInitAllocator::Instance::`2::instance);
+                        atexit(`UFG::qStaticInitAllocator::Instance::`2::`dynamic atexit destructor for instance);
                       }
                       v19 = -1i64;
                       v20 = -1i64;
@@ -700,18 +700,18 @@ void __usercall TracksEnum<float>::LoadFromFile(TracksEnum<float> *this@<rcx>, i
                         ++v19;
                       while ( v16[v19] );
                       v21 = v20 + v19 + 2;
-                      v22 = `UFG::qStaticInitAllocator::Instance'::`2'::instance.mNextAlloc;
-                      if ( !`UFG::qStaticInitAllocator::Instance'::`2'::instance.mBlocks
-                        || &`UFG::qStaticInitAllocator::Instance'::`2'::instance.mNextAlloc[v21] > `UFG::qStaticInitAllocator::Instance'::`2'::instance.mEndBlock )
+                      v22 = `UFG::qStaticInitAllocator::Instance::`2::instance.mNextAlloc;
+                      if ( !`UFG::qStaticInitAllocator::Instance::`2::instance.mBlocks
+                        || &`UFG::qStaticInitAllocator::Instance::`2::instance.mNextAlloc[v21] > `UFG::qStaticInitAllocator::Instance::`2::instance.mEndBlock )
                       {
                         v23 = UFG::qMalloc(0x1FF0ui64, "gStaticInitAllocator", 1ui64);
-                        v23->mNext = (UFG::allocator::free_link *)`UFG::qStaticInitAllocator::Instance'::`2'::instance.mBlocks;
-                        `UFG::qStaticInitAllocator::Instance'::`2'::instance.mBlocks = (UFG::qRegionAllocator<UFG::qMainPoolAllocator<1>,0>::Block *)v23;
+                        v23->mNext = (UFG::allocator::free_link *)`UFG::qStaticInitAllocator::Instance::`2::instance.mBlocks;
+                        `UFG::qStaticInitAllocator::Instance::`2::instance.mBlocks = (UFG::qRegionAllocator<UFG::qMainPoolAllocator<1>,0>::Block *)v23;
                         v22 = (char *)&v23[1];
-                        `UFG::qStaticInitAllocator::Instance'::`2'::instance.mEndBlock = (char *)&v23[1022];
+                        `UFG::qStaticInitAllocator::Instance::`2::instance.mEndBlock = (char *)&v23[1022];
                       }
-                      `UFG::qStaticInitAllocator::Instance'::`2'::instance.mNextAlloc = &v22[v21];
-                      ++`UFG::qStaticInitAllocator::Instance'::`2'::instance.mTotalAlloc;
+                      `UFG::qStaticInitAllocator::Instance::`2::instance.mNextAlloc = &v22[v21];
+                      ++`UFG::qStaticInitAllocator::Instance::`2::instance.mTotalAlloc;
                       v24 = v16;
                       do
                       {
@@ -917,28 +917,28 @@ void __usercall TracksEnum<float>::LoadFromFile(TracksEnum<float> *this@<rcx>, i
                   }
                   else
                   {
-                    if ( !(`UFG::qStaticInitAllocator::Instance'::`2'::`local static guard' & 1) )
+                    if ( !(`UFG::qStaticInitAllocator::Instance::`2::`local static guard & 1) )
                     {
-                      `UFG::qStaticInitAllocator::Instance'::`2'::`local static guard' |= 1u;
-                      UFG::qStaticInitAllocator::qStaticInitAllocator(&`UFG::qStaticInitAllocator::Instance'::`2'::instance);
-                      atexit(`UFG::qStaticInitAllocator::Instance'::`2'::`dynamic atexit destructor for 'instance'');
+                      `UFG::qStaticInitAllocator::Instance::`2::`local static guard |= 1u;
+                      UFG::qStaticInitAllocator::qStaticInitAllocator(&`UFG::qStaticInitAllocator::Instance::`2::instance);
+                      atexit(`UFG::qStaticInitAllocator::Instance::`2::`dynamic atexit destructor for instance);
                     }
                     v64 = -1i64;
                     do
                       ++v64;
                     while ( v16[v64] );
-                    v65 = `UFG::qStaticInitAllocator::Instance'::`2'::instance.mNextAlloc;
-                    if ( !`UFG::qStaticInitAllocator::Instance'::`2'::instance.mBlocks
-                      || &`UFG::qStaticInitAllocator::Instance'::`2'::instance.mNextAlloc[v64 + 1] > `UFG::qStaticInitAllocator::Instance'::`2'::instance.mEndBlock )
+                    v65 = `UFG::qStaticInitAllocator::Instance::`2::instance.mNextAlloc;
+                    if ( !`UFG::qStaticInitAllocator::Instance::`2::instance.mBlocks
+                      || &`UFG::qStaticInitAllocator::Instance::`2::instance.mNextAlloc[v64 + 1] > `UFG::qStaticInitAllocator::Instance::`2::instance.mEndBlock )
                     {
                       v66 = UFG::qMalloc(0x1FF0ui64, "gStaticInitAllocator", 1ui64);
-                      v66->mNext = (UFG::allocator::free_link *)`UFG::qStaticInitAllocator::Instance'::`2'::instance.mBlocks;
-                      `UFG::qStaticInitAllocator::Instance'::`2'::instance.mBlocks = (UFG::qRegionAllocator<UFG::qMainPoolAllocator<1>,0>::Block *)v66;
+                      v66->mNext = (UFG::allocator::free_link *)`UFG::qStaticInitAllocator::Instance::`2::instance.mBlocks;
+                      `UFG::qStaticInitAllocator::Instance::`2::instance.mBlocks = (UFG::qRegionAllocator<UFG::qMainPoolAllocator<1>,0>::Block *)v66;
                       v65 = (char *)&v66[1];
-                      `UFG::qStaticInitAllocator::Instance'::`2'::instance.mEndBlock = (char *)&v66[1022];
+                      `UFG::qStaticInitAllocator::Instance::`2::instance.mEndBlock = (char *)&v66[1022];
                     }
-                    `UFG::qStaticInitAllocator::Instance'::`2'::instance.mNextAlloc = &v65[v64 + 1];
-                    ++`UFG::qStaticInitAllocator::Instance'::`2'::instance.mTotalAlloc;
+                    `UFG::qStaticInitAllocator::Instance::`2::instance.mNextAlloc = &v65[v64 + 1];
+                    ++`UFG::qStaticInitAllocator::Instance::`2::instance.mTotalAlloc;
                     v67 = v65 - v16;
                     do
                     {
@@ -1089,7 +1089,7 @@ void __usercall TracksEnum<float>::LoadFromFile(TracksEnum<float> *this@<rcx>, i
         if ( !TracksEnum<float>::ResolveBinding(v2, (TracksEnumBinding<float> *)v94) )
         {
           v97 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v94[1]);
-          UFG::qPrintf("TracksEnum<T>::LoadFromFile(): Couldn't resolve enum %s\n", v97);
+          UFG::qPrintf("TracksEnum<T>::LoadFromFile(): Couldnt resolve enum %s\n", v97);
         }
       }
       UFG::qString::~qString(&v101);
@@ -1131,7 +1131,7 @@ LABEL_14:
     {
       v16 = UFG::qSymbol::as_cstr_dbg(v7 + 4);
       UFG::qPrintf(
-        "WARNING: TracksEnum<T>::ResolveBinding: Could Not Resolve Binding for Enum '%s' UID: 0x%X\n",
+        "WARNING: TracksEnum<T>::ResolveBinding: Could Not Resolve Binding for Enum %s UID: 0x%X\n",
         v16,
         v3);
     }
@@ -1200,15 +1200,15 @@ void __fastcall TracksEnum<unsigned long>::Unload(TracksEnum<float> *this)
     v4 = 0;
     if ( (signed int)v3->m_enumName.size > 0 )
     {
-      v5 = `UFG::qStaticInitAllocator::Instance'::`2'::`local static guard';
+      v5 = `UFG::qStaticInitAllocator::Instance::`2::`local static guard;
       do
       {
         if ( !(v5 & 1) )
         {
-          `UFG::qStaticInitAllocator::Instance'::`2'::`local static guard' = v5 | 1;
-          UFG::qStaticInitAllocator::qStaticInitAllocator(&`UFG::qStaticInitAllocator::Instance'::`2'::instance);
-          atexit(`UFG::qStaticInitAllocator::Instance'::`2'::`dynamic atexit destructor for 'instance'');
-          v5 = `UFG::qStaticInitAllocator::Instance'::`2'::`local static guard';
+          `UFG::qStaticInitAllocator::Instance::`2::`local static guard = v5 | 1;
+          UFG::qStaticInitAllocator::qStaticInitAllocator(&`UFG::qStaticInitAllocator::Instance::`2::instance);
+          atexit(`UFG::qStaticInitAllocator::Instance::`2::`dynamic atexit destructor for instance);
+          v5 = `UFG::qStaticInitAllocator::Instance::`2::`local static guard;
         }
         ++v4;
       }

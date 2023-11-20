@@ -9,10 +9,10 @@ void __fastcall CAkSequenceCtx::CAkSequenceCtx(CAkSequenceCtx *this, CAkMusicRan
   v3 = in_pSequenceNode;
   v4 = this;
   CAkChainCtx::CAkChainCtx((CAkChainCtx *)&this->vfptr, in_pParentCtx);
-  v4->vfptr = (CAkChildCtxVtbl *)&CAkSequenceCtx::`vftable'{for `CAkChildCtx'};
-  v4->vfptr = (CAkTransportAwareVtbl *)&CAkSequenceCtx::`vftable'{for `CAkTransportAware'};
+  v4->vfptr = (CAkChildCtxVtbl *)&CAkSequenceCtx::`vftable{for `CAkChildCtx};
+  v4->vfptr = (CAkTransportAwareVtbl *)&CAkSequenceCtx::`vftable{for `CAkTransportAware};
   v4->m_pSequenceNode = v3;
-  v4->vfptr = (ITransitionableVtbl *)&CAkSegmentCtx::`vftable'{for `ITransitionable'};
+  v4->vfptr = (ITransitionableVtbl *)&CAkSegmentCtx::`vftable{for `ITransitionable};
   AkRSIterator::AkRSIterator(&v4->m_PlayListIterator, v3);
   v5 = v4->m_pSequenceNode;
   v4->m_bIsChainValid = 1;
@@ -30,9 +30,9 @@ void __fastcall CAkSequenceCtx::~CAkSequenceCtx(CAkSequenceCtx *this)
 
   v1 = this;
   v2 = &this->m_PlayListIterator;
-  *(_QWORD *)&v2[-3].m_arOriginalGlobalRSInfo.m_uLength = &CAkSequenceCtx::`vftable'{for `CAkChildCtx'};
-  *(_QWORD *)&v2[-2].m_playingID = &CAkSequenceCtx::`vftable'{for `CAkTransportAware'};
-  *(_QWORD *)&v2[-2].m_stack.m_uLength = &CAkSegmentCtx::`vftable'{for `ITransitionable'};
+  *(_QWORD *)&v2[-3].m_arOriginalGlobalRSInfo.m_uLength = &CAkSequenceCtx::`vftable{for `CAkChildCtx};
+  *(_QWORD *)&v2[-2].m_playingID = &CAkSequenceCtx::`vftable{for `CAkTransportAware};
+  *(_QWORD *)&v2[-2].m_stack.m_uLength = &CAkSegmentCtx::`vftable{for `ITransitionable};
   AkRSIterator::Term(v2);
   v3 = v1->m_pSequenceNode;
   if ( v3 )

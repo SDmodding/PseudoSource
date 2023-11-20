@@ -113,9 +113,9 @@ void __fastcall hkpBvCompressedMeshShape::hkpBvCompressedMeshShape(hkpBvCompress
   v2 = 0i64;
   this->m_userData = 0i64;
   this->m_bvTreeType.m_storage = 3;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpBvCompressedMeshShape::`vftable'{for `hkpBvTreeShape'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkpBvCompressedMeshShape::`vftable{for `hkpBvTreeShape};
   v3 = this;
-  this->vfptr = (hkpShapeContainerVtbl *)&hkpBvCompressedMeshShape::`vftable'{for `hkpShapeContainer'};
+  this->vfptr = (hkpShapeContainerVtbl *)&hkpBvCompressedMeshShape::`vftable{for `hkpShapeContainer};
   v4 = cInfo;
   this->m_convexRadius = cInfo->m_convexRadius;
   this->m_weldingType.m_storage = cInfo->m_weldingType;
@@ -670,8 +670,8 @@ void __fastcall hkpBvCompressedMeshShape::hkpBvCompressedMeshShape(hkpBvCompress
   v3 = flag.m_finishing;
   v2 = this;
   hkpBvTreeShape::hkpBvTreeShape((hkpBvTreeShape *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpBvCompressedMeshShape::`vftable'{for `hkpBvTreeShape'};
-  v2->vfptr = (hkpShapeContainerVtbl *)&hkpBvCompressedMeshShape::`vftable'{for `hkpShapeContainer'};
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpBvCompressedMeshShape::`vftable{for `hkpBvTreeShape};
+  v2->vfptr = (hkpShapeContainerVtbl *)&hkpBvCompressedMeshShape::`vftable{for `hkpShapeContainer};
   if ( v3 )
   {
     v2->m_type.m_storage = 17;
@@ -693,8 +693,8 @@ void __fastcall hkpBvCompressedMeshShape::~hkpBvCompressedMeshShape(hkpBvCompres
 
   v1 = this;
   v2 = (hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun> *)this->m_tree;
-  *(_QWORD *)&v2[-1].m_numPrimitiveKeys = &hkpBvCompressedMeshShape::`vftable'{for `hkpBvTreeShape'};
-  *(_QWORD *)&v2[-1].m_primitives.m_size = &hkpBvCompressedMeshShape::`vftable'{for `hkpShapeContainer'};
+  *(_QWORD *)&v2[-1].m_numPrimitiveKeys = &hkpBvCompressedMeshShape::`vftable{for `hkpBvTreeShape};
+  *(_QWORD *)&v2[-1].m_primitives.m_size = &hkpBvCompressedMeshShape::`vftable{for `hkpShapeContainer};
   hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::~hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>(v2);
   v3 = v1->m_userStringPalette.m_size - 1;
   if ( v3 >= 0 )
@@ -735,8 +735,8 @@ void __fastcall hkpBvCompressedMeshShape::~hkpBvCompressedMeshShape(hkpBvCompres
       4 * v7);
   v1->m_collisionFilterInfoPalette.m_data = 0i64;
   v1->m_collisionFilterInfoPalette.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkpShapeContainerVtbl *)&hkpShapeContainer::`vftable';
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkpShapeContainerVtbl *)&hkpShapeContainer::`vftable;
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 347
@@ -1160,7 +1160,7 @@ void __fastcall computeWeldingInfo(hkpBvCompressedMeshShapeCinfo *cinfo, hkBool 
       output.m_nodes.m_data = v47;
       *(_QWORD *)&output.m_firstFree = v47;
       output.m_nodes.m_capacityAndFlags = -2147483584;
-      hkcdTreeQueries<hkcdTreeQueriesStacks::Dynamic,64,0>::unary<hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStorage32>,hkcdTreeQueriesStacks::Dynamic<64,unsigned int>,hkcdTreeQueries<hkcdTreeQueriesStacks::Dynamic,64,0>::AabbOverlapsNoEarlyExitWrapper<`anonymous namespace'::NeighborsQuery>>(
+      hkcdTreeQueries<hkcdTreeQueriesStacks::Dynamic,64,0>::unary<hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStorage32>,hkcdTreeQueriesStacks::Dynamic<64,unsigned int>,hkcdTreeQueries<hkcdTreeQueriesStacks::Dynamic,64,0>::AabbOverlapsNoEarlyExitWrapper<`anonymous namespace::NeighborsQuery>>(
         (hkcdTreeQueries<hkcdTreeQueriesStacks::Dynamic,64,0> *)&v64,
         (hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStorage32> *)&output.m_nodes,
         &stackInstance,

@@ -11,10 +11,10 @@ void __fastcall Render::LightningInstance::LightningInstance(Render::LightningIn
   v2 = (UFG::qNode<Render::FXComponentInstance,Render::FXComponentInstance> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable';
+  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable;
   *(_QWORD *)&this->mForceSuspendState = 0i64;
   *(_WORD *)&this->mIsActive = 0;
-  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::LightningInstance::`vftable';
+  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::LightningInstance::`vftable;
   UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&this->mSettingsHandle.mPrev);
   UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v1->mHeadModel.mPrev);
   UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v1->mTailModel.mPrev);
@@ -64,7 +64,7 @@ void __fastcall Render::LightningInstance::~LightningInstance(Render::LightningI
   UFG::qNode<Render::FXComponentInstance,Render::FXComponentInstance> *v26; // rax
 
   v1 = this;
-  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::LightningInstance::`vftable';
+  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::LightningInstance::`vftable;
   v2 = Render::LightningInstance::sLastInstanceAdded;
   if ( this == Render::LightningInstance::sLastInstanceAdded )
     v2 = 0i64;
@@ -131,34 +131,34 @@ void __fastcall Render::LightningInstance::~LightningInstance(Render::LightningI
   v17->mPrev = v16;
   v13->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v13->mPrev;
   v1->mHeadTransformNodeComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->mHeadTransformNodeComponent.mPrev;
-  v18 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  v18 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v19 = UFG::qResourceWarehouse::Instance();
     v18 = UFG::qResourceWarehouse::GetInventory(v19, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v18;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v18;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mTailModel.mPrev, v18);
   UFG::qResourceHandle::~qResourceHandle((UFG::qResourceHandle *)&v1->mTailModel.mPrev);
-  v20 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  v20 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v21 = UFG::qResourceWarehouse::Instance();
     v20 = UFG::qResourceWarehouse::GetInventory(v21, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v20;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v20;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mHeadModel.mPrev, v20);
   UFG::qResourceHandle::~qResourceHandle((UFG::qResourceHandle *)&v1->mHeadModel.mPrev);
-  v22 = `UFG::qGetResourceInventory<Render::LightningSettings>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Render::LightningSettings>'::`2'::result )
+  v22 = `UFG::qGetResourceInventory<Render::LightningSettings>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Render::LightningSettings>::`2::result )
   {
     v23 = UFG::qResourceWarehouse::Instance();
     v22 = UFG::qResourceWarehouse::GetInventory(v23, 0x21AE1C64u);
-    `UFG::qGetResourceInventory<Render::LightningSettings>'::`2'::result = v22;
+    `UFG::qGetResourceInventory<Render::LightningSettings>::`2::result = v22;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mSettingsHandle.mPrev, v22);
   UFG::qResourceHandle::~qResourceHandle((UFG::qResourceHandle *)&v1->mSettingsHandle.mPrev);
-  v1->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable';
+  v1->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable;
   v24 = (UFG::qNode<Render::FXComponentInstance,Render::FXComponentInstance> *)&v1->mPrev;
   v25 = v1->mPrev;
   v26 = v1->mNext;
@@ -186,22 +186,22 @@ void __fastcall Render::LightningInstance::Init(Render::LightningInstance *this,
   this->mSettingsId = settingsId;
   if ( !v2 )
   {
-    v4 = `UFG::qGetResourceInventory<Render::LightningSettings>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Render::LightningSettings>'::`2'::result )
+    v4 = `UFG::qGetResourceInventory<Render::LightningSettings>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Render::LightningSettings>::`2::result )
     {
       v5 = UFG::qResourceWarehouse::Instance();
       v4 = UFG::qResourceWarehouse::GetInventory(v5, 0x21AE1C64u);
-      `UFG::qGetResourceInventory<Render::LightningSettings>'::`2'::result = v4;
+      `UFG::qGetResourceInventory<Render::LightningSettings>::`2::result = v4;
     }
     UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v3->mSettingsHandle.mPrev, v4);
   }
-  v6 = `UFG::qGetResourceInventory<Render::LightningSettings>'::`2'::result;
+  v6 = `UFG::qGetResourceInventory<Render::LightningSettings>::`2::result;
   v7 = v3->mSettingsId;
-  if ( !`UFG::qGetResourceInventory<Render::LightningSettings>'::`2'::result )
+  if ( !`UFG::qGetResourceInventory<Render::LightningSettings>::`2::result )
   {
     v8 = UFG::qResourceWarehouse::Instance();
     v6 = UFG::qResourceWarehouse::GetInventory(v8, 0x21AE1C64u);
-    `UFG::qGetResourceInventory<Render::LightningSettings>'::`2'::result = v6;
+    `UFG::qGetResourceInventory<Render::LightningSettings>::`2::result = v6;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v3->mSettingsHandle.mPrev, 0x21AE1C64u, v7, v6);
 }

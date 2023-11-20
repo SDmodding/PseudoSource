@@ -37,11 +37,11 @@ void __fastcall finishLoadedObjecthkpConstraintChainInstance(void *p, int finish
   {
     v2 = p;
     v3 = (hkStringPtr *)((char *)p + 80);
-    v3[-10].m_stringAndFlag = (const char *)&hkpConstraintInstance::`vftable';
+    v3[-10].m_stringAndFlag = (const char *)&hkpConstraintInstance::`vftable;
     LODWORD(v3[-1].m_stringAndFlag) = 2147483648;
     v3[-2].m_stringAndFlag = 0i64;
     hkStringPtr::hkStringPtr(v3, (hkFinishLoadedObjectFlag)finishing);
-    *(_QWORD *)v2 = &hkpConstraintChainInstance::`vftable';
+    *(_QWORD *)v2 = &hkpConstraintChainInstance::`vftable;
     v2[26] = -16;
   }
 }
@@ -60,7 +60,7 @@ void **__fastcall getVtablehkpConstraintChainInstance()
   hkStringPtr v1; // [rsp+70h] [rbp-48h]
 
   hkStringPtr::hkStringPtr(&v1, 0);
-  return &hkpConstraintChainInstance::`vftable';
+  return &hkpConstraintChainInstance::`vftable;
 }
 
 // File Line: 100

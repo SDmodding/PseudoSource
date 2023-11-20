@@ -203,9 +203,9 @@ void __fastcall CAkMusicSwitchCtx::CAkMusicSwitchCtx(CAkMusicSwitchCtx *this, CA
   v4 = this;
   CAkMatrixAwareCtx::CAkMatrixAwareCtx((CAkMatrixAwareCtx *)&this->vfptr, in_pParentCtx);
   v4->m_pSwitchCntrNode = v3;
-  v4->vfptr = (CAkChildCtxVtbl *)&CAkMusicSwitchCtx::`vftable'{for `CAkChildCtx'};
-  v4->vfptr = (CAkTransportAwareVtbl *)&CAkMusicSwitchCtx::`vftable'{for `CAkTransportAware'};
-  v4->vfptr = (ITransitionableVtbl *)&CAkSegmentCtx::`vftable'{for `ITransitionable'};
+  v4->vfptr = (CAkChildCtxVtbl *)&CAkMusicSwitchCtx::`vftable{for `CAkChildCtx};
+  v4->vfptr = (CAkTransportAwareVtbl *)&CAkMusicSwitchCtx::`vftable{for `CAkTransportAware};
+  v4->vfptr = (ITransitionableVtbl *)&CAkSegmentCtx::`vftable{for `ITransitionable};
   v4->m_switchMonitors.m_pItems = 0i64;
   *(_QWORD *)&v4->m_switchMonitors.m_uLength = 0i64;
   v4->m_queueTransitions.m_pFirst = 0i64;
@@ -226,9 +226,9 @@ void __fastcall CAkMusicSwitchCtx::~CAkMusicSwitchCtx(CAkMusicSwitchCtx *this)
   CAkMusicSwitchCntr *v2; // rcx
 
   v1 = this;
-  this->vfptr = (CAkChildCtxVtbl *)&CAkMusicSwitchCtx::`vftable'{for `CAkChildCtx'};
-  this->vfptr = (CAkTransportAwareVtbl *)&CAkMusicSwitchCtx::`vftable'{for `CAkTransportAware'};
-  this->vfptr = (ITransitionableVtbl *)&CAkSegmentCtx::`vftable'{for `ITransitionable'};
+  this->vfptr = (CAkChildCtxVtbl *)&CAkMusicSwitchCtx::`vftable{for `CAkChildCtx};
+  this->vfptr = (CAkTransportAwareVtbl *)&CAkMusicSwitchCtx::`vftable{for `CAkTransportAware};
+  this->vfptr = (ITransitionableVtbl *)&CAkSegmentCtx::`vftable{for `ITransitionable};
   if ( this->m_switchMonitors.m_pItems )
   {
     AkArray<CAkMusicSwitchMonitor,CAkMusicSwitchMonitor const &,ArrayPoolDefault,1,AkArrayAllocatorDefault>::RemoveAll(&this->m_switchMonitors);
@@ -288,7 +288,7 @@ __int64 __fastcall CAkMusicSwitchCtx::Init(CAkMusicSwitchCtx *this, CAkRegistere
     while ( v8 < (unsigned int)v6 )
     {
       CAkSwitchAware::CAkSwitchAware(&v15);
-      v15.vfptr = (CAkSwitchAwareVtbl *)&CAkMusicSwitchMonitor::`vftable';
+      v15.vfptr = (CAkSwitchAwareVtbl *)&CAkMusicSwitchMonitor::`vftable;
       v17 = -1;
       v18 = 0i64;
       v9 = AkArray<CAkMusicSwitchMonitor,CAkMusicSwitchMonitor const &,ArrayPoolDefault,1,AkArrayAllocatorDefault>::AddLast(&v3->m_switchMonitors);
@@ -298,7 +298,7 @@ __int64 __fastcall CAkMusicSwitchCtx::Init(CAkMusicSwitchCtx *this, CAkRegistere
         v9->m_uIdx = v17;
         v9->m_pMusicCtx = v18;
       }
-      v15.vfptr = (CAkSwitchAwareVtbl *)&CAkMusicSwitchMonitor::`vftable';
+      v15.vfptr = (CAkSwitchAwareVtbl *)&CAkMusicSwitchMonitor::`vftable;
       CAkSwitchAware::UnsubscribeSwitches(&v15);
       CAkSwitchAware::~CAkSwitchAware(&v15);
       v10 = CAkMusicSwitchMonitor::Init((CAkMusicSwitchMonitor *)*v5 + v8, v8, v3);
@@ -1161,9 +1161,9 @@ CAkChainCtx *__fastcall CAkMusicSwitchCtx::CreateDestinationContext(CAkMusicSwit
     {
       CAkChainCtx::CAkChainCtx(v4, (CAkMusicCtx *)&v2->vfptr);
       LOBYTE(v5[1].vfptr) = 0;
-      v5->vfptr = (CAkChildCtxVtbl *)&CAkNothingCtx::`vftable'{for `CAkChildCtx'};
-      v5->vfptr = (CAkTransportAwareVtbl *)&CAkNothingCtx::`vftable'{for `CAkTransportAware'};
-      v5->vfptr = (ITransitionableVtbl *)&CAkSegmentCtx::`vftable'{for `ITransitionable'};
+      v5->vfptr = (CAkChildCtxVtbl *)&CAkNothingCtx::`vftable{for `CAkChildCtx};
+      v5->vfptr = (CAkTransportAwareVtbl *)&CAkNothingCtx::`vftable{for `CAkTransportAware};
+      v5->vfptr = (ITransitionableVtbl *)&CAkSegmentCtx::`vftable{for `ITransitionable};
       ++v5->m_uRefCount;
       if ( (unsigned int)CAkMatrixAwareCtx::Init(
                            (CAkMatrixAwareCtx *)&v5->vfptr,

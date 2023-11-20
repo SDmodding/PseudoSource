@@ -31,7 +31,7 @@ hkClass *__fastcall hkReferencedObject::staticClass()
 void __fastcall finishLoadedObjecthkReferencedObject(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkReferencedObject::`vftable';
+    *(_QWORD *)p = &hkReferencedObject::`vftable;
 }
 
 // File Line: 71
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkReferencedObject(void *p)
 // RVA: 0xC54E70
 void **__fastcall getVtablehkReferencedObject()
 {
-  return &hkReferencedObject::`vftable';
+  return &hkReferencedObject::`vftable;
 }
 
 // File Line: 97

@@ -7,7 +7,7 @@ AK::IAkPluginParam *__fastcall CreateHarmonizerFXParams(AK::IAkPluginMemAlloc *i
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 88ui64);
   if ( !result )
     return 0i64;
-  result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkHarmonizerFXParams::`vftable';
+  result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkHarmonizerFXParams::`vftable;
   LOWORD(result[1].vfptr) = 0;
   BYTE2(result[1].vfptr) = 0;
   HIDWORD(result[1].vfptr) = 0;
@@ -36,7 +36,7 @@ AK::IAkPluginParam *__fastcall CreateHarmonizerFXParams(AK::IAkPluginMemAlloc *i
 // RVA: 0xAF6B20
 void __fastcall CAkHarmonizerFXParams::CAkHarmonizerFXParams(CAkHarmonizerFXParams *this)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkHarmonizerFXParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkHarmonizerFXParams::`vftable;
   *(_WORD *)this->m_ParamChangeHandler.m_uParamBitArray = 0;
   this->m_ParamChangeHandler.m_uParamBitArray[2] = 0;
   this->m_Params.Voice[0].Filter.eFilterType = 0;
@@ -64,14 +64,14 @@ void __fastcall CAkHarmonizerFXParams::CAkHarmonizerFXParams(CAkHarmonizerFXPara
 // RVA: 0xAF6BB0
 void __fastcall CAkHarmonizerFXParams::~CAkHarmonizerFXParams(CAkHarmonizerFXParams *this)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable;
 }
 
 // File Line: 35
 // RVA: 0xAF6BD0
 void __fastcall CAkHarmonizerFXParams::CAkHarmonizerFXParams(CAkHarmonizerFXParams *this, CAkHarmonizerFXParams *in_rCopy)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkHarmonizerFXParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkHarmonizerFXParams::`vftable;
   *(_WORD *)this->m_ParamChangeHandler.m_uParamBitArray = 0;
   this->m_ParamChangeHandler.m_uParamBitArray[2] = 0;
   this->m_Params.Voice[0].Filter.eFilterType = 0;

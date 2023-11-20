@@ -49,7 +49,7 @@ void __fastcall UFG::AltColorPostEffect::AltColorPostEffect(UFG::AltColorPostEff
 
   v1 = this;
   UFG::RenderStagePlugin::RenderStagePlugin((UFG::RenderStagePlugin *)&this->vfptr);
-  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AltColorPostEffect::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AltColorPostEffect::`vftable;
   UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v1->mStateBlockGlobal.mPrev);
   UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v1->mStateBlockAlt.mPrev);
   *(_WORD *)&v1->mEnableGlobally = 256;
@@ -94,20 +94,20 @@ void __fastcall UFG::AltColorPostEffect::AltColorPostEffect(UFG::AltColorPostEff
       --v7;
     }
     while ( v7 );
-    v8 = `UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result )
+    v8 = `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result )
     {
       v9 = UFG::qResourceWarehouse::Instance();
       v8 = UFG::qResourceWarehouse::GetInventory(v9, 0x4D04C7F2u);
-      `UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result = v8;
+      `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result = v8;
     }
     UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v1->mStateBlockGlobal.mPrev, 0x4D04C7F2u, 0xFA64CB1u, v8);
-    v10 = `UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result )
+    v10 = `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result )
     {
       v11 = UFG::qResourceWarehouse::Instance();
       v10 = UFG::qResourceWarehouse::GetInventory(v11, 0x4D04C7F2u);
-      `UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result = v10;
+      `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result = v10;
     }
     UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v1->mStateBlockAlt.mPrev, 0x4D04C7F2u, 0xA6F3AB7u, v10);
     v12 = (_DWORD *)v1->mAltStateValues;
@@ -607,7 +607,7 @@ void __fastcall UFG::AltColorPostEffect::RenderFinalPass(UFG::AltColorPostEffect
     *v45 = *scratch_target;
     *v55 = v54;
     poly.mVertices = (Render::vDynamic *)&ptr.mStateArgs;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       ptr.mStateArgs.mStateArgs,
       0x10ui64,
       128,
@@ -813,20 +813,20 @@ void __fastcall UFG::SetGlobalEffectUID(unsigned int uid)
     v2 = UFG::SimObject::GetComponentOfType(UFG::RenderWorld::msRenderStagePlugin, UFG::AltColorPostEffect::_TypeUID);
     if ( v2 )
     {
-      v3 = `UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result )
+      v3 = `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result;
+      if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result )
       {
         v4 = UFG::qResourceWarehouse::Instance();
         v3 = UFG::qResourceWarehouse::GetInventory(v4, 0x4D04C7F2u);
-        `UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result = v3;
+        `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result = v3;
       }
       UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v2[137].m_TypeUID, 0x4D04C7F2u, v1, v3);
-      v5 = `UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result )
+      v5 = `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result;
+      if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result )
       {
         v6 = UFG::qResourceWarehouse::Instance();
         v5 = UFG::qResourceWarehouse::GetInventory(v6, 0x4D04C7F2u);
-        `UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result = v5;
+        `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result = v5;
       }
       UFG::qResourceHandle::Init(
         (UFG::qResourceHandle *)&v2[137].m_BoundComponentHandles.mNode.mNext,

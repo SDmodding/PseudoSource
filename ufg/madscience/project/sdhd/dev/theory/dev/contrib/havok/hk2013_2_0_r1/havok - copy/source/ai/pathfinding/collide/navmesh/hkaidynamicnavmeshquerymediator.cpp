@@ -2,7 +2,7 @@
 // RVA: 0xBE91A0
 void __fastcall hkaiDynamicNavMeshQueryMediator::hkaiDynamicNavMeshQueryMediator(hkaiDynamicNavMeshQueryMediator *this, hkFinishLoadedObjectFlag f)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiDynamicNavMeshQueryMediator::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiDynamicNavMeshQueryMediator::`vftable;
 }
 
 // File Line: 33
@@ -19,7 +19,7 @@ void __fastcall hkaiDynamicNavMeshQueryMediator::hkaiDynamicNavMeshQueryMediator
   v6 = collection;
   v7 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiDynamicNavMeshQueryMediator::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiDynamicNavMeshQueryMediator::`vftable;
   if ( collection )
     hkReferencedObject::addReference((hkReferencedObject *)&collection->vfptr);
   v7->m_collection.m_pntr = v6;
@@ -42,7 +42,7 @@ void __fastcall hkaiDynamicNavMeshQueryMediator::~hkaiDynamicNavMeshQueryMediato
   hkReferencedObject *v4; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiDynamicNavMeshQueryMediator::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiDynamicNavMeshQueryMediator::`vftable;
   v2 = this->m_cutter.m_pntr;
   if ( v2 )
     hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
@@ -55,7 +55,7 @@ void __fastcall hkaiDynamicNavMeshQueryMediator::~hkaiDynamicNavMeshQueryMediato
   if ( v4 )
     hkReferencedObject::removeReference(v4);
   v1->m_collection.m_pntr = 0i64;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 55
@@ -191,7 +191,7 @@ __int64 __fastcall hkaiDynamicNavMeshQueryMediator::getClosestPoint(hkaiDynamicN
     v8[1] = v10;
   }
   v11 = v3->m_aabbTree.m_pntr;
-  collector.vfptr = (hkcdAabbTreeQueries::ClosestPointCollectorVtbl *)&NavMeshClosestPointCollector::`vftable';
+  collector.vfptr = (hkcdAabbTreeQueries::ClosestPointCollectorVtbl *)&NavMeshClosestPointCollector::`vftable;
   v22 = v3->m_collection.m_pntr;
   v12 = (__int64)v3->m_cutter.m_pntr;
   v21 = v5;
@@ -199,7 +199,7 @@ __int64 __fastcall hkaiDynamicNavMeshQueryMediator::getClosestPoint(hkaiDynamicN
   v23 = v12;
   hkcdDynamicAabbTree::getClosestPoint(v11, &v5->m_position, &v5->m_queryRadius, &collector, v4);
   v13 = v24;
-  collector.vfptr = (hkcdAabbTreeQueries::ClosestPointCollectorVtbl *)&hkcdAabbTreeQueries::ClosestPointCollector::`vftable';
+  collector.vfptr = (hkcdAabbTreeQueries::ClosestPointCollectorVtbl *)&hkcdAabbTreeQueries::ClosestPointCollector::`vftable;
   v14 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
   v15 = (_QWORD *)v14[1];
   v16 = v14;
@@ -341,7 +341,7 @@ __int64 __fastcall hkaiDynamicNavMeshQueryMediator::getClosestBoundaryEdge(hkaiD
     v8[1] = v10;
   }
   v11 = v3->m_aabbTree.m_pntr;
-  collector.vfptr = (hkcdAabbTreeQueries::ClosestPointCollectorVtbl *)&NavMeshClosestBoundaryEdgeCollector::`vftable';
+  collector.vfptr = (hkcdAabbTreeQueries::ClosestPointCollectorVtbl *)&NavMeshClosestBoundaryEdgeCollector::`vftable;
   v22 = v3->m_collection.m_pntr;
   v12 = (__int64)v3->m_cutter.m_pntr;
   v21 = v5;
@@ -349,7 +349,7 @@ __int64 __fastcall hkaiDynamicNavMeshQueryMediator::getClosestBoundaryEdge(hkaiD
   v23 = v12;
   hkcdDynamicAabbTree::getClosestPoint(v11, &v5->m_position, &v5->m_queryRadius, &collector, v4);
   v13 = v24;
-  collector.vfptr = (hkcdAabbTreeQueries::ClosestPointCollectorVtbl *)&hkcdAabbTreeQueries::ClosestPointCollector::`vftable';
+  collector.vfptr = (hkcdAabbTreeQueries::ClosestPointCollectorVtbl *)&hkcdAabbTreeQueries::ClosestPointCollector::`vftable;
   v14 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
   v15 = (_QWORD *)v14[1];
   v16 = v14;
@@ -553,7 +553,7 @@ __int64 __fastcall hkaiDynamicNavMeshQueryMediator::castRay(hkaiDynamicNavMeshQu
     v8[1] = v10;
   }
   v11 = v3->m_aabbTree.m_pntr;
-  collector.vfptr = (hkcdAabbTreeQueries::RaycastCollectorVtbl *)&NavMeshSectionRaycaster::`vftable';
+  collector.vfptr = (hkcdAabbTreeQueries::RaycastCollectorVtbl *)&NavMeshSectionRaycaster::`vftable;
   v27 = v5;
   v12 = (__m128i)_mm_sub_ps(v5->m_to.m_quad, v5->m_from.m_quad);
   v13 = _mm_cmpeqps((__m128)0i64, (__m128)v12);
@@ -582,7 +582,7 @@ __int64 __fastcall hkaiDynamicNavMeshQueryMediator::castRay(hkaiDynamicNavMeshQu
   {
     v19 = 0;
   }
-  collector.vfptr = (hkcdAabbTreeQueries::RaycastCollectorVtbl *)&hkcdAabbTreeQueries::RaycastCollector::`vftable';
+  collector.vfptr = (hkcdAabbTreeQueries::RaycastCollectorVtbl *)&hkcdAabbTreeQueries::RaycastCollector::`vftable;
   v20 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
   v21 = (_QWORD *)v20[1];
   v22 = v20;
@@ -837,7 +837,7 @@ void __fastcall hkaiDynamicNavMeshQueryMediator::queryAabb(hkaiDynamicNavMeshQue
   }
   v11 = v3->m_aabbTree.m_pntr;
   v12 = LODWORD(v3->m_cutAabbTolerance);
-  collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&NavMeshSectionAabbQuery::`vftable';
+  collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&NavMeshSectionAabbQuery::`vftable;
   v13 = (__int64)v3->m_collection.m_pntr;
   v21 = v5;
   v25 = v12;
@@ -847,7 +847,7 @@ void __fastcall hkaiDynamicNavMeshQueryMediator::queryAabb(hkaiDynamicNavMeshQue
   v23 = v14;
   if ( v11 )
     hkcdDynamicAabbTree::queryAabb(v11, &v5->m_aabb, &collector);
-  collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&hkcdAabbTreeQueries::AabbCollector::`vftable';
+  collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&hkcdAabbTreeQueries::AabbCollector::`vftable;
   v15 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
   v16 = (_QWORD *)v15[1];
   v17 = v15;

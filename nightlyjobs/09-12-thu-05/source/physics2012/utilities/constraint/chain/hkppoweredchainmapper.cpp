@@ -97,7 +97,7 @@ hkpPoweredChainMapper *__fastcall hkpPoweredChainMapper::buildChainMapper(hkpPow
   if ( v7 )
   {
     *(_DWORD *)(v7 + 8) = 0x1FFFF;
-    *(_QWORD *)v7 = &hkpPoweredChainMapper::`vftable';
+    *(_QWORD *)v7 = &hkpPoweredChainMapper::`vftable;
     *(_QWORD *)(v7 + 16) = 0i64;
     *(_DWORD *)(v7 + 24) = 0;
     *(_DWORD *)(v7 + 28) = 2147483648;
@@ -465,7 +465,7 @@ void __fastcall hkpPoweredChainMapper::~hkpPoweredChainMapper(hkpPoweredChainMap
   int v9; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpPoweredChainMapper::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpPoweredChainMapper::`vftable;
   v2 = 0;
   if ( this->m_links.m_size > 0 )
   {
@@ -519,7 +519,7 @@ void __fastcall hkpPoweredChainMapper::~hkpPoweredChainMapper(hkpPoweredChainMap
       16 * v9);
   v1->m_links.m_data = 0i64;
   v1->m_links.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 199

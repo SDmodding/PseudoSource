@@ -2,7 +2,7 @@
 // RVA: 0x9DCD0
 void __fastcall hkpEntityListener::~hkpEntityListener(hkpEntityListener *this)
 {
-  this->vfptr = (hkpEntityListenerVtbl *)&hkpEntityListener::`vftable';
+  this->vfptr = (hkpEntityListenerVtbl *)&hkpEntityListener::`vftable;
 }
 
 // File Line: 30

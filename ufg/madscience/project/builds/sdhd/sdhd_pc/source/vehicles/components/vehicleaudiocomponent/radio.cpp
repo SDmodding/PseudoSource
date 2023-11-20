@@ -57,11 +57,11 @@ void __fastcall UFG::DJAsset::DJAsset(UFG::DJAsset *this, UFG::RadioStation *sta
   v9 = (UFG::qNode<UFG::RadioStationAsset,UFG::RadioStationAsset> *)&this->mPrev;
   v9->mPrev = v9;
   v9->mNext = v9;
-  this->vfptr = (UFG::RadioStationAssetVtbl *)&UFG::RadioStationAsset::`vftable';
+  this->vfptr = (UFG::RadioStationAssetVtbl *)&UFG::RadioStationAsset::`vftable;
   this->m_index = index;
   *(_QWORD *)&this->m_type = 1i64;
   *((_BYTE *)&this->0 + 36) |= 1u;
-  this->vfptr = (UFG::RadioStationAssetVtbl *)&UFG::DJAsset::`vftable';
+  this->vfptr = (UFG::RadioStationAssetVtbl *)&UFG::DJAsset::`vftable;
   UFG::qString::qString(&v17);
   v10 = v6;
   UFG::qString::Format(&v17, "play_station_%02u_dj_%01ua", v7->m_id, v6, -2i64);
@@ -133,11 +133,11 @@ void __fastcall UFG::TrackAsset::TrackAsset(UFG::TrackAsset *this, UFG::RadioSta
   v9 = (UFG::qNode<UFG::RadioStationAsset,UFG::RadioStationAsset> *)&this->mPrev;
   v9->mPrev = v9;
   v9->mNext = v9;
-  this->vfptr = (UFG::RadioStationAssetVtbl *)&UFG::RadioStationAsset::`vftable';
+  this->vfptr = (UFG::RadioStationAssetVtbl *)&UFG::RadioStationAsset::`vftable;
   this->m_index = index;
   *(_QWORD *)&this->m_type = 0i64;
   *((_BYTE *)&v8->0 + 36) |= 1u;
-  this->vfptr = (UFG::RadioStationAssetVtbl *)&UFG::TrackAsset::`vftable';
+  this->vfptr = (UFG::RadioStationAssetVtbl *)&UFG::TrackAsset::`vftable;
   this->m_trackUID = -1;
   this->m_trackName = 0i64;
   this->m_artistName = 0i64;
@@ -178,11 +178,11 @@ void __fastcall UFG::AdAsset::AdAsset(UFG::AdAsset *this, UFG::RadioStation *sta
   v6 = (UFG::qNode<UFG::RadioStationAsset,UFG::RadioStationAsset> *)&this->mPrev;
   v6->mPrev = v6;
   v6->mNext = v6;
-  this->vfptr = (UFG::RadioStationAssetVtbl *)&UFG::RadioStationAsset::`vftable';
+  this->vfptr = (UFG::RadioStationAssetVtbl *)&UFG::RadioStationAsset::`vftable;
   this->m_index = index;
   *(_QWORD *)&this->m_type = 2i64;
   *((_BYTE *)&this->0 + 36) |= 1u;
-  this->vfptr = (UFG::RadioStationAssetVtbl *)&UFG::AdAsset::`vftable';
+  this->vfptr = (UFG::RadioStationAssetVtbl *)&UFG::AdAsset::`vftable;
   UFG::qString::qString(&v7);
   UFG::qString::Format(&v7, "play_station_%02u_ad_%02u", v4->m_id, v3, -2i64);
   v5->m_assetId = UFG::TiDo::CalcWwiseUid(v7.mData);
@@ -203,11 +203,11 @@ void __fastcall UFG::IdentAsset::IdentAsset(UFG::IdentAsset *this, UFG::RadioSta
   v4 = (UFG::qNode<UFG::RadioStationAsset,UFG::RadioStationAsset> *)&this->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  this->vfptr = (UFG::RadioStationAssetVtbl *)&UFG::RadioStationAsset::`vftable';
+  this->vfptr = (UFG::RadioStationAssetVtbl *)&UFG::RadioStationAsset::`vftable;
   this->m_index = 0;
   *(_QWORD *)&this->m_type = 3i64;
   *((_BYTE *)&this->0 + 36) |= 1u;
-  this->vfptr = (UFG::RadioStationAssetVtbl *)&UFG::IdentAsset::`vftable';
+  this->vfptr = (UFG::RadioStationAssetVtbl *)&UFG::IdentAsset::`vftable;
   UFG::qString::qString(&v5);
   UFG::qString::Format(&v5, "play_station_%02u_ident", v2->m_id);
   v3->m_assetId = UFG::TiDo::CalcWwiseUid(v5.mData);
@@ -249,7 +249,7 @@ void __fastcall UFG::RadioStation::RadioStation(UFG::RadioStation *this, const c
   v12 = (UFG::qNode<UFG::RadioStation,UFG::RadioStation> *)&this->mPrev;
   v12->mPrev = v12;
   v12->mNext = v12;
-  this->vfptr = (UFG::RadioStationVtbl *)&UFG::RadioStation::`vftable';
+  this->vfptr = (UFG::RadioStationVtbl *)&UFG::RadioStation::`vftable;
   UFG::qString::qString(&this->m_textureName);
   UFG::qString::qString(&v11->m_texturePack);
   UFG::qString::qString(&v11->m_currentlyPlayingAssetName);
@@ -357,7 +357,7 @@ void __fastcall UFG::RadioStation::~RadioStation(UFG::RadioStation *this)
   UFG::qNode<UFG::RadioStation,UFG::RadioStation> *v19; // rax
 
   v1 = this;
-  this->vfptr = (UFG::RadioStationVtbl *)&UFG::RadioStation::`vftable';
+  this->vfptr = (UFG::RadioStationVtbl *)&UFG::RadioStation::`vftable;
   v2 = (UFG::qList<UFG::qReflectField,UFG::qReflectField,1,0> *)&this->m_playList;
   UFG::qList<UFG::FractureConnectivity::Connection,UFG::FractureConnectivity::Connection,1,0>::DeleteNodes((UFG::qList<UFG::qReflectField,UFG::qReflectField,1,0> *)&this->m_playList);
   v3 = &v1->m_prevPlayed;
@@ -1354,7 +1354,7 @@ void __fastcall UFG::Radio::LoadRadioStationData(float chanceDj)
                   v27 = SimpleXML::XMLNode::GetName(v25);
                   if ( !(unsigned int)UFG::qStringCompare(v27, "DJ", -1) )
                   {
-                    `eh vector constructor iterator'(
+                    `eh vector constructor iterator(
                       ptr,
                       0x28ui64,
                       3,
@@ -1397,7 +1397,7 @@ void __fastcall UFG::Radio::LoadRadioStationData(float chanceDj)
                     v12->m_assets.mNode.mPrev = v35;
                     ++v12->m_assetCount[1];
                     ++v26;
-                    `eh vector destructor iterator'(
+                    `eh vector destructor iterator(
                       ptr,
                       0x28ui64,
                       3,
@@ -1483,7 +1483,7 @@ void __fastcall UFG::Radio::Radio(UFG::Radio *this)
 
   v1 = this;
   UFG::AudioEntity::AudioEntity((UFG::AudioEntity *)&this->vfptr);
-  v1->vfptr = (UFG::AudioEntityVtbl *)&UFG::Radio::`vftable';
+  v1->vfptr = (UFG::AudioEntityVtbl *)&UFG::Radio::`vftable;
   v1->m_ecRadio.m_pEvent = 0i64;
   *(_QWORD *)&v1->m_timeSinceRadioStarted = 0i64;
   v1->m_buttonHoldLength = 0.0;
@@ -2431,7 +2431,7 @@ void __fastcall UFG::RadioFullyControlled::RadioFullyControlled(UFG::RadioFullyC
 
   v1 = this;
   UFG::Radio::Radio((UFG::Radio *)&this->vfptr);
-  v1->vfptr = (UFG::AudioEntityVtbl *)&UFG::RadioFullyControlled::`vftable';
+  v1->vfptr = (UFG::AudioEntityVtbl *)&UFG::RadioFullyControlled::`vftable;
   v1->m_pVehAudComponent = 0i64;
   UFG::Radio::SetupParams((UFG::Radio *)&v1->vfptr, -1);
 }

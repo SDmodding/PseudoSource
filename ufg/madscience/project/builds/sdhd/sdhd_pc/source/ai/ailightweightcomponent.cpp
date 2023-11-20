@@ -15,10 +15,10 @@ void __fastcall UFG::AILightWeightComponent::AILightWeightComponent(UFG::AILight
 
   v2 = this;
   UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name_uid);
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AILightWeightComponent::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AILightWeightComponent::`vftable;
   UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0>::RebindingComponentHandle<UFG::TransformNodeComponent,0>(&v2->m_pTransformNodeComponent);
   v3 = (signed __int64)&v2->mWanderData;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     &v2->mWanderData,
     0x78ui64,
     2,
@@ -521,22 +521,22 @@ char __fastcall UFG::AILightWeightComponent::MaybeReversePath(UFG::AILightWeight
     v12 = *(_DWORD *)(v8 + 16);
     v13 = *(_DWORD *)(v8 + 12);
     v40 = 0i64;
-    v14 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+    v14 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+    if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
     {
       v15 = UFG::qResourceWarehouse::Instance();
       v14 = UFG::qResourceWarehouse::GetInventory(v15, 0x43E99F7Eu);
-      `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v14;
+      `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v14;
     }
     UFG::qResourceHandle::Close(&v37, v14);
     LOWORD(v38) = -1;
     objUID = v13;
-    v16 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+    v16 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+    if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
     {
       v17 = UFG::qResourceWarehouse::Instance();
       v16 = UFG::qResourceWarehouse::GetInventory(v17, 0x43E99F7Eu);
-      `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v16;
+      `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v16;
     }
     UFG::qResourceHandle::Init(&v37, 0x43E99F7Eu, v12, v16);
     v11 = objUID;
@@ -544,12 +544,12 @@ char __fastcall UFG::AILightWeightComponent::MaybeReversePath(UFG::AILightWeight
   else
   {
     v40 = 0i64;
-    v9 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+    v9 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+    if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
     {
       v10 = UFG::qResourceWarehouse::Instance();
       v9 = UFG::qResourceWarehouse::GetInventory(v10, 0x43E99F7Eu);
-      `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v9;
+      `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v9;
     }
     UFG::qResourceHandle::Close(&v37, v9);
     LOWORD(v38) = -1;
@@ -570,12 +570,12 @@ char __fastcall UFG::AILightWeightComponent::MaybeReversePath(UFG::AILightWeight
     if ( !v21 )
     {
       v40 = 0i64;
-      v22 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+      v22 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+      if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
       {
         v23 = UFG::qResourceWarehouse::Instance();
         v22 = UFG::qResourceWarehouse::GetInventory(v23, 0x43E99F7Eu);
-        `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v22;
+        `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v22;
       }
       UFG::qResourceHandle::Close(&v37, v22);
       LOWORD(v38) = -1;
@@ -587,22 +587,22 @@ char __fastcall UFG::AILightWeightComponent::MaybeReversePath(UFG::AILightWeight
     v24 = *(_DWORD *)(v21 + 16);
     v25 = *(_DWORD *)(v21 + 12);
     v40 = 0i64;
-    v26 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+    v26 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+    if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
     {
       v27 = UFG::qResourceWarehouse::Instance();
       v26 = UFG::qResourceWarehouse::GetInventory(v27, 0x43E99F7Eu);
-      `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v26;
+      `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v26;
     }
     UFG::qResourceHandle::Close(&v37, v26);
     LOWORD(v38) = -1;
     objUID = v25;
-    v28 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+    v28 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+    if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
     {
       v29 = UFG::qResourceWarehouse::Instance();
       v28 = UFG::qResourceWarehouse::GetInventory(v29, 0x43E99F7Eu);
-      `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v28;
+      `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v28;
     }
     UFG::qResourceHandle::Init(&v37, 0x43E99F7Eu, v24, v28);
     v11 = objUID;
@@ -610,12 +610,12 @@ char __fastcall UFG::AILightWeightComponent::MaybeReversePath(UFG::AILightWeight
   if ( !v40 )
   {
 LABEL_33:
-    v35 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+    v35 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+    if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
     {
       v36 = UFG::qResourceWarehouse::Instance();
       v35 = UFG::qResourceWarehouse::GetInventory(v36, 0x43E99F7Eu);
-      `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v35;
+      `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v35;
     }
     UFG::qResourceHandle::Close(&v37, v35);
     UFG::qResourceHandle::~qResourceHandle(&v37);
@@ -635,12 +635,12 @@ LABEL_33:
   v5->mInitPos.x = v4->x;
   v5->mInitPos.y = v30;
   v5->mInitPos.z = v31;
-  v32 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+  v32 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
   {
     v33 = UFG::qResourceWarehouse::Instance();
     v32 = UFG::qResourceWarehouse::GetInventory(v33, 0x43E99F7Eu);
-    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v32;
+    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v32;
   }
   UFG::qResourceHandle::Close(&v37, v32);
   UFG::qResourceHandle::~qResourceHandle(&v37);
@@ -945,8 +945,8 @@ LABEL_34:
   if ( UFG::PedSpawnManager::msProxyExclusionZoneActive_2 )
     goto LABEL_34;
 LABEL_21:
-  if ( (float)((float)((float)(v17 * v17) + (float)(v16 * v16)) + (float)(v18 * v18)) < (float)(`anonymous namespace'::gLightWeightDestReachedThreshold
-                                                                                              * `anonymous namespace'::gLightWeightDestReachedThreshold) )
+  if ( (float)((float)((float)(v17 * v17) + (float)(v16 * v16)) + (float)(v18 * v18)) < (float)(`anonymous namespace::gLightWeightDestReachedThreshold
+                                                                                              * `anonymous namespace::gLightWeightDestReachedThreshold) )
   {
     if ( v19 )
     {

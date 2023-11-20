@@ -13,11 +13,11 @@ void __fastcall UFG::UIHKScreenSocialHub::ChallengeDialogPopupEntry::ChallengeDi
   v8 = (UFG::qNode<UFG::DialogPopupEntry,UFG::DialogPopupEntry> *)&this->mPrev;
   v8->mPrev = v8;
   v8->mNext = v8;
-  this->vfptr = (UFG::DialogPopupEntryVtbl *)&UFG::DialogPopupEntry::`vftable';
+  this->vfptr = (UFG::DialogPopupEntryVtbl *)&UFG::DialogPopupEntry::`vftable;
   UFG::qString::qString(&this->mName, name);
   v7->mChecked = 0;
   v7->mType = 0;
-  v7->vfptr = (UFG::DialogPopupEntryVtbl *)&UFG::UIHKScreenSocialHub::ChallengeDialogPopupEntry::`vftable';
+  v7->vfptr = (UFG::DialogPopupEntryVtbl *)&UFG::UIHKScreenSocialHub::ChallengeDialogPopupEntry::`vftable;
   UFG::qString::qString(&v7->mOnlineId, v6);
   v7->mLeaderboardId = v5;
   v7->mScore = score;

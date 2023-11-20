@@ -10,9 +10,9 @@ void __fastcall hkServerDebugDisplayHandler::hkServerDebugDisplayHandler(hkServe
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_selectable.m_bool = 0;
   v3 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkServerDebugDisplayHandler::`vftable'{for `hkReferencedObject'};
-  this->vfptr = (hkProcessVtbl *)&hkServerDebugDisplayHandler::`vftable'{for `hkProcess'};
-  this->vfptr = (hkDebugDisplayHandlerVtbl *)&hkServerDebugDisplayHandler::`vftable'{for `hkDebugDisplayHandler'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkServerDebugDisplayHandler::`vftable{for `hkReferencedObject};
+  this->vfptr = (hkProcessVtbl *)&hkServerDebugDisplayHandler::`vftable{for `hkProcess};
+  this->vfptr = (hkDebugDisplayHandlerVtbl *)&hkServerDebugDisplayHandler::`vftable{for `hkDebugDisplayHandler};
   this->m_geometriesAwaitingRequests.m_data = 0i64;
   this->m_geometriesAwaitingRequests.m_size = 0;
   this->m_geometriesAwaitingRequests.m_capacityAndFlags = 2147483648;
@@ -57,9 +57,9 @@ void __fastcall hkServerDebugDisplayHandler::~hkServerDebugDisplayHandler(hkServ
 
   v1 = this->m_outstreamLock;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkServerDebugDisplayHandler::`vftable'{for `hkReferencedObject'};
-  this->vfptr = (hkProcessVtbl *)&hkServerDebugDisplayHandler::`vftable'{for `hkProcess'};
-  this->vfptr = (hkDebugDisplayHandlerVtbl *)&hkServerDebugDisplayHandler::`vftable'{for `hkDebugDisplayHandler'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkServerDebugDisplayHandler::`vftable{for `hkReferencedObject};
+  this->vfptr = (hkProcessVtbl *)&hkServerDebugDisplayHandler::`vftable{for `hkProcess};
+  this->vfptr = (hkDebugDisplayHandlerVtbl *)&hkServerDebugDisplayHandler::`vftable{for `hkDebugDisplayHandler};
   if ( v1 )
   {
     DeleteCriticalSection(&v1->m_section);
@@ -117,9 +117,9 @@ void __fastcall hkServerDebugDisplayHandler::~hkServerDebugDisplayHandler(hkServ
       24 * (v10 & 0x3FFFFFFF));
   v2->m_geometriesAwaitingRequests.m_data = 0i64;
   v2->m_geometriesAwaitingRequests.m_capacityAndFlags = 2147483648;
-  v2->vfptr = (hkDebugDisplayHandlerVtbl *)&hkDebugDisplayHandler::`vftable';
-  v2->vfptr = (hkProcessVtbl *)&hkProcess::`vftable';
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v2->vfptr = (hkDebugDisplayHandlerVtbl *)&hkDebugDisplayHandler::`vftable;
+  v2->vfptr = (hkProcessVtbl *)&hkProcess::`vftable;
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 57

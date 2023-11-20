@@ -18,7 +18,7 @@ void __fastcall UFG::InteractionPoint::~InteractionPoint(UFG::InteractionPoint *
   UFG::qList<UFG::qSafePointerBase<UFG::InteractionPoint>,UFG::qSafePointerNodeList,1,0> *v14; // [rsp+40h] [rbp+8h]
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::InteractionPoint>Vtbl *)&UFG::InteractionPoint::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::InteractionPoint>Vtbl *)&UFG::InteractionPoint::`vftable;
   UFG::InteractionPoint::RemoveAllInteractors(this, 1);
   v2 = v1->m_pSimObject.m_pPointer;
   if ( v2 )
@@ -59,7 +59,7 @@ void __fastcall UFG::InteractionPoint::~InteractionPoint(UFG::InteractionPoint *
     operator delete[](v11);
   v1->m_InteractorList.p = 0i64;
   *(_QWORD *)&v1->m_InteractorList.size = 0i64;
-  v1->vfptr = (UFG::qSafePointerNode<UFG::InteractionPoint>Vtbl *)&UFG::qSafePointerNode<UFG::InteractionPoint>::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::InteractionPoint>Vtbl *)&UFG::qSafePointerNode<UFG::InteractionPoint>::`vftable;
   UFG::qSafePointerNode<UFG::DynamicCoverCorner>::SetAllPointersToNull((UFG::qSafePointerNode<UFG::ParkourHandle> *)v1);
   v14 = &v1->m_SafePointerList;
   UFG::qList<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList,1,0>::DeleteNodes((UFG::qList<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList,1,0> *)&v1->m_SafePointerList);
@@ -1060,7 +1060,7 @@ UFG::allocator::free_link *__fastcall UFG::InteractorComponent::PropertiesOnActi
   if ( v4 )
   {
     UFG::SimComponent::SimComponent((UFG::SimComponent *)v4, v2->m_NameUID);
-    v5->mNext = (UFG::allocator::free_link *)&UFG::InteractorComponent::`vftable';
+    v5->mNext = (UFG::allocator::free_link *)&UFG::InteractorComponent::`vftable;
     v10 = v5 + 8;
     v10->mNext = v10;
     v10[1].mNext = v10;
@@ -1104,7 +1104,7 @@ void __fastcall UFG::InteractorComponent::~InteractorComponent(UFG::InteractorCo
   UFG::qNode<UFG::qSafePointerBase<UFG::InteractionPoint>,UFG::qSafePointerNodeList> *v11; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::InteractorComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::InteractorComponent::`vftable;
   v2 = this->m_pInteractionPoint;
   if ( v2 )
   {
@@ -1511,9 +1511,9 @@ void __fastcall UFG::InteractableComponent::InteractableComponent(UFG::Interacta
   v5 = (UFG::qNode<UFG::InteractableComponent,UFG::InteractableComponent> *)&v4->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::InteractableComponent::`vftable';
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::InteractableComponent::`vftable;
   v4->m_fUntargetedCountdownTimer = -1.0;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v4->m_InteractionPoints,
     0xA0ui64,
     6,
@@ -1549,7 +1549,7 @@ void __fastcall UFG::InteractableComponent::~InteractableComponent(UFG::Interact
   UFG::qNode<UFG::InteractableComponent,UFG::InteractableComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::InteractableComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::InteractableComponent::`vftable;
   UFG::InteractableComponent::DestroyInteractionPoints(this);
   if ( v1 == UFG::InteractableComponent::s_InteractableComponentpCurrentIterator )
     UFG::InteractableComponent::s_InteractableComponentpCurrentIterator = (UFG::InteractableComponent *)&v1->mPrev[-4];
@@ -1561,7 +1561,7 @@ void __fastcall UFG::InteractableComponent::~InteractableComponent(UFG::Interact
   v2->mPrev = v2;
   v2->mNext = v2;
   UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->m_pTSBC);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->m_InteractionPoints,
     0xA0ui64,
     6,
@@ -2310,9 +2310,9 @@ LABEL_38:
   v52.m_daemonType = 0;
   *(_QWORD *)&v52.m_internalType = 1i64;
   v52.m_pOutput = 0i64;
-  v52.vfptr = (UFG::DaemonQueryInputVtbl *)&UFG::FindPathMultiDestPrioritizedImmediateQuery::`vftable';
+  v52.vfptr = (UFG::DaemonQueryInputVtbl *)&UFG::FindPathMultiDestPrioritizedImmediateQuery::`vftable;
   v52.m_npFrom.m_vPosition = UFG::qVector3::msZero;
-  v52.m_npFrom.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable';
+  v52.m_npFrom.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable;
   v52.m_npFrom.m_bValid = 0;
   v52.m_npFrom.m_hkvMeshPosition = (hkVector4f)hkvZero_34.m_quad;
   *(_QWORD *)&v52.m_npFrom.m_packedKey = -1i64;
@@ -2322,7 +2322,7 @@ LABEL_38:
   *(_QWORD *)&v52.m_aPrioritizedDestinations.size = 0i64;
   output.m_id = 0;
   *(_QWORD *)&output.m_internalType = 1i64;
-  output.vfptr = (UFG::DaemonQueryOutputVtbl *)&UFG::FindPathMultiDestPrioritizedOutput::`vftable';
+  output.vfptr = (UFG::DaemonQueryOutputVtbl *)&UFG::FindPathMultiDestPrioritizedOutput::`vftable;
   mem = 0i64;
   v48 = 0i64;
   v50 = 0i64;
@@ -2356,7 +2356,7 @@ LABEL_38:
           npPosition.m_vPosition.x = v33->mWorldTransform.v3.x;
           LODWORD(npPosition.m_vPosition.y) = v34.m128_i32[0];
           LODWORD(npPosition.m_vPosition.z) = v35.m128_i32[0];
-          npPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable';
+          npPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable;
           npPosition.m_bValid = 0;
           *(_QWORD *)&npPosition.m_packedKey = -1i64;
           npPosition.m_hkvMeshPosition.m_quad = _mm_unpacklo_ps(
@@ -2445,12 +2445,12 @@ LABEL_75:
     operator delete[](mem);
   mem = 0i64;
   v48 = 0i64;
-  output.vfptr = (UFG::DaemonQueryOutputVtbl *)&UFG::DaemonQueryOutput::`vftable';
+  output.vfptr = (UFG::DaemonQueryOutputVtbl *)&UFG::DaemonQueryOutput::`vftable;
   if ( v52.m_aPrioritizedDestinations.p )
     operator delete[](v52.m_aPrioritizedDestinations.p);
   v52.m_aPrioritizedDestinations.p = 0i64;
   *(_QWORD *)&v52.m_aPrioritizedDestinations.size = 0i64;
-  v52.vfptr = (UFG::DaemonQueryInputVtbl *)&UFG::DaemonQueryInput::`vftable';
+  v52.vfptr = (UFG::DaemonQueryInputVtbl *)&UFG::DaemonQueryInput::`vftable;
   return (UFG::InteractionPoint *)v45;
 }
 
@@ -2553,7 +2553,7 @@ UFG::InteractionPoint *__fastcall UFG::InteractableComponent::FindInteractionPoi
             v18.m_bValid = 0;
             *(_QWORD *)&v18.m_packedKey = -1i64;
             LODWORD(v18.m_vPosition.z) = v16.m128_i32[0];
-            v18.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable';
+            v18.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable;
             v18.m_hkvMeshPosition.m_quad = _mm_unpacklo_ps(
                                              _mm_unpacklo_ps(v14, v16),
                                              _mm_unpacklo_ps(v15, (__m128)(unsigned int)FLOAT_1_0));

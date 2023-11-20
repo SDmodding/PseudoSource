@@ -51,8 +51,8 @@ void __fastcall UFG::FacialActionTreeComponent::FacialActionTreeComponent(UFG::F
   UFG::ActionTreeComponentBase::ActionTreeComponentBase(
     (UFG::ActionTreeComponentBase *)&v4->vfptr,
     eACTION_TREE_TYPE_FACIAL);
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::FacialActionTreeComponent::`vftable'{for `UFG::SimComponent'};
-  v4->vfptr = (UFG::ActionTreeComponentBaseVtbl *)&UFG::FacialActionTreeComponent::`vftable'{for `UFG::ActionTreeComponentBase'};
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::FacialActionTreeComponent::`vftable{for `UFG::SimComponent};
+  v4->vfptr = (UFG::ActionTreeComponentBaseVtbl *)&UFG::FacialActionTreeComponent::`vftable{for `UFG::ActionTreeComponentBase};
   v7 = 0i64;
   v4->mActionTreeFileName = 0i64;
   ActionController::ActionController(&v4->mActionController);
@@ -98,10 +98,10 @@ void __fastcall UFG::FacialActionTreeComponent::FacialActionTreeComponent(UFG::F
       }
     }
   }
-  v15 = `anonymous namespace'::slLocalTweaksEnabled;
-  if ( !`anonymous namespace'::slLocalTweaksEnabled )
+  v15 = `anonymous namespace::slLocalTweaksEnabled;
+  if ( !`anonymous namespace::slLocalTweaksEnabled )
     v15 = 1;
-  `anonymous namespace'::slLocalTweaksEnabled = v15;
+  `anonymous namespace::slLocalTweaksEnabled = v15;
   v16 = *((_BYTE *)v4 + 480);
   if ( !(v16 & 2) && !(v16 & 1) )
   {
@@ -133,8 +133,8 @@ void __fastcall UFG::FacialActionTreeComponent::~FacialActionTreeComponent(UFG::
   UFG::qNode<UFG::FacialActionTreeComponent,UFG::FacialActionTreeComponent> *v14; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::FacialActionTreeComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::ActionTreeComponentBaseVtbl *)&UFG::FacialActionTreeComponent::`vftable'{for `UFG::ActionTreeComponentBase'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::FacialActionTreeComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::ActionTreeComponentBaseVtbl *)&UFG::FacialActionTreeComponent::`vftable{for `UFG::ActionTreeComponentBase};
   if ( this == UFG::FacialActionTreeComponent::s_FacialActionTreeComponentpCurrentIterator )
     UFG::FacialActionTreeComponent::s_FacialActionTreeComponentpCurrentIterator = (UFG::FacialActionTreeComponent *)&this->mPrev[-10].mNext;
   v2 = (UFG::qNode<UFG::FacialActionTreeComponent,UFG::FacialActionTreeComponent> *)&this->mPrev;

@@ -70,7 +70,7 @@ void __fastcall hkpSampledHeightFieldShape::castSphereCoarseTree(hkpSampledHeigh
   v9 = _mm_mul_ps(input->m_from.m_quad, this->m_floatToIntScale.m_quad);
   v10 = _mm_mul_ps(input->m_to.m_quad, this->m_floatToIntScale.m_quad);
   v11 = _mm_xor_si128(
-          (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v9),
+          (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v9),
           _mm_cvttps_epi32(v9));
   v12 = _mm_cvtsi128_si32(v11);
   v13 = _mm_cvtsi128_si32(_mm_shuffle_epi32(v11, 170));

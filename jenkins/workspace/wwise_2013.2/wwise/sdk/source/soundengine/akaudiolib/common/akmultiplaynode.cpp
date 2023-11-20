@@ -92,7 +92,7 @@ void __fastcall CAkMultiPlayNode::CAkMultiPlayNode(CAkMultiPlayNode *this, unsig
 
   v2 = this;
   CAkContainerBase::CAkContainerBase((CAkContainerBase *)&this->vfptr, in_ulID);
-  v2->vfptr = (CAkIndexableVtbl *)&CAkMultiPlayNode::`vftable';
+  v2->vfptr = (CAkIndexableVtbl *)&CAkMultiPlayNode::`vftable;
   v2->m_listContParameters.m_pItems = 0i64;
   *(_QWORD *)&v2->m_listContParameters.m_uLength = 0i64;
 }
@@ -101,7 +101,7 @@ void __fastcall CAkMultiPlayNode::CAkMultiPlayNode(CAkMultiPlayNode *this, unsig
 // RVA: 0xA932E0
 void __fastcall CAkMultiPlayNode::~CAkMultiPlayNode(CAkMultiPlayNode *this)
 {
-  this->vfptr = (CAkIndexableVtbl *)&CAkMultiPlayNode::`vftable';
+  this->vfptr = (CAkIndexableVtbl *)&CAkMultiPlayNode::`vftable;
   CAkContainerBase::~CAkContainerBase((CAkContainerBase *)&this->vfptr);
 }
 

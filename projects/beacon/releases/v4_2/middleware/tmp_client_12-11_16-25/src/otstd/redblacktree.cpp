@@ -40,8 +40,8 @@ void __fastcall OSuite::ZRedBlackTreeBase::ZIteratorBase::ZIteratorBase(OSuite::
 {
   this->m_parents.m_nFree = 0i64;
   this->m_parents.m_pList = 0i64;
-  this->m_parents.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable'{for `OSuite::ZObject'};
-  this->m_parents.vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable'{for `OSuite::IHashable'};
+  this->m_parents.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable{for `OSuite::ZObject};
+  this->m_parents.vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable{for `OSuite::IHashable};
 }
 
 // File Line: 69
@@ -55,8 +55,8 @@ void __fastcall OSuite::ZRedBlackTreeBase::ZIteratorBase::ZIteratorBase(OSuite::
   v2[-1].m_pList = (OSuite::TList<OSuite::ZRedBlackTreeBase::ZElementBase *> *)other->m_pElement;
   v2->m_nFree = 0i64;
   v2->m_pList = 0i64;
-  v2->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable'{for `OSuite::ZObject'};
-  v2->vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable'{for `OSuite::IHashable'};
+  v2->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable{for `OSuite::ZObject};
+  v2->vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable{for `OSuite::IHashable};
   OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::operator=(v2, &other->m_parents);
 }
 
@@ -73,8 +73,8 @@ void __fastcall OSuite::ZRedBlackTreeBase::ZIteratorBase::ZIteratorBase(OSuite::
   this->m_parents.m_pList = 0i64;
   v4 = &this->m_parents;
   v5 = pParents;
-  v4->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable'{for `OSuite::ZObject'};
-  v4->vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable'{for `OSuite::IHashable'};
+  v4->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable{for `OSuite::ZObject};
+  v4->vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable{for `OSuite::IHashable};
   if ( pParents )
   {
     OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::operator=(v4, pParents);
@@ -89,9 +89,9 @@ void __fastcall OSuite::ZRedBlackTreeBase::ZIteratorBase::ZIteratorBase(OSuite::
   this->m_pList = pList;
   this->m_pElement = 0i64;
   this->m_parents.m_nFree = 0i64;
-  this->m_parents.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable'{for `OSuite::ZObject'};
+  this->m_parents.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable{for `OSuite::ZObject};
   this->m_parents.m_pList = 0i64;
-  this->m_parents.vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable'{for `OSuite::IHashable'};
+  this->m_parents.vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable{for `OSuite::IHashable};
   OSuite::ZRedBlackTreeBase::ZIteratorBase::MoveToFirst(this);
 }
 
@@ -1639,8 +1639,8 @@ OSuite::TPair<OSuite::ZRedBlackTreeBase::ZElementBase *,OSuite::TStack<OSuite::Z
     {
       v7->m_nFree = 0i64;
       v7->m_pList = 0i64;
-      v7->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable'{for `OSuite::ZObject'};
-      v7->vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable'{for `OSuite::IHashable'};
+      v7->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable{for `OSuite::ZObject};
+      v7->vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable{for `OSuite::IHashable};
     }
     else
     {
@@ -1678,7 +1678,7 @@ OSuite::TPair<OSuite::ZRedBlackTreeBase::ZElementBase *,OSuite::TStack<OSuite::Z
   v5->m_First = 0i64;
   v5->m_Second = 0i64;
 LABEL_13:
-  v5->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<OSuite::ZRedBlackTreeBase::ZElementBase *,OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *> *>::`vftable';
+  v5->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<OSuite::ZRedBlackTreeBase::ZElementBase *,OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *> *>::`vftable;
   return v5;
 }
 
@@ -1702,9 +1702,9 @@ void __fastcall OSuite::ZRedBlackTreeBase::InsertElementSet(OSuite::ZRedBlackTre
     {
       zParents.m_nFree = 0i64;
       zParents.m_pList = 0i64;
-      zParents.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable'{for `OSuite::ZObject'};
+      zParents.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable{for `OSuite::ZObject};
       element = v2;
-      zParents.vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable'{for `OSuite::IHashable'};
+      zParents.vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable{for `OSuite::IHashable};
       while ( !((unsigned __int8 (__fastcall *)(OSuite::ZRedBlackTreeBase *, OSuite::ZRedBlackTreeBase::ZElementBase *, OSuite::ZRedBlackTreeBase::ZElementBase *))v4->vfptr[2].__vecDelDtor)(
                  v4,
                  v3,

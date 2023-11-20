@@ -75,7 +75,7 @@ UFG::qBaseTreeRB *__fastcall UFG::ScriptCache::GetScript(const char *scriptConte
   v8 = SSBrain::get_class(classScope);
   if ( !v8 )
   {
-    v9 = a_str_format(&result, "%s is not a valid class, will assume it's scope is %x", v6, v5);
+    v9 = a_str_format(&result, "%s is not a valid class, will assume its scope is %x", v6, v5);
     SSDebug::print_error(v9, AErrLevel_error);
     v10 = result.i_str_ref_p;
     v11 = result.i_str_ref_p->i_ref_count == 1;

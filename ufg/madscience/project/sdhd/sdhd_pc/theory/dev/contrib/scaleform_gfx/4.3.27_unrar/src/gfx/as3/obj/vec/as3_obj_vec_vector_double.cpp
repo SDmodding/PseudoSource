@@ -334,14 +334,14 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_vec::Vector_double::Vector_do
   v2 = t;
   v3 = this;
   Scaleform::GFx::AS3::Instances::fl::Object::Object((Scaleform::GFx::AS3::Instances::fl::Object *)&this->vfptr, t);
-  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_vec::Vector_double::`vftable';
+  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_vec::Vector_double::`vftable;
   v4 = v2->pVM;
   v5 = v4->MHeap;
   v6 = (signed __int64)&v3->V;
-  *(_QWORD *)v6 = &Scaleform::GFx::AS3::ArrayBase::`vftable';
+  *(_QWORD *)v6 = &Scaleform::GFx::AS3::ArrayBase::`vftable;
   *(_BYTE *)(v6 + 8) = 0;
   *(_QWORD *)(v6 + 16) = v4;
-  *(_QWORD *)v6 = &Scaleform::GFx::AS3::VectorBase<double>::`vftable';
+  *(_QWORD *)v6 = &Scaleform::GFx::AS3::VectorBase<double>::`vftable;
   v7 = (signed __int64)&v3->V.ValueA;
   *(_OWORD *)v7 = 0ui64;
   *(_QWORD *)(v7 + 16) = 0i64;
@@ -652,14 +652,14 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_vec::Vector_double::Vector_do
   v6 = t;
   v7 = this;
   Scaleform::GFx::AS3::Instances::fl::Object::Object((Scaleform::GFx::AS3::Instances::fl::Object *)&this->vfptr, t);
-  v7->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_vec::Vector_double::`vftable';
+  v7->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_vec::Vector_double::`vftable;
   v8 = v6->pVM;
   v9 = v8->MHeap;
   v11 = (signed __int64)&v7->V;
-  *(_QWORD *)v11 = &Scaleform::GFx::AS3::ArrayBase::`vftable';
+  *(_QWORD *)v11 = &Scaleform::GFx::AS3::ArrayBase::`vftable;
   *(_BYTE *)(v11 + 8) = 0;
   *(_QWORD *)(v11 + 16) = v8;
-  *(_QWORD *)v11 = &Scaleform::GFx::AS3::VectorBase<double>::`vftable';
+  *(_QWORD *)v11 = &Scaleform::GFx::AS3::VectorBase<double>::`vftable;
   v10 = &v7->V.ValueA;
   v10->Data.Data = 0i64;
   v10->Data.Size = 0i64;
@@ -939,7 +939,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v5 )
   {
     Scaleform::GFx::AS3::ClassTraits::fl::Object::Object(v5, v2, &Scaleform::GFx::AS3::fl_vec::Vector_doubleCI);
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_vec::Vector_double::`vftable';
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_vec::Vector_double::`vftable;
     v6->TraitsType = 14;
   }
   else
@@ -952,7 +952,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v7 )
   {
     Scaleform::GFx::AS3::InstanceTraits::fl::Object::Object(v7, v2, &Scaleform::GFx::AS3::fl_vec::Vector_doubleCI);
-    v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_vec::Vector_double::`vftable';
+    v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_vec::Vector_double::`vftable;
     v8.pV->Flags |= 1ui64;
     v8.pV->TraitsType = 14;
   }
@@ -968,7 +968,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v9 )
   {
     Scaleform::GFx::AS3::Class::Class(v9, v3->pV);
-    v10->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl_vec::Vector_double::`vftable';
+    v10->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl_vec::Vector_double::`vftable;
   }
   return v3;
 }

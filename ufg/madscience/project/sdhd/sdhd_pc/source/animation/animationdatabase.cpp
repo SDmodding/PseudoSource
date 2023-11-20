@@ -173,9 +173,9 @@ void BlendTreeDataBase::Init(void)
   v0 = UFG::qMemoryPool2::Allocate(&gActionTreeMemoryPool, 0x30ui64, "BlendTreeDataBase", 0i64, 1u);
   if ( v0 )
   {
-    *(_QWORD *)v0 = &Expression::IMemberMap::`vftable';
+    *(_QWORD *)v0 = &Expression::IMemberMap::`vftable;
     *((_QWORD *)v0 + 1) = 0i64;
-    *(_QWORD *)v0 = &BlendTreeDataBase::`vftable';
+    *(_QWORD *)v0 = &BlendTreeDataBase::`vftable;
     *((_QWORD *)v0 + 3) = 0i64;
     *((_QWORD *)v0 + 2) = 0i64;
     v6 = v0 + 32;
@@ -216,7 +216,7 @@ void __fastcall BlendTreeDataBase::~BlendTreeDataBase(BlendTreeDataBase *this)
   PoseNode **v6; // rbx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&BlendTreeDataBase::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&BlendTreeDataBase::`vftable;
   v2 = &this->mPoseNodes;
   UFG::qList<PoseNode,PoseNode,1,0>::DeleteNodes(&this->mPoseNodes);
   v3 = v2->mNode.mPrev;
@@ -229,12 +229,12 @@ void __fastcall BlendTreeDataBase::~BlendTreeDataBase(BlendTreeDataBase *this)
   if ( v5 )
   {
     v6 = &v5[-1].mpPoseNode;
-    `eh vector destructor iterator'(v5, 0x10ui64, (int)v5[-1].mpPoseNode, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v5, 0x10ui64, (int)v5[-1].mpPoseNode, (void (__fastcall *)(void *))_);
     operator delete[](v6);
   }
   v1->mPoseNodeLookup.p = 0i64;
   *(_QWORD *)&v1->mPoseNodeLookup.size = 0i64;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 341
@@ -304,13 +304,13 @@ void __fastcall AnimationDataBase::AnimationDataBase(AnimationDataBase *this)
   UFG::qList<AnimationGroup,AnimationGroupUpdateList,0,0> *v8; // [rsp+68h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   v2 = 0i64;
   this->mResourceOwner = 0i64;
-  this->vfptr = (Expression::IMemberMapVtbl *)&AnimationDataBase::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&AnimationDataBase::`vftable;
   UFG::qBaseTreeRB::qBaseTreeRB(&this->mAnimGroups.mTree);
   UFG::qBaseTreeRB::qBaseTreeRB(&v1->mAnimations.mTree);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v1->mDefaultReferenceContainers,
     0x18ui64,
     17,
@@ -374,7 +374,7 @@ void __fastcall AnimationDataBase::~AnimationDataBase(AnimationDataBase *this)
   UFG::qBaseNodeVariableRB<unsigned __int64> *v5; // rdx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&AnimationDataBase::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&AnimationDataBase::`vftable;
   v2 = (Render::Skinning *)&this->mAnimGroups;
   if ( this->mAnimGroups.mTree.mCount )
   {
@@ -405,7 +405,7 @@ LABEL_10:
   v1->mPriorityBudgets.size = 0;
   UFG::qList<ActionNodeBank,ActionNodeBank,0,1>::~qList<ActionNodeBank,ActionNodeBank,0,1>((UFG::qList<ActionNodeBank,ActionNodeBank,0,1> *)&v1->mQueuedUpdateGroups);
   UFG::qList<AnimationGroup,AnimationGroupBudgetedList,0,0>::~qList<AnimationGroup,AnimationGroupBudgetedList,0,0>(&v1->mBudgetedAnimationGroups);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->mDefaultReferenceContainers,
     0x18ui64,
     17,
@@ -414,7 +414,7 @@ LABEL_10:
   UFG::qBaseTreeRB::~qBaseTreeRB((Render::Skinning *)&v1->mAnimations);
   UFG::qTreeRB<AnimationGroup,AnimationGroup,1>::DeleteAll((UFG::qTreeRB<SkeletalAnimation,SkeletalAnimation,1> *)v2);
   UFG::qBaseTreeRB::~qBaseTreeRB(v2);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 584
@@ -1030,7 +1030,7 @@ void __fastcall BlendTreeDataBase::RebuildPoseNodeLookup(BlendTreeDataBase *this
   if ( v3 )
   {
     v4 = &v3[-1].mpPoseNode;
-    `eh vector destructor iterator'(v3, 0x10ui64, (int)v3[-1].mpPoseNode, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v3, 0x10ui64, (int)v3[-1].mpPoseNode, (void (__fastcall *)(void *))_);
     operator delete[](v4);
   }
   v1->p = 0i64;
@@ -1546,7 +1546,7 @@ void __fastcall AnimationGroup::AnimationGroup(AnimationGroup *this)
   UFG::qList<AnimationGroupHandle,AnimationGroupList,0,0> *v4; // [rsp+48h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
   UFG::qSafePointerNode<AnimationGroup>::qSafePointerNode<AnimationGroup>((UFG::qSafePointerNode<AnimationGroup> *)&this->vfptr);
   v1->mNode.mParent = 0i64;
@@ -1558,8 +1558,8 @@ void __fastcall AnimationGroup::AnimationGroup(AnimationGroup *this)
   v3 = (UFG::qNode<AnimationGroup,AnimationGroupUpdateList> *)&v1->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AnimationGroup::`vftable'{for `Expression::IMemberMap'};
-  v1->vfptr = (UFG::qSafePointerNode<AnimationGroup>Vtbl *)&AnimationGroup::`vftable'{for `UFG::qSafePointerNode<AnimationGroup>'};
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AnimationGroup::`vftable{for `Expression::IMemberMap};
+  v1->vfptr = (UFG::qSafePointerNode<AnimationGroup>Vtbl *)&AnimationGroup::`vftable{for `UFG::qSafePointerNode<AnimationGroup>};
   v1->mName.mOffset = 1i64;
   BinString::Set(&v1->mName, &customWorldMapCaption);
   v1->mAnimations.mCount = 0;
@@ -1595,7 +1595,7 @@ void __fastcall AnimationGroup::AnimationGroup(AnimationGroup *this, MemImageLoa
   UFG::qList<AnimationGroupHandle,AnimationGroupList,0,0> *v9; // [rsp+60h] [rbp+18h]
 
   v2 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
   UFG::qSafePointerNode<AnimationGroup>::qSafePointerNode<AnimationGroup>((UFG::qSafePointerNode<AnimationGroup> *)&this->vfptr);
   v2->mNode.mParent = 0i64;
@@ -1607,8 +1607,8 @@ void __fastcall AnimationGroup::AnimationGroup(AnimationGroup *this, MemImageLoa
   v4 = (UFG::qNode<AnimationGroup,AnimationGroupUpdateList> *)&v2->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  v2->vfptr = (Expression::IMemberMapVtbl *)&AnimationGroup::`vftable'{for `Expression::IMemberMap'};
-  v2->vfptr = (UFG::qSafePointerNode<AnimationGroup>Vtbl *)&AnimationGroup::`vftable'{for `UFG::qSafePointerNode<AnimationGroup>'};
+  v2->vfptr = (Expression::IMemberMapVtbl *)&AnimationGroup::`vftable{for `Expression::IMemberMap};
+  v2->vfptr = (UFG::qSafePointerNode<AnimationGroup>Vtbl *)&AnimationGroup::`vftable{for `UFG::qSafePointerNode<AnimationGroup>};
   v9 = &v2->mAnimGroupHandles;
   v9->mNode.mPrev = &v9->mNode;
   v9->mNode.mNext = &v9->mNode;
@@ -1666,9 +1666,9 @@ void __fastcall AnimationGroup::~AnimationGroup(AnimationGroup *this)
   UFG::qList<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList,1,0> *v36; // [rsp+48h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&AnimationGroup::`vftable'{for `Expression::IMemberMap'};
+  this->vfptr = (Expression::IMemberMapVtbl *)&AnimationGroup::`vftable{for `Expression::IMemberMap};
   v2 = (UFG::qSafePointerNode<UFG::ParkourHandle> *)&this->vfptr;
-  this->vfptr = (UFG::qSafePointerNode<AnimationGroup>Vtbl *)&AnimationGroup::`vftable'{for `UFG::qSafePointerNode<AnimationGroup>'};
+  this->vfptr = (UFG::qSafePointerNode<AnimationGroup>Vtbl *)&AnimationGroup::`vftable{for `UFG::qSafePointerNode<AnimationGroup>};
   AnimationGroup::Destroy(this);
   while ( v1->mAnimations.mCount & 0x7FFFFFFF )
   {
@@ -1782,7 +1782,7 @@ void __fastcall AnimationGroup::~AnimationGroup(AnimationGroup *this)
   v33->mPrev = v32;
   v31->mPrev = v31;
   v31->mNext = v31;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<AnimationGroup>::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<AnimationGroup>::`vftable;
   UFG::qSafePointerNode<UFG::DynamicCoverCorner>::SetAllPointersToNull(v2);
   v36 = &v2->m_SafePointerList;
   UFG::qList<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList,1,0>::DeleteNodes(&v2->m_SafePointerList);
@@ -1792,7 +1792,7 @@ void __fastcall AnimationGroup::~AnimationGroup(AnimationGroup *this)
   v35->mPrev = v34;
   v36->mNode.mPrev = &v36->mNode;
   v36->mNode.mNext = &v36->mNode;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 2533
@@ -1948,12 +1948,12 @@ void __fastcall AnimationGroup::LoadInternal(AnimationGroup *this)
         v8 = *(_DWORD *)(v7 + 168);
         v9 = (UFG::qResourceHandle *)(v7 + 88);
         *(_QWORD *)(v7 + 120) = v7;
-        v10 = `UFG::qGetResourceInventory<UFG::AnimationResource>'::`2'::result;
-        if ( !`UFG::qGetResourceInventory<UFG::AnimationResource>'::`2'::result )
+        v10 = `UFG::qGetResourceInventory<UFG::AnimationResource>::`2::result;
+        if ( !`UFG::qGetResourceInventory<UFG::AnimationResource>::`2::result )
         {
           v11 = UFG::qResourceWarehouse::Instance();
           v10 = UFG::qResourceWarehouse::GetInventory(v11, 0x53F1685Eu);
-          `UFG::qGetResourceInventory<UFG::AnimationResource>'::`2'::result = v10;
+          `UFG::qGetResourceInventory<UFG::AnimationResource>::`2::result = v10;
         }
         UFG::qResourceHandle::Init(v9, 0x53F1685Eu, v8, v10);
         v6 = (unsigned int)(v6 + 1);
@@ -2011,13 +2011,13 @@ void __fastcall AnimationGroup::UnloadInternal(AnimationGroup *this)
     {
       do
       {
-        v5 = `UFG::qGetResourceInventory<UFG::AnimationResource>'::`2'::result;
+        v5 = `UFG::qGetResourceInventory<UFG::AnimationResource>::`2::result;
         v6 = v4 + 8 * v3 + *(_QWORD *)(v4 + 8 * v3);
-        if ( !`UFG::qGetResourceInventory<UFG::AnimationResource>'::`2'::result )
+        if ( !`UFG::qGetResourceInventory<UFG::AnimationResource>::`2::result )
         {
           v7 = UFG::qResourceWarehouse::Instance();
           v5 = UFG::qResourceWarehouse::GetInventory(v7, 0x53F1685Eu);
-          `UFG::qGetResourceInventory<UFG::AnimationResource>'::`2'::result = v5;
+          `UFG::qGetResourceInventory<UFG::AnimationResource>::`2::result = v5;
         }
         UFG::qResourceHandle::Close((UFG::qResourceHandle *)(v6 + 88), v5);
         v3 = (unsigned int)(v3 + 1);

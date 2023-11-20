@@ -5,9 +5,9 @@ void __fastcall OSuite::ZCallbackManager::ZCallbackManager(OSuite::ZCallbackMana
   OSuite::ZCallbackManager *v1; // rdi
 
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZCallbackManager::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZCallbackManager::`vftable;
   OSuite::ZDoublyLinkedListBase::ZDoublyLinkedListBase((OSuite::ZRedBlackTreeBase *)&this->m_callbacksList);
-  v1->m_callbacksList.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZSocketManager::InternalSocket>::`vftable';
+  v1->m_callbacksList.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZSocketManager::InternalSocket>::`vftable;
   OSuite::ZMutex::ZMutex(&v1->m_Mutex);
 }
 
@@ -24,12 +24,12 @@ void __fastcall OSuite::ZCallbackManager::~ZCallbackManager(OSuite::ZCallbackMan
   v4.m_pElement = 0i64;
   v1 = (OSuite::ZDoublyLinkedListBase *)&this->m_callbacksList.vfptr;
   v2 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZCallbackManager::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZCallbackManager::`vftable;
   OSuite::ZDoublyLinkedListBase::ZIteratorBase::ZIteratorBase(
     &v4,
     (OSuite::ZDoublyLinkedListBase *)&this->m_callbacksList.vfptr,
     this->m_callbacksList.m_pHead);
-  v4.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+  v4.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
   while ( !(unsigned __int8)OSuite::ZString::IsNull((OSuite::ZString *)&v4) )
   {
     v3 = v4.m_pElement[1].vfptr;
@@ -38,7 +38,7 @@ void __fastcall OSuite::ZCallbackManager::~ZCallbackManager(OSuite::ZCallbackMan
     OSuite::ZDoublyLinkedListBase::ZIteratorBase::Remove(&v4);
   }
   OSuite::ZMutex::~ZMutex(&v2->m_Mutex);
-  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZSocketManager::InternalSocket>::`vftable';
+  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZSocketManager::InternalSocket>::`vftable;
   OSuite::ZDoublyLinkedListBase::Clear(v1);
 }
 
@@ -76,7 +76,7 @@ void __fastcall OSuite::ZCallbackManager::Update(OSuite::ZCallbackManager *this)
       &v4,
       (OSuite::ZDoublyLinkedListBase *)&v1->m_callbacksList.vfptr,
       v2);
-    v4.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+    v4.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
     while ( !(unsigned __int8)OSuite::ZString::IsNull((OSuite::ZString *)&v4) )
     {
       (*((void (__cdecl **)(OSuite::ZObjectVtbl *))v4.m_pElement[1].vfptr->__vecDelDtor + 3))(v4.m_pElement[1].vfptr);

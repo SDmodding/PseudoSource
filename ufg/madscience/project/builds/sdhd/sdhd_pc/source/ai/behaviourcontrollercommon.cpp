@@ -84,7 +84,7 @@ UFG::qString *__fastcall UFG::InvokeBehaviourParams::ToString(UFG::InvokeBehavio
   LODWORD(v10) = v5->mPriority;
   UFG::qString::Format(
     v4,
-    "  %s: '%s'\n       Flags  [PriorityMode: '%s', Control: '%s']\n       Params [P: %d, Life: %.2f, Wait: %.2f]\n",
+    "  %s: %s\n       Flags  [PriorityMode: %s, Control: %s]\n       Params [P: %d, Life: %.2f, Wait: %.2f]\n",
     v3,
     v7,
     gInvokeBehaviourPriorityModeNames[v5->mPriorityMode],

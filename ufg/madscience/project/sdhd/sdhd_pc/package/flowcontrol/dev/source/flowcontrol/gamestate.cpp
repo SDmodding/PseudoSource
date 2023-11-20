@@ -7,7 +7,7 @@ void __fastcall UFG::GameState::GameState(UFG::GameState *this, const char *name
 
   v3 = uid;
   v4 = this;
-  this->vfptr = (UFG::GameStateVtbl *)&UFG::GameState::`vftable';
+  this->vfptr = (UFG::GameStateVtbl *)&UFG::GameState::`vftable;
   UFG::qString::qString(&this->mGameStateName, name);
   v4->mGameStateUID = v3;
   v4->mGameStateUserDataInt = 0;

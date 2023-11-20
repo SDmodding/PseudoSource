@@ -6,7 +6,7 @@ void __fastcall UFG::OSuiteManagerObserver::~OSuiteManagerObserver(UFG::OSuiteMa
   UFG::qNode<UFG::OSuiteManagerObserver,UFG::OSuiteManagerObserver> *v2; // rcx
   UFG::qNode<UFG::OSuiteManagerObserver,UFG::OSuiteManagerObserver> *v3; // rax
 
-  this->vfptr = (UFG::OSuiteManagerObserverVtbl *)&UFG::OSuiteManagerObserver::`vftable';
+  this->vfptr = (UFG::OSuiteManagerObserverVtbl *)&UFG::OSuiteManagerObserver::`vftable;
   v1 = (UFG::qNode<UFG::OSuiteManagerObserver,UFG::OSuiteManagerObserver> *)&this->mPrev;
   v2 = this->mPrev;
   v3 = v1->mNext;
@@ -23,7 +23,7 @@ void __fastcall UFG::OsuiteGameConfig::~OsuiteGameConfig(UFG::OsuiteGameConfig *
   UFG::OsuiteGameConfig *v1; // rbx
 
   v1 = this;
-  this->vfptr = (OSuite::IGameConfigVtbl *)&UFG::OsuiteGameConfig::`vftable';
+  this->vfptr = (OSuite::IGameConfigVtbl *)&UFG::OsuiteGameConfig::`vftable;
   UFG::qString::~qString(&this->mGameVersion);
   UFG::qString::~qString(&v1->mBuildId);
 }
@@ -43,7 +43,7 @@ void __fastcall UFG::OSuiteManager::~OSuiteManager(UFG::OSuiteManager *this)
   UFG::qNode<UFG::OnlineManagerObserver,UFG::OnlineManagerObserver> *v9; // rax
 
   v1 = this;
-  this->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::OSuiteManager::`vftable';
+  this->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::OSuiteManager::`vftable;
   v2 = &this->m_FriendsToSend;
   UFG::qList<UFG::qString,UFG::qString,1,0>::DeleteNodes(&this->m_FriendsToSend);
   v3 = v2->mNode.mPrev;
@@ -52,7 +52,7 @@ void __fastcall UFG::OSuiteManager::~OSuiteManager(UFG::OSuiteManager *this)
   v4->mPrev = v3;
   v2->mNode.mPrev = &v2->mNode;
   v2->mNode.mNext = &v2->mNode;
-  v1->m_GameConfig.vfptr = (OSuite::IGameConfigVtbl *)&UFG::OsuiteGameConfig::`vftable';
+  v1->m_GameConfig.vfptr = (OSuite::IGameConfigVtbl *)&UFG::OsuiteGameConfig::`vftable;
   UFG::qString::~qString(&v1->m_GameConfig.mGameVersion);
   UFG::qString::~qString(&v1->m_GameConfig.mBuildId);
   UFG::qList<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption,1,0>::DeleteNodes((UFG::qList<UFG::GUIObjectBase,UFG::GUIObjectBase,1,0> *)&v1->m_lOSuiteObservers);
@@ -62,7 +62,7 @@ void __fastcall UFG::OSuiteManager::~OSuiteManager(UFG::OSuiteManager *this)
   v6->mPrev = v5;
   v1->m_lOSuiteObservers.mNode.mPrev = &v1->m_lOSuiteObservers.mNode;
   v1->m_lOSuiteObservers.mNode.mNext = &v1->m_lOSuiteObservers.mNode;
-  v1->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::OnlineManagerObserver::`vftable';
+  v1->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::OnlineManagerObserver::`vftable;
   v7 = (UFG::qNode<UFG::OnlineManagerObserver,UFG::OnlineManagerObserver> *)&v1->mPrev;
   v8 = v1->mPrev;
   v9 = v1->mNext;

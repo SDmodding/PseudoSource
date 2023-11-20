@@ -329,13 +329,13 @@ void __fastcall UFG::FormationManagerComponent::FormationManagerComponent(UFG::F
   v7 = (UFG::qNode<UFG::FormationManagerComponent,UFG::FormationManagerComponent> *)&v6->mPrev;
   v7->mPrev = v7;
   v7->mNext = v7;
-  v6->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::FormationManagerComponent::`vftable';
+  v6->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::FormationManagerComponent::`vftable;
   UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0>::RebindingComponentHandle<UFG::TransformNodeComponent,0>(&v6->m_pTransformNodeComponent);
   UFG::RebindingComponentHandle<UFG::AIEntityComponent,0>::RebindingComponentHandle<UFG::AIEntityComponent,0>(&v6->m_pAIEntityComponent);
   UFG::RebindingComponentHandle<UFG::ActionTreeComponent,0>::RebindingComponentHandle<UFG::ActionTreeComponent,0>(&v6->m_pActionTreeComponent);
   UFG::RebindingComponentHandle<UFG::TargetingSystemBaseComponent,0>::RebindingComponentHandle<UFG::TargetingSystemBaseComponent,0>(&v6->m_pTargetingSystemBaseComponent);
   UFG::RebindingComponentHandle<UFG::AttackRightsComponent,0>::RebindingComponentHandle<UFG::AttackRightsComponent,0>(&v6->m_pAttackRightsComponent);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v6->mStateVariables.m_FormationSlot,
     0xC8ui64,
     32,
@@ -368,7 +368,7 @@ void __fastcall UFG::FormationManagerComponent::~FormationManagerComponent(UFG::
   UFG::qNode<UFG::FormationManagerComponent,UFG::FormationManagerComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::FormationManagerComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::FormationManagerComponent::`vftable;
   if ( this == UFG::FormationManagerComponent::s_FormationManagerComponentpCurrentIterator )
     UFG::FormationManagerComponent::s_FormationManagerComponentpCurrentIterator = (UFG::FormationManagerComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::FormationManagerComponent,UFG::FormationManagerComponent> *)&this->mPrev;
@@ -378,7 +378,7 @@ void __fastcall UFG::FormationManagerComponent::~FormationManagerComponent(UFG::
   v4->mPrev = v3;
   v2->mPrev = v2;
   v2->mNext = v2;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->mStateVariables.m_FormationSlot,
     0xC8ui64,
     32,

@@ -256,7 +256,7 @@ char __fastcall hkaiStaticObstacleSystem::findClosestEdge(hkaiStaticObstacleSyst
   v11 = v5->m_data;
   evalFunc.m_angle = v8;
   evalFunc.m_weight = v9;
-  v6->m_closestEdgeIdx = hkAlgorithm::findMinimumIndex<hkaiStaticObstacleSystem::VelocityObstacleEdge,`anonymous namespace'::CalculateEdgePenalty>(
+  v6->m_closestEdgeIdx = hkAlgorithm::findMinimumIndex<hkaiStaticObstacleSystem::VelocityObstacleEdge,`anonymous namespace::CalculateEdgePenalty>(
                            v11,
                            v10,
                            &evalFunc);

@@ -25,7 +25,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_events::ErrorEvent> *__fa
     Scaleform::GFx::AS3::Instances::fl_events::TextEvent::TextEvent(
       v4,
       (Scaleform::GFx::AS3::InstanceTraits::Traits *)&v2->vfptr);
-    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_events::ErrorEvent::`vftable';
+    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_events::ErrorEvent::`vftable;
   }
   else
   {

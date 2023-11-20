@@ -8,7 +8,7 @@ void __fastcall UFG::UISlot::~UISlot(UFG::UISlot *this)
   UFG::qNode<UFG::UISlot,UFG::UISlot> *v4; // rax
 
   v1 = this;
-  this->vfptr = (UFG::UISlotVtbl *)&UFG::UISlot::`vftable';
+  this->vfptr = (UFG::UISlotVtbl *)&UFG::UISlot::`vftable;
   UFG::qString::~qString(&this->m_pathToSlot);
   v2 = (UFG::qNode<UFG::UISlot,UFG::UISlot> *)&v1->mPrev;
   v3 = v1->mPrev;

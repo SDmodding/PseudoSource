@@ -20,7 +20,7 @@ void __fastcall UFG::WayTraversalSearch::WayTraversalSearch(UFG::WayTraversalSea
   v9 = (UFG::qNode<UFG::WayTraversalSearch,UFG::WayTraversalSearch> *)&this->mPrev;
   v9->mPrev = v9;
   v9->mNext = v9;
-  this->vfptr = (UFG::WayTraversalSearchVtbl *)&UFG::WayTraversalSearch::`vftable';
+  this->vfptr = (UFG::WayTraversalSearchVtbl *)&UFG::WayTraversalSearch::`vftable;
   v10 = &this->lOpen;
   v10->mNode.mPrev = &v10->mNode;
   v10->mNode.mNext = &v10->mNode;
@@ -91,7 +91,7 @@ void __fastcall UFG::WayTraversalSearch::~WayTraversalSearch(UFG::WayTraversalSe
   UFG::qNode<UFG::WayTraversalSearch,UFG::WayTraversalSearch> *v25; // rax
 
   v1 = this;
-  this->vfptr = (UFG::WayTraversalSearchVtbl *)&UFG::WayTraversalSearch::`vftable';
+  this->vfptr = (UFG::WayTraversalSearchVtbl *)&UFG::WayTraversalSearch::`vftable;
   v2 = 0;
   if ( this->nCandidates > 0 )
   {
@@ -700,7 +700,7 @@ UFG::WayTraversal *__fastcall UFG::GetWayTraversal()
   if ( !(_S31_2 & 1) )
   {
     _S31_2 |= 1u;
-    WayTraversalDummyGraph.vfptr = (UFG::WayGraphVtbl *)&UFG::WayGraph::`vftable';
+    WayTraversalDummyGraph.vfptr = (UFG::WayGraphVtbl *)&UFG::WayGraph::`vftable;
     atexit(UFG::GetWayTraversal_::_2_::_dynamic_atexit_destructor_for__WayTraversalDummyGraph__);
     v0 = _S31_2;
   }

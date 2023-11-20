@@ -25,7 +25,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_display::Shape> *__fastca
     Scaleform::GFx::AS3::Instances::fl_display::DisplayObject::DisplayObject(
       v4,
       (Scaleform::GFx::AS3::InstanceTraits::Traits *)&v2->vfptr);
-    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_display::Shape::`vftable';
+    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_display::Shape::`vftable;
     v5->pGraphics.pObject = 0i64;
   }
   else

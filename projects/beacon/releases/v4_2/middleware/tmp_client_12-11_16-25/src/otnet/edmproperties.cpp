@@ -19,7 +19,7 @@ void __fastcall OSuite::ZOEdmProperty::ZOEdmProperty(OSuite::ZOEdmProperty *this
   OSuite::ZOEdmBase::ZOEdmBase((OSuite::ZOEdmBase *)&v6->vfptr, &schema, v5);
   OSuite::ZString::~ZString(&schema);
   v9 = 0i64;
-  v6->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOEdmProperty::`vftable';
+  v6->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOEdmProperty::`vftable;
   v6->m_Type = v8;
   v6->m_ComplexType = 0i64;
   v6->m_ComplexTypeName = 0i64;
@@ -71,7 +71,7 @@ void __fastcall OSuite::ZOEdmNavigationProperty::ZOEdmNavigationProperty(OSuite:
   v7 = this;
   OSuite::ZOEdmBase::ZOEdmBase((OSuite::ZOEdmBase *)&this->vfptr, schema, name);
   v8 = 0i64;
-  v7->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOEdmNavigationProperty::`vftable';
+  v7->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOEdmNavigationProperty::`vftable;
   v7->m_Association = 0i64;
   v7->m_FromRole = 0i64;
   v7->m_ToRole = 0i64;

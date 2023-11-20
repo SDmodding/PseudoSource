@@ -320,7 +320,7 @@ void __fastcall hkpSaveContactPointsUtil::saveContactPoints(hkpSaveContactPoints
 
 // File Line: 152
 // RVA: 0xE22B90
-unsigned __int64 __fastcall `anonymous namespace'::hkEntitySelectorListed::isEntityOk(hkEntitySelectorListed *this, hkpEntity *entity)
+unsigned __int64 __fastcall `anonymous namespace::hkEntitySelectorListed::isEntityOk(hkEntitySelectorListed *this, hkpEntity *entity)
 {
   return hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::getWithDefault(
            (hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)&this->m_map.m_elem,
@@ -426,7 +426,7 @@ void __fastcall hkpSaveContactPointsUtil::loadContactPoints(hkpSaveContactPoints
 {
   hkpSaveContactPointsUtil::EntitySelector selector; // [rsp+48h] [rbp+20h]
 
-  selector.vfptr = (hkpSaveContactPointsUtil::EntitySelectorVtbl *)&`anonymous namespace'::hkEntitySelectorAll::`vftable';
+  selector.vfptr = (hkpSaveContactPointsUtil::EntitySelectorVtbl *)&`anonymous namespace::hkEntitySelectorAll::`vftable;
   hkpSaveContactPointsUtil::loadContactPointsInternal(input, sys, world, &selector);
 }
 
@@ -446,7 +446,7 @@ void __fastcall hkpSaveContactPointsUtil::loadContactPoints(hkpSaveContactPoints
   v4 = input;
   v5 = 0i64;
   v6 = (*entities)->m_world;
-  selector.vfptr = (hkpSaveContactPointsUtil::EntitySelectorVtbl *)&`anonymous namespace'::hkEntitySelectorListed::`vftable';
+  selector.vfptr = (hkpSaveContactPointsUtil::EntitySelectorVtbl *)&`anonymous namespace::hkEntitySelectorListed::`vftable;
   v7 = numEntities;
   v8 = entities;
   v9 = sys;

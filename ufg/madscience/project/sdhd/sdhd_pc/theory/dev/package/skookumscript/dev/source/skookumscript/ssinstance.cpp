@@ -949,12 +949,12 @@ LABEL_12:
       v41 = v6;
       *(ASymbol *)(v6 + 8) = ASymbol_String;
       *(_QWORD *)(v6 + 16) = v7;
-      *(_QWORD *)v6 = &SSInvokableBase::`vftable';
+      *(_QWORD *)v6 = &SSInvokableBase::`vftable;
       *(_QWORD *)(v6 + 24) = v8;
       if ( v8 )
         ++v8->i_ref_count;
-      *(_QWORD *)v6 = &SSMethodBase::`vftable';
-      *(_QWORD *)v6 = &SSMethodFunc::`vftable';
+      *(_QWORD *)v6 = &SSMethodBase::`vftable;
+      *(_QWORD *)v6 = &SSMethodFunc::`vftable;
       *(_QWORD *)(v6 + 32) = SSInstance::mthd_as_string;
       if ( v8 )
       {
@@ -1031,12 +1031,12 @@ LABEL_37:
       v41 = v17;
       *(ASymbol *)(v17 + 8) = ASymbol_is;
       *(_QWORD *)(v17 + 16) = v18;
-      *(_QWORD *)v17 = &SSInvokableBase::`vftable';
+      *(_QWORD *)v17 = &SSInvokableBase::`vftable;
       *(_QWORD *)(v17 + 24) = v19;
       if ( v19 )
         ++v19->i_ref_count;
-      *(_QWORD *)v17 = &SSMethodBase::`vftable';
-      *(_QWORD *)v17 = &SSMethodFunc::`vftable';
+      *(_QWORD *)v17 = &SSMethodBase::`vftable;
+      *(_QWORD *)v17 = &SSMethodFunc::`vftable;
       *(_QWORD *)(v17 + 32) = SSActor::mthd_op_equals;
       if ( v19 )
       {

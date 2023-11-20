@@ -54,7 +54,7 @@ void __fastcall UFG::AIAwarenessComponent::AIAwarenessComponent(UFG::AIAwareness
   v3 = (UFG::qNode<UFG::AIAwarenessComponent,UFG::AIAwarenessComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIAwarenessComponent::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIAwarenessComponent::`vftable;
   if ( !sInitialized )
   {
     v4 = 0i64;
@@ -291,7 +291,7 @@ void __fastcall UFG::AIAwarenessComponent::AIAwarenessComponent(UFG::AIAwareness
   *(_QWORD *)&result.mUID = v20;
   if ( v20 )
   {
-    `eh vector constructor iterator'(
+    `eh vector constructor iterator(
       v20,
       0x38ui64,
       100,
@@ -350,7 +350,7 @@ void __fastcall UFG::AIAwarenessComponent::~AIAwarenessComponent(UFG::AIAwarenes
   UFG::qNode<UFG::AIAwarenessComponent,UFG::AIAwarenessComponent> *v19; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIAwarenessComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIAwarenessComponent::`vftable;
   if ( this == UFG::AIAwarenessComponent::s_AIAwarenessComponentpCurrentIterator )
     UFG::AIAwarenessComponent::s_AIAwarenessComponentpCurrentIterator = (UFG::AIAwarenessComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::AIAwarenessComponent,UFG::AIAwarenessComponent> *)&this->mPrev;
@@ -407,7 +407,7 @@ void __fastcall UFG::AIAwarenessComponent::~AIAwarenessComponent(UFG::AIAwarenes
   v17 = v1->mpKnowledgeSpace;
   if ( v17 )
   {
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v17,
       0x38ui64,
       100,

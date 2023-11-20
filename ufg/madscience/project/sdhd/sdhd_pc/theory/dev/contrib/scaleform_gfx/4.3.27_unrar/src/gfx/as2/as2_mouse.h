@@ -65,7 +65,7 @@ void __fastcall Scaleform::GFx::AS2::MouseCtorFunction::LocalInvokeCallback::Inv
     v11 = ((_QWORD)((char *)v6->Stack.pCurrent - (char *)v6->Stack.pPageStart) >> 5)
         + 32 * v6->Stack.Pages.Data.Size
         - 32;
-    i = &Scaleform::GFx::AS2::FnCall::`vftable';
+    i = &Scaleform::GFx::AS2::FnCall::`vftable;
     v20 = &eventMethod;
     v21 = v5;
     v24 = 0;
@@ -79,7 +79,7 @@ void __fastcall Scaleform::GFx::AS2::MouseCtorFunction::LocalInvokeCallback::Inv
       &i,
       v4->pLocalFrame,
       0i64);
-    i = &Scaleform::GFx::AS2::FnCall::`vftable';
+    i = &Scaleform::GFx::AS2::FnCall::`vftable;
     v12 = v24;
     if ( !(v24 & 2) )
     {
@@ -110,7 +110,7 @@ void __fastcall Scaleform::GFx::AS2::MouseCtorFunction::LocalInvokeCallback::Inv
       }
     }
     v23 = 0i64;
-    for ( i = &Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>::`vftable'; v10; --v10 )
+    for ( i = &Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>::`vftable; v10; --v10 )
     {
       v17 = v6->Stack.pCurrent;
       if ( v17->T.Type >= 5u )

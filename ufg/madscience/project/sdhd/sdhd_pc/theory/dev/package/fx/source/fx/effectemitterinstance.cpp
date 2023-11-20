@@ -9,10 +9,10 @@ void __fastcall Render::EffectEmitterInstance::EffectEmitterInstance(Render::Eff
   v2 = (UFG::qNode<Render::FXComponentInstance,Render::FXComponentInstance> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable';
+  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable;
   *(_QWORD *)&this->mForceSuspendState = 0i64;
   *(_WORD *)&this->mIsActive = 0;
-  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::EffectEmitterInstance::`vftable';
+  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::EffectEmitterInstance::`vftable;
   this->mActiveEffects[0].node = 0i64;
   this->mActiveEffects[0].effectHandle = -1;
   this->mActiveEffects[1].node = 0i64;
@@ -48,18 +48,18 @@ void __fastcall Render::EffectEmitterInstance::~EffectEmitterInstance(Render::Ef
   UFG::qNode<Render::FXComponentInstance,Render::FXComponentInstance> *v7; // rax
 
   v1 = this;
-  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::EffectEmitterInstance::`vftable';
+  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::EffectEmitterInstance::`vftable;
   v2 = (UFG::qResourceHandle *)&this->mSettingsHandle.mPrev;
-  v3 = `UFG::qGetResourceInventory<Render::EffectEmitterSettings>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Render::EffectEmitterSettings>'::`2'::result )
+  v3 = `UFG::qGetResourceInventory<Render::EffectEmitterSettings>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Render::EffectEmitterSettings>::`2::result )
   {
     v4 = UFG::qResourceWarehouse::Instance();
     v3 = UFG::qResourceWarehouse::GetInventory(v4, 0xFF1F2832);
-    `UFG::qGetResourceInventory<Render::EffectEmitterSettings>'::`2'::result = v3;
+    `UFG::qGetResourceInventory<Render::EffectEmitterSettings>::`2::result = v3;
   }
   UFG::qResourceHandle::Close(v2, v3);
   UFG::qResourceHandle::~qResourceHandle(v2);
-  v1->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable';
+  v1->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable;
   v5 = (UFG::qNode<Render::FXComponentInstance,Render::FXComponentInstance> *)&v1->mPrev;
   v6 = v1->mPrev;
   v7 = v1->mNext;
@@ -86,22 +86,22 @@ void __fastcall Render::EffectEmitterInstance::Init(Render::EffectEmitterInstanc
   this->mSettingsId = settingsId;
   if ( !v2 )
   {
-    v4 = `UFG::qGetResourceInventory<Render::EffectEmitterSettings>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Render::EffectEmitterSettings>'::`2'::result )
+    v4 = `UFG::qGetResourceInventory<Render::EffectEmitterSettings>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Render::EffectEmitterSettings>::`2::result )
     {
       v5 = UFG::qResourceWarehouse::Instance();
       v4 = UFG::qResourceWarehouse::GetInventory(v5, 0xFF1F2832);
-      `UFG::qGetResourceInventory<Render::EffectEmitterSettings>'::`2'::result = v4;
+      `UFG::qGetResourceInventory<Render::EffectEmitterSettings>::`2::result = v4;
     }
     UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v3->mSettingsHandle.mPrev, v4);
   }
-  v6 = `UFG::qGetResourceInventory<Render::EffectEmitterSettings>'::`2'::result;
+  v6 = `UFG::qGetResourceInventory<Render::EffectEmitterSettings>::`2::result;
   v7 = v3->mSettingsId;
-  if ( !`UFG::qGetResourceInventory<Render::EffectEmitterSettings>'::`2'::result )
+  if ( !`UFG::qGetResourceInventory<Render::EffectEmitterSettings>::`2::result )
   {
     v8 = UFG::qResourceWarehouse::Instance();
     v6 = UFG::qResourceWarehouse::GetInventory(v8, 0xFF1F2832);
-    `UFG::qGetResourceInventory<Render::EffectEmitterSettings>'::`2'::result = v6;
+    `UFG::qGetResourceInventory<Render::EffectEmitterSettings>::`2::result = v6;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v3->mSettingsHandle.mPrev, 0xFF1F2832, v7, v6);
 }

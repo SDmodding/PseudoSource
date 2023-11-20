@@ -7,7 +7,7 @@ void __fastcall hkaiPathfindingUtil::FindPathInput::~FindPathInput(hkaiPathfindi
   int v3; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiPathfindingUtil::FindPathInput::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiPathfindingUtil::FindPathInput::`vftable;
   this->m_goalFaceKeys.m_size = 0;
   v2 = this->m_goalFaceKeys.m_capacityAndFlags;
   if ( v2 >= 0 )
@@ -26,14 +26,14 @@ void __fastcall hkaiPathfindingUtil::FindPathInput::~FindPathInput(hkaiPathfindi
       16 * v3);
   v1->m_goalPoints.m_data = 0i64;
   v1->m_goalPoints.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable';
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable;
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 167
 // RVA: 0xE6350
 void __fastcall hkaiPathfindingUtil::NearestFeatureCallback::~NearestFeatureCallback(hkaiPathfindingUtil::NearestFeatureCallback *this)
 {
-  this->vfptr = (hkaiPathfindingUtil::NearestFeatureCallbackVtbl *)&hkaiPathfindingUtil::NearestFeatureCallback::`vftable';
+  this->vfptr = (hkaiPathfindingUtil::NearestFeatureCallbackVtbl *)&hkaiPathfindingUtil::NearestFeatureCallback::`vftable;
 }
 

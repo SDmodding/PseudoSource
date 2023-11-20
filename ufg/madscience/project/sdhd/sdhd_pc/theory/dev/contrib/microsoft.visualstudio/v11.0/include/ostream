@@ -6,12 +6,12 @@ void __fastcall std::basic_ostream<char,std::char_traits<char>>::basic_ostream<c
 
   if ( a4 )
   {
-    *(_QWORD *)this->gap0 = &std::basic_ostream<char,std::char_traits<char>>::`vbtable';
+    *(_QWORD *)this->gap0 = &std::basic_ostream<char,std::char_traits<char>>::`vbtable;
     v4 = &this->gap0[16];
-    *v4 = &std::ios_base::`vftable';
-    *v4 = &std::basic_ios<char,std::char_traits<char>>::`vftable';
+    *v4 = &std::ios_base::`vftable;
+    *v4 = &std::basic_ios<char,std::char_traits<char>>::`vftable;
   }
-  *(_QWORD *)&this->gap0[*(signed int *)(*(_QWORD *)this->gap0 + 4i64)] = &std::basic_ostream<char,std::char_traits<char>>::`vftable';
+  *(_QWORD *)&this->gap0[*(signed int *)(*(_QWORD *)this->gap0 + 4i64)] = &std::basic_ostream<char,std::char_traits<char>>::`vftable;
   *(_DWORD *)&this->gap0[*(signed int *)(*(_QWORD *)this->gap0 + 4i64) - 4] = *(_DWORD *)(*(_QWORD *)this->gap0 + 4i64)
                                                                             - 16;
   std::basic_ios<char,std::char_traits<char>>::init(
@@ -387,7 +387,7 @@ LABEL_36:
           v31 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v36._Bx._Ptr;
         _What = (char *)v31;
         std::exception::exception(&pExceptionObject, (const char *const *)&_What);
-        pExceptionObject.vfptr = (std::exceptionVtbl *)&std::system_error::`vftable';
+        pExceptionObject.vfptr = (std::exceptionVtbl *)&std::system_error::`vftable;
         v43 = v38;
         v44 = &std::_Error_objects<int>::_Iostream_object;
         if ( v36._Myres >= 0x10 )
@@ -395,7 +395,7 @@ LABEL_36:
         v36._Myres = 15i64;
         v36._Mysize = 0i64;
         v36._Bx._Buf[0] = 0;
-        pExceptionObject.vfptr = (std::exceptionVtbl *)&std::ios_base::failure::`vftable';
+        pExceptionObject.vfptr = (std::exceptionVtbl *)&std::ios_base::failure::`vftable;
         CxxThrowException(&pExceptionObject, &TI4_AVfailure_ios_base_std__);
       }
       if ( v30 & 2 )
@@ -409,7 +409,7 @@ LABEL_36:
           v32 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v36._Bx._Ptr;
         _What = (char *)v32;
         std::exception::exception(&v48, (const char *const *)&_What);
-        v48.vfptr = (std::exceptionVtbl *)&std::system_error::`vftable';
+        v48.vfptr = (std::exceptionVtbl *)&std::system_error::`vftable;
         v49 = v38;
         v50 = &std::_Error_objects<int>::_Iostream_object;
         if ( v36._Myres >= 0x10 )
@@ -417,7 +417,7 @@ LABEL_36:
         v36._Myres = 15i64;
         v36._Mysize = 0i64;
         v36._Bx._Buf[0] = 0;
-        v48.vfptr = (std::exceptionVtbl *)&std::ios_base::failure::`vftable';
+        v48.vfptr = (std::exceptionVtbl *)&std::ios_base::failure::`vftable;
         CxxThrowException(&v48, &TI4_AVfailure_ios_base_std__);
       }
       std::basic_string<char,std::char_traits<char>,std::allocator<char>>::assign(
@@ -429,7 +429,7 @@ LABEL_36:
         v33 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v36._Bx._Ptr;
       _What = (char *)v33;
       std::exception::exception(&v45, (const char *const *)&_What);
-      v45.vfptr = (std::exceptionVtbl *)&std::system_error::`vftable';
+      v45.vfptr = (std::exceptionVtbl *)&std::system_error::`vftable;
       v46 = v38;
       v47 = &std::_Error_objects<int>::_Iostream_object;
       if ( v36._Myres >= 0x10 )
@@ -437,7 +437,7 @@ LABEL_36:
       v36._Myres = 15i64;
       v36._Mysize = 0i64;
       v36._Bx._Buf[0] = 0;
-      v45.vfptr = (std::exceptionVtbl *)&std::ios_base::failure::`vftable';
+      v45.vfptr = (std::exceptionVtbl *)&std::ios_base::failure::`vftable;
       CxxThrowException(&v45, &TI4_AVfailure_ios_base_std__);
     }
   }

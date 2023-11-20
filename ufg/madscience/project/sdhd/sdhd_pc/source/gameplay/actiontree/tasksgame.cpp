@@ -181,9 +181,9 @@ void __fastcall DoorStateTask::DoorStateTask(DoorStateTask *this)
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<DoorStateTrack>::`vftable';
-  this->vfptr = (ITaskVtbl *)&DoorStateTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<DoorStateTrack>::`vftable;
+  this->vfptr = (ITaskVtbl *)&DoorStateTask::`vftable;
 }
 
 // File Line: 377
@@ -776,15 +776,15 @@ void __fastcall AttackCollisionTask::AttackCollisionTask(AttackCollisionTask *th
   v2 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<AttackCollisionTrack>::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<AttackCollisionTrack>::`vftable;
   v3 = (PostAnimUpdateTask *)&this->vfptr;
   v4 = (UFG::qNode<PostAnimUpdateTask,PostAnimUpdateTaskList> *)&v3->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  v3->vfptr = (PostAnimUpdateTaskVtbl *)&PostAnimUpdateTask::`vftable';
-  v1->vfptr = (ITaskVtbl *)&AttackCollisionTask::`vftable'{for `Task<AttackCollisionTrack>'};
-  v3->vfptr = (PostAnimUpdateTaskVtbl *)&AttackCollisionTask::`vftable'{for `PostAnimUpdateTask'};
+  v3->vfptr = (PostAnimUpdateTaskVtbl *)&PostAnimUpdateTask::`vftable;
+  v1->vfptr = (ITaskVtbl *)&AttackCollisionTask::`vftable{for `Task<AttackCollisionTrack>};
+  v3->vfptr = (PostAnimUpdateTaskVtbl *)&AttackCollisionTask::`vftable{for `PostAnimUpdateTask};
   v1->mAttackBoneIndex = -1;
   *(_DWORD *)&v1->mHitPhysical = 0;
   *(_WORD *)&v1->mBlockedLastFrame = 0;
@@ -4815,9 +4815,9 @@ void __fastcall AttackRightsTask::AttackRightsTask(AttackRightsTask *this)
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<AttackRightsTrack>::`vftable';
-  this->vfptr = (ITaskVtbl *)&AttackRightsTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<AttackRightsTrack>::`vftable;
+  this->vfptr = (ITaskVtbl *)&AttackRightsTask::`vftable;
   v2 = &this->mAttackRightsComponent;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
@@ -5747,12 +5747,12 @@ void __fastcall AimingSoftLockTask::AimingSoftLockTask(AimingSoftLockTask *this)
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<AimingSoftLockTrack>::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<AimingSoftLockTrack>::`vftable;
   v2 = (UFG::qNode<AimingSoftLockTask,AimingSoftLockList> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (ITaskVtbl *)&AimingSoftLockTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&AimingSoftLockTask::`vftable;
 }
 
 // File Line: 2888
@@ -5814,12 +5814,12 @@ void __fastcall AimingSoftLockDisableTask::AimingSoftLockDisableTask(AimingSoftL
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<AimingSoftLockDisableTrack>::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<AimingSoftLockDisableTrack>::`vftable;
   v2 = (UFG::qNode<AimingSoftLockDisableTask,AimingSoftLockDisableList> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (ITaskVtbl *)&AimingSoftLockDisableTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&AimingSoftLockDisableTask::`vftable;
 }
 
 // File Line: 2921
@@ -5881,12 +5881,12 @@ void __fastcall AimingFreeAimConeClampTask::AimingFreeAimConeClampTask(AimingFre
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<AimingFreeAimConeClampTrack>::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<AimingFreeAimConeClampTrack>::`vftable;
   v2 = (UFG::qNode<AimingFreeAimConeClampTask,AimingFreeAimConeClampList> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (ITaskVtbl *)&AimingFreeAimConeClampTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&AimingFreeAimConeClampTask::`vftable;
 }
 
 // File Line: 2953
@@ -5947,9 +5947,9 @@ void __fastcall PowerManagementSuspendPermanentlyTask::PowerManagementSuspendPer
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<PowerManagementSuspendPermanentlyTrack>::`vftable';
-  this->vfptr = (ITaskVtbl *)&PowerManagementSuspendPermanentlyTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<PowerManagementSuspendPermanentlyTrack>::`vftable;
+  this->vfptr = (ITaskVtbl *)&PowerManagementSuspendPermanentlyTask::`vftable;
 }
 
 // File Line: 2986
@@ -6872,9 +6872,9 @@ void __fastcall ActorStateCounterTask::ActorStateCounterTask(ActorStateCounterTa
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<ActorStateCounterTrack>::`vftable';
-  this->vfptr = (ITaskVtbl *)&ActorStateCounterTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<ActorStateCounterTrack>::`vftable;
+  this->vfptr = (ITaskVtbl *)&ActorStateCounterTask::`vftable;
   this->m_pActionContext = 0i64;
 }
 
@@ -6908,9 +6908,9 @@ void __fastcall GameStatEventTask::GameStatEventTask(GameStatEventTask *this)
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<GameStatEventTrack>::`vftable';
-  this->vfptr = (ITaskVtbl *)&GameStatEventTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<GameStatEventTrack>::`vftable;
+  this->vfptr = (ITaskVtbl *)&GameStatEventTask::`vftable;
 }
 
 // File Line: 3444
@@ -6942,10 +6942,10 @@ void __fastcall GameStatEventTask::Begin(GameStatEventTask *this, ActionContext 
       v10 = v5 + 1;
       v10->mNext = v10;
       v10[1].mNext = v10;
-      v6->mNext = (UFG::allocator::free_link *)&UFG::Event::`vftable';
+      v6->mNext = (UFG::allocator::free_link *)&UFG::Event::`vftable;
       LODWORD(v6[3].mNext) = v9;
       v6[4].mNext = (UFG::allocator::free_link *)v8;
-      v6->mNext = (UFG::allocator::free_link *)&UFG::GameStatEvent::`vftable';
+      v6->mNext = (UFG::allocator::free_link *)&UFG::GameStatEvent::`vftable;
       LODWORD(v6[7].mNext) = v4;
       v6[8].mNext = (UFG::allocator::free_link *)v7;
     }
@@ -7088,10 +7088,10 @@ void __fastcall GameStatSpecialMoveTask::Begin(GameStatSpecialMoveTask *this, Ac
                     v23 = v18 + 1;
                     v23->mNext = v23;
                     v23[1].mNext = v23;
-                    v19->mNext = (UFG::allocator::free_link *)&UFG::Event::`vftable';
+                    v19->mNext = (UFG::allocator::free_link *)&UFG::Event::`vftable;
                     LODWORD(v19[3].mNext) = v22;
                     v19[4].mNext = (UFG::allocator::free_link *)v21;
-                    v19->mNext = (UFG::allocator::free_link *)&UFG::GameStatEvent::`vftable';
+                    v19->mNext = (UFG::allocator::free_link *)&UFG::GameStatEvent::`vftable;
                     LODWORD(v19[7].mNext) = 59;
                     v19[8].mNext = (UFG::allocator::free_link *)v20;
                   }
@@ -7116,10 +7116,10 @@ void __fastcall GameStatSpecialMoveTask::Begin(GameStatSpecialMoveTask *this, Ac
                     v16 = v11 + 1;
                     v16->mNext = v16;
                     v16[1].mNext = v16;
-                    v12->mNext = (UFG::allocator::free_link *)&UFG::Event::`vftable';
+                    v12->mNext = (UFG::allocator::free_link *)&UFG::Event::`vftable;
                     LODWORD(v12[3].mNext) = v15;
                     v12[4].mNext = (UFG::allocator::free_link *)v14;
-                    v12->mNext = (UFG::allocator::free_link *)&UFG::GameStatEvent::`vftable';
+                    v12->mNext = (UFG::allocator::free_link *)&UFG::GameStatEvent::`vftable;
                     LODWORD(v12[7].mNext) = 28;
                     v12[8].mNext = (UFG::allocator::free_link *)v13;
                   }
@@ -7798,9 +7798,9 @@ void __fastcall ReadControllerInputTask::ReadControllerInputTask(ReadControllerI
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<ReadControllerInputTrack>::`vftable';
-  this->vfptr = (ITaskVtbl *)&ReadControllerInputTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<ReadControllerInputTrack>::`vftable;
+  this->vfptr = (ITaskVtbl *)&ReadControllerInputTask::`vftable;
   v3 = &this->m_pAICharacterControllerComponent;
   v3->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v3->mPrev;
   v3->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v3->mPrev;
@@ -7844,7 +7844,7 @@ void __fastcall ReadControllerInputTask::~ReadControllerInputTask(ReadController
   UFG::qNode<ITask,ITask> *v19; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&ReadControllerInputTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ReadControllerInputTask::`vftable;
   v2 = &this->m_pTargetingSystemPedPlayerComponent;
   if ( this->m_pTargetingSystemPedPlayerComponent.m_pPointer )
   {
@@ -7896,7 +7896,7 @@ void __fastcall ReadControllerInputTask::~ReadControllerInputTask(ReadController
   v16->mPrev = v15;
   v12->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v12->mPrev;
   v1->m_pAICharacterControllerComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->m_pAICharacterControllerComponent.mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v17 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v18 = v1->mPrev;
   v19 = v1->mNext;
@@ -10653,10 +10653,10 @@ void __fastcall SocialSetFastTalkSuccessTask::Begin(SocialSetFastTalkSuccessTask
         v16 = v12 + 1;
         v16->mNext = v16;
         v16[1].mNext = v16;
-        v12->mNext = (UFG::allocator::free_link *)&UFG::Event::`vftable';
+        v12->mNext = (UFG::allocator::free_link *)&UFG::Event::`vftable;
         LODWORD(v12[3].mNext) = v14;
         v12[4].mNext = (UFG::allocator::free_link *)v13;
-        v12->mNext = (UFG::allocator::free_link *)&UFG::GameStatEvent::`vftable';
+        v12->mNext = (UFG::allocator::free_link *)&UFG::GameStatEvent::`vftable;
         LODWORD(v12[7].mNext) = 41;
         v12[8].mNext = (UFG::allocator::free_link *)v15;
       }
@@ -10840,12 +10840,12 @@ void __fastcall AccuracyModifierTask::AccuracyModifierTask(AccuracyModifierTask 
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<AccuracyModifierTrack>::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<AccuracyModifierTrack>::`vftable;
   v2 = (UFG::qNode<AccuracyModifierTask,AimingSystemAccuracyModifierList> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (ITaskVtbl *)&AccuracyModifierTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&AccuracyModifierTask::`vftable;
   *((_BYTE *)this + 64) = *((_BYTE *)this + 64) & 0xFD | 1;
 }
 
@@ -10939,9 +10939,9 @@ void __fastcall CollectibleCollectTask::CollectibleCollectTask(CollectibleCollec
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<CollectibleCollectTrack>::`vftable';
-  this->vfptr = (ITaskVtbl *)&CollectibleCollectTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<CollectibleCollectTrack>::`vftable;
+  this->vfptr = (ITaskVtbl *)&CollectibleCollectTask::`vftable;
 }
 
 // File Line: 5062
@@ -11125,12 +11125,12 @@ void __fastcall SimObjectFlagSetTask::SimObjectFlagSetTask(SimObjectFlagSetTask 
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<SimObjectFlagSetTrack>::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<SimObjectFlagSetTrack>::`vftable;
   v2 = (UFG::qNode<SimObjectFlagSetTask,SimObjectFlagSetList> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (ITaskVtbl *)&SimObjectFlagSetTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&SimObjectFlagSetTask::`vftable;
   v3 = &this->m_SimObjectPropertiesComponent;
   v3->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v3->mPrev;
   v3->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v3->mPrev;
@@ -11156,7 +11156,7 @@ void __fastcall SimObjectFlagSetTask::~SimObjectFlagSetTask(SimObjectFlagSetTask
   UFG::qNode<ITask,ITask> *v13; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&SimObjectFlagSetTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&SimObjectFlagSetTask::`vftable;
   v2 = (UFG::SimObjectPropertiesComponent *)this->m_SimObjectPropertiesComponent.m_pPointer;
   if ( v2 )
     UFG::SimObjectPropertiesComponent::UpdateCachedValues(v2);
@@ -11184,7 +11184,7 @@ void __fastcall SimObjectFlagSetTask::~SimObjectFlagSetTask(SimObjectFlagSetTask
   v10->mPrev = v9;
   v8->mPrev = v8;
   v8->mNext = v8;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v11 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v12 = v1->mPrev;
   v13 = v1->mNext;
@@ -11579,15 +11579,15 @@ void __fastcall ResourceOpportunityTask::ResourceOpportunityTask(ResourceOpportu
   v2 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<ResourceOpportunityTrack>::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<ResourceOpportunityTrack>::`vftable;
   v3 = (UFG::PowerManagedResource *)&this->vfptr;
   v4 = (UFG::qNode<UFG::PowerManagedResource,UFG::PowerManagedResourceList> *)&v3->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  v3->vfptr = (UFG::PowerManagedResourceVtbl *)&UFG::PowerManagedResource::`vftable';
-  v1->vfptr = (ITaskVtbl *)&ResourceOpportunityTask::`vftable'{for `Task<ResourceOpportunityTrack>'};
-  v3->vfptr = (UFG::PowerManagedResourceVtbl *)&ResourceOpportunityTask::`vftable'{for `UFG::PowerManagedResource'};
+  v3->vfptr = (UFG::PowerManagedResourceVtbl *)&UFG::PowerManagedResource::`vftable;
+  v1->vfptr = (ITaskVtbl *)&ResourceOpportunityTask::`vftable{for `Task<ResourceOpportunityTrack>};
+  v3->vfptr = (UFG::PowerManagedResourceVtbl *)&ResourceOpportunityTask::`vftable{for `UFG::PowerManagedResource};
   v1->mContext = 0i64;
   v1->mLatchedNode = 0i64;
   v1->mNameUID = 0;
@@ -11913,7 +11913,7 @@ void __fastcall ResourceOpportunityTask::gatherResources(ResourceOpportunityTask
             {
               v13 = v12->vfptr;
               v15 = 1;
-              v14 = &ResourceOpportunityVisitor::`vftable';
+              v14 = &ResourceOpportunityVisitor::`vftable;
               v16 = v7;
               v17 = v1;
               v13[1].FindWithOldPath((Expression::IMemberMap *)&v12->vfptr, (const char *)&v14);

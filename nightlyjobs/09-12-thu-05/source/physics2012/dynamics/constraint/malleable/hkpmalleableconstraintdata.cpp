@@ -10,7 +10,7 @@ void __fastcall hkpMalleableConstraintData::hkpMalleableConstraintData(hkpMallea
   this->m_constraintData = constraintData;
   this->m_referenceCount = 1;
   this->m_userData = 0i64;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpMalleableConstraintData::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpMalleableConstraintData::`vftable;
   this->m_atoms.m_bridgeAtom.m_type.m_storage = 1;
   v3 = this->m_constraintData;
   v2->m_strength = 0.0099999998;
@@ -28,7 +28,7 @@ void __fastcall hkpMalleableConstraintData::hkpMalleableConstraintData(hkpMallea
   v3 = f.m_finishing;
   v2 = this;
   hkpConstraintData::hkpConstraintData((hkpConstraintData *)&this->vfptr, f);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpMalleableConstraintData::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpMalleableConstraintData::`vftable;
   if ( v3 )
   {
     hkpBridgeConstraintAtom::init(&v2->m_atoms.m_bridgeAtom, v2->m_atoms.m_bridgeAtom.m_constraintData);
@@ -44,9 +44,9 @@ void __fastcall hkpMalleableConstraintData::~hkpMalleableConstraintData(hkpMalle
   hkpMalleableConstraintData *v1; // rbx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpMalleableConstraintData::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpMalleableConstraintData::`vftable;
   hkReferencedObject::removeReference((hkReferencedObject *)&this->m_constraintData->vfptr);
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 41

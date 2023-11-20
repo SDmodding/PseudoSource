@@ -71,10 +71,10 @@ unsigned __int64 __fastcall std::numpunct<char>::_Getcat(std::locale::facet **_P
       }
       std::_Locinfo::_Locinfo(&v10, v7);
       v4 = 1;
-      v5->vfptr = (std::_Facet_baseVtbl *)&std::_Facet_base::`vftable';
-      v5->vfptr = (std::_Facet_baseVtbl *)&std::locale::facet::`vftable';
+      v5->vfptr = (std::_Facet_baseVtbl *)&std::_Facet_base::`vftable;
+      v5->vfptr = (std::_Facet_baseVtbl *)&std::locale::facet::`vftable;
       v5->_Refs = 0;
-      v5->vfptr = (std::_Facet_baseVtbl *)&std::numpunct<char>::`vftable';
+      v5->vfptr = (std::_Facet_baseVtbl *)&std::numpunct<char>::`vftable;
       std::numpunct<char>::_Init(v5, v8, 1);
     }
     else
@@ -272,10 +272,10 @@ unsigned __int64 __fastcall std::num_put<char,std::ostreambuf_iterator<char,std:
       }
       std::_Locinfo::_Locinfo(&v9, v7);
       v4 = 1;
-      v5->vfptr = (std::_Facet_baseVtbl *)&std::_Facet_base::`vftable';
-      v5->vfptr = (std::_Facet_baseVtbl *)&std::locale::facet::`vftable';
+      v5->vfptr = (std::_Facet_baseVtbl *)&std::_Facet_base::`vftable;
+      v5->vfptr = (std::_Facet_baseVtbl *)&std::locale::facet::`vftable;
       v5->_Refs = 0;
-      v5->vfptr = (std::_Facet_baseVtbl *)&std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char>>>::`vftable';
+      v5->vfptr = (std::_Facet_baseVtbl *)&std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char>>>::`vftable;
     }
     else
     {

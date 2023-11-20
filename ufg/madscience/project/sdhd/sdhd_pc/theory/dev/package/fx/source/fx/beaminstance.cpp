@@ -7,10 +7,10 @@ void __fastcall Render::BeamInstance::BeamInstance(Render::BeamInstance *this)
   v1 = (UFG::qNode<Render::FXComponentInstance,Render::FXComponentInstance> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable';
+  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable;
   *(_QWORD *)&this->mForceSuspendState = 0i64;
   *(_WORD *)&this->mIsActive = 0;
-  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::BeamInstance::`vftable';
+  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::BeamInstance::`vftable;
   this->mCallback = 0i64;
   UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&this->mSettingsHandle.mPrev);
 }
@@ -31,16 +31,16 @@ void __fastcall Render::BeamInstance::~BeamInstance(Render::BeamInstance *this)
   UFG::qNode<Render::FXComponentInstance,Render::FXComponentInstance> *v10; // rax
 
   v1 = this;
-  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::BeamInstance::`vftable';
+  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::BeamInstance::`vftable;
   if ( this->mIsActive )
   {
     this->mIsActive = 0;
-    v2 = `UFG::qGetResourceInventory<Render::BeamSettings>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Render::BeamSettings>'::`2'::result )
+    v2 = `UFG::qGetResourceInventory<Render::BeamSettings>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Render::BeamSettings>::`2::result )
     {
       v3 = UFG::qResourceWarehouse::Instance();
       v2 = UFG::qResourceWarehouse::GetInventory(v3, 0xA0AAE10F);
-      `UFG::qGetResourceInventory<Render::BeamSettings>'::`2'::result = v2;
+      `UFG::qGetResourceInventory<Render::BeamSettings>::`2::result = v2;
     }
     UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mSettingsHandle.mPrev, v2);
     if ( v1->mIsSuspended )
@@ -54,16 +54,16 @@ void __fastcall Render::BeamInstance::~BeamInstance(Render::BeamInstance *this)
     if ( !v5->CallbackPending )
       operator delete[](v5);
   }
-  v6 = `UFG::qGetResourceInventory<Render::BeamSettings>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Render::BeamSettings>'::`2'::result )
+  v6 = `UFG::qGetResourceInventory<Render::BeamSettings>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Render::BeamSettings>::`2::result )
   {
     v7 = UFG::qResourceWarehouse::Instance();
     v6 = UFG::qResourceWarehouse::GetInventory(v7, 0xA0AAE10F);
-    `UFG::qGetResourceInventory<Render::BeamSettings>'::`2'::result = v6;
+    `UFG::qGetResourceInventory<Render::BeamSettings>::`2::result = v6;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mSettingsHandle.mPrev, v6);
   UFG::qResourceHandle::~qResourceHandle((UFG::qResourceHandle *)&v1->mSettingsHandle.mPrev);
-  v1->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable';
+  v1->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable;
   v8 = (UFG::qNode<Render::FXComponentInstance,Render::FXComponentInstance> *)&v1->mPrev;
   v9 = v1->mPrev;
   v10 = v1->mNext;
@@ -90,22 +90,22 @@ void __fastcall Render::BeamInstance::Init(Render::BeamInstance *this, unsigned 
   this->mSettingsId = settingsId;
   if ( !v2 )
   {
-    v4 = `UFG::qGetResourceInventory<Render::BeamSettings>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Render::BeamSettings>'::`2'::result )
+    v4 = `UFG::qGetResourceInventory<Render::BeamSettings>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Render::BeamSettings>::`2::result )
     {
       v5 = UFG::qResourceWarehouse::Instance();
       v4 = UFG::qResourceWarehouse::GetInventory(v5, 0xA0AAE10F);
-      `UFG::qGetResourceInventory<Render::BeamSettings>'::`2'::result = v4;
+      `UFG::qGetResourceInventory<Render::BeamSettings>::`2::result = v4;
     }
     UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v3->mSettingsHandle.mPrev, v4);
   }
-  v6 = `UFG::qGetResourceInventory<Render::BeamSettings>'::`2'::result;
+  v6 = `UFG::qGetResourceInventory<Render::BeamSettings>::`2::result;
   v7 = v3->mSettingsId;
-  if ( !`UFG::qGetResourceInventory<Render::BeamSettings>'::`2'::result )
+  if ( !`UFG::qGetResourceInventory<Render::BeamSettings>::`2::result )
   {
     v8 = UFG::qResourceWarehouse::Instance();
     v6 = UFG::qResourceWarehouse::GetInventory(v8, 0xA0AAE10F);
-    `UFG::qGetResourceInventory<Render::BeamSettings>'::`2'::result = v6;
+    `UFG::qGetResourceInventory<Render::BeamSettings>::`2::result = v6;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v3->mSettingsHandle.mPrev, 0xA0AAE10F, v7, v6);
 }
@@ -163,12 +163,12 @@ void __fastcall Render::BeamInstance::Deactivate(Render::BeamInstance *this, boo
   if ( this->mIsActive )
   {
     this->mIsActive = 0;
-    v3 = `UFG::qGetResourceInventory<Render::BeamSettings>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Render::BeamSettings>'::`2'::result )
+    v3 = `UFG::qGetResourceInventory<Render::BeamSettings>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Render::BeamSettings>::`2::result )
     {
       v4 = UFG::qResourceWarehouse::Instance();
       v3 = UFG::qResourceWarehouse::GetInventory(v4, 0xA0AAE10F);
-      `UFG::qGetResourceInventory<Render::BeamSettings>'::`2'::result = v3;
+      `UFG::qGetResourceInventory<Render::BeamSettings>::`2::result = v3;
     }
     UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v2->mSettingsHandle.mPrev, v3);
     if ( v2->mIsSuspended )
@@ -228,12 +228,12 @@ void __fastcall Render::BeamInstance::Update(Render::BeamInstance *this, UFG::qV
   if ( !this->mSettingsHandle.mData )
   {
     v4 = this->mSettingsId;
-    v5 = `UFG::qGetResourceInventory<Render::BeamSettings>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Render::BeamSettings>'::`2'::result )
+    v5 = `UFG::qGetResourceInventory<Render::BeamSettings>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Render::BeamSettings>::`2::result )
     {
       v6 = UFG::qResourceWarehouse::Instance();
       v5 = UFG::qResourceWarehouse::GetInventory(v6, 0xA0AAE10F);
-      `UFG::qGetResourceInventory<Render::BeamSettings>'::`2'::result = v5;
+      `UFG::qGetResourceInventory<Render::BeamSettings>::`2::result = v5;
     }
     UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v3->mSettingsHandle.mPrev, 0xA0AAE10F, v4, v5);
   }

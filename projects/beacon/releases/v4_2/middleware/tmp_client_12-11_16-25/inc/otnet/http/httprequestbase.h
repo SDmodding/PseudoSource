@@ -196,16 +196,16 @@ void __fastcall OSuite::ZHttpRequestBase::~ZHttpRequestBase(OSuite::ZHttpRequest
   OSuite::TOrderedMap<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString> > *v3; // rcx
 
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpRequestBase::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpRequestBase::`vftable;
   v2 = (OSuite::ZRedBlackTreeBase *)&this->m_clientHeaders.vfptr;
-  v2->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TRedBlackTree<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString>,1,OSuite::TKeyValueElementComparer<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString>>>::`vftable';
-  v2[1].vfptr = (OSuite::ZObjectVtbl *)&OSuite::TOperatorComparer<OSuite::ZString>::`vftable'{for `OSuite::IComparer<OSuite::ZString>'};
-  v2[1].m_pTop = (OSuite::ZRedBlackTreeBase::ZElementBase *)&OSuite::TOperatorComparer<OSuite::ZString>::`vftable'{for `OSuite::ZObject'};
+  v2->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TRedBlackTree<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString>,1,OSuite::TKeyValueElementComparer<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString>>>::`vftable;
+  v2[1].vfptr = (OSuite::ZObjectVtbl *)&OSuite::TOperatorComparer<OSuite::ZString>::`vftable{for `OSuite::IComparer<OSuite::ZString>};
+  v2[1].m_pTop = (OSuite::ZRedBlackTreeBase::ZElementBase *)&OSuite::TOperatorComparer<OSuite::ZString>::`vftable{for `OSuite::ZObject};
   OSuite::ZRedBlackTreeBase::~ZRedBlackTreeBase(v2);
   v3 = &v1->m_headers;
-  v3->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TRedBlackTree<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString>,1,OSuite::TKeyValueElementComparer<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString>>>::`vftable';
-  v3->m_Comparer.vfptr = (OSuite::IComparer<OSuite::ZString>Vtbl *)&OSuite::TOperatorComparer<OSuite::ZString>::`vftable'{for `OSuite::IComparer<OSuite::ZString>'};
-  v3->m_Comparer.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TOperatorComparer<OSuite::ZString>::`vftable'{for `OSuite::ZObject'};
+  v3->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TRedBlackTree<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString>,1,OSuite::TKeyValueElementComparer<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString>>>::`vftable;
+  v3->m_Comparer.vfptr = (OSuite::IComparer<OSuite::ZString>Vtbl *)&OSuite::TOperatorComparer<OSuite::ZString>::`vftable{for `OSuite::IComparer<OSuite::ZString>};
+  v3->m_Comparer.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TOperatorComparer<OSuite::ZString>::`vftable{for `OSuite::ZObject};
   OSuite::ZRedBlackTreeBase::~ZRedBlackTreeBase((OSuite::ZRedBlackTreeBase *)&v1->m_headers.vfptr);
   OSuite::ZString::~ZString(&v1->m_contentType);
   OSuite::ZString::~ZString(&v1->m_acceptType);
@@ -213,6 +213,6 @@ void __fastcall OSuite::ZHttpRequestBase::~ZHttpRequestBase(OSuite::ZHttpRequest
   OSuite::ZMemoryBufferChain::~ZMemoryBufferChain(&v1->m_bufferChain);
   OSuite::ZMutex::~ZMutex(&v1->m_StateMutex);
   OSuite::ZUrl::~ZUrl(&v1->m_url);
-  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::IHttpRequest::`vftable';
+  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::IHttpRequest::`vftable;
 }
 

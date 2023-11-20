@@ -478,31 +478,31 @@ void __fastcall UFG::TimeOfDayManager::~TimeOfDayManager(UFG::TimeOfDayManager *
 
   v1 = this;
   operator delete[](this->mNightFogZones);
-  v2 = `UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result )
+  v2 = `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result )
   {
     v3 = UFG::qResourceWarehouse::Instance();
     v2 = UFG::qResourceWarehouse::GetInventory(v3, 0x4D04C7F2u);
-    `UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result = v2;
+    `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result = v2;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mOvercastStateBlockHandle.mPrev, v2);
   UFG::qResourceHandle::~qResourceHandle((UFG::qResourceHandle *)&v1->mOvercastStateBlockHandle.mPrev);
-  v4 = `UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result )
+  v4 = `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result )
   {
     v5 = UFG::qResourceWarehouse::Instance();
     v4 = UFG::qResourceWarehouse::GetInventory(v5, 0x4D04C7F2u);
-    `UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result = v4;
+    `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result = v4;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mSunnyStateBlockHandle.mPrev, v4);
   UFG::qResourceHandle::~qResourceHandle((UFG::qResourceHandle *)&v1->mSunnyStateBlockHandle.mPrev);
   v6 = (UFG::qResourceHandle *)&v1->mOverrideStateBlockHandle.mPrev;
-  v7 = `UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result )
+  v7 = `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result )
   {
     v8 = UFG::qResourceWarehouse::Instance();
     v7 = UFG::qResourceWarehouse::GetInventory(v8, 0x4D04C7F2u);
-    `UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result = v7;
+    `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result = v7;
   }
   UFG::qResourceHandle::Close(v6, v7);
   UFG::qResourceHandle::~qResourceHandle(v6);

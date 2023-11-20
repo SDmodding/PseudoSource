@@ -13,7 +13,7 @@ void __fastcall UFG::ParkourQuery::~ParkourQuery(UFG::ParkourQuery *this)
   if ( v2 )
   {
     v3 = &v2[-1].m_pPointer;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v2,
       0x18ui64,
       (int)v2[-1].m_pPointer,

@@ -254,7 +254,7 @@ void __fastcall UFG::PhotoManager::PhotoManager(UFG::PhotoManager *this)
 
   v1 = this;
   UFG::TSActor::TSActor((UFG::TSActor *)&this->vfptr, &UFG::PhotoManager::mClass->i_name, UFG::PhotoManager::mClass);
-  v1->vfptr = (SSObjectBaseVtbl *)&UFG::PhotoManager::`vftable';
+  v1->vfptr = (SSObjectBaseVtbl *)&UFG::PhotoManager::`vftable;
   UFG::PhotoManager::nGoodPhotos = 0;
   memset(UFG::PhotoManager::aPhotoTargets, 0, sizeof(UFG::PhotoManager::aPhotoTargets));
 }

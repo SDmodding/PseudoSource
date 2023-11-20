@@ -2,7 +2,7 @@
 // RVA: 0x6D1F80
 void __fastcall Scaleform::GFx::DisplayList::MemberVisitor::~MemberVisitor(Scaleform::GFx::DisplayList::MemberVisitor *this)
 {
-  this->vfptr = (Scaleform::GFx::DisplayList::MemberVisitorVtbl *)&Scaleform::GFx::DisplayList::MemberVisitor::`vftable';
+  this->vfptr = (Scaleform::GFx::DisplayList::MemberVisitorVtbl *)&Scaleform::GFx::DisplayList::MemberVisitor::`vftable;
 }
 
 // File Line: 170

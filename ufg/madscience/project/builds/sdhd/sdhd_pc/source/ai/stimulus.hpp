@@ -48,7 +48,7 @@ void __fastcall UFG::Stimulus::~Stimulus(UFG::Stimulus *this)
   UFG::qNode<UFG::Event,UFG::Event> *v44; // rax
 
   v1 = this;
-  this->vfptr = (UFG::EventVtbl *)&UFG::Stimulus::`vftable';
+  this->vfptr = (UFG::EventVtbl *)&UFG::Stimulus::`vftable;
   v2 = &this->m_pStimulusTarget;
   if ( this->m_pStimulusTarget.m_pPointer )
   {
@@ -185,7 +185,7 @@ void __fastcall UFG::Stimulus::~Stimulus(UFG::Stimulus *this)
   v41->mPrev = v40;
   v37->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v37->mPrev;
   v1->m_pStimulusProducer.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v1->m_pStimulusProducer.mPrev;
-  v1->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+  v1->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
   v42 = (UFG::qNode<UFG::Event,UFG::Event> *)&v1->mPrev;
   v43 = v1->mPrev;
   v44 = v1->mNext;

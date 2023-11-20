@@ -143,7 +143,7 @@ void __fastcall OSuite::ZTextDecoder::ZTextDecoder(OSuite::ZTextDecoder *this, O
 
   this->m_nChar = -1;
   v2 = &this->m_sEncoding;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZTextDecoder::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZTextDecoder::`vftable;
   v3 = this;
   v4 = sEncoding;
   OSuite::ZString::ZString(&this->m_sEncoding);
@@ -154,9 +154,9 @@ void __fastcall OSuite::ZTextDecoder::ZTextDecoder(OSuite::ZTextDecoder *this, O
     v5 = OSuite::ZObject::operator new(0x18ui64);
     if ( v5 )
     {
-      *(_QWORD *)v5 = &OSuite::ZTextDecoder::ZUtf8Feeder::`vftable'{for `OSuite::ZTextDecoder::IFeeder'};
+      *(_QWORD *)v5 = &OSuite::ZTextDecoder::ZUtf8Feeder::`vftable{for `OSuite::ZTextDecoder::IFeeder};
 LABEL_4:
-      *(_QWORD *)(v5 + 8) = &OSuite::ZTextDecoder::ZUtf8Feeder::`vftable'{for `OSuite::ZObject'};
+      *(_QWORD *)(v5 + 8) = &OSuite::ZTextDecoder::ZUtf8Feeder::`vftable{for `OSuite::ZObject};
       *(_DWORD *)(v5 + 16) = 0;
 LABEL_6:
       v3->m_pFeeder = (OSuite::ZTextDecoder::IFeeder *)v5;
@@ -172,7 +172,7 @@ LABEL_6:
       v5 = OSuite::ZObject::operator new(0x18ui64);
       if ( v5 )
       {
-        *(_QWORD *)v5 = &OSuite::ZTextDecoder::ZUtf16LittleFeeder::`vftable'{for `OSuite::ZTextDecoder::IFeeder'};
+        *(_QWORD *)v5 = &OSuite::ZTextDecoder::ZUtf16LittleFeeder::`vftable{for `OSuite::ZTextDecoder::IFeeder};
         goto LABEL_4;
       }
     }
@@ -196,9 +196,9 @@ LABEL_15:
       {
         *(_QWORD *)(v5 + 16) = 0i64;
         v7 = *v6;
-        *(_QWORD *)v5 = &OSuite::ZTextDecoder::Z8BitFeeder::`vftable'{for `OSuite::ZTextDecoder::IFeeder'};
+        *(_QWORD *)v5 = &OSuite::ZTextDecoder::Z8BitFeeder::`vftable{for `OSuite::ZTextDecoder::IFeeder};
         *(_QWORD *)(v5 + 16) = v7;
-        *(_QWORD *)(v5 + 8) = &OSuite::ZTextDecoder::ZUtf8Feeder::`vftable'{for `OSuite::ZObject'};
+        *(_QWORD *)(v5 + 8) = &OSuite::ZTextDecoder::ZUtf8Feeder::`vftable{for `OSuite::ZObject};
         goto LABEL_6;
       }
     }
@@ -210,8 +210,8 @@ LABEL_5:
   if ( v8 )
   {
     *(_DWORD *)(v8 + 16) = 0;
-    *(_QWORD *)v8 = &OSuite::ZTextDecoder::ZUtf16BigFeeder::`vftable'{for `OSuite::ZTextDecoder::IFeeder'};
-    *(_QWORD *)(v8 + 8) = &OSuite::ZTextDecoder::ZUtf8Feeder::`vftable'{for `OSuite::ZObject'};
+    *(_QWORD *)v8 = &OSuite::ZTextDecoder::ZUtf16BigFeeder::`vftable{for `OSuite::ZTextDecoder::IFeeder};
+    *(_QWORD *)(v8 + 8) = &OSuite::ZTextDecoder::ZUtf8Feeder::`vftable{for `OSuite::ZObject};
   }
   v3->m_pFeeder = (OSuite::ZTextDecoder::IFeeder *)v8;
   OSuite::ZString::ZString(&that, "utf-16be");
@@ -229,7 +229,7 @@ void __fastcall OSuite::ZTextDecoder::~ZTextDecoder(OSuite::ZTextDecoder *this)
   OSuite::ZTextDecoder::IFeeder *v2; // rcx
 
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZTextDecoder::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZTextDecoder::`vftable;
   v2 = this->m_pFeeder;
   if ( v2 )
     v2->vfptr->__vecDelDtor(v2, 1u);

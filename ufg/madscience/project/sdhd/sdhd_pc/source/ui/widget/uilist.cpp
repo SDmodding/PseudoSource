@@ -67,7 +67,7 @@ void __fastcall UFG::UIList::update(UFG::UIList *this)
     UFG::operator+(&result, &v1->m_initData.m_pathToWidget, v6);
     UFG::qString::~qString(&v8);
     v7 = v1->m_screen->mRenderable->m_movie.pObject;
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     v12 = 0i64;
     ptr = 2;
     LOBYTE(v11) = v2;
@@ -116,7 +116,7 @@ void __fastcall UFG::UIList::update(UFG::UIList *this)
     }
     LODWORD(v8.mData) = 0;
     Scaleform::GFx::Movie::Invoke(v7, result.mData, 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     UFG::qString::~qString(&result);
   }
 }

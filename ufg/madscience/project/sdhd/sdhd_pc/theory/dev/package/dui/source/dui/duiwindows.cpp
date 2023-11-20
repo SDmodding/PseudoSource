@@ -34,12 +34,12 @@ void __fastcall UFG::DUIThemeEditorWindow::DUIThemeEditorWindow(UFG::DUIThemeEdi
 
   v1 = this;
   UFG::DUIWindow::DUIWindow((UFG::DUIWindow *)&this->vfptr);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::DUIThemeEditorWindow,UFG::DUIWindow>::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::DUIThemeEditorWindow,UFG::DUIWindow>::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::DUIThemeEditorWindow,UFG::DUIWindow>::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::DUIThemeEditorWindow,UFG::DUIWindow>::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v1->mBaseNode.mUID = -1i64;
   v1->mTypeUID = UFG::qStringHash64("UFG::DUIThemeEditorWindow", 0xFFFFFFFFFFFFFFFFui64);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUIThemeEditorWindow::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUIThemeEditorWindow::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUIThemeEditorWindow::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUIThemeEditorWindow::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   UFG::qString::qString(&v1->mTextBoxString0);
   UFG::qString::qString(&v1->mTextBoxString1);
   UFG::qString::qString(&v1->mTextBoxString2);
@@ -52,10 +52,10 @@ void __fastcall UFG::DUIThemeEditorWindow::DUIThemeEditorWindow(UFG::DUIThemeEdi
   v1->mSliderI100 = 0;
   v1->mSliderI1000 = 2048;
   v1->mCollapsable_TextBox = 0;
-  UFG::qString::Set(&v1->mTextBoxString0, "Hello, I'm textbox one");
-  UFG::qString::Set(&v1->mTextBoxString1, "Hello, I'm textbox two");
-  UFG::qString::Set(&v1->mTextBoxString2, "Hello, I'm textbox three");
-  UFG::qString::Set(&v1->mTextBoxString3, "Hello, I'm textbox four");
+  UFG::qString::Set(&v1->mTextBoxString0, "Hello, Im textbox one");
+  UFG::qString::Set(&v1->mTextBoxString1, "Hello, Im textbox two");
+  UFG::qString::Set(&v1->mTextBoxString2, "Hello, Im textbox three");
+  UFG::qString::Set(&v1->mTextBoxString3, "Hello, Im textbox four");
   v1->mCollapsable_Comboxbox = 0;
   v1->mComboBoxCurrentIndex = 0;
   *(_WORD *)&v1->mCollapsable_MessageBox = 0;
@@ -543,13 +543,13 @@ void __fastcall UFG::DUILogWindow::DUILogWindow(UFG::DUILogWindow *this)
 
   v1 = this;
   UFG::DUIWindow::DUIWindow((UFG::DUIWindow *)&this->vfptr);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::DUILogWindow,UFG::DUIWindow>::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::DUILogWindow,UFG::DUIWindow>::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::DUILogWindow,UFG::DUIWindow>::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::DUILogWindow,UFG::DUIWindow>::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v1->mBaseNode.mUID = -1i64;
   v1->mTypeUID = UFG::qStringHash64("UFG::DUILogWindow", 0xFFFFFFFFFFFFFFFFui64);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUILogWindow::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUILogWindow::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
-  `eh vector constructor iterator'(v1->mLines, 0x28ui64, 32, (void (__fastcall *)(void *))UFG::qString::qString);
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUILogWindow::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUILogWindow::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
+  `eh vector constructor iterator(v1->mLines, 0x28ui64, 32, (void (__fastcall *)(void *))UFG::qString::qString);
   v1->mNumLines = 0i64;
   v1->mScrollPos = 0i64;
   UFG::qString::Set(&v1->mTitle, "Log");
@@ -563,10 +563,10 @@ void __fastcall UFG::DUILogWindow::~DUILogWindow(UFG::DUILogWindow *this)
   UFG::DUILogWindow *v1; // rbx
 
   v1 = this;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUILogWindow::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  this->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUILogWindow::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUILogWindow::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  this->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUILogWindow::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   UFG::qRemovePrintHandler(UFG::DUILogWindow::PrintHandler, this);
-  `eh vector destructor iterator'(v1->mLines, 0x28ui64, 32, (void (__fastcall *)(void *))UFG::qString::~qString);
+  `eh vector destructor iterator(v1->mLines, 0x28ui64, 32, (void (__fastcall *)(void *))UFG::qString::~qString);
   UFG::DUIWindow::~DUIWindow((UFG::DUIWindow *)&v1->vfptr);
 }
 

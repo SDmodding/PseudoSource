@@ -384,7 +384,7 @@ LABEL_29:
                     _mm_andnot_ps(v36, _mm_add_ps(v35, (__m128)xmmword_141A711B0)),
                     _mm_and_ps(_mm_sub_ps(v35, (__m128)xmmword_141A711B0), v36));
             v38 = _mm_xor_si128(
-                    (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v37),
+                    (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v37),
                     _mm_cvttps_epi32(v37));
             v223 = v38.m128i_i64[0];
             *(_QWORD *)v32[v31].m_x = v38.m128i_i64[0];

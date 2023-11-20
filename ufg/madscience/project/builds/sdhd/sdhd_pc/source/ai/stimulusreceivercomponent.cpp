@@ -27,7 +27,7 @@ void __fastcall UFG::StimulusReceiverComponent::StimulusReceiverComponent(UFG::S
   v3 = (UFG::qNode<UFG::StimulusReceiverComponent,UFG::StimulusReceiverComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StimulusReceiverComponent::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StimulusReceiverComponent::`vftable;
   v2->m_pRegisteredStimulusCookie = 0i64;
   v2->m_StimulusRegistered.mBits[0] = 0i64;
   v2->m_StimulusRegistered.mBits[1] = 0i64;
@@ -69,7 +69,7 @@ void __fastcall UFG::StimulusReceiverComponent::~StimulusReceiverComponent(UFG::
   UFG::qNode<UFG::StimulusReceiverComponent,UFG::StimulusReceiverComponent> *v8; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StimulusReceiverComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StimulusReceiverComponent::`vftable;
   if ( this == UFG::StimulusReceiverComponent::s_StimulusReceiverComponentpCurrentIterator )
     UFG::StimulusReceiverComponent::s_StimulusReceiverComponentpCurrentIterator = (UFG::StimulusReceiverComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::StimulusReceiverComponent,UFG::StimulusReceiverComponent> *)&this->mPrev;

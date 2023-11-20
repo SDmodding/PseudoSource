@@ -73,7 +73,7 @@ hkJobQueue::JobStatus __usercall hkaiProcessAvoidanceSolverJob@<eax>(hkJobQueue 
   v10 = *(__int128 **)&v4->m_data[48];
   v40.m_avoidancePairDataMap.m_size = *(_DWORD *)&v4->m_data[40];
   *(_DWORD *)&v40.m_memSizeAndFlags = 0x1FFFF;
-  v40.vfptr = (hkBaseObjectVtbl *)&hkaiAvoidancePairProperties::`vftable';
+  v40.vfptr = (hkBaseObjectVtbl *)&hkaiAvoidancePairProperties::`vftable;
   v40.m_avoidancePairDataMap.m_data = v9;
   v11 = 0;
   for ( v40.m_avoidancePairDataMap.m_capacityAndFlags = v40.m_avoidancePairDataMap.m_size | 0x80000000;
@@ -202,7 +202,7 @@ hkJobQueue::JobStatus __usercall hkaiProcessAvoidanceSolverJob@<eax>(hkJobQueue 
     v32[1] = v35;
   }
   v36 = hkJobQueue::finishJobAndGetNextJob(v3, v4, v4, 0);
-  v40.vfptr = (hkBaseObjectVtbl *)&hkaiAvoidancePairProperties::`vftable';
+  v40.vfptr = (hkBaseObjectVtbl *)&hkaiAvoidancePairProperties::`vftable;
   v37 = v36;
   v40.m_avoidancePairDataMap.m_size = 0;
   if ( v40.m_avoidancePairDataMap.m_capacityAndFlags >= 0 )

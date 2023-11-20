@@ -2,7 +2,7 @@
 // RVA: 0xBA5970
 void __fastcall hkaiPositionHitFilter::hkaiPositionHitFilter(hkaiPositionHitFilter *this, float epsilon)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiPositionHitFilter::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiPositionHitFilter::`vftable;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_lowerEpsilon.m_real = _mm_shuffle_ps(
                                   (__m128)COERCE_UNSIGNED_INT(epsilon * 0.94999999),
@@ -68,7 +68,7 @@ void __fastcall hkaiRemoveUnreachableHitFilter::hkaiRemoveUnreachableHitFilter(h
   v11 = this;
   hkaiPositionHitFilter::hkaiPositionHitFilter((hkaiPositionHitFilter *)&this->vfptr, epsilon);
   v11->m_trianglesVertices = v10;
-  v11->vfptr = (hkBaseObjectVtbl *)&hkaiRemoveUnreachableHitFilter::`vftable';
+  v11->vfptr = (hkBaseObjectVtbl *)&hkaiRemoveUnreachableHitFilter::`vftable;
   if ( v9 )
     hkReferencedObject::addReference((hkReferencedObject *)&v9->vfptr);
   v11->m_walkableGeom.m_pntr = v9;

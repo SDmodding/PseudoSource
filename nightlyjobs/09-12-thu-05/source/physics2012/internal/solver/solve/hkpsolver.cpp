@@ -1028,7 +1028,7 @@ void __fastcall hkSolver_buildStableJacobiansForBallSocketChain(hkpSolverInfo *s
                                         _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v83, v82)), v83),
                                         virtMassFactor->m_real)),
                                     196);
-    v84 = _mm_and_ps((__m128)`hkVector4f::getComponent'::`2'::indexToMask[v53 - 1], v62);
+    v84 = _mm_and_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[v53 - 1], v62);
     v61 = v89;
     v85 = _mm_or_ps(_mm_shuffle_ps(v84, v84, 78), v84);
     v50[-1].m_linear0.m_quad = _mm_shuffle_ps(

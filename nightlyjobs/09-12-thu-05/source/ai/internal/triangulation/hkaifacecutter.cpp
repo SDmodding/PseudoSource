@@ -123,7 +123,7 @@ __int64 __usercall hkaiFaceCutter::triangulatorAddLoop@<rax>(hkaiFaceCutter *thi
       v21 = _mm_cmpltps(v18, (__m128)0i64);
       v22 = _mm_or_ps(_mm_andnot_ps(v21, v20), _mm_and_ps(v19, v21));
       v23 = _mm_xor_si128(
-              (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v22),
+              (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v22),
               _mm_cvttps_epi32(v22));
       v24 = _mm_cvtsi128_si32(v23);
       if ( v24 >= v16 )

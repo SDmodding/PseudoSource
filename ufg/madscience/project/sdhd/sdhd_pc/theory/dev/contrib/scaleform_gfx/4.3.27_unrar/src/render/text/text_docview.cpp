@@ -18,12 +18,12 @@ void __fastcall Scaleform::Render::Text::DocView::DocView(Scaleform::Render::Tex
   v4 = plog;
   v5 = pallocator;
   v6 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,74>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::Text::DocView,74>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Text::DocView::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,74>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::Text::DocView,74>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Text::DocView::`vftable;
   this->pDocument.pObject = 0i64;
   if ( pfontMgr )
     _InterlockedExchangeAdd(&pfontMgr->RefCount, 1u);
@@ -67,7 +67,7 @@ void __fastcall Scaleform::Render::Text::DocView::DocView(Scaleform::Render::Tex
   if ( v8 )
   {
     Scaleform::Render::Text::StyledText::StyledText(v8, v5);
-    v9->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::Render::Text::DocView::DocumentText::`vftable';
+    v9->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::Render::Text::DocView::DocumentText::`vftable;
     v9->pDocument = v6;
   }
   else
@@ -114,7 +114,7 @@ void __fastcall Scaleform::Render::Text::DocView::~DocView(Scaleform::Render::Te
   Scaleform::Render::Text::DocView::DocumentText *v10; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Text::DocView::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Text::DocView::`vftable;
   Scaleform::Render::Text::DocView::Close(this);
   v2 = (Scaleform::ArrayDataBase<Scaleform::Render::Text::DocView::ImageSubstitutor::Element,Scaleform::AllocatorLH<Scaleform::Render::Text::DocView::ImageSubstitutor::Element,2>,Scaleform::ArrayDefaultPolicy> *)&v1->pImageSubstitutor->Elements.Data.Data;
   if ( v2 )
@@ -135,7 +135,7 @@ void __fastcall Scaleform::Render::Text::DocView::~DocView(Scaleform::Render::Te
   v5 = v1->Filter.ShadowParams.Gradient.pObject;
   if ( v5 && !_InterlockedDecrement(&v5->RefCount) && v5 )
     v5->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v5->vfptr, 1u);
-  v1->Filter.vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable';
+  v1->Filter.vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable;
   v6 = v1->pEditorKit.pObject;
   if ( v6 && !_InterlockedDecrement(&v6->RefCount) && v6 )
     v6->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v6->vfptr, 1u);
@@ -159,7 +159,7 @@ void __fastcall Scaleform::Render::Text::DocView::~DocView(Scaleform::Render::Te
     if ( v8 )
       v10->vfptr->__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v10->vfptr, 1u);
   }
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
 }
 
 // File Line: 117
@@ -3735,7 +3735,7 @@ LABEL_245:
             LODWORD(v122) = v2->LineCursor.CharInfoHolder.Character;
             Scaleform::Log::LogError(
               v2->pLog,
-              "Missing \"%s\" glyph '%c' (0x%x) in \"%s\".\nFont has %u glyphs, ranges %s.\nSearch log: \n%s",
+              "Missing \"%s\" glyph %c (0x%x) in \"%s\".\nFont has %u glyphs, ranges %s.\nSearch log: \n%s",
               (v71->HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12,
               (unsigned int)SLOBYTE(v2->LineCursor.CharInfoHolder.Character),
               v122,

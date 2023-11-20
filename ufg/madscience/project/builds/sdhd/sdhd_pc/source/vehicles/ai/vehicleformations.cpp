@@ -34,7 +34,7 @@ void __fastcall UFG::VehicleFormations::VehicleFormations(UFG::VehicleFormations
   v5->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v5->mPrev;
   this->mpClosestToSecondaryTarget.m_pPointer = 0i64;
   v6 = this->mSlots;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     this->mSlots,
     0x18ui64,
     14,

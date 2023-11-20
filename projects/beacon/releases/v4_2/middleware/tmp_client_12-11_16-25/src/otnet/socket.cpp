@@ -6,7 +6,7 @@ void __fastcall OSuite::ZSocket::ZSocket(OSuite::ZSocket *this)
 
   this->m_socket = 0i64;
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZSocket::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZSocket::`vftable;
   OSuite::ZString::ZString(&this->m_sHost);
   v1->m_operationRetry = 0i64;
   v1->m_nBytesSent = 0i64;
@@ -21,7 +21,7 @@ void __fastcall OSuite::ZSocket::~ZSocket(OSuite::ZSocket *this)
   OSuite::ZSocket *v1; // rbx
 
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZSocket::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZSocket::`vftable;
   if ( OSuite::ZSocket::GetLastError(this) & 0xFFFFFFF7 || v1->m_state )
     OSuite::ZSocket::Close(v1);
   OSuite::psock::free(v1->m_socket);

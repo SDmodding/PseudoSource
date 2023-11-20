@@ -29,12 +29,12 @@ void __fastcall UFG::HitReactionComponent::HitReactionComponent(UFG::HitReaction
   v4 = data_ptr;
   v5 = this;
   UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name_uid);
-  v5->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::UpdateInterface::`vftable';
+  v5->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::UpdateInterface::`vftable;
   v6 = (UFG::qNode<UFG::HitReactionComponent,UFG::HitReactionComponent> *)&v5->mPrev;
   v6->mPrev = v6;
   v6->mNext = v6;
-  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HitReactionComponent::`vftable'{for `UFG::SimComponent'};
-  v5->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::HitReactionComponent::`vftable'{for `UFG::UpdateInterface'};
+  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HitReactionComponent::`vftable{for `UFG::SimComponent};
+  v5->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::HitReactionComponent::`vftable{for `UFG::UpdateInterface};
   UFG::qSharedString::qSharedString(&v5->mHitTreeFileName);
   v7 = (signed __int64)&v5->mHitReactionOpeningBranchFullPath;
   *(_DWORD *)v7 = 0;
@@ -110,8 +110,8 @@ void __fastcall UFG::HitReactionComponent::~HitReactionComponent(UFG::HitReactio
   UFG::qNode<UFG::HitReactionComponent,UFG::HitReactionComponent> *v15; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HitReactionComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::HitReactionComponent::`vftable'{for `UFG::UpdateInterface'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HitReactionComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::HitReactionComponent::`vftable{for `UFG::UpdateInterface};
   if ( this == UFG::HitReactionComponent::s_HitReactionComponentpCurrentIterator )
     UFG::HitReactionComponent::s_HitReactionComponentpCurrentIterator = (UFG::HitReactionComponent *)&this->mPrev[-5].mNext;
   v2 = (UFG::qNode<UFG::HitReactionComponent,UFG::HitReactionComponent> *)&this->mPrev;
@@ -340,7 +340,7 @@ void __fastcall UFG::HitReactionComponent::InitActionTree(UFG::HitReactionCompon
   {
     v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v1->m_pSimObject->m_Name);
     UFG::qPrintf(
-      "WARNING: HitReactionComponent::InitActionTree: Could Not Find Hit Tree: '%s' for SimObject: '%s'\n",
+      "WARNING: HitReactionComponent::InitActionTree: Could Not Find Hit Tree: %s for SimObject: %s\n",
       v1->mHitTreeFileName.mText,
       v3);
   }
@@ -729,7 +729,7 @@ LABEL_34:
         else
         {
           v18 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v2[-1].mActionTreeComponent.m_pSimObject->m_Name);
-          UFG::qPrintf("HandleHitReaction: '%s' NO MATCH\n", v18);
+          UFG::qPrintf("HandleHitReaction: %s NO MATCH\n", v18);
         }
         LOBYTE(v2->mHitReactionOpeningBranchFullPath.mPath.mData.mOffset) = 1;
       }

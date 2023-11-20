@@ -6,8 +6,8 @@ void __fastcall UFG::PredictiveSubPriorityModifierTrack::PredictiveSubPriorityMo
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, UFG::PredictiveSubPriorityModifierTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<UFG::PredictiveSubPriorityModifierTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&UFG::PredictiveSubPriorityModifierTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<UFG::PredictiveSubPriorityModifierTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&UFG::PredictiveSubPriorityModifierTrack::`vftable;
   v1->m_SubPriorityModifierConditions.mCount = 0;
   v1->m_SubPriorityModifierConditions.mData.mOffset = 0i64;
 }

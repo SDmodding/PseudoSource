@@ -2,12 +2,12 @@
 // RVA: 0x93CEB0
 void __fastcall Scaleform::Render::GradientData::GradientData(Scaleform::Render::GradientData *this, Scaleform::Render::GradientType type, unsigned __int16 recordCount, bool linearRgb)
 {
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,257>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::GradientData,257>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::GradientData::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,257>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::GradientData,257>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::GradientData::`vftable;
   this->LinearRGB = linearRgb;
   this->Type = type;
   this->RecordCount = 0;
@@ -24,10 +24,10 @@ void __fastcall Scaleform::Render::GradientData::~GradientData(Scaleform::Render
   Scaleform::Render::GradientData *v1; // rbx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::GradientData::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::GradientData::`vftable;
   if ( this->pRecords )
     ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
 }
 
 // File Line: 53
@@ -676,19 +676,19 @@ void __fastcall Scaleform::Render::GradientImage::GradientImage(Scaleform::Rende
   unsigned int v7; // eax
 
   v4 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountVImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountVImpl,3>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseV<Scaleform::Render::Image,3>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ImageBase::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Image::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountVImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountVImpl,3>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseV<Scaleform::Render::Image,3>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ImageBase::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Image::`vftable;
   this->pTexture.Value = 0i64;
   v5 = this->pTexture.Value;
   v6 = this->pTexture.Value;
   this->pUpdateSync = 0i64;
   this->pInverseMatrix = 0i64;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::GradientImage::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::GradientImage::`vftable;
   this->pManager = mng;
   if ( data )
     _InterlockedExchangeAdd(&data->RefCount, 1u);
@@ -722,7 +722,7 @@ void __fastcall Scaleform::Render::GradientImage::~GradientImage(Scaleform::Rend
   Scaleform::Render::GradientImage *key; // [rsp+48h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::GradientImage::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::GradientImage::`vftable;
   v2 = this->pManager;
   if ( v2 )
   {
@@ -821,7 +821,7 @@ char __fastcall Scaleform::Render::GradientImage::Decode(Scaleform::Render::Grad
   {
     v12 = v11->pMorphTo;
     v47.RefCount = 1;
-    v47.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::GradientData::`vftable';
+    v47.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::GradientData::`vftable;
     *(_DWORD *)&v47.LinearRGB = 0;
     v47.pRecords = 0i64;
     v47.FocalRatio = 0.0;
@@ -953,13 +953,13 @@ char __fastcall Scaleform::Render::GradientImage::Decode(Scaleform::Render::Grad
       }
       while ( v7 < v6->Size.Height );
     }
-    v47.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::GradientData::`vftable';
+    v47.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::GradientData::`vftable;
     if ( v47.pRecords )
       ((void (__fastcall *)(Scaleform::MemoryHeap *, Scaleform::Render::GradientRecord *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->Free)(
         Scaleform::Memory::pGlobalHeap,
         v47.pRecords,
         v14);
-    v47.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+    v47.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   }
   else
   {

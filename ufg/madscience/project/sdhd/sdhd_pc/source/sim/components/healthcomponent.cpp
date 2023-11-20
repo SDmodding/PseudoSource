@@ -37,7 +37,7 @@ void __fastcall UFG::HealthComponent::HealthComponent(UFG::HealthComponent *this
   v5 = (UFG::qNode<UFG::HealthComponent,UFG::HealthComponent> *)&v4->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HealthComponent::`vftable';
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HealthComponent::`vftable;
   v4->m_fHealth = 100.0;
   v4->m_fMinHealth = -1.0;
   v4->m_fMaxHealth = 100.0;
@@ -75,7 +75,7 @@ void __fastcall UFG::HealthComponent::~HealthComponent(UFG::HealthComponent *thi
   UFG::qNode<UFG::HealthComponent,UFG::HealthComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HealthComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HealthComponent::`vftable;
   if ( this == UFG::HealthComponent::s_HealthComponentpCurrentIterator )
     UFG::HealthComponent::s_HealthComponentpCurrentIterator = (UFG::HealthComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::HealthComponent,UFG::HealthComponent> *)&this->mPrev;
@@ -586,10 +586,10 @@ void __fastcall UFG::HealthComponent::OnDeath(UFG::HealthComponent *this, UFG::H
       v12 = v8 + 1;
       v12->mNext = v12;
       v12[1].mNext = v12;
-      v9->mNext = (UFG::allocator::free_link *)&UFG::Event::`vftable';
+      v9->mNext = (UFG::allocator::free_link *)&UFG::Event::`vftable;
       LODWORD(v9[3].mNext) = v11;
       v9[4].mNext = (UFG::allocator::free_link *)v10;
-      v9->mNext = (UFG::allocator::free_link *)&UFG::GameStatEvent::`vftable';
+      v9->mNext = (UFG::allocator::free_link *)&UFG::GameStatEvent::`vftable;
       LODWORD(v9[7].mNext) = 37;
       v9[8].mNext = (UFG::allocator::free_link *)v5;
     }
@@ -662,10 +662,10 @@ LABEL_26:
               v24 = v20 + 1;
               v24->mNext = v24;
               v24[1].mNext = v24;
-              v21->mNext = (UFG::allocator::free_link *)&UFG::Event::`vftable';
+              v21->mNext = (UFG::allocator::free_link *)&UFG::Event::`vftable;
               LODWORD(v21[3].mNext) = v23;
               v21[4].mNext = (UFG::allocator::free_link *)v22;
-              v21->mNext = (UFG::allocator::free_link *)&UFG::GameStatEvent::`vftable';
+              v21->mNext = (UFG::allocator::free_link *)&UFG::GameStatEvent::`vftable;
               LODWORD(v21[7].mNext) = 21;
               v21[8].mNext = (UFG::allocator::free_link *)v5;
             }
@@ -774,10 +774,10 @@ LABEL_62:
       v39 = v36 + 1;
       v39->mNext = v39;
       v39[1].mNext = v39;
-      v21->mNext = (UFG::allocator::free_link *)&UFG::Event::`vftable';
+      v21->mNext = (UFG::allocator::free_link *)&UFG::Event::`vftable;
       LODWORD(v21[3].mNext) = v38;
       v21[4].mNext = (UFG::allocator::free_link *)v37;
-      v21->mNext = (UFG::allocator::free_link *)&UFG::GameStatEvent::`vftable';
+      v21->mNext = (UFG::allocator::free_link *)&UFG::GameStatEvent::`vftable;
       LODWORD(v21[7].mNext) = 81;
       v21[8].mNext = (UFG::allocator::free_link *)v5;
     }

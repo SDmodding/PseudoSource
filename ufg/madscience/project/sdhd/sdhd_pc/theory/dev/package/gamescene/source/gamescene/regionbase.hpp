@@ -19,7 +19,7 @@ void __fastcall UFG::RegionRefPtr<UFG::RegionBase>::~RegionRefPtr<UFG::RegionBas
 // RVA: 0x238310
 void __fastcall UFG::RegionBase::~RegionBase(UFG::RegionBase *this)
 {
-  this->vfptr = (UFG::RegionBaseVtbl *)&UFG::RegionBase::`vftable';
+  this->vfptr = (UFG::RegionBaseVtbl *)&UFG::RegionBase::`vftable;
 }
 
 // File Line: 197

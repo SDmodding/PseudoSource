@@ -5,12 +5,12 @@ void __fastcall hkDisplayConvex::hkDisplayConvex(hkDisplayConvex *this, hkGeomet
   this->m_geometry = 0i64;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_type = 6;
-  this->vfptr = (hkBaseObjectVtbl *)&hkDisplayGeometry::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkDisplayGeometry::`vftable;
   this->m_transform.m_rotation.m_col0 = (hkVector4f)transform.m_quad;
   this->m_transform.m_rotation.m_col1 = (hkVector4f)direction.m_quad;
   this->m_transform.m_rotation.m_col2 = (hkVector4f)stru_141A71280.m_quad;
   this->m_transform.m_translation = 0i64;
-  this->vfptr = (hkBaseObjectVtbl *)&hkDisplayConvex::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkDisplayConvex::`vftable;
   this->m_geometry = geom;
 }
 

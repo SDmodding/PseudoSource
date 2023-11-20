@@ -56,7 +56,7 @@ void __fastcall UFG::UIHK_PDAWidget::UIHK_PDAWidget(UFG::UIHK_PDAWidget *this, U
 
   v2 = cache;
   v3 = this;
-  this->vfptr = (UFG::UIHK_PDAWidgetVtbl *)&UFG::UIHK_PDAWidget::`vftable';
+  this->vfptr = (UFG::UIHK_PDAWidgetVtbl *)&UFG::UIHK_PDAWidget::`vftable;
   UFG::UIHK_PDAPhoneContactsWidget::UIHK_PDAPhoneContactsWidget(&this->PhoneContacts);
   v3->mState = v2->state;
   v3->mMovie = 0i64;
@@ -102,7 +102,7 @@ void __fastcall UFG::UIHK_PDAWidget::~UIHK_PDAWidget(UFG::UIHK_PDAWidget *this)
   UFG::UIHK_PDAWidget *v1; // rdi
 
   v1 = this;
-  this->vfptr = (UFG::UIHK_PDAWidgetVtbl *)&UFG::UIHK_PDAWidget::`vftable';
+  this->vfptr = (UFG::UIHK_PDAWidgetVtbl *)&UFG::UIHK_PDAWidget::`vftable;
   UFG::UIHK_PDAWidget::EndPhoneCall(this, 0);
   UFG::UIHK_PDAWidget::ForceIdle(v1);
   UFG::qString::~qString(&v1->mPhoneContact);
@@ -191,14 +191,14 @@ void __fastcall UFG::UIHK_PDAWidget::init(UFG::UIHK_PDAWidget *this, UFG::UIScre
     v34 = v4;
     if ( v4 )
     {
-      *(_QWORD *)v4 = &Scaleform::RefCountImplCore::`vftable';
+      *(_QWORD *)v4 = &Scaleform::RefCountImplCore::`vftable;
       *(_DWORD *)(v4 + 8) = 1;
-      *(_QWORD *)v4 = &Scaleform::RefCountImpl::`vftable';
-      *(_QWORD *)v4 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-      *(_QWORD *)v4 = &Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable';
-      *(_QWORD *)v4 = &Scaleform::GFx::State::`vftable';
+      *(_QWORD *)v4 = &Scaleform::RefCountImpl::`vftable;
+      *(_QWORD *)v4 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+      *(_QWORD *)v4 = &Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable;
+      *(_QWORD *)v4 = &Scaleform::GFx::State::`vftable;
       *(_DWORD *)(v4 + 16) = 3;
-      *(_QWORD *)v4 = &Scaleform::GFx::ActionControl::`vftable';
+      *(_QWORD *)v4 = &Scaleform::GFx::ActionControl::`vftable;
       *(_DWORD *)(v4 + 24) = 8;
     }
     else
@@ -274,7 +274,7 @@ LABEL_19:
     value.Type = 2;
     value.mValue.BValue = v10;
     Scaleform::GFx::Movie::SetVariable(v3, "gSocialHubAvailable", &value, 1i64);
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     v17 = UFG::UIHK_PDAWidget::mTxtMsg.mData;
     if ( (v22 >> 6) & 1 )
     {
@@ -333,7 +333,7 @@ LABEL_19:
         UFG::UIHKObjectiveFlasherWidget::mPDAStateChanged = 1;
         break;
     }
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     if ( ((unsigned int)value.Type >> 6) & 1 )
     {
       (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&value.pObjectInterface->vfptr->gap8[8])(
@@ -1367,7 +1367,7 @@ void __fastcall UFG::UIHK_PDAWidget::Flash_UIHighlight_Init(UFG::UIHK_PDAWidget 
   v2 = screen->mRenderable->m_movie.pObject;
   if ( v2 )
   {
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( (v5 >> 6) & 1 )
     {
       (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v4 + 16i64))(v4, &ptr, v6);
@@ -1383,7 +1383,7 @@ void __fastcall UFG::UIHK_PDAWidget::Flash_UIHighlight_Init(UFG::UIHK_PDAWidget 
     v9 = 6;
     v10 = "mc_CircleMenu_highlight";
     Scaleform::GFx::Movie::Invoke(v2, "UIHighlight_Init", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 

@@ -87,7 +87,7 @@ UFG::TerrainCollisionManager *__fastcall UFG::TerrainCollisionManager::GetInstan
 // RVA: 0x44E090
 void __fastcall UFG::TerrainCollisionManager::TerrainCollisionManager(UFG::TerrainCollisionManager *this)
 {
-  this->vfptr = (UFG::TerrainCollisionManagerVtbl *)&UFG::TerrainCollisionManager::`vftable';
+  this->vfptr = (UFG::TerrainCollisionManagerVtbl *)&UFG::TerrainCollisionManager::`vftable;
   UFG::qBaseTreeRB::qBaseTreeRB(&this->mTerrainObjectMap.mTree.mTree);
   UFG::RenderWorld::msStageTerrain->mAddTerrainDataPhysicsCallback = UFG::AddTerrainDataPhysicsCallback;
   UFG::RenderWorld::msStageTerrain->mRemoveTerrainDataPhysicsCallback = UFG::RemoveTerrainDataPhysicsCallback;
@@ -100,7 +100,7 @@ void __fastcall UFG::TerrainCollisionManager::~TerrainCollisionManager(UFG::Terr
   Render::Skinning *v1; // rdi
   Render::SkinningCacheNode *v2; // rbx
 
-  this->vfptr = (UFG::TerrainCollisionManagerVtbl *)&UFG::TerrainCollisionManager::`vftable';
+  this->vfptr = (UFG::TerrainCollisionManagerVtbl *)&UFG::TerrainCollisionManager::`vftable;
   v1 = (Render::Skinning *)&this->mTerrainObjectMap;
   if ( this->mTerrainObjectMap.mTree.mTree.mCount )
   {

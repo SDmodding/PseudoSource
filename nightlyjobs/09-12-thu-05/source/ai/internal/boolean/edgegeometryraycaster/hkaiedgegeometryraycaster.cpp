@@ -4,7 +4,7 @@ void __fastcall hkaiEdgeGeometryRaycaster::hkaiEdgeGeometryRaycaster(hkaiEdgeGeo
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_ignoreFaceIndex = -1;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiEdgeGeometryRaycaster::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiEdgeGeometryRaycaster::`vftable;
   this->m_edgeGeometry.m_pntr = 0i64;
   this->m_geometry.m_pntr = 0i64;
   this->m_carverGeometry.m_pntr = 0i64;
@@ -38,7 +38,7 @@ void __fastcall hkaiEdgeGeometryRaycaster::~hkaiEdgeGeometryRaycaster(hkaiEdgeGe
 
   v1 = (void **)this->m_tree;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiEdgeGeometryRaycaster::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiEdgeGeometryRaycaster::`vftable;
   if ( v1 )
   {
     v3 = *((_DWORD *)v1 + 3);
@@ -79,7 +79,7 @@ void __fastcall hkaiEdgeGeometryRaycaster::~hkaiEdgeGeometryRaycaster(hkaiEdgeGe
   if ( v9 )
     hkReferencedObject::removeReference(v9);
   v2->m_edgeGeometry.m_pntr = 0i64;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 122
@@ -655,7 +655,7 @@ hkResult *__fastcall hkaiEdgeGeometryRaycaster::init(hkaiEdgeGeometryRaycaster *
   if ( v11 )
   {
     *(_DWORD *)(v11 + 8) = 0x1FFFF;
-    *(_QWORD *)v11 = &hkGeometry::`vftable';
+    *(_QWORD *)v11 = &hkGeometry::`vftable;
     *(_QWORD *)(v11 + 16) = 0i64;
     *(_DWORD *)(v11 + 24) = 0;
     *(_DWORD *)(v11 + 28) = 2147483648;
@@ -685,7 +685,7 @@ hkResult *__fastcall hkaiEdgeGeometryRaycaster::init(hkaiEdgeGeometryRaycaster *
       v16 = v5->m_data[v15].m_pntr;
       if ( v16 )
       {
-        geometry.vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable';
+        geometry.vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable;
         *(_DWORD *)&geometry.m_memSizeAndFlags = 0x1FFFF;
         geometry.m_vertices.m_data = 0i64;
         geometry.m_vertices.m_size = 0;
@@ -1252,8 +1252,8 @@ __int64 __fastcall pointInPolygon(hkVector4f *samplePoint, hkVector4f *extrusion
       return v17 & 1;
     v19 = &v8->m_data->m_quad;
     v20 = v7->m_quad;
-    v21 = (__m128)`hkVector4f::getComponent'::`2'::indexToMask[v15];
-    v22 = (__m128)`hkVector4f::getComponent'::`2'::indexToMask[v16];
+    v21 = (__m128)`hkVector4f::getComponent::`2::indexToMask[v15];
+    v22 = (__m128)`hkVector4f::getComponent::`2::indexToMask[v16];
     v23 = &v8->m_data[1].m_quad;
     while ( 1 )
     {

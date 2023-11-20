@@ -5,8 +5,8 @@ void __fastcall SSCode::SSCode(SSCode *this, const void **binary_pp)
   AVCompactSortedLogical<ASymbol,ASymbol> *v2; // [rsp+50h] [rbp+18h]
   APCompactArrayFree<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase> > *v3; // [rsp+50h] [rbp+18h]
 
-  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-  this->vfptr = (SSExpressionBaseVtbl *)&SSCode::`vftable';
+  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+  this->vfptr = (SSExpressionBaseVtbl *)&SSCode::`vftable;
   v2 = &this->i_temp_vars;
   v2->i_count = 0;
   v2->i_array_p = 0i64;
@@ -26,8 +26,8 @@ void __fastcall SSConcurrentBranch::SSConcurrentBranch(SSConcurrentBranch *this,
   SSExpressionBase *v5; // rax
 
   v2 = this;
-  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-  this->vfptr = (SSExpressionBaseVtbl *)&SSConcurrentBranch::`vftable';
+  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+  this->vfptr = (SSExpressionBaseVtbl *)&SSConcurrentBranch::`vftable;
   v3 = *(unsigned __int8 *)*binary_pp;
   v4 = (char *)*binary_pp + 1;
   *binary_pp = v4;
@@ -53,8 +53,8 @@ void __fastcall SSDivert::SSDivert(SSDivert *this, const void **binary_pp)
   SSExpressionBase *v5; // rax
 
   v2 = this;
-  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-  this->vfptr = (SSExpressionBaseVtbl *)&SSDivert::`vftable';
+  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+  this->vfptr = (SSExpressionBaseVtbl *)&SSDivert::`vftable;
   v3 = *(unsigned __int8 *)*binary_pp;
   v4 = (char *)*binary_pp + 1;
   *binary_pp = v4;
@@ -85,8 +85,8 @@ void __fastcall SSBind::SSBind(SSBind *this, const void **binary_pp)
 
   v2 = binary_pp;
   v3 = this;
-  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-  this->vfptr = (SSExpressionBaseVtbl *)&SSBind::`vftable';
+  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+  this->vfptr = (SSExpressionBaseVtbl *)&SSBind::`vftable;
   v4 = *(unsigned __int8 *)*binary_pp;
   v5 = (char *)*binary_pp + 1;
   *binary_pp = v5;

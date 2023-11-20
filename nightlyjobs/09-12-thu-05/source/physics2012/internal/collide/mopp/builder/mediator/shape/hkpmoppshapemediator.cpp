@@ -4,7 +4,7 @@ void __fastcall hkpMoppShapeMediator::hkpMoppShapeMediator(hkpMoppShapeMediator 
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_shape = shapeArray;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpMoppShapeMediator::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpMoppShapeMediator::`vftable;
   this->m_numChildShapes = shapeArray->vfptr->getNumChildShapes(shapeArray);
 }
 
@@ -13,7 +13,7 @@ void __fastcall hkpMoppShapeMediator::hkpMoppShapeMediator(hkpMoppShapeMediator 
 void __fastcall hkpMoppShapeMediator::~hkpMoppShapeMediator(hkpMoppShapeMediator *this)
 {
   this->m_shape = 0i64;
-  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 31

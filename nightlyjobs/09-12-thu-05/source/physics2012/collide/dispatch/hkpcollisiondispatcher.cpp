@@ -118,7 +118,7 @@ void __fastcall hkpCollisionDispatcher::hkpCollisionDispatcher(hkpCollisionDispa
 
   v3 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpCollisionDispatcher::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpCollisionDispatcher::`vftable;
   this->m_defaultCollisionAgent = defaultCollisionAgent;
   v4 = defaultContactMgrFactory;
   v5 = 63;
@@ -252,7 +252,7 @@ void __fastcall hkpCollisionDispatcher::~hkpCollisionDispatcher(hkpCollisionDisp
   int v5; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpCollisionDispatcher::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpCollisionDispatcher::`vftable;
   hkpCollisionDispatcher::disableDebugging(this);
   v2 = (hkReferencedObject **)v1->m_contactMgrFactory;
   v3 = 8i64;
@@ -279,7 +279,7 @@ void __fastcall hkpCollisionDispatcher::~hkpCollisionDispatcher(hkpCollisionDisp
       8 * v5);
   v1->m_shapeInheritance.m_data = 0i64;
   v1->m_shapeInheritance.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 249
@@ -916,15 +916,15 @@ void __fastcall hkpCollisionDispatcher::getClosestPoints(hkpCollisionDispatcher 
   v10 = shapeA;
   hkpCollisionFilter::hkpCollisionFilter(&v43);
   v46 = collisionTolerance;
-  v43.vfptr = (hkBaseObjectVtbl *)&hkpNullCollisionFilter::`vftable'{for `hkReferencedObject'};
-  v43.vfptr = (hkpCollidableCollidableFilterVtbl *)&hkpNullCollisionFilter::`vftable'{for `hkpCollidableCollidableFilter'};
+  v43.vfptr = (hkBaseObjectVtbl *)&hkpNullCollisionFilter::`vftable{for `hkReferencedObject};
+  v43.vfptr = (hkpCollidableCollidableFilterVtbl *)&hkpNullCollisionFilter::`vftable{for `hkpCollidableCollidableFilter};
   v43.m_type.m_storage = 1;
-  v43.vfptr = (hkpShapeCollectionFilterVtbl *)&hkpNullCollisionFilter::`vftable'{for `hkpShapeCollectionFilter'};
-  v43.vfptr = (hkpRayShapeCollectionFilterVtbl *)&hkpNullCollisionFilter::`vftable'{for `hkpRayShapeCollectionFilter'};
+  v43.vfptr = (hkpShapeCollectionFilterVtbl *)&hkpNullCollisionFilter::`vftable{for `hkpShapeCollectionFilter};
+  v43.vfptr = (hkpRayShapeCollectionFilterVtbl *)&hkpNullCollisionFilter::`vftable{for `hkpRayShapeCollectionFilter};
   v16 = 0x1FFFF;
-  v43.vfptr = (hkpRayCollidableFilterVtbl *)&hkpNullCollisionFilter::`vftable'{for `hkpRayCollidableFilter'};
+  v43.vfptr = (hkpRayCollidableFilterVtbl *)&hkpNullCollisionFilter::`vftable{for `hkpRayCollidableFilter};
   v45 = 0;
-  v15 = &hkpDefaultConvexListFilter::`vftable';
+  v15 = &hkpDefaultConvexListFilter::`vftable;
   v44 = v7;
   v47 = &v43;
   v17 = v10;
@@ -965,7 +965,7 @@ void __fastcall hkpCollisionDispatcher::getClosestPoints(hkpCollisionDispatcher 
     &v30,
     &v44,
     collector);
-  v15 = &hkBaseObject::`vftable';
+  v15 = &hkBaseObject::`vftable;
   hkpNullCollisionFilter::~hkpNullCollisionFilter((hkpNullCollisionFilter *)&v43);
 }
 
@@ -1022,15 +1022,15 @@ void __fastcall hkpCollisionDispatcher::getPenetrations(hkpCollisionDispatcher *
   v10 = shapeA;
   hkpCollisionFilter::hkpCollisionFilter(&v43);
   v46 = collisionTolerance;
-  v43.vfptr = (hkBaseObjectVtbl *)&hkpNullCollisionFilter::`vftable'{for `hkReferencedObject'};
-  v43.vfptr = (hkpCollidableCollidableFilterVtbl *)&hkpNullCollisionFilter::`vftable'{for `hkpCollidableCollidableFilter'};
+  v43.vfptr = (hkBaseObjectVtbl *)&hkpNullCollisionFilter::`vftable{for `hkReferencedObject};
+  v43.vfptr = (hkpCollidableCollidableFilterVtbl *)&hkpNullCollisionFilter::`vftable{for `hkpCollidableCollidableFilter};
   v43.m_type.m_storage = 1;
-  v43.vfptr = (hkpShapeCollectionFilterVtbl *)&hkpNullCollisionFilter::`vftable'{for `hkpShapeCollectionFilter'};
-  v43.vfptr = (hkpRayShapeCollectionFilterVtbl *)&hkpNullCollisionFilter::`vftable'{for `hkpRayShapeCollectionFilter'};
+  v43.vfptr = (hkpShapeCollectionFilterVtbl *)&hkpNullCollisionFilter::`vftable{for `hkpShapeCollectionFilter};
+  v43.vfptr = (hkpRayShapeCollectionFilterVtbl *)&hkpNullCollisionFilter::`vftable{for `hkpRayShapeCollectionFilter};
   v16 = 0x1FFFF;
-  v43.vfptr = (hkpRayCollidableFilterVtbl *)&hkpNullCollisionFilter::`vftable'{for `hkpRayCollidableFilter'};
+  v43.vfptr = (hkpRayCollidableFilterVtbl *)&hkpNullCollisionFilter::`vftable{for `hkpRayCollidableFilter};
   v45 = 0;
-  v15 = &hkpDefaultConvexListFilter::`vftable';
+  v15 = &hkpDefaultConvexListFilter::`vftable;
   v44 = v7;
   v47 = &v43;
   v17 = v10;
@@ -1070,7 +1070,7 @@ void __fastcall hkpCollisionDispatcher::getPenetrations(hkpCollisionDispatcher *
     (hkpCdBody *)&v30,
     (hkpCollisionInput *)&v44,
     collector);
-  v15 = &hkBaseObject::`vftable';
+  v15 = &hkBaseObject::`vftable;
   hkpNullCollisionFilter::~hkpNullCollisionFilter((hkpNullCollisionFilter *)&v43);
 }
 

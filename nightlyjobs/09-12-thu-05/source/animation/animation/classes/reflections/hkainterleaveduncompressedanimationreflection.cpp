@@ -31,7 +31,7 @@ hkClass *__fastcall hkaInterleavedUncompressedAnimation::staticClass()
 void __fastcall finishLoadedObjecthkaInterleavedUncompressedAnimation(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaInterleavedUncompressedAnimation::`vftable';
+    *(_QWORD *)p = &hkaInterleavedUncompressedAnimation::`vftable;
 }
 
 // File Line: 72
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkaInterleavedUncompressedAnimation(void *p)
 // RVA: 0xB1D5C0
 void **__fastcall getVtablehkaInterleavedUncompressedAnimation()
 {
-  return &hkaInterleavedUncompressedAnimation::`vftable';
+  return &hkaInterleavedUncompressedAnimation::`vftable;
 }
 
 // File Line: 98

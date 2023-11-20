@@ -24,10 +24,10 @@ void __fastcall Scaleform::GFx::AS2::MouseCtorFunction::MouseCtorFunction(Scalef
     (Scaleform::GFx::AS2::CFunctionObject *)&this->vfptr,
     psc,
     Scaleform::GFx::AS2::StageCtorFunction::GlobalCtor);
-  v5->vfptr = (Scaleform::GFx::AS2::MouseListenerVtbl *)&Scaleform::GFx::AS2::MouseListener::`vftable';
-  v5->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::MouseCtorFunction::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  v5->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::MouseCtorFunction::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
-  v5->vfptr = (Scaleform::GFx::AS2::MouseListenerVtbl *)&Scaleform::GFx::AS2::MouseCtorFunction::`vftable';
+  v5->vfptr = (Scaleform::GFx::AS2::MouseListenerVtbl *)&Scaleform::GFx::AS2::MouseListener::`vftable;
+  v5->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::MouseCtorFunction::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  v5->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::MouseCtorFunction::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+  v5->vfptr = (Scaleform::GFx::AS2::MouseListenerVtbl *)&Scaleform::GFx::AS2::MouseCtorFunction::`vftable;
   v5->pListenersArray.pObject = 0i64;
   v5->SetCursorTypeFunc.Flags = 0;
   v5->SetCursorTypeFunc.Function = 0i64;
@@ -538,7 +538,7 @@ void __fastcall Scaleform::GFx::AS2::MouseCtorFunction::NotifyListeners(Scalefor
   bool v16; // [rsp+48h] [rbp-10h]
 
   v8 = penv;
-  pcallback.vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)&Scaleform::GFx::AS2::MouseCtorFunction::LocalInvokeCallback::`vftable';
+  pcallback.vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)&Scaleform::GFx::AS2::MouseCtorFunction::LocalInvokeCallback::`vftable;
   v11 = mouseIndex;
   v12 = eventName;
   v13 = ptargetName;
@@ -572,7 +572,7 @@ void __fastcall Scaleform::GFx::AS2::MouseCtorFunction::OnMouseMove(Scaleform::G
   char v11; // [rsp+48h] [rbp-10h]
 
   v3 = penv;
-  pcallback.vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)&Scaleform::GFx::AS2::MouseCtorFunction::LocalInvokeCallback::`vftable';
+  pcallback.vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)&Scaleform::GFx::AS2::MouseCtorFunction::LocalInvokeCallback::`vftable;
   v7 = mouseIndex;
   v8 = 105;
   v4 = 0i64;
@@ -652,7 +652,7 @@ void __fastcall Scaleform::GFx::AS2::MouseCtorFunction::OnMouseDown(Scaleform::G
     ++LODWORD(ptarget->vfptr);
     v17 = v8 == (Scaleform::GFx::AS2::MouseCtorFunction *)104;
     v18 = (signed __int64)&v8[-1].ResolveHandler.pLocalFrame;
-    pcallback.vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)&Scaleform::GFx::AS2::MouseCtorFunction::LocalInvokeCallback::`vftable';
+    pcallback.vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)&Scaleform::GFx::AS2::MouseCtorFunction::LocalInvokeCallback::`vftable;
     v21 = v6;
     v22 = 103;
     v23 = &ptarget;
@@ -666,7 +666,7 @@ void __fastcall Scaleform::GFx::AS2::MouseCtorFunction::OnMouseDown(Scaleform::G
       v10,
       (Scaleform::GFx::ASString *)&v7->StringContext.pContext->pMovieRoot->pASMovieRoot.pObject[28].pMovieImpl,
       &pcallback);
-    pcallback.vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)&Scaleform::GFx::AS2::AsBroadcaster::InvokeCallback::`vftable';
+    pcallback.vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)&Scaleform::GFx::AS2::AsBroadcaster::InvokeCallback::`vftable;
     v19 = (Scaleform::GFx::ASStringNode *)ptarget;
     v17 = LODWORD(ptarget->vfptr) == 1;
     --v19->RefCount;
@@ -718,7 +718,7 @@ void __fastcall Scaleform::GFx::AS2::MouseCtorFunction::OnMouseUp(Scaleform::GFx
       v9 = Scaleform::GFx::DisplayObject::CreateCharacterHandle((Scaleform::GFx::DisplayObject *)&ptarget->vfptr);
     ptarget = (Scaleform::GFx::InteractiveObject *)v9->NamePath.pNode;
     ++LODWORD(ptarget->vfptr);
-    pcallback.vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)&Scaleform::GFx::AS2::MouseCtorFunction::LocalInvokeCallback::`vftable';
+    pcallback.vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)&Scaleform::GFx::AS2::MouseCtorFunction::LocalInvokeCallback::`vftable;
     v14 = v6;
     v15 = 104;
     v16 = &ptarget;
@@ -733,7 +733,7 @@ void __fastcall Scaleform::GFx::AS2::MouseCtorFunction::OnMouseUp(Scaleform::GFx
       v10,
       (Scaleform::GFx::ASString *)&v7->StringContext.pContext->pMovieRoot->pASMovieRoot.pObject[28].pASSupport,
       &pcallback);
-    pcallback.vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)&Scaleform::GFx::AS2::AsBroadcaster::InvokeCallback::`vftable';
+    pcallback.vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)&Scaleform::GFx::AS2::AsBroadcaster::InvokeCallback::`vftable;
     v11 = (Scaleform::GFx::ASStringNode *)ptarget;
     v12 = LODWORD(ptarget->vfptr) == 1;
     --v11->RefCount;
@@ -785,7 +785,7 @@ void __fastcall Scaleform::GFx::AS2::MouseCtorFunction::OnMouseWheel(Scaleform::
       v9 = Scaleform::GFx::DisplayObject::CreateCharacterHandle((Scaleform::GFx::DisplayObject *)&ptarget->vfptr);
     ptarget = (Scaleform::GFx::InteractiveObject *)v9->NamePath.pNode;
     ++LODWORD(ptarget->vfptr);
-    pcallback.vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)&Scaleform::GFx::AS2::MouseCtorFunction::LocalInvokeCallback::`vftable';
+    pcallback.vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)&Scaleform::GFx::AS2::MouseCtorFunction::LocalInvokeCallback::`vftable;
     v14 = v6;
     v15 = 106;
     v16 = &ptarget;
@@ -800,7 +800,7 @@ void __fastcall Scaleform::GFx::AS2::MouseCtorFunction::OnMouseWheel(Scaleform::
       v10,
       (Scaleform::GFx::ASString *)&v7->StringContext.pContext->pMovieRoot->pASMovieRoot.pObject[29],
       &pcallback);
-    pcallback.vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)&Scaleform::GFx::AS2::AsBroadcaster::InvokeCallback::`vftable';
+    pcallback.vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)&Scaleform::GFx::AS2::AsBroadcaster::InvokeCallback::`vftable;
     v11 = (Scaleform::GFx::ASStringNode *)ptarget;
     v12 = LODWORD(ptarget->vfptr) == 1;
     --v11->RefCount;
@@ -1599,9 +1599,9 @@ Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::MouseCtorFunct
       &psc,
       v7,
       v3);
-    v6->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::MouseProto::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::MouseProto::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
-    v6->vfptr = (Scaleform::GFx::AS2::GASPrototypeBaseVtbl *)&Scaleform::GFx::AS2::MouseProto::`vftable';
+    v6->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::MouseProto::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::MouseProto::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+    v6->vfptr = (Scaleform::GFx::AS2::GASPrototypeBaseVtbl *)&Scaleform::GFx::AS2::MouseProto::`vftable;
     LOBYTE(flags) = 1;
     Scaleform::GFx::AS2::GASPrototypeBase::InitFunctionMembers(
       (Scaleform::GFx::AS2::GASPrototypeBase *)&v6->vfptr,

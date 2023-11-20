@@ -9,7 +9,7 @@ __int64 UFG::_dynamic_initializer_for__gReflectionGroupInventory__()
     0xD53B5BAC,
     0,
     0);
-  UFG::gReflectionGroupInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::ReflectionGroupInventory::`vftable';
+  UFG::gReflectionGroupInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::ReflectionGroupInventory::`vftable;
   return atexit(UFG::_dynamic_atexit_destructor_for__gReflectionGroupInventory__);
 }
 

@@ -16,10 +16,10 @@ void __fastcall UFG::SpawnRegion::SpawnRegion(UFG::SpawnRegion *this, UFG::qSymb
   v3 = pSimObj;
   v4 = this;
   UFG::MarkerBase::MarkerBase((UFG::MarkerBase *)&this->vfptr, name, pSimObj, 0x30000u);
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SpawnPointInterface::`vftable';
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SpawnPointInterface::`vftable;
   UFG::qSafePointerNodeWithCallbacks<UFG::SpawnRegion>::qSafePointerNodeWithCallbacks<UFG::SpawnRegion>((UFG::qSafePointerNodeWithCallbacks<UFG::SpawnRegion> *)&v4->vfptr);
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SpawnRegion::`vftable'{for `UFG::SpawnPointInterface'};
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SpawnRegion>Vtbl *)&UFG::SpawnRegion::`vftable'{for `UFG::qSafePointerNodeWithCallbacks<UFG::SpawnRegion>'};
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SpawnRegion::`vftable{for `UFG::SpawnPointInterface};
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SpawnRegion>Vtbl *)&UFG::SpawnRegion::`vftable{for `UFG::qSafePointerNodeWithCallbacks<UFG::SpawnRegion>};
   *(_QWORD *)&v4->mAABBOnActivate.mMin.x = 0i64;
   *(_QWORD *)&v4->mAABBOnActivate.mMin.z = 0i64;
   *(_QWORD *)&v4->mAABBOnActivate.mMax.y = 0i64;
@@ -104,8 +104,8 @@ void __fastcall UFG::SpawnRegion::~SpawnRegion(UFG::SpawnRegion *this)
   UFG::qNode<SimObjectFlagSetTask,SimObjectFlagSetList> *v8; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SpawnRegion::`vftable'{for `UFG::SpawnPointInterface'};
-  this->vfptr = (UFG::qSafePointerNode<UFG::SpawnRegion>Vtbl *)&UFG::SpawnRegion::`vftable'{for `UFG::qSafePointerNodeWithCallbacks<UFG::SpawnRegion>'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SpawnRegion::`vftable{for `UFG::SpawnPointInterface};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SpawnRegion>Vtbl *)&UFG::SpawnRegion::`vftable{for `UFG::qSafePointerNodeWithCallbacks<UFG::SpawnRegion>};
   v2 = (UFG::qList<SimObjectFlagSetTask,SimObjectFlagSetList,1,0> *)&this->mZones;
   if ( &this->mZones.mNode.mNext[-3].mNext != (UFG::qNode<UFG::SpawnZone,UFG::SpawnRegionList> **)&this->mWorldToLocal.v2.z )
   {

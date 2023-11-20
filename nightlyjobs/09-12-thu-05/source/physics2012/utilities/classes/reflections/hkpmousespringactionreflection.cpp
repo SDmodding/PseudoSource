@@ -37,9 +37,9 @@ void __fastcall finishLoadedObjecthkpMouseSpringAction(void *p, int finishing)
   {
     v2 = p;
     v3 = (hkStringPtr *)((char *)p + 40);
-    v3[-5].m_stringAndFlag = (const char *)&hkpAction::`vftable';
+    v3[-5].m_stringAndFlag = (const char *)&hkpAction::`vftable;
     hkStringPtr::hkStringPtr(v3, (hkFinishLoadedObjectFlag)finishing);
-    *(_QWORD *)v2 = &hkpMouseSpringAction::`vftable';
+    *(_QWORD *)v2 = &hkpMouseSpringAction::`vftable;
     v2[33] = 2147483648;
     *((_QWORD *)v2 + 15) = 0i64;
     v2[32] = 0;
@@ -60,7 +60,7 @@ void **__fastcall getVtablehkpMouseSpringAction()
   hkStringPtr v1; // [rsp+48h] [rbp-70h]
 
   hkStringPtr::hkStringPtr(&v1, 0);
-  return &hkpMouseSpringAction::`vftable';
+  return &hkpMouseSpringAction::`vftable;
 }
 
 // File Line: 101

@@ -29,7 +29,7 @@ void __fastcall UFG::VehicleOwnershipComponent::~VehicleOwnershipComponent(UFG::
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleOwnershipComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleOwnershipComponent::`vftable;
   v2 = &this->m_PriorityLockComponent;
   if ( this->m_PriorityLockComponent.m_pPointer )
   {

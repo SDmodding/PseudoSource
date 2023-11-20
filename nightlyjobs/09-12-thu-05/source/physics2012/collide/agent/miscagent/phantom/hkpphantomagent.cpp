@@ -27,7 +27,7 @@ void __fastcall hkpPhantomAgent::hkpPhantomAgent(hkpPhantomAgent *this, hkpCdBod
 
   this->m_contactMgr = contactMgr;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpPhantomAgent::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpPhantomAgent::`vftable;
   v4 = bodyA->m_parent;
   v5 = this;
   for ( i = (hkpCollidable *)bodyA; v4; v4 = v4->m_parent )

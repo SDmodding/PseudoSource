@@ -15,7 +15,7 @@ void __fastcall UFG::RoadNetworkGuide::~RoadNetworkGuide(UFG::RoadNetworkGuide *
   UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v11; // rax
 
   v1 = (UFG::qSafePointerNode<UFG::ParkourHandle> *)this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::RoadNetworkGuide>Vtbl *)&UFG::RoadNetworkGuide::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::RoadNetworkGuide>Vtbl *)&UFG::RoadNetworkGuide::`vftable;
   v2 = &this->m_NextGuide;
   if ( this->m_NextGuide.m_pPointer )
   {
@@ -33,7 +33,7 @@ void __fastcall UFG::RoadNetworkGuide::~RoadNetworkGuide(UFG::RoadNetworkGuide *
   v6->mPrev = v5;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::RoadNetworkGuide>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::RoadNetworkGuide>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::RoadNetworkGuide>::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::RoadNetworkGuide>::`vftable;
   UFG::qSafePointerNode<UFG::DynamicCoverCorner>::SetAllPointersToNull(v1);
   UFG::qList<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList,1,0>::DeleteNodes(&v1->m_SafePointerList);
   v7 = v1->m_SafePointerList.mNode.mPrev;

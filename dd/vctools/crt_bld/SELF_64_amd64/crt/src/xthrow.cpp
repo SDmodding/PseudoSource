@@ -7,7 +7,7 @@ void __noreturn std::_Xbad_alloc(void)
 
   _What = "bad allocation";
   std::exception::exception(&pExceptionObject, (const char *const *)&_What, 1);
-  pExceptionObject.vfptr = (std::exceptionVtbl *)&std::bad_alloc::`vftable';
+  pExceptionObject.vfptr = (std::exceptionVtbl *)&std::bad_alloc::`vftable;
   CxxThrowException(&pExceptionObject, &TI2_AVbad_alloc_std__);
 }
 
@@ -20,7 +20,7 @@ void __fastcall __noreturn std::_Xlength_error(const char *_Message)
 
   _What = (char *)_Message;
   std::exception::exception(&pExceptionObject, (const char *const *)&_What);
-  pExceptionObject.vfptr = (std::exceptionVtbl *)&std::length_error::`vftable';
+  pExceptionObject.vfptr = (std::exceptionVtbl *)&std::length_error::`vftable;
   CxxThrowException(&pExceptionObject, &TI3_AVlength_error_std__);
 }
 
@@ -33,7 +33,7 @@ void __fastcall __noreturn std::_Xout_of_range(const char *_Message)
 
   _What = (char *)_Message;
   std::exception::exception(&pExceptionObject, (const char *const *)&_What);
-  pExceptionObject.vfptr = (std::exceptionVtbl *)&std::out_of_range::`vftable';
+  pExceptionObject.vfptr = (std::exceptionVtbl *)&std::out_of_range::`vftable;
   CxxThrowException(&pExceptionObject, &TI3_AVout_of_range_std__);
 }
 

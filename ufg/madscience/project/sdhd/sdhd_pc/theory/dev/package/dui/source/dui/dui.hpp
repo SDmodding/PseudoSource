@@ -209,8 +209,8 @@ void __fastcall UFG::DUIWindow::DUIWindow(UFG::DUIWindow *this)
   v3->mPrev = v3;
   v3->mNext = v3;
   UFG::qSafePointerNode<UFG::DUIWindow>::qSafePointerNode<UFG::DUIWindow>((UFG::qSafePointerNode<UFG::DUIWindow> *)&v1->vfptr);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUIWindow::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUIWindow::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUIWindow::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUIWindow::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v4 = &v1->mGroupTag;
   *(_QWORD *)&v4->mText.mData.mNumItems = 0i64;
   v4->mText.mData.mItems = 0i64;
@@ -242,11 +242,11 @@ void __fastcall UFG::DUIWindow::DUIWindow(UFG::DUIWindow *this, MemImageLoadFlag
   v3->mBaseNode.mNeighbours[0] = &v3->mBaseNode;
   v3->mBaseNode.mNeighbours[1] = &v3->mBaseNode;
   v3->mBaseNode.mUID = v4;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable;
   v7 = &this->mHandles;
   v7->mNode.mPrev = &v7->mNode;
   v7->mNode.mNext = &v7->mNode;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>::`vftable;
   v5 = (UFG::qNode<UFG::DUIWindow,UFG::DUIWindow> *)&this->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
@@ -254,8 +254,8 @@ void __fastcall UFG::DUIWindow::DUIWindow(UFG::DUIWindow *this, MemImageLoadFlag
   v6->mPrev = v6;
   v6->mNext = v6;
   UFG::qSafePointerNode<UFG::DUIWindow>::qSafePointerNode<UFG::DUIWindow>((UFG::qSafePointerNode<UFG::DUIWindow> *)&this->vfptr);
-  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUIWindow::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUIWindow::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUIWindow::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUIWindow::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v2->mGroupTag.mText.mData.mFlags = 2;
   v2->mSurfaceName.mText.mData.mFlags = 2;
   UFG::qString::qString(&v2->mTitle);
@@ -282,9 +282,9 @@ void __fastcall UFG::DUIWindow::~DUIWindow(UFG::DUIWindow *this)
   UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *v14; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUIWindow::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUIWindow::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
   v2 = (UFG::qSafePointerNode<UFG::ParkourHandle> *)&this->vfptr;
-  this->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUIWindow::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUIWindow::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   UFG::qString::~qString(&this->mTitle);
   v3 = (void **)&v1->mSurfaceName.mText.mData.mItems;
   if ( !(v1->mSurfaceName.mText.mData.mFlags & 2) )
@@ -296,7 +296,7 @@ void __fastcall UFG::DUIWindow::~DUIWindow(UFG::DUIWindow *this)
     operator delete[](*v4);
   *v4 = 0i64;
   *(_QWORD *)&v1->mGroupTag.mText.mData.mNumItems = 0i64;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::DUIWindow>::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::DUIWindow>::`vftable;
   UFG::qSafePointerNode<UFG::DynamicCoverCorner>::SetAllPointersToNull(v2);
   UFG::qList<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList,1,0>::DeleteNodes(&v2->m_SafePointerList);
   v5 = v2->m_SafePointerList.mNode.mPrev;
@@ -319,7 +319,7 @@ void __fastcall UFG::DUIWindow::~DUIWindow(UFG::DUIWindow *this)
   v12->mPrev = v11;
   v10->mPrev = v10;
   v10->mNext = v10;
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable';
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable;
   UFG::qList<UFG::qReflectHandleBase,UFG::qReflectHandleBase,1,0>::DeleteNodes(&v1->mHandles);
   v13 = v1->mHandles.mNode.mPrev;
   v14 = v1->mHandles.mNode.mNext;

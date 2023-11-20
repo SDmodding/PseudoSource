@@ -49,7 +49,7 @@ void __fastcall hkaiSilhouetteRecorder::navMeshInstanceRemoved(hkaiSilhouetteRec
   v4 = instance;
   v5 = this;
   hkaiSilhouetteRecorder::connectWorld(this, world);
-  v8 = &hkaiSilhouetteRecorder::InstanceUnloadedEvent::`vftable';
+  v8 = &hkaiSilhouetteRecorder::InstanceUnloadedEvent::`vftable;
   v6 = v4->m_sectionUid;
   v9 = 0x1FFFF;
   v11 = v6;
@@ -463,7 +463,7 @@ void __fastcall hkaiSilhouetteRecorder::navVolumeRemoved(hkaiSilhouetteRecorder 
   v3 = volume;
   v4 = this;
   hkaiSilhouetteRecorder::connectWorld(this, world);
-  v7 = &hkaiSilhouetteRecorder::VolumeUnloadedEvent::`vftable';
+  v7 = &hkaiSilhouetteRecorder::VolumeUnloadedEvent::`vftable;
   v5 = v3->m_sectionUid;
   v8 = 0x1FFFF;
   v10 = v5;
@@ -511,7 +511,7 @@ void __fastcall hkaiSilhouetteRecorder::graphRemoved(hkaiSilhouetteRecorder *thi
   v3 = graph;
   v4 = this;
   hkaiSilhouetteRecorder::connectWorld(this, world);
-  v7 = &hkaiSilhouetteRecorder::GraphUnloadedEvent::`vftable';
+  v7 = &hkaiSilhouetteRecorder::GraphUnloadedEvent::`vftable;
   v5 = v3->m_sectionUid;
   v8 = 0x1FFFF;
   v10 = v5;
@@ -668,10 +668,10 @@ void __fastcall hkaiSilhouetteReplayViewer::hkaiSilhouetteReplayViewer(hkaiSilho
 
   v2 = this;
   hkaiViewerBase::hkaiViewerBase((hkaiViewerBase *)&this->vfptr, contexts);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteReplayViewer::`vftable'{for `hkReferencedObject'};
-  v2->vfptr = (hkProcessVtbl *)&hkaiSilhouetteReplayViewer::`vftable'{for `hkProcess'};
-  v2->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiSilhouetteReplayViewer::`vftable'{for `hkaiViewerContextWorldListener'};
-  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiSilhouetteReplayViewer::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteReplayViewer::`vftable{for `hkReferencedObject};
+  v2->vfptr = (hkProcessVtbl *)&hkaiSilhouetteReplayViewer::`vftable{for `hkProcess};
+  v2->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiSilhouetteReplayViewer::`vftable{for `hkaiViewerContextWorldListener};
+  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiSilhouetteReplayViewer::`vftable;
   v2->m_worldSent.m_bool = 0;
 }
 
@@ -686,10 +686,10 @@ void __fastcall hkaiSilhouetteReplayViewer::~hkaiSilhouetteReplayViewer(hkaiSilh
 
   v1 = 0;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteReplayViewer::`vftable'{for `hkReferencedObject'};
-  this->vfptr = (hkProcessVtbl *)&hkaiSilhouetteReplayViewer::`vftable'{for `hkProcess'};
-  this->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiSilhouetteReplayViewer::`vftable'{for `hkaiViewerContextWorldListener'};
-  this->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiSilhouetteReplayViewer::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteReplayViewer::`vftable{for `hkReferencedObject};
+  this->vfptr = (hkProcessVtbl *)&hkaiSilhouetteReplayViewer::`vftable{for `hkProcess};
+  this->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiSilhouetteReplayViewer::`vftable{for `hkaiViewerContextWorldListener};
+  this->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiSilhouetteReplayViewer::`vftable;
   if ( this->m_context.m_pntr )
   {
     v3 = 0i64;
@@ -706,7 +706,7 @@ void __fastcall hkaiSilhouetteReplayViewer::~hkaiSilhouetteReplayViewer(hkaiSilh
     }
     while ( v2->m_context.m_pntr );
   }
-  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiWorld::Listener::`vftable';
+  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiWorld::Listener::`vftable;
   hkaiViewerBase::~hkaiViewerBase((hkaiViewerBase *)&v2->vfptr);
 }
 
@@ -855,7 +855,7 @@ void __fastcall hkaiSilhouetteRecorder::InstanceLoadedEvent::InstanceLoadedEvent
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_eventType.m_storage = 1;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteRecorder::InstanceLoadedEvent::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteRecorder::InstanceLoadedEvent::`vftable;
   this->m_instance.m_pntr = 0i64;
   this->m_mediator.m_pntr = 0i64;
   this->m_graph.m_pntr = 0i64;
@@ -865,7 +865,7 @@ void __fastcall hkaiSilhouetteRecorder::InstanceLoadedEvent::InstanceLoadedEvent
 // RVA: 0xC3E410
 void __fastcall hkaiSilhouetteRecorder::InstanceLoadedEvent::InstanceLoadedEvent(hkaiSilhouetteRecorder::InstanceLoadedEvent *this, hkFinishLoadedObjectFlag f)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteRecorder::InstanceLoadedEvent::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteRecorder::InstanceLoadedEvent::`vftable;
 }
 
 // File Line: 339
@@ -878,7 +878,7 @@ void __fastcall hkaiSilhouetteRecorder::InstanceLoadedEvent::~InstanceLoadedEven
   hkReferencedObject *v4; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteRecorder::InstanceLoadedEvent::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteRecorder::InstanceLoadedEvent::`vftable;
   v2 = this->m_graph.m_pntr;
   if ( v2 )
     hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
@@ -891,7 +891,7 @@ void __fastcall hkaiSilhouetteRecorder::InstanceLoadedEvent::~InstanceLoadedEven
   if ( v4 )
     hkReferencedObject::removeReference(v4);
   v1->m_instance.m_pntr = 0i64;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 345
@@ -900,7 +900,7 @@ void __fastcall hkaiSilhouetteRecorder::SilhouettesSteppedEvent::SilhouettesStep
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_eventType.m_storage = 3;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteRecorder::SilhouettesSteppedEvent::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteRecorder::SilhouettesSteppedEvent::`vftable;
   this->m_generators.m_capacityAndFlags = 2147483648;
   this->m_generators.m_data = 0i64;
   this->m_generators.m_size = 0;
@@ -920,7 +920,7 @@ void __fastcall hkaiSilhouetteRecorder::SilhouettesSteppedEvent::SilhouettesStep
 // RVA: 0xC3E500
 void __fastcall hkaiSilhouetteRecorder::SilhouettesSteppedEvent::SilhouettesSteppedEvent(hkaiSilhouetteRecorder::SilhouettesSteppedEvent *this, hkFinishLoadedObjectFlag f)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteRecorder::SilhouettesSteppedEvent::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteRecorder::SilhouettesSteppedEvent::`vftable;
 }
 
 // File Line: 357
@@ -940,7 +940,7 @@ void __fastcall hkaiSilhouetteRecorder::SilhouettesSteppedEvent::~SilhouettesSte
   int v11; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteRecorder::SilhouettesSteppedEvent::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteRecorder::SilhouettesSteppedEvent::`vftable;
   v2 = this->m_updatedSections.m_storage.m_words.m_capacityAndFlags;
   this->m_updatedSections.m_storage.m_words.m_size = 0;
   if ( v2 >= 0 )
@@ -997,7 +997,7 @@ void __fastcall hkaiSilhouetteRecorder::SilhouettesSteppedEvent::~SilhouettesSte
       8 * v11);
   v1->m_generators.m_data = 0i64;
   v1->m_generators.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 363
@@ -1006,7 +1006,7 @@ void __fastcall hkaiSilhouetteRecorder::VolumeLoadedEvent::VolumeLoadedEvent(hka
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_eventType.m_storage = 4;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteRecorder::VolumeLoadedEvent::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteRecorder::VolumeLoadedEvent::`vftable;
   this->m_volume.m_pntr = 0i64;
   this->m_mediator.m_pntr = 0i64;
 }
@@ -1015,7 +1015,7 @@ void __fastcall hkaiSilhouetteRecorder::VolumeLoadedEvent::VolumeLoadedEvent(hka
 // RVA: 0xC3E6D0
 void __fastcall hkaiSilhouetteRecorder::VolumeLoadedEvent::VolumeLoadedEvent(hkaiSilhouetteRecorder::VolumeLoadedEvent *this, hkFinishLoadedObjectFlag f)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteRecorder::VolumeLoadedEvent::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteRecorder::VolumeLoadedEvent::`vftable;
 }
 
 // File Line: 374
@@ -1027,7 +1027,7 @@ void __fastcall hkaiSilhouetteRecorder::VolumeLoadedEvent::~VolumeLoadedEvent(hk
   hkReferencedObject *v3; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteRecorder::VolumeLoadedEvent::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteRecorder::VolumeLoadedEvent::`vftable;
   v2 = this->m_mediator.m_pntr;
   if ( v2 )
     hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
@@ -1036,7 +1036,7 @@ void __fastcall hkaiSilhouetteRecorder::VolumeLoadedEvent::~VolumeLoadedEvent(hk
   if ( v3 )
     hkReferencedObject::removeReference(v3);
   v1->m_volume.m_pntr = 0i64;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 380
@@ -1045,7 +1045,7 @@ void __fastcall hkaiSilhouetteRecorder::GraphLoadedEvent::GraphLoadedEvent(hkaiS
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_eventType.m_storage = 6;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteRecorder::GraphLoadedEvent::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteRecorder::GraphLoadedEvent::`vftable;
   this->m_graph.m_pntr = 0i64;
 }
 
@@ -1053,7 +1053,7 @@ void __fastcall hkaiSilhouetteRecorder::GraphLoadedEvent::GraphLoadedEvent(hkaiS
 // RVA: 0xC3E780
 void __fastcall hkaiSilhouetteRecorder::GraphLoadedEvent::GraphLoadedEvent(hkaiSilhouetteRecorder::GraphLoadedEvent *this, hkFinishLoadedObjectFlag f)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteRecorder::GraphLoadedEvent::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteRecorder::GraphLoadedEvent::`vftable;
 }
 
 // File Line: 390
@@ -1064,12 +1064,12 @@ void __fastcall hkaiSilhouetteRecorder::GraphLoadedEvent::~GraphLoadedEvent(hkai
   hkaiDirectedGraphInstance *v2; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteRecorder::GraphLoadedEvent::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteRecorder::GraphLoadedEvent::`vftable;
   v2 = this->m_graph.m_pntr;
   if ( v2 )
     hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
   v1->m_graph.m_pntr = 0i64;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 396
@@ -1078,7 +1078,7 @@ void __fastcall hkaiSilhouetteRecorder::WorldConnectedEvent::WorldConnectedEvent
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_eventType.m_storage = 0;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteRecorder::WorldConnectedEvent::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteRecorder::WorldConnectedEvent::`vftable;
   this->m_world.m_pntr = 0i64;
 }
 
@@ -1086,7 +1086,7 @@ void __fastcall hkaiSilhouetteRecorder::WorldConnectedEvent::WorldConnectedEvent
 // RVA: 0xC3E380
 void __fastcall hkaiSilhouetteRecorder::WorldConnectedEvent::WorldConnectedEvent(hkaiSilhouetteRecorder::WorldConnectedEvent *this, hkFinishLoadedObjectFlag f)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteRecorder::WorldConnectedEvent::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteRecorder::WorldConnectedEvent::`vftable;
 }
 
 // File Line: 405
@@ -1097,11 +1097,11 @@ void __fastcall hkaiSilhouetteRecorder::WorldConnectedEvent::~WorldConnectedEven
   hkaiWorld *v2; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteRecorder::WorldConnectedEvent::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteRecorder::WorldConnectedEvent::`vftable;
   v2 = this->m_world.m_pntr;
   if ( v2 )
     hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
   v1->m_world.m_pntr = 0i64;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 

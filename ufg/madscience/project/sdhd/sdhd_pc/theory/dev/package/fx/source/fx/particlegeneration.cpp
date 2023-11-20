@@ -1,6 +1,6 @@
 // File Line: 26
 // RVA: 0x1E77B0
-void __fastcall Render::`anonymous namespace'::MatrixToEulerAngles(UFG::qMatrix44 *mat, UFG::qVector3 *euler)
+void __fastcall Render::`anonymous namespace::MatrixToEulerAngles(UFG::qMatrix44 *mat, UFG::qVector3 *euler)
 {
   float v2; // xmm0_4
   UFG::qVector3 *v3; // rdi
@@ -150,7 +150,7 @@ void __fastcall Render::ParticleGenerator::CreateRotation(Render::ParticleGenera
   {
     UFG::qRotationMatrixXYZDepreciated(&rot, &result);
     UFG::qMatrix44::operator*(&rot, &mat, *v3);
-    Render::`anonymous namespace'::MatrixToEulerAngles(&mat, &result);
+    Render::`anonymous namespace::MatrixToEulerAngles(&mat, &result);
   }
   v13 = (signed int)(float)((float)(result.x + 6.2831855) * 20.292255);
   v14 = (signed int)(float)((float)(result.y + 6.2831855) * 20.292255);

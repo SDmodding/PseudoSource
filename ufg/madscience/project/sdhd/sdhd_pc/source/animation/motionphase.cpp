@@ -21,9 +21,9 @@ __int64 dynamic_initializer_for__MotionPhase2::sClassNameUID__()
 // RVA: 0x39E1D0
 void __fastcall MotionPhase2::MotionPhase2(MotionPhase2 *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
-  this->vfptr = (Expression::IMemberMapVtbl *)&MotionPhase2::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&MotionPhase2::`vftable;
   *(_QWORD *)&this->mPhaseMark.mValue = 0i64;
   *(_QWORD *)&this->mPhase = 0i64;
 }
@@ -32,9 +32,9 @@ void __fastcall MotionPhase2::MotionPhase2(MotionPhase2 *this)
 // RVA: 0x39E190
 void __fastcall MotionPhase2::MotionPhase2(MotionPhase2 *this, MemImageLoadFlag flag)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
-  this->vfptr = (Expression::IMemberMapVtbl *)&MotionPhase2::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&MotionPhase2::`vftable;
 }
 
 // File Line: 95

@@ -17,7 +17,7 @@ void __fastcall ReceivedScriptCommandCondition::ReceivedScriptCommandCondition(R
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ReceivedScriptCommandCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ReceivedScriptCommandCondition::`vftable;
 }
 
 // File Line: 91
@@ -73,7 +73,7 @@ void __fastcall CollisionAvoidanceIsActiveCondition::CollisionAvoidanceIsActiveC
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CollisionAvoidanceIsActiveCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CollisionAvoidanceIsActiveCondition::`vftable;
 }
 
 // File Line: 124
@@ -134,7 +134,7 @@ void __fastcall HasRangedWeaponEquippedWithAmmoCondition::HasRangedWeaponEquippe
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&HasRangedWeaponEquippedWithAmmoCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&HasRangedWeaponEquippedWithAmmoCondition::`vftable;
 }
 
 // File Line: 162
@@ -190,7 +190,7 @@ void __fastcall HasAnyDangerousEntitiesOrPointsCondition::HasAnyDangerousEntitie
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&HasAnyDangerousEntitiesOrPointsCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&HasAnyDangerousEntitiesOrPointsCondition::`vftable;
 }
 
 // File Line: 192
@@ -277,9 +277,9 @@ void __fastcall ReceivedStimulusCondition::ReceivedStimulusCondition(ReceivedSti
   v3 = (UFG::qNode<IConditionInit,IConditionInit> *)&v1->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (IConditionInitVtbl *)&IConditionInit::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ReceivedStimulusCondition::`vftable'{for `Condition'};
-  v2->vfptr = (IConditionInitVtbl *)&ReceivedStimulusCondition::`vftable'{for `IConditionInit'};
+  v2->vfptr = (IConditionInitVtbl *)&IConditionInit::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ReceivedStimulusCondition::`vftable{for `Condition};
+  v2->vfptr = (IConditionInitVtbl *)&ReceivedStimulusCondition::`vftable{for `IConditionInit};
   *(_DWORD *)&v1->m_Stimulus.mValue = 1441792;
   *(_WORD *)&v1->m_OnlyCareAboutStimuliFromFactionStandingType.mValue = 258;
   v1->m_MyRoot.mOffset = 0i64;
@@ -299,8 +299,8 @@ void __fastcall ReceivedStimulusCondition::~ReceivedStimulusCondition(ReceivedSt
   UFG::qNode<IConditionInit,IConditionInit> *v4; // rax
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&ReceivedStimulusCondition::`vftable'{for `Condition'};
-  this->vfptr = (IConditionInitVtbl *)&ReceivedStimulusCondition::`vftable'{for `IConditionInit'};
+  this->vfptr = (Expression::IMemberMapVtbl *)&ReceivedStimulusCondition::`vftable{for `Condition};
+  this->vfptr = (IConditionInitVtbl *)&ReceivedStimulusCondition::`vftable{for `IConditionInit};
   v2 = (UFG::qNode<IConditionInit,IConditionInit> *)&this->mPrev;
   v3 = this->mPrev;
   v4 = v2->mNext;
@@ -308,8 +308,8 @@ void __fastcall ReceivedStimulusCondition::~ReceivedStimulusCondition(ReceivedSt
   v4->mPrev = v3;
   v2->mPrev = v2;
   v2->mNext = v2;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 259
@@ -1001,7 +1001,7 @@ void __fastcall ReceivedHeatEventCondition::ReceivedHeatEventCondition(ReceivedH
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ReceivedHeatEventCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ReceivedHeatEventCondition::`vftable;
   v1->m_HeatEvent.mValue = 0;
 }
 
@@ -1009,9 +1009,9 @@ void __fastcall ReceivedHeatEventCondition::ReceivedHeatEventCondition(ReceivedH
 // RVA: 0x33A460
 void __fastcall ReceivedHeatEventCondition::~ReceivedHeatEventCondition(ReceivedHeatEventCondition *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&ReceivedHeatEventCondition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&ReceivedHeatEventCondition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 535
@@ -1046,7 +1046,7 @@ void __fastcall AIPlayerInsideAIMeshHeuristicCondition::AIPlayerInsideAIMeshHeur
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AIPlayerInsideAIMeshHeuristicCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AIPlayerInsideAIMeshHeuristicCondition::`vftable;
 }
 
 // File Line: 561
@@ -1078,7 +1078,7 @@ void __fastcall AICopAcquireArrestRightCondition::AICopAcquireArrestRightConditi
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AICopAcquireArrestRightCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AICopAcquireArrestRightCondition::`vftable;
 }
 
 // File Line: 588
@@ -1114,7 +1114,7 @@ void __fastcall AICopPlayerInsideUnlockedSafehouseCondition::AICopPlayerInsideUn
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AICopPlayerInsideUnlockedSafehouseCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AICopPlayerInsideUnlockedSafehouseCondition::`vftable;
 }
 
 // File Line: 614
@@ -1146,7 +1146,7 @@ void __fastcall AICopOnFootNoSprintCondition::AICopOnFootNoSprintCondition(AICop
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AICopOnFootNoSprintCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AICopOnFootNoSprintCondition::`vftable;
 }
 
 // File Line: 640
@@ -1178,7 +1178,7 @@ void __fastcall AICopIsSoloOnSceneCondition::AICopIsSoloOnSceneCondition(AICopIs
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AICopIsSoloOnSceneCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AICopIsSoloOnSceneCondition::`vftable;
 }
 
 // File Line: 666
@@ -1214,7 +1214,7 @@ void __fastcall AICopNumArrestAttemptCondition::AICopNumArrestAttemptCondition(A
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AICopNumArrestAttemptCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AICopNumArrestAttemptCondition::`vftable;
   v1->m_InEqualityOperator.mValue = 4;
   v1->m_NumAttempts = 0;
 }
@@ -1254,7 +1254,7 @@ void __fastcall AICopIsSuspectInsideInteriorCondition::AICopIsSuspectInsideInter
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AICopIsSuspectInsideInteriorCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AICopIsSuspectInsideInteriorCondition::`vftable;
 }
 
 // File Line: 725
@@ -1286,7 +1286,7 @@ void __fastcall AICopIsSuspectInWaterCondition::AICopIsSuspectInWaterCondition(A
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AICopIsSuspectInWaterCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AICopIsSuspectInWaterCondition::`vftable;
 }
 
 // File Line: 750
@@ -1318,7 +1318,7 @@ void __fastcall AICopHasSuspectOpenedFiredCondition::AICopHasSuspectOpenedFiredC
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AICopHasSuspectOpenedFiredCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AICopHasSuspectOpenedFiredCondition::`vftable;
   v1->m_OpenFiredContext.mValue = 0;
 }
 
@@ -1362,7 +1362,7 @@ void __fastcall AICopHasVehicleToDefendCondition::AICopHasVehicleToDefendConditi
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AICopHasVehicleToDefendCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AICopHasVehicleToDefendCondition::`vftable;
 }
 
 // File Line: 813
@@ -1418,7 +1418,7 @@ void __fastcall AIEncounterRoleCondition::AIEncounterRoleCondition(AIEncounterRo
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AIEncounterRoleCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AIEncounterRoleCondition::`vftable;
   v1->mRole.mValue = 0;
 }
 
@@ -1468,7 +1468,7 @@ void __fastcall AIEncounterUnitGotStuckCondition::AIEncounterUnitGotStuckConditi
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AIEncounterUnitGotStuckCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AIEncounterUnitGotStuckCondition::`vftable;
 }
 
 // File Line: 883
@@ -1535,7 +1535,7 @@ void __fastcall CanBeginSinglePersonConversationCondition::CanBeginSinglePersonC
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CanBeginSinglePersonConversationCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CanBeginSinglePersonConversationCondition::`vftable;
 }
 
 // File Line: 925
@@ -1591,7 +1591,7 @@ void __fastcall OneShotCondition::OneShotCondition(OneShotCondition *this)
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&OneShotCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&OneShotCondition::`vftable;
   v1->m_HasFiredUID = 0;
   v1->m_MyRoot.mOffset = 0i64;
 }
@@ -1710,7 +1710,7 @@ void __fastcall CooldownCondition::CooldownCondition(CooldownCondition *this)
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CooldownCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CooldownCondition::`vftable;
   *(_QWORD *)&v1->m_NextTimeCanEnterUID = 0i64;
   v1->m_MaxTimeUntilCanEnterAgain = 0.0;
   v1->m_MyRoot.mOffset = 0i64;
@@ -1802,7 +1802,7 @@ void __fastcall GlobalCooldownCondition::GlobalCooldownCondition(GlobalCooldownC
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&GlobalCooldownCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&GlobalCooldownCondition::`vftable;
   v1->m_CooldownType.mValue = 0;
   *(_QWORD *)&v1->m_MinTimeUntilCanEnterAgain = 0i64;
 }
@@ -1875,7 +1875,7 @@ void __fastcall RandomStartTimeCondition::RandomStartTimeCondition(RandomStartTi
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&RandomStartTimeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&RandomStartTimeCondition::`vftable;
   *(_QWORD *)&v1->m_TimeCanEnterUID = 0i64;
   *(_QWORD *)&v1->m_MinTimeUntilCanEnter = 0i64;
   v1->m_MyRoot.mOffset = 0i64;
@@ -2082,7 +2082,7 @@ void __fastcall AIObjectiveCondition::AIObjectiveCondition(AIObjectiveCondition 
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AIObjectiveCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AIObjectiveCondition::`vftable;
   v1->m_AIObjective.mValue = 0;
 }
 
@@ -2130,7 +2130,7 @@ void __fastcall AIObjectiveAnyCondition::AIObjectiveAnyCondition(AIObjectiveAnyC
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AIObjectiveAnyCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AIObjectiveAnyCondition::`vftable;
 }
 
 // File Line: 1361
@@ -2175,7 +2175,7 @@ void __fastcall AIObjectiveIsHostileCondition::AIObjectiveIsHostileCondition(AIO
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AIObjectiveIsHostileCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AIObjectiveIsHostileCondition::`vftable;
 }
 
 // File Line: 1398
@@ -2220,7 +2220,7 @@ void __fastcall AIOnMeshCondition::AIOnMeshCondition(AIOnMeshCondition *this)
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AIOnMeshCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AIOnMeshCondition::`vftable;
 }
 
 // File Line: 1437
@@ -2280,7 +2280,7 @@ void __fastcall AIAtDestinationCondition::AIAtDestinationCondition(AIAtDestinati
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AIAtDestinationCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AIAtDestinationCondition::`vftable;
   v1->m_Tolerance = 0.5;
 }
 
@@ -2326,7 +2326,7 @@ void __fastcall AIHasValidPathCondition::AIHasValidPathCondition(AIHasValidPathC
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AIHasValidPathCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AIHasValidPathCondition::`vftable;
 }
 
 // File Line: 1513
@@ -2387,7 +2387,7 @@ void __fastcall AIDestinationObstructedCondition::AIDestinationObstructedConditi
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AIDestinationObstructedCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AIDestinationObstructedCondition::`vftable;
 }
 
 // File Line: 1546
@@ -2448,7 +2448,7 @@ void __fastcall POIUseTypeCondition::POIUseTypeCondition(POIUseTypeCondition *th
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&POIUseTypeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&POIUseTypeCondition::`vftable;
   v1->m_POIUseType.mValue = 0;
 }
 
@@ -3389,7 +3389,7 @@ void __fastcall TargetDistanceHysteresis::TargetDistanceHysteresis(TargetDistanc
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetDistanceHysteresis::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetDistanceHysteresis::`vftable;
   *(_QWORD *)&v1->m_TargetType = 0i64;
   *(_QWORD *)&v1->m_ZDistanceBegin = 0x40000000i64;
   v1->m_ZDistanceEnd = 2.0;
@@ -3542,7 +3542,7 @@ void __fastcall TargetVisibleCondition::TargetVisibleCondition(TargetVisibleCond
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetVisibleCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetVisibleCondition::`vftable;
   v1->m_TargetType = 0;
   v1->m_NumSecondsToContinueAfterTargetFirstVisible = 2.0;
   v1->m_MinTimeBetweenChecks = 0.5;
@@ -4329,7 +4329,7 @@ void __fastcall TargetKnowledgeCondition::TargetKnowledgeCondition(TargetKnowled
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetKnowledgeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetKnowledgeCondition::`vftable;
   v1->m_TargetType = 0;
   *(_WORD *)&v1->m_HasEverSeen = 0;
   v1->m_CanPathTo = 0;
@@ -4521,9 +4521,9 @@ void __fastcall GetInFormationCondition::GetInFormationCondition(GetInFormationC
   v3 = (UFG::qNode<IConditionInit,IConditionInit> *)&v1->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (IConditionInitVtbl *)&IConditionInit::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&GetInFormationCondition::`vftable'{for `Condition'};
-  v2->vfptr = (IConditionInitVtbl *)&GetInFormationCondition::`vftable'{for `IConditionInit'};
+  v2->vfptr = (IConditionInitVtbl *)&IConditionInit::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&GetInFormationCondition::`vftable{for `Condition};
+  v2->vfptr = (IConditionInitVtbl *)&GetInFormationCondition::`vftable{for `IConditionInit};
   *(_WORD *)&v1->m_TargetType.mValue = 22;
   v1->m_AttackType.mValue = 0;
   v4 = (signed __int64)&v1->m_ActionPath;
@@ -4547,9 +4547,9 @@ void __fastcall GetInFormationCondition::~GetInFormationCondition(GetInFormation
   UFG::qNode<IConditionInit,IConditionInit> *v9; // rax
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&GetInFormationCondition::`vftable'{for `Condition'};
+  this->vfptr = (Expression::IMemberMapVtbl *)&GetInFormationCondition::`vftable{for `Condition};
   v2 = (IConditionInit *)&this->vfptr;
-  this->vfptr = (IConditionInitVtbl *)&GetInFormationCondition::`vftable'{for `IConditionInit'};
+  this->vfptr = (IConditionInitVtbl *)&GetInFormationCondition::`vftable{for `IConditionInit};
   v3 = &this->m_ActionPath;
   if ( this->m_ActionPath.mPath.mCount >= 0 )
   {
@@ -4573,8 +4573,8 @@ void __fastcall GetInFormationCondition::~GetInFormationCondition(GetInFormation
   v9->mPrev = v8;
   v7->mPrev = v7;
   v7->mNext = v7;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 2839
@@ -4944,9 +4944,9 @@ void __fastcall GetInPedFormationCondition::GetInPedFormationCondition(GetInPedF
   v3 = (UFG::qNode<IConditionInit,IConditionInit> *)&v1->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (IConditionInitVtbl *)&IConditionInit::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&GetInPedFormationCondition::`vftable'{for `Condition'};
-  v2->vfptr = (IConditionInitVtbl *)&GetInPedFormationCondition::`vftable'{for `IConditionInit'};
+  v2->vfptr = (IConditionInitVtbl *)&IConditionInit::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&GetInPedFormationCondition::`vftable{for `Condition};
+  v2->vfptr = (IConditionInitVtbl *)&GetInPedFormationCondition::`vftable{for `IConditionInit};
   v1->m_TargetType.mValue = 62;
   v4 = (signed __int64)&v1->m_ActionPath;
   *(_DWORD *)v4 = 0;
@@ -4970,9 +4970,9 @@ void __fastcall GetInPedFormationCondition::~GetInPedFormationCondition(GetInPed
   UFG::qNode<IConditionInit,IConditionInit> *v9; // rax
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&GetInPedFormationCondition::`vftable'{for `Condition'};
+  this->vfptr = (Expression::IMemberMapVtbl *)&GetInPedFormationCondition::`vftable{for `Condition};
   v2 = (IConditionInit *)&this->vfptr;
-  this->vfptr = (IConditionInitVtbl *)&GetInPedFormationCondition::`vftable'{for `IConditionInit'};
+  this->vfptr = (IConditionInitVtbl *)&GetInPedFormationCondition::`vftable{for `IConditionInit};
   v3 = &this->m_ActionPath;
   if ( this->m_ActionPath.mPath.mCount >= 0 )
   {
@@ -4996,8 +4996,8 @@ void __fastcall GetInPedFormationCondition::~GetInPedFormationCondition(GetInPed
   v9->mPrev = v8;
   v7->mPrev = v7;
   v7->mNext = v7;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 3073
@@ -5305,7 +5305,7 @@ void __fastcall AIIsStandingBetweenAttackerAndTarget::AIIsStandingBetweenAttacke
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AIIsStandingBetweenAttackerAndTarget::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AIIsStandingBetweenAttackerAndTarget::`vftable;
   *(_WORD *)&v1->m_TargetType.mValue = 22;
   v1->m_MaxDistance = 8.0;
   v1->m_MaxAngle = 0.89999998;
@@ -5509,7 +5509,7 @@ void __fastcall NextAttackerCondition::NextAttackerCondition(NextAttackerConditi
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&NextAttackerCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&NextAttackerCondition::`vftable;
   v1->m_WeaponType.mValue = 0;
 }
 
@@ -5673,7 +5673,7 @@ void __fastcall IsNextAttackerCondition::IsNextAttackerCondition(IsNextAttackerC
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IsNextAttackerCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&IsNextAttackerCondition::`vftable;
   *(_WORD *)&v1->m_AttackType.mValue = 5632;
 }
 
@@ -5681,9 +5681,9 @@ void __fastcall IsNextAttackerCondition::IsNextAttackerCondition(IsNextAttackerC
 // RVA: 0x338FD0
 void __fastcall IsNextAttackerCondition::~IsNextAttackerCondition(IsNextAttackerCondition *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&IsNextAttackerCondition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&IsNextAttackerCondition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 3492
@@ -5869,9 +5869,9 @@ void __fastcall HasAttackRequestCondition::HasAttackRequestCondition(HasAttackRe
   v3 = (UFG::qNode<IConditionInit,IConditionInit> *)&v1->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (IConditionInitVtbl *)&IConditionInit::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&HasAttackRequestCondition::`vftable'{for `Condition'};
-  v2->vfptr = (IConditionInitVtbl *)&HasAttackRequestCondition::`vftable'{for `IConditionInit'};
+  v2->vfptr = (IConditionInitVtbl *)&IConditionInit::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&HasAttackRequestCondition::`vftable{for `Condition};
+  v2->vfptr = (IConditionInitVtbl *)&HasAttackRequestCondition::`vftable{for `IConditionInit};
   *(_DWORD *)&v1->m_AttackType.mValue = 1441792;
   v1->m_CopySecondaryCharacterToTargetType.mValue = 37;
   v8 = (signed __int64)&v1->m_ActionPath;
@@ -5915,9 +5915,9 @@ void __fastcall HasAttackRequestCondition::~HasAttackRequestCondition(HasAttackR
   UFG::qNode<IConditionInit,IConditionInit> *v11; // rax
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&HasAttackRequestCondition::`vftable'{for `Condition'};
+  this->vfptr = (Expression::IMemberMapVtbl *)&HasAttackRequestCondition::`vftable{for `Condition};
   v2 = (IConditionInit *)&this->vfptr;
-  this->vfptr = (IConditionInitVtbl *)&HasAttackRequestCondition::`vftable'{for `IConditionInit'};
+  this->vfptr = (IConditionInitVtbl *)&HasAttackRequestCondition::`vftable{for `IConditionInit};
   v3 = this->m_pCanAttackConditions.mOffset;
   if ( v3 )
   {
@@ -5949,8 +5949,8 @@ void __fastcall HasAttackRequestCondition::~HasAttackRequestCondition(HasAttackR
   v11->mPrev = v10;
   v9->mPrev = v9;
   v9->mNext = v9;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 3615
@@ -6444,7 +6444,7 @@ void __fastcall IsAtRangePreferenceCondition::IsAtRangePreferenceCondition(IsAtR
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IsAtRangePreferenceCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&IsAtRangePreferenceCondition::`vftable;
   *(_WORD *)&v1->m_TargetType.mValue = 22;
 }
 
@@ -6452,9 +6452,9 @@ void __fastcall IsAtRangePreferenceCondition::IsAtRangePreferenceCondition(IsAtR
 // RVA: 0x338ED0
 void __fastcall IsAtRangePreferenceCondition::~IsAtRangePreferenceCondition(IsAtRangePreferenceCondition *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&IsAtRangePreferenceCondition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&IsAtRangePreferenceCondition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 3953
@@ -6571,7 +6571,7 @@ void __fastcall TimeoutCondition::TimeoutCondition(TimeoutCondition *this)
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TimeoutCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TimeoutCondition::`vftable;
   *(_QWORD *)&v1->m_TimeoutTimeUID = 0i64;
   v1->m_MaxTimeUntilTimeout = 0.0;
   v1->m_MyRoot.mOffset = 0i64;
@@ -6748,7 +6748,7 @@ void __fastcall RunningAttackCooldownCondition::RunningAttackCooldownCondition(R
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&RunningAttackCooldownCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&RunningAttackCooldownCondition::`vftable;
   v1->m_TargetType.mValue = 22;
   v1->m_MyRoot.mOffset = 0i64;
   v1->m_HasBegunUID = 0;
@@ -6758,9 +6758,9 @@ void __fastcall RunningAttackCooldownCondition::RunningAttackCooldownCondition(R
 // RVA: 0x33A940
 void __fastcall RunningAttackCooldownCondition::~RunningAttackCooldownCondition(RunningAttackCooldownCondition *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&RunningAttackCooldownCondition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&RunningAttackCooldownCondition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 4098
@@ -7034,9 +7034,9 @@ void __fastcall OpportunityAttackCooldownCondition::OpportunityAttackCooldownCon
   v3 = (UFG::qNode<IConditionInit,IConditionInit> *)&v1->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (IConditionInitVtbl *)&IConditionInit::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&OpportunityAttackCooldownCondition::`vftable'{for `Condition'};
-  v2->vfptr = (IConditionInitVtbl *)&OpportunityAttackCooldownCondition::`vftable'{for `IConditionInit'};
+  v2->vfptr = (IConditionInitVtbl *)&IConditionInit::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&OpportunityAttackCooldownCondition::`vftable{for `Condition};
+  v2->vfptr = (IConditionInitVtbl *)&OpportunityAttackCooldownCondition::`vftable{for `IConditionInit};
   *(_WORD *)&v1->m_TargetType.mValue = 22;
   *(_QWORD *)&v1->m_MinTimeUntilNextOpportunityAttackPropertySymbol.mUID = -1i64;
   v1->m_MyRoot.mOffset = 0i64;
@@ -7054,8 +7054,8 @@ void __fastcall OpportunityAttackCooldownCondition::~OpportunityAttackCooldownCo
   UFG::qNode<IConditionInit,IConditionInit> *v4; // rax
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&OpportunityAttackCooldownCondition::`vftable'{for `Condition'};
-  this->vfptr = (IConditionInitVtbl *)&OpportunityAttackCooldownCondition::`vftable'{for `IConditionInit'};
+  this->vfptr = (Expression::IMemberMapVtbl *)&OpportunityAttackCooldownCondition::`vftable{for `Condition};
+  this->vfptr = (IConditionInitVtbl *)&OpportunityAttackCooldownCondition::`vftable{for `IConditionInit};
   v2 = (UFG::qNode<IConditionInit,IConditionInit> *)&this->mPrev;
   v3 = this->mPrev;
   v4 = v2->mNext;
@@ -7063,8 +7063,8 @@ void __fastcall OpportunityAttackCooldownCondition::~OpportunityAttackCooldownCo
   v4->mPrev = v3;
   v2->mPrev = v2;
   v2->mNext = v2;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 4226
@@ -7467,7 +7467,7 @@ void __fastcall TimeToInterceptCondition::TimeToInterceptCondition(TimeToInterce
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TimeToInterceptCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TimeToInterceptCondition::`vftable;
   v1->m_TargetType.mValue = 22;
   v1->m_InEqualityOperator.mValue = 4;
   v1->m_TimeToIntercept = 1.0;
@@ -7479,9 +7479,9 @@ void __fastcall TimeToInterceptCondition::TimeToInterceptCondition(TimeToInterce
 // RVA: 0x33B6F0
 void __fastcall TimeToInterceptCondition::~TimeToInterceptCondition(TimeToInterceptCondition *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&TimeToInterceptCondition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&TimeToInterceptCondition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 4425
@@ -7634,7 +7634,7 @@ void __fastcall TargetCanBeAttackedCondition::TargetCanBeAttackedCondition(Targe
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetCanBeAttackedCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetCanBeAttackedCondition::`vftable;
   *(_WORD *)&v1->m_TargetType.mValue = 22;
 }
 
@@ -7642,9 +7642,9 @@ void __fastcall TargetCanBeAttackedCondition::TargetCanBeAttackedCondition(Targe
 // RVA: 0x33B630
 void __fastcall TargetCanBeAttackedCondition::~TargetCanBeAttackedCondition(TargetCanBeAttackedCondition *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&TargetCanBeAttackedCondition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&TargetCanBeAttackedCondition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 4502
@@ -7752,16 +7752,16 @@ void __fastcall HasPositionToDefendCondition::HasPositionToDefendCondition(HasPo
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&HasPositionToDefendCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&HasPositionToDefendCondition::`vftable;
 }
 
 // File Line: 4541
 // RVA: 0x3385B0
 void __fastcall HasPositionToDefendCondition::~HasPositionToDefendCondition(HasPositionToDefendCondition *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&HasPositionToDefendCondition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&HasPositionToDefendCondition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 4546
@@ -7806,7 +7806,7 @@ void __fastcall OutsideOfPositionToDefendCondition::OutsideOfPositionToDefendCon
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&OutsideOfPositionToDefendCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&OutsideOfPositionToDefendCondition::`vftable;
   *(_QWORD *)&v1->m_HowCloseToGet = 0x40000000i64;
   v1->m_MyRoot.mOffset = 0i64;
 }
@@ -7815,9 +7815,9 @@ void __fastcall OutsideOfPositionToDefendCondition::OutsideOfPositionToDefendCon
 // RVA: 0x339920
 void __fastcall OutsideOfPositionToDefendCondition::~OutsideOfPositionToDefendCondition(OutsideOfPositionToDefendCondition *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&OutsideOfPositionToDefendCondition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&OutsideOfPositionToDefendCondition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 4596
@@ -7944,7 +7944,7 @@ void __fastcall AbandonPositionToDefendCondition::AbandonPositionToDefendConditi
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AbandonPositionToDefendCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AbandonPositionToDefendCondition::`vftable;
   v1->m_TargetType.mValue = 22;
   v1->m_PositionToDefendHasBeenCompromisedUID = 0;
   v1->m_MyRoot.mOffset = 0i64;
@@ -7954,9 +7954,9 @@ void __fastcall AbandonPositionToDefendCondition::AbandonPositionToDefendConditi
 // RVA: 0x334C70
 void __fastcall AbandonPositionToDefendCondition::~AbandonPositionToDefendCondition(AbandonPositionToDefendCondition *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&AbandonPositionToDefendCondition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&AbandonPositionToDefendCondition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 4674
@@ -8238,16 +8238,16 @@ void __fastcall CrouchWhileDefendingPositionCondition::CrouchWhileDefendingPosit
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CrouchWhileDefendingPositionCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CrouchWhileDefendingPositionCondition::`vftable;
 }
 
 // File Line: 4775
 // RVA: 0x336000
 void __fastcall CrouchWhileDefendingPositionCondition::~CrouchWhileDefendingPositionCondition(CrouchWhileDefendingPositionCondition *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&CrouchWhileDefendingPositionCondition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&CrouchWhileDefendingPositionCondition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 4780
@@ -8292,7 +8292,7 @@ void __fastcall NodeRequestCondition::NodeRequestCondition(NodeRequestCondition 
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&NodeRequestCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&NodeRequestCondition::`vftable;
   v1->m_pActionNode = 0i64;
 }
 
@@ -8300,9 +8300,9 @@ void __fastcall NodeRequestCondition::NodeRequestCondition(NodeRequestCondition 
 // RVA: 0x339800
 void __fastcall NodeRequestCondition::~NodeRequestCondition(NodeRequestCondition *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&NodeRequestCondition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&NodeRequestCondition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 4825
@@ -8382,16 +8382,16 @@ void __fastcall NodeRequestAnyCondition::NodeRequestAnyCondition(NodeRequestAnyC
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&NodeRequestAnyCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&NodeRequestAnyCondition::`vftable;
 }
 
 // File Line: 4866
 // RVA: 0x3397C0
 void __fastcall NodeRequestAnyCondition::~NodeRequestAnyCondition(NodeRequestAnyCondition *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&NodeRequestAnyCondition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&NodeRequestAnyCondition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 4871
@@ -8436,16 +8436,16 @@ void __fastcall LeaderHasFollowersCondition::LeaderHasFollowersCondition(LeaderH
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&LeaderHasFollowersCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&LeaderHasFollowersCondition::`vftable;
 }
 
 // File Line: 4910
 // RVA: 0x3390E0
 void __fastcall LeaderHasFollowersCondition::~LeaderHasFollowersCondition(LeaderHasFollowersCondition *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&LeaderHasFollowersCondition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&LeaderHasFollowersCondition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 4915
@@ -8633,7 +8633,7 @@ void __fastcall AICoverIsValidCondition::AICoverIsValidCondition(AICoverIsValidC
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AICoverIsValidCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AICoverIsValidCondition::`vftable;
   v1->m_iTargetType = 0;
   v1->m_fMinDistance = 5.0;
   v1->m_fFacingAngle = 1.0471976;
@@ -8643,9 +8643,9 @@ void __fastcall AICoverIsValidCondition::AICoverIsValidCondition(AICoverIsValidC
 // RVA: 0x333E70
 void __fastcall AICoverIsValidCondition::~AICoverIsValidCondition(AICoverIsValidCondition *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&AICoverIsValidCondition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&AICoverIsValidCondition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 4988
@@ -8768,16 +8768,16 @@ void __fastcall AICoverTargetIsLatched::AICoverTargetIsLatched(AICoverTargetIsLa
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AICoverTargetIsLatched::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AICoverTargetIsLatched::`vftable;
 }
 
 // File Line: 5048
 // RVA: 0x334280
 void __fastcall AICoverTargetIsLatched::~AICoverTargetIsLatched(AICoverTargetIsLatched *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&AICoverTargetIsLatched::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&AICoverTargetIsLatched::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 5052
@@ -8883,7 +8883,7 @@ void __fastcall AICoverFiringPositionClear::AICoverFiringPositionClear(AICoverFi
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AICoverFiringPositionClear::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AICoverFiringPositionClear::`vftable;
   *(_WORD *)&v1->m_Left = 0;
   v1->m_Top = 0;
 }
@@ -8892,9 +8892,9 @@ void __fastcall AICoverFiringPositionClear::AICoverFiringPositionClear(AICoverFi
 // RVA: 0x333E30
 void __fastcall AICoverFiringPositionClear::~AICoverFiringPositionClear(AICoverFiringPositionClear *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&AICoverFiringPositionClear::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&AICoverFiringPositionClear::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 5104
@@ -8965,7 +8965,7 @@ void __fastcall IsClosestFormationMemberCondition::IsClosestFormationMemberCondi
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IsClosestFormationMemberCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&IsClosestFormationMemberCondition::`vftable;
   v1->m_TargetType.mValue = 22;
 }
 
@@ -8973,9 +8973,9 @@ void __fastcall IsClosestFormationMemberCondition::IsClosestFormationMemberCondi
 // RVA: 0x338F10
 void __fastcall IsClosestFormationMemberCondition::~IsClosestFormationMemberCondition(IsClosestFormationMemberCondition *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&IsClosestFormationMemberCondition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&IsClosestFormationMemberCondition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 5175
@@ -9155,7 +9155,7 @@ void __fastcall IsClosestGroupMemberCondition::IsClosestGroupMemberCondition(IsC
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IsClosestGroupMemberCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&IsClosestGroupMemberCondition::`vftable;
   *(_WORD *)&v1->m_TargetType.mValue = 22;
   v1->m_ExcludeTarget2.mValue = 0;
 }
@@ -9164,9 +9164,9 @@ void __fastcall IsClosestGroupMemberCondition::IsClosestGroupMemberCondition(IsC
 // RVA: 0x338F50
 void __fastcall IsClosestGroupMemberCondition::~IsClosestGroupMemberCondition(IsClosestGroupMemberCondition *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&IsClosestGroupMemberCondition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&IsClosestGroupMemberCondition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 5266
@@ -9320,9 +9320,9 @@ void __fastcall SelectSuitableVehicleCondition::SelectSuitableVehicleCondition(S
   v3 = (UFG::qNode<IConditionInit,IConditionInit> *)&v1->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (IConditionInitVtbl *)&IConditionInit::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SelectSuitableVehicleCondition::`vftable'{for `Condition'};
-  v2->vfptr = (IConditionInitVtbl *)&SelectSuitableVehicleCondition::`vftable'{for `IConditionInit'};
+  v2->vfptr = (IConditionInitVtbl *)&IConditionInit::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&SelectSuitableVehicleCondition::`vftable{for `Condition};
+  v2->vfptr = (IConditionInitVtbl *)&SelectSuitableVehicleCondition::`vftable{for `IConditionInit};
   v1->m_TimeBeforeReset = 3.0;
   v1->m_MinTimeBetweenUpdates = 0.25;
   v1->m_MaxTimeBetweenUpdates = 0.75;
@@ -9345,8 +9345,8 @@ void __fastcall SelectSuitableVehicleCondition::~SelectSuitableVehicleCondition(
   UFG::qNode<IConditionInit,IConditionInit> *v4; // rax
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&SelectSuitableVehicleCondition::`vftable'{for `Condition'};
-  this->vfptr = (IConditionInitVtbl *)&SelectSuitableVehicleCondition::`vftable'{for `IConditionInit'};
+  this->vfptr = (Expression::IMemberMapVtbl *)&SelectSuitableVehicleCondition::`vftable{for `Condition};
+  this->vfptr = (IConditionInitVtbl *)&SelectSuitableVehicleCondition::`vftable{for `IConditionInit};
   v2 = (UFG::qNode<IConditionInit,IConditionInit> *)&this->mPrev;
   v3 = this->mPrev;
   v4 = v2->mNext;
@@ -9354,8 +9354,8 @@ void __fastcall SelectSuitableVehicleCondition::~SelectSuitableVehicleCondition(
   v4->mPrev = v3;
   v2->mPrev = v2;
   v2->mNext = v2;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 5352
@@ -9779,16 +9779,16 @@ void __fastcall ScriptFakeHasHostageCondition::ScriptFakeHasHostageCondition(Scr
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ScriptFakeHasHostageCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ScriptFakeHasHostageCondition::`vftable;
 }
 
 // File Line: 5534
 // RVA: 0x33A9F0
 void __fastcall ScriptFakeHasHostageCondition::~ScriptFakeHasHostageCondition(ScriptFakeHasHostageCondition *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&ScriptFakeHasHostageCondition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&ScriptFakeHasHostageCondition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 5539
@@ -9833,7 +9833,7 @@ void __fastcall TargetVisibleInAIDataCondition::TargetVisibleInAIDataCondition(T
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetVisibleInAIDataCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetVisibleInAIDataCondition::`vftable;
   *(_WORD *)&v1->m_TargetType.mValue = 278;
   v1->m_MyRoot.mOffset = 0i64;
   v1->m_MinTimeBetweenChecks = 0.2;
@@ -9845,9 +9845,9 @@ void __fastcall TargetVisibleInAIDataCondition::TargetVisibleInAIDataCondition(T
 // RVA: 0x33B6B0
 void __fastcall TargetVisibleInAIDataCondition::~TargetVisibleInAIDataCondition(TargetVisibleInAIDataCondition *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&TargetVisibleInAIDataCondition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&TargetVisibleInAIDataCondition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 5588
@@ -10228,7 +10228,7 @@ void __fastcall TargetIsEnemyOfMineCondition::TargetIsEnemyOfMineCondition(Targe
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetIsEnemyOfMineCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetIsEnemyOfMineCondition::`vftable;
   v1->m_TargetType.mValue = 22;
 }
 
@@ -10236,9 +10236,9 @@ void __fastcall TargetIsEnemyOfMineCondition::TargetIsEnemyOfMineCondition(Targe
 // RVA: 0x33B670
 void __fastcall TargetIsEnemyOfMineCondition::~TargetIsEnemyOfMineCondition(TargetIsEnemyOfMineCondition *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&TargetIsEnemyOfMineCondition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&TargetIsEnemyOfMineCondition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 5724
@@ -10363,16 +10363,16 @@ void __fastcall CombatRegionExistsCondition::CombatRegionExistsCondition(CombatR
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CombatRegionExistsCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CombatRegionExistsCondition::`vftable;
 }
 
 // File Line: 5759
 // RVA: 0x335C60
 void __fastcall CombatRegionExistsCondition::~CombatRegionExistsCondition(CombatRegionExistsCondition *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&CombatRegionExistsCondition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&CombatRegionExistsCondition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 5763
@@ -10423,16 +10423,16 @@ void __fastcall CombatRegionIsInsideCondition::CombatRegionIsInsideCondition(Com
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CombatRegionIsInsideCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CombatRegionIsInsideCondition::`vftable;
 }
 
 // File Line: 5795
 // RVA: 0x335CA0
 void __fastcall CombatRegionIsInsideCondition::~CombatRegionIsInsideCondition(CombatRegionIsInsideCondition *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&CombatRegionIsInsideCondition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&CombatRegionIsInsideCondition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 5799
@@ -10522,7 +10522,7 @@ void __fastcall CombatRegionTargetIsInsideCondition::CombatRegionTargetIsInsideC
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CombatRegionTargetIsInsideCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CombatRegionTargetIsInsideCondition::`vftable;
   v1->m_TargetType.mValue = 22;
   v1->m_FixZForCharacter = 1;
 }
@@ -10531,9 +10531,9 @@ void __fastcall CombatRegionTargetIsInsideCondition::CombatRegionTargetIsInsideC
 // RVA: 0x335CE0
 void __fastcall CombatRegionTargetIsInsideCondition::~CombatRegionTargetIsInsideCondition(CombatRegionTargetIsInsideCondition *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&CombatRegionTargetIsInsideCondition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&CombatRegionTargetIsInsideCondition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 5851
@@ -10687,16 +10687,16 @@ void __fastcall IsInCrosswalkCondition::IsInCrosswalkCondition(IsInCrosswalkCond
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IsInCrosswalkCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&IsInCrosswalkCondition::`vftable;
 }
 
 // File Line: 5912
 // RVA: 0x338F90
 void __fastcall IsInCrosswalkCondition::~IsInCrosswalkCondition(IsInCrosswalkCondition *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&IsInCrosswalkCondition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&IsInCrosswalkCondition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 5916
@@ -10787,7 +10787,7 @@ void __fastcall AttackRequestCanceledCondition::AttackRequestCanceledCondition(A
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AttackRequestCanceledCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AttackRequestCanceledCondition::`vftable;
   v1->m_AttackType.mValue = 0;
 }
 
@@ -10795,9 +10795,9 @@ void __fastcall AttackRequestCanceledCondition::AttackRequestCanceledCondition(A
 // RVA: 0x335330
 void __fastcall AttackRequestCanceledCondition::~AttackRequestCanceledCondition(AttackRequestCanceledCondition *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&AttackRequestCanceledCondition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&AttackRequestCanceledCondition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 5980
@@ -10847,16 +10847,16 @@ void __fastcall HasAIDriverCondition::HasAIDriverCondition(HasAIDriverCondition 
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&HasAIDriverCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&HasAIDriverCondition::`vftable;
 }
 
 // File Line: 6013
 // RVA: 0x338150
 void __fastcall HasAIDriverCondition::~HasAIDriverCondition(HasAIDriverCondition *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&HasAIDriverCondition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&HasAIDriverCondition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 6018
@@ -10905,7 +10905,7 @@ void __fastcall DriverFlagAvoidPedsCondition::DriverFlagAvoidPedsCondition(Drive
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DriverFlagAvoidPedsCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&DriverFlagAvoidPedsCondition::`vftable;
   v1->m_FlagSet = 1;
 }
 
@@ -10913,9 +10913,9 @@ void __fastcall DriverFlagAvoidPedsCondition::DriverFlagAvoidPedsCondition(Drive
 // RVA: 0x336330
 void __fastcall DriverFlagAvoidPedsCondition::~DriverFlagAvoidPedsCondition(DriverFlagAvoidPedsCondition *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&DriverFlagAvoidPedsCondition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&DriverFlagAvoidPedsCondition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 6054
@@ -10962,7 +10962,7 @@ void __fastcall DriverFlagAllowedToPassCondition::DriverFlagAllowedToPassConditi
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DriverFlagAllowedToPassCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&DriverFlagAllowedToPassCondition::`vftable;
   v1->m_FlagSet = 1;
 }
 
@@ -10970,9 +10970,9 @@ void __fastcall DriverFlagAllowedToPassCondition::DriverFlagAllowedToPassConditi
 // RVA: 0x3362F0
 void __fastcall DriverFlagAllowedToPassCondition::~DriverFlagAllowedToPassCondition(DriverFlagAllowedToPassCondition *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&DriverFlagAllowedToPassCondition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&DriverFlagAllowedToPassCondition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 6094
@@ -11019,7 +11019,7 @@ void __fastcall DriverFlagStayOffSidewalkCondition::DriverFlagStayOffSidewalkCon
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DriverFlagStayOffSidewalkCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&DriverFlagStayOffSidewalkCondition::`vftable;
   v1->m_FlagSet = 1;
 }
 
@@ -11027,9 +11027,9 @@ void __fastcall DriverFlagStayOffSidewalkCondition::DriverFlagStayOffSidewalkCon
 // RVA: 0x3363B0
 void __fastcall DriverFlagStayOffSidewalkCondition::~DriverFlagStayOffSidewalkCondition(DriverFlagStayOffSidewalkCondition *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&DriverFlagStayOffSidewalkCondition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&DriverFlagStayOffSidewalkCondition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 6134
@@ -11076,7 +11076,7 @@ void __fastcall DriverFlagRespectSpeedLimitCondition::DriverFlagRespectSpeedLimi
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DriverFlagRespectSpeedLimitCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&DriverFlagRespectSpeedLimitCondition::`vftable;
   v1->m_FlagSet = 1;
 }
 
@@ -11084,9 +11084,9 @@ void __fastcall DriverFlagRespectSpeedLimitCondition::DriverFlagRespectSpeedLimi
 // RVA: 0x336370
 void __fastcall DriverFlagRespectSpeedLimitCondition::~DriverFlagRespectSpeedLimitCondition(DriverFlagRespectSpeedLimitCondition *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&DriverFlagRespectSpeedLimitCondition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&DriverFlagRespectSpeedLimitCondition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 6174
@@ -11133,7 +11133,7 @@ void __fastcall TargetDistanceRelativeDesiredRangeCondition::TargetDistanceRelat
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetDistanceRelativeDesiredRangeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TargetDistanceRelativeDesiredRangeCondition::`vftable;
   v1->m_eTargetType.mValue = 22;
   *(_QWORD *)&v1->m_eInEqualityOperator.mValue = 3i64;
   v1->m_fBuffer = 0.0;

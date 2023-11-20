@@ -62,7 +62,7 @@ void __fastcall UFG::UIMapBlipGraphic::UIMapBlipGraphic(UFG::UIMapBlipGraphic *t
   this->mAnimateBlink = 0;
   *(_QWORD *)&this->mBlinkScale = 1065353216i64;
   this->mBlinkTimesMax = 5;
-  this->vfptr = (UFG::UIMapBlipGraphicVtbl *)&UFG::UIMapBlipGraphic::`vftable';
+  this->vfptr = (UFG::UIMapBlipGraphicVtbl *)&UFG::UIMapBlipGraphic::`vftable;
   v1 = &this->mIconPoly;
   v1->Size = 10.0;
   v1->Matrix = 0i64;
@@ -84,7 +84,7 @@ void __fastcall UFG::UIMapBlipGraphic::~UIMapBlipGraphic(UFG::UIMapBlipGraphic *
 
   v1 = (void **)&this->mPolys[1];
   v2 = 4i64;
-  this->vfptr = (UFG::UIMapBlipGraphicVtbl *)&UFG::UIMapBlipGraphic::`vftable';
+  this->vfptr = (UFG::UIMapBlipGraphicVtbl *)&UFG::UIMapBlipGraphic::`vftable;
   do
   {
     if ( *v1 )
@@ -935,7 +935,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
     v6 = (UFG::UIMapBlipGraphic *)v10;
     if ( v10 )
     {
-      *(_QWORD *)v10 = &UFG::UIMapBlipGraphic::`vftable';
+      *(_QWORD *)v10 = &UFG::UIMapBlipGraphic::`vftable;
       v10[8] = 0;
       *(_QWORD *)(v10 + 12) = 1065353216i64;
       *((_DWORD *)v10 + 5) = 5;
@@ -1004,7 +1004,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
       v6 = (UFG::UIMapBlipGraphic *)v20;
       if ( v20 )
       {
-        *(_QWORD *)v20 = &UFG::UIMapBlipGraphic::`vftable';
+        *(_QWORD *)v20 = &UFG::UIMapBlipGraphic::`vftable;
         v20[8] = 0;
         *(_QWORD *)(v20 + 12) = 1065353216i64;
         *((_DWORD *)v20 + 5) = 5;
@@ -1033,7 +1033,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
         v6 = (UFG::UIMapBlipGraphic *)v22;
         if ( v22 )
         {
-          *(_QWORD *)v22 = &UFG::UIMapBlipGraphic::`vftable';
+          *(_QWORD *)v22 = &UFG::UIMapBlipGraphic::`vftable;
           v22[8] = 0;
           *(_QWORD *)(v22 + 12) = 1065353216i64;
           *((_DWORD *)v22 + 5) = 5;
@@ -1062,7 +1062,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
         v6 = (UFG::UIMapBlipGraphic *)v25;
         if ( v25 )
         {
-          *(_QWORD *)v25 = &UFG::UIMapBlipGraphic::`vftable';
+          *(_QWORD *)v25 = &UFG::UIMapBlipGraphic::`vftable;
           v25[8] = 0;
           *(_QWORD *)(v25 + 12) = 1065353216i64;
           *((_DWORD *)v25 + 5) = 5;
@@ -1123,7 +1123,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
         v6 = (UFG::UIMapBlipGraphic *)v31;
         if ( v31 )
         {
-          *(_QWORD *)v31 = &UFG::UIMapBlipGraphic::`vftable';
+          *(_QWORD *)v31 = &UFG::UIMapBlipGraphic::`vftable;
           v31[8] = 0;
           *(_QWORD *)(v31 + 12) = 1065353216i64;
           *((_DWORD *)v31 + 5) = 5;
@@ -1152,7 +1152,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
         v6 = (UFG::UIMapBlipGraphic *)v33;
         if ( v33 )
         {
-          *(_QWORD *)v33 = &UFG::UIMapBlipGraphic::`vftable';
+          *(_QWORD *)v33 = &UFG::UIMapBlipGraphic::`vftable;
           v33[8] = 0;
           *(_QWORD *)(v33 + 12) = 1065353216i64;
           *((_DWORD *)v33 + 5) = 5;
@@ -1181,7 +1181,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
         v6 = (UFG::UIMapBlipGraphic *)v35;
         if ( v35 )
         {
-          *(_QWORD *)v35 = &UFG::UIMapBlipGraphic::`vftable';
+          *(_QWORD *)v35 = &UFG::UIMapBlipGraphic::`vftable;
           v35[8] = 0;
           *(_QWORD *)(v35 + 12) = 1065353216i64;
           *((_DWORD *)v35 + 5) = 5;
@@ -1210,7 +1210,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
         v6 = (UFG::UIMapBlipGraphic *)v37;
         if ( v37 )
         {
-          *(_QWORD *)v37 = &UFG::UIMapBlipGraphic::`vftable';
+          *(_QWORD *)v37 = &UFG::UIMapBlipGraphic::`vftable;
           v37[8] = 0;
           *(_QWORD *)(v37 + 12) = 1065353216i64;
           *((_DWORD *)v37 + 5) = 5;
@@ -1239,7 +1239,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
         v6 = (UFG::UIMapBlipGraphic *)v39;
         if ( v39 )
         {
-          *(_QWORD *)v39 = &UFG::UIMapBlipGraphic::`vftable';
+          *(_QWORD *)v39 = &UFG::UIMapBlipGraphic::`vftable;
           v39[8] = 0;
           *(_QWORD *)(v39 + 12) = 1065353216i64;
           *((_DWORD *)v39 + 5) = 5;
@@ -1268,7 +1268,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
         v6 = (UFG::UIMapBlipGraphic *)v41;
         if ( v41 )
         {
-          *(_QWORD *)v41 = &UFG::UIMapBlipGraphic::`vftable';
+          *(_QWORD *)v41 = &UFG::UIMapBlipGraphic::`vftable;
           v41[8] = 0;
           *(_QWORD *)(v41 + 12) = 1065353216i64;
           *((_DWORD *)v41 + 5) = 5;
@@ -1313,7 +1313,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
         v6 = (UFG::UIMapBlipGraphic *)v45;
         if ( v45 )
         {
-          *(_QWORD *)v45 = &UFG::UIMapBlipGraphic::`vftable';
+          *(_QWORD *)v45 = &UFG::UIMapBlipGraphic::`vftable;
           v45[8] = 0;
           *(_QWORD *)(v45 + 12) = 1065353216i64;
           *((_DWORD *)v45 + 5) = 5;
@@ -1342,7 +1342,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
         v6 = (UFG::UIMapBlipGraphic *)v47;
         if ( v47 )
         {
-          *(_QWORD *)v47 = &UFG::UIMapBlipGraphic::`vftable';
+          *(_QWORD *)v47 = &UFG::UIMapBlipGraphic::`vftable;
           v47[8] = 0;
           *(_QWORD *)(v47 + 12) = 1065353216i64;
           *((_DWORD *)v47 + 5) = 5;
@@ -1371,7 +1371,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
         v6 = (UFG::UIMapBlipGraphic *)v49;
         if ( v49 )
         {
-          *(_QWORD *)v49 = &UFG::UIMapBlipGraphic::`vftable';
+          *(_QWORD *)v49 = &UFG::UIMapBlipGraphic::`vftable;
           v49[8] = 0;
           *(_QWORD *)(v49 + 12) = 1065353216i64;
           *((_DWORD *)v49 + 5) = 5;
@@ -1400,7 +1400,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
         v6 = (UFG::UIMapBlipGraphic *)v51;
         if ( v51 )
         {
-          *(_QWORD *)v51 = &UFG::UIMapBlipGraphic::`vftable';
+          *(_QWORD *)v51 = &UFG::UIMapBlipGraphic::`vftable;
           v51[8] = 0;
           *(_QWORD *)(v51 + 12) = 1065353216i64;
           *((_DWORD *)v51 + 5) = 5;
@@ -1429,7 +1429,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
         v6 = (UFG::UIMapBlipGraphic *)v53;
         if ( v53 )
         {
-          *(_QWORD *)v53 = &UFG::UIMapBlipGraphic::`vftable';
+          *(_QWORD *)v53 = &UFG::UIMapBlipGraphic::`vftable;
           v53[8] = 0;
           *(_QWORD *)(v53 + 12) = 1065353216i64;
           *((_DWORD *)v53 + 5) = 5;
@@ -1458,7 +1458,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
         v6 = (UFG::UIMapBlipGraphic *)v55;
         if ( v55 )
         {
-          *(_QWORD *)v55 = &UFG::UIMapBlipGraphic::`vftable';
+          *(_QWORD *)v55 = &UFG::UIMapBlipGraphic::`vftable;
           v55[8] = 0;
           *(_QWORD *)(v55 + 12) = 1065353216i64;
           *((_DWORD *)v55 + 5) = 5;
@@ -1487,7 +1487,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
         v6 = (UFG::UIMapBlipGraphic *)v57;
         if ( v57 )
         {
-          *(_QWORD *)v57 = &UFG::UIMapBlipGraphic::`vftable';
+          *(_QWORD *)v57 = &UFG::UIMapBlipGraphic::`vftable;
           v57[8] = 0;
           *(_QWORD *)(v57 + 12) = 1065353216i64;
           *((_DWORD *)v57 + 5) = 5;
@@ -1516,7 +1516,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
         v6 = (UFG::UIMapBlipGraphic *)v59;
         if ( v59 )
         {
-          *(_QWORD *)v59 = &UFG::UIMapBlipGraphic::`vftable';
+          *(_QWORD *)v59 = &UFG::UIMapBlipGraphic::`vftable;
           v59[8] = 0;
           *(_QWORD *)(v59 + 12) = 1065353216i64;
           *((_DWORD *)v59 + 5) = 5;
@@ -1545,7 +1545,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
         v6 = (UFG::UIMapBlipGraphic *)v61;
         if ( v61 )
         {
-          *(_QWORD *)v61 = &UFG::UIMapBlipGraphic::`vftable';
+          *(_QWORD *)v61 = &UFG::UIMapBlipGraphic::`vftable;
           v61[8] = 0;
           *(_QWORD *)(v61 + 12) = 1065353216i64;
           *((_DWORD *)v61 + 5) = 5;
@@ -1574,7 +1574,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
         v6 = (UFG::UIMapBlipGraphic *)v63;
         if ( v63 )
         {
-          *(_QWORD *)v63 = &UFG::UIMapBlipGraphic::`vftable';
+          *(_QWORD *)v63 = &UFG::UIMapBlipGraphic::`vftable;
           v63[8] = 0;
           *(_QWORD *)(v63 + 12) = 1065353216i64;
           *((_DWORD *)v63 + 5) = 5;
@@ -1603,7 +1603,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
         v6 = (UFG::UIMapBlipGraphic *)v65;
         if ( v65 )
         {
-          *(_QWORD *)v65 = &UFG::UIMapBlipGraphic::`vftable';
+          *(_QWORD *)v65 = &UFG::UIMapBlipGraphic::`vftable;
           v65[8] = 0;
           *(_QWORD *)(v65 + 12) = 1065353216i64;
           *((_DWORD *)v65 + 5) = 5;
@@ -1632,7 +1632,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
         v6 = (UFG::UIMapBlipGraphic *)v67;
         if ( v67 )
         {
-          *(_QWORD *)v67 = &UFG::UIMapBlipGraphic::`vftable';
+          *(_QWORD *)v67 = &UFG::UIMapBlipGraphic::`vftable;
           v67[8] = 0;
           *(_QWORD *)(v67 + 12) = 1065353216i64;
           *((_DWORD *)v67 + 5) = 5;
@@ -1661,7 +1661,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
         v6 = (UFG::UIMapBlipGraphic *)v69;
         if ( v69 )
         {
-          *(_QWORD *)v69 = &UFG::UIMapBlipGraphic::`vftable';
+          *(_QWORD *)v69 = &UFG::UIMapBlipGraphic::`vftable;
           v69[8] = 0;
           *(_QWORD *)(v69 + 12) = 1065353216i64;
           *((_DWORD *)v69 + 5) = 5;
@@ -1690,7 +1690,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
         v6 = (UFG::UIMapBlipGraphic *)v71;
         if ( v71 )
         {
-          *(_QWORD *)v71 = &UFG::UIMapBlipGraphic::`vftable';
+          *(_QWORD *)v71 = &UFG::UIMapBlipGraphic::`vftable;
           v71[8] = 0;
           *(_QWORD *)(v71 + 12) = 1065353216i64;
           *((_DWORD *)v71 + 5) = 5;
@@ -1719,7 +1719,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
         v6 = (UFG::UIMapBlipGraphic *)v73;
         if ( v73 )
         {
-          *(_QWORD *)v73 = &UFG::UIMapBlipGraphic::`vftable';
+          *(_QWORD *)v73 = &UFG::UIMapBlipGraphic::`vftable;
           v73[8] = 0;
           *(_QWORD *)(v73 + 12) = 1065353216i64;
           *((_DWORD *)v73 + 5) = 5;
@@ -1748,7 +1748,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
         v6 = (UFG::UIMapBlipGraphic *)v75;
         if ( v75 )
         {
-          *(_QWORD *)v75 = &UFG::UIMapBlipGraphic::`vftable';
+          *(_QWORD *)v75 = &UFG::UIMapBlipGraphic::`vftable;
           v75[8] = 0;
           *(_QWORD *)(v75 + 12) = 1065353216i64;
           *((_DWORD *)v75 + 5) = 5;
@@ -1777,7 +1777,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
         v6 = (UFG::UIMapBlipGraphic *)v77;
         if ( v77 )
         {
-          *(_QWORD *)v77 = &UFG::UIMapBlipGraphic::`vftable';
+          *(_QWORD *)v77 = &UFG::UIMapBlipGraphic::`vftable;
           v77[8] = 0;
           *(_QWORD *)(v77 + 12) = 1065353216i64;
           *((_DWORD *)v77 + 5) = 5;
@@ -1806,7 +1806,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
           v6 = (UFG::UIMapBlipGraphic *)v79;
           if ( v79 )
           {
-            *(_QWORD *)v79 = &UFG::UIMapBlipGraphic::`vftable';
+            *(_QWORD *)v79 = &UFG::UIMapBlipGraphic::`vftable;
             v79[8] = 0;
             *(_QWORD *)(v79 + 12) = 1065353216i64;
             *((_DWORD *)v79 + 5) = 5;
@@ -1835,7 +1835,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
           v6 = (UFG::UIMapBlipGraphic *)v81;
           if ( v81 )
           {
-            *(_QWORD *)v81 = &UFG::UIMapBlipGraphic::`vftable';
+            *(_QWORD *)v81 = &UFG::UIMapBlipGraphic::`vftable;
             v81[8] = 0;
             *(_QWORD *)(v81 + 12) = 1065353216i64;
             *((_DWORD *)v81 + 5) = 5;
@@ -1864,7 +1864,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
           v6 = (UFG::UIMapBlipGraphic *)v83;
           if ( v83 )
           {
-            *(_QWORD *)v83 = &UFG::UIMapBlipGraphic::`vftable';
+            *(_QWORD *)v83 = &UFG::UIMapBlipGraphic::`vftable;
             v83[8] = 0;
             *(_QWORD *)(v83 + 12) = 1065353216i64;
             *((_DWORD *)v83 + 5) = 5;
@@ -1893,7 +1893,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
           v6 = (UFG::UIMapBlipGraphic *)v85;
           if ( v85 )
           {
-            *(_QWORD *)v85 = &UFG::UIMapBlipGraphic::`vftable';
+            *(_QWORD *)v85 = &UFG::UIMapBlipGraphic::`vftable;
             v85[8] = 0;
             *(_QWORD *)(v85 + 12) = 1065353216i64;
             *((_DWORD *)v85 + 5) = 5;
@@ -1919,7 +1919,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
           v6 = (UFG::UIMapBlipGraphic *)v87;
           if ( v87 )
           {
-            *(_QWORD *)v87 = &UFG::UIMapBlipGraphic::`vftable';
+            *(_QWORD *)v87 = &UFG::UIMapBlipGraphic::`vftable;
             v87[8] = 0;
             *(_QWORD *)(v87 + 12) = 1065353216i64;
             *((_DWORD *)v87 + 5) = 5;
@@ -2028,7 +2028,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
             v6 = (UFG::UIMapBlipGraphic *)v99;
             if ( v99 )
             {
-              *(_QWORD *)v99 = &UFG::UIMapBlipGraphic::`vftable';
+              *(_QWORD *)v99 = &UFG::UIMapBlipGraphic::`vftable;
               v99[8] = 0;
               *(_QWORD *)(v99 + 12) = 1065353216i64;
               *((_DWORD *)v99 + 5) = 5;
@@ -2056,7 +2056,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
             v6 = (UFG::UIMapBlipGraphic *)v101;
             if ( v101 )
             {
-              *(_QWORD *)v101 = &UFG::UIMapBlipGraphic::`vftable';
+              *(_QWORD *)v101 = &UFG::UIMapBlipGraphic::`vftable;
               v101[8] = 0;
               *(_QWORD *)(v101 + 12) = 1065353216i64;
               *((_DWORD *)v101 + 5) = 5;
@@ -2084,7 +2084,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
             v6 = (UFG::UIMapBlipGraphic *)v103;
             if ( v103 )
             {
-              *(_QWORD *)v103 = &UFG::UIMapBlipGraphic::`vftable';
+              *(_QWORD *)v103 = &UFG::UIMapBlipGraphic::`vftable;
               v103[8] = 0;
               *(_QWORD *)(v103 + 12) = 1065353216i64;
               *((_DWORD *)v103 + 5) = 5;
@@ -2112,7 +2112,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
             v6 = (UFG::UIMapBlipGraphic *)v105;
             if ( v105 )
             {
-              *(_QWORD *)v105 = &UFG::UIMapBlipGraphic::`vftable';
+              *(_QWORD *)v105 = &UFG::UIMapBlipGraphic::`vftable;
               v105[8] = 0;
               *(_QWORD *)(v105 + 12) = 1065353216i64;
               *((_DWORD *)v105 + 5) = 5;
@@ -2140,7 +2140,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
             v6 = (UFG::UIMapBlipGraphic *)v107;
             if ( v107 )
             {
-              *(_QWORD *)v107 = &UFG::UIMapBlipGraphic::`vftable';
+              *(_QWORD *)v107 = &UFG::UIMapBlipGraphic::`vftable;
               v107[8] = 0;
               *(_QWORD *)(v107 + 12) = 1065353216i64;
               *((_DWORD *)v107 + 5) = 5;
@@ -2168,7 +2168,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
             v6 = (UFG::UIMapBlipGraphic *)v109;
             if ( v109 )
             {
-              *(_QWORD *)v109 = &UFG::UIMapBlipGraphic::`vftable';
+              *(_QWORD *)v109 = &UFG::UIMapBlipGraphic::`vftable;
               v109[8] = 0;
               *(_QWORD *)(v109 + 12) = 1065353216i64;
               *((_DWORD *)v109 + 5) = 5;
@@ -2196,7 +2196,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
             v6 = (UFG::UIMapBlipGraphic *)v111;
             if ( v111 )
             {
-              *(_QWORD *)v111 = &UFG::UIMapBlipGraphic::`vftable';
+              *(_QWORD *)v111 = &UFG::UIMapBlipGraphic::`vftable;
               v111[8] = 0;
               *(_QWORD *)(v111 + 12) = 1065353216i64;
               *((_DWORD *)v111 + 5) = 5;
@@ -2224,7 +2224,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
             v6 = (UFG::UIMapBlipGraphic *)v113;
             if ( v113 )
             {
-              *(_QWORD *)v113 = &UFG::UIMapBlipGraphic::`vftable';
+              *(_QWORD *)v113 = &UFG::UIMapBlipGraphic::`vftable;
               v113[8] = 0;
               *(_QWORD *)(v113 + 12) = 1065353216i64;
               *((_DWORD *)v113 + 5) = 5;
@@ -2252,7 +2252,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
             v6 = (UFG::UIMapBlipGraphic *)v115;
             if ( v115 )
             {
-              *(_QWORD *)v115 = &UFG::UIMapBlipGraphic::`vftable';
+              *(_QWORD *)v115 = &UFG::UIMapBlipGraphic::`vftable;
               v115[8] = 0;
               *(_QWORD *)(v115 + 12) = 1065353216i64;
               *((_DWORD *)v115 + 5) = 5;
@@ -2281,7 +2281,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
             v6 = (UFG::UIMapBlipGraphic *)v117;
             if ( v117 )
             {
-              *(_QWORD *)v117 = &UFG::UIMapBlipGraphic::`vftable';
+              *(_QWORD *)v117 = &UFG::UIMapBlipGraphic::`vftable;
               v117[8] = 0;
               *(_QWORD *)(v117 + 12) = 1065353216i64;
               *((_DWORD *)v117 + 5) = 5;
@@ -2310,7 +2310,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
             v6 = (UFG::UIMapBlipGraphic *)v119;
             if ( v119 )
             {
-              *(_QWORD *)v119 = &UFG::UIMapBlipGraphic::`vftable';
+              *(_QWORD *)v119 = &UFG::UIMapBlipGraphic::`vftable;
               v119[8] = 0;
               *(_QWORD *)(v119 + 12) = 1065353216i64;
               *((_DWORD *)v119 + 5) = 5;
@@ -2338,7 +2338,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
             v6 = (UFG::UIMapBlipGraphic *)v121;
             if ( v121 )
             {
-              *(_QWORD *)v121 = &UFG::UIMapBlipGraphic::`vftable';
+              *(_QWORD *)v121 = &UFG::UIMapBlipGraphic::`vftable;
               v121[8] = 0;
               *(_QWORD *)(v121 + 12) = 1065353216i64;
               *((_DWORD *)v121 + 5) = 5;
@@ -2366,7 +2366,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
             v6 = (UFG::UIMapBlipGraphic *)v123;
             if ( v123 )
             {
-              *(_QWORD *)v123 = &UFG::UIMapBlipGraphic::`vftable';
+              *(_QWORD *)v123 = &UFG::UIMapBlipGraphic::`vftable;
               v123[8] = 0;
               *(_QWORD *)(v123 + 12) = 1065353216i64;
               *((_DWORD *)v123 + 5) = 5;
@@ -2395,7 +2395,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
             v6 = (UFG::UIMapBlipGraphic *)v125;
             if ( v125 )
             {
-              *(_QWORD *)v125 = &UFG::UIMapBlipGraphic::`vftable';
+              *(_QWORD *)v125 = &UFG::UIMapBlipGraphic::`vftable;
               v125[8] = 0;
               *(_QWORD *)(v125 + 12) = 1065353216i64;
               *((_DWORD *)v125 + 5) = 5;
@@ -2423,7 +2423,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
             v6 = (UFG::UIMapBlipGraphic *)v127;
             if ( v127 )
             {
-              *(_QWORD *)v127 = &UFG::UIMapBlipGraphic::`vftable';
+              *(_QWORD *)v127 = &UFG::UIMapBlipGraphic::`vftable;
               v127[8] = 0;
               *(_QWORD *)(v127 + 12) = 1065353216i64;
               *((_DWORD *)v127 + 5) = 5;
@@ -2452,7 +2452,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
             v6 = (UFG::UIMapBlipGraphic *)v129;
             if ( v129 )
             {
-              *(_QWORD *)v129 = &UFG::UIMapBlipGraphic::`vftable';
+              *(_QWORD *)v129 = &UFG::UIMapBlipGraphic::`vftable;
               v129[8] = 0;
               *(_QWORD *)(v129 + 12) = 1065353216i64;
               *((_DWORD *)v129 + 5) = 5;
@@ -2481,7 +2481,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
             v6 = (UFG::UIMapBlipGraphic *)v131;
             if ( v131 )
             {
-              *(_QWORD *)v131 = &UFG::UIMapBlipGraphic::`vftable';
+              *(_QWORD *)v131 = &UFG::UIMapBlipGraphic::`vftable;
               v131[8] = 0;
               *(_QWORD *)(v131 + 12) = 1065353216i64;
               *((_DWORD *)v131 + 5) = 5;
@@ -2510,7 +2510,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
             v6 = (UFG::UIMapBlipGraphic *)v133;
             if ( v133 )
             {
-              *(_QWORD *)v133 = &UFG::UIMapBlipGraphic::`vftable';
+              *(_QWORD *)v133 = &UFG::UIMapBlipGraphic::`vftable;
               v133[8] = 0;
               *(_QWORD *)(v133 + 12) = 1065353216i64;
               *((_DWORD *)v133 + 5) = 5;
@@ -2538,7 +2538,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
             v6 = (UFG::UIMapBlipGraphic *)v135;
             if ( v135 )
             {
-              *(_QWORD *)v135 = &UFG::UIMapBlipGraphic::`vftable';
+              *(_QWORD *)v135 = &UFG::UIMapBlipGraphic::`vftable;
               v135[8] = 0;
               *(_QWORD *)(v135 + 12) = 1065353216i64;
               *((_DWORD *)v135 + 5) = 5;
@@ -2567,7 +2567,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
             v6 = (UFG::UIMapBlipGraphic *)v137;
             if ( v137 )
             {
-              *(_QWORD *)v137 = &UFG::UIMapBlipGraphic::`vftable';
+              *(_QWORD *)v137 = &UFG::UIMapBlipGraphic::`vftable;
               v137[8] = 0;
               *(_QWORD *)(v137 + 12) = 1065353216i64;
               *((_DWORD *)v137 + 5) = 5;
@@ -2611,7 +2611,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
             v6 = (UFG::UIMapBlipGraphic *)v141;
             if ( v141 )
             {
-              *(_QWORD *)v141 = &UFG::UIMapBlipGraphic::`vftable';
+              *(_QWORD *)v141 = &UFG::UIMapBlipGraphic::`vftable;
               v141[8] = 0;
               *(_QWORD *)(v141 + 12) = 1065353216i64;
               *((_DWORD *)v141 + 5) = 5;
@@ -2640,7 +2640,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
             v6 = (UFG::UIMapBlipGraphic *)v143;
             if ( v143 )
             {
-              *(_QWORD *)v143 = &UFG::UIMapBlipGraphic::`vftable';
+              *(_QWORD *)v143 = &UFG::UIMapBlipGraphic::`vftable;
               v143[8] = 0;
               *(_QWORD *)(v143 + 12) = 1065353216i64;
               *((_DWORD *)v143 + 5) = 5;
@@ -2669,7 +2669,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
             v6 = (UFG::UIMapBlipGraphic *)v145;
             if ( v145 )
             {
-              *(_QWORD *)v145 = &UFG::UIMapBlipGraphic::`vftable';
+              *(_QWORD *)v145 = &UFG::UIMapBlipGraphic::`vftable;
               v145[8] = 0;
               *(_QWORD *)(v145 + 12) = 1065353216i64;
               *((_DWORD *)v145 + 5) = 5;
@@ -2697,7 +2697,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
             v6 = (UFG::UIMapBlipGraphic *)v147;
             if ( v147 )
             {
-              *(_QWORD *)v147 = &UFG::UIMapBlipGraphic::`vftable';
+              *(_QWORD *)v147 = &UFG::UIMapBlipGraphic::`vftable;
               v147[8] = 0;
               *(_QWORD *)(v147 + 12) = 1065353216i64;
               *((_DWORD *)v147 + 5) = 5;
@@ -2726,7 +2726,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
             v6 = (UFG::UIMapBlipGraphic *)v149;
             if ( v149 )
             {
-              *(_QWORD *)v149 = &UFG::UIMapBlipGraphic::`vftable';
+              *(_QWORD *)v149 = &UFG::UIMapBlipGraphic::`vftable;
               v149[8] = 0;
               *(_QWORD *)(v149 + 12) = 1065353216i64;
               *((_DWORD *)v149 + 5) = 5;
@@ -2755,7 +2755,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
             v6 = (UFG::UIMapBlipGraphic *)v151;
             if ( v151 )
             {
-              *(_QWORD *)v151 = &UFG::UIMapBlipGraphic::`vftable';
+              *(_QWORD *)v151 = &UFG::UIMapBlipGraphic::`vftable;
               v151[8] = 0;
               *(_QWORD *)(v151 + 12) = 1065353216i64;
               *((_DWORD *)v151 + 5) = 5;
@@ -2784,7 +2784,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
             v6 = (UFG::UIMapBlipGraphic *)v153;
             if ( v153 )
             {
-              *(_QWORD *)v153 = &UFG::UIMapBlipGraphic::`vftable';
+              *(_QWORD *)v153 = &UFG::UIMapBlipGraphic::`vftable;
               v153[8] = 0;
               *(_QWORD *)(v153 + 12) = 1065353216i64;
               *((_DWORD *)v153 + 5) = 5;
@@ -2813,7 +2813,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
             v6 = (UFG::UIMapBlipGraphic *)v155;
             if ( v155 )
             {
-              *(_QWORD *)v155 = &UFG::UIMapBlipGraphic::`vftable';
+              *(_QWORD *)v155 = &UFG::UIMapBlipGraphic::`vftable;
               v155[8] = 0;
               *(_QWORD *)(v155 + 12) = 1065353216i64;
               *((_DWORD *)v155 + 5) = 5;
@@ -2841,7 +2841,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
             v6 = (UFG::UIMapBlipGraphic *)v157;
             if ( v157 )
             {
-              *(_QWORD *)v157 = &UFG::UIMapBlipGraphic::`vftable';
+              *(_QWORD *)v157 = &UFG::UIMapBlipGraphic::`vftable;
               v157[8] = 0;
               *(_QWORD *)(v157 + 12) = 1065353216i64;
               *((_DWORD *)v157 + 5) = 5;
@@ -2870,7 +2870,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
             v6 = (UFG::UIMapBlipGraphic *)v159;
             if ( v159 )
             {
-              *(_QWORD *)v159 = &UFG::UIMapBlipGraphic::`vftable';
+              *(_QWORD *)v159 = &UFG::UIMapBlipGraphic::`vftable;
               v159[8] = 0;
               *(_QWORD *)(v159 + 12) = 1065353216i64;
               *((_DWORD *)v159 + 5) = 5;
@@ -2898,7 +2898,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
             v6 = (UFG::UIMapBlipGraphic *)v161;
             if ( v161 )
             {
-              *(_QWORD *)v161 = &UFG::UIMapBlipGraphic::`vftable';
+              *(_QWORD *)v161 = &UFG::UIMapBlipGraphic::`vftable;
               v161[8] = 0;
               *(_QWORD *)(v161 + 12) = 1065353216i64;
               *((_DWORD *)v161 + 5) = 5;
@@ -2927,7 +2927,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
             v6 = (UFG::UIMapBlipGraphic *)v163;
             if ( v163 )
             {
-              *(_QWORD *)v163 = &UFG::UIMapBlipGraphic::`vftable';
+              *(_QWORD *)v163 = &UFG::UIMapBlipGraphic::`vftable;
               v163[8] = 0;
               *(_QWORD *)(v163 + 12) = 1065353216i64;
               *((_DWORD *)v163 + 5) = 5;
@@ -2955,7 +2955,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
             v6 = (UFG::UIMapBlipGraphic *)v165;
             if ( v165 )
             {
-              *(_QWORD *)v165 = &UFG::UIMapBlipGraphic::`vftable';
+              *(_QWORD *)v165 = &UFG::UIMapBlipGraphic::`vftable;
               v165[8] = 0;
               *(_QWORD *)(v165 + 12) = 1065353216i64;
               *((_DWORD *)v165 + 5) = 5;
@@ -2984,7 +2984,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
             v6 = (UFG::UIMapBlipGraphic *)v167;
             if ( v167 )
             {
-              *(_QWORD *)v167 = &UFG::UIMapBlipGraphic::`vftable';
+              *(_QWORD *)v167 = &UFG::UIMapBlipGraphic::`vftable;
               v167[8] = 0;
               *(_QWORD *)(v167 + 12) = 1065353216i64;
               *((_DWORD *)v167 + 5) = 5;
@@ -3012,7 +3012,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
             v6 = (UFG::UIMapBlipGraphic *)v169;
             if ( v169 )
             {
-              *(_QWORD *)v169 = &UFG::UIMapBlipGraphic::`vftable';
+              *(_QWORD *)v169 = &UFG::UIMapBlipGraphic::`vftable;
               v169[8] = 0;
               *(_QWORD *)(v169 + 12) = 1065353216i64;
               *((_DWORD *)v169 + 5) = 5;
@@ -3040,7 +3040,7 @@ UFG::UIMapBlipGraphic *__fastcall UFG::UIMapBlipGraphicFactory::GetNativeIconIns
               v6 = (UFG::UIMapBlipGraphic *)v171;
               if ( v171 )
               {
-                *(_QWORD *)v171 = &UFG::UIMapBlipGraphic::`vftable';
+                *(_QWORD *)v171 = &UFG::UIMapBlipGraphic::`vftable;
                 v171[8] = 0;
                 *(_QWORD *)(v171 + 12) = 1065353216i64;
                 *((_DWORD *)v171 + 5) = 5;
@@ -3298,7 +3298,7 @@ LABEL_489:
   v6 = (UFG::UIMapBlipGraphic *)v15;
   if ( v15 )
   {
-    *(_QWORD *)v15 = &UFG::UIMapBlipGraphic::`vftable';
+    *(_QWORD *)v15 = &UFG::UIMapBlipGraphic::`vftable;
     v15[8] = 0;
     *(_QWORD *)(v15 + 12) = 1065353216i64;
     *((_DWORD *)v15 + 5) = 5;
@@ -3393,7 +3393,7 @@ LABEL_489:
   v6 = (UFG::UIMapBlipGraphic *)v15;
   if ( v15 )
   {
-    *(_QWORD *)v15 = &UFG::UIMapBlipGraphic::`vftable';
+    *(_QWORD *)v15 = &UFG::UIMapBlipGraphic::`vftable;
     v15[8] = 0;
     *(_QWORD *)(v15 + 12) = 1065353216i64;
     *((_DWORD *)v15 + 5) = 5;
@@ -3450,7 +3450,7 @@ void __fastcall UFG::UIMapBlipGraphicPlayerArrow::UIMapBlipGraphicPlayerArrow(UF
   char *v10; // [rsp+48h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (UFG::UIMapBlipGraphicVtbl *)&UFG::UIMapBlipGraphic::`vftable';
+  this->vfptr = (UFG::UIMapBlipGraphicVtbl *)&UFG::UIMapBlipGraphic::`vftable;
   this->mAnimateBlink = 0;
   *(_QWORD *)&this->mBlinkScale = 1065353216i64;
   this->mBlinkTimesMax = 5;
@@ -3464,7 +3464,7 @@ void __fastcall UFG::UIMapBlipGraphicPlayerArrow::UIMapBlipGraphicPlayerArrow(UF
   this->mPolys[2] = 0i64;
   this->mPolys[3] = 0i64;
   this->mPolys[4] = 0i64;
-  this->vfptr = (UFG::UIMapBlipGraphicVtbl *)&UFG::UIMapBlipGraphicPlayerArrow::`vftable';
+  this->vfptr = (UFG::UIMapBlipGraphicVtbl *)&UFG::UIMapBlipGraphicPlayerArrow::`vftable;
   if ( !this->mPolys[0] )
   {
     v7 = UFG::qMalloc(0x50ui64, "UIMapBlipGraphic::Quad", 0i64);

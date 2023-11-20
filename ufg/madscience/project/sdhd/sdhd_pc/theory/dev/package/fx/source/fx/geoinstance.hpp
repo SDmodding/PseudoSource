@@ -13,27 +13,27 @@ void __fastcall Render::GeoInstance::~GeoInstance(Render::GeoInstance *this)
   UFG::qNode<Render::FXComponentInstance,Render::FXComponentInstance> *v9; // rax
 
   v1 = this;
-  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::GeoInstance::`vftable';
+  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::GeoInstance::`vftable;
   v2 = (UFG::qResourceHandle *)&this->mModelHandle.mPrev;
-  v3 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  v3 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v4 = UFG::qResourceWarehouse::Instance();
     v3 = UFG::qResourceWarehouse::GetInventory(v4, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v3;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v3;
   }
   UFG::qResourceHandle::Close(v2, v3);
   UFG::qResourceHandle::~qResourceHandle(v2);
-  v5 = `UFG::qGetResourceInventory<Render::GeoSettings>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Render::GeoSettings>'::`2'::result )
+  v5 = `UFG::qGetResourceInventory<Render::GeoSettings>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Render::GeoSettings>::`2::result )
   {
     v6 = UFG::qResourceWarehouse::Instance();
     v5 = UFG::qResourceWarehouse::GetInventory(v6, 0xF1734D8E);
-    `UFG::qGetResourceInventory<Render::GeoSettings>'::`2'::result = v5;
+    `UFG::qGetResourceInventory<Render::GeoSettings>::`2::result = v5;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mSettingsHandle.mPrev, v5);
   UFG::qResourceHandle::~qResourceHandle((UFG::qResourceHandle *)&v1->mSettingsHandle.mPrev);
-  v1->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable';
+  v1->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable;
   v7 = (UFG::qNode<Render::FXComponentInstance,Render::FXComponentInstance> *)&v1->mPrev;
   v8 = v1->mPrev;
   v9 = v1->mNext;

@@ -105,7 +105,7 @@ void __fastcall UFG::BoostRegion::BoostRegion(UFG::BoostRegion *this, UFG::qSymb
   v5 = (UFG::qNode<UFG::BoostRegion,UFG::BoostRegion> *)&v4->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BoostRegion::`vftable';
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BoostRegion::`vftable;
   v7 = &v4->mTrackedObjects;
   v7->mNode.mPrev = &v7->mNode;
   v7->mNode.mNext = &v7->mNode;
@@ -175,7 +175,7 @@ void __fastcall UFG::BoostRegion::~BoostRegion(UFG::BoostRegion *this)
   UFG::qNode<UFG::BoostRegion,UFG::BoostRegion> *v10; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BoostRegion::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BoostRegion::`vftable;
   if ( this == UFG::BoostRegion::s_BoostRegionpCurrentIterator )
     UFG::BoostRegion::s_BoostRegionpCurrentIterator = (UFG::BoostRegion *)&this->mPrev[-7];
   v2 = (UFG::qNode<UFG::BoostRegion,UFG::BoostRegion> *)&this->mPrev;

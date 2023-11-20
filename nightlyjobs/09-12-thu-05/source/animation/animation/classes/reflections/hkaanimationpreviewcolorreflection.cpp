@@ -31,7 +31,7 @@ hkClass *__fastcall hkaAnimationPreviewColorContainer::staticClass()
 void __fastcall finishLoadedObjecthkaAnimationPreviewColorContainer(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaAnimationPreviewColorContainer::`vftable';
+    *(_QWORD *)p = &hkaAnimationPreviewColorContainer::`vftable;
 }
 
 // File Line: 68
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkaAnimationPreviewColorContainer(void *p)
 // RVA: 0xB1D160
 void **__fastcall getVtablehkaAnimationPreviewColorContainer()
 {
-  return &hkaAnimationPreviewColorContainer::`vftable';
+  return &hkaAnimationPreviewColorContainer::`vftable;
 }
 
 // File Line: 94

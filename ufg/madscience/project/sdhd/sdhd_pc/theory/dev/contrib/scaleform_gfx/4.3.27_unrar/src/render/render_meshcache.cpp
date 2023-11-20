@@ -1161,10 +1161,10 @@ void __fastcall Scaleform::Render::MeshCache::MeshCache(Scaleform::Render::MeshC
 {
   Scaleform::Render::MeshStagingNode *v3; // rax
 
-  this->vfptr = (Scaleform::Render::CacheBaseVtbl *)&Scaleform::Render::CacheBase::`vftable';
-  this->vfptr = (Scaleform::Render::MeshCacheConfigVtbl *)&Scaleform::Render::MeshCacheConfig::`vftable';
-  this->vfptr = (Scaleform::Render::CacheBaseVtbl *)&Scaleform::Render::MeshCache::`vftable'{for `Scaleform::Render::CacheBase'};
-  this->vfptr = (Scaleform::Render::MeshCacheConfigVtbl *)&Scaleform::Render::MeshCache::`vftable'{for `Scaleform::Render::MeshCacheConfig'};
+  this->vfptr = (Scaleform::Render::CacheBaseVtbl *)&Scaleform::Render::CacheBase::`vftable;
+  this->vfptr = (Scaleform::Render::MeshCacheConfigVtbl *)&Scaleform::Render::MeshCacheConfig::`vftable;
+  this->vfptr = (Scaleform::Render::CacheBaseVtbl *)&Scaleform::Render::MeshCache::`vftable{for `Scaleform::Render::CacheBase};
+  this->vfptr = (Scaleform::Render::MeshCacheConfigVtbl *)&Scaleform::Render::MeshCache::`vftable{for `Scaleform::Render::MeshCacheConfig};
   this->pHeap = pheap;
   this->pRQCaches = 0i64;
   this->Params.MemReserve = params->MemReserve;
@@ -1197,12 +1197,12 @@ void __fastcall Scaleform::Render::MeshCache::~MeshCache(Scaleform::Render::Mesh
   Scaleform::Render::MeshCache *v1; // rbx
 
   v1 = this;
-  this->vfptr = (Scaleform::Render::CacheBaseVtbl *)&Scaleform::Render::MeshCache::`vftable'{for `Scaleform::Render::CacheBase'};
-  this->vfptr = (Scaleform::Render::MeshCacheConfigVtbl *)&Scaleform::Render::MeshCache::`vftable'{for `Scaleform::Render::MeshCacheConfig'};
+  this->vfptr = (Scaleform::Render::CacheBaseVtbl *)&Scaleform::Render::MeshCache::`vftable{for `Scaleform::Render::CacheBase};
+  this->vfptr = (Scaleform::Render::MeshCacheConfigVtbl *)&Scaleform::Render::MeshCache::`vftable{for `Scaleform::Render::MeshCacheConfig};
   Scaleform::HashSet<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::AllocatorLH<Scaleform::Render::GradientImage *,2>,Scaleform::HashsetCachedEntry<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor>>::~HashSet<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::AllocatorLH<Scaleform::Render::GradientImage *,2>,Scaleform::HashsetCachedEntry<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor>>((Scaleform::HashSet<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor> > *)&this->BatchCacheItemHash);
   Scaleform::Render::MeshStagingBuffer::Reset(&v1->StagingBuffer);
-  v1->vfptr = (Scaleform::Render::MeshCacheConfigVtbl *)&Scaleform::Render::MeshCacheConfig::`vftable';
-  v1->vfptr = (Scaleform::Render::CacheBaseVtbl *)&Scaleform::Render::CacheBase::`vftable';
+  v1->vfptr = (Scaleform::Render::MeshCacheConfigVtbl *)&Scaleform::Render::MeshCacheConfig::`vftable;
+  v1->vfptr = (Scaleform::Render::CacheBaseVtbl *)&Scaleform::Render::CacheBase::`vftable;
 }
 
 // File Line: 884
@@ -1238,7 +1238,7 @@ Scaleform::Render::MeshCache::MeshResult *__fastcall Scaleform::Render::MeshCach
   __int64 v18; // [rsp+80h] [rbp-18h]
 
   v7 = result;
-  v9 = &Scaleform::Render::MeshVertexOutput::`vftable';
+  v9 = &Scaleform::Render::MeshVertexOutput::`vftable;
   v10 = this;
   v11 = waitForCache;
   v12 = mesh;
@@ -1281,7 +1281,7 @@ char __fastcall Scaleform::Render::MeshCache::PrepareComplexMesh(Scaleform::Rend
     if ( !mesh->pCacheMeshItem )
     {
       v5 = mesh->pFillManager->pHAL;
-      v8 = &Scaleform::Render::ComplexMeshVertexOutput::`vftable';
+      v8 = &Scaleform::Render::ComplexMeshVertexOutput::`vftable;
       v9 = mesh;
       v10 = v4;
       v11 = v5;
@@ -1297,7 +1297,7 @@ char __fastcall Scaleform::Render::MeshCache::PrepareComplexMesh(Scaleform::Rend
       if ( !v13 )
       {
 LABEL_7:
-        v8 = &Scaleform::Render::VertexOutput::`vftable';
+        v8 = &Scaleform::Render::VertexOutput::`vftable;
         return result;
       }
       if ( v13 != 3 )
@@ -1305,7 +1305,7 @@ LABEL_7:
         result = 1;
         goto LABEL_7;
       }
-      v8 = &Scaleform::Render::VertexOutput::`vftable';
+      v8 = &Scaleform::Render::VertexOutput::`vftable;
     }
     v7 = v3->pCacheMeshItem;
     if ( v7 )

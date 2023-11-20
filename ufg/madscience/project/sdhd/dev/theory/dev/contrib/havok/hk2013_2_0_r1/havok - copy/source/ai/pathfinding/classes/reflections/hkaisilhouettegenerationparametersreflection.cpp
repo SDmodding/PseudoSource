@@ -84,7 +84,7 @@ hkClass *__fastcall hkaiSilhouetteMerger::staticClass()
 void __fastcall finishLoadedObjecthkaiSilhouetteMerger(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiSilhouetteMerger::`vftable';
+    *(_QWORD *)p = &hkaiSilhouetteMerger::`vftable;
 }
 
 // File Line: 142
@@ -98,7 +98,7 @@ void __fastcall cleanupLoadedObjecthkaiSilhouetteMerger(void *p)
 // RVA: 0xBB61B0
 void **__fastcall getVtablehkaiSilhouetteMerger()
 {
-  return &hkaiSilhouetteMerger::`vftable';
+  return &hkaiSilhouetteMerger::`vftable;
 }
 
 // File Line: 168
@@ -150,7 +150,7 @@ hkClass *__fastcall hkaiSimpleSilhouetteMerger::staticClass()
 void __fastcall finishLoadedObjecthkaiSimpleSilhouetteMerger(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiSimpleSilhouetteMerger::`vftable';
+    *(_QWORD *)p = &hkaiSimpleSilhouetteMerger::`vftable;
 }
 
 // File Line: 206
@@ -164,7 +164,7 @@ void __fastcall cleanupLoadedObjecthkaiSimpleSilhouetteMerger(void *p)
 // RVA: 0xBB61F0
 void **__fastcall getVtablehkaiSimpleSilhouetteMerger()
 {
-  return &hkaiSimpleSilhouetteMerger::`vftable';
+  return &hkaiSimpleSilhouetteMerger::`vftable;
 }
 
 // File Line: 232
@@ -216,7 +216,7 @@ hkClass *__fastcall hkaiConvexHullSilhouetteMerger::staticClass()
 void __fastcall finishLoadedObjecthkaiConvexHullSilhouetteMerger(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiConvexHullSilhouetteMerger::`vftable';
+    *(_QWORD *)p = &hkaiConvexHullSilhouetteMerger::`vftable;
 }
 
 // File Line: 270
@@ -230,7 +230,7 @@ void __fastcall cleanupLoadedObjecthkaiConvexHullSilhouetteMerger(void *p)
 // RVA: 0xBB6230
 void **__fastcall getVtablehkaiConvexHullSilhouetteMerger()
 {
-  return &hkaiConvexHullSilhouetteMerger::`vftable';
+  return &hkaiConvexHullSilhouetteMerger::`vftable;
 }
 
 // File Line: 296

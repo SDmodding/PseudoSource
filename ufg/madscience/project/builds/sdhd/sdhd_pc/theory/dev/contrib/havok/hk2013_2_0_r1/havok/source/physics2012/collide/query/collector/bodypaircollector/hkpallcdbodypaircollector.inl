@@ -15,7 +15,7 @@ void __fastcall hkpAllCdBodyPairCollector::~hkpAllCdBodyPairCollector(hkpAllCdBo
   int v3; // er8
 
   v1 = this;
-  this->vfptr = (hkpCdBodyPairCollectorVtbl *)&hkpAllCdBodyPairCollector::`vftable';
+  this->vfptr = (hkpCdBodyPairCollectorVtbl *)&hkpAllCdBodyPairCollector::`vftable;
   v2 = &this->m_hits;
   this->m_hits.m_size = 0;
   v3 = this->m_hits.m_capacityAndFlags;
@@ -26,6 +26,6 @@ void __fastcall hkpAllCdBodyPairCollector::~hkpAllCdBodyPairCollector(hkpAllCdBo
       32 * v3);
   v2->m_data = 0i64;
   v2->m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkpCdBodyPairCollectorVtbl *)&hkpCdBodyPairCollector::`vftable';
+  v1->vfptr = (hkpCdBodyPairCollectorVtbl *)&hkpCdBodyPairCollector::`vftable;
 }
 

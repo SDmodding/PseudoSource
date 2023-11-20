@@ -9,7 +9,7 @@ __int64 dynamic_initializer_for__gActionTreeResourceInventory__()
     0x4BCE8537u,
     0,
     0);
-  gActionTreeResourceInventory.vfptr = (UFG::qResourceInventoryVtbl *)&ActionTreeResourceInventory::`vftable';
+  gActionTreeResourceInventory.vfptr = (UFG::qResourceInventoryVtbl *)&ActionTreeResourceInventory::`vftable;
   return atexit(dynamic_atexit_destructor_for__gActionTreeResourceInventory__);
 }
 
@@ -24,7 +24,7 @@ __int64 dynamic_initializer_for__gAnimationGroupResourceInventory__()
     0x3D0EBC72u,
     0,
     0);
-  gAnimationGroupResourceInventory.vfptr = (UFG::qResourceInventoryVtbl *)&AnimationGroupResourceInventory::`vftable';
+  gAnimationGroupResourceInventory.vfptr = (UFG::qResourceInventoryVtbl *)&AnimationGroupResourceInventory::`vftable;
   return atexit(dynamic_atexit_destructor_for__gAnimationGroupResourceInventory__);
 }
 
@@ -39,7 +39,7 @@ __int64 dynamic_initializer_for__gWeightSetGroupResourceInventory__()
     0x1146D4C8u,
     0,
     0);
-  gWeightSetGroupResourceInventory.vfptr = (UFG::qResourceInventoryVtbl *)&WeightSetGroupResourceInventory::`vftable';
+  gWeightSetGroupResourceInventory.vfptr = (UFG::qResourceInventoryVtbl *)&WeightSetGroupResourceInventory::`vftable;
   return atexit(dynamic_atexit_destructor_for__gWeightSetGroupResourceInventory__);
 }
 
@@ -54,7 +54,7 @@ __int64 dynamic_initializer_for__gUELFragmentTableInventory__()
     0x32890C01u,
     0,
     0);
-  gUELFragmentTableInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UELFragmentTableInventory::`vftable';
+  gUELFragmentTableInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UELFragmentTableInventory::`vftable;
   return atexit(dynamic_atexit_destructor_for__gUELFragmentTableInventory__);
 }
 
@@ -69,7 +69,7 @@ __int64 dynamic_initializer_for__gRigInfoResourceInventory__()
     0x36C2E8Eu,
     0,
     0);
-  gRigInfoResourceInventory.vfptr = (UFG::qResourceInventoryVtbl *)&RigInfoResourceInventory::`vftable';
+  gRigInfoResourceInventory.vfptr = (UFG::qResourceInventoryVtbl *)&RigInfoResourceInventory::`vftable;
   return atexit(dynamic_atexit_destructor_for__gRigInfoResourceInventory__);
 }
 
@@ -84,7 +84,7 @@ __int64 dynamic_initializer_for__gBlendTreeResourceInventory__()
     0xE691BB97,
     0,
     0);
-  gBlendTreeResourceInventory.vfptr = (UFG::qResourceInventoryVtbl *)&BlendTreeResourceInventory::`vftable';
+  gBlendTreeResourceInventory.vfptr = (UFG::qResourceInventoryVtbl *)&BlendTreeResourceInventory::`vftable;
   return atexit(dynamic_atexit_destructor_for__gBlendTreeResourceInventory__);
 }
 
@@ -98,8 +98,8 @@ void __fastcall InPlaceInit<AccuracyEnsureMissTrack>::InPlaceNew(void *ptr)
   if ( ptr )
   {
     ITrack::ITrack((ITrack *)ptr, 0);
-    *v1 = &Track<AccuracyEnsureMissTask>::`vftable';
-    *v1 = &AccuracyEnsureMissTrack::`vftable';
+    *v1 = &Track<AccuracyEnsureMissTask>::`vftable;
+    *v1 = &AccuracyEnsureMissTrack::`vftable;
   }
 }
 

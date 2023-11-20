@@ -15,9 +15,9 @@ void __fastcall OSuite::TList<OSuite::ZString>::TList<OSuite::ZString>(OSuite::T
     (OSuite::ZListBase::ZListIteratorBase *)that);
   v4 = v3->m_nSize;
   v5 = 0i64;
-  v3->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZString>::`vftable'{for `OSuite::ZListBase'};
+  v3->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZString>::`vftable{for `OSuite::ZListBase};
   v3->m_pList = 0i64;
-  v3->vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZString>::`vftable'{for `OSuite::IHashable'};
+  v3->vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZString>::`vftable{for `OSuite::IHashable};
   if ( v4 )
     v3->m_pList = OSuite::TList<OSuite::ZString>::AllocList(v3, 0i64, v4);
   if ( v3->m_nTop > 0 )
@@ -242,10 +242,10 @@ unsigned int __fastcall OSuite::TList<OSuite::ZString>::ComputeHash(OSuite::TLis
   v11.m_pListBase = 0i64;
   v2 = OSuite::FComputeHashBegin((_exception *)this);
   OSuite::ZListBase::ZListIteratorBase::ZListIteratorBase(&that, (OSuite::ZListBase *)&v1[-1].m_nTop);
-  that.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
-  v10 = &OSuite::TConstIterator<OSuite::TList<OSuite::ZOEdmEndRole *>::ZIterator,OSuite::ZOEdmEndRole *,int>::`vftable';
+  that.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
+  v10 = &OSuite::TConstIterator<OSuite::TList<OSuite::ZOEdmEndRole *>::ZIterator,OSuite::ZOEdmEndRole *,int>::`vftable;
   OSuite::ZListBase::ZListIteratorBase::ZListIteratorBase(&v11, &that);
-  v11.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+  v11.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
   while ( !OSuite::ZListBase::ZListIteratorBase::AtEnd(&v11) )
   {
     OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)v11.m_pListBase);
@@ -262,8 +262,8 @@ unsigned int __fastcall OSuite::TList<OSuite::ZString>::ComputeHash(OSuite::TLis
     v2 = OSuite::FComputeHashAdd(v2, v7);
     OSuite::ZListBase::ZListIteratorBase::Next(&v11);
   }
-  v10 = &OSuite::TConstIterator<OSuite::TList<OSuite::ZOEdmEndRole *>::ZIterator,OSuite::ZOEdmEndRole *,int>::`vftable';
-  v11.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+  v10 = &OSuite::TConstIterator<OSuite::TList<OSuite::ZOEdmEndRole *>::ZIterator,OSuite::ZOEdmEndRole *,int>::`vftable;
+  v11.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
   return OSuite::FComputeHashEnd(v2);
 }
 
@@ -302,7 +302,7 @@ OSuite::ZWebServiceClientManager::ZWebServiceClientBucket *__fastcall OSuite::TL
     do
     {
       LODWORD(v10[-1].m_pString) = 0;
-      v10[-1].vfptr = (OSuite::IHashableVtbl *)&OSuite::ZWebServiceClientManager::ZWebServiceClientBucket::`vftable';
+      v10[-1].vfptr = (OSuite::IHashableVtbl *)&OSuite::ZWebServiceClientManager::ZWebServiceClientBucket::`vftable;
       OSuite::ZString::ZString(v10, &customWorldMapCaption);
       v10 += 2;
       --v8;

@@ -1261,7 +1261,7 @@ UFG::AudioCurve *__fastcall UFG::AudioCurveSet::FindCurve(UFG::AudioCurveSet *th
                                                1u);
         if ( v5 )
         {
-          `eh vector constructor iterator'(v5, 4ui64, 255, (void (__fastcall *)(void *))BackInfo::BackInfo);
+          `eh vector constructor iterator(v5, 4ui64, 255, (void (__fastcall *)(void *))BackInfo::BackInfo);
           v5->m_numSymbols = 1;
           v7 = (UFG::qSymbol *)v5;
           v8 = 254i64;

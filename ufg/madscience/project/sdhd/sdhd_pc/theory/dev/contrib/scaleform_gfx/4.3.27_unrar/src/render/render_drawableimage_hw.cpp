@@ -217,7 +217,7 @@ void __fastcall Scaleform::Render::DICommand_ApplyFilter::ExecuteHWCopyAction(Sc
   v28 = (float)(v12 * 0.0) + (float)(bounds.y1 * 0.050000001);
   v15 = v7->pFilter.pObject;
   v26.RefCount = 1;
-  v26.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::FilterSet::`vftable';
+  v26.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::FilterSet::`vftable;
   v41 = &v26.Filters;
   v42 = &v26.Filters;
   v26.Filters.Data.Data = 0i64;
@@ -235,8 +235,8 @@ void __fastcall Scaleform::Render::DICommand_ApplyFilter::ExecuteHWCopyAction(Sc
   if ( v16 )
   {
     Scaleform::Render::CacheablePrimitive::CacheablePrimitive(v16, 0);
-    *(_QWORD *)v17 = &Scaleform::Render::FilterPrimitive::`vftable'{for `Scaleform::RefCountBase<Scaleform::Render::CacheablePrimitive,67>'};
-    *(_QWORD *)(v17 + 16) = &Scaleform::Render::FilterPrimitive::`vftable'{for `Scaleform::Render::RenderQueueItem::Interface'};
+    *(_QWORD *)v17 = &Scaleform::Render::FilterPrimitive::`vftable{for `Scaleform::RefCountBase<Scaleform::Render::CacheablePrimitive,67>};
+    *(_QWORD *)(v17 + 16) = &Scaleform::Render::FilterPrimitive::`vftable{for `Scaleform::Render::RenderQueueItem::Interface};
     _InterlockedExchangeAdd(&v26.RefCount, 1u);
     *(_QWORD *)(v17 + 80) = &v26;
   }
@@ -306,7 +306,7 @@ void __fastcall Scaleform::Render::DICommand_ApplyFilter::ExecuteHWCopyAction(Sc
   }
   if ( !_InterlockedDecrement((volatile signed __int32 *)(v17 + 8)) )
     (**(void (__fastcall ***)(__int64, signed __int64))v17)(v17, 1i64);
-  v26.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::FilterSet::`vftable';
+  v26.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::FilterSet::`vftable;
   v24 = v26.pCacheAsBitmapFilter.pObject;
   if ( v26.pCacheAsBitmapFilter.pObject && !_InterlockedDecrement(&v26.pCacheAsBitmapFilter.pObject->RefCount) && v24 )
     v24->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v24->vfptr, 1u);

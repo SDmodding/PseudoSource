@@ -43,7 +43,7 @@ void __fastcall UFG::StimulusNotifyCallback::~StimulusNotifyCallback(UFG::Stimul
   UFG::qNode<UFG::StimulusNotifyCallback,UFG::StimulusNotifyCallback> *v2; // rcx
   UFG::qNode<UFG::StimulusNotifyCallback,UFG::StimulusNotifyCallback> *v3; // rax
 
-  this->vfptr = (UFG::StimulusNotifyCallbackVtbl *)&UFG::StimulusNotifyCallback::`vftable';
+  this->vfptr = (UFG::StimulusNotifyCallbackVtbl *)&UFG::StimulusNotifyCallback::`vftable;
   v1 = (UFG::qNode<UFG::StimulusNotifyCallback,UFG::StimulusNotifyCallback> *)&this->mPrev;
   v2 = this->mPrev;
   v3 = v1->mNext;

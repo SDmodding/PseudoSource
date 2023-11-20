@@ -10,7 +10,7 @@ void __fastcall hkaSplineCompressedAnimation::~hkaSplineCompressedAnimation(hkaS
   int v6; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaSplineCompressedAnimation::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaSplineCompressedAnimation::`vftable;
   v2 = this->m_data.m_capacityAndFlags;
   this->m_data.m_size = 0;
   if ( v2 >= 0 )

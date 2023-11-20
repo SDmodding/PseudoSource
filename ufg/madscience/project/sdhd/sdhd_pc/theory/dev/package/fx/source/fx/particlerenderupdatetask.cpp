@@ -859,7 +859,7 @@ void __fastcall Render::GenerateNewParticles(UFG::qMemoryStream<Render::Particle
   v6 = pfx;
   v7 = taskParams;
   v38 = *((_DWORD *)taskParams->mMainMemoryAddress + 142);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     &ptr,
     0x18ui64,
     2,
@@ -961,8 +961,8 @@ void __fastcall Render::GenerateNewParticles(UFG::qMemoryStream<Render::Particle
     v24 = Render::ParticleCreator::AddResumeParticles(&v37, &generateParticleParams, v42, v41);
   }
   *v43 = v24;
-  `eh vector destructor iterator'(v37.mMeshEmitter.mVertexBuffers, 0x18ui64, 2, (void (__fastcall *)(void *))_);
-  `eh vector destructor iterator'(&ptr, 0x18ui64, 2, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(v37.mMeshEmitter.mVertexBuffers, 0x18ui64, 2, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(&ptr, 0x18ui64, 2, (void (__fastcall *)(void *))_);
 }
 
 // File Line: 508
@@ -1372,7 +1372,7 @@ void __fastcall Render::ParticleRenderUpdateTask(int worker_id, UFG::qMemoryStre
   *v4 = *((_DWORD *)v5 + 143);
   v29 = *((_DWORD *)v5 + 136);
   currentBufferCount = *((_DWORD *)v5 + 136);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     &ptr,
     0x18ui64,
     50,
@@ -1406,6 +1406,6 @@ void __fastcall Render::ParticleRenderUpdateTask(int worker_id, UFG::qMemoryStre
   v32 = (void *)*((_QWORD *)v5 + 31);
   if ( v32 )
     UFG::qMemoryStreamer::BeginRawWritePlat(v6, stream_name, v43, 0xA80ui64, v32, main_num_bytes);
-  `eh vector destructor iterator'(&ptr, 0x18ui64, 50, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(&ptr, 0x18ui64, 50, (void (__fastcall *)(void *))_);
 }
 

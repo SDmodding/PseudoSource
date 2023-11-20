@@ -2174,7 +2174,7 @@ LABEL_117:
   v34->Shape->Paths = v64;
   pa->pAltStream = 0i64;
   v65 = v22 == 0;
-  v76.vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::Stream>Vtbl *)&Scaleform::GFx::Stream::`vftable';
+  v76.vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::Stream>Vtbl *)&Scaleform::GFx::Stream::`vftable;
   v78 = (Scaleform::GFx::ShapeSwfReader *)&v76.FileName;
   v66 = v76.FileName.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64;
   if ( !_InterlockedDecrement((volatile signed __int32 *)((v76.FileName.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
@@ -2319,33 +2319,33 @@ __int64 __fastcall Scaleform::GFx::ShapeDataBase::DefPointTestLocal(Scaleform::G
   }
   else if ( v5 )
   {
-    trans.vfptr = (Scaleform::Render::TransformerBaseVtbl *)&Scaleform::Render::TransformerWrapper<Scaleform::Render::Matrix2x4<float>>::`vftable';
+    trans.vfptr = (Scaleform::Render::TransformerBaseVtbl *)&Scaleform::Render::TransformerWrapper<Scaleform::Render::Matrix2x4<float>>::`vftable;
     v24 = 0i64;
-    v21 = &Scaleform::Render::TransformerWrapper<Scaleform::Render::Scale9GridInfo>::`vftable';
+    v21 = &Scaleform::Render::TransformerWrapper<Scaleform::Render::Scale9GridInfo>::`vftable;
     v22 = 0i64;
-    *(_QWORD *)&result.x1 = &Scaleform::Render::TransformerBase::`vftable';
+    *(_QWORD *)&result.x1 = &Scaleform::Render::TransformerBase::`vftable;
     if ( v9 )
     {
-      *(_QWORD *)&result.x1 = &Scaleform::Render::TransformerWrapper<Scaleform::Render::Scale9GridInfo>::`vftable';
+      *(_QWORD *)&result.x1 = &Scaleform::Render::TransformerWrapper<Scaleform::Render::Scale9GridInfo>::`vftable;
       *(_QWORD *)&result.x2 = v9;
       v22 = v9;
       v17 = (Scaleform::Render::TransformerBase *)&v21;
     }
     else
     {
-      *(_QWORD *)&result.x1 = &Scaleform::Render::TransformerWrapper<Scaleform::Render::Matrix2x4<float>>::`vftable';
+      *(_QWORD *)&result.x1 = &Scaleform::Render::TransformerWrapper<Scaleform::Render::Matrix2x4<float>>::`vftable;
       *(_QWORD *)&result.x2 = &Scaleform::Render::Matrix2x4<float>::Identity;
       v24 = &Scaleform::Render::Matrix2x4<float>::Identity;
       v17 = &trans;
     }
-    *(_QWORD *)&result.x1 = &Scaleform::Render::TransformerBase::`vftable';
+    *(_QWORD *)&result.x1 = &Scaleform::Render::TransformerBase::`vftable;
     v18 = Scaleform::Render::HitTestFill<Scaleform::Render::TransformerBase>(
             (Scaleform::Render::ShapeDataInterface *)&v8->vfptr,
             v17,
             v6->x,
             v6->y);
-    v21 = &Scaleform::Render::TransformerBase::`vftable';
-    trans.vfptr = (Scaleform::Render::TransformerBaseVtbl *)&Scaleform::Render::TransformerBase::`vftable';
+    v21 = &Scaleform::Render::TransformerBase::`vftable;
+    trans.vfptr = (Scaleform::Render::TransformerBaseVtbl *)&Scaleform::Render::TransformerBase::`vftable;
   }
   else
   {
@@ -2489,16 +2489,16 @@ Scaleform::GFx::ShapeDataBase *__fastcall Scaleform::GFx::ConstShapeNoStyles::Cl
   v4 = result;
   if ( !result )
     return 0i64;
-  result->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  result->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   result->RefCount = 1;
-  result->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  result->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable';
-  result->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::ShapeDataInterface,71>::`vftable';
-  result->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ShapeDataInterface::`vftable';
-  result->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ShapeDataBase::`vftable';
+  result->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  result->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable;
+  result->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::ShapeDataInterface,71>::`vftable;
+  result->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ShapeDataInterface::`vftable;
+  result->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ShapeDataBase::`vftable;
   result->Paths = v1->Paths;
   result->Flags = v1->Flags;
-  result->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ConstShapeNoStyles::`vftable';
+  result->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ConstShapeNoStyles::`vftable;
   return result;
 }
 
@@ -2509,16 +2509,16 @@ void __fastcall Scaleform::GFx::ConstShapeWithStyles::ConstShapeWithStyles(Scale
   Scaleform::GFx::ConstShapeWithStyles *v2; // rbx
 
   v2 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::ShapeDataInterface,71>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ShapeDataInterface::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ShapeDataBase::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::ShapeDataInterface,71>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ShapeDataInterface::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ShapeDataBase::`vftable;
   this->Paths = o->Paths;
   this->Flags = o->Flags;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ConstShapeWithStyles::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ConstShapeWithStyles::`vftable;
   this->Styles = 0i64;
   *(_QWORD *)&this->Bound.x1 = 0i64;
   *(_QWORD *)&this->Bound.x2 = 0i64;
@@ -2549,7 +2549,7 @@ void __fastcall Scaleform::GFx::ConstShapeWithStyles::~ConstShapeWithStyles(Scal
   Scaleform::Render::RenderBuffer *v7; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ConstShapeWithStyles::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ConstShapeWithStyles::`vftable;
   v2 = this->Styles;
   v3 = 0;
   v4 = 0;
@@ -3105,17 +3105,17 @@ void __fastcall Scaleform::GFx::SwfShapeCharacterDef::SwfShapeCharacterDef(Scale
 
   v2 = shp;
   v3 = this;
-  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::Resource::`vftable';
+  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::Resource::`vftable;
   v4 = this->RefCount.Value;
   v5 = (unsigned int)this->RefCount.Value;
   this->RefCount.Value = 1;
   v6 = 0i64;
   this->pLib = 0i64;
-  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::CharacterDef::`vftable';
+  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::CharacterDef::`vftable;
   this->Id.Id = 0x40000;
-  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::ShapeBaseCharacterDef::`vftable';
+  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::ShapeBaseCharacterDef::`vftable;
   this->pShapeMeshProvider.pObject = 0i64;
-  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::SwfShapeCharacterDef::`vftable';
+  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::SwfShapeCharacterDef::`vftable;
   if ( shp )
     Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)shp);
   v3->pShape.pObject = v2;
@@ -3318,17 +3318,17 @@ void __fastcall Scaleform::GFx::ImageShapeCharacterDef::ImageShapeCharacterDef(S
   v4 = imgCreator;
   v5 = pimage;
   v6 = this;
-  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::Resource::`vftable';
+  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::Resource::`vftable;
   v7 = this->RefCount.Value;
   v8 = (unsigned int)this->RefCount.Value;
   this->RefCount.Value = 1;
   v9 = 0i64;
   this->pLib = 0i64;
-  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::CharacterDef::`vftable';
+  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::CharacterDef::`vftable;
   this->Id.Id = 0x40000;
-  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::ShapeBaseCharacterDef::`vftable';
+  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::ShapeBaseCharacterDef::`vftable;
   this->pShapeMeshProvider.pObject = 0i64;
-  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::ImageShapeCharacterDef::`vftable';
+  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::ImageShapeCharacterDef::`vftable;
   this->pShape.pObject = 0i64;
   LODWORD(v49) = 71;
   v10 = (Scaleform::Render::ShapeDataFloat *)Scaleform::Memory::pGlobalHeap->vfptr->AllocAutoHeap(
@@ -3357,12 +3357,12 @@ void __fastcall Scaleform::GFx::ImageShapeCharacterDef::ImageShapeCharacterDef(S
   v35 = v13;
   if ( v13 )
   {
-    *(_QWORD *)v13 = &Scaleform::RefCountImplCore::`vftable';
+    *(_QWORD *)v13 = &Scaleform::RefCountImplCore::`vftable;
     *((_DWORD *)v13 + 2) = 1;
-    *(_QWORD *)v13 = &Scaleform::RefCountImpl::`vftable';
-    *(_QWORD *)v13 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable';
-    *(_QWORD *)v13 = &Scaleform::RefCountBase<Scaleform::Render::ComplexFill,71>::`vftable';
-    *(_QWORD *)v13 = &Scaleform::Render::ComplexFill::`vftable';
+    *(_QWORD *)v13 = &Scaleform::RefCountImpl::`vftable;
+    *(_QWORD *)v13 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable;
+    *(_QWORD *)v13 = &Scaleform::RefCountBase<Scaleform::Render::ComplexFill,71>::`vftable;
+    *(_QWORD *)v13 = &Scaleform::Render::ComplexFill::`vftable;
     *((_QWORD *)v13 + 2) = 0i64;
     *((_QWORD *)v13 + 3) = 0i64;
     *((_QWORD *)v13 + 4) = 1065353216i64;

@@ -88,7 +88,7 @@ hkClass *__fastcall hkaiPath::staticClass()
 void __fastcall finishLoadedObjecthkaiPath(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiPath::`vftable';
+    *(_QWORD *)p = &hkaiPath::`vftable;
 }
 
 // File Line: 170
@@ -102,7 +102,7 @@ void __fastcall cleanupLoadedObjecthkaiPath(void *p)
 // RVA: 0xBB7170
 void **__fastcall getVtablehkaiPath()
 {
-  return &hkaiPath::`vftable';
+  return &hkaiPath::`vftable;
 }
 
 // File Line: 196

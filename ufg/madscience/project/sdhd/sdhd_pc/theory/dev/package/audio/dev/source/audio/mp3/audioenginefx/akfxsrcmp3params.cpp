@@ -7,9 +7,9 @@ AK::IAkPluginParam *__fastcall CreateMP3SourceParams(AK::IAkPluginMemAlloc *in_p
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 16ui64);
   if ( !result )
     return 0i64;
-  result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable';
-  result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkPluginParam::`vftable';
-  result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkFxSrcMP3Params::`vftable';
+  result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable;
+  result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkPluginParam::`vftable;
+  result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkFxSrcMP3Params::`vftable;
   return result;
 }
 
@@ -24,9 +24,9 @@ AK::IAkPluginParam *__fastcall CAkFxSrcMP3Params::Clone(CAkFxSrcMP3Params *this,
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 16ui64);
   if ( !result )
     return 0i64;
-  result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable';
-  result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkPluginParam::`vftable';
-  result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkFxSrcMP3Params::`vftable';
+  result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable;
+  result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkPluginParam::`vftable;
+  result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkFxSrcMP3Params::`vftable;
   LODWORD(result[1].vfptr) = v2->m_Params.uToken;
   return result;
 }

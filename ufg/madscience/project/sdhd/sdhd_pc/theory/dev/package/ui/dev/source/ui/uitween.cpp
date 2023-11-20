@@ -24,12 +24,12 @@ void __fastcall UFG::UITween::UITween(UFG::UITween *this, Scaleform::GFx::Movie 
   v8 = &v5->mRoughnessPoints;
   v8->mNode.mPrev = &v8->mNode;
   v8->mNode.mNext = &v8->mNode;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v5->mCallbacks,
     0x30ui64,
     6,
     (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v5->mCallbackParams,
     0x30ui64,
     6,
@@ -154,7 +154,7 @@ char __fastcall UFG::UITween::InvokeCallback(UFG::UITween *this, UFG::UITween::e
         LODWORD(v9->mNext) = v4;
         v11 = v9 + 1;
         pDtor = (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value;
-        `eh vector constructor iterator'(
+        `eh vector constructor iterator(
           &v9[1],
           0x30ui64,
           v4,
@@ -189,7 +189,7 @@ char __fastcall UFG::UITween::InvokeCallback(UFG::UITween *this, UFG::UITween::e
               -2i64);
       if ( v11 )
       {
-        `eh vector destructor iterator'(
+        `eh vector destructor iterator(
           v11,
           0x30ui64,
           (int)v11[-1].mNext,

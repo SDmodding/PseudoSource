@@ -7,7 +7,7 @@ void __fastcall UFG::UIHKScreenDemoClosing::UIHKScreenDemoClosing(UFG::UIHKScree
   v1 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -18,7 +18,7 @@ void __fastcall UFG::UIHKScreenDemoClosing::UIHKScreenDemoClosing(UFG::UIHKScree
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenDemoClosing::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenDemoClosing::`vftable;
   this->mPushHudOnExit = 0;
 }
 
@@ -32,7 +32,7 @@ void __fastcall UFG::UIHKScreenDemoClosing::~UIHKScreenDemoClosing(UFG::UIHKScre
   UFG::UIScreenTextureManager *v4; // rax
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenDemoClosing::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenDemoClosing::`vftable;
   UFG::UI::UnpauseGame((UFG::UI *)this);
   if ( UFG::gInputSystem )
   {

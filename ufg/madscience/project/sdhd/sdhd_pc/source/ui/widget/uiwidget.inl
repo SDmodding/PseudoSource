@@ -10,7 +10,7 @@ void __fastcall UFG::UIWidget::~UIWidget(UFG::UIWidget *this)
   UFG::qNode<UFG::UIItem,UFG::UIItem> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::UIWidgetVtbl *)&UFG::UIWidget::`vftable';
+  this->vfptr = (UFG::UIWidgetVtbl *)&UFG::UIWidget::`vftable;
   v2 = &this->m_slots;
   UFG::qList<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption,1,0>::DeleteNodes((UFG::qList<UFG::GUIObjectBase,UFG::GUIObjectBase,1,0> *)&this->m_slots);
   v3 = v2->mNode.mPrev;

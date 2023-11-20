@@ -2,8 +2,8 @@
 // RVA: 0x105190
 void __fastcall SSIdentifier::SSIdentifier(SSIdentifier *this, const void **binary_pp)
 {
-  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-  this->vfptr = (SSExpressionBaseVtbl *)&SSIdentifier::`vftable';
+  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+  this->vfptr = (SSExpressionBaseVtbl *)&SSIdentifier::`vftable;
   ASymbol::create_from_binary(&this->i_ident_name, binary_pp);
 }
 
@@ -19,10 +19,10 @@ void __fastcall SSIdentifierMember::SSIdentifierMember(SSIdentifierMember *this,
 
   v2 = binary_pp;
   v3 = this;
-  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-  this->vfptr = (SSExpressionBaseVtbl *)&SSIdentifier::`vftable';
+  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+  this->vfptr = (SSExpressionBaseVtbl *)&SSIdentifier::`vftable;
   ASymbol::create_from_binary(&this->i_ident_name, binary_pp);
-  v3->vfptr = (SSExpressionBaseVtbl *)&SSIdentifierMember::`vftable';
+  v3->vfptr = (SSExpressionBaseVtbl *)&SSIdentifierMember::`vftable;
   v4 = *(unsigned __int8 *)*v2;
   v5 = (signed __int64)*v2 + 1;
   *v2 = (const void *)v5;
@@ -46,6 +46,6 @@ void __fastcall SSIdentifierClassMember::SSIdentifierClassMember(SSIdentifierCla
 
   v2 = this;
   SSIdentifierMember::SSIdentifierMember((SSIdentifierMember *)&this->vfptr, binary_pp);
-  v2->vfptr = (SSExpressionBaseVtbl *)&SSIdentifierClassMember::`vftable';
+  v2->vfptr = (SSExpressionBaseVtbl *)&SSIdentifierClassMember::`vftable;
 }
 

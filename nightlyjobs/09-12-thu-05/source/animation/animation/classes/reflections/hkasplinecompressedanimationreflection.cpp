@@ -116,7 +116,7 @@ void __fastcall finishLoadedObjecthkaSplineCompressedAnimation(void *p, int fini
 {
   if ( p )
   {
-    *(_QWORD *)p = &hkaSplineCompressedAnimation::`vftable';
+    *(_QWORD *)p = &hkaSplineCompressedAnimation::`vftable;
     JUMPOUT(finishing, 0, hkaSplineCompressedAnimation::handleEndian);
   }
 }
@@ -132,7 +132,7 @@ void __fastcall cleanupLoadedObjecthkaSplineCompressedAnimation(void *p)
 // RVA: 0xB1DDC0
 void **__fastcall getVtablehkaSplineCompressedAnimation()
 {
-  return &hkaSplineCompressedAnimation::`vftable';
+  return &hkaSplineCompressedAnimation::`vftable;
 }
 
 // File Line: 242

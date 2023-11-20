@@ -140,7 +140,7 @@ void __fastcall UFG::GameLayerActivationBehaviour::CachePropertySetData(UFG::Gam
   if ( v36 )
   {
     v37 = v36 - 1;
-    `eh vector destructor iterator'(v36, 4ui64, v36[-1].mUID, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v36, 4ui64, v36[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v37);
   }
   v4->mFlowList.p = 0i64;
@@ -663,8 +663,8 @@ UFG::allocator::free_link *__fastcall UFG::ILayerActivationBehaviour::Create(UFG
   result = UFG::qMalloc(0x50ui64, "GameLayerActivationBehaviour", 0i64);
   if ( !result )
     return 0i64;
-  result->mNext = (UFG::allocator::free_link *)&UFG::ILayerActivationBehaviour::`vftable';
-  result->mNext = (UFG::allocator::free_link *)&UFG::GameLayerActivationBehaviour::`vftable';
+  result->mNext = (UFG::allocator::free_link *)&UFG::ILayerActivationBehaviour::`vftable;
+  result->mNext = (UFG::allocator::free_link *)&UFG::GameLayerActivationBehaviour::`vftable;
   HIDWORD(result[1].mNext) = -1;
   LODWORD(result[3].mNext) = -1;
   HIDWORD(result[3].mNext) = 8;

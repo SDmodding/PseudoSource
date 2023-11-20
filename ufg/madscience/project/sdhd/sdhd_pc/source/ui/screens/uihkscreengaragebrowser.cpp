@@ -28,7 +28,7 @@ void __fastcall UFG::UIHKScreenGarageBrowser::UIHKScreenGarageBrowser(UFG::UIHKS
   v2 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -39,21 +39,21 @@ void __fastcall UFG::UIHKScreenGarageBrowser::UIHKScreenGarageBrowser(UFG::UIHKS
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKTaskableScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKTaskableScreen::`vftable;
   this->mFinished = 0;
   v6 = (UFG::OnlineManagerObserver *)&this->vfptr;
   v3 = (UFG::qNode<UFG::OnlineManagerObserver,UFG::OnlineManagerObserver> *)&this->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v6->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::OnlineManagerObserver::`vftable';
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenGarageBrowser::`vftable'{for `UFG::UIHKTaskableScreen'};
-  v6->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::UIHKScreenGarageBrowser::`vftable'{for `UFG::OnlineManagerObserver'};
+  v6->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::OnlineManagerObserver::`vftable;
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenGarageBrowser::`vftable{for `UFG::UIHKTaskableScreen};
+  v6->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::UIHKScreenGarageBrowser::`vftable{for `UFG::OnlineManagerObserver};
   this->mHelpBarState = 0;
   *(_QWORD *)&this->mState = 0i64;
   this->mVehicleList.p = 0i64;
   *(_QWORD *)&this->mVehicleList.size = 0i64;
   UFG::qString::qString(&this->mTexturePackToLoad);
-  `eh vector constructor iterator'(v1->mCarTextures, 0x28ui64, 3, (void (__fastcall *)(void *))UFG::qString::qString);
+  `eh vector constructor iterator(v1->mCarTextures, 0x28ui64, 3, (void (__fastcall *)(void *))UFG::qString::qString);
   *(_QWORD *)&v1->m_iTextureHandleIndex = 0i64;
   v1->m_pSimObjVehicle = 0i64;
   UFG::UIHKDepthOfFieldWidget::UIHKDepthOfFieldWidget(&v1->DOF);
@@ -101,9 +101,9 @@ void __fastcall UFG::UIHKScreenGarageBrowser::~UIHKScreenGarageBrowser(UFG::UIHK
   void (__fastcall *v20)(UFG::UIHKScreenGarageBrowser *, UFG::Event *); // [rsp+30h] [rbp-38h]
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenGarageBrowser::`vftable'{for `UFG::UIHKTaskableScreen'};
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenGarageBrowser::`vftable{for `UFG::UIHKTaskableScreen};
   v2 = (UFG::OnlineManagerObserver *)&this->vfptr;
-  this->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::UIHKScreenGarageBrowser::`vftable'{for `UFG::OnlineManagerObserver'};
+  this->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::UIHKScreenGarageBrowser::`vftable{for `UFG::OnlineManagerObserver};
   v3 = UFG::OnlineManager::Instance();
   UFG::OSuiteManager::UnRegisterObserver(v3, v2);
   v20 = UFG::UIHKScreenGarageBrowser::HandleDeferredTask;
@@ -154,13 +154,13 @@ void __fastcall UFG::UIHKScreenGarageBrowser::~UIHKScreenGarageBrowser(UFG::UIHK
   }
   while ( v11 );
   UFG::GameCameraComponent::EndDOFOverride(0);
-  `eh vector destructor iterator'(v1->mCarTextures, 0x28ui64, 3, (void (__fastcall *)(void *))UFG::qString::~qString);
+  `eh vector destructor iterator(v1->mCarTextures, 0x28ui64, 3, (void (__fastcall *)(void *))UFG::qString::~qString);
   UFG::qString::~qString(&v1->mTexturePackToLoad);
   v14 = v1->mVehicleList.p;
   if ( v14 )
   {
     v15 = &v14[-1].discountPercent;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v14,
       0x110ui64,
       v14[-1].discountPercent,
@@ -169,7 +169,7 @@ void __fastcall UFG::UIHKScreenGarageBrowser::~UIHKScreenGarageBrowser(UFG::UIHK
   }
   v1->mVehicleList.p = 0i64;
   *(_QWORD *)&v1->mVehicleList.size = 0i64;
-  v2->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::OnlineManagerObserver::`vftable';
+  v2->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::OnlineManagerObserver::`vftable;
   v16 = (UFG::qNode<UFG::OnlineManagerObserver,UFG::OnlineManagerObserver> *)&v2->mPrev;
   v17 = v2->mPrev;
   v18 = v2->mNext;
@@ -207,7 +207,7 @@ void __fastcall UFG::UIHKScreenGarageBrowser::LoadTextureInFlash(UFG::UIHKScreen
   if ( this->mCurrentVehicle )
   {
     v2 = this->mRenderable->m_movie.pObject;
-    `eh vector constructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     UFG::qString::qString(&v4);
     UFG::qString::Format(&v4, "img://%s", v1->mCurrentVehicle->texture.mData);
     v3 = v4.mData;
@@ -223,7 +223,7 @@ void __fastcall UFG::UIHKScreenGarageBrowser::LoadTextureInFlash(UFG::UIHKScreen
     *(_QWORD *)&pargs.mValue.NValue = v3;
     Scaleform::GFx::Movie::Invoke(v2, "SetTexture", 0i64, &pargs, 1u);
     UFG::qString::~qString(&v4);
-    `eh vector destructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 
@@ -331,14 +331,14 @@ void __usercall UFG::UIHKScreenGarageBrowser::init(UFG::UIHKScreenGarageBrowser 
            32i64);
     if ( v6 )
     {
-      *(_QWORD *)v6 = &Scaleform::RefCountImplCore::`vftable';
+      *(_QWORD *)v6 = &Scaleform::RefCountImplCore::`vftable;
       *(_DWORD *)(v6 + 8) = 1;
-      *(_QWORD *)v6 = &Scaleform::RefCountImpl::`vftable';
-      *(_QWORD *)v6 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-      *(_QWORD *)v6 = &Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable';
-      *(_QWORD *)v6 = &Scaleform::GFx::State::`vftable';
+      *(_QWORD *)v6 = &Scaleform::RefCountImpl::`vftable;
+      *(_QWORD *)v6 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+      *(_QWORD *)v6 = &Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable;
+      *(_QWORD *)v6 = &Scaleform::GFx::State::`vftable;
       *(_DWORD *)(v6 + 16) = 3;
-      *(_QWORD *)v6 = &Scaleform::GFx::ActionControl::`vftable';
+      *(_QWORD *)v6 = &Scaleform::GFx::ActionControl::`vftable;
       *(_DWORD *)(v6 + 24) = 8;
     }
     else
@@ -384,7 +384,7 @@ void __usercall UFG::UIHKScreenGarageBrowser::init(UFG::UIHKScreenGarageBrowser 
     UFG::UIHK_NISOverlay::UpdateAudioMuteState();
   }
   UFG::UIGfxTranslator::loadDictionary(UFG::UIScreenManager::s_instance->m_translator, "ITEMS");
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( (v17 >> 6) & 1 )
   {
     (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v16 + 16i64))(v16, &ptr, v18);
@@ -421,7 +421,7 @@ void __usercall UFG::UIHKScreenGarageBrowser::init(UFG::UIHKScreenGarageBrowser 
       0i64);
   v14 = UFG::OnlineManager::Instance();
   UFG::OnlineManager::RegisterObserver(v14, (UFG::OnlineManagerObserver *)&v4->vfptr);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 263
@@ -516,7 +516,7 @@ void __usercall UFG::UIHKScreenGarageBrowser::AfterFadeToBlackInit(UFG::UIHKScre
   }
   v20 = v2->mStore->mStoreType == 1;
   v21 = v2->mRenderable->m_movie.pObject;
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( (v25 >> 6) & 1 )
   {
     (*(void (__fastcall **)(__int64, char *, __int64))(*(_QWORD *)v24 + 16i64))(v24, &ptr, v26);
@@ -536,7 +536,7 @@ void __usercall UFG::UIHKScreenGarageBrowser::AfterFadeToBlackInit(UFG::UIHKScre
       0);
   }
   UFG::UIHK_NISOverlay::UpdateAudioMuteState();
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 337
@@ -703,7 +703,7 @@ void __fastcall UFG::UIHKScreenGarageBrowser::SetAsValet(UFG::UIHKScreenGarageBr
             v6 = v1->mRenderable->m_movie.pObject;
             if ( v6 )
             {
-              `eh vector constructor iterator'(
+              `eh vector constructor iterator(
                 &ptr,
                 0x30ui64,
                 1,
@@ -717,7 +717,7 @@ void __fastcall UFG::UIHKScreenGarageBrowser::SetAsValet(UFG::UIHKScreenGarageBr
               v10 = 2;
               LOBYTE(v11) = v7;
               Scaleform::GFx::Movie::Invoke(v6, "VehicleList_UpdateValet", 0i64, (Scaleform::GFx::Value *)&ptr, 1u);
-              `eh vector destructor iterator'(
+              `eh vector destructor iterator(
                 &ptr,
                 0x30ui64,
                 1,
@@ -1171,14 +1171,14 @@ LABEL_35:
     v24 = &gGlobalOverlaySentinel;
   UFG::UIHKHelpBarWidget::Show(&v24->HelpBar, &data);
   UFG::qString::~qString((UFG::qString *)&data.MessageIds[4]);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     &data.Captions[5].mStringHash32,
     0x28ui64,
     6,
     (void (__fastcall *)(void *))UFG::qString::~qString);
-  `eh vector destructor iterator'(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+  `eh vector destructor iterator(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
 }tring::~qString);
-  `eh vector destructor iterator'(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qStrin
+  `eh vector destructor iterator(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qStrin
 
 // File Line: 699
 // RVA: 0x5D2F40
@@ -1219,7 +1219,7 @@ void UFG::UIHKScreenGarageBrowser::ClearVehicleOrderOverride(void)
   if ( UFG::UIHKScreenGarageBrowser::mVehicleOrderOverride.p )
   {
     v0 = UFG::UIHKScreenGarageBrowser::mVehicleOrderOverride.p - 1;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       UFG::UIHKScreenGarageBrowser::mVehicleOrderOverride.p,
       4ui64,
       UFG::UIHKScreenGarageBrowser::mVehicleOrderOverride.p[-1].mUID,
@@ -1363,7 +1363,7 @@ LABEL_35:
         }
         while ( v16 < v15 );
       }
-      `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       if ( v1->mNumItems )
       {
         if ( v1->mStore->mStoreType == 1 )
@@ -1416,7 +1416,7 @@ LABEL_35:
         LOBYTE(v23) = 1;
         Scaleform::GFx::Movie::Invoke(v28, "VehicleList_SetIsEmpty", 0i64, (Scaleform::GFx::Value *)&ptr, 1u);
       }
-      `eh vector destructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+      `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
       if ( v2 )
         operator delete[](v2);
     }
@@ -1458,7 +1458,7 @@ void __fastcall UFG::UIHKScreenGarageBrowser::UpdateMoney(UFG::UIHKScreenGarageB
   UFG::qString::qString(&string);
   UFG::UI::FormatMoneyStr(v3, &string);
   pDtor = (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value;
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   v6 = string.mData;
   if ( (v10 >> 6) & 1 )
   {
@@ -1488,7 +1488,7 @@ void __fastcall UFG::UIHKScreenGarageBrowser::UpdateMoney(UFG::UIHKScreenGarageB
   v18 = 5;
   v19 = (double)v5;
   Scaleform::GFx::Movie::Invoke(v1, "VehicleList_SetCurrentMoney", 0i64, (Scaleform::GFx::Value *)&ptr, 3u);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   UFG::qString::~qString(&string);
 }
 
@@ -1710,7 +1710,7 @@ void __fastcall UFG::UIHKScreenGarageBrowser::Flash_AddItem(UFG::UIHKScreenGarag
   v68 = -2i64;
   v2 = info;
   v3 = this;
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 13, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 13, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   v4 = (double)(signed int)v2->storeIndex;
   if ( (v19 >> 6) & 1 )
   {
@@ -1833,7 +1833,7 @@ void __fastcall UFG::UIHKScreenGarageBrowser::Flash_AddItem(UFG::UIHKScreenGarag
     0i64,
     (Scaleform::GFx::Value *)&ptr,
     0xDu);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 13, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 13, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   UFG::qString::~qString(&v2->tier);
   UFG::qString::~qString(&v2->brandTexture);
   UFG::qString::~qString(&v2->texture);
@@ -2206,7 +2206,7 @@ void __fastcall UFG::UIHKScreenGarageBrowser::ClearList(UFG::UIHKScreenGarageBro
   if ( v2 )
   {
     v3 = &v2[-1].discountPercent;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v2,
       0x110ui64,
       v2[-1].discountPercent,

@@ -78,7 +78,7 @@ void __fastcall finishLoadedObjecthkpDeformableFixedConstraintData(void *p, int 
   {
     v2 = p;
     hkpConstraintData::hkpConstraintData((hkpConstraintData *)p, (hkFinishLoadedObjectFlag)finishing);
-    *v2 = &hkpDeformableFixedConstraintData::`vftable';
+    *v2 = &hkpDeformableFixedConstraintData::`vftable;
   }
 }
 
@@ -96,7 +96,7 @@ void **__fastcall getVtablehkpDeformableFixedConstraintData()
   hkpConstraintData v1; // [rsp+20h] [rbp-178h]
 
   hkpConstraintData::hkpConstraintData(&v1, 0);
-  return &hkpDeformableFixedConstraintData::`vftable';
+  return &hkpDeformableFixedConstraintData::`vftable;
 }
 
 // File Line: 154

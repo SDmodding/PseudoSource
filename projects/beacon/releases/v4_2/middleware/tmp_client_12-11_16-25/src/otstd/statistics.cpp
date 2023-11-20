@@ -6,7 +6,7 @@ void __fastcall OSuite::Statistics::Statistics(OSuite::Statistics *this, int mov
 
   this->maSize = movingAverageSize;
   v2 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::Statistics::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::Statistics::`vftable;
   this->maData = (float *)OSuite::ZObject::m_allocator->vfptr->malloc(
                             OSuite::ZObject::m_allocator,
                             4i64 * movingAverageSize,
@@ -23,7 +23,7 @@ void __fastcall OSuite::Statistics::~Statistics(OSuite::Statistics *this)
 
   v1 = this;
   v2 = this->maData;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::Statistics::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::Statistics::`vftable;
   OSuite::ZObject::m_allocator->vfptr->free(OSuite::ZObject::m_allocator, v2);
   v1->maData = 0i64;
 }

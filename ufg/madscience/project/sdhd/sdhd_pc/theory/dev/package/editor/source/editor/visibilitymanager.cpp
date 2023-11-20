@@ -44,7 +44,7 @@ void __fastcall UFG::Editor::VisibilityManager::Deactivate(UFG::Editor::Visibili
     v3 = v1 + 1;
     v3->mNext = v3;
     v3[1].mNext = v3;
-    v2->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+    v2->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
     v2->m_EventUID = 609910773;
     v2->m_NamePTR = 0i64;
   }
@@ -109,7 +109,7 @@ void __fastcall UFG::Editor::VisibilityManager::Deactivate(UFG::Editor::Visibili
         v15 = v13 + 1;
         v15->mNext = v15;
         v15[1].mNext = v15;
-        v14->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+        v14->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
         v14->m_EventUID = 609910773;
         v14->m_NamePTR = 0i64;
       }
@@ -216,7 +216,7 @@ void __fastcall UFG::Editor::VisibilityManager::Unhide(UFG::Editor::DAGPath *p)
   if ( path.mSubElements.p )
   {
     v5 = &path.mSubElements.p[-1].mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       path.mSubElements.p,
       0x28ui64,
       path.mSubElements.p[-1].mStringHash32,
@@ -376,7 +376,7 @@ LABEL_24:
           if ( pa.mSubElements.p )
           {
             v29 = &pa.mSubElements.p[-1].mStringHash32;
-            `eh vector destructor iterator'(
+            `eh vector destructor iterator(
               pa.mSubElements.p,
               0x28ui64,
               pa.mSubElements.p[-1].mStringHash32,
@@ -388,7 +388,7 @@ LABEL_24:
           if ( pa.mElements.p )
           {
             v30 = pa.mElements.p - 1;
-            `eh vector destructor iterator'(
+            `eh vector destructor iterator(
               pa.mElements.p,
               4ui64,
               pa.mElements.p[-1].mUID,
@@ -408,7 +408,7 @@ LABEL_59:
   if ( path.mSubElements.p )
   {
     v31 = &path.mSubElements.p[-1].mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       path.mSubElements.p,
       0x28ui64,
       path.mSubElements.p[-1].mStringHash32,
@@ -420,7 +420,7 @@ LABEL_59:
   if ( path.mElements.p )
   {
     v32 = path.mElements.p - 1;
-    `eh vector destructor iterator'(path.mElements.p, 4ui64, path.mElements.p[-1].mUID, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(path.mElements.p, 4ui64, path.mElements.p[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v32);
   }
   path.mElements.p = 0i64;
@@ -530,7 +530,7 @@ void __fastcall UFG::Editor::VisibilityManager::UnhideAll(UFG::Editor::Visibilit
         v11 = v9 + 1;
         v11->mNext = v11;
         v11[1].mNext = v11;
-        v10->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+        v10->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
         v10->m_EventUID = 609910773;
         v10->m_NamePTR = 0i64;
       }
@@ -547,7 +547,7 @@ void __fastcall UFG::Editor::VisibilityManager::UnhideAll(UFG::Editor::Visibilit
   if ( v19.p )
   {
     v13 = &v19.p[-1].mPathType;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v19.p,
       0x58ui64,
       v19.p[-1].mPathType,

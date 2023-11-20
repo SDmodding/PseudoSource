@@ -78,7 +78,7 @@ void __fastcall finishLoadedObjecthkpPulleyConstraintData(void *p, int finishing
   {
     v2 = p;
     hkpConstraintData::hkpConstraintData((hkpConstraintData *)p, (hkFinishLoadedObjectFlag)finishing);
-    *v2 = &hkpPulleyConstraintData::`vftable';
+    *v2 = &hkpPulleyConstraintData::`vftable;
   }
 }
 
@@ -96,7 +96,7 @@ void **__fastcall getVtablehkpPulleyConstraintData()
   hkpConstraintData v1; // [rsp+20h] [rbp-98h]
 
   hkpConstraintData::hkpConstraintData(&v1, 0);
-  return &hkpPulleyConstraintData::`vftable';
+  return &hkpPulleyConstraintData::`vftable;
 }
 
 // File Line: 152

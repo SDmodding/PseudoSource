@@ -41,7 +41,7 @@ void __fastcall UFG::TerrainCollisionComponent::TerrainCollisionComponent(UFG::T
   v11 = this;
   UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name_uid);
   v12 = (UFG::BasePhysicsObject *)&v11->vfptr;
-  v12->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::BasePhysicsObject::`vftable';
+  v12->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::BasePhysicsObject::`vftable;
   v11->mUserData.isBoat = 0;
   v13 = &v11->mUserData.simComponent;
   v13->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v13->mPrev;
@@ -50,8 +50,8 @@ void __fastcall UFG::TerrainCollisionComponent::TerrainCollisionComponent(UFG::T
   v14 = (UFG::qNode<UFG::TerrainCollisionComponent,UFG::TerrainCollisionComponent> *)&v11->mPrev;
   v14->mPrev = v14;
   v14->mNext = v14;
-  v11->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TerrainCollisionComponent::`vftable'{for `UFG::SimComponent'};
-  v12->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::TerrainCollisionComponent::`vftable'{for `UFG::BasePhysicsObject'};
+  v11->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TerrainCollisionComponent::`vftable{for `UFG::SimComponent};
+  v12->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::TerrainCollisionComponent::`vftable{for `UFG::BasePhysicsObject};
   v11->mWidth = v10;
   v11->mHeight = v9;
   v11->mQuantOffset = quant_offset;
@@ -130,8 +130,8 @@ void __fastcall UFG::TerrainCollisionComponent::~TerrainCollisionComponent(UFG::
   UFG::qNode<UFG::TerrainCollisionComponent,UFG::TerrainCollisionComponent> *v9; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TerrainCollisionComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::TerrainCollisionComponent::`vftable'{for `UFG::BasePhysicsObject'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TerrainCollisionComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::TerrainCollisionComponent::`vftable{for `UFG::BasePhysicsObject};
   if ( this == UFG::TerrainCollisionComponent::s_TerrainCollisionComponentpCurrentIterator )
     UFG::TerrainCollisionComponent::s_TerrainCollisionComponentpCurrentIterator = (UFG::TerrainCollisionComponent *)&this->mPrev[-7].mNext;
   v2 = (UFG::qNode<UFG::TerrainCollisionComponent,UFG::TerrainCollisionComponent> *)&this->mPrev;

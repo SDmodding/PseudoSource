@@ -122,7 +122,7 @@ void __fastcall FileCaptureWriter::Destroy(FileCaptureWriter *this)
   {
     v1 = g_DefaultPoolId;
     v2 = this;
-    this->vfptr = (IAkCaptureWriterVtbl *)&FileCaptureWriter::`vftable';
+    this->vfptr = (IAkCaptureWriterVtbl *)&FileCaptureWriter::`vftable;
     v3 = this->m_pCaptureStream;
     if ( v3 )
     {
@@ -140,7 +140,7 @@ FileCaptureWriterFactory *__fastcall FileCaptureWriterFactory::Instance()
   if ( !(_S1_36 & 1) )
   {
     _S1_36 |= 1u;
-    g_Factory.vfptr = (IAkCaptureWriterFactoryVtbl *)&FileCaptureWriterFactory::`vftable';
+    g_Factory.vfptr = (IAkCaptureWriterFactoryVtbl *)&FileCaptureWriterFactory::`vftable;
   }
   return &g_Factory;
 }
@@ -155,7 +155,7 @@ IAkCaptureWriter *__fastcall FileCaptureWriterFactory::CreateWriter(FileCaptureW
   if ( result )
   {
     result[66].vfptr = 0i64;
-    result->vfptr = (IAkCaptureWriterVtbl *)&FileCaptureWriter::`vftable';
+    result->vfptr = (IAkCaptureWriterVtbl *)&FileCaptureWriter::`vftable;
   }
   return result;
 }

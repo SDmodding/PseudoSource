@@ -60,7 +60,7 @@ hkaiNavMeshInstanceSegmentCaster::AccelerationData *__fastcall hkaiNavMeshInstan
   if ( v3 )
   {
     *(_DWORD *)(v3 + 8) = 0x1FFFF;
-    *(_QWORD *)v3 = &hkaiNavMeshInstanceSegmentCaster::AccelerationData::`vftable';
+    *(_QWORD *)v3 = &hkaiNavMeshInstanceSegmentCaster::AccelerationData::`vftable;
     *(_QWORD *)(v3 + 16) = 0i64;
   }
   else
@@ -130,7 +130,7 @@ void __fastcall hkaiNavMeshInstanceSegmentCaster::hkaiNavMeshInstanceSegmentCast
   v4 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_navMeshInstance = navMeshInstance;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshInstanceSegmentCaster::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshInstanceSegmentCaster::`vftable;
   if ( accelerationData )
   {
     hkReferencedObject::addReference((hkReferencedObject *)&accelerationData->vfptr);
@@ -150,12 +150,12 @@ void __fastcall hkaiNavMeshInstanceSegmentCaster::~hkaiNavMeshInstanceSegmentCas
   hkaiNavMeshInstanceSegmentCaster::AccelerationData *v2; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshInstanceSegmentCaster::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshInstanceSegmentCaster::`vftable;
   v2 = this->m_accelerationData.m_pntr;
   if ( v2 )
     hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
   v1->m_accelerationData.m_pntr = 0i64;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 117
@@ -188,7 +188,7 @@ void __fastcall hkaiNavMeshInstanceSegmentCaster::castSegment(hkaiNavMeshInstanc
   aabb.m_max.m_quad = _mm_max_ps(_mm_max_ps(_mm_max_ps(v6, v5), v8), v9);
   aabb.m_min.m_quad = _mm_min_ps(_mm_min_ps(_mm_min_ps(v6, v5), v8), v9);
   v10 = leftStart->m_quad;
-  collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&NavMeshInstanceCastSegmentQuery::`vftable';
+  collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&NavMeshInstanceCastSegmentQuery::`vftable;
   v11 = this->m_navMeshInstance;
   _mm_store_si128((__m128i *)&v14, (__m128i)v10);
   v12 = displacement->m_quad;
@@ -216,7 +216,7 @@ void __fastcall hkaiNavMeshInstanceSegmentCaster::castSegment(hkaiNavMeshInstanc
 
 // File Line: 135
 // RVA: 0x12E7770
-_BOOL8 __fastcall `anonymous namespace'::isEdgeMisconnected(hkaiNavMeshInstance *navMeshInstance, hkaiNavMesh::Edge *edge)
+_BOOL8 __fastcall `anonymous namespace::isEdgeMisconnected(hkaiNavMeshInstance *navMeshInstance, hkaiNavMesh::Edge *edge)
 {
   return hkaiNavMeshInstance_get_hkaiNavMesh::Edge__24(
            navMeshInstance->m_originalEdges,
@@ -442,7 +442,7 @@ LABEL_8:
             if ( v44->m_oppositeEdge == -1
               || (v46 = v44->m_flags.m_storage, v46 & 0x20)
               || v46 & 0x40
-              || (unsigned int)`anonymous namespace'::isEdgeMisconnected(v43, v45) )
+              || (unsigned int)`anonymous namespace::isEdgeMisconnected(v43, v45) )
             {
               hkaiIntervalPartition::Interval::setFromEndpoints(&interval, v38, v40, v39, v41, index);
               interval.m_leftX = fmaxf(v38, *(float *)&v67);

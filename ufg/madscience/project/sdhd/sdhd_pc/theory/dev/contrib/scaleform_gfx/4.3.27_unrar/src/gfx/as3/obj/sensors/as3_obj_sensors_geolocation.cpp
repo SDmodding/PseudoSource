@@ -40,7 +40,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_sensors::Geolocation::Geoloca
   Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::EventDispatcher(
     (Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher *)&this->vfptr,
     t);
-  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_sensors::Geolocation::`vftable';
+  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_sensors::Geolocation::`vftable;
   v2->GeolocationId = Scaleform::GFx::AS3::Instances::fl_sensors::Geolocation::GeolocationIdCount++;
   v3 = v2->VMRef;
   Scaleform::GFx::AS3::MovieRoot::AddToGeolocations((Scaleform::GFx::AS3::MovieRoot *)v3[1].vfptr, v2);
@@ -137,7 +137,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_sensors::Geolocation::~Geoloc
   Scaleform::Ptr<Scaleform::GFx::GeolocationInterface> result; // [rsp+48h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_sensors::Geolocation::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_sensors::Geolocation::`vftable;
   v2 = this->VMRef;
   if ( !v2->InDestructor )
   {
@@ -237,7 +237,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
       v5,
       v2,
       &Scaleform::GFx::AS3::fl_sensors::GeolocationCI);
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_sensors::Geolocation::`vftable';
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_sensors::Geolocation::`vftable;
   }
   else
   {
@@ -252,7 +252,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
       v7,
       v2,
       &Scaleform::GFx::AS3::fl_sensors::GeolocationCI);
-    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_sensors::Geolocation::`vftable';
+    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_sensors::Geolocation::`vftable;
   }
   else
   {
@@ -268,7 +268,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v9 )
   {
     Scaleform::GFx::AS3::Class::Class(v9, v3->pV);
-    v10->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl_sensors::Geolocation::`vftable';
+    v10->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl_sensors::Geolocation::`vftable;
   }
   return v3;
 }

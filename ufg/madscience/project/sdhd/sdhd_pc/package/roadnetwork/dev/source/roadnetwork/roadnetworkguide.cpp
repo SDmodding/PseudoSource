@@ -730,7 +730,7 @@ void __fastcall UFG::RoadNetworkGuide::RoadNetworkGuide(UFG::RoadNetworkGuide *t
   v2->mPrev = v2;
   v2->mNext = v2;
   UFG::qSafePointerNode<UFG::RoadNetworkGuide>::qSafePointerNode<UFG::RoadNetworkGuide>((UFG::qSafePointerNode<UFG::RoadNetworkGuide> *)&this->vfptr);
-  v1->vfptr = (UFG::qSafePointerNode<UFG::RoadNetworkGuide>Vtbl *)&UFG::RoadNetworkGuide::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::RoadNetworkGuide>Vtbl *)&UFG::RoadNetworkGuide::`vftable;
   v1->m_TargetLocation.m_LaneT = 0.0;
   v1->m_TargetLocation.m_CurrentLane = 0i64;
   v1->m_CurrentLocation.m_LaneT = 0.0;

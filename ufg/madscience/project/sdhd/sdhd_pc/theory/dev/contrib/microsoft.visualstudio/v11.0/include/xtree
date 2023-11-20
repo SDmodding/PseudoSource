@@ -265,7 +265,7 @@ LABEL_61:
     if ( !(_S1_13 & 1) )
     {
       _S1_13 |= 1u;
-      defaultAllocator.vfptr = (Json::ValueAllocatorVtbl *)&Json::DefaultValueAllocator::`vftable';
+      defaultAllocator.vfptr = (Json::ValueAllocatorVtbl *)&Json::DefaultValueAllocator::`vftable;
       atexit(Json::valueAllocator_::_2_::_dynamic_atexit_destructor_for__defaultAllocator__);
     }
     valueAllocator->vfptr->releaseMemberName(valueAllocator, (char *)v5->_Myval.first.cstr_);
@@ -391,7 +391,7 @@ void __fastcall std::_Tree<std::_Tmap_traits<Json::Value::CZString,Json::Value,s
       if ( !(_S1_13 & 1) )
       {
         _S1_13 |= 1u;
-        defaultAllocator.vfptr = (Json::ValueAllocatorVtbl *)&Json::DefaultValueAllocator::`vftable';
+        defaultAllocator.vfptr = (Json::ValueAllocatorVtbl *)&Json::DefaultValueAllocator::`vftable;
         atexit(Json::valueAllocator_::_2_::_dynamic_atexit_destructor_for__defaultAllocator__);
       }
       valueAllocator->vfptr->releaseMemberName(valueAllocator, (char *)v2->_Myval.first.cstr_);

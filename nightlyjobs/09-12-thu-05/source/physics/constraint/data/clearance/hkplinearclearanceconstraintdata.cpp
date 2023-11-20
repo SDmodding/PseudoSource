@@ -3,7 +3,7 @@
 void __fastcall hkpLinearClearanceConstraintData::hkpLinearClearanceConstraintData(hkpLinearClearanceConstraintData *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpLinearClearanceConstraintData::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpLinearClearanceConstraintData::`vftable;
   this->m_userData = 0i64;
   this->m_atoms.m_transforms.m_type.m_storage = 2;
   this->m_atoms.m_motor.m_type.m_storage = 11;
@@ -65,11 +65,11 @@ void __fastcall hkpLinearClearanceConstraintData::~hkpLinearClearanceConstraintD
   hkpConstraintMotor *v2; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpLinearClearanceConstraintData::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpLinearClearanceConstraintData::`vftable;
   v2 = this->m_atoms.m_motor.m_motor;
   if ( v2 )
     hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 87

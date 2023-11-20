@@ -2,7 +2,7 @@
 // RVA: 0x1075F0
 void __fastcall SSParameterBase::~SSParameterBase(SSParameterBase *this)
 {
-  this->vfptr = (SSParameterBaseVtbl *)&SSParameterBase::`vftable';
+  this->vfptr = (SSParameterBaseVtbl *)&SSParameterBase::`vftable;
 }
 
 // File Line: 59

@@ -26,7 +26,7 @@ void __fastcall UFG::GetInPedFormationComponent::GetInPedFormationComponent(UFG:
   v5 = (UFG::qNode<UFG::GetInPedFormationComponent,UFG::GetInPedFormationComponent> *)&v4->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::GetInPedFormationComponent::`vftable';
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::GetInPedFormationComponent::`vftable;
   v6 = &v4->m_NodeList;
   v6->mNode.mPrev = &v6->mNode;
   v6->mNode.mNext = &v6->mNode;
@@ -62,7 +62,7 @@ void __fastcall UFG::GetInPedFormationComponent::~GetInPedFormationComponent(UFG
   UFG::qNode<UFG::GetInPedFormationComponent,UFG::GetInPedFormationComponent> *v12; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::GetInPedFormationComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::GetInPedFormationComponent::`vftable;
   v2 = (UFG::qList<UFG::HasAttackRequestNode,UFG::HasAttackRequestNode,1,0> *)&this->m_NodeList;
   v3 = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> **)&this->m_NodeList.mNode.mNext[-2].mNext;
   v4 = &this->m_BoundComponentHandles.mNode.mNext;
@@ -400,7 +400,7 @@ void __fastcall UFG::GetInPedFormationNode::GetInPedFormationNode(UFG::GetInPedF
   v4->mPrev = v4;
   v4->mNext = v4;
   UFG::qSafePointerNode<UFG::GetInPedFormationNode>::qSafePointerNode<UFG::GetInPedFormationNode>((UFG::qSafePointerNode<UFG::GetInPedFormationNode> *)&this->vfptr);
-  v3->vfptr = (UFG::qSafePointerNode<UFG::GetInPedFormationNode>Vtbl *)&UFG::GetInPedFormationNode::`vftable';
+  v3->vfptr = (UFG::qSafePointerNode<UFG::GetInPedFormationNode>Vtbl *)&UFG::GetInPedFormationNode::`vftable;
   v5 = &v3->m_pTargetPedFormationManagerComponent;
   v5->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v5->mPrev;
   v5->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v5->mPrev;
@@ -464,7 +464,7 @@ void __fastcall UFG::GetInPedFormationNode::~GetInPedFormationNode(UFG::GetInPed
   UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v16; // rax
 
   v1 = (UFG::qSafePointerNode<UFG::ParkourHandle> *)this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::GetInPedFormationNode>Vtbl *)&UFG::GetInPedFormationNode::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::GetInPedFormationNode>Vtbl *)&UFG::GetInPedFormationNode::`vftable;
   v2 = &this->m_pOwner;
   if ( this->m_pOwner.m_pPointer )
   {
@@ -499,7 +499,7 @@ void __fastcall UFG::GetInPedFormationNode::~GetInPedFormationNode(UFG::GetInPed
   v11->mPrev = v10;
   v7->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)v7;
   v1[2].m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v1[2];
-  v1->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::GetInPedFormationNode>::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::GetInPedFormationNode>::`vftable;
   UFG::qSafePointerNode<UFG::DynamicCoverCorner>::SetAllPointersToNull(v1);
   UFG::qList<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList,1,0>::DeleteNodes(&v1->m_SafePointerList);
   v12 = v1->m_SafePointerList.mNode.mPrev;

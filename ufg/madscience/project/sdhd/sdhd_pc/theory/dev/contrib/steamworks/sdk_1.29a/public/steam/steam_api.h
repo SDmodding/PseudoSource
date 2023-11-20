@@ -24,7 +24,7 @@ void __fastcall CCallback<UFG::AchievementTrophyManager,UserStatsStored_t,0>::~C
   bool v1; // zf
 
   v1 = (this->m_nCallbackFlags & 1) == 0;
-  this->vfptr = (CCallbackBaseVtbl *)&CCallback<UFG::AchievementTrophyManager,UserStatsStored_t,0>::`vftable';
+  this->vfptr = (CCallbackBaseVtbl *)&CCallback<UFG::AchievementTrophyManager,UserStatsStored_t,0>::`vftable;
   if ( !v1 )
     SteamAPI_UnregisterCallback(this);
 }

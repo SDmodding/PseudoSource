@@ -35,51 +35,51 @@ void __fastcall hkaQuantizedQuaternion::packQuaternions48(unsigned __int16 *dst,
   v4 = dst;
   v5 = *v32;
   v6 = _mm_add_ps(
-         *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31,
-         *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31);
+         *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31,
+         *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31);
   v7 = _mm_mul_ps(_mm_sub_ps(src0->m_vec.m_quad, SMALLEST_MIN_REAL), SMALLEST_RNG_REAL);
   v8 = _mm_mul_ps(_mm_sub_ps(src1->m_vec.m_quad, SMALLEST_MIN_REAL), SMALLEST_RNG_REAL);
-  v9 = (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v7);
+  v9 = (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v7);
   v10 = _mm_mul_ps(_mm_sub_ps(src2->m_vec.m_quad, SMALLEST_MIN_REAL), SMALLEST_RNG_REAL);
   v11 = _mm_or_si128(
           _mm_add_epi32(
             _mm_cvttps_epi32(
               _mm_max_ps(
-                _mm_sub_ps(v7, _mm_and_ps((__m128)v9, *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31)),
+                _mm_sub_ps(v7, _mm_and_ps((__m128)v9, *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31)),
                 (__m128)0i64)),
             _mm_slli_epi32(v9, 0x1Fu)),
           (__m128i)_mm_cmpleps(v6, v7));
-  v12 = (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v8);
+  v12 = (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v8);
   _mm_store_si128(&v29, v11);
   _mm_store_si128((__m128i *)&v25, v11);
   v13 = _mm_or_si128(
           _mm_add_epi32(
             _mm_cvttps_epi32(
               _mm_max_ps(
-                _mm_sub_ps(v8, _mm_and_ps((__m128)v12, *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31)),
+                _mm_sub_ps(v8, _mm_and_ps((__m128)v12, *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31)),
                 (__m128)0i64)),
             _mm_slli_epi32(v12, 0x1Fu)),
           (__m128i)_mm_cmpleps(v6, v8));
-  v14 = (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v10);
+  v14 = (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v10);
   _mm_store_si128(&v30, v13);
   _mm_store_si128((__m128i *)&v26, v13);
   v15 = _mm_or_si128(
           _mm_add_epi32(
             _mm_cvttps_epi32(
               _mm_max_ps(
-                _mm_sub_ps(v10, _mm_and_ps((__m128)v14, *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31)),
+                _mm_sub_ps(v10, _mm_and_ps((__m128)v14, *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31)),
                 (__m128)0i64)),
             _mm_slli_epi32(v14, 0x1Fu)),
           (__m128i)_mm_cmpleps(v6, v10));
   _mm_store_si128(&v31, v15);
   _mm_store_si128((__m128i *)&v27, v15);
   v16 = _mm_mul_ps(_mm_sub_ps(v5, SMALLEST_MIN_REAL), SMALLEST_RNG_REAL);
-  v17 = (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v16);
+  v17 = (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v16);
   v18 = _mm_or_si128(
           _mm_add_epi32(
             _mm_cvttps_epi32(
               _mm_max_ps(
-                _mm_sub_ps(v16, _mm_and_ps((__m128)v17, *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31)),
+                _mm_sub_ps(v16, _mm_and_ps((__m128)v17, *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31)),
                 (__m128)0i64)),
             _mm_slli_epi32(v17, 0x1Fu)),
           (__m128i)_mm_cmpleps(v6, v16));

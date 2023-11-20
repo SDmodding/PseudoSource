@@ -6,14 +6,14 @@ void __fastcall CAkSoundBase::CAkSoundBase(CAkSoundBase *this, unsigned int in_u
 
   v2 = this;
   CAkParameterNode::CAkParameterNode((CAkParameterNode *)&this->vfptr, in_ulID);
-  v2->vfptr = (CAkIndexableVtbl *)&CAkSoundBase::`vftable';
+  v2->vfptr = (CAkIndexableVtbl *)&CAkSoundBase::`vftable;
 }
 
 // File Line: 34
 // RVA: 0xA8ECD0
 void __fastcall CAkSoundBase::~CAkSoundBase(CAkSoundBase *this)
 {
-  this->vfptr = (CAkIndexableVtbl *)&CAkSoundBase::`vftable';
+  this->vfptr = (CAkIndexableVtbl *)&CAkSoundBase::`vftable;
   CAkParameterNode::~CAkParameterNode((CAkParameterNode *)&this->vfptr);
 }
 

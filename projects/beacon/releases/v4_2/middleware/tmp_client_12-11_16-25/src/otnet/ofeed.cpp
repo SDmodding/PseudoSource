@@ -33,7 +33,7 @@ void __fastcall OSuite::ZOFeed::ZOFeed(OSuite::ZOFeed *this, OSuite::IReader *pR
   OSuite::ZAtomFeed::ZAtomFeed((OSuite::ZAtomFeed *)&this->vfptr, sFeedUrl);
   v5->m_inlineEntryCount = -1;
   v5->m_pEdmEntityType = 0i64;
-  v5->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOFeed::`vftable';
+  v5->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOFeed::`vftable;
   v6 = OSuite::ZOnlineSuite::Instance();
   v7 = OSuite::ZOnlineSuite::GetForUrl(v6, v4);
   v8 = v7;
@@ -129,10 +129,10 @@ LABEL_22:
     goto LABEL_22;
   v20.m_pListBase = 0i64;
   OSuite::ZListBase::ZListIteratorBase::ZListIteratorBase((OSuite::ZListBase::ZListIteratorBase *)&v17, v5);
-  v17.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
-  v19 = &OSuite::TConstIterator<OSuite::TList<OSuite::ZOEdmEndRole *>::ZIterator,OSuite::ZOEdmEndRole *,int>::`vftable';
+  v17.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
+  v19 = &OSuite::TConstIterator<OSuite::TList<OSuite::ZOEdmEndRole *>::ZIterator,OSuite::ZOEdmEndRole *,int>::`vftable;
   OSuite::ZListBase::ZListIteratorBase::ZListIteratorBase(&v20, (OSuite::ZListBase::ZListIteratorBase *)&v17);
-  v20.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+  v20.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
   while ( !OSuite::ZListBase::ZListIteratorBase::AtEnd(&v20) )
   {
     OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)v20.m_pListBase);

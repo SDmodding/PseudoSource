@@ -27,11 +27,11 @@ UFG::UIFlowInGame *__fastcall UFG::LazyInitGet<UFG::UIFlowInGame>::get()
                                     1u);
     if ( result )
     {
-      result->vfptr = (UFG::UIFlowVtbl *)&UFG::UIFlow::`vftable';
+      result->vfptr = (UFG::UIFlowVtbl *)&UFG::UIFlow::`vftable;
       result->m_screen_id = -1;
       result->m_child_flow = 0i64;
       *(_QWORD *)&result->m_state = 0i64;
-      result->vfptr = (UFG::UIFlowVtbl *)&UFG::UIFlowInGame::`vftable';
+      result->vfptr = (UFG::UIFlowVtbl *)&UFG::UIFlowInGame::`vftable;
     }
     else
     {

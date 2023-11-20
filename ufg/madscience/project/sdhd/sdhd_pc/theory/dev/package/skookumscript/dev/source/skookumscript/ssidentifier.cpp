@@ -37,11 +37,11 @@ void __fastcall SSIdentifierMember::~SSIdentifierMember(SSIdentifierMember *this
   SSExpressionBase *v2; // rcx
 
   v1 = this;
-  this->vfptr = (SSExpressionBaseVtbl *)&SSIdentifierMember::`vftable';
+  this->vfptr = (SSExpressionBaseVtbl *)&SSIdentifierMember::`vftable;
   v2 = this->i_owner_p;
   if ( v2 )
     v2->vfptr->__vecDelDtor(v2, 1u);
-  v1->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
+  v1->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
 }
 
 // File Line: 422

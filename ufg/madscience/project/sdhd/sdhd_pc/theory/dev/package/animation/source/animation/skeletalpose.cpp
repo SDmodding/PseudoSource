@@ -268,12 +268,12 @@ void __fastcall SkeletalPose::SkeletalPose(SkeletalPose *this, unsigned int rigU
   v3->mRootMatrix44.v3 = (UFG::qVector4)_mm_shuffle_ps(v6, v6, 21);
   v3->mIsRootDirty = 0;
   v3->mCachedTransformChangeID = -1;
-  v7 = `UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result )
+  v7 = `UFG::qGetResourceInventory<UFG::RigResource>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::RigResource>::`2::result )
   {
     v8 = UFG::qResourceWarehouse::Instance();
     v7 = UFG::qResourceWarehouse::GetInventory(v8, 0x39BC0A7Eu);
-    `UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result = v7;
+    `UFG::qGetResourceInventory<UFG::RigResource>::`2::result = v7;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v5->mPrev, 0x39BC0A7Eu, v2, v7);
   v3->mRigHandle.mUnloadFunction = SkeletalPose::RigUnloadedCallback;
@@ -535,12 +535,12 @@ void __fastcall SkeletalPose::SkeletalPose(SkeletalPose *this, UFG::RigResource 
   v3->mIsRootDirty = 0;
   v3->mCachedTransformChangeID = -1;
   v7 = v2->mNode.mUID;
-  inventory = `UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result )
+  inventory = `UFG::qGetResourceInventory<UFG::RigResource>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::RigResource>::`2::result )
   {
     v9 = UFG::qResourceWarehouse::Instance();
     inventory = UFG::qResourceWarehouse::GetInventory(v9, 0x39BC0A7Eu);
-    `UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result = inventory;
+    `UFG::qGetResourceInventory<UFG::RigResource>::`2::result = inventory;
   }
   UFG::qResourceHandle::Init(
     (UFG::qResourceHandle *)&v5->mPrev,
@@ -757,12 +757,12 @@ void __fastcall SkeletalPose::~SkeletalPose(SkeletalPose *this)
     (*(void (__fastcall **)(_QWORD *, hkaPose *, signed __int64))(*v3[11] + 16i64))(v3[11], v2, 80i64);
     v1->mHavokPose = 0i64;
   }
-  v4 = `UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result )
+  v4 = `UFG::qGetResourceInventory<UFG::RigResource>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::RigResource>::`2::result )
   {
     v5 = UFG::qResourceWarehouse::Instance();
     v4 = UFG::qResourceWarehouse::GetInventory(v5, 0x39BC0A7Eu);
-    `UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result = v4;
+    `UFG::qGetResourceInventory<UFG::RigResource>::`2::result = v4;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mRigHandle.mPrev, v4);
   UFG::qResourceHandle::~qResourceHandle((UFG::qResourceHandle *)&v1->mRigHandle.mPrev);

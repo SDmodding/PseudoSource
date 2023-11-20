@@ -40,7 +40,7 @@ void __fastcall UFG::CollectibleComponent::CollectibleComponent(UFG::Collectible
   *(_QWORD *)(v7 + 8) = 0i64;
   *(_QWORD *)(v7 + 16) = 0i64;
   *(_DWORD *)(v7 + 24) = v6;
-  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CollectibleComponent::`vftable';
+  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CollectibleComponent::`vftable;
   v13 = &v5->mpObject;
   v13->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v13->mPrev;
   v13->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v13->mPrev;
@@ -83,7 +83,7 @@ void __fastcall UFG::CollectibleComponent::~CollectibleComponent(UFG::Collectibl
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CollectibleComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CollectibleComponent::`vftable;
   UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
     (UFG::qBaseTreeVariableRB<unsigned __int64> *)&UFG::CollectibleComponent::msCollectibleComponents,
     (UFG::qBaseNodeVariableRB<unsigned __int64> *)&this->mNode);

@@ -31,7 +31,7 @@ hkClass *__fastcall hkaiDropDownAnalyzer::staticClass()
 void __fastcall finishLoadedObjecthkaiDropDownAnalyzer(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiDropDownAnalyzer::`vftable';
+    *(_QWORD *)p = &hkaiDropDownAnalyzer::`vftable;
 }
 
 // File Line: 70
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkaiDropDownAnalyzer(void *p)
 // RVA: 0xC32290
 void **__fastcall getVtablehkaiDropDownAnalyzer()
 {
-  return &hkaiDropDownAnalyzer::`vftable';
+  return &hkaiDropDownAnalyzer::`vftable;
 }
 
 // File Line: 96

@@ -51,7 +51,7 @@ void __fastcall hkaiWorld::stepCharacters(hkaiWorld *this, float timestep, hkArr
 
 // File Line: 78
 // RVA: 0xBE34A0
-void __fastcall `anonymous namespace'::AgentInfo::AgentInfo(AgentInfo *this)
+void __fastcall `anonymous namespace::AgentInfo::AgentInfo(AgentInfo *this)
 {
   AgentInfo *v1; // rbp
   unsigned int v2; // ebx
@@ -591,7 +591,7 @@ void __usercall hkaiWorld::stepCharactersMT(hkaiWorld *this@<rcx>, float timeste
     do
     {
       if ( v22 )
-        `anonymous namespace'::AgentInfo::AgentInfo(v22);
+        `anonymous namespace::AgentInfo::AgentInfo(v22);
       ++v22;
       --v23;
     }
@@ -1498,7 +1498,7 @@ void __fastcall hkaiWorld::CharacterStepSerializableContext::CharacterStepSerial
   hkResult result; // [rsp+78h] [rbp+10h]
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiWorld::CharacterStepSerializableContext::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiWorld::CharacterStepSerializableContext::`vftable;
   v2 = cbCtx;
   this->m_world = cbCtx->m_world;
   v3 = this;
@@ -1645,7 +1645,7 @@ void __fastcall hkaiWorld::CharacterStepSerializableContext::CharacterStepSerial
 // RVA: 0xBE1A90
 void __fastcall hkaiWorld::CharacterStepSerializableContext::CharacterStepSerializableContext(hkaiWorld::CharacterStepSerializableContext *this, hkFinishLoadedObjectFlag f)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiWorld::CharacterStepSerializableContext::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiWorld::CharacterStepSerializableContext::`vftable;
 }
 
 // File Line: 648
@@ -1666,7 +1666,7 @@ void __fastcall hkaiWorld::CharacterStepSerializableContext::~CharacterStepSeria
   int v12; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiWorld::CharacterStepSerializableContext::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiWorld::CharacterStepSerializableContext::`vftable;
   v2 = this->m_obstacleGenerators.m_data;
   v3 = this->m_obstacleGenerators.m_size - 1;
   for ( i = v3; i >= 0; v2[i--].m_pntr = 0i64 )
@@ -1710,6 +1710,6 @@ void __fastcall hkaiWorld::CharacterStepSerializableContext::~CharacterStepSeria
       8 * v12);
   v1->m_characters.m_data = 0i64;
   v1->m_characters.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 

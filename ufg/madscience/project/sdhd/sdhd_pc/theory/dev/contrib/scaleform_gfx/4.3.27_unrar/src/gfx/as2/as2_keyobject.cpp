@@ -56,11 +56,11 @@ void __fastcall Scaleform::GFx::AS2::KeyCtorFunction::KeyCtorFunction(Scaleform:
     (Scaleform::GFx::AS2::CFunctionObject *)&this->vfptr,
     psc,
     Scaleform::GFx::AS2::StageCtorFunction::GlobalCtor);
-  v5->vfptr = (Scaleform::GFx::KeyboardState::IListenerVtbl *)&Scaleform::GFx::KeyboardState::IListener::`vftable';
-  v5->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::KeyCtorFunction::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
+  v5->vfptr = (Scaleform::GFx::KeyboardState::IListenerVtbl *)&Scaleform::GFx::KeyboardState::IListener::`vftable;
+  v5->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::KeyCtorFunction::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
   v6 = (signed __int64)&v5->vfptr;
-  v5->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::KeyCtorFunction::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
-  v5->vfptr = (Scaleform::GFx::KeyboardState::IListenerVtbl *)&Scaleform::GFx::AS2::KeyCtorFunction::`vftable';
+  v5->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::KeyCtorFunction::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+  v5->vfptr = (Scaleform::GFx::KeyboardState::IListenerVtbl *)&Scaleform::GFx::AS2::KeyCtorFunction::`vftable;
   v7 = (signed __int64)v5->States;
   v8 = 15;
   do
@@ -503,7 +503,7 @@ void __fastcall Scaleform::GFx::AS2::KeyCtorFunction::NotifyListeners(Scaleform:
               - 32;
           if ( v4 != (Scaleform::GFx::AS2::KeyCtorFunction *)-32i64 )
           {
-            *(_QWORD *)&evta.Id = `Scaleform::GFx::AS2::AsBroadcaster::BroadcastMessage'::`4'::LocalInvokeCallback::`vftable';
+            *(_QWORD *)&evta.Id = `Scaleform::GFx::AS2::AsBroadcaster::BroadcastMessage::`4::LocalInvokeCallback::`vftable;
             evta.KeyCode = v6;
             evta.TouchID = v19;
             Scaleform::GFx::AS2::AsBroadcaster::BroadcastMessageWithCallback(
@@ -511,7 +511,7 @@ void __fastcall Scaleform::GFx::AS2::KeyCtorFunction::NotifyListeners(Scaleform:
               (Scaleform::GFx::AS2::ObjectInterface *)&v4->vfptr,
               &result,
               (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallback *)&evta);
-            *(_QWORD *)&evta.Id = &Scaleform::GFx::AS2::AsBroadcaster::InvokeCallback::`vftable';
+            *(_QWORD *)&evta.Id = &Scaleform::GFx::AS2::AsBroadcaster::InvokeCallback::`vftable;
           }
           for ( ; v6; --v6 )
           {

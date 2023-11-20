@@ -33,7 +33,7 @@ void __fastcall UFG::RenderStagePlugin::RenderStagePlugin(UFG::RenderStagePlugin
   v2 = (UFG::qNode<UFG::RenderStagePlugin,UFG::RenderStagePlugin> *)&v1->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::RenderStagePlugin::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::RenderStagePlugin::`vftable;
   UFG::SimComponent::AddType(
     (UFG::SimComponent *)&v1->vfptr,
     UFG::RenderStagePlugin::_RenderStagePluginTypeUID,
@@ -61,7 +61,7 @@ void __fastcall UFG::DamagePostEffect::DamagePostEffect(UFG::DamagePostEffect *t
 
   v1 = (UFG::SimComponent *)&this->vfptr;
   UFG::RenderStagePlugin::RenderStagePlugin((UFG::RenderStagePlugin *)&this->vfptr);
-  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::DamagePostEffect::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::DamagePostEffect::`vftable;
   v1[1].m_SafePointerList.mNode.mNext = 0i64;
   UFG::SimComponent::AddType(v1, UFG::DamagePostEffect::_DamagePostEffectTypeUID, "DamagePostEffect");
   v2 = sIsStaticInit;
@@ -160,7 +160,7 @@ void __fastcall UFG::DamagePostEffect::RenderPostEffect(UFG::DamagePostEffect *t
       v19 = *v14;
       *v14 = *v11;
       *v11 = v19;
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         ptr.mStateArgs.mStateArgs,
         0x10ui64,
         128,
@@ -190,7 +190,7 @@ UFG::ComponentIDDesc *__fastcall UFG::VisualTreatmentPostEffect::GetDesc(UFG::Vi
 // RVA: 0x1456890
 __int64 dynamic_initializer_for__UFG::VisualTreatmentPostEffect::msStateBlockHandle__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     UFG::VisualTreatmentPostEffect::msStateBlockHandle,
     0x20ui64,
     128,
@@ -241,13 +241,13 @@ void __fastcall UFG::VisualTreatmentPostEffect::StaticInit(const char **visual_t
         v10 = UFG::VisualTreatmentPostEffect::msNumVisualTreatments;
         UFG::VisualTreatmentPostEffect::msStateBlockName[v10] = v3[v5];
         v11 = (unsigned int)v9[1].mNode.mNext;
-        v12 = `UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result;
+        v12 = `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result;
         v13 = &UFG::VisualTreatmentPostEffect::msStateBlockHandle[v10];
-        if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result )
+        if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result )
         {
           v14 = UFG::qResourceWarehouse::Instance();
           v12 = UFG::qResourceWarehouse::GetInventory(v14, 0x4D04C7F2u);
-          `UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result = v12;
+          `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result = v12;
         }
         UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v13->mPrev, 0x4D04C7F2u, v11, v12);
         v15 = UFG::VisualTreatmentPostEffect::msNumVisualTreatments++ + 1;
@@ -291,7 +291,7 @@ void __fastcall UFG::VisualTreatmentPostEffect::VisualTreatmentPostEffect(UFG::V
 
   v1 = this;
   UFG::RenderStagePlugin::RenderStagePlugin((UFG::RenderStagePlugin *)&this->vfptr);
-  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VisualTreatmentPostEffect::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VisualTreatmentPostEffect::`vftable;
   v1->mState.mNumAdditive = 0;
   v1->mState.mBasePlaying = 0;
   v1->mState.mTreatmentID = 0;
@@ -315,12 +315,12 @@ void __fastcall UFG::VisualTreatmentPostEffect::VisualTreatmentPostEffect(UFG::V
   LODWORD(gVisualTreatmentParams.TimeScale) = (_DWORD)FLOAT_1_0;
   v1->mDefaultVisualTreatmentParams = 0i64;
   UFG::qResourceHandle::qResourceHandle(&v16);
-  v2 = `UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result )
+  v2 = `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result )
   {
     v3 = UFG::qResourceWarehouse::Instance();
     v2 = UFG::qResourceWarehouse::GetInventory(v3, 0x4D04C7F2u);
-    `UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result = v2;
+    `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result = v2;
   }
   UFG::qResourceHandle::Init(&v16, 0x4D04C7F2u, 0x8906EE5D, v2);
   if ( v16.mData )
@@ -375,12 +375,12 @@ LABEL_18:
       v1->mDefaultVisualTreatmentParams[v5++] = v12;
     }
   }
-  v14 = `UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result )
+  v14 = `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result )
   {
     v15 = UFG::qResourceWarehouse::Instance();
     v14 = UFG::qResourceWarehouse::GetInventory(v15, 0x4D04C7F2u);
-    `UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result = v14;
+    `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result = v14;
   }
   UFG::qResourceHandle::Close(&v16, v14);
   UFG::qResourceHandle::~qResourceHandle(&v16);
@@ -688,7 +688,7 @@ void __fastcall UFG::VisualTreatmentPostEffect::RenderPostEffect(UFG::VisualTrea
     v24 = *v15;
     *v15 = *v12;
     *v12 = v24;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       ptr.mStateArgs.mStateArgs,
       0x10ui64,
       128,
@@ -1111,7 +1111,7 @@ void __fastcall UFG::GunRecoilPostEffect::GunRecoilPostEffect(UFG::GunRecoilPost
 
   v1 = this;
   UFG::RenderStagePlugin::RenderStagePlugin((UFG::RenderStagePlugin *)&this->vfptr);
-  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::GunRecoilPostEffect::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::GunRecoilPostEffect::`vftable;
   v1->mRecoilValue = 0.0;
   v1->mRecoilFalloffScale = 1.0;
   UFG::SimComponent::AddType(
@@ -1198,7 +1198,7 @@ void __fastcall UFG::GunRecoilPostEffect::RenderPostEffect(UFG::GunRecoilPostEff
       v20 = *v15;
       *v15 = *v12;
       *v12 = v20;
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         ptr.mStateArgs.mStateArgs,
         0x10ui64,
         128,
@@ -1231,7 +1231,7 @@ void __fastcall UFG::AccumulationBufferPostEffect::AccumulationBufferPostEffect(
 
   v1 = this;
   UFG::RenderStagePlugin::RenderStagePlugin((UFG::RenderStagePlugin *)&this->vfptr);
-  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AccumulationBufferPostEffect::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AccumulationBufferPostEffect::`vftable;
   v1->mEnable = 0.0;
   UFG::SimComponent::AddType(
     (UFG::SimComponent *)&v1->vfptr,
@@ -1293,7 +1293,7 @@ void __fastcall UFG::AccumulationBufferPostEffect::RenderPostEffect(UFG::Accumul
     Scaleform::Ptr<Scaleform::Render::Texture>::Ptr<Scaleform::Render::Texture>(&poly);
     Render::View::Draw(&v15, &poly, v7, 0i64);
     Render::View::EndTarget(&v15);
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       ptr.mStateArgs.mStateArgs,
       0x10ui64,
       128,
@@ -1318,7 +1318,7 @@ void __fastcall UFG::FrontEndPauseEffect::FrontEndPauseEffect(UFG::FrontEndPause
 
   v1 = this;
   UFG::RenderStagePlugin::RenderStagePlugin((UFG::RenderStagePlugin *)&this->vfptr);
-  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::FrontEndPauseEffect::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::FrontEndPauseEffect::`vftable;
   v1->mVisualTreatmentIndex = -1;
   *(_QWORD *)&v1->mCurrBlurCount = 0i64;
   v1->mRestoreVisualTreatmentAfterBlur = 0;
@@ -1618,7 +1618,7 @@ void __fastcall UFG::FrontEndPauseEffect::RenderPostEffect(UFG::FrontEndPauseEff
       0xB0A10EFE);
   }
   Render::gRenderUtilities.mSubmitContext = 0i64;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     ptr.mStateArgs.mStateArgs,
     0x10ui64,
     128,

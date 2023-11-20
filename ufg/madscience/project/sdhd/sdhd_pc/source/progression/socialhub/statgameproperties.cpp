@@ -119,7 +119,7 @@ void __fastcall UFG::StatGamePropertyManager::StatGamePropertyManager(UFG::StatG
           v9 = v6 + 1;
           v9->mNext = v9;
           v9[1].mNext = v9;
-          v7->vfptr = (UFG::StatGamePropertyDataVtbl *)&UFG::StatGamePropertyData::`vftable';
+          v7->vfptr = (UFG::StatGamePropertyDataVtbl *)&UFG::StatGamePropertyData::`vftable;
           v7->m_pLBD = (UFG::OSuiteLeaderboardData *)v8;
         }
         else

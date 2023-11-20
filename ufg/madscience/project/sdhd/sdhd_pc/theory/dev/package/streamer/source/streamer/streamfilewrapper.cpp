@@ -120,7 +120,7 @@ __int64 UFG::StreamFileWrapper::_dynamic_initializer_for__smClosedStreamFiles__(
 // RVA: 0x146FD80
 __int64 UFG::StreamFileWrapper::_dynamic_initializer_for__smPendingQueues__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     UFG::StreamFileWrapper::smPendingQueues,
     0x48ui64,
     4,
@@ -307,7 +307,7 @@ UFG::allocator::free_link *__fastcall UFG::StreamFileWrapper::OnPackedAudioFileO
   v9 = UFG::qMalloc(0x18ui64, "StreamFile:PackedAudioFileData", 0x800ui64);
   if ( v9 )
   {
-    v9->mNext = (UFG::allocator::free_link *)&UFG::StreamFileWrapper::PackedAudioFileData::`vftable';
+    v9->mNext = (UFG::allocator::free_link *)&UFG::StreamFileWrapper::PackedAudioFileData::`vftable;
     LODWORD(v9[1].mNext) = 0;
     BYTE4(v9[1].mNext) = 0;
     v9[2].mNext = 0i64;

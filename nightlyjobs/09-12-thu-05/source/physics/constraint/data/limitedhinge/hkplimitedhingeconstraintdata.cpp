@@ -6,7 +6,7 @@ void __fastcall hkpLimitedHingeConstraintData::hkpLimitedHingeConstraintData(hkp
 
   v1 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpLimitedHingeConstraintData::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpLimitedHingeConstraintData::`vftable;
   this->m_userData = 0i64;
   hkpLimitedHingeConstraintData::Atoms::Atoms(&this->m_atoms);
   v1->m_atoms.m_transforms.m_transformA.m_rotation.m_col0 = (hkVector4f)transform.m_quad;
@@ -53,11 +53,11 @@ void __fastcall hkpLimitedHingeConstraintData::~hkpLimitedHingeConstraintData(hk
   hkpConstraintMotor *v2; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpLimitedHingeConstraintData::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpLimitedHingeConstraintData::`vftable;
   v2 = this->m_atoms.m_angMotor.m_motor;
   if ( v2 )
     hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 82

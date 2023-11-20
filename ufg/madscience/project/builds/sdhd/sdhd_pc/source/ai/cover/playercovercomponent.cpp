@@ -119,7 +119,7 @@ UFG::SimComponent *__fastcall UFG::PlayerCoverComponent::PropertiesOnActivate(UF
     if ( !v5 )
       v5 = v1->mpConstProperties;
     UFG::AICoverComponent::AICoverComponent((UFG::AICoverComponent *)v3, v1->m_NameUID, v5, 0);
-    v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::PlayerCoverComponent::`vftable';
+    v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::PlayerCoverComponent::`vftable;
     UFG::SimComponent::AddType(v4, UFG::PlayerCoverComponent::_PlayerCoverComponentTypeUID, "PlayerCoverComponent");
   }
   else
@@ -488,7 +488,7 @@ void __fastcall UFG::PlayerCoverComponent::SubmitPlayerCoverQuery(UFG::PlayerCov
     if ( v8 )
     {
       UFG::AICoverQuery::AICoverQuery((UFG::AICoverQuery *)v8);
-      v9->vfptr = (UFG::AIQueryVtbl *)&UFG::PlayerCoverQuery::`vftable';
+      v9->vfptr = (UFG::AIQueryVtbl *)&UFG::PlayerCoverQuery::`vftable;
     }
     else
     {
@@ -1109,7 +1109,7 @@ LABEL_119:
   }
   if ( v51 )
   {
-    `eh vector destructor iterator'(v51, 0x18ui64, *((_DWORD *)v51 - 2), (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v51, 0x18ui64, *((_DWORD *)v51 - 2), (void (__fastcall *)(void *))_);
     operator delete[](v51 - 2);
   }
   *(_QWORD *)&result.z = 0i64;
@@ -1498,7 +1498,7 @@ char __fastcall UFG::PlayerCoverComponent::ProbeForCover(UFG::PlayerCoverCompone
 LABEL_37:
     if ( v6 )
     {
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         v6,
         0x10ui64,
         (int)v6[-1].m_pCoverPosition,
@@ -1585,7 +1585,7 @@ LABEL_37:
 LABEL_34:
   if ( v6 )
   {
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v6,
       0x10ui64,
       (int)v6[-1].m_pCoverPosition,

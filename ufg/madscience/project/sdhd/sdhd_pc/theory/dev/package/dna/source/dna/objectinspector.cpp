@@ -10,7 +10,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UITest::ValueTest_UFG::
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UITest::ValueTest,UFG::qReflectObject>::sInventory.vfptr,
     "UITest::ValueTest",
     v0);
-  UFG::qReflectObjectType<UITest::ValueTest,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UITest::ValueTest>::`vftable';
+  UFG::qReflectObjectType<UITest::ValueTest,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UITest::ValueTest>::`vftable;
   UFG::qReflectInventory<UITest::ValueTest>::OnAddToWarehouse(&UFG::qReflectObjectType<UITest::ValueTest,UFG::qReflectObject>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -31,7 +31,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UITest::ValueSubClass_U
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UITest::ValueSubClass,UITest::ValueTest>::sInventory.vfptr,
     "UITest::ValueSubClass",
     v0);
-  UFG::qReflectObjectType<UITest::ValueSubClass,UITest::ValueTest>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UITest::ValueSubClass>::`vftable';
+  UFG::qReflectObjectType<UITest::ValueSubClass,UITest::ValueTest>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UITest::ValueSubClass>::`vftable;
   UFG::qReflectInventory<UITest::ValueSubClass>::OnAddToWarehouse(&UFG::qReflectObjectType<UITest::ValueSubClass,UITest::ValueTest>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -52,7 +52,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UITest::PointerTest_UFG
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UITest::PointerTest,UFG::qReflectObject>::sInventory.vfptr,
     "UITest::PointerTest",
     v0);
-  UFG::qReflectObjectType<UITest::PointerTest,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UITest::PointerTest>::`vftable';
+  UFG::qReflectObjectType<UITest::PointerTest,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UITest::PointerTest>::`vftable;
   UFG::qReflectInventory<UITest::PointerTest>::OnAddToWarehouse(&UFG::qReflectObjectType<UITest::PointerTest,UFG::qReflectObject>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -80,7 +80,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UITest::EnumValueTest_U
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UITest::EnumValueTest,UFG::qReflectObject>::sInventory.vfptr,
     "UITest::EnumValueTest",
     v0);
-  UFG::qReflectObjectType<UITest::EnumValueTest,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UITest::EnumValueTest>::`vftable';
+  UFG::qReflectObjectType<UITest::EnumValueTest,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UITest::EnumValueTest>::`vftable;
   UFG::qReflectInventory<UITest::EnumValueTest>::OnAddToWarehouse(&UFG::qReflectObjectType<UITest::EnumValueTest,UFG::qReflectObject>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -115,7 +115,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UITest::ArrayPointerTes
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UITest::ArrayPointerTest,UFG::qReflectObject>::sInventory.vfptr,
     "UITest::ArrayPointerTest",
     v0);
-  UFG::qReflectObjectType<UITest::ArrayPointerTest,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UITest::ArrayPointerTest>::`vftable';
+  UFG::qReflectObjectType<UITest::ArrayPointerTest,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UITest::ArrayPointerTest>::`vftable;
   UFG::qReflectInventory<UITest::ArrayPointerTest>::OnAddToWarehouse(&UFG::qReflectObjectType<UITest::ArrayPointerTest,UFG::qReflectObject>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -157,7 +157,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UITest::SymbolTest_UFG:
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UITest::SymbolTest,UFG::qReflectObject>::sInventory.vfptr,
     "UITest::SymbolTest",
     v0);
-  UFG::qReflectObjectType<UITest::SymbolTest,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UITest::SymbolTest>::`vftable';
+  UFG::qReflectObjectType<UITest::SymbolTest,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UITest::SymbolTest>::`vftable;
   UFG::qReflectInventory<UITest::SymbolTest>::OnAddToWarehouse(&UFG::qReflectObjectType<UITest::SymbolTest,UFG::qReflectObject>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -178,7 +178,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UITest::MathValueTest_U
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UITest::MathValueTest,UFG::qReflectObject>::sInventory.vfptr,
     "UITest::MathValueTest",
     v0);
-  UFG::qReflectObjectType<UITest::MathValueTest,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UITest::MathValueTest>::`vftable';
+  UFG::qReflectObjectType<UITest::MathValueTest,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UITest::MathValueTest>::`vftable;
   UFG::qReflectInventory<UITest::MathValueTest>::OnAddToWarehouse(&UFG::qReflectObjectType<UITest::MathValueTest,UFG::qReflectObject>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -220,7 +220,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UITest::UITestCase_UFG:
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UITest::UITestCase,UFG::qReflectObject>::sInventory.vfptr,
     "UITest::UITestCase",
     v0);
-  UFG::qReflectObjectType<UITest::UITestCase,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UITest::UITestCase>::`vftable';
+  UFG::qReflectObjectType<UITest::UITestCase,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UITest::UITestCase>::`vftable;
   UFG::qReflectInventory<UITest::UITestCase>::OnAddToWarehouse(&UFG::qReflectObjectType<UITest::UITestCase,UFG::qReflectObject>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -241,7 +241,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_DNA::DUIDNAInspector_UF
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<DNA::DUIDNAInspector,UFG::DUIWindow>::sInventory.vfptr,
     "DNA::DUIDNAInspector",
     v0);
-  UFG::qReflectObjectType<DNA::DUIDNAInspector,UFG::DUIWindow>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<DNA::DUIDNAInspector>::`vftable';
+  UFG::qReflectObjectType<DNA::DUIDNAInspector,UFG::DUIWindow>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<DNA::DUIDNAInspector>::`vftable;
   UFG::qReflectInventory<DNA::DUIDNAInspector>::OnAddToWarehouse(&UFG::qReflectObjectType<DNA::DUIDNAInspector,UFG::DUIWindow>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -1296,14 +1296,14 @@ void __fastcall DNA::DUIReflectWidget::DUIReflectWidget(DNA::DUIReflectWidget *t
 {
   UFG::qList<DNA::DUIReflectWidget::SubObject,DNA::DUIReflectWidget::SubObject,1,0> *v1; // [rsp+48h] [rbp+10h]
 
-  this->vfptr = (UFG::qReflectVisitorVtbl *)&UFG::qReflectVisitor::`vftable';
+  this->vfptr = (UFG::qReflectVisitorVtbl *)&UFG::qReflectVisitor::`vftable;
   this->mTrackedObjects.p = 0i64;
   *(_QWORD *)&this->mTrackedObjects.size = 0i64;
   this->mPatches.p = 0i64;
   *(_QWORD *)&this->mPatches.size = 0i64;
   this->mArrays.p = 0i64;
   *(_QWORD *)&this->mArrays.size = 0i64;
-  this->vfptr = (UFG::qReflectVisitorVtbl *)&DNA::DUIReflectWidget::`vftable';
+  this->vfptr = (UFG::qReflectVisitorVtbl *)&DNA::DUIReflectWidget::`vftable;
   this->mObject = 0i64;
   this->mFieldStack.p = 0i64;
   *(_QWORD *)&this->mFieldStack.size = 0i64;
@@ -1334,7 +1334,7 @@ void __fastcall DNA::DUIReflectWidget::~DUIReflectWidget(DNA::DUIReflectWidget *
   UFG::qReflectField **v8; // rcx
 
   v1 = this;
-  this->vfptr = (UFG::qReflectVisitorVtbl *)&DNA::DUIReflectWidget::`vftable';
+  this->vfptr = (UFG::qReflectVisitorVtbl *)&DNA::DUIReflectWidget::`vftable;
   v2 = &this->mSubObjects;
   UFG::qList<DNA::DUIReflectWidget::SubObject,DNA::DUIReflectWidget::SubObject,1,0>::DeleteNodes(&this->mSubObjects);
   UFG::qString::~qString(&v1->mEditValue);

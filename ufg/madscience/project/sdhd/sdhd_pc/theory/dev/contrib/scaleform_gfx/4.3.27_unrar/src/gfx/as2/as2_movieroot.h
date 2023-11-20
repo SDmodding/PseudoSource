@@ -2,14 +2,14 @@
 // RVA: 0x6D2080
 void __fastcall Scaleform::GFx::AS2::MouseListener::~MouseListener(Scaleform::GFx::AS2::MouseListener *this)
 {
-  this->vfptr = (Scaleform::GFx::AS2::MouseListenerVtbl *)&Scaleform::GFx::AS2::MouseListener::`vftable';
+  this->vfptr = (Scaleform::GFx::AS2::MouseListenerVtbl *)&Scaleform::GFx::AS2::MouseListener::`vftable;
 }
 
 // File Line: 76
 // RVA: 0x6D2AF0
 void __fastcall Scaleform::GFx::AS2::XMLFileLoader::~XMLFileLoader(Scaleform::GFx::AS2::XMLFileLoader *this)
 {
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS2::XMLFileLoader::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS2::XMLFileLoader::`vftable;
   Scaleform::RefCountImplCore::~RefCountImplCore((Scaleform::RefCountImplCore *)&this->vfptr);
 }
 
@@ -29,7 +29,7 @@ void __fastcall Scaleform::GFx::AS2::GFxAS2LoadQueueEntry::GFxAS2LoadQueueEntry(
     method,
     loadingVars,
     quietOpen);
-  v7->vfptr = (Scaleform::GFx::LoadQueueEntryVtbl *)&Scaleform::GFx::AS2::GFxAS2LoadQueueEntry::`vftable';
+  v7->vfptr = (Scaleform::GFx::LoadQueueEntryVtbl *)&Scaleform::GFx::AS2::GFxAS2LoadQueueEntry::`vftable;
   v7->pCharacter.pObject = 0i64;
   v7->MovieClipLoaderHolder.T.Type = 0;
   v7->LoadVarsHolder.T.Type = 0;
@@ -69,7 +69,7 @@ void __fastcall Scaleform::GFx::AS2::GFxAS2LoadQueueEntry::GFxAS2LoadQueueEntry(
     method,
     loadingVars,
     quietOpen);
-  v8->vfptr = (Scaleform::GFx::LoadQueueEntryVtbl *)&Scaleform::GFx::AS2::GFxAS2LoadQueueEntry::`vftable';
+  v8->vfptr = (Scaleform::GFx::LoadQueueEntryVtbl *)&Scaleform::GFx::AS2::GFxAS2LoadQueueEntry::`vftable;
   v9 = 0;
   v8->pCharacter.pObject = 0i64;
   v8->MovieClipLoaderHolder.T.Type = 0;

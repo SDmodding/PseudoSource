@@ -102,7 +102,7 @@ void __fastcall UFG::ActiveRegionManager::~ActiveRegionManager(UFG::ActiveRegion
   if ( v8 )
   {
     v9 = &v8[-1].mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v8,
       0x28ui64,
       v8[-1].mStringHash32,

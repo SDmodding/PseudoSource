@@ -13,7 +13,7 @@ void __fastcall UFG::Daemon::Daemon(UFG::Daemon *this, UFG::DaemonType type, UFG
   unsigned int i; // edx
 
   v4 = this;
-  this->vfptr = (UFG::DaemonVtbl *)&UFG::Daemon::`vftable';
+  this->vfptr = (UFG::DaemonVtbl *)&UFG::Daemon::`vftable;
   this->m_type = type;
   this->m_stage = stage;
   this->m_internalTypesCount = internalTypesCount;
@@ -68,7 +68,7 @@ void __fastcall UFG::Daemon::~Daemon(UFG::Daemon *this)
   UFG::qArray<UFG::DaemonQueryInput const *,0> **v2; // rcx
 
   v1 = this;
-  this->vfptr = (UFG::DaemonVtbl *)&UFG::Daemon::`vftable';
+  this->vfptr = (UFG::DaemonVtbl *)&UFG::Daemon::`vftable;
   v2 = this->m_queryLookupTable.p;
   if ( v2 )
     operator delete[](v2);

@@ -20,15 +20,15 @@ void __fastcall hkRotationf::set(hkRotationf *this, hkQuaternionf *qi)
   v6 = transform.m_quad;
   v7 = _mm_xor_ps(
          _mm_mul_ps(_mm_shuffle_ps(v2, v2, 254), _mm_shuffle_ps(v3, v3, 26)),
-         (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation'::`2'::negateMask1);
-  v8 = _mm_xor_ps((__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation'::`2'::negateMask0, v5);
+         (__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation::`2::negateMask1);
+  v8 = _mm_xor_ps((__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation::`2::negateMask0, v5);
   v6.m128_f32[0] = (float)(1.0 - v4) - v5.m128_f32[0];
   v7.m128_f32[0] = v7.m128_f32[0] + 1.0;
   v9.m_quad = _mm_sub_ps(v7, v8);
   v8.m128_f32[0] = v4;
   this->m_col0 = (hkVector4f)v9.m_quad;
   v10 = _mm_sub_ps(
-          _mm_xor_ps((__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation'::`2'::negateMask0, v7),
+          _mm_xor_ps((__m128)`hkVector4UtilImpl<float>::convertQuaternionToRotation::`2::negateMask0, v7),
           v8);
   v11.m_quad = _mm_shuffle_ps(v10, v10, 177);
   this->m_col1 = (hkVector4f)v11.m_quad;

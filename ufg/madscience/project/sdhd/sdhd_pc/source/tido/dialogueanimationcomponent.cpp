@@ -36,7 +36,7 @@ void __fastcall UFG::DialogueAnimationComponent::DialogueAnimationComponent(UFG:
   v3 = (UFG::qNode<UFG::DialogueAnimationComponent,UFG::DialogueAnimationComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::DialogueAnimationComponent::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::DialogueAnimationComponent::`vftable;
   v2->m_currentTime = 0.0;
   *(_WORD *)&v2->m_parametricMode = 0;
   *(_QWORD *)&v2->m_sampleNameHash = 0i64;
@@ -97,7 +97,7 @@ void __fastcall UFG::DialogueAnimationComponent::~DialogueAnimationComponent(UFG
   UFG::qNode<UFG::DialogueAnimationComponent,UFG::DialogueAnimationComponent> *v16; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::DialogueAnimationComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::DialogueAnimationComponent::`vftable;
   if ( this == UFG::DialogueAnimationComponent::s_DialogueAnimationComponentpCurrentIterator )
     UFG::DialogueAnimationComponent::s_DialogueAnimationComponentpCurrentIterator = (UFG::DialogueAnimationComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::DialogueAnimationComponent,UFG::DialogueAnimationComponent> *)&this->mPrev;

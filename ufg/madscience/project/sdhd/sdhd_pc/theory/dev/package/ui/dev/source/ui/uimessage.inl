@@ -2,7 +2,7 @@
 // RVA: 0x5C9260
 void __fastcall UFG::UICommandData::~UICommandData(UFG::UICommandData *this)
 {
-  this->vfptr = (UFG::UICommandDataVtbl *)&UFG::UICommandData::`vftable';
+  this->vfptr = (UFG::UICommandDataVtbl *)&UFG::UICommandData::`vftable;
 }
 
 // File Line: 37
@@ -13,7 +13,7 @@ void __fastcall UFG::UICommand::~UICommand(UFG::UICommand *this)
   UFG::qNode<UFG::UICommand,UFG::UICommand> *v2; // rcx
   UFG::qNode<UFG::UICommand,UFG::UICommand> *v3; // rax
 
-  this->vfptr = (UFG::UICommandVtbl *)&UFG::UICommand::`vftable';
+  this->vfptr = (UFG::UICommandVtbl *)&UFG::UICommand::`vftable;
   v1 = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&this->mPrev;
   v2 = this->mPrev;
   v3 = v1->mNext;
@@ -34,10 +34,10 @@ void __fastcall UFG::UICommandScreenPush::UICommandScreenPush(UFG::UICommandScre
   v5 = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&this->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  this->vfptr = (UFG::UICommandVtbl *)&UFG::UICommand::`vftable';
+  this->vfptr = (UFG::UICommandVtbl *)&UFG::UICommand::`vftable;
   this->m_commandType = -1;
   this->m_commandData = 0i64;
-  this->vfptr = (UFG::UICommandVtbl *)&UFG::UICommandScreenPush::`vftable';
+  this->vfptr = (UFG::UICommandVtbl *)&UFG::UICommandScreenPush::`vftable;
   this->m_screenUID = screenUID;
   this->m_controllerMask = controllerMask;
   this->m_preCreatedInstance = 0i64;
@@ -57,10 +57,10 @@ void __fastcall UFG::UICommandOverlayPush::UICommandOverlayPush(UFG::UICommandOv
   v6 = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&this->mPrev;
   v6->mPrev = v6;
   v6->mNext = v6;
-  this->vfptr = (UFG::UICommandVtbl *)&UFG::UICommand::`vftable';
+  this->vfptr = (UFG::UICommandVtbl *)&UFG::UICommand::`vftable;
   this->m_commandType = -1;
   this->m_commandData = 0i64;
-  this->vfptr = (UFG::UICommandVtbl *)&UFG::UICommandOverlayPush::`vftable';
+  this->vfptr = (UFG::UICommandVtbl *)&UFG::UICommandOverlayPush::`vftable;
   this->m_screenUID = screenUID;
   this->m_priority = priority;
   this->m_controllerMask = controllerMask;
@@ -80,10 +80,10 @@ void __fastcall UFG::UICommandOverlayPop::UICommandOverlayPop(UFG::UICommandOver
   v3 = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&this->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  this->vfptr = (UFG::UICommandVtbl *)&UFG::UICommand::`vftable';
+  this->vfptr = (UFG::UICommandVtbl *)&UFG::UICommand::`vftable;
   this->m_commandType = -1;
   this->m_commandData = 0i64;
-  this->vfptr = (UFG::UICommandVtbl *)&UFG::UICommandOverlayPop::`vftable';
+  this->vfptr = (UFG::UICommandVtbl *)&UFG::UICommandOverlayPop::`vftable;
   this->m_screenUID = -1;
   UFG::qStringCopy(this->m_screenName, 128, screenName, -1);
   v2->m_commandType = 4;
@@ -98,15 +98,15 @@ void __fastcall UFG::UIMessagePadInput::UIMessagePadInput(UFG::UIMessagePadInput
   v4 = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&this->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  this->vfptr = (UFG::UICommandVtbl *)&UFG::UICommand::`vftable';
+  this->vfptr = (UFG::UICommandVtbl *)&UFG::UICommand::`vftable;
   this->m_commandType = -1;
   this->m_commandData = 0i64;
-  this->vfptr = (UFG::UICommandVtbl *)&UFG::UIMessage::`vftable';
+  this->vfptr = (UFG::UICommandVtbl *)&UFG::UIMessage::`vftable;
   this->m_messageId = messageId;
   this->m_resultId = 0;
   *(_QWORD *)&this->m_receiverUID = -1i64;
   this->m_commandType = 5;
-  this->vfptr = (UFG::UICommandVtbl *)&UFG::UIMessagePadInput::`vftable';
+  this->vfptr = (UFG::UICommandVtbl *)&UFG::UIMessagePadInput::`vftable;
   this->m_value = value;
   this->m_controllerMask = controllerMask;
   this->m_commandType = 6;
@@ -122,20 +122,20 @@ void __fastcall UFG::UIMessagePadInputAnalogStick::UIMessagePadInputAnalogStick(
   v5 = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&this->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  this->vfptr = (UFG::UICommandVtbl *)&UFG::UICommand::`vftable';
+  this->vfptr = (UFG::UICommandVtbl *)&UFG::UICommand::`vftable;
   this->m_commandType = -1;
   this->m_commandData = 0i64;
-  this->vfptr = (UFG::UICommandVtbl *)&UFG::UIMessage::`vftable';
+  this->vfptr = (UFG::UICommandVtbl *)&UFG::UIMessage::`vftable;
   this->m_messageId = messageId;
   this->m_resultId = 0;
   *(_QWORD *)&this->m_receiverUID = -1i64;
   this->m_commandType = 5;
-  this->vfptr = (UFG::UICommandVtbl *)&UFG::UIMessagePadInput::`vftable';
+  this->vfptr = (UFG::UICommandVtbl *)&UFG::UIMessagePadInput::`vftable;
   this->m_value = 1.0;
   this->m_controllerMask = controllerMask;
   this->m_commandType = 6;
   this->m_messageType = 0;
-  this->vfptr = (UFG::UICommandVtbl *)&UFG::UIMessagePadInputAnalogStick::`vftable';
+  this->vfptr = (UFG::UICommandVtbl *)&UFG::UIMessagePadInputAnalogStick::`vftable;
   this->m_xAxis = xAxis;
   this->m_yAxis = yAxis;
   this->m_messageType = 1;
@@ -150,15 +150,15 @@ void __fastcall UFG::UIMessageMouseInput::UIMessageMouseInput(UFG::UIMessageMous
   v7 = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&this->mPrev;
   v7->mPrev = v7;
   v7->mNext = v7;
-  this->vfptr = (UFG::UICommandVtbl *)&UFG::UICommand::`vftable';
+  this->vfptr = (UFG::UICommandVtbl *)&UFG::UICommand::`vftable;
   this->m_commandType = -1;
   this->m_commandData = 0i64;
-  this->vfptr = (UFG::UICommandVtbl *)&UFG::UIMessage::`vftable';
+  this->vfptr = (UFG::UICommandVtbl *)&UFG::UIMessage::`vftable;
   this->m_messageId = messageId;
   this->m_resultId = 0;
   *(_QWORD *)&this->m_receiverUID = -1i64;
   this->m_commandType = 5;
-  this->vfptr = (UFG::UICommandVtbl *)&UFG::UIMessageMouseInput::`vftable';
+  this->vfptr = (UFG::UICommandVtbl *)&UFG::UIMessageMouseInput::`vftable;
   this->m_xPos = xPos;
   this->m_yPos = yPos;
   this->m_mouseWheel = mouseWheel;
@@ -181,15 +181,15 @@ void __fastcall UFG::UIMessageFlash::UIMessageFlash(UFG::UIMessageFlash *this, u
   v6 = (UFG::qNode<UFG::UICommand,UFG::UICommand> *)&this->mPrev;
   v6->mPrev = v6;
   v6->mNext = v6;
-  this->vfptr = (UFG::UICommandVtbl *)&UFG::UICommand::`vftable';
+  this->vfptr = (UFG::UICommandVtbl *)&UFG::UICommand::`vftable;
   this->m_commandType = -1;
   this->m_commandData = 0i64;
-  this->vfptr = (UFG::UICommandVtbl *)&UFG::UIMessage::`vftable';
+  this->vfptr = (UFG::UICommandVtbl *)&UFG::UIMessage::`vftable;
   this->m_messageId = messageId;
   this->m_resultId = 0;
   *(_QWORD *)&this->m_receiverUID = -1i64;
   this->m_commandType = 5;
-  this->vfptr = (UFG::UICommandVtbl *)&UFG::UIMessageFlash::`vftable';
+  this->vfptr = (UFG::UICommandVtbl *)&UFG::UIMessageFlash::`vftable;
   UFG::qString::qString(&this->m_args, args);
   v5->mReceiverMovieView = v4;
   v5->m_commandType = 7;

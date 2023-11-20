@@ -7,7 +7,7 @@ void __fastcall UFG::UIHKScreenDialogPopup::UIHKScreenDialogPopup(UFG::UIHKScree
   v1 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -18,7 +18,7 @@ void __fastcall UFG::UIHKScreenDialogPopup::UIHKScreenDialogPopup(UFG::UIHKScree
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenDialogPopup::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenDialogPopup::`vftable;
   this->mOwner = 0i64;
   *(_QWORD *)&this->mOptionMsgAccept = 0i64;
 }
@@ -33,7 +33,7 @@ void __fastcall UFG::UIHKScreenDialogPopup::~UIHKScreenDialogPopup(UFG::UIHKScre
   UFG::UIScreenTextureManager *v4; // rax
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenDialogPopup::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenDialogPopup::`vftable;
   if ( UFG::UIHKScreenGlobalOverlay::mThis )
   {
     v2 = &UFG::UIHKScreenGlobalOverlay::mThis->HelpBar;
@@ -107,7 +107,7 @@ void __fastcall UFG::UIHKScreenDialogPopup::init(UFG::UIHKScreenDialogPopup *thi
   UFG::qString::qString(&v34, (UFG::qString *)&v2[3]);
   UFG::qString::FormatEx(&result, "%s %s", v7, v34.mData);
   v8 = v3->mRenderable->m_movie.pObject;
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 5, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 5, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( (v17 >> 6) & 1 )
   {
     (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v16 + 16i64))(v16, &ptr, v15);
@@ -151,7 +151,7 @@ void __fastcall UFG::UIHKScreenDialogPopup::init(UFG::UIHKScreenDialogPopup *thi
   {
     do
     {
-      `eh vector constructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       v12 = *(double *)(v11 + 48);
       if ( ((unsigned int)pargs.Type >> 6) & 1 )
       {
@@ -164,18 +164,18 @@ void __fastcall UFG::UIHKScreenDialogPopup::init(UFG::UIHKScreenDialogPopup *thi
       pargs.Type = 6;
       pargs.mValue.NValue = v12;
       Scaleform::GFx::Movie::Invoke(v8, "DialogPopupList_AddItem", 0i64, &pargs, 1u);
-      `eh vector destructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+      `eh vector destructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
       v11 = *(_QWORD *)(v11 + 16) - 8i64;
     }
     while ( (UFG::qNode<UFG::DialogPopupEntry,UFG::DialogPopupEntry> **)v11 != &v3->mEntries[-1].mNode.mNext );
   }
   Scaleform::GFx::Movie::Invoke(v8, "DialogPopupList_Refresh", 0i64, 0i64, 0);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 5, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 5, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   UFG::qString::~qString(&result);
   UFG::qString::~qString(&v34);
   UFG::qString::~qString(&dataa.CustomTexturePack);
-  `eh vector destructor iterator'(dataa.Icons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
-  `eh vector destructor iterator'(dataa.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+  `eh vector destructor iterator(dataa.Icons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+  `eh vector destructor iterator(dataa.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
 }
 
 // File Line: 94
@@ -261,7 +261,7 @@ LABEL_27:
       while ( v8 > 0 );
     }
     *(_BYTE *)(v10 + 64) = *(_BYTE *)(v10 + 64) == 0;
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     v12 = *(_BYTE *)(v10 + 64);
     if ( (v16 >> 6) & 1 )
     {
@@ -278,7 +278,7 @@ LABEL_27:
         0i64,
         0,
         0i64);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     if ( ((unsigned int)pval.Type >> 6) & 1 )
     {
       (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pval.pObjectInterface->vfptr->gap8[8])(
@@ -321,8 +321,8 @@ void __fastcall UFG::UIHKScreenDialogPopup::createDialog(UFG::UIScreen *owner, U
   v9 = UFG::qMemoryPool::Allocate(&gScaleformMemoryPool, 0x48ui64, "UIHKScreenDialogPopup", 0i64, 1u);
   if ( v9 )
   {
-    v9->mNext = (UFG::allocator::free_link *)&UFG::UICommandData::`vftable';
-    v9->mNext = (UFG::allocator::free_link *)&UFG::UIHKScreenDialogPopup::UIHKScreenDialogPopupData::`vftable';
+    v9->mNext = (UFG::allocator::free_link *)&UFG::UICommandData::`vftable;
+    v9->mNext = (UFG::allocator::free_link *)&UFG::UIHKScreenDialogPopup::UIHKScreenDialogPopupData::`vftable;
     v9[1].mNext = 0i64;
     v9[2].mNext = 0i64;
     UFG::qString::qString((UFG::qString *)&v9[3]);

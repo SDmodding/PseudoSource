@@ -40,7 +40,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_sensors::Accelerometer::Accel
   Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::EventDispatcher(
     (Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher *)&this->vfptr,
     t);
-  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_sensors::Accelerometer::`vftable';
+  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_sensors::Accelerometer::`vftable;
   v2->AccelerometerId = Scaleform::GFx::AS3::Instances::fl_sensors::Accelerometer::AccelerometerIdCount++;
   v3 = v2->VMRef;
   Scaleform::GFx::AS3::MovieRoot::AddToAccelerometers((Scaleform::GFx::AS3::MovieRoot *)v3[1].vfptr, v2);
@@ -136,7 +136,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_sensors::Accelerometer::~Acce
   Scaleform::Ptr<Scaleform::GFx::AccelerometerInterface> result; // [rsp+48h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_sensors::Accelerometer::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_sensors::Accelerometer::`vftable;
   v2 = this->VMRef;
   if ( !v2->InDestructor )
   {
@@ -235,7 +235,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
       v5,
       v2,
       &Scaleform::GFx::AS3::fl_sensors::AccelerometerCI);
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_sensors::Accelerometer::`vftable';
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_sensors::Accelerometer::`vftable;
   }
   else
   {
@@ -250,7 +250,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
       v7,
       v2,
       &Scaleform::GFx::AS3::fl_sensors::AccelerometerCI);
-    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_sensors::Accelerometer::`vftable';
+    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_sensors::Accelerometer::`vftable;
   }
   else
   {
@@ -266,7 +266,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v9 )
   {
     Scaleform::GFx::AS3::Class::Class(v9, v3->pV);
-    v10->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl_sensors::Accelerometer::`vftable';
+    v10->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl_sensors::Accelerometer::`vftable;
   }
   return v3;
 }

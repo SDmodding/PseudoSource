@@ -12,8 +12,8 @@ void __fastcall Scaleform::Render::ShapeDataFloatMP::ShapeDataFloatMP(Scaleform:
 
   v1 = this;
   Scaleform::Render::ShapeMeshProvider::ShapeMeshProvider((Scaleform::Render::ShapeMeshProvider *)&this->vfptr);
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ShapeDataFloatMP::`vftable'{for `Scaleform::RefCountBase<Scaleform::Render::MeshProvider_RCImpl,2>'};
-  v1->vfptr = (Scaleform::Render::MeshProviderVtbl *)&Scaleform::Render::ShapeDataFloatMP::`vftable'{for `Scaleform::Render::MeshProvider'};
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ShapeDataFloatMP::`vftable{for `Scaleform::RefCountBase<Scaleform::Render::MeshProvider_RCImpl,2>};
+  v1->vfptr = (Scaleform::Render::MeshProviderVtbl *)&Scaleform::Render::ShapeDataFloatMP::`vftable{for `Scaleform::Render::MeshProvider};
   v2 = 0i64;
   v1->pData.pObject = 0i64;
   v6 = 71;

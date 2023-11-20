@@ -13,10 +13,10 @@ void __fastcall DetectRagdollPenetration::DetectRagdollPenetration(DetectRagdoll
   hkResult result; // [rsp+68h] [rbp+10h]
 
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
-  this->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
+  this->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&DetectRagdollPenetration::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&DetectRagdollPenetration::`vftable;
   this->m_setup = *setup;
   this->m_boneStates.m_data = 0i64;
   this->m_boneStates.m_size = 0;

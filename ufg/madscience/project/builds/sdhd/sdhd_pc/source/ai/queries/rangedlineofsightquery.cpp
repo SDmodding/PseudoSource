@@ -5,10 +5,10 @@ void __fastcall UFG::AIRangedLineOfSightQuery::AIRangedLineOfSightQuery(UFG::AIR
   UFG::AIRangedLineOfSightQuery::QueryParameters *v1; // [rsp+48h] [rbp+10h]
   UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v2; // [rsp+50h] [rbp+18h]
 
-  this->vfptr = (UFG::AIQueryVtbl *)&UFG::AIQuery::`vftable';
+  this->vfptr = (UFG::AIQueryVtbl *)&UFG::AIQuery::`vftable;
   this->m_bStateNeedsInit = 1;
   *(_QWORD *)&this->m_iRefCount = 0i64;
-  this->vfptr = (UFG::AIQueryVtbl *)&UFG::AIRangedLineOfSightQuery::`vftable';
+  this->vfptr = (UFG::AIQueryVtbl *)&UFG::AIRangedLineOfSightQuery::`vftable;
   v1 = &this->m_queryParams;
   v1->pOwnerSimObject.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v1->pOwnerSimObject.mPrev;
   v1->pOwnerSimObject.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v1->pOwnerSimObject.mPrev;
@@ -441,7 +441,7 @@ void __fastcall UFG::AIRangedLineOfSightQuery::PathTest(UFG::AIRangedLineOfSight
   else
     v3 = 0i64;
   *(_QWORD *)&v21.m_internalType = 1i64;
-  v21.vfptr = (UFG::DaemonQueryInputVtbl *)&UFG::FindPathMultiDestPrioritizedImmediateQuery::`vftable';
+  v21.vfptr = (UFG::DaemonQueryInputVtbl *)&UFG::FindPathMultiDestPrioritizedImmediateQuery::`vftable;
   v21.m_daemonType = LODWORD(UFG::qVector3::msZero.z);
   LOBYTE(v21.m_mode) = 0;
   *(hkVector4f *)&v21.m_pOutput = (hkVector4f)hkvZero_13.m_quad;
@@ -452,7 +452,7 @@ void __fastcall UFG::AIRangedLineOfSightQuery::PathTest(UFG::AIRangedLineOfSight
   v21.m_npFrom.m_hkvMeshPosition.m_quad.m128_u64[1] = 0i64;
   output.m_id = 0;
   *(_QWORD *)&output.m_internalType = 1i64;
-  output.vfptr = (UFG::DaemonQueryOutputVtbl *)&UFG::FindPathMultiDestPrioritizedOutput::`vftable';
+  output.vfptr = (UFG::DaemonQueryOutputVtbl *)&UFG::FindPathMultiDestPrioritizedOutput::`vftable;
   mem = 0i64;
   v18 = 0i64;
   v20 = 0i64;
@@ -543,7 +543,7 @@ void __fastcall UFG::AIRangedLineOfSightQuery::PathTest(UFG::AIRangedLineOfSight
     operator delete[](mem);
   mem = 0i64;
   v18 = 0i64;
-  output.vfptr = (UFG::DaemonQueryOutputVtbl *)&UFG::DaemonQueryOutput::`vftable';
+  output.vfptr = (UFG::DaemonQueryOutputVtbl *)&UFG::DaemonQueryOutput::`vftable;
   if ( *(_QWORD *)&v21.m_npFrom.m_packedKey )
     operator delete[](*(void **)&v21.m_npFrom.m_packedKey);
 }

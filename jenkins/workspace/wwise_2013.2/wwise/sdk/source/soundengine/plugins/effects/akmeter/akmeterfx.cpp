@@ -7,7 +7,7 @@ AK::IAkPlugin *__fastcall CreateMeterFX(AK::IAkPluginMemAlloc *in_pAllocator)
   result = (AK::IAkPlugin *)in_pAllocator->vfptr->Malloc(in_pAllocator, 112ui64);
   if ( !result )
     return 0i64;
-  result->vfptr = (AK::IAkPluginVtbl *)&CAkMeterFX::`vftable';
+  result->vfptr = (AK::IAkPluginVtbl *)&CAkMeterFX::`vftable;
   result[2].vfptr = 0i64;
   result[3].vfptr = 0i64;
   result[4].vfptr = 0i64;
@@ -20,7 +20,7 @@ AK::IAkPlugin *__fastcall CreateMeterFX(AK::IAkPluginMemAlloc *in_pAllocator)
 // RVA: 0xAF5620
 void __fastcall CAkMeterFX::CAkMeterFX(CAkMeterFX *this)
 {
-  this->vfptr = (AK::IAkPluginVtbl *)&CAkMeterFX::`vftable';
+  this->vfptr = (AK::IAkPluginVtbl *)&CAkMeterFX::`vftable;
   this->m_pParams = 0i64;
   this->m_pCtx = 0i64;
   this->m_pAllocator = 0i64;
@@ -32,7 +32,7 @@ void __fastcall CAkMeterFX::CAkMeterFX(CAkMeterFX *this)
 // RVA: 0xAF5650
 void __fastcall CAkMeterFX::~CAkMeterFX(CAkMeterFX *this)
 {
-  this->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable';
+  this->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable;
 }
 
 // File Line: 67

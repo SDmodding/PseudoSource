@@ -6,7 +6,7 @@ void __fastcall CAkSinkDirectSound::CAkSinkDirectSound(CAkSinkDirectSound *this)
 
   v1 = this;
   CAkSink::CAkSink((CAkSink *)&this->vfptr, AkSink_Main_DirectSound);
-  v1->vfptr = (CAkSinkVtbl *)&CAkSinkDirectSound::`vftable';
+  v1->vfptr = (CAkSinkVtbl *)&CAkSinkDirectSound::`vftable;
   CAkSinkDirectSound::m_pDirectSound = 0i64;
   *(_QWORD *)&v1->m_ulBufferSize = 0i64;
   *(_QWORD *)&v1->m_lRefillToEnd = 0i64;

@@ -43,7 +43,7 @@ UFG::allocator::free_link *__fastcall ADatum::alloc_buffer(unsigned int data_len
 
   result = UFG::qMalloc(data_length, "ADatum::alloc_buffer", 0i64);
   v2 = (char *)result;
-  if ( `ADatum::alloc_buffer'::`3'::_test && !result )
+  if ( `ADatum::alloc_buffer::`3::_test && !result )
   {
     v13 = "Unable to allocate memory";
     v3 = 0;
@@ -90,7 +90,7 @@ UFG::allocator::free_link *__fastcall ADatum::alloc_buffer(unsigned int data_len
     if ( (_DWORD)v20 == 4 )
     {
       v10 = 3;
-      `ADatum::alloc_buffer'::`3'::_test = 0;
+      `ADatum::alloc_buffer::`3::_test = 0;
       LODWORD(v20) = 3;
     }
     _((AMD_HD3D *)v10);

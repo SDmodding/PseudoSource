@@ -23,8 +23,8 @@ void __fastcall NISActorNode::NISActorNode(NISActorNode *this)
 
   v1 = this;
   ActionNodeImplementation::ActionNodeImplementation((ActionNodeImplementation *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ActionNodePlayable::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&NISActorNode::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ActionNodePlayable::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&NISActorNode::`vftable;
   v2 = &v1->mRightHandEquipSlot;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
@@ -1857,8 +1857,8 @@ void __fastcall NISNode::NISNode(NISNode *this)
 
   v1 = this;
   ActionNodeImplementation::ActionNodeImplementation((ActionNodeImplementation *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ActionNodePlayable::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&NISNode::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ActionNodePlayable::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&NISNode::`vftable;
   v1->mIsPlaceHolder = 0;
   v1->mPlaceHolderMessage.mOffset = 1i64;
   BinString::Set(&v1->mPlaceHolderMessage, &customWorldMapCaption);
@@ -1895,9 +1895,9 @@ void __fastcall NISNode::NISNode(NISNode *this)
   v3 = UFG::qMemoryPool2::Allocate(&gActionTreeMemoryPool, 0x20ui64, "ActionNodeImplementation.mTracksAction", 0i64, 1u);
   if ( v3 )
   {
-    *(_QWORD *)v3 = &Expression::IMemberMap::`vftable';
+    *(_QWORD *)v3 = &Expression::IMemberMap::`vftable;
     *((_QWORD *)v3 + 1) = 0i64;
-    *(_QWORD *)v3 = &TrackGroup::`vftable';
+    *(_QWORD *)v3 = &TrackGroup::`vftable;
     *((_DWORD *)v3 + 4) = 0;
     *((_QWORD *)v3 + 3) = 0i64;
   }
@@ -1937,7 +1937,7 @@ void __fastcall NISNode::~NISNode(NISNode *this)
   char *v13; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&NISNode::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&NISNode::`vftable;
   v2 = this->mTracksAction.mOffset;
   if ( v2 )
   {

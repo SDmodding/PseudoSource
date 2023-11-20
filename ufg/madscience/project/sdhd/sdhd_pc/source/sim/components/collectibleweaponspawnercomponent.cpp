@@ -22,7 +22,7 @@ void __fastcall UFG::CollectibleWeaponSpawnerComponent::CollectibleWeaponSpawner
   v3 = pSimObj;
   v4 = this;
   UFG::CollectibleComponent::CollectibleComponent((UFG::CollectibleComponent *)&this->vfptr, name, pSimObj);
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CollectibleWeaponSpawnerComponent::`vftable';
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CollectibleWeaponSpawnerComponent::`vftable;
   v5 = &v4->mpWeapon;
   result = v5;
   v5->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v5->mPrev;
@@ -72,7 +72,7 @@ void __fastcall UFG::CollectibleWeaponSpawnerComponent::~CollectibleWeaponSpawne
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CollectibleWeaponSpawnerComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CollectibleWeaponSpawnerComponent::`vftable;
   v2 = &this->mpWeapon;
   if ( this->mpWeapon.m_pPointer )
   {

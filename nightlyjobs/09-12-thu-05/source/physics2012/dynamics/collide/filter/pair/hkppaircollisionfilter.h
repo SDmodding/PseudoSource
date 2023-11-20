@@ -8,11 +8,11 @@ void __fastcall hkpPairCollisionFilter::hkpPairCollisionFilter(hkpPairCollisionF
   v2 = childFilter;
   v3 = this;
   hkpCollisionFilter::hkpCollisionFilter((hkpCollisionFilter *)&this->vfptr);
-  v3->vfptr = (hkBaseObjectVtbl *)&hkpPairCollisionFilter::`vftable'{for `hkReferencedObject'};
-  v3->vfptr = (hkpCollidableCollidableFilterVtbl *)&hkpPairCollisionFilter::`vftable'{for `hkpCollidableCollidableFilter'};
-  v3->vfptr = (hkpShapeCollectionFilterVtbl *)&hkpPairCollisionFilter::`vftable'{for `hkpShapeCollectionFilter'};
-  v3->vfptr = (hkpRayShapeCollectionFilterVtbl *)&hkpPairCollisionFilter::`vftable'{for `hkpRayShapeCollectionFilter'};
-  v3->vfptr = (hkpRayCollidableFilterVtbl *)&hkpPairCollisionFilter::`vftable'{for `hkpRayCollidableFilter'};
+  v3->vfptr = (hkBaseObjectVtbl *)&hkpPairCollisionFilter::`vftable{for `hkReferencedObject};
+  v3->vfptr = (hkpCollidableCollidableFilterVtbl *)&hkpPairCollisionFilter::`vftable{for `hkpCollidableCollidableFilter};
+  v3->vfptr = (hkpShapeCollectionFilterVtbl *)&hkpPairCollisionFilter::`vftable{for `hkpShapeCollectionFilter};
+  v3->vfptr = (hkpRayShapeCollectionFilterVtbl *)&hkpPairCollisionFilter::`vftable{for `hkpRayShapeCollectionFilter};
+  v3->vfptr = (hkpRayCollidableFilterVtbl *)&hkpPairCollisionFilter::`vftable{for `hkpRayCollidableFilter};
   v3->m_disabledPairs.m_hashMod = -1;
   v3->m_disabledPairs.m_elem = 0i64;
   v3->m_disabledPairs.m_numElems = 0;

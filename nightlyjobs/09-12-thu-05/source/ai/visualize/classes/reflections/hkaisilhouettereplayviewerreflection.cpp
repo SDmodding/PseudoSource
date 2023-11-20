@@ -42,7 +42,7 @@ hkClass *__fastcall hkaiSilhouetteRecorder::ReplayEvent::staticClass()
 void __fastcall finishLoadedObjecthkaiSilhouetteRecorderReplayEvent(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiSilhouetteRecorder::ReplayEvent::`vftable';
+    *(_QWORD *)p = &hkaiSilhouetteRecorder::ReplayEvent::`vftable;
 }
 
 // File Line: 103
@@ -56,7 +56,7 @@ void __fastcall cleanupLoadedObjecthkaiSilhouetteRecorderReplayEvent(void *p)
 // RVA: 0xC3DE50
 void **__fastcall getVtablehkaiSilhouetteRecorderReplayEvent()
 {
-  return &hkaiSilhouetteRecorder::ReplayEvent::`vftable';
+  return &hkaiSilhouetteRecorder::ReplayEvent::`vftable;
 }
 
 // File Line: 129
@@ -323,7 +323,7 @@ hkClass *__fastcall hkaiSilhouetteRecorder::InstanceUnloadedEvent::staticClass()
 void __fastcall finishLoadedObjecthkaiSilhouetteRecorderInstanceUnloadedEvent(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiSilhouetteRecorder::InstanceUnloadedEvent::`vftable';
+    *(_QWORD *)p = &hkaiSilhouetteRecorder::InstanceUnloadedEvent::`vftable;
 }
 
 // File Line: 402
@@ -337,7 +337,7 @@ void __fastcall cleanupLoadedObjecthkaiSilhouetteRecorderInstanceUnloadedEvent(v
 // RVA: 0xC3DF90
 void **__fastcall getVtablehkaiSilhouetteRecorderInstanceUnloadedEvent()
 {
-  return &hkaiSilhouetteRecorder::InstanceUnloadedEvent::`vftable';
+  return &hkaiSilhouetteRecorder::InstanceUnloadedEvent::`vftable;
 }
 
 // File Line: 428
@@ -457,7 +457,7 @@ hkClass *__fastcall hkaiSilhouetteRecorder::VolumeUnloadedEvent::staticClass()
 void __fastcall finishLoadedObjecthkaiSilhouetteRecorderVolumeUnloadedEvent(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiSilhouetteRecorder::VolumeUnloadedEvent::`vftable';
+    *(_QWORD *)p = &hkaiSilhouetteRecorder::VolumeUnloadedEvent::`vftable;
 }
 
 // File Line: 539
@@ -471,7 +471,7 @@ void __fastcall cleanupLoadedObjecthkaiSilhouetteRecorderVolumeUnloadedEvent(voi
 // RVA: 0xC3E020
 void **__fastcall getVtablehkaiSilhouetteRecorderVolumeUnloadedEvent()
 {
-  return &hkaiSilhouetteRecorder::VolumeUnloadedEvent::`vftable';
+  return &hkaiSilhouetteRecorder::VolumeUnloadedEvent::`vftable;
 }
 
 // File Line: 565
@@ -591,7 +591,7 @@ hkClass *__fastcall hkaiSilhouetteRecorder::GraphUnloadedEvent::staticClass()
 void __fastcall finishLoadedObjecthkaiSilhouetteRecorderGraphUnloadedEvent(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiSilhouetteRecorder::GraphUnloadedEvent::`vftable';
+    *(_QWORD *)p = &hkaiSilhouetteRecorder::GraphUnloadedEvent::`vftable;
 }
 
 // File Line: 675
@@ -605,7 +605,7 @@ void __fastcall cleanupLoadedObjecthkaiSilhouetteRecorderGraphUnloadedEvent(void
 // RVA: 0xC3E0B0
 void **__fastcall getVtablehkaiSilhouetteRecorderGraphUnloadedEvent()
 {
-  return &hkaiSilhouetteRecorder::GraphUnloadedEvent::`vftable';
+  return &hkaiSilhouetteRecorder::GraphUnloadedEvent::`vftable;
 }
 
 // File Line: 701

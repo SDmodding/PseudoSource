@@ -77,7 +77,7 @@ hkClass *__fastcall hkaiTraversalAnnotationLibrary::staticClass()
 void __fastcall finishLoadedObjecthkaiTraversalAnnotationLibrary(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiTraversalAnnotationLibrary::`vftable';
+    *(_QWORD *)p = &hkaiTraversalAnnotationLibrary::`vftable;
 }
 
 // File Line: 129
@@ -91,7 +91,7 @@ void __fastcall cleanupLoadedObjecthkaiTraversalAnnotationLibrary(void *p)
 // RVA: 0xC32400
 void **__fastcall getVtablehkaiTraversalAnnotationLibrary()
 {
-  return &hkaiTraversalAnnotationLibrary::`vftable';
+  return &hkaiTraversalAnnotationLibrary::`vftable;
 }
 
 // File Line: 155

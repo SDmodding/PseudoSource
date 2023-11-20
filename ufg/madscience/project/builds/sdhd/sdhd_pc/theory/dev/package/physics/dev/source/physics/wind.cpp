@@ -52,7 +52,7 @@ void __fastcall UFG::WindAction::WindAction(UFG::WindAction *this, hkpRigidBody 
 
   v3 = this;
   hkpUnaryAction::hkpUnaryAction((hkpUnaryAction *)&this->vfptr, (hkpEntity *)&body->vfptr, 0i64);
-  v3->vfptr = (hkBaseObjectVtbl *)&UFG::WindAction::`vftable';
+  v3->vfptr = (hkBaseObjectVtbl *)&UFG::WindAction::`vftable;
   v3->mWindFactor = windFactor;
   v3->wforce = 0i64;
   v3->wtorque = 0i64;

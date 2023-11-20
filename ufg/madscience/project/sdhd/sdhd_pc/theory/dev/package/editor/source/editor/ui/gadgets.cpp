@@ -17,7 +17,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::Editor::Orientatio
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::Editor::OrientationGadget,UFG::Editor::Gadget>::sInventory.vfptr,
     "UFG::Editor::OrientationGadget",
     v0);
-  UFG::qReflectObjectType<UFG::Editor::OrientationGadget,UFG::Editor::Gadget>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::Editor::OrientationGadget>::`vftable';
+  UFG::qReflectObjectType<UFG::Editor::OrientationGadget,UFG::Editor::Gadget>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::Editor::OrientationGadget>::`vftable;
   UFG::qReflectInventory<UFG::Editor::OrientationGadget>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::Editor::OrientationGadget,UFG::Editor::Gadget>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -38,7 +38,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::Editor::CompassGad
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::Editor::CompassGadget,UFG::Editor::Gadget>::sInventory.vfptr,
     "UFG::Editor::CompassGadget",
     v0);
-  UFG::qReflectObjectType<UFG::Editor::CompassGadget,UFG::Editor::Gadget>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::Editor::CompassGadget>::`vftable';
+  UFG::qReflectObjectType<UFG::Editor::CompassGadget,UFG::Editor::Gadget>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::Editor::CompassGadget>::`vftable;
   UFG::qReflectInventory<UFG::Editor::CompassGadget>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::Editor::CompassGadget,UFG::Editor::Gadget>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -55,12 +55,12 @@ void __fastcall UFG::Editor::Gadget::Gadget(UFG::Editor::Gadget *this)
 
   v1 = this;
   UFG::DUIWindow::DUIWindow((UFG::DUIWindow *)&this->vfptr);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::Editor::Gadget,UFG::DUIWindow>::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::Editor::Gadget,UFG::DUIWindow>::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::Editor::Gadget,UFG::DUIWindow>::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::Editor::Gadget,UFG::DUIWindow>::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v1->mBaseNode.mUID = -1i64;
   v1->mTypeUID = UFG::qStringHash64("UFG::Editor::Gadget", 0xFFFFFFFFFFFFFFFFui64);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::Gadget::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::Gadget::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::Gadget::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::Gadget::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v1->mStyle = 141;
   UFG::qString::Set(&v1->mTitle, "Gadget");
 }
@@ -69,8 +69,8 @@ void __fastcall UFG::Editor::Gadget::Gadget(UFG::Editor::Gadget *this)
 // RVA: 0x203370
 void __fastcall UFG::Editor::Gadget::~Gadget(UFG::Editor::Gadget *this)
 {
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::Gadget::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  this->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::Gadget::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::Gadget::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  this->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::Gadget::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   UFG::DUIWindow::~DUIWindow((UFG::DUIWindow *)&this->vfptr);
 }
 
@@ -82,12 +82,12 @@ void __fastcall UFG::Editor::OrientationGadget::OrientationGadget(UFG::Editor::O
 
   v1 = this;
   UFG::Editor::Gadget::Gadget((UFG::Editor::Gadget *)&this->vfptr);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::Editor::OrientationGadget,UFG::Editor::Gadget>::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::Editor::OrientationGadget,UFG::Editor::Gadget>::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::Editor::OrientationGadget,UFG::Editor::Gadget>::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::Editor::OrientationGadget,UFG::Editor::Gadget>::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v1->mBaseNode.mUID = -1i64;
   v1->mTypeUID = UFG::qStringHash64("UFG::Editor::OrientationGadget", 0xFFFFFFFFFFFFFFFFui64);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::OrientationGadget::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::OrientationGadget::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::OrientationGadget::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::OrientationGadget::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   UFG::qString::Set(&v1->mTitle, "Orient");
 }
 
@@ -165,7 +165,7 @@ void __fastcall UFG::Editor::OrientationGadget::Render(UFG::Editor::OrientationG
       HIDWORD(v26.mData1) = 1;
       *(_WORD *)&v26.mBackfaceCull = 1;
       *(&v26.mBackfaceCull + 2) = 0;
-      v26.vfptr = (UFG::Editor::DrawInterfaceVtbl *)&UFG::Editor::DrawRenderI::`vftable';
+      v26.vfptr = (UFG::Editor::DrawInterfaceVtbl *)&UFG::Editor::DrawRenderI::`vftable;
       v3 = (float)((float)((float)clientArea->mY + (float)(clientArea->mY + clientArea->mH)) * 0.5)
          / (float)v2->mDrawCtx->mTargetHeight;
       ndc.x = (float)((float)((float)((float)((float)(clientArea->mX + clientArea->mW) + (float)clientArea->mX) * 0.5)
@@ -289,12 +289,12 @@ void __fastcall UFG::Editor::CompassGadget::CompassGadget(UFG::Editor::CompassGa
 
   v1 = this;
   UFG::Editor::Gadget::Gadget((UFG::Editor::Gadget *)&this->vfptr);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::Editor::CompassGadget,UFG::Editor::Gadget>::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::Editor::CompassGadget,UFG::Editor::Gadget>::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::Editor::CompassGadget,UFG::Editor::Gadget>::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::Editor::CompassGadget,UFG::Editor::Gadget>::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v1->mBaseNode.mUID = -1i64;
   v1->mTypeUID = UFG::qStringHash64("UFG::Editor::CompassGadget", 0xFFFFFFFFFFFFFFFFui64);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::CompassGadget::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::CompassGadget::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::CompassGadget::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::CompassGadget::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   UFG::qString::Set(&v1->mTitle, "Compass");
 }
 
@@ -454,7 +454,7 @@ void __fastcall UFG::Editor::CompassGadget::Render(UFG::Editor::CompassGadget *t
       v95.mBlendMode = 1;
       *(_WORD *)&v95.mDepthTest = 1;
       v95.mOverlay = 0;
-      v95.vfptr = (UFG::Editor::DrawInterfaceVtbl *)&UFG::Editor::DrawRenderI::`vftable';
+      v95.vfptr = (UFG::Editor::DrawInterfaceVtbl *)&UFG::Editor::DrawRenderI::`vftable;
       v3 = (float)clientArea->mX;
       v4 = (float)(clientArea->mX + clientArea->mW);
       v5 = (float)((float)clientArea->mY + (float)(clientArea->mY + clientArea->mH)) * 0.5;

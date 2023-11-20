@@ -9,7 +9,7 @@ void __fastcall HK_ASSERT_OBJECT_SIZE_OK_FUNC(unsigned __int64 nbytes)
 // RVA: 0xC55E20
 void __fastcall hkMemoryAllocator::~hkMemoryAllocator(hkMemoryAllocator *this)
 {
-  this->vfptr = (hkMemoryAllocatorVtbl *)&hkMemoryAllocator::`vftable';
+  this->vfptr = (hkMemoryAllocatorVtbl *)&hkMemoryAllocator::`vftable;
 }
 
 // File Line: 23

@@ -78,7 +78,7 @@ void __fastcall UFG::ResourceRequest::~ResourceRequest(UFG::ResourceRequest *thi
   if ( v2 )
   {
     v3 = v2 - 1;
-    `eh vector destructor iterator'(v2, 4ui64, v2[-1].mUID, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v2, 4ui64, v2[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v3);
     v1->mModelNames = 0i64;
   }
@@ -341,7 +341,7 @@ void __fastcall UFG::ResourceRequest::FindModelNames(UFG::ResourceRequest *this)
   UFG::qString::qString(&v26, v1->mAssetName);
   UFG::qString::GetFilenameWithoutExtension(v3, &result);
   UFG::qString::~qString(&v26);
-  `eh vector constructor iterator'(ptr, 4ui64, 64, (void (__fastcall *)(void *))BackInfo::BackInfo);
+  `eh vector constructor iterator(ptr, 4ui64, 64, (void (__fastcall *)(void *))BackInfo::BackInfo);
   v5 = result.mStringHashUpper32;
   if ( result.mStringHashUpper32 == -1 )
   {
@@ -372,7 +372,7 @@ void __fastcall UFG::ResourceRequest::FindModelNames(UFG::ResourceRequest *this)
   if ( v14 )
   {
     v15 = v14 - 1;
-    `eh vector destructor iterator'(v14, 4ui64, v14[-1].mUID, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v14, 4ui64, v14[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v15);
     v1->mModelNames = 0i64;
   }
@@ -394,7 +394,7 @@ void __fastcall UFG::ResourceRequest::FindModelNames(UFG::ResourceRequest *this)
     {
       LODWORD(v22->mNext) = v17;
       v23 = (signed __int64)&v22->mNext + 4;
-      `eh vector constructor iterator'(
+      `eh vector constructor iterator(
         (char *)&v22->mNext + 4,
         4ui64,
         v17,
@@ -415,7 +415,7 @@ void __fastcall UFG::ResourceRequest::FindModelNames(UFG::ResourceRequest *this)
       while ( v6 < v1->mNumModels );
     }
   }
-  `eh vector destructor iterator'(ptr, 4ui64, 64, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(ptr, 4ui64, 64, (void (__fastcall *)(void *))_);
   UFG::qString::~qString(&result);
 }
 

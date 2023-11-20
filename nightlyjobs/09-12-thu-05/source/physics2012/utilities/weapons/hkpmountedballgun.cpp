@@ -8,7 +8,7 @@ void __fastcall hkpMountedBallGun::hkpMountedBallGun(hkpMountedBallGun *this, hk
   v3 = flag.m_finishing;
   v2 = this;
   hkpBallGun::hkpBallGun((hkpBallGun *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpMountedBallGun::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpMountedBallGun::`vftable;
   if ( v3 )
     v2->m_type.m_storage = 4;
 }
@@ -22,7 +22,7 @@ void __fastcall hkpMountedBallGun::hkpMountedBallGun(hkpMountedBallGun *this, in
   v2 = this;
   hkpBallGun::hkpBallGun((hkpBallGun *)&this->vfptr, numBullets);
   v2->m_type.m_storage = 4;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpMountedBallGun::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpMountedBallGun::`vftable;
   hkStringPtr::operator=(&v2->m_name, "MountedBallGun");
   v2->m_position = (hkVector4f)_xmm;
 }

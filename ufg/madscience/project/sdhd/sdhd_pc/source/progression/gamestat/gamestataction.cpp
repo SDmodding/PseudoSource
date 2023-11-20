@@ -1108,10 +1108,10 @@ LABEL_56:
       v27 = v23 + 1;
       v27->mNext = v27;
       v27[1].mNext = v27;
-      v23->mNext = (UFG::allocator::free_link *)&UFG::Event::`vftable';
+      v23->mNext = (UFG::allocator::free_link *)&UFG::Event::`vftable;
       LODWORD(v23[3].mNext) = v25;
       v23[4].mNext = (UFG::allocator::free_link *)v24;
-      v23->mNext = (UFG::allocator::free_link *)&UFG::GameStatEvent::`vftable';
+      v23->mNext = (UFG::allocator::free_link *)&UFG::GameStatEvent::`vftable;
       LODWORD(v23[7].mNext) = 23;
       v23[8].mNext = (UFG::allocator::free_link *)v26;
     }
@@ -2857,10 +2857,10 @@ LABEL_148:
                 v62 = v58 + 1;
                 v62->mNext = v62;
                 v62[1].mNext = v62;
-                v58->mNext = (UFG::allocator::free_link *)&UFG::Event::`vftable';
+                v58->mNext = (UFG::allocator::free_link *)&UFG::Event::`vftable;
                 LODWORD(v58[3].mNext) = v60;
                 v58[4].mNext = (UFG::allocator::free_link *)v59;
-                v58->mNext = (UFG::allocator::free_link *)&UFG::GameStatEvent::`vftable';
+                v58->mNext = (UFG::allocator::free_link *)&UFG::GameStatEvent::`vftable;
                 LODWORD(v58[7].mNext) = 88;
                 v58[8].mNext = (UFG::allocator::free_link *)v61;
               }
@@ -3577,14 +3577,14 @@ LABEL_25:
       v22 = v20 + 1;
       v22->mNext = v22;
       v22[1].mNext = v22;
-      v21->mNext = (UFG::allocator::free_link *)&UFG::UICommand::`vftable';
+      v21->mNext = (UFG::allocator::free_link *)&UFG::UICommand::`vftable;
       LODWORD(v21[3].mNext) = -1;
       v21[4].mNext = 0i64;
-      v21->mNext = (UFG::allocator::free_link *)&UFG::UIMessage::`vftable';
+      v21->mNext = (UFG::allocator::free_link *)&UFG::UIMessage::`vftable;
       v21[5].mNext = (UFG::allocator::free_link *)UI_HASH_REGION_CHANGE_14;
       v21[6].mNext = (UFG::allocator::free_link *)-1i64;
       LODWORD(v21[3].mNext) = 5;
-      v21->mNext = (UFG::allocator::free_link *)&UFG::UIMessageRegionChange::`vftable';
+      v21->mNext = (UFG::allocator::free_link *)&UFG::UIMessageRegionChange::`vftable;
       LODWORD(v21[7].mNext) = v1;
     }
     else

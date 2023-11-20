@@ -2,7 +2,7 @@
 // RVA: 0x8A5E70
 void __fastcall Scaleform::GFx::MemoryContext::~MemoryContext(Scaleform::GFx::MemoryContext *this)
 {
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::MemoryContext::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::MemoryContext::`vftable;
   Scaleform::RefCountImplCore::~RefCountImplCore((Scaleform::RefCountImplCore *)&this->vfptr);
 }
 
@@ -10,14 +10,14 @@ void __fastcall Scaleform::GFx::MemoryContext::~MemoryContext(Scaleform::GFx::Me
 // RVA: 0x6D2570
 void __fastcall Scaleform::GFx::MovieDef::ResourceVisitor::~ResourceVisitor(Scaleform::GFx::MovieDef::ResourceVisitor *this)
 {
-  this->vfptr = (Scaleform::GFx::MovieDef::ResourceVisitorVtbl *)&Scaleform::GFx::MovieDef::ResourceVisitor::`vftable';
+  this->vfptr = (Scaleform::GFx::MovieDef::ResourceVisitorVtbl *)&Scaleform::GFx::MovieDef::ResourceVisitor::`vftable;
 }
 
 // File Line: 670
 // RVA: 0x6D2460
 void __fastcall Scaleform::GFx::Value::ObjectInterface::~ObjectInterface(Scaleform::GFx::Value::ObjectInterface *this)
 {
-  this->vfptr = (Scaleform::GFx::Value::ObjectInterfaceVtbl *)&Scaleform::GFx::Value::ObjectInterface::`vftable';
+  this->vfptr = (Scaleform::GFx::Value::ObjectInterfaceVtbl *)&Scaleform::GFx::Value::ObjectInterface::`vftable;
 }
 
 // File Line: 806
@@ -105,8 +105,8 @@ Scaleform::Ptr<Scaleform::GFx::VirtualKeyboardInterface> *__fastcall Scaleform::
 // RVA: 0xA239A0
 void __fastcall Scaleform::GFx::ExternalInterface::~ExternalInterface(Scaleform::GFx::ExternalInterface *this)
 {
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ExternalInterface::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::State::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ExternalInterface::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::State::`vftable;
   Scaleform::RefCountImplCore::~RefCountImplCore((Scaleform::RefCountImplCore *)&this->vfptr);
 }
 
@@ -157,6 +157,6 @@ __int64 Scaleform::GFx::Movie::Invoke(Scaleform::GFx::Movie *this, const char *p
 // RVA: 0x8A45A0
 void __fastcall Scaleform::GFx::ExternalLibPtr::~ExternalLibPtr(Scaleform::GFx::ExternalLibPtr *this)
 {
-  this->vfptr = (Scaleform::GFx::ExternalLibPtrVtbl *)&Scaleform::GFx::ExternalLibPtr::`vftable';
+  this->vfptr = (Scaleform::GFx::ExternalLibPtrVtbl *)&Scaleform::GFx::ExternalLibPtr::`vftable;
 }
 

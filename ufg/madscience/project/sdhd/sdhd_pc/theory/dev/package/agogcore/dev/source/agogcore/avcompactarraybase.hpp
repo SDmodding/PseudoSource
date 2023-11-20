@@ -84,7 +84,7 @@ ASymbol *__fastcall AVCompactArrayBase<ASymbol>::alloc_array(unsigned int count)
   v1 = count;
   result = (ASymbol *)AMemory::c_malloc_func(4i64 * count, "AVCompactArray");
   v3 = result;
-  if ( `AVCompactArrayBase<ASymbol>::alloc_array'::`3'::_test && v1 && !result )
+  if ( `AVCompactArrayBase<ASymbol>::alloc_array::`3::_test && v1 && !result )
   {
     AErrMsg::AErrMsg(&err_msg, "Unable to allocate memory", AErrLevel_error, 0i64, 0i64);
     AErrMsg::AErrMsg(
@@ -95,7 +95,7 @@ ASymbol *__fastcall AVCompactArrayBase<ASymbol>::alloc_array(unsigned int count)
       "d:\\ufg\\madscience\\project\\sdhd\\sdhd_pc\\theory\\dev\\package\\agogcore\\dev\\source\\agogcore\\avcompactarraybase.hpp",
       0x38Au,
       3u);
-    if ( ADebug::resolve_error(v4, &action_p, &`AVCompactArrayBase<ASymbol>::alloc_array'::`3'::_test) )
+    if ( ADebug::resolve_error(v4, &action_p, &`AVCompactArrayBase<ASymbol>::alloc_array::`3::_test) )
       __debugbreak();
     if ( action_p != 3 )
       __debugbreak();

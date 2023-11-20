@@ -6,11 +6,11 @@ void __fastcall SSInvokedCoroutine::SSInvokedCoroutine(SSInvokedCoroutine *this)
   AList<SSInvokedBase,SSInvokedBase> *v2; // [rsp+28h] [rbp+10h]
   APArrayLogical<SSData,ASymbol> *v3; // [rsp+28h] [rbp+10h]
 
-  this->vfptr = (SSObjectBaseVtbl *)&SSObjectBase::`vftable';
+  this->vfptr = (SSObjectBaseVtbl *)&SSObjectBase::`vftable;
   v1 = (AListNode<SSInvokedBase,SSInvokedBase> *)&this->i_next_p;
   v1->i_prev_p = v1;
   v1->i_next_p = v1;
-  this->vfptr = (SSObjectBaseVtbl *)&SSInvokedBase::`vftable';
+  this->vfptr = (SSObjectBaseVtbl *)&SSInvokedBase::`vftable;
   this->i_scope_p.i_obj_p = 0i64;
   this->i_scope_p.i_ptr_id = 0;
   this->i_caller_p.i_obj_p = 0i64;
@@ -20,12 +20,12 @@ void __fastcall SSInvokedCoroutine::SSInvokedCoroutine(SSInvokedCoroutine *this)
   v2->i_sentinel.i_next_p = &v2->i_sentinel;
   this->i_pending_count = 0;
   this->i_ptr_id = ++SSObjectBase::c_ptr_id_prev;
-  this->vfptr = (SSObjectBaseVtbl *)&SSInvokedContextBase::`vftable';
+  this->vfptr = (SSObjectBaseVtbl *)&SSInvokedContextBase::`vftable;
   v3 = &this->i_data;
   v3->i_count = 0;
   v3->i_array_p = 0i64;
   v3->i_size = 0;
-  this->vfptr = (SSObjectBaseVtbl *)&SSInvokedCoroutine::`vftable';
+  this->vfptr = (SSObjectBaseVtbl *)&SSInvokedCoroutine::`vftable;
   *(_QWORD *)&this->i_update_count = 0i64;
   this->i_update_next = SkookumScript::c_sim_time;
   this->i_coroutine_p = 0i64;
@@ -631,12 +631,12 @@ LABEL_12:
       }
       *(ASymbol *)(v6 + 8) = ASymbol_String;
       *(_QWORD *)(v6 + 16) = v7;
-      *(_QWORD *)v6 = &SSInvokableBase::`vftable';
+      *(_QWORD *)v6 = &SSInvokableBase::`vftable;
       *(_QWORD *)(v6 + 24) = v8;
       if ( v8 )
         ++v8->i_ref_count;
-      *(_QWORD *)v6 = &SSMethodBase::`vftable';
-      *(_QWORD *)v6 = &SSMethodFunc::`vftable';
+      *(_QWORD *)v6 = &SSMethodBase::`vftable;
+      *(_QWORD *)v6 = &SSMethodFunc::`vftable;
       *(_QWORD *)(v6 + 32) = SSInvokedCoroutine::mthd_String;
       if ( v8 )
       {

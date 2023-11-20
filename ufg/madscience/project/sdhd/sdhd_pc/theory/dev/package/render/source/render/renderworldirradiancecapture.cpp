@@ -105,12 +105,12 @@ void InitIrradianceCaptureSystem(void)
   v15 = UFG::qResourceWarehouse::Instance();
   UFG::qResourceWarehouse::Add(v15, (UFG::qResourceData *)&gRenderVolumeHelperMaterial->mNode);
   v16 = UFG::qStringHash32("UNITSPHERE", 0xFFFFFFFF);
-  v17 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  v17 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v18 = UFG::qResourceWarehouse::Instance();
     v17 = UFG::qResourceWarehouse::GetInventory(v18, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v17;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v17;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&gIrrHelperModelHandle.mPrev, 0xA2ADCD77, v16, v17);
 }

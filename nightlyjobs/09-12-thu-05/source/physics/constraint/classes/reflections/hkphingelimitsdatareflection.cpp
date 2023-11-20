@@ -78,7 +78,7 @@ void __fastcall finishLoadedObjecthkpHingeLimitsData(void *p, int finishing)
   {
     v2 = p;
     hkpConstraintData::hkpConstraintData((hkpConstraintData *)p, (hkFinishLoadedObjectFlag)finishing);
-    *v2 = &hkpHingeLimitsData::`vftable';
+    *v2 = &hkpHingeLimitsData::`vftable;
   }
 }
 
@@ -96,7 +96,7 @@ void **__fastcall getVtablehkpHingeLimitsData()
   hkpConstraintData v1; // [rsp+20h] [rbp-B8h]
 
   hkpConstraintData::hkpConstraintData(&v1, 0);
-  return &hkpHingeLimitsData::`vftable';
+  return &hkpHingeLimitsData::`vftable;
 }
 
 // File Line: 168

@@ -714,7 +714,7 @@ void __fastcall AttackCollisionTrack::AttackCollisionTrack(AttackCollisionTrack 
   NodeRefTrack<AttackCollisionTask>::NodeRefTrack<AttackCollisionTask>(
     (NodeRefTrack<AttackCollisionTask> *)&this->vfptr,
     AttackCollisionTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AttackCollisionTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AttackCollisionTrack::`vftable;
   v1->mDamage.text.mOffset = 1i64;
   BinString::Set(&v1->mDamage.text, &customWorldMapCaption);
   v1->mDamage.expression.mOffset = 0i64;
@@ -847,8 +847,8 @@ void __fastcall OverrideDesiredFocusModeTrack::OverrideDesiredFocusModeTrack(Ove
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, OverrideDesiredFocusModeTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<OverrideDesiredFocusModeTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&OverrideDesiredFocusModeTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<OverrideDesiredFocusModeTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&OverrideDesiredFocusModeTrack::`vftable;
   v1->m_eOverrideMode.mValue = 0;
   v1->m_bResetOnEnd = 1;
 }
@@ -872,8 +872,8 @@ void __fastcall ParkourSyncPositionTrack::ParkourSyncPositionTrack(ParkourSyncPo
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, ParkourSyncPositionTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<ParkourSyncPositionTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ParkourSyncPositionTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<ParkourSyncPositionTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ParkourSyncPositionTrack::`vftable;
   v1->mSyncTimeStart = 0.0;
   v1->mSyncTimeEnd = -1.0;
   v1->mSyncTime = 0.333;
@@ -902,8 +902,8 @@ void __fastcall ParkourNeighborAdvanceTrack::ParkourNeighborAdvanceTrack(Parkour
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, ParkourNeighborAdvanceTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<ParkourNeighborAdvanceTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ParkourNeighborAdvanceTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<ParkourNeighborAdvanceTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ParkourNeighborAdvanceTrack::`vftable;
   v1->mAdvanceRightNeighbor = 0;
 }
 
@@ -926,8 +926,8 @@ void __fastcall ParkourConstrainTrack::ParkourConstrainTrack(ParkourConstrainTra
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, ParkourConstrainTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<ParkourConstrainTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ParkourConstrainTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<ParkourConstrainTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ParkourConstrainTrack::`vftable;
   v1->mSyncTimeStart = 0.0;
   v1->mSyncTimeEnd = -1.0;
   v1->mSyncTime = 0.333;
@@ -956,8 +956,8 @@ void __fastcall CoverSyncPositionTrack::CoverSyncPositionTrack(CoverSyncPosition
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, CoverSyncPositionTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CoverSyncPositionTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CoverSyncPositionTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CoverSyncPositionTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CoverSyncPositionTrack::`vftable;
   v1->m_SyncTime = 0.333;
   v1->m_Attachment = UFG::gNullQSymbolUC;
   *(_WORD *)&v1->m_SyncParkour = 1;
@@ -983,8 +983,8 @@ void __fastcall CoverHoldPositionTrack::CoverHoldPositionTrack(CoverHoldPosition
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, CoverHoldPositionTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CoverHoldPositionTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CoverHoldPositionTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CoverHoldPositionTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CoverHoldPositionTrack::`vftable;
   v1->m_AllowUpdate = 1;
 }
 
@@ -1007,8 +1007,8 @@ void __fastcall CoverProbeForwardAndLatchTrack::CoverProbeForwardAndLatchTrack(C
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, CoverProbeForwardAndLatchTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CoverProbeForwardAndLatchTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CoverProbeForwardAndLatchTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CoverProbeForwardAndLatchTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CoverProbeForwardAndLatchTrack::`vftable;
   *(_QWORD *)&v1->m_Distance = 1056964608i64;
 }
 
@@ -1031,8 +1031,8 @@ void __fastcall CoverProbeAndLatchTrack::CoverProbeAndLatchTrack(CoverProbeAndLa
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, CoverProbeAndLatchTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CoverProbeAndLatchTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CoverProbeAndLatchTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CoverProbeAndLatchTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CoverProbeAndLatchTrack::`vftable;
   *(_QWORD *)&v1->m_Distance = 1056964608i64;
 }
 
@@ -1055,8 +1055,8 @@ void __fastcall CoverSetPopoutSideTrack::CoverSetPopoutSideTrack(CoverSetPopoutS
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, CoverSetPopoutSideTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CoverSetPopoutSideTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CoverSetPopoutSideTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CoverSetPopoutSideTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CoverSetPopoutSideTrack::`vftable;
   v1->m_eCoverPopoutSide.mValue = 0;
 }
 
@@ -1079,8 +1079,8 @@ void __fastcall DynamicWallHandleTrack::DynamicWallHandleTrack(DynamicWallHandle
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, DynamicWallHandleTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DynamicWallHandleTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DynamicWallHandleTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DynamicWallHandleTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&DynamicWallHandleTrack::`vftable;
   v1->mDirection = 0.0;
   v1->mFirstRayHeight = 0.75;
   v1->mRaySpacing = 1.0;
@@ -1106,8 +1106,8 @@ void __fastcall EventTrack::EventTrack(EventTrack *this)
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, EventTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<EventTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&EventTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<EventTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&EventTrack::`vftable;
   v1->mEventName.mOffset = 1i64;
   BinString::Set(&v1->mEventName, "NO_EVENT");
 }
@@ -1132,8 +1132,8 @@ void __fastcall ApplyStimulusEmitterToTargetTrack::ApplyStimulusEmitterToTargetT
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, ApplyStimulusEmitterToTargetTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<ApplyStimulusEmitterToTargetTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ApplyStimulusEmitterToTargetTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<ApplyStimulusEmitterToTargetTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ApplyStimulusEmitterToTargetTrack::`vftable;
   *(_QWORD *)&v1->mActivationType.mValue = 0i64;
   v1->mMaxDuration = -1.0;
   v1->mEmitUntilSpeedLessThan = -1.0;
@@ -1156,7 +1156,7 @@ void __fastcall ApplyStimulusEmitterToTargetTrack::~ApplyStimulusEmitterToTarget
   char *v7; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&ApplyStimulusEmitterToTargetTrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&ApplyStimulusEmitterToTargetTrack::`vftable;
   v2 = &this->m_ActionPath;
   if ( this->m_ActionPath.mPath.mCount >= 0 )
   {
@@ -1173,7 +1173,7 @@ void __fastcall ApplyStimulusEmitterToTargetTrack::~ApplyStimulusEmitterToTarget
     v2->mPath.mData.mOffset = 0i64;
     v2->mPath.mCount &= 0x80000000;
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v6 = &v1->mMasterRate;
   if ( !(~LOBYTE(v1->mMasterRate.text.mOffset) & 1) )
   {
@@ -1184,7 +1184,7 @@ void __fastcall ApplyStimulusEmitterToTargetTrack::~ApplyStimulusEmitterToTarget
         operator delete[](v7);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 861
@@ -1206,8 +1206,8 @@ void __fastcall AttackRightsTrack::AttackRightsTrack(AttackRightsTrack *this)
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, AttackRightsTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AttackRightsTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AttackRightsTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AttackRightsTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AttackRightsTrack::`vftable;
   *(_WORD *)&v1->mAttackingEnabled = 256;
 }
 
@@ -1220,8 +1220,8 @@ void __fastcall AttackRightsTrack::~AttackRightsTrack(AttackRightsTrack *this)
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&AttackRightsTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&AttackRightsTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -1232,7 +1232,7 @@ void __fastcall AttackRightsTrack::~AttackRightsTrack(AttackRightsTrack *this)
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 891
@@ -1255,8 +1255,8 @@ void __fastcall SkookumTrack::SkookumTrack(SkookumTrack *this)
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, SkookumTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<SkookumTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SkookumTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<SkookumTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&SkookumTrack::`vftable;
   v2 = SkookumTrack::sDefaultScope;
   v1->mClassScopeText.mOffset = 1i64;
   BinString::Set(&v1->mClassScopeText, v2);
@@ -1275,8 +1275,8 @@ void __fastcall SkookumTrack::SkookumTrack(SkookumTrack *this, MemImageLoadFlag 
 
   v2 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, flag);
-  v2->vfptr = (Expression::IMemberMapVtbl *)&Track<SkookumTask>::`vftable';
-  v2->vfptr = (Expression::IMemberMapVtbl *)&SkookumTrack::`vftable';
+  v2->vfptr = (Expression::IMemberMapVtbl *)&Track<SkookumTask>::`vftable;
+  v2->vfptr = (Expression::IMemberMapVtbl *)&SkookumTrack::`vftable;
   v3 = BinString::sEmptyString;
   if ( v2->mClassScopeText.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
     v4 = (char *)&v2->mClassScopeText + (v2->mClassScopeText.mOffset & 0xFFFFFFFFFFFFFFFEui64);
@@ -1304,7 +1304,7 @@ void __fastcall SkookumTrack::~SkookumTrack(SkookumTrack *this)
   char *v6; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&SkookumTrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&SkookumTrack::`vftable;
   v2 = this->mpScript;
   if ( v2 )
   {
@@ -1329,7 +1329,7 @@ void __fastcall SkookumTrack::~SkookumTrack(SkookumTrack *this)
         operator delete[](v4);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v5 = &v1->mMasterRate;
   if ( !(~LOBYTE(v1->mMasterRate.text.mOffset) & 1) )
   {
@@ -1340,7 +1340,7 @@ void __fastcall SkookumTrack::~SkookumTrack(SkookumTrack *this)
         operator delete[](v6);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 1039
@@ -1373,8 +1373,8 @@ void __fastcall ReloadGunTrack::ReloadGunTrack(ReloadGunTrack *this)
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, ReloadGunTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<ReloadGunTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ReloadGunTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<ReloadGunTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ReloadGunTrack::`vftable;
   v1->m_bReloadOverride = 0;
   v1->m_nReloadAmount = -1;
 }
@@ -1409,8 +1409,8 @@ void __fastcall AimingFreeAimIntentionResetTrack::AimingFreeAimIntentionResetTra
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, AimingFreeAimIntentionResetTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AimingFreeAimIntentionResetTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AimingFreeAimIntentionResetTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AimingFreeAimIntentionResetTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AimingFreeAimIntentionResetTrack::`vftable;
 }
 
 // File Line: 1118
@@ -1432,8 +1432,8 @@ void __fastcall AimingSoftLockTrack::AimingSoftLockTrack(AimingSoftLockTrack *th
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, AimingSoftLockTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AimingSoftLockTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AimingSoftLockTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AimingSoftLockTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AimingSoftLockTrack::`vftable;
 }
 
 // File Line: 1139
@@ -1455,8 +1455,8 @@ void __fastcall AimingSoftLockDisableTrack::AimingSoftLockDisableTrack(AimingSof
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, AimingSoftLockDisableTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AimingSoftLockDisableTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AimingSoftLockDisableTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AimingSoftLockDisableTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AimingSoftLockDisableTrack::`vftable;
 }
 
 // File Line: 1160
@@ -1478,8 +1478,8 @@ void __fastcall AimingFreeAimConeClampTrack::AimingFreeAimConeClampTrack(AimingF
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, AimingFreeAimConeClampTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AimingFreeAimConeClampTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AimingFreeAimConeClampTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AimingFreeAimConeClampTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AimingFreeAimConeClampTrack::`vftable;
 }
 
 // File Line: 1184
@@ -1501,8 +1501,8 @@ void __fastcall PowerManagementSuspendPermanentlyTrack::PowerManagementSuspendPe
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, PowerManagementSuspendPermanentlyTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<PowerManagementSuspendPermanentlyTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PowerManagementSuspendPermanentlyTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<PowerManagementSuspendPermanentlyTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PowerManagementSuspendPermanentlyTrack::`vftable;
 }
 
 // File Line: 1204
@@ -1524,8 +1524,8 @@ void __fastcall MotionIntentionHoldTrack::MotionIntentionHoldTrack(MotionIntenti
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, MotionIntentionHoldTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<MotionIntentionHoldTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&MotionIntentionHoldTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<MotionIntentionHoldTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&MotionIntentionHoldTrack::`vftable;
 }
 
 // File Line: 1221
@@ -1547,8 +1547,8 @@ void __fastcall AttachmentTransferTrack::AttachmentTransferTrack(AttachmentTrans
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, AttachmentTransferTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AttachmentTransferTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AttachmentTransferTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AttachmentTransferTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AttachmentTransferTrack::`vftable;
   v1->m_SourceAttachJoint = UFG::gNullQSymbolUC;
   v1->m_DestAttachJoint = UFG::gNullQSymbolUC;
   v1->m_AttachmentAttachJoint.mUID = -1;
@@ -1576,8 +1576,8 @@ void __fastcall PlaybackSpeedModifierEnabledTrack::PlaybackSpeedModifierEnabledT
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, PlaybackSpeedModifierEnabledTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<PlaybackSpeedModifierEnabledTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlaybackSpeedModifierEnabledTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<PlaybackSpeedModifierEnabledTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PlaybackSpeedModifierEnabledTrack::`vftable;
 }
 
 // File Line: 1263
@@ -1599,8 +1599,8 @@ void __fastcall CharacterStatModifyTrack::CharacterStatModifyTrack(CharacterStat
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, CharacterStatModifyTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CharacterStatModifyTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CharacterStatModifyTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CharacterStatModifyTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CharacterStatModifyTrack::`vftable;
   *(_QWORD *)&v1->m_iCharacterStat = 0i64;
 }
 
@@ -1623,8 +1623,8 @@ void __fastcall SetOutOfFightTrack::SetOutOfFightTrack(SetOutOfFightTrack *this)
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, SetOutOfFightTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<SetOutOfFightTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SetOutOfFightTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<SetOutOfFightTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&SetOutOfFightTrack::`vftable;
   v1->m_OutOfFightState = 1;
 }
 
@@ -1658,8 +1658,8 @@ void __fastcall StruggleTrack::StruggleTrack(StruggleTrack *this)
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, StruggleTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<StruggleTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&StruggleTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<StruggleTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&StruggleTrack::`vftable;
   v1->mIncrement = 0.050000001;
   v1->mAutoStruggleToOne = 0;
 }
@@ -1683,8 +1683,8 @@ void __fastcall Struggle2Track::Struggle2Track(Struggle2Track *this)
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, Struggle2Track::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<Struggle2Task>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Struggle2Track::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<Struggle2Task>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Struggle2Track::`vftable;
   v1->mActionRequest.mValue = gActionRequest_Action.m_EnumValue;
   v1->mStrugglePeriod = 0.16666667;
   v1->mStruggleFallOffPeriod = 0.33333334;
@@ -1717,8 +1717,8 @@ void __fastcall ActorStateCounterTrack::ActorStateCounterTrack(ActorStateCounter
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, ActorStateCounterTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<ActorStateCounterTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ActorStateCounterTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<ActorStateCounterTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ActorStateCounterTrack::`vftable;
   v1->m_audioStateCounter.mValue = 0;
 }
 
@@ -1731,8 +1731,8 @@ void __fastcall ActorStateCounterTrack::~ActorStateCounterTrack(ActorStateCounte
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&ActorStateCounterTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&ActorStateCounterTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -1743,7 +1743,7 @@ void __fastcall ActorStateCounterTrack::~ActorStateCounterTrack(ActorStateCounte
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 1401
@@ -1773,8 +1773,8 @@ void __fastcall GameStatEventTrack::GameStatEventTrack(GameStatEventTrack *this)
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, GameStatEventTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<GameStatEventTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&GameStatEventTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<GameStatEventTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&GameStatEventTrack::`vftable;
   v1->mEventType.mValue = 0;
   v1->mPlayerOnly = 0;
 }
@@ -1788,8 +1788,8 @@ void __fastcall GameStatEventTrack::~GameStatEventTrack(GameStatEventTrack *this
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&GameStatEventTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&GameStatEventTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -1800,7 +1800,7 @@ void __fastcall GameStatEventTrack::~GameStatEventTrack(GameStatEventTrack *this
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 1432
@@ -1822,8 +1822,8 @@ void __fastcall GameStatDistanceTrack::GameStatDistanceTrack(GameStatDistanceTra
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, GameStatDistanceTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<GameStatDistanceTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&GameStatDistanceTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<GameStatDistanceTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&GameStatDistanceTrack::`vftable;
   v1->mPlayerOnly = 1;
 }
 
@@ -1846,8 +1846,8 @@ void __fastcall GameStatSpecialMoveTrack::GameStatSpecialMoveTrack(GameStatSpeci
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, GameStatSpecialMoveTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<GameStatSpecialMoveTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&GameStatSpecialMoveTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<GameStatSpecialMoveTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&GameStatSpecialMoveTrack::`vftable;
   v1->mPlayerOnly = 0;
 }
 
@@ -1870,8 +1870,8 @@ void __fastcall AccuracyOverrideTrack::AccuracyOverrideTrack(AccuracyOverrideTra
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, AccuracyOverrideTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AccuracyOverrideTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AccuracyOverrideTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AccuracyOverrideTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AccuracyOverrideTrack::`vftable;
   v1->m_fAccuracyOverride = 1.0;
   v1->m_bCoverAccuracyOverride = 0;
 }
@@ -1895,8 +1895,8 @@ void __fastcall AccuracyEnsureMissTrack::AccuracyEnsureMissTrack(AccuracyEnsureM
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, AccuracyEnsureMissTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AccuracyEnsureMissTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AccuracyEnsureMissTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AccuracyEnsureMissTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AccuracyEnsureMissTrack::`vftable;
 }
 
 // File Line: 1513
@@ -1918,8 +1918,8 @@ void __fastcall ReticleSizeOverrideTrack::ReticleSizeOverrideTrack(ReticleSizeOv
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, ReticleSizeOverrideTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<ReticleSizeOverrideTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ReticleSizeOverrideTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<ReticleSizeOverrideTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ReticleSizeOverrideTrack::`vftable;
   v1->m_fOverrideSize = -1.0;
 }
 
@@ -1942,8 +1942,8 @@ void __fastcall CharacterStatModifyIntTrack::CharacterStatModifyIntTrack(Charact
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, CharacterStatModifyIntTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CharacterStatModifyIntTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CharacterStatModifyIntTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CharacterStatModifyIntTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CharacterStatModifyIntTrack::`vftable;
   *(_QWORD *)&v1->m_StatType = 0i64;
   v1->m_Value = 0;
 }
@@ -1967,8 +1967,8 @@ void __fastcall MotionIntentionSetRelativeToPlayerTrack::MotionIntentionSetRelat
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, MotionIntentionSetRelativeToPlayerTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<MotionIntentionSetRelativeToPlayerTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&MotionIntentionSetRelativeToPlayerTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<MotionIntentionSetRelativeToPlayerTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&MotionIntentionSetRelativeToPlayerTrack::`vftable;
   v1->m_RelativeToPlayer = 0;
 }
 
@@ -1991,8 +1991,8 @@ void __fastcall GunConsumeAmmoTrack::GunConsumeAmmoTrack(GunConsumeAmmoTrack *th
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, GunConsumeAmmoTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<GunConsumeAmmoTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&GunConsumeAmmoTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<GunConsumeAmmoTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&GunConsumeAmmoTrack::`vftable;
   v1->m_AmountToConsume = 0;
 }
 
@@ -2015,8 +2015,8 @@ void __fastcall SetStateFlagTrack::SetStateFlagTrack(SetStateFlagTrack *this)
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, SetStateFlagTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<SetStateFlagTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SetStateFlagTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<SetStateFlagTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&SetStateFlagTrack::`vftable;
   v1->m_FlagType.mValue = 0;
 }
 
@@ -2039,8 +2039,8 @@ void __fastcall HitRecordSetBerserkAttackFlagTrack::HitRecordSetBerserkAttackFla
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, HitRecordSetBerserkAttackFlagTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<HitRecordSetBerserkAttackFlagTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&HitRecordSetBerserkAttackFlagTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<HitRecordSetBerserkAttackFlagTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&HitRecordSetBerserkAttackFlagTrack::`vftable;
   v1->m_Enabled = 0;
 }
 
@@ -2063,8 +2063,8 @@ void __fastcall PlayerBuffActivateTrack::PlayerBuffActivateTrack(PlayerBuffActiv
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, PlayerBuffActivateTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<PlayerBuffActivateTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerBuffActivateTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<PlayerBuffActivateTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerBuffActivateTrack::`vftable;
   v1->m_ePlayerBuffType = 0;
 }
 
@@ -2120,8 +2120,8 @@ void __fastcall FaceMeterActivateTrack::FaceMeterActivateTrack(FaceMeterActivate
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, FaceMeterActivateTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<FaceMeterActivateTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&FaceMeterActivateTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<FaceMeterActivateTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&FaceMeterActivateTrack::`vftable;
 }
 
 // File Line: 1741
@@ -2143,8 +2143,8 @@ void __fastcall FaceInteractionResultSetTrack::FaceInteractionResultSetTrack(Fac
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, FaceInteractionResultSetTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<FaceInteractionResultSetTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&FaceInteractionResultSetTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<FaceInteractionResultSetTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&FaceInteractionResultSetTrack::`vftable;
   v1->mInteractionResult = 0;
 }
 
@@ -2174,8 +2174,8 @@ void __fastcall ParkourHandleTrack::ParkourHandleTrack(ParkourHandleTrack *this)
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, ParkourHandleTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<ParkourHandleTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ParkourHandleTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<ParkourHandleTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ParkourHandleTrack::`vftable;
   v1->mHandleState = 1;
   v1->mCollisionGeoName.mUID = -1;
 }
@@ -2199,8 +2199,8 @@ void __fastcall InvulnerableTrack::InvulnerableTrack(InvulnerableTrack *this)
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, InvulnerableTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<InvulnerableTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&InvulnerableTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<InvulnerableTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&InvulnerableTrack::`vftable;
 }
 
 // File Line: 1814
@@ -2222,8 +2222,8 @@ void __fastcall SocialSetEnabledTrack::SocialSetEnabledTrack(SocialSetEnabledTra
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, SocialSetEnabledTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<SocialSetEnabledTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SocialSetEnabledTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<SocialSetEnabledTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&SocialSetEnabledTrack::`vftable;
   v1->m_Enable = 0;
 }
 
@@ -2279,8 +2279,8 @@ void __fastcall TriggerRecoilPostEffectTrack::TriggerRecoilPostEffectTrack(Trigg
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, TriggerRecoilPostEffectTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<TriggerRecoilPostEffectTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TriggerRecoilPostEffectTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<TriggerRecoilPostEffectTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TriggerRecoilPostEffectTrack::`vftable;
   v1->mAmountMin = 1.0;
   v1->mAmountMax = 1.0;
   v1->mFallOffScale = 1.0;
@@ -2306,8 +2306,8 @@ void __fastcall AccuracyModifierTrack::AccuracyModifierTrack(AccuracyModifierTra
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, AccuracyModifierTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AccuracyModifierTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AccuracyModifierTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AccuracyModifierTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AccuracyModifierTrack::`vftable;
   v1->m_fAccuracyModifier.text.mOffset = 1i64;
   BinString::Set(&v1->m_fAccuracyModifier.text, &customWorldMapCaption);
   v1->m_fAccuracyModifier.expression.mOffset = 0i64;
@@ -2333,7 +2333,7 @@ void __fastcall AccuracyModifierTrack::~AccuracyModifierTrack(AccuracyModifierTr
   char *v9; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&AccuracyModifierTrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&AccuracyModifierTrack::`vftable;
   v2 = &this->m_ActionPath;
   if ( this->m_ActionPath.mPath.mCount >= 0 )
   {
@@ -2360,7 +2360,7 @@ void __fastcall AccuracyModifierTrack::~AccuracyModifierTrack(AccuracyModifierTr
         operator delete[](v7);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v8 = &v1->mMasterRate;
   if ( !(~LOBYTE(v1->mMasterRate.text.mOffset) & 1) )
   {
@@ -2371,7 +2371,7 @@ void __fastcall AccuracyModifierTrack::~AccuracyModifierTrack(AccuracyModifierTr
         operator delete[](v9);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 1948
@@ -2393,8 +2393,8 @@ void __fastcall AIOutlineActivateTrack::AIOutlineActivateTrack(AIOutlineActivate
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, AIOutlineActivateTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AIOutlineActivateTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AIOutlineActivateTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AIOutlineActivateTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AIOutlineActivateTrack::`vftable;
   v1->m_bActivate = 1;
 }
 
@@ -2407,8 +2407,8 @@ void __fastcall AIOutlineActivateTrack::~AIOutlineActivateTrack(AIOutlineActivat
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&AIOutlineActivateTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&AIOutlineActivateTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -2419,7 +2419,7 @@ void __fastcall AIOutlineActivateTrack::~AIOutlineActivateTrack(AIOutlineActivat
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 1972
@@ -2441,8 +2441,8 @@ void __fastcall CollectibleCollectTrack::CollectibleCollectTrack(CollectibleColl
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, CollectibleCollectTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CollectibleCollectTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CollectibleCollectTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CollectibleCollectTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CollectibleCollectTrack::`vftable;
   v1->mCollectibleType.mUID = -1;
   v1->mTargetType.mValue = 0;
   v1->mCollectibleType.mUID = gStaticSymbolUC_none.mUID;
@@ -2457,8 +2457,8 @@ void __fastcall CollectibleCollectTrack::~CollectibleCollectTrack(CollectibleCol
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&CollectibleCollectTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&CollectibleCollectTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -2469,7 +2469,7 @@ void __fastcall CollectibleCollectTrack::~CollectibleCollectTrack(CollectibleCol
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 2005
@@ -2492,8 +2492,8 @@ void __fastcall SimObjectFlagSetTrack::SimObjectFlagSetTrack(SimObjectFlagSetTra
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, SimObjectFlagSetTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<SimObjectFlagSetTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SimObjectFlagSetTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<SimObjectFlagSetTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&SimObjectFlagSetTrack::`vftable;
   v1->m_eSimObjectFlag.mValue = 0;
   v2 = (signed __int64)&v1->m_ActionPath;
   *(_DWORD *)v2 = 0;
@@ -2513,7 +2513,7 @@ void __fastcall SimObjectFlagSetTrack::~SimObjectFlagSetTrack(SimObjectFlagSetTr
   char *v7; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&SimObjectFlagSetTrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&SimObjectFlagSetTrack::`vftable;
   v2 = &this->m_ActionPath;
   if ( this->m_ActionPath.mPath.mCount >= 0 )
   {
@@ -2530,7 +2530,7 @@ void __fastcall SimObjectFlagSetTrack::~SimObjectFlagSetTrack(SimObjectFlagSetTr
     v2->mPath.mData.mOffset = 0i64;
     v2->mPath.mCount &= 0x80000000;
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v6 = &v1->mMasterRate;
   if ( !(~LOBYTE(v1->mMasterRate.text.mOffset) & 1) )
   {
@@ -2541,7 +2541,7 @@ void __fastcall SimObjectFlagSetTrack::~SimObjectFlagSetTrack(SimObjectFlagSetTr
         operator delete[](v7);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 2040
@@ -2563,8 +2563,8 @@ void __fastcall SetRollStabilityTrack::SetRollStabilityTrack(SetRollStabilityTra
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, SetRollStabilityTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<SetRollStabilityTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SetRollStabilityTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<SetRollStabilityTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&SetRollStabilityTrack::`vftable;
   v1->m_fRollStability = 0.0;
 }
 
@@ -2577,8 +2577,8 @@ void __fastcall SetRollStabilityTrack::~SetRollStabilityTrack(SetRollStabilityTr
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&SetRollStabilityTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&SetRollStabilityTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -2589,7 +2589,7 @@ void __fastcall SetRollStabilityTrack::~SetRollStabilityTrack(SetRollStabilityTr
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 2066

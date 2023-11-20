@@ -119,7 +119,7 @@ hkClass *__fastcall hkaiEdgeGeometry::staticClass()
 void __fastcall finishLoadedObjecthkaiEdgeGeometry(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiEdgeGeometry::`vftable';
+    *(_QWORD *)p = &hkaiEdgeGeometry::`vftable;
 }
 
 // File Line: 195
@@ -133,7 +133,7 @@ void __fastcall cleanupLoadedObjecthkaiEdgeGeometry(void *p)
 // RVA: 0xB47D50
 void **__fastcall getVtablehkaiEdgeGeometry()
 {
-  return &hkaiEdgeGeometry::`vftable';
+  return &hkaiEdgeGeometry::`vftable;
 }
 
 // File Line: 221

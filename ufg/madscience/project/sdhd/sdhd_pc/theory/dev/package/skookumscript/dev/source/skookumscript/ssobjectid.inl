@@ -9,8 +9,8 @@ void __fastcall SSObjectId::SSObjectId(SSObjectId *this, const void **binary_pp)
 
   v2 = binary_pp;
   v3 = this;
-  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-  this->vfptr = (SSExpressionBaseVtbl *)&SSObjectId::`vftable';
+  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+  this->vfptr = (SSExpressionBaseVtbl *)&SSObjectId::`vftable;
   ASymbol::create_from_binary(&this->i_name, binary_pp);
   v3->i_obj_p.i_obj_p = 0i64;
   v3->i_obj_p.i_ptr_id = 0;

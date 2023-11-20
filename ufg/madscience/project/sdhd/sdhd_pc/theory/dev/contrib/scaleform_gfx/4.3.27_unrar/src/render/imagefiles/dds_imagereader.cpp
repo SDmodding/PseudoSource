@@ -144,7 +144,7 @@ void __fastcall Scaleform::Render::DDS::DDSFileImageSource::DDSFileImageSource(S
     file,
     format,
     0i64);
-  v3->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::DDS::DDSFileImageSource::`vftable';
+  v3->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::DDS::DDSFileImageSource::`vftable;
   v3->ImageDesc = 0;
   *(_QWORD *)&v3->HeaderInfo.Width = 0i64;
   *(_QWORD *)&v3->HeaderInfo.Pitch = 0i64;
@@ -600,7 +600,7 @@ Scaleform::Render::DDS::DDSFileImageSource *__fastcall Scaleform::Render::DDS::F
 // RVA: 0x159C610
 __int64 dynamic_initializer_for__Scaleform::Render::DDS::FileReader::Instance__()
 {
-  Scaleform::Render::DDS::FileReader::Instance.vfptr = (Scaleform::Render::ImageFileHandlerVtbl *)&Scaleform::Render::DDS::FileReader::`vftable';
+  Scaleform::Render::DDS::FileReader::Instance.vfptr = (Scaleform::Render::ImageFileHandlerVtbl *)&Scaleform::Render::DDS::FileReader::`vftable;
   return atexit(dynamic_atexit_destructor_for__Scaleform::Render::DDS::FileReader::Instance__);
 }
 

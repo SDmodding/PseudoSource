@@ -51,7 +51,7 @@ void __fastcall createVertexMap(hkArray<hkVector4f,hkContainerHeapAllocator> *ve
 // RVA: 0xBA4530
 void __fastcall hkaiSelfIntersectBooleanFilter2::hkaiSelfIntersectBooleanFilter2(hkaiSelfIntersectBooleanFilter2 *this)
 {
-  this->vfptr = (hkaiBooleanFilterVtbl *)&hkaiSelfIntersectBooleanFilter2::`vftable';
+  this->vfptr = (hkaiBooleanFilterVtbl *)&hkaiSelfIntersectBooleanFilter2::`vftable;
   this->m_vertexMapA.m_capacityAndFlags = 2147483648;
   this->m_vertexMapA.m_data = 0i64;
   this->m_vertexMapA.m_size = 0;

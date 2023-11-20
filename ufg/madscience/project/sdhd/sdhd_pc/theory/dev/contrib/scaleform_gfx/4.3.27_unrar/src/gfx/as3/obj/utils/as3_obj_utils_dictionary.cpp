@@ -119,12 +119,12 @@ LABEL_24:
             v43 = v22;
             if ( v22 )
             {
-              *(_QWORD *)v22 = &Scaleform::RefCountImplCore::`vftable';
+              *(_QWORD *)v22 = &Scaleform::RefCountImplCore::`vftable;
               *(_DWORD *)(v22 + 8) = 1;
-              *(_QWORD *)v22 = &Scaleform::RefCountImpl::`vftable';
-              *(_QWORD *)v22 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,328>::`vftable';
-              *(_QWORD *)v22 = &Scaleform::RefCountBase<Scaleform::GFx::AS3::PtrReleaseProxy<328>,328>::`vftable';
-              *(_QWORD *)v22 = &Scaleform::GFx::AS3::PtrReleaseProxy<328>::`vftable';
+              *(_QWORD *)v22 = &Scaleform::RefCountImpl::`vftable;
+              *(_QWORD *)v22 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,328>::`vftable;
+              *(_QWORD *)v22 = &Scaleform::RefCountBase<Scaleform::GFx::AS3::PtrReleaseProxy<328>,328>::`vftable;
+              *(_QWORD *)v22 = &Scaleform::GFx::AS3::PtrReleaseProxy<328>::`vftable;
               *(_QWORD *)(v22 + 16) = 0i64;
               *(_QWORD *)(v22 + 24) = 0i64;
               *(_QWORD *)(v22 + 32) = 0i64;
@@ -904,7 +904,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v5 )
   {
     Scaleform::GFx::AS3::ClassTraits::fl::Object::Object(v5, v2, &Scaleform::GFx::AS3::fl_utils::DictionaryCI);
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_utils::Dictionary::`vftable';
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_utils::Dictionary::`vftable;
     v6->TraitsType = 11;
   }
   else
@@ -917,7 +917,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v7 )
   {
     Scaleform::GFx::AS3::InstanceTraits::fl::Object::Object(v7, v2, &Scaleform::GFx::AS3::fl_utils::DictionaryCI);
-    v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_utils::Dictionary::`vftable';
+    v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_utils::Dictionary::`vftable;
     v8.pV->Flags |= 1ui64;
     v8.pV->TraitsType = 11;
   }

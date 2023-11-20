@@ -32,9 +32,9 @@ Expression::IMemberMap *__fastcall TrackGroup::CreateClone(TrackGroup *this)
   v14 = v2;
   if ( v2 )
   {
-    *(_QWORD *)v2 = &Expression::IMemberMap::`vftable';
+    *(_QWORD *)v2 = &Expression::IMemberMap::`vftable;
     *((_QWORD *)v2 + 1) = 0i64;
-    *(_QWORD *)v2 = &TrackGroup::`vftable';
+    *(_QWORD *)v2 = &TrackGroup::`vftable;
     *((_DWORD *)v2 + 4) = 0;
     *((_QWORD *)v2 + 3) = 0i64;
   }
@@ -139,9 +139,9 @@ void __fastcall ITrack::ITrack(ITrack *this, unsigned int class_name_uid)
   ExpressionParameterFloat *v3; // [rsp+50h] [rbp+18h]
 
   v2 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   this->m_TrackClassNameUID = class_name_uid;
   this->mMaster = 0;
   v3 = &this->mMasterRate;
@@ -158,9 +158,9 @@ void __fastcall ITrack::ITrack(ITrack *this, unsigned int class_name_uid)
 // RVA: 0x268D00
 void __fastcall ITrack::ITrack(ITrack *this, MemImageLoadFlag flag)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   *(_WORD *)&this->mBreakPoint = 0;
 }
 

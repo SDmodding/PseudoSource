@@ -154,20 +154,20 @@ void __fastcall UFG::AICoverQuery::AICoverQuery(UFG::AICoverQuery *this)
   float v2; // xmm1_4
   float v3; // xmm2_4
 
-  this->vfptr = (UFG::AIQueryVtbl *)&UFG::AIQuery::`vftable';
+  this->vfptr = (UFG::AIQueryVtbl *)&UFG::AIQuery::`vftable;
   this->m_bStateNeedsInit = 1;
   *(_QWORD *)&this->m_iRefCount = 0i64;
   v1 = (UFG::qNode<UFG::AICoverQuery,UFG::AICoverQuery> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (UFG::AIQueryVtbl *)&UFG::AICoverQuery::`vftable';
-  this->m_npQueryCenter.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable';
+  this->vfptr = (UFG::AIQueryVtbl *)&UFG::AICoverQuery::`vftable;
+  this->m_npQueryCenter.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable;
   v2 = UFG::qVector3::msZero.y;
   v3 = UFG::qVector3::msZero.z;
   this->m_npQueryCenter.m_vPosition.x = UFG::qVector3::msZero.x;
   this->m_npQueryCenter.m_vPosition.y = v2;
   this->m_npQueryCenter.m_vPosition.z = v3;
-  this->m_npQueryCenter.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable';
+  this->m_npQueryCenter.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable;
   this->m_npQueryCenter.m_bValid = 0;
   this->m_npQueryCenter.m_hkvMeshPosition = (hkVector4f)hkvZero_13.m_quad;
   *(_QWORD *)&this->m_npQueryCenter.m_packedKey = -1i64;
@@ -224,7 +224,7 @@ void __fastcall UFG::AICoverQuery::~AICoverQuery(UFG::AICoverQuery *this)
   UFG::qNode<UFG::AICoverQuery,UFG::AICoverQuery> *v23; // rax
 
   v1 = this;
-  this->vfptr = (UFG::AIQueryVtbl *)&UFG::AICoverQuery::`vftable';
+  this->vfptr = (UFG::AIQueryVtbl *)&UFG::AICoverQuery::`vftable;
   v2 = this->m_pSearchParams;
   if ( v2 )
   {
@@ -327,7 +327,7 @@ void __fastcall UFG::AICoverQuery::~AICoverQuery(UFG::AICoverQuery *this)
   v23->mPrev = v22;
   v21->mPrev = v21;
   v21->mNext = v21;
-  v1->vfptr = (UFG::AIQueryVtbl *)&UFG::AIQuery::`vftable';
+  v1->vfptr = (UFG::AIQueryVtbl *)&UFG::AIQuery::`vftable;
 }
 
 // File Line: 191
@@ -980,11 +980,11 @@ void __fastcall UFG::AICoverQuery::GatherInRange(UFG::AICoverQuery *this)
             *(_QWORD *)&result.x = v37;
             if ( v37 )
             {
-              v37->mNext = (UFG::allocator::free_link *)&UFG::CoverObjectBase::`vftable';
+              v37->mNext = (UFG::allocator::free_link *)&UFG::CoverObjectBase::`vftable;
               LODWORD(v37[1].mNext) = 0;
               v37[2].mNext = 0i64;
               LODWORD(v37[3].mNext) = 0;
-              v37->mNext = (UFG::allocator::free_link *)&UFG::CoverObjectCorner::`vftable';
+              v37->mNext = (UFG::allocator::free_link *)&UFG::CoverObjectCorner::`vftable;
               UFG::CoverCornerHandle::CoverCornerHandle((UFG::CoverCornerHandle *)&v37[4], v34);
               v38[12].mNext = 0i64;
             }
@@ -1161,7 +1161,7 @@ void __fastcall UFG::AICoverQuery::GatherInRange(UFG::AICoverQuery *this)
     if ( v72 )
     {
       v73 = (char *)&v72[-1].m_pPointer;
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         v72,
         0x18ui64,
         (int)v72[-1].m_pPointer,
@@ -1545,11 +1545,11 @@ LABEL_39:
             v12 = (UFG::CoverObjectGroup *)v11;
             if ( v11 )
             {
-              v11->mNext = (UFG::allocator::free_link *)&UFG::CoverObjectBase::`vftable';
+              v11->mNext = (UFG::allocator::free_link *)&UFG::CoverObjectBase::`vftable;
               LODWORD(v11[1].mNext) = 0;
               v11[2].mNext = 0i64;
               LODWORD(v11[3].mNext) = 0;
-              v11->mNext = (UFG::allocator::free_link *)&UFG::CoverObjectGroup::`vftable';
+              v11->mNext = (UFG::allocator::free_link *)&UFG::CoverObjectGroup::`vftable;
               v11[5].mNext = 0i64;
               v11[4].mNext = 0i64;
             }
@@ -2198,7 +2198,7 @@ void __fastcall UFG::AICoverQuery::PathTest(UFG::AICoverQuery *this)
       v4 = 0i64;
     }
     *(_QWORD *)&v32.m_internalType = 1i64;
-    v32.vfptr = (UFG::DaemonQueryInputVtbl *)&UFG::FindPathMultiDestPrioritizedImmediateQuery::`vftable';
+    v32.vfptr = (UFG::DaemonQueryInputVtbl *)&UFG::FindPathMultiDestPrioritizedImmediateQuery::`vftable;
     v32.m_daemonType = LODWORD(UFG::qVector3::msZero.z);
     LOBYTE(v32.m_mode) = 0;
     *(hkVector4f *)&v32.m_pOutput = (hkVector4f)hkvZero_13.m_quad;
@@ -2209,7 +2209,7 @@ void __fastcall UFG::AICoverQuery::PathTest(UFG::AICoverQuery *this)
     v32.m_npFrom.m_hkvMeshPosition.m_quad.m128_u64[1] = 0i64;
     output.m_id = 0;
     *(_QWORD *)&output.m_internalType = 1i64;
-    output.vfptr = (UFG::DaemonQueryOutputVtbl *)&UFG::FindPathMultiDestPrioritizedOutput::`vftable';
+    output.vfptr = (UFG::DaemonQueryOutputVtbl *)&UFG::FindPathMultiDestPrioritizedOutput::`vftable;
     mem = 0i64;
     v29 = 0i64;
     v31 = 0i64;
@@ -2311,7 +2311,7 @@ LABEL_46:
       operator delete[](mem);
     mem = 0i64;
     v29 = 0i64;
-    output.vfptr = (UFG::DaemonQueryOutputVtbl *)&UFG::DaemonQueryOutput::`vftable';
+    output.vfptr = (UFG::DaemonQueryOutputVtbl *)&UFG::DaemonQueryOutput::`vftable;
     if ( *(_QWORD *)&v32.m_npFrom.m_packedKey )
       operator delete[](*(void **)&v32.m_npFrom.m_packedKey);
   }

@@ -499,7 +499,7 @@ void __fastcall UFG::RoadNetworkResource::ClearDataGrids(UFG::RoadNetworkResourc
       if ( *v4 )
       {
         v6 = v5 - 8;
-        `eh vector destructor iterator'(
+        `eh vector destructor iterator(
           v5,
           0x10ui64,
           *((_DWORD *)v5 - 2),
@@ -522,7 +522,7 @@ void __fastcall UFG::RoadNetworkResource::ClearDataGrids(UFG::RoadNetworkResourc
       if ( *v8 )
       {
         v10 = v9 - 8;
-        `eh vector destructor iterator'(
+        `eh vector destructor iterator(
           v9,
           0x10ui64,
           *((_DWORD *)v9 - 2),

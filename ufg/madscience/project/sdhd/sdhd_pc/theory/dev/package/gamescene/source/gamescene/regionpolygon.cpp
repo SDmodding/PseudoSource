@@ -7,9 +7,9 @@ void __fastcall UFG::RegionPolygon::RegionPolygon(UFG::RegionPolygon *this, UFG:
   float v4; // xmm1_4
   float v5; // xmm2_4
 
-  this->vfptr = (UFG::RegionBaseVtbl *)&UFG::RegionBase::`vftable';
+  this->vfptr = (UFG::RegionBaseVtbl *)&UFG::RegionBase::`vftable;
   this->mRefCount = 0;
-  this->vfptr = (UFG::RegionBaseVtbl *)&UFG::RegionPolygon::`vftable';
+  this->vfptr = (UFG::RegionBaseVtbl *)&UFG::RegionPolygon::`vftable;
   this->mpVerts = 0i64;
   this->mVertCount = 0;
   v2 = UFG::qVector3::msZero.y;
@@ -38,9 +38,9 @@ void __fastcall UFG::RegionPolygon::RegionPolygon(UFG::RegionPolygon *this, UFG:
   float v4; // xmm1_4
   float v5; // xmm2_4
 
-  this->vfptr = (UFG::RegionBaseVtbl *)&UFG::RegionBase::`vftable';
+  this->vfptr = (UFG::RegionBaseVtbl *)&UFG::RegionBase::`vftable;
   this->mRefCount = 0;
-  this->vfptr = (UFG::RegionBaseVtbl *)&UFG::RegionPolygon::`vftable';
+  this->vfptr = (UFG::RegionBaseVtbl *)&UFG::RegionPolygon::`vftable;
   this->mpVerts = 0i64;
   *(_QWORD *)&this->mVertCount = 0i64;
   this->mExtentBelow = 0.0;

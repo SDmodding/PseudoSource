@@ -9,7 +9,7 @@ void __fastcall UFG::UIHKScreenOptions::~UIHKScreenOptions(UFG::UIHKScreenOption
   unsigned int v5; // eax
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenOptions::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenOptions::`vftable;
   if ( UFG::gInputSystem )
   {
     if ( UFG::gActiveControllerNum != -1 )
@@ -373,8 +373,8 @@ void __fastcall UFG::UIHKScreenOptions::ShowHelpBar(UFG::UIHKScreenOptions *this
   data.MessageIds[5] = 0;
   UFG::UIHKHelpBarWidget::Show(v2, &data);
   UFG::qString::~qString(&data.CustomTexturePack);
-  `eh vector destructor iterator'(data.Icons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
-  `eh vector destructor iterator'(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+  `eh vector destructor iterator(data.Icons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+  `eh vector destructor iterator(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
 }
 
 // File Line: 353
@@ -430,7 +430,7 @@ void __fastcall UFG::UIHKScreenUpgrades::Flash_HandleMouseMove(UFG::UIHKScreenUp
   v3 = this->mRenderable->m_movie.pObject;
   if ( v3 )
   {
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( (v6 >> 6) & 1 )
     {
       (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v5 + 16i64))(v5, &ptr, COERCE_DOUBLE(*(_QWORD *)&v7));
@@ -446,7 +446,7 @@ void __fastcall UFG::UIHKScreenUpgrades::Flash_HandleMouseMove(UFG::UIHKScreenUp
     v10 = 5;
     v11 = mouseY;
     Scaleform::GFx::Movie::Invoke(v3, "HandleMouseMove", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 

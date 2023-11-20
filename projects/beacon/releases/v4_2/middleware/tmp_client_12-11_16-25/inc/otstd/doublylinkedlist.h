@@ -16,7 +16,7 @@ OSuite::ZDoublyLinkedListBase::ZElementBase *__fastcall OSuite::TDoublyLinkedLis
     v5->m_pPrev = 0i64;
     v5[1].vfptr = 0i64;
     OSuite::ZRedBlackTreeBase::ZElementBase::ZElementBase((OSuite::ZObject *)&v5->vfptr, v4);
-    v5->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+    v5->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
     v5[1].vfptr = (OSuite::ZObjectVtbl *)*v3;
   }
   else
@@ -46,7 +46,7 @@ OSuite::ZObject *__fastcall OSuite::TDoublyLinkedList<OSuite::ZSocketManager::In
     v4[1].vfptr = 0i64;
     v4[2].vfptr = 0i64;
     OSuite::ZRedBlackTreeBase::ZElementBase::ZElementBase(v4, v5);
-    v6->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZSocketManager::InternalSocket>::ZElement::`vftable';
+    v6->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZSocketManager::InternalSocket>::ZElement::`vftable;
     OSuite::ZClock::ZClock((OSuite::ZClock *)&v6[3], &v3->m_lastActionTime.m_clock);
     OSuite::ZClock::ZClock((OSuite::ZClock *)&v6[4], &v3->m_maxTime.m_clock);
     LODWORD(v6[5].vfptr) = v3->m_state;
@@ -93,7 +93,7 @@ LABEL_11:
     (OSuite::ZDoublyLinkedListBase::ZIteratorBase *)&v4->vfptr,
     (OSuite::ZDoublyLinkedListBase *)&v5->vfptr,
     v6);
-  v4->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+  v4->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
   return v4;
 }
 

@@ -13,7 +13,7 @@ void __fastcall CarStopTask::~CarStopTask(CarStopTask *this)
   UFG::qNode<ITask,ITask> *v9; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&CarStopTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&CarStopTask::`vftable;
   v2 = &this->m_pAIComponent;
   if ( this->m_pAIComponent.m_pPointer )
   {
@@ -31,7 +31,7 @@ void __fastcall CarStopTask::~CarStopTask(CarStopTask *this)
   v6->mPrev = v5;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v8 = v1->mPrev;
   v9 = v1->mNext;
@@ -61,7 +61,7 @@ void __fastcall CarRaceTask::~CarRaceTask(CarRaceTask *this)
   UFG::qNode<ITask,ITask> *v14; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&CarRaceTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&CarRaceTask::`vftable;
   v2 = &this->m_pRoadSpaceComponent;
   if ( this->m_pRoadSpaceComponent.m_pPointer )
   {
@@ -96,7 +96,7 @@ void __fastcall CarRaceTask::~CarRaceTask(CarRaceTask *this)
   v11->mPrev = v10;
   v7->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v7->mPrev;
   v1->m_pAIComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->m_pAIComponent.mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v12 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v13 = v1->mPrev;
   v14 = v1->mNext;
@@ -121,7 +121,7 @@ void __fastcall CarNoDestinationTask::~CarNoDestinationTask(CarNoDestinationTask
   UFG::qNode<ITask,ITask> *v9; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&CarNoDestinationTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&CarNoDestinationTask::`vftable;
   v2 = &this->m_pAIComponent;
   if ( this->m_pAIComponent.m_pPointer )
   {
@@ -139,7 +139,7 @@ void __fastcall CarNoDestinationTask::~CarNoDestinationTask(CarNoDestinationTask
   v6->mPrev = v5;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v8 = v1->mPrev;
   v9 = v1->mNext;
@@ -164,7 +164,7 @@ void __fastcall CarOffsetDriveTask::~CarOffsetDriveTask(CarOffsetDriveTask *this
   UFG::qNode<ITask,ITask> *v9; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&CarOffsetDriveTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&CarOffsetDriveTask::`vftable;
   v2 = &this->m_pAIComponent;
   if ( this->m_pAIComponent.m_pPointer )
   {
@@ -182,7 +182,7 @@ void __fastcall CarOffsetDriveTask::~CarOffsetDriveTask(CarOffsetDriveTask *this
   v6->mPrev = v5;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v8 = v1->mPrev;
   v9 = v1->mNext;
@@ -207,7 +207,7 @@ void __fastcall CarFormationDriveTask::~CarFormationDriveTask(CarFormationDriveT
   UFG::qNode<ITask,ITask> *v9; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&CarFormationDriveTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&CarFormationDriveTask::`vftable;
   v2 = &this->m_pAIComponent;
   if ( this->m_pAIComponent.m_pPointer )
   {
@@ -225,7 +225,7 @@ void __fastcall CarFormationDriveTask::~CarFormationDriveTask(CarFormationDriveT
   v6->mPrev = v5;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v8 = v1->mPrev;
   v9 = v1->mNext;
@@ -250,7 +250,7 @@ void __fastcall CarOccupantAimTask::~CarOccupantAimTask(CarOccupantAimTask *this
   UFG::qNode<ITask,ITask> *v9; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&CarOccupantAimTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&CarOccupantAimTask::`vftable;
   v2 = &this->m_pActiveAIEntityComponent;
   if ( this->m_pActiveAIEntityComponent.m_pPointer )
   {
@@ -268,7 +268,7 @@ void __fastcall CarOccupantAimTask::~CarOccupantAimTask(CarOccupantAimTask *this
   v6->mPrev = v5;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v8 = v1->mPrev;
   v9 = v1->mNext;

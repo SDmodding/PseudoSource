@@ -31,7 +31,7 @@ hkClass *__fastcall hkpVehicleDefaultSteering::staticClass()
 void __fastcall finishLoadedObjecthkpVehicleDefaultSteering(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpVehicleDefaultSteering::`vftable';
+    *(_QWORD *)p = &hkpVehicleDefaultSteering::`vftable;
 }
 
 // File Line: 73
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkpVehicleDefaultSteering(void *p)
 // RVA: 0xE256D0
 void **__fastcall getVtablehkpVehicleDefaultSteering()
 {
-  return &hkpVehicleDefaultSteering::`vftable';
+  return &hkpVehicleDefaultSteering::`vftable;
 }
 
 // File Line: 99

@@ -80,7 +80,7 @@ void __fastcall finishLoadedObjecthkpRagdollConstraintData(void *p, int finishin
     v2 = finishing;
     v3 = (hkpRagdollConstraintData *)p;
     hkpConstraintData::hkpConstraintData((hkpConstraintData *)p, (hkFinishLoadedObjectFlag)finishing);
-    v3->vfptr = (hkBaseObjectVtbl *)&hkpRagdollConstraintData::`vftable';
+    v3->vfptr = (hkBaseObjectVtbl *)&hkpRagdollConstraintData::`vftable;
     hkpRagdollConstraintData::Atoms::Atoms(&v3->m_atoms, (hkFinishLoadedObjectFlag)v2);
     if ( v2 )
     {
@@ -105,7 +105,7 @@ hkBaseObjectVtbl *__fastcall getVtablehkpRagdollConstraintData()
   hkpRagdollConstraintData::Atoms v2; // [rsp+40h] [rbp-188h]
 
   hkpConstraintData::hkpConstraintData(&v1, 0);
-  v1.vfptr = (hkBaseObjectVtbl *)&hkpRagdollConstraintData::`vftable';
+  v1.vfptr = (hkBaseObjectVtbl *)&hkpRagdollConstraintData::`vftable;
   hkpRagdollConstraintData::Atoms::Atoms(&v2, 0);
   return v1.vfptr;
 }

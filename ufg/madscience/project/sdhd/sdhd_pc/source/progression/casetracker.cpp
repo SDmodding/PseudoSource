@@ -186,7 +186,7 @@ void __fastcall UFG::CaseTracker::~CaseTracker(UFG::CaseTracker *this)
 {
   this->mCases.size = 0;
   this->mCases.size = 0;
-  `eh vector destructor iterator'(this->mCases.p, 0x50ui64, 20, (void (__fastcall *)(void *))UFG::CaseInfo::~CaseInfo);
+  `eh vector destructor iterator(this->mCases.p, 0x50ui64, 20, (void (__fastcall *)(void *))UFG::CaseInfo::~CaseInfo);
 }
 
 // File Line: 220

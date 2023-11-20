@@ -10,7 +10,7 @@ void __fastcall UFG::OSuiteTickerManager::~OSuiteTickerManager(UFG::OSuiteTicker
   UFG::qNode<UFG::OSuiteManagerObserver,UFG::OSuiteManagerObserver> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::OSuiteManagerObserverVtbl *)&UFG::OSuiteTickerManager::`vftable';
+  this->vfptr = (UFG::OSuiteManagerObserverVtbl *)&UFG::OSuiteTickerManager::`vftable;
   UFG::OSuiteManager::Instance();
   v2 = (UFG::qNode<UFG::OSuiteManagerObserver,UFG::OSuiteManagerObserver> *)&v1->mPrev;
   v3 = v1->mPrev;
@@ -20,7 +20,7 @@ void __fastcall UFG::OSuiteTickerManager::~OSuiteTickerManager(UFG::OSuiteTicker
   v2->mPrev = v2;
   v2->mNext = v2;
   UFG::qString::~qString(&v1->m_infoDataID);
-  v1->vfptr = (UFG::OSuiteManagerObserverVtbl *)&UFG::OSuiteManagerObserver::`vftable';
+  v1->vfptr = (UFG::OSuiteManagerObserverVtbl *)&UFG::OSuiteManagerObserver::`vftable;
   v5 = v1->mPrev;
   v6 = v1->mNext;
   v5->mNext = v6;
@@ -41,7 +41,7 @@ UFG::OSuiteTickerManager *__fastcall UFG::OSuiteTickerManager::Instance()
     _S9_11 |= 1u;
     unk_142401468 = &unk_142401468;
     unk_142401470 = &unk_142401468;
-    instance_3.vfptr = (UFG::OSuiteManagerObserverVtbl *)&UFG::OSuiteTickerManager::`vftable';
+    instance_3.vfptr = (UFG::OSuiteManagerObserverVtbl *)&UFG::OSuiteTickerManager::`vftable;
     unk_142401478 = 0i64;
     unk_142401480 = 0i64;
     unk_142401488 = 0i64;
@@ -175,10 +175,10 @@ LABEL_21:
     v18 = OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&params.m_pLists[v17].vfptr);
     params.m_nCount -= v18;
     v19 = &params.m_pLists[v17];
-    data.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable';
+    data.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable;
     OSuite::ZString::ZString(&data.m_First, &that);
     OSuite::ZString::ZString(&data.m_Second, &v28);
-    data.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString>::`vftable';
+    data.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString>::`vftable;
     v20 = (OSuite::ZRedBlackTreeBase::TElement<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString> > *)OSuite::ZObject::operator new(0x58ui64);
     if ( v20 )
       OSuite::ZRedBlackTreeBase::TElement<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString>>::TElement<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString>>(
@@ -187,7 +187,7 @@ LABEL_21:
     else
       v21 = 0i64;
     OSuite::ZRedBlackTreeBase::InsertElementSet((OSuite::ZRedBlackTreeBase *)&v19->vfptr, v21);
-    data.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable';
+    data.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<OSuite::ZString,OSuite::ZString>::`vftable;
     OSuite::ZString::~ZString(&data.m_Second);
     OSuite::ZString::~ZString(&data.m_First);
     v22 = OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&params.m_pLists[v17].vfptr);
@@ -200,7 +200,7 @@ LABEL_21:
     cb.m_Closure.m_pthis = (OSuite::fastdelegate::detail::GenericClass *)Assembly::GetRCX(v1);
     OSuite::ZWebServiceClient::ExecuteQuery(v1->m_pWebServiceClient, &query, &cb);
     v1->m_downloadActive = 1;
-    params.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TMap<OSuite::ZString,OSuite::ZString>::`vftable';
+    params.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TMap<OSuite::ZString,OSuite::ZString>::`vftable;
     if ( params.m_pLists )
     {
       if ( LODWORD(params.m_pLists[-1].m_Comparer.vfptr) )

@@ -13,7 +13,7 @@ void __fastcall UFG::Rule::~Rule(UFG::Rule *this)
   UFG::KeyValue *v9; // [rsp+48h] [rbp+10h]
 
   v1 = (UFG::qList<UFG::qReflectField,UFG::qReflectField,1,0> *)this;
-  this->vfptr = (UFG::RuleVtbl *)&UFG::Rule::`vftable';
+  this->vfptr = (UFG::RuleVtbl *)&UFG::Rule::`vftable;
   v9 = &this->m_apply;
   v2 = this->m_apply.mPrev;
   v3 = v9->mNext;

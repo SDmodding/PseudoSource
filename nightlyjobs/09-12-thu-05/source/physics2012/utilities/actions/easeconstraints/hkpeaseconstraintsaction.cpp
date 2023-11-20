@@ -10,7 +10,7 @@ void __fastcall hkpEaseConstraintsAction::hkpEaseConstraintsAction(hkpEaseConstr
   v4 = this;
   hkpArrayAction::hkpArrayAction((hkpArrayAction *)&this->vfptr, entities, userData);
   v4->m_duration = -1.0;
-  v4->vfptr = (hkBaseObjectVtbl *)&hkpEaseConstraintsAction::`vftable';
+  v4->vfptr = (hkBaseObjectVtbl *)&hkpEaseConstraintsAction::`vftable;
   v4->m_timePassed = 0.0;
   v4->m_originalConstraints.m_data = 0i64;
   v4->m_originalConstraints.m_size = 0;
@@ -18,7 +18,7 @@ void __fastcall hkpEaseConstraintsAction::hkpEaseConstraintsAction(hkpEaseConstr
   v4->m_originalLimits.m_data = 0i64;
   v4->m_originalLimits.m_size = 0;
   v4->m_originalLimits.m_capacityAndFlags = 2147483648;
-  collectionFilter.vfptr = (hkpConstraintUtils::CollectConstraintsFilterVtbl *)&hkpEaseConstraintsAction::CollectSupportedConstraints::`vftable';
+  collectionFilter.vfptr = (hkpConstraintUtils::CollectConstraintsFilterVtbl *)&hkpEaseConstraintsAction::CollectSupportedConstraints::`vftable;
   hkpConstraintUtils::collectConstraints(v3, &v4->m_originalConstraints, &collectionFilter);
   hkpEaseConstraintsAction::_saveLimits(&v4->m_originalLimits, &v4->m_originalConstraints);
 }

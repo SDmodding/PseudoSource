@@ -7,12 +7,12 @@ void __fastcall Scaleform::Render::ContextImpl::ContextLock::ContextLock(Scalefo
 
   v2 = context;
   v3 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,69>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::ContextImpl::ContextLock,69>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ContextImpl::ContextLock::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,69>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::ContextImpl::ContextLock,69>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ContextImpl::ContextLock::`vftable;
   Scaleform::Lock::Lock(&this->LockObject, 0);
   v3->pContext = v2;
 }
@@ -38,8 +38,8 @@ Scaleform::Render::ContextImpl::Entry *__fastcall Scaleform::Render::ContextImpl
   if ( v2 )
   {
     Scaleform::Render::TreeNode::NodeData::NodeData(v2, ET_Shape);
-    v3->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::ContextImpl::ContextData_ImplMixin<Scaleform::Render::TreeShape::NodeData,Scaleform::Render::TreeNode::NodeData>::`vftable';
-    v3->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::TreeShape::NodeData::`vftable';
+    v3->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::ContextImpl::ContextData_ImplMixin<Scaleform::Render::TreeShape::NodeData,Scaleform::Render::TreeNode::NodeData>::`vftable;
+    v3->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::TreeShape::NodeData::`vftable;
     v3[1].vfptr = 0i64;
     *(_DWORD *)&v3[1].Type = 0;
   }
@@ -63,8 +63,8 @@ Scaleform::Render::TreeNodeArray *__fastcall Scaleform::Render::ContextImpl::Con
   if ( !v3 )
     return 0i64;
   Scaleform::Render::TreeNode::NodeData::NodeData(v3, (Scaleform::Render::TreeNode::NodeData *)&v2->vfptr);
-  v4->pData[0] = (unsigned __int64)&Scaleform::Render::ContextImpl::ContextData_ImplMixin<Scaleform::Render::TreeContainer::NodeData,Scaleform::Render::TreeNode::NodeData>::`vftable';
-  v4->pData[0] = (unsigned __int64)&Scaleform::Render::TreeContainer::NodeData::`vftable';
+  v4->pData[0] = (unsigned __int64)&Scaleform::Render::ContextImpl::ContextData_ImplMixin<Scaleform::Render::TreeContainer::NodeData,Scaleform::Render::TreeNode::NodeData>::`vftable;
+  v4->pData[0] = (unsigned __int64)&Scaleform::Render::TreeContainer::NodeData::`vftable;
   Scaleform::Render::TreeNodeArray::TreeNodeArray(v4 + 9, (Scaleform::Render::TreeNodeArray *)&v2[1]);
   return v4;
 }

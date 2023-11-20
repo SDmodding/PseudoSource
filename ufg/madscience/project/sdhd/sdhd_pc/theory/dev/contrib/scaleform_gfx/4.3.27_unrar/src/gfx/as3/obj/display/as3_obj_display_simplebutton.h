@@ -25,9 +25,9 @@ Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_display::SimpleButton> *_
     Scaleform::GFx::AS3::Instances::fl_display::DisplayObject::DisplayObject(
       v4,
       (Scaleform::GFx::AS3::InstanceTraits::Traits *)&v2->vfptr);
-    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_display::InteractiveObject::`vftable';
+    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_display::InteractiveObject::`vftable;
     v5->pContextMenu.pObject = 0i64;
-    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::`vftable';
+    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::`vftable;
     v5->OverStateObject.pObject = 0i64;
     v5->UpStateObject.pObject = 0i64;
     v5->DownStateObject.pObject = 0i64;

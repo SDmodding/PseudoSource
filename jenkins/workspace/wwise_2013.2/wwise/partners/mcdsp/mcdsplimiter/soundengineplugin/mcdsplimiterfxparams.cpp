@@ -6,7 +6,7 @@ AK::IAkPluginParam *__fastcall CreateMcDSPML1FXParams(AK::IAkPluginMemAlloc *in_
 
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 32ui64);
   if ( result )
-    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CMcDSPLimiterFXParams::`vftable';
+    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CMcDSPLimiterFXParams::`vftable;
   return result;
 }
 
@@ -14,21 +14,21 @@ AK::IAkPluginParam *__fastcall CreateMcDSPML1FXParams(AK::IAkPluginMemAlloc *in_
 // RVA: 0xAFC060
 void __fastcall CMcDSPLimiterFXParams::CMcDSPLimiterFXParams(CMcDSPLimiterFXParams *this)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CMcDSPLimiterFXParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CMcDSPLimiterFXParams::`vftable;
 }
 
 // File Line: 27
 // RVA: 0xAFC0C0
 void __fastcall CMcDSPLimiterFXParams::~CMcDSPLimiterFXParams(CMcDSPLimiterFXParams *this)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable;
 }
 
 // File Line: 32
 // RVA: 0xAFC080
 void __fastcall CMcDSPLimiterFXParams::CMcDSPLimiterFXParams(CMcDSPLimiterFXParams *this, CMcDSPLimiterFXParams *in_rCopy)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CMcDSPLimiterFXParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CMcDSPLimiterFXParams::`vftable;
   this->m_Params.fCeiling = in_rCopy->m_Params.fCeiling;
   this->m_Params.fThreshold = in_rCopy->m_Params.fThreshold;
   this->m_Params.fKnee = in_rCopy->m_Params.fKnee;
@@ -48,7 +48,7 @@ AK::IAkPluginParam *__fastcall CMcDSPLimiterFXParams::Clone(CMcDSPLimiterFXParam
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 32ui64);
   if ( result )
   {
-    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CMcDSPLimiterFXParams::`vftable';
+    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CMcDSPLimiterFXParams::`vftable;
     *(float *)&result[1].vfptr = v2->m_Params.fCeiling;
     HIDWORD(result[1].vfptr) = LODWORD(v2->m_Params.fThreshold);
     *(float *)&result[2].vfptr = v2->m_Params.fKnee;

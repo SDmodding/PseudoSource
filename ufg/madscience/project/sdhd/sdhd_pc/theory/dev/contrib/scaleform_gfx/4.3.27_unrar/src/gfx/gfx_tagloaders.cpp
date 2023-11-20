@@ -92,7 +92,7 @@ void __fastcall Scaleform::GFx::GFx_JpegTablesLoader(Scaleform::GFx::LoadProcess
         if ( v7 )
         {
           Scaleform::Render::JPEG::ExtraData::ExtraData(v7, v3->pLoadData.pObject->pHeap, v2->TagLength);
-          v7->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::JPEG::TablesHeader::`vftable';
+          v7->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::JPEG::TablesHeader::`vftable;
         }
         else
         {
@@ -114,14 +114,14 @@ void __fastcall Scaleform::GFx::GFx_JpegTablesLoader(Scaleform::GFx::LoadProcess
     {
       Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>::LogError(
         (Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess> *)&v3->vfptr,
-        "Jpeg System is not installed - can't load jpeg image data");
+        "Jpeg System is not installed - cant load jpeg image data");
     }
   }
   else
   {
     Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>::LogError(
       (Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess> *)&v3->vfptr,
-      "Image file handler registry is not installed - can't load jpeg image data");
+      "Image file handler registry is not installed - cant load jpeg image data");
   }
   if ( v5 )
     Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v5);
@@ -250,14 +250,14 @@ void __fastcall Scaleform::GFx::GFx_DefineBitsJpegLoader(Scaleform::GFx::LoadPro
     {
       Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>::LogError(
         (Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess> *)&v3->vfptr,
-        "Jpeg System is not installed - can't load jpeg image data");
+        "Jpeg System is not installed - cant load jpeg image data");
     }
   }
   else
   {
     Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>::LogError(
       (Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess> *)&v3->vfptr,
-      "Image file handler registry is not installed - can't load jpeg image data");
+      "Image file handler registry is not installed - cant load jpeg image data");
   }
   if ( v9 )
     Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v9);
@@ -364,14 +364,14 @@ void __fastcall Scaleform::GFx::GFx_DefineBitsJpeg2Loader(Scaleform::GFx::LoadPr
     {
       Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>::LogError(
         (Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess> *)&v3->vfptr,
-        "Jpeg System is not installed - can't load jpeg image data");
+        "Jpeg System is not installed - cant load jpeg image data");
     }
   }
   else
   {
     Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>::LogError(
       (Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess> *)&v3->vfptr,
-      "Image file handler registry is not installed - can't load jpeg image data");
+      "Image file handler registry is not installed - cant load jpeg image data");
   }
   if ( v11 )
     Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v11);
@@ -453,7 +453,7 @@ void __fastcall Scaleform::GFx::GFx_DefineBitsJpeg3Loader(Scaleform::GFx::LoadPr
   v16 = 0i64;
   Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>::LogError(
     v12,
-    "zlib or jpeglib are not linked - can't load jpeg+zipped image data!");
+    "zlib or jpeglib are not linked - cant load jpeg+zipped image data!");
   rid.Id = v11;
   Scaleform::GFx::LoadProcess::AddImageResource(v3, (Scaleform::GFx::ResourceId)&rid, 0i64);
 }
@@ -572,7 +572,7 @@ void __fastcall Scaleform::GFx::GFx_DefineBitsLossless2Loader(Scaleform::GFx::Lo
   {
     Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>::LogError(
       (Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess> *)&v3->vfptr,
-      "Error: GFxZlibState is not set - can't load zipped image data\n");
+      "Error: GFxZlibState is not set - cant load zipped image data\n");
     goto LABEL_56;
   }
   if ( *v2 == 20 )
@@ -597,7 +597,7 @@ void __fastcall Scaleform::GFx::GFx_DefineBitsLossless2Loader(Scaleform::GFx::Lo
             v24,
             Image_R8G8B8,
             v22);
-          *(_QWORD *)v23 = &Scaleform::GFx::ZlibImageSource::`vftable';
+          *(_QWORD *)v23 = &Scaleform::GFx::ZlibImageSource::`vftable;
           Scaleform::Render::RenderBuffer::AddRef(v19);
           *(_QWORD *)(v23 + 56) = v19;
           *(_WORD *)(v23 + 64) = v20;
@@ -624,7 +624,7 @@ void __fastcall Scaleform::GFx::GFx_DefineBitsLossless2Loader(Scaleform::GFx::Lo
             v28,
             Image_R8G8B8,
             v26);
-          *(_QWORD *)v27 = &Scaleform::GFx::ZlibImageSource::`vftable';
+          *(_QWORD *)v27 = &Scaleform::GFx::ZlibImageSource::`vftable;
           Scaleform::Render::RenderBuffer::AddRef(v19);
           *(_QWORD *)(v27 + 56) = v19;
           *(_WORD *)(v27 + 64) = 0;
@@ -651,7 +651,7 @@ void __fastcall Scaleform::GFx::GFx_DefineBitsLossless2Loader(Scaleform::GFx::Lo
             v32,
             Image_R8G8B8,
             v30);
-          *(_QWORD *)v31 = &Scaleform::GFx::ZlibImageSource::`vftable';
+          *(_QWORD *)v31 = &Scaleform::GFx::ZlibImageSource::`vftable;
           Scaleform::Render::RenderBuffer::AddRef(v19);
           *(_QWORD *)(v31 + 56) = v19;
           *(_WORD *)(v31 + 64) = 0;
@@ -687,7 +687,7 @@ void __fastcall Scaleform::GFx::GFx_DefineBitsLossless2Loader(Scaleform::GFx::Lo
             v37,
             Image_R8G8B8A8,
             v35);
-          *(_QWORD *)v36 = &Scaleform::GFx::ZlibImageSource::`vftable';
+          *(_QWORD *)v36 = &Scaleform::GFx::ZlibImageSource::`vftable;
           Scaleform::Render::RenderBuffer::AddRef(v19);
           *(_QWORD *)(v36 + 56) = v19;
           *(_WORD *)(v36 + 64) = v33;
@@ -714,7 +714,7 @@ void __fastcall Scaleform::GFx::GFx_DefineBitsLossless2Loader(Scaleform::GFx::Lo
             v41,
             Image_R8G8B8A8,
             v39);
-          *(_QWORD *)v40 = &Scaleform::GFx::ZlibImageSource::`vftable';
+          *(_QWORD *)v40 = &Scaleform::GFx::ZlibImageSource::`vftable;
           Scaleform::Render::RenderBuffer::AddRef(v19);
           *(_QWORD *)(v40 + 56) = v19;
           *(_WORD *)(v40 + 64) = 0;
@@ -741,7 +741,7 @@ void __fastcall Scaleform::GFx::GFx_DefineBitsLossless2Loader(Scaleform::GFx::Lo
             v45,
             Image_R8G8B8A8,
             v43);
-          *(_QWORD *)v44 = &Scaleform::GFx::ZlibImageSource::`vftable';
+          *(_QWORD *)v44 = &Scaleform::GFx::ZlibImageSource::`vftable;
           Scaleform::Render::RenderBuffer::AddRef(v19);
           *(_QWORD *)(v44 + 56) = v19;
           *(_WORD *)(v44 + 64) = 0;
@@ -807,16 +807,16 @@ void __fastcall Scaleform::GFx::GFx_DefineShapeLoader(Scaleform::GFx::LoadProces
   v19 = v9;
   if ( v9 )
   {
-    v9->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+    v9->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
     v9->RefCount = 1;
-    v9->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-    v9->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable';
-    v9->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::ShapeDataInterface,71>::`vftable';
-    v9->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ShapeDataInterface::`vftable';
-    v9->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ShapeDataBase::`vftable';
+    v9->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+    v9->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable;
+    v9->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::ShapeDataInterface,71>::`vftable;
+    v9->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ShapeDataInterface::`vftable;
+    v9->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ShapeDataBase::`vftable;
     v9->Paths = 0i64;
     v9->Flags = 0;
-    v9->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ConstShapeWithStyles::`vftable';
+    v9->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ConstShapeWithStyles::`vftable;
     v9[1].vfptr = 0i64;
     *(_QWORD *)&v9[1].RefCount = 0i64;
     v9[1].Paths = 0i64;
@@ -1059,7 +1059,7 @@ void __fastcall Scaleform::GFx::GFx_DefineFontInfoLoader(Scaleform::GFx::LoadPro
 LABEL_8:
     Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>::LogError(
       (Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess> *)&v4->vfptr,
-      "GFx_DefineFontInfoLoader - can't find FontResource w/ id %d");
+      "GFx_DefineFontInfoLoader - cant find FontResource w/ id %d");
   }
 }
 
@@ -1286,16 +1286,16 @@ void __fastcall Scaleform::GFx::GFx_SpriteLoader(Scaleform::GFx::LoadProcess *p,
   if ( v8 )
   {
     v10 = v2->pDataDef_Unsafe;
-    *(_QWORD *)v8 = &Scaleform::GFx::Resource::`vftable';
+    *(_QWORD *)v8 = &Scaleform::GFx::Resource::`vftable;
     v11 = *(_DWORD *)(v8 + 8);
     v12 = *(unsigned int *)(v8 + 8);
     *(_DWORD *)(v9 + 8) = 1;
     *(_QWORD *)(v9 + 16) = 0i64;
-    *(_QWORD *)v9 = &Scaleform::GFx::CharacterDef::`vftable';
+    *(_QWORD *)v9 = &Scaleform::GFx::CharacterDef::`vftable;
     *(_DWORD *)(v9 + 24) = 0x40000;
-    *(_QWORD *)v9 = &Scaleform::GFx::TimelineDef::`vftable';
-    *(_QWORD *)v9 = &Scaleform::GFx::TimelineIODef::`vftable';
-    *(_QWORD *)v9 = &Scaleform::GFx::SpriteDef::`vftable';
+    *(_QWORD *)v9 = &Scaleform::GFx::TimelineDef::`vftable;
+    *(_QWORD *)v9 = &Scaleform::GFx::TimelineIODef::`vftable;
+    *(_QWORD *)v9 = &Scaleform::GFx::SpriteDef::`vftable;
     *(_QWORD *)(v9 + 32) = v10;
     *(_QWORD *)(v9 + 40) = 0i64;
     *(_QWORD *)(v9 + 48) = 0i64;
@@ -1459,14 +1459,14 @@ void __fastcall Scaleform::GFx::GFx_ButtonCharacterLoader(Scaleform::GFx::LoadPr
   v18 = v9;
   if ( v9 )
   {
-    *(_QWORD *)v9 = &Scaleform::GFx::Resource::`vftable';
+    *(_QWORD *)v9 = &Scaleform::GFx::Resource::`vftable;
     v11 = *(_DWORD *)(v9 + 8);
     v12 = *(unsigned int *)(v9 + 8);
     v10->RefCount.Value = 1;
     v10->pLib = 0i64;
-    v10->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::CharacterDef::`vftable';
+    v10->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::CharacterDef::`vftable;
     v10->Id.Id = 0x40000;
-    v10->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::ButtonDef::`vftable';
+    v10->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::ButtonDef::`vftable;
     v13 = &v10->ButtonRecords;
     v13->Data.Data = 0i64;
     v13->Data.Size = 0i64;
@@ -1731,7 +1731,7 @@ LABEL_44:
       {
         Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>::LogError(
           (Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess> *)v7,
-          "Don't know how to export Resource '%s'",
+          "Dont know how to export Resource %s",
           (v30.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12);
       }
       if ( phandle.HType == RH_Pointer )
@@ -1899,8 +1899,8 @@ void __fastcall Scaleform::GFx::GFx_ImportLoader(Scaleform::GFx::LoadProcess *p,
   v28 = v18;
   if ( v18 )
   {
-    *(_QWORD *)v18 = &Scaleform::GFx::ExecuteTag::`vftable';
-    *(_QWORD *)v18 = &Scaleform::GFx::GFxInitImportActions::`vftable';
+    *(_QWORD *)v18 = &Scaleform::GFx::ExecuteTag::`vftable;
+    *(_QWORD *)v18 = &Scaleform::GFx::GFxInitImportActions::`vftable;
     *((_DWORD *)v18 + 2) = 0;
   }
   else
@@ -2073,7 +2073,7 @@ Scaleform::GFx::ResourceHandle *__fastcall Scaleform::GFx::GFx_CreateImageFileRe
   if ( v12 )
   {
     Scaleform::GFx::ResourceFileInfo::ResourceFileInfo(v12);
-    *(_QWORD *)v13 = &Scaleform::GFx::ImageFileInfo::`vftable';
+    *(_QWORD *)v13 = &Scaleform::GFx::ImageFileInfo::`vftable;
     Scaleform::String::String((Scaleform::String *)(v13 + 48));
     *(_DWORD *)(v13 + 40) = 0;
     *(_DWORD *)(v13 + 44) = 1;
@@ -2214,10 +2214,10 @@ void __fastcall Scaleform::GFx::GFx_DefineExternalImageLoader(Scaleform::GFx::Lo
   v4->Pos = v16 + 1;
   if ( (signed int)v17 > 0 )
   {
-    src.vfptr = (Scaleform::String::InitStructVtbl *)`Scaleform::GFx::Stream::ReadStringWithLength'::`2'::StringReader::`vftable';
+    src.vfptr = (Scaleform::String::InitStructVtbl *)`Scaleform::GFx::Stream::ReadStringWithLength::`2::StringReader::`vftable;
     v26 = v4;
     Scaleform::String::AssignString(&v32, &src, v17);
-    src.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable';
+    src.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable;
   }
   else
   {
@@ -2231,10 +2231,10 @@ void __fastcall Scaleform::GFx::GFx_DefineExternalImageLoader(Scaleform::GFx::Lo
   v4->Pos = v18 + 1;
   if ( (signed int)v19 > 0 )
   {
-    v27.vfptr = (Scaleform::String::InitStructVtbl *)`Scaleform::GFx::Stream::ReadStringWithLength'::`2'::StringReader::`vftable';
+    v27.vfptr = (Scaleform::String::InitStructVtbl *)`Scaleform::GFx::Stream::ReadStringWithLength::`2::StringReader::`vftable;
     v28 = v4;
     Scaleform::String::AssignString(&v30, &v27, v19);
-    v27.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable';
+    v27.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable;
   }
   else
   {
@@ -2245,7 +2245,7 @@ void __fastcall Scaleform::GFx::GFx_DefineExternalImageLoader(Scaleform::GFx::Lo
   LODWORD(pimageExportName) = bitmapFormat;
   Scaleform::GFx::LogBase<Scaleform::GFx::Stream>::LogParseShape(
     (Scaleform::GFx::LogBase<Scaleform::GFx::Stream> *)&v4->vfptr,
-    "  DefineExternalImage: tagInfo.TagType = %d, id = 0x%X, fmt = %d, name = '%s', exp = '%s', w = %d, h = %d\n",
+    "  DefineExternalImage: tagInfo.TagType = %d, id = 0x%X, fmt = %d, name = %s, exp = %s, w = %d, h = %d\n",
     (unsigned int)rid->TagType,
     v6,
     pimageExportName,
@@ -2381,12 +2381,12 @@ void __fastcall Scaleform::GFx::GFx_DefineSubImageLoader(Scaleform::GFx::LoadPro
   v28 = v22;
   if ( v22 )
   {
-    *(_QWORD *)v22 = &Scaleform::RefCountNTSImplCore::`vftable';
+    *(_QWORD *)v22 = &Scaleform::RefCountNTSImplCore::`vftable;
     *(_DWORD *)(v22 + 8) = 1;
-    *(_QWORD *)v22 = &Scaleform::RefCountNTSImpl::`vftable';
-    *(_QWORD *)v22 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,2>::`vftable';
-    *(_QWORD *)v22 = &Scaleform::RefCountBaseNTS<Scaleform::GFx::SubImageResourceInfo,2>::`vftable';
-    *(_QWORD *)v22 = &Scaleform::GFx::SubImageResourceInfo::`vftable';
+    *(_QWORD *)v22 = &Scaleform::RefCountNTSImpl::`vftable;
+    *(_QWORD *)v22 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,2>::`vftable;
+    *(_QWORD *)v22 = &Scaleform::RefCountBaseNTS<Scaleform::GFx::SubImageResourceInfo,2>::`vftable;
+    *(_QWORD *)v22 = &Scaleform::GFx::SubImageResourceInfo::`vftable;
     *(_DWORD *)(v22 + 16) = 0x40000;
     *(_QWORD *)(v22 + 24) = 0i64;
     *(_QWORD *)(v22 + 32) = 0i64;
@@ -2569,10 +2569,10 @@ void __fastcall Scaleform::GFx::GFx_FontTextureInfoLoader(Scaleform::GFx::LoadPr
   v4->Pos = v11 + 1;
   if ( (signed int)v12 > 0 )
   {
-    src.vfptr = (Scaleform::String::InitStructVtbl *)`Scaleform::GFx::Stream::ReadStringWithLength'::`2'::StringReader::`vftable';
+    src.vfptr = (Scaleform::String::InitStructVtbl *)`Scaleform::GFx::Stream::ReadStringWithLength::`2::StringReader::`vftable;
     v99 = v4;
     Scaleform::String::AssignString(&v76, &src, v12);
-    src.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable';
+    src.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable;
   }
   else
   {
@@ -2614,7 +2614,7 @@ void __fastcall Scaleform::GFx::GFx_FontTextureInfoLoader(Scaleform::GFx::LoadPr
     LODWORD(pimageExportName) = bitmapFormat;
     Scaleform::GFx::LogBase<Scaleform::GFx::Stream>::LogParseShape(
       (Scaleform::GFx::LogBase<Scaleform::GFx::Stream> *)&v4->vfptr,
-      "  FontTextureInfo: tagInfo.TagType = %d, id = 0x%X, fmt = %d, name = '%s', w = %d, h = %d\n",
+      "  FontTextureInfo: tagInfo.TagType = %d, id = 0x%X, fmt = %d, name = %s, w = %d, h = %d\n",
       (unsigned int)v2->TagType,
       v8,
       pimageExportName,
@@ -2717,7 +2717,7 @@ void __fastcall Scaleform::GFx::GFx_FontTextureInfoLoader(Scaleform::GFx::LoadPr
           v37);
       }
       v86.RefCount = 1;
-      v86.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::TextureGlyph::`vftable';
+      v86.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::TextureGlyph::`vftable;
       v87 = 0i64;
       v88 = 0i64;
       v91 = -1;
@@ -2752,12 +2752,12 @@ void __fastcall Scaleform::GFx::GFx_FontTextureInfoLoader(Scaleform::GFx::LoadPr
       v97 = &pheapAddr.Data[pheapAddr.Size - 1];
       if ( v40 )
       {
-        v40->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+        v40->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
         v40->RefCount = 1;
-        v40->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-        v40->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-        v40->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::TextureGlyph,2>::`vftable';
-        v40->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::TextureGlyph::`vftable';
+        v40->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+        v40->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+        v40->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::TextureGlyph,2>::`vftable;
+        v40->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::TextureGlyph::`vftable;
         v41 = v87;
         if ( v87 )
         {
@@ -2992,10 +2992,10 @@ void __fastcall Scaleform::GFx::GFx_DefineExternalGradientImageLoader(Scaleform:
   v4->Pos = v12 + 1;
   if ( (signed int)v13 > 0 )
   {
-    src.vfptr = (Scaleform::String::InitStructVtbl *)`Scaleform::GFx::Stream::ReadStringWithLength'::`2'::StringReader::`vftable';
+    src.vfptr = (Scaleform::String::InitStructVtbl *)`Scaleform::GFx::Stream::ReadStringWithLength::`2::StringReader::`vftable;
     v19 = v4;
     Scaleform::String::AssignString(&v22, &src, v13);
-    src.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable';
+    src.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable;
   }
   else
   {
@@ -3005,7 +3005,7 @@ void __fastcall Scaleform::GFx::GFx_DefineExternalGradientImageLoader(Scaleform:
   LODWORD(pimageExportName) = bitmapFormat;
   Scaleform::GFx::LogBase<Scaleform::GFx::Stream>::LogParseShape(
     (Scaleform::GFx::LogBase<Scaleform::GFx::Stream> *)&v4->vfptr,
-    "  DefineExternalGradientImage: tagInfo.TagType = %d, id = 0x%X, fmt = %d, name = '%s', size = %d\n",
+    "  DefineExternalGradientImage: tagInfo.TagType = %d, id = 0x%X, fmt = %d, name = %s, size = %d\n",
     (unsigned int)v2->TagType,
     v7,
     pimageExportName,
@@ -3172,7 +3172,7 @@ void __fastcall Scaleform::GFx::GFx_DoActionLoader(Scaleform::GFx::LoadProcess *
   {
     Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>::LogError(
       (Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess> *)&p->vfptr,
-      "GFx_DoActionLoader - DoAction tag shouldn't appear in AS3 swf. Tag is skipped.");
+      "GFx_DoActionLoader - DoAction tag shouldnt appear in AS3 swf. Tag is skipped.");
   }
   else
   {
@@ -3199,7 +3199,7 @@ void __fastcall Scaleform::GFx::GFx_DoInitActionLoader(Scaleform::GFx::LoadProce
   {
     Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>::LogError(
       (Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess> *)&p->vfptr,
-      "GFx_DoInitActionLoader - DoInitAction tag shouldn't appear in AS3 swf. Tag is skipped.");
+      "GFx_DoInitActionLoader - DoInitAction tag shouldnt appear in AS3 swf. Tag is skipped.");
   }
   else
   {
@@ -3416,7 +3416,7 @@ void __fastcall Scaleform::GFx::GFx_DefineBinaryData(Scaleform::GFx::LoadProcess
   v2 = p;
   Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>::LogError(
     (Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess> *)&p->vfptr,
-    "Tag 'DefineBinaryData' (87) is not supported, potentially 'TLF text' fields are used. Switch to 'Classic Text'.");
+    "Tag DefineBinaryData (87) is not supported, potentially TLF text fields are used. Switch to Classic Text.");
   v3 = v2->pAltStream;
   if ( !v3 )
     v3 = &v2->ProcessInfo.Stream;
@@ -3438,14 +3438,14 @@ void __fastcall Scaleform::GFx::GFx_DefineBinaryData(Scaleform::GFx::LoadProcess
   v17 = v8;
   if ( v8 )
   {
-    *(_QWORD *)v8 = &Scaleform::GFx::Resource::`vftable';
+    *(_QWORD *)v8 = &Scaleform::GFx::Resource::`vftable;
     v10 = *(_DWORD *)(v8 + 8);
     v11 = *(unsigned int *)(v8 + 8);
     *(_DWORD *)(v9 + 8) = 1;
     *(_QWORD *)(v9 + 16) = 0i64;
-    *(_QWORD *)v9 = &Scaleform::GFx::CharacterDef::`vftable';
+    *(_QWORD *)v9 = &Scaleform::GFx::CharacterDef::`vftable;
     *(_DWORD *)(v9 + 24) = 0x40000;
-    *(_QWORD *)v9 = &Scaleform::GFx::ButtonDef::`vftable';
+    *(_QWORD *)v9 = &Scaleform::GFx::ButtonDef::`vftable;
     v12 = (_QWORD *)(v9 + 32);
     *v12 = 0i64;
     v12[1] = 0i64;

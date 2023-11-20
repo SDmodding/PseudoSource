@@ -14,7 +14,7 @@ CAkBus *__fastcall CAkFeedbackBus::Create(unsigned int in_ulID)
   if ( !v2 )
     return 0i64;
   CAkBus::CAkBus(v2, v1);
-  v3->vfptr = (CAkIndexableVtbl *)&CAkFeedbackBus::`vftable';
+  v3->vfptr = (CAkIndexableVtbl *)&CAkFeedbackBus::`vftable;
   v4 = (CAkParameterNodeBase::AkFeedbackInfo *)AK::MemoryMgr::Malloc(g_DefaultPoolId, 8ui64);
   v3->m_pFeedbackInfo = v4;
   if ( v4 )

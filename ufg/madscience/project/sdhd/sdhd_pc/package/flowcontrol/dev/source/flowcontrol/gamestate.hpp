@@ -16,7 +16,7 @@ void __fastcall UFG::GameState::~GameState(UFG::GameState *this)
   UFG::GameState *v1; // rbx
 
   v1 = this;
-  this->vfptr = (UFG::GameStateVtbl *)&UFG::GameState::`vftable';
+  this->vfptr = (UFG::GameStateVtbl *)&UFG::GameState::`vftable;
   UFG::qString::~qString(&this->mGameStateUserDataStr);
   UFG::qString::~qString(&v1->mGameStateName);
 }

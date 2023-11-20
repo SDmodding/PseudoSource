@@ -880,12 +880,12 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::DisplayObject::Displ
   v2 = t;
   v3 = this;
   Scaleform::GFx::AS3::Instance::Instance((Scaleform::GFx::AS3::Instance *)&this->vfptr, t);
-  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Object::`vftable';
-  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::`vftable';
+  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Object::`vftable;
+  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::`vftable;
   v3->VMRef = v2->pVM;
   v3->pImpl.pObject = 0i64;
   v3->pImpl.Owner = 1;
-  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_display::DisplayObject::`vftable';
+  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_display::DisplayObject::`vftable;
   v3->pLoaderInfo.pObject = 0i64;
   v3->pDispObj.pObject = 0i64;
   v3->pReleaseProxy.pObject = 0i64;
@@ -899,12 +899,12 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::DisplayObject::Displ
   v7 = v4;
   if ( v4 )
   {
-    *(_QWORD *)v4 = &Scaleform::RefCountImplCore::`vftable';
+    *(_QWORD *)v4 = &Scaleform::RefCountImplCore::`vftable;
     *(_DWORD *)(v4 + 8) = 1;
-    *(_QWORD *)v4 = &Scaleform::RefCountImpl::`vftable';
-    *(_QWORD *)v4 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,328>::`vftable';
-    *(_QWORD *)v4 = &Scaleform::RefCountBase<Scaleform::GFx::AS3::PtrReleaseProxy<328>,328>::`vftable';
-    *(_QWORD *)v4 = &Scaleform::GFx::AS3::PtrReleaseProxy<328>::`vftable';
+    *(_QWORD *)v4 = &Scaleform::RefCountImpl::`vftable;
+    *(_QWORD *)v4 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,328>::`vftable;
+    *(_QWORD *)v4 = &Scaleform::RefCountBase<Scaleform::GFx::AS3::PtrReleaseProxy<328>,328>::`vftable;
+    *(_QWORD *)v4 = &Scaleform::GFx::AS3::PtrReleaseProxy<328>::`vftable;
     *(_QWORD *)(v4 + 16) = 0i64;
     *(_QWORD *)(v4 + 24) = 0i64;
     *(_QWORD *)(v4 + 32) = 0i64;
@@ -2115,7 +2115,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::DisplayObject::scale
         Scaleform::GFx::AS3::Value::ReleaseInternal(&v11);
       }
     }
-    `eh vector destructor iterator'(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
   }
 }
 
@@ -2238,7 +2238,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::DisplayObject::scrol
   v4 = this->pDispObj.pObject->pScrollRect;
   if ( v4 )
   {
-    `eh vector constructor iterator'(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::Value);
     v5 = v4->Rectangle.x1 * 0.05;
     if ( v5 <= 0.0 )
       v6 = v5 - 0.5;
@@ -2269,7 +2269,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::DisplayObject::scrol
       v3->pTraits.pObject->pVM[1].ExceptionObj.value.VS._1.VObj,
       4u,
       (Scaleform::GFx::AS3::Value *)&ptr);
-    `eh vector destructor iterator'(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
   }
   else
   {
@@ -2754,7 +2754,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::DisplayObject::getBo
       Scaleform::GFx::AS3::Value::ReleaseInternal((Scaleform::GFx::AS3::Value *)&pmat.M[1][2]);
     }
   }
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
 }
 
 // File Line: 938
@@ -2874,7 +2874,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::DisplayObject::getRe
       Scaleform::GFx::AS3::Value::ReleaseInternal((Scaleform::GFx::AS3::Value *)&pmat.M[1][2]);
     }
   }
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
 }
 
 // File Line: 967
@@ -2947,7 +2947,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::DisplayObject::globa
       Scaleform::GFx::AS3::Value::ReleaseInternal(&v12);
     }
   }
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
 }
 
 // File Line: 980
@@ -3031,7 +3031,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::DisplayObject::globa
       Scaleform::GFx::AS3::Value::ReleaseInternal(&v13);
     }
   }
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
 }
 
 // File Line: 993
@@ -3424,7 +3424,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::DisplayObject::local
       Scaleform::GFx::AS3::Value::ReleaseInternal(&v11);
     }
   }
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
 }
 
 // File Line: 1090
@@ -3497,7 +3497,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::DisplayObject::local
       Scaleform::GFx::AS3::Value::ReleaseInternal(&v11);
     }
   }
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
 }
 
 // File Line: 1189
@@ -3515,7 +3515,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::DisplayObject::~Disp
   unsigned int v9; // eax
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_display::DisplayObject::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_display::DisplayObject::`vftable;
   v2 = this->pDispObj.pObject;
   if ( v2 )
   {
@@ -3563,9 +3563,9 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::DisplayObject::~Disp
       }
     }
   }
-  v1->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::`vftable';
+  v1->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::`vftable;
   Scaleform::AutoPtr<Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::EventDispatcherImpl>::~AutoPtr<Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::EventDispatcherImpl>(&v1->pImpl);
-  v1->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instance::`vftable';
+  v1->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instance::`vftable;
   Scaleform::GFx::AS3::Traits::DestructTail(
     (Scaleform::GFx::AS3::Traits *)((_QWORD)v1->pTraits.pObject & 0xFFFFFFFFFFFFFFFEui64),
     (Scaleform::GFx::AS3::Object *)&v1->vfptr);
@@ -3705,9 +3705,9 @@ void __fastcall Scaleform::GFx::AS3::InstanceTraits::fl_display::DisplayObject::
     (Scaleform::GFx::AS3::InstanceTraits::CTraits *)&this->vfptr,
     vm,
     ci);
-  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable';
-  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_events::EventDispatcher::`vftable';
-  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_display::DisplayObject::`vftable';
+  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable;
+  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_events::EventDispatcher::`vftable;
+  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_display::DisplayObject::`vftable;
   v3->TraitsType = 22;
 }
 
@@ -3734,9 +3734,9 @@ void __fastcall Scaleform::GFx::AS3::ClassTraits::fl_display::DisplayObject::Dis
 
   v3 = this;
   Scaleform::GFx::AS3::ClassTraits::Traits::Traits((Scaleform::GFx::AS3::ClassTraits::Traits *)&this->vfptr, vm, ci);
-  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable';
-  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_events::EventDispatcher::`vftable';
-  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_display::DisplayObject::`vftable';
+  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable;
+  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_events::EventDispatcher::`vftable;
+  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_display::DisplayObject::`vftable;
   v3->TraitsType = 22;
 }
 
@@ -3761,9 +3761,9 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v5 )
   {
     Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, v2, &Scaleform::GFx::AS3::fl_display::DisplayObjectCI);
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable';
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_events::EventDispatcher::`vftable';
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_display::DisplayObject::`vftable';
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable;
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_events::EventDispatcher::`vftable;
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_display::DisplayObject::`vftable;
     v6->TraitsType = 22;
   }
   else
@@ -3776,9 +3776,9 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v7 )
   {
     Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v7, v2, &Scaleform::GFx::AS3::fl_display::DisplayObjectCI);
-    v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable';
-    v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_events::EventDispatcher::`vftable';
-    v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_display::DisplayObject::`vftable';
+    v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable;
+    v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_events::EventDispatcher::`vftable;
+    v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_display::DisplayObject::`vftable;
     v8.pV->TraitsType = 22;
   }
   else

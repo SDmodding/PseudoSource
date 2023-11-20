@@ -72,7 +72,7 @@ char __fastcall UFG::ItemProfiles::InitItemProfiles()
       if ( !v7 )
       {
         v21 = UFG::qSymbol::as_cstr_dbg(v6);
-        UFG::qPrintf("Searching for property set '%s', which was not found, check spelling and case\n", v21);
+        UFG::qPrintf("Searching for property set %s, which was not found, check spelling and case\n", v21);
         return 0;
       }
       v8 = (char *)UFG::ItemProfiles::mpInstance + v4;

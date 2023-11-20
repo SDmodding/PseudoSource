@@ -30,7 +30,7 @@ void __fastcall UFG::BaseAnimationComponent::BaseAnimationComponent(UFG::BaseAni
   v6 = (UFG::qNode<UFG::BaseAnimationComponent,UFG::BaseAnimationComponent> *)&v5->mPrev;
   v6->mPrev = v6;
   v6->mNext = v6;
-  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BaseAnimationComponent::`vftable';
+  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BaseAnimationComponent::`vftable;
   UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v5->mRigHandle.mPrev);
   v5->mRigHandle.mLoadFunction = 0i64;
   v5->mRigHandle.mUnloadFunction = 0i64;
@@ -81,7 +81,7 @@ void __fastcall UFG::BaseAnimationComponent::BaseAnimationComponent(UFG::BaseAni
   v4 = (UFG::qNode<UFG::BaseAnimationComponent,UFG::BaseAnimationComponent> *)&v3->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BaseAnimationComponent::`vftable';
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BaseAnimationComponent::`vftable;
   UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v3->mRigHandle.mPrev);
   v5 = 0i64;
   v3->mRigHandle.mLoadFunction = 0i64;
@@ -137,7 +137,7 @@ void __fastcall UFG::BaseAnimationComponent::~BaseAnimationComponent(UFG::BaseAn
   UFG::qNode<UFG::BaseAnimationComponent,UFG::BaseAnimationComponent> *v11; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BaseAnimationComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BaseAnimationComponent::`vftable;
   if ( this == UFG::BaseAnimationComponent::s_BaseAnimationComponentpCurrentIterator )
     UFG::BaseAnimationComponent::s_BaseAnimationComponentpCurrentIterator = (UFG::BaseAnimationComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::BaseAnimationComponent,UFG::BaseAnimationComponent> *)&this->mPrev;
@@ -158,12 +158,12 @@ void __fastcall UFG::BaseAnimationComponent::~BaseAnimationComponent(UFG::BaseAn
   v7->mPrev = v6;
   v1->mRequiredAnimationBanks.m_AnimationGroupHandleList.mNode.mPrev = &v1->mRequiredAnimationBanks.m_AnimationGroupHandleList.mNode;
   v1->mRequiredAnimationBanks.m_AnimationGroupHandleList.mNode.mNext = &v1->mRequiredAnimationBanks.m_AnimationGroupHandleList.mNode;
-  v8 = `UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result )
+  v8 = `UFG::qGetResourceInventory<UFG::RigResource>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::RigResource>::`2::result )
   {
     v9 = UFG::qResourceWarehouse::Instance();
     v8 = UFG::qResourceWarehouse::GetInventory(v9, 0x39BC0A7Eu);
-    `UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result = v8;
+    `UFG::qGetResourceInventory<UFG::RigResource>::`2::result = v8;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mRigHandle.mPrev, v8);
   UFG::qResourceHandle::~qResourceHandle((UFG::qResourceHandle *)&v1->mRigHandle.mPrev);
@@ -266,13 +266,13 @@ void __fastcall UFG::BaseAnimationComponent::OnAttach(UFG::BaseAnimationComponen
       if ( v12 )
       {
         v12[21].vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&v3->mCreature->mPose;
-        v14 = `UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result;
+        v14 = `UFG::qGetResourceInventory<UFG::RigResource>::`2::result;
         v15 = v3->mCurrentRigUID;
-        if ( !`UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result )
+        if ( !`UFG::qGetResourceInventory<UFG::RigResource>::`2::result )
         {
           v16 = UFG::qResourceWarehouse::Instance();
           v14 = UFG::qResourceWarehouse::GetInventory(v16, 0x39BC0A7Eu);
-          `UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result = v14;
+          `UFG::qGetResourceInventory<UFG::RigResource>::`2::result = v14;
         }
         UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v12[21].m_SafePointerList, 0x39BC0A7Eu, v15, v14);
       }
@@ -791,12 +791,12 @@ void __fastcall UFG::BaseAnimationComponent::InitPropertySetInfo(UFG::BaseAnimat
     v19 = UFG::qStringHashUpper32(v8, 0xFFFFFFFF);
     v20 = v19;
     v5->mCurrentRigUID = v19;
-    v21 = `UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result )
+    v21 = `UFG::qGetResourceInventory<UFG::RigResource>::`2::result;
+    if ( !`UFG::qGetResourceInventory<UFG::RigResource>::`2::result )
     {
       v22 = UFG::qResourceWarehouse::Instance();
       v21 = UFG::qResourceWarehouse::GetInventory(v22, 0x39BC0A7Eu);
-      `UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result = v21;
+      `UFG::qGetResourceInventory<UFG::RigResource>::`2::result = v21;
     }
     UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v5->mRigHandle.mPrev, 0x39BC0A7Eu, v20, v21);
     v23 = (UFG::RigResource *)v5->mRigHandle.mData;

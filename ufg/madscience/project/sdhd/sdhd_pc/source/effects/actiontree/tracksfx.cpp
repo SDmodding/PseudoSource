@@ -17,8 +17,8 @@ void __fastcall RumbleTrack::RumbleTrack(RumbleTrack *this, MemImageLoadFlag fla
 
   v2 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, flag);
-  v2->vfptr = (Expression::IMemberMapVtbl *)&Track<RumbleTask>::`vftable';
-  v2->vfptr = (Expression::IMemberMapVtbl *)&RumbleTrack::`vftable';
+  v2->vfptr = (Expression::IMemberMapVtbl *)&Track<RumbleTask>::`vftable;
+  v2->vfptr = (Expression::IMemberMapVtbl *)&RumbleTrack::`vftable;
 }
 
 // File Line: 40
@@ -29,8 +29,8 @@ void __fastcall RumbleTrack::RumbleTrack(RumbleTrack *this)
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, RumbleTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<RumbleTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&RumbleTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<RumbleTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&RumbleTrack::`vftable;
   *(_QWORD *)&v1->m_audioTagId = 0i64;
   v1->m_secondUID = 0;
 }
@@ -120,9 +120,9 @@ void __fastcall PlayEffectTrack::PlayEffectTrack(PlayEffectTrack *this)
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, PlayEffectTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<PlayEffectTask>::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<PlayEffectTask>::`vftable;
   PlayEffectBaseTrack::PlayEffectBaseTrack((PlayEffectBaseTrack *)&v1->mAttachLimbName);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayEffectTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayEffectTrack::`vftable;
 }
 
 // File Line: 226
@@ -156,8 +156,8 @@ void __fastcall FootStepLeftEffectTrack::FootStepLeftEffectTrack(FootStepLeftEff
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, FootStepLeftEffectTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<FootStepLeftEffectTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&FootStepLeftEffectTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<FootStepLeftEffectTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&FootStepLeftEffectTrack::`vftable;
   *(_QWORD *)&v1->mStepSound = 0i64;
 }
 
@@ -180,8 +180,8 @@ void __fastcall FootStepRightEffectTrack::FootStepRightEffectTrack(FootStepRight
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, FootStepRightEffectTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<FootStepRightEffectTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&FootStepRightEffectTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<FootStepRightEffectTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&FootStepRightEffectTrack::`vftable;
   *(_QWORD *)&v1->mStepSound = 0i64;
 }
 
@@ -204,8 +204,8 @@ void __fastcall CollisionEffectTrack::CollisionEffectTrack(CollisionEffectTrack 
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, CollisionEffectTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CollisionEffectTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CollisionEffectTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CollisionEffectTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CollisionEffectTrack::`vftable;
   v1->m_TargetMaterial = 0;
   *(_WORD *)&v1->m_AudioEffect = 257;
 }
@@ -244,8 +244,8 @@ void __fastcall EffectSurfaceCollisionTrack::EffectSurfaceCollisionTrack(EffectS
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, EffectSurfaceCollisionTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<EffectSurfaceCollisionTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&EffectSurfaceCollisionTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<EffectSurfaceCollisionTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&EffectSurfaceCollisionTrack::`vftable;
   *(_QWORD *)&v1->m_SourceImpactMaterial = 0i64;
   v1->m_ProbeLength = 0.30000001;
   *(_WORD *)&v1->m_AudioEffect = 257;
@@ -294,8 +294,8 @@ void __fastcall VisualTreatmentTrack::VisualTreatmentTrack(VisualTreatmentTrack 
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, VisualTreatmentTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<VisualTreatmentTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&VisualTreatmentTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<VisualTreatmentTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&VisualTreatmentTrack::`vftable;
   *(_QWORD *)&v1->mVisualTreatment = 0i64;
   v1->mMotionEffect = 1.0;
   *(_WORD *)&v1->mSoundEffect = 0;
@@ -322,8 +322,8 @@ void __fastcall DamageEffectTrack::DamageEffectTrack(DamageEffectTrack *this)
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, DamageEffectTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DamageEffectTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DamageEffectTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DamageEffectTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&DamageEffectTrack::`vftable;
   v1->m_fDamage = 0.0;
 }
 
@@ -357,8 +357,8 @@ void __fastcall LightingRimBoostTrack::LightingRimBoostTrack(LightingRimBoostTra
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, LightingRimBoostTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<LightingRimBoostTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&LightingRimBoostTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<LightingRimBoostTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&LightingRimBoostTrack::`vftable;
   v1->mMultiplier = 1.0;
 }
 
@@ -403,8 +403,8 @@ void __fastcall SetHighlightingModeTrack::SetHighlightingModeTrack(SetHighlighti
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, SetHighlightingModeTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<SetHighlightingModeTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SetHighlightingModeTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<SetHighlightingModeTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&SetHighlightingModeTrack::`vftable;
   v1->mHighlightingMode.mValue = 0;
 }
 

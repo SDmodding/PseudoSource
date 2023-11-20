@@ -609,7 +609,7 @@ void __fastcall UFG::ExplosionManager::Explosion::Explosion(UFG::ExplosionManage
   v8 = (UFG::qNode<UFG::ExplosionManager::Explosion,UFG::ExplosionManager::Explosion> *)&this->mPrev;
   v8->mPrev = v8;
   v8->mNext = v8;
-  this->vfptr = (UFG::ExplosionManager::ExplosionVtbl *)&UFG::ExplosionManager::Explosion::`vftable';
+  this->vfptr = (UFG::ExplosionManager::ExplosionVtbl *)&UFG::ExplosionManager::Explosion::`vftable;
   v9 = 0;
   v10 = UFG::ExplosionManager::sExplosionTypeInfos;
   do
@@ -860,7 +860,7 @@ void __fastcall UFG::ExplosionManager::Explosion::~Explosion(UFG::ExplosionManag
   UFG::qNode<UFG::ExplosionManager::Explosion,UFG::ExplosionManager::Explosion> *v17; // rax
 
   v1 = this;
-  this->vfptr = (UFG::ExplosionManager::ExplosionVtbl *)&UFG::ExplosionManager::Explosion::`vftable';
+  this->vfptr = (UFG::ExplosionManager::ExplosionVtbl *)&UFG::ExplosionManager::Explosion::`vftable;
   v2 = this->mCollidable;
   if ( v2 )
   {
@@ -1116,7 +1116,7 @@ _BOOL8 __fastcall UFG::ExplosionManager::Explosion::Update(UFG::ExplosionManager
   v2 = deltaT;
   v3 = this;
   v4 = UFG::BasePhysicsSystem::mInstance->mWorld;
-  collector.vfptr = (hkpCdBodyPairCollectorVtbl *)&hkpAllCdBodyPairCollector::`vftable';
+  collector.vfptr = (hkpCdBodyPairCollectorVtbl *)&hkpAllCdBodyPairCollector::`vftable;
   adjustedMagnitude = (__int64 *)&v173;
   v173 = &v176;
   v175 = -2147483632;
@@ -2092,7 +2092,7 @@ void __fastcall UFG::ExplosionManager::Explosion::FindClosestPointToExplosion(UF
     v22.m_quad = (__m128)v7->m_aabb32Info.m_bitOffsetHigh;
     v23.m_quad = (__m128)v7->m_aabb32Info.m_bitScale;
     v17 = FLOAT_10_0;
-    v8 = &hkpClosestCdPointCollector::`vftable';
+    v8 = &hkpClosestCdPointCollector::`vftable;
     v12 = 0i64;
     v11 = _mm_shuffle_ps(v11, _mm_unpackhi_ps(v11, (__m128)xmmword_141A712A0), 196);
     v9 = 2139095022;
@@ -2108,10 +2108,10 @@ void __fastcall UFG::ExplosionManager::Explosion::FindClosestPointToExplosion(UF
     if ( v12 )
     {
       *v3 = (hkVector4f)v10.m_quad;
-      v8 = &hkpCdPointCollector::`vftable';
+      v8 = &hkpCdPointCollector::`vftable;
       return;
     }
-    v8 = &hkpCdPointCollector::`vftable';
+    v8 = &hkpCdPointCollector::`vftable;
   }
   *v3 = v4->m_motion.m_motionState.m_sweptTransform.m_centerOfMass1;
 }

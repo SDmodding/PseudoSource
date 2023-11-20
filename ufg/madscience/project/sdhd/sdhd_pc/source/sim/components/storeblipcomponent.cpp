@@ -25,7 +25,7 @@ void __fastcall UFG::StoreBlipComponent::StoreBlipComponent(UFG::StoreBlipCompon
   v3 = (UFG::qNode<UFG::StoreBlipComponent,UFG::StoreBlipComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StoreBlipComponent::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StoreBlipComponent::`vftable;
   v4 = UFG::StoreBlipComponent::s_StoreBlipComponentList.mNode.mPrev;
   UFG::StoreBlipComponent::s_StoreBlipComponentList.mNode.mPrev->mNext = (UFG::qNode<UFG::StoreBlipComponent,UFG::StoreBlipComponent> *)&v2->mPrev;
   v3->mPrev = v4;
@@ -49,7 +49,7 @@ void __fastcall UFG::StoreBlipComponent::~StoreBlipComponent(UFG::StoreBlipCompo
   UFG::qNode<UFG::StoreBlipComponent,UFG::StoreBlipComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StoreBlipComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StoreBlipComponent::`vftable;
   if ( this == UFG::StoreBlipComponent::s_StoreBlipComponentpCurrentIterator )
     UFG::StoreBlipComponent::s_StoreBlipComponentpCurrentIterator = (UFG::StoreBlipComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::StoreBlipComponent,UFG::StoreBlipComponent> *)&this->mPrev;

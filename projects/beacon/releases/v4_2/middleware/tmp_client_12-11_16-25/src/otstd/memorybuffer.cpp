@@ -2,7 +2,7 @@
 // RVA: 0xEE7DAC
 void __fastcall OSuite::ZMemoryBuffer::ZMemoryBuffer(OSuite::ZMemoryBuffer *this)
 {
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZMemoryBuffer::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZMemoryBuffer::`vftable;
   this->m_pNext = 0i64;
   this->m_pBuffer = 0i64;
   this->m_pIndex = 0i64;
@@ -158,9 +158,9 @@ void __fastcall OSuite::ZMemoryBufferChain::ZMemoryBufferChain(OSuite::ZMemoryBu
 {
   this->m_firstBuffer = 0i64;
   this->m_indexBuffer = 0i64;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZMemoryBufferChain::`vftable'{for `OSuite::ZObject'};
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZMemoryBufferChain::`vftable{for `OSuite::ZObject};
   this->m_bDeleteOnRead = bDeleteOnRead;
-  this->vfptr = (OSuite::IReaderVtbl *)&OSuite::ZMemoryBufferChain::`vftable'{for `OSuite::IReader'};
+  this->vfptr = (OSuite::IReaderVtbl *)&OSuite::ZMemoryBufferChain::`vftable{for `OSuite::IReader};
 }
 
 // File Line: 247
@@ -172,8 +172,8 @@ void __fastcall OSuite::ZMemoryBufferChain::~ZMemoryBufferChain(OSuite::ZMemoryB
   OSuite::ZMemoryBuffer *v3; // rcx
 
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZMemoryBufferChain::`vftable'{for `OSuite::ZObject'};
-  this->vfptr = (OSuite::IReaderVtbl *)&OSuite::ZMemoryBufferChain::`vftable'{for `OSuite::IReader'};
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZMemoryBufferChain::`vftable{for `OSuite::ZObject};
+  this->vfptr = (OSuite::IReaderVtbl *)&OSuite::ZMemoryBufferChain::`vftable{for `OSuite::IReader};
   v2 = this->m_firstBuffer;
   if ( v2 )
     OSuite::ZMemoryBuffer::ReleaseChain(v2);
@@ -480,7 +480,7 @@ unsigned __int64 __fastcall OSuite::ZMemoryBufferChain::AccumulateData(OSuite::Z
             v14->m_pIndex = 0i64;
             v14->m_nBufferLength = 0i64;
             v14->m_nDataLength = 0i64;
-            v14->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZMemoryBuffer::`vftable';
+            v14->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZMemoryBuffer::`vftable;
             v14->m_nRemainingDataLength = 0i64;
           }
           else
@@ -508,7 +508,7 @@ unsigned __int64 __fastcall OSuite::ZMemoryBufferChain::AccumulateData(OSuite::Z
             v12->m_pIndex = 0i64;
             v12->m_nBufferLength = 0i64;
             v12->m_nDataLength = 0i64;
-            v12->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZMemoryBuffer::`vftable';
+            v12->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZMemoryBuffer::`vftable;
             v12->m_nRemainingDataLength = 0i64;
           }
           else

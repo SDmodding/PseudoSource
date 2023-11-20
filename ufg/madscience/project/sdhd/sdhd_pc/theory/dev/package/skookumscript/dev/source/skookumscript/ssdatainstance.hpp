@@ -4,10 +4,10 @@ void __fastcall SSDataInstance::SSDataInstance(SSDataInstance *this)
 {
   APSortedLogical<SSData,ASymbol> *v1; // [rsp+28h] [rbp+10h]
 
-  this->vfptr = (SSObjectBaseVtbl *)&SSObjectBase::`vftable';
+  this->vfptr = (SSObjectBaseVtbl *)&SSObjectBase::`vftable;
   this->i_ref_count = 0;
-  this->vfptr = (SSObjectBaseVtbl *)&SSInstance::`vftable';
-  this->vfptr = (SSObjectBaseVtbl *)&SSDataInstance::`vftable';
+  this->vfptr = (SSObjectBaseVtbl *)&SSInstance::`vftable;
+  this->vfptr = (SSObjectBaseVtbl *)&SSDataInstance::`vftable;
   v1 = &this->i_data;
   v1->i_count = 0;
   v1->i_array_p = 0i64;
@@ -20,12 +20,12 @@ void __fastcall SSDataInstance::SSDataInstance(SSDataInstance *this, SSClass *cl
 {
   APSortedLogical<SSData,ASymbol> *v2; // [rsp+48h] [rbp+10h]
 
-  this->vfptr = (SSObjectBaseVtbl *)&SSObjectBase::`vftable';
+  this->vfptr = (SSObjectBaseVtbl *)&SSObjectBase::`vftable;
   this->i_ref_count = 0;
-  this->vfptr = (SSObjectBaseVtbl *)&SSInstance::`vftable';
+  this->vfptr = (SSObjectBaseVtbl *)&SSInstance::`vftable;
   this->i_class_p = class_p;
   this->i_ptr_id = ++SSObjectBase::c_ptr_id_prev;
-  this->vfptr = (SSObjectBaseVtbl *)&SSDataInstance::`vftable';
+  this->vfptr = (SSObjectBaseVtbl *)&SSDataInstance::`vftable;
   v2 = &this->i_data;
   v2->i_count = 0;
   v2->i_array_p = 0i64;

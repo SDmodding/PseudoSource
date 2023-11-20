@@ -148,7 +148,7 @@ void __fastcall UFG::GunshotManagerGunInfo::~GunshotManagerGunInfo(UFG::GunshotM
   UFG::qNode<UFG::GunshotManagerGunInfo,UFG::GunshotManagerGunInfo> *v9; // rax
 
   v1 = this;
-  this->vfptr = (UFG::GunshotManagerGunInfoVtbl *)&UFG::GunshotManagerGunInfo::`vftable';
+  this->vfptr = (UFG::GunshotManagerGunInfoVtbl *)&UFG::GunshotManagerGunInfo::`vftable;
   v2 = &this->simObject;
   if ( this->simObject.m_pPointer )
   {
@@ -368,7 +368,7 @@ LABEL_18:
       v11 = v10 + 1;
       v11->mNext = v11;
       v11[1].mNext = v11;
-      v6->vfptr = (UFG::GunshotManagerGunInfoVtbl *)&UFG::GunshotManagerGunInfo::`vftable';
+      v6->vfptr = (UFG::GunshotManagerGunInfoVtbl *)&UFG::GunshotManagerGunInfo::`vftable;
       v24 = &v6->simObject;
       v24->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v24->mPrev;
       v24->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v24->mPrev;

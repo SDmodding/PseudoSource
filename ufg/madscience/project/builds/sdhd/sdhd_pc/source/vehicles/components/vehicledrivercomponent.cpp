@@ -27,12 +27,12 @@ void __fastcall UFG::VehicleDriverInterface::VehicleDriverInterface(UFG::Vehicle
 
   v2 = this;
   UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name_uid);
-  v2->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::UpdateInterface::`vftable';
+  v2->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::UpdateInterface::`vftable;
   v3 = (UFG::qNode<UFG::VehicleDriverInterface,UFG::VehicleDriverInterface> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleDriverInterface::`vftable'{for `UFG::SimComponent'};
-  v2->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::VehicleDriverInterface::`vftable'{for `UFG::UpdateInterface'};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleDriverInterface::`vftable{for `UFG::SimComponent};
+  v2->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::VehicleDriverInterface::`vftable{for `UFG::UpdateInterface};
   UFG::RebindingComponentHandle<UFG::PhysicsMoverInterface,0>::RebindingComponentHandle<UFG::PhysicsMoverInterface,0>(&v2->mMoverComponent);
   UFG::RebindingComponentHandle<UFG::VehicleEffectsComponent,0>::RebindingComponentHandle<UFG::VehicleEffectsComponent,0>(&v2->mRenderComponent);
   UFG::RebindingComponentHandle<UFG::VehicleAudioComponent,0>::RebindingComponentHandle<UFG::VehicleAudioComponent,0>(&v2->mAudioComponent);
@@ -92,8 +92,8 @@ void __fastcall UFG::VehicleDriverInterface::~VehicleDriverInterface(UFG::Vehicl
   UFG::qNode<UFG::VehicleDriverInterface,UFG::VehicleDriverInterface> *v12; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleDriverInterface::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::VehicleDriverInterface::`vftable'{for `UFG::UpdateInterface'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleDriverInterface::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::VehicleDriverInterface::`vftable{for `UFG::UpdateInterface};
   v2 = this->m_ChaseSpawnTransform;
   if ( v2 )
     v2->vfptr->__vecDelDtor((UFG::qSafePointerNode<UFG::SimComponent> *)&v2->vfptr, 1u);

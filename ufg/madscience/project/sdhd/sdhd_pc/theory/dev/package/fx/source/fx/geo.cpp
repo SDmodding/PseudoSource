@@ -9,7 +9,7 @@ __int64 Render::_dynamic_initializer_for__gGeoSettingsInventory__()
     0x52A8963Au,
     0,
     0);
-  Render::gGeoSettingsInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::GeoSettingsInventory::`vftable';
+  Render::gGeoSettingsInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::GeoSettingsInventory::`vftable;
   return atexit(Render::_dynamic_atexit_destructor_for__gGeoSettingsInventory__);
 }
 
@@ -103,13 +103,13 @@ void __fastcall Render::GeoManager::AddGeo(Render::GeoManager *this, UFG::qMatri
   *(UFG::qVector4 *)(v13 + 16) = v12;
   *(UFG::qVector4 *)(v13 + 32) = v14;
   *(UFG::qVector4 *)(v13 + 48) = v15;
-  v16 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
+  v16 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
   v17 = v9->mNameUID;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v18 = UFG::qResourceWarehouse::Instance();
     v16 = UFG::qResourceWarehouse::GetInventory(v18, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v16;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v16;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)(v13 + 64), 0xA2ADCD77, v17, v16);
   *(float *)(v13 + 96) = v8->r;

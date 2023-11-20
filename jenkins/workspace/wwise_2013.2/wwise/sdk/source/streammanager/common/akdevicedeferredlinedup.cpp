@@ -6,7 +6,7 @@ void __fastcall AK::StreamMgr::CAkDeviceDeferredLinedUp::CAkDeviceDeferredLinedU
 
   v2 = this;
   AK::StreamMgr::CAkDeviceBase::CAkDeviceBase((AK::StreamMgr::CAkDeviceBase *)&this->vfptr, in_pLowLevelHook);
-  v2->vfptr = (AK::StreamMgr::CAkIOThreadVtbl *)&AK::StreamMgr::CAkDeviceDeferredLinedUp::`vftable';
+  v2->vfptr = (AK::StreamMgr::CAkIOThreadVtbl *)&AK::StreamMgr::CAkDeviceDeferredLinedUp::`vftable;
   v2->m_poolLowLevelTransfers.m_pFirst = 0i64;
   v2->m_pLowLevelTransfersMem = 0i64;
 }
@@ -151,8 +151,8 @@ AK::StreamMgr::CAkStdStmBase *__fastcall AK::StreamMgr::CAkDeviceDeferredLinedUp
   v10[1].vfptr = 0i64;
   v10[1].m_hBlockEvent = 0i64;
   *(_QWORD *)&v10[1].m_bIsBlocked = 0i64;
-  v10->vfptr = (AK::StreamMgr::CAkClientThreadAwareVtbl *)&AK::StreamMgr::CAkStdStmDeferredLinedUp::`vftable'{for `AK::StreamMgr::CAkStmTask'};
-  v10->vfptr = (AK::IAkStdStreamVtbl *)&AK::StreamMgr::CAkStdStmDeferredLinedUp::`vftable'{for `AK::IAkStdStream'};
+  v10->vfptr = (AK::StreamMgr::CAkClientThreadAwareVtbl *)&AK::StreamMgr::CAkStdStmDeferredLinedUp::`vftable{for `AK::StreamMgr::CAkStmTask};
+  v10->vfptr = (AK::IAkStdStreamVtbl *)&AK::StreamMgr::CAkStdStmDeferredLinedUp::`vftable{for `AK::IAkStdStream};
   if ( (unsigned int)AK::StreamMgr::CAkStdStmBase::Init(
                        v10,
                        (AK::StreamMgr::CAkDeviceBase *)&v4->vfptr,
@@ -216,8 +216,8 @@ LABEL_9:
   v12[1].vfptr = 0i64;
   v12[1].m_hBlockEvent = 0i64;
   *(_QWORD *)&v12[1].m_bIsBlocked = 0i64;
-  v12->vfptr = (AK::StreamMgr::CAkClientThreadAwareVtbl *)&AK::StreamMgr::CAkAutoStmDeferredLinedUp::`vftable'{for `AK::StreamMgr::CAkStmTask'};
-  v12->vfptr = (AK::IAkAutoStreamVtbl *)&AK::StreamMgr::CAkAutoStmDeferredLinedUp::`vftable'{for `AK::IAkAutoStream'};
+  v12->vfptr = (AK::StreamMgr::CAkClientThreadAwareVtbl *)&AK::StreamMgr::CAkAutoStmDeferredLinedUp::`vftable{for `AK::StreamMgr::CAkStmTask};
+  v12->vfptr = (AK::IAkAutoStreamVtbl *)&AK::StreamMgr::CAkAutoStmDeferredLinedUp::`vftable{for `AK::IAkAutoStream};
   if ( AK::StreamMgr::CAkAutoStmBase::Init(
          v12,
          (AK::StreamMgr::CAkDeviceBase *)&v6->vfptr,

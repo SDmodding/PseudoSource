@@ -21,8 +21,8 @@ std::locale::facet *__fastcall std::locale::facet::_Decref(std::locale::facet *t
 // RVA: 0x82D90
 void __fastcall std::locale::facet::~facet(std::locale::facet *this)
 {
-  this->vfptr = (std::_Facet_baseVtbl *)&std::locale::facet::`vftable';
-  this->vfptr = (std::_Facet_baseVtbl *)&std::_Facet_base::`vftable';
+  this->vfptr = (std::_Facet_baseVtbl *)&std::locale::facet::`vftable;
+  this->vfptr = (std::_Facet_baseVtbl *)&std::_Facet_base::`vftable;
 }
 
 // File Line: 421
@@ -115,9 +115,9 @@ LABEL_19:
 // RVA: 0x82D40
 void __fastcall std::ctype_base::~ctype_base(std::ctype_base *this)
 {
-  this->vfptr = (std::_Facet_baseVtbl *)&std::ctype_base::`vftable';
-  this->vfptr = (std::_Facet_baseVtbl *)&std::locale::facet::`vftable';
-  this->vfptr = (std::_Facet_baseVtbl *)&std::_Facet_base::`vftable';
+  this->vfptr = (std::_Facet_baseVtbl *)&std::ctype_base::`vftable;
+  this->vfptr = (std::_Facet_baseVtbl *)&std::locale::facet::`vftable;
+  this->vfptr = (std::_Facet_baseVtbl *)&std::_Facet_base::`vftable;
 }
 
 // File Line: 2448
@@ -129,11 +129,11 @@ void __fastcall std::ctype<char>::ctype<char>(std::ctype<char> *this, std::_Loci
   _Ctypevec result; // [rsp+28h] [rbp-30h]
 
   v3 = this;
-  this->vfptr = (std::_Facet_baseVtbl *)&std::_Facet_base::`vftable';
-  this->vfptr = (std::_Facet_baseVtbl *)&std::locale::facet::`vftable';
+  this->vfptr = (std::_Facet_baseVtbl *)&std::_Facet_base::`vftable;
+  this->vfptr = (std::_Facet_baseVtbl *)&std::locale::facet::`vftable;
   this->_Refs = _Refs;
-  this->vfptr = (std::_Facet_baseVtbl *)&std::ctype_base::`vftable';
-  this->vfptr = (std::_Facet_baseVtbl *)&std::ctype<char>::`vftable';
+  this->vfptr = (std::_Facet_baseVtbl *)&std::ctype_base::`vftable;
+  this->vfptr = (std::_Facet_baseVtbl *)&std::ctype<char>::`vftable;
   v4 = Getctype(&result, _Lobj);
   *(_QWORD *)&v3->_Ctype._Page = *(_QWORD *)&v4->_Page;
   v3->_Ctype._Table = v4->_Table;
@@ -197,7 +197,7 @@ void __fastcall std::ctype<char>::~ctype<char>(std::ctype<char> *this)
   int v2; // eax
 
   v1 = this;
-  this->vfptr = (std::_Facet_baseVtbl *)&std::ctype<char>::`vftable';
+  this->vfptr = (std::_Facet_baseVtbl *)&std::ctype<char>::`vftable;
   v2 = this->_Ctype._Delfl;
   if ( v2 <= 0 )
   {
@@ -209,9 +209,9 @@ void __fastcall std::ctype<char>::~ctype<char>(std::ctype<char> *this)
     free((void *)this->_Ctype._Table);
   }
   free(v1->_Ctype._LocaleName);
-  v1->vfptr = (std::_Facet_baseVtbl *)&std::ctype_base::`vftable';
-  v1->vfptr = (std::_Facet_baseVtbl *)&std::locale::facet::`vftable';
-  v1->vfptr = (std::_Facet_baseVtbl *)&std::_Facet_base::`vftable';
+  v1->vfptr = (std::_Facet_baseVtbl *)&std::ctype_base::`vftable;
+  v1->vfptr = (std::_Facet_baseVtbl *)&std::locale::facet::`vftable;
+  v1->vfptr = (std::_Facet_baseVtbl *)&std::_Facet_base::`vftable;
 }
 
 // File Line: 2497

@@ -31,7 +31,7 @@ hkClass *__fastcall hkxMeshSection::staticClass()
 void __fastcall finishLoadedObjecthkxMeshSection(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkxMeshSection::`vftable';
+    *(_QWORD *)p = &hkxMeshSection::`vftable;
 }
 
 // File Line: 79
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkxMeshSection(void *p)
 // RVA: 0xE32780
 void **__fastcall getVtablehkxMeshSection()
 {
-  return &hkxMeshSection::`vftable';
+  return &hkxMeshSection::`vftable;
 }
 
 // File Line: 105

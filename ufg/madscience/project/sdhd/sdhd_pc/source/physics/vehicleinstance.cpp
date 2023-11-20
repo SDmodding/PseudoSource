@@ -7,7 +7,7 @@ void __fastcall UFG::VehicleInstance::VehicleInstance(UFG::VehicleInstance *this
 
   v2 = this;
   hkpVehicleInstance::hkpVehicleInstance((hkpVehicleInstance *)&this->vfptr, chassis);
-  v2->vfptr = (hkBaseObjectVtbl *)&UFG::VehicleInstance::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&UFG::VehicleInstance::`vftable;
   axis.m_quad = (__m128)_xmm;
   hkQuaternionf::setAxisAngle(&v2->mAxleFixup, &axis, 1.5707964);
 }

@@ -761,10 +761,10 @@ void __fastcall Illusion::TaskRenderEnv::TaskRenderEnv(Illusion::TaskRenderEnv *
   this->mIndexCount = 0;
   UFG::qBaseTreeRB::qBaseTreeRB(&this->mConstantBufferValues.mTree.mTree);
   v4 = (signed __int64)&v3->mInputLayoutCache;
-  *(_OWORD *)v4 = (unsigned __int64)&Illusion::CombinedObjectManager<Illusion::Shader,Illusion::VertexDecl,ID3D11InputLayout>::`vftable';
+  *(_OWORD *)v4 = (unsigned __int64)&Illusion::CombinedObjectManager<Illusion::Shader,Illusion::VertexDecl,ID3D11InputLayout>::`vftable;
   *(_QWORD *)(v4 + 16) = 0i64;
   v3->mInputLayoutCache.mGlobalCache = &unk_14249AF60;
-  *(_QWORD *)v4 = &Illusion::InputLayoutCache::`vftable';
+  *(_QWORD *)v4 = &Illusion::InputLayoutCache::`vftable;
   v3->mAbortNextDraw = 0;
   v3->mContext = v2;
   memset(&v3->mCurrState, 0, 0x910ui64);

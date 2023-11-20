@@ -6,7 +6,7 @@ void __fastcall UFG::ArgumentSequencerBase::ArgumentSequencerBase(UFG::ArgumentS
   UFG::qString v2; // [rsp+28h] [rbp-30h]
 
   v1 = this;
-  this->vfptr = (UFG::ArgumentSequencerBaseVtbl *)&UFG::ArgumentSequencerBase::`vftable';
+  this->vfptr = (UFG::ArgumentSequencerBaseVtbl *)&UFG::ArgumentSequencerBase::`vftable;
   UFG::qBaseTreeRB::qBaseTreeRB(&this->m_argumentGroup.mTree);
   UFG::qBaseTreeRB::qBaseTreeRB(&v1->m_events.mTree);
   UFG::ArgumentSequencerBase::Populate(v1);
@@ -22,7 +22,7 @@ void __fastcall UFG::ArgumentSequencerBase::~ArgumentSequencerBase(UFG::Argument
   UFG::ArgumentSequencerBase *v1; // rdi
 
   v1 = this;
-  this->vfptr = (UFG::ArgumentSequencerBaseVtbl *)&UFG::ArgumentSequencerBase::`vftable';
+  this->vfptr = (UFG::ArgumentSequencerBaseVtbl *)&UFG::ArgumentSequencerBase::`vftable;
   UFG::ArgumentSequencerBase::Destroy(this);
   UFG::qTreeRB<UFG::BankNode,UFG::BankNode,1>::DeleteAll(&v1->m_events);
   UFG::qBaseTreeRB::~qBaseTreeRB((Render::Skinning *)&v1->m_events);
@@ -158,7 +158,7 @@ void __fastcall UFG::ArgumentSequencerBase::Populate(UFG::ArgumentSequencerBase 
                 *((_QWORD *)v11 + 2) = 0i64;
                 *((_QWORD *)v11 + 3) = 0i64;
                 *((_DWORD *)v11 + 8) = v10;
-                *(_QWORD *)v11 = &UFG::DialogArgSet::`vftable';
+                *(_QWORD *)v11 = &UFG::DialogArgSet::`vftable;
                 UFG::qBaseTreeRB::qBaseTreeRB((UFG::qBaseTreeRB *)(v11 + 40));
               }
               else
@@ -264,7 +264,7 @@ void __fastcall UFG::ArgumentSequencerBase::PopulateSequences(UFG::ArgumentSeque
             *((_QWORD *)v11 + 2) = 0i64;
             *((_QWORD *)v11 + 3) = 0i64;
             *((_DWORD *)v11 + 8) = v10;
-            *(_QWORD *)v11 = &UFG::DialogEvent::`vftable';
+            *(_QWORD *)v11 = &UFG::DialogEvent::`vftable;
             *((_QWORD *)v11 + 6) = 0i64;
             *((_QWORD *)v11 + 5) = 0i64;
           }

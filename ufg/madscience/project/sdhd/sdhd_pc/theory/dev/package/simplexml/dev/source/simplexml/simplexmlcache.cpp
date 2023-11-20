@@ -9,7 +9,7 @@ __int64 SimpleXML::_dynamic_initializer_for__gXMLFileInventory__()
     0x24D0C3A0u,
     0,
     0);
-  SimpleXML::gXMLFileInventory.vfptr = (UFG::qResourceInventoryVtbl *)&SimpleXML::XMLFileInventory::`vftable';
+  SimpleXML::gXMLFileInventory.vfptr = (UFG::qResourceInventoryVtbl *)&SimpleXML::XMLFileInventory::`vftable;
   return atexit(SimpleXML::_dynamic_atexit_destructor_for__gXMLFileInventory__);
 }
 

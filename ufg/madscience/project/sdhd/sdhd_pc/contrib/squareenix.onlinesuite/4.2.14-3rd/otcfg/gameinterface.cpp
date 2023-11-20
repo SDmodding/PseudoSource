@@ -2,7 +2,7 @@
 // RVA: 0x15E200
 void __fastcall OSuite::ZGameInterface::ZGameInterface(OSuite::ZGameInterface *this)
 {
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZGameInterface::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZGameInterface::`vftable;
   this->m_pLogger = 0i64;
   this->m_bInitSuccess = 0;
   OSuite::ZString::ZString(&this->m_strUserId);
@@ -12,7 +12,7 @@ void __fastcall OSuite::ZGameInterface::ZGameInterface(OSuite::ZGameInterface *t
 // RVA: 0x15E250
 void __fastcall OSuite::ZGameInterface::~ZGameInterface(OSuite::ZGameInterface *this)
 {
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZGameInterface::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZGameInterface::`vftable;
   OSuite::ZString::~ZString(&this->m_strUserId);
 }
 

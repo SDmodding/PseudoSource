@@ -65,10 +65,10 @@ void __fastcall hkCpuPairLinearCastImplementation(hkpPairLinearCastJob *pairLine
   v40 = (unsigned __int64)collisionInput->m_dispatcher.m_storage;
   v8 = pairLinearCastJob;
   v44 = collisionInput->m_filter.m_storage;
-  v37 = &hkpFixedBufferCdPointCollector::`vftable';
+  v37 = &hkpFixedBufferCdPointCollector::`vftable;
   v40 = 16i64;
   v38 = 2139095022;
-  v33 = &hkpFixedBufferCdPointCollector::`vftable';
+  v33 = &hkpFixedBufferCdPointCollector::`vftable;
   v48 = (int *)&v41;
   v36 = 16i64;
   v34 = 2139095022;
@@ -88,7 +88,7 @@ void __fastcall hkCpuPairLinearCastImplementation(hkpPairLinearCastJob *pairLine
       v43 = v8->m_tolerance;
       v45 = v16;
       v17 = _mm_mul_ps(v16, v16);
-      v37 = &hkpFixedBufferCdPointCollector::`vftable';
+      v37 = &hkpFixedBufferCdPointCollector::`vftable;
       v39 = &v49;
       v18 = *v9;
       v19 = _mm_add_ps(
@@ -107,7 +107,7 @@ void __fastcall hkCpuPairLinearCastImplementation(hkpPairLinearCastJob *pairLine
                                    v19));
       if ( v15 )
       {
-        v33 = &hkpFixedBufferCdPointCollector::`vftable';
+        v33 = &hkpFixedBufferCdPointCollector::`vftable;
         v35 = &v51;
         v21 = v9[4];
         v34 = 2139095022;

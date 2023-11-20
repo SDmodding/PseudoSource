@@ -895,7 +895,7 @@ void __fastcall buildSchemaFromBallSocketAtom(hkpBallSocketConstraintAtom *atom,
       }
     }
     v90 = &transform;
-    v91 = (__m128 *)`hkVector4f::getComponent'::`2'::indexToMask;
+    v91 = (__m128 *)`hkVector4f::getComponent::`2::indexToMask;
     do
     {
       v92 = v11->m_virtMassFactor.m_storage;

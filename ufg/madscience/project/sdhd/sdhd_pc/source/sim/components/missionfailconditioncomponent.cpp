@@ -43,7 +43,7 @@ void __fastcall UFG::MissionFailConditionComponent::MissionFailConditionComponen
   v5 = (UFG::qNode<UFG::MissionFailConditionComponent,UFG::MissionFailConditionComponent> *)&v4->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::MissionFailConditionComponent::`vftable';
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::MissionFailConditionComponent::`vftable;
   v6 = 0i64;
   v4->mpDistanceFailObject = 0i64;
   v4->mpCustomGameSlice = 0i64;
@@ -141,7 +141,7 @@ void __fastcall UFG::MissionFailConditionComponent::~MissionFailConditionCompone
   UFG::qNode<UFG::MissionFailConditionComponent,UFG::MissionFailConditionComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::MissionFailConditionComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::MissionFailConditionComponent::`vftable;
   if ( this == UFG::MissionFailConditionComponent::s_MissionFailConditionComponentpCurrentIterator )
     UFG::MissionFailConditionComponent::s_MissionFailConditionComponentpCurrentIterator = (UFG::MissionFailConditionComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::MissionFailConditionComponent,UFG::MissionFailConditionComponent> *)&this->mPrev;

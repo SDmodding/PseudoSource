@@ -7,12 +7,12 @@ void __fastcall Scaleform::Render::RenderSync::RenderSync(Scaleform::Render::Ren
   Scaleform::ListAllocLH_POD<Scaleform::Render::FenceImpl,127,2> *v3; // [rsp+28h] [rbp+10h]
   Scaleform::ListAllocLH<Scaleform::Render::Fence,127,2> *v4; // [rsp+28h] [rbp+10h]
 
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::RenderSync,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::RenderSync::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::RenderSync,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::RenderSync::`vftable;
   v1 = &this->FenceFrames;
   v1->Root.pPrev = (Scaleform::Render::FenceFrame *)v1;
   v1->Root.pNext = (Scaleform::Render::FenceFrame *)v1;
@@ -40,7 +40,7 @@ void __fastcall Scaleform::Render::RenderSync::RenderSync(Scaleform::Render::Ren
 // RVA: 0x9FBC00
 void __fastcall Scaleform::Render::FenceWrapperList::~FenceWrapperList(Scaleform::Render::FenceWrapperList *this)
 {
-  this->vfptr = (Scaleform::Render::FenceWrapperListVtbl *)&Scaleform::Render::FenceWrapperList::`vftable';
+  this->vfptr = (Scaleform::Render::FenceWrapperListVtbl *)&Scaleform::Render::FenceWrapperList::`vftable;
 }
 
 // File Line: 230

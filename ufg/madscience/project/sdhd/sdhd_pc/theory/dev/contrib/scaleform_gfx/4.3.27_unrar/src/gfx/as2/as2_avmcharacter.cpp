@@ -4,13 +4,13 @@ void __fastcall Scaleform::GFx::AS2::AvmCharacter::AvmCharacter(Scaleform::GFx::
 {
   Scaleform::GFx::AS2::ObjectInterface *v2; // rax
 
-  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmDisplayObjBase::`vftable';
-  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmInteractiveObjBase::`vftable';
+  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmDisplayObjBase::`vftable;
+  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmInteractiveObjBase::`vftable;
   v2 = (Scaleform::GFx::AS2::ObjectInterface *)&this->vfptr;
-  v2->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::ObjectInterface::`vftable';
+  v2->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::ObjectInterface::`vftable;
   v2->pProto.pObject = 0i64;
-  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS2::AvmCharacter::`vftable'{for `Scaleform::GFx::AvmInteractiveObjBase'};
-  v2->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::AvmCharacter::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS2::AvmCharacter::`vftable{for `Scaleform::GFx::AvmInteractiveObjBase};
+  v2->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::AvmCharacter::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   this->pDispObj = pdispObj;
   this->EventHandlers.mHash.pTable = 0i64;
   Scaleform::GFx::DisplayObjectBase::BindAvmObj(
@@ -28,11 +28,11 @@ void __fastcall Scaleform::GFx::AS2::AvmCharacter::~AvmCharacter(Scaleform::GFx:
   unsigned int v4; // eax
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS2::AvmCharacter::`vftable'{for `Scaleform::GFx::AvmInteractiveObjBase'};
+  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS2::AvmCharacter::`vftable{for `Scaleform::GFx::AvmInteractiveObjBase};
   v2 = (Scaleform::GFx::AS2::ObjectInterface *)&this->vfptr;
-  this->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::AvmCharacter::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+  this->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::AvmCharacter::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::GFx::EventId,Scaleform::ArrayLH<Scaleform::GFx::AS2::Value,323,Scaleform::ArrayDefaultPolicy>,Scaleform::GFx::EventIdHashFunctor>,Scaleform::HashNode<Scaleform::GFx::EventId,Scaleform::ArrayLH<Scaleform::GFx::AS2::Value,323,Scaleform::ArrayDefaultPolicy>,Scaleform::GFx::EventIdHashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::EventId,Scaleform::ArrayLH<Scaleform::GFx::AS2::Value,323,Scaleform::ArrayDefaultPolicy>,Scaleform::GFx::EventIdHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::EventId,323>,Scaleform::HashsetCachedNodeEntry<Scaleform::HashNode<Scaleform::GFx::EventId,Scaleform::ArrayLH<Scaleform::GFx::AS2::Value,323,Scaleform::ArrayDefaultPolicy>,Scaleform::GFx::EventIdHashFunctor>,Scaleform::HashNode<Scaleform::GFx::EventId,Scaleform::ArrayLH<Scaleform::GFx::AS2::Value,323,Scaleform::ArrayDefaultPolicy>,Scaleform::GFx::EventIdHashFunctor>::NodeHashF>>::Clear((Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::GFx::EventId,Scaleform::ArrayLH<Scaleform::GFx::AS2::Value,323,Scaleform::ArrayDefaultPolicy>,Scaleform::GFx::EventIdHashFunctor>,Scaleform::HashNode<Scaleform::GFx::EventId,Scaleform::ArrayLH<Scaleform::GFx::AS2::Value,323,Scaleform::ArrayDefaultPolicy>,Scaleform::GFx::EventIdHashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::EventId,Scaleform::ArrayLH<Scaleform::GFx::AS2::Value,323,Scaleform::ArrayDefaultPolicy>,Scaleform::GFx::EventIdHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::EventId,323>,Scaleform::HashsetCachedNodeEntry<Scaleform::HashNode<Scaleform::GFx::EventId,Scaleform::ArrayLH<Scaleform::GFx::AS2::Value,323,Scaleform::ArrayDefaultPolicy>,Scaleform::GFx::EventIdHashFunctor>,Scaleform::HashNode<Scaleform::GFx::EventId,Scaleform::ArrayLH<Scaleform::GFx::AS2::Value,323,Scaleform::ArrayDefaultPolicy>,Scaleform::GFx::EventIdHashFunctor>::NodeHashF> > *)&this->EventHandlers.mHash.pTable);
-  v2->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::ObjectInterface::`vftable';
+  v2->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::ObjectInterface::`vftable;
   v3 = (Scaleform::GFx::AS2::RefCountBaseGC<323> *)&v2->pProto.pObject->vfptr;
   if ( v3 )
   {
@@ -43,7 +43,7 @@ void __fastcall Scaleform::GFx::AS2::AvmCharacter::~AvmCharacter(Scaleform::GFx:
       Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v3);
     }
   }
-  v1->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmDisplayObjBase::`vftable';
+  v1->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmDisplayObjBase::`vftable;
 }
 
 // File Line: 28
@@ -1199,7 +1199,7 @@ _BOOL8 __fastcall Scaleform::GFx::AS2::AvmCharacter::ExecuteEvent(Scaleform::GFx
               v21 = Scaleform::GFx::DisplayObject::CreateCharacterHandle(v20);
             Scaleform::GFx::LogBase<Scaleform::GFx::AS2::Environment>::LogAction(
               (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::Environment> *)&v6->vfptr,
-              "\n!!! ExecuteEvent started '%s' = %p for %s\n",
+              "\n!!! ExecuteEvent started %s = %p for %s\n",
               result.pNode->pData,
               v19->Function,
               v21->NamePath.pNode->pData);
@@ -1335,7 +1335,7 @@ LABEL_87:
                   v46 = Scaleform::GFx::DisplayObject::CreateCharacterHandle(v45);
                 Scaleform::GFx::LogBase<Scaleform::GFx::AS2::Environment>::LogAction(
                   (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::Environment> *)&v6->vfptr,
-                  "!!! ExecuteEvent finished '%s' = %p for %s\n\n",
+                  "!!! ExecuteEvent finished %s = %p for %s\n\n",
                   result.pNode->pData,
                   v44->Function,
                   v46->NamePath.pNode->pData);
@@ -1427,7 +1427,7 @@ LABEL_139:
               v54 = Scaleform::GFx::DisplayObject::CreateCharacterHandle(v53);
             Scaleform::GFx::LogBase<Scaleform::GFx::AS2::Environment>::LogAction(
               (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::Environment> *)&v6->vfptr,
-              "\n!!! ExecuteEvent started '%s' = %p for %s\n",
+              "\n!!! ExecuteEvent started %s = %p for %s\n",
               result.pNode->pData,
               v52->Function,
               v54->NamePath.pNode->pData);
@@ -1481,7 +1481,7 @@ LABEL_139:
               v62 = Scaleform::GFx::DisplayObject::CreateCharacterHandle(v61);
             Scaleform::GFx::LogBase<Scaleform::GFx::AS2::Environment>::LogAction(
               (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::Environment> *)&v6->vfptr,
-              "!!! ExecuteEvent finished '%s' = %p for %s\n\n",
+              "!!! ExecuteEvent finished %s = %p for %s\n\n",
               result.pNode->pData,
               v60->Function,
               v62->NamePath.pNode->pData);
@@ -1613,7 +1613,7 @@ char __fastcall Scaleform::GFx::AS2::AvmCharacter::ExecuteFunction(Scaleform::GF
   }
   v14 = (Scaleform::GFx::AS2::PagedStack<Scaleform::GFx::AS2::Value,32> *)(v7 + 1);
   v15 = ((v7[1] - v7[2]) >> 5) - 32 + 32 * v7[6];
-  v22 = &Scaleform::GFx::AS2::FnCall::`vftable';
+  v22 = &Scaleform::GFx::AS2::FnCall::`vftable;
   v23 = &v32;
   v24 = (Scaleform::GFx::AS2::ObjectInterface *)&v5->vfptr;
   v27 = 0;
@@ -1627,10 +1627,10 @@ char __fastcall Scaleform::GFx::AS2::AvmCharacter::ExecuteFunction(Scaleform::GF
     &v22,
     v4->pLocalFrame,
     0i64,
-    &Scaleform::GFx::AS2::FnCall::`vftable',
+    &Scaleform::GFx::AS2::FnCall::`vftable,
     &v32,
     &v5->vfptr);
-  v22 = &Scaleform::GFx::AS2::FnCall::`vftable';
+  v22 = &Scaleform::GFx::AS2::FnCall::`vftable;
   v16 = v27;
   if ( !(v27 & 2) )
   {
@@ -1661,7 +1661,7 @@ char __fastcall Scaleform::GFx::AS2::AvmCharacter::ExecuteFunction(Scaleform::GF
     }
   }
   v26 = 0i64;
-  v22 = &Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>::`vftable';
+  v22 = &Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>::`vftable;
   if ( (signed int)v8 > 0 )
   {
     do
@@ -1755,7 +1755,7 @@ char __fastcall Scaleform::GFx::AS2::AvmCharacter::ExecuteCFunction(Scaleform::G
   }
   v13 = (Scaleform::GFx::AS2::PagedStack<Scaleform::GFx::AS2::Value,32> *)(v6 + 1);
   v14 = (unsigned int)((v6[1] - v6[2]) >> 5) - 32 + 32 * (unsigned int)v6[6];
-  v21 = &Scaleform::GFx::AS2::FnCall::`vftable';
+  v21 = &Scaleform::GFx::AS2::FnCall::`vftable;
   v22 = &v31;
   v23 = (Scaleform::GFx::AS2::ObjectInterface *)&v4->vfptr;
   v26 = 0;
@@ -1765,7 +1765,7 @@ char __fastcall Scaleform::GFx::AS2::AvmCharacter::ExecuteCFunction(Scaleform::G
   v28 = v7;
   v29 = v14;
   ((void (__fastcall *)(void ***, __int64, Scaleform::GFx::AS2::ObjectInterfaceVtbl **))v34)(&v21, v14, &v4->vfptr);
-  v21 = &Scaleform::GFx::AS2::FnCall::`vftable';
+  v21 = &Scaleform::GFx::AS2::FnCall::`vftable;
   v15 = v26;
   if ( !(v26 & 2) )
   {
@@ -1796,7 +1796,7 @@ char __fastcall Scaleform::GFx::AS2::AvmCharacter::ExecuteCFunction(Scaleform::G
     }
   }
   v25 = 0i64;
-  v21 = &Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>::`vftable';
+  v21 = &Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>::`vftable;
   if ( (signed int)v7 > 0 )
   {
     do
@@ -2892,8 +2892,8 @@ void __fastcall Scaleform::GFx::AS2::GenericDisplayObj::GenericDisplayObj(Scalef
     pasRoot,
     pparent,
     (Scaleform::GFx::ResourceId)&id);
-  v6->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::AS2::GenericDisplayObj::`vftable'{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>'};
-  v6->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::AS2::GenericDisplayObj::`vftable'{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>'};
+  v6->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::AS2::GenericDisplayObj::`vftable{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>};
+  v6->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::AS2::GenericDisplayObj::`vftable{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>};
   if ( v5 )
     Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)&v5->vfptr);
   v6->pDef.pObject = (Scaleform::GFx::ShapeBaseCharacterDef *)v5;

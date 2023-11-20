@@ -48,15 +48,15 @@ void __fastcall Scaleform::SysAllocWinAPI::SysAllocWinAPI(Scaleform::SysAllocWin
 
   v3 = granularity;
   v4 = this;
-  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocBase::`vftable';
-  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocPaged::`vftable';
-  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocBase_SingletonSupport<Scaleform::SysAllocWinAPI,Scaleform::SysAllocPaged>::`vftable';
+  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocBase::`vftable;
+  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocPaged::`vftable;
+  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocBase_SingletonSupport<Scaleform::SysAllocWinAPI,Scaleform::SysAllocPaged>::`vftable;
   v5 = 0i64;
   this->pContainer = 0i64;
-  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocWinAPI::`vftable';
+  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocWinAPI::`vftable;
   v6 = (Scaleform::SysMemMapper *)&this->Mapper.vfptr;
-  v6->vfptr = (Scaleform::SysMemMapperVtbl *)&Scaleform::SysMemMapper::`vftable';
-  v6->vfptr = (Scaleform::SysMemMapperVtbl *)&Scaleform::SysMemMapperWinAPI::`vftable';
+  v6->vfptr = (Scaleform::SysMemMapperVtbl *)&Scaleform::SysMemMapper::`vftable;
+  v6->vfptr = (Scaleform::SysMemMapperVtbl *)&Scaleform::SysMemMapperWinAPI::`vftable;
   v7 = (Scaleform::SysAllocMapper *)this->PrivateData;
   if ( v4 != (Scaleform::SysAllocWinAPI *)-32i64 )
     Scaleform::SysAllocMapper::SysAllocMapper(v7, v6, segSize, v3, 1);

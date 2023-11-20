@@ -357,7 +357,7 @@ LABEL_35:
     v18 = v1->m_pSimObject;
     v19 = UFG::SceneObjectProperties::operator UFG::qSymbol const(v1, &result);
     UFG::CollectibleComponent::CollectibleComponent((UFG::CollectibleComponent *)v17, v19, v18);
-    v17->mNext = (UFG::allocator::free_link *)&UFG::CollectibleHidingSpotComponent::`vftable';
+    v17->mNext = (UFG::allocator::free_link *)&UFG::CollectibleHidingSpotComponent::`vftable;
     LOWORD(v17[25].mNext) = 0;
     UFG::SimComponent::AddType(
       (UFG::SimComponent *)v17,

@@ -15,11 +15,11 @@ void __fastcall CAkPBI::CAkPBI(CAkPBI *this, CAkSoundBase *in_pSound, CAkSource 
   CAkParameterNodeBase *v22; // rcx
 
   v12 = this;
-  this->vfptr = (CAkTransportAwareVtbl *)&CAkPBI::`vftable'{for `CAkTransportAware'};
+  this->vfptr = (CAkTransportAwareVtbl *)&CAkPBI::`vftable{for `CAkTransportAware};
   this->m_uRegisteredNotif = 0;
   this->m_pUsageSlot = 0i64;
   v13 = in_pSound;
-  this->vfptr = (ITransitionableVtbl *)&CAkContinuousPBI::`vftable'{for `ITransitionable'};
+  this->vfptr = (ITransitionableVtbl *)&CAkContinuousPBI::`vftable{for `ITransitionable};
   this->m_mapMutedNodes.m_pItems = 0i64;
   *(_QWORD *)&this->m_mapMutedNodes.m_uLength = 0i64;
   *(_QWORD *)&this->m_Ranges.VolumeOffset = 0i64;
@@ -232,8 +232,8 @@ void __fastcall CAkPBI::~CAkPBI(CAkPBI *this)
   AkExternalSourceArray *v3; // rcx
 
   v1 = this;
-  this->vfptr = (CAkTransportAwareVtbl *)&CAkPBI::`vftable'{for `CAkTransportAware'};
-  this->vfptr = (ITransitionableVtbl *)&CAkContinuousPBI::`vftable'{for `ITransitionable'};
+  this->vfptr = (CAkTransportAwareVtbl *)&CAkPBI::`vftable{for `CAkTransportAware};
+  this->vfptr = (ITransitionableVtbl *)&CAkContinuousPBI::`vftable{for `ITransitionable};
   v2 = this->m_cachedGameObjectPosition.m_aPos;
   if ( v2 )
   {
@@ -244,7 +244,7 @@ void __fastcall CAkPBI::~CAkPBI(CAkPBI *this)
   v3 = v1->m_UserParams.m_CustomParam.pExternalSrcs;
   if ( v3 )
     AkExternalSourceArray::Release(v3);
-  v1->vfptr = (CAkTransportAwareVtbl *)&CAkTransportAware::`vftable';
+  v1->vfptr = (CAkTransportAwareVtbl *)&CAkTransportAware::`vftable;
 }
 
 // File Line: 265
@@ -2750,27 +2750,27 @@ bool __fastcall CAkPBI::IsInitiallyUnderThreshold(CAkPBI *this, AkArray<AkRayVol
     v5 = v3->m_fEffectiveVoiceVolume;
   }
   v6 = FLOAT_1_0653532e9;
-  v7 = `AkMath::FastPow10'::`4'::`local static guard';
+  v7 = `AkMath::FastPow10::`4::`local static guard;
   v8 = (float)(v5 + v2->m_EffectiveParams.Volume) * 0.050000001;
   if ( v8 >= -37.0 )
   {
-    if ( !(`AkMath::FastPow10'::`4'::`local static guard' & 1) )
+    if ( !(`AkMath::FastPow10::`4::`local static guard & 1) )
     {
-      v7 = `AkMath::FastPow10'::`4'::`local static guard' | 1;
-      `AkMath::FastPow10'::`4'::SCALE = 1272224376;
-      `AkMath::FastPow10'::`4'::`local static guard' |= 1u;
+      v7 = `AkMath::FastPow10::`4::`local static guard | 1;
+      `AkMath::FastPow10::`4::SCALE = 1272224376;
+      `AkMath::FastPow10::`4::`local static guard |= 1u;
     }
     v9 = (float)((float)((float)((float)(COERCE_FLOAT(
-                                           ((signed int)(float)((float)(*(float *)&`AkMath::FastPow10'::`4'::SCALE * v8)
+                                           ((signed int)(float)((float)(*(float *)&`AkMath::FastPow10::`4::SCALE * v8)
                                                               + 1065353200.0) & 0x7FFFFF)
                                          + 1065353216)
                                        * 0.32518977)
                                + 0.020805772)
                        * COERCE_FLOAT(
-                           ((signed int)(float)((float)(*(float *)&`AkMath::FastPow10'::`4'::SCALE * v8) + 1065353200.0) & 0x7FFFFF)
+                           ((signed int)(float)((float)(*(float *)&`AkMath::FastPow10::`4::SCALE * v8) + 1065353200.0) & 0x7FFFFF)
                          + 1065353216))
                + 0.65304345)
-       * COERCE_FLOAT((signed int)(float)((float)(*(float *)&`AkMath::FastPow10'::`4'::SCALE * v8) + 1065353200.0) & 0xFF800000);
+       * COERCE_FLOAT((signed int)(float)((float)(*(float *)&`AkMath::FastPow10::`4::SCALE * v8) + 1065353200.0) & 0xFF800000);
   }
   else
   {
@@ -2794,7 +2794,7 @@ bool __fastcall CAkPBI::IsInitiallyUnderThreshold(CAkPBI *this, AkArray<AkRayVol
           if ( !(*((_BYTE *)v14 + 304) & 1) )
           {
             CAkBus::UpdateVoiceVolumes(v14);
-            v7 = `AkMath::FastPow10'::`4'::`local static guard';
+            v7 = `AkMath::FastPow10::`4::`local static guard;
             v6 = FLOAT_1_0653532e9;
           }
           v13 = v13 + v14->m_fEffectiveBusVolume;
@@ -2804,21 +2804,21 @@ bool __fastcall CAkPBI::IsInitiallyUnderThreshold(CAkPBI *this, AkArray<AkRayVol
         {
           if ( !(v7 & 1) )
           {
-            `AkMath::FastPow10'::`4'::SCALE = 1272224376;
-            `AkMath::FastPow10'::`4'::`local static guard' = v7 | 1;
+            `AkMath::FastPow10::`4::SCALE = 1272224376;
+            `AkMath::FastPow10::`4::`local static guard = v7 | 1;
           }
           v4 = (float)((float)((float)((float)(COERCE_FLOAT(
                                                  ((signed int)(float)((float)(v15
-                                                                            * *(float *)&`AkMath::FastPow10'::`4'::SCALE)
+                                                                            * *(float *)&`AkMath::FastPow10::`4::SCALE)
                                                                     + v6) & 0x7FFFFF)
                                                + 1065353216)
                                              * 0.32518977)
                                      + 0.020805772)
                              * COERCE_FLOAT(
-                                 ((signed int)(float)((float)(v15 * *(float *)&`AkMath::FastPow10'::`4'::SCALE) + v6) & 0x7FFFFF)
+                                 ((signed int)(float)((float)(v15 * *(float *)&`AkMath::FastPow10::`4::SCALE) + v6) & 0x7FFFFF)
                                + 1065353216))
                      + 0.65304345)
-             * COERCE_FLOAT((signed int)(float)((float)(v15 * *(float *)&`AkMath::FastPow10'::`4'::SCALE) + v6) & 0xFF800000);
+             * COERCE_FLOAT((signed int)(float)((float)(v15 * *(float *)&`AkMath::FastPow10::`4::SCALE) + v6) & 0xFF800000);
         }
         v16 = g_fVolumeThreshold < (float)(v4 * v10);
         return !v16;
@@ -2857,9 +2857,9 @@ void __fastcall CAkPBI::GetAuxSendsValues(CAkPBI *this, AkAuxSendValueEx *io_paE
 
   v2 = (float *)this->m_pGameObj->m_EnvironmentValues;
   v3 = io_paEnvVal;
-  v4 = `AkMath::FastPow10'::`4'::`local static guard';
+  v4 = `AkMath::FastPow10::`4::`local static guard;
   v5 = 0;
-  v6 = *(float *)&`AkMath::FastPow10'::`4'::SCALE;
+  v6 = *(float *)&`AkMath::FastPow10::`4::SCALE;
   if ( this->m_EffectiveParams.bGameDefinedAuxEnabled )
   {
     v7 = g_fVolumeThreshold;
@@ -2876,8 +2876,8 @@ void __fastcall CAkPBI::GetAuxSendsValues(CAkPBI *this, AkAuxSendValueEx *io_paE
         {
           v6 = FLOAT_2_7866352e7;
           v4 |= 1u;
-          `AkMath::FastPow10'::`4'::`local static guard' = v4;
-          `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
+          `AkMath::FastPow10::`4::`local static guard = v4;
+          `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
         }
         v11 = (float)((float)((float)((float)(COERCE_FLOAT(
                                                 ((signed int)(float)((float)(v6 * v10) + 1065353200.0) & 0x7FFFFF)
@@ -2922,8 +2922,8 @@ void __fastcall CAkPBI::GetAuxSendsValues(CAkPBI *this, AkAuxSendValueEx *io_paE
         {
           v6 = FLOAT_2_7866352e7;
           v4 |= 1u;
-          `AkMath::FastPow10'::`4'::`local static guard' = v4;
-          `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
+          `AkMath::FastPow10::`4::`local static guard = v4;
+          `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
         }
         v20 = (float)((float)((float)((float)(COERCE_FLOAT(
                                                 ((signed int)(float)((float)(v6 * v18) + 1065353200.0) & 0x7FFFFF)

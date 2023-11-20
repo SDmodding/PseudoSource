@@ -15,7 +15,7 @@ void __fastcall UFG::UIHKSniperWidget::~UIHKSniperWidget(UFG::UIHKSniperWidget *
 {
   UFG::UIHKScreenGlobalOverlay *v1; // rax
 
-  this->vfptr = (UFG::UIHKSniperWidgetVtbl *)&UFG::UIHKSniperWidget::`vftable';
+  this->vfptr = (UFG::UIHKSniperWidgetVtbl *)&UFG::UIHKSniperWidget::`vftable;
   v1 = UFG::UIHKScreenGlobalOverlay::mThis;
   if ( !UFG::UIHKScreenGlobalOverlay::mThis )
     v1 = &gGlobalOverlaySentinel;

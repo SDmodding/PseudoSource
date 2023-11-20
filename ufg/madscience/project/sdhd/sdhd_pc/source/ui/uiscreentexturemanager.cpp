@@ -491,8 +491,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v4;
   if ( v4 )
   {
-    v4->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v4->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenLoading>::`vftable';
+    v4->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v4->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenLoading>::`vftable;
   }
   else
   {
@@ -532,8 +532,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v10;
   if ( v10 )
   {
-    v10->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v10->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenGlobalOverlay>::`vftable';
+    v10->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v10->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenGlobalOverlay>::`vftable;
   }
   else
   {
@@ -568,8 +568,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v14;
   if ( v14 )
   {
-    v14->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v14->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenDialogBox>::`vftable';
+    v14->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v14->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenDialogBox>::`vftable;
   }
   else
   {
@@ -604,8 +604,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v18;
   if ( v18 )
   {
-    v18->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v18->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenDialogPopup>::`vftable';
+    v18->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v18->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenDialogPopup>::`vftable;
   }
   else
   {
@@ -640,8 +640,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v22;
   if ( v22 )
   {
-    v22->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v22->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenSplash>::`vftable';
+    v22->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v22->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenSplash>::`vftable;
   }
   else
   {
@@ -681,8 +681,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v28;
   if ( v28 )
   {
-    v28->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v28->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenHints>::`vftable';
+    v28->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v28->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenHints>::`vftable;
   }
   else
   {
@@ -722,8 +722,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v34;
   if ( v34 )
   {
-    v34->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v34->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenMainMenu>::`vftable';
+    v34->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v34->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenMainMenu>::`vftable;
   }
   else
   {
@@ -763,8 +763,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v40;
   if ( v40 )
   {
-    v40->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v40->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenStartFlow>::`vftable';
+    v40->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v40->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenStartFlow>::`vftable;
   }
   else
   {
@@ -799,8 +799,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v44;
   if ( v44 )
   {
-    v44->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v44->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenPauseMenu>::`vftable';
+    v44->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v44->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenPauseMenu>::`vftable;
   }
   else
   {
@@ -838,8 +838,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v50;
   if ( v50 )
   {
-    v50->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v50->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenHud>::`vftable';
+    v50->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v50->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenHud>::`vftable;
   }
   else
   {
@@ -879,8 +879,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v56;
   if ( v56 )
   {
-    v56->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v56->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenSaveLoad>::`vftable';
+    v56->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v56->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenSaveLoad>::`vftable;
   }
   else
   {
@@ -915,8 +915,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v60;
   if ( v60 )
   {
-    v60->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v60->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenWardrobe>::`vftable';
+    v60->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v60->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenWardrobe>::`vftable;
   }
   else
   {
@@ -956,8 +956,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v66;
   if ( v66 )
   {
-    v66->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v66->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenCaseComplete>::`vftable';
+    v66->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v66->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenCaseComplete>::`vftable;
   }
   else
   {
@@ -992,8 +992,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v70;
   if ( v70 )
   {
-    v70->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v70->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenWorldMap>::`vftable';
+    v70->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v70->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenWorldMap>::`vftable;
   }
   else
   {
@@ -1033,8 +1033,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v76;
   if ( v76 )
   {
-    v76->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v76->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenScriptableList>::`vftable';
+    v76->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v76->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenScriptableList>::`vftable;
   }
   else
   {
@@ -1069,8 +1069,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v80;
   if ( v80 )
   {
-    v80->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v80->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenGarageBrowser>::`vftable';
+    v80->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v80->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenGarageBrowser>::`vftable;
   }
   else
   {
@@ -1113,8 +1113,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v86;
   if ( v86 )
   {
-    v86->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v86->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenGameTracker>::`vftable';
+    v86->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v86->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenGameTracker>::`vftable;
   }
   else
   {
@@ -1149,8 +1149,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v90;
   if ( v90 )
   {
-    v90->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v90->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenCamera>::`vftable';
+    v90->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v90->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenCamera>::`vftable;
   }
   else
   {
@@ -1190,8 +1190,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v96;
   if ( v96 )
   {
-    v96->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v96->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenCameraCCTV>::`vftable';
+    v96->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v96->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenCameraCCTV>::`vftable;
   }
   else
   {
@@ -1234,8 +1234,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v102;
   if ( v102 )
   {
-    v102->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v102->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenOptionsAudio>::`vftable';
+    v102->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v102->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenOptionsAudio>::`vftable;
   }
   else
   {
@@ -1270,8 +1270,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v106;
   if ( v106 )
   {
-    v106->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v106->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenOptionsDisplay>::`vftable';
+    v106->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v106->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenOptionsDisplay>::`vftable;
   }
   else
   {
@@ -1306,8 +1306,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v110;
   if ( v110 )
   {
-    v110->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v110->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenOptionsDisplayAdvanced>::`vftable';
+    v110->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v110->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenOptionsDisplayAdvanced>::`vftable;
   }
   else
   {
@@ -1342,8 +1342,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v114;
   if ( v114 )
   {
-    v114->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v114->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenOptionsGame>::`vftable';
+    v114->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v114->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenOptionsGame>::`vftable;
   }
   else
   {
@@ -1378,8 +1378,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v118;
   if ( v118 )
   {
-    v118->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v118->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenOptionsController>::`vftable';
+    v118->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v118->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenOptionsController>::`vftable;
   }
   else
   {
@@ -1422,8 +1422,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v124;
   if ( v124 )
   {
-    v124->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v124->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenOptionsButtonMapping>::`vftable';
+    v124->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v124->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenOptionsButtonMapping>::`vftable;
   }
   else
   {
@@ -1466,8 +1466,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v130;
   if ( v130 )
   {
-    v130->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v130->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenOptionsCalibration>::`vftable';
+    v130->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v130->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenOptionsCalibration>::`vftable;
   }
   else
   {
@@ -1510,8 +1510,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v136;
   if ( v136 )
   {
-    v136->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v136->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenSocialHub>::`vftable';
+    v136->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v136->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenSocialHub>::`vftable;
   }
   else
   {
@@ -1546,8 +1546,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v140;
   if ( v140 )
   {
-    v140->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v140->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenStats>::`vftable';
+    v140->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v140->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenStats>::`vftable;
   }
   else
   {
@@ -1587,8 +1587,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v146;
   if ( v146 )
   {
-    v146->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v146->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenPhotoBrowser>::`vftable';
+    v146->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v146->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenPhotoBrowser>::`vftable;
   }
   else
   {
@@ -1631,8 +1631,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v152;
   if ( v152 )
   {
-    v152->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v152->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIScreenCredits>::`vftable';
+    v152->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v152->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIScreenCredits>::`vftable;
   }
   else
   {
@@ -1667,8 +1667,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v156;
   if ( v156 )
   {
-    v156->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v156->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenNISPause>::`vftable';
+    v156->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v156->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenNISPause>::`vftable;
   }
   else
   {
@@ -1703,8 +1703,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v160;
   if ( v160 )
   {
-    v160->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v160->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenMissionFailed>::`vftable';
+    v160->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v160->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenMissionFailed>::`vftable;
   }
   else
   {
@@ -1747,8 +1747,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v166;
   if ( v166 )
   {
-    v166->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v166->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenFightClub>::`vftable';
+    v166->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v166->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenFightClub>::`vftable;
   }
   else
   {
@@ -1791,8 +1791,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v172;
   if ( v172 )
   {
-    v172->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v172->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenMartialArts>::`vftable';
+    v172->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v172->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenMartialArts>::`vftable;
   }
   else
   {
@@ -1835,8 +1835,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v178;
   if ( v178 )
   {
-    v178->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v178->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenFightTutorial>::`vftable';
+    v178->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v178->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenFightTutorial>::`vftable;
   }
   else
   {
@@ -1871,8 +1871,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v182;
   if ( v182 )
   {
-    v182->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v182->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenCockFight>::`vftable';
+    v182->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v182->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenCockFight>::`vftable;
   }
   else
   {
@@ -1915,8 +1915,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v188;
   if ( v188 )
   {
-    v188->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v188->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenGameLog>::`vftable';
+    v188->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v188->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenGameLog>::`vftable;
   }
   else
   {
@@ -1959,8 +1959,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v194;
   if ( v194 )
   {
-    v194->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v194->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenFaceTracker>::`vftable';
+    v194->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v194->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenFaceTracker>::`vftable;
   }
   else
   {
@@ -2003,8 +2003,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v200;
   if ( v200 )
   {
-    v200->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v200->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenMissionComplete>::`vftable';
+    v200->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v200->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenMissionComplete>::`vftable;
   }
   else
   {
@@ -2039,8 +2039,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v204;
   if ( v204 )
   {
-    v204->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v204->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenUpgrades>::`vftable';
+    v204->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v204->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenUpgrades>::`vftable;
   }
   else
   {
@@ -2083,8 +2083,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v210;
   if ( v210 )
   {
-    v210->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v210->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenUnlockables>::`vftable';
+    v210->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v210->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenUnlockables>::`vftable;
   }
   else
   {
@@ -2127,8 +2127,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v216;
   if ( v216 )
   {
-    v216->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v216->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenOpeningCredits>::`vftable';
+    v216->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v216->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenOpeningCredits>::`vftable;
   }
   else
   {
@@ -2163,8 +2163,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v220;
   if ( v220 )
   {
-    v220->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v220->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenPCBenchmark>::`vftable';
+    v220->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v220->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenPCBenchmark>::`vftable;
   }
   else
   {
@@ -2199,8 +2199,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v224;
   if ( v224 )
   {
-    v224->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v224->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenPickLockMinigame>::`vftable';
+    v224->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v224->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenPickLockMinigame>::`vftable;
   }
   else
   {
@@ -2243,8 +2243,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v230;
   if ( v230 )
   {
-    v230->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v230->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenBugPlantingMinigame>::`vftable';
+    v230->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v230->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenBugPlantingMinigame>::`vftable;
   }
   else
   {
@@ -2287,8 +2287,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v236;
   if ( v236 )
   {
-    v236->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v236->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenPhoneTraceMinigame>::`vftable';
+    v236->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v236->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenPhoneTraceMinigame>::`vftable;
   }
   else
   {
@@ -2331,8 +2331,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v242;
   if ( v242 )
   {
-    v242->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v242->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenPhoneSignalMinigame>::`vftable';
+    v242->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v242->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenPhoneSignalMinigame>::`vftable;
   }
   else
   {
@@ -2375,8 +2375,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v248;
   if ( v248 )
   {
-    v248->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v248->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenSpyPC>::`vftable';
+    v248->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v248->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenSpyPC>::`vftable;
   }
   else
   {
@@ -2416,8 +2416,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v254;
   if ( v254 )
   {
-    v254->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v254->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenSpyCam>::`vftable';
+    v254->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v254->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenSpyCam>::`vftable;
   }
   else
   {
@@ -2457,8 +2457,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v260;
   if ( v260 )
   {
-    v260->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v260->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenKaraokeMinigame>::`vftable';
+    v260->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v260->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenKaraokeMinigame>::`vftable;
   }
   else
   {
@@ -2501,8 +2501,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v266;
   if ( v266 )
   {
-    v266->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v266->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenHackingMinigame>::`vftable';
+    v266->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v266->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenHackingMinigame>::`vftable;
   }
   else
   {
@@ -2545,8 +2545,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v272;
   if ( v272 )
   {
-    v272->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v272->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenPokerDiceMinigame>::`vftable';
+    v272->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v272->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenPokerDiceMinigame>::`vftable;
   }
   else
   {
@@ -2589,8 +2589,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v278;
   if ( v278 )
   {
-    v278->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v278->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenSafeCrackingMinigame>::`vftable';
+    v278->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v278->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenSafeCrackingMinigame>::`vftable;
   }
   else
   {
@@ -2633,8 +2633,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v284;
   if ( v284 )
   {
-    v284->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v284->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenDebugScreenList>::`vftable';
+    v284->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v284->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenDebugScreenList>::`vftable;
   }
   else
   {
@@ -2669,8 +2669,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v288;
   if ( v288 )
   {
-    v288->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v288->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenDebugNISList>::`vftable';
+    v288->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v288->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenDebugNISList>::`vftable;
   }
   else
   {
@@ -2705,8 +2705,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v292;
   if ( v292 )
   {
-    v292->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v292->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenDebugLanguageList>::`vftable';
+    v292->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v292->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenDebugLanguageList>::`vftable;
   }
   else
   {
@@ -2741,8 +2741,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v296;
   if ( v296 )
   {
-    v296->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v296->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenSandbox>::`vftable';
+    v296->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v296->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenSandbox>::`vftable;
   }
   else
   {
@@ -2777,8 +2777,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v300;
   if ( v300 )
   {
-    v300->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v300->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenSandbox>::`vftable';
+    v300->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v300->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenSandbox>::`vftable;
   }
   else
   {
@@ -2813,8 +2813,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v304;
   if ( v304 )
   {
-    v304->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v304->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenDemoClosing>::`vftable';
+    v304->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v304->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenDemoClosing>::`vftable;
   }
   else
   {
@@ -2857,8 +2857,8 @@ void __fastcall UFG::UIScreenTextureManager::Init(unsigned int texturePoolSize)
   vars0 = v310;
   if ( v310 )
   {
-    v310->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
-    v310->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenDemoHack_SkipGameslice>::`vftable';
+    v310->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
+    v310->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryWrapper<UFG::UIHKScreenDemoHack_SkipGameslice>::`vftable;
   }
   else
   {
@@ -3033,7 +3033,7 @@ void __fastcall UFG::UIScreenTextureManager::UIScreenTextureManager(UFG::UIScree
   v2 = texturePoolSize;
   v3 = this;
   UFG::UIScreenFactory::UIScreenFactory((UFG::UIScreenFactory *)&this->vfptr);
-  v3->vfptr = (UFG::UIScreenFactoryVtbl *)&UFG::UIScreenTextureManager::`vftable';
+  v3->vfptr = (UFG::UIScreenFactoryVtbl *)&UFG::UIScreenTextureManager::`vftable;
   v3->mGameState = 1;
   v3->mTexturePoolSize = v2;
   v3->mCurrentTexturePoolUsage = 0;
@@ -3072,7 +3072,7 @@ void __fastcall UFG::UIScreenTextureManager::~UIScreenTextureManager(UFG::UIScre
   _QWORD *v14; // rax
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenFactoryVtbl *)&UFG::UIScreenTextureManager::`vftable';
+  this->vfptr = (UFG::UIScreenFactoryVtbl *)&UFG::UIScreenTextureManager::`vftable;
   v2 = this->mQueued.mNode.mNext - 2;
   v3 = this->mTextures.mTree.mNULL.mChild;
   if ( v2 != (UFG::qNode<UFG::UIScreenTextureManager::ScreenInfo,UFG::UIScreenTextureManager::ScreenInfo> *)this->mTextures.mTree.mNULL.mChild )

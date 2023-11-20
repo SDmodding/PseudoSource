@@ -24,8 +24,8 @@ void __fastcall UFG::UIHKHelpBarData::UIHKHelpBarData(UFG::UIHKHelpBarData *this
   this->alignment = 1;
   this->isWeaponPickup = 0;
   v2 = 6i64;
-  `eh vector constructor iterator'(this->Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::qString);
-  `eh vector constructor iterator'(v1->Icons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::qString);
+  `eh vector constructor iterator(this->Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::qString);
+  `eh vector constructor iterator(v1->Icons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::qString);
   UFG::qString::qString(&v1->CustomTexturePack);
   v3 = v1->MessageIds;
   do
@@ -139,12 +139,12 @@ void __fastcall UFG::UIHKHelpBarWidget::~UIHKHelpBarWidget(UFG::UIHKHelpBarWidge
   UFG::qString::Set(&v1->mTexturePackName, &customWorldMapCaption);
   UFG::qString::~qString(&v1->mTexturePackName);
   UFG::qString::~qString(&v1->mOneFrameData.CustomTexturePack);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->mOneFrameData.Icons,
     0x28ui64,
     6,
     (void (__fastcall *)(void *))UFG::qString::~qString);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->mOneFrameData.Captions,
     0x28ui64,
     6,
@@ -382,7 +382,7 @@ void __fastcall UFG::UIHKHelpBarWidget::Flash_handleMouseMove(UFG::UIHKHelpBarWi
   v4 = screen->mRenderable->m_movie.pObject;
   if ( v4 )
   {
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( (v7 >> 6) & 1 )
     {
       (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v6 + 16i64))(v6, &ptr, COERCE_DOUBLE(*(_QWORD *)&v8));
@@ -401,7 +401,7 @@ void __fastcall UFG::UIHKHelpBarWidget::Flash_handleMouseMove(UFG::UIHKHelpBarWi
     v11 = 5;
     v12 = mouseY;
     Scaleform::GFx::Movie::Invoke(v4, "HelpBar_handleMouseMove", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 
@@ -422,7 +422,7 @@ void __fastcall UFG::UIHKHelpBarWidget::Flash_handleMouseClick(UFG::UIHKHelpBarW
   v4 = screen->mRenderable->m_movie.pObject;
   if ( v4 )
   {
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( (v7 >> 6) & 1 )
     {
       (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v6 + 16i64))(v6, &ptr, COERCE_DOUBLE(*(_QWORD *)&v8));
@@ -441,7 +441,7 @@ void __fastcall UFG::UIHKHelpBarWidget::Flash_handleMouseClick(UFG::UIHKHelpBarW
     v11 = 5;
     v12 = mouseY;
     Scaleform::GFx::Movie::Invoke(v4, "HelpBar_handleMouseClick", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 
@@ -587,12 +587,12 @@ void __fastcall UFG::UIHKHelpBarWidget::ShowWithMessage(UFG::UIHKHelpBarWidget *
   data.MessageIds[3] = (unsigned int)caption5;
   UFG::UIHKHelpBarWidget::Show(v24, &data);
   UFG::qString::~qString((UFG::qString *)&data.MessageIds[4]);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     &data.Captions[5].mStringHash32,
     0x28ui64,
     6,
     (void (__fastcall *)(void *))UFG::qString::~qString);
-  `eh vector destructor iterator'(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+  `eh vector destructor iterator(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
 }
 
 // File Line: 398
@@ -663,8 +663,8 @@ void __fastcall UFG::UIHKHelpBarWidget::Hide(UFG::UIHKHelpBarWidget *this, unsig
         if ( v6 )
         {
           UFG::qString::~qString(&v6->CustomTexturePack);
-          `eh vector destructor iterator'(v6->Icons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
-          `eh vector destructor iterator'(
+          `eh vector destructor iterator(v6->Icons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+          `eh vector destructor iterator(
             v6->Captions,
             0x28ui64,
             6,
@@ -731,8 +731,8 @@ void __fastcall UFG::UIHKHelpBarWidget::ShowOneFrame(UFG::UIHKHelpBarWidget *thi
   UFG::UIHKHelpBarData::operator=(&v16->mOneFrameData, &rval);
   v16->mRemappable = 1;
   UFG::qString::~qString(&rval.CustomTexturePack);
-  `eh vector destructor iterator'(rval.Icons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
-  `eh vector destructor iterator'(rval.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+  `eh vector destructor iterator(rval.Icons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+  `eh vector destructor iterator(rval.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
 }
 
 // File Line: 485
@@ -840,8 +840,8 @@ void __fastcall UFG::UIHKHelpBarWidget::ClearAll(UFG::UIHKHelpBarWidget *this)
         if ( v4 )
         {
           UFG::qString::~qString(&v4->CustomTexturePack);
-          `eh vector destructor iterator'(v4->Icons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
-          `eh vector destructor iterator'(
+          `eh vector destructor iterator(v4->Icons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+          `eh vector destructor iterator(
             v4->Captions,
             0x28ui64,
             6,
@@ -966,7 +966,7 @@ void __fastcall UFG::UIHKHelpBarWidget::Flash_Show(UFG::UIHKHelpBarWidget *this,
       v7 = 0;
     }
   }
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 24, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 24, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   v8 = &v28;
   v9 = 24i64;
   do
@@ -1088,7 +1088,7 @@ LABEL_36:
     value.pObjectInterface = 0i64;
   }
   value.Type = 0;
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 24, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 24, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 662

@@ -18,7 +18,7 @@ void __fastcall UFG::BlockHeader::BlockHeader(UFG::BlockHeader *this)
 // RVA: 0x146F7E0
 __int64 dynamic_initializer_for__UFG::StreamPool::smBlocks__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     UFG::StreamPool::smBlocks,
     0x58ui64,
     2304,
@@ -270,7 +270,7 @@ void __fastcall UFG::StreamPool_DBGDumpAllPools(UFG *this)
     v3 = *v1;
     if ( *v1 )
     {
-      UFG::qPrintf("Memory Report: '%s'\n", v3->mPoolName);
+      UFG::qPrintf("Memory Report: %s\n", v3->mPoolName);
       v4 = v3->mBlockHead.mNext;
       v5 = (signed __int64)&v3->mBlockHead;
       v6 = 0;

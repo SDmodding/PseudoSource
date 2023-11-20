@@ -80,7 +80,7 @@ void __fastcall finishLoadedObjecthkpLinearClearanceConstraintData(void *p, int 
     v2 = finishing;
     v3 = (char *)p;
     hkpConstraintData::hkpConstraintData((hkpConstraintData *)p, (hkFinishLoadedObjectFlag)finishing);
-    *(_QWORD *)v3 = &hkpLinearClearanceConstraintData::`vftable';
+    *(_QWORD *)v3 = &hkpLinearClearanceConstraintData::`vftable;
     hkpLinearClearanceConstraintData::Atoms::Atoms(
       (hkpLinearClearanceConstraintData::Atoms *)(v3 + 32),
       (hkFinishLoadedObjectFlag)v2);
@@ -102,7 +102,7 @@ hkBaseObjectVtbl *__fastcall getVtablehkpLinearClearanceConstraintData()
   hkpLinearClearanceConstraintData::Atoms v2; // [rsp+40h] [rbp-128h]
 
   hkpConstraintData::hkpConstraintData(&v1, 0);
-  v1.vfptr = (hkBaseObjectVtbl *)&hkpLinearClearanceConstraintData::`vftable';
+  v1.vfptr = (hkBaseObjectVtbl *)&hkpLinearClearanceConstraintData::`vftable;
   hkpLinearClearanceConstraintData::Atoms::Atoms(&v2, 0);
   return v1.vfptr;
 }

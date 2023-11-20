@@ -8,7 +8,7 @@ void __fastcall hkpBinaryAction::hkpBinaryAction(hkpBinaryAction *this, hkpEntit
 
   v4 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpAction::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpAction::`vftable;
   this->m_userData = userData;
   this->m_world = 0i64;
   this->m_island = 0i64;
@@ -17,7 +17,7 @@ void __fastcall hkpBinaryAction::hkpBinaryAction(hkpBinaryAction *this, hkpEntit
   hkStringPtr::hkStringPtr(&this->m_name);
   v4->m_entityA = v6;
   v4->m_entityB = v5;
-  v4->vfptr = (hkBaseObjectVtbl *)&hkpBinaryAction::`vftable';
+  v4->vfptr = (hkBaseObjectVtbl *)&hkpBinaryAction::`vftable;
   if ( v5 || v6 )
     hkpBinaryAction::_referenceBodies(v4);
 }

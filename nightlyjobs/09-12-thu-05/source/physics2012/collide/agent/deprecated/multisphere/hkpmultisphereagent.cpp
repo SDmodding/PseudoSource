@@ -63,7 +63,7 @@ hkpMultiSphereAgent *__fastcall hkpMultiSphereAgent::createListBAgent(hkpCdBody 
   if ( result )
   {
     hkpMultiSphereAgent::hkpMultiSphereAgent(result, v7, v4, v6, v5);
-    v10->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpMultiSphereAgent>::`vftable';
+    v10->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpMultiSphereAgent>::`vftable;
     result = (hkpMultiSphereAgent *)v10;
   }
   return result;
@@ -114,7 +114,7 @@ void __fastcall hkpMultiSphereAgent::hkpMultiSphereAgent(hkpMultiSphereAgent *th
   v5 = &this->m_agents;
   this->m_contactMgr = mgr;
   v6 = 0;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpMultiSphereAgent::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpMultiSphereAgent::`vftable;
   v5->m_size = 0;
   v5->m_capacityAndFlags = -2147483644;
   v5->m_data = this->m_agents.m_storage;

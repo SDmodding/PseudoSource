@@ -261,7 +261,7 @@ void UFG::AISidewalkGraph::Initialize(void)
     if ( gAISidewalkEdgeDataGrid->mGridNodes )
     {
       v3 = &v2[-1].mNode.mNext;
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         v2,
         0x10ui64,
         (int)v2[-1].mNode.mNext,
@@ -277,7 +277,7 @@ void UFG::AISidewalkGraph::Initialize(void)
     if ( gAISidewalkEdgeCrosswalkDataGrid->mGridNodes )
     {
       v6 = &v5[-1].mNode.mNext;
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         v5,
         0x10ui64,
         (int)v5[-1].mNode.mNext,
@@ -605,12 +605,12 @@ LABEL_102:
   v5 = v72;
 LABEL_97:
   v5->mPtr = 0i64;
-  v63 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+  v63 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
   {
     v64 = UFG::qResourceWarehouse::Instance();
     v63 = UFG::qResourceWarehouse::GetInventory(v64, 0x43E99F7Eu);
-    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v63;
+    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v63;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v5->mPrev, v63);
   v5->mObjUID = -1;
@@ -999,22 +999,22 @@ char __fastcall UFG::AISidewalkGraph::CalculateDestinationPoint(UFG::SidewalkCom
   v12 = v8->mObjUID;
   v13 = v8->mIndex;
   v137 = 0i64;
-  v14 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+  v14 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
   {
     v15 = UFG::qResourceWarehouse::Instance();
     v14 = UFG::qResourceWarehouse::GetInventory(v15, 0x43E99F7Eu);
-    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v14;
+    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v14;
   }
   UFG::qResourceHandle::Close(&v134, v14);
   LOWORD(v135) = v13;
   v136 = v12;
-  v16 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+  v16 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
   {
     v17 = UFG::qResourceWarehouse::Instance();
     v16 = UFG::qResourceWarehouse::GetInventory(v17, 0x43E99F7Eu);
-    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v16;
+    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v16;
   }
   UFG::qResourceHandle::Init(&v134, 0x43E99F7Eu, v11, v16);
   UFG::qResourceHandle::qResourceHandle(&v122);
@@ -1026,22 +1026,22 @@ char __fastcall UFG::AISidewalkGraph::CalculateDestinationPoint(UFG::SidewalkCom
   v19 = v9->mObjUID;
   v20 = v9->mIndex;
   v125 = 0i64;
-  v21 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+  v21 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
   {
     v22 = UFG::qResourceWarehouse::Instance();
     v21 = UFG::qResourceWarehouse::GetInventory(v22, 0x43E99F7Eu);
-    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v21;
+    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v21;
   }
   UFG::qResourceHandle::Close(&v122, v21);
   LOWORD(v123) = v20;
   v124 = v19;
-  v23 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+  v23 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
   {
     v24 = UFG::qResourceWarehouse::Instance();
     v23 = UFG::qResourceWarehouse::GetInventory(v24, 0x43E99F7Eu);
-    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v23;
+    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v23;
   }
   UFG::qResourceHandle::Init(&v122, 0x43E99F7Eu, v18, v23);
   UFG::qResourceHandle::qResourceHandle(&v130);
@@ -1057,22 +1057,22 @@ char __fastcall UFG::AISidewalkGraph::CalculateDestinationPoint(UFG::SidewalkCom
   v27 = *(_DWORD *)(v25 + 36);
   v28 = *(_WORD *)(v25 + 32);
   v133 = 0i64;
-  v29 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+  v29 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
   {
     v30 = UFG::qResourceWarehouse::Instance();
     v29 = UFG::qResourceWarehouse::GetInventory(v30, 0x43E99F7Eu);
-    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v29;
+    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v29;
   }
   UFG::qResourceHandle::Close(&v130, v29);
   LOWORD(v131) = v28;
   v132 = v27;
-  v31 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+  v31 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
   {
     v32 = UFG::qResourceWarehouse::Instance();
     v31 = UFG::qResourceWarehouse::GetInventory(v32, 0x43E99F7Eu);
-    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v31;
+    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v31;
   }
   UFG::qResourceHandle::Init(&v130, 0x43E99F7Eu, v26, v31);
   UFG::qResourceHandle::qResourceHandle(&v126);
@@ -1089,22 +1089,22 @@ char __fastcall UFG::AISidewalkGraph::CalculateDestinationPoint(UFG::SidewalkCom
   v36 = *(_DWORD *)(v34 + 36);
   v37 = *(_WORD *)(v34 + 32);
   v129 = 0i64;
-  v38 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+  v38 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
   {
     v39 = UFG::qResourceWarehouse::Instance();
     v38 = UFG::qResourceWarehouse::GetInventory(v39, 0x43E99F7Eu);
-    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v38;
+    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v38;
   }
   UFG::qResourceHandle::Close(&v126, v38);
   LOWORD(v127) = v37;
   v128 = v36;
-  v40 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+  v40 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
   {
     v41 = UFG::qResourceWarehouse::Instance();
     v40 = UFG::qResourceWarehouse::GetInventory(v41, 0x43E99F7Eu);
-    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v40;
+    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v40;
   }
   UFG::qResourceHandle::Init(&v126, 0x43E99F7Eu, v35, v40);
   if ( !v133 && !v129 )
@@ -1161,34 +1161,34 @@ char __fastcall UFG::AISidewalkGraph::CalculateDestinationPoint(UFG::SidewalkCom
         v92 = *(_DWORD *)(v89 + 16);
         v93 = *(_DWORD *)(v89 + 12);
         v121 = 0i64;
-        v94 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-        if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+        v94 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+        if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
         {
           v95 = UFG::qResourceWarehouse::Instance();
           v94 = UFG::qResourceWarehouse::GetInventory(v95, 0x43E99F7Eu);
-          `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v94;
+          `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v94;
         }
         UFG::qResourceHandle::Close(&v118, v94);
         LOWORD(v119) = -1;
         objUID = v93;
-        v96 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-        if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+        v96 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+        if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
         {
           v97 = UFG::qResourceWarehouse::Instance();
           v96 = UFG::qResourceWarehouse::GetInventory(v97, 0x43E99F7Eu);
-          `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v96;
+          `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v96;
         }
         UFG::qResourceHandle::Init(&v118, 0x43E99F7Eu, v92, v96);
       }
       else
       {
         v121 = 0i64;
-        v90 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-        if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+        v90 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+        if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
         {
           v91 = UFG::qResourceWarehouse::Instance();
           v90 = UFG::qResourceWarehouse::GetInventory(v91, 0x43E99F7Eu);
-          `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v90;
+          `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v90;
         }
         UFG::qResourceHandle::Close(&v118, v90);
         LOWORD(v119) = -1;
@@ -1207,12 +1207,12 @@ char __fastcall UFG::AISidewalkGraph::CalculateDestinationPoint(UFG::SidewalkCom
         if ( !v100 )
         {
           v121 = 0i64;
-          v101 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-          if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+          v101 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+          if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
           {
             v102 = UFG::qResourceWarehouse::Instance();
             v101 = UFG::qResourceWarehouse::GetInventory(v102, 0x43E99F7Eu);
-            `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v101;
+            `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v101;
           }
           UFG::qResourceHandle::Close(&v118, v101);
           LOWORD(v119) = -1;
@@ -1225,22 +1225,22 @@ char __fastcall UFG::AISidewalkGraph::CalculateDestinationPoint(UFG::SidewalkCom
         v82 = *(_DWORD *)(v100 + 12);
         v121 = 0i64;
 LABEL_112:
-        v103 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-        if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+        v103 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+        if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
         {
           v104 = UFG::qResourceWarehouse::Instance();
           v103 = UFG::qResourceWarehouse::GetInventory(v104, 0x43E99F7Eu);
-          `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v103;
+          `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v103;
         }
         UFG::qResourceHandle::Close(&v118, v103);
-        v105 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
+        v105 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
         objUID = v82;
         LOWORD(v119) = -1;
-        if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+        if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
         {
           v106 = UFG::qResourceWarehouse::Instance();
           v105 = UFG::qResourceWarehouse::GetInventory(v106, 0x43E99F7Eu);
-          `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v105;
+          `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v105;
         }
         UFG::qResourceHandle::Init(&v118, 0x43E99F7Eu, v81, v105);
         goto LABEL_117;
@@ -1311,34 +1311,34 @@ LABEL_112:
       v70 = *(_DWORD *)(v67 + 16);
       v71 = *(_DWORD *)(v67 + 12);
       v121 = 0i64;
-      v72 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+      v72 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+      if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
       {
         v73 = UFG::qResourceWarehouse::Instance();
         v72 = UFG::qResourceWarehouse::GetInventory(v73, 0x43E99F7Eu);
-        `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v72;
+        `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v72;
       }
       UFG::qResourceHandle::Close(&v118, v72);
       LOWORD(v119) = -1;
       objUID = v71;
-      v74 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+      v74 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+      if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
       {
         v75 = UFG::qResourceWarehouse::Instance();
         v74 = UFG::qResourceWarehouse::GetInventory(v75, 0x43E99F7Eu);
-        `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v74;
+        `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v74;
       }
       UFG::qResourceHandle::Init(&v118, 0x43E99F7Eu, v70, v74);
     }
     else
     {
       v121 = 0i64;
-      v68 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+      v68 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+      if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
       {
         v69 = UFG::qResourceWarehouse::Instance();
         v68 = UFG::qResourceWarehouse::GetInventory(v69, 0x43E99F7Eu);
-        `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v68;
+        `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v68;
       }
       UFG::qResourceHandle::Close(&v118, v68);
       LOWORD(v119) = -1;
@@ -1357,12 +1357,12 @@ LABEL_112:
       if ( !v78 )
       {
         v121 = 0i64;
-        v79 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-        if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+        v79 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+        if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
         {
           v80 = UFG::qResourceWarehouse::Instance();
           v79 = UFG::qResourceWarehouse::GetInventory(v80, 0x43E99F7Eu);
-          `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v79;
+          `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v79;
         }
         UFG::qResourceHandle::Close(&v118, v79);
         LOWORD(v119) = -1;
@@ -1388,48 +1388,48 @@ LABEL_120:
   UFG::AISidewalkGraph::GetDestinationPointFromNode(v8, destPos, isGroupLeader);
   v107 = 1;
 LABEL_121:
-  v108 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+  v108 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
   {
     v109 = UFG::qResourceWarehouse::Instance();
     v108 = UFG::qResourceWarehouse::GetInventory(v109, 0x43E99F7Eu);
-    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v108;
+    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v108;
   }
   UFG::qResourceHandle::Close(&v126, v108);
   UFG::qResourceHandle::~qResourceHandle(&v126);
-  v110 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+  v110 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
   {
     v111 = UFG::qResourceWarehouse::Instance();
     v110 = UFG::qResourceWarehouse::GetInventory(v111, 0x43E99F7Eu);
-    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v110;
+    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v110;
   }
   UFG::qResourceHandle::Close(&v130, v110);
   UFG::qResourceHandle::~qResourceHandle(&v130);
-  v112 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+  v112 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
   {
     v113 = UFG::qResourceWarehouse::Instance();
     v112 = UFG::qResourceWarehouse::GetInventory(v113, 0x43E99F7Eu);
-    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v112;
+    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v112;
   }
   UFG::qResourceHandle::Close(&v122, v112);
   UFG::qResourceHandle::~qResourceHandle(&v122);
-  v114 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+  v114 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
   {
     v115 = UFG::qResourceWarehouse::Instance();
     v114 = UFG::qResourceWarehouse::GetInventory(v115, 0x43E99F7Eu);
-    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v114;
+    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v114;
   }
   UFG::qResourceHandle::Close(&v134, v114);
   UFG::qResourceHandle::~qResourceHandle(&v134);
-  v116 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+  v116 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
   {
     v117 = UFG::qResourceWarehouse::Instance();
     v116 = UFG::qResourceWarehouse::GetInventory(v117, 0x43E99F7Eu);
-    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v116;
+    `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v116;
   }
   UFG::qResourceHandle::Close(&v118, v116);
   UFG::qResourceHandle::~qResourceHandle(&v118);
@@ -1953,12 +1953,12 @@ void __fastcall UFG::AISidewalkGraph::HandleAlteredDataOnAdd(UFG::AISidewalkSect
         else
         {
           v1->mpNode.mPtr = 0i64;
-          v14 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-          if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+          v14 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+          if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
           {
             v15 = UFG::qResourceWarehouse::Instance();
             v14 = UFG::qResourceWarehouse::GetInventory(v15, 0x43E99F7Eu);
-            `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v14;
+            `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v14;
           }
           UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mpNode.mPrev, v14);
           v1->mpNode.mIndex = -1;

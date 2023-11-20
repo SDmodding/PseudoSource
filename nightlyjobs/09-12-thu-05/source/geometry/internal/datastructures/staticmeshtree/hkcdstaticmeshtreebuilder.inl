@@ -1088,8 +1088,8 @@ LABEL_124:
           LODWORD(v397.m_data.m_data[(signed __int64)(v167 & 0x3FFFFFFF) >> 5]) |= 1 << (v167 & 0x1F);
           LODWORD(v397.m_data.m_data[(signed __int64)v169 >> 5]) |= 1 << (v169 & 0x1F);
           v171 = array;
-          *(_BYTE *)((v167 & 0x3FFFFFFF) + *(_QWORD *)array) = `hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::Utilities::buildStep12<hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::BuildGeometryProvider<hkpBvCompressedMeshShape_Internals::GeometryProvider>>'::`65'::rotationsMap[v167 >> 30];
-          *(_BYTE *)((v168 & 0x3FFFFFFF) + *v171) = `hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::Utilities::buildStep12<hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::BuildGeometryProvider<hkpBvCompressedMeshShape_Internals::GeometryProvider>>'::`65'::rotationsMap[(signed int)(((unsigned int)v168 >> 30) + 2) % 3];
+          *(_BYTE *)((v167 & 0x3FFFFFFF) + *(_QWORD *)array) = `hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::Utilities::buildStep12<hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::BuildGeometryProvider<hkpBvCompressedMeshShape_Internals::GeometryProvider>>::`65::rotationsMap[v167 >> 30];
+          *(_BYTE *)((v168 & 0x3FFFFFFF) + *v171) = `hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::Utilities::buildStep12<hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::BuildGeometryProvider<hkpBvCompressedMeshShape_Internals::GeometryProvider>>::`65::rotationsMap[(signed int)(((unsigned int)v168 >> 30) + 2) % 3];
         }
         ++v165;
         v40 += 12i64;
@@ -2889,7 +2889,7 @@ LABEL_48:
   v628 = _mm_sub_ps(v626, v62);
   v639 = _mm_mul_ps(
            v628,
-           (__m128)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::setupParameters'::`2'::invBitScalesBuffer);
+           (__m128)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::setupParameters::`2::invBitScalesBuffer);
   v63 = quads->m_size;
   v64 = v63;
   if ( (_DWORD)v63 )
@@ -3416,7 +3416,7 @@ LABEL_151:
       v513 = v135;
       v650 = _mm_mul_ps(
                _mm_sub_ps(v141, v139),
-               (__m128)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::setupParameters'::`2'::invBitScalesBuffer);
+               (__m128)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::setupParameters::`2::invBitScalesBuffer);
       *((__m128 *)v140 + 3) = v139;
       *(_QWORD *)(v140 + 60) = v650.m128_u64[0];
       *((_DWORD *)v140 + 17) = (unsigned __int128)_mm_movehl_ps(v650, v650);
@@ -3569,8 +3569,8 @@ LABEL_151:
               v237 = _mm_max_ps(v628, aabbOut.m_quad);
               v238 = v639;
               v239 = v638;
-              v240 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode'::`2'::maskZ);
-              v241 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode'::`2'::maskY);
+              v240 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskZ);
+              v241 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskY);
               do
               {
                 v242 = _mm_rcp_ps(v237);
@@ -3624,7 +3624,7 @@ LABEL_151:
                                  _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32(v256, 0xAu), 85), v240),
                                  _mm_and_si128(
                                    v256,
-                                   (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode'::`2'::maskX)),
+                                   (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskX)),
                                _mm_and_si128(_mm_srli_epi32(_mm_slli_si128(v256, 2), 5u), v241))),
                            v238),
                          v239);
@@ -3755,13 +3755,13 @@ LABEL_151:
                                _mm_or_si128(
                                  _mm_and_si128(
                                    _mm_shuffle_epi32(_mm_srli_epi32(v213, 0x16u), 0),
-                                   (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode'::`2'::maskZ),
+                                   (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskZ),
                                  _mm_and_si128(
                                    v213,
-                                   (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode'::`2'::maskX)),
+                                   (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskX)),
                                _mm_and_si128(
                                  _mm_shuffle_epi32(_mm_srli_epi32(v213, 0xBu), 0),
-                                 (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode'::`2'::maskY))),
+                                 (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskY))),
                            v637),
                          v636);
                 v189 = _mm_min_ps(v189, v214);
@@ -3821,13 +3821,13 @@ LABEL_151:
                                  _mm_or_si128(
                                    _mm_and_si128(
                                      _mm_shuffle_epi32(_mm_srli_epi32(v228, 0xAu), 85),
-                                     (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode'::`2'::maskZ),
+                                     (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskZ),
                                    _mm_and_si128(
                                      v228,
-                                     (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode'::`2'::maskX)),
+                                     (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskX)),
                                  _mm_and_si128(
                                    _mm_srli_epi32(_mm_slli_si128(v228, 2), 5u),
-                                   (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode'::`2'::maskY))),
+                                   (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskY))),
                              v639),
                            v638);
                   v189 = _mm_min_ps(v189, v229);
@@ -4126,7 +4126,7 @@ LABEL_284:
               v312 = (unsigned __int64)(2i64 * (v598.m_numVertices + 1)) >> 3;
               v652 = _mm_mul_ps(
                        v311,
-                       (__m128)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned short,5,5>::setupParameters'::`2'::invBitScalesBuffer);
+                       (__m128)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned short,5,5>::setupParameters::`2::invBitScalesBuffer);
               v313 = v164[2];
               v314 = v313 + v312;
               v315 = v164[3] & 0x3FFFFFFF;
@@ -4243,7 +4243,7 @@ LABEL_296:
               v335 = (unsigned __int64)(4i64 * (v598.m_numVertices + 1)) >> 3;
               v646 = _mm_mul_ps(
                        v334,
-                       (__m128)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::setupParameters'::`2'::invBitScalesBuffer);
+                       (__m128)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::setupParameters::`2::invBitScalesBuffer);
               v336 = v164[2];
               v337 = v336 + v335;
               v338 = v164[3] & 0x3FFFFFFF;
@@ -4302,13 +4302,13 @@ LABEL_314:
                                    _mm_or_si128(
                                      _mm_and_si128(
                                        _mm_shuffle_epi32(_mm_srli_epi32(v349, 0x16u), 0),
-                                       (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode'::`2'::maskZ),
+                                       (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskZ),
                                      _mm_and_si128(
                                        v349,
-                                       (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode'::`2'::maskX)),
+                                       (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskX)),
                                    _mm_and_si128(
                                      _mm_shuffle_epi32(_mm_srli_epi32(v349, 0xBu), 0),
-                                     (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode'::`2'::maskY))),
+                                     (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskY))),
                                v646),
                              v645),
                            v345);
@@ -5076,7 +5076,7 @@ LABEL_469:
     v494 = (hkPointerMap<int,int,hkContainerHeapAllocator> *)&array[v493];
     do
     {
-      hkPointerMap<int,int,hkContainerHeapAllocator>::`scalar deleting destructor'(v494, 0);
+      hkPointerMap<int,int,hkContainerHeapAllocator>::`scalar deleting destructor(v494, 0);
       --v494;
       --v493;
     }
@@ -5284,7 +5284,7 @@ __int64 __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned in
   *(_QWORD *)&config.m_pbd = 0i64;
   *(_DWORD *)&config.m_weldVertices.m_bool = 0;
   *(_QWORD *)&config.m_convexRadius = 0i64;
-  *(_QWORD *)&config.m_globalOptimizations.m_bool = &hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::BuildGeometryProvider<hkpBvCompressedMeshShape_Internals::GeometryProvider>::`vftable';
+  *(_QWORD *)&config.m_globalOptimizations.m_bool = &hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::BuildGeometryProvider<hkpBvCompressedMeshShape_Internals::GeometryProvider>::`vftable;
   config.m_maxCompressionError = 0.0;
   v158 = 2147483648;
   v159 = 0;
@@ -5699,17 +5699,17 @@ LABEL_152:
           v103 = 1;
         hkStringBuf::appendPrintf(
           (hkStringBuf *)&v160.m_convexRadius,
-          "Compression 'CM_GLOBAL' : %d (%d%%)\n",
+          "Compression CM_GLOBAL : %d (%d%%)\n",
           (unsigned int)v160.m_vrp,
           (unsigned int)((100 * v160.m_vrp + 50) / v103));
         hkStringBuf::appendPrintf(
           (hkStringBuf *)&v160.m_convexRadius,
-          "Compression 'CM_LOCAL_4' : %d (%d%%)\n",
+          "Compression CM_LOCAL_4 : %d (%d%%)\n",
           (unsigned int)v160.m_pbd,
           (unsigned int)((100 * v160.m_pbd + 50) / v103));
         hkStringBuf::appendPrintf(
           (hkStringBuf *)&v160.m_convexRadius,
-          "Compression 'CM_LOCAL_2' : %d (%d%%)\n",
+          "Compression CM_LOCAL_2 : %d (%d%%)\n",
           (unsigned int)v160.m_verbosity,
           (unsigned int)((100 * v160.m_verbosity + 50) / v103));
         hkStringBuf::appendPrintf(

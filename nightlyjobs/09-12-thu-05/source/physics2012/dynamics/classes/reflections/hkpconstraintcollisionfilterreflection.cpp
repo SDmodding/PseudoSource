@@ -35,12 +35,12 @@ void __fastcall finishLoadedObjecthkpConstraintCollisionFilter(void *p, int fini
     *((_DWORD *)p + 21) = -1;
     *((_QWORD *)p + 9) = 0i64;
     *((_DWORD *)p + 20) = 0;
-    *(_QWORD *)p = &hkpConstraintCollisionFilter::`vftable'{for `hkReferencedObject'};
-    *((_QWORD *)p + 2) = &hkpConstraintCollisionFilter::`vftable'{for `hkpCollidableCollidableFilter'};
-    *((_QWORD *)p + 3) = &hkpConstraintCollisionFilter::`vftable'{for `hkpShapeCollectionFilter'};
-    *((_QWORD *)p + 4) = &hkpConstraintCollisionFilter::`vftable'{for `hkpRayShapeCollectionFilter'};
-    *((_QWORD *)p + 5) = &hkpConstraintCollisionFilter::`vftable'{for `hkpRayCollidableFilter'};
-    *((_QWORD *)p + 12) = &hkpConstraintCollisionFilter::`vftable';
+    *(_QWORD *)p = &hkpConstraintCollisionFilter::`vftable{for `hkReferencedObject};
+    *((_QWORD *)p + 2) = &hkpConstraintCollisionFilter::`vftable{for `hkpCollidableCollidableFilter};
+    *((_QWORD *)p + 3) = &hkpConstraintCollisionFilter::`vftable{for `hkpShapeCollectionFilter};
+    *((_QWORD *)p + 4) = &hkpConstraintCollisionFilter::`vftable{for `hkpRayShapeCollectionFilter};
+    *((_QWORD *)p + 5) = &hkpConstraintCollisionFilter::`vftable{for `hkpRayCollidableFilter};
+    *((_QWORD *)p + 12) = &hkpConstraintCollisionFilter::`vftable;
   }
 }
 
@@ -55,7 +55,7 @@ void __fastcall cleanupLoadedObjecthkpConstraintCollisionFilter(void *p)
 // RVA: 0xD50730
 void **__fastcall getVtablehkpConstraintCollisionFilter()
 {
-  return &hkpConstraintCollisionFilter::`vftable'{for `hkReferencedObject'};
+  return &hkpConstraintCollisionFilter::`vftable{for `hkReferencedObject};
 }
 
 // File Line: 90

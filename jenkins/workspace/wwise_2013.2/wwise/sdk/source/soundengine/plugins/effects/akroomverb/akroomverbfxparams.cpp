@@ -6,7 +6,7 @@ AK::IAkPluginParam *__fastcall CreateRoomVerbFXParams(AK::IAkPluginMemAlloc *in_
 
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 200ui64);
   if ( result )
-    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkRoomVerbFXParams::`vftable';
+    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkRoomVerbFXParams::`vftable;
   return result;
 }
 
@@ -14,21 +14,21 @@ AK::IAkPluginParam *__fastcall CreateRoomVerbFXParams(AK::IAkPluginMemAlloc *in_
 // RVA: 0xAE0250
 void __fastcall CAkRoomVerbFXParams::CAkRoomVerbFXParams(CAkRoomVerbFXParams *this)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkRoomVerbFXParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkRoomVerbFXParams::`vftable;
 }
 
 // File Line: 30
 // RVA: 0xAE0270
 void __fastcall CAkRoomVerbFXParams::~CAkRoomVerbFXParams(CAkRoomVerbFXParams *this)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable;
 }
 
 // File Line: 35
 // RVA: 0xAE0290
 void __fastcall CAkRoomVerbFXParams::CAkRoomVerbFXParams(CAkRoomVerbFXParams *this, CAkRoomVerbFXParams *in_rCopy)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkRoomVerbFXParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkRoomVerbFXParams::`vftable;
   this->sRTPCParams.fDecayTime = in_rCopy->sRTPCParams.fDecayTime;
   this->sRTPCParams.fHFDamping = in_rCopy->sRTPCParams.fHFDamping;
   this->sRTPCParams.fDiffusion = in_rCopy->sRTPCParams.fDiffusion;

@@ -16,9 +16,9 @@ void __fastcall hkpTypedBroadPhaseDispatcher::hkpTypedBroadPhaseDispatcher(hkpTy
 
   v1 = &this->m_nullBroadPhaseListener;
   v2 = 8i64;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkpNullBroadPhaseListener::`vftable'{for `hkReferencedObject'};
+  v1->vfptr = (hkBaseObjectVtbl *)&hkpNullBroadPhaseListener::`vftable{for `hkReferencedObject};
   *(_DWORD *)&v1->m_memSizeAndFlags = 0x1FFFF;
-  v1->vfptr = (hkpBroadPhaseListenerVtbl *)&hkpNullBroadPhaseListener::`vftable'{for `hkpBroadPhaseListener'};
+  v1->vfptr = (hkpBroadPhaseListenerVtbl *)&hkpNullBroadPhaseListener::`vftable{for `hkpBroadPhaseListener};
   v3 = &this->m_broadPhaseListeners[0][2];
   do
   {
@@ -72,8 +72,8 @@ void __fastcall hkpTypedBroadPhaseDispatcher::hkpTypedBroadPhaseDispatcher(hkpTy
 // RVA: 0x131C0E0
 void __fastcall hkpTypedBroadPhaseDispatcher::~hkpTypedBroadPhaseDispatcher(hkpTypedBroadPhaseDispatcher *this)
 {
-  this->m_nullBroadPhaseListener.vfptr = (hkpBroadPhaseListenerVtbl *)&hkpBroadPhaseListener::`vftable';
-  this->m_nullBroadPhaseListener.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  this->m_nullBroadPhaseListener.vfptr = (hkpBroadPhaseListenerVtbl *)&hkpBroadPhaseListener::`vftable;
+  this->m_nullBroadPhaseListener.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 38

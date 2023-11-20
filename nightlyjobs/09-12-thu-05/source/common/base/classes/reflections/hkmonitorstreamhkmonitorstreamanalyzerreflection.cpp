@@ -210,7 +210,7 @@ hkClass *__fastcall hkMonitorStreamColorTable::staticClass()
 void __fastcall finishLoadedObjecthkMonitorStreamColorTable(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkMonitorStreamColorTable::`vftable';
+    *(_QWORD *)p = &hkMonitorStreamColorTable::`vftable;
 }
 
 // File Line: 309
@@ -224,7 +224,7 @@ void __fastcall cleanupLoadedObjecthkMonitorStreamColorTable(void *p)
 // RVA: 0xC55C90
 void **__fastcall getVtablehkMonitorStreamColorTable()
 {
-  return &hkMonitorStreamColorTable::`vftable';
+  return &hkMonitorStreamColorTable::`vftable;
 }
 
 // File Line: 335

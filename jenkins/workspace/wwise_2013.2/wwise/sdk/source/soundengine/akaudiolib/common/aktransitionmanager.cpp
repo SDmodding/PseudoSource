@@ -336,15 +336,15 @@ void __fastcall CAkTransitionManager::ChangeParameter(CAkTransitionManager *this
       v12 = v10 * 0.050000001;
       if ( v12 >= -37.0 )
       {
-        if ( `AkMath::FastPow10'::`4'::`local static guard' & 1 )
+        if ( `AkMath::FastPow10::`4::`local static guard & 1 )
         {
-          v14 = *(float *)&`AkMath::FastPow10'::`4'::SCALE;
+          v14 = *(float *)&`AkMath::FastPow10::`4::SCALE;
         }
         else
         {
           v14 = FLOAT_2_7866352e7;
-          `AkMath::FastPow10'::`4'::`local static guard' |= 1u;
-          `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
+          `AkMath::FastPow10::`4::`local static guard |= 1u;
+          `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
         }
         v13 = (float)((float)((float)((float)(COERCE_FLOAT(
                                                 ((signed int)(float)((float)(v14 * v12) + 1065353200.0) & 0x7FFFFF)
@@ -363,15 +363,15 @@ void __fastcall CAkTransitionManager::ChangeParameter(CAkTransitionManager *this
       in_pTransition->m_fStartValue = v13;
       if ( v15 < -37.0 )
         goto LABEL_20;
-      if ( `AkMath::FastPow10'::`4'::`local static guard' & 1 )
+      if ( `AkMath::FastPow10::`4::`local static guard & 1 )
       {
-        v16 = v15 * *(float *)&`AkMath::FastPow10'::`4'::SCALE;
+        v16 = v15 * *(float *)&`AkMath::FastPow10::`4::SCALE;
       }
       else
       {
-        `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
+        `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
         v16 = v15 * 27866352.0;
-        `AkMath::FastPow10'::`4'::`local static guard' |= 1u;
+        `AkMath::FastPow10::`4::`local static guard |= 1u;
       }
     }
     else
@@ -386,15 +386,15 @@ LABEL_20:
         in_pTransition->m_fTargetValue = v11;
         goto LABEL_28;
       }
-      if ( `AkMath::FastPow10'::`4'::`local static guard' & 1 )
+      if ( `AkMath::FastPow10::`4::`local static guard & 1 )
       {
-        v18 = *(float *)&`AkMath::FastPow10'::`4'::SCALE;
+        v18 = *(float *)&`AkMath::FastPow10::`4::SCALE;
       }
       else
       {
         v18 = FLOAT_2_7866352e7;
-        `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
-        `AkMath::FastPow10'::`4'::`local static guard' |= 1u;
+        `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
+        `AkMath::FastPow10::`4::`local static guard |= 1u;
       }
       v16 = v17 * v18;
     }

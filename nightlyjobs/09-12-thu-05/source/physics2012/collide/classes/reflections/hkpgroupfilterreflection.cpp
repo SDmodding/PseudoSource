@@ -32,11 +32,11 @@ void __fastcall finishLoadedObjecthkpGroupFilter(void *p, int finishing)
 {
   if ( p )
   {
-    *(_QWORD *)p = &hkpGroupFilter::`vftable'{for `hkReferencedObject'};
-    *((_QWORD *)p + 2) = &hkpGroupFilter::`vftable'{for `hkpCollidableCollidableFilter'};
-    *((_QWORD *)p + 3) = &hkpGroupFilter::`vftable'{for `hkpShapeCollectionFilter'};
-    *((_QWORD *)p + 4) = &hkpGroupFilter::`vftable'{for `hkpRayShapeCollectionFilter'};
-    *((_QWORD *)p + 5) = &hkpGroupFilter::`vftable'{for `hkpRayCollidableFilter'};
+    *(_QWORD *)p = &hkpGroupFilter::`vftable{for `hkReferencedObject};
+    *((_QWORD *)p + 2) = &hkpGroupFilter::`vftable{for `hkpCollidableCollidableFilter};
+    *((_QWORD *)p + 3) = &hkpGroupFilter::`vftable{for `hkpShapeCollectionFilter};
+    *((_QWORD *)p + 4) = &hkpGroupFilter::`vftable{for `hkpRayShapeCollectionFilter};
+    *((_QWORD *)p + 5) = &hkpGroupFilter::`vftable{for `hkpRayCollidableFilter};
     if ( finishing )
       *((_DWORD *)p + 14) = 2;
   }
@@ -53,7 +53,7 @@ void __fastcall cleanupLoadedObjecthkpGroupFilter(void *p)
 // RVA: 0xCEB700
 void **__fastcall getVtablehkpGroupFilter()
 {
-  return &hkpGroupFilter::`vftable'{for `hkReferencedObject'};
+  return &hkpGroupFilter::`vftable{for `hkReferencedObject};
 }
 
 // File Line: 96

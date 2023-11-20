@@ -24,12 +24,12 @@ void __fastcall UFG::RenderStageEnvMap::RenderStageEnvMap(UFG::RenderStageEnvMap
   v3 = (UFG::qResourceHandle *)&this->mEnvMapTextureHandle.mPrev;
   UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&this->mEnvMapTextureHandle.mPrev);
   v2->mEnvMapBlend = 0.0;
-  v4 = `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result )
+  v4 = `UFG::qGetResourceInventory<Illusion::Texture>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Texture>::`2::result )
   {
     v5 = UFG::qResourceWarehouse::Instance();
     v4 = UFG::qResourceWarehouse::GetInventory(v5, 0x8B43FABF);
-    `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result = v4;
+    `UFG::qGetResourceInventory<Illusion::Texture>::`2::result = v4;
   }
   UFG::qResourceHandle::Init(v3, 0x8B43FABF, 0xC0C0C0C0, v4);
   v2->mCustomEnvMapCellIndex = -1;
@@ -442,7 +442,7 @@ void __fastcall UFG::RenderStageEnvMap::Render(UFG::RenderStageEnvMap *this, UFG
 LABEL_20:
           UFG::TimeOfDayManager::GetInstance()->mSkySaturation = 1.0;
           poly.mVertices = (Render::vDynamic *)&ptr.mStateArgs;
-          `eh vector destructor iterator'(
+          `eh vector destructor iterator(
             ptr.mStateArgs.mStateArgs,
             0x10ui64,
             128,

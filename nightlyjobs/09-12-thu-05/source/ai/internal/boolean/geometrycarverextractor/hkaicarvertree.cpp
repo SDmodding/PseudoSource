@@ -3,7 +3,7 @@
 void __fastcall hkaiCarverTree::hkaiCarverTree(hkaiCarverTree *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiCarverTree::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiCarverTree::`vftable;
   this->m_carverTree.m_pntr = 0i64;
   this->m_painterTree.m_pntr = 0i64;
   this->m_carvers = 0i64;
@@ -19,7 +19,7 @@ void __fastcall hkaiCarverTree::~hkaiCarverTree(hkaiCarverTree *this)
   hkReferencedObject *v3; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiCarverTree::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiCarverTree::`vftable;
   v2 = this->m_painterTree.m_pntr;
   if ( v2 )
     hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
@@ -28,7 +28,7 @@ void __fastcall hkaiCarverTree::~hkaiCarverTree(hkaiCarverTree *this)
   if ( v3 )
     hkReferencedObject::removeReference(v3);
   v1->m_carverTree.m_pntr = 0i64;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 57
@@ -407,7 +407,7 @@ LABEL_19:
     return v8;
   }
   v20 = 0i64;
-  collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&AabbCollector::`vftable';
+  collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&AabbCollector::`vftable;
   v21 = 0;
   v24 = (void **)&v20;
   v22 = 2147483648;
@@ -451,7 +451,7 @@ LABEL_19:
         }
         while ( v4 < v15 );
       }
-      collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&hkcdAabbTreeQueries::AabbCollector::`vftable';
+      collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&hkcdAabbTreeQueries::AabbCollector::`vftable;
       v21 = 0;
       if ( v22 >= 0 )
         hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
@@ -463,7 +463,7 @@ LABEL_19:
   }
   v9 = v22;
   v8->m_enum = 1;
-  collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&hkcdAabbTreeQueries::AabbCollector::`vftable';
+  collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&hkcdAabbTreeQueries::AabbCollector::`vftable;
   v21 = 0;
   if ( v9 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
@@ -513,7 +513,7 @@ LABEL_19:
     return v8;
   }
   v20 = 0i64;
-  collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&AabbCollector::`vftable';
+  collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&AabbCollector::`vftable;
   v21 = 0;
   v24 = (void **)&v20;
   v22 = 2147483648;
@@ -557,7 +557,7 @@ LABEL_19:
         }
         while ( v4 < v15 );
       }
-      collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&hkcdAabbTreeQueries::AabbCollector::`vftable';
+      collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&hkcdAabbTreeQueries::AabbCollector::`vftable;
       v21 = 0;
       if ( v22 >= 0 )
         hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
@@ -569,7 +569,7 @@ LABEL_19:
   }
   v9 = v22;
   v8->m_enum = 1;
-  collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&hkcdAabbTreeQueries::AabbCollector::`vftable';
+  collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&hkcdAabbTreeQueries::AabbCollector::`vftable;
   v21 = 0;
   if ( v9 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
@@ -607,7 +607,7 @@ __int64 __fastcall hkaiCarverTree::carversContainTriangle(hkaiCarverTree *this, 
   v8 = C->m_quad;
   v9 = (__int64)v4->m_carvers;
   v13 = v5;
-  v12 = &TriangleQuery::`vftable';
+  v12 = &TriangleQuery::`vftable;
   v14 = v9;
   v15 = v6;
   v16 = v7;
@@ -644,7 +644,7 @@ __int64 __fastcall hkaiCarverTree::carversContainPoint(hkaiCarverTree *this, hkV
   v5 = (__int64)v2->m_carvers;
   v11 = v3;
   v12 = v5;
-  v10 = &PointQuery::`vftable';
+  v10 = &PointQuery::`vftable;
   v6 = _mm_shuffle_ps((__m128)LODWORD(FLOAT_0_0099999998), (__m128)LODWORD(FLOAT_0_0099999998), 0);
   v14 = 0;
   v13 = v4;
@@ -684,7 +684,7 @@ __int64 __fastcall hkaiCarverTree::carversContainAABB(hkaiCarverTree *this, hkAa
   v13 = v3;
   v14 = v6;
   v7 = v5.m_quad;
-  v12 = &AabbQuery::`vftable';
+  v12 = &AabbQuery::`vftable;
   v16 = v5.m_quad;
   v15 = v4.m_quad;
   v17 = 0;
@@ -729,7 +729,7 @@ __int64 __fastcall hkaiCarverTree::getPaintedMaterialForPoint(hkaiCarverTree *th
     v10 = p->m_quad;
     v11 = v6->m_painters;
     v17 = 0i64;
-    v15 = &PainterQuery::`vftable';
+    v15 = &PainterQuery::`vftable;
     v19 = 2147483648;
     v23 = resultOut;
     v20 = v7;

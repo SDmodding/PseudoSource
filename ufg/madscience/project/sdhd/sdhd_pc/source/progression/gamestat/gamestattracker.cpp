@@ -747,7 +747,7 @@ void __fastcall UFG::GameStatTracker::DeserializeSnapshotByPropertySet(UFG::Game
     if ( v75 )
     {
       v76 = &v75[-1].4;
-      `eh vector destructor iterator'(v75, 8ui64, v75[-1].mIntValue, (void (__fastcall *)(void *))_);
+      `eh vector destructor iterator(v75, 8ui64, v75[-1].mIntValue, (void (__fastcall *)(void *))_);
       operator delete[](v76);
     }
     v74->mValues.p = 0i64;
@@ -808,7 +808,7 @@ LABEL_114:
     if ( v89 )
     {
       v90 = &v89[-1].mIntValue;
-      `eh vector destructor iterator'(v89, 0x10ui64, v89[-1].mIntValue, (void (__fastcall *)(void *))_);
+      `eh vector destructor iterator(v89, 0x10ui64, v89[-1].mIntValue, (void (__fastcall *)(void *))_);
       operator delete[](v90);
     }
     v88->mValues.p = 0i64;
@@ -869,7 +869,7 @@ LABEL_126:
       if ( v106 )
       {
         v107 = &v106[-1].4;
-        `eh vector destructor iterator'(v106, 8ui64, v106[-1].mIntValue, (void (__fastcall *)(void *))_);
+        `eh vector destructor iterator(v106, 8ui64, v106[-1].mIntValue, (void (__fastcall *)(void *))_);
         operator delete[](v107);
       }
       v105->mValues.p = 0i64;

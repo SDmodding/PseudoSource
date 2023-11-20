@@ -4,7 +4,7 @@ void __fastcall hkcdStaticAabbTree::hkcdStaticAabbTree(hkcdStaticAabbTree *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_treePtr = 0i64;
-  this->vfptr = (hkBaseObjectVtbl *)&hkcdStaticAabbTree::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkcdStaticAabbTree::`vftable;
   this->m_shouldDeleteTree.m_bool = 1;
 }
 
@@ -12,7 +12,7 @@ void __fastcall hkcdStaticAabbTree::hkcdStaticAabbTree(hkcdStaticAabbTree *this)
 // RVA: 0xC95280
 void __fastcall hkcdStaticAabbTree::hkcdStaticAabbTree(hkcdStaticAabbTree *this, hkFinishLoadedObjectFlag f)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkcdStaticAabbTree::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkcdStaticAabbTree::`vftable;
   if ( f.m_finishing )
     this->m_shouldDeleteTree.m_bool = this->m_memSizeAndFlags != 0;
 }
@@ -25,11 +25,11 @@ void __fastcall hkcdStaticAabbTree::~hkcdStaticAabbTree(hkcdStaticAabbTree *this
   hkcdStaticTree::DefaultTreeStorage6 *v2; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkcdStaticAabbTree::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkcdStaticAabbTree::`vftable;
   v2 = (hkcdStaticTree::DefaultTreeStorage6 *)this->m_treePtr;
   if ( v2 && v1->m_shouldDeleteTree.m_bool )
-    hkcdStaticTree::DefaultTreeStorage6::`scalar deleting destructor'(v2, 1);
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+    hkcdStaticTree::DefaultTreeStorage6::`scalar deleting destructor(v2, 1);
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 43

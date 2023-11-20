@@ -185,8 +185,8 @@ __int64 UFG::DataSynchronizer_UploadToServerAll()
       v20 = v18 + 1;
       v20->mNext = v20;
       v20[1].mNext = v20;
-      v18->mNext = (UFG::allocator::free_link *)&UFG::OSuiteLeaderboardManager::UpdateEvent::`vftable';
-      v18->mNext = (UFG::allocator::free_link *)&UFG::OSuiteLeaderboardManager::UpdateBanStatusEvent::`vftable';
+      v18->mNext = (UFG::allocator::free_link *)&UFG::OSuiteLeaderboardManager::UpdateEvent::`vftable;
+      v18->mNext = (UFG::allocator::free_link *)&UFG::OSuiteLeaderboardManager::UpdateBanStatusEvent::`vftable;
       LODWORD(v18[3].mNext) = 6;
     }
     else
@@ -460,7 +460,7 @@ void UFG::DataSynchronizer::AddToSaveData(void)
                 if ( v10 )
                 {
                   UFG::SocialLogData::SocialLogData((UFG::SocialLogData *)v10);
-                  v11->mNext = (UFG::allocator::free_link *)&UFG::SocialLogData_BeatChallenge::`vftable';
+                  v11->mNext = (UFG::allocator::free_link *)&UFG::SocialLogData_BeatChallenge::`vftable;
                   LODWORD(v11[24].mNext) = 0;
                   v11[25].mNext = 0i64;
                 }
@@ -488,7 +488,7 @@ void UFG::DataSynchronizer::AddToSaveData(void)
                 if ( v8 )
                 {
                   UFG::SocialLogData::SocialLogData((UFG::SocialLogData *)v8);
-                  v9->mNext = (UFG::allocator::free_link *)&UFG::SocialLogData_Challenge::`vftable';
+                  v9->mNext = (UFG::allocator::free_link *)&UFG::SocialLogData_Challenge::`vftable;
                   LODWORD(v9[24].mNext) = 0;
                   v9[25].mNext = 0i64;
                 }
@@ -558,7 +558,7 @@ LABEL_44:
       {
         frnd.mPrev = (UFG::qNode<UFG::OnlineFriend,UFG::OnlineFriend> *)&frnd.mPrev;
         frnd.mNext = (UFG::qNode<UFG::OnlineFriend,UFG::OnlineFriend> *)&frnd.mPrev;
-        frnd.vfptr = (UFG::OnlineFriendVtbl *)&UFG::OnlineFriend::`vftable';
+        frnd.vfptr = (UFG::OnlineFriendVtbl *)&UFG::OnlineFriend::`vftable;
         dest = &frnd.m_cOnlineId;
         frnd.m_cOnlineId.mPrev = (UFG::qNode<UFG::OnlineId,UFG::OnlineId> *)&frnd.m_cOnlineId.mPrev;
         frnd.m_cOnlineId.mNext = (UFG::qNode<UFG::OnlineId,UFG::OnlineId> *)&frnd.m_cOnlineId.mPrev;
@@ -586,7 +586,7 @@ LABEL_44:
           entry.mPrev = (UFG::qNode<UFG::CachedLeaderboard::Entry,UFG::CachedLeaderboard::Entry> *)&entry;
           entry.mNext = (UFG::qNode<UFG::CachedLeaderboard::Entry,UFG::CachedLeaderboard::Entry> *)&entry;
         }
-        frnd.vfptr = (UFG::OnlineFriendVtbl *)&UFG::OnlineFriend::`vftable';
+        frnd.vfptr = (UFG::OnlineFriendVtbl *)&UFG::OnlineFriend::`vftable;
         UFG::qString::~qString(&frnd.m_sOnlineName);
         dest = &frnd.m_cOnlineId;
         v27 = frnd.m_cOnlineId.mPrev;
@@ -1315,7 +1315,7 @@ void __fastcall UFG::DataSynchronizer::SendBeatChallengeMessageIfNeeded(UFG::OSu
           {
             frnd.mPrev = (UFG::qNode<UFG::OnlineFriend,UFG::OnlineFriend> *)&frnd.mPrev;
             frnd.mNext = (UFG::qNode<UFG::OnlineFriend,UFG::OnlineFriend> *)&frnd.mPrev;
-            frnd.vfptr = (UFG::OnlineFriendVtbl *)&UFG::OnlineFriend::`vftable';
+            frnd.vfptr = (UFG::OnlineFriendVtbl *)&UFG::OnlineFriend::`vftable;
             v36 = &frnd.m_cOnlineId;
             frnd.m_cOnlineId.mPrev = (UFG::qNode<UFG::OnlineId,UFG::OnlineId> *)&frnd.m_cOnlineId.mPrev;
             frnd.m_cOnlineId.mNext = (UFG::qNode<UFG::OnlineId,UFG::OnlineId> *)&frnd.m_cOnlineId.mPrev;
@@ -1388,7 +1388,7 @@ void __fastcall UFG::DataSynchronizer::SendBeatChallengeMessageIfNeeded(UFG::OSu
                 v3 = v43;
               }
             }
-            frnd.vfptr = (UFG::OnlineFriendVtbl *)&UFG::OnlineFriend::`vftable';
+            frnd.vfptr = (UFG::OnlineFriendVtbl *)&UFG::OnlineFriend::`vftable;
             UFG::qString::~qString(&frnd.m_sOnlineName);
             v36 = &frnd.m_cOnlineId;
             v31 = frnd.m_cOnlineId.mPrev;

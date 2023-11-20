@@ -2,7 +2,7 @@
 // RVA: 0xC7D4C0
 void __fastcall hkDelayedFreeAllocator::hkDelayedFreeAllocator(hkDelayedFreeAllocator *this)
 {
-  this->vfptr = (hkMemoryAllocatorVtbl *)&hkDelayedFreeAllocator::`vftable';
+  this->vfptr = (hkMemoryAllocatorVtbl *)&hkDelayedFreeAllocator::`vftable;
   this->m_next = 0i64;
   this->m_kept.m_data = 0i64;
   this->m_kept.m_size = 0;

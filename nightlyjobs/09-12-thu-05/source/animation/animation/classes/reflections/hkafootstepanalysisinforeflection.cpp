@@ -99,7 +99,7 @@ hkClass *__fastcall hkaFootstepAnalysisInfoContainer::staticClass()
 void __fastcall finishLoadedObjecthkaFootstepAnalysisInfoContainer(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaFootstepAnalysisInfoContainer::`vftable';
+    *(_QWORD *)p = &hkaFootstepAnalysisInfoContainer::`vftable;
 }
 
 // File Line: 151
@@ -113,7 +113,7 @@ void __fastcall cleanupLoadedObjecthkaFootstepAnalysisInfoContainer(void *p)
 // RVA: 0xB1D510
 void **__fastcall getVtablehkaFootstepAnalysisInfoContainer()
 {
-  return &hkaFootstepAnalysisInfoContainer::`vftable';
+  return &hkaFootstepAnalysisInfoContainer::`vftable;
 }
 
 // File Line: 177

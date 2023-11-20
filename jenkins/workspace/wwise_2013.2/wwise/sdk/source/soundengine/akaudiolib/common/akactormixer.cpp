@@ -18,7 +18,7 @@ CAkActorMixer *__fastcall CAkActorMixer::Create(unsigned int in_ulID)
     CAkParameterNode::CAkParameterNode((CAkParameterNode *)&result->vfptr, v1);
     v3->m_mapChildId.m_pItems = 0i64;
     *(_QWORD *)&v3->m_mapChildId.m_uLength = 0i64;
-    v3->vfptr = (CAkIndexableVtbl *)&CAkActorMixer::`vftable';
+    v3->vfptr = (CAkIndexableVtbl *)&CAkActorMixer::`vftable;
     v5 = hkaReferencePoseAnimation::getNumOriginalFrames((hkEntitySelectorAll *)v3, v4);
     v7 = 0;
     if ( v5 <= 0xC )

@@ -18,14 +18,14 @@ void __fastcall OSuite::ZHttpTransmitter::ZHttpTransmitter(OSuite::ZHttpTransmit
   v2 = sUrl;
   v3 = this;
   OSuite::ITransmitter::ITransmitter((OSuite::ITransmitter *)&this->vfptr);
-  v3->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpTransmitter::`vftable';
+  v3->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpTransmitter::`vftable;
   OSuite::ZUrl::ZUrl(&v3->m_url);
   v3->m_nMaxBytesPerSecond = 0i64;
   v3->m_nRequestInProgress = 0;
   OSuite::ZRedBlackTreeBase::ZElementBase::ZElementBase((OSuite::ZObject *)&v3->m_sentHttpRequest.vfptr, v4);
   v3->m_sentHttpRequest.m_pList = 0i64;
-  v3->m_sentHttpRequest.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable'{for `OSuite::ZListBase'};
-  v3->m_sentHttpRequest.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable'{for `OSuite::IHashable'};
+  v3->m_sentHttpRequest.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
+  v3->m_sentHttpRequest.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
   v5 = (OSuite::IHttpRequest **)OSuite::ZObject::malloc((OSuite::ZObject *)&v3->m_sentHttpRequest.vfptr, 0x80ui64, 0i64);
   v3->m_sentHttpRequest.m_nTop = 0i64;
   v3->m_sentHttpRequest.m_pList = v5;
@@ -67,7 +67,7 @@ void __fastcall OSuite::ZHttpTransmitter::~ZHttpTransmitter(OSuite::ZHttpTransmi
 
   v1 = this->m_pHttpRequest == 0i64;
   v2 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpTransmitter::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpTransmitter::`vftable;
   if ( !v1 )
   {
     v3 = OSuite::TSingleton<OSuite::ZHttpManager>::Object();
@@ -76,7 +76,7 @@ void __fastcall OSuite::ZHttpTransmitter::~ZHttpTransmitter(OSuite::ZHttpTransmi
   }
   v11.m_pListBase = 0i64;
   OSuite::ZListBase::ZListIteratorBase::ZListIteratorBase(&v11, (OSuite::ZListBase *)&v2->m_sentHttpRequest.vfptr);
-  v11.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+  v11.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
   while ( !OSuite::ZListBase::ZListIteratorBase::AtEnd(&v11) )
   {
     OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)v11.m_pListBase);
@@ -101,8 +101,8 @@ void __fastcall OSuite::ZHttpTransmitter::~ZHttpTransmitter(OSuite::ZHttpTransmi
   v2->m_sentHttpRequest.m_nSize = 16i64;
   OSuite::ZMutex::~ZMutex(&v2->m_mutex);
   v10 = v2->m_sentHttpRequest.m_pList;
-  v2->m_sentHttpRequest.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable'{for `OSuite::ZListBase'};
-  v2->m_sentHttpRequest.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable'{for `OSuite::IHashable'};
+  v2->m_sentHttpRequest.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
+  v2->m_sentHttpRequest.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
   OSuite::ZObject::free((OSuite::ZObject *)&v2->m_sentHttpRequest.vfptr, v10);
   OSuite::ZUrl::~ZUrl(&v2->m_url);
   OSuite::ITransmitter::~ITransmitter((OSuite::ITransmitter *)&v2->vfptr);

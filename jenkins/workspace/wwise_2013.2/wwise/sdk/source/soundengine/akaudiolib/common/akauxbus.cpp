@@ -13,7 +13,7 @@ CAkBus *__fastcall CAkAuxBus::Create(unsigned int in_ulID)
   if ( !v2 )
     return 0i64;
   CAkBus::CAkBus(v2, v1);
-  v3->vfptr = (CAkIndexableVtbl *)&CAkAuxBus::`vftable';
+  v3->vfptr = (CAkIndexableVtbl *)&CAkAuxBus::`vftable;
   v4 = _mm_shuffle_ps((__m128)(unsigned int)FLOAT_1_0, (__m128)(unsigned int)FLOAT_1_0, 0);
   *(__m128 *)&v3[1].vfptr = v4;
   *(__m128 *)&v3[1].key = v4;

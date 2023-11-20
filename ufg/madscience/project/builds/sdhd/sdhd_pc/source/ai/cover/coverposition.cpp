@@ -14,18 +14,18 @@ void __fastcall UFG::CoverPosition::CoverPosition(UFG::CoverPosition *this)
   UFG::qSafePointer<UFG::ParkourHandle,UFG::ParkourHandle> *v10; // [rsp+48h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (UFG::CoverObjectBaseVtbl *)&UFG::CoverObjectBase::`vftable';
+  this->vfptr = (UFG::CoverObjectBaseVtbl *)&UFG::CoverObjectBase::`vftable;
   this->m_iRefCount = 0;
   this->m_pCoverObjectGroup = 0i64;
   this->m_fPriority = 0.0;
-  this->vfptr = (UFG::CoverObjectBaseVtbl *)&UFG::CoverObjectParkour::`vftable';
+  this->vfptr = (UFG::CoverObjectBaseVtbl *)&UFG::CoverObjectParkour::`vftable;
   v10 = &this->m_pParkourHandle;
   v10->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v10->mPrev;
   v10->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v10->mPrev;
   this->m_pParkourHandle.m_pPointer = 0i64;
   this->m_bFoundParkourSync = 0;
   this->m_pCoverUser = 0i64;
-  this->vfptr = (UFG::CoverObjectBaseVtbl *)&UFG::CoverPosition::`vftable';
+  this->vfptr = (UFG::CoverObjectBaseVtbl *)&UFG::CoverPosition::`vftable;
   UFG::CoverCornerHandle::CoverCornerHandle(&this->m_LeftCorner);
   UFG::CoverCornerHandle::CoverCornerHandle(&v1->m_RightCorner);
   *(_QWORD *)&v1->m_fDistToLeft = 0i64;
@@ -45,13 +45,13 @@ void __fastcall UFG::CoverPosition::CoverPosition(UFG::CoverPosition *this)
   v1->m_vInbetweenParkourAxis.y = v6;
   v1->m_vInbetweenParkourAxis.z = v7;
   v1->m_bInbetweenParkourLine = 0;
-  v1->m_NavPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable';
+  v1->m_NavPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable;
   v8 = UFG::qVector3::msZero.y;
   v9 = UFG::qVector3::msZero.z;
   v1->m_NavPosition.m_vPosition.x = UFG::qVector3::msZero.x;
   v1->m_NavPosition.m_vPosition.y = v8;
   v1->m_NavPosition.m_vPosition.z = v9;
-  v1->m_NavPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable';
+  v1->m_NavPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable;
   v1->m_NavPosition.m_bValid = 0;
   v1->m_NavPosition.m_hkvMeshPosition = (hkVector4f)hkvZero_13.m_quad;
   *(_QWORD *)&v1->m_NavPosition.m_packedKey = -1i64;
@@ -78,18 +78,18 @@ void __fastcall UFG::CoverPosition::CoverPosition(UFG::CoverPosition *this, UFG:
 
   v2 = pCorner;
   v3 = this;
-  this->vfptr = (UFG::CoverObjectBaseVtbl *)&UFG::CoverObjectBase::`vftable';
+  this->vfptr = (UFG::CoverObjectBaseVtbl *)&UFG::CoverObjectBase::`vftable;
   this->m_iRefCount = 0;
   this->m_pCoverObjectGroup = 0i64;
   this->m_fPriority = 0.0;
-  this->vfptr = (UFG::CoverObjectBaseVtbl *)&UFG::CoverObjectParkour::`vftable';
+  this->vfptr = (UFG::CoverObjectBaseVtbl *)&UFG::CoverObjectParkour::`vftable;
   v13 = &this->m_pParkourHandle;
   v13->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v13->mPrev;
   v13->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v13->mPrev;
   this->m_pParkourHandle.m_pPointer = 0i64;
   this->m_bFoundParkourSync = 0;
   this->m_pCoverUser = 0i64;
-  this->vfptr = (UFG::CoverObjectBaseVtbl *)&UFG::CoverPosition::`vftable';
+  this->vfptr = (UFG::CoverObjectBaseVtbl *)&UFG::CoverPosition::`vftable;
   UFG::CoverCornerHandle::CoverCornerHandle(&this->m_LeftCorner);
   UFG::CoverCornerHandle::CoverCornerHandle(&v3->m_RightCorner);
   *(_QWORD *)&v3->m_fDistToLeft = 0i64;
@@ -109,13 +109,13 @@ void __fastcall UFG::CoverPosition::CoverPosition(UFG::CoverPosition *this, UFG:
   v3->m_vInbetweenParkourAxis.y = v8;
   v3->m_vInbetweenParkourAxis.z = v9;
   v3->m_bInbetweenParkourLine = 0;
-  v3->m_NavPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable';
+  v3->m_NavPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable;
   v10 = UFG::qVector3::msZero.y;
   v11 = UFG::qVector3::msZero.z;
   v3->m_NavPosition.m_vPosition.x = UFG::qVector3::msZero.x;
   v3->m_NavPosition.m_vPosition.y = v10;
   v3->m_NavPosition.m_vPosition.z = v11;
-  v3->m_NavPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable';
+  v3->m_NavPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable;
   v3->m_NavPosition.m_bValid = 0;
   v3->m_NavPosition.m_hkvMeshPosition = (hkVector4f)hkvZero_13.m_quad;
   *(_QWORD *)&v3->m_NavPosition.m_packedKey = -1i64;
@@ -143,7 +143,7 @@ void __fastcall UFG::CoverPosition::CoverPosition(UFG::CoverPosition *this, UFG:
 
   v2 = this;
   UFG::CoverObjectParkour::CoverObjectParkour((UFG::CoverObjectParkour *)&this->vfptr, pParkourHandle);
-  v2->vfptr = (UFG::CoverObjectBaseVtbl *)&UFG::CoverPosition::`vftable';
+  v2->vfptr = (UFG::CoverObjectBaseVtbl *)&UFG::CoverPosition::`vftable;
   UFG::CoverCornerHandle::CoverCornerHandle(&v2->m_LeftCorner);
   UFG::CoverCornerHandle::CoverCornerHandle(&v2->m_RightCorner);
   *(_QWORD *)&v2->m_fDistToLeft = 0i64;
@@ -163,13 +163,13 @@ void __fastcall UFG::CoverPosition::CoverPosition(UFG::CoverPosition *this, UFG:
   v2->m_vInbetweenParkourAxis.y = v7;
   v2->m_vInbetweenParkourAxis.z = v8;
   v2->m_bInbetweenParkourLine = 0;
-  v2->m_NavPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable';
+  v2->m_NavPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable;
   v9 = UFG::qVector3::msZero.y;
   v10 = UFG::qVector3::msZero.z;
   v2->m_NavPosition.m_vPosition.x = UFG::qVector3::msZero.x;
   v2->m_NavPosition.m_vPosition.y = v9;
   v2->m_NavPosition.m_vPosition.z = v10;
-  v2->m_NavPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable';
+  v2->m_NavPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable;
   v2->m_NavPosition.m_bValid = 0;
   v2->m_NavPosition.m_hkvMeshPosition = (hkVector4f)hkvZero_13.m_quad;
   *(_QWORD *)&v2->m_NavPosition.m_packedKey = -1i64;

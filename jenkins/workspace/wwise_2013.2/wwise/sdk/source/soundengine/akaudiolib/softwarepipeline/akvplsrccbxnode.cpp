@@ -39,7 +39,7 @@ void __fastcall CAkVPLSrcCbxNodeBase::CAkVPLSrcCbxNodeBase(CAkVPLSrcCbxNodeBase 
 {
   char v1; // al
 
-  this->vfptr = (CAkVPLSrcCbxNodeBaseVtbl *)&CAkVPLSrcCbxNodeBase::`vftable';
+  this->vfptr = (CAkVPLSrcCbxNodeBaseVtbl *)&CAkVPLSrcCbxNodeBase::`vftable;
   this->m_pHdrBus = 0i64;
   this->m_arVolumeData.m_pItems = 0i64;
   *(_QWORD *)&this->m_arVolumeData.m_uLength = 0i64;
@@ -98,7 +98,7 @@ void __fastcall CAkVPLSrcCbxNodeBase::~CAkVPLSrcCbxNodeBase(CAkVPLSrcCbxNodeBase
   void *v5; // rdx
 
   v1 = this;
-  this->vfptr = (CAkVPLSrcCbxNodeBaseVtbl *)&CAkVPLSrcCbxNodeBase::`vftable';
+  this->vfptr = (CAkVPLSrcCbxNodeBaseVtbl *)&CAkVPLSrcCbxNodeBase::`vftable;
   v2 = this->m_arVolumeData.m_pItems;
   if ( v2 )
   {
@@ -206,9 +206,9 @@ void __fastcall CAkVPLSrcCbxNode::CAkVPLSrcCbxNode(CAkVPLSrcCbxNode *this)
   v1 = this;
   CAkVPLSrcCbxNodeBase::CAkVPLSrcCbxNodeBase((CAkVPLSrcCbxNodeBase *)&this->vfptr);
   v1->m_uChannelMask = 4;
-  v1->vfptr = (CAkVPLSrcCbxNodeBaseVtbl *)&CAkVPLSrcCbxNode::`vftable';
+  v1->vfptr = (CAkVPLSrcCbxNodeBaseVtbl *)&CAkVPLSrcCbxNode::`vftable;
   CAkVPLPitchNode::CAkVPLPitchNode(&v1->m_cbxRec.m_Pitch, v1);
-  v1->m_cbxRec.m_LPF.vfptr = (CAkVPLNodeVtbl *)&CAkVPLLPFNode::`vftable';
+  v1->m_cbxRec.m_LPF.vfptr = (CAkVPLNodeVtbl *)&CAkVPLLPFNode::`vftable;
   v1->m_cbxRec.m_LPF.m_pInput = 0i64;
   CAkSrcLpFilter::CAkSrcLpFilter(&v1->m_cbxRec.m_LPF.m_LPF);
   v1->m_cbxRec.m_pFilter[0] = 0i64;
@@ -216,7 +216,7 @@ void __fastcall CAkVPLSrcCbxNode::CAkVPLSrcCbxNode(CAkVPLSrcCbxNode *this)
   v1->m_cbxRec.m_pFilter[2] = 0i64;
   v1->m_cbxRec.m_pFilter[3] = 0i64;
   v1->m_ObstructionLPF.m_pInput = 0i64;
-  v1->m_ObstructionLPF.vfptr = (CAkVPLNodeVtbl *)&CAkVPLLPFNode::`vftable';
+  v1->m_ObstructionLPF.vfptr = (CAkVPLNodeVtbl *)&CAkVPLLPFNode::`vftable;
   CAkSrcLpFilter::CAkSrcLpFilter(&v1->m_ObstructionLPF.m_LPF);
 }
 
@@ -863,7 +863,7 @@ LABEL_11:
         if ( !v24 )
           goto LABEL_48;
         v24->Term = 0i64;
-        v24->__vecDelDtor = (void *(__fastcall *)(AK::IAkPlugin *, unsigned int))&CAkVPLFilterNode::`vftable';
+        v24->__vecDelDtor = (void *(__fastcall *)(AK::IAkPlugin *, unsigned int))&CAkVPLFilterNode::`vftable;
       }
       else
       {
@@ -872,7 +872,7 @@ LABEL_11:
         if ( !v25 )
           goto LABEL_48;
         v25->Term = 0i64;
-        v25->__vecDelDtor = (void *(__fastcall *)(AK::IAkPlugin *, unsigned int))&CAkVPLFilterNodeOutOfPlace::`vftable';
+        v25->__vecDelDtor = (void *(__fastcall *)(AK::IAkPlugin *, unsigned int))&CAkVPLFilterNodeOutOfPlace::`vftable;
         v25[1].GetPluginInfo = 0i64;
         LOWORD(v25[2].__vecDelDtor) = 0;
         v25[2].Term = 0i64;
@@ -1122,14 +1122,14 @@ LABEL_4:
     if ( !v12 )
       goto LABEL_27;
     v12->m_pInput = 0i64;
-    v12->vfptr = (CAkVPLNodeVtbl *)&CAkVPLFilterNode::`vftable';
+    v12->vfptr = (CAkVPLNodeVtbl *)&CAkVPLFilterNode::`vftable;
   }
   else
   {
     v13 = (CAkVPLSrcNode *)AK::MemoryMgr::Malloc(g_LEngineDefaultPoolId, 0xD8ui64);
     if ( !v13 )
       goto LABEL_27;
-    v13->vfptr = (CAkVPLNodeVtbl *)&CAkVPLFilterNodeOutOfPlace::`vftable';
+    v13->vfptr = (CAkVPLNodeVtbl *)&CAkVPLFilterNodeOutOfPlace::`vftable;
     v13->m_pInput = 0i64;
     *((_QWORD *)&v13[1] + 4) = 0i64;
     LOWORD(v13[2].m_pAnalysisData) = 0;
@@ -1390,15 +1390,15 @@ char __fastcall CAkVPLSrcCbxNodeBase::ComputeVolumeRays(CAkVPLSrcCbxNodeBase *th
     v7 = (float)(CAkPBI::GetVoiceVolumedB(v2) + v2->m_EffectiveParams.Volume) * 0.050000001;
     if ( v7 >= -37.0 )
     {
-      if ( `AkMath::FastPow10'::`4'::`local static guard' & 1 )
+      if ( `AkMath::FastPow10::`4::`local static guard & 1 )
       {
-        v9 = *(float *)&`AkMath::FastPow10'::`4'::SCALE;
+        v9 = *(float *)&`AkMath::FastPow10::`4::SCALE;
       }
       else
       {
         v9 = FLOAT_2_7866352e7;
-        `AkMath::FastPow10'::`4'::`local static guard' |= 1u;
-        `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
+        `AkMath::FastPow10::`4::`local static guard |= 1u;
+        `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
       }
       v8 = (float)((float)((float)((float)(COERCE_FLOAT(
                                              ((signed int)(float)((float)(v9 * v7) + 1065353200.0) & 0x7FFFFF)
@@ -1437,14 +1437,14 @@ char __fastcall CAkVPLSrcCbxNodeBase::ComputeVolumeRays(CAkVPLSrcCbxNodeBase *th
       v13 = CAkPBI::GetOutputBusVolumeValuedB(v2) * 0.050000001;
       if ( v13 >= -37.0 )
       {
-        if ( `AkMath::FastPow10'::`4'::`local static guard' & 1 )
+        if ( `AkMath::FastPow10::`4::`local static guard & 1 )
         {
-          v5 = *(float *)&`AkMath::FastPow10'::`4'::SCALE;
+          v5 = *(float *)&`AkMath::FastPow10::`4::SCALE;
         }
         else
         {
-          `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
-          `AkMath::FastPow10'::`4'::`local static guard' |= 1u;
+          `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
+          `AkMath::FastPow10::`4::`local static guard |= 1u;
         }
         v6 = (float)((float)((float)((float)(COERCE_FLOAT(
                                                ((signed int)(float)((float)(v13 * v5) + 1065353200.0) & 0x7FFFFF)
@@ -1817,15 +1817,15 @@ LABEL_4:
     v22 = v21 * -0.050000001;
     if ( v22 >= -37.0 )
     {
-      if ( `AkMath::FastPow10'::`4'::`local static guard' & 1 )
+      if ( `AkMath::FastPow10::`4::`local static guard & 1 )
       {
-        v23 = *(float *)&`AkMath::FastPow10'::`4'::SCALE;
+        v23 = *(float *)&`AkMath::FastPow10::`4::SCALE;
       }
       else
       {
         v23 = FLOAT_2_7866352e7;
-        `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
-        `AkMath::FastPow10'::`4'::`local static guard' |= 1u;
+        `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
+        `AkMath::FastPow10::`4::`local static guard |= 1u;
       }
       v10 = (float)((float)((float)((float)(COERCE_FLOAT(
                                               ((signed int)(float)((float)(v22 * v23) + 1065353200.0) & 0x7FFFFF)

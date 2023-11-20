@@ -14,7 +14,7 @@ void __fastcall hkpBallGun::hkpBallGun(hkpBallGun *this, hkFinishLoadedObjectFla
   v9 = flag.m_finishing;
   v2 = this;
   v3 = &this->m_name;
-  v3[-3].m_stringAndFlag = (const char *)&hkpFirstPersonGun::`vftable';
+  v3[-3].m_stringAndFlag = (const char *)&hkpFirstPersonGun::`vftable;
   hkStringPtr::hkStringPtr(v3, flag);
   v4 = 0i64;
   v2->m_listeners.m_capacityAndFlags = 2147483648;
@@ -22,7 +22,7 @@ void __fastcall hkpBallGun::hkpBallGun(hkpBallGun *this, hkFinishLoadedObjectFla
   v2->m_listeners.m_size = 0;
   if ( v9 )
     v2->m_type.m_storage = 0;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpBallGun::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpBallGun::`vftable;
   if ( v9 )
   {
     v2->m_type.m_storage = 1;

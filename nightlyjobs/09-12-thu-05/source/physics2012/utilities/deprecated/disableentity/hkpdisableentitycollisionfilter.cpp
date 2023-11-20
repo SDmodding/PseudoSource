@@ -6,12 +6,12 @@ void __fastcall hkpDisableEntityCollisionFilter::hkpDisableEntityCollisionFilter
 
   v1 = this;
   hkpCollisionFilter::hkpCollisionFilter((hkpCollisionFilter *)&this->vfptr);
-  v1->vfptr = (hkBaseObjectVtbl *)&hkpDisableEntityCollisionFilter::`vftable'{for `hkReferencedObject'};
-  v1->vfptr = (hkpCollidableCollidableFilterVtbl *)&hkpDisableEntityCollisionFilter::`vftable'{for `hkpCollidableCollidableFilter'};
-  v1->vfptr = (hkpShapeCollectionFilterVtbl *)&hkpDisableEntityCollisionFilter::`vftable'{for `hkpShapeCollectionFilter'};
-  v1->vfptr = (hkpRayShapeCollectionFilterVtbl *)&hkpDisableEntityCollisionFilter::`vftable'{for `hkpRayShapeCollectionFilter'};
-  v1->vfptr = (hkpRayCollidableFilterVtbl *)&hkpDisableEntityCollisionFilter::`vftable'{for `hkpRayCollidableFilter'};
-  v1->vfptr = (hkpEntityListenerVtbl *)&hkpDisableEntityCollisionFilter::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkpDisableEntityCollisionFilter::`vftable{for `hkReferencedObject};
+  v1->vfptr = (hkpCollidableCollidableFilterVtbl *)&hkpDisableEntityCollisionFilter::`vftable{for `hkpCollidableCollidableFilter};
+  v1->vfptr = (hkpShapeCollectionFilterVtbl *)&hkpDisableEntityCollisionFilter::`vftable{for `hkpShapeCollectionFilter};
+  v1->vfptr = (hkpRayShapeCollectionFilterVtbl *)&hkpDisableEntityCollisionFilter::`vftable{for `hkpRayShapeCollectionFilter};
+  v1->vfptr = (hkpRayCollidableFilterVtbl *)&hkpDisableEntityCollisionFilter::`vftable{for `hkpRayCollidableFilter};
+  v1->vfptr = (hkpEntityListenerVtbl *)&hkpDisableEntityCollisionFilter::`vftable;
   v1->m_disabledEntities.m_capacityAndFlags = 2147483648;
   v1->m_disabledEntities.m_data = 0i64;
   v1->m_disabledEntities.m_size = 0;
@@ -36,14 +36,14 @@ void __fastcall hkpDisableEntityCollisionFilter::~hkpDisableEntityCollisionFilte
   int v13; // er8
 
   v1 = (hkpEntityListener *)&this->vfptr;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpDisableEntityCollisionFilter::`vftable'{for `hkReferencedObject'};
-  this->vfptr = (hkpCollidableCollidableFilterVtbl *)&hkpDisableEntityCollisionFilter::`vftable'{for `hkpCollidableCollidableFilter'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkpDisableEntityCollisionFilter::`vftable{for `hkReferencedObject};
+  this->vfptr = (hkpCollidableCollidableFilterVtbl *)&hkpDisableEntityCollisionFilter::`vftable{for `hkpCollidableCollidableFilter};
   v2 = this;
-  this->vfptr = (hkpShapeCollectionFilterVtbl *)&hkpDisableEntityCollisionFilter::`vftable'{for `hkpShapeCollectionFilter'};
+  this->vfptr = (hkpShapeCollectionFilterVtbl *)&hkpDisableEntityCollisionFilter::`vftable{for `hkpShapeCollectionFilter};
   v3 = 0;
-  this->vfptr = (hkpRayShapeCollectionFilterVtbl *)&hkpDisableEntityCollisionFilter::`vftable'{for `hkpRayShapeCollectionFilter'};
-  this->vfptr = (hkpRayCollidableFilterVtbl *)&hkpDisableEntityCollisionFilter::`vftable'{for `hkpRayCollidableFilter'};
-  this->vfptr = (hkpEntityListenerVtbl *)&hkpDisableEntityCollisionFilter::`vftable';
+  this->vfptr = (hkpRayShapeCollectionFilterVtbl *)&hkpDisableEntityCollisionFilter::`vftable{for `hkpRayShapeCollectionFilter};
+  this->vfptr = (hkpRayCollidableFilterVtbl *)&hkpDisableEntityCollisionFilter::`vftable{for `hkpRayCollidableFilter};
+  this->vfptr = (hkpEntityListenerVtbl *)&hkpDisableEntityCollisionFilter::`vftable;
   if ( this->m_disabledEntities.m_size > 0 )
   {
     v4 = 0i64;
@@ -100,12 +100,12 @@ LABEL_15:
       8 * v13);
   v2->m_disabledEntities.m_data = 0i64;
   v2->m_disabledEntities.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkpEntityListenerVtbl *)&hkpEntityListener::`vftable';
-  v2->vfptr = (hkpRayCollidableFilterVtbl *)&hkpRayCollidableFilter::`vftable';
-  v2->vfptr = (hkpRayShapeCollectionFilterVtbl *)&hkpRayShapeCollectionFilter::`vftable';
-  v2->vfptr = (hkpShapeCollectionFilterVtbl *)&hkpShapeCollectionFilter::`vftable';
-  v2->vfptr = (hkpCollidableCollidableFilterVtbl *)&hkpCollidableCollidableFilter::`vftable';
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkpEntityListenerVtbl *)&hkpEntityListener::`vftable;
+  v2->vfptr = (hkpRayCollidableFilterVtbl *)&hkpRayCollidableFilter::`vftable;
+  v2->vfptr = (hkpRayShapeCollectionFilterVtbl *)&hkpRayShapeCollectionFilter::`vftable;
+  v2->vfptr = (hkpShapeCollectionFilterVtbl *)&hkpShapeCollectionFilter::`vftable;
+  v2->vfptr = (hkpCollidableCollidableFilterVtbl *)&hkpCollidableCollidableFilter::`vftable;
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 33

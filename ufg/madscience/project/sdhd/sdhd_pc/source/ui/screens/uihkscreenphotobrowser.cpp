@@ -7,7 +7,7 @@ void __fastcall UFG::UIHKScreenPhotoBrowser::UIHKScreenPhotoBrowser(UFG::UIHKScr
   v1 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -18,7 +18,7 @@ void __fastcall UFG::UIHKScreenPhotoBrowser::UIHKScreenPhotoBrowser(UFG::UIHKScr
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenPhotoBrowser::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenPhotoBrowser::`vftable;
   *(_QWORD *)&this->mState = 0i64;
   *(_QWORD *)&this->mOffset = 0i64;
   *(_QWORD *)&this->mLastPicLoaded = -1i64;
@@ -41,7 +41,7 @@ void __fastcall UFG::UIHKScreenPhotoBrowser::~UIHKScreenPhotoBrowser(UFG::UIHKSc
   Illusion::Texture *v4; // rcx
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenPhotoBrowser::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenPhotoBrowser::`vftable;
   if ( UFG::gInputSystem )
   {
     if ( UFG::gActiveControllerNum != -1 )
@@ -526,7 +526,7 @@ void __fastcall UFG::UIHKScreenPhotoBrowser::UpdateCounter(UFG::UIHKScreenPhotoB
   v1 = this;
   if ( this->mMovie )
   {
-    `eh vector constructor iterator'(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     v2 = UFG::GameSaveLoad::Instance();
     if ( (unsigned int)UFG::GameSaveLoad::GetNumPhotosTaken(v2) )
       v3 = v1->mSelectedIndex + 1;
@@ -552,7 +552,7 @@ void __fastcall UFG::UIHKScreenPhotoBrowser::UpdateCounter(UFG::UIHKScreenPhotoB
     v9 = 5;
     v10 = v5;
     Scaleform::GFx::Movie::Invoke(v1->mMovie, "PhotoList_SetCounter", 0i64, &pargs, 2u);
-    `eh vector destructor iterator'(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 
@@ -591,8 +591,8 @@ void __fastcall UFG::UIHKScreenPhotoBrowser::ShowHelpBar(UFG::UIHKScreenPhotoBro
     *(_QWORD *)&data.MessageIds[4] = 0i64;
     UFG::UIHKHelpBarWidget::Show(v2, &data);
     UFG::qString::~qString(&data.CustomTexturePack);
-    `eh vector destructor iterator'(data.Icons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
-    `eh vector destructor iterator'(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+    `eh vector destructor iterator(data.Icons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+    `eh vector destructor iterator(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
   }
 }
 

@@ -8,8 +8,8 @@ void __fastcall CAkMusicSwitchCntr::CAkMusicSwitchCntr(CAkMusicSwitchCntr *this,
   CAkMusicTransAware::CAkMusicTransAware((CAkMusicTransAware *)&this->vfptr, in_ulID);
   v2->pNextItemPrepare = 0i64;
   v2->m_uPreparationCount = 0;
-  v2->vfptr = (CAkIndexableVtbl *)&CAkMusicSwitchCntr::`vftable'{for `CAkMusicTransAware'};
-  v2->vfptr = (CAkPreparationAwareVtbl *)&CAkMusicSwitchCntr::`vftable'{for `CAkPreparationAware'};
+  v2->vfptr = (CAkIndexableVtbl *)&CAkMusicSwitchCntr::`vftable{for `CAkMusicTransAware};
+  v2->vfptr = (CAkPreparationAwareVtbl *)&CAkMusicSwitchCntr::`vftable{for `CAkPreparationAware};
   AkDecisionTree::AkDecisionTree(&v2->m_decisionTree);
   v2->m_bIsContinuePlayback = 1;
   v2->m_pArguments = 0i64;
@@ -26,8 +26,8 @@ void __fastcall CAkMusicSwitchCntr::~CAkMusicSwitchCntr(CAkMusicSwitchCntr *this
 
   v1 = this->m_pArguments;
   v2 = this;
-  this->vfptr = (CAkIndexableVtbl *)&CAkMusicSwitchCntr::`vftable'{for `CAkMusicTransAware'};
-  this->vfptr = (CAkPreparationAwareVtbl *)&CAkMusicSwitchCntr::`vftable'{for `CAkPreparationAware'};
+  this->vfptr = (CAkIndexableVtbl *)&CAkMusicSwitchCntr::`vftable{for `CAkMusicTransAware};
+  this->vfptr = (CAkPreparationAwareVtbl *)&CAkMusicSwitchCntr::`vftable{for `CAkPreparationAware};
   if ( v1 )
   {
     AK::MemoryMgr::Free(g_DefaultPoolId, v1);

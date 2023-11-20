@@ -2,18 +2,18 @@
 // RVA: 0x105280
 void __fastcall SSInstance::SSInstance(SSInstance *this)
 {
-  this->vfptr = (SSObjectBaseVtbl *)&SSObjectBase::`vftable';
+  this->vfptr = (SSObjectBaseVtbl *)&SSObjectBase::`vftable;
   this->i_ref_count = 0;
-  this->vfptr = (SSObjectBaseVtbl *)&SSInstance::`vftable';
+  this->vfptr = (SSObjectBaseVtbl *)&SSInstance::`vftable;
 }
 
 // File Line: 86
 // RVA: 0xBD560
 void __fastcall SSInstance::~SSInstance(SSInstance *this)
 {
-  this->vfptr = (SSObjectBaseVtbl *)&SSInstance::`vftable';
+  this->vfptr = (SSObjectBaseVtbl *)&SSInstance::`vftable;
   this->i_ptr_id = 0;
-  this->vfptr = (SSObjectBaseVtbl *)&SSObjectBase::`vftable';
+  this->vfptr = (SSObjectBaseVtbl *)&SSObjectBase::`vftable;
 }
 
 // File Line: 125

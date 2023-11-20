@@ -26,7 +26,7 @@ void __fastcall hkErrStream::hkErrStream(hkErrStream *this, void *buf, int bufSi
   v4 = bufSize;
   v5 = this;
   hkOstream::hkOstream((hkOstream *)&this->vfptr, 0i64);
-  v5->vfptr = (hkBaseObjectVtbl *)&hkErrStream::`vftable';
+  v5->vfptr = (hkBaseObjectVtbl *)&hkErrStream::`vftable;
   v6 = (hkBufferedStreamWriter *)&v3[v4 - 48];
   if ( v6 )
   {

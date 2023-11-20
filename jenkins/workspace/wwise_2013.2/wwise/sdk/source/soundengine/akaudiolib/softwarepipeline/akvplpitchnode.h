@@ -6,7 +6,7 @@ void __fastcall CAkVPLPitchNode::CAkVPLPitchNode(CAkVPLPitchNode *this, CAkVPLSr
   CAkVPLSrcCbxNode *v3; // rbx
 
   v2 = this;
-  this->vfptr = (CAkVPLNodeVtbl *)&CAkVPLPitchNode::`vftable';
+  this->vfptr = (CAkVPLNodeVtbl *)&CAkVPLPitchNode::`vftable;
   this->m_pInput = 0i64;
   v3 = in_pCbx;
   Assembly::GetRCX(&this->m_Pitch);

@@ -9,7 +9,7 @@ void __fastcall UFG::UIHKScreenFightTutorial::UIHKScreenFightTutorial(UFG::UIHKS
   v2 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -20,7 +20,7 @@ void __fastcall UFG::UIHKScreenFightTutorial::UIHKScreenFightTutorial(UFG::UIHKS
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenFightTutorial::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenFightTutorial::`vftable;
   UFG::UIHKMoveSequenceData::UIHKMoveSequenceData(&this->mMoveSequence);
   v1->mInputIndex = 1;
   v1->mPendingReset = 0;
@@ -39,7 +39,7 @@ void __fastcall UFG::UIHKScreenFightTutorial::~UIHKScreenFightTutorial(UFG::UIHK
   int v5; // eax
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenFightTutorial::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenFightTutorial::`vftable;
   v2 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseScreen(v2, "FightingTutorial");
   if ( v1->mHelpbarLocked )
@@ -581,7 +581,7 @@ void __fastcall UFG::UIHKScreenFightTutorial::SetSequenceInFlash(UFG::UIHKScreen
   v2 = this->mRenderable->m_movie.pObject;
   if ( v2 )
   {
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 15, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 15, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     v3 = &v21;
     v4 = 15i64;
     do
@@ -732,7 +732,7 @@ void __fastcall UFG::UIHKScreenFightTutorial::SetSequenceInFlash(UFG::UIHKScreen
       v78 = v19;
     }
     Scaleform::GFx::Movie::Invoke(v2, "FightTutorial_SetSequence", 0i64, (Scaleform::GFx::Value *)&ptr, 0xFu);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 15, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 15, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 } }
     Scaleform::GFx::Movie::Invoke(v2, "FightTutorial_SetSequence", 0i64, (Scaleform::GFx::Value *)&ptr, 0xFu);
@@ -750,7 +750,7 @@ void __fastcall UFG::UIHKScreenFightTutorial::HitSuccess(UFG::UIHKScreenFightTut
   v3 = this->mRenderable->m_movie.pObject;
   if ( v3 )
   {
-    `eh vector constructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( ((unsigned int)pargs.Type >> 6) & 1 )
     {
       (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
@@ -762,7 +762,7 @@ void __fastcall UFG::UIHKScreenFightTutorial::HitSuccess(UFG::UIHKScreenFightTut
     pargs.Type = 5;
     pargs.mValue.NValue = (double)v2;
     Scaleform::GFx::Movie::Invoke(v3, "FightTutorial_HitSuccess", 0i64, &pargs, 1u);
-    `eh vector destructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 
@@ -780,7 +780,7 @@ void __fastcall UFG::UIHKScreenFightTutorial::HitFailed(UFG::UIHKScreenFightTuto
   v4 = this->mRenderable->m_movie.pObject;
   if ( v4 )
   {
-    `eh vector constructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( ((unsigned int)pargs.Type >> 6) & 1 )
     {
       (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
@@ -793,7 +793,7 @@ void __fastcall UFG::UIHKScreenFightTutorial::HitFailed(UFG::UIHKScreenFightTuto
     pargs.mValue.NValue = (double)v2;
     Scaleform::GFx::Movie::Invoke(v4, "FightTutorial_HitFailed", 0i64, &pargs, 1u);
     v3->mResetTimer = 0.0;
-    `eh vector destructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 

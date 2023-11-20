@@ -10,7 +10,7 @@ __int64 dynamic_initializer_for__Json::Value::null__()
 // RVA: 0x84360
 void __fastcall Json::ValueAllocator::~ValueAllocator(Json::ValueAllocator *this)
 {
-  this->vfptr = (Json::ValueAllocatorVtbl *)&Json::ValueAllocator::`vftable';
+  this->vfptr = (Json::ValueAllocatorVtbl *)&Json::ValueAllocator::`vftable;
 }
 
 // File Line: 72
@@ -59,7 +59,7 @@ Json::ValueAllocator **__fastcall Json::valueAllocator()
   if ( !(_S1_13 & 1) )
   {
     _S1_13 |= 1u;
-    defaultAllocator.vfptr = (Json::ValueAllocatorVtbl *)&Json::DefaultValueAllocator::`vftable';
+    defaultAllocator.vfptr = (Json::ValueAllocatorVtbl *)&Json::DefaultValueAllocator::`vftable;
     atexit(Json::valueAllocator_::_2_::_dynamic_atexit_destructor_for__defaultAllocator__);
   }
   return &valueAllocator;
@@ -75,7 +75,7 @@ __int64 Json::_dynamic_initializer_for__dummyValueAllocatorInitializer__()
   if ( !(_S1_13 & 1) )
   {
     _S1_13 = result | 1;
-    defaultAllocator.vfptr = (Json::ValueAllocatorVtbl *)&Json::DefaultValueAllocator::`vftable';
+    defaultAllocator.vfptr = (Json::ValueAllocatorVtbl *)&Json::DefaultValueAllocator::`vftable;
     result = atexit(Json::valueAllocator_::_2_::_dynamic_atexit_destructor_for__defaultAllocator__);
   }
   return result;
@@ -93,7 +93,7 @@ void __fastcall Json::Value::CommentInfo::~CommentInfo(Json::Value::CommentInfo 
     if ( !(_S1_13 & 1) )
     {
       _S1_13 |= 1u;
-      defaultAllocator.vfptr = (Json::ValueAllocatorVtbl *)&Json::DefaultValueAllocator::`vftable';
+      defaultAllocator.vfptr = (Json::ValueAllocatorVtbl *)&Json::DefaultValueAllocator::`vftable;
       atexit(Json::valueAllocator_::_2_::_dynamic_atexit_destructor_for__defaultAllocator__);
     }
     valueAllocator->vfptr->releaseStringValue(valueAllocator, v1->comment_);
@@ -158,7 +158,7 @@ void __fastcall Json::Value::~Value(Json::Value *this)
   if ( v5 )
   {
     v6 = v5 - 1;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v5,
       8ui64,
       (int)v5[-1].comment_,

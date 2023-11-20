@@ -30,9 +30,9 @@ UELFragmentTable *__fastcall UELFragmentTable::Create()
                                  1u);
   if ( !result )
     return 0i64;
-  result->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  result->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   result->mResourceOwner = 0i64;
-  result->vfptr = (Expression::IMemberMapVtbl *)&UELFragmentTable::`vftable';
+  result->vfptr = (Expression::IMemberMapVtbl *)&UELFragmentTable::`vftable;
   result->mFragmentTable.mCount = 0;
   result->mFragmentTable.mData.mOffset = 0i64;
   return result;

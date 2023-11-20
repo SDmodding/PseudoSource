@@ -1396,7 +1396,7 @@ void __fastcall SubmitLightingTask(int workerId, UFG::qMemoryStreamer *memory_st
   arg.mPrev = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
   arg.mNext = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
   light_Remote.m_Stream = &dest.mStateArgs;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     dest.mStateArgs.mStateArgs,
     0x10ui64,
     128,

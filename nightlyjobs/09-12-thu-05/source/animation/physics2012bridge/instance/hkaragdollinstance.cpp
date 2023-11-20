@@ -133,7 +133,7 @@ void __fastcall hkaRagdollInstance::hkaRagdollInstance(hkaRagdollInstance *this,
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v4 = 0;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaRagdollInstance::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaRagdollInstance::`vftable;
   this->m_rigidBodies.m_data = 0i64;
   this->m_rigidBodies.m_size = 0;
   this->m_rigidBodies.m_capacityAndFlags = 2147483648;
@@ -189,7 +189,7 @@ void __fastcall hkaRagdollInstance::hkaRagdollInstance(hkaRagdollInstance *this,
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v5 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaRagdollInstance::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaRagdollInstance::`vftable;
   this->m_rigidBodies.m_capacityAndFlags = 2147483648;
   this->m_rigidBodies.m_data = 0i64;
   this->m_rigidBodies.m_size = 0;
@@ -237,7 +237,7 @@ void __fastcall hkaRagdollInstance::hkaRagdollInstance(hkaRagdollInstance *this,
 // RVA: 0xC52100
 void __fastcall hkaRagdollInstance::hkaRagdollInstance(hkaRagdollInstance *this, hkFinishLoadedObjectFlag f)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkaRagdollInstance::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaRagdollInstance::`vftable;
 }
 
 // File Line: 59
@@ -255,7 +255,7 @@ void __fastcall hkaRagdollInstance::~hkaRagdollInstance(hkaRagdollInstance *this
   int v9; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaRagdollInstance::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaRagdollInstance::`vftable;
   v2 = 0;
   if ( this->m_rigidBodies.m_size > 0 )
   {
@@ -311,7 +311,7 @@ void __fastcall hkaRagdollInstance::~hkaRagdollInstance(hkaRagdollInstance *this
       8 * v9);
   v1->m_rigidBodies.m_data = 0i64;
   v1->m_rigidBodies.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 71

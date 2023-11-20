@@ -2,10 +2,10 @@
 // RVA: 0x94B240
 void __fastcall Scaleform::Log::~Log(Scaleform::Log *this)
 {
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Log::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Log::`vftable;
   if ( this == Scaleform::SF_GlobalLog )
     Scaleform::SF_GlobalLog = 0i64;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
 }
 
 // File Line: 56
@@ -40,7 +40,7 @@ Scaleform::Log *__fastcall Scaleform::Log::GetDefaultLog()
   {
     _S1_31 |= 1u;
     defaultLog.RefCount = 1;
-    defaultLog.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Log::`vftable';
+    defaultLog.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Log::`vftable;
     atexit(Scaleform::Log::GetDefaultLog_::_2_::_dynamic_atexit_destructor_for__defaultLog__);
   }
   return &defaultLog;

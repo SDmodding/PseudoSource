@@ -6,7 +6,7 @@ void __fastcall OSuite::ZWorker::ZWorker(OSuite::ZWorker *this)
 
   v1 = this;
   OSuite::ZThread::ZThread((OSuite::ZThread *)&this->vfptr, 0);
-  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZWorker::`vftable';
+  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZWorker::`vftable;
   OSuite::ZEvent::ZEvent(&v1->m_wakeUpSignal, 0);
   OSuite::ZMutex::ZMutex(&v1->m_mutex);
   OSuite::ZCallbackManager::ZCallbackManager(&v1->m_CallbackManager);
@@ -24,7 +24,7 @@ void __fastcall OSuite::ZWorker::~ZWorker(OSuite::ZWorker *this)
   OSuite::ZWorker *v1; // rbx
 
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZWorker::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZWorker::`vftable;
   OSuite::ZCallbackManager::~ZCallbackManager(&this->m_CallbackManager);
   OSuite::ZMutex::~ZMutex(&v1->m_mutex);
   OSuite::ZEvent::~ZEvent(&v1->m_wakeUpSignal);

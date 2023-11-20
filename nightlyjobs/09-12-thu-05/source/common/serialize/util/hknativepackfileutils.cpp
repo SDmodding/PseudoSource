@@ -21,7 +21,7 @@ void __fastcall LOCALNAMESPACE::hkNativeResource::~hkNativeResource(LOCALNAMESPA
   int v2; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&LOCALNAMESPACE::hkNativeResource::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&LOCALNAMESPACE::hkNativeResource::`vftable;
   if ( this->m_contents )
   {
     hkNativePackfileUtils::unload(this->m_data.m_data, this->m_data.m_size);
@@ -37,7 +37,7 @@ void __fastcall LOCALNAMESPACE::hkNativeResource::~hkNativeResource(LOCALNAMESPA
       v2 & 0x3FFFFFFF);
   v1->m_data.m_data = 0i64;
   v1->m_data.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 87
@@ -132,7 +132,7 @@ hkResource *__fastcall hkNativePackfileUtils::load(const void *packfileData, int
   if ( v11 )
   {
     v12 = *array[5];
-    *(_QWORD *)v11 = &LOCALNAMESPACE::hkNativeResource::`vftable';
+    *(_QWORD *)v11 = &LOCALNAMESPACE::hkNativeResource::`vftable;
     v13 = v11 + 16;
     *(_DWORD *)(v11 + 8) = 0x1FFFF;
     *(_QWORD *)v13 = 0i64;

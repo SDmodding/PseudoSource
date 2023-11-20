@@ -32,9 +32,9 @@ void __fastcall CAkChainCtx::CAkChainCtx(CAkChainCtx *this, CAkMusicCtx *in_pare
 
   v2 = this;
   CAkMatrixAwareCtx::CAkMatrixAwareCtx((CAkMatrixAwareCtx *)&this->vfptr, in_parent);
-  v2->vfptr = (CAkChildCtxVtbl *)&CAkChainCtx::`vftable'{for `CAkChildCtx'};
-  v2->vfptr = (CAkTransportAwareVtbl *)&CAkChainCtx::`vftable'{for `CAkTransportAware'};
-  v2->vfptr = (ITransitionableVtbl *)&CAkSegmentCtx::`vftable'{for `ITransitionable'};
+  v2->vfptr = (CAkChildCtxVtbl *)&CAkChainCtx::`vftable{for `CAkChildCtx};
+  v2->vfptr = (CAkTransportAwareVtbl *)&CAkChainCtx::`vftable{for `CAkTransportAware};
+  v2->vfptr = (ITransitionableVtbl *)&CAkSegmentCtx::`vftable{for `ITransitionable};
   v2->m_chain.m_pFirst = 0i64;
   v2->m_chain.m_pLast = 0i64;
   v2->m_uItemsTimeOffset = 0;
@@ -48,9 +48,9 @@ void __fastcall CAkChainCtx::~CAkChainCtx(CAkChainCtx *this)
   CAkScheduledItem *v2; // rcx
 
   v1 = this;
-  this->vfptr = (CAkChildCtxVtbl *)&CAkChainCtx::`vftable'{for `CAkChildCtx'};
-  this->vfptr = (CAkTransportAwareVtbl *)&CAkChainCtx::`vftable'{for `CAkTransportAware'};
-  this->vfptr = (ITransitionableVtbl *)&CAkSegmentCtx::`vftable'{for `ITransitionable'};
+  this->vfptr = (CAkChildCtxVtbl *)&CAkChainCtx::`vftable{for `CAkChildCtx};
+  this->vfptr = (CAkTransportAwareVtbl *)&CAkChainCtx::`vftable{for `CAkTransportAware};
+  this->vfptr = (ITransitionableVtbl *)&CAkSegmentCtx::`vftable{for `ITransitionable};
   while ( v1->m_chain.m_pFirst )
   {
     v2 = v1->m_chain.m_pFirst;

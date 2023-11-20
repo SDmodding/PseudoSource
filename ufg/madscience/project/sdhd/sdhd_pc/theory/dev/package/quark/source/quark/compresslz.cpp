@@ -169,7 +169,7 @@ __int64 __fastcall UFG::qDecompressLZ(UFG::qCompressHeader *input, __int64 input
   v7 = _mm_cvtsi128_si32(*(__m128i *)&input->mID);
   v8 = *(_OWORD *)&input->mUncompressedChecksum;
   v9 = *(_OWORD *)&input->pad2;
-  if ( v7 != 'PMCQ' && v7 != 'QCMP' )
+  if ( v7 != PMCQ && v7 != QCMP )
     return -1i64;
   UFG::qCompressHeader::EndianSwap(input);
   v11 = v27;

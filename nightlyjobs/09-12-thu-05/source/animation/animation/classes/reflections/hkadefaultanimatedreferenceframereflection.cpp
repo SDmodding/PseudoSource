@@ -33,7 +33,7 @@ void __fastcall finishLoadedObjecthkaDefaultAnimatedReferenceFrame(void *p, int 
   if ( p )
   {
     *((_BYTE *)p + 16) = 1;
-    *(_QWORD *)p = &hkaDefaultAnimatedReferenceFrame::`vftable';
+    *(_QWORD *)p = &hkaDefaultAnimatedReferenceFrame::`vftable;
   }
 }
 
@@ -48,7 +48,7 @@ void __fastcall cleanupLoadedObjecthkaDefaultAnimatedReferenceFrame(void *p)
 // RVA: 0xB1D350
 void **__fastcall getVtablehkaDefaultAnimatedReferenceFrame()
 {
-  return &hkaDefaultAnimatedReferenceFrame::`vftable';
+  return &hkaDefaultAnimatedReferenceFrame::`vftable;
 }
 
 // File Line: 101

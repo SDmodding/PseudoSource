@@ -43,7 +43,7 @@ void __fastcall UFG::ParkourComponent::ParkourComponent(UFG::ParkourComponent *t
   v7 = (UFG::qNode<UFG::ParkourComponent,UFG::ParkourComponent> *)&v6->mPrev;
   v7->mPrev = v7;
   v7->mNext = v7;
-  v6->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ParkourComponent::`vftable';
+  v6->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ParkourComponent::`vftable;
   UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v6->mParkourContainer.mPrev);
   v6->mDisabledBits = 0i64;
   v6->mFlags = 2;
@@ -73,12 +73,12 @@ void __fastcall UFG::ParkourComponent::ParkourComponent(UFG::ParkourComponent *t
     UFG::ParkourComponent::_ParkourComponentTypeUID,
     "ParkourComponent");
   v12 = v5->mParkourContainerGuid;
-  v13 = `UFG::qGetResourceInventory<UFG::ParkourContainer>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::ParkourContainer>'::`2'::result )
+  v13 = `UFG::qGetResourceInventory<UFG::ParkourContainer>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::ParkourContainer>::`2::result )
   {
     v14 = UFG::qResourceWarehouse::Instance();
     v13 = UFG::qResourceWarehouse::GetInventory(v14, 0x15E16140u);
-    `UFG::qGetResourceInventory<UFG::ParkourContainer>'::`2'::result = v13;
+    `UFG::qGetResourceInventory<UFG::ParkourContainer>::`2::result = v13;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v6->mParkourContainer.mPrev, 0x15E16140u, v12, v13);
 }
@@ -102,7 +102,7 @@ void __fastcall UFG::ParkourComponent::ParkourComponent(UFG::ParkourComponent *t
   v6 = (UFG::qNode<UFG::ParkourComponent,UFG::ParkourComponent> *)&v5->mPrev;
   v6->mPrev = v6;
   v6->mNext = v6;
-  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ParkourComponent::`vftable';
+  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ParkourComponent::`vftable;
   UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v5->mParkourContainer.mPrev);
   v5->mDisabledBits = 0i64;
   v5->mFlags = 5;
@@ -117,12 +117,12 @@ void __fastcall UFG::ParkourComponent::ParkourComponent(UFG::ParkourComponent *t
     (UFG::SimComponent *)&v5->vfptr,
     UFG::ParkourComponent::_ParkourComponentTypeUID,
     "ParkourComponent");
-  v8 = `UFG::qGetResourceInventory<UFG::ParkourContainer>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::ParkourContainer>'::`2'::result )
+  v8 = `UFG::qGetResourceInventory<UFG::ParkourContainer>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::ParkourContainer>::`2::result )
   {
     v9 = UFG::qResourceWarehouse::Instance();
     v8 = UFG::qResourceWarehouse::GetInventory(v9, 0x15E16140u);
-    `UFG::qGetResourceInventory<UFG::ParkourContainer>'::`2'::result = v8;
+    `UFG::qGetResourceInventory<UFG::ParkourContainer>::`2::result = v8;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v5->mParkourContainer.mPrev, 0x15E16140u, v4, v8);
 }
@@ -142,7 +142,7 @@ void __fastcall UFG::ParkourComponent::~ParkourComponent(UFG::ParkourComponent *
   UFG::qNode<UFG::ParkourComponent,UFG::ParkourComponent> *v9; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ParkourComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ParkourComponent::`vftable;
   if ( this == UFG::ParkourComponent::s_ParkourComponentpCurrentIterator )
     UFG::ParkourComponent::s_ParkourComponentpCurrentIterator = (UFG::ParkourComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::ParkourComponent,UFG::ParkourComponent> *)&this->mPrev;
@@ -155,12 +155,12 @@ void __fastcall UFG::ParkourComponent::~ParkourComponent(UFG::ParkourComponent *
   v5 = v1->mDisabledBits;
   if ( v5 )
     v5->vfptr->__vecDelDtor(v5, 1u);
-  v6 = `UFG::qGetResourceInventory<UFG::ParkourContainer>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::ParkourContainer>'::`2'::result )
+  v6 = `UFG::qGetResourceInventory<UFG::ParkourContainer>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::ParkourContainer>::`2::result )
   {
     v7 = UFG::qResourceWarehouse::Instance();
     v6 = UFG::qResourceWarehouse::GetInventory(v7, 0x15E16140u);
-    `UFG::qGetResourceInventory<UFG::ParkourContainer>'::`2'::result = v6;
+    `UFG::qGetResourceInventory<UFG::ParkourContainer>::`2::result = v6;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mParkourContainer.mPrev, v6);
   UFG::qResourceHandle::~qResourceHandle((UFG::qResourceHandle *)&v1->mParkourContainer.mPrev);
@@ -336,7 +336,7 @@ void __fastcall UFG::ParkourQueryManager::ParkourQueryManager(UFG::ParkourQueryM
   UFG::qList<UFG::ParkourQuery,UFG::ParkourQuery,1,0> *result; // [rsp+58h] [rbp+10h]
 
   v1 = this;
-  `eh vector constructor iterator'(this, 0x10ui64, 257, (void (__fastcall *)(void *))UFG::TargetSphere::TargetSphere);
+  `eh vector constructor iterator(this, 0x10ui64, 257, (void (__fastcall *)(void *))UFG::TargetSphere::TargetSphere);
   v2 = &v1->mTempOutput;
   v2->m_data = 0i64;
   v2->m_size = 0;

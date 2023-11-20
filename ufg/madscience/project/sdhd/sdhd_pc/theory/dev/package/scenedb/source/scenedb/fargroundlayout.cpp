@@ -9,7 +9,7 @@ __int64 UFG::_dynamic_initializer_for__gFarGroundLayoutInventory__()
     0xF40E78D9,
     0,
     0);
-  UFG::gFarGroundLayoutInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::FarGroundLayoutInventory::`vftable';
+  UFG::gFarGroundLayoutInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::FarGroundLayoutInventory::`vftable;
   return atexit(UFG::_dynamic_atexit_destructor_for__gFarGroundLayoutInventory__);
 }
 
@@ -43,12 +43,12 @@ void __fastcall UFG::FarGroundLayoutInventory::Add(UFG::FarGroundLayoutInventory
       v7 = (UFG::qResourceHandle *)(v6 + 112i64 * v4);
       if ( v7 )
         UFG::qResourceHandle::qResourceHandle(v7 + 2);
-      v8 = `UFG::qGetResourceInventory<UFG::SceneryGroup>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<UFG::SceneryGroup>'::`2'::result )
+      v8 = `UFG::qGetResourceInventory<UFG::SceneryGroup>::`2::result;
+      if ( !`UFG::qGetResourceInventory<UFG::SceneryGroup>::`2::result )
       {
         v9 = UFG::qResourceWarehouse::Instance();
         v8 = UFG::qResourceWarehouse::GetInventory(v9, 0xF0A07244);
-        `UFG::qGetResourceInventory<UFG::SceneryGroup>'::`2'::result = v8;
+        `UFG::qGetResourceInventory<UFG::SceneryGroup>::`2::result = v8;
       }
       UFG::qResourceHandle::Init(v7 + 2, 0xF0A07244, v7[2].mNameUID, v8);
       ++v4;
@@ -83,13 +83,13 @@ void __fastcall UFG::FarGroundLayoutInventory::Remove(UFG::FarGroundLayoutInvent
         v5 = (signed __int64)v2[1].mNode.mChild + (_QWORD)v4;
       else
         v5 = 0i64;
-      v6 = `UFG::qGetResourceInventory<UFG::SceneryGroup>'::`2'::result;
+      v6 = `UFG::qGetResourceInventory<UFG::SceneryGroup>::`2::result;
       v7 = (UFG::qResourceHandle *)(v5 + 112i64 * v3);
-      if ( !`UFG::qGetResourceInventory<UFG::SceneryGroup>'::`2'::result )
+      if ( !`UFG::qGetResourceInventory<UFG::SceneryGroup>::`2::result )
       {
         v8 = UFG::qResourceWarehouse::Instance();
         v6 = UFG::qResourceWarehouse::GetInventory(v8, 0xF0A07244);
-        `UFG::qGetResourceInventory<UFG::SceneryGroup>'::`2'::result = v6;
+        `UFG::qGetResourceInventory<UFG::SceneryGroup>::`2::result = v6;
       }
       UFG::qResourceHandle::Close(v7 + 2, v6);
       ++v3;

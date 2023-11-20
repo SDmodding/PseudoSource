@@ -21,7 +21,7 @@ void __fastcall hkpGskBaseAgent::hkpGskBaseAgent(hkpGskBaseAgent *this, hkpCdBod
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_contactMgr = mgr;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpGskBaseAgent::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpGskBaseAgent::`vftable;
   v4 = (hkpConvexShape *)bodyA->m_shape;
   v5 = (hkpTriangleShape *)bodyB->m_shape;
   v6 = bodyB;

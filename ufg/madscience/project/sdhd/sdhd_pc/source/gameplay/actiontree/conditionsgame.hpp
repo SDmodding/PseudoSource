@@ -74,7 +74,7 @@ IsPlayingThisCondition *__fastcall IsPlayingThisCondition::Create()
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &IsPlayingThisCondition::`vftable';
+  *(_QWORD *)v1 = &IsPlayingThisCondition::`vftable;
   *((_QWORD *)v1 + 3) = 0i64;
   return (IsPlayingThisCondition *)v1;
 }
@@ -96,7 +96,7 @@ IsPlayingThisInPathCondition *__fastcall IsPlayingThisInPathCondition::Create()
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &IsPlayingThisInPathCondition::`vftable';
+  *(_QWORD *)v1 = &IsPlayingThisInPathCondition::`vftable;
   *((_QWORD *)v1 + 3) = 0i64;
   return (IsPlayingThisInPathCondition *)v1;
 }
@@ -163,7 +163,7 @@ IsHostCondition *__fastcall IsHostCondition::Create()
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &IsHostCondition::`vftable';
+  *(_QWORD *)v1 = &IsHostCondition::`vftable;
   return (IsHostCondition *)v1;
 }
 
@@ -186,7 +186,7 @@ IsPlayerInClothingStore *__fastcall IsPlayerInClothingStore::Create()
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &IsPlayerInClothingStore::`vftable';
+  *(_QWORD *)v1 = &IsPlayerInClothingStore::`vftable;
   return (IsPlayerInClothingStore *)v1;
 }
 
@@ -216,7 +216,7 @@ IsTakingDamageCondition *__fastcall IsTakingDamageCondition::Create()
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &IsTakingDamageCondition::`vftable';
+  *(_QWORD *)v1 = &IsTakingDamageCondition::`vftable;
   return (IsTakingDamageCondition *)v1;
 }
 
@@ -253,7 +253,7 @@ MinigameSuccessCondition *__fastcall MinigameSuccessCondition::Create()
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &MinigameSuccessCondition::`vftable';
+  *(_QWORD *)v1 = &MinigameSuccessCondition::`vftable;
   *((_DWORD *)v1 + 6) = 0;
   return (MinigameSuccessCondition *)v1;
 }
@@ -584,7 +584,7 @@ OnGroundSurfaceGrade *__fastcall OnGroundSurfaceGrade::Create()
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &OnGroundSurfaceGrade::`vftable';
+  *(_QWORD *)v1 = &OnGroundSurfaceGrade::`vftable;
   *((_DWORD *)v1 + 6) = 0;
   *((_DWORD *)v1 + 7) = 1070141403;
   return (OnGroundSurfaceGrade *)v1;
@@ -841,9 +841,9 @@ const char *__fastcall RelativeOrientationCondition::GetClassname(RelativeOrient
 // RVA: 0x29D790
 void __fastcall RelativeOrientationCondition::~RelativeOrientationCondition(RelativeOrientationCondition *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&RelativeOrientationCondition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&RelativeOrientationCondition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 2757
@@ -857,9 +857,9 @@ __int64 __fastcall TargetRelativeOrientationCondition::GetClassNameUID(TargetRel
 // RVA: 0x29D7D0
 void __fastcall RelativePositionCondition::~RelativePositionCondition(RelativePositionCondition *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&RelativePositionCondition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&RelativePositionCondition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 2786
@@ -946,10 +946,10 @@ HitCollisionVelocityRelativeToNormal *__fastcall HitCollisionVelocityRelativeToN
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &RelativeOrientationCondition::`vftable';
+  *(_QWORD *)v1 = &RelativeOrientationCondition::`vftable;
   *((_DWORD *)v1 + 6) = 0;
   *((_DWORD *)v1 + 7) = 1061752795;
-  *(_QWORD *)v1 = &HitCollisionVelocityRelativeToNormal::`vftable';
+  *(_QWORD *)v1 = &HitCollisionVelocityRelativeToNormal::`vftable;
   return (HitCollisionVelocityRelativeToNormal *)v1;
 }
 
@@ -1250,7 +1250,7 @@ VehicleOffGroundCondition *__fastcall VehicleOffGroundCondition::Create()
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &VehicleOffGroundCondition::`vftable';
+  *(_QWORD *)v1 = &VehicleOffGroundCondition::`vftable;
   return (VehicleOffGroundCondition *)v1;
 }
 
@@ -1271,7 +1271,7 @@ VehicleUntargetableCondition *__fastcall VehicleUntargetableCondition::Create()
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &VehicleUntargetableCondition::`vftable';
+  *(_QWORD *)v1 = &VehicleUntargetableCondition::`vftable;
   return (VehicleUntargetableCondition *)v1;
 }
 
@@ -1294,7 +1294,7 @@ VehicleBurnoutCondition *__fastcall VehicleBurnoutCondition::Create()
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &VehicleBurnoutCondition::`vftable';
+  *(_QWORD *)v1 = &VehicleBurnoutCondition::`vftable;
   return (VehicleBurnoutCondition *)v1;
 }
 
@@ -1310,7 +1310,7 @@ VehicleWheelieCondition *__fastcall VehicleWheelieCondition::Create()
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &VehicleWheelieCondition::`vftable';
+  *(_QWORD *)v1 = &VehicleWheelieCondition::`vftable;
   return (VehicleWheelieCondition *)v1;
 }
 
@@ -1359,7 +1359,7 @@ VehicleOccupantIsInBoatCondition *__fastcall VehicleOccupantIsInBoatCondition::C
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &VehicleOccupantIsInBoatCondition::`vftable';
+  *(_QWORD *)v1 = &VehicleOccupantIsInBoatCondition::`vftable;
   return (VehicleOccupantIsInBoatCondition *)v1;
 }
 
@@ -1380,7 +1380,7 @@ VehicleOccupantIsInSinkingBoatCondition *__fastcall VehicleOccupantIsInSinkingBo
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &VehicleOccupantIsInSinkingBoatCondition::`vftable';
+  *(_QWORD *)v1 = &VehicleOccupantIsInSinkingBoatCondition::`vftable;
   return (VehicleOccupantIsInSinkingBoatCondition *)v1;
 }
 
@@ -1436,7 +1436,7 @@ TargetVehicleDoorsLockedCondition *__fastcall TargetVehicleDoorsLockedCondition:
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &TargetVehicleDoorsLockedCondition::`vftable';
+  *(_QWORD *)v1 = &TargetVehicleDoorsLockedCondition::`vftable;
   v1[24] = 28;
   return (TargetVehicleDoorsLockedCondition *)v1;
 }
@@ -1458,7 +1458,7 @@ VehicleWindowBrokenCondition *__fastcall VehicleWindowBrokenCondition::Create()
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &VehicleWindowBrokenCondition::`vftable';
+  *(_QWORD *)v1 = &VehicleWindowBrokenCondition::`vftable;
   *((_DWORD *)v1 + 6) = 3;
   return (VehicleWindowBrokenCondition *)v1;
 }
@@ -1480,7 +1480,7 @@ TargetVehicleWindowBrokenCondition *__fastcall TargetVehicleWindowBrokenConditio
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &TargetVehicleWindowBrokenCondition::`vftable';
+  *(_QWORD *)v1 = &TargetVehicleWindowBrokenCondition::`vftable;
   v1[24] = 28;
   *((_DWORD *)v1 + 7) = 3;
   return (TargetVehicleWindowBrokenCondition *)v1;
@@ -1503,7 +1503,7 @@ VehicleNumberOfTiresDamagedCondition *__fastcall VehicleNumberOfTiresDamagedCond
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &VehicleNumberOfTiresDamagedCondition::`vftable';
+  *(_QWORD *)v1 = &VehicleNumberOfTiresDamagedCondition::`vftable;
   *((_DWORD *)v1 + 6) = 0;
   v1[28] = 3;
   *((_DWORD *)v1 + 8) = 1;
@@ -1556,7 +1556,7 @@ VehicleDeniesAllyPassengerCondition *__fastcall VehicleDeniesAllyPassengerCondit
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &VehicleDeniesAllyPassengerCondition::`vftable';
+  *(_QWORD *)v1 = &VehicleDeniesAllyPassengerCondition::`vftable;
   v1[24] = 28;
   return (VehicleDeniesAllyPassengerCondition *)v1;
 }
@@ -1592,7 +1592,7 @@ VehicleDeniesHijackCondition *__fastcall VehicleDeniesHijackCondition::Create()
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleDeniesHijackCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleDeniesHijackCondition::`vftable;
   v1->mTargetType.mValue = eTARGET_TYPE_VEHICLE;
   return v1;
 }
@@ -1621,7 +1621,7 @@ Condition *__fastcall VehicleCanActionHijackCondition::Create()
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &VehicleCanActionHijackCondition::`vftable';
+  *(_QWORD *)v1 = &VehicleCanActionHijackCondition::`vftable;
   v1[24] = 44;
   return (Condition *)v1;
 }
@@ -1643,7 +1643,7 @@ VehicleCanActionHijackClimbCondition *__fastcall VehicleCanActionHijackClimbCond
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &VehicleCanActionHijackClimbCondition::`vftable';
+  *(_QWORD *)v1 = &VehicleCanActionHijackClimbCondition::`vftable;
   v1[24] = 44;
   return (VehicleCanActionHijackClimbCondition *)v1;
 }
@@ -2138,7 +2138,7 @@ WantToUsePOICondition *__fastcall WantToUsePOICondition::Create()
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &WantToUsePOICondition::`vftable';
+  *(_QWORD *)v1 = &WantToUsePOICondition::`vftable;
   return (WantToUsePOICondition *)v1;
 }
 
@@ -2166,7 +2166,7 @@ POIWeatherFilterOnWithIsRainingCondition *__fastcall POIWeatherFilterOnWithIsRai
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &POIWeatherFilterOnWithIsRainingCondition::`vftable';
+  *(_QWORD *)v1 = &POIWeatherFilterOnWithIsRainingCondition::`vftable;
   return (POIWeatherFilterOnWithIsRainingCondition *)v1;
 }
 
@@ -2366,7 +2366,7 @@ IsTargetsTargetCondition *__fastcall IsTargetsTargetCondition::Create()
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &IsTargetsTargetCondition::`vftable';
+  *(_QWORD *)v1 = &IsTargetsTargetCondition::`vftable;
   *((_WORD *)v1 + 12) = 0;
   return (IsTargetsTargetCondition *)v1;
 }
@@ -2388,7 +2388,7 @@ InventoryCheckPropertyCondition *__fastcall InventoryCheckPropertyCondition::Cre
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &InventoryCheckPropertyCondition::`vftable';
+  *(_QWORD *)v1 = &InventoryCheckPropertyCondition::`vftable;
   *((_WORD *)v1 + 12) = 0;
   return (InventoryCheckPropertyCondition *)v1;
 }
@@ -2426,7 +2426,7 @@ CanWanderCondition *__fastcall CanWanderCondition::Create()
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &CanWanderCondition::`vftable';
+  *(_QWORD *)v1 = &CanWanderCondition::`vftable;
   return (CanWanderCondition *)v1;
 }
 
@@ -2509,7 +2509,7 @@ Condition *__fastcall ActionDefLeanBackCondition::Create()
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &ActionDefLeanBackCondition::`vftable';
+  *(_QWORD *)v1 = &ActionDefLeanBackCondition::`vftable;
   return (Condition *)v1;
 }
 
@@ -2615,7 +2615,7 @@ IsPlayerInBerserkModeCondition *__fastcall IsPlayerInBerserkModeCondition::Creat
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &IsPlayerInBerserkModeCondition::`vftable';
+  *(_QWORD *)v1 = &IsPlayerInBerserkModeCondition::`vftable;
   return (IsPlayerInBerserkModeCondition *)v1;
 }
 
@@ -2636,7 +2636,7 @@ IsPlayerInCombatBuffModeCondition *__fastcall IsPlayerInCombatBuffModeCondition:
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &IsPlayerInCombatBuffModeCondition::`vftable';
+  *(_QWORD *)v1 = &IsPlayerInCombatBuffModeCondition::`vftable;
   return (IsPlayerInCombatBuffModeCondition *)v1;
 }
 
@@ -2657,7 +2657,7 @@ HitRecordProcessingCondition *__fastcall HitRecordProcessingCondition::Create()
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &HitRecordProcessingCondition::`vftable';
+  *(_QWORD *)v1 = &HitRecordProcessingCondition::`vftable;
   return (HitRecordProcessingCondition *)v1;
 }
 
@@ -2678,7 +2678,7 @@ HitRecordBerserkAttackFlagCondition *__fastcall HitRecordBerserkAttackFlagCondit
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &HitRecordBerserkAttackFlagCondition::`vftable';
+  *(_QWORD *)v1 = &HitRecordBerserkAttackFlagCondition::`vftable;
   return (HitRecordBerserkAttackFlagCondition *)v1;
 }
 
@@ -2706,7 +2706,7 @@ ResourceIsAvailableCondition *__fastcall ResourceIsAvailableCondition::Create()
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &ResourceIsAvailableCondition::`vftable';
+  *(_QWORD *)v1 = &ResourceIsAvailableCondition::`vftable;
   *((_QWORD *)v1 + 3) = 1i64;
   BinString::Set((BinString *)v1 + 3, &customWorldMapCaption);
   *((_WORD *)v1 + 16) = 0;
@@ -2747,7 +2747,7 @@ IsCameraCollidingCondition *__fastcall IsCameraCollidingCondition::Create()
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &IsCameraCollidingCondition::`vftable';
+  *(_QWORD *)v1 = &IsCameraCollidingCondition::`vftable;
   return (IsCameraCollidingCondition *)v1;
 }
 
@@ -2883,7 +2883,7 @@ SocialRequiresInteractionAreaCheckCondition *__fastcall SocialRequiresInteractio
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &SocialRequiresInteractionAreaCheckCondition::`vftable';
+  *(_QWORD *)v1 = &SocialRequiresInteractionAreaCheckCondition::`vftable;
   return (SocialRequiresInteractionAreaCheckCondition *)v1;
 }
 
@@ -2966,7 +2966,7 @@ UIPDAIsActiveCondition *__fastcall UIPDAIsActiveCondition::Create()
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &UIPDAIsActiveCondition::`vftable';
+  *(_QWORD *)v1 = &UIPDAIsActiveCondition::`vftable;
   return (UIPDAIsActiveCondition *)v1;
 }
 
@@ -3070,7 +3070,7 @@ SocialFaceActionGetConfirmationDialogConfirmedCondition *__fastcall SocialFaceAc
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &SocialFaceActionGetConfirmationDialogConfirmedCondition::`vftable';
+  *(_QWORD *)v1 = &SocialFaceActionGetConfirmationDialogConfirmedCondition::`vftable;
   return (SocialFaceActionGetConfirmationDialogConfirmedCondition *)v1;
 }
 
@@ -3119,7 +3119,7 @@ SocialFaceActionEnabledCondition *__fastcall SocialFaceActionEnabledCondition::C
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &SocialFaceActionEnabledCondition::`vftable';
+  *(_QWORD *)v1 = &SocialFaceActionEnabledCondition::`vftable;
   return (SocialFaceActionEnabledCondition *)v1;
 }
 
@@ -3168,7 +3168,7 @@ IsPossessedPedModeEnabledCondition *__fastcall IsPossessedPedModeEnabledConditio
   if ( !v0 )
     return 0i64;
   Condition::Condition((Condition *)v0);
-  *(_QWORD *)v1 = &IsPossessedPedModeEnabledCondition::`vftable';
+  *(_QWORD *)v1 = &IsPossessedPedModeEnabledCondition::`vftable;
   return (IsPossessedPedModeEnabledCondition *)v1;
 }
 

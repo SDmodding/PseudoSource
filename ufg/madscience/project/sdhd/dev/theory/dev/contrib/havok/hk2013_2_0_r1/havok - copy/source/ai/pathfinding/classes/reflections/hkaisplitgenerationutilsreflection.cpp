@@ -35,7 +35,7 @@ void __fastcall finishLoadedObjecthkaiCuttingGeometryInfo(void *p, int finishing
   if ( p )
   {
     v2 = (hkGeometry *)((char *)p + 16);
-    v2[-1].m_triangles.m_data = (hkGeometry::Triangle *)&hkaiCuttingGeometryInfo::`vftable';
+    v2[-1].m_triangles.m_data = (hkGeometry::Triangle *)&hkaiCuttingGeometryInfo::`vftable;
     hkGeometry::hkGeometry(v2, (hkFinishLoadedObjectFlag)finishing);
   }
 }
@@ -54,7 +54,7 @@ void **__fastcall getVtablehkaiCuttingGeometryInfo()
   hkGeometry v1; // [rsp+30h] [rbp-58h]
 
   hkGeometry::hkGeometry(&v1, 0);
-  return &hkaiCuttingGeometryInfo::`vftable';
+  return &hkaiCuttingGeometryInfo::`vftable;
 }
 
 // File Line: 107

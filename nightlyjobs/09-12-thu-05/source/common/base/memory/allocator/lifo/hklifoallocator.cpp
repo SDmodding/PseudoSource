@@ -4,7 +4,7 @@ void __fastcall hkLifoAllocator::hkLifoAllocator(hkLifoAllocator *this, int slab
 {
   this->m_impl = 0i64;
   this->m_slabSize = slabSize;
-  this->vfptr = (hkMemoryAllocatorVtbl *)&hkLifoAllocator::`vftable';
+  this->vfptr = (hkMemoryAllocatorVtbl *)&hkLifoAllocator::`vftable;
 }
 
 // File Line: 46

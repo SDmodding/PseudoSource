@@ -37,8 +37,8 @@ void __fastcall UFG::BoatPhysicsMoverComponent::BoatPhysicsMoverComponent(UFG::B
   v4 = (UFG::qNode<UFG::BoatPhysicsMoverComponent,UFG::BoatPhysicsMoverComponent> *)&v3->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BoatPhysicsMoverComponent::`vftable'{for `UFG::SimComponent'};
-  v3->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::BoatPhysicsMoverComponent::`vftable'{for `UFG::UpdateInterface'};
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BoatPhysicsMoverComponent::`vftable{for `UFG::SimComponent};
+  v3->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::BoatPhysicsMoverComponent::`vftable{for `UFG::UpdateInterface};
   v3->mDocked = 0;
   v3->mIgnoreDockingTimer = 2.0;
   v5 = UFG::BoatPhysicsMoverComponent::s_BoatPhysicsMoverComponentList.mNode.mPrev;
@@ -64,8 +64,8 @@ void __fastcall UFG::BoatPhysicsMoverComponent::~BoatPhysicsMoverComponent(UFG::
   UFG::qNode<UFG::BoatPhysicsMoverComponent,UFG::BoatPhysicsMoverComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BoatPhysicsMoverComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::BoatPhysicsMoverComponent::`vftable'{for `UFG::UpdateInterface'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BoatPhysicsMoverComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::BoatPhysicsMoverComponent::`vftable{for `UFG::UpdateInterface};
   if ( this == UFG::BoatPhysicsMoverComponent::s_BoatPhysicsMoverComponentpCurrentIterator )
     UFG::BoatPhysicsMoverComponent::s_BoatPhysicsMoverComponentpCurrentIterator = (UFG::BoatPhysicsMoverComponent *)&this->mPrev[-58].mNext;
   v2 = (UFG::qNode<UFG::BoatPhysicsMoverComponent,UFG::BoatPhysicsMoverComponent> *)&this->mPrev;
@@ -917,7 +917,7 @@ UFG::ParkourHandle *__fastcall UFG::BoatPhysicsMoverComponent::FindClosestParkou
   if ( !sensor_component )
     return 0i64;
   UFG::SensorComponent::GetExtents(sensor_component, &vmin, &vmax);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     out.p,
     0x18ui64,
     768,
@@ -968,7 +968,7 @@ UFG::ParkourHandle *__fastcall UFG::BoatPhysicsMoverComponent::FindClosestParkou
     while ( (unsigned int)v15 < out.size );
   }
   out.size = 0;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     out.p,
     0x18ui64,
     768,

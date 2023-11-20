@@ -173,9 +173,9 @@ void __fastcall AnimationTask::AnimationTask(AnimationTask *this)
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<AnimationTrack>::`vftable';
-  this->vfptr = (ITaskVtbl *)&AnimationTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<AnimationTrack>::`vftable;
+  this->vfptr = (ITaskVtbl *)&AnimationTask::`vftable;
   v2 = &this->mController;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
@@ -704,9 +704,9 @@ void __fastcall AnimationRefPoseTask::AnimationRefPoseTask(AnimationRefPoseTask 
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<AnimationRefPoseTrack>::`vftable';
-  this->vfptr = (ITaskVtbl *)&AnimationRefPoseTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<AnimationRefPoseTrack>::`vftable;
+  this->vfptr = (ITaskVtbl *)&AnimationRefPoseTask::`vftable;
   v2 = &this->mController;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
@@ -1126,12 +1126,12 @@ void __fastcall AnimationLockHighLODTask::AnimationLockHighLODTask(AnimationLock
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<AnimationLockHighLODTrack>::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<AnimationLockHighLODTrack>::`vftable;
   v2 = (UFG::qNode<AnimationLockHighLODTask,AnimationLockHighLODList> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (ITaskVtbl *)&AnimationLockHighLODTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&AnimationLockHighLODTask::`vftable;
 }
 
 // File Line: 583
@@ -1235,9 +1235,9 @@ void __fastcall BlendTreeTask::BlendTreeTask(BlendTreeTask *this)
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<BlendTreeTrack>::`vftable';
-  this->vfptr = (ITaskVtbl *)&BlendTreeTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<BlendTreeTrack>::`vftable;
+  this->vfptr = (ITaskVtbl *)&BlendTreeTask::`vftable;
   v2 = &this->mPlayingTree;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
@@ -1774,13 +1774,13 @@ void __fastcall BlendTreeControllerTask::BlendTreeControllerTask(BlendTreeContro
   v1 = (UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (IBlendTreeControllerTaskVtbl *)&IBlendTreeControllerTask::`vftable';
-  this->vfptr = (IBlendTreeControllerTaskVtbl *)&BlendTreeControllerBaseTask<BlendTreeControllerTrack>::`vftable';
+  this->vfptr = (IBlendTreeControllerTaskVtbl *)&IBlendTreeControllerTask::`vftable;
+  this->vfptr = (IBlendTreeControllerTaskVtbl *)&BlendTreeControllerBaseTask<BlendTreeControllerTrack>::`vftable;
   v2 = &this->mPlayingTree;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   this->mPlayingTree.m_pPointer = 0i64;
-  this->vfptr = (IBlendTreeControllerTaskVtbl *)&BlendTreeControllerTask::`vftable';
+  this->vfptr = (IBlendTreeControllerTaskVtbl *)&BlendTreeControllerTask::`vftable;
   if ( this->mPlayingTree.m_pPointer )
   {
     v3 = v2->mPrev;
@@ -1995,13 +1995,13 @@ void __fastcall BlendTreeControllerTargetPositionTask::BlendTreeControllerTarget
   v1 = (UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (IBlendTreeControllerTaskVtbl *)&IBlendTreeControllerTask::`vftable';
-  this->vfptr = (IBlendTreeControllerTaskVtbl *)&BlendTreeControllerBaseTask<BlendTreeControllerTargetPositionTrack>::`vftable';
+  this->vfptr = (IBlendTreeControllerTaskVtbl *)&IBlendTreeControllerTask::`vftable;
+  this->vfptr = (IBlendTreeControllerTaskVtbl *)&BlendTreeControllerBaseTask<BlendTreeControllerTargetPositionTrack>::`vftable;
   v2 = &this->mPlayingTree;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   this->mPlayingTree.m_pPointer = 0i64;
-  this->vfptr = (IBlendTreeControllerTaskVtbl *)&BlendTreeControllerTargetPositionTask::`vftable';
+  this->vfptr = (IBlendTreeControllerTaskVtbl *)&BlendTreeControllerTargetPositionTask::`vftable;
   if ( this->mPlayingTree.m_pPointer )
   {
     v3 = v2->mPrev;
@@ -2155,13 +2155,13 @@ void __fastcall BlendTreeControllerTargetDistancTask::BlendTreeControllerTargetD
   v1 = (UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (IBlendTreeControllerTaskVtbl *)&IBlendTreeControllerTask::`vftable';
-  this->vfptr = (IBlendTreeControllerTaskVtbl *)&BlendTreeControllerBaseTask<BlendTreeControllerTargetDistancTrack>::`vftable';
+  this->vfptr = (IBlendTreeControllerTaskVtbl *)&IBlendTreeControllerTask::`vftable;
+  this->vfptr = (IBlendTreeControllerTaskVtbl *)&BlendTreeControllerBaseTask<BlendTreeControllerTargetDistancTrack>::`vftable;
   v2 = &this->mPlayingTree;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   this->mPlayingTree.m_pPointer = 0i64;
-  this->vfptr = (IBlendTreeControllerTaskVtbl *)&BlendTreeControllerTargetDistancTask::`vftable';
+  this->vfptr = (IBlendTreeControllerTaskVtbl *)&BlendTreeControllerTargetDistancTask::`vftable;
   if ( this->mPlayingTree.m_pPointer )
   {
     v3 = v2->mPrev;

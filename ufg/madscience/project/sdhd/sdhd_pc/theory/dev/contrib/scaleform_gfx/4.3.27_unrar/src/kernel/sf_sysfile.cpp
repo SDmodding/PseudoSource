@@ -29,28 +29,28 @@ void __fastcall Scaleform::SysFile::SysFile(Scaleform::SysFile *this)
   Scaleform::File *v4; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::File,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::File::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::DelegatedFile::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::File,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::File::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::DelegatedFile::`vftable;
   this->pFile.pObject = 0i64;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::SysFile::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::SysFile::`vftable;
   v2 = ((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
          Scaleform::Memory::pGlobalHeap,
          16i64);
   v3 = (Scaleform::File *)v2;
   if ( v2 )
   {
-    *(_QWORD *)v2 = &Scaleform::RefCountImplCore::`vftable';
+    *(_QWORD *)v2 = &Scaleform::RefCountImplCore::`vftable;
     *(_DWORD *)(v2 + 8) = 1;
-    *(_QWORD *)v2 = &Scaleform::RefCountImpl::`vftable';
-    *(_QWORD *)v2 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-    *(_QWORD *)v2 = &Scaleform::RefCountBase<Scaleform::File,2>::`vftable';
-    *(_QWORD *)v2 = &Scaleform::File::`vftable';
-    *(_QWORD *)v2 = &Scaleform::UnopenedFile::`vftable';
+    *(_QWORD *)v2 = &Scaleform::RefCountImpl::`vftable;
+    *(_QWORD *)v2 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+    *(_QWORD *)v2 = &Scaleform::RefCountBase<Scaleform::File,2>::`vftable;
+    *(_QWORD *)v2 = &Scaleform::File::`vftable;
+    *(_QWORD *)v2 = &Scaleform::UnopenedFile::`vftable;
   }
   else
   {
@@ -66,15 +66,15 @@ void __fastcall Scaleform::SysFile::SysFile(Scaleform::SysFile *this)
 // RVA: 0x945880
 void __fastcall Scaleform::SysFile::SysFile(Scaleform::SysFile *this, Scaleform::String *path, int flags, int mode)
 {
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::File,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::File::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::DelegatedFile::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::File,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::File::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::DelegatedFile::`vftable;
   this->pFile.pObject = 0i64;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::SysFile::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::SysFile::`vftable;
   Scaleform::SysFile::Open(this, path, flags, mode);
 }
 
@@ -148,13 +148,13 @@ char __fastcall Scaleform::SysFile::Open(Scaleform::SysFile *this, Scaleform::St
             16i64);
     if ( v17 )
     {
-      *(_QWORD *)v17 = &Scaleform::RefCountImplCore::`vftable';
+      *(_QWORD *)v17 = &Scaleform::RefCountImplCore::`vftable;
       *(_DWORD *)(v17 + 8) = 1;
-      *(_QWORD *)v17 = &Scaleform::RefCountImpl::`vftable';
-      *(_QWORD *)v17 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-      *(_QWORD *)v17 = &Scaleform::RefCountBase<Scaleform::File,2>::`vftable';
-      *(_QWORD *)v17 = &Scaleform::File::`vftable';
-      *(_QWORD *)v17 = &Scaleform::UnopenedFile::`vftable';
+      *(_QWORD *)v17 = &Scaleform::RefCountImpl::`vftable;
+      *(_QWORD *)v17 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+      *(_QWORD *)v17 = &Scaleform::RefCountBase<Scaleform::File,2>::`vftable;
+      *(_QWORD *)v17 = &Scaleform::File::`vftable;
+      *(_QWORD *)v17 = &Scaleform::UnopenedFile::`vftable;
     }
     else
     {
@@ -201,13 +201,13 @@ char __fastcall Scaleform::SysFile::Close(Scaleform::SysFile *this)
          16i64);
   if ( v2 )
   {
-    *(_QWORD *)v2 = &Scaleform::RefCountImplCore::`vftable';
+    *(_QWORD *)v2 = &Scaleform::RefCountImplCore::`vftable;
     *(_DWORD *)(v2 + 8) = 1;
-    *(_QWORD *)v2 = &Scaleform::RefCountImpl::`vftable';
-    *(_QWORD *)v2 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-    *(_QWORD *)v2 = &Scaleform::RefCountBase<Scaleform::File,2>::`vftable';
-    *(_QWORD *)v2 = &Scaleform::File::`vftable';
-    *(_QWORD *)v2 = &Scaleform::UnopenedFile::`vftable';
+    *(_QWORD *)v2 = &Scaleform::RefCountImpl::`vftable;
+    *(_QWORD *)v2 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+    *(_QWORD *)v2 = &Scaleform::RefCountBase<Scaleform::File,2>::`vftable;
+    *(_QWORD *)v2 = &Scaleform::File::`vftable;
+    *(_QWORD *)v2 = &Scaleform::UnopenedFile::`vftable;
   }
   else
   {

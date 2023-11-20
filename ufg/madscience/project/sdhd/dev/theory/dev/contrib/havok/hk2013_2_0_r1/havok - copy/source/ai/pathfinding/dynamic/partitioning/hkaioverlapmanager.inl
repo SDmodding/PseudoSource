@@ -10,7 +10,7 @@ void __fastcall hkaiOverlapManagerSection::GeneratorData::GeneratorData(hkaiOver
 
   v3 = 0;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiOverlapManagerSection::GeneratorData::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiOverlapManagerSection::GeneratorData::`vftable;
   this->m_context.m_generator = 0i64;
   this->m_context.m_generatorSize = 0;
   this->m_overlappedFaces.m_data = 0i64;

@@ -14,13 +14,13 @@ void __fastcall Scaleform::GFx::AS3::XMLSupportImpl::XMLSupportImpl(Scaleform::G
   v2 = vm;
   v3 = this;
   v4 = vm->GC.GC;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::RefCountBaseGC<328>::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::RefCountBaseGC<328>::`vftable;
   this->RefCount = 1;
   this->pRCCRaw = (unsigned __int64)v4;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::GASRefCountBase::`vftable';
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::XMLSupport::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::GASRefCountBase::`vftable;
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::XMLSupport::`vftable;
   this->Enabled = 1;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::XMLSupportImpl::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::XMLSupportImpl::`vftable;
   this->VMRef = vm;
   v5 = Scaleform::GFx::AS3::ClassTraits::fl::XML::MakeClassTraits(&result, vm);
   v6 = v5->pV;
@@ -43,7 +43,7 @@ void __fastcall Scaleform::GFx::AS3::XMLSupportImpl::~XMLSupportImpl(Scaleform::
   unsigned int v5; // eax
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::XMLSupportImpl::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::XMLSupportImpl::`vftable;
   v2 = this->TraitsXMLList.pObject;
   if ( v2 )
   {
@@ -78,7 +78,7 @@ void __fastcall Scaleform::GFx::AS3::XMLSupportImpl::~XMLSupportImpl(Scaleform::
       }
     }
   }
-  v1->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::XMLSupport::`vftable';
+  v1->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::XMLSupport::`vftable;
   Scaleform::GFx::AS3::GASRefCountBase::~GASRefCountBase((Scaleform::GFx::AS3::GASRefCountBase *)&v1->vfptr);
 }
 
@@ -2188,7 +2188,7 @@ LABEL_186:
             if ( v264.pNode < (Scaleform::GFx::ASStringNode *)v270 )
               v116 = &v278;
             Scaleform::GFx::AS3::Instances::fl::XMLElement::AddAttr(v114, ns, &v277, v116);
-            v303.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable';
+            v303.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable;
             Scaleform::Formatter::~Formatter((Scaleform::Formatter *)&v303.vfptr);
             v11 = v105->RefCount-- == 1;
             if ( v11 )
@@ -2200,7 +2200,7 @@ LABEL_186:
             if ( name.pNode >= (Scaleform::GFx::ASStringNode *)v268.pV )
               goto LABEL_235;
           }
-          v303.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable';
+          v303.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable;
           Scaleform::Formatter::~Formatter((Scaleform::Formatter *)&v303.vfptr);
           v11 = v105->RefCount-- == 1;
           if ( v11 )
@@ -2753,7 +2753,7 @@ LABEL_395:
                     &v277,
                     v183);
                   Scaleform::GFx::AS3::Multiname::~Multiname((Scaleform::GFx::AS3::Multiname *)&v303);
-                  v306.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable';
+                  v306.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable;
                   Scaleform::Formatter::~Formatter((Scaleform::Formatter *)&v306.vfptr);
                   v171 = v283;
                   key.pNode = v283;
@@ -2763,7 +2763,7 @@ LABEL_395:
                     goto LABEL_341;
                   }
                 }
-                v306.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable';
+                v306.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable;
                 v207 = &v306;
 LABEL_400:
                 Scaleform::Formatter::~Formatter((Scaleform::Formatter *)&v207->vfptr);
@@ -2922,14 +2922,14 @@ LABEL_341:
                     if ( (unsigned int)v267 < (unsigned __int64)((v283->Size >> 6) & 7) )
                       v196 = &v278;
                     Scaleform::GFx::AS3::Instances::fl::XMLElement::AddAttr(v194, ns, &v277, v196);
-                    v307.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable';
+                    v307.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable;
                     Scaleform::Formatter::~Formatter((Scaleform::Formatter *)&v307.vfptr);
                     v189 = (int)key.pNode;
                     LODWORD(v267) = key.pNode;
                     if ( LODWORD(key.pNode) >= (unsigned int)v254 )
                       goto LABEL_365;
                   }
-                  v307.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable';
+                  v307.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable;
                   v207 = &v307;
                   goto LABEL_400;
                 }

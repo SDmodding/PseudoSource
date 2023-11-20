@@ -7,7 +7,7 @@ void __fastcall SkeletalAnimation::SkeletalAnimation(SkeletalAnimation *this, Me
   UFG::qList<SkeletalAnimationHandle,SkeletalAnimationList,0,0> *v4; // [rsp+50h] [rbp+18h]
 
   v2 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
   UFG::qSafePointerNode<SkeletalAnimation>::qSafePointerNode<SkeletalAnimation>((UFG::qSafePointerNode<SkeletalAnimation> *)&this->vfptr);
   v2->mNode.mParent = 0i64;
@@ -16,8 +16,8 @@ void __fastcall SkeletalAnimation::SkeletalAnimation(SkeletalAnimation *this, Me
   v3 = (UFG::qNode<SkeletalAnimation,SkeletalAnimation> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (Expression::IMemberMapVtbl *)&SkeletalAnimation::`vftable'{for `Expression::IMemberMap'};
-  v2->vfptr = (UFG::qSafePointerNode<SkeletalAnimation>Vtbl *)&SkeletalAnimation::`vftable'{for `UFG::qSafePointerNode<SkeletalAnimation>'};
+  v2->vfptr = (Expression::IMemberMapVtbl *)&SkeletalAnimation::`vftable{for `Expression::IMemberMap};
+  v2->vfptr = (UFG::qSafePointerNode<SkeletalAnimation>Vtbl *)&SkeletalAnimation::`vftable{for `UFG::qSafePointerNode<SkeletalAnimation>};
   UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v2->m_AnimationResourceHandle.mPrev);
   v2->m_AnimationResourceHandle.m_pSkeletalAnimationOwner = 0i64;
   v2->m_AnimationResourceHandle.m_bUnloading = 0;

@@ -176,7 +176,7 @@ void __fastcall UFG::TriggerRegion::TriggerRegion(UFG::TriggerRegion *this, UFG:
   v11 = (UFG::qNode<UFG::TriggerRegion,UFG::TriggerRegion> *)&v7->mPrev;
   v11->mPrev = v11;
   v11->mNext = v11;
-  v7->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TriggerRegion::`vftable';
+  v7->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TriggerRegion::`vftable;
   v7->mModeFlags = 0;
   v12 = &v7->mpRegion;
   v12->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v12->mPrev;
@@ -325,7 +325,7 @@ void __fastcall UFG::TriggerRegion::~TriggerRegion(UFG::TriggerRegion *this)
   UFG::qNode<UFG::TriggerRegion,UFG::TriggerTarget> *v18; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TriggerRegion::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TriggerRegion::`vftable;
   v2 = &this->mTrackList;
   UFG::qList<UFG::TriggerTarget,UFG::TriggerTarget,1,0>::DeleteNodes(&this->mTrackList);
   v3 = v2->mNode.mPrev;
@@ -372,7 +372,7 @@ void __fastcall UFG::TriggerRegion::~TriggerRegion(UFG::TriggerRegion *this)
   v18->mPrev = v17;
   v16->mPrev = v16;
   v16->mNext = v16;
-  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::MarkerBase::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::MarkerBase::`vftable;
   if ( v1->mFlags & 0x10000 )
     UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
       (UFG::qBaseTreeVariableRB<unsigned __int64> *)&UFG::MarkerBase::msMarkers,

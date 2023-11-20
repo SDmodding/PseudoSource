@@ -17,7 +17,7 @@ _BOOL8 __fastcall hkcdGskBase::castRay<hkcdGsk_Vector4Shape>(hkcdGskBase *this, 
   hkcdGskImpl<hkcdGskBase::RayCastShapeInterface<hkcdGsk_Vector4Shape> > v8; // [rsp+70h] [rbp-C8h]
 
   v4 = input;
-  shapeInterface.vfptr = (hkcdGskBase::ShapeInterfaceVtbl *)&hkcdGskBase::RayCastShapeInterface<hkcdGsk_Vector4Shape>::`vftable';
+  shapeInterface.vfptr = (hkcdGskBase::ShapeInterfaceVtbl *)&hkcdGskBase::RayCastShapeInterface<hkcdGsk_Vector4Shape>::`vftable;
   *(_DWORD *)shapeInterface.m_vertexIds = 0;
   shapeInterface.m_dimAb = 65;
   return hkcdGskImpl<hkcdGskBase::RayCastShapeInterface<hkcdGsk_Vector4Shape>>::linearCast<hkcdGskBase::RayCastShapeInterface<hkcdGsk_Vector4Shape>>(
@@ -1494,8 +1494,8 @@ LABEL_83:
           goto LABEL_64;
         v459.m128_i32[2] = 1066192077;
         v336 = _mm_or_ps(
-                 _mm_andnot_ps((__m128)`hkVector4f::getComponent'::`2'::indexToMask[v335], v333),
-                 _mm_and_ps((__m128)`hkVector4f::getComponent'::`2'::indexToMask[v335], (__m128)xmmword_141A712F0));
+                 _mm_andnot_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[v335], v333),
+                 _mm_and_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[v335], (__m128)xmmword_141A712F0));
         if ( v334.m128_f32[0] <= (float)(fmax(
                                            COERCE_FLOAT(_mm_shuffle_ps(v336, v336, 170)),
                                            fmax(

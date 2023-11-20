@@ -38,7 +38,7 @@ void __fastcall UFG::ProgressionCameraComponent::ProgressionCameraComponent(UFG:
   v3 = (UFG::qNode<UFG::ProgressionCameraComponent,UFG::ProgressionCameraComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ProgressionCameraComponent::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ProgressionCameraComponent::`vftable;
   UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0>::RebindingComponentHandle<UFG::TransformNodeComponent,0>(&v2->mTransformNode);
   UFG::RebindingComponentHandle<UFG::CameraAnimationComponent,0>::RebindingComponentHandle<UFG::CameraAnimationComponent,0>(&v2->mAnimation);
   UFG::RebindingComponentHandle<UFG::CameraSubject,0>::RebindingComponentHandle<UFG::CameraSubject,0>(&v2->mTarget);
@@ -109,7 +109,7 @@ void __fastcall UFG::ProgressionCameraComponent::~ProgressionCameraComponent(UFG
   UFG::qNode<UFG::ProgressionCameraComponent,UFG::ProgressionCameraComponent> *v11; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ProgressionCameraComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ProgressionCameraComponent::`vftable;
   --UFG::ProgressionCameraComponent::nNumCinematicCameraInstances;
   if ( this == UFG::ProgressionCameraComponent::s_ProgressionCameraComponentpCurrentIterator )
     UFG::ProgressionCameraComponent::s_ProgressionCameraComponentpCurrentIterator = (UFG::ProgressionCameraComponent *)&this->mPrev[-78];

@@ -31,7 +31,7 @@ hkClass *__fastcall hkaReferencePoseAnimation::staticClass()
 void __fastcall finishLoadedObjecthkaReferencePoseAnimation(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaReferencePoseAnimation::`vftable';
+    *(_QWORD *)p = &hkaReferencePoseAnimation::`vftable;
 }
 
 // File Line: 71
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkaReferencePoseAnimation(void *p)
 // RVA: 0xB1DC70
 void **__fastcall getVtablehkaReferencePoseAnimation()
 {
-  return &hkaReferencePoseAnimation::`vftable';
+  return &hkaReferencePoseAnimation::`vftable;
 }
 
 // File Line: 97

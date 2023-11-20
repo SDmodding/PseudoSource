@@ -142,8 +142,8 @@ OSuitePrivate::ZEidosTransaction *__fastcall OSuitePrivate::ZEidosTransaction::C
             {
               *(_QWORD *)(v27 + 32) = 0i64;
               v29 = Element;
-              *(_QWORD *)v27 = &OSuite::ZConsumableInfoBase::`vftable'{for `OSuite::IConsumableInfo'};
-              *(_QWORD *)(v27 + 8) = &OSuite::ZConsumableInfoBase::`vftable'{for `OSuite::ZObject'};
+              *(_QWORD *)v27 = &OSuite::ZConsumableInfoBase::`vftable{for `OSuite::IConsumableInfo};
+              *(_QWORD *)(v27 + 8) = &OSuite::ZConsumableInfoBase::`vftable{for `OSuite::ZObject};
               OSuite::ZString::ZString((OSuite::ZString *)(v27 + 16), &outValue);
               v28->m_uiQuantity = v29;
               v31 = v28;
@@ -165,7 +165,7 @@ OSuitePrivate::ZEidosTransaction *__fastcall OSuitePrivate::ZEidosTransaction::C
       }
       OSuite::ZListBase::ZListIteratorBase::Next((OSuite::ZListBase::ZListIteratorBase *)&result.vfptr);
     }
-    result.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+    result.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
     if ( v10
       || *(_QWORD *)(v3 + 16) < 0i64
       || *(_DWORD *)(v3 + 12) < 0
@@ -198,20 +198,20 @@ void __fastcall OSuitePrivate::ZEidosTransaction::ZEidosTransaction(OSuitePrivat
   this->m_id = -1i64;
   v2 = (OSuite::ZObject *)&this->m_Infos.vfptr;
   v3 = this;
-  this->vfptr = (OSuite::IConsumableTransactionVtbl *)&OSuitePrivate::ZEidosTransaction::`vftable';
+  this->vfptr = (OSuite::IConsumableTransactionVtbl *)&OSuitePrivate::ZEidosTransaction::`vftable;
   *(_WORD *)&this->m_bClose = 0;
   OSuite::ZRedBlackTreeBase::ZElementBase::ZElementBase((OSuite::ZObject *)&this->m_Infos.vfptr, a2);
   v2[4].vfptr = 0i64;
-  v2->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable'{for `OSuite::ZListBase'};
-  v2[3].vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable'{for `OSuite::IHashable'};
+  v2->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
+  v2[3].vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
   v4 = OSuite::ZObject::malloc(v2, 0x80ui64, 0i64);
   v2[2].vfptr = 0i64;
   v2[1].vfptr = (OSuite::ZObjectVtbl *)16;
   v2[4].vfptr = (OSuite::ZObjectVtbl *)v4;
   OSuite::ZRedBlackTreeBase::ZElementBase::ZElementBase((OSuite::ZObject *)&v3->m_tempCount.vfptr, v5);
   v3->m_tempCount.m_pList = 0i64;
-  v3->m_tempCount.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<int>::`vftable'{for `OSuite::ZListBase'};
-  v3->m_tempCount.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<int>::`vftable'{for `OSuite::IHashable'};
+  v3->m_tempCount.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<int>::`vftable{for `OSuite::ZListBase};
+  v3->m_tempCount.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<int>::`vftable{for `OSuite::IHashable};
   v6 = OSuite::ZObject::malloc((OSuite::ZObject *)&v3->m_tempCount.vfptr, 0x40ui64, 0i64);
   v3->m_tempCount.m_nTop = 0i64;
   v3->m_tempCount.m_nSize = 16i64;
@@ -235,7 +235,7 @@ void __fastcall OSuitePrivate::ZEidosTransaction::~ZEidosTransaction(OSuitePriva
 
   v1 = (OSuite::TList<OSuite::ZRedBlackTreeBase::ZElementBase *> *)&this->m_Infos;
   v2 = this;
-  this->vfptr = (OSuite::IConsumableTransactionVtbl *)&OSuitePrivate::ZEidosTransaction::`vftable';
+  this->vfptr = (OSuite::IConsumableTransactionVtbl *)&OSuitePrivate::ZEidosTransaction::`vftable;
   v3 = 0i64;
   if ( OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&this->m_Infos) )
   {
@@ -255,12 +255,12 @@ void __fastcall OSuitePrivate::ZEidosTransaction::~ZEidosTransaction(OSuitePriva
   OSuite::ZString::~ZString(&v2->m_tag);
   v6 = &v2->m_tempCount;
   v7 = v2->m_tempCount.m_pList;
-  v6->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<int>::`vftable'{for `OSuite::ZListBase'};
-  v6->vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<int>::`vftable'{for `OSuite::IHashable'};
+  v6->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<int>::`vftable{for `OSuite::ZListBase};
+  v6->vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<int>::`vftable{for `OSuite::IHashable};
   OSuite::ZObject::free((OSuite::ZObject *)&v2->m_tempCount.vfptr, v7);
   v8 = v1->m_pList;
-  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable'{for `OSuite::ZListBase'};
-  v1->vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable'{for `OSuite::IHashable'};
+  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
+  v1->vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
   OSuite::ZObject::free((OSuite::ZObject *)&v1->vfptr, v8);
 }
 
@@ -442,8 +442,8 @@ void __fastcall OSuitePrivate::ZEidosTransaction::UpdateState(OSuitePrivate::ZEi
       v26 = 0i64;
       OSuite::ZRedBlackTreeBase::ZElementBase::ZElementBase(&v22, a2);
       v26 = 0i64;
-      v22.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZString>::`vftable'{for `OSuite::ZListBase'};
-      v25 = &OSuite::TList<OSuite::ZString>::`vftable'{for `OSuite::IHashable'};
+      v22.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZString>::`vftable{for `OSuite::ZListBase};
+      v25 = &OSuite::TList<OSuite::ZString>::`vftable{for `OSuite::IHashable};
       v5 = OSuite::TList<OSuite::ZString>::AllocList((OSuite::TList<OSuite::ZString> *)&v22, 0i64, 0x10ui64);
       v6 = v2->m_pTransactionEntry;
       v24 = 0i64;
@@ -474,7 +474,7 @@ void __fastcall OSuitePrivate::ZEidosTransaction::UpdateState(OSuitePrivate::ZEi
         OSuite::ZListBase::ZListIteratorBase::Next((OSuite::ZListBase::ZListIteratorBase *)&result.vfptr);
       }
       v12 = 0i64;
-      result.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+      result.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
       if ( OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&v22) )
       {
         v13 = 0i64;
@@ -493,8 +493,8 @@ void __fastcall OSuitePrivate::ZEidosTransaction::UpdateState(OSuitePrivate::ZEi
         }
         while ( v14 < OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&v22) );
       }
-      v22.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZString>::`vftable'{for `OSuite::ZListBase'};
-      v25 = &OSuite::TList<OSuite::ZString>::`vftable'{for `OSuite::IHashable'};
+      v22.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZString>::`vftable{for `OSuite::ZListBase};
+      v25 = &OSuite::TList<OSuite::ZString>::`vftable{for `OSuite::IHashable};
       if ( v26 )
       {
         if ( LODWORD(v26[-1].m_pString) )

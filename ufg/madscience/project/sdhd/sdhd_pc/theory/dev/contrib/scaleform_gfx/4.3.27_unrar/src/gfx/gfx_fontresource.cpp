@@ -27,12 +27,12 @@ void __fastcall Scaleform::GFx::TextureGlyphData::TextureGlyphData(Scaleform::GF
   __int128 v24; // [rsp+70h] [rbp-48h]
 
   v2 = orig;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,261>::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseNTS<Scaleform::GFx::TextureGlyphData,261>::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::TextureGlyphData::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,261>::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseNTS<Scaleform::GFx::TextureGlyphData,261>::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::TextureGlyphData::`vftable;
   this->PackTextureConfig.NominalSize = orig->PackTextureConfig.NominalSize;
   this->PackTextureConfig.PadPixels = orig->PackTextureConfig.PadPixels;
   this->PackTextureConfig.TextureWidth = orig->PackTextureConfig.TextureWidth;
@@ -130,7 +130,7 @@ Scaleform::Render::TextureGlyph *__fastcall Scaleform::GFx::TextureGlyphData::Ge
   {
     _S12_14 |= 1u;
     dummyTextureGlyph.RefCount = 1;
-    dummyTextureGlyph.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::TextureGlyph::`vftable';
+    dummyTextureGlyph.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::TextureGlyph::`vftable;
     dummyTextureGlyph.pImage.pObject = 0i64;
     dummyTextureGlyph.UvBounds = 0i64;
     dummyTextureGlyph.BindIndex = -1;
@@ -287,12 +287,12 @@ void __fastcall Scaleform::GFx::FontData::FontData(Scaleform::GFx::FontData *thi
   Scaleform::ArrayLH<Scaleform::Ptr<Scaleform::GFx::ShapeDataBase>,261,Scaleform::ArrayDefaultPolicy> *v3; // rax
   Scaleform::ArrayLH<Scaleform::GFx::FontData::AdvanceEntry,261,Scaleform::ArrayDefaultPolicy> *v4; // rax
 
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,75>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::Font,75>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Font::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,75>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::Font,75>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Font::`vftable;
   *(_QWORD *)&this->Ascent = 0i64;
   *(_QWORD *)&this->Leading = 0i64;
   *(_DWORD *)&this->LowerCaseTop = 0;
@@ -300,7 +300,7 @@ void __fastcall Scaleform::GFx::FontData::FontData(Scaleform::GFx::FontData *thi
   this->hRef.pManager.Value = 0i64;
   v2 = this->hRef.pManager.Value;
   this->hRef.pFontHandle = 0i64;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::FontData::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::FontData::`vftable;
   this->Name = 0i64;
   this->pTGData.pObject = 0i64;
   v3 = &this->Glyphs;
@@ -331,12 +331,12 @@ void __fastcall Scaleform::GFx::FontData::FontData(Scaleform::GFx::FontData *thi
 
   v3 = name;
   v4 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,75>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::Font,75>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Font::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,75>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::Font,75>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Font::`vftable;
   *(_QWORD *)&this->Ascent = 0i64;
   this->Leading = 0.0;
   this->Flags = fontFlags;
@@ -345,7 +345,7 @@ void __fastcall Scaleform::GFx::FontData::FontData(Scaleform::GFx::FontData *thi
   this->hRef.pManager.Value = 0i64;
   v6 = this->hRef.pManager.Value;
   this->hRef.pFontHandle = 0i64;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::FontData::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::FontData::`vftable;
   this->Name = 0i64;
   this->pTGData.pObject = 0i64;
   v7 = &this->Glyphs;
@@ -384,7 +384,7 @@ void __fastcall Scaleform::GFx::FontData::~FontData(Scaleform::GFx::FontData *th
   Scaleform::RefCountNTSImpl *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::FontData::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::FontData::`vftable;
   v2 = (Scaleform::ArrayData<Scaleform::Ptr<Scaleform::AmpMovieObjectDesc>,Scaleform::AllocatorLH<Scaleform::Ptr<Scaleform::AmpMovieObjectDesc>,2>,Scaleform::ArrayDefaultPolicy> *)&this->Glyphs;
   Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::GFx::ShapeDataBase>,Scaleform::AllocatorLH<Scaleform::Ptr<Scaleform::GFx::ShapeDataBase>,261>,Scaleform::ArrayDefaultPolicy>::ResizeNoConstruct(
     (Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::GFx::ShapeDataBase>,Scaleform::AllocatorLH<Scaleform::Ptr<Scaleform::GFx::ShapeDataBase>,261>,Scaleform::ArrayDefaultPolicy> *)&this->Glyphs.Data.Data,
@@ -402,7 +402,7 @@ void __fastcall Scaleform::GFx::FontData::~FontData(Scaleform::GFx::FontData *th
   v3 = (Scaleform::RefCountNTSImpl *)&v1->pTGData.pObject->vfptr;
   if ( v3 )
     Scaleform::RefCountNTSImpl::Release(v3);
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Font::`vftable';
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Font::`vftable;
   Scaleform::Render::FontCacheHandleRef::releaseFont(&v1->hRef);
   Scaleform::RefCountImplCore::~RefCountImplCore((Scaleform::RefCountImplCore *)&v1->vfptr);
 }
@@ -619,7 +619,7 @@ void __fastcall Scaleform::GFx::FontData::Read(Scaleform::GFx::FontData *this, S
     {
       v11 = pheapAddr.Size + 1;
 LABEL_11:
-      Scaleform::ArrayDataBase<Scaleform::GFx::`anonymous namespace'::Range,AllocatorGH<Scaleform::GFx::`anonymous namespace'::Range,2>::AllocatorGH<Scaleform::GFx::`anonymous namespace'::Range,2>,AllocatorGH<Scaleform::GFx::`anonymous namespace'::Range,2>::ArrayDefaultPolicy>::Reserve(
+      Scaleform::ArrayDataBase<Scaleform::GFx::`anonymous namespace::Range,AllocatorGH<Scaleform::GFx::`anonymous namespace::Range,2>::AllocatorGH<Scaleform::GFx::`anonymous namespace::Range,2>,AllocatorGH<Scaleform::GFx::`anonymous namespace::Range,2>::ArrayDefaultPolicy>::Reserve(
         &pheapAddr,
         &pheapAddr,
         v11);
@@ -671,7 +671,7 @@ LABEL_12:
         {
           v22 = pheapAddr.Size + 1;
 LABEL_23:
-          Scaleform::ArrayDataBase<Scaleform::GFx::`anonymous namespace'::Range,AllocatorGH<Scaleform::GFx::`anonymous namespace'::Range,2>::AllocatorGH<Scaleform::GFx::`anonymous namespace'::Range,2>,AllocatorGH<Scaleform::GFx::`anonymous namespace'::Range,2>::ArrayDefaultPolicy>::Reserve(
+          Scaleform::ArrayDataBase<Scaleform::GFx::`anonymous namespace::Range,AllocatorGH<Scaleform::GFx::`anonymous namespace::Range,2>::AllocatorGH<Scaleform::GFx::`anonymous namespace::Range,2>,AllocatorGH<Scaleform::GFx::`anonymous namespace::Range,2>::ArrayDefaultPolicy>::Reserve(
             &pheapAddr,
             &pheapAddr,
             v22);
@@ -761,16 +761,16 @@ LABEL_24:
           pheapAddr.Data = (int *)v37;
           if ( v37 )
           {
-            v37->Data = (int *)&Scaleform::RefCountImplCore::`vftable';
+            v37->Data = (int *)&Scaleform::RefCountImplCore::`vftable;
             LODWORD(v37->Size) = 1;
-            v37->Data = (int *)&Scaleform::RefCountImpl::`vftable';
-            v37->Data = (int *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable';
-            v37->Data = (int *)&Scaleform::RefCountBase<Scaleform::Render::ShapeDataInterface,71>::`vftable';
-            v37->Data = (int *)&Scaleform::Render::ShapeDataInterface::`vftable';
-            v37->Data = (int *)&Scaleform::GFx::ShapeDataBase::`vftable';
+            v37->Data = (int *)&Scaleform::RefCountImpl::`vftable;
+            v37->Data = (int *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable;
+            v37->Data = (int *)&Scaleform::RefCountBase<Scaleform::Render::ShapeDataInterface,71>::`vftable;
+            v37->Data = (int *)&Scaleform::Render::ShapeDataInterface::`vftable;
+            v37->Data = (int *)&Scaleform::GFx::ShapeDataBase::`vftable;
             v37->Policy.Capacity = 0i64;
             LOBYTE(v37[1].Data) = 0;
-            v37->Data = (int *)&Scaleform::GFx::ConstShapeNoStyles::`vftable';
+            v37->Data = (int *)&Scaleform::GFx::ConstShapeNoStyles::`vftable;
           }
           else
           {
@@ -935,7 +935,7 @@ LABEL_24:
         goto LABEL_102;
       v59 = v154.Size + 1;
     }
-    Scaleform::ArrayDataBase<Scaleform::GFx::`anonymous namespace'::Range,AllocatorGH<Scaleform::GFx::`anonymous namespace'::Range,2>::AllocatorGH<Scaleform::GFx::`anonymous namespace'::Range,2>,AllocatorGH<Scaleform::GFx::`anonymous namespace'::Range,2>::ArrayDefaultPolicy>::Reserve(
+    Scaleform::ArrayDataBase<Scaleform::GFx::`anonymous namespace::Range,AllocatorGH<Scaleform::GFx::`anonymous namespace::Range,2>::AllocatorGH<Scaleform::GFx::`anonymous namespace::Range,2>,AllocatorGH<Scaleform::GFx::`anonymous namespace::Range,2>::ArrayDefaultPolicy>::Reserve(
       &v154,
       &v154,
       v59);
@@ -982,7 +982,7 @@ LABEL_134:
       {
         v75 = v154.Size + 1;
 LABEL_130:
-        Scaleform::ArrayDataBase<Scaleform::GFx::`anonymous namespace'::Range,AllocatorGH<Scaleform::GFx::`anonymous namespace'::Range,2>::AllocatorGH<Scaleform::GFx::`anonymous namespace'::Range,2>,AllocatorGH<Scaleform::GFx::`anonymous namespace'::Range,2>::ArrayDefaultPolicy>::Reserve(
+        Scaleform::ArrayDataBase<Scaleform::GFx::`anonymous namespace::Range,AllocatorGH<Scaleform::GFx::`anonymous namespace::Range,2>::AllocatorGH<Scaleform::GFx::`anonymous namespace::Range,2>,AllocatorGH<Scaleform::GFx::`anonymous namespace::Range,2>::ArrayDefaultPolicy>::Reserve(
           &v154,
           &v154,
           v75);
@@ -1021,7 +1021,7 @@ LABEL_131:
       {
         v65 = v154.Size + 1;
 LABEL_114:
-        Scaleform::ArrayDataBase<Scaleform::GFx::`anonymous namespace'::Range,AllocatorGH<Scaleform::GFx::`anonymous namespace'::Range,2>::AllocatorGH<Scaleform::GFx::`anonymous namespace'::Range,2>,AllocatorGH<Scaleform::GFx::`anonymous namespace'::Range,2>::ArrayDefaultPolicy>::Reserve(
+        Scaleform::ArrayDataBase<Scaleform::GFx::`anonymous namespace::Range,AllocatorGH<Scaleform::GFx::`anonymous namespace::Range,2>::AllocatorGH<Scaleform::GFx::`anonymous namespace::Range,2>,AllocatorGH<Scaleform::GFx::`anonymous namespace::Range,2>::ArrayDefaultPolicy>::Reserve(
           &v154,
           &v154,
           v65);
@@ -1237,7 +1237,7 @@ LABEL_193:
           v148 = v4->Name;
         Scaleform::GFx::LogBase<Scaleform::GFx::Stream>::LogError(
           (Scaleform::GFx::LogBase<Scaleform::GFx::Stream> *)&v5->vfptr,
-          "Corrupted file %s, kerning table of the font '%s' is longer than tagLength.",
+          "Corrupted file %s, kerning table of the font %s is longer than tagLength.",
           (v5->FileName.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12,
           v148,
           v151,
@@ -1314,16 +1314,16 @@ LABEL_242:
       v163 = v94;
       if ( v94 )
       {
-        v94->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::RefCountImplCore::`vftable';
+        v94->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::RefCountImplCore::`vftable;
         v94->RefCount.Value = 1;
-        v94->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::RefCountImpl::`vftable';
-        v94->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable';
-        v94->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::RefCountBase<Scaleform::Render::ShapeDataInterface,71>::`vftable';
-        v94->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::Render::ShapeDataInterface::`vftable';
-        v94->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::ShapeDataBase::`vftable';
+        v94->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::RefCountImpl::`vftable;
+        v94->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable;
+        v94->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::RefCountBase<Scaleform::Render::ShapeDataInterface,71>::`vftable;
+        v94->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::Render::ShapeDataInterface::`vftable;
+        v94->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::ShapeDataBase::`vftable;
         v94->pLib = 0i64;
         LOBYTE(v94[1].vfptr) = 0;
-        v94->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::ConstShapeNoStyles::`vftable';
+        v94->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::ConstShapeNoStyles::`vftable;
       }
       else
       {
@@ -2202,7 +2202,7 @@ LABEL_9:
           {
             v17 = v16 + (v16 >> 2);
 LABEL_21:
-            Scaleform::ArrayDataBase<Scaleform::GFx::`anonymous namespace'::Range,AllocatorGH<Scaleform::GFx::`anonymous namespace'::Range,2>::AllocatorGH<Scaleform::GFx::`anonymous namespace'::Range,2>,AllocatorGH<Scaleform::GFx::`anonymous namespace'::Range,2>::ArrayDefaultPolicy>::Reserve(
+            Scaleform::ArrayDataBase<Scaleform::GFx::`anonymous namespace::Range,AllocatorGH<Scaleform::GFx::`anonymous namespace::Range,2>::AllocatorGH<Scaleform::GFx::`anonymous namespace::Range,2>,AllocatorGH<Scaleform::GFx::`anonymous namespace::Range,2>::ArrayDefaultPolicy>::Reserve(
               &pheapAddr,
               &pheapAddr,
               v17);
@@ -2259,7 +2259,7 @@ LABEL_21:
         goto LABEL_36;
       v21 = v11 + 1;
     }
-    Scaleform::ArrayDataBase<Scaleform::GFx::`anonymous namespace'::Range,AllocatorGH<Scaleform::GFx::`anonymous namespace'::Range,2>::AllocatorGH<Scaleform::GFx::`anonymous namespace'::Range,2>,AllocatorGH<Scaleform::GFx::`anonymous namespace'::Range,2>::ArrayDefaultPolicy>::Reserve(
+    Scaleform::ArrayDataBase<Scaleform::GFx::`anonymous namespace::Range,AllocatorGH<Scaleform::GFx::`anonymous namespace::Range,2>::AllocatorGH<Scaleform::GFx::`anonymous namespace::Range,2>,AllocatorGH<Scaleform::GFx::`anonymous namespace::Range,2>::ArrayDefaultPolicy>::Reserve(
       &pheapAddr,
       &pheapAddr,
       v21);
@@ -2273,7 +2273,7 @@ LABEL_36:
       v11 = pheapAddr.Size;
     }
   }
-  Scaleform::Alg::QuickSortSliced<Scaleform::Array<Scaleform::GFx::`anonymous namespace'::Range,2,ArrayDefaultPolicy::ArrayDefaultPolicy>,Scaleform::GFx::`anonymous namespace'::RangeLess>(
+  Scaleform::Alg::QuickSortSliced<Scaleform::Array<Scaleform::GFx::`anonymous namespace::Range,2,ArrayDefaultPolicy::ArrayDefaultPolicy>,Scaleform::GFx::`anonymous namespace::RangeLess>(
     (Scaleform::Array<Scaleform::GFx::Range,2,Scaleform::ArrayDefaultPolicy> *)&pheapAddr,
     0i64,
     v11,
@@ -2375,12 +2375,12 @@ void __fastcall Scaleform::GFx::FontDataBound::FontDataBound(Scaleform::GFx::Fon
   v3 = pbinding;
   v4 = pfont;
   v5 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,75>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::Font,75>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Font::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,75>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::Font,75>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Font::`vftable;
   this->Ascent = pfont->Ascent;
   this->Descent = pfont->Descent;
   this->Leading = pfont->Leading;
@@ -2392,7 +2392,7 @@ void __fastcall Scaleform::GFx::FontDataBound::FontDataBound(Scaleform::GFx::Fon
   this->hRef.pManager.Value = 0i64;
   v8 = this->hRef.pManager.Value;
   this->hRef.pFontHandle = 0i64;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::FontDataBound::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::FontDataBound::`vftable;
   Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)pfont);
   v5->pFont.pObject = v4;
   v5->pTGData.pObject = 0i64;
@@ -2418,7 +2418,7 @@ void __fastcall Scaleform::GFx::FontDataBound::FontDataBound(Scaleform::GFx::Fon
   if ( v13 )
     Scaleform::RefCountNTSImpl::Release(v13);
   v5->pTGData.pObject = v12;
-  v17 = &Scaleform::GFx::TextureGlyphBinder::`vftable';
+  v17 = &Scaleform::GFx::TextureGlyphBinder::`vftable;
   v18 = v3;
   v14 = v5->pTGData.pObject;
   v15 = v14->TextureGlyphs.Data.Size;
@@ -2449,12 +2449,12 @@ void __fastcall Scaleform::GFx::FontResource::FontResource(Scaleform::GFx::FontR
 
   v3 = pfont;
   v4 = this;
-  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::Resource::`vftable';
+  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::Resource::`vftable;
   v5 = this->RefCount.Value;
   v6 = (unsigned int)this->RefCount.Value;
   this->RefCount.Value = 1;
   this->pLib = 0i64;
-  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::FontResource::`vftable';
+  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::FontResource::`vftable;
   this->pFont.pObject = 0i64;
   this->pBinding = pbinding;
   this->FontKey.pKeyInterface = 0i64;
@@ -2483,12 +2483,12 @@ void __fastcall Scaleform::GFx::FontResource::FontResource(Scaleform::GFx::FontR
   v3 = key;
   v4 = pfont;
   v5 = this;
-  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::Resource::`vftable';
+  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::Resource::`vftable;
   v6 = this->RefCount.Value;
   v7 = (unsigned int)this->RefCount.Value;
   this->RefCount.Value = 1;
   this->pLib = 0i64;
-  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::FontResource::`vftable';
+  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::FontResource::`vftable;
   this->pFont.pObject = 0i64;
   this->pBinding = 0i64;
   this->FontKey.pKeyInterface = 0i64;
@@ -2529,12 +2529,12 @@ void __fastcall Scaleform::GFx::GFxSystemFontResourceKey::GFxSystemFontResourceK
   v5 = fontFlags;
   v6 = pname;
   v7 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,261>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::GFxSystemFontResourceKey,261>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::GFxSystemFontResourceKey::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,261>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::GFxSystemFontResourceKey,261>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::GFxSystemFontResourceKey::`vftable;
   this->pFontProvider.pObject = 0i64;
   Scaleform::String::String(&this->FontName);
   Scaleform::String::String(&v11, v6);
@@ -2567,7 +2567,7 @@ unsigned __int64 __fastcall Scaleform::GFx::GFxSystemFontResourceKeyInterface::G
 // RVA: 0x159C2A0
 __int64 Scaleform::GFx::_dynamic_initializer_for__GFxSystemFontResourceKeyInterface_Instance__()
 {
-  GFxSystemFontResourceKeyInterface_Instance.vfptr = (Scaleform::GFx::ResourceKey::KeyInterfaceVtbl *)&Scaleform::GFx::GFxSystemFontResourceKeyInterface::`vftable';
+  GFxSystemFontResourceKeyInterface_Instance.vfptr = (Scaleform::GFx::ResourceKey::KeyInterfaceVtbl *)&Scaleform::GFx::GFxSystemFontResourceKeyInterface::`vftable;
   return atexit(Scaleform::GFx::_dynamic_atexit_destructor_for__GFxSystemFontResourceKeyInterface_Instance__);
 }
 

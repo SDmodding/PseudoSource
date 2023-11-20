@@ -7,10 +7,10 @@ void __fastcall hkpConvexListShape::hkpConvexListShape(hkpConvexListShape *this,
   v3 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   *(_DWORD *)&this->m_type.m_storage = 1050;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpConvexListShape::`vftable'{for `hkpConvexShape'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkpConvexListShape::`vftable{for `hkpConvexShape};
   this->m_userData = 0i64;
   this->m_radius = 0.0;
-  this->vfptr = (hkpShapeContainerVtbl *)&hkpConvexListShape::`vftable'{for `hkpShapeContainer'};
+  this->vfptr = (hkpShapeContainerVtbl *)&hkpConvexListShape::`vftable{for `hkpShapeContainer};
   this->m_childShapes.m_data = 0i64;
   this->m_childShapes.m_size = 0;
   this->m_childShapes.m_capacityAndFlags = 2147483648;
@@ -27,9 +27,9 @@ void __fastcall hkpConvexListShape::hkpConvexListShape(hkpConvexListShape *this,
 
   v2 = this;
   hkpConvexShape::hkpConvexShape((hkpConvexShape *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpConvexListShape::`vftable'{for `hkpConvexShape'};
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpConvexListShape::`vftable{for `hkpConvexShape};
   v2->m_type.m_storage = 26;
-  v2->vfptr = (hkpShapeContainerVtbl *)&hkpConvexListShape::`vftable'{for `hkpShapeContainer'};
+  v2->vfptr = (hkpShapeContainerVtbl *)&hkpConvexListShape::`vftable{for `hkpShapeContainer};
 }
 
 // File Line: 54
@@ -42,9 +42,9 @@ void __fastcall hkpConvexListShape::~hkpConvexListShape(hkpConvexListShape *this
   int v4; // er8
 
   v1 = 0;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpConvexListShape::`vftable'{for `hkpConvexShape'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkpConvexListShape::`vftable{for `hkpConvexShape};
   v2 = this;
-  this->vfptr = (hkpShapeContainerVtbl *)&hkpConvexListShape::`vftable'{for `hkpShapeContainer'};
+  this->vfptr = (hkpShapeContainerVtbl *)&hkpConvexListShape::`vftable{for `hkpShapeContainer};
   if ( this->m_childShapes.m_size > 0 )
   {
     v3 = 0i64;
@@ -65,8 +65,8 @@ void __fastcall hkpConvexListShape::~hkpConvexListShape(hkpConvexListShape *this
       8 * v4);
   v2->m_childShapes.m_data = 0i64;
   v2->m_childShapes.m_capacityAndFlags = 2147483648;
-  v2->vfptr = (hkpShapeContainerVtbl *)&hkpShapeContainer::`vftable';
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v2->vfptr = (hkpShapeContainerVtbl *)&hkpShapeContainer::`vftable;
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 65

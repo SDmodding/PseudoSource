@@ -154,7 +154,7 @@ void __fastcall UFG::PhysicsSystem::PhysicsSystem(UFG::PhysicsSystem *this, UFG:
 
   v2 = this;
   UFG::BasePhysicsSystem::BasePhysicsSystem((UFG::BasePhysicsSystem *)&this->vfptr, pool);
-  v2->vfptr = (UFG::BasePhysicsSystemVtbl *)&UFG::PhysicsSystem::`vftable';
+  v2->vfptr = (UFG::BasePhysicsSystemVtbl *)&UFG::PhysicsSystem::`vftable;
   v20 = &v2->mStaticSceneryToDisable;
   v20->mNode.mPrev = &v20->mNode;
   v20->mNode.mNext = &v20->mNode;
@@ -168,7 +168,7 @@ void __fastcall UFG::PhysicsSystem::PhysicsSystem(UFG::PhysicsSystem *this, UFG:
   v2->mEntitiesLeftBroadphase.tail.prev = &v2->mEntitiesLeftBroadphase.head;
   v2->mEntitiesLeftBroadphase.tail.next = 0i64;
   v22 = &v2->mBoundaries;
-  v22->vfptr = (UFG::WorldBoundariesVtbl *)&UFG::WorldBoundaries::`vftable';
+  v22->vfptr = (UFG::WorldBoundariesVtbl *)&UFG::WorldBoundaries::`vftable;
   v22->mWorldBoundaries.p = 0i64;
   *(_QWORD *)&v22->mWorldBoundaries.size = 0i64;
   UFG::qBaseTreeRB::qBaseTreeRB(&v2->mBoundaries.mMappings.mTree);
@@ -490,7 +490,7 @@ void __fastcall UFG::PhysicsSystem::~PhysicsSystem(UFG::PhysicsSystem *this)
   UFG::qNode<UFG::PhysicsSystem::StaticSceneryTracking,UFG::PhysicsSystem::StaticSceneryTracking> *v12; // rax
 
   v1 = this;
-  this->vfptr = (UFG::BasePhysicsSystemVtbl *)&UFG::PhysicsSystem::`vftable';
+  this->vfptr = (UFG::BasePhysicsSystemVtbl *)&UFG::PhysicsSystem::`vftable;
   v2 = UFG::ParkourQueryManager::mInstance;
   if ( UFG::ParkourQueryManager::mInstance )
   {
@@ -705,7 +705,7 @@ UFG::RigidBodyComponent *__fastcall UFG::PhysicsSystem::OnCollisionInstanceAdded
     {
       v24 = UFG::GetTypeTableProp();
       UFG::SimObjectGame::SimObjectGame(v22, v24, &name);
-      v22->vfptr = (UFG::qSafePointerNode<UFG::SimObject>Vtbl *)&UFG::SimObjectProp::`vftable';
+      v22->vfptr = (UFG::qSafePointerNode<UFG::SimObject>Vtbl *)&UFG::SimObjectProp::`vftable;
       v22->m_Flags |= 0x2000u;
     }
     else
@@ -780,7 +780,7 @@ UFG::RigidBodyComponent *__fastcall UFG::PhysicsSystem::OnCollisionInstanceAdded
     if ( v36 )
     {
       UFG::qReflectObjectType<UFG::StateMachineDefinition,UFG::qReflectObject>::qReflectObjectType<UFG::StateMachineDefinition,UFG::qReflectObject>((UFG::qReflectObjectType<UFG::StateMachineDefinition,UFG::qReflectObject> *)v36);
-      v37->mNext = (UFG::allocator::free_link *)&UFG::StateMachineDefinition::`vftable';
+      v37->mNext = (UFG::allocator::free_link *)&UFG::StateMachineDefinition::`vftable;
       v37[11].mNext = 0i64;
       v37[10].mNext = 0i64;
       LODWORD(v37[12].mNext) = -1;
@@ -1113,12 +1113,12 @@ void __fastcall UFG::PhysicsSystem::Create(UFG::PhysicsSystem *this, UFG::SimObj
 
   v3 = data;
   v4 = simObject;
-  v5 = `UFG::qGetResourceInventory<UFG::ParkourContainerBundle>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::ParkourContainerBundle>'::`2'::result )
+  v5 = `UFG::qGetResourceInventory<UFG::ParkourContainerBundle>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::ParkourContainerBundle>::`2::result )
   {
     v6 = UFG::qResourceWarehouse::Instance();
     v5 = UFG::qResourceWarehouse::GetInventory(v6, 0x4558A12Eu);
-    `UFG::qGetResourceInventory<UFG::ParkourContainerBundle>'::`2'::result = v5;
+    `UFG::qGetResourceInventory<UFG::ParkourContainerBundle>::`2::result = v5;
   }
   UFG::qResourceHandle::Init(
     (UFG::qResourceHandle *)&v3->mParkourContainerBundle.mPrev,

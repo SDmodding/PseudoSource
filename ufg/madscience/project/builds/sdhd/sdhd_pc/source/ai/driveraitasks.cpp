@@ -11,9 +11,9 @@ void __fastcall DriverPathfindToTargetTask::DriverPathfindToTargetTask(DriverPat
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<DriverPathfindToTargetTrack>::`vftable';
-  this->vfptr = (ITaskVtbl *)&DriverPathfindToTargetTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<DriverPathfindToTargetTrack>::`vftable;
+  this->vfptr = (ITaskVtbl *)&DriverPathfindToTargetTask::`vftable;
   this->mpContext = 0i64;
   this->mIsCloseEnough = 0;
   this->mInThresholdTimer = 0.0;
@@ -558,9 +558,9 @@ void __fastcall DriverFollowTargetTask::DriverFollowTargetTask(DriverFollowTarge
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<DriverFollowTargetTrack>::`vftable';
-  this->vfptr = (ITaskVtbl *)&DriverFollowTargetTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<DriverFollowTargetTrack>::`vftable;
+  this->vfptr = (ITaskVtbl *)&DriverFollowTargetTask::`vftable;
 }
 
 // File Line: 407
@@ -572,9 +572,9 @@ void __fastcall DriverChaseTargetTask::DriverChaseTargetTask(DriverChaseTargetTa
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<DriverChaseTargetTrack>::`vftable';
-  this->vfptr = (ITaskVtbl *)&DriverChaseTargetTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<DriverChaseTargetTrack>::`vftable;
+  this->vfptr = (ITaskVtbl *)&DriverChaseTargetTask::`vftable;
 }
 
 // File Line: 427
@@ -824,9 +824,9 @@ void __fastcall DriverWanderTask::DriverWanderTask(DriverWanderTask *this)
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<DriverWanderTrack>::`vftable';
-  this->vfptr = (ITaskVtbl *)&DriverWanderTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<DriverWanderTrack>::`vftable;
+  this->vfptr = (ITaskVtbl *)&DriverWanderTask::`vftable;
   v2 = &this->mpAIComponent;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
@@ -848,7 +848,7 @@ void __fastcall DriverWanderTask::~DriverWanderTask(DriverWanderTask *this)
   UFG::qNode<ITask,ITask> *v9; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&DriverWanderTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&DriverWanderTask::`vftable;
   v2 = &this->mpAIComponent;
   if ( this->mpAIComponent.m_pPointer )
   {
@@ -866,7 +866,7 @@ void __fastcall DriverWanderTask::~DriverWanderTask(DriverWanderTask *this)
   v6->mPrev = v5;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v8 = v1->mPrev;
   v9 = v1->mNext;
@@ -902,9 +902,9 @@ void __fastcall DriverStopTask::DriverStopTask(DriverStopTask *this)
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<DriverStopTrack>::`vftable';
-  this->vfptr = (ITaskVtbl *)&DriverStopTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<DriverStopTrack>::`vftable;
+  this->vfptr = (ITaskVtbl *)&DriverStopTask::`vftable;
   v2 = &this->mpAIComponent;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
@@ -926,7 +926,7 @@ void __fastcall DriverStopTask::~DriverStopTask(DriverStopTask *this)
   UFG::qNode<ITask,ITask> *v9; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&DriverStopTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&DriverStopTask::`vftable;
   v2 = &this->mpAIComponent;
   if ( this->mpAIComponent.m_pPointer )
   {
@@ -944,7 +944,7 @@ void __fastcall DriverStopTask::~DriverStopTask(DriverStopTask *this)
   v6->mPrev = v5;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v8 = v1->mPrev;
   v9 = v1->mNext;

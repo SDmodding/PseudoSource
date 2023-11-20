@@ -25,11 +25,11 @@ void __fastcall UFG::Editor::PropertySetAssetFactory::PropertySetAssetFactory(UF
   v3->mBaseNode.mNeighbours[0] = &v3->mBaseNode;
   v3->mBaseNode.mNeighbours[1] = &v3->mBaseNode;
   v3->mBaseNode.mUID = v2;
-  v1->vfptr = (UFG::HiveAssetFactoryVtbl *)&UFG::HiveAssetFactory::`vftable';
+  v1->vfptr = (UFG::HiveAssetFactoryVtbl *)&UFG::HiveAssetFactory::`vftable;
   UFG::qString::qString(&v1->mTypeName, "PropertySet");
   v4 = UFG::AssetHive::Instance();
   UFG::qTree64Base::Add(&v4->mFactories.mTree, &v1->mBaseNode);
-  v1->vfptr = (UFG::HiveAssetFactoryVtbl *)&UFG::Editor::PropertySetAssetFactory::`vftable';
+  v1->vfptr = (UFG::HiveAssetFactoryVtbl *)&UFG::Editor::PropertySetAssetFactory::`vftable;
 }
 
 // File Line: 36
@@ -151,7 +151,7 @@ void __fastcall UFG::Editor::PropertySetAssetFactory::EditAssets(UFG::Editor::Pr
         v15 = v13 + 1;
         v15->mNext = v15;
         v15[1].mNext = v15;
-        v14->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+        v14->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
         v14->m_EventUID = 609910773;
         v14->m_NamePTR = 0i64;
       }
@@ -165,7 +165,7 @@ void __fastcall UFG::Editor::PropertySetAssetFactory::EditAssets(UFG::Editor::Pr
     if ( item.mSubElements.p )
     {
       v16 = &item.mSubElements.p[-1].mStringHash32;
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         item.mSubElements.p,
         0x28ui64,
         item.mSubElements.p[-1].mStringHash32,
@@ -177,7 +177,7 @@ void __fastcall UFG::Editor::PropertySetAssetFactory::EditAssets(UFG::Editor::Pr
     if ( item.mElements.p )
     {
       v17 = item.mElements.p - 1;
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         item.mElements.p,
         4ui64,
         item.mElements.p[-1].mUID,
@@ -219,7 +219,7 @@ void __fastcall UFG::Editor::PropertySetAssetFactory::EditAssets(UFG::Editor::Pr
     v26 = (UFG::qNode<UFG::Event,UFG::Event> *)&v25->mPrev;
     v26->mPrev = v26;
     v26->mNext = v26;
-    v25->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+    v25->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
     v25->m_EventUID = 609910773;
     v25->m_NamePTR = 0i64;
   }
@@ -236,7 +236,7 @@ void __fastcall UFG::Editor::PropertySetAssetFactory::EditAssets(UFG::Editor::Pr
   if ( set.mDAGPaths.p )
   {
     v27 = &set.mDAGPaths.p[-1].mPathType;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       set.mDAGPaths.p,
       0x58ui64,
       set.mDAGPaths.p[-1].mPathType,

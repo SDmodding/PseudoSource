@@ -9,7 +9,7 @@ void __fastcall hkpConstraintInstance::hkpConstraintInstance(hkpConstraintInstan
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_data = data;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpConstraintInstance::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpConstraintInstance::`vftable;
   this->m_owner = 0i64;
   this->m_priority.m_storage = priority;
   *(_WORD *)&this->m_wantRuntime.m_bool = 1;
@@ -41,7 +41,7 @@ void __fastcall hkpConstraintInstance::hkpConstraintInstance(hkpConstraintInstan
   hkpConstraintInstance *v2; // rbx
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpConstraintInstance::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpConstraintInstance::`vftable;
   this->m_owner = 0i64;
   this->m_constraintModifiers = 0i64;
   this->m_priority.m_storage = priority;
@@ -215,7 +215,7 @@ void __fastcall hkpConstraintInstance::~hkpConstraintInstance(hkpConstraintInsta
   _QWORD **v11; // rax
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpConstraintInstance::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpConstraintInstance::`vftable;
   hkpConstraintCallbackUtil::fireConstraintDeleted(this);
   v2 = (hkReferencedObject *)&v1->m_entities[0]->vfptr;
   if ( v2 )
@@ -250,7 +250,7 @@ void __fastcall hkpConstraintInstance::~hkpConstraintInstance(hkpConstraintInsta
       v10,
       8 * (v9 & 0x3FFFu));
   }
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 219

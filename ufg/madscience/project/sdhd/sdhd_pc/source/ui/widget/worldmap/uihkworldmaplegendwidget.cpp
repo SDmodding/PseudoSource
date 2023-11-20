@@ -78,7 +78,7 @@ void __fastcall UFG::UIHKWorldMapLegendWidget::Flash_AddItem(UFG::UIHKWorldMapLe
   v6 = screen->mRenderable->m_movie.pObject;
   if ( v6 )
   {
-    `eh vector constructor iterator'(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( ((unsigned int)pargs.Type >> 6) & 1 )
     {
       (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
@@ -97,7 +97,7 @@ void __fastcall UFG::UIHKWorldMapLegendWidget::Flash_AddItem(UFG::UIHKWorldMapLe
     v10 = 6;
     v11 = v4;
     Scaleform::GFx::Movie::Invoke(v6, "Legend_AddItem", 0i64, &pargs, 2u);
-    `eh vector destructor iterator'(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 
@@ -197,7 +197,7 @@ void __fastcall UFG::UIHKWorldMapLegendWidget::Flash_SetLegendPageNumbers(UFG::U
   v6 = screen->mRenderable->m_movie.pObject;
   if ( v6 )
   {
-    `eh vector constructor iterator'(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( ((unsigned int)pargs.Type >> 6) & 1 )
     {
       (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
@@ -216,7 +216,7 @@ void __fastcall UFG::UIHKWorldMapLegendWidget::Flash_SetLegendPageNumbers(UFG::U
     v10 = 5;
     v11 = (double)v4;
     Scaleform::GFx::Movie::Invoke(v6, "Legend_SetPageNumbers", 0i64, &pargs, 2u);
-    `eh vector destructor iterator'(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 

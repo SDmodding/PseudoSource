@@ -61,7 +61,7 @@ void __fastcall UFG::qCompressHeader::EndianSwap(UFG::qCompressHeader *this)
   char v57; // cl
 
   v1 = this;
-  if ( this->mID != 'QCMP' )
+  if ( this->mID != QCMP )
   {
     v2 = (UFG::qCompressHeader *)((char *)this + 3);
     for ( i = this; i < v2; i = (UFG::qCompressHeader *)((char *)i + 1) )

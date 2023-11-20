@@ -41,12 +41,12 @@ void __fastcall UFG::UIDictionary::~UIDictionary(UFG::UIDictionary *this)
 
   v1 = this;
   UFG::UIDictionary::UnloadDictionary(this);
-  v2 = `UFG::qGetResourceInventory<UFG::UILocalizationChunk>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::UILocalizationChunk>'::`2'::result )
+  v2 = `UFG::qGetResourceInventory<UFG::UILocalizationChunk>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::UILocalizationChunk>::`2::result )
   {
     v3 = UFG::qResourceWarehouse::Instance();
     v2 = UFG::qResourceWarehouse::GetInventory(v3, 0x90CE6B7A);
-    `UFG::qGetResourceInventory<UFG::UILocalizationChunk>'::`2'::result = v2;
+    `UFG::qGetResourceInventory<UFG::UILocalizationChunk>::`2::result = v2;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mDatabaseHandle.mPrev, v2);
   UFG::qResourceHandle::~qResourceHandle((UFG::qResourceHandle *)&v1->mDatabaseHandle.mPrev);
@@ -76,16 +76,16 @@ void __fastcall UFG::UIGfxTranslator::UIGfxTranslator(UFG::UIGfxTranslator *this
   UFG::qList<UFG::UIDictionary,UFG::UIDictionary,1,0> *v2; // [rsp+48h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::State::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::State::`vftable;
   this->SType = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::Translator::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::Translator::`vftable;
   this->WWMode = 0;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&UFG::UIGfxTranslator::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&UFG::UIGfxTranslator::`vftable;
   this->mLanguage = -1;
   *(_QWORD *)&this->mFontScale = 1065353216i64;
   this->mDateFormat = 2;
@@ -110,7 +110,7 @@ void __fastcall UFG::UIGfxTranslator::~UIGfxTranslator(UFG::UIGfxTranslator *thi
   UFG::qNode<UFG::UIDictionary,UFG::UIDictionary> *v4; // rax
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&UFG::UIGfxTranslator::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&UFG::UIGfxTranslator::`vftable;
   this->mGfxLoader = 0i64;
   v2 = &this->mDictionaries;
   UFG::qList<UFG::UIDictionary,UFG::UIDictionary,1,0>::DeleteNodes(&this->mDictionaries);
@@ -120,7 +120,7 @@ void __fastcall UFG::UIGfxTranslator::~UIGfxTranslator(UFG::UIGfxTranslator *thi
   v4->mPrev = v3;
   v2->mNode.mPrev = &v2->mNode;
   v2->mNode.mNext = &v2->mNode;
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::State::`vftable';
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::State::`vftable;
   Scaleform::RefCountImplCore::~RefCountImplCore((Scaleform::RefCountImplCore *)&v1->vfptr);
 }
 

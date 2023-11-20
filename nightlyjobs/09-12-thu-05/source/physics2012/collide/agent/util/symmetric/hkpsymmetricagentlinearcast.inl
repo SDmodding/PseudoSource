@@ -35,7 +35,7 @@ void __fastcall hkpSymmetricAgentLinearCast<hkpConvexListAgent>::getClosestPoint
   hkpCdPointCollector v5; // [rsp+30h] [rbp-28h]
   hkpCdPointCollector *v6; // [rsp+40h] [rbp-18h]
 
-  v5.vfptr = (hkpCdPointCollectorVtbl *)&hkpSymmetricAgentFlipCollector::`vftable';
+  v5.vfptr = (hkpCdPointCollectorVtbl *)&hkpSymmetricAgentFlipCollector::`vftable;
   v5.m_earlyOutDistance = FLOAT_3_40282e38;
   v6 = collector;
   hkpConvexListAgent::getClosestPoints((hkpConvexListAgent *)&this->vfptr, bodyB, bodyA, input, &v5);
@@ -49,7 +49,7 @@ void __fastcall hkpSymmetricAgentLinearCast<hkpBvCompressedMeshAgent>::staticGet
   hkpCdPointCollector *v5; // [rsp+30h] [rbp-18h]
 
   v5 = collector;
-  collectora.vfptr = (hkpCdPointCollectorVtbl *)&hkpSymmetricAgentFlipCollector::`vftable';
+  collectora.vfptr = (hkpCdPointCollectorVtbl *)&hkpSymmetricAgentFlipCollector::`vftable;
   collectora.m_earlyOutDistance = FLOAT_3_40282e38;
   hkpBvTreeAgent::staticGetClosestPoints(bodyB, bodyA, input, &collectora);
 }
@@ -61,7 +61,7 @@ void __fastcall hkpSymmetricAgentLinearCast<hkpBvTreeAgent>::getPenetrations(hkp
   hkpCdBodyPairCollector v5; // [rsp+30h] [rbp-28h]
   hkpCdBodyPairCollector *v6; // [rsp+40h] [rbp-18h]
 
-  v5.vfptr = (hkpCdBodyPairCollectorVtbl *)&hkpSymmetricAgentFlipBodyCollector::`vftable';
+  v5.vfptr = (hkpCdBodyPairCollectorVtbl *)&hkpSymmetricAgentFlipBodyCollector::`vftable;
   v6 = collector;
   v5.m_earlyOut.m_bool = 0;
   hkpBvTreeAgent::getPenetrations((hkpBvTreeAgent *)&this->vfptr, bodyB, bodyA, input, &v5);
@@ -75,7 +75,7 @@ void __fastcall hkpSymmetricAgentLinearCast<hkpShapeCollectionAgent>::staticGetP
   hkpCdBodyPairCollector *v5; // [rsp+30h] [rbp-18h]
 
   v5 = collector;
-  collectora.vfptr = (hkpCdBodyPairCollectorVtbl *)&hkpSymmetricAgentFlipBodyCollector::`vftable';
+  collectora.vfptr = (hkpCdBodyPairCollectorVtbl *)&hkpSymmetricAgentFlipBodyCollector::`vftable;
   collectora.m_earlyOut.m_bool = 0;
   hkpShapeCollectionAgent::staticGetPenetrations(bodyB, bodyA, input, &collectora);
 }
@@ -115,7 +115,7 @@ void __fastcall hkpSymmetricAgentLinearCast<hkpMoppAgent>::staticLinearCast(hkpC
   inputa.m_path = (hkVector4f)v9.m_quad;
   inputa.m_aabb32Info.m_bitScale = (hkVector4f)v10.m_quad;
   v11 = *(_OWORD *)&input->m_maxExtraPenetration;
-  collectora.vfptr = (hkpCdPointCollectorVtbl *)&hkpSymmetricAgentFlipCastCollector::`vftable';
+  collectora.vfptr = (hkpCdPointCollectorVtbl *)&hkpSymmetricAgentFlipCastCollector::`vftable;
   *(_OWORD *)&inputa.m_maxExtraPenetration = v11;
   inputa.m_path.m_quad = _mm_xor_ps(
                            (__m128)_mm_shuffle_epi32(_mm_insert_epi16((__m128i)0i64, 0x8000u, 1), 0),
@@ -125,7 +125,7 @@ void __fastcall hkpSymmetricAgentLinearCast<hkpMoppAgent>::staticLinearCast(hkpC
   {
     v14 = startCollector;
     v13 = 2139095022;
-    v12 = &hkpSymmetricAgentFlipCollector::`vftable';
+    v12 = &hkpSymmetricAgentFlipCollector::`vftable;
     hkpMoppAgent::staticLinearCast(bodyB, bodyA, &inputa, &collectora, (hkpCdPointCollector *)&v12);
   }
   else

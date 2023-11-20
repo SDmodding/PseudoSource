@@ -358,8 +358,8 @@ void __fastcall FireWeaponTrack::FireWeaponTrack(FireWeaponTrack *this, MemImage
 
   v2 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, flag);
-  v2->vfptr = (Expression::IMemberMapVtbl *)&Track<FireWeaponTask>::`vftable';
-  v2->vfptr = (Expression::IMemberMapVtbl *)&FireWeaponTrack::`vftable';
+  v2->vfptr = (Expression::IMemberMapVtbl *)&Track<FireWeaponTask>::`vftable;
+  v2->vfptr = (Expression::IMemberMapVtbl *)&FireWeaponTrack::`vftable;
 }
 
 // File Line: 1319
@@ -421,8 +421,8 @@ void __fastcall AICopApplyReducedRadiusTrack::~AICopApplyReducedRadiusTrack(AICo
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&AICopApplyReducedRadiusTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&AICopApplyReducedRadiusTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -433,7 +433,7 @@ void __fastcall AICopApplyReducedRadiusTrack::~AICopApplyReducedRadiusTrack(AICo
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 1525
@@ -500,8 +500,8 @@ void __fastcall ForceUpdateTargetingTrack::~ForceUpdateTargetingTrack(ForceUpdat
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&ForceUpdateTargetingTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&ForceUpdateTargetingTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -512,7 +512,7 @@ void __fastcall ForceUpdateTargetingTrack::~ForceUpdateTargetingTrack(ForceUpdat
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 1685
@@ -674,8 +674,8 @@ AIAwarenessEnableTrack *__fastcall AIAwarenessEnableTrack::Create()
   if ( !v0 )
     return 0i64;
   ITrack::ITrack((ITrack *)v0, AIAwarenessEnableTrack::sClassNameUID);
-  *(_QWORD *)v1 = &Track<AIAwarenessEnableTask>::`vftable';
-  *(_QWORD *)v1 = &AIAwarenessEnableTrack::`vftable';
+  *(_QWORD *)v1 = &Track<AIAwarenessEnableTask>::`vftable;
+  *(_QWORD *)v1 = &AIAwarenessEnableTrack::`vftable;
   v1[56] = 1;
   return (AIAwarenessEnableTrack *)v1;
 }
@@ -699,8 +699,8 @@ LookAtTrack *__fastcall LookAtTrack::Create()
   if ( !v0 )
     return 0i64;
   ITrack::ITrack((ITrack *)v0, LookAtTrack::sClassNameUID);
-  *(_QWORD *)v1 = &Track<LookAtTask>::`vftable';
-  *(_QWORD *)v1 = &LookAtTrack::`vftable';
+  *(_QWORD *)v1 = &Track<LookAtTask>::`vftable;
+  *(_QWORD *)v1 = &LookAtTrack::`vftable;
   v1[56] = 0;
   return (LookAtTrack *)v1;
 }

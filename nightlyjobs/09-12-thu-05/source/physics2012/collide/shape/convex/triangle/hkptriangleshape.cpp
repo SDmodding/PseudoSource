@@ -6,7 +6,7 @@ void __fastcall hkpTriangleShape::hkpTriangleShape(hkpTriangleShape *this, hkFin
 
   v2 = this;
   hkpConvexShape::hkpConvexShape((hkpConvexShape *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpTriangleShape::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpTriangleShape::`vftable;
   v2->m_type.m_storage = 2;
 }
 

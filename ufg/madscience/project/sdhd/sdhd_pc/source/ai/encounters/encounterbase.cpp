@@ -41,20 +41,20 @@ void __fastcall UFG::EncounterBase::EncounterBase(UFG::EncounterBase *this)
 
   v1 = this;
   UFG::qSafePointerNodeWithCallbacks<UFG::EncounterBase>::qSafePointerNodeWithCallbacks<UFG::EncounterBase>((UFG::qSafePointerNodeWithCallbacks<UFG::EncounterBase> *)&this->vfptr);
-  v1->vfptr = (UFG::qSafePointerNode<UFG::EncounterBase>Vtbl *)&UFG::EncounterBase::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::EncounterBase>Vtbl *)&UFG::EncounterBase::`vftable;
   v1->mEnable = 1;
   UFG::PropertySetHandle::PropertySetHandle(&v1->mProperties);
   v1->mObjective = 0;
   v1->mPostObjective = 36;
   v1->mCurrentWaveType.mUID = -1;
   v2 = 6i64;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v1->mHeatLevelPropertiesName,
     4ui64,
     6,
     (void (__fastcall *)(void *))BackInfo::BackInfo);
   v3 = v1->mWaterHeatLevelPropertiesName;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v1->mWaterHeatLevelPropertiesName,
     4ui64,
     6,
@@ -93,7 +93,7 @@ void __fastcall UFG::EncounterBase::EncounterBase(UFG::EncounterBase *this)
     (UFG::VehicleWayFinderClient *)&v1->mWayTraversalClient.vfptr,
     0i64,
     0xFFFFFFFF);
-  v1->mWayTraversalClient.vfptr = (UFG::WayFinderClientVtbl *)&UFG::WayTraversalClient::`vftable';
+  v1->mWayTraversalClient.vfptr = (UFG::WayFinderClientVtbl *)&UFG::WayTraversalClient::`vftable;
   v14 = &v1->mpFocusTarget;
   v14->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v14->mPrev;
   v14->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v14->mPrev;
@@ -179,7 +179,7 @@ void __fastcall UFG::EncounterBase::~EncounterBase(UFG::EncounterBase *this)
   UFG::WayTraversalClient *v17; // [rsp+48h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::EncounterBase>Vtbl *)&UFG::EncounterBase::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::EncounterBase>Vtbl *)&UFG::EncounterBase::`vftable;
   UFG::EncounterBase::Shutdown(this);
   v2 = &v1->mpCombatRegion;
   if ( v1->mpCombatRegion.m_pPointer )
@@ -233,13 +233,13 @@ void __fastcall UFG::EncounterBase::~EncounterBase(UFG::EncounterBase *this)
   v12->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v12->mPrev;
   v1->mpFocusTarget.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v1->mpFocusTarget.mPrev;
   v17 = &v1->mWayTraversalClient;
-  v17->vfptr = (UFG::WayFinderClientVtbl *)&UFG::VehicleWayFinderClient::`vftable';
-  v17->vfptr = (UFG::WayFinderClientVtbl *)&UFG::WayFinderClient::`vftable';
+  v17->vfptr = (UFG::WayFinderClientVtbl *)&UFG::VehicleWayFinderClient::`vftable;
+  v17->vfptr = (UFG::WayFinderClientVtbl *)&UFG::WayFinderClient::`vftable;
   v1->mHumanSpawnRegions.size = 0;
   v1->mVehicles.size = 0;
   v1->mHumans.size = 0;
-  `eh vector destructor iterator'(v1->mWaterHeatLevelPropertiesName, 4ui64, 6, (void (__fastcall *)(void *))_);
-  `eh vector destructor iterator'(v1->mHeatLevelPropertiesName, 4ui64, 6, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(v1->mWaterHeatLevelPropertiesName, 4ui64, 6, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(v1->mHeatLevelPropertiesName, 4ui64, 6, (void (__fastcall *)(void *))_);
   UFG::PropertySetHandle::~PropertySetHandle(&v1->mProperties);
   UFG::qSafePointerNodeWithCallbacks<UFG::EncounterBase>::~qSafePointerNodeWithCallbacks<UFG::EncounterBase>((UFG::qSafePointerNodeWithCallbacks<UFG::EncounterBase> *)&v1->vfptr);
 }

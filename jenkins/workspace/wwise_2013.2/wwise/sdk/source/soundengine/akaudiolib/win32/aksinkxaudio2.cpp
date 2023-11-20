@@ -13,9 +13,9 @@ void __fastcall CAkSinkXAudio2::CAkSinkXAudio2(CAkSinkXAudio2 *this)
 
   v1 = this;
   CAkSink::CAkSink((CAkSink *)&this->vfptr, AkSink_Main_XAudio2);
-  v1->vfptr = (CAkSinkVtbl *)&CAkSinkXAudio2::`vftable'{for `CAkSink'};
-  v1->vfptr = (IXAudio2EngineCallbackVtbl *)&CAkSinkXAudio2::`vftable'{for `IXAudio2EngineCallback'};
-  v1->vfptr = (IXAudio2VoiceCallbackVtbl *)&CAkSinkXAudio2::`vftable'{for `IXAudio2VoiceCallback'};
+  v1->vfptr = (CAkSinkVtbl *)&CAkSinkXAudio2::`vftable{for `CAkSink};
+  v1->vfptr = (IXAudio2EngineCallbackVtbl *)&CAkSinkXAudio2::`vftable{for `IXAudio2EngineCallback};
+  v1->vfptr = (IXAudio2VoiceCallbackVtbl *)&CAkSinkXAudio2::`vftable{for `IXAudio2VoiceCallback};
   v1->pNextLightItem = 0i64;
   v1->m_ulNumChannels = 0;
   v1->m_pXAudio2 = 0i64;

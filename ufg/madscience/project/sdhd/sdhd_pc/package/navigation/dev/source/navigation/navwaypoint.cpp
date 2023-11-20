@@ -5,13 +5,13 @@ void __fastcall UFG::NavWaypoint::NavWaypoint(UFG::NavWaypoint *this)
   float v1; // xmm2_4
   float v2; // xmm0_4
 
-  this->m_navPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable';
+  this->m_navPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable;
   v1 = UFG::qVector3::msZero.z;
   v2 = UFG::qVector3::msZero.x;
   this->m_navPosition.m_vPosition.y = UFG::qVector3::msZero.y;
   this->m_navPosition.m_vPosition.z = v1;
   this->m_navPosition.m_vPosition.x = v2;
-  this->m_navPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable';
+  this->m_navPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable;
   this->m_navPosition.m_bValid = 0;
   *(_QWORD *)&this->m_navPosition.m_packedKey = -1i64;
   this->m_navPosition.m_hkvMeshPosition.m_quad = _mm_unpacklo_ps(
@@ -33,7 +33,7 @@ void __fastcall UFG::NavWaypoint::NavWaypoint(UFG::NavWaypoint *this, UFG::qVect
   float v2; // xmm1_4
   float v3; // xmm0_4
 
-  this->m_navPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable';
+  this->m_navPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable;
   v2 = vPosition->y;
   v3 = vPosition->z;
   this->m_navPosition.m_vPosition.x = vPosition->x;
@@ -41,7 +41,7 @@ void __fastcall UFG::NavWaypoint::NavWaypoint(UFG::NavWaypoint *this, UFG::qVect
   this->m_navPosition.m_vPosition.z = v3;
   this->m_navPosition.m_bValid = 0;
   *(_QWORD *)&this->m_navPosition.m_packedKey = -1i64;
-  this->m_navPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable';
+  this->m_navPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable;
   this->m_navPosition.m_hkvMeshPosition.m_quad = _mm_unpacklo_ps(
                                                    _mm_unpacklo_ps(
                                                      (__m128)LODWORD(vPosition->x),
@@ -61,7 +61,7 @@ void __fastcall UFG::NavWaypoint::NavWaypoint(UFG::NavWaypoint *this, UFG::qVect
   float v3; // xmm1_4
   float v4; // xmm0_4
 
-  this->m_navPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable';
+  this->m_navPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable;
   v3 = vPosition->y;
   v4 = vPosition->z;
   this->m_navPosition.m_vPosition.x = vPosition->x;
@@ -69,7 +69,7 @@ void __fastcall UFG::NavWaypoint::NavWaypoint(UFG::NavWaypoint *this, UFG::qVect
   this->m_navPosition.m_vPosition.z = v4;
   this->m_navPosition.m_bValid = 0;
   *(_QWORD *)&this->m_navPosition.m_packedKey = -1i64;
-  this->m_navPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable';
+  this->m_navPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable;
   this->m_navPosition.m_hkvMeshPosition.m_quad = _mm_unpacklo_ps(
                                                    _mm_unpacklo_ps(
                                                      (__m128)LODWORD(vPosition->x),

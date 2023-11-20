@@ -11,7 +11,7 @@ void __fastcall UFG::UIHKScreenDebugLanguageList::UIHKScreenDebugLanguageList(UF
   v2 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -22,14 +22,14 @@ void __fastcall UFG::UIHKScreenDebugLanguageList::UIHKScreenDebugLanguageList(UF
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenDebugLanguageList::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenDebugLanguageList::`vftable;
   this->m_list = 0i64;
   v3 = UFG::qMemoryPool::Allocate(&gScaleformMemoryPool, 0x90ui64, "UIListText", 0i64, 1u);
   v4 = v3;
   if ( v3 )
   {
     UFG::UIList::UIList((UFG::UIList *)v3, (UFG::UIScreen *)&v1->vfptr);
-    v4->mNext = (UFG::allocator::free_link *)&UFG::UIListText::`vftable';
+    v4->mNext = (UFG::allocator::free_link *)&UFG::UIListText::`vftable;
   }
   else
   {
@@ -48,7 +48,7 @@ void __fastcall UFG::UIHKScreenDebugLanguageList::~UIHKScreenDebugLanguageList(U
   UFG::UIScreenTextureManager *v4; // rax
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenDebugLanguageList::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenDebugLanguageList::`vftable;
   v2 = this->m_list;
   if ( v2 )
     v2->vfptr->__vecDelDtor((UFG::UIWidget *)&v2->vfptr, 1u);
@@ -117,10 +117,10 @@ void __fastcall UFG::UIHKScreenDebugLanguageList::init(UFG::UIHKScreenDebugLangu
       v10 = v7 + 1;
       v10->mNext = v10;
       v10[1].mNext = v10;
-      v7->mNext = (UFG::allocator::free_link *)&UFG::UIItem::`vftable';
+      v7->mNext = (UFG::allocator::free_link *)&UFG::UIItem::`vftable;
       LODWORD(v7[3].mNext) = v9;
       v7[4].mNext = (UFG::allocator::free_link *)v2;
-      v7->mNext = (UFG::allocator::free_link *)&UFG::UIItemText::`vftable';
+      v7->mNext = (UFG::allocator::free_link *)&UFG::UIItemText::`vftable;
       UFG::qString::qString((UFG::qString *)&v7[5], &text);
       v17 = v7 + 10;
       v17->mNext = v17;

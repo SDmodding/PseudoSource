@@ -72,7 +72,7 @@ UFG::PDATrigger *__fastcall UFG::PDATriggerTracker::Add(UFG::PDATriggerTracker *
     v6->mNode.mChild[0] = 0i64;
     v6->mNode.mChild[1] = 0i64;
     v6->mNode.mUID = v8;
-    v6->vfptr = (UFG::PDATriggerVtbl *)&UFG::PDATrigger::`vftable';
+    v6->vfptr = (UFG::PDATriggerVtbl *)&UFG::PDATrigger::`vftable;
     v6->mSymbol.mUID = v8;
     v6->mpGameSlice = v3;
     v6->mTriggered = 0;

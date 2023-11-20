@@ -50,8 +50,8 @@ void __fastcall OSuite::IParser::ZCharReaderBase::~ZCharReaderBase(OSuite::IPars
     v2->vfptr->__vecDelDtor((OSuite::ZObject *)&v2->vfptr, 1u);
   v1->m_pDecoder = 0i64;
   v3 = v1->m_Stack.m_pList;
-  v1->m_Stack.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<int>::`vftable'{for `OSuite::ZObject'};
-  v1->m_Stack.vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<int>::`vftable'{for `OSuite::IHashable'};
+  v1->m_Stack.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<int>::`vftable{for `OSuite::ZObject};
+  v1->m_Stack.vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<int>::`vftable{for `OSuite::IHashable};
   if ( v3 )
     v3->vfptr->__vecDelDtor((OSuite::ZObject *)&v3->vfptr, 1u);
 }
@@ -115,14 +115,14 @@ void __fastcall OSuite::IParser::ZCharReaderBase::Push(OSuite::IParser::ZCharRea
 // RVA: 0xEE06CC
 void __fastcall OSuite::IParser::ZStreamCharReader::ZStreamCharReader(OSuite::IParser::ZStreamCharReader *this, OSuite::IReader *pStream, OSuite::IParser *pParent)
 {
-  this->m_Stack.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<int>::`vftable'{for `OSuite::ZObject'};
-  this->m_Stack.vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<int>::`vftable'{for `OSuite::IHashable'};
+  this->m_Stack.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<int>::`vftable{for `OSuite::ZObject};
+  this->m_Stack.vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<int>::`vftable{for `OSuite::IHashable};
   this->m_Stack.m_nFree = 0i64;
   this->m_Stack.m_pList = 0i64;
   this->m_pDecoder = 0i64;
   this->m_pParent = pParent;
   this->m_pStream = pStream;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::IParser::ZStreamCharReader::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::IParser::ZStreamCharReader::`vftable;
   OSuite::IParser::ZCharReaderBase::DetermineEncoding((OSuite::IParser::ZCharReaderBase *)&this->vfptr);
 }
 
@@ -152,12 +152,12 @@ void __fastcall OSuite::IParser::ZHttpCharReader::ZHttpCharReader(OSuite::IParse
   this->m_Stack.m_nFree = 0i64;
   this->m_Stack.m_pList = 0i64;
   v3 = this;
-  this->m_Stack.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<int>::`vftable'{for `OSuite::ZObject'};
-  this->m_Stack.vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<int>::`vftable'{for `OSuite::IHashable'};
+  this->m_Stack.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<int>::`vftable{for `OSuite::ZObject};
+  this->m_Stack.vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<int>::`vftable{for `OSuite::IHashable};
   this->m_pDecoder = 0i64;
   this->m_pStream = pStream;
   this->m_pParent = pParent;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::IParser::ZHttpCharReader::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::IParser::ZHttpCharReader::`vftable;
   v4 = (OSuite::ZString *)(*((__int64 (__fastcall **)(OSuite::IBufferedReader *, OSuite::ZString *))&pStream->vfptr[1].__vecDelDtor
                            + 1))(
                             pStream,

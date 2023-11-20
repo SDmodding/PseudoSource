@@ -45,7 +45,7 @@ hkClass *__fastcall hkpSingleShapeContainer::staticClass()
 void __fastcall finishLoadedObjecthkpSingleShapeContainer(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpSingleShapeContainer::`vftable';
+    *(_QWORD *)p = &hkpSingleShapeContainer::`vftable;
 }
 
 // File Line: 96
@@ -59,7 +59,7 @@ void __fastcall cleanupLoadedObjecthkpSingleShapeContainer(void *p)
 // RVA: 0xCEBF00
 void **__fastcall getVtablehkpSingleShapeContainer()
 {
-  return &hkpSingleShapeContainer::`vftable';
+  return &hkpSingleShapeContainer::`vftable;
 }
 
 // File Line: 122

@@ -6,9 +6,9 @@ void __fastcall CAkMusicRanSeqCntr::CAkMusicRanSeqCntr(CAkMusicRanSeqCntr *this,
 
   v2 = this;
   CAkMusicTransAware::CAkMusicTransAware((CAkMusicTransAware *)&this->vfptr, in_ulID);
-  v2->vfptr = (CAkIndexableVtbl *)&CAkMusicRanSeqCntr::`vftable';
+  v2->vfptr = (CAkIndexableVtbl *)&CAkMusicRanSeqCntr::`vftable;
   v2->m_playListRoot.m_pParent = 0i64;
-  v2->m_playListRoot.vfptr = (CAkRSNodeVtbl *)&CAkRSSub::`vftable';
+  v2->m_playListRoot.vfptr = (CAkRSNodeVtbl *)&CAkRSSub::`vftable;
   v2->m_playListRoot.m_ID = 0;
   v2->m_playListRoot.m_Weight = 50000;
   v2->m_playListRoot.m_listChildren.m_pItems = 0i64;
@@ -363,7 +363,7 @@ signed __int64 __fastcall CAkMusicRanSeqCntr::AddPlaylistChildren(CAkMusicRanSeq
     v7->m_pParent = (CAkRSNode *)&v4->vfptr;
     v7->m_Weight = 50000;
     v7->m_ID = 0;
-    v7->vfptr = (CAkRSNodeVtbl *)&CAkRSSub::`vftable';
+    v7->vfptr = (CAkRSNodeVtbl *)&CAkRSSub::`vftable;
     v7->m_listChildren.m_pItems = 0i64;
     *(_QWORD *)&v7->m_listChildren.m_uLength = 0i64;
     v7->m_eRSType = 0;
@@ -434,7 +434,7 @@ LABEL_27:
   v18->m_pParent = (CAkRSNode *)&v4->vfptr;
   v18->m_Weight = 50000;
   v18->m_ID = 0;
-  v18->vfptr = (CAkRSNodeVtbl *)&CAkRSSegment::`vftable';
+  v18->vfptr = (CAkRSNodeVtbl *)&CAkRSSegment::`vftable;
   v19 = v4->m_listChildren.m_uLength;
   v20 = v4->m_listChildren.m_ulReserved;
   v32 = v19;

@@ -8,8 +8,8 @@ void __fastcall hkpExtendedMeshShape::hkpExtendedMeshShape(hkpExtendedMeshShape 
   v3 = numBitsForSubpartIndex;
   v4 = this;
   hkpShapeCollection::hkpShapeCollection((hkpShapeCollection *)&this->vfptr, EXTENDED_MESH, COLLECTION_EXTENDED_MESH);
-  v4->vfptr = (hkBaseObjectVtbl *)&hkpExtendedMeshShape::`vftable'{for `hkpShape'};
-  v4->vfptr = (hkpShapeContainerVtbl *)&hkpExtendedMeshShape::`vftable'{for `hkpShapeContainer'};
+  v4->vfptr = (hkBaseObjectVtbl *)&hkpExtendedMeshShape::`vftable{for `hkpShape};
+  v4->vfptr = (hkpShapeContainerVtbl *)&hkpExtendedMeshShape::`vftable{for `hkpShapeContainer};
   *(_QWORD *)&v4->m_embeddedTrianglesSubpart.m_typeAndFlags = 10i64;
   v4->m_embeddedTrianglesSubpart.m_extrusion = 0i64;
   v4->m_embeddedTrianglesSubpart.m_materialBase = 0i64;
@@ -68,8 +68,8 @@ void __fastcall hkpExtendedMeshShape::hkpExtendedMeshShape(hkpExtendedMeshShape 
   v4 = 0;
   v5 = (signed __int64)&v3->m_embeddedTrianglesSubpart;
   v6 = (signed __int64)&v3->m_trianglesSubparts;
-  v3->vfptr = (hkBaseObjectVtbl *)&hkpExtendedMeshShape::`vftable'{for `hkpShape'};
-  v3->vfptr = (hkpShapeContainerVtbl *)&hkpExtendedMeshShape::`vftable'{for `hkpShapeContainer'};
+  v3->vfptr = (hkBaseObjectVtbl *)&hkpExtendedMeshShape::`vftable{for `hkpShape};
+  v3->vfptr = (hkpShapeContainerVtbl *)&hkpExtendedMeshShape::`vftable{for `hkpShapeContainer};
   *(_QWORD *)v5 = 10i64;
   *(_QWORD *)(v5 + 16) = 0i64;
   *(_OWORD *)(v5 + 80) = 0i64;
@@ -197,9 +197,9 @@ void __fastcall hkpExtendedMeshShape::~hkpExtendedMeshShape(hkpExtendedMeshShape
   int v5; // eax
   int v6; // eax
 
-  this->vfptr = (hkBaseObjectVtbl *)&hkpExtendedMeshShape::`vftable'{for `hkpShape'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkpExtendedMeshShape::`vftable{for `hkpShape};
   v1 = this;
-  this->vfptr = (hkpShapeContainerVtbl *)&hkpExtendedMeshShape::`vftable'{for `hkpShapeContainer'};
+  this->vfptr = (hkpShapeContainerVtbl *)&hkpExtendedMeshShape::`vftable{for `hkpShapeContainer};
   v2 = this->m_weldingInfo.m_capacityAndFlags;
   this->m_weldingInfo.m_size = 0;
   if ( v2 >= 0 )
@@ -239,8 +239,8 @@ void __fastcall hkpExtendedMeshShape::~hkpExtendedMeshShape(hkpExtendedMeshShape
       144 * (v6 & 0x3FFFFFFF));
   v1->m_trianglesSubparts.m_data = 0i64;
   v1->m_trianglesSubparts.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkpShapeContainerVtbl *)&hkpShapeContainer::`vftable';
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkpShapeContainerVtbl *)&hkpShapeContainer::`vftable;
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 127
@@ -266,8 +266,8 @@ void __fastcall hkpExtendedMeshShape::hkpExtendedMeshShape(hkpExtendedMeshShape 
   flaga = flag.m_finishing;
   v2 = this;
   hkpShapeCollection::hkpShapeCollection((hkpShapeCollection *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpExtendedMeshShape::`vftable'{for `hkpShape'};
-  v2->vfptr = (hkpShapeContainerVtbl *)&hkpExtendedMeshShape::`vftable'{for `hkpShapeContainer'};
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpExtendedMeshShape::`vftable{for `hkpShape};
+  v2->vfptr = (hkpShapeContainerVtbl *)&hkpExtendedMeshShape::`vftable{for `hkpShapeContainer};
   if ( flaga )
   {
     v3 = 0;
@@ -802,7 +802,7 @@ hkpShape *__fastcall hkpExtendedMeshShape::getChildShape(hkpExtendedMeshShape *t
       *(_DWORD *)&(*v4)[16] = 1026;
       *(float *)&(*v4)[32] = v21;
       *(_QWORD *)&(*v4)[24] = 0i64;
-      *(_QWORD *)v4 = &hkpTriangleShape::`vftable';
+      *(_QWORD *)v4 = &hkpTriangleShape::`vftable;
       *(_DWORD *)&(*v4)[40] = 393216;
       *(_OWORD *)&(*v4)[96] = 0i64;
     }
@@ -915,7 +915,7 @@ hkpShape *__fastcall hkpExtendedMeshShape::getChildShape(hkpExtendedMeshShape *t
   *(_DWORD *)&(*v4)[56] = 0;
   v49 = *(__m128 *)(((unsigned __int64)&v54 & 0xFFFFFFFFFFFFFFB0ui64) + 0x40);
   v50 = *(__m128 *)(((unsigned __int64)&v54 & 0xFFFFFFFFFFFFFFB0ui64) + 0x40);
-  *(_QWORD *)v4 = &hkpConvexTranslateShape::`vftable';
+  *(_QWORD *)v4 = &hkpConvexTranslateShape::`vftable;
   *(__m128 *)&(*v4)[64] = _mm_shuffle_ps(v49, _mm_unpackhi_ps(v50, (__m128)0i64), 196);
   return (hkpShape *)v4;
 }

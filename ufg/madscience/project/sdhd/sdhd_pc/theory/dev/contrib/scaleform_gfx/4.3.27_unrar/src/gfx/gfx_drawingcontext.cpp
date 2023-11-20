@@ -10,12 +10,12 @@ void __fastcall Scaleform::GFx::DrawingContext::DrawingContext(Scaleform::GFx::D
 
   v3 = imgCreator;
   v4 = this;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,322>::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseNTS<Scaleform::GFx::DrawingContext,322>::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::DrawingContext::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,322>::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseNTS<Scaleform::GFx::DrawingContext,322>::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::DrawingContext::`vftable;
   this->pTreeContainer.pObject = 0i64;
   this->RenContext = renCtxt;
   if ( imgCreator )
@@ -62,7 +62,7 @@ void __fastcall Scaleform::GFx::DrawingContext::~DrawingContext(Scaleform::GFx::
   bool v8; // zf
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::DrawingContext::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::DrawingContext::`vftable;
   if ( this->pPrev && this->pNext )
   {
     this->pPrev->pNext = this->pNext;
@@ -335,12 +335,12 @@ Scaleform::Render::ComplexFill *__fastcall Scaleform::GFx::DrawingContext::Creat
   v5 = ((__int64 (__fastcall *)(__int64, signed __int64))v1->RenContext->pHeap->vfptr->Alloc)(v4, 80i64);
   if ( v5 )
   {
-    *(_QWORD *)v5 = &Scaleform::RefCountImplCore::`vftable';
+    *(_QWORD *)v5 = &Scaleform::RefCountImplCore::`vftable;
     *(_DWORD *)(v5 + 8) = 1;
-    *(_QWORD *)v5 = &Scaleform::RefCountImpl::`vftable';
-    *(_QWORD *)v5 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable';
-    *(_QWORD *)v5 = &Scaleform::RefCountBase<Scaleform::Render::ComplexFill,71>::`vftable';
-    *(_QWORD *)v5 = &Scaleform::Render::ComplexFill::`vftable';
+    *(_QWORD *)v5 = &Scaleform::RefCountImpl::`vftable;
+    *(_QWORD *)v5 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable;
+    *(_QWORD *)v5 = &Scaleform::RefCountBase<Scaleform::Render::ComplexFill,71>::`vftable;
+    *(_QWORD *)v5 = &Scaleform::Render::ComplexFill::`vftable;
     *(_QWORD *)(v5 + 16) = 0i64;
     *(_QWORD *)(v5 + 24) = 0i64;
     *(_QWORD *)(v5 + 32) = 1065353216i64;
@@ -420,12 +420,12 @@ Scaleform::GFx::Resource *__fastcall Scaleform::GFx::DrawingContext::CreateLineC
   v3 = (Scaleform::GFx::Resource *)v2;
   if ( v2 )
   {
-    *(_QWORD *)v2 = &Scaleform::RefCountImplCore::`vftable';
+    *(_QWORD *)v2 = &Scaleform::RefCountImplCore::`vftable;
     *(_DWORD *)(v2 + 8) = 1;
-    *(_QWORD *)v2 = &Scaleform::RefCountImpl::`vftable';
-    *(_QWORD *)v2 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable';
-    *(_QWORD *)v2 = &Scaleform::RefCountBase<Scaleform::Render::ComplexFill,71>::`vftable';
-    *(_QWORD *)v2 = &Scaleform::Render::ComplexFill::`vftable';
+    *(_QWORD *)v2 = &Scaleform::RefCountImpl::`vftable;
+    *(_QWORD *)v2 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable;
+    *(_QWORD *)v2 = &Scaleform::RefCountBase<Scaleform::Render::ComplexFill,71>::`vftable;
+    *(_QWORD *)v2 = &Scaleform::Render::ComplexFill::`vftable;
     *(_QWORD *)(v2 + 16) = 0i64;
     *(_QWORD *)(v2 + 24) = 0i64;
     *(_QWORD *)(v2 + 32) = 1065353216i64;
@@ -614,12 +614,12 @@ void __fastcall Scaleform::GFx::DrawingContext::BeginBitmapFill(Scaleform::GFx::
     v42 = v13;
     if ( v13 )
     {
-      *(_QWORD *)v13 = &Scaleform::RefCountImplCore::`vftable';
+      *(_QWORD *)v13 = &Scaleform::RefCountImplCore::`vftable;
       *(_DWORD *)(v13 + 8) = 1;
-      *(_QWORD *)v13 = &Scaleform::RefCountImpl::`vftable';
-      *(_QWORD *)v13 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable';
-      *(_QWORD *)v13 = &Scaleform::RefCountBase<Scaleform::Render::ComplexFill,71>::`vftable';
-      *(_QWORD *)v13 = &Scaleform::Render::ComplexFill::`vftable';
+      *(_QWORD *)v13 = &Scaleform::RefCountImpl::`vftable;
+      *(_QWORD *)v13 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable;
+      *(_QWORD *)v13 = &Scaleform::RefCountBase<Scaleform::Render::ComplexFill,71>::`vftable;
+      *(_QWORD *)v13 = &Scaleform::Render::ComplexFill::`vftable;
       *(_QWORD *)(v13 + 16) = 0i64;
       *(_QWORD *)(v13 + 24) = 0i64;
       *(_QWORD *)(v13 + 32) = 1065353216i64;

@@ -13,7 +13,7 @@ AStringRef **__fastcall APArrayBase<AStringRef>::alloc_array(unsigned int needed
   v1 = needed;
   result = (AStringRef **)AMemory::c_malloc_func(8i64 * needed, "APArrayBase.buffer");
   v3 = result;
-  if ( `APArrayBase<AStringRef>::alloc_array'::`3'::_test && v1 && !result )
+  if ( `APArrayBase<AStringRef>::alloc_array::`3::_test && v1 && !result )
   {
     AErrMsg::AErrMsg(&err_msg, "Unable to allocate memory", AErrLevel_error, 0i64, 0i64);
     AErrMsg::AErrMsg(
@@ -24,7 +24,7 @@ AStringRef **__fastcall APArrayBase<AStringRef>::alloc_array(unsigned int needed
       "d:\\ufg\\madscience\\project\\sdhd\\sdhd_pc\\theory\\dev\\package\\agogcore\\dev\\source\\agogcore\\aparraybase.hpp",
       0x398u,
       3u);
-    if ( ADebug::resolve_error(v4, &action_p, &`APArrayBase<AStringRef>::alloc_array'::`3'::_test) )
+    if ( ADebug::resolve_error(v4, &action_p, &`APArrayBase<AStringRef>::alloc_array::`3::_test) )
       __debugbreak();
     if ( action_p != 3 )
       __debugbreak();

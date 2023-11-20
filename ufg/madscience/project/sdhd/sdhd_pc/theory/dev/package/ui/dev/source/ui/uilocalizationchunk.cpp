@@ -9,7 +9,7 @@ __int64 UFG::_dynamic_initializer_for__gLocalizationInventory__()
     0x90CE6B7A,
     0,
     0);
-  UFG::gLocalizationInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::UILocalizationInventory::`vftable';
+  UFG::gLocalizationInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::UILocalizationInventory::`vftable;
   return atexit(UFG::_dynamic_atexit_destructor_for__gLocalizationInventory__);
 }
 

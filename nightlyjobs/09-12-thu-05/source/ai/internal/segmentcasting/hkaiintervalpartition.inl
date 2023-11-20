@@ -1,6 +1,6 @@
 // File Line: 11
 // RVA: 0x12E35F0
-void __fastcall hkaiIntervalPartition::filterIntervals<`anonymous namespace'::ContractFilter>(hkaiIntervalPartition *this, ContractFilter *filter)
+void __fastcall hkaiIntervalPartition::filterIntervals<`anonymous namespace::ContractFilter>(hkaiIntervalPartition *this, ContractFilter *filter)
 {
   signed __int64 v2; // rdi
   int v3; // er11

@@ -1,6 +1,6 @@
 // File Line: 130
 // RVA: 0xE533C0
-void __fastcall `anonymous namespace'::Reader::Reader(Reader *this, hkStreamReader *sr, hkDataWorld *cont)
+void __fastcall `anonymous namespace::Reader::Reader(Reader *this, hkStreamReader *sr, hkDataWorld *cont)
 {
   hkDataWorld *v3; // rbx
   Reader *v4; // rsi
@@ -45,12 +45,12 @@ void __fastcall `anonymous namespace'::Reader::Reader(Reader *this, hkStreamRead
   v4->m_numPrevStringsStatic = 2;
   text.m_start = "#0000";
   text.m_end = &a0000[(signed int)hkString::strLen("#0000")];
-  v4->m_null = `anonymous namespace'::Reader::_getString(v4, &text);
+  v4->m_null = `anonymous namespace::Reader::_getString(v4, &text);
 }
 
 // File Line: 141
 // RVA: 0xE53560
-void __fastcall `anonymous namespace'::Reader::~Reader(Reader *this)
+void __fastcall `anonymous namespace::Reader::~Reader(Reader *this)
 {
   hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *v1; // rbp
   Reader *v2; // rbx
@@ -81,7 +81,7 @@ void __fastcall `anonymous namespace'::Reader::~Reader(Reader *this)
     v5 = v4;
     if ( v4 )
     {
-      `anonymous namespace'::ReferenceInfo::~ReferenceInfo(v4);
+      `anonymous namespace::ReferenceInfo::~ReferenceInfo(v4);
       v6 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
       (*(void (__fastcall **)(_QWORD *, ReferenceInfo *, signed __int64))(*v6[11] + 16i64))(v6[11], v5, 40i64);
     }
@@ -162,7 +162,7 @@ void __fastcall `anonymous namespace'::Reader::~Reader(Reader *this)
 
 // File Line: 152
 // RVA: 0xE55B00
-hkResult *__fastcall `anonymous namespace'::Reader::_parseObjectReferenceImpl<hkDataArray_Value>(Reader *this, hkResult *result, hkDataArray_Value *valueOut)
+hkResult *__fastcall `anonymous namespace::Reader::_parseObjectReferenceImpl<hkDataArray_Value>(Reader *this, hkResult *result, hkDataArray_Value *valueOut)
 {
   hkDataArray_Value *v3; // rsi
   hkResult *v4; // rdi
@@ -182,7 +182,7 @@ hkResult *__fastcall `anonymous namespace'::Reader::_parseObjectReferenceImpl<hk
   v3 = valueOut;
   v4 = result;
   v5 = this;
-  `anonymous namespace'::Reader::_skipWhiteSpace(this);
+  `anonymous namespace::Reader::_skipWhiteSpace(this);
   v6 = v5->m_parser.m_token;
   if ( v6 != 1 )
   {
@@ -203,16 +203,16 @@ hkResult *__fastcall `anonymous namespace'::Reader::_parseObjectReferenceImpl<hk
   }
   v7 = hkXmlStreamParser::getBlockName(&v5->m_parser, &resulta);
   if ( !hkSubString::operator==(v7, &v17, "ref")->m_bool
-    || (`anonymous namespace'::Reader::_pushBlock(v5),
+    || (`anonymous namespace::Reader::_pushBlock(v5),
         hkXmlStreamParser::advance(&v5->m_parser),
-        `anonymous namespace'::Reader::_skipWhiteSpace(v5) != 4) )
+        `anonymous namespace::Reader::_skipWhiteSpace(v5) != 4) )
   {
 LABEL_15:
     v4->m_enum = 1;
     return v4;
   }
   v8 = hkXmlStreamParser::getLexeme(&v5->m_parser, &resulta);
-  v9 = `anonymous namespace'::Reader::_getString(v5, v8);
+  v9 = `anonymous namespace::Reader::_getString(v5, v8);
   if ( v9 == v5->m_null )
   {
     ((void (__fastcall *)(hkDataArrayImpl *, _QWORD, _QWORD))v3->m_impl->vfptr[22].__vecDelDtor)(
@@ -222,7 +222,7 @@ LABEL_15:
   }
   else
   {
-    v10 = `anonymous namespace'::Reader::_requireReferenceInfo(v5, v9);
+    v10 = `anonymous namespace::Reader::_requireReferenceInfo(v5, v9);
     v11 = (hkSubString)*v3;
     v12 = (signed int *)&v10->m_arrayRefs;
     resulta = v11;
@@ -237,14 +237,14 @@ LABEL_15:
     ++v12[2];
   }
   hkXmlStreamParser::advance(&v5->m_parser);
-  `anonymous namespace'::Reader::_skipWhiteSpace(v5);
-  `anonymous namespace'::Reader::_popBlock(v5, v4);
+  `anonymous namespace::Reader::_skipWhiteSpace(v5);
+  `anonymous namespace::Reader::_popBlock(v5, v4);
   return v4;
 }
 
 // File Line: 199
 // RVA: 0xE53DA0
-char *__fastcall `anonymous namespace'::Reader::_getString(Reader *this, hkSubString *text)
+char *__fastcall `anonymous namespace::Reader::_getString(Reader *this, hkSubString *text)
 {
   Reader *v2; // rbp
   char *v3; // rcx
@@ -317,7 +317,7 @@ char *__fastcall `anonymous namespace'::Reader::_getString(Reader *this, hkSubSt
 
 // File Line: 212
 // RVA: 0xE54330
-hkTypeManager::Type *__fastcall `anonymous namespace'::Reader::_getType(Reader *this, const char *name, const char *className)
+hkTypeManager::Type *__fastcall `anonymous namespace::Reader::_getType(Reader *this, const char *name, const char *className)
 {
   const char *v3; // rsi
   const char *v4; // rdi
@@ -385,7 +385,7 @@ LABEL_14:
 
 // File Line: 283
 // RVA: 0xE53CA0
-void __fastcall `anonymous namespace'::Reader::_pushBlock(Reader *this)
+void __fastcall `anonymous namespace::Reader::_pushBlock(Reader *this)
 {
   Reader *v1; // rbx
   hkSubString *v2; // rax
@@ -396,7 +396,7 @@ void __fastcall `anonymous namespace'::Reader::_pushBlock(Reader *this)
 
   v1 = this;
   v2 = hkXmlStreamParser::getBlockName(&this->m_parser, &result);
-  v3 = `anonymous namespace'::Reader::_getString(v1, v2);
+  v3 = `anonymous namespace::Reader::_getString(v1, v2);
   v4 = &v1->m_blockStack;
   v5 = v3;
   if ( v4->m_size == (v4->m_capacityAndFlags & 0x3FFFFFFF) )
@@ -406,7 +406,7 @@ void __fastcall `anonymous namespace'::Reader::_pushBlock(Reader *this)
 
 // File Line: 289
 // RVA: 0xE53D10
-hkResult *__fastcall `anonymous namespace'::Reader::_popBlock(Reader *this, hkResult *result)
+hkResult *__fastcall `anonymous namespace::Reader::_popBlock(Reader *this, hkResult *result)
 {
   hkResult *v2; // rbx
   Reader *v3; // rdi
@@ -417,9 +417,9 @@ hkResult *__fastcall `anonymous namespace'::Reader::_popBlock(Reader *this, hkRe
 
   v2 = result;
   v3 = this;
-  `anonymous namespace'::Reader::_skipWhiteSpace(this);
+  `anonymous namespace::Reader::_skipWhiteSpace(this);
   v4 = hkXmlStreamParser::getBlockName(&v3->m_parser, &resulta);
-  v5 = `anonymous namespace'::Reader::_getString(v3, v4);
+  v5 = `anonymous namespace::Reader::_getString(v3, v4);
   if ( v3->m_blockStack.m_size <= 0 || v5 != v3->m_blockStack.m_data[v3->m_blockStack.m_size - 1] )
   {
     v2->m_enum = 1;
@@ -437,7 +437,7 @@ hkResult *__fastcall `anonymous namespace'::Reader::_popBlock(Reader *this, hkRe
 
 // File Line: 313
 // RVA: 0xE54060
-hkResult *__fastcall `anonymous namespace'::Reader::_parseClassDefinition(Reader *this, hkResult *result)
+hkResult *__fastcall `anonymous namespace::Reader::_parseClassDefinition(Reader *this, hkResult *result)
 {
   hkResult *v2; // rsi
   Reader *v3; // rbx
@@ -470,13 +470,13 @@ hkResult *__fastcall `anonymous namespace'::Reader::_parseClassDefinition(Reader
 
   v2 = result;
   v3 = this;
-  `anonymous namespace'::Reader::_pushBlock(this);
-  v4 = `anonymous namespace'::Reader::_getAttribute(v3, "name");
+  `anonymous namespace::Reader::_pushBlock(this);
+  v4 = `anonymous namespace::Reader::_getAttribute(v3, "name");
   if ( v4 )
   {
     value = 0;
     hkXmlStreamParser::getIntAttribute(&v3->m_parser, &resulta, "version", &value);
-    v6 = `anonymous namespace'::Reader::_getAttribute(v3, "parent");
+    v6 = `anonymous namespace::Reader::_getAttribute(v3, "parent");
     array = 0i64;
     v23 = value;
     v7 = v3->m_world;
@@ -486,23 +486,23 @@ hkResult *__fastcall `anonymous namespace'::Reader::_parseClassDefinition(Reader
     v24 = v6;
     v8 = (hkTypeManager *)((__int64 (*)(void))v7->vfptr[5].__first_virtual_table_function__)();
     hkXmlStreamParser::advance(&v3->m_parser);
-    while ( `anonymous namespace'::Reader::_skipWhiteSpace(v3) == 2 )
+    while ( `anonymous namespace::Reader::_skipWhiteSpace(v3) == 2 )
     {
       v9 = hkXmlStreamParser::getBlockName(&v3->m_parser, &v21);
       if ( !hkSubString::operator==(v9, (hkBool *)&resulta, "member")->m_bool )
         break;
-      v10 = `anonymous namespace'::Reader::_getAttribute(v3, "name");
-      v11 = `anonymous namespace'::Reader::_getAttribute(v3, "type");
-      v12 = `anonymous namespace'::Reader::_getAttribute(v3, "class");
+      v10 = `anonymous namespace::Reader::_getAttribute(v3, "name");
+      v11 = `anonymous namespace::Reader::_getAttribute(v3, "type");
+      v12 = `anonymous namespace::Reader::_getAttribute(v3, "class");
       v13 = v12;
       if ( !v10 )
         goto LABEL_18;
       if ( !v11 )
         goto LABEL_18;
-      v14 = `anonymous namespace'::Reader::_getType(v3, v11, v12);
+      v14 = `anonymous namespace::Reader::_getType(v3, v11, v12);
       if ( !v14 )
         goto LABEL_18;
-      if ( `anonymous namespace'::Reader::_getBoolAttribute(v3, &v29, "array", 0)->m_bool )
+      if ( `anonymous namespace::Reader::_getBoolAttribute(v3, &v29, "array", 0)->m_bool )
         v14 = hkTypeManager::makeArray(v8, v14);
       tupleSize = 0;
       hkXmlStreamParser::getIntAttribute(&v3->m_parser, &v20, "count", &tupleSize);
@@ -526,7 +526,7 @@ hkResult *__fastcall `anonymous namespace'::Reader::_parseClassDefinition(Reader
           v13);
       hkXmlStreamParser::advance(&v3->m_parser);
     }
-    if ( `anonymous namespace'::Reader::_popBlock(v3, &resulta)->m_enum == 1 )
+    if ( `anonymous namespace::Reader::_popBlock(v3, &resulta)->m_enum == 1 )
     {
 LABEL_18:
       v2->m_enum = 1;
@@ -557,7 +557,7 @@ LABEL_18:
 
 // File Line: 409
 // RVA: 0xE54AE0
-hkResult *__fastcall `anonymous namespace'::Reader::_parseInt(Reader *this, hkResult *result, const char *blockName, __int64 *valueOut)
+hkResult *__fastcall `anonymous namespace::Reader::_parseInt(Reader *this, hkResult *result, const char *blockName, __int64 *valueOut)
 {
   __int64 *v4; // rbp
   const char *v5; // rsi
@@ -575,9 +575,9 @@ hkResult *__fastcall `anonymous namespace'::Reader::_parseInt(Reader *this, hkRe
   v7 = this;
   if ( this->m_parser.m_token == 1
     && (v8 = hkXmlStreamParser::getBlockName(&this->m_parser, &resulta), hkSubString::operator==(v8, &v13, v5)->m_bool)
-    && (`anonymous namespace'::Reader::_pushBlock(v7),
+    && (`anonymous namespace::Reader::_pushBlock(v7),
         hkXmlStreamParser::advance(&v7->m_parser),
-        `anonymous namespace'::Reader::_skipWhiteSpace(v7) == 4) )
+        `anonymous namespace::Reader::_skipWhiteSpace(v7) == 4) )
   {
     v9 = hkXmlStreamParser::getLexeme(&v7->m_parser, &resulta);
     hkXmlStreamParser::parseInt(&v11, v9, v4);
@@ -588,7 +588,7 @@ hkResult *__fastcall `anonymous namespace'::Reader::_parseInt(Reader *this, hkRe
     else
     {
       hkXmlStreamParser::advance(&v7->m_parser);
-      `anonymous namespace'::Reader::_popBlock(v7, v6);
+      `anonymous namespace::Reader::_popBlock(v7, v6);
     }
   }
   else
@@ -600,7 +600,7 @@ hkResult *__fastcall `anonymous namespace'::Reader::_parseInt(Reader *this, hkRe
 
 // File Line: 436
 // RVA: 0xE54BB0
-hkResult *__fastcall `anonymous namespace'::Reader::_parseReal(Reader *this, hkResult *result, const char *blockName, float *valueOut)
+hkResult *__fastcall `anonymous namespace::Reader::_parseReal(Reader *this, hkResult *result, const char *blockName, float *valueOut)
 {
   float *v4; // rbp
   const char *v5; // rsi
@@ -618,9 +618,9 @@ hkResult *__fastcall `anonymous namespace'::Reader::_parseReal(Reader *this, hkR
   v7 = this;
   if ( this->m_parser.m_token == 1
     && (v8 = hkXmlStreamParser::getBlockName(&this->m_parser, &resulta), hkSubString::operator==(v8, &v13, v5)->m_bool)
-    && (`anonymous namespace'::Reader::_pushBlock(v7),
+    && (`anonymous namespace::Reader::_pushBlock(v7),
         hkXmlStreamParser::advance(&v7->m_parser),
-        `anonymous namespace'::Reader::_skipWhiteSpace(v7) == 4) )
+        `anonymous namespace::Reader::_skipWhiteSpace(v7) == 4) )
   {
     v9 = hkXmlStreamParser::getLexeme(&v7->m_parser, &resulta);
     hkXmlStreamParser::parseReal(&v11, v9, v4);
@@ -631,7 +631,7 @@ hkResult *__fastcall `anonymous namespace'::Reader::_parseReal(Reader *this, hkR
     else
     {
       hkXmlStreamParser::advance(&v7->m_parser);
-      `anonymous namespace'::Reader::_popBlock(v7, v6);
+      `anonymous namespace::Reader::_popBlock(v7, v6);
     }
   }
   else
@@ -643,7 +643,7 @@ hkResult *__fastcall `anonymous namespace'::Reader::_parseReal(Reader *this, hkR
 
 // File Line: 487
 // RVA: 0xE55040
-hkResult *__fastcall `anonymous namespace'::Reader::_parseRealVector(Reader *this, hkResult *result, float *out, int numReal)
+hkResult *__fastcall `anonymous namespace::Reader::_parseRealVector(Reader *this, hkResult *result, float *out, int numReal)
 {
   int v4; // ebp
   float *v5; // r14
@@ -657,17 +657,17 @@ hkResult *__fastcall `anonymous namespace'::Reader::_parseRealVector(Reader *thi
   v5 = out;
   v6 = result;
   v7 = this;
-  `anonymous namespace'::Reader::_pushBlock(this);
+  `anonymous namespace::Reader::_pushBlock(this);
   hkXmlStreamParser::advance(&v7->m_parser);
   v8 = 0;
   if ( v4 <= 0 )
   {
 LABEL_5:
-    `anonymous namespace'::Reader::_popBlock(v7, v6);
+    `anonymous namespace::Reader::_popBlock(v7, v6);
   }
   else
   {
-    while ( `anonymous namespace'::Reader::_skipWhiteSpace(v7) == 4 )
+    while ( `anonymous namespace::Reader::_skipWhiteSpace(v7) == 4 )
     {
       hkXmlStreamParser::getLexeme(&v7->m_parser, &resulta);
       hkXmlStreamParser::parseReal(&v11, &resulta, &v5[v8]);
@@ -687,7 +687,7 @@ LABEL_5:
 
 // File Line: 515
 // RVA: 0xE550F0
-hkResult *__fastcall `anonymous namespace'::Reader::_parseString(Reader *this, hkResult *result, const char **stringOut)
+hkResult *__fastcall `anonymous namespace::Reader::_parseString(Reader *this, hkResult *result, const char **stringOut)
 {
   hkResult *v3; // rbx
   const char **v4; // r14
@@ -727,12 +727,12 @@ hkResult *__fastcall `anonymous namespace'::Reader::_parseString(Reader *this, h
     }
     if ( v6 == 1 )
     {
-      `anonymous namespace'::Reader::_pushBlock(v5);
+      `anonymous namespace::Reader::_pushBlock(v5);
       v7 = hkXmlStreamParser::advance(&v5->m_parser);
       if ( v7 == 3 )
       {
         *v4 = &customWorldMapCaption;
-        `anonymous namespace'::Reader::_popBlock(v5, v3);
+        `anonymous namespace::Reader::_popBlock(v5, v3);
       }
       else
       {
@@ -789,7 +789,7 @@ hkResult *__fastcall `anonymous namespace'::Reader::_parseString(Reader *this, h
             1ui64);
         }
         *v4 = v10;
-        `anonymous namespace'::Reader::_popBlock(v5, v3);
+        `anonymous namespace::Reader::_popBlock(v5, v3);
         v14.m_string.m_size = 0;
         if ( v14.m_string.m_capacityAndFlags >= 0 )
           hkContainerTempAllocator::s_alloc.vfptr->bufFree(
@@ -809,7 +809,7 @@ LABEL_24:
 
 // File Line: 575
 // RVA: 0xE55660
-hkResult *__fastcall `anonymous namespace'::Reader::_parseIntArray(Reader *this, hkResult *result, const char *blockName, hkDataArray *arr)
+hkResult *__fastcall `anonymous namespace::Reader::_parseIntArray(Reader *this, hkResult *result, const char *blockName, hkDataArray *arr)
 {
   Reader *v4; // rdi
   hkDataArray *v5; // r14
@@ -835,11 +835,11 @@ hkResult *__fastcall `anonymous namespace'::Reader::_parseIntArray(Reader *this,
   {
     do
     {
-      `anonymous namespace'::Reader::_skipWhiteSpace(v4);
+      `anonymous namespace::Reader::_skipWhiteSpace(v4);
       v10 = v4->m_parser.m_token;
       if ( v10 == 1 )
       {
-        `anonymous namespace'::Reader::_parseInt(v4, &resulta, v6, &valueOut);
+        `anonymous namespace::Reader::_parseInt(v4, &resulta, v6, &valueOut);
         v11 = resulta.m_enum;
         if ( resulta.m_enum )
           goto LABEL_11;
@@ -880,7 +880,7 @@ LABEL_11:
 
 // File Line: 617
 // RVA: 0xE55780
-hkResult *__fastcall `anonymous namespace'::Reader::_parseRealArray(Reader *this, hkResult *result, const char *blockName, hkDataArray *arr)
+hkResult *__fastcall `anonymous namespace::Reader::_parseRealArray(Reader *this, hkResult *result, const char *blockName, hkDataArray *arr)
 {
   Reader *v4; // rdi
   hkDataArray *v5; // r14
@@ -907,11 +907,11 @@ hkResult *__fastcall `anonymous namespace'::Reader::_parseRealArray(Reader *this
   {
     do
     {
-      `anonymous namespace'::Reader::_skipWhiteSpace(v4);
+      `anonymous namespace::Reader::_skipWhiteSpace(v4);
       v10 = v4->m_parser.m_token;
       if ( v10 == 1 )
       {
-        `anonymous namespace'::Reader::_parseReal(v4, &resulta, v6, &valueOut);
+        `anonymous namespace::Reader::_parseReal(v4, &resulta, v6, &valueOut);
         v11 = resulta.m_enum;
         if ( resulta.m_enum )
           goto LABEL_11;
@@ -946,7 +946,7 @@ LABEL_11:
 
 // File Line: 656
 // RVA: 0xE54C80
-hkResult *__fastcall `anonymous namespace'::Reader::_parseArrayItems(Reader *this, hkResult *result, int numElems, hkDataArray *arr)
+hkResult *__fastcall `anonymous namespace::Reader::_parseArrayItems(Reader *this, hkResult *result, int numElems, hkDataArray *arr)
 {
   Reader *v4; // rdi
   hkDataArray *v5; // r15
@@ -996,10 +996,10 @@ hkResult *__fastcall `anonymous namespace'::Reader::_parseArrayItems(Reader *thi
       v11 = "int";
       if ( v10 == 2 )
         v11 = "byte";
-      `anonymous namespace'::Reader::_parseIntArray(v4, v7, v11, v5);
+      `anonymous namespace::Reader::_parseIntArray(v4, v7, v11, v5);
       return v7;
     case 3:
-      `anonymous namespace'::Reader::_parseRealArray(v4, v7, "real", v5);
+      `anonymous namespace::Reader::_parseRealArray(v4, v7, "real", v5);
       return v7;
     case 5:
       v18 = 0;
@@ -1007,8 +1007,8 @@ hkResult *__fastcall `anonymous namespace'::Reader::_parseArrayItems(Reader *thi
         goto LABEL_44;
       do
       {
-        `anonymous namespace'::Reader::_skipWhiteSpace(v4);
-        if ( `anonymous namespace'::Reader::_parseString(v4, &v31, (const char **)&resulta)->m_enum )
+        `anonymous namespace::Reader::_skipWhiteSpace(v4);
+        if ( `anonymous namespace::Reader::_parseString(v4, &v31, (const char **)&resulta)->m_enum )
           goto LABEL_45;
         ((void (__fastcall *)(hkDataArrayImpl *, _QWORD, _QWORD))v5->m_impl->vfptr[14].__vecDelDtor)(
           v5->m_impl,
@@ -1016,7 +1016,7 @@ hkResult *__fastcall `anonymous namespace'::Reader::_parseArrayItems(Reader *thi
           *(_QWORD *)&resulta.m_enum);
       }
       while ( v18 < v6 );
-      `anonymous namespace'::Reader::_skipWhiteSpace(v4);
+      `anonymous namespace::Reader::_skipWhiteSpace(v4);
       v7->m_enum = 0;
       return v7;
     case 6:
@@ -1025,7 +1025,7 @@ hkResult *__fastcall `anonymous namespace'::Reader::_parseArrayItems(Reader *thi
         goto LABEL_44;
       while ( 1 )
       {
-        `anonymous namespace'::Reader::_skipWhiteSpace(v4);
+        `anonymous namespace::Reader::_skipWhiteSpace(v4);
         v20 = (hkDataObjectImpl *)v5->m_impl->vfptr[21].__vecDelDtor((hkDataRefCounted *)v5->m_impl, v19);
         v21 = v20;
         obj.m_impl = v20;
@@ -1052,7 +1052,7 @@ hkResult *__fastcall `anonymous namespace'::Reader::_parseArrayItems(Reader *thi
           }
         }
         ++v4->m_tmpObjects.m_size;
-        `anonymous namespace'::Reader::_parseObject(v4, &resulta, &obj);
+        `anonymous namespace::Reader::_parseObject(v4, &resulta, &obj);
         v24 = obj.m_impl;
         if ( resulta.m_enum )
           break;
@@ -1065,7 +1065,7 @@ hkResult *__fastcall `anonymous namespace'::Reader::_parseArrayItems(Reader *thi
         }
         if ( (signed int)++v19 >= v6 )
         {
-          `anonymous namespace'::Reader::_skipWhiteSpace(v4);
+          `anonymous namespace::Reader::_skipWhiteSpace(v4);
           v7->m_enum = 0;
           return v7;
         }
@@ -1085,7 +1085,7 @@ hkResult *__fastcall `anonymous namespace'::Reader::_parseArrayItems(Reader *thi
         v27 = (hkDataObjectImpl *)v5->m_impl;
         v30 = i;
         obj.m_impl = v27;
-        `anonymous namespace'::Reader::_parseObjectReferenceImpl<hkDataArray_Value>(
+        `anonymous namespace::Reader::_parseObjectReferenceImpl<hkDataArray_Value>(
           v4,
           &resulta,
           (hkDataArray_Value *)&obj);
@@ -1120,8 +1120,8 @@ LABEL_45:
   }
   do
   {
-    `anonymous namespace'::Reader::_skipWhiteSpace(v4);
-    if ( `anonymous namespace'::Reader::_parseRealVector(v4, &v32, (float *)array, v14)->m_enum )
+    `anonymous namespace::Reader::_skipWhiteSpace(v4);
+    if ( `anonymous namespace::Reader::_parseRealVector(v4, &v32, (float *)array, v14)->m_enum )
     {
       v17 = v35;
       v7->m_enum = 1;
@@ -1145,7 +1145,7 @@ LABEL_17:
   if ( v13 < 0 )
   {
 LABEL_44:
-    `anonymous namespace'::Reader::_skipWhiteSpace(v4);
+    `anonymous namespace::Reader::_skipWhiteSpace(v4);
     v7->m_enum = 0;
   }
   else
@@ -1154,7 +1154,7 @@ LABEL_44:
       (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
       array,
       4 * v13);
-    `anonymous namespace'::Reader::_skipWhiteSpace(v4);
+    `anonymous namespace::Reader::_skipWhiteSpace(v4);
     v7->m_enum = 0;
   }
   return v7;
@@ -1162,7 +1162,7 @@ LABEL_44:
 
 // File Line: 753
 // RVA: 0xE54550
-hkResult *__fastcall `anonymous namespace'::Reader::_parseMemberValue(Reader *this, hkResult *result, hkDataClass_MemberInfo *minfo, hkDataObject_Value *valueOut)
+hkResult *__fastcall `anonymous namespace::Reader::_parseMemberValue(Reader *this, hkResult *result, hkDataClass_MemberInfo *minfo, hkDataObject_Value *valueOut)
 {
   hkTypeManager::Type *v4; // r15
   hkDataObject_Value *v5; // rdi
@@ -1212,7 +1212,7 @@ hkResult *__fastcall `anonymous namespace'::Reader::_parseMemberValue(Reader *th
     value = v10;
     if ( v11 && v4->m_parent->m_subType == 3 && !((v4->m_extra.m_size - 4) & 0xFFFFFFF3) )
     {
-      if ( `anonymous namespace'::Reader::_parseRealVector(v9, &resulta, &out, v10)->m_enum == HK_SUCCESS )
+      if ( `anonymous namespace::Reader::_parseRealVector(v9, &resulta, &out, v10)->m_enum == HK_SUCCESS )
       {
         ((void (__fastcall *)(hkDataObjectImpl *, const struct _hkDataObject_MemberHandle *, float *, _QWORD))v5->m_impl->vfptr[18].__vecDelDtor)(
           v5->m_impl,
@@ -1257,10 +1257,10 @@ LABEL_10:
         && (v17 = hkXmlStreamParser::getBlockName(&v9->m_parser, &v36),
             hkSubString::operator==(v17, (hkBool *)&resulta, "tuple")->m_bool) )
       {
-        `anonymous namespace'::Reader::_pushBlock(v9);
+        `anonymous namespace::Reader::_pushBlock(v9);
         hkXmlStreamParser::advance(&v9->m_parser);
         v18 = hkTypeManager::Type::getTupleSize(v4);
-        v19 = `anonymous namespace'::Reader::_parseArrayItems(v9, &resulta, v18, &arr)->m_enum;
+        v19 = `anonymous namespace::Reader::_parseArrayItems(v9, &resulta, v18, &arr)->m_enum;
         if ( v19 )
         {
           v8->m_enum = v19;
@@ -1278,7 +1278,7 @@ LABEL_10:
         }
         else
         {
-          `anonymous namespace'::Reader::_popBlock(v9, v8);
+          `anonymous namespace::Reader::_popBlock(v9, v8);
           if ( v16 )
           {
             --v16->m_externalCount;
@@ -1344,9 +1344,9 @@ LABEL_53:
       ++v21->m_count;
     }
     v21->vfptr[4].__vecDelDtor((hkDataRefCounted *)&v21->vfptr, resulta.m_enum);
-    `anonymous namespace'::Reader::_pushBlock(v9);
+    `anonymous namespace::Reader::_pushBlock(v9);
     hkXmlStreamParser::advance(&v9->m_parser);
-    if ( `anonymous namespace'::Reader::_parseArrayItems(v9, &v35, resulta.m_enum, &v33)->m_enum )
+    if ( `anonymous namespace::Reader::_parseArrayItems(v9, &v35, resulta.m_enum, &v33)->m_enum )
     {
       v8->m_enum = 1;
       --v22->m_externalCount;
@@ -1364,7 +1364,7 @@ LABEL_53:
     }
     else
     {
-      `anonymous namespace'::Reader::_popBlock(v9, v8);
+      `anonymous namespace::Reader::_popBlock(v9, v8);
       --v22->m_externalCount;
       v11 = v22->m_count-- == 1;
       if ( v11 )
@@ -1384,13 +1384,13 @@ LABEL_53:
     switch ( v7 )
     {
       case 2:
-        `anonymous namespace'::Reader::_parseInt(this, &resulta, "byte", (__int64 *)&v33);
+        `anonymous namespace::Reader::_parseInt(this, &resulta, "byte", (__int64 *)&v33);
         v12 = resulta.m_enum;
         if ( resulta.m_enum )
           goto LABEL_53;
         goto LABEL_51;
       case 3:
-        `anonymous namespace'::Reader::_parseReal(this, &resulta, "real", (float *)&value);
+        `anonymous namespace::Reader::_parseReal(this, &resulta, "real", (float *)&value);
         v12 = resulta.m_enum;
         if ( resulta.m_enum )
           goto LABEL_53;
@@ -1398,7 +1398,7 @@ LABEL_53:
         v8->m_enum = 0;
         return v8;
       case 4:
-        `anonymous namespace'::Reader::_parseInt(this, &resulta, "int", (__int64 *)&v33);
+        `anonymous namespace::Reader::_parseInt(this, &resulta, "int", (__int64 *)&v33);
         v12 = resulta.m_enum;
         if ( resulta.m_enum )
           goto LABEL_53;
@@ -1410,7 +1410,7 @@ LABEL_51:
         v8->m_enum = 0;
         return v8;
       case 5:
-        `anonymous namespace'::Reader::_parseString(this, &resulta, (const char **)&v33);
+        `anonymous namespace::Reader::_parseString(this, &resulta, (const char **)&v33);
         if ( resulta.m_enum )
           goto LABEL_68;
         ((void (__fastcall *)(hkDataObjectImpl *, const struct _hkDataObject_MemberHandle *, hkDataArrayImpl *))v5->m_impl->vfptr[21].__vecDelDtor)(
@@ -1427,7 +1427,7 @@ LABEL_51:
         if ( !v27 )
           goto LABEL_68;
         arr.m_impl = 0i64;
-        `anonymous namespace'::Reader::_parseAndCreateObject(v9, &resulta, v27, (hkDataObject *)&arr);
+        `anonymous namespace::Reader::_parseAndCreateObject(v9, &resulta, v27, (hkDataObject *)&arr);
         if ( resulta.m_enum )
         {
           v28 = arr.m_impl;
@@ -1460,7 +1460,7 @@ LABEL_67:
         }
         break;
       case 7:
-        `anonymous namespace'::Reader::_parseObjectReferenceImpl<hkDataObject_Value>(this, result, valueOut);
+        `anonymous namespace::Reader::_parseObjectReferenceImpl<hkDataObject_Value>(this, result, valueOut);
         break;
       default:
         goto LABEL_68;
@@ -1471,7 +1471,7 @@ LABEL_67:
 
 // File Line: 917
 // RVA: 0xE53F10
-char *__fastcall `anonymous namespace'::Reader::_getAttribute(Reader *this, const char *key)
+char *__fastcall `anonymous namespace::Reader::_getAttribute(Reader *this, const char *key)
 {
   Reader *v2; // rbx
   hkSubString valueOut; // [rsp+20h] [rbp-18h]
@@ -1489,12 +1489,12 @@ char *__fastcall `anonymous namespace'::Reader::_getAttribute(Reader *this, cons
   }
   --valueOut.m_end;
   ++valueOut.m_start;
-  return `anonymous namespace'::Reader::_getString(v2, &valueOut);
+  return `anonymous namespace::Reader::_getString(v2, &valueOut);
 }
 
 // File Line: 936
 // RVA: 0xE53FC0
-hkBool *__fastcall `anonymous namespace'::Reader::_getBoolAttribute(Reader *this, hkBool *result, const char *key, hkBool defaultValue)
+hkBool *__fastcall `anonymous namespace::Reader::_getBoolAttribute(Reader *this, hkBool *result, const char *key, hkBool defaultValue)
 {
   hkBool *v4; // rbx
   hkBool *v5; // rax
@@ -1529,7 +1529,7 @@ LABEL_9:
 
 // File Line: 957
 // RVA: 0xE53F90
-hkXmlStreamParser::Token __fastcall `anonymous namespace'::Reader::_skipWhiteSpace(Reader *this)
+hkXmlStreamParser::Token __fastcall `anonymous namespace::Reader::_skipWhiteSpace(Reader *this)
 {
   hkXmlStreamParser::Token result; // eax
   Reader *i; // rbx
@@ -1542,7 +1542,7 @@ hkXmlStreamParser::Token __fastcall `anonymous namespace'::Reader::_skipWhiteSpa
 
 // File Line: 967
 // RVA: 0xE55890
-ReferenceInfo *__fastcall `anonymous namespace'::Reader::_findReferenceInfo(Reader *this, const char *key)
+ReferenceInfo *__fastcall `anonymous namespace::Reader::_findReferenceInfo(Reader *this, const char *key)
 {
   return (ReferenceInfo *)hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator>::getWithDefault(
                             (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&this->m_referenceMap,
@@ -1552,7 +1552,7 @@ ReferenceInfo *__fastcall `anonymous namespace'::Reader::_findReferenceInfo(Read
 
 // File Line: 972
 // RVA: 0xE55910
-ReferenceInfo *__fastcall `anonymous namespace'::Reader::_requireReferenceInfo(Reader *this, const char *key)
+ReferenceInfo *__fastcall `anonymous namespace::Reader::_requireReferenceInfo(Reader *this, const char *key)
 {
   hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator> *v2; // rsi
   const char *v3; // rdi
@@ -1595,7 +1595,7 @@ ReferenceInfo *__fastcall `anonymous namespace'::Reader::_requireReferenceInfo(R
 
 // File Line: 985
 // RVA: 0xE558B0
-hkResult *__fastcall `anonymous namespace'::Reader::_setReferencedObject(Reader *this, hkResult *result, const char *id, hkDataObject *obj)
+hkResult *__fastcall `anonymous namespace::Reader::_setReferencedObject(Reader *this, hkResult *result, const char *id, hkDataObject *obj)
 {
   hkResult *v4; // rbx
   hkDataObject *v5; // rdi
@@ -1604,7 +1604,7 @@ hkResult *__fastcall `anonymous namespace'::Reader::_setReferencedObject(Reader 
 
   v4 = result;
   v5 = obj;
-  v6 = `anonymous namespace'::Reader::_requireReferenceInfo(this, id);
+  v6 = `anonymous namespace::Reader::_requireReferenceInfo(this, id);
   if ( v6->m_object )
   {
     v4->m_enum = 1;
@@ -1620,7 +1620,7 @@ hkResult *__fastcall `anonymous namespace'::Reader::_setReferencedObject(Reader 
 
 // File Line: 998
 // RVA: 0xE553E0
-hkResult *__fastcall `anonymous namespace'::Reader::_parseAndCreateObject(Reader *this, hkResult *result, hkDataClassImpl *klassImpl, hkDataObject *objOut)
+hkResult *__fastcall `anonymous namespace::Reader::_parseAndCreateObject(Reader *this, hkResult *result, hkDataClassImpl *klassImpl, hkDataObject *objOut)
 {
   hkDataObject *v4; // r14
   hkDataClassImpl *v5; // rbx
@@ -1645,12 +1645,12 @@ hkResult *__fastcall `anonymous namespace'::Reader::_parseAndCreateObject(Reader
   v6 = result;
   v7 = this;
   if ( klassImpl
-    || (v8 = `anonymous namespace'::Reader::_getAttribute(this, "type")) != 0i64
+    || (v8 = `anonymous namespace::Reader::_getAttribute(this, "type")) != 0i64
     && (v5 = (hkDataClassImpl *)((__int64 (__fastcall *)(hkDataWorld *, char *))v7->m_world->vfptr[4].__first_virtual_table_function__)(
                                   v7->m_world,
                                   v8)) != 0i64 )
   {
-    v10 = `anonymous namespace'::Reader::_getAttribute(v7, "id");
+    v10 = `anonymous namespace::Reader::_getAttribute(v7, "id");
     v11 = v7->m_world;
     v19 = v5;
     v12 = v10;
@@ -1665,12 +1665,12 @@ hkResult *__fastcall `anonymous namespace'::Reader::_parseAndCreateObject(Reader
       ++v13->m_externalCount;
       ++v13->m_count;
     }
-    `anonymous namespace'::Reader::_parseObject(v7, &resulta, &obj);
+    `anonymous namespace::Reader::_parseObject(v7, &resulta, &obj);
     if ( resulta.m_enum )
     {
       v6->m_enum = resulta.m_enum;
     }
-    else if ( v12 && (v15 = `anonymous namespace'::Reader::_setReferencedObject(v7, &resulta, v12, &obj)->m_enum) != 0 )
+    else if ( v12 && (v15 = `anonymous namespace::Reader::_setReferencedObject(v7, &resulta, v12, &obj)->m_enum) != 0 )
     {
       v6->m_enum = v15;
     }
@@ -1711,7 +1711,7 @@ hkResult *__fastcall `anonymous namespace'::Reader::_parseAndCreateObject(Reader
 
 // File Line: 1043
 // RVA: 0xE55530
-hkResult *__fastcall `anonymous namespace'::Reader::_parseObject(Reader *this, hkResult *result, hkDataObject *obj)
+hkResult *__fastcall `anonymous namespace::Reader::_parseObject(Reader *this, hkResult *result, hkDataObject *obj)
 {
   hkDataObject *v3; // r14
   hkResult *v4; // rdi
@@ -1727,12 +1727,12 @@ hkResult *__fastcall `anonymous namespace'::Reader::_parseObject(Reader *this, h
   v3 = obj;
   v4 = result;
   v5 = this;
-  `anonymous namespace'::Reader::_pushBlock(this);
+  `anonymous namespace::Reader::_pushBlock(this);
   v6 = ((__int64 (*)(void))v3->m_impl->vfptr[2].__vecDelDtor)();
   hkXmlStreamParser::advance(&v5->m_parser);
-  while ( `anonymous namespace'::Reader::_skipWhiteSpace(v5) == 1 )
+  while ( `anonymous namespace::Reader::_skipWhiteSpace(v5) == 1 )
   {
-    v7 = `anonymous namespace'::Reader::_getAttribute(v5, "name");
+    v7 = `anonymous namespace::Reader::_getAttribute(v5, "name");
     if ( !v7 )
       goto LABEL_10;
     v8 = (*(__int64 (__fastcall **)(__int64, char *))(*(_QWORD *)v6 + 88i64))(v6, v7);
@@ -1747,14 +1747,14 @@ hkResult *__fastcall `anonymous namespace'::Reader::_parseObject(Reader *this, h
       v3->m_impl,
       &valueOut,
       minfo.m_name);
-    `anonymous namespace'::Reader::_parseMemberValue(v5, &resulta, &minfo, &valueOut);
+    `anonymous namespace::Reader::_parseMemberValue(v5, &resulta, &minfo, &valueOut);
     if ( resulta.m_enum )
     {
       v4->m_enum = resulta.m_enum;
       return v4;
     }
   }
-  if ( `anonymous namespace'::Reader::_popBlock(v5, &resulta)->m_enum )
+  if ( `anonymous namespace::Reader::_popBlock(v5, &resulta)->m_enum )
   {
 LABEL_10:
     v4->m_enum = 1;
@@ -1766,7 +1766,7 @@ LABEL_10:
 
 // File Line: 1096
 // RVA: 0xE559B0
-hkResult *__fastcall `anonymous namespace'::Reader::_fixUpReferences(Reader *this, hkResult *result)
+hkResult *__fastcall `anonymous namespace::Reader::_fixUpReferences(Reader *this, hkResult *result)
 {
   hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *v2; // r15
   hkResult *v3; // r12
@@ -1853,7 +1853,7 @@ LABEL_15:
 
 // File Line: 1117
 // RVA: 0xE53B30
-hkResult *__fastcall `anonymous namespace'::Reader::readHeader(Reader *this, hkResult *result, hkXmlTagfile::Header *out)
+hkResult *__fastcall `anonymous namespace::Reader::readHeader(Reader *this, hkResult *result, hkXmlTagfile::Header *out)
 {
   hkXmlTagfile::Header *v3; // rsi
   hkResult *v4; // rbx
@@ -1868,9 +1868,9 @@ hkResult *__fastcall `anonymous namespace'::Reader::readHeader(Reader *this, hkR
   v4 = result;
   v5 = this;
   hkXmlStreamParser::advance(&this->m_parser);
-  if ( `anonymous namespace'::Reader::_skipWhiteSpace(v5) == TOKEN_QBLOCK )
+  if ( `anonymous namespace::Reader::_skipWhiteSpace(v5) == TOKEN_QBLOCK )
     hkXmlStreamParser::advance(&v5->m_parser);
-  if ( `anonymous namespace'::Reader::_skipWhiteSpace(v5) != 1 )
+  if ( `anonymous namespace::Reader::_skipWhiteSpace(v5) != 1 )
     goto LABEL_11;
   v6 = hkXmlStreamParser::getBlockName(&v5->m_parser, &resulta);
   if ( !hkSubString::operator==(v6, &v11, "hktagfile")->m_bool
@@ -1899,7 +1899,7 @@ LABEL_11:
 
 // File Line: 1171
 // RVA: 0xE53800
-hkResult *__fastcall `anonymous namespace'::Reader::parseRoot(Reader *this, hkResult *result, hkDataObject *objOut)
+hkResult *__fastcall `anonymous namespace::Reader::parseRoot(Reader *this, hkResult *result, hkDataObject *objOut)
 {
   hkDataObject *v3; // r15
   hkResult *v4; // r14
@@ -1922,12 +1922,12 @@ hkResult *__fastcall `anonymous namespace'::Reader::parseRoot(Reader *this, hkRe
   v4 = result;
   v5 = this;
   hkXmlStreamParser::advance(&this->m_parser);
-  if ( `anonymous namespace'::Reader::_skipWhiteSpace(v5) == TOKEN_QBLOCK )
+  if ( `anonymous namespace::Reader::_skipWhiteSpace(v5) == TOKEN_QBLOCK )
     hkXmlStreamParser::advance(&v5->m_parser);
-  if ( `anonymous namespace'::Reader::_skipWhiteSpace(v5) != 1 )
+  if ( `anonymous namespace::Reader::_skipWhiteSpace(v5) != 1 )
   {
     hkErrStream::hkErrStream(&v16, &buf, 512);
-    hkOstream::operator<<((hkOstream *)&v16.vfptr, "Didn't find the root 'hktagfile' block");
+    hkOstream::operator<<((hkOstream *)&v16.vfptr, "Didnt find the root hktagfile block");
     v6 = 1187;
 LABEL_5:
     hkError::messageWarning(-18022230, &buf, "Tagfile\\Xml\\hkXmlTagfileReader.cpp", v6);
@@ -1939,26 +1939,26 @@ LABEL_5:
   if ( !hkSubString::operator==(v8, &v18, "hktagfile")->m_bool )
   {
     hkErrStream::hkErrStream(&v16, &buf, 512);
-    hkOstream::operator<<((hkOstream *)&v16.vfptr, "Expecting 'hktagfile' block");
+    hkOstream::operator<<((hkOstream *)&v16.vfptr, "Expecting hktagfile block");
     v6 = 1193;
     goto LABEL_5;
   }
   value = 0;
   hkXmlStreamParser::getIntAttribute(&v5->m_parser, (hkResult *)&v18, "version", &value);
-  `anonymous namespace'::Reader::_pushBlock(v5);
+  `anonymous namespace::Reader::_pushBlock(v5);
   hkXmlStreamParser::advance(&v5->m_parser);
-  while ( `anonymous namespace'::Reader::_skipWhiteSpace(v5) == 1 )
+  while ( `anonymous namespace::Reader::_skipWhiteSpace(v5) == 1 )
   {
     v9 = hkXmlStreamParser::getBlockName(&v5->m_parser, (hkSubString *)&v16);
     if ( !hkSubString::operator==(v9, &v18, "class")->m_bool )
       break;
-    `anonymous namespace'::Reader::_parseClassDefinition(v5, (hkResult *)&resulta);
+    `anonymous namespace::Reader::_parseClassDefinition(v5, (hkResult *)&resulta);
   }
   v10 = 0i64;
-  while ( (unsigned int)(`anonymous namespace'::Reader::_skipWhiteSpace(v5) - 1) <= 1 )
+  while ( (unsigned int)(`anonymous namespace::Reader::_skipWhiteSpace(v5) - 1) <= 1 )
   {
     resulta.m_start = 0i64;
-    `anonymous namespace'::Reader::_parseAndCreateObject(v5, (hkResult *)&v18, 0i64, (hkDataObject *)&resulta);
+    `anonymous namespace::Reader::_parseAndCreateObject(v5, (hkResult *)&v18, 0i64, (hkDataObject *)&resulta);
     if ( *(_DWORD *)&v18.m_bool == 1 )
     {
       v13 = resulta.m_start;
@@ -1994,13 +1994,13 @@ LABEL_5:
         (**(void (__fastcall ***)(const char *, signed __int64))v11)(v11, 1i64);
     }
   }
-  if ( `anonymous namespace'::Reader::_popBlock(v5, (hkResult *)&v18)->m_enum )
+  if ( `anonymous namespace::Reader::_popBlock(v5, (hkResult *)&v18)->m_enum )
   {
     v4->m_enum = 1;
   }
-  else if ( `anonymous namespace'::Reader::_skipWhiteSpace(v5) == 7 )
+  else if ( `anonymous namespace::Reader::_skipWhiteSpace(v5) == 7 )
   {
-    `anonymous namespace'::Reader::_fixUpReferences(v5, (hkResult *)&v18);
+    `anonymous namespace::Reader::_fixUpReferences(v5, (hkResult *)&v18);
     if ( *(_DWORD *)&v18.m_bool )
     {
       v4->m_enum = *(hkResultEnum *)&v18.m_bool;
@@ -2052,9 +2052,9 @@ hkDataObject *__fastcall hkXmlTagfileReader::load(hkXmlTagfileReader *this, hkDa
   Reader v11; // [rsp+30h] [rbp-148h]
 
   v4 = result;
-  `anonymous namespace'::Reader::Reader(&v11, stream, world);
+  `anonymous namespace::Reader::Reader(&v11, stream, world);
   objOut.m_impl = 0i64;
-  `anonymous namespace'::Reader::parseRoot(&v11, &resulta, &objOut);
+  `anonymous namespace::Reader::parseRoot(&v11, &resulta, &objOut);
   v5 = objOut.m_impl;
   if ( resulta.m_enum )
   {
@@ -2076,7 +2076,7 @@ hkDataObject *__fastcall hkXmlTagfileReader::load(hkXmlTagfileReader *this, hkDa
   if ( v6 )
     v5->vfptr->__vecDelDtor((hkDataRefCounted *)&v5->vfptr, 1u);
 LABEL_8:
-  `anonymous namespace'::Reader::~Reader(&v11);
+  `anonymous namespace::Reader::~Reader(&v11);
   return v4;
 }
 
@@ -2090,9 +2090,9 @@ hkResult *__fastcall hkXmlTagfileReader::readHeader(hkXmlTagfileReader *this, hk
 
   v4 = result;
   v5 = out;
-  `anonymous namespace'::Reader::Reader(&v7, stream, 0i64);
-  `anonymous namespace'::Reader::readHeader(&v7, v4, v5);
-  `anonymous namespace'::Reader::~Reader(&v7);
+  `anonymous namespace::Reader::Reader(&v7, stream, 0i64);
+  `anonymous namespace::Reader::readHeader(&v7, v4, v5);
+  `anonymous namespace::Reader::~Reader(&v7);
   return v4;
 }
 

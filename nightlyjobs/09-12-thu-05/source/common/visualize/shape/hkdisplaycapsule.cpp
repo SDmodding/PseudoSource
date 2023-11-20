@@ -7,12 +7,12 @@ void __fastcall hkDisplayCapsule::hkDisplayCapsule(hkDisplayCapsule *this, hkVec
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_geometry = 0i64;
   this->m_type = 8;
-  this->vfptr = (hkBaseObjectVtbl *)&hkDisplayGeometry::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkDisplayGeometry::`vftable;
   this->m_transform.m_rotation.m_col0 = (hkVector4f)transform.m_quad;
   this->m_transform.m_rotation.m_col1 = (hkVector4f)direction.m_quad;
   this->m_transform.m_rotation.m_col2 = (hkVector4f)stru_141A71280.m_quad;
   this->m_transform.m_translation = 0i64;
-  this->vfptr = (hkBaseObjectVtbl *)&hkDisplayCapsule::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkDisplayCapsule::`vftable;
   this->m_numSides = numSides;
   this->m_numHeightSegments = numHeightSegments;
   this->m_top = (hkVector4f)top->m_quad;
@@ -38,7 +38,7 @@ void __fastcall hkDisplayCapsule::buildGeometry(hkDisplayCapsule *this)
   if ( v3 )
   {
     *(_DWORD *)(v3 + 8) = 0x1FFFF;
-    *(_QWORD *)v3 = &hkGeometry::`vftable';
+    *(_QWORD *)v3 = &hkGeometry::`vftable;
     *(_DWORD *)(v3 + 28) = 2147483648;
     *(_QWORD *)(v3 + 16) = 0i64;
     *(_DWORD *)(v3 + 24) = 0;

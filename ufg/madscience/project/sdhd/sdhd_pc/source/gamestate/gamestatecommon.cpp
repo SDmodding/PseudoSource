@@ -321,13 +321,13 @@ void __fastcall GameStateHKBase::OnPostUpdate(GameStateHKBase *this, float fReal
     UFG::SpawnInfoInterface::SpawnObject(&result, &parentSetName, 0, 0i64, 0i64, 0i64);
     UFG::SkookumMgr::InvokeWorldCoroutine((UFG::qSymbol *)&qSymbol__on_change_player.mUID, 0i64);
   }
-  if ( !(`Broadcaster::GetBroadcaster'::`2'::`local static guard' & 1) )
+  if ( !(`Broadcaster::GetBroadcaster::`2::`local static guard & 1) )
   {
-    `Broadcaster::GetBroadcaster'::`2'::`local static guard' |= 1u;
-    Broadcaster::Broadcaster(&`Broadcaster::GetBroadcaster'::`2'::singleton);
-    atexit(`Broadcaster::GetBroadcaster'::`2'::`dynamic atexit destructor for 'singleton'');
+    `Broadcaster::GetBroadcaster::`2::`local static guard |= 1u;
+    Broadcaster::Broadcaster(&`Broadcaster::GetBroadcaster::`2::singleton);
+    atexit(`Broadcaster::GetBroadcaster::`2::`dynamic atexit destructor for singleton);
   }
-  Broadcaster::Update(&`Broadcaster::GetBroadcaster'::`2'::singleton);
+  Broadcaster::Update(&`Broadcaster::GetBroadcaster::`2::singleton);
   UFG::RenderWorld::UpdateScreenShot();
 }
 

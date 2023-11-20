@@ -6,7 +6,7 @@ void __fastcall std::basic_streambuf<char,std::char_traits<char>>::basic_streamb
   std::locale *v2; // rdi
 
   v1 = this;
-  this->vfptr = (std::basic_streambuf<char,std::char_traits<char> >Vtbl *)&std::basic_streambuf<char,std::char_traits<char>>::`vftable';
+  this->vfptr = (std::basic_streambuf<char,std::char_traits<char> >Vtbl *)&std::basic_streambuf<char,std::char_traits<char>>::`vftable;
   v2 = (std::locale *)AMemory::malloc_default(8ui64);
   if ( v2 )
     v2->_Ptr = std::locale::_Init(1);

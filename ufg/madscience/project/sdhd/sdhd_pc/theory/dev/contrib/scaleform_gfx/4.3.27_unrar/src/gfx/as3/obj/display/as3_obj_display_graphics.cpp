@@ -611,7 +611,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Graphics::drawGraphi
       {
         v38 = 0;
         v39 = 0i64;
-        `eh vector constructor iterator'(
+        `eh vector constructor iterator(
           &ptr,
           0x20ui64,
           8,
@@ -650,7 +650,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Graphics::drawGraphi
         Scaleform::GFx::AS3::Instances::fl_display::Graphics::CreateGradientHelper(v4, 8u, &ptr, v16);
         Scaleform::GFx::DrawingContext::BeginFill(v4->pDrawing.pObject);
         v5 = 1;
-        `eh vector destructor iterator'(
+        `eh vector destructor iterator(
           &ptr,
           0x20ui64,
           8,
@@ -726,7 +726,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Graphics::drawGraphi
                                   v10) )
           {
             v21 = *(_QWORD *)(*(_QWORD *)&v12 + 64i64);
-            `eh vector constructor iterator'(
+            `eh vector constructor iterator(
               &argv,
               0x20ui64,
               8,
@@ -743,7 +743,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Graphics::drawGraphi
             Scaleform::GFx::AS3::Value::operator=(&v49, *(long double *)(v21 + 72));
             v22 = Scaleform::GFx::DrawingContext::CreateLineComplexFill(v4->pDrawing.pObject);
             Scaleform::GFx::AS3::Instances::fl_display::Graphics::CreateGradientHelper(v4, 8u, &argv, v22);
-            `eh vector destructor iterator'(
+            `eh vector destructor iterator(
               &argv,
               0x20ui64,
               8,
@@ -756,7 +756,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Graphics::drawGraphi
                                   v10) )
           {
             v23 = *(_QWORD *)(*(_QWORD *)&v12 + 64i64);
-            `eh vector constructor iterator'(
+            `eh vector constructor iterator(
               &v50,
               0x20ui64,
               8,
@@ -772,7 +772,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Graphics::drawGraphi
             Scaleform::GFx::AS3::Value::Assign(&v56, (Scaleform::GFx::ASString *)(*(_QWORD *)&v12 + 72i64));
             Scaleform::GFx::AS3::Value::operator=(&v57, *(long double *)(*(_QWORD *)&v12 + 80i64));
             Scaleform::GFx::AS3::Instances::fl_display::Graphics::lineStyle(v4, &v29, 8u, &v50);
-            `eh vector destructor iterator'(
+            `eh vector destructor iterator(
               &v50,
               0x20ui64,
               8,
@@ -2630,8 +2630,8 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v5 )
   {
     Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, v2, &Scaleform::GFx::AS3::fl_display::GraphicsCI);
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable';
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_display::Graphics::`vftable';
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable;
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_display::Graphics::`vftable;
   }
   else
   {
@@ -2643,8 +2643,8 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v7 )
   {
     Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v7, v2, &Scaleform::GFx::AS3::fl_display::GraphicsCI);
-    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable';
-    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_display::Graphics::`vftable';
+    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable;
+    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_display::Graphics::`vftable;
   }
   else
   {

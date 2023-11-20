@@ -20,12 +20,12 @@ void __fastcall UFG::PartDefinition::PartDefinition(UFG::PartDefinition *this, M
   v3->mBaseNode.mNeighbours[0] = &v3->mBaseNode;
   v3->mBaseNode.mNeighbours[1] = &v3->mBaseNode;
   v3->mBaseNode.mUID = v4;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable;
   v8 = &this->mHandles;
   v8->mNode.mPrev = &v8->mNode;
   v8->mNode.mNext = &v8->mNode;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::PartDefinition,UFG::qReflectObject>::`vftable';
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::PartDefinition::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::PartDefinition,UFG::qReflectObject>::`vftable;
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::PartDefinition::`vftable;
   this->mName.mText.mData.mFlags = 2;
   UFG::qReflectHandleBase::qReflectHandleBase((UFG::qList<UFG::qReflectHandleBase,UFG::qReflectHandleBase,1,0> *)&this->mModelAsset);
   v2->mCompositeData.mDiffuseChannelDefaults.mData.mFlags = 2;
@@ -75,12 +75,12 @@ void __fastcall UFG::PartTemplate::PartTemplate(UFG::PartTemplate *this, MemImag
   v3->mBaseNode.mNeighbours[0] = &v3->mBaseNode;
   v3->mBaseNode.mNeighbours[1] = &v3->mBaseNode;
   v3->mBaseNode.mUID = v4;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable;
   v5 = &this->mHandles;
   v5->mNode.mPrev = &v5->mNode;
   v5->mNode.mNext = &v5->mNode;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::PartTemplate,UFG::qReflectObject>::`vftable';
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::PartTemplate::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::PartTemplate,UFG::qReflectObject>::`vftable;
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::PartTemplate::`vftable;
   v6 = &this->mSlotTree;
   v6->mName.mText.mData.mFlags = 2;
   UFG::qReflectHandleBase::qReflectHandleBase((UFG::qList<UFG::qReflectHandleBase,UFG::qReflectHandleBase,1,0> *)&this->mSlotTree.mDefaultPart);
@@ -97,7 +97,7 @@ void __fastcall UFG::PartTemplateInstance::PartTemplateInstance(UFG::PartTemplat
 
   v1 = this;
   UFG::qReflectObjectType<UFG::PartTemplateInstance,UFG::qReflectObject>::qReflectObjectType<UFG::PartTemplateInstance,UFG::qReflectObject>((UFG::qReflectObjectType<UFG::PartTemplateInstance,UFG::qReflectObject> *)&this->vfptr);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::PartTemplateInstance::`vftable';
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::PartTemplateInstance::`vftable;
   v1->mCompositeDirty = 1;
   UFG::qReflectHandleBase::qReflectHandleBase((UFG::qReflectHandleBase *)&v1->mTemplate.mPrev);
   v1->mTemplate.mTypeUID = UFG::qStringHash64("UFG::PartTemplate", 0xFFFFFFFFFFFFFFFFui64);
@@ -129,12 +129,12 @@ void __fastcall UFG::PartTemplateInstance::PartTemplateInstance(UFG::PartTemplat
   v3->mBaseNode.mNeighbours[0] = &v3->mBaseNode;
   v3->mBaseNode.mNeighbours[1] = &v3->mBaseNode;
   v3->mBaseNode.mUID = v4;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable;
   v5 = &this->mHandles;
   v5->mNode.mPrev = &v5->mNode;
   v5->mNode.mNext = &v5->mNode;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::PartTemplateInstance,UFG::qReflectObject>::`vftable';
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::PartTemplateInstance::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::PartTemplateInstance,UFG::qReflectObject>::`vftable;
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::PartTemplateInstance::`vftable;
   this->mCompositeDirty = 1;
   UFG::qReflectHandleBase::qReflectHandleBase((UFG::qList<UFG::qReflectHandleBase,UFG::qReflectHandleBase,1,0> *)&this->mTemplate);
   UFG::qReflectHandleBase::qReflectHandleBase((UFG::qList<UFG::qReflectHandleBase,UFG::qReflectHandleBase,1,0> *)&v2->mScalingPreset);

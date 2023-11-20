@@ -22,7 +22,7 @@ CAkActionSetSwitch *__fastcall CAkActionSetSwitch::Create(AkActionType in_eActio
   if ( result )
   {
     CAkAction::CAkAction((CAkAction *)&result->vfptr, v2, v3);
-    v5->vfptr = (CAkIndexableVtbl *)&CAkActionSetSwitch::`vftable';
+    v5->vfptr = (CAkIndexableVtbl *)&CAkActionSetSwitch::`vftable;
     *(_QWORD *)&v5->m_ulSwitchGroupID = 0i64;
     CAkAction::AddToIndex((CAkAction *)&v5->vfptr);
     result = v5;

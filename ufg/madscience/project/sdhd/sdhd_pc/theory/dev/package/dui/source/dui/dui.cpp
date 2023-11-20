@@ -8,16 +8,16 @@ void __fastcall UFG::DUISuggestionBoxWindow::DUISuggestionBoxWindow(UFG::DUISugg
 
   v2 = this;
   UFG::DUIWindow::DUIWindow((UFG::DUIWindow *)&this->vfptr, f);
-  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::DUISuggestionBoxWindow,UFG::DUIWindow>::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::DUISuggestionBoxWindow,UFG::DUIWindow>::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
-  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUISuggestionBoxWindow::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUISuggestionBoxWindow::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::DUISuggestionBoxWindow,UFG::DUIWindow>::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::DUISuggestionBoxWindow,UFG::DUIWindow>::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
+  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUISuggestionBoxWindow::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUISuggestionBoxWindow::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v2->mStyle = 0;
   v3 = v2->mOptions;
   if ( v3 )
   {
     v4 = &v3[-1].mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v3,
       0x28ui64,
       v3[-1].mStringHash32,
@@ -39,10 +39,10 @@ void __fastcall UFG::DUIMessageBoxWindow::DUIMessageBoxWindow(UFG::DUIMessageBox
 
   v2 = this;
   UFG::DUIWindow::DUIWindow((UFG::DUIWindow *)&this->vfptr, f);
-  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::DUIMessageBoxWindow,UFG::DUIWindow>::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::DUIMessageBoxWindow,UFG::DUIWindow>::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
-  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUIMessageBoxWindow::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUIMessageBoxWindow::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::DUIMessageBoxWindow,UFG::DUIWindow>::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::DUIMessageBoxWindow,UFG::DUIWindow>::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
+  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUIMessageBoxWindow::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUIMessageBoxWindow::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   UFG::qString::qString(&v2->mMessage);
   v3 = &v2->mOptions;
   v3->mNode.mPrev = &v3->mNode;
@@ -58,10 +58,10 @@ void __fastcall UFG::DUIInfoBoxWindow::DUIInfoBoxWindow(UFG::DUIInfoBoxWindow *t
 
   v2 = this;
   UFG::DUIWindow::DUIWindow((UFG::DUIWindow *)&this->vfptr, f);
-  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::DUIInfoBoxWindow,UFG::DUIWindow>::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::DUIInfoBoxWindow,UFG::DUIWindow>::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
-  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUIInfoBoxWindow::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUIInfoBoxWindow::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::DUIInfoBoxWindow,UFG::DUIWindow>::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::DUIInfoBoxWindow,UFG::DUIWindow>::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
+  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUIInfoBoxWindow::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUIInfoBoxWindow::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   UFG::qString::qString(&v2->mMessage);
   v2->mStyle = 165;
   v2->mRect.mW = 300;
@@ -77,10 +77,10 @@ void __fastcall UFG::DUIComboBoxWindow::DUIComboBoxWindow(UFG::DUIComboBoxWindow
 
   v2 = this;
   UFG::DUIWindow::DUIWindow((UFG::DUIWindow *)&this->vfptr, f);
-  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::DUIComboBoxWindow,UFG::DUIWindow>::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::DUIComboBoxWindow,UFG::DUIWindow>::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
-  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUIComboBoxWindow::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUIComboBoxWindow::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::DUIComboBoxWindow,UFG::DUIWindow>::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::DUIComboBoxWindow,UFG::DUIWindow>::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
+  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUIComboBoxWindow::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUIComboBoxWindow::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v3 = &v2->mOptions;
   v3->mNode.mPrev = &v3->mNode;
   v3->mNode.mNext = &v3->mNode;
@@ -128,7 +128,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::DUIComboBoxWindow_
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::DUIComboBoxWindow,UFG::DUIWindow>::sInventory.vfptr,
     "UFG::DUIComboBoxWindow",
     v0);
-  UFG::qReflectObjectType<UFG::DUIComboBoxWindow,UFG::DUIWindow>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::DUIComboBoxWindow>::`vftable';
+  UFG::qReflectObjectType<UFG::DUIComboBoxWindow,UFG::DUIWindow>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::DUIComboBoxWindow>::`vftable;
   UFG::qReflectInventory<UFG::DUIComboBoxWindow>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::DUIComboBoxWindow,UFG::DUIWindow>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -149,7 +149,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::DUIPopupMenuWindow
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::DUIPopupMenuWindow,UFG::DUIWindow>::sInventory.vfptr,
     "UFG::DUIPopupMenuWindow",
     v0);
-  UFG::qReflectObjectType<UFG::DUIPopupMenuWindow,UFG::DUIWindow>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::DUIPopupMenuWindow>::`vftable';
+  UFG::qReflectObjectType<UFG::DUIPopupMenuWindow,UFG::DUIWindow>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::DUIPopupMenuWindow>::`vftable;
   UFG::qReflectInventory<UFG::DUIPopupMenuWindow>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::DUIPopupMenuWindow,UFG::DUIWindow>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -170,7 +170,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::DUISuggestionBoxWi
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::DUISuggestionBoxWindow,UFG::DUIWindow>::sInventory.vfptr,
     "UFG::DUISuggestionBoxWindow",
     v0);
-  UFG::qReflectObjectType<UFG::DUISuggestionBoxWindow,UFG::DUIWindow>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::DUISuggestionBoxWindow>::`vftable';
+  UFG::qReflectObjectType<UFG::DUISuggestionBoxWindow,UFG::DUIWindow>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::DUISuggestionBoxWindow>::`vftable;
   UFG::qReflectInventory<UFG::DUISuggestionBoxWindow>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::DUISuggestionBoxWindow,UFG::DUIWindow>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -376,12 +376,12 @@ void __fastcall UFG::DUIMessageBoxWindow::DUIMessageBoxWindow(UFG::DUIMessageBox
 
   v1 = this;
   UFG::DUIWindow::DUIWindow((UFG::DUIWindow *)&this->vfptr);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::DUIMessageBoxWindow,UFG::DUIWindow>::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::DUIMessageBoxWindow,UFG::DUIWindow>::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::DUIMessageBoxWindow,UFG::DUIWindow>::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::DUIMessageBoxWindow,UFG::DUIWindow>::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v1->mBaseNode.mUID = -1i64;
   v1->mTypeUID = UFG::qStringHash64("UFG::DUIMessageBoxWindow", 0xFFFFFFFFFFFFFFFFui64);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUIMessageBoxWindow::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUIMessageBoxWindow::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUIMessageBoxWindow::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUIMessageBoxWindow::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   UFG::qString::qString(&v1->mMessage);
   v2 = &v1->mOptions;
   v2->mNode.mPrev = &v2->mNode;
@@ -575,12 +575,12 @@ void __fastcall UFG::DUIComboBoxWindow::DUIComboBoxWindow(UFG::DUIComboBoxWindow
 
   v1 = this;
   UFG::DUIWindow::DUIWindow((UFG::DUIWindow *)&this->vfptr);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::DUIComboBoxWindow,UFG::DUIWindow>::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::DUIComboBoxWindow,UFG::DUIWindow>::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::DUIComboBoxWindow,UFG::DUIWindow>::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::DUIComboBoxWindow,UFG::DUIWindow>::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v1->mBaseNode.mUID = -1i64;
   v1->mTypeUID = UFG::qStringHash64("UFG::DUIComboBoxWindow", 0xFFFFFFFFFFFFFFFFui64);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUIComboBoxWindow::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUIComboBoxWindow::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUIComboBoxWindow::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUIComboBoxWindow::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v2 = &v1->mOptions;
   v2->mNode.mPrev = &v2->mNode;
   v2->mNode.mNext = &v2->mNode;
@@ -600,13 +600,13 @@ void __fastcall UFG::DUIComboBoxWindow::~DUIComboBoxWindow(UFG::DUIComboBoxWindo
   UFG::qNode<UFG::qString,UFG::qString> *v5; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUIComboBoxWindow::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  this->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUIComboBoxWindow::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUIComboBoxWindow::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  this->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUIComboBoxWindow::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v2 = this->mToolTips;
   if ( v2 )
   {
     v3 = &v2[-1].mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v2,
       0x28ui64,
       v2[-1].mStringHash32,
@@ -701,7 +701,7 @@ void __fastcall UFG::DUIComboBoxWindow::SetData(UFG::DUIComboBoxWindow *this, in
   if ( v20 )
   {
     v21 = &v20[-1].mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v20,
       0x28ui64,
       v20[-1].mStringHash32,
@@ -725,7 +725,7 @@ void __fastcall UFG::DUIComboBoxWindow::SetData(UFG::DUIComboBoxWindow *this, in
     {
       LODWORD(v27->mNext) = v5;
       v28 = (signed __int64)&v27[1];
-      `eh vector constructor iterator'(&v27[1], 0x28ui64, v5, (void (__fastcall *)(void *))UFG::qString::qString);
+      `eh vector constructor iterator(&v27[1], 0x28ui64, v5, (void (__fastcall *)(void *))UFG::qString::qString);
     }
     else
     {
@@ -1061,13 +1061,13 @@ void __fastcall UFG::DUISuggestionBoxWindow::~DUISuggestionBoxWindow(UFG::DUISug
   unsigned int *v3; // rbx
 
   v1 = this;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUISuggestionBoxWindow::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  this->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUISuggestionBoxWindow::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUISuggestionBoxWindow::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  this->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUISuggestionBoxWindow::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v2 = this->mOptions;
   if ( v2 )
   {
     v3 = &v2[-1].mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v2,
       0x28ui64,
       v2[-1].mStringHash32,
@@ -1482,12 +1482,12 @@ void __fastcall UFG::DUIPopupMenuWindow::DUIPopupMenuWindow(UFG::DUIPopupMenuWin
   v4 = context;
   v5 = this;
   UFG::DUIWindow::DUIWindow((UFG::DUIWindow *)&this->vfptr);
-  v5->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::DUIPopupMenuWindow,UFG::DUIWindow>::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v5->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::DUIPopupMenuWindow,UFG::DUIWindow>::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v5->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::DUIPopupMenuWindow,UFG::DUIWindow>::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v5->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::DUIPopupMenuWindow,UFG::DUIWindow>::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v5->mBaseNode.mUID = -1i64;
   v5->mTypeUID = UFG::qStringHash64("UFG::DUIPopupMenuWindow", 0xFFFFFFFFFFFFFFFFui64);
-  v5->vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUIPopupMenuWindow::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v5->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUIPopupMenuWindow::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v5->vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUIPopupMenuWindow::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v5->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUIPopupMenuWindow::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v5->mParentCommand = 0i64;
   v5->mCommands.p = 0i64;
   *(_QWORD *)&v5->mCommands.size = 0i64;
@@ -1513,8 +1513,8 @@ void __fastcall UFG::DUIPopupMenuWindow::~DUIPopupMenuWindow(UFG::DUIPopupMenuWi
   UFG::qTree64Base::BaseNode *v4; // rcx
 
   v1 = (UFG::DUIWindow *)&this->vfptr;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUIPopupMenuWindow::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  this->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUIPopupMenuWindow::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUIPopupMenuWindow::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  this->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUIPopupMenuWindow::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v2 = this->mParentWindow;
   if ( v2 != this )
     v2->mChildWindow = 0i64;
@@ -4229,7 +4229,7 @@ char __fastcall UFG::EvaluateExpression(UFG::qString *expression, float *value)
     else
       v7 = (float)(signed int)v8;
     *v2 = v7;
-    v5->vfptr = (UEL::ExpressionVtbl *)&UEL::Expression::`vftable';
+    v5->vfptr = (UEL::ExpressionVtbl *)&UEL::Expression::`vftable;
     operator delete[](v5);
     UFG::qString::~qString(v3);
     result = 1;
@@ -6017,8 +6017,8 @@ bool __fastcall UFG::DUIContext::CommandButton(UFG::DUIContext *this, UFG::Comma
       v9[2].mNext = 0i64;
       v9[3].mNext = 0i64;
       LODWORD(v9[4].mNext) = v10;
-      v9->mNext = (UFG::allocator::free_link *)&UFG::ContextDataBase::`vftable';
-      v9->mNext = (UFG::allocator::free_link *)&UFG::ContextData<UFG::DUIContext *>::`vftable';
+      v9->mNext = (UFG::allocator::free_link *)&UFG::ContextDataBase::`vftable;
+      v9->mNext = (UFG::allocator::free_link *)&UFG::ContextData<UFG::DUIContext *>::`vftable;
       v9[5].mNext = (UFG::allocator::free_link *)v5;
     }
     else
@@ -6099,8 +6099,8 @@ bool __fastcall UFG::DUIContext::CommandButton(UFG::DUIContext *this, UFG::Comma
       v12[2].mNext = 0i64;
       v12[3].mNext = 0i64;
       LODWORD(v12[4].mNext) = v13;
-      v12->mNext = (UFG::allocator::free_link *)&UFG::ContextDataBase::`vftable';
-      v12->mNext = (UFG::allocator::free_link *)&UFG::ContextData<UFG::DUIContext *>::`vftable';
+      v12->mNext = (UFG::allocator::free_link *)&UFG::ContextDataBase::`vftable;
+      v12->mNext = (UFG::allocator::free_link *)&UFG::ContextData<UFG::DUIContext *>::`vftable;
       v12[5].mNext = (UFG::allocator::free_link *)v7;
     }
     else
@@ -6302,7 +6302,7 @@ void __fastcall UFG::DUIContext::BeginTreeView(UFG::DUIContext *this, UFG::IDUIC
     v10 = UFG::qMalloc(0x18ui64, "DUIIntArray", 0x800ui64);
     if ( v10 )
     {
-      v10->mNext = (UFG::allocator::free_link *)&UFG::DUIIntArray::`vftable';
+      v10->mNext = (UFG::allocator::free_link *)&UFG::DUIIntArray::`vftable;
       v10[2].mNext = 0i64;
       v10[1].mNext = 0i64;
     }
@@ -6591,7 +6591,7 @@ void __fastcall UFG::DUIContext::BeginListView(UFG::DUIContext *this, UFG::IDUIC
     v9 = UFG::qMalloc(0x18ui64, "DUIIntArray", 0x800ui64);
     if ( v9 )
     {
-      v9->mNext = (UFG::allocator::free_link *)&UFG::DUIIntArray::`vftable';
+      v9->mNext = (UFG::allocator::free_link *)&UFG::DUIIntArray::`vftable;
       v9[2].mNext = 0i64;
       v9[1].mNext = 0i64;
     }
@@ -6874,7 +6874,7 @@ void __fastcall UFG::DUIContext::BeginDataGrid(UFG::DUIContext *this, int num_co
     v30 = UFG::qMalloc(0x18ui64, "DUIIntArray", 0x800ui64);
     if ( v30 )
     {
-      v30->mNext = (UFG::allocator::free_link *)&UFG::DUIIntArray::`vftable';
+      v30->mNext = (UFG::allocator::free_link *)&UFG::DUIIntArray::`vftable;
       v30[2].mNext = 0i64;
       v30[1].mNext = 0i64;
     }
@@ -7531,7 +7531,7 @@ void __fastcall UFG::DUIContext::ShowPopupMenu(UFG::DUIContext *this, UFG::DUIPo
   command.mDisplayText.mData = (char *)&command.mDisplayText.mMagic;
   UFG::qString::qString((UFG::qString *)((char *)&command.mDisplayText + 32));
   *(_QWORD *)&command.mUserType.mMagic = 0i64;
-  command.vfptr = (UFG::CommandVtbl *)&UFG::PopupMenuCommand::`vftable';
+  command.vfptr = (UFG::CommandVtbl *)&UFG::PopupMenuCommand::`vftable;
   retaddr = (char *)&command.mUserType.mData;
   command.mUserType.mData = (char *)&command.mUserType.mData;
   *(_QWORD *)&command.mUserType.mStringHash32 = (char *)&command + 192;
@@ -7564,7 +7564,7 @@ void __fastcall UFG::DUIContext::ShowPopupMenu(UFG::DUIContext *this, UFG::DUIPo
   *v12 = v11;
   command.mUserType.mData = (char *)&command.mUserType.mData;
   *(_QWORD *)&command.mUserType.mStringHash32 = (char *)&command + 192;
-  command.vfptr = (UFG::CommandVtbl *)&UFG::Command::`vftable';
+  command.vfptr = (UFG::CommandVtbl *)&UFG::Command::`vftable;
   UFG::qString::~qString((UFG::qString *)((char *)&command.mDisplayText + 32));
   retaddr = (char *)&command.mDisplayText.mMagic;
   UFG::qList<UFG::qString,UFG::qString,1,0>::DeleteNodes((UFG::qList<UFG::qString,UFG::qString,1,0> *)&command.mDisplayText.mMagic);
@@ -7637,8 +7637,8 @@ void __fastcall UFG::DUIContext::ShowPopupMenu(UFG::DUIContext *this, UFG::DUIPo
       v15[2].mNext = 0i64;
       v15[3].mNext = 0i64;
       LODWORD(v15[4].mNext) = v16;
-      v15->mNext = (UFG::allocator::free_link *)&UFG::ContextDataBase::`vftable';
-      v15->mNext = (UFG::allocator::free_link *)&UFG::ContextData<UFG::DUIPopupMenuWindow *>::`vftable';
+      v15->mNext = (UFG::allocator::free_link *)&UFG::ContextDataBase::`vftable;
+      v15->mNext = (UFG::allocator::free_link *)&UFG::ContextData<UFG::DUIPopupMenuWindow *>::`vftable;
       v15[5].mNext = (UFG::allocator::free_link *)v11;
     }
     else

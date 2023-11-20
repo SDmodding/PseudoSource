@@ -7,7 +7,7 @@ void __fastcall hkpCompressedMeshShapeBuilder::hkpCompressedMeshShapeBuilder(hkp
   this->m_TjunctionTolerance = 0.000099999997;
   this->m_weldTolerance = 0.001;
   this->m_stripperPasses = 1;
-  this->m_leftOver.vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable';
+  this->m_leftOver.vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable;
   *(_DWORD *)&this->m_leftOver.m_memSizeAndFlags = 0x1FFFF;
   this->m_leftOver.m_vertices.m_data = 0i64;
   this->m_leftOver.m_vertices.m_size = 0;
@@ -39,7 +39,7 @@ void __fastcall hkpCompressedMeshShapeBuilder::hkpCompressedMeshShapeBuilder(hkp
   this->m_shapeKeys.m_size = 0;
   this->m_shapeKeys.m_capacityAndFlags = 2147483648;
   this->m_createMapping = 0;
-  this->m_geometry.vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable';
+  this->m_geometry.vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable;
   *(_DWORD *)&this->m_geometry.m_memSizeAndFlags = 0x1FFFF;
   this->m_geometry.m_vertices.m_data = 0i64;
   this->m_geometry.m_vertices.m_size = 0;
@@ -61,10 +61,10 @@ void __fastcall hkpCompressedMeshShapeBuilder::MappingTree::~MappingTree(hkpComp
   v1 = this;
   v2 = this->m_left;
   if ( v2 )
-    hkpCompressedMeshShapeBuilder::MappingTree::`scalar deleting destructor'(v2, 1u);
+    hkpCompressedMeshShapeBuilder::MappingTree::`scalar deleting destructor(v2, 1u);
   v3 = v1->m_right;
   if ( v3 )
-    hkpCompressedMeshShapeBuilder::MappingTree::`scalar deleting destructor'(v3, 1u);
+    hkpCompressedMeshShapeBuilder::MappingTree::`scalar deleting destructor(v3, 1u);
   v4 = v1->m_triangles.m_capacityAndFlags;
   v1->m_triangles.m_size = 0;
   if ( v4 >= 0 )

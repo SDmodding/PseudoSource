@@ -121,13 +121,13 @@ SSInvokableClass *__fastcall SSInvokableClass::get_or_create(SSClass *class_p, S
 
   iclass.i_ref_count = 0;
   iclass.i_class_p = class_p;
-  iclass.vfptr = (SSClassDescBaseVtbl *)&SSInvokableClass::`vftable';
+  iclass.vfptr = (SSClassDescBaseVtbl *)&SSInvokableClass::`vftable;
   iclass.i_params_p.i_obj_p = params_p;
   if ( params_p )
     ++params_p->i_ref_count;
   iclass.i_invoke_type = invoke_type;
   v3 = SSInvokableClass::get_or_create(&iclass);
-  iclass.vfptr = (SSClassDescBaseVtbl *)&SSInvokableClass::`vftable';
+  iclass.vfptr = (SSClassDescBaseVtbl *)&SSInvokableClass::`vftable;
   v4 = iclass.i_params_p.i_obj_p;
   if ( iclass.i_params_p.i_obj_p )
   {

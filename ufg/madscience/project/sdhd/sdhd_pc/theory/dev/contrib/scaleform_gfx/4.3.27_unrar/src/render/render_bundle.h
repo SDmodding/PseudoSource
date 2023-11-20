@@ -2,7 +2,7 @@
 // RVA: 0x94CD80
 void __fastcall Scaleform::Render::SortKeyInterface::~SortKeyInterface(Scaleform::Render::SortKeyInterface *this)
 {
-  this->vfptr = (Scaleform::Render::SortKeyInterfaceVtbl *)&Scaleform::Render::SortKeyInterface::`vftable';
+  this->vfptr = (Scaleform::Render::SortKeyInterfaceVtbl *)&Scaleform::Render::SortKeyInterface::`vftable;
 }
 
 // File Line: 181
@@ -53,12 +53,12 @@ void __fastcall Scaleform::Render::Bundle::Bundle(Scaleform::Render::Bundle *thi
   Scaleform::ArrayLH<Scaleform::Render::BundleEntry *,2,Scaleform::ArrayDefaultPolicy> *v3; // [rsp+50h] [rbp+18h]
 
   v2 = this;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,67>::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseNTS<Scaleform::Render::Bundle,67>::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::Render::Bundle::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,67>::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseNTS<Scaleform::Render::Bundle,67>::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::Render::Bundle::`vftable;
   v3 = &this->Entries;
   *(_OWORD *)&v3->Data.Data = 0ui64;
   v3->Data.Policy.Capacity = 0i64;
@@ -75,9 +75,9 @@ void __fastcall Scaleform::Render::Bundle::~Bundle(Scaleform::Render::Bundle *th
   Scaleform::Render::Bundle *v1; // rbx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::Render::Bundle::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::Render::Bundle::`vftable;
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, this->Entries.Data.Data);
-  v1->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable';
+  v1->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable;
 }
 
 // File Line: 567

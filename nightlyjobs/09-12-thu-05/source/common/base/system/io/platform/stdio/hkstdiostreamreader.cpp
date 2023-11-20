@@ -36,7 +36,7 @@ hkStdioStreamReader *__fastcall hkStdioStreamReader::open(const char *nameIn)
 void __fastcall hkStdioStreamReader::hkStdioStreamReader(hkStdioStreamReader *this, void *handle)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkStdioStreamReader::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkStdioStreamReader::`vftable;
   this->m_handle = handle;
   this->m_isOk.m_bool = handle != 0i64;
 }
@@ -49,11 +49,11 @@ void __fastcall hkStdioStreamReader::~hkStdioStreamReader(hkStdioStreamReader *t
   _iobuf *v2; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkStdioStreamReader::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkStdioStreamReader::`vftable;
   v2 = (_iobuf *)this->m_handle;
   if ( v2 )
     fclose(v2);
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 45

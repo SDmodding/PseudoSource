@@ -6,7 +6,7 @@ __int64 Render::_dynamic_initializer_for__gSlimDescriptor__()
     (Illusion::VertexStreamDescriptor *)&Render::gSlimDescriptor.vfptr,
     "VertexDecl.Slim",
     0x91355905);
-  Render::gSlimDescriptor.vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vSlimDescriptor::`vftable';
+  Render::gSlimDescriptor.vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vSlimDescriptor::`vftable;
   Illusion::VertexStreamDescriptor::AddElement(
     (Illusion::VertexStreamDescriptor *)&Render::gSlimDescriptor.vfptr,
     0,
@@ -24,7 +24,7 @@ __int64 Render::_dynamic_initializer_for__gSlimUVDescriptor__()
     (Illusion::VertexStreamDescriptor *)&Render::gSlimUVDescriptor.vfptr,
     "VertexDecl.SlimUV",
     0x7E0D7533u);
-  Render::gSlimUVDescriptor.vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vSlimUVDescriptor::`vftable';
+  Render::gSlimUVDescriptor.vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vSlimUVDescriptor::`vftable;
   Illusion::VertexStreamDescriptor::AddElement(
     (Illusion::VertexStreamDescriptor *)&Render::gSlimUVDescriptor.vfptr,
     0,
@@ -80,7 +80,7 @@ __int64 Render::_dynamic_initializer_for__gMorphTargetDescriptor__()
     (Illusion::VertexStreamDescriptor *)&Render::gMorphTargetDescriptor.vfptr,
     "VertexDecl.MorphTarget",
     0x7029F5BAu);
-  Render::gMorphTargetDescriptor.vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vMorphTargetDescriptor::`vftable';
+  Render::gMorphTargetDescriptor.vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vMorphTargetDescriptor::`vftable;
   Illusion::VertexStreamDescriptor::AddElement(
     (Illusion::VertexStreamDescriptor *)&Render::gMorphTargetDescriptor.vfptr,
     0,
@@ -104,7 +104,7 @@ __int64 Render::_dynamic_initializer_for__gMultiMorphTargetDescriptor__()
     (Illusion::VertexStreamDescriptor *)&Render::gMultiMorphTargetDescriptor.vfptr,
     "VertexDecl.MultiMorphTarget",
     0x6649E95u);
-  Render::gMultiMorphTargetDescriptor.vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vMultiMorphTargetDescriptor::`vftable';
+  Render::gMultiMorphTargetDescriptor.vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vMultiMorphTargetDescriptor::`vftable;
   Illusion::VertexStreamDescriptor::AddElement(
     (Illusion::VertexStreamDescriptor *)&Render::gMultiMorphTargetDescriptor.vfptr,
     0,
@@ -144,7 +144,7 @@ __int64 Render::_dynamic_initializer_for__gRainDescriptor__()
     (Illusion::VertexStreamDescriptor *)&Render::gRainDescriptor.vfptr,
     "VertexDecl.Rain",
     0x48649FC8u);
-  Render::gRainDescriptor.vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vRainDescriptor::`vftable';
+  Render::gRainDescriptor.vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Render::vRainDescriptor::`vftable;
   Illusion::VertexStreamDescriptor::AddElement(
     (Illusion::VertexStreamDescriptor *)&Render::gRainDescriptor.vfptr,
     0,

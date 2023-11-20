@@ -11,9 +11,9 @@ void __fastcall CAkSwitchCntr::CAkSwitchCntr(CAkSwitchCntr *this, unsigned int i
   v2->m_uPreparationCount = 0;
   *(_QWORD *)&v2->m_eGroupType = 0i64;
   v2->m_ulDefaultSwitch = 0;
-  v2->vfptr = (CAkIndexableVtbl *)&CAkSwitchCntr::`vftable'{for `CAkMultiPlayNode'};
-  v2->vfptr = (CAkSwitchAwareVtbl *)&CAkSwitchCntr::`vftable'{for `CAkSwitchAware'};
-  v2->vfptr = (CAkPreparationAwareVtbl *)&CAkSwitchCntr::`vftable'{for `CAkPreparationAware'};
+  v2->vfptr = (CAkIndexableVtbl *)&CAkSwitchCntr::`vftable{for `CAkMultiPlayNode};
+  v2->vfptr = (CAkSwitchAwareVtbl *)&CAkSwitchCntr::`vftable{for `CAkSwitchAware};
+  v2->vfptr = (CAkPreparationAwareVtbl *)&CAkSwitchCntr::`vftable{for `CAkPreparationAware};
   *(_QWORD *)&v2->m_SwitchList.m_ulMinNumListItems = 0i64;
   v2->m_SwitchList.m_ulNumListItems = 0;
   *(_QWORD *)&v2->m_listParameters.m_ulMinNumListItems = 0i64;
@@ -31,9 +31,9 @@ void __fastcall CAkSwitchCntr::~CAkSwitchCntr(CAkSwitchCntr *this)
 
   v1 = this;
   v2 = (CAkSwitchAware *)&this->vfptr;
-  v2[-23].vfptr = (CAkSwitchAwareVtbl *)&CAkSwitchCntr::`vftable'{for `CAkMultiPlayNode'};
-  v2->vfptr = (CAkSwitchAwareVtbl *)&CAkSwitchCntr::`vftable'{for `CAkSwitchAware'};
-  v2[1].vfptr = (CAkSwitchAwareVtbl *)&CAkSwitchCntr::`vftable'{for `CAkPreparationAware'};
+  v2[-23].vfptr = (CAkSwitchAwareVtbl *)&CAkSwitchCntr::`vftable{for `CAkMultiPlayNode};
+  v2->vfptr = (CAkSwitchAwareVtbl *)&CAkSwitchCntr::`vftable{for `CAkSwitchAware};
+  v2[1].vfptr = (CAkSwitchAwareVtbl *)&CAkSwitchCntr::`vftable{for `CAkPreparationAware};
   CAkSwitchAware::UnsubscribeSwitches(v2);
   CAkSwitchCntr::ClearSwitches(v1);
   CAkList2<CAkSwitchCntr::SwitchContPlaybackItem,CAkSwitchCntr::SwitchContPlaybackItem const &,2,ArrayPoolDefault>::Term(&v1->m_listSwitchContPlayback);

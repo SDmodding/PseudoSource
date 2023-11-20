@@ -15,7 +15,7 @@ void __fastcall hkpConvexListAgent::hkpConvexListAgent(hkpConvexListAgent *this,
   v7 = bodyA;
   v8 = this;
   hkpGskfAgent::hkpGskfAgent((hkpGskfAgent *)&this->vfptr, bodyA, bodyB, mgr);
-  v8->vfptr = (hkBaseObjectVtbl *)&hkpConvexListAgent::`vftable';
+  v8->vfptr = (hkBaseObjectVtbl *)&hkpConvexListAgent::`vftable;
   v8->m_dispatcher = v5->m_dispatcher.m_storage;
   *(_WORD *)&v8->m_inGskMode.m_bool = 1;
   v9 = (hkpConvexShape *)v7->m_shape;
@@ -72,7 +72,7 @@ hkpCollisionAgent *__fastcall hkpConvexListAgent::createConvexConvexListAgent(hk
           if ( v11 )
           {
             hkpGskfAgent::hkpGskfAgent(v11, v7, v6, v4);
-            *v12 = &hkpPredGskfAgent::`vftable';
+            *v12 = &hkpPredGskfAgent::`vftable;
             return (hkpCollisionAgent *)v12;
           }
         }
@@ -87,7 +87,7 @@ hkpCollisionAgent *__fastcall hkpConvexListAgent::createConvexConvexListAgent(hk
         if ( v14 )
         {
           hkpShapeCollectionAgent::hkpShapeCollectionAgent(v14, v6, v7, v5, v4);
-          *v12 = &hkpSymmetricAgent<hkpShapeCollectionAgent>::`vftable';
+          *v12 = &hkpSymmetricAgent<hkpShapeCollectionAgent>::`vftable;
           return (hkpCollisionAgent *)v12;
         }
       }
@@ -116,7 +116,7 @@ hkpCollisionAgent *__fastcall hkpConvexListAgent::createConvexConvexListAgent(hk
   {
     hkpShapeCollectionAgent::hkpShapeCollectionAgent(v19, v6, v7, v5, 0i64);
     v12 = &v20->vfptr;
-    v20->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpShapeCollectionAgent>::`vftable';
+    v20->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpShapeCollectionAgent>::`vftable;
   }
   return (hkpCollisionAgent *)v12;
 }
@@ -172,7 +172,7 @@ hkpConvexListAgent *__fastcall hkpConvexListAgent::createConvexListConvexAgent(h
     if ( v17 )
     {
       hkpConvexListAgent::hkpConvexListAgent(v17, v6, v7, v5, v4);
-      v12->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpConvexListAgent>::`vftable';
+      v12->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpConvexListAgent>::`vftable;
       return v12;
     }
     return 0i64;
@@ -199,7 +199,7 @@ hkpConvexListAgent *__fastcall hkpConvexListAgent::createConvexListConvexAgent(h
   if ( !v11 )
     return 0i64;
   hkpGskfAgent::hkpGskfAgent(v11, v7, v6, v4);
-  v12->vfptr = (hkBaseObjectVtbl *)&hkpPredGskfAgent::`vftable';
+  v12->vfptr = (hkBaseObjectVtbl *)&hkpPredGskfAgent::`vftable;
   return v12;
 }
 
@@ -269,7 +269,7 @@ void __fastcall hkpConvexListAgent::createConvexListConvexListAgent(hkpCdBody *b
                 if ( v13 )
                 {
                   hkpGskfAgent::hkpGskfAgent(v13, v7, v6, v4);
-                  v14->vfptr = (hkBaseObjectVtbl *)&hkpPredGskfAgent::`vftable';
+                  v14->vfptr = (hkBaseObjectVtbl *)&hkpPredGskfAgent::`vftable;
                 }
               }
             }
@@ -283,7 +283,7 @@ void __fastcall hkpConvexListAgent::createConvexListConvexListAgent(hkpCdBody *b
               if ( v16 )
               {
                 hkpShapeCollectionAgent::hkpShapeCollectionAgent(v16, v6, v7, v5, v4);
-                v17->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpShapeCollectionAgent>::`vftable';
+                v17->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpShapeCollectionAgent>::`vftable;
               }
             }
           }
@@ -318,7 +318,7 @@ void __fastcall hkpConvexListAgent::createConvexListConvexListAgent(hkpCdBody *b
       if ( v23 )
       {
         hkpConvexListAgent::hkpConvexListAgent(v23, v6, v7, v5, v4);
-        v24->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpConvexListAgent>::`vftable';
+        v24->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpConvexListAgent>::`vftable;
       }
     }
   }
@@ -471,12 +471,12 @@ void __fastcall hkpConvexListAgent::staticGetClosestPoints(hkpCdBody *bodyA, hkp
     v10[1] = v9 + 24;
   }
   collectora.m_earlyOut.m_bool = 0;
-  collectora.vfptr = (hkpCdBodyPairCollectorVtbl *)&hkpFlagCdBodyPairCollector::`vftable';
+  collectora.vfptr = (hkpCdBodyPairCollectorVtbl *)&hkpFlagCdBodyPairCollector::`vftable;
   hkpGskBaseAgent::staticGetPenetrations(v4, v7, v6, &collectora);
   if ( collectora.m_earlyOut.m_bool )
     goto LABEL_14;
   v24 = 0i64;
-  v21.vfptr = (hkpCdPointCollectorVtbl *)&hkpClosestCdPointCollector::`vftable';
+  v21.vfptr = (hkpCdPointCollectorVtbl *)&hkpClosestCdPointCollector::`vftable;
   v21.m_earlyOutDistance = FLOAT_3_40282e38;
   v23 = _mm_shuffle_ps(v23, _mm_unpackhi_ps(v23, (__m128)xmmword_141A712A0), 196);
   hkpGskBaseAgent::staticGetClosestPoints(v4, v7, v6, &v21);
@@ -564,7 +564,7 @@ void __fastcall hkpConvexListAgent::staticGetPenetrations(hkpCdBody *bodyA, hkpC
     v10[1] = v9 + 24;
   }
   collectora.m_earlyOut.m_bool = 0;
-  collectora.vfptr = (hkpCdBodyPairCollectorVtbl *)&hkpFlagCdBodyPairCollector::`vftable';
+  collectora.vfptr = (hkpCdBodyPairCollectorVtbl *)&hkpFlagCdBodyPairCollector::`vftable;
   hkpGskBaseAgent::staticGetPenetrations(v4, v7, v6, &collectora);
   if ( collectora.m_earlyOut.m_bool )
   {
@@ -638,7 +638,7 @@ void __fastcall hkpConvexListAgent::staticLinearCast(hkpCdBody *bodyA, hkpCdBody
     *(_DWORD *)(v10 + 8) = v12;
     v11[1] = v10 + 24;
   }
-  collectora.vfptr = (hkpCdPointCollectorVtbl *)&hkpSimpleClosestContactCollector::`vftable';
+  collectora.vfptr = (hkpCdPointCollectorVtbl *)&hkpSimpleClosestContactCollector::`vftable;
   v22 = 0;
   collectora.m_earlyOutDistance = FLOAT_3_40282e38;
   v23 = _mm_shuffle_ps(v23, _mm_unpackhi_ps(v23, (__m128)xmmword_141A712A0), 196);
@@ -865,7 +865,7 @@ void __fastcall hkpConvexListAgent::processCollision(hkpConvexListAgent *this, h
       *(_DWORD *)(v29 - 8) = v28;
       v26[1] = v29;
     }
-    inputa.m_aTb.m_storage = (hkTransformf *)&hkpMapPointsToSubShapeContactMgr::`vftable';
+    inputa.m_aTb.m_storage = (hkTransformf *)&hkpMapPointsToSubShapeContactMgr::`vftable;
     inputa.m_shapeB.m_storage = (hkpConvexShape *)v5->m_contactMgr;
     LODWORD(inputa.m_transformA.m_storage) = 0x1FFFF;
     LODWORD(inputa.m_shapeA.m_storage) = 2;

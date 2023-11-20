@@ -7,7 +7,7 @@ AK::IAkPlugin *__fastcall CreateAkSoundSeedImpactFX(AK::IAkPluginMemAlloc *in_pA
   result = (AK::IAkPlugin *)in_pAllocator->vfptr->Malloc(in_pAllocator, 80ui64);
   if ( result )
   {
-    result->vfptr = (AK::IAkPluginVtbl *)&CAkModalSynth::`vftable';
+    result->vfptr = (AK::IAkPluginVtbl *)&CAkModalSynth::`vftable;
     result[1].vfptr = 0i64;
     result[3].vfptr = 0i64;
     result[4].vfptr = 0i64;
@@ -36,60 +36,60 @@ float __fastcall EnforcePoleRadiusBounds<float>(float R, float theta)
   v3 = theta;
   if ( R > 1.0 )
     v2 = *(float *)&FLOAT_1_0;
-  v4 = `EnforcePoleRadiusBounds<float>'::`4'::`local static guard';
-  if ( `EnforcePoleRadiusBounds<float>'::`4'::`local static guard' & 1 )
+  v4 = `EnforcePoleRadiusBounds<float>::`4::`local static guard;
+  if ( `EnforcePoleRadiusBounds<float>::`4::`local static guard & 1 )
   {
-    v5 = `EnforcePoleRadiusBounds<float>'::`4'::theta1;
+    v5 = `EnforcePoleRadiusBounds<float>::`4::theta1;
   }
   else
   {
-    v4 = `EnforcePoleRadiusBounds<float>'::`4'::`local static guard' | 1;
-    `EnforcePoleRadiusBounds<float>'::`4'::`local static guard' |= 1u;
+    v4 = `EnforcePoleRadiusBounds<float>::`4::`local static guard | 1;
+    `EnforcePoleRadiusBounds<float>::`4::`local static guard |= 1u;
     v5 = acosf(0.95999998);
-    `EnforcePoleRadiusBounds<float>'::`4'::theta1 = v5;
+    `EnforcePoleRadiusBounds<float>::`4::theta1 = v5;
   }
   if ( v4 & 2 )
   {
-    v6 = `EnforcePoleRadiusBounds<float>'::`4'::theta2;
+    v6 = `EnforcePoleRadiusBounds<float>::`4::theta2;
   }
   else
   {
     v4 |= 2u;
-    `EnforcePoleRadiusBounds<float>'::`4'::`local static guard' = v4;
+    `EnforcePoleRadiusBounds<float>::`4::`local static guard = v4;
     v6 = 3.1415927 - v5;
-    `EnforcePoleRadiusBounds<float>'::`4'::theta2 = 3.1415927 - v5;
+    `EnforcePoleRadiusBounds<float>::`4::theta2 = 3.1415927 - v5;
   }
   if ( v4 & 4 )
   {
-    v7 = `EnforcePoleRadiusBounds<float>'::`4'::m1;
+    v7 = `EnforcePoleRadiusBounds<float>::`4::m1;
   }
   else
   {
     v4 |= 4u;
-    `EnforcePoleRadiusBounds<float>'::`4'::`local static guard' = v4;
+    `EnforcePoleRadiusBounds<float>::`4::`local static guard = v4;
     v7 = -0.25 / v5;
-    `EnforcePoleRadiusBounds<float>'::`4'::m1 = -0.25 / v5;
+    `EnforcePoleRadiusBounds<float>::`4::m1 = -0.25 / v5;
   }
   if ( v4 & 8 )
   {
-    v8 = `EnforcePoleRadiusBounds<float>'::`4'::m2;
+    v8 = `EnforcePoleRadiusBounds<float>::`4::m2;
   }
   else
   {
     v4 |= 8u;
-    `EnforcePoleRadiusBounds<float>'::`4'::`local static guard' = v4;
+    `EnforcePoleRadiusBounds<float>::`4::`local static guard = v4;
     v8 = 0.25 / (float)(3.1415927 - v6);
-    `EnforcePoleRadiusBounds<float>'::`4'::m2 = 0.25 / (float)(3.1415927 - v6);
+    `EnforcePoleRadiusBounds<float>::`4::m2 = 0.25 / (float)(3.1415927 - v6);
   }
   if ( v4 & 0x10 )
   {
-    v9 = `EnforcePoleRadiusBounds<float>'::`4'::b2;
+    v9 = `EnforcePoleRadiusBounds<float>::`4::b2;
   }
   else
   {
-    `EnforcePoleRadiusBounds<float>'::`4'::`local static guard' = v4 | 0x10;
+    `EnforcePoleRadiusBounds<float>::`4::`local static guard = v4 | 0x10;
     v9 = 1.0 - (float)(v8 * 3.1415927);
-    `EnforcePoleRadiusBounds<float>'::`4'::b2 = 1.0 - (float)(v8 * 3.1415927);
+    `EnforcePoleRadiusBounds<float>::`4::b2 = 1.0 - (float)(v8 * 3.1415927);
   }
   if ( v3 >= v5 )
   {
@@ -143,7 +143,7 @@ void __fastcall CalcCoeffs<float>(float GlobalGain, float freq, float amp, float
 // RVA: 0xADF290
 void __fastcall CAkModalSynth::CAkModalSynth(CAkModalSynth *this)
 {
-  this->vfptr = (AK::IAkPluginVtbl *)&CAkModalSynth::`vftable';
+  this->vfptr = (AK::IAkPluginVtbl *)&CAkModalSynth::`vftable;
   this->m_pSharedParams = 0i64;
   this->m_pfAllocatedMem = 0i64;
   this->m_pfFiltCoefs = 0i64;
@@ -159,12 +159,12 @@ void __fastcall CAkModalSynth::~CAkModalSynth(CAkModalSynth *this)
 
   v1 = this->m_pfAllocatedMem;
   v2 = this;
-  this->vfptr = (AK::IAkPluginVtbl *)&CAkModalSynth::`vftable';
+  this->vfptr = (AK::IAkPluginVtbl *)&CAkModalSynth::`vftable;
   if ( v1 )
     ((void (*)(void))this->m_pAllocator->vfptr->Free)();
   if ( v2->m_pfFiltCoefs )
     ((void (*)(void))v2->m_pAllocator->vfptr->Free)();
-  v2->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable';
+  v2->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable;
 }
 
 // File Line: 120

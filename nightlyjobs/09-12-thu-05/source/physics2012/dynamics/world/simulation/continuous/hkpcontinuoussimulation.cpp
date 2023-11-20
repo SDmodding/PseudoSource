@@ -15,7 +15,7 @@ void __fastcall hkpContinuousSimulation::hkpContinuousSimulation(hkpContinuousSi
   v2 = world;
   v3 = this;
   hkpSimulation::hkpSimulation((hkpSimulation *)&this->vfptr, world);
-  v3->vfptr = (hkBaseObjectVtbl *)&hkpContinuousSimulation::`vftable';
+  v3->vfptr = (hkBaseObjectVtbl *)&hkpContinuousSimulation::`vftable;
   v3->m_toiEvents.m_data = 0i64;
   v3->m_toiEvents.m_size = 0;
   v3->m_toiEvents.m_capacityAndFlags = 2147483648;
@@ -56,7 +56,7 @@ void __fastcall hkpContinuousSimulation::~hkpContinuousSimulation(hkpContinuousS
   int v3; // eax
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpContinuousSimulation::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpContinuousSimulation::`vftable;
   v2 = this->m_toiResourceMgr;
   if ( v2 )
     v2->vfptr->__vecDelDtor((hkBaseObject *)&v2->vfptr, 1u);

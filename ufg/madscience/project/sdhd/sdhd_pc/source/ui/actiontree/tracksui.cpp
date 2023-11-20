@@ -17,8 +17,8 @@ void __fastcall UIEventTrack::UIEventTrack(UIEventTrack *this)
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, UIEventTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<UIEventTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&UIEventTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<UIEventTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&UIEventTrack::`vftable;
   v1->mEventName.mOffset = 1i64;
   BinString::Set(&v1->mEventName, "NO_EVENT");
 }
@@ -50,8 +50,8 @@ void __fastcall UIScreenTrack::UIScreenTrack(UIScreenTrack *this)
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, UIScreenTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<UIScreenTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&UIScreenTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<UIScreenTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&UIScreenTrack::`vftable;
   v1->mScreen = 0;
   *(_WORD *)&v1->mPopHud = 1;
   v1->mDontRemoveOnEnd = 0;
@@ -76,8 +76,8 @@ void __fastcall HUDSocialActionChargeTrack::HUDSocialActionChargeTrack(HUDSocial
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, HUDSocialActionChargeTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<HUDSocialActionChargeTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&HUDSocialActionChargeTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<HUDSocialActionChargeTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&HUDSocialActionChargeTrack::`vftable;
   v1->m_Charge = 0.0;
   v1->m_SetValue = 0;
 }
@@ -101,8 +101,8 @@ void __fastcall HUDSocialActionEnableTrack::HUDSocialActionEnableTrack(HUDSocial
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, HUDSocialActionEnableTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<HUDSocialActionEnableTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&HUDSocialActionEnableTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<HUDSocialActionEnableTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&HUDSocialActionEnableTrack::`vftable;
   v1->m_Enabled = 1;
 }
 
@@ -125,7 +125,7 @@ void __fastcall HUDSocialActionActivateTrack::HUDSocialActionActivateTrack(HUDSo
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, HUDSocialActionActivateTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<HUDSocialActionActivateTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&HUDSocialActionActivateTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<HUDSocialActionActivateTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&HUDSocialActionActivateTrack::`vftable;
 }
 

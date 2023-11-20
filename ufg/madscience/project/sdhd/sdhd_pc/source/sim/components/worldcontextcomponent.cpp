@@ -111,7 +111,7 @@ void __fastcall UFG::WorldContextComponent::WorldContextComponent(UFG::WorldCont
   v5 = (UFG::qNode<UFG::WorldContextComponent,UFG::WorldContextComponent> *)&v4->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::WorldContextComponent::`vftable';
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::WorldContextComponent::`vftable;
   v10 = &v4->mFocusParkourHandle;
   v10->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v10->mPrev;
   v10->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v10->mPrev;
@@ -191,7 +191,7 @@ void __fastcall UFG::WorldContextComponent::~WorldContextComponent(UFG::WorldCon
   UFG::qNode<UFG::WorldContextComponent,UFG::WorldContextComponent> *v18; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::WorldContextComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::WorldContextComponent::`vftable;
   UFG::WorldContextComponent::DetachAll(this);
   if ( v1 == UFG::WorldContextComponent::s_WorldContextComponentpCurrentIterator )
     UFG::WorldContextComponent::s_WorldContextComponentpCurrentIterator = (UFG::WorldContextComponent *)&v1->mPrev[-4];
@@ -1114,7 +1114,7 @@ LABEL_85:
           LODWORD(v117) = COERCE_UNSIGNED_INT(vmax.y - vmin.y) & _xmm;
           LODWORD(v68) = COERCE_UNSIGNED_INT(vmax.z - vmin.z) & _xmm;
           LODWORD(v120) = COERCE_UNSIGNED_INT(vmax.z - vmin.z) & _xmm;
-          `eh vector constructor iterator'(
+          `eh vector constructor iterator(
             out.p,
             0x18ui64,
             768,
@@ -1271,7 +1271,7 @@ LABEL_85:
             }
           }
           out.size = 0;
-          `eh vector destructor iterator'(
+          `eh vector destructor iterator(
             out.p,
             0x18ui64,
             768,

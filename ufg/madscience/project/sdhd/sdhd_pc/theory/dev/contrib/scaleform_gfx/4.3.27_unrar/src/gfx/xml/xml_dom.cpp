@@ -12,13 +12,13 @@ void __fastcall Scaleform::GFx::XML::DOMBuilder::DOMBuilder(Scaleform::GFx::XML:
   v3 = ignorews;
   v4 = (Scaleform::Render::RenderBuffer **)pxmlParser.pObject;
   v5 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,326>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::XML::ParserHandler,326>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::XML::ParserHandler::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::XML::DOMBuilder::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,326>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::XML::ParserHandler,326>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::XML::ParserHandler::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::XML::DOMBuilder::`vftable;
   if ( pxmlParser.pObject->vfptr )
     Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)pxmlParser.pObject->vfptr);
   v5->pXMLParserState.pObject = (Scaleform::GFx::XML::SupportBase *)*v4;

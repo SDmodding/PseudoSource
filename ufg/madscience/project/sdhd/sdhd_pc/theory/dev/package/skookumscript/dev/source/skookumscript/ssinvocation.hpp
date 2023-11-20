@@ -6,7 +6,7 @@ void __fastcall SSInvokeSync::SSInvokeSync(SSInvokeSync *this, const void **bina
 
   v2 = this;
   SSInvocation::SSInvocation((SSInvocation *)&this->vfptr, binary_pp);
-  v2->vfptr = (SSExpressionBaseVtbl *)&SSInvokeSync::`vftable';
+  v2->vfptr = (SSExpressionBaseVtbl *)&SSInvokeSync::`vftable;
 }
 
 // File Line: 241
@@ -24,7 +24,7 @@ void __fastcall SSInvokeRace::SSInvokeRace(SSInvokeRace *this, const void **bina
 
   v2 = this;
   SSInvocation::SSInvocation((SSInvocation *)&this->vfptr, binary_pp);
-  v2->vfptr = (SSExpressionBaseVtbl *)&SSInvokeRace::`vftable';
+  v2->vfptr = (SSExpressionBaseVtbl *)&SSInvokeRace::`vftable;
 }
 
 // File Line: 299

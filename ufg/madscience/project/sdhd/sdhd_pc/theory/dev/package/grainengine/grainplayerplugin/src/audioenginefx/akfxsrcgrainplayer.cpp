@@ -7,9 +7,9 @@ AK::IAkPlugin *__fastcall CreateGrainPlayerSource(AK::IAkPluginMemAlloc *in_pAll
   v1 = (char *)in_pAllocator->vfptr->Malloc(in_pAllocator, 184ui64);
   if ( !v1 )
     return 0i64;
-  *(_QWORD *)v1 = &AK::IAkPlugin::`vftable';
-  *(_QWORD *)v1 = &AK::IAkSourcePlugin::`vftable';
-  *(_QWORD *)v1 = &CAkFXSrcGrainPlayer::`vftable';
+  *(_QWORD *)v1 = &AK::IAkPlugin::`vftable;
+  *(_QWORD *)v1 = &AK::IAkSourcePlugin::`vftable;
+  *(_QWORD *)v1 = &CAkFXSrcGrainPlayer::`vftable;
   SpectralEngineCoreDX::GrainPlayerSource::GrainPlayerSource((SpectralEngineCoreDX::GrainPlayerSource *)(v1 + 16));
   *((_QWORD *)v1 + 22) = 0i64;
   return (AK::IAkPlugin *)v1;

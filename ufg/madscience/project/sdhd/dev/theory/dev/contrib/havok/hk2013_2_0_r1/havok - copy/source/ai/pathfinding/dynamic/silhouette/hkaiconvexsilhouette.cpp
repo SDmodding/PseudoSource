@@ -2,7 +2,7 @@
 // RVA: 0xBE6DC0
 void __fastcall hkaiConvexSilhouetteSet::hkaiConvexSilhouetteSet(hkaiConvexSilhouetteSet *this, hkFinishLoadedObjectFlag f)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiConvexSilhouetteSet::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiConvexSilhouetteSet::`vftable;
 }
 
 // File Line: 26

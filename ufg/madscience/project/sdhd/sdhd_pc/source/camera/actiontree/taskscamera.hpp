@@ -23,7 +23,7 @@ void __fastcall CameraAnimationTask::~CameraAnimationTask(CameraAnimationTask *t
   UFG::qNode<ITask,ITask> *v19; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&CameraAnimationTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&CameraAnimationTask::`vftable;
   v2 = &this->mPreviousCameraComponent;
   if ( this->mPreviousCameraComponent.m_pPointer )
   {
@@ -75,7 +75,7 @@ void __fastcall CameraAnimationTask::~CameraAnimationTask(CameraAnimationTask *t
   v16->mPrev = v15;
   v12->mPrev = (UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *)&v12->mPrev;
   v1->mController.mNext = (UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *)&v1->mController.mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v17 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v18 = v1->mPrev;
   v19 = v1->mNext;

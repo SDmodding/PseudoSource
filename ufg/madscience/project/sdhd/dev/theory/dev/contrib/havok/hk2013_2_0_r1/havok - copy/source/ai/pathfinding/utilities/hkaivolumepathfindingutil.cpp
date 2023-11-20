@@ -14,7 +14,7 @@ void __fastcall hkaiVolumePathfindingUtil::FindPathInput::FindPathInput(hkaiVolu
 
   v2 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiVolumePathfindingUtil::FindPathInput::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiVolumePathfindingUtil::FindPathInput::`vftable;
   *(_QWORD *)&this->m_goalPoints.m_capacityAndFlags = -2147483648i64;
   this->m_goalPoints.m_data = 0i64;
   this->m_goalPoints.m_size = 0;
@@ -73,7 +73,7 @@ void __fastcall hkaiVolumePathfindingUtil::FindPathInput::FindPathInput(hkaiVolu
 // RVA: 0xBF8790
 void __fastcall hkaiVolumePathfindingUtil::FindPathInput::FindPathInput(hkaiVolumePathfindingUtil::FindPathInput *this, hkFinishLoadedObjectFlag f)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiVolumePathfindingUtil::FindPathInput::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiVolumePathfindingUtil::FindPathInput::`vftable;
   this->m_searchBuffers.m_openSetBuffer = 0i64;
   this->m_searchBuffers.m_searchStateBuffer = 0i64;
 }
@@ -82,7 +82,7 @@ void __fastcall hkaiVolumePathfindingUtil::FindPathInput::FindPathInput(hkaiVolu
 // RVA: 0xBF87D0
 void __fastcall hkaiVolumePathfindingUtil::FindPathOutput::FindPathOutput(hkaiVolumePathfindingUtil::FindPathOutput *this, hkFinishLoadedObjectFlag f)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiVolumePathfindingUtil::FindPathOutput::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiVolumePathfindingUtil::FindPathOutput::`vftable;
 }
 
 // File Line: 70
@@ -493,7 +493,7 @@ LABEL_38:
                                                                 _mm_add_ps(
                                                                   _mm_mul_ps(
                                                                     _mm_cvtepi32_ps(_mm_srli_epi32(v51, 0x10u)),
-                                                                    (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                                                                    (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                                                                   _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v51, 0x10u), 0x10u)))),
                                                               v53),
                                                             _mm_add_ps(
@@ -502,7 +502,7 @@ LABEL_38:
                                                                 _mm_add_ps(
                                                                   _mm_mul_ps(
                                                                     _mm_cvtepi32_ps(_mm_srli_epi32(v52, 0x10u)),
-                                                                    (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                                                                    (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                                                                   _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v52, 0x10u), 0x10u)))),
                                                               v53)),
                                                           (__m128)xmmword_141A711B0);

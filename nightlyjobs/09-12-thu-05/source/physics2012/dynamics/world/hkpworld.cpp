@@ -10,7 +10,7 @@ void __fastcall hkpMultithreadConfig::hkpMultithreadConfig(hkpMultithreadConfig 
 void __fastcall hkpWorld::hkpWorld(hkpWorld *this, hkFinishLoadedObjectFlag flag)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpWorld::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpWorld::`vftable;
   this->m_activeSimulationIslands.m_data = 0i64;
   this->m_activeSimulationIslands.m_size = 0;
   this->m_activeSimulationIslands.m_capacityAndFlags = 2147483648;
@@ -311,7 +311,7 @@ void __fastcall hkpWorld::~hkpWorld(hkpWorld *this)
 
   v1 = this->m_multithreadedSimulationJobData;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpWorld::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpWorld::`vftable;
   if ( v1 )
   {
     if ( v1->m_collisionInput.m_spareAgentSector )
@@ -611,7 +611,7 @@ void __fastcall hkpWorld::~hkpWorld(hkpWorld *this)
       8 * v51);
   v2->m_activeSimulationIslands.m_data = 0i64;
   v2->m_activeSimulationIslands.m_capacityAndFlags = 2147483648;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 304
@@ -666,9 +666,9 @@ void __fastcall hkWorld_setupContactMgrFactories(hkpWorld *world, hkpCollisionDi
   if ( v13 )
   {
     *(_DWORD *)(v13 + 8) = 0x1FFFF;
-    *(_QWORD *)v13 = &hkpNullContactMgrFactory::`vftable';
+    *(_QWORD *)v13 = &hkpNullContactMgrFactory::`vftable;
     *(_DWORD *)(v13 + 24) = 0x1FFFF;
-    *(_QWORD *)(v13 + 16) = &hkpNullContactMgr::`vftable';
+    *(_QWORD *)(v13 + 16) = &hkpNullContactMgr::`vftable;
     *(_DWORD *)(v13 + 32) = 3;
   }
   else
@@ -5025,7 +5025,7 @@ void __fastcall hkpWorld::hkpWorld(hkpWorld *this, hkpWorldCinfo *infoBase, unsi
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v3 = this;
   v4 = sdkversion;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpWorld::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpWorld::`vftable;
   this->m_activeSimulationIslands.m_data = 0i64;
   this->m_activeSimulationIslands.m_size = 0;
   this->m_activeSimulationIslands.m_capacityAndFlags = 2147483648;
@@ -5334,8 +5334,8 @@ void __fastcall hkpWorld::hkpWorld(hkpWorld *this, hkpWorldCinfo *infoBase, unsi
   if ( v62 )
   {
     *(_DWORD *)(v62 + 8) = 0x1FFFF;
-    *(_QWORD *)v62 = &hkpPhantomBroadPhaseListener::`vftable'{for `hkReferencedObject'};
-    *(_QWORD *)(v62 + 16) = &hkpPhantomBroadPhaseListener::`vftable'{for `hkpBroadPhaseListener'};
+    *(_QWORD *)v62 = &hkpPhantomBroadPhaseListener::`vftable{for `hkReferencedObject};
+    *(_QWORD *)(v62 + 16) = &hkpPhantomBroadPhaseListener::`vftable{for `hkpBroadPhaseListener};
   }
   else
   {
@@ -5356,8 +5356,8 @@ void __fastcall hkpWorld::hkpWorld(hkpWorld *this, hkpWorldCinfo *infoBase, unsi
   if ( v67 )
   {
     *(_DWORD *)(v67 + 8) = 0x1FFFF;
-    *(_QWORD *)v67 = &hkpBroadPhaseBorderListener::`vftable'{for `hkReferencedObject'};
-    *(_QWORD *)(v67 + 16) = &hkpBroadPhaseBorderListener::`vftable'{for `hkpBroadPhaseListener'};
+    *(_QWORD *)v67 = &hkpBroadPhaseBorderListener::`vftable{for `hkReferencedObject};
+    *(_QWORD *)(v67 + 16) = &hkpBroadPhaseBorderListener::`vftable{for `hkpBroadPhaseListener};
   }
   else
   {
@@ -5463,11 +5463,11 @@ void __fastcall hkpWorld::hkpWorld(hkpWorld *this, hkpWorldCinfo *infoBase, unsi
     {
       hkpCollisionFilter::hkpCollisionFilter(v95);
       v96->m_type.m_storage = 1;
-      v96->vfptr = (hkBaseObjectVtbl *)&hkpNullCollisionFilter::`vftable'{for `hkReferencedObject'};
-      v96->vfptr = (hkpCollidableCollidableFilterVtbl *)&hkpNullCollisionFilter::`vftable'{for `hkpCollidableCollidableFilter'};
-      v96->vfptr = (hkpShapeCollectionFilterVtbl *)&hkpNullCollisionFilter::`vftable'{for `hkpShapeCollectionFilter'};
-      v96->vfptr = (hkpRayShapeCollectionFilterVtbl *)&hkpNullCollisionFilter::`vftable'{for `hkpRayShapeCollectionFilter'};
-      v96->vfptr = (hkpRayCollidableFilterVtbl *)&hkpNullCollisionFilter::`vftable'{for `hkpRayCollidableFilter'};
+      v96->vfptr = (hkBaseObjectVtbl *)&hkpNullCollisionFilter::`vftable{for `hkReferencedObject};
+      v96->vfptr = (hkpCollidableCollidableFilterVtbl *)&hkpNullCollisionFilter::`vftable{for `hkpCollidableCollidableFilter};
+      v96->vfptr = (hkpShapeCollectionFilterVtbl *)&hkpNullCollisionFilter::`vftable{for `hkpShapeCollectionFilter};
+      v96->vfptr = (hkpRayShapeCollectionFilterVtbl *)&hkpNullCollisionFilter::`vftable{for `hkpRayShapeCollectionFilter};
+      v96->vfptr = (hkpRayCollidableFilterVtbl *)&hkpNullCollisionFilter::`vftable{for `hkpRayCollidableFilter};
       v3->m_collisionFilter = v96;
     }
     else
@@ -5489,7 +5489,7 @@ void __fastcall hkpWorld::hkpWorld(hkpWorld *this, hkpWorldCinfo *infoBase, unsi
     if ( v100 )
     {
       *(_DWORD *)(v100 + 8) = 0x1FFFF;
-      *(_QWORD *)v100 = &hkpDefaultConvexListFilter::`vftable';
+      *(_QWORD *)v100 = &hkpDefaultConvexListFilter::`vftable;
       v3->m_convexListFilter = (hkpConvexListFilter *)v100;
     }
     else
@@ -6161,13 +6161,13 @@ void __fastcall hkpWorld::castRay(hkpWorld *this, hkpWorldRayCastInput *input, h
   }
   v11 = v3->m_collisionFilter;
   v12 = v3->m_broadPhase;
-  v18.vfptr = (hkpBroadPhaseCastCollectorVtbl *)&hkpWorldRayCaster::`vftable';
+  v18.vfptr = (hkpBroadPhaseCastCollectorVtbl *)&hkpWorldRayCaster::`vftable;
   v18.m_shapeInput.m_filterInfo = 0;
   v18.m_shapeInput.m_rayShapeCollectionFilter = 0i64;
   v18.m_shapeInput.m_collidable = 0i64;
   v18.m_shapeInput.m_userData = 0i64;
   hkpWorldRayCaster::castRay(&v18, v12, v5, v11, 0i64, v4);
-  v18.vfptr = (hkpBroadPhaseCastCollectorVtbl *)&hkpBroadPhaseCastCollector::`vftable';
+  v18.vfptr = (hkpBroadPhaseCastCollectorVtbl *)&hkpBroadPhaseCastCollector::`vftable;
   v13 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
   v14 = (_QWORD *)v13[1];
   v15 = v13;
@@ -6218,13 +6218,13 @@ void __fastcall hkpWorld::castRay(hkpWorld *this, hkpWorldRayCastInput *input, h
   }
   v11 = v3->m_collisionFilter;
   v12 = v3->m_broadPhase;
-  v18.vfptr = (hkpBroadPhaseCastCollectorVtbl *)&hkpSimpleWorldRayCaster::`vftable';
+  v18.vfptr = (hkpBroadPhaseCastCollectorVtbl *)&hkpSimpleWorldRayCaster::`vftable;
   v18.m_shapeInput.m_filterInfo = 0;
   v18.m_shapeInput.m_rayShapeCollectionFilter = 0i64;
   v18.m_shapeInput.m_collidable = 0i64;
   v18.m_shapeInput.m_userData = 0i64;
   hkpSimpleWorldRayCaster::castRay(&v18, v12, v5, v11, 0i64, v4);
-  v18.vfptr = (hkpBroadPhaseCastCollectorVtbl *)&hkpBroadPhaseCastCollector::`vftable';
+  v18.vfptr = (hkpBroadPhaseCastCollectorVtbl *)&hkpBroadPhaseCastCollector::`vftable;
   v13 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
   v14 = (_QWORD *)v13[1];
   v15 = v13;
@@ -6700,7 +6700,7 @@ void __fastcall hkpWorld::linearCast(hkpWorld *this, hkpCollidable *collA, hkpLi
     *(_DWORD *)(v13 - 8) = v12;
     v11[1] = v13;
   }
-  v21.vfptr = (hkpBroadPhaseCastCollectorVtbl *)&hkpWorldLinearCaster::`vftable';
+  v21.vfptr = (hkpBroadPhaseCastCollectorVtbl *)&hkpWorldLinearCaster::`vftable;
   v14 = v5->m_collisionFilter;
   v21.m_shapeInput.m_maxExtraPenetration = FLOAT_1_1920929eN7;
   filter = (hkpCollidableCollidableFilter *)&v14->vfptr;
@@ -6718,7 +6718,7 @@ void __fastcall hkpWorld::linearCast(hkpWorld *this, hkpCollidable *collA, hkpLi
     0i64,
     v6,
     startPointCollector);
-  v21.vfptr = (hkpBroadPhaseCastCollectorVtbl *)&hkpBroadPhaseCastCollector::`vftable';
+  v21.vfptr = (hkpBroadPhaseCastCollectorVtbl *)&hkpBroadPhaseCastCollector::`vftable;
   v16 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
   v17 = (_QWORD *)v16[1];
   v18 = v16;

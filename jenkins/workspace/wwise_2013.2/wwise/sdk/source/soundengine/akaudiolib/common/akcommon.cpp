@@ -67,7 +67,7 @@ void __fastcall AkDeviceInfo::AkDeviceInfo(AkDeviceInfo *this, AkVPL *in_pOutput
 
   this->pMixBus = in_pOutputBus;
   this->uDeviceID = in_uDeviceID;
-  this->vfptr = (AkDeviceInfoVtbl *)&AkDeviceInfo::`vftable';
+  this->vfptr = (AkDeviceInfoVtbl *)&AkDeviceInfo::`vftable;
   v4 = this;
   this->bCrossDeviceSend = in_bCrossDeviceSend;
   *(_QWORD *)&this->fLPF = 0i64;

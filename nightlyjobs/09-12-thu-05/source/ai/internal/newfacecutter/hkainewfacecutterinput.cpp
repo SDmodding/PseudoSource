@@ -1324,18 +1324,18 @@ void __fastcall hkaiNewFaceCutterUtil::createFacePolygon(hkaiNewFaceCutterUtil::
                     v4->m_externalToInternal.m_col1.m_quad)),
                 _mm_mul_ps(_mm_shuffle_ps(v13, v13, 170), v4->m_externalToInternal.m_col2.m_quad)),
               (__m128)xmmword_141A711B0);
-      v15 = (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v14);
+      v15 = (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v14);
       v16 = _mm_or_si128(
               _mm_add_epi32(
                 _mm_cvttps_epi32(
                   _mm_max_ps(
-                    _mm_sub_ps(v14, _mm_and_ps((__m128)v15, *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31)),
+                    _mm_sub_ps(v14, _mm_and_ps((__m128)v15, *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31)),
                     (__m128)0i64)),
                 _mm_slli_epi32(v15, 0x1Fu)),
               (__m128i)_mm_cmpleps(
                          _mm_add_ps(
-                           *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31,
-                           *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31),
+                           *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31,
+                           *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31),
                          v14));
       v17 = _mm_cmpgt_epi32(v16, v11);
       v18 = _mm_or_si128(_mm_andnot_si128(v17, v16), _mm_and_si128(v11, v17));
@@ -1518,7 +1518,7 @@ void __fastcall hkaiNewFaceCutterUtil::createNonFacePolygon(hkaiNewFaceCutterUti
   v71 = v8;
   if ( (signed int)v3 > 0 )
   {
-    v15 = *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31;
+    v15 = *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31;
     v16 = 16i64 * ((signed int)v3 - 1);
     v17 = 0i64;
     v18 = 0i64;
@@ -1597,7 +1597,7 @@ void __fastcall hkaiNewFaceCutterUtil::createNonFacePolygon(hkaiNewFaceCutterUti
             vertices = verticesa;
             v8[v4].m_xy = v46;
             v8 = iv.m_data;
-            v15 = *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31;
+            v15 = *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31;
             v4 = iv.m_size++ + 1;
           }
         }

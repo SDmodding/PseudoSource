@@ -2,7 +2,7 @@
 // RVA: 0x6D0F60
 void __fastcall Scaleform::GFx::AvmDisplayObjBase::~AvmDisplayObjBase(Scaleform::GFx::AvmDisplayObjBase *this)
 {
-  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmDisplayObjBase::`vftable';
+  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmDisplayObjBase::`vftable;
 }
 
 // File Line: 165

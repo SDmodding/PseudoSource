@@ -27,7 +27,7 @@ void __fastcall UFG::DoorComponent::DoorComponent(UFG::DoorComponent *this, UFG:
   v4 = (UFG::qNode<UFG::DoorComponent,UFG::DoorComponent> *)&v3->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::DoorComponent::`vftable';
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::DoorComponent::`vftable;
   *(_WORD *)&v3->mOpen = 0;
   v3->mAutoCloseInit = 0;
   v3->mAutoCloseTimer = 0.0;
@@ -55,7 +55,7 @@ void __fastcall UFG::DoorComponent::~DoorComponent(UFG::DoorComponent *this)
   UFG::qNode<UFG::DoorComponent,UFG::DoorComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::DoorComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::DoorComponent::`vftable;
   if ( this == UFG::DoorComponent::s_DoorComponentpCurrentIterator )
     UFG::DoorComponent::s_DoorComponentpCurrentIterator = (UFG::DoorComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::DoorComponent,UFG::DoorComponent> *)&this->mPrev;
@@ -540,10 +540,10 @@ void __fastcall UFG::DoorComponent::UpdateLockedState(UFG::DoorComponent *this)
     v13 = v10 + 1;
     v13->mNext = v13;
     v13[1].mNext = v13;
-    v10->mNext = (UFG::allocator::free_link *)&UFG::Event::`vftable';
+    v10->mNext = (UFG::allocator::free_link *)&UFG::Event::`vftable;
     LODWORD(v10[3].mNext) = v12;
     v10[4].mNext = (UFG::allocator::free_link *)v11;
-    v10->mNext = (UFG::allocator::free_link *)&UFG::AiDoorStateChangeEvent::`vftable';
+    v10->mNext = (UFG::allocator::free_link *)&UFG::AiDoorStateChangeEvent::`vftable;
     LODWORD(v10[7].mNext) = v15;
     BYTE4(v10[7].mNext) = v4;
   }

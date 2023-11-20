@@ -104,8 +104,8 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_geom::PerspectiveProjection::
 
   v2 = this;
   Scaleform::GFx::AS3::Instance::Instance((Scaleform::GFx::AS3::Instance *)&this->vfptr, t);
-  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Object::`vftable';
-  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_geom::PerspectiveProjection::`vftable';
+  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Object::`vftable;
+  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_geom::PerspectiveProjection::`vftable;
   v2->pDispObj = 0i64;
   v2->projectionCenter.x = 250.0;
   v2->projectionCenter.y = 250.0;
@@ -165,7 +165,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_geom::PerspectiveProjection::
       Scaleform::GFx::AS3::Value::ReleaseInternal(&v6);
     }
   }
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
 }
 
 // File Line: 85
@@ -344,7 +344,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_geom::PerspectiveProjection::
   v28 = v34;
   v29 = 1065353216;
   v30 = 0;
-  `eh vector constructor iterator'(&ptr, 0x20ui64, 16, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x20ui64, 16, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::Value);
   v10 = 0i64;
   v11 = (Scaleform::GFx::AS3::Value *)&ptr;
   v12 = v36;
@@ -383,7 +383,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_geom::PerspectiveProjection::
     "flash.geom.Matrix3D",
     0x10u,
     (Scaleform::GFx::AS3::Value *)&ptr);
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 16, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 16, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
 }
 
 // File Line: 198
@@ -470,8 +470,8 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v5 )
   {
     Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, v2, &Scaleform::GFx::AS3::fl_geom::PerspectiveProjectionCI);
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable';
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_geom::PerspectiveProjection::`vftable';
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable;
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_geom::PerspectiveProjection::`vftable;
   }
   else
   {
@@ -486,8 +486,8 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
       v7,
       v2,
       &Scaleform::GFx::AS3::fl_geom::PerspectiveProjectionCI);
-    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable';
-    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_geom::PerspectiveProjection::`vftable';
+    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable;
+    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_geom::PerspectiveProjection::`vftable;
   }
   else
   {

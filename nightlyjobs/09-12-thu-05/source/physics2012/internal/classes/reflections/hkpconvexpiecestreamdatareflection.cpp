@@ -31,7 +31,7 @@ hkClass *__fastcall hkpConvexPieceStreamData::staticClass()
 void __fastcall finishLoadedObjecthkpConvexPieceStreamData(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpConvexPieceStreamData::`vftable';
+    *(_QWORD *)p = &hkpConvexPieceStreamData::`vftable;
 }
 
 // File Line: 70
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkpConvexPieceStreamData(void *p)
 // RVA: 0xD990C0
 void **__fastcall getVtablehkpConvexPieceStreamData()
 {
-  return &hkpConvexPieceStreamData::`vftable';
+  return &hkpConvexPieceStreamData::`vftable;
 }
 
 // File Line: 96

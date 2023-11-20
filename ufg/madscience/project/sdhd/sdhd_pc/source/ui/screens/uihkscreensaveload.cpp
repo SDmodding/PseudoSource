@@ -7,7 +7,7 @@ void __fastcall UFG::UIHKScreenSaveLoad::UIHKScreenSaveLoad(UFG::UIHKScreenSaveL
   v1 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -18,7 +18,7 @@ void __fastcall UFG::UIHKScreenSaveLoad::UIHKScreenSaveLoad(UFG::UIHKScreenSaveL
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenSaveLoad::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenSaveLoad::`vftable;
   this->mState = 0;
   this->m_iSlotCount = 0;
   this->m_bHeadersLoaded = 0;
@@ -39,7 +39,7 @@ void __fastcall UFG::UIHKScreenSaveLoad::~UIHKScreenSaveLoad(UFG::UIHKScreenSave
   UFG::UIScreenTextureManager *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenSaveLoad::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenSaveLoad::`vftable;
   v2 = UFG::UIHKScreenGlobalOverlay::mThis;
   if ( !UFG::UIHKScreenGlobalOverlay::mThis )
     v2 = &gGlobalOverlaySentinel;
@@ -165,7 +165,7 @@ void __fastcall UFG::UIHKScreenSaveLoad::init(UFG::UIHKScreenSaveLoad *this, UFG
       v16.Type = 2;
       v16.mValue.BValue = 0;
       Scaleform::GFx::Movie::SetVariable(v4, "mcStorageButton._visible", &v16, 1i64);
-      `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       v5 = UFG::UIHKScreenSaveLoad::mIsSave;
       if ( (v19 >> 6) & 1 )
       {
@@ -212,7 +212,7 @@ void __fastcall UFG::UIHKScreenSaveLoad::init(UFG::UIHKScreenSaveLoad *this, UFG
           0,
           0i64);
       UFG::UIHKScreenSaveLoad::UpdateHelpbar(v2);
-      `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+      `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
       if ( ((unsigned int)v16.Type >> 6) & 1 )
       {
         (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&v16.pObjectInterface->vfptr->gap8[8])(
@@ -354,7 +354,7 @@ void __fastcall UFG::UIHKScreenSaveLoad::SetSlotText(UFG::UIHKScreenSaveLoad *th
   v6 = iSlotNum;
   v7 = this->mRenderable->m_movie.pObject;
   pDtor = (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value;
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( ((unsigned int)pDtor >> 6) & 1 )
   {
     (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v11 + 16i64))(
@@ -383,7 +383,7 @@ void __fastcall UFG::UIHKScreenSaveLoad::SetSlotText(UFG::UIHKScreenSaveLoad *th
   v21 = v9;
   Scaleform::GFx::Movie::Invoke(v7, "SetSlot", 0i64, (Scaleform::GFx::Value *)&ptr, 3u);
   Scaleform::GFx::Movie::Invoke(v7, "SlotList.Refresh", 0i64, 0i64, 0);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   UFG::qString::~qString(v5);
   UFG::qString::~qString(v4);
 }
@@ -1115,12 +1115,12 @@ LABEL_19:
     *(_BYTE *)(v20 + 1) |= COERCE_FLOAT(COERCE_UNSIGNED_INT(v18->HelpBar.mYOffset - -20.0) & _xmm) > 0.001;
     *(_DWORD *)(v20 + 612) = -1046478848;
     UFG::qString::~qString((UFG::qString *)&data.MessageIds[4]);
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       &data.Captions[5].mStringHash32,
       0x28ui64,
       6,
       (void (__fastcall *)(void *))UFG::qString::~qString);
-    `eh vector destructor iterator'(&data.Buttons[4], 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+    `eh vector destructor iterator(&data.Buttons[4], 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
     if ( ((unsigned int)pval.Type >> 6) & 1 )
       (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pval.pObjectInterface->vfptr->gap8[8])(
         pval.pObjectInterface,

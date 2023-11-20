@@ -27,7 +27,7 @@ void __fastcall UFG::AIOutlineComponent::AIOutlineComponent(UFG::AIOutlineCompon
   v3 = (UFG::qNode<UFG::AIOutlineComponent,UFG::AIOutlineComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIOutlineComponent::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIOutlineComponent::`vftable;
   v5 = &v2->m_pTransformNodeComponent;
   v5->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v5->mPrev;
   v5->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v5->mPrev;
@@ -75,7 +75,7 @@ void __fastcall UFG::AIOutlineComponent::~AIOutlineComponent(UFG::AIOutlineCompo
   UFG::qNode<UFG::AIOutlineComponent,UFG::AIOutlineComponent> *v16; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIOutlineComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIOutlineComponent::`vftable;
   if ( !this->mQueueAddToWorld || (this->mQueueAddToWorld = 0, this->mAddedToWorld) )
   {
     if ( this->mAddedToWorld )

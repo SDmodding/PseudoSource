@@ -8,7 +8,7 @@ void __fastcall UFG::ScalingPoseDriver::ScalingPoseDriver(UFG::ScalingPoseDriver
 
   v1 = this;
   PoseDriver::PoseDriver((PoseDriver *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&UFG::ScalingPoseDriver::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&UFG::ScalingPoseDriver::`vftable;
   UFG::qReflectHandleBase::qReflectHandleBase((UFG::qReflectHandleBase *)&v1->mTemplateInstance.mPrev);
   v3 = UFG::qReflectObjectType<UFG::PartTemplateInstance,UFG::qReflectObject>::GetTypeName(v2);
   v1->mTemplateInstance.mTypeUID = UFG::qStringHash64(v3, 0xFFFFFFFFFFFFFFFFui64);

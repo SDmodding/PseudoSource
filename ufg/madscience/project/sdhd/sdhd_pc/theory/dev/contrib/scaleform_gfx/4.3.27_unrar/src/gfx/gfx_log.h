@@ -2,7 +2,7 @@
 // RVA: 0x8A22A0
 void __fastcall Scaleform::GFx::LogBase<Scaleform::GFx::LoaderImpl>::~LogBase<Scaleform::GFx::LoaderImpl>(Scaleform::GFx::LogBase<Scaleform::GFx::LoaderImpl> *this)
 {
-  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::LoaderImpl>Vtbl *)&Scaleform::GFx::LogBase<Scaleform::GFx::LoaderImpl>::`vftable';
+  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::LoaderImpl>Vtbl *)&Scaleform::GFx::LogBase<Scaleform::GFx::LoaderImpl>::`vftable;
 }
 
 // File Line: 223
@@ -14,16 +14,16 @@ void __fastcall Scaleform::GFx::LogState::LogState(Scaleform::GFx::LogState *thi
 
   v2 = log;
   v3 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::State::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::State::`vftable;
   this->SType = 2;
-  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::LogState>Vtbl *)&Scaleform::GFx::LogBase<Scaleform::GFx::LogState>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::LogState::`vftable'{for `Scaleform::GFx::State'};
-  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::LogState>Vtbl *)&Scaleform::GFx::LogState::`vftable'{for `Scaleform::GFx::LogBase<Scaleform::GFx::LogState>'};
+  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::LogState>Vtbl *)&Scaleform::GFx::LogBase<Scaleform::GFx::LogState>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::LogState::`vftable{for `Scaleform::GFx::State};
+  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::LogState>Vtbl *)&Scaleform::GFx::LogState::`vftable{for `Scaleform::GFx::LogBase<Scaleform::GFx::LogState>};
   if ( log )
     Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)log);
   v3->pLog.pObject = v2;

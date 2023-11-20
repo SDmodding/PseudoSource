@@ -29,7 +29,7 @@ void __fastcall UFG::FlowfieldPrint::~FlowfieldPrint(UFG::FlowfieldPrint *this)
   UFG::qList<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList,1,0> *v25; // [rsp+40h] [rbp+8h]
 
   v1 = (UFG::qSafePointerNode<UFG::ParkourHandle> *)this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::FlowfieldPrint>Vtbl *)&UFG::FlowfieldPrint::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::FlowfieldPrint>Vtbl *)&UFG::FlowfieldPrint::`vftable;
   v2 = &this->mpInterest;
   if ( this->mpInterest.m_pPointer )
   {
@@ -95,7 +95,7 @@ void __fastcall UFG::FlowfieldPrint::~FlowfieldPrint(UFG::FlowfieldPrint *this)
   v22->__vecDelDtor = (void *(__fastcall *)(UFG::qSafePointerNode<UFG::ParkourHandle> *, unsigned int))v21;
   *v20 = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)v20;
   v20[1] = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)v20;
-  v1->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::FlowfieldPrint>::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::FlowfieldPrint>::`vftable;
   UFG::qSafePointerNode<UFG::DynamicCoverCorner>::SetAllPointersToNull(v1);
   v25 = &v1->m_SafePointerList;
   UFG::qList<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList,1,0>::DeleteNodes(&v1->m_SafePointerList);
@@ -1791,7 +1791,7 @@ void __fastcall UFG::FFieldPathPrint::FFieldPathPrint(UFG::FFieldPathPrint *this
   v5 = pPathCurve;
   v6 = this;
   UFG::FlowfieldPrint::FlowfieldPrint((UFG::FlowfieldPrint *)&this->vfptr, 1u, iPriority, fStrength);
-  v6->vfptr = (UFG::qSafePointerNode<UFG::FlowfieldPrint>Vtbl *)&UFG::FFieldPathPrint::`vftable';
+  v6->vfptr = (UFG::qSafePointerNode<UFG::FlowfieldPrint>Vtbl *)&UFG::FFieldPathPrint::`vftable;
   v6->mParams.MinTForPerp = 0.0099999998;
   v6->mParams.DistForPerp = 3.0;
   v6->mParams.GlobalSearchDist = 25.0;

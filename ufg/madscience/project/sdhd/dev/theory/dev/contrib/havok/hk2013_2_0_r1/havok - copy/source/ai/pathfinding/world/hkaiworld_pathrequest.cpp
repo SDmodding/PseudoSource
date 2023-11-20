@@ -103,7 +103,7 @@ void __fastcall hkaiWorld::requestPath(hkaiWorld *this, hkaiPathRequestInfoOwner
   if ( v11 )
   {
     *(_DWORD *)(v11 + 8) = 0x1FFFF;
-    *(_QWORD *)v11 = &hkaiNavMeshPathRequestInfo::`vftable';
+    *(_QWORD *)v11 = &hkaiNavMeshPathRequestInfo::`vftable;
     *(_QWORD *)(v11 + 16) = 0i64;
     *(_QWORD *)(v11 + 24) = 0i64;
     *(_DWORD *)(v11 + 32) = 0;
@@ -160,7 +160,7 @@ void __fastcall hkaiWorld::requestPath(hkaiWorld *this, hkaiPathRequestInfoOwner
   if ( v11 )
   {
     *(_DWORD *)(v11 + 8) = 0x1FFFF;
-    *(_QWORD *)v11 = &hkaiNavVolumePathRequestInfo::`vftable';
+    *(_QWORD *)v11 = &hkaiNavVolumePathRequestInfo::`vftable;
     *(_QWORD *)(v11 + 16) = 0i64;
     *(_QWORD *)(v11 + 24) = 0i64;
     *(_DWORD *)(v11 + 32) = 0;
@@ -559,7 +559,7 @@ LABEL_5:
     v19 = *(unsigned __int64 *)(v7[2].m128_u64[0] + 32);
     v12 = _mm_add_epi32(
             _mm_xor_si128(
-              (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v9),
+              (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v9),
               _mm_cvttps_epi32(v9)),
             _mm_loadu_si128((const __m128i *)hkPackedUnitVector_m_offset));
     LOWORD(v17) = _mm_extract_epi16(v12, 1);
@@ -1371,7 +1371,7 @@ LABEL_83:
         if ( v20 )
         {
           *(_DWORD *)(v20 + 8) = 0x1FFFF;
-          *(_QWORD *)v20 = &hkaiVolumePathfindingUtil::FindPathOutput::`vftable';
+          *(_QWORD *)v20 = &hkaiVolumePathfindingUtil::FindPathOutput::`vftable;
           *(_DWORD *)(v20 + 28) = 2147483648;
           *(_QWORD *)(v20 + 16) = 0i64;
           *(_DWORD *)(v20 + 24) = 0;
@@ -1509,7 +1509,7 @@ LABEL_81:
     if ( v50 )
     {
       *(_DWORD *)(v50 + 8) = 0x1FFFF;
-      *(_QWORD *)v50 = &hkaiPathfindingUtil::FindPathOutput::`vftable';
+      *(_QWORD *)v50 = &hkaiPathfindingUtil::FindPathOutput::`vftable;
       *(_DWORD *)(v50 + 28) = 2147483648;
       *(_QWORD *)(v50 + 16) = 0i64;
       *(_DWORD *)(v50 + 24) = 0;
@@ -1708,7 +1708,7 @@ void __fastcall hkaiWorld::stepPathSearches(hkaiWorld *this)
           if ( v8 )
           {
             *(_DWORD *)(v8 + 8) = 0x1FFFF;
-            *(_QWORD *)v8 = &hkaiVolumePathfindingUtil::FindPathOutput::`vftable';
+            *(_QWORD *)v8 = &hkaiVolumePathfindingUtil::FindPathOutput::`vftable;
             *(_QWORD *)(v8 + 16) = 0i64;
             *(_DWORD *)(v8 + 24) = 0;
             *(_DWORD *)(v8 + 28) = 2147483648;
@@ -1747,7 +1747,7 @@ void __fastcall hkaiWorld::stepPathSearches(hkaiWorld *this)
             (hkArrayBase<hkaiWorld::Listener *> *)&v1->m_listeners.m_data,
             v6);
           hkaiVolumePathfindingUtil::FindPathOutput::checkDeterminism(v9);
-          v14 = (hkBaseObjectVtbl *)&hkaiVolumePathfindingUtil::FindPathInput::`vftable';
+          v14 = (hkBaseObjectVtbl *)&hkaiVolumePathfindingUtil::FindPathInput::`vftable;
 LABEL_20:
           v2 -= v9->m_outputParameters.m_numIterations;
           input.m_goalCellKeys.m_size = 0;
@@ -1777,7 +1777,7 @@ LABEL_20:
         if ( v17 )
         {
           *(_DWORD *)(v17 + 8) = 0x1FFFF;
-          *(_QWORD *)v17 = &hkaiPathfindingUtil::FindPathOutput::`vftable';
+          *(_QWORD *)v17 = &hkaiPathfindingUtil::FindPathOutput::`vftable;
           *(_QWORD *)(v17 + 16) = 0i64;
           *(_DWORD *)(v17 + 24) = 0;
           *(_DWORD *)(v17 + 28) = 2147483648;
@@ -1819,7 +1819,7 @@ LABEL_20:
             (hkArrayBase<hkaiWorld::Listener *> *)&v1->m_listeners.m_data,
             v15);
           hkaiPathfindingUtil::FindPathOutput::checkDeterminism((hkaiPathfindingUtil::FindPathOutput *)v9);
-          v14 = (hkBaseObjectVtbl *)&hkaiPathfindingUtil::FindPathInput::`vftable';
+          v14 = (hkBaseObjectVtbl *)&hkaiPathfindingUtil::FindPathInput::`vftable;
           goto LABEL_20;
         }
         generateFailureOutput((hkaiPathfindingUtil::FindPathOutput *)v9);

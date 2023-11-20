@@ -24,7 +24,7 @@ void __fastcall UFG::qValidateChunkFileBuilders(UFG *this)
         i != &UFG::gChunkFileBuilders;
         i = (UFG::qList<UFG::qChunkFileBuilder,UFG::qChunkFileBuilder,1,0> *)i->mNode.mNext )
   {
-    UFG::qPrintf("ERROR:  filename='%s'\n", i[5].mNode.mPrev);
+    UFG::qPrintf("ERROR:  filename=%s\n", i[5].mNode.mPrev);
   }
   UFG::qMutex::Unlock((LPCRITICAL_SECTION)&UFG::gChunkFileBuildersMutex);
 }

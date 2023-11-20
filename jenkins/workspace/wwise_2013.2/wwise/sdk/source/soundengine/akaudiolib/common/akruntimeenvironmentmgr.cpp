@@ -21,7 +21,7 @@ void __fastcall AK::AkRuntimeEnvironmentMgr::AkRuntimeEnvironmentMgr(AK::AkRunti
 
   v1 = 0;
   v2 = this;
-  this->vfptr = (AK::IAkProcessorFeaturesVtbl *)&AK::AkRuntimeEnvironmentMgr::`vftable';
+  this->vfptr = (AK::IAkProcessorFeaturesVtbl *)&AK::AkRuntimeEnvironmentMgr::`vftable;
   *(_QWORD *)&this->ProcessorInfo.uSIMDProcessorSupport = 0i64;
   this->ProcessorInfo.uCacheLineSize = 0;
   _RAX = 0i64;

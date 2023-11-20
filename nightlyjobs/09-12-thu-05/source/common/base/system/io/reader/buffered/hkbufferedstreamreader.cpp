@@ -37,7 +37,7 @@ void __fastcall hkBufferedStreamReader::hkBufferedStreamReader(hkBufferedStreamR
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_stream = s;
-  this->vfptr = (hkBaseObjectVtbl *)&hkBufferedStreamReader::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkBufferedStreamReader::`vftable;
   v3 = this;
   v4 = bufSize;
   this->m_seekStream = (hkSeekableStreamReader *)((__int64 (__fastcall *)(hkStreamReader *))s->vfptr[3].__first_virtual_table_function__)(s);
@@ -52,10 +52,10 @@ void __fastcall hkBufferedStreamReader::~hkBufferedStreamReader(hkBufferedStream
   hkBufferedStreamReader *v1; // rbx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkBufferedStreamReader::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkBufferedStreamReader::`vftable;
   hkReferencedObject::removeReference((hkReferencedObject *)&this->m_stream->vfptr);
   hkBufferedStreamReader::Buffer::~Buffer(&v1->m_buf);
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 52

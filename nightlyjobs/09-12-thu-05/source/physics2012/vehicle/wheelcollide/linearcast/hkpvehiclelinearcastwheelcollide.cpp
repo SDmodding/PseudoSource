@@ -4,13 +4,13 @@ void __fastcall hkpVehicleLinearCastWheelCollide::hkpVehicleLinearCastWheelColli
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_alreadyUsed.m_bool = 0;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpVehicleLinearCastWheelCollide::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpVehicleLinearCastWheelCollide::`vftable;
   this->m_wheelStates.m_capacityAndFlags = 2147483648;
   this->m_wheelStates.m_data = 0i64;
   this->m_wheelStates.m_size = 0;
   *(_DWORD *)&this->m_rejectChassisListener.m_memSizeAndFlags = 0x1FFFF;
-  this->m_rejectChassisListener.vfptr = (hkBaseObjectVtbl *)&hkpRejectChassisListener::`vftable'{for `hkReferencedObject'};
-  this->m_rejectChassisListener.vfptr = (hkpPhantomOverlapListenerVtbl *)&hkpRejectChassisListener::`vftable'{for `hkpPhantomOverlapListener'};
+  this->m_rejectChassisListener.vfptr = (hkBaseObjectVtbl *)&hkpRejectChassisListener::`vftable{for `hkReferencedObject};
+  this->m_rejectChassisListener.vfptr = (hkpPhantomOverlapListenerVtbl *)&hkpRejectChassisListener::`vftable{for `hkpPhantomOverlapListener};
   this->m_maxExtraPenetration = 0.00000011920929;
   this->m_startPointTolerance = 0.00000011920929;
   *(_WORD *)&this->m_alreadyUsed.m_bool = 512;
@@ -164,7 +164,7 @@ void __fastcall hkpVehicleLinearCastWheelCollide::~hkpVehicleLinearCastWheelColl
 
   v1 = this->m_wheelStates.m_size;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpVehicleLinearCastWheelCollide::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpVehicleLinearCastWheelCollide::`vftable;
   if ( v1 > 0 )
   {
     v3 = 0i64;
@@ -197,7 +197,7 @@ void __fastcall hkpVehicleLinearCastWheelCollide::~hkpVehicleLinearCastWheelColl
       96 * (v7 & 0x3FFFFFFF));
   v2->m_wheelStates.m_data = 0i64;
   v2->m_wheelStates.m_capacityAndFlags = 2147483648;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 156
@@ -538,7 +538,7 @@ hkBool *__fastcall hkpVehicleLinearCastWheelCollide::castSingleWheel(hkpVehicleL
   v12.m_quad = (__m128)v7->m_to;
   input.m_maxExtraPenetration = v9;
   input.m_to = (hkVector4f)v12.m_quad;
-  castCollector.vfptr = (hkpCdPointCollectorVtbl *)&hkpClosestCdPointCollector::`vftable';
+  castCollector.vfptr = (hkpCdPointCollectorVtbl *)&hkpClosestCdPointCollector::`vftable;
   v22 = 0i64;
   input.m_startPointTolerance = v5->m_startPointTolerance;
   castCollector.m_earlyOutDistance = FLOAT_3_40282e38;

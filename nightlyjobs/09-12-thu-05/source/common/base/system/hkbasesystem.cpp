@@ -256,7 +256,7 @@ hkResult *__fastcall hkBaseSystem::init(hkResult *result, hkMemoryRouter *memory
     if ( v8 )
     {
       *(_DWORD *)(v8 + 8) = 0x1FFFF;
-      *(_QWORD *)v8 = &hkWin32FileSystem::`vftable';
+      *(_QWORD *)v8 = &hkWin32FileSystem::`vftable;
     }
     else
     {

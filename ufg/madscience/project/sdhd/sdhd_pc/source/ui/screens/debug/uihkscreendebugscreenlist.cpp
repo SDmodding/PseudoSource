@@ -11,7 +11,7 @@ void __fastcall UFG::UIHKScreenDebugScreenList::UIHKScreenDebugScreenList(UFG::U
   v2 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -22,14 +22,14 @@ void __fastcall UFG::UIHKScreenDebugScreenList::UIHKScreenDebugScreenList(UFG::U
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenDebugScreenList::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenDebugScreenList::`vftable;
   this->m_list = 0i64;
   v3 = UFG::qMemoryPool::Allocate(&gScaleformMemoryPool, 0x90ui64, "UIListText", 0i64, 1u);
   v4 = v3;
   if ( v3 )
   {
     UFG::UIList::UIList((UFG::UIList *)v3, (UFG::UIScreen *)&v1->vfptr);
-    v4->mNext = (UFG::allocator::free_link *)&UFG::UIListText::`vftable';
+    v4->mNext = (UFG::allocator::free_link *)&UFG::UIListText::`vftable;
   }
   else
   {
@@ -84,10 +84,10 @@ void __fastcall UFG::UIHKScreenDebugScreenList::init(UFG::UIHKScreenDebugScreenL
       v9 = v6 + 1;
       v9->mNext = v9;
       v9[1].mNext = v9;
-      v6->mNext = (UFG::allocator::free_link *)&UFG::UIItem::`vftable';
+      v6->mNext = (UFG::allocator::free_link *)&UFG::UIItem::`vftable;
       LODWORD(v6[3].mNext) = v8;
       v6[4].mNext = (UFG::allocator::free_link *)v2;
-      v6->mNext = (UFG::allocator::free_link *)&UFG::UIItemText::`vftable';
+      v6->mNext = (UFG::allocator::free_link *)&UFG::UIItemText::`vftable;
       UFG::qString::qString((UFG::qString *)&v6[5], &text);
       v16 = v6 + 10;
       v16->mNext = v16;

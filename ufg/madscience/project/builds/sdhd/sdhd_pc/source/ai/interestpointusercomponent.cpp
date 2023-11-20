@@ -220,7 +220,7 @@ void __fastcall UFG::ActiveInterestPoint::Reset(UFG::ActiveInterestPoint *this)
 // RVA: 0x14AD410
 __int64 dynamic_initializer_for__UFG::InterestPointUserComponent::msaPlayersLastNearest__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     UFG::InterestPointUserComponent::msaPlayersLastNearest.p,
     0x18ui64,
     4,
@@ -272,7 +272,7 @@ void __fastcall UFG::InterestPointUserComponent::InterestPointUserComponent(UFG:
   v3 = (UFG::qNode<UFG::InterestPointUserComponent,UFG::InterestPointUserComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::InterestPointUserComponent::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::InterestPointUserComponent::`vftable;
   *((_BYTE *)v2 + 80) = *((_BYTE *)v2 + 80) & 0xFD | 1;
   v7 = &v2->mLastInterestPoint;
   v7->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::InterestPoint>,UFG::qSafePointerNodeList> *)&v7->mPrev;
@@ -288,7 +288,7 @@ void __fastcall UFG::InterestPointUserComponent::InterestPointUserComponent(UFG:
   v5->mPrev = v5;
   v5->mNext = v5;
   UFG::qSafePointerNode<UFG::InterestPointQuery>::qSafePointerNode<UFG::InterestPointQuery>((UFG::qSafePointerNode<UFG::InterestPointQuery> *)&v2->mInterestPointQuery.vfptr);
-  v4->vfptr = (UFG::qSafePointerNode<UFG::InterestPointQuery>Vtbl *)&UFG::InterestPointQuery::`vftable';
+  v4->vfptr = (UFG::qSafePointerNode<UFG::InterestPointQuery>Vtbl *)&UFG::InterestPointQuery::`vftable;
   v2->mInterestPointQuery.mNavComponent = 0i64;
   v2->mInterestPointQuery.mCandidates.p = 0i64;
   *(_QWORD *)&v2->mInterestPointQuery.mCandidates.size = 0i64;
@@ -362,7 +362,7 @@ void __fastcall UFG::InterestPointUserComponent::~InterestPointUserComponent(UFG
   UFG::qNode<UFG::InterestPointUserComponent,UFG::InterestPointUserComponent> *v26; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::InterestPointUserComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::InterestPointUserComponent::`vftable;
   if ( this == UFG::InterestPointUserComponent::s_InterestPointUserComponentpCurrentIterator )
     UFG::InterestPointUserComponent::s_InterestPointUserComponentpCurrentIterator = (UFG::InterestPointUserComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::InterestPointUserComponent,UFG::InterestPointUserComponent> *)&this->mPrev;
@@ -526,7 +526,7 @@ LABEL_13:
   if ( v9 )
   {
     v10 = &v9[-1].mInterestPoint.m_pPointer;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v9,
       0xF0ui64,
       (int)v9[-1].mInterestPoint.m_pPointer,
@@ -933,7 +933,7 @@ LABEL_27:
   if ( v13 )
   {
     v14 = &v13[-1].mInterestPoint.m_pPointer;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v13,
       0xF0ui64,
       (int)v13[-1].mInterestPoint.m_pPointer,
@@ -1160,7 +1160,7 @@ void __fastcall UFG::InterestPointUserComponent::UpdateUsePOITarget(UFG::Interes
   if ( v7 )
   {
     v8 = (char *)&v7[-1].mInterestPoint.m_pPointer;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v7,
       0xF0ui64,
       (int)v7[-1].mInterestPoint.m_pPointer,

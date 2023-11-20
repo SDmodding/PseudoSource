@@ -49,7 +49,7 @@ void __fastcall finishLoadedObjecthkpPointToPathConstraintData(void *p, int fini
     v2 = finishing;
     v3 = (hkpBridgeConstraintAtom *)p;
     hkpConstraintData::hkpConstraintData((hkpConstraintData *)p, (hkFinishLoadedObjectFlag)finishing);
-    *(_QWORD *)&v3->m_type.m_storage = &hkpPointToPathConstraintData::`vftable';
+    *(_QWORD *)&v3->m_type.m_storage = &hkpPointToPathConstraintData::`vftable;
     if ( v2 )
       hkpBridgeConstraintAtom::init(v3 + 1, v3[1].m_constraintData);
   }
@@ -69,7 +69,7 @@ void **__fastcall getVtablehkpPointToPathConstraintData()
   hkpConstraintData v1; // [rsp+20h] [rbp-D8h]
 
   hkpConstraintData::hkpConstraintData(&v1, 0);
-  return &hkpPointToPathConstraintData::`vftable';
+  return &hkpPointToPathConstraintData::`vftable;
 }
 
 // File Line: 120

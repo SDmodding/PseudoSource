@@ -16,7 +16,7 @@ void __fastcall UFG::PhysicsMotorBike::PhysicsMotorBike(UFG::PhysicsMotorBike *t
     transform,
     velocity,
     wheelPositions);
-  v5->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::PhysicsMotorBike::`vftable';
+  v5->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::PhysicsMotorBike::`vftable;
   v6 = 0i64;
   v5->mLeanAngle = 0.0;
   v5->mWheelieTorqueBoostCounter = 0.0;
@@ -50,7 +50,7 @@ void __fastcall UFG::PhysicsMotorBike::~PhysicsMotorBike(UFG::PhysicsMotorBike *
   hkpConstraintInstance *v4; // rdx
 
   v1 = this;
-  this->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::PhysicsMotorBike::`vftable';
+  this->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::PhysicsMotorBike::`vftable;
   v2 = this->mWheeliePidController;
   if ( v2 )
   {
@@ -70,7 +70,7 @@ void __fastcall UFG::PhysicsMotorBike::~PhysicsMotorBike(UFG::PhysicsMotorBike *
     hkReferencedObject::removeReference((hkReferencedObject *)&v1->mConstraint->vfptr);
     v1->mConstraint = 0i64;
   }
-  v1->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::PhysicsWheeledVehicle::`vftable';
+  v1->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::PhysicsWheeledVehicle::`vftable;
   UFG::PhysicsWheeledVehicle::DeleteWheeledVehicleComponents((UFG::PhysicsWheeledVehicle *)&v1->vfptr);
   UFG::PhysicsVehicle::~PhysicsVehicle((UFG::PhysicsVehicle *)&v1->vfptr);
 }

@@ -9,7 +9,7 @@ AK::IAkPlugin *__fastcall CreateDelayFX(AK::IAkPluginMemAlloc *in_pAllocator)
   v2 = result;
   if ( result )
   {
-    result->vfptr = (AK::IAkPluginVtbl *)&CAkDelayFX::`vftable';
+    result->vfptr = (AK::IAkPluginVtbl *)&CAkDelayFX::`vftable;
     CAkDelayFXDSP::CAkDelayFXDSP((CAkDelayFXDSP *)&result[1]);
     v2[17].vfptr = 0i64;
     v2[18].vfptr = 0i64;

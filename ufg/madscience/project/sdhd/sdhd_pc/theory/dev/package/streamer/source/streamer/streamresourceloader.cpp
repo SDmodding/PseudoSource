@@ -608,7 +608,7 @@ __int64 __fastcall UFG::StreamResourceLoader::LoadInternal(UFG::StreamResourceLo
   else
   {
     UFG::qPrintf(
-      "WARNING: StreamResourceLoader::Load() failed, file_name[%s] since is doesn't exist or has a fileSize of zero\n",
+      "WARNING: StreamResourceLoader::Load() failed, file_name[%s] since is doesnt exist or has a fileSize of zero\n",
       v1->mFilename.mData);
   }
   LOBYTE(v6) = v2 != 0;

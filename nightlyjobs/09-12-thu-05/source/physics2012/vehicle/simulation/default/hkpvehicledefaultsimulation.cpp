@@ -3,7 +3,7 @@
 void __fastcall hkpVehicleDefaultSimulation::hkpVehicleDefaultSimulation(hkpVehicleDefaultSimulation *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpVehicleDefaultSimulation::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpVehicleDefaultSimulation::`vftable;
   *(_QWORD *)&this->m_frictionStatus.m_axis[0].m_forward_slip_velocity = 0i64;
   *(_QWORD *)&this->m_frictionStatus.m_axis[0].m_skid_energy_density = 0i64;
   *(_QWORD *)&this->m_frictionStatus.m_axis[0].m_delayed_forward_impulse = 0i64;
@@ -1239,7 +1239,7 @@ void __fastcall hkpVehicleDefaultSimulation::init(hkpVehicleDefaultSimulation *t
   if ( v20 )
   {
     *(_DWORD *)(v20 + 8) = 0x1FFFF;
-    *(_QWORD *)v20 = &hkpVehicleFrictionDescription::`vftable';
+    *(_QWORD *)v20 = &hkpVehicleFrictionDescription::`vftable;
   }
   else
   {

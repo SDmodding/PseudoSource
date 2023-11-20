@@ -177,7 +177,7 @@ const char *UFG::_dynamic_initializer_for__g_StimulusDescriptions__()
   unk_1423BFAE0 = 1084227584;
   unk_1423BFAE4 = 0x40000000;
   unk_1423BFAD0 = v4;
-  unk_1423BFAD8 = "Notification that there's a dangerous flying object";
+  unk_1423BFAD8 = "Notification that theres a dangerous flying object";
   unk_1423BFAE8 = LODWORD(v1);
   unk_1423BFAEC = LODWORD(v1);
   unk_1423BFAF0 = LODWORD(v1);
@@ -525,7 +525,7 @@ const char *UFG::_dynamic_initializer_for__g_StimulusDescriptions__()
   unk_1423C01A4 = 0x40000000;
   unk_1423C01B4 = 0;
   unk_1423C01B8 = 1120403456;
-  unk_1423C0198 = "Notification that there's a dangerous vehicle nearby";
+  unk_1423C0198 = "Notification that theres a dangerous vehicle nearby";
   unk_1423C01BC = 1084227584;
   unk_1423C01C0 = 0;
   unk_1423C01C4 = 2;
@@ -608,7 +608,7 @@ const char *UFG::_dynamic_initializer_for__g_StimulusDescriptions__()
   unk_1423C0350 = 1203982208i64;
   unk_1423C0364 = 0;
   unk_1423C0368 = 1120403456;
-  unk_1423C0348 = "I always feel like somebody's watching me";
+  unk_1423C0348 = "I always feel like somebodys watching me";
   unk_1423C036C = 1084227584;
   unk_1423C0370 = 0;
   unk_1423C0374 = 0;
@@ -623,7 +623,7 @@ const char *UFG::_dynamic_initializer_for__g_StimulusDescriptions__()
   unk_1423C03AC = 0;
   unk_1423C03B0 = 1120403456;
   unk_1423C03B4 = 1084227584;
-  unk_1423C0390 = "I just taunted a target who's hostile to me";
+  unk_1423C0390 = "I just taunted a target whos hostile to me";
   unk_1423C03B8 = 0;
   unk_1423C03BC = 0;
   unk_1423C03C0 = 36;
@@ -633,7 +633,7 @@ const char *UFG::_dynamic_initializer_for__g_StimulusDescriptions__()
   unk_1423C03EC = LODWORD(v1);
   unk_1423C03F0 = LODWORD(v1);
   unk_1423C03D0 = v40;
-  unk_1423C03D8 = "I just began attacking a target who's hostile to me";
+  unk_1423C03D8 = "I just began attacking a target whos hostile to me";
   unk_1423C03E0 = 1092616192i64;
   unk_1423C03F4 = 0;
   unk_1423C03F8 = 1120403456;
@@ -718,7 +718,7 @@ const char *UFG::_dynamic_initializer_for__g_StimulusDescriptions__()
   unk_1423C059C = LODWORD(v1);
   unk_1423C05A0 = LODWORD(v1);
   unk_1423C0580 = v46;
-  unk_1423C0588 = "I've been directed to attack by my leader";
+  unk_1423C0588 = "Ive been directed to attack by my leader";
   unk_1423C0590 = 1203982208i64;
   unk_1423C05A4 = 1048576000;
   unk_1423C05A8 = 1120403456;
@@ -735,7 +735,7 @@ const char *UFG::_dynamic_initializer_for__g_StimulusDescriptions__()
   unk_1423C05D8 = 1203982208i64;
   unk_1423C05EC = 1048576000;
   unk_1423C05F0 = 1120403456;
-  unk_1423C05D0 = "I've been bumped by someone";
+  unk_1423C05D0 = "Ive been bumped by someone";
   unk_1423C05F4 = 1084227584;
   unk_1423C05F8 = 0;
   unk_1423C05FC = 0;
@@ -1254,7 +1254,7 @@ const char *UFG::_dynamic_initializer_for__g_StimulusDescriptions__()
   unk_1423C1054 = 0;
   unk_1423C1058 = 1120403456;
   unk_1423C105C = 1084227584;
-  unk_1423C1038 = "There's something to take a picture of";
+  unk_1423C1038 = "Theres something to take a picture of";
   unk_1423C1060 = 0;
   unk_1423C1064 = 0;
   unk_1423C1068 = 81;
@@ -1264,7 +1264,7 @@ const char *UFG::_dynamic_initializer_for__g_StimulusDescriptions__()
   unk_1423C1094 = LODWORD(v1);
   unk_1423C1098 = LODWORD(v1);
   unk_1423C1078 = v83;
-  unk_1423C1080 = "There's something to whistle at";
+  unk_1423C1080 = "Theres something to whistle at";
   unk_1423C1088 = 1097859072i64;
   unk_1423C109C = 0;
   unk_1423C10A0 = 1120403456;
@@ -1281,7 +1281,7 @@ const char *UFG::_dynamic_initializer_for__g_StimulusDescriptions__()
   unk_1423C10D0 = 1097859072i64;
   unk_1423C10E4 = 0;
   unk_1423C10E8 = 1120403456;
-  unk_1423C10C8 = "There's something to be disgusted with";
+  unk_1423C10C8 = "Theres something to be disgusted with";
   unk_1423C10EC = 1084227584;
   unk_1423C10F0 = 0;
   unk_1423C10F4 = 0;
@@ -1296,7 +1296,7 @@ const char *UFG::_dynamic_initializer_for__g_StimulusDescriptions__()
   unk_1423C112C = 0;
   unk_1423C1130 = 1120403456;
   unk_1423C1134 = 1084227584;
-  unk_1423C1110 = "There's something to laugh at";
+  unk_1423C1110 = "Theres something to laugh at";
   unk_1423C1138 = 0;
   unk_1423C113C = 0;
   unk_1423C1140 = 84;
@@ -1310,7 +1310,7 @@ const char *UFG::_dynamic_initializer_for__g_StimulusDescriptions__()
   unk_1423C1174 = 0;
   unk_1423C1178 = 1120403456;
   unk_1423C117C = 1084227584;
-  unk_1423C1158 = "There's something to gasp at";
+  unk_1423C1158 = "Theres something to gasp at";
   unk_1423C1180 = 0;
   unk_1423C1184 = 0;
   unk_1423C1188 = 85;
@@ -1323,7 +1323,7 @@ const char *UFG::_dynamic_initializer_for__g_StimulusDescriptions__()
   unk_1423C11A8 = 1097859072i64;
   unk_1423C11BC = 0;
   unk_1423C11C0 = 1120403456;
-  unk_1423C11A0 = "There's something to be scared of";
+  unk_1423C11A0 = "Theres something to be scared of";
   unk_1423C11C4 = 1084227584;
   unk_1423C11C8 = 0;
   unk_1423C11CC = 0;
@@ -1338,7 +1338,7 @@ const char *UFG::_dynamic_initializer_for__g_StimulusDescriptions__()
   unk_1423C1204 = 0;
   unk_1423C1208 = 1120403456;
   unk_1423C120C = 1084227584;
-  unk_1423C11E8 = "There's something to walk to";
+  unk_1423C11E8 = "Theres something to walk to";
   unk_1423C1210 = 0;
   unk_1423C1214 = 0;
   unk_1423C1218 = 87;
@@ -1418,7 +1418,7 @@ const char *UFG::_dynamic_initializer_for__g_StimulusDescriptions__()
   unk_1423C13AC = LODWORD(v1);
   unk_1423C13B0 = LODWORD(v1);
   unk_1423C1390 = v94;
-  unk_1423C1398 = "Hey, someone's singing. Let's check it out!";
+  unk_1423C1398 = "Hey, someones singing. Lets check it out!";
   unk_1423C13A0 = 1101004800i64;
   unk_1423C13B4 = 0;
   unk_1423C13B8 = 1120403456;
@@ -1445,7 +1445,7 @@ const char *UFG::_dynamic_initializer_for__g_StimulusDescriptions__()
   unk_1423C1430 = 1101004800i64;
   unk_1423C1420 = v96;
   unk_1423C1438 = LODWORD(v1);
-  unk_1423C1428 = "Their singing's not that bad!";
+  unk_1423C1428 = "Their singings not that bad!";
   unk_1423C143C = LODWORD(v1);
   unk_1423C1440 = LODWORD(v1);
   unk_1423C1444 = 0;
@@ -1460,7 +1460,7 @@ const char *UFG::_dynamic_initializer_for__g_StimulusDescriptions__()
   unk_1423C1484 = LODWORD(v1);
   unk_1423C1488 = LODWORD(v1);
   unk_1423C1468 = v97;
-  unk_1423C1470 = "Wow. Their singing's impressive!";
+  unk_1423C1470 = "Wow. Their singings impressive!";
   unk_1423C1478 = 1101004800i64;
   unk_1423C148C = 0;
   unk_1423C1490 = 1120403456;

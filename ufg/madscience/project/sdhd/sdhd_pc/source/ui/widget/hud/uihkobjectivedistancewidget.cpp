@@ -906,7 +906,7 @@ void __fastcall UFG::UIHKObjectiveDistanceWidget::Flash_SetColor(UFG::UIHKObject
   v6 = (signed int)(float)(color->g * 255.0);
   v7 = (signed int)(float)(color->b * 255.0);
   pDtor = (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value;
-  `eh vector constructor iterator'(&v13, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&v13, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( ((unsigned int)Scaleform::GFx::Value::~Value >> 6) & 1 )
   {
     (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v10 + 16i64))(
@@ -949,6 +949,6 @@ void __fastcall UFG::UIHKObjectiveDistanceWidget::Flash_SetColor(UFG::UIHKObject
   }
   v12 = v8;
   Scaleform::GFx::Movie::Invoke(v3, "ObjectiveDist_SetType", 0i64, (Scaleform::GFx::Value *)&ptr, 1u);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 

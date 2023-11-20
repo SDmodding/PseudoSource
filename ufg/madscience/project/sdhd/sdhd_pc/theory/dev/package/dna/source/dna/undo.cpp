@@ -170,11 +170,11 @@ void __fastcall DNA::ActionHistory::BeginTransaction(DNA::ActionHistory *this)
       v4 = v2 + 1;
       v4->mNext = v4;
       v4[1].mNext = v4;
-      v2->mNext = (UFG::allocator::free_link *)&DNA::IAction::`vftable';
+      v2->mNext = (UFG::allocator::free_link *)&DNA::IAction::`vftable;
       LOBYTE(v2[3].mNext) = 1;
       HIDWORD(v2[3].mNext) = -764200325;
       LODWORD(v2[4].mNext) = 0;
-      v2->mNext = (UFG::allocator::free_link *)&DNA::Transaction::`vftable';
+      v2->mNext = (UFG::allocator::free_link *)&DNA::Transaction::`vftable;
       v5 = v2 + 5;
       v5->mNext = v5;
       v5[1].mNext = v5;

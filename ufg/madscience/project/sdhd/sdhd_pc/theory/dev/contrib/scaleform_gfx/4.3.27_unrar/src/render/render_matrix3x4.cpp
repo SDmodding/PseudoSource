@@ -14,7 +14,7 @@ void __fastcall Scaleform::Render::Matrix3x4<float>::MultiplyMatrix(Scaleform::R
   v4 = *(__m128 *)&m2->M[1][0];
   v5 = *(__m128 *)&m2->M[0][0];
   v6 = *(__m128 *)&m2->M[2][0];
-  v7 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v;
+  v7 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v;
   v8 = *(__m128 *)&m1->M[2][0];
   v9 = _mm_shuffle_ps(*(__m128 *)&m1->M[1][0], v3, 170);
   *(__m128 *)&this->M[0][0] = _mm_add_ps(
@@ -26,7 +26,7 @@ void __fastcall Scaleform::Render::Matrix3x4<float>::MultiplyMatrix(Scaleform::R
                                       *(__m128 *)&m2->M[0][0])),
                                   _mm_mul_ps(_mm_shuffle_ps(*(__m128 *)&m1->M[0][0], *(__m128 *)&m1->M[0][0], 170), v6)),
                                 _mm_and_ps(
-                                  (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v,
+                                  (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v,
                                   *(__m128 *)&m1->M[0][0]));
   *(__m128 *)&this->M[1][0] = _mm_add_ps(
                                 _mm_add_ps(
@@ -57,7 +57,7 @@ void __fastcall Scaleform::Render::Matrix3x4<float>::MultiplyMatrix(Scaleform::R
   v3 = *(__m128 *)&m1->M[1][0];
   v4 = *(__m128 *)&m2->M[0][0];
   v5 = *(__m128 *)&m2->M[1][0];
-  v6 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,4294967295,4294967295>'::`2'::v;
+  v6 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,4294967295,4294967295>::`2::v;
   v7 = *(__m128 *)&m1->M[2][0];
   *(__m128 *)&this->M[0][0] = _mm_add_ps(
                                 _mm_add_ps(
@@ -66,7 +66,7 @@ void __fastcall Scaleform::Render::Matrix3x4<float>::MultiplyMatrix(Scaleform::R
                                     _mm_shuffle_ps(*(__m128 *)&m1->M[0][0], *(__m128 *)&m1->M[0][0], 0),
                                     *(__m128 *)&m2->M[0][0])),
                                 _mm_and_ps(
-                                  (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,4294967295,4294967295>'::`2'::v,
+                                  (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,4294967295,4294967295>::`2::v,
                                   *(__m128 *)&m1->M[0][0]));
   *(__m128 *)&this->M[1][0] = _mm_add_ps(
                                 _mm_add_ps(
@@ -95,7 +95,7 @@ void __fastcall Scaleform::Render::Matrix3x4<float>::MultiplyMatrix(Scaleform::R
   v4 = *(__m128 *)&m2->M[1][0];
   v5 = *(__m128 *)&m2->M[2][0];
   v6 = *(__m128 *)&m1->M[1][0];
-  v7 = _mm_and_ps((__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v, v6);
+  v7 = _mm_and_ps((__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v, v6);
   v8 = _mm_shuffle_ps(*(__m128 *)&m1->M[1][0], v6, 0);
   *(__m128 *)&this->M[0][0] = _mm_add_ps(
                                 _mm_add_ps(
@@ -106,7 +106,7 @@ void __fastcall Scaleform::Render::Matrix3x4<float>::MultiplyMatrix(Scaleform::R
                                       *(__m128 *)&m2->M[0][0])),
                                   _mm_mul_ps(_mm_shuffle_ps(*(__m128 *)&m1->M[0][0], *(__m128 *)&m1->M[0][0], 170), v5)),
                                 _mm_and_ps(
-                                  (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v,
+                                  (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v,
                                   *(__m128 *)&m1->M[0][0]));
   *(__m128 *)&this->M[1][0] = _mm_add_ps(
                                 _mm_add_ps(

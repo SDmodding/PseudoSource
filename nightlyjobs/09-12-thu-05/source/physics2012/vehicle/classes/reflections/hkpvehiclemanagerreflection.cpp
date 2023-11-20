@@ -31,7 +31,7 @@ hkClass *__fastcall hkpVehicleManager::staticClass()
 void __fastcall finishLoadedObjecthkpVehicleManager(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpVehicleManager::`vftable';
+    *(_QWORD *)p = &hkpVehicleManager::`vftable;
 }
 
 // File Line: 71
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkpVehicleManager(void *p)
 // RVA: 0xE25C50
 void **__fastcall getVtablehkpVehicleManager()
 {
-  return &hkpVehicleManager::`vftable';
+  return &hkpVehicleManager::`vftable;
 }
 
 // File Line: 97

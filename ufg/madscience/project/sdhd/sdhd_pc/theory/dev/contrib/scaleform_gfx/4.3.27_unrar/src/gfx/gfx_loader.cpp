@@ -170,8 +170,8 @@ void __fastcall Scaleform::GFx::Loader::Loader(Scaleform::GFx::Loader *this, Sca
   v3 = (Scaleform::GFx::Resource **)pzlib;
   v4 = pfileOpener;
   v5 = this;
-  this->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::StateBag::`vftable';
-  this->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::Loader::`vftable';
+  this->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::StateBag::`vftable;
+  this->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::Loader::`vftable;
   cfg.DefLoadFlags = 0;
   if ( pfileOpener->pObject )
     Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)pfileOpener->pObject);
@@ -197,14 +197,14 @@ void __fastcall Scaleform::GFx::Loader::~Loader(Scaleform::GFx::Loader *this)
   Scaleform::Render::RenderBuffer *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::Loader::`vftable';
+  this->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::Loader::`vftable;
   v2 = (Scaleform::Render::RenderBuffer *)this->pImpl;
   if ( v2 )
     Scaleform::RefCountImpl::Release(v2);
   v3 = (Scaleform::Render::RenderBuffer *)v1->pStrongResourceLib;
   if ( v3 )
     Scaleform::RefCountImpl::Release(v3);
-  v1->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::StateBag::`vftable';
+  v1->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::StateBag::`vftable;
 }
 
 // File Line: 334
@@ -245,14 +245,14 @@ void __fastcall Scaleform::GFx::Loader::InitLoader(Scaleform::GFx::Loader *this,
            32i64);
     if ( v7 )
     {
-      *(_QWORD *)v7 = &Scaleform::RefCountImplCore::`vftable';
+      *(_QWORD *)v7 = &Scaleform::RefCountImplCore::`vftable;
       *(_DWORD *)(v7 + 8) = 1;
-      *(_QWORD *)v7 = &Scaleform::RefCountImpl::`vftable';
-      *(_QWORD *)v7 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-      *(_QWORD *)v7 = &Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable';
-      *(_QWORD *)v7 = &Scaleform::GFx::State::`vftable';
+      *(_QWORD *)v7 = &Scaleform::RefCountImpl::`vftable;
+      *(_QWORD *)v7 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+      *(_QWORD *)v7 = &Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable;
+      *(_QWORD *)v7 = &Scaleform::GFx::State::`vftable;
       *(_DWORD *)(v7 + 16) = 16;
-      *(_QWORD *)v7 = &Scaleform::GFx::ParseControl::`vftable';
+      *(_QWORD *)v7 = &Scaleform::GFx::ParseControl::`vftable;
       *(_DWORD *)(v7 + 24) = 0;
     }
     else

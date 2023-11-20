@@ -197,12 +197,12 @@ void __fastcall NISManager::~NISManager(NISManager *this)
   v11->mPrev = v10;
   v7->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v7->mPrev;
   v1->mDisabledVehicle.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v1->mDisabledVehicle.mPrev;
-  v12 = `UFG::qGetResourceInventory<UFG::NISSpatialData>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::NISSpatialData>'::`2'::result )
+  v12 = `UFG::qGetResourceInventory<UFG::NISSpatialData>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::NISSpatialData>::`2::result )
   {
     v13 = UFG::qResourceWarehouse::Instance();
     v12 = UFG::qResourceWarehouse::GetInventory(v13, 0x59362AA3u);
-    `UFG::qGetResourceInventory<UFG::NISSpatialData>'::`2'::result = v12;
+    `UFG::qGetResourceInventory<UFG::NISSpatialData>::`2::result = v12;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mSpatialDataHandle.mPrev, v12);
   UFG::qResourceHandle::~qResourceHandle((UFG::qResourceHandle *)&v1->mSpatialDataHandle.mPrev);
@@ -387,12 +387,12 @@ void __fastcall NISManager::Reset(NISManager *this)
 
   v1 = this;
   ActionController::Stop(&this->mActionController);
-  v2 = `UFG::qGetResourceInventory<UFG::NISSpatialData>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::NISSpatialData>'::`2'::result )
+  v2 = `UFG::qGetResourceInventory<UFG::NISSpatialData>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::NISSpatialData>::`2::result )
   {
     v3 = UFG::qResourceWarehouse::Instance();
     v2 = UFG::qResourceWarehouse::GetInventory(v3, 0x59362AA3u);
-    `UFG::qGetResourceInventory<UFG::NISSpatialData>'::`2'::result = v2;
+    `UFG::qGetResourceInventory<UFG::NISSpatialData>::`2::result = v2;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mSpatialDataHandle.mPrev, v2);
   if ( v1->mpDynamicOutline )
@@ -800,12 +800,12 @@ LABEL_46:
   else
     v19 = BinString::sEmptyString;
   v20 = UFG::qStringHash32(v19, 0xFFFFFFFF);
-  v21 = `UFG::qGetResourceInventory<UFG::NISSpatialData>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::NISSpatialData>'::`2'::result )
+  v21 = `UFG::qGetResourceInventory<UFG::NISSpatialData>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::NISSpatialData>::`2::result )
   {
     v22 = UFG::qResourceWarehouse::Instance();
     v21 = UFG::qResourceWarehouse::GetInventory(v22, 0x59362AA3u);
-    `UFG::qGetResourceInventory<UFG::NISSpatialData>'::`2'::result = v21;
+    `UFG::qGetResourceInventory<UFG::NISSpatialData>::`2::result = v21;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v1->mSpatialDataHandle.mPrev, 0x59362AA3u, v20, v21);
   v23 = v1->mSpatialDataHandle.mData;
@@ -970,12 +970,12 @@ void __fastcall NISManager::ResetNISSettings(NISManager *this)
   if ( v5 != -1 )
     Render::EnableLightLayer(v5, 1);
   UFG::TimeOfDayManager::GetInstance()->mGlobalIlluminationBlend = 1.0;
-  v6 = `UFG::qGetResourceInventory<UFG::NISSpatialData>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::NISSpatialData>'::`2'::result )
+  v6 = `UFG::qGetResourceInventory<UFG::NISSpatialData>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::NISSpatialData>::`2::result )
   {
     v7 = UFG::qResourceWarehouse::Instance();
     v6 = UFG::qResourceWarehouse::GetInventory(v7, 0x59362AA3u);
-    `UFG::qGetResourceInventory<UFG::NISSpatialData>'::`2'::result = v6;
+    `UFG::qGetResourceInventory<UFG::NISSpatialData>::`2::result = v6;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mSpatialDataHandle.mPrev, v6);
   if ( v1->mpDynamicOutline )

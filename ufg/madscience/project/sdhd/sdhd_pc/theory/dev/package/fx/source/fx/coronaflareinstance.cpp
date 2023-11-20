@@ -16,21 +16,21 @@ void __fastcall Render::CoronaFlareInstance::Init(Render::CoronaFlareInstance *t
   this->mSettingsId = settingsId;
   if ( !v2 )
   {
-    v5 = `UFG::qGetResourceInventory<Render::CoronaFlareSettings>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Render::CoronaFlareSettings>'::`2'::result )
+    v5 = `UFG::qGetResourceInventory<Render::CoronaFlareSettings>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Render::CoronaFlareSettings>::`2::result )
     {
       v6 = UFG::qResourceWarehouse::Instance();
       v5 = UFG::qResourceWarehouse::GetInventory(v6, 0xB76CCFB8);
-      `UFG::qGetResourceInventory<Render::CoronaFlareSettings>'::`2'::result = v5;
+      `UFG::qGetResourceInventory<Render::CoronaFlareSettings>::`2::result = v5;
     }
     UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v4->mCoronaFlare.mSettings.mPrev, v5);
   }
-  v7 = `UFG::qGetResourceInventory<Render::CoronaFlareSettings>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Render::CoronaFlareSettings>'::`2'::result )
+  v7 = `UFG::qGetResourceInventory<Render::CoronaFlareSettings>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Render::CoronaFlareSettings>::`2::result )
   {
     v8 = UFG::qResourceWarehouse::Instance();
     v7 = UFG::qResourceWarehouse::GetInventory(v8, 0xB76CCFB8);
-    `UFG::qGetResourceInventory<Render::CoronaFlareSettings>'::`2'::result = v7;
+    `UFG::qGetResourceInventory<Render::CoronaFlareSettings>::`2::result = v7;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v4->mCoronaFlare.mSettings.mPrev, 0xB76CCFB8, v3, v7);
 }

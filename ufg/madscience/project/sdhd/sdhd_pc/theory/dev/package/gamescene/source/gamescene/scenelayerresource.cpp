@@ -31,7 +31,7 @@ __int64 UFG::_dynamic_initializer_for__gSceneLayerInventory__()
     0xE7F23AEE,
     0,
     0);
-  UFG::gSceneLayerInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::SceneLayerInventory::`vftable';
+  UFG::gSceneLayerInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::SceneLayerInventory::`vftable;
   UFG::gSceneLayerInventory.mPurgedScriptUIDs.p = 0i64;
   *(_QWORD *)&UFG::gSceneLayerInventory.mPurgedScriptUIDs.size = 0i64;
   return atexit(UFG::_dynamic_atexit_destructor_for__gSceneLayerInventory__);
@@ -45,13 +45,13 @@ void __fastcall UFG::SceneLayerInventory::PrintContents(UFG::SceneLayerInventory
   UFG::qBaseTreeRB *i; // rbx
 
   v1 = this;
-  UFG::qPrintf("Contents of Inventory '%.64s' %d items\n", this->mName, this->mNumResourceData);
+  UFG::qPrintf("Contents of Inventory %.64s %d items\n", this->mName, this->mNumResourceData);
   for ( i = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&v1->mResourceDatas);
         i;
         i = UFG::qBaseTreeRB::GetNext(&v1->mResourceDatas.mTree, &i->mRoot) )
   {
     UFG::qPrintf(
-      "  - Resource TypeUID:0x%08x DataUID:0x%08x Memory:0x%08x Name:'%.36s'\n",
+      "  - Resource TypeUID:0x%08x DataUID:0x%08x Memory:0x%08x Name:%.36s\n",
       LODWORD(i->mNULL.mChild[1]),
       i->mRoot.mUID,
       i,

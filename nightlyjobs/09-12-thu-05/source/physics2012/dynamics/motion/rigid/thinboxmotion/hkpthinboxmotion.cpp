@@ -6,7 +6,7 @@ void __fastcall hkpThinBoxMotion::hkpThinBoxMotion(hkpThinBoxMotion *this, hkVec
 
   v3 = this;
   hkpBoxMotion::hkpBoxMotion((hkpBoxMotion *)&this->vfptr, position, rotation);
-  v3->vfptr = (hkBaseObjectVtbl *)&hkpThinBoxMotion::`vftable';
+  v3->vfptr = (hkBaseObjectVtbl *)&hkpThinBoxMotion::`vftable;
   v3->m_type.m_storage = 6;
 }
 

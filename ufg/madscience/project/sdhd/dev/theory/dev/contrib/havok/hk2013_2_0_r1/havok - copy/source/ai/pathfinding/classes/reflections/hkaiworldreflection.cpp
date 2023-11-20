@@ -31,7 +31,7 @@ hkClass *__fastcall hkaiNavMeshPathRequestInfo::staticClass()
 void __fastcall finishLoadedObjecthkaiNavMeshPathRequestInfo(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiNavMeshPathRequestInfo::`vftable';
+    *(_QWORD *)p = &hkaiNavMeshPathRequestInfo::`vftable;
 }
 
 // File Line: 95
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkaiNavMeshPathRequestInfo(void *p)
 // RVA: 0xBB6C50
 void **__fastcall getVtablehkaiNavMeshPathRequestInfo()
 {
-  return &hkaiNavMeshPathRequestInfo::`vftable';
+  return &hkaiNavMeshPathRequestInfo::`vftable;
 }
 
 // File Line: 121
@@ -97,7 +97,7 @@ hkClass *__fastcall hkaiNavVolumePathRequestInfo::staticClass()
 void __fastcall finishLoadedObjecthkaiNavVolumePathRequestInfo(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiNavVolumePathRequestInfo::`vftable';
+    *(_QWORD *)p = &hkaiNavVolumePathRequestInfo::`vftable;
 }
 
 // File Line: 166
@@ -111,7 +111,7 @@ void __fastcall cleanupLoadedObjecthkaiNavVolumePathRequestInfo(void *p)
 // RVA: 0xBB6C90
 void **__fastcall getVtablehkaiNavVolumePathRequestInfo()
 {
-  return &hkaiNavVolumePathRequestInfo::`vftable';
+  return &hkaiNavVolumePathRequestInfo::`vftable;
 }
 
 // File Line: 192

@@ -50,9 +50,9 @@ void __fastcall hkInspectProcess::hkInspectProcess(hkInspectProcess *this, hkArr
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_selectable.m_bool = 1;
-  this->vfptr = (hkBaseObjectVtbl *)&hkInspectProcess::`vftable'{for `hkReferencedObject'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkInspectProcess::`vftable{for `hkReferencedObject};
   v2 = this;
-  this->vfptr = (hkProcessVtbl *)&hkInspectProcess::`vftable'{for `hkProcess'};
+  this->vfptr = (hkProcessVtbl *)&hkInspectProcess::`vftable{for `hkProcess};
   this->m_autoUpdateList.m_data = 0i64;
   this->m_autoUpdateList.m_size = 0;
   this->m_autoUpdateList.m_capacityAndFlags = 2147483648;
@@ -92,9 +92,9 @@ void __fastcall hkInspectProcess::~hkInspectProcess(hkInspectProcess *this)
   int v5; // er8
 
   v1 = this->m_vdb;
-  this->vfptr = (hkBaseObjectVtbl *)&hkInspectProcess::`vftable'{for `hkReferencedObject'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkInspectProcess::`vftable{for `hkReferencedObject};
   v2 = this;
-  this->vfptr = (hkProcessVtbl *)&hkInspectProcess::`vftable'{for `hkProcess'};
+  this->vfptr = (hkProcessVtbl *)&hkInspectProcess::`vftable{for `hkProcess};
   if ( v1 )
   {
     v3 = 0;
@@ -122,8 +122,8 @@ void __fastcall hkInspectProcess::~hkInspectProcess(hkInspectProcess *this)
       16 * v5);
   v2->m_autoUpdateList.m_data = 0i64;
   v2->m_autoUpdateList.m_capacityAndFlags = 2147483648;
-  v2->vfptr = (hkProcessVtbl *)&hkProcess::`vftable';
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v2->vfptr = (hkProcessVtbl *)&hkProcess::`vftable;
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 81
@@ -179,7 +179,7 @@ void __fastcall hkInspectProcess::init(hkInspectProcess *this)
       hkOArchive::write64u(*(hkOArchive **)&v1->m_selectable.m_bool, (unsigned __int64)v4);
       ++v3;
     }
-    while ( (signed __int64)v3 < (signed __int64)&hkInspectProcess `RTTI Type Descriptor' );
+    while ( (signed __int64)v3 < (signed __int64)&hkInspectProcess `RTTI Type Descriptor );
     v5 = v1->m_autoUpdateList.m_data;
     v6 = 0;
     if ( SLODWORD(v5[4].klass) > 0 )

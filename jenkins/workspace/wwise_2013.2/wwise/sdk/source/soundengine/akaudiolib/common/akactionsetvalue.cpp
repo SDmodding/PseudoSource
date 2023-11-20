@@ -6,14 +6,14 @@ void __fastcall CAkActionSetValue::CAkActionSetValue(CAkActionSetValue *this, Ak
 
   v3 = this;
   CAkActionExcept::CAkActionExcept((CAkActionExcept *)&this->vfptr, in_eActionType, in_ulID);
-  v3->vfptr = (CAkIndexableVtbl *)&CAkActionSetValue::`vftable';
+  v3->vfptr = (CAkIndexableVtbl *)&CAkActionSetValue::`vftable;
 }
 
 // File Line: 35
 // RVA: 0xA9E740
 void __fastcall CAkActionSetValue::~CAkActionSetValue(CAkActionSetValue *this)
 {
-  this->vfptr = (CAkIndexableVtbl *)&CAkActionSetValue::`vftable';
+  this->vfptr = (CAkIndexableVtbl *)&CAkActionSetValue::`vftable;
   CAkActionExcept::~CAkActionExcept((CAkActionExcept *)&this->vfptr);
 }
 

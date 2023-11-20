@@ -8,15 +8,15 @@ void __fastcall hkaiSingleCharacterBehavior::hkaiSingleCharacterBehavior(hkaiSin
 
   v3 = world;
   v4 = character;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiBehavior::`vftable'{for `hkReferencedObject'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiBehavior::`vftable{for `hkReferencedObject};
   v5 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkaiPathRequestInfoOwnerVtbl *)&hkaiBehavior::`vftable'{for `hkaiPathRequestInfoOwner'};
+  this->vfptr = (hkaiPathRequestInfoOwnerVtbl *)&hkaiBehavior::`vftable{for `hkaiPathRequestInfoOwner};
   if ( world )
     hkReferencedObject::addReference((hkReferencedObject *)&world->vfptr);
   v5->m_world.m_pntr = v3;
-  v5->vfptr = (hkBaseObjectVtbl *)&hkaiSingleCharacterBehavior::`vftable'{for `hkReferencedObject'};
-  v5->vfptr = (hkaiPathRequestInfoOwnerVtbl *)&hkaiSingleCharacterBehavior::`vftable'{for `hkaiPathRequestInfoOwner'};
+  v5->vfptr = (hkBaseObjectVtbl *)&hkaiSingleCharacterBehavior::`vftable{for `hkReferencedObject};
+  v5->vfptr = (hkaiPathRequestInfoOwnerVtbl *)&hkaiSingleCharacterBehavior::`vftable{for `hkaiPathRequestInfoOwner};
   if ( v4 )
     hkReferencedObject::addReference((hkReferencedObject *)&v4->vfptr);
   v5->m_character.m_pntr = v4;
@@ -31,21 +31,21 @@ void __fastcall hkaiSingleCharacterBehavior::~hkaiSingleCharacterBehavior(hkaiSi
   hkReferencedObject *v3; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiSingleCharacterBehavior::`vftable'{for `hkReferencedObject'};
-  this->vfptr = (hkaiPathRequestInfoOwnerVtbl *)&hkaiSingleCharacterBehavior::`vftable'{for `hkaiPathRequestInfoOwner'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiSingleCharacterBehavior::`vftable{for `hkReferencedObject};
+  this->vfptr = (hkaiPathRequestInfoOwnerVtbl *)&hkaiSingleCharacterBehavior::`vftable{for `hkaiPathRequestInfoOwner};
   hkaiSingleCharacterBehavior::cancelRequestedPath(this);
   v2 = (hkReferencedObject *)&v1->m_character.m_pntr->vfptr;
   if ( v2 )
     hkReferencedObject::removeReference(v2);
   v1->m_character.m_pntr = 0i64;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkaiBehavior::`vftable'{for `hkReferencedObject'};
-  v1->vfptr = (hkaiPathRequestInfoOwnerVtbl *)&hkaiBehavior::`vftable'{for `hkaiPathRequestInfoOwner'};
+  v1->vfptr = (hkBaseObjectVtbl *)&hkaiBehavior::`vftable{for `hkReferencedObject};
+  v1->vfptr = (hkaiPathRequestInfoOwnerVtbl *)&hkaiBehavior::`vftable{for `hkaiPathRequestInfoOwner};
   v3 = (hkReferencedObject *)&v1->m_world.m_pntr->vfptr;
   if ( v3 )
     hkReferencedObject::removeReference(v3);
   v1->m_world.m_pntr = 0i64;
-  v1->vfptr = (hkaiPathRequestInfoOwnerVtbl *)&hkaiPathRequestInfoOwner::`vftable';
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkaiPathRequestInfoOwnerVtbl *)&hkaiPathRequestInfoOwner::`vftable;
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 26

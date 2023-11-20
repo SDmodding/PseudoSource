@@ -22,8 +22,8 @@ void __fastcall hkpWorldExtension::requireExtension<hkpCollisionCallbackUtil>(hk
     if ( v5 )
     {
       hkpWorldExtension::hkpWorldExtension(v5, 1001);
-      v6->vfptr = (hkBaseObjectVtbl *)&hkpCollisionCallbackUtil::`vftable'{for `hkpWorldExtension'};
-      v6[1].vfptr = (hkBaseObjectVtbl *)&hkpCollisionCallbackUtil::`vftable'{for `hkpConstraintListener'};
+      v6->vfptr = (hkBaseObjectVtbl *)&hkpCollisionCallbackUtil::`vftable{for `hkpWorldExtension};
+      v6[1].vfptr = (hkBaseObjectVtbl *)&hkpCollisionCallbackUtil::`vftable{for `hkpConstraintListener};
       hkpEndOfStepCallbackUtil::hkpEndOfStepCallbackUtil((hkpEndOfStepCallbackUtil *)&v6[1].m_memSizeAndFlags);
     }
     else

@@ -14,7 +14,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_text::TextLineMetrics> *_
   if ( v4 )
   {
     Scaleform::GFx::AS3::Instances::fl::Object::Object(v4, (Scaleform::GFx::AS3::InstanceTraits::Traits *)&v2->vfptr);
-    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_text::TextLineMetrics::`vftable';
+    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_text::TextLineMetrics::`vftable;
     v5->ascent = 0.0;
     v5->descent = 0.0;
     v5->height = 0.0;

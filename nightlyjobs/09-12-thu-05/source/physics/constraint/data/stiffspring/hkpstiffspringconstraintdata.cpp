@@ -3,7 +3,7 @@
 void __fastcall hkpStiffSpringConstraintData::hkpStiffSpringConstraintData(hkpStiffSpringConstraintData *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpStiffSpringConstraintData::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpStiffSpringConstraintData::`vftable;
   this->m_userData = 0i64;
   this->m_atoms.m_pivots.m_type.m_storage = 3;
   this->m_atoms.m_setupStabilization.m_type.m_storage = 23;

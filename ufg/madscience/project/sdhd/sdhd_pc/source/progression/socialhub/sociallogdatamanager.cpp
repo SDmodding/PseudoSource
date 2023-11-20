@@ -215,7 +215,7 @@ void __fastcall UFG::SocialLogDataManager::UpdateChallengeStatus(UFG::SocialLogD
               if ( v8 )
               {
                 UFG::SocialLogData::SocialLogData((UFG::SocialLogData *)v8);
-                v9->mNext = (UFG::allocator::free_link *)&UFG::SocialLogData_Challenge::`vftable';
+                v9->mNext = (UFG::allocator::free_link *)&UFG::SocialLogData_Challenge::`vftable;
                 LODWORD(v9[24].mNext) = 0;
                 v9[25].mNext = 0i64;
               }
@@ -340,7 +340,7 @@ UFG::SocialLogDataManager *__fastcall UFG::SocialLogDataManager::GetList(UFG::So
               if ( v16 )
               {
                 UFG::SocialLogData::SocialLogData((UFG::SocialLogData *)v16);
-                v13->mNext = (UFG::allocator::free_link *)&UFG::SocialLogData_NewHighScore::`vftable';
+                v13->mNext = (UFG::allocator::free_link *)&UFG::SocialLogData_NewHighScore::`vftable;
                 LODWORD(v13[24].mNext) = 0;
                 v13[25].mNext = 0i64;
               }
@@ -367,7 +367,7 @@ LABEL_31:
               if ( v15 )
               {
                 UFG::SocialLogData::SocialLogData((UFG::SocialLogData *)v15);
-                v13->mNext = (UFG::allocator::free_link *)&UFG::SocialLogData_AwardAchieved::`vftable';
+                v13->mNext = (UFG::allocator::free_link *)&UFG::SocialLogData_AwardAchieved::`vftable;
                 v13[24].mNext = 0i64;
               }
               else
@@ -382,7 +382,7 @@ LABEL_31:
               if ( v14 )
               {
                 UFG::SocialLogData::SocialLogData((UFG::SocialLogData *)v14);
-                v13->mNext = (UFG::allocator::free_link *)&UFG::SocialLogData_BeatChallenge::`vftable';
+                v13->mNext = (UFG::allocator::free_link *)&UFG::SocialLogData_BeatChallenge::`vftable;
                 LODWORD(v13[24].mNext) = 0;
                 v13[25].mNext = 0i64;
               }
@@ -398,7 +398,7 @@ LABEL_31:
               if ( v12 )
               {
                 UFG::SocialLogData::SocialLogData((UFG::SocialLogData *)v12);
-                v13->mNext = (UFG::allocator::free_link *)&UFG::SocialLogData_Challenge::`vftable';
+                v13->mNext = (UFG::allocator::free_link *)&UFG::SocialLogData_Challenge::`vftable;
                 LODWORD(v13[24].mNext) = 0;
                 v13[25].mNext = 0i64;
               }

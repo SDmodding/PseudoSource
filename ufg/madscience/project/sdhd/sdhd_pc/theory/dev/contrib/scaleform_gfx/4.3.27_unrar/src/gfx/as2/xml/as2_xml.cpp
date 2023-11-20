@@ -11,13 +11,13 @@ void __fastcall Scaleform::GFx::AS2::XMLFileLoaderAndParserImpl::XMLFileLoaderAn
   v5 = objMgr;
   v6 = pparser;
   v7 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,326>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::AS2::XMLFileLoader,326>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS2::XMLFileLoader::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS2::XMLFileLoaderAndParserImpl::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,326>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::AS2::XMLFileLoader,326>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS2::XMLFileLoader::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS2::XMLFileLoaderAndParserImpl::`vftable;
   if ( pparser )
     Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)pparser);
   v7->pParser.pObject = v6;
@@ -156,8 +156,8 @@ void __fastcall Scaleform::GFx::AS2::XMLFileLoaderAndParserImpl::InitASXml(Scale
     v26.pNode = v11;
     if ( v11 )
     {
-      v11->pData = (const char *)&Scaleform::GFx::XML::ShadowRefBase::`vftable';
-      v11->pData = (const char *)&Scaleform::GFx::AS2::XMLShadowRef::`vftable';
+      v11->pData = (const char *)&Scaleform::GFx::XML::ShadowRefBase::`vftable;
+      v11->pData = (const char *)&Scaleform::GFx::AS2::XMLShadowRef::`vftable;
       v11->pManager = 0i64;
       v11->pLower = 0i64;
     }
@@ -493,8 +493,8 @@ LABEL_29:
   v37.pNode = v25;
   if ( v25 )
   {
-    v25->pData = (const char *)&Scaleform::GFx::XML::ShadowRefBase::`vftable';
-    v25->pData = (const char *)&Scaleform::GFx::AS2::XMLShadowRef::`vftable';
+    v25->pData = (const char *)&Scaleform::GFx::XML::ShadowRefBase::`vftable;
+    v25->pData = (const char *)&Scaleform::GFx::AS2::XMLShadowRef::`vftable;
     v25->pManager = 0i64;
     v25->pLower = 0i64;
   }
@@ -540,8 +540,8 @@ void __fastcall Scaleform::GFx::AS2::XmlObject::XmlObject(Scaleform::GFx::AS2::X
   v2 = penv;
   v3 = this;
   Scaleform::GFx::AS2::XmlNodeObject::XmlNodeObject((Scaleform::GFx::AS2::XmlNodeObject *)&this->vfptr, penv);
-  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::XmlObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::XmlObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::XmlObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::XmlObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   v4 = Scaleform::GFx::AS2::GlobalContext::GetPrototype(v2->StringContext.pContext, ASBuiltin_XML);
   Scaleform::GFx::AS2::Object::Set__proto__((Scaleform::GFx::AS2::Object *)&v3->vfptr, &v2->StringContext, v4);
   v3->BytesLoadedCurrent = -1.0;
@@ -692,11 +692,11 @@ void __fastcall Scaleform::GFx::AS2::XmlObject::NotifyOnData(Scaleform::GFx::AS2
   v8 = ((_QWORD)((char *)v4->Stack.pCurrent - (char *)v4->Stack.pPageStart) >> 5) + 32 * v4->Stack.Pages.Data.Size - 32;
   if ( v5 )
   {
-    pcallback.vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)`Scaleform::GFx::AS2::AsBroadcaster::BroadcastMessage'::`4'::LocalInvokeCallback::`vftable';
+    pcallback.vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)`Scaleform::GFx::AS2::AsBroadcaster::BroadcastMessage::`4::LocalInvokeCallback::`vftable;
     v13 = 1;
     v14 = v8;
     Scaleform::GFx::AS2::AsBroadcaster::BroadcastMessageWithCallback(v4, v5, v7, &pcallback);
-    pcallback.vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)&Scaleform::GFx::AS2::AsBroadcaster::InvokeCallback::`vftable';
+    pcallback.vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)&Scaleform::GFx::AS2::AsBroadcaster::InvokeCallback::`vftable;
   }
   v9 = result.pNode;
   v10 = result.pNode->RefCount == 1;
@@ -765,7 +765,7 @@ void __fastcall Scaleform::GFx::AS2::XmlObject::NotifyOnLoad(Scaleform::GFx::AS2
   v12 = ((_QWORD)((char *)v4->Stack.pCurrent - (char *)v4->Stack.pPageStart) >> 5) + 32 * v4->Stack.Pages.Data.Size - 32;
   if ( v7 )
   {
-    *(_QWORD *)&v15.T.Type = `Scaleform::GFx::AS2::AsBroadcaster::BroadcastMessage'::`4'::LocalInvokeCallback::`vftable';
+    *(_QWORD *)&v15.T.Type = `Scaleform::GFx::AS2::AsBroadcaster::BroadcastMessage::`4::LocalInvokeCallback::`vftable;
     v15.NV.Int32Value = 1;
     HIDWORD(v15.NV.NumberValue) = v12;
     Scaleform::GFx::AS2::AsBroadcaster::BroadcastMessageWithCallback(
@@ -773,7 +773,7 @@ void __fastcall Scaleform::GFx::AS2::XmlObject::NotifyOnLoad(Scaleform::GFx::AS2
       v7,
       v11,
       (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallback *)&v15);
-    *(_QWORD *)&v15.T.Type = &Scaleform::GFx::AS2::AsBroadcaster::InvokeCallback::`vftable';
+    *(_QWORD *)&v15.T.Type = &Scaleform::GFx::AS2::AsBroadcaster::InvokeCallback::`vftable;
   }
   v13 = result.pNode;
   v9 = result.pNode->RefCount == 1;
@@ -828,9 +828,9 @@ void __fastcall Scaleform::GFx::AS2::XmlProto::XmlProto(Scaleform::GFx::AS2::Xml
     psc,
     prototype,
     constructor);
-  v5->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::XmlProto::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  v5->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::XmlProto::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
-  v5->vfptr = (Scaleform::GFx::AS2::GASPrototypeBaseVtbl *)&Scaleform::GFx::AS2::XmlProto::`vftable';
+  v5->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::XmlProto::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  v5->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::XmlProto::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+  v5->vfptr = (Scaleform::GFx::AS2::GASPrototypeBaseVtbl *)&Scaleform::GFx::AS2::XmlProto::`vftable;
   flags.Flags = 6;
   Scaleform::GFx::AS2::GASPrototypeBase::InitFunctionMembers(
     (Scaleform::GFx::AS2::GASPrototypeBase *)&v5->vfptr,
@@ -963,7 +963,7 @@ void __fastcall Scaleform::GFx::AS2::XmlProto::DefaultOnData(Scaleform::GFx::AS2
   if ( !v2 || (*(unsigned int (**)(void))&v2->vfptr->gap8[8])() != 28 )
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "XML");
 }
 
@@ -999,7 +999,7 @@ void __fastcall Scaleform::GFx::AS2::XmlProto::AddRequestHeader(Scaleform::GFx::
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "XML");
   }
 }
@@ -1121,12 +1121,12 @@ void __fastcall Scaleform::GFx::AS2::XmlProto::CreateElement(Scaleform::GFx::AS2
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "XML");
   }
 }or(
       v1->Env,
-      "Error: Null or invalid 'this
+      "Error: Null or invalid this
 
 // File Line: 662
 // RVA: 0x6AB6D0
@@ -1245,12 +1245,12 @@ void __fastcall Scaleform::GFx::AS2::XmlProto::CreateTextNode(Scaleform::GFx::AS
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "XML");
   }
 }or(
       v1->Env,
-      "Error: Null or invalid 'thi
+      "Error: Null or invalid thi
 
 // File Line: 687
 // RVA: 0x6ABAC0
@@ -1294,7 +1294,7 @@ void __fastcall Scaleform::GFx::AS2::XmlProto::GetBytesLoaded(Scaleform::GFx::AS
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "XML");
   }
 }
@@ -1341,7 +1341,7 @@ void __fastcall Scaleform::GFx::AS2::XmlProto::GetBytesTotal(Scaleform::GFx::AS2
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "XML");
   }
 }
@@ -1409,7 +1409,7 @@ void __fastcall Scaleform::GFx::AS2::XmlProto::Load(Scaleform::GFx::AS2::FnCall 
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "XML");
     return;
   }
@@ -1596,13 +1596,13 @@ LABEL_45:
       v44 = v27;
       if ( v27 )
       {
-        v27->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+        v27->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
         v27->RefCount = 1;
-        v27->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-        v27->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,326>::`vftable';
-        v27->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::AS2::XMLFileLoader,326>::`vftable';
-        v27->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS2::XMLFileLoader::`vftable';
-        v27->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS2::XMLFileLoaderImpl::`vftable';
+        v27->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+        v27->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,326>::`vftable;
+        v27->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::AS2::XMLFileLoader,326>::`vftable;
+        v27->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS2::XMLFileLoader::`vftable;
+        v27->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS2::XMLFileLoaderImpl::`vftable;
         v27[1].vfptr = 0i64;
         v27[1].RefCount = 0;
       }
@@ -1718,7 +1718,7 @@ void __fastcall Scaleform::GFx::AS2::XmlProto::ParseXML(Scaleform::GFx::AS2::FnC
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "XML");
   }
 }
@@ -1752,7 +1752,7 @@ void __fastcall Scaleform::GFx::AS2::XmlProto::Send(Scaleform::GFx::AS2::FnCall 
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "XML");
   }
 }
@@ -1786,7 +1786,7 @@ void __fastcall Scaleform::GFx::AS2::XmlProto::SendAndLoad(Scaleform::GFx::AS2::
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "XML");
   }
 }
@@ -1935,10 +1935,10 @@ Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::XmlCtorFunctio
   if ( v8 )
   {
     Scaleform::GFx::AS2::Object::Object(v8, &psc);
-    v10->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    v10->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
-    v10->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    v10->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+    v10->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    v10->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+    v10->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    v10->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
     v10[1].vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)Scaleform::GFx::AS2::XmlCtorFunction::GlobalCtor;
     v11 = Scaleform::GFx::AS2::GlobalContext::GetPrototype(psc.pContext, ASBuiltin_Function);
     if ( !v10->pProto.pObject )
@@ -1967,8 +1967,8 @@ Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::XmlCtorFunctio
       }
     }
     v10->pProto.pObject = v11;
-    v10->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::XmlCtorFunction::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    v10->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::XmlCtorFunction::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+    v10->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::XmlCtorFunction::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    v10->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::XmlCtorFunction::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   }
   else
   {

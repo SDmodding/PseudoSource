@@ -29,7 +29,7 @@ void __fastcall UFG::FaceActionComponent::FaceActionComponent(UFG::FaceActionCom
   v3 = (UFG::qNode<UFG::FaceActionComponent,UFG::FaceActionComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::FaceActionComponent::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::FaceActionComponent::`vftable;
   v2->m_DebugDrawEnabled = 0;
   UFG::RebindingComponentHandle<UFG::TargetingSystemBaseComponent,0>::RebindingComponentHandle<UFG::TargetingSystemBaseComponent,0>(&v2->mTargetingSystemBaseComponent);
   UFG::RebindingComponentHandle<UFG::StimulusReceiverComponent,0>::RebindingComponentHandle<UFG::StimulusReceiverComponent,0>(&v2->mStimulusReceiverComponent);
@@ -119,7 +119,7 @@ void __fastcall UFG::FaceActionComponent::~FaceActionComponent(UFG::FaceActionCo
   UFG::qNode<UFG::FaceActionComponent,UFG::FaceActionComponent> *v10; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::FaceActionComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::FaceActionComponent::`vftable;
   if ( this->mAnimationGroupHandleContainer.m_bHasBeenBound )
     AnimationGroupHandleContainer::Unbind(&this->mAnimationGroupHandleContainer);
   UFG::FaceActionComponent::ResetState(v1);

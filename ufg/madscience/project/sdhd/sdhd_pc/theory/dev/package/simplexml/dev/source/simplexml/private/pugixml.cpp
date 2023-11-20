@@ -159,7 +159,7 @@ pugi::xml_attribute_struct *__fastcall pugi::xml_node_struct::append_attribute(p
 
 // File Line: 322
 // RVA: 0x8CBC0
-char *__fastcall `anonymous namespace'::strutf16_utf8(char *s, unsigned int ch)
+char *__fastcall `anonymous namespace::strutf16_utf8(char *s, unsigned int ch)
 {
   unsigned int v2; // eax
   __int64 v3; // r8
@@ -226,7 +226,7 @@ LABEL_9:
 
 // File Line: 482
 // RVA: 0x8C670
-void __fastcall `anonymous namespace'::gap::push(gap *this, char **s, unsigned __int64 count)
+void __fastcall `anonymous namespace::gap::push(gap *this, char **s, unsigned __int64 count)
 {
   char **v3; // rdi
   unsigned __int64 v4; // rsi
@@ -246,7 +246,7 @@ void __fastcall `anonymous namespace'::gap::push(gap *this, char **s, unsigned _
 
 // File Line: 511
 // RVA: 0x8C9A0
-char *__fastcall `anonymous namespace'::strconv_escape(char *s, gap *g)
+char *__fastcall `anonymous namespace::strconv_escape(char *s, gap *g)
 {
   char v2; // r8
   char *v3; // rax
@@ -334,7 +334,7 @@ char *__fastcall `anonymous namespace'::strconv_escape(char *s, gap *g)
         return v6;
     }
     sa = v3;
-    `anonymous namespace'::gap::push(g, &sa, v6 + 1 - v3);
+    `anonymous namespace::gap::push(g, &sa, v6 + 1 - v3);
     return v6 + 1;
   }
   v9 = s[2];
@@ -388,7 +388,7 @@ LABEL_35:
     return v6;
 LABEL_43:
   ++v6;
-  v14 = `anonymous namespace'::strutf16_utf8(v5, v10);
+  v14 = `anonymous namespace::strutf16_utf8(v5, v10);
   v15 = v14;
   v16 = v6 - v14;
   if ( v4->end )
@@ -400,7 +400,7 @@ LABEL_43:
 
 // File Line: 629
 // RVA: 0x8C8A0
-char *__fastcall `anonymous namespace'::strconv_comment(char *s)
+char *__fastcall `anonymous namespace::strconv_comment(char *s)
 {
   char *v1; // rbx
   char *result; // rax
@@ -459,7 +459,7 @@ char *__fastcall `anonymous namespace'::strconv_comment(char *s)
 
 // File Line: 659
 // RVA: 0x8C7A0
-char *__fastcall `anonymous namespace'::strconv_cdata(char *s)
+char *__fastcall `anonymous namespace::strconv_cdata(char *s)
 {
   char *v1; // rbx
   char *result; // rax
@@ -518,7 +518,7 @@ char *__fastcall `anonymous namespace'::strconv_cdata(char *s)
 
 // File Line: 689
 // RVA: 0x89160
-char *__fastcall `anonymous namespace'::strconv_pcdata_t<0,1>(char *s)
+char *__fastcall `anonymous namespace::strconv_pcdata_t<0,1>(char *s)
 {
   char *result; // rax
   char *v2; // rbx
@@ -545,7 +545,7 @@ char *__fastcall `anonymous namespace'::strconv_pcdata_t<0,1>(char *s)
         v4 = *v2;
         if ( *v2 != 38 )
           break;
-        v2 = `anonymous namespace'::strconv_escape(v2, &g);
+        v2 = `anonymous namespace::strconv_escape(v2, &g);
       }
       if ( v4 == 60 )
         break;
@@ -569,7 +569,7 @@ char *__fastcall `anonymous namespace'::strconv_pcdata_t<0,1>(char *s)
 
 // File Line: 737
 // RVA: 0x882D0
-char *__fastcall `anonymous namespace'::strconv_attribute_t<0,1,1,1>(char *s, char end_quote)
+char *__fastcall `anonymous namespace::strconv_attribute_t<0,1,1,1>(char *s, char end_quote)
 {
   char v2; // bp
   char *v3; // rbx
@@ -631,7 +631,7 @@ LABEL_8:
           v10 = *v3;
           if ( *v3 != 38 )
             break;
-          v11 = `anonymous namespace'::strconv_escape(v3, &g);
+          v11 = `anonymous namespace::strconv_escape(v3, &g);
           v7 = (char *)g.size;
           v5 = g.end;
           v3 = v11;
@@ -695,59 +695,59 @@ LABEL_8:
 
 // File Line: 815
 // RVA: 0x8C6E0
-char *__fastcall `anonymous namespace'::strconv_attribute(char *s, char end_quote, unsigned int optmask)
+char *__fastcall `anonymous namespace::strconv_attribute(char *s, char end_quote, unsigned int optmask)
 {
   char *result; // rax
 
   switch ( (unsigned __int8)optmask >> 4 )
   {
     case 0:
-      result = `anonymous namespace'::strconv_attribute_t<0,0,0,0>(s, end_quote);
+      result = `anonymous namespace::strconv_attribute_t<0,0,0,0>(s, end_quote);
       break;
     case 1:
-      result = `anonymous namespace'::strconv_attribute_t<0,0,0,1>(s, end_quote);
+      result = `anonymous namespace::strconv_attribute_t<0,0,0,1>(s, end_quote);
       break;
     case 2:
-      result = `anonymous namespace'::strconv_attribute_t<0,0,1,0>(s, end_quote);
+      result = `anonymous namespace::strconv_attribute_t<0,0,1,0>(s, end_quote);
       break;
     case 3:
-      result = `anonymous namespace'::strconv_attribute_t<0,0,1,1>(s, end_quote);
+      result = `anonymous namespace::strconv_attribute_t<0,0,1,1>(s, end_quote);
       break;
     case 4:
-      result = `anonymous namespace'::strconv_attribute_t<1,1,0,0>(s, end_quote);
+      result = `anonymous namespace::strconv_attribute_t<1,1,0,0>(s, end_quote);
       break;
     case 5:
-      result = `anonymous namespace'::strconv_attribute_t<0,1,0,1>(s, end_quote);
+      result = `anonymous namespace::strconv_attribute_t<0,1,0,1>(s, end_quote);
       break;
     case 6:
-      result = `anonymous namespace'::strconv_attribute_t<1,1,1,0>(s, end_quote);
+      result = `anonymous namespace::strconv_attribute_t<1,1,1,0>(s, end_quote);
       break;
     case 7:
-      result = `anonymous namespace'::strconv_attribute_t<0,1,1,1>(s, end_quote);
+      result = `anonymous namespace::strconv_attribute_t<0,1,1,1>(s, end_quote);
       break;
     case 8:
-      result = `anonymous namespace'::strconv_attribute_t<1,0,0,0>(s, end_quote);
+      result = `anonymous namespace::strconv_attribute_t<1,0,0,0>(s, end_quote);
       break;
     case 9:
-      result = `anonymous namespace'::strconv_attribute_t<1,0,0,1>(s, end_quote);
+      result = `anonymous namespace::strconv_attribute_t<1,0,0,1>(s, end_quote);
       break;
     case 0xA:
-      result = `anonymous namespace'::strconv_attribute_t<1,0,1,0>(s, end_quote);
+      result = `anonymous namespace::strconv_attribute_t<1,0,1,0>(s, end_quote);
       break;
     case 0xB:
-      result = `anonymous namespace'::strconv_attribute_t<1,0,1,1>(s, end_quote);
+      result = `anonymous namespace::strconv_attribute_t<1,0,1,1>(s, end_quote);
       break;
     case 0xC:
-      result = `anonymous namespace'::strconv_attribute_t<1,1,0,0>(s, end_quote);
+      result = `anonymous namespace::strconv_attribute_t<1,1,0,0>(s, end_quote);
       break;
     case 0xD:
-      result = `anonymous namespace'::strconv_attribute_t<0,1,0,1>(s, end_quote);
+      result = `anonymous namespace::strconv_attribute_t<0,1,0,1>(s, end_quote);
       break;
     case 0xE:
-      result = `anonymous namespace'::strconv_attribute_t<1,1,1,0>(s, end_quote);
+      result = `anonymous namespace::strconv_attribute_t<1,1,1,0>(s, end_quote);
       break;
     case 0xF:
-      result = `anonymous namespace'::strconv_attribute_t<0,1,1,1>(s, end_quote);
+      result = `anonymous namespace::strconv_attribute_t<0,1,1,1>(s, end_quote);
       break;
     default:
       result = 0i64;
@@ -758,7 +758,7 @@ char *__fastcall `anonymous namespace'::strconv_attribute(char *s, char end_quot
 
 // File Line: 864
 // RVA: 0x8BBD0
-char __fastcall `anonymous namespace'::xml_parser::parse(xml_parser *this, char *s, pugi::xml_node_struct *xmldoc, unsigned int optmsk, UFG::qString *error_string, unsigned int *line_count)
+char __fastcall `anonymous namespace::xml_parser::parse(xml_parser *this, char *s, pugi::xml_node_struct *xmldoc, unsigned int optmsk, UFG::qString *error_string, unsigned int *line_count)
 {
   unsigned int v6; // er12
   char *v7; // rbx
@@ -909,13 +909,13 @@ LABEL_279:
       switch ( (v6 >> 4) & 3 )
       {
         case 1u:
-          v19 = `anonymous namespace'::strconv_pcdata_t<0,1>(v14);
+          v19 = `anonymous namespace::strconv_pcdata_t<0,1>(v14);
           break;
         case 2u:
-          v19 = `anonymous namespace'::strconv_pcdata_t<1,0>(v14);
+          v19 = `anonymous namespace::strconv_pcdata_t<1,0>(v14);
           break;
         case 3u:
-          v19 = `anonymous namespace'::strconv_pcdata_t<1,1>(v14);
+          v19 = `anonymous namespace::strconv_pcdata_t<1,1>(v14);
           break;
         default:
           return 0;
@@ -923,7 +923,7 @@ LABEL_279:
     }
     else
     {
-      v19 = `anonymous namespace'::strconv_pcdata_t<0,0>(v14);
+      v19 = `anonymous namespace::strconv_pcdata_t<0,0>(v14);
     }
     v13 = v19;
     if ( !v19 )
@@ -1079,7 +1079,7 @@ $LOC_TAG:
             v36->value = v35;
             if ( v6 & 0x20 )
             {
-              v37 = `anonymous namespace'::strconv_cdata(v35);
+              v37 = `anonymous namespace::strconv_cdata(v35);
               v38 = v37 == 0i64;
             }
             else
@@ -1221,7 +1221,7 @@ LABEL_155:
       }
       if ( v6 & 0x20 && v6 & 2 )
       {
-        v7 = `anonymous namespace'::strconv_comment(v34);
+        v7 = `anonymous namespace::strconv_comment(v34);
         if ( !v7 )
           return 0;
       }
@@ -1429,7 +1429,7 @@ LABEL_263:
             return 0;
           v59 = v55 + 1;
           v53->value = v59;
-          v60 = `anonymous namespace'::strconv_attribute(v59, v58, v6);
+          v60 = `anonymous namespace::strconv_attribute(v59, v58, v6);
           v7 = v60;
           if ( !v60 )
             return 0;
@@ -1636,7 +1636,7 @@ signed __int64 __fastcall pugi::xml_document::load(pugi::xml_document *this, con
   v11 = v7->_root;
   v12.alloc = (pugi::xml_allocator *)&v7->_root[1];
   v12._filename = v7->_filename;
-  if ( `anonymous namespace'::xml_parser::parse(&v12, v9, v11, v4, 0i64, 0i64) )
+  if ( `anonymous namespace::xml_parser::parse(&v12, v9, v11, v4, 0i64, 0i64) )
   {
     v7->_buffer = v9;
     result = 0i64;
@@ -1702,7 +1702,7 @@ signed __int64 __fastcall pugi::xml_document::load_file(pugi::xml_document *this
   v17 = v5->_root;
   v18.alloc = (pugi::xml_allocator *)&v5->_root[1];
   v18._filename = v5->_filename;
-  if ( `anonymous namespace'::xml_parser::parse(&v18, v9, v17, v7, v6, lineNumber) )
+  if ( `anonymous namespace::xml_parser::parse(&v18, v9, v17, v7, v6, lineNumber) )
   {
     v5->_buffer = v9;
     result = 0i64;

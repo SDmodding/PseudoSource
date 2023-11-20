@@ -3,7 +3,7 @@
 void __fastcall hkDefaultError::hkDefaultError(hkDefaultError *this, void (__fastcall *errorReportFunction)(const char *, void *), void *errorReportObject)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkDefaultError::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkDefaultError::`vftable;
   this->m_disabledAssertIds.m_map.m_hashMod = -1;
   this->m_disabledAssertIds.m_map.m_elem = 0i64;
   this->m_disabledAssertIds.m_map.m_numElems = 0;

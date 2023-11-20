@@ -105,7 +105,7 @@ void __fastcall UFG::UIHKWorldMapCollectiblesStatsWidget::PopulateHealthShrine(U
   LODWORD(pDtor) = v4;
   UFG::qString::Format(&v24, "%s: %d / %d", v10, v3, pDtor);
   pDtor = (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value;
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( (v17 >> 6) & 1 )
   {
     (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v16 + 16i64))(v16, &ptr, v18);
@@ -122,7 +122,7 @@ void __fastcall UFG::UIHKWorldMapCollectiblesStatsWidget::PopulateHealthShrine(U
   v21 = 6;
   v22 = v11;
   Scaleform::GFx::Movie::Invoke(v2, "PopulateCollectiblesStats", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   UFG::qString::~qString(&v24);
 }
 
@@ -197,7 +197,7 @@ LABEL_17:
     LODWORD(pDtor) = v7;
     UFG::qString::Format(&v29, "%s: %d / %d", v13, v6, pDtor);
     pDtor = (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value;
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( ((unsigned int)stat >> 6) & 1 )
     {
       (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v17 + 16i64))(v17, &ptr, v20);
@@ -214,7 +214,7 @@ LABEL_17:
     v23 = 6;
     v24 = v14;
     Scaleform::GFx::Movie::Invoke(v2, "PopulateCollectiblesStats", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     UFG::qString::~qString(&v29);
     ++v3;
   }
@@ -284,7 +284,7 @@ LABEL_16:
     v11 = (__int64)v6;
   LODWORD(pDtor) = total;
   UFG::qString::Format(&v22, "%s: %d / %d", v11, v5, pDtor);
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( (v16 >> 6) & 1 )
   {
     (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v15 + 16i64))(v15, &ptr, v17);
@@ -301,7 +301,7 @@ LABEL_16:
   v20 = 6;
   v21 = v12;
   Scaleform::GFx::Movie::Invoke(v7, "PopulateCollectiblesStats", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   UFG::qString::~qString(&v22);
 }
 

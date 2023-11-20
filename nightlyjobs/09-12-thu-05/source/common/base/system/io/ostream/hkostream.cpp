@@ -38,7 +38,7 @@ void __fastcall hkOstream::hkOstream(hkOstream *this, hkStreamWriter *sw)
   v2 = sw;
   v3 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkOstream::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkOstream::`vftable;
   if ( sw )
   {
     hkReferencedObject::addReference((hkReferencedObject *)&sw->vfptr);
@@ -62,7 +62,7 @@ void __fastcall hkOstream::hkOstream(hkOstream *this, const char *filename)
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkOstream::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkOstream::`vftable;
   this->m_writer.m_pntr = 0i64;
   v3 = (hkStreamWriter **)((__int64 (__fastcall *)(hkFileSystem *, char *, const char *, signed __int64))hkSingleton<hkFileSystem>::s_instance->vfptr[2].__vecDelDtor)(
                             hkSingleton<hkFileSystem>::s_instance,
@@ -93,7 +93,7 @@ void __fastcall hkOstream::hkOstream(hkOstream *this, void *mem, int memSize, hk
   v12 = isString.m_bool;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v4 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkOstream::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkOstream::`vftable;
   v5 = 0i64;
   v6 = memSize;
   this->m_writer.m_pntr = 0i64;
@@ -125,7 +125,7 @@ void __fastcall hkOstream::hkOstream(hkOstream *this, hkArray<char,hkContainerHe
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkOstream::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkOstream::`vftable;
   v3 = 0i64;
   v4 = buf;
   this->m_writer.m_pntr = 0i64;
@@ -155,7 +155,7 @@ void __fastcall hkOstream::hkOstream(hkOstream *this, hkMemoryTrack *buf)
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkOstream::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkOstream::`vftable;
   this->m_writer.m_pntr = 0i64;
   v3 = buf;
   v4 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
@@ -165,7 +165,7 @@ void __fastcall hkOstream::hkOstream(hkOstream *this, hkMemoryTrack *buf)
   {
     *(_DWORD *)(v5 + 8) = 0x1FFFF;
     *(_QWORD *)(v5 + 16) = v3;
-    *(_QWORD *)v5 = &hkMemoryTrackStreamWriter::`vftable';
+    *(_QWORD *)v5 = &hkMemoryTrackStreamWriter::`vftable;
     *(_DWORD *)(v5 + 24) = 1;
   }
   else
@@ -186,12 +186,12 @@ void __fastcall hkOstream::~hkOstream(hkOstream *this)
   hkStreamWriter *v2; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkOstream::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkOstream::`vftable;
   v2 = this->m_writer.m_pntr;
   if ( v2 )
     hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
   v1->m_writer.m_pntr = 0i64;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 71

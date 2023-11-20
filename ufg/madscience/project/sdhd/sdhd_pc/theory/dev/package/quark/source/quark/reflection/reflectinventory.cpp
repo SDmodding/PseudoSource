@@ -70,7 +70,7 @@ __int64 UFG::_dynamic_initializer_for__gRootInventory__()
     (UFG::qReflectInventoryBase *)&UFG::gRootInventory.vfptr,
     "UFG::qReflectObject",
     v1);
-  UFG::gRootInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::qReflectObject>::`vftable';
+  UFG::gRootInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::qReflectObject>::`vftable;
   UFG::qReflectInventory<UFG::qReflectObject>::OnAddToWarehouse(&UFG::gRootInventory);
   v3 = UFG::qReflectWarehouse::Instance();
   UFG::qTree64Base::Add(&v3->mInventoryTree.mTree, &stru_14235A7B8);
@@ -97,7 +97,7 @@ void __fastcall UFG::qReflectInventoryBase::qReflectInventoryBase(UFG::qReflectI
   v5->mBaseNode.mChildren[1] = &v5->mBaseNode;
   v5->mBaseNode.mNeighbours[0] = &v5->mBaseNode;
   v5->mBaseNode.mNeighbours[1] = &v5->mBaseNode;
-  this->vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventoryBase::`vftable';
+  this->vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventoryBase::`vftable;
   this->mName = name;
   v6 = &this->mItems;
   v6->mTree.mHead.mUID = 0i64;
@@ -123,7 +123,7 @@ void __fastcall UFG::qReflectInventoryBase::qReflectInventoryBase(UFG::qReflectI
   v8->mTree.mHead.mNeighbours[0] = &v8->mTree.mHead;
   v8->mTree.mHead.mNeighbours[1] = &v8->mTree.mHead;
   v8->mTree.mCount = 0i64;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     this->mUnBoundHandles,
     0x10ui64,
     8,

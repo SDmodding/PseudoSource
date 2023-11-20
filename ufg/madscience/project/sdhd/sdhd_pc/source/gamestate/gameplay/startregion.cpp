@@ -62,7 +62,7 @@ void __fastcall UFG::StartRegion::StartRegion(UFG::StartRegion *this, UFG::qSymb
   v5->mNode.mChild[0] = 0i64;
   v5->mNode.mChild[1] = 0i64;
   v5->mNode.mUID = v6;
-  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StartRegion::`vftable';
+  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StartRegion::`vftable;
   v5->m_IsAvailable = 1;
   UFG::SimComponent::AddType((UFG::SimComponent *)&v5->vfptr, UFG::StartRegion::_StartRegionTypeUID, "StartRegion");
   UFG::StartRegion::InitTrigger(v5, v3);

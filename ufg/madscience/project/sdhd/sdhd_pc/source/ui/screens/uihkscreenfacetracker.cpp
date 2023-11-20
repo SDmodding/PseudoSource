@@ -7,7 +7,7 @@ void __fastcall UFG::UIHKScreenFaceTracker::UIHKScreenFaceTracker(UFG::UIHKScree
   v1 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -18,7 +18,7 @@ void __fastcall UFG::UIHKScreenFaceTracker::UIHKScreenFaceTracker(UFG::UIHKScree
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenFaceTracker::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenFaceTracker::`vftable;
 }
 
 // File Line: 46
@@ -125,7 +125,7 @@ void __fastcall UFG::UIHKScreenFaceTracker::init(UFG::UIHKScreenFaceTracker *thi
   LODWORD(v52) = v7;
   LODWORD(pDtora) = iDiffBetweenLevels;
   UFG::qString::qString(&v70, "%s %d / %d, %d%%", v14, iExpTowardsNextLevel, pDtora, v52);
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   v15 = v72.mData;
   if ( (LODWORD(v55) >> 6) & 1 )
   {
@@ -495,7 +495,7 @@ LABEL_58:
       UFG::qString::~qString(&v68);
     }
   }
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   UFG::qString::~qString(&v70);
   UFG::qString::~qString(&v72);
 }     v63,

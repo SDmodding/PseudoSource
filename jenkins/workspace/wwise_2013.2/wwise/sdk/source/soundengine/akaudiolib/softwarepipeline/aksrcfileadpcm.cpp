@@ -6,7 +6,7 @@ void __fastcall CAkSrcFileADPCM::CAkSrcFileADPCM(CAkSrcFileADPCM *this, CAkPBI *
 
   v2 = this;
   CAkSrcFileBase::CAkSrcFileBase((CAkSrcFileBase *)&this->vfptr, in_pCtx);
-  v2->vfptr = (CAkVPLNodeVtbl *)&CAkSrcFileADPCM::`vftable';
+  v2->vfptr = (CAkVPLNodeVtbl *)&CAkSrcFileADPCM::`vftable;
   v2->m_pOutBuffer = 0i64;
   v2->m_wExtraSize = 0;
 }

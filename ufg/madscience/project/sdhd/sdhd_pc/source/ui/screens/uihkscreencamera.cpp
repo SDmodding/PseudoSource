@@ -16,7 +16,7 @@ void __fastcall UFG::UIHKScreenCamera::UIHKScreenCamera(UFG::UIHKScreenCamera *t
   v1 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -27,7 +27,7 @@ void __fastcall UFG::UIHKScreenCamera::UIHKScreenCamera(UFG::UIHKScreenCamera *t
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenCamera::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenCamera::`vftable;
   *(_QWORD *)&this->mState = 0i64;
   this->mObjectiveFlasher.mOldVisible = 0;
   this->mSavedControllerMode = 0;
@@ -49,7 +49,7 @@ void __fastcall UFG::UIHKScreenCamera::~UIHKScreenCamera(UFG::UIHKScreenCamera *
   UFG::UIScreenTextureManager *v8; // rax
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenCamera::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenCamera::`vftable;
   v2 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseScreen(v2, "Camera");
   UFG::SetInputMode((UFG::eHKControllerInputMode)v1->mSavedControllerMode, UFG::gActiveControllerNum);
@@ -425,12 +425,12 @@ void __fastcall UFG::UIHKScreenCamera::ShowHelpBar(UFG::UIHKScreenCamera *this)
     *(_QWORD *)&data.MessageIds[2] = 0i64;
     UFG::UIHKHelpBarWidget::Show(v2, &data);
     UFG::qString::~qString((UFG::qString *)&data.MessageIds[4]);
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       &data.Captions[5].mStringHash32,
       0x28ui64,
       6,
       (void (__fastcall *)(void *))UFG::qString::~qString);
-    `eh vector destructor iterator'(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+    `eh vector destructor iterator(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
     v2->mRemappable = 1;
   }
   else
@@ -456,12 +456,12 @@ void __fastcall UFG::UIHKScreenCamera::ShowHelpBar(UFG::UIHKScreenCamera *this)
     *(_QWORD *)&data.MessageIds[2] = 0i64;
     UFG::UIHKHelpBarWidget::Show(v4, &data);
     UFG::qString::~qString((UFG::qString *)&data.MessageIds[4]);
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       &data.Captions[5].mStringHash32,
       0x28ui64,
       6,
       (void (__fastcall *)(void *))UFG::qString::~qString);
-    `eh vector destructor iterator'(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+    `eh vector destructor iterator(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
   }
 }
 

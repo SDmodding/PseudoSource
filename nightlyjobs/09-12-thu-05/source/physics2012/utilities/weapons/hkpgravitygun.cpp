@@ -6,7 +6,7 @@ void __fastcall hkpGravityGun::hkpGravityGun(hkpGravityGun *this)
 
   v1 = this;
   hkpFirstPersonGun::hkpFirstPersonGun((hkpFirstPersonGun *)&this->vfptr);
-  v1->vfptr = (hkBaseObjectVtbl *)&hkpGravityGun::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkpGravityGun::`vftable;
   v1->m_grabbedBodies.m_capacityAndFlags = 2147483648;
   v1->m_grabbedBodies.m_data = 0i64;
   v1->m_grabbedBodies.m_size = 0;
@@ -32,14 +32,14 @@ void __fastcall hkpGravityGun::hkpGravityGun(hkpGravityGun *this, hkFinishLoaded
   v4 = flag.m_finishing;
   v2 = this;
   v3 = &this->m_name;
-  v3[-3].m_stringAndFlag = (const char *)&hkpFirstPersonGun::`vftable';
+  v3[-3].m_stringAndFlag = (const char *)&hkpFirstPersonGun::`vftable;
   hkStringPtr::hkStringPtr(v3, flag);
   v2->m_listeners.m_capacityAndFlags = 2147483648;
   v2->m_listeners.m_data = 0i64;
   v2->m_listeners.m_size = 0;
   if ( v4 )
     v2->m_type.m_storage = 0;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpGravityGun::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpGravityGun::`vftable;
   v2->m_grabbedBodies.m_data = 0i64;
   v2->m_grabbedBodies.m_size = 0;
   v2->m_grabbedBodies.m_capacityAndFlags = 2147483648;
@@ -158,7 +158,7 @@ LABEL_19:
                   v40 = 0i64;
                   v36 = 1065353216;
                   v37 = -1;
-                  *(_QWORD *)collector = &hkpClosestRayHitCollector::`vftable';
+                  *(_QWORD *)collector = &hkpClosestRayHitCollector::`vftable;
                   v39 = 0;
                   v38 = -1;
                   *(_DWORD *)&collector[8] = 1065353216;

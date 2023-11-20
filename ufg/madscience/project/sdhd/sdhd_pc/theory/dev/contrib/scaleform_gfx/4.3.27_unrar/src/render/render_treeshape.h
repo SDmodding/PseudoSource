@@ -14,8 +14,8 @@ void __fastcall Scaleform::Render::TreeShape::NodeData::NodeData(Scaleform::Rend
   Scaleform::Render::TreeNode::NodeData::NodeData(
     (Scaleform::Render::TreeNode::NodeData *)&this->vfptr,
     (Scaleform::Render::ContextImpl::NonlocalCloneArg<Scaleform::Render::TreeNode::NodeData>)&srca);
-  v3->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::ContextImpl::ContextData_ImplMixin<Scaleform::Render::TreeShape::NodeData,Scaleform::Render::TreeNode::NodeData>::`vftable';
-  v3->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::TreeShape::NodeData::`vftable';
+  v3->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::ContextImpl::ContextData_ImplMixin<Scaleform::Render::TreeShape::NodeData,Scaleform::Render::TreeNode::NodeData>::`vftable;
+  v3->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::TreeShape::NodeData::`vftable;
   v4 = v2->vfptr;
   v5 = v2->vfptr[3].__vecDelDtor;
   if ( v5 )

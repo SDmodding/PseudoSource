@@ -10,7 +10,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::Editor::MenuBar_UF
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::Editor::MenuBar,UFG::DUIWindow>::sInventory.vfptr,
     "UFG::Editor::MenuBar",
     v0);
-  UFG::qReflectObjectType<UFG::Editor::MenuBar,UFG::DUIWindow>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::Editor::MenuBar>::`vftable';
+  UFG::qReflectObjectType<UFG::Editor::MenuBar,UFG::DUIWindow>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::Editor::MenuBar>::`vftable;
   UFG::qReflectInventory<UFG::Editor::MenuBar>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::Editor::MenuBar,UFG::DUIWindow>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -28,17 +28,17 @@ void __fastcall UFG::Editor::MenuBar::MenuBar(UFG::Editor::MenuBar *this)
 
   v1 = this;
   UFG::DUIWindow::DUIWindow((UFG::DUIWindow *)&this->vfptr);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::Editor::MenuBar,UFG::DUIWindow>::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::Editor::MenuBar,UFG::DUIWindow>::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::Editor::MenuBar,UFG::DUIWindow>::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::Editor::MenuBar,UFG::DUIWindow>::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v1->mBaseNode.mUID = -1i64;
   v1->mTypeUID = UFG::qStringHash64("UFG::Editor::MenuBar", 0xFFFFFFFFFFFFFFFFui64);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::MenuBar::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::MenuBar::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::MenuBar::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::MenuBar::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   UFG::qString::qString(&v1->mSceneLayer.mFilter_Text);
   v1->mSceneLayer.mFilteredList.p = 0i64;
   *(_QWORD *)&v1->mSceneLayer.mFilteredList.size = 0i64;
   v2 = &v1->mSceneLayer.mLayer_SelectedItems;
-  v2->vfptr = (UFG::IDUICollectionViewVtbl *)&UFG::DUIIntArray::`vftable';
+  v2->vfptr = (UFG::IDUICollectionViewVtbl *)&UFG::DUIIntArray::`vftable;
   v2->mData.p = 0i64;
   *(_QWORD *)&v2->mData.size = 0i64;
   v1->mSceneLayer.mLayer_ScrollPos = 0i64;
@@ -87,7 +87,7 @@ void __fastcall UFG::Editor::MenuBar::UpdateUI(UFG::Editor::MenuBar *this, UFG::
     v10 = v7;
     if ( v7 )
     {
-      v7->vfptr = (UFG::CommandContextVtbl *)&UFG::CommandContext::`vftable';
+      v7->vfptr = (UFG::CommandContextVtbl *)&UFG::CommandContext::`vftable;
       UFG::qBaseTreeRB::qBaseTreeRB(&v7->mDictionary.mTree);
     }
     else

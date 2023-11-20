@@ -14,9 +14,9 @@ void __fastcall Scaleform::SysAllocStatic::SysAllocStatic(Scaleform::SysAllocSta
   v10 = size1;
   v11 = mem1;
   v12 = this;
-  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocBase::`vftable';
-  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocPaged::`vftable';
-  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocStatic::`vftable';
+  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocBase::`vftable;
+  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocPaged::`vftable;
+  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocStatic::`vftable;
   this->MinSize = 4096i64;
   this->NumSegments = 0i64;
   this->pAllocator = 0i64;
@@ -58,9 +58,9 @@ void __fastcall Scaleform::SysAllocStatic::SysAllocStatic(Scaleform::SysAllocSta
   signed __int64 v5; // rax
 
   v2 = this;
-  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocBase::`vftable';
-  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocPaged::`vftable';
-  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocStatic::`vftable';
+  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocBase::`vftable;
+  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocPaged::`vftable;
+  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocStatic::`vftable;
   this->MinSize = minSize;
   this->NumSegments = 0i64;
   this->pAllocator = 0i64;

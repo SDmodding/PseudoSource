@@ -12,7 +12,7 @@ void __fastcall UFG::ParkourInstanceInventory::ParkourInstanceInventory(UFG::Par
     0xC31501A5,
     0,
     0);
-  v1->vfptr = (UFG::qResourceInventoryVtbl *)&UFG::ParkourInstanceInventory::`vftable';
+  v1->vfptr = (UFG::qResourceInventoryVtbl *)&UFG::ParkourInstanceInventory::`vftable;
 }
 
 // File Line: 88
@@ -65,7 +65,7 @@ void __fastcall UFG::ParkourHandle::ParkourHandle(UFG::ParkourHandle *this, unsi
   v9->mPrev = v9;
   v9->mNext = v9;
   UFG::qSafePointerNode<UFG::ParkourHandle>::qSafePointerNode<UFG::ParkourHandle>((UFG::qSafePointerNode<UFG::ParkourHandle> *)&this->vfptr);
-  v8->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::ParkourHandle::`vftable';
+  v8->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::ParkourHandle::`vftable;
   v14 = &v8->mSimObject;
   v14->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v14->mPrev;
   v14->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v14->mPrev;
@@ -121,7 +121,7 @@ void __fastcall UFG::ParkourHandle::~ParkourHandle(UFG::ParkourHandle *this)
   UFG::qNode<UFG::ParkourHandle,UFG::ParkourHandle> *v21; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::ParkourHandle::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::ParkourHandle::`vftable;
   v2 = &this->mCachedRightNeighbor;
   if ( this->mCachedRightNeighbor.m_pPointer )
   {
@@ -173,7 +173,7 @@ void __fastcall UFG::ParkourHandle::~ParkourHandle(UFG::ParkourHandle *this)
   v16->mPrev = v15;
   v12->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v12->mPrev;
   v1->mSimObject.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v1->mSimObject.mPrev;
-  v1->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::ParkourHandle>::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::ParkourHandle>::`vftable;
   UFG::qSafePointerNode<UFG::DynamicCoverCorner>::SetAllPointersToNull((UFG::qSafePointerNode<UFG::ParkourHandle> *)&v1->vfptr);
   UFG::qList<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList,1,0>::DeleteNodes(&v1->m_SafePointerList);
   v17 = v1->m_SafePointerList.mNode.mPrev;
@@ -456,7 +456,7 @@ float __fastcall UFG::ParkourHandle::GetDropoffDistance(UFG::ParkourHandle *this
       v20 = v11;
       v24 = v12;
       v22.m128_i32[0] = 2139095022;
-      v21 = &hkpClosestCdPointCollector::`vftable';
+      v21 = &hkpClosestCdPointCollector::`vftable;
       v23 = 0i64;
       v22 = _mm_shuffle_ps(v22, _mm_unpackhi_ps(v22, (__m128)xmmword_141A712A0), 196);
       v22.m128_i32[0] = 2139095022;
@@ -471,7 +471,7 @@ float __fastcall UFG::ParkourHandle::GetDropoffDistance(UFG::ParkourHandle *this
         LOBYTE(v14) = 1;
         v19.vfptr->AddHit(&v19, (hkpRootCdPoint *)&v20.m128_u16[4], v14);
       }
-      v21 = &hkpCdPointCollector::`vftable';
+      v21 = &hkpCdPointCollector::`vftable;
       hkpWorld::removePhantom(v13, (hkpPhantom *)&v19.mPhantom->vfptr);
     }
     v15 = (__m128)LODWORD(v19.mHitList.mNode.mNext[1].mPrev);
@@ -482,7 +482,7 @@ float __fastcall UFG::ParkourHandle::GetDropoffDistance(UFG::ParkourHandle *this
                     + (float)((float)(*(float *)&v19.mHitList.mNode.mNext[1].mNext - v5.m128_f32[0])
                             * (float)(*(float *)&v19.mHitList.mNode.mNext[1].mNext - v5.m128_f32[0]));
     LODWORD(v4) = (unsigned __int128)_mm_sqrt_ps(v15);
-    v19.vfptr = (UFG::ShapeCasterCollectorVtbl *)&UFG::ShapeCasterCollector::`vftable';
+    v19.vfptr = (UFG::ShapeCasterCollectorVtbl *)&UFG::ShapeCasterCollector::`vftable;
     v16 = v19.mPhantom;
     if ( v19.mPhantom )
     {

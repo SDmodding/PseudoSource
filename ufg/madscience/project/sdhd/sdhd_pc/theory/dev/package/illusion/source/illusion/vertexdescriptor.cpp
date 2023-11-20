@@ -103,7 +103,7 @@ void __fastcall Illusion::VertexStreamDescriptor::VertexStreamDescriptor(Illusio
   v4 = (UFG::qNode<Illusion::VertexStreamDescriptor,Illusion::VertexStreamDescriptor> *)&this->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  this->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Illusion::VertexStreamDescriptor::`vftable';
+  this->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Illusion::VertexStreamDescriptor::`vftable;
   this->mName = name;
   this->mNameUID = name_uid;
   *(_QWORD *)&this->mTotalElements = 0i64;
@@ -139,7 +139,7 @@ void __fastcall Illusion::VertexStreamDescriptor::~VertexStreamDescriptor(Illusi
   UFG::qNode<Illusion::VertexStreamDescriptor,Illusion::VertexStreamDescriptor> *v5; // rax
 
   v1 = this;
-  this->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Illusion::VertexStreamDescriptor::`vftable';
+  this->vfptr = (Illusion::VertexStreamDescriptorVtbl *)&Illusion::VertexStreamDescriptor::`vftable;
   Illusion::VertexStreamDescriptor::GetStreamDescriptors();
   v1 = (Illusion::VertexStreamDescriptor *)((char *)v1 + 8);
   v2 = v1->vfptr;

@@ -64,7 +64,7 @@ hkpCollisionAgent *__fastcall hkpBoxBoxAgent::createBoxBoxAgent(hkpCdBody *bodyA
     return 0i64;
   *(_DWORD *)(v9 + 8) = 0x1FFFF;
   *(_QWORD *)(v9 + 16) = v4;
-  *(_QWORD *)v9 = &hkpBoxBoxAgent::`vftable';
+  *(_QWORD *)v9 = &hkpBoxBoxAgent::`vftable;
   hkpBoxBoxManifold::hkpBoxBoxManifold((hkpBoxBoxManifold *)(v9 + 32));
   return (hkpCollisionAgent *)v10;
 }

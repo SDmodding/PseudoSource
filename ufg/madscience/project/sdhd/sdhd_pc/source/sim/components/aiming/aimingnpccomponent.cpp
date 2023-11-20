@@ -219,8 +219,8 @@ void __fastcall UFG::AimingNPCComponent::AimingNPCComponent(UFG::AimingNPCCompon
 
   v3 = this;
   UFG::AimingBaseComponent::AimingBaseComponent((UFG::AimingBaseComponent *)&this->vfptr, name_uid, properties, 0);
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AimingNPCComponent::`vftable'{for `UFG::SimComponent'};
-  v3->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::AimingNPCComponent::`vftable'{for `UFG::UpdateInterface'};
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AimingNPCComponent::`vftable{for `UFG::SimComponent};
+  v3->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::AimingNPCComponent::`vftable{for `UFG::UpdateInterface};
   v3->m_fBaseAIAccuracy = -1.0;
   v3->m_fBaseAIAccuracyVersusNPC = -1.0;
   v3->m_fPlayerDodgeFactor = 0.0;
@@ -250,8 +250,8 @@ void __fastcall UFG::AimingNPCComponent::~AimingNPCComponent(UFG::AimingNPCCompo
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v10; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AimingNPCComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::AimingNPCComponent::`vftable'{for `UFG::UpdateInterface'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AimingNPCComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::AimingNPCComponent::`vftable{for `UFG::UpdateInterface};
   v2 = this->m_pSimTargetAimPos.m_pPointer;
   if ( v2 )
   {

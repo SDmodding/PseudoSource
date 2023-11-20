@@ -59,7 +59,7 @@ Scaleform::Render::MappedTextureBase *__fastcall Scaleform::Render::D3D1x::Textu
   if ( !v1 )
     return 0i64;
   Scaleform::Render::MappedTextureBase::MappedTextureBase(v1);
-  v2->vfptr = (Scaleform::Render::MappedTextureBaseVtbl *)&Scaleform::Render::D3D1x::MappedTexture::`vftable';
+  v2->vfptr = (Scaleform::Render::MappedTextureBaseVtbl *)&Scaleform::Render::D3D1x::MappedTexture::`vftable;
   return v2;
 }
 

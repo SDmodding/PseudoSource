@@ -217,7 +217,7 @@ void __fastcall castRayBroadPhase(hkpBroadPhase *broadphase, hkpWorldRayCastComm
       fixedBufferHitCollector->m_nextFreeOutput.m_storage = v10;
       fixedBufferHitCollector->m_capacity.m_storage = v9;
       fixedBufferHitCollector->m_earlyOutHitFraction = 1.0;
-      fixedBufferHitCollector->vfptr = (hkpRayHitCollectorVtbl *)&hkpFixedBufferRayHitCollector::`vftable';
+      fixedBufferHitCollector->vfptr = (hkpRayHitCollectorVtbl *)&hkpFixedBufferRayHitCollector::`vftable;
       fixedBufferHitCollector->m_numOutputs.m_storage = 0;
       fixedBufferHitCollector->m_collidableOnPpu.m_storage = 0i64;
     }
@@ -306,7 +306,7 @@ __int64 __fastcall hkCpuWorldRayCastJob(hkJobQueue *jobQueue, hkJobQueue::JobQue
     v6[1] = v8;
   }
   v9 = *(hkpWorldRayCastCommand **)&v3->m_data[40];
-  *(_QWORD *)&command.m_resultsCapacity = &hkCpuWorldRayCastCollector::`vftable';
+  *(_QWORD *)&command.m_resultsCapacity = &hkCpuWorldRayCastCollector::`vftable;
   v10 = *(_QWORD *)&v3->m_data[24];
   v33 = 0;
   v34 = 0i64;
@@ -321,7 +321,7 @@ __int64 __fastcall hkCpuWorldRayCastJob(hkJobQueue *jobQueue, hkJobQueue::JobQue
   fixedBufferHitCollector.m_rayCastOutputBase.m_storage = 0i64;
   fixedBufferHitCollector.m_nextFreeOutput.m_storage = 0i64;
   *(_QWORD *)&command.m_useCollector.m_bool = v11;
-  fixedBufferHitCollector.vfptr = (hkpRayHitCollectorVtbl *)&hkpFixedBufferRayHitCollector::`vftable';
+  fixedBufferHitCollector.vfptr = (hkpRayHitCollectorVtbl *)&hkpFixedBufferRayHitCollector::`vftable;
   *(_QWORD *)&fixedBufferHitCollector.m_capacity.m_storage = 1i64;
   for ( fixedBufferHitCollector.m_collidableOnPpu.m_storage = 0i64; v12 < *(_DWORD *)&v3->m_data[48]; ++v9 )
   {

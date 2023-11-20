@@ -2,7 +2,7 @@
 // RVA: 0x5C9230
 void __fastcall Scaleform::GFx::State::~State(Scaleform::GFx::State *this)
 {
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::State::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::State::`vftable;
   Scaleform::RefCountImplCore::~RefCountImplCore((Scaleform::RefCountImplCore *)&this->vfptr);
 }
 
@@ -15,14 +15,14 @@ void __fastcall Scaleform::GFx::FontProvider::FontProvider(Scaleform::GFx::FontP
 
   v2 = fp;
   v3 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::State::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::State::`vftable;
   this->SType = 22;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::FontProvider::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::FontProvider::`vftable;
   if ( fp )
     Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)fp);
   v3->pFontProvider.pObject = v2;
@@ -36,11 +36,11 @@ void __fastcall Scaleform::GFx::FontProvider::~FontProvider(Scaleform::GFx::Font
   Scaleform::Render::RenderBuffer *v2; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::FontProvider::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::FontProvider::`vftable;
   v2 = (Scaleform::Render::RenderBuffer *)this->pFontProvider.pObject;
   if ( v2 )
     Scaleform::RefCountImpl::Release(v2);
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::State::`vftable';
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::State::`vftable;
   Scaleform::RefCountImplCore::~RefCountImplCore((Scaleform::RefCountImplCore *)&v1->vfptr);
 }
 
@@ -55,7 +55,7 @@ _BOOL8 __fastcall Scaleform::GFx::Clipboard::ContainsRichText(Scaleform::GFx::Cl
 // RVA: 0x8A7BF0
 void __fastcall Scaleform::GFx::StateBag::~StateBag(Scaleform::GFx::StateBag *this)
 {
-  this->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::StateBag::`vftable';
+  this->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::StateBag::`vftable;
 }
 
 // File Line: 1238

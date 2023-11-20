@@ -5,15 +5,15 @@ void __fastcall Scaleform::BufferedFile::BufferedFile(Scaleform::BufferedFile *t
   Scaleform::BufferedFile *v1; // rbx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::File,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::File::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::DelegatedFile::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::File,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::File::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::DelegatedFile::`vftable;
   this->pFile.pObject = 0i64;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::BufferedFile::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::BufferedFile::`vftable;
   this->pBuffer = (char *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64, signed __int64, _QWORD, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
                             Scaleform::Memory::pGlobalHeap,
                             8184i64,
@@ -34,17 +34,17 @@ void __fastcall Scaleform::BufferedFile::BufferedFile(Scaleform::BufferedFile *t
 
   v2 = pfile;
   v3 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::File,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::File::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::DelegatedFile::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::File,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::File::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::DelegatedFile::`vftable;
   if ( pfile )
     _InterlockedExchangeAdd(&pfile->RefCount, 1u);
   this->pFile.pObject = pfile;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::BufferedFile::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::BufferedFile::`vftable;
   this->pBuffer = (char *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
                             Scaleform::Memory::pGlobalHeap,
                             8184i64,
@@ -62,7 +62,7 @@ void __fastcall Scaleform::BufferedFile::~BufferedFile(Scaleform::BufferedFile *
   Scaleform::File *v2; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::BufferedFile::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::BufferedFile::`vftable;
   if ( this->pFile.pObject )
     Scaleform::BufferedFile::FlushBuffer(this);
   if ( v1->pBuffer )
@@ -70,7 +70,7 @@ void __fastcall Scaleform::BufferedFile::~BufferedFile(Scaleform::BufferedFile *
   v2 = v1->pFile.pObject;
   if ( v2 && !_InterlockedDecrement(&v2->RefCount) && v2 )
     v2->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v2->vfptr, 1u);
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
 }
 
 // File Line: 97

@@ -5063,8 +5063,8 @@ LABEL_8:
       v22.m128_f32[1] = (float)v20 * 2.3283064e-10;
       v23 = 1664525 * v21 + 1013904223;
       rand->m_current = v23;
-      v24 = (__m128)`hkVector4f::getComponent'::`2'::indexToMask[v15];
-      v25 = (__m128)`hkVector4f::getComponent'::`2'::indexToMask[v15];
+      v24 = (__m128)`hkVector4f::getComponent::`2::indexToMask[v15];
+      v25 = (__m128)`hkVector4f::getComponent::`2::indexToMask[v15];
       v22.m128_f32[2] = (float)v21 * 2.3283064e-10;
       v26 = (float)v23;
       v27 = v10->vfptr;
@@ -8156,7 +8156,7 @@ void __fastcall hkaiNavMeshUtils::calcFacePlane<hkaiNavMeshInstance>(hkaiNavMesh
 
 // File Line: 3066
 // RVA: 0xBCC980
-void __fastcall `anonymous namespace'::rotateArray<hkaiNavMesh::Edge>(hkaiNavMesh::Edge *data, int n, int offset)
+void __fastcall `anonymous namespace::rotateArray<hkaiNavMesh::Edge>(hkaiNavMesh::Edge *data, int n, int offset)
 {
   hkaiNavMesh::Edge *v3; // r14
   __int64 v4; // rbp
@@ -8266,7 +8266,7 @@ void __fastcall `anonymous namespace'::rotateArray<hkaiNavMesh::Edge>(hkaiNavMes
 
 // File Line: 3095
 // RVA: 0xBC7770
-void __fastcall `anonymous namespace'::calcMinimalWidth(hkArrayBase<hkVector4f> *vertices, hkVector4f *up, int *baseOut, int *antipodeOut, hkSimdFloat32 *widthOut)
+void __fastcall `anonymous namespace::calcMinimalWidth(hkArrayBase<hkVector4f> *vertices, hkVector4f *up, int *baseOut, int *antipodeOut, hkSimdFloat32 *widthOut)
 {
   __int64 v5; // r10
   hkVector4f *v6; // r11
@@ -8414,10 +8414,10 @@ void __fastcall hkaiNavMeshUtils::rotateFace(hkaiNavMesh *navMesh, int faceIndex
   {
     v6 = v4->m_numEdges;
     v7 = v5 + v6 - newFirstEdgeIndex;
-    `anonymous namespace'::rotateArray<hkaiNavMesh::Edge>(&navMesh->m_edges.m_data[v5], v6, v5 + v6 - newFirstEdgeIndex);
+    `anonymous namespace::rotateArray<hkaiNavMesh::Edge>(&navMesh->m_edges.m_data[v5], v6, v5 + v6 - newFirstEdgeIndex);
     v8 = v3->m_edgeDataStriding;
     if ( v8 > 0 )
-      `anonymous namespace'::rotateArray<int>(
+      `anonymous namespace::rotateArray<int>(
         &v3->m_edgeData.m_data[v8 * v4->m_startEdgeIndex],
         v8 * v4->m_numEdges,
         v7 * v8);
@@ -8484,7 +8484,7 @@ void __fastcall hkaiNavMeshUtils::rotateOwnedFace(hkaiStreamingCollection *strea
     return;
   v9 = v7->m_numEdges;
   v10 = v8 + v9 - v4;
-  `anonymous namespace'::rotateArray<hkaiNavMesh::Edge>(&v6->m_ownedEdges.m_data[v8 - v6->m_numOriginalEdges], v9, v10);
+  `anonymous namespace::rotateArray<hkaiNavMesh::Edge>(&v6->m_ownedEdges.m_data[v8 - v6->m_numOriginalEdges], v9, v10);
   v11 = v6->m_edgeDataStriding;
   if ( v11 > 0 )
   {
@@ -8498,7 +8498,7 @@ void __fastcall hkaiNavMeshUtils::rotateOwnedFace(hkaiStreamingCollection *strea
       {
         v16 = 0i64;
 LABEL_11:
-        `anonymous namespace'::rotateArray<int>(v16, v11 * v7->m_numEdges, v10 * v11);
+        `anonymous namespace::rotateArray<int>(v16, v11 * v7->m_numEdges, v10 * v11);
         goto LABEL_12;
       }
       v14 = (signed int)v12;

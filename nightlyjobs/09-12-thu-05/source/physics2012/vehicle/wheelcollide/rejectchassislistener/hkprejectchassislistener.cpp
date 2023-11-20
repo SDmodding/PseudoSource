@@ -2,8 +2,8 @@
 // RVA: 0xE2C3D0
 void __fastcall hkpRejectChassisListener::~hkpRejectChassisListener(hkpRejectChassisListener *this)
 {
-  this->vfptr = (hkpPhantomOverlapListenerVtbl *)&hkpPhantomOverlapListener::`vftable';
-  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  this->vfptr = (hkpPhantomOverlapListenerVtbl *)&hkpPhantomOverlapListener::`vftable;
+  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 24

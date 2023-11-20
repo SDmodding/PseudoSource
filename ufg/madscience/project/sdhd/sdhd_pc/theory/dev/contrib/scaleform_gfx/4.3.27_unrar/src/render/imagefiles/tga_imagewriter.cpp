@@ -297,7 +297,7 @@ LABEL_39:
 // RVA: 0x159C7A0
 __int64 dynamic_initializer_for__Scaleform::Render::TGA::FileWriter::Instance__()
 {
-  Scaleform::Render::TGA::FileWriter::Instance.vfptr = (Scaleform::Render::ImageFileHandlerVtbl *)&Scaleform::Render::TGA::FileWriter::`vftable';
+  Scaleform::Render::TGA::FileWriter::Instance.vfptr = (Scaleform::Render::ImageFileHandlerVtbl *)&Scaleform::Render::TGA::FileWriter::`vftable;
   return atexit(dynamic_atexit_destructor_for__Scaleform::Render::TGA::FileWriter::Instance__);
 }
 

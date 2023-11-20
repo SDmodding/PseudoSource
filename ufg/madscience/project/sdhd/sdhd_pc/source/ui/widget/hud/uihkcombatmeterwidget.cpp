@@ -317,7 +317,7 @@ void __fastcall UFG::UIHKCombatMeterWidget::Flash_UIHighlight_Init(UFG::UIHKComb
   v2 = screen->mRenderable->m_movie.pObject;
   if ( v2 )
   {
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( (v5 >> 6) & 1 )
     {
       (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v4 + 16i64))(v4, &ptr, v6);
@@ -333,7 +333,7 @@ void __fastcall UFG::UIHKCombatMeterWidget::Flash_UIHighlight_Init(UFG::UIHKComb
     v9 = 6;
     v10 = "mcCombatMeter_highlight";
     Scaleform::GFx::Movie::Invoke(v2, "UIHighlight_Init", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 
@@ -361,7 +361,7 @@ void __fastcall UFG::UIHKCombatMeterWidget::Flash_Update(UFG::UIHKCombatMeterWid
   v4 = screen->mRenderable->m_movie.pObject;
   if ( v4 )
   {
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( (v7 >> 6) & 1 )
     {
       (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v6 + 16i64))(v6, &ptr, COERCE_DOUBLE(*(_QWORD *)&v8));
@@ -387,7 +387,7 @@ void __fastcall UFG::UIHKCombatMeterWidget::Flash_Update(UFG::UIHKCombatMeterWid
     v15 = 2;
     LOBYTE(v16) = v18;
     Scaleform::GFx::Movie::Invoke(v4, "CombatMeter_Update", 0i64, (Scaleform::GFx::Value *)&ptr, 3u);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 

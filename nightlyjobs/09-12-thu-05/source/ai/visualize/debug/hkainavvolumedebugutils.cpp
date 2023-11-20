@@ -403,7 +403,7 @@ LABEL_43:
                             _mm_add_ps(
                               _mm_mul_ps(
                                 _mm_cvtepi32_ps(_mm_srli_epi32(v49, 0x10u)),
-                                (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                                (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                               _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v49, 0x10u), 0x10u)))),
                           v50);
                   v52 = _mm_add_ps(
@@ -412,7 +412,7 @@ LABEL_43:
                             _mm_add_ps(
                               _mm_mul_ps(
                                 _mm_cvtepi32_ps(_mm_srli_epi32(v48, 0x10u)),
-                                (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                                (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                               _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v48, 0x10u), 0x10u)))),
                           v50);
                   if ( SHIWORD(v27->m128i_i64[0]) > 0 )
@@ -455,7 +455,7 @@ LABEL_43:
                                 _mm_add_ps(
                                   _mm_mul_ps(
                                     _mm_cvtepi32_ps(_mm_srli_epi32(v66, 0x10u)),
-                                    (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                                    (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                                   _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v66, 0x10u), 0x10u)))),
                               v68);
                       v70 = _mm_add_ps(
@@ -464,7 +464,7 @@ LABEL_43:
                                 _mm_add_ps(
                                   _mm_mul_ps(
                                     _mm_cvtepi32_ps(_mm_srli_epi32(v67, 0x10u)),
-                                    (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                                    (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                                   _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v67, 0x10u), 0x10u)))),
                               v68);
                       start.m_quad = _mm_add_ps(_mm_mul_ps(v53, (__m128)xmmword_141A711B0), v4->m_displayOffset.m_quad);
@@ -987,7 +987,7 @@ void __fastcall hkaiNavVolumeDebugUtils::reportMemoryUsed(hkaiNavVolume *navVolu
 
 // File Line: 469
 // RVA: 0xC4E340
-void __fastcall `anonymous namespace'::cutSquareVertically(Square *square, Square *cutter, hkArray<Square,hkContainerHeapAllocator> *squaresOut)
+void __fastcall `anonymous namespace::cutSquareVertically(Square *square, Square *cutter, hkArray<Square,hkContainerHeapAllocator> *squaresOut)
 {
   float v3; // xmm6_4
   hkArray<Square,hkContainerHeapAllocator> *v4; // rbx
@@ -1114,7 +1114,7 @@ LABEL_27:
 
 // File Line: 519
 // RVA: 0xC4E5B0
-void __fastcall `anonymous namespace'::cutSquare(Square *_square, Square *_cutter, hkArray<Square,hkContainerHeapAllocator> *squaresOut)
+void __fastcall `anonymous namespace::cutSquare(Square *_square, Square *_cutter, hkArray<Square,hkContainerHeapAllocator> *squaresOut)
 {
   Square v3; // xmm6
   hkArray<Square,hkContainerHeapAllocator> *v4; // rbx
@@ -1246,7 +1246,7 @@ LABEL_40:
     if ( v12 >= v7 )
     {
 LABEL_41:
-      `anonymous namespace'::cutSquareVertically(&square, &cutter, squaresOut);
+      `anonymous namespace::cutSquareVertically(&square, &cutter, squaresOut);
       return;
     }
     if ( squaresOut->m_size == (squaresOut->m_capacityAndFlags & 0x3FFFFFFF) )
@@ -1276,7 +1276,7 @@ LABEL_12:
 
 // File Line: 595
 // RVA: 0xC4E880
-void __fastcall `anonymous namespace'::cutSquaresFromSquare(Square *square, hkArray<Square,hkContainerHeapAllocator> *cutters, hkArray<Square,hkContainerHeapAllocator> *squaresOut)
+void __fastcall `anonymous namespace::cutSquaresFromSquare(Square *square, hkArray<Square,hkContainerHeapAllocator> *cutters, hkArray<Square,hkContainerHeapAllocator> *squaresOut)
 {
   hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *v3; // rdi
   hkArray<Square,hkContainerHeapAllocator> *v4; // r14
@@ -1313,7 +1313,7 @@ void __fastcall `anonymous namespace'::cutSquaresFromSquare(Square *square, hkAr
     {
       v10 = 0;
       for ( squaresOuta.m_size = 0; v10 < v3->m_size; ++v10 )
-        `anonymous namespace'::cutSquare((Square *)&v3->m_data[v10], &v4->m_data[v9], &squaresOuta);
+        `anonymous namespace::cutSquare((Square *)&v3->m_data[v10], &v4->m_data[v9], &squaresOuta);
       hkArray<hkpTreeBroadPhase32::Handle,hkContainerHeapAllocator>::swap(
         v3,
         (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&squaresOuta);
@@ -1333,7 +1333,7 @@ void __fastcall `anonymous namespace'::cutSquaresFromSquare(Square *square, hkAr
 
 // File Line: 611
 // RVA: 0xC4E9D0
-void __fastcall `anonymous namespace'::convertAabbFaceToSquare(hkAabb *aabb, int face, Square *squareOut)
+void __fastcall `anonymous namespace::convertAabbFaceToSquare(hkAabb *aabb, int face, Square *squareOut)
 {
   switch ( face )
   {
@@ -1361,7 +1361,7 @@ void __fastcall `anonymous namespace'::convertAabbFaceToSquare(hkAabb *aabb, int
 
 // File Line: 641
 // RVA: 0xC4EA60
-void __fastcall `anonymous namespace'::processCutSquares(hkArray<Square,hkContainerHeapAllocator> *squares, hkAabb *aabb, int face, hkGeometry *geometryOut)
+void __fastcall `anonymous namespace::processCutSquares(hkArray<Square,hkContainerHeapAllocator> *squares, hkAabb *aabb, int face, hkGeometry *geometryOut)
 {
   int v4; // er15
   hkGeometry *v5; // rbp
@@ -1744,7 +1744,7 @@ void __fastcall hkaiNavVolumeDebugUtils::buildNavVolumeGeometry(hkaiNavVolumeDeb
                          _mm_add_ps(
                            _mm_mul_ps(
                              _mm_cvtepi32_ps(_mm_srli_epi32(v18, 0x10u)),
-                             (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                             (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                            _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v18, 0x10u), 0x10u)))),
                        v3->m_quantizationOffset.m_quad);
         aabb.m_min = (hkVector4f)v19.m_quad;
@@ -1754,7 +1754,7 @@ void __fastcall hkaiNavVolumeDebugUtils::buildNavVolumeGeometry(hkaiNavVolumeDeb
                          _mm_add_ps(
                            _mm_mul_ps(
                              _mm_cvtepi32_ps(_mm_srli_epi32(v17, 0x10u)),
-                             (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                             (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                            _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v17, 0x10u), 0x10u)))),
                        v3->m_quantizationOffset.m_quad);
         aabb.m_max = (hkVector4f)v20.m_quad;
@@ -1794,7 +1794,7 @@ void __fastcall hkaiNavVolumeDebugUtils::buildNavVolumeGeometry(hkaiNavVolumeDeb
 LABEL_8:
             *(_QWORD *)&squareOut.minX = 0i64;
             *(_QWORD *)&squareOut.maxX = 0i64;
-            `anonymous namespace'::convertAabbFaceToSquare(&aabb, v13, &squareOut);
+            `anonymous namespace::convertAabbFaceToSquare(&aabb, v13, &squareOut);
             v27 = v10[v8].m_startEdgeIndex;
             v54 = 2147483648;
             array = 0i64;
@@ -1822,7 +1822,7 @@ LABEL_8:
                                    _mm_add_ps(
                                      _mm_mul_ps(
                                        _mm_cvtepi32_ps(_mm_srli_epi32(v33, 0x10u)),
-                                       (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                                       (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                                      _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v33, 0x10u), 0x10u)))),
                                  v3->m_quantizationOffset.m_quad);
                   v77.m_min.m_quad = _mm_add_ps(
@@ -1831,7 +1831,7 @@ LABEL_8:
                                          _mm_add_ps(
                                            _mm_mul_ps(
                                              _mm_cvtepi32_ps(_mm_srli_epi32(v34, 0x10u)),
-                                             (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                                             (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                                            _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v34, 0x10u), 0x10u)))),
                                        v3->m_quantizationOffset.m_quad);
                   v36 = _mm_min_ps(v20.m_quad, v35.m_quad);
@@ -1862,7 +1862,7 @@ LABEL_8:
                         &array,
                         16);
                     v43 = v53++;
-                    `anonymous namespace'::convertAabbFaceToSquare(&v77, v13, &array[v43]);
+                    `anonymous namespace::convertAabbFaceToSquare(&v77, v13, &array[v43]);
                   }
                 }
                 LODWORD(v27) = v27 + 1;
@@ -1874,12 +1874,12 @@ LABEL_8:
             squaresOut.m_capacityAndFlags = 2147483648;
             squaresOut.m_data = 0i64;
             squaresOut.m_size = 0;
-            `anonymous namespace'::cutSquaresFromSquare(
+            `anonymous namespace::cutSquaresFromSquare(
               &squareOut,
               (hkArray<Square,hkContainerHeapAllocator> *)&array,
               &squaresOut);
             v6 = geometryOuta;
-            `anonymous namespace'::processCutSquares(&squaresOut, &aabb, v13, geometryOuta);
+            `anonymous namespace::processCutSquares(&squaresOut, &aabb, v13, geometryOuta);
             squaresOut.m_size = 0;
             if ( squaresOut.m_capacityAndFlags >= 0 )
               hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
@@ -1904,7 +1904,7 @@ LABEL_19:
             if ( *v14 == (v14[1] & 0x3FFFFFFF) )
               hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v14 - 2, 16);
             v42 = (Square *)(*((_QWORD *)v14 - 1) + 16i64 * (*v14)++);
-            `anonymous namespace'::convertAabbFaceToSquare(&aabb, v13, v42);
+            `anonymous namespace::convertAabbFaceToSquare(&aabb, v13, v42);
           }
           v14 += 4;
           ++v13;
@@ -1930,15 +1930,15 @@ LABEL_19:
     {
       *(_QWORD *)&squareOut.minX = 0i64;
       *(_QWORD *)&squareOut.maxX = 0i64;
-      `anonymous namespace'::convertAabbFaceToSquare(&v3->m_aabb, v45, &squareOut);
+      `anonymous namespace::convertAabbFaceToSquare(&v3->m_aabb, v45, &squareOut);
       squaresOut.m_data = 0i64;
       squaresOut.m_size = 0;
       squaresOut.m_capacityAndFlags = 2147483648;
-      `anonymous namespace'::cutSquaresFromSquare(&squareOut, v46, &squaresOut);
+      `anonymous namespace::cutSquaresFromSquare(&squareOut, v46, &squaresOut);
       v47 = 1;
       if ( v45 & 1 )
         v47 = -1;
-      `anonymous namespace'::processCutSquares(&squaresOut, &v77, v45 + v47, v6);
+      `anonymous namespace::processCutSquares(&squaresOut, &v77, v45 + v47, v6);
       squaresOut.m_size = 0;
       if ( squaresOut.m_capacityAndFlags >= 0 )
         hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
@@ -2245,7 +2245,7 @@ void __fastcall hkaiNavVolumeDebugUtils::displayNavVolumeGeometry(hkaiNavVolumeD
 
   v3 = displaySettings;
   *(_DWORD *)&geometryOut.m_memSizeAndFlags = 0x1FFFF;
-  geometryOut.vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable';
+  geometryOut.vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable;
   geometryOut.m_vertices.m_data = 0i64;
   geometryOut.m_vertices.m_size = 0;
   geometryOut.m_vertices.m_capacityAndFlags = 2147483648;

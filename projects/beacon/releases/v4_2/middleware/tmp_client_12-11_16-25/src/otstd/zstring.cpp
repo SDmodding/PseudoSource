@@ -3,8 +3,8 @@
 void __fastcall OSuite::ZString::ZString(OSuite::ZString *this)
 {
   this->m_pString = 0i64;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable'{for `OSuite::ZObject'};
-  this->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable'{for `OSuite::IHashable'};
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable{for `OSuite::ZObject};
+  this->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable{for `OSuite::IHashable};
 }
 
 // File Line: 43
@@ -18,8 +18,8 @@ void __fastcall OSuite::ZString::ZString(OSuite::ZString *this, OSuite::TList<ch
 
   v2 = this;
   v3 = (OSuite::ZRedBlackTreeBase *)charList;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable'{for `OSuite::ZObject'};
-  this->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable'{for `OSuite::IHashable'};
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable{for `OSuite::ZObject};
+  this->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable{for `OSuite::IHashable};
   v4 = 0i64;
   if ( OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)charList) )
     v4 = (const char *)v3[1].m_pTop;
@@ -41,8 +41,8 @@ void __fastcall OSuite::ZString::ZString(OSuite::ZString *this, const char *pszS
 
   v2 = pszString;
   v3 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable'{for `OSuite::ZObject'};
-  this->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable'{for `OSuite::IHashable'};
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable{for `OSuite::ZObject};
+  this->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable{for `OSuite::IHashable};
   if ( pszString )
   {
     v4 = strlen(pszString);
@@ -86,9 +86,9 @@ void __fastcall OSuite::ZString::ZString(OSuite::ZString *this, const char *pszS
 
   v3 = nLength;
   v4 = pszString;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable'{for `OSuite::ZObject'};
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable{for `OSuite::ZObject};
   v5 = this;
-  this->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable'{for `OSuite::IHashable'};
+  this->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable{for `OSuite::IHashable};
   if ( pszString )
   {
     v6 = OSuite::ZString::AllocateInternalString(nLength + 1);
@@ -129,9 +129,9 @@ void __fastcall OSuite::ZString::ZString(OSuite::ZString *this, int nNumber)
 
   v6.m_Chars.m_pList = 0i64;
   v2 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable'{for `OSuite::ZObject'};
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable{for `OSuite::ZObject};
   v3 = nNumber;
-  this->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable'{for `OSuite::IHashable'};
+  this->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable{for `OSuite::IHashable};
   OSuite::ZStringBuilder::ZStringBuilder(&v6, 0x10ui64);
   OSuite::ZStringBuilder::AppendInt(&v6, v3);
   v4 = OSuite::ZStringBuilder::Count(&v6);
@@ -152,9 +152,9 @@ void __fastcall OSuite::ZString::ZString(OSuite::ZString *this, unsigned int nNu
 
   v6.m_Chars.m_pList = 0i64;
   v2 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable'{for `OSuite::ZObject'};
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable{for `OSuite::ZObject};
   v3 = nNumber;
-  this->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable'{for `OSuite::IHashable'};
+  this->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable{for `OSuite::IHashable};
   OSuite::ZStringBuilder::ZStringBuilder(&v6, 0x10ui64);
   OSuite::ZStringBuilder::AppendInt(&v6, v3);
   v4 = OSuite::ZStringBuilder::Count(&v6);
@@ -175,9 +175,9 @@ void __fastcall OSuite::ZString::ZString(OSuite::ZString *this, __int64 nNumber)
 
   v6.m_Chars.m_pList = 0i64;
   v2 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable'{for `OSuite::ZObject'};
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable{for `OSuite::ZObject};
   v3 = nNumber;
-  this->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable'{for `OSuite::IHashable'};
+  this->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable{for `OSuite::IHashable};
   OSuite::ZStringBuilder::ZStringBuilder(&v6, 0x18ui64);
   OSuite::ZStringBuilder::AppendInt(&v6, v3);
   v4 = OSuite::ZStringBuilder::Count(&v6);
@@ -198,9 +198,9 @@ void __fastcall OSuite::ZString::ZString(OSuite::ZString *this, unsigned __int64
 
   v6.m_Chars.m_pList = 0i64;
   v2 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable'{for `OSuite::ZObject'};
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable{for `OSuite::ZObject};
   v3 = nNumber;
-  this->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable'{for `OSuite::IHashable'};
+  this->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable{for `OSuite::IHashable};
   OSuite::ZStringBuilder::ZStringBuilder(&v6, 0x18ui64);
   OSuite::ZStringBuilder::AppendInt(&v6, v3);
   v4 = OSuite::ZStringBuilder::Count(&v6);
@@ -219,8 +219,8 @@ void __fastcall OSuite::ZString::ZString(OSuite::ZString *this, OSuite::ZString 
 
   v2 = this;
   v3 = that;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable'{for `OSuite::ZObject'};
-  this->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable'{for `OSuite::IHashable'};
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable{for `OSuite::ZObject};
+  this->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable{for `OSuite::IHashable};
   v4 = that->m_pString;
   if ( v4 )
   {
@@ -237,8 +237,8 @@ void __fastcall OSuite::ZString::ZString(OSuite::ZString *this, OSuite::ZString 
 // RVA: 0xEE2C40
 void __fastcall OSuite::ZString::~ZString(OSuite::ZString *this)
 {
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable'{for `OSuite::ZObject'};
-  this->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable'{for `OSuite::IHashable'};
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable{for `OSuite::ZObject};
+  this->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable{for `OSuite::IHashable};
   OSuite::ZString::DecreaseRefCount(this);
 }
 
@@ -481,8 +481,8 @@ LABEL_13:
   v11->m_nHash = 0;
   v11->m_nRefCount = 1;
   v11->m_nLength = v12;
-  v5->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable'{for `OSuite::ZObject'};
-  v5->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable'{for `OSuite::IHashable'};
+  v5->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable{for `OSuite::ZObject};
+  v5->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable{for `OSuite::IHashable};
   v5->m_pString = v11;
   return v5;
 }
@@ -535,8 +535,8 @@ LABEL_10:
   v10->m_nHash = 0;
   v10->m_nLength = v8 + v11;
   v4->m_pString = v10;
-  v4->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable'{for `OSuite::ZObject'};
-  v4->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable'{for `OSuite::IHashable'};
+  v4->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable{for `OSuite::ZObject};
+  v4->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable{for `OSuite::IHashable};
   return v4;
 }
 
@@ -726,8 +726,8 @@ OSuite::ZString *__fastcall OSuite::ZString::ToLower(OSuite::ZString *this, OSui
           v6->m_nRefCount = 1;
           v6->m_nHash = 0;
           v6->m_nLength = v13 - 20;
-          v15->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable'{for `OSuite::ZObject'};
-          v15->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable'{for `OSuite::IHashable'};
+          v15->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable{for `OSuite::ZObject};
+          v15->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable{for `OSuite::IHashable};
           v15->m_pString = v6;
           return v4;
         }
@@ -738,8 +738,8 @@ OSuite::ZString *__fastcall OSuite::ZString::ToLower(OSuite::ZString *this, OSui
     return v4;
   }
   result->m_pString = 0i64;
-  result->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable'{for `OSuite::ZObject'};
-  result->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable'{for `OSuite::IHashable'};
+  result->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable{for `OSuite::ZObject};
+  result->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable{for `OSuite::IHashable};
   return v4;
 }
 
@@ -775,8 +775,8 @@ OSuite::ZString *__fastcall OSuite::ZString::Trim(OSuite::ZString *this, OSuite:
   else
   {
     result->m_pString = 0i64;
-    result->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable'{for `OSuite::ZObject'};
-    result->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable'{for `OSuite::IHashable'};
+    result->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable{for `OSuite::ZObject};
+    result->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable{for `OSuite::IHashable};
   }
   return v3;
 }
@@ -800,8 +800,8 @@ OSuite::ZString *__fastcall OSuite::ZString::Slice(OSuite::ZString *this, OSuite
   else
   {
     result->m_pString = 0i64;
-    result->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable'{for `OSuite::ZObject'};
-    result->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable'{for `OSuite::IHashable'};
+    result->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable{for `OSuite::ZObject};
+    result->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable{for `OSuite::IHashable};
   }
   return v5;
 }
@@ -825,8 +825,8 @@ OSuite::ZString *__fastcall OSuite::ZString::Slice(OSuite::ZString *this, OSuite
   else
   {
     result->m_pString = 0i64;
-    result->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable'{for `OSuite::ZObject'};
-    result->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable'{for `OSuite::IHashable'};
+    result->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable{for `OSuite::ZObject};
+    result->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable{for `OSuite::IHashable};
   }
   return v4;
 }
@@ -996,8 +996,8 @@ void __fastcall OSuite::ZString::Split(OSuite::ZString *this, OSuite::TList<OSui
         OSuite::TList<OSuite::ZString>::Grow(v5, v5->m_nTop + 1);
         OSuite::ZString::operator=(&v5->m_pList[v5->m_nTop], v12);
         ++v5->m_nTop;
-        that.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable'{for `OSuite::ZObject'};
-        that.vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable'{for `OSuite::IHashable'};
+        that.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable{for `OSuite::ZObject};
+        that.vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable{for `OSuite::IHashable};
         OSuite::ZString::DecreaseRefCount(&that);
         v3 = (OSuite::ZString::InternalString *)(v10 + 1);
         if ( !v10[1] )
@@ -1007,8 +1007,8 @@ void __fastcall OSuite::ZString::Split(OSuite::ZString *this, OSuite::TList<OSui
       OSuite::TList<OSuite::ZString>::Grow(v5, v5->m_nTop + 1);
       OSuite::ZString::operator=(&v5->m_pList[v5->m_nTop], &that);
       ++v5->m_nTop;
-      that.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable'{for `OSuite::ZObject'};
-      that.vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable'{for `OSuite::IHashable'};
+      that.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable{for `OSuite::ZObject};
+      that.vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable{for `OSuite::IHashable};
       OSuite::ZString::DecreaseRefCount(&that);
     }
   }
@@ -1179,8 +1179,8 @@ LABEL_3:
   {
     v5->m_pString = 0i64;
   }
-  v5->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable'{for `OSuite::ZObject'};
-  v5->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable'{for `OSuite::IHashable'};
+  v5->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZString::`vftable{for `OSuite::ZObject};
+  v5->vfptr = (OSuite::IHashableVtbl *)&OSuite::ZString::`vftable{for `OSuite::IHashable};
   return v5;
 }
 

@@ -8,7 +8,7 @@ void __fastcall UFG::OnlineFriend::OnlineFriend(UFG::OnlineFriend *this, UFG::On
   v2 = (UFG::qNode<UFG::OnlineFriend,UFG::OnlineFriend> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (UFG::OnlineFriendVtbl *)&UFG::OnlineFriend::`vftable';
+  this->vfptr = (UFG::OnlineFriendVtbl *)&UFG::OnlineFriend::`vftable;
   v3 = &this->m_cOnlineId;
   v3->mPrev = (UFG::qNode<UFG::OnlineId,UFG::OnlineId> *)&v3->mPrev;
   v3->mNext = (UFG::qNode<UFG::OnlineId,UFG::OnlineId> *)&v3->mPrev;
@@ -33,7 +33,7 @@ void __fastcall UFG::OnlineFriend::~OnlineFriend(UFG::OnlineFriend *this)
   UFG::qNode<UFG::OnlineFriend,UFG::OnlineFriend> *v7; // rax
 
   v1 = this;
-  this->vfptr = (UFG::OnlineFriendVtbl *)&UFG::OnlineFriend::`vftable';
+  this->vfptr = (UFG::OnlineFriendVtbl *)&UFG::OnlineFriend::`vftable;
   UFG::qString::~qString(&this->m_sOnlineName);
   v2 = &v1->m_cOnlineId;
   v3 = v1->m_cOnlineId.mPrev;

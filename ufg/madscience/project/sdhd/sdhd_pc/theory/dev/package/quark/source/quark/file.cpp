@@ -478,7 +478,7 @@ void __fastcall UFG::qFileOpList::qFileOpList(UFG::qFileOpList *this, const char
   this->mNext = (UFG::qNode<UFG::qFileOpList,UFG::qFileOpList> *)&this->mPrev;
   UFG::qEvent::qEvent(&this->mEvent, "qFileOpList", 1);
   UFG::qMutex::qMutex(&v2->mMutex, &customWorldMapCaption);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v2->mQueuedOps,
     0x10ui64,
     3,
@@ -521,7 +521,7 @@ void __fastcall UFG::qFileOpList::~qFileOpList(UFG::qFileOpList *this)
   v6->mPrev = v5;
   v1->mExecutingOps.mNode.mPrev = &v1->mExecutingOps.mNode;
   v1->mExecutingOps.mNode.mNext = &v1->mExecutingOps.mNode;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->mQueuedOps,
     0x10ui64,
     3,
@@ -868,7 +868,7 @@ void __fastcall UFG::qFileDevice::qFileDevice(UFG::qFileDevice *this, const char
   v9 = (UFG::qNode<UFG::qFileDevice,UFG::qFileDevice> *)&this->mPrev;
   v9->mPrev = v9;
   v9->mNext = v9;
-  this->vfptr = (UFG::qFileDeviceVtbl *)&UFG::qFileDevice::`vftable';
+  this->vfptr = (UFG::qFileDeviceVtbl *)&UFG::qFileDevice::`vftable;
   v12 = &this->mFileOpLists;
   v12->mNode.mPrev = &v12->mNode;
   v12->mNode.mNext = &v12->mNode;
@@ -913,7 +913,7 @@ void __fastcall UFG::qFileDevice::~qFileDevice(UFG::qFileDevice *this)
   UFG::qNode<UFG::qFileDevice,UFG::qFileDevice> *v11; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qFileDeviceVtbl *)&UFG::qFileDevice::`vftable';
+  this->vfptr = (UFG::qFileDeviceVtbl *)&UFG::qFileDevice::`vftable;
   v2 = &this->mClosedFiles;
   UFG::qList<UFG::qFile,UFG::qFile,1,0>::DeleteNodes(&this->mClosedFiles);
   v3 = v2->mNode.mPrev;
@@ -1197,10 +1197,10 @@ UFG::qString *__fastcall UFG::qFileSystem::MapFilename(UFG::qFileSystem *this, U
       else
       {
         UFG::qPrintf(
-          "ERROR: 'filename' has an incorrect File Mapping location!\n"
+          "ERROR: filename has an incorrect File Mapping location!\n"
           " filename = %s\n"
-          " Message  = If a filename starts with '$(' it must have a trailing ')'\n"
-          "            i.e. '$(InstallDir)\blah.bin\n",
+          " Message  = If a filename starts with $( it must have a trailing )\n"
+          "            i.e. $(InstallDir)\blah.bin\n",
           v4);
       }
     }
@@ -1899,7 +1899,7 @@ bool __fastcall UFG::qOpenInternal(UFG::qFile *file, bool warn_if_fail)
     {
       v8 = UFG::qGetDirectory(&v19);
       UFG::qPrintf(
-        "WARNING:  Could not create directory '%s' when opening '%s'.  Current Dir = '%s'\n",
+        "WARNING:  Could not create directory %s when opening %s.  Current Dir = %s\n",
         result.mData,
         v5,
         v8->mData);
@@ -1963,7 +1963,7 @@ bool __fastcall UFG::qOpenInternal(UFG::qFile *file, bool warn_if_fail)
   }
   else if ( v21 == 1 )
   {
-    UFG::qPrintf("ERROR: Unable to open file = '%s'\n", v2->mFilename);
+    UFG::qPrintf("ERROR: Unable to open file = %s\n", v2->mFilename);
   }
   return v2->mOpenState == 2;
 }
@@ -3594,7 +3594,7 @@ UFG::allocator::free_link *__fastcall UFG::qReadEntireFile(const char *filename,
   if ( !v11 )
     return 0i64;
   if ( !name )
-    UFG::qSPrintf(&dest, "qReadEntireFile('%s')", v8);
+    UFG::qSPrintf(&dest, "qReadEntireFile(%s)", v8);
   v12 = &dest;
   if ( name )
     v12 = name;
@@ -3740,7 +3740,7 @@ UFG::qString *__fastcall UFG::qReadString(UFG::qString *result, const char *file
   v6 = UFG::qOpen(v2, QACCESS_READ, 1);
   if ( !v6 )
     return v3;
-  UFG::qSPrintf(&dest, "qReadEntireFile('%s')", v2);
+  UFG::qSPrintf(&dest, "qReadEntireFile(%s)", v2);
   v7 = UFG::qMemoryPool::Allocate(v5, v4 + 1, &dest, 0i64, 1u);
   v8 = (char *)v7;
   if ( !v7 )

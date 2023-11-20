@@ -32,7 +32,7 @@ __int64 dynamic_initializer_for__UFG::UIHKScreenCaseComplete::gBiosTexturePackFi
 // RVA: 0x1567190
 __int64 dynamic_initializer_for__UFG::UIHKScreenCaseComplete::mInfo__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     &UFG::UIHKScreenCaseComplete::mInfo,
     0x30ui64,
     5,
@@ -142,7 +142,7 @@ void __fastcall UFG::UIHKScreenCaseComplete::UIHKScreenCaseComplete(UFG::UIHKScr
   v1 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -153,7 +153,7 @@ void __fastcall UFG::UIHKScreenCaseComplete::UIHKScreenCaseComplete(UFG::UIHKScr
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenCaseComplete::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenCaseComplete::`vftable;
   *(_WORD *)&this->mIntroAnimComplete = 0;
   this->mFlipOut = 0;
   this->mBioTitles.pObjectInterface = 0i64;
@@ -180,7 +180,7 @@ void __fastcall UFG::UIHKScreenCaseComplete::~UIHKScreenCaseComplete(UFG::UIHKSc
   UFG::UIScreenTextureManager *v4; // rax
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenCaseComplete::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenCaseComplete::`vftable;
   v2 = &UFG::UIHKScreenCaseComplete::mInfo;
   do
   {
@@ -531,7 +531,7 @@ void __fastcall UFG::UIHKScreenCaseComplete::Flash_Init(UFG::UIHKScreenCaseCompl
   pargs.Type = 5;
   pargs.mValue.NValue = (double)(signed int)UFG::UIHKScreenCaseComplete::mCaseType;
   Scaleform::GFx::Movie::Invoke(v2, "Init_Case", 0i64, &pargs, 1u);
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   v3 = 0;
   if ( UFG::UIHKScreenCaseComplete::mNumInfo > 0 )
   {
@@ -570,7 +570,7 @@ void __fastcall UFG::UIHKScreenCaseComplete::Flash_Init(UFG::UIHKScreenCaseCompl
     }
     while ( v3 < UFG::UIHKScreenCaseComplete::mNumInfo );
   }
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   if ( ((unsigned int)pargs.Type >> 6) & 1 )
     (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
       pargs.pObjectInterface,

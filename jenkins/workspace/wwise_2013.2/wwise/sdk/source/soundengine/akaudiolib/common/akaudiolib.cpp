@@ -705,20 +705,20 @@ signed __int64 __fastcall AK::SoundEngine::SetVolumeThresholdInternal(float in_f
     v6 = (__m128)LODWORD(FLOAT_10_0);
     v5 = v4 * 0.050000001;
     v6.m128_f32[0] = powf(10.0, v5);
-    v7 = `AkMath::FastPow10'::`4'::`local static guard';
+    v7 = `AkMath::FastPow10::`4::`local static guard;
     v8 = v6.m128_f32[0];
     if ( v5 >= -37.0 )
     {
-      if ( `AkMath::FastPow10'::`4'::`local static guard' & 1 )
+      if ( `AkMath::FastPow10::`4::`local static guard & 1 )
       {
-        v9 = *(float *)&`AkMath::FastPow10'::`4'::SCALE;
+        v9 = *(float *)&`AkMath::FastPow10::`4::SCALE;
       }
       else
       {
         v9 = FLOAT_2_7866352e7;
-        v7 = `AkMath::FastPow10'::`4'::`local static guard' | 1;
-        `AkMath::FastPow10'::`4'::`local static guard' |= 1u;
-        `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
+        v7 = `AkMath::FastPow10::`4::`local static guard | 1;
+        `AkMath::FastPow10::`4::`local static guard |= 1u;
+        `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
       }
       v11 = (float)(v5 * v9) + 1065353200.0;
       v12 = (signed int)v11 & 0x7FFFFF;
@@ -730,7 +730,7 @@ signed __int64 __fastcall AK::SoundEngine::SetVolumeThresholdInternal(float in_f
     }
     else
     {
-      v9 = *(float *)&`AkMath::FastPow10'::`4'::SCALE;
+      v9 = *(float *)&`AkMath::FastPow10::`4::SCALE;
       v10 = 0.0;
     }
     v6.m128_f32[0] = v2;
@@ -744,8 +744,8 @@ signed __int64 __fastcall AK::SoundEngine::SetVolumeThresholdInternal(float in_f
       {
         v9 = FLOAT_2_7866352e7;
         v7 |= 1u;
-        `AkMath::FastPow10'::`4'::`local static guard' = v7;
-        `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
+        `AkMath::FastPow10::`4::`local static guard = v7;
+        `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
       }
       v3 = (float)((float)((float)((float)(COERCE_FLOAT(
                                              ((signed int)(float)((float)(v9 * v14) + 1065353200.0) & 0x7FFFFF)
@@ -759,43 +759,43 @@ signed __int64 __fastcall AK::SoundEngine::SetVolumeThresholdInternal(float in_f
     if ( (float)(v16.m128_f32[1] * 0.050000001) >= -37.0 && !(v7 & 1) )
     {
       v7 |= 1u;
-      `AkMath::FastPow10'::`4'::SCALE = 1272224376;
-      `AkMath::FastPow10'::`4'::`local static guard' = v7;
+      `AkMath::FastPow10::`4::SCALE = 1272224376;
+      `AkMath::FastPow10::`4::`local static guard = v7;
     }
     if ( (float)(v16.m128_f32[2] * 0.050000001) >= -37.0 && !(v7 & 1) )
     {
       v7 |= 1u;
-      `AkMath::FastPow10'::`4'::SCALE = 1272224376;
-      `AkMath::FastPow10'::`4'::`local static guard' = v7;
+      `AkMath::FastPow10::`4::SCALE = 1272224376;
+      `AkMath::FastPow10::`4::`local static guard = v7;
     }
     if ( (float)(v17.m128_f32[3] * 0.050000001) >= -37.0 && !(v7 & 1) )
     {
       v7 |= 1u;
-      `AkMath::FastPow10'::`4'::SCALE = 1272224376;
-      `AkMath::FastPow10'::`4'::`local static guard' = v7;
+      `AkMath::FastPow10::`4::SCALE = 1272224376;
+      `AkMath::FastPow10::`4::`local static guard = v7;
     }
     if ( (float)(v16.m128_f32[3] * 0.050000001) >= -37.0 && !(v7 & 1) )
     {
       v7 |= 1u;
-      `AkMath::FastPow10'::`4'::SCALE = 1272224376;
-      `AkMath::FastPow10'::`4'::`local static guard' = v7;
+      `AkMath::FastPow10::`4::SCALE = 1272224376;
+      `AkMath::FastPow10::`4::`local static guard = v7;
     }
     if ( (float)(v17.m128_f32[0] * 0.050000001) >= -37.0 && !(v7 & 1) )
     {
       v7 |= 1u;
-      `AkMath::FastPow10'::`4'::SCALE = 1272224376;
-      `AkMath::FastPow10'::`4'::`local static guard' = v7;
+      `AkMath::FastPow10::`4::SCALE = 1272224376;
+      `AkMath::FastPow10::`4::`local static guard = v7;
     }
     if ( (float)(v17.m128_f32[1] * 0.050000001) >= -37.0 && !(v7 & 1) )
     {
       v7 |= 1u;
-      `AkMath::FastPow10'::`4'::SCALE = 1272224376;
-      `AkMath::FastPow10'::`4'::`local static guard' = v7;
+      `AkMath::FastPow10::`4::SCALE = 1272224376;
+      `AkMath::FastPow10::`4::`local static guard = v7;
     }
     if ( (float)(v17.m128_f32[2] * 0.050000001) >= -37.0 && !(v7 & 1) )
     {
-      `AkMath::FastPow10'::`4'::SCALE = 1272224376;
-      `AkMath::FastPow10'::`4'::`local static guard' = v7 | 1;
+      `AkMath::FastPow10::`4::SCALE = 1272224376;
+      `AkMath::FastPow10::`4::`local static guard = v7 | 1;
     }
     if ( v8 <= v10 )
       v8 = v10;

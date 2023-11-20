@@ -9,7 +9,7 @@ __int64 UFG::_dynamic_initializer_for__gNavCellInventory__()
     0xDD3C7B19,
     0,
     0);
-  UFG::gNavCellInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::NavCellInventory::`vftable';
+  UFG::gNavCellInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::NavCellInventory::`vftable;
   return atexit(UFG::_dynamic_atexit_destructor_for__gNavCellInventory__);
 }
 

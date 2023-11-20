@@ -36,15 +36,15 @@ void __fastcall UFG::AIInterestComponent::AIInterestComponent(UFG::AIInterestCom
 
   v2 = this;
   UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name_uid);
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable'{for `UFG::SimComponent'};
-  v2->vfptr = (UFG::StateInterfaceVtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable'{for `UFG::StateInterface'};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable{for `UFG::SimComponent};
+  v2->vfptr = (UFG::StateInterfaceVtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable{for `UFG::StateInterface};
   v2->mAutoActivate = 1;
   v2->mAge = 0.0;
   v3 = (UFG::qNode<UFG::AIInterestComponent,UFG::AIInterestComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIInterestComponent::`vftable'{for `UFG::SimComponent'};
-  v2->vfptr = (UFG::StateInterfaceVtbl *)&UFG::AIInterestComponent::`vftable'{for `UFG::StateInterface'};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIInterestComponent::`vftable{for `UFG::SimComponent};
+  v2->vfptr = (UFG::StateInterfaceVtbl *)&UFG::AIInterestComponent::`vftable{for `UFG::StateInterface};
   v2->mGridRequestCount = 0;
   v2->mFlags = 144;
   v17 = &v2->mpTransform;
@@ -60,7 +60,7 @@ void __fastcall UFG::AIInterestComponent::AIInterestComponent(UFG::AIInterestCom
   *v4 = 0i64;
   v4[1] = 0i64;
   v4[2] = 0i64;
-  v2->mBoundingBox.vfptr = (UFG::BoundingVolumeVtbl *)&UFG::SphereVolume::`vftable';
+  v2->mBoundingBox.vfptr = (UFG::BoundingVolumeVtbl *)&UFG::SphereVolume::`vftable;
   UFG::qBox::SetRadius((UFG::qBox *)&v2->mBoundingBox.mMin, 1.0);
   v5 = UFG::qVector3::msZero.y;
   v6 = UFG::qVector3::msZero.z;
@@ -157,8 +157,8 @@ void __fastcall UFG::AIInterestComponent::~AIInterestComponent(UFG::AIInterestCo
   UFG::qNode<UFG::AIInterestComponent,UFG::AIInterestComponent> *v17; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIInterestComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::StateInterfaceVtbl *)&UFG::AIInterestComponent::`vftable'{for `UFG::StateInterface'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIInterestComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::StateInterfaceVtbl *)&UFG::AIInterestComponent::`vftable{for `UFG::StateInterface};
   v2 = this->mVelocityWindow;
   if ( v2 )
   {
@@ -216,8 +216,8 @@ void __fastcall UFG::AIInterestComponent::~AIInterestComponent(UFG::AIInterestCo
   v17->mPrev = v16;
   v3->mPrev = v3;
   v1->mNext = (UFG::qNode<UFG::AIInterestComponent,UFG::AIInterestComponent> *)&v1->mPrev;
-  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable'{for `UFG::SimComponent'};
-  v1->vfptr = (UFG::StateInterfaceVtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable'{for `UFG::StateInterface'};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable{for `UFG::SimComponent};
+  v1->vfptr = (UFG::StateInterfaceVtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable{for `UFG::StateInterface};
   if ( (LOBYTE(v1->m_Flags) >> 2) & 1 )
   {
     v1->m_Flags |= 2u;

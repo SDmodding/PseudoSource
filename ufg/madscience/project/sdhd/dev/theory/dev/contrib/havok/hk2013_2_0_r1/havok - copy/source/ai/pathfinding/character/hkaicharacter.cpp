@@ -125,7 +125,7 @@ void __fastcall hkaiCharacter::hkaiCharacter(hkaiCharacter *this, hkaiCharacter:
   hkaiAvoidanceProperties *v4; // rsi
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiCharacter::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiCharacter::`vftable;
   v2 = cinfo;
   this->m_userData = cinfo->m_userData;
   v3 = this;
@@ -160,7 +160,7 @@ void __fastcall hkaiCharacter::hkaiCharacter(hkaiCharacter *this, hkaiCharacter:
 // RVA: 0xBD5080
 void __fastcall hkaiCharacter::hkaiCharacter(hkaiCharacter *this, hkFinishLoadedObjectFlag f)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiCharacter::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiCharacter::`vftable;
   this->m_hitFilter.m_pntr = 0i64;
   this->m_steeringFilter.m_pntr = 0i64;
   this->m_behaviorListeners.m_data = 0i64;
@@ -188,7 +188,7 @@ void __fastcall hkaiCharacter::hkaiCharacter(hkaiCharacter *this, hkaiCharacter 
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiCharacter::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiCharacter::`vftable;
   v3 = other;
   this->m_userData = other->m_userData;
   this->m_position = other->m_position;
@@ -265,7 +265,7 @@ void __fastcall hkaiCharacter::~hkaiCharacter(hkaiCharacter *this)
   hkReferencedObject *v7; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiCharacter::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiCharacter::`vftable;
   v2 = this->m_behaviorListeners.m_capacityAndFlags;
   this->m_behaviorListeners.m_size = 0;
   if ( v2 >= 0 )
@@ -295,7 +295,7 @@ void __fastcall hkaiCharacter::~hkaiCharacter(hkaiCharacter *this)
   if ( v7 )
     hkReferencedObject::removeReference(v7);
   v1->m_costModifier.m_pntr = 0i64;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 215

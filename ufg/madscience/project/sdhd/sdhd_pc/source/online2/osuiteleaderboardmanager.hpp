@@ -37,7 +37,7 @@ void __fastcall UFG::OSuiteLeaderboardManager::UpdateEvent::~UpdateEvent(UFG::OS
   UFG::qNode<UFG::OSuiteLeaderboardManager::UpdateEvent,UFG::OSuiteLeaderboardManager::UpdateEvent> *v2; // rcx
   UFG::qNode<UFG::OSuiteLeaderboardManager::UpdateEvent,UFG::OSuiteLeaderboardManager::UpdateEvent> *v3; // rax
 
-  this->vfptr = (UFG::OSuiteLeaderboardManager::UpdateEventVtbl *)&UFG::OSuiteLeaderboardManager::UpdateEvent::`vftable';
+  this->vfptr = (UFG::OSuiteLeaderboardManager::UpdateEventVtbl *)&UFG::OSuiteLeaderboardManager::UpdateEvent::`vftable;
   v1 = (UFG::qNode<UFG::OSuiteLeaderboardManager::UpdateEvent,UFG::OSuiteLeaderboardManager::UpdateEvent> *)&this->mPrev;
   v2 = this->mPrev;
   v3 = v1->mNext;
@@ -55,8 +55,8 @@ void __fastcall UFG::OSuiteLeaderboardManager::Score::~Score(UFG::OSuiteLeaderbo
   UFG::qNode<UFG::OSuiteLeaderboardManager::UpdateEvent,UFG::OSuiteLeaderboardManager::UpdateEvent> *v2; // rcx
   UFG::qNode<UFG::OSuiteLeaderboardManager::UpdateEvent,UFG::OSuiteLeaderboardManager::UpdateEvent> *v3; // rax
 
-  this->vfptr = (UFG::OSuiteLeaderboardManager::UpdateEventVtbl *)&UFG::OSuiteLeaderboardManager::Score::`vftable';
-  this->vfptr = (UFG::OSuiteLeaderboardManager::UpdateEventVtbl *)&UFG::OSuiteLeaderboardManager::UpdateEvent::`vftable';
+  this->vfptr = (UFG::OSuiteLeaderboardManager::UpdateEventVtbl *)&UFG::OSuiteLeaderboardManager::Score::`vftable;
+  this->vfptr = (UFG::OSuiteLeaderboardManager::UpdateEventVtbl *)&UFG::OSuiteLeaderboardManager::UpdateEvent::`vftable;
   v1 = (UFG::qNode<UFG::OSuiteLeaderboardManager::UpdateEvent,UFG::OSuiteLeaderboardManager::UpdateEvent> *)&this->mPrev;
   v2 = this->mPrev;
   v3 = v1->mNext;
@@ -75,13 +75,13 @@ void __fastcall UFG::OSuiteLeaderboardManager::RaceScore::RaceScore(UFG::OSuiteL
   v6 = (UFG::qNode<UFG::OSuiteLeaderboardManager::UpdateEvent,UFG::OSuiteLeaderboardManager::UpdateEvent> *)&this->mPrev;
   v6->mPrev = v6;
   v6->mNext = v6;
-  this->vfptr = (UFG::OSuiteLeaderboardManager::UpdateEventVtbl *)&UFG::OSuiteLeaderboardManager::UpdateEvent::`vftable';
-  this->vfptr = (UFG::OSuiteLeaderboardManager::UpdateEventVtbl *)&UFG::OSuiteLeaderboardManager::Score::`vftable';
+  this->vfptr = (UFG::OSuiteLeaderboardManager::UpdateEventVtbl *)&UFG::OSuiteLeaderboardManager::UpdateEvent::`vftable;
+  this->vfptr = (UFG::OSuiteLeaderboardManager::UpdateEventVtbl *)&UFG::OSuiteLeaderboardManager::Score::`vftable;
   this->m_pLBD = pLBD;
   this->m_iScore = score;
   this->m_pCallback = p;
   this->m_eType = 3;
-  this->vfptr = (UFG::OSuiteLeaderboardManager::UpdateEventVtbl *)&UFG::OSuiteLeaderboardManager::RaceScore::`vftable';
+  this->vfptr = (UFG::OSuiteLeaderboardManager::UpdateEventVtbl *)&UFG::OSuiteLeaderboardManager::RaceScore::`vftable;
   this->m_bIsWin = isWin;
   UFG::qString::qString(&this->m_sCarUsed, carUsed);
 }
@@ -104,7 +104,7 @@ void __fastcall UFG::OSuiteLeaderboardManager::~OSuiteLeaderboardManager(UFG::OS
   UFG::qNode<UFG::OSuiteManagerObserver,UFG::OSuiteManagerObserver> *v12; // rax
 
   v1 = this;
-  this->vfptr = (UFG::OSuiteManagerObserverVtbl *)&UFG::OSuiteLeaderboardManager::`vftable';
+  this->vfptr = (UFG::OSuiteManagerObserverVtbl *)&UFG::OSuiteLeaderboardManager::`vftable;
   UFG::OSuiteManager::Instance();
   v2 = (UFG::qNode<UFG::OSuiteManagerObserver,UFG::OSuiteManagerObserver> *)&v1->mPrev;
   v3 = v1->mPrev;
@@ -137,7 +137,7 @@ void __fastcall UFG::OSuiteLeaderboardManager::~OSuiteLeaderboardManager(UFG::OS
   if ( v9 )
   {
     v10 = &v9[-1].mFlow;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v9,
       0x138ui64,
       v9[-1].mFlow.mUID,
@@ -146,7 +146,7 @@ void __fastcall UFG::OSuiteLeaderboardManager::~OSuiteLeaderboardManager(UFG::OS
   }
   v1->mLeaderboardData.p = 0i64;
   *(_QWORD *)&v1->mLeaderboardData.size = 0i64;
-  v1->vfptr = (UFG::OSuiteManagerObserverVtbl *)&UFG::OSuiteManagerObserver::`vftable';
+  v1->vfptr = (UFG::OSuiteManagerObserverVtbl *)&UFG::OSuiteManagerObserver::`vftable;
   v11 = v2->mPrev;
   v12 = v1->mNext;
   v11->mNext = v12;

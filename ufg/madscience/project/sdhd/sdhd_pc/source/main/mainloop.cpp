@@ -225,9 +225,9 @@ __int64 __fastcall UFG::AgogErrorOutput::determine_choice(UFG::AgogErrorOutput *
     v6 = "Error";
     v5 = "\n"
          "Choose:\n"
-         "  'Abort'  - break into C++ & get callstack [then ignore on continue]\n"
-         "  'Retry'  - attempt recovery/ignore [still tests this assert in future]\n"
-         "  'Ignore' - recover/ignore always [auto-ignores this assert in future]";
+         "  Abort  - break into C++ & get callstack [then ignore on continue]\n"
+         "  Retry  - attempt recovery/ignore [still tests this assert in future]\n"
+         "  Ignore - recover/ignore always [auto-ignores this assert in future]";
   }
   else
   {
@@ -381,7 +381,7 @@ UFG::AgogErrorOutput *__fastcall Agog::on_error_pre(bool nested)
   if ( !(_S8_10 & 1) )
   {
     _S8_10 |= 1u;
-    s_simple_err_out.vfptr = (AErrorOutputBaseVtbl *)&UFG::AgogErrorOutput::`vftable';
+    s_simple_err_out.vfptr = (AErrorOutputBaseVtbl *)&UFG::AgogErrorOutput::`vftable;
     atexit(Agog::on_error_pre_::_2_::_dynamic_atexit_destructor_for__s_simple_err_out__);
   }
   return &s_simple_err_out;
@@ -2630,21 +2630,21 @@ LABEL_36:
   v61 = UFG::TimeOfDayManager::GetInstance();
   UFG::TimeOfDayManager::Init(v61);
   v62 = UFG::TimeOfDayManager::GetInstance();
-  v63 = `UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result )
+  v63 = `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result )
   {
     v64 = UFG::qResourceWarehouse::Instance();
     v63 = UFG::qResourceWarehouse::GetInventory(v64, 0x4D04C7F2u);
-    `UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result = v63;
+    `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result = v63;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v62->mSunnyStateBlockHandle.mPrev, 0x4D04C7F2u, 0x764E403Au, v63);
   v65 = UFG::TimeOfDayManager::GetInstance();
-  v66 = `UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result )
+  v66 = `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result )
   {
     v67 = UFG::qResourceWarehouse::Instance();
     v66 = UFG::qResourceWarehouse::GetInventory(v67, 0x4D04C7F2u);
-    `UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result = v66;
+    `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result = v66;
   }
   UFG::qResourceHandle::Init(
     (UFG::qResourceHandle *)&v65->mOvercastStateBlockHandle.mPrev,
@@ -2889,13 +2889,13 @@ LABEL_36:
     SetUpCameraForFERender(v115);
   DebugTestInit();
   _(0i64);
-  if ( !(`UFG::qStaticInitAllocator::Instance'::`2'::`local static guard' & 1) )
+  if ( !(`UFG::qStaticInitAllocator::Instance::`2::`local static guard & 1) )
   {
-    `UFG::qStaticInitAllocator::Instance'::`2'::`local static guard' |= 1u;
-    UFG::qStaticInitAllocator::qStaticInitAllocator(&`UFG::qStaticInitAllocator::Instance'::`2'::instance);
-    atexit(`UFG::qStaticInitAllocator::Instance'::`2'::`dynamic atexit destructor for 'instance'');
+    `UFG::qStaticInitAllocator::Instance::`2::`local static guard |= 1u;
+    UFG::qStaticInitAllocator::qStaticInitAllocator(&`UFG::qStaticInitAllocator::Instance::`2::instance);
+    atexit(`UFG::qStaticInitAllocator::Instance::`2::`dynamic atexit destructor for instance);
   }
-  UFG::qStaticInitAllocator::Done(&`UFG::qStaticInitAllocator::Instance'::`2'::instance);
+  UFG::qStaticInitAllocator::Done(&`UFG::qStaticInitAllocator::Instance::`2::instance);
   InitGameSystems_Stage2();
   UFG::MemoryUtil_MarkAllPools(v116);
   while ( !UFG::LoadingLogic::HasRequiredScreensFinished(&UFG::gLoadingLogic) )

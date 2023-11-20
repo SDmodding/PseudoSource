@@ -22,8 +22,8 @@ void __fastcall UFG::NavObjectParkour::NavObjectParkour(UFG::NavObjectParkour *t
   v7 = vStartEdgeB;
   v8 = vStartEdgeA;
   v9 = this;
-  this->vfptr = (UFG::NavObjectVtbl *)&UFG::NavObject::`vftable';
-  this->vfptr = (UFG::NavObjectVtbl *)&UFG::NavObjectParkour::`vftable';
+  this->vfptr = (UFG::NavObjectVtbl *)&UFG::NavObject::`vftable;
+  this->vfptr = (UFG::NavObjectVtbl *)&UFG::NavObjectParkour::`vftable;
   v10 = (float)(vEndEdgeB->z + vEndEdgeA->z) * 0.5;
   v11 = (float)(vEndEdgeB->y + vEndEdgeA->y) * 0.5;
   vPosition.x = (float)(vEndEdgeA->x + vEndEdgeB->x) * 0.5;

@@ -17,7 +17,7 @@ __int64 UFG::_dynamic_initializer_for__gBIGFileInventory__()
     0x2C5C40A8u,
     0,
     0);
-  UFG::gBIGFileInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::BIGFileInventory::`vftable';
+  UFG::gBIGFileInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::BIGFileInventory::`vftable;
   return atexit(UFG::_dynamic_atexit_destructor_for__gBIGFileInventory__);
 }
 
@@ -94,7 +94,7 @@ __int64 UFG::_dynamic_initializer_for__gBIGFileNameLookupInventory__()
     0x164013D5u,
     0,
     0);
-  UFG::gBIGFileNameLookupInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::BIGFileNameLookupInventory::`vftable';
+  UFG::gBIGFileNameLookupInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::BIGFileNameLookupInventory::`vftable;
   return atexit(UFG::_dynamic_atexit_destructor_for__gBIGFileNameLookupInventory__);
 }
 
@@ -206,7 +206,7 @@ void __fastcall UFG::EmptyFileCallback(UFG::qFileOp *file_op, void *callback_par
   v3 = UFG::qFileOp::GetStatusName(file_op);
   v4 = UFG::qFileOp::GetTypeName(v2);
   v5 = UFG::qFileOp::GetFilename(v2);
-  UFG::qPrintf("Got empty callback for qFileOp * 0x%08x '%s' %s - %s\n", v2, v5, v4, v3);
+  UFG::qPrintf("Got empty callback for qFileOp * 0x%08x %s %s - %s\n", v2, v5, v4, v3);
 }
 
 // File Line: 247
@@ -227,7 +227,7 @@ void __fastcall UFG::BigFileSystem::ReopenBigFile(const char *filename)
 
   v8 = -2i64;
   v1 = filename;
-  UFG::qPrintf("schedule reopen of file '%s'\n", filename);
+  UFG::qPrintf("schedule reopen of file %s\n", filename);
   for ( i = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead(&stru_142377400);
         i;
         i = UFG::qBaseTreeRB::GetNext((UFG::qBaseTreeRB *)&stru_142377400, &i->mRoot) )
@@ -239,7 +239,7 @@ void __fastcall UFG::BigFileSystem::ReopenBigFile(const char *filename)
       UFG::qString::~qString(&v9);
       if ( !(unsigned int)UFG::qStringCompareInsensitive(result.mData, v1, -1) )
       {
-        UFG::qPrintf("Closing bigfile '%s' qFile* at 0x%08x\n", &i[1].mNULL.mUID + 1, i[1].mNULL.mChild[0]);
+        UFG::qPrintf("Closing bigfile %s qFile* at 0x%08x\n", &i[1].mNULL.mUID + 1, i[1].mNULL.mChild[0]);
         UFG::qCloseAsync((UFG::qFile *)i[1].mNULL.mChild[0], UFG::EmptyFileCallback, 0i64, QPRIORITY_NORMAL);
         i[1].mNULL.mChild[0] = 0i64;
         UFG::qString::qString(&v10, &result);
@@ -248,7 +248,7 @@ void __fastcall UFG::BigFileSystem::ReopenBigFile(const char *filename)
         UFG::qString::~qString(&v11);
         v6 = UFG::qOpenAsync(result.mData, QACCESS_READ, 0, UFG::EmptyFileCallback, 0i64, QPRIORITY_NORMAL);
         i[1].mNULL.mChild[0] = (UFG::qBaseNodeRB *)v6;
-        UFG::qPrintf("Reopenned bigfile '%s' qFile* at 0x%08x\n", &i[1].mNULL.mUID + 1, v6);
+        UFG::qPrintf("Reopenned bigfile %s qFile* at 0x%08x\n", &i[1].mNULL.mUID + 1, v6);
       }
       UFG::qString::~qString(&result);
     }

@@ -56,7 +56,7 @@ void __fastcall hkQsTransform_fasterRenormalizeBatch(hkQsTransformf *poseOut, un
       v15 = _mm_mul_ps(
               _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v14, v13), v14)),
               _mm_mul_ps(*(__m128 *)_xmm, v14));
-      v16 = _mm_and_ps(v15, (__m128)`hkVector4f::getComponent'::`2'::indexToMask);
+      v16 = _mm_and_ps(v15, (__m128)`hkVector4f::getComponent::`2::indexToMask);
       v17 = _mm_or_ps(_mm_shuffle_ps(v16, v16, 78), v16);
       poseOut[-4].m_rotation.m_vec.m_quad = _mm_mul_ps(_mm_or_ps(_mm_shuffle_ps(v17, v17, 177), v17), v3.m_vec.m_quad);
       v18 = _mm_and_ps(v15, (__m128)xmmword_141687F10);

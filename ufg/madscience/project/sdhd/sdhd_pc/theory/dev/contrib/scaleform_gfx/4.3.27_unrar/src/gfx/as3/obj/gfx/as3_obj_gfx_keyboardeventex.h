@@ -25,7 +25,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_gfx::KeyboardEventEx> *__
     Scaleform::GFx::AS3::Instances::fl_events::KeyboardEvent::KeyboardEvent(
       v4,
       (Scaleform::GFx::AS3::InstanceTraits::Traits *)&v2->vfptr);
-    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_gfx::KeyboardEventEx::`vftable';
+    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_gfx::KeyboardEventEx::`vftable;
     v5->controllerIdx = 0;
   }
   else

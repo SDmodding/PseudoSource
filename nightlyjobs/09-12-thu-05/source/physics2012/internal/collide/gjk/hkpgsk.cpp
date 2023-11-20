@@ -38,11 +38,11 @@ signed __int64 __fastcall findClosestTriangleBackup(hkVector4f *a0, hkVector4f *
   {
     v7 = oldDots->m_quad;
     v8 = *v4;
-    v9 = _mm_and_ps((__m128)`hkVector4f::getComponent'::`2'::indexToMask[v4[2]], oldDots->m_quad);
+    v9 = _mm_and_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[v4[2]], oldDots->m_quad);
     v10 = _mm_or_ps(_mm_shuffle_ps(v9, v9, 78), v9);
     if ( COERCE_FLOAT(*(unsigned __int128 *)&_mm_shuffle_ps(v10, v10, 177) | v10.m128_i32[0]) >= 0.0 )
     {
-      v11 = _mm_and_ps((__m128)`hkVector4f::getComponent'::`2'::indexToMask[v8], v7);
+      v11 = _mm_and_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[v8], v7);
       v12 = _mm_or_ps(_mm_shuffle_ps(v11, v11, 78), v11);
       if ( COERCE_FLOAT(*(unsigned __int128 *)&_mm_shuffle_ps(v12, v12, 177) | v12.m128_i32[0]) >= 0.0 )
       {
@@ -67,9 +67,9 @@ signed __int64 __fastcall findClosestTriangleBackup(hkVector4f *a0, hkVector4f *
                            * (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v20, v20, 85))
                                            + COERCE_FLOAT(_mm_shuffle_ps(v20, v20, 0)))
                                    + COERCE_FLOAT(_mm_shuffle_ps(v20, v20, 170))))) >= 0.0 )
-          v22 = (__m128)`hkVector4f::getComponent'::`2'::indexToMask[v4[2]];
+          v22 = (__m128)`hkVector4f::getComponent::`2::indexToMask[v4[2]];
         else
-          v22 = (__m128)`hkVector4f::getComponent'::`2'::indexToMask[v8];
+          v22 = (__m128)`hkVector4f::getComponent::`2::indexToMask[v8];
         oldDots->m_quad = _mm_or_ps(_mm_andnot_ps(v22, v7), _mm_and_ps(v22, g_vectorfConstants[0]));
       }
     }

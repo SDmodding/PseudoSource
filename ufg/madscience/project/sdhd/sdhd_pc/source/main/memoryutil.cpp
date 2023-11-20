@@ -55,7 +55,7 @@ void __fastcall UFG::MemoryUtil_DumpUnmarked(const char *message)
       if ( v4 > 0 )
       {
         v5 = UFG::qMemoryPool::GetName(i);
-        UFG::qPrintf("   '%s': Contains (%d) unmarked!\n", v5, (unsigned int)v4);
+        UFG::qPrintf("   %s: Contains (%d) unmarked!\n", v5, (unsigned int)v4);
         UFG::qMemoryPool::ReportUnmarked(i);
       }
     }
@@ -75,7 +75,7 @@ void __fastcall UFG::MemoryUtil_DumpUnmarked(const char *message)
       if ( v7 )
       {
         v8 = UFG::qMemoryPool::GetName(j);
-        UFG::qPrintf("   '%s': Contains (%d) unmarked!  (See dump above)\n", v8, v7);
+        UFG::qPrintf("   %s: Contains (%d) unmarked!  (See dump above)\n", v8, v7);
       }
       else
       {

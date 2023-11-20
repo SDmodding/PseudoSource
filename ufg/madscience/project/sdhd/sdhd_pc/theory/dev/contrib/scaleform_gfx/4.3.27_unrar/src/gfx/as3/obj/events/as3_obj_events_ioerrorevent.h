@@ -27,8 +27,8 @@ Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent> *__
     Scaleform::GFx::AS3::Instances::fl_events::TextEvent::TextEvent(
       v4,
       (Scaleform::GFx::AS3::InstanceTraits::Traits *)&v2->vfptr);
-    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_events::ErrorEvent::`vftable';
-    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent::`vftable';
+    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_events::ErrorEvent::`vftable;
+    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent::`vftable;
     v6 = v5->pTraits.pObject->pVM->StringManagerRef;
     v7 = v6->Builtins[0].pNode;
     v5->Text.pNode = v6->Builtins[0].pNode;

@@ -6,7 +6,7 @@ void __fastcall hkaiSimpleObstacleGenerator::hkaiSimpleObstacleGenerator(hkaiSim
 
   v1 = this;
   hkaiObstacleGenerator::hkaiObstacleGenerator((hkaiObstacleGenerator *)&this->vfptr);
-  v1->vfptr = (hkBaseObjectVtbl *)&hkaiSimpleObstacleGenerator::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkaiSimpleObstacleGenerator::`vftable;
   v1->m_localAabb.m_min = (hkVector4f)xmmword_141A712A0;
   v1->m_localAabb.m_max.m_quad = _mm_xor_ps(
                                    (__m128)_mm_shuffle_epi32(_mm_insert_epi16((__m128i)0i64, 0x8000u, 1), 0),

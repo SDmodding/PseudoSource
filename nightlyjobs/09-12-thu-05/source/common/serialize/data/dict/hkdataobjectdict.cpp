@@ -7,7 +7,7 @@ __int64 anonymous_namespace_::_dynamic_initializer_for__InternedNullRefCounted__
 
 // File Line: 115
 // RVA: 0xE43B00
-void __fastcall `anonymous namespace'::Union::clearArray(Union *this, hkTypeManager::Type *typeIn, Union *u, int n, unsigned int destroyStructs)
+void __fastcall `anonymous namespace::Union::clearArray(Union *this, hkTypeManager::Type *typeIn, Union *u, int n, unsigned int destroyStructs)
 {
   int v5; // er15
   hkTypeManager::Type *v6; // r14
@@ -104,7 +104,7 @@ void __fastcall hkDataClassDict::hkDataClassDict(hkDataClassDict *this, hkDataWo
   v4 = this;
   *(_QWORD *)&this->m_memSize = 0xFFFFi64;
   this->m_world = root;
-  this->vfptr = (hkDataRefCountedVtbl *)&hkDataClassDict::`vftable';
+  this->vfptr = (hkDataRefCountedVtbl *)&hkDataClassDict::`vftable;
   v5 = version;
   hkDataWorldDict::ObjectTracker::internClassNameHandle(root->m_tracker, &this->m_name, name);
   v4->m_version = v5;
@@ -647,7 +647,7 @@ LABEL_8:
         }
         v10 = (signed __int64)&v5->m_memberInfo.m_data[v7];
         if ( v10 )
-          `anonymous namespace'::Union::clearArray(
+          `anonymous namespace::Union::clearArray(
             *(Union **)(v10 + 16),
             (hkTypeManager::Type *)&v4[v1].m_value,
             (Union *)1,
@@ -721,7 +721,7 @@ LABEL_8:
         }
         v10 = (signed __int64)&v5->m_memberInfo.m_data[v7];
         if ( v10 )
-          `anonymous namespace'::Union::clearArray(
+          `anonymous namespace::Union::clearArray(
             *(Union **)(v10 + 16),
             (hkTypeManager::Type *)&v4[v1].m_value,
             (Union *)1,
@@ -809,7 +809,7 @@ LABEL_11:
       }
       v13 = (signed __int64)&v7->m_memberInfo.m_data[v10];
       if ( v13 )
-        `anonymous namespace'::Union::clearArray(
+        `anonymous namespace::Union::clearArray(
           *(Union **)(v13 + 16),
           (hkTypeManager::Type *)&v8->m_value,
           (Union *)1,
@@ -1085,7 +1085,7 @@ LABEL_5:
       if ( v6 >= v4 )
         goto LABEL_5;
     }
-    `anonymous namespace'::Union::clearArray(
+    `anonymous namespace::Union::clearArray(
       *((Union **)handle + 2),
       (hkTypeManager::Type *)&this->m_memberData.m_data[v5].m_value,
       (Union *)1,
@@ -1684,7 +1684,7 @@ void __fastcall VariableIntArrayImplementation::~VariableIntArrayImplementation(
   hkMemoryAllocator *v5; // rcx
 
   v1 = this;
-  this->vfptr = (hkDataRefCountedVtbl *)&VariableIntArrayImplementation::`vftable';
+  this->vfptr = (hkDataRefCountedVtbl *)&VariableIntArrayImplementation::`vftable;
   v2 = this->m_int32Array.m_capacityAndFlags;
   v3 = this->m_world->m_allocator;
   v1->m_int32Array.m_size = 0;
@@ -1699,7 +1699,7 @@ void __fastcall VariableIntArrayImplementation::~VariableIntArrayImplementation(
     v5->vfptr->bufFree(v5, v1->m_int64Array.m_data, 8 * v4);
   v1->m_int64Array.m_data = 0i64;
   v1->m_int64Array.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkDataRefCountedVtbl *)&hkDataRefCounted::`vftable';
+  v1->vfptr = (hkDataRefCountedVtbl *)&hkDataRefCounted::`vftable;
 }
 
 // File Line: 1338
@@ -2363,7 +2363,7 @@ hkDataArrayImpl *__fastcall ArrayOfTuplesImplementation::View::swizzleObjectMemb
     return 0i64;
   v6 = v2->m_baseIndex;
   *(_QWORD *)&result->m_memSize = 0xFFFFi64;
-  result->vfptr = (hkDataRefCountedVtbl *)&ArrayOfTuplesImplementation::View::`vftable';
+  result->vfptr = (hkDataRefCountedVtbl *)&ArrayOfTuplesImplementation::View::`vftable;
   result[1].vfptr = v3;
   *(_DWORD *)&result[1].m_memSize = v6;
   return result;
@@ -2585,7 +2585,7 @@ ArrayOfTuplesImplementation *__fastcall ArrayOfTuplesImplementation::swizzleObje
       *(_QWORD *)(v5 + 16) = v3->m_world;
       *(_DWORD *)(v5 + 32) = v6;
       *(_QWORD *)(v5 + 8) = 0xFFFFi64;
-      *(_QWORD *)v5 = &ArrayOfTuplesImplementation::`vftable';
+      *(_QWORD *)v5 = &ArrayOfTuplesImplementation::`vftable;
       *(_QWORD *)(v5 + 24) = 0i64;
       *(_QWORD *)(v5 + 40) = 0i64;
     }
@@ -2687,7 +2687,7 @@ hkDataArrayImpl *__fastcall ArrayOfTuplesImplementation::asArray(ArrayOfTuplesIm
     return 0i64;
   v6 = v2->m_tupleCount;
   *(_QWORD *)&result->m_memSize = 0xFFFFi64;
-  result->vfptr = (hkDataRefCountedVtbl *)&ArrayOfTuplesImplementation::View::`vftable';
+  result->vfptr = (hkDataRefCountedVtbl *)&ArrayOfTuplesImplementation::View::`vftable;
   result[1].vfptr = (hkDataRefCountedVtbl *)v2;
   *(_DWORD *)&result[1].m_memSize = v3 * v6;
   return result;
@@ -3077,7 +3077,7 @@ hkDataArrayImpl *__fastcall VecArrayImplementation::asArray(VecArrayImplementati
   v7 = (signed __int64)&v2->m_data.m_data[v3 * v4];
   v8 = (hkDataRefCountedVtbl *)v2->m_world;
   *(_QWORD *)&result->m_memSize = 0xFFFFi64;
-  result->vfptr = (hkDataRefCountedVtbl *)&RealArrayView::`vftable';
+  result->vfptr = (hkDataRefCountedVtbl *)&RealArrayView::`vftable;
   *(_QWORD *)&result[1].m_memSize = v7;
   result[1].vfptr = v8;
   LODWORD(result[2].vfptr) = v4;
@@ -3181,7 +3181,7 @@ void __fastcall PointerArrayImplementation::~PointerArrayImplementation(PointerA
   hkMemoryAllocator *v7; // rcx
 
   v1 = 0;
-  this->vfptr = (hkDataRefCountedVtbl *)&PointerArrayImplementation::`vftable';
+  this->vfptr = (hkDataRefCountedVtbl *)&PointerArrayImplementation::`vftable;
   v2 = this;
   if ( this->m_data.m_size > 0 )
   {
@@ -3200,7 +3200,7 @@ void __fastcall PointerArrayImplementation::~PointerArrayImplementation(PointerA
     }
     while ( v1 < v2->m_data.m_size );
   }
-  v2->vfptr = (hkDataRefCountedVtbl *)&BasicArrayImplementation<hkDataObjectImpl *>::`vftable';
+  v2->vfptr = (hkDataRefCountedVtbl *)&BasicArrayImplementation<hkDataObjectImpl *>::`vftable;
   v6 = v2->m_data.m_capacityAndFlags;
   v7 = v2->m_world->m_allocator;
   v2->m_data.m_size = 0;
@@ -3208,7 +3208,7 @@ void __fastcall PointerArrayImplementation::~PointerArrayImplementation(PointerA
     v7->vfptr->bufFree(v7, v2->m_data.m_data, 8 * v6);
   v2->m_data.m_data = 0i64;
   v2->m_data.m_capacityAndFlags = 2147483648;
-  v2->vfptr = (hkDataRefCountedVtbl *)&hkDataRefCounted::`vftable';
+  v2->vfptr = (hkDataRefCountedVtbl *)&hkDataRefCounted::`vftable;
 }
 
 // File Line: 2083
@@ -3229,7 +3229,7 @@ void __fastcall CstringArrayImplementation::~CstringArrayImplementation(CstringA
   hkMemoryAllocator *v5; // rcx
 
   v1 = 0;
-  this->vfptr = (hkDataRefCountedVtbl *)&CstringArrayImplementation::`vftable';
+  this->vfptr = (hkDataRefCountedVtbl *)&CstringArrayImplementation::`vftable;
   v2 = this;
   if ( this->m_data.m_size > 0 )
   {
@@ -3242,7 +3242,7 @@ void __fastcall CstringArrayImplementation::~CstringArrayImplementation(CstringA
     }
     while ( v1 < v2->m_data.m_size );
   }
-  v2->vfptr = (hkDataRefCountedVtbl *)&BasicArrayImplementation<char *>::`vftable';
+  v2->vfptr = (hkDataRefCountedVtbl *)&BasicArrayImplementation<char *>::`vftable;
   v4 = v2->m_data.m_capacityAndFlags;
   v5 = v2->m_world->m_allocator;
   v2->m_data.m_size = 0;
@@ -3250,7 +3250,7 @@ void __fastcall CstringArrayImplementation::~CstringArrayImplementation(CstringA
     v5->vfptr->bufFree(v5, v2->m_data.m_data, 8 * v4);
   v2->m_data.m_data = 0i64;
   v2->m_data.m_capacityAndFlags = 2147483648;
-  v2->vfptr = (hkDataRefCountedVtbl *)&hkDataRefCounted::`vftable';
+  v2->vfptr = (hkDataRefCountedVtbl *)&hkDataRefCounted::`vftable;
 }
 
 // File Line: 2107
@@ -3284,7 +3284,7 @@ void __fastcall ArrayArrayImplementation::~ArrayArrayImplementation(ArrayArrayIm
   hkMemoryAllocator *v7; // rcx
 
   v1 = 0;
-  this->vfptr = (hkDataRefCountedVtbl *)&ArrayArrayImplementation::`vftable';
+  this->vfptr = (hkDataRefCountedVtbl *)&ArrayArrayImplementation::`vftable;
   v2 = this;
   if ( this->m_data.m_size > 0 )
   {
@@ -3303,7 +3303,7 @@ void __fastcall ArrayArrayImplementation::~ArrayArrayImplementation(ArrayArrayIm
     }
     while ( v1 < v2->m_data.m_size );
   }
-  v2->vfptr = (hkDataRefCountedVtbl *)&BasicArrayImplementation<hkDataArrayImpl *>::`vftable';
+  v2->vfptr = (hkDataRefCountedVtbl *)&BasicArrayImplementation<hkDataArrayImpl *>::`vftable;
   v6 = v2->m_data.m_capacityAndFlags;
   v7 = v2->m_world->m_allocator;
   v2->m_data.m_size = 0;
@@ -3311,7 +3311,7 @@ void __fastcall ArrayArrayImplementation::~ArrayArrayImplementation(ArrayArrayIm
     v7->vfptr->bufFree(v7, v2->m_data.m_data, 8 * v6);
   v2->m_data.m_data = 0i64;
   v2->m_data.m_capacityAndFlags = 2147483648;
-  v2->vfptr = (hkDataRefCountedVtbl *)&hkDataRefCounted::`vftable';
+  v2->vfptr = (hkDataRefCountedVtbl *)&hkDataRefCounted::`vftable;
 }
 
 // File Line: 2128
@@ -4236,7 +4236,7 @@ void __fastcall StructArrayImplementation::StructArrayImplementation(StructArray
 
   v5 = 0;
   *(_QWORD *)&this->m_memSize = 0xFFFFi64;
-  this->vfptr = (hkDataRefCountedVtbl *)&StructArrayImplementation::`vftable';
+  this->vfptr = (hkDataRefCountedVtbl *)&StructArrayImplementation::`vftable;
   v6 = this;
   this->m_memberData.m_data = 0i64;
   this->m_memberData.m_size = 0;
@@ -4294,7 +4294,7 @@ void __fastcall StructArrayImplementation::~StructArrayImplementation(StructArra
   hkResult result; // [rsp+30h] [rbp+8h]
 
   v1 = 0;
-  this->vfptr = (hkDataRefCountedVtbl *)&StructArrayImplementation::`vftable';
+  this->vfptr = (hkDataRefCountedVtbl *)&StructArrayImplementation::`vftable;
   v2 = this;
   if ( this->m_memberData.m_size > 0 )
   {
@@ -4335,7 +4335,7 @@ void __fastcall StructArrayImplementation::~StructArrayImplementation(StructArra
       v11->vfptr->__vecDelDtor((hkDataRefCounted *)&v11->vfptr, 1u);
   }
   v2->m_class.m_pntr = 0i64;
-  v2->vfptr = (hkDataRefCountedVtbl *)&hkDataRefCounted::`vftable';
+  v2->vfptr = (hkDataRefCountedVtbl *)&hkDataRefCounted::`vftable;
 }
 
 // File Line: 2602
@@ -4362,7 +4362,7 @@ hkDataObjectImpl *__fastcall StructArrayImplementation::asObject(StructArrayImpl
     return 0i64;
   *(_QWORD *)&result->m_memSize = 0xFFFFi64;
   result[1].vfptr = v2;
-  result->vfptr = (hkDataRefCountedVtbl *)&StructArrayImplementation::Object::`vftable';
+  result->vfptr = (hkDataRefCountedVtbl *)&StructArrayImplementation::Object::`vftable;
   *(_DWORD *)&result[1].m_memSize = v3;
   return result;
 }
@@ -4552,7 +4552,7 @@ void __fastcall hkDataArrayDict_create(hkDataWorldDict *world, hkTypeManager::Ty
         *(_DWORD *)(v24 + 24) = 0;
         *(_DWORD *)(v24 + 28) = 2147483648;
         *(_QWORD *)(v24 + 32) = v5;
-        *(_QWORD *)v24 = &ByteArrayImplementation::`vftable';
+        *(_QWORD *)v24 = &ByteArrayImplementation::`vftable;
         *(_QWORD *)(v24 + 40) = v4;
       }
       break;
@@ -4566,7 +4566,7 @@ void __fastcall hkDataArrayDict_create(hkDataWorldDict *world, hkTypeManager::Ty
         *(_DWORD *)(v22 + 24) = 0;
         *(_DWORD *)(v22 + 28) = 2147483648;
         *(_QWORD *)(v22 + 32) = v5;
-        *(_QWORD *)v22 = &RealArrayImplementation::`vftable';
+        *(_QWORD *)v22 = &RealArrayImplementation::`vftable;
         *(_QWORD *)(v22 + 40) = v4;
       }
       break;
@@ -4578,7 +4578,7 @@ void __fastcall hkDataArrayDict_create(hkDataWorldDict *world, hkTypeManager::Ty
         *(_QWORD *)(v18 + 8) = 0xFFFFi64;
         *(_QWORD *)(v18 + 16) = v5;
         *(_DWORD *)(v18 + 24) = 0;
-        *(_QWORD *)v18 = &VariableIntArrayImplementation::`vftable';
+        *(_QWORD *)v18 = &VariableIntArrayImplementation::`vftable;
         *(_QWORD *)(v18 + 32) = 0i64;
         *(_DWORD *)(v18 + 40) = 0;
         *(_DWORD *)(v18 + 44) = 2147483648;
@@ -4598,7 +4598,7 @@ void __fastcall hkDataArrayDict_create(hkDataWorldDict *world, hkTypeManager::Ty
         *(_DWORD *)(v20 + 24) = 0;
         *(_DWORD *)(v20 + 28) = 2147483648;
         *(_QWORD *)(v20 + 32) = v5;
-        *(_QWORD *)v20 = &CstringArrayImplementation::`vftable';
+        *(_QWORD *)v20 = &CstringArrayImplementation::`vftable;
         *(_QWORD *)(v20 + 40) = v4;
       }
       break;
@@ -4634,7 +4634,7 @@ void __fastcall hkDataArrayDict_create(hkDataWorldDict *world, hkTypeManager::Ty
           *(_DWORD *)(v29 + 24) = 0;
           *(_DWORD *)(v29 + 28) = 2147483648;
           *(_QWORD *)(v29 + 32) = v5;
-          *(_QWORD *)v29 = &PointerArrayImplementation::`vftable';
+          *(_QWORD *)v29 = &PointerArrayImplementation::`vftable;
           *(_QWORD *)(v29 + 40) = v4;
         }
       }
@@ -4652,7 +4652,7 @@ void __fastcall hkDataArrayDict_create(hkDataWorldDict *world, hkTypeManager::Ty
         *(_DWORD *)(v7 + 28) = 2147483648;
         *(_QWORD *)(v7 + 32) = v5;
         *(_QWORD *)(v7 + 40) = v4;
-        *(_QWORD *)v7 = &ArrayArrayImplementation::`vftable';
+        *(_QWORD *)v7 = &ArrayArrayImplementation::`vftable;
       }
       else
       {
@@ -4681,7 +4681,7 @@ void __fastcall hkDataArrayDict_create(hkDataWorldDict *world, hkTypeManager::Ty
         if ( v13 )
         {
           *(_QWORD *)(v13 + 8) = 0xFFFFi64;
-          *(_QWORD *)v13 = &VecArrayImplementation::`vftable';
+          *(_QWORD *)v13 = &VecArrayImplementation::`vftable;
           *(_QWORD *)(v13 + 16) = 0i64;
           *(_DWORD *)(v13 + 24) = 0;
           *(_DWORD *)(v13 + 28) = 2147483648;
@@ -4697,7 +4697,7 @@ void __fastcall hkDataArrayDict_create(hkDataWorldDict *world, hkTypeManager::Ty
         if ( v15 )
         {
           v16 = hkTypeManager::Type::getTupleSize(v4);
-          *(_QWORD *)v15 = &ArrayOfTuplesImplementation::`vftable';
+          *(_QWORD *)v15 = &ArrayOfTuplesImplementation::`vftable;
           *(_QWORD *)(v15 + 8) = 0xFFFFi64;
           *(_QWORD *)(v15 + 16) = v5;
           *(_DWORD *)(v15 + 32) = v16;
@@ -6144,7 +6144,7 @@ hkReferencedObject **__fastcall hkDataWorldDict::ObjectTracker::internClassNameH
             (unsigned __int64)v8);
         }
         *(_QWORD *)(v6 + 16) = v8;
-        *(_QWORD *)v6 = &`anonymous namespace'::InternedStringRefCounted::`vftable';
+        *(_QWORD *)v6 = &`anonymous namespace::InternedStringRefCounted::`vftable;
         *(_DWORD *)(v6 + 8) = 0x1FFFF;
       }
       else
@@ -6175,7 +6175,7 @@ void __fastcall hkDataWorldDict::hkDataWorldDict(hkDataWorldDict *this)
 
   v1 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkDataWorldDict::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkDataWorldDict::`vftable;
   hkTypeManager::hkTypeManager(&this->m_typeManager);
   v1->m_allocator = (hkMemoryAllocator *)*((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
   v2 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
@@ -6205,7 +6205,7 @@ void __fastcall hkDataWorldDict::hkDataWorldDict(hkDataWorldDict *this, hkMemory
 
   v2 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkDataWorldDict::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkDataWorldDict::`vftable;
   v3 = mall;
   hkTypeManager::hkTypeManager(&this->m_typeManager);
   v2->m_allocator = v3;
@@ -6234,7 +6234,7 @@ void __fastcall hkDataWorldDict::~hkDataWorldDict(hkDataWorldDict *this)
 
   v1 = this->m_tracker;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkDataWorldDict::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkDataWorldDict::`vftable;
   if ( v1 )
   {
     hkDataWorldDict::ObjectTracker::~ObjectTracker(v1);
@@ -6245,7 +6245,7 @@ void __fastcall hkDataWorldDict::~hkDataWorldDict(hkDataWorldDict *this)
       184i64);
   }
   hkTypeManager::~hkTypeManager(&v2->m_typeManager);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 3228
@@ -6293,7 +6293,7 @@ hkDataObjectDict *__fastcall hkDataWorldDict::newObject(hkDataWorldDict *this, h
   {
     v9 = v5->m_impl;
     *(_QWORD *)(v7 + 8) = 0xFFFFi64;
-    *(_QWORD *)v7 = &hkDataObjectDict::`vftable';
+    *(_QWORD *)v7 = &hkDataObjectDict::`vftable;
     if ( v9 )
       ++v9->m_count;
     *(_QWORD *)(v7 + 16) = v9;

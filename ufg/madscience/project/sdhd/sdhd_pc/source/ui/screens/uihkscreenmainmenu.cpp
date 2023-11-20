@@ -50,7 +50,7 @@ void __fastcall UFG::UIHKScreenMainMenu::UIHKScreenMainMenu(UFG::UIHKScreenMainM
   v2 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -65,18 +65,18 @@ void __fastcall UFG::UIHKScreenMainMenu::UIHKScreenMainMenu(UFG::UIHKScreenMainM
   v4 = (UFG::qNode<UFG::OnlineManagerObserver,UFG::OnlineManagerObserver> *)&this->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  v3->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::OnlineManagerObserver::`vftable';
+  v3->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::OnlineManagerObserver::`vftable;
   v5 = (UFG::OSuiteManagerObserver *)&this->vfptr;
   v6 = (UFG::qNode<UFG::OSuiteManagerObserver,UFG::OSuiteManagerObserver> *)&v5->mPrev;
   v6->mPrev = v6;
   v6->mNext = v6;
-  v5->vfptr = (UFG::OSuiteManagerObserverVtbl *)&UFG::OSuiteManagerObserver::`vftable';
-  v1->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenMainMenu::`vftable'{for `UFG::UIScreen'};
-  v3->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::UIHKScreenMainMenu::`vftable'{for `UFG::OnlineManagerObserver'};
-  v5->vfptr = (UFG::OSuiteManagerObserverVtbl *)&UFG::UIHKScreenMainMenu::`vftable'{for `UFG::OSuiteManagerObserver'};
+  v5->vfptr = (UFG::OSuiteManagerObserverVtbl *)&UFG::OSuiteManagerObserver::`vftable;
+  v1->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenMainMenu::`vftable{for `UFG::UIScreen};
+  v3->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::UIHKScreenMainMenu::`vftable{for `UFG::OnlineManagerObserver};
+  v5->vfptr = (UFG::OSuiteManagerObserverVtbl *)&UFG::UIHKScreenMainMenu::`vftable{for `UFG::OSuiteManagerObserver};
   v1->mInfoTickerSet = 0;
   UFG::UIPropertySetMenu::UIPropertySetMenu((UFG::UIPropertySetMenu *)&v1->mMenu.vfptr);
-  v1->mMenu.vfptr = (UFG::UIPropertySetMenuVtbl *)&UFG::UIPropertySetMenuMainNav::`vftable';
+  v1->mMenu.vfptr = (UFG::UIPropertySetMenuVtbl *)&UFG::UIPropertySetMenuMainNav::`vftable;
   *(_WORD *)&v1->mContinueEnabled = 0;
   v7 = &v1->mOnlineIdsToGetDisplayImageFor;
   v7->mNode.mPrev = &v7->mNode;
@@ -88,7 +88,7 @@ void __fastcall UFG::UIHKScreenMainMenu::UIHKScreenMainMenu(UFG::UIHKScreenMainM
   v1->mIsHeaderLoadStarted = 0;
   v1->mHeaderInfo.p = 0i64;
   *(_QWORD *)&v1->mHeaderInfo.size = 0i64;
-  `eh vector constructor iterator'(v1->mFlowList, 4ui64, 3, (void (__fastcall *)(void *))BackInfo::BackInfo);
+  `eh vector constructor iterator(v1->mFlowList, 4ui64, 3, (void (__fastcall *)(void *))BackInfo::BackInfo);
   v1->mCurrentFlowToCheck = 0;
   *(_WORD *)&v1->mIsLoadingSaveGame = 0;
   v1->mIsTransitionToGame = 0;
@@ -152,11 +152,11 @@ void __fastcall UFG::UIHKScreenMainMenu::~UIHKScreenMainMenu(UFG::UIHKScreenMain
   UFG::qSymbol result; // [rsp+58h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenMainMenu::`vftable'{for `UFG::UIScreen'};
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenMainMenu::`vftable{for `UFG::UIScreen};
   v2 = (UFG::OnlineManagerObserver *)&this->vfptr;
-  this->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::UIHKScreenMainMenu::`vftable'{for `UFG::OnlineManagerObserver'};
+  this->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::UIHKScreenMainMenu::`vftable{for `UFG::OnlineManagerObserver};
   v3 = (UFG::OnlineManagerObserver *)&this->vfptr;
-  this->vfptr = (UFG::OSuiteManagerObserverVtbl *)&UFG::UIHKScreenMainMenu::`vftable'{for `UFG::OSuiteManagerObserver'};
+  this->vfptr = (UFG::OSuiteManagerObserverVtbl *)&UFG::UIHKScreenMainMenu::`vftable{for `UFG::OSuiteManagerObserver};
   v4 = UFG::UIHKScreenGlobalOverlay::mThis;
   if ( !UFG::UIHKScreenGlobalOverlay::mThis )
     v4 = &gGlobalOverlaySentinel;
@@ -206,12 +206,12 @@ void __fastcall UFG::UIHKScreenMainMenu::~UIHKScreenMainMenu(UFG::UIHKScreenMain
   }
   UFG::MoviePlayer::Close(&v1->HKUIMovie);
   UFG::MoviePlayer::~MoviePlayer(&v1->HKUIMovie);
-  `eh vector destructor iterator'(v1->mFlowList, 4ui64, 3, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(v1->mFlowList, 4ui64, 3, (void (__fastcall *)(void *))_);
   v21 = v1->mHeaderInfo.p;
   if ( v21 )
   {
     v22 = &v21[-1].flow;
-    `eh vector destructor iterator'(v21, 0x10ui64, v21[-1].flow.mUID, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v21, 0x10ui64, v21[-1].flow.mUID, (void (__fastcall *)(void *))_);
     operator delete[](v22);
   }
   v1->mHeaderInfo.p = 0i64;
@@ -232,7 +232,7 @@ void __fastcall UFG::UIHKScreenMainMenu::~UIHKScreenMainMenu(UFG::UIHKScreenMain
   *(_QWORD *)&result.mUID = (char *)v1 + 200;
   UFG::UIPropertySetMenu::~UIPropertySetMenu((UFG::UIPropertySetMenu *)&v1->mMenu.vfptr);
   *(_QWORD *)&result.mUID = v3;
-  v3->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::OSuiteManagerObserver::`vftable';
+  v3->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::OSuiteManagerObserver::`vftable;
   v26 = (UFG::qNode<UFG::OnlineManagerObserver,UFG::OnlineManagerObserver> *)&v3->mPrev;
   v27 = v3->mPrev;
   v28 = v3->mNext;
@@ -241,7 +241,7 @@ void __fastcall UFG::UIHKScreenMainMenu::~UIHKScreenMainMenu(UFG::UIHKScreenMain
   v26->mPrev = v26;
   v26->mNext = v26;
   *(_QWORD *)&result.mUID = v2;
-  v2->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::OnlineManagerObserver::`vftable';
+  v2->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::OnlineManagerObserver::`vftable;
   v29 = (UFG::qNode<UFG::OnlineManagerObserver,UFG::OnlineManagerObserver> *)&v2->mPrev;
   v30 = v2->mPrev;
   v31 = v2->mNext;
@@ -305,7 +305,7 @@ void __fastcall UFG::UIHKScreenMainMenu::init(UFG::UIHKScreenMainMenu *this, UFG
     v6 = 0i64;
   v7 = UFG::OSuiteManager::Instance();
   UFG::OSuiteManager::RegisterObserver(v7, v6);
-  v29 = &UFG::UIPropertySetMenuData::`vftable';
+  v29 = &UFG::UIPropertySetMenuData::`vftable;
   UFG::qString::qString(&v31);
   UFG::qString::qString(&v32);
   v30 = v2;
@@ -324,14 +324,14 @@ void __fastcall UFG::UIHKScreenMainMenu::init(UFG::UIHKScreenMainMenu *this, UFG
   v35 = v11;
   if ( v11 )
   {
-    *(_QWORD *)v11 = &Scaleform::RefCountImplCore::`vftable';
+    *(_QWORD *)v11 = &Scaleform::RefCountImplCore::`vftable;
     *(_DWORD *)(v11 + 8) = 1;
-    *(_QWORD *)v11 = &Scaleform::RefCountImpl::`vftable';
-    *(_QWORD *)v11 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-    *(_QWORD *)v11 = &Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable';
-    *(_QWORD *)v11 = &Scaleform::GFx::State::`vftable';
+    *(_QWORD *)v11 = &Scaleform::RefCountImpl::`vftable;
+    *(_QWORD *)v11 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+    *(_QWORD *)v11 = &Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable;
+    *(_QWORD *)v11 = &Scaleform::GFx::State::`vftable;
     *(_DWORD *)(v11 + 16) = 3;
-    *(_QWORD *)v11 = &Scaleform::GFx::ActionControl::`vftable';
+    *(_QWORD *)v11 = &Scaleform::GFx::ActionControl::`vftable;
     *(_DWORD *)(v11 + 24) = 8;
   }
   else
@@ -414,7 +414,7 @@ void __fastcall UFG::UIHKScreenMainMenu::init(UFG::UIHKScreenMainMenu *this, UFG
     UFG::qString::~qString(&v33);
   }
   Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v11);
-  v29 = &UFG::UIPropertySetMenuData::`vftable';
+  v29 = &UFG::UIPropertySetMenuData::`vftable;
   UFG::qString::~qString(&v32);
   UFG::qString::~qString(&v31);
 }
@@ -754,7 +754,7 @@ bool __fastcall UFG::UIHKScreenMainMenu::handleMessage(UFG::UIHKScreenMainMenu *
   {
     v9 = UFG::OnlineManager::Instance();
     UFG::OnlineManager::GetRetreivedDisplayImage(v9, &result);
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     v10 = result.mData;
     if ( (LODWORD(v83) >> 6) & 1 )
     {
@@ -796,7 +796,7 @@ bool __fastcall UFG::UIHKScreenMainMenu::handleMessage(UFG::UIHKScreenMainMenu *
       v78 = (unsigned __int64)v16[1].mPrev;
       ((void (__fastcall *)(UFG::OnlineManager *, __int64 **))v15->vfptr->RetreivePlayerDisplayImage)(v15, &v76);
     }
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     UFG::qString::~qString(&result);
   }
   v17 = 0x40000000;
@@ -1341,12 +1341,12 @@ void __fastcall UFG::UIHKScreenMainMenu::EnterGame(UFG::UIHKScreenMainMenu *this
     v5 = UFG::TimeOfDayManager::GetInstance();
     v6 = v5;
     v5->m_OverrideStateBlockAmount = 1.0;
-    v7 = `UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result )
+    v7 = `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result )
     {
       v8 = UFG::qResourceWarehouse::Instance();
       v7 = UFG::qResourceWarehouse::GetInventory(v8, 0x4D04C7F2u);
-      `UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result = v7;
+      `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result = v7;
     }
     UFG::qResourceHandle::Init(
       (UFG::qResourceHandle *)&v6->mOverrideStateBlockHandle.mPrev,
@@ -1367,12 +1367,12 @@ void __fastcall UFG::UIHKScreenMainMenu::EnterGame(UFG::UIHKScreenMainMenu *this
     v10 = UFG::TimeOfDayManager::GetInstance();
     v11 = v10;
     v10->m_OverrideStateBlockAmount = 0.0;
-    v12 = `UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result )
+    v12 = `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result )
     {
       v13 = UFG::qResourceWarehouse::Instance();
       v12 = UFG::qResourceWarehouse::GetInventory(v13, 0x4D04C7F2u);
-      `UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result = v12;
+      `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result = v12;
     }
     UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v11->mOverrideStateBlockHandle.mPrev, 0x4D04C7F2u, 0, v12);
     Render::SkyMarshall::gSkyMarshall.mDebugDomeIndex = -1;
@@ -2156,7 +2156,7 @@ LABEL_80:
           }
           presult.pObjectInterface = 0i64;
           presult.Type = 0;
-          `eh vector constructor iterator'(&ptr, 0x30ui64, 5, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+          `eh vector constructor iterator(&ptr, 0x30ui64, 5, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
           v80 = (double)*(signed int *)(v13 + 44);
           if ( (v97 >> 6) & 1 )
           {
@@ -2208,7 +2208,7 @@ LABEL_80:
           v2 = v134;
           Scaleform::GFx::Movie::Invoke(v134, "SetSocialHubSlot", &presult, (Scaleform::GFx::Value *)&ptr, 5u);
           v6 = presult.mValue.BValue;
-          `eh vector destructor iterator'(&ptr, 0x30ui64, 5, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+          `eh vector destructor iterator(&ptr, 0x30ui64, 5, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
           if ( ((unsigned int)presult.Type >> 6) & 1 )
           {
             (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&presult.pObjectInterface->vfptr->gap8[8])(

@@ -108,7 +108,7 @@ void __fastcall UFG::UIHKPlayerObjectiveManager::UIHKPlayerObjectiveManager(UFG:
   UFG::UIHKPlayerObjectiveManager *v1; // rbx
 
   v1 = this;
-  this->vfptr = (UFG::UIHKPlayerObjectiveManagerVtbl *)&UFG::UIHKPlayerObjectiveManager::`vftable';
+  this->vfptr = (UFG::UIHKPlayerObjectiveManagerVtbl *)&UFG::UIHKPlayerObjectiveManager::`vftable;
   this->m_objectives.p = 0i64;
   *(_QWORD *)&this->m_objectives.size = 0i64;
   this->m_currentObjective = -1;
@@ -130,7 +130,7 @@ void __fastcall UFG::UIHKPlayerObjectiveManager::~UIHKPlayerObjectiveManager(UFG
   UFG::UIHKPlayerObjective **v2; // rcx
 
   v1 = this;
-  this->vfptr = (UFG::UIHKPlayerObjectiveManagerVtbl *)&UFG::UIHKPlayerObjectiveManager::`vftable';
+  this->vfptr = (UFG::UIHKPlayerObjectiveManagerVtbl *)&UFG::UIHKPlayerObjectiveManager::`vftable;
   UFG::UIHKPlayerObjectiveManager::mInstance = 0i64;
   UFG::UIHKPlayerObjective::~UIHKPlayerObjective(&this->mWorldMapObjective);
   UFG::UIHKPlayerObjective::~UIHKPlayerObjective(&v1->mTempObjective);
@@ -1226,7 +1226,7 @@ LABEL_29:
   }
   if ( v1 )
   {
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v1,
       0x48ui64,
       (int)v1[-1].target.m_pPointer,

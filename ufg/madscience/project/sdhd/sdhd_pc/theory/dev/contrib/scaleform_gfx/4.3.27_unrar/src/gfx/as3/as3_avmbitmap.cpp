@@ -23,9 +23,9 @@ void __fastcall Scaleform::GFx::AS3::AvmBitmap::AvmBitmap(Scaleform::GFx::AS3::A
   Scaleform::GFx::AS3::AvmDisplayObj::AvmDisplayObj(
     (Scaleform::GFx::AS3::AvmDisplayObj *)&v6->vfptr,
     (Scaleform::GFx::DisplayObject *)&v6->vfptr);
-  v6->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::AS3::AvmBitmap::`vftable'{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>'};
-  v6->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::AS3::AvmBitmap::`vftable'{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>'};
-  v6->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmBitmap::`vftable';
+  v6->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::AS3::AvmBitmap::`vftable{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>};
+  v6->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::AS3::AvmBitmap::`vftable{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>};
+  v6->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmBitmap::`vftable;
   v8 = v5->pBindDefImpl;
   if ( v8 )
     Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)&v5->pBindDefImpl->vfptr);
@@ -70,9 +70,9 @@ void __fastcall Scaleform::GFx::AS3::AvmBitmap::~AvmBitmap(Scaleform::GFx::AS3::
   Scaleform::GFx::Resource *v4; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::AS3::AvmBitmap::`vftable'{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>'};
-  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::AS3::AvmBitmap::`vftable'{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>'};
-  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmBitmap::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::AS3::AvmBitmap::`vftable{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>};
+  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::AS3::AvmBitmap::`vftable{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>};
+  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmBitmap::`vftable;
   v2 = this->pDefImpl.pObject;
   if ( v2 )
     Scaleform::GFx::MovieImpl::AddMovieDefToKillList(this->pASRoot->pMovieImpl, v2);
@@ -301,7 +301,7 @@ __int64 __fastcall Scaleform::GFx::AS3::AvmBitmap::CreateASInstance(Scaleform::G
           }
         }
       }
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         &ptr,
         0x20ui64,
         2,
@@ -719,12 +719,12 @@ __int64 __fastcall Scaleform::GFx::AS3::AvmBitmap::CreateBitmapShape(Scaleform::
   v49 = v9;
   if ( v9 )
   {
-    *(_QWORD *)v9 = &Scaleform::RefCountImplCore::`vftable';
+    *(_QWORD *)v9 = &Scaleform::RefCountImplCore::`vftable;
     *(_DWORD *)(v9 + 8) = 1;
-    *(_QWORD *)v9 = &Scaleform::RefCountImpl::`vftable';
-    *(_QWORD *)v9 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable';
-    *(_QWORD *)v9 = &Scaleform::RefCountBase<Scaleform::Render::ComplexFill,71>::`vftable';
-    *(_QWORD *)v9 = &Scaleform::Render::ComplexFill::`vftable';
+    *(_QWORD *)v9 = &Scaleform::RefCountImpl::`vftable;
+    *(_QWORD *)v9 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,71>::`vftable;
+    *(_QWORD *)v9 = &Scaleform::RefCountBase<Scaleform::Render::ComplexFill,71>::`vftable;
+    *(_QWORD *)v9 = &Scaleform::Render::ComplexFill::`vftable;
     *(_QWORD *)(v9 + 16) = 0i64;
     *(_QWORD *)(v9 + 24) = 0i64;
     *(_QWORD *)(v9 + 32) = 1065353216i64;
@@ -760,7 +760,7 @@ __int64 __fastcall Scaleform::GFx::AS3::AvmBitmap::CreateBitmapShape(Scaleform::
       if ( !v11 )
       {
         LODWORD(id) = 135168;
-        v14 = "Image is not created: can't find ImageCreator.";
+        v14 = "Image is not created: cant find ImageCreator.";
         v15 = &id;
         goto LABEL_44;
       }

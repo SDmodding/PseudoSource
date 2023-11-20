@@ -1351,7 +1351,7 @@ UFG::qPropertySet *__usercall UFG::qPropertySetResource::LoadSetFromXMLNode@<rax
         v16 = property_set;
         v11 = property_set;
         if ( property_set )
-          v18 = UFG::qPropertySet::`scalar deleting destructor'(v11, 1);
+          v18 = UFG::qPropertySet::`scalar deleting destructor(v11, 1);
         else
           v18 = 0i64;
       }

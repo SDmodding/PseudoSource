@@ -11,7 +11,7 @@ void __fastcall hkpStaticCompoundShapeBreakableMaterial::hkpStaticCompoundShapeB
     strength);
   v3->m_typeAndFlags &= 0xFFFFFF2F;
   v3->m_typeAndFlags |= 0x20u;
-  v3->vfptr = (hkBaseObjectVtbl *)&hkpStaticCompoundShapeBreakableMaterial::`vftable';
+  v3->vfptr = (hkBaseObjectVtbl *)&hkpStaticCompoundShapeBreakableMaterial::`vftable;
 }
 
 // File Line: 25
@@ -29,7 +29,7 @@ void __fastcall hkpStaticCompoundShapeBreakableMaterial::hkpStaticCompoundShapeB
 
   v2 = this;
   hkpBreakableMultiMaterial::hkpBreakableMultiMaterial((hkpBreakableMultiMaterial *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpStaticCompoundShapeBreakableMaterial::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpStaticCompoundShapeBreakableMaterial::`vftable;
 }
 
 // File Line: 41
@@ -42,7 +42,7 @@ void __fastcall hkpStaticCompoundShapeBreakableMaterial::hkpStaticCompoundShapeB
   hkpBreakableMultiMaterial::hkpBreakableMultiMaterial(
     (hkpBreakableMultiMaterial *)&this->vfptr,
     (hkpBreakableMultiMaterial *)&other->vfptr);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpStaticCompoundShapeBreakableMaterial::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpStaticCompoundShapeBreakableMaterial::`vftable;
 }
 
 // File Line: 47

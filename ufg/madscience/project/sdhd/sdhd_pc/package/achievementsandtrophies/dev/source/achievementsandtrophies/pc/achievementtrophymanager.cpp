@@ -123,28 +123,28 @@ void __fastcall UFG::AchievementTrophyManager::AchievementTrophyManager(UFG::Ach
 
   v1 = this;
   UFG::AchievementTrophyManagerBase::AchievementTrophyManagerBase((UFG::AchievementTrophyManagerBase *)&this->vfptr);
-  v1->vfptr = (UFG::AchievementTrophyManagerBaseVtbl *)&UFG::AchievementTrophyManager::`vftable';
+  v1->vfptr = (UFG::AchievementTrophyManagerBaseVtbl *)&UFG::AchievementTrophyManager::`vftable;
   v2 = (signed __int64)&v1->mUserStatsReceivedCB;
   *(_BYTE *)(v2 + 8) = 0;
   *(_DWORD *)(v2 + 12) = 0;
-  *(_QWORD *)v2 = &CCallback<UFG::AchievementTrophyManager,UserStatsReceived_t,0>::`vftable';
+  *(_QWORD *)v2 = &CCallback<UFG::AchievementTrophyManager,UserStatsReceived_t,0>::`vftable;
   *(_QWORD *)(v2 + 16) = 0i64;
   *(_QWORD *)(v2 + 24) = 0i64;
-  *(_QWORD *)v2 = &CCallbackManual<UFG::AchievementTrophyManager,UserStatsReceived_t,0>::`vftable';
+  *(_QWORD *)v2 = &CCallbackManual<UFG::AchievementTrophyManager,UserStatsReceived_t,0>::`vftable;
   v3 = (signed __int64)&v1->mUserStatsStoredCB;
   *(_BYTE *)(v3 + 8) = 0;
   *(_DWORD *)(v3 + 12) = 0;
-  *(_QWORD *)v3 = &CCallback<UFG::AchievementTrophyManager,UserStatsStored_t,0>::`vftable';
+  *(_QWORD *)v3 = &CCallback<UFG::AchievementTrophyManager,UserStatsStored_t,0>::`vftable;
   *(_QWORD *)(v3 + 16) = 0i64;
   *(_QWORD *)(v3 + 24) = 0i64;
-  *(_QWORD *)v3 = &CCallbackManual<UFG::AchievementTrophyManager,UserStatsStored_t,0>::`vftable';
+  *(_QWORD *)v3 = &CCallbackManual<UFG::AchievementTrophyManager,UserStatsStored_t,0>::`vftable;
   v4 = (signed __int64)&v1->mAchievementStoredCB;
   *(_BYTE *)(v4 + 8) = 0;
   *(_DWORD *)(v4 + 12) = 0;
-  *(_QWORD *)v4 = &CCallback<UFG::AchievementTrophyManager,UserAchievementStored_t,0>::`vftable';
+  *(_QWORD *)v4 = &CCallback<UFG::AchievementTrophyManager,UserAchievementStored_t,0>::`vftable;
   *(_QWORD *)(v4 + 16) = 0i64;
   *(_QWORD *)(v4 + 24) = 0i64;
-  *(_QWORD *)v4 = &CCallbackManual<UFG::AchievementTrophyManager,UserAchievementStored_t,0>::`vftable';
+  *(_QWORD *)v4 = &CCallbackManual<UFG::AchievementTrophyManager,UserAchievementStored_t,0>::`vftable;
   if ( UFG::AchievementTrophyManager::OnUserStatsReceived )
   {
     if ( v1->mUserStatsReceivedCB.m_nCallbackFlags & 1 )
@@ -179,15 +179,15 @@ void __fastcall UFG::AchievementTrophyManager::~AchievementTrophyManager(UFG::Ac
   CCallbackManual<UFG::AchievementTrophyManager,UserAchievementStored_t,0> *v2; // rcx
 
   v1 = this;
-  this->vfptr = (UFG::AchievementTrophyManagerBaseVtbl *)&UFG::AchievementTrophyManager::`vftable';
+  this->vfptr = (UFG::AchievementTrophyManagerBaseVtbl *)&UFG::AchievementTrophyManager::`vftable;
   v2 = &this->mAchievementStoredCB;
-  v2->vfptr = (CCallbackBaseVtbl *)&CCallback<UFG::AchievementTrophyManager,UserAchievementStored_t,0>::`vftable';
+  v2->vfptr = (CCallbackBaseVtbl *)&CCallback<UFG::AchievementTrophyManager,UserAchievementStored_t,0>::`vftable;
   if ( v2->m_nCallbackFlags & 1 )
     SteamAPI_UnregisterCallback(v2);
-  v1->mUserStatsStoredCB.vfptr = (CCallbackBaseVtbl *)&CCallback<UFG::AchievementTrophyManager,UserStatsStored_t,0>::`vftable';
+  v1->mUserStatsStoredCB.vfptr = (CCallbackBaseVtbl *)&CCallback<UFG::AchievementTrophyManager,UserStatsStored_t,0>::`vftable;
   if ( v1->mUserStatsStoredCB.m_nCallbackFlags & 1 )
     SteamAPI_UnregisterCallback(&v1->mUserStatsStoredCB);
-  v1->mUserStatsReceivedCB.vfptr = (CCallbackBaseVtbl *)&CCallback<UFG::AchievementTrophyManager,UserStatsReceived_t,0>::`vftable';
+  v1->mUserStatsReceivedCB.vfptr = (CCallbackBaseVtbl *)&CCallback<UFG::AchievementTrophyManager,UserStatsReceived_t,0>::`vftable;
   if ( v1->mUserStatsReceivedCB.m_nCallbackFlags & 1 )
     SteamAPI_UnregisterCallback(&v1->mUserStatsReceivedCB);
   UFG::AchievementTrophyManagerBase::~AchievementTrophyManagerBase((UFG::AchievementTrophyManagerBase *)&v1->vfptr);

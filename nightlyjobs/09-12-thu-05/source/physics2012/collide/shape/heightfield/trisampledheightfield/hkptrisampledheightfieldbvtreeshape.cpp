@@ -11,9 +11,9 @@ void __fastcall hkpTriSampledHeightFieldBvTreeShape::hkpTriSampledHeightFieldBvT
   this->m_userData = 0i64;
   this->m_bvTreeType.m_storage = 1;
   v3 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpTriSampledHeightFieldBvTreeShape::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpTriSampledHeightFieldBvTreeShape::`vftable;
   this->m_childContainer.m_childShape = (hkpShape *)&c->vfptr;
-  this->m_childContainer.vfptr = (hkpShapeContainerVtbl *)&hkpSingleShapeContainer::`vftable';
+  this->m_childContainer.vfptr = (hkpShapeContainerVtbl *)&hkpSingleShapeContainer::`vftable;
   hkReferencedObject::addReference((hkReferencedObject *)&c->vfptr);
   v3->m_wantAabbRejectionTest.m_bool = v4;
 }
@@ -28,8 +28,8 @@ void __fastcall hkpTriSampledHeightFieldBvTreeShape::hkpTriSampledHeightFieldBvT
   v3 = flag.m_finishing;
   v2 = this;
   hkpBvTreeShape::hkpBvTreeShape((hkpBvTreeShape *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpTriSampledHeightFieldBvTreeShape::`vftable';
-  v2->m_childContainer.vfptr = (hkpShapeContainerVtbl *)&hkpSingleShapeContainer::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpTriSampledHeightFieldBvTreeShape::`vftable;
+  v2->m_childContainer.vfptr = (hkpShapeContainerVtbl *)&hkpSingleShapeContainer::`vftable;
   if ( v3 )
   {
     v2->m_type.m_storage = 7;
@@ -158,22 +158,22 @@ hkBool *__usercall hkpTriSampledHeightFieldBvTreeShape::getExtentsForQueryAabb@<
     v29 = _mm_max_ps(_mm_min_ps(_mm_mul_ps(_mm_add_ps(v26, v17), v12->m_floatToIntScale.m_quad), v27), (__m128)0i64);
     v30 = _mm_sub_epi32(
             _mm_xor_si128(
-              (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v29),
+              (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v29),
               _mm_cvttps_epi32(v29)),
             (__m128i)_xmm);
     v31 = _mm_sub_epi32(
             _mm_xor_si128(
-              (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v28),
+              (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v28),
               _mm_cvttps_epi32(v28)),
             (__m128i)_xmm);
     v32 = (unsigned __int128)_mm_add_epi16(
                                _mm_packs_epi32(v30, v30),
-                               (__m128i)`hkIntVector::setConvertSaturateS32ToU16'::`2'::offset2);
+                               (__m128i)`hkIntVector::setConvertSaturateS32ToU16::`2::offset2);
     v33 = v32;
     v34 = WORD2(v32);
     v38 = (unsigned __int128)_mm_add_epi16(
                                _mm_packs_epi32(v31, v31),
-                               (__m128i)`hkIntVector::setConvertSaturateS32ToU16'::`2'::offset2);
+                               (__m128i)`hkIntVector::setConvertSaturateS32ToU16::`2::offset2);
     v35 = v38;
     if ( (unsigned __int16)v32 < (unsigned __int16)v38 )
       v35 = v32;

@@ -84,7 +84,7 @@ void __fastcall UFG::MarkerBase::MarkerBase(UFG::MarkerBase *this, UFG::qSymbol 
   v7 = this;
   UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name->mUID);
   v7->i_name = (UFG::qSymbol)v6->mUID;
-  v7->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HintComponentBase::`vftable';
+  v7->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HintComponentBase::`vftable;
   v7->mFlags = v4;
   UFG::SimComponent::AddType(
     (UFG::SimComponent *)&v7->vfptr,
@@ -95,7 +95,7 @@ void __fastcall UFG::MarkerBase::MarkerBase(UFG::MarkerBase *this, UFG::qSymbol 
   v7->mNode.mChild[0] = 0i64;
   v7->mNode.mChild[1] = 0i64;
   v7->mNode.mUID = v8;
-  v7->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::MarkerBase::`vftable';
+  v7->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::MarkerBase::`vftable;
   v7->mpXformNode = 0i64;
   UFG::SimComponent::AddType((UFG::SimComponent *)&v7->vfptr, UFG::MarkerBase::_MarkerBaseTypeUID, "MarkerBase");
   if ( v5 )
@@ -134,7 +134,7 @@ void __fastcall UFG::MarkerBase::~MarkerBase(UFG::MarkerBase *this)
   UFG::MarkerBase *v1; // rbx
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::MarkerBase::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::MarkerBase::`vftable;
   if ( this->mFlags & 0x10000 )
     UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
       (UFG::qBaseTreeVariableRB<unsigned __int64> *)&UFG::MarkerBase::msMarkers,
@@ -213,7 +213,7 @@ UFG::allocator::free_link *__fastcall UFG::Marker::PropertiesOnActivate(UFG::Sce
   v4 = v1->m_pSimObject;
   v5 = (UFG::qSymbol *)UFG::qSymbol::qSymbol(&result, v1->m_NameUID);
   UFG::MarkerBase::MarkerBase((UFG::MarkerBase *)v3, v5, v4, 0x10000u);
-  v3->mNext = (UFG::allocator::free_link *)&UFG::Marker::`vftable';
+  v3->mNext = (UFG::allocator::free_link *)&UFG::Marker::`vftable;
   UFG::SimComponent::AddType((UFG::SimComponent *)v3, UFG::Marker::_MarkerTypeUID, "Marker");
   return v3;
 }
@@ -246,7 +246,7 @@ UFG::allocator::free_link *__fastcall UFG::CameraMarker::PropertiesOnActivate(UF
   v4 = v1->m_pSimObject;
   v5 = (UFG::qSymbol *)UFG::qSymbol::qSymbol(&result, v1->m_NameUID);
   UFG::MarkerBase::MarkerBase((UFG::MarkerBase *)v3, v5, v4, 0x10000u);
-  v3->mNext = (UFG::allocator::free_link *)&UFG::CameraMarker::`vftable';
+  v3->mNext = (UFG::allocator::free_link *)&UFG::CameraMarker::`vftable;
   UFG::SimComponent::AddType((UFG::SimComponent *)v3, UFG::CameraMarker::_CameraMarkerTypeUID, "CameraMarker");
   return v3;
 }
@@ -469,7 +469,7 @@ void __fastcall UFG::AIMarker::AIMarker(UFG::AIMarker *this, UFG::qSymbol *name,
   v6 = (UFG::qNode<UFG::AIMarker,UFG::AIMarker> *)&v5->mPrev;
   v6->mPrev = v6;
   v6->mNext = v6;
-  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIMarker::`vftable';
+  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIMarker::`vftable;
   v5->m_eType = v4;
   UFG::SimComponent::AddType((UFG::SimComponent *)&v5->vfptr, UFG::AIMarker::_AIMarkerTypeUID, "AIMarker");
   v7 = v5->m_eType;
@@ -534,7 +534,7 @@ void __fastcall UFG::AIMarker::~AIMarker(UFG::AIMarker *this)
   UFG::qNode<UFG::AIMarker,UFG::AIMarker> *v10; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIMarker::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIMarker::`vftable;
   v2 = this->m_eType;
   if ( v2 == EAIMarkerType_AIFleeToPoint || (v3 = v2 - 1) == 0 || (v4 = v3 - 2) == 0 || v4 == 1 )
   {
@@ -553,7 +553,7 @@ void __fastcall UFG::AIMarker::~AIMarker(UFG::AIMarker *this)
   v10->mPrev = v9;
   v8->mPrev = v8;
   v8->mNext = v8;
-  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::MarkerBase::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::MarkerBase::`vftable;
   if ( v1->mFlags & 0x10000 )
     UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
       (UFG::qBaseTreeVariableRB<unsigned __int64> *)&UFG::MarkerBase::msMarkers,

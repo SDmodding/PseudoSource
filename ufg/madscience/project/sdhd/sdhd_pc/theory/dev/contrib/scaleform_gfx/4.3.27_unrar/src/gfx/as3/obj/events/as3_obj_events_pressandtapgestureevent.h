@@ -25,7 +25,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_events::PressAndTapGestur
     Scaleform::GFx::AS3::Instances::fl_events::GestureEvent::GestureEvent(
       v4,
       (Scaleform::GFx::AS3::InstanceTraits::Traits *)&v2->vfptr);
-    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_events::PressAndTapGestureEvent::`vftable';
+    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_events::PressAndTapGestureEvent::`vftable;
     v5[1].pRCCRaw = 0i64;
     v5[1].vfptr = 0i64;
     v5[1].pPrev = 0i64;

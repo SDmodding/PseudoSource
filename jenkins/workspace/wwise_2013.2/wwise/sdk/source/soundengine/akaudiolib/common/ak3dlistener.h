@@ -11,15 +11,15 @@ float __fastcall CAkListener::ComputeConeAttenuation(float in_fInsideAngle, floa
   v6 = (float)(v5 * in_fConeOutsideVolume) * 0.050000001;
   if ( v6 < -37.0 )
     return 0.0;
-  if ( `AkMath::FastPow10'::`4'::`local static guard' & 1 )
+  if ( `AkMath::FastPow10::`4::`local static guard & 1 )
   {
-    v8 = *(float *)&`AkMath::FastPow10'::`4'::SCALE;
+    v8 = *(float *)&`AkMath::FastPow10::`4::SCALE;
   }
   else
   {
     v8 = FLOAT_2_7866352e7;
-    `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
-    `AkMath::FastPow10'::`4'::`local static guard' |= 1u;
+    `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
+    `AkMath::FastPow10::`4::`local static guard |= 1u;
   }
   return (float)((float)((float)((float)(COERCE_FLOAT(
                                            ((signed int)(float)((float)(v6 * v8) + 1065353200.0) & 0x7FFFFF)

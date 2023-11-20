@@ -243,19 +243,19 @@ void __fastcall UFG::RenderStageTerrain::RenderStageTerrain(UFG::RenderStageTerr
 
   v203 = -2i64;
   v2 = this;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     this->mTerrainModelHandles,
     0x20ui64,
     10,
     (void (__fastcall *)(void *))Illusion::ModelHandle::ModelHandle);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v2->mDX10TerrainModelHandles,
     0x20ui64,
     10,
     (void (__fastcall *)(void *))Illusion::ModelHandle::ModelHandle);
   v3 = &v2->mTerrainQuadTreeNodes;
   v211 = &v2->mTerrainQuadTreeNodes;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v2->mTerrainQuadTreeNodes.p,
     0x110ui64,
     512,
@@ -749,12 +749,12 @@ void __fastcall UFG::RenderStageTerrain::RenderStageTerrain(UFG::RenderStageTerr
       v135 = UFG::qResourceWarehouse::Instance();
       UFG::qResourceWarehouse::Add(v135, (UFG::qResourceData *)*v131);
       v136 = *v133;
-      v137 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+      v137 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+      if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
       {
         v138 = UFG::qResourceWarehouse::Instance();
         v137 = UFG::qResourceWarehouse::GetInventory(v138, 0xA2ADCD77);
-        `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v137;
+        `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v137;
       }
       UFG::qResourceHandle::Init(
         (UFG::qResourceHandle *)(v132 + 32 * (v134 + (signed int)v130++) + 40),
@@ -902,12 +902,12 @@ void __fastcall UFG::RenderStageTerrain::RenderStageTerrain(UFG::RenderStageTerr
       v185 = UFG::qResourceWarehouse::Instance();
       UFG::qResourceWarehouse::Add(v185, (UFG::qResourceData *)*v183);
       v186 = *v184;
-      v187 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+      v187 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+      if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
       {
         v188 = UFG::qResourceWarehouse::Instance();
         v187 = UFG::qResourceWarehouse::GetInventory(v188, 0xA2ADCD77);
-        `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v187;
+        `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v187;
       }
       UFG::qResourceHandle::Init(
         (UFG::qResourceHandle *)v2->mDX10TerrainModelHandles + v195 + (signed int)v182++,

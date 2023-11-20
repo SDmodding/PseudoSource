@@ -12,7 +12,7 @@ void __fastcall UFG::PhysicsVolumeProperties::PhysicsVolumeProperties(UFG::Physi
   UFG::qReflectObjectType<UFG::PhysicsVolumeProperties,UFG::qReflectObject>::qReflectObjectType<UFG::PhysicsVolumeProperties,UFG::qReflectObject>(
     (UFG::qReflectObjectType<UFG::PhysicsVolumeProperties,UFG::qReflectObject> *)&this->vfptr,
     uid);
-  v4->vfptr = (UFG::qReflectObjectVtbl *)&UFG::PhysicsVolumeProperties::`vftable';
+  v4->vfptr = (UFG::qReflectObjectVtbl *)&UFG::PhysicsVolumeProperties::`vftable;
   v6 = &v4->mName;
   *(_QWORD *)&v6->mText.mData.mNumItems = 0i64;
   v6->mText.mData.mItems = 0i64;
@@ -47,12 +47,12 @@ void __fastcall UFG::PhysicsVolumeProperties::PhysicsVolumeProperties(UFG::Physi
   v2->mBaseNode.mNeighbours[0] = &v2->mBaseNode;
   v2->mBaseNode.mNeighbours[1] = &v2->mBaseNode;
   v2->mBaseNode.mUID = v3;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable;
   v6 = &this->mHandles;
   v6->mNode.mPrev = &v6->mNode;
   v6->mNode.mNext = &v6->mNode;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::PhysicsVolumeProperties,UFG::qReflectObject>::`vftable';
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::PhysicsVolumeProperties::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::PhysicsVolumeProperties,UFG::qReflectObject>::`vftable;
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::PhysicsVolumeProperties::`vftable;
   v7 = &this->mName.mText;
   v7->mData.mFlags = 2;
   v4 = UFG::qReflectObject::GetName((UFG::qReflectObject *)&this->vfptr);

@@ -8,7 +8,7 @@ void __fastcall hkIstream::hkIstream(hkIstream *this, hkStreamReader *sb)
   v2 = sb;
   v3 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkIstream::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkIstream::`vftable;
   if ( sb )
   {
     hkReferencedObject::addReference((hkReferencedObject *)&sb->vfptr);
@@ -32,7 +32,7 @@ void __fastcall hkIstream::hkIstream(hkIstream *this, const char *fname)
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkIstream::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkIstream::`vftable;
   this->m_streamReader.m_pntr = 0i64;
   v3 = (hkStreamReader **)((__int64 (__fastcall *)(hkFileSystem *, char *, const char *, signed __int64))hkSingleton<hkFileSystem>::s_instance->vfptr[1].__first_virtual_table_function__)(
                             hkSingleton<hkFileSystem>::s_instance,
@@ -61,7 +61,7 @@ void __fastcall hkIstream::hkIstream(hkIstream *this, const void *mem, int memSi
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v3 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkIstream::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkIstream::`vftable;
   v4 = 0i64;
   v5 = memSize;
   this->m_streamReader.m_pntr = 0i64;
@@ -93,7 +93,7 @@ void __fastcall hkIstream::hkIstream(hkIstream *this, hkMemoryTrack *track)
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkIstream::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkIstream::`vftable;
   v3 = 0i64;
   v4 = track;
   this->m_streamReader.m_pntr = 0i64;
@@ -120,12 +120,12 @@ void __fastcall hkIstream::~hkIstream(hkIstream *this)
   hkStreamReader *v2; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkIstream::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkIstream::`vftable;
   v2 = this->m_streamReader.m_pntr;
   if ( v2 )
     hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
   v1->m_streamReader.m_pntr = 0i64;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 52

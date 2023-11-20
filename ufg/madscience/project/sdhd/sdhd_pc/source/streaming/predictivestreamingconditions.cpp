@@ -17,7 +17,7 @@ void __fastcall PlayerIsInVehicleCondition::PlayerIsInVehicleCondition(PlayerIsI
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsInVehicleCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsInVehicleCondition::`vftable;
 }
 
 // File Line: 36
@@ -47,7 +47,7 @@ void __fastcall PlayerIsInVehicleTypeCondition::PlayerIsInVehicleTypeCondition(P
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsInVehicleTypeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsInVehicleTypeCondition::`vftable;
   *(_WORD *)&v1->m_eSimObjectVehicleType.mValue = 0;
 }
 
@@ -92,7 +92,7 @@ void __fastcall PlayerIsDriverInVehicleCondition::PlayerIsDriverInVehicleConditi
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsDriverInVehicleCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsDriverInVehicleCondition::`vftable;
 }
 
 // File Line: 103
@@ -121,7 +121,7 @@ void __fastcall PlayerIsDriverInVehicleTypeCondition::PlayerIsDriverInVehicleTyp
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsDriverInVehicleTypeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsDriverInVehicleTypeCondition::`vftable;
   *(_WORD *)&v1->m_eSimObjectVehicleType.mValue = 0;
 }
 
@@ -159,7 +159,7 @@ void __fastcall PlayerIsPassengerInVehicleCondition::PlayerIsPassengerInVehicleC
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsPassengerInVehicleCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsPassengerInVehicleCondition::`vftable;
 }
 
 // File Line: 170
@@ -188,7 +188,7 @@ void __fastcall PlayerIsPassengerInVehicleTypeCondition::PlayerIsPassengerInVehi
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsPassengerInVehicleTypeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsPassengerInVehicleTypeCondition::`vftable;
   *(_WORD *)&v1->m_eSimObjectVehicleType.mValue = 0;
 }
 
@@ -226,7 +226,7 @@ void __fastcall PlayerIsCloseToVehicleTypeCondition::PlayerIsCloseToVehicleTypeC
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsCloseToVehicleTypeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsCloseToVehicleTypeCondition::`vftable;
   *(_WORD *)&v1->m_eSimObjectVehicleType.mValue = 0;
 }
 
@@ -275,7 +275,7 @@ void __fastcall PlayerIsCloseToDriverSideOfVehicleTypeCondition::PlayerIsCloseTo
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsCloseToDriverSideOfVehicleTypeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsCloseToDriverSideOfVehicleTypeCondition::`vftable;
   *(_WORD *)&v1->m_eSimObjectVehicleType.mValue = 0;
 }
 
@@ -320,7 +320,7 @@ void __fastcall PlayerIsCloseToPassengerSideOfVehicleTypeCondition::PlayerIsClos
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsCloseToPassengerSideOfVehicleTypeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerIsCloseToPassengerSideOfVehicleTypeCondition::`vftable;
   *(_WORD *)&v1->m_eSimObjectVehicleType.mValue = 0;
 }
 
@@ -365,7 +365,7 @@ void __fastcall PlayerHasOwnedWeaponTypeCondition::PlayerHasOwnedWeaponTypeCondi
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerHasOwnedWeaponTypeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerHasOwnedWeaponTypeCondition::`vftable;
   v1->m_eSimObjectWeaponType = 0;
 }
 
@@ -395,7 +395,7 @@ void __fastcall PlayerCloseToWeaponTypeCondition::PlayerCloseToWeaponTypeConditi
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerCloseToWeaponTypeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerCloseToWeaponTypeCondition::`vftable;
   v1->m_eSimObjectWeaponType = 0;
 }
 
@@ -425,7 +425,7 @@ void __fastcall WeaponIsOwnedCondition::WeaponIsOwnedCondition(WeaponIsOwnedCond
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&WeaponIsOwnedCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&WeaponIsOwnedCondition::`vftable;
   v1->m_eSimObjectWeaponType = 0;
 }
 
@@ -455,7 +455,7 @@ void __fastcall WeaponIsTargetedForInteractionCondition::WeaponIsTargetedForInte
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&WeaponIsTargetedForInteractionCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&WeaponIsTargetedForInteractionCondition::`vftable;
   v1->m_eSimObjectWeaponType = 0;
 }
 
@@ -485,7 +485,7 @@ void __fastcall VehicleHasDriverCondition::VehicleHasDriverCondition(VehicleHasD
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleHasDriverCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleHasDriverCondition::`vftable;
   *(_WORD *)&v1->m_eSimObjectVehicleType.mValue = 0;
 }
 
@@ -525,7 +525,7 @@ void __fastcall VehicleHasDriverWithWeaponCondition::VehicleHasDriverWithWeaponC
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleHasDriverWithWeaponCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleHasDriverWithWeaponCondition::`vftable;
   *(_WORD *)&v1->m_eSimObjectVehicleType.mValue = 0;
   v1->m_eSimObjectWeaponType = 0;
 }
@@ -566,7 +566,7 @@ void __fastcall VehicleHasPassengerCondition::VehicleHasPassengerCondition(Vehic
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleHasPassengerCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleHasPassengerCondition::`vftable;
   *(_WORD *)&v1->m_eSimObjectVehicleType.mValue = 0;
 }
 
@@ -604,7 +604,7 @@ void __fastcall VehicleHasPassengerWithWeaponCondition::VehicleHasPassengerWithW
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleHasPassengerWithWeaponCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleHasPassengerWithWeaponCondition::`vftable;
   *(_WORD *)&v1->m_eSimObjectVehicleType.mValue = 0;
   v1->m_eSimObjectWeaponType = 0;
 }
@@ -645,7 +645,7 @@ void __fastcall VehicleTargetedForInteractionOnFootDriverSideCondition::VehicleT
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleTargetedForInteractionOnFootDriverSideCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleTargetedForInteractionOnFootDriverSideCondition::`vftable;
   *(_WORD *)&v1->m_eSimObjectVehicleType.mValue = 0;
 }
 
@@ -683,7 +683,7 @@ void __fastcall VehicleTargetedForInteractionOnFootPassengerSideCondition::Vehic
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleTargetedForInteractionOnFootPassengerSideCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleTargetedForInteractionOnFootPassengerSideCondition::`vftable;
   *(_WORD *)&v1->m_eSimObjectVehicleType.mValue = 0;
 }
 
@@ -721,10 +721,10 @@ void __fastcall VehicleTargetedForInteractionOnFootWithWeaponDriverSideCondition
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SubPriorityModifierCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&SubPriorityModifierCondition::`vftable;
   v1->m_eAnimationPriority.mValue = SubPriorityModifierCondition::ms_ePredictivePriority;
   v1->m_uSubPriority = -1;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleTargetedForInteractionOnFootWithWeaponDriverSideCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleTargetedForInteractionOnFootWithWeaponDriverSideCondition::`vftable;
   *(_WORD *)&v1->m_eSimObjectVehicleType.mValue = 0;
   v1->m_eSimObjectWeaponType = 0;
 }
@@ -807,10 +807,10 @@ void __fastcall VehicleTargetedForInteractionOnFootWithWeaponPassengerSideCondit
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SubPriorityModifierCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&SubPriorityModifierCondition::`vftable;
   v1->m_eAnimationPriority.mValue = SubPriorityModifierCondition::ms_ePredictivePriority;
   v1->m_uSubPriority = -1;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleTargetedForInteractionOnFootWithWeaponPassengerSideCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleTargetedForInteractionOnFootWithWeaponPassengerSideCondition::`vftable;
   *(_WORD *)&v1->m_eSimObjectVehicleType.mValue = 0;
   v1->m_eSimObjectWeaponType = 0;
 }
@@ -893,7 +893,7 @@ void __fastcall CharacterTypeHasWeaponTypeCondition::CharacterTypeHasWeaponTypeC
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CharacterTypeHasWeaponTypeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CharacterTypeHasWeaponTypeCondition::`vftable;
   v1->m_eCharacterType.mValue = 0;
   v1->m_eSimObjectWeaponType = 0;
 }
@@ -952,10 +952,10 @@ void __fastcall PredictiveVehicleDriverPotentialInteractionCondition::Predictive
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SubPriorityModifierCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&SubPriorityModifierCondition::`vftable;
   v1->m_eAnimationPriority.mValue = SubPriorityModifierCondition::ms_ePredictivePriority;
   v1->m_uSubPriority = -1;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PredictiveVehicleDriverPotentialInteractionCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PredictiveVehicleDriverPotentialInteractionCondition::`vftable;
   *(_WORD *)&v1->m_eSimObjectVehicleType.mValue = 0;
 }
 
@@ -1034,10 +1034,10 @@ void __fastcall PredictiveVehiclePassengerPotentialInteractionCondition::Predict
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SubPriorityModifierCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&SubPriorityModifierCondition::`vftable;
   v1->m_eAnimationPriority.mValue = SubPriorityModifierCondition::ms_ePredictivePriority;
   v1->m_uSubPriority = -1;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PredictiveVehiclePassengerPotentialInteractionCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PredictiveVehiclePassengerPotentialInteractionCondition::`vftable;
   *(_WORD *)&v1->m_eSimObjectVehicleType.mValue = 0;
 }
 
@@ -1116,10 +1116,10 @@ void __fastcall PredictiveVehiclePlayerPotentialInteractionCondition::Predictive
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SubPriorityModifierCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&SubPriorityModifierCondition::`vftable;
   v1->m_eAnimationPriority.mValue = SubPriorityModifierCondition::ms_ePredictivePriority;
   v1->m_uSubPriority = -1;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PredictiveVehiclePlayerPotentialInteractionCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PredictiveVehiclePlayerPotentialInteractionCondition::`vftable;
   *(_WORD *)&v1->m_eSimObjectVehicleType.mValue = 0;
 }
 
@@ -1204,10 +1204,10 @@ void __fastcall PredictiveWeaponPotentialInteractionCondition::PredictiveWeaponP
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SubPriorityModifierCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&SubPriorityModifierCondition::`vftable;
   v1->m_eAnimationPriority.mValue = SubPriorityModifierCondition::ms_ePredictivePriority;
   v1->m_uSubPriority = -1;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PredictiveWeaponPotentialInteractionCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PredictiveWeaponPotentialInteractionCondition::`vftable;
   v1->m_eSimObjectWeaponType = 0;
 }
 

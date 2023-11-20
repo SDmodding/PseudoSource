@@ -2,7 +2,7 @@
 // RVA: 0x146F9C0
 __int64 anonymous_namespace_::_dynamic_initializer_for__gStreaminInstallerLogWriterMutex__()
 {
-  UFG::qMutex::qMutex(&`anonymous namespace'::gStreaminInstallerLogWriterMutex, &customWorldMapCaption);
+  UFG::qMutex::qMutex(&`anonymous namespace::gStreaminInstallerLogWriterMutex, &customWorldMapCaption);
   return atexit(anonymous_namespace_::_dynamic_atexit_destructor_for__gStreaminInstallerLogWriterMutex__);
 }
 
@@ -10,7 +10,7 @@ __int64 anonymous_namespace_::_dynamic_initializer_for__gStreaminInstallerLogWri
 // RVA: 0x146FA50
 __int64 anonymous_namespace_::_dynamic_initializer_for__gStreamingInstallerFileTraceMutex__()
 {
-  UFG::qMutex::qMutex(&`anonymous namespace'::gStreamingInstallerFileTraceMutex, &customWorldMapCaption);
+  UFG::qMutex::qMutex(&`anonymous namespace::gStreamingInstallerFileTraceMutex, &customWorldMapCaption);
   return atexit(anonymous_namespace_::_dynamic_atexit_destructor_for__gStreamingInstallerFileTraceMutex__);
 }
 
@@ -18,7 +18,7 @@ __int64 anonymous_namespace_::_dynamic_initializer_for__gStreamingInstallerFileT
 // RVA: 0x146FB20
 __int64 anonymous_namespace_::_dynamic_initializer_for__mFileTraceLog__()
 {
-  UFG::qBaseTreeRB::qBaseTreeRB(&`anonymous namespace'::mFileTraceLog.mTree);
+  UFG::qBaseTreeRB::qBaseTreeRB(&`anonymous namespace::mFileTraceLog.mTree);
   return atexit(anonymous_namespace_::_dynamic_atexit_destructor_for__mFileTraceLog__);
 }
 
@@ -26,7 +26,7 @@ __int64 anonymous_namespace_::_dynamic_initializer_for__mFileTraceLog__()
 // RVA: 0x146F9F0
 __int64 anonymous_namespace_::_dynamic_initializer_for__gStreamingInstallerAudioLogMutex__()
 {
-  UFG::qMutex::qMutex(&`anonymous namespace'::gStreamingInstallerAudioLogMutex, &customWorldMapCaption);
+  UFG::qMutex::qMutex(&`anonymous namespace::gStreamingInstallerAudioLogMutex, &customWorldMapCaption);
   return atexit(anonymous_namespace_::_dynamic_atexit_destructor_for__gStreamingInstallerAudioLogMutex__);
 }
 
@@ -34,7 +34,7 @@ __int64 anonymous_namespace_::_dynamic_initializer_for__gStreamingInstallerAudio
 // RVA: 0x146FAC0
 __int64 anonymous_namespace_::_dynamic_initializer_for__mAudioLog__()
 {
-  UFG::qBaseTreeRB::qBaseTreeRB(&`anonymous namespace'::mAudioLog.mTree);
+  UFG::qBaseTreeRB::qBaseTreeRB(&`anonymous namespace::mAudioLog.mTree);
   return atexit(anonymous_namespace_::_dynamic_atexit_destructor_for__mAudioLog__);
 }
 
@@ -42,7 +42,7 @@ __int64 anonymous_namespace_::_dynamic_initializer_for__mAudioLog__()
 // RVA: 0x146FA20
 __int64 anonymous_namespace_::_dynamic_initializer_for__gStreamingInstallerFileOpLogMutex__()
 {
-  UFG::qMutex::qMutex(&`anonymous namespace'::gStreamingInstallerFileOpLogMutex, &customWorldMapCaption);
+  UFG::qMutex::qMutex(&`anonymous namespace::gStreamingInstallerFileOpLogMutex, &customWorldMapCaption);
   return atexit(anonymous_namespace_::_dynamic_atexit_destructor_for__gStreamingInstallerFileOpLogMutex__);
 }
 
@@ -50,7 +50,7 @@ __int64 anonymous_namespace_::_dynamic_initializer_for__gStreamingInstallerFileO
 // RVA: 0x146FAF0
 __int64 anonymous_namespace_::_dynamic_initializer_for__mFileOpLog__()
 {
-  UFG::qBaseTreeRB::qBaseTreeRB(&`anonymous namespace'::mFileOpLog.mTree);
+  UFG::qBaseTreeRB::qBaseTreeRB(&`anonymous namespace::mFileOpLog.mTree);
   return atexit(anonymous_namespace_::_dynamic_atexit_destructor_for__mFileOpLog__);
 }
 

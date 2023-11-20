@@ -9,10 +9,10 @@ void __fastcall Render::ScreenParticleEmitterInstance::ScreenParticleEmitterInst
   v2 = (UFG::qNode<Render::FXComponentInstance,Render::FXComponentInstance> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable';
+  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable;
   *(_QWORD *)&this->mForceSuspendState = 0i64;
   *(_WORD *)&this->mIsActive = 0;
-  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::ScreenParticleEmitterInstance::`vftable';
+  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::ScreenParticleEmitterInstance::`vftable;
   UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&this->mSettingsHandle.mPrev);
   v1->mIsEmitting = 0;
   *(_QWORD *)&v1->mStartEmissionSimTime = 0i64;
@@ -31,18 +31,18 @@ void __fastcall Render::ScreenParticleEmitterInstance::~ScreenParticleEmitterIns
   UFG::qNode<Render::FXComponentInstance,Render::FXComponentInstance> *v7; // rax
 
   v1 = this;
-  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::ScreenParticleEmitterInstance::`vftable';
+  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::ScreenParticleEmitterInstance::`vftable;
   v2 = (UFG::qResourceHandle *)&this->mSettingsHandle.mPrev;
-  v3 = `UFG::qGetResourceInventory<Render::ScreenParticleEmitterSettings>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Render::ScreenParticleEmitterSettings>'::`2'::result )
+  v3 = `UFG::qGetResourceInventory<Render::ScreenParticleEmitterSettings>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Render::ScreenParticleEmitterSettings>::`2::result )
   {
     v4 = UFG::qResourceWarehouse::Instance();
     v3 = UFG::qResourceWarehouse::GetInventory(v4, 0x354C3CDCu);
-    `UFG::qGetResourceInventory<Render::ScreenParticleEmitterSettings>'::`2'::result = v3;
+    `UFG::qGetResourceInventory<Render::ScreenParticleEmitterSettings>::`2::result = v3;
   }
   UFG::qResourceHandle::Close(v2, v3);
   UFG::qResourceHandle::~qResourceHandle(v2);
-  v1->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable';
+  v1->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable;
   v5 = (UFG::qNode<Render::FXComponentInstance,Render::FXComponentInstance> *)&v1->mPrev;
   v6 = v1->mPrev;
   v7 = v1->mNext;
@@ -62,14 +62,14 @@ void __fastcall Render::ScreenParticleEmitterInstance::Init(Render::ScreenPartic
   UFG::qResourceWarehouse *v5; // rax
 
   this->mSettingsId = settingsId;
-  v2 = `UFG::qGetResourceInventory<Render::ScreenParticleEmitterSettings>'::`2'::result;
+  v2 = `UFG::qGetResourceInventory<Render::ScreenParticleEmitterSettings>::`2::result;
   v3 = settingsId;
   v4 = this;
-  if ( !`UFG::qGetResourceInventory<Render::ScreenParticleEmitterSettings>'::`2'::result )
+  if ( !`UFG::qGetResourceInventory<Render::ScreenParticleEmitterSettings>::`2::result )
   {
     v5 = UFG::qResourceWarehouse::Instance();
     v2 = UFG::qResourceWarehouse::GetInventory(v5, 0x354C3CDCu);
-    `UFG::qGetResourceInventory<Render::ScreenParticleEmitterSettings>'::`2'::result = v2;
+    `UFG::qGetResourceInventory<Render::ScreenParticleEmitterSettings>::`2::result = v2;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v4->mSettingsHandle.mPrev, 0x354C3CDCu, v3, v2);
 }

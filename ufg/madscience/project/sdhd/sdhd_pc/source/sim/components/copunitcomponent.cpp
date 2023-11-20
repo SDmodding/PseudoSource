@@ -22,12 +22,12 @@ void __fastcall UFG::CopUnitComponent::CopUnitComponent(UFG::CopUnitComponent *t
 
   v2 = this;
   UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name_uid);
-  v2->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::UpdateInterface::`vftable';
+  v2->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::UpdateInterface::`vftable;
   v3 = (UFG::qNode<UFG::CopUnitComponent,UFG::CopUnitComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CopUnitComponent::`vftable'{for `UFG::SimComponent'};
-  v2->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::CopUnitComponent::`vftable'{for `UFG::UpdateInterface'};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CopUnitComponent::`vftable{for `UFG::SimComponent};
+  v2->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::CopUnitComponent::`vftable{for `UFG::UpdateInterface};
   UFG::RebindingComponentHandle<UFG::TSActorComponent,0>::RebindingComponentHandle<UFG::TSActorComponent,0>(&v2->mpTSActorComponent);
   UFG::RebindingComponentHandle<UFG::VehicleAudioComponent,0>::RebindingComponentHandle<UFG::VehicleAudioComponent,0>(&v2->mpVehicleAudioComponent);
   UFG::RebindingComponentHandle<UFG::VehicleEffectsComponent,0>::RebindingComponentHandle<UFG::VehicleEffectsComponent,0>(&v2->mpVehicleRenderComponent);
@@ -62,8 +62,8 @@ void __fastcall UFG::CopUnitComponent::~CopUnitComponent(UFG::CopUnitComponent *
   UFG::qNode<UFG::CopUnitComponent,UFG::CopUnitComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CopUnitComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::CopUnitComponent::`vftable'{for `UFG::UpdateInterface'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CopUnitComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::CopUnitComponent::`vftable{for `UFG::UpdateInterface};
   if ( this == UFG::CopUnitComponent::s_CopUnitComponentpCurrentIterator )
     UFG::CopUnitComponent::s_CopUnitComponentpCurrentIterator = (UFG::CopUnitComponent *)&this->mPrev[-5].mNext;
   v2 = (UFG::qNode<UFG::CopUnitComponent,UFG::CopUnitComponent> *)&this->mPrev;

@@ -78,8 +78,8 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::Even
   v2 = t;
   v3 = this;
   Scaleform::GFx::AS3::Instance::Instance((Scaleform::GFx::AS3::Instance *)&this->vfptr, t);
-  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Object::`vftable';
-  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::`vftable';
+  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Object::`vftable;
+  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::`vftable;
   v3->VMRef = v2->pVM;
   v3->pImpl.pObject = 0i64;
   v3->pImpl.Owner = 1;
@@ -1242,11 +1242,11 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::will
           v19 = 0i64;
           evtFlowArray.Size = 0i64;
           evtFlowArray.Reserved = 32i64;
-          `eh vector constructor iterator'(
+          `eh vector constructor iterator(
             evtFlowArray.Static,
             8ui64,
             32,
-            (void (__fastcall *)(void *))Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_vec::Vector_double>::`default constructor closure');
+            (void (__fastcall *)(void *))Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_vec::Vector_double>::`default constructor closure);
           evtFlowArray.Data = evtFlowArray.Static;
           Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::CaptureEventFlow(
             v5,
@@ -1319,7 +1319,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::will
           }
 LABEL_45:
           Scaleform::ArrayStaticBuff<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,32,2>::Clear(&evtFlowArray);
-          `eh vector destructor iterator'(
+          `eh vector destructor iterator(
             evtFlowArray.Static,
             8ui64,
             32,
@@ -1337,9 +1337,9 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::~Eve
   Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher *v1; // rbx
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::`vftable;
   Scaleform::AutoPtr<Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::EventDispatcherImpl>::~AutoPtr<Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::EventDispatcherImpl>(&this->pImpl);
-  v1->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instance::`vftable';
+  v1->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instance::`vftable;
   Scaleform::GFx::AS3::Traits::DestructTail(
     (Scaleform::GFx::AS3::Traits *)((_QWORD)v1->pTraits.pObject & 0xFFFFFFFFFFFFFFFEui64),
     (Scaleform::GFx::AS3::Object *)&v1->vfptr);
@@ -2414,11 +2414,11 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::DoDi
   v6 = 0i64;
   evtFlowArray.Size = 0i64;
   evtFlowArray.Reserved = 32i64;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     evtFlowArray.Static,
     8ui64,
     32,
-    (void (__fastcall *)(void *))Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_vec::Vector_double>::`default constructor closure');
+    (void (__fastcall *)(void *))Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_vec::Vector_double>::`default constructor closure);
   evtFlowArray.Data = evtFlowArray.Static;
   Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::CaptureEventFlow(v5, v3, &evtFlowArray);
   v4->Phase = 1;
@@ -2475,7 +2475,7 @@ LABEL_21:
   }
 LABEL_23:
   Scaleform::ArrayStaticBuff<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,32,2>::Clear(&evtFlowArray);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     evtFlowArray.Static,
     8ui64,
     32,
@@ -3236,7 +3236,7 @@ char __fastcall Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::Disp
       v14 = Scaleform::GFx::AS3::ASVM::GetLogState(v11);
       Scaleform::GFx::LogBase<Scaleform::GFx::LogState>::LogScriptError(
         (Scaleform::GFx::LogBase<Scaleform::GFx::LogState> *)&v14->vfptr,
-        "Can't dispatch '%s' - exception is not cleared",
+        "Cant dispatch %s - exception is not cleared",
         v13);
     }
     return 1;
@@ -3648,8 +3648,8 @@ void __fastcall Scaleform::GFx::AS3::InstanceTraits::fl_events::EventDispatcher:
     (Scaleform::GFx::AS3::InstanceTraits::CTraits *)&this->vfptr,
     vm,
     ci);
-  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable';
-  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_events::EventDispatcher::`vftable';
+  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable;
+  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_events::EventDispatcher::`vftable;
 }
 
 // File Line: 1176
@@ -3732,7 +3732,7 @@ Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_events::Event> *__f
     (Scaleform::GFx::AS3::Object *)this->pTraits.pObject->pVM[1].XMLSupport_.pObject,
     3u,
     &ptr);
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
   return v5;
 }
 
@@ -4142,7 +4142,7 @@ Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_events::ProgressEve
     (Scaleform::GFx::AS3::Object *)v4[1].ScopeStack.Data.Data,
     3u,
     &ptr);
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
   return v3;
 }
 
@@ -4217,7 +4217,7 @@ Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_events::FocusEvent>
     &ptr);
   if ( v7->ExtensionsEnabled )
     LODWORD(v6->pObject[1].vfptr) = v27;
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 6, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 6, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
   return v6;
 }
 
@@ -4323,7 +4323,7 @@ Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Object> *__fastcall Scaleform::GF
     (Scaleform::GFx::AS3::Object *)&v14->vfptr,
     4u,
     &ptr);
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
   return v4;
 }
 
@@ -4400,7 +4400,7 @@ Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Object> *__fastcall Scaleform::GF
       Scaleform::GFx::ASStringNode::ReleaseNode(v14);
     *(_QWORD *)&v12.pObject[1].RefCount = v13;
   }
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
   return v6;
 }
 
@@ -4412,8 +4412,8 @@ void __fastcall Scaleform::GFx::AS3::ClassTraits::fl_events::EventDispatcher::Ev
 
   v3 = this;
   Scaleform::GFx::AS3::ClassTraits::Traits::Traits((Scaleform::GFx::AS3::ClassTraits::Traits *)&this->vfptr, vm, ci);
-  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable';
-  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_events::EventDispatcher::`vftable';
+  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable;
+  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_events::EventDispatcher::`vftable;
 }
 
 // File Line: 1627
@@ -4438,8 +4438,8 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v5 )
   {
     Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, v2, &Scaleform::GFx::AS3::fl_events::EventDispatcherCI);
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable';
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_events::EventDispatcher::`vftable';
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable;
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_events::EventDispatcher::`vftable;
   }
   else
   {
@@ -4451,8 +4451,8 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v7 )
   {
     Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v7, v2, &Scaleform::GFx::AS3::fl_events::EventDispatcherCI);
-    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable';
-    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_events::EventDispatcher::`vftable';
+    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable;
+    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_events::EventDispatcher::`vftable;
   }
   else
   {
@@ -4468,7 +4468,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v9 )
   {
     Scaleform::GFx::AS3::Class::Class(v9, v3->pV);
-    v10->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl_events::EventDispatcher::`vftable';
+    v10->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl_events::EventDispatcher::`vftable;
     v10[1].vfptr = 0i64;
     v10[1].pRCCRaw = 0i64;
   }

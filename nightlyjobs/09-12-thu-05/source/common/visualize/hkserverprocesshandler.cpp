@@ -30,13 +30,13 @@ void __fastcall hkServerProcessHandler::hkServerProcessHandler(hkServerProcessHa
   this->m_memSizeAndFlags = -1;
   this->m_referenceCount = 1;
   this->m_selectable.m_bool = 0;
-  this->vfptr = (hkBaseObjectVtbl *)&hkServerProcessHandler::`vftable'{for `hkReferencedObject'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkServerProcessHandler::`vftable{for `hkReferencedObject};
   v6 = (hkProcessHandler *)&this->vfptr;
-  this->vfptr = (hkProcessHandlerVtbl *)&hkServerProcessHandler::`vftable'{for `hkProcessHandler'};
+  this->vfptr = (hkProcessHandlerVtbl *)&hkServerProcessHandler::`vftable{for `hkProcessHandler};
   v7 = outStream;
-  this->vfptr = (hkProcessVtbl *)&hkServerProcessHandler::`vftable'{for `hkProcess'};
+  this->vfptr = (hkProcessVtbl *)&hkServerProcessHandler::`vftable{for `hkProcess};
   v8 = inStream;
-  this->m_commandRouter.vfptr = (hkBaseObjectVtbl *)&hkCommandRouter::`vftable';
+  this->m_commandRouter.vfptr = (hkBaseObjectVtbl *)&hkCommandRouter::`vftable;
   *(_DWORD *)&this->m_commandRouter.m_memSizeAndFlags = 0x1FFFF;
   hkMultiMap<unsigned __int64,unsigned __int64,hkMultiMapOperations<unsigned __int64>,hkContainerHeapAllocator>::hkMultiMap<unsigned __int64,unsigned __int64,hkMultiMapOperations<unsigned __int64>,hkContainerHeapAllocator>(&this->m_commandRouter.m_commandMap.m_map);
   v9 = 0i64;
@@ -146,11 +146,11 @@ void __fastcall hkServerProcessHandler::~hkServerProcessHandler(hkServerProcessH
 
   v1 = this->m_processList.m_size;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkServerProcessHandler::`vftable'{for `hkReferencedObject'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkServerProcessHandler::`vftable{for `hkReferencedObject};
   v3 = v1 - 1;
-  this->vfptr = (hkProcessHandlerVtbl *)&hkServerProcessHandler::`vftable'{for `hkProcessHandler'};
+  this->vfptr = (hkProcessHandlerVtbl *)&hkServerProcessHandler::`vftable{for `hkProcessHandler};
   v4 = v3;
-  for ( this->vfptr = (hkProcessVtbl *)&hkServerProcessHandler::`vftable'{for `hkProcess'}; v4 >= 0; --v4 )
+  for ( this->vfptr = (hkProcessVtbl *)&hkServerProcessHandler::`vftable{for `hkProcess}; v4 >= 0; --v4 )
   {
     v5 = v2->m_processList.m_data[v4];
     v6 = --v2->m_processList.m_size;
@@ -188,10 +188,10 @@ void __fastcall hkServerProcessHandler::~hkServerProcessHandler(hkServerProcessH
   v2->m_processList.m_data = 0i64;
   v2->m_processList.m_capacityAndFlags = 2147483648;
   hkMultiMap<unsigned __int64,unsigned __int64,hkMultiMapOperations<unsigned __int64>,hkContainerHeapAllocator>::~hkMultiMap<unsigned __int64,unsigned __int64,hkMultiMapOperations<unsigned __int64>,hkContainerHeapAllocator>(&v2->m_commandRouter.m_commandMap.m_map);
-  v2->m_commandRouter.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
-  v2->vfptr = (hkProcessVtbl *)&hkProcess::`vftable';
-  v2->vfptr = (hkProcessHandlerVtbl *)&hkProcessHandler::`vftable';
+  v2->m_commandRouter.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
+  v2->vfptr = (hkProcessVtbl *)&hkProcess::`vftable;
+  v2->vfptr = (hkProcessHandlerVtbl *)&hkProcessHandler::`vftable;
 }
 
 // File Line: 48

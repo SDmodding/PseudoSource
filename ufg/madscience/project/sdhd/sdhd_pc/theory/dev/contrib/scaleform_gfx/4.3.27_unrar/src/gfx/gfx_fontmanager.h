@@ -11,7 +11,7 @@ void __fastcall Scaleform::GFx::FontHandle::FontHandle(Scaleform::GFx::FontHandl
     pfont,
     pfontName,
     overridenFontFlags);
-  v6->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::FontHandle::`vftable';
+  v6->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::FontHandle::`vftable;
   if ( pdefImpl )
     _InterlockedExchangeAdd(&pdefImpl->RefCount.Value, 1u);
   v6->pSourceMovieDef.pObject = pdefImpl;
@@ -30,7 +30,7 @@ void __fastcall Scaleform::GFx::FontHandle::FontHandle(Scaleform::GFx::FontHandl
   Scaleform::Render::Text::FontHandle::FontHandle(
     (Scaleform::Render::Text::FontHandle *)&this->vfptr,
     (Scaleform::Render::Text::FontHandle *)&f->vfptr);
-  v3->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::FontHandle::`vftable';
+  v3->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::FontHandle::`vftable;
   v4 = v2->pSourceMovieDef.pObject;
   if ( v4 )
     _InterlockedExchangeAdd(&v4->RefCount.Value, 1u);
@@ -77,7 +77,7 @@ void __fastcall Scaleform::GFx::FontHandle::~FontHandle(Scaleform::GFx::FontHand
   Scaleform::StringLH *v8; // [rsp+60h] [rbp+18h]
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::FontHandle::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::FontHandle::`vftable;
   v2 = (Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp> > *)this->pFontManager;
   if ( v2 )
   {
@@ -102,7 +102,7 @@ void __fastcall Scaleform::GFx::FontHandle::~FontHandle(Scaleform::GFx::FontHand
     }
     v4->vfptr->__vecDelDtor((Scaleform::GFx::Resource *)&v4->vfptr, 1u);
   }
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Text::FontHandle::`vftable';
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Text::FontHandle::`vftable;
   v6 = (Scaleform::Render::RenderBuffer *)v1->pFont.pObject;
   if ( v6 )
     Scaleform::RefCountImpl::Release(v6);

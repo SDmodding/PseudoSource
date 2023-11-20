@@ -29,14 +29,14 @@ void __fastcall UFG::CompositeLookComponent::CompositeLookComponent(UFG::Composi
 
   v1 = this;
   UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, 0);
-  v1->vfptr = (UFG::ICompositeLookVtbl *)&UFG::ICompositeLook::`vftable';
-  v1->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::UpdateInterface::`vftable';
+  v1->vfptr = (UFG::ICompositeLookVtbl *)&UFG::ICompositeLook::`vftable;
+  v1->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::UpdateInterface::`vftable;
   v2 = (UFG::qNode<UFG::CompositeLookComponent,UFG::CompositeLookComponent> *)&v1->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CompositeLookComponent::`vftable'{for `UFG::SimComponent'};
-  v1->vfptr = (UFG::ICompositeLookVtbl *)&UFG::CompositeLookComponent::`vftable'{for `UFG::ICompositeLook'};
-  v1->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::CompositeLookComponent::`vftable'{for `UFG::UpdateInterface'};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CompositeLookComponent::`vftable{for `UFG::SimComponent};
+  v1->vfptr = (UFG::ICompositeLookVtbl *)&UFG::CompositeLookComponent::`vftable{for `UFG::ICompositeLook};
+  v1->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::CompositeLookComponent::`vftable{for `UFG::UpdateInterface};
   v1->mColourTints = 0i64;
   v1->mForceTransparencyState = -1;
   v1->mHighlightingMode = 0;
@@ -636,9 +636,9 @@ void __fastcall UFG::VehicleLookComponent::VehicleLookComponent(UFG::VehicleLook
 
   v1 = this;
   UFG::CompositeLookComponent::CompositeLookComponent((UFG::CompositeLookComponent *)&this->vfptr);
-  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleLookComponent::`vftable'{for `UFG::SimComponent'};
-  v1->vfptr = (UFG::ICompositeLookVtbl *)&UFG::VehicleLookComponent::`vftable'{for `UFG::ICompositeLook'};
-  v1->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::VehicleLookComponent::`vftable'{for `UFG::UpdateInterface'};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleLookComponent::`vftable{for `UFG::SimComponent};
+  v1->vfptr = (UFG::ICompositeLookVtbl *)&UFG::VehicleLookComponent::`vftable{for `UFG::ICompositeLook};
+  v1->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::VehicleLookComponent::`vftable{for `UFG::UpdateInterface};
   v1->mVehicleEffectsComponent = 0i64;
   *(_WORD *)&v1->mVehiclePaintID = -1;
   UFG::SimComponent::AddType(
@@ -779,7 +779,7 @@ void __fastcall UFG::VehicleLookComponent::OnUpdateMaterial(UFG::VehicleLookComp
           }
           v23 = ModelType::GetSkeleton((ModelType *)v22[22].m_SafePointerList.mNode.mNext);
           v24 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)v23);
-          UFG::qPrintf("Warning: Cannot set '%s' VehicleLook override to %s\n", v24, v11);
+          UFG::qPrintf("Warning: Cannot set %s VehicleLook override to %s\n", v24, v11);
         }
       }
     }
@@ -843,7 +843,7 @@ void __fastcall UFG::VehicleLookComponent::OnUpdateMaterial(UFG::VehicleLookComp
           }
           v38 = ModelType::GetSkeleton((ModelType *)v37[22].m_SafePointerList.mNode.mNext);
           v39 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)v38);
-          UFG::qPrintf("Warning: Cannot set '%s' VehicleLook override to %s\n", v39, v26);
+          UFG::qPrintf("Warning: Cannot set %s VehicleLook override to %s\n", v39, v26);
         }
       }
     }
@@ -1019,9 +1019,9 @@ void __fastcall UFG::CharacterLookComponent::CharacterLookComponent(UFG::Charact
 
   v1 = this;
   UFG::CompositeLookComponent::CompositeLookComponent((UFG::CompositeLookComponent *)&this->vfptr);
-  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CharacterLookComponent::`vftable'{for `UFG::SimComponent'};
-  v1->vfptr = (UFG::ICompositeLookVtbl *)&UFG::CharacterLookComponent::`vftable'{for `UFG::ICompositeLook'};
-  v1->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::CharacterLookComponent::`vftable'{for `UFG::UpdateInterface'};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CharacterLookComponent::`vftable{for `UFG::SimComponent};
+  v1->vfptr = (UFG::ICompositeLookVtbl *)&UFG::CharacterLookComponent::`vftable{for `UFG::ICompositeLook};
+  v1->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::CharacterLookComponent::`vftable{for `UFG::UpdateInterface};
   v1->mOverlayTextureID = 0;
   v1->mIsSkinSSEnabled = 0;
   *(_QWORD *)&v1->mSweatLevel = 0i64;

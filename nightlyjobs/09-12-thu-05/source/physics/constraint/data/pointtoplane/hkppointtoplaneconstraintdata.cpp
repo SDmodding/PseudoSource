@@ -4,7 +4,7 @@ void __fastcall hkpPointToPlaneConstraintData::hkpPointToPlaneConstraintData(hkp
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_userData = 0i64;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpPointToPlaneConstraintData::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpPointToPlaneConstraintData::`vftable;
   this->m_atoms.m_transforms.m_type.m_storage = 2;
   this->m_atoms.m_lin.m_type.m_storage = 7;
   this->m_atoms.m_transforms.m_transformA.m_rotation.m_col0 = (hkVector4f)transform.m_quad;

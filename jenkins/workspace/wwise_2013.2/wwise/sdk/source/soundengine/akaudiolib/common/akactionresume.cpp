@@ -14,7 +14,7 @@ CAkActionResume *__fastcall CAkActionResume::Create(AkActionType in_eActionType,
   if ( result )
   {
     CAkActionActive::CAkActionActive((CAkActionActive *)&result->vfptr, v2, v3);
-    v5->vfptr = (CAkIndexableVtbl *)&CAkActionResume::`vftable';
+    v5->vfptr = (CAkIndexableVtbl *)&CAkActionResume::`vftable;
     CAkAction::AddToIndex((CAkAction *)&v5->vfptr);
     result = v5;
   }

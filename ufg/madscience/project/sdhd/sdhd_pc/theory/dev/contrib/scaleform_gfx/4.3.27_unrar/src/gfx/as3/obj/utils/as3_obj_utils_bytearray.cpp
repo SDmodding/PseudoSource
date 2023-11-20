@@ -610,7 +610,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::ByteArray::ByteArray(S
   v2 = t;
   v3 = this;
   Scaleform::GFx::AS3::Instances::fl::Object::Object((Scaleform::GFx::AS3::Instances::fl::Object *)&this->vfptr, t);
-  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_utils::ByteArray::`vftable';
+  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_utils::ByteArray::`vftable;
   *((_DWORD *)v3 + 14) = *((_DWORD *)v3 + 14) & 0xFFFFFFE0 | (_QWORD)Scaleform::GFx::AS3::Traits::GetConstructor((Scaleform::GFx::AS3::Traits *)&v2->vfptr)[1].vfptr & 7;
   *(_QWORD *)&v3->Position = 0i64;
   v7 = (signed __int64)&v3->Data;
@@ -3238,13 +3238,13 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::ByteArray::SerializeOb
   LODWORD(result.pNode) = Scaleform::GFx::AS3::Instances::fl_utils::ByteArray::FindInTraitsTable(
                             v3,
                             (Scaleform::GFx::AS3::InstanceTraits::Traits *)v2->pTraits.pObject);
-  f[0].vfptr = (Scaleform::GFx::AS3::Slots::SlotFunctVtbl *)&Scaleform::GFx::AS3::Instances::fl_utils::BASlotFunctCalc::`vftable';
+  f[0].vfptr = (Scaleform::GFx::AS3::Slots::SlotFunctVtbl *)&Scaleform::GFx::AS3::Instances::fl_utils::BASlotFunctCalc::`vftable;
   v7 = 0i64;
   LODWORD(f[1].vfptr) = 0;
   v8 = (Scaleform::GFx::AS3::Slots *)&v6->FirstOwnSlotNum;
   Scaleform::GFx::AS3::Slots::ForEachSlot((Scaleform::GFx::AS3::Slots *)&v6->FirstOwnSlotNum, f);
   v42 = (int)f[1].vfptr;
-  f[0].vfptr = (Scaleform::GFx::AS3::Slots::SlotFunctVtbl *)&Scaleform::GFx::AS3::Slots::SlotFunct::`vftable';
+  f[0].vfptr = (Scaleform::GFx::AS3::Slots::SlotFunctVtbl *)&Scaleform::GFx::AS3::Slots::SlotFunct::`vftable;
   v9 = (LOBYTE(v6->Flags) >> 1) & 1;
   if ( !v5[1].VArray.Data.Size )
     v5[1].VArray.Data.Size = (unsigned __int64)Scaleform::GFx::AS3::VM::Resolve2ClassTraits(
@@ -3267,10 +3267,10 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::ByteArray::SerializeOb
     --v13->RefCount;
     if ( v14 )
       Scaleform::GFx::ASStringNode::ReleaseNode(v13);
-    f[0].vfptr = (Scaleform::GFx::AS3::Slots::SlotFunctVtbl *)&Scaleform::GFx::AS3::Instances::fl_utils::BASlotFunctSrlzFixedName::`vftable';
+    f[0].vfptr = (Scaleform::GFx::AS3::Slots::SlotFunctVtbl *)&Scaleform::GFx::AS3::Instances::fl_utils::BASlotFunctSrlzFixedName::`vftable;
     f[1].vfptr = (Scaleform::GFx::AS3::Slots::SlotFunctVtbl *)v3;
     Scaleform::GFx::AS3::Slots::ForEachSlot(v8, f);
-    f[0].vfptr = (Scaleform::GFx::AS3::Slots::SlotFunctVtbl *)&Scaleform::GFx::AS3::Slots::SlotFunct::`vftable';
+    f[0].vfptr = (Scaleform::GFx::AS3::Slots::SlotFunctVtbl *)&Scaleform::GFx::AS3::Slots::SlotFunct::`vftable;
   }
   else
   {
@@ -3308,7 +3308,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::ByteArray::SerializeOb
                      1,
                      &ptr) )
     {
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         &ptr,
         0x20ui64,
         1,
@@ -3349,7 +3349,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::ByteArray::SerializeOb
     }
     else
     {
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         &ptr,
         0x20ui64,
         1,
@@ -3393,7 +3393,7 @@ LABEL_42:
   }
   else
   {
-    *(_QWORD *)&v36.Flags = &Scaleform::GFx::AS3::Instances::fl_utils::BASlotFunctSrlzFixedValue::`vftable';
+    *(_QWORD *)&v36.Flags = &Scaleform::GFx::AS3::Instances::fl_utils::BASlotFunctSrlzFixedValue::`vftable;
     v36.Bonus.pWeakProxy = (Scaleform::GFx::AS3::WeakProxy *)v3;
     *(_QWORD *)&v36.value.VNumber = v2;
     Scaleform::GFx::AS3::Slots::ForEachSlot(v8, (Scaleform::GFx::AS3::Slots::SlotFunct *)&v36);
@@ -3717,7 +3717,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::ByteArray::Deserialize
                          argv,
                          &ptr) )
         {
-          `eh vector destructor iterator'(
+          `eh vector destructor iterator(
             &ptr,
             0x20ui64,
             1,
@@ -3732,7 +3732,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::ByteArray::Deserialize
         }
         else
         {
-          `eh vector destructor iterator'(
+          `eh vector destructor iterator(
             &ptr,
             0x20ui64,
             1,
@@ -3964,7 +3964,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::SerializeArrSparse::op
     v8 = v4->BA;
     v9 = Scaleform::GFx::AS3::Value::GetUndefined();
     Scaleform::GFx::AS3::Instances::fl_utils::ByteArray::writeObject(v8, v9, v3);
-    v11.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable';
+    v11.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable;
     Scaleform::Formatter::~Formatter((Scaleform::Formatter *)&v11.vfptr);
   }
 }
@@ -4020,12 +4020,12 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::ByteArray::SerializeAr
     Scaleform::GFx::AS3::Instances::fl_utils::ByteArray::WriteUInt29(v3, 2 * v5 | 1);
     if ( v2->SA.Length > v2->SA.ValueA.Data.Size )
     {
-      f.vfptr = (Scaleform::GFx::AS3::Impl::ArrayFuncVtbl *)&Scaleform::GFx::AS3::Instances::fl_utils::SerializeArrSparse::`vftable';
+      f.vfptr = (Scaleform::GFx::AS3::Impl::ArrayFuncVtbl *)&Scaleform::GFx::AS3::Instances::fl_utils::SerializeArrSparse::`vftable;
       v10 = v2->pTraits.pObject->pVM->StringManagerRef;
       v11 = v2;
       v12 = v3;
       Scaleform::GFx::AS3::Impl::SparseArray::ForEachSparse(&v2->SA, &f);
-      f.vfptr = (Scaleform::GFx::AS3::Impl::ArrayFuncVtbl *)&Scaleform::GFx::AS3::Impl::ArrayFunc::`vftable';
+      f.vfptr = (Scaleform::GFx::AS3::Impl::ArrayFuncVtbl *)&Scaleform::GFx::AS3::Impl::ArrayFunc::`vftable;
     }
     v6 = Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateEmptyString(
            (Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *)v3->pTraits.pObject->pVM->StringManagerRef->Builtins,
@@ -4038,7 +4038,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::ByteArray::SerializeAr
       Scaleform::GFx::ASStringNode::ReleaseNode(v7);
     if ( v5 )
     {
-      f.vfptr = (Scaleform::GFx::AS3::Impl::ArrayFuncVtbl *)&Scaleform::GFx::AS3::Instances::fl_utils::SerializeArrDense::`vftable';
+      f.vfptr = (Scaleform::GFx::AS3::Impl::ArrayFuncVtbl *)&Scaleform::GFx::AS3::Instances::fl_utils::SerializeArrDense::`vftable;
       v10 = v2;
       v11 = v3;
       Scaleform::GFx::AS3::Impl::SparseArray::ForEachDense(&v2->SA, &f);
@@ -5551,7 +5551,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v5 )
   {
     Scaleform::GFx::AS3::ClassTraits::fl::Object::Object(v5, v2, &Scaleform::GFx::AS3::fl_utils::ByteArrayCI);
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_utils::ByteArray::`vftable';
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_utils::ByteArray::`vftable;
     v6->Flags |= 1ui64;
     v6->TraitsType = 8;
   }
@@ -5565,7 +5565,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v7 )
   {
     Scaleform::GFx::AS3::InstanceTraits::fl::Object::Object(v7, v2, &Scaleform::GFx::AS3::fl_utils::ByteArrayCI);
-    v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_utils::ByteArray::`vftable';
+    v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_utils::ByteArray::`vftable;
     v8.pV->Flags |= 1ui64;
     v8.pV->TraitsType = 8;
     *(_QWORD *)&v8.pV[1].RefCount = 0i64;
@@ -5586,7 +5586,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v9 )
   {
     Scaleform::GFx::AS3::Class::Class(v9, v3->pV);
-    v10->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl_utils::ByteArray::`vftable';
+    v10->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl_utils::ByteArray::`vftable;
     LODWORD(v10[1].vfptr) = 3;
   }
   return v3;

@@ -165,7 +165,7 @@ void __fastcall APCompactArrayBase<SSClause>::set_size_free(APCompactArrayBase<S
       if ( *v5 )
       {
         v8 = v7->i_test_p;
-        v7->vfptr = (SSClauseVtbl *)&SSClause::`vftable';
+        v7->vfptr = (SSClauseVtbl *)&SSClause::`vftable;
         if ( v8 )
           v8->vfptr->__vecDelDtor(v8, 1u);
         v9 = v7->i_clause_p;

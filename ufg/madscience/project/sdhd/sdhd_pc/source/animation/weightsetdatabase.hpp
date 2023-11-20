@@ -21,12 +21,12 @@ void __fastcall WeightSetGroup::WeightSetGroup(WeightSetGroup *this)
   BinString *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
   v2 = (UFG::qNode<WeightSetGroup,WeightSetGroup> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (Expression::IMemberMapVtbl *)&WeightSetGroup::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&WeightSetGroup::`vftable;
   v3 = &this->mName;
   v3->mOffset = 1i64;
   BinString::Set(v3, &customWorldMapCaption);
@@ -45,7 +45,7 @@ void __fastcall WeightSetGroup::~WeightSetGroup(WeightSetGroup *this)
   UFG::qNode<WeightSetGroup,WeightSetGroup> *v5; // rax
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&WeightSetGroup::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&WeightSetGroup::`vftable;
   BinPtrArray<JointReferences,1,0>::Clear((BinPtrArray<ITrack,1,0> *)&this->mWeightsets);
   if ( !(~LOBYTE(v1->mName.mOffset) & 1) )
   {
@@ -63,7 +63,7 @@ void __fastcall WeightSetGroup::~WeightSetGroup(WeightSetGroup *this)
   v5->mPrev = v4;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 175

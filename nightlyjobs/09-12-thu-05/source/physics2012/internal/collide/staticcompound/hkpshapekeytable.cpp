@@ -24,7 +24,7 @@ void __fastcall hkpShapeKeyTable::Block::~Block(hkpShapeKeyTable::Block *this)
 
   v1 = this->m_next;
   if ( v1 )
-    hkpShapeKeyTable::Block::`scalar deleting destructor'(v1, 1);
+    hkpShapeKeyTable::Block::`scalar deleting destructor(v1, 1);
 }
 
 // File Line: 56

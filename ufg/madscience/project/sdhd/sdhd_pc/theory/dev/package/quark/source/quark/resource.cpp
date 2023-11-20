@@ -123,7 +123,7 @@ __int64 UFG::_dynamic_initializer_for__gChunkFileIndexInventory__()
     0x7040F7D2u,
     0,
     0);
-  UFG::gChunkFileIndexInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::ChunkFileIndexInventory::`vftable';
+  UFG::gChunkFileIndexInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::ChunkFileIndexInventory::`vftable;
   return atexit(UFG::_dynamic_atexit_destructor_for__gChunkFileIndexInventory__);
 }
 
@@ -138,7 +138,7 @@ __int64 UFG::_dynamic_initializer_for__gChunkFileFatIndexInventory__()
     0xE445B80C,
     0,
     0);
-  UFG::gChunkFileFatIndexInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::ChunkFileFatIndexInventory::`vftable';
+  UFG::gChunkFileFatIndexInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::ChunkFileFatIndexInventory::`vftable;
   return atexit(UFG::_dynamic_atexit_destructor_for__gChunkFileFatIndexInventory__);
 }
 
@@ -539,7 +539,7 @@ void __fastcall UFG::qResourceInventory::qResourceInventory(UFG::qResourceInvent
   v10 = (UFG::qNode<UFG::qResourceInventory,UFG::qResourceInventory> *)&this->mPrev;
   v10->mPrev = v10;
   v10->mNext = v10;
-  this->vfptr = (UFG::qResourceInventoryVtbl *)&UFG::qResourceInventory::`vftable';
+  this->vfptr = (UFG::qResourceInventoryVtbl *)&UFG::qResourceInventory::`vftable;
   v11 = &this->mResourceDatas;
   v11->mTree.mRoot.mParent = 0i64;
   v11->mTree.mRoot.mChild[0] = 0i64;
@@ -562,7 +562,7 @@ void __fastcall UFG::qResourceInventory::qResourceInventory(UFG::qResourceInvent
   v13 = &v8->mNullHandles;
   v13->mNode.mPrev = &v13->mNode;
   v13->mNode.mNext = &v13->mNode;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v8->mInternalUnresolvedHandles,
     0x10ui64,
     4,
@@ -598,7 +598,7 @@ void __fastcall UFG::qResourceInventory::qResourceInventory(UFG::qResourceInvent
     {
       *(_DWORD *)v18 = num_unsolved_hash_lists;
       v9 = (signed __int64)(v18 + 8);
-      `eh vector constructor iterator'(
+      `eh vector constructor iterator(
         v18 + 8,
         0x10ui64,
         num_unsolved_hash_lists,
@@ -641,7 +641,7 @@ void __fastcall UFG::qResourceInventory::~qResourceInventory(UFG::qResourceInven
   UFG::qNode<UFG::qResourceInventory,UFG::qResourceInventory> *v18; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qResourceInventoryVtbl *)&UFG::qResourceInventory::`vftable';
+  this->vfptr = (UFG::qResourceInventoryVtbl *)&UFG::qResourceInventory::`vftable;
   v2 = &this->mResourceDatas;
   v3 = &this->mResourceDatas.mTree.mNULL;
   v2->mTree.mRoot.mParent = (UFG::qBaseNodeRB *)((unsigned __int64)v3 | (_QWORD)v2->mTree.mRoot.mParent & 1);
@@ -690,7 +690,7 @@ void __fastcall UFG::qResourceInventory::~qResourceInventory(UFG::qResourceInven
   v13->mPrev = v13;
   v13->mNext = v13;
   --v12->mNumInventories;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->mInternalUnresolvedHandles,
     0x10ui64,
     4,
@@ -749,7 +749,7 @@ void __fastcall UFG::qResourceInventory::Close(UFG::qResourceInventory *this)
       UFG::qPrintChannel::Print(
         &gInventoryChannel,
         OUTPUT_LEVEL_DEBUG,
-        "[%s] WARNING: Remaining resource name = '%s'\n");
+        "[%s] WARNING: Remaining resource name = %s\n");
       v2->vfptr->Remove(v2, v7);
     }
     while ( v2->mResourceDatas.mTree.mCount );
@@ -1406,7 +1406,7 @@ void __fastcall UFG::qResourceInventory::PrintContents(UFG::qResourceInventory *
   UFG::qBaseNodeRB *v10; // rcx
 
   v1 = this;
-  UFG::qPrintf("Contents of Inventory '%.64s' %d items\n", this->mName, this->mNumResourceData);
+  UFG::qPrintf("Contents of Inventory %.64s %d items\n", this->mName, this->mNumResourceData);
   v2 = v1->mResourceDatas.mTree.mRoot.mChild[0];
   v3 = (signed __int64)&v1->mResourceDatas;
   v4 = v2->mChild[0];
@@ -1418,7 +1418,7 @@ void __fastcall UFG::qResourceInventory::PrintContents(UFG::qResourceInventory *
   while ( v6 )
   {
     UFG::qPrintf(
-      "  - Resource TypeUID:0x%08x DataUID:0x%08x Memory:0x%08x Name:'%.36s'\n",
+      "  - Resource TypeUID:0x%08x DataUID:0x%08x Memory:0x%08x Name:%.36s\n",
       LODWORD(v6[1].mChild[1]),
       v6->mUID,
       v6,

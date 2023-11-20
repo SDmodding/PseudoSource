@@ -290,7 +290,7 @@ void __fastcall UFG::ObjectResourceManager::ObjectResourceManager(UFG::ObjectRes
 
   v1 = this;
   UFG::ResourcePool::ResourcePool(&this->mPool);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v1->mEntityStates,
     0x48ui64,
     3,
@@ -302,7 +302,7 @@ void __fastcall UFG::ObjectResourceManager::ObjectResourceManager(UFG::ObjectRes
   *(_QWORD *)&v1->mAvailableDrivers.size = 0i64;
   v1->mDefaultDriver = 0i64;
   v2 = v1->mRareSpawnList;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v1->mRareSpawnList,
     0x10ui64,
     3,
@@ -456,7 +456,7 @@ void __fastcall UFG::ObjectResourceManager::~ObjectResourceManager(UFG::ObjectRe
   v4->mPrev = v3;
   v2->mNode.mPrev = &v2->mNode;
   v2->mNode.mNext = &v2->mNode;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->mRareSpawnList,
     0x10ui64,
     3,
@@ -471,7 +471,7 @@ void __fastcall UFG::ObjectResourceManager::~ObjectResourceManager(UFG::ObjectRe
     operator delete[](v6);
   v1->mAmbientVehicles.p = 0i64;
   *(_QWORD *)&v1->mAmbientVehicles.size = 0i64;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->mEntityStates,
     0x48ui64,
     3,

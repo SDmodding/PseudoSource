@@ -14,8 +14,8 @@ void __fastcall UFG::HkAudioEntityComponent::HkAudioEntityComponent(UFG::HkAudio
   v2 = this;
   UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, pSceneObj->m_NameUID);
   UFG::AudioEntity::AudioEntity((UFG::AudioEntity *)&v2->vfptr);
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HkAudioEntityComponent::`vftable'{for `UFG::SimComponent'};
-  v2->vfptr = (UFG::AudioEntityVtbl *)&UFG::HkAudioEntityComponent::`vftable'{for `UFG::AudioEntity'};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HkAudioEntityComponent::`vftable{for `UFG::SimComponent};
+  v2->vfptr = (UFG::AudioEntityVtbl *)&UFG::HkAudioEntityComponent::`vftable{for `UFG::AudioEntity};
   UFG::SimComponent::AddType(
     (UFG::SimComponent *)&v2->vfptr,
     UFG::HkAudioEntityComponent::_HkAudioEntityComponentTypeUID,
@@ -30,9 +30,9 @@ void __fastcall UFG::HkAudioEntityComponent::~HkAudioEntityComponent(UFG::HkAudi
   UFG::AudioEntity *v2; // rcx
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HkAudioEntityComponent::`vftable'{for `UFG::SimComponent'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HkAudioEntityComponent::`vftable{for `UFG::SimComponent};
   v2 = (UFG::AudioEntity *)&this->vfptr;
-  v2->vfptr = (UFG::AudioEntityVtbl *)&UFG::HkAudioEntityComponent::`vftable'{for `UFG::AudioEntity'};
+  v2->vfptr = (UFG::AudioEntityVtbl *)&UFG::HkAudioEntityComponent::`vftable{for `UFG::AudioEntity};
   UFG::AudioEntity::~AudioEntity(v2);
   UFG::SimComponent::~SimComponent((UFG::SimComponent *)&v1->vfptr);
 }

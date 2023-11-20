@@ -60,7 +60,7 @@ void __fastcall UFG::SpawnPoint::SpawnPoint(UFG::SpawnPoint *this, UFG::qSymbol 
   v4->mNode.mChild[0] = 0i64;
   v4->mNode.mChild[1] = 0i64;
   v4->mNode.mUID = (unsigned int)v5;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SpawnPoint::`vftable';
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SpawnPoint::`vftable;
   v6 = &v4->mpSpawn;
   v6->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v6->mPrev;
   v6->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v6->mPrev;
@@ -156,7 +156,7 @@ void __fastcall UFG::SpawnPoint::~SpawnPoint(UFG::SpawnPoint *this)
   UFG::qNode<UFG::SpawnPoint,UFG::SpawnPoint> *v11; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SpawnPoint::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SpawnPoint::`vftable;
   if ( this->mFlags & 0x10000 )
     UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
       (UFG::qBaseTreeVariableRB<unsigned __int64> *)&UFG::SpawnPoint::msSpawnPoints,

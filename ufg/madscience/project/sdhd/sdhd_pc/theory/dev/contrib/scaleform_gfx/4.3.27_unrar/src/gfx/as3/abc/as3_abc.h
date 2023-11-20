@@ -139,7 +139,7 @@ void __fastcall Scaleform::GFx::AS3::Abc::ScriptTable::~ScriptTable(Scaleform::G
 // RVA: 0x78A0D0
 void __fastcall Scaleform::GFx::AS3::Abc::Code::~Code(Scaleform::GFx::AS3::Abc::Code *this)
 {
-  this->vfptr = (Scaleform::GFx::AS3::Abc::CodeVtbl *)&Scaleform::GFx::AS3::Abc::Code::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::Abc::CodeVtbl *)&Scaleform::GFx::AS3::Abc::Code::`vftable;
 }
 
 // File Line: 1634
@@ -155,10 +155,10 @@ void __fastcall Scaleform::GFx::AS3::Abc::File::File(Scaleform::GFx::AS3::Abc::F
   signed __int64 v7; // [rsp+58h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS3::Abc::File::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS3::Abc::File::`vftable;
   this->DataSize = 0;
   Scaleform::String::String(&this->Source);
   Scaleform::GFx::AS3::Abc::ConstPool::ConstPool(&v1->Const_Pool);

@@ -12,7 +12,7 @@ void __fastcall SSLiteral::~SSLiteral(SSLiteral *this)
   APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *v8; // rcx
 
   v1 = this;
-  this->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable';
+  this->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable;
   if ( this->i_kind == 4 )
   {
     v2 = (AStringRef *)this->i_data;
@@ -29,7 +29,7 @@ void __fastcall SSLiteral::~SSLiteral(SSLiteral *this)
       APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(v8, v2);
     }
   }
-  v1->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
+  v1->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
 }
 
 // File Line: 253
@@ -45,8 +45,8 @@ void __fastcall SSLiteral::SSLiteral(SSLiteral *this, const void **binary_pp)
   ASymbol result; // [rsp+48h] [rbp+10h]
 
   v2 = this;
-  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-  this->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable';
+  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+  this->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable;
   this->i_kind = *(unsigned __int8 *)*binary_pp;
   *binary_pp = (char *)*binary_pp + 1;
   v3 = this->i_kind;
@@ -244,8 +244,8 @@ void __fastcall SSLiteralList::SSLiteralList(SSLiteralList *this, const void **b
 
   v2 = binary_pp;
   v3 = this;
-  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-  this->vfptr = (SSExpressionBaseVtbl *)&SSLiteralList::`vftable';
+  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+  this->vfptr = (SSExpressionBaseVtbl *)&SSLiteralList::`vftable;
   this->i_item_exprs.i_count = 0;
   this->i_item_exprs.i_array_p = 0i64;
   this->i_ctor_p = (SSMethodCall *)SSInvokeBase::from_binary_typed_new(binary_pp);

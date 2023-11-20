@@ -3,7 +3,7 @@
 void __fastcall hkPlatformObjectWriter::Cache::Cache(hkPlatformObjectWriter::Cache *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkPlatformObjectWriter::Cache::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkPlatformObjectWriter::Cache::`vftable;
   this->m_platformClassFromHostClass.m_map.m_hashMod = -1;
   this->m_platformClassFromHostClass.m_map.m_elem = 0i64;
   this->m_platformClassFromHostClass.m_map.m_numElems = 0;
@@ -27,7 +27,7 @@ void __fastcall hkPlatformObjectWriter::Cache::~Cache(hkPlatformObjectWriter::Ca
 
   v1 = 0;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkPlatformObjectWriter::Cache::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkPlatformObjectWriter::Cache::`vftable;
   if ( this->m_allocations.m_size > 0 )
   {
     v3 = 0i64;
@@ -56,7 +56,7 @@ void __fastcall hkPlatformObjectWriter::Cache::~Cache(hkPlatformObjectWriter::Ca
     (hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)&v2->m_platformClassFromHostClass.m_map.m_elem,
     (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr);
   _((AMD_HD3D *)&v2->m_platformClassFromHostClass);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 28
@@ -108,7 +108,7 @@ void __fastcall hkPlatformObjectWriter::hkPlatformObjectWriter(hkPlatformObjectW
   flagsa.m_storage = flags.m_storage;
   v4 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkPlatformObjectWriter::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkPlatformObjectWriter::`vftable;
   v5 = cache;
   v6 = layout;
   v7 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
@@ -157,12 +157,12 @@ void __fastcall hkPlatformObjectWriter::~hkPlatformObjectWriter(hkPlatformObject
   hkReferencedObject *v2; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkPlatformObjectWriter::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkPlatformObjectWriter::`vftable;
   hkReferencedObject::removeReference((hkReferencedObject *)&this->m_copier->vfptr);
   v2 = (hkReferencedObject *)&v1->m_cache->vfptr;
   if ( v2 )
     hkReferencedObject::removeReference(v2);
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 77

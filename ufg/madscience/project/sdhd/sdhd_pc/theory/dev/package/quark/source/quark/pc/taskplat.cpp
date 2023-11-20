@@ -22,7 +22,7 @@ void __fastcall UFG::qTaskManagerData::qTaskManagerData(UFG::qTaskManagerData *t
   v3->mEventAllDone.mName = "qTaskManagerData.mEventAllDone";
   v3->mEventAllDone.mAutoReset = 0;
   v3->mEventAllDone.mHandlePlat = CreateEventA(0i64, 1, 0, 0i64);
-  `eh vector constructor iterator'(v3->mThreads, 0x40ui64, 5, (void (__fastcall *)(void *))UFG::qThread::qThread);
+  `eh vector constructor iterator(v3->mThreads, 0x40ui64, 5, (void (__fastcall *)(void *))UFG::qThread::qThread);
   v4 = &v3->mQueuedTasks;
   v4->mNode.mPrev = &v4->mNode;
   v4->mNode.mNext = &v4->mNode;

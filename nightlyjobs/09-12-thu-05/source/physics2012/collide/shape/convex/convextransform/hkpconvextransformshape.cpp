@@ -15,7 +15,7 @@ void __fastcall hkpConvexTransformShape::hkpConvexTransformShape(hkpConvexTransf
     childShape->m_radius,
     childShape,
     ref);
-  v6->vfptr = (hkBaseObjectVtbl *)&hkpConvexTransformShape::`vftable';
+  v6->vfptr = (hkBaseObjectVtbl *)&hkpConvexTransformShape::`vftable;
   hkQsTransformf::setFromTransformNoScale(&v6->m_transform, v5);
   v6->m_extraScale = 0i64;
   v6->m_userData = v4->m_userData;
@@ -38,7 +38,7 @@ void __fastcall hkpConvexTransformShape::hkpConvexTransformShape(hkpConvexTransf
     childShape->m_radius,
     childShape,
     ref);
-  v6->vfptr = (hkBaseObjectVtbl *)&hkpConvexTransformShape::`vftable';
+  v6->vfptr = (hkBaseObjectVtbl *)&hkpConvexTransformShape::`vftable;
   hkpConvexTransformShape::setTransform(v6, v5);
   v6->m_userData = v4->m_userData;
 }
@@ -51,9 +51,9 @@ void __fastcall hkpConvexTransformShape::hkpConvexTransformShape(hkpConvexTransf
 
   v2 = this;
   hkpConvexShape::hkpConvexShape((hkpConvexShape *)&this->vfptr, flag);
-  v2->m_childShape.vfptr = (hkpShapeContainerVtbl *)&hkpSingleShapeContainer::`vftable';
+  v2->m_childShape.vfptr = (hkpShapeContainerVtbl *)&hkpSingleShapeContainer::`vftable;
   v2->m_type.m_storage = 11;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpConvexTransformShape::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpConvexTransformShape::`vftable;
 }
 
 // File Line: 46

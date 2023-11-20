@@ -4,7 +4,7 @@ void __fastcall std::exception::exception(std::exception *this, const char *cons
 {
   this->_Mywhat = 0i64;
   this->_Mydofree = 0;
-  this->vfptr = (std::exceptionVtbl *)&std::exception::`vftable';
+  this->vfptr = (std::exceptionVtbl *)&std::exception::`vftable;
   std::exception::_Copy_str(this, *_What);
 }
 
@@ -14,7 +14,7 @@ void __fastcall std::exception::exception(std::exception *this, const char *cons
 {
   const char *v3; // rax
 
-  this->vfptr = (std::exceptionVtbl *)&std::exception::`vftable';
+  this->vfptr = (std::exceptionVtbl *)&std::exception::`vftable;
   v3 = *_What;
   this->_Mydofree = 0;
   this->_Mywhat = v3;
@@ -25,7 +25,7 @@ void __fastcall std::exception::exception(std::exception *this, const char *cons
 void __fastcall std::exception::exception(std::exception *this, std::exception *_That)
 {
   this->_Mywhat = 0i64;
-  this->vfptr = (std::exceptionVtbl *)&std::exception::`vftable';
+  this->vfptr = (std::exceptionVtbl *)&std::exception::`vftable;
   this->_Mydofree = 0;
   std::exception::operator=(this, _That);
 }
@@ -105,7 +105,7 @@ void __fastcall std::exception::_Tidy(std::exception *this)
 // RVA: 0x12C3E14
 void __fastcall std::bad_exception::~bad_exception(std::bad_exception *this)
 {
-  this->vfptr = (std::exceptionVtbl *)&std::bad_exception::`vftable';
+  this->vfptr = (std::exceptionVtbl *)&std::bad_exception::`vftable;
   std::bad_cast::~bad_cast((std::exception *)&this->vfptr);
 }
 

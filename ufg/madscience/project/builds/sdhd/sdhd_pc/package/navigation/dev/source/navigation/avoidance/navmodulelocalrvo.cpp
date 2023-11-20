@@ -20,7 +20,7 @@ void __fastcall UFG::NavModuleLocalRVO::NavModuleLocalRVO(UFG::NavModuleLocalRVO
 
   v2 = this;
   UFG::NavModuleLocal::NavModuleLocal((UFG::NavModuleLocal *)&this->vfptr, parent);
-  v2->vfptr = (UFG::NavModuleLocalVtbl *)&UFG::NavModuleLocalRVO::`vftable';
+  v2->vfptr = (UFG::NavModuleLocalVtbl *)&UFG::NavModuleLocalRVO::`vftable;
   v2->m_phkaiCharacter = 0i64;
   v2->m_phkaiBehaviour = 0i64;
   hkaiAvoidanceProperties::hkaiAvoidanceProperties(&v2->m_AvoidanceProperties);

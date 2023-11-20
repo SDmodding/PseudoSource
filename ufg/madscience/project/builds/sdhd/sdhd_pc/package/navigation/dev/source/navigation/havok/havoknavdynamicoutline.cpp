@@ -37,7 +37,7 @@ void __fastcall UFG::HavokNavDynamicOutline::HavokNavDynamicOutline(UFG::HavokNa
   v8 = transform;
   v9 = this;
   UFG::NavDynamicOutline::NavDynamicOutline((UFG::NavDynamicOutline *)&this->vfptr);
-  v9->vfptr = (UFG::NavDynamicOutlineVtbl *)&UFG::HavokNavDynamicOutline::`vftable';
+  v9->vfptr = (UFG::NavDynamicOutlineVtbl *)&UFG::HavokNavDynamicOutline::`vftable;
   v9->m_dynamicEdgesLocal.p = 0i64;
   *(_QWORD *)&v9->m_dynamicEdgesLocal.size = 0i64;
   v9->m_dynamicEdgesWorld.p = 0i64;
@@ -179,7 +179,7 @@ void __fastcall UFG::HavokNavDynamicOutline::~HavokNavDynamicOutline(UFG::HavokN
   UFG::NavDynamicOutlineVtbl *v3; // rcx
 
   v1 = (UFG::NavDynamicOutline *)&this->vfptr;
-  this->vfptr = (UFG::NavDynamicOutlineVtbl *)&UFG::HavokNavDynamicOutline::`vftable';
+  this->vfptr = (UFG::NavDynamicOutlineVtbl *)&UFG::HavokNavDynamicOutline::`vftable;
   hkReferencedObject::removeReference((hkReferencedObject *)&this->m_pSilhouette->vfptr);
   v1[14].vfptr = 0i64;
   v2 = v1[13].vfptr;

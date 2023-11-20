@@ -14,7 +14,7 @@ CAkActionSetGameParameter *__fastcall CAkActionSetGameParameter::Create(AkAction
   if ( result )
   {
     CAkActionSetValue::CAkActionSetValue((CAkActionSetValue *)&result->vfptr, v2, v3);
-    v5->vfptr = (CAkIndexableVtbl *)&CAkActionSetGameParameter::`vftable';
+    v5->vfptr = (CAkIndexableVtbl *)&CAkActionSetGameParameter::`vftable;
     *(_QWORD *)&v5->m_TargetValue.m_base = 0i64;
     v5->m_TargetValue.m_mod.m_max = 0.0;
     v5->m_eValueMeaning = 2;

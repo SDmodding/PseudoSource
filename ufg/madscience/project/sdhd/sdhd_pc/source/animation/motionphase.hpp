@@ -2,8 +2,8 @@
 // RVA: 0x30FE40
 void __fastcall MotionPhase2::~MotionPhase2(MotionPhase2 *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&MotionPhase2::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&MotionPhase2::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 30
@@ -17,8 +17,8 @@ const char *__fastcall MotionPhase2::GetClassname(MotionPhase2 *this)
 // RVA: 0x29C620
 void __fastcall MotionKey::~MotionKey(MotionKey *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&MotionKey::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&MotionKey::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 100

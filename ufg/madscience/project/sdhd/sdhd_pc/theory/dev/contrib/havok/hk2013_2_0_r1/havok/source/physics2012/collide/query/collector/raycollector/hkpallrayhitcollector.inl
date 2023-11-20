@@ -4,9 +4,9 @@ void __fastcall hkpAllRayHitCollector::hkpAllRayHitCollector(hkpAllRayHitCollect
 {
   hkInplaceArray<hkpWorldRayCastOutput,8,hkContainerHeapAllocator> *v1; // [rsp+28h] [rbp+10h]
 
-  this->vfptr = (hkpRayHitCollectorVtbl *)&hkpRayHitCollector::`vftable';
+  this->vfptr = (hkpRayHitCollectorVtbl *)&hkpRayHitCollector::`vftable;
   this->m_earlyOutHitFraction = 1.0;
-  this->vfptr = (hkpRayHitCollectorVtbl *)&hkpAllRayHitCollector::`vftable';
+  this->vfptr = (hkpRayHitCollectorVtbl *)&hkpAllRayHitCollector::`vftable;
   v1 = &this->m_hits;
   v1->m_data = this->m_hits.m_storage;
   v1->m_size = 0;
@@ -64,7 +64,7 @@ void __fastcall hkpAllRayHitCollector::~hkpAllRayHitCollector(hkpAllRayHitCollec
   int v3; // eax
 
   v1 = this;
-  this->vfptr = (hkpRayHitCollectorVtbl *)&hkpAllRayHitCollector::`vftable';
+  this->vfptr = (hkpRayHitCollectorVtbl *)&hkpAllRayHitCollector::`vftable;
   v2 = &this->m_hits;
   this->m_hits.m_size = 0;
   v3 = this->m_hits.m_capacityAndFlags;
@@ -75,6 +75,6 @@ void __fastcall hkpAllRayHitCollector::~hkpAllRayHitCollector(hkpAllRayHitCollec
       96 * (v3 & 0x3FFFFFFF));
   v2->m_data = 0i64;
   v2->m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkpRayHitCollectorVtbl *)&hkpRayHitCollector::`vftable';
+  v1->vfptr = (hkpRayHitCollectorVtbl *)&hkpRayHitCollector::`vftable;
 }
 

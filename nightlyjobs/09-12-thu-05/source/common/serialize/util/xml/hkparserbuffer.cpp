@@ -10,7 +10,7 @@ void __fastcall hkParserBuffer::hkParserBuffer(hkParserBuffer *this, hkStreamRea
   hkResult result; // [rsp+40h] [rbp+8h]
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkParserBuffer::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkParserBuffer::`vftable;
   this->m_buffer.m_data = 0i64;
   this->m_buffer.m_size = 0;
   this->m_buffer.m_capacityAndFlags = 2147483648;
@@ -43,7 +43,7 @@ void __fastcall hkParserBuffer::~hkParserBuffer(hkParserBuffer *this)
   int v2; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkParserBuffer::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkParserBuffer::`vftable;
   hkReferencedObject::removeReference((hkReferencedObject *)&this->m_reader->vfptr);
   v2 = v1->m_buffer.m_capacityAndFlags;
   v1->m_buffer.m_size = 0;
@@ -54,7 +54,7 @@ void __fastcall hkParserBuffer::~hkParserBuffer(hkParserBuffer *this)
       v2 & 0x3FFFFFFF);
   v1->m_buffer.m_data = 0i64;
   v1->m_buffer.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 40

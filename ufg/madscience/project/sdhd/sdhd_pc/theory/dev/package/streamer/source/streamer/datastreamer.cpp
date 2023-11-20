@@ -2,7 +2,7 @@
 // RVA: 0x146F980
 __int64 UFG::DataStreamer::_dynamic_initializer_for__gStallRecordNames__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     UFG::DataStreamer::gStallRecordNames,
     0x28ui64,
     5,
@@ -1304,7 +1304,7 @@ LABEL_14:
   else
   {
     v8 = UFG::qFileOp::GetFilename(v3);
-    UFG::qPrintf("file_op 0x%08x Read %d64 of %d64 expected bytes for stream 0x%08x from '%s'\n", v3, v5, v4, v2, v8);
+    UFG::qPrintf("file_op 0x%08x Read %d64 of %d64 expected bytes for stream 0x%08x from %s\n", v3, v5, v4, v2, v8);
   }
 }
 

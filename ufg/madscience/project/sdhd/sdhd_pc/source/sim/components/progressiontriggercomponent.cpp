@@ -36,7 +36,7 @@ void __fastcall UFG::ProgressionTriggerComponent::ProgressionTriggerComponent(UF
   v4 = (UFG::qNode<UFG::ProgressionTriggerComponent,UFG::UpdateList> *)&v2->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ProgressionTriggerComponent::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ProgressionTriggerComponent::`vftable;
   v2->mpGameSlice = 0i64;
   v2->mCallTimeout = 0i64;
   v2->mCallFailTimeout = 0i64;
@@ -80,7 +80,7 @@ void __fastcall UFG::ProgressionTriggerComponent::~ProgressionTriggerComponent(U
   UFG::qNode<UFG::ProgressionTriggerComponent,UFG::ProgressionTriggerComponent> *v11; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ProgressionTriggerComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ProgressionTriggerComponent::`vftable;
   if ( this == UFG::gpCurrentProgressionTriggerComponent )
     UFG::gpCurrentProgressionTriggerComponent = (UFG::ProgressionTriggerComponent *)&UFG::gpCurrentProgressionTriggerComponent->mPrev[-5];
   if ( this == UFG::ProgressionTriggerComponent::s_ProgressionTriggerComponentpCurrentIterator )

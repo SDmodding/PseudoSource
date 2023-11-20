@@ -45,7 +45,7 @@ void Scaleform::Render::ImageFileHandlerRegistry::ImageFileHandlerRegistry(Scale
   unsigned int v9; // [rsp+88h] [rbp+10h]
 
   v9 = handlerCount;
-  this->vfptr = (Scaleform::Render::ImageFileHandlerRegistryVtbl *)&Scaleform::Render::ImageFileHandlerRegistry::`vftable';
+  this->vfptr = (Scaleform::Render::ImageFileHandlerRegistryVtbl *)&Scaleform::Render::ImageFileHandlerRegistry::`vftable;
   v2 = (Scaleform::ArrayDataBase<Scaleform::String,Scaleform::AllocatorGH<Scaleform::String,2>,Scaleform::ArrayDefaultPolicy> *)&this->Handlers;
   v3 = 0;
   v2->Data = 0i64;

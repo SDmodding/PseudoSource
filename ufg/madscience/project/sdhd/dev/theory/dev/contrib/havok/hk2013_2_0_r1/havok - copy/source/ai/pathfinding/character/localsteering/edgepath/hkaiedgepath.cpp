@@ -895,7 +895,7 @@ void __usercall hkaiEdgePath::replacePrefixWithEdge(hkaiEdgePath *this@<rcx>, in
 
 // File Line: 546
 // RVA: 0xBEC930
-__int64 __fastcall `anonymous namespace'::moveCwInFace(hkaiGeneralAccessor *accessor, unsigned int *edgeKey, unsigned int faceKey)
+__int64 __fastcall `anonymous namespace::moveCwInFace(hkaiGeneralAccessor *accessor, unsigned int *edgeKey, unsigned int faceKey)
 {
   unsigned int v3; // ebx
   unsigned int *v4; // rdi
@@ -919,7 +919,7 @@ __int64 __fastcall `anonymous namespace'::moveCwInFace(hkaiGeneralAccessor *acce
 
 // File Line: 568
 // RVA: 0xBEC980
-__int64 __fastcall `anonymous namespace'::moveCcwInFace(hkaiGeneralAccessor *accessor, unsigned int *edgeKey, unsigned int faceKey)
+__int64 __fastcall `anonymous namespace::moveCcwInFace(hkaiGeneralAccessor *accessor, unsigned int *edgeKey, unsigned int faceKey)
 {
   unsigned int v3; // ebx
   unsigned int *v4; // rdi
@@ -942,7 +942,7 @@ __int64 __fastcall `anonymous namespace'::moveCcwInFace(hkaiGeneralAccessor *acc
 
 // File Line: 590
 // RVA: 0xBEC9E0
-__int64 __fastcall `anonymous namespace'::moveCwAroundVertex(hkaiGeneralAccessor *accessor, unsigned int *edgeKey, unsigned int *faceKey)
+__int64 __fastcall `anonymous namespace::moveCwAroundVertex(hkaiGeneralAccessor *accessor, unsigned int *edgeKey, unsigned int *faceKey)
 {
   unsigned int *v3; // rdi
   unsigned int *v4; // rsi
@@ -989,7 +989,7 @@ __int64 __fastcall `anonymous namespace'::moveCwAroundVertex(hkaiGeneralAccessor
     if ( v12 == -1 )
       v14 = -1;
     *v3 = v14;
-    `anonymous namespace'::moveCcwInFace(v5, v3, *v4);
+    `anonymous namespace::moveCcwInFace(v5, v3, *v4);
     result = 0i64;
   }
   return result;
@@ -997,7 +997,7 @@ __int64 __fastcall `anonymous namespace'::moveCwAroundVertex(hkaiGeneralAccessor
 
 // File Line: 617
 // RVA: 0xBECAD0
-signed __int64 __fastcall `anonymous namespace'::moveCcwAroundVertex(hkaiGeneralAccessor *accessor, unsigned int *edgeKey, unsigned int *faceKey)
+signed __int64 __fastcall `anonymous namespace::moveCcwAroundVertex(hkaiGeneralAccessor *accessor, unsigned int *edgeKey, unsigned int *faceKey)
 {
   unsigned int *v3; // rdi
   unsigned int *v4; // rsi
@@ -1044,7 +1044,7 @@ signed __int64 __fastcall `anonymous namespace'::moveCcwAroundVertex(hkaiGeneral
     if ( v12 == -1 )
       v14 = -1;
     *v3 = v14;
-    `anonymous namespace'::moveCwInFace(v5, v3, *v4);
+    `anonymous namespace::moveCwInFace(v5, v3, *v4);
     result = 0i64;
   }
   return result;
@@ -1160,7 +1160,7 @@ signed __int64 __usercall hkaiEdgePath::pullPastInternalVertex@<rax>(hkaiEdgePat
   v24 = 0;
   result.m_enum = (signed int)streamingCollection;
   faceKey = (unsigned int)streamingCollection;
-  v25 = v10 ? `anonymous namespace'::moveCcwInFace(&accessor, &edgeKey, (unsigned int)streamingCollection) : `anonymous namespace'::moveCwInFace(&accessor, &edgeKey, (unsigned int)streamingCollection);
+  v25 = v10 ? `anonymous namespace::moveCcwInFace(&accessor, &edgeKey, (unsigned int)streamingCollection) : `anonymous namespace::moveCwInFace(&accessor, &edgeKey, (unsigned int)streamingCollection);
   if ( v25 )
     return 2i64;
   if ( result.m_enum != v20 )
@@ -1168,7 +1168,7 @@ signed __int64 __usercall hkaiEdgePath::pullPastInternalVertex@<rax>(hkaiEdgePat
     while ( 1 )
     {
       ++v24;
-      v26 = v10 ? `anonymous namespace'::moveCwAroundVertex(&accessor, &edgeKey, &faceKey) : `anonymous namespace'::moveCcwAroundVertex(
+      v26 = v10 ? `anonymous namespace::moveCwAroundVertex(&accessor, &edgeKey, &faceKey) : `anonymous namespace::moveCcwAroundVertex(
                                                                                                &accessor,
                                                                                                &edgeKey,
                                                                                                &faceKey);
@@ -1284,9 +1284,9 @@ LABEL_46:
   curSection = (unsigned int)v27 >> 22;
   LOBYTE(edgeKey) = accessor.m_accessor->m_originalMesh.m_pntr->m_flags.m_storage & 1;
   if ( v10 )
-    `anonymous namespace'::moveCcwInFace(&accessor, &faceKey, v27);
+    `anonymous namespace::moveCcwInFace(&accessor, &faceKey, v27);
   else
-    `anonymous namespace'::moveCwInFace(&accessor, &faceKey, v27);
+    `anonymous namespace::moveCwInFace(&accessor, &faceKey, v27);
   v45 = v14 + v24;
   edgeIdx = v14;
   if ( v14 != v45 )
@@ -1306,9 +1306,9 @@ LABEL_46:
         (bool *)&edgeKey,
         edgeIdx);
       if ( v10 )
-        `anonymous namespace'::moveCwAroundVertex(&accessor, &faceKey, (unsigned int *)&result);
+        `anonymous namespace::moveCwAroundVertex(&accessor, &faceKey, (unsigned int *)&result);
       else
-        `anonymous namespace'::moveCcwAroundVertex(&accessor, &faceKey, (unsigned int *)&result);
+        `anonymous namespace::moveCcwAroundVertex(&accessor, &faceKey, (unsigned int *)&result);
       if ( ++edgeIdx == v45 )
         break;
       v27 = result.m_enum;
@@ -1779,7 +1779,7 @@ hkaiEdgePath::FollowingCornerInfo *__fastcall hkaiEdgePath::getFollowingCornerIn
 void __fastcall hkaiEdgePath::hkaiEdgePath(hkaiEdgePath *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiEdgePath::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiEdgePath::`vftable;
   this->m_edges.m_capacityAndFlags = 2147483648;
   this->m_edges.m_data = 0i64;
   this->m_edges.m_size = 0;
@@ -1794,7 +1794,7 @@ void __fastcall hkaiEdgePath::hkaiEdgePath(hkaiEdgePath *this)
 // RVA: 0xBEA750
 void __fastcall hkaiEdgePath::hkaiEdgePath(hkaiEdgePath *this, hkFinishLoadedObjectFlag f)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiEdgePath::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiEdgePath::`vftable;
 }
 
 // File Line: 1109
@@ -1842,7 +1842,7 @@ __int64 __fastcall hkaiEdgePath::consecutiveEdgesShareVertex(hkaiEdgePath *this,
     return 0i64;
   edgeKey = v13;
   faceKey = faceKeyOut;
-  v14 = v7 ? `anonymous namespace'::moveCcwAroundVertex(&accessor, &edgeKey, &faceKey) : `anonymous namespace'::moveCwAroundVertex(
+  v14 = v7 ? `anonymous namespace::moveCcwAroundVertex(&accessor, &edgeKey, &faceKey) : `anonymous namespace::moveCwAroundVertex(
                                                                                            &accessor,
                                                                                            &edgeKey,
                                                                                            &faceKey);

@@ -2,7 +2,7 @@
 // RVA: 0x8A79F0
 void __fastcall Scaleform::GFx::AS3::Slots::SlotFunct::~SlotFunct(Scaleform::GFx::AS3::Slots::SlotFunct *this)
 {
-  this->vfptr = (Scaleform::GFx::AS3::Slots::SlotFunctVtbl *)&Scaleform::GFx::AS3::Slots::SlotFunct::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::Slots::SlotFunctVtbl *)&Scaleform::GFx::AS3::Slots::SlotFunct::`vftable;
 }
 
 // File Line: 160

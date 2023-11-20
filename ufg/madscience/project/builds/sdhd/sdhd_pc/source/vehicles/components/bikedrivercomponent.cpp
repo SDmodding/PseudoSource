@@ -37,8 +37,8 @@ void __fastcall UFG::BikeHumanDriverComponent::BikeHumanDriverComponent(UFG::Bik
   v3 = (UFG::qNode<UFG::BikeHumanDriverComponent,UFG::BikeHumanDriverComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BikeHumanDriverComponent::`vftable'{for `UFG::SimComponent'};
-  v2->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::BikeHumanDriverComponent::`vftable'{for `UFG::UpdateInterface'};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BikeHumanDriverComponent::`vftable{for `UFG::SimComponent};
+  v2->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::BikeHumanDriverComponent::`vftable{for `UFG::UpdateInterface};
   *(_QWORD *)&v2->mWheelieTime = 0i64;
   *(_WORD *)&v2->mIsHoodBounce = 256;
   v4 = UFG::BikeHumanDriverComponent::s_BikeHumanDriverComponentList.mNode.mPrev;
@@ -70,8 +70,8 @@ void __fastcall UFG::BikeHumanDriverComponent::~BikeHumanDriverComponent(UFG::Bi
   UFG::qNode<UFG::BikeHumanDriverComponent,UFG::BikeHumanDriverComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BikeHumanDriverComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::BikeHumanDriverComponent::`vftable'{for `UFG::UpdateInterface'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BikeHumanDriverComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::BikeHumanDriverComponent::`vftable{for `UFG::UpdateInterface};
   if ( this == UFG::BikeHumanDriverComponent::s_BikeHumanDriverComponentpCurrentIterator )
     UFG::BikeHumanDriverComponent::s_BikeHumanDriverComponentpCurrentIterator = (UFG::BikeHumanDriverComponent *)&this->mPrev[-25];
   v2 = (UFG::qNode<UFG::BikeHumanDriverComponent,UFG::BikeHumanDriverComponent> *)&this->mPrev;

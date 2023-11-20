@@ -9,7 +9,7 @@ __int64 Render::_dynamic_initializer_for__gLightGroupInventory__()
     0x7480E00Fu,
     0,
     0);
-  Render::gLightGroupInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::LightGroupInventory::`vftable';
+  Render::gLightGroupInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::LightGroupInventory::`vftable;
   uid = 0;
   UFG::qBaseTreeRB::qBaseTreeRB(&stru_142135078);
   return atexit(Render::_dynamic_atexit_destructor_for__gLightGroupInventory__);

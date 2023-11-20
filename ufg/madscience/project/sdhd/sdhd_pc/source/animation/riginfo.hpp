@@ -14,12 +14,12 @@ void __fastcall RigInfo::RigInfo(RigInfo *this)
   BinString *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
   v2 = (UFG::qNode<RigInfo,RigInfo> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (Expression::IMemberMapVtbl *)&RigInfo::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&RigInfo::`vftable;
   this->mUID = -1;
   v3 = &this->mName;
   v3->mOffset = 1i64;
@@ -41,7 +41,7 @@ void __fastcall RigInfo::~RigInfo(RigInfo *this)
   UFG::qNode<RigInfo,RigInfo> *v7; // rax
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&RigInfo::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&RigInfo::`vftable;
   if ( this->mPoseDrivers.mCount >= 0 )
   {
     v2 = this->mPoseDrivers.mData.mOffset;
@@ -70,7 +70,7 @@ void __fastcall RigInfo::~RigInfo(RigInfo *this)
   v7->mPrev = v6;
   v5->mPrev = v5;
   v5->mNext = v5;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 178

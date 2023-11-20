@@ -276,7 +276,7 @@ void __fastcall UFG::UIHKWeaponAmmoWidget::UIHKWeaponAmmoWidget(UFG::UIHKWeaponA
 
   v1 = this;
   *(_WORD *)&this->mVisible = 1;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     this->mDisplayedWeapons,
     0x48ui64,
     1,
@@ -330,7 +330,7 @@ void __fastcall UFG::UIHKWeaponAmmoWidget::~UIHKWeaponAmmoWidget(UFG::UIHKWeapon
   v4->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v4->mPrev;
   v1->mTargetingSystemBaseComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->mTargetingSystemBaseComponent.mPrev;
   UFG::qString::~qString(&v1->mTexturePack);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->mDisplayedWeapons,
     0x48ui64,
     1,
@@ -1107,7 +1107,7 @@ void __fastcall UFG::UIHKWeaponAmmoWidget::Flash_SetAmmo(UFG::UIHKWeaponAmmoWidg
   v6->mLastClipAmmo = v5->ClipAmmo;
   if ( v19 )
   {
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     v23 = (double)(v5->ClipAmmo - 1);
     if ( (*(_DWORD *)dest >> 6) & 1 )
     {
@@ -1117,7 +1117,7 @@ void __fastcall UFG::UIHKWeaponAmmoWidget::Flash_SetAmmo(UFG::UIHKWeaponAmmoWidg
     *(_DWORD *)dest = 5;
     *(double *)&value.DataAux = v23;
     Scaleform::GFx::Movie::Invoke(v7, "WeaponSwitcher_HighlightCurrentBullet", 0i64, (Scaleform::GFx::Value *)&ptr, 1u);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
   if ( !v4 && v5->ReserveAmmo > v5->OldReserveAmmo )
     Scaleform::GFx::Movie::Invoke(v7, "WeaponSwitcher_OnAmmoPickUp", 0i64);
@@ -1169,7 +1169,7 @@ void __fastcall UFG::UIHKWeaponAmmoWidget::Flash_SetWeapon(UFG::UIHKWeaponAmmoWi
     || (unsigned int)UFG::qStringCompareInsensitive(iconTexture, this->mLastIconTexture.mData, -1) )
   {
     v8 = v6->mRenderable->m_movie.pObject;
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     v9 = 0;
     if ( ((unsigned int)v15 >> 6) & 1 )
     {
@@ -1232,7 +1232,7 @@ void __fastcall UFG::UIHKWeaponAmmoWidget::Flash_SetWeapon(UFG::UIHKWeaponAmmoWi
       value.pObjectInterface = 0i64;
     }
     value.Type = 0;
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 

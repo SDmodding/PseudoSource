@@ -41,10 +41,10 @@ void Scaleform::MemoryHeap::CleanUpPT(void)
       v0 = Scaleform::HeapPT::GlobalRoot;
       DeleteCriticalSection(&Scaleform::HeapPT::GlobalRoot->RootLock.mLock.cs);
       v1 = &v0->AllocWrapper.Allocator;
-      v1->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocPaged::`vftable';
-      v1->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocBase::`vftable';
-      v0->AllocWrapper.vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocPaged::`vftable';
-      v0->AllocWrapper.vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocBase::`vftable';
+      v1->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocPaged::`vftable;
+      v1->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocBase::`vftable;
+      v0->AllocWrapper.vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocPaged::`vftable;
+      v0->AllocWrapper.vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocBase::`vftable;
       Scaleform::HeapPT::GlobalRoot = 0i64;
     }
   }

@@ -81,12 +81,12 @@ void __fastcall ModelType::~ModelType(ModelType *this)
   v8->mPrev = v7;
   v1->mModelBindingSkinTable.mNode.mPrev = &v1->mModelBindingSkinTable.mNode;
   v1->mModelBindingSkinTable.mNode.mNext = &v1->mModelBindingSkinTable.mNode;
-  v9 = `UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result )
+  v9 = `UFG::qGetResourceInventory<UFG::RigResource>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::RigResource>::`2::result )
   {
     v10 = UFG::qResourceWarehouse::Instance();
     v9 = UFG::qResourceWarehouse::GetInventory(v10, 0x39BC0A7Eu);
-    `UFG::qGetResourceInventory<UFG::RigResource>'::`2'::result = v9;
+    `UFG::qGetResourceInventory<UFG::RigResource>::`2::result = v9;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mRigHandle.mPrev, v9);
   UFG::qResourceHandle::~qResourceHandle((UFG::qResourceHandle *)&v1->mRigHandle.mPrev);
@@ -115,7 +115,7 @@ void __fastcall ModelType::ModelBindingSkin::~ModelBindingSkin(ModelType::ModelB
   v2 = this->mMorphTargets;
   if ( v2 )
   {
-    `eh vector destructor iterator'(v2, 0x20ui64, 2, (void (__fastcall *)(void *))Illusion::ModelHandle::~ModelHandle);
+    `eh vector destructor iterator(v2, 0x20ui64, 2, (void (__fastcall *)(void *))Illusion::ModelHandle::~ModelHandle);
     operator delete[](v2);
   }
   operator delete[](v1->mSkeletonToModelBoneMap);
@@ -132,12 +132,12 @@ void __fastcall ModelType::ModelBindingSkin::~ModelBindingSkin(ModelType::ModelB
     operator delete[](v4);
     v1->mSoftbody = 0i64;
   }
-  v5 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  v5 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v6 = UFG::qResourceWarehouse::Instance();
     v5 = UFG::qResourceWarehouse::GetInventory(v6, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v5;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v5;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mModelProxy.mModelHandle.mPrev, v5);
   UFG::qResourceHandle::~qResourceHandle((UFG::qResourceHandle *)&v1->mModelProxy.mModelHandle.mPrev);
@@ -187,21 +187,21 @@ void __fastcall ModelType::ModelBindingRigid::~ModelBindingRigid(ModelType::Mode
 
   v1 = this;
   v2 = (UFG::qResourceHandle *)&this->mMorphModelHandle.mPrev;
-  v3 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  v3 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v4 = UFG::qResourceWarehouse::Instance();
     v3 = UFG::qResourceWarehouse::GetInventory(v4, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v3;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v3;
   }
   UFG::qResourceHandle::Close(v2, v3);
   UFG::qResourceHandle::~qResourceHandle(v2);
-  v5 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  v5 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v6 = UFG::qResourceWarehouse::Instance();
     v5 = UFG::qResourceWarehouse::GetInventory(v6, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v5;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v5;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mModelProxy.mModelHandle.mPrev, v5);
   UFG::qResourceHandle::~qResourceHandle((UFG::qResourceHandle *)&v1->mModelProxy.mModelHandle.mPrev);
@@ -220,7 +220,7 @@ void __fastcall ModelType::SimpleMorphTargets::SimpleMorphTargets(ModelType::Sim
   ModelType::SimpleMorphTargets *v1; // rbx
 
   v1 = this;
-  `eh vector constructor iterator'(this, 0x20ui64, 2, (void (__fastcall *)(void *))Illusion::ModelHandle::ModelHandle);
+  `eh vector constructor iterator(this, 0x20ui64, 2, (void (__fastcall *)(void *))Illusion::ModelHandle::ModelHandle);
   v1->mNumModelBindings = 0;
 }
 
@@ -242,12 +242,12 @@ void __fastcall ModelType::SkinnedDecalLayer::SkinnedDecalLayer(ModelType::Skinn
   v7 = this;
   v8 = (UFG::qResourceHandle *)&this->mDecalMaterialHandle.mPrev;
   UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&this->mDecalMaterialHandle.mPrev);
-  v9 = `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Material>'::`2'::result )
+  v9 = `UFG::qGetResourceInventory<Illusion::Material>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Material>::`2::result )
   {
     v10 = UFG::qResourceWarehouse::Instance();
     v9 = UFG::qResourceWarehouse::GetInventory(v10, 0xB4C26312);
-    `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result = v9;
+    `UFG::qGetResourceInventory<Illusion::Material>::`2::result = v9;
   }
   UFG::qResourceHandle::Init(v8, 0xB4C26312, v6, v9);
   *(_QWORD *)&v7->mDecalSeriesCount = 0i64;
@@ -290,12 +290,12 @@ void __fastcall ModelType::SkinnedDecalLayer::~SkinnedDecalLayer(ModelType::Skin
     v1->mClipQuery = 0i64;
   }
   v5 = (UFG::qResourceHandle *)&v1->mDecalMaterialHandle.mPrev;
-  v6 = `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Material>'::`2'::result )
+  v6 = `UFG::qGetResourceInventory<Illusion::Material>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Material>::`2::result )
   {
     v7 = UFG::qResourceWarehouse::Instance();
     v6 = UFG::qResourceWarehouse::GetInventory(v7, 0xB4C26312);
-    `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result = v6;
+    `UFG::qGetResourceInventory<Illusion::Material>::`2::result = v6;
   }
   UFG::qResourceHandle::Close(v5, v6);
   UFG::qResourceHandle::~qResourceHandle(v5);
@@ -364,7 +364,7 @@ void __fastcall ModelType::SkinnedDecalLayer::CreateDecal(ModelType::SkinnedDeca
         v16 = v13 + 5;
         do
         {
-          `vector constructor iterator'(v16, 2ui64, 2, (void *(__fastcall *)(void *))UFG::qHalfFloat::qHalfFloat);
+          `vector constructor iterator(v16, 2ui64, 2, (void *(__fastcall *)(void *))UFG::qHalfFloat::qHalfFloat);
           v16 = (UFG::allocator::free_link *)((char *)v16 + 44);
           --v15;
         }
@@ -806,12 +806,12 @@ ModelType::ModelBindingSkin *__fastcall ModelType::AddSkinModelBinding(ModelType
     v25 = v13 + 5;
     UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v13[5]);
     v16 = v6->mModelHandle.mNameUID;
-    v17 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+    v17 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
     {
       v18 = UFG::qResourceWarehouse::Instance();
       v17 = UFG::qResourceWarehouse::GetInventory(v18, 0xA2ADCD77);
-      `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v17;
+      `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v17;
     }
     UFG::qResourceHandle::Init(v15, 0xA2ADCD77, v16, v17);
     v15[1].mPrev = (UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *)v6->mRModel;
@@ -1187,22 +1187,22 @@ void __fastcall ModelType::AddModelBinding(ModelType *this, Illusion::ModelProxy
     v13 = Skeleton::GetBoneID((Skeleton *)this->mRigHandle.mData[3].mNode.mParent, model_proxy->mModelHandle.mNameUID);
     v14 = v7->mModelHandle.mNameUID;
     UFG::qResourceHandle::qResourceHandle(&v19);
-    v15 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+    v15 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
     {
       v16 = UFG::qResourceWarehouse::Instance();
       v15 = UFG::qResourceWarehouse::GetInventory(v16, 0xA2ADCD77);
-      `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v15;
+      `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v15;
     }
     UFG::qResourceHandle::Init(&v19, 0xA2ADCD77, v14, v15);
     v20 = 0i64;
     ModelType::AddRigidModelBinding(v8, (Illusion::ModelProxy *)&v19, v13, v6, v5);
-    v17 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+    v17 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
     {
       v18 = UFG::qResourceWarehouse::Instance();
       v17 = UFG::qResourceWarehouse::GetInventory(v18, 0xA2ADCD77);
-      `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v17;
+      `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v17;
     }
     UFG::qResourceHandle::Close(&v19, v17);
     UFG::qResourceHandle::~qResourceHandle(&v19);
@@ -1473,12 +1473,12 @@ void __fastcall ModelType::buildModelBindingRigid(ModelType *this)
           {
             v31 = &v24;
             UFG::qResourceHandle::qResourceHandle(&v24);
-            v13 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-            if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+            v13 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+            if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
             {
               v14 = UFG::qResourceWarehouse::Instance();
               v13 = UFG::qResourceWarehouse::GetInventory(v14, 0xA2ADCD77);
-              `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v13;
+              `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v13;
             }
             UFG::qResourceHandle::Init(&v24, 0xA2ADCD77, *((_DWORD *)v11 - 1), v13);
             v25 = 0i64;
@@ -1489,12 +1489,12 @@ void __fastcall ModelType::buildModelBindingRigid(ModelType *this)
             v34 = (signed __int64)&v12[3];
             UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v12[3]);
             v15 = v24.mNameUID;
-            v16 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-            if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+            v16 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+            if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
             {
               v17 = UFG::qResourceWarehouse::Instance();
               v16 = UFG::qResourceWarehouse::GetInventory(v17, 0xA2ADCD77);
-              `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v16;
+              `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v16;
             }
             UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v12[3], 0xA2ADCD77, v15, v16);
             v12[7].mNext = v25;
@@ -1511,12 +1511,12 @@ void __fastcall ModelType::buildModelBindingRigid(ModelType *this)
           {
             v2 &= 0xFFFFFFFE;
             v30 = &v24;
-            v18 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-            if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+            v18 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+            if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
             {
               v19 = UFG::qResourceWarehouse::Instance();
               v18 = UFG::qResourceWarehouse::GetInventory(v19, 0xA2ADCD77);
-              `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v18;
+              `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v18;
             }
             UFG::qResourceHandle::Close(&v24, v18);
             UFG::qResourceHandle::~qResourceHandle(&v24);

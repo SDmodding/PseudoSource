@@ -27,7 +27,7 @@ void __fastcall UFG::HasAttackRequestComponent::HasAttackRequestComponent(UFG::H
   v3 = (UFG::qNode<UFG::HasAttackRequestComponent,UFG::HasAttackRequestComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HasAttackRequestComponent::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HasAttackRequestComponent::`vftable;
   v5 = &v2->m_NodeList;
   v5->mNode.mPrev = &v5->mNode;
   v5->mNode.mNext = &v5->mNode;
@@ -71,7 +71,7 @@ void __fastcall UFG::HasAttackRequestComponent::~HasAttackRequestComponent(UFG::
   UFG::qNode<UFG::HasAttackRequestComponent,UFG::HasAttackRequestComponent> *v12; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HasAttackRequestComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HasAttackRequestComponent::`vftable;
   v2 = &this->m_NodeList;
   v3 = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> **)&this->m_NodeList.mNode.mNext[-2].mNext;
   v4 = &this->m_BoundComponentHandles.mNode.mNext;
@@ -618,7 +618,7 @@ void __fastcall UFG::HasAttackRequestNode::HasAttackRequestNode(UFG::HasAttackRe
   v10 = (UFG::qNode<UFG::HasAttackRequestNode,UFG::FollowerAttackRightsList> *)&v7->mPrev;
   v10->mPrev = v10;
   v10->mNext = v10;
-  v7->vfptr = (UFG::qSafePointerNode<UFG::HasAttackRequestNode>Vtbl *)&UFG::HasAttackRequestNode::`vftable';
+  v7->vfptr = (UFG::qSafePointerNode<UFG::HasAttackRequestNode>Vtbl *)&UFG::HasAttackRequestNode::`vftable;
   v18 = &v7->m_pCanAttackConditions;
   v18->mPrev = (UFG::qNode<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList> *)&v18->mPrev;
   v18->mNext = (UFG::qNode<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList> *)&v18->mPrev;
@@ -707,7 +707,7 @@ void __fastcall UFG::HasAttackRequestNode::~HasAttackRequestNode(UFG::HasAttackR
   UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v37; // rax
 
   v1 = (UFG::qSafePointerNode<UFG::ParkourHandle> *)this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::HasAttackRequestNode>Vtbl *)&UFG::HasAttackRequestNode::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::HasAttackRequestNode>Vtbl *)&UFG::HasAttackRequestNode::`vftable;
   v2 = this->m_pActionContextCopy;
   if ( v2 )
   {
@@ -812,7 +812,7 @@ void __fastcall UFG::HasAttackRequestNode::~HasAttackRequestNode(UFG::HasAttackR
   v32->__vecDelDtor = (void *(__fastcall *)(UFG::qSafePointerNode<UFG::ParkourHandle> *, unsigned int))v31;
   *v30 = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)v30;
   v30[1] = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)v30;
-  v1->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::HasAttackRequestNode>::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::HasAttackRequestNode>::`vftable;
   UFG::qSafePointerNode<UFG::DynamicCoverCorner>::SetAllPointersToNull(v1);
   UFG::qList<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList,1,0>::DeleteNodes(&v1->m_SafePointerList);
   v33 = v1->m_SafePointerList.mNode.mPrev;

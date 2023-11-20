@@ -9,7 +9,7 @@ __int64 Render::_dynamic_initializer_for__gFontInventory__()
     0x2A1BE612u,
     0,
     0);
-  Render::gFontInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::FontInventory::`vftable';
+  Render::gFontInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::FontInventory::`vftable;
   return atexit(Render::_dynamic_atexit_destructor_for__gFontInventory__);
 }
 

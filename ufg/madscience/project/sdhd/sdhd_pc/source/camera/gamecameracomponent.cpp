@@ -34,7 +34,7 @@ __int64 dynamic_initializer_for__UFG::GameCameraComponent::mDofFocusDist__()
 // RVA: 0x14BFE20
 __int64 dynamic_initializer_for__UFG::GameCameraComponent::mDynamicDofParams__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     &UFG::GameCameraComponent::mDynamicDofParams,
     0x4Cui64,
     6,
@@ -101,7 +101,7 @@ void __fastcall UFG::GameCameraComponent::GameCameraComponent(UFG::GameCameraCom
   v42 = -2i64;
   v2 = this;
   UFG::BaseCameraComponent::BaseCameraComponent((UFG::BaseCameraComponent *)&this->vfptr, name_uid);
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::GameCameraComponent::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::GameCameraComponent::`vftable;
   v3 = &v2->mDofNoise.tDecay;
   UFG::qNoise<float,float>::qNoise<float,float>(&v2->mDofNoise);
   v2->mEyeImpactNoise.bCircular = 0;
@@ -354,7 +354,7 @@ void __fastcall UFG::GameCameraComponent::~GameCameraComponent(UFG::GameCameraCo
   UFG::Director *v5; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::GameCameraComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::GameCameraComponent::`vftable;
   if ( this->mActive )
     this->mActive = 0;
   v2 = this->pCollisionCollector;
@@ -2633,7 +2633,7 @@ void __fastcall UFG::GameSubject::GameSubject(UFG::GameSubject *this, unsigned i
 
   v2 = this;
   UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name_uid);
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CameraSubject::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CameraSubject::`vftable;
   UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0>::RebindingComponentHandle<UFG::TransformNodeComponent,0>(&v2->pTransformNodeComponent);
   UFG::SimComponent::AddType(
     (UFG::SimComponent *)&v2->vfptr,
@@ -2643,7 +2643,7 @@ void __fastcall UFG::GameSubject::GameSubject(UFG::GameSubject *this, unsigned i
   v3 = (UFG::qNode<UFG::GameSubject,UFG::GameSubject> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::GameSubject::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::GameSubject::`vftable;
   v4 = UFG::GameSubject::s_GameSubjectList.mNode.mPrev;
   UFG::GameSubject::s_GameSubjectList.mNode.mPrev->mNext = (UFG::qNode<UFG::GameSubject,UFG::GameSubject> *)&v2->mPrev;
   v3->mPrev = v4;
@@ -2664,7 +2664,7 @@ void __fastcall UFG::GameSubject::~GameSubject(UFG::GameSubject *this)
   UFG::qNode<UFG::GameSubject,UFG::GameSubject> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::GameSubject::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::GameSubject::`vftable;
   if ( this == UFG::GameSubject::s_GameSubjectpCurrentIterator )
     UFG::GameSubject::s_GameSubjectpCurrentIterator = (UFG::GameSubject *)&this->mPrev[-18];
   v2 = (UFG::qNode<UFG::GameSubject,UFG::GameSubject> *)&this->mPrev;
@@ -2680,7 +2680,7 @@ void __fastcall UFG::GameSubject::~GameSubject(UFG::GameSubject *this)
   v6->mPrev = v5;
   v2->mPrev = v2;
   v2->mNext = v2;
-  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CameraSubject::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CameraSubject::`vftable;
   UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>(&v1->pTransformNodeComponent);
   UFG::SimComponent::~SimComponent((UFG::SimComponent *)&v1->vfptr);
 }

@@ -321,7 +321,7 @@ void __fastcall UFG::InitSim(UFG *this)
   if ( v4 )
   {
     UFG::HavokNavDaemon::HavokNavDaemon((UFG::HavokNavDaemon *)v4);
-    v5->mPrev = (UFG::qNode<UFG::RoadNetworkVisibleAreaEdge,UFG::RoadNetworkVisibleAreaEdge> *)&UFG::GameNavDaemon::`vftable';
+    v5->mPrev = (UFG::qNode<UFG::RoadNetworkVisibleAreaEdge,UFG::RoadNetworkVisibleAreaEdge> *)&UFG::GameNavDaemon::`vftable;
   }
   else
   {
@@ -355,7 +355,7 @@ void __fastcall UFG::OpenSim(UFG *this)
   (*((void (**)(void))&UFG::NavManager::ms_pInstance->vfptr->__vecDelDtor + 1))();
   v1 = (UFG::NavSystemBase *)UFG::qMalloc(8ui64, "DerivedNavSystem", 0i64);
   if ( v1 )
-    v1->vfptr = (UFG::NavSystemBaseVtbl *)&UFG::NavSystemBase::`vftable';
+    v1->vfptr = (UFG::NavSystemBaseVtbl *)&UFG::NavSystemBase::`vftable;
   else
     v1 = 0i64;
   UFG::NavSystemBase::ms_pInstance = v1;

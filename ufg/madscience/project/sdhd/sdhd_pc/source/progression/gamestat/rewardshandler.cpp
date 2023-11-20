@@ -1067,7 +1067,7 @@ char __fastcall UFG::RewardsHandler::HandleRewards(UFG::ShowRewardType showRewar
         v26 = gameslice_subtype.mUID;
         v31 = UFG::qString::FormatEx(
                 &v257,
-                "<img src='Icon_Reward_Cash' height='24' width='24' vspace='-8'>HK $%d",
+                "<img src=Icon_Reward_Cash height=24 width=24 vspace=-8>HK $%d",
                 gameslice_subtype.mUID)->mData;
         UFG::UIHKScreenMissionComplete::AddReward(v31, symGameSlice[0].mUID, (__int64)&result);
         UFG::qString::~qString(&v257);
@@ -1235,7 +1235,7 @@ char __fastcall UFG::RewardsHandler::HandleRewards(UFG::ShowRewardType showRewar
             v72 = v65->mLeaderboardId;
             v73 = UFG::OnlineUtil::CurrentTimeMillis();
             UFG::SocialLogData::SocialLogData(&data);
-            data.vfptr = (UFG::OSuiteMessageVtbl *)&UFG::SocialLogData_NewHighScore::`vftable';
+            data.vfptr = (UFG::OSuiteMessageVtbl *)&UFG::SocialLogData_NewHighScore::`vftable;
             v260 = 0;
             mem = 0i64;
             data.m_iCommId = 0;
@@ -1245,7 +1245,7 @@ char __fastcall UFG::RewardsHandler::HandleRewards(UFG::ShowRewardType showRewar
             v74 = UFG::SocialLogDataManager::Instance();
             UFG::SocialLogDataManager::AddToSaveData(v74, &data);
             UFG::UIHKScreenMissionComplete::sIsHighscore = 1;
-            data.vfptr = (UFG::OSuiteMessageVtbl *)&UFG::SocialLogData_NewHighScore::`vftable';
+            data.vfptr = (UFG::OSuiteMessageVtbl *)&UFG::SocialLogData_NewHighScore::`vftable;
             if ( mem )
               operator delete[](mem);
             UFG::SocialLogData::~SocialLogData(&data);

@@ -332,7 +332,7 @@ hkResult *__fastcall hkaiGeometryCarverExtractor::addVolume(hkResult *result, hk
   v5 = volume;
   v6 = extrudeGeom;
   hkaiEdgeGeometry::hkaiEdgeGeometry(&v12);
-  geom.vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable';
+  geom.vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable;
   v7 = v5->vfptr;
   *(_DWORD *)&geom.m_memSizeAndFlags = 0x1FFFF;
   geom.m_vertices.m_data = 0i64;
@@ -362,7 +362,7 @@ hkResult *__fastcall hkaiGeometryCarverExtractor::addVolume(hkResult *result, hk
         16 * geom.m_vertices.m_capacityAndFlags);
     geom.m_vertices.m_data = 0i64;
     geom.m_vertices.m_capacityAndFlags = 2147483648;
-    geom.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+    geom.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
   }
   else
   {

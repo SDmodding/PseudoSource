@@ -6,7 +6,7 @@ void __fastcall hkpMoppAgent::hkpMoppAgent(hkpMoppAgent *this, hkpContactMgr *mg
 
   v2 = this;
   hkpBvTreeAgent::hkpBvTreeAgent((hkpBvTreeAgent *)&this->vfptr, mgr);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpMoppAgent::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpMoppAgent::`vftable;
 }
 
 // File Line: 37
@@ -58,7 +58,7 @@ void __fastcall hkpMoppAgent::createBvBvAgent(hkpCdBody *bodyA, hkpCdBody *bodyB
     if ( v8 )
     {
       hkpMoppAgent::hkpMoppAgent(v8, v4);
-      v9->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpMoppAgent>::`vftable';
+      v9->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpMoppAgent>::`vftable;
     }
   }
   else

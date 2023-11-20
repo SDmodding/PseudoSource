@@ -23,7 +23,7 @@ void __fastcall UFG::Editor::SelectionSet::DispatchChangedEvent(UFG::Editor::Sel
     v4 = v2 + 1;
     v4->mNext = v4;
     v4[1].mNext = v4;
-    v3->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+    v3->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
     v3->m_EventUID = 609910773;
     v3->m_NamePTR = 0i64;
   }
@@ -126,7 +126,7 @@ void __fastcall UFG::Editor::SelectionSet::Add(UFG::Editor::SelectionSet *this, 
         v18 = v16 + 1;
         v18->mNext = v18;
         v18[1].mNext = v18;
-        v17->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+        v17->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
         v17->m_EventUID = 609910773;
         v17->m_NamePTR = 0i64;
       }

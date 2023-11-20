@@ -7,7 +7,7 @@ void __fastcall UFG::UIHKScreenMartialArts::UIHKScreenMartialArts(UFG::UIHKScree
   v1 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -18,7 +18,7 @@ void __fastcall UFG::UIHKScreenMartialArts::UIHKScreenMartialArts(UFG::UIHKScree
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenMartialArts::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenMartialArts::`vftable;
   this->mState = 0;
   this->mIsDone = 0;
   this->mSelectedMoveIndex = 0;
@@ -46,7 +46,7 @@ void __fastcall UFG::UIHKScreenMartialArts::~UIHKScreenMartialArts(UFG::UIHKScre
   UFG::UIHKMoveData **v10; // rcx
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenMartialArts::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenMartialArts::`vftable;
   if ( UFG::gInputSystem )
   {
     if ( UFG::gActiveControllerNum != -1 )
@@ -244,7 +244,7 @@ void __fastcall UFG::UIHKScreenMartialArts::RefreshMoveList(UFG::UIHKScreenMarti
   UFG::qString::~qString(v5);
   for ( i = 0; i < v1->mNewMoveArray.size; ++i )
   {
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     v7 = i;
     v8 = v1->mNewMoveArray.p[v7]->name.mData;
     if ( ((unsigned int)Scaleform::GFx::Value::~Value >> 6) & 1 )
@@ -267,7 +267,7 @@ void __fastcall UFG::UIHKScreenMartialArts::RefreshMoveList(UFG::UIHKScreenMarti
     v20 = 2;
     LOBYTE(v21) = v10;
     Scaleform::GFx::Movie::Invoke(v1->mMovie, "MartialArts_AddMove", 0i64, (Scaleform::GFx::Value *)&ptr, 3u);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 
@@ -435,7 +435,7 @@ void __fastcall UFG::UIHKScreenMartialArts::ShowHelpBar(UFG::UIHKScreenMartialAr
           *(_QWORD *)&data.MessageIds[2] = 0i64;
           UFG::UIHKHelpBarWidget::Show(v4, &data);
           UFG::qString::~qString((UFG::qString *)&data.MessageIds[4]);
-          `eh vector destructor iterator'(
+          `eh vector destructor iterator(
             &data.Captions[5].mStringHash32,
             0x28ui64,
             6,
@@ -466,13 +466,13 @@ void __fastcall UFG::UIHKScreenMartialArts::ShowHelpBar(UFG::UIHKScreenMartialAr
           *(_QWORD *)&data.MessageIds[2] = 0i64;
           UFG::UIHKHelpBarWidget::Show(v2, &data);
           UFG::qString::~qString((UFG::qString *)&data.MessageIds[4]);
-          `eh vector destructor iterator'(
+          `eh vector destructor iterator(
             &data.Captions[5].mStringHash32,
             0x28ui64,
             6,
             (void (__fastcall *)(void *))UFG::qString::~qString);
         }
-        `eh vector destructor iterator'(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+        `eh vector destructor iterator(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
       }
     }
   }

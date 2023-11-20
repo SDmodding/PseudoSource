@@ -3,8 +3,8 @@
 void __fastcall hkpGunProjectile::hkpGunProjectile(hkpGunProjectile *this, hkpProjectileGun *gun, hkpRigidBody *body)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpGunProjectile::`vftable'{for `hkReferencedObject'};
-  this->vfptr = (hkpContactListenerVtbl *)&hkpGunProjectile::`vftable'{for `hkpContactListener'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkpGunProjectile::`vftable{for `hkReferencedObject};
+  this->vfptr = (hkpContactListenerVtbl *)&hkpGunProjectile::`vftable{for `hkpContactListener};
   this->m_flags.m_storage = 0;
   this->m_body = body;
   this->m_existanceTime = 0.0;
@@ -19,11 +19,11 @@ void __fastcall hkpGunProjectile::~hkpGunProjectile(hkpGunProjectile *this)
   hkpGunProjectile *v1; // rbx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpGunProjectile::`vftable'{for `hkReferencedObject'};
-  this->vfptr = (hkpContactListenerVtbl *)&hkpGunProjectile::`vftable'{for `hkpContactListener'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkpGunProjectile::`vftable{for `hkReferencedObject};
+  this->vfptr = (hkpContactListenerVtbl *)&hkpGunProjectile::`vftable{for `hkpContactListener};
   hkpGunProjectile::_destroyBody(this);
-  v1->vfptr = (hkpContactListenerVtbl *)&hkpContactListener::`vftable';
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkpContactListenerVtbl *)&hkpContactListener::`vftable;
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 30
@@ -252,7 +252,7 @@ void __fastcall hkpProjectileGun::hkpProjectileGun(hkpProjectileGun *this, hkpWo
   hkpFirstPersonGun::hkpFirstPersonGun((hkpFirstPersonGun *)&this->vfptr);
   v5->m_maxProjectiles = 5;
   *(_QWORD *)&v5->m_reloadTime = 1050253722i64;
-  v5->vfptr = (hkBaseObjectVtbl *)&hkpProjectileGun::`vftable';
+  v5->vfptr = (hkBaseObjectVtbl *)&hkpProjectileGun::`vftable;
   v5->m_projectiles.m_capacityAndFlags = 2147483648;
   v5->m_projectiles.m_data = 0i64;
   v5->m_projectiles.m_size = 0;

@@ -74,7 +74,7 @@ hkClass *__fastcall hkxEnum::staticClass()
 void __fastcall finishLoadedObjecthkxEnum(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkxEnum::`vftable';
+    *(_QWORD *)p = &hkxEnum::`vftable;
 }
 
 // File Line: 123
@@ -88,7 +88,7 @@ void __fastcall cleanupLoadedObjecthkxEnum(void *p)
 // RVA: 0xE31CD0
 void **__fastcall getVtablehkxEnum()
 {
-  return &hkxEnum::`vftable';
+  return &hkxEnum::`vftable;
 }
 
 // File Line: 149
@@ -140,7 +140,7 @@ hkClass *__fastcall hkxSparselyAnimatedEnum::staticClass()
 void __fastcall finishLoadedObjecthkxSparselyAnimatedEnum(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkxSparselyAnimatedEnum::`vftable';
+    *(_QWORD *)p = &hkxSparselyAnimatedEnum::`vftable;
 }
 
 // File Line: 192
@@ -154,7 +154,7 @@ void __fastcall cleanupLoadedObjecthkxSparselyAnimatedEnum(void *p)
 // RVA: 0xE31D10
 void **__fastcall getVtablehkxSparselyAnimatedEnum()
 {
-  return &hkxSparselyAnimatedEnum::`vftable';
+  return &hkxSparselyAnimatedEnum::`vftable;
 }
 
 // File Line: 218

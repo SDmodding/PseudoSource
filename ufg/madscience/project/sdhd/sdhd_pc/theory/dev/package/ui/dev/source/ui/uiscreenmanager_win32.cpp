@@ -11,7 +11,7 @@ void __fastcall UFG::UIScreenManager::UIScreenManager(UFG::UIScreenManager *this
 
   v2 = this;
   UFG::UIScreenManagerBase::UIScreenManagerBase((UFG::UIScreenManagerBase *)&this->vfptr, screenFactory);
-  v2->vfptr = (UFG::UIScreenManagerBaseVtbl *)&UFG::UIScreenManager::`vftable';
+  v2->vfptr = (UFG::UIScreenManagerBaseVtbl *)&UFG::UIScreenManager::`vftable;
   UFG::UIScreenManagerBase::baseInit((UFG::UIScreenManagerBase *)&v2->vfptr);
   v3 = (Scaleform::GFx::FontProviderWin32 *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
                                               Scaleform::Memory::pGlobalHeap,
@@ -144,8 +144,8 @@ void __fastcall UFG::UIScreenManager::initHAL(UFG::UIScreenManager *this)
     commandQueue = (Scaleform::Render::ThreadCommandQueue *)&v1->mThreadCommandQueue->vfptr;
     v13 = UFG::qGetCurrentThreadID();
     Scaleform::Render::D3D1x::TextureManager::TextureManager(v9, v11, v10, v13, commandQueue, 0i64);
-    v9->vfptr = (Scaleform::RefCountImplCoreVtbl *)&UFG::UIGfxTextureManager::`vftable'{for `Scaleform::RefCountBase<Scaleform::Render::TextureManager,72>'};
-    v9->vfptr = (Scaleform::Render::ImageUpdateSyncVtbl *)&UFG::UIGfxTextureManager::`vftable'{for `Scaleform::Render::ImageUpdateSync'};
+    v9->vfptr = (Scaleform::RefCountImplCoreVtbl *)&UFG::UIGfxTextureManager::`vftable{for `Scaleform::RefCountBase<Scaleform::Render::TextureManager,72>};
+    v9->vfptr = (Scaleform::Render::ImageUpdateSyncVtbl *)&UFG::UIGfxTextureManager::`vftable{for `Scaleform::Render::ImageUpdateSync};
   }
   else
   {

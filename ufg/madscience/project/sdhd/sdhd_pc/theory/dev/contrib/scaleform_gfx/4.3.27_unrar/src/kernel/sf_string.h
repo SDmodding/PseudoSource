@@ -2,7 +2,7 @@
 // RVA: 0x6D1B20
 void __fastcall Scaleform::String::InitStruct::~InitStruct(Scaleform::String::InitStruct *this)
 {
-  this->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable';
+  this->vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable;
 }
 
 // File Line: 182

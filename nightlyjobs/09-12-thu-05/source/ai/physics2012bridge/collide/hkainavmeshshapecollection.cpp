@@ -127,7 +127,7 @@ hkpShape *__fastcall hkaiNavMeshFaceShape::getChildShape(hkaiNavMeshFaceShape *t
     *(_OWORD *)&(*buffer)[80] = v10;
     *(_DWORD *)&(*buffer)[32] = 0;
     *(_DWORD *)&(*buffer)[40] = 393216;
-    *(_QWORD *)buffer = &hkpTriangleShape::`vftable';
+    *(_QWORD *)buffer = &hkpTriangleShape::`vftable;
     *(_OWORD *)&(*buffer)[96] = 0i64;
     result = (hkpShape *)buffer;
   }
@@ -180,8 +180,8 @@ void __fastcall hkaiNavMeshShapeCollection::hkaiNavMeshShapeCollection(hkaiNavMe
   v2 = navMesh;
   v3 = this;
   hkpShapeCollection::hkpShapeCollection((hkpShapeCollection *)&this->vfptr, COLLECTION, COLLECTION_USER);
-  v3->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshShapeCollection::`vftable'{for `hkpShape'};
-  v3->vfptr = (hkpShapeContainerVtbl *)&hkaiNavMeshShapeCollection::`vftable'{for `hkpShapeContainer'};
+  v3->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshShapeCollection::`vftable{for `hkpShape};
+  v3->vfptr = (hkpShapeContainerVtbl *)&hkaiNavMeshShapeCollection::`vftable{for `hkpShapeContainer};
   v3->m_navMesh.m_pntr = 0i64;
   if ( v2 )
     hkReferencedObject::addReference((hkReferencedObject *)&v2->vfptr);
@@ -232,8 +232,8 @@ hkpShape *__fastcall hkaiNavMeshShapeCollection::getChildShape(hkaiNavMeshShapeC
   if ( buffer )
   {
     hkpShapeCollection::hkpShapeCollection((hkpShapeCollection *)buffer, COLLECTION, COLLECTION_USER);
-    *(_QWORD *)v3 = &hkaiNavMeshFaceShape::`vftable'{for `hkpShape'};
-    *(_QWORD *)&(*v3)[32] = &hkaiNavMeshFaceShape::`vftable'{for `hkpShapeContainer'};
+    *(_QWORD *)v3 = &hkaiNavMeshFaceShape::`vftable{for `hkpShape};
+    *(_QWORD *)&(*v3)[32] = &hkaiNavMeshFaceShape::`vftable{for `hkpShapeContainer};
   }
   else
   {
@@ -273,13 +273,13 @@ void __fastcall hkaiNavMeshShapeCollection::~hkaiNavMeshShapeCollection(hkaiNavM
   hkaiNavMesh *v2; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshShapeCollection::`vftable'{for `hkpShape'};
-  this->vfptr = (hkpShapeContainerVtbl *)&hkaiNavMeshShapeCollection::`vftable'{for `hkpShapeContainer'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshShapeCollection::`vftable{for `hkpShape};
+  this->vfptr = (hkpShapeContainerVtbl *)&hkaiNavMeshShapeCollection::`vftable{for `hkpShapeContainer};
   v2 = this->m_navMesh.m_pntr;
   if ( v2 )
     hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
   v1->m_navMesh.m_pntr = 0i64;
-  v1->vfptr = (hkpShapeContainerVtbl *)&hkpShapeContainer::`vftable';
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkpShapeContainerVtbl *)&hkpShapeContainer::`vftable;
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 

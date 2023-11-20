@@ -11,7 +11,7 @@ void __fastcall Creature::Creature(Creature *this, UFG::RigResource *rig)
   v2 = rig;
   v3 = this;
   UFG::qSafePointerNode<Creature>::qSafePointerNode<Creature>((UFG::qSafePointerNode<Creature> *)&this->vfptr);
-  v3->vfptr = (UFG::qSafePointerNode<Creature>Vtbl *)&Creature::`vftable';
+  v3->vfptr = (UFG::qSafePointerNode<Creature>Vtbl *)&Creature::`vftable;
   v4 = &v3->mPoseDrivers;
   v4->mNode.mPrev = &v4->mNode;
   v4->mNode.mNext = &v4->mNode;
@@ -27,8 +27,8 @@ void __fastcall Creature::Creature(Creature *this, UFG::RigResource *rig)
   v3->mCorrected = 0;
   SkeletalPose::SkeletalPose(&v3->mPose, v2);
   PoseNode::PoseNode((PoseNode *)&v3->mBlendTree.vfptr);
-  v3->mBlendTree.vfptr = (Expression::IMemberMapVtbl *)&PoseNodeParent::`vftable'{for `Expression::IMemberMap'};
-  v3->mBlendTree.vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&PoseNodeParent::`vftable'{for `UFG::qSafePointerNode<PoseNode>'};
+  v3->mBlendTree.vfptr = (Expression::IMemberMapVtbl *)&PoseNodeParent::`vftable{for `Expression::IMemberMap};
+  v3->mBlendTree.vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&PoseNodeParent::`vftable{for `UFG::qSafePointerNode<PoseNode>};
   v3->mBlendTree.mChildrenSerialized.mCount = 0;
   v3->mBlendTree.mChildrenSerialized.mData.mOffset = 0i64;
   v6 = &v3->mBlendTree.mChildren;
@@ -119,7 +119,7 @@ void __fastcall Creature::~Creature(Creature *this)
   UFG::qNode<UFG::qSafePointerBase<Creature>,UFG::qSafePointerNodeList> *v12; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<Creature>Vtbl *)&Creature::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<Creature>Vtbl *)&Creature::`vftable;
   Creature::WaitOnPoseTask(this);
   v2 = &v1->mPoseDrivers;
   for ( i = (signed __int64)&v1->mPoseDrivers.mNode.mNext[-1];
@@ -152,7 +152,7 @@ void __fastcall Creature::~Creature(Creature *this)
   v10->mPrev = v9;
   v2->mNode.mPrev = &v2->mNode;
   v1->mPoseDrivers.mNode.mNext = &v1->mPoseDrivers.mNode;
-  v1->vfptr = (UFG::qSafePointerNode<Creature>Vtbl *)&UFG::qSafePointerNode<Creature>::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<Creature>Vtbl *)&UFG::qSafePointerNode<Creature>::`vftable;
   UFG::qSafePointerNode<UFG::DynamicCoverCorner>::SetAllPointersToNull((UFG::qSafePointerNode<UFG::ParkourHandle> *)v1);
   UFG::qList<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList,1,0>::DeleteNodes((UFG::qList<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList,1,0> *)&v1->m_SafePointerList);
   v11 = v1->m_SafePointerList.mNode.mPrev;
@@ -314,7 +314,7 @@ PoseNode *__fastcall Creature::PlayBlendTree(Creature *this, PoseNode *blendTree
     ((void (__fastcall *)(PoseNode *))v10->vfptr[3].GetResourcePath)(v10);
     if ( endTime >= 0.0 )
     {
-      v34 = &AnimationNode_SetPlayEndTime::`vftable';
+      v34 = &AnimationNode_SetPlayEndTime::`vftable;
       v13 = v10->vfptr;
       *(float *)&dest = endTime;
       v35 = 1;
@@ -367,10 +367,10 @@ PoseNode *__fastcall Creature::PlayBlendTree(Creature *this, PoseNode *blendTree
         }
         ((void (__fastcall *)(signed __int64, PoseNode *))v31[4].GetClassNameUID)(v32, v10);
         v35 = 1;
-        v34 = &BlendDirectionNode_GetBlendDirection::`vftable';
+        v34 = &BlendDirectionNode_GetBlendDirection::`vftable;
         UFG::qMemSet(&dest, 0, 0x20u);
         (*(void (__fastcall **)(_QWORD *, void ***))(*v22 + 80i64))(v22, &v34);
-        v37 = &BlendDirectionNode_SetBlendDirection::`vftable';
+        v37 = &BlendDirectionNode_SetBlendDirection::`vftable;
         v38 = 1;
         UFG::qMemCopy(&v39, &dest, 0x20u);
         v10->vfptr[1].FindWithOldPath((Expression::IMemberMap *)&v10->vfptr, (const char *)&v37);
@@ -382,7 +382,7 @@ PoseNode *__fastcall Creature::PlayBlendTree(Creature *this, PoseNode *blendTree
     v19[4].GetResourceOwner((Expression::IMemberMap *)v16);
     (*(void (__fastcall **)(PoseNodeParent *, PoseNode *))(*(_QWORD *)v14 + 360i64))(&v11->mBlendTree, v10);
 LABEL_21:
-    v34 = &PoseStackCalculatorVisitor::`vftable';
+    v34 = &PoseStackCalculatorVisitor::`vftable;
     v33 = v10->vfptr;
     v35 = 1;
     dest = 0i64;
@@ -428,7 +428,7 @@ PoseNode *__fastcall Creature::PlayBlendTree(Creature *this, PoseNode *blendTree
       ((void (__fastcall *)(PoseNode *))v9->vfptr[3].GetResourcePath)(v9);
     if ( endTime >= 0.0 )
     {
-      v21 = &AnimationNode_SetPlayEndTime::`vftable';
+      v21 = &AnimationNode_SetPlayEndTime::`vftable;
       v12 = v9->vfptr;
       *(float *)&dest = endTime;
       v22 = 1;
@@ -455,15 +455,15 @@ PoseNode *__fastcall Creature::PlayBlendTree(Creature *this, PoseNode *blendTree
         v19 = (PoseNode *)v20;
       PoseNode::BlendIn(v19, v9, blendInTime, phaseIn);
       v22 = 1;
-      v21 = &BlendDirectionNode_GetBlendDirection::`vftable';
+      v21 = &BlendDirectionNode_GetBlendDirection::`vftable;
       UFG::qMemSet(&dest, 0, 0x20u);
       v19->vfptr[1].FindWithOldPath((Expression::IMemberMap *)&v19->vfptr, (const char *)&v21);
-      v24 = &BlendDirectionNode_SetBlendDirection::`vftable';
+      v24 = &BlendDirectionNode_SetBlendDirection::`vftable;
       v25 = 1;
       UFG::qMemCopy(&v26, &dest, 0x20u);
       v9->vfptr[1].FindWithOldPath((Expression::IMemberMap *)&v9->vfptr, (const char *)&v24);
     }
-    v21 = &PoseStackCalculatorVisitor::`vftable';
+    v21 = &PoseStackCalculatorVisitor::`vftable;
     v22 = 1;
     dest = 0i64;
     v9->vfptr[1].FindWithOldPath((Expression::IMemberMap *)&v9->vfptr, (const char *)&v21);
@@ -497,7 +497,7 @@ char __fastcall Creature::pruneBigBlendTree(Creature *this)
   if ( (signed int)this->mBlendTree.vfptr[1].CreateClone((Expression::IMemberMap *)&this->mBlendTree) > 0 )
   {
     (*(void (__fastcall **)(char *, _QWORD))(*(_QWORD *)v2 + 88i64))(v2, 0i64);
-    v11 = &PoseStackCalculatorVisitor::`vftable';
+    v11 = &PoseStackCalculatorVisitor::`vftable;
     v3 = *(_QWORD *)v2;
     v12 = 1;
     v13 = 0i64;
@@ -637,7 +637,7 @@ void __fastcall Creature::PrepPoseTaskInput(Creature *this, PoseNode *tree)
   v2->mRecipe.mSkelDesc.mParentIndices = (const unsigned __int16 *)v10;
   v12 = 0;
   v13 = 0;
-  v34.vfptr = (PoseNodeVisitorVtbl *)&PoseRecipeVisitor::`vftable';
+  v34.vfptr = (PoseNodeVisitorVtbl *)&PoseRecipeVisitor::`vftable;
   *(_QWORD *)&v2->mRecipe.mStackCount = 0i64;
   v2->mRecipe.mBoneUpdateCount = -1;
   *(_QWORD *)&v2->mRecipe.mAnimMemoryHighWaterMark = 0i64;
@@ -1003,7 +1003,7 @@ void __fastcall Creature::updateAnimatedMovement(Creature *this, float deltaTime
   v47 = qi.m_vec.m_quad;
   v48 = query.m_quad;
   v3[1].GetResourcePath((Expression::IMemberMap *)&v2->mBlendTree.vfptr, v4, (int)&v46);
-  v44 = &AnimationNode_UpdateLastPlayTime::`vftable';
+  v44 = &AnimationNode_UpdateLastPlayTime::`vftable;
   v5 = v2->mBlendTree.vfptr;
   v45 = 1;
   v5[1].FindWithOldPath((Expression::IMemberMap *)&v2->mBlendTree.vfptr, (const char *)&v44);
@@ -1088,7 +1088,7 @@ void __fastcall Creature::updateAnimatedMovement(Creature *this, float deltaTime
     v2->mAnimatedMoveDirection.y = v25 * v28;
     v2->mAnimatedMoveDirection.z = v27 * v28;
   }
-  v41 = &FirstAnimationNode::`vftable';
+  v41 = &FirstAnimationNode::`vftable;
   v30 = v2->mBlendTree.vfptr;
   v42 = 1;
   v43 = 0i64;
@@ -1221,7 +1221,7 @@ void __fastcall Creature::SetBlendTreePlayTime(Creature *this, float timeAbsolut
   v2 = &this->mBlendTree;
   if ( v2 )
   {
-    v4 = &AnimationNode_SetLocalTime::`vftable';
+    v4 = &AnimationNode_SetLocalTime::`vftable;
     v3 = v2->vfptr;
     v6 = timeAbsolute;
     v7 = (signed int)FLOAT_1_0;
@@ -3908,7 +3908,7 @@ void __fastcall Creature::UnbindResources(Creature *this)
   char v4; // [rsp+28h] [rbp-10h]
 
   v1 = &this->mBlendTree;
-  v3 = &UnbindResourcesVisitor::`vftable';
+  v3 = &UnbindResourcesVisitor::`vftable;
   v2 = v1->vfptr;
   v4 = 1;
   v2[1].FindWithOldPath((Expression::IMemberMap *)&v1->vfptr, (const char *)&v3);
@@ -3924,7 +3924,7 @@ void __fastcall Creature::RebindResources(Creature *this)
   char v4; // [rsp+28h] [rbp-10h]
 
   v1 = &this->mBlendTree;
-  v3 = &RebindResourcesVisitor::`vftable';
+  v3 = &RebindResourcesVisitor::`vftable;
   v2 = v1->vfptr;
   v4 = 1;
   v2[1].FindWithOldPath((Expression::IMemberMap *)&v1->vfptr, (const char *)&v3);
@@ -3942,7 +3942,7 @@ void __fastcall Creature::SetPoseOnFrameBoundaries(Creature *this, bool val)
 
   v2 = &this->mBlendTree;
   v6 = val;
-  v4 = &PoseOnFrameBoundariesVisitor::`vftable';
+  v4 = &PoseOnFrameBoundariesVisitor::`vftable;
   v3 = v2->vfptr;
   v5 = 1;
   v3[1].FindWithOldPath((Expression::IMemberMap *)&v2->vfptr, (const char *)&v4);

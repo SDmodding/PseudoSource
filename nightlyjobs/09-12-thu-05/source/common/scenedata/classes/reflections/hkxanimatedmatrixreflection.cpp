@@ -42,7 +42,7 @@ hkClass *__fastcall hkxAnimatedMatrix::staticClass()
 void __fastcall finishLoadedObjecthkxAnimatedMatrix(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkxAnimatedMatrix::`vftable';
+    *(_QWORD *)p = &hkxAnimatedMatrix::`vftable;
 }
 
 // File Line: 72
@@ -56,7 +56,7 @@ void __fastcall cleanupLoadedObjecthkxAnimatedMatrix(void *p)
 // RVA: 0xE31730
 void **__fastcall getVtablehkxAnimatedMatrix()
 {
-  return &hkxAnimatedMatrix::`vftable';
+  return &hkxAnimatedMatrix::`vftable;
 }
 
 // File Line: 98

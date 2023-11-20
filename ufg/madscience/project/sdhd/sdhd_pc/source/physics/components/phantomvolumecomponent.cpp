@@ -25,7 +25,7 @@ void __fastcall UFG::PhantomVolumeComponent::PhantomVolumeComponent(UFG::Phantom
   v3 = (UFG::qNode<UFG::PhantomVolumeComponent,UFG::PhantomVolumeComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::PhantomVolumeComponent::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::PhantomVolumeComponent::`vftable;
   *(_WORD *)&v2->mActiveProperties = 0;
   v4 = UFG::PhantomVolumeComponent::s_PhantomVolumeComponentList.mNode.mPrev;
   UFG::PhantomVolumeComponent::s_PhantomVolumeComponentList.mNode.mPrev->mNext = (UFG::qNode<UFG::PhantomVolumeComponent,UFG::PhantomVolumeComponent> *)&v2->mPrev;
@@ -60,7 +60,7 @@ void __fastcall UFG::PhantomVolumeComponent::~PhantomVolumeComponent(UFG::Phanto
   UFG::qNode<UFG::PhantomVolumeComponent,UFG::PhantomVolumeComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::PhantomVolumeComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::PhantomVolumeComponent::`vftable;
   if ( this == UFG::PhantomVolumeComponent::s_PhantomVolumeComponentpCurrentIterator )
     UFG::PhantomVolumeComponent::s_PhantomVolumeComponentpCurrentIterator = (UFG::PhantomVolumeComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::PhantomVolumeComponent,UFG::PhantomVolumeComponent> *)&this->mPrev;

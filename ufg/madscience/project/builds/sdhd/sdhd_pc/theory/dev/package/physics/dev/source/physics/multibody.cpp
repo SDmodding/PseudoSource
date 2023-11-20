@@ -240,7 +240,7 @@ void __fastcall UFG::MultiBodyComponent::MultiBodyComponent(UFG::MultiBodyCompon
   v3 = (UFG::qNode<UFG::MultiBodyComponent,UFG::MultiBodyComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::MultiBodyComponent::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::MultiBodyComponent::`vftable;
   v2->mBodies.p = 0i64;
   *(_QWORD *)&v2->mBodies.size = 0i64;
   v2->mConstraints.p = 0i64;
@@ -273,7 +273,7 @@ void __fastcall UFG::MultiBodyComponent::~MultiBodyComponent(UFG::MultiBodyCompo
   UFG::qNode<UFG::MultiBodyComponent,UFG::MultiBodyComponent> *v10; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::MultiBodyComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::MultiBodyComponent::`vftable;
   if ( this == UFG::MultiBodyComponent::s_MultiBodyComponentpCurrentIterator )
     UFG::MultiBodyComponent::s_MultiBodyComponentpCurrentIterator = (UFG::MultiBodyComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::MultiBodyComponent,UFG::MultiBodyComponent> *)&this->mPrev;
@@ -287,7 +287,7 @@ void __fastcall UFG::MultiBodyComponent::~MultiBodyComponent(UFG::MultiBodyCompo
   if ( v5 )
   {
     v6 = &v5[-1].m_pPointer;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v5,
       0x18ui64,
       (int)v5[-1].m_pPointer,
@@ -300,7 +300,7 @@ void __fastcall UFG::MultiBodyComponent::~MultiBodyComponent(UFG::MultiBodyCompo
   if ( v7 )
   {
     v8 = &v7[-1].m_pPointer;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v7,
       0x18ui64,
       (int)v7[-1].m_pPointer,

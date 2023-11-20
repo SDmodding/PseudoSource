@@ -16,7 +16,7 @@ void __fastcall cleanupLoadedObjecthkBaseObject(void *__formal)
 // RVA: 0xC55A60
 void **__fastcall getVtablehkBaseObject()
 {
-  return &hkBaseObject::`vftable';
+  return &hkBaseObject::`vftable;
 }
 
 // File Line: 28
@@ -50,7 +50,7 @@ void __fastcall hkReferencedObjectLock::hkReferencedObjectLock(hkReferencedObjec
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkReferencedObjectLock::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkReferencedObjectLock::`vftable;
   this->m_multiThreadCheck.m_threadId = -15;
   this->m_multiThreadCheck.m_markCount = -32768;
   hkCriticalSection::hkCriticalSection(&this->m_criticalSection, 4000);

@@ -16,7 +16,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_utils::Timer> *__fastcall
     Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::EventDispatcher(
       v4,
       (Scaleform::GFx::AS3::InstanceTraits::Traits *)&v2->vfptr);
-    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_utils::Timer::`vftable';
+    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_utils::Timer::`vftable;
     *(_QWORD *)&v5->RepeatCount = 0i64;
     v5->Delay = 0.0;
     v5->pCoreTimer.pObject = 0i64;

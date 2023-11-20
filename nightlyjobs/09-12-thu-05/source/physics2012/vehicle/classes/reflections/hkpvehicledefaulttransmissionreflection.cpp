@@ -31,7 +31,7 @@ hkClass *__fastcall hkpVehicleDefaultTransmission::staticClass()
 void __fastcall finishLoadedObjecthkpVehicleDefaultTransmission(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpVehicleDefaultTransmission::`vftable';
+    *(_QWORD *)p = &hkpVehicleDefaultTransmission::`vftable;
 }
 
 // File Line: 74
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkpVehicleDefaultTransmission(void *p)
 // RVA: 0xE25830
 void **__fastcall getVtablehkpVehicleDefaultTransmission()
 {
-  return &hkpVehicleDefaultTransmission::`vftable';
+  return &hkpVehicleDefaultTransmission::`vftable;
 }
 
 // File Line: 100

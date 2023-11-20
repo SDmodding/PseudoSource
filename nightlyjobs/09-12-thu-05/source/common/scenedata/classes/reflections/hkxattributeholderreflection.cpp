@@ -31,7 +31,7 @@ hkClass *__fastcall hkxAttributeHolder::staticClass()
 void __fastcall finishLoadedObjecthkxAttributeHolder(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkxAttributeHolder::`vftable';
+    *(_QWORD *)p = &hkxAttributeHolder::`vftable;
 }
 
 // File Line: 71
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkxAttributeHolder(void *p)
 // RVA: 0xE31820
 void **__fastcall getVtablehkxAttributeHolder()
 {
-  return &hkxAttributeHolder::`vftable';
+  return &hkxAttributeHolder::`vftable;
 }
 
 // File Line: 97

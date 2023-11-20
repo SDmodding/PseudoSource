@@ -55,10 +55,10 @@ void __fastcall UFG::PhysicsMoverInterface_EmitVehicleDisabledEvent(UFG::SimObje
     v6 = v3 + 1;
     v6->mNext = v6;
     v6[1].mNext = v6;
-    v4->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+    v4->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
     v4->m_NamePTR = v5;
     v4->m_EventUID = UFG::qStringHash32(v5, 0xFFFFFFFF);
-    v4->vfptr = (UFG::EventVtbl *)&UFG::AnimatedEvent::`vftable';
+    v4->vfptr = (UFG::EventVtbl *)&UFG::AnimatedEvent::`vftable;
     v7 = v4 + 1;
     v7->vfptr = (UFG::EventVtbl *)v7;
     v7->mPrev = (UFG::qNode<UFG::Event,UFG::Event> *)v7;
@@ -101,7 +101,7 @@ void __fastcall UFG::CruiseControl::CruiseControl(UFG::CruiseControl *this, floa
   UFG::qPidController *v5; // rax
 
   v4 = this;
-  this->vfptr = (UFG::CruiseControlVtbl *)&UFG::CruiseControl::`vftable';
+  this->vfptr = (UFG::CruiseControlVtbl *)&UFG::CruiseControl::`vftable;
   *(_WORD *)&this->mIsActive = 0;
   v5 = (UFG::qPidController *)UFG::qMalloc(0xB0ui64, "qPidController", 0i64);
   if ( v5 )
@@ -158,7 +158,7 @@ float __fastcall UFG::CruiseControl::Update(UFG::CruiseControl *this, float delt
 // RVA: 0x157B830
 __int64 dynamic_initializer_for__UFG::PhysicsMoverInterface::s_VehicleAttacks__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     &UFG::PhysicsMoverInterface::s_VehicleAttacks,
     0x38ui64,
     200,
@@ -208,12 +208,12 @@ void __fastcall UFG::PhysicsMoverInterface::PhysicsMoverInterface(UFG::PhysicsMo
   v6 = numWheels;
   v7 = this;
   UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, pSceneObj->m_NameUID);
-  v7->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::UpdateInterface::`vftable';
+  v7->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::UpdateInterface::`vftable;
   v8 = (UFG::qNode<UFG::PhysicsMoverInterface,UFG::PhysicsMoverInterface> *)&v7->mPrev;
   v8->mPrev = v8;
   v8->mNext = v8;
-  v7->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::PhysicsMoverInterface::`vftable'{for `UFG::SimComponent'};
-  v7->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::PhysicsMoverInterface::`vftable'{for `UFG::UpdateInterface'};
+  v7->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::PhysicsMoverInterface::`vftable{for `UFG::SimComponent};
+  v7->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::PhysicsMoverInterface::`vftable{for `UFG::UpdateInterface};
   *(_QWORD *)&v7->mInput.mSteering = 0i64;
   *(_QWORD *)&v7->mInput.mGasBrakes = 0i64;
   *((_DWORD *)&v7->mInput + 4) &= 0xFFFFF800;
@@ -226,7 +226,7 @@ void __fastcall UFG::PhysicsMoverInterface::PhysicsMoverInterface(UFG::PhysicsMo
   v7->mLastDamageSource.m_pPointer = 0i64;
   *(_QWORD *)&v7->mPropertySetNameAI.mUID = -1i64;
   v7->mPropertySetExplosion.mUID = -1;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v7->mTargetSpheres,
     0x40ui64,
     5,
@@ -303,8 +303,8 @@ void __fastcall UFG::PhysicsMoverInterface::~PhysicsMoverInterface(UFG::PhysicsM
   UFG::qNode<UFG::PhysicsMoverInterface,UFG::PhysicsMoverInterface> *v12; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::PhysicsMoverInterface::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::PhysicsMoverInterface::`vftable'{for `UFG::UpdateInterface'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::PhysicsMoverInterface::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::PhysicsMoverInterface::`vftable{for `UFG::UpdateInterface};
   if ( this == UFG::PhysicsMoverInterface::s_PhysicsMoverInterfacepCurrentIterator )
     UFG::PhysicsMoverInterface::s_PhysicsMoverInterfacepCurrentIterator = (UFG::PhysicsMoverInterface *)&this->mPrev[-5].mNext;
   v2 = (UFG::qNode<UFG::PhysicsMoverInterface,UFG::PhysicsMoverInterface> *)&this->mPrev;
@@ -318,7 +318,7 @@ void __fastcall UFG::PhysicsMoverInterface::~PhysicsMoverInterface(UFG::PhysicsM
   if ( v5 )
     v5->vfptr->__vecDelDtor((UFG::BasePhysicsObject *)&v5->vfptr, 1u);
   UFG::VehicleParams::~VehicleParams(&v1->mParameters);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->mTargetSpheres,
     0x40ui64,
     5,

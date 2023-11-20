@@ -8,7 +8,7 @@ void __fastcall std::bad_cast::bad_cast(std::bad_cast *this, const char *_Messag
   _What = (char *)_Message;
   v2 = this;
   std::exception::exception((std::exception *)&this->vfptr, (const char *const *)&_What);
-  v2->vfptr = (std::exceptionVtbl *)&std::bad_cast::`vftable';
+  v2->vfptr = (std::exceptionVtbl *)&std::bad_cast::`vftable;
 }
 
 // File Line: 57
@@ -19,7 +19,7 @@ void __fastcall std::bad_cast::bad_cast(std::bad_cast *this, std::bad_cast *that
 
   v2 = this;
   std::exception::exception((std::exception *)&this->vfptr, (std::exception *)&that->vfptr);
-  v2->vfptr = (std::exceptionVtbl *)&std::bad_cast::`vftable';
+  v2->vfptr = (std::exceptionVtbl *)&std::bad_cast::`vftable;
 }
 
 // File Line: 87
@@ -32,7 +32,7 @@ void __fastcall std::bad_typeid::bad_typeid(std::bad_typeid *this, const char *_
   _What = (char *)_Message;
   v2 = this;
   std::exception::exception((std::exception *)&this->vfptr, (const char *const *)&_What);
-  v2->vfptr = (std::exceptionVtbl *)&std::bad_typeid::`vftable';
+  v2->vfptr = (std::exceptionVtbl *)&std::bad_typeid::`vftable;
 }
 
 // File Line: 92
@@ -43,7 +43,7 @@ void __fastcall std::bad_typeid::bad_typeid(std::bad_typeid *this, std::bad_type
 
   v2 = this;
   std::exception::exception((std::exception *)&this->vfptr, (std::exception *)&that->vfptr);
-  v2->vfptr = (std::exceptionVtbl *)&std::bad_typeid::`vftable';
+  v2->vfptr = (std::exceptionVtbl *)&std::bad_typeid::`vftable;
 }
 
 // File Line: 106
@@ -54,7 +54,7 @@ void __fastcall std::__non_rtti_object::__non_rtti_object(std::__non_rtti_object
 
   v2 = this;
   std::bad_typeid::bad_typeid((std::bad_typeid *)&this->vfptr, _Message);
-  v2->vfptr = (std::exceptionVtbl *)&std::__non_rtti_object::`vftable';
+  v2->vfptr = (std::exceptionVtbl *)&std::__non_rtti_object::`vftable;
 }
 
 // File Line: 111
@@ -65,14 +65,14 @@ void __fastcall std::__non_rtti_object::__non_rtti_object(std::__non_rtti_object
 
   v2 = this;
   std::exception::exception((std::exception *)&this->vfptr, (std::exception *)&that->vfptr);
-  v2->vfptr = (std::exceptionVtbl *)&std::__non_rtti_object::`vftable';
+  v2->vfptr = (std::exceptionVtbl *)&std::__non_rtti_object::`vftable;
 }
 
 // File Line: 115
 // RVA: 0x12B0E00
 void __fastcall std::bad_cast::~bad_cast(std::exception *this)
 {
-  this->vfptr = (std::exceptionVtbl *)&std::exception::`vftable';
+  this->vfptr = (std::exceptionVtbl *)&std::exception::`vftable;
   std::exception::_Tidy(this);
 }
 

@@ -8,7 +8,7 @@ void __fastcall hkaiPhysics2012BodyObstacleGenerator::hkaiPhysics2012BodyObstacl
   v2 = rigidBody;
   v3 = this;
   hkaiObstacleGenerator::hkaiObstacleGenerator((hkaiObstacleGenerator *)&this->vfptr);
-  v3->vfptr = (hkBaseObjectVtbl *)&hkaiPhysics2012BodyObstacleGenerator::`vftable';
+  v3->vfptr = (hkBaseObjectVtbl *)&hkaiPhysics2012BodyObstacleGenerator::`vftable;
   if ( v2 )
     hkReferencedObject::addReference((hkReferencedObject *)&v2->vfptr);
   v3->m_rigidBody.m_pntr = v2;
@@ -24,7 +24,7 @@ void __fastcall hkaiPhysics2012BodyObstacleGenerator::hkaiPhysics2012BodyObstacl
 
   v2 = this;
   hkaiObstacleGenerator::hkaiObstacleGenerator((hkaiObstacleGenerator *)&this->vfptr, f);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkaiPhysics2012BodyObstacleGenerator::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkaiPhysics2012BodyObstacleGenerator::`vftable;
 }
 
 // File Line: 29
@@ -35,7 +35,7 @@ void __fastcall hkaiPhysics2012BodyObstacleGenerator::~hkaiPhysics2012BodyObstac
   hkpRigidBody *v2; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiPhysics2012BodyObstacleGenerator::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiPhysics2012BodyObstacleGenerator::`vftable;
   v2 = this->m_rigidBody.m_pntr;
   if ( v2 )
     hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);

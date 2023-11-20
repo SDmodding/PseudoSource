@@ -12,7 +12,7 @@ void __fastcall UFG::VisualEffectAudioTrack::VisualEffectAudioTrack(UFG::VisualE
   this->mNode.mParent = 0i64;
   this->mNode.mChild[0] = 0i64;
   this->mNode.mChild[1] = 0i64;
-  this->vfptr = (UFG::VisualEffectAudioTrackVtbl *)&UFG::VisualEffectAudioTrack::`vftable';
+  this->vfptr = (UFG::VisualEffectAudioTrackVtbl *)&UFG::VisualEffectAudioTrack::`vftable;
   this->m_visualEffect.mUID = -1;
   v1 = &this->m_nodes;
   v1->mNode.mPrev = &v1->mNode;
@@ -50,7 +50,7 @@ void __fastcall UFG::VisualEffectAudioTrack::~VisualEffectAudioTrack(UFG::Visual
   UFG::qNode<UFG::GUIObjectBase,UFG::GUIObjectBase> *v7; // rcx
   UFG::qNode<UFG::GUIObjectBase,UFG::GUIObjectBase> *v8; // rax
 
-  this->vfptr = (UFG::VisualEffectAudioTrackVtbl *)&UFG::VisualEffectAudioTrack::`vftable';
+  this->vfptr = (UFG::VisualEffectAudioTrackVtbl *)&UFG::VisualEffectAudioTrack::`vftable;
   v1 = (UFG::qList<UFG::GUIObjectBase,UFG::GUIObjectBase,1,0> *)&this->m_nodes;
   v2 = (UFG::qSymbol *)&this->m_nodes.mNode.mNext[-1].mNext;
   v3 = &this->m_visualEffect;
@@ -89,7 +89,7 @@ void __fastcall UFG::SurfaceBankNode::~SurfaceBankNode(UFG::SurfaceBankNode *thi
   Illusion::Buffer **v3; // rbx
   UFG::qBaseNodeVariableRB<unsigned __int64> *v4; // rdx
 
-  this->vfptr = (UFG::SurfaceBankNodeVtbl *)&UFG::SurfaceBankNode::`vftable';
+  this->vfptr = (UFG::SurfaceBankNodeVtbl *)&UFG::SurfaceBankNode::`vftable;
   v1 = (Render::Skinning *)&this->m_banks;
   if ( this->m_banks.mTree.mCount )
   {

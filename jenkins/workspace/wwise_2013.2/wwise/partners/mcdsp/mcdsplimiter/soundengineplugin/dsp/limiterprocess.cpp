@@ -6,7 +6,7 @@ void __fastcall LimiterProcess::LimiterProcess(LimiterProcess *this)
 
   v1 = this;
   this->mSampleRate = 44100;
-  this->vfptr = (ProcessVtbl *)&MultiChannelSurroundProcess<LimiterProcessMonoFloatImpl,LimiterProcessStereoFloatImpl,LimiterProcessSurroundFloatImpl,LimiterProcessSurround71FloatImpl>::`vftable';
+  this->vfptr = (ProcessVtbl *)&MultiChannelSurroundProcess<LimiterProcessMonoFloatImpl,LimiterProcessStereoFloatImpl,LimiterProcessSurroundFloatImpl,LimiterProcessSurround71FloatImpl>::`vftable;
   this->mDSPMonoImpl = 0i64;
   this->mDSPStereoImpl = 0i64;
   this->mDSPSurroundImpl = 0i64;
@@ -15,7 +15,7 @@ void __fastcall LimiterProcess::LimiterProcess(LimiterProcess *this)
   PooledMemoryAllocator::PooledMemoryAllocator(&v1->mDSPStereoImplAllocator);
   PooledMemoryAllocator::PooledMemoryAllocator(&v1->mDSPSurroundImplAllocator);
   PooledMemoryAllocator::PooledMemoryAllocator(&v1->mDSPSurround71ImplAllocator);
-  v1->vfptr = (ProcessVtbl *)&LimiterProcess::`vftable';
+  v1->vfptr = (ProcessVtbl *)&LimiterProcess::`vftable;
   v1->mParameters.ceiling = 0.0;
   v1->mParameters.release = 10.0;
   v1->mParameters.threshold = 0.0;
@@ -32,12 +32,12 @@ void __fastcall LimiterProcess::~LimiterProcess(LimiterProcess *this)
 
   v1 = this;
   v2 = &this->mDSPSurround71ImplAllocator;
-  v2[-5].mCurrentPointer = (char *)&MultiChannelSurroundProcess<LimiterProcessMonoFloatImpl,LimiterProcessStereoFloatImpl,LimiterProcessSurroundFloatImpl,LimiterProcessSurround71FloatImpl>::`vftable';
+  v2[-5].mCurrentPointer = (char *)&MultiChannelSurroundProcess<LimiterProcessMonoFloatImpl,LimiterProcessStereoFloatImpl,LimiterProcessSurroundFloatImpl,LimiterProcessSurround71FloatImpl>::`vftable;
   PooledMemoryAllocator::~PooledMemoryAllocator(v2);
   PooledMemoryAllocator::~PooledMemoryAllocator(&v1->mDSPSurroundImplAllocator);
   PooledMemoryAllocator::~PooledMemoryAllocator(&v1->mDSPStereoImplAllocator);
   PooledMemoryAllocator::~PooledMemoryAllocator(&v1->mDSPMonoImplAllocator);
-  v1->vfptr = (ProcessVtbl *)&AK::IAkPluginMemAlloc::`vftable';
+  v1->vfptr = (ProcessVtbl *)&AK::IAkPluginMemAlloc::`vftable;
 }
 
 // File Line: 29

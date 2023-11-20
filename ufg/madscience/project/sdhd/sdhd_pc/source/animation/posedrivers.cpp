@@ -44,12 +44,12 @@ void __fastcall PoseDriver::PoseDriver(PoseDriver *this)
 {
   UFG::qNode<PoseDriver,PoseDriver> *v1; // rax
 
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
   v1 = (UFG::qNode<PoseDriver,PoseDriver> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (Expression::IMemberMapVtbl *)&PoseDriver::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&PoseDriver::`vftable;
   *(_WORD *)&this->mActive = 0;
   this->mBreakpoint = 0;
   this->mName.mUID = -1;
@@ -64,7 +64,7 @@ void __fastcall PoseDriver::~PoseDriver(PoseDriver *this)
   UFG::qNode<PoseDriver,PoseDriver> *v2; // rdx
   UFG::qNode<PoseDriver,PoseDriver> *v3; // rax
 
-  this->vfptr = (Expression::IMemberMapVtbl *)&PoseDriver::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&PoseDriver::`vftable;
   v1 = (UFG::qNode<PoseDriver,PoseDriver> *)&this->mPrev;
   v2 = this->mPrev;
   v3 = this->mNext;
@@ -72,7 +72,7 @@ void __fastcall PoseDriver::~PoseDriver(PoseDriver *this)
   v3->mPrev = v2;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 163
@@ -96,17 +96,17 @@ void __fastcall AimConstraint::AimConstraint(AimConstraint *this)
   float v4; // xmm1_4
   float v5; // xmm2_4
 
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
   v1 = (UFG::qNode<PoseDriver,PoseDriver> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (Expression::IMemberMapVtbl *)&PoseDriver::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&PoseDriver::`vftable;
   *(_WORD *)&this->mActive = 0;
   this->mBreakpoint = 0;
   this->mName.mUID = -1;
   this->mName.mUID = symEffectorNone.mUID;
-  this->vfptr = (Expression::IMemberMapVtbl *)&AimConstraint::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&AimConstraint::`vftable;
   this->mAimAxis.mValue = 1;
   this->mEffectorJoint = UFG::gNullQSymbolUC;
   v2 = UFG::qVector3::msZero.y;
@@ -434,17 +434,17 @@ void __fastcall AimConstraint2::AimConstraint2(AimConstraint2 *this)
 {
   UFG::qNode<PoseDriver,PoseDriver> *v1; // rax
 
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
   v1 = (UFG::qNode<PoseDriver,PoseDriver> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (Expression::IMemberMapVtbl *)&PoseDriver::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&PoseDriver::`vftable;
   *(_WORD *)&this->mActive = 0;
   this->mBreakpoint = 0;
   this->mName.mUID = -1;
   this->mName.mUID = symEffectorNone.mUID;
-  this->vfptr = (Expression::IMemberMapVtbl *)&AimConstraint2::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&AimConstraint2::`vftable;
   this->mEffectorJoint = UFG::gNullQSymbolUC;
   this->mTargetJoint = UFG::gNullQSymbolUC;
   *(_QWORD *)&this->mJointID = -1i64;
@@ -592,17 +592,17 @@ void __fastcall AimConstraintMultiLink::AimConstraintMultiLink(AimConstraintMult
   float v2; // xmm1_4
   float v3; // xmm2_4
 
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
   v1 = (UFG::qNode<PoseDriver,PoseDriver> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (Expression::IMemberMapVtbl *)&PoseDriver::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&PoseDriver::`vftable;
   *(_WORD *)&this->mActive = 0;
   this->mBreakpoint = 0;
   this->mName.mUID = -1;
   this->mName.mUID = symEffectorNone.mUID;
-  this->vfptr = (Expression::IMemberMapVtbl *)&AimConstraintMultiLink::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&AimConstraintMultiLink::`vftable;
   this->mFirstJoint = UFG::gNullQSymbolUC;
   this->mSecondJoint = UFG::gNullQSymbolUC;
   this->mThirdJoint = UFG::gNullQSymbolUC;
@@ -1085,17 +1085,17 @@ void __fastcall TwoLinkIKsolver::TwoLinkIKsolver(TwoLinkIKsolver *this)
   UFG::qNode<PoseDriver,PoseDriver> *v1; // rax
   UFG::qVector4 v2; // xmm3
 
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
   v1 = (UFG::qNode<PoseDriver,PoseDriver> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (Expression::IMemberMapVtbl *)&PoseDriver::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&PoseDriver::`vftable;
   *(_WORD *)&this->mActive = 0;
   this->mBreakpoint = 0;
   this->mName.mUID = -1;
   this->mName.mUID = symEffectorNone.mUID;
-  this->vfptr = (Expression::IMemberMapVtbl *)&TwoLinkIKsolver::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&TwoLinkIKsolver::`vftable;
   this->mFirstJoint = UFG::gNullQSymbolUC;
   this->mSecondJoint = UFG::gNullQSymbolUC;
   this->mEndJoint = UFG::gNullQSymbolUC;
@@ -1781,9 +1781,9 @@ __int64 dynamic_initializer_for__JointReferences::sClassNameUID__()
 // RVA: 0x39E150
 void __fastcall JointReferences::JointReferences(JointReferences *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
-  this->vfptr = (Expression::IMemberMapVtbl *)&JointReferences::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&JointReferences::`vftable;
   this->mJointName = UFG::gNullQSymbolUC;
   this->mJointID = 0;
 }
@@ -1831,10 +1831,10 @@ void __fastcall OrientationConstraint::~OrientationConstraint(OrientationConstra
   UFG::qNode<PoseDriver,PoseDriver> *v4; // rax
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&OrientationConstraint::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&OrientationConstraint::`vftable;
   BinPtrArray<JointReferences,1,0>::Clear((BinPtrArray<ITrack,1,0> *)&this->mInputJoints);
-  v1->mDriveJoint.vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PoseDriver::`vftable';
+  v1->mDriveJoint.vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PoseDriver::`vftable;
   v2 = (UFG::qNode<PoseDriver,PoseDriver> *)&v1->mPrev;
   v3 = v1->mPrev;
   v4 = v1->mNext;
@@ -1842,7 +1842,7 @@ void __fastcall OrientationConstraint::~OrientationConstraint(OrientationConstra
   v4->mPrev = v3;
   v2->mPrev = v2;
   v2->mNext = v2;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 1655
@@ -1909,20 +1909,20 @@ Expression::IMemberMap *__fastcall OrientationConstraint::CreateClone(Orientatio
   v3 = v2;
   if ( v2 )
   {
-    *(_QWORD *)v2 = &Expression::IMemberMap::`vftable';
+    *(_QWORD *)v2 = &Expression::IMemberMap::`vftable;
     *((_QWORD *)v2 + 1) = 0i64;
     v4 = v2 + 16;
     *v4 = v4;
     v4[1] = v4;
-    *(_QWORD *)v3 = &PoseDriver::`vftable';
+    *(_QWORD *)v3 = &PoseDriver::`vftable;
     *((_WORD *)v3 + 20) = 0;
     v3[42] = 0;
     *((_DWORD *)v3 + 11) = -1;
     *((UFG::qStaticSymbolUC *)v3 + 11) = symEffectorNone;
-    *(_QWORD *)v3 = &OrientationConstraint::`vftable';
+    *(_QWORD *)v3 = &OrientationConstraint::`vftable;
     v6 = v3 + 56;
-    *v6 = (unsigned __int64)&Expression::IMemberMap::`vftable';
-    *(_QWORD *)v6 = &JointReferences::`vftable';
+    *v6 = (unsigned __int64)&Expression::IMemberMap::`vftable;
+    *(_QWORD *)v6 = &JointReferences::`vftable;
     *((UFG::qSymbolUC *)v3 + 18) = UFG::gNullQSymbolUC;
     *((_DWORD *)v3 + 19) = 0;
     *((_DWORD *)v3 + 20) = 0;
@@ -2109,17 +2109,17 @@ void __fastcall TwistXRotLinearLink::TwistXRotLinearLink(TwistXRotLinearLink *th
 {
   UFG::qNode<PoseDriver,PoseDriver> *v1; // rax
 
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
   v1 = (UFG::qNode<PoseDriver,PoseDriver> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (Expression::IMemberMapVtbl *)&PoseDriver::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&PoseDriver::`vftable;
   *(_WORD *)&this->mActive = 0;
   this->mBreakpoint = 0;
   this->mName.mUID = -1;
   this->mName.mUID = symEffectorNone.mUID;
-  this->vfptr = (Expression::IMemberMapVtbl *)&TwistXRotLinearLink::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&TwistXRotLinearLink::`vftable;
   this->mDriveJoint = UFG::gNullQSymbolUC;
   this->mBaseJoint = UFG::gNullQSymbolUC;
   this->mEndJoint = UFG::gNullQSymbolUC;
@@ -2276,17 +2276,17 @@ void __fastcall FollowLink::FollowLink(FollowLink *this)
 {
   UFG::qNode<PoseDriver,PoseDriver> *v1; // rax
 
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
   v1 = (UFG::qNode<PoseDriver,PoseDriver> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (Expression::IMemberMapVtbl *)&PoseDriver::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&PoseDriver::`vftable;
   *(_WORD *)&this->mActive = 0;
   this->mBreakpoint = 0;
   this->mName.mUID = -1;
   this->mName.mUID = symEffectorNone.mUID;
-  this->vfptr = (Expression::IMemberMapVtbl *)&FollowLink::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&FollowLink::`vftable;
   this->mDriveJoint = UFG::gNullQSymbolUC;
   this->mFollowJoint = UFG::gNullQSymbolUC;
   this->mTransformFloatParamRotInput.mValue = 2;
@@ -2480,17 +2480,17 @@ void __fastcall Follow2Link::Follow2Link(Follow2Link *this)
 {
   UFG::qNode<PoseDriver,PoseDriver> *v1; // rax
 
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
   v1 = (UFG::qNode<PoseDriver,PoseDriver> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (Expression::IMemberMapVtbl *)&PoseDriver::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&PoseDriver::`vftable;
   *(_WORD *)&this->mActive = 0;
   this->mBreakpoint = 0;
   this->mName.mUID = -1;
   this->mName.mUID = symEffectorNone.mUID;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Follow2Link::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Follow2Link::`vftable;
   this->mDriveJoint = UFG::gNullQSymbolUC;
   this->mFollowJoint = UFG::gNullQSymbolUC;
 }
@@ -2557,17 +2557,17 @@ void __fastcall Follow3Link::Follow3Link(Follow3Link *this)
 {
   UFG::qNode<PoseDriver,PoseDriver> *v1; // rax
 
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
   v1 = (UFG::qNode<PoseDriver,PoseDriver> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (Expression::IMemberMapVtbl *)&PoseDriver::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&PoseDriver::`vftable;
   *(_WORD *)&this->mActive = 0;
   this->mBreakpoint = 0;
   this->mName.mUID = -1;
   this->mName.mUID = symEffectorNone.mUID;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Follow3Link::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Follow3Link::`vftable;
   this->mDriveJoint = UFG::gNullQSymbolUC;
   this->mFollowJoint = UFG::gNullQSymbolUC;
 }
@@ -2693,17 +2693,17 @@ void __fastcall Spring1DOF::Spring1DOF(Spring1DOF *this)
   UFG::qVector4 v3; // xmm2
   UFG::qVector4 v4; // xmm3
 
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
   v1 = (UFG::qNode<PoseDriver,PoseDriver> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (Expression::IMemberMapVtbl *)&PoseDriver::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&PoseDriver::`vftable;
   *(_WORD *)&this->mActive = 0;
   this->mBreakpoint = 0;
   this->mName.mUID = -1;
   this->mName.mUID = symEffectorNone.mUID;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Spring1DOF::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Spring1DOF::`vftable;
   this->mFollowJoint = UFG::gNullQSymbolUC;
   this->mTransformFollowAxis.mValue = 2;
   this->mTransformSpace.mValue = 2;
@@ -3244,17 +3244,17 @@ void __fastcall RootUprightDriver::RootUprightDriver(RootUprightDriver *this)
 {
   UFG::qNode<PoseDriver,PoseDriver> *v1; // rax
 
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
   v1 = (UFG::qNode<PoseDriver,PoseDriver> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (Expression::IMemberMapVtbl *)&PoseDriver::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&PoseDriver::`vftable;
   *(_WORD *)&this->mActive = 0;
   this->mBreakpoint = 0;
   this->mName.mUID = -1;
   this->mName.mUID = symEffectorNone.mUID;
-  this->vfptr = (Expression::IMemberMapVtbl *)&RootUprightDriver::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&RootUprightDriver::`vftable;
   *(_QWORD *)&this->mUprightVector.x = 0i64;
   this->mUprightVector.z = 1.0;
 }

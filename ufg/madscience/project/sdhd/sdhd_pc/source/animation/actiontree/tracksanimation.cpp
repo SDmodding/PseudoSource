@@ -44,8 +44,8 @@ void __fastcall AnimationTrack::AnimationTrack(AnimationTrack *this)
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, AnimationTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AnimationTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AnimationTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AnimationTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AnimationTrack::`vftable;
   v1->mAnimation = 0i64;
   v1->mStartFrame = 0.0;
   v1->mEndFrame = -1.0;
@@ -70,8 +70,8 @@ void __fastcall AnimationTrack::~AnimationTrack(AnimationTrack *this)
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&AnimationTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&AnimationTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -82,7 +82,7 @@ void __fastcall AnimationTrack::~AnimationTrack(AnimationTrack *this)
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 130
@@ -156,8 +156,8 @@ void __fastcall AnimationRefPoseTrack::AnimationRefPoseTrack(AnimationRefPoseTra
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, AnimationRefPoseTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AnimationRefPoseTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AnimationRefPoseTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AnimationRefPoseTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AnimationRefPoseTrack::`vftable;
   v1->mStartFrame = 0.0;
   v1->mEndFrame = -1.0;
   v1->mBlendInTime = 0.33333334;
@@ -176,8 +176,8 @@ void __fastcall AnimationRefPoseTrack::~AnimationRefPoseTrack(AnimationRefPoseTr
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&AnimationRefPoseTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&AnimationRefPoseTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -188,7 +188,7 @@ void __fastcall AnimationRefPoseTrack::~AnimationRefPoseTrack(AnimationRefPoseTr
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 316
@@ -210,8 +210,8 @@ void __fastcall AnimationLockHighLODTrack::AnimationLockHighLODTrack(AnimationLo
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, AnimationLockHighLODTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AnimationLockHighLODTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AnimationLockHighLODTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AnimationLockHighLODTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AnimationLockHighLODTrack::`vftable;
 }
 
 // File Line: 336
@@ -237,8 +237,8 @@ void __fastcall BlendTreeTrack::BlendTreeTrack(BlendTreeTrack *this)
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, BlendTreeTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<BlendTreeTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&BlendTreeTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<BlendTreeTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&BlendTreeTrack::`vftable;
   v1->mBlendTreeName.mUID = -1;
   v1->mWeightSetName.mUID = symNone.mUID;
   v1->mBlendInTime = 0.33333334;
@@ -251,9 +251,9 @@ void __fastcall BlendTreeTrack::BlendTreeTrack(BlendTreeTrack *this)
   *(_QWORD *)&result.mUID = v2;
   if ( v2 )
   {
-    *(_QWORD *)v2 = &Expression::IMemberMap::`vftable';
+    *(_QWORD *)v2 = &Expression::IMemberMap::`vftable;
     *((_QWORD *)v2 + 1) = 0i64;
-    *(_QWORD *)v2 = &BlendTreeControllerGroup::`vftable';
+    *(_QWORD *)v2 = &BlendTreeControllerGroup::`vftable;
     *((_DWORD *)v2 + 4) = 0;
     *((_QWORD *)v2 + 3) = 0i64;
   }
@@ -278,8 +278,8 @@ void __fastcall BlendTreeTrack::BlendTreeTrack(BlendTreeTrack *this, MemImageLoa
 
   v2 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, flag);
-  v2->vfptr = (Expression::IMemberMapVtbl *)&Track<BlendTreeTask>::`vftable';
-  v2->vfptr = (Expression::IMemberMapVtbl *)&BlendTreeTrack::`vftable';
+  v2->vfptr = (Expression::IMemberMapVtbl *)&Track<BlendTreeTask>::`vftable;
+  v2->vfptr = (Expression::IMemberMapVtbl *)&BlendTreeTrack::`vftable;
 }
 
 // File Line: 404
@@ -308,9 +308,9 @@ BlendTreeTrack *__fastcall BlendTreeTrack::CreateClone(BlendTreeTrack *this)
   v5 = UFG::qMemoryPool2::Allocate(&gActionTreeMemoryPool, 0x20ui64, "BlendTreeControllerGroup", 0i64, 1u);
   if ( v5 )
   {
-    *(_QWORD *)v5 = &Expression::IMemberMap::`vftable';
+    *(_QWORD *)v5 = &Expression::IMemberMap::`vftable;
     *((_QWORD *)v5 + 1) = 0i64;
-    *(_QWORD *)v5 = &BlendTreeControllerGroup::`vftable';
+    *(_QWORD *)v5 = &BlendTreeControllerGroup::`vftable;
     *((_DWORD *)v5 + 4) = 0;
     *((_QWORD *)v5 + 3) = 0i64;
   }
@@ -409,7 +409,7 @@ void __fastcall BlendTreeTrack::~BlendTreeTrack(BlendTreeTrack *this)
   char *v5; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&BlendTreeTrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&BlendTreeTrack::`vftable;
   v2 = this->mControllers.mOffset;
   if ( v2 )
   {
@@ -417,7 +417,7 @@ void __fastcall BlendTreeTrack::~BlendTreeTrack(BlendTreeTrack *this)
     if ( v3 )
       (*(void (__fastcall **)(char *, signed __int64))(*(_QWORD *)v3 + 8i64))(v3, 1i64);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v4 = &v1->mMasterRate;
   if ( !(~LOBYTE(v1->mMasterRate.text.mOffset) & 1) )
   {
@@ -428,7 +428,7 @@ void __fastcall BlendTreeTrack::~BlendTreeTrack(BlendTreeTrack *this)
         operator delete[](v5);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 608
@@ -569,8 +569,8 @@ void __fastcall PoseDriverDisableTrack::PoseDriverDisableTrack(PoseDriverDisable
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, PoseDriverDisableTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<PoseDriverDisableTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PoseDriverDisableTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<PoseDriverDisableTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PoseDriverDisableTrack::`vftable;
 }
 
 // File Line: 770
@@ -592,8 +592,8 @@ void __fastcall AnimationBankReferenceTrack::AnimationBankReferenceTrack(Animati
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, AnimationBankReferenceTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AnimationBankReferenceTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AnimationBankReferenceTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AnimationBankReferenceTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AnimationBankReferenceTrack::`vftable;
   v1->m_AnimationBankName.mOffset = 1i64;
   BinString::Set(&v1->m_AnimationBankName, &customWorldMapCaption);
   v1->m_eAnimationPriority.mValue = 10;
@@ -618,8 +618,8 @@ void __fastcall AnimationBankPriorityTrack::AnimationBankPriorityTrack(Animation
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, AnimationBankPriorityTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AnimationBankPriorityTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AnimationBankPriorityTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AnimationBankPriorityTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AnimationBankPriorityTrack::`vftable;
   v1->m_AnimationBankSymbolUC.mUID = gStaticSymbolUC_none.mUID;
   v1->m_eAnimationPriority.mValue = 10;
 }
@@ -645,7 +645,7 @@ void __fastcall ResourceOpportunityTrack::ResourceOpportunityTrack(ResourceOppor
   NodeRefTrack<ResourceOpportunityTask>::NodeRefTrack<ResourceOpportunityTask>(
     (NodeRefTrack<ResourceOpportunityTask> *)&this->vfptr,
     ResourceOpportunityTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ResourceOpportunityTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ResourceOpportunityTrack::`vftable;
   *(_QWORD *)&v1->mPriority = 0x10000i64;
   v1->mTruthDuration = 0.0;
   *(_WORD *)&v1->mPlayerAnimationPriority.mValue = 1807;
@@ -662,7 +662,7 @@ void __fastcall ResourceOpportunityTrack::~ResourceOpportunityTrack(ResourceOppo
   char *v4; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&ResourceOpportunityTrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&ResourceOpportunityTrack::`vftable;
   v2 = this->mConditions.mOffset;
   if ( v2 && (UFG::qOffset64<ConditionGroup *> *)((char *)&this->mConditions + v2) )
   {
@@ -706,7 +706,7 @@ Expression::IMemberMap *__fastcall ResourceOpportunityTrack::CreateClone(Resourc
     NodeRefTrack<ResourceOpportunityTask>::NodeRefTrack<ResourceOpportunityTask>(
       (NodeRefTrack<ResourceOpportunityTask> *)v2,
       ResourceOpportunityTrack::sClassNameUID);
-    *(_QWORD *)v3 = &ResourceOpportunityTrack::`vftable';
+    *(_QWORD *)v3 = &ResourceOpportunityTrack::`vftable;
     *((_QWORD *)v3 + 9) = 0x10000i64;
     v4 = 0i64;
     *((_DWORD *)v3 + 20) = 0;

@@ -19,7 +19,7 @@ UFG::CoverDataInventory *__fastcall UFG::CoverDataInventory::GetInstance()
       0x5DEB3457u,
       0,
       0);
-    sCoverDataInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::CoverDataInventory::`vftable';
+    sCoverDataInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::CoverDataInventory::`vftable;
     sCoverDataInventory.m_CornerGrid.mGridNodes = 0i64;
     *(_QWORD *)&sCoverDataInventory.m_CornerGrid.mGridSize = 0i64;
     *(_QWORD *)&sCoverDataInventory.m_CornerGrid.mXDim = 0i64;

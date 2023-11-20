@@ -17,7 +17,7 @@ void __fastcall DestructionDamageCondition::DestructionDamageCondition(Destructi
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DestructionDamageCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&DestructionDamageCondition::`vftable;
   v1->mDamageThreshold = 0.0;
   v1->mInEqualityOperator.mValue = 3;
   v1->mDestructionObjectName = UFG::gNullQSymbolUC;
@@ -103,7 +103,7 @@ void __fastcall DestructionFractureCondition::DestructionFractureCondition(Destr
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DestructionFractureCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&DestructionFractureCondition::`vftable;
   v1->mFractureObjectName = UFG::gNullQSymbolUC;
 }
 

@@ -3,7 +3,7 @@
 void __fastcall UFG::AudioEntityRegionData::AudioEntityRegionData(UFG::AudioEntityRegionData *this, UFG::AudioEntity *parent)
 {
   this->m_parent = parent;
-  this->vfptr = (UFG::AudioEntityRegionDataVtbl *)&UFG::AudioEntityRegionData::`vftable';
+  this->vfptr = (UFG::AudioEntityRegionDataVtbl *)&UFG::AudioEntityRegionData::`vftable;
   parent->m_pRegionData = this;
 }
 
@@ -12,7 +12,7 @@ void __fastcall UFG::AudioEntityRegionData::AudioEntityRegionData(UFG::AudioEnti
 void __fastcall UFG::AudioEntityRegionData::~AudioEntityRegionData(UFG::AudioEntityRegionData *this)
 {
   this->m_parent = 0i64;
-  this->vfptr = (UFG::AudioEntityRegionDataVtbl *)&UFG::AudioEntityRegionData::`vftable';
+  this->vfptr = (UFG::AudioEntityRegionDataVtbl *)&UFG::AudioEntityRegionData::`vftable;
 }
 
 // File Line: 36
@@ -68,7 +68,7 @@ void __fastcall UFG::AudioEntity::AudioEntity(UFG::AudioEntity *this)
   v2 = (UFG::qNode<UFG::AudioEntity,UFG::AudioEntity> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (UFG::AudioEntityVtbl *)&UFG::AudioEntity::`vftable';
+  this->vfptr = (UFG::AudioEntityVtbl *)&UFG::AudioEntity::`vftable;
   this->m_name = UFG::gNullQSymbol;
   this->m_bEnableEnvironments = 1;
   v3 = UFG::qMatrix44::msIdentity.v0.y;
@@ -183,7 +183,7 @@ void __fastcall UFG::AudioEntity::~AudioEntity(UFG::AudioEntity *this)
   UFG::qNode<UFG::AudioEntity,UFG::AudioEntity> *v9; // rax
 
   v1 = this;
-  this->vfptr = (UFG::AudioEntityVtbl *)&UFG::AudioEntity::`vftable';
+  this->vfptr = (UFG::AudioEntityVtbl *)&UFG::AudioEntity::`vftable;
   UFG::AudioEntity::Shutdown(this);
   v2 = v1->m_pMotionData;
   if ( v2 )
@@ -336,7 +336,7 @@ void __fastcall UFG::AudioEntity::Init(UFG::AudioEntity *this, UFG::qSymbol *obj
     if ( v23 )
     {
       v24 = v23 - 1;
-      `eh vector destructor iterator'(v23, 4ui64, v23[-1].mUID, (void (__fastcall *)(void *))_);
+      `eh vector destructor iterator(v23, 4ui64, v23[-1].mUID, (void (__fastcall *)(void *))_);
       operator delete[](v24);
     }
     v5->m_containmentInfo.m_regionsContainedIn.p = 0i64;
@@ -519,7 +519,7 @@ void __fastcall UFG::AudioEntity::Shutdown(UFG::AudioEntity *this)
     if ( v18 )
     {
       v19 = v18 - 1;
-      `eh vector destructor iterator'(v18, 4ui64, v18[-1].mUID, (void (__fastcall *)(void *))_);
+      `eh vector destructor iterator(v18, 4ui64, v18[-1].mUID, (void (__fastcall *)(void *))_);
       operator delete[](v19);
     }
     v1->m_containmentInfo.m_regionsContainedIn.p = 0i64;
@@ -547,10 +547,10 @@ void __fastcall UFG::AudioEntity::StopAndForgetAllEvents(UFG::AudioEntity *this,
 
   v2 = this->m_events.mNode.mNext;
   v3 = &this->m_eventInfos.p;
-  v4 = &UFG::StopAndForgetFunctor::`vftable';
+  v4 = &UFG::StopAndForgetFunctor::`vftable;
   v7 = ms;
   v5 = (UFG::AudioEntity *)&v2[-1].mNext;
-  v6 = &UFG::StopAndForgetFunctor::`vftable';
+  v6 = &UFG::StopAndForgetFunctor::`vftable;
   if ( v5 != (UFG::AudioEntity *)&this->m_eventInfos.p )
   {
     while ( 1 )
@@ -575,9 +575,9 @@ void __fastcall UFG::AudioEntity::StopAndForgetEvent(UFG::AudioEntity *this, uns
   unsigned int v7; // [rsp+28h] [rbp-10h]
 
   v3 = &this->m_eventInfos.p;
-  v4 = &UFG::StopAllEventsOfIdFunctor::`vftable';
+  v4 = &UFG::StopAllEventsOfIdFunctor::`vftable;
   v5 = (UFG::AudioEntity *)&this->m_events.mNode.mNext[-1].mNext;
-  v6 = &UFG::StopAllEventsOfIdFunctor::`vftable';
+  v6 = &UFG::StopAllEventsOfIdFunctor::`vftable;
   v7 = id;
   if ( v5 != (UFG::AudioEntity *)&this->m_eventInfos.p )
   {
@@ -602,9 +602,9 @@ void __fastcall UFG::AudioEntity::DestroyAllEvents(UFG::AudioEntity *this)
   void **v4; // [rsp+38h] [rbp+10h]
 
   v1 = &this->m_eventInfos.p;
-  v2 = &UFG::DestroyEventFunctor::`vftable';
+  v2 = &UFG::DestroyEventFunctor::`vftable;
   v3 = (UFG::AudioEntity *)&this->m_events.mNode.mNext[-1].mNext;
-  v4 = &UFG::DestroyEventFunctor::`vftable';
+  v4 = &UFG::DestroyEventFunctor::`vftable;
   if ( v3 != (UFG::AudioEntity *)&this->m_eventInfos.p )
   {
     while ( 1 )
@@ -629,10 +629,10 @@ __int64 __fastcall UFG::AudioEntity::CountNumPlayingEvents(UFG::AudioEntity *thi
   __int64 v6; // [rsp+28h] [rbp-10h]
 
   v1 = &this->m_eventInfos.p;
-  v2 = &UFG::IsIdPlayingFunctor::`vftable';
+  v2 = &UFG::IsIdPlayingFunctor::`vftable;
   v3 = (UFG::AudioEntity *)&this->m_events.mNode.mNext[-1].mNext;
   v6 = 0i64;
-  v5 = &UFG::IsIdPlayingFunctor::`vftable';
+  v5 = &UFG::IsIdPlayingFunctor::`vftable;
   if ( v3 == (UFG::AudioEntity *)&this->m_eventInfos.p )
     return 0i64;
   while ( 1 )
@@ -656,9 +656,9 @@ void __fastcall UFG::AudioEntity::ResumeAllEvents(UFG::AudioEntity *this)
   void **v4; // [rsp+38h] [rbp+10h]
 
   v1 = &this->m_eventInfos.p;
-  v2 = &UFG::ResumeFunctor::`vftable';
+  v2 = &UFG::ResumeFunctor::`vftable;
   v3 = (UFG::AudioEntity *)&this->m_events.mNode.mNext[-1].mNext;
-  v4 = &UFG::ResumeFunctor::`vftable';
+  v4 = &UFG::ResumeFunctor::`vftable;
   if ( v3 != (UFG::AudioEntity *)&this->m_eventInfos.p )
   {
     while ( 1 )
@@ -685,12 +685,12 @@ bool __fastcall UFG::AudioEntity::IsPlayingId(UFG::AudioEntity *this, unsigned i
   int v9; // [rsp+2Ch] [rbp-Ch]
 
   v2 = &this->m_eventInfos.p;
-  v3 = &UFG::IsIdPlayingFunctor::`vftable';
+  v3 = &UFG::IsIdPlayingFunctor::`vftable;
   v4 = (UFG::AudioEntity *)&this->m_events.mNode.mNext[-1].mNext;
   v5 = 0i64;
   v9 = 0;
   v8 = id;
-  v7 = &UFG::IsIdPlayingFunctor::`vftable';
+  v7 = &UFG::IsIdPlayingFunctor::`vftable;
   if ( v4 != (UFG::AudioEntity *)&this->m_eventInfos.p )
   {
     while ( 1 )
@@ -1941,14 +1941,14 @@ void __fastcall UFG::AudioEntity::Debug_Render(UFG::AudioEntity *this)
         &UFG::qColour::Green,
         "%s",
         &customWorldMapCaption);
-      v12 = &`UFG::AudioEntity::Debug_Render'::`11'::BuildEventDebugString::`vftable';
+      v12 = &`UFG::AudioEntity::Debug_Render::`11::BuildEventDebugString::`vftable;
       UFG::qString::qString(&v13);
       v14 = 0;
       v5 = (signed __int64)&v1->m_events.mNode.mNext[-1].mNext;
       for ( i = (signed __int64)&v1->m_eventInfos.p; v5 != i; v5 = *(_QWORD *)(v5 + 16) - 8i64 )
         ((void (__fastcall *)(__int64 (__fastcall ***)(), signed __int64))*v12)(&v12, v5);
-      v7 = &`UFG::AudioEntity::Debug_Render'::`12'::RenderDebugSphere::`vftable';
-      v9 = &`UFG::AudioEntity::Debug_Render'::`12'::RenderDebugSphere::`vftable';
+      v7 = &`UFG::AudioEntity::Debug_Render::`12::RenderDebugSphere::`vftable;
+      v9 = &`UFG::AudioEntity::Debug_Render::`12::RenderDebugSphere::`vftable;
       v11 = v1;
       v10 = v4;
       v8 = (signed __int64)&v1->m_events.mNode.mNext[-1].mNext;
@@ -2106,7 +2106,7 @@ void __fastcall UFG::AudioEntity::ClearContainmentInfo(UFG::AudioEntity *this)
   if ( v2 )
   {
     v3 = v2 - 1;
-    `eh vector destructor iterator'(v2, 4ui64, v2[-1].mUID, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v2, 4ui64, v2[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v3);
   }
   v1->m_containmentInfo.m_regionsContainedIn.p = 0i64;

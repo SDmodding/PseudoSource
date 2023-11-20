@@ -42,7 +42,7 @@ void __fastcall hkTrackerLayoutCalculator::hkTrackerLayoutCalculator(hkTrackerLa
   hkTrackerLayoutHandler *v39; // rdi
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkTrackerLayoutCalculator::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkTrackerLayoutCalculator::`vftable;
   this->m_layoutMap.m_map.m_elem = 0i64;
   this->m_layoutMap.m_map.m_numElems = 0;
   this->m_layoutMap.m_map.m_hashMod = -1;
@@ -66,7 +66,7 @@ void __fastcall hkTrackerLayoutCalculator::hkTrackerLayoutCalculator(hkTrackerLa
   if ( v5 )
   {
     *(_DWORD *)(v5 + 8) = 0x1FFFF;
-    *(_QWORD *)v5 = &hkTrackerArrayLayoutHandler::`vftable';
+    *(_QWORD *)v5 = &hkTrackerArrayLayoutHandler::`vftable;
   }
   else
   {
@@ -83,7 +83,7 @@ void __fastcall hkTrackerLayoutCalculator::hkTrackerLayoutCalculator(hkTrackerLa
   if ( v8 )
   {
     *(_DWORD *)(v8 + 8) = 0x1FFFF;
-    *(_QWORD *)v8 = &hkTrackerRefPtrLayoutHandler::`vftable';
+    *(_QWORD *)v8 = &hkTrackerRefPtrLayoutHandler::`vftable;
   }
   else
   {
@@ -97,7 +97,7 @@ void __fastcall hkTrackerLayoutCalculator::hkTrackerLayoutCalculator(hkTrackerLa
   if ( v11 )
   {
     *(_DWORD *)(v11 + 8) = 0x1FFFF;
-    *(_QWORD *)v11 = &hkTrackerStringPtrLayoutHandler::`vftable';
+    *(_QWORD *)v11 = &hkTrackerStringPtrLayoutHandler::`vftable;
   }
   else
   {
@@ -111,7 +111,7 @@ void __fastcall hkTrackerLayoutCalculator::hkTrackerLayoutCalculator(hkTrackerLa
   if ( v14 )
   {
     *(_DWORD *)(v14 + 8) = 0x1FFFF;
-    *(_QWORD *)v14 = &hkTrackerPadSpuLayoutHandler::`vftable';
+    *(_QWORD *)v14 = &hkTrackerPadSpuLayoutHandler::`vftable;
   }
   else
   {
@@ -125,7 +125,7 @@ void __fastcall hkTrackerLayoutCalculator::hkTrackerLayoutCalculator(hkTrackerLa
   if ( v17 )
   {
     *(_DWORD *)(v17 + 8) = 0x1FFFF;
-    *(_QWORD *)v17 = &hkTrackerQueueLayoutHandler::`vftable';
+    *(_QWORD *)v17 = &hkTrackerQueueLayoutHandler::`vftable;
   }
   else
   {
@@ -139,7 +139,7 @@ void __fastcall hkTrackerLayoutCalculator::hkTrackerLayoutCalculator(hkTrackerLa
   if ( v20 )
   {
     *(_DWORD *)(v20 + 8) = 0x1FFFF;
-    *(_QWORD *)v20 = &hkTrackerStringMapLayoutHandler::`vftable';
+    *(_QWORD *)v20 = &hkTrackerStringMapLayoutHandler::`vftable;
   }
   else
   {
@@ -154,7 +154,7 @@ void __fastcall hkTrackerLayoutCalculator::hkTrackerLayoutCalculator(hkTrackerLa
   if ( v23 )
   {
     *(_DWORD *)(v23 + 8) = 0x1FFFF;
-    *(_QWORD *)v23 = &hkTrackerPointerMapLayoutHandler::`vftable';
+    *(_QWORD *)v23 = &hkTrackerPointerMapLayoutHandler::`vftable;
   }
   else
   {
@@ -169,7 +169,7 @@ void __fastcall hkTrackerLayoutCalculator::hkTrackerLayoutCalculator(hkTrackerLa
   if ( v26 )
   {
     *(_DWORD *)(v26 + 8) = 0x1FFFF;
-    *(_QWORD *)v26 = &hkTrackerJobQueueLayoutHandler::`vftable';
+    *(_QWORD *)v26 = &hkTrackerJobQueueLayoutHandler::`vftable;
   }
   else
   {
@@ -183,7 +183,7 @@ void __fastcall hkTrackerLayoutCalculator::hkTrackerLayoutCalculator(hkTrackerLa
   if ( v29 )
   {
     *(_DWORD *)(v29 + 8) = 0x1FFFF;
-    *(_QWORD *)v29 = &hkTrackerJobQueueDynamicDataLayoutHandler::`vftable';
+    *(_QWORD *)v29 = &hkTrackerJobQueueDynamicDataLayoutHandler::`vftable;
   }
   else
   {
@@ -197,7 +197,7 @@ void __fastcall hkTrackerLayoutCalculator::hkTrackerLayoutCalculator(hkTrackerLa
   if ( v32 )
   {
     *(_DWORD *)(v32 + 8) = 0x1FFFF;
-    *(_QWORD *)v32 = &hkTrackerSetLayoutHandler::`vftable';
+    *(_QWORD *)v32 = &hkTrackerSetLayoutHandler::`vftable;
   }
   else
   {
@@ -211,7 +211,7 @@ void __fastcall hkTrackerLayoutCalculator::hkTrackerLayoutCalculator(hkTrackerLa
   if ( v35 )
   {
     *(_DWORD *)(v35 + 8) = 0x1FFFF;
-    *(_QWORD *)v35 = &hkTrackerFlagsLayoutHandler::`vftable';
+    *(_QWORD *)v35 = &hkTrackerFlagsLayoutHandler::`vftable;
   }
   else
   {
@@ -225,7 +225,7 @@ void __fastcall hkTrackerLayoutCalculator::hkTrackerLayoutCalculator(hkTrackerLa
   if ( v38 )
   {
     *(_DWORD *)(v38 + 8) = 0x1FFFF;
-    *(_QWORD *)v38 = &hkTrackerEnumLayoutHandler::`vftable';
+    *(_QWORD *)v38 = &hkTrackerEnumLayoutHandler::`vftable;
   }
   else
   {
@@ -243,7 +243,7 @@ void __fastcall hkTrackerLayoutCalculator::~hkTrackerLayoutCalculator(hkTrackerL
   hkReferencedObject *v2; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkTrackerLayoutCalculator::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkTrackerLayoutCalculator::`vftable;
   hkTrackerLayoutCalculator::clear(this);
   hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::clearAndDeallocate(
     (hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)&v1->m_sizeMap.m_map.m_elem,
@@ -263,7 +263,7 @@ void __fastcall hkTrackerLayoutCalculator::~hkTrackerLayoutCalculator(hkTrackerL
     (hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)&v1->m_layoutMap.m_map.m_elem,
     (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr);
   _((AMD_HD3D *)&v1->m_layoutMap);
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 120
@@ -377,7 +377,7 @@ hkTrackerTypeLayout *__fastcall hkTrackerLayoutCalculator::_createClassLayout(hk
     v12 = v8->m_alignment;
     *(_DWORD *)(v10 + 8) = 0x1FFFF;
     *(_QWORD *)(v10 + 16) = v2;
-    *(_QWORD *)v10 = &hkTrackerTypeLayout::`vftable';
+    *(_QWORD *)v10 = &hkTrackerTypeLayout::`vftable;
     *(_DWORD *)(v10 + 36) = 2147483648;
     *(_QWORD *)(v10 + 24) = 0i64;
     *(_DWORD *)(v10 + 32) = 0;
@@ -1554,7 +1554,7 @@ void __fastcall hkTrackerLayoutCalculator::flattenTypes(hkTrackerLayoutCalculato
           v13 = *(_QWORD *)(v7 + 16);
           *(_DWORD *)(v9 + 8) = 0x1FFFF;
           *(_QWORD *)(v9 + 16) = v13;
-          *(_QWORD *)v9 = &hkTrackerTypeLayout::`vftable';
+          *(_QWORD *)v9 = &hkTrackerTypeLayout::`vftable;
           *(_QWORD *)(v9 + 24) = 0i64;
           *(_DWORD *)(v9 + 32) = 0;
           *(_DWORD *)(v9 + 36) = 2147483648;

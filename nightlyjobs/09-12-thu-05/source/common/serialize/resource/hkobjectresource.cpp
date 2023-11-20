@@ -27,7 +27,7 @@ void __fastcall hkObjectResource::hkObjectResource(hkObjectResource *this, hkVar
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkObjectResource::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkObjectResource::`vftable;
   this->m_topLevelObject = *v;
   v3 = (hkReferencedObject *)((__int64 (*)(void))hkSingleton<hkBuiltinTypeRegistry>::s_instance->vfptr[2].__vecDelDtor)();
   v4 = (hkClassNameRegistry *)v3;
@@ -66,7 +66,7 @@ void __fastcall hkObjectResource::~hkObjectResource(hkObjectResource *this)
 
   v1 = this->m_topLevelObject.m_class;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkObjectResource::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkObjectResource::`vftable;
   if ( v1 )
   {
     if ( hkClass::isSuperClass(&hkReferencedObjectClass, &result, v1)->m_bool )
@@ -100,7 +100,7 @@ void __fastcall hkObjectResource::~hkObjectResource(hkObjectResource *this)
   if ( v11 )
     hkReferencedObject::removeReference(v11);
   v2->m_classRegistry.m_pntr = 0i64;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 51

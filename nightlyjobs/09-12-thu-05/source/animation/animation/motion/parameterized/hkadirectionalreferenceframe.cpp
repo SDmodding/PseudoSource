@@ -19,7 +19,7 @@ void __fastcall hkaDirectionalReferenceFrame::hkaDirectionalReferenceFrame(hkaDi
     (hkaDefaultAnimatedReferenceFrame *)&this->vfptr,
     options,
     REFERENCE_FRAME_PARAMETRIC);
-  v3->vfptr = (hkBaseObjectVtbl *)&hkaDirectionalReferenceFrame::`vftable';
+  v3->vfptr = (hkBaseObjectVtbl *)&hkaDirectionalReferenceFrame::`vftable;
   v4 = *(_OWORD *)&v2->m_referenceFrameTransforms;
   *(_OWORD *)&optionsa.m_numSamples = *(_OWORD *)&v2->m_numSamples;
   v5.m_quad = (__m128)v2->m_forward;
@@ -59,9 +59,9 @@ void __fastcall hkaDirectionalReferenceFrame::hkaDirectionalReferenceFrame(hkaDi
   this->m_referenceFrameSamples.m_capacityAndFlags = 2147483648;
   v2 = baseReferenceFrame;
   v3 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaParameterizedReferenceFrame::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaParameterizedReferenceFrame::`vftable;
   hkaDefaultAnimatedReferenceFrame::operator=((hkaDefaultAnimatedReferenceFrame *)&this->vfptr, baseReferenceFrame);
-  v3->vfptr = (hkBaseObjectVtbl *)&hkaDirectionalReferenceFrame::`vftable';
+  v3->vfptr = (hkBaseObjectVtbl *)&hkaDirectionalReferenceFrame::`vftable;
   v3->m_frameType.m_storage = 2;
   hkaParameterizeAnimationUtil::computeMovementDisplacement(
     (hkaAnimatedReferenceFrame *)&v2->vfptr,
@@ -74,7 +74,7 @@ void __fastcall hkaDirectionalReferenceFrame::hkaDirectionalReferenceFrame(hkaDi
 void __fastcall hkaDirectionalReferenceFrame::hkaDirectionalReferenceFrame(hkaDirectionalReferenceFrame *this, hkFinishLoadedObjectFlag flag)
 {
   this->m_frameType.m_storage = 2;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaDirectionalReferenceFrame::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaDirectionalReferenceFrame::`vftable;
 }
 
 // File Line: 37

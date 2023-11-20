@@ -75,7 +75,7 @@ void __fastcall UFG::SimObjectVehiclePropertiesComponent::SimObjectVehicleProper
   v7 = (UFG::qNode<UFG::SimObjectVehiclePropertiesComponent,UFG::SimObjectVehiclePropertiesComponent> *)&v6->mPrev;
   v7->mPrev = v7;
   v7->mNext = v7;
-  v6->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SimObjectVehiclePropertiesComponent::`vftable';
+  v6->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SimObjectVehiclePropertiesComponent::`vftable;
   v8 = 0i64;
   *(_QWORD *)&v6->m_eSimObjectVehicleType = 0i64;
   v9 = &v6->mAimLimit;
@@ -324,7 +324,7 @@ void __fastcall UFG::SimObjectVehiclePropertiesComponent::~SimObjectVehiclePrope
   UFG::qNode<UFG::SimObjectVehiclePropertiesComponent,UFG::SimObjectVehiclePropertiesComponent> *v8; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SimObjectVehiclePropertiesComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SimObjectVehiclePropertiesComponent::`vftable;
   if ( this == UFG::SimObjectVehiclePropertiesComponent::s_SimObjectVehiclePropertiesComponentpCurrentIterator )
     UFG::SimObjectVehiclePropertiesComponent::s_SimObjectVehiclePropertiesComponentpCurrentIterator = (UFG::SimObjectVehiclePropertiesComponent *)&this->mPrev[-10].mNext;
   v2 = (UFG::qNode<UFG::SimObjectVehiclePropertiesComponent,UFG::SimObjectVehiclePropertiesComponent> *)&this->mPrev;

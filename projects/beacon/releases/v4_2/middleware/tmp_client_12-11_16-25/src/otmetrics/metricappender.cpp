@@ -155,7 +155,7 @@ void OSuite::ZMetricAppender::Init(void)
     {
       v2->m_pTop = 0i64;
       OSuite::ZDoublyLinkedListBase::ZDoublyLinkedListBase(v2);
-      v3->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZSocketManager::InternalSocket>::`vftable';
+      v3->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZSocketManager::InternalSocket>::`vftable;
       OSuite::ZMetricAppender::m_appenderList = v3;
     }
     else
@@ -202,12 +202,12 @@ void OSuite::ZMetricAppender::Update(void)
     OSuite::ZMetricAppender::m_appenderList->m_pHead);
   v6.m_pList = 0i64;
   v6.m_pElement = 0i64;
-  v5.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+  v5.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
   OSuite::ZDoublyLinkedListBase::ZIteratorBase::ZIteratorBase(
     &v6,
     (OSuite::ZDoublyLinkedListBase *)&OSuite::ZMetricAppender::m_appenderList->vfptr,
     0i64);
-  v6.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable';
+  v6.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
   while ( !OSuite::ZString::IsNull((OSuite::ZString *)&v5) )
   {
     v1 = v5.m_pElement[1].vfptr[24].__vecDelDtor;
@@ -242,7 +242,7 @@ void __fastcall OSuite::ZMetricAppender::ZMetricAppender(OSuite::ZMetricAppender
 
   v3 = this;
   v4 = pszPublicIpAddress;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZMetricAppender::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZMetricAppender::`vftable;
   v5 = pTransmitter;
   OSuite::ZMutex::ZMutex(&this->m_mutex);
   OSuite::ZMetricProperties::ZMetricProperties(&v3->m_Properties);
@@ -294,7 +294,7 @@ void __fastcall OSuite::ZMetricAppender::~ZMetricAppender(OSuite::ZMetricAppende
   OSuite::ITransmitter *v2; // rcx
 
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZMetricAppender::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZMetricAppender::`vftable;
   v2 = this->m_pTransmitter;
   if ( v2 )
     v2->vfptr->__vecDelDtor((OSuite::ZObject *)&v2->vfptr, 1u);

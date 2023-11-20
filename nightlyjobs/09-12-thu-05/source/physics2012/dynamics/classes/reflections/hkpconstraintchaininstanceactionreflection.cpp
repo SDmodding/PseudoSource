@@ -37,9 +37,9 @@ void __fastcall finishLoadedObjecthkpConstraintChainInstanceAction(void *p, int 
   {
     v2 = p;
     v3 = (hkStringPtr *)((char *)p + 40);
-    v3[-5].m_stringAndFlag = (const char *)&hkpAction::`vftable';
+    v3[-5].m_stringAndFlag = (const char *)&hkpAction::`vftable;
     hkStringPtr::hkStringPtr(v3, (hkFinishLoadedObjectFlag)finishing);
-    *v2 = &hkpConstraintChainInstanceAction::`vftable';
+    *v2 = &hkpConstraintChainInstanceAction::`vftable;
   }
 }
 
@@ -57,7 +57,7 @@ void **__fastcall getVtablehkpConstraintChainInstanceAction()
   hkStringPtr v1; // [rsp+48h] [rbp-20h]
 
   hkStringPtr::hkStringPtr(&v1, 0);
-  return &hkpConstraintChainInstanceAction::`vftable';
+  return &hkpConstraintChainInstanceAction::`vftable;
 }
 
 // File Line: 97

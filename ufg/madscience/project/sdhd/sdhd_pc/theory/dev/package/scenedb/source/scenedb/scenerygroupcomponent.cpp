@@ -25,7 +25,7 @@ void __fastcall UFG::SceneryGroupComponent::SceneryGroupComponent(UFG::SceneryGr
 
   v2 = scenery_group;
   v3 = this;
-  this->vfptr = (Render::IDecalSceneryVtbl *)&Render::IDecalScenery::`vftable';
+  this->vfptr = (Render::IDecalSceneryVtbl *)&Render::IDecalScenery::`vftable;
   v7 = &this->mAttachedDecals;
   v7->mNode.mPrev = &v7->mNode;
   v7->mNode.mNext = &v7->mNode;
@@ -33,8 +33,8 @@ void __fastcall UFG::SceneryGroupComponent::SceneryGroupComponent(UFG::SceneryGr
   v4 = (UFG::qNode<UFG::SceneryGroupComponent,UFG::SceneryGroupComponent> *)&v3->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  v3->vfptr = (Render::IDecalSceneryVtbl *)&UFG::SceneryGroupComponent::`vftable'{for `Render::IDecalScenery'};
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SceneryGroupComponent::`vftable'{for `UFG::SimComponent'};
+  v3->vfptr = (Render::IDecalSceneryVtbl *)&UFG::SceneryGroupComponent::`vftable{for `Render::IDecalScenery};
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SceneryGroupComponent::`vftable{for `UFG::SimComponent};
   v5 = UFG::SceneryGroupComponent::s_SceneryGroupComponentList.mNode.mPrev;
   UFG::SceneryGroupComponent::s_SceneryGroupComponentList.mNode.mPrev->mNext = (UFG::qNode<UFG::SceneryGroupComponent,UFG::SceneryGroupComponent> *)&v3->mPrev;
   v4->mPrev = v5;
@@ -66,8 +66,8 @@ void __fastcall UFG::SceneryGroupComponent::~SceneryGroupComponent(UFG::SceneryG
   UFG::qNode<UFG::SceneryGroupComponent,UFG::SceneryGroupComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (Render::IDecalSceneryVtbl *)&UFG::SceneryGroupComponent::`vftable'{for `Render::IDecalScenery'};
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SceneryGroupComponent::`vftable'{for `UFG::SimComponent'};
+  this->vfptr = (Render::IDecalSceneryVtbl *)&UFG::SceneryGroupComponent::`vftable{for `Render::IDecalScenery};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SceneryGroupComponent::`vftable{for `UFG::SimComponent};
   if ( this == UFG::SceneryGroupComponent::s_SceneryGroupComponentpCurrentIterator )
     UFG::SceneryGroupComponent::s_SceneryGroupComponentpCurrentIterator = (UFG::SceneryGroupComponent *)&this->mPrev[-6].mNext;
   v2 = (UFG::qNode<UFG::SceneryGroupComponent,UFG::SceneryGroupComponent> *)&this->mPrev;

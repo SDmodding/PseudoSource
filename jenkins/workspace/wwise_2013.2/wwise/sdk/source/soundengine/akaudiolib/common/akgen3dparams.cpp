@@ -6,7 +6,7 @@ void __fastcall CAkGen3DParams::CAkGen3DParams(CAkGen3DParams *this)
   char v2; // dl
   float v3; // eax
 
-  this->vfptr = (CAkGen3DParamsVtbl *)&CAkGen3DParams::`vftable';
+  this->vfptr = (CAkGen3DParamsVtbl *)&CAkGen3DParams::`vftable;
   this->m_Params.m_pAttenuation = 0i64;
   v1 = *((_BYTE *)&this->m_Params + 68);
   *(_QWORD *)&this->m_Params.m_ID = 0i64;
@@ -203,13 +203,13 @@ void __fastcall CAkGen3DParamsEx::~CAkGen3DParamsEx(CAkGen3DParamsEx *this)
 
   v1 = this->m_PathState.pbPlayed;
   v2 = this;
-  this->vfptr = (CAkGen3DParamsVtbl *)&CAkGen3DParamsEx::`vftable';
+  this->vfptr = (CAkGen3DParamsVtbl *)&CAkGen3DParamsEx::`vftable;
   if ( v1 )
   {
     AK::MemoryMgr::Free(g_DefaultPoolId, v1);
     v2->m_PathState.pbPlayed = 0i64;
   }
-  v2->vfptr = (CAkGen3DParamsVtbl *)&CAkGen3DParams::`vftable';
+  v2->vfptr = (CAkGen3DParamsVtbl *)&CAkGen3DParams::`vftable;
   v3 = v2->m_Params.m_pAttenuation;
   if ( v3 )
     ((void (*)(void))v3->vfptr->Release)();

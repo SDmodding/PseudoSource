@@ -173,7 +173,7 @@ void __fastcall Render::SkinClipInfo::SkinClipInfo(Render::SkinClipInfo *this, c
         v7 = v4 + 40;
         do
         {
-          `vector constructor iterator'(v7, 2ui64, 2, (void *(__fastcall *)(void *))UFG::qHalfFloat::qHalfFloat);
+          `vector constructor iterator(v7, 2ui64, 2, (void *(__fastcall *)(void *))UFG::qHalfFloat::qHalfFloat);
           v7 += 44;
           --v6;
         }
@@ -554,12 +554,12 @@ void __fastcall Render::Skinning::Init(Render::Skinning *this)
   this->mRenderRMeshFunc = (UFG::BitFlags128 *(__fastcall *)(UFG::BitFlags128 *, Render::View *, Illusion::rMesh *, UFG::qMatrix44 *, Illusion::rMaterial *, UFG::BitFlags128, const char *))Render::DefaultRenderRMeshFunc;
   v2 = this;
   this->mRenderDecalFunc = Render::DefaultRenderDecalFunc;
-  v3 = `UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result )
+  v3 = `UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result )
   {
     v4 = UFG::qResourceWarehouse::Instance();
     v3 = UFG::qResourceWarehouse::GetInventory(v4, 0x3E5FDA3Eu);
-    `UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result = v3;
+    `UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result = v3;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v2->mDecalVertexDecl.mPrev, 0x3E5FDA3Eu, v1, v3);
 }

@@ -4,7 +4,7 @@ void __fastcall hkpLinearParametricCurve::hkpLinearParametricCurve(hkpLinearPara
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_smoothingFactor = 0.0099999998;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpLinearParametricCurve::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpLinearParametricCurve::`vftable;
   this->m_closedLoop.m_bool = 0;
   this->m_points.m_data = 0i64;
   this->m_points.m_size = 0;

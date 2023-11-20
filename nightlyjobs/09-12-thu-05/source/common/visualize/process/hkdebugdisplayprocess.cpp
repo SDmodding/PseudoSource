@@ -24,10 +24,10 @@ void __fastcall hkDebugDisplayProcess::hkDebugDisplayProcess(hkDebugDisplayProce
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_selectable.m_bool = 1;
-  this->vfptr = (hkBaseObjectVtbl *)&hkDebugDisplayProcess::`vftable'{for `hkReferencedObject'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkDebugDisplayProcess::`vftable{for `hkReferencedObject};
   v1 = this;
-  this->vfptr = (hkProcessVtbl *)&hkDebugDisplayProcess::`vftable'{for `hkProcess'};
-  this->vfptr = (hkDebugDisplayHandlerVtbl *)&hkDebugDisplayProcess::`vftable'{for `hkDebugDisplayHandler'};
+  this->vfptr = (hkProcessVtbl *)&hkDebugDisplayProcess::`vftable{for `hkProcess};
+  this->vfptr = (hkDebugDisplayHandlerVtbl *)&hkDebugDisplayProcess::`vftable{for `hkDebugDisplayHandler};
   if ( !(_DWORD)hkDebugDisplayProcess::m_tag )
     hkDebugDisplayProcess::registerProcess();
   hkDebugDisplay::addDebugDisplayHandler(hkSingleton<hkDebugDisplay>::s_instance, (hkDebugDisplayHandler *)&v1->vfptr);
@@ -50,15 +50,15 @@ void __fastcall hkDebugDisplayProcess::~hkDebugDisplayProcess(hkDebugDisplayProc
   hkDebugDisplayProcess *v1; // rdi
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkDebugDisplayProcess::`vftable'{for `hkReferencedObject'};
-  this->vfptr = (hkProcessVtbl *)&hkDebugDisplayProcess::`vftable'{for `hkProcess'};
-  this->vfptr = (hkDebugDisplayHandlerVtbl *)&hkDebugDisplayProcess::`vftable'{for `hkDebugDisplayHandler'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkDebugDisplayProcess::`vftable{for `hkReferencedObject};
+  this->vfptr = (hkProcessVtbl *)&hkDebugDisplayProcess::`vftable{for `hkProcess};
+  this->vfptr = (hkDebugDisplayHandlerVtbl *)&hkDebugDisplayProcess::`vftable{for `hkDebugDisplayHandler};
   hkDebugDisplay::removeDebugDisplayHandler(
     hkSingleton<hkDebugDisplay>::s_instance,
     (hkDebugDisplayHandler *)&this->vfptr);
-  v1->vfptr = (hkDebugDisplayHandlerVtbl *)&hkDebugDisplayHandler::`vftable';
-  v1->vfptr = (hkProcessVtbl *)&hkProcess::`vftable';
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkDebugDisplayHandlerVtbl *)&hkDebugDisplayHandler::`vftable;
+  v1->vfptr = (hkProcessVtbl *)&hkProcess::`vftable;
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 52

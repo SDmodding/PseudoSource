@@ -9,6 +9,6 @@ void __fastcall SSData::SSData(SSData *this)
 // RVA: 0xBD660
 void __fastcall SSObjectBase::~SSObjectBase(SSObjectBase *this)
 {
-  this->vfptr = (SSObjectBaseVtbl *)&SSObjectBase::`vftable';
+  this->vfptr = (SSObjectBaseVtbl *)&SSObjectBase::`vftable;
 }
 

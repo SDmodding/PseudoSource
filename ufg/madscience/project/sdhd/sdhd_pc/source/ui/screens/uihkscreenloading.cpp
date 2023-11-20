@@ -14,7 +14,7 @@ void __fastcall UFG::UIHKScreenLoading::~UIHKScreenLoading(UFG::UIHKScreenLoadin
   UFG::UIScreenTextureManager *v2; // rax
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenLoading::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenLoading::`vftable;
   v2 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseScreen(v2, "Loading");
   UFG::UIScreen::~UIScreen((UFG::UIScreen *)&v1->vfptr);
@@ -111,7 +111,7 @@ LABEL_8:
       UFG::qString::Format(&v21, "NO GENERIC HINTS TO DISPLAY", 0i64);
     }
   }
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   v20 = v21.mData;
   if ( (v25 >> 6) & 1 )
   {
@@ -121,7 +121,7 @@ LABEL_8:
   v25 = 6;
   v26 = v20;
   Scaleform::GFx::Movie::Invoke(v2, "Set_Text", 0i64, (Scaleform::GFx::Value *)&ptr, 1u);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   UFG::qString::~qString(&v21);
 }
 

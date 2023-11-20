@@ -22,7 +22,7 @@ void __fastcall UFG::GangMemberStatData::GangMemberStatData(UFG::GangMemberStatD
 
   v1 = this;
   UFG::qReflectObjectType<UFG::GangMemberStatData,UFG::qReflectObject>::qReflectObjectType<UFG::GangMemberStatData,UFG::qReflectObject>((UFG::qReflectObjectType<UFG::GangMemberStatData,UFG::qReflectObject> *)&this->vfptr);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::GangMemberStatData::`vftable';
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::GangMemberStatData::`vftable;
   v2 = &v1->type;
   *(_QWORD *)&v2->mText.mData.mNumItems = 0i64;
   v2->mText.mData.mItems = 0i64;
@@ -36,7 +36,7 @@ void __fastcall UFG::RangedWeaponStatData::RangedWeaponStatData(UFG::RangedWeapo
 
   v1 = this;
   UFG::qReflectObjectType<UFG::RangedWeaponStatData,UFG::qReflectObject>::qReflectObjectType<UFG::RangedWeaponStatData,UFG::qReflectObject>((UFG::qReflectObjectType<UFG::RangedWeaponStatData,UFG::qReflectObject> *)&this->vfptr);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::RangedWeaponStatData::`vftable';
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::RangedWeaponStatData::`vftable;
 }
 
 // File Line: 188
@@ -47,7 +47,7 @@ void __fastcall UFG::ThrownWeaponStatData::ThrownWeaponStatData(UFG::ThrownWeapo
 
   v1 = this;
   UFG::qReflectObjectType<UFG::ThrownWeaponStatData,UFG::qReflectObject>::qReflectObjectType<UFG::ThrownWeaponStatData,UFG::qReflectObject>((UFG::qReflectObjectType<UFG::ThrownWeaponStatData,UFG::qReflectObject> *)&this->vfptr);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::ThrownWeaponStatData::`vftable';
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::ThrownWeaponStatData::`vftable;
 }
 
 // File Line: 199
@@ -58,7 +58,7 @@ void __fastcall UFG::MeleeWeaponStatData::MeleeWeaponStatData(UFG::MeleeWeaponSt
 
   v1 = this;
   UFG::qReflectObjectType<UFG::MeleeWeaponStatData,UFG::qReflectObject>::qReflectObjectType<UFG::MeleeWeaponStatData,UFG::qReflectObject>((UFG::qReflectObjectType<UFG::MeleeWeaponStatData,UFG::qReflectObject> *)&this->vfptr);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::MeleeWeaponStatData::`vftable';
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::MeleeWeaponStatData::`vftable;
 }
 
 // File Line: 222
@@ -69,18 +69,18 @@ void __fastcall UFG::WeaponStatData::WeaponStatData(UFG::WeaponStatData *this)
 
   v1 = this;
   UFG::qReflectObjectType<UFG::WeaponStatData,UFG::qReflectObject>::qReflectObjectType<UFG::WeaponStatData,UFG::qReflectObject>((UFG::qReflectObjectType<UFG::WeaponStatData,UFG::qReflectObject> *)&this->vfptr);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::WeaponStatData::`vftable';
-  `eh vector constructor iterator'(
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::WeaponStatData::`vftable;
+  `eh vector constructor iterator(
     v1->meleeWeapons,
     0x60ui64,
     4,
     (void (__fastcall *)(void *))UFG::MeleeWeaponStatData::MeleeWeaponStatData);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v1->rangedWeapons,
     0x60ui64,
     6,
     (void (__fastcall *)(void *))UFG::RangedWeaponStatData::RangedWeaponStatData);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v1->thrownWeapons,
     0x60ui64,
     5,
@@ -106,23 +106,23 @@ void __fastcall UFG::WeaponStatData::WeaponStatData(UFG::WeaponStatData *this, M
   v3->mBaseNode.mNeighbours[0] = &v3->mBaseNode;
   v3->mBaseNode.mNeighbours[1] = &v3->mBaseNode;
   v3->mBaseNode.mUID = v4;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable;
   v5 = &this->mHandles;
   v5->mNode.mPrev = &v5->mNode;
   v5->mNode.mNext = &v5->mNode;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::WeaponStatData,UFG::qReflectObject>::`vftable';
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::WeaponStatData::`vftable';
-  `eh vector constructor iterator'(
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::WeaponStatData,UFG::qReflectObject>::`vftable;
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::WeaponStatData::`vftable;
+  `eh vector constructor iterator(
     this->meleeWeapons,
     0x60ui64,
     4,
     (void (__fastcall *)(void *))UFG::MeleeWeaponStatData::MeleeWeaponStatData);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v2->rangedWeapons,
     0x60ui64,
     6,
     (void (__fastcall *)(void *))UFG::RangedWeaponStatData::RangedWeaponStatData);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v2->thrownWeapons,
     0x60ui64,
     5,
@@ -148,19 +148,19 @@ void __fastcall UFG::PlayerStatData::PlayerStatData(UFG::PlayerStatData *this, M
   v3->mBaseNode.mNeighbours[0] = &v3->mBaseNode;
   v3->mBaseNode.mNeighbours[1] = &v3->mBaseNode;
   v3->mBaseNode.mUID = v4;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable;
   v5 = &this->mHandles;
   v5->mNode.mPrev = &v5->mNode;
   v5->mNode.mNext = &v5->mNode;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::PlayerStatData,UFG::qReflectObject>::`vftable';
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::PlayerStatData::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::PlayerStatData,UFG::qReflectObject>::`vftable;
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::PlayerStatData::`vftable;
   this->name.mText.mData.mFlags = 2;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     this->weaponStats,
     0x5F0ui64,
     2,
     (void (__fastcall *)(void *))UFG::WeaponStatData::WeaponStatData);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v2->gangMembers,
     0xA0ui64,
     10,

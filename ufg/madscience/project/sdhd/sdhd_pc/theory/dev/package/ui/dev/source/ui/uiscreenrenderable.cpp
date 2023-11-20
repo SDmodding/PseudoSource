@@ -10,7 +10,7 @@ void __fastcall UFG::UIScreenRenderable::~UIScreenRenderable(UFG::UIScreenRender
   Scaleform::GFx::Resource *v6; // rcx
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenRenderableVtbl *)&UFG::UIScreenRenderable::`vftable';
+  this->vfptr = (UFG::UIScreenRenderableVtbl *)&UFG::UIScreenRenderable::`vftable;
   if ( this->m_ownsOffscreenTarget )
   {
     v2 = this->m_offscreenTarget;
@@ -328,19 +328,19 @@ void __fastcall UFG::UIScreenRenderable::replaceTexture(UFG::UIScreenRenderable 
     v22 = v14;
     if ( v14 )
     {
-      *(_QWORD *)v14 = &Scaleform::RefCountImplCore::`vftable';
+      *(_QWORD *)v14 = &Scaleform::RefCountImplCore::`vftable;
       *(_DWORD *)(v14 + 8) = 1;
-      *(_QWORD *)v14 = &Scaleform::RefCountVImpl::`vftable';
-      *(_QWORD *)v14 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountVImpl,3>::`vftable';
-      *(_QWORD *)v14 = &Scaleform::RefCountBaseV<Scaleform::Render::Image,3>::`vftable';
-      *(_QWORD *)v14 = &Scaleform::Render::ImageBase::`vftable';
-      *(_QWORD *)v14 = &Scaleform::Render::Image::`vftable';
+      *(_QWORD *)v14 = &Scaleform::RefCountVImpl::`vftable;
+      *(_QWORD *)v14 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountVImpl,3>::`vftable;
+      *(_QWORD *)v14 = &Scaleform::RefCountBaseV<Scaleform::Render::Image,3>::`vftable;
+      *(_QWORD *)v14 = &Scaleform::Render::ImageBase::`vftable;
+      *(_QWORD *)v14 = &Scaleform::Render::Image::`vftable;
       *(_QWORD *)(v14 + 16) = 0i64;
       v15 = *(_QWORD *)(v14 + 16);
       v16 = *(_QWORD *)(v14 + 16);
       *(_QWORD *)(v14 + 24) = 0i64;
       *(_QWORD *)(v14 + 32) = 0i64;
-      *(_QWORD *)v14 = &Scaleform::Render::TextureImage::`vftable';
+      *(_QWORD *)v14 = &Scaleform::Render::TextureImage::`vftable;
       *(_DWORD *)(v14 + 40) = 1;
       *(_DWORD *)(v14 + 44) = v12;
       *(_DWORD *)(v14 + 48) = v10;
@@ -368,7 +368,7 @@ void __fastcall UFG::UIScreenRenderable::replaceTexture(UFG::UIScreenRenderable 
     if ( v19 )
     {
       Scaleform::Render::Image::Image(v19, v18, 0i64);
-      v20->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::TextureImage::`vftable';
+      v20->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::TextureImage::`vftable;
       LODWORD(v20[1].vfptr) = 1;
       HIDWORD(v20[1].vfptr) = v12;
       v20[1].RefCount = v10;

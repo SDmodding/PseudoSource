@@ -64,7 +64,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_text::Font::Font(Scaleform::G
   v2 = t;
   v3 = this;
   Scaleform::GFx::AS3::Instances::fl::Object::Object((Scaleform::GFx::AS3::Instances::fl::Object *)&this->vfptr, t);
-  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_text::Font::`vftable';
+  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_text::Font::`vftable;
   v3->pFont.pObject = 0i64;
   Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateEmptyString(
     (Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *)v2->pVM->StringManagerRef->Builtins,
@@ -461,7 +461,7 @@ LABEL_5:
               Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v29.pObject);
             Scaleform::GFx::LogBase<Scaleform::GFx::LogState>::LogScriptWarning(
               (Scaleform::GFx::LogBase<Scaleform::GFx::LogState> *)&v16->vfptr,
-              "Attaching a font with class '%s' failed",
+              "Attaching a font with class %s failed",
               v15);
           }
         }
@@ -618,7 +618,7 @@ void __fastcall Scaleform::GFx::AS3::Classes::fl_text::Font::enumerateFonts(Scal
   v3 = (Scaleform::GFx::StateBag *)v77[1].vfptr[2].__vecDelDtor;
   v4 = ((__int64 (__fastcall *)(void *(__fastcall *)(Scaleform::GFx::AS3::VM *, unsigned int)))v3->vfptr->~StateBag)(v77[1].vfptr[2].__vecDelDtor);
   pmemAddr.pTable = 0i64;
-  v78 = (void **)`Scaleform::GFx::AS3::Classes::fl_text::Font::enumerateFonts'::`2'::FontsVisitor::`vftable';
+  v78 = (void **)`Scaleform::GFx::AS3::Classes::fl_text::Font::enumerateFonts::`2::FontsVisitor::`vftable;
   v79 = &pmemAddr;
   (*(void (__fastcall **)(__int64, void ***, signed __int64))(*(_QWORD *)v4 + 208i64))(v4, &v78, 1i64);
   v5 = v3[2654].vfptr;
@@ -973,7 +973,7 @@ LABEL_48:
     }
     v65->pObject = v64;
   }
-  v78 = &Scaleform::GFx::MovieDef::ResourceVisitor::`vftable';
+  v78 = &Scaleform::GFx::MovieDef::ResourceVisitor::`vftable;
   v68 = pmemAddr.pTable;
   if ( pmemAddr.pTable )
   {
@@ -1213,7 +1213,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v5 )
   {
     Scaleform::GFx::AS3::ClassTraits::fl::Object::Object(v5, v2, &Scaleform::GFx::AS3::fl_text::FontCI);
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_text::Font::`vftable';
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_text::Font::`vftable;
   }
   else
   {
@@ -1225,7 +1225,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v7 )
   {
     Scaleform::GFx::AS3::InstanceTraits::fl::Object::Object(v7, v2, &Scaleform::GFx::AS3::fl_text::FontCI);
-    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_text::Font::`vftable';
+    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_text::Font::`vftable;
   }
   else
   {
@@ -1241,7 +1241,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v9 )
   {
     Scaleform::GFx::AS3::Class::Class(v9, v3->pV);
-    v10->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl_text::Font::`vftable';
+    v10->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl_text::Font::`vftable;
   }
   return v3;
 }

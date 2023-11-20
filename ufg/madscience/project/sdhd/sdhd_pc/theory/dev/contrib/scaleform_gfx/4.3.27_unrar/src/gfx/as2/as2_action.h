@@ -382,10 +382,10 @@ void __fastcall Scaleform::GFx::AS2::Environment::Environment(Scaleform::GFx::AS
   signed __int64 v4; // [rsp+58h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::Environment>Vtbl *)&Scaleform::GFx::LogBase<Scaleform::GFx::AS2::Environment>::`vftable';
-  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::Environment>Vtbl *)&Scaleform::GFx::AS2::Environment::`vftable';
+  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::Environment>Vtbl *)&Scaleform::GFx::LogBase<Scaleform::GFx::AS2::Environment>::`vftable;
+  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::Environment>Vtbl *)&Scaleform::GFx::AS2::Environment::`vftable;
   Scaleform::GFx::AS2::PagedStack<Scaleform::GFx::AS2::Value,32>::PagedStack<Scaleform::GFx::AS2::Value,32>(&this->Stack);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v1->GlobalRegister,
     0x20ui64,
     4,
@@ -417,20 +417,20 @@ void __fastcall Scaleform::GFx::AS2::Environment::~Environment(Scaleform::GFx::A
   Scaleform::GFx::AS2::Environment *v1; // rbx
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::Environment>Vtbl *)&Scaleform::GFx::AS2::Environment::`vftable';
+  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::Environment>Vtbl *)&Scaleform::GFx::AS2::Environment::`vftable;
   Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::GFx::AS2::Object>,Scaleform::AllocatorLH<Scaleform::Ptr<Scaleform::GFx::AS2::Object>,2>,Scaleform::ArrayDefaultPolicy>::~ArrayDataBase<Scaleform::Ptr<Scaleform::GFx::AS2::Object>,Scaleform::AllocatorLH<Scaleform::Ptr<Scaleform::GFx::AS2::Object>,2>,Scaleform::ArrayDefaultPolicy>((Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::GFx::AS2::Object>,Scaleform::AllocatorLH<Scaleform::Ptr<Scaleform::GFx::AS2::Object>,2>,Scaleform::ArrayDefaultPolicy> *)&this->LocalFrames);
   if ( v1->ThrowingValue.T.Type >= 5u )
     Scaleform::GFx::AS2::Value::DropRefs(&v1->ThrowingValue);
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v1->TryBlocks.Data.Data);
   Scaleform::GFx::AS2::PagedStack<Scaleform::Ptr<Scaleform::GFx::AS2::FunctionObject>,32>::~PagedStack<Scaleform::Ptr<Scaleform::GFx::AS2::FunctionObject>,32>(&v1->CallStack);
   Scaleform::ArrayDataBase<Scaleform::GFx::AS2::Value,Scaleform::AllocatorLH<Scaleform::GFx::AS2::Value,2>,Scaleform::ArrayDefaultPolicy>::~ArrayDataBase<Scaleform::GFx::AS2::Value,Scaleform::AllocatorLH<Scaleform::GFx::AS2::Value,2>,Scaleform::ArrayDefaultPolicy>((Scaleform::ArrayDataBase<Scaleform::GFx::AS2::Value,Scaleform::AllocatorLH<Scaleform::GFx::AS2::Value,323>,Scaleform::ArrayDefaultPolicy> *)&v1->LocalRegister);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->GlobalRegister,
     0x20ui64,
     4,
     (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::~Value);
   Scaleform::GFx::AS2::PagedStack<Scaleform::GFx::AS2::Value,32>::~PagedStack<Scaleform::GFx::AS2::Value,32>(&v1->Stack);
-  v1->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::Environment>Vtbl *)&Scaleform::GFx::LogBase<Scaleform::GFx::AS2::Environment>::`vftable';
+  v1->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::Environment>Vtbl *)&Scaleform::GFx::LogBase<Scaleform::GFx::AS2::Environment>::`vftable;
 }
 
 // File Line: 634

@@ -179,12 +179,12 @@ void __fastcall FindHandler(EHExceptionRecord *pExcept, unsigned __int64 *pRN, _
             {
               v20 = 0i64;
             }
-            if ( type_info::operator==(v20, &std::bad_exception `RTTI Type Descriptor') )
+            if ( type_info::operator==(v20, &std::bad_exception `RTTI Type Descriptor) )
             {
               _DestructExceptionObject(v10, 1);
               _What = "bad exception";
               std::exception::exception(&pExceptionObject, (const char *const *)&_What);
-              pExceptionObject.vfptr = (std::exceptionVtbl *)&std::bad_exception::`vftable';
+              pExceptionObject.vfptr = (std::exceptionVtbl *)&std::bad_exception::`vftable;
               CxxThrowException(&pExceptionObject, &TI2_AVbad_exception_std__);
             }
             ++v17;

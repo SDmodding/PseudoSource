@@ -11,18 +11,18 @@ void __fastcall Render::DecalInstance::~DecalInstance(Render::DecalInstance *thi
   UFG::qNode<Render::FXComponentInstance,Render::FXComponentInstance> *v7; // rax
 
   v1 = this;
-  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::DecalInstance::`vftable';
+  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::DecalInstance::`vftable;
   v2 = (UFG::qResourceHandle *)&this->mSettingsHandle.mPrev;
-  v3 = `UFG::qGetResourceInventory<Render::DecalSettings>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Render::DecalSettings>'::`2'::result )
+  v3 = `UFG::qGetResourceInventory<Render::DecalSettings>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Render::DecalSettings>::`2::result )
   {
     v4 = UFG::qResourceWarehouse::Instance();
     v3 = UFG::qResourceWarehouse::GetInventory(v4, 0xAE323146);
-    `UFG::qGetResourceInventory<Render::DecalSettings>'::`2'::result = v3;
+    `UFG::qGetResourceInventory<Render::DecalSettings>::`2::result = v3;
   }
   UFG::qResourceHandle::Close(v2, v3);
   UFG::qResourceHandle::~qResourceHandle(v2);
-  v1->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable';
+  v1->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable;
   v5 = (UFG::qNode<Render::FXComponentInstance,Render::FXComponentInstance> *)&v1->mPrev;
   v6 = v1->mPrev;
   v7 = v1->mNext;

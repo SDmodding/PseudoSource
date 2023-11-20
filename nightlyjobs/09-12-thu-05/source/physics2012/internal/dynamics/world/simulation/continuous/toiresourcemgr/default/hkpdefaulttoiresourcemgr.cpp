@@ -25,7 +25,7 @@ void __fastcall hkpDefaultToiResourceMgr::hkpDefaultToiResourceMgr(hkpDefaultToi
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_defaultScratchpadSize = 0x20000;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpDefaultToiResourceMgr::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpDefaultToiResourceMgr::`vftable;
 }
 
 // File Line: 31
@@ -96,7 +96,7 @@ void __fastcall hkpDefaultToiResourceMgr::endToiAndFreeResources(hkpDefaultToiRe
 // RVA: 0xDE5A90
 void __fastcall hkpDefaultToiResourceMgr::~hkpDefaultToiResourceMgr(hkpDefaultToiResourceMgr *this)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 91

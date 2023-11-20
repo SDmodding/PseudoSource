@@ -31,7 +31,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::ConstraintDefStiff
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::ConstraintDefStiffSpring,UFG::ConstraintDef>::sInventory.vfptr,
     "UFG::ConstraintDefStiffSpring",
     v0);
-  UFG::qReflectObjectType<UFG::ConstraintDefStiffSpring,UFG::ConstraintDef>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::ConstraintDefStiffSpring>::`vftable';
+  UFG::qReflectObjectType<UFG::ConstraintDefStiffSpring,UFG::ConstraintDef>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::ConstraintDefStiffSpring>::`vftable;
   UFG::qReflectInventory<UFG::ConstraintDefStiffSpring>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::ConstraintDefStiffSpring,UFG::ConstraintDef>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -59,7 +59,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::ConstraintDefFixed
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::ConstraintDefFixed,UFG::ConstraintDef>::sInventory.vfptr,
     "UFG::ConstraintDefFixed",
     v0);
-  UFG::qReflectObjectType<UFG::ConstraintDefFixed,UFG::ConstraintDef>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::ConstraintDefFixed>::`vftable';
+  UFG::qReflectObjectType<UFG::ConstraintDefFixed,UFG::ConstraintDef>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::ConstraintDefFixed>::`vftable;
   UFG::qReflectInventory<UFG::ConstraintDefFixed>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::ConstraintDefFixed,UFG::ConstraintDef>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -106,10 +106,10 @@ void __fastcall UFG::ConstraintAudioEvent::ConstraintAudioEvent(UFG::ConstraintA
   v2 = (UFG::qNode<UFG::Event,UFG::Event> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+  this->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
   this->m_EventUID = v1;
   this->m_NamePTR = 0i64;
-  this->vfptr = (UFG::EventVtbl *)&UFG::ConstraintAudioEvent::`vftable';
+  this->vfptr = (UFG::EventVtbl *)&UFG::ConstraintAudioEvent::`vftable;
   v3 = &this->mConstraint;
   v3->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::Constraint>,UFG::qSafePointerNodeList> *)&v3->mPrev;
   v3->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::Constraint>,UFG::qSafePointerNodeList> *)&v3->mPrev;
@@ -133,7 +133,7 @@ void __fastcall UFG::Constraint::Constraint(UFG::Constraint *this, __int64 _name
   v4 = (UFG::qNode<UFG::Constraint,UFG::Constraint> *)&v3->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  v3->vfptr = (UFG::qSafePointerNode<UFG::Constraint>Vtbl *)&UFG::Constraint::`vftable';
+  v3->vfptr = (UFG::qSafePointerNode<UFG::Constraint>Vtbl *)&UFG::Constraint::`vftable;
   v3->mName.mUID = *v2;
   UFG::qReflectHandleBase::qReflectHandleBase((UFG::qReflectHandleBase *)&v3->mDefinition.mPrev);
   v3->mDefinition.mTypeUID = UFG::qStringHash64("UFG::qReflectObject", 0xFFFFFFFFFFFFFFFFui64);
@@ -169,7 +169,7 @@ void __fastcall UFG::Constraint::Constraint(UFG::Constraint *this, UFG::qReflect
   v8 = (UFG::qNode<UFG::Constraint,UFG::Constraint> *)&v7->mPrev;
   v8->mPrev = v8;
   v8->mNext = v8;
-  v7->vfptr = (UFG::qSafePointerNode<UFG::Constraint>Vtbl *)&UFG::Constraint::`vftable';
+  v7->vfptr = (UFG::qSafePointerNode<UFG::Constraint>Vtbl *)&UFG::Constraint::`vftable;
   v7->mName.mUID = -1;
   UFG::qReflectHandleBase::qReflectHandleBase(
     (UFG::qReflectHandleBase *)&v7->mDefinition.mPrev,
@@ -312,7 +312,7 @@ void __fastcall UFG::Constraint::Constraint(UFG::Constraint *this, UFG::PhysicsO
   v6 = (UFG::qNode<UFG::Constraint,UFG::Constraint> *)&v5->mPrev;
   v6->mPrev = v6;
   v6->mNext = v6;
-  v5->vfptr = (UFG::qSafePointerNode<UFG::Constraint>Vtbl *)&UFG::Constraint::`vftable';
+  v5->vfptr = (UFG::qSafePointerNode<UFG::Constraint>Vtbl *)&UFG::Constraint::`vftable;
   v7 = 0i64;
   v5->mConstraintInstance = 0i64;
   v5->mName.mUID = v4->mName.mUID;
@@ -480,7 +480,7 @@ void __fastcall UFG::Constraint::~Constraint(UFG::Constraint *this)
   UFG::qNode<UFG::qSafePointerBase<UFG::Constraint>,UFG::qSafePointerNodeList> *v9; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::Constraint>Vtbl *)&UFG::Constraint::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::Constraint>Vtbl *)&UFG::Constraint::`vftable;
   v2 = (UFG::qNode<UFG::Constraint,UFG::Constraint> *)&this->mPrev;
   v3 = this->mPrev;
   v4 = this->mNext;
@@ -501,7 +501,7 @@ void __fastcall UFG::Constraint::~Constraint(UFG::Constraint *this)
   v7->mPrev = v6;
   v2->mPrev = v2;
   v2->mNext = v2;
-  v1->vfptr = (UFG::qSafePointerNode<UFG::Constraint>Vtbl *)&UFG::qSafePointerNode<UFG::Constraint>::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::Constraint>Vtbl *)&UFG::qSafePointerNode<UFG::Constraint>::`vftable;
   UFG::qSafePointerNode<UFG::DynamicCoverCorner>::SetAllPointersToNull((UFG::qSafePointerNode<UFG::ParkourHandle> *)v1);
   UFG::qList<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList,1,0>::DeleteNodes((UFG::qList<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList,1,0> *)&v1->m_SafePointerList);
   v8 = v1->m_SafePointerList.mNode.mPrev;

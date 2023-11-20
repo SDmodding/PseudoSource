@@ -25,7 +25,7 @@ void __fastcall UFG::Director::Director(UFG::Director *this, unsigned int nameUI
   v3 = (UFG::qNode<UFG::Director,UFG::Director> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::Director::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::Director::`vftable;
   v2->mCurrentCamera = 0i64;
   v4 = UFG::Director::s_DirectorList.mNode.mPrev;
   UFG::Director::s_DirectorList.mNode.mPrev->mNext = (UFG::qNode<UFG::Director,UFG::Director> *)&v2->mPrev;
@@ -48,7 +48,7 @@ void __fastcall UFG::Director::~Director(UFG::Director *this)
   UFG::qNode<UFG::Director,UFG::Director> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::Director::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::Director::`vftable;
   UFG::gpDirector = 0i64;
   if ( this == UFG::Director::s_DirectorpCurrentIterator )
     UFG::Director::s_DirectorpCurrentIterator = (UFG::Director *)&this->mPrev[-4];

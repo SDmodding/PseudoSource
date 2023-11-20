@@ -173,12 +173,12 @@ void __fastcall Scaleform::GFx::ButtonDef::~ButtonDef(Scaleform::GFx::ButtonDef 
   Scaleform::GFx::ButtonDef *v1; // rbx
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::ButtonDef::`vftable';
+  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::ButtonDef::`vftable;
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, this->pScale9Grid);
   Scaleform::ArrayData<Scaleform::Ptr<Scaleform::GFx::ButtonActionBase>,Scaleform::AllocatorLH<Scaleform::Ptr<Scaleform::GFx::ButtonActionBase>,258>,Scaleform::ArrayDefaultPolicy>::~ArrayData<Scaleform::Ptr<Scaleform::GFx::ButtonActionBase>,Scaleform::AllocatorLH<Scaleform::Ptr<Scaleform::GFx::ButtonActionBase>,258>,Scaleform::ArrayDefaultPolicy>((Scaleform::ArrayData<Scaleform::Ptr<Scaleform::AmpMovieObjectDesc>,Scaleform::AllocatorLH<Scaleform::Ptr<Scaleform::AmpMovieObjectDesc>,2>,Scaleform::ArrayDefaultPolicy> *)&v1->ButtonActions);
   Scaleform::ArrayDataBase<Scaleform::GFx::ButtonRecord,Scaleform::AllocatorLH<Scaleform::GFx::ButtonRecord,258>,Scaleform::ArrayDefaultPolicy>::~ArrayDataBase<Scaleform::GFx::ButtonRecord,Scaleform::AllocatorLH<Scaleform::GFx::ButtonRecord,258>,Scaleform::ArrayDefaultPolicy>((Scaleform::ArrayDataBase<Scaleform::GFx::ButtonRecord,Scaleform::AllocatorLH<Scaleform::GFx::ButtonRecord,258>,Scaleform::ArrayDefaultPolicy> *)&v1->ButtonRecords.Data.Data);
-  v1->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::CharacterDef::`vftable';
-  v1->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::Resource::`vftable';
+  v1->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::CharacterDef::`vftable;
+  v1->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::Resource::`vftable;
 }
 
 // File Line: 142
@@ -448,7 +448,7 @@ void __fastcall Scaleform::GFx::ButtonDef::Read(Scaleform::GFx::ButtonDef *this,
         goto LABEL_27;
       }
 LABEL_59:
-      v17 = "GFx_ButtonLoader - AS3 Button shouldn't have AS2 actions. Skipped.";
+      v17 = "GFx_ButtonLoader - AS3 Button shouldnt have AS2 actions. Skipped.";
       goto LABEL_60;
     case 17:
       Scaleform::GFx::SkipButtonSoundDef(p);

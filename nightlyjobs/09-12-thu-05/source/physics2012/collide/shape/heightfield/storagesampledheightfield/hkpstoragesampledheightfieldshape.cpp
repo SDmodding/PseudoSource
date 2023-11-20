@@ -23,7 +23,7 @@ void __fastcall hkpStorageSampledHeightFieldShape::hkpStorageSampledHeightFieldS
   v4 = this;
   hkpSampledHeightFieldShape::hkpSampledHeightFieldShape((hkpSampledHeightFieldShape *)&this->vfptr, info, 0);
   v5 = 0i64;
-  v4->vfptr = (hkBaseObjectVtbl *)&hkpStorageSampledHeightFieldShape::`vftable';
+  v4->vfptr = (hkBaseObjectVtbl *)&hkpStorageSampledHeightFieldShape::`vftable;
   v4->m_storage.m_data = 0i64;
   v4->m_storage.m_size = 0;
   v4->m_storage.m_capacityAndFlags = 2147483648;
@@ -125,7 +125,7 @@ void __fastcall hkpStorageSampledHeightFieldShape::hkpStorageSampledHeightFieldS
   this->m_coarseTreeData.m_capacityAndFlags = 2147483648;
   v2 = &this->m_storage;
   v3 = hf;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpStorageSampledHeightFieldShape::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpStorageSampledHeightFieldShape::`vftable;
   v2->m_data = 0i64;
   v2->m_size = 0;
   v2->m_capacityAndFlags = 2147483648;
@@ -317,7 +317,7 @@ void __fastcall hkpStorageSampledHeightFieldShape::collideSpheres(hkpStorageSamp
              _mm_add_ps(v3->m_pos.m_quad, v6->m_floatToIntOffsetFloorCorrected.m_quad),
              v6->m_floatToIntScale.m_quad);
       v9 = _mm_xor_si128(
-             (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v8),
+             (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v8),
              _mm_cvttps_epi32(v8));
       v10 = _mm_packs_epi32(v9, v9);
       if ( v10.m128i_u16[0] >= v6->m_xRes - 1 || v10.m128i_u16[2] >= v6->m_zRes - 1 )

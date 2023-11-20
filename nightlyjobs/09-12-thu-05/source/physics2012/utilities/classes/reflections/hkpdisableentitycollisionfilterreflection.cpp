@@ -32,12 +32,12 @@ void __fastcall finishLoadedObjecthkpDisableEntityCollisionFilter(void *p, int f
 {
   if ( p )
   {
-    *(_QWORD *)p = &hkpDisableEntityCollisionFilter::`vftable'{for `hkReferencedObject'};
-    *((_QWORD *)p + 2) = &hkpDisableEntityCollisionFilter::`vftable'{for `hkpCollidableCollidableFilter'};
-    *((_QWORD *)p + 3) = &hkpDisableEntityCollisionFilter::`vftable'{for `hkpShapeCollectionFilter'};
-    *((_QWORD *)p + 4) = &hkpDisableEntityCollisionFilter::`vftable'{for `hkpRayShapeCollectionFilter'};
-    *((_QWORD *)p + 5) = &hkpDisableEntityCollisionFilter::`vftable'{for `hkpRayCollidableFilter'};
-    *((_QWORD *)p + 9) = &hkpDisableEntityCollisionFilter::`vftable';
+    *(_QWORD *)p = &hkpDisableEntityCollisionFilter::`vftable{for `hkReferencedObject};
+    *((_QWORD *)p + 2) = &hkpDisableEntityCollisionFilter::`vftable{for `hkpCollidableCollidableFilter};
+    *((_QWORD *)p + 3) = &hkpDisableEntityCollisionFilter::`vftable{for `hkpShapeCollectionFilter};
+    *((_QWORD *)p + 4) = &hkpDisableEntityCollisionFilter::`vftable{for `hkpRayShapeCollectionFilter};
+    *((_QWORD *)p + 5) = &hkpDisableEntityCollisionFilter::`vftable{for `hkpRayCollidableFilter};
+    *((_QWORD *)p + 9) = &hkpDisableEntityCollisionFilter::`vftable;
   }
 }
 
@@ -52,7 +52,7 @@ void __fastcall cleanupLoadedObjecthkpDisableEntityCollisionFilter(void *p)
 // RVA: 0xE0A980
 void **__fastcall getVtablehkpDisableEntityCollisionFilter()
 {
-  return &hkpDisableEntityCollisionFilter::`vftable'{for `hkReferencedObject'};
+  return &hkpDisableEntityCollisionFilter::`vftable{for `hkReferencedObject};
 }
 
 // File Line: 97

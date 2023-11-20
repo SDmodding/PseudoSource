@@ -7,9 +7,9 @@ void __fastcall Scaleform::SysAllocMapper::SysAllocMapper(Scaleform::SysAllocMap
   unsigned __int64 v7; // rbx
 
   v5 = this;
-  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocBase::`vftable';
-  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocPaged::`vftable';
-  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocMapper::`vftable';
+  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocBase::`vftable;
+  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocPaged::`vftable;
+  this->vfptr = (Scaleform::SysAllocBaseVtbl *)&Scaleform::SysAllocMapper::`vftable;
   this->pMapper = mapper;
   this->PageSize = 0i64;
   this->SegmSize = segSize;

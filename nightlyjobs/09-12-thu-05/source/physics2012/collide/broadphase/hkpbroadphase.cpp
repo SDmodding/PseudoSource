@@ -10,7 +10,7 @@ void __fastcall hkpBroadPhase::hkpBroadPhase(hkpBroadPhase *this, hkpBroadPhase:
   this->m_size = size;
   this->m_caps = caps;
   v4 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpBroadPhase::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpBroadPhase::`vftable;
   v5 = &this->m_multiThreadCheck;
   v5->m_threadId = -15;
   v5->m_markCount = -32768;
@@ -50,18 +50,18 @@ void __fastcall hkpBroadPhase::~hkpBroadPhase(hkpBroadPhase *this)
 
   v1 = this->m_criticalSection;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpBroadPhase::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpBroadPhase::`vftable;
   if ( v1 )
   {
     DeleteCriticalSection(&v1->m_section);
     v3 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
     (*(void (__fastcall **)(_QWORD *, hkCriticalSection *, signed __int64))(*v3[11] + 16i64))(v3[11], v1, 40i64);
     v2->m_criticalSection = 0i64;
-    v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+    v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
   }
   else
   {
-    this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+    this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
   }
 }
 

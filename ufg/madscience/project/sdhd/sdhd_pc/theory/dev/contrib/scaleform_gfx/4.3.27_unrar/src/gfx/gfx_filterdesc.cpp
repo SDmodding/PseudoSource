@@ -375,15 +375,15 @@ __int64 __fastcall Scaleform::GFx::LoadFilters<Scaleform::GFx::StreamContext>(Sc
         v11 = ((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))v7->vfptr->Alloc)(v7, 80i64);
         if ( v11 )
         {
-          *(_QWORD *)v11 = &Scaleform::RefCountImplCore::`vftable';
+          *(_QWORD *)v11 = &Scaleform::RefCountImplCore::`vftable;
           *(_DWORD *)(v11 + 8) = 1;
-          *(_QWORD *)v11 = &Scaleform::RefCountImpl::`vftable';
-          *(_QWORD *)v11 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-          *(_QWORD *)v11 = &Scaleform::RefCountBase<Scaleform::Render::Filter,2>::`vftable';
-          *(_QWORD *)v11 = &Scaleform::Render::Filter::`vftable';
+          *(_QWORD *)v11 = &Scaleform::RefCountImpl::`vftable;
+          *(_QWORD *)v11 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+          *(_QWORD *)v11 = &Scaleform::RefCountBase<Scaleform::Render::Filter,2>::`vftable;
+          *(_QWORD *)v11 = &Scaleform::Render::Filter::`vftable;
           *(_DWORD *)(v11 + 16) = 0;
           *(_BYTE *)(v11 + 20) = 0;
-          *(_QWORD *)v11 = &Scaleform::Render::BlurFilterImpl::`vftable';
+          *(_QWORD *)v11 = &Scaleform::Render::BlurFilterImpl::`vftable;
           v14 = v11 + 24;
           *(_DWORD *)v14 = params.Mode;
           *(_DWORD *)(v14 + 4) = params.Passes;
@@ -403,7 +403,7 @@ __int64 __fastcall Scaleform::GFx::LoadFilters<Scaleform::GFx::StreamContext>(Sc
           }
           *(_QWORD *)(v11 + 64) = v16;
           *(_QWORD *)(v11 + 72) = 0i64;
-          *(_QWORD *)v11 = &Scaleform::Render::BlurFilter::`vftable';
+          *(_QWORD *)v11 = &Scaleform::Render::BlurFilter::`vftable;
           v2 = v57;
         }
         else
@@ -416,15 +416,15 @@ __int64 __fastcall Scaleform::GFx::LoadFilters<Scaleform::GFx::StreamContext>(Sc
         v11 = ((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))v7->vfptr->Alloc)(v7, 80i64);
         if ( v11 )
         {
-          *(_QWORD *)v11 = &Scaleform::RefCountImplCore::`vftable';
+          *(_QWORD *)v11 = &Scaleform::RefCountImplCore::`vftable;
           *(_DWORD *)(v11 + 8) = 1;
-          *(_QWORD *)v11 = &Scaleform::RefCountImpl::`vftable';
-          *(_QWORD *)v11 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-          *(_QWORD *)v11 = &Scaleform::RefCountBase<Scaleform::Render::Filter,2>::`vftable';
-          *(_QWORD *)v11 = &Scaleform::Render::Filter::`vftable';
+          *(_QWORD *)v11 = &Scaleform::RefCountImpl::`vftable;
+          *(_QWORD *)v11 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+          *(_QWORD *)v11 = &Scaleform::RefCountBase<Scaleform::Render::Filter,2>::`vftable;
+          *(_QWORD *)v11 = &Scaleform::Render::Filter::`vftable;
           *(_DWORD *)(v11 + 16) = 2;
           *(_BYTE *)(v11 + 20) = 0;
-          *(_QWORD *)v11 = &Scaleform::Render::BlurFilterImpl::`vftable';
+          *(_QWORD *)v11 = &Scaleform::Render::BlurFilterImpl::`vftable;
           v17 = v11 + 24;
           *(_DWORD *)v17 = params.Mode;
           *(_DWORD *)(v17 + 4) = params.Passes;
@@ -444,7 +444,7 @@ __int64 __fastcall Scaleform::GFx::LoadFilters<Scaleform::GFx::StreamContext>(Sc
           }
           *(_QWORD *)(v11 + 64) = v19;
           *(_QWORD *)(v11 + 72) = 0i64;
-          *(_QWORD *)v11 = &Scaleform::Render::GlowFilter::`vftable';
+          *(_QWORD *)v11 = &Scaleform::Render::GlowFilter::`vftable;
           v2 = v57;
         }
         else
@@ -533,7 +533,7 @@ __int64 __fastcall Scaleform::GFx::LoadFilters<Scaleform::GFx::StreamContext>(Sc
         }
         if ( v11 )
           Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)v11);
-        v31 = (unsigned __int8 *)&`Scaleform::GFx::LoadFilters<Scaleform::GFx::StreamContext>'::`10'::Index[1];
+        v31 = (unsigned __int8 *)&`Scaleform::GFx::LoadFilters<Scaleform::GFx::StreamContext>::`10::Index[1];
         v32 = 2i64;
         do
         {

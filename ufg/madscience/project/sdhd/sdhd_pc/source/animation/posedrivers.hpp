@@ -116,13 +116,13 @@ void __fastcall TwoLinkIKsolver::TwoLinkIKsolver(TwoLinkIKsolver *this, MemImage
 {
   UFG::qNode<PoseDriver,PoseDriver> *v2; // rax
 
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
   v2 = (UFG::qNode<PoseDriver,PoseDriver> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (Expression::IMemberMapVtbl *)&PoseDriver::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&TwoLinkIKsolver::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&PoseDriver::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&TwoLinkIKsolver::`vftable;
   this->mLinkInfo.m_firstJointIdx = -1;
   this->mLinkInfo.m_secondJointIdx = -1;
   this->mLinkInfo.m_endBoneIdx = -1;
@@ -200,17 +200,17 @@ TwistXRotLinearLink *__fastcall TwistXRotLinearLink::Create()
   v0 = UFG::qMemoryPool2::Allocate(&gActionTreeMemoryPool, 0x60ui64, "MemberMap::TwistXRotLinearLink", 0i64, 1u);
   if ( !v0 )
     return 0i64;
-  *(_QWORD *)v0 = &Expression::IMemberMap::`vftable';
+  *(_QWORD *)v0 = &Expression::IMemberMap::`vftable;
   *((_QWORD *)v0 + 1) = 0i64;
   v1 = v0 + 16;
   *v1 = v1;
   v1[1] = v1;
-  *(_QWORD *)v0 = &PoseDriver::`vftable';
+  *(_QWORD *)v0 = &PoseDriver::`vftable;
   *((_WORD *)v0 + 20) = 0;
   v0[42] = 0;
   *((_DWORD *)v0 + 11) = -1;
   *((UFG::qStaticSymbolUC *)v0 + 11) = symEffectorNone;
-  *(_QWORD *)v0 = &TwistXRotLinearLink::`vftable';
+  *(_QWORD *)v0 = &TwistXRotLinearLink::`vftable;
   *((UFG::qSymbolUC *)v0 + 14) = UFG::gNullQSymbolUC;
   *((UFG::qSymbolUC *)v0 + 15) = UFG::gNullQSymbolUC;
   *((UFG::qSymbolUC *)v0 + 16) = UFG::gNullQSymbolUC;

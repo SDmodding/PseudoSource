@@ -13,8 +13,8 @@ void __fastcall Scaleform::GFx::DisplayObjContainer::DisplayObjContainer(Scalefo
     pasRoot,
     pparent,
     (Scaleform::GFx::ResourceId)&id);
-  v5->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::DisplayObjContainer::`vftable'{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>'};
-  v5->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::DisplayObjContainer::`vftable'{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>'};
+  v5->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::DisplayObjContainer::`vftable{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>};
+  v5->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::DisplayObjContainer::`vftable{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>};
   v6 = &v5->mDisplayList;
   *(_QWORD *)&id.Id = v6;
   v6->DisplayObjectArray.Data.Data = 0i64;
@@ -38,8 +38,8 @@ void __fastcall Scaleform::GFx::DisplayObjContainer::~DisplayObjContainer(Scalef
   Scaleform::GFx::MovieDefRootNode *v4; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::DisplayObjContainer::`vftable'{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>'};
-  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::DisplayObjContainer::`vftable'{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>'};
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::DisplayObjContainer::`vftable{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>};
+  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::DisplayObjContainer::`vftable{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>};
   v2 = this->pRootNode;
   if ( v2 )
   {
@@ -1151,12 +1151,12 @@ void __fastcall Scaleform::GFx::DisplayObjContainer::GetChildDescTree(Scaleform:
       v19 = v9;
       if ( v9 )
       {
-        *(_QWORD *)v9 = &Scaleform::RefCountImplCore::`vftable';
+        *(_QWORD *)v9 = &Scaleform::RefCountImplCore::`vftable;
         *(_DWORD *)(v9 + 8) = 1;
-        *(_QWORD *)v9 = &Scaleform::RefCountImpl::`vftable';
-        *(_QWORD *)v9 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-        *(_QWORD *)v9 = &Scaleform::RefCountBase<Scaleform::AmpMovieObjectDesc,2>::`vftable';
-        *(_QWORD *)v9 = &Scaleform::AmpMovieObjectDesc::`vftable';
+        *(_QWORD *)v9 = &Scaleform::RefCountImpl::`vftable;
+        *(_QWORD *)v9 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+        *(_QWORD *)v9 = &Scaleform::RefCountBase<Scaleform::AmpMovieObjectDesc,2>::`vftable;
+        *(_QWORD *)v9 = &Scaleform::AmpMovieObjectDesc::`vftable;
         Scaleform::StringLH::StringLH((Scaleform::StringLH *)(v9 + 16));
         v10 = (_QWORD *)(v9 + 24);
         v20 = v10;

@@ -42,8 +42,8 @@ void __fastcall ConversationTrackCreate::~ConversationTrackCreate(ConversationTr
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&ConversationTrackCreate::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&ConversationTrackCreate::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -54,7 +54,7 @@ void __fastcall ConversationTrackCreate::~ConversationTrackCreate(ConversationTr
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 264
@@ -73,8 +73,8 @@ void __fastcall ConversationTrackCleanup::~ConversationTrackCleanup(Conversation
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&ConversationTrackCleanup::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&ConversationTrackCleanup::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -85,7 +85,7 @@ void __fastcall ConversationTrackCleanup::~ConversationTrackCleanup(Conversation
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 287
@@ -100,8 +100,8 @@ ConversationTrackCleanup *__fastcall ConversationTrackCleanup::Create()
   if ( !v0 )
     return 0i64;
   ITrack::ITrack((ITrack *)v0, ConversationTrackCleanup::sClassNameUID);
-  *(_QWORD *)v1 = &Track<ConversationTaskCleanup>::`vftable';
-  *(_QWORD *)v1 = &ConversationTrackCleanup::`vftable';
+  *(_QWORD *)v1 = &Track<ConversationTaskCleanup>::`vftable;
+  *(_QWORD *)v1 = &ConversationTrackCleanup::`vftable;
   return (ConversationTrackCleanup *)v1;
 }
 
@@ -114,8 +114,8 @@ void __fastcall ConversationTrackOperation::~ConversationTrackOperation(Conversa
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&ConversationTrackOperation::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&ConversationTrackOperation::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -126,7 +126,7 @@ void __fastcall ConversationTrackOperation::~ConversationTrackOperation(Conversa
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 305
@@ -145,8 +145,8 @@ void __fastcall ConversationTrackInterrupt::~ConversationTrackInterrupt(Conversa
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&ConversationTrackInterrupt::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&ConversationTrackInterrupt::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -157,7 +157,7 @@ void __fastcall ConversationTrackInterrupt::~ConversationTrackInterrupt(Conversa
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 328

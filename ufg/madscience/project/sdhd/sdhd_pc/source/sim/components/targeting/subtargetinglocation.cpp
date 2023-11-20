@@ -141,7 +141,7 @@ void __fastcall UFG::SubTargetingLocation::InitFromPropertySet(UFG::SubTargeting
 // RVA: 0x1543900
 __int64 dynamic_initializer_for__UFG::SubTargetingLocations::ms_SubTargetingLocationPool__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     UFG::SubTargetingLocations::ms_SubTargetingLocationPool.p,
     0x40ui64,
     32,

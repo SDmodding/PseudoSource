@@ -502,7 +502,7 @@ UFG::qResourceData *__fastcall Illusion::Factory::NewModel(const char *name, uns
         UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)(v44 + 32));
         v51 = v44 + 64;
         UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)(v44 + 64));
-        `eh vector constructor iterator'(
+        `eh vector constructor iterator(
           (void *)(v44 + 96),
           0x20ui64,
           4,

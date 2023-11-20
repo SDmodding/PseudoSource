@@ -6,7 +6,7 @@ void __fastcall hkxScene::hkxScene(hkxScene *this)
 
   v1 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkxScene::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkxScene::`vftable;
   hkStringPtr::hkStringPtr(&this->m_modeller);
   hkStringPtr::hkStringPtr(&v1->m_asset);
   *(_QWORD *)&v1->m_sceneLength = 0i64;
@@ -96,7 +96,7 @@ void __fastcall hkxScene::~hkxScene(hkxScene *this)
   hkReferencedObject *v47; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkxScene::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkxScene::`vftable;
   v2 = this->m_splines.m_data;
   v3 = this->m_splines.m_size - 1;
   for ( i = v3; i >= 0; v2[i--].m_pntr = 0i64 )
@@ -256,7 +256,7 @@ void __fastcall hkxScene::~hkxScene(hkxScene *this)
   v1->m_rootNode.m_pntr = 0i64;
   hkStringPtr::~hkStringPtr(&v1->m_asset);
   hkStringPtr::~hkStringPtr(&v1->m_modeller);
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 24

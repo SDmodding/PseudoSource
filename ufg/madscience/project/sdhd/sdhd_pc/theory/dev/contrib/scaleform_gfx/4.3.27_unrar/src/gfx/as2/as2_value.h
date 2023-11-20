@@ -265,8 +265,8 @@ void __fastcall Scaleform::GFx::AS2::Value::Lsr(Scaleform::GFx::AS2::Value *this
 // RVA: 0x6C88A0
 void __fastcall Scaleform::GFx::AS2::FnCall::FnCall(Scaleform::GFx::AS2::FnCall *this, Scaleform::GFx::AS2::Value *ResIn, Scaleform::GFx::AS2::ObjectInterface *ThisIn, Scaleform::GFx::AS2::Environment *EnvIn, int NargsIn, int FirstIn)
 {
-  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>Vtbl *)&Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>::`vftable';
-  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>Vtbl *)&Scaleform::GFx::AS2::FnCall::`vftable';
+  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>Vtbl *)&Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>::`vftable;
+  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>Vtbl *)&Scaleform::GFx::AS2::FnCall::`vftable;
   this->Result = ResIn;
   this->ThisPtr = ThisIn;
   this->ThisFunctionRef.Flags = 0;
@@ -295,8 +295,8 @@ void __fastcall Scaleform::GFx::AS2::FnCall::FnCall(Scaleform::GFx::AS2::FnCall 
   v6 = EnvIn;
   v7 = ThisIn;
   v8 = this;
-  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>Vtbl *)&Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>::`vftable';
-  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>Vtbl *)&Scaleform::GFx::AS2::FnCall::`vftable';
+  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>Vtbl *)&Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>::`vftable;
+  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>Vtbl *)&Scaleform::GFx::AS2::FnCall::`vftable;
   this->Result = ResIn;
   this->ThisPtr = Scaleform::GFx::AS2::Value::ToObjectInterface(ThisIn, EnvIn);
   v8->ThisFunctionRef.Flags = 0;
@@ -354,7 +354,7 @@ void __fastcall Scaleform::GFx::AS2::FnCall::~FnCall(Scaleform::GFx::AS2::FnCall
   unsigned int v5; // eax
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>Vtbl *)&Scaleform::GFx::AS2::FnCall::`vftable';
+  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>Vtbl *)&Scaleform::GFx::AS2::FnCall::`vftable;
   if ( !(this->ThisFunctionRef.Flags & 2) )
   {
     v2 = this->ThisFunctionRef.Function;
@@ -383,6 +383,6 @@ void __fastcall Scaleform::GFx::AS2::FnCall::~FnCall(Scaleform::GFx::AS2::FnCall
     }
   }
   v1->ThisFunctionRef.pLocalFrame = 0i64;
-  v1->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>Vtbl *)&Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>::`vftable';
+  v1->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>Vtbl *)&Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>::`vftable;
 }
 

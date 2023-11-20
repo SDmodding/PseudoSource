@@ -5,7 +5,7 @@ void __fastcall RumbleBusBase::RumbleBusBase(RumbleBusBase *this)
   RumbleBusBase *v1; // rbx
 
   v1 = this;
-  this->vfptr = (AK::IAkPluginVtbl *)&RumbleBusBase::`vftable';
+  this->vfptr = (AK::IAkPluginVtbl *)&RumbleBusBase::`vftable;
   memset(this->m_pData, 0, 0x80ui64);
   *(_DWORD *)&v1->m_iDrift = 0x1000000;
   *(_QWORD *)&v1->m_usWriteBuffer = 0i64;

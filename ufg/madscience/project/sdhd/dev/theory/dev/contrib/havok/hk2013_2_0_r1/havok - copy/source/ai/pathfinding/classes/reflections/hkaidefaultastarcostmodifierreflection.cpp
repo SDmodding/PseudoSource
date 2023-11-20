@@ -31,7 +31,7 @@ hkClass *__fastcall hkaiDefaultAstarCostModifier::staticClass()
 void __fastcall finishLoadedObjecthkaiDefaultAstarCostModifier(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiDefaultAstarCostModifier::`vftable';
+    *(_QWORD *)p = &hkaiDefaultAstarCostModifier::`vftable;
 }
 
 // File Line: 90
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkaiDefaultAstarCostModifier(void *p)
 // RVA: 0xBB64E0
 void **__fastcall getVtablehkaiDefaultAstarCostModifier()
 {
-  return &hkaiDefaultAstarCostModifier::`vftable';
+  return &hkaiDefaultAstarCostModifier::`vftable;
 }
 
 // File Line: 116

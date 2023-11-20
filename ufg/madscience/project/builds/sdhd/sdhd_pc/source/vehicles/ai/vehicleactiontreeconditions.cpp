@@ -17,7 +17,7 @@ void __fastcall CarModeCondition::CarModeCondition(CarModeCondition *this)
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CarModeCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CarModeCondition::`vftable;
   v1->mMode.mValue = 0;
 }
 
@@ -65,7 +65,7 @@ void __fastcall CarEscortMode::CarEscortMode(CarEscortMode *this)
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CarEscortMode::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CarEscortMode::`vftable;
   v1->mEscortMode.mValue = 0;
 }
 
@@ -113,7 +113,7 @@ void __fastcall CarAtOffset::CarAtOffset(CarAtOffset *this)
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CarAtOffset::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CarAtOffset::`vftable;
   v1->mTime = 0.0;
   *(_WORD *)&v1->mPosition.mValue = 768;
 }
@@ -162,7 +162,7 @@ void __fastcall CarAttackStat::CarAttackStat(CarAttackStat *this)
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CarAttackStat::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CarAttackStat::`vftable;
   v1->mAttackType.mValue = 0;
   v1->mNumAttacks = 0;
 }
@@ -211,7 +211,7 @@ void __fastcall CarLastAttack::CarLastAttack(CarLastAttack *this)
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CarLastAttack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CarLastAttack::`vftable;
   v1->mAttackType.mValue = 0;
   v1->mAttackTime = 0.0;
 }
@@ -260,7 +260,7 @@ void __fastcall CarFormationAttackStat::CarFormationAttackStat(CarFormationAttac
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CarFormationAttackStat::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CarFormationAttackStat::`vftable;
   v1->mAttackType.mValue = 0;
   v1->mNumAttacks = 0;
 }
@@ -310,7 +310,7 @@ void __fastcall CarDistanceToEscortEnemy::CarDistanceToEscortEnemy(CarDistanceTo
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CarDistanceToEscortEnemy::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CarDistanceToEscortEnemy::`vftable;
   v1->mInEqualityOperator.mValue = 4;
   v1->mDistance = 10.0;
 }
@@ -389,7 +389,7 @@ void __fastcall CarLastFormationAttack::CarLastFormationAttack(CarLastFormationA
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CarLastFormationAttack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CarLastFormationAttack::`vftable;
   v1->mAttackType.mValue = 0;
   v1->mAttackTime = 0.0;
 }
@@ -439,7 +439,7 @@ void __fastcall CarWithinRange::CarWithinRange(CarWithinRange *this)
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CarWithinRange::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CarWithinRange::`vftable;
   v1->mRange = 0.0;
 }
 
@@ -523,7 +523,7 @@ void __fastcall CarFormationAvailable::CarFormationAvailable(CarFormationAvailab
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CarFormationAvailable::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CarFormationAvailable::`vftable;
   v1->mAvailable = 0;
 }
 
@@ -570,7 +570,7 @@ void __fastcall CarFormationAssignedPosition::CarFormationAssignedPosition(CarFo
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CarFormationAssignedPosition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CarFormationAssignedPosition::`vftable;
   v1->mPosition.mValue = 0;
 }
 
@@ -640,7 +640,7 @@ void __fastcall CarAtFormation::CarAtFormation(CarAtFormation *this)
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CarAtFormation::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CarAtFormation::`vftable;
   v1->mGroupWaitTime = 0.0;
 }
 
@@ -689,7 +689,7 @@ void __fastcall CarFormationTimeout::CarFormationTimeout(CarFormationTimeout *th
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CarFormationTimeout::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CarFormationTimeout::`vftable;
   v1->mTimeout = 0.0;
 }
 
@@ -738,7 +738,7 @@ void __fastcall CarFormationNumChasers::CarFormationNumChasers(CarFormationNumCh
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CarFormationNumChasers::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CarFormationNumChasers::`vftable;
   v1->mCount = 0;
   v1->mInEqualityOperator.mValue = 0;
 }
@@ -791,7 +791,7 @@ void __fastcall CarFormationNumChasersInRange::CarFormationNumChasersInRange(Car
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CarFormationNumChasersInRange::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CarFormationNumChasersInRange::`vftable;
   v1->mCount = 0;
   v1->mInEqualityOperator.mValue = 0;
   v1->mRange = 0.0;
@@ -1408,7 +1408,7 @@ void __fastcall CarRoleCondition::CarRoleCondition(CarRoleCondition *this)
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CarRoleCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&CarRoleCondition::`vftable;
   v1->mRole.mValue = 6;
 }
 
@@ -1456,7 +1456,7 @@ void __fastcall VehicleInTrafficJamCondition::VehicleInTrafficJamCondition(Vehic
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleInTrafficJamCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleInTrafficJamCondition::`vftable;
 }
 
 // File Line: 947
@@ -1501,7 +1501,7 @@ void __fastcall VehicleIsAvoidingCondition::VehicleIsAvoidingCondition(VehicleIs
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleIsAvoidingCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleIsAvoidingCondition::`vftable;
   v1->mTypeSet.mValue = 0;
 }
 
@@ -1638,7 +1638,7 @@ void __fastcall VehicleNumberOfPassengersCondition::VehicleNumberOfPassengersCon
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleNumberOfPassengersCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&VehicleNumberOfPassengersCondition::`vftable;
   v1->mInEqualityOperator.mValue = 1;
   v1->mQuantity = 0;
 }
@@ -1729,7 +1729,7 @@ void __fastcall TransitDistanceToGoalLocationCondition::TransitDistanceToGoalLoc
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TransitDistanceToGoalLocationCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&TransitDistanceToGoalLocationCondition::`vftable;
   v1->mInEqualityOperator.mValue = 2;
   v1->mDistance = 20.0;
 }

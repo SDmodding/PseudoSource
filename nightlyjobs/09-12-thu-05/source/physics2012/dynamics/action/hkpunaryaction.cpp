@@ -7,14 +7,14 @@ void __fastcall hkpUnaryAction::hkpUnaryAction(hkpUnaryAction *this, hkpEntity *
 
   v3 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpAction::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpAction::`vftable;
   this->m_userData = userData;
   this->m_world = 0i64;
   this->m_island = 0i64;
   v4 = entity;
   hkStringPtr::hkStringPtr(&this->m_name);
   v3->m_entity = v4;
-  v3->vfptr = (hkBaseObjectVtbl *)&hkpUnaryAction::`vftable';
+  v3->vfptr = (hkBaseObjectVtbl *)&hkpUnaryAction::`vftable;
   if ( v4 )
     hkReferencedObject::addReference((hkReferencedObject *)&v4->vfptr);
 }
@@ -35,16 +35,16 @@ void __fastcall hkpUnaryAction::~hkpUnaryAction(hkpUnaryAction *this)
   hkpEntity *v2; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpUnaryAction::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpUnaryAction::`vftable;
   v2 = this->m_entity;
   if ( v2 )
   {
     hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
     v1->m_entity = 0i64;
   }
-  v1->vfptr = (hkBaseObjectVtbl *)&hkpAction::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkpAction::`vftable;
   hkStringPtr::~hkStringPtr(&v1->m_name);
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 48

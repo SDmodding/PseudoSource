@@ -196,13 +196,13 @@ void __fastcall Render::cbShadowTransformState::SetStateBlock(Render::cbShadowTr
     v3->mCached_Remote.m_Stream = v4;
     if ( v4 )
     {
-      if ( !(`Render::cbShadowTransformState::SetStateBlock'::`8'::`local static guard' & 1) )
+      if ( !(`Render::cbShadowTransformState::SetStateBlock::`8::`local static guard & 1) )
       {
-        `Render::cbShadowTransformState::SetStateBlock'::`8'::`local static guard' |= 1u;
-        `Render::cbShadowTransformState::SetStateBlock'::`8'::viewCorrector.v0 = (UFG::qVector4)_xmm;
-        `Render::cbShadowTransformState::SetStateBlock'::`8'::viewCorrector.v1 = (UFG::qVector4)_xmm;
-        `Render::cbShadowTransformState::SetStateBlock'::`8'::viewCorrector.v2 = (UFG::qVector4)_xmm;
-        `Render::cbShadowTransformState::SetStateBlock'::`8'::viewCorrector.v3 = (UFG::qVector4)_xmm;
+        `Render::cbShadowTransformState::SetStateBlock::`8::`local static guard |= 1u;
+        `Render::cbShadowTransformState::SetStateBlock::`8::viewCorrector.v0 = (UFG::qVector4)_xmm;
+        `Render::cbShadowTransformState::SetStateBlock::`8::viewCorrector.v1 = (UFG::qVector4)_xmm;
+        `Render::cbShadowTransformState::SetStateBlock::`8::viewCorrector.v2 = (UFG::qVector4)_xmm;
+        `Render::cbShadowTransformState::SetStateBlock::`8::viewCorrector.v3 = (UFG::qVector4)_xmm;
       }
       v5 = (char *)v3->mCached_Remote.m_Stream;
       v6 = 0;
@@ -213,7 +213,7 @@ void __fastcall Render::cbShadowTransformState::SetStateBlock(Render::cbShadowTr
         v9 = (UFG::qMatrix44 *)((char *)v3->mProjection + v8);
         v10 = UFG::qMatrix44::operator*(v3->mViewWorld, &result, (UFG::qMatrix44 *)((char *)v3->mWorldView + v8));
         v11 = UFG::qMatrix44::operator*(v10, &v22, v9);
-        v12 = UFG::qMatrix44::operator*(v11, &v23, &`Render::cbShadowTransformState::SetStateBlock'::`8'::viewCorrector);
+        v12 = UFG::qMatrix44::operator*(v11, &v23, &`Render::cbShadowTransformState::SetStateBlock::`8::viewCorrector);
         v13 = v12->v1;
         v14 = v12->v2;
         v15 = v12->v3;

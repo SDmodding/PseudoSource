@@ -29,8 +29,8 @@ void __fastcall UFG::BikePhysicsMoverComponent::BikePhysicsMoverComponent(UFG::B
   v4 = (UFG::qNode<UFG::BikePhysicsMoverComponent,UFG::BikePhysicsMoverComponent> *)&v3->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BikePhysicsMoverComponent::`vftable'{for `UFG::SimComponent'};
-  v3->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::BikePhysicsMoverComponent::`vftable'{for `UFG::UpdateInterface'};
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BikePhysicsMoverComponent::`vftable{for `UFG::SimComponent};
+  v3->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::BikePhysicsMoverComponent::`vftable{for `UFG::UpdateInterface};
   v5 = UFG::BikePhysicsMoverComponent::s_BikePhysicsMoverComponentList.mNode.mPrev;
   UFG::BikePhysicsMoverComponent::s_BikePhysicsMoverComponentList.mNode.mPrev->mNext = (UFG::qNode<UFG::BikePhysicsMoverComponent,UFG::BikePhysicsMoverComponent> *)&v3->mPrev;
   v4->mPrev = v5;
@@ -54,8 +54,8 @@ void __fastcall UFG::BikePhysicsMoverComponent::~BikePhysicsMoverComponent(UFG::
   UFG::qNode<UFG::BikePhysicsMoverComponent,UFG::BikePhysicsMoverComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BikePhysicsMoverComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::BikePhysicsMoverComponent::`vftable'{for `UFG::UpdateInterface'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BikePhysicsMoverComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::BikePhysicsMoverComponent::`vftable{for `UFG::UpdateInterface};
   if ( this == UFG::BikePhysicsMoverComponent::s_BikePhysicsMoverComponentpCurrentIterator )
     UFG::BikePhysicsMoverComponent::s_BikePhysicsMoverComponentpCurrentIterator = (UFG::BikePhysicsMoverComponent *)&this->mPrev[-58].mNext;
   v2 = (UFG::qNode<UFG::BikePhysicsMoverComponent,UFG::BikePhysicsMoverComponent> *)&this->mPrev;

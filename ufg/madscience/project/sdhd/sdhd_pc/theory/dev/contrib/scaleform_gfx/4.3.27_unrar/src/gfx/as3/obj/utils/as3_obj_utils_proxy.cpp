@@ -560,7 +560,7 @@ Scaleform::GFx::AS3::CheckResult *__fastcall Scaleform::GFx::AS3::Instances::fl_
     {
       v6->Result = 0;
     }
-    `eh vector destructor iterator'(&name, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+    `eh vector destructor iterator(&name, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
     if ( (other.Flags & 0x1F) > 9 )
     {
       if ( (other.Flags >> 9) & 1 )
@@ -975,11 +975,11 @@ LABEL_23:
       else
         Scaleform::GFx::AS3::Value::ReleaseInternal(&v19);
     }
-    `eh vector destructor iterator'(&name, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+    `eh vector destructor iterator(&name, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
     goto LABEL_23;
   }
   v6->Result = 0;
-  `eh vector destructor iterator'(&name, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&name, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
   if ( ((_QWORD)v17.Message.pNode & 0x1F) > 9 )
   {
     if ( (LODWORD(v17.Message.pNode) >> 9) & 1 )
@@ -1212,7 +1212,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::GetNextProperty
     else
       Scaleform::GFx::AS3::Value::ReleaseInternal(&v20);
   }
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
   if ( (func.Flags & 0x1F) > 9 )
   {
     if ( (func.Flags >> 9) & 1 )
@@ -1318,7 +1318,7 @@ Scaleform::GFx::AS3::GlobalSlotIndex *__fastcall Scaleform::GFx::AS3::Instances:
   {
     v3->Index = (unsigned int)resulta.pNode;
   }
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
   if ( (other.Flags & 0x1F) > 9 )
   {
     if ( (other.Flags >> 9) & 1 )
@@ -1420,7 +1420,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::GetNextProperty
     else
       Scaleform::GFx::AS3::Value::ReleaseInternal(&v20);
   }
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
   if ( (func.Flags & 0x1F) > 9 )
   {
     if ( (func.Flags >> 9) & 1 )
@@ -1614,7 +1614,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v5 )
   {
     Scaleform::GFx::AS3::ClassTraits::fl::Object::Object(v5, v2, &Scaleform::GFx::AS3::fl_utils::ProxyCI);
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_utils::Proxy::`vftable';
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_utils::Proxy::`vftable;
   }
   else
   {
@@ -1626,7 +1626,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v7 )
   {
     Scaleform::GFx::AS3::InstanceTraits::fl::Object::Object(v7, v2, &Scaleform::GFx::AS3::fl_utils::ProxyCI);
-    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_utils::Proxy::`vftable';
+    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_utils::Proxy::`vftable;
   }
   else
   {

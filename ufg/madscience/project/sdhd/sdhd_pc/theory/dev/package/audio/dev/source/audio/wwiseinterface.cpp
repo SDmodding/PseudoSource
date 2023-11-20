@@ -99,8 +99,8 @@ void __fastcall UFG::WwiseInterface::InitializeSoundEngine(UFG::SoundEngineInitP
   *(_QWORD *)&result[0].mUID = v2;
   if ( v2 )
   {
-    v2->vfptr = (AK::StreamMgr::IAkFileLocationResolverVtbl *)&AK::StreamMgr::IAkFileLocationResolver::`vftable';
-    v2->vfptr = (AK::StreamMgr::IAkFileLocationResolverVtbl *)&UFG::LowLevelIODispatcher::`vftable';
+    v2->vfptr = (AK::StreamMgr::IAkFileLocationResolverVtbl *)&AK::StreamMgr::IAkFileLocationResolver::`vftable;
+    v2->vfptr = (AK::StreamMgr::IAkFileLocationResolverVtbl *)&UFG::LowLevelIODispatcher::`vftable;
     v2->m_arDevices[0] = 0i64;
     v2->m_arDevices[1] = 0i64;
     v2->m_arDevices[2] = 0i64;

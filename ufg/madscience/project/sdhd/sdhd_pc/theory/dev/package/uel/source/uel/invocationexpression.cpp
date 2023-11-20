@@ -26,12 +26,12 @@ void __fastcall UEL::InvocationExpression::InvocationExpression(UEL::InvocationE
   v4 = numExpressions;
   v5 = expressions;
   v6 = this;
-  this->vfptr = (UEL::ExpressionVtbl *)&UEL::Expression::`vftable';
+  this->vfptr = (UEL::ExpressionVtbl *)&UEL::Expression::`vftable;
   this->mType.mValue = 3;
   this->mValueType.mBaseType.mValue = 0;
   this->mValueType.mDetailedType = UFG::gNullQSymbol;
   *(_DWORD *)&this->mResolved = 0;
-  this->vfptr = (UEL::ExpressionVtbl *)&UEL::InvocationExpression::`vftable';
+  this->vfptr = (UEL::ExpressionVtbl *)&UEL::InvocationExpression::`vftable;
   this->mIdentifier.mUID = -1;
   this->mNumExpressions = numExpressions;
   this->mFunctionTableIndex = -1;
@@ -208,7 +208,7 @@ UEL::Value *__fastcall UEL::InvocationExpression::Eval(UEL::InvocationExpression
   UFG::qString::~qString(&resulta);
   v16.type.mBaseType.mValue = 0;
   v16.type.mDetailedType = UFG::gNullQSymbol;
-  `eh vector constructor iterator'(ptr, 0x20ui64, 8, (void (__fastcall *)(void *))UEL::Value::Value);
+  `eh vector constructor iterator(ptr, 0x20ui64, 8, (void (__fastcall *)(void *))UEL::Value::Value);
   v9 = 0;
   if ( v7->mNumExpressions > 0 )
   {
@@ -272,7 +272,7 @@ UEL::Value *__fastcall UEL::InvocationExpression::Eval(UEL::InvocationExpression
   v6->qVector_w = v16.qVector_w;
   v6->type.mBaseType.mValue = v16.type.mBaseType.mValue;
   v6->type.mDetailedType.mUID = v16.type.mDetailedType.mUID;
-  `eh vector destructor iterator'(ptr, 0x20ui64, 8, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(ptr, 0x20ui64, 8, (void (__fastcall *)(void *))_);
   return v6;
 }
 

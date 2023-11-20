@@ -12,7 +12,7 @@ void __fastcall hkCpuJobThreadPoolCinfo::hkCpuJobThreadPoolCinfo(hkCpuJobThreadP
 void __fastcall hkCpuJobThreadPool::hkCpuJobThreadPool(hkCpuJobThreadPool *this, hkCpuJobThreadPoolCinfo *ci)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkCpuJobThreadPool::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkCpuJobThreadPool::`vftable;
   hkCpuThreadPool::hkCpuThreadPool(&this->m_threadPool, (hkCpuThreadPoolCinfo *)&ci->m_workerFunction);
 }
 

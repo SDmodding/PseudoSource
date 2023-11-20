@@ -25,7 +25,7 @@ void __fastcall UFG::UIHKOpeningCreditsData::Populate(UFG::UIHKOpeningCreditsDat
   if ( v3 )
   {
     v5 = &v3[-1].PosX;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v3,
       0x48ui64,
       LODWORD(v3[-1].PosX),
@@ -123,7 +123,7 @@ void __fastcall UFG::UIHKOpeningCreditsSection::Populate(UFG::UIHKOpeningCredits
   if ( v6 )
   {
     v7 = &v6[-1].mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v6,
       0x28ui64,
       v6[-1].mStringHash32,
@@ -213,7 +213,7 @@ void __fastcall UFG::UIHKScreenOpeningCredits::UIHKScreenOpeningCredits(UFG::UIH
   v1 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -224,7 +224,7 @@ void __fastcall UFG::UIHKScreenOpeningCredits::UIHKScreenOpeningCredits(UFG::UIH
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenOpeningCredits::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenOpeningCredits::`vftable;
   *(_QWORD *)&this->mState = 0i64;
   this->mCurrentSectionIndex = -1;
   this->mElapsedTotal = 0.0;
@@ -243,7 +243,7 @@ void __fastcall UFG::UIHKScreenOpeningCredits::~UIHKScreenOpeningCredits(UFG::UI
   char *v4; // rbx
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenOpeningCredits::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenOpeningCredits::`vftable;
   v2 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseScreen(v2, "OpeningCredits");
   UFG::UIHKScreenOpeningCredits::gSequence = 0;
@@ -251,7 +251,7 @@ void __fastcall UFG::UIHKScreenOpeningCredits::~UIHKScreenOpeningCredits(UFG::UI
   if ( v3 )
   {
     v4 = (char *)&v3[-1].PosX;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v3,
       0x48ui64,
       LODWORD(v3[-1].PosX),
@@ -466,7 +466,7 @@ void __fastcall UFG::UIHKScreenOpeningCredits::Flash_AddName(UFG::UIScreenCredit
 
   v2 = name;
   v3 = this->mRenderable->m_movie.pObject;
-  `eh vector constructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( ((unsigned int)pargs.Type >> 6) & 1 )
   {
     (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
@@ -478,7 +478,7 @@ void __fastcall UFG::UIHKScreenOpeningCredits::Flash_AddName(UFG::UIScreenCredit
   pargs.Type = 6;
   *(_QWORD *)&pargs.mValue.NValue = v2;
   Scaleform::GFx::Movie::Invoke(v3, "AddName", 0i64, &pargs, 1u);
-  `eh vector destructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 296
@@ -496,7 +496,7 @@ void __fastcall UFG::UIHKScreenOpeningCredits::Flash_SetPosition(UFG::UIHKScreen
   double v11; // [rsp+90h] [rbp-38h]
 
   v3 = this->mRenderable->m_movie.pObject;
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( (v6 >> 6) & 1 )
   {
     (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v5 + 16i64))(v5, &ptr, COERCE_DOUBLE(*(_QWORD *)&v7));
@@ -512,7 +512,7 @@ void __fastcall UFG::UIHKScreenOpeningCredits::Flash_SetPosition(UFG::UIHKScreen
   v10 = 5;
   v11 = pos_y;
   Scaleform::GFx::Movie::Invoke(v3, "SetPosition", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 317

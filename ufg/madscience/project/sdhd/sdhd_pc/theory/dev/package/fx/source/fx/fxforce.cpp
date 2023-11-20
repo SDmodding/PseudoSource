@@ -20,10 +20,10 @@ void __fastcall Render::FXForceComponent::FXForceComponent(Render::FXForceCompon
   v2 = (UFG::qNode<Render::FXComponentInstance,Render::FXComponentInstance> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable';
+  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable;
   *(_QWORD *)&this->mForceSuspendState = 0i64;
   *(_WORD *)&this->mIsActive = 0;
-  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXForceComponent::`vftable';
+  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXForceComponent::`vftable;
   UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&this->mSettingsHandle.mPrev);
   v3 = tweakablesAdded;
   if ( !tweakablesAdded )
@@ -52,25 +52,25 @@ void __fastcall Render::FXForceComponent::~FXForceComponent(Render::FXForceCompo
   UFG::qNode<Render::FXComponentInstance,Render::FXComponentInstance> *v8; // rax
 
   v1 = this;
-  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXForceComponent::`vftable';
-  v2 = `UFG::qGetResourceInventory<Render::FXForceSettings>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Render::FXForceSettings>'::`2'::result )
+  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXForceComponent::`vftable;
+  v2 = `UFG::qGetResourceInventory<Render::FXForceSettings>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Render::FXForceSettings>::`2::result )
   {
     v3 = UFG::qResourceWarehouse::Instance();
     v2 = UFG::qResourceWarehouse::GetInventory(v3, 0x433ED8DFu);
-    `UFG::qGetResourceInventory<Render::FXForceSettings>'::`2'::result = v2;
+    `UFG::qGetResourceInventory<Render::FXForceSettings>::`2::result = v2;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mSettingsHandle.mPrev, v2);
-  v4 = `UFG::qGetResourceInventory<Render::FXForceSettings>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Render::FXForceSettings>'::`2'::result )
+  v4 = `UFG::qGetResourceInventory<Render::FXForceSettings>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Render::FXForceSettings>::`2::result )
   {
     v5 = UFG::qResourceWarehouse::Instance();
     v4 = UFG::qResourceWarehouse::GetInventory(v5, 0x433ED8DFu);
-    `UFG::qGetResourceInventory<Render::FXForceSettings>'::`2'::result = v4;
+    `UFG::qGetResourceInventory<Render::FXForceSettings>::`2::result = v4;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mSettingsHandle.mPrev, v4);
   UFG::qResourceHandle::~qResourceHandle((UFG::qResourceHandle *)&v1->mSettingsHandle.mPrev);
-  v1->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable';
+  v1->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable;
   v6 = (UFG::qNode<Render::FXComponentInstance,Render::FXComponentInstance> *)&v1->mPrev;
   v7 = v1->mPrev;
   v8 = v1->mNext;
@@ -90,14 +90,14 @@ void __fastcall Render::FXForceComponent::Init(Render::FXForceComponent *this, u
   UFG::qResourceWarehouse *v5; // rax
 
   this->mSettingsId = settingsId;
-  v2 = `UFG::qGetResourceInventory<Render::FXForceSettings>'::`2'::result;
+  v2 = `UFG::qGetResourceInventory<Render::FXForceSettings>::`2::result;
   v3 = settingsId;
   v4 = this;
-  if ( !`UFG::qGetResourceInventory<Render::FXForceSettings>'::`2'::result )
+  if ( !`UFG::qGetResourceInventory<Render::FXForceSettings>::`2::result )
   {
     v5 = UFG::qResourceWarehouse::Instance();
     v2 = UFG::qResourceWarehouse::GetInventory(v5, 0x433ED8DFu);
-    `UFG::qGetResourceInventory<Render::FXForceSettings>'::`2'::result = v2;
+    `UFG::qGetResourceInventory<Render::FXForceSettings>::`2::result = v2;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v4->mSettingsHandle.mPrev, 0x433ED8DFu, v3, v2);
 }

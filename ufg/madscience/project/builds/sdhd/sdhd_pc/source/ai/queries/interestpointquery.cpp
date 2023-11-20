@@ -9,10 +9,10 @@ void __fastcall UFG::InterestPointQuery::Candidate::Candidate(UFG::InterestPoint
   v1 = this;
   UFG::FindPathDeferredQuery::FindPathDeferredQuery(&this->input);
   v2 = (signed __int64)&v1->output;
-  *(_QWORD *)v2 = &UFG::DaemonQueryOutput::`vftable';
+  *(_QWORD *)v2 = &UFG::DaemonQueryOutput::`vftable;
   *(_QWORD *)(v2 + 8) = 0i64;
   *(_DWORD *)(v2 + 16) = 0;
-  *(_QWORD *)v2 = &UFG::FindPathOutput::`vftable';
+  *(_QWORD *)v2 = &UFG::FindPathOutput::`vftable;
   v1->output.m_pPath.m_pNavPath = 0i64;
   v3 = &v1->mInterestPoint;
   v3->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::InterestPoint>,UFG::qSafePointerNodeList> *)&v3->mPrev;
@@ -75,13 +75,13 @@ void __fastcall UFG::InterestPointQuery::~InterestPointQuery(UFG::InterestPointQ
   UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v15; // rax
 
   v1 = (UFG::qSafePointerNode<UFG::ParkourHandle> *)this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::InterestPointQuery>Vtbl *)&UFG::InterestPointQuery::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::InterestPointQuery>Vtbl *)&UFG::InterestPointQuery::`vftable;
   UFG::InterestPointQuery::End(this, 0);
   v2 = v1[2].m_SafePointerList.mNode.mPrev;
   if ( v2 )
   {
     v3 = v2 - 1;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v2,
       0xF0ui64,
       (int)v2[-1].mPrev,
@@ -111,7 +111,7 @@ void __fastcall UFG::InterestPointQuery::~InterestPointQuery(UFG::InterestPointQ
   if ( v9 )
   {
     v10 = v9 - 1;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v9,
       0xF0ui64,
       (int)v9[-1].mPrev,
@@ -120,7 +120,7 @@ void __fastcall UFG::InterestPointQuery::~InterestPointQuery(UFG::InterestPointQ
   }
   v1[2].m_SafePointerList.mNode.mPrev = 0i64;
   v1[2].vfptr = 0i64;
-  v1->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::InterestPointQuery>::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::InterestPointQuery>::`vftable;
   UFG::qSafePointerNode<UFG::DynamicCoverCorner>::SetAllPointersToNull(v1);
   UFG::qList<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList,1,0>::DeleteNodes(&v1->m_SafePointerList);
   v11 = v1->m_SafePointerList.mNode.mPrev;

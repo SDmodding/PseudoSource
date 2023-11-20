@@ -46,7 +46,7 @@ void __fastcall finishLoadedObjecthkxMaterialEffect(void *p, int finishing)
   if ( p )
   {
     v2 = (hkStringPtr *)((char *)p + 16);
-    v2[-2].m_stringAndFlag = (const char *)&hkxMaterialEffect::`vftable';
+    v2[-2].m_stringAndFlag = (const char *)&hkxMaterialEffect::`vftable;
     hkStringPtr::hkStringPtr(v2, (hkFinishLoadedObjectFlag)finishing);
   }
 }
@@ -65,7 +65,7 @@ void **__fastcall getVtablehkxMaterialEffect()
   hkStringPtr v1; // [rsp+30h] [rbp-28h]
 
   hkStringPtr::hkStringPtr(&v1, 0);
-  return &hkxMaterialEffect::`vftable';
+  return &hkxMaterialEffect::`vftable;
 }
 
 // File Line: 117

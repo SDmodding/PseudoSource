@@ -31,7 +31,7 @@ hkClass *__fastcall hkaiClimbUpAnalyzer::staticClass()
 void __fastcall finishLoadedObjecthkaiClimbUpAnalyzer(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiClimbUpAnalyzer::`vftable';
+    *(_QWORD *)p = &hkaiClimbUpAnalyzer::`vftable;
 }
 
 // File Line: 72
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkaiClimbUpAnalyzer(void *p)
 // RVA: 0xC32240
 void **__fastcall getVtablehkaiClimbUpAnalyzer()
 {
-  return &hkaiClimbUpAnalyzer::`vftable';
+  return &hkaiClimbUpAnalyzer::`vftable;
 }
 
 // File Line: 98

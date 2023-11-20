@@ -164,7 +164,7 @@ void __fastcall UFG::StatAwardPropertyManager::StatAwardPropertyManager(UFG::Sta
           v13 = v11 + 1;
           v13->mNext = v13;
           v13[1].mNext = v13;
-          v11->mNext = (UFG::allocator::free_link *)&UFG::StatAwardPropertyData::`vftable';
+          v11->mNext = (UFG::allocator::free_link *)&UFG::StatAwardPropertyData::`vftable;
           v11[3].mNext = (UFG::allocator::free_link *)v12;
           LODWORD(v11[4].mNext) = v6;
           HIDWORD(v11[4].mNext) = v8;

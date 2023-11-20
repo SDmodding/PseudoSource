@@ -186,7 +186,7 @@ __int64 __fastcall hkFindClosestPositionUtil::findClosest(hkFindClosestPositionU
   closestDistInOut.m_real = v11;
   v13 = _mm_mul_ps(_mm_add_ps(v9, v3.m_quad), v4.m_quad);
   v14 = _mm_xor_si128(
-          (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v13),
+          (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v13),
           _mm_cvttps_epi32(v13));
   *((_QWORD *)&v31 + 1) = v14.m128i_i64[0];
   v15 = coord.m_x;
@@ -194,7 +194,7 @@ __int64 __fastcall hkFindClosestPositionUtil::findClosest(hkFindClosestPositionU
   coord.m_z = (unsigned __int128)_mm_shuffle_epi32(v14, 170);
   v17 = coord.m_z;
   v18 = _mm_xor_si128(
-          (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v12),
+          (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v12),
           _mm_cvttps_epi32(v12));
   closestDistInOut.m_real.m128_u64[1] = v18.m128i_i64[0];
   v19 = HIDWORD(v29);
@@ -299,7 +299,7 @@ __int64 __fastcall hkFindClosestPositionUtil::addPoint(hkFindClosestPositionUtil
   v5 = resultOut;
   v6 = _mm_mul_ps(_mm_add_ps(v3.m_quad, point->m_quad), this->m_scale.m_quad);
   v7 = _mm_xor_si128(
-         (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v6),
+         (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v6),
          _mm_cvttps_epi32(v6));
   v8 = (unsigned __int128)_mm_shuffle_epi32(v7, 170);
   key = (v7.m128i_i32[0] ^ (v8 << 8) ^ ((v7.m128i_i32[1] << 16) + ((unsigned int)v7.m128i_i32[1] >> 16))) & 0xFFFFFFFE;
@@ -434,7 +434,7 @@ hkResult *__fastcall hkFindClosestPositionUtil::_findEntry(hkFindClosestPosition
   v9 = point;
   v10 = _mm_mul_ps(_mm_add_ps(this->m_offset.m_quad, point->m_quad), this->m_scale.m_quad);
   v11 = _mm_xor_si128(
-          (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v10),
+          (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v10),
           _mm_cvttps_epi32(v10));
   v12 = (unsigned __int128)_mm_shuffle_epi32(v11, 170);
   v13 = (unsigned __int64)hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::findKey(

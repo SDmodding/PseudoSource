@@ -10,8 +10,8 @@ BinString *__fastcall SubtitleTrack::Create()
   if ( !v0 )
     return 0i64;
   ITrack::ITrack((ITrack *)v0, SubtitleTrack::sClassNameUID);
-  v1->mOffset = (__int64)&Track<SubtitleTask>::`vftable';
-  v1->mOffset = (__int64)&SubtitleTrack::`vftable';
+  v1->mOffset = (__int64)&Track<SubtitleTask>::`vftable;
+  v1->mOffset = (__int64)&SubtitleTrack::`vftable;
   v1[7].mOffset = 1i64;
   BinString::Set(v1 + 7, &customWorldMapCaption);
   return v1;
@@ -29,8 +29,8 @@ BinString *__fastcall SubtitleGroupTrack::Create()
   if ( !v0 )
     return 0i64;
   ITrack::ITrack((ITrack *)v0, SubtitleGroupTrack::sClassNameUID);
-  v1->mOffset = (__int64)&Track<SubtitleGroupTask>::`vftable';
-  v1->mOffset = (__int64)&SubtitleGroupTrack::`vftable';
+  v1->mOffset = (__int64)&Track<SubtitleGroupTask>::`vftable;
+  v1->mOffset = (__int64)&SubtitleGroupTrack::`vftable;
   v1[7].mOffset = 1i64;
   BinString::Set(v1 + 7, &customWorldMapCaption);
   return v1;
@@ -48,8 +48,8 @@ FastCurtainShowTrack *__fastcall FastCurtainShowTrack::Create()
   if ( !v0 )
     return 0i64;
   ITrack::ITrack((ITrack *)v0, FastCurtainShowTrack::sClassNameUID);
-  *(_QWORD *)v1 = &Track<FastCurtainShowTask>::`vftable';
-  *(_QWORD *)v1 = &FastCurtainShowTrack::`vftable';
+  *(_QWORD *)v1 = &Track<FastCurtainShowTask>::`vftable;
+  *(_QWORD *)v1 = &FastCurtainShowTrack::`vftable;
   *((_WORD *)v1 + 28) = 257;
   return (FastCurtainShowTrack *)v1;
 }
@@ -71,8 +71,8 @@ AudioTrackNIS *__fastcall AudioTrackNIS::Create()
   if ( result )
   {
     ITrack::ITrack((ITrack *)&result->vfptr, AudioTrackNIS::sClassNameUID);
-    v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AudioTaskNIS>::`vftable';
-    v1->vfptr = (Expression::IMemberMapVtbl *)&AudioTrackNIS::`vftable';
+    v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AudioTaskNIS>::`vftable;
+    v1->vfptr = (Expression::IMemberMapVtbl *)&AudioTrackNIS::`vftable;
     *(_QWORD *)v1->m_audioTagId = 0i64;
     *(_QWORD *)v1->m_audioTagUID = 0i64;
     v1->mMaster = 1;
@@ -93,8 +93,8 @@ ITrack *__fastcall NISFadeOutTrack::Create()
   if ( !v0 )
     return 0i64;
   ITrack::ITrack((ITrack *)v0, NISFadeOutTrack::sClassNameUID);
-  *(_QWORD *)v1 = &Track<NISFadeOutTask>::`vftable';
-  *(_QWORD *)v1 = &NISFadeOutTrack::`vftable';
+  *(_QWORD *)v1 = &Track<NISFadeOutTask>::`vftable;
+  *(_QWORD *)v1 = &NISFadeOutTrack::`vftable;
   *((_WORD *)v1 + 28) = 0;
   v1[22] = 1;
   *(_QWORD *)(v1 + 60) = 0i64;
@@ -124,8 +124,8 @@ NISLightGroupAnimationTrack *__fastcall NISLightGroupAnimationTrack::Create()
   if ( !v0 )
     return 0i64;
   ITrack::ITrack((ITrack *)v0, NISLightGroupAnimationTrack::sClassNameUID);
-  *(_QWORD *)v1 = &Track<NISLightGroupAnimationTask>::`vftable';
-  *(_QWORD *)v1 = &NISLightGroupAnimationTrack::`vftable';
+  *(_QWORD *)v1 = &Track<NISLightGroupAnimationTask>::`vftable;
+  *(_QWORD *)v1 = &NISLightGroupAnimationTrack::`vftable;
   v1[56] = 0;
   return (NISLightGroupAnimationTrack *)v1;
 }
@@ -153,8 +153,8 @@ NISAllowPlayerControlTrack *__fastcall NISAllowPlayerControlTrack::Create()
   if ( !v0 )
     return 0i64;
   ITrack::ITrack((ITrack *)v0, NISAllowPlayerControlTrack::sClassNameUID);
-  *(_QWORD *)v1 = &Track<NISAllowPlayerControlTask>::`vftable';
-  *(_QWORD *)v1 = &NISAllowPlayerControlTrack::`vftable';
+  *(_QWORD *)v1 = &Track<NISAllowPlayerControlTask>::`vftable;
+  *(_QWORD *)v1 = &NISAllowPlayerControlTrack::`vftable;
   return (NISAllowPlayerControlTrack *)v1;
 }
 

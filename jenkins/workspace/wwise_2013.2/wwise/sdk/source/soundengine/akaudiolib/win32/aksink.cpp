@@ -2,7 +2,7 @@
 // RVA: 0xA76670
 void __fastcall CAkSink::CAkSink(CAkSink *this, AkSinkType in_eType)
 {
-  this->vfptr = (CAkSinkVtbl *)&CAkSink::`vftable';
+  this->vfptr = (CAkSinkVtbl *)&CAkSink::`vftable;
   this->m_pCapture = 0i64;
   this->m_SpeakersConfig = 0;
   this->m_MasterOut.pData = 0i64;
@@ -133,7 +133,7 @@ CAkSinkDummy *__fastcall CAkSink::CreateDummy(unsigned int in_uChannelMask)
     result->m_SpeakersConfig = 0;
     result->m_MasterOut.pData = 0i64;
     result->m_eType = 3;
-    result->vfptr = (CAkSinkVtbl *)&CAkSinkDummy::`vftable';
+    result->vfptr = (CAkSinkVtbl *)&CAkSinkDummy::`vftable;
     if ( CAkSinkDummy::Init(result, v1) != 1 )
     {
       v3->vfptr->Term(v3);

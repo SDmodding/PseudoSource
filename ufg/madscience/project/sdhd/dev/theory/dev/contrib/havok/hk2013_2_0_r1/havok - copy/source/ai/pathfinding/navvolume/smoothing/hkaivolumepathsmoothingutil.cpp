@@ -181,7 +181,7 @@ __int64 __fastcall hkaiVolumePathSmoothingUtil::findSmoothedPath(hkaiStreamingCo
               _mm_add_ps(
                 _mm_mul_ps(
                   _mm_cvtepi32_ps(_mm_srli_epi32(v36, 0x10u)),
-                  (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                  (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                 _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v36, 0x10u), 0x10u))));
       v39 = _mm_add_ps(v33[7], v31[7]);
       v40 = _mm_mul_ps(
@@ -189,7 +189,7 @@ __int64 __fastcall hkaiVolumePathSmoothingUtil::findSmoothedPath(hkaiStreamingCo
               _mm_add_ps(
                 _mm_mul_ps(
                   _mm_cvtepi32_ps(_mm_srli_epi32(v35, 0x10u)),
-                  (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                  (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                 _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v35, 0x10u), 0x10u))));
       v41 = _mm_loadu_si128((const __m128i *)(v37[1].m128_u64[0] + 24i64 * (v30 & 0x3FFFFF)));
       v42 = (__m128 *)v37[3].m128_u64[0];
@@ -209,13 +209,13 @@ __int64 __fastcall hkaiVolumePathSmoothingUtil::findSmoothedPath(hkaiStreamingCo
                   _mm_add_ps(
                     _mm_mul_ps(
                       _mm_cvtepi32_ps(_mm_srli_epi32(v46, 0x10u)),
-                      (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                      (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                     _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v46, 0x10u), 0x10u)))),
                 v50));
       v52 = _mm_max_ps(
               v43,
               _mm_add_ps(
-                _mm_mul_ps(v42[6], _mm_add_ps(_mm_mul_ps(v48, (__m128)`hkIntVector::convertU32ToF32'::`2'::two16), v49)),
+                _mm_mul_ps(v42[6], _mm_add_ps(_mm_mul_ps(v48, (__m128)`hkIntVector::convertU32ToF32::`2::two16), v49)),
                 v50));
       v53 = _mm_min_ps(v52, v51);
       v54 = _mm_max_ps(v52, v51);

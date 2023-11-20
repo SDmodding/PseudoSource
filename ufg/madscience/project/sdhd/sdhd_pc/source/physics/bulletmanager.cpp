@@ -149,23 +149,23 @@ void UFG::BulletManager::Initialize(void)
         v19 = UFG::BulletManager::smSettingsHandles.p[v13];
         if ( v19->mData )
         {
-          v20 = `UFG::qGetResourceInventory<Render::BeamSettings>'::`2'::result;
-          if ( !`UFG::qGetResourceInventory<Render::BeamSettings>'::`2'::result )
+          v20 = `UFG::qGetResourceInventory<Render::BeamSettings>::`2::result;
+          if ( !`UFG::qGetResourceInventory<Render::BeamSettings>::`2::result )
           {
             v21 = UFG::qResourceWarehouse::Instance();
             v20 = UFG::qResourceWarehouse::GetInventory(v21, 0xA0AAE10F);
-            `UFG::qGetResourceInventory<Render::BeamSettings>'::`2'::result = v20;
+            `UFG::qGetResourceInventory<Render::BeamSettings>::`2::result = v20;
           }
           UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v19->mPrev, v20);
           v18 = UFG::BulletManager::smSettingsHandles.p;
         }
         v22 = (UFG::qResourceHandle *)&v18[v13]->mPrev;
-        v23 = `UFG::qGetResourceInventory<Render::BeamSettings>'::`2'::result;
-        if ( !`UFG::qGetResourceInventory<Render::BeamSettings>'::`2'::result )
+        v23 = `UFG::qGetResourceInventory<Render::BeamSettings>::`2::result;
+        if ( !`UFG::qGetResourceInventory<Render::BeamSettings>::`2::result )
         {
           v24 = UFG::qResourceWarehouse::Instance();
           v23 = UFG::qResourceWarehouse::GetInventory(v24, 0xA0AAE10F);
-          `UFG::qGetResourceInventory<Render::BeamSettings>'::`2'::result = v23;
+          `UFG::qGetResourceInventory<Render::BeamSettings>::`2::result = v23;
         }
         UFG::qResourceHandle::Init(v22, 0xA0AAE10F, v17, v23);
         ++v12;
@@ -583,7 +583,7 @@ void __fastcall UFG::BulletManager::BulletManager(UFG::BulletManager *this)
   UFG::qList<UFG::TargetSphere,UFG::TargetSphere,1,0> *v1; // [rsp+58h] [rbp+10h]
   UFG::qList<UFG::Bullet,UFG::Bullet,1,0> *v2; // [rsp+58h] [rbp+10h]
 
-  this->vfptr = (UFG::BulletManagerVtbl *)&UFG::BulletManager::`vftable';
+  this->vfptr = (UFG::BulletManagerVtbl *)&UFG::BulletManager::`vftable;
   v1 = &this->mTargetSpheres;
   v1->mNode.mPrev = &v1->mNode;
   v1->mNode.mNext = &v1->mNode;
@@ -613,7 +613,7 @@ void __fastcall UFG::BulletManager::~BulletManager(UFG::BulletManager *this)
   UFG::qNode<UFG::TargetSphere,UFG::TargetSphere> *v12; // rax
 
   v1 = this;
-  this->vfptr = (UFG::BulletManagerVtbl *)&UFG::BulletManager::`vftable';
+  this->vfptr = (UFG::BulletManagerVtbl *)&UFG::BulletManager::`vftable;
   v2 = (UFG::BulletManager *)((char *)UFG::BulletManager::mInstance + 8);
   v3 = (UFG::BulletManager *)UFG::BulletManager::mInstance->mTargetSpheres.mNode.mNext;
   if ( v3 != (UFG::BulletManager *)&UFG::BulletManager::mInstance->mTargetSpheres )
@@ -637,7 +637,7 @@ void __fastcall UFG::BulletManager::~BulletManager(UFG::BulletManager *this)
   if ( v7 )
   {
     v8 = v7 - 1;
-    `eh vector destructor iterator'(v7, 4ui64, v7[-1].mUID, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v7, 4ui64, v7[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v8);
   }
   v1->mSimObjectsToIgnore.p = 0i64;

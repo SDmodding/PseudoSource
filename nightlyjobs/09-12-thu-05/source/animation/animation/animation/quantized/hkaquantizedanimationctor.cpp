@@ -29,7 +29,7 @@ void __fastcall hkaQuantizedAnimation::hkaQuantizedAnimation(hkaQuantizedAnimati
   v6 = this;
   hkaAnimation::hkaAnimation((hkaAnimation *)&this->vfptr, binding->m_animation.m_pntr);
   v7 = 0i64;
-  v6->vfptr = (hkBaseObjectVtbl *)&hkaQuantizedAnimation::`vftable';
+  v6->vfptr = (hkBaseObjectVtbl *)&hkaQuantizedAnimation::`vftable;
   v6->m_data.m_data = 0i64;
   v6->m_data.m_size = 0;
   v6->m_data.m_capacityAndFlags = 2147483648;
@@ -164,7 +164,7 @@ void __fastcall hkaQuantizedAnimation::hkaQuantizedAnimation(hkaQuantizedAnimati
   v5 = this;
   hkaAnimation::hkaAnimation((hkaAnimation *)&this->vfptr, binding->m_animation.m_pntr);
   v6 = 0i64;
-  v5->vfptr = (hkBaseObjectVtbl *)&hkaQuantizedAnimation::`vftable';
+  v5->vfptr = (hkBaseObjectVtbl *)&hkaQuantizedAnimation::`vftable;
   v5->m_data.m_data = 0i64;
   v5->m_data.m_size = 0;
   v5->m_data.m_capacityAndFlags = 2147483648;
@@ -302,7 +302,7 @@ void __fastcall hkaQuantizedAnimation::hkaQuantizedAnimation(hkaQuantizedAnimati
   v7 = skeleton;
   v8 = this;
   hkaAnimation::hkaAnimation((hkaAnimation *)&this->vfptr, binding->m_animation.m_pntr);
-  v8->vfptr = (hkBaseObjectVtbl *)&hkaQuantizedAnimation::`vftable';
+  v8->vfptr = (hkBaseObjectVtbl *)&hkaQuantizedAnimation::`vftable;
   v8->m_data.m_data = 0i64;
   v8->m_data.m_size = 0;
   v8->m_data.m_capacityAndFlags = 2147483648;
@@ -336,7 +336,7 @@ void __fastcall hkaQuantizedAnimation::~hkaQuantizedAnimation(hkaQuantizedAnimat
   int v2; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaQuantizedAnimation::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaQuantizedAnimation::`vftable;
   v2 = this->m_data.m_capacityAndFlags;
   this->m_data.m_size = 0;
   if ( v2 >= 0 )
@@ -1191,7 +1191,7 @@ void __fastcall hkaQuantizedAnimationBuilder::identifyRotations(unsigned __int16
   v36 = 0;
   v14 = 12 * track;
   v37 = 0;
-  v15 = &`hkVector4f::getComponent'::`2'::indexToMask;
+  v15 = &`hkVector4f::getComponent::`2::indexToMask;
   v16 = -4 - v14;
   v17 = v14 + 4;
   v18 = 0i64;

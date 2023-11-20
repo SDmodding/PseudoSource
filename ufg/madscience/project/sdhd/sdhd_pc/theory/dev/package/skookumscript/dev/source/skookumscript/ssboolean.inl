@@ -5,12 +5,12 @@ void __fastcall SSBoolean::SSBoolean(SSBoolean *this)
   SSClass *v1; // rax
 
   v1 = SSBrain::c_boolean_class_p;
-  this->vfptr = (SSObjectBaseVtbl *)&SSObjectBase::`vftable';
+  this->vfptr = (SSObjectBaseVtbl *)&SSObjectBase::`vftable;
   this->i_ref_count = 0;
-  this->vfptr = (SSObjectBaseVtbl *)&SSInstance::`vftable';
+  this->vfptr = (SSObjectBaseVtbl *)&SSInstance::`vftable;
   this->i_class_p = v1;
   this->i_ptr_id = ++SSObjectBase::c_ptr_id_prev;
-  this->vfptr = (SSObjectBaseVtbl *)&SSBoolean::`vftable';
+  this->vfptr = (SSObjectBaseVtbl *)&SSBoolean::`vftable;
 }
 
 // File Line: 49

@@ -14,16 +14,16 @@ void __fastcall UFG::NavModulePathing::NavModulePathing(UFG::NavModulePathing *t
   signed __int64 v11; // [rsp+58h] [rbp+10h]
 
   v2 = this;
-  this->vfptr = (UFG::NavModulePathingVtbl *)&UFG::NavModulePathing::`vftable';
+  this->vfptr = (UFG::NavModulePathingVtbl *)&UFG::NavModulePathing::`vftable;
   *(_QWORD *)&this->m_bGoalRefreshed = 0i64;
   this->m_navComponent = parent;
-  this->m_wpPreviousWaypoint.m_navPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable';
+  this->m_wpPreviousWaypoint.m_navPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable;
   v3 = UFG::qVector3::msZero.y;
   v4 = UFG::qVector3::msZero.z;
   this->m_wpPreviousWaypoint.m_navPosition.m_vPosition.x = UFG::qVector3::msZero.x;
   this->m_wpPreviousWaypoint.m_navPosition.m_vPosition.y = v3;
   this->m_wpPreviousWaypoint.m_navPosition.m_vPosition.z = v4;
-  this->m_wpPreviousWaypoint.m_navPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable';
+  this->m_wpPreviousWaypoint.m_navPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable;
   this->m_wpPreviousWaypoint.m_navPosition.m_bValid = 0;
   *(_QWORD *)&this->m_wpPreviousWaypoint.m_navPosition.m_packedKey = -1i64;
   this->m_wpPreviousWaypoint.m_navPosition.m_hkvMeshPosition.m_quad = _mm_unpacklo_ps(
@@ -38,9 +38,9 @@ void __fastcall UFG::NavModulePathing::NavModulePathing(UFG::NavModulePathing *t
   this->m_wpPreviousWaypoint.m_canSmooth = 1;
   UFG::FindPathDeferredQuery::FindPathDeferredQuery(&this->m_PathQueryInput);
   v11 = (signed __int64)&v2->m_PathQueryOutput;
-  *(_OWORD *)v11 = (unsigned __int64)&UFG::DaemonQueryOutput::`vftable';
+  *(_OWORD *)v11 = (unsigned __int64)&UFG::DaemonQueryOutput::`vftable;
   *(_DWORD *)(v11 + 16) = 0;
-  *(_QWORD *)v11 = &UFG::FindPathOutput::`vftable';
+  *(_QWORD *)v11 = &UFG::FindPathOutput::`vftable;
   v2->m_PathQueryOutput.m_pPath.m_pNavPath = 0i64;
   *(_QWORD *)&v2->m_Deferrer[0].mLastPosition.x = 0i64;
   *(_QWORD *)&v2->m_Deferrer[0].mLastPosition.z = 0i64;
@@ -50,23 +50,23 @@ void __fastcall UFG::NavModulePathing::NavModulePathing(UFG::NavModulePathing *t
   *(_QWORD *)&v2->m_Deferrer[1].mLastPosition.z = 0i64;
   *(_QWORD *)&v2->m_Deferrer[1].mDistanceTolerance = 0i64;
   v2->m_Deferrer[1].mResult = 0;
-  v2->m_npInjectedPathSource.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable';
+  v2->m_npInjectedPathSource.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable;
   v5 = UFG::qVector3::msZero.y;
   v6 = UFG::qVector3::msZero.z;
   v2->m_npInjectedPathSource.m_vPosition.x = UFG::qVector3::msZero.x;
   v2->m_npInjectedPathSource.m_vPosition.y = v5;
   v2->m_npInjectedPathSource.m_vPosition.z = v6;
-  v2->m_npInjectedPathSource.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable';
+  v2->m_npInjectedPathSource.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable;
   v2->m_npInjectedPathSource.m_bValid = 0;
   v2->m_npInjectedPathSource.m_hkvMeshPosition = (hkVector4f)hkvZero_5.m_quad;
   *(_QWORD *)&v2->m_npInjectedPathSource.m_packedKey = -1i64;
-  v2->m_npInjectedPathDestination.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable';
+  v2->m_npInjectedPathDestination.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable;
   v7 = UFG::qVector3::msZero.y;
   v8 = UFG::qVector3::msZero.z;
   v2->m_npInjectedPathDestination.m_vPosition.x = UFG::qVector3::msZero.x;
   v2->m_npInjectedPathDestination.m_vPosition.y = v7;
   v2->m_npInjectedPathDestination.m_vPosition.z = v8;
-  v2->m_npInjectedPathDestination.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable';
+  v2->m_npInjectedPathDestination.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable;
   v2->m_npInjectedPathDestination.m_bValid = 0;
   v2->m_npInjectedPathDestination.m_hkvMeshPosition = (hkVector4f)hkvZero_5.m_quad;
   *(_QWORD *)&v2->m_npInjectedPathDestination.m_packedKey = -1i64;
@@ -101,7 +101,7 @@ void __fastcall UFG::NavModulePathing::~NavModulePathing(UFG::NavModulePathing *
   UFG::NavPath *v6; // rcx
 
   v1 = this;
-  this->vfptr = (UFG::NavModulePathingVtbl *)&UFG::NavModulePathing::`vftable';
+  this->vfptr = (UFG::NavModulePathingVtbl *)&UFG::NavModulePathing::`vftable;
   UFG::NavModulePathing::CancelPendingQuery(this);
   UFG::NavModulePathing::ClearPath(v1);
   if ( v1->m_bForceGoalAdvance )
@@ -137,8 +137,8 @@ void __fastcall UFG::NavModulePathing::~NavModulePathing(UFG::NavModulePathing *
     if ( v4 )
       v6->vfptr->__vecDelDtor(v6, 1u);
   }
-  v1->m_PathQueryOutput.vfptr = (UFG::DaemonQueryOutputVtbl *)&UFG::DaemonQueryOutput::`vftable';
-  v1->m_PathQueryInput.vfptr = (UFG::DaemonQueryInputVtbl *)&UFG::DaemonQueryInput::`vftable';
+  v1->m_PathQueryOutput.vfptr = (UFG::DaemonQueryOutputVtbl *)&UFG::DaemonQueryOutput::`vftable;
+  v1->m_PathQueryInput.vfptr = (UFG::DaemonQueryInputVtbl *)&UFG::DaemonQueryInput::`vftable;
 }
 
 // File Line: 64
@@ -606,7 +606,7 @@ LABEL_7:
           v18 = v10;
           if ( v10 )
           {
-            v10->mNext = (UFG::allocator::free_link *)&UFG::NavPath::`vftable';
+            v10->mNext = (UFG::allocator::free_link *)&UFG::NavPath::`vftable;
             v10[2].mNext = 0i64;
             v10[1].mNext = 0i64;
             v10[4].mNext = 0i64;
@@ -621,7 +621,7 @@ LABEL_7:
           item.m_navPosition.m_vPosition.x = v8->m_npPosition.m_vPosition.x;
           item.m_navPosition.m_vPosition.y = v8->m_npPosition.m_vPosition.y;
           item.m_navPosition.m_vPosition.z = v8->m_npPosition.m_vPosition.z;
-          item.m_navPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable';
+          item.m_navPosition.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable;
           item.m_navPosition.m_bValid = v8->m_npPosition.m_bValid;
           item.m_navPosition.m_hkvMeshPosition = v8->m_npPosition.m_hkvMeshPosition;
           item.m_navPosition.m_packedKey = v8->m_npPosition.m_packedKey;

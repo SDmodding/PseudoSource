@@ -3,7 +3,7 @@
 __int64 UFG::_dynamic_initializer_for__g_NULL_GameStateObj__()
 {
   UFG::GameState::GameState((UFG::GameState *)&UFG::g_NULL_GameStateObj.vfptr, "NULL", uidGameState_NULL_0);
-  UFG::g_NULL_GameStateObj.vfptr = (UFG::GameStateVtbl *)&UFG::GameState_NULL::`vftable';
+  UFG::g_NULL_GameStateObj.vfptr = (UFG::GameStateVtbl *)&UFG::GameState_NULL::`vftable;
   return atexit(UFG::_dynamic_atexit_destructor_for__g_NULL_GameStateObj__);
 }
 

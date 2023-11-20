@@ -22,9 +22,9 @@ void __fastcall CAkSegmentCtx::CAkSegmentCtx(CAkSegmentCtx *this, CAkMusicSegmen
   v3 = in_pSegmentNode;
   v4 = this;
   CAkMusicCtx::CAkMusicCtx((CAkMusicCtx *)&this->vfptr, in_pParentCtx);
-  v4->vfptr = (CAkChildCtxVtbl *)&CAkSegmentCtx::`vftable'{for `CAkChildCtx'};
-  v4->vfptr = (CAkTransportAwareVtbl *)&CAkSegmentCtx::`vftable'{for `CAkTransportAware'};
-  v4->vfptr = (ITransitionableVtbl *)&CAkSegmentCtx::`vftable'{for `ITransitionable'};
+  v4->vfptr = (CAkChildCtxVtbl *)&CAkSegmentCtx::`vftable{for `CAkChildCtx};
+  v4->vfptr = (CAkTransportAwareVtbl *)&CAkSegmentCtx::`vftable{for `CAkTransportAware};
+  v4->vfptr = (ITransitionableVtbl *)&CAkSegmentCtx::`vftable{for `ITransitionable};
   CAkContextualMusicSequencer::CAkContextualMusicSequencer(&v4->m_sequencer);
   v4->m_pSegmentNode = v3;
   v4->m_pOwner = 0i64;
@@ -115,9 +115,9 @@ void __fastcall CAkSegmentCtx::~CAkSegmentCtx(CAkSegmentCtx *this)
   CAkMusicTrack **v5; // rdx
 
   v1 = this;
-  this->vfptr = (CAkChildCtxVtbl *)&CAkSegmentCtx::`vftable'{for `CAkChildCtx'};
-  this->vfptr = (CAkTransportAwareVtbl *)&CAkSegmentCtx::`vftable'{for `CAkTransportAware'};
-  this->vfptr = (ITransitionableVtbl *)&CAkSegmentCtx::`vftable'{for `ITransitionable'};
+  this->vfptr = (CAkChildCtxVtbl *)&CAkSegmentCtx::`vftable{for `CAkChildCtx};
+  this->vfptr = (CAkTransportAwareVtbl *)&CAkSegmentCtx::`vftable{for `CAkTransportAware};
+  this->vfptr = (ITransitionableVtbl *)&CAkSegmentCtx::`vftable{for `ITransitionable};
   this->m_sequencer.m_pFirst = 0i64;
   this->m_sequencer.m_pLast = 0i64;
   v2 = this->m_arTrackRS.m_pItems;
@@ -314,7 +314,7 @@ void __fastcall CAkSegmentCtx::ScheduleAudioClips(CAkSegmentCtx *this)
                   v16->m_pTrack = v8;
                   v16->m_rTrackSrc = v11;
                   v16->m_uPlayOffset = v13;
-                  v16->vfptr = (AkMusicActionVtbl *)&AkMusicActionPlay::`vftable';
+                  v16->vfptr = (AkMusicActionVtbl *)&AkMusicActionPlay::`vftable;
                   v16->m_iTime = v15 - v17;
                   v16->m_uSourceOffset = v21;
                   v16->m_listAutomation.m_pFirst = 0i64;
@@ -589,7 +589,7 @@ LABEL_31:
         v28 = CAkMusicSegment::PreEntryDuration(v4->m_pSegmentNode);
         v26[1].vfptr = (AkMusicActionVtbl *)out_pPBI;
         v3 = &v4->m_sequencer;
-        v26->vfptr = (AkMusicActionVtbl *)&AkMusicActionStop::`vftable';
+        v26->vfptr = (AkMusicActionVtbl *)&AkMusicActionStop::`vftable;
         v26->m_iTime = v27 - v28;
         CAkContextualMusicSequencer::ScheduleAction(&v4->m_sequencer, v26);
         while ( 1 )

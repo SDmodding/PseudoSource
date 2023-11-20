@@ -15,8 +15,8 @@ void __fastcall UFG::SocialLogData::SocialLogData(UFG::SocialLogData *this)
   v3 = (UFG::qNode<UFG::OSuiteMessage,UFG::OSuiteMessage> *)&this->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  this->vfptr = (UFG::OSuiteMessageVtbl *)&UFG::OSuiteMessage::`vftable';
-  this->vfptr = (UFG::OSuiteMessageVtbl *)&UFG::SocialLogData::`vftable';
+  this->vfptr = (UFG::OSuiteMessageVtbl *)&UFG::OSuiteMessage::`vftable;
+  this->vfptr = (UFG::OSuiteMessageVtbl *)&UFG::SocialLogData::`vftable;
   this->m_iVersion = 0;
   this->m_iCommId = -1;
   this->m_iTimeStamp = 0i64;
@@ -59,7 +59,7 @@ void __fastcall UFG::SocialLogData::~SocialLogData(UFG::SocialLogData *this)
   UFG::qNode<UFG::SocialLogData,UFG::SocialLogData> *v13; // rax
 
   v1 = this;
-  this->vfptr = (UFG::OSuiteMessageVtbl *)&UFG::SocialLogData::`vftable';
+  this->vfptr = (UFG::OSuiteMessageVtbl *)&UFG::SocialLogData::`vftable;
   UFG::qString::~qString(&this->m_sDstOnlineName);
   v2 = &v1->m_cDstOnlineId;
   v3 = v1->m_cDstOnlineId.mPrev;
@@ -76,7 +76,7 @@ void __fastcall UFG::SocialLogData::~SocialLogData(UFG::SocialLogData *this)
   v7->mPrev = v6;
   v5->mPrev = (UFG::qNode<UFG::OnlineId,UFG::OnlineId> *)&v5->mPrev;
   v5->mNext = (UFG::qNode<UFG::OnlineId,UFG::OnlineId> *)&v5->mPrev;
-  v1->vfptr = (UFG::OSuiteMessageVtbl *)&UFG::OSuiteMessage::`vftable';
+  v1->vfptr = (UFG::OSuiteMessageVtbl *)&UFG::OSuiteMessage::`vftable;
   v8 = (UFG::qNode<UFG::OSuiteMessage,UFG::OSuiteMessage> *)&v1->mPrev;
   v9 = v1->mPrev;
   v10 = v1->mNext;

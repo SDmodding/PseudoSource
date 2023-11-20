@@ -2,8 +2,8 @@
 // RVA: 0x853C0
 void __fastcall std::basic_ios<char,std::char_traits<char>>::~basic_ios<char,std::char_traits<char>>(std::basic_ios<char,std::char_traits<char> > *this)
 {
-  this->vfptr = (std::ios_baseVtbl *)&std::basic_ios<char,std::char_traits<char>>::`vftable';
-  this->vfptr = (std::ios_baseVtbl *)&std::ios_base::`vftable';
+  this->vfptr = (std::ios_baseVtbl *)&std::basic_ios<char,std::char_traits<char>>::`vftable;
+  this->vfptr = (std::ios_baseVtbl *)&std::ios_base::`vftable;
   std::ios_base::_Ios_base_dtor((std::ios_base *)&this->vfptr);
 }
 

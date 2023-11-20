@@ -8,10 +8,10 @@ void __fastcall AkMusicActionPlay::~AkMusicActionPlay(AkMusicActionPlay *this)
 
   v1 = this->m_listAutomation.m_pFirst == 0i64;
   v2 = this;
-  this->vfptr = (AkMusicActionVtbl *)&AkMusicActionPlay::`vftable';
+  this->vfptr = (AkMusicActionVtbl *)&AkMusicActionPlay::`vftable;
   if ( v1 )
   {
-    this->vfptr = (AkMusicActionVtbl *)&AkMusicAction::`vftable';
+    this->vfptr = (AkMusicActionVtbl *)&AkMusicAction::`vftable;
   }
   else
   {
@@ -25,7 +25,7 @@ void __fastcall AkMusicActionPlay::~AkMusicActionPlay(AkMusicActionPlay *this)
       }
     }
     while ( v2->m_listAutomation.m_pFirst );
-    v2->vfptr = (AkMusicActionVtbl *)&AkMusicAction::`vftable';
+    v2->vfptr = (AkMusicActionVtbl *)&AkMusicAction::`vftable;
   }
 }
 

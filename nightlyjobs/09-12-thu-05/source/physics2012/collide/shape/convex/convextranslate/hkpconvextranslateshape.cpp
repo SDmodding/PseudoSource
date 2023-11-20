@@ -30,9 +30,9 @@ void __fastcall hkpConvexTranslateShape::hkpConvexTranslateShape(hkpConvexTransl
 
   v2 = this;
   hkpConvexShape::hkpConvexShape((hkpConvexShape *)&this->vfptr, flag);
-  v2->m_childShape.vfptr = (hkpShapeContainerVtbl *)&hkpSingleShapeContainer::`vftable';
+  v2->m_childShape.vfptr = (hkpShapeContainerVtbl *)&hkpSingleShapeContainer::`vftable;
   v2->m_type.m_storage = 10;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpConvexTranslateShape::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpConvexTranslateShape::`vftable;
 }
 
 // File Line: 38

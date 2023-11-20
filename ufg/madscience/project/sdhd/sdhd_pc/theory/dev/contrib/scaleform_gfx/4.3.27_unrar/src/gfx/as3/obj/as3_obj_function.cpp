@@ -49,7 +49,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::Instances::ThunkFunction> *__fastcall S
   if ( v6 )
   {
     Scaleform::GFx::AS3::Instances::FunctionBase::FunctionBase(v6, v5);
-    v7->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::ThunkFunction::`vftable';
+    v7->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::ThunkFunction::`vftable;
     v7->Thunk = v3;
   }
   else
@@ -84,9 +84,9 @@ Scaleform::Pickable<Scaleform::GFx::AS3::Instances::CheckTypeTF> *__fastcall Sca
   if ( v9 )
   {
     Scaleform::GFx::AS3::Instances::FunctionBase::FunctionBase(v9, v8);
-    v10->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::ThunkFunction::`vftable';
+    v10->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::ThunkFunction::`vftable;
     v10->Thunk = v4;
-    v10->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::CheckTypeTF::`vftable';
+    v10->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::CheckTypeTF::`vftable;
     v10->DataTypeClass = v5;
   }
   else
@@ -291,8 +291,8 @@ void __fastcall Scaleform::GFx::AS3::Instances::FunctionBase::FunctionBase(Scale
 
   v2 = this;
   Scaleform::GFx::AS3::Instance::Instance((Scaleform::GFx::AS3::Instance *)&this->vfptr, t);
-  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Object::`vftable';
-  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::FunctionBase::`vftable';
+  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Object::`vftable;
+  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::FunctionBase::`vftable;
   v2->Prototype.pObject = 0i64;
   Scaleform::GFx::AS3::InstanceTraits::fl::Object::MakeInstance(
     &result,
@@ -330,7 +330,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::FunctionBase::~FunctionBase(Scal
   unsigned int v3; // eax
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::FunctionBase::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::FunctionBase::`vftable;
   v2 = this->Prototype.pObject;
   if ( v2 )
   {
@@ -348,7 +348,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::FunctionBase::~FunctionBase(Scal
       }
     }
   }
-  v1->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instance::`vftable';
+  v1->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instance::`vftable;
   Scaleform::GFx::AS3::Traits::DestructTail(
     (Scaleform::GFx::AS3::Traits *)((_QWORD)v1->pTraits.pObject & 0xFFFFFFFFFFFFFFFEui64),
     (Scaleform::GFx::AS3::Object *)&v1->vfptr);
@@ -417,7 +417,7 @@ LABEL_10:
   --v9->RefCount;
   if ( v10 )
     Scaleform::GFx::ASStringNode::ReleaseNode(v9);
-  v13.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable';
+  v13.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable;
   Scaleform::Formatter::~Formatter((Scaleform::Formatter *)&v13.vfptr);
 }
 
@@ -1063,7 +1063,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::Function::Function(Scaleform::GF
   Scaleform::GFx::AS3::Instances::FunctionBase::FunctionBase(
     (Scaleform::GFx::AS3::Instances::FunctionBase *)&this->vfptr,
     (Scaleform::GFx::AS3::InstanceTraits::Traits *)&tr->vfptr);
-  v4->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::Function::`vftable';
+  v4->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::Function::`vftable;
   Scaleform::ArrayDataDH<Scaleform::GFx::AS3::Value,Scaleform::AllocatorDH<Scaleform::GFx::AS3::Value,2>,Scaleform::ArrayDefaultPolicy>::ArrayDataDH<Scaleform::GFx::AS3::Value,Scaleform::AllocatorDH<Scaleform::GFx::AS3::Value,2>,Scaleform::ArrayDefaultPolicy>(
     &v4->StoredScopeStack.Data,
     &v3->Data);
@@ -1657,7 +1657,7 @@ void __fastcall Scaleform::GFx::AS3::InstanceTraits::Thunk::Thunk(Scaleform::GFx
     (Scaleform::GFx::AS3::InstanceTraits::CTraits *)&this->vfptr,
     vm,
     &Scaleform::GFx::AS3::fl::FunctionCICpp);
-  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::Thunk::`vftable';
+  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::Thunk::`vftable;
   v2->TraitsType = 10;
   v3 = Scaleform::GFx::AS3::InstanceTraits::Thunk::f;
   v4 = 3i64;
@@ -1722,7 +1722,7 @@ void __fastcall Scaleform::GFx::AS3::InstanceTraits::MethodInd::MethodInd(Scalef
     (Scaleform::GFx::AS3::InstanceTraits::CTraits *)&this->vfptr,
     vm,
     &Scaleform::GFx::AS3::fl::FunctionCICpp);
-  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::MethodInd::`vftable';
+  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::MethodInd::`vftable;
   v2->TraitsType = 10;
   v3 = Scaleform::GFx::AS3::InstanceTraits::MethodInd::f;
   v4 = 3i64;
@@ -1764,7 +1764,7 @@ Scaleform::GFx::ASString *__fastcall Scaleform::GFx::AS3::InstanceTraits::Method
     ++v5;
   while ( str[v5] );
   Scaleform::GFx::ASString::Append(v3, str, v5);
-  v8 = &Scaleform::String::InitStruct::`vftable';
+  v8 = &Scaleform::String::InitStruct::`vftable;
   Scaleform::Formatter::~Formatter(&v7);
   return v3;
 }
@@ -1832,7 +1832,7 @@ void __fastcall Scaleform::GFx::AS3::InstanceTraits::VTableInd::VTableInd(Scalef
     (Scaleform::GFx::AS3::InstanceTraits::CTraits *)&this->vfptr,
     vm,
     &Scaleform::GFx::AS3::fl::FunctionCICpp);
-  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::VTableInd::`vftable';
+  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::VTableInd::`vftable;
   v2->TraitsType = 10;
   v3 = Scaleform::GFx::AS3::InstanceTraits::VTableInd::f;
   v4 = 3i64;
@@ -1921,7 +1921,7 @@ Scaleform::GFx::ASString *__fastcall Scaleform::GFx::AS3::InstanceTraits::ThunkF
     ++v5;
   while ( v7.ValueStr[v5] );
   Scaleform::GFx::ASString::Append(v3, v7.ValueStr, v5);
-  v7.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable';
+  v7.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable;
   Scaleform::Formatter::~Formatter((Scaleform::Formatter *)&v7.vfptr);
   return v3;
 }
@@ -1943,7 +1943,7 @@ void __fastcall Scaleform::GFx::AS3::InstanceTraits::Function::Function(Scalefor
     (Scaleform::GFx::AS3::InstanceTraits::CTraits *)&this->vfptr,
     file->VMRef,
     ci);
-  v7->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::Function::`vftable';
+  v7->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::Function::`vftable;
   v7->MethodInfoInd.Ind = v5;
   v7->File.pObject = v6;
   v6->RefCount = (v6->RefCount + 1) & 0x8FBFFFFF;
@@ -2058,7 +2058,7 @@ Scaleform::GFx::ASString *__fastcall Scaleform::GFx::AS3::InstanceTraits::Functi
     ++v5;
   while ( v7.ValueStr[v5] );
   Scaleform::GFx::ASString::Append(v3, v7.ValueStr, v5);
-  v7.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable';
+  v7.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable;
   Scaleform::Formatter::~Formatter((Scaleform::Formatter *)&v7.vfptr);
   return v3;
 }
@@ -2265,7 +2265,7 @@ void __fastcall Scaleform::GFx::AS3::ClassTraits::Function::Function(Scaleform::
   v4 = vm;
   v5 = this;
   Scaleform::GFx::AS3::ClassTraits::Traits::Traits((Scaleform::GFx::AS3::ClassTraits::Traits *)&this->vfptr, vm, ci);
-  v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::Function::`vftable';
+  v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::Function::`vftable;
   v6 = 0i64;
   v5->ThunkTraits.pObject = 0i64;
   v5->ThunkFunctionTraits.pObject = 0i64;
@@ -2278,7 +2278,7 @@ void __fastcall Scaleform::GFx::AS3::ClassTraits::Function::Function(Scaleform::
   if ( v8 )
   {
     Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v8, v4, v3);
-    v9.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::Function::`vftable';
+    v9.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::Function::`vftable;
     v9.pV[1].RefCount = 0;
     v9.pV[1].FirstOwnSlotNum = 0i64;
     v9.pV[1].Parent = 0i64;
@@ -2299,7 +2299,7 @@ void __fastcall Scaleform::GFx::AS3::ClassTraits::Function::Function(Scaleform::
   if ( v10 )
   {
     Scaleform::GFx::AS3::Class::Class(v10, (Scaleform::GFx::AS3::ClassTraits::Traits *)&v5->vfptr);
-    v12->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::Function::`vftable';
+    v12->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::Function::`vftable;
   }
   else
   {
@@ -2368,7 +2368,7 @@ void __fastcall Scaleform::GFx::AS3::ClassTraits::Function::Function(Scaleform::
   if ( v21 )
   {
     Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v21, v4, &Scaleform::GFx::AS3::fl::FunctionCIThunk);
-    v22->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::ThunkFunction::`vftable';
+    v22->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::ThunkFunction::`vftable;
     v22->TraitsType = 10;
     Scaleform::GFx::AS3::Traits::Add2VT(
       (Scaleform::GFx::AS3::Traits *)&v22->vfptr,

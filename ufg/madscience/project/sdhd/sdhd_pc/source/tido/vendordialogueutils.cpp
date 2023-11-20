@@ -34,7 +34,7 @@ void __fastcall UFG::VendorDialogueUtils::Setup(UFG::StoreFront *store)
     if ( v2 )
     {
       UFG::AudioEntity::AudioEntity((UFG::AudioEntity *)v2);
-      v3->vfptr = (UFG::AudioEntityVtbl *)&UFG::VendorDialogueUtils::`vftable';
+      v3->vfptr = (UFG::AudioEntityVtbl *)&UFG::VendorDialogueUtils::`vftable;
     }
     else
     {
@@ -476,9 +476,9 @@ LABEL_29:
     }
     if ( v17 )
     {
-      v17->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::AudioEventCallbackObject::`vftable';
+      v17->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::AudioEventCallbackObject::`vftable;
       v17->m_next = 0i64;
-      v17->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::SubtitleCallback::`vftable';
+      v17->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::SubtitleCallback::`vftable;
     }
     else
     {

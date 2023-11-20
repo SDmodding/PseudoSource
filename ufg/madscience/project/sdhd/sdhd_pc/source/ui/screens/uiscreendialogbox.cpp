@@ -31,7 +31,7 @@ void __fastcall UFG::UIScreenDialogBox::UIScreenDialogBox(UFG::UIScreenDialogBox
   v2 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -42,7 +42,7 @@ void __fastcall UFG::UIScreenDialogBox::UIScreenDialogBox(UFG::UIScreenDialogBox
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreenDialogBox::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreenDialogBox::`vftable;
   UFG::UIScreenDialogBox::UIScreenDialogBoxData::UIScreenDialogBoxData(&this->mData);
   v1->mState = 0;
   ++UFG::UIScreenDialogBox::m_iDialogBoxRefCount;
@@ -55,7 +55,7 @@ void __fastcall UFG::UIScreenDialogBox::~UIScreenDialogBox(UFG::UIScreenDialogBo
   UFG::UIScreenDialogBox *v1; // rbx
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreenDialogBox::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreenDialogBox::`vftable;
   if ( UFG::UIHKScreenGlobalOverlay::mThis )
     UFG::UIHKHelpBarWidget::Hide(&UFG::UIHKScreenGlobalOverlay::mThis->HelpBar, UI_DIALOG_HELP_BAR);
   UFG::UIScreenManagerBase::queueMessage(
@@ -149,12 +149,12 @@ void __fastcall UFG::UIScreenDialogBox::init(UFG::UIScreenDialogBox *this, UFG::
     *(_QWORD *)&dataa.MessageIds[4] = 0i64;
     UFG::UIHKHelpBarWidget::Show(v4, &dataa);
     UFG::qString::~qString(&dataa.CustomTexturePack);
-    `eh vector destructor iterator'(dataa.Icons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
-    `eh vector destructor iterator'(dataa.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+    `eh vector destructor iterator(dataa.Icons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+    `eh vector destructor iterator(dataa.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
   }
   v3->mState = 1;
   v6 = v3->mRenderable->m_movie.pObject;
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 8, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 8, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   v7 = (double)SLODWORD(v2[2].vfptr);
   if ( (v20 >> 6) & 1 )
   {
@@ -250,7 +250,7 @@ void __fastcall UFG::UIScreenDialogBox::init(UFG::UIScreenDialogBox *this, UFG::
     pargs.pObjectInterface = 0i64;
   }
   pargs.Type = 0;
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 8, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 8, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 109
@@ -405,7 +405,7 @@ void __fastcall UFG::UIScreenDialogBox::Flash_handleMouseMove(UFG::UIScreenDialo
   v3 = this->mRenderable->m_movie.pObject;
   if ( v3 )
   {
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( (v6 >> 6) & 1 )
     {
       (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v5 + 16i64))(v5, &ptr, COERCE_DOUBLE(*(_QWORD *)&v7));
@@ -421,7 +421,7 @@ void __fastcall UFG::UIScreenDialogBox::Flash_handleMouseMove(UFG::UIScreenDialo
     v10 = 5;
     v11 = mouseY;
     Scaleform::GFx::Movie::Invoke(v3, "handleMouseMove", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 
@@ -442,7 +442,7 @@ void __fastcall UFG::UIScreenDialogBox::Flash_handleMouseClick(UFG::UIScreenDial
   v3 = this->mRenderable->m_movie.pObject;
   if ( v3 )
   {
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( (v6 >> 6) & 1 )
     {
       (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v5 + 16i64))(v5, &ptr, COERCE_DOUBLE(*(_QWORD *)&v7));
@@ -458,7 +458,7 @@ void __fastcall UFG::UIScreenDialogBox::Flash_handleMouseClick(UFG::UIScreenDial
     v10 = 5;
     v11 = mouseY;
     Scaleform::GFx::Movie::Invoke(v3, "handleMouseClick", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 

@@ -5,7 +5,7 @@ void __fastcall OSuite::ZLog::ZLog(OSuite::ZLog *this)
   OSuite::ZLog *v1; // rbx
 
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZLog::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZLog::`vftable;
   OSuite::ZMutex::ZMutex(&this->m_FileMutex);
   v1->m_pLogFile = 0i64;
   v1->m_logDelegate.m_Closure.m_pFunction = 0i64;
@@ -20,7 +20,7 @@ void __fastcall OSuite::ZLog::~ZLog(OSuite::ZLog *this)
   OSuite::ZFileWriter *v2; // rcx
 
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZLog::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZLog::`vftable;
   v2 = this->m_pLogFile;
   if ( v2 )
   {

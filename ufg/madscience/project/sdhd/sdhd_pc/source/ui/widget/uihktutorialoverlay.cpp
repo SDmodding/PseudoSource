@@ -5,7 +5,7 @@ void __fastcall UFG::UIHKTutorialOverlay::~UIHKTutorialOverlay(UFG::UIHKTutorial
   UFG::UIHKTutorialOverlay *v1; // rbx
 
   v1 = this;
-  this->vfptr = (UFG::UIHKTutorialOverlayVtbl *)&UFG::UIHKTutorialOverlay::`vftable';
+  this->vfptr = (UFG::UIHKTutorialOverlayVtbl *)&UFG::UIHKTutorialOverlay::`vftable;
   UFG::qString::~qString(&this->m_BodyTxt);
   UFG::qString::~qString(&v1->m_TitleTxt);
 }
@@ -36,7 +36,7 @@ void __fastcall UFG::UIHKTutorialOverlay::show(UFG::UIHKTutorialOverlay *this, c
     if ( !(_S15_5 & 1) )
     {
       _S15_5 |= 1u;
-      glManager.vfptr = (UFG::GameLogManagerVtbl *)&UFG::GameLogManager::`vftable';
+      glManager.vfptr = (UFG::GameLogManagerVtbl *)&UFG::GameLogManager::`vftable;
       atexit(UFG::GameLogManager::getInstance_::_2_::_dynamic_atexit_destructor_for__glManager__);
     }
     UFG::GameLogManager::LogItem(&glManager, (__int64)&log_type, v3);
@@ -102,7 +102,7 @@ void __fastcall UFG::UIHKTutorialOverlay::update(UFG::UIHKTutorialOverlay *this,
       v5 = UFG::UI::LocalizeText(this->m_TitleTxt.mData);
       v6 = UFG::UI::LocalizeText(v4->m_BodyTxt.mData);
       v7 = v3->mRenderable->m_movie.pObject;
-      `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       if ( (v10 >> 6) & 1 )
       {
         (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v9 + 16i64))(v9, &ptr, v11);
@@ -121,7 +121,7 @@ void __fastcall UFG::UIHKTutorialOverlay::update(UFG::UIHKTutorialOverlay *this,
       Scaleform::GFx::Movie::Invoke(v7, "Set_Subtitle_Position1", 0i64, 0i64, 0);
       v4->m_bShowMsg = 0;
       v4->m_eState = 2;
-      `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+      `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     }
     else if ( this->m_eState == 3 )
     {

@@ -38,9 +38,9 @@ __int64 __fastcall hkAlgorithm::findMinimumIndex<hkVector4f,hkVector4UtilImpl<fl
 
 // File Line: 62
 // RVA: 0xC28D10
-int __fastcall hkAlgorithm::findMinimumIndex<hkaiStaticObstacleSystem::VelocityObstacleEdge,`anonymous namespace'::CalculateEdgePenalty>(hkaiStaticObstacleSystem::VelocityObstacleEdge *pArr, int N, CalculateEdgePenalty *evalFunc)
+int __fastcall hkAlgorithm::findMinimumIndex<hkaiStaticObstacleSystem::VelocityObstacleEdge,`anonymous namespace::CalculateEdgePenalty>(hkaiStaticObstacleSystem::VelocityObstacleEdge *pArr, int N, CalculateEdgePenalty *evalFunc)
 {
-  return hkAlgorithm::findMinimumIndex<hkaiStaticObstacleSystem::VelocityObstacleEdge,`anonymous namespace'::CalculateEdgePenalty,hkAlgorithm::less<float>>(
+  return hkAlgorithm::findMinimumIndex<hkaiStaticObstacleSystem::VelocityObstacleEdge,`anonymous namespace::CalculateEdgePenalty,hkAlgorithm::less<float>>(
            pArr,
            N,
            evalFunc,

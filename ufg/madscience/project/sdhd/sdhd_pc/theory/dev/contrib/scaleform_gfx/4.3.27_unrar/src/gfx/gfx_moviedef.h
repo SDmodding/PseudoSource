@@ -45,12 +45,12 @@ void __fastcall Scaleform::GFx::LoadUpdateSync::LoadUpdateSync(Scaleform::GFx::L
   Scaleform::GFx::LoadUpdateSync *v1; // rbx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,264>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::LoadUpdateSync,264>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::LoadUpdateSync::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,264>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::LoadUpdateSync,264>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::LoadUpdateSync::`vftable;
   Scaleform::Mutex::Mutex(&this->mMutex, 1, 0);
   Scaleform::WaitCondition::WaitCondition(&v1->WC);
   v1->LoadFinished = 0;
@@ -252,12 +252,12 @@ void __fastcall Scaleform::GFx::MovieDefBindStates::MovieDefBindStates(Scaleform
   __int64 v22; // [rsp+58h] [rbp-10h]
 
   v2 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::MovieDefBindStates,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::MovieDefBindStates::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::MovieDefBindStates,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::MovieDefBindStates::`vftable;
   this->pFileOpener.pObject = 0i64;
   this->pURLBulider.pObject = 0i64;
   this->pImageCreator.pObject = 0i64;
@@ -275,7 +275,7 @@ void __fastcall Scaleform::GFx::MovieDefBindStates::MovieDefBindStates(Scaleform
   ((void (__fastcall *)(Scaleform::GFx::StateBag *, __int128 *, Scaleform::GFx::State::StateType *, signed __int64, signed __int64))psharedState->vfptr->GetStatesAddRef)(
     psharedState,
     &v17,
-    `Scaleform::GFx::MovieDefBindStates::MovieDefBindStates'::`2'::stateQuery,
+    `Scaleform::GFx::MovieDefBindStates::MovieDefBindStates::`2::stateQuery,
     7i64,
     -2i64);
   v3 = (Scaleform::GFx::FileOpener *)v17;
@@ -338,12 +338,12 @@ void __fastcall Scaleform::GFx::MovieDefBindStates::MovieDefBindStates(Scaleform
 
   v2 = pother;
   v3 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::MovieDefBindStates,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::MovieDefBindStates::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::MovieDefBindStates,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::MovieDefBindStates::`vftable;
   this->pFileOpener.pObject = 0i64;
   this->pURLBulider.pObject = 0i64;
   this->pImageCreator.pObject = 0i64;
@@ -407,7 +407,7 @@ void __fastcall Scaleform::GFx::MovieDefBindStates::MovieDefBindStates(Scaleform
 // RVA: 0x78DB00
 void __fastcall Scaleform::GFx::MovieDefImpl::ReleaseNotifier::~ReleaseNotifier(Scaleform::GFx::MovieDefImpl::ReleaseNotifier *this)
 {
-  this->vfptr = (Scaleform::GFx::MovieDefImpl::ReleaseNotifierVtbl *)&Scaleform::GFx::MovieDefImpl::ReleaseNotifier::`vftable';
+  this->vfptr = (Scaleform::GFx::MovieDefImpl::ReleaseNotifierVtbl *)&Scaleform::GFx::MovieDefImpl::ReleaseNotifier::`vftable;
 }
 
 // File Line: 1406
@@ -668,7 +668,7 @@ void __fastcall Scaleform::GFx::MovieBindProcess::OnAbandon(Scaleform::GFx::Movi
 // RVA: 0x8A4500
 void __fastcall Scaleform::GFx::ExecuteTag::~ExecuteTag(Scaleform::GFx::ExecuteTag *this)
 {
-  this->vfptr = (Scaleform::GFx::ExecuteTagVtbl *)&Scaleform::GFx::ExecuteTag::`vftable';
+  this->vfptr = (Scaleform::GFx::ExecuteTagVtbl *)&Scaleform::GFx::ExecuteTag::`vftable;
 }
 
 // File Line: 1773
@@ -677,9 +677,9 @@ void __fastcall Scaleform::GFx::GFxPlaceObjectUnpacked::GFxPlaceObjectUnpacked(S
 {
   Scaleform::GFx::CharPosInfo *v1; // rbx
 
-  this->vfptr = (Scaleform::GFx::ExecuteTagVtbl *)&Scaleform::GFx::ExecuteTag::`vftable';
-  this->vfptr = (Scaleform::GFx::ExecuteTagVtbl *)&Scaleform::GFx::GFxPlaceObjectBase::`vftable';
-  this->vfptr = (Scaleform::GFx::ExecuteTagVtbl *)&Scaleform::GFx::GFxPlaceObjectUnpacked::`vftable';
+  this->vfptr = (Scaleform::GFx::ExecuteTagVtbl *)&Scaleform::GFx::ExecuteTag::`vftable;
+  this->vfptr = (Scaleform::GFx::ExecuteTagVtbl *)&Scaleform::GFx::GFxPlaceObjectBase::`vftable;
+  this->vfptr = (Scaleform::GFx::ExecuteTagVtbl *)&Scaleform::GFx::GFxPlaceObjectUnpacked::`vftable;
   v1 = &this->Pos;
   Scaleform::Render::Cxform::Cxform(&this->Pos.ColorTransform);
   *(_QWORD *)&v1->Matrix_1.M[0][0] = 1065353216i64;

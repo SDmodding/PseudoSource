@@ -31,7 +31,7 @@ hkClass *__fastcall hkxSparselyAnimatedInt::staticClass()
 void __fastcall finishLoadedObjecthkxSparselyAnimatedInt(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkxSparselyAnimatedInt::`vftable';
+    *(_QWORD *)p = &hkxSparselyAnimatedInt::`vftable;
 }
 
 // File Line: 69
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkxSparselyAnimatedInt(void *p)
 // RVA: 0xE33090
 void **__fastcall getVtablehkxSparselyAnimatedInt()
 {
-  return &hkxSparselyAnimatedInt::`vftable';
+  return &hkxSparselyAnimatedInt::`vftable;
 }
 
 // File Line: 95

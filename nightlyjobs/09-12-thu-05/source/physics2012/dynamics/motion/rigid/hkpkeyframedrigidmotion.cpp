@@ -7,7 +7,7 @@ void __fastcall hkpKeyframedRigidMotion::hkpKeyframedRigidMotion(hkpKeyframedRig
   v3 = this;
   hkpMotion::hkpMotion((hkpMotion *)&this->vfptr, position, rotation, 0);
   v3->m_type.m_storage = 4;
-  v3->vfptr = (hkBaseObjectVtbl *)&hkpKeyframedRigidMotion::`vftable';
+  v3->vfptr = (hkBaseObjectVtbl *)&hkpKeyframedRigidMotion::`vftable;
   v3->m_inertiaAndMassInv = 0i64;
   v3->m_savedMotion = 0i64;
   v3->m_savedQualityTypeIndex = 0;
@@ -21,11 +21,11 @@ void __fastcall hkpKeyframedRigidMotion::~hkpKeyframedRigidMotion(hkpKeyframedRi
   hkpMaxSizeMotion *v2; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpKeyframedRigidMotion::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpKeyframedRigidMotion::`vftable;
   v2 = this->m_savedMotion;
   if ( v2 )
     hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 36

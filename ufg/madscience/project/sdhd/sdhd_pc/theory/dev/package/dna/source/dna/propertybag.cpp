@@ -1877,10 +1877,10 @@ __int64 __fastcall DNA::PropertyData::Add(DNA::PropertyData *this, unsigned int 
     v9 = v5 + 1;
     v9->mNext = v9;
     v9[1].mNext = v9;
-    v5->mNext = (UFG::allocator::free_link *)&DNA::IAction::`vftable';
+    v5->mNext = (UFG::allocator::free_link *)&DNA::IAction::`vftable;
     LOBYTE(v5[3].mNext) = 1;
     *(UFG::allocator::free_link **)((char *)&v5[3].mNext + 4) = (UFG::allocator::free_link *)1601572253;
-    v5->mNext = (UFG::allocator::free_link *)&DNA::PropertyData::AddValueAction::`vftable';
+    v5->mNext = (UFG::allocator::free_link *)&DNA::PropertyData::AddValueAction::`vftable;
     v5[5].mNext = v8;
   }
   else

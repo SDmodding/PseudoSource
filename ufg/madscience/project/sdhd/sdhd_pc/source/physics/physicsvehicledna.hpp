@@ -19,12 +19,12 @@ void __fastcall UFG::BaseVehiclePhysicsDef::BaseVehiclePhysicsDef(UFG::BaseVehic
   v3->mBaseNode.mNeighbours[0] = &v3->mBaseNode;
   v3->mBaseNode.mNeighbours[1] = &v3->mBaseNode;
   v3->mBaseNode.mUID = v4;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable;
   v8 = &this->mHandles;
   v8->mNode.mPrev = &v8->mNode;
   v8->mNode.mNext = &v8->mNode;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::BaseVehiclePhysicsDef,UFG::qReflectObject>::`vftable';
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::BaseVehiclePhysicsDef::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::BaseVehiclePhysicsDef,UFG::qReflectObject>::`vftable;
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::BaseVehiclePhysicsDef::`vftable;
   this->chassis_physicsProperties.mText.mData.mFlags = 2;
   v5 = UFG::qMalloc(0x28ui64, UFG::gGlobalNewName, 0i64);
   v6 = (UFG::qBaseNodeRB *)v5;
@@ -52,14 +52,14 @@ void __fastcall UFG::CarPhysicsDef::CarPhysicsDef(UFG::CarPhysicsDef *this, MemI
 
   v2 = this;
   UFG::BaseVehiclePhysicsDef::BaseVehiclePhysicsDef((UFG::BaseVehiclePhysicsDef *)&this->vfptr, f);
-  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::WheeledVehiclePhysicsDef,UFG::BaseVehiclePhysicsDef>::`vftable';
-  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::WheeledVehiclePhysicsDef::`vftable';
+  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::WheeledVehiclePhysicsDef,UFG::BaseVehiclePhysicsDef>::`vftable;
+  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::WheeledVehiclePhysicsDef::`vftable;
   v2->torqueTable.mData.mFlags = 2;
   v2->drivetrain_gearRatioTable.mData.mFlags = 2;
   v2->drivetrain_upshiftTable.mData.mFlags = 2;
   v2->drivetrain_downshiftTable.mData.mFlags = 2;
-  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::CarPhysicsDef,UFG::WheeledVehiclePhysicsDef>::`vftable';
-  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::CarPhysicsDef::`vftable';
+  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::CarPhysicsDef,UFG::WheeledVehiclePhysicsDef>::`vftable;
+  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::CarPhysicsDef::`vftable;
 }
 
 // File Line: 250
@@ -70,13 +70,13 @@ void __fastcall UFG::BikePhysicsDef::BikePhysicsDef(UFG::BikePhysicsDef *this, M
 
   v2 = this;
   UFG::BaseVehiclePhysicsDef::BaseVehiclePhysicsDef((UFG::BaseVehiclePhysicsDef *)&this->vfptr, f);
-  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::WheeledVehiclePhysicsDef,UFG::BaseVehiclePhysicsDef>::`vftable';
-  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::WheeledVehiclePhysicsDef::`vftable';
+  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::WheeledVehiclePhysicsDef,UFG::BaseVehiclePhysicsDef>::`vftable;
+  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::WheeledVehiclePhysicsDef::`vftable;
   v2->torqueTable.mData.mFlags = 2;
   v2->drivetrain_gearRatioTable.mData.mFlags = 2;
   v2->drivetrain_upshiftTable.mData.mFlags = 2;
   v2->drivetrain_downshiftTable.mData.mFlags = 2;
-  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::BikePhysicsDef,UFG::WheeledVehiclePhysicsDef>::`vftable';
-  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::BikePhysicsDef::`vftable';
+  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::BikePhysicsDef,UFG::WheeledVehiclePhysicsDef>::`vftable;
+  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::BikePhysicsDef::`vftable;
 }
 

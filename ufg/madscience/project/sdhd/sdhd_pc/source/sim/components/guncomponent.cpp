@@ -33,7 +33,7 @@ void __fastcall UFG::GunComponent::GunComponent(UFG::GunComponent *this, unsigne
   v5 = (UFG::qNode<UFG::GunComponent,UFG::GunComponent> *)&v4->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::GunComponent::`vftable';
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::GunComponent::`vftable;
   *(_QWORD *)&v4->mNetShootSequence = 0i64;
   *(_QWORD *)&v4->mNetBulletPosition.y = 0i64;
   *(_QWORD *)&v4->mNetBulletVelocity.x = 0i64;
@@ -138,7 +138,7 @@ void __fastcall UFG::GunComponent::~GunComponent(UFG::GunComponent *this)
   UFG::qNode<UFG::GunComponent,UFG::GunComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::GunComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::GunComponent::`vftable;
   if ( this == UFG::GunComponent::s_GunComponentpCurrentIterator )
     UFG::GunComponent::s_GunComponentpCurrentIterator = (UFG::GunComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::GunComponent,UFG::GunComponent> *)&this->mPrev;

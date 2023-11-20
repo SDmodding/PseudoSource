@@ -12,10 +12,10 @@ void __fastcall Scaleform::GFx::AS3::AvmInteractiveObj::AvmInteractiveObj(Scalef
     (Scaleform::GFx::AS3::AvmDisplayObj *)&this->vfptr,
     (Scaleform::GFx::DisplayObject *)&pdispObj->vfptr);
   v4 = (Scaleform::GFx::AvmInteractiveObjBase *)&v3->vfptr;
-  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmDisplayObjBase::`vftable';
-  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmInteractiveObjBase::`vftable';
-  v3->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmInteractiveObj::`vftable'{for `Scaleform::GFx::AS3::AvmDisplayObj'};
-  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmInteractiveObj::`vftable'{for `Scaleform::GFx::AvmInteractiveObjBase'};
+  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmDisplayObjBase::`vftable;
+  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmInteractiveObjBase::`vftable;
+  v3->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmInteractiveObj::`vftable{for `Scaleform::GFx::AS3::AvmDisplayObj};
+  v4->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmInteractiveObj::`vftable{for `Scaleform::GFx::AvmInteractiveObjBase};
   *(_WORD *)&v3->MouseOverCnt = 0;
   v2->TabIndex = -1;
 }
@@ -24,9 +24,9 @@ void __fastcall Scaleform::GFx::AS3::AvmInteractiveObj::AvmInteractiveObj(Scalef
 // RVA: 0x789940
 void __fastcall Scaleform::GFx::AS3::AvmInteractiveObj::~AvmInteractiveObj(Scaleform::GFx::AS3::AvmInteractiveObj *this)
 {
-  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmInteractiveObj::`vftable'{for `Scaleform::GFx::AS3::AvmDisplayObj'};
-  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmInteractiveObj::`vftable'{for `Scaleform::GFx::AvmInteractiveObjBase'};
-  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmDisplayObjBase::`vftable';
+  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmInteractiveObj::`vftable{for `Scaleform::GFx::AS3::AvmDisplayObj};
+  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmInteractiveObj::`vftable{for `Scaleform::GFx::AvmInteractiveObjBase};
+  this->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AvmDisplayObjBase::`vftable;
   Scaleform::GFx::AS3::AvmDisplayObj::~AvmDisplayObj((Scaleform::GFx::AS3::AvmDisplayObj *)&this->vfptr);
 }
 

@@ -27,7 +27,7 @@ void __fastcall UFG::BaseCameraComponent::BaseCameraComponent(UFG::BaseCameraCom
   v3 = (UFG::qNode<UFG::BaseCameraComponent,UFG::BaseCameraComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BaseCameraComponent::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BaseCameraComponent::`vftable;
   UFG::Camera::Camera(&v2->mCamera);
   v4 = UFG::BaseCameraComponent::s_BaseCameraComponentList.mNode.mPrev;
   UFG::BaseCameraComponent::s_BaseCameraComponentList.mNode.mPrev->mNext = (UFG::qNode<UFG::BaseCameraComponent,UFG::BaseCameraComponent> *)&v2->mPrev;
@@ -64,7 +64,7 @@ void __fastcall UFG::BaseCameraComponent::~BaseCameraComponent(UFG::BaseCameraCo
   UFG::qNode<UFG::BaseCameraComponent,UFG::BaseCameraComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BaseCameraComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BaseCameraComponent::`vftable;
   if ( this == UFG::BaseCameraComponent::s_BaseCameraComponentpCurrentIterator )
     UFG::BaseCameraComponent::s_BaseCameraComponentpCurrentIterator = (UFG::BaseCameraComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::BaseCameraComponent,UFG::BaseCameraComponent> *)&this->mPrev;

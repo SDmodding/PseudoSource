@@ -12,7 +12,7 @@ hkReferencedObject *__fastcall hkTypeInfoRegistrycreate()
   if ( result )
   {
     *(_DWORD *)&result->m_memSizeAndFlags = 0x1FFFF;
-    result->vfptr = (hkBaseObjectVtbl *)&hkTypeInfoRegistry::`vftable';
+    result->vfptr = (hkBaseObjectVtbl *)&hkTypeInfoRegistry::`vftable;
     hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>(
       (hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator> *)&result[1],
       0);

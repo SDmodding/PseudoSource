@@ -1,6 +1,6 @@
 // File Line: 108
 // RVA: 0x89C1A0
-void __fastcall Scaleform::GFx::`anonymous namespace'::Params::Params(Scaleform::GFx::Params *this, void **jin, unsigned int width, Scaleform::Render::ImageFormat format)
+void __fastcall Scaleform::GFx::`anonymous namespace::Params::Params(Scaleform::GFx::Params *this, void **jin, unsigned int width, Scaleform::Render::ImageFormat format)
 {
   Scaleform::Render::ImageFormat v4; // er14
   unsigned int v5; // er13
@@ -332,7 +332,7 @@ __int64 __fastcall Scaleform::GFx::ZlibDecodeColorMappedAlpha(Scaleform::GFx::Zl
     Image_R8G8B8A8,
     &tempBuffer,
     0x400ui64);
-  Scaleform::GFx::`anonymous namespace'::Params::Params(&paramsa, 0i64, v5->Size.Width, v5->Format);
+  Scaleform::GFx::`anonymous namespace::Params::Params(&paramsa, 0i64, v5->Size.Width, v5->Format);
   v7 = 0;
   v8 = v19.pReadScanline;
   v9 = 4 * v5->ColorTableSize;
@@ -626,7 +626,7 @@ __int64 __fastcall Scaleform::GFx::ZlibDecodeRGBA(Scaleform::GFx::ZlibDecodePara
   v5 = copyScanline;
   v6 = pdest;
   v7 = params;
-  Scaleform::GFx::`anonymous namespace'::Params::Params(&paramsa, 0i64, params->Size.Width, params->Format);
+  Scaleform::GFx::`anonymous namespace::Params::Params(&paramsa, 0i64, params->Size.Width, params->Format);
   v8 = 1;
   v22 = 0;
   v9 = 0;
@@ -874,7 +874,7 @@ _BOOL8 __fastcall Scaleform::GFx::MemoryBufferZlibImage::Decode(Scaleform::GFx::
   v10 = v7->FileData.Data.Size;
   v11 = (__int64)v7->FileData.Data.Data;
   v24.RefCount = 1;
-  v24.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::MemoryFile::`vftable';
+  v24.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::MemoryFile::`vftable;
   Scaleform::String::String(&v25, &customWorldMapCaption);
   v26 = v11;
   v27 = v10;

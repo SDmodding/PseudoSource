@@ -9,7 +9,7 @@ void __fastcall hkpMoppCodeGenerator::hkpMoppCodeGenerator(hkpMoppCodeGenerator 
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpMoppCodeGenerator::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpMoppCodeGenerator::`vftable;
   this->m_jumpCommands.m_data = 0i64;
   this->m_jumpCommands.m_size = 0;
   this->m_jumpCommands.m_capacityAndFlags = 2147483648;
@@ -33,7 +33,7 @@ void __fastcall hkpMoppCodeGenerator::~hkpMoppCodeGenerator(hkpMoppCodeGenerator
 
   v1 = this->m_code;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpMoppCodeGenerator::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpMoppCodeGenerator::`vftable;
   if ( v1 )
   {
     v3 = this->m_size;
@@ -49,7 +49,7 @@ void __fastcall hkpMoppCodeGenerator::~hkpMoppCodeGenerator(hkpMoppCodeGenerator
       8 * v5);
   v2->m_jumpCommands.m_data = 0i64;
   v2->m_jumpCommands.m_capacityAndFlags = 2147483648;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 39
@@ -107,7 +107,7 @@ hkpMoppCode *__fastcall hkpMoppCodeGenerator::compileCode(hkpMoppCodeGenerator *
   if ( v4 )
   {
     *(_DWORD *)(v4 + 8) = 0x1FFFF;
-    *(_QWORD *)v4 = &hkpMoppCode::`vftable';
+    *(_QWORD *)v4 = &hkpMoppCode::`vftable;
     *(_QWORD *)(v4 + 32) = 0i64;
     *(_DWORD *)(v4 + 40) = 0;
     *(_DWORD *)(v4 + 44) = 2147483648;

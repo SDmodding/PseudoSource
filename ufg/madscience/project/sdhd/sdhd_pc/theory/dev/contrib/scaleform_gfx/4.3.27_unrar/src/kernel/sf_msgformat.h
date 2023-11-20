@@ -2,7 +2,7 @@
 // RVA: 0x94A4E0
 void __fastcall Scaleform::FmtResource::~FmtResource(Scaleform::FmtResource *this)
 {
-  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::FmtResource::`vftable';
+  this->vfptr = (Scaleform::FmtResourceVtbl *)&Scaleform::FmtResource::`vftable;
 }
 
 // File Line: 1031
@@ -49,11 +49,11 @@ void __fastcall Scaleform::MsgFormat::FormatD1<bool>(Scaleform::MsgFormat *this,
       if ( v5 )
       {
         v9 = *v2;
-        *(_QWORD *)v5 = &Scaleform::FmtResource::`vftable';
-        *(_QWORD *)v5 = &Scaleform::Formatter::`vftable';
+        *(_QWORD *)v5 = &Scaleform::FmtResource::`vftable;
+        *(_QWORD *)v5 = &Scaleform::Formatter::`vftable;
         *(_QWORD *)(v5 + 8) = v3;
         *(_BYTE *)(v5 + 16) = 0;
-        *(_QWORD *)v5 = &Scaleform::BoolFormatter::`vftable';
+        *(_QWORD *)v5 = &Scaleform::BoolFormatter::`vftable;
         *(_BYTE *)(v5 + 24) = v9 | *(_BYTE *)(v5 + 24) & 0xFC;
         *(_QWORD *)(v5 + 32) = 0i64;
         *(_QWORD *)(v5 + 40) = 0i64;

@@ -42,12 +42,12 @@ void __fastcall UFG::SimObjectPropertiesComponent::SimObjectPropertiesComponent(
   v5 = (UFG::qNode<UFG::SimObjectPropertiesComponent,UFG::SimObjectPropertiesComponent> *)&v4->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SimObjectPropertiesComponent::`vftable';
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SimObjectPropertiesComponent::`vftable;
   v6 = 0i64;
   v4->m_eSimObjectType = 0;
   v4->m_pSubTargetingProfile = 0i64;
   v4->m_BitField.mBits[0] = 0i64;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v4->m_FlagSetLists,
     0x10ui64,
     2,
@@ -125,7 +125,7 @@ void __fastcall UFG::SimObjectPropertiesComponent::~SimObjectPropertiesComponent
   UFG::qNode<UFG::SimObjectPropertiesComponent,UFG::SimObjectPropertiesComponent> *v18; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SimObjectPropertiesComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SimObjectPropertiesComponent::`vftable;
   if ( this == UFG::SimObjectPropertiesComponent::s_SimObjectPropertiesComponentpCurrentIterator )
     UFG::SimObjectPropertiesComponent::s_SimObjectPropertiesComponentpCurrentIterator = (UFG::SimObjectPropertiesComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::SimObjectPropertiesComponent,UFG::SimObjectPropertiesComponent> *)&this->mPrev;
@@ -227,12 +227,12 @@ LABEL_32:
   if ( v15 )
   {
     v16 = v15 - 1;
-    `eh vector destructor iterator'(v15, 4ui64, v15[-1].mUID, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v15, 4ui64, v15[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v16);
   }
   v1->m_ClassTypeListArray.p = 0i64;
   *(_QWORD *)&v1->m_ClassTypeListArray.size = 0i64;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->m_FlagSetLists,
     0x10ui64,
     2,

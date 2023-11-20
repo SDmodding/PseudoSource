@@ -35,7 +35,7 @@ void __fastcall finishLoadedObjecthkxNodeSelectionSet(void *p, int finishing)
   if ( p )
   {
     v2 = (hkStringPtr *)((char *)p + 48);
-    v2[-6].m_stringAndFlag = (const char *)&hkxNodeSelectionSet::`vftable';
+    v2[-6].m_stringAndFlag = (const char *)&hkxNodeSelectionSet::`vftable;
     hkStringPtr::hkStringPtr(v2, (hkFinishLoadedObjectFlag)finishing);
   }
 }
@@ -54,7 +54,7 @@ void **__fastcall getVtablehkxNodeSelectionSet()
   hkStringPtr v1; // [rsp+50h] [rbp-18h]
 
   hkStringPtr::hkStringPtr(&v1, 0);
-  return &hkxNodeSelectionSet::`vftable';
+  return &hkxNodeSelectionSet::`vftable;
 }
 
 // File Line: 98

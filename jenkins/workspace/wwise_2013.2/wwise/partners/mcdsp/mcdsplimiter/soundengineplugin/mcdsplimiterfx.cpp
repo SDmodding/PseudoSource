@@ -7,7 +7,7 @@ AK::IAkPlugin *__fastcall CreateMcDSPML1FX(AK::IAkPluginMemAlloc *in_pAllocator)
   result = (AK::IAkPlugin *)in_pAllocator->vfptr->Malloc(in_pAllocator, 40ui64);
   if ( !result )
     return 0i64;
-  result->vfptr = (AK::IAkPluginVtbl *)&CMcDSPLimiterFX::`vftable';
+  result->vfptr = (AK::IAkPluginVtbl *)&CMcDSPLimiterFX::`vftable;
   result[1].vfptr = 0i64;
   result[2].vfptr = 0i64;
   LODWORD(result[3].vfptr) = -1;
@@ -19,7 +19,7 @@ AK::IAkPlugin *__fastcall CreateMcDSPML1FX(AK::IAkPluginMemAlloc *in_pAllocator)
 // RVA: 0xAFC3C0
 void __fastcall CMcDSPLimiterFX::CMcDSPLimiterFX(CMcDSPLimiterFX *this)
 {
-  this->vfptr = (AK::IAkPluginVtbl *)&CMcDSPLimiterFX::`vftable';
+  this->vfptr = (AK::IAkPluginVtbl *)&CMcDSPLimiterFX::`vftable;
   this->m_pSharedParams = 0i64;
   this->m_process = 0i64;
   this->m_FXState.FXTailHandler.uTotalTailFrames = 0;
@@ -30,7 +30,7 @@ void __fastcall CMcDSPLimiterFX::CMcDSPLimiterFX(CMcDSPLimiterFX *this)
 // RVA: 0xAFC3F0
 void __fastcall CMcDSPLimiterFX::~CMcDSPLimiterFX(CMcDSPLimiterFX *this)
 {
-  this->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable';
+  this->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable;
 }
 
 // File Line: 61

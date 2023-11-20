@@ -6,7 +6,7 @@ void __fastcall hkpReorientAction::hkpReorientAction(hkpReorientAction *this)
 
   v1 = this;
   hkpUnaryAction::hkpUnaryAction((hkpUnaryAction *)&this->vfptr, 0i64, 0i64);
-  v1->vfptr = (hkBaseObjectVtbl *)&hkpReorientAction::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkpReorientAction::`vftable;
   v1->m_rotationAxis = 0i64;
   v1->m_upAxis = 0i64;
   *(_QWORD *)&v1->m_strength = 0i64;
@@ -25,7 +25,7 @@ void __fastcall hkpReorientAction::hkpReorientAction(hkpReorientAction *this, hk
   v7 = upAxis;
   v8 = this;
   hkpUnaryAction::hkpUnaryAction((hkpUnaryAction *)&this->vfptr, (hkpEntity *)&body->vfptr, 0i64);
-  v8->vfptr = (hkBaseObjectVtbl *)&hkpReorientAction::`vftable';
+  v8->vfptr = (hkBaseObjectVtbl *)&hkpReorientAction::`vftable;
   v8->m_rotationAxis = (hkVector4f)v6->m_quad;
   v9 = v7->m_quad;
   v8->m_strength = strength;
@@ -141,11 +141,11 @@ void __fastcall hkpReorientAction::applyAction(hkpReorientAction *this, hkStepIn
           v25);
   v27 = (__m128)_mm_srli_epi32(_mm_slli_epi32((__m128i)v33.m_quad, 1u), 1u);
   v28 = _mm_and_ps(
-          (__m128)`hkVector4f::getComponent'::`2'::indexToMask[(unsigned __int8)hkVector4Comparison_maskToLastIndex[_mm_movemask_ps(_mm_and_ps(v26, (__m128)xmmword_141AA8270))]],
+          (__m128)`hkVector4f::getComponent::`2::indexToMask[(unsigned __int8)hkVector4Comparison_maskToLastIndex[_mm_movemask_ps(_mm_and_ps(v26, (__m128)xmmword_141AA8270))]],
           (__m128)v24);
   v29 = _mm_or_ps(_mm_shuffle_ps(v28, v28, 78), v28);
   v30 = _mm_and_ps(
-          (__m128)`hkVector4f::getComponent'::`2'::indexToMask[(unsigned __int8)hkVector4Comparison_maskToLastIndex[_mm_movemask_ps(_mm_and_ps(_mm_cmpleps(_mm_max_ps(_mm_shuffle_ps(v27, v27, 170), _mm_max_ps(_mm_shuffle_ps(v27, v27, 85), _mm_shuffle_ps(v27, v27, 0))), v27), (__m128)xmmword_141AA8270))]],
+          (__m128)`hkVector4f::getComponent::`2::indexToMask[(unsigned __int8)hkVector4Comparison_maskToLastIndex[_mm_movemask_ps(_mm_and_ps(_mm_cmpleps(_mm_max_ps(_mm_shuffle_ps(v27, v27, 170), _mm_max_ps(_mm_shuffle_ps(v27, v27, 85), _mm_shuffle_ps(v27, v27, 0))), v27), (__m128)xmmword_141AA8270))]],
           v33.m_quad);
   v31 = _mm_or_ps(_mm_shuffle_ps(v30, v30, 78), v30);
   if ( COERCE_FLOAT(*(unsigned __int128 *)&_mm_shuffle_ps(v29, v29, 177) | v29.m128_i32[0]) < 0.0 != COERCE_FLOAT(*(unsigned __int128 *)&_mm_shuffle_ps(v31, v31, 177) | v31.m128_i32[0]) < 0.0 )

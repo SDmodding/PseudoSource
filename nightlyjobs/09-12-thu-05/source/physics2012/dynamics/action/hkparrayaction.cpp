@@ -15,12 +15,12 @@ void __fastcall hkpArrayAction::hkpArrayAction(hkpArrayAction *this, hkArray<hkp
   v3 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_userData = userData;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpAction::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpAction::`vftable;
   this->m_world = 0i64;
   this->m_island = 0i64;
   v4 = entities;
   hkStringPtr::hkStringPtr(&this->m_name);
-  v3->vfptr = (hkBaseObjectVtbl *)&hkpArrayAction::`vftable';
+  v3->vfptr = (hkBaseObjectVtbl *)&hkpArrayAction::`vftable;
   v3->m_entities.m_data = 0i64;
   v3->m_entities.m_size = 0;
   v3->m_entities.m_capacityAndFlags = 2147483648;
@@ -62,7 +62,7 @@ void __fastcall hkpArrayAction::~hkpArrayAction(hkpArrayAction *this)
   int v4; // er8
 
   v1 = 0;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpArrayAction::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpArrayAction::`vftable;
   v2 = this;
   if ( this->m_entities.m_size > 0 )
   {
@@ -84,9 +84,9 @@ void __fastcall hkpArrayAction::~hkpArrayAction(hkpArrayAction *this)
       8 * v4);
   v2->m_entities.m_data = 0i64;
   v2->m_entities.m_capacityAndFlags = 2147483648;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpAction::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpAction::`vftable;
   hkStringPtr::~hkStringPtr(&v2->m_name);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 33

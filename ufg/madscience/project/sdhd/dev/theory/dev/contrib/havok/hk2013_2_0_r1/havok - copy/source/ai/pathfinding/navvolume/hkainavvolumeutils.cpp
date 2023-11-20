@@ -17,11 +17,11 @@ void __fastcall hkaiNavVolumeUtils::calcRandomPointInCell(hkaiNavVolumeInstance 
   v5 = vol->m_originalVolume.m_pntr;
   v6 = _mm_unpacklo_epi16(v4, (__m128i)0i64);
   v7 = _mm_add_ps(
-         _mm_mul_ps(_mm_cvtepi32_ps(_mm_srli_epi32(v6, 0x10u)), (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+         _mm_mul_ps(_mm_cvtepi32_ps(_mm_srli_epi32(v6, 0x10u)), (__m128)`hkIntVector::convertU32ToF32::`2::two16),
          _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v6, 0x10u), 0x10u)));
   v8 = _mm_unpackhi_epi16(v4, (__m128i)0i64);
   v9 = _mm_add_ps(
-         _mm_mul_ps(_mm_cvtepi32_ps(_mm_srli_epi32(v8, 0x10u)), (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+         _mm_mul_ps(_mm_cvtepi32_ps(_mm_srli_epi32(v8, 0x10u)), (__m128)`hkIntVector::convertU32ToF32::`2::two16),
          _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v8, 0x10u), 0x10u)));
   v10 = _mm_add_ps(v5->m_quantizationOffset.m_quad, vol->m_translation.m_quad);
   v11 = _mm_add_ps(_mm_mul_ps(v5->m_quantizationScale.m_quad, v9), v10);
@@ -62,7 +62,7 @@ void __fastcall hkaiNavVolumeUtils::getClosestPointOnCell(hkaiNavVolume *vol, hk
          _mm_mul_ps(
            vol->m_quantizationScale.m_quad,
            _mm_add_ps(
-             _mm_mul_ps(_mm_cvtepi32_ps(_mm_srli_epi32(v7, 0x10u)), (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+             _mm_mul_ps(_mm_cvtepi32_ps(_mm_srli_epi32(v7, 0x10u)), (__m128)`hkIntVector::convertU32ToF32::`2::two16),
              _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v7, 0x10u), 0x10u)))),
          vol->m_quantizationOffset.m_quad);
   v9 = position->m_quad;
@@ -70,7 +70,7 @@ void __fastcall hkaiNavVolumeUtils::getClosestPointOnCell(hkaiNavVolume *vol, hk
           _mm_mul_ps(
             vol->m_quantizationScale.m_quad,
             _mm_add_ps(
-              _mm_mul_ps(_mm_cvtepi32_ps(_mm_srli_epi32(v6, 0x10u)), (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+              _mm_mul_ps(_mm_cvtepi32_ps(_mm_srli_epi32(v6, 0x10u)), (__m128)`hkIntVector::convertU32ToF32::`2::two16),
               _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v6, 0x10u), 0x10u)))),
           vol->m_quantizationOffset.m_quad);
   if ( (_mm_movemask_ps(_mm_and_ps(_mm_cmpleps(v8, position->m_quad), _mm_cmpleps(position->m_quad, v10))) & 7) == 7 )
@@ -118,7 +118,7 @@ hkSimdFloat32 *__fastcall hkaiNavVolumeUtils::calcCellVolume(hkSimdFloat32 *resu
              _mm_add_ps(
                _mm_mul_ps(
                  _mm_cvtepi32_ps(_mm_srli_epi32(v6, 0x10u)),
-                 (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                 (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v6, 0x10u), 0x10u)))),
            vol->m_quantizationOffset.m_quad),
          _mm_add_ps(
@@ -127,7 +127,7 @@ hkSimdFloat32 *__fastcall hkaiNavVolumeUtils::calcCellVolume(hkSimdFloat32 *resu
              _mm_add_ps(
                _mm_mul_ps(
                  _mm_cvtepi32_ps(_mm_srli_epi32(v7, 0x10u)),
-                 (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                 (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v7, 0x10u), 0x10u)))),
            vol->m_quantizationOffset.m_quad));
   result->m_real = _mm_mul_ps(

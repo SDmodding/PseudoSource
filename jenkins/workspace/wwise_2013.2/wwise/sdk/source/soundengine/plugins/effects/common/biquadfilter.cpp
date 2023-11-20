@@ -120,15 +120,15 @@ void __fastcall DSP::BiquadFilter<DSP::SingleChannelPolicy>::ComputeCoefs(DSP::B
         {
           if ( (float)(in_fGain * 0.025) >= -37.0 )
           {
-            if ( `AkMath::FastPow10'::`4'::`local static guard' & 1 )
+            if ( `AkMath::FastPow10::`4::`local static guard & 1 )
             {
-              v41 = *(float *)&`AkMath::FastPow10'::`4'::SCALE;
+              v41 = *(float *)&`AkMath::FastPow10::`4::SCALE;
             }
             else
             {
               v41 = FLOAT_2_7866352e7;
-              `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
-              `AkMath::FastPow10'::`4'::`local static guard' |= 1u;
+              `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
+              `AkMath::FastPow10::`4::`local static guard |= 1u;
             }
             v42 = (signed int)(float)((float)((float)(in_fGain * 0.025) * v41) + 1065353200.0);
             LODWORD(v60) = (v42 & 0x7FFFFF) + 1065353216;
@@ -165,15 +165,15 @@ void __fastcall DSP::BiquadFilter<DSP::SingleChannelPolicy>::ComputeCoefs(DSP::B
           v51 = cosf(v50);
           if ( (float)(in_fGain * 0.025) >= -37.0 )
           {
-            if ( `AkMath::FastPow10'::`4'::`local static guard' & 1 )
+            if ( `AkMath::FastPow10::`4::`local static guard & 1 )
             {
-              v53 = *(float *)&`AkMath::FastPow10'::`4'::SCALE;
+              v53 = *(float *)&`AkMath::FastPow10::`4::SCALE;
             }
             else
             {
               v53 = FLOAT_2_7866352e7;
-              `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
-              `AkMath::FastPow10'::`4'::`local static guard' |= 1u;
+              `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
+              `AkMath::FastPow10::`4::`local static guard |= 1u;
             }
             v52 = (float)((float)((float)((float)(COERCE_FLOAT(
                                                     ((signed int)(float)((float)((float)(in_fGain * 0.025) * v53)
@@ -207,15 +207,15 @@ void __fastcall DSP::BiquadFilter<DSP::SingleChannelPolicy>::ComputeCoefs(DSP::B
       {
         if ( (float)(in_fGain * 0.025) >= -37.0 )
         {
-          if ( `AkMath::FastPow10'::`4'::`local static guard' & 1 )
+          if ( `AkMath::FastPow10::`4::`local static guard & 1 )
           {
-            v26 = *(float *)&`AkMath::FastPow10'::`4'::SCALE;
+            v26 = *(float *)&`AkMath::FastPow10::`4::SCALE;
           }
           else
           {
             v26 = FLOAT_2_7866352e7;
-            `AkMath::FastPow10'::`4'::SCALE = LODWORD(FLOAT_2_7866352e7);
-            `AkMath::FastPow10'::`4'::`local static guard' |= 1u;
+            `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
+            `AkMath::FastPow10::`4::`local static guard |= 1u;
           }
           v27 = (signed int)(float)((float)((float)(in_fGain * 0.025) * v26) + 1065353200.0);
           v28 = v27;

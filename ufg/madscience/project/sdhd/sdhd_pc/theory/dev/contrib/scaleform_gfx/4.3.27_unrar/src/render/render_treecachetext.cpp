@@ -35,7 +35,7 @@ void __fastcall Scaleform::Render::TreeCacheText::TreeCacheText(Scaleform::Rende
     v5,
     v4);
   v8->vfptr->Release((Scaleform::Render::SortKeyInterface *)&v8->vfptr, 0i64);
-  v7->vfptr = (Scaleform::Render::TreeCacheNodeVtbl *)&Scaleform::Render::TreeCacheText::`vftable';
+  v7->vfptr = (Scaleform::Render::TreeCacheNodeVtbl *)&Scaleform::Render::TreeCacheText::`vftable;
   v7->pNextNoBatch = 0i64;
   Scaleform::Render::TextMeshProvider::TextMeshProvider(&v7->TMProvider, v7->pRenderer2D->pGlyphCache.pObject);
 }
@@ -343,8 +343,8 @@ LABEL_31:
                     0.0,
                     0,
                     meshGenFlags);
-                  v51->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Mesh::`vftable'{for `Scaleform::RefCountBase<Scaleform::Render::MeshBase,68>'};
-                  v51->vfptr = (Scaleform::Render::MeshStagingNodeVtbl *)&Scaleform::Render::Mesh::`vftable'{for `Scaleform::Render::MeshStagingNode'};
+                  v51->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Mesh::`vftable{for `Scaleform::RefCountBase<Scaleform::Render::MeshBase,68>};
+                  v51->vfptr = (Scaleform::Render::MeshStagingNodeVtbl *)&Scaleform::Render::Mesh::`vftable{for `Scaleform::Render::MeshStagingNode};
                   v51[1].vfptr = 0i64;
                   v51[1].pNext = (Scaleform::Render::MeshStagingNode *)1065353216;
                   v51[1].StagingBufferSize = 0i64;
@@ -746,7 +746,7 @@ Scaleform::Render::TextMeshProvider *__fastcall Scaleform::Render::TreeCacheText
                                     v12)),
                                 _mm_and_ps(
                                   *(__m128 *)&result.M[1][0],
-                                  (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v));
+                                  (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v));
       v21 = _mm_add_ps(
               _mm_add_ps(
                 _mm_add_ps(
@@ -755,7 +755,7 @@ Scaleform::Render::TextMeshProvider *__fastcall Scaleform::Render::TreeCacheText
                 _mm_mul_ps(_mm_shuffle_ps(*(__m128 *)&result.M[2][0], *(__m128 *)&result.M[2][0], 170), v12)),
               _mm_and_ps(
                 *(__m128 *)&result.M[2][0],
-                (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v));
+                (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v));
       v22 = _mm_add_ps(
               _mm_add_ps(
                 _mm_add_ps(
@@ -764,7 +764,7 @@ Scaleform::Render::TextMeshProvider *__fastcall Scaleform::Render::TreeCacheText
                 _mm_mul_ps(_mm_shuffle_ps(*(__m128 *)&result.M[3][0], *(__m128 *)&result.M[3][0], 170), v12)),
               _mm_and_ps(
                 *(__m128 *)&result.M[3][0],
-                (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v));
+                (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v));
       v18.BufferWidth = v15;
       v18.BufferHeight = v14[41];
       v18.Left = v14[42];

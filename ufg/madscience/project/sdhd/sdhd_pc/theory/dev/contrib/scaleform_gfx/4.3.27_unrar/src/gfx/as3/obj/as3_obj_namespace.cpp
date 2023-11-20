@@ -160,11 +160,11 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl::Namespace::Namespace(Scalefo
 
   v4 = this;
   v5 = vm->GC.GC;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::RefCountBaseGC<328>::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::RefCountBaseGC<328>::`vftable;
   this->RefCount = 1;
   this->pRCCRaw = (unsigned __int64)v5;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::GASRefCountBase::`vftable';
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Namespace::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::GASRefCountBase::`vftable;
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Namespace::`vftable;
   *((_QWORD *)v4 + 5) = *((_QWORD *)v4 + 5) & 0xFFFFFFFFFFFFFFE0ui64 | kind & 0xF;
   this->VMRef = vm;
   Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
@@ -190,11 +190,11 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl::Namespace::Namespace(Scalefo
   v6 = factory;
   v7 = this;
   v8 = vm->GC.GC;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::RefCountBaseGC<328>::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::RefCountBaseGC<328>::`vftable;
   this->RefCount = 1;
   this->pRCCRaw = (unsigned __int64)v8;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::GASRefCountBase::`vftable';
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Namespace::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::GASRefCountBase::`vftable;
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Namespace::`vftable;
   *((_QWORD *)v7 + 5) = *((_QWORD *)v7 + 5) & 0xFFFFFFFFFFFFFFE0ui64 | kind & 0xF;
   this->VMRef = vm;
   v9 = uri->pNode;
@@ -251,7 +251,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl::Namespace::~Namespace(Scalef
   Scaleform::GFx::AS3::Instances::fl::Namespace *key; // [rsp+48h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Namespace::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Namespace::`vftable;
   v2 = this->pFactory.pObject;
   if ( v2 )
   {
@@ -676,19 +676,19 @@ void __fastcall Scaleform::GFx::AS3::InstanceTraits::fl::Namespace::Namespace(Sc
     (Scaleform::GFx::AS3::InstanceTraits::CTraits *)&this->vfptr,
     vm,
     ci);
-  v4->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable';
-  v4->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Namespace::`vftable';
+  v4->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable;
+  v4->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Namespace::`vftable;
   v4->pNamespaceFactory.pObject = 0i64;
   v4->TraitsType = 6;
   v6 = ((__int64 (__fastcall *)(__int64, signed __int64))v3->MHeap->vfptr->Alloc)(v5, 32i64);
   if ( v6 )
   {
-    *(_QWORD *)v6 = &Scaleform::RefCountImplCore::`vftable';
+    *(_QWORD *)v6 = &Scaleform::RefCountImplCore::`vftable;
     *(_DWORD *)(v6 + 8) = 1;
-    *(_QWORD *)v6 = &Scaleform::RefCountImpl::`vftable';
-    *(_QWORD *)v6 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,336>::`vftable';
-    *(_QWORD *)v6 = &Scaleform::RefCountBase<Scaleform::GFx::AS3::NamespaceInstanceFactory,336>::`vftable';
-    *(_QWORD *)v6 = &Scaleform::GFx::AS3::NamespaceInstanceFactory::`vftable';
+    *(_QWORD *)v6 = &Scaleform::RefCountImpl::`vftable;
+    *(_QWORD *)v6 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,336>::`vftable;
+    *(_QWORD *)v6 = &Scaleform::RefCountBase<Scaleform::GFx::AS3::NamespaceInstanceFactory,336>::`vftable;
+    *(_QWORD *)v6 = &Scaleform::GFx::AS3::NamespaceInstanceFactory::`vftable;
     *(_QWORD *)(v6 + 16) = 0i64;
     *(_QWORD *)(v6 + 24) = v4;
   }
@@ -1036,8 +1036,8 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v5 )
   {
     Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, v2, &Scaleform::GFx::AS3::fl::NamespaceCI);
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable';
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Namespace::`vftable';
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable;
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Namespace::`vftable;
     v6->TraitsType = 6;
   }
   else
@@ -1059,7 +1059,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v10 )
   {
     Scaleform::GFx::AS3::Class::Class(v10, v3->pV);
-    v11->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl::Namespace::`vftable';
+    v11->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl::Namespace::`vftable;
   }
   return v3;
 }

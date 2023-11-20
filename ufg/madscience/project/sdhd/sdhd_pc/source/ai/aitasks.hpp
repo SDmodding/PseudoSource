@@ -15,15 +15,15 @@ void __fastcall PerformScriptCommandTask::PerformScriptCommandTask(PerformScript
   v2 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<PerformScriptCommandTrack>::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<PerformScriptCommandTrack>::`vftable;
   v3 = (IFinishUpdate *)&this->vfptr;
   v4 = (UFG::qNode<IFinishUpdate,IFinishUpdate> *)&v3->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  v3->vfptr = (IFinishUpdateVtbl *)&IFinishUpdate::`vftable';
-  v1->vfptr = (ITaskVtbl *)&PerformScriptCommandTask::`vftable'{for `Task<PerformScriptCommandTrack>'};
-  v3->vfptr = (IFinishUpdateVtbl *)&PerformScriptCommandTask::`vftable'{for `IFinishUpdate'};
+  v3->vfptr = (IFinishUpdateVtbl *)&IFinishUpdate::`vftable;
+  v1->vfptr = (ITaskVtbl *)&PerformScriptCommandTask::`vftable{for `Task<PerformScriptCommandTrack>};
+  v3->vfptr = (IFinishUpdateVtbl *)&PerformScriptCommandTask::`vftable{for `IFinishUpdate};
   v5 = &v1->m_pAIEntityComponent;
   v5->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v5->mPrev;
   v5->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v5->mPrev;
@@ -76,9 +76,9 @@ void __fastcall PerformScriptCommandTask::~PerformScriptCommandTask(PerformScrip
   UFG::qNode<ITask,ITask> *v28; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&PerformScriptCommandTask::`vftable'{for `Task<PerformScriptCommandTrack>'};
+  this->vfptr = (ITaskVtbl *)&PerformScriptCommandTask::`vftable{for `Task<PerformScriptCommandTrack>};
   v2 = (IFinishUpdate *)&this->vfptr;
-  this->vfptr = (IFinishUpdateVtbl *)&PerformScriptCommandTask::`vftable'{for `IFinishUpdate'};
+  this->vfptr = (IFinishUpdateVtbl *)&PerformScriptCommandTask::`vftable{for `IFinishUpdate};
   v3 = &this->m_pActionTreeComponent;
   if ( this->m_pActionTreeComponent.m_pPointer )
   {
@@ -154,7 +154,7 @@ void __fastcall PerformScriptCommandTask::~PerformScriptCommandTask(PerformScrip
   v25->mPrev = v24;
   v23->mPrev = v23;
   v23->mNext = v23;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v26 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v27 = v1->mPrev;
   v28 = v1->mNext;
@@ -176,17 +176,17 @@ void __fastcall TestPathToTargetTask::TestPathToTargetTask(TestPathToTargetTask 
   v2 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
-  this->vfptr = (ITaskVtbl *)&Task<TestPathToTargetTrack>::`vftable';
-  this->vfptr = (ITaskVtbl *)&TestPathToTargetTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->vfptr = (ITaskVtbl *)&Task<TestPathToTargetTrack>::`vftable;
+  this->vfptr = (ITaskVtbl *)&TestPathToTargetTask::`vftable;
   UFG::RebindingComponentHandle<UFG::NavComponent,0>::RebindingComponentHandle<UFG::NavComponent,0>(&this->m_navComponent);
   UFG::RebindingComponentHandle<UFG::TargetingSystemBaseComponent,0>::RebindingComponentHandle<UFG::TargetingSystemBaseComponent,0>(&v1->m_targetingSysComponent);
   UFG::RebindingComponentHandle<UFG::ActiveAIEntityComponent,0>::RebindingComponentHandle<UFG::ActiveAIEntityComponent,0>(&v1->m_AIEntityComponent);
   UFG::FindPathDeferredQuery::FindPathDeferredQuery(&v1->m_PathQueryInput);
   v3 = (signed __int64)&v1->m_PathQueryOutput;
-  *(_OWORD *)v3 = (unsigned __int64)&UFG::DaemonQueryOutput::`vftable';
+  *(_OWORD *)v3 = (unsigned __int64)&UFG::DaemonQueryOutput::`vftable;
   *(_DWORD *)(v3 + 16) = 0;
-  *(_QWORD *)v3 = &UFG::FindPathOutput::`vftable';
+  *(_QWORD *)v3 = &UFG::FindPathOutput::`vftable;
   v1->m_PathQueryOutput.m_pPath.m_pNavPath = 0i64;
 }
 
@@ -203,7 +203,7 @@ void __fastcall TestPathToTargetTask::~TestPathToTargetTask(TestPathToTargetTask
   UFG::qNode<ITask,ITask> *v7; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&TestPathToTargetTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&TestPathToTargetTask::`vftable;
   v2 = &this->m_PathQueryOutput;
   v3 = this->m_PathQueryOutput.m_pPath.m_pNavPath;
   if ( v3 )
@@ -212,12 +212,12 @@ void __fastcall TestPathToTargetTask::~TestPathToTargetTask(TestPathToTargetTask
     if ( v4 )
       v3->vfptr->__vecDelDtor(v3, 1u);
   }
-  v2->vfptr = (UFG::DaemonQueryOutputVtbl *)&UFG::DaemonQueryOutput::`vftable';
-  v1->m_PathQueryInput.vfptr = (UFG::DaemonQueryInputVtbl *)&UFG::DaemonQueryInput::`vftable';
+  v2->vfptr = (UFG::DaemonQueryOutputVtbl *)&UFG::DaemonQueryOutput::`vftable;
+  v1->m_PathQueryInput.vfptr = (UFG::DaemonQueryInputVtbl *)&UFG::DaemonQueryInput::`vftable;
   UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->m_AIEntityComponent);
   UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->m_targetingSysComponent);
   UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->m_navComponent);
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v5 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v6 = v1->mPrev;
   v7 = v1->mNext;

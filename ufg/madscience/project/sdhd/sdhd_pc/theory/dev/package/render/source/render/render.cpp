@@ -10,7 +10,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_Render::rLight_UFG::qRe
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<Render::rLight,UFG::qReflectObject>::sInventory.vfptr,
     "Render::rLight",
     v0);
-  UFG::qReflectObjectType<Render::rLight,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<Render::rLight>::`vftable';
+  UFG::qReflectObjectType<Render::rLight,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<Render::rLight>::`vftable;
   UFG::qReflectInventory<Render::rLight>::OnAddToWarehouse(&UFG::qReflectObjectType<Render::rLight,UFG::qReflectObject>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -251,7 +251,7 @@ __int64 Render::Timers::_dynamic_initializer_for__mCpuTimer_UpdateWorld__()
 // RVA: 0x1452D40
 __int64 Render::_dynamic_initializer_for__FrameMemoryAllocators__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     Render::FrameMemoryAllocators,
     0x80ui64,
     4,
@@ -263,7 +263,7 @@ __int64 Render::_dynamic_initializer_for__FrameMemoryAllocators__()
 // RVA: 0x1452E40
 __int64 Render::_dynamic_initializer_for__FrameWriteMemoryAllocators__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     Render::FrameWriteMemoryAllocators,
     0x80ui64,
     4,
@@ -275,7 +275,7 @@ __int64 Render::_dynamic_initializer_for__FrameWriteMemoryAllocators__()
 // RVA: 0x1452E80
 __int64 Render::_dynamic_initializer_for__FrameWriteMemoryHandle__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     Render::FrameWriteMemoryHandle,
     0x20ui64,
     4,
@@ -287,7 +287,7 @@ __int64 Render::_dynamic_initializer_for__FrameWriteMemoryHandle__()
 // RVA: 0x1452EC0
 __int64 Render::_dynamic_initializer_for__FrameWriteMemoryHandleOverflow__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     Render::FrameWriteMemoryHandleOverflow,
     0x20ui64,
     4,
@@ -299,7 +299,7 @@ __int64 Render::_dynamic_initializer_for__FrameWriteMemoryHandleOverflow__()
 // RVA: 0x1452F00
 __int64 Render::_dynamic_initializer_for__PrimitiveFrameWriteMemoryAllocators__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     Render::PrimitiveFrameWriteMemoryAllocators,
     0x80ui64,
     4,
@@ -311,7 +311,7 @@ __int64 Render::_dynamic_initializer_for__PrimitiveFrameWriteMemoryAllocators__(
 // RVA: 0x1452F40
 __int64 Render::_dynamic_initializer_for__PrimitiveFrameWriteMemoryHandle__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     Render::PrimitiveFrameWriteMemoryHandle,
     0x20ui64,
     4,
@@ -323,7 +323,7 @@ __int64 Render::_dynamic_initializer_for__PrimitiveFrameWriteMemoryHandle__()
 // RVA: 0x1452F80
 __int64 Render::_dynamic_initializer_for__PrimitiveFrameWriteMemoryHandleOverflow__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     Render::PrimitiveFrameWriteMemoryHandleOverflow,
     0x20ui64,
     4,
@@ -335,7 +335,7 @@ __int64 Render::_dynamic_initializer_for__PrimitiveFrameWriteMemoryHandleOverflo
 // RVA: 0x1452D80
 __int64 Render::_dynamic_initializer_for__FramePatchMemoryAllocators__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     Render::FramePatchMemoryAllocators,
     0x80ui64,
     4,
@@ -347,7 +347,7 @@ __int64 Render::_dynamic_initializer_for__FramePatchMemoryAllocators__()
 // RVA: 0x1452DC0
 __int64 Render::_dynamic_initializer_for__FramePatchMemoryHandle__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     Render::FramePatchMemoryHandle,
     0x20ui64,
     4,
@@ -359,7 +359,7 @@ __int64 Render::_dynamic_initializer_for__FramePatchMemoryHandle__()
 // RVA: 0x1452E00
 __int64 Render::_dynamic_initializer_for__FramePatchMemoryHandleOverflow__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     Render::FramePatchMemoryHandleOverflow,
     0x20ui64,
     4,
@@ -371,7 +371,7 @@ __int64 Render::_dynamic_initializer_for__FramePatchMemoryHandleOverflow__()
 // RVA: 0x1452C80
 __int64 Render::_dynamic_initializer_for__FrameIndexMemoryAllocators__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     Render::FrameIndexMemoryAllocators,
     0x80ui64,
     4,
@@ -383,7 +383,7 @@ __int64 Render::_dynamic_initializer_for__FrameIndexMemoryAllocators__()
 // RVA: 0x1452CC0
 __int64 Render::_dynamic_initializer_for__FrameIndexMemoryHandle__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     Render::FrameIndexMemoryHandle,
     0x20ui64,
     4,
@@ -395,7 +395,7 @@ __int64 Render::_dynamic_initializer_for__FrameIndexMemoryHandle__()
 // RVA: 0x1452D00
 __int64 Render::_dynamic_initializer_for__FrameIndexMemoryHandleOverflow__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     Render::FrameIndexMemoryHandleOverflow,
     0x20ui64,
     4,

@@ -5,7 +5,7 @@ __int64 anonymous_namespace_::_dynamic_initializer_for__SceneLayer_type_id__()
   __int64 result; // rax
 
   result = UFG::qStringHash32("SceneLayer1", 0xFFFFFFFF);
-  `anonymous namespace'::SceneLayer_type_id = result;
+  `anonymous namespace::SceneLayer_type_id = result;
   return result;
 }
 
@@ -16,7 +16,7 @@ __int64 anonymous_namespace_::_dynamic_initializer_for__Scene_type_id__()
   __int64 result; // rax
 
   result = UFG::qStringHash32("Scene1", 0xFFFFFFFF);
-  `anonymous namespace'::Scene_type_id = result;
+  `anonymous namespace::Scene_type_id = result;
   return result;
 }
 
@@ -937,13 +937,13 @@ char __fastcall UFG::SceneLayer::RefreshLayerBoundingBox(UFG::SceneLayer *this)
   }
   v8 = v2->mBox.mMin.y;
   v9 = (signed __int64)&v2->mLayerResources.mNode.mNext[-6].mNext;
-  v2->mBox.mMin.x = v2->mBox.mMin.x - `anonymous namespace'::gPaddingAmount;
+  v2->mBox.mMin.x = v2->mBox.mMin.x - `anonymous namespace::gPaddingAmount;
   v10 = v2->mBox.mMin.z;
-  v2->mBox.mMin.y = v8 - `anonymous namespace'::gPaddingAmount;
-  v2->mBox.mMin.z = v10 - `anonymous namespace'::gPaddingAmount;
-  v2->mBox.mMax.x = `anonymous namespace'::gPaddingAmount + v2->mBox.mMax.x;
-  v2->mBox.mMax.y = `anonymous namespace'::gPaddingAmount + v2->mBox.mMax.y;
-  v2->mBox.mMax.z = `anonymous namespace'::gPaddingAmount + v2->mBox.mMax.z;
+  v2->mBox.mMin.y = v8 - `anonymous namespace::gPaddingAmount;
+  v2->mBox.mMin.z = v10 - `anonymous namespace::gPaddingAmount;
+  v2->mBox.mMax.x = `anonymous namespace::gPaddingAmount + v2->mBox.mMax.x;
+  v2->mBox.mMax.y = `anonymous namespace::gPaddingAmount + v2->mBox.mMax.y;
+  v2->mBox.mMax.z = `anonymous namespace::gPaddingAmount + v2->mBox.mMax.z;
   if ( (UFG::qBox *)v9 != v1 && v9 && (v11 = *(_QWORD *)(v9 + 120)) != 0 )
     v12 = (UFG::qPropertySet *)(v11 + v9 + 120);
   else
@@ -1150,7 +1150,7 @@ void __fastcall UFG::Scene::OnSceneLayerResourceLoad(UFG::SceneLayerResource *pS
           v31 = v28 + 1;
           v31->mNext = v31;
           v31[1].mNext = v31;
-          v29->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+          v29->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
           v29->m_EventUID = v30;
           v29->m_NamePTR = 0i64;
         }

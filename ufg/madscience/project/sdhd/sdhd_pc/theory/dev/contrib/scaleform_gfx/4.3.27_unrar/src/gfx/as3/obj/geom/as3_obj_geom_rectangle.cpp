@@ -447,7 +447,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_geom::Rectangle::bottomRightG
     "flash.geom.Point",
     2u,
     (Scaleform::GFx::AS3::Value *)&ptr);
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
 }
 
 // File Line: 127
@@ -532,7 +532,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_geom::Rectangle::sizeGet(Scal
     "flash.geom.Point",
     2u,
     (Scaleform::GFx::AS3::Value *)&ptr);
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
 }
 
 // File Line: 174
@@ -610,7 +610,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_geom::Rectangle::topLeftGet(S
     "flash.geom.Point",
     2u,
     (Scaleform::GFx::AS3::Value *)&ptr);
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
 }
 
 // File Line: 207
@@ -686,7 +686,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_geom::Rectangle::clone(Scalef
     "flash.geom.Rectangle",
     4u,
     &ptr);
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
 }
 
 // File Line: 228
@@ -965,7 +965,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_geom::Rectangle::intersection
         &argv);
       v9 = &argv;
     }
-    `eh vector destructor iterator'(v9, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+    `eh vector destructor iterator(v9, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
   }
   else
   {
@@ -1564,7 +1564,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_geom::Rectangle::union_(Scale
     }
     v17 = &ptr;
 LABEL_20:
-    `eh vector destructor iterator'(v17, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+    `eh vector destructor iterator(v17, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
     return;
   }
   Scaleform::GFx::AS3::VM::Error::Error(&v35, eConvertNullToObjectError, this->pTraits.pObject->pVM);
@@ -1640,8 +1640,8 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v5 )
   {
     Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, v2, &Scaleform::GFx::AS3::fl_geom::RectangleCI);
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable';
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_geom::Rectangle::`vftable';
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable;
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_geom::Rectangle::`vftable;
   }
   else
   {
@@ -1653,8 +1653,8 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v7 )
   {
     Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v7, v2, &Scaleform::GFx::AS3::fl_geom::RectangleCI);
-    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable';
-    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_geom::Rectangle::`vftable';
+    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable;
+    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_geom::Rectangle::`vftable;
   }
   else
   {

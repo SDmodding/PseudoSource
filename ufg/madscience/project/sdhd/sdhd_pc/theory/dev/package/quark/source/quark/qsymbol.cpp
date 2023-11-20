@@ -437,7 +437,7 @@ void __fastcall UFG::SymbolTableResourceInventory::SymbolTableResourceInventory(
     0xE4868DBE,
     0,
     0);
-  v1->vfptr = (UFG::qResourceInventoryVtbl *)&UFG::SymbolTableResourceInventory::`vftable';
+  v1->vfptr = (UFG::qResourceInventoryVtbl *)&UFG::SymbolTableResourceInventory::`vftable;
   v1->mbAutoUnpackSymbols = 0;
 }
 

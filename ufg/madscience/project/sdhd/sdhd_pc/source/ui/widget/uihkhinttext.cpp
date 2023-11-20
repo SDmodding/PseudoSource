@@ -5,7 +5,7 @@ void __fastcall UFG::UIHKHintText::UIHKHintText(UFG::UIHKHintText *this)
   UFG::UIHKHintText *v1; // rbx
 
   v1 = this;
-  this->vfptr = (UFG::UIHKHintTextVtbl *)&UFG::UIHKHintText::`vftable';
+  this->vfptr = (UFG::UIHKHintTextVtbl *)&UFG::UIHKHintText::`vftable;
   this->m_eState = 0;
   this->m_bShowMsg = 0;
   this->m_Suppress = 0;
@@ -84,7 +84,7 @@ void __fastcall UFG::UIHKHintText::show(UFG::UIHKHintText *this, const char *tex
     if ( !(_S15_5 & 1) )
     {
       _S15_5 |= 1u;
-      glManager.vfptr = (UFG::GameLogManagerVtbl *)&UFG::GameLogManager::`vftable';
+      glManager.vfptr = (UFG::GameLogManagerVtbl *)&UFG::GameLogManager::`vftable;
       atexit(UFG::GameLogManager::getInstance_::_2_::_dynamic_atexit_destructor_for__glManager__);
     }
     if ( (signed int)UFG::qStringLength(v6) >= 1 )

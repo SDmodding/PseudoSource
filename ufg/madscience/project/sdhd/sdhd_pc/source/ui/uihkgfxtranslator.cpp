@@ -78,7 +78,7 @@ char __fastcall UIHKDictionary::KeyTextureReplaced(unsigned int hash, UFG::qStri
   v51 = -2i64;
   v2 = keyStr;
   v3 = hash;
-  UFG::qString::ReplaceString(keyStr, "\"", "'", 0);
+  UFG::qString::ReplaceString(keyStr, "\"", "", 0);
   v4 = 0;
   v5 = 0i64;
   v6 = MeleeHints;
@@ -89,8 +89,8 @@ char __fastcall UIHKDictionary::KeyTextureReplaced(unsigned int hash, UFG::qStri
     if ( (unsigned int)v5 >= 5 )
       goto LABEL_8;
   }
-  UFG::qString::qString(&v35, "'BUTTON_MOUSE_M'", v5);
-  v7 = UFG::qString::ReplaceString(v2, "'BUTTON_R_STICK'", v35.mData, 0);
+  UFG::qString::qString(&v35, "BUTTON_MOUSE_M", v5);
+  v7 = UFG::qString::ReplaceString(v2, "BUTTON_R_STICK", v35.mData, 0);
   v8 = &customWorldMapCaption;
   if ( REMAP_ID_MELEE_ATTACK_2 != REMAP_ID_INVALID_2 )
   {
@@ -98,12 +98,12 @@ char __fastcall UIHKDictionary::KeyTextureReplaced(unsigned int hash, UFG::qStri
     v8 = UFG::KeyToTextureName(v9);
   }
   UFG::qString::qString(&rhs, v8);
-  v10 = UFG::operator+(&result, "'", &rhs);
-  v11 = UFG::operator+(&v52, v10, "'");
+  v10 = UFG::operator+(&result, "", &rhs);
+  v11 = UFG::operator+(&v52, v10, "");
   UFG::qString::Set(&rhs, v11->mData, v11->mLength, 0i64, 0);
   UFG::qString::~qString(&v52);
   UFG::qString::~qString(&result);
-  v4 = (unsigned __int64)UFG::qString::ReplaceString(v2, "'BUTTON_R2'", rhs.mData, 0) + v7;
+  v4 = (unsigned __int64)UFG::qString::ReplaceString(v2, "BUTTON_R2", rhs.mData, 0) + v7;
   UFG::qString::~qString(&rhs);
   UFG::qString::~qString(&v35);
 LABEL_8:
@@ -137,8 +137,8 @@ LABEL_8:
     UFG::qString::qString(&rhs, *v15);
     if ( rhs.mLength )
     {
-      v17 = UFG::operator+(&v52, "'", &rhs);
-      v18 = UFG::operator+(&result, v17, "'");
+      v17 = UFG::operator+(&v52, "", &rhs);
+      v18 = UFG::operator+(&result, v17, "");
       UFG::qString::Set(&rhs, v18->mData, v18->mLength, 0i64, 0);
       UFG::qString::~qString(&result);
       UFG::qString::~qString(&v52);
@@ -149,8 +149,8 @@ LABEL_8:
         v19 = UFG::KeyToTextureName(v20);
       }
       UFG::qString::qString(&v35, v19);
-      v21 = UFG::operator+(&v54, "'", &v35);
-      v22 = UFG::operator+(&v55, v21, "'");
+      v21 = UFG::operator+(&v54, "", &v35);
+      v22 = UFG::operator+(&v55, v21, "");
       UFG::qString::Set(&v35, v22->mData, v22->mLength, 0i64, 0);
       UFG::qString::~qString(&v55);
       UFG::qString::~qString(&v54);
@@ -215,7 +215,7 @@ LABEL_24:
   v47 = "BUTTON_MOUSE5";
   v48 = "BUTTON_LALT";
   v49 = "BUTTON_RALT";
-  UFG::qString::qString(&attribute, "width='");
+  UFG::qString::qString(&attribute, "width=");
   v32 = (const char **)&v35;
   v33 = 19i64;
   do
@@ -225,7 +225,7 @@ LABEL_24:
     --v33;
   }
   while ( v33 );
-  UFG::qString::Set(&attribute, "vspace='");
+  UFG::qString::Set(&attribute, "vspace=");
   UIHKDictionary::AdjustAttribute(v2, attribute.mData, &attribute, 0.5);
   UFG::qString::~qString(&attribute);
   return 1;
@@ -277,7 +277,7 @@ void __fastcall UIHKDictionary::AdjustAttribute(UFG::qString *strKey, const char
     UFG::qString::Substring(v6, &rhs, i, -1);
     v11 = UFG::qString::find(&rhs, v8);
     UFG::qString::Substring(&rhs, &result, v11 + v9, -1);
-    v12 = UFG::qString::find(&result, "'");
+    v12 = UFG::qString::find(&result, "");
     if ( v12 != UFG::qString::npos )
       v12 += v11 + v9;
     v13 = UFG::qString::find(&rhs, ">");
@@ -325,10 +325,10 @@ void __fastcall UIHKGFxTranslator::UIHKGFxTranslator(UIHKGFxTranslator *this)
 
   v1 = this;
   UFG::UIGfxTranslator::UIGfxTranslator((UFG::UIGfxTranslator *)&this->vfptr);
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&UIHKGFxTranslator::`vftable';
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&UIHKGFxTranslator::`vftable;
   v2 = v1->mTranslatedStrings;
   v3 = 512i64;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v1->mTranslatedStrings,
     0x28ui64,
     512,

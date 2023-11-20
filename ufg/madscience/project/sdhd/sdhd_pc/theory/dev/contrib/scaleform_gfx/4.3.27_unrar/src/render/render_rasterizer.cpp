@@ -6,8 +6,8 @@ void __fastcall Scaleform::Render::Rasterizer::Rasterizer(Scaleform::Render::Ras
   Scaleform::Render::LinearHeap *v3; // rax
 
   v2 = this;
-  this->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable';
-  this->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::Rasterizer::`vftable';
+  this->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable;
+  this->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::Rasterizer::`vftable;
   v3 = &this->LHeap;
   v3->pHeap = heap;
   v3->Granularity = 0x2000i64;

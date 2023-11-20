@@ -1,8 +1,8 @@
 // File Line: 54
 // RVA: 0x9AB10
-void __fastcall __1__hkLocalArray_UFixup__1__ForcePose_Ragdoll_UFG__QEAAXPEBVhkaSkeleton__PEAVhkaPose__AEAVhkQsTransformf___N_Z___QEAA_XZ(hkLocalArray<`UFG::Ragdoll::ForcePose'::`2'::Fixup> *this)
+void __fastcall __1__hkLocalArray_UFixup__1__ForcePose_Ragdoll_UFG__QEAAXPEBVhkaSkeleton__PEAVhkaPose__AEAVhkQsTransformf___N_Z___QEAA_XZ(hkLocalArray<`UFG::Ragdoll::ForcePose::`2::Fixup> *this)
 {
-  hkLocalArray<`UFG::Ragdoll::ForcePose'::`2'::Fixup> *v1; // rdi
+  hkLocalArray<`UFG::Ragdoll::ForcePose::`2::Fixup> *v1; // rdi
   struct UFG::Ragdoll::ForcePose::__l2::Fixup *v2; // rsi
   int v3; // ebx
   hkLifoAllocator *v4; // rcx

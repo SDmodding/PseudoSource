@@ -24,13 +24,13 @@ void __fastcall UFG::RegionComponent::RegionComponent(UFG::RegionComponent *this
   v3 = this;
   UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name->mUID);
   v3->i_name = (UFG::qSymbol)v2->mUID;
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HintComponentBase::`vftable';
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HintComponentBase::`vftable;
   v3->mFlags = 0;
   UFG::SimComponent::AddType(
     (UFG::SimComponent *)&v3->vfptr,
     UFG::HintComponentBase::_HintComponentBaseTypeUID,
     "HintComponentBase");
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::RegionComponent::`vftable';
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::RegionComponent::`vftable;
   v3->mFlags = 0;
   v3->mpRegion.mPtr = 0i64;
   v3->mXFormChangeCacheID = -1;
@@ -1056,9 +1056,9 @@ void __fastcall UFG::RegionComponent::PropertiesLoad(UFG::RegionComponent *this,
       if ( v26 )
       {
         v27 = *(unsigned int *)UFG::qPropertySet::Get<float>(v6, (UFG::qSymbol *)&SimSym_Radius.mUID, DEPTH_RECURSE);
-        v26->mNext = (UFG::allocator::free_link *)&UFG::RegionBase::`vftable';
+        v26->mNext = (UFG::allocator::free_link *)&UFG::RegionBase::`vftable;
         LODWORD(v26[1].mNext) = 0;
-        v26->mNext = (UFG::allocator::free_link *)&UFG::RegionSphere::`vftable';
+        v26->mNext = (UFG::allocator::free_link *)&UFG::RegionSphere::`vftable;
         LODWORD(v26[2].mNext) = v27;
         v4 = (UFG::RegionBase *)v26;
       }
@@ -1075,9 +1075,9 @@ void __fastcall UFG::RegionComponent::PropertiesLoad(UFG::RegionComponent *this,
         v23 = v18->x;
         v24 = v18->y;
         v25 = v18->z;
-        v17->mNext = (UFG::allocator::free_link *)&UFG::RegionBase::`vftable';
+        v17->mNext = (UFG::allocator::free_link *)&UFG::RegionBase::`vftable;
         LODWORD(v17[1].mNext) = 0;
-        v17->mNext = (UFG::allocator::free_link *)&UFG::RegionBox::`vftable';
+        v17->mNext = (UFG::allocator::free_link *)&UFG::RegionBox::`vftable;
         *(float *)&v17[2].mNext = v20;
         *((float *)&v17[2].mNext + 1) = v21;
         *(float *)&v17[3].mNext = v22;
@@ -1106,9 +1106,9 @@ void __fastcall UFG::RegionComponent::PropertiesLoad(UFG::RegionComponent *this,
           v16 = *(_DWORD *)v10;
         else
           v16 = (signed int)FLOAT_1_0;
-        v13->mNext = (UFG::allocator::free_link *)&UFG::RegionBase::`vftable';
+        v13->mNext = (UFG::allocator::free_link *)&UFG::RegionBase::`vftable;
         LODWORD(v13[1].mNext) = 0;
-        v13->mNext = (UFG::allocator::free_link *)&UFG::RegionDisc::`vftable';
+        v13->mNext = (UFG::allocator::free_link *)&UFG::RegionDisc::`vftable;
         LODWORD(v13[2].mNext) = v16;
         *((float *)&v13[2].mNext + 1) = v15;
         *(float *)&v13[3].mNext = v14;

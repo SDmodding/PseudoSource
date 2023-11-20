@@ -5,7 +5,7 @@ __int64 UFG::_anonymous_namespace_::_dynamic_initializer_for__TransformNodeCompo
   __int64 result; // rax
 
   result = UFG::qStringHash32("xform.root", 0xFFFFFFFF);
-  UFG::`anonymous namespace'::TransformNodeComponent_name_id_def = result;
+  UFG::`anonymous namespace::TransformNodeComponent_name_id_def = result;
   return result;
 }
 
@@ -114,7 +114,7 @@ UFG::TransformNodeComponent *__fastcall UFG::TransformNodeComponent_PropertiesOn
     {
       UFG::TransformNodeComponent::TransformNodeComponent(
         (UFG::TransformNodeComponent *)v7,
-        UFG::`anonymous namespace'::TransformNodeComponent_name_id_def,
+        UFG::`anonymous namespace::TransformNodeComponent_name_id_def,
         0i64,
         0);
       v9 = v8;
@@ -152,7 +152,7 @@ UFG::TransformNodeComponent *__fastcall UFG::TransformNodeComponent_PropertiesOn
     {
       UFG::TransformNodeComponent::TransformNodeComponent(
         (UFG::TransformNodeComponent *)v15,
-        UFG::`anonymous namespace'::TransformNodeComponent_name_id_def,
+        UFG::`anonymous namespace::TransformNodeComponent_name_id_def,
         0i64,
         0);
       v17 = v16;

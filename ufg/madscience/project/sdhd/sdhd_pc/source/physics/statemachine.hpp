@@ -207,7 +207,7 @@ void __fastcall UFG::StateMachineNode::~StateMachineNode(UFG::StateMachineNode *
     if ( v5 )
     {
       v6 = &v5[-1].mGotoNode;
-      `eh vector destructor iterator'(v5, 0x10ui64, v5[-1].mGotoNode.mUID, (void (__fastcall *)(void *))_);
+      `eh vector destructor iterator(v5, 0x10ui64, v5[-1].mGotoNode.mUID, (void (__fastcall *)(void *))_);
       operator delete[](v6);
     }
   }
@@ -219,7 +219,7 @@ void __fastcall UFG::StateMachineNode::~StateMachineNode(UFG::StateMachineNode *
     if ( v7 )
     {
       v8 = &v7[-1].mFractureElements.mData.mNumItems;
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         v7,
         0x18ui64,
         v7[-1].mFractureElements.mData.mNumItems,
@@ -235,7 +235,7 @@ void __fastcall UFG::StateMachineNode::~StateMachineNode(UFG::StateMachineNode *
     if ( v9 )
     {
       v10 = &v9[-1].mType;
-      `eh vector destructor iterator'(v9, 0x40ui64, v9[-1].mType, (void (__fastcall *)(void *))_);
+      `eh vector destructor iterator(v9, 0x40ui64, v9[-1].mType, (void (__fastcall *)(void *))_);
       operator delete[](v10);
     }
   }
@@ -247,7 +247,7 @@ void __fastcall UFG::StateMachineNode::~StateMachineNode(UFG::StateMachineNode *
     if ( v11 )
     {
       v12 = &v11[-1].mEnabled;
-      `eh vector destructor iterator'(v11, 8ui64, *(_DWORD *)&v11[-1].mEnabled, (void (__fastcall *)(void *))_);
+      `eh vector destructor iterator(v11, 8ui64, *(_DWORD *)&v11[-1].mEnabled, (void (__fastcall *)(void *))_);
       UFG::qMemoryPool::Free(&gPhysicsMemoryPool, v12);
     }
   }
@@ -259,7 +259,7 @@ void __fastcall UFG::StateMachineNode::~StateMachineNode(UFG::StateMachineNode *
     if ( v13 )
     {
       v14 = &v13[-1].mSpawnPropertySet;
-      `eh vector destructor iterator'(v13, 0x5Cui64, v13[-1].mSpawnPropertySet.mUID, (void (__fastcall *)(void *))_);
+      `eh vector destructor iterator(v13, 0x5Cui64, v13[-1].mSpawnPropertySet.mUID, (void (__fastcall *)(void *))_);
       UFG::qMemoryPool::Free(&gPhysicsMemoryPool, v14);
     }
   }
@@ -271,7 +271,7 @@ void __fastcall UFG::StateMachineNode::~StateMachineNode(UFG::StateMachineNode *
     if ( v15 )
     {
       v16 = &v15[-1].mAttachToObject;
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         v15,
         0x50ui64,
         *(_DWORD *)&v15[-1].mAttachToObject,
@@ -324,13 +324,13 @@ void __fastcall UFG::StateMachineDefinition::StateMachineDefinition(UFG::StateMa
   v3->mBaseNode.mNeighbours[0] = &v3->mBaseNode;
   v3->mBaseNode.mNeighbours[1] = &v3->mBaseNode;
   v3->mBaseNode.mUID = v4;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable;
   v5 = &this->mHandles;
   v21 = (UFG::StateMachineNode *)v5;
   v5->mNode.mPrev = &v5->mNode;
   v5->mNode.mNext = &v5->mNode;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::StateMachineDefinition,UFG::qReflectObject>::`vftable';
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::StateMachineDefinition::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::StateMachineDefinition,UFG::qReflectObject>::`vftable;
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::StateMachineDefinition::`vftable;
   this->mStateNodes.mData.mFlags = 2;
   v6 = 0;
   if ( this->mStateNodes.mData.mNumItems )

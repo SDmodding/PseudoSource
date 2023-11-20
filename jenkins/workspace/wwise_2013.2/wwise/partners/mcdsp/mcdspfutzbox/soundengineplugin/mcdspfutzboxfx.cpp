@@ -17,7 +17,7 @@ void __fastcall CMcDSPFutzBoxFX::CMcDSPFutzBoxFX(CMcDSPFutzBoxFX *this)
 
   v1 = this;
   this->m_pSharedParams = 0i64;
-  this->vfptr = (AK::IAkPluginVtbl *)&CMcDSPFutzBoxFX::`vftable';
+  this->vfptr = (AK::IAkPluginVtbl *)&CMcDSPFutzBoxFX::`vftable;
   McDSP::CAkWhiteNoise::CAkWhiteNoise(&this->m_State.WhiteNoise);
   v1->m_State.tailHandler.uTailFramesRemaining = -1;
   v1->m_State.tailHandler.uTotalTailFrames = 0;
@@ -46,7 +46,7 @@ void __fastcall CMcDSPFutzBoxFX::~CMcDSPFutzBoxFX(CMcDSPFutzBoxFX *this)
 
   v1 = this;
   v2 = &this->m_FutzLoFiImpl;
-  v2[-26].MemoryMapHelper.FutzBoxMemMapPtr = (FutzBoxLoFiMemoryMap *)&CMcDSPFutzBoxFX::`vftable';
+  v2[-26].MemoryMapHelper.FutzBoxMemMapPtr = (FutzBoxLoFiMemoryMap *)&CMcDSPFutzBoxFX::`vftable;
   FutzLoFiImpl::~FutzLoFiImpl(v2);
   FutzGateImpl::~FutzGateImpl(&v1->m_FutzGateImpl);
   FutzSIMImpl::~FutzSIMImpl(&v1->m_FutzSIMImpl);
@@ -61,7 +61,7 @@ void __fastcall CMcDSPFutzBoxFX::~CMcDSPFutzBoxFX(CMcDSPFutzBoxFX *this)
   PooledMemoryAllocator::~PooledMemoryAllocator(&v1->m_EQPool);
   PooledMemoryAllocator::~PooledMemoryAllocator(&v1->m_DistortionPool);
   PooledMemoryAllocator::~PooledMemoryAllocator(&v1->m_FiltersPool);
-  v1->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable';
+  v1->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable;
 }
 
 // File Line: 48

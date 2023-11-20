@@ -136,7 +136,7 @@ __int64 __usercall hkCpuAgentSectorJob@<rax>(hkpMtThreadStructure *tl@<rcx>, hkJ
   input.m_enableDeprecatedWelding.m_bool = tl->m_collisionInput.m_enableDeprecatedWelding.m_bool;
   input.m_allowToSkipConfirmedCallbacks.m_bool = tl->m_collisionInput.m_allowToSkipConfirmedCallbacks.m_bool;
   input.m_config = tl->m_collisionInput.m_config;
-  v84 = &hkpDeferredConstraintOwner::`vftable';
+  v84 = &hkpDeferredConstraintOwner::`vftable;
   hkpFixedSizePhysicsCommandQueue<1536>::hkpFixedSizePhysicsCommandQueue<1536>(&v90);
   v20 = v16->m_jobSubType == 13;
   _mm_store_si128((__m128i *)&v86, (__m128i)0i64);
@@ -459,7 +459,7 @@ LABEL_54:
   }
 LABEL_72:
   v74 = hkJobQueue::finishJobAndGetNextJob(v94, v16, v16, 0);
-  v84 = &hkBaseObject::`vftable';
+  v84 = &hkBaseObject::`vftable;
   if ( input.m_spareAgentSector )
   {
     v75 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
@@ -476,7 +476,7 @@ LABEL_72:
   }
 LABEL_72:
   v74 = hkJobQueue::finishJobAndGetNextJob(v94, v16, v16, 0);
-  v84 = &hkBaseObject::`vftable';
+  v84 = &hkBaseObject::`vftable;
   if ( input.m_spareAgentSector )
   {
     v75 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);

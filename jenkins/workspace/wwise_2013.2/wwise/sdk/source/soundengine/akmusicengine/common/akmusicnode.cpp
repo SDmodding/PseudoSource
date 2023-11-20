@@ -8,7 +8,7 @@ void __fastcall CAkMusicNode::CAkMusicNode(CAkMusicNode *this, unsigned int in_u
   CAkParameterNode::CAkParameterNode((CAkParameterNode *)&this->vfptr, in_ulID);
   v2->m_mapChildId.m_pItems = 0i64;
   *(_QWORD *)&v2->m_mapChildId.m_uLength = 0i64;
-  v2->vfptr = (CAkIndexableVtbl *)&CAkMusicNode::`vftable';
+  v2->vfptr = (CAkIndexableVtbl *)&CAkMusicNode::`vftable;
   *(_QWORD *)&v2->m_grid.uBeatDuration = 0i64;
   *(_QWORD *)&v2->m_grid.uGridDuration = 0i64;
   *((_BYTE *)v2 + 184) &= 0xFEu;
@@ -23,9 +23,9 @@ void __fastcall CAkMusicNode::~CAkMusicNode(CAkMusicNode *this)
   CAkParameterNodeBase **v2; // rdx
 
   v1 = this;
-  this->vfptr = (CAkIndexableVtbl *)&CAkMusicNode::`vftable';
+  this->vfptr = (CAkIndexableVtbl *)&CAkMusicNode::`vftable;
   CAkMusicNode::FlushStingers(this);
-  v1->vfptr = (CAkIndexableVtbl *)&CAkParentNode<CAkParameterNode>::`vftable';
+  v1->vfptr = (CAkIndexableVtbl *)&CAkParentNode<CAkParameterNode>::`vftable;
   v2 = v1->m_mapChildId.m_pItems;
   if ( v2 )
   {

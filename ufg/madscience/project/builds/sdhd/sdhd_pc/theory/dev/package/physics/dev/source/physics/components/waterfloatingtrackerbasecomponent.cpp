@@ -22,12 +22,12 @@ void __fastcall UFG::WaterFloatingTrackerBaseComponent::WaterFloatingTrackerBase
 
   v3 = this;
   UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name_uid);
-  v3->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::UpdateInterface::`vftable';
+  v3->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::UpdateInterface::`vftable;
   v4 = (UFG::qNode<UFG::WaterFloatingTrackerBaseComponent,UFG::WaterFloatingTrackerBaseComponent> *)&v3->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::WaterFloatingTrackerBaseComponent::`vftable'{for `UFG::SimComponent'};
-  v3->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::WaterFloatingTrackerBaseComponent::`vftable'{for `UFG::UpdateInterface'};
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::WaterFloatingTrackerBaseComponent::`vftable{for `UFG::SimComponent};
+  v3->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::WaterFloatingTrackerBaseComponent::`vftable{for `UFG::UpdateInterface};
   v5 = UFG::WaterFloatingTrackerBaseComponent::s_WaterFloatingTrackerBaseComponentList.mNode.mPrev;
   UFG::WaterFloatingTrackerBaseComponent::s_WaterFloatingTrackerBaseComponentList.mNode.mPrev->mNext = (UFG::qNode<UFG::WaterFloatingTrackerBaseComponent,UFG::WaterFloatingTrackerBaseComponent> *)&v3->mPrev;
   v4->mPrev = v5;
@@ -51,8 +51,8 @@ void __fastcall UFG::WaterFloatingTrackerBaseComponent::~WaterFloatingTrackerBas
   UFG::qNode<UFG::WaterFloatingTrackerBaseComponent,UFG::WaterFloatingTrackerBaseComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::WaterFloatingTrackerBaseComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::WaterFloatingTrackerBaseComponent::`vftable'{for `UFG::UpdateInterface'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::WaterFloatingTrackerBaseComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::WaterFloatingTrackerBaseComponent::`vftable{for `UFG::UpdateInterface};
   if ( this == UFG::WaterFloatingTrackerBaseComponent::s_WaterFloatingTrackerBaseComponentpCurrentIterator )
     UFG::WaterFloatingTrackerBaseComponent::s_WaterFloatingTrackerBaseComponentpCurrentIterator = (UFG::WaterFloatingTrackerBaseComponent *)&this->mPrev[-5].mNext;
   v2 = (UFG::qNode<UFG::WaterFloatingTrackerBaseComponent,UFG::WaterFloatingTrackerBaseComponent> *)&this->mPrev;

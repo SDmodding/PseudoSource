@@ -4,21 +4,21 @@ void __fastcall Scaleform::GFx::AS3::MemoryContextImpl::MemoryContextImpl(Scalef
 {
   Scaleform::GFx::AS3::MemoryContextImpl::HeapLimit *v1; // [rsp+28h] [rbp+10h]
 
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::MemoryContext,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::MemoryContext::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS3::MemoryContextImpl::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::MemoryContext,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::MemoryContext::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS3::MemoryContextImpl::`vftable;
   this->Heap = 0i64;
   this->StringMgr.pObject = 0i64;
   this->ASGC.pObject = 0i64;
   this->TextAllocator.pObject = 0i64;
   v1 = &this->LimHandler;
-  v1->vfptr = (Scaleform::MemoryHeap::LimitHandlerVtbl *)&Scaleform::MemoryHeap::LimitHandler::`vftable';
+  v1->vfptr = (Scaleform::MemoryHeap::LimitHandlerVtbl *)&Scaleform::MemoryHeap::LimitHandler::`vftable;
   v1->AllocCount = 0;
-  v1->vfptr = (Scaleform::MemoryHeap::LimitHandlerVtbl *)&Scaleform::GFx::AS3::MemoryContextImpl::HeapLimit::`vftable';
+  v1->vfptr = (Scaleform::MemoryHeap::LimitHandlerVtbl *)&Scaleform::GFx::AS3::MemoryContextImpl::HeapLimit::`vftable;
   this->LimHandler.MemContext = 0i64;
   this->LimHandler.UserLevelLimit = 0i64;
   this->LimHandler.LastCollectionFootprint = 0i64;
@@ -37,9 +37,9 @@ void __fastcall Scaleform::GFx::AS3::MemoryContextImpl::~MemoryContextImpl(Scale
   Scaleform::Render::RenderBuffer *v4; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS3::MemoryContextImpl::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS3::MemoryContextImpl::`vftable;
   this->Heap->vfptr->SetLimitHandler(this->Heap, 0i64);
-  v1->LimHandler.vfptr = (Scaleform::MemoryHeap::LimitHandlerVtbl *)&Scaleform::MemoryHeap::LimitHandler::`vftable';
+  v1->LimHandler.vfptr = (Scaleform::MemoryHeap::LimitHandlerVtbl *)&Scaleform::MemoryHeap::LimitHandler::`vftable;
   v2 = (Scaleform::RefCountNTSImpl *)&v1->TextAllocator.pObject->vfptr;
   if ( v2 )
     Scaleform::RefCountNTSImpl::Release(v2);
@@ -49,7 +49,7 @@ void __fastcall Scaleform::GFx::AS3::MemoryContextImpl::~MemoryContextImpl(Scale
   v4 = (Scaleform::Render::RenderBuffer *)v1->StringMgr.pObject;
   if ( v4 )
     Scaleform::RefCountImpl::Release(v4);
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::MemoryContext::`vftable';
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::MemoryContext::`vftable;
   Scaleform::RefCountImplCore::~RefCountImplCore((Scaleform::RefCountImplCore *)&v1->vfptr);
 }
 
@@ -65,7 +65,7 @@ void __fastcall Scaleform::GFx::AS3::ASVM::AbcFileWithMovieDef::AbcFileWithMovie
   v4 = pdefImpl;
   v5 = this;
   Scaleform::GFx::AS3::Abc::File::File((Scaleform::GFx::AS3::Abc::File *)&this->vfptr);
-  v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS3::ASVM::AbcFileWithMovieDef::`vftable';
+  v5->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS3::ASVM::AbcFileWithMovieDef::`vftable;
   if ( v4 )
     Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)&v4->vfptr);
   v5->pDefImpl.pObject = v4;

@@ -236,7 +236,7 @@ LABEL_12:
     v20 = v1->mScore;
     v21 = v1->mStatGameProp->m_pLBD->mLeaderboardId;
     UFG::SocialLogData::SocialLogData(&data);
-    data.vfptr = (UFG::OSuiteMessageVtbl *)&UFG::SocialLogData_NewHighScore::`vftable';
+    data.vfptr = (UFG::OSuiteMessageVtbl *)&UFG::SocialLogData_NewHighScore::`vftable;
     v24 = 0;
     mem = 0i64;
     data.m_iCommId = 0;
@@ -245,7 +245,7 @@ LABEL_12:
     data.m_iScore = v20;
     v22 = UFG::SocialLogDataManager::Instance();
     UFG::SocialLogDataManager::AddToSaveData(v22, &data);
-    data.vfptr = (UFG::OSuiteMessageVtbl *)&UFG::SocialLogData_NewHighScore::`vftable';
+    data.vfptr = (UFG::OSuiteMessageVtbl *)&UFG::SocialLogData_NewHighScore::`vftable;
     if ( mem )
       operator delete[](mem);
     UFG::SocialLogData::~SocialLogData(&data);

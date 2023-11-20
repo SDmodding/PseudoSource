@@ -27,7 +27,7 @@ __int64 dynamic_initializer_for__UFG::UIHK_NISOverlay::m_curtains__()
 // RVA: 0x5CDB10
 void __fastcall UFG::UIHK_NISOverlay::~UIHK_NISOverlay(UFG::UIHK_NISOverlay *this)
 {
-  this->vfptr = (UFG::UIHK_NISOverlayVtbl *)&UFG::UIHK_NISOverlay::`vftable';
+  this->vfptr = (UFG::UIHK_NISOverlayVtbl *)&UFG::UIHK_NISOverlay::`vftable;
   UFG::UIHK_NISOverlay::mLetterBoxActive = 0;
   UFG::UIHK_NISOverlay::m_curtains.m_state = 0;
   UFG::UIHK_NISOverlay::m_curtains.m_mutingAudio = 0;

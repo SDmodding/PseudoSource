@@ -29,7 +29,7 @@ MemberMapFileObject *__fastcall MemberMapFileDependent::Create()
   if ( !v0 )
     return 0i64;
   MemberMapFileObject::MemberMapFileObject(v0);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileDependent::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileDependent::`vftable;
   return v1;
 }
 

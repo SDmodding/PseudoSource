@@ -53,14 +53,14 @@ LABEL_11:
   if ( v5 )
   {
     v14 = SSBrain::c_closure_class_p;
-    v5->vfptr = (SSObjectBaseVtbl *)&SSObjectBase::`vftable';
+    v5->vfptr = (SSObjectBaseVtbl *)&SSObjectBase::`vftable;
     v5->i_ref_count = 0;
-    v5->vfptr = (SSObjectBaseVtbl *)&SSInstance::`vftable';
+    v5->vfptr = (SSObjectBaseVtbl *)&SSInstance::`vftable;
     v5->i_class_p = v14;
     v5->i_user_data = (unsigned __int64)v3;
     v5->i_user_data2 = (unsigned __int64)v2;
     v5->i_ptr_id = ++SSObjectBase::c_ptr_id_prev;
-    v5->vfptr = (SSObjectBaseVtbl *)&SSClosure::`vftable';
+    v5->vfptr = (SSObjectBaseVtbl *)&SSClosure::`vftable;
     ++v3->i_ref_count;
     ++v2->i_ref_count;
   }
@@ -137,9 +137,9 @@ void __fastcall SSClosure::pool_delete(SSClosure *this)
     if ( (unsigned __int64)v1 < v11 || (v12 = v11 + 48i64 * v10->i_size, v13 = &v9->i_pool, (unsigned __int64)v1 >= v12) )
       v13 = &v9->i_exp_pool;
     APArray<SSInstance,SSInstance,ACompareAddress<SSInstance>>::append(v13, (SSInstance *)&v1->vfptr);
-    v1->vfptr = (SSObjectBaseVtbl *)&SSObjectBase::`vftable';
+    v1->vfptr = (SSObjectBaseVtbl *)&SSObjectBase::`vftable;
     v1->i_ref_count = 0;
-    v1->vfptr = (SSObjectBaseVtbl *)&SSInstance::`vftable';
+    v1->vfptr = (SSObjectBaseVtbl *)&SSInstance::`vftable;
   }
 }
 
@@ -371,12 +371,12 @@ LABEL_12:
       }
       *(ASymbol *)(v6 + 8) = ASymbol_String;
       *(_QWORD *)(v6 + 16) = v7;
-      *(_QWORD *)v6 = &SSInvokableBase::`vftable';
+      *(_QWORD *)v6 = &SSInvokableBase::`vftable;
       *(_QWORD *)(v6 + 24) = v8;
       if ( v8 )
         ++v8->i_ref_count;
-      *(_QWORD *)v6 = &SSMethodBase::`vftable';
-      *(_QWORD *)v6 = &SSMethodFunc::`vftable';
+      *(_QWORD *)v6 = &SSMethodBase::`vftable;
+      *(_QWORD *)v6 = &SSMethodFunc::`vftable;
       *(_QWORD *)(v6 + 32) = SSClosure::mthd_String;
       if ( v8 )
       {

@@ -35,7 +35,7 @@ void __fastcall SSActor::SSActor(SSActor *this, ASymbol *name, SSActorClass *cla
   if ( class_p )
     v6 = class_p;
   SSDataInstance::SSDataInstance((SSDataInstance *)&this->vfptr, (SSClass *)&v6->vfptr);
-  v5->vfptr = (SSObjectBaseVtbl *)&SSActor::`vftable';
+  v5->vfptr = (SSObjectBaseVtbl *)&SSActor::`vftable;
   v5->i_icoroutines_to_update.i_count = 0;
   v5->i_icoroutines_to_update.i_array_p = 0i64;
   v5->i_icoroutines_to_update.i_size = 0;
@@ -65,7 +65,7 @@ void __fastcall SSActor::~SSActor(SSActor *this)
   SSActor *v1; // rbx
 
   v1 = this;
-  this->vfptr = (SSObjectBaseVtbl *)&SSActor::`vftable';
+  this->vfptr = (SSObjectBaseVtbl *)&SSActor::`vftable;
   if ( this->i_actor_flags & 1 )
   {
     this->i_actor_flags ^= 1u;
@@ -446,7 +446,7 @@ AString *__fastcall SSActor::as_string(SSActor *this, AString *result)
     memmove(&v2->i_str_ref_p->i_cstr_p[v2->i_str_ref_p->i_length], v5->i_cstr_p, v6 + 1);
     v2->i_str_ref_p->i_length = v7;
   }
-  AString::append(v2, "' <", 3u);
+  AString::append(v2, " <", 3u);
   v8 = resulta.i_str_ref_p;
   v9 = resulta.i_str_ref_p->i_length;
   if ( v9 )
@@ -1140,12 +1140,12 @@ LABEL_20:
       v74 = v12;
       *(ASymbol *)(v12 + 8) = ASymbol_String;
       *(_QWORD *)(v12 + 16) = v13;
-      *(_QWORD *)v12 = &SSInvokableBase::`vftable';
+      *(_QWORD *)v12 = &SSInvokableBase::`vftable;
       *(_QWORD *)(v12 + 24) = v14;
       if ( v14 )
         ++v14->i_ref_count;
-      *(_QWORD *)v12 = &SSMethodBase::`vftable';
-      *(_QWORD *)v12 = &SSMethodFunc::`vftable';
+      *(_QWORD *)v12 = &SSMethodBase::`vftable;
+      *(_QWORD *)v12 = &SSMethodFunc::`vftable;
       *(_QWORD *)(v12 + 32) = SSActor::mthd_string;
       if ( v14 )
       {
@@ -1229,12 +1229,12 @@ LABEL_45:
       v74 = v21;
       *(ASymbol *)(v21 + 8) = ASymbol_equals;
       *(_QWORD *)(v21 + 16) = v22;
-      *(_QWORD *)v21 = &SSInvokableBase::`vftable';
+      *(_QWORD *)v21 = &SSInvokableBase::`vftable;
       *(_QWORD *)(v21 + 24) = v23;
       if ( v23 )
         ++v23->i_ref_count;
-      *(_QWORD *)v21 = &SSMethodBase::`vftable';
-      *(_QWORD *)v21 = &SSMethodFunc::`vftable';
+      *(_QWORD *)v21 = &SSMethodBase::`vftable;
+      *(_QWORD *)v21 = &SSMethodFunc::`vftable;
       *(_QWORD *)(v21 + 32) = SSActor::mthd_op_equals;
       if ( v23 )
       {
@@ -1318,12 +1318,12 @@ LABEL_70:
       v74 = v29;
       *(ASymbol *)(v29 + 8) = ASymbol_get_name;
       *(_QWORD *)(v29 + 16) = v30;
-      *(_QWORD *)v29 = &SSInvokableBase::`vftable';
+      *(_QWORD *)v29 = &SSInvokableBase::`vftable;
       *(_QWORD *)(v29 + 24) = v31;
       if ( v31 )
         ++v31->i_ref_count;
-      *(_QWORD *)v29 = &SSMethodBase::`vftable';
-      *(_QWORD *)v29 = &SSMethodFunc::`vftable';
+      *(_QWORD *)v29 = &SSMethodBase::`vftable;
+      *(_QWORD *)v29 = &SSMethodFunc::`vftable;
       *(_QWORD *)(v29 + 32) = SSActor::mthd_get_name;
       if ( v31 )
       {
@@ -1407,12 +1407,12 @@ LABEL_95:
       v74 = v37;
       *(ASymbol *)(v37 + 8) = ASymbol_get_strategy_name;
       *(_QWORD *)(v37 + 16) = v38;
-      *(_QWORD *)v37 = &SSInvokableBase::`vftable';
+      *(_QWORD *)v37 = &SSInvokableBase::`vftable;
       *(_QWORD *)(v37 + 24) = v39;
       if ( v39 )
         ++v39->i_ref_count;
-      *(_QWORD *)v37 = &SSMethodBase::`vftable';
-      *(_QWORD *)v37 = &SSMethodFunc::`vftable';
+      *(_QWORD *)v37 = &SSMethodBase::`vftable;
+      *(_QWORD *)v37 = &SSMethodFunc::`vftable;
       *(_QWORD *)(v37 + 32) = SSActor::mthd_get_strategy_name;
       if ( v39 )
       {
@@ -1496,12 +1496,12 @@ LABEL_120:
       v74 = v45;
       *(ASymbol *)(v45 + 8) = ASymbol_not_equal;
       *(_QWORD *)(v45 + 16) = v46;
-      *(_QWORD *)v45 = &SSInvokableBase::`vftable';
+      *(_QWORD *)v45 = &SSInvokableBase::`vftable;
       *(_QWORD *)(v45 + 24) = v47;
       if ( v47 )
         ++v47->i_ref_count;
-      *(_QWORD *)v45 = &SSMethodBase::`vftable';
-      *(_QWORD *)v45 = &SSMethodFunc::`vftable';
+      *(_QWORD *)v45 = &SSMethodBase::`vftable;
+      *(_QWORD *)v45 = &SSMethodFunc::`vftable;
       *(_QWORD *)(v45 + 32) = SSInstance::mthdc_op_not_equal;
       if ( v47 )
       {
@@ -1585,12 +1585,12 @@ LABEL_145:
       v74 = v53;
       *(ASymbol *)(v53 + 8) = ASymbol_set_strategy;
       *(_QWORD *)(v53 + 16) = v54;
-      *(_QWORD *)v53 = &SSInvokableBase::`vftable';
+      *(_QWORD *)v53 = &SSInvokableBase::`vftable;
       *(_QWORD *)(v53 + 24) = v55;
       if ( v55 )
         ++v55->i_ref_count;
-      *(_QWORD *)v53 = &SSMethodBase::`vftable';
-      *(_QWORD *)v53 = &SSMethodFunc::`vftable';
+      *(_QWORD *)v53 = &SSMethodBase::`vftable;
+      *(_QWORD *)v53 = &SSMethodFunc::`vftable;
       *(_QWORD *)(v53 + 32) = UFG::TSAudio::MthdC_get_named;
       if ( v55 )
       {

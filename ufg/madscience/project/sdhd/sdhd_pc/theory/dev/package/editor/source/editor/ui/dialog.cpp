@@ -10,7 +10,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::Editor::EditorDial
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::Editor::EditorDialog,UFG::DUIWindow>::sInventory.vfptr,
     "UFG::Editor::EditorDialog",
     v0);
-  UFG::qReflectObjectType<UFG::Editor::EditorDialog,UFG::DUIWindow>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::Editor::EditorDialog>::`vftable';
+  UFG::qReflectObjectType<UFG::Editor::EditorDialog,UFG::DUIWindow>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::Editor::EditorDialog>::`vftable;
   UFG::qReflectInventory<UFG::Editor::EditorDialog>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::Editor::EditorDialog,UFG::DUIWindow>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(

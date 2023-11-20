@@ -12,7 +12,7 @@ void __fastcall CAkSIS::~CAkSIS(CAkSIS *this)
   char *v8; // rdx
 
   v1 = this;
-  this->vfptr = (ITransitionableVtbl *)&CAkSIS::`vftable';
+  this->vfptr = (ITransitionableVtbl *)&CAkSIS::`vftable;
   v2 = this->m_values.m_pProps;
   if ( v2 )
   {

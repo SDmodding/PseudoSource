@@ -7,7 +7,7 @@ void __fastcall hkaMeshBinding::hkaMeshBinding(hkaMeshBinding *this)
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaMeshBinding::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaMeshBinding::`vftable;
   v2 = &this->m_originalSkeletonName;
   v2[-1].m_stringAndFlag = 0i64;
   hkStringPtr::hkStringPtr(v2);
@@ -32,7 +32,7 @@ void __fastcall hkaMeshBinding::hkaMeshBinding(hkaMeshBinding *this, hkFinishLoa
   fa = f.m_finishing;
   v2 = this;
   v3 = &this->m_originalSkeletonName;
-  v3[-3].m_stringAndFlag = (const char *)&hkaMeshBinding::`vftable';
+  v3[-3].m_stringAndFlag = (const char *)&hkaMeshBinding::`vftable;
   hkStringPtr::hkStringPtr(v3, f);
   hkStringPtr::hkStringPtr(&v2->m_name, (hkFinishLoadedObjectFlag)fa);
 }
@@ -51,7 +51,7 @@ void __fastcall hkaMeshBinding::~hkaMeshBinding(hkaMeshBinding *this)
   hkReferencedObject *v8; // rcx
   hkReferencedObject *v9; // rcx
 
-  this->vfptr = (hkBaseObjectVtbl *)&hkaMeshBinding::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaMeshBinding::`vftable;
   v1 = this->m_boneFromSkinMeshTransforms.m_capacityAndFlags;
   v2 = this;
   this->m_boneFromSkinMeshTransforms.m_size = 0;
@@ -102,6 +102,6 @@ void __fastcall hkaMeshBinding::~hkaMeshBinding(hkaMeshBinding *this)
   if ( v9 )
     hkReferencedObject::removeReference(v9);
   v2->m_mesh.m_pntr = 0i64;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 

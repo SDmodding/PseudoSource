@@ -2,7 +2,7 @@
 // RVA: 0xC62E60
 void __fastcall hkSolverAllocator::hkSolverAllocator(hkSolverAllocator *this)
 {
-  this->vfptr = (hkMemoryAllocatorVtbl *)&hkSolverAllocator::`vftable';
+  this->vfptr = (hkMemoryAllocatorVtbl *)&hkSolverAllocator::`vftable;
   this->m_bufferStart = 0i64;
   this->m_bufferEnd = 0i64;
   this->m_currentEnd = 0i64;
@@ -23,7 +23,7 @@ void __fastcall hkSolverAllocator::~hkSolverAllocator(hkSolverAllocator *this)
 
   v1 = this;
   v2 = &this->m_criticalSection.m_section;
-  v2[-28].SpinCount = (unsigned __int64)&hkSolverAllocator::`vftable';
+  v2[-28].SpinCount = (unsigned __int64)&hkSolverAllocator::`vftable;
   DeleteCriticalSection(v2);
   hkMemoryAllocator::~hkMemoryAllocator((hkMemoryAllocator *)&v1->vfptr);
 }

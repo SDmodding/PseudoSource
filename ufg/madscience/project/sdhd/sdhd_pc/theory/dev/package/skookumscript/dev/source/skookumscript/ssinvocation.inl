@@ -10,8 +10,8 @@ void __fastcall SSInvocation::SSInvocation(SSInvocation *this, const void **bina
 
   v2 = binary_pp;
   v3 = this;
-  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-  this->vfptr = (SSExpressionBaseVtbl *)&SSInvocation::`vftable';
+  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+  this->vfptr = (SSExpressionBaseVtbl *)&SSInvocation::`vftable;
   v4 = *(unsigned __int8 *)*binary_pp;
   v5 = (char *)*binary_pp + 1;
   *binary_pp = v5;

@@ -219,7 +219,7 @@ void __fastcall UFG::TargetingProfile::UpdateCachedValues(UFG::TargetingProfile 
 // RVA: 0x1543C60
 __int64 dynamic_initializer_for__UFG::TargetingProfiles::ms_TargetingProfilePool__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     UFG::TargetingProfiles::ms_TargetingProfilePool.p,
     0x80ui64,
     16,

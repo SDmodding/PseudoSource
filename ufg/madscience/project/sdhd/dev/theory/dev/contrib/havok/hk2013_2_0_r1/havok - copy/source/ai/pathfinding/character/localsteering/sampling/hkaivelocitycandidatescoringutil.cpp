@@ -454,7 +454,7 @@ bool __fastcall hkaiVelocityCandidateScoringUtil::scoreAgentObstacle(hkaiAvoidan
                _mm_add_ps(
                  _mm_mul_ps(
                    _mm_cvtepi32_ps(_mm_srli_epi32(v106, 0x10u)),
-                   (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                   (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                  _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v106, 0x10u), 0x10u))),
                (__m128)xmmword_141A71230);
       v110 = _mm_cvtepi32_ps(_mm_srli_epi32(v107, 0x10u));
@@ -465,7 +465,7 @@ bool __fastcall hkaiVelocityCandidateScoringUtil::scoreAgentObstacle(hkaiAvoidan
       v114 = _mm_mul_ps(
                _mm_add_ps(
                  _mm_mul_ps(
-                   _mm_add_ps(_mm_mul_ps(v110, (__m128)`hkIntVector::convertU32ToF32'::`2'::two16), v111),
+                   _mm_add_ps(_mm_mul_ps(v110, (__m128)`hkIntVector::convertU32ToF32::`2::two16), v111),
                    (__m128)xmmword_141A71230),
                  g_vectorfConstants[0]),
                v147);
@@ -515,7 +515,7 @@ bool __fastcall hkaiVelocityCandidateScoringUtil::scoreAgentObstacle(hkaiAvoidan
                 _mm_add_ps(
                   _mm_mul_ps(
                     _mm_cvtepi32_ps(_mm_srli_epi32(v127, 0x10u)),
-                    (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                    (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                   _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v127, 0x10u), 0x10u))),
                 (__m128)xmmword_141A71230),
               g_vectorfConstants[0]);
@@ -523,7 +523,7 @@ bool __fastcall hkaiVelocityCandidateScoringUtil::scoreAgentObstacle(hkaiAvoidan
                _mm_add_ps(
                  _mm_mul_ps(
                    _mm_cvtepi32_ps(_mm_srli_epi32(v126, 0x10u)),
-                   (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                   (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                  _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v126, 0x10u), 0x10u))),
                (__m128)xmmword_141A71230);
       v132 = _mm_sub_ps(v129, _mm_andnot_ps(_mm_cmpleps(v130, (__m128)0i64), _mm_mul_ps(_mm_rsqrt_ps(v130), v130)));
@@ -789,7 +789,7 @@ bool __fastcall hkaiVelocityCandidateScoringUtil::scoreStaticCapsule(hkVector4f 
                   _mm_add_ps(
                     _mm_mul_ps(
                       _mm_cvtepi32_ps(_mm_srli_epi32(v70, 0x10u)),
-                      (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                      (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                     _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v70, 0x10u), 0x10u))),
                   (__m128)xmmword_141A71230),
                 g_vectorfConstants[0]);
@@ -800,7 +800,7 @@ bool __fastcall hkaiVelocityCandidateScoringUtil::scoreStaticCapsule(hkVector4f 
                   _mm_add_ps(
                     _mm_mul_ps(
                       _mm_cvtepi32_ps(_mm_srli_epi32(v71, 0x10u)),
-                      (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                      (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                     _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v71, 0x10u), 0x10u))),
                   (__m128)xmmword_141A71230),
                 g_vectorfConstants[0]);
@@ -867,7 +867,7 @@ bool __fastcall hkaiVelocityCandidateScoringUtil::scoreStaticCapsule(hkVector4f 
               _mm_add_ps(
                 _mm_mul_ps(
                   _mm_cvtepi32_ps(_mm_srli_epi32(v46, 0x10u)),
-                  (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                  (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                 _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v46, 0x10u), 0x10u))),
               (__m128)xmmword_141A71230),
             g_vectorfConstants[0]);
@@ -876,7 +876,7 @@ bool __fastcall hkaiVelocityCandidateScoringUtil::scoreStaticCapsule(hkVector4f 
               _mm_add_ps(
                 _mm_mul_ps(
                   _mm_cvtepi32_ps(_mm_srli_epi32(v47, 0x10u)),
-                  (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                  (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                 _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v47, 0x10u), 0x10u))),
               (__m128)xmmword_141A71230),
             g_vectorfConstants[0]);
@@ -1022,7 +1022,7 @@ _BOOL8 __fastcall hkaiVelocityCandidateScoringUtil::scoreMovingSphere(hkVector4f
               _mm_mul_ps(
                 _mm_add_ps(
                   _mm_mul_ps(
-                    _mm_add_ps(_mm_mul_ps(v56, (__m128)`hkIntVector::convertU32ToF32'::`2'::two16), v57),
+                    _mm_add_ps(_mm_mul_ps(v56, (__m128)`hkIntVector::convertU32ToF32::`2::two16), v57),
                     (__m128)xmmword_141A71230),
                   g_vectorfConstants[0]),
                 v11.m_real),
@@ -1037,7 +1037,7 @@ _BOOL8 __fastcall hkaiVelocityCandidateScoringUtil::scoreMovingSphere(hkVector4f
                     _mm_add_ps(
                       _mm_mul_ps(
                         _mm_cvtepi32_ps(_mm_srli_epi32(v54, 0x10u)),
-                        (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                        (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                       _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v54, 0x10u), 0x10u))),
                     (__m128)xmmword_141A71230),
                   g_vectorfConstants[0]),
@@ -1098,7 +1098,7 @@ _BOOL8 __fastcall hkaiVelocityCandidateScoringUtil::scoreMovingSphere(hkVector4f
                     _mm_add_ps(
                       _mm_mul_ps(
                         _mm_cvtepi32_ps(_mm_srli_epi32(v40, 0x10u)),
-                        (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                        (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                       _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v40, 0x10u), 0x10u))),
                     (__m128)xmmword_141A71230),
                   g_vectorfConstants[0]),
@@ -1114,7 +1114,7 @@ _BOOL8 __fastcall hkaiVelocityCandidateScoringUtil::scoreMovingSphere(hkVector4f
                     _mm_add_ps(
                       _mm_mul_ps(
                         _mm_cvtepi32_ps(_mm_srli_epi32(v41, 0x10u)),
-                        (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                        (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                       _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v41, 0x10u), 0x10u))),
                     (__m128)xmmword_141A71230),
                   g_vectorfConstants[0]),
@@ -1233,7 +1233,7 @@ signed __int64 __fastcall hkaiVelocityCandidateScoringUtil::calcWallFollowingDir
           velocityCandidatesIn->m_firstBlockRight.m_quad,
           velocityCandidatesIn->m_firstBlockRight.m_quad,
           0);
-  v12 = (__m128)`hkIntVector::convertU32ToF32'::`2'::two16;
+  v12 = (__m128)`hkIntVector::convertU32ToF32::`2::two16;
   v13 = timesToStaticCollision->m_scores.m_elements[31].m_quad;
   v14 = _mm_unpacklo_epi8(_mm_loadl_epi64((const __m128i *)(v7 + 248)), (__m128i)0i64);
   v15 = v14;
@@ -1247,7 +1247,7 @@ signed __int64 __fastcall hkaiVelocityCandidateScoringUtil::calcWallFollowingDir
             _mm_add_ps(
               _mm_mul_ps(
                 _mm_cvtepi32_ps(_mm_srli_epi32(v19, 0x10u)),
-                (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                (__m128)`hkIntVector::convertU32ToF32::`2::two16),
               _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v19, 0x10u), 0x10u))),
             (__m128)xmmword_141A71230),
           g_vectorfConstants[0]);
@@ -1258,7 +1258,7 @@ signed __int64 __fastcall hkaiVelocityCandidateScoringUtil::calcWallFollowingDir
             _mm_add_ps(
               _mm_mul_ps(
                 _mm_cvtepi32_ps(_mm_srli_epi32(v18, 0x10u)),
-                (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                (__m128)`hkIntVector::convertU32ToF32::`2::two16),
               _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v18, 0x10u), 0x10u))),
             (__m128)xmmword_141A71230),
           g_vectorfConstants[0]);
@@ -1339,7 +1339,7 @@ signed __int64 __fastcall hkaiVelocityCandidateScoringUtil::calcWallFollowingDir
               _mm_add_ps(
                 _mm_mul_ps(
                   _mm_cvtepi32_ps(_mm_srli_epi32(v53, 0x10u)),
-                  (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                  (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                 _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v53, 0x10u), 0x10u))),
               (__m128)xmmword_141A71230),
             v47);
@@ -1379,7 +1379,7 @@ signed __int64 __fastcall hkaiVelocityCandidateScoringUtil::calcWallFollowingDir
     ++v25;
     ++v27;
     v35 = v56;
-    v12 = (__m128)`hkIntVector::convertU32ToF32'::`2'::two16;
+    v12 = (__m128)`hkIntVector::convertU32ToF32::`2::two16;
     v13 = v49;
     v43 = v55;
     v38 = v57;
@@ -1390,17 +1390,17 @@ signed __int64 __fastcall hkaiVelocityCandidateScoringUtil::calcWallFollowingDir
   v77 = _mm_movemask_ps(_mm_cmpleps(_mm_max_ps(v76, _mm_shuffle_ps(v76, v76, 177)), v45));
   v78 = (unsigned __int8)hkVector4Comparison_maskToLastIndex[v77];
   v79 = _mm_and_ps(
-          (__m128)`hkVector4f::getComponent'::`2'::indexToMask[(unsigned __int8)hkVector4Comparison_maskToLastIndex[v77]],
+          (__m128)`hkVector4f::getComponent::`2::indexToMask[(unsigned __int8)hkVector4Comparison_maskToLastIndex[v77]],
           v45);
   v80 = _mm_or_ps(_mm_shuffle_ps(v79, v79, 78), v79);
   if ( COERCE_FLOAT(*(unsigned __int128 *)&_mm_shuffle_ps(v80, v80, 177) | v80.m128_i32[0]) <= 0.0 )
     return 0i64;
   v82 = _mm_and_ps(
-          (__m128)`hkVector4f::getComponent'::`2'::indexToMask[(unsigned __int8)hkVector4Comparison_maskToLastIndex[v77]],
+          (__m128)`hkVector4f::getComponent::`2::indexToMask[(unsigned __int8)hkVector4Comparison_maskToLastIndex[v77]],
           v87);
   v83 = _mm_or_ps(_mm_shuffle_ps(v82, v82, 78), v82);
   forwardFactorOut->m_real = _mm_or_ps(_mm_shuffle_ps(v83, v83, 177), v83);
-  v84 = _mm_and_ps(v30, (__m128)`hkVector4f::getComponent'::`2'::indexToMask[v78]);
+  v84 = _mm_and_ps(v30, (__m128)`hkVector4f::getComponent::`2::indexToMask[v78]);
   v85 = _mm_or_ps(_mm_shuffle_ps(v84, v84, 78), v84);
   rightFactorOut->m_real = _mm_or_ps(_mm_shuffle_ps(v85, v85, 177), v85);
   return 1i64;
@@ -1408,7 +1408,7 @@ signed __int64 __fastcall hkaiVelocityCandidateScoringUtil::calcWallFollowingDir
 
 // File Line: 1224
 // RVA: 0xC2CBB0
-float __fastcall `anonymous namespace'::calcWallFollowingPenaltyFromAngle(float angle)
+float __fastcall `anonymous namespace::calcWallFollowingPenaltyFromAngle(float angle)
 {
   __m128i v1; // xmm6
   __m128 v2; // xmm9
@@ -1559,7 +1559,7 @@ void __fastcall hkaiVelocityCandidateScoringUtil::chooseBestCandidate(hkaiVeloci
   v22 = (__m128)LODWORD(radialMultiplier);
   velocityCandidatesIna.m_maxSpeed.m_real = v20;
   v86 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v18, v21)), v21);
-  v22.m128_f32[0] = `anonymous namespace'::calcWallFollowingPenaltyFromAngle(radialMultiplier);
+  v22.m128_f32[0] = `anonymous namespace::calcWallFollowingPenaltyFromAngle(radialMultiplier);
   v23 = _mm_rcp_ps(v20);
   v24 = _mm_shuffle_ps((__m128)(unsigned int)bonusVector, (__m128)(unsigned int)bonusVector, 0);
   v25 = (__m128)xmmword_141A712F0;
@@ -1664,7 +1664,7 @@ LABEL_7:
               _mm_add_ps(
                 _mm_mul_ps(
                   _mm_cvtepi32_ps(_mm_srli_epi32(v58, 0x10u)),
-                  (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                  (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                 _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v58, 0x10u), 0x10u))),
               (__m128)xmmword_141A71230),
             g_vectorfConstants[0]);
@@ -1674,7 +1674,7 @@ LABEL_7:
               _mm_add_ps(
                 _mm_mul_ps(
                   _mm_cvtepi32_ps(_mm_srli_epi32(v57, 0x10u)),
-                  (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                  (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                 _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v57, 0x10u), 0x10u))),
               (__m128)xmmword_141A71230),
             g_vectorfConstants[0]);

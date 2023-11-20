@@ -2,7 +2,7 @@
 // RVA: 0x94B930
 void __fastcall Scaleform::Render::MeshStagingNode::~MeshStagingNode(Scaleform::Render::MeshStagingNode *this)
 {
-  this->vfptr = (Scaleform::Render::MeshStagingNodeVtbl *)&Scaleform::Render::MeshStagingNode::`vftable';
+  this->vfptr = (Scaleform::Render::MeshStagingNodeVtbl *)&Scaleform::Render::MeshStagingNode::`vftable;
 }
 
 // File Line: 101
@@ -16,7 +16,7 @@ void __fastcall Scaleform::Render::MeshStagingNode::OnStagingNodeEvict(Scaleform
 // RVA: 0x94B860
 void __fastcall Scaleform::Render::MeshProvider::~MeshProvider(Scaleform::Render::MeshProvider *this)
 {
-  this->vfptr = (Scaleform::Render::MeshProviderVtbl *)&Scaleform::Render::MeshProvider::`vftable';
+  this->vfptr = (Scaleform::Render::MeshProviderVtbl *)&Scaleform::Render::MeshProvider::`vftable;
 }
 
 // File Line: 157
@@ -62,19 +62,19 @@ void __fastcall Scaleform::Render::MeshBase::MeshBase(Scaleform::Render::MeshBas
   v7 = viewMatrix;
   v8 = provider;
   v9 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,68>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::MeshBase,68>::`vftable';
-  this->vfptr = (Scaleform::Render::MeshStagingNodeVtbl *)&Scaleform::Render::MeshStagingNode::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,68>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::MeshBase,68>::`vftable;
+  this->vfptr = (Scaleform::Render::MeshStagingNodeVtbl *)&Scaleform::Render::MeshStagingNode::`vftable;
   this->StagingBufferSize = 0i64;
   this->StagingBufferOffset = 0i64;
   this->StagingBufferIndexOffset = 0i64;
   *(_QWORD *)&this->PinCount = 0i64;
   this->IndexCount = 0;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::MeshBase::`vftable'{for `Scaleform::RefCountBase<Scaleform::Render::MeshBase,68>'};
-  this->vfptr = (Scaleform::Render::MeshStagingNodeVtbl *)&Scaleform::Render::MeshBase::`vftable'{for `Scaleform::Render::MeshStagingNode'};
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::MeshBase::`vftable{for `Scaleform::RefCountBase<Scaleform::Render::MeshBase,68>};
+  this->vfptr = (Scaleform::Render::MeshStagingNodeVtbl *)&Scaleform::Render::MeshBase::`vftable{for `Scaleform::Render::MeshStagingNode};
   this->pRenderer2D = prenderer;
   if ( provider )
     (*((void (__fastcall **)(Scaleform::Render::MeshProvider *))&provider->vfptr->__vecDelDtor + 1))(provider);
@@ -128,7 +128,7 @@ _BOOL8 __fastcall Scaleform::Render::MeshBase::IsEvicted(Scaleform::Render::Mesh
 // RVA: 0x94DA70
 void __fastcall Scaleform::Render::VertexOutput::~VertexOutput(Scaleform::Render::VertexOutput *this)
 {
-  this->vfptr = (Scaleform::Render::VertexOutputVtbl *)&Scaleform::Render::VertexOutput::`vftable';
+  this->vfptr = (Scaleform::Render::VertexOutputVtbl *)&Scaleform::Render::VertexOutput::`vftable;
 }
 
 // File Line: 379
@@ -173,7 +173,7 @@ void __fastcall Scaleform::Render::PrimitiveFillData::PrimitiveFillData(Scalefor
   this->Type = type;
   this->SolidColor.Raw = 0;
   *(_WORD *)&this->FillModes[0].Fill = 0;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     this->Textures,
     8ui64,
     2,
@@ -211,7 +211,7 @@ void __fastcall Scaleform::Render::PrimitiveFillData::PrimitiveFillData(Scalefor
   this->Type = src->Type;
   this->SolidColor.Raw = src->SolidColor.Raw;
   *(_WORD *)&this->FillModes[0].Fill = 0;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     this->Textures,
     8ui64,
     2,
@@ -302,12 +302,12 @@ void __fastcall Scaleform::Render::PrimitiveFill::PrimitiveFill(Scaleform::Rende
 
   v3 = manager;
   v4 = this;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,71>::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseNTS<Scaleform::Render::PrimitiveFill,71>::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::Render::PrimitiveFill::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,71>::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseNTS<Scaleform::Render::PrimitiveFill,71>::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::Render::PrimitiveFill::`vftable;
   Scaleform::Render::PrimitiveFillData::PrimitiveFillData(&this->Data, srcData);
   v4->pManager = v3;
 }
@@ -319,17 +319,17 @@ void __fastcall Scaleform::Render::PrimitiveFillManager::~PrimitiveFillManager(S
   Scaleform::HashSet<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor> > *v1; // rbx
 
   v1 = (Scaleform::HashSet<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor> > *)this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::PrimitiveFillManager::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::PrimitiveFillManager::`vftable;
   Scaleform::HashSet<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::AllocatorLH<Scaleform::Render::GradientImage *,2>,Scaleform::HashsetCachedEntry<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor>>::~HashSet<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::AllocatorLH<Scaleform::Render::GradientImage *,2>,Scaleform::HashsetCachedEntry<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor>>((Scaleform::HashSet<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor> > *)&this->Gradients);
   Scaleform::HashSet<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::AllocatorLH<Scaleform::Render::GradientImage *,2>,Scaleform::HashsetCachedEntry<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor>>::~HashSet<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::Render::GradientImage::PtrHashFunctor,Scaleform::AllocatorLH<Scaleform::Render::GradientImage *,2>,Scaleform::HashsetCachedEntry<Scaleform::Render::GradientImage *,Scaleform::Render::GradientImage::PtrHashFunctor>>(v1 + 3);
-  v1->pTable = (Scaleform::HashSetBase<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor> >::TableType *)&Scaleform::RefCountImplCore::`vftable';
+  v1->pTable = (Scaleform::HashSetBase<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::Render::Text::TextFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::TextFormat *>,Scaleform::Render::Text::TextFormat::HashFunctor> >::TableType *)&Scaleform::RefCountImplCore::`vftable;
 }
 
 // File Line: 743
 // RVA: 0x948FF0
 void __fastcall Scaleform::Render::CacheBase::~CacheBase(Scaleform::Render::CacheBase *this)
 {
-  this->vfptr = (Scaleform::Render::CacheBaseVtbl *)&Scaleform::Render::CacheBase::`vftable';
+  this->vfptr = (Scaleform::Render::CacheBaseVtbl *)&Scaleform::Render::CacheBase::`vftable;
 }
 
 // File Line: 773
@@ -363,7 +363,7 @@ void __fastcall Scaleform::Render::RQCacheInterface::UnlockCaches(Scaleform::Ren
 // RVA: 0x94B180
 void __fastcall Scaleform::Render::RenderQueueItem::Interface::~Interface(Scaleform::Render::RenderQueueItem::Interface *this)
 {
-  this->vfptr = (Scaleform::Render::RenderQueueItem::InterfaceVtbl *)&Scaleform::Render::RenderQueueItem::Interface::`vftable';
+  this->vfptr = (Scaleform::Render::RenderQueueItem::InterfaceVtbl *)&Scaleform::Render::RenderQueueItem::Interface::`vftable;
 }
 
 // File Line: 1062
@@ -391,10 +391,10 @@ bool __fastcall Scaleform::Render::ComplexMesh::IsEvicted(Scaleform::Render::Com
 // RVA: 0x94DB10
 void __fastcall Scaleform::Render::ViewMatrix3DPrimitive::~ViewMatrix3DPrimitive(Scaleform::Render::ViewMatrix3DPrimitive *this)
 {
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ViewMatrix3DPrimitive::`vftable'{for `Scaleform::RefCountBase<Scaleform::Render::ViewMatrix3DPrimitive,67>'};
-  this->vfptr = (Scaleform::Render::RenderQueueItem::InterfaceVtbl *)&Scaleform::Render::ViewMatrix3DPrimitive::`vftable'{for `Scaleform::Render::RenderQueueItem::Interface'};
-  this->vfptr = (Scaleform::Render::RenderQueueItem::InterfaceVtbl *)&Scaleform::Render::RenderQueueItem::Interface::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ViewMatrix3DPrimitive::`vftable{for `Scaleform::RefCountBase<Scaleform::Render::ViewMatrix3DPrimitive,67>};
+  this->vfptr = (Scaleform::Render::RenderQueueItem::InterfaceVtbl *)&Scaleform::Render::ViewMatrix3DPrimitive::`vftable{for `Scaleform::Render::RenderQueueItem::Interface};
+  this->vfptr = (Scaleform::Render::RenderQueueItem::InterfaceVtbl *)&Scaleform::Render::RenderQueueItem::Interface::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
 }
 
 // File Line: 1363
@@ -404,14 +404,14 @@ void __fastcall Scaleform::Render::ProjectionMatrix3DPrimitive::ProjectionMatrix
   Scaleform::Render::ProjectionMatrix3DPrimitive *v1; // rdi
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,67>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::ProjectionMatrix3DPrimitive,67>::`vftable';
-  this->vfptr = (Scaleform::Render::RenderQueueItem::InterfaceVtbl *)&Scaleform::Render::RenderQueueItem::Interface::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ProjectionMatrix3DPrimitive::`vftable'{for `Scaleform::RefCountBase<Scaleform::Render::ProjectionMatrix3DPrimitive,67>'};
-  this->vfptr = (Scaleform::Render::RenderQueueItem::InterfaceVtbl *)&Scaleform::Render::ProjectionMatrix3DPrimitive::`vftable'{for `Scaleform::Render::RenderQueueItem::Interface'};
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,67>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::ProjectionMatrix3DPrimitive,67>::`vftable;
+  this->vfptr = (Scaleform::Render::RenderQueueItem::InterfaceVtbl *)&Scaleform::Render::RenderQueueItem::Interface::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ProjectionMatrix3DPrimitive::`vftable{for `Scaleform::RefCountBase<Scaleform::Render::ProjectionMatrix3DPrimitive,67>};
+  this->vfptr = (Scaleform::Render::RenderQueueItem::InterfaceVtbl *)&Scaleform::Render::ProjectionMatrix3DPrimitive::`vftable{for `Scaleform::Render::RenderQueueItem::Interface};
   memset(&this->ProjectionMatrix, 0, 0x40ui64);
   v1->ProjectionMatrix.M[0][0] = 1.0;
   v1->ProjectionMatrix.M[1][1] = 1.0;
@@ -424,24 +424,24 @@ void __fastcall Scaleform::Render::ProjectionMatrix3DPrimitive::ProjectionMatrix
 // RVA: 0x94C0E0
 void __fastcall Scaleform::Render::ProjectionMatrix3DPrimitive::~ProjectionMatrix3DPrimitive(Scaleform::Render::ProjectionMatrix3DPrimitive *this)
 {
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ProjectionMatrix3DPrimitive::`vftable'{for `Scaleform::RefCountBase<Scaleform::Render::ProjectionMatrix3DPrimitive,67>'};
-  this->vfptr = (Scaleform::Render::RenderQueueItem::InterfaceVtbl *)&Scaleform::Render::ProjectionMatrix3DPrimitive::`vftable'{for `Scaleform::Render::RenderQueueItem::Interface'};
-  this->vfptr = (Scaleform::Render::RenderQueueItem::InterfaceVtbl *)&Scaleform::Render::RenderQueueItem::Interface::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ProjectionMatrix3DPrimitive::`vftable{for `Scaleform::RefCountBase<Scaleform::Render::ProjectionMatrix3DPrimitive,67>};
+  this->vfptr = (Scaleform::Render::RenderQueueItem::InterfaceVtbl *)&Scaleform::Render::ProjectionMatrix3DPrimitive::`vftable{for `Scaleform::Render::RenderQueueItem::Interface};
+  this->vfptr = (Scaleform::Render::RenderQueueItem::InterfaceVtbl *)&Scaleform::Render::RenderQueueItem::Interface::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
 }
 
 // File Line: 1390
 // RVA: 0x946D10
 void __fastcall Scaleform::Render::UserDataPrimitive::UserDataPrimitive(Scaleform::Render::UserDataPrimitive *this, Scaleform::Render::UserDataState::Data *data)
 {
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,67>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::UserDataPrimitive,67>::`vftable';
-  this->vfptr = (Scaleform::Render::RenderQueueItem::InterfaceVtbl *)&Scaleform::Render::RenderQueueItem::Interface::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::UserDataPrimitive::`vftable'{for `Scaleform::RefCountBase<Scaleform::Render::UserDataPrimitive,67>'};
-  this->vfptr = (Scaleform::Render::RenderQueueItem::InterfaceVtbl *)&Scaleform::Render::UserDataPrimitive::`vftable'{for `Scaleform::Render::RenderQueueItem::Interface'};
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,67>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::UserDataPrimitive,67>::`vftable;
+  this->vfptr = (Scaleform::Render::RenderQueueItem::InterfaceVtbl *)&Scaleform::Render::RenderQueueItem::Interface::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::UserDataPrimitive::`vftable{for `Scaleform::RefCountBase<Scaleform::Render::UserDataPrimitive,67>};
+  this->vfptr = (Scaleform::Render::RenderQueueItem::InterfaceVtbl *)&Scaleform::Render::UserDataPrimitive::`vftable{for `Scaleform::Render::RenderQueueItem::Interface};
   if ( data )
     _InterlockedExchangeAdd(&data->RefCount, 1u);
   this->pUserData.pObject = data;
@@ -455,12 +455,12 @@ void __fastcall Scaleform::Render::UserDataPrimitive::~UserDataPrimitive(Scalefo
   Scaleform::Render::UserDataState::Data *v2; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::UserDataPrimitive::`vftable'{for `Scaleform::RefCountBase<Scaleform::Render::UserDataPrimitive,67>'};
-  this->vfptr = (Scaleform::Render::RenderQueueItem::InterfaceVtbl *)&Scaleform::Render::UserDataPrimitive::`vftable'{for `Scaleform::Render::RenderQueueItem::Interface'};
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::UserDataPrimitive::`vftable{for `Scaleform::RefCountBase<Scaleform::Render::UserDataPrimitive,67>};
+  this->vfptr = (Scaleform::Render::RenderQueueItem::InterfaceVtbl *)&Scaleform::Render::UserDataPrimitive::`vftable{for `Scaleform::Render::RenderQueueItem::Interface};
   v2 = this->pUserData.pObject;
   if ( v2 && !_InterlockedDecrement(&v2->RefCount) && v2 )
     v2->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v2->vfptr, 1u);
-  v1->vfptr = (Scaleform::Render::RenderQueueItem::InterfaceVtbl *)&Scaleform::Render::RenderQueueItem::Interface::`vftable';
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  v1->vfptr = (Scaleform::Render::RenderQueueItem::InterfaceVtbl *)&Scaleform::Render::RenderQueueItem::Interface::`vftable;
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
 }
 

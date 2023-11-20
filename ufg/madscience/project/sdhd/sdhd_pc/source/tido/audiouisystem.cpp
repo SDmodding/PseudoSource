@@ -225,7 +225,7 @@ void __fastcall UFG::AudioUISystem::LoadUISoundDataCallback(SimpleXML::XMLDocume
             v9[1].mNext = 0i64;
             v9[2].mNext = 0i64;
             v9[3].mNext = 0i64;
-            v9->mNext = (UFG::allocator::free_link *)&UFG::AudioUIScreen::`vftable';
+            v9->mNext = (UFG::allocator::free_link *)&UFG::AudioUIScreen::`vftable;
             v9[5].mNext = (UFG::allocator::free_link *)-1i64;
             UFG::qBaseTreeRB::qBaseTreeRB((UFG::qBaseTreeRB *)&v9[6]);
           }
@@ -314,7 +314,7 @@ LABEL_32:
                   v27[1].mNext = 0i64;
                   v27[2].mNext = 0i64;
                   v27[3].mNext = 0i64;
-                  v27->mNext = (UFG::allocator::free_link *)&UFG::AudioUIInput::`vftable';
+                  v27->mNext = (UFG::allocator::free_link *)&UFG::AudioUIInput::`vftable;
                   v27[5].mNext = (UFG::allocator::free_link *)-1i64;
                   v27[6].mNext = (UFG::allocator::free_link *)-1i64;
                 }

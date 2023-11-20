@@ -146,8 +146,8 @@ void __fastcall UFG::TSUI_HUD_GameplayHelp::MthdC_show(SSInvokedMethod *pScope, 
     v17 = UFG::UIHKGameplayHelpWidget::Get();
     UFG::UIHKGameplayHelpWidget::Show(v17, &data);
     UFG::qString::~qString(&data.CustomTexturePack);
-    `eh vector destructor iterator'(data.Icons, 0x28ui64, 2, (void (__fastcall *)(void *))UFG::qString::~qString);
-    `eh vector destructor iterator'(data.Captions, 0x28ui64, 2, (void (__fastcall *)(void *))UFG::qString::~qString);
+    `eh vector destructor iterator(data.Icons, 0x28ui64, 2, (void (__fastcall *)(void *))UFG::qString::~qString);
+    `eh vector destructor iterator(data.Captions, 0x28ui64, 2, (void (__fastcall *)(void *))UFG::qString::~qString);
   }
 }
 
@@ -202,8 +202,8 @@ void __fastcall UFG::TSUI_HUD_GameplayHelp::MthdC_show_for_one_frame(SSInvokedMe
     v15 = UFG::UIHKGameplayHelpWidget::Get();
     UFG::UIHKGameplayHelpWidget::ShowOneFrame(v15, &data);
     UFG::qString::~qString(&data.CustomTexturePack);
-    `eh vector destructor iterator'(data.Icons, 0x28ui64, 2, (void (__fastcall *)(void *))UFG::qString::~qString);
-    `eh vector destructor iterator'(data.Captions, 0x28ui64, 2, (void (__fastcall *)(void *))UFG::qString::~qString);
+    `eh vector destructor iterator(data.Icons, 0x28ui64, 2, (void (__fastcall *)(void *))UFG::qString::~qString);
+    `eh vector destructor iterator(data.Captions, 0x28ui64, 2, (void (__fastcall *)(void *))UFG::qString::~qString);
   }
 }
 
@@ -307,11 +307,11 @@ void __fastcall UFG::TSUI_HUD_GameplayHelp::pickup_helper(const char *button, co
   pTrackEnumBinding.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&pTrackEnumBinding;
   pTrackEnumBinding.mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&pTrackEnumBinding;
   UFG::qString::~qString((UFG::qString *)((char *)&data.Icons[1] + 24));
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     &data.Captions[1].mMagic,
     0x28ui64,
     2,
     (void (__fastcall *)(void *))UFG::qString::~qString);
-  `eh vector destructor iterator'(data.Captions, 0x28ui64, 2, (void (__fastcall *)(void *))UFG::qString::~qString);
+  `eh vector destructor iterator(data.Captions, 0x28ui64, 2, (void (__fastcall *)(void *))UFG::qString::~qString);
 }
 

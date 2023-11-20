@@ -2,7 +2,7 @@
 // RVA: 0xE35060
 void __fastcall hkxMesh::hkxMesh(hkxMesh *this, hkFinishLoadedObjectFlag f)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkxMesh::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkxMesh::`vftable;
 }
 
 // File Line: 18
@@ -22,7 +22,7 @@ void __fastcall hkxMesh::~hkxMesh(hkxMesh *this)
   int v11; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkxMesh::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkxMesh::`vftable;
   v2 = this->m_userChannelInfos.m_data;
   v3 = this->m_userChannelInfos.m_size - 1;
   for ( i = v3; i >= 0; v2[i--].m_pntr = 0i64 )
@@ -57,7 +57,7 @@ void __fastcall hkxMesh::~hkxMesh(hkxMesh *this)
       8 * v11);
   v1->m_sections.m_data = 0i64;
   v1->m_sections.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 23
@@ -147,7 +147,7 @@ LABEL_10:
       }
       v14 = v6->m_sections.m_data;
       *(_DWORD *)&geometryInOuta.m_memSizeAndFlags = 0x1FFFF;
-      geometryInOuta.vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable';
+      geometryInOuta.vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable;
       geometryInOuta.m_vertices.m_data = 0i64;
       geometryInOuta.m_vertices.m_size = 0;
       geometryInOuta.m_vertices.m_capacityAndFlags = 2147483648;

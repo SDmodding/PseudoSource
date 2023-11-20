@@ -30,8 +30,8 @@ Scaleform::Render::D3D1x::MeshCacheItem *__fastcall Scaleform::Render::D3D1x::Me
 // RVA: 0xA066A0
 void __fastcall Scaleform::Render::D3D1x::MeshBuffer::~MeshBuffer(Scaleform::Render::D3D1x::MeshBuffer *this)
 {
-  this->vfptr = (Scaleform::Render::MeshBufferVtbl *)&Scaleform::Render::D3D1x::MeshBuffer::`vftable';
-  this->vfptr = (Scaleform::Render::MeshBufferVtbl *)&Scaleform::Render::MeshBuffer::`vftable';
+  this->vfptr = (Scaleform::Render::MeshBufferVtbl *)&Scaleform::Render::D3D1x::MeshBuffer::`vftable;
+  this->vfptr = (Scaleform::Render::MeshBufferVtbl *)&Scaleform::Render::MeshBuffer::`vftable;
 }
 
 // File Line: 169
@@ -41,7 +41,7 @@ void __fastcall Scaleform::Render::D3D1x::MeshBufferSet::~MeshBufferSet(Scalefor
   Scaleform::Render::D3D1x::MeshBufferSet *v1; // rbx
 
   v1 = this;
-  this->vfptr = (Scaleform::Render::D3D1x::MeshBufferSetVtbl *)&Scaleform::Render::D3D1x::MeshBufferSet::`vftable';
+  this->vfptr = (Scaleform::Render::D3D1x::MeshBufferSetVtbl *)&Scaleform::Render::D3D1x::MeshBufferSet::`vftable;
   Scaleform::AllocAddr::~AllocAddr(&this->Allocator);
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v1->Buffers.Data.Data);
 }
@@ -190,15 +190,15 @@ Scaleform::Render::D3D1x::MeshBuffer *__fastcall Scaleform::Render::D3D1x::MeshB
                                                   88i64);
   if ( v12 )
   {
-    v12->vfptr = (Scaleform::Render::MeshBufferVtbl *)&Scaleform::Render::MeshBuffer::`vftable';
+    v12->vfptr = (Scaleform::Render::MeshBufferVtbl *)&Scaleform::Render::MeshBuffer::`vftable;
     v12->Arena = v6;
     v12->Type = v7;
     v12->Size = v11;
     v12->pData = 0i64;
-    v12->vfptr = (Scaleform::Render::MeshBufferVtbl *)&Scaleform::Render::D3D1x::MeshBuffer::`vftable';
-    v12->vfptr = (Scaleform::Render::MeshBufferVtbl *)&Scaleform::Render::D3D1x::MeshBufferImpl<ID3D11Buffer,Scaleform::Render::D3D1x::IndexBuffer>::`vftable';
+    v12->vfptr = (Scaleform::Render::MeshBufferVtbl *)&Scaleform::Render::D3D1x::MeshBuffer::`vftable;
+    v12->vfptr = (Scaleform::Render::MeshBufferVtbl *)&Scaleform::Render::D3D1x::MeshBufferImpl<ID3D11Buffer,Scaleform::Render::D3D1x::IndexBuffer>::`vftable;
     v12[1].vfptr = 0i64;
-    v12->vfptr = (Scaleform::Render::MeshBufferVtbl *)&Scaleform::Render::D3D1x::IndexBuffer::`vftable';
+    v12->vfptr = (Scaleform::Render::MeshBufferVtbl *)&Scaleform::Render::D3D1x::IndexBuffer::`vftable;
   }
   else
   {

@@ -109,7 +109,7 @@ void __fastcall UFG::ModelAssetComponent::ModelAssetComponent(UFG::ModelAssetCom
   v2 = model_asset_uid;
   v3 = this;
   UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, 0);
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ModelAssetComponent::`vftable';
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ModelAssetComponent::`vftable;
   UFG::qReflectHandleBase::qReflectHandleBase((UFG::qReflectHandleBase *)&v3->mModelAssetHandle.mPrev);
   v5 = UFG::qReflectObjectType<UFG::ModelAsset,UFG::qReflectObject>::GetTypeName(v4);
   v6 = UFG::qStringHash64(v5, 0xFFFFFFFFFFFFFFFFui64);

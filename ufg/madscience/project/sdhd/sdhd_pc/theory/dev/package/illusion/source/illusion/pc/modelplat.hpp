@@ -75,12 +75,12 @@ void __fastcall Illusion::BufferPlat::~BufferPlat(Illusion::BufferPlat *this)
   v4->mPrev = v3;
   v2->mPrev = (UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *)&v2->mPrev;
-  v5 = `UFG::qGetResourceInventory<Illusion::BufferD3DResource>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::BufferD3DResource>'::`2'::result )
+  v5 = `UFG::qGetResourceInventory<Illusion::BufferD3DResource>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::BufferD3DResource>::`2::result )
   {
     v6 = UFG::qResourceWarehouse::Instance();
     v5 = UFG::qResourceWarehouse::GetInventory(v6, 0x171246ADu);
-    `UFG::qGetResourceInventory<Illusion::BufferD3DResource>'::`2'::result = v5;
+    `UFG::qGetResourceInventory<Illusion::BufferD3DResource>::`2::result = v5;
   }
   UFG::qResourceHandle::Close(v2, v5);
   UFG::qResourceHandle::~qResourceHandle(v2);

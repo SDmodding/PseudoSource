@@ -14,7 +14,7 @@ void __fastcall hkaiPhysics2012BodySilhouetteGenerator::hkaiPhysics2012BodySilho
   v4 = rb;
   v5 = this;
   hkaiPhysicsBodySilhouetteGeneratorBase::hkaiPhysicsBodySilhouetteGeneratorBase((hkaiPhysicsBodySilhouetteGeneratorBase *)&this->vfptr);
-  v5->vfptr = (hkBaseObjectVtbl *)&hkaiPhysics2012BodySilhouetteGenerator::`vftable';
+  v5->vfptr = (hkBaseObjectVtbl *)&hkaiPhysics2012BodySilhouetteGenerator::`vftable;
   v5->m_rigidBody.m_pntr = 0i64;
   v5->m_physicsWorldListener = v3;
   v6 = (__m128i)v4->m_motion.m_motionState.m_transform.m_translation;
@@ -41,7 +41,7 @@ void __fastcall hkaiPhysics2012BodySilhouetteGenerator::hkaiPhysics2012BodySilho
   hkaiPhysicsBodySilhouetteGeneratorBase::hkaiPhysicsBodySilhouetteGeneratorBase(
     (hkaiPhysicsBodySilhouetteGeneratorBase *)&this->vfptr,
     f);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkaiPhysics2012BodySilhouetteGenerator::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkaiPhysics2012BodySilhouetteGenerator::`vftable;
 }
 
 // File Line: 39
@@ -52,7 +52,7 @@ void __fastcall hkaiPhysics2012BodySilhouetteGenerator::~hkaiPhysics2012BodySilh
   hkpRigidBody *v2; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiPhysics2012BodySilhouetteGenerator::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiPhysics2012BodySilhouetteGenerator::`vftable;
   v2 = this->m_rigidBody.m_pntr;
   if ( v2 )
     hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);

@@ -32,8 +32,8 @@ void __fastcall Scaleform::Render::MeshGenerator::MeshGenerator(Scaleform::Rende
   this->Heap4.MaxPages = 0i64;
   Scaleform::Render::Tessellator::Tessellator(&this->mTess, &this->Heap1, &this->Heap2);
   v5 = &v2->mStroker;
-  v5->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable';
-  v5->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::Stroker::`vftable';
+  v5->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable;
+  v5->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::Stroker::`vftable;
   v2->mStroker.pHeap = v4;
   v2->mStroker.Path.Path.pHeap = v4;
   v2->mStroker.Path.Path.Size = 0i64;
@@ -91,8 +91,8 @@ void __fastcall Scaleform::Render::StrokeGenerator::StrokeGenerator(Scaleform::R
   this->Heap2.pLastPage = 0i64;
   this->Heap2.MaxPages = 0i64;
   v3 = &this->mStroker;
-  v3->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable';
-  v3->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::Stroker::`vftable';
+  v3->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable;
+  v3->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::Stroker::`vftable;
   v3->pHeap = &this->Heap1;
   v3->Path.Path.pHeap = &this->Heap1;
   v3->Path.Path.Size = 0i64;
@@ -109,8 +109,8 @@ void __fastcall Scaleform::Render::StrokeGenerator::StrokeGenerator(Scaleform::R
   v3->Closed = 0;
   Scaleform::Render::StrokeSorter::StrokeSorter(&v2->mStrokeSorter, &v2->Heap2);
   v4 = &v2->mPath;
-  v4->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable';
-  v4->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::VertexPath::`vftable';
+  v4->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable;
+  v4->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::VertexPath::`vftable;
   v2->mPath.Vertices.pHeap = &v2->Heap1;
   v2->mPath.Vertices.Size = 0i64;
   v2->mPath.Vertices.NumPages = 0i64;

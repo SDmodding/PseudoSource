@@ -337,7 +337,7 @@ UFG::SchemaDef *__fastcall UFG::PropertySetManager::GetSchemaForProperty(UFG::qP
           v14 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)v17);
           v2 = (UFG::qSymbolUC *)UFG::qPropertySet::GetName(propertySeta);
           v3 = UFG::qSymbol::as_cstr_dbg(v2);
-          UFG::qPrintf("Warning: '%s' defines property '%s' without parent '%s' [%s]\n", v3, v14, v12, v13);
+          UFG::qPrintf("Warning: %s defines property %s without parent %s [%s]\n", v3, v14, v12, v13);
           schema_def = v10;
         }
         UFG::qArray<UFG::PropertyLookup,0>::Clear((UFG::qArray<UFG::PropertyLookup,0> *)&derived_schemas);

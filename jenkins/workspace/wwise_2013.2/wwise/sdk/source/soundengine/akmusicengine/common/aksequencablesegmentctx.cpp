@@ -9,9 +9,9 @@ void __fastcall CAkSequencableSegmentCtx::CAkSequencableSegmentCtx(CAkSequencabl
   v4 = this;
   CAkChainCtx::CAkChainCtx((CAkChainCtx *)&this->vfptr, in_pParentCtx);
   v4->m_pSegmentNode = v3;
-  v4->vfptr = (CAkChildCtxVtbl *)&CAkSequencableSegmentCtx::`vftable'{for `CAkChildCtx'};
-  v4->vfptr = (CAkTransportAwareVtbl *)&CAkSequencableSegmentCtx::`vftable'{for `CAkTransportAware'};
-  v4->vfptr = (ITransitionableVtbl *)&CAkSegmentCtx::`vftable'{for `ITransitionable'};
+  v4->vfptr = (CAkChildCtxVtbl *)&CAkSequencableSegmentCtx::`vftable{for `CAkChildCtx};
+  v4->vfptr = (CAkTransportAwareVtbl *)&CAkSequencableSegmentCtx::`vftable{for `CAkTransportAware};
+  v4->vfptr = (ITransitionableVtbl *)&CAkSegmentCtx::`vftable{for `ITransitionable};
   if ( v3 )
     v3->vfptr->AddRef((CAkIndexable *)&v3->vfptr);
 }

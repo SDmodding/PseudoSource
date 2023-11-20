@@ -8,7 +8,7 @@ void __fastcall Illusion::Mesh::Mesh(Illusion::Mesh *this)
   UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&this->mMaterialHandle.mPrev);
   UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v1->mVertexDeclHandle.mPrev);
   UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v1->mIndexBufferHandle.mPrev);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v1->mVertexBufferHandles,
     0x20ui64,
     4,

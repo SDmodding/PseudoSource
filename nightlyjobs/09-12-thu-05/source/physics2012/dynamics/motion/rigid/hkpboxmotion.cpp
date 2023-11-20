@@ -6,7 +6,7 @@ void __fastcall hkpBoxMotion::hkpBoxMotion(hkpBoxMotion *this, hkVector4f *posit
 
   v3 = this;
   hkpMotion::hkpMotion((hkpMotion *)&this->vfptr, position, rotation, 0);
-  v3->vfptr = (hkBaseObjectVtbl *)&hkpBoxMotion::`vftable';
+  v3->vfptr = (hkBaseObjectVtbl *)&hkpBoxMotion::`vftable;
   v3->m_type.m_storage = 3;
   v3->m_inertiaAndMassInv = (hkVector4f)query.m_quad;
 }

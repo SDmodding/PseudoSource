@@ -7,7 +7,7 @@ void __fastcall CAkSrcLpFilter::CAkSrcLpFilter(CAkSrcLpFilter *this)
 
   v1 = this;
   v2 = (DSP::BiquadFilter<DSP::SingleChannelPolicy> *)&this->m_InternalLPFState;
-  *(_QWORD *)&v2[-1].m_Memories.m_Memories.fFFwd1 = &CAkSrcLpFilter::`vftable';
+  *(_QWORD *)&v2[-1].m_Memories.m_Memories.fFFwd1 = &CAkSrcLpFilter::`vftable;
   *(_QWORD *)&v2->m_Memories.m_Memories.fFFwd1 = 0i64;
   v2->m_Memories.m_Memories.fFFbk1 = 0.0;
   DSP::BiquadFilter<DSP::SingleChannelPolicy>::SetCoefs(v2, 1.0, 0.0, 0.0, 0.0, 0.0);
@@ -22,7 +22,7 @@ void __fastcall CAkSrcLpFilter::~CAkSrcLpFilter(CAkSrcLpFilter *this)
   DSP::Memories *v2; // rdx
 
   v1 = this;
-  this->vfptr = (CAkSrcLpFilterVtbl *)&CAkSrcLpFilter::`vftable';
+  this->vfptr = (CAkSrcLpFilterVtbl *)&CAkSrcLpFilter::`vftable;
   v2 = this->m_InternalLPFState.m_LPF.m_Memories.m_pMemories;
   if ( v2 )
   {

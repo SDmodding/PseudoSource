@@ -13,7 +13,7 @@ void __fastcall CarWanderTask::~CarWanderTask(CarWanderTask *this)
   UFG::qNode<ITask,ITask> *v9; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&CarWanderTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&CarWanderTask::`vftable;
   v2 = &this->m_pAIComponent;
   if ( this->m_pAIComponent.m_pPointer )
   {
@@ -31,7 +31,7 @@ void __fastcall CarWanderTask::~CarWanderTask(CarWanderTask *this)
   v6->mPrev = v5;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v8 = v1->mPrev;
   v9 = v1->mNext;
@@ -56,7 +56,7 @@ void __fastcall CarFollowTask::~CarFollowTask(CarFollowTask *this)
   UFG::qNode<ITask,ITask> *v9; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&CarFollowTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&CarFollowTask::`vftable;
   v2 = &this->m_pAIComponent;
   if ( this->m_pAIComponent.m_pPointer )
   {
@@ -74,7 +74,7 @@ void __fastcall CarFollowTask::~CarFollowTask(CarFollowTask *this)
   v6->mPrev = v5;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v8 = v1->mPrev;
   v9 = v1->mNext;
@@ -99,7 +99,7 @@ void __fastcall CarEscortTask::~CarEscortTask(CarEscortTask *this)
   UFG::qNode<ITask,ITask> *v9; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&CarEscortTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&CarEscortTask::`vftable;
   v2 = &this->m_pAIComponent;
   if ( this->m_pAIComponent.m_pPointer )
   {
@@ -117,7 +117,7 @@ void __fastcall CarEscortTask::~CarEscortTask(CarEscortTask *this)
   v6->mPrev = v5;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v8 = v1->mPrev;
   v9 = v1->mNext;
@@ -147,7 +147,7 @@ void __fastcall CarGoToTask::~CarGoToTask(CarGoToTask *this)
   UFG::qNode<ITask,ITask> *v14; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&CarGoToTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&CarGoToTask::`vftable;
   v2 = &this->m_pRoadSpaceComponent;
   if ( this->m_pRoadSpaceComponent.m_pPointer )
   {
@@ -182,7 +182,7 @@ void __fastcall CarGoToTask::~CarGoToTask(CarGoToTask *this)
   v11->mPrev = v10;
   v7->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v7->mPrev;
   v1->m_pAIComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->m_pAIComponent.mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v12 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v13 = v1->mPrev;
   v14 = v1->mNext;
@@ -212,7 +212,7 @@ void __fastcall CarStopAtTask::~CarStopAtTask(CarStopAtTask *this)
   UFG::qNode<ITask,ITask> *v14; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&CarStopAtTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&CarStopAtTask::`vftable;
   v2 = &this->m_pAiDriver;
   if ( this->m_pAiDriver.m_pPointer )
   {
@@ -247,7 +247,7 @@ void __fastcall CarStopAtTask::~CarStopAtTask(CarStopAtTask *this)
   v11->mPrev = v10;
   v7->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v7->mPrev;
   v1->m_pRoadSpace.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->m_pRoadSpace.mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v12 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v13 = v1->mPrev;
   v14 = v1->mNext;
@@ -277,7 +277,7 @@ void __fastcall CarWaitTask::~CarWaitTask(CarWaitTask *this)
   UFG::qNode<ITask,ITask> *v14; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&CarWaitTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&CarWaitTask::`vftable;
   v2 = &this->m_pAiDriver;
   if ( this->m_pAiDriver.m_pPointer )
   {
@@ -312,7 +312,7 @@ void __fastcall CarWaitTask::~CarWaitTask(CarWaitTask *this)
   v11->mPrev = v10;
   v7->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v7->mPrev;
   v1->m_pRoadSpace.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->m_pRoadSpace.mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v12 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v13 = v1->mPrev;
   v14 = v1->mNext;
@@ -342,7 +342,7 @@ void __fastcall CarStopAtStimulusTask::~CarStopAtStimulusTask(CarStopAtStimulusT
   UFG::qNode<ITask,ITask> *v14; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&CarStopAtStimulusTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&CarStopAtStimulusTask::`vftable;
   v2 = &this->m_pAiDriver;
   if ( this->m_pAiDriver.m_pPointer )
   {
@@ -377,7 +377,7 @@ void __fastcall CarStopAtStimulusTask::~CarStopAtStimulusTask(CarStopAtStimulusT
   v11->mPrev = v10;
   v7->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v7->mPrev;
   v1->m_pRoadSpace.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->m_pRoadSpace.mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v12 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v13 = v1->mPrev;
   v14 = v1->mNext;
@@ -396,8 +396,8 @@ void __fastcall CarStopTrack::~CarStopTrack(CarStopTrack *this)
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&CarStopTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&CarStopTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -408,7 +408,7 @@ void __fastcall CarStopTrack::~CarStopTrack(CarStopTrack *this)
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 450
@@ -427,8 +427,8 @@ void __fastcall CarRaceTrack::~CarRaceTrack(CarRaceTrack *this)
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&CarRaceTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&CarRaceTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -439,7 +439,7 @@ void __fastcall CarRaceTrack::~CarRaceTrack(CarRaceTrack *this)
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 463
@@ -454,8 +454,8 @@ CarRaceTrack *__fastcall CarRaceTrack::Create()
   if ( !v0 )
     return 0i64;
   ITrack::ITrack((ITrack *)v0, CarRaceTrack::sClassNameUID);
-  *(_QWORD *)v1 = &Track<CarRaceTask>::`vftable';
-  *(_QWORD *)v1 = &CarRaceTrack::`vftable';
+  *(_QWORD *)v1 = &Track<CarRaceTask>::`vftable;
+  *(_QWORD *)v1 = &CarRaceTrack::`vftable;
   return (CarRaceTrack *)v1;
 }
 
@@ -468,8 +468,8 @@ void __fastcall CarStopAtStimulusTrack::~CarStopAtStimulusTrack(CarStopAtStimulu
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&CarStopAtStimulusTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&CarStopAtStimulusTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -480,7 +480,7 @@ void __fastcall CarStopAtStimulusTrack::~CarStopAtStimulusTrack(CarStopAtStimulu
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 478
@@ -499,8 +499,8 @@ void __fastcall CarWaitTrack::~CarWaitTrack(CarWaitTrack *this)
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&CarWaitTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&CarWaitTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -511,7 +511,7 @@ void __fastcall CarWaitTrack::~CarWaitTrack(CarWaitTrack *this)
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 494
@@ -530,8 +530,8 @@ void __fastcall CarStopAtTrack::~CarStopAtTrack(CarStopAtTrack *this)
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&CarStopAtTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&CarStopAtTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -542,7 +542,7 @@ void __fastcall CarStopAtTrack::~CarStopAtTrack(CarStopAtTrack *this)
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 508
@@ -561,8 +561,8 @@ void __fastcall CarWanderTrack::~CarWanderTrack(CarWanderTrack *this)
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&CarWanderTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&CarWanderTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -573,7 +573,7 @@ void __fastcall CarWanderTrack::~CarWanderTrack(CarWanderTrack *this)
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 521
@@ -592,8 +592,8 @@ void __fastcall CarFollowTrack::~CarFollowTrack(CarFollowTrack *this)
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&CarFollowTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&CarFollowTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -604,7 +604,7 @@ void __fastcall CarFollowTrack::~CarFollowTrack(CarFollowTrack *this)
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 534
@@ -623,8 +623,8 @@ void __fastcall CarEscortTrack::~CarEscortTrack(CarEscortTrack *this)
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&CarEscortTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&CarEscortTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -635,7 +635,7 @@ void __fastcall CarEscortTrack::~CarEscortTrack(CarEscortTrack *this)
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 547
@@ -654,8 +654,8 @@ void __fastcall CarGoToTrack::~CarGoToTrack(CarGoToTrack *this)
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&CarGoToTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&CarGoToTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -666,7 +666,7 @@ void __fastcall CarGoToTrack::~CarGoToTrack(CarGoToTrack *this)
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 560
@@ -681,8 +681,8 @@ CarGoToTrack *__fastcall CarGoToTrack::Create()
   if ( !v0 )
     return 0i64;
   ITrack::ITrack((ITrack *)v0, CarGoToTrack::sClassNameUID);
-  *(_QWORD *)v1 = &Track<CarGoToTask>::`vftable';
-  *(_QWORD *)v1 = &CarGoToTrack::`vftable';
+  *(_QWORD *)v1 = &Track<CarGoToTask>::`vftable;
+  *(_QWORD *)v1 = &CarGoToTrack::`vftable;
   return (CarGoToTrack *)v1;
 }
 
@@ -695,8 +695,8 @@ void __fastcall CarNoDestinationTrack::~CarNoDestinationTrack(CarNoDestinationTr
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&CarNoDestinationTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&CarNoDestinationTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -707,7 +707,7 @@ void __fastcall CarNoDestinationTrack::~CarNoDestinationTrack(CarNoDestinationTr
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 573
@@ -726,8 +726,8 @@ void __fastcall CarAttackTrack::~CarAttackTrack(CarAttackTrack *this)
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&CarAttackTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&CarAttackTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -738,7 +738,7 @@ void __fastcall CarAttackTrack::~CarAttackTrack(CarAttackTrack *this)
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 587
@@ -757,8 +757,8 @@ void __fastcall CarFormationAttackTrack::~CarFormationAttackTrack(CarFormationAt
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&CarFormationAttackTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&CarFormationAttackTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -769,7 +769,7 @@ void __fastcall CarFormationAttackTrack::~CarFormationAttackTrack(CarFormationAt
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 610
@@ -788,8 +788,8 @@ void __fastcall CarFormationTrack::~CarFormationTrack(CarFormationTrack *this)
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&CarFormationTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&CarFormationTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -800,7 +800,7 @@ void __fastcall CarFormationTrack::~CarFormationTrack(CarFormationTrack *this)
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 633
@@ -819,8 +819,8 @@ void __fastcall CarOffsetDriveTrack::~CarOffsetDriveTrack(CarOffsetDriveTrack *t
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&CarOffsetDriveTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&CarOffsetDriveTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -831,7 +831,7 @@ void __fastcall CarOffsetDriveTrack::~CarOffsetDriveTrack(CarOffsetDriveTrack *t
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 664
@@ -850,8 +850,8 @@ void __fastcall CarFormationDriveTrack::~CarFormationDriveTrack(CarFormationDriv
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&CarFormationDriveTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&CarFormationDriveTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -862,7 +862,7 @@ void __fastcall CarFormationDriveTrack::~CarFormationDriveTrack(CarFormationDriv
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 688
@@ -881,8 +881,8 @@ void __fastcall CarOccupantAimTrack::~CarOccupantAimTrack(CarOccupantAimTrack *t
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&CarOccupantAimTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&CarOccupantAimTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -893,7 +893,7 @@ void __fastcall CarOccupantAimTrack::~CarOccupantAimTrack(CarOccupantAimTrack *t
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 704
@@ -912,8 +912,8 @@ void __fastcall CarOccupantShootTrack::~CarOccupantShootTrack(CarOccupantShootTr
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&CarOccupantShootTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&CarOccupantShootTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -924,7 +924,7 @@ void __fastcall CarOccupantShootTrack::~CarOccupantShootTrack(CarOccupantShootTr
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 722
@@ -943,8 +943,8 @@ void __fastcall CarOccupantIntentionTrack::~CarOccupantIntentionTrack(CarOccupan
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&CarOccupantIntentionTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&CarOccupantIntentionTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -955,7 +955,7 @@ void __fastcall CarOccupantIntentionTrack::~CarOccupantIntentionTrack(CarOccupan
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 740
@@ -974,8 +974,8 @@ void __fastcall CarOccupantsActionTrack::~CarOccupantsActionTrack(CarOccupantsAc
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&CarOccupantsActionTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&CarOccupantsActionTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -986,7 +986,7 @@ void __fastcall CarOccupantsActionTrack::~CarOccupantsActionTrack(CarOccupantsAc
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 762
@@ -1005,8 +1005,8 @@ void __fastcall SetCarModeTrack::~SetCarModeTrack(SetCarModeTrack *this)
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&SetCarModeTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&SetCarModeTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -1017,7 +1017,7 @@ void __fastcall SetCarModeTrack::~SetCarModeTrack(SetCarModeTrack *this)
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 780
@@ -1046,8 +1046,8 @@ VehicleEffectTrack *__fastcall VehicleEffectTrack::Create()
   if ( !v0 )
     return 0i64;
   ITrack::ITrack((ITrack *)v0, VehicleEffectTrack::sClassNameUID);
-  *(_QWORD *)v1 = &Track<VehicleEffectTask>::`vftable';
-  *(_QWORD *)v1 = &VehicleEffectTrack::`vftable';
+  *(_QWORD *)v1 = &Track<VehicleEffectTask>::`vftable;
+  *(_QWORD *)v1 = &VehicleEffectTrack::`vftable;
   *((_DWORD *)v1 + 15) = 0;
   return (VehicleEffectTrack *)v1;
 }

@@ -13,7 +13,7 @@ void __fastcall UFG::qReflectArray<UFG::StateMachineNode::FractureElementNode>::
     if ( v2 )
     {
       v3 = &v2[-1].mValue;
-      `eh vector destructor iterator'(v2, 8ui64, v2[-1].mValue, (void (__fastcall *)(void *))_);
+      `eh vector destructor iterator(v2, 8ui64, v2[-1].mValue, (void (__fastcall *)(void *))_);
       operator delete[](v3);
     }
   }

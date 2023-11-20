@@ -40,7 +40,7 @@ void __fastcall finishLoadedObjecthkpCompressedSampledHeightFieldShape(void *p, 
     hkpSampledHeightFieldShape::hkpSampledHeightFieldShape(
       (hkpSampledHeightFieldShape *)p,
       (hkFinishLoadedObjectFlag)finishing);
-    *(_QWORD *)v3 = &hkpCompressedSampledHeightFieldShape::`vftable';
+    *(_QWORD *)v3 = &hkpCompressedSampledHeightFieldShape::`vftable;
     if ( v2 )
       v3[73] = 1;
   }
@@ -60,7 +60,7 @@ void **__fastcall getVtablehkpCompressedSampledHeightFieldShape()
   hkpSampledHeightFieldShape v1; // [rsp+20h] [rbp-B8h]
 
   hkpSampledHeightFieldShape::hkpSampledHeightFieldShape(&v1, 0);
-  return &hkpCompressedSampledHeightFieldShape::`vftable';
+  return &hkpCompressedSampledHeightFieldShape::`vftable;
 }
 
 // File Line: 104

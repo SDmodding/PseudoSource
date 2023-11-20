@@ -9,7 +9,7 @@ void __fastcall Scaleform::Render::TreeCacheNode::~TreeCacheNode(Scaleform::Rend
   Scaleform::Render::CacheEffect *v5; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::Render::TreeCacheNodeVtbl *)&Scaleform::Render::TreeCacheNode::`vftable';
+  this->vfptr = (Scaleform::Render::TreeCacheNodeVtbl *)&Scaleform::Render::TreeCacheNode::`vftable;
   if ( this->pPrev )
   {
     this->pPrev->pNext = this->pNext;
@@ -802,7 +802,7 @@ LABEL_36:
                                 _mm_mul_ps(_mm_shuffle_ps(v59, v59, 170), *(__m128 *)&m.M[2][0])),
                               _mm_and_ps(
                                 v59,
-                                (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v));
+                                (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v));
     v63 = _mm_add_ps(
             _mm_mul_ps(_mm_shuffle_ps(v61, v61, 85), *(__m128 *)&m.M[1][0]),
             _mm_mul_ps(_mm_shuffle_ps(v61, v61, 0), v56));
@@ -814,12 +814,12 @@ LABEL_36:
                                 _mm_mul_ps(_mm_shuffle_ps(v60, v60, 170), *(__m128 *)&m.M[2][0])),
                               _mm_and_ps(
                                 v60,
-                                (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v));
+                                (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v));
     *(__m128 *)&m.M[2][0] = _mm_add_ps(
                               _mm_add_ps(v63, _mm_mul_ps(_mm_shuffle_ps(v61, v61, 170), *(__m128 *)&m.M[2][0])),
                               _mm_and_ps(
                                 v61,
-                                (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v));
+                                (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v));
     v11 = dataa;
     *(__m128 *)&m.M[0][2] = _mm_add_ps(
                               _mm_add_ps(
@@ -829,7 +829,7 @@ LABEL_36:
                                 _mm_mul_ps(_mm_shuffle_ps(v62, v62, 170), v58)),
                               _mm_and_ps(
                                 v62,
-                                (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v));
+                                (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v));
     Scaleform::Render::Matrix4x4<float>::EncloseTransformHomogeneous(
       (Scaleform::Render::Matrix4x4<float> *)&m,
       &maskBounds,
@@ -1116,15 +1116,15 @@ LABEL_7:
               _mm_add_ps(
                 _mm_mul_ps(_mm_shuffle_ps(v25, v25, 85), *(__m128 *)&pviewMatrix.M[1][0]),
                 _mm_mul_ps(_mm_shuffle_ps(v25, v25, 0), *(__m128 *)&pviewMatrix.M[0][0])),
-              _mm_and_ps(v25, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v)),
-            (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v);
+              _mm_and_ps(v25, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v)),
+            (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v);
     v28 = _mm_and_ps(
             _mm_add_ps(
               _mm_add_ps(
                 _mm_mul_ps(_mm_shuffle_ps(v26, v26, 85), *(__m128 *)&pviewMatrix.M[1][0]),
                 _mm_mul_ps(_mm_shuffle_ps(v26, v26, 0), *(__m128 *)&pviewMatrix.M[0][0])),
-              _mm_and_ps(v26, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v)),
-            (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v);
+              _mm_and_ps(v26, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v)),
+            (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v);
   }
   v29 = *(__m128 *)(v8 + 112);
   v30 = v27;
@@ -1409,18 +1409,18 @@ signed __int64 __fastcall Scaleform::Render::TreeCacheNode::calcMaskBounds(Scale
         v51 = rect.y2;
         v10->M[1][3] = v50;
         v10->M[1][1] = v51 - v50;
-        v52 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v;
+        v52 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v;
         v53 = _mm_add_ps(
                 _mm_add_ps(
                   _mm_mul_ps(_mm_shuffle_ps(v47, v47, 85), *(__m128 *)&v10->M[1][0]),
                   _mm_mul_ps(_mm_shuffle_ps(v47, v47, 0), *(__m128 *)&v10->M[0][0])),
-                _mm_and_ps(v47, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v));
+                _mm_and_ps(v47, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v));
         v54 = _mm_mul_ps(_mm_shuffle_ps(v48, v48, 0), *(__m128 *)&v10->M[0][0]);
         v55 = _mm_shuffle_ps(v48, v48, 85);
-        v56 = _mm_and_ps(v48, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v);
+        v56 = _mm_and_ps(v48, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v);
         *(__m128 *)&v10->M[0][0] = _mm_and_ps(
                                      v53,
-                                     (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v);
+                                     (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v);
         *(__m128 *)&v10->M[1][0] = _mm_and_ps(
                                      _mm_add_ps(_mm_add_ps(_mm_mul_ps(v55, *(__m128 *)&v10->M[1][0]), v54), v56),
                                      v52);
@@ -1452,28 +1452,28 @@ signed __int64 __fastcall Scaleform::Render::TreeCacheNode::calcMaskBounds(Scale
               _mm_mul_ps(_mm_shuffle_ps(Dst, Dst, 85), *(__m128 *)&pviewMatrix.M[1][0]),
               _mm_mul_ps(_mm_shuffle_ps(Dst, Dst, 0), *(__m128 *)&pviewMatrix.M[0][0])),
             _mm_mul_ps(_mm_shuffle_ps(Dst, Dst, 170), *(__m128 *)&pviewMatrix.M[2][0])),
-          _mm_and_ps(Dst, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v));
+          _mm_and_ps(Dst, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v));
   v84 = _mm_add_ps(
           _mm_add_ps(
             _mm_add_ps(
               _mm_mul_ps(_mm_shuffle_ps(v84, v84, 85), *(__m128 *)&pviewMatrix.M[1][0]),
               _mm_mul_ps(_mm_shuffle_ps(v84, v84, 0), *(__m128 *)&pviewMatrix.M[0][0])),
             _mm_mul_ps(_mm_shuffle_ps(v84, v84, 170), *(__m128 *)&pviewMatrix.M[2][0])),
-          _mm_and_ps(v84, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v));
+          _mm_and_ps(v84, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v));
   v85 = _mm_add_ps(
           _mm_add_ps(
             _mm_add_ps(
               _mm_mul_ps(_mm_shuffle_ps(v85, v85, 85), *(__m128 *)&pviewMatrix.M[1][0]),
               _mm_mul_ps(_mm_shuffle_ps(v85, v85, 0), *(__m128 *)&pviewMatrix.M[0][0])),
             _mm_mul_ps(_mm_shuffle_ps(v85, v85, 170), *(__m128 *)&pviewMatrix.M[2][0])),
-          _mm_and_ps(v85, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v));
+          _mm_and_ps(v85, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v));
   v86 = _mm_add_ps(
           _mm_add_ps(
             _mm_add_ps(
               _mm_mul_ps(_mm_shuffle_ps(v86, v86, 85), *(__m128 *)&pviewMatrix.M[1][0]),
               _mm_mul_ps(_mm_shuffle_ps(v86, v86, 0), *(__m128 *)&pviewMatrix.M[0][0])),
             _mm_mul_ps(_mm_shuffle_ps(v86, v86, 170), *(__m128 *)&pviewMatrix.M[2][0])),
-          _mm_and_ps(v86, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v));
+          _mm_and_ps(v86, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v));
   Scaleform::Render::Matrix4x4<float>::EncloseTransformHomogeneous(
     (Scaleform::Render::Matrix4x4<float> *)&Dst,
     &rect,
@@ -1883,7 +1883,7 @@ void __fastcall Scaleform::Render::TreeCacheNode::CalcViewMatrix(Scaleform::Rend
   {
     v6 = v4->pNode;
     v4 = v4->pParent;
-    v7 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v;
+    v7 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v;
     v8 = (__m128 *)(*(_QWORD *)(*(_QWORD *)(((unsigned __int64)v6 & 0xFFFFFFFFFFFFF000ui64) + 0x28)
                               + 8
                               * ((unsigned int)((signed __int64)((unsigned __int128)((signed __int64)((signed __int64)&v6[-1] - ((unsigned __int64)v6 & 0xFFFFFFFFFFFFF000ui64))
@@ -1895,14 +1895,14 @@ void __fastcall Scaleform::Render::TreeCacheNode::CalcViewMatrix(Scaleform::Rend
     v9 = v8[2];
     v10 = _mm_shuffle_ps(v8[2], v9, 85);
     v11 = _mm_mul_ps(_mm_shuffle_ps(v9, v9, 0), *v2);
-    v12 = _mm_and_ps(v9, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v);
+    v12 = _mm_and_ps(v9, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v);
     *v2 = _mm_and_ps(
             _mm_add_ps(
               _mm_add_ps(
                 _mm_mul_ps(_mm_shuffle_ps(v8[1], v8[1], 85), v2[1]),
                 _mm_mul_ps(_mm_shuffle_ps(v8[1], v8[1], 0), *v2)),
-              _mm_and_ps(v8[1], (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v)),
-            (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v);
+              _mm_and_ps(v8[1], (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v)),
+            (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v);
   }
 }
 
@@ -2003,7 +2003,7 @@ LABEL_7:
     do
     {
       v13 = *v12;
-      v14 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v;
+      v14 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v;
       v52.m256i_i32[2] = LODWORD(v3->M[0][0]);
       v15 = (__m128 *)(*(_QWORD *)(*(_QWORD *)(((_QWORD)v13->pNode & 0xFFFFFFFFFFFFF000ui64) + 0x28)
                                  + 8
@@ -2031,7 +2031,7 @@ LABEL_7:
                                     _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v16, v16, 85), *(__m128 *)v52.m256i_i8), v21),
                                     _mm_mul_ps(_mm_shuffle_ps(v16, v16, 170), *(__m128 *)&v52.m256i_u64[2])),
                                   _mm_and_ps(
-                                    (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v,
+                                    (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v,
                                     v16));
       *(__m128 *)&v3->M[1][0] = _mm_add_ps(
                                   _mm_add_ps(
@@ -2189,7 +2189,7 @@ LABEL_37:
   if ( v10 && v11 )
   {
     v36 = *(__m128 **)(v10 + 8);
-    v37 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v;
+    v37 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v;
     v52.m256i_i64[1] = v36[1].m128_i64[0];
     v52.m256i_i32[4] = v36[1].m128_i32[2];
     v38 = v36[1].m128_f32[3];
@@ -2211,7 +2211,7 @@ LABEL_37:
                          _mm_mul_ps(_mm_shuffle_ps(v44, v44, 85), v40),
                          _mm_mul_ps(_mm_shuffle_ps(v44, v44, 0), v39)),
                        _mm_mul_ps(_mm_shuffle_ps(v44, v44, 170), v41)),
-                     _mm_and_ps(v44, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v));
+                     _mm_and_ps(v44, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v));
     v46.m128_u64[1] = *(_QWORD *)(v43 + 56);
     v48 = *(__m128 *)(v43 + 64);
     LODWORD(v5->M[0][0]) = _mm_cvtsi128_si32(v47);
@@ -2534,7 +2534,7 @@ LABEL_39:
   {
     v25 = *(__m128 **)(v8 + 8);
     v26.m128_u64[0] = v25[1].m128_u64[0];
-    v27 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v;
+    v27 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v;
     v26.m128_u64[1] = v25[1].m128_u64[1];
     v28 = v25[2];
     v29.m128_u64[0] = v25[3].m128_u64[0];
@@ -2557,7 +2557,7 @@ LABEL_39:
                                   _mm_mul_ps(_mm_shuffle_ps(v32, v32, 170), v29)),
                                 _mm_and_ps(
                                   v32,
-                                  (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v));
+                                  (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v));
     *(__m128 *)&v2->M[1][0] = _mm_add_ps(
                                 _mm_add_ps(
                                   _mm_add_ps(
@@ -2768,7 +2768,7 @@ void __fastcall Scaleform::Render::TreeCacheContainer::~TreeCacheContainer(Scale
   Scaleform::Render::TreeCacheNode *v4; // rdi
 
   v1 = this;
-  this->vfptr = (Scaleform::Render::TreeCacheNodeVtbl *)&Scaleform::Render::TreeCacheContainer::`vftable';
+  this->vfptr = (Scaleform::Render::TreeCacheNodeVtbl *)&Scaleform::Render::TreeCacheContainer::`vftable;
   for ( i = this->Children.Root.pNext; ; i = v4 )
   {
     v3 = (signed __int64)&v1->SortParentBounds.x2;
@@ -2982,7 +2982,7 @@ LABEL_16:
                     _mm_mul_ps(_mm_shuffle_ps(*(__m128 *)&m.M[0][0], *(__m128 *)&m.M[0][0], 0), v45)),
                   _mm_mul_ps(_mm_shuffle_ps(*(__m128 *)&m.M[0][0], *(__m128 *)&m.M[0][0], 170), v47)),
                 _mm_and_ps(
-                  (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v,
+                  (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v,
                   *(__m128 *)&m.M[0][0]));
         v62 = _mm_add_ps(
                 _mm_add_ps(
@@ -2991,7 +2991,7 @@ LABEL_16:
                     _mm_mul_ps(_mm_shuffle_ps(*(__m128 *)&m.M[1][0], *(__m128 *)&m.M[1][0], 0), v45)),
                   _mm_mul_ps(_mm_shuffle_ps(*(__m128 *)&m.M[1][0], *(__m128 *)&m.M[1][0], 170), v47)),
                 _mm_and_ps(
-                  (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v,
+                  (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v,
                   *(__m128 *)&m.M[1][0]));
         v63 = _mm_add_ps(
                 _mm_add_ps(
@@ -3000,7 +3000,7 @@ LABEL_16:
                     _mm_mul_ps(_mm_shuffle_ps(*(__m128 *)&m.M[2][0], *(__m128 *)&m.M[2][0], 0), v45)),
                   _mm_mul_ps(_mm_shuffle_ps(*(__m128 *)&m.M[2][0], *(__m128 *)&m.M[2][0], 170), v47)),
                 _mm_and_ps(
-                  (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v,
+                  (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v,
                   *(__m128 *)&m.M[2][0]));
       }
       v42 = v38 | 0x80;
@@ -3016,7 +3016,7 @@ LABEL_16:
                 _mm_mul_ps(_mm_shuffle_ps(*(__m128 *)&v10->Mat.M[1][0], *(__m128 *)&v10->Mat.M[1][0], 0), v39)),
               _mm_and_ps(
                 *(__m128 *)&v10->Mat.M[1][0],
-                (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v));
+                (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v));
       v83 = _mm_and_ps(
               _mm_add_ps(
                 _mm_add_ps(
@@ -3024,11 +3024,11 @@ LABEL_16:
                   _mm_mul_ps(_mm_shuffle_ps(*(__m128 *)&v10->Mat.M[0][0], *(__m128 *)&v10->Mat.M[0][0], 0), v39)),
                 _mm_and_ps(
                   *(__m128 *)&v10->Mat.M[0][0],
-                  (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v)),
-              (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v);
+                  (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v)),
+              (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v);
       v84 = _mm_and_ps(
               v41,
-              (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v);
+              (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v);
     }
     else
     {
@@ -3632,8 +3632,8 @@ char __fastcall Scaleform::Render::FixedSizeArrayRect2F::Intersects(Scaleform::R
     {
       v3 = _S7_17 | 1;
       _S7_17 |= 1u;
-      v4 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,0>'::`2'::v;
-      c0000 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,0>'::`2'::v;
+      v4 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,0>::`2::v;
+      c0000 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,0>::`2::v;
     }
     if ( v3 & 2 )
     {
@@ -3643,8 +3643,8 @@ char __fastcall Scaleform::Render::FixedSizeArrayRect2F::Intersects(Scaleform::R
     {
       v3 |= 2u;
       _S7_17 = v3;
-      v5 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,0>'::`2'::v;
-      c1100 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,0>'::`2'::v;
+      v5 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,0>::`2::v;
+      c1100 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,0>::`2::v;
     }
     if ( v3 & 4 )
     {
@@ -3653,8 +3653,8 @@ char __fastcall Scaleform::Render::FixedSizeArrayRect2F::Intersects(Scaleform::R
     else
     {
       _S7_17 = v3 | 4;
-      v6 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,4294967295,4294967295>'::`2'::v;
-      c0011 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,4294967295,4294967295>'::`2'::v;
+      v6 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,4294967295,4294967295>::`2::v;
+      c0011 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,4294967295,4294967295>::`2::v;
     }
     v7 = *bounds;
     v8 = _mm_shuffle_ps((__m128)v7, (__m128)v7, 68);
@@ -4997,7 +4997,7 @@ LABEL_110:
                         _mm_mul_ps(_mm_shuffle_ps(v60[2], v60[2], 85), v122)),
                       _mm_mul_ps(_mm_shuffle_ps(v60[2], v60[2], 170), v135)),
                     _mm_and_ps(
-                      (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v,
+                      (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v,
                       v60[2]));
             v67 = _mm_add_ps(
                     _mm_add_ps(
@@ -5006,7 +5006,7 @@ LABEL_110:
                         _mm_mul_ps(_mm_shuffle_ps(v60[3], v60[3], 85), v122)),
                       _mm_mul_ps(_mm_shuffle_ps(v60[3], v60[3], 170), v135)),
                     _mm_and_ps(
-                      (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v,
+                      (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v,
                       v60[3]));
             v117 = _mm_add_ps(
                      _mm_add_ps(
@@ -5016,7 +5016,7 @@ LABEL_110:
                        _mm_mul_ps(_mm_shuffle_ps(v60[1], v60[1], 170), v135)),
                      _mm_and_ps(
                        v60[1],
-                       (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v));
+                       (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v));
             v118 = v66;
             v119 = v67;
             v68 = (__m128)_xmm;
@@ -5033,8 +5033,8 @@ LABEL_110:
                         _mm_mul_ps(v121, _mm_shuffle_ps(v60[1], v60[1], 0))),
                       _mm_and_ps(
                         v60[1],
-                        (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v)),
-                    (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v);
+                        (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v)),
+                    (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v);
             v122 = _mm_and_ps(
                      _mm_add_ps(
                        _mm_add_ps(
@@ -5042,8 +5042,8 @@ LABEL_110:
                          _mm_mul_ps(v121, _mm_shuffle_ps(v60[2], v60[2], 0))),
                        _mm_and_ps(
                          v60[2],
-                         (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v)),
-                     (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v);
+                         (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v)),
+                     (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v);
           }
           v121 = v68;
         }
@@ -5075,21 +5075,21 @@ LABEL_110:
                       _mm_mul_ps(_mm_shuffle_ps(v62[1], v62[1], 0), v117),
                       _mm_mul_ps(_mm_shuffle_ps(v62[1], v62[1], 85), v118)),
                     _mm_mul_ps(_mm_shuffle_ps(v62[1], v62[1], 170), v119)),
-                  _mm_and_ps((__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v, v62[1]));
+                  _mm_and_ps((__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v, v62[1]));
           v64 = _mm_add_ps(
                   _mm_add_ps(
                     _mm_add_ps(
                       _mm_mul_ps(_mm_shuffle_ps(v62[2], v62[2], 0), v117),
                       _mm_mul_ps(_mm_shuffle_ps(v62[2], v62[2], 85), v118)),
                     _mm_mul_ps(_mm_shuffle_ps(v62[2], v62[2], 170), v119)),
-                  _mm_and_ps((__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v, v62[2]));
+                  _mm_and_ps((__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v, v62[2]));
           v117 = _mm_add_ps(
                    _mm_add_ps(
                      _mm_add_ps(
                        _mm_mul_ps(_mm_shuffle_ps(*v62, *v62, 0), v117),
                        _mm_mul_ps(_mm_shuffle_ps(*v62, *v62, 85), v118)),
                      _mm_mul_ps(_mm_shuffle_ps(*v62, *v62, 170), v119)),
-                   _mm_and_ps((__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v, *v62));
+                   _mm_and_ps((__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v, *v62));
           v118 = v63;
           v119 = v64;
         }
@@ -5516,7 +5516,7 @@ void __fastcall Scaleform::Render::TreeCacheMeshBase::TreeCacheMeshBase(Scalefor
   Scaleform::Render::BundleEntry *v7; // [rsp+48h] [rbp+10h]
 
   v5 = this;
-  this->vfptr = (Scaleform::Render::TreeCacheNodeVtbl *)&Scaleform::Render::TreeCacheNode::`vftable';
+  this->vfptr = (Scaleform::Render::TreeCacheNodeVtbl *)&Scaleform::Render::TreeCacheNode::`vftable;
   this->pRoot = 0i64;
   this->pNode = pnode;
   this->pRenderer2D = prenderer2D;
@@ -5531,7 +5531,7 @@ void __fastcall Scaleform::Render::TreeCacheMeshBase::TreeCacheMeshBase(Scalefor
   *(_QWORD *)&this->SortParentBounds.x2 = 0i64;
   this->pNext = 0i64;
   this->pPrev = 0i64;
-  this->vfptr = (Scaleform::Render::TreeCacheNodeVtbl *)&Scaleform::Render::TreeCacheMeshBase::`vftable';
+  this->vfptr = (Scaleform::Render::TreeCacheNodeVtbl *)&Scaleform::Render::TreeCacheMeshBase::`vftable;
   v7 = &this->SorterShapeNode;
   *(_OWORD *)&v7->pNextPattern = 0ui64;
   *(_DWORD *)&v7->ChainHeight = 0;
@@ -5555,7 +5555,7 @@ void __fastcall Scaleform::Render::TreeCacheMeshBase::~TreeCacheMeshBase(Scalefo
   __int64 v5; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::Render::TreeCacheNodeVtbl *)&Scaleform::Render::TreeCacheMeshBase::`vftable';
+  this->vfptr = (Scaleform::Render::TreeCacheNodeVtbl *)&Scaleform::Render::TreeCacheMeshBase::`vftable;
   v2 = this->M.pHandle;
   if ( v2 != &Scaleform::Render::MatrixPoolImpl::HMatrix::NullHandle )
   {

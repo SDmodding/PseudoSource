@@ -60,7 +60,7 @@ void __fastcall UFG::PersistentData::MapBool::~MapBool(UFG::PersistentData::MapB
   if ( v2 )
   {
     v3 = v2 - 1;
-    `eh vector destructor iterator'(v2, 4ui64, v2[-1].mUID, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v2, 4ui64, v2[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v3);
   }
   v1->mNames.p = 0i64;
@@ -69,7 +69,7 @@ void __fastcall UFG::PersistentData::MapBool::~MapBool(UFG::PersistentData::MapB
   if ( v4 )
   {
     v5 = &v4[-1].4;
-    `eh vector destructor iterator'(v4, 8ui64, v4[-1].mIntValue, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v4, 8ui64, v4[-1].mIntValue, (void (__fastcall *)(void *))_);
     operator delete[](v5);
   }
   v1->mValues.p = 0i64;
@@ -1132,7 +1132,7 @@ void __fastcall UFG::PersistentData::MapBinary::Clear(UFG::PersistentData::MapBi
   if ( v5 )
   {
     v6 = &v5[-1].mBinary.mSize;
-    `eh vector destructor iterator'(v5, 0x18ui64, v5[-1].mBinary.mSize, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v5, 0x18ui64, v5[-1].mBinary.mSize, (void (__fastcall *)(void *))_);
     operator delete[](v6);
   }
   v1->mValues.p = 0i64;

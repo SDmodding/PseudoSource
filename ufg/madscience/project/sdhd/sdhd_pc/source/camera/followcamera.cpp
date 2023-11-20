@@ -22,7 +22,7 @@ hkSeekableStreamReader *UFG::_dynamic_initializer_for__TweakableOverrideParamete
 // RVA: 0x14C1C40
 __int64 UFG::_dynamic_initializer_for__TweakableOverrideSymbols__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     TweakableOverrideSymbols,
     4ui64,
     106,
@@ -97,7 +97,7 @@ const char *__fastcall UFG::FollowCameraComponent::GetTypeName(UFG::FollowCamera
 // RVA: 0x14BFD50
 __int64 dynamic_initializer_for__UFG::FollowCameraComponent::mContextParameterSymbols__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     UFG::FollowCameraComponent::mContextParameterSymbols,
     4ui64,
     15,
@@ -265,7 +265,7 @@ void __fastcall UFG::FollowCameraComponent::FollowCameraComponent(UFG::FollowCam
   v3 = (UFG::qNode<UFG::FollowCameraComponent,UFG::FollowCameraComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::FollowCameraComponent::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::FollowCameraComponent::`vftable;
   UFG::RebindingComponentHandle<UFG::CharacterSubjectComponent,0>::RebindingComponentHandle<UFG::CharacterSubjectComponent,0>(&v2->mTarget);
   UFG::RebindingComponentHandle<UFG::CameraSubject,0>::RebindingComponentHandle<UFG::CameraSubject,0>(&v2->mEnemyTarget);
   v2->mFov.mDuration = 0.0099999998;
@@ -845,7 +845,7 @@ void __fastcall UFG::FollowCameraComponent::~FollowCameraComponent(UFG::FollowCa
   void (__fastcall *v11)(UFG::FollowCameraComponent *, UFG::Event *); // [rsp+30h] [rbp-18h]
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::FollowCameraComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::FollowCameraComponent::`vftable;
   --UFG::FollowCameraComponent::mNumFollowCameraInstances;
   v11 = UFG::FollowCameraComponent::FollowCameraEventHandler;
   v10 = Assembly::GetRCX(this);
@@ -7312,7 +7312,7 @@ LABEL_96:
         v74 = v71 + 1;
         v74->mNext = v74;
         v74[1].mNext = v74;
-        v72->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+        v72->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
         v72->m_EventUID = v73;
         v72->m_NamePTR = 0i64;
       }
@@ -9521,10 +9521,10 @@ void __fastcall UFG::FollowCameraComponent::SafetyDetectInconsistentCameraMode(U
         v12 = v10 + 1;
         v12->mNext = v12;
         v12[1].mNext = v12;
-        v11->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+        v11->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
         v11->m_NamePTR = "EVT_MOUNT_VEHICLE_CAMERA";
         v11->m_EventUID = UFG::qStringHash32("EVT_MOUNT_VEHICLE_CAMERA", 0xFFFFFFFF);
-        v11->vfptr = (UFG::EventVtbl *)&UFG::AnimatedEvent::`vftable';
+        v11->vfptr = (UFG::EventVtbl *)&UFG::AnimatedEvent::`vftable;
         v13 = v11 + 1;
         v13->vfptr = (UFG::EventVtbl *)v13;
         v13->mPrev = (UFG::qNode<UFG::Event,UFG::Event> *)v13;

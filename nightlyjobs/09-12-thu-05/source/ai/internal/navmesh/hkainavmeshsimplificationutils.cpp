@@ -1072,7 +1072,7 @@ LABEL_214:
     }
     if ( v174 > 1 )
     {
-      hkAlgorithm::quickSortRecursive<`anonymous namespace'::SegmentInfo,hkAlgorithm::less<`anonymous namespace'::SegmentInfo>>(
+      hkAlgorithm::quickSortRecursive<`anonymous namespace::SegmentInfo,hkAlgorithm::less<`anonymous namespace::SegmentInfo>>(
         pArr,
         0,
         v174 - 1,
@@ -1742,7 +1742,7 @@ void __fastcall anonymous_namespace_::getProjectionMatrix(int majorAxis, hkRotat
 
 // File Line: 950
 // RVA: 0xB507E0
-hkSimdFloat32 *__fastcall `anonymous namespace'::computeSignedLoopArea(hkSimdFloat32 *result, hkArray<hkVector4f,hkContainerHeapAllocator> *vertices, hkArray<int,hkContainerHeapAllocator> *indices, int majorAxis)
+hkSimdFloat32 *__fastcall `anonymous namespace::computeSignedLoopArea(hkSimdFloat32 *result, hkArray<hkVector4f,hkContainerHeapAllocator> *vertices, hkArray<int,hkContainerHeapAllocator> *indices, int majorAxis)
 {
   hkVector4f *v4; // r11
   int *v5; // r10
@@ -1832,7 +1832,7 @@ LABEL_25:
 
 // File Line: 971
 // RVA: 0xB50920
-char __fastcall `anonymous namespace'::areOppositeSegments(hkArray<hkVector4f,hkContainerHeapAllocator> *vertices, hkaiNavMeshSimplificationUtils::Segment *seg1, hkaiNavMeshSimplificationUtils::Segment *seg2, hkaiNavMesh *navMesh, hkResult *resOut)
+char __fastcall `anonymous namespace::areOppositeSegments(hkArray<hkVector4f,hkContainerHeapAllocator> *vertices, hkaiNavMeshSimplificationUtils::Segment *seg1, hkaiNavMeshSimplificationUtils::Segment *seg2, hkaiNavMesh *navMesh, hkResult *resOut)
 {
   hkResult *v5; // r14
   hkaiNavMesh *v6; // r15
@@ -1960,7 +1960,7 @@ LABEL_27:
 
 // File Line: 1017
 // RVA: 0xB50BA0
-hkSimdFloat32 *__fastcall `anonymous namespace'::getSignedSegmentArea(hkSimdFloat32 *result, hkArray<hkVector4f,hkContainerHeapAllocator> *vertices, hkaiNavMeshSimplificationUtils::Segment *seg, bool forwards, int majorAxis)
+hkSimdFloat32 *__fastcall `anonymous namespace::getSignedSegmentArea(hkSimdFloat32 *result, hkArray<hkVector4f,hkContainerHeapAllocator> *vertices, hkaiNavMeshSimplificationUtils::Segment *seg, bool forwards, int majorAxis)
 {
   int *v5; // r10
   hkVector4f *v6; // r11
@@ -2129,7 +2129,7 @@ LABEL_52:
 
 // File Line: 1060
 // RVA: 0xB50DE0
-__int64 __fastcall `anonymous namespace'::computeSignedPartitionArea(hkArray<hkVector4f,hkContainerHeapAllocator> *vertices, hkArray<hkaiNavMeshSimplificationUtils::Segment,hkContainerHeapAllocator> *segments, hkArrayBase<int> *segmentToOppositeMap, hkPointerMultiMap<int,int> *parToSegIdxMap, int segmentIndex, int partition, int majorAxis, hkSimdFloat32 *areaOut, hkResult *resOut)
+__int64 __fastcall `anonymous namespace::computeSignedPartitionArea(hkArray<hkVector4f,hkContainerHeapAllocator> *vertices, hkArray<hkaiNavMeshSimplificationUtils::Segment,hkContainerHeapAllocator> *segments, hkArrayBase<int> *segmentToOppositeMap, hkPointerMultiMap<int,int> *parToSegIdxMap, int segmentIndex, int partition, int majorAxis, hkSimdFloat32 *areaOut, hkResult *resOut)
 {
   hkResult *v9; // r12
   int v10; // esi
@@ -2300,7 +2300,7 @@ LABEL_21:
         break;
       if ( v38[v37->m_indices.m_size - 1] == v29 )
       {
-        v40 = `anonymous namespace'::getSignedSegmentArea(&result, verticesa, v37, 0, v31);
+        v40 = `anonymous namespace::getSignedSegmentArea(&result, verticesa, v37, 0, v31);
         --v32;
         segmentIndex = v36;
         areaOut->m_real = _mm_add_ps(areaOut->m_real, v40->m_real);
@@ -2331,7 +2331,7 @@ LABEL_32:
       if ( v33 >= v32 )
         goto LABEL_44;
     }
-    v46 = `anonymous namespace'::getSignedSegmentArea(&v56, verticesa, v37, 1, v31);
+    v46 = `anonymous namespace::getSignedSegmentArea(&v56, verticesa, v37, 1, v31);
     --v32;
     segmentIndex = v36;
     areaOut->m_real = _mm_add_ps(areaOut->m_real, v46->m_real);
@@ -2386,7 +2386,7 @@ LABEL_48:
 
 // File Line: 1139
 // RVA: 0xB51180
-signed __int64 __fastcall `anonymous namespace'::computePartialSignedPartitionAreas(hkArray<hkVector4f,hkContainerHeapAllocator> *vertices, hkArray<hkaiNavMeshSimplificationUtils::Segment,hkContainerHeapAllocator> *segments, hkArrayBase<int> *segmentToOppositeMap, hkPointerMultiMap<int,int> *parToSegIdxMap, int segmentIndex, int majorAxisA, int majorAxisB, hkSimdFloat32 *area1Out, hkSimdFloat32 *area2Out, hkResult *resOut)
+signed __int64 __fastcall `anonymous namespace::computePartialSignedPartitionAreas(hkArray<hkVector4f,hkContainerHeapAllocator> *vertices, hkArray<hkaiNavMeshSimplificationUtils::Segment,hkContainerHeapAllocator> *segments, hkArrayBase<int> *segmentToOppositeMap, hkPointerMultiMap<int,int> *parToSegIdxMap, int segmentIndex, int majorAxisA, int majorAxisB, hkSimdFloat32 *area1Out, hkSimdFloat32 *area2Out, hkResult *resOut)
 {
   unsigned int v10; // ebx
   hkPointerMultiMap<int,int> *v11; // r13
@@ -2410,7 +2410,7 @@ signed __int64 __fastcall `anonymous namespace'::computePartialSignedPartitionAr
     return 1i64;
   *area1Out = 0i64;
   *area2Out = 0i64;
-  v15 = `anonymous namespace'::computeSignedPartitionArea(
+  v15 = `anonymous namespace::computeSignedPartitionArea(
           vertices,
           segments,
           segmentToOppositeMap,
@@ -2428,7 +2428,7 @@ signed __int64 __fastcall `anonymous namespace'::computePartialSignedPartitionAr
     v10 = 1;
   if ( partition != -1 )
   {
-    v18 = `anonymous namespace'::computeSignedPartitionArea(
+    v18 = `anonymous namespace::computeSignedPartitionArea(
             verticesa,
             v13,
             segmentToOppositeMapa,
@@ -2452,7 +2452,7 @@ signed __int64 __fastcall `anonymous namespace'::computePartialSignedPartitionAr
 
 // File Line: 1185
 // RVA: 0xB512D0
-void __fastcall `anonymous namespace'::computeFullSignedPartitionAreas(hkArray<hkVector4f,hkContainerHeapAllocator> *vertices, hkArray<hkaiNavMeshSimplificationUtils::Segment,hkContainerHeapAllocator> *segments, int segmentIndex, int majorAxisA, int majorAxisB, hkSimdFloat32 *area1InOut, hkSimdFloat32 *area2InOut)
+void __fastcall `anonymous namespace::computeFullSignedPartitionAreas(hkArray<hkVector4f,hkContainerHeapAllocator> *vertices, hkArray<hkaiNavMeshSimplificationUtils::Segment,hkContainerHeapAllocator> *segments, int segmentIndex, int majorAxisA, int majorAxisB, hkSimdFloat32 *area1InOut, hkSimdFloat32 *area2InOut)
 {
   hkArray<hkVector4f,hkContainerHeapAllocator> *v7; // rsi
   int v8; // edi
@@ -2465,7 +2465,7 @@ void __fastcall `anonymous namespace'::computeFullSignedPartitionAreas(hkArray<h
   v9 = &segments->m_data[segmentIndex];
   if ( *v9->m_indices.m_data == v9->m_indices.m_data[v9->m_indices.m_size - 1] )
   {
-    *area1InOut = (hkSimdFloat32)`anonymous namespace'::computeSignedLoopArea(
+    *area1InOut = (hkSimdFloat32)`anonymous namespace::computeSignedLoopArea(
                                    &result,
                                    vertices,
                                    &v9->m_indices,
@@ -2473,7 +2473,7 @@ void __fastcall `anonymous namespace'::computeFullSignedPartitionAreas(hkArray<h
   }
   else
   {
-    `anonymous namespace'::getSignedSegmentArea(&result, vertices, v9, 0, majorAxisA);
+    `anonymous namespace::getSignedSegmentArea(&result, vertices, v9, 0, majorAxisA);
     v10 = result.m_real;
     area1InOut->m_real = _mm_add_ps(area1InOut->m_real, result.m_real);
     if ( v8 == majorAxisB )
@@ -2483,7 +2483,7 @@ void __fastcall `anonymous namespace'::computeFullSignedPartitionAreas(hkArray<h
     else if ( majorAxisB != -1 )
     {
       area2InOut->m_real = _mm_add_ps(
-                             `anonymous namespace'::getSignedSegmentArea(&result, v7, v9, 0, majorAxisB)->m_real,
+                             `anonymous namespace::getSignedSegmentArea(&result, v7, v9, 0, majorAxisB)->m_real,
                              area2InOut->m_real);
     }
   }
@@ -2491,7 +2491,7 @@ void __fastcall `anonymous namespace'::computeFullSignedPartitionAreas(hkArray<h
 
 // File Line: 1211
 // RVA: 0xB513C0
-float __fastcall `anonymous namespace'::getTriangleArea(hkVector4f *a, hkVector4f *b, hkVector4f *c)
+float __fastcall `anonymous namespace::getTriangleArea(hkVector4f *a, hkVector4f *b, hkVector4f *c)
 {
   __m128 v3; // xmm1
   __m128 v4; // xmm2
@@ -2519,7 +2519,7 @@ float __fastcall `anonymous namespace'::getTriangleArea(hkVector4f *a, hkVector4
 
 // File Line: 1219
 // RVA: 0xB51450
-float __fastcall `anonymous namespace'::getProjectedTriangleArea(hkVector4f *a, hkVector4f *b, hkVector4f *c, int majorAxis)
+float __fastcall `anonymous namespace::getProjectedTriangleArea(hkVector4f *a, hkVector4f *b, hkVector4f *c, int majorAxis)
 {
   __m128 v4; // xmm1
   __m128 v5; // xmm2
@@ -2592,7 +2592,7 @@ LABEL_23:
 
 // File Line: 1279
 // RVA: 0xB51540
-char __fastcall `anonymous namespace'::edgesIntersect(hkVector2f *s0, hkVector2f *e0, hkVector2f *s1, hkVector2f *e1, hkVector2f *out)
+char __fastcall `anonymous namespace::edgesIntersect(hkVector2f *s0, hkVector2f *e0, hkVector2f *s1, hkVector2f *e1, hkVector2f *out)
 {
   float v5; // xmm4_4
   float v6; // xmm2_4
@@ -2634,7 +2634,7 @@ char __fastcall `anonymous namespace'::edgesIntersect(hkVector2f *s0, hkVector2f
 
 // File Line: 1374
 // RVA: 0xB51680
-_BOOL8 __fastcall `anonymous namespace'::_pointsAreDistinct(hkVector4f *start, hkVector4f *end, hkVector4f *v1, hkVector4f *v2, hkVector4f *epsilon)
+_BOOL8 __fastcall `anonymous namespace::_pointsAreDistinct(hkVector4f *start, hkVector4f *end, hkVector4f *v1, hkVector4f *v2, hkVector4f *epsilon)
 {
   __m128 v5; // xmm5
   __m128 v6; // xmm6
@@ -2920,7 +2920,7 @@ _BOOL8 __fastcall _processLeaf_PartitionIntersectionQuery__A0x257692e2_2_UEAAIIA
           v1.m_quad = (__m128)v63[*v64];
           v67 = v63[v66].m_quad;
           v2.m_quad = (__m128)v63[v66];
-          if ( (unsigned int)`anonymous namespace'::_pointsAreDistinct(&v3->m_start, &v3->m_end, &v1, &v2, &epsilon) )
+          if ( (unsigned int)`anonymous namespace::_pointsAreDistinct(&v3->m_start, &v3->m_end, &v1, &v2, &epsilon) )
           {
             v68 = v6->m_col1.m_quad;
             v69 = v6->m_col2.m_quad;
@@ -3037,7 +3037,7 @@ LABEL_26:
 
 // File Line: 1497
 // RVA: 0xB51720
-char __fastcall `anonymous namespace'::doesLineSegmentIntersectPartition(int startIndex, int endIndex, hkArray<hkVector4f,hkContainerHeapAllocator> *vertices, hkArray<hkaiNavMeshSimplificationUtils::Segment,hkContainerHeapAllocator> *segments)
+char __fastcall `anonymous namespace::doesLineSegmentIntersectPartition(int startIndex, int endIndex, hkArray<hkVector4f,hkContainerHeapAllocator> *vertices, hkArray<hkaiNavMeshSimplificationUtils::Segment,hkContainerHeapAllocator> *segments)
 {
   __int64 v4; // rbx
   hkArray<hkaiNavMeshSimplificationUtils::Segment,hkContainerHeapAllocator> *v5; // rsi
@@ -3704,7 +3704,7 @@ char __fastcall `anonymous namespace'::doesLineSegmentIntersectPartition(int sta
 
 // File Line: 1557
 // RVA: 0xB524F0
-char __fastcall `anonymous namespace'::doesLineSegmentIntersectPartition(hkVector4f *start, hkVector4f *end, hkArray<hkVector4f,hkContainerHeapAllocator> *vertices, hkArray<hkaiNavMeshSimplificationUtils::Segment,hkContainerHeapAllocator> *segments)
+char __fastcall `anonymous namespace::doesLineSegmentIntersectPartition(hkVector4f *start, hkVector4f *end, hkArray<hkVector4f,hkContainerHeapAllocator> *vertices, hkArray<hkaiNavMeshSimplificationUtils::Segment,hkContainerHeapAllocator> *segments)
 {
   int v4; // edi
   __m128 v5; // xmm8
@@ -3939,7 +3939,7 @@ char __fastcall `anonymous namespace'::doesLineSegmentIntersectPartition(hkVecto
         *(hkVector4f *)((char *)&aabb.m_max + 8) = v16[*v17];
         v20 = v16[v19].m_quad;
         *(hkVector4f *)((char *)&v2 + 8) = v16[v19];
-        if ( (unsigned int)`anonymous namespace'::_pointsAreDistinct(
+        if ( (unsigned int)`anonymous namespace::_pointsAreDistinct(
                              v6,
                              v7,
                              (hkVector4f *)((char *)&aabb.m_max + 8),
@@ -4108,7 +4108,7 @@ char __fastcall `anonymous namespace'::doesLineSegmentIntersectPartition(hkVecto
         *(hkVector4f *)((char *)&aabb.m_max + 8) = v67[*v68];
         v71 = v67[v70].m_quad;
         *(hkVector4f *)((char *)&aabb.m_min + 8) = v67[v70];
-        if ( (unsigned int)`anonymous namespace'::_pointsAreDistinct(
+        if ( (unsigned int)`anonymous namespace::_pointsAreDistinct(
                              v6,
                              v7,
                              (hkVector4f *)((char *)&aabb.m_max + 8),
@@ -4256,7 +4256,7 @@ char __fastcall `anonymous namespace'::doesLineSegmentIntersectPartition(hkVecto
           v2.m_quad = *(__m128 *)(v114 + 16i64 * *v113);
           v118 = *(__m128 *)(v114 + 16 * v117);
           *(_OWORD *)&collector[0].vfptr = *(_OWORD *)(v114 + 16 * v117);
-          if ( (unsigned int)`anonymous namespace'::_pointsAreDistinct(
+          if ( (unsigned int)`anonymous namespace::_pointsAreDistinct(
                                v6,
                                v7,
                                &v2,
@@ -4388,7 +4388,7 @@ char __fastcall `anonymous namespace'::doesLineSegmentIntersectPartition(hkVecto
 
 // File Line: 1617
 // RVA: 0xB532F0
-hkSimdFloat32 *__fastcall `anonymous namespace'::getClosestPointOnLine(hkSimdFloat32 *result, hkVector4f *p, hkVector4f *a, hkVector4f *b, int majorAxis, hkVector4f *out)
+hkSimdFloat32 *__fastcall `anonymous namespace::getClosestPointOnLine(hkSimdFloat32 *result, hkVector4f *p, hkVector4f *a, hkVector4f *b, int majorAxis, hkVector4f *out)
 {
   __m128 v6; // xmm5
   __m128 v7; // xmm6
@@ -4458,7 +4458,7 @@ hkSimdFloat32 *__fastcall `anonymous namespace'::getClosestPointOnLine(hkSimdFlo
 
 // File Line: 1653
 // RVA: 0xB53440
-hkSimdFloat32 *__fastcall `anonymous namespace'::getHeightErrorSquared(hkSimdFloat32 *result, hkVector4f *p, hkVector4f *a, hkVector4f *b, int majorAxis)
+hkSimdFloat32 *__fastcall `anonymous namespace::getHeightErrorSquared(hkSimdFloat32 *result, hkVector4f *p, hkVector4f *a, hkVector4f *b, int majorAxis)
 {
   int v5; // ebx
   hkVector4f *v6; // rdi
@@ -4484,7 +4484,7 @@ hkSimdFloat32 *__fastcall `anonymous namespace'::getHeightErrorSquared(hkSimdFlo
   v9 = result;
   if ( majorAxis >= 3 )
     v5 = majorAxis - 3;
-  `anonymous namespace'::getClosestPointOnLine(&resulta, p, a, b, v5, &out);
+  `anonymous namespace::getClosestPointOnLine(&resulta, p, a, b, v5, &out);
   v10 = _mm_sub_ps(v6->m_quad, v7->m_quad);
   out.m_quad.m128_i32[v5] = v8->m_quad.m128_i32[v5];
   v11 = v9;
@@ -4513,7 +4513,7 @@ hkSimdFloat32 *__fastcall `anonymous namespace'::getHeightErrorSquared(hkSimdFlo
 
 // File Line: 1685
 // RVA: 0xB53580
-float __fastcall `anonymous namespace'::computeAabb(hkArrayBase<hkVector2f> *points, hkVector2f *centerOut, hkVector2f *e0Out, hkVector2f *e1Out)
+float __fastcall `anonymous namespace::computeAabb(hkArrayBase<hkVector2f> *points, hkVector2f *centerOut, hkVector2f *e0Out, hkVector2f *e1Out)
 {
   signed __int64 v4; // r10
   float result; // xmm0_4
@@ -4566,7 +4566,7 @@ float __fastcall `anonymous namespace'::computeAabb(hkArrayBase<hkVector2f> *poi
 
 // File Line: 1706
 // RVA: 0xB536B0
-char __fastcall `anonymous namespace'::convertSegmentToObb(hkaiNavMeshGenerationSettings *settings, hkArray<hkVector4f,hkContainerHeapAllocator> *verticesInOut, hkArray<hkaiNavMeshSimplificationUtils::Segment,hkContainerHeapAllocator> *segmentsInOut, int segmentIndex, int majorAxisA, int majorAxisB, hkcdDynamicAabbTree *tree, hkResult *resOut)
+char __fastcall `anonymous namespace::convertSegmentToObb(hkaiNavMeshGenerationSettings *settings, hkArray<hkVector4f,hkContainerHeapAllocator> *verticesInOut, hkArray<hkaiNavMeshSimplificationUtils::Segment,hkContainerHeapAllocator> *segmentsInOut, int segmentIndex, int majorAxisA, int majorAxisB, hkcdDynamicAabbTree *tree, hkResult *resOut)
 {
   hkArray<hkVector4f,hkContainerHeapAllocator> *v8; // rdi
   hkaiNavMeshSimplificationUtils::Segment *v9; // r13
@@ -4706,7 +4706,7 @@ char __fastcall `anonymous namespace'::convertSegmentToObb(hkaiNavMeshGeneration
   if ( *v14 != v14[v11 - 1] || v9[v10].m_partitionIdB != -1 )
     return 0;
   v15 = majorAxisA;
-  `anonymous namespace'::computeSignedLoopArea(&result, v8, v12 + 2, majorAxisA);
+  `anonymous namespace::computeSignedLoopArea(&result, v8, v12 + 2, majorAxisA);
   v16 = result.m_real.m128_f32[0];
   if ( result.m_real.m128_f32[0] <= 0.0 )
     return 0;
@@ -4714,7 +4714,7 @@ char __fastcall `anonymous namespace'::convertSegmentToObb(hkaiNavMeshGeneration
   v18.m128_i32[0] = 0;
   if ( v15 != majorAxisB && majorAxisB != -1 )
   {
-    v18 = `anonymous namespace'::computeSignedLoopArea(&result, v8, v12 + 2, majorAxisB)->m_real;
+    v18 = `anonymous namespace::computeSignedLoopArea(&result, v8, v12 + 2, majorAxisB)->m_real;
     if ( v18.m128_f32[0] <= 0.0 )
       return 0;
   }
@@ -4887,7 +4887,7 @@ LABEL_40:
           resOut = 0i64;
           v103 = 0i64;
           result.m_real.m128_u64[0] = 0i64;
-          if ( `anonymous namespace'::computeAabb(
+          if ( `anonymous namespace::computeAabb(
                  (hkArrayBase<hkVector2f> *)&array,
                  (hkVector2f *)&resOut,
                  &v103,
@@ -4974,10 +4974,10 @@ LABEL_40:
               hkVector4f::setRotatedInverseDir(&v117, &quat, &v122);
               anonymous_namespace_::getProjectionMatrix(majorAxisA, &projectionMatrix);
               anonymous_namespace_::getProjectionMatrix(v17, &v124);
-              if ( !`anonymous namespace'::doesLineSegmentIntersectPartition(&start, &end, v8, segments)
-                && !`anonymous namespace'::doesLineSegmentIntersectPartition(&end, &v119, v8, segments)
-                && !`anonymous namespace'::doesLineSegmentIntersectPartition(&v119, &v117, v8, segments)
-                && !`anonymous namespace'::doesLineSegmentIntersectPartition(&v117, &start, v8, segments) )
+              if ( !`anonymous namespace::doesLineSegmentIntersectPartition(&start, &end, v8, segments)
+                && !`anonymous namespace::doesLineSegmentIntersectPartition(&end, &v119, v8, segments)
+                && !`anonymous namespace::doesLineSegmentIntersectPartition(&v119, &v117, v8, segments)
+                && !`anonymous namespace::doesLineSegmentIntersectPartition(&v117, &start, v8, segments) )
               {
                 v92 = v8->m_size;
                 v93 = v92 + 4;
@@ -5286,7 +5286,7 @@ _BOOL8 __fastcall _processLeaf_CorridorIntersectionQuery__A0x257692e2_2_UEAAIIAE
 
 // File Line: 2070
 // RVA: 0xB546A0
-char __fastcall `anonymous namespace'::collapseMakesCorridorImpassable(float minCorridorWidth, float maxCorridorWidth, hkVector4f *p0, hkVector4f *p1, hkVector4f *p2, hkVector4f *pa, hkVector4f *pb, int skipIndex, hkArray<hkVector4f,hkContainerHeapAllocator> *vertices, hkArray<hkaiNavMeshSimplificationUtils::Segment,hkContainerHeapAllocator> *segments, __int64 segmentIndex, int majorAxis, hkRotationf *projection, hkcdDynamicAabbTree *tree, hkResult *resOut)
+char __fastcall `anonymous namespace::collapseMakesCorridorImpassable(float minCorridorWidth, float maxCorridorWidth, hkVector4f *p0, hkVector4f *p1, hkVector4f *p2, hkVector4f *pa, hkVector4f *pb, int skipIndex, hkArray<hkVector4f,hkContainerHeapAllocator> *vertices, hkArray<hkaiNavMeshSimplificationUtils::Segment,hkContainerHeapAllocator> *segments, __int64 segmentIndex, int majorAxis, hkRotationf *projection, hkcdDynamicAabbTree *tree, hkResult *resOut)
 {
   int *v15; // rdi
   float v16; // xmm9_4
@@ -5800,7 +5800,7 @@ char __fastcall `anonymous namespace'::collapseMakesCorridorImpassable(float min
     v55 = 1;
   }
 LABEL_41:
-  collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&hkcdAabbTreeQueries::AabbCollector::`vftable';
+  collector.vfptr = (hkcdAabbTreeQueries::AabbCollectorVtbl *)&hkcdAabbTreeQueries::AabbCollector::`vftable;
   testSegs.m_size = 0;
   if ( testSegs.m_capacityAndFlags >= 0 )
     hkContainerTempAllocator::s_alloc.vfptr->bufFree(
@@ -5812,7 +5812,7 @@ LABEL_41:
 
 // File Line: 2198
 // RVA: 0xB55160
-hkSimdFloat32 *__fastcall `anonymous namespace'::getProjectedDistanceErrorSquared(hkSimdFloat32 *result, hkVector4f *a, hkVector4f *b, hkArray<hkVector4f,hkContainerHeapAllocator> *vertices, hkArray<int,hkContainerHeapAllocator> *indices, int majorAxis)
+hkSimdFloat32 *__fastcall `anonymous namespace::getProjectedDistanceErrorSquared(hkSimdFloat32 *result, hkVector4f *a, hkVector4f *b, hkArray<hkVector4f,hkContainerHeapAllocator> *vertices, hkArray<int,hkContainerHeapAllocator> *indices, int majorAxis)
 {
   int v6; // edi
   hkArray<hkVector4f,hkContainerHeapAllocator> *v7; // r15
@@ -5834,7 +5834,7 @@ hkSimdFloat32 *__fastcall `anonymous namespace'::getProjectedDistanceErrorSquare
     v11 = 0i64;
     do
     {
-      `anonymous namespace'::getClosestPointOnLine(&resulta, &v7->m_data[indices->m_data[v11]], v9, v8, majorAxis, &out);
+      `anonymous namespace::getClosestPointOnLine(&resulta, &v7->m_data[indices->m_data[v11]], v9, v8, majorAxis, &out);
       ++v6;
       ++v11;
       v10->m_real = _mm_max_ps(v10->m_real, resulta.m_real);
@@ -5846,7 +5846,7 @@ hkSimdFloat32 *__fastcall `anonymous namespace'::getProjectedDistanceErrorSquare
 
 // File Line: 2234
 // RVA: 0xB55230
-hkResult *__fastcall `anonymous namespace'::simplifyInternalOrConvexBoundary(hkResult *result, hkaiNavMeshGenerationSettings *settings, hkArray<hkVector4f,hkContainerHeapAllocator> *verticesInOut, hkArray<hkaiNavMeshSimplificationUtils::Segment,hkContainerHeapAllocator> *segmentsInOut, hkArrayBase<int> *segmentToOppositeMap, int segmentIndex, int majorAxisA, int majorAxisB, hkcdDynamicAabbTree *tree, hkPointerMultiMap<int,int> *parToSegIdxMap, hkBitField *unremovableVertices)
+hkResult *__fastcall `anonymous namespace::simplifyInternalOrConvexBoundary(hkResult *result, hkaiNavMeshGenerationSettings *settings, hkArray<hkVector4f,hkContainerHeapAllocator> *verticesInOut, hkArray<hkaiNavMeshSimplificationUtils::Segment,hkContainerHeapAllocator> *segmentsInOut, hkArrayBase<int> *segmentToOppositeMap, int segmentIndex, int majorAxisA, int majorAxisB, hkcdDynamicAabbTree *tree, hkPointerMultiMap<int,int> *parToSegIdxMap, hkBitField *unremovableVertices)
 {
   hkArray<hkaiNavMeshSimplificationUtils::Segment,hkContainerHeapAllocator> *v11; // r13
   hkArray<hkVector4f,hkContainerHeapAllocator> *v12; // r15
@@ -6217,7 +6217,7 @@ hkResult *__fastcall `anonymous namespace'::simplifyInternalOrConvexBoundary(hkR
   v42 = v11->m_data;
   v226 = *v39 == v41;
   v225 = v42[v244 / 0x30].m_partitionIdB == -1;
-  v43 = (signed int)`anonymous namespace'::computePartialSignedPartitionAreas(
+  v43 = (signed int)`anonymous namespace::computePartialSignedPartitionAreas(
                       v12,
                       v11,
                       segmentToOppositeMap,
@@ -6259,7 +6259,7 @@ hkResult *__fastcall `anonymous namespace'::simplifyInternalOrConvexBoundary(hkR
   v52 = v213.m_real;
   _mm_store_si128((__m128i *)&v224, (__m128i)v224.m_real);
   _mm_store_si128((__m128i *)&v213, (__m128i)v52);
-  `anonymous namespace'::computeFullSignedPartitionAreas(v12, v11, segmentIndex, majorAxisA, majorAxisB, &v224, &v213);
+  `anonymous namespace::computeFullSignedPartitionAreas(v12, v11, segmentIndex, majorAxisA, majorAxisB, &v224, &v213);
   array = 0i64;
   v219 = 0;
   v220 = 2147483648;
@@ -6455,7 +6455,7 @@ LABEL_60:
         v76 = &v75[*(signed int *)(v71 + v72 - 4)];
         v77 = &v75[v74];
         v78 = &v75[*(signed int *)(v72 + 4 * v70)];
-        v79 = `anonymous namespace'::getProjectedTriangleArea(v76, v77, v78, majorAxisA);
+        v79 = `anonymous namespace::getProjectedTriangleArea(v76, v77, v78, majorAxisA);
         v80 = v79;
         if ( v212 || v79 >= 0.001 )
         {
@@ -6466,7 +6466,7 @@ LABEL_60:
           v85 = v213.m_real.m128_u64[0];
           *(_DWORD *)(v213.m_real.m128_u64[0] + 8 * v84 + 4) = v69;
           if ( v212 )
-            v80 = `anonymous namespace'::getTriangleArea(v76, v77, v78);
+            v80 = `anonymous namespace::getTriangleArea(v76, v77, v78);
           *(float *)(v85 + 8 * v84) = v80;
         }
         else
@@ -6531,7 +6531,7 @@ LABEL_327:
           v215 = v67 + 1;
           LODWORD(pArr[v83].m_errorRange[1]) = v69;
           *(float *)&v82[v83].m_numVertices = v79;
-          v82[v83].m_errorRange[0] = `anonymous namespace'::getTriangleArea(v76, v77, v78);
+          v82[v83].m_errorRange[0] = `anonymous namespace::getTriangleArea(v76, v77, v78);
         }
         v67 = v215;
         v16 = v234;
@@ -6805,9 +6805,9 @@ LABEL_172:
     v116 = hkaiNavMeshGenerationSettings::getSimplificationSettings(v261, &v229, localSettingsIndex);
     v249 = v116;
     if ( v114 > v116->m_maxBorderSimplifyArea
-      || COERCE_FLOAT(*`anonymous namespace'::getHeightErrorSquared(&v254, v102, v101, b, majorAxisA)) > (float)(v116->m_maxBorderHeightError * v116->m_maxBorderHeightError)
+      || COERCE_FLOAT(*`anonymous namespace::getHeightErrorSquared(&v254, v102, v101, b, majorAxisA)) > (float)(v116->m_maxBorderHeightError * v116->m_maxBorderHeightError)
       || v212
-      && COERCE_FLOAT(*`anonymous namespace'::getHeightErrorSquared(&v258, v102, v101, b, majorAxisB)) > (float)(v116->m_maxBorderHeightError * v116->m_maxBorderHeightError) )
+      && COERCE_FLOAT(*`anonymous namespace::getHeightErrorSquared(&v258, v102, v101, b, majorAxisB)) > (float)(v116->m_maxBorderHeightError * v116->m_maxBorderHeightError) )
     {
       goto LABEL_173;
     }
@@ -6817,7 +6817,7 @@ LABEL_172:
     LODWORD(area2InOut) = majorAxisA;
     LODWORD(area1InOut) = segmentIndex;
     v205 = tree;
-    if ( `anonymous namespace'::doesLineSegmentIntersectPartition(v96, v100, vertices, segments) )
+    if ( `anonymous namespace::doesLineSegmentIntersectPartition(v96, v100, vertices, segments) )
       goto LABEL_173;
     if ( v245 )
     {
@@ -6983,7 +6983,7 @@ LABEL_202:
       }
       _mm_store_si128((__m128i *)&v253, (__m128i)v51);
       _mm_store_si128((__m128i *)&v252, (__m128i)v52);
-      `anonymous namespace'::computeFullSignedPartitionAreas(
+      `anonymous namespace::computeFullSignedPartitionAreas(
         vertices,
         segments,
         segmentIndex,
@@ -7073,7 +7073,7 @@ LABEL_222:
       LODWORD(v211) = segmentIndex;
       v151 = v97;
       v152 = b;
-      v153 = `anonymous namespace'::collapseMakesCorridorImpassable(
+      v153 = `anonymous namespace::collapseMakesCorridorImpassable(
                v116->m_minCorridorWidth,
                v116->m_maxCorridorWidth,
                v101,
@@ -7222,11 +7222,11 @@ LABEL_260:
     }
     v12 = vertices;
     v169 = a;
-    v170 = `anonymous namespace'::getProjectedDistanceErrorSquared(&v257, a, v152, vertices, &indices, majorAxisA);
+    v170 = `anonymous namespace::getProjectedDistanceErrorSquared(&v257, a, v152, vertices, &indices, majorAxisA);
     v171 = (__int64)v249;
     if ( COERCE_FLOAT(*v170) > (float)(v249->m_maxBorderDistanceError * v249->m_maxBorderDistanceError)
       || v212
-      && COERCE_FLOAT(*`anonymous namespace'::getProjectedDistanceErrorSquared(
+      && COERCE_FLOAT(*`anonymous namespace::getProjectedDistanceErrorSquared(
                          &v256,
                          v169,
                          v152,
@@ -7432,7 +7432,7 @@ LABEL_361:
 
 // File Line: 2600
 // RVA: 0xB56F10
-hkResult *__fastcall `anonymous namespace'::simplifyConcaveBoundary(hkResult *result, hkaiNavMeshGenerationSettings *settings, hkArray<hkVector4f,hkContainerHeapAllocator> *verticesInOut, hkArray<hkaiNavMeshSimplificationUtils::Segment,hkContainerHeapAllocator> *segmentsInOut, hkArrayBase<int> *segmentToOppositeMap, int segmentIndex, int majorAxisA, int majorAxisB, hkcdDynamicAabbTree *tree, hkPointerMultiMap<int,int> *parToSegIdxMap)
+hkResult *__fastcall `anonymous namespace::simplifyConcaveBoundary(hkResult *result, hkaiNavMeshGenerationSettings *settings, hkArray<hkVector4f,hkContainerHeapAllocator> *verticesInOut, hkArray<hkaiNavMeshSimplificationUtils::Segment,hkContainerHeapAllocator> *segmentsInOut, hkArrayBase<int> *segmentToOppositeMap, int segmentIndex, int majorAxisA, int majorAxisB, hkcdDynamicAabbTree *tree, hkPointerMultiMap<int,int> *parToSegIdxMap)
 {
   int v10; // er13
   int v11; // ebx
@@ -7693,7 +7693,7 @@ hkResult *__fastcall `anonymous namespace'::simplifyConcaveBoundary(hkResult *re
   v200.m_real = 0i64;
   if ( v25 )
   {
-    v26 = `anonymous namespace'::computePartialSignedPartitionAreas(
+    v26 = `anonymous namespace::computePartialSignedPartitionAreas(
             v15,
             v13,
             vars0,
@@ -7707,7 +7707,7 @@ hkResult *__fastcall `anonymous namespace'::simplifyConcaveBoundary(hkResult *re
     v23 = v199.m_real;
     v24 = v200.m_real;
     v22 = v26;
-    `anonymous namespace'::computeFullSignedPartitionAreas(v15, v13, (int)retaddr, v10, v11, &v199, &v200);
+    `anonymous namespace::computeFullSignedPartitionAreas(v15, v13, (int)retaddr, v10, v11, &v199, &v200);
     v215 = v199.m_real;
     v217 = v200.m_real;
   }
@@ -7784,7 +7784,7 @@ LABEL_184:
           v39 = &v36[v38];
           b = v39;
           c = &v36[v35[(v30 + 1) % v34]];
-          v40 = `anonymous namespace'::getProjectedTriangleArea(v37, v39, c, (int)majorAxis);
+          v40 = `anonymous namespace::getProjectedTriangleArea(v37, v39, c, (int)majorAxis);
           v41 = v40;
           if ( BYTE1(v180) || v40 >= 0.001 )
           {
@@ -7797,7 +7797,7 @@ LABEL_184:
             b = v49;
             if ( BYTE1(v180) )
             {
-              v50 = `anonymous namespace'::getTriangleArea(v37, v39, c);
+              v50 = `anonymous namespace::getTriangleArea(v37, v39, c);
               v49 = b;
               v41 = v50;
             }
@@ -7842,7 +7842,7 @@ LABEL_170:
             LODWORD(projection) = v33 + 1;
             LODWORD(pArr[v47].m_errorRange[1]) = v30;
             *(float *)&v43[v47].m_numVertices = v40;
-            v43[v47].m_errorRange[0] = `anonymous namespace'::getTriangleArea(v46, v45, v44);
+            v43[v47].m_errorRange[0] = `anonymous namespace::getTriangleArea(v46, v45, v44);
           }
           v30 = v189;
           v33 = (signed int)projection;
@@ -7975,11 +7975,11 @@ LABEL_85:
         b = (hkVector4f *)hkaiNavMeshGenerationSettings::getSimplificationSettings(v224, &points, localSettingsIndex);
         if ( v74 < b->m_quad.m128_f32[1] )
         {
-          v75 = `anonymous namespace'::getHeightErrorSquared(&v222, v64, v66, v65, (int)majorAxis);
+          v75 = `anonymous namespace::getHeightErrorSquared(&v222, v64, v66, v65, (int)majorAxis);
           if ( COERCE_FLOAT(*v75) <= (float)(b[1].m_quad.m128_f32[3] * b[1].m_quad.m128_f32[3]) )
           {
             if ( !BYTE1(v180)
-              || (v76 = `anonymous namespace'::getHeightErrorSquared(&v221, v64, v66, v65, (int)v229),
+              || (v76 = `anonymous namespace::getHeightErrorSquared(&v221, v64, v66, v65, (int)v229),
                   COERCE_FLOAT(*v76) <= (float)(b[1].m_quad.m128_f32[3] * b[1].m_quad.m128_f32[3])) )
             {
               v77 = _mm_sub_ps(v66->m_quad, v65->m_quad);
@@ -8067,7 +8067,7 @@ LABEL_94:
               LODWORD(area2InOut) = (_DWORD)majorAxis;
               LODWORD(area1InOut) = (_DWORD)retaddr;
               v174 = v230;
-              if ( `anonymous namespace'::doesLineSegmentIntersectPartition(
+              if ( `anonymous namespace::doesLineSegmentIntersectPartition(
                      (hkVector4f *)&v199,
                      (hkVector4f *)&v200,
                      v15,
@@ -8081,14 +8081,14 @@ LABEL_94:
               LODWORD(area2InOut) = (_DWORD)majorAxis;
               LODWORD(area1InOut) = (_DWORD)retaddr;
               v174 = v230;
-              if ( `anonymous namespace'::doesLineSegmentIntersectPartition(start, (hkVector4f *)&v199, v15, segments)
+              if ( `anonymous namespace::doesLineSegmentIntersectPartition(start, (hkVector4f *)&v199, v15, segments)
                 || (resOut = &projB,
                     area2Out = &projectionMatrix,
                     LODWORD(area1Out) = (_DWORD)v229,
                     LODWORD(area2InOut) = (_DWORD)majorAxis,
                     LODWORD(area1InOut) = (_DWORD)retaddr,
                     v174 = v230,
-                    (v102 = `anonymous namespace'::doesLineSegmentIntersectPartition(
+                    (v102 = `anonymous namespace::doesLineSegmentIntersectPartition(
                               (hkVector4f *)&v200,
                               end,
                               v15,
@@ -8106,7 +8106,7 @@ LABEL_193:
                 projection = &projectionMatrix;
                 LODWORD(pArr) = (_DWORD)majorAxis;
                 LODWORD(v180) = (_DWORD)retaddr;
-                v103 = `anonymous namespace'::collapseMakesCorridorImpassable(
+                v103 = `anonymous namespace::collapseMakesCorridorImpassable(
                          b->m_quad.m128_f32[2],
                          b->m_quad.m128_f32[3],
                          v66,
@@ -8228,7 +8228,7 @@ LABEL_193:
                 _mm_store_si128((__m128i *)&v216, (__m128i)v23);
                 _mm_store_si128((__m128i *)&v218, (__m128i)v24);
                 v130 = segments;
-                `anonymous namespace'::computeFullSignedPartitionAreas(
+                `anonymous namespace::computeFullSignedPartitionAreas(
                   v15,
                   segments,
                   (int)retaddr,
@@ -8504,7 +8504,7 @@ LABEL_153:
 
 // File Line: 2919
 // RVA: 0xB582E0
-hkResult *__fastcall `anonymous namespace'::simplifySegment(hkResult *result, hkaiNavMeshGenerationSettings *settings, hkArray<hkVector4f,hkContainerHeapAllocator> *verticesInOut, hkArray<hkaiNavMeshSimplificationUtils::Segment,hkContainerHeapAllocator> *segmentsInOut, hkArrayBase<int> *segmentToOppositeMap, int segmentIndex, int majorAxisA, int majorAxisB, hkPointerMultiMap<int,int> *parToSegIdxMap, hkBitField *unremovableVertices)
+hkResult *__fastcall `anonymous namespace::simplifySegment(hkResult *result, hkaiNavMeshGenerationSettings *settings, hkArray<hkVector4f,hkContainerHeapAllocator> *verticesInOut, hkArray<hkaiNavMeshSimplificationUtils::Segment,hkContainerHeapAllocator> *segmentsInOut, hkArrayBase<int> *segmentToOppositeMap, int segmentIndex, int majorAxisA, int majorAxisB, hkPointerMultiMap<int,int> *parToSegIdxMap, hkBitField *unremovableVertices)
 {
   hkArray<hkaiNavMeshSimplificationUtils::Segment,hkContainerHeapAllocator> *v10; // r13
   hkResult *v11; // r12
@@ -8795,7 +8795,7 @@ LABEL_51:
   v63 = majorAxisB;
   if ( majorAxisA == majorAxisB || majorAxisB == -1 )
   {
-    v64 = `anonymous namespace'::convertSegmentToObb(
+    v64 = `anonymous namespace::convertSegmentToObb(
             settingsa,
             verticesInOuta,
             v10,
@@ -8815,7 +8815,7 @@ LABEL_75:
   }
   v65 = v50;
   v66 = segmentToOppositeMap;
-  `anonymous namespace'::simplifyInternalOrConvexBoundary(
+  `anonymous namespace::simplifyInternalOrConvexBoundary(
     &resulta,
     settingsa,
     verticesInOuta,
@@ -8832,7 +8832,7 @@ LABEL_75:
     v11->m_enum = 1;
     goto LABEL_82;
   }
-  `anonymous namespace'::simplifyConcaveBoundary(
+  `anonymous namespace::simplifyConcaveBoundary(
     (hkResult *)&segmentIndex,
     settingsa,
     verticesInOuta,
@@ -9431,7 +9431,7 @@ hkResult *__fastcall hkaiNavMeshSimplificationUtils::simplifySegments(hkResult *
   }
   if ( v14 > 1 )
   {
-    hkAlgorithm::quickSortRecursive<`anonymous namespace'::SegmentPtrIdxKey,hkAlgorithm::less<`anonymous namespace'::SegmentPtrIdxKey>>(
+    hkAlgorithm::quickSortRecursive<`anonymous namespace::SegmentPtrIdxKey,hkAlgorithm::less<`anonymous namespace::SegmentPtrIdxKey>>(
       v12,
       0,
       v14 - 1,
@@ -9513,7 +9513,7 @@ LABEL_22:
         while ( *(unsigned __int64 *)((char *)&v12->m_key + v9) == *(unsigned __int64 *)((char *)&v12->m_key + v37)
              && *(int *)((char *)&v12->m_segmentSize + v9) == *(int *)((char *)&v12->m_segmentSize + v37) )
         {
-          v38 = `anonymous namespace'::areOppositeSegments(
+          v38 = `anonymous namespace::areOppositeSegments(
                   vertices,
                   &v10->m_data[*(int *)((char *)&v12->m_index + v9)],
                   &v10->m_data[*(int *)((char *)&v12->m_index + v37)],
@@ -9659,7 +9659,7 @@ LABEL_22:
         v62 = &pArr[v44];
         v114 = v44 + 1;
         LODWORD(v62->m_value) = 2
-                              * (unsigned int)*(_OWORD *)&_mm_load_si128((const __m128i *)`anonymous namespace'::computeSignedLoopArea(
+                              * (unsigned int)*(_OWORD *)&_mm_load_si128((const __m128i *)`anonymous namespace::computeSignedLoopArea(
                                                                                             &v127,
                                                                                             vertices,
                                                                                             v55,
@@ -9967,7 +9967,7 @@ LABEL_162:
           {
             majorAxisB = v119.m_enum;
           }
-          `anonymous namespace'::simplifySegment(
+          `anonymous namespace::simplifySegment(
             &resOut,
             settingsa,
             vertices,
@@ -11428,10 +11428,10 @@ _BOOL8 __fastcall canMergeVertexPair(hkaiNavMeshSimplificationUtils::Settings *s
   v7 = unmergedVertexB->m_quad;
   v8 = unmergedVertexA->m_quad;
   v9 = mergedVertex->m_quad;
-  v10 = _mm_and_ps((__m128)`hkVector4f::getComponent'::`2'::indexToMask[vertComponentIdx], mergedVertex->m_quad);
+  v10 = _mm_and_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[vertComponentIdx], mergedVertex->m_quad);
   v11 = _mm_or_ps(_mm_shuffle_ps(v10, v10, 78), v10);
-  v12 = _mm_and_ps((__m128)`hkVector4f::getComponent'::`2'::indexToMask[vertComponentIdx], unmergedVertexA->m_quad);
-  v13 = _mm_and_ps((__m128)`hkVector4f::getComponent'::`2'::indexToMask[vertComponentIdx], unmergedVertexB->m_quad);
+  v12 = _mm_and_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[vertComponentIdx], unmergedVertexA->m_quad);
+  v13 = _mm_and_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[vertComponentIdx], unmergedVertexB->m_quad);
   LODWORD(v14) = *(unsigned __int128 *)&_mm_shuffle_ps(v11, v11, 177) | v11.m128_i32[0];
   v15 = _mm_or_ps(_mm_shuffle_ps(v12, v12, 78), v12);
   v16 = _mm_or_ps(_mm_shuffle_ps(v13, v13, 78), v13);
@@ -12930,7 +12930,7 @@ __int64 __fastcall hkaiNavMeshSimplificationUtils::_simplifyNavMesh(hkaiNavMeshG
   settingsa = settings;
   v5 = navMesh;
   v6 = settings->m_wallClimbingSettings.m_enableWallClimbing.m_bool != 0;
-  v169 = &hkaiNavMeshGenerationProgressCallback::`vftable';
+  v169 = &hkaiNavMeshGenerationProgressCallback::`vftable;
   v7 = settings;
   callbacks = (hkaiNavMeshGenerationProgressCallback *)&v169;
   v9 = raycaster;
@@ -13041,7 +13041,7 @@ LABEL_274:
           v118 = &segmentsOut.m_data[v117];
           do
           {
-            hkaiNavMeshSimplificationUtils::Segment::`scalar deleting destructor'(v118, 0);
+            hkaiNavMeshSimplificationUtils::Segment::`scalar deleting destructor(v118, 0);
             --v118;
             --v117;
           }

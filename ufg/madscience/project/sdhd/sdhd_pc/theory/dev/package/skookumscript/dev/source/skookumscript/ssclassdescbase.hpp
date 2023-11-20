@@ -2,7 +2,7 @@
 // RVA: 0x106CF0
 void __fastcall SSClassDescBase::~SSClassDescBase(SSClassDescBase *this)
 {
-  this->vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable';
+  this->vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable;
 }
 
 // File Line: 130

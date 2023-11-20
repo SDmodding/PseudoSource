@@ -24,7 +24,7 @@ char __fastcall UFG::UIHKLoadingOverlay::handleMessage(UFG::UIHKLoadingOverlay *
     }
     if ( msgId == UI_HASH_LOADING_ICON_SHOW_NEXT_SAVE_ICON_9 )
     {
-      `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       if ( (v9 >> 6) & 1 )
       {
         (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v8 + 16i64))(
@@ -46,7 +46,7 @@ char __fastcall UFG::UIHKLoadingOverlay::handleMessage(UFG::UIHKLoadingOverlay *
       v13 = 5;
       v14 = DOUBLE_56_0;
       Scaleform::GFx::Movie::Invoke(v5, "LoadingIcon_Show", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-      `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+      `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     }
     else if ( msgId == UI_HASH_LOADING_ICON_HIDE_9 )
     {

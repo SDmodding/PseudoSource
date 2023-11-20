@@ -7,7 +7,7 @@ void __fastcall hkXmlStreamParser::hkXmlStreamParser(hkXmlStreamParser *this, hk
 
   v2 = reader;
   v3 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkXmlStreamParser::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkXmlStreamParser::`vftable;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>(
     &this->m_attribMap.m_map,
@@ -880,7 +880,7 @@ LABEL_11:
   }
   if ( !hkString::strNcmp((const char *)(v6 + 1), "apos;", 5) )
   {
-    hkStringBuf::append(v4, "'", 1);
+    hkStringBuf::append(v4, "", 1);
     v6 += 6i64;
     goto LABEL_31;
   }

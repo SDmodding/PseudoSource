@@ -1820,7 +1820,7 @@ __int64 UFG::_dynamic_initializer_for__gTrueCrowdDataBaseInventory__()
     0x90EEF023,
     0,
     0);
-  UFG::gTrueCrowdDataBaseInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::TrueCrowdDataBaseInventory::`vftable';
+  UFG::gTrueCrowdDataBaseInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::TrueCrowdDataBaseInventory::`vftable;
   return atexit(UFG::_dynamic_atexit_destructor_for__gTrueCrowdDataBaseInventory__);
 }
 
@@ -1857,7 +1857,7 @@ void __fastcall UFG::TrueCrowdDataBase::TrueCrowdDataBase(UFG::TrueCrowdDataBase
   flaga = flag.flag;
   v2 = this;
   UFG::qResourceData::qResourceData((UFG::qResourceData *)&this->mNode);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v2->mDefinition.mEntities,
     0x50Cui64,
     25,
@@ -2092,8 +2092,8 @@ UFG::qList<UFG::TrueCrowdSet,UFG::TrueCrowdSet,1,0> *__fastcall UFG::TrueCrowdDa
   v94 = textureSetList->mNumElements;
   v11 = componentList->mNumElements;
   v96 = componentList->mNumElements;
-  `eh vector constructor iterator'(ptr, 4ui64, 16, (void (__fastcall *)(void *))BackInfo::BackInfo);
-  `eh vector constructor iterator'(v104, 4ui64, 16, (void (__fastcall *)(void *))BackInfo::BackInfo);
+  `eh vector constructor iterator(ptr, 4ui64, 16, (void (__fastcall *)(void *))BackInfo::BackInfo);
+  `eh vector constructor iterator(v104, 4ui64, 16, (void (__fastcall *)(void *))BackInfo::BackInfo);
   v12 = 0;
   v107 = 0i64;
   memset(&Dst, 0, 0x78ui64);
@@ -2210,7 +2210,7 @@ UFG::qList<UFG::TrueCrowdSet,UFG::TrueCrowdSet,1,0> *__fastcall UFG::TrueCrowdDa
     v35[1].mNext = v35;
     v35[4].mNext = (UFG::allocator::free_link *)-1i64;
     LODWORD(v35[5].mNext) = 0;
-    `eh vector constructor iterator'(
+    `eh vector constructor iterator(
       &v35[6],
       0x10ui64,
       16,
@@ -2492,8 +2492,8 @@ LABEL_116:
     }
   }
 LABEL_126:
-  `eh vector destructor iterator'(v104, 4ui64, 16, (void (__fastcall *)(void *))_);
-  `eh vector destructor iterator'(ptr, 4ui64, 16, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(v104, 4ui64, 16, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(ptr, 4ui64, 16, (void (__fastcall *)(void *))_);
   return v33;
 }        ++v88;
         v89 += 20;

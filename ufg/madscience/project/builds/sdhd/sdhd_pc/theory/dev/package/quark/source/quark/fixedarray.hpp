@@ -50,7 +50,7 @@ void __fastcall UFG::qFixedArray<PedFormationPairing,10>::qFixedArray<PedFormati
 void __fastcall UFG::qFixedArray<UFG::qSafePointer<UFG::GroupComponent,UFG::GroupComponent>,4>::~qFixedArray<UFG::qSafePointer<UFG::GroupComponent,UFG::GroupComponent>,4>(UFG::qFixedArray<UFG::qSafePointer<UFG::GroupComponent,UFG::GroupComponent>,4> *this)
 {
   this->size = 0;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     this->p,
     0x18ui64,
     4,

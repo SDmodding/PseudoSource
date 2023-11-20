@@ -23,7 +23,7 @@ void __fastcall Attachment::~Attachment(Attachment *this)
   UFG::qNode<Attachment,Attachment> *v19; // rax
 
   v1 = this;
-  this->vfptr = (AttachmentVtbl *)&Attachment::`vftable';
+  this->vfptr = (AttachmentVtbl *)&Attachment::`vftable;
   v2 = &this->mAttachedSimObject;
   if ( this->mAttachedSimObject.m_pPointer )
   {
@@ -143,7 +143,7 @@ void __fastcall AttachmentCreatureToTransformNode::~AttachmentCreatureToTransfor
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v11; // rax
 
   v1 = this;
-  this->vfptr = (AttachmentVtbl *)&AttachmentCreatureToTransformNode::`vftable';
+  this->vfptr = (AttachmentVtbl *)&AttachmentCreatureToTransformNode::`vftable;
   v2 = &this->mAttachedCharacterAnimationComponent;
   if ( this->mAttachedCharacterAnimationComponent.m_pPointer )
   {
@@ -193,7 +193,7 @@ void __fastcall AttachmentCreature::~AttachmentCreature(AttachmentCreature *this
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v6; // rax
 
   v1 = this;
-  this->vfptr = (AttachmentVtbl *)&AttachmentCreature::`vftable';
+  this->vfptr = (AttachmentVtbl *)&AttachmentCreature::`vftable;
   v2 = &this->mAttachedCharacterAnimationComponent;
   if ( this->mAttachedCharacterAnimationComponent.m_pPointer )
   {
@@ -243,7 +243,7 @@ void __fastcall AttachmentCreatureToHandle::AttachmentCreatureToHandle(Attachmen
   v1 = (UFG::qNode<Attachment,Attachment> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (AttachmentVtbl *)&Attachment::`vftable';
+  this->vfptr = (AttachmentVtbl *)&Attachment::`vftable;
   *(_WORD *)&this->mPositionOnly = 0;
   this->mUseRubberBand = 0;
   this->attachedJoint = 0;
@@ -259,7 +259,7 @@ void __fastcall AttachmentCreatureToHandle::AttachmentCreatureToHandle(Attachmen
   v4->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v4->mPrev;
   v4->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v4->mPrev;
   this->mAttachedSimObject.m_pPointer = 0i64;
-  this->vfptr = (AttachmentVtbl *)&AttachmentCreatureToHandle::`vftable';
+  this->vfptr = (AttachmentVtbl *)&AttachmentCreatureToHandle::`vftable;
   v5 = &this->mParkourHandle;
   v5->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v5->mPrev;
   v5->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v5->mPrev;

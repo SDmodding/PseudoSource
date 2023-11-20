@@ -21,10 +21,10 @@ void __fastcall StimulusBank::StimulusBank(StimulusBank *this)
   v2 = (UFG::qNode<ActionNodeBank,ActionNodeBank> *)&v1->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ActionNodeBank::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ActionNodeBank::`vftable;
   v1->m_Level = 0;
   v1->mSignalMask = -1i64;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&StimulusBank::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&StimulusBank::`vftable;
   *(_QWORD *)&v1->m_NumChildren = 0i64;
   v1->m_pStimulusType = 0i64;
   v1->m_pNumRecords = 0i64;
@@ -45,7 +45,7 @@ void __fastcall StimulusBank::~StimulusBank(StimulusBank *this)
   UFG::qNode<ActionNodeBank,ActionNodeBank> *v4; // rax
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&StimulusBank::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&StimulusBank::`vftable;
   StimulusBank::CleanUp(this);
   v2 = (UFG::qNode<ActionNodeBank,ActionNodeBank> *)&v1->mPrev;
   v3 = v1->mPrev;

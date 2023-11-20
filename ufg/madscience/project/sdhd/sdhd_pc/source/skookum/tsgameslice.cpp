@@ -1949,7 +1949,7 @@ void __fastcall UFG::TSGameSlice::Mthd_set_battle_type(SSInvokedMethod *pScope, 
   if ( v3 == -1 )
   {
     v4 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v2->i_user_data);
-    UFG::qPrintf("Script error: invalid battle type '%s'\n", v4);
+    UFG::qPrintf("Script error: invalid battle type %s\n", v4);
   }
   else
   {
@@ -3652,7 +3652,7 @@ void __fastcall UFG::TSGameSlice::Mthd_release_interior_triggers(SSInvokedMethod
   if ( UFG::TSGameSlice::msInteriorTriggerData.p )
   {
     v9 = &UFG::TSGameSlice::msInteriorTriggerData.p[-1].mOnEnterOnly;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       UFG::TSGameSlice::msInteriorTriggerData.p,
       0xA8ui64,
       UFG::TSGameSlice::msInteriorTriggerData.p[-1].mOnEnterOnly,

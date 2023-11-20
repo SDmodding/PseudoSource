@@ -112,12 +112,12 @@ void __fastcall hkDefaultBuiltinTypeRegistry::reinitialize(hkDefaultBuiltinTypeR
   if ( v3 )
   {
     *(_DWORD *)(v3 + 8) = 0x1FFFF;
-    *(_QWORD *)v3 = &hkDynamicClassNameRegistry::`vftable';
+    *(_QWORD *)v3 = &hkDynamicClassNameRegistry::`vftable;
     *(_QWORD *)(v3 + 16) = "hk_2013.2.0-r1";
     hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>(
       (hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator> *)(v3 + 24),
       0);
-    v4->vfptr = (hkBaseObjectVtbl *)&hkDefaultClassNameRegistry::`vftable';
+    v4->vfptr = (hkBaseObjectVtbl *)&hkDefaultClassNameRegistry::`vftable;
   }
   else
   {
@@ -132,7 +132,7 @@ void __fastcall hkDefaultBuiltinTypeRegistry::reinitialize(hkDefaultBuiltinTypeR
   if ( v6 )
   {
     *(_DWORD *)(v6 + 8) = 0x1FFFF;
-    *(_QWORD *)v6 = &hkTypeInfoRegistry::`vftable';
+    *(_QWORD *)v6 = &hkTypeInfoRegistry::`vftable;
     hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>(
       (hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator> *)(v6 + 16),
       0);
@@ -152,7 +152,7 @@ void __fastcall hkDefaultBuiltinTypeRegistry::reinitialize(hkDefaultBuiltinTypeR
   if ( v9 )
   {
     *(_DWORD *)(v9 + 8) = 0x1FFFF;
-    *(_QWORD *)v9 = &hkVtableClassRegistry::`vftable';
+    *(_QWORD *)v9 = &hkVtableClassRegistry::`vftable;
     *(_QWORD *)(v9 + 16) = 0i64;
     *(_DWORD *)(v9 + 24) = 0;
     *(_DWORD *)(v9 + 28) = -1;
@@ -187,7 +187,7 @@ hkReferencedObject *__fastcall hkCreateBuiltInTypeRegistry()
   if ( !v1 )
     return 0i64;
   *(_DWORD *)(v1 + 8) = 0x1FFFF;
-  *(_QWORD *)v1 = &hkDefaultBuiltinTypeRegistry::`vftable';
+  *(_QWORD *)v1 = &hkDefaultBuiltinTypeRegistry::`vftable;
   hkDefaultBuiltinTypeRegistry::init((hkDefaultBuiltinTypeRegistry *)v1);
   return (hkReferencedObject *)v2;
 }

@@ -10,7 +10,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::BaseVehiclePhysics
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::BaseVehiclePhysicsDef,UFG::qReflectObject>::sInventory.vfptr,
     "UFG::BaseVehiclePhysicsDef",
     v0);
-  UFG::qReflectObjectType<UFG::BaseVehiclePhysicsDef,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::BaseVehiclePhysicsDef>::`vftable';
+  UFG::qReflectObjectType<UFG::BaseVehiclePhysicsDef,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::BaseVehiclePhysicsDef>::`vftable;
   UFG::qReflectInventory<UFG::BaseVehiclePhysicsDef>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::BaseVehiclePhysicsDef,UFG::qReflectObject>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -31,7 +31,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::WheeledVehiclePhys
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::WheeledVehiclePhysicsDef,UFG::BaseVehiclePhysicsDef>::sInventory.vfptr,
     "UFG::WheeledVehiclePhysicsDef",
     v0);
-  UFG::qReflectObjectType<UFG::WheeledVehiclePhysicsDef,UFG::BaseVehiclePhysicsDef>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::WheeledVehiclePhysicsDef>::`vftable';
+  UFG::qReflectObjectType<UFG::WheeledVehiclePhysicsDef,UFG::BaseVehiclePhysicsDef>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::WheeledVehiclePhysicsDef>::`vftable;
   UFG::qReflectInventory<UFG::WheeledVehiclePhysicsDef>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::WheeledVehiclePhysicsDef,UFG::BaseVehiclePhysicsDef>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -59,7 +59,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::BikePhysicsDef_UFG
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::BikePhysicsDef,UFG::WheeledVehiclePhysicsDef>::sInventory.vfptr,
     "UFG::BikePhysicsDef",
     v0);
-  UFG::qReflectObjectType<UFG::BikePhysicsDef,UFG::WheeledVehiclePhysicsDef>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::BikePhysicsDef>::`vftable';
+  UFG::qReflectObjectType<UFG::BikePhysicsDef,UFG::WheeledVehiclePhysicsDef>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::BikePhysicsDef>::`vftable;
   UFG::qReflectInventory<UFG::BikePhysicsDef>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::BikePhysicsDef,UFG::WheeledVehiclePhysicsDef>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -80,7 +80,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::BoatPhysicsDef_UFG
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::BoatPhysicsDef,UFG::BaseVehiclePhysicsDef>::sInventory.vfptr,
     "UFG::BoatPhysicsDef",
     v0);
-  UFG::qReflectObjectType<UFG::BoatPhysicsDef,UFG::BaseVehiclePhysicsDef>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::BoatPhysicsDef>::`vftable';
+  UFG::qReflectObjectType<UFG::BoatPhysicsDef,UFG::BaseVehiclePhysicsDef>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::BoatPhysicsDef>::`vftable;
   UFG::qReflectInventory<UFG::BoatPhysicsDef>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::BoatPhysicsDef,UFG::BaseVehiclePhysicsDef>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -292,7 +292,7 @@ void __usercall UFG::PhysicsVehicle::PhysicsVehicle(UFG::PhysicsVehicle *this@<r
   v91.mptrSimObject.m_pPointer = (UFG::SimObject *)-2i64;
   v5 = transform;
   v6 = this;
-  this->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::BasePhysicsObject::`vftable';
+  this->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::BasePhysicsObject::`vftable;
   this->mUserData.isBoat = 0;
   v7 = &this->mUserData.simComponent;
   v92.m128_u64[1] = (unsigned __int64)v7;
@@ -300,7 +300,7 @@ void __usercall UFG::PhysicsVehicle::PhysicsVehicle(UFG::PhysicsVehicle *this@<r
   v7->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v7->mPrev;
   v8 = 0i64;
   this->mUserData.simComponent.m_pPointer = 0i64;
-  this->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::PhysicsVehicle::`vftable';
+  this->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::PhysicsVehicle::`vftable;
   this->mWaterFloatingTrackerComponent = 0i64;
   this->mParams = param;
   v9 = (UFG::qReflectHandleBase *)&this->mDnaDefinition.mPrev;
@@ -668,7 +668,7 @@ void __fastcall UFG::PhysicsVehicle::~PhysicsVehicle(UFG::PhysicsVehicle *this)
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v15; // rax
 
   v1 = this;
-  this->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::PhysicsVehicle::`vftable';
+  this->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::PhysicsVehicle::`vftable;
   UFG::CustomCollisionFilter::ReleaseSystemId(UFG::BasePhysicsSystem::mInstance->mCollisionFilter, this->mSystemId);
   v1->mCollisionMeshBundle.mOwner = 0i64;
   UFG::Simulation::DestroySimComponent(&UFG::gSim, (UFG::SimComponent *)&v1->mWaterFloatingTrackerComponent->vfptr);
@@ -2260,10 +2260,10 @@ void __fastcall UFG::VehicleCollisionListener::VehicleCollisionListener(UFG::Veh
   UFG::VehicleCollisionListener *v2; // rdi
 
   v2 = this;
-  this->vfptr = (hkpContactListenerVtbl *)&hkpContactListener::`vftable';
-  this->vfptr = (hkpEntityListenerVtbl *)&hkpEntityListener::`vftable';
-  this->vfptr = (hkpContactListenerVtbl *)&UFG::VehicleCollisionListener::`vftable'{for `hkpContactListener'};
-  this->vfptr = (hkpEntityListenerVtbl *)&UFG::VehicleCollisionListener::`vftable'{for `hkpEntityListener'};
+  this->vfptr = (hkpContactListenerVtbl *)&hkpContactListener::`vftable;
+  this->vfptr = (hkpEntityListenerVtbl *)&hkpEntityListener::`vftable;
+  this->vfptr = (hkpContactListenerVtbl *)&UFG::VehicleCollisionListener::`vftable{for `hkpContactListener};
+  this->vfptr = (hkpEntityListenerVtbl *)&UFG::VehicleCollisionListener::`vftable{for `hkpEntityListener};
   this->mBody = rb;
   this->mInverseMassScale = *(hkVector4f *)_xmm;
   hkpEntity::addContactListener((hkpEntity *)&rb->vfptr, (hkpContactListener *)&this->vfptr);
@@ -2279,16 +2279,16 @@ void __fastcall UFG::VehicleCollisionListener::~VehicleCollisionListener(UFG::Ve
   hkpRigidBody *v2; // rcx
 
   v1 = this;
-  this->vfptr = (hkpContactListenerVtbl *)&UFG::VehicleCollisionListener::`vftable'{for `hkpContactListener'};
-  this->vfptr = (hkpEntityListenerVtbl *)&UFG::VehicleCollisionListener::`vftable'{for `hkpEntityListener'};
+  this->vfptr = (hkpContactListenerVtbl *)&UFG::VehicleCollisionListener::`vftable{for `hkpContactListener};
+  this->vfptr = (hkpEntityListenerVtbl *)&UFG::VehicleCollisionListener::`vftable{for `hkpEntityListener};
   v2 = this->mBody;
   if ( v2 )
   {
     hkpEntity::removeContactListener((hkpEntity *)&v2->vfptr, (hkpContactListener *)&v1->vfptr);
     hkpEntity::removeEntityListener((hkpEntity *)&v1->mBody->vfptr, (hkpEntityListener *)&v1->vfptr);
   }
-  v1->vfptr = (hkpEntityListenerVtbl *)&hkpEntityListener::`vftable';
-  v1->vfptr = (hkpContactListenerVtbl *)&hkpContactListener::`vftable';
+  v1->vfptr = (hkpEntityListenerVtbl *)&hkpEntityListener::`vftable;
+  v1->vfptr = (hkpContactListenerVtbl *)&hkpContactListener::`vftable;
 }
 
 // File Line: 1271
@@ -2459,11 +2459,11 @@ void __fastcall UFG::VehicleSetup::buildVehicle(UFG::VehicleSetup *this, UFG::Ph
   v21 = (*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v20[11] + 8i64))(v20[11], 24i64);
   if ( v21 )
   {
-    *(_QWORD *)v21 = &hkBaseObject::`vftable';
-    *(_QWORD *)v21 = &hkReferencedObject::`vftable';
+    *(_QWORD *)v21 = &hkBaseObject::`vftable;
+    *(_QWORD *)v21 = &hkReferencedObject::`vftable;
     *(_DWORD *)(v21 + 8) = 0x1FFFF;
-    *(_QWORD *)v21 = &hkpVehicleDriverInput::`vftable';
-    *(_QWORD *)v21 = &UFG::VehicleAnalogDriverInput::`vftable';
+    *(_QWORD *)v21 = &hkpVehicleDriverInput::`vftable;
+    *(_QWORD *)v21 = &UFG::VehicleAnalogDriverInput::`vftable;
     *(_DWORD *)(v21 + 16) = 0;
     *(_BYTE *)(v21 + 20) = 0;
   }
@@ -2497,11 +2497,11 @@ void __fastcall UFG::VehicleSetup::buildVehicle(UFG::VehicleSetup *this, UFG::Ph
   v27 = (*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v26[11] + 8i64))(v26[11], 72i64);
   if ( v27 )
   {
-    *(_QWORD *)v27 = &hkBaseObject::`vftable';
-    *(_QWORD *)v27 = &hkReferencedObject::`vftable';
+    *(_QWORD *)v27 = &hkBaseObject::`vftable;
+    *(_QWORD *)v27 = &hkReferencedObject::`vftable;
     *(_DWORD *)(v27 + 8) = 0x1FFFF;
-    *(_QWORD *)v27 = &hkpVehicleSteering::`vftable';
-    *(_QWORD *)v27 = &UFG::Steering::`vftable';
+    *(_QWORD *)v27 = &hkpVehicleSteering::`vftable;
+    *(_QWORD *)v27 = &UFG::Steering::`vftable;
     *(_QWORD *)(v27 + 16) = 0i64;
     *(_DWORD *)(v27 + 24) = 0;
     *(_DWORD *)(v27 + 28) = 2147483648;
@@ -2543,7 +2543,7 @@ void __fastcall UFG::VehicleSetup::buildVehicle(UFG::VehicleSetup *this, UFG::Ph
   if ( v33 )
   {
     hkpVehicleDefaultEngine::hkpVehicleDefaultEngine(v33);
-    v34->vfptr = (hkBaseObjectVtbl *)&UFG::Engine::`vftable';
+    v34->vfptr = (hkBaseObjectVtbl *)&UFG::Engine::`vftable;
     *(_QWORD *)&v34[1].m_memSizeAndFlags = 0i64;
     v34[1].vfptr = 0i64;
     *(_QWORD *)&v34[1].m_minRPM = 0i64;
@@ -2586,7 +2586,7 @@ void __fastcall UFG::VehicleSetup::buildVehicle(UFG::VehicleSetup *this, UFG::Ph
   if ( v40 )
   {
     hkpVehicleDefaultTransmission::hkpVehicleDefaultTransmission(v40);
-    v41->vfptr = (hkBaseObjectVtbl *)&UFG::Transmission::`vftable';
+    v41->vfptr = (hkBaseObjectVtbl *)&UFG::Transmission::`vftable;
     v41[1].vfptr = 0i64;
     *(_DWORD *)&v41[1].m_memSizeAndFlags = 0;
     *(_DWORD *)(&v41[1].m_referenceCount + 1) = 2147483648;
@@ -2629,7 +2629,7 @@ void __fastcall UFG::VehicleSetup::buildVehicle(UFG::VehicleSetup *this, UFG::Ph
   if ( v47 )
   {
     hkpVehicleDefaultBrake::hkpVehicleDefaultBrake(v47);
-    v48->vfptr = (hkBaseObjectVtbl *)&UFG::Brakes::`vftable';
+    v48->vfptr = (hkBaseObjectVtbl *)&UFG::Brakes::`vftable;
     v48[1].vfptr = 0i64;
   }
   else
@@ -2662,14 +2662,14 @@ void __fastcall UFG::VehicleSetup::buildVehicle(UFG::VehicleSetup *this, UFG::Ph
   v54 = (*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v53[11] + 8i64))(v53[11], 48i64);
   if ( v54 )
   {
-    *(_QWORD *)v54 = &hkBaseObject::`vftable';
-    *(_QWORD *)v54 = &hkReferencedObject::`vftable';
+    *(_QWORD *)v54 = &hkBaseObject::`vftable;
+    *(_QWORD *)v54 = &hkReferencedObject::`vftable;
     *(_DWORD *)(v54 + 8) = 0x1FFFF;
-    *(_QWORD *)v54 = &hkpVehicleSuspension::`vftable';
+    *(_QWORD *)v54 = &hkpVehicleSuspension::`vftable;
     *(_QWORD *)(v54 + 16) = 0i64;
     *(_DWORD *)(v54 + 24) = 0;
     *(_DWORD *)(v54 + 28) = 2147483648;
-    *(_QWORD *)v54 = &hkpVehicleDefaultSuspension::`vftable';
+    *(_QWORD *)v54 = &hkpVehicleDefaultSuspension::`vftable;
     *(_QWORD *)(v54 + 32) = 0i64;
     *(_DWORD *)(v54 + 40) = 0;
     *(_DWORD *)(v54 + 44) = 2147483648;
@@ -2709,7 +2709,7 @@ void __fastcall UFG::VehicleSetup::buildVehicle(UFG::VehicleSetup *this, UFG::Ph
   {
     v62 = v81.mData;
     hkpVehicleDefaultAerodynamics::hkpVehicleDefaultAerodynamics(v60);
-    v61->m128_u64[0] = (unsigned __int64)&UFG::VehicleAerodynamics::`vftable';
+    v61->m128_u64[0] = (unsigned __int64)&UFG::VehicleAerodynamics::`vftable;
     v61[3].m128_i32[0] = 0;
     v61[3].m128_i32[1] = 1065353216;
     v61[2] = _mm_unpacklo_ps(
@@ -2830,11 +2830,11 @@ void __fastcall UFG::VehicleSetup::buildVehicle(UFG::VehicleSetup *this, UFG::Ph
   v75 = (*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v74[11] + 8i64))(v74[11], 32i64);
   if ( v75 )
   {
-    *(_QWORD *)v75 = &hkBaseObject::`vftable';
-    *(_QWORD *)v75 = &hkReferencedObject::`vftable';
+    *(_QWORD *)v75 = &hkBaseObject::`vftable;
+    *(_QWORD *)v75 = &hkReferencedObject::`vftable;
     *(_DWORD *)(v75 + 8) = 0x1FFFF;
-    *(_QWORD *)v75 = &hkpVehicleDriverInputStatus::`vftable';
-    *(_QWORD *)v75 = &hkpVehicleDriverInputAnalogStatus::`vftable';
+    *(_QWORD *)v75 = &hkpVehicleDriverInputStatus::`vftable;
+    *(_QWORD *)v75 = &hkpVehicleDriverInputAnalogStatus::`vftable;
   }
   else
   {
@@ -3219,7 +3219,7 @@ void __fastcall UFG::VehicleAction::VehicleAction(UFG::VehicleAction *this, UFG:
   v2 = vehicle;
   v3 = this;
   hkpUnaryAction::hkpUnaryAction((hkpUnaryAction *)&this->vfptr, (hkpEntity *)&vehicle->mRigidBody->mBody->vfptr, 0i64);
-  v3->vfptr = (hkBaseObjectVtbl *)&UFG::VehicleAction::`vftable';
+  v3->vfptr = (hkBaseObjectVtbl *)&UFG::VehicleAction::`vftable;
   v3->mVehicle = v2;
   v3->mFlatTireDistance = 0.0;
 }
@@ -4243,7 +4243,7 @@ void __usercall UFG::PhysicsWheeledVehicle::PhysicsWheeledVehicle(UFG::PhysicsWh
   v47 = -2i64;
   v6 = this;
   UFG::PhysicsVehicle::PhysicsVehicle((UFG::PhysicsVehicle *)&this->vfptr, param, transform, velocity, a5);
-  v6->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::PhysicsWheeledVehicle::`vftable';
+  v6->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::PhysicsWheeledVehicle::`vftable;
   v7 = 0i64;
   v6->mWheelCollider = 0i64;
   v6->mHavokVehicle = 0i64;
@@ -4380,7 +4380,7 @@ void __fastcall UFG::PhysicsWheeledVehicle::~PhysicsWheeledVehicle(UFG::PhysicsW
   UFG::PhysicsWheeledVehicle *v1; // rbx
 
   v1 = this;
-  this->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::PhysicsWheeledVehicle::`vftable';
+  this->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::PhysicsWheeledVehicle::`vftable;
   UFG::PhysicsWheeledVehicle::DeleteWheeledVehicleComponents(this);
   UFG::PhysicsVehicle::~PhysicsVehicle((UFG::PhysicsVehicle *)&v1->vfptr);
 }
@@ -5521,7 +5521,7 @@ LABEL_38:
     HavokJobMemoryPoolTagger::onEndJob((HavokJobMemoryPoolTagger *)CustomHavokMemorySystem::mInstance, v13);
     v20 = v2->mParams;
     *(_DWORD *)&v38.m_memSizeAndFlags = 0x1FFFF;
-    v38.vfptr = (hkBaseObjectVtbl *)&UFG::VehicleSetup::`vftable';
+    v38.vfptr = (hkBaseObjectVtbl *)&UFG::VehicleSetup::`vftable;
     UFG::VehicleParams::VehicleParams(&v38.mParams, v20);
     v21 = ++*(_BYTE *)(v7 + 80);
     v22 = v21;
@@ -5605,7 +5605,7 @@ LABEL_38:
       while ( v5 < (*((_DWORD *)&v2->0 + 151) & 7u) );
     }
     UFG::VehicleParams::~VehicleParams(&v38.mParams);
-    v38.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+    v38.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
   }
 }
 

@@ -9,7 +9,7 @@ void __fastcall hkpPointToPathConstraintData::hkpPointToPathConstraintData(hkpPo
   v1 = this;
   this->m_userData = 0i64;
   v2 = &this->m_atoms.m_bridgeAtom;
-  *(_QWORD *)&v2[-1].m_type.m_storage = &hkpPointToPathConstraintData::`vftable';
+  *(_QWORD *)&v2[-1].m_type.m_storage = &hkpPointToPathConstraintData::`vftable;
   v2->m_type.m_storage = 1;
   v1->m_path = 0i64;
   v1->m_maxFrictionForce = 0.0;
@@ -33,11 +33,11 @@ void __fastcall hkpPointToPathConstraintData::~hkpPointToPathConstraintData(hkpP
   hkpParametricCurve *v2; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpPointToPathConstraintData::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpPointToPathConstraintData::`vftable;
   v2 = this->m_path;
   if ( v2 )
     hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 40

@@ -193,7 +193,7 @@ void __fastcall UFG::RenderStageFrameCapture::Render(UFG::RenderStageFrameCaptur
     Render::View::Draw(&v20, &poly, Render::gRenderUtilities.mMaterial, 0i64);
     Render::View::EndTarget(&v20);
     v23 = &ptr.mStateArgs;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       ptr.mStateArgs.mStateArgs,
       0x10ui64,
       128,

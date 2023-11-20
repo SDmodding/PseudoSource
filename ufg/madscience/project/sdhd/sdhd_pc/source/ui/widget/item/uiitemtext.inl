@@ -14,7 +14,7 @@ void __fastcall UFG::UIItemText::~UIItemText(UFG::UIItemText *this)
   UFG::qNode<UFG::UIItem,UFG::UIItem> *v10; // rax
 
   v1 = this;
-  this->vfptr = (UFG::UIItemVtbl *)&UFG::UIItemText::`vftable';
+  this->vfptr = (UFG::UIItemVtbl *)&UFG::UIItemText::`vftable;
   v2 = &this->m_options;
   v3 = (UFG::qString *)this->m_options.mNode.mNext;
   if ( v3 != (UFG::qString *)&this->m_options )
@@ -41,7 +41,7 @@ void __fastcall UFG::UIItemText::~UIItemText(UFG::UIItemText *this)
   v2->mNode.mPrev = &v2->mNode;
   v2->mNode.mNext = &v2->mNode;
   UFG::qString::~qString(&v1->m_text);
-  v1->vfptr = (UFG::UIItemVtbl *)&UFG::UIItem::`vftable';
+  v1->vfptr = (UFG::UIItemVtbl *)&UFG::UIItem::`vftable;
   v8 = (UFG::qNode<UFG::UIItem,UFG::UIItem> *)&v1->mPrev;
   v9 = v1->mPrev;
   v10 = v1->mNext;

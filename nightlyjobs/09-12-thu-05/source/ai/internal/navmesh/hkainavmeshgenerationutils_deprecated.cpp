@@ -733,7 +733,7 @@ __int64 __fastcall hkaiNavMeshGenerationUtils::_generateNavMeshDeprecated(hkaiNa
   dstGeom.m_vertices.m_size = 0;
   dstGeom.m_vertices.m_capacityAndFlags = 2147483648;
   dstGeom.m_triangles.m_data = 0i64;
-  dstGeom.vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable';
+  dstGeom.vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable;
   dstGeom.m_triangles.m_size = 0;
   dstGeom.m_triangles.m_capacityAndFlags = 2147483648;
   hkaiNavMeshGenerationUtils::safeCopyAndPruneByAabb(
@@ -2090,7 +2090,7 @@ LABEL_353:
     v215 = &carvers.m_data[v214];
     do
     {
-      hkRefPtr<hkaiVolume const>::`scalar deleting destructor'(v215);
+      hkRefPtr<hkaiVolume const>::`scalar deleting destructor(v215);
       --v215;
       --v214;
     }
@@ -2153,7 +2153,7 @@ LABEL_353:
     v215 = &carvers.m_data[v214];
     do
     {
-      hkRefPtr<hkaiVolume const>::`scalar deleting destructor'(v215);
+      hkRefPtr<hkaiVolume const>::`scalar deleting destructor(v215);
       --v215;
       --v214;
     }

@@ -763,7 +763,7 @@ void __usercall UFG::UIAmbientMapBlipManager::Init(UFG::UIAmbientMapBlipManager 
   if ( v3 )
   {
     v4 = &v3[-1].mIconTypeSetAsCollected;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v3,
       0x1Cui64,
       *(_DWORD *)&v3[-1].mIconTypeSetAsCollected,

@@ -9,7 +9,7 @@ __int64 UFG::_dynamic_initializer_for__gBSPInventory__()
     0x4F05B59Au,
     0,
     0);
-  UFG::gBSPInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::BSPInventory::`vftable';
+  UFG::gBSPInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::BSPInventory::`vftable;
   return atexit(UFG::_dynamic_atexit_destructor_for__gBSPInventory__);
 }
 
@@ -161,7 +161,7 @@ __int64 UFG::_dynamic_initializer_for__gBSPDebugDataInventory__()
     0xE2C5C78C,
     0,
     0);
-  UFG::gBSPDebugDataInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::BSPDebugDataInventory::`vftable';
+  UFG::gBSPDebugDataInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::BSPDebugDataInventory::`vftable;
   return atexit(UFG::_dynamic_atexit_destructor_for__gBSPDebugDataInventory__);
 }
 

@@ -74,7 +74,7 @@ hkaiPathfindingUtil::FindPathInput *__fastcall hkaiCharacterUtil::generatePathRe
   v12 = _mm_mul_ps(v4->m_up.m_quad, (__m128)xmmword_141A71390);
   v13 = _mm_add_epi32(
           _mm_xor_si128(
-            (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v12),
+            (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v12),
             _mm_cvttps_epi32(v12)),
           _mm_loadu_si128((const __m128i *)hkPackedUnitVector_m_offset));
   v11->m_searchParameters.m_up.m_vec[0] = _mm_extract_epi16(v13, 1);
@@ -132,7 +132,7 @@ hkaiVolumePathfindingUtil::FindPathInput *__fastcall hkaiCharacterUtil::generate
   v12 = _mm_mul_ps(v4->m_up.m_quad, (__m128)xmmword_141A71390);
   v13 = _mm_add_epi32(
           _mm_xor_si128(
-            (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v12),
+            (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v12),
             _mm_cvttps_epi32(v12)),
           _mm_loadu_si128((const __m128i *)hkPackedUnitVector_m_offset));
   v11->m_searchParameters.m_up.m_vec[0] = _mm_extract_epi16(v13, 1);
@@ -214,7 +214,7 @@ hkaiCharacterUtil::ProcessedPath *__fastcall hkaiCharacterUtil::processPathOutpu
         if ( v12 )
         {
           *(_DWORD *)(v12 + 8) = 0x1FFFF;
-          *(_QWORD *)v12 = &hkaiPath::`vftable';
+          *(_QWORD *)v12 = &hkaiPath::`vftable;
           *(_QWORD *)(v12 + 16) = 0i64;
           *(_DWORD *)(v12 + 24) = 0;
           *(_DWORD *)(v12 + 28) = 2147483648;
@@ -324,7 +324,7 @@ hkaiCharacterUtil::ProcessedPath *__fastcall hkaiCharacterUtil::processPathOutpu
         if ( v9 )
         {
           *(_DWORD *)(v9 + 8) = 0x1FFFF;
-          *(_QWORD *)v9 = &hkaiPath::`vftable';
+          *(_QWORD *)v9 = &hkaiPath::`vftable;
           *(_QWORD *)(v9 + 16) = 0i64;
           *(_DWORD *)(v9 + 24) = 0;
           *(_DWORD *)(v9 + 28) = 2147483648;

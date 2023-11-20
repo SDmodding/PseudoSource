@@ -582,7 +582,7 @@ void __fastcall hkaiStringPulling::hkaiStringPulling(hkaiStringPulling *this, hk
   v12 = startFaceKey;
   v13 = accessor;
   v14 = 1;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiStringPulling::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiStringPulling::`vftable;
   if ( radius != 0.0 )
     v14 = 0;
   this->m_radiusIsZero = v14;

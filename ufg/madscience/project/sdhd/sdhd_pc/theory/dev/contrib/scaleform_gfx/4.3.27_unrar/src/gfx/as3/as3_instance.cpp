@@ -7,7 +7,7 @@ void __fastcall Scaleform::GFx::AS3::InstanceTraits::Traits::~Traits(Scaleform::
   unsigned int v3; // eax
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::Traits::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::Traits::`vftable;
   v2 = this->Ns.pObject;
   if ( v2 )
   {
@@ -51,7 +51,7 @@ void __fastcall Scaleform::GFx::AS3::InstanceTraits::Traits::MakeObject(Scalefor
   if ( v5 )
   {
     Scaleform::GFx::AS3::Instance::Instance(v5, v3);
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Object::`vftable';
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Object::`vftable;
   }
   else
   {
@@ -164,12 +164,12 @@ void __fastcall Scaleform::GFx::AS3::InstanceTraits::Anonimous::Anonimous(Scalef
     (Scaleform::GFx::AS3::InstanceTraits::CTraits *)&this->vfptr,
     vm,
     &Scaleform::GFx::AS3::InstanceTraits::Anonimous::CInfo);
-  v3->pObject = (Scaleform::GFx::AS3::Instances::fl::XMLList *)&Scaleform::GFx::AS3::InstanceTraits::Prototype::`vftable';
+  v3->pObject = (Scaleform::GFx::AS3::Instances::fl::XMLList *)&Scaleform::GFx::AS3::InstanceTraits::Prototype::`vftable;
   v4 = (Scaleform::GFx::AS3::Instances::fl::XMLList **)v2->TraitsObject.pObject->ITraits.pObject;
   if ( !v4[17] )
     ((void (__fastcall *)(Scaleform::GFx::AS3::Instances::fl::XMLList **))(*v4)->List.Data.Data)(v4);
   Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_geom::Vector3D>::SetPtr(v3 + 17, v4[17]);
-  v3->pObject = (Scaleform::GFx::AS3::Instances::fl::XMLList *)&Scaleform::GFx::AS3::InstanceTraits::Anonimous::`vftable';
+  v3->pObject = (Scaleform::GFx::AS3::Instances::fl::XMLList *)&Scaleform::GFx::AS3::InstanceTraits::Anonimous::`vftable;
 }
 
 // File Line: 154
@@ -186,12 +186,12 @@ void __fastcall Scaleform::GFx::AS3::InstanceTraits::Void::Void(Scaleform::GFx::
     (Scaleform::GFx::AS3::InstanceTraits::CTraits *)&this->vfptr,
     vm,
     &Scaleform::GFx::AS3::InstanceTraits::Void::CInfo);
-  v3->pObject = (Scaleform::GFx::AS3::Instances::fl::XMLList *)&Scaleform::GFx::AS3::InstanceTraits::Prototype::`vftable';
+  v3->pObject = (Scaleform::GFx::AS3::Instances::fl::XMLList *)&Scaleform::GFx::AS3::InstanceTraits::Prototype::`vftable;
   v4 = (Scaleform::GFx::AS3::Instances::fl::XMLList **)v2->TraitsObject.pObject->ITraits.pObject;
   if ( !v4[17] )
     ((void (__fastcall *)(Scaleform::GFx::AS3::Instances::fl::XMLList **))(*v4)->List.Data.Data)(v4);
   Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_geom::Vector3D>::SetPtr(v3 + 17, v4[17]);
-  v3->pObject = (Scaleform::GFx::AS3::Instances::fl::XMLList *)&Scaleform::GFx::AS3::InstanceTraits::Void::`vftable';
+  v3->pObject = (Scaleform::GFx::AS3::Instances::fl::XMLList *)&Scaleform::GFx::AS3::InstanceTraits::Void::`vftable;
 }
 
 // File Line: 162
@@ -244,9 +244,9 @@ void __fastcall Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(Scaleform:
     v10 = (Scaleform::GFx::AS3::Traits *)&v9->ITraits.pObject->vfptr;
   v11 = Scaleform::GFx::AS3::VM::MakeInternedNamespace(v4, &result, 0, v3->Type->PkgName)->pV;
   Scaleform::GFx::AS3::Traits::Traits((Scaleform::GFx::AS3::Traits *)&v5->vfptr, v4, v10, v7, isFinal);
-  v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::Traits::`vftable';
+  v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::Traits::`vftable;
   v5->Ns.pObject = v11;
-  v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::CTraits::`vftable';
+  v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::CTraits::`vftable;
   v5->CI = v3;
   v12 = (Scaleform::GFx::AS3::Instances::fl::Namespace *)&v5->ImplementsInterfaces;
   result.pV = v12;
@@ -394,9 +394,9 @@ void __fastcall Scaleform::GFx::AS3::InstanceTraits::CTraits::~CTraits(Scaleform
   unsigned int v3; // eax
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::CTraits::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::CTraits::`vftable;
   Scaleform::ArrayData<Scaleform::GFx::AS3::Multiname,Scaleform::AllocatorLH<Scaleform::GFx::AS3::Multiname,2>,Scaleform::ArrayDefaultPolicy>::~ArrayData<Scaleform::GFx::AS3::Multiname,Scaleform::AllocatorLH<Scaleform::GFx::AS3::Multiname,2>,Scaleform::ArrayDefaultPolicy>(&this->ImplementsInterfaces.Data);
-  v1->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::Traits::`vftable';
+  v1->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::Traits::`vftable;
   v2 = v1->Ns.pObject;
   if ( v2 )
   {
@@ -652,9 +652,9 @@ void __fastcall Scaleform::GFx::AS3::InstanceTraits::RTraits::RTraits(Scaleform:
     (Scaleform::GFx::AS3::Traits *)&pt->vfptr,
     isDynamic,
     isFinal);
-  v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::Traits::`vftable';
+  v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::Traits::`vftable;
   v8->Ns.pObject = v10;
-  v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::RTraits::`vftable';
+  v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::RTraits::`vftable;
   v9 = v7->pNode;
   v8->Name = (Scaleform::GFx::ASString)v7->pNode;
   ++v9->RefCount;
@@ -671,12 +671,12 @@ void __fastcall Scaleform::GFx::AS3::InstanceTraits::RTraits::~RTraits(Scaleform
   unsigned int v5; // eax
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::RTraits::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::RTraits::`vftable;
   v2 = this->Name.pNode;
   v3 = v2->RefCount-- == 1;
   if ( v3 )
     Scaleform::GFx::ASStringNode::ReleaseNode(v2);
-  v1->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::Traits::`vftable';
+  v1->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::Traits::`vftable;
   v4 = v1->Ns.pObject;
   if ( v4 )
   {
@@ -748,15 +748,15 @@ void __fastcall Scaleform::GFx::AS3::Instance::Instance(Scaleform::GFx::AS3::Ins
   Scaleform::GFx::AS3::ASRefCountCollector *v2; // r8
 
   v2 = t->pVM->GC.GC;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::RefCountBaseGC<328>::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::RefCountBaseGC<328>::`vftable;
   this->RefCount = 1;
   this->pRCCRaw = (unsigned __int64)v2;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::GASRefCountBase::`vftable';
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Object::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::GASRefCountBase::`vftable;
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Object::`vftable;
   this->pTraits.pObject = (Scaleform::GFx::AS3::Traits *)&t->vfptr;
   t->RefCount = (t->RefCount + 1) & 0x8FBFFFFF;
   this->DynAttrs.mHash.pTable = 0i64;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instance::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instance::`vftable;
   Scaleform::GFx::AS3::Traits::ConstructTail(
     (Scaleform::GFx::AS3::Traits *)&t->vfptr,
     (Scaleform::GFx::AS3::Object *)&this->vfptr);
@@ -769,7 +769,7 @@ void __fastcall Scaleform::GFx::AS3::Instance::~Instance(Scaleform::GFx::AS3::In
   Scaleform::GFx::AS3::Instance *v1; // rbx
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instance::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instance::`vftable;
   Scaleform::GFx::AS3::Traits::DestructTail(
     (Scaleform::GFx::AS3::Traits *)((_QWORD)this->pTraits.pObject & 0xFFFFFFFFFFFFFFFEui64),
     (Scaleform::GFx::AS3::Object *)&this->vfptr);

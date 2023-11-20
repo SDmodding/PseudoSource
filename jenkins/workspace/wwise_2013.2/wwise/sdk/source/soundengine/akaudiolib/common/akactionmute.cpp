@@ -166,7 +166,7 @@ CAkActionMute *__fastcall CAkActionMute::Create(AkActionType in_eActionType, uns
   if ( result )
   {
     CAkActionSetValue::CAkActionSetValue((CAkActionSetValue *)&result->vfptr, v2, v3);
-    v5->vfptr = (CAkIndexableVtbl *)&CAkActionMute::`vftable';
+    v5->vfptr = (CAkIndexableVtbl *)&CAkActionMute::`vftable;
     CAkAction::AddToIndex((CAkAction *)&v5->vfptr);
     result = v5;
   }

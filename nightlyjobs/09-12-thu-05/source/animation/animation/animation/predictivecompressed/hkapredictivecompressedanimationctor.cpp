@@ -318,7 +318,7 @@ void __fastcall hkaPredictiveCompressedAnimation::hkaPredictiveCompressedAnimati
   v4 = skeleton;
   v5 = this;
   hkaAnimation::hkaAnimation((hkaAnimation *)&this->vfptr, binding->m_animation.m_pntr);
-  v5->vfptr = (hkBaseObjectVtbl *)&hkaPredictiveCompressedAnimation::`vftable';
+  v5->vfptr = (hkBaseObjectVtbl *)&hkaPredictiveCompressedAnimation::`vftable;
   v5->m_compressedData.m_capacityAndFlags = 2147483648;
   v5->m_compressedData.m_data = 0i64;
   v5->m_compressedData.m_size = 0;
@@ -347,7 +347,7 @@ void __fastcall hkaPredictiveCompressedAnimation::hkaPredictiveCompressedAnimati
   v6 = skeleton;
   v7 = this;
   hkaAnimation::hkaAnimation((hkaAnimation *)&this->vfptr, binding->m_animation.m_pntr);
-  v7->vfptr = (hkBaseObjectVtbl *)&hkaPredictiveCompressedAnimation::`vftable';
+  v7->vfptr = (hkBaseObjectVtbl *)&hkaPredictiveCompressedAnimation::`vftable;
   v7->m_compressedData.m_capacityAndFlags = 2147483648;
   v7->m_compressedData.m_data = 0i64;
   v7->m_compressedData.m_size = 0;
@@ -364,7 +364,7 @@ void __fastcall hkaPredictiveCompressedAnimation::hkaPredictiveCompressedAnimati
 // RVA: 0xB36670
 void __fastcall hkaPredictiveCompressedAnimation::hkaPredictiveCompressedAnimation(hkaPredictiveCompressedAnimation *this, hkFinishLoadedObjectFlag flag)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkaPredictiveCompressedAnimation::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaPredictiveCompressedAnimation::`vftable;
   if ( flag.m_finishing )
     hkaPredictiveCompressedAnimation::computeMaxCompressedBytesPerFrame(this);
 }

@@ -285,7 +285,7 @@ __int64 Illusion::_dynamic_initializer_for__gAlphaStateInventory__()
     0x1BCFF4D5u,
     0,
     0);
-  Illusion::gAlphaStateInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Illusion::AlphaStateInventory::`vftable';
+  Illusion::gAlphaStateInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Illusion::AlphaStateInventory::`vftable;
   return atexit(Illusion::_dynamic_atexit_destructor_for__gAlphaStateInventory__);
 }
 
@@ -350,7 +350,7 @@ __int64 Illusion::_dynamic_initializer_for__gRasterStateInventory__()
     0xB27A4B38,
     0,
     0);
-  Illusion::gRasterStateInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Illusion::RasterStateInventory::`vftable';
+  Illusion::gRasterStateInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Illusion::RasterStateInventory::`vftable;
   return atexit(Illusion::_dynamic_atexit_destructor_for__gRasterStateInventory__);
 }
 

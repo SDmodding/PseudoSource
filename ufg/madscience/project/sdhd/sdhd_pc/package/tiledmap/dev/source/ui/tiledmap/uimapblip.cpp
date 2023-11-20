@@ -14,7 +14,7 @@ void __fastcall UFG::UIMapBlip::~UIMapBlip(UFG::UIMapBlip *this)
   {
     v3 = (void **)&v1->mPolys[1];
     v4 = 4i64;
-    v1->vfptr = (UFG::UIMapBlipGraphicVtbl *)&UFG::UIMapBlipGraphic::`vftable';
+    v1->vfptr = (UFG::UIMapBlipGraphicVtbl *)&UFG::UIMapBlipGraphic::`vftable;
     do
     {
       if ( *v3 )
@@ -459,7 +459,7 @@ void __usercall UFG::UIMapBlip::SetType(UFG::UIMapBlip *this@<rcx>, UFG::UIHKMin
         v3->mBoundIcon = 0;
       v4 = v3->mNativeIcon;
       if ( v4 )
-        UFG::UIMapBlipGraphic::`scalar deleting destructor'(v4, 1);
+        UFG::UIMapBlipGraphic::`scalar deleting destructor(v4, 1);
       v5 = UFG::UIMapBlipGraphicFactory::GetNativeIconInstance(
              &UFG::UIMapBlipGraphicFactory::Singleton,
              &v3->mType->Icon);

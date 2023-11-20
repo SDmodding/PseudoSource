@@ -36,7 +36,7 @@ hkGeometry *__fastcall hkpShapeConverter::toSingleGeometry(hkpShape *shape)
   if ( v3 )
   {
     *(_DWORD *)(v3 + 8) = 0x1FFFF;
-    *(_QWORD *)v3 = &hkGeometry::`vftable';
+    *(_QWORD *)v3 = &hkGeometry::`vftable;
     *(_QWORD *)(v3 + 16) = 0i64;
     *(_DWORD *)(v3 + 24) = 0;
     *(_DWORD *)(v3 + 28) = 2147483648;
@@ -99,7 +99,7 @@ hkGeometry *__fastcall hkpShapeConverter::toSingleGeometry(hkpShape *shape)
     v4 = 0i64;
   }
   displayGeometries.m_size = 0;
-  v16.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v16.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
   if ( displayGeometries.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
       (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
@@ -135,7 +135,7 @@ hkGeometry *__fastcall hkpShapeConverter::clone(hkGeometry *geom)
   if ( v3 )
   {
     *(_DWORD *)(v3 + 8) = 0x1FFFF;
-    *(_QWORD *)v3 = &hkGeometry::`vftable';
+    *(_QWORD *)v3 = &hkGeometry::`vftable;
     *(_DWORD *)(v3 + 28) = 2147483648;
     *(_QWORD *)(v3 + 16) = 0i64;
     *(_DWORD *)(v3 + 24) = 0;

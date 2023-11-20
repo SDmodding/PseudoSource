@@ -31,7 +31,7 @@ hkClass *__fastcall hkaiVaultAnalyzer::staticClass()
 void __fastcall finishLoadedObjecthkaiVaultAnalyzer(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiVaultAnalyzer::`vftable';
+    *(_QWORD *)p = &hkaiVaultAnalyzer::`vftable;
 }
 
 // File Line: 75
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkaiVaultAnalyzer(void *p)
 // RVA: 0xC32620
 void **__fastcall getVtablehkaiVaultAnalyzer()
 {
-  return &hkaiVaultAnalyzer::`vftable';
+  return &hkaiVaultAnalyzer::`vftable;
 }
 
 // File Line: 101

@@ -52,7 +52,7 @@ void __fastcall UFG::TurfCameraComponent::TurfCameraComponent(UFG::TurfCameraCom
   v5 = (UFG::qNode<UFG::TurfCameraComponent,UFG::TurfCameraComponent> *)&v4->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TurfCameraComponent::`vftable';
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TurfCameraComponent::`vftable;
   v4->mCameraMarkerName.mUID = -1;
   *(_QWORD *)&v4->mPOV = 0i64;
   *(_QWORD *)&v4->mPitch = 0i64;
@@ -141,7 +141,7 @@ void __fastcall UFG::TurfCameraComponent::~TurfCameraComponent(UFG::TurfCameraCo
   UFG::qNode<UFG::TurfCameraComponent,UFG::TurfCameraComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TurfCameraComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TurfCameraComponent::`vftable;
   --UFG::TurfCameraComponent::mInstanceCount;
   if ( this == UFG::TurfCameraComponent::s_TurfCameraComponentpCurrentIterator )
     UFG::TurfCameraComponent::s_TurfCameraComponentpCurrentIterator = (UFG::TurfCameraComponent *)&this->mPrev[-47];
@@ -249,8 +249,8 @@ void __fastcall UFG::TurfCameraComponent::Update(UFG::TurfCameraComponent *this,
       v5 = (UFG::CameraMarker *)_RTDynamicCast(
                                   v4,
                                   0,
-                                  &UFG::MarkerBase `RTTI Type Descriptor',
-                                  &UFG::CameraMarker `RTTI Type Descriptor',
+                                  &UFG::MarkerBase `RTTI Type Descriptor,
+                                  &UFG::CameraMarker `RTTI Type Descriptor,
                                   0);
       if ( v5 )
       {

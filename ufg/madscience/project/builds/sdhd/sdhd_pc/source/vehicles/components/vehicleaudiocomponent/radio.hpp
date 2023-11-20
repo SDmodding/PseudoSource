@@ -6,7 +6,7 @@ void __fastcall UFG::RadioStationAsset::~RadioStationAsset(UFG::RadioStationAsse
   UFG::qNode<UFG::RadioStationAsset,UFG::RadioStationAsset> *v2; // rcx
   UFG::qNode<UFG::RadioStationAsset,UFG::RadioStationAsset> *v3; // rax
 
-  this->vfptr = (UFG::RadioStationAssetVtbl *)&UFG::RadioStationAsset::`vftable';
+  this->vfptr = (UFG::RadioStationAssetVtbl *)&UFG::RadioStationAsset::`vftable;
   v1 = (UFG::qNode<UFG::RadioStationAsset,UFG::RadioStationAsset> *)&this->mPrev;
   v2 = this->mPrev;
   v3 = v1->mNext;
@@ -28,7 +28,7 @@ void __fastcall UFG::TrackAsset::~TrackAsset(UFG::TrackAsset *this)
   UFG::qNode<UFG::RadioStationAsset,UFG::RadioStationAsset> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::RadioStationAssetVtbl *)&UFG::TrackAsset::`vftable';
+  this->vfptr = (UFG::RadioStationAssetVtbl *)&UFG::TrackAsset::`vftable;
   v2 = this->m_trackName;
   if ( v2 )
   {
@@ -41,7 +41,7 @@ void __fastcall UFG::TrackAsset::~TrackAsset(UFG::TrackAsset *this)
     operator delete[](v3);
     v1->m_artistName = 0i64;
   }
-  v1->vfptr = (UFG::RadioStationAssetVtbl *)&UFG::RadioStationAsset::`vftable';
+  v1->vfptr = (UFG::RadioStationAssetVtbl *)&UFG::RadioStationAsset::`vftable;
   v4 = (UFG::qNode<UFG::RadioStationAsset,UFG::RadioStationAsset> *)&v1->mPrev;
   v5 = v1->mPrev;
   v6 = v1->mNext;
@@ -90,7 +90,7 @@ void __fastcall UFG::Radio::~Radio(UFG::Radio *this)
   UFG::AudioEvent *v2; // rcx
 
   v1 = this;
-  this->vfptr = (UFG::AudioEntityVtbl *)&UFG::Radio::`vftable';
+  this->vfptr = (UFG::AudioEntityVtbl *)&UFG::Radio::`vftable;
   v2 = this->m_ecRadio.m_pEvent;
   if ( v2 )
     UFG::AudioEvent::OnControllerDestroy(v2);

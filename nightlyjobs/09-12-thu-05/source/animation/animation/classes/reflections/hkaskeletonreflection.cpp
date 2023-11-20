@@ -126,7 +126,7 @@ void __fastcall finishLoadedObjecthkaSkeleton(void *p, int finishing)
   if ( p )
   {
     v2 = (hkStringPtr *)((char *)p + 16);
-    v2[-2].m_stringAndFlag = (const char *)&hkaSkeleton::`vftable';
+    v2[-2].m_stringAndFlag = (const char *)&hkaSkeleton::`vftable;
     hkStringPtr::hkStringPtr(v2, (hkFinishLoadedObjectFlag)finishing);
   }
 }
@@ -145,7 +145,7 @@ void **__fastcall getVtablehkaSkeleton()
   hkStringPtr v1; // [rsp+30h] [rbp-88h]
 
   hkStringPtr::hkStringPtr(&v1, 0);
-  return &hkaSkeleton::`vftable';
+  return &hkaSkeleton::`vftable;
 }
 
 // File Line: 214

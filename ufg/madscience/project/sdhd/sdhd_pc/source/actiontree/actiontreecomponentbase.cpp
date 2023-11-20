@@ -91,7 +91,7 @@ void __fastcall UFG::ActionTreeComponentBase::ActionTreeComponentBase(UFG::Actio
   UFG::qTreeRB64<UFG::ActionTreeComponentBase::ActionTreeMemoryData,UFG::ActionTreeComponentBase::ActionTreeMemoryData,1> *v5; // [rsp+30h] [rbp+18h]
 
   v2 = this;
-  this->vfptr = (UFG::ActionTreeComponentBaseVtbl *)&UFG::ActionTreeComponentBase::`vftable';
+  this->vfptr = (UFG::ActionTreeComponentBaseVtbl *)&UFG::ActionTreeComponentBase::`vftable;
   v5 = &this->mActionTreeMemoryDataStructs;
   *(_OWORD *)&v5->mTree.mRoot.mParent = 0ui64;
   v5->mTree.mRoot.mChild[1] = 0i64;
@@ -124,7 +124,7 @@ void __fastcall UFG::ActionTreeComponentBase::~ActionTreeComponentBase(UFG::Acti
   UFG::ActionTreeComponentBase *v1; // rbx
 
   v1 = this;
-  this->vfptr = (UFG::ActionTreeComponentBaseVtbl *)&UFG::ActionTreeComponentBase::`vftable';
+  this->vfptr = (UFG::ActionTreeComponentBaseVtbl *)&UFG::ActionTreeComponentBase::`vftable;
   UFG::ActionTreeComponentBase::ResetMemory(this);
   UFG::qTreeRB64<UFG::ActionTreeComponentBase::ActionTreeMemoryData,UFG::ActionTreeComponentBase::ActionTreeMemoryData,1>::~qTreeRB64<UFG::ActionTreeComponentBase::ActionTreeMemoryData,UFG::ActionTreeComponentBase::ActionTreeMemoryData,1>(&v1->mActionTreeMemoryDataStructs);
 }
@@ -1099,7 +1099,7 @@ void __fastcall UFG::ActionTreeComponentBase::ActionTreeMemoryData::~ActionTreeM
   if ( v8 )
   {
     v9 = &v8[-1].m_pPointer;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v8,
       0x18ui64,
       (int)v8[-1].m_pPointer,
@@ -1112,7 +1112,7 @@ void __fastcall UFG::ActionTreeComponentBase::ActionTreeMemoryData::~ActionTreeM
   if ( v10 )
   {
     v11 = &v10[-1].m_pPointer;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v10,
       0x18ui64,
       (int)v10[-1].m_pPointer,
@@ -1125,7 +1125,7 @@ void __fastcall UFG::ActionTreeComponentBase::ActionTreeMemoryData::~ActionTreeM
   if ( v12 )
   {
     v13 = &v12[-1].m_pPointer;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v12,
       0x18ui64,
       (int)v12[-1].m_pPointer,
@@ -1138,7 +1138,7 @@ void __fastcall UFG::ActionTreeComponentBase::ActionTreeMemoryData::~ActionTreeM
   if ( v14 )
   {
     v15 = &v14[-1].m_pPointer;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v14,
       0x18ui64,
       (int)v14[-1].m_pPointer,
@@ -1151,7 +1151,7 @@ void __fastcall UFG::ActionTreeComponentBase::ActionTreeMemoryData::~ActionTreeM
   if ( v16 )
   {
     v17 = &v16[-1].m_pPointer;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v16,
       0x18ui64,
       (int)v16[-1].m_pPointer,
@@ -1164,7 +1164,7 @@ void __fastcall UFG::ActionTreeComponentBase::ActionTreeMemoryData::~ActionTreeM
   if ( v18 )
   {
     v19 = &v18[-1].m_pPointer;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v18,
       0x18ui64,
       (int)v18[-1].m_pPointer,
@@ -1177,7 +1177,7 @@ void __fastcall UFG::ActionTreeComponentBase::ActionTreeMemoryData::~ActionTreeM
   if ( v20 )
   {
     v21 = &v20[-1].m_pPointer;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v20,
       0x18ui64,
       (int)v20[-1].m_pPointer,
@@ -1190,7 +1190,7 @@ void __fastcall UFG::ActionTreeComponentBase::ActionTreeMemoryData::~ActionTreeM
   if ( v22 )
   {
     v23 = &v22[-1].m_pPointer;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v22,
       0x18ui64,
       (int)v22[-1].m_pPointer,
@@ -1203,7 +1203,7 @@ void __fastcall UFG::ActionTreeComponentBase::ActionTreeMemoryData::~ActionTreeM
   if ( v24 )
   {
     v25 = &v24[-1].m_pPointer;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v24,
       0x18ui64,
       (int)v24[-1].m_pPointer,
@@ -1216,7 +1216,7 @@ void __fastcall UFG::ActionTreeComponentBase::ActionTreeMemoryData::~ActionTreeM
   if ( v26 )
   {
     v27 = &v26[-1].m_pPointer;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v26,
       0x18ui64,
       (int)v26[-1].m_pPointer,

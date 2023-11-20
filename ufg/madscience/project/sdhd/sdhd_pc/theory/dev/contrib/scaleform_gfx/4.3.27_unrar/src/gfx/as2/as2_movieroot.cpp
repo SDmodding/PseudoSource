@@ -15,7 +15,7 @@ void __fastcall Scaleform::GFx::AS2::MovieRoot::MovieRoot(Scaleform::GFx::AS2::M
   v6 = memContext;
   v7 = this;
   Scaleform::GFx::ASMovieRootBase::ASMovieRootBase((Scaleform::GFx::ASMovieRootBase *)&this->vfptr, pas);
-  v7->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS2::MovieRoot::`vftable';
+  v7->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS2::MovieRoot::`vftable;
   v7->TopNode.pObject = 0i64;
   if ( v4 )
     Scaleform::Render::RenderBuffer::AddRef(v4);
@@ -78,7 +78,7 @@ void __fastcall Scaleform::GFx::AS2::MovieRoot::~MovieRoot(Scaleform::GFx::AS2::
   Scaleform::Render::RenderBuffer *v7; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS2::MovieRoot::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS2::MovieRoot::`vftable;
   Scaleform::ArrayData<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,Scaleform::AllocatorLH<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,327>,Scaleform::ArrayDefaultPolicy>::~ArrayData<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,Scaleform::AllocatorLH<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,327>,Scaleform::ArrayDefaultPolicy>(&this->SpritesWithHitArea.Data);
   Scaleform::GFx::ASStringManager::ReleaseBuiltinArray(v1->BuiltinsMgr.pStringManager, v1->BuiltinsMgr.Builtins, 0x9Cu);
   Scaleform::GFx::AS2::MovieRoot::ActionQueueType::~ActionQueueType(&v1->ActionQueue);
@@ -100,7 +100,7 @@ void __fastcall Scaleform::GFx::AS2::MovieRoot::~MovieRoot(Scaleform::GFx::AS2::
     if ( v6 )
       Scaleform::Render::ContextImpl::Entry::destroyHelper(v5);
   }
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ASMovieRootBase::`vftable';
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ASMovieRootBase::`vftable;
   v7 = (Scaleform::Render::RenderBuffer *)v1->pASSupport.pObject;
   if ( v7 )
     Scaleform::RefCountImpl::Release(v7);
@@ -1292,7 +1292,7 @@ Scaleform::GFx::MovieDefRootNode *__fastcall Scaleform::GFx::AS2::MovieRoot::Cre
                                                  64i64);
   if ( !result )
     return 0i64;
-  result->vfptr = (Scaleform::GFx::MovieDefRootNodeVtbl *)&Scaleform::GFx::MovieDefRootNode::`vftable';
+  result->vfptr = (Scaleform::GFx::MovieDefRootNodeVtbl *)&Scaleform::GFx::MovieDefRootNode::`vftable;
   result->SpriteRefCount = 1;
   result->pDefImpl = v5;
   result->ImportFlag = v4;
@@ -1780,7 +1780,7 @@ LABEL_23:
     {
       Scaleform::String::String(&src, v5);
       v9 = 2;
-      *(_QWORD *)v27 = &Scaleform::GFx::LoadQueueEntry::`vftable';
+      *(_QWORD *)v27 = &Scaleform::GFx::LoadQueueEntry::`vftable;
       Scaleform::String::String((Scaleform::String *)(v27 + 24));
       *(_DWORD *)(v27 + 16) = 4;
       *(_DWORD *)(v27 + 20) = v4;
@@ -1788,7 +1788,7 @@ LABEL_23:
       Scaleform::String::operator=((Scaleform::String *)(v27 + 24), &src);
       *(_DWORD *)(v27 + 32) = -1;
       *(_WORD *)(v27 + 36) = 0;
-      *(_QWORD *)v27 = &Scaleform::GFx::AS2::GFxAS2LoadQueueEntry::`vftable';
+      *(_QWORD *)v27 = &Scaleform::GFx::AS2::GFxAS2LoadQueueEntry::`vftable;
       *(_QWORD *)(v27 + 48) = 0i64;
       *(_BYTE *)(v27 + 56) = 0;
       *(_BYTE *)(v27 + 88) = 0;
@@ -2173,7 +2173,7 @@ void __fastcall Scaleform::GFx::AS2::MovieRoot::AddVarLoadQueueEntry(Scaleform::
   {
     Scaleform::String::String(&src, v5);
     v8 = 1;
-    *(_QWORD *)v9 = &Scaleform::GFx::LoadQueueEntry::`vftable';
+    *(_QWORD *)v9 = &Scaleform::GFx::LoadQueueEntry::`vftable;
     Scaleform::String::String((Scaleform::String *)(v9 + 24));
     *(_DWORD *)(v9 + 16) = 4;
     *(_DWORD *)(v9 + 20) = v4;
@@ -2181,7 +2181,7 @@ void __fastcall Scaleform::GFx::AS2::MovieRoot::AddVarLoadQueueEntry(Scaleform::
     Scaleform::String::operator=((Scaleform::String *)(v9 + 24), &src);
     *(_DWORD *)(v9 + 32) = -1;
     *(_WORD *)(v9 + 36) = 0;
-    *(_QWORD *)v9 = &Scaleform::GFx::AS2::GFxAS2LoadQueueEntry::`vftable';
+    *(_QWORD *)v9 = &Scaleform::GFx::AS2::GFxAS2LoadQueueEntry::`vftable;
     *(_QWORD *)(v9 + 48) = 0i64;
     *(_BYTE *)(v9 + 56) = 0;
     *(_BYTE *)(v9 + 88) = 0;
@@ -2256,7 +2256,7 @@ void __fastcall Scaleform::GFx::AS2::MovieRoot::AddXmlLoadQueueEntry(Scaleform::
   {
     Scaleform::String::String(&src, v5);
     v9 = 1;
-    *(_QWORD *)v10 = &Scaleform::GFx::LoadQueueEntry::`vftable';
+    *(_QWORD *)v10 = &Scaleform::GFx::LoadQueueEntry::`vftable;
     Scaleform::String::String((Scaleform::String *)(v10 + 24));
     *(_DWORD *)(v10 + 16) = (src.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) == -12i64;
     *(_DWORD *)(v10 + 20) = method;
@@ -2264,7 +2264,7 @@ void __fastcall Scaleform::GFx::AS2::MovieRoot::AddXmlLoadQueueEntry(Scaleform::
     Scaleform::String::operator=((Scaleform::String *)(v10 + 24), &src);
     *(_DWORD *)(v10 + 32) = -1;
     *(_WORD *)(v10 + 36) = 0;
-    *(_QWORD *)v10 = &Scaleform::GFx::AS2::GFxAS2LoadQueueEntry::`vftable';
+    *(_QWORD *)v10 = &Scaleform::GFx::AS2::GFxAS2LoadQueueEntry::`vftable;
     *(_QWORD *)(v10 + 48) = 0i64;
     *(_BYTE *)(v10 + 56) = 0;
     *(_BYTE *)(v10 + 88) = 0;
@@ -5396,12 +5396,12 @@ LABEL_33:
   result.pNode = (Scaleform::GFx::ASStringNode *)v22;
   if ( v22 )
   {
-    *(_QWORD *)v22 = &Scaleform::GFx::MovieImpl::StickyVarNode::`vftable';
+    *(_QWORD *)v22 = &Scaleform::GFx::MovieImpl::StickyVarNode::`vftable;
     *((_QWORD *)v22 + 1) = v9;
     ++v9->RefCount;
     *((_QWORD *)v22 + 2) = 0i64;
     *((_BYTE *)v22 + 24) = v4 == 2;
-    *(_QWORD *)v22 = &Scaleform::GFx::AS2::MovieRoot::StickyVarNode::`vftable';
+    *(_QWORD *)v22 = &Scaleform::GFx::AS2::MovieRoot::StickyVarNode::`vftable;
     Scaleform::GFx::AS2::Value::Value((Scaleform::GFx::AS2::Value *)v22 + 1, v5, (__int64)v22);
   }
   else
@@ -6590,7 +6590,7 @@ void __fastcall Scaleform::GFx::AS2::GFxAS2LoadQueueEntryMT_LoadMovie::GFxAS2Loa
     (Scaleform::GFx::LoadQueueEntryMT *)&this->vfptr,
     pqueueEntry,
     pmovieRoot);
-  v4->vfptr = (Scaleform::GFx::LoadQueueEntryMTVtbl *)&Scaleform::GFx::AS2::GFxAS2LoadQueueEntryMT_LoadMovie::`vftable';
+  v4->vfptr = (Scaleform::GFx::LoadQueueEntryMTVtbl *)&Scaleform::GFx::AS2::GFxAS2LoadQueueEntryMT_LoadMovie::`vftable;
   v5 = 0i64;
   v4->pPreloadTask.pObject = 0i64;
   v4->pNewChar.pObject = 0i64;
@@ -7298,15 +7298,15 @@ void __fastcall Scaleform::GFx::AS2::GFxAS2LoadXMLTask::GFxAS2LoadXMLTask(Scalef
   v6 = level0Path;
   v7 = pls;
   v8 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::Task,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::Task::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::Task,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::Task::`vftable;
   this->ThisTaskId = 131073;
   this->CurrentState = 0;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS2::GFxAS2LoadXMLTask::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS2::GFxAS2LoadXMLTask::`vftable;
   if ( pls )
     Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)pls);
   v8->pLoadStates.pObject = v7;
@@ -7409,7 +7409,7 @@ void __fastcall Scaleform::GFx::AS2::GFxAS2LoadQueueEntryMT_LoadXML::GFxAS2LoadQ
     (Scaleform::GFx::LoadQueueEntryMT *)&this->vfptr,
     pqueueEntry,
     pmovieRoot->pMovieImpl);
-  v5->vfptr = (Scaleform::GFx::LoadQueueEntryMTVtbl *)&Scaleform::GFx::AS2::GFxAS2LoadQueueEntryMT_LoadXML::`vftable';
+  v5->vfptr = (Scaleform::GFx::LoadQueueEntryMTVtbl *)&Scaleform::GFx::AS2::GFxAS2LoadQueueEntryMT_LoadXML::`vftable;
   v6 = 0i64;
   v5->pTask.pObject = 0i64;
   v5->pLoadStates.pObject = 0i64;
@@ -7553,7 +7553,7 @@ void __fastcall Scaleform::GFx::AS2::ASRefCountCollector::ASRefCountCollector(Sc
 
   v1 = this;
   Scaleform::GFx::AS2::RefCountCollector<323>::RefCountCollector<323>((Scaleform::GFx::AS2::RefCountCollector<323> *)&this->vfptr);
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS2::ASRefCountCollector::`vftable';
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS2::ASRefCountCollector::`vftable;
   v1->FrameCnt = 0;
   *(_QWORD *)&v1->PeakRootCount = 0i64;
   *(_QWORD *)&v1->LastCollectedRoots = 0i64;

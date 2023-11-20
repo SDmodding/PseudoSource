@@ -31,7 +31,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::AudioEventProperty
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::AudioEventPropertyData,UFG::qReflectObject>::sInventory.vfptr,
     "UFG::AudioEventPropertyData",
     v0);
-  UFG::qReflectObjectType<UFG::AudioEventPropertyData,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::AudioEventPropertyData>::`vftable';
+  UFG::qReflectObjectType<UFG::AudioEventPropertyData,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::AudioEventPropertyData>::`vftable;
   UFG::qReflectInventory<UFG::AudioEventPropertyData>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::AudioEventPropertyData,UFG::qReflectObject>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -73,7 +73,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::AudioCategoryPrope
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::AudioCategoryPropertyData,UFG::qReflectObject>::sInventory.vfptr,
     "UFG::AudioCategoryPropertyData",
     v0);
-  UFG::qReflectObjectType<UFG::AudioCategoryPropertyData,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::AudioCategoryPropertyData>::`vftable';
+  UFG::qReflectObjectType<UFG::AudioCategoryPropertyData,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::AudioCategoryPropertyData>::`vftable;
   UFG::qReflectInventory<UFG::AudioCategoryPropertyData>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::AudioCategoryPropertyData,UFG::qReflectObject>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -108,7 +108,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::SoundEngineDeviceS
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::SoundEngineDeviceSettingsReflect,UFG::qReflectObject>::sInventory.vfptr,
     "UFG::SoundEngineDeviceSettingsReflect",
     v0);
-  UFG::qReflectObjectType<UFG::SoundEngineDeviceSettingsReflect,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::SoundEngineDeviceSettingsReflect>::`vftable';
+  UFG::qReflectObjectType<UFG::SoundEngineDeviceSettingsReflect,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::SoundEngineDeviceSettingsReflect>::`vftable;
   UFG::qReflectInventory<UFG::SoundEngineDeviceSettingsReflect>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::SoundEngineDeviceSettingsReflect,UFG::qReflectObject>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(

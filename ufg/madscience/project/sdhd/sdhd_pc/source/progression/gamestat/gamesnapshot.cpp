@@ -121,48 +121,48 @@ void __fastcall UFG::GameSnapshot::GameSnapshot(UFG::GameSnapshot *this)
   UFG::qString v117; // [rsp+48h] [rbp-28h]
 
   v1 = this;
-  `eh vector constructor iterator'(this, 0x10ui64, 30, (void (__fastcall *)(void *))UFG::PersistentData::Time::Time);
+  `eh vector constructor iterator(this, 0x10ui64, 30, (void (__fastcall *)(void *))UFG::PersistentData::Time::Time);
   v2 = (UFG::qSymbol *)v1->mIDs;
-  `eh vector constructor iterator'(v1->mIDs, 4ui64, 44, (void (__fastcall *)(void *))UFG::PersistentData::ID::ID);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(v1->mIDs, 4ui64, 44, (void (__fastcall *)(void *))UFG::PersistentData::ID::ID);
+  `eh vector constructor iterator(
     v1->mBools,
     1ui64,
     58,
     (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::Value);
   v3 = v1->mInts;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v1->mInts,
     4ui64,
     163,
     (void (__fastcall *)(void *))UFG::PersistentData::Float::Float);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v1->mUInt64s,
     8ui64,
     1,
     (void (__fastcall *)(void *))Scaleform::Ptr<Scaleform::Render::Texture>::Ptr<Scaleform::Render::Texture>);
   v4 = (signed __int64)v1->mFloats;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v1->mFloats,
     4ui64,
     139,
     (void (__fastcall *)(void *))UFG::PersistentData::Float::Float);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v1->mIntsRanged,
     8ui64,
     7,
     (void (__fastcall *)(void *))UFG::PersistentData::IntRanged::IntRanged);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v1->mFloatsRanged,
     8ui64,
     1,
     (void (__fastcall *)(void *))UFG::PersistentData::IntRanged::IntRanged);
   v5 = (UFG::qString *)v1->mStrings;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v1->mStrings,
     0x28ui64,
     25,
     (void (__fastcall *)(void *))UFG::PersistentData::String::String);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v1->mBinaries,
     0x10ui64,
     3,
@@ -2048,7 +2048,7 @@ void __fastcall UFG::GameSnapshot::Clone(UFG::GameSnapshot *this, UFG::GameSnaps
       if ( v36 )
       {
         v37 = (char *)&v36[-1].4;
-        `eh vector destructor iterator'(v36, 8ui64, v36[-1].mIntValue, (void (__fastcall *)(void *))_);
+        `eh vector destructor iterator(v36, 8ui64, v36[-1].mIntValue, (void (__fastcall *)(void *))_);
         operator delete[](v37);
       }
       v35->mValues.p = 0i64;
@@ -2057,7 +2057,7 @@ void __fastcall UFG::GameSnapshot::Clone(UFG::GameSnapshot *this, UFG::GameSnaps
       if ( v38 )
       {
         v39 = (char *)&v38[-1].4;
-        `eh vector destructor iterator'(v38, 8ui64, v38[-1].mIntValue, (void (__fastcall *)(void *))_);
+        `eh vector destructor iterator(v38, 8ui64, v38[-1].mIntValue, (void (__fastcall *)(void *))_);
         operator delete[](v39);
       }
       v35->mValues.p = 0i64;
@@ -2090,7 +2090,7 @@ void __fastcall UFG::GameSnapshot::Clone(UFG::GameSnapshot *this, UFG::GameSnaps
     if ( v44 )
     {
       v45 = (char *)&v44[-1].mIntValue;
-      `eh vector destructor iterator'(v44, 0x10ui64, v44[-1].mIntValue, (void (__fastcall *)(void *))_);
+      `eh vector destructor iterator(v44, 0x10ui64, v44[-1].mIntValue, (void (__fastcall *)(void *))_);
       operator delete[](v45);
     }
     v43->mValues.p = 0i64;
@@ -2099,7 +2099,7 @@ void __fastcall UFG::GameSnapshot::Clone(UFG::GameSnapshot *this, UFG::GameSnaps
     if ( v46 )
     {
       v47 = (char *)&v46[-1].mIntValue;
-      `eh vector destructor iterator'(v46, 0x10ui64, v46[-1].mIntValue, (void (__fastcall *)(void *))_);
+      `eh vector destructor iterator(v46, 0x10ui64, v46[-1].mIntValue, (void (__fastcall *)(void *))_);
       operator delete[](v47);
     }
     v43->mValues.p = 0i64;
@@ -2132,7 +2132,7 @@ void __fastcall UFG::GameSnapshot::Clone(UFG::GameSnapshot *this, UFG::GameSnaps
       if ( v54 )
       {
         v55 = (char *)&v54[-1].4;
-        `eh vector destructor iterator'(v54, 8ui64, v54[-1].mIntValue, (void (__fastcall *)(void *))_);
+        `eh vector destructor iterator(v54, 8ui64, v54[-1].mIntValue, (void (__fastcall *)(void *))_);
         operator delete[](v55);
       }
       v53->mValues.p = 0i64;
@@ -2141,7 +2141,7 @@ void __fastcall UFG::GameSnapshot::Clone(UFG::GameSnapshot *this, UFG::GameSnaps
       if ( v56 )
       {
         v57 = (char *)&v56[-1].4;
-        `eh vector destructor iterator'(v56, 8ui64, v56[-1].mIntValue, (void (__fastcall *)(void *))_);
+        `eh vector destructor iterator(v56, 8ui64, v56[-1].mIntValue, (void (__fastcall *)(void *))_);
         operator delete[](v57);
       }
       v53->mValues.p = 0i64;
@@ -2179,7 +2179,7 @@ void __fastcall UFG::GameSnapshot::Clone(UFG::GameSnapshot *this, UFG::GameSnaps
       if ( v64 )
       {
         v65 = &v64[-1].mBinary.mSize;
-        `eh vector destructor iterator'(v64, 0x18ui64, v64[-1].mBinary.mSize, (void (__fastcall *)(void *))_);
+        `eh vector destructor iterator(v64, 0x18ui64, v64[-1].mBinary.mSize, (void (__fastcall *)(void *))_);
         operator delete[](v65);
       }
       v63->mValues.p = 0i64;
@@ -2299,7 +2299,7 @@ void __fastcall UFG::GameSnapshot::~GameSnapshot(UFG::GameSnapshot *this)
       if ( v10 )
       {
         v11 = (char *)&v10[-1].4;
-        `eh vector destructor iterator'(v10, 8ui64, v10[-1].mIntValue, (void (__fastcall *)(void *))_);
+        `eh vector destructor iterator(v10, 8ui64, v10[-1].mIntValue, (void (__fastcall *)(void *))_);
         operator delete[](v11);
       }
       v9->mValues.p = 0i64;
@@ -2308,7 +2308,7 @@ void __fastcall UFG::GameSnapshot::~GameSnapshot(UFG::GameSnapshot *this)
       if ( v12 )
       {
         v13 = (char *)&v12[-1].4;
-        `eh vector destructor iterator'(v12, 8ui64, v12[-1].mIntValue, (void (__fastcall *)(void *))_);
+        `eh vector destructor iterator(v12, 8ui64, v12[-1].mIntValue, (void (__fastcall *)(void *))_);
         operator delete[](v13);
       }
       v9->mValues.p = 0i64;
@@ -2326,7 +2326,7 @@ void __fastcall UFG::GameSnapshot::~GameSnapshot(UFG::GameSnapshot *this)
     if ( v15 )
     {
       v16 = (char *)&v15[-1].mIntValue;
-      `eh vector destructor iterator'(v15, 0x10ui64, v15[-1].mIntValue, (void (__fastcall *)(void *))_);
+      `eh vector destructor iterator(v15, 0x10ui64, v15[-1].mIntValue, (void (__fastcall *)(void *))_);
       operator delete[](v16);
     }
     v14->mValues.p = 0i64;
@@ -2335,7 +2335,7 @@ void __fastcall UFG::GameSnapshot::~GameSnapshot(UFG::GameSnapshot *this)
     if ( v17 )
     {
       v18 = (char *)&v17[-1].mIntValue;
-      `eh vector destructor iterator'(v17, 0x10ui64, v17[-1].mIntValue, (void (__fastcall *)(void *))_);
+      `eh vector destructor iterator(v17, 0x10ui64, v17[-1].mIntValue, (void (__fastcall *)(void *))_);
       operator delete[](v18);
     }
     v14->mValues.p = 0i64;
@@ -2353,7 +2353,7 @@ void __fastcall UFG::GameSnapshot::~GameSnapshot(UFG::GameSnapshot *this)
       if ( v22 )
       {
         v23 = (char *)&v22[-1].4;
-        `eh vector destructor iterator'(v22, 8ui64, v22[-1].mIntValue, (void (__fastcall *)(void *))_);
+        `eh vector destructor iterator(v22, 8ui64, v22[-1].mIntValue, (void (__fastcall *)(void *))_);
         operator delete[](v23);
       }
       v21->mValues.p = 0i64;
@@ -2362,7 +2362,7 @@ void __fastcall UFG::GameSnapshot::~GameSnapshot(UFG::GameSnapshot *this)
       if ( v24 )
       {
         v25 = (char *)&v24[-1].4;
-        `eh vector destructor iterator'(v24, 8ui64, v24[-1].mIntValue, (void (__fastcall *)(void *))_);
+        `eh vector destructor iterator(v24, 8ui64, v24[-1].mIntValue, (void (__fastcall *)(void *))_);
         operator delete[](v25);
       }
       v21->mValues.p = 0i64;
@@ -2385,7 +2385,7 @@ void __fastcall UFG::GameSnapshot::~GameSnapshot(UFG::GameSnapshot *this)
       if ( v29 )
       {
         v30 = &v29[-1].mBinary.mSize;
-        `eh vector destructor iterator'(v29, 0x18ui64, v29[-1].mBinary.mSize, (void (__fastcall *)(void *))_);
+        `eh vector destructor iterator(v29, 0x18ui64, v29[-1].mBinary.mSize, (void (__fastcall *)(void *))_);
         operator delete[](v30);
       }
       v28->mValues.p = 0i64;
@@ -2411,20 +2411,20 @@ void __fastcall UFG::GameSnapshot::~GameSnapshot(UFG::GameSnapshot *this)
     }
     operator delete[](v31);
   }
-  `eh vector destructor iterator'(v1->mBinaries, 0x10ui64, 3, (void (__fastcall *)(void *))_);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(v1->mBinaries, 0x10ui64, 3, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(
     v1->mStrings,
     0x28ui64,
     25,
     (void (__fastcall *)(void *))UFG::PersistentData::String::~String);
-  `eh vector destructor iterator'(v1->mFloatsRanged, 8ui64, 1, (void (__fastcall *)(void *))_);
-  `eh vector destructor iterator'(v1->mIntsRanged, 8ui64, 7, (void (__fastcall *)(void *))_);
-  `eh vector destructor iterator'(v1->mFloats, 4ui64, 139, (void (__fastcall *)(void *))_);
-  `eh vector destructor iterator'(v1->mUInt64s, 8ui64, 1, (void (__fastcall *)(void *))_);
-  `eh vector destructor iterator'(v1->mInts, 4ui64, 163, (void (__fastcall *)(void *))_);
-  `eh vector destructor iterator'(v1->mBools, 1ui64, 58, (void (__fastcall *)(void *))_);
-  `eh vector destructor iterator'(v1->mIDs, 4ui64, 44, (void (__fastcall *)(void *))_);
-  `eh vector destructor iterator'(v1, 0x10ui64, 30, (void (__fastcall *)(void *))UFG::PersistentData::Time::~Time);
+  `eh vector destructor iterator(v1->mFloatsRanged, 8ui64, 1, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(v1->mIntsRanged, 8ui64, 7, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(v1->mFloats, 4ui64, 139, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(v1->mUInt64s, 8ui64, 1, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(v1->mInts, 4ui64, 163, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(v1->mBools, 1ui64, 58, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(v1->mIDs, 4ui64, 44, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(v1, 0x10ui64, 30, (void (__fastcall *)(void *))UFG::PersistentData::Time::~Time);
 }
 
 // File Line: 289
@@ -3969,7 +3969,7 @@ void __fastcall UFG::GameSnapshot::CommitByFilter(UFG::GameSnapshot *this, UFG::
         if ( v66 )
         {
           v67 = v66 - 4;
-          `eh vector destructor iterator'(v66, 8ui64, *((_DWORD *)v66 - 1), (void (__fastcall *)(void *))_);
+          `eh vector destructor iterator(v66, 8ui64, *((_DWORD *)v66 - 1), (void (__fastcall *)(void *))_);
           operator delete[](v67);
         }
         v65[1] = 0i64;
@@ -3978,7 +3978,7 @@ void __fastcall UFG::GameSnapshot::CommitByFilter(UFG::GameSnapshot *this, UFG::
         if ( v68 )
         {
           v69 = v68 - 4;
-          `eh vector destructor iterator'(v68, 8ui64, *((_DWORD *)v68 - 1), (void (__fastcall *)(void *))_);
+          `eh vector destructor iterator(v68, 8ui64, *((_DWORD *)v68 - 1), (void (__fastcall *)(void *))_);
           operator delete[](v69);
         }
         v65[1] = 0i64;
@@ -4016,7 +4016,7 @@ void __fastcall UFG::GameSnapshot::CommitByFilter(UFG::GameSnapshot *this, UFG::
       if ( v73 )
       {
         v74 = (char *)&v73[-1].mIntValue;
-        `eh vector destructor iterator'(v73, 0x10ui64, v73[-1].mIntValue, (void (__fastcall *)(void *))_);
+        `eh vector destructor iterator(v73, 0x10ui64, v73[-1].mIntValue, (void (__fastcall *)(void *))_);
         operator delete[](v74);
       }
       v72->mValues.p = 0i64;
@@ -4025,7 +4025,7 @@ void __fastcall UFG::GameSnapshot::CommitByFilter(UFG::GameSnapshot *this, UFG::
       if ( v75 )
       {
         v76 = (char *)&v75[-1].mIntValue;
-        `eh vector destructor iterator'(v75, 0x10ui64, v75[-1].mIntValue, (void (__fastcall *)(void *))_);
+        `eh vector destructor iterator(v75, 0x10ui64, v75[-1].mIntValue, (void (__fastcall *)(void *))_);
         operator delete[](v76);
       }
       v72->mValues.p = 0i64;
@@ -4063,7 +4063,7 @@ void __fastcall UFG::GameSnapshot::CommitByFilter(UFG::GameSnapshot *this, UFG::
         if ( v85 )
         {
           v86 = v85 - 4;
-          `eh vector destructor iterator'(v85, 8ui64, *((_DWORD *)v85 - 1), (void (__fastcall *)(void *))_);
+          `eh vector destructor iterator(v85, 8ui64, *((_DWORD *)v85 - 1), (void (__fastcall *)(void *))_);
           operator delete[](v86);
         }
         v84[1] = 0i64;
@@ -4072,7 +4072,7 @@ void __fastcall UFG::GameSnapshot::CommitByFilter(UFG::GameSnapshot *this, UFG::
         if ( v87 )
         {
           v88 = v87 - 4;
-          `eh vector destructor iterator'(v87, 8ui64, *((_DWORD *)v87 - 1), (void (__fastcall *)(void *))_);
+          `eh vector destructor iterator(v87, 8ui64, *((_DWORD *)v87 - 1), (void (__fastcall *)(void *))_);
           operator delete[](v88);
         }
         v84[1] = 0i64;
@@ -4115,7 +4115,7 @@ void __fastcall UFG::GameSnapshot::CommitByFilter(UFG::GameSnapshot *this, UFG::
         if ( v96 )
         {
           v97 = &v96[-1].mBinary.mSize;
-          `eh vector destructor iterator'(v96, 0x18ui64, v96[-1].mBinary.mSize, (void (__fastcall *)(void *))_);
+          `eh vector destructor iterator(v96, 0x18ui64, v96[-1].mBinary.mSize, (void (__fastcall *)(void *))_);
           operator delete[](v97);
         }
         v95->mValues.p = 0i64;
@@ -5524,7 +5524,7 @@ char __fastcall UFG::GameSnapshot::DeserializeByFilter(UFG::GameSnapshot *this, 
   v7 = (unsigned int)(LODWORD(dest) - 4);
   if ( (unsigned int)UFG::qDataHash32(pBuffer, v7, 0xFFFFFFFF) != *(_DWORD *)&pBuffer[v7] )
     return 0;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     ptr,
     0x48ui64,
     16,
@@ -6155,7 +6155,7 @@ LABEL_47:
   while ( v177 );
   v178 = 1;
 LABEL_202:
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     ptr,
     0x48ui64,
     16,

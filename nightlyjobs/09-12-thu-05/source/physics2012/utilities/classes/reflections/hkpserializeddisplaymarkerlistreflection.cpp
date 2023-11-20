@@ -31,7 +31,7 @@ hkClass *__fastcall hkpSerializedDisplayMarkerList::staticClass()
 void __fastcall finishLoadedObjecthkpSerializedDisplayMarkerList(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpSerializedDisplayMarkerList::`vftable';
+    *(_QWORD *)p = &hkpSerializedDisplayMarkerList::`vftable;
 }
 
 // File Line: 71
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkpSerializedDisplayMarkerList(void *p)
 // RVA: 0xE0B9C0
 void **__fastcall getVtablehkpSerializedDisplayMarkerList()
 {
-  return &hkpSerializedDisplayMarkerList::`vftable';
+  return &hkpSerializedDisplayMarkerList::`vftable;
 }
 
 // File Line: 97

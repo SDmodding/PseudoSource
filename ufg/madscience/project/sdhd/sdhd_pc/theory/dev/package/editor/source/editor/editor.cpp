@@ -152,7 +152,7 @@ void __fastcall UFG::Editor::ShowContextMenu(UFG::DUIContext *dui)
   v2 = (UFG::CommandContext *)UFG::qMalloc(0x50ui64, "CommandContext", 0i64);
   if ( v2 )
   {
-    v2->vfptr = (UFG::CommandContextVtbl *)&UFG::CommandContext::`vftable';
+    v2->vfptr = (UFG::CommandContextVtbl *)&UFG::CommandContext::`vftable;
     UFG::qBaseTreeRB::qBaseTreeRB(&v2->mDictionary.mTree);
   }
   else

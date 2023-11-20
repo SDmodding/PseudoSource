@@ -90,7 +90,7 @@ void __fastcall hkaiDynamicNavVolumeMediator::hkaiDynamicNavVolumeMediator(hkaiD
   v4 = collection;
   v5 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiDynamicNavVolumeMediator::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiDynamicNavVolumeMediator::`vftable;
   if ( collection )
     hkReferencedObject::addReference((hkReferencedObject *)&collection->vfptr);
   v5->m_collection.m_pntr = v4;
@@ -103,7 +103,7 @@ void __fastcall hkaiDynamicNavVolumeMediator::hkaiDynamicNavVolumeMediator(hkaiD
 // RVA: 0xBEA330
 void __fastcall hkaiDynamicNavVolumeMediator::hkaiDynamicNavVolumeMediator(hkaiDynamicNavVolumeMediator *this, hkFinishLoadedObjectFlag f)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiDynamicNavVolumeMediator::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiDynamicNavVolumeMediator::`vftable;
 }
 
 // File Line: 84
@@ -115,7 +115,7 @@ void __fastcall hkaiDynamicNavVolumeMediator::~hkaiDynamicNavVolumeMediator(hkai
   hkReferencedObject *v3; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiDynamicNavVolumeMediator::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiDynamicNavVolumeMediator::`vftable;
   v2 = this->m_aabbTree.m_pntr;
   if ( v2 )
     hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
@@ -124,7 +124,7 @@ void __fastcall hkaiDynamicNavVolumeMediator::~hkaiDynamicNavVolumeMediator(hkai
   if ( v3 )
     hkReferencedObject::removeReference(v3);
   v1->m_collection.m_pntr = 0i64;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 89
@@ -138,7 +138,7 @@ __int64 __fastcall hkaiDynamicNavVolumeMediator::getClosestPoint(hkaiDynamicNavV
   hkaiNavVolumeMediator::GetClosestPointInput *v8; // [rsp+40h] [rbp-18h]
   unsigned int v9; // [rsp+48h] [rbp-10h]
 
-  collector.vfptr = (hkcdAabbTreeQueries::ClosestPointCollectorVtbl *)&DynVolumeClosestPointCollector::`vftable';
+  collector.vfptr = (hkcdAabbTreeQueries::ClosestPointCollectorVtbl *)&DynVolumeClosestPointCollector::`vftable;
   v3 = this->m_collection.m_pntr;
   v4 = this->m_aabbTree.m_pntr;
   v7 = v3;

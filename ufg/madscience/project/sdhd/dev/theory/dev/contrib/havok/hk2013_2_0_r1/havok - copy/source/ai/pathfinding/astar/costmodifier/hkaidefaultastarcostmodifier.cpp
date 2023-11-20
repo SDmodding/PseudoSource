@@ -7,7 +7,7 @@ void __fastcall hkaiDefaultAstarCostModifier::hkaiDefaultAstarCostModifier(hkaiD
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_type.m_storage = 0;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiDefaultAstarCostModifier::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiDefaultAstarCostModifier::`vftable;
   v1 = this->m_costMultiplierLookupTable;
   this->m_maxCostPenalty = 1.0;
   for ( i = 32i64; i; --i )

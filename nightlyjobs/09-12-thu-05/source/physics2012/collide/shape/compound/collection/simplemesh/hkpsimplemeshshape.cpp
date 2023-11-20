@@ -9,8 +9,8 @@ void __fastcall hkpSimpleMeshShape::hkpSimpleMeshShape(hkpSimpleMeshShape *this,
     (hkpShapeCollection *)&this->vfptr,
     TRIANGLE_COLLECTION,
     COLLECTION_SIMPLE_MESH);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpSimpleMeshShape::`vftable'{for `hkpShape'};
-  v2->vfptr = (hkpShapeContainerVtbl *)&hkpSimpleMeshShape::`vftable'{for `hkpShapeContainer'};
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpSimpleMeshShape::`vftable{for `hkpShape};
+  v2->vfptr = (hkpShapeContainerVtbl *)&hkpSimpleMeshShape::`vftable{for `hkpShapeContainer};
   v2->m_vertices.m_capacityAndFlags = 2147483648;
   v2->m_vertices.m_data = 0i64;
   v2->m_vertices.m_size = 0;
@@ -34,8 +34,8 @@ void __fastcall hkpSimpleMeshShape::hkpSimpleMeshShape(hkpSimpleMeshShape *this,
   v3 = flag.m_finishing;
   v2 = this;
   hkpShapeCollection::hkpShapeCollection((hkpShapeCollection *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpSimpleMeshShape::`vftable'{for `hkpShape'};
-  v2->vfptr = (hkpShapeContainerVtbl *)&hkpSimpleMeshShape::`vftable'{for `hkpShapeContainer'};
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpSimpleMeshShape::`vftable{for `hkpShape};
+  v2->vfptr = (hkpShapeContainerVtbl *)&hkpSimpleMeshShape::`vftable{for `hkpShapeContainer};
   if ( v3 )
   {
     v2->m_type.m_storage = 27;
@@ -146,7 +146,7 @@ hkpShape *__fastcall hkpSimpleMeshShape::getChildShape(hkpSimpleMeshShape *this,
     *(_OWORD *)&(*buffer)[96] = 0i64;
     *(_WORD *)&(*buffer)[40] = v6;
     (*buffer)[43] = 0;
-    *(_QWORD *)buffer = &hkpTriangleShape::`vftable';
+    *(_QWORD *)buffer = &hkpTriangleShape::`vftable;
   }
   else
   {

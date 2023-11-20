@@ -194,7 +194,7 @@ hkClass *__fastcall hkaiUserEdgeSetupArray::staticClass()
 void __fastcall finishLoadedObjecthkaiUserEdgeSetupArray(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiUserEdgeSetupArray::`vftable';
+    *(_QWORD *)p = &hkaiUserEdgeSetupArray::`vftable;
 }
 
 // File Line: 336
@@ -208,7 +208,7 @@ void __fastcall cleanupLoadedObjecthkaiUserEdgeSetupArray(void *p)
 // RVA: 0xBB78F0
 void **__fastcall getVtablehkaiUserEdgeSetupArray()
 {
-  return &hkaiUserEdgeSetupArray::`vftable';
+  return &hkaiUserEdgeSetupArray::`vftable;
 }
 
 // File Line: 362
@@ -260,7 +260,7 @@ hkClass *__fastcall hkaiUserEdgePairArray::staticClass()
 void __fastcall finishLoadedObjecthkaiUserEdgePairArray(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiUserEdgePairArray::`vftable';
+    *(_QWORD *)p = &hkaiUserEdgePairArray::`vftable;
 }
 
 // File Line: 404
@@ -274,7 +274,7 @@ void __fastcall cleanupLoadedObjecthkaiUserEdgePairArray(void *p)
 // RVA: 0xBB7930
 void **__fastcall getVtablehkaiUserEdgePairArray()
 {
-  return &hkaiUserEdgePairArray::`vftable';
+  return &hkaiUserEdgePairArray::`vftable;
 }
 
 // File Line: 430

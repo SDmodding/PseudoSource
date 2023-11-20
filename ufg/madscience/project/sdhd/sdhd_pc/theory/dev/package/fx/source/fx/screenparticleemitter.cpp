@@ -7,7 +7,7 @@ __int64 Render::_dynamic_initializer_for__gScreenParticleEmitterManager__()
   Render::gScreenParticleEmitterManager.mActiveList.mNode.mNext = &Render::gScreenParticleEmitterManager.mActiveList.mNode;
   Render::gScreenParticleEmitterManager.mInactiveList.mNode.mPrev = &Render::gScreenParticleEmitterManager.mInactiveList.mNode;
   Render::gScreenParticleEmitterManager.mInactiveList.mNode.mNext = &Render::gScreenParticleEmitterManager.mInactiveList.mNode;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     Render::gScreenParticleEmitterManager.mBuffer,
     0x58ui64,
     128,
@@ -117,12 +117,12 @@ void __fastcall Render::ScreenParticleEmitterManager::Init(Render::ScreenParticl
   if ( !v1->mVertexDeclHandle.mData )
   {
     v20 = UFG::qStringHash32("VertexDecl.ScreenParticle", 0xFFFFFFFF);
-    v21 = `UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result )
+    v21 = `UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result )
     {
       v22 = UFG::qResourceWarehouse::Instance();
       v21 = UFG::qResourceWarehouse::GetInventory(v22, 0x3E5FDA3Eu);
-      `UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result = v21;
+      `UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result = v21;
     }
     UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v1->mVertexDeclHandle.mPrev, 0x3E5FDA3Eu, v20, v21);
   }
@@ -618,12 +618,12 @@ void __fastcall Render::ScreenParticleEmitterManager::Render(Render::ScreenParti
       do
       {
         v46 = *(_DWORD *)((char *)v43 + v45 + 11336);
-        v47 = `UFG::qGetResourceInventory<Render::ScreenParticleEmitterSettings>'::`2'::result;
-        if ( !`UFG::qGetResourceInventory<Render::ScreenParticleEmitterSettings>'::`2'::result )
+        v47 = `UFG::qGetResourceInventory<Render::ScreenParticleEmitterSettings>::`2::result;
+        if ( !`UFG::qGetResourceInventory<Render::ScreenParticleEmitterSettings>::`2::result )
         {
           v48 = UFG::qResourceWarehouse::Instance();
           v47 = UFG::qResourceWarehouse::GetInventory(v48, 0x354C3CDCu);
-          `UFG::qGetResourceInventory<Render::ScreenParticleEmitterSettings>'::`2'::result = v47;
+          `UFG::qGetResourceInventory<Render::ScreenParticleEmitterSettings>::`2::result = v47;
         }
         UFG::qResourceHandle::Init(&v84, 0x354C3CDCu, v46, v47);
         v49 = v84.mData;
@@ -763,12 +763,12 @@ void __fastcall Render::ScreenParticleEmitterManager::Render(Render::ScreenParti
       }
       while ( v82 );
     }
-    v80 = `UFG::qGetResourceInventory<Render::ScreenParticleEmitterSettings>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Render::ScreenParticleEmitterSettings>'::`2'::result )
+    v80 = `UFG::qGetResourceInventory<Render::ScreenParticleEmitterSettings>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Render::ScreenParticleEmitterSettings>::`2::result )
     {
       v81 = UFG::qResourceWarehouse::Instance();
       v80 = UFG::qResourceWarehouse::GetInventory(v81, 0x354C3CDCu);
-      `UFG::qGetResourceInventory<Render::ScreenParticleEmitterSettings>'::`2'::result = v80;
+      `UFG::qGetResourceInventory<Render::ScreenParticleEmitterSettings>::`2::result = v80;
     }
     UFG::qResourceHandle::Close(&v84, v80);
     UFG::qResourceHandle::~qResourceHandle(&v84);

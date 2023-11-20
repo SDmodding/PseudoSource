@@ -249,7 +249,7 @@ void __fastcall UFG::allocator::allocator(UFG::allocator *this)
   v4 = &this->mSmallBlockSystemPages;
   v4->mNode.mPrev = &v4->mNode;
   v4->mNode.mNext = &v4->mNode;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     this->mBuckets,
     0x80ui64,
     32,
@@ -327,7 +327,7 @@ LABEL_5:
     goto LABEL_5;
   }
 LABEL_6:
-  UFG::qPrintf("ERROR: All allocs must be free'd before a qMemoryPool can be Closed()! Name = '%s' \n", this->mName);
+  UFG::qPrintf("ERROR: All allocs must be freed before a qMemoryPool can be Closed()! Name = %s \n", this->mName);
 LABEL_7:
   Scaleform::Lock::~Lock((LPCRITICAL_SECTION)&v1->mTreeMutex);
   UFG::qList<UFG::qTaskFunctionDecl,UFG::qTaskFunctionDecl,1,0>::DeleteNodes((UFG::qList<UFG::tChunkPosition,UFG::tChunkPosition,1,0> *)&v1->mSmallFreeList);
@@ -361,7 +361,7 @@ LABEL_7:
   v10->mPrev = v9;
   v5->mNode.mPrev = &v5->mNode;
   v1->mBucketFreePages.mNode.mNext = &v1->mBucketFreePages.mNode;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->mBuckets,
     0x80ui64,
     32,
@@ -494,7 +494,7 @@ void __fastcall UFG::allocator::init(UFG::allocator *this, const char *name, cha
         v18 = (unsigned __int64)&v7[v6 - 8224] & 0xFFFFFFFFFFFFE000ui64;
         if ( v18 <= v17 )
         {
-          UFG::qPrintf("WARNING: no space for small blocks in pool '%s'\n", v8);
+          UFG::qPrintf("WARNING: no space for small blocks in pool %s\n", v8);
         }
         else
         {

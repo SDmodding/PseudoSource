@@ -31,7 +31,7 @@ hkClass *__fastcall hkxSparselyAnimatedBool::staticClass()
 void __fastcall finishLoadedObjecthkxSparselyAnimatedBool(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkxSparselyAnimatedBool::`vftable';
+    *(_QWORD *)p = &hkxSparselyAnimatedBool::`vftable;
 }
 
 // File Line: 72
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkxSparselyAnimatedBool(void *p)
 // RVA: 0xE32F50
 void **__fastcall getVtablehkxSparselyAnimatedBool()
 {
-  return &hkxSparselyAnimatedBool::`vftable';
+  return &hkxSparselyAnimatedBool::`vftable;
 }
 
 // File Line: 98

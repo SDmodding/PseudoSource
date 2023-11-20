@@ -74,7 +74,7 @@ void __fastcall UFG::VehicleAudioComponent::ImpactEntity::~ImpactEntity(UFG::Veh
   UFG::AudioEvent *v2; // rcx
 
   v1 = this;
-  this->vfptr = (UFG::AudioEntityVtbl *)&UFG::VehicleAudioComponent::ImpactEntity::`vftable';
+  this->vfptr = (UFG::AudioEntityVtbl *)&UFG::VehicleAudioComponent::ImpactEntity::`vftable;
   this->m_pVehicleAudio = 0i64;
   v2 = this->m_Event.m_pEvent;
   if ( v2 )

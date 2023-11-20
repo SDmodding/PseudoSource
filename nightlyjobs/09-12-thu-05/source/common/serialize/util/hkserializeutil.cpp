@@ -164,7 +164,7 @@ hkResult *__fastcall anonymous_namespace_::loadBinaryTagfileIntoWorld(hkResult *
           hkReferencedObject::removeReference((hkReferencedObject *)&v11->vfptr);
       }
       v17.m_nameReg.m_pntr = 0i64;
-      v17.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+      v17.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
     }
     else
     {
@@ -216,7 +216,7 @@ hkResult *__fastcall anonymous_namespace_::loadXmlTagfileIntoWorld(hkResult *res
   v6 = world;
   v7 = result;
   *(_DWORD *)&v15.m_memSizeAndFlags = 0x1FFFF;
-  v15.vfptr = (hkBaseObjectVtbl *)&hkXmlTagfileReader::`vftable';
+  v15.vfptr = (hkBaseObjectVtbl *)&hkXmlTagfileReader::`vftable;
   hkXmlTagfileReader::load(&v15, &resulta, streamIn, (hkDataWorld *)&world->vfptr);
   v8 = resulta.m_impl;
   if ( resulta.m_impl )
@@ -258,7 +258,7 @@ hkResult *__fastcall anonymous_namespace_::loadXmlTagfileIntoWorld(hkResult *res
           hkReferencedObject::removeReference((hkReferencedObject *)&v10->vfptr);
       }
       v16.m_nameReg.m_pntr = 0i64;
-      v16.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+      v16.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
     }
     else
     {
@@ -557,7 +557,7 @@ LABEL_49:
 
 // File Line: 250
 // RVA: 0xE3BB20
-hkDataObject *__fastcall `anonymous namespace'::ForwardingPackfileListerer::addDataObjectCallback(ForwardingPackfileListerer *this, hkDataObject *result, hkDataObject *object)
+hkDataObject *__fastcall `anonymous namespace::ForwardingPackfileListerer::addDataObjectCallback(ForwardingPackfileListerer *this, hkDataObject *result, hkDataObject *object)
 {
   hkDataObject *v3; // rsi
   hkDataObject *v4; // rdi
@@ -665,7 +665,7 @@ hkObjectResource *__fastcall anonymous_namespace_::loadNewPackfileOnHeap(hkStrea
   v33 = details;
   v32 = streamIn;
   v6 = classReg;
-  v24 = &hkTypeInfoRegistry::`vftable';
+  v24 = &hkTypeInfoRegistry::`vftable;
   v7 = errorOut;
   v25 = 0x1FFFF;
   hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>(
@@ -1352,7 +1352,7 @@ hkResult *__fastcall hkSerializeUtil::saveTagfile(hkResult *result, const void *
   hkDataWorldNative::setContents(&v23, v6, v9);
   v10 = ((__int64 (*)(void))hkSingleton<hkBuiltinTypeRegistry>::s_instance->vfptr[2].__vecDelDtor)();
   *(_DWORD *)&v19.m_memSizeAndFlags = 0x1FFFF;
-  v19.vfptr = (hkBaseObjectVtbl *)&`anonymous namespace'::ForwardingPackfileListerer::`vftable';
+  v19.vfptr = (hkBaseObjectVtbl *)&`anonymous namespace::ForwardingPackfileListerer::`vftable;
   v20 = userListener;
   v22 = v10;
   v21 = &v23;
@@ -1370,7 +1370,7 @@ hkResult *__fastcall hkSerializeUtil::saveTagfile(hkResult *result, const void *
   BYTE1(userListener) = 1;
   if ( options.m_storage & 1 )
   {
-    v18.vfptr = (hkBaseObjectVtbl *)&hkXmlTagfileWriter::`vftable';
+    v18.vfptr = (hkBaseObjectVtbl *)&hkXmlTagfileWriter::`vftable;
     v12 = hkDataWorldNative::getContents(&v23, &resulta);
     hkXmlTagfileWriter::save(&v18, v7, v12, v8, &v19, (hkTagfileWriter::Options *)&userListener);
     v13 = resulta.m_impl;
@@ -1384,7 +1384,7 @@ hkResult *__fastcall hkSerializeUtil::saveTagfile(hkResult *result, const void *
   }
   else
   {
-    v18.vfptr = (hkBaseObjectVtbl *)&hkBinaryTagfileWriter::`vftable';
+    v18.vfptr = (hkBaseObjectVtbl *)&hkBinaryTagfileWriter::`vftable;
     v15 = hkDataWorldNative::getContents(&v23, &resulta);
     hkBinaryTagfileWriter::save(
       (hkBinaryTagfileWriter *)&v18,
@@ -1401,14 +1401,14 @@ hkResult *__fastcall hkSerializeUtil::saveTagfile(hkResult *result, const void *
       if ( v14 )
       {
         v16->vfptr->__vecDelDtor((hkDataRefCounted *)&v16->vfptr, 1u);
-        v18.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+        v18.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
         goto LABEL_13;
       }
     }
   }
-  v18.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v18.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 LABEL_13:
-  v19.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v19.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
   hkDataWorldNative::~hkDataWorldNative(&v23);
   return v7;
 }
@@ -1511,7 +1511,7 @@ hkEnum<enum hkSerializeUtil::FormatType,int> *__fastcall hkSerializeUtil::detect
 
 // File Line: 752
 // RVA: 0xE3BD20
-hkBool *__fastcall `anonymous namespace'::PeekStreamReader::isOk(PeekStreamReader *this, hkBool *result)
+hkBool *__fastcall `anonymous namespace::PeekStreamReader::isOk(PeekStreamReader *this, hkBool *result)
 {
   hkBool *v2; // rbx
   hkBool *v3; // rax
@@ -1536,7 +1536,7 @@ hkBool *__fastcall `anonymous namespace'::PeekStreamReader::isOk(PeekStreamReade
 
 // File Line: 757
 // RVA: 0xE3BDD0
-__int64 __fastcall `anonymous namespace'::PeekStreamReader::read(PeekStreamReader *this, void *buf, __int64 nbytes)
+__int64 __fastcall `anonymous namespace::PeekStreamReader::read(PeekStreamReader *this, void *buf, __int64 nbytes)
 {
   PeekStreamReader *v3; // rbx
   __int64 result; // rax
@@ -1549,7 +1549,7 @@ __int64 __fastcall `anonymous namespace'::PeekStreamReader::read(PeekStreamReade
 
 // File Line: 765
 // RVA: 0xE3BD60
-__int64 __fastcall `anonymous namespace'::PeekStreamReader::peek(PeekStreamReader *this, void *buf, int nbytes)
+__int64 __fastcall `anonymous namespace::PeekStreamReader::peek(PeekStreamReader *this, void *buf, int nbytes)
 {
   int v3; // ebx
   void *v4; // rsi
@@ -1560,7 +1560,7 @@ __int64 __fastcall `anonymous namespace'::PeekStreamReader::peek(PeekStreamReade
   v4 = buf;
   v5 = this;
   if ( nbytes + this->m_curPos >= this->m_peekBuffer.m_size )
-    `anonymous namespace'::PeekStreamReader::expandPeekBuffer(this, nbytes);
+    `anonymous namespace::PeekStreamReader::expandPeekBuffer(this, nbytes);
   v6 = v5->m_curPos;
   if ( v5->m_peekBuffer.m_size - (signed int)v6 < v3 )
     v3 = v5->m_peekBuffer.m_size - v6;
@@ -1571,7 +1571,7 @@ __int64 __fastcall `anonymous namespace'::PeekStreamReader::peek(PeekStreamReade
 
 // File Line: 788
 // RVA: 0xE3BC40
-void __fastcall `anonymous namespace'::PeekStreamReader::expandPeekBuffer(PeekStreamReader *this, const int nbytes)
+void __fastcall `anonymous namespace::PeekStreamReader::expandPeekBuffer(PeekStreamReader *this, const int nbytes)
 {
   PeekStreamReader *v2; // rsi
   int v3; // edx
@@ -1677,14 +1677,14 @@ void __fastcall hkSerializeUtil::detectFormat(hkStreamReader *reader, hkSerializ
   v5 = errorOut;
   hkStringPtr::operator=(&details->m_version, 0i64);
   hkMemUtil::memSet(&v3->m_layoutRules, 0, 4);
-  v6.vfptr = (hkBaseObjectVtbl *)&`anonymous namespace'::PeekStreamReader::`vftable';
+  v6.vfptr = (hkBaseObjectVtbl *)&`anonymous namespace::PeekStreamReader::`vftable;
   *(_DWORD *)&v6.m_memSizeAndFlags = 0x1FFFF;
   v6.m_underlyingStream = v4;
   v6.m_peekBuffer.m_data = 0i64;
   v6.m_peekBuffer.m_size = 0;
   v6.m_peekBuffer.m_capacityAndFlags = 2147483648;
   v6.m_curPos = 0;
-  `anonymous namespace'::PeekStreamReader::expandPeekBuffer(&v6, 512);
+  `anonymous namespace::PeekStreamReader::expandPeekBuffer(&v6, 512);
   hkBinaryTagfileReader::hkBinaryTagfileReader(&v12);
   hkStringPtr::hkStringPtr(&out.m_sdk);
   if ( hkBinaryTagfileReader::readHeader(&v12, &result, (hkStreamReader *)&v6.vfptr, &out)->m_enum )
@@ -1698,7 +1698,7 @@ void __fastcall hkSerializeUtil::detectFormat(hkStreamReader *reader, hkSerializ
     if ( hkPackfileHeader::readHeader(&result, (hkStreamReader *)&v6.vfptr, (hkPackfileHeader *)&dst)->m_enum )
     {
       v6.m_curPos = 0;
-      v7.vfptr = (hkBaseObjectVtbl *)&hkXmlTagfileReader::`vftable';
+      v7.vfptr = (hkBaseObjectVtbl *)&hkXmlTagfileReader::`vftable;
       *(_DWORD *)&v7.m_memSizeAndFlags = 0x1FFFF;
       hkStringPtr::hkStringPtr(&v11.m_sdkVersion);
       if ( hkXmlTagfileReader::readHeader(&v7, &result, (hkStreamReader *)&v6.vfptr, &v11)->m_enum )
@@ -1725,7 +1725,7 @@ void __fastcall hkSerializeUtil::detectFormat(hkStreamReader *reader, hkSerializ
         v3->m_formatType.m_storage = 5;
       }
       hkStringPtr::~hkStringPtr(&v11.m_sdkVersion);
-      v7.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+      v7.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
     }
     else
     {
@@ -1740,7 +1740,7 @@ void __fastcall hkSerializeUtil::detectFormat(hkStreamReader *reader, hkSerializ
     v3->m_formatType.m_storage = 4;
   }
   hkStringPtr::~hkStringPtr(&out.m_sdk);
-  v12.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v12.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
   v6.m_peekBuffer.m_size = 0;
   if ( v6.m_peekBuffer.m_capacityAndFlags >= 0 )
     hkContainerTempAllocator::s_alloc.vfptr->bufFree(

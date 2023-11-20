@@ -26,7 +26,7 @@ void __fastcall UFG::DebugCameraComponent::DebugCameraComponent(UFG::DebugCamera
   v3 = (UFG::qNode<UFG::DebugCameraComponent,UFG::DebugCameraComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::DebugCameraComponent::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::DebugCameraComponent::`vftable;
   v2->mController = 0i64;
   v2->mPreviousCameraComponent = 0i64;
   *(_WORD *)&v2->mDebugCameraOn = 256;
@@ -66,7 +66,7 @@ void __fastcall UFG::DebugCameraComponent::~DebugCameraComponent(UFG::DebugCamer
   UFG::qNode<UFG::DebugCameraComponent,UFG::DebugCameraComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::DebugCameraComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::DebugCameraComponent::`vftable;
   UFG::InputSystem::ReleaseController(UFG::gInputSystem, this->mController);
   if ( v1 == UFG::DebugCameraComponent::s_DebugCameraComponentpCurrentIterator )
     UFG::DebugCameraComponent::s_DebugCameraComponentpCurrentIterator = (UFG::DebugCameraComponent *)&v1->mPrev[-47];

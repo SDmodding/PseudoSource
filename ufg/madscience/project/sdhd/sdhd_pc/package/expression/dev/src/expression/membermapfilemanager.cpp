@@ -7,12 +7,12 @@ void __fastcall MemberMapFileNode::MemberMapFileNode(MemberMapFileNode *this)
   UFG::qList<MemberMapFileNode,MemberMapFileNodeListIdentifier,0,0> *v3; // [rsp+48h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
   v2 = (UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileNode::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileNode::`vftable;
   UFG::qString::qString(&this->mName);
   v3 = &v1->mChildren;
   v3->mNode.mPrev = &v3->mNode;
@@ -30,7 +30,7 @@ void __fastcall MemberMapFileNode::~MemberMapFileNode(MemberMapFileNode *this)
   UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *v4; // rax
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileNode::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileNode::`vftable;
   UFG::qList<UFG::qTask,UFG::TaskPlat,0,0>::~qList<UFG::qTask,UFG::TaskPlat,0,0>(&this->mChildren);
   UFG::qString::~qString(&v1->mName);
   v2 = (UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *)&v1->mPrev;
@@ -40,7 +40,7 @@ void __fastcall MemberMapFileNode::~MemberMapFileNode(MemberMapFileNode *this)
   v4->mPrev = v3;
   v2->mPrev = v2;
   v2->mNext = v2;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 90
@@ -140,7 +140,7 @@ void __fastcall MemberMapFileObject::MemberMapFileObject(MemberMapFileObject *th
 
   v1 = this;
   MemberMapFileNode::MemberMapFileNode((MemberMapFileNode *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileObject::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileObject::`vftable;
   v1->mFileTime = 0i64;
   UFG::qString::qString(&v1->mRelativeFilePath);
   UFG::qString::qString(&v1->mAbsoluteFilePath);
@@ -159,11 +159,11 @@ void __fastcall MemberMapFileObject::~MemberMapFileObject(MemberMapFileObject *t
   UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *v4; // rax
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileObject::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileObject::`vftable;
   UFG::qString::~qString(&this->mResourcePath);
   UFG::qString::~qString(&v1->mAbsoluteFilePath);
   UFG::qString::~qString(&v1->mRelativeFilePath);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileNode::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileNode::`vftable;
   UFG::qList<UFG::qTask,UFG::TaskPlat,0,0>::~qList<UFG::qTask,UFG::TaskPlat,0,0>(&v1->mChildren);
   UFG::qString::~qString(&v1->mName);
   v2 = (UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *)&v1->mPrev;
@@ -173,7 +173,7 @@ void __fastcall MemberMapFileObject::~MemberMapFileObject(MemberMapFileObject *t
   v4->mPrev = v3;
   v2->mPrev = v2;
   v2->mNext = v2;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 204
@@ -313,8 +313,8 @@ void __fastcall MemberMapFileGroup::~MemberMapFileGroup(MemberMapFileGroup *this
   UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *v4; // rax
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileGroup::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileNode::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileGroup::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileNode::`vftable;
   UFG::qList<UFG::qTask,UFG::TaskPlat,0,0>::~qList<UFG::qTask,UFG::TaskPlat,0,0>(&this->mChildren);
   UFG::qString::~qString(&v1->mName);
   v2 = (UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *)&v1->mPrev;
@@ -324,7 +324,7 @@ void __fastcall MemberMapFileGroup::~MemberMapFileGroup(MemberMapFileGroup *this
   v4->mPrev = v3;
   v2->mPrev = v2;
   v2->mNext = v2;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 444
@@ -356,7 +356,7 @@ void __fastcall MemberMapFileProject::MemberMapFileProject(MemberMapFileProject 
 
   v1 = this;
   MemberMapFileObject::MemberMapFileObject((MemberMapFileObject *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileProject::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileProject::`vftable;
   UFG::qString::qString(&v1->mRelativeDataPath);
   UFG::qString::qString(&v1->mAbsoluteDataPath);
   v1->mMemberMapResource = (Expression::IMemberMap *)&v1->vfptr;
@@ -397,11 +397,11 @@ Expression::IMemberMap *__fastcall MemberMapFileProject::LoadMemberMapFileProjec
   v2 = UFG::qMakeFullPath(&v9, v7.mData, MEMORY[0x108]);
   UFG::qString::Set((UFG::qString *)0x118, v2->mData, v2->mLength, 0i64, 0);
   UFG::qString::~qString(&v9);
-  v11 = &MemberMapFileProjectResolveRelativePathsVisitor::`vftable';
+  v11 = &MemberMapFileProjectResolveRelativePathsVisitor::`vftable;
   (*(void (__fastcall **)(_QWORD, void ***))(MEMORY[0] + 80))(0i64, &v11);
   UFG::qString::~qString(&v7);
   MemberMapFileProject::sLoadingFileObjects = 1;
-  v4 = &MemberMapFileNodeLoadAllFileObjectsVisitor::`vftable';
+  v4 = &MemberMapFileNodeLoadAllFileObjectsVisitor::`vftable;
   v5 = 0i64;
   (*(void (__fastcall **)(_QWORD, void ***))(MEMORY[0] + 80))(0i64, &v4);
   MemberMapFileProject::sLoadingFileObjects = 0;
@@ -444,7 +444,7 @@ Expression::IMemberMap *__fastcall MemberMapFileProject::NewMemberMapFileProject
   v6 = UFG::qMakeFullPath(&v10, v8.mData, *(const char **)(v5 + 264));
   UFG::qString::Set((UFG::qString *)(v5 + 280), v6->mData, v6->mLength, 0i64, 0);
   UFG::qString::~qString(&v10);
-  v11 = &MemberMapFileProjectResolveRelativePathsVisitor::`vftable';
+  v11 = &MemberMapFileProjectResolveRelativePathsVisitor::`vftable;
   (*(void (__fastcall **)(__int64, void ***))(*(_QWORD *)v5 + 80i64))(v5, &v11);
   UFG::qString::~qString(&v8);
   UFG::qString::~qString(&result);
@@ -589,8 +589,8 @@ void __fastcall MemberMapFileManager::MemberMapFileManager(MemberMapFileManager 
   v2 = startupPath;
   v3 = this;
   MemberMapFileNode::MemberMapFileNode((MemberMapFileNode *)&this->vfptr);
-  v3->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileGroup::`vftable';
-  v3->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileManager::`vftable';
+  v3->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileGroup::`vftable;
+  v3->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileManager::`vftable;
   v3->mActiveProject = 0i64;
   UFG::qString::qString(&v3->mStartupPath);
   v3->mOnNewProjectFileEntryCallback = 0i64;

@@ -2,10 +2,10 @@
 // RVA: 0xE65E0
 void __fastcall hkaiUFGAStarEdgeFilter::~hkaiUFGAStarEdgeFilter(hkaiUFGAStarEdgeFilter *this)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiUFGAStarEdgeFilter::`vftable';
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiAstarEdgeFilter::`vftable';
-  this->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable';
-  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiUFGAStarEdgeFilter::`vftable;
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiAstarEdgeFilter::`vftable;
+  this->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable;
+  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 20

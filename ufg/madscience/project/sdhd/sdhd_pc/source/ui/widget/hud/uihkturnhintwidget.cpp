@@ -20,7 +20,7 @@ void __fastcall UFG::UIHKTurnHintWidget::Update(UFG::UIHKTurnHintWidget *this, U
       {
         if ( this->mShouldPlayIntro )
         {
-          `eh vector constructor iterator'(
+          `eh vector constructor iterator(
             &pargs,
             0x30ui64,
             1,
@@ -40,7 +40,7 @@ void __fastcall UFG::UIHKTurnHintWidget::Update(UFG::UIHKTurnHintWidget *this, U
           *(_QWORD *)&pargs.mValue.NValue = v4;
           v2->mShouldPlayIntro = 0;
           Scaleform::GFx::Movie::Invoke(v3, "TurnIndicator_Show", 0i64, &pargs, 1u);
-          `eh vector destructor iterator'(
+          `eh vector destructor iterator(
             &pargs,
             0x30ui64,
             1,

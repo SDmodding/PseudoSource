@@ -65,7 +65,7 @@ void __fastcall UFG::UICreditsData::Populate(UFG::UICreditsData *this, UFG::qPro
   if ( v3 )
   {
     v5 = &v3[-1].Names.p;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v3,
       0x68ui64,
       (int)v3[-1].Names.p,
@@ -168,7 +168,7 @@ void __fastcall UFG::UICreditsSection::Populate(UFG::UICreditsSection *this, UFG
   if ( v8 )
   {
     v9 = &v8[-1].mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v8,
       0x28ui64,
       v8[-1].mStringHash32,
@@ -240,7 +240,7 @@ void __fastcall UFG::UIScreenCredits::UIScreenCredits(UFG::UIScreenCredits *this
   v1 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -251,7 +251,7 @@ void __fastcall UFG::UIScreenCredits::UIScreenCredits(UFG::UIScreenCredits *this
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreenCredits::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreenCredits::`vftable;
   v2 = &this->mData;
   v2->Sections.p = 0i64;
   *(_QWORD *)&v2->Sections.size = 0i64;
@@ -277,7 +277,7 @@ void __fastcall UFG::UIScreenCredits::~UIScreenCredits(UFG::UIScreenCredits *thi
   UFG::qNode<UFG::UIScreen,UFG::UIScreen> **v13; // rbx
 
   v1 = (UFG::UIScreen *)&this->vfptr;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreenCredits::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreenCredits::`vftable;
   v2 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseScreen(v2, "Credits");
   v3 = UFG::UIHKScreenGlobalOverlay::mThis;
@@ -332,7 +332,7 @@ void __fastcall UFG::UIScreenCredits::~UIScreenCredits(UFG::UIScreenCredits *thi
   if ( v12 )
   {
     v13 = &v12[-1].mNext;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v12,
       0x68ui64,
       (int)v12[-1].mNext,
@@ -447,8 +447,8 @@ LABEL_22:
     v19 = &gGlobalOverlaySentinel;
   UFG::UIHKHelpBarWidget::Show(&v19->HelpBar, &dataa);
   UFG::qString::~qString(&dataa.CustomTexturePack);
-  `eh vector destructor iterator'(dataa.Icons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
-  `eh vector destructor iterator'(dataa.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+  `eh vector destructor iterator(dataa.Icons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+  `eh vector destructor iterator(dataa.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
 }
 
 // File Line: 193
@@ -606,7 +606,7 @@ void __fastcall UFG::UIScreenCredits::Flash_Update(UFG::UIScreenCredits *this, f
   Scaleform::GFx::Value pargs; // [rsp+38h] [rbp-50h]
 
   v2 = this->mRenderable->m_movie.pObject;
-  `eh vector constructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( ((unsigned int)pargs.Type >> 6) & 1 )
   {
     (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
@@ -618,7 +618,7 @@ void __fastcall UFG::UIScreenCredits::Flash_Update(UFG::UIScreenCredits *this, f
   pargs.Type = 5;
   pargs.mValue.NValue = elapsed;
   Scaleform::GFx::Movie::Invoke(v2, "Update", 0i64, &pargs, 1u);
-  `eh vector destructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 312
@@ -638,7 +638,7 @@ void __fastcall UFG::UIScreenCredits::Flash_SpawnSection(UFG::UIScreenCredits *t
 
   v3 = caption;
   v4 = this->mRenderable->m_movie.pObject;
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( (v7 >> 6) & 1 )
   {
     (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v6 + 16i64))(v6, &ptr, v8);
@@ -654,7 +654,7 @@ void __fastcall UFG::UIScreenCredits::Flash_SpawnSection(UFG::UIScreenCredits *t
   v11 = 5;
   v12 = yPos;
   Scaleform::GFx::Movie::Invoke(v4, "SpawnSection", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 325
@@ -674,7 +674,7 @@ void __fastcall UFG::UIScreenCredits::Flash_SpawnMusicSection(UFG::UIScreenCredi
 
   v3 = body;
   v4 = this->mRenderable->m_movie.pObject;
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( (v7 >> 6) & 1 )
   {
     (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v6 + 16i64))(v6, &ptr, v8);
@@ -690,7 +690,7 @@ void __fastcall UFG::UIScreenCredits::Flash_SpawnMusicSection(UFG::UIScreenCredi
   v11 = 5;
   v12 = yPos;
   Scaleform::GFx::Movie::Invoke(v4, "SpawnMusicSection", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 350

@@ -8,7 +8,7 @@ void __fastcall UFG::ShadowRenderQueueTaskResults::ShadowRenderQueueTaskResults(
   signed __int64 v4; // rcx
 
   v1 = this;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     this,
     0x20ui64,
     16,
@@ -40,7 +40,7 @@ void __fastcall UFG::ShadowRenderQueueSimResults::ShadowRenderQueueSimResults(UF
   UFG::qList<Illusion::RenderQueue,Illusion::RenderQueue,1,0> *v6; // [rsp+58h] [rbp+10h]
 
   v1 = this;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     this->mCompositeDrawableCascades,
     0x10ui64,
     4,
@@ -48,7 +48,7 @@ void __fastcall UFG::ShadowRenderQueueSimResults::ShadowRenderQueueSimResults(UF
   v2 = &v1->mDownsampleShadows;
   v2->mNode.mPrev = &v2->mNode;
   v2->mNode.mNext = &v2->mNode;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v1->mCollector,
     0x10ui64,
     4,

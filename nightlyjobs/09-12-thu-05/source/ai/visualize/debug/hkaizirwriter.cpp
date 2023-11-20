@@ -336,7 +336,7 @@ LABEL_12:
     hkStringPtr::~hkStringPtr(&v18);
     if ( v10 == -1 )
       break;
-    hkStringBuf::append(&s, "'", -1);
+    hkStringBuf::append(&s, "", -1);
   }
   hkStringBuf::hkStringBuf(v5, &s);
   s.m_string.m_size = 0;

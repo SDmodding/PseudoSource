@@ -9,7 +9,7 @@ __int64 dynamic_initializer_for__gUniqueUIDTableResourceInventory__()
     0x2C40FA26u,
     0,
     0);
-  gUniqueUIDTableResourceInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UniqueUIDTableResourceInventory::`vftable';
+  gUniqueUIDTableResourceInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UniqueUIDTableResourceInventory::`vftable;
   return atexit(dynamic_atexit_destructor_for__gUniqueUIDTableResourceInventory__);
 }
 

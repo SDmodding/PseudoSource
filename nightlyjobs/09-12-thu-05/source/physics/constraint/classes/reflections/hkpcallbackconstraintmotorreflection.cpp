@@ -42,7 +42,7 @@ hkClass *__fastcall hkpCallbackConstraintMotor::staticClass()
 void __fastcall finishLoadedObjecthkpCallbackConstraintMotor(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpCallbackConstraintMotor::`vftable';
+    *(_QWORD *)p = &hkpCallbackConstraintMotor::`vftable;
 }
 
 // File Line: 111
@@ -56,7 +56,7 @@ void __fastcall cleanupLoadedObjecthkpCallbackConstraintMotor(void *p)
 // RVA: 0xD43660
 void **__fastcall getVtablehkpCallbackConstraintMotor()
 {
-  return &hkpCallbackConstraintMotor::`vftable';
+  return &hkpCallbackConstraintMotor::`vftable;
 }
 
 // File Line: 137

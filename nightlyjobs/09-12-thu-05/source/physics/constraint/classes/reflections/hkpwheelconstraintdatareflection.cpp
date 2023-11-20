@@ -78,7 +78,7 @@ void __fastcall finishLoadedObjecthkpWheelConstraintData(void *p, int finishing)
   {
     v2 = p;
     hkpConstraintData::hkpConstraintData((hkpConstraintData *)p, (hkFinishLoadedObjectFlag)finishing);
-    *v2 = &hkpWheelConstraintData::`vftable';
+    *v2 = &hkpWheelConstraintData::`vftable;
   }
 }
 
@@ -96,7 +96,7 @@ void **__fastcall getVtablehkpWheelConstraintData()
   hkpConstraintData v1; // [rsp+20h] [rbp-198h]
 
   hkpConstraintData::hkpConstraintData(&v1, 0);
-  return &hkpWheelConstraintData::`vftable';
+  return &hkpWheelConstraintData::`vftable;
 }
 
 // File Line: 178

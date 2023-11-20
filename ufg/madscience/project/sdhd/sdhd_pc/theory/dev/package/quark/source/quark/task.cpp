@@ -87,7 +87,7 @@ void __fastcall UFG::qTaskFunctionManager::Init(UFG::qTaskFunctionManager *this)
     else
       v8 = &customWorldMapCaption;
     UFG::qPrintf(
-      "[qTaskFunction] uid=0x%08x %-40s  PPU=0x%08x  SPU=0x%08x '%s'\n",
+      "[qTaskFunction] uid=0x%08x %-40s  PPU=0x%08x  SPU=0x%08x %s\n",
       LODWORD(v6[3].mPrev),
       v6[3].mNext,
       v6[2].mPrev,
@@ -165,12 +165,12 @@ void __fastcall UFG::qTaskManager::qTaskManager(UFG::qTaskManager *this)
 
   v1 = this;
   v2 = this->mSingleFrameTaskGroupLists;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     this->mSingleFrameTaskGroupLists,
     0x10ui64,
     2,
     (void (__fastcall *)(void *))UFG::qReflectHandleBase::qReflectHandleBase);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v1->mSingleFrameTaskLists,
     0x10ui64,
     2,
@@ -248,12 +248,12 @@ void __fastcall UFG::qTaskManager::~qTaskManager(UFG::qTaskManager *this)
   v13->mPrev = v12;
   v8->mNode.mPrev = &v8->mNode;
   v1->mMultiFrameTaskGroups.mNode.mNext = &v1->mMultiFrameTaskGroups.mNode;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->mSingleFrameTaskLists,
     0x10ui64,
     2,
     (void (__fastcall *)(void *))UFG::qList<UFG::allocator::page,UFG::allocator::page,0,0>::~qList<UFG::allocator::page,UFG::allocator::page,0,0>);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->mSingleFrameTaskGroupLists,
     0x10ui64,
     2,

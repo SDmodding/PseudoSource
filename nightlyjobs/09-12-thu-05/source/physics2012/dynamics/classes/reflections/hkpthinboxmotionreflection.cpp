@@ -32,10 +32,10 @@ void __fastcall finishLoadedObjecthkpThinBoxMotion(void *p, int finishing)
 {
   if ( p )
   {
-    *(_QWORD *)p = &hkpMotion::`vftable';
+    *(_QWORD *)p = &hkpMotion::`vftable;
     if ( finishing )
       *((_WORD *)p + 153) = 16256;
-    *(_QWORD *)p = &hkpThinBoxMotion::`vftable';
+    *(_QWORD *)p = &hkpThinBoxMotion::`vftable;
   }
 }
 
@@ -50,7 +50,7 @@ void __fastcall cleanupLoadedObjecthkpThinBoxMotion(void *p)
 // RVA: 0xD51360
 void **__fastcall getVtablehkpThinBoxMotion()
 {
-  return &hkpThinBoxMotion::`vftable';
+  return &hkpThinBoxMotion::`vftable;
 }
 
 // File Line: 90

@@ -2,7 +2,7 @@
 // RVA: 0x106DB0
 void __fastcall SSClosureInfoBase::~SSClosureInfoBase(SSClosureInfoBase *this)
 {
-  this->vfptr = (SSClosureInfoBaseVtbl *)&SSClosureInfoBase::`vftable';
+  this->vfptr = (SSClosureInfoBaseVtbl *)&SSClosureInfoBase::`vftable;
   AMemory::c_free_func(this->i_captured.i_array_p);
 }
 
@@ -20,7 +20,7 @@ void __fastcall SSClosureInfoBase::SSClosureInfoBase(SSClosureInfoBase *this, SS
 
   v2 = this;
   this->i_ref_count = 0;
-  this->vfptr = (SSClosureInfoBaseVtbl *)&SSClosureInfoBase::`vftable';
+  this->vfptr = (SSClosureInfoBaseVtbl *)&SSClosureInfoBase::`vftable;
   v3 = closure_p->i_captured.i_array_p;
   v4 = closure_p->i_captured.i_count;
   closure_p->i_captured.i_count = 0;
@@ -67,7 +67,7 @@ void __fastcall SSClosureInfoBase::SSClosureInfoBase(SSClosureInfoBase *this, co
   v2 = binary_pp;
   v3 = this;
   this->i_ref_count = 0;
-  this->vfptr = (SSClosureInfoBaseVtbl *)&SSClosureInfoBase::`vftable';
+  this->vfptr = (SSClosureInfoBaseVtbl *)&SSClosureInfoBase::`vftable;
   v4 = &this->i_captured;
   result = v4;
   v4->i_count = 0;
@@ -114,15 +114,15 @@ void __fastcall SSClosureInfoMethod::SSClosureInfoMethod(SSClosureInfoMethod *th
   v7 = (signed __int64)&v3->vfptr;
   *(_DWORD *)(v7 + 8) = v2->i_name.i_uid;
   *(_QWORD *)(v7 + 16) = v6;
-  *(_QWORD *)v7 = &SSInvokableBase::`vftable';
+  *(_QWORD *)v7 = &SSInvokableBase::`vftable;
   *(_QWORD *)(v7 + 24) = v4;
   if ( v4 )
     ++v4->i_ref_count;
-  *(_QWORD *)v7 = &SSMethodBase::`vftable';
-  *(_QWORD *)v7 = &SSMethod::`vftable';
+  *(_QWORD *)v7 = &SSMethodBase::`vftable;
+  *(_QWORD *)v7 = &SSMethod::`vftable;
   v3->i_expr_p = v5;
-  v3->vfptr = (SSClosureInfoBaseVtbl *)&SSClosureInfoMethod::`vftable'{for `SSClosureInfoBase'};
-  *(_QWORD *)v7 = &SSClosureInfoMethod::`vftable'{for `SSMethod'};
+  v3->vfptr = (SSClosureInfoBaseVtbl *)&SSClosureInfoMethod::`vftable{for `SSClosureInfoBase};
+  *(_QWORD *)v7 = &SSClosureInfoMethod::`vftable{for `SSMethod};
   v2->i_expr_p = 0i64;
 }
 
@@ -134,11 +134,11 @@ void __fastcall SSClosureInfoMethod::~SSClosureInfoMethod(SSClosureInfoMethod *t
   SSMethod *v2; // rcx
 
   v1 = this;
-  this->vfptr = (SSClosureInfoBaseVtbl *)&SSClosureInfoMethod::`vftable'{for `SSClosureInfoBase'};
+  this->vfptr = (SSClosureInfoBaseVtbl *)&SSClosureInfoMethod::`vftable{for `SSClosureInfoBase};
   v2 = (SSMethod *)&this->vfptr;
-  v2->vfptr = (SSInvokableBaseVtbl *)&SSClosureInfoMethod::`vftable'{for `SSMethod'};
+  v2->vfptr = (SSInvokableBaseVtbl *)&SSClosureInfoMethod::`vftable{for `SSMethod};
   SSMethod::~SSMethod(v2);
-  v1->vfptr = (SSClosureInfoBaseVtbl *)&SSClosureInfoBase::`vftable';
+  v1->vfptr = (SSClosureInfoBaseVtbl *)&SSClosureInfoBase::`vftable;
   AMemory::c_free_func(v1->i_captured.i_array_p);
 }
 
@@ -160,13 +160,13 @@ void __fastcall SSClosureInfoMethod::SSClosureInfoMethod(SSClosureInfoMethod *th
   *(ASymbol *)(v7 + 8) = ASymbol_closure;
   v4 = 0i64;
   *(_QWORD *)(v7 + 16) = 0i64;
-  *(_QWORD *)v7 = &SSInvokableBase::`vftable';
+  *(_QWORD *)v7 = &SSInvokableBase::`vftable;
   *(_QWORD *)(v7 + 24) = 0i64;
-  *(_QWORD *)v7 = &SSMethodBase::`vftable';
-  *(_QWORD *)v7 = &SSMethod::`vftable';
+  *(_QWORD *)v7 = &SSMethodBase::`vftable;
+  *(_QWORD *)v7 = &SSMethod::`vftable;
   v3->i_expr_p = 0i64;
-  v3->vfptr = (SSClosureInfoBaseVtbl *)&SSClosureInfoMethod::`vftable'{for `SSClosureInfoBase'};
-  *(_QWORD *)v7 = &SSClosureInfoMethod::`vftable'{for `SSMethod'};
+  v3->vfptr = (SSClosureInfoBaseVtbl *)&SSClosureInfoMethod::`vftable{for `SSClosureInfoBase};
+  *(_QWORD *)v7 = &SSClosureInfoMethod::`vftable{for `SSMethod};
   SSCoroutineBase::assign_binary((SSMethodBase *)&v3->vfptr, v2);
   v5 = *(unsigned __int8 *)*v2;
   v6 = (signed __int64)*v2 + 1;
@@ -233,15 +233,15 @@ void __fastcall SSClosureInfoCoroutine::SSClosureInfoCoroutine(SSClosureInfoCoro
   v7 = (signed __int64)&v3->vfptr;
   *(_DWORD *)(v7 + 8) = v2->i_name.i_uid;
   *(_QWORD *)(v7 + 16) = v5;
-  *(_QWORD *)v7 = &SSInvokableBase::`vftable';
+  *(_QWORD *)v7 = &SSInvokableBase::`vftable;
   *(_QWORD *)(v7 + 24) = v4;
   if ( v4 )
     ++v4->i_ref_count;
-  *(_QWORD *)v7 = &SSCoroutineBase::`vftable';
-  *(_QWORD *)v7 = &SSCoroutine::`vftable';
+  *(_QWORD *)v7 = &SSCoroutineBase::`vftable;
+  *(_QWORD *)v7 = &SSCoroutine::`vftable;
   v3->i_expr_p = (SSExpressionBase *)v6;
-  v3->vfptr = (SSClosureInfoBaseVtbl *)&SSClosureInfoCoroutine::`vftable'{for `SSClosureInfoBase'};
-  *(_QWORD *)v7 = &SSClosureInfoCoroutine::`vftable'{for `SSCoroutine'};
+  v3->vfptr = (SSClosureInfoBaseVtbl *)&SSClosureInfoCoroutine::`vftable{for `SSClosureInfoBase};
+  *(_QWORD *)v7 = &SSClosureInfoCoroutine::`vftable{for `SSCoroutine};
   v2->i_expr_p = 0i64;
 }
 
@@ -263,13 +263,13 @@ void __fastcall SSClosureInfoCoroutine::SSClosureInfoCoroutine(SSClosureInfoCoro
   *(ASymbol *)(v7 + 8) = ASymbol__closure;
   v4 = 0i64;
   *(_QWORD *)(v7 + 16) = 0i64;
-  *(_QWORD *)v7 = &SSInvokableBase::`vftable';
+  *(_QWORD *)v7 = &SSInvokableBase::`vftable;
   *(_QWORD *)(v7 + 24) = 0i64;
-  *(_QWORD *)v7 = &SSCoroutineBase::`vftable';
-  *(_QWORD *)v7 = &SSCoroutine::`vftable';
+  *(_QWORD *)v7 = &SSCoroutineBase::`vftable;
+  *(_QWORD *)v7 = &SSCoroutine::`vftable;
   v3[2].vfptr = 0i64;
-  v3->vfptr = (SSInvokableBaseVtbl *)&SSClosureInfoCoroutine::`vftable'{for `SSClosureInfoBase'};
-  *(_QWORD *)v7 = &SSClosureInfoCoroutine::`vftable'{for `SSCoroutine'};
+  v3->vfptr = (SSInvokableBaseVtbl *)&SSClosureInfoCoroutine::`vftable{for `SSClosureInfoBase};
+  *(_QWORD *)v7 = &SSClosureInfoCoroutine::`vftable{for `SSCoroutine};
   SSCoroutineBase::assign_binary(v3 + 1, v2);
   v5 = *(unsigned __int8 *)*v2;
   v6 = (signed __int64)*v2 + 1;
@@ -326,7 +326,7 @@ void __fastcall SSLiteralClosure::~SSLiteralClosure(SSLiteralClosure *this)
   bool v4; // zf
 
   v1 = this;
-  this->vfptr = (SSExpressionBaseVtbl *)&SSLiteralClosure::`vftable';
+  this->vfptr = (SSExpressionBaseVtbl *)&SSLiteralClosure::`vftable;
   v2 = this->i_receiver_p;
   if ( v2 )
     v2->vfptr->__vecDelDtor(v2, 1u);
@@ -341,7 +341,7 @@ void __fastcall SSLiteralClosure::~SSLiteralClosure(SSLiteralClosure *this)
         v3->vfptr->__vecDelDtor(v3, 1u);
     }
   }
-  v1->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
+  v1->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
 }
 
 // File Line: 422
@@ -362,8 +362,8 @@ void __fastcall SSLiteralClosure::SSLiteralClosure(SSLiteralClosure *this, SSLit
 
   v3 = closure_method_p;
   v4 = this;
-  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-  this->vfptr = (SSExpressionBaseVtbl *)&SSLiteralClosure::`vftable';
+  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+  this->vfptr = (SSExpressionBaseVtbl *)&SSLiteralClosure::`vftable;
   this->i_receiver_p = closure_method_p->i_receiver_p;
   this->i_info_p.i_obj_p = 0i64;
   v5 = (SSClosureInfoMethod *)closure_method_p->i_info_p.i_obj_p;
@@ -446,8 +446,8 @@ void __fastcall SSLiteralClosure::SSLiteralClosure(SSLiteralClosure *this, const
   v3 = type;
   v4 = binary_pp;
   v5 = this;
-  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable';
-  this->vfptr = (SSExpressionBaseVtbl *)&SSLiteralClosure::`vftable';
+  this->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+  this->vfptr = (SSExpressionBaseVtbl *)&SSLiteralClosure::`vftable;
   v6 = *(unsigned __int8 *)*binary_pp;
   v7 = (char *)*binary_pp + 1;
   *binary_pp = v7;

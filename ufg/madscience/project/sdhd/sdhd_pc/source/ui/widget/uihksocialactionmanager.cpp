@@ -76,7 +76,7 @@ void __fastcall UFG::UIHKSocialActionManager::Update(UFG::UIHKSocialActionManage
     v5 = 1;
   }
   v6 = v3->mRenderable->m_movie.pObject;
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( (v9 >> 6) & 1 )
   {
     (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v8 + 16i64))(v8, &ptr, COERCE_DOUBLE(*(_QWORD *)&v10));
@@ -85,6 +85,6 @@ void __fastcall UFG::UIHKSocialActionManager::Update(UFG::UIHKSocialActionManage
   v9 = 5;
   v10 = (double)v5;
   Scaleform::GFx::Movie::Invoke(v6, "FaceAction_hitTest", 0i64, (Scaleform::GFx::Value *)&ptr, 1u);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 

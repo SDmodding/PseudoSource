@@ -8,7 +8,7 @@ void __fastcall UFG::SpotShadowRenderQueueTaskResults::SpotShadowRenderQueueTask
   signed __int64 v4; // rdx
 
   v1 = this;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     this,
     0x20ui64,
     32,
@@ -35,7 +35,7 @@ void __fastcall UFG::SpotShadowRenderQueueSimResults::SpotShadowRenderQueueSimRe
   UFG::SpotShadowRenderQueueSimResults *v1; // rbx
 
   v1 = this;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     this->mCompositeDrawableSpotShadows,
     0x10ui64,
     8,

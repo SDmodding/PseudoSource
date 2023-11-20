@@ -66,11 +66,11 @@ SSInvokableClass *__fastcall SSInvokableClass::from_binary_ref(const void **bina
   else
   {
     iclass.i_ref_count = 0;
-    iclass.vfptr = (SSClassDescBaseVtbl *)&SSInvokableClass::`vftable';
+    iclass.vfptr = (SSClassDescBaseVtbl *)&SSInvokableClass::`vftable;
     iclass.i_params_p.i_obj_p = 0i64;
     SSInvokableClass::assign_binary(&iclass, binary_pp);
     v3 = SSInvokableClass::get_or_create(&iclass);
-    iclass.vfptr = (SSClassDescBaseVtbl *)&SSInvokableClass::`vftable';
+    iclass.vfptr = (SSClassDescBaseVtbl *)&SSInvokableClass::`vftable;
     v4 = iclass.i_params_p.i_obj_p;
     if ( iclass.i_params_p.i_obj_p )
     {

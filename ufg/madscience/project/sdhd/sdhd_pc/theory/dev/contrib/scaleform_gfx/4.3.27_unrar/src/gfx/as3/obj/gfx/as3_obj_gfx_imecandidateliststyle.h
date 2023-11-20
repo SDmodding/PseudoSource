@@ -23,8 +23,8 @@ Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_gfx::IMECandidateListStyl
   if ( v4 )
   {
     Scaleform::GFx::AS3::Instance::Instance(v4, (Scaleform::GFx::AS3::InstanceTraits::Traits *)&v2->vfptr);
-    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Object::`vftable';
-    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_gfx::IMECandidateListStyle::`vftable';
+    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Object::`vftable;
+    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_gfx::IMECandidateListStyle::`vftable;
     *(_QWORD *)&v5->textColor = -1i64;
     *(_QWORD *)&v5->fontSize = -1i64;
     *(_QWORD *)&v5->selectedBackgroundColor = -1i64;

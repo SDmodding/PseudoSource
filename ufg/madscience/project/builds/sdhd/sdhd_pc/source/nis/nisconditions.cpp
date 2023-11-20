@@ -17,7 +17,7 @@ void __fastcall IsNISPlayingCondition::IsNISPlayingCondition(IsNISPlayingConditi
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IsNISPlayingCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&IsNISPlayingCondition::`vftable;
 }
 
 // File Line: 29
@@ -46,7 +46,7 @@ void __fastcall IsNISPlayingActionCondition::IsNISPlayingActionCondition(IsNISPl
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IsNISPlayingActionCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&IsNISPlayingActionCondition::`vftable;
 }
 
 // File Line: 55
@@ -75,7 +75,7 @@ void __fastcall IsNISControlledCondition::IsNISControlledCondition(IsNISControll
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IsNISControlledCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&IsNISControlledCondition::`vftable;
 }
 
 // File Line: 81
@@ -131,7 +131,7 @@ void __fastcall IsNISSeamlessInCondition::IsNISSeamlessInCondition(IsNISSeamless
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IsNISSeamlessInCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&IsNISSeamlessInCondition::`vftable;
 }
 
 // File Line: 124
@@ -173,7 +173,7 @@ void __fastcall IsNISSeamlessOutCondition::IsNISSeamlessOutCondition(IsNISSeamle
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IsNISSeamlessOutCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&IsNISSeamlessOutCondition::`vftable;
 }
 
 // File Line: 159
@@ -215,7 +215,7 @@ void __fastcall IsNISPlayerControllableCondition::IsNISPlayerControllableConditi
 
   v1 = this;
   Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&IsNISPlayerControllableCondition::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&IsNISPlayerControllableCondition::`vftable;
 }
 
 // File Line: 194

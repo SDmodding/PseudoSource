@@ -807,8 +807,8 @@ void __fastcall Scaleform::Render::Stroker::calcJoin(Scaleform::Render::Stroker 
 // RVA: 0x945120
 void __fastcall Scaleform::Render::StrokeSorter::StrokeSorter(Scaleform::Render::StrokeSorter *this, Scaleform::Render::LinearHeap *heap)
 {
-  this->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable';
-  this->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::StrokeSorter::`vftable';
+  this->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable;
+  this->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::StrokeSorter::`vftable;
   this->pHeap = heap;
   this->SrcVertices.pHeap = heap;
   this->SrcVertices.Size = 0i64;

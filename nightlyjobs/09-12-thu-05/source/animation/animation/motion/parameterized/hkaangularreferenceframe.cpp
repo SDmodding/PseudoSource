@@ -19,7 +19,7 @@ void __fastcall hkaAngularReferenceFrame::hkaAngularReferenceFrame(hkaAngularRef
     (hkaDefaultAnimatedReferenceFrame *)&this->vfptr,
     options,
     REFERENCE_FRAME_PARAMETRIC);
-  v3->vfptr = (hkBaseObjectVtbl *)&hkaAngularReferenceFrame::`vftable';
+  v3->vfptr = (hkBaseObjectVtbl *)&hkaAngularReferenceFrame::`vftable;
   v4 = *(_OWORD *)&v2->m_referenceFrameTransforms;
   *(_OWORD *)&optionsa.m_numSamples = *(_OWORD *)&v2->m_numSamples;
   v5.m_quad = (__m128)v2->m_forward;
@@ -59,9 +59,9 @@ void __fastcall hkaAngularReferenceFrame::hkaAngularReferenceFrame(hkaAngularRef
   this->m_referenceFrameSamples.m_capacityAndFlags = 2147483648;
   v2 = baseReferenceFrame;
   v3 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaParameterizedReferenceFrame::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaParameterizedReferenceFrame::`vftable;
   hkaDefaultAnimatedReferenceFrame::operator=((hkaDefaultAnimatedReferenceFrame *)&this->vfptr, baseReferenceFrame);
-  v3->vfptr = (hkBaseObjectVtbl *)&hkaAngularReferenceFrame::`vftable';
+  v3->vfptr = (hkBaseObjectVtbl *)&hkaAngularReferenceFrame::`vftable;
   v3->m_frameType.m_storage = 2;
   hkaAngularReferenceFrame::initialize(v3, v2);
 }
@@ -130,7 +130,7 @@ void __usercall hkaAngularReferenceFrame::initialize(hkaAngularReferenceFrame *t
 void __fastcall hkaAngularReferenceFrame::hkaAngularReferenceFrame(hkaAngularReferenceFrame *this, hkFinishLoadedObjectFlag flag)
 {
   this->m_frameType.m_storage = 2;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaAngularReferenceFrame::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaAngularReferenceFrame::`vftable;
 }
 
 // File Line: 57

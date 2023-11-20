@@ -115,8 +115,8 @@ void __fastcall UFG::TargetingSystemCraneComponent::TargetingSystemCraneComponen
   v6 = (UFG::qNode<UFG::TargetingSystemCraneComponent,UFG::TargetingSystemCraneComponent> *)&v5->mPrev;
   v6->mPrev = v6;
   v6->mNext = v6;
-  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TargetingSystemCraneComponent::`vftable'{for `UFG::SimComponent'};
-  v5->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::TargetingSystemCraneComponent::`vftable'{for `UFG::UpdateInterface'};
+  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TargetingSystemCraneComponent::`vftable{for `UFG::SimComponent};
+  v5->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::TargetingSystemCraneComponent::`vftable{for `UFG::UpdateInterface};
   v5->mProbeBone.mUID = -1;
   v5->mProbeBoneIndex = -1;
   v7 = UFG::TargetingSystemCraneComponent::s_TargetingSystemCraneComponentList.mNode.mPrev;
@@ -143,8 +143,8 @@ void __fastcall UFG::TargetingSystemCraneComponent::~TargetingSystemCraneCompone
   UFG::qNode<UFG::TargetingSystemCraneComponent,UFG::TargetingSystemCraneComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TargetingSystemCraneComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::TargetingSystemCraneComponent::`vftable'{for `UFG::UpdateInterface'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TargetingSystemCraneComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::TargetingSystemCraneComponent::`vftable{for `UFG::UpdateInterface};
   if ( this == UFG::TargetingSystemCraneComponent::s_TargetingSystemCraneComponentpCurrentIterator )
     UFG::TargetingSystemCraneComponent::s_TargetingSystemCraneComponentpCurrentIterator = (UFG::TargetingSystemCraneComponent *)&this->mPrev[-8].mNext;
   v2 = (UFG::qNode<UFG::TargetingSystemCraneComponent,UFG::TargetingSystemCraneComponent> *)&this->mPrev;
@@ -358,7 +358,7 @@ LABEL_31:
   if ( v24 )
     UFG::TargetingSimObject::SetTarget((UFG::TargetingSimObject *)(*(_QWORD *)&v2->m_TypeUID + 56i64 * v24), v23);
 LABEL_27:
-  input.m_to.m_quad.m128_u64[1] = (unsigned __int64)&hkpAllRayHitCollector::`vftable';
+  input.m_to.m_quad.m128_u64[1] = (unsigned __int64)&hkpAllRayHitCollector::`vftable;
   v35 = &input.m_userData;
   v33 = 0;
   if ( v34 >= 0 )

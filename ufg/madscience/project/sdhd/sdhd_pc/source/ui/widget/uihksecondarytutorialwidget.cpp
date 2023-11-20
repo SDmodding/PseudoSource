@@ -61,7 +61,7 @@ void __fastcall UFG::UIHKSecondaryTutorialWidget::Flash_Show(UFG::UIHKSecondaryT
     v4 = screen->mRenderable->m_movie.pObject;
     if ( v4 )
     {
-      `eh vector constructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       if ( ((unsigned int)pargs.Type >> 6) & 1 )
       {
         (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
@@ -73,7 +73,7 @@ void __fastcall UFG::UIHKSecondaryTutorialWidget::Flash_Show(UFG::UIHKSecondaryT
       pargs.Type = 6;
       *(_QWORD *)&pargs.mValue.NValue = v3;
       Scaleform::GFx::Movie::Invoke(v4, "SecondaryTutorial_Show", 0i64, &pargs, 1u);
-      `eh vector destructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+      `eh vector destructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     }
   }
 }

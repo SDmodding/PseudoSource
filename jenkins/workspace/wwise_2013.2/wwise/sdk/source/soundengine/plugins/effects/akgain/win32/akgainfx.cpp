@@ -6,7 +6,7 @@ AK::IAkPlugin *__fastcall CreateGainFX(AK::IAkPluginMemAlloc *in_pAllocator)
 
   result = (AK::IAkPlugin *)in_pAllocator->vfptr->Malloc(in_pAllocator, 32ui64);
   if ( result )
-    result->vfptr = (AK::IAkPluginVtbl *)&CAkGainFX::`vftable';
+    result->vfptr = (AK::IAkPluginVtbl *)&CAkGainFX::`vftable;
   return result;
 }
 
@@ -14,14 +14,14 @@ AK::IAkPlugin *__fastcall CreateGainFX(AK::IAkPluginMemAlloc *in_pAllocator)
 // RVA: 0xAF64D0
 void __fastcall CAkGainFX::CAkGainFX(CAkGainFX *this)
 {
-  this->vfptr = (AK::IAkPluginVtbl *)&CAkGainFX::`vftable';
+  this->vfptr = (AK::IAkPluginVtbl *)&CAkGainFX::`vftable;
 }
 
 // File Line: 51
 // RVA: 0xAF64F0
 void __fastcall CAkGainFX::~CAkGainFX(CAkGainFX *this)
 {
-  this->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable';
+  this->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable;
 }
 
 // File Line: 61

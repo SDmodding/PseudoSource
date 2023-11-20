@@ -51,7 +51,7 @@ void __fastcall CAkRTPCMgr::CAkRTPCTransition::TransUpdateValue(CAkRTPCMgr::CAkR
 LABEL_14:
     v5->m_pTransition = 0i64;
     v15 = g_DefaultPoolId;
-    v5->vfptr = (ITransitionableVtbl *)&CAkRTPCMgr::CAkRTPCTransition::`vftable';
+    v5->vfptr = (ITransitionableVtbl *)&CAkRTPCMgr::CAkRTPCTransition::`vftable;
     AK::MemoryMgr::Free(v15, v5);
   }
 }
@@ -103,7 +103,7 @@ void __fastcall CAkRTPCMgr::AkRTPCEntry::~AkRTPCEntry(CAkRTPCMgr::AkRTPCEntry *t
         MEMORY[8] = v1->pNextLightItem;
       v3 = v1->m_pTransition;
       v4 = g_DefaultPoolId;
-      v1->vfptr = (ITransitionableVtbl *)&CAkRTPCMgr::CAkRTPCTransition::`vftable';
+      v1->vfptr = (ITransitionableVtbl *)&CAkRTPCMgr::CAkRTPCTransition::`vftable;
       if ( v3 )
         CAkTransitionManager::RemoveTransitionUser(g_pTransitionManager, v3, (ITransitionable *)&v1->vfptr);
       AK::MemoryMgr::Free(v4, v1);
@@ -173,7 +173,7 @@ void __fastcall CAkRTPCMgr::AkRTPCEntry::RemoveGameObject(CAkRTPCMgr::AkRTPCEntr
         v8[1].vfptr = v11;
       v12 = (CAkTransition *)v9[2].vfptr;
       v13 = g_DefaultPoolId;
-      v9->vfptr = (ITransitionableVtbl *)&CAkRTPCMgr::CAkRTPCTransition::`vftable';
+      v9->vfptr = (ITransitionableVtbl *)&CAkRTPCMgr::CAkRTPCTransition::`vftable;
       if ( v12 )
         CAkTransitionManager::RemoveTransitionUser(g_pTransitionManager, v12, v9);
       AK::MemoryMgr::Free(v13, v9);
@@ -196,7 +196,7 @@ LABEL_21:
           MEMORY[8] = v4->pNextLightItem;
         v5 = v4->m_pTransition;
         v6 = g_DefaultPoolId;
-        v4->vfptr = (ITransitionableVtbl *)&CAkRTPCMgr::CAkRTPCTransition::`vftable';
+        v4->vfptr = (ITransitionableVtbl *)&CAkRTPCMgr::CAkRTPCTransition::`vftable;
         if ( v5 )
           CAkTransitionManager::RemoveTransitionUser(g_pTransitionManager, v5, (ITransitionable *)&v4->vfptr);
         AK::MemoryMgr::Free(v6, v4);
@@ -1078,7 +1078,7 @@ signed __int64 __fastcall CAkRTPCMgr::AkRTPCEntry::SetRTPC(CAkRTPCMgr::AkRTPCEnt
         v15[1].vfptr = v18;
       v19 = (CAkTransition *)v16[2].vfptr;
       v20 = g_DefaultPoolId;
-      v16->vfptr = (ITransitionableVtbl *)&CAkRTPCMgr::CAkRTPCTransition::`vftable';
+      v16->vfptr = (ITransitionableVtbl *)&CAkRTPCMgr::CAkRTPCTransition::`vftable;
       if ( v19 )
         CAkTransitionManager::RemoveTransitionUser(g_pTransitionManager, v19, v16);
       AK::MemoryMgr::Free(v20, v16);
@@ -1193,7 +1193,7 @@ bool __fastcall CAkRTPCMgr::AkRTPCEntry::CreateOrModifyTransition(CAkRTPCMgr::Ak
       v9[1].vfptr = v14;
     v15 = (CAkTransition *)v10[2].vfptr;
     v16 = g_DefaultPoolId;
-    v10->vfptr = (ITransitionableVtbl *)&CAkRTPCMgr::CAkRTPCTransition::`vftable';
+    v10->vfptr = (ITransitionableVtbl *)&CAkRTPCMgr::CAkRTPCTransition::`vftable;
     if ( v15 )
       CAkTransitionManager::RemoveTransitionUser(g_pTransitionManager, v15, v10);
     AK::MemoryMgr::Free(v16, v10);
@@ -1205,7 +1205,7 @@ LABEL_5:
   v11 = (CAkRTPCMgr::CAkRTPCTransition *)AK::MemoryMgr::Malloc(g_DefaultPoolId, 0x30ui64);
   if ( !v11 )
     return 0;
-  v11->vfptr = (ITransitionableVtbl *)&CAkRTPCMgr::CAkRTPCTransition::`vftable';
+  v11->vfptr = (ITransitionableVtbl *)&CAkRTPCMgr::CAkRTPCTransition::`vftable;
   v11->m_pTransition = 0i64;
   v11->m_pOwner = v7;
   v11->m_pGameObject = v6;

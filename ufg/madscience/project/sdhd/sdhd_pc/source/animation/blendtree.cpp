@@ -63,9 +63,9 @@ void __fastcall PoseNode::~PoseNode(PoseNode *this)
   UFG::qList<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList,1,0> *v13; // [rsp+48h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&PoseNode::`vftable'{for `Expression::IMemberMap'};
+  this->vfptr = (Expression::IMemberMapVtbl *)&PoseNode::`vftable{for `Expression::IMemberMap};
   v2 = (UFG::qSafePointerNode<UFG::ParkourHandle> *)&this->vfptr;
-  this->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&PoseNode::`vftable'{for `UFG::qSafePointerNode<PoseNode>'};
+  this->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&PoseNode::`vftable{for `UFG::qSafePointerNode<PoseNode>};
   v3 = this->mParent.mOffset;
   if ( v3 && (UFG::qOffset64<PoseNodeParent *> *)((char *)&this->mParent + v3) )
   {
@@ -89,7 +89,7 @@ void __fastcall PoseNode::~PoseNode(PoseNode *this)
   v10->mPrev = v9;
   v6->mPrev = v6;
   v1->mNext = (UFG::qNode<PoseNode,PoseNode> *)&v1->mPrev;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<PoseNode>::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<PoseNode>::`vftable;
   UFG::qSafePointerNode<UFG::DynamicCoverCorner>::SetAllPointersToNull(v2);
   v13 = &v2->m_SafePointerList;
   UFG::qList<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList,1,0>::DeleteNodes(&v2->m_SafePointerList);
@@ -99,7 +99,7 @@ void __fastcall PoseNode::~PoseNode(PoseNode *this)
   v12->mPrev = v11;
   v13->mNode.mPrev = &v13->mNode;
   v13->mNode.mNext = &v13->mNode;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 190
@@ -118,16 +118,16 @@ void __fastcall PoseNodeParent::PoseNodeParent(PoseNodeParent *this, MemImageLoa
   UFG::qNode<PoseNode,PoseNode> *v11; // rax
 
   v2 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
   UFG::qSafePointerNode<PoseNode>::qSafePointerNode<PoseNode>((UFG::qSafePointerNode<PoseNode> *)&this->vfptr);
   v3 = (UFG::qNode<PoseNode,PoseNode> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (Expression::IMemberMapVtbl *)&PoseNode::`vftable'{for `Expression::IMemberMap'};
-  v2->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&PoseNode::`vftable'{for `UFG::qSafePointerNode<PoseNode>'};
-  v2->vfptr = (Expression::IMemberMapVtbl *)&PoseNodeParent::`vftable'{for `Expression::IMemberMap'};
-  v2->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&PoseNodeParent::`vftable'{for `UFG::qSafePointerNode<PoseNode>'};
+  v2->vfptr = (Expression::IMemberMapVtbl *)&PoseNode::`vftable{for `Expression::IMemberMap};
+  v2->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&PoseNode::`vftable{for `UFG::qSafePointerNode<PoseNode>};
+  v2->vfptr = (Expression::IMemberMapVtbl *)&PoseNodeParent::`vftable{for `Expression::IMemberMap};
+  v2->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&PoseNodeParent::`vftable{for `UFG::qSafePointerNode<PoseNode>};
   v4 = &v2->mChildren;
   v4->mNode.mPrev = &v4->mNode;
   v4->mNode.mNext = &v4->mNode;
@@ -382,20 +382,20 @@ void __fastcall BlendDirectionNode::BlendDirectionNode(BlendDirectionNode *this)
 
   v1 = this;
   PoseNode::PoseNode((PoseNode *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PoseNodeParent::`vftable'{for `Expression::IMemberMap'};
-  v1->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&PoseNodeParent::`vftable'{for `UFG::qSafePointerNode<PoseNode>'};
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PoseNodeParent::`vftable{for `Expression::IMemberMap};
+  v1->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&PoseNodeParent::`vftable{for `UFG::qSafePointerNode<PoseNode>};
   v1->mChildrenSerialized.mCount = 0;
   v1->mChildrenSerialized.mData.mOffset = 0i64;
   v2 = &v1->mChildren;
   v2->mNode.mPrev = &v2->mNode;
   v2->mNode.mNext = &v2->mNode;
   v1->mLocalTime = 0.0;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&BlendDirectionNode::`vftable'{for `Expression::IMemberMap'};
-  v1->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&BlendDirectionNode::`vftable'{for `UFG::qSafePointerNode<PoseNode>'};
+  v1->vfptr = (Expression::IMemberMapVtbl *)&BlendDirectionNode::`vftable{for `Expression::IMemberMap};
+  v1->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&BlendDirectionNode::`vftable{for `UFG::qSafePointerNode<PoseNode>};
   *(_QWORD *)&v1->mActiveDirection = 0i64;
   v3 = &v1->mMotionPhase;
-  v3->0 = (Expression::IMemberMap)(unsigned __int64)&Expression::IMemberMap::`vftable';
-  v3->vfptr = (Expression::IMemberMapVtbl *)&MotionPhase2::`vftable';
+  v3->0 = (Expression::IMemberMap)(unsigned __int64)&Expression::IMemberMap::`vftable;
+  v3->vfptr = (Expression::IMemberMapVtbl *)&MotionPhase2::`vftable;
   *(_QWORD *)&v1->mMotionPhase.mPhaseMark.mValue = 0i64;
   *(_QWORD *)&v1->mMotionPhase.mPhase = 0i64;
   *(_QWORD *)v1->mDirections = -4647714812233515008i64;
@@ -423,11 +423,11 @@ void __fastcall BlendDirectionNode::BlendDirectionNode(BlendDirectionNode *this,
 
   v2 = this;
   PoseNodeParent::PoseNodeParent((PoseNodeParent *)&this->vfptr, flag);
-  v2->vfptr = (Expression::IMemberMapVtbl *)&BlendDirectionNode::`vftable'{for `Expression::IMemberMap'};
-  v2->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&BlendDirectionNode::`vftable'{for `UFG::qSafePointerNode<PoseNode>'};
+  v2->vfptr = (Expression::IMemberMapVtbl *)&BlendDirectionNode::`vftable{for `Expression::IMemberMap};
+  v2->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&BlendDirectionNode::`vftable{for `UFG::qSafePointerNode<PoseNode>};
   v3 = &v2->mMotionPhase;
-  v3->0 = (Expression::IMemberMap)(unsigned __int64)&Expression::IMemberMap::`vftable';
-  v3->vfptr = (Expression::IMemberMapVtbl *)&MotionPhase2::`vftable';
+  v3->0 = (Expression::IMemberMap)(unsigned __int64)&Expression::IMemberMap::`vftable;
+  v3->vfptr = (Expression::IMemberMapVtbl *)&MotionPhase2::`vftable;
   *(_QWORD *)&v2->mMotionPhase.mPhaseMark.mValue = 0i64;
   *(_QWORD *)&v2->mMotionPhase.mPhase = 0i64;
 }
@@ -545,9 +545,9 @@ void __fastcall AnimationNode::AnimationNode(AnimationNode *this)
   v1 = this;
   PoseNode::PoseNode((PoseNode *)&this->vfptr);
   UFG::qSafePointerNode<AnimationNode>::qSafePointerNode<AnimationNode>((UFG::qSafePointerNode<AnimationNode> *)&v1->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AnimationNode::`vftable'{for `Expression::IMemberMap'};
-  v1->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&AnimationNode::`vftable'{for `UFG::qSafePointerNode<PoseNode>'};
-  v1->vfptr = (UFG::qSafePointerNode<AnimationNode>Vtbl *)&AnimationNode::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&AnimationNode::`vftable{for `Expression::IMemberMap};
+  v1->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&AnimationNode::`vftable{for `UFG::qSafePointerNode<PoseNode>};
+  v1->vfptr = (UFG::qSafePointerNode<AnimationNode>Vtbl *)&AnimationNode::`vftable;
   v9 = &v1->m_RunningTasks;
   v9->mNode.mPrev = &v9->mNode;
   v9->mNode.mNext = &v9->mNode;
@@ -583,9 +583,9 @@ void __fastcall AnimationNode::AnimationNode(AnimationNode *this)
   *(_QWORD *)&v1->mCurrentExtractedMotionSpeed = 0i64;
   v1->mDebugPlayingFromActionNode = 0i64;
   v6 = &v1->mMotionPhase;
-  v6->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v6->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   v6->mResourceOwner = 0i64;
-  v6->vfptr = (Expression::IMemberMapVtbl *)&MotionPhase2::`vftable';
+  v6->vfptr = (Expression::IMemberMapVtbl *)&MotionPhase2::`vftable;
   *(_QWORD *)&v1->mMotionPhase.mPhaseMark.mValue = 0i64;
   *(_QWORD *)&v1->mMotionPhase.mPhase = 0i64;
   *(_DWORD *)&v1->mPlayMode.mValue = 16777473;
@@ -623,9 +623,9 @@ void __fastcall AnimationNode::AnimationNode(AnimationNode *this, UFG::qSymbolUC
   v7 = this;
   PoseNode::PoseNode((PoseNode *)&this->vfptr);
   UFG::qSafePointerNode<AnimationNode>::qSafePointerNode<AnimationNode>((UFG::qSafePointerNode<AnimationNode> *)&v7->vfptr);
-  v7->vfptr = (Expression::IMemberMapVtbl *)&AnimationNode::`vftable'{for `Expression::IMemberMap'};
-  v7->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&AnimationNode::`vftable'{for `UFG::qSafePointerNode<PoseNode>'};
-  v7->vfptr = (UFG::qSafePointerNode<AnimationNode>Vtbl *)&AnimationNode::`vftable';
+  v7->vfptr = (Expression::IMemberMapVtbl *)&AnimationNode::`vftable{for `Expression::IMemberMap};
+  v7->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&AnimationNode::`vftable{for `UFG::qSafePointerNode<PoseNode>};
+  v7->vfptr = (UFG::qSafePointerNode<AnimationNode>Vtbl *)&AnimationNode::`vftable;
   v16 = &v7->m_RunningTasks;
   v16->mNode.mPrev = &v16->mNode;
   v16->mNode.mNext = &v16->mNode;
@@ -661,9 +661,9 @@ void __fastcall AnimationNode::AnimationNode(AnimationNode *this, UFG::qSymbolUC
   *(_QWORD *)&v7->mCurrentExtractedMotionSpeed = 0i64;
   v7->mDebugPlayingFromActionNode = 0i64;
   v13 = &v7->mMotionPhase;
-  v13->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v13->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   v13->mResourceOwner = 0i64;
-  v13->vfptr = (Expression::IMemberMapVtbl *)&MotionPhase2::`vftable';
+  v13->vfptr = (Expression::IMemberMapVtbl *)&MotionPhase2::`vftable;
   *(_QWORD *)&v7->mMotionPhase.mPhaseMark.mValue = 0i64;
   *(_QWORD *)&v7->mMotionPhase.mPhase = 0i64;
   v7->mPlayMode.mValue = v5;
@@ -695,18 +695,18 @@ void __fastcall AnimationNode::AnimationNode(AnimationNode *this, MemImageLoadFl
   UFG::qSafePointer<AnimationGroup,AnimationGroup> *v10; // [rsp+78h] [rbp+20h]
 
   v2 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
   UFG::qSafePointerNode<PoseNode>::qSafePointerNode<PoseNode>((UFG::qSafePointerNode<PoseNode> *)&this->vfptr);
   v3 = (UFG::qNode<PoseNode,PoseNode> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (Expression::IMemberMapVtbl *)&PoseNode::`vftable'{for `Expression::IMemberMap'};
-  v2->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&PoseNode::`vftable'{for `UFG::qSafePointerNode<PoseNode>'};
+  v2->vfptr = (Expression::IMemberMapVtbl *)&PoseNode::`vftable{for `Expression::IMemberMap};
+  v2->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&PoseNode::`vftable{for `UFG::qSafePointerNode<PoseNode>};
   UFG::qSafePointerNode<AnimationNode>::qSafePointerNode<AnimationNode>((UFG::qSafePointerNode<AnimationNode> *)&v2->vfptr);
-  v2->vfptr = (Expression::IMemberMapVtbl *)&AnimationNode::`vftable'{for `Expression::IMemberMap'};
-  v2->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&AnimationNode::`vftable'{for `UFG::qSafePointerNode<PoseNode>'};
-  v2->vfptr = (UFG::qSafePointerNode<AnimationNode>Vtbl *)&AnimationNode::`vftable';
+  v2->vfptr = (Expression::IMemberMapVtbl *)&AnimationNode::`vftable{for `Expression::IMemberMap};
+  v2->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&AnimationNode::`vftable{for `UFG::qSafePointerNode<PoseNode>};
+  v2->vfptr = (UFG::qSafePointerNode<AnimationNode>Vtbl *)&AnimationNode::`vftable;
   v2->mpContext = 0i64;
   v7 = &v2->m_RunningTasks;
   v7->mNode.mPrev = &v7->mNode;
@@ -729,8 +729,8 @@ void __fastcall AnimationNode::AnimationNode(AnimationNode *this, MemImageLoadFl
   v10->mNext = (UFG::qNode<UFG::qSafePointerBase<AnimationGroup>,UFG::qSafePointerNodeList> *)&v10->mPrev;
   v5->m_AnimationGroup.m_pPointer = 0i64;
   v9 = &v2->mMotionPhase;
-  v9->0 = (Expression::IMemberMap)(unsigned __int64)&Expression::IMemberMap::`vftable';
-  v9->vfptr = (Expression::IMemberMapVtbl *)&MotionPhase2::`vftable';
+  v9->0 = (Expression::IMemberMap)(unsigned __int64)&Expression::IMemberMap::`vftable;
+  v9->vfptr = (Expression::IMemberMapVtbl *)&MotionPhase2::`vftable;
 }
 
 // File Line: 791
@@ -755,10 +755,10 @@ void __fastcall AnimationNode::~AnimationNode(AnimationNode *this)
   MotionPhase2 *v16; // [rsp+58h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&AnimationNode::`vftable'{for `Expression::IMemberMap'};
-  this->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&AnimationNode::`vftable'{for `UFG::qSafePointerNode<PoseNode>'};
+  this->vfptr = (Expression::IMemberMapVtbl *)&AnimationNode::`vftable{for `Expression::IMemberMap};
+  this->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&AnimationNode::`vftable{for `UFG::qSafePointerNode<PoseNode>};
   v2 = (UFG::qSafePointerNode<UFG::ParkourHandle> *)&this->vfptr;
-  this->vfptr = (UFG::qSafePointerNode<AnimationNode>Vtbl *)&AnimationNode::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<AnimationNode>Vtbl *)&AnimationNode::`vftable;
   while ( (ActionContext **)&v1->m_RunningTasks.mNode.mNext[-1].mNext != &v1->mpContext )
   {
     v3 = v1->m_RunningTasks.mNode.mNext;
@@ -801,12 +801,12 @@ void __fastcall AnimationNode::~AnimationNode(AnimationNode *this)
     operator delete[](v9);
   }
   v16 = &v1->mMotionPhase;
-  v16->vfptr = (Expression::IMemberMapVtbl *)&MotionPhase2::`vftable';
-  v16->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v16->vfptr = (Expression::IMemberMapVtbl *)&MotionPhase2::`vftable;
+  v16->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   AnimationGroupHandle::~AnimationGroupHandle(&v1->mAnimationGroupHandle);
   SkeletalAnimationHandle::~SkeletalAnimationHandle(&v1->mSkeletalAnimationHandle);
   UFG::qList<UFG::PowerManagedResource,UFG::PowerManagedResourceList,0,0>::~qList<UFG::PowerManagedResource,UFG::PowerManagedResourceList,0,0>(&v1->m_RunningTasks);
-  v2->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<AnimationNode>::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<AnimationNode>::`vftable;
   UFG::qSafePointerNode<UFG::DynamicCoverCorner>::SetAllPointersToNull(v2);
   UFG::qList<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList,1,0>::DeleteNodes(&v2->m_SafePointerList);
   v14 = v2->m_SafePointerList.mNode.mPrev;
@@ -921,7 +921,7 @@ char __usercall GetWeightedDurationAndParametricTime@<al>(PoseNode *pose0@<rcx>,
   __int64 v14; // [rsp+30h] [rbp-58h]
 
   v6 = FLOAT_N1_0;
-  v12 = &FirstAnimationNode::`vftable';
+  v12 = &FirstAnimationNode::`vftable;
   v7 = pose0->vfptr;
   v8 = pose1;
   v9 = weightedDurationMaster;
@@ -966,7 +966,7 @@ void __fastcall DurationMatch(PoseNode *pose0, PoseNode *pose1, float weight, fl
   v4 = pose1;
   if ( GetWeightedDurationAndParametricTime(pose0, pose1, weight, &weightedDurationMaster, &parametricLocalTimeMaster) )
   {
-    v8 = &AnimationNode_SetLocalTimeParametric::`vftable';
+    v8 = &AnimationNode_SetLocalTimeParametric::`vftable;
     v5 = v4->vfptr;
     v10 = parametricLocalTimeMaster;
     v11 = weightedDurationMaster;
@@ -1460,7 +1460,7 @@ void __fastcall PhaseSync(PoseNode *pose0, PoseNode *pose1)
 
   v2 = pose1;
   v4 = 0i64;
-  v3 = &MotionPhase2::`vftable';
+  v3 = &MotionPhase2::`vftable;
   v5 = 0i64;
   v6 = 0i64;
   pose0->vfptr[2].Serialize((Expression::IMemberMap *)pose0, (IActionTreeSerializer *)&v3);
@@ -1485,11 +1485,11 @@ void __fastcall PhaseMatch(PoseNode *pose0, PoseNode *pose1, float weight)
   v3 = pose1;
   v4 = pose0;
   v6 = 0i64;
-  v5 = &MotionPhase2::`vftable';
+  v5 = &MotionPhase2::`vftable;
   v7 = 0i64;
   v8 = 0i64;
   v10 = 0i64;
-  v9 = &MotionPhase2::`vftable';
+  v9 = &MotionPhase2::`vftable;
   v11 = 0i64;
   v12 = 0i64;
   pose0->vfptr[2].Serialize((Expression::IMemberMap *)pose0, (IActionTreeSerializer *)&v5);
@@ -2450,7 +2450,7 @@ void __fastcall BlendDirectionNode::updateOperation(BlendDirectionNode *this)
     }
     if ( GetWeightedDurationAndParametricTime(i, v5, v3, (float *)&child1ID, v3, (float *)&child0ID) )
     {
-      v10 = &AnimationNode_SetLocalTimeParametric::`vftable';
+      v10 = &AnimationNode_SetLocalTimeParametric::`vftable;
       v8 = v2->vfptr;
       v12 = *(float *)&child0ID;
       v13 = child1ID;
@@ -2463,7 +2463,7 @@ void __fastcall BlendDirectionNode::updateOperation(BlendDirectionNode *this)
   else
   {
     v12 = this->mPlayRate;
-    v10 = &AnimationNode_SetPlayRate::`vftable';
+    v10 = &AnimationNode_SetPlayRate::`vftable;
     v9 = this->vfptr;
     v11 = 1;
     v9[1].FindWithOldPath((Expression::IMemberMap *)&this->vfptr, (const char *)&v10);
@@ -2521,7 +2521,7 @@ void __fastcall BlendNode::Begin(BlendNode *this)
         {
           v3 = this->mChildren.mNode.mNext;
           v7 = 1;
-          v5 = &PoseNode_SetPauseBlend::`vftable';
+          v5 = &PoseNode_SetPauseBlend::`vftable;
           v8 = v1->mPriority;
           v4 = (__int64)v1->mWeightSet;
           v6 = 0;
@@ -2604,17 +2604,17 @@ LABEL_23:
     if ( v14 )
     {
       PhaseSync(v13, v14);
-      v17 = &AnimationNode_UpdateLastPlayTime::`vftable';
+      v17 = &AnimationNode_UpdateLastPlayTime::`vftable;
       v15 = v14->vfptr;
       v18 = 1;
       v15[1].FindWithOldPath((Expression::IMemberMap *)&v14->vfptr, (const char *)&v17);
       if ( sSyncBlendDirection )
       {
         v20 = 1;
-        v19 = &BlendDirectionNode_GetBlendDirection::`vftable';
+        v19 = &BlendDirectionNode_GetBlendDirection::`vftable;
         UFG::qMemSet(&dest, 0, 0x20u);
         v13->vfptr[1].FindWithOldPath((Expression::IMemberMap *)&v13->vfptr, (const char *)&v19);
-        v22 = &BlendDirectionNode_SetBlendDirection::`vftable';
+        v22 = &BlendDirectionNode_SetBlendDirection::`vftable;
         v23 = 1;
         UFG::qMemCopy(&v24, &dest, 0x20u);
         v14->vfptr[1].FindWithOldPath((Expression::IMemberMap *)&v14->vfptr, (const char *)&v22);
@@ -2763,7 +2763,7 @@ LABEL_26:
 LABEL_28:
   v20 = this->mChildren.mNode.mNext;
   v21 = (int)v20[1].mNext;
-  v23 = &PoseNode_SetPauseBlend::`vftable';
+  v23 = &PoseNode_SetPauseBlend::`vftable;
   v26 = v21;
   v22 = (__int64)v1->mWeightSet;
   v25 = 0;
@@ -2932,11 +2932,11 @@ void __fastcall BlendNode::GetPhase(BlendNode *this, MotionPhase2 *motionPhase)
       return;
     }
     v21 = 0i64;
-    v20 = &MotionPhase2::`vftable';
+    v20 = &MotionPhase2::`vftable;
     v22 = 0i64;
     v23 = 0i64;
     v17 = 0i64;
-    v16 = &MotionPhase2::`vftable';
+    v16 = &MotionPhase2::`vftable;
     v18 = 0i64;
     v19 = 0i64;
     v4 = &this->mChildren.mNode.mNext[-3].mNext;
@@ -2957,8 +2957,8 @@ void __fastcall BlendNode::GetPhase(BlendNode *this, MotionPhase2 *motionPhase)
         v2->mPhaseMark.mValue = v22;
         v2->mPhase = (float)((float)(*(float *)&v19 - *(float *)&v23) * v6) + *(float *)&v23;
 LABEL_28:
-        v16 = &Expression::IMemberMap::`vftable';
-        v20 = &Expression::IMemberMap::`vftable';
+        v16 = &Expression::IMemberMap::`vftable;
+        v20 = &Expression::IMemberMap::`vftable;
         return;
       }
       v7 = *(float *)&FLOAT_1_0;
@@ -3020,8 +3020,8 @@ LABEL_27:
       v14 = *(float *)&v23;
       goto LABEL_27;
     }
-    v16 = &Expression::IMemberMap::`vftable';
-    v20 = &Expression::IMemberMap::`vftable';
+    v16 = &Expression::IMemberMap::`vftable;
+    v20 = &Expression::IMemberMap::`vftable;
   }
   *(_QWORD *)&v2->mPhaseMark.mValue = 0i64;
   *(_QWORD *)&v2->mPhase = 0i64;
@@ -3328,22 +3328,22 @@ bool __usercall BlendPhaseNode::Update@<al>(BlendPhaseNode *this@<rcx>, float ti
     if ( v15 )
     {
       PhaseSync(v14, v15);
-      v24 = &AnimationNode_UpdateLastPlayTime::`vftable';
+      v24 = &AnimationNode_UpdateLastPlayTime::`vftable;
       v16 = v15->vfptr;
       v25 = 1;
       v16[1].FindWithOldPath((Expression::IMemberMap *)&v15->vfptr, (const char *)&v24);
       if ( sSyncBlendDirection )
       {
         v27 = 1;
-        v26 = &BlendDirectionNode_GetBlendDirection::`vftable';
+        v26 = &BlendDirectionNode_GetBlendDirection::`vftable;
         UFG::qMemSet(&dest, 0, 0x20u);
         v14->vfptr[1].FindWithOldPath((Expression::IMemberMap *)&v14->vfptr, (const char *)&v26);
-        v29 = &BlendDirectionNode_SetBlendDirection::`vftable';
+        v29 = &BlendDirectionNode_SetBlendDirection::`vftable;
         v30 = 1;
         UFG::qMemCopy(&v31, &dest, 0x20u);
         v15->vfptr[1].FindWithOldPath((Expression::IMemberMap *)&v15->vfptr, (const char *)&v29);
       }
-      v21 = &FirstAnimationNode::`vftable';
+      v21 = &FirstAnimationNode::`vftable;
       v17 = v14->vfptr;
       v22 = 1;
       v23 = 0i64;
@@ -3575,9 +3575,9 @@ void __fastcall BlendPhaseNode::GetPhase(BlendPhaseNode *this, MotionPhase2 *mot
 
   v2 = motionPhase;
   v4 = 1;
-  v3 = &PoseNode_GetPhase::`vftable';
+  v3 = &PoseNode_GetPhase::`vftable;
   v6 = 0ui64;
-  v5 = &MotionPhase2::`vftable';
+  v5 = &MotionPhase2::`vftable;
   v7 = 0i64;
   ((void (__fastcall *)(UFG::qNode<PoseNode,PoseNode> **, void ***))this->mChildren.mNode.mNext[-3].mNext[5].mPrev)(
     &this->mChildren.mNode.mNext[-3].mNext,
@@ -4584,7 +4584,7 @@ void __fastcall BlendDirectionNode::constructNetSequence(BlendDirectionNode *thi
 
   v2 = creature;
   v4 = 1;
-  v3 = &ConstructNetSequence::`vftable';
+  v3 = &ConstructNetSequence::`vftable;
   v5 = creature->mNetPoseSequence;
   this->vfptr[1].FindWithOldPath((Expression::IMemberMap *)this, (const char *)&v3);
   v2->mNetPoseSequence = v5;

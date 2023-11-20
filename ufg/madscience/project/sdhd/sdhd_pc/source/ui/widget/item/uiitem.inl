@@ -6,7 +6,7 @@ void __fastcall UFG::UIItem::~UIItem(UFG::UIItem *this)
   UFG::qNode<UFG::UIItem,UFG::UIItem> *v2; // rcx
   UFG::qNode<UFG::UIItem,UFG::UIItem> *v3; // rax
 
-  this->vfptr = (UFG::UIItemVtbl *)&UFG::UIItem::`vftable';
+  this->vfptr = (UFG::UIItemVtbl *)&UFG::UIItem::`vftable;
   v1 = (UFG::qNode<UFG::UIItem,UFG::UIItem> *)&this->mPrev;
   v2 = this->mPrev;
   v3 = v1->mNext;

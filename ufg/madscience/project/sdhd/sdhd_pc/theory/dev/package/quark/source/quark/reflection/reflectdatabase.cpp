@@ -1157,7 +1157,7 @@ char __fastcall UFG::ReflectionDB::Load(UFG::ReflectionDB *this, const char *fil
   v6 = UFG::qOpen(v2, QACCESS_READ, 1);
   if ( !v6 )
     goto LABEL_8;
-  UFG::qSPrintf(&dest, "qReadEntireFile('%s')", v2);
+  UFG::qSPrintf(&dest, "qReadEntireFile(%s)", v2);
   v7 = UFG::qMemoryPool::Allocate(v5, v4 + 1, &dest, 0i64, 1u);
   v8 = v7;
   v48 = v7;
@@ -1165,7 +1165,7 @@ char __fastcall UFG::ReflectionDB::Load(UFG::ReflectionDB *this, const char *fil
   {
     UFG::qClose(v6);
 LABEL_8:
-    UFG::qPrintf("ERROR: Could not load ReflectionDB.  File not found!  filename = '%s'\n", v2);
+    UFG::qPrintf("ERROR: Could not load ReflectionDB.  File not found!  filename = %s\n", v2);
     return 0;
   }
   if ( (signed int)UFG::qRead(v6, v7, v4, 0i64, QSEEK_CUR) != v4 )

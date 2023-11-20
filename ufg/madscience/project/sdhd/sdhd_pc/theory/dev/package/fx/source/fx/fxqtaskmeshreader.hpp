@@ -12,7 +12,7 @@ void __fastcall Render::FXqTaskMeshReader::FXqTaskMeshReader(Render::FXqTaskMesh
   this->mMeshStream.mName = "<unassigned>";
   this->mMeshStream.mMainMemoryAddress = 0i64;
   this->mMeshStream.mState = 0;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     this->mVertexBuffers,
     0x18ui64,
     2,

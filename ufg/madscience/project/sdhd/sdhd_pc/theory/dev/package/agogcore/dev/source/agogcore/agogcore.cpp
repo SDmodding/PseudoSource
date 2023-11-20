@@ -160,12 +160,12 @@ char *a_cstr_format(const char *format_cstr_p, ...)
   va_list ap; // [rsp+38h] [rbp+10h]
 
   va_start(ap, format_cstr_p);
-  v1 = ((vsnprintf(`anonymous namespace'::g_cstr_p, 0x3FFui64, format_cstr_p, ap) + 1) & 0xFFFFFBFF) == 0;
-  v2 = `anonymous namespace'::g_cstr_p[1023];
+  v1 = ((vsnprintf(`anonymous namespace::g_cstr_p, 0x3FFui64, format_cstr_p, ap) + 1) & 0xFFFFFBFF) == 0;
+  v2 = `anonymous namespace::g_cstr_p[1023];
   if ( v1 )
     v2 = 0;
-  `anonymous namespace'::g_cstr_p[1023] = v2;
-  return `anonymous namespace'::g_cstr_p;
+  `anonymous namespace::g_cstr_p[1023] = v2;
+  return `anonymous namespace::g_cstr_p;
 }
 
 // File Line: 335
@@ -178,13 +178,13 @@ AString *a_str_format(AString *result, const char *format_cstr_p, ...)
 
   va_start(va, format_cstr_p);
   v2 = result;
-  v3 = vsnprintf(`anonymous namespace'::g_cstr_p, 0x3FFui64, format_cstr_p, va);
+  v3 = vsnprintf(`anonymous namespace::g_cstr_p, 0x3FFui64, format_cstr_p, va);
   if ( v3 == -1 )
   {
     v3 = 1023;
-    `anonymous namespace'::g_cstr_p[1023] = 0;
+    `anonymous namespace::g_cstr_p[1023] = 0;
   }
-  AString::AString(v2, `anonymous namespace'::g_cstr_p, 0x400u, v3, 0);
+  AString::AString(v2, `anonymous namespace::g_cstr_p, 0x400u, v3, 0);
   return v2;
 }
 

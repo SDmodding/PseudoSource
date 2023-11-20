@@ -3,7 +3,7 @@
 __int64 Render::_dynamic_initializer_for__gFlareManager__()
 {
   UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&Render::gFlareManager.mFlareMat.mPrev);
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     Render::gFlareManager.mFlares,
     0x10ui64,
     2,
@@ -101,12 +101,12 @@ void __fastcall Render::Flare::~Flare(Render::Flare *this)
       v1->mFXOverridePointer.m_pPointer = 0i64;
     }
   }
-  v5 = `UFG::qGetResourceInventory<Render::FlareSettings>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Render::FlareSettings>'::`2'::result )
+  v5 = `UFG::qGetResourceInventory<Render::FlareSettings>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Render::FlareSettings>::`2::result )
   {
     v6 = UFG::qResourceWarehouse::Instance();
     v5 = UFG::qResourceWarehouse::GetInventory(v6, 0xA6535FBB);
-    `UFG::qGetResourceInventory<Render::FlareSettings>'::`2'::result = v5;
+    `UFG::qGetResourceInventory<Render::FlareSettings>::`2::result = v5;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mSettings.mPrev, v5);
   UFG::qResourceHandle::~qResourceHandle((UFG::qResourceHandle *)&v1->mSettings.mPrev);
@@ -191,12 +191,12 @@ void __fastcall Render::FlareManager::Init(Render::FlareManager *this)
       v2 = (_WORD *)((char *)&v4->mMaterialUser + v14);
     *v2 |= 0x20u;
   }
-  v15 = `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Material>'::`2'::result )
+  v15 = `UFG::qGetResourceInventory<Illusion::Material>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Material>::`2::result )
   {
     v16 = UFG::qResourceWarehouse::Instance();
     v15 = UFG::qResourceWarehouse::GetInventory(v16, 0xB4C26312);
-    `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result = v15;
+    `UFG::qGetResourceInventory<Illusion::Material>::`2::result = v15;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v1->mFlareMat.mPrev, 0xB4C26312, v3, v15);
   v17 = UFG::qStringHash32("cbFlareSettings", 0xFFFFFFFF);

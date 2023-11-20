@@ -90,7 +90,7 @@ void __fastcall hkCheckingMemorySystem::hkCheckingMemorySystem(hkCheckingMemoryS
 
   v1 = this;
   v2 = &this->m_stackTracer;
-  v2[-1].vfptr = (hkStackTracerVtbl *)&hkCheckingMemorySystem::`vftable';
+  v2[-1].vfptr = (hkStackTracerVtbl *)&hkCheckingMemorySystem::`vftable;
   hkStackTracer::hkStackTracer(v2);
   v1->m_callTree.m_nodes.m_data = 0i64;
   v1->m_callTree.m_nodes.m_size = 0;
@@ -239,7 +239,7 @@ void __fastcall hkCheckingMemorySystem::danger(hkCheckingMemorySystem *this, con
   hkString::snprintf(
     &v12,
     256,
-    "\nAddress=0x%p size=%i flags='%s' thread=%I64u time=%.2f\n",
+    "\nAddress=0x%p size=%i flags=%s thread=%I64u time=%.2f\n",
     v6,
     context,
     v9,
@@ -332,7 +332,7 @@ void __fastcall hkCheckingMemorySystem::leakReportByTime(hkCheckingMemorySystem 
   __int64 v73; // [rsp+1A0h] [rbp+A0h]
 
   v1 = this->m_rawAllocator;
-  `anonymous namespace'::SummaryAllocator::s_allocator = this->m_rawAllocator;
+  `anonymous namespace::SummaryAllocator::s_allocator = this->m_rawAllocator;
   v2 = this->m_activePointers.m_numElems;
   v3 = this;
   array = 0i64;
@@ -345,7 +345,7 @@ void __fastcall hkCheckingMemorySystem::leakReportByTime(hkCheckingMemorySystem 
     if ( v4 < 0 )
       v5 = 0;
     hkArrayUtil::_reserve(&result, v1, &array, v5, 8);
-    v1 = `anonymous namespace'::SummaryAllocator::s_allocator;
+    v1 = `anonymous namespace::SummaryAllocator::s_allocator;
   }
   cmpLess.m_allocs = 0i64;
   v57 = 0;
@@ -356,7 +356,7 @@ void __fastcall hkCheckingMemorySystem::leakReportByTime(hkCheckingMemorySystem 
     if ( v4 < 0 )
       v6 = 0;
     hkArrayUtil::_reserve(&result, v1, &cmpLess, v6, 56);
-    v1 = `anonymous namespace'::SummaryAllocator::s_allocator;
+    v1 = `anonymous namespace::SummaryAllocator::s_allocator;
   }
   v59 = 0i64;
   v60 = 0;
@@ -367,7 +367,7 @@ void __fastcall hkCheckingMemorySystem::leakReportByTime(hkCheckingMemorySystem 
     if ( v4 < 0 )
       v7 = 0;
     hkArrayUtil::_reserve(&result, v1, &v59, v7, 4);
-    v1 = `anonymous namespace'::SummaryAllocator::s_allocator;
+    v1 = `anonymous namespace::SummaryAllocator::s_allocator;
   }
   v68.m_elem = 0i64;
   v68.m_numElems = 0;
@@ -418,7 +418,7 @@ void __fastcall hkCheckingMemorySystem::leakReportByTime(hkCheckingMemorySystem 
         v22 = hkCheckingMemorySystem::AllocInfo::getKey(&v69);
         v23 = (unsigned __int64)hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::findOrInsertKey(
                                   &v68,
-                                  `anonymous namespace'::SummaryAllocator::s_allocator,
+                                  `anonymous namespace::SummaryAllocator::s_allocator,
                                   v22,
                                   0xFFFFFFFFFFFFFFFFui64);
         v24 = &v68.m_elem[v23];
@@ -500,7 +500,7 @@ LABEL_27:
     v44 = v57;
     if ( v57 < 0 )
       v44 = 0;
-    hkArrayUtil::_reserve(&result, `anonymous namespace'::SummaryAllocator::s_allocator, &pArr, v44, 4);
+    hkArrayUtil::_reserve(&result, `anonymous namespace::SummaryAllocator::s_allocator, &pArr, v44, 4);
   }
   v66 = v43;
   v45 = 0;
@@ -518,7 +518,7 @@ LABEL_27:
   }
   if ( v43 > 1 )
   {
-    hkAlgorithm::quickSortRecursive<int,`anonymous namespace'::allocTimeComparison>(
+    hkAlgorithm::quickSortRecursive<int,`anonymous namespace::allocTimeComparison>(
       pArr,
       0,
       v43 - 1,
@@ -579,35 +579,35 @@ LABEL_55:
 LABEL_62:
   v66 = 0;
   if ( v67 >= 0 )
-    `anonymous namespace'::SummaryAllocator::s_allocator->vfptr->bufFree(
-      `anonymous namespace'::SummaryAllocator::s_allocator,
+    `anonymous namespace::SummaryAllocator::s_allocator->vfptr->bufFree(
+      `anonymous namespace::SummaryAllocator::s_allocator,
       pArr,
       4 * v67);
   pArr = 0i64;
   v67 = 2147483648;
   hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::clearAndDeallocate(
     &v68,
-    `anonymous namespace'::SummaryAllocator::s_allocator);
+    `anonymous namespace::SummaryAllocator::s_allocator);
   v60 = 0;
   if ( v61 >= 0 )
-    `anonymous namespace'::SummaryAllocator::s_allocator->vfptr->bufFree(
-      `anonymous namespace'::SummaryAllocator::s_allocator,
+    `anonymous namespace::SummaryAllocator::s_allocator->vfptr->bufFree(
+      `anonymous namespace::SummaryAllocator::s_allocator,
       v59,
       4 * v61);
   v59 = 0i64;
   v61 = 2147483648;
   v57 = 0;
   if ( v58 >= 0 )
-    `anonymous namespace'::SummaryAllocator::s_allocator->vfptr->bufFree(
-      `anonymous namespace'::SummaryAllocator::s_allocator,
+    `anonymous namespace::SummaryAllocator::s_allocator->vfptr->bufFree(
+      `anonymous namespace::SummaryAllocator::s_allocator,
       cmpLess.m_allocs,
       56 * (v58 & 0x3FFFFFFF));
   cmpLess.m_allocs = 0i64;
   v63 = 0;
   v58 = 2147483648;
   if ( v64 >= 0 )
-    `anonymous namespace'::SummaryAllocator::s_allocator->vfptr->bufFree(
-      `anonymous namespace'::SummaryAllocator::s_allocator,
+    `anonymous namespace::SummaryAllocator::s_allocator->vfptr->bufFree(
+      `anonymous namespace::SummaryAllocator::s_allocator,
       array,
       8 * v64);
 }
@@ -641,7 +641,7 @@ void __fastcall breadthFirstSearch(int startIndex, hkArrayBase<int> *connectTo, 
   v8 = connectTo;
   if ( owned->m_size == (owned->m_capacityAndFlags & 0x3FFFFFFF) )
   {
-    hkArrayUtil::_reserveMore(`anonymous namespace'::SummaryAllocator::s_allocator, owned, 4);
+    hkArrayUtil::_reserveMore(`anonymous namespace::SummaryAllocator::s_allocator, owned, 4);
     connectStart = v19;
     v8 = v18;
   }
@@ -667,7 +667,7 @@ void __fastcall breadthFirstSearch(int startIndex, hkArrayBase<int> *connectTo, 
           {
             v7->m_data[v17].m_bool = 1;
             if ( owned->m_size == (owned->m_capacityAndFlags & 0x3FFFFFFF) )
-              hkArrayUtil::_reserveMore(`anonymous namespace'::SummaryAllocator::s_allocator, owned, 4);
+              hkArrayUtil::_reserveMore(`anonymous namespace::SummaryAllocator::s_allocator, owned, 4);
             owned->m_data[owned->m_size++] = v17;
             v9 = owned->m_size;
           }
@@ -754,7 +754,7 @@ void __fastcall hkCheckingMemorySystem::dumpLeak(hkCheckingMemorySystem *this, h
       hkString::snprintf(
         &buf,
         128,
-        "REACHED Address=0x%p size=%i flags='%s' thread=%i\n",
+        "REACHED Address=0x%p size=%i flags=%s thread=%i\n",
         v12,
         v15,
         v14,
@@ -847,7 +847,7 @@ void __fastcall hkCheckingMemorySystem::leakReportByOwnership(hkCheckingMemorySy
   v1 = this->m_rawAllocator;
   v2 = 0i64;
   v3 = 2147483648;
-  `anonymous namespace'::SummaryAllocator::s_allocator = this->m_rawAllocator;
+  `anonymous namespace::SummaryAllocator::s_allocator = this->m_rawAllocator;
   v4 = this;
   v5 = (this->m_activePointers.m_numElems & 0x7FFFFFFF) == 0;
   v6 = (this->m_activePointers.m_numElems & 0x7FFFFFFF) < 0;
@@ -883,7 +883,7 @@ void __fastcall hkCheckingMemorySystem::leakReportByOwnership(hkCheckingMemorySy
     v12 = v7;
     if ( v7 < v11 )
       v12 = v11;
-    hkArrayUtil::_reserve(&result, `anonymous namespace'::SummaryAllocator::s_allocator, &allocs, v12, 56);
+    hkArrayUtil::_reserve(&result, `anonymous namespace::SummaryAllocator::s_allocator, &allocs, v12, 56);
     v8 = connectTo.m_size;
   }
   v13 = v4->m_activePointers.m_hashMod;
@@ -955,7 +955,7 @@ void __fastcall hkCheckingMemorySystem::leakReportByOwnership(hkCheckingMemorySy
     do
     {
       if ( connectStart.m_size == (connectStart.m_capacityAndFlags & 0x3FFFFFFF) )
-        hkArrayUtil::_reserveMore(`anonymous namespace'::SummaryAllocator::s_allocator, &connectStart, 4);
+        hkArrayUtil::_reserveMore(`anonymous namespace::SummaryAllocator::s_allocator, &connectStart, 4);
       connectStart.m_data[connectStart.m_size] = v8;
       ++connectStart.m_size;
       v31 = allocs.m_data;
@@ -980,7 +980,7 @@ void __fastcall hkCheckingMemorySystem::leakReportByOwnership(hkCheckingMemorySy
             {
               if ( v8 == (connectTo.m_capacityAndFlags & 0x3FFFFFFF) )
               {
-                hkArrayUtil::_reserveMore(`anonymous namespace'::SummaryAllocator::s_allocator, &connectTo, 4);
+                hkArrayUtil::_reserveMore(`anonymous namespace::SummaryAllocator::s_allocator, &connectTo, 4);
                 v8 = connectTo.m_size;
               }
               connectTo.m_data[v8] = v36;
@@ -1011,7 +1011,7 @@ void __fastcall hkCheckingMemorySystem::leakReportByOwnership(hkCheckingMemorySy
     v4 = v66;
   }
   if ( connectStart.m_size == (connectStart.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore(`anonymous namespace'::SummaryAllocator::s_allocator, &connectStart, 4);
+    hkArrayUtil::_reserveMore(`anonymous namespace::SummaryAllocator::s_allocator, &connectStart, 4);
   connectStart.m_data[connectStart.m_size] = v8;
   ++connectStart.m_size;
   v40 = 0;
@@ -1023,7 +1023,7 @@ void __fastcall hkCheckingMemorySystem::leakReportByOwnership(hkCheckingMemorySy
     v41 = v7;
     if ( v7 < 0 )
       v41 = v2;
-    hkArrayUtil::_reserve((hkResult *)&v66, `anonymous namespace'::SummaryAllocator::s_allocator, &visited, v41, 1);
+    hkArrayUtil::_reserve((hkResult *)&v66, `anonymous namespace::SummaryAllocator::s_allocator, &visited, v41, 1);
     v40 = visited.m_size;
   }
   v42 = &visited.m_data[v40];
@@ -1041,7 +1041,7 @@ void __fastcall hkCheckingMemorySystem::leakReportByOwnership(hkCheckingMemorySy
     v46 = v7;
     if ( v7 < 0 )
       v46 = v2;
-    hkArrayUtil::_reserve((hkResult *)&v66, `anonymous namespace'::SummaryAllocator::s_allocator, &v58, v46, 1);
+    hkArrayUtil::_reserve((hkResult *)&v66, `anonymous namespace::SummaryAllocator::s_allocator, &v58, v46, 1);
     v45 = v58.m_size;
   }
   v47 = v7 - v45;
@@ -1090,14 +1090,14 @@ void __fastcall hkCheckingMemorySystem::leakReportByOwnership(hkCheckingMemorySy
   }
   owned.m_size = v2;
   if ( v51 >= 0 )
-    `anonymous namespace'::SummaryAllocator::s_allocator->vfptr->bufFree(
-      `anonymous namespace'::SummaryAllocator::s_allocator,
+    `anonymous namespace::SummaryAllocator::s_allocator->vfptr->bufFree(
+      `anonymous namespace::SummaryAllocator::s_allocator,
       v50,
       4 * v51);
   v58.m_size = v2;
   if ( v58.m_capacityAndFlags >= 0 )
-    `anonymous namespace'::SummaryAllocator::s_allocator->vfptr->bufFree(
-      `anonymous namespace'::SummaryAllocator::s_allocator,
+    `anonymous namespace::SummaryAllocator::s_allocator->vfptr->bufFree(
+      `anonymous namespace::SummaryAllocator::s_allocator,
       v58.m_data,
       v58.m_capacityAndFlags & 0x3FFFFFFF);
   owned.m_data = 0i64;
@@ -1144,53 +1144,53 @@ void __fastcall hkCheckingMemorySystem::leakReportByOwnership(hkCheckingMemorySy
   }
   v58.m_size = v2;
   if ( v58.m_capacityAndFlags >= 0 )
-    `anonymous namespace'::SummaryAllocator::s_allocator->vfptr->bufFree(
-      `anonymous namespace'::SummaryAllocator::s_allocator,
+    `anonymous namespace::SummaryAllocator::s_allocator->vfptr->bufFree(
+      `anonymous namespace::SummaryAllocator::s_allocator,
       v58.m_data,
       4 * v58.m_capacityAndFlags);
   v58.m_data = 0i64;
   v58.m_capacityAndFlags = 2147483648;
   if ( owned.m_capacityAndFlags >= 0 )
-    `anonymous namespace'::SummaryAllocator::s_allocator->vfptr->bufFree(
-      `anonymous namespace'::SummaryAllocator::s_allocator,
+    `anonymous namespace::SummaryAllocator::s_allocator->vfptr->bufFree(
+      `anonymous namespace::SummaryAllocator::s_allocator,
       owned.m_data,
       4 * owned.m_capacityAndFlags);
   visited.m_size = v2;
   if ( visited.m_capacityAndFlags >= 0 )
-    `anonymous namespace'::SummaryAllocator::s_allocator->vfptr->bufFree(
-      `anonymous namespace'::SummaryAllocator::s_allocator,
+    `anonymous namespace::SummaryAllocator::s_allocator->vfptr->bufFree(
+      `anonymous namespace::SummaryAllocator::s_allocator,
       visited.m_data,
       visited.m_capacityAndFlags & 0x3FFFFFFF);
   visited.m_data = 0i64;
   visited.m_capacityAndFlags = 2147483648;
   connectStart.m_size = 0;
   if ( connectStart.m_capacityAndFlags >= 0 )
-    `anonymous namespace'::SummaryAllocator::s_allocator->vfptr->bufFree(
-      `anonymous namespace'::SummaryAllocator::s_allocator,
+    `anonymous namespace::SummaryAllocator::s_allocator->vfptr->bufFree(
+      `anonymous namespace::SummaryAllocator::s_allocator,
       connectStart.m_data,
       4 * connectStart.m_capacityAndFlags);
   connectStart.m_data = 0i64;
   connectStart.m_capacityAndFlags = 2147483648;
   connectTo.m_size = 0;
   if ( connectTo.m_capacityAndFlags >= 0 )
-    `anonymous namespace'::SummaryAllocator::s_allocator->vfptr->bufFree(
-      `anonymous namespace'::SummaryAllocator::s_allocator,
+    `anonymous namespace::SummaryAllocator::s_allocator->vfptr->bufFree(
+      `anonymous namespace::SummaryAllocator::s_allocator,
       connectTo.m_data,
       4 * connectTo.m_capacityAndFlags);
   connectTo.m_data = 0i64;
   connectTo.m_capacityAndFlags = 2147483648;
   allocs.m_size = 0;
   if ( allocs.m_capacityAndFlags >= 0 )
-    `anonymous namespace'::SummaryAllocator::s_allocator->vfptr->bufFree(
-      `anonymous namespace'::SummaryAllocator::s_allocator,
+    `anonymous namespace::SummaryAllocator::s_allocator->vfptr->bufFree(
+      `anonymous namespace::SummaryAllocator::s_allocator,
       allocs.m_data,
       56 * (allocs.m_capacityAndFlags & 0x3FFFFFFF));
   allocs.m_data = 0i64;
   allocs.m_capacityAndFlags = 2147483648;
   v64 = 0;
   if ( v65 >= 0 )
-    `anonymous namespace'::SummaryAllocator::s_allocator->vfptr->bufFree(
-      `anonymous namespace'::SummaryAllocator::s_allocator,
+    `anonymous namespace::SummaryAllocator::s_allocator->vfptr->bufFree(
+      `anonymous namespace::SummaryAllocator::s_allocator,
       array,
       8 * v65);
 }
@@ -1361,7 +1361,7 @@ hkCheckingMemorySystem::AllocatorForwarder *__fastcall hkCheckingMemorySystem::n
   v6 = (hkCheckingMemorySystem::AllocatorForwarder *)v5;
   if ( v5 )
   {
-    *v5 = &hkCheckingMemorySystem::AllocatorForwarder::`vftable';
+    *v5 = &hkCheckingMemorySystem::AllocatorForwarder::`vftable;
     v5[1] = 0i64;
     v5[2] = 0i64;
     *(_QWORD *)((char *)v5 + 28) = 0i64;

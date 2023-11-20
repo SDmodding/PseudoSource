@@ -36,10 +36,10 @@ void __fastcall hkaiCharacterViewer::hkaiCharacterViewer(hkaiCharacterViewer *th
 
   v2 = this;
   hkaiViewerBase::hkaiViewerBase((hkaiViewerBase *)&this->vfptr, contexts);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkaiCharacterViewer::`vftable'{for `hkReferencedObject'};
-  v2->vfptr = (hkProcessVtbl *)&hkaiCharacterViewer::`vftable'{for `hkProcess'};
-  v2->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiCharacterViewer::`vftable'{for `hkaiViewerContextWorldListener'};
-  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiCharacterViewer::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkaiCharacterViewer::`vftable{for `hkReferencedObject};
+  v2->vfptr = (hkProcessVtbl *)&hkaiCharacterViewer::`vftable{for `hkProcess};
+  v2->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiCharacterViewer::`vftable{for `hkaiViewerContextWorldListener};
+  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiCharacterViewer::`vftable;
   v2->m_colors.m_capacityAndFlags = 2147483648;
   v2->m_colors.m_data = 0i64;
   v2->m_colors.m_size = 0;
@@ -88,11 +88,11 @@ void __fastcall hkaiCharacterViewer::~hkaiCharacterViewer(hkaiCharacterViewer *t
   int v5; // er8
 
   v1 = 0;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiCharacterViewer::`vftable'{for `hkReferencedObject'};
-  this->vfptr = (hkProcessVtbl *)&hkaiCharacterViewer::`vftable'{for `hkProcess'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiCharacterViewer::`vftable{for `hkReferencedObject};
+  this->vfptr = (hkProcessVtbl *)&hkaiCharacterViewer::`vftable{for `hkProcess};
   v2 = this;
-  this->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiCharacterViewer::`vftable'{for `hkaiViewerContextWorldListener'};
-  this->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiCharacterViewer::`vftable';
+  this->vfptr = (hkaiViewerContextWorldListenerVtbl *)&hkaiCharacterViewer::`vftable{for `hkaiViewerContextWorldListener};
+  this->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiCharacterViewer::`vftable;
   if ( this->m_context.m_pntr )
   {
     v3 = 0i64;
@@ -116,7 +116,7 @@ void __fastcall hkaiCharacterViewer::~hkaiCharacterViewer(hkaiCharacterViewer *t
       4 * v5);
   v2->m_colors.m_data = 0i64;
   v2->m_colors.m_capacityAndFlags = 2147483648;
-  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiWorld::Listener::`vftable';
+  v2->vfptr = (hkaiWorld::ListenerVtbl *)&hkaiWorld::Listener::`vftable;
   hkaiViewerBase::~hkaiViewerBase((hkaiViewerBase *)&v2->vfptr);
 }
 

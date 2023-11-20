@@ -2,12 +2,12 @@
 // RVA: 0x6C9230
 void __fastcall Scaleform::Render::Text::ImageDesc::ImageDesc(Scaleform::Render::Text::ImageDesc *this)
 {
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,74>::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseNTS<Scaleform::Render::Text::ImageDesc,74>::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::Render::Text::ImageDesc::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,74>::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseNTS<Scaleform::Render::Text::ImageDesc,74>::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::Render::Text::ImageDesc::`vftable;
   this->pImage.pObject = 0i64;
   *(_QWORD *)&this->BaseLineX = 0i64;
   *(_QWORD *)&this->ScreenWidth = 0i64;
@@ -21,12 +21,12 @@ void __fastcall Scaleform::Render::Text::ImageDesc::ImageDesc(Scaleform::Render:
 // RVA: 0x93D960
 void __fastcall Scaleform::Render::Text::HTMLImageTagDesc::HTMLImageTagDesc(Scaleform::Render::Text::HTMLImageTagDesc *this)
 {
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,74>::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseNTS<Scaleform::Render::Text::ImageDesc,74>::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::Render::Text::ImageDesc::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,74>::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseNTS<Scaleform::Render::Text::ImageDesc,74>::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::Render::Text::ImageDesc::`vftable;
   this->pImage.pObject = 0i64;
   *(_QWORD *)&this->BaseLineX = 0i64;
   *(_QWORD *)&this->ScreenWidth = 0i64;
@@ -34,7 +34,7 @@ void __fastcall Scaleform::Render::Text::HTMLImageTagDesc::HTMLImageTagDesc(Scal
   this->Matrix.M[1][0] = 0.0;
   *(_QWORD *)&this->Matrix.M[1][1] = 1065353216i64;
   this->Matrix.M[1][3] = 0.0;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::Render::Text::HTMLImageTagDesc::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::Render::Text::HTMLImageTagDesc::`vftable;
   _InterlockedExchangeAdd(&Scaleform::String::NullData.RefCount, 1u);
   this->Url.HeapTypeBits = (unsigned __int64)&Scaleform::String::NullData | 1;
   _InterlockedExchangeAdd(&Scaleform::String::NullData.RefCount, 1u);
@@ -338,12 +338,12 @@ void __fastcall Scaleform::Render::Text::Allocator::Allocator(Scaleform::Render:
 
   v3 = flags;
   v4 = this;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,74>::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseNTS<Scaleform::Render::Text::Allocator,74>::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::Render::Text::Allocator::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,74>::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseNTS<Scaleform::Render::Text::Allocator,74>::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::Render::Text::Allocator::`vftable;
   this->TextFormatStorage.pTable = 0i64;
   this->ParagraphFormatStorage.pTable = 0i64;
   this->TextFormatStorageCap = 100;
@@ -358,6 +358,6 @@ void __fastcall Scaleform::Render::Text::Allocator::Allocator(Scaleform::Render:
 // RVA: 0x78E630
 void __fastcall Scaleform::Render::Text::Allocator::TextFormatVisitor::~TextFormatVisitor(Scaleform::Render::Text::Allocator::TextFormatVisitor *this)
 {
-  this->vfptr = (Scaleform::Render::Text::Allocator::TextFormatVisitorVtbl *)&Scaleform::Render::Text::Allocator::TextFormatVisitor::`vftable';
+  this->vfptr = (Scaleform::Render::Text::Allocator::TextFormatVisitorVtbl *)&Scaleform::Render::Text::Allocator::TextFormatVisitor::`vftable;
 }
 

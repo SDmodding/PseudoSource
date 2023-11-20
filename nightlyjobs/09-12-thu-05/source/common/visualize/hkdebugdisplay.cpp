@@ -9,7 +9,7 @@ void __fastcall hkDebugDisplay::hkDebugDisplay(hkDebugDisplay *this)
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkDebugDisplay::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkDebugDisplay::`vftable;
   this->m_debugDisplayHandlers.m_data = 0i64;
   this->m_debugDisplayHandlers.m_size = 0;
   this->m_debugDisplayHandlers.m_capacityAndFlags = 2147483648;
@@ -37,7 +37,7 @@ void __fastcall hkDebugDisplay::~hkDebugDisplay(hkDebugDisplay *this)
 
   v1 = this->m_arrayLock;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkDebugDisplay::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkDebugDisplay::`vftable;
   if ( v1 )
   {
     DeleteCriticalSection(&v1->m_section);
@@ -53,7 +53,7 @@ void __fastcall hkDebugDisplay::~hkDebugDisplay(hkDebugDisplay *this)
       8 * v4);
   v2->m_debugDisplayHandlers.m_data = 0i64;
   v2->m_debugDisplayHandlers.m_capacityAndFlags = 2147483648;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 26

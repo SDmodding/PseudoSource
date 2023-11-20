@@ -15,7 +15,7 @@ void __fastcall UFG::EncounterUnitComponent::EncounterUnitComponent(UFG::Encount
 
   v2 = this;
   UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name_uid);
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::EncounterUnitComponent::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::EncounterUnitComponent::`vftable;
   v2->mRole = 0;
   v3 = &v2->mpEncounter;
   v3->mPrev = (UFG::qNode<UFG::qSafePointerWithCallbacksBase<UFG::EncounterBase>,UFG::qSafePointerNodeList> *)&v3->mPrev;
@@ -63,7 +63,7 @@ void __fastcall UFG::EncounterUnitComponent::~EncounterUnitComponent(UFG::Encoun
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v7; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::EncounterUnitComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::EncounterUnitComponent::`vftable;
   v2 = this->mpObjectiveIndicator;
   if ( v2 )
   {
@@ -95,7 +95,7 @@ void __fastcall UFG::EncounterUnitComponent::~EncounterUnitComponent(UFG::Encoun
 // RVA: 0x3F3AD0
 void __fastcall UFG::EncounterUnitComponent::EncounterGoingNull(UFG::EncounterUnitComponent *this, UFG::EncounterBase *e)
 {
-  UFG::qPrintf("who's fucking with this! %p\n", e);
+  UFG::qPrintf("whos fucking with this! %p\n", e);
 }
 
 // File Line: 53

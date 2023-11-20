@@ -10,7 +10,7 @@ void __fastcall UFG::VehicleWayFinderClient::VehicleWayFinderClient(UFG::Vehicle
   v4 = guide;
   v5 = this;
   UFG::WayFinderClient::WayFinderClient((UFG::WayFinderClient *)&this->vfptr);
-  v5->vfptr = (UFG::WayFinderClientVtbl *)&UFG::VehicleWayFinderClient::`vftable';
+  v5->vfptr = (UFG::WayFinderClientVtbl *)&UFG::VehicleWayFinderClient::`vftable;
   v5->m_RoadNetworkType = 0;
   v5->m_LaneFlags = v3;
   v5->m_RoadGuide = v4;

@@ -178,7 +178,7 @@ void __fastcall JacobianBuilder::_hkBallSocketConstraintBuildJacobian(hkVector4f
     }
   }
   v35 = &transform;
-  v36 = (__m128 *)`hkVector4f::getComponent'::`2'::indexToMask;
+  v36 = (__m128 *)`hkVector4f::getComponent::`2::indexToMask;
   do
   {
     v37 = v35->m_quad;

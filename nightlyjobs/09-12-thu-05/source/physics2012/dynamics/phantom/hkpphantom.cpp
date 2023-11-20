@@ -397,20 +397,20 @@ void __fastcall hkpPhantom::setBoundingVolumeData(hkpPhantom *this, hkAabb *aabb
              v3->m_aabb32Info.m_bitScale.m_quad),
            hkAabbUtil::hkAabbUint32MaxVal),
          (__m128)0i64);
-  v5 = (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v4);
+  v5 = (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v4);
   _mm_store_si128(
     (__m128i *)&this->m_collidable.m_boundingVolumeData,
     _mm_or_si128(
       _mm_add_epi32(
         _mm_cvttps_epi32(
           _mm_max_ps(
-            _mm_sub_ps(v4, _mm_and_ps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, (__m128)v5)),
+            _mm_sub_ps(v4, _mm_and_ps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, (__m128)v5)),
             (__m128)0i64)),
         _mm_slli_epi32(v5, 0x1Fu)),
       (__m128i)_mm_cmpleps(
                  _mm_add_ps(
-                   *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31,
-                   *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31),
+                   *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31,
+                   *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31),
                  v4)));
   v6 = _mm_max_ps(
          _mm_min_ps(
@@ -419,7 +419,7 @@ void __fastcall hkpPhantom::setBoundingVolumeData(hkpPhantom *this, hkAabb *aabb
              v3->m_aabb32Info.m_bitScale.m_quad),
            v2),
          (__m128)0i64);
-  v7 = (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v6);
+  v7 = (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v6);
   v8 = _mm_cvtsi32_si128(0);
   _mm_store_si128(
     (__m128i *)this->m_collidable.m_boundingVolumeData.m_max,
@@ -427,13 +427,13 @@ void __fastcall hkpPhantom::setBoundingVolumeData(hkpPhantom *this, hkAabb *aabb
       _mm_add_epi32(
         _mm_cvttps_epi32(
           _mm_max_ps(
-            _mm_sub_ps(v6, _mm_and_ps((__m128)v7, *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31)),
+            _mm_sub_ps(v6, _mm_and_ps((__m128)v7, *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31)),
             (__m128)0i64)),
         _mm_slli_epi32(v7, 0x1Fu)),
       (__m128i)_mm_cmpleps(
                  _mm_add_ps(
-                   *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31,
-                   *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31),
+                   *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31,
+                   *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31),
                  v6)));
   v9 = _mm_unpacklo_epi32(
          _mm_unpacklo_epi32(
@@ -614,7 +614,7 @@ void __fastcall hkpPhantom::~hkpPhantom(hkpPhantom *this)
   int v3; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpPhantom::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpPhantom::`vftable;
   hkpPhantom::firePhantomDeleted(this);
   v2 = v1->m_phantomListeners.m_capacityAndFlags;
   v1->m_phantomListeners.m_size = 0;

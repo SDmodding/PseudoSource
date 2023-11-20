@@ -50,16 +50,16 @@ void __fastcall Scaleform::GFx::MoviePreloadTask::MoviePreloadTask(Scaleform::GF
   v6 = url;
   v7 = pmovieRoot;
   v8 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::Task,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::Task::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::Task,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::Task::`vftable;
   this->ThisTaskId = 131073;
   v9 = 0i64;
   this->CurrentState = 0;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::MoviePreloadTask::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::MoviePreloadTask::`vftable;
   this->pLoadStates.pObject = 0i64;
   Scaleform::String::String(&this->Level0Path);
   Scaleform::String::String(&v8->Url, v6);
@@ -187,7 +187,7 @@ void __fastcall Scaleform::GFx::LoadQueueEntryMT::LoadQueueEntryMT(Scaleform::GF
 {
   this->pMovieImpl = pmovieRoot;
   this->pQueueEntry = pqueueEntry;
-  this->vfptr = (Scaleform::GFx::LoadQueueEntryMTVtbl *)&Scaleform::GFx::LoadQueueEntryMT::`vftable';
+  this->vfptr = (Scaleform::GFx::LoadQueueEntryMTVtbl *)&Scaleform::GFx::LoadQueueEntryMT::`vftable;
   this->pNext = 0i64;
   this->pPrev = 0i64;
 }
@@ -198,7 +198,7 @@ void __fastcall Scaleform::GFx::LoadQueueEntryMT::~LoadQueueEntryMT(Scaleform::G
 {
   Scaleform::GFx::LoadQueueEntry *v1; // rcx
 
-  this->vfptr = (Scaleform::GFx::LoadQueueEntryMTVtbl *)&Scaleform::GFx::LoadQueueEntryMT::`vftable';
+  this->vfptr = (Scaleform::GFx::LoadQueueEntryMTVtbl *)&Scaleform::GFx::LoadQueueEntryMT::`vftable;
   v1 = this->pQueueEntry;
   if ( v1 )
     v1->vfptr->__vecDelDtor(v1, 1u);
@@ -217,15 +217,15 @@ void __fastcall Scaleform::GFx::LoadVarsTask::LoadVarsTask(Scaleform::GFx::LoadV
   v5 = level0Path;
   v6 = pls;
   v7 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::Task,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::Task::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::Task,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::Task::`vftable;
   this->ThisTaskId = 131073;
   this->CurrentState = 0;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::LoadVarsTask::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::LoadVarsTask::`vftable;
   if ( pls )
     Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)pls);
   v7->pLoadStates.pObject = v6;
@@ -314,7 +314,7 @@ void __fastcall Scaleform::GFx::LoadVarsTask::Execute(Scaleform::GFx::LoadVarsTa
     if ( v8 )
       Scaleform::GFx::LogBase<Scaleform::GFx::LogState>::LogError(
         v8 + 3,
-        "Loader failed to open '%s', FileOpener not installe",
+        "Loader failed to open %s, FileOpener not installe",
         v6 + 12);
   }
   v17 = v5;
@@ -367,13 +367,13 @@ void __fastcall Scaleform::GFx::LoadQueueEntryMT_LoadVars::LoadQueueEntryMT_Load
 
   v3 = pqueueEntry;
   v4 = this;
-  this->vfptr = (Scaleform::GFx::LoadQueueEntryMTVtbl *)&Scaleform::GFx::LoadQueueEntryMT::`vftable';
+  this->vfptr = (Scaleform::GFx::LoadQueueEntryMTVtbl *)&Scaleform::GFx::LoadQueueEntryMT::`vftable;
   v5 = 0i64;
   this->pNext = 0i64;
   this->pPrev = 0i64;
   this->pMovieImpl = pmovieRoot;
   this->pQueueEntry = pqueueEntry;
-  this->vfptr = (Scaleform::GFx::LoadQueueEntryMTVtbl *)&Scaleform::GFx::LoadQueueEntryMT_LoadVars::`vftable';
+  this->vfptr = (Scaleform::GFx::LoadQueueEntryMTVtbl *)&Scaleform::GFx::LoadQueueEntryMT_LoadVars::`vftable;
   this->pTask.pObject = 0i64;
   this->pLoadStates.pObject = 0i64;
   v6 = (Scaleform::String::DataDesc *)Scaleform::Memory::pGlobalHeap->vfptr->Alloc(
@@ -454,14 +454,14 @@ void __fastcall Scaleform::GFx::LoadQueueEntryMT_LoadVars::~LoadQueueEntryMT_Loa
   Scaleform::GFx::LoadQueueEntry *v4; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::LoadQueueEntryMTVtbl *)&Scaleform::GFx::LoadQueueEntryMT_LoadVars::`vftable';
+  this->vfptr = (Scaleform::GFx::LoadQueueEntryMTVtbl *)&Scaleform::GFx::LoadQueueEntryMT_LoadVars::`vftable;
   v2 = (Scaleform::Render::RenderBuffer *)this->pLoadStates.pObject;
   if ( v2 )
     Scaleform::RefCountImpl::Release(v2);
   v3 = (Scaleform::Render::RenderBuffer *)v1->pTask.pObject;
   if ( v3 )
     Scaleform::RefCountImpl::Release(v3);
-  v1->vfptr = (Scaleform::GFx::LoadQueueEntryMTVtbl *)&Scaleform::GFx::LoadQueueEntryMT::`vftable';
+  v1->vfptr = (Scaleform::GFx::LoadQueueEntryMTVtbl *)&Scaleform::GFx::LoadQueueEntryMT::`vftable;
   v4 = v1->pQueueEntry;
   if ( v4 )
     v4->vfptr->__vecDelDtor(v4, 1u);
@@ -545,15 +545,15 @@ void __fastcall Scaleform::GFx::LoadBinaryTask::LoadBinaryTask(Scaleform::GFx::L
   v5 = level0Path;
   v6 = pls;
   v7 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::Task,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::Task::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::Task,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::Task::`vftable;
   this->ThisTaskId = 131073;
   this->CurrentState = 0;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::LoadBinaryTask::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::LoadBinaryTask::`vftable;
   if ( pls )
     Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)pls);
   v7->pLoadStates.pObject = v6;
@@ -644,7 +644,7 @@ void __fastcall Scaleform::GFx::LoadBinaryTask::Execute(Scaleform::GFx::LoadBina
     if ( v8 )
       Scaleform::GFx::LogBase<Scaleform::GFx::LogState>::LogError(
         v8 + 3,
-        "Loader failed to open '%s', FileOpener not installe",
+        "Loader failed to open %s, FileOpener not installe",
         v6 + 12);
   }
   v17 = v5;
@@ -697,13 +697,13 @@ void __fastcall Scaleform::GFx::LoadQueueEntryMT_LoadBinary::LoadQueueEntryMT_Lo
 
   v3 = pqueueEntry;
   v4 = this;
-  this->vfptr = (Scaleform::GFx::LoadQueueEntryMTVtbl *)&Scaleform::GFx::LoadQueueEntryMT::`vftable';
+  this->vfptr = (Scaleform::GFx::LoadQueueEntryMTVtbl *)&Scaleform::GFx::LoadQueueEntryMT::`vftable;
   v5 = 0i64;
   this->pNext = 0i64;
   this->pPrev = 0i64;
   this->pMovieImpl = pmovieRoot;
   this->pQueueEntry = pqueueEntry;
-  this->vfptr = (Scaleform::GFx::LoadQueueEntryMTVtbl *)&Scaleform::GFx::LoadQueueEntryMT_LoadBinary::`vftable';
+  this->vfptr = (Scaleform::GFx::LoadQueueEntryMTVtbl *)&Scaleform::GFx::LoadQueueEntryMT_LoadBinary::`vftable;
   this->pTask.pObject = 0i64;
   this->pLoadStates.pObject = 0i64;
   v6 = (Scaleform::String::DataDesc *)Scaleform::Memory::pGlobalHeap->vfptr->Alloc(
@@ -784,14 +784,14 @@ void __fastcall Scaleform::GFx::LoadQueueEntryMT_LoadBinary::~LoadQueueEntryMT_L
   Scaleform::GFx::LoadQueueEntry *v4; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::LoadQueueEntryMTVtbl *)&Scaleform::GFx::LoadQueueEntryMT_LoadBinary::`vftable';
+  this->vfptr = (Scaleform::GFx::LoadQueueEntryMTVtbl *)&Scaleform::GFx::LoadQueueEntryMT_LoadBinary::`vftable;
   v2 = (Scaleform::Render::RenderBuffer *)this->pLoadStates.pObject;
   if ( v2 )
     Scaleform::RefCountImpl::Release(v2);
   v3 = (Scaleform::Render::RenderBuffer *)v1->pTask.pObject;
   if ( v3 )
     Scaleform::RefCountImpl::Release(v3);
-  v1->vfptr = (Scaleform::GFx::LoadQueueEntryMTVtbl *)&Scaleform::GFx::LoadQueueEntryMT::`vftable';
+  v1->vfptr = (Scaleform::GFx::LoadQueueEntryMTVtbl *)&Scaleform::GFx::LoadQueueEntryMT::`vftable;
   v4 = v1->pQueueEntry;
   if ( v4 )
     v4->vfptr->__vecDelDtor(v4, 1u);

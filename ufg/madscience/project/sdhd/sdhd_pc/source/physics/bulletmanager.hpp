@@ -13,10 +13,10 @@ void __fastcall UFG::BulletImpactDamageSphereEvent::BulletImpactDamageSphereEven
   v2 = (UFG::qNode<UFG::Event,UFG::Event> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+  this->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
   this->m_EventUID = v1;
   this->m_NamePTR = 0i64;
-  this->vfptr = (UFG::EventVtbl *)&UFG::BulletImpactDamageSphereEvent::`vftable';
+  this->vfptr = (UFG::EventVtbl *)&UFG::BulletImpactDamageSphereEvent::`vftable;
   v6 = &this->weaponOwnerSimObject;
   v6->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v6->mPrev;
   v6->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v6->mPrev;

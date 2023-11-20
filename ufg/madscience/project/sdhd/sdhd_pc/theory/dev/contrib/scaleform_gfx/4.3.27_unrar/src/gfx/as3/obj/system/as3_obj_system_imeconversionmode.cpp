@@ -6,7 +6,7 @@ void __fastcall Scaleform::GFx::AS3::Classes::fl_system::IMEConversionMode::IMEC
 
   v2 = this;
   Scaleform::GFx::AS3::Class::Class((Scaleform::GFx::AS3::Class *)&this->vfptr, t);
-  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl_system::IMEConversionMode::`vftable';
+  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl_system::IMEConversionMode::`vftable;
   v2->ALPHANUMERIC_FULL = "ALPHANUMERIC_FULL";
   v2->ALPHANUMERIC_HALF = "ALPHANUMERIC_HALF";
   v2->CHINESE = "CHINESE";
@@ -40,7 +40,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v5 )
   {
     Scaleform::GFx::AS3::ClassTraits::fl::Object::Object(v5, v2, &Scaleform::GFx::AS3::fl_system::IMEConversionModeCI);
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_system::IMEConversionMode::`vftable';
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_system::IMEConversionMode::`vftable;
   }
   else
   {

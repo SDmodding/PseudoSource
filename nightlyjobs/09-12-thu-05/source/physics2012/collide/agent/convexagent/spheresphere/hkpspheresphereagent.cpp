@@ -48,7 +48,7 @@ hkpCollisionAgent *__fastcall hkpSphereSphereAgent::createSphereSphereAgent(hkpC
   if ( result )
   {
     *(_DWORD *)&result->m_memSizeAndFlags = 0x1FFFF;
-    result->vfptr = (hkBaseObjectVtbl *)&hkpSphereSphereAgent::`vftable';
+    result->vfptr = (hkBaseObjectVtbl *)&hkpSphereSphereAgent::`vftable;
     result->m_contactMgr = v4;
     LOWORD(result[1].vfptr) = -1;
   }

@@ -109,7 +109,7 @@ void UFG::VoiceProfileManager::LoadVoiceProfiles(void)
                 v14[1].mNext = 0i64;
                 v14[2].mNext = 0i64;
                 v14[3].mNext = 0i64;
-                v14->mNext = (UFG::allocator::free_link *)&UFG::VoiceTag::`vftable';
+                v14->mNext = (UFG::allocator::free_link *)&UFG::VoiceTag::`vftable;
                 v17 = v31;
                 LODWORD(v14[5].mNext) = v31;
                 HIDWORD(v14[5].mNext) = v15;
@@ -149,7 +149,7 @@ void UFG::VoiceProfileManager::LoadVoiceProfiles(void)
           v19[1].mNext = 0i64;
           v19[2].mNext = 0i64;
           v19[3].mNext = 0i64;
-          v19->mNext = (UFG::allocator::free_link *)&UFG::VoiceProfile::`vftable';
+          v19->mNext = (UFG::allocator::free_link *)&UFG::VoiceProfile::`vftable;
           LODWORD(v19[5].mNext) = (_DWORD)v29;
           _((AMD_HD3D *)(unsigned int)v29);
           HIDWORD(v19[5].mNext) = -1;
@@ -815,7 +815,7 @@ LABEL_35:
     }
     while ( v26 < 0x80 );
     v33 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v1->m_Name);
-    UFG::qPrintf("TC_VOICE_DBG: Could not find voice for profile: '%s' --> '%s' \n", v33, v44.mData);
+    UFG::qPrintf("TC_VOICE_DBG: Could not find voice for profile: %s --> %s \n", v33, v44.mData);
     UFG::qString::~qString(&v44);
   }
   for ( i = v42.mNode.mNext;
@@ -997,7 +997,7 @@ void __fastcall UFG::VoiceProfile::VoiceProfile(UFG::VoiceProfile *this, __int64
   this->mNode.mParent = 0i64;
   this->mNode.mChild[0] = 0i64;
   this->mNode.mChild[1] = 0i64;
-  this->vfptr = (UFG::VoiceProfileVtbl *)&UFG::VoiceProfile::`vftable';
+  this->vfptr = (UFG::VoiceProfileVtbl *)&UFG::VoiceProfile::`vftable;
   v8 = (AMD_HD3D *)*(unsigned int *)wwiseId;
   v7->m_wwiseVoiceUid.mUID = (unsigned int)v8;
   _(v8);

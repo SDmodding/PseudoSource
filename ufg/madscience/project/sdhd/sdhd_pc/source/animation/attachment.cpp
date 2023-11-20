@@ -432,7 +432,7 @@ void __fastcall AttachmentCreatureEffectorToCreatureReverse::AttachmentCreatureE
   v1 = (UFG::qNode<Attachment,Attachment> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (AttachmentVtbl *)&Attachment::`vftable';
+  this->vfptr = (AttachmentVtbl *)&Attachment::`vftable;
   *(_WORD *)&this->mPositionOnly = 0;
   this->mUseRubberBand = 0;
   this->attachedJoint = 0;
@@ -448,7 +448,7 @@ void __fastcall AttachmentCreatureEffectorToCreatureReverse::AttachmentCreatureE
   v5->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v5->mPrev;
   v5->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v5->mPrev;
   this->mAttachedSimObject.m_pPointer = 0i64;
-  this->vfptr = (AttachmentVtbl *)&AttachmentCreatureEffectorToCreatureReverse::`vftable';
+  this->vfptr = (AttachmentVtbl *)&AttachmentCreatureEffectorToCreatureReverse::`vftable;
   v6 = &this->mFollowCharacterAnimationComponent;
   v6->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v6->mPrev;
   v6->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v6->mPrev;
@@ -479,7 +479,7 @@ void __fastcall AttachmentCreatureEffectorToCreatureReverse::~AttachmentCreature
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v7; // rax
 
   v1 = this;
-  this->vfptr = (AttachmentVtbl *)&AttachmentCreatureEffectorToCreatureReverse::`vftable';
+  this->vfptr = (AttachmentVtbl *)&AttachmentCreatureEffectorToCreatureReverse::`vftable;
   v2 = this->mEffector;
   if ( v2 )
     v2->vfptr[1].__vecDelDtor((Expression::IMemberMap *)&v2->vfptr, 0);

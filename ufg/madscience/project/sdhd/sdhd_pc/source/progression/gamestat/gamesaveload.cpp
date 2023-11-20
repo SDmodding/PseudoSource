@@ -1499,7 +1499,7 @@ void __fastcall UFG::GameSaveLoad::SaveDataEnd(UFG::GameSaveLoad *this, UFG::err
   {
     do
     {
-      UFG::qPrintf("File Name '%s', File Size = %d \n", v5[3].mPrev, LODWORD(v5[6].mNext));
+      UFG::qPrintf("File Name %s, File Size = %d \n", v5[3].mPrev, LODWORD(v5[6].mNext));
       v6 = (int)v5[7].mNext;
       v7 = HIDWORD(v5[7].mNext);
       v8 = UFG::GameSaveLoad::GetSlotFullFilename(v2, &result, (UFG::GameSaveLoad::eGameSlotNum)HIDWORD(v5[7].mNext));
@@ -1769,7 +1769,7 @@ LABEL_36:
   }
   do
   {
-    UFG::qPrintf("File Name '%s', File Size = %d \n", v6->mFileName.mData, v6->mFileSize);
+    UFG::qPrintf("File Name %s, File Size = %d \n", v6->mFileName.mData, v6->mFileSize);
     v7 = v6->mData;
     bufferSize = v6->mFileSize;
     v9 = v6->mUserData[0];
@@ -1893,16 +1893,16 @@ LABEL_16:
             v23 = v21 + 1;
             v23->mNext = v23;
             v23[1].mNext = v23;
-            v21->mNext = (UFG::allocator::free_link *)&UFG::UICommand::`vftable';
+            v21->mNext = (UFG::allocator::free_link *)&UFG::UICommand::`vftable;
             LODWORD(v21[3].mNext) = -1;
             v21[4].mNext = 0i64;
-            v21->mNext = (UFG::allocator::free_link *)&UFG::UIMessage::`vftable';
+            v21->mNext = (UFG::allocator::free_link *)&UFG::UIMessage::`vftable;
             v21[5].mNext = (UFG::allocator::free_link *)UI_HASH_PHOTO_LOADED_14;
             v21[6].mNext = (UFG::allocator::free_link *)-1i64;
             LODWORD(v21[3].mNext) = 5;
-            v21->mNext = (UFG::allocator::free_link *)&UFG::UIMessageSaveLoad::`vftable';
+            v21->mNext = (UFG::allocator::free_link *)&UFG::UIMessageSaveLoad::`vftable;
             LODWORD(v21[7].mNext) = v10 - 6;
-            v21->mNext = (UFG::allocator::free_link *)&UFG::UIMessagePhotoLoaded::`vftable';
+            v21->mNext = (UFG::allocator::free_link *)&UFG::UIMessagePhotoLoaded::`vftable;
             v21[8].mNext = v20;
             LODWORD(v21[9].mNext) = v22;
           }
@@ -2044,7 +2044,7 @@ void __fastcall UFG::GameSaveLoad::DeleteDataEnd(UFG::GameSaveLoad *this, UFG::e
   {
     do
     {
-      UFG::qPrintf("DeleteDataEnd: File Name '%s', (Slot) %d \n", v4[3].mPrev, HIDWORD(v4[7].mNext));
+      UFG::qPrintf("DeleteDataEnd: File Name %s, (Slot) %d \n", v4[3].mPrev, HIDWORD(v4[7].mNext));
       if ( !v5 && LODWORD(v4[7].mNext) == 4 )
       {
         v6 = HIDWORD(v4[7].mNext);
@@ -2054,15 +2054,15 @@ void __fastcall UFG::GameSaveLoad::DeleteDataEnd(UFG::GameSaveLoad *this, UFG::e
           v8 = v7 + 1;
           v8->mNext = v8;
           v8[1].mNext = v8;
-          v7->mNext = (UFG::allocator::free_link *)&UFG::UICommand::`vftable';
+          v7->mNext = (UFG::allocator::free_link *)&UFG::UICommand::`vftable;
           LODWORD(v7[3].mNext) = -1;
           v7[4].mNext = 0i64;
-          v7->mNext = (UFG::allocator::free_link *)&UFG::UIMessage::`vftable';
+          v7->mNext = (UFG::allocator::free_link *)&UFG::UIMessage::`vftable;
           LODWORD(v7[5].mNext) = UI_HASH_PHOTO_DELETED_14;
           HIDWORD(v7[5].mNext) = 0;
           v7[6].mNext = (UFG::allocator::free_link *)-1i64;
           LODWORD(v7[3].mNext) = 5;
-          v7->mNext = (UFG::allocator::free_link *)&UFG::UIMessageSaveLoad::`vftable';
+          v7->mNext = (UFG::allocator::free_link *)&UFG::UIMessageSaveLoad::`vftable;
           LODWORD(v7[7].mNext) = v6 - 6;
         }
         else
@@ -2136,7 +2136,7 @@ void __fastcall UFG::GameSaveLoad::UpdateGameSlotInfo(UFG::GameSaveLoad *this, U
     *(_BYTE *)(v11 + 112) = 0;
   }
   UFG::qPrintf(
-    "[GameSaveLoad] Slot %d  State=%d  Size=%d  TimeStamp=0x%016x64  Mission='%s'\n",
+    "[GameSaveLoad] Slot %d  State=%d  Size=%d  TimeStamp=0x%016x64  Mission=%s\n",
     (unsigned int)v6,
     *(unsigned int *)(v11 + 96),
     *(unsigned int *)(v11 + 100),

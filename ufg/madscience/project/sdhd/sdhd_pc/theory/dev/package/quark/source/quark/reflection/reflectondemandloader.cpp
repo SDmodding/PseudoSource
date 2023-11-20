@@ -89,7 +89,7 @@ LABEL_8:
   *(_QWORD *)&v5.mPatches.size = 0i64;
   v5.mArrays.p = 0i64;
   *(_QWORD *)&v5.mArrays.size = 0i64;
-  v5.vfptr = (UFG::qReflectVisitorVtbl *)&UFG::qReflectOnDemandVisitor::`vftable';
+  v5.vfptr = (UFG::qReflectVisitorVtbl *)&UFG::qReflectOnDemandVisitor::`vftable;
   UFG::qReflectVisitor::TrackObject(&v5, v4, (const char *)v1);
   UFG::qReflectVisitor::VisitObjects(&v5);
   UFG::qReflectVisitor::~qReflectVisitor(&v5);
@@ -178,7 +178,7 @@ LABEL_52:
     *(_QWORD *)&v30.mPatches.size = 0i64;
     v30.mArrays.p = 0i64;
     *(_QWORD *)&v30.mArrays.size = 0i64;
-    v30.vfptr = (UFG::qReflectVisitorVtbl *)&UFG::qReflectOnDemandVisitor::`vftable';
+    v30.vfptr = (UFG::qReflectVisitorVtbl *)&UFG::qReflectOnDemandVisitor::`vftable;
     UFG::qReflectVisitor::TrackObject(&v30, v29, v12);
     UFG::qReflectVisitor::VisitObjects(&v30);
     UFG::qReflectVisitor::~qReflectVisitor(&v30);

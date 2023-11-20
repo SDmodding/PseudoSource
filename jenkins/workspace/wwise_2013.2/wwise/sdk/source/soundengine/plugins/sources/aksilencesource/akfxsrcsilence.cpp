@@ -6,7 +6,7 @@ AK::IAkPluginParam *__fastcall CreateSilenceSourceParams(AK::IAkPluginMemAlloc *
 
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 24ui64);
   if ( result )
-    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkFxSrcSilenceParams::`vftable';
+    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkFxSrcSilenceParams::`vftable;
   return result;
 }
 
@@ -14,14 +14,14 @@ AK::IAkPluginParam *__fastcall CreateSilenceSourceParams(AK::IAkPluginMemAlloc *
 // RVA: 0xAD16A0
 void __fastcall CAkFxSrcSilenceParams::CAkFxSrcSilenceParams(CAkFxSrcSilenceParams *this)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkFxSrcSilenceParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkFxSrcSilenceParams::`vftable;
 }
 
 // File Line: 38
 // RVA: 0xAD16C0
 void __fastcall CAkFxSrcSilenceParams::CAkFxSrcSilenceParams(CAkFxSrcSilenceParams *this, CAkFxSrcSilenceParams *Copy)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkFxSrcSilenceParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkFxSrcSilenceParams::`vftable;
   this->m_Params.fDuration = Copy->m_Params.fDuration;
   this->m_Params.fRandomizedLengthMinus = Copy->m_Params.fRandomizedLengthMinus;
   this->m_Params.fRandomizedLengthPlus = Copy->m_Params.fRandomizedLengthPlus;
@@ -31,7 +31,7 @@ void __fastcall CAkFxSrcSilenceParams::CAkFxSrcSilenceParams(CAkFxSrcSilencePara
 // RVA: 0xAD16F0
 void __fastcall CAkFxSrcSilenceParams::~CAkFxSrcSilenceParams(CAkFxSrcSilenceParams *this)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable;
 }
 
 // File Line: 49
@@ -45,7 +45,7 @@ AK::IAkPluginParam *__fastcall CAkFxSrcSilenceParams::Clone(CAkFxSrcSilenceParam
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 24ui64);
   if ( result )
   {
-    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkFxSrcSilenceParams::`vftable';
+    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkFxSrcSilenceParams::`vftable;
     *(float *)&result[1].vfptr = v2->m_Params.fDuration;
     HIDWORD(result[1].vfptr) = LODWORD(v2->m_Params.fRandomizedLengthMinus);
     *(float *)&result[2].vfptr = v2->m_Params.fRandomizedLengthPlus;
@@ -135,7 +135,7 @@ AK::IAkPlugin *__fastcall CreateSilenceSource(AK::IAkPluginMemAlloc *in_pAllocat
   if ( !result )
     return 0i64;
   LODWORD(result[3].vfptr) = 1;
-  result->vfptr = (AK::IAkPluginVtbl *)&CAkFXSrcSilence::`vftable';
+  result->vfptr = (AK::IAkPluginVtbl *)&CAkFXSrcSilence::`vftable;
   result[1].vfptr = 0i64;
   HIDWORD(result[2].vfptr) = 0;
   HIDWORD(result[3].vfptr) = 0;
@@ -149,7 +149,7 @@ AK::IAkPlugin *__fastcall CreateSilenceSource(AK::IAkPluginMemAlloc *in_pAllocat
 void __fastcall CAkFXSrcSilence::CAkFXSrcSilence(CAkFXSrcSilence *this)
 {
   *(_DWORD *)&this->m_sNumLoops = 1;
-  this->vfptr = (AK::IAkPluginVtbl *)&CAkFXSrcSilence::`vftable';
+  this->vfptr = (AK::IAkPluginVtbl *)&CAkFXSrcSilence::`vftable;
   *(_QWORD *)&this->m_uSampleRate = 0i64;
   this->m_fDurationModifier = 0.0;
   this->m_fInitDuration = 0.0;
@@ -161,7 +161,7 @@ void __fastcall CAkFXSrcSilence::CAkFXSrcSilence(CAkFXSrcSilence *this)
 // RVA: 0xAD1880
 void __fastcall CAkFXSrcSilence::~CAkFXSrcSilence(CAkFXSrcSilence *this)
 {
-  this->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable';
+  this->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable;
 }
 
 // File Line: 173

@@ -149,7 +149,7 @@ LABEL_9:
     v17 = ">gt";
     v18 = "&amp";
     v19 = "\"quot";
-    v20 = "'apos";
+    v20 = "apos";
     v21 = 0i64;
     v10 = 0i64;
     v11 = "<lt";
@@ -398,7 +398,7 @@ LABEL_19:
 void __fastcall hkXmlParser::hkXmlParser(hkXmlParser *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkXmlParser::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkXmlParser::`vftable;
   this->m_pendingNodes.m_capacityAndFlags = 2147483648;
   this->m_pendingNodes.m_data = 0i64;
   this->m_pendingNodes.m_size = 0;
@@ -416,7 +416,7 @@ void __fastcall hkXmlParser::~hkXmlParser(hkXmlParser *this)
   int v5; // er8
 
   v1 = 0;
-  this->vfptr = (hkBaseObjectVtbl *)&hkXmlParser::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkXmlParser::`vftable;
   v2 = this;
   if ( this->m_pendingNodes.m_size > 0 )
   {
@@ -441,7 +441,7 @@ void __fastcall hkXmlParser::~hkXmlParser(hkXmlParser *this)
       8 * v5);
   v2->m_pendingNodes.m_data = 0i64;
   v2->m_pendingNodes.m_capacityAndFlags = 2147483648;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 259
@@ -767,7 +767,7 @@ LABEL_24:
         {
           *(_DWORD *)(v20 + 8) = 0x1FFFF;
           *(_DWORD *)(v20 + 16) = 3;
-          *(_QWORD *)v20 = &hkXmlParser::Characters::`vftable';
+          *(_QWORD *)v20 = &hkXmlParser::Characters::`vftable;
           hkStringPtr::hkStringPtr((hkStringPtr *)(v20 + 24), 0i64);
           *v6 = v21;
         }
@@ -1082,7 +1082,7 @@ LABEL_45:
 LABEL_44:
           hkStringPtr::printf(
             &v6->m_lastError,
-            "Expected tag to end '%s' but got '%s'",
+            "Expected tag to end %s but got %s",
             (_QWORD)v18[1].vfptr & 0xFFFFFFFFFFFFFFFEui64,
             *(_QWORD *)&v19[1].m_memSizeAndFlags & 0xFFFFFFFFFFFFFFFEui64);
           goto LABEL_42;
@@ -1091,7 +1091,7 @@ LABEL_44:
         {
 LABEL_46:
           v23 = *(hkBaseObjectVtbl **)&v19[1].m_memSizeAndFlags;
-          v22 = "Unexpected end tag '%s'";
+          v22 = "Unexpected end tag %s";
           goto LABEL_41;
         }
         v13 = v13->m_parent;
@@ -1128,7 +1128,7 @@ LABEL_36:
 LABEL_37:
   if ( v13 )
   {
-    v22 = "Missing closing tag of '%s'";
+    v22 = "Missing closing tag of %s";
     if ( v13->m_value.m_pntr->type == 1 )
       v10 = v13->m_value.m_pntr;
     v23 = v10[1].vfptr;

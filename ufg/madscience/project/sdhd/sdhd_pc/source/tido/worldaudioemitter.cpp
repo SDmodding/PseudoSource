@@ -34,7 +34,7 @@ void __fastcall UFG::AudioEmitterMarker::AudioEmitterMarker(UFG::AudioEmitterMar
   v4->mNode.mParent = 0i64;
   v4->mNode.mChild[0] = 0i64;
   v4->mNode.mChild[1] = 0i64;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AudioEmitterMarker::`vftable';
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AudioEmitterMarker::`vftable;
   v4->m_contoller.m_pEvent = 0i64;
   v4->m_entity = 0i64;
   v4->m_eventId.mUID = -1;
@@ -66,7 +66,7 @@ void __fastcall UFG::AudioEmitterMarker::~AudioEmitterMarker(UFG::AudioEmitterMa
   UFG::AudioEvent *v2; // rcx
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AudioEmitterMarker::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AudioEmitterMarker::`vftable;
   UFG::AudioEmitterMarker::Stop(this, 0x7D0u);
   UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
     (UFG::qBaseTreeVariableRB<unsigned __int64> *)&UFG::AudioEmitterMarker::msAudioEmitterMarkers,
@@ -248,7 +248,7 @@ UFG::AudioEmitterMarker *__fastcall UFG::AudioEmitterMarker::PropertiesOnActivat
     {
       v19 = (UFG::qSymbolUC *)UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&v33, v1->m_NameUID);
       v20 = UFG::qSymbol::as_cstr_dbg(v19);
-      UFG::qPrintf("Audio Emitter has no event: '%s'\n", v20);
+      UFG::qPrintf("Audio Emitter has no event: %s\n", v20);
     }
     if ( v12 )
       UFG::qWiseSymbol::operator=((UFG::qWiseSymbol *)(v6 + 164), v12);
@@ -259,7 +259,7 @@ UFG::AudioEmitterMarker *__fastcall UFG::AudioEmitterMarker::PropertiesOnActivat
       v23 = (UFG::qSymbolUC *)UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&v33, v1->m_NameUID);
       v24 = UFG::qSymbol::as_cstr_dbg(v23);
       v25 = UFG::qWiseSymbol::as_cstr_dbg(v22 + 22);
-      UFG::qPrintf("Audio Emitter has no soundbank reference: '%s' - setting to %s using event properties \n", v24, v25);
+      UFG::qPrintf("Audio Emitter has no soundbank reference: %s - setting to %s using event properties \n", v24, v25);
       UFG::qWiseSymbol::operator=((UFG::qWiseSymbol *)(v6 + 164), (UFG::qWiseSymbol *)&v21->mNULL.mChild[0][2].mUID);
       v14 = v34;
       v18 = v31;

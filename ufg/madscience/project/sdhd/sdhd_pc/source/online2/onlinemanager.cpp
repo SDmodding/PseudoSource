@@ -5,7 +5,7 @@ UFG::OnlineManager *__fastcall UFG::OnlineManager::Instance()
   if ( !(_S5_9 & 1) )
   {
     _S5_9 |= 1u;
-    instance.vfptr = (UFG::OnlineManagerVtbl *)&UFG::OnlineManager::`vftable';
+    instance.vfptr = (UFG::OnlineManagerVtbl *)&UFG::OnlineManager::`vftable;
     unk_1424011B8 = 0;
     stru_1424011C0.mNode.mPrev = (UFG::qNode<UFG::GUIObjectBase,UFG::GUIObjectBase> *)&stru_1424011C0;
     stru_1424011C0.mNode.mNext = (UFG::qNode<UFG::GUIObjectBase,UFG::GUIObjectBase> *)&stru_1424011C0;

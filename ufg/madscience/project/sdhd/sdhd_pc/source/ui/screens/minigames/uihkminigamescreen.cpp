@@ -6,7 +6,7 @@ void __fastcall UFG::UIHKMinigameScreen::~UIHKMinigameScreen(UFG::UIHKMinigameSc
   int v2; // eax
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKMinigameScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKMinigameScreen::`vftable;
   if ( unk_142431A14 && UFG::UIHK_PDAWidget::mInputLocked )
   {
     UFG::SetInputMode_PDA_Off(UFG::gActiveControllerNum);

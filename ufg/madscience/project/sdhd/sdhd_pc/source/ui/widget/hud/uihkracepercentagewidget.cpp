@@ -128,7 +128,7 @@ void __fastcall UFG::UIHKRacePercentageWidget::Flash_SetPercentageDone(UFG::UIHK
 
   v2 = screen;
   v3 = this;
-  `eh vector constructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   v4 = (double)(signed int)v3->mPercentageDone;
   if ( ((unsigned int)pargs.Type >> 6) & 1 )
   {
@@ -143,6 +143,6 @@ void __fastcall UFG::UIHKRacePercentageWidget::Flash_SetPercentageDone(UFG::UIHK
   v5 = v2->mRenderable->m_movie.pObject;
   if ( v5 )
     Scaleform::GFx::Movie::Invoke(v5, "Race_SetPercentageDone", 0i64, &pargs, 1u);
-  `eh vector destructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 

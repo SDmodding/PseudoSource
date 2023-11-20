@@ -38,7 +38,7 @@ void __fastcall finishLoadedObjecthkxScene(void *p, int finishing)
   {
     v2 = (hkStringPtr *)p;
     v3 = (hkStringPtr *)((char *)p + 16);
-    v3[-2].m_stringAndFlag = (const char *)&hkxScene::`vftable';
+    v3[-2].m_stringAndFlag = (const char *)&hkxScene::`vftable;
     v4 = finishing;
     hkStringPtr::hkStringPtr(v3, (hkFinishLoadedObjectFlag)finishing);
     hkStringPtr::hkStringPtr(v2 + 3, (hkFinishLoadedObjectFlag)v4);
@@ -61,7 +61,7 @@ void **__fastcall getVtablehkxScene()
 
   hkStringPtr::hkStringPtr(&v1, 0);
   hkStringPtr::hkStringPtr(&v2, 0);
-  return &hkxScene::`vftable';
+  return &hkxScene::`vftable;
 }
 
 // File Line: 141

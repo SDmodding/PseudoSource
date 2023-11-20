@@ -727,7 +727,7 @@ void __fastcall UFG::RagdollSkeletonMapper::CreateMapping(UFG::RagdollSkeletonMa
             {
               v174 = UFG::qSymbol::as_cstr_dbg(v53 + 1);
               v175 = UFG::qSymbol::as_cstr_dbg(v53);
-              UFG::qPrintf("Couldn't make a chain (%s - %s).\n", v175, v174);
+              UFG::qPrintf("Couldnt make a chain (%s - %s).\n", v175, v174);
               v176 = (char *)p;
               v177 = v232.m_size;
               if ( p == v232.m_data )
@@ -777,7 +777,7 @@ void __fastcall UFG::RagdollSkeletonMapper::CreateMapping(UFG::RagdollSkeletonMa
                   {
                     v73 = UFG::qSymbol::as_cstr_dbg(v53 + 1);
                     v74 = UFG::qSymbol::as_cstr_dbg(v53);
-                    UFG::qPrintf("Couldn't make a chain (%s - %s).\n", v74, v73);
+                    UFG::qPrintf("Couldnt make a chain (%s - %s).\n", v74, v73);
                   }
                   ++v71;
                   --v72;
@@ -796,7 +796,7 @@ void __fastcall UFG::RagdollSkeletonMapper::CreateMapping(UFG::RagdollSkeletonMa
                   {
                     v78 = UFG::qSymbol::as_cstr_dbg(v53 + 1);
                     v79 = UFG::qSymbol::as_cstr_dbg(v53);
-                    UFG::qPrintf("Couldn't make a chain (%s - %s).\n", v79, v78);
+                    UFG::qPrintf("Couldnt make a chain (%s - %s).\n", v79, v78);
                   }
                   ++v76;
                   --v77;
@@ -1111,7 +1111,7 @@ void __fastcall UFG::RagdollSkeletonMapper::CreateMapping(UFG::RagdollSkeletonMa
           {
             v188 = UFG::qSymbol::as_cstr_dbg(v53 + 1);
             v189 = UFG::qSymbol::as_cstr_dbg(v53);
-            UFG::qPrintf("Couldn't make a chain (%s - %s).\n", v189, v188);
+            UFG::qPrintf("Couldnt make a chain (%s - %s).\n", v189, v188);
             v190 = (char *)p;
             v191 = v232.m_size;
             if ( p == v232.m_data )
@@ -1160,14 +1160,14 @@ void __fastcall UFG::RagdollSkeletonMapper::CreateMapping(UFG::RagdollSkeletonMa
         {
           v63 = UFG::qSymbol::as_cstr_dbg(v53 + 1);
           v64 = UFG::qSymbol::as_cstr_dbg(v53);
-          UFG::qPrintf("Couldn't make a chain (%s - %s). End bone not found in either skeleton\n", v64, v63);
+          UFG::qPrintf("Couldnt make a chain (%s - %s). End bone not found in either skeleton\n", v64, v63);
         }
       }
       else
       {
         v61 = UFG::qSymbol::as_cstr_dbg(v53 + 1);
         v62 = UFG::qSymbol::as_cstr_dbg(v53);
-        UFG::qPrintf("Couldn't make a chain (%s - %s). Start bone not found in either skeleton\n", v62, v61);
+        UFG::qPrintf("Couldnt make a chain (%s - %s). Start bone not found in either skeleton\n", v62, v61);
       }
       v52 = v256 + 1;
       v256 = v52;
@@ -1765,7 +1765,7 @@ UFG::qSafePointerNode<UFG::RagdollData> *__fastcall UFG::RagdollFactory::CreateR
   if ( v7 )
   {
     UFG::qSafePointerNode<UFG::RagdollData>::qSafePointerNode<UFG::RagdollData>(v7);
-    v9->vfptr = (UFG::qSafePointerNode<UFG::RagdollData>Vtbl *)&UFG::RagdollData::`vftable';
+    v9->vfptr = (UFG::qSafePointerNode<UFG::RagdollData>Vtbl *)&UFG::RagdollData::`vftable;
     v9[2].m_SafePointerList.mNode.mPrev = 0i64;
     v9[2].vfptr = 0i64;
     v9[3].vfptr = 0i64;

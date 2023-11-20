@@ -15,7 +15,7 @@ CAkSound *__fastcall CAkSound::Create(unsigned int in_ulID)
   if ( result )
   {
     CAkSoundBase::CAkSoundBase((CAkSoundBase *)&result->vfptr, v1);
-    v3->vfptr = (CAkIndexableVtbl *)&CAkSound::`vftable';
+    v3->vfptr = (CAkIndexableVtbl *)&CAkSound::`vftable;
     CAkSource::CAkSource(&v3->m_Source);
     v4 = v3->vfptr[3].Release((CAkIndexable *)&v3->vfptr);
     v6 = 0;

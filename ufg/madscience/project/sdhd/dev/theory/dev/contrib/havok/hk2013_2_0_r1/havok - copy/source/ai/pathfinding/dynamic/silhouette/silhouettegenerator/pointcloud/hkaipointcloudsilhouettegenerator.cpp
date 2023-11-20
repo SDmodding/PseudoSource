@@ -6,7 +6,7 @@ void __fastcall hkaiPointCloudSilhouetteGenerator::hkaiPointCloudSilhouetteGener
 
   v1 = (__m128 *)this;
   hkaiSilhouetteGenerator::hkaiSilhouetteGenerator((hkaiSilhouetteGenerator *)&this->vfptr, GENERATOR_POINT_CLOUD);
-  v1->m128_u64[0] = (unsigned __int64)&hkaiPointCloudSilhouetteGenerator::`vftable';
+  v1->m128_u64[0] = (unsigned __int64)&hkaiPointCloudSilhouetteGenerator::`vftable;
   v1[7].m128_i32[3] = 2147483648;
   v1[7].m128_u64[0] = 0i64;
   v1[7].m128_i32[2] = 0;
@@ -27,7 +27,7 @@ void __fastcall hkaiPointCloudSilhouetteGenerator::hkaiPointCloudSilhouetteGener
 
   v2 = this;
   hkaiSilhouetteGenerator::hkaiSilhouetteGenerator((hkaiSilhouetteGenerator *)&this->vfptr, f);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkaiPointCloudSilhouetteGenerator::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkaiPointCloudSilhouetteGenerator::`vftable;
 }
 
 // File Line: 51
@@ -39,7 +39,7 @@ void __fastcall hkaiPointCloudSilhouetteGenerator::~hkaiPointCloudSilhouetteGene
   int v3; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiPointCloudSilhouetteGenerator::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiPointCloudSilhouetteGenerator::`vftable;
   v2 = this->m_silhouetteSizes.m_capacityAndFlags;
   this->m_silhouetteSizes.m_size = 0;
   if ( v2 >= 0 )
@@ -291,7 +291,7 @@ hkaiConvexSilhouetteSet *__fastcall hkaiPointCloudSilhouetteGenerator::generateS
     if ( v19 )
     {
       *(_DWORD *)(v19 + 8) = 0x1FFFF;
-      *(_QWORD *)v19 = &hkaiConvexSilhouetteSet::`vftable';
+      *(_QWORD *)v19 = &hkaiConvexSilhouetteSet::`vftable;
       *(_DWORD *)(v19 + 28) = 2147483648;
       *(_QWORD *)(v19 + 16) = 0i64;
       *(_DWORD *)(v19 + 24) = 0;

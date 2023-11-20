@@ -6,14 +6,14 @@ void __fastcall OSuite::ZStringBuilder::ZStringBuilder(OSuite::ZStringBuilder *t
   unsigned __int64 v3; // rdi
 
   v2 = (OSuite::ZObject *)&this->m_Chars.vfptr;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZStringBuilder::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZStringBuilder::`vftable;
   v3 = nSize;
   OSuite::ZRedBlackTreeBase::ZElementBase::ZElementBase(
     (OSuite::ZObject *)&this->m_Chars.vfptr,
     (OSuite::ZObject *)nSize);
   v2[4].vfptr = 0i64;
-  v2->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<unsigned char>::`vftable'{for `OSuite::ZListBase'};
-  v2[3].vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<char>::`vftable'{for `OSuite::IHashable'};
+  v2->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<unsigned char>::`vftable{for `OSuite::ZListBase};
+  v2[3].vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<char>::`vftable{for `OSuite::IHashable};
   if ( v3 )
     v2[4].vfptr = (OSuite::ZObjectVtbl *)OSuite::ZObject::malloc(v2, v3, 0i64);
   v2[2].vfptr = 0i64;

@@ -31,7 +31,7 @@ hkClass *__fastcall hkpVehicleDefaultVelocityDamper::staticClass()
 void __fastcall finishLoadedObjecthkpVehicleDefaultVelocityDamper(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpVehicleDefaultVelocityDamper::`vftable';
+    *(_QWORD *)p = &hkpVehicleDefaultVelocityDamper::`vftable;
 }
 
 // File Line: 70
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkpVehicleDefaultVelocityDamper(void *p)
 // RVA: 0xE258E0
 void **__fastcall getVtablehkpVehicleDefaultVelocityDamper()
 {
-  return &hkpVehicleDefaultVelocityDamper::`vftable';
+  return &hkpVehicleDefaultVelocityDamper::`vftable;
 }
 
 // File Line: 96

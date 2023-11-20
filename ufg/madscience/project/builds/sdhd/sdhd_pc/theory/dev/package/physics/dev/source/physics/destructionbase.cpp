@@ -47,20 +47,20 @@ void __fastcall UFG::Destruction::Destruction(UFG::Destruction *this, hkpWorld *
 
   v2 = world;
   v3 = this;
-  this->vfptr = (hkpBreakOffPartsListenerVtbl *)&hkpBreakOffPartsListener::`vftable';
+  this->vfptr = (hkpBreakOffPartsListenerVtbl *)&hkpBreakOffPartsListener::`vftable;
   v4 = (hkReferencedObject *)&this->vfptr;
-  v4->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
-  v4->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable';
+  v4->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
+  v4->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable;
   *(_DWORD *)&v4->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkpBreakOffPartsListenerVtbl *)&UFG::Destruction::`vftable'{for `hkpBreakOffPartsListener'};
-  v4->vfptr = (hkBaseObjectVtbl *)&UFG::Destruction::`vftable'{for `hkReferencedObject'};
+  this->vfptr = (hkpBreakOffPartsListenerVtbl *)&UFG::Destruction::`vftable{for `hkpBreakOffPartsListener};
+  v4->vfptr = (hkBaseObjectVtbl *)&UFG::Destruction::`vftable{for `hkReferencedObject};
   v5 = &this->mBreakOffPartsQueue;
   UFG::qMutex::qMutex(&this->mBreakOffPartsQueue.mutex, &customWorldMapCaption);
   v3->mBreakOffPartsQueue.head.next = &v3->mBreakOffPartsQueue.tail;
   v5->head.prev = 0i64;
   v3->mBreakOffPartsQueue.tail.prev = &v3->mBreakOffPartsQueue.head;
   v3->mBreakOffPartsQueue.tail.next = 0i64;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v3->mObjects,
     0x18ui64,
     15,
@@ -107,23 +107,23 @@ void __fastcall UFG::Destruction::~Destruction(UFG::Destruction *this)
   hkpWorld *v4; // rcx
 
   v1 = this;
-  this->vfptr = (hkpBreakOffPartsListenerVtbl *)&UFG::Destruction::`vftable'{for `hkpBreakOffPartsListener'};
+  this->vfptr = (hkpBreakOffPartsListenerVtbl *)&UFG::Destruction::`vftable{for `hkpBreakOffPartsListener};
   v2 = (hkReferencedObject *)&this->vfptr;
-  this->vfptr = (hkBaseObjectVtbl *)&UFG::Destruction::`vftable'{for `hkReferencedObject'};
+  this->vfptr = (hkBaseObjectVtbl *)&UFG::Destruction::`vftable{for `hkReferencedObject};
   v3 = this->mBreakOffPartsUtil;
   v4 = v3->m_world;
   if ( v4 )
     hkpWorld::removeWorldExtension(v4, (hkpWorldExtension *)&v3->vfptr);
   hkReferencedObject::removeReference((hkReferencedObject *)&v1->mBreakOffPartsUtil->vfptr);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->mObjects,
     0x18ui64,
     15,
     (void (__fastcall *)(void *))UFG::qSafePointer<UFG::SimComponent,UFG::HealthComponent>::~qSafePointer<UFG::SimComponent,UFG::HealthComponent>);
   UFG::ThreadSafeQueue<UFG::BreakoffPart>::~ThreadSafeQueue<UFG::BreakoffPart>(&v1->mBreakOffPartsQueue);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable';
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
-  v1->vfptr = (hkpBreakOffPartsListenerVtbl *)&hkpBreakOffPartsListener::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable;
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
+  v1->vfptr = (hkpBreakOffPartsListenerVtbl *)&hkpBreakOffPartsListener::`vftable;
 }
 
 // File Line: 125
@@ -1259,10 +1259,10 @@ void __fastcall UFG::DestructionEvent::DestructionEvent(UFG::DestructionEvent *t
   v9 = (UFG::qNode<UFG::Event,UFG::Event> *)&this->mPrev;
   v9->mPrev = v9;
   v9->mNext = v9;
-  this->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+  this->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
   this->m_EventUID = v8;
   this->m_NamePTR = 0i64;
-  this->vfptr = (UFG::EventVtbl *)&UFG::DestructionEvent::`vftable';
+  this->vfptr = (UFG::EventVtbl *)&UFG::DestructionEvent::`vftable;
   v10 = &this->mCollidingComponent;
   v10->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v10->mPrev;
   v10->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v10->mPrev;

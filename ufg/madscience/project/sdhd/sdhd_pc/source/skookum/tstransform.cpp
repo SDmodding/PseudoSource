@@ -5,7 +5,7 @@ __int64 anonymous_namespace_::_dynamic_initializer_for__TSTransform_name_id_def_
   __int64 result; // rax
 
   result = UFG::qStringHash32("Skookum.xformNode", 0xFFFFFFFF);
-  `anonymous namespace'::TSTransform_name_id_def = result;
+  `anonymous namespace::TSTransform_name_id_def = result;
   return result;
 }
 
@@ -153,7 +153,7 @@ void __fastcall UFG::TSTransform::Mthd_ctor(SSInvokedMethod *pScope, SSInstance 
   {
     UFG::TransformNodeComponent::TransformNodeComponent(
       (UFG::TransformNodeComponent *)v4,
-      `anonymous namespace'::TSTransform_name_id_def,
+      `anonymous namespace::TSTransform_name_id_def,
       0i64,
       0);
     v2[2].vfptr = v5;

@@ -86,7 +86,7 @@ UFG::qColour *__fastcall Render::ParticleLighting::ApplyDynamicLights(Render::Pa
   v11 = 0i64;
   if ( this->mNumLights )
   {
-    v12 = `Render::Light::LuminanceAndColourAtDistance'::`2'::`local static guard';
+    v12 = `Render::Light::LuminanceAndColourAtDistance::`2::`local static guard;
     do
     {
       v13 = v7->mLights[v11];
@@ -98,8 +98,8 @@ UFG::qColour *__fastcall Render::ParticleLighting::ApplyDynamicLights(Render::Pa
       LODWORD(v15) = (unsigned __int128)_mm_sqrt_ps(v14);
       if ( !(v12 & 1) )
       {
-        `Render::Light::LuminanceAndColourAtDistance'::`2'::`local static guard' = v12 | 1;
-        `Render::Light::LuminanceAndColourAtDistance'::`2'::luminance_mul = 1050253722;
+        `Render::Light::LuminanceAndColourAtDistance::`2::`local static guard = v12 | 1;
+        `Render::Light::LuminanceAndColourAtDistance::`2::luminance_mul = 1050253722;
         dword_142366DB4 = 1056964608;
         dword_142366DB8 = 1045220557;
         v12 |= 1u;

@@ -10,7 +10,7 @@ void __fastcall hkaiDefaultAstarEdgeFilter::hkaiDefaultAstarEdgeFilter(hkaiDefau
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_type.m_storage = 0;
   v2 = this->m_edgeMaskLookupTable;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiDefaultAstarEdgeFilter::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiDefaultAstarEdgeFilter::`vftable;
   for ( i = 32i64; i; --i )
   {
     *v2 = -1;

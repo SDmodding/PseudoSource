@@ -85,7 +85,7 @@ UFG::SimComponent *__fastcall UFG::GameNavComponent::PropertiesOnActivateNew(UFG
   if ( v4 )
   {
     UFG::NavComponent::NavComponent((UFG::NavComponent *)v4, v2->m_NameUID);
-    v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::GameNavComponent::`vftable';
+    v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::GameNavComponent::`vftable;
   }
   else
   {

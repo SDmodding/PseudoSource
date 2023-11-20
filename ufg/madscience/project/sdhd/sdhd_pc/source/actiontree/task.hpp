@@ -6,7 +6,7 @@ void __fastcall ITask::~ITask(ITask *this)
   UFG::qNode<ITask,ITask> *v2; // rcx
   UFG::qNode<ITask,ITask> *v3; // rax
 
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
   v2 = this->mPrev;
   v3 = v1->mNext;

@@ -370,8 +370,8 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_geom::Matrix3D::Matrix3D(Scal
 
   v2 = this;
   Scaleform::GFx::AS3::Instance::Instance((Scaleform::GFx::AS3::Instance *)&this->vfptr, t);
-  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Object::`vftable';
-  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_geom::Matrix3D::`vftable';
+  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Object::`vftable;
+  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_geom::Matrix3D::`vftable;
   memset(&v2->mat4, 0, 0x80ui64);
   v2->mat4.M[0][0] = 1.0;
   v2->mat4.M[1][1] = 1.0;
@@ -432,7 +432,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_geom::Matrix3D::positionGet(S
   gname.Size = 19i64;
   v7 = Scaleform::GFx::AS3::VM::GetClass((Scaleform::GFx::AS3::VM *)&v6->vfptr, &gname, v6->CurrentDomain.pObject);
   Scaleform::GFx::AS3::ASVM::_constructInstance(v6, v2, (Scaleform::GFx::AS3::Object *)&v7->vfptr, 4u, &ptr);
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
 }
 
 // File Line: 138
@@ -1106,7 +1106,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_geom::Matrix3D::clone(Scalefo
 
   v2 = (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_vec::Vector_uint> *)result;
   v3 = this;
-  `eh vector constructor iterator'(&ptr, 0x20ui64, 16, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x20ui64, 16, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::Value);
   v4 = (Scaleform::GFx::AS3::Value *)&ptr;
   v5 = &v3->mat4;
   v6 = 16i64;
@@ -1147,7 +1147,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_geom::Matrix3D::clone(Scalefo
     "flash.geom.Matrix3D",
     0x10u,
     (Scaleform::GFx::AS3::Value *)&ptr);
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 16, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 16, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
 }
 
 // File Line: 291
@@ -3047,8 +3047,8 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v5 )
   {
     Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, v2, &Scaleform::GFx::AS3::fl_geom::Matrix3DCI);
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable';
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_geom::Matrix3D::`vftable';
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable;
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_geom::Matrix3D::`vftable;
   }
   else
   {
@@ -3060,8 +3060,8 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v7 )
   {
     Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v7, v2, &Scaleform::GFx::AS3::fl_geom::Matrix3DCI);
-    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable';
-    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_geom::Matrix3D::`vftable';
+    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable;
+    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_geom::Matrix3D::`vftable;
   }
   else
   {

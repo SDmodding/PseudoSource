@@ -10,7 +10,7 @@ void __fastcall UFG::AudioVFXNode::~AudioVFXNode(UFG::AudioVFXNode *this)
   UFG::qNode<UFG::AudioVFXNode,UFG::AudioVFXNode> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::AudioVFXNodeVtbl *)&UFG::AudioVFXNode::`vftable';
+  this->vfptr = (UFG::AudioVFXNodeVtbl *)&UFG::AudioVFXNode::`vftable;
   this->m_eventId = 0;
   this->m_fxInstance = 0i64;
   v2 = this->m_oneShot.m_pOneShot;
@@ -186,7 +186,7 @@ void __fastcall UFG::AudioVFXManager::Add(Render::FXInstance *fxInstance, unsign
     v6 = v4 + 8;
     *v6 = v6;
     v6[1] = v6;
-    *(_QWORD *)v5 = &UFG::AudioVFXNode::`vftable';
+    *(_QWORD *)v5 = &UFG::AudioVFXNode::`vftable;
     *((_QWORD *)v5 + 3) = 0i64;
     *((_QWORD *)v5 + 4) = 0i64;
     *((_QWORD *)v5 + 5) = 0i64;

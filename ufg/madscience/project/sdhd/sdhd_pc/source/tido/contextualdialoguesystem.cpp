@@ -72,7 +72,7 @@ void UFG::ContextualDialogueManager::ReadRules(void)
         v4 = v2 + 1;
         v4->mNext = v4;
         v4[1].mNext = v4;
-        v3->mNext = (UFG::allocator::free_link *)&UFG::Rule::`vftable';
+        v3->mNext = (UFG::allocator::free_link *)&UFG::Rule::`vftable;
         v3[3].mNext = (UFG::allocator::free_link *)-1i64;
         v5 = v3 + 4;
         v5->mNext = v5;
@@ -206,7 +206,7 @@ void UFG::ContextualDialogueManager::ReadResponses(void)
         v3[1].mNext = 0i64;
         v3[2].mNext = 0i64;
         v3[3].mNext = 0i64;
-        v3->mNext = (UFG::allocator::free_link *)&UFG::Response::`vftable';
+        v3->mNext = (UFG::allocator::free_link *)&UFG::Response::`vftable;
         v3[5].mNext = (UFG::allocator::free_link *)-1i64;
         _((AMD_HD3D *)0xFFFFFFFFi64);
         LODWORD(v4[6].mNext) = -1;
@@ -443,7 +443,7 @@ void __fastcall UFG::Query::Query(UFG::Query *this)
   UFG::qNode<UFG::KeyValue,UFG::KeyValue> *v3; // rdx
   UFG::qNode<UFG::KeyValue,UFG::KeyValue> *v4; // rcx
 
-  this->vfptr = (UFG::QueryVtbl *)&UFG::Query::`vftable';
+  this->vfptr = (UFG::QueryVtbl *)&UFG::Query::`vftable;
   this->m_character = UFG::gNullQSymbol;
   this->m_concept = UFG::gNullQSymbol;
   v1 = &this->m_facts;
@@ -474,7 +474,7 @@ void __fastcall UFG::Query::~Query(UFG::Query *this)
   UFG::qNode<UFG::qReflectField,UFG::qReflectField> *v2; // rcx
   UFG::qNode<UFG::qReflectField,UFG::qReflectField> *v3; // rax
 
-  this->vfptr = (UFG::QueryVtbl *)&UFG::Query::`vftable';
+  this->vfptr = (UFG::QueryVtbl *)&UFG::Query::`vftable;
   v1 = (UFG::qList<UFG::qReflectField,UFG::qReflectField,1,0> *)&this->m_facts;
   UFG::qList<UFG::FractureConnectivity::Connection,UFG::FractureConnectivity::Connection,1,0>::DeleteNodes((UFG::qList<UFG::qReflectField,UFG::qReflectField,1,0> *)&this->m_facts);
   UFG::qList<UFG::FractureConnectivity::Connection,UFG::FractureConnectivity::Connection,1,0>::DeleteNodes(v1);

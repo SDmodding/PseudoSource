@@ -19,11 +19,11 @@ void __fastcall hkSocket::hkSocket(hkSocket *this)
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkSocket::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkSocket::`vftable;
   *(_DWORD *)&this->m_reader.m_memSizeAndFlags = 0x1FFFF;
-  this->m_reader.vfptr = (hkBaseObjectVtbl *)&hkSocket::ReaderAdapter::`vftable';
+  this->m_reader.vfptr = (hkBaseObjectVtbl *)&hkSocket::ReaderAdapter::`vftable;
   *(_DWORD *)&this->m_writer.m_memSizeAndFlags = 0x1FFFF;
-  this->m_writer.vfptr = (hkBaseObjectVtbl *)&hkSocket::WriterAdapter::`vftable';
+  this->m_writer.vfptr = (hkBaseObjectVtbl *)&hkSocket::WriterAdapter::`vftable;
   v1->m_reader.m_socket = v1;
   v1->m_writer.m_socket = v1;
   if ( !hkSocket::s_platformNetInitialized.m_bool )

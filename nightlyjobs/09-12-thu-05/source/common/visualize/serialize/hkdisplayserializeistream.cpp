@@ -6,7 +6,7 @@ void __fastcall hkDisplaySerializeIStream::hkDisplaySerializeIStream(hkDisplaySe
 
   v2 = this;
   hkIArchive::hkIArchive((hkIArchive *)&this->vfptr, reader, 0);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkDisplaySerializeIStream::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkDisplaySerializeIStream::`vftable;
 }
 
 // File Line: 32
@@ -304,7 +304,7 @@ void __fastcall hkDisplaySerializeIStream::readDisplayGeometry(hkDisplaySerializ
       if ( v5 )
       {
         *(_DWORD *)(v5 + 8) = 0x1FFFF;
-        *(_QWORD *)v5 = &hkGeometry::`vftable';
+        *(_QWORD *)v5 = &hkGeometry::`vftable;
         *(_QWORD *)(v5 + 16) = 0i64;
         *(_DWORD *)(v5 + 24) = 0;
         *(_DWORD *)(v5 + 28) = 2147483648;

@@ -566,7 +566,7 @@ void __fastcall hkCollideCapsuleUtilCapsVsTri(hkVector4f *capsAPoints, float cap
         --v69;
       }
       while ( v69 );
-      v76 = (__m128 *)`hkVector4f::getComponent'::`2'::indexToMask;
+      v76 = (__m128 *)`hkVector4f::getComponent::`2::indexToMask;
       v77 = (__int128 *)&v145;
       v78 = 3i64;
       v79 = _mm_shuffle_ps(v64, v64, 255);

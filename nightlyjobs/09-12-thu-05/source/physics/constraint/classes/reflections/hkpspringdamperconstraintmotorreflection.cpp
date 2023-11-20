@@ -31,7 +31,7 @@ hkClass *__fastcall hkpSpringDamperConstraintMotor::staticClass()
 void __fastcall finishLoadedObjecthkpSpringDamperConstraintMotor(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpSpringDamperConstraintMotor::`vftable';
+    *(_QWORD *)p = &hkpSpringDamperConstraintMotor::`vftable;
 }
 
 // File Line: 69
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkpSpringDamperConstraintMotor(void *p)
 // RVA: 0xD446A0
 void **__fastcall getVtablehkpSpringDamperConstraintMotor()
 {
-  return &hkpSpringDamperConstraintMotor::`vftable';
+  return &hkpSpringDamperConstraintMotor::`vftable;
 }
 
 // File Line: 95

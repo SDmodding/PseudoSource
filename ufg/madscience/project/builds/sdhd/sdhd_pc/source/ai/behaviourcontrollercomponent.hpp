@@ -12,7 +12,7 @@ void __fastcall UFG::Behaviour::Behaviour(UFG::Behaviour *this, UFG::InvokeBehav
   v4->mPrev = v4;
   v4->mNext = v4;
   UFG::qSafePointerNode<UFG::Behaviour>::qSafePointerNode<UFG::Behaviour>((UFG::qSafePointerNode<UFG::Behaviour> *)&this->vfptr);
-  v3->vfptr = (UFG::qSafePointerNode<UFG::Behaviour>Vtbl *)&UFG::Behaviour::`vftable';
+  v3->vfptr = (UFG::qSafePointerNode<UFG::Behaviour>Vtbl *)&UFG::Behaviour::`vftable;
   *(_QWORD *)&v3->mAge = 0i64;
   v3->mParams.mNode = v2->mNode;
   *(_QWORD *)&v3->mParams.mPriority = *(_QWORD *)&v2->mPriority;
@@ -41,7 +41,7 @@ void __fastcall UFG::Behaviour::~Behaviour(UFG::Behaviour *this)
   UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v12; // rax
 
   v1 = (UFG::qSafePointerNode<UFG::ParkourHandle> *)this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::Behaviour>Vtbl *)&UFG::Behaviour::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::Behaviour>Vtbl *)&UFG::Behaviour::`vftable;
   if ( !this->mParams.mInvokeTask || this->mParams.mControlType )
   {
     v2 = this->mActionController;
@@ -69,7 +69,7 @@ void __fastcall UFG::Behaviour::~Behaviour(UFG::Behaviour *this)
       operator delete[](v3);
     }
   }
-  v1->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::Behaviour>::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::Behaviour>::`vftable;
   UFG::qSafePointerNode<UFG::DynamicCoverCorner>::SetAllPointersToNull(v1);
   UFG::qList<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList,1,0>::DeleteNodes(&v1->m_SafePointerList);
   v8 = v1->m_SafePointerList.mNode.mPrev;

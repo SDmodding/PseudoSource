@@ -7,14 +7,14 @@ void __fastcall SSUnaryParam::~SSUnaryParam(SSUnaryParam *this)
   SSClassDescBase *v3; // rcx
 
   v1 = this;
-  this->vfptr = (SSParameterBaseVtbl *)&SSUnaryParam::`vftable';
+  this->vfptr = (SSParameterBaseVtbl *)&SSUnaryParam::`vftable;
   v2 = this->i_default_p;
   if ( v2 )
     v2->vfptr->__vecDelDtor(v2, 1u);
   v3 = v1->i_type_p.i_obj_p;
   if ( v3 )
     (*(void (__cdecl **)(SSClassDescBase *))&v3->vfptr->gap8[8])(v3);
-  v1->vfptr = (SSParameterBaseVtbl *)&SSParameterBase::`vftable';
+  v1->vfptr = (SSParameterBaseVtbl *)&SSParameterBase::`vftable;
 }
 
 // File Line: 76
@@ -36,8 +36,8 @@ void __fastcall SSUnaryParam::SSUnaryParam(SSUnaryParam *this, eSSParameter type
   v6 = type;
   v7 = this;
   this->i_name = (ASymbol)ASymbol::create_from_binary(&result, binary_pp)->i_uid;
-  v7->vfptr = (SSParameterBaseVtbl *)&SSParameterBase::`vftable';
-  v7->vfptr = (SSParameterBaseVtbl *)&SSUnaryParam::`vftable';
+  v7->vfptr = (SSParameterBaseVtbl *)&SSParameterBase::`vftable;
+  v7->vfptr = (SSParameterBaseVtbl *)&SSUnaryParam::`vftable;
   v7->i_type_p.i_obj_p = 0i64;
   v8 = *(unsigned __int8 *)*v4;
   *v4 = (char *)*v4 + 1;
@@ -86,8 +86,8 @@ SSParameterBase *__fastcall SSUnaryParam::as_finalized_generic(SSUnaryParam *thi
     return 0i64;
   v7 = (__int64)v3->i_type_p.i_obj_p->vfptr->as_finalized_generic(v3->i_type_p.i_obj_p, v2);
   v6[2] = v3->i_name.i_uid;
-  *(_QWORD *)v6 = &SSParameterBase::`vftable';
-  *(_QWORD *)v6 = &SSUnaryParam::`vftable';
+  *(_QWORD *)v6 = &SSParameterBase::`vftable;
+  *(_QWORD *)v6 = &SSUnaryParam::`vftable;
   v8 = SSBrain::c_object_class_p;
   if ( v7 )
     v8 = (SSClass *)v7;

@@ -9,10 +9,10 @@ void __fastcall UFG::UIHKMessageOverlay::~UIHKMessageOverlay(UFG::UIHKMessageOve
   UFG::qNode<UFG::OnlineManagerObserver,UFG::OnlineManagerObserver> *v5; // rax
 
   v1 = this;
-  this->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::UIHKMessageOverlay::`vftable';
+  this->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::UIHKMessageOverlay::`vftable;
   v2 = UFG::OnlineManager::Instance();
   UFG::OSuiteManager::UnRegisterObserver(v2, (UFG::OnlineManagerObserver *)&v1->vfptr);
-  v1->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::OnlineManagerObserver::`vftable';
+  v1->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::OnlineManagerObserver::`vftable;
   v3 = (UFG::qNode<UFG::OnlineManagerObserver,UFG::OnlineManagerObserver> *)&v1->mPrev;
   v4 = v1->mPrev;
   v5 = v1->mNext;

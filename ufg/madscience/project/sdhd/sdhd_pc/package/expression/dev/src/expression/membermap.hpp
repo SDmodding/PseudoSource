@@ -71,7 +71,7 @@ void __fastcall Expression::IMemberMap::operator delete(void *ptr, unsigned __in
 // RVA: 0x151D40
 void __fastcall Expression::IMemberMap::~IMemberMap(Expression::IMemberMap *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 690

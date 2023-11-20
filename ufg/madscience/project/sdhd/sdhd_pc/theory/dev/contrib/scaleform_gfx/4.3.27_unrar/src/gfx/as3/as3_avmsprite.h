@@ -46,10 +46,10 @@ void __fastcall Scaleform::GFx::AS3::AvmMovieClip::AvmMovieClip(Scaleform::GFx::
 
   v2 = this;
   Scaleform::GFx::AS3::AvmSprite::AvmSprite((Scaleform::GFx::AS3::AvmSprite *)&this->vfptr, psprite);
-  v2->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmMovieClip::`vftable'{for `Scaleform::GFx::AS3::AvmDisplayObj'};
-  v2->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmMovieClip::`vftable'{for `Scaleform::GFx::AvmInteractiveObjBase'};
-  v2->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmMovieClip::`vftable'{for `Scaleform::GFx::AS3::AvmDisplayObjContainer'};
-  v2->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmMovieClip::`vftable'{for `Scaleform::GFx::AvmSpriteBase'};
+  v2->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmMovieClip::`vftable{for `Scaleform::GFx::AS3::AvmDisplayObj};
+  v2->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmMovieClip::`vftable{for `Scaleform::GFx::AvmInteractiveObjBase};
+  v2->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmMovieClip::`vftable{for `Scaleform::GFx::AS3::AvmDisplayObjContainer};
+  v2->vfptr = (Scaleform::GFx::AvmDisplayObjBaseVtbl *)&Scaleform::GFx::AS3::AvmMovieClip::`vftable{for `Scaleform::GFx::AvmSpriteBase};
 }
 
 // File Line: 270

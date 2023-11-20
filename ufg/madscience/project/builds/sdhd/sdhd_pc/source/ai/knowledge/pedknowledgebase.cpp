@@ -418,7 +418,7 @@ void __fastcall UFG::PedKnowledgeBase::OnAttach(UFG::PedKnowledgeBase *this, UFG
   if ( v6 )
   {
     v7 = (char *)&v6[-1] + 48;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v6,
       0x38ui64,
       *((_DWORD *)&v6[-1] + 12),
@@ -463,7 +463,7 @@ void __fastcall UFG::PedKnowledgeBase::OnDetach(UFG::PedKnowledgeBase *this)
   if ( v4 )
   {
     v5 = (char *)&v4[-1] + 48;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v4,
       0x38ui64,
       *((_DWORD *)&v4[-1] + 12),

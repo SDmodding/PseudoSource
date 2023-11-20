@@ -2,8 +2,8 @@
 // RVA: 0x296760
 void __fastcall TestClassA::~TestClassA(TestClassA *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&TestClassA::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&TestClassA::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 36

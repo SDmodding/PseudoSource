@@ -52,7 +52,7 @@ void __fastcall UFG::UIHKScreenWorldMap::UIHKScreenWorldMap(UFG::UIHKScreenWorld
   v2 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   v3 = 0i64;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
@@ -64,9 +64,9 @@ void __fastcall UFG::UIHKScreenWorldMap::UIHKScreenWorldMap(UFG::UIHKScreenWorld
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKTaskableScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKTaskableScreen::`vftable;
   this->mFinished = 0;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenWorldMap::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenWorldMap::`vftable;
   *(_QWORD *)&this->mState = 0i64;
   this->mViewTypeChanged = 1;
   this->mViewTypeScrollDirection = 0;
@@ -181,7 +181,7 @@ void __fastcall UFG::UIHKScreenWorldMap::~UIHKScreenWorldMap(UFG::UIHKScreenWorl
   UFG::qVector3 *v14; // rcx
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenWorldMap::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenWorldMap::`vftable;
   v2 = this->mTileStreamerLowRes;
   if ( v2 )
   {
@@ -260,7 +260,7 @@ void __fastcall UFG::UIHKScreenWorldMap::~UIHKScreenWorldMap(UFG::UIHKScreenWorl
   UFG::UIMapBlipManager::~UIMapBlipManager(&v1->mMinimapIconManagerClone);
   UFG::UITiledMapWidget::~UITiledMapWidget(&v1->mTiledMap);
   UFG::qString::~qString(&v1->TutorialPopup.mCaption);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->Territory.mData,
     0x30ui64,
     20,
@@ -1080,7 +1080,7 @@ void __fastcall UFG::UIHKScreenWorldMap::ShowHelpBar(UFG::UIHKScreenWorldMap *th
       *(_QWORD *)&data.MessageIds[2] = 0i64;
       UFG::UIHKHelpBarWidget::Show(v3, &data);
       UFG::qString::~qString((UFG::qString *)&data.MessageIds[4]);
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         &data.Captions[5].mStringHash32,
         0x28ui64,
         6,
@@ -1108,7 +1108,7 @@ void __fastcall UFG::UIHKScreenWorldMap::ShowHelpBar(UFG::UIHKScreenWorldMap *th
       *(_QWORD *)&data.MessageIds[2] = 0i64;
       UFG::UIHKHelpBarWidget::Show(v5, &data);
       UFG::qString::~qString((UFG::qString *)&data.MessageIds[4]);
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         &data.Captions[5].mStringHash32,
         0x28ui64,
         6,
@@ -1218,13 +1218,13 @@ LABEL_40:
       v31 = &gGlobalOverlaySentinel;
     UFG::UIHKHelpBarWidget::Show(&v31->HelpBar, &data);
     UFG::qString::~qString((UFG::qString *)&data.MessageIds[4]);
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       &data.Captions[5].mStringHash32,
       0x28ui64,
       6,
       (void (__fastcall *)(void *))UFG::qString::~qString);
   }
-  `eh vector destructor iterator'(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+  `eh vector destructor iterator(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
 }
 
 // File Line: 948
@@ -1787,7 +1787,7 @@ void __usercall UFG::UIHKScreenWorldMap::UpdateViewType(UFG::UIHKScreenWorldMap 
   {
     UFG::UITiledMapGPS::SetActive(&v2->GPS, 0);
     *(_QWORD *)&blipTypes.size = Scaleform::GFx::Value::~Value;
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( (v21 >> 6) & 1 )
     {
       (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v20 + 16i64))(v20, &ptr, v22);
@@ -1822,7 +1822,7 @@ void __usercall UFG::UIHKScreenWorldMap::UpdateViewType(UFG::UIHKScreenWorldMap 
         UFG::qString::~qString(&v18);
       }
     }
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
   UFG::UIMapBlipManager::PopulateWorldMap(
     &v2->mMinimapIconManagerClone,
@@ -1865,7 +1865,7 @@ LABEL_25:
   if ( blipTypes.p )
   {
     v16 = blipTypes.p - 1;
-    `eh vector destructor iterator'(blipTypes.p, 4ui64, blipTypes.p[-1].mUID, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(blipTypes.p, 4ui64, blipTypes.p[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v16);
   }
 }
@@ -2929,7 +2929,7 @@ _BOOL8 __fastcall UFG::UIHKScreenWorldMap::SetUpLegend(UFG::UIHKScreenWorldMap *
   if ( v5 )
   {
     v8 = v5 - 1;
-    `eh vector destructor iterator'(v5, 4ui64, v5[-1].mUID, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v5, 4ui64, v5[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v8);
   }
   v9 = 1;
@@ -5199,12 +5199,12 @@ void __fastcall UFG::UIHKScreenWorldMap::RenderMinimapPrimitive(UFG::UIHKScreenW
   if ( !vertex_decl_handle_3.mData )
   {
     v32 = UFG::qStringHash32("VertexDecl.Dynamic", 0xFFFFFFFF);
-    v33 = `UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result )
+    v33 = `UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result )
     {
       v34 = UFG::qResourceWarehouse::Instance();
       v33 = UFG::qResourceWarehouse::GetInventory(v34, 0x3E5FDA3Eu);
-      `UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result = v33;
+      `UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result = v33;
     }
     UFG::qResourceHandle::Init((UFG::qResourceHandle *)&vertex_decl_handle_3.mPrev, 0x3E5FDA3Eu, v32, v33);
   }
@@ -5361,7 +5361,7 @@ void __fastcall UFG::UIHKScreenWorldMap::Flash_SetViewType(UFG::UIHKScreenWorldM
   v3 = this->mRenderable->m_movie.pObject;
   if ( v3 )
   {
-    `eh vector constructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( ((unsigned int)pargs.Type >> 6) & 1 )
     {
       (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
@@ -5373,7 +5373,7 @@ void __fastcall UFG::UIHKScreenWorldMap::Flash_SetViewType(UFG::UIHKScreenWorldM
     pargs.Type = 2;
     pargs.mValue.BValue = v2;
     Scaleform::GFx::Movie::Invoke(v3, "SetCollectiblesStatsVisible", 0i64, &pargs, 1u);
-    `eh vector destructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 

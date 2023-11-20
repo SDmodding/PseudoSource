@@ -40,13 +40,13 @@ hkpCollisionAgent *__fastcall hkpMultiSphereTriangleAgent::createTriangleMultiSp
     result->m_contactMgr = v5;
     result->m_memSizeAndFlags = -1;
     result->m_referenceCount = 1;
-    result->vfptr = (hkBaseObjectVtbl *)&hkpMultiSphereTriangleAgent::`vftable';
+    result->vfptr = (hkBaseObjectVtbl *)&hkpMultiSphereTriangleAgent::`vftable;
     result[1].m_contactMgr = (hkpContactMgr *)-1i64;
     result[2].vfptr = (hkBaseObjectVtbl *)-1i64;
     hkpCollideTriangleUtil::setupClosestPointTriangleCache(
       (hkVector4f *)&v4->m_shape[1].m_type,
       (hkpCollideTriangleUtil::ClosestPointTriangleCache *)&result[1]);
-    v8->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgentLinearCast<hkpMultiSphereTriangleAgent>::`vftable';
+    v8->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgentLinearCast<hkpMultiSphereTriangleAgent>::`vftable;
     result = v8;
   }
   return result;
@@ -72,7 +72,7 @@ hkpCollisionAgent *__fastcall hkpMultiSphereTriangleAgent::createMultiSphereTria
     result->m_contactMgr = v4;
     result->m_memSizeAndFlags = -1;
     result->m_referenceCount = 1;
-    result->vfptr = (hkBaseObjectVtbl *)&hkpMultiSphereTriangleAgent::`vftable';
+    result->vfptr = (hkBaseObjectVtbl *)&hkpMultiSphereTriangleAgent::`vftable;
     result[1].m_contactMgr = (hkpContactMgr *)-1i64;
     result[2].vfptr = (hkBaseObjectVtbl *)-1i64;
     hkpCollideTriangleUtil::setupClosestPointTriangleCache(

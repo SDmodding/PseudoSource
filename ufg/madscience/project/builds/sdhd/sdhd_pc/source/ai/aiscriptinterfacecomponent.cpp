@@ -25,8 +25,8 @@ void __fastcall UFG::AIScriptInterfaceComponent::AIScriptInterfaceComponent(UFG:
   v4 = (UFG::qNode<UFG::AIScriptInterfaceComponent,UFG::AIScriptInterfaceComponent> *)&v3->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIScriptInterfaceComponent::`vftable';
-  `eh vector constructor iterator'(
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIScriptInterfaceComponent::`vftable;
+  `eh vector constructor iterator(
     v3->m_ScriptArgument,
     0x48ui64,
     5,
@@ -43,7 +43,7 @@ void __fastcall UFG::AIScriptInterfaceComponent::AIScriptInterfaceComponent(UFG:
   v3->m_ActionRequestToHold.mBits[6] = 0i64;
   v3->m_ActionRequestToHold.mBits[7] = 0i64;
   v3->m_ActionRequestToHold.mBits[8] = 0i64;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     v3->m_pFollower,
     0x18ui64,
     10,
@@ -72,7 +72,7 @@ void __fastcall UFG::AIScriptInterfaceComponent::~AIScriptInterfaceComponent(UFG
   UFG::qNode<UFG::AIScriptInterfaceComponent,UFG::AIScriptInterfaceComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIScriptInterfaceComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIScriptInterfaceComponent::`vftable;
   if ( this == UFG::AIScriptInterfaceComponent::s_AIScriptInterfaceComponentpCurrentIterator )
     UFG::AIScriptInterfaceComponent::s_AIScriptInterfaceComponentpCurrentIterator = (UFG::AIScriptInterfaceComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::AIScriptInterfaceComponent,UFG::AIScriptInterfaceComponent> *)&this->mPrev;
@@ -82,7 +82,7 @@ void __fastcall UFG::AIScriptInterfaceComponent::~AIScriptInterfaceComponent(UFG
   v4->mPrev = v3;
   v2->mPrev = v2;
   v2->mNext = v2;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->m_pFollower,
     0x18ui64,
     10,
@@ -90,7 +90,7 @@ void __fastcall UFG::AIScriptInterfaceComponent::~AIScriptInterfaceComponent(UFG
   UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->m_pTargetingSystemBaseComponent);
   UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->m_pSimObjectCharacterPropertiesComponent);
   UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->m_pAIEntityComponent);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->m_ScriptArgument,
     0x48ui64,
     5,
@@ -542,7 +542,7 @@ char __fastcall UFG::AIScriptInterfaceComponent::GiveCommand(UFG::AIScriptInterf
   else
   {
     UFG::qPrintf(
-      "WARNING: Cannot perform script command '%s' because no AIEntityComponent\n",
+      "WARNING: Cannot perform script command %s because no AIEntityComponent\n",
       UFG::ScriptCommandNames[command]);
   }
   return 0;
@@ -575,7 +575,7 @@ char __fastcall UFG::AIScriptInterfaceComponent::GiveCommand(UFG::AIScriptInterf
   else
   {
     UFG::qPrintf(
-      "WARNING: Cannot perform script command '%s' because no AIEntityComponent\n",
+      "WARNING: Cannot perform script command %s because no AIEntityComponent\n",
       UFG::ScriptCommandNames[command],
       vector);
   }
@@ -600,7 +600,7 @@ char __fastcall UFG::AIScriptInterfaceComponent::GiveCommand(UFG::AIScriptInterf
   else
   {
     UFG::qPrintf(
-      "WARNING: Cannot perform script command '%s' because no AIEntityComponent\n",
+      "WARNING: Cannot perform script command %s because no AIEntityComponent\n",
       UFG::ScriptCommandNames[command]);
   }
   return 0;
@@ -621,7 +621,7 @@ char __fastcall UFG::AIScriptInterfaceComponent::GiveCommand(UFG::AIScriptInterf
   if ( !this->m_pAIEntityComponent.m_pSimComponent )
   {
     UFG::qPrintf(
-      "WARNING: Cannot perform script command '%s' because no AIEntityComponent\n",
+      "WARNING: Cannot perform script command %s because no AIEntityComponent\n",
       UFG::ScriptCommandNames[command],
       transform_node_component,
       this);

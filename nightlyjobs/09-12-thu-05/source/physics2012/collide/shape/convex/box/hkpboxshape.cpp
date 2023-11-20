@@ -8,7 +8,7 @@ void __fastcall hkpBoxShape::hkpBoxShape(hkpBoxShape *this, hkVector4f *halfExte
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   *(_DWORD *)&this->m_type.m_storage = 1027;
   this->m_radius = radius;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpBoxShape::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpBoxShape::`vftable;
   this->m_userData = 0i64;
   v3 = halfExtents->m_quad;
   v4 = halfExtents->m_quad;
@@ -31,7 +31,7 @@ void __fastcall hkpBoxShape::hkpBoxShape(hkpBoxShape *this, hkFinishLoadedObject
 
   v2 = this;
   hkpConvexShape::hkpConvexShape((hkpConvexShape *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpBoxShape::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpBoxShape::`vftable;
   v2->m_type.m_storage = 3;
 }
 
@@ -39,7 +39,7 @@ void __fastcall hkpBoxShape::hkpBoxShape(hkpBoxShape *this, hkFinishLoadedObject
 // RVA: 0xCF21B0
 void __fastcall hkpBoxShape::~hkpBoxShape(hkpBoxShape *this)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 54

@@ -17,7 +17,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::CollisionData_UFG:
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::CollisionData,UFG::ModelAssetData>::sInventory.vfptr,
     "UFG::CollisionData",
     v0);
-  UFG::qReflectObjectType<UFG::CollisionData,UFG::ModelAssetData>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::CollisionData>::`vftable';
+  UFG::qReflectObjectType<UFG::CollisionData,UFG::ModelAssetData>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::CollisionData>::`vftable;
   UFG::qReflectInventory<UFG::CollisionData>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::CollisionData,UFG::ModelAssetData>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(

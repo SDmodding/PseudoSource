@@ -31,7 +31,7 @@ hkClass *__fastcall hkpBreakableShape::staticClass()
 void __fastcall finishLoadedObjecthkpBreakableShape(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpBreakableShape::`vftable';
+    *(_QWORD *)p = &hkpBreakableShape::`vftable;
 }
 
 // File Line: 73
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkpBreakableShape(void *p)
 // RVA: 0xD501C0
 void **__fastcall getVtablehkpBreakableShape()
 {
-  return &hkpBreakableShape::`vftable';
+  return &hkpBreakableShape::`vftable;
 }
 
 // File Line: 99

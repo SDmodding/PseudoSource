@@ -14,20 +14,20 @@ void __fastcall OSuite::ZError::ZError(OSuite::ZError *this)
   OSuite::ZString v3; // [rsp+20h] [rbp-28h]
 
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZError::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZError::`vftable;
   OSuite::TMap<unsigned __int64,OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>>::TMap<unsigned __int64,OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>>(
     &this->m_threadsErrorMap,
     0x10ui64);
-  v1->m_enumerator.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TMap<OSuite::ZString,OSuite::ZJsonValue *>::ZIterator::`vftable';
-  v1->m_enumerator.m_iterator.vfptr = (OSuite::TOrderedMap<unsigned __int64,OSuite::TPair<enum OSuite::ZError::EError,OSuite::ZString>,OSuite::TOperatorComparer<unsigned __int64> >::ZIteratorVtbl *)&OSuite::TOrderedMap<unsigned __int64,OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>,OSuite::TOperatorComparer<unsigned __int64>>::ZIterator::`vftable';
+  v1->m_enumerator.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TMap<OSuite::ZString,OSuite::ZJsonValue *>::ZIterator::`vftable;
+  v1->m_enumerator.m_iterator.vfptr = (OSuite::TOrderedMap<unsigned __int64,OSuite::TPair<enum OSuite::ZError::EError,OSuite::ZString>,OSuite::TOperatorComparer<unsigned __int64> >::ZIteratorVtbl *)&OSuite::TOrderedMap<unsigned __int64,OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>,OSuite::TOperatorComparer<unsigned __int64>>::ZIterator::`vftable;
   OSuite::ZRedBlackTreeBase::ZIteratorBase::ZIteratorBase((OSuite::ZRedBlackTreeBase::ZIteratorBase *)&v1->m_enumerator.m_iterator.m_iterator.vfptr);
-  v1->m_enumerator.m_iterator.m_iterator.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZRedBlackTreeBase::TIterator<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZUsageTracker::ZResourceUsage *>>::`vftable';
+  v1->m_enumerator.m_iterator.m_iterator.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZRedBlackTreeBase::TIterator<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZUsageTracker::ZResourceUsage *>>::`vftable;
   v1->m_errorDelegate.m_Closure.m_pFunction = 0i64;
   v1->m_errorDelegate.m_Closure.m_pthis = 0i64;
   OSuite::ZMutex::ZMutex(&v1->m_mutex);
   OSuite::ZString::ZString(&v3, "Ok");
   v1->m_noError.m_First = 0;
-  v1->m_noError.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>::`vftable';
+  v1->m_noError.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>::`vftable;
   OSuite::ZString::ZString(&v1->m_noError.m_Second, v2);
   OSuite::ZString::~ZString(&v3);
 }
@@ -59,11 +59,11 @@ OSuite::TPair<enum OSuite::ZError::EError,OSuite::ZString> *__fastcall OSuite::Z
     &result,
     &key);
   v4 = (unsigned __int8)OSuite::ZString::IsNull((OSuite::ZString *)&result.m_iterator.m_iterator) == 0;
-  result.m_iterator.m_iterator.m_parents.vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable'{for `OSuite::IHashable'};
-  result.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TMap<OSuite::ZString,OSuite::ZJsonValue *>::ZIterator::`vftable';
-  result.m_iterator.vfptr = (OSuite::TOrderedMap<unsigned __int64,OSuite::TPair<enum OSuite::ZError::EError,OSuite::ZString>,OSuite::TOperatorComparer<unsigned __int64> >::ZIteratorVtbl *)&OSuite::TOrderedMap<unsigned __int64,OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>,OSuite::TOperatorComparer<unsigned __int64>>::ZIterator::`vftable';
-  result.m_iterator.m_iterator.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZRedBlackTreeBase::TIterator<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZUsageTracker::ZResourceUsage *>>::`vftable';
-  result.m_iterator.m_iterator.m_parents.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable'{for `OSuite::ZObject'};
+  result.m_iterator.m_iterator.m_parents.vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable{for `OSuite::IHashable};
+  result.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TMap<OSuite::ZString,OSuite::ZJsonValue *>::ZIterator::`vftable;
+  result.m_iterator.vfptr = (OSuite::TOrderedMap<unsigned __int64,OSuite::TPair<enum OSuite::ZError::EError,OSuite::ZString>,OSuite::TOperatorComparer<unsigned __int64> >::ZIteratorVtbl *)&OSuite::TOrderedMap<unsigned __int64,OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>,OSuite::TOperatorComparer<unsigned __int64>>::ZIterator::`vftable;
+  result.m_iterator.m_iterator.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZRedBlackTreeBase::TIterator<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZUsageTracker::ZResourceUsage *>>::`vftable;
+  result.m_iterator.m_iterator.m_parents.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable{for `OSuite::ZObject};
   if ( v4 )
   {
     v5 = result.m_iterator.m_iterator.m_pElement;
@@ -111,18 +111,18 @@ void __fastcall OSuite::ZError::SetThreadLastError(OSuite::ZError *this, OSuite:
   OSuite::ZMutex::Lock(&this->m_mutex);
   v15.m_pString = 0i64;
   v9 = OSuite::ZError::GetThreadLastError(v5);
-  v13 = &OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>::`vftable';
+  v13 = &OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>::`vftable;
   v14 = v9->m_First;
   OSuite::ZString::ZString(&v15, &v9->m_Second);
   if ( v14 == v8 && OSuite::ZString::operator==(&v15, v7) )
   {
-    v13 = &OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>::`vftable';
+    v13 = &OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>::`vftable;
     OSuite::ZString::~ZString(&v15);
     OSuite::ZMutex::Unlock(v4);
   }
   else
   {
-    value.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>::`vftable';
+    value.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>::`vftable;
     value.m_First = v8;
     key = OSuite::ZThread::GetCurrentTID();
     OSuite::ZString::ZString(&value.m_Second, v7);
@@ -130,9 +130,9 @@ void __fastcall OSuite::ZError::SetThreadLastError(OSuite::ZError *this, OSuite:
       &v5->m_threadsErrorMap,
       &key,
       &value);
-    value.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>::`vftable';
+    value.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>::`vftable;
     OSuite::ZString::~ZString(&value.m_Second);
-    v13 = &OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>::`vftable';
+    v13 = &OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>::`vftable;
     OSuite::ZString::~ZString(&v15);
     OSuite::ZMutex::Unlock(v4);
     if ( v5->m_errorDelegate.m_Closure.m_pthis || v5->m_errorDelegate.m_Closure.m_pFunction )
@@ -141,7 +141,7 @@ void __fastcall OSuite::ZError::SetThreadLastError(OSuite::ZError *this, OSuite:
       {
         if ( v6 )
         {
-          value.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>::`vftable';
+          value.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>::`vftable;
           value.m_First = v8;
           OSuite::ZString::ZString(&value.m_Second);
           v10 = OSuite::ZThread::GetCurrentTID();
@@ -149,7 +149,7 @@ void __fastcall OSuite::ZError::SetThreadLastError(OSuite::ZError *this, OSuite:
             v5->m_errorDelegate.m_Closure.m_pthis,
             v10,
             &value);
-          value.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>::`vftable';
+          value.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>::`vftable;
           OSuite::ZString::~ZString(&value.m_Second);
         }
       }
@@ -182,12 +182,12 @@ void __fastcall OSuite::ZError::SetThreadLastError(OSuite::ZError *this, OSuite:
   OSuite::ZMutex::Lock(&this->m_mutex);
   v15.m_pString = 0i64;
   v7 = OSuite::ZError::GetThreadLastError(v4);
-  v13 = &OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>::`vftable';
+  v13 = &OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>::`vftable;
   v14 = v7->m_First;
   OSuite::ZString::ZString(&v15, &v7->m_Second);
   if ( v14 == v6 )
   {
-    v13 = &OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>::`vftable';
+    v13 = &OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>::`vftable;
     OSuite::ZString::~ZString(&v15);
     OSuite::ZMutex::Unlock(v3);
   }
@@ -202,7 +202,7 @@ void __fastcall OSuite::ZError::SetThreadLastError(OSuite::ZError *this, OSuite:
       &value);
     OSuite::ZString::~ZString(&value.m_Second);
     OSuite::ZString::~ZString(&v12);
-    v13 = &OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>::`vftable';
+    v13 = &OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>::`vftable;
     OSuite::ZString::~ZString(&v15);
     OSuite::ZMutex::Unlock(v3);
     if ( v4->m_errorDelegate.m_Closure.m_pthis || v4->m_errorDelegate.m_Closure.m_pFunction )

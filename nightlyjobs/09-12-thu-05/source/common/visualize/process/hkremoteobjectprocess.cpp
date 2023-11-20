@@ -15,8 +15,8 @@ void __fastcall hkRemoteObjectProcess::hkRemoteObjectProcess(hkRemoteObjectProce
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_selectable.m_bool = 1;
-  this->vfptr = (hkBaseObjectVtbl *)&hkRemoteObjectProcess::`vftable'{for `hkReferencedObject'};
-  this->vfptr = (hkProcessVtbl *)&hkRemoteObjectProcess::`vftable'{for `hkProcess'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkRemoteObjectProcess::`vftable{for `hkReferencedObject};
+  this->vfptr = (hkProcessVtbl *)&hkRemoteObjectProcess::`vftable{for `hkProcess};
   this->m_listeners.m_capacityAndFlags = 2147483648;
   this->m_listeners.m_data = 0i64;
   this->m_listeners.m_size = 0;
@@ -30,8 +30,8 @@ void __fastcall hkRemoteObjectProcess::~hkRemoteObjectProcess(hkRemoteObjectProc
   int v2; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkRemoteObjectProcess::`vftable'{for `hkReferencedObject'};
-  this->vfptr = (hkProcessVtbl *)&hkRemoteObjectProcess::`vftable'{for `hkProcess'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkRemoteObjectProcess::`vftable{for `hkReferencedObject};
+  this->vfptr = (hkProcessVtbl *)&hkRemoteObjectProcess::`vftable{for `hkProcess};
   v2 = this->m_listeners.m_capacityAndFlags;
   this->m_listeners.m_size = 0;
   if ( v2 >= 0 )
@@ -41,8 +41,8 @@ void __fastcall hkRemoteObjectProcess::~hkRemoteObjectProcess(hkRemoteObjectProc
       8 * v2);
   v1->m_listeners.m_data = 0i64;
   v1->m_listeners.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkProcessVtbl *)&hkProcess::`vftable';
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkProcessVtbl *)&hkProcess::`vftable;
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 35

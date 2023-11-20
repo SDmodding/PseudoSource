@@ -39,7 +39,7 @@ void __fastcall hkBsdSocket::hkBsdSocket(hkBsdSocket *this, unsigned __int64 s)
   v3 = this;
   hkSocket::hkSocket((hkSocket *)&this->vfptr);
   v3->m_socket = v2;
-  v3->vfptr = (hkBaseObjectVtbl *)&hkBsdSocket::`vftable';
+  v3->vfptr = (hkBaseObjectVtbl *)&hkBsdSocket::`vftable;
   if ( v2 == -1i64 )
     hkBsdSocket::createSocket(v3, &result);
 }
@@ -96,11 +96,11 @@ void __fastcall hkBsdSocket::~hkBsdSocket(hkBsdSocket *this)
   hkBsdSocket *v1; // rbx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkBsdSocket::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkBsdSocket::`vftable;
   hkBsdSocket::close(this);
-  v1->m_writer.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
-  v1->m_reader.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->m_writer.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
+  v1->m_reader.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 152

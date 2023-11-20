@@ -6,7 +6,7 @@ void __fastcall CAkActionActive::CAkActionActive(CAkActionActive *this, AkAction
 
   v3 = this;
   CAkActionExcept::CAkActionExcept((CAkActionExcept *)&this->vfptr, in_eActionType, in_ulID);
-  v3->vfptr = (CAkIndexableVtbl *)&CAkActionActive::`vftable';
+  v3->vfptr = (CAkIndexableVtbl *)&CAkActionActive::`vftable;
   v3->m_bIsMasterResume = 0;
 }
 
@@ -14,7 +14,7 @@ void __fastcall CAkActionActive::CAkActionActive(CAkActionActive *this, AkAction
 // RVA: 0xA979A0
 void __fastcall CAkActionActive::~CAkActionActive(CAkActionActive *this)
 {
-  this->vfptr = (CAkIndexableVtbl *)&CAkActionActive::`vftable';
+  this->vfptr = (CAkIndexableVtbl *)&CAkActionActive::`vftable;
   CAkActionExcept::~CAkActionExcept((CAkActionExcept *)&this->vfptr);
 }
 

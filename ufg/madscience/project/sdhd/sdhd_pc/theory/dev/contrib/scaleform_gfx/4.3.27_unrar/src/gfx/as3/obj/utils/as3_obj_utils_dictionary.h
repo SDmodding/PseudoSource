@@ -14,7 +14,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_utils::Dictionary> *__fas
   if ( v4 )
   {
     Scaleform::GFx::AS3::Instances::fl::Object::Object(v4, (Scaleform::GFx::AS3::InstanceTraits::Traits *)&v2->vfptr);
-    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_utils::Dictionary::`vftable';
+    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_utils::Dictionary::`vftable;
     v5->WeakKeys = 0;
     v5->ValueH.mHash.pTable = 0i64;
   }
@@ -44,7 +44,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_utils::Dictionary> *__fas
   if ( v6 )
   {
     Scaleform::GFx::AS3::Instances::fl::Object::Object(v6, (Scaleform::GFx::AS3::InstanceTraits::Traits *)&v4->vfptr);
-    v7->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_utils::Dictionary::`vftable';
+    v7->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_utils::Dictionary::`vftable;
     v7->WeakKeys = v3;
     v7->ValueH.mHash.pTable = 0i64;
   }

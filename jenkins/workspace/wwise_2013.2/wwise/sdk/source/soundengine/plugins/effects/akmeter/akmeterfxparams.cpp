@@ -6,7 +6,7 @@ AK::IAkPluginParam *__fastcall CreateMeterFXParams(AK::IAkPluginMemAlloc *in_pAl
 
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 40ui64);
   if ( result )
-    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkMeterFXParams::`vftable';
+    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkMeterFXParams::`vftable;
   return result;
 }
 
@@ -14,21 +14,21 @@ AK::IAkPluginParam *__fastcall CreateMeterFXParams(AK::IAkPluginMemAlloc *in_pAl
 // RVA: 0xAF5340
 void __fastcall CAkMeterFXParams::CAkMeterFXParams(CAkMeterFXParams *this)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkMeterFXParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkMeterFXParams::`vftable;
 }
 
 // File Line: 30
 // RVA: 0xAF5360
 void __fastcall CAkMeterFXParams::~CAkMeterFXParams(CAkMeterFXParams *this)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable;
 }
 
 // File Line: 35
 // RVA: 0xAF5380
 void __fastcall CAkMeterFXParams::CAkMeterFXParams(CAkMeterFXParams *this, CAkMeterFXParams *in_rCopy)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkMeterFXParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkMeterFXParams::`vftable;
   this->RTPC.fAttack = in_rCopy->RTPC.fAttack;
   this->RTPC.fRelease = in_rCopy->RTPC.fRelease;
   this->RTPC.fMin = in_rCopy->RTPC.fMin;
@@ -48,7 +48,7 @@ AK::IAkPluginParam *__fastcall CAkMeterFXParams::Clone(CAkMeterFXParams *this, A
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 40ui64);
   if ( result )
   {
-    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkMeterFXParams::`vftable';
+    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkMeterFXParams::`vftable;
     *(float *)&result[1].vfptr = v2->RTPC.fAttack;
     HIDWORD(result[1].vfptr) = LODWORD(v2->RTPC.fRelease);
     *(float *)&result[2].vfptr = v2->RTPC.fMin;

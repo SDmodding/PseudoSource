@@ -164,7 +164,7 @@ char __fastcall Scaleform::Render::DICommand::executeSWHelper(Scaleform::Render:
   v9 = Scaleform::Render::DrawableImage::getMappedData(di);
   if ( imageCount )
   {
-    `eh vector constructor iterator'(
+    `eh vector constructor iterator(
       &ptr,
       0x40ui64,
       2,
@@ -178,7 +178,7 @@ char __fastcall Scaleform::Render::DICommand::executeSWHelper(Scaleform::Render:
       || (v12 = &ptr, (v10 = (Scaleform::Render::ImageBase *)&v5->pImages[1]->vfptr) != 0i64)
       && !Scaleform::Render::DrawableImage::MapImageSource(&data, v10) )
     {
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         &ptr,
         0x40ui64,
         2,
@@ -192,7 +192,7 @@ char __fastcall Scaleform::Render::DICommand::executeSWHelper(Scaleform::Render:
       v9,
       &v12,
       Scaleform::Render::ImageData::~ImageData);
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       &ptr,
       0x40ui64,
       2,
@@ -245,12 +245,12 @@ void __fastcall Scaleform::Render::DICommandQueue::DICommandQueue(Scaleform::Ren
 
   v2 = dicontext;
   v3 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::DICommandQueue,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::DICommandQueue::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::DICommandQueue,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::DICommandQueue::`vftable;
   Scaleform::Mutex::Mutex(&this->CommandSetMutex, 1, 0);
   Scaleform::WaitCondition::WaitCondition(&v3->CommandSetWC);
   v3->pRTCommands = 0i64;
@@ -292,7 +292,7 @@ void __fastcall Scaleform::Render::DICommandQueue::~DICommandQueue(Scaleform::Re
   Scaleform::Render::DrawableImage *v6; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::DICommandQueue::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::DICommandQueue::`vftable;
   v2 = &this->QueueLock.cs;
   EnterCriticalSection(&this->QueueLock.cs);
   while ( (Scaleform::List<Scaleform::Render::DIQueuePage,Scaleform::Render::DIQueuePage> *)v1->Queues[3].Root.pNext != &v1->Queues[3] )
@@ -317,7 +317,7 @@ void __fastcall Scaleform::Render::DICommandQueue::~DICommandQueue(Scaleform::Re
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *))v6->vfptr[2].__vecDelDtor)(v6);
   Scaleform::WaitCondition::~WaitCondition(&v1->CommandSetWC);
   Scaleform::Mutex::~Mutex(&v1->CommandSetMutex);
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
 }
 
 // File Line: 239

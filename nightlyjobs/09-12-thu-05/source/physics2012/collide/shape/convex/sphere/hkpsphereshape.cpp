@@ -5,7 +5,7 @@ void __fastcall hkpSphereShape::hkpSphereShape(hkpSphereShape *this, float radiu
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   *(_DWORD *)&this->m_type.m_storage = 1024;
   this->m_radius = radius;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpSphereShape::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpSphereShape::`vftable;
   this->m_userData = 0i64;
 }
 
@@ -17,7 +17,7 @@ void __fastcall hkpSphereShape::hkpSphereShape(hkpSphereShape *this, hkFinishLoa
 
   v2 = this;
   hkpConvexShape::hkpConvexShape((hkpConvexShape *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpSphereShape::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpSphereShape::`vftable;
   v2->m_type.m_storage = 0;
 }
 

@@ -173,7 +173,7 @@ void __fastcall CAkParameterNodeBase::CAkParameterNodeBase(CAkParameterNodeBase 
 
   v2 = this;
   CAkIndexable::CAkIndexable((CAkIndexable *)&this->vfptr, in_ulID);
-  v2->vfptr = (CAkIndexableVtbl *)&CAkParameterNodeBase::`vftable';
+  v2->vfptr = (CAkIndexableVtbl *)&CAkParameterNodeBase::`vftable;
   v2->m_states.m_pFirst = 0i64;
   v2->m_pGlobalSIS = 0i64;
   v2->m_pFXChunk = 0i64;
@@ -203,7 +203,7 @@ void __fastcall CAkParameterNodeBase::~CAkParameterNodeBase(CAkParameterNodeBase
   v1 = this->m_pFXChunk;
   *((_BYTE *)this + 83) |= 1u;
   v2 = this;
-  this->vfptr = (CAkIndexableVtbl *)&CAkParameterNodeBase::`vftable';
+  this->vfptr = (CAkIndexableVtbl *)&CAkParameterNodeBase::`vftable;
   if ( v1 )
     AK::MemoryMgr::Free(g_DefaultPoolId, v1);
   for ( i = 0; v2->m_RTPCBitArray.m_iBitArray; ++i )
@@ -1359,7 +1359,7 @@ LABEL_4:
       result->m_pOwner = v6;
       result->m_pNextInGroup = 0i64;
       result->m_pNextInNode = 0i64;
-      result->vfptr = (ITransitionableVtbl *)&AkStateGroupChunk::`vftable';
+      result->vfptr = (ITransitionableVtbl *)&AkStateGroupChunk::`vftable;
       result->m_values.m_pProps = 0i64;
       result->m_mapStates.m_pItems = 0i64;
       *(_QWORD *)&result->m_mapStates.m_uLength = 0i64;
@@ -1387,7 +1387,7 @@ LABEL_4:
       else
       {
         v8 = g_DefaultPoolId;
-        v7->vfptr = (ITransitionableVtbl *)&AkStateGroupChunk::`vftable';
+        v7->vfptr = (ITransitionableVtbl *)&AkStateGroupChunk::`vftable;
         v9 = v7->m_mapStates.m_pItems;
         if ( v9 )
         {
@@ -1434,7 +1434,7 @@ LABEL_4:
       while ( v2->m_mapStates.m_uLength > 0 )
         AkStateGroupChunk::RemoveState(v2, v2->m_mapStates.m_pItems->key);
       v5 = g_DefaultPoolId;
-      v2->vfptr = (ITransitionableVtbl *)&AkStateGroupChunk::`vftable';
+      v2->vfptr = (ITransitionableVtbl *)&AkStateGroupChunk::`vftable;
       v6 = v2->m_mapStates.m_pItems;
       if ( v6 )
       {

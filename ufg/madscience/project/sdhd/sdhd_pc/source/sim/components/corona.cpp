@@ -30,7 +30,7 @@ void __fastcall UFG::Corona::Corona(UFG::Corona *this, UFG::qSymbol *name, UFG::
 
   v3 = this;
   UFG::MarkerBase::MarkerBase((UFG::MarkerBase *)&this->vfptr, name, pSimObj, 0x10000u);
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::Corona::`vftable';
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::Corona::`vftable;
   v3->mEffectId = -1;
   v4 = &v3->mpEffectTransform;
   v4->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v4->mPrev;
@@ -51,7 +51,7 @@ void __fastcall UFG::Corona::~Corona(UFG::Corona *this)
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::Corona::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::Corona::`vftable;
   v2 = &this->mpEffectTransform;
   if ( this->mpEffectTransform.m_pPointer )
   {

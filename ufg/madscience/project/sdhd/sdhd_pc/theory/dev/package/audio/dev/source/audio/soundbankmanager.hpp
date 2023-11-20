@@ -32,7 +32,7 @@ void __fastcall UFG::SoundBank::~SoundBank(UFG::SoundBank *this)
   UFG::qNode<UFG::SoundBank,UFG::SoundBankManagerBankList> *v7; // rax
 
   v1 = this;
-  this->vfptr = (UFG::SoundBankVtbl *)&UFG::SoundBank::`vftable';
+  this->vfptr = (UFG::SoundBankVtbl *)&UFG::SoundBank::`vftable;
   this->m_group = 0i64;
   _((AMD_HD3D *)this->m_name.mUID);
   v2 = (UFG::qNode<UFG::SoundBank,UFG::SoundBankGroupBankList> *)&v1->mPrev;

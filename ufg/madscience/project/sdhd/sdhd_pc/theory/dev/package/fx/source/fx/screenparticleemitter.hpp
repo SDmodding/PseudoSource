@@ -11,7 +11,7 @@ void __fastcall Render::ScreenParticleEmitterManager::~ScreenParticleEmitterMana
   UFG::qResourceWarehouse *v7; // rax
 
   v1 = this;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     this->mBuffer,
     0x58ui64,
     128,
@@ -30,12 +30,12 @@ void __fastcall Render::ScreenParticleEmitterManager::~ScreenParticleEmitterMana
   v5->mPrev = v4;
   v1->mActiveList.mNode.mPrev = &v1->mActiveList.mNode;
   v1->mActiveList.mNode.mNext = &v1->mActiveList.mNode;
-  v6 = `UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result )
+  v6 = `UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result )
   {
     v7 = UFG::qResourceWarehouse::Instance();
     v6 = UFG::qResourceWarehouse::GetInventory(v7, 0x3E5FDA3Eu);
-    `UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result = v6;
+    `UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result = v6;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mVertexDeclHandle.mPrev, v6);
   UFG::qResourceHandle::~qResourceHandle((UFG::qResourceHandle *)&v1->mVertexDeclHandle.mPrev);

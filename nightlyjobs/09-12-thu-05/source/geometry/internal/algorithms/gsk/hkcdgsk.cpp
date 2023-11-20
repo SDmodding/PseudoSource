@@ -1207,7 +1207,7 @@ __int64 __fastcall hkcdGsk::getClosestPoint(hkcdVertex *vertsA, int numVertsA, h
   v5 = vertsA;
   v6 = v594.m_verticesBinA;
   v7 = v752;
-  shapeInterface.vfptr = (hkcdGskBase::ShapeInterfaceVtbl *)&hkcdGsk_Vector4ShapeInterface::`vftable';
+  shapeInterface.vfptr = (hkcdGskBase::ShapeInterfaceVtbl *)&hkcdGsk_Vector4ShapeInterface::`vftable;
   v8 = (unsigned int)(unsigned __int8)v752[4] >> 6;
   v9 = v752[4] & 3;
   v10 = (unsigned int)(unsigned __int8)v752[4] >> 6;
@@ -2654,8 +2654,8 @@ LABEL_97:
           goto LABEL_65;
         v747 = 1066192077;
         v447 = _mm_or_ps(
-                 _mm_and_ps((__m128)`hkVector4f::getComponent'::`2'::indexToMask[v446], (__m128)xmmword_141A712F0),
-                 _mm_andnot_ps((__m128)`hkVector4f::getComponent'::`2'::indexToMask[v446], v444));
+                 _mm_and_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[v446], (__m128)xmmword_141A712F0),
+                 _mm_andnot_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[v446], v444));
         if ( v445.m128_f32[0] <= (float)(fmax(
                                            COERCE_FLOAT(_mm_shuffle_ps(v447, v447, 170)),
                                            fmax(
@@ -3685,7 +3685,7 @@ __int64 __fastcall hkcdGsk::getClosestPoint(const void *__formal, hkcdVertex *ve
   v4 = vertsA;
   v5 = v582.m_verticesBinA;
   v6 = v740;
-  shapeInterface.vfptr = (hkcdGskBase::ShapeInterfaceVtbl *)&hkcdGsk_Vector4ShapeInterface::`vftable';
+  shapeInterface.vfptr = (hkcdGskBase::ShapeInterfaceVtbl *)&hkcdGsk_Vector4ShapeInterface::`vftable;
   shapeB = v737;
   v595 = dimA.m_storage;
   v7 = (unsigned int)(unsigned __int8)v740[4] >> 6;
@@ -5152,8 +5152,8 @@ LABEL_96:
           goto LABEL_64;
         LODWORD(retaddr) = 1066192077;
         v442 = _mm_or_ps(
-                 _mm_and_ps((__m128)`hkVector4f::getComponent'::`2'::indexToMask[v441], (__m128)xmmword_141A712F0),
-                 _mm_andnot_ps((__m128)`hkVector4f::getComponent'::`2'::indexToMask[v441], v439));
+                 _mm_and_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[v441], (__m128)xmmword_141A712F0),
+                 _mm_andnot_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[v441], v439));
         if ( v440.m128_f32[0] <= (float)(fmax(
                                            COERCE_FLOAT(_mm_shuffle_ps(v442, v442, 170)),
                                            fmax(
@@ -5455,7 +5455,7 @@ hkBool *__fastcall hkcdGsk::linearCast(hkBool *result, hkcdVertex *vertsShape, i
   void **v15; // [rsp+140h] [rbp+8h]
 
   shapeA = vertsShape;
-  v15 = &hkcdGsk_Vector4ShapeInterface::`vftable';
+  v15 = &hkcdGsk_Vector4ShapeInterface::`vftable;
   v8 = result;
   v13 = numVertsCast;
   v11 = numVertsShape;

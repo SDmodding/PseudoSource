@@ -46,8 +46,8 @@ void __fastcall Scaleform::GFx::TextField::TextField(Scaleform::GFx::TextField *
     pasRoot,
     parent,
     (Scaleform::GFx::ResourceId)&id);
-  v9->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::TextField::`vftable'{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>'};
-  v9->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::TextField::`vftable'{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>'};
+  v9->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::TextField::`vftable{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>};
+  v9->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::TextField::`vftable{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>};
   if ( v8 )
     _InterlockedExchangeAdd(&v8->RefCount.Value, 1u);
   v9->pDef.pObject = v8;
@@ -213,8 +213,8 @@ void __fastcall Scaleform::GFx::TextField::~TextField(Scaleform::GFx::TextField 
   Scaleform::GFx::ResourceLibBase *v6; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::TextField::`vftable'{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>'};
-  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::TextField::`vftable'{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>'};
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::TextField::`vftable{for `Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>};
+  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl *)&Scaleform::GFx::TextField::`vftable{for `Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>};
   Scaleform::GFx::TextField::ClearIdImageDescAssoc(this);
   Scaleform::Render::Text::DocView::Close(v1->pDocument.pObject);
   v2 = v1->pShadow;
@@ -643,19 +643,19 @@ void __fastcall Scaleform::GFx::TextField::GetInitialFormats(Scaleform::GFx::Tex
       if ( v18 )
       {
         v26 = presBindData.pBinding->pOwnerDefRes;
-        *(_QWORD *)v18 = &Scaleform::RefCountImplCore::`vftable';
+        *(_QWORD *)v18 = &Scaleform::RefCountImplCore::`vftable;
         *(_DWORD *)(v18 + 8) = 1;
-        *(_QWORD *)v18 = &Scaleform::RefCountImpl::`vftable';
-        *(_QWORD *)v18 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,74>::`vftable';
-        *(_QWORD *)v18 = &Scaleform::RefCountBase<Scaleform::Render::Text::FontHandle,74>::`vftable';
-        *(_QWORD *)v18 = &Scaleform::Render::Text::FontHandle::`vftable';
+        *(_QWORD *)v18 = &Scaleform::RefCountImpl::`vftable;
+        *(_QWORD *)v18 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,74>::`vftable;
+        *(_QWORD *)v18 = &Scaleform::RefCountBase<Scaleform::Render::Text::FontHandle,74>::`vftable;
+        *(_QWORD *)v18 = &Scaleform::Render::Text::FontHandle::`vftable;
         *(_QWORD *)(v18 + 16) = 0i64;
         *(_DWORD *)(v18 + 24) = 0;
         Scaleform::StringLH::StringLH((Scaleform::StringLH *)(v18 + 32));
         *(_DWORD *)(v18 + 40) = 1065353216;
         Scaleform::Render::RenderBuffer::AddRef(v23);
         *(_QWORD *)(v18 + 48) = v23;
-        *(_QWORD *)v18 = &Scaleform::GFx::FontHandle::`vftable';
+        *(_QWORD *)v18 = &Scaleform::GFx::FontHandle::`vftable;
         if ( v26 )
           _InterlockedExchangeAdd(&v26->RefCount.Value, 1u);
         *(_QWORD *)(v18 + 56) = v26;
@@ -675,7 +675,7 @@ void __fastcall Scaleform::GFx::TextField::GetInitialFormats(Scaleform::GFx::Tex
       if ( v18 )
         Scaleform::Log::LogError(
           (Scaleform::Log *)v18,
-          "Font id = %d is referring to non-font resource in text field id = %d, def text = '%s'",
+          "Font id = %d is referring to non-font resource in text field id = %d, def text = %s",
           LOWORD(v5->pDef.pObject->FontId.Id),
           LOWORD(v5->Id.Id),
           (v5->pDef.pObject->DefaultText.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12);
@@ -695,14 +695,14 @@ void __fastcall Scaleform::GFx::TextField::GetInitialFormats(Scaleform::GFx::Tex
       if ( LOWORD(v19->FontId.Id) )
         Scaleform::Log::LogError(
           (Scaleform::Log *)v18,
-          "Resource for font id = %d is not found in text field id = %d, def text = '%s'",
+          "Resource for font id = %d is not found in text field id = %d, def text = %s",
           LOWORD(v19->FontId.Id),
           v20,
           ((unsigned __int64)v21 & 0xFFFFFFFFFFFFFFFCui64) + 12);
       else
         Scaleform::Log::LogError(
           (Scaleform::Log *)v18,
-          "Resource for font class = '%s' is not found in text field id = %d, def text = '%s'",
+          "Resource for font class = %s is not found in text field id = %d, def text = %s",
           (v19->FontClass.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12,
           v20,
           ((unsigned __int64)v21 & 0xFFFFFFFFFFFFFFFCui64) + 12);
@@ -3581,7 +3581,7 @@ void __fastcall Scaleform::GFx::TextField::ProcessImageTags(Scaleform::GFx::Text
         {
           v13 = *v11 & 0xFFFFFFFFFFFFFFFCui64;
           v14 = (Scaleform::Log *)((__int64 (__fastcall *)(Scaleform::GFx::TextField *))v2->vfptr[76].__vecDelDtor)(v2);
-          Scaleform::Log::LogWarning(v14, "ProcessImageTags: can't find a resource for export name '%s'\n", v13 + 12);
+          Scaleform::Log::LogWarning(v14, "ProcessImageTags: cant find a resource for export name %s\n", v13 + 12);
         }
         if ( !_InterlockedDecrement(&v10->RefCount.Value) )
         {
@@ -3657,7 +3657,7 @@ LABEL_74:
             v62.Id = 135168;
             Scaleform::LogDebugMessage(
               (Scaleform::LogMessageId)&v62,
-              "Image '%s' wasn't created in ProcessImageTags",
+              "Image %s wasnt created in ProcessImageTags",
               v52 + 12);
             if ( !_InterlockedDecrement(&v10->RefCount.Value) )
             {
@@ -3702,7 +3702,7 @@ LABEL_35:
             {
               v21 = *v11 & 0xFFFFFFFFFFFFFFFCui64;
               v22 = (Scaleform::Log *)((__int64 (__fastcall *)(Scaleform::GFx::TextField *))v2->vfptr[76].__vecDelDtor)(v2);
-              Scaleform::Log::LogWarning(v22, "ProcessImageTags: can't load the image '%s'\n", v21 + 12);
+              Scaleform::Log::LogWarning(v22, "ProcessImageTags: cant load the image %s\n", v21 + 12);
             }
             v23 = result.pObject;
             if ( result.pObject && !_InterlockedDecrement(&result.pObject->RefCount.Value) )
@@ -4673,7 +4673,7 @@ void __fastcall Scaleform::GFx::TextField::ClearRestrict(Scaleform::GFx::TextFie
       if ( LOBYTE(v1[3].vfptr) )
       {
         LOBYTE(v1[3].vfptr) = 0;
-        Scaleform::GFx::Text::EditorKit::RestrictParams::`scalar deleting destructor'(v2, 1);
+        Scaleform::GFx::Text::EditorKit::RestrictParams::`scalar deleting destructor(v2, 1);
       }
       *(_QWORD *)&v1[2].RefCount = 0i64;
     }
@@ -4739,14 +4739,14 @@ void __fastcall Scaleform::GFx::TextField::TextDocumentListener::TextDocumentLis
   Scaleform::Ptr<Scaleform::GFx::Translator> result; // [rsp+48h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,74>::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseNTS<Scaleform::Render::Text::DocView::DocumentListener,74>::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::Render::Text::DocView::DocumentListener::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,74>::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseNTS<Scaleform::Render::Text::DocView::DocumentListener,74>::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::Render::Text::DocView::DocumentListener::`vftable;
   this->HandlersMask = 14;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::TextField::TextDocumentListener::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::TextField::TextDocumentListener::`vftable;
   Scaleform::GFx::StateBag::GetTranslator(
     (Scaleform::GFx::StateBag *)(*(_QWORD *)(*(_QWORD *)&this[-11].RefCount + 16i64) + 16i64),
     &result);

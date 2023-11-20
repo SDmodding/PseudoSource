@@ -56,7 +56,7 @@ void __fastcall UFG::ShapeCasterCollector::ShapeCasterCollector(UFG::ShapeCaster
   v4 = simpleOrCached;
   v5 = collisionFilter;
   v6 = this;
-  this->vfptr = (UFG::ShapeCasterCollectorVtbl *)&UFG::ShapeCasterCollector::`vftable';
+  this->vfptr = (UFG::ShapeCasterCollectorVtbl *)&UFG::ShapeCasterCollector::`vftable;
   v7 = &this->mHitList;
   v7->mNode.mPrev = &v7->mNode;
   v7->mNode.mNext = &v7->mNode;
@@ -193,7 +193,7 @@ void __fastcall UFG::ShapeCasterCollector::~ShapeCasterCollector(UFG::ShapeCaste
   UFG::qNode<UFG::qReflectField,UFG::qReflectField> *v5; // rax
 
   v1 = this;
-  this->vfptr = (UFG::ShapeCasterCollectorVtbl *)&UFG::ShapeCasterCollector::`vftable';
+  this->vfptr = (UFG::ShapeCasterCollectorVtbl *)&UFG::ShapeCasterCollector::`vftable;
   v2 = this->mPhantom;
   if ( v2 )
   {

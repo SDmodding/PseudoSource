@@ -25,7 +25,7 @@ void __fastcall UFG::CharacterControllerInterface::CharacterControllerInterface(
   v3 = (UFG::qNode<UFG::CharacterControllerInterface,UFG::CharacterControllerInterface> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CharacterControllerInterface::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CharacterControllerInterface::`vftable;
   UFG::RebindingComponentHandle<UFG::ActionTreeComponent,0>::RebindingComponentHandle<UFG::ActionTreeComponent,0>(&v2->m_pActionTreeComponent);
   v4 = UFG::CharacterControllerInterface::s_CharacterControllerInterfaceList.mNode.mPrev;
   UFG::CharacterControllerInterface::s_CharacterControllerInterfaceList.mNode.mPrev->mNext = (UFG::qNode<UFG::CharacterControllerInterface,UFG::CharacterControllerInterface> *)&v2->mPrev;
@@ -50,7 +50,7 @@ void __fastcall UFG::CharacterControllerInterface::~CharacterControllerInterface
   UFG::qNode<UFG::CharacterControllerInterface,UFG::CharacterControllerInterface> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CharacterControllerInterface::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CharacterControllerInterface::`vftable;
   if ( this == UFG::CharacterControllerInterface::s_CharacterControllerInterfacepCurrentIterator )
     UFG::CharacterControllerInterface::s_CharacterControllerInterfacepCurrentIterator = (UFG::CharacterControllerInterface *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::CharacterControllerInterface,UFG::CharacterControllerInterface> *)&this->mPrev;
@@ -186,7 +186,7 @@ char __fastcall UFG::CharacterControllerInterface::PlayActionNode(UFG::Character
   v4 = ActionNode::Find(&absolutePath, 0i64);
   if ( !v4 )
   {
-    UFG::qPrintf("WARNING: CharacterControllerInterface::PlayActionNode(): Couldn't find ActionNode '%s'\n", v2);
+    UFG::qPrintf("WARNING: CharacterControllerInterface::PlayActionNode(): Couldnt find ActionNode %s\n", v2);
     v7 = absolutePath.mPath.mCount;
     if ( absolutePath.mPath.mCount >= 0 )
     {

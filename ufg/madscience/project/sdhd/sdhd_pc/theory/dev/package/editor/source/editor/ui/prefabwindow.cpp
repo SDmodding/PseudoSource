@@ -10,7 +10,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::Editor::PrefabWind
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::Editor::PrefabWindow,UFG::DUIWindow>::sInventory.vfptr,
     "UFG::Editor::PrefabWindow",
     v0);
-  UFG::qReflectObjectType<UFG::Editor::PrefabWindow,UFG::DUIWindow>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::Editor::PrefabWindow>::`vftable';
+  UFG::qReflectObjectType<UFG::Editor::PrefabWindow,UFG::DUIWindow>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::Editor::PrefabWindow>::`vftable;
   UFG::qReflectInventory<UFG::Editor::PrefabWindow>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::Editor::PrefabWindow,UFG::DUIWindow>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -31,22 +31,22 @@ void __fastcall UFG::Editor::PrefabWindow::PrefabWindow(UFG::Editor::PrefabWindo
 
   v1 = this;
   UFG::DUIWindow::DUIWindow((UFG::DUIWindow *)&this->vfptr);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::Editor::PrefabWindow,UFG::DUIWindow>::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::Editor::PrefabWindow,UFG::DUIWindow>::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::Editor::PrefabWindow,UFG::DUIWindow>::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::Editor::PrefabWindow,UFG::DUIWindow>::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v1->mBaseNode.mUID = -1i64;
   v1->mTypeUID = UFG::qStringHash64("UFG::Editor::PrefabWindow", 0xFFFFFFFFFFFFFFFFui64);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::PrefabWindow::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::PrefabWindow::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::PrefabWindow::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::PrefabWindow::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v1->mIgnoreSelectionChange = 0;
   UFG::Editor::DAGPath::DAGPath(&v1->mPrefabPath);
   UFG::Editor::DAGPath::DAGPath(&v1->mPrefabPathNext);
   v1->mScrollPos = 0i64;
   v4 = &v1->mSelectedItems;
-  v4->vfptr = (UFG::IDUICollectionViewVtbl *)&UFG::DUIIntArray::`vftable';
+  v4->vfptr = (UFG::IDUICollectionViewVtbl *)&UFG::DUIIntArray::`vftable;
   v4->mData.p = 0i64;
   *(_QWORD *)&v4->mData.size = 0i64;
   v5 = &v1->mExpandedItems;
-  v5->vfptr = (UFG::IDUICollectionViewVtbl *)&UFG::DUIIntArray::`vftable';
+  v5->vfptr = (UFG::IDUICollectionViewVtbl *)&UFG::DUIIntArray::`vftable;
   v5->mData.p = 0i64;
   *(_QWORD *)&v5->mData.size = 0i64;
   UFG::qString::Set(&v1->mTitle, "Prefab Inspector");
@@ -72,20 +72,20 @@ void __fastcall UFG::Editor::PrefabWindow::PrefabWindow(UFG::Editor::PrefabWindo
 
   v2 = this;
   UFG::DUIWindow::DUIWindow((UFG::DUIWindow *)&this->vfptr, f);
-  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::Editor::PrefabWindow,UFG::DUIWindow>::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::Editor::PrefabWindow,UFG::DUIWindow>::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
-  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::PrefabWindow::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::PrefabWindow::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::Editor::PrefabWindow,UFG::DUIWindow>::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::Editor::PrefabWindow,UFG::DUIWindow>::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
+  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::PrefabWindow::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::PrefabWindow::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v2->mIgnoreSelectionChange = 0;
   UFG::Editor::DAGPath::DAGPath(&v2->mPrefabPath);
   UFG::Editor::DAGPath::DAGPath(&v2->mPrefabPathNext);
   v2->mScrollPos = 0i64;
   v5 = &v2->mSelectedItems;
-  v5->vfptr = (UFG::IDUICollectionViewVtbl *)&UFG::DUIIntArray::`vftable';
+  v5->vfptr = (UFG::IDUICollectionViewVtbl *)&UFG::DUIIntArray::`vftable;
   v5->mData.p = 0i64;
   *(_QWORD *)&v5->mData.size = 0i64;
   v6 = &v2->mExpandedItems;
-  v6->vfptr = (UFG::IDUICollectionViewVtbl *)&UFG::DUIIntArray::`vftable';
+  v6->vfptr = (UFG::IDUICollectionViewVtbl *)&UFG::DUIIntArray::`vftable;
   v6->mData.p = 0i64;
   *(_QWORD *)&v6->mData.size = 0i64;
   UFG::qString::Set(&v2->mTitle, "Prefab Inspector");
@@ -110,8 +110,8 @@ void __fastcall UFG::Editor::PrefabWindow::~PrefabWindow(UFG::Editor::PrefabWind
   void (__fastcall *v5)(UFG::Editor::PrefabWindow *, UFG::Event *); // [rsp+30h] [rbp-18h]
 
   v1 = this;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::PrefabWindow::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  this->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::PrefabWindow::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::PrefabWindow::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  this->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::PrefabWindow::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v5 = UFG::Editor::PrefabWindow::OnSelectionChanged;
   v4 = Assembly::GetRCX(this);
   UFG::EventDispatcher::UnRegister(
@@ -490,7 +490,7 @@ LABEL_151:
   }
   UFG::DUIContext::Separator(v2);
   UFG::DUIContext::BeginScrollView(v2, &v3->mScrollPos);
-  v101.mPrev = (UFG::qNode<UFG::qString,UFG::qString> *)&UFG::DUIIntArray::`vftable';
+  v101.mPrev = (UFG::qNode<UFG::qString,UFG::qString> *)&UFG::DUIIntArray::`vftable;
   v21 = 0i64;
   *(_QWORD *)&v101.mMagic = 0i64;
   v22 = 0;
@@ -558,7 +558,7 @@ LABEL_151:
     while ( v4 < LODWORD(v99[3].mNext) );
     v5 = v102;
   }
-  v100.mPrev = (UFG::qNode<UFG::qString,UFG::qString> *)&UFG::DUIIntArray::`vftable';
+  v100.mPrev = (UFG::qNode<UFG::qString,UFG::qString> *)&UFG::DUIIntArray::`vftable;
   *(_QWORD *)&v100.mMagic = 0i64;
   v100.mNext = 0i64;
   UFG::qArray<UFG::qPropertySet *,0>::Clone(
@@ -601,7 +601,7 @@ LABEL_53:
         v42 = v40 + 1;
         v42->mNext = v42;
         v42[1].mNext = v42;
-        v41->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+        v41->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
         v41->m_EventUID = 609910773;
         v41->m_NamePTR = 0i64;
       }
@@ -686,7 +686,7 @@ LABEL_53:
             v57 = v55 + 1;
             v57->mNext = v57;
             v57[1].mNext = v57;
-            v56->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+            v56->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
             v56->m_EventUID = 609910773;
             v56->m_NamePTR = 0i64;
           }
@@ -878,7 +878,7 @@ LABEL_132:
       v83 = v81 + 1;
       v83->mNext = v83;
       v83[1].mNext = v83;
-      v82->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+      v82->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
       v82->m_EventUID = 609910773;
       v82->m_NamePTR = 0i64;
     }
@@ -1149,7 +1149,7 @@ LABEL_6:
   if ( v35.mSubElements.p )
   {
     v23 = &v35.mSubElements.p[-1].mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v35.mSubElements.p,
       0x28ui64,
       v35.mSubElements.p[-1].mStringHash32,
@@ -1161,7 +1161,7 @@ LABEL_6:
   if ( v35.mElements.p )
   {
     v24 = v35.mElements.p - 1;
-    `eh vector destructor iterator'(v35.mElements.p, 4ui64, v35.mElements.p[-1].mUID, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v35.mElements.p, 4ui64, v35.mElements.p[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v24);
   }
   v35.mElements.p = 0i64;
@@ -1398,7 +1398,7 @@ LABEL_6:
   if ( v31.mSubElements.p )
   {
     v19 = &v31.mSubElements.p[-1].mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v31.mSubElements.p,
       0x28ui64,
       v31.mSubElements.p[-1].mStringHash32,
@@ -1410,7 +1410,7 @@ LABEL_6:
   if ( v31.mElements.p )
   {
     v20 = v31.mElements.p - 1;
-    `eh vector destructor iterator'(v31.mElements.p, 4ui64, v31.mElements.p[-1].mUID, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v31.mElements.p, 4ui64, v31.mElements.p[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v20);
   }
   v31.mElements.p = 0i64;

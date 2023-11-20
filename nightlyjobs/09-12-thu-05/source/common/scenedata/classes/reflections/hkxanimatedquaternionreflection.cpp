@@ -31,7 +31,7 @@ hkClass *__fastcall hkxAnimatedQuaternion::staticClass()
 void __fastcall finishLoadedObjecthkxAnimatedQuaternion(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkxAnimatedQuaternion::`vftable';
+    *(_QWORD *)p = &hkxAnimatedQuaternion::`vftable;
 }
 
 // File Line: 68
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkxAnimatedQuaternion(void *p)
 // RVA: 0xE31780
 void **__fastcall getVtablehkxAnimatedQuaternion()
 {
-  return &hkxAnimatedQuaternion::`vftable';
+  return &hkxAnimatedQuaternion::`vftable;
 }
 
 // File Line: 94

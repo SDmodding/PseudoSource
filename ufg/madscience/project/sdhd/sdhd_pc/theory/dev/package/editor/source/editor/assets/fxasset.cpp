@@ -25,10 +25,10 @@ void __fastcall UFG::Editor::FxAssetFactory::FxAssetFactory(UFG::Editor::FxAsset
   v3->mBaseNode.mNeighbours[0] = &v3->mBaseNode;
   v3->mBaseNode.mNeighbours[1] = &v3->mBaseNode;
   v3->mBaseNode.mUID = v2;
-  v1->vfptr = (UFG::HiveAssetFactoryVtbl *)&UFG::HiveAssetFactory::`vftable';
+  v1->vfptr = (UFG::HiveAssetFactoryVtbl *)&UFG::HiveAssetFactory::`vftable;
   UFG::qString::qString(&v1->mTypeName, "EffectSystem");
   v4 = UFG::AssetHive::Instance();
   UFG::qTree64Base::Add(&v4->mFactories.mTree, &v1->mBaseNode);
-  v1->vfptr = (UFG::HiveAssetFactoryVtbl *)&UFG::Editor::FxAssetFactory::`vftable';
+  v1->vfptr = (UFG::HiveAssetFactoryVtbl *)&UFG::Editor::FxAssetFactory::`vftable;
 }
 

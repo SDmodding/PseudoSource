@@ -115,7 +115,7 @@ void __fastcall UFG::RenderWorld::UpdateRenderScreenShot(UFG::qList<Illusion::Re
       1,
       &texUV);
     Render::gRenderUtilities.mSubmitContext = 0i64;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       ptr.mStateArgs.mStateArgs,
       0x10ui64,
       128,

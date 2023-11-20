@@ -6,7 +6,7 @@ void __fastcall hkpConvexShape::hkpConvexShape(hkpConvexShape *this, hkFinishLoa
 
   v2 = this;
   hkpShape::hkpShape((hkpShape *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpConvexShape::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpConvexShape::`vftable;
   v2->m_type.m_storage = 23;
 }
 
@@ -126,10 +126,10 @@ void __fastcall hkpConvexTransformShapeBase::hkpConvexTransformShapeBase(hkpConv
   *(_WORD *)&this->m_dispatchType.m_storage = 4;
   this->m_shapeInfoCodecType.m_storage = 0;
   this->m_radius = radius;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpConvexTransformShapeBase::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpConvexTransformShapeBase::`vftable;
   this->m_userData = 0i64;
   this->m_childShape.m_childShape = (hkpShape *)&childShape->vfptr;
-  this->m_childShape.vfptr = (hkpShapeContainerVtbl *)&hkpSingleShapeContainer::`vftable';
+  this->m_childShape.vfptr = (hkpShapeContainerVtbl *)&hkpSingleShapeContainer::`vftable;
   if ( ref == 1 )
     hkReferencedObject::addReference((hkReferencedObject *)&childShape->vfptr);
 }

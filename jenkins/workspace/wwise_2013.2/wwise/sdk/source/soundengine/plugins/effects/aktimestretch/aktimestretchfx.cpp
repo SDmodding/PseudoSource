@@ -9,7 +9,7 @@ AK::IAkPlugin *__fastcall CreateTimeStretchFX(AK::IAkPluginMemAlloc *in_pAllocat
   v2 = result;
   if ( result )
   {
-    result->vfptr = (AK::IAkPluginVtbl *)&CAkTimeStretchFX::`vftable';
+    result->vfptr = (AK::IAkPluginVtbl *)&CAkTimeStretchFX::`vftable;
     result[1].vfptr = 0i64;
     result[2].vfptr = 0i64;
     result[3].vfptr = (AK::IAkPluginVtbl *)2048;
@@ -31,7 +31,7 @@ void __fastcall CAkTimeStretchFX::CAkTimeStretchFX(CAkTimeStretchFX *this)
   DSP::AkFFTAllButterflies::CAkPhaseVocoder *v1; // rcx
 
   v1 = &this->m_FXInfo.PhaseVocoder;
-  v1[-1].m_pfPrevSynthesisPhase[7] = (float *)&CAkTimeStretchFX::`vftable';
+  v1[-1].m_pfPrevSynthesisPhase[7] = (float *)&CAkTimeStretchFX::`vftable;
   *(_QWORD *)v1[-1].m_uFreqWindowIndex = 0i64;
   v1[-1].m_pFFTState = 0i64;
   v1[-1].m_pIFFTState = (ak_fftr_state *)2048;
@@ -52,9 +52,9 @@ void __fastcall CAkTimeStretchFX::~CAkTimeStretchFX(CAkTimeStretchFX *this)
 
   v1 = this;
   v2 = &this->m_FXInfo.PhaseVocoder;
-  v2[-1].m_pfPrevSynthesisPhase[7] = (float *)&CAkTimeStretchFX::`vftable';
+  v2[-1].m_pfPrevSynthesisPhase[7] = (float *)&CAkTimeStretchFX::`vftable;
   DSP::AkFFTAllButterflies::CAkPhaseVocoder::~CAkPhaseVocoder(v2);
-  v1->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable';
+  v1->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable;
 }
 
 // File Line: 53

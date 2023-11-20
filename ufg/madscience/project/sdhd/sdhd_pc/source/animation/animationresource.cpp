@@ -202,7 +202,7 @@ void UFG::AnimationResource::Initialize(void)
       0x8ACF9964,
       0,
       0x400u);
-    gAnimationInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::AnimationInventory::`vftable';
+    gAnimationInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::AnimationInventory::`vftable;
     atexit(UFG::AnimationResource::Initialize_::_2_::_dynamic_atexit_destructor_for__gAnimationInventory__);
   }
 }

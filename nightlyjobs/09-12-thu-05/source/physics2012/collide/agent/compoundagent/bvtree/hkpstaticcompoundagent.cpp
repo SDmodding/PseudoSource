@@ -6,7 +6,7 @@ void __fastcall hkpStaticCompoundAgent::hkpStaticCompoundAgent(hkpStaticCompound
 
   v2 = this;
   hkpBvTreeAgent::hkpBvTreeAgent((hkpBvTreeAgent *)&this->vfptr, mgr);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpStaticCompoundAgent::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpStaticCompoundAgent::`vftable;
 }
 
 // File Line: 40
@@ -122,7 +122,7 @@ void __fastcall hkpStaticCompoundAgent::staticLinearCast(hkpCdBody *bodyA, hkpCd
   v10 = v7->m_shape;
   v11 = (hkpStaticCompoundShape *)v6->m_shape;
   v12 = _mm_add_ps(v5[3], v9[6]);
-  v15.vfptr = (hkpAabbCastCollectorVtbl *)&hkpBvTreeAgent::LinearCastAabbCastCollector::`vftable';
+  v15.vfptr = (hkpAabbCastCollectorVtbl *)&hkpBvTreeAgent::LinearCastAabbCastCollector::`vftable;
   v16 = v7;
   v20 = startCollector;
   v17 = v6;

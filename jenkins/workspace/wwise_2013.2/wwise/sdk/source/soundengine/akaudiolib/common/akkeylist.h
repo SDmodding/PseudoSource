@@ -117,7 +117,7 @@ LABEL_4:
     if ( !v6 )
       return (CAkDuckItem *)v5;
     if ( v6 != (CAkList2<MapStruct<unsigned long,CAkDuckItem>,MapStruct<unsigned long,CAkDuckItem> const &,1,ArrayPoolDefault>::ListItem *)-8i64 )
-      v6->Item.item.vfptr = (ITransitionableVtbl *)&CAkDuckItem::`vftable';
+      v6->Item.item.vfptr = (ITransitionableVtbl *)&CAkDuckItem::`vftable;
     v6->pNextListItem = v4->m_pFree;
     v4->m_pFree = v6;
   }

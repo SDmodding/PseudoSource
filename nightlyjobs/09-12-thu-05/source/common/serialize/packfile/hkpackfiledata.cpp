@@ -9,7 +9,7 @@ void __fastcall hkPackfileData::hkPackfileData(hkPackfileData *this, hkClassName
   hkReferencedObject *v6; // rcx
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkPackfileData::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkPackfileData::`vftable;
   this->m_topLevelObject = 0i64;
   this->m_name = 0i64;
   v2 = reg;
@@ -154,7 +154,7 @@ void __fastcall hkPackfileData::~hkPackfileData(hkPackfileData *this)
   hkReferencedObject *v19; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkPackfileData::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkPackfileData::`vftable;
   hkPackfileData::callDestructors(this);
   v2 = 0;
   if ( v1->m_memory.m_size > 0 )
@@ -243,7 +243,7 @@ void __fastcall hkPackfileData::~hkPackfileData(hkPackfileData *this)
     (hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)&v1->m_trackedObjects.m_map.m_elem,
     (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr);
   _((AMD_HD3D *)&v1->m_trackedObjects);
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 77

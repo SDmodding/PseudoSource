@@ -358,14 +358,14 @@ char __fastcall hkaiNavMeshGenerationUtils::ExtrudedTriangleObb::doesTriangleInt
   if ( v16 | v15 )
     return 0;
   v18 = v8->m_center.m_quad;
-  v19 = (__m128 *)`hkVector4f::getComponent'::`2'::indexToMask;
+  v19 = (__m128 *)`hkVector4f::getComponent::`2::indexToMask;
   v20 = 0;
   v21 = v8->m_extent.m_quad;
   while ( 1 )
   {
     *(__m128 *)&imin[8] = *(__m128 *)((char *)v19
                                     + (char *)v8
-                                    - (char *)`hkVector4f::getComponent'::`2'::indexToMask
+                                    - (char *)`hkVector4f::getComponent::`2::indexToMask
                                     + 16);
     v22 = *(__m128 *)&imin[8];
     hkaiNavMeshGenerationUtils::ExtrudedTriangleObb::getProjection(
@@ -1199,7 +1199,7 @@ signed __int64 __fastcall hkaiNavMeshGenerationUtils::_generateWallClimbingNavMe
   hkaiTriangleSetAabbTester::init(&v278);
   hkaiEdgeGeometry::hkaiEdgeGeometry(&geomA);
   hkaiEdgeGeometry::setForSingleTriangle(&geomA, &result);
-  mesh.vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable';
+  mesh.vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable;
   *(_DWORD *)&mesh.m_memSizeAndFlags = 0x1FFFF;
   mesh.m_vertices.m_data = 0i64;
   mesh.m_vertices.m_size = 0;
@@ -1315,7 +1315,7 @@ LABEL_89:
           v89 = _mm_add_ps(v87, v85);
           v90 = _mm_add_ps(v85, v58->m_quad);
           aabb.m_min = (hkVector4f)xmmword_141A712A0;
-          points.m_data = (hkVector4f *)&hkaiTriangleSetAabbTester::AabbCollector::`vftable';
+          points.m_data = (hkVector4f *)&hkaiTriangleSetAabbTester::AabbCollector::`vftable;
           *(_QWORD *)&points.m_size = &v234;
           v91.m_quad = _mm_xor_ps(
                          (__m128)_mm_shuffle_epi32(_mm_insert_epi16((__m128i)0i64, 0x8000u, 1), 0),
@@ -1552,7 +1552,7 @@ LABEL_115:
                 filter.m_vertexMapA.m_data,
                 4 * filter.m_vertexMapA.m_capacityAndFlags);
             filter.m_vertexMapA.m_data = 0i64;
-            filter.vfptr = (hkaiBooleanFilterVtbl *)&hkaiBooleanFilter::`vftable';
+            filter.vfptr = (hkaiBooleanFilterVtbl *)&hkaiBooleanFilter::`vftable;
             filter.m_vertexMapA.m_capacityAndFlags = 2147483648;
             hkaiBooleanOperation::~hkaiBooleanOperation(&buf);
             newTriangles.m_size = 0;
@@ -1587,7 +1587,7 @@ LABEL_115:
                 16 * v265.m_edges.m_capacityAndFlags);
             v265.m_edges.m_data = 0i64;
             v265.m_edges.m_capacityAndFlags = 2147483648;
-            v265.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+            v265.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
             extrudeGeom.m_vertices.m_size = 0;
             if ( extrudeGeom.m_vertices.m_capacityAndFlags >= 0 )
               hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
@@ -1907,7 +1907,7 @@ LABEL_153:
       v167.m_quad = _mm_max_ps(v165.m_quad, v146->m_quad);
       aabb.m_max = (hkVector4f)v167.m_quad;
       v168.m_quad = _mm_min_ps(v166.m_quad, v147->m_quad);
-      points.m_data = (hkVector4f *)&hkaiTriangleSetAabbTester::AabbCollector::`vftable';
+      points.m_data = (hkVector4f *)&hkaiTriangleSetAabbTester::AabbCollector::`vftable;
       aabb.m_min = (hkVector4f)v168.m_quad;
       v169 = _mm_max_ps(v167.m_quad, v147->m_quad);
       *(_QWORD *)&points.m_size = &trisPerFaceOut;
@@ -2021,7 +2021,7 @@ LABEL_188:
       v194 = _mm_max_ps(v193.m_quad, v175[v184].m_quad);
       trisPerFaceOut.m_data = 0i64;
       trisPerFaceOut.m_size = 0;
-      points.m_data = (hkVector4f *)&hkaiTriangleSetAabbTester::AabbCollector::`vftable';
+      points.m_data = (hkVector4f *)&hkaiTriangleSetAabbTester::AabbCollector::`vftable;
       trisPerFaceOut.m_capacityAndFlags = 2147483648;
       aabb.m_min.m_quad = _mm_sub_ps(aabb.m_min.m_quad, v180);
       *(_QWORD *)&points.m_size = &trisPerFaceOut;

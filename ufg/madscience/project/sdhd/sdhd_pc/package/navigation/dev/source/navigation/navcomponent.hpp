@@ -66,7 +66,7 @@ void __fastcall UFG::NavComponent::SetLocalModule<UFG::NavModuleLocalNone>(UFG::
   if ( v3 )
   {
     UFG::NavModuleLocal::NavModuleLocal((UFG::NavModuleLocal *)v3, v1);
-    v4->mNext = (UFG::allocator::free_link *)&UFG::NavModuleLocalNone::`vftable';
+    v4->mNext = (UFG::allocator::free_link *)&UFG::NavModuleLocalNone::`vftable;
     v1->m_pNavModuleLocal = (UFG::NavModuleLocal *)v4;
   }
   else
@@ -95,7 +95,7 @@ void __fastcall UFG::NavComponent::SetControllerModule<UFG::NavModuleController>
   v3 = UFG::qMalloc(0x20ui64, "SetControllerModule", 0i64);
   if ( v3 )
   {
-    v3->mNext = (UFG::allocator::free_link *)&UFG::NavModuleController::`vftable';
+    v3->mNext = (UFG::allocator::free_link *)&UFG::NavModuleController::`vftable;
     v3[1].mNext = (UFG::allocator::free_link *)v1;
     v4 = UFG::qVector3::msZero.y;
     v5 = UFG::qVector3::msZero.z;

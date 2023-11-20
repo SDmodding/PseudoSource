@@ -17,8 +17,8 @@ void __fastcall PrintTrack::PrintTrack(PrintTrack *this)
 
   v1 = this;
   ITrack::ITrack((ITrack *)&this->vfptr, PrintTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<PrintTask>::`vftable';
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PrintTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<PrintTask>::`vftable;
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PrintTrack::`vftable;
   v1->m_Text.mOffset = 1i64;
   BinString::Set(&v1->m_Text, &customWorldMapCaption);
   v1->m_PrintLocation.mValue = 0;
@@ -35,7 +35,7 @@ void __fastcall PrintTrack::~PrintTrack(PrintTrack *this)
   char *v4; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&PrintTrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&PrintTrack::`vftable;
   if ( !(~LOBYTE(this->m_Text.mOffset) & 1) )
   {
     if ( this->m_Text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
@@ -45,7 +45,7 @@ void __fastcall PrintTrack::~PrintTrack(PrintTrack *this)
         operator delete[](v2);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v3 = &v1->mMasterRate;
   if ( !(~LOBYTE(v1->mMasterRate.text.mOffset) & 1) )
   {
@@ -56,7 +56,7 @@ void __fastcall PrintTrack::~PrintTrack(PrintTrack *this)
         operator delete[](v4);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 59
@@ -80,7 +80,7 @@ void __fastcall OpportunityTrack::OpportunityTrack(OpportunityTrack *this)
   NodeRefTrack<OpportunityTask>::NodeRefTrack<OpportunityTask>(
     (NodeRefTrack<OpportunityTask> *)&this->vfptr,
     OpportunityTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&OpportunityTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&OpportunityTrack::`vftable;
   *(_QWORD *)&v1->mPriority = 0x10000i64;
   v1->mTruthDuration = 0.0;
   v1->mConditions.mOffset = 0i64;
@@ -209,7 +209,7 @@ ITrack *__fastcall SequenceTrack::CreateClone(SequenceTrack *this)
     NodeRefTrack<SequenceTask>::NodeRefTrack<SequenceTask>(
       (NodeRefTrack<SequenceTask> *)v2,
       SequenceTrack::sClassNameUID);
-    v3->vfptr = (Expression::IMemberMapVtbl *)&SequenceTrack::`vftable';
+    v3->vfptr = (Expression::IMemberMapVtbl *)&SequenceTrack::`vftable;
   }
   else
   {
@@ -282,7 +282,7 @@ void __fastcall SpawnTrack::SpawnTrack(SpawnTrack *this)
 
   v1 = this;
   NodeRefTrack<SpawnTask>::NodeRefTrack<SpawnTask>((NodeRefTrack<SpawnTask> *)&this->vfptr, SpawnTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SpawnTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&SpawnTrack::`vftable;
   *(_WORD *)&v1->mKeepAlive = 1;
 }
 
@@ -308,7 +308,7 @@ Expression::IMemberMap *__fastcall SpawnTrack::CreateClone(SpawnTrack *this)
   if ( v2 )
   {
     NodeRefTrack<SpawnTask>::NodeRefTrack<SpawnTask>((NodeRefTrack<SpawnTask> *)v2, SpawnTrack::sClassNameUID);
-    *(_QWORD *)v3 = &SpawnTrack::`vftable';
+    *(_QWORD *)v3 = &SpawnTrack::`vftable;
     *((_WORD *)v3 + 32) = 1;
   }
   else

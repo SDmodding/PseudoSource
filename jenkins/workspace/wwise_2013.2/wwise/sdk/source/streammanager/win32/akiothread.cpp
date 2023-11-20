@@ -4,7 +4,7 @@ void __fastcall AK::StreamMgr::CAkClientThreadAware::CAkClientThreadAware(AK::St
 {
   this->m_hBlockEvent = 0i64;
   this->m_bIsBlocked = 0;
-  this->vfptr = (AK::StreamMgr::CAkClientThreadAwareVtbl *)&AK::StreamMgr::CAkClientThreadAware::`vftable';
+  this->vfptr = (AK::StreamMgr::CAkClientThreadAwareVtbl *)&AK::StreamMgr::CAkClientThreadAware::`vftable;
 }
 
 // File Line: 36
@@ -15,7 +15,7 @@ void __fastcall AK::StreamMgr::CAkClientThreadAware::~CAkClientThreadAware(AK::S
   void *v2; // rcx
 
   v1 = this;
-  this->vfptr = (AK::StreamMgr::CAkClientThreadAwareVtbl *)&AK::StreamMgr::CAkClientThreadAware::`vftable';
+  this->vfptr = (AK::StreamMgr::CAkClientThreadAwareVtbl *)&AK::StreamMgr::CAkClientThreadAware::`vftable;
   v2 = this->m_hBlockEvent;
   if ( v2 )
   {
@@ -54,7 +54,7 @@ void __fastcall AK::StreamMgr::CAkIOThread::CAkIOThread(AK::StreamMgr::CAkIOThre
   AK::StreamMgr::CAkIOThread *v1; // rbx
 
   v1 = this;
-  this->vfptr = (AK::StreamMgr::CAkIOThreadVtbl *)&AK::StreamMgr::CAkIOThread::`vftable';
+  this->vfptr = (AK::StreamMgr::CAkIOThreadVtbl *)&AK::StreamMgr::CAkIOThread::`vftable;
   this->m_hIOThread = 0i64;
   InitializeCriticalSection(&this->m_lockSems.m_csLock);
   v1->m_hIOThreadStopEvent = 0i64;
@@ -73,7 +73,7 @@ void __fastcall AK::StreamMgr::CAkIOThread::~CAkIOThread(AK::StreamMgr::CAkIOThr
   _RTL_CRITICAL_SECTION *v1; // rcx
 
   v1 = &this->m_lockSems.m_csLock;
-  v1[-1].OwningThread = &AK::StreamMgr::CAkIOThread::`vftable';
+  v1[-1].OwningThread = &AK::StreamMgr::CAkIOThread::`vftable;
   DeleteCriticalSection(v1);
 }
 

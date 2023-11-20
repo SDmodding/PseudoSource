@@ -6,7 +6,7 @@ void __fastcall CAkMusicTransAware::CAkMusicTransAware(CAkMusicTransAware *this,
 
   v2 = this;
   CAkMusicNode::CAkMusicNode((CAkMusicNode *)&this->vfptr, in_ulID);
-  v2->vfptr = (CAkIndexableVtbl *)&CAkMusicTransAware::`vftable';
+  v2->vfptr = (CAkIndexableVtbl *)&CAkMusicTransAware::`vftable;
   v2->m_arTrRules.m_pItems = 0i64;
   *(_QWORD *)&v2->m_arTrRules.m_uLength = 0i64;
 }
@@ -19,7 +19,7 @@ void __fastcall CAkMusicTransAware::~CAkMusicTransAware(CAkMusicTransAware *this
   CAkMusicTransAware *v2; // rdi
 
   v1 = &this->m_arTrRules;
-  this->vfptr = (CAkIndexableVtbl *)&CAkMusicTransAware::`vftable';
+  this->vfptr = (CAkIndexableVtbl *)&CAkMusicTransAware::`vftable;
   v2 = this;
   if ( this->m_arTrRules.m_pItems )
   {

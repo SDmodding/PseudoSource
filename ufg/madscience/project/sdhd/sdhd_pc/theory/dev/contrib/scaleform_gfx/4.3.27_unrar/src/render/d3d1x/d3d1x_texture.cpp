@@ -18,7 +18,7 @@ void __fastcall Scaleform::Render::D3D1x::Texture::Texture(Scaleform::Render::D3
     use,
     pimage,
     (Scaleform::Render::TextureFormat *)&pformat->vfptr);
-  v8->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::D3D1x::Texture::`vftable';
+  v8->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::D3D1x::Texture::`vftable;
   v9 = (unsigned int)v7->vfptr->GetImageFormat((Scaleform::Render::TextureFormat *)&v7->vfptr);
   v10 = Scaleform::Render::ImageData::GetFormatPlaneCount(v9);
   v8->TextureCount = v10;
@@ -55,7 +55,7 @@ void __fastcall Scaleform::Render::D3D1x::Texture::Texture(Scaleform::Render::D3
     0,
     image,
     0i64);
-  v7->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::D3D1x::Texture::`vftable';
+  v7->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::D3D1x::Texture::`vftable;
   v7->TextureFlags |= 4u;
   v6->vfptr->AddRef((IUnknown *)&v6->vfptr);
   v7->pTextures = &v7->Texture0;
@@ -78,7 +78,7 @@ void __fastcall Scaleform::Render::D3D1x::Texture::~Texture(Scaleform::Render::D
   Scaleform::Render::RenderBuffer *v4; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::D3D1x::Texture::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::D3D1x::Texture::`vftable;
   v2 = &this->pManagerLocks.pObject->TextureMutex;
   Scaleform::Mutex::DoLock(v2);
   if ( (unsigned int)(v1->State - 2) <= 1 )
@@ -95,7 +95,7 @@ void __fastcall Scaleform::Render::D3D1x::Texture::~Texture(Scaleform::Render::D
   if ( v3 != &v1->Texture0 && v3 )
     ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
   Scaleform::Mutex::Unlock(v2);
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Texture::`vftable';
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Texture::`vftable;
   v4 = (Scaleform::Render::RenderBuffer *)v1->pManagerLocks.pObject;
   if ( v4 )
     Scaleform::RefCountImpl::Release(v4);
@@ -1202,12 +1202,12 @@ void __fastcall Scaleform::Render::D3D1x::TextureManager::TextureManager(Scalefo
     renderThreadId,
     commandQueue,
     texCache);
-  v8->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::D3D1x::TextureManager::`vftable'{for `Scaleform::RefCountBase<Scaleform::Render::TextureManager,72>'};
-  v8->vfptr = (Scaleform::Render::ImageUpdateSyncVtbl *)&Scaleform::Render::D3D1x::TextureManager::`vftable'{for `Scaleform::Render::ImageUpdateSync'};
+  v8->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::D3D1x::TextureManager::`vftable{for `Scaleform::RefCountBase<Scaleform::Render::TextureManager,72>};
+  v8->vfptr = (Scaleform::Render::ImageUpdateSyncVtbl *)&Scaleform::Render::D3D1x::TextureManager::`vftable{for `Scaleform::Render::ImageUpdateSync};
   v8->pDevice = v7;
   v8->pDeviceContext = v6;
   Scaleform::Render::MappedTextureBase::MappedTextureBase((Scaleform::Render::MappedTextureBase *)&v8->MappedTexture0.vfptr);
-  v8->MappedTexture0.vfptr = (Scaleform::Render::MappedTextureBaseVtbl *)&Scaleform::Render::D3D1x::MappedTexture::`vftable';
+  v8->MappedTexture0.vfptr = (Scaleform::Render::MappedTextureBaseVtbl *)&Scaleform::Render::D3D1x::MappedTexture::`vftable;
   v20 = (signed __int64)&v8->D3DTextureKillList;
   *(_OWORD *)v20 = 0ui64;
   *(_QWORD *)(v20 + 16) = 0i64;
@@ -1265,8 +1265,8 @@ void __fastcall Scaleform::Render::D3D1x::TextureManager::~TextureManager(Scalef
   volatile signed __int32 *v3; // rdx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::D3D1x::TextureManager::`vftable'{for `Scaleform::RefCountBase<Scaleform::Render::TextureManager,72>'};
-  this->vfptr = (Scaleform::Render::ImageUpdateSyncVtbl *)&Scaleform::Render::D3D1x::TextureManager::`vftable'{for `Scaleform::Render::ImageUpdateSync'};
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::D3D1x::TextureManager::`vftable{for `Scaleform::RefCountBase<Scaleform::Render::TextureManager,72>};
+  this->vfptr = (Scaleform::Render::ImageUpdateSyncVtbl *)&Scaleform::Render::D3D1x::TextureManager::`vftable{for `Scaleform::Render::ImageUpdateSync};
   v2 = &this->pLocks.pObject->TextureMutex;
   Scaleform::Mutex::DoLock(v2);
   Scaleform::Render::D3D1x::TextureManager::Reset(v1);
@@ -1274,7 +1274,7 @@ void __fastcall Scaleform::Render::D3D1x::TextureManager::~TextureManager(Scalef
   Scaleform::Mutex::Unlock(v2);
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v1->D3DTexViewKillList.Data.Data);
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v1->D3DTextureKillList.Data.Data);
-  v1->MappedTexture0.vfptr = (Scaleform::Render::MappedTextureBaseVtbl *)&Scaleform::Render::MappedTextureBase::`vftable';
+  v1->MappedTexture0.vfptr = (Scaleform::Render::MappedTextureBaseVtbl *)&Scaleform::Render::MappedTextureBase::`vftable;
   Scaleform::Render::ImageData::freePlanes(&v1->MappedTexture0.Data);
   v3 = &v1->MappedTexture0.Data.pPalette.pObject->RefCount.Value;
   if ( v3 && !_InterlockedDecrement(v3) )
@@ -1491,8 +1491,8 @@ LABEL_18:
     v12 = v4;
     if ( v4 )
     {
-      v4->vfptr = (Scaleform::Render::TextureFormatVtbl *)&Scaleform::Render::TextureFormat::`vftable';
-      v4->vfptr = (Scaleform::Render::TextureFormatVtbl *)&Scaleform::Render::D3D1x::TextureFormat::`vftable';
+      v4->vfptr = (Scaleform::Render::TextureFormatVtbl *)&Scaleform::Render::TextureFormat::`vftable;
+      v4->vfptr = (Scaleform::Render::TextureFormatVtbl *)&Scaleform::Render::D3D1x::TextureFormat::`vftable;
       v4[1].vfptr = (Scaleform::Render::TextureFormatVtbl *)v3;
       LODWORD(v4[2].vfptr) = 0;
     }
@@ -1819,7 +1819,7 @@ Scaleform::Render::DepthStencilSurface *__fastcall Scaleform::Render::D3D1x::Tex
   if ( v6 )
   {
     Scaleform::Render::DepthStencilSurface::DepthStencilSurface(v6, v4->pLocks.pObject, v3);
-    v7->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::D3D1x::DepthStencilSurface::`vftable';
+    v7->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::D3D1x::DepthStencilSurface::`vftable;
     v7[1].vfptr = 0i64;
     *(_QWORD *)&v7[1].RefCount = 0i64;
   }
@@ -1866,19 +1866,19 @@ Scaleform::Render::DepthStencilSurface *__fastcall Scaleform::Render::D3D1x::Tex
     v6 = v9;
     v7 = v10;
     v8 = (Scaleform::GFx::Resource *)v3->pLocks.pObject;
-    *(_QWORD *)v5 = &Scaleform::RefCountImplCore::`vftable';
+    *(_QWORD *)v5 = &Scaleform::RefCountImplCore::`vftable;
     *(_DWORD *)(v5 + 8) = 1;
-    *(_QWORD *)v5 = &Scaleform::RefCountImpl::`vftable';
-    *(_QWORD *)v5 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,72>::`vftable';
-    *(_QWORD *)v5 = &Scaleform::RefCountBase<Scaleform::Render::DepthStencilSurface,72>::`vftable';
-    *(_QWORD *)v5 = &Scaleform::Render::DepthStencilSurface::`vftable';
+    *(_QWORD *)v5 = &Scaleform::RefCountImpl::`vftable;
+    *(_QWORD *)v5 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,72>::`vftable;
+    *(_QWORD *)v5 = &Scaleform::RefCountBase<Scaleform::Render::DepthStencilSurface,72>::`vftable;
+    *(_QWORD *)v5 = &Scaleform::Render::DepthStencilSurface::`vftable;
     if ( v8 )
       Scaleform::Render::RenderBuffer::AddRef(v8);
     *(_QWORD *)(v5 + 32) = v8;
     *(_DWORD *)(v5 + 40) = 0;
     *(_DWORD *)(v5 + 44) = v6;
     *(_DWORD *)(v5 + 48) = v7;
-    *(_QWORD *)v5 = &Scaleform::Render::D3D1x::DepthStencilSurface::`vftable';
+    *(_QWORD *)v5 = &Scaleform::Render::D3D1x::DepthStencilSurface::`vftable;
     *(_QWORD *)(v5 + 56) = 0i64;
     *(_QWORD *)(v5 + 64) = 0i64;
   }

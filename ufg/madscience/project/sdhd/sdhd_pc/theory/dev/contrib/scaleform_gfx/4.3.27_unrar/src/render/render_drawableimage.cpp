@@ -17,16 +17,16 @@ void __fastcall Scaleform::Render::DrawableImageContext::DrawableImageContext(Sc
 
   v4 = i;
   v5 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::DrawableImageContext,2>::`vftable';
-  this->vfptr = (Scaleform::Render::ContextImpl::ContextCaptureNotifyVtbl *)&Scaleform::Render::ContextImpl::ContextCaptureNotify::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::DrawableImageContext,2>::`vftable;
+  this->vfptr = (Scaleform::Render::ContextImpl::ContextCaptureNotifyVtbl *)&Scaleform::Render::ContextImpl::ContextCaptureNotify::`vftable;
   v6 = 0i64;
   this->pOwnedContext = 0i64;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::DrawableImageContext::`vftable'{for `Scaleform::RefCountBase<Scaleform::Render::DrawableImageContext,2>'};
-  this->vfptr = (Scaleform::Render::ContextImpl::ContextCaptureNotifyVtbl *)&Scaleform::Render::DrawableImageContext::`vftable'{for `Scaleform::Render::ContextImpl::ContextCaptureNotify'};
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::DrawableImageContext::`vftable{for `Scaleform::RefCountBase<Scaleform::Render::DrawableImageContext,2>};
+  this->vfptr = (Scaleform::Render::ContextImpl::ContextCaptureNotifyVtbl *)&Scaleform::Render::DrawableImageContext::`vftable{for `Scaleform::Render::ContextImpl::ContextCaptureNotify};
   this->RContext = 0i64;
   this->pControlContext = controlContext;
   this->pRTCommandQueue = commandQueue;
@@ -87,8 +87,8 @@ void __fastcall Scaleform::Render::DrawableImageContext::~DrawableImageContext(S
   Scaleform::Render::ContextImpl::Context *v4; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::DrawableImageContext::`vftable'{for `Scaleform::RefCountBase<Scaleform::Render::DrawableImageContext,2>'};
-  this->vfptr = (Scaleform::Render::ContextImpl::ContextCaptureNotifyVtbl *)&Scaleform::Render::DrawableImageContext::`vftable'{for `Scaleform::Render::ContextImpl::ContextCaptureNotify'};
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::DrawableImageContext::`vftable{for `Scaleform::RefCountBase<Scaleform::Render::DrawableImageContext,2>};
+  this->vfptr = (Scaleform::Render::ContextImpl::ContextCaptureNotifyVtbl *)&Scaleform::Render::DrawableImageContext::`vftable{for `Scaleform::Render::ContextImpl::ContextCaptureNotify};
   if ( this->RContext )
   {
     Scaleform::Render::DrawableImageContext::processTreeRootKillList(this);
@@ -105,13 +105,13 @@ void __fastcall Scaleform::Render::DrawableImageContext::~DrawableImageContext(S
     v3->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v3->vfptr, 1u);
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v1->TreeRootKillList.Data.Data);
   DeleteCriticalSection(&v1->TreeRootKillListLock.cs);
-  v1->vfptr = (Scaleform::Render::ContextImpl::ContextCaptureNotifyVtbl *)&Scaleform::Render::ContextImpl::ContextCaptureNotify::`vftable';
+  v1->vfptr = (Scaleform::Render::ContextImpl::ContextCaptureNotifyVtbl *)&Scaleform::Render::ContextImpl::ContextCaptureNotify::`vftable;
   v4 = v1->pOwnedContext;
   if ( v4 )
     Scaleform::Render::ContextImpl::Context::RemoveCaptureNotify(
       v4,
       (Scaleform::Render::ContextImpl::ContextCaptureNotify *)&v1->vfptr);
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
 }
 
 // File Line: 74
@@ -345,19 +345,19 @@ void __fastcall Scaleform::Render::DrawableImage::DrawableImage(Scaleform::Rende
   v4 = dicontext;
   v5 = originalData;
   v6 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountVImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountVImpl,3>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseV<Scaleform::Render::Image,3>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ImageBase::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Image::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountVImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountVImpl,3>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseV<Scaleform::Render::Image,3>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ImageBase::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Image::`vftable;
   this->pTexture.Value = 0i64;
   v7 = this->pTexture.Value;
   v8 = this->pTexture.Value;
   this->pUpdateSync = 0i64;
   this->pInverseMatrix = 0i64;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::DrawableImage::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::DrawableImage::`vftable;
   this->DrawableImageState = 0;
   this->Transparent = transparent;
   this->pQueue.pObject = 0i64;
@@ -403,19 +403,19 @@ void __fastcall Scaleform::Render::DrawableImage::DrawableImage(Scaleform::Rende
   Scaleform::Render::DICommand_Clear cmd; // [rsp+30h] [rbp-28h]
 
   v6 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountVImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountVImpl,3>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseV<Scaleform::Render::Image,3>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ImageBase::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Image::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountVImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountVImpl,3>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseV<Scaleform::Render::Image,3>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ImageBase::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Image::`vftable;
   this->pTexture.Value = 0i64;
   v7 = this->pTexture.Value;
   v8 = this->pTexture.Value;
   this->pUpdateSync = 0i64;
   this->pInverseMatrix = 0i64;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::DrawableImage::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::DrawableImage::`vftable;
   this->DrawableImageState = 0;
   this->Transparent = transparent;
   this->pQueue.pObject = 0i64;
@@ -439,13 +439,13 @@ void __fastcall Scaleform::Render::DrawableImage::DrawableImage(Scaleform::Rende
   if ( !v6->Transparent )
     *(_BYTE *)(fillColor + 3) = -1;
   v11 = *(_DWORD *)fillColor;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   ((void (__fastcall *)(Scaleform::Render::DrawableImage *))v6->vfptr[1].__vecDelDtor)(v6);
   cmd.pImage.pObject = v6;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_Clear::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_Clear::`vftable;
   cmd.FillColor.Raw = v11;
   Scaleform::Render::DrawableImage::addCommand<Scaleform::Render::DICommand_Clear>(v6, &cmd);
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( cmd.pImage.pObject )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *, __int64, __int64))cmd.pImage.pObject->vfptr[2].__vecDelDtor)(
       cmd.pImage.pObject,
@@ -519,13 +519,13 @@ void __fastcall Scaleform::Render::DrawableImage::Release(Scaleform::Render::Dra
     v8 = Scaleform::Memory::pGlobalHeap->vfptr->Alloc(Scaleform::Memory::pGlobalHeap, 24ui64, 0i64);
     if ( v8 )
     {
-      *(_QWORD *)v8 = &Scaleform::RefCountImplCore::`vftable';
+      *(_QWORD *)v8 = &Scaleform::RefCountImplCore::`vftable;
       *((_DWORD *)v8 + 2) = 1;
-      *(_QWORD *)v8 = &Scaleform::RefCountImpl::`vftable';
-      *(_QWORD *)v8 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-      *(_QWORD *)v8 = &Scaleform::RefCountBase<Scaleform::Render::ThreadCommand,2>::`vftable';
-      *(_QWORD *)v8 = &Scaleform::Render::ThreadCommand::`vftable';
-      *(_QWORD *)v8 = &Scaleform::Render::DestroyDrawableImageThreadCommand::`vftable';
+      *(_QWORD *)v8 = &Scaleform::RefCountImpl::`vftable;
+      *(_QWORD *)v8 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+      *(_QWORD *)v8 = &Scaleform::RefCountBase<Scaleform::Render::ThreadCommand,2>::`vftable;
+      *(_QWORD *)v8 = &Scaleform::Render::ThreadCommand::`vftable;
+      *(_QWORD *)v8 = &Scaleform::Render::DestroyDrawableImageThreadCommand::`vftable;
       *((_QWORD *)v8 + 2) = v1;
     }
     else
@@ -579,7 +579,7 @@ void __fastcall Scaleform::Render::DrawableImage::~DrawableImage(Scaleform::Rend
 
   v22 = -2i64;
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::DrawableImage::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::DrawableImage::`vftable;
   v23 = 0ui64;
   v24 = 0i64;
   v25 = 0i64;
@@ -874,12 +874,12 @@ void __fastcall Scaleform::Render::DrawableImage::initialize(Scaleform::Render::
     }
     else
     {
-      cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+      cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
       ((void (__fastcall *)(Scaleform::Render::DrawableImage *))v7->vfptr[1].__vecDelDtor)(v7);
       cmd.pImage.pObject = v7;
-      cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_CreateTexture::`vftable';
+      cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_CreateTexture::`vftable;
       Scaleform::Render::DrawableImage::addCommand<Scaleform::Render::DICommand_CreateTexture>(v7, &cmd);
-      cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+      cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
       if ( cmd.pImage.pObject )
         ((void (__cdecl *)(Scaleform::Render::DrawableImage *, __int64))cmd.pImage.pObject->vfptr[2].__vecDelDtor)(
           cmd.pImage.pObject,
@@ -1685,13 +1685,13 @@ void __fastcall Scaleform::Render::DrawableImage::ApplyFilter(Scaleform::Render:
   v6 = sourceRect;
   v7 = source;
   v8 = this;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( this )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *, Scaleform::Render::DrawableImage *))this->vfptr[1].__vecDelDtor)(
       this,
       source);
   cmd.pImage.pObject = v8;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_SourceRect::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_SourceRect::`vftable;
   if ( v7 )
     ((void (__fastcall *)(Scaleform::Render::DrawableImage *))v7->vfptr[1].__vecDelDtor)(v7);
   cmd.pSource.pObject = v7;
@@ -1705,7 +1705,7 @@ void __fastcall Scaleform::Render::DrawableImage::ApplyFilter(Scaleform::Render:
   v12 = v5->y;
   cmd.DestPoint.x = v5->x;
   cmd.DestPoint.y = v12;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_ApplyFilter::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_ApplyFilter::`vftable;
   if ( filter )
     _InterlockedExchangeAdd(&filter->RefCount, 1u);
   cmd.pFilter.pObject = filter;
@@ -1717,7 +1717,7 @@ void __fastcall Scaleform::Render::DrawableImage::ApplyFilter(Scaleform::Render:
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *, __int64))cmd.pSource.pObject->vfptr[2].__vecDelDtor)(
       cmd.pSource.pObject,
       v13);
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( cmd.pImage.pObject )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *, __int64))cmd.pImage.pObject->vfptr[2].__vecDelDtor)(
       cmd.pImage.pObject,
@@ -1769,7 +1769,7 @@ void __fastcall Scaleform::Render::DrawableImage::ColorTransform(Scaleform::Rend
   Scaleform::Render::DrawableImage::addCommand<Scaleform::Render::DICommand_ColorTransform>(v3, v4);
   if ( v5.pSource.pObject )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *))v5.pSource.pObject->vfptr[2].__vecDelDtor)(v5.pSource.pObject);
-  v5.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  v5.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( v5.pImage.pObject )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *))v5.pImage.pObject->vfptr[2].__vecDelDtor)(v5.pImage.pObject);
 }
@@ -1790,7 +1790,7 @@ void __fastcall Scaleform::Render::DrawableImage::Compare(Scaleform::Render::Dra
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *))v6.pImageCompare1.pObject->vfptr[2].__vecDelDtor)(v6.pImageCompare1.pObject);
   if ( v6.pSource.pObject )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *))v6.pSource.pObject->vfptr[2].__vecDelDtor)(v6.pSource.pObject);
-  v6.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  v6.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( v6.pImage.pObject )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *, __int64))v6.pImage.pObject->vfptr[2].__vecDelDtor)(
       v6.pImage.pObject,
@@ -1816,13 +1816,13 @@ void __fastcall Scaleform::Render::DrawableImage::CopyChannel(Scaleform::Render:
   v7 = sourceRect;
   v8 = source;
   v9 = this;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( this )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *, Scaleform::Render::DrawableImage *))this->vfptr[1].__vecDelDtor)(
       this,
       source);
   cmd.pImage.pObject = v9;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_SourceRect::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_SourceRect::`vftable;
   if ( v8 )
     ((void (__fastcall *)(Scaleform::Render::DrawableImage *))v8->vfptr[1].__vecDelDtor)(v8);
   cmd.pSource.pObject = v8;
@@ -1836,7 +1836,7 @@ void __fastcall Scaleform::Render::DrawableImage::CopyChannel(Scaleform::Render:
   v13 = v6->y;
   cmd.DestPoint.x = v6->x;
   cmd.DestPoint.y = v13;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_CopyChannel::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_CopyChannel::`vftable;
   cmd.SourceChannel = sourceChannel;
   cmd.DestChannel = destChannel;
   Scaleform::Render::DrawableImage::addCommand<Scaleform::Render::DICommand_CopyChannel>(v9, &cmd);
@@ -1844,7 +1844,7 @@ void __fastcall Scaleform::Render::DrawableImage::CopyChannel(Scaleform::Render:
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *, __int64))cmd.pSource.pObject->vfptr[2].__vecDelDtor)(
       cmd.pSource.pObject,
       v14);
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( cmd.pImage.pObject )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *, __int64))cmd.pImage.pObject->vfptr[2].__vecDelDtor)(
       cmd.pImage.pObject,
@@ -1871,13 +1871,13 @@ void __fastcall Scaleform::Render::DrawableImage::CopyPixels(Scaleform::Render::
   v8 = sourceRect;
   v9 = source;
   v10 = this;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( this )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *, Scaleform::Render::DrawableImage *))this->vfptr[1].__vecDelDtor)(
       this,
       source);
   cmd.pImage.pObject = v10;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_SourceRect::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_SourceRect::`vftable;
   if ( v9 )
     ((void (__fastcall *)(Scaleform::Render::DrawableImage *))v9->vfptr[1].__vecDelDtor)(v9);
   cmd.pSource.pObject = v9;
@@ -1891,7 +1891,7 @@ void __fastcall Scaleform::Render::DrawableImage::CopyPixels(Scaleform::Render::
   v14 = v7->y;
   cmd.DestPoint.x = v7->x;
   cmd.DestPoint.y = v14;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_CopyPixels::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_CopyPixels::`vftable;
   if ( alphaSource )
     ((void (__fastcall *)(Scaleform::Render::DrawableImage *))alphaSource->vfptr[1].__vecDelDtor)(alphaSource);
   cmd.pAlphaSource.pObject = alphaSource;
@@ -1910,7 +1910,7 @@ void __fastcall Scaleform::Render::DrawableImage::CopyPixels(Scaleform::Render::
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *, __int64))cmd.pSource.pObject->vfptr[2].__vecDelDtor)(
       cmd.pSource.pObject,
       v15);
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( cmd.pImage.pObject )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *, __int64))cmd.pImage.pObject->vfptr[2].__vecDelDtor)(
       cmd.pImage.pObject,
@@ -2047,7 +2047,7 @@ void __fastcall Scaleform::Render::DrawableImage::Draw(Scaleform::Render::Drawab
         v26);
       Scaleform::Render::DICommand_Draw::DICommand_Draw(&v50, v7, v9, clipRect);
       Scaleform::Render::DrawableImage::addCommand<Scaleform::Render::DICommand_Draw>(v7, v28);
-      v50.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+      v50.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
       if ( v50.pImage.pObject )
         ((void (__cdecl *)(Scaleform::Render::DrawableImage *, __int64, __int64, __int64))v50.pImage.pObject->vfptr[2].__vecDelDtor)(
           v50.pImage.pObject,
@@ -2278,7 +2278,7 @@ void __fastcall Scaleform::Render::DrawableImage::Draw(Scaleform::Render::Drawab
       ((void (*)(void))v39->pContext.pObject->vfptr->OnCapture)();
       Scaleform::Render::DICommand_Draw::DICommand_Draw(&v57, v39, v7, vars0);
       Scaleform::Render::DrawableImage::addCommand<Scaleform::Render::DICommand_Draw>(v39, v41);
-      v57.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+      v57.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
       if ( v57.pImage.pObject )
         ((void (*)(void))v57.pImage.pObject->vfptr[2].__vecDelDtor)();
       (*(void (**)(void))(*(_QWORD *)(v42 + 16) + 16i64))();
@@ -2316,13 +2316,13 @@ void __fastcall Scaleform::Render::DrawableImage::FillRect(Scaleform::Render::Dr
   v3 = rect;
   v4 = this;
   v5 = *(_DWORD *)color;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( this )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *, Scaleform::Render::Rect<long> *))this->vfptr[1].__vecDelDtor)(
       this,
       rect);
   cmd.pImage.pObject = v4;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_FillRect::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_FillRect::`vftable;
   v6 = v3->y2;
   v7 = v3->x2;
   v8 = v3->y1;
@@ -2332,7 +2332,7 @@ void __fastcall Scaleform::Render::DrawableImage::FillRect(Scaleform::Render::Dr
   cmd.ApplyRect.y2 = v6;
   cmd.FillColor.Raw = v5;
   Scaleform::Render::DrawableImage::addCommand<Scaleform::Render::DICommand_FillRect>(v4, &cmd);
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( cmd.pImage.pObject )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *, __int64))cmd.pImage.pObject->vfptr[2].__vecDelDtor)(
       cmd.pImage.pObject,
@@ -2353,19 +2353,19 @@ void __fastcall Scaleform::Render::DrawableImage::FloodFill(Scaleform::Render::D
   v3 = pt;
   v4 = this;
   v5 = *(_DWORD *)color;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( this )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *, Scaleform::Render::Point<long> *))this->vfptr[1].__vecDelDtor)(
       this,
       pt);
   cmd.pImage.pObject = v4;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_FloodFill::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_FloodFill::`vftable;
   v6 = v3->y;
   cmd.Pt.x = v3->x;
   cmd.Pt.y = v6;
   cmd.FillColor.Raw = v5;
   Scaleform::Render::DrawableImage::addCommand<Scaleform::Render::DICommand_FloodFill>(v4, &cmd);
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( cmd.pImage.pObject )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *, __int64))cmd.pImage.pObject->vfptr[2].__vecDelDtor)(
       cmd.pImage.pObject,
@@ -2389,13 +2389,13 @@ Scaleform::Render::Rect<long> *__fastcall Scaleform::Render::DrawableImage::GetC
   v8 = this;
   *(_QWORD *)&result->x1 = 0i64;
   *(_QWORD *)&result->x2 = 0i64;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( this )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *, Scaleform::Render::Rect<long> *))this->vfptr[1].__vecDelDtor)(
       this,
       result);
   cmd.pImage.pObject = v8;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_GetColorBoundsRect::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_GetColorBoundsRect::`vftable;
   cmd.Mask = v6;
   cmd.SearchColor = v5;
   cmd.FindColor = findColor;
@@ -2403,7 +2403,7 @@ Scaleform::Render::Rect<long> *__fastcall Scaleform::Render::DrawableImage::GetC
   if ( !v8->Transparent )
     cmd.Mask = v6 & 0xFFFFFF;
   Scaleform::Render::DrawableImage::addCommand<Scaleform::Render::DICommand_GetColorBoundsRect>(v8, &cmd);
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( cmd.pImage.pObject )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *, __int64))cmd.pImage.pObject->vfptr[2].__vecDelDtor)(
       cmd.pImage.pObject,
@@ -2445,18 +2445,18 @@ Scaleform::Render::Color *__fastcall Scaleform::Render::DrawableImage::GetPixel3
   }
   else
   {
-    cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+    cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *, Scaleform::Render::Color *))this->vfptr[1].__vecDelDtor)(
       this,
       result);
     cmd.pImage.pObject = v7;
-    cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_GetPixel32::`vftable';
+    cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_GetPixel32::`vftable;
     cmd.X = v5;
     cmd.Y = v4;
     cmd.Result = (Scaleform::Render::Color *)&v11;
     Scaleform::Render::DrawableImage::addCommand<Scaleform::Render::DICommand_GetPixel32>(v7, &cmd);
     v6->Raw = v11;
-    cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+    cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
     if ( cmd.pImage.pObject )
       ((void (__cdecl *)(Scaleform::Render::DrawableImage *, __int64))cmd.pImage.pObject->vfptr[2].__vecDelDtor)(
         cmd.pImage.pObject,
@@ -2493,12 +2493,12 @@ char __fastcall Scaleform::Render::DrawableImage::GetPixels(Scaleform::Render::D
   v8 = sourceRect->y1;
   if ( v8 < 0 )
     return 0;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   ((void (__cdecl *)(Scaleform::Render::DrawableImage *, Scaleform::Render::DIPixelProvider *))this->vfptr[1].__vecDelDtor)(
     this,
     provider);
   cmd.pImage.pObject = v4;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_GetPixels::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_GetPixels::`vftable;
   cmd.SourceRect.x1 = v7;
   cmd.SourceRect.y1 = v8;
   cmd.SourceRect.x2 = v5;
@@ -2507,7 +2507,7 @@ char __fastcall Scaleform::Render::DrawableImage::GetPixels(Scaleform::Render::D
   cmd.Result = (bool *)&v12;
   Scaleform::Render::DrawableImage::addCommand<Scaleform::Render::DICommand_GetPixels>(v4, &cmd);
   v9 = v12;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( cmd.pImage.pObject )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *, Scaleform::RefCountImplCoreVtbl *))cmd.pImage.pObject->vfptr[2].__vecDelDtor)(
       cmd.pImage.pObject,
@@ -2569,11 +2569,11 @@ void __fastcall Scaleform::Render::DrawableImage::Histogram(Scaleform::Render::D
     v9 = 0;
     v8 = 0;
   }
-  v24.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  v24.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( v5 )
     ((void (__fastcall *)(Scaleform::Render::DrawableImage *))v5->vfptr[1].__vecDelDtor)(v5);
   v24.pImage.pObject = v5;
-  v24.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_Histogram::`vftable';
+  v24.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_Histogram::`vftable;
   v25 = v9;
   v26 = v8;
   v27 = v7;
@@ -2593,7 +2593,7 @@ void __fastcall Scaleform::Render::DrawableImage::Histogram(Scaleform::Render::D
     if ( v15 )
     {
       v32 = v15;
-      *v15 = &Scaleform::Render::DICommand::`vftable';
+      *v15 = &Scaleform::Render::DICommand::`vftable;
       v19 = v24.pImage.pObject;
       if ( v24.pImage.pObject )
       {
@@ -2604,8 +2604,8 @@ void __fastcall Scaleform::Render::DrawableImage::Histogram(Scaleform::Render::D
         v19 = v24.pImage.pObject;
       }
       v18[1] = v19;
-      *v18 = &Scaleform::Render::DICommandImpl<Scaleform::Render::DICommand_Histogram,Scaleform::Render::DICommand>::`vftable';
-      *v18 = &Scaleform::Render::DICommand_Histogram::`vftable';
+      *v18 = &Scaleform::Render::DICommandImpl<Scaleform::Render::DICommand_Histogram,Scaleform::Render::DICommand>::`vftable;
+      *v18 = &Scaleform::Render::DICommand_Histogram::`vftable;
       v20 = v28;
       v21 = v27;
       v22 = v26;
@@ -2626,7 +2626,7 @@ void __fastcall Scaleform::Render::DrawableImage::Histogram(Scaleform::Render::D
       Scaleform::Render::DICommandQueue::ExecuteCommand::WaitDoneAndReset(v23->ExecuteCmd.pObject);
     }
   }
-  v24.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  v24.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( v24.pImage.pObject )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *, __int64, __int64, __int64))v24.pImage.pObject->vfptr[2].__vecDelDtor)(
       v24.pImage.pObject,
@@ -2655,11 +2655,11 @@ __int64 __fastcall Scaleform::Render::DrawableImage::HitTest(Scaleform::Render::
   v5 = secondImage;
   v6 = firstPoint;
   v7 = this;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( this )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *))this->vfptr[1].__vecDelDtor)(this);
   cmd.pImage.pObject = v7;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_HitTest::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_HitTest::`vftable;
   cmd.SecondImage.pObject = 0i64;
   v8 = v5->y2;
   v9 = v5->x2;
@@ -2678,7 +2678,7 @@ __int64 __fastcall Scaleform::Render::DrawableImage::HitTest(Scaleform::Render::
   v12 = v15;
   if ( cmd.SecondImage.pObject )
     ((void (__cdecl *)(Scaleform::Render::Image *))cmd.SecondImage.pObject->vfptr[2].__vecDelDtor)(cmd.SecondImage.pObject);
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( cmd.pImage.pObject )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *))cmd.pImage.pObject->vfptr[2].__vecDelDtor)(cmd.pImage.pObject);
   return v12;
@@ -2702,11 +2702,11 @@ __int64 __fastcall Scaleform::Render::DrawableImage::HitTest(Scaleform::Render::
   v7 = firstPoint;
   v8 = secondImage;
   v9 = this;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( this )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *))this->vfptr[1].__vecDelDtor)(this);
   cmd.pImage.pObject = v9;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_HitTest::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_HitTest::`vftable;
   if ( v8 )
     ((void (__fastcall *)(Scaleform::Render::ImageBase *))v8->vfptr[1].__vecDelDtor)(v8);
   *(_OWORD *)&cmd.SecondImage.pObject = (unsigned __int64)v8;
@@ -2724,7 +2724,7 @@ __int64 __fastcall Scaleform::Render::DrawableImage::HitTest(Scaleform::Render::
   v12 = v15;
   if ( cmd.SecondImage.pObject )
     ((void (__cdecl *)(Scaleform::Render::Image *))cmd.SecondImage.pObject->vfptr[2].__vecDelDtor)(cmd.SecondImage.pObject);
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( cmd.pImage.pObject )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *))cmd.pImage.pObject->vfptr[2].__vecDelDtor)(cmd.pImage.pObject);
   return v12;
@@ -2749,13 +2749,13 @@ void __fastcall Scaleform::Render::DrawableImage::Merge(Scaleform::Render::Drawa
   v9 = sourceRect;
   v10 = source;
   v11 = this;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( this )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *, Scaleform::Render::DrawableImage *))this->vfptr[1].__vecDelDtor)(
       this,
       source);
   cmd.pImage.pObject = v11;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_SourceRect::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_SourceRect::`vftable;
   if ( v10 )
     ((void (__fastcall *)(Scaleform::Render::DrawableImage *))v10->vfptr[1].__vecDelDtor)(v10);
   cmd.pSource.pObject = v10;
@@ -2769,7 +2769,7 @@ void __fastcall Scaleform::Render::DrawableImage::Merge(Scaleform::Render::Drawa
   v15 = v8->y;
   cmd.DestPoint.x = v8->x;
   cmd.DestPoint.y = v15;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_Merge::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_Merge::`vftable;
   cmd.RedMultiplier = redMult;
   cmd.GreenMultiplier = greenMult;
   cmd.BlueMultiplier = blueMult;
@@ -2779,7 +2779,7 @@ void __fastcall Scaleform::Render::DrawableImage::Merge(Scaleform::Render::Drawa
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *, __int64))cmd.pSource.pObject->vfptr[2].__vecDelDtor)(
       cmd.pSource.pObject,
       v16);
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( cmd.pImage.pObject )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *, __int64))cmd.pImage.pObject->vfptr[2].__vecDelDtor)(
       cmd.pImage.pObject,
@@ -2801,18 +2801,18 @@ void __fastcall Scaleform::Render::DrawableImage::Noise(Scaleform::Render::Drawa
   v7 = low;
   v8 = randomSeed;
   v9 = this;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( this )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *, __int64))this->vfptr[1].__vecDelDtor)(this, randomSeed);
   cmd.pImage.pObject = v9;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_Noise::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_Noise::`vftable;
   cmd.RandomSeed = v8;
   cmd.Low = v7;
   cmd.High = v6;
   cmd.ChannelMask = channelMask;
   cmd.GrayScale = grayscale;
   Scaleform::Render::DrawableImage::addCommand<Scaleform::Render::DICommand_Noise>(v9, &cmd);
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( cmd.pImage.pObject )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *, __int64))cmd.pImage.pObject->vfptr[2].__vecDelDtor)(
       cmd.pImage.pObject,
@@ -2830,13 +2830,13 @@ void __fastcall Scaleform::Render::DrawableImage::PaletteMap(Scaleform::Render::
   v5 = this;
   Scaleform::Render::DICommand_PaletteMap::DICommand_PaletteMap(&v7, this, source, sourceRect, destPoint, channels);
   Scaleform::Render::DrawableImage::addCommand<Scaleform::Render::DICommand_PaletteMap>(v5, v6);
-  v7.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_PaletteMap::`vftable';
+  v7.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_PaletteMap::`vftable;
   if ( v7.Channels )
     ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
   v7.Channels = 0i64;
   if ( v7.pSource.pObject )
     ((void (*)(void))v7.pSource.pObject->vfptr[2].__vecDelDtor)();
-  v7.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  v7.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( v7.pImage.pObject )
     ((void (*)(void))v7.pImage.pObject->vfptr[2].__vecDelDtor)();
 }
@@ -2864,7 +2864,7 @@ void __fastcall Scaleform::Render::DrawableImage::PerlinNoise(Scaleform::Render:
     offsets,
     offsetCount);
   Scaleform::Render::DrawableImage::addCommand<Scaleform::Render::DICommand_PerlinNoise>(v11, v12);
-  v13.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  v13.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( v13.pImage.pObject )
     ((void (*)(void))v13.pImage.pObject->vfptr[2].__vecDelDtor)();
 }
@@ -2890,11 +2890,11 @@ __int64 __fastcall Scaleform::Render::DrawableImage::PixelDissolve(Scaleform::Re
   v9 = source;
   v10 = this;
   v11 = **(_DWORD **)&fill.Channels.Blue;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( this )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *))this->vfptr[1].__vecDelDtor)(this);
   cmd.pImage.pObject = v10;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_PixelDissolve::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_PixelDissolve::`vftable;
   if ( v9 )
     ((void (__fastcall *)(Scaleform::Render::DrawableImage *))v9->vfptr[1].__vecDelDtor)(v9);
   cmd.pSource.pObject = v9;
@@ -2916,7 +2916,7 @@ __int64 __fastcall Scaleform::Render::DrawableImage::PixelDissolve(Scaleform::Re
   v16 = fill.Raw;
   if ( cmd.pSource.pObject )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *))cmd.pSource.pObject->vfptr[2].__vecDelDtor)(cmd.pSource.pObject);
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( cmd.pImage.pObject )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *))cmd.pImage.pObject->vfptr[2].__vecDelDtor)(cmd.pImage.pObject);
   return v16;
@@ -2936,7 +2936,7 @@ void __fastcall Scaleform::Render::DrawableImage::Scroll(Scaleform::Render::Draw
   Scaleform::Render::DrawableImage::addCommand<Scaleform::Render::DICommand_Scroll>(v3, v4);
   if ( v6.pSource.pObject )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *))v6.pSource.pObject->vfptr[2].__vecDelDtor)(v6.pSource.pObject);
-  v6.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  v6.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( v6.pImage.pObject )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *, __int64))v6.pImage.pObject->vfptr[2].__vecDelDtor)(
       v6.pImage.pObject,
@@ -2962,16 +2962,16 @@ void __fastcall Scaleform::Render::DrawableImage::SetPixel(Scaleform::Render::Dr
   if ( x <= (signed int)(v6->ISize.Width - 1) && x >= 0 && y <= v7 && y >= 0 )
   {
     v8 = *(_DWORD *)c;
-    cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+    cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
     ((void (__fastcall *)(Scaleform::Render::DrawableImage *))v6->vfptr[1].__vecDelDtor)(v6);
     cmd.pImage.pObject = v6;
-    cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_SetPixel32::`vftable';
+    cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_SetPixel32::`vftable;
     cmd.X = v5;
     cmd.Y = v4;
     cmd.Fill.Raw = v8;
     cmd.OverwriteAlpha = 0;
     Scaleform::Render::DrawableImage::addCommand<Scaleform::Render::DICommand_SetPixel32>(v6, &cmd);
-    cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+    cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
     if ( cmd.pImage.pObject )
       ((void (__cdecl *)(Scaleform::Render::DrawableImage *, __int64))cmd.pImage.pObject->vfptr[2].__vecDelDtor)(
         cmd.pImage.pObject,
@@ -2998,16 +2998,16 @@ void __fastcall Scaleform::Render::DrawableImage::SetPixel32(Scaleform::Render::
   if ( x <= (signed int)(v6->ISize.Width - 1) && x >= 0 && y <= v7 && y >= 0 )
   {
     v8 = *(_DWORD *)c;
-    cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+    cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
     ((void (__fastcall *)(Scaleform::Render::DrawableImage *))v6->vfptr[1].__vecDelDtor)(v6);
     cmd.pImage.pObject = v6;
-    cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_SetPixel32::`vftable';
+    cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_SetPixel32::`vftable;
     cmd.X = v5;
     cmd.Y = v4;
     cmd.Fill.Raw = v8;
     cmd.OverwriteAlpha = 1;
     Scaleform::Render::DrawableImage::addCommand<Scaleform::Render::DICommand_SetPixel32>(v6, &cmd);
-    cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+    cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
     if ( cmd.pImage.pObject )
       ((void (__cdecl *)(Scaleform::Render::DrawableImage *, __int64))cmd.pImage.pObject->vfptr[2].__vecDelDtor)(
         cmd.pImage.pObject,
@@ -3055,10 +3055,10 @@ char __fastcall Scaleform::Render::DrawableImage::SetPixels(Scaleform::Render::D
     v7 = 0;
   if ( v5 > v8 )
     v5 = inputRect->y2;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   ((void (__fastcall *)(Scaleform::Render::DrawableImage *))v4->vfptr[1].__vecDelDtor)(v4);
   cmd.pImage.pObject = v4;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_SetPixels::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_SetPixels::`vftable;
   cmd.DestRect.x1 = v10;
   cmd.DestRect.y1 = v7;
   cmd.DestRect.x2 = v6;
@@ -3067,7 +3067,7 @@ char __fastcall Scaleform::Render::DrawableImage::SetPixels(Scaleform::Render::D
   cmd.Result = (bool *)&v14;
   Scaleform::Render::DrawableImage::addCommand<Scaleform::Render::DICommand_SetPixels>(v4, &cmd);
   v11 = v14;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( cmd.pImage.pObject )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *, Scaleform::RefCountImplCoreVtbl *))cmd.pImage.pObject->vfptr[2].__vecDelDtor)(
       cmd.pImage.pObject,
@@ -3094,13 +3094,13 @@ void __fastcall Scaleform::Render::DrawableImage::Threshold(Scaleform::Render::D
   v10 = sourceRect;
   v11 = source;
   v12 = this;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( this )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *, Scaleform::Render::DrawableImage *))this->vfptr[1].__vecDelDtor)(
       this,
       source);
   cmd.pImage.pObject = v12;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_SourceRect::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_SourceRect::`vftable;
   if ( v11 )
     ((void (__fastcall *)(Scaleform::Render::DrawableImage *))v11->vfptr[1].__vecDelDtor)(v11);
   cmd.pSource.pObject = v11;
@@ -3114,7 +3114,7 @@ void __fastcall Scaleform::Render::DrawableImage::Threshold(Scaleform::Render::D
   v16 = v9->y;
   cmd.DestPoint.x = v9->x;
   cmd.DestPoint.y = v16;
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_Threshold::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_Threshold::`vftable;
   cmd.Operation = op;
   cmd.Threshold = threshold;
   cmd.ThresholdColor = color;
@@ -3125,7 +3125,7 @@ void __fastcall Scaleform::Render::DrawableImage::Threshold(Scaleform::Render::D
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *, __int64))cmd.pSource.pObject->vfptr[2].__vecDelDtor)(
       cmd.pSource.pObject,
       v17);
-  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  cmd.vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( cmd.pImage.pObject )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *, __int64))cmd.pImage.pObject->vfptr[2].__vecDelDtor)(
       cmd.pImage.pObject,

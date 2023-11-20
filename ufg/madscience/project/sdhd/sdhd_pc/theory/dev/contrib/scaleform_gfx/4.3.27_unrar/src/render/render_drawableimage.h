@@ -11,6 +11,6 @@ Scaleform::Render::Size<unsigned long> *__fastcall Scaleform::Render::DrawableIm
 // RVA: 0x78A1C0
 void __fastcall Scaleform::Render::DIPixelProvider::~DIPixelProvider(Scaleform::Render::DIPixelProvider *this)
 {
-  this->vfptr = (Scaleform::Render::DIPixelProviderVtbl *)&Scaleform::Render::DIPixelProvider::`vftable';
+  this->vfptr = (Scaleform::Render::DIPixelProviderVtbl *)&Scaleform::Render::DIPixelProvider::`vftable;
 }
 

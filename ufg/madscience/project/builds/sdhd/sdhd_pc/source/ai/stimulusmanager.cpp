@@ -773,8 +773,8 @@ void __fastcall UFG::StimulusManager::RenderPerceivedLine(UFG::StimulusManager *
         LOWORD(info.mScale) = 257;
         BYTE2(info.mScale) = 0;
         *(_QWORD *)&info.mDepthBuffer = Render::gXRayDrawCallback;
-        LODWORD(info.mColour2.a) = `UFG::XRayDrawInfo::XRayDrawInfo'::`2'::alpha;
-        LODWORD(info.mColour1.a) = `UFG::XRayDrawInfo::XRayDrawInfo'::`2'::alpha;
+        LODWORD(info.mColour2.a) = `UFG::XRayDrawInfo::XRayDrawInfo::`2::alpha;
+        LODWORD(info.mColour1.a) = `UFG::XRayDrawInfo::XRayDrawInfo::`2::alpha;
         Render::View::DrawArrow(v6, &p0, &position, &info, &UFG::qMatrix44::msIdentity);
       }
     }

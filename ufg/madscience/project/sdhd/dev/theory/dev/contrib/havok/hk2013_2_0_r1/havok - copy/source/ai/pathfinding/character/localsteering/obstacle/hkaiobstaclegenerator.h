@@ -7,7 +7,7 @@ void __fastcall hkaiObstacleGenerator::~hkaiObstacleGenerator(hkaiObstacleGenera
   int v3; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiObstacleGenerator::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiObstacleGenerator::`vftable;
   v2 = this->m_boundaries.m_capacityAndFlags;
   this->m_boundaries.m_size = 0;
   if ( v2 >= 0 )
@@ -26,6 +26,6 @@ void __fastcall hkaiObstacleGenerator::~hkaiObstacleGenerator(hkaiObstacleGenera
       32 * v3);
   v1->m_spheres.m_data = 0i64;
   v1->m_spheres.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 

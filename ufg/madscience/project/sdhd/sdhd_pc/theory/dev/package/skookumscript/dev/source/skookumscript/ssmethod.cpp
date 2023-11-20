@@ -17,11 +17,11 @@ void __fastcall SSMethod::~SSMethod(SSMethod *this)
   bool v4; // zf
 
   v1 = this;
-  this->vfptr = (SSInvokableBaseVtbl *)&SSMethod::`vftable';
+  this->vfptr = (SSInvokableBaseVtbl *)&SSMethod::`vftable;
   v2 = this->i_expr_p;
   if ( v2 )
     v2->vfptr->__vecDelDtor(v2, 1u);
-  v1->vfptr = (SSInvokableBaseVtbl *)&SSInvokableBase::`vftable';
+  v1->vfptr = (SSInvokableBaseVtbl *)&SSInvokableBase::`vftable;
   v3 = v1->i_params_p.i_obj_p;
   if ( v3 )
   {

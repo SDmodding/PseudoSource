@@ -782,7 +782,7 @@ $do_compare_5:
           v195 = (float)(v9 + ((v13 + (v12 << 8)) << 8));
           v113 = _mm_mul_ps(_mm_shuffle_ps((__m128)LODWORD(v195), (__m128)LODWORD(v195), 0), v8->m_ItoFScale.m_quad);
           v195 = (float)v111;
-          v114 = (__m128)`hkVector4f::getComponent'::`2'::indexToMask[v112];
+          v114 = (__m128)`hkVector4f::getComponent::`2::indexToMask[v112];
           v115 = v196;
           v116 = _mm_and_ps(v114, v7->m_FtoBoffset.m_quad);
           v117 = _mm_or_ps(_mm_shuffle_ps(v116, v116, 78), v116);

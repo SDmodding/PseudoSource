@@ -10,15 +10,15 @@ void __fastcall OSuitePrivate::ZEidosConsumables::ZEidosConsumables(OSuitePrivat
   *(_WORD *)&this->m_bInit = 0;
   this->m_bQueryInProgress = 0;
   this->m_eStatus = -2147483392;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuitePrivate::ZEidosConsumables::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuitePrivate::ZEidosConsumables::`vftable;
   OSuite::ZMutex::ZMutex(&this->m_Mutex);
   OSuite::ZString::ZString(&v1->m_servlet);
   v1->m_pWebServiceClient = 0i64;
   v1->m_pConsumableFeed = 0i64;
   OSuite::ZRedBlackTreeBase::ZElementBase::ZElementBase((OSuite::ZObject *)&v1->m_playerData.vfptr, v2);
   v1->m_playerData.m_pList = 0i64;
-  v1->m_playerData.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable'{for `OSuite::ZListBase'};
-  v1->m_playerData.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable'{for `OSuite::IHashable'};
+  v1->m_playerData.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
+  v1->m_playerData.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
   v3 = OSuite::ZObject::malloc((OSuite::ZObject *)&v1->m_playerData.vfptr, 0x80ui64, 0i64);
   v1->m_playerData.m_nTop = 0i64;
   v1->m_playerData.m_nSize = 16i64;
@@ -36,13 +36,13 @@ void __fastcall OSuitePrivate::ZEidosConsumables::~ZEidosConsumables(OSuitePriva
 
   v1 = this->m_bInit == 0;
   v2 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuitePrivate::ZEidosConsumables::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuitePrivate::ZEidosConsumables::`vftable;
   if ( !v1 )
     OSuitePrivate::ZEidosConsumables::Terminate(this);
   v3 = &v2->m_playerData;
   v4 = v2->m_playerData.m_pList;
-  v3->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable'{for `OSuite::ZListBase'};
-  v3->vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable'{for `OSuite::IHashable'};
+  v3->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
+  v3->vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
   OSuite::ZObject::free((OSuite::ZObject *)&v2->m_playerData.vfptr, v4);
   OSuite::ZString::~ZString(&v2->m_servlet);
   OSuite::ZMutex::~ZMutex(&v2->m_Mutex);

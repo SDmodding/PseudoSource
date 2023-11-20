@@ -303,16 +303,16 @@ void __fastcall SpawnTask::~SpawnTask(SpawnTask *this)
   UFG::qNode<ITask,ITask> *v13; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&SpawnTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&SpawnTask::`vftable;
   v2 = &this->m_ActionController;
-  v2->vfptr = (Expression::IMemberMapVtbl *)&ActionController::`vftable';
+  v2->vfptr = (Expression::IMemberMapVtbl *)&ActionController::`vftable;
   ActionController::nodeCleanup(&this->m_ActionController);
   v2->m_SequenceNode = 0i64;
   v2->m_previousNode = 0i64;
   UFG::qList<UFG::PowerManagedResource,UFG::PowerManagedResourceList,0,0>::~qList<UFG::PowerManagedResource,UFG::PowerManagedResourceList,0,0>((UFG::qList<ITask,ITask,0,0> *)&v2->m_FinishUpdateTasks);
   UFG::qList<UFG::PowerManagedResource,UFG::PowerManagedResourceList,0,0>::~qList<UFG::PowerManagedResource,UFG::PowerManagedResourceList,0,0>(&v2->m_SequencedTasks);
   UFG::qList<UFG::PowerManagedResource,UFG::PowerManagedResourceList,0,0>::~qList<UFG::PowerManagedResource,UFG::PowerManagedResourceList,0,0>(&v2->m_RunningTasks);
-  v2->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v2->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   v3 = &v1->m_ActionContext;
   if ( v1->m_ActionContext.mSimObject.m_pPointer )
   {
@@ -337,7 +337,7 @@ void __fastcall SpawnTask::~SpawnTask(SpawnTask *this)
   v10->mPrev = v9;
   v8->mPrev = v8;
   v8->mNext = v8;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v11 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v12 = v1->mPrev;
   v13 = v1->mNext;

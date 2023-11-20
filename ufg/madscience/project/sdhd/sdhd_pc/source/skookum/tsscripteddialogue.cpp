@@ -8,7 +8,7 @@ void __fastcall UFG::TSScriptedDialogue::TSScriptedDialogue(UFG::TSScriptedDialo
   v4 = conv;
   v5 = this;
   SSActor::SSActor((SSActor *)&this->vfptr, name, pClass, 1);
-  v5->vfptr = (SSObjectBaseVtbl *)&UFG::TSScriptedDialogue::`vftable';
+  v5->vfptr = (SSObjectBaseVtbl *)&UFG::TSScriptedDialogue::`vftable;
   v5->m_conversation = v4;
 }
 
@@ -401,7 +401,7 @@ LABEL_13:
   if ( v14 )
   {
     UFG::ConversationElement::ConversationElement((UFG::ConversationElement *)v14, 0);
-    v15->mNext = (UFG::allocator::free_link *)&UFG::ScriptedConversationElement::`vftable';
+    v15->mNext = (UFG::allocator::free_link *)&UFG::ScriptedConversationElement::`vftable;
     v15[20].mNext = 0i64;
     v15[21].mNext = 0i64;
     v15[22].mNext = 0i64;
@@ -1913,7 +1913,7 @@ void __fastcall UFG::TSScriptedDialogueElement::TSScriptedDialogueElement(UFG::T
   v4 = conv;
   v5 = this;
   SSActor::SSActor((SSActor *)&this->vfptr, name, pClass, 1);
-  v5->vfptr = (SSObjectBaseVtbl *)&UFG::TSScriptedDialogueElement::`vftable';
+  v5->vfptr = (SSObjectBaseVtbl *)&UFG::TSScriptedDialogueElement::`vftable;
   v5->m_element = v4;
 }
 
@@ -2418,7 +2418,7 @@ void __fastcall UFG::TSScriptedDialogueElement::Mthd_speaker_action_request(SSIn
   {
     v8 = *(_QWORD *)v7->i_user_data;
     v9 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v3[4].i_ptr_id);
-    UFG::qString::qString(&v18, "%s : %f '%s'", v9, *(float *)&v6->i_user_data, v8);
+    UFG::qString::qString(&v18, "%s : %f %s", v9, *(float *)&v6->i_user_data, v8);
     UFG::qPrintf("Dlg Trc: %s : %s\n", "add_action_request", *(_QWORD *)(v10 + 24));
     UFG::qString::~qString(&v18);
   }
@@ -2500,7 +2500,7 @@ void __fastcall UFG::TSScriptedDialogueElement::Mthd_listener_action_request(SSI
   {
     v8 = *(_QWORD *)v7->i_user_data;
     v9 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v3[4].i_ptr_id);
-    UFG::qString::qString(&v18, "%s : %f '%s' ", v9, *(float *)&v6->i_user_data, v8);
+    UFG::qString::qString(&v18, "%s : %f %s ", v9, *(float *)&v6->i_user_data, v8);
     UFG::qPrintf("Dlg Trc: %s : %s\n", "add_action_request", *(_QWORD *)(v10 + 24));
     UFG::qString::~qString(&v18);
   }

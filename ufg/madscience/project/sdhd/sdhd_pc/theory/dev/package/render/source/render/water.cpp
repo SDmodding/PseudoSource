@@ -22,8 +22,8 @@ CB_WaterOffset *__fastcall UFG::Water::GetWaterSettings()
   gWaterSettings = result;
   result->RippleOffset[0] = UFG::Water::mCameraPos.x;
   result->RippleOffset[1] = UFG::Water::mCameraPos.y;
-  result->FogFalloff[0] = UFG::`anonymous namespace'::WaterFogFalloffScale;
-  result->FogFalloff[1] = UFG::`anonymous namespace'::WaterFogFalloffAdd;
+  result->FogFalloff[0] = UFG::`anonymous namespace::WaterFogFalloffScale;
+  result->FogFalloff[1] = UFG::`anonymous namespace::WaterFogFalloffAdd;
   return result;
 }
 
@@ -627,7 +627,7 @@ void __fastcall UFG::Water::UpdateRippleMap(UFG::RenderContext *render_context, 
     RenderQueueLayer::SerializeRenderQueues(&v58);
     RenderQueueLayer::~RenderQueueLayer(&v58);
     v61 = &ptr.mStateArgs;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       ptr.mStateArgs.mStateArgs,
       0x10ui64,
       128,
@@ -636,7 +636,7 @@ void __fastcall UFG::Water::UpdateRippleMap(UFG::RenderContext *render_context, 
 }
     RenderQueueLayer::~RenderQueueLayer(&v58);
     v61 = &ptr.mStateArgs;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       ptr.mStateArgs.mStateArgs,
       0x10ui64,
       128,

@@ -18,7 +18,7 @@ void __fastcall UFG::AudioEvent::AudioEvent(UFG::AudioEvent *this, unsigned int 
   v7->mNext = v7;
   v8 = (UFG::qSNode<UFG::AudioEvent,UFG::AudioEvent> *)&this->mNext;
   this->mNext = 0i64;
-  this->vfptr = (UFG::AudioEventVtbl *)&UFG::AudioEvent::`vftable';
+  this->vfptr = (UFG::AudioEventVtbl *)&UFG::AudioEvent::`vftable;
   this->m_uEventId = uEventId;
   this->m_callbackObject = 0i64;
   LODWORD(v14) = -1;
@@ -137,7 +137,7 @@ void __fastcall UFG::AudioEvent::~AudioEvent(UFG::AudioEvent *this)
   UFG::qNode<UFG::AudioEvent,UFG::AudioEvent> *v11; // rax
 
   v1 = this;
-  this->vfptr = (UFG::AudioEventVtbl *)&UFG::AudioEvent::`vftable';
+  this->vfptr = (UFG::AudioEventVtbl *)&UFG::AudioEvent::`vftable;
   v2 = this->m_externalInfo;
   if ( v2 )
     v2->vfptr->__vecDelDtor(v2, 1u);
@@ -701,7 +701,7 @@ void __fastcall UFG::AudioDialogEvent::AudioDialogEvent(UFG::AudioDialogEvent *t
     pController,
     pInitParams,
     externalSourceInfo);
-  v5->vfptr = (UFG::AudioEventVtbl *)&UFG::AudioDialogEvent::`vftable';
+  v5->vfptr = (UFG::AudioEventVtbl *)&UFG::AudioDialogEvent::`vftable;
   v5->m_uPlayingId = 0;
 }
 
@@ -766,7 +766,7 @@ __int64 __fastcall UFG::AudioDialogEvent::Enqueue(UFG::AudioDialogEvent *this, U
 
   v3 = msDelay;
   v4 = this;
-  v9 = &UFG::DialogArgList::`vftable';
+  v9 = &UFG::DialogArgList::`vftable;
   in_aArgumentValues = args->m_args[0];
   v11 = args->m_args[1];
   v12 = args->m_args[2];
@@ -909,9 +909,9 @@ __int64 __fastcall UFG::AudioEventManager::CountIdPlaying(unsigned int id)
   unsigned int v6; // [rsp+28h] [rbp-10h]
   unsigned int v7; // [rsp+2Ch] [rbp-Ch]
 
-  v1 = &UFG::IsIdPlayingFunctor::`vftable';
+  v1 = &UFG::IsIdPlayingFunctor::`vftable;
   v7 = 0;
-  v5 = &UFG::IsIdPlayingFunctor::`vftable';
+  v5 = &UFG::IsIdPlayingFunctor::`vftable;
   v6 = id;
   if ( !UFG::AudioEventManager::sm_allEventsList.mHead )
     return 0i64;
@@ -943,9 +943,9 @@ UFG::AudioEvent *__fastcall UFG::AudioEventManager::FindOldestEvent(unsigned int
   unsigned int v6; // [rsp+28h] [rbp-20h]
   __int64 v7; // [rsp+30h] [rbp-18h]
 
-  v1 = &UFG::FindOldestEventFunctor::`vftable';
+  v1 = &UFG::FindOldestEventFunctor::`vftable;
   v7 = 0i64;
-  v5 = &UFG::FindOldestEventFunctor::`vftable';
+  v5 = &UFG::FindOldestEventFunctor::`vftable;
   v6 = id;
   if ( !UFG::AudioEventManager::sm_allEventsList.mHead )
     return 0i64;

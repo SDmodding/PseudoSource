@@ -4,10 +4,10 @@ void __fastcall hkaiAvoidanceProperties::hkaiAvoidanceProperties(hkaiAvoidancePr
 {
   hkVector4f v1; // xmm2
 
-  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
-  this->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
+  this->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiAvoidanceProperties::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiAvoidanceProperties::`vftable;
   this->m_movementProperties.m_minVelocity = 0.02;
   this->m_movementProperties.m_maxVelocity = 5.6399999;
   this->m_movementProperties.m_maxAcceleration = 20.0;

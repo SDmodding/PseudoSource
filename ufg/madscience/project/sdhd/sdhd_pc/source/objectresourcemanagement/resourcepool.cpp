@@ -711,7 +711,7 @@ void __fastcall UFG::ResourcePool::Init(UFG::ResourcePool *this, UFG::StreamingM
   {
     LODWORD(v24->mNext) = v19;
     v25 = (signed __int64)&v24[1];
-    `eh vector constructor iterator'(
+    `eh vector constructor iterator(
       &v24[1],
       0x10ui64,
       v19,

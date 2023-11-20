@@ -22,12 +22,12 @@ void UFG::HintComponentBase::Init(void)
   UFG::qResourceWarehouse *v2; // rax
 
   v0 = UFG::qStringHash32("LucidaConsole", 0xFFFFFFFF);
-  v1 = `UFG::qGetResourceInventory<Render::Font>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Render::Font>'::`2'::result )
+  v1 = `UFG::qGetResourceInventory<Render::Font>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Render::Font>::`2::result )
   {
     v2 = UFG::qResourceWarehouse::Instance();
     v1 = UFG::qResourceWarehouse::GetInventory(v2, 0x69FCCB4Cu);
-    `UFG::qGetResourceInventory<Render::Font>'::`2'::result = v1;
+    `UFG::qGetResourceInventory<Render::Font>::`2::result = v1;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&UFG::HintComponentBase::mspDefaultFont.mPrev, 0x69FCCB4Cu, v0, v1);
 }

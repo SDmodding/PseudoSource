@@ -24,7 +24,7 @@ void __fastcall hkaAnimation::hkaAnimation(hkaAnimation *this, hkaAnimation *tha
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaAnimation::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaAnimation::`vftable;
   this->m_extractedMotion.m_pntr = 0i64;
   this->m_annotationTracks.m_data = 0i64;
   this->m_annotationTracks.m_size = 0;

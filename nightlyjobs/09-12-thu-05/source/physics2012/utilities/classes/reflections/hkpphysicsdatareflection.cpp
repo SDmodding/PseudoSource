@@ -31,7 +31,7 @@ hkClass *__fastcall hkpPhysicsData::staticClass()
 void __fastcall finishLoadedObjecthkpPhysicsData(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpPhysicsData::`vftable';
+    *(_QWORD *)p = &hkpPhysicsData::`vftable;
 }
 
 // File Line: 73
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkpPhysicsData(void *p)
 // RVA: 0xE0B340
 void **__fastcall getVtablehkpPhysicsData()
 {
-  return &hkpPhysicsData::`vftable';
+  return &hkpPhysicsData::`vftable;
 }
 
 // File Line: 99

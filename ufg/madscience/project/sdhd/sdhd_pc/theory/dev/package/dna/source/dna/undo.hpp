@@ -6,7 +6,7 @@ void __fastcall DNA::IAction::~IAction(DNA::IAction *this)
   UFG::qNode<DNA::IAction,DNA::IAction> *v2; // rcx
   UFG::qNode<DNA::IAction,DNA::IAction> *v3; // rax
 
-  this->vfptr = (DNA::IActionVtbl *)&DNA::IAction::`vftable';
+  this->vfptr = (DNA::IActionVtbl *)&DNA::IAction::`vftable;
   v1 = (UFG::qNode<DNA::IAction,DNA::IAction> *)&this->mPrev;
   v2 = this->mPrev;
   v3 = v1->mNext;
@@ -29,7 +29,7 @@ void __fastcall DNA::Transaction::~Transaction(DNA::Transaction *this)
   UFG::qNode<DNA::IAction,DNA::IAction> *v7; // rax
 
   v1 = this;
-  this->vfptr = (DNA::IActionVtbl *)&DNA::Transaction::`vftable';
+  this->vfptr = (DNA::IActionVtbl *)&DNA::Transaction::`vftable;
   v2 = &this->mActions;
   UFG::qList<DNA::IAction,DNA::IAction,1,0>::DeleteNodes(&this->mActions);
   v3 = v2->mNode.mPrev;
@@ -38,7 +38,7 @@ void __fastcall DNA::Transaction::~Transaction(DNA::Transaction *this)
   v4->mPrev = v3;
   v2->mNode.mPrev = &v2->mNode;
   v2->mNode.mNext = &v2->mNode;
-  v1->vfptr = (DNA::IActionVtbl *)&DNA::IAction::`vftable';
+  v1->vfptr = (DNA::IActionVtbl *)&DNA::IAction::`vftable;
   v5 = (UFG::qNode<DNA::IAction,DNA::IAction> *)&v1->mPrev;
   v6 = v1->mPrev;
   v7 = v1->mNext;

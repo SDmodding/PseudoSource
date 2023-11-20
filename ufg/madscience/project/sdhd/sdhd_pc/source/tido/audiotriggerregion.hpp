@@ -5,7 +5,7 @@ void __fastcall UFG::AudioTriggerRegionEvent::~AudioTriggerRegionEvent(UFG::Audi
   UFG::AudioTriggerRegionEvent *v1; // rbx
 
   v1 = this;
-  this->vfptr = (UFG::AudioTriggerRegionEventVtbl *)&UFG::AudioTriggerRegionEvent::`vftable';
+  this->vfptr = (UFG::AudioTriggerRegionEventVtbl *)&UFG::AudioTriggerRegionEvent::`vftable;
   _((AMD_HD3D *)this->mAudioModeUid.mUID);
   _((AMD_HD3D *)v1->mAudioUidOnExit.mUID);
   _((AMD_HD3D *)v1->mAudioUidOnEnter.mUID);

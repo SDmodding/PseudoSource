@@ -813,7 +813,7 @@ void __usercall hkaiNavMeshDebugUtils::_drawPathWithRadius(hkaiPathfindingUtil::
   v14 = color;
   v15 = pathInput;
   *(_DWORD *)&path.m_memSizeAndFlags = 0x1FFFF;
-  path.vfptr = (hkBaseObjectVtbl *)&hkaiPath::`vftable';
+  path.vfptr = (hkBaseObjectVtbl *)&hkaiPath::`vftable;
   path.m_points.m_data = 0i64;
   path.m_points.m_size = 0;
   path.m_points.m_capacityAndFlags = 2147483648;

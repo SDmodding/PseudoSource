@@ -6,7 +6,7 @@ void __fastcall UFG::Event::~Event(UFG::Event *this)
   UFG::qNode<UFG::Event,UFG::Event> *v2; // rcx
   UFG::qNode<UFG::Event,UFG::Event> *v3; // rax
 
-  this->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+  this->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
   v1 = (UFG::qNode<UFG::Event,UFG::Event> *)&this->mPrev;
   v2 = this->mPrev;
   v3 = v1->mNext;

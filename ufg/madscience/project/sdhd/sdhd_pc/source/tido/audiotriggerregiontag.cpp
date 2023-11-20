@@ -9,7 +9,7 @@ void __fastcall UFG::AudioTriggerRegionTag::AudioTriggerRegionTag(UFG::AudioTrig
   v2 = (UFG::qNode<UFG::AudioTriggerRegionTag,UFG::AudioTriggerRegionTag> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (UFG::AudioTriggerRegionTagVtbl *)&UFG::AudioTriggerRegionTag::`vftable';
+  this->vfptr = (UFG::AudioTriggerRegionTagVtbl *)&UFG::AudioTriggerRegionTag::`vftable;
   this->mAudioUidOnEnter.mUID = -1;
   _((AMD_HD3D *)0xFFFFFFFFi64);
   v1->mAudioUidOnExit.mUID = -1;

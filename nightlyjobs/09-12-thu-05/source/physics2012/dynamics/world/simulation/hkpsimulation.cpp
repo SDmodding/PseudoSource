@@ -4,7 +4,7 @@ void __fastcall hkpSimulation::hkpSimulation(hkpSimulation *this, hkpWorld *worl
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_world = world;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpSimulation::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpSimulation::`vftable;
   this->m_simulateUntilTime = -1.0;
   *(_QWORD *)&this->m_currentTime = 0i64;
   this->m_determinismCheckFrameCounter = 0;
@@ -16,7 +16,7 @@ void __fastcall hkpSimulation::hkpSimulation(hkpSimulation *this, hkpWorld *worl
 // RVA: 0xD69B60
 void __fastcall hkpSimulation::~hkpSimulation(hkpSimulation *this)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 99

@@ -322,7 +322,7 @@ hkResult *__usercall hkInertiaTensorComputer::computeTriangleSurfaceMassProperti
           v55.m_inertiaTensor.m_col2 = 0i64;
           v39 = _mm_mul_ps(v14, (__m128)xmmword_141A711B0);
           inertia.m_col0.m_quad.m128_i32[2] = 0x1FFFF;
-          inertia.m_col0.m_quad.m128_u64[0] = (unsigned __int64)&hkGeometry::`vftable';
+          inertia.m_col0.m_quad.m128_u64[0] = (unsigned __int64)&hkGeometry::`vftable;
           inertia.m_col1.m_quad.m128_u64[0] = 0i64;
           v40 = _mm_rsqrt_ps(v38);
           inertia.m_col1.m_quad.m128_u64[1] = 0x8000000000000000i64;

@@ -30,7 +30,7 @@ void __fastcall hkpGskfAgent::hkpGskfAgent(hkpGskfAgent *this, hkpCdBody *bodyA,
 
   v4 = this;
   hkpGskBaseAgent::hkpGskBaseAgent((hkpGskBaseAgent *)&this->vfptr, bodyA, bodyB, mgr);
-  v4->vfptr = (hkBaseObjectVtbl *)&hkpGskfAgent::`vftable';
+  v4->vfptr = (hkBaseObjectVtbl *)&hkpGskfAgent::`vftable;
   *(_DWORD *)&v4->m_manifold.m_numVertsA = 0;
 }
 

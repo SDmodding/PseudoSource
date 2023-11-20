@@ -14,7 +14,7 @@ CAkActionStop *__fastcall CAkActionStop::Create(AkActionType in_eActionType, uns
   if ( result )
   {
     CAkActionActive::CAkActionActive((CAkActionActive *)&result->vfptr, v2, v3);
-    v5->vfptr = (CAkIndexableVtbl *)&CAkActionStop::`vftable';
+    v5->vfptr = (CAkIndexableVtbl *)&CAkActionStop::`vftable;
     CAkAction::AddToIndex((CAkAction *)&v5->vfptr);
     result = v5;
   }

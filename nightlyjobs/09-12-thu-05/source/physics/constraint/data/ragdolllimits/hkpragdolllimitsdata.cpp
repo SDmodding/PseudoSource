@@ -6,7 +6,7 @@ void __fastcall hkpRagdollLimitsData::hkpRagdollLimitsData(hkpRagdollLimitsData 
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_userData = 0i64;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpRagdollLimitsData::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpRagdollLimitsData::`vftable;
   this->m_atoms.m_rotations.m_type.m_storage = 4;
   v1 = this;
   this->m_atoms.m_twistLimit.m_type.m_storage = 15;

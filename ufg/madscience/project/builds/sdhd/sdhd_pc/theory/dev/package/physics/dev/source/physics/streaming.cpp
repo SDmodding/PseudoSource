@@ -111,7 +111,7 @@ void __fastcall UFG::NativePackfileUtils::FastTypeRegistry::Init(UFG::NativePack
       0);
     v13.m_finishFlag = 1;
     v13.m_informMemoryTracker = 1;
-    v13.vfptr = (hkBaseObjectVtbl *)&UFG::NativePackfileUtils::_hkTypeInfoRegistry::`vftable';
+    v13.vfptr = (hkBaseObjectVtbl *)&UFG::NativePackfileUtils::_hkTypeInfoRegistry::`vftable;
     hkTypeInfoRegistry::merge(&v13, v2);
     v3 = hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator>::getIterator((hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&v13.m_map);
     hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::isValid(

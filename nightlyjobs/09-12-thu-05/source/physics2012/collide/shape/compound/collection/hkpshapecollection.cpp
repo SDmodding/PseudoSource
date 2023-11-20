@@ -7,8 +7,8 @@ void __fastcall hkpShapeCollection::hkpShapeCollection(hkpShapeCollection *this,
   *(_WORD *)&this->m_dispatchType.m_storage = 4;
   this->m_shapeInfoCodecType.m_storage = 0;
   this->m_userData = 0i64;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpShapeCollection::`vftable'{for `hkpShape'};
-  this->vfptr = (hkpShapeContainerVtbl *)&hkpShapeCollection::`vftable'{for `hkpShapeContainer'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkpShapeCollection::`vftable{for `hkpShape};
+  this->vfptr = (hkpShapeContainerVtbl *)&hkpShapeCollection::`vftable{for `hkpShapeContainer};
   this->m_disableWelding.m_bool = 0;
   this->m_collectionType.m_storage = subType;
 }
@@ -23,8 +23,8 @@ void __fastcall hkpShapeCollection::hkpShapeCollection(hkpShapeCollection *this,
   v3 = flag.m_finishing;
   v2 = this;
   hkpShape::hkpShape((hkpShape *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpShapeCollection::`vftable'{for `hkpShape'};
-  v2->vfptr = (hkpShapeContainerVtbl *)&hkpShapeCollection::`vftable'{for `hkpShapeContainer'};
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpShapeCollection::`vftable{for `hkpShape};
+  v2->vfptr = (hkpShapeContainerVtbl *)&hkpShapeCollection::`vftable{for `hkpShapeContainer};
   if ( v3 )
   {
     v2->m_type.m_storage = 18;

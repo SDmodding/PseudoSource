@@ -18,7 +18,7 @@ void __fastcall CAkConvolutionReverbFX::CAkConvolutionReverbFX(CAkConvolutionRev
 
   v1 = this;
   v2 = &this->m_ConvolutionEngine;
-  *(_QWORD *)&v2[-1].m_uNumInputChannels = &CAkConvolutionReverbFX::`vftable';
+  *(_QWORD *)&v2[-1].m_uNumInputChannels = &CAkConvolutionReverbFX::`vftable;
   DSP::AkFFTSubsetButterflies::CAkPartitionedConvolutionEngine::CAkPartitionedConvolutionEngine(v2);
   v1->m_Params.fStereoWidth = 180.0;
   *(_QWORD *)&v1->m_Params.fInputCenterLevel = 1065353216i64;
@@ -50,9 +50,9 @@ void __fastcall CAkConvolutionReverbFX::~CAkConvolutionReverbFX(CAkConvolutionRe
 
   v1 = this;
   v2 = &this->m_ConvolutionEngine;
-  *(_QWORD *)&v2[-1].m_uNumInputChannels = &CAkConvolutionReverbFX::`vftable';
+  *(_QWORD *)&v2[-1].m_uNumInputChannels = &CAkConvolutionReverbFX::`vftable;
   DSP::AkFFTSubsetButterflies::CAkPartitionedConvolutionEngine::~CAkPartitionedConvolutionEngine(v2);
-  v1->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable';
+  v1->vfptr = (AK::IAkPluginVtbl *)&AK::IAkPlugin::`vftable;
 }
 
 // File Line: 52

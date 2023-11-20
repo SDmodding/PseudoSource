@@ -31,7 +31,7 @@ hkClass *__fastcall hkaiDuckUnderAnalyzer::staticClass()
 void __fastcall finishLoadedObjecthkaiDuckUnderAnalyzer(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiDuckUnderAnalyzer::`vftable';
+    *(_QWORD *)p = &hkaiDuckUnderAnalyzer::`vftable;
 }
 
 // File Line: 71
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkaiDuckUnderAnalyzer(void *p)
 // RVA: 0xC322E0
 void **__fastcall getVtablehkaiDuckUnderAnalyzer()
 {
-  return &hkaiDuckUnderAnalyzer::`vftable';
+  return &hkaiDuckUnderAnalyzer::`vftable;
 }
 
 // File Line: 97

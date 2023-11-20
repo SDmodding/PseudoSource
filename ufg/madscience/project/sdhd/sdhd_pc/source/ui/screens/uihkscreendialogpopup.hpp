@@ -8,7 +8,7 @@ void __fastcall UFG::DialogPopupEntry::~DialogPopupEntry(UFG::DialogPopupEntry *
   UFG::qNode<UFG::DialogPopupEntry,UFG::DialogPopupEntry> *v4; // rax
 
   v1 = this;
-  this->vfptr = (UFG::DialogPopupEntryVtbl *)&UFG::DialogPopupEntry::`vftable';
+  this->vfptr = (UFG::DialogPopupEntryVtbl *)&UFG::DialogPopupEntry::`vftable;
   UFG::qString::~qString(&this->mName);
   v2 = (UFG::qNode<UFG::DialogPopupEntry,UFG::DialogPopupEntry> *)&v1->mPrev;
   v3 = v1->mPrev;

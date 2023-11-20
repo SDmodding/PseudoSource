@@ -3,7 +3,7 @@
 void __fastcall hkpVehicleDefaultBrake::hkpVehicleDefaultBrake(hkpVehicleDefaultBrake *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpVehicleDefaultBrake::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpVehicleDefaultBrake::`vftable;
   this->m_wheelBrakingProperties.m_capacityAndFlags = 2147483648;
   this->m_wheelBrakingProperties.m_data = 0i64;
   this->m_wheelBrakingProperties.m_size = 0;

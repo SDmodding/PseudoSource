@@ -10,7 +10,7 @@ void __fastcall hkpMouseSpringAction::hkpMouseSpringAction(hkpMouseSpringAction 
   v2->m_springElasticity = 0.30000001;
   v2->m_maxRelativeForce = 250.0;
   v2->m_objectDamping = 0.94999999;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpMouseSpringAction::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpMouseSpringAction::`vftable;
   v2->m_applyCallbacks.m_capacityAndFlags = 2147483648;
   v2->m_applyCallbacks.m_data = 0i64;
   v2->m_applyCallbacks.m_size = 0;
@@ -81,7 +81,7 @@ void __fastcall hkpMouseSpringAction::hkpMouseSpringAction(hkpMouseSpringAction 
   v8 = this;
   hkpUnaryAction::hkpUnaryAction((hkpUnaryAction *)&this->vfptr, entity, 0i64);
   v9 = v52;
-  v8->vfptr = (hkBaseObjectVtbl *)&hkpMouseSpringAction::`vftable';
+  v8->vfptr = (hkBaseObjectVtbl *)&hkpMouseSpringAction::`vftable;
   v10 = v7->m_quad;
   v11 = *(_QWORD *)&springElasticity;
   v8->m_positionInRbLocal.m_quad = v10;
@@ -160,7 +160,7 @@ void __fastcall hkpMouseSpringAction::hkpMouseSpringAction(hkpMouseSpringAction 
     v49 = v24[4];
     v25 = v24[5];
     v39 = 0i64;
-    v37.m_childShapeAabbs = (hkAabbUint32 *)&hkpClosestCdPointCollector::`vftable';
+    v37.m_childShapeAabbs = (hkAabbUint32 *)&hkpClosestCdPointCollector::`vftable;
     v50 = v25;
     *(float *)&v37.m_childShapeKeys = FLOAT_3_40282e38;
     v38 = _mm_shuffle_ps(v38, _mm_unpackhi_ps(v38, (__m128)xmmword_141A712A0), 196);

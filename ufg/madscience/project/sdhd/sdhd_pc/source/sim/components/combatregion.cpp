@@ -36,8 +36,8 @@ void __fastcall UFG::CombatRegion::CombatRegion(UFG::CombatRegion *this, UFG::qS
   v7->mNode.mChild[1] = 0i64;
   v7->mNode.mUID = v8;
   UFG::qSafePointerNode<UFG::CombatRegion>::qSafePointerNode<UFG::CombatRegion>((UFG::qSafePointerNode<UFG::CombatRegion> *)&v7->vfptr);
-  v7->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CombatRegion::`vftable'{for `UFG::MarkerBase'};
-  v7->vfptr = (UFG::qSafePointerNode<UFG::CombatRegion>Vtbl *)&UFG::CombatRegion::`vftable'{for `UFG::qSafePointerNode<UFG::CombatRegion>'};
+  v7->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CombatRegion::`vftable{for `UFG::MarkerBase};
+  v7->vfptr = (UFG::qSafePointerNode<UFG::CombatRegion>Vtbl *)&UFG::CombatRegion::`vftable{for `UFG::qSafePointerNode<UFG::CombatRegion>};
   UFG::SimComponent::AddType((UFG::SimComponent *)&v7->vfptr, UFG::CombatRegion::_CombatRegionTypeUID, "CombatRegion");
   if ( v4 )
   {
@@ -80,13 +80,13 @@ void __fastcall UFG::CombatRegion::~CombatRegion(UFG::CombatRegion *this)
   UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v4; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CombatRegion::`vftable'{for `UFG::MarkerBase'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CombatRegion::`vftable{for `UFG::MarkerBase};
   v2 = (UFG::qSafePointerNode<UFG::ParkourHandle> *)&this->vfptr;
-  this->vfptr = (UFG::qSafePointerNode<UFG::CombatRegion>Vtbl *)&UFG::CombatRegion::`vftable'{for `UFG::qSafePointerNode<UFG::CombatRegion>'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::CombatRegion>Vtbl *)&UFG::CombatRegion::`vftable{for `UFG::qSafePointerNode<UFG::CombatRegion>};
   UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
     (UFG::qBaseTreeVariableRB<unsigned __int64> *)&UFG::CombatRegion::msCombatRegions,
     (UFG::qBaseNodeVariableRB<unsigned __int64> *)&this->mNode);
-  v2->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::CombatRegion>::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::CombatRegion>::`vftable;
   UFG::qSafePointerNode<UFG::DynamicCoverCorner>::SetAllPointersToNull(v2);
   v2 = (UFG::qSafePointerNode<UFG::ParkourHandle> *)((char *)v2 + 8);
   UFG::qList<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList,1,0>::DeleteNodes((UFG::qList<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList,1,0> *)v2);

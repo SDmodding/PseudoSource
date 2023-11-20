@@ -2,7 +2,7 @@
 // RVA: 0xED9AD4
 void __fastcall OSuite::ZOFilter::ZOFilter(OSuite::ZOFilter *this)
 {
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOFilter::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOFilter::`vftable;
   OSuite::ZStringBuilder::ZStringBuilder(&this->m_queryBuilder, 0x40ui64);
 }
 
@@ -10,7 +10,7 @@ void __fastcall OSuite::ZOFilter::ZOFilter(OSuite::ZOFilter *this)
 // RVA: 0xED9B00
 void __fastcall OSuite::ZOFilter::~ZOFilter(OSuite::ZOFilter *this)
 {
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOFilter::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOFilter::`vftable;
   OSuite::ZUtf8Buffer::~ZUtf8Buffer(&this->m_queryBuilder);
 }
 
@@ -24,7 +24,7 @@ OSuite::ZOFilter *__fastcall OSuite::ZOFilter::Compare(OSuite::ZOFilter *this, c
   if ( propertyName && value )
     OSuite::ZStringBuilder::AppendFormat(
       &this->m_queryBuilder,
-      "%s %s '%s'",
+      "%s %s %s",
       propertyName,
       off_14211D890[comparison],
       value);

@@ -14,12 +14,12 @@ void __fastcall Scaleform::ConstructorMov<Scaleform::Render::TextureGlyph>::Cons
   {
     if ( p )
     {
-      *(_QWORD *)p = &Scaleform::RefCountImplCore::`vftable';
+      *(_QWORD *)p = &Scaleform::RefCountImplCore::`vftable;
       *((_DWORD *)p + 2) = 1;
-      *(_QWORD *)p = &Scaleform::RefCountImpl::`vftable';
-      *(_QWORD *)p = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-      *(_QWORD *)p = &Scaleform::RefCountBase<Scaleform::Render::TextureGlyph,2>::`vftable';
-      *(_QWORD *)p = &Scaleform::Render::TextureGlyph::`vftable';
+      *(_QWORD *)p = &Scaleform::RefCountImpl::`vftable;
+      *(_QWORD *)p = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+      *(_QWORD *)p = &Scaleform::RefCountBase<Scaleform::Render::TextureGlyph,2>::`vftable;
+      *(_QWORD *)p = &Scaleform::Render::TextureGlyph::`vftable;
       *((_QWORD *)p + 2) = 0i64;
       *((_QWORD *)p + 4) = 0i64;
       *((_QWORD *)p + 5) = 0i64;

@@ -391,11 +391,11 @@ $error_result:
   {
     if ( io_hdr.uVersion == 2 )
     {
-      v38 = `AkMP3FrameHeader::GetSampleRate'::`2'::s_aSampleRatesMPEG2[io_hdr.uSampleRate];
+      v38 = `AkMP3FrameHeader::GetSampleRate::`2::s_aSampleRatesMPEG2[io_hdr.uSampleRate];
     }
     else if ( io_hdr.uVersion == 3 )
     {
-      v38 = `AkMP3FrameHeader::GetSampleRate'::`2'::s_aSampleRatesMPEG1[io_hdr.uSampleRate];
+      v38 = `AkMP3FrameHeader::GetSampleRate::`2::s_aSampleRatesMPEG1[io_hdr.uSampleRate];
     }
     else
     {
@@ -404,7 +404,7 @@ $error_result:
   }
   else
   {
-    v38 = `AkMP3FrameHeader::GetSampleRate'::`2'::s_aSampleRatesMPEG2_5[io_hdr.uSampleRate];
+    v38 = `AkMP3FrameHeader::GetSampleRate::`2::s_aSampleRatesMPEG2_5[io_hdr.uSampleRate];
   }
   NumberOfBytesRead = v38;
   v69->uSampleRate = v38;
@@ -418,7 +418,7 @@ $error_result:
     if ( v37 == 3 )
     {
       v42 = io_hdr.uBitRate;
-      v41 = `AkMP3FrameHeader::GetBitRate'::`2'::s_aBitRatesMPEG1[io_hdr.uBitRate];
+      v41 = `AkMP3FrameHeader::GetBitRate::`2::s_aBitRatesMPEG1[io_hdr.uBitRate];
     }
     else
     {
@@ -429,7 +429,7 @@ $error_result:
   else
   {
     v42 = io_hdr.uBitRate;
-    v41 = `AkMP3FrameHeader::GetBitRate'::`2'::s_aBitRatesMPEG2[io_hdr.uBitRate];
+    v41 = `AkMP3FrameHeader::GetBitRate::`2::s_aBitRatesMPEG2[io_hdr.uBitRate];
   }
   v69->uBitRate = v41;
   v69->uFirstFrameOffset = (_DWORD)v35 - (_DWORD)lpBaseAddress;
@@ -493,13 +493,13 @@ LABEL_102:
     if ( v37 && (v53 = v37 - 2) != 0 )
     {
       if ( v53 == 1 )
-        v54 = `AkMP3FrameHeader::GetBitRate'::`2'::s_aBitRatesMPEG1[v42];
+        v54 = `AkMP3FrameHeader::GetBitRate::`2::s_aBitRatesMPEG1[v42];
       else
         v54 = 0;
     }
     else
     {
-      v54 = `AkMP3FrameHeader::GetBitRate'::`2'::s_aBitRatesMPEG2[v42];
+      v54 = `AkMP3FrameHeader::GetBitRate::`2::s_aBitRatesMPEG2[v42];
     }
     v69->msDuration = v69->uMPEGStreamSize / (v54 >> 3);
   }

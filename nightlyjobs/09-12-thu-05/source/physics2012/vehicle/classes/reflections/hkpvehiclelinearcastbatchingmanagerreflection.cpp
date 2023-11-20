@@ -31,7 +31,7 @@ hkClass *__fastcall hkpVehicleLinearCastBatchingManager::staticClass()
 void __fastcall finishLoadedObjecthkpVehicleLinearCastBatchingManager(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpVehicleLinearCastBatchingManager::`vftable';
+    *(_QWORD *)p = &hkpVehicleLinearCastBatchingManager::`vftable;
 }
 
 // File Line: 70
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkpVehicleLinearCastBatchingManager(void *p)
 // RVA: 0xE25AA0
 void **__fastcall getVtablehkpVehicleLinearCastBatchingManager()
 {
-  return &hkpVehicleLinearCastBatchingManager::`vftable';
+  return &hkpVehicleLinearCastBatchingManager::`vftable;
 }
 
 // File Line: 96

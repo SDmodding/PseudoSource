@@ -53,7 +53,7 @@ void __fastcall UFG::TrueCrowdDataBase::~TrueCrowdDataBase(UFG::TrueCrowdDataBas
   v4->mPrev = v3;
   v2->mNode.mPrev = &v2->mNode;
   v2->mNode.mNext = &v2->mNode;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->mDefinition.mEntities,
     0x50Cui64,
     25,

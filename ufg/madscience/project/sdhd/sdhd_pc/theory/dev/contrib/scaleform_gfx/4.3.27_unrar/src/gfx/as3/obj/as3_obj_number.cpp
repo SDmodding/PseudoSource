@@ -75,7 +75,7 @@ LABEL_11:
     --v16->RefCount;
     if ( v11 )
       Scaleform::GFx::ASStringNode::ReleaseNode(v16);
-    v21.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable';
+    v21.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable;
     Scaleform::Formatter::~Formatter((Scaleform::Formatter *)&v21.vfptr);
   }
 }
@@ -141,7 +141,7 @@ LABEL_11:
     --v16->RefCount;
     if ( v11 )
       Scaleform::GFx::ASStringNode::ReleaseNode(v16);
-    v21.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable';
+    v21.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable;
     Scaleform::Formatter::~Formatter((Scaleform::Formatter *)&v21.vfptr);
   }
 }
@@ -197,7 +197,7 @@ void __fastcall Scaleform::GFx::AS3::InstanceTraits::fl::Number::AS3toPrecision(
     --v13->RefCount;
     if ( v14 )
       Scaleform::GFx::ASStringNode::ReleaseNode(v13);
-    v22.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable';
+    v22.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable;
     Scaleform::Formatter::~Formatter((Scaleform::Formatter *)&v22.vfptr);
   }
   else
@@ -302,7 +302,7 @@ LABEL_15:
     --v14->RefCount;
     if ( v15 )
       Scaleform::GFx::ASStringNode::ReleaseNode(v14);
-    v22.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable';
+    v22.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable;
     Scaleform::Formatter::~Formatter((Scaleform::Formatter *)&v22.vfptr);
   }
 }
@@ -548,7 +548,7 @@ void __fastcall Scaleform::GFx::AS3::Classes::fl::Number::Number(Scaleform::GFx:
 
   v2 = this;
   Scaleform::GFx::AS3::Class::Class((Scaleform::GFx::AS3::Class *)&this->vfptr, t);
-  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl::Number::`vftable';
+  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl::Number::`vftable;
   v2->NaN = Scaleform::GFx::NumberUtil::NaN();
   v2->NEGATIVE_INFINITY = Scaleform::GFx::NumberUtil::NEGATIVE_INFINITY();
   v2->POSITIVE_INFINITY = Scaleform::GFx::NumberUtil::POSITIVE_INFINITY();
@@ -760,8 +760,8 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v5 )
   {
     Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, v2, &Scaleform::GFx::AS3::fl::NumberCI);
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable';
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Number::`vftable';
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable;
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Number::`vftable;
     v6->TraitsType = 4;
   }
   else
@@ -774,8 +774,8 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v7 )
   {
     Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v7, v2, &Scaleform::GFx::AS3::fl::NumberCI);
-    v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable';
-    v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Number::`vftable';
+    v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable;
+    v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Number::`vftable;
     v8.pV->TraitsType = 4;
   }
   else

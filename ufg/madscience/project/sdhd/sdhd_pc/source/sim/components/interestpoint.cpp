@@ -1,6 +1,6 @@
 // File Line: 90
 // RVA: 0x582330
-signed __int64 __fastcall `anonymous namespace'::GetActionMostUsedIndex_Interactions()
+signed __int64 __fastcall `anonymous namespace::GetActionMostUsedIndex_Interactions()
 {
   signed __int64 result; // rax
 
@@ -82,7 +82,7 @@ __int64 dynamic_initializer_for__UFG::InterestPoint::msAIHintColour__()
 // RVA: 0x154D7C0
 __int64 dynamic_initializer_for__UFG::InterestPoint::msInterestPointTypePool__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     UFG::InterestPoint::msInterestPointTypePool.p,
     0xA8ui64,
     500,
@@ -235,7 +235,7 @@ void __fastcall UFG::InterestPointProperties::LoadCommonProperties(UFG::Interest
   if ( v8 )
   {
     v9 = v8 - 1;
-    `eh vector destructor iterator'(v8, 4ui64, v8[-1].mUID, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v8, 4ui64, v8[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v9);
   }
   v10 = 0;
@@ -384,7 +384,7 @@ void __fastcall UFG::InterestPointPropertiesHandle::Set(UFG::InterestPointProper
     if ( v7 )
     {
       v8 = v7 - 1;
-      `eh vector destructor iterator'(v7, 4ui64, v7[-1].mUID, (void (__fastcall *)(void *))_);
+      `eh vector destructor iterator(v7, 4ui64, v7[-1].mUID, (void (__fastcall *)(void *))_);
       operator delete[](v8);
     }
     v6->mUseClassList.p = 0i64;
@@ -511,7 +511,7 @@ void __fastcall UFG::InterestPointType::InterestPointType(UFG::InterestPointType
   this->mNode.mParent = 0i64;
   this->mNode.mChild[0] = 0i64;
   this->mNode.mChild[1] = 0i64;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     this->mAnimBankSymbols,
     0x10ui64,
     3,
@@ -603,7 +603,7 @@ void __fastcall UFG::InterestPointType::ReadAnimBankSymbols(UFG::InterestPointTy
   v19 = pInterestPointTypePropertySet;
   v2 = pInterestPointTypePropertySet;
   v3 = this;
-  `eh vector constructor iterator'(&name, 4ui64, 3, (void (__fastcall *)(void *))BackInfo::BackInfo);
+  `eh vector constructor iterator(&name, 4ui64, 3, (void (__fastcall *)(void *))BackInfo::BackInfo);
   name.mUID = qSymbol_AnimBankFileNames.mUID;
   v17 = qSymbol_AnimBankFileNamesMale.mUID;
   v18 = qSymbol_AnimBankFileNamesFemale.mUID;
@@ -660,7 +660,7 @@ void __fastcall UFG::InterestPointType::ReadAnimBankSymbols(UFG::InterestPointTy
     v21 = --v6;
   }
   while ( v6 );
-  `eh vector destructor iterator'(&name, 4ui64, 3, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(&name, 4ui64, 3, (void (__fastcall *)(void *))_);
 }
 
 // File Line: 610
@@ -946,9 +946,9 @@ void __fastcall UFG::InterestPoint::InterestPoint(UFG::InterestPoint *this, UFG:
   v7 = (UFG::GridIntrusiveNode<UFG::InterestPoint> *)&v3->mPrev;
   v7->mPrev = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *)&v7->mPrev;
   v7->mNext = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *)&v7->mPrev;
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::InterestPoint::`vftable'{for `UFG::MarkerBase'};
-  v3->vfptr = (UFG::qSafePointerNode<UFG::InterestPoint>Vtbl *)&UFG::InterestPoint::`vftable'{for `UFG::qSafePointerNode<UFG::InterestPoint>'};
-  `eh vector constructor iterator'(
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::InterestPoint::`vftable{for `UFG::MarkerBase};
+  v3->vfptr = (UFG::qSafePointerNode<UFG::InterestPoint>Vtbl *)&UFG::InterestPoint::`vftable{for `UFG::qSafePointerNode<UFG::InterestPoint>};
+  `eh vector constructor iterator(
     v3->mAnimGroupHandles,
     0x18ui64,
     3,
@@ -1491,9 +1491,9 @@ void __fastcall UFG::InterestPoint::~InterestPoint(UFG::InterestPoint *this)
   UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *v31; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::InterestPoint::`vftable'{for `UFG::MarkerBase'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::InterestPoint::`vftable{for `UFG::MarkerBase};
   v2 = (UFG::qSafePointerNode<UFG::ParkourHandle> *)&this->vfptr;
-  this->vfptr = (UFG::qSafePointerNode<UFG::InterestPoint>Vtbl *)&UFG::InterestPoint::`vftable'{for `UFG::qSafePointerNode<UFG::InterestPoint>'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::InterestPoint>Vtbl *)&UFG::InterestPoint::`vftable{for `UFG::qSafePointerNode<UFG::InterestPoint>};
   v3 = &this->mLinkObject;
   if ( this->mLinkObject.m_pPointer )
   {
@@ -1563,7 +1563,7 @@ void __fastcall UFG::InterestPoint::~InterestPoint(UFG::InterestPoint *this)
   v22->mPrev = v21;
   v18->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v18->mPrev;
   v1->mpParentCharacterAnimationComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->mpParentCharacterAnimationComponent.mPrev;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v1->mAnimGroupHandles,
     0x18ui64,
     3,
@@ -1575,7 +1575,7 @@ void __fastcall UFG::InterestPoint::~InterestPoint(UFG::InterestPoint *this)
   v25->mPrev = v24;
   v23->mPrev = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *)&v23->mPrev;
   v23->mNext = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *)&v23->mPrev;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::InterestPoint>::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::InterestPoint>::`vftable;
   UFG::qSafePointerNode<UFG::DynamicCoverCorner>::SetAllPointersToNull(v2);
   v26 = &v2->m_SafePointerList;
   UFG::qList<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList,1,0>::DeleteNodes(v26);
@@ -2573,7 +2573,7 @@ bool __fastcall UFG::InterestPoint::CheckOutsideForInteruption(UFG::InterestPoin
     _S9_16 |= 1u;
     node_id.mUID = UFG::qStringHashUpper32("Interactions", 0xFFFFFFFF);
   }
-  v7 = `anonymous namespace'::GetActionMostUsedIndex_Interactions();
+  v7 = `anonymous namespace::GetActionMostUsedIndex_Interactions();
   v8 = ActionController::IsPlaying((ActionController *)&v5[3], &node_id, v7, 0);
   v9 = v8 == 0;
   if ( !v8 )

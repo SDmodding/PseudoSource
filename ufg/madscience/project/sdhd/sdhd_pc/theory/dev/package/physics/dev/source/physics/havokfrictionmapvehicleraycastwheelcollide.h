@@ -21,7 +21,7 @@ void __fastcall UFG::VehicleRaycastWheelCollide::VehicleRaycastWheelCollide(UFG:
 
   v1 = this;
   hkpVehicleRayCastWheelCollide::hkpVehicleRayCastWheelCollide((hkpVehicleRayCastWheelCollide *)&this->vfptr);
-  v1->vfptr = (hkBaseObjectVtbl *)&UFG::VehicleRaycastWheelCollide::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&UFG::VehicleRaycastWheelCollide::`vftable;
   *(_QWORD *)v1->mFrictionMultiplier = 4575657222473777152i64;
   *(_QWORD *)&v1->mFrictionMultiplier[2] = 4575657222473777152i64;
   *(_QWORD *)&v1->mSurfaceNormal[0].x = 0i64;
@@ -241,7 +241,7 @@ void __fastcall UFG::VehicleLinearCastWheelCollide::VehicleLinearCastWheelCollid
 
   v1 = this;
   hkpVehicleLinearCastWheelCollide::hkpVehicleLinearCastWheelCollide((hkpVehicleLinearCastWheelCollide *)&this->vfptr);
-  v1->vfptr = (hkBaseObjectVtbl *)&UFG::VehicleLinearCastWheelCollide::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&UFG::VehicleLinearCastWheelCollide::`vftable;
   *(_QWORD *)v1->mFrictionMultiplier = 4575657222473777152i64;
   *(_QWORD *)&v1->mFrictionMultiplier[2] = 4575657222473777152i64;
   *(_QWORD *)&v1->mSurfaceNormal[0].x = 0i64;
@@ -326,7 +326,7 @@ hkBool *__fastcall UFG::VehicleLinearCastWheelCollide::castSingleWheel(UFG::Vehi
   input.m_to = v8->m_to;
   input.m_maxExtraPenetration = v6->m_maxExtraPenetration;
   input.m_startPointTolerance = v6->m_startPointTolerance;
-  castCollector.vfptr = (hkpCdPointCollectorVtbl *)&hkpClosestCdPointCollector::`vftable';
+  castCollector.vfptr = (hkpCdPointCollectorVtbl *)&hkpClosestCdPointCollector::`vftable;
   *(_QWORD *)&castCollector.m_earlyOutDistance = 0i64;
   v28 = _mm_shuffle_ps(v28, _mm_unpackhi_ps(v28, (__m128)xmmword_141A712A0), 196);
   castCollector.m_earlyOutDistance = 3.40282e38;
@@ -401,12 +401,12 @@ hkBool *__fastcall UFG::VehicleLinearCastWheelCollide::castSingleWheel(UFG::Vehi
       v5 = v37;
     }
     v5->m_bool = 1;
-    castCollector.vfptr = (hkpCdPointCollectorVtbl *)&hkpClosestCdPointCollector::`vftable';
+    castCollector.vfptr = (hkpCdPointCollectorVtbl *)&hkpClosestCdPointCollector::`vftable;
   }
   else
   {
     v5->m_bool = 0;
-    castCollector.vfptr = (hkpCdPointCollectorVtbl *)&hkpClosestCdPointCollector::`vftable';
+    castCollector.vfptr = (hkpCdPointCollectorVtbl *)&hkpClosestCdPointCollector::`vftable;
   }
   return v5;
 }

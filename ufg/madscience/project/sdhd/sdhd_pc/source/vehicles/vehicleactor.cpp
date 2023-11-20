@@ -6,7 +6,7 @@ void __fastcall UFG::TSVehicle::TSVehicle(UFG::TSVehicle *this, ASymbol *name)
 
   v2 = this;
   UFG::TSActor::TSActor((UFG::TSActor *)&this->vfptr, name, UFG::TSVehicle::mClass);
-  v2->vfptr = (SSObjectBaseVtbl *)&UFG::TSVehicle::`vftable';
+  v2->vfptr = (SSObjectBaseVtbl *)&UFG::TSVehicle::`vftable;
   UFG::RebindingComponentHandle<UFG::AiDriverComponent,0>::RebindingComponentHandle<UFG::AiDriverComponent,0>(&v2->mAIDriverComponent);
   UFG::RebindingComponentHandle<UFG::PhysicsMoverInterface,0>::RebindingComponentHandle<UFG::PhysicsMoverInterface,0>(&v2->mMoverComponent);
   v2->bDelayedByNoDriver = 0;

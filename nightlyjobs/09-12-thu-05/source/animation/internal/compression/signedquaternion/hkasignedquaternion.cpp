@@ -11,7 +11,7 @@ void __fastcall hkaSignedQuaternion::packSignedQuaternion16(hkQuaternionf *in, c
   v2 = _mm_mul_ps(in->m_vec.m_quad, (__m128)xmmword_141A71120);
   v3 = _mm_add_epi32(
          _mm_xor_si128(
-           (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v2),
+           (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v2),
            _mm_cvttps_epi32(v2)),
          (__m128i)_xmm);
   v4 = _mm_or_si128(
@@ -51,7 +51,7 @@ void __fastcall hkaSignedQuaternion::packSignedQuaternion24(hkQuaternionf *in, c
          in->m_vec.m_quad);
   v7 = _mm_add_epi32(
          _mm_xor_si128(
-           (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v6),
+           (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v6),
            _mm_cvttps_epi32(v6)),
          (__m128i)_xmm);
   v8 = _mm_packs_epi32(v7, v7);
@@ -61,7 +61,7 @@ void __fastcall hkaSignedQuaternion::packSignedQuaternion24(hkQuaternionf *in, c
   v2[1] = v12.m128i_i8[v9];
   LOBYTE(v9) = v12.m128i_i8[v9 + 1 + (v9 + 1 == v5)];
   v2[2] = v9;
-  v10 = _mm_and_ps((__m128)`hkVector4f::getComponent'::`2'::indexToMask[v5], in->m_vec.m_quad);
+  v10 = _mm_and_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[v5], in->m_vec.m_quad);
   *v2 |= (_BYTE)v5 << 7;
   v2[1] |= (v5 & 0xFE) << 6;
   v11 = _mm_or_ps(_mm_shuffle_ps(v10, v10, 78), v10);
@@ -250,7 +250,7 @@ void __fastcall hkaSignedQuaternion::packSignedQuaternion40(hkQuaternionf *in, c
   v6 = _mm_mul_ps(_mm_shuffle_ps((__m128)LODWORD(FLOAT_2894_8953), (__m128)LODWORD(FLOAT_2894_8953), 0), (__m128)v2);
   v7 = _mm_add_epi32(
          _mm_xor_si128(
-           (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v6),
+           (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v6),
            _mm_cvttps_epi32(v6)),
          (__m128i)_xmm);
   _mm_store_si128(&v13, _mm_packs_epi32(v7, v7));
@@ -258,7 +258,7 @@ void __fastcall hkaSignedQuaternion::packSignedQuaternion40(hkQuaternionf *in, c
   v8 = ((v5 == 0) + 1 == v5) + (v5 == 0) + 1;
   v9 = v13.m128i_i16[v8];
   LOWORD(v8) = v13.m128i_i16[v8 + 1 + (unsigned __int64)(v8 + 1 == v5)];
-  v10 = (__m128)`hkVector4f::getComponent'::`2'::indexToMask[v5];
+  v10 = (__m128)`hkVector4f::getComponent::`2::indexToMask[v5];
   *out = v14;
   v11 = _mm_and_ps(v10, (__m128)v2);
   out[3] = v8;
@@ -299,13 +299,13 @@ void __fastcall hkaSignedQuaternion::packSignedQuaternion48(hkQuaternionf *in, c
   v7 = _mm_mul_ps(_mm_shuffle_ps((__m128)LODWORD(FLOAT_23169_061), (__m128)LODWORD(FLOAT_23169_061), 0), (__m128)v2);
   v8 = _mm_add_epi32(
          _mm_xor_si128(
-           (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v7),
+           (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v7),
            _mm_cvttps_epi32(v7)),
          (__m128i)_xmm);
   _mm_store_si128(&v14, _mm_packs_epi32(v8, v8));
   v9 = ((v6 == 0) + 1 == v6) + (v6 == 0) + 1;
   v10 = v14.m128i_i16[v9];
-  v11 = (__m128)`hkVector4f::getComponent'::`2'::indexToMask[v6];
+  v11 = (__m128)`hkVector4f::getComponent::`2::indexToMask[v6];
   *(_WORD *)v3 = v14.m128i_i16[v6 == 0] | ((_WORD)v6 << 15);
   *((_WORD *)v3 + 1) = v10 | ((v6 & 0xFFFE) << 14);
   v12 = _mm_and_ps(v11, (__m128)v2);
@@ -392,8 +392,8 @@ void __fastcall hkaSignedQuaternion::unpackSignedQuaternion24(const char *in, hk
   if ( v5 < 0 )
     v14 = _mm_sub_ps((__m128)0i64, v14);
   v6->m_vec.m_quad = _mm_or_ps(
-                       _mm_andnot_ps((__m128)`hkVector4f::getComponent'::`2'::indexToMask[v8], v10),
-                       _mm_and_ps((__m128)`hkVector4f::getComponent'::`2'::indexToMask[v8], v14));
+                       _mm_andnot_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[v8], v10),
+                       _mm_and_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[v8], v14));
 }
 
 // File Line: 607
@@ -659,8 +659,8 @@ void __fastcall hkaSignedQuaternion::unpackSignedQuaternion48(const char *in8, h
   if ( v3 < 0 )
     v13 = _mm_sub_ps((__m128)0i64, v13);
   v4->m_vec.m_quad = _mm_or_ps(
-                       _mm_andnot_ps((__m128)`hkVector4f::getComponent'::`2'::indexToMask[v7], v9),
-                       _mm_and_ps((__m128)`hkVector4f::getComponent'::`2'::indexToMask[v7], v13));
+                       _mm_andnot_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[v7], v9),
+                       _mm_and_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[v7], v13));
 }
 
 // File Line: 1253

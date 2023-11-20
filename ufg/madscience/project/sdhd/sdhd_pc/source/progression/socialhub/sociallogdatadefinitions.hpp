@@ -6,7 +6,7 @@ void __fastcall UFG::SocialLogData_BeatChallenge::SocialLogData_BeatChallenge(UF
 
   v1 = this;
   UFG::SocialLogData::SocialLogData((UFG::SocialLogData *)&this->vfptr);
-  v1->vfptr = (UFG::OSuiteMessageVtbl *)&UFG::SocialLogData_BeatChallenge::`vftable';
+  v1->vfptr = (UFG::OSuiteMessageVtbl *)&UFG::SocialLogData_BeatChallenge::`vftable;
   v1->m_iHasSent = 0;
   v1->m_aData = 0i64;
 }
@@ -19,7 +19,7 @@ void __fastcall UFG::SocialLogData_Challenge::SocialLogData_Challenge(UFG::Socia
 
   v1 = this;
   UFG::SocialLogData::SocialLogData((UFG::SocialLogData *)&this->vfptr);
-  v1->vfptr = (UFG::OSuiteMessageVtbl *)&UFG::SocialLogData_Challenge::`vftable';
+  v1->vfptr = (UFG::OSuiteMessageVtbl *)&UFG::SocialLogData_Challenge::`vftable;
   v1->m_iHasBeaten = 0;
   v1->m_aData = 0i64;
 }

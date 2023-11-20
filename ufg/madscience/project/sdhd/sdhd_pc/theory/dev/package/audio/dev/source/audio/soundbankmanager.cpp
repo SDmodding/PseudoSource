@@ -779,8 +779,8 @@ LABEL_18:
   }
 LABEL_19:
   in_pCookiea = (char *)in_pCookie + 8;
-  *in_pCookiea = &UFG::WwiseCallbackOperation::`vftable';
-  in_pCookiea[2] = &UFG::AudioEventInfo::`vftable';
+  *in_pCookiea = &UFG::WwiseCallbackOperation::`vftable;
+  in_pCookiea[2] = &UFG::AudioEventInfo::`vftable;
   operator delete[](v5);
 }
 
@@ -865,8 +865,8 @@ char __fastcall UFG::SoundBankManager::LoadBank(UFG::SoundBank *bank)
   if ( v5 )
   {
     v8 = &v5->op;
-    v8->vfptr = (UFG::WwiseCallbackOperationVtbl *)&UFG::WwiseCallbackOperation::`vftable';
-    v8->eventInfo.vfptr = (UFG::AudioEventInfoVtbl *)&UFG::AudioEventInfo::`vftable';
+    v8->vfptr = (UFG::WwiseCallbackOperationVtbl *)&UFG::WwiseCallbackOperation::`vftable;
+    v8->eventInfo.vfptr = (UFG::AudioEventInfoVtbl *)&UFG::AudioEventInfo::`vftable;
     v8->eventInfo.eventId = 0;
     v8->eventInfo.objectId = 0i64;
     v8->eventInfo.flags = 0;
@@ -910,8 +910,8 @@ char __fastcall UFG::SoundBankManager::UnloadBank(UFG::SoundBank *bank)
     if ( v2 )
     {
       v6 = (signed __int64)(v2 + 8);
-      *(_QWORD *)v6 = &UFG::WwiseCallbackOperation::`vftable';
-      *(_QWORD *)(v6 + 16) = &UFG::AudioEventInfo::`vftable';
+      *(_QWORD *)v6 = &UFG::WwiseCallbackOperation::`vftable;
+      *(_QWORD *)(v6 + 16) = &UFG::AudioEventInfo::`vftable;
       *(_DWORD *)(v6 + 24) = 0;
       *(_QWORD *)(v6 + 32) = 0i64;
       *(_DWORD *)(v6 + 40) = 0;
@@ -1376,7 +1376,7 @@ void __fastcall UFG::SoundBank::SoundBank(UFG::SoundBank *this, UFG::qWiseSymbol
   v7 = (UFG::qNode<UFG::SoundBank,UFG::SoundBankGroupBankList> *)&this->mPrev;
   v7->mPrev = v7;
   v7->mNext = v7;
-  this->vfptr = (UFG::SoundBankVtbl *)&UFG::SoundBank::`vftable';
+  this->vfptr = (UFG::SoundBankVtbl *)&UFG::SoundBank::`vftable;
   v8 = (AMD_HD3D *)bankId->mUID;
   v4->m_name.mUID = (unsigned int)v8;
   _(v8);

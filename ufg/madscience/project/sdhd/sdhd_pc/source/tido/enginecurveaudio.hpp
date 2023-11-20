@@ -22,7 +22,7 @@ void __fastcall UFG::AudioCurveSymbolManager::AudioCurveSymbolManager(UFG::Audio
   signed __int64 v3; // rdx
 
   v1 = this;
-  `eh vector constructor iterator'(this, 4ui64, 255, (void (__fastcall *)(void *))BackInfo::BackInfo);
+  `eh vector constructor iterator(this, 4ui64, 255, (void (__fastcall *)(void *))BackInfo::BackInfo);
   v1->m_numSymbols = 1;
   v2 = (UFG::qSymbol *)v1;
   v3 = 254i64;
@@ -52,7 +52,7 @@ void __fastcall UFG::AudioCurve::~AudioCurve(UFG::AudioCurve *this)
     if ( v3 )
     {
       v4 = &v3[-1].mVehicleEvent;
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         v3,
         0xCui64,
         v3[-1].mVehicleEvent.mUID,

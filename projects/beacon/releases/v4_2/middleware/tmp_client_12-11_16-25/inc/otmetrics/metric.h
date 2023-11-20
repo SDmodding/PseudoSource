@@ -34,7 +34,7 @@ OSuite::ZMetric::IStoredData *__fastcall OSuite::ZMetric::TStoredData<double>::C
   result = (OSuite::ZMetric::IStoredData *)OSuite::ZObject::operator new(0x10ui64);
   if ( result )
   {
-    result->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZMetric::TStoredData<double>::`vftable';
+    result->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZMetric::TStoredData<double>::`vftable;
     result[1].vfptr = *(OSuite::ZObjectVtbl **)&v1->m_data;
   }
   return result;
@@ -69,10 +69,10 @@ char __fastcall OSuite::ZMetric::ReplaceIfExist<int>(OSuite::ZMetric *this, cons
     v5 = 1;
     LODWORD(result.m_iterator.m_pElement[2].vfptr[1].__vecDelDtor) = *v4;
   }
-  result.vfptr = (OSuite::TOrderedMap<OSuite::ZString,OSuite::ZUsageTracker *,OSuite::TOperatorComparer<OSuite::ZString> >::ZIteratorVtbl *)&OSuite::TOrderedMap<unsigned __int64,OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>,OSuite::TOperatorComparer<unsigned __int64>>::ZIterator::`vftable';
-  result.m_iterator.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZRedBlackTreeBase::TIterator<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZUsageTracker::ZResourceUsage *>>::`vftable';
-  result.m_iterator.m_parents.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable'{for `OSuite::ZObject'};
-  result.m_iterator.m_parents.vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable'{for `OSuite::IHashable'};
+  result.vfptr = (OSuite::TOrderedMap<OSuite::ZString,OSuite::ZUsageTracker *,OSuite::TOperatorComparer<OSuite::ZString> >::ZIteratorVtbl *)&OSuite::TOrderedMap<unsigned __int64,OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>,OSuite::TOperatorComparer<unsigned __int64>>::ZIterator::`vftable;
+  result.m_iterator.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZRedBlackTreeBase::TIterator<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZUsageTracker::ZResourceUsage *>>::`vftable;
+  result.m_iterator.m_parents.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable{for `OSuite::ZObject};
+  result.m_iterator.m_parents.vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable{for `OSuite::IHashable};
   if ( result.m_iterator.m_parents.m_pList )
     result.m_iterator.m_parents.m_pList->vfptr->__vecDelDtor((OSuite::ZObject *)result.m_iterator.m_parents.m_pList, 1u);
   return v5;

@@ -12,7 +12,7 @@ void __fastcall OSuite::ZONavigationProperty::ZONavigationProperty(OSuite::ZONav
   v7 = sName;
   v8 = this;
   OSuite::ZAtomBase::ZAtomBase((OSuite::ZAtomBase *)&this->vfptr, sBaseUrl);
-  v8->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZONavigationProperty::`vftable';
+  v8->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZONavigationProperty::`vftable;
   OSuite::ZString::ZString(&v8->m_sName, v7);
   OSuite::ZString::ZString(&v8->m_sHref, v6);
   v8->m_pEdm = v5;
@@ -25,7 +25,7 @@ void __fastcall OSuite::ZONavigationProperty::~ZONavigationProperty(OSuite::ZONa
   OSuite::ZONavigationProperty *v1; // rbx
 
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZONavigationProperty::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZONavigationProperty::`vftable;
   OSuite::ZString::~ZString(&this->m_sHref);
   OSuite::ZString::~ZString(&v1->m_sName);
   OSuite::ZAtomBase::~ZAtomBase((OSuite::ZAtomBase *)&v1->vfptr);

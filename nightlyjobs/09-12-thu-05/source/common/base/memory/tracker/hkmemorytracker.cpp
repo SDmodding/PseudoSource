@@ -10,7 +10,7 @@ hkDummyMemoryTrackerImpl *__fastcall hkMemoryTracker::getInstance()
     if ( !(_S1_46 & 1) )
     {
       _S1_46 |= 1u;
-      dummy.vfptr = (hkMemoryTrackerVtbl *)&hkDummyMemoryTrackerImpl::`vftable';
+      dummy.vfptr = (hkMemoryTrackerVtbl *)&hkDummyMemoryTrackerImpl::`vftable;
       atexit(hkMemoryTracker::getInstance_::_5_::_dynamic_atexit_destructor_for__dummy__);
     }
     result = &dummy;

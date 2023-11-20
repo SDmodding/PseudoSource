@@ -119,7 +119,7 @@ __int64 __fastcall hkCpuShapeRayCastJob(hkJobQueue *jobQueue, hkJobQueue::JobQue
       v62 = 0i64;
       v73 = v17;
       v64 = 1065353216;
-      v63 = &hkpFixedBufferRayHitCollector::`vftable';
+      v63 = &hkpFixedBufferRayHitCollector::`vftable;
       v65 = v13;
       v66 = v13;
       v68 = 0;

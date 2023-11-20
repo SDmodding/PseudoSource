@@ -36,7 +36,7 @@ void __fastcall AObjBlock<SSInvokedExpression>::AObjBlock<SSInvokedExpression>(A
   {
     *(_DWORD *)v4 = v3;
     v8 = (signed __int64)(v4 + 8);
-    `eh vector constructor iterator'(
+    `eh vector constructor iterator(
       v4 + 8,
       0x70ui64,
       v3,
@@ -47,7 +47,7 @@ void __fastcall AObjBlock<SSInvokedExpression>::AObjBlock<SSInvokedExpression>(A
     v8 = 0i64;
   }
   v2->i_objects_a = (SSInvokedExpression *)v8;
-  if ( `AObjBlock<SSInvokedExpression>::AObjBlock<SSInvokedExpression>'::`3'::_test && !v8 )
+  if ( `AObjBlock<SSInvokedExpression>::AObjBlock<SSInvokedExpression>::`3::_test && !v8 )
   {
     AErrMsg::AErrMsg(&err_msg, "Unable to allocate memory", AErrLevel_error, 0i64, 0i64);
     AErrMsg::AErrMsg(
@@ -61,7 +61,7 @@ void __fastcall AObjBlock<SSInvokedExpression>::AObjBlock<SSInvokedExpression>(A
     if ( ADebug::resolve_error(
            v9,
            &action_p,
-           &`AObjBlock<SSInvokedExpression>::AObjBlock<SSInvokedExpression>'::`3'::_test) )
+           &`AObjBlock<SSInvokedExpression>::AObjBlock<SSInvokedExpression>::`3::_test) )
     {
       __debugbreak();
     }
@@ -131,7 +131,7 @@ void __fastcall AObjReusePool<SSBoolean>::append_block(AObjReusePool<SSBoolean> 
   {
     v6 = 0i64;
   }
-  if ( `AObjReusePool<SSBoolean>::append_block'::`3'::_test && !v6 )
+  if ( `AObjReusePool<SSBoolean>::append_block::`3::_test && !v6 )
   {
     AErrMsg::AErrMsg(&err_msg, "Unable to allocate memory", AErrLevel_error, 0i64, 0i64);
     AErrMsg::AErrMsg(
@@ -142,7 +142,7 @@ void __fastcall AObjReusePool<SSBoolean>::append_block(AObjReusePool<SSBoolean> 
       "d:\\ufg\\madscience\\project\\sdhd\\sdhd_pc\\theory\\dev\\package\\agogcore\\dev\\source\\agogcore\\aobjreusepool.hpp",
       0x184u,
       3u);
-    if ( ADebug::resolve_error(v7, (eAErrAction *)&action_p, &`AObjReusePool<SSBoolean>::append_block'::`3'::_test) )
+    if ( ADebug::resolve_error(v7, (eAErrAction *)&action_p, &`AObjReusePool<SSBoolean>::append_block::`3::_test) )
       __debugbreak();
     if ( (_DWORD)action_p != 3 )
       __debugbreak();

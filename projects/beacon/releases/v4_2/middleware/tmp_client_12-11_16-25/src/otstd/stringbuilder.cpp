@@ -5,11 +5,11 @@ void __fastcall OSuite::ZUtf8Buffer::~ZUtf8Buffer(OSuite::ZStringBuilder *this)
   char *v1; // rdx
   OSuite::ZObject *v2; // rcx
 
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZStringBuilder::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZStringBuilder::`vftable;
   v1 = this->m_Chars.m_pList;
   v2 = (OSuite::ZObject *)&this->m_Chars.vfptr;
-  v2->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<unsigned char>::`vftable'{for `OSuite::ZListBase'};
-  v2[3].vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<char>::`vftable'{for `OSuite::IHashable'};
+  v2->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<unsigned char>::`vftable{for `OSuite::ZListBase};
+  v2[3].vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<char>::`vftable{for `OSuite::IHashable};
   OSuite::ZObject::free(v2, v1);
 }
 

@@ -10,7 +10,7 @@ void __fastcall hkpMultiSphereShape::hkpMultiSphereShape(hkpMultiSphereShape *th
   v3 = numSpheres;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   *(_DWORD *)&this->m_type.m_storage = 1049;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpMultiSphereShape::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpMultiSphereShape::`vftable;
   this->m_userData = 0i64;
   v4 = v3;
   if ( (signed int)v3 > 0 )
@@ -36,7 +36,7 @@ void __fastcall hkpMultiSphereShape::hkpMultiSphereShape(hkpMultiSphereShape *th
 
   v2 = this;
   hkpShape::hkpShape((hkpShape *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpMultiSphereShape::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpMultiSphereShape::`vftable;
   v2->m_type.m_storage = 25;
 }
 

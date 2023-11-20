@@ -473,7 +473,7 @@ hkDataArrayImpl *__fastcall hkDataArrayNative::asArray(hkDataArrayNative *this, 
       *(_DWORD *)(v7 + 32) = v13;
       *(_DWORD *)(v7 + 36) = v5;
       *(_DWORD *)(v7 + 40) = v12;
-      *(_QWORD *)v7 = &hkDataArrayNative::`vftable';
+      *(_QWORD *)v7 = &hkDataArrayNative::`vftable;
       *(_DWORD *)(v7 + 44) = v11;
       *(_QWORD *)(v7 + 48) = v10;
       *(_DWORD *)(v7 + 64) = 0;
@@ -502,7 +502,7 @@ hkDataArrayImpl *__fastcall hkDataArrayNative::asArray(hkDataArrayNative *this, 
   *(_DWORD *)(v17 + 32) = v23;
   *(_DWORD *)(v17 + 36) = v15;
   *(_DWORD *)(v17 + 40) = v22;
-  *(_QWORD *)v17 = &hkDataArrayNative::`vftable';
+  *(_QWORD *)v17 = &hkDataArrayNative::`vftable;
   *(_DWORD *)(v17 + 44) = 0;
   *(_QWORD *)(v17 + 48) = v21;
   *(_DWORD *)(v17 + 64) = 0;
@@ -549,7 +549,7 @@ hkDataArrayImpl *__fastcall hkDataArrayNative::swizzleObjectMember(hkDataArrayNa
     v13 = (hkDataRefCountedVtbl *)v2->m_world;
     v14 = v2->m_elementStride;
     LODWORD(v9[2].vfptr) = v2->m_arraySize;
-    v9->vfptr = (hkDataRefCountedVtbl *)&hkDataArrayNative::`vftable';
+    v9->vfptr = (hkDataRefCountedVtbl *)&hkDataArrayNative::`vftable;
     *(_QWORD *)&v9->m_memSize = 0xFFFFi64;
     v9[1].vfptr = v13;
     *(_QWORD *)&v9[4].m_memSize = 0i64;
@@ -931,7 +931,7 @@ void __fastcall hkDataObjectNative::hkDataObjectNative(hkDataObjectNative *this,
 
   *(_QWORD *)&this->m_memSize = 0xFFFFi64;
   v3 = world;
-  this->vfptr = (hkDataRefCountedVtbl *)&hkDataObjectNative::`vftable';
+  this->vfptr = (hkDataRefCountedVtbl *)&hkDataObjectNative::`vftable;
   v4 = (hkClass *)h->p1;
   v5 = h;
   v6 = this;
@@ -1191,7 +1191,7 @@ LABEL_17:
           *(_QWORD *)(v23 + 16) = v25;
           *(_DWORD *)(v23 + 32) = v7;
           *(_DWORD *)(v23 + 36) = v11;
-          *(_QWORD *)v23 = &hkDataArrayNative::`vftable';
+          *(_QWORD *)v23 = &hkDataArrayNative::`vftable;
           *(_DWORD *)(v23 + 40) = v10;
           *(_QWORD *)(v23 + 48) = v9;
           *(_QWORD *)(v23 + 72) = v4;
@@ -1217,7 +1217,7 @@ LABEL_17:
         {
           v16 = v3->m_world;
           *(_QWORD *)(v14 + 8) = 0xFFFFi64;
-          *(_QWORD *)v14 = &hkDataArrayNative::`vftable';
+          *(_QWORD *)v14 = &hkDataArrayNative::`vftable;
           *(_QWORD *)(v14 + 16) = v16;
           *(_QWORD *)(v14 + 24) = 0i64;
           *(_QWORD *)(v14 + 32) = 0i64;
@@ -1566,9 +1566,9 @@ hkClassAccessor *__fastcall hkNativeDataObjectImplCreate(hkVariant *v, hkDataWor
       v9 = hkClass::getName(v3->m_class);
       v10 = hkOstream::operator<<((hkOstream *)&v18.vfptr, "Ignore object at 0x");
       v11 = hkOstream::operator<<(v10, v3->m_object, (int)v10);
-      v12 = hkOstream::operator<<(v11, ". Class '");
+      v12 = hkOstream::operator<<(v11, ". Class ");
       v13 = hkOstream::operator<<(v12, v9);
-      hkOstream::operator<<(v13, "' is not registered in the provided hkDataWorldNative.");
+      hkOstream::operator<<(v13, " is not registered in the provided hkDataWorldNative.");
       hkError::messageWarning(402671418, &buf, "Data\\Native\\hkDataObjectNative.cpp", 800);
       hkOstream::~hkOstream((hkOstream *)&v18.vfptr);
       v3->m_object = 0i64;
@@ -1581,7 +1581,7 @@ hkClassAccessor *__fastcall hkNativeDataObjectImplCreate(hkVariant *v, hkDataWor
   if ( !v15 )
     return 0i64;
   v15->m_variant.m_class = (hkClass *)0xFFFF;
-  v15->m_variant.m_object = &hkDataObjectNative::`vftable';
+  v15->m_variant.m_object = &hkDataObjectNative::`vftable;
   hkClassAccessor::hkClassAccessor(v15 + 1, v3);
   v16[2].m_variant.m_object = v5;
   LOBYTE(v16[2].m_variant.m_class) = v20;
@@ -1618,7 +1618,7 @@ void __fastcall hkDataWorldNative::hkDataWorldNative(hkDataWorldNative *this, hk
 
   v12 = accessSerializeIgnored.m_bool;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkDataWorldNative::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkDataWorldNative::`vftable;
   this->m_reg.m_pntr = 0i64;
   this->m_vtable.m_pntr = 0i64;
   this->m_infoReg.m_pntr = 0i64;
@@ -1675,7 +1675,7 @@ void __fastcall hkDataWorldNative::~hkDataWorldNative(hkDataWorldNative *this)
 
   v1 = this;
   v2 = (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&this->m_classes;
-  *(_QWORD *)&v2[-2].m_numElems = &hkDataWorldNative::`vftable';
+  *(_QWORD *)&v2[-2].m_numElems = &hkDataWorldNative::`vftable;
   v3 = hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator>::getIterator(v2);
   hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::isValid(
     (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&v1->m_classes,
@@ -1719,7 +1719,7 @@ void __fastcall hkDataWorldNative::~hkDataWorldNative(hkDataWorldNative *this)
   if ( v8 )
     hkReferencedObject::removeReference(v8);
   v1->m_reg.m_pntr = 0i64;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 860
@@ -1840,7 +1840,7 @@ hkDataClassImpl *__fastcall hkDataWorldNative::findClass(hkDataWorldNative *this
   {
     v7[1] = 0xFFFFi64;
     v7[2] = v5;
-    *v7 = &hkDataClassNative::`vftable';
+    *v7 = &hkDataClassNative::`vftable;
     v7[3] = v3;
   }
   else
@@ -1963,7 +1963,7 @@ hkDataObject *__fastcall hkDataWorldNative::getContents(hkDataWorldNative *this,
   if ( v5 )
   {
     v5->m_variant.m_class = (hkClass *)0xFFFF;
-    v5->m_variant.m_object = &hkDataObjectNative::`vftable';
+    v5->m_variant.m_object = &hkDataObjectNative::`vftable;
     hkClassAccessor::hkClassAccessor(v5 + 1, &v2->m_contents);
     v6[2].m_variant.m_object = v2;
     LOBYTE(v6[2].m_variant.m_class) = 0;

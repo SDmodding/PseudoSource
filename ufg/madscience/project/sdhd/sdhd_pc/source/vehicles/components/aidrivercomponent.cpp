@@ -101,8 +101,8 @@ void __fastcall UFG::AiDriverComponent::AiDriverComponent(UFG::AiDriverComponent
   v4 = (UFG::qNode<UFG::AiDriverComponent,UFG::AiDriverComponent> *)&v3->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AiDriverComponent::`vftable'{for `UFG::SimComponent'};
-  v3->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::AiDriverComponent::`vftable'{for `UFG::UpdateInterface'};
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AiDriverComponent::`vftable{for `UFG::SimComponent};
+  v3->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::AiDriverComponent::`vftable{for `UFG::UpdateInterface};
   UFG::RebindingComponentHandle<UFG::RoadSpaceComponent,0>::RebindingComponentHandle<UFG::RoadSpaceComponent,0>(&v3->m_pRoadSpace);
   UFG::RebindingComponentHandle<UFG::VehicleSubjectComponent,0>::RebindingComponentHandle<UFG::VehicleSubjectComponent,0>(&v3->m_pVehicleSubject);
   v31 = &v3->m_pChaseVehicleSubject;
@@ -353,8 +353,8 @@ void __fastcall UFG::AiDriverComponent::~AiDriverComponent(UFG::AiDriverComponen
   UFG::qNode<UFG::AiDriverComponent,UFG::AiDriverComponent> *v40; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AiDriverComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::AiDriverComponent::`vftable'{for `UFG::UpdateInterface'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AiDriverComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::AiDriverComponent::`vftable{for `UFG::UpdateInterface};
   if ( this->m_DriverProfile )
     this->m_DriverProfile = 0i64;
   if ( this == UFG::AiDriverComponent::s_AiDriverComponentpCurrentIterator )
@@ -6951,7 +6951,7 @@ UFG::qVector3 *__fastcall UFG::AiDriverComponent::SteerToAvoidGeometry(UFG::AiDr
         + (float)(UFG::qVector3::msDirUp.z * (float)(UFG::AiDriverComponent::m_fAvoidanceCastingRadius + 0.40000001));
     v57 = v29 + v27;
     v58 = v28 + v26;
-    v60 = &hkpSimpleClosestContactCollector::`vftable';
+    v60 = &hkpSimpleClosestContactCollector::`vftable;
     v62 = 0;
     v65 = _mm_shuffle_ps(v65, _mm_unpackhi_ps(v65, (__m128)xmmword_141A712A0), 196);
     v61 = 2139095022;
@@ -7087,7 +7087,7 @@ UFG::qVector3 *__fastcall UFG::AiDriverComponent::SteerToAvoidGeometry(UFG::AiDr
     v6->x = v9;
     v6->y = v10;
     v6->z = v11;
-    v60 = &hkpCdPointCollector::`vftable';
+    v60 = &hkpCdPointCollector::`vftable;
   }
   else
   {
@@ -9933,7 +9933,7 @@ void __fastcall UFG::AiDriverComponent::SetDrivingRoleByClassType(UFG::AiDriverC
   v3 = v2->mpWritableProperties;
   if ( v3 || (v3 = v2->mpConstProperties) != 0i64 )
   {
-    `eh vector constructor iterator'(&ptr, 4ui64, 16, (void (__fastcall *)(void *))BackInfo::BackInfo);
+    `eh vector constructor iterator(&ptr, 4ui64, 16, (void (__fastcall *)(void *))BackInfo::BackInfo);
     v4 = UFG::SimObjectUtility::GetClassTypes(v3, (UFG::qSymbol *)&ptr, 0x10u);
     v5 = 0;
     if ( v4 )
@@ -10007,7 +10007,7 @@ LABEL_26:
       v1->m_RoadRuleFlagsLocked = 1;
     }
 LABEL_27:
-    `eh vector destructor iterator'(&ptr, 4ui64, 16, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(&ptr, 4ui64, 16, (void (__fastcall *)(void *))_);
   }
 }
 

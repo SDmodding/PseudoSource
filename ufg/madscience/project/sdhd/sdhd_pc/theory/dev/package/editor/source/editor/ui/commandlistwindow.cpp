@@ -10,7 +10,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::Editor::DUICommand
     (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::Editor::DUICommandListWindow,UFG::DUIWindow>::sInventory.vfptr,
     "UFG::Editor::DUICommandListWindow",
     v0);
-  UFG::qReflectObjectType<UFG::Editor::DUICommandListWindow,UFG::DUIWindow>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::Editor::DUICommandListWindow>::`vftable';
+  UFG::qReflectObjectType<UFG::Editor::DUICommandListWindow,UFG::DUIWindow>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::Editor::DUICommandListWindow>::`vftable;
   UFG::qReflectInventory<UFG::Editor::DUICommandListWindow>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::Editor::DUICommandListWindow,UFG::DUIWindow>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
@@ -27,12 +27,12 @@ void __fastcall UFG::Editor::DUICommandListWindow::DUICommandListWindow(UFG::Edi
 
   v1 = this;
   UFG::DUIWindow::DUIWindow((UFG::DUIWindow *)&this->vfptr);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::Editor::DUICommandListWindow,UFG::DUIWindow>::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::Editor::DUICommandListWindow,UFG::DUIWindow>::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::Editor::DUICommandListWindow,UFG::DUIWindow>::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::Editor::DUICommandListWindow,UFG::DUIWindow>::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v1->mBaseNode.mUID = -1i64;
   v1->mTypeUID = UFG::qStringHash64("UFG::Editor::DUICommandListWindow", 0xFFFFFFFFFFFFFFFFui64);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::DUICommandListWindow::`vftable'{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>'};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::DUICommandListWindow::`vftable'{for `UFG::qSafePointerNode<UFG::DUIWindow>'};
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::DUICommandListWindow::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::DUICommandListWindow::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   v1->mScrollPos = 0i64;
   UFG::qString::Set(&v1->mTitle, "Command List");
 }
@@ -112,7 +112,7 @@ void __fastcall UFG::Editor::DUICommandListWindow::UpdateUI(UFG::Editor::DUIComm
     }
     UFG::CommandManager::SetActiveBindingMap(UFG::gCommandManager, (const char *)j[1].mNext);
   }
-  context.vfptr = (UFG::CommandContextVtbl *)&UFG::CommandContext::`vftable';
+  context.vfptr = (UFG::CommandContextVtbl *)&UFG::CommandContext::`vftable;
   retaddr = (char *)&context.mDictionary;
   UFG::qBaseTreeRB::qBaseTreeRB(&context.mDictionary.mTree);
   UFG::DUIContext::BeginScrollView(v2, &v3->mScrollPos);
@@ -125,7 +125,7 @@ void __fastcall UFG::Editor::DUICommandListWindow::UpdateUI(UFG::Editor::DUIComm
   }
   UFG::DUIContext::EndLayoutHorizontal(v2);
   UFG::DUIContext::EndScrollView(v2);
-  context.vfptr = (UFG::CommandContextVtbl *)&UFG::CommandContext::`vftable';
+  context.vfptr = (UFG::CommandContextVtbl *)&UFG::CommandContext::`vftable;
   retaddr = (char *)&context.mDictionary;
   if ( context.mDictionary.mTree.mCount )
   {

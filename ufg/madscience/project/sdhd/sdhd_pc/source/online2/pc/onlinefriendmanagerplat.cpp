@@ -98,7 +98,7 @@ __int64 __fastcall UFG::OnlineFriendManager::GetFriends(UFG::qList<UFG::OnlineFr
                   v24 = v23 + 1;
                   v24->mNext = v24;
                   v24[1].mNext = v24;
-                  v23->mNext = (UFG::allocator::free_link *)&UFG::OnlineFriend::`vftable';
+                  v23->mNext = (UFG::allocator::free_link *)&UFG::OnlineFriend::`vftable;
                   v25 = v23 + 3;
                   v44 = v25;
                   v25->mNext = v25;

@@ -28,7 +28,7 @@ void __fastcall UFG::GameSliceStreamer::GameSliceStreamer(UFG::GameSliceStreamer
   {
     LODWORD(v6->mNext) = 128;
     v2 = (signed __int64)&v6[1];
-    `eh vector constructor iterator'(
+    `eh vector constructor iterator(
       &v6[1],
       0x18ui64,
       128,
@@ -63,7 +63,7 @@ void __fastcall UFG::GameSliceStreamer::~GameSliceStreamer(UFG::GameSliceStreame
     if ( v3 )
     {
       v4 = &v3[-1].mScript.m_pPointer;
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         v3,
         0x18ui64,
         (int)v3[-1].mScript.m_pPointer,

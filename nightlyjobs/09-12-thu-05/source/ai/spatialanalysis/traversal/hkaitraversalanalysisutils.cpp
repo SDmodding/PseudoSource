@@ -554,7 +554,7 @@ void __fastcall hkaiTraversalAnalysisUtils::resolveHangs(hkVector4f *bottomLeftI
 
 // File Line: 372
 // RVA: 0xC3B400
-void __fastcall `anonymous namespace'::planeFromPoints(hkVector4f *p0, hkVector4f *p1, hkVector4f *p2, hkVector4f *planeOut)
+void __fastcall `anonymous namespace::planeFromPoints(hkVector4f *p0, hkVector4f *p1, hkVector4f *p2, hkVector4f *planeOut)
 {
   __m128 v4; // xmm1
   __m128 v5; // xmm6
@@ -596,7 +596,7 @@ void __fastcall `anonymous namespace'::planeFromPoints(hkVector4f *p0, hkVector4
 
 // File Line: 382
 // RVA: 0xC3B4C0
-void __fastcall `anonymous namespace'::planeFromPoints(hkVector4f *p0, hkVector4f *p1, hkVector4f *p2, hkVector4f *p3, hkVector4f *planeOut)
+void __fastcall `anonymous namespace::planeFromPoints(hkVector4f *p0, hkVector4f *p1, hkVector4f *p2, hkVector4f *p3, hkVector4f *planeOut)
 {
   __m128 v5; // xmm1
   __m128 v6; // xmm6
@@ -805,7 +805,7 @@ void __fastcall hkaiTraversalAnalysisUtils::findClearanceProfile(hkVector4f *lef
               _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v45, v44), v45)),
               _mm_mul_ps(v45, *(__m128 *)_xmm))));
   v48 = _mm_mul_ps(v47, rightStartIn->m_quad);
-  `anonymous namespace'::planeFromPoints(&p0, &p1, &p2, &p3, &planeOut);
+  `anonymous namespace::planeFromPoints(&p0, &p1, &p2, &p3, &planeOut);
   v63 = v24;
   v64 = v32;
   v65 = v40;

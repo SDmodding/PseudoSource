@@ -30,7 +30,7 @@ void __fastcall UFG::StimulusEmitterComponent::StimulusEmitterComponent(UFG::Sti
   v8 = (UFG::qNode<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList> *)&v7->mPrev;
   v8->mPrev = v8;
   v8->mNext = v8;
-  v7->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StimulusEmitterComponent::`vftable';
+  v7->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StimulusEmitterComponent::`vftable;
   v9 = UFG::qVector3::msZero.y;
   v10 = UFG::qVector3::msZero.z;
   v7->m_StimulusParameters.m_StimulusProducerOffset.x = UFG::qVector3::msZero.x;
@@ -108,7 +108,7 @@ void __fastcall UFG::StimulusEmitterComponent::~StimulusEmitterComponent(UFG::St
   UFG::qNode<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList> *v9; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StimulusEmitterComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StimulusEmitterComponent::`vftable;
   v2 = &this->m_pStimulusTarget;
   if ( this->m_pStimulusTarget.m_pPointer )
   {

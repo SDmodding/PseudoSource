@@ -10,7 +10,7 @@ void __fastcall UFG::NavAvoidanceStrategyORCA::NavAvoidanceStrategyORCA(UFG::Nav
 
   v1 = this;
   UFG::NavAvoidanceStrategy::NavAvoidanceStrategy((UFG::NavAvoidanceStrategy *)&this->vfptr);
-  v1->vfptr = (UFG::NavAvoidanceStrategyVtbl *)&UFG::NavAvoidanceStrategyORCA::`vftable';
+  v1->vfptr = (UFG::NavAvoidanceStrategyVtbl *)&UFG::NavAvoidanceStrategyORCA::`vftable;
   v2 = 0;
   v1->mNumActiveIndexes = 0;
   v3 = UFG::qMalloc(0x48ui64, UFG::gGlobalNewName, 0i64);

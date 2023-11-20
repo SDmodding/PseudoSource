@@ -125,7 +125,7 @@ __int64 __fastcall Scaleform::GFx::AS2::ArraySortFunctor::Compare(Scaleform::GFx
       v16 = Scaleform::GFx::AS2::Value::ToInt32(*(Scaleform::GFx::AS2::Value **)&v53.T.Type, v3->Env);
       if ( v3->Flags & 2 )
         v16 = -v16;
-      v52 = &Scaleform::GFx::AS2::FnCall::`vftable';
+      v52 = &Scaleform::GFx::AS2::FnCall::`vftable;
       v17 = v51;
       if ( !(v51 & 2) )
       {
@@ -152,14 +152,14 @@ __int64 __fastcall Scaleform::GFx::AS2::ArraySortFunctor::Compare(Scaleform::GFx
           }
         }
       }
-      v52 = &Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>::`vftable';
+      v52 = &Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>::`vftable;
       if ( v53.T.Type >= 5u )
         Scaleform::GFx::AS2::Value::DropRefs(&v53);
 LABEL_74:
       v6 = v16;
       goto LABEL_90;
     }
-    v52 = &Scaleform::GFx::AS2::FnCall::`vftable';
+    v52 = &Scaleform::GFx::AS2::FnCall::`vftable;
     v21 = v50;
     if ( !(v50 & 2) )
     {
@@ -186,7 +186,7 @@ LABEL_74:
         }
       }
     }
-    v52 = &Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>::`vftable';
+    v52 = &Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>::`vftable;
     if ( v53.T.Type >= 5u )
       Scaleform::GFx::AS2::Value::DropRefs(&v53);
   }
@@ -551,8 +551,8 @@ void __fastcall Scaleform::GFx::AS2::ArrayObject::ArrayObject(Scaleform::GFx::AS
   v2 = penv;
   v3 = this;
   Scaleform::GFx::AS2::Object::Object((Scaleform::GFx::AS2::Object *)&this->vfptr, penv);
-  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::ArrayObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::ArrayObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::ArrayObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::ArrayObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   v3->LogPtr = (Scaleform::Log *const )((__int64 (__cdecl *)(Scaleform::GFx::InteractiveObject *))v2->Target->vfptr[76].__vecDelDtor)(v2->Target);
   v5 = (signed __int64)&v3->Elements;
   *(_OWORD *)v5 = 0ui64;
@@ -576,8 +576,8 @@ void __fastcall Scaleform::GFx::AS2::ArrayObject::ArrayObject(Scaleform::GFx::AS
   v2 = psc;
   v3 = this;
   Scaleform::GFx::AS2::Object::Object((Scaleform::GFx::AS2::Object *)&this->vfptr, psc);
-  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::ArrayObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::ArrayObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::ArrayObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::ArrayObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   v3->LogPtr = 0i64;
   v5 = (signed __int64)&v3->Elements;
   *(_OWORD *)v5 = 0ui64;
@@ -596,8 +596,8 @@ void __fastcall Scaleform::GFx::AS2::ArrayObject::~ArrayObject(Scaleform::GFx::A
   Scaleform::GFx::AS2::ArrayObject *v1; // rbx
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::ArrayObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  this->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::ArrayObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+  this->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::ArrayObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  this->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::ArrayObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   Scaleform::GFx::AS2::ArrayObject::Resize(this, 0);
   if ( !_InterlockedDecrement((volatile signed __int32 *)((v1->StringValue.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
     ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
@@ -1510,7 +1510,7 @@ void __fastcall Scaleform::GFx::AS2::ArrayObject::ArrayConcat(Scaleform::GFx::AS
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "Array");
   }
 }
@@ -1589,7 +1589,7 @@ void __fastcall Scaleform::GFx::AS2::ArrayObject::ArrayJoin(Scaleform::GFx::AS2:
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "Array");
   }
 }
@@ -1642,7 +1642,7 @@ void __fastcall Scaleform::GFx::AS2::ArrayObject::ArrayPop(Scaleform::GFx::AS2::
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "Array");
   }
 }
@@ -1690,7 +1690,7 @@ void __fastcall Scaleform::GFx::AS2::ArrayObject::ArrayPush(Scaleform::GFx::AS2:
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "Array");
   }
 }
@@ -1744,7 +1744,7 @@ void __fastcall Scaleform::GFx::AS2::ArrayObject::ArrayReverse(Scaleform::GFx::A
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "Array");
   }
 }
@@ -1794,7 +1794,7 @@ void __fastcall Scaleform::GFx::AS2::ArrayObject::ArrayShift(Scaleform::GFx::AS2
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "Array");
   }
 }
@@ -1902,7 +1902,7 @@ void __fastcall Scaleform::GFx::AS2::ArrayObject::ArraySlice(Scaleform::GFx::AS2
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "Array");
   }
 }
@@ -2204,7 +2204,7 @@ LABEL_53:
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "Array");
   }
 }
@@ -2308,7 +2308,7 @@ void __fastcall Scaleform::GFx::AS2::ArrayObject::ArraySortOn(Scaleform::GFx::AS
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "Array");
     return;
   }
@@ -2432,7 +2432,7 @@ void __fastcall Scaleform::GFx::AS2::ArrayObject::ArraySortOn(Scaleform::GFx::AS
         {
           v28 = v27 + 1;
 LABEL_32:
-          Scaleform::ArrayDataBase<Scaleform::GFx::`anonymous namespace'::Range,AllocatorGH<Scaleform::GFx::`anonymous namespace'::Range,2>::AllocatorGH<Scaleform::GFx::`anonymous namespace'::Range,2>,AllocatorGH<Scaleform::GFx::`anonymous namespace'::Range,2>::ArrayDefaultPolicy>::Reserve(
+          Scaleform::ArrayDataBase<Scaleform::GFx::`anonymous namespace::Range,AllocatorGH<Scaleform::GFx::`anonymous namespace::Range,2>::AllocatorGH<Scaleform::GFx::`anonymous namespace::Range,2>,AllocatorGH<Scaleform::GFx::`anonymous namespace::Range,2>::ArrayDefaultPolicy>::Reserve(
             &pheapAddr,
             &pheapAddr,
             v28);
@@ -2870,7 +2870,7 @@ void __fastcall Scaleform::GFx::AS2::ArrayObject::ArraySplice(Scaleform::GFx::AS
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "Array");
   }
 }
@@ -2951,7 +2951,7 @@ void __fastcall Scaleform::GFx::AS2::ArrayObject::ArrayToString(Scaleform::GFx::
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "Array");
   }
 }
@@ -3005,7 +3005,7 @@ void __fastcall Scaleform::GFx::AS2::ArrayObject::ArrayUnshift(Scaleform::GFx::A
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
       v1->Env,
-      "Error: Null or invalid 'this' is used for a method of %s class.\n",
+      "Error: Null or invalid this is used for a method of %s class.\n",
       "Array");
   }
 }
@@ -3286,7 +3286,7 @@ void __fastcall Scaleform::GFx::AS2::ArrayObject::VisitMembers(Scaleform::GFx::A
       --v13->RefCount;
       if ( v14 )
         Scaleform::GFx::ASStringNode::ReleaseNode(v13);
-      v16.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable';
+      v16.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable;
       Scaleform::Formatter::~Formatter((Scaleform::Formatter *)&v16.vfptr);
     }
   }
@@ -3462,8 +3462,8 @@ void __fastcall Scaleform::GFx::AS2::ArrayCtorFunction::ArrayCtorFunction(Scalef
     (Scaleform::GFx::AS2::CFunctionObject *)&this->vfptr,
     psc,
     Scaleform::GFx::AS2::ArrayCtorFunction::GlobalCtor);
-  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::ArrayCtorFunction::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::ArrayCtorFunction::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::ArrayCtorFunction::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::ArrayCtorFunction::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   v4 = 0i64;
   if ( GASArrayConstTable[0].Name )
   {
@@ -3753,8 +3753,8 @@ Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::ArrayCtorFunct
   {
     v8 = Scaleform::GFx::AS2::GlobalContext::GetPrototype(v2, ASBuiltin_Object);
     Scaleform::GFx::AS2::Object::Object((Scaleform::GFx::AS2::Object *)v7, &psc);
-    *(_QWORD *)v7 = &Scaleform::GFx::AS2::ArrayObject::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    *(_QWORD *)(v7 + 32) = &Scaleform::GFx::AS2::ArrayObject::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
+    *(_QWORD *)v7 = &Scaleform::GFx::AS2::ArrayObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    *(_QWORD *)(v7 + 32) = &Scaleform::GFx::AS2::ArrayObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
     *(_QWORD *)(v7 + 96) = 0i64;
     v9 = (Scaleform::GFx::AS2::Object *)(v7 + 104);
     objproto.pObject = v9;
@@ -3793,7 +3793,7 @@ Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::ArrayCtorFunct
     *(_QWORD *)(v7 + 40) = v8;
     v12 = v7 + 144;
     flags = v12;
-    *(_QWORD *)v12 = &Scaleform::GFx::AS2::GASPrototypeBase::`vftable';
+    *(_QWORD *)v12 = &Scaleform::GFx::AS2::GASPrototypeBase::`vftable;
     *(_BYTE *)(v12 + 24) = 0;
     *(_QWORD *)(v12 + 8) = 0i64;
     *(_QWORD *)(v12 + 16) = 0i64;
@@ -3801,17 +3801,17 @@ Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::ArrayCtorFunct
     *(_QWORD *)(v7 + 176) = 0i64;
     *(_QWORD *)(v7 + 184) = 0i64;
     *(_QWORD *)(v7 + 200) = 0i64;
-    *(_QWORD *)v7 = &Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::ArrayObject,Scaleform::GFx::AS2::Environment>::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    *(_QWORD *)(v7 + 32) = &Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::ArrayObject,Scaleform::GFx::AS2::Environment>::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
-    *(_QWORD *)v12 = &Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::ArrayObject,Scaleform::GFx::AS2::Environment>::`vftable';
+    *(_QWORD *)v7 = &Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::ArrayObject,Scaleform::GFx::AS2::Environment>::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    *(_QWORD *)(v7 + 32) = &Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::ArrayObject,Scaleform::GFx::AS2::Environment>::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+    *(_QWORD *)v12 = &Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::ArrayObject,Scaleform::GFx::AS2::Environment>::`vftable;
     Scaleform::GFx::AS2::GASPrototypeBase::Init(
       (Scaleform::GFx::AS2::GASPrototypeBase *)(v7 + 144),
       (Scaleform::GFx::AS2::Object *)v7,
       &psc,
       v3);
-    *(_QWORD *)v7 = &Scaleform::GFx::AS2::ArrayProto::`vftable'{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>'};
-    *(_QWORD *)(v7 + 32) = &Scaleform::GFx::AS2::ArrayProto::`vftable'{for `Scaleform::GFx::AS2::ObjectInterface'};
-    *(_QWORD *)v12 = &Scaleform::GFx::AS2::ArrayProto::`vftable';
+    *(_QWORD *)v7 = &Scaleform::GFx::AS2::ArrayProto::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    *(_QWORD *)(v7 + 32) = &Scaleform::GFx::AS2::ArrayProto::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+    *(_QWORD *)v12 = &Scaleform::GFx::AS2::ArrayProto::`vftable;
     LOBYTE(flags) = 1;
     Scaleform::GFx::AS2::GASPrototypeBase::InitFunctionMembers(
       (Scaleform::GFx::AS2::GASPrototypeBase *)(v7 + 144),

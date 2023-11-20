@@ -3,7 +3,7 @@
 void __fastcall hkAlignSceneToNodeOptions::hkAlignSceneToNodeOptions(hkAlignSceneToNodeOptions *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkAlignSceneToNodeOptions::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkAlignSceneToNodeOptions::`vftable;
   hkStringPtr::hkStringPtr(&this->m_nodeName);
 }
 
@@ -14,7 +14,7 @@ void __fastcall hkAlignSceneToNodeOptions::hkAlignSceneToNodeOptions(hkAlignScen
   hkStringPtr *v2; // rcx
 
   v2 = &this->m_nodeName;
-  v2[-4].m_stringAndFlag = (const char *)&hkAlignSceneToNodeOptions::`vftable';
+  v2[-4].m_stringAndFlag = (const char *)&hkAlignSceneToNodeOptions::`vftable;
   hkStringPtr::hkStringPtr(v2, f);
 }
 

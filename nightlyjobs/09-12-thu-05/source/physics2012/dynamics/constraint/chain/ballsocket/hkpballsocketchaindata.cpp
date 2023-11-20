@@ -9,7 +9,7 @@ void __fastcall hkpBallSocketChainData::hkpBallSocketChainData(hkpBallSocketChai
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_userData = 0i64;
   v2 = &this->m_atoms.m_bridgeAtom;
-  *(_QWORD *)&v2[-1].m_type.m_storage = &hkpBallSocketChainData::`vftable';
+  *(_QWORD *)&v2[-1].m_type.m_storage = &hkpBallSocketChainData::`vftable;
   v2->m_type.m_storage = 1;
   v1->m_infos.m_data = 0i64;
   v1->m_infos.m_size = 0;
@@ -32,7 +32,7 @@ void __fastcall hkpBallSocketChainData::hkpBallSocketChainData(hkpBallSocketChai
   v3 = f.m_finishing;
   v2 = this;
   hkpConstraintData::hkpConstraintData((hkpConstraintData *)&this->vfptr, f);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpBallSocketChainData::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpBallSocketChainData::`vftable;
   if ( v3 )
   {
     hkpBridgeConstraintAtom::init(&v2->m_atoms.m_bridgeAtom, v2->m_atoms.m_bridgeAtom.m_constraintData);
@@ -49,7 +49,7 @@ void __fastcall hkpBallSocketChainData::~hkpBallSocketChainData(hkpBallSocketCha
   int v2; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpBallSocketChainData::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpBallSocketChainData::`vftable;
   v2 = this->m_infos.m_capacityAndFlags;
   this->m_infos.m_size = 0;
   if ( v2 >= 0 )
@@ -59,7 +59,7 @@ void __fastcall hkpBallSocketChainData::~hkpBallSocketChainData(hkpBallSocketCha
       32 * v2);
   v1->m_infos.m_data = 0i64;
   v1->m_infos.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 52

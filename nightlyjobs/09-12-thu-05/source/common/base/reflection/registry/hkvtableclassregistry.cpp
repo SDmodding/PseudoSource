@@ -112,7 +112,7 @@ hkReferencedObject *__fastcall hkVtableClassRegistrycreate()
   if ( result )
   {
     *(_DWORD *)&result->m_memSizeAndFlags = 0x1FFFF;
-    result->vfptr = (hkBaseObjectVtbl *)&hkVtableClassRegistry::`vftable';
+    result->vfptr = (hkBaseObjectVtbl *)&hkVtableClassRegistry::`vftable;
     result[1].vfptr = 0i64;
     *(_DWORD *)&result[1].m_memSizeAndFlags = 0;
     *(_DWORD *)(&result[1].m_referenceCount + 1) = -1;

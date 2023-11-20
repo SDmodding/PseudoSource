@@ -298,7 +298,7 @@ Scaleform::MemoryHeapMH *__fastcall Scaleform::HeapMH::RootMH::CreateHeap(Scalef
   if ( result )
   {
     Scaleform::MemoryHeap::MemoryHeap((Scaleform::MemoryHeap *)&result->vfptr);
-    v11->vfptr = (Scaleform::MemoryHeapVtbl *)&Scaleform::MemoryHeapMH::`vftable';
+    v11->vfptr = (Scaleform::MemoryHeapVtbl *)&Scaleform::MemoryHeapMH::`vftable;
     v11->pEngine = 0i64;
     v11->pDebugStorage = 0i64;
     v12 = (Scaleform::HeapMH::AllocEngineMH *)&v11[1];

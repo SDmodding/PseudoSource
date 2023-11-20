@@ -12,7 +12,7 @@ CAkSrcBaseEx *__fastcall CreateVorbisBankPlugin(void *in_pCtx)
   if ( result )
   {
     CAkSrcBaseEx::CAkSrcBaseEx(result, v1);
-    v3->vfptr = (CAkVPLNodeVtbl *)&CAkSrcBankVorbis::`vftable';
+    v3->vfptr = (CAkVPLNodeVtbl *)&CAkSrcBankVorbis::`vftable;
     v3[24].vfptr = 0i64;
     v3[24].m_pInput = 0i64;
     memset(&v3[5].m_pInput, 0, 0x128ui64);

@@ -94,7 +94,7 @@ UFG::allocator::free_link *__fastcall UFG::NavigationConfigs::CreateAvoidanceStr
         if ( v0 )
         {
           UFG::NavAvoidanceStrategy::NavAvoidanceStrategy((UFG::NavAvoidanceStrategy *)v0);
-          v1->mNext = (UFG::allocator::free_link *)&UFG::NavAvoidanceStrategyNone::`vftable';
+          v1->mNext = (UFG::allocator::free_link *)&UFG::NavAvoidanceStrategyNone::`vftable;
         }
         else
         {
@@ -110,7 +110,7 @@ UFG::allocator::free_link *__fastcall UFG::NavigationConfigs::CreateAvoidanceStr
     if ( v12 )
     {
       UFG::NavAvoidanceStrategy::NavAvoidanceStrategy((UFG::NavAvoidanceStrategy *)v12);
-      v1->mNext = (UFG::allocator::free_link *)&UFG::NavAvoidanceStrategyNone::`vftable';
+      v1->mNext = (UFG::allocator::free_link *)&UFG::NavAvoidanceStrategyNone::`vftable;
     }
     else
     {

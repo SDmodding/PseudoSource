@@ -563,7 +563,7 @@ _BOOL8 __fastcall UFG::qVRAMemoryPool::Init(UFG::qVRAMemoryPool *this, char *vra
   UFG::qPrintChannel::Print(
     &UFG::VRAMChannel,
     OUTPUT_LEVEL_WARNING,
-    "[VRAM Channel] - Init(%p, 0x%08x(%u), '%.64s', %u, %u, %p, 0x%08x(%u))\n");
+    "[VRAM Channel] - Init(%p, 0x%08x(%u), %.64s, %u, %u, %p, 0x%08x(%u))\n");
   v13 = 0;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMPoolsLock);
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&v11->mPoolLock);
@@ -640,7 +640,7 @@ void __fastcall UFG::qVRAMemoryPool::Close(UFG::qVRAMemoryPool *this)
 
   v1 = this->mName;
   v2 = this;
-  UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - '%.64s'->Close()\n");
+  UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - %.64s->Close()\n");
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMPoolsLock);
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&v2->mPoolLock);
   UFG::qVRAMemoryPool::AssertValid(v2);
@@ -684,7 +684,7 @@ void __fastcall UFG::qVRAMemoryPool::Close(UFG::qVRAMemoryPool *this)
       if ( v12 )
       {
         v13 = &v12[-1].mCallbackData32;
-        `eh vector destructor iterator'(
+        `eh vector destructor iterator(
           v12,
           0x80ui64,
           v12[-1].mCallbackData32,
@@ -744,7 +744,7 @@ char __fastcall UFG::qVRAMemoryPool::ForceEmptyPool(UFG::qVRAMemoryPool *this)
   UFG::BlockInfo *v5; // rdx
 
   v1 = this;
-  UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - '%.64s'->ForceEmptyPool()\n");
+  UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - %.64s->ForceEmptyPool()\n");
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&v1->mPoolLock);
   UFG::qVRAMemoryPool::AssertValid(v1);
   if ( v1->mInitialized == 1 )
@@ -850,7 +850,7 @@ _BOOL8 __fastcall UFG::qVRAMemoryPool::Allocate(UFG::qVRAMemoryPool *this, UFG::
   UFG::qPrintChannel::Print(
     &UFG::VRAMChannel,
     OUTPUT_LEVEL_WARNING,
-    "[VRAM Channel] - '%.64s'->Allocate(handle(%p), 0x%08x(%u), %s, '%.64s'%s, %u, 0x%08x, %s, 0x%016x64, 0x%08x)\n");
+    "[VRAM Channel] - %.64s->Allocate(handle(%p), 0x%08x(%u), %s, %.64s%s, %u, 0x%08x, %s, 0x%016x64, 0x%08x)\n");
   v61 = 0;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&v12->mPoolLock);
   UFG::qVRAMemoryPool::AssertValid(v12);
@@ -859,7 +859,7 @@ _BOOL8 __fastcall UFG::qVRAMemoryPool::Allocate(UFG::qVRAMemoryPool *this, UFG::
     UFG::qPrintChannel::Print(
       &UFG::VRAMChannel,
       OUTPUT_LEVEL_ERROR,
-      "[VRAM Channel]   Someone requested 0 bytes with name %.64s from pool '%.64s'\n");
+      "[VRAM Channel]   Someone requested 0 bytes with name %.64s from pool %.64s\n");
     UFG::qPrintChannel::Print(
       &UFG::VRAMChannel,
       OUTPUT_LEVEL_DEBUG,
@@ -1065,7 +1065,7 @@ LABEL_60:
         UFG::qPrintChannel::Print(
           &UFG::VRAMChannel,
           OUTPUT_LEVEL_WARNING,
-          "Pool '%s' (Free:%u Largest:%u) is too full for named allocation '%s' of size %u, allowable fail, try again next frame\n");
+          "Pool %s (Free:%u Largest:%u) is too full for named allocation %s of size %u, allowable fail, try again next frame\n");
         v11 = handlea;
         goto LABEL_61;
       }
@@ -1117,7 +1117,7 @@ LABEL_47:
 LABEL_61:
   if ( v12->mValidate )
   {
-    UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - '%.64s'->AssertValid()\n");
+    UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - %.64s->AssertValid()\n");
     UFG::qMutex::Lock((LPCRITICAL_SECTION)&v12->mPoolLock);
     if ( v12->mInitialized == 1 )
       UFG::qVRAMemoryPool::AssertValidInitialized(v12);
@@ -1128,7 +1128,7 @@ LABEL_61:
   UFG::qPrintChannel::Print(
     &UFG::VRAMChannel,
     OUTPUT_LEVEL_WARNING,
-    "[VRAM Channel] -   Allocated 0x%08x(%u) bytes at [%p - %p] named '%.64s' in pool '%.64s'\n");
+    "[VRAM Channel] -   Allocated 0x%08x(%u) bytes at [%p - %p] named %.64s in pool %.64s\n");
   return v61;
 }
 
@@ -1147,7 +1147,7 @@ __int64 __fastcall UFG::qVRAMemoryPool::PreMove(UFG::qVRAMemoryPool *this, UFG::
 
   v2 = this;
   v3 = handle;
-  UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - '%.64s'->PreMove(handle(%p))\n");
+  UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - %.64s->PreMove(handle(%p))\n");
   v4 = 0;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&v2->mPoolLock);
   UFG::qVRAMemoryPool::AssertValid(v2);
@@ -1196,7 +1196,7 @@ __int64 __fastcall UFG::qVRAMemoryPool::PostMove(UFG::qVRAMemoryPool *this, UFG:
 
   v2 = this;
   v3 = handle;
-  UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - '%.64s'->PostMove(handle(%p))\n");
+  UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - %.64s->PostMove(handle(%p))\n");
   v4 = 0;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&v2->mPoolLock);
   UFG::qVRAMemoryPool::AssertValid(v2);
@@ -1271,7 +1271,7 @@ _BOOL8 __fastcall UFG::qVRAMemoryPool::Free(UFG::qVRAMemoryPool *this, UFG::qVRA
   v3 = frames_to_delay;
   v4 = this;
   v5 = handle;
-  UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - '%.64s'->Free(handle(%p), %u)\n");
+  UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - %.64s->Free(handle(%p), %u)\n");
   v6 = 0;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&v4->mPoolLock);
   UFG::qVRAMemoryPool::AssertValid(v4);
@@ -1444,7 +1444,7 @@ __int64 __fastcall UFG::qVRAMemoryPool::Lock(UFG::qVRAMemoryPool *this, UFG::qVR
 
   v2 = this;
   v3 = handle;
-  UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - '%.64s'->Lock(handle(%p))\n");
+  UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - %.64s->Lock(handle(%p))\n");
   v4 = 0;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&v2->mPoolLock);
   UFG::qVRAMemoryPool::AssertValid(v2);
@@ -1501,7 +1501,7 @@ __int64 __fastcall UFG::qVRAMemoryPool::Unlock(UFG::qVRAMemoryPool *this, UFG::q
 
   v2 = this;
   v3 = handle;
-  UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - '%.64s'->Unlock(handle(%p))\n");
+  UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - %.64s->Unlock(handle(%p))\n");
   v4 = 0;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&v2->mPoolLock);
   UFG::qVRAMemoryPool::AssertValid(v2);
@@ -1630,7 +1630,7 @@ void __fastcall UFG::qVRAMemoryPool::AssertValid(UFG::qVRAMemoryPool *this)
   v1 = this;
   if ( this->mValidate )
   {
-    UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - '%.64s'->AssertValid()\n");
+    UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - %.64s->AssertValid()\n");
     UFG::qMutex::Lock((LPCRITICAL_SECTION)&v1->mPoolLock);
     if ( v1->mInitialized == 1 )
       UFG::qVRAMemoryPool::AssertValidInitialized(v1);
@@ -1675,21 +1675,21 @@ void __fastcall UFG::qVRAMemoryPool::Print(UFG::qVRAMemoryPool *this, unsigned i
   v4 = this;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->mPoolLock);
   UFG::qVRAMemoryPool::AssertValid(v4);
-  UFG::qPrintf("Summary of Pool %u '%s'\n", v4->mPoolID, v4->mName);
+  UFG::qPrintf("Summary of Pool %u %s\n", v4->mPoolID, v4->mName);
   if ( v3 & 1 )
   {
     v5 = v4->mOverflowVRAM;
     if ( v5 )
-      UFG::qPrintf("  Overflow qVRAMemoryPool ID:%u '%s'\n", v5->mPoolID, v5->mName);
+      UFG::qPrintf("  Overflow qVRAMemoryPool ID:%u %s\n", v5->mPoolID, v5->mName);
     v6 = v4->mOverflowMain;
     if ( v6 )
-      UFG::qPrintf("  Overflow qMemoryPool '%s'\n", v6->mData->mAllocator.mName);
+      UFG::qPrintf("  Overflow qMemoryPool %s\n", v6->mData->mAllocator.mName);
     v7 = v4->mMainMemoryPool;
     if ( v7 )
-      UFG::qPrintf("  Main Memory Allocations qMemoryPool '%s'\n", v7->mData->mAllocator.mName);
+      UFG::qPrintf("  Main Memory Allocations qMemoryPool %s\n", v7->mData->mAllocator.mName);
     if ( v4->mPoolMemory.mData )
       UFG::qPrintf(
-        "  Parent qVRAMemoryPool ID:%u '%s'\n",
+        "  Parent qVRAMemoryPool ID:%u %s\n",
         v4->mPoolMemory.mReadOnlyAndPoolID & 0x7FFF,
         UFG::qVRAMemoryPools::sVRAMemoryPools[v4->mPoolMemory.mReadOnlyAndPoolID & 0x7FFF]->mName);
     UFG::qPrintf("  Memory Range: %p - %p\n", v4->mVRAMemoryStart, &v4->mVRAMemoryStart[v4->mVRAMemorySize - 1]);
@@ -1893,7 +1893,7 @@ __int64 __fastcall UFG::qVRAMemoryPool::GetDefragmentMoves(UFG::qVRAMemoryPool *
   {
     v9 = 2;
   }
-  UFG::qPrintChannel::Print(&UFG::VRAMChannel, v9, "[VRAM Channel] - '%.64s'->GetDefragmentMoves(%p, %u)\n");
+  UFG::qPrintChannel::Print(&UFG::VRAMChannel, v9, "[VRAM Channel] - %.64s->GetDefragmentMoves(%p, %u)\n");
   v10 = 0;
   if ( v5 && v7 > 0 )
   {
@@ -2322,7 +2322,7 @@ void __fastcall UFG::qVRAMemoryPool::MoveCompleted(UFG::qVRAMemoryPool *this, UF
   UFG::qPrintChannel::Print(
     &UFG::VRAMChannel,
     OUTPUT_LEVEL_WARNING,
-    "[VRAM Channel] - '%.64s'->MoveCompleted(%p, %p)\n");
+    "[VRAM Channel] - %.64s->MoveCompleted(%p, %p)\n");
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&v5->mPoolLock);
   UFG::qVRAMemoryPool::AssertValid(v5);
   v4->mSourceHandle.mReadOnlyAndPoolID &= 0x7FFFu;
@@ -2511,7 +2511,7 @@ void __fastcall UFG::qVRAMemoryPool::MoveCompleted(UFG::qVRAMemoryPool *this, UF
   }
   if ( v5->mValidate )
   {
-    UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - '%.64s'->AssertValid()\n");
+    UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - %.64s->AssertValid()\n");
     v40 = (_RTL_CRITICAL_SECTION *)&v5->mPoolLock;
     UFG::qMutex::Lock((LPCRITICAL_SECTION)&v5->mPoolLock);
     if ( v5->mInitialized == 1 )
@@ -2920,7 +2920,7 @@ char __fastcall UFG::qVRAMemoryPool::InternalFree(UFG::qVRAMemoryPool *this, UFG
   UFG::qPrintChannel::Print(
     &UFG::VRAMChannel,
     OUTPUT_LEVEL_WARNING,
-    "[VRAM Channel] - '%.64s'->InternalFree(%p - [%04u]%p)\n");
+    "[VRAM Channel] - %.64s->InternalFree(%p - [%04u]%p)\n");
   v6 = v2->mUsage;
   if ( (unsigned __int8)v6 >= 2u )
   {
@@ -3389,7 +3389,7 @@ char __fastcall UFG::qVRAMemoryPools::InitSystem(char *main_pool_vram_start, uns
       {
         LODWORD(v18->mNext) = common_num_blocks;
         v20 = (UFG::BlockInfo *)&v18[1];
-        `eh vector constructor iterator'(
+        `eh vector constructor iterator(
           &v18[1],
           0x80ui64,
           common_num_blocks,
@@ -3551,11 +3551,11 @@ void UFG::qVRAMemoryPools::ServiceDeletes(void)
     v2 = *v0;
     if ( *v0 )
     {
-      UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - '%.64s'->ServiceDeletes()\n");
+      UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - %.64s->ServiceDeletes()\n");
       UFG::qMutex::Lock((LPCRITICAL_SECTION)&v2->mPoolLock);
       if ( v2->mValidate )
       {
-        UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - '%.64s'->AssertValid()\n");
+        UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - %.64s->AssertValid()\n");
         UFG::qMutex::Lock((LPCRITICAL_SECTION)&v2->mPoolLock);
         if ( v2->mInitialized == 1 )
           UFG::qVRAMemoryPool::AssertValidInitialized(v2);
@@ -3592,7 +3592,7 @@ void UFG::qVRAMemoryPools::ServiceDeletes(void)
       }
       if ( v2->mValidate )
       {
-        UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - '%.64s'->AssertValid()\n");
+        UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - %.64s->AssertValid()\n");
         UFG::qMutex::Lock((LPCRITICAL_SECTION)&v2->mPoolLock);
         if ( v2->mInitialized == 1 )
           UFG::qVRAMemoryPool::AssertValidInitialized(v2);
@@ -3827,12 +3827,12 @@ __int64 __fastcall UFG::qVRAMemoryPools::BindWithinContainer(UFG::qVRAMemoryHand
     UFG::qPrintChannel::Print(
       &UFG::VRAMChannel,
       OUTPUT_LEVEL_WARNING,
-      "[VRAM Channel] - '%.64s'->BindWithinContainer(handle(%p), %p, 0x%08x(%u), '%.64s'%s)\n");
+      "[VRAM Channel] - %.64s->BindWithinContainer(handle(%p), %p, 0x%08x(%u), %.64s%s)\n");
     v7 = 0;
     UFG::qMutex::Lock((LPCRITICAL_SECTION)&v9->mPoolLock);
     if ( v9->mValidate )
     {
-      UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - '%.64s'->AssertValid()\n");
+      UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - %.64s->AssertValid()\n");
       UFG::qMutex::Lock((LPCRITICAL_SECTION)&v9->mPoolLock);
       if ( v9->mInitialized == 1 )
         UFG::qVRAMemoryPool::AssertValidInitialized(v9);
@@ -3913,7 +3913,7 @@ __int64 __fastcall UFG::qVRAMemoryPools::BindWithinContainer(UFG::qVRAMemoryHand
 LABEL_22:
     if ( v9->mValidate )
     {
-      UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - '%.64s'->AssertValid()\n");
+      UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - %.64s->AssertValid()\n");
       UFG::qMutex::Lock((LPCRITICAL_SECTION)&v9->mPoolLock);
       if ( v9->mInitialized == 1 )
         UFG::qVRAMemoryPool::AssertValidInitialized(v9);

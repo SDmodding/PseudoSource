@@ -142,7 +142,7 @@ void __fastcall Scaleform::GFx::AS3::TR::ReadArgs::ReadArgs(Scaleform::GFx::AS3:
   v8->Size = 0i64;
   v8->Policy.Capacity = 0i64;
   this->CallArgs.Data.pHeap = v7;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     this->FixedArr,
     0x20ui64,
     8,
@@ -776,7 +776,7 @@ void __fastcall Scaleform::GFx::AS3::TR::State::exec_newobject(Scaleform::GFx::A
   Scaleform::ConstructorMov<Scaleform::GFx::AS3::Value>::Construct(
     &v3->OpStack.Data.Data[v3->OpStack.Data.Size - 1],
     &source);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     ptr.FixedArr,
     0x20ui64,
     8,
@@ -812,7 +812,7 @@ void __fastcall Scaleform::GFx::AS3::TR::State::exec_newarray(Scaleform::GFx::AS
   Scaleform::ConstructorMov<Scaleform::GFx::AS3::Value>::Construct(
     &v3->OpStack.Data.Data[v3->OpStack.Data.Size - 1],
     &source);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     ptr.FixedArr,
     0x20ui64,
     8,
@@ -4658,10 +4658,10 @@ void __fastcall Scaleform::GFx::AS3::Tracer::Tracer(Scaleform::GFx::AS3::Tracer 
 
   v4 = heap;
   v5 = this;
-  this->vfptr = (Scaleform::GFx::AS3::FlashUIVtbl *)&Scaleform::GFx::AS3::FlashUI::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::FlashUIVtbl *)&Scaleform::GFx::AS3::FlashUI::`vftable;
   this->State = 0;
   this->NeedToCheck = 0;
-  this->vfptr = (Scaleform::GFx::AS3::FlashUIVtbl *)&Scaleform::GFx::AS3::Tracer::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::FlashUIVtbl *)&Scaleform::GFx::AS3::Tracer::`vftable;
   this->Done = 0;
   this->Heap = heap;
   this->CF = cf;
@@ -5154,7 +5154,7 @@ void __fastcall Scaleform::GFx::AS3::Tracer::~Tracer(Scaleform::GFx::AS3::Tracer
   unsigned int v12; // eax
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::AS3::FlashUIVtbl *)&Scaleform::GFx::AS3::Tracer::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::FlashUIVtbl *)&Scaleform::GFx::AS3::Tracer::`vftable;
   v2 = this->Blocks.Root.pNext;
   v3 = &this->Blocks;
   if ( v2 != (Scaleform::GFx::AS3::TR::Block *)&this->Blocks )
@@ -5218,7 +5218,7 @@ void __fastcall Scaleform::GFx::AS3::Tracer::~Tracer(Scaleform::GFx::AS3::Tracer
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v1->PosToRecalculate.Data.Data);
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v1->NewOpcodePos.Data.Data);
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v1->OrigOpcodePos.Data.Data);
-  v1->vfptr = (Scaleform::GFx::AS3::FlashUIVtbl *)&Scaleform::GFx::AS3::FlashUI::`vftable';
+  v1->vfptr = (Scaleform::GFx::AS3::FlashUIVtbl *)&Scaleform::GFx::AS3::FlashUI::`vftable;
 }
 
 // File Line: 4386

@@ -72,12 +72,12 @@ void __fastcall Render::CoronaFlareManager::Init(Render::CoronaFlareManager *thi
       v2 = (_WORD *)((char *)&v4->mMaterialUser + v14);
     *v2 |= 0x20u;
   }
-  v15 = `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Material>'::`2'::result )
+  v15 = `UFG::qGetResourceInventory<Illusion::Material>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Material>::`2::result )
   {
     v16 = UFG::qResourceWarehouse::Instance();
     v15 = UFG::qResourceWarehouse::GetInventory(v16, 0xB4C26312);
-    `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result = v15;
+    `UFG::qGetResourceInventory<Illusion::Material>::`2::result = v15;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v1->mCoronaFlareMat.mPrev, 0xB4C26312, v3, v15);
   v17 = UFG::qStringHash32("cbFlareSettings", 0xFFFFFFFF);

@@ -37,9 +37,9 @@ void __fastcall finishLoadedObjecthkpDashpotAction(void *p, int finishing)
   {
     v2 = p;
     v3 = (hkStringPtr *)((char *)p + 40);
-    v3[-5].m_stringAndFlag = (const char *)&hkpAction::`vftable';
+    v3[-5].m_stringAndFlag = (const char *)&hkpAction::`vftable;
     hkStringPtr::hkStringPtr(v3, (hkFinishLoadedObjectFlag)finishing);
-    *v2 = &hkpDashpotAction::`vftable';
+    *v2 = &hkpDashpotAction::`vftable;
   }
 }
 
@@ -57,7 +57,7 @@ void **__fastcall getVtablehkpDashpotAction()
   hkStringPtr v1; // [rsp+48h] [rbp-60h]
 
   hkStringPtr::hkStringPtr(&v1, 0);
-  return &hkpDashpotAction::`vftable';
+  return &hkpDashpotAction::`vftable;
 }
 
 // File Line: 97

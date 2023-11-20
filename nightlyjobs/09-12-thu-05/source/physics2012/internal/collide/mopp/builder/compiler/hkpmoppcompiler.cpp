@@ -299,7 +299,7 @@ hkpMoppCode *__fastcall hkpMoppCompiler::compile(hkpMoppCompiler *this, hkpMoppM
       if ( v44 )
       {
         *(_DWORD *)(v44 + 8) = 0x1FFFF;
-        *(_QWORD *)v44 = &hkpMoppCode::`vftable';
+        *(_QWORD *)v44 = &hkpMoppCode::`vftable;
         *(_QWORD *)(v44 + 32) = 0i64;
         *(_DWORD *)(v44 + 40) = 0;
         *(_DWORD *)(v44 + 44) = 2147483648;
@@ -385,7 +385,7 @@ hkpMoppCode *__fastcall hkpMoppCompiler::compile(hkpMoppCompiler *this, hkpMoppM
     v20 = 0i64;
   }
   hkpMoppDefaultAssembler::~hkpMoppDefaultAssembler(&v65);
-  costFunction.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  costFunction.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
   hkpMoppCodeGenerator::~hkpMoppCodeGenerator(&code);
   return v20;
 }

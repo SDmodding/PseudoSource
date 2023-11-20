@@ -74,7 +74,7 @@ void __fastcall hkaiWorld::hkaiWorld(hkaiWorld *this, hkaiWorld::Cinfo *cInfo)
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v2 = 0i64;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiWorld::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiWorld::`vftable;
   this->m_streamingCollection.m_pntr = 0i64;
   this->m_cutter.m_pntr = 0i64;
   this->m_dynamicNavMeshMediator.m_pntr = 0i64;
@@ -279,7 +279,7 @@ void __fastcall hkaiWorld::hkaiWorld(hkaiWorld *this, hkFinishLoadedObjectFlag f
   fa = f.m_finishing;
   v2 = this;
   v3 = &this->m_defaultPathfindingInput;
-  v3[-2].m_searchParameters.m_costModifier = (hkaiAstarCostModifier *)&hkaiWorld::`vftable';
+  v3[-2].m_searchParameters.m_costModifier = (hkaiAstarCostModifier *)&hkaiWorld::`vftable;
   v3[-1].m_goalFaceKeys.m_capacityAndFlags = 2147483648;
   v3[-1].m_goalFaceKeys.m_data = 0i64;
   v3[-1].m_goalFaceKeys.m_size = 0;
@@ -337,7 +337,7 @@ void __fastcall hkaiWorld::~hkaiWorld(hkaiWorld *this)
 
   v1 = this->m_navMeshPathRequests.m_size - 1;
   v2 = this;
-  for ( this->vfptr = (hkBaseObjectVtbl *)&hkaiWorld::`vftable'; v1 >= 0; --v1 )
+  for ( this->vfptr = (hkBaseObjectVtbl *)&hkaiWorld::`vftable; v1 >= 0; --v1 )
     hkaiWorld::_deleteNavMeshPathRequestAt(v2, v1);
   for ( i = v2->m_navVolumePathRequests.m_size - 1; i >= 0; --i )
     hkaiWorld::_deleteNavVolumePathRequestAt(v2, i);
@@ -466,7 +466,7 @@ void __fastcall hkaiWorld::~hkaiWorld(hkaiWorld *this)
   if ( v35 )
     hkReferencedObject::removeReference(v35);
   v2->m_streamingCollection.m_pntr = 0i64;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 162

@@ -3,7 +3,7 @@
 void __fastcall hkaiNavMeshInstance::hkaiNavMeshInstance(hkaiNavMeshInstance *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshInstance::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshInstance::`vftable;
   this->m_originalFaces = 0i64;
   this->m_numOriginalFaces = 0;
   this->m_originalEdges = 0i64;
@@ -81,7 +81,7 @@ void __fastcall hkaiNavMeshInstance::hkaiNavMeshInstance(hkaiNavMeshInstance *th
   hkaiNavMesh *v3; // rcx
 
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshInstance::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshInstance::`vftable;
   if ( f.m_finishing )
   {
     v3 = this->m_originalMesh.m_pntr;
@@ -126,7 +126,7 @@ void __fastcall hkaiNavMeshInstance::~hkaiNavMeshInstance(hkaiNavMeshInstance *t
   hkReferencedObject *v18; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshInstance::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshInstance::`vftable;
   v2 = this->m_faceClearanceIndices.m_capacityAndFlags;
   this->m_faceClearanceIndices.m_size = 0;
   if ( v2 >= 0 )
@@ -275,7 +275,7 @@ void __fastcall hkaiNavMeshInstance::~hkaiNavMeshInstance(hkaiNavMeshInstance *t
   if ( v18 )
     hkReferencedObject::removeReference(v18);
   v1->m_originalMesh.m_pntr = 0i64;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 85

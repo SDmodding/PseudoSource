@@ -16,8 +16,8 @@ void __fastcall UFG::OSuiteDBLogger::OSuiteDBLogger(UFG::OSuiteDBLogger *this)
   v2 = (UFG::qNode<UFG::OSuiteManagerObserver,UFG::OSuiteManagerObserver> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (UFG::OSuiteManagerObserverVtbl *)&UFG::OSuiteManagerObserver::`vftable';
-  this->vfptr = (UFG::OSuiteManagerObserverVtbl *)&UFG::OSuiteDBLogger::`vftable';
+  this->vfptr = (UFG::OSuiteManagerObserverVtbl *)&UFG::OSuiteManagerObserver::`vftable;
+  this->vfptr = (UFG::OSuiteManagerObserverVtbl *)&UFG::OSuiteDBLogger::`vftable;
   v3 = 0;
   this->m_pWebServiceClient = 0i64;
   this->m_pMetricAppender = 0i64;

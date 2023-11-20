@@ -49,7 +49,7 @@ void __fastcall AErrMsg::AErrMsg(AErrMsg *this, AErrMsg *err_msg, const char *de
 // RVA: 0x223730
 void __fastcall AErrorOutputBase::~AErrorOutputBase(AErrorOutputBase *this)
 {
-  this->vfptr = (AErrorOutputBaseVtbl *)&AErrorOutputBase::`vftable';
+  this->vfptr = (AErrorOutputBaseVtbl *)&AErrorOutputBase::`vftable;
 }
 
 // File Line: 186
@@ -75,11 +75,11 @@ void ADebug::info(void)
   if ( ADebug::context_append(&str_p) )
   {
     _((AMD_HD3D *)&str_p);
-    if ( `anonymous namespace'::g_dprint_funcs.i_count )
+    if ( `anonymous namespace::g_dprint_funcs.i_count )
     {
-      v0 = `anonymous namespace'::g_dprint_funcs.i_array_p;
-      v1 = &`anonymous namespace'::g_dprint_funcs.i_array_p[`anonymous namespace'::g_dprint_funcs.i_count];
-      if ( `anonymous namespace'::g_dprint_funcs.i_array_p < v1 )
+      v0 = `anonymous namespace::g_dprint_funcs.i_array_p;
+      v1 = &`anonymous namespace::g_dprint_funcs.i_array_p[`anonymous namespace::g_dprint_funcs.i_count];
+      if ( `anonymous namespace::g_dprint_funcs.i_array_p < v1 )
       {
         do
         {
@@ -109,12 +109,12 @@ char __fastcall ADebug::context_append(AString *str_p)
   unsigned int v6; // ecx
 
   v1 = str_p;
-  if ( !`anonymous namespace'::g_context_funcs.i_count )
+  if ( !`anonymous namespace::g_context_funcs.i_count )
     return 0;
-  v2 = `anonymous namespace'::g_context_funcs.i_array_p;
+  v2 = `anonymous namespace::g_context_funcs.i_array_p;
   v3 = str_p->i_str_ref_p->i_length;
-  v4 = &`anonymous namespace'::g_context_funcs.i_array_p[`anonymous namespace'::g_context_funcs.i_count];
-  if ( `anonymous namespace'::g_context_funcs.i_array_p < v4 )
+  v4 = &`anonymous namespace::g_context_funcs.i_array_p[`anonymous namespace::g_context_funcs.i_count];
+  if ( `anonymous namespace::g_context_funcs.i_array_p < v4 )
   {
     do
     {
@@ -174,12 +174,12 @@ void __fastcall ADebug::print(AString *str, bool call_print_funcs_b)
   _((AMD_HD3D *)str);
   v4 = 0i64;
   if ( v2 )
-    v4 = `anonymous namespace'::g_dprint_funcs.i_count;
+    v4 = `anonymous namespace::g_dprint_funcs.i_count;
   if ( (_DWORD)v4 )
   {
-    v5 = `anonymous namespace'::g_dprint_funcs.i_array_p;
-    v6 = &`anonymous namespace'::g_dprint_funcs.i_array_p[v4];
-    if ( `anonymous namespace'::g_dprint_funcs.i_array_p < v6 )
+    v5 = `anonymous namespace::g_dprint_funcs.i_array_p;
+    v6 = &`anonymous namespace::g_dprint_funcs.i_array_p[v4];
+    if ( `anonymous namespace::g_dprint_funcs.i_array_p < v6 )
     {
       do
       {
@@ -226,7 +226,7 @@ void __fastcall ADebug::print(const char *cstr_p, bool call_print_funcs_b)
     AStringRef::pool_delete(v7);
   v9 = 0i64;
   if ( v2 )
-    v9 = `anonymous namespace'::g_dprint_funcs.i_count;
+    v9 = `anonymous namespace::g_dprint_funcs.i_count;
   if ( (_DWORD)v9 )
   {
     do
@@ -234,9 +234,9 @@ void __fastcall ADebug::print(const char *cstr_p, bool call_print_funcs_b)
     while ( v3[v4] );
     v10 = AMemory::c_req_byte_size_func(v4 + 1);
     v14 = AStringRef::pool_new(v3, v4, v10, 1u, 0, 1);
-    v11 = `anonymous namespace'::g_dprint_funcs.i_array_p;
-    v12 = &`anonymous namespace'::g_dprint_funcs.i_array_p[v9];
-    if ( `anonymous namespace'::g_dprint_funcs.i_array_p < v12 )
+    v11 = `anonymous namespace::g_dprint_funcs.i_array_p;
+    v12 = &`anonymous namespace::g_dprint_funcs.i_array_p[v9];
+    if ( `anonymous namespace::g_dprint_funcs.i_array_p < v12 )
     {
       do
       {
@@ -320,11 +320,11 @@ LABEL_12:
   *(_DWORD *)(v5 + 16) = 16777217;
   v20 = (AStringRef *)v5;
   _((AMD_HD3D *)&v20);
-  if ( `anonymous namespace'::g_dprint_funcs.i_count )
+  if ( `anonymous namespace::g_dprint_funcs.i_count )
   {
-    v14 = `anonymous namespace'::g_dprint_funcs.i_array_p;
-    v15 = &`anonymous namespace'::g_dprint_funcs.i_array_p[`anonymous namespace'::g_dprint_funcs.i_count];
-    if ( `anonymous namespace'::g_dprint_funcs.i_array_p < v15 )
+    v14 = `anonymous namespace::g_dprint_funcs.i_array_p;
+    v15 = &`anonymous namespace::g_dprint_funcs.i_array_p[`anonymous namespace::g_dprint_funcs.i_count];
+    if ( `anonymous namespace::g_dprint_funcs.i_array_p < v15 )
     {
       do
       {

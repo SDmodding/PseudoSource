@@ -7,7 +7,7 @@ void __fastcall UFG::UIHKScreenOptionsButtonMapping::UIHKScreenOptionsButtonMapp
   v1 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -18,7 +18,7 @@ void __fastcall UFG::UIHKScreenOptionsButtonMapping::UIHKScreenOptionsButtonMapp
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenOptionsButtonMapping::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenOptionsButtonMapping::`vftable;
   this->mOnFootActions.pObjectInterface = 0i64;
   this->mOnFootActions.Type = 0;
   this->mOnFootInputs.pObjectInterface = 0i64;
@@ -42,7 +42,7 @@ void __fastcall UFG::UIHKScreenOptionsButtonMapping::~UIHKScreenOptionsButtonMap
   unsigned int v5; // eax
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenOptionsButtonMapping::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenOptionsButtonMapping::`vftable;
   v2 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseScreen(v2, "Options_ButtonMapping");
   v3 = UFG::UIHKScreenGlobalOverlay::mThis;
@@ -134,8 +134,8 @@ void __fastcall UFG::UIHKScreenOptionsButtonMapping::init(UFG::UIHKScreenOptions
   *(_QWORD *)&dataa.MessageIds[4] = 0i64;
   UFG::UIHKHelpBarWidget::Show(v4, &dataa);
   UFG::qString::~qString(&dataa.CustomTexturePack);
-  `eh vector destructor iterator'(dataa.Icons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
-  `eh vector destructor iterator'(dataa.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+  `eh vector destructor iterator(dataa.Icons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+  `eh vector destructor iterator(dataa.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
   if ( UFG::HudAudio::m_instance )
     UFG::AudioEntity::CreateAndPlayEvent(
       (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,

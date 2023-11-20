@@ -675,7 +675,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::BitmapData::rectGet(
 
   v2 = (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Object> *)result;
   v3 = this;
-  `eh vector constructor iterator'(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::Value);
   Scaleform::GFx::AS3::Value::SetNumber((Scaleform::GFx::AS3::Value *)&ptr, 0.0);
   Scaleform::GFx::AS3::Value::SetNumber(&v9, 0.0);
   v4 = (double)(signed int)v3->Width;
@@ -696,7 +696,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::BitmapData::rectGet(
     v3->pTraits.pObject->pVM[1].ExceptionObj.value.VS._1.VObj,
     4u,
     (Scaleform::GFx::AS3::Value *)&ptr);
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
 }
 
 // File Line: 247
@@ -1722,7 +1722,7 @@ LABEL_3:
     &resulta,
     (Scaleform::Render::Rect<long> *)&v24,
     v4->FilterData.pObject);
-  `eh vector constructor iterator'(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::Value);
   v16 = resulta.x1 * 0.050000001;
   if ( (float)(resulta.x1 * 0.050000001) <= 0.0 )
     v17 = v16 - 0.5;
@@ -1753,7 +1753,7 @@ LABEL_3:
     v7->pTraits.pObject->pVM[1].ExceptionObj.value.VS._1.VObj,
     4u,
     (Scaleform::GFx::AS3::Value *)&ptr);
-  `eh vector destructor iterator'(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
 }
 
 // File Line: 582
@@ -1815,7 +1815,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::BitmapData::getColor
             "flash.geom.Rectangle",
             4u,
             &argv)->Result == 0;
-    `eh vector destructor iterator'(&argv, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+    `eh vector destructor iterator(&argv, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
   }
   else
   {
@@ -1978,7 +1978,7 @@ LABEL_3:
       v4->pObject,
       4 * (sourceRect.y2 - sourceRect.y1) * (sourceRect.x2 - sourceRect.x1));
     v16 = (__int64)v4->pObject;
-    provider.vfptr = (Scaleform::Render::DIPixelProviderVtbl *)&Scaleform::GFx::AS3::AS3ByteArray_DIPixelProvider::`vftable';
+    provider.vfptr = (Scaleform::Render::DIPixelProviderVtbl *)&Scaleform::GFx::AS3::AS3ByteArray_DIPixelProvider::`vftable;
     v19 = v16;
     Scaleform::Render::DrawableImage::GetPixels(v10, &provider, &sourceRect);
   }
@@ -2062,7 +2062,7 @@ LABEL_3:
         v16.pObject,
         4 * (sourceRect.y2 - sourceRect.y1) * (sourceRect.x2 - sourceRect.x1));
       v18 = (__int64)v4->pObject;
-      provider.vfptr = (Scaleform::Render::DIPixelProviderVtbl *)&Scaleform::GFx::AS3::AS3Vectoruint_DIPixelProvider::`vftable';
+      provider.vfptr = (Scaleform::Render::DIPixelProviderVtbl *)&Scaleform::GFx::AS3::AS3Vectoruint_DIPixelProvider::`vftable;
       v22 = 0;
       v23 = v18;
       Scaleform::Render::DrawableImage::GetPixels(v9, &provider, &sourceRect);
@@ -2333,11 +2333,11 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::BitmapData::histogra
       Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_geom::Vector3D>::SetPtr(
         (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)v3,
         (Scaleform::GFx::AS3::Instances::fl::XMLList *)v.value.VS._1.VStr);
-      `eh vector constructor iterator'(
+      `eh vector constructor iterator(
         ptr,
         8ui64,
         4,
-        (void (__fastcall *)(void *))Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_vec::Vector_double>::`default constructor closure');
+        (void (__fastcall *)(void *))Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_vec::Vector_double>::`default constructor closure);
       v14 = 0;
       v15 = 0i64;
       while ( 2 )
@@ -2558,7 +2558,7 @@ LABEL_24:
           Scaleform::GFx::AS3::Multiname::~Multiname(&v47);
           if ( v31 )
             break;
-          `eh vector destructor iterator'(
+          `eh vector destructor iterator(
             &v55,
             0x20ui64,
             1,
@@ -2567,7 +2567,7 @@ LABEL_24:
           ++v15;
           if ( v14 < 4 )
             continue;
-          `eh vector destructor iterator'(
+          `eh vector destructor iterator(
             ptr,
             8ui64,
             4,
@@ -2586,12 +2586,12 @@ LABEL_24:
         break;
       }
 LABEL_69:
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         &v55,
         0x20ui64,
         1,
         (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         ptr,
         8ui64,
         4,
@@ -2600,7 +2600,7 @@ LABEL_69:
     if ( (v.Flags & 0x1F) <= 9 )
     {
 LABEL_77:
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         &argv,
         0x20ui64,
         1,
@@ -3442,7 +3442,7 @@ LABEL_3:
       Scaleform::GFx::ASStringNode::ReleaseNode(v8);
     return;
   }
-  provider.vfptr = (Scaleform::Render::DIPixelProviderVtbl *)&Scaleform::GFx::AS3::AS3ByteArray_DIPixelProvider::`vftable';
+  provider.vfptr = (Scaleform::Render::DIPixelProviderVtbl *)&Scaleform::GFx::AS3::AS3ByteArray_DIPixelProvider::`vftable;
   v19 = inputByteArray;
   v11 = (Scaleform::Render::DrawableImage *)Scaleform::GFx::AS3::Instances::fl_display::BitmapData::getDrawableImageFromBitmapData(
                                               this,
@@ -3534,7 +3534,7 @@ LABEL_3:
       Scaleform::GFx::ASStringNode::ReleaseNode(v8);
     return;
   }
-  provider.vfptr = (Scaleform::Render::DIPixelProviderVtbl *)&Scaleform::GFx::AS3::AS3Vectoruint_DIPixelProvider::`vftable';
+  provider.vfptr = (Scaleform::Render::DIPixelProviderVtbl *)&Scaleform::GFx::AS3::AS3Vectoruint_DIPixelProvider::`vftable;
   v23 = 0;
   v24 = (Scaleform::GFx::AS3::Instances::fl_events::MouseEvent *)inputVector;
   v11 = (Scaleform::Render::DrawableImage *)Scaleform::GFx::AS3::Instances::fl_display::BitmapData::getDrawableImageFromBitmapData(
@@ -3784,7 +3784,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::BitmapData::~BitmapD
   Scaleform::GFx::Resource *v7; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_display::BitmapData::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_display::BitmapData::`vftable;
   v2 = this->pImageResource.pObject;
   if ( v2 )
     Scaleform::GFx::Resource::Release((Scaleform::GFx::Resource *)&v2->vfptr);
@@ -3806,7 +3806,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::BitmapData::~BitmapD
   v7 = (Scaleform::GFx::Resource *)&v1->pImageResource.pObject->vfptr;
   if ( v7 )
     Scaleform::GFx::Resource::Release(v7);
-  v1->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instance::`vftable';
+  v1->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instance::`vftable;
   Scaleform::GFx::AS3::Traits::DestructTail(
     (Scaleform::GFx::AS3::Traits *)((_QWORD)v1->pTraits.pObject & 0xFFFFFFFFFFFFFFFEui64),
     (Scaleform::GFx::AS3::Object *)&v1->vfptr);
@@ -3914,7 +3914,7 @@ bool __fastcall Scaleform::GFx::AS3::Instances::fl_display::BitmapData::CreateLi
             v17 = Scaleform::GFx::StateBag::GetLog((Scaleform::GFx::StateBag *)&v14->pMovieImpl->vfptr, &v29)->pObject;
             if ( v29.pObject )
               Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v29.pObject);
-            Scaleform::Log::LogWarning(v17, "Attaching a bitmap with class '%s' failed", v16);
+            Scaleform::Log::LogWarning(v17, "Attaching a bitmap with class %s failed", v16);
           }
         }
         else if ( presBindData.pResource.pObject
@@ -4199,8 +4199,8 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v5 )
   {
     Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, v2, &Scaleform::GFx::AS3::fl_display::BitmapDataCI);
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable';
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_display::BitmapData::`vftable';
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable;
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_display::BitmapData::`vftable;
   }
   else
   {
@@ -4212,8 +4212,8 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   if ( v7 )
   {
     Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v7, v2, &Scaleform::GFx::AS3::fl_display::BitmapDataCI);
-    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable';
-    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_display::BitmapData::`vftable';
+    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable;
+    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_display::BitmapData::`vftable;
   }
   else
   {

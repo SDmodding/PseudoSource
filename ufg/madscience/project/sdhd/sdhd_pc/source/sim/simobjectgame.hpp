@@ -10,7 +10,7 @@ void __fastcall UFG::SimObjectProp::SimObjectProp(UFG::SimObjectProp *this, UFG:
   v3 = this;
   v4 = UFG::GetTypeTableProp();
   UFG::SimObjectGame::SimObjectGame((UFG::SimObjectGame *)&v3->vfptr, v4, v2);
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimObject>Vtbl *)&UFG::SimObjectProp::`vftable';
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimObject>Vtbl *)&UFG::SimObjectProp::`vftable;
   v3->m_Flags |= 0x2000u;
 }
 
@@ -26,7 +26,7 @@ void __fastcall UFG::SimObjectInterestPoint::SimObjectInterestPoint(UFG::SimObje
   v3 = this;
   v4 = UFG::GetTypeTableInterestPoint();
   UFG::SimObjectGame::SimObjectGame((UFG::SimObjectGame *)&v3->vfptr, v4, v2);
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimObject>Vtbl *)&UFG::SimObjectInterestPoint::`vftable';
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimObject>Vtbl *)&UFG::SimObjectInterestPoint::`vftable;
   v3->m_Flags |= 0x1000u;
 }
 
@@ -42,8 +42,8 @@ void __fastcall UFG::SimObjectCharacter::SimObjectCharacter(UFG::SimObjectCharac
   v3 = this;
   v4 = UFG::GetTypeTableCharacter();
   UFG::SimObjectGame::SimObjectGame((UFG::SimObjectGame *)&v3->vfptr, v4, v2);
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimObject>Vtbl *)&UFG::SimObjectCVBase::`vftable';
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimObject>Vtbl *)&UFG::SimObjectCharacter::`vftable';
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimObject>Vtbl *)&UFG::SimObjectCVBase::`vftable;
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimObject>Vtbl *)&UFG::SimObjectCharacter::`vftable;
   v3->m_Flags |= 0x4000u;
 }
 
@@ -59,8 +59,8 @@ void __fastcall UFG::SimObjectVehicle::SimObjectVehicle(UFG::SimObjectVehicle *t
   v3 = this;
   v4 = UFG::GetTypeTableVehicle();
   UFG::SimObjectGame::SimObjectGame((UFG::SimObjectGame *)&v3->vfptr, v4, v2);
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimObject>Vtbl *)&UFG::SimObjectCVBase::`vftable';
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimObject>Vtbl *)&UFG::SimObjectVehicle::`vftable';
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimObject>Vtbl *)&UFG::SimObjectCVBase::`vftable;
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimObject>Vtbl *)&UFG::SimObjectVehicle::`vftable;
   v3->m_Flags |= 0x8000u;
 }
 

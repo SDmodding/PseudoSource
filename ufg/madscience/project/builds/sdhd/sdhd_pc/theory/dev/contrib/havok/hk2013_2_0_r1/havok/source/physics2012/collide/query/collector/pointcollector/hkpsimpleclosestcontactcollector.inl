@@ -16,7 +16,7 @@ void __fastcall hkpSimpleClosestContactCollector::reset(hkpSimpleClosestContactC
 // RVA: 0x9DD80
 void __fastcall hkpSimpleClosestContactCollector::~hkpSimpleClosestContactCollector(hkpSimpleClosestContactCollector *this)
 {
-  this->vfptr = (hkpCdPointCollectorVtbl *)&hkpSimpleClosestContactCollector::`vftable';
-  this->vfptr = (hkpCdPointCollectorVtbl *)&hkpCdPointCollector::`vftable';
+  this->vfptr = (hkpCdPointCollectorVtbl *)&hkpSimpleClosestContactCollector::`vftable;
+  this->vfptr = (hkpCdPointCollectorVtbl *)&hkpCdPointCollector::`vftable;
 }
 

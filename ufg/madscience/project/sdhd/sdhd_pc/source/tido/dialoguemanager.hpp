@@ -14,7 +14,7 @@ void __fastcall UFG::ConversationElement::ConversationElement(UFG::ConversationE
   v4 = (UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *)&this->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  this->vfptr = (UFG::ConversationElementVtbl *)&UFG::ConversationElement::`vftable';
+  this->vfptr = (UFG::ConversationElementVtbl *)&UFG::ConversationElement::`vftable;
   this->m_playbackEvent.mUID = -1;
   _((AMD_HD3D *)0xFFFFFFFFi64);
   UFG::qString::qString(&v3->m_context);
@@ -61,7 +61,7 @@ void __fastcall UFG::ConversationElement::~ConversationElement(UFG::Conversation
   UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *v22; // rax
 
   v1 = this;
-  this->vfptr = (UFG::ConversationElementVtbl *)&UFG::ConversationElement::`vftable';
+  this->vfptr = (UFG::ConversationElementVtbl *)&UFG::ConversationElement::`vftable;
   v2 = (UFG::qList<UFG::GUIObjectBase,UFG::GUIObjectBase,1,0> *)&this->m_interruptionPoints;
   v3 = (UFG::SimComponent **)&this->m_interruptionPoints.mNode.mNext[-1].mNext;
   v4 = &this->m_tgtAac.m_pPointer;
@@ -169,7 +169,7 @@ void __fastcall UFG::ScriptedConversationElement::ScriptedConversationElement(UF
   v2 = symbol;
   v3 = this;
   UFG::ConversationElement::ConversationElement((UFG::ConversationElement *)&this->vfptr, 0);
-  v3->vfptr = (UFG::ConversationElementVtbl *)&UFG::ScriptedConversationElement::`vftable';
+  v3->vfptr = (UFG::ConversationElementVtbl *)&UFG::ScriptedConversationElement::`vftable;
   v3->m_script = 0i64;
   v3->m_nonCharInfo = 0i64;
   v3->m_instSpk = 0i64;
@@ -185,7 +185,7 @@ void __fastcall UFG::ConversationElementInterruption::~ConversationElementInterr
   UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *v2; // rcx
   UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *v3; // rax
 
-  this->vfptr = (UFG::ConversationElementInterruptionVtbl *)&UFG::ConversationElementInterruption::`vftable';
+  this->vfptr = (UFG::ConversationElementInterruptionVtbl *)&UFG::ConversationElementInterruption::`vftable;
   v1 = (UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *)&this->mPrev;
   v2 = this->mPrev;
   v3 = v1->mNext;
@@ -209,7 +209,7 @@ void __fastcall UFG::AmbientConversationConfigurator::Context::Context(UFG::Ambi
   v1 = (UFG::qNode<UFG::AmbientConversationConfigurator::Context,UFG::AmbientConversationConfigurator::Context> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (UFG::AmbientConversationConfigurator::ContextVtbl *)&UFG::AmbientConversationConfigurator::Context::`vftable';
+  this->vfptr = (UFG::AmbientConversationConfigurator::ContextVtbl *)&UFG::AmbientConversationConfigurator::Context::`vftable;
   this->m_weight = 0;
   v2 = &this->m_actions;
   v2->mNode.mPrev = &v2->mNode;
@@ -247,7 +247,7 @@ void __fastcall UFG::AmbientConversationConfigurator::Context::~Context(UFG::Amb
   UFG::qNode<UFG::AmbientConversationConfigurator::Context,UFG::AmbientConversationConfigurator::Context> *v12; // rax
 
   v1 = this;
-  this->vfptr = (UFG::AmbientConversationConfigurator::ContextVtbl *)&UFG::AmbientConversationConfigurator::Context::`vftable';
+  this->vfptr = (UFG::AmbientConversationConfigurator::ContextVtbl *)&UFG::AmbientConversationConfigurator::Context::`vftable;
   v2 = (UFG::qList<UFG::GUIObjectBase,UFG::GUIObjectBase,1,0> *)&this->m_actions;
   v3 = (unsigned int *)&this->m_actions.mNode.mNext[-1].mNext;
   v4 = &this->m_weight;

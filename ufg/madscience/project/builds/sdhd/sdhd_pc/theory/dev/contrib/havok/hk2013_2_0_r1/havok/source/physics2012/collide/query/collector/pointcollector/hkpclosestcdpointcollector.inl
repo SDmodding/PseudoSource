@@ -16,7 +16,7 @@ void __fastcall hkpClosestCdPointCollector::reset(hkpClosestCdPointCollector *th
 // RVA: 0x9DC60
 void __fastcall hkpClosestCdPointCollector::~hkpClosestCdPointCollector(hkpClosestCdPointCollector *this)
 {
-  this->vfptr = (hkpCdPointCollectorVtbl *)&hkpClosestCdPointCollector::`vftable';
-  this->vfptr = (hkpCdPointCollectorVtbl *)&hkpCdPointCollector::`vftable';
+  this->vfptr = (hkpCdPointCollectorVtbl *)&hkpClosestCdPointCollector::`vftable;
+  this->vfptr = (hkpCdPointCollectorVtbl *)&hkpCdPointCollector::`vftable;
 }
 

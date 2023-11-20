@@ -50,7 +50,7 @@ void __fastcall ActionNodePlayableDataBase::buildDatabase(ActionNodePlayableData
   ActionNodePlayableDataBase *v17; // [rsp+40h] [rbp-28h]
 
   v1 = this;
-  v16 = &ActionNode_BuildDatabase_Visitor::`vftable';
+  v16 = &ActionNode_BuildDatabase_Visitor::`vftable;
   v17 = this;
   if ( ActionNode::smRoot )
     ((void (__fastcall *)(ActionNode *, void ***))ActionNode::smRoot->vfptr[1].ResolveReferences)(

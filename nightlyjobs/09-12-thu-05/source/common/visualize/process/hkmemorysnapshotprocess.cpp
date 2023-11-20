@@ -34,8 +34,8 @@ void __fastcall hkMemorySnapshotProcess::hkMemorySnapshotProcess(hkMemorySnapsho
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_selectable.m_bool = 1;
-  this->vfptr = (hkBaseObjectVtbl *)&hkMemorySnapshotProcess::`vftable'{for `hkReferencedObject'};
-  this->vfptr = (hkProcessVtbl *)&hkMemorySnapshotProcess::`vftable'{for `hkProcess'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkMemorySnapshotProcess::`vftable{for `hkReferencedObject};
+  this->vfptr = (hkProcessVtbl *)&hkMemorySnapshotProcess::`vftable{for `hkProcess};
 }
 
 // File Line: 37

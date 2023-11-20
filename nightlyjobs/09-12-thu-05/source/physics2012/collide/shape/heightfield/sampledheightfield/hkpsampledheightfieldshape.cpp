@@ -16,7 +16,7 @@ void __fastcall hkpSampledHeightFieldShape::hkpSampledHeightFieldShape(hkpSample
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   *(_DWORD *)&this->m_type.m_storage = 1036;
   this->m_userData = 0i64;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpSampledHeightFieldShape::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpSampledHeightFieldShape::`vftable;
   this->m_coarseTreeData.m_data = 0i64;
   this->m_coarseTreeData.m_size = 0;
   this->m_coarseTreeData.m_capacityAndFlags = 2147483648;
@@ -75,7 +75,7 @@ void __fastcall hkpSampledHeightFieldShape::hkpSampledHeightFieldShape(hkpSample
   v2 = this;
   hkpShape::hkpShape((hkpShape *)&this->vfptr, flag);
   v2->m_type.m_storage = 28;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpSampledHeightFieldShape::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpSampledHeightFieldShape::`vftable;
   if ( v3 )
     v2->m_type.m_storage = 12;
 }
@@ -94,7 +94,7 @@ void __fastcall hkpSampledHeightFieldShape::~hkpSampledHeightFieldShape(hkpSampl
   int v8; // eax
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpSampledHeightFieldShape::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpSampledHeightFieldShape::`vftable;
   v2 = this->m_coarseTreeData.m_size;
   v3 = this->m_coarseTreeData.m_data;
   v4 = v2 - 1;
@@ -127,7 +127,7 @@ void __fastcall hkpSampledHeightFieldShape::~hkpSampledHeightFieldShape(hkpSampl
       24 * (v8 & 0x3FFFFFFF));
   v1->m_coarseTreeData.m_data = 0i64;
   v1->m_coarseTreeData.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 95
@@ -374,7 +374,7 @@ void __fastcall hkpSampledHeightFieldShape::getCoarseMinMax(hkpSampledHeightFiel
 
 // File Line: 214
 // RVA: 0xD16A90
-void __fastcall `anonymous namespace'::NearestHitCollector::addRayHit(NearestHitCollector *this, hkpCdBody *cdBody, hkpShapeRayCastCollectorOutput *hitInfoIn)
+void __fastcall `anonymous namespace::NearestHitCollector::addRayHit(NearestHitCollector *this, hkpCdBody *cdBody, hkpShapeRayCastCollectorOutput *hitInfoIn)
 {
   float v3; // xmm0_4
   hkpShapeRayCastOutput *v4; // rax
@@ -394,7 +394,7 @@ void __fastcall `anonymous namespace'::NearestHitCollector::addRayHit(NearestHit
 
 // File Line: 242
 // RVA: 0xD16AE0
-void __fastcall `anonymous namespace'::RotateNormalHitCollector::addRayHit(RotateNormalHitCollector *this, hkpCdBody *cdBody, hkpShapeRayCastCollectorOutput *hitIn)
+void __fastcall `anonymous namespace::RotateNormalHitCollector::addRayHit(RotateNormalHitCollector *this, hkpCdBody *cdBody, hkpShapeRayCastCollectorOutput *hitIn)
 {
   hkVector4f v3; // xmm0
   __m128 *v4; // rax
@@ -432,7 +432,7 @@ hkBool *__fastcall hkpSampledHeightFieldShape::castRay(hkpSampledHeightFieldShap
   v5 = result;
   v9 = results;
   v7.m_earlyOutHitFraction = v4;
-  v7.vfptr = (hkpRayHitCollectorVtbl *)&`anonymous namespace'::NearestHitCollector::`vftable';
+  v7.vfptr = (hkpRayHitCollectorVtbl *)&`anonymous namespace::NearestHitCollector::`vftable;
   v8 = 0;
   hkpSampledHeightFieldShape::s_rayCastFunc(this, input, 0i64, &v7);
   v5->m_bool = v8;
@@ -450,7 +450,7 @@ void __fastcall hkpSampledHeightFieldShape::castRayWithCollector(hkpSampledHeigh
   v4 = collector->m_earlyOutHitFraction;
   v6 = collector;
   v5.m_earlyOutHitFraction = v4;
-  v5.vfptr = (hkpRayHitCollectorVtbl *)&`anonymous namespace'::RotateNormalHitCollector::`vftable';
+  v5.vfptr = (hkpRayHitCollectorVtbl *)&`anonymous namespace::RotateNormalHitCollector::`vftable;
   hkpSampledHeightFieldShape::s_rayCastFunc(this, input, cdBody, &v5);
 }
 

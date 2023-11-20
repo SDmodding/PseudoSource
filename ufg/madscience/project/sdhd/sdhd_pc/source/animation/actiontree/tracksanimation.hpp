@@ -25,8 +25,8 @@ void __fastcall AnimationLockHighLODTrack::~AnimationLockHighLODTrack(AnimationL
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&AnimationLockHighLODTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&AnimationLockHighLODTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -37,7 +37,7 @@ void __fastcall AnimationLockHighLODTrack::~AnimationLockHighLODTrack(AnimationL
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 200
@@ -58,8 +58,8 @@ void __fastcall UFG::GetInFormationComponent::operator delete(void *ptr, const c
 // RVA: 0x29BF40
 void __fastcall IBlendTreeControllerTrack::~IBlendTreeControllerTrack(IBlendTreeControllerTrack *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&IBlendTreeControllerTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&IBlendTreeControllerTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 246
@@ -75,10 +75,10 @@ void __fastcall BlendTreeControllerTrackBase<BlendTreeControllerTargetDistancTas
 {
   UFG::qSymbolUC result; // [rsp+48h] [rbp+10h]
 
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
-  this->vfptr = (Expression::IMemberMapVtbl *)&IBlendTreeControllerTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&BlendTreeControllerTrackBase<BlendTreeControllerTargetDistancTask>::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&IBlendTreeControllerTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&BlendTreeControllerTrackBase<BlendTreeControllerTargetDistancTask>::`vftable;
   this->mBlendTreeName.mUID = -1;
   this->mBlendTreeControlSocket.mValue = 0;
   this->mBlendTreeName = (UFG::qSymbolUC)UFG::qSymbolUC::create_from_string(&result, "none")->mUID;
@@ -88,9 +88,9 @@ void __fastcall BlendTreeControllerTrackBase<BlendTreeControllerTargetDistancTas
 // RVA: 0x298E20
 void __fastcall BlendTreeControllerTrackBase<BlendTreeControllerTargetDistancTask>::~BlendTreeControllerTrackBase<BlendTreeControllerTargetDistancTask>(BlendTreeControllerTrackBase<BlendTreeControllerTargetDistancTask> *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&BlendTreeControllerTrackBase<BlendTreeControllerTargetDistancTask>::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&IBlendTreeControllerTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&BlendTreeControllerTrackBase<BlendTreeControllerTargetDistancTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&IBlendTreeControllerTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 350
@@ -158,7 +158,7 @@ void __usercall BlendTreeControllerTrackBase<BlendTreeControllerTask>::ApplySign
         else
         {
           v12 = signal;
-          v10 = &BlendNode_SetBlendWeight::`vftable';
+          v10 = &BlendNode_SetBlendWeight::`vftable;
           v9 = playingNode->vfptr;
           v11 = 0;
           ((void (__fastcall *)(PoseNode *, void ***, __int64, __int64, void **, _QWORD, _QWORD))v9[1].FindWithOldPath)(
@@ -166,7 +166,7 @@ void __usercall BlendTreeControllerTrackBase<BlendTreeControllerTask>::ApplySign
             &v10,
             a5,
             forceInput,
-            &BlendNode_SetBlendWeight::`vftable',
+            &BlendNode_SetBlendWeight::`vftable,
             *(_QWORD *)&v11,
             *(_QWORD *)&v12);
         }
@@ -221,7 +221,7 @@ BlendTreeControllerTargetDistancTrack *__fastcall BlendTreeControllerTargetDista
   if ( !v0 )
     return 0i64;
   BlendTreeControllerTrackBase<BlendTreeControllerTargetDistancTask>::BlendTreeControllerTrackBase<BlendTreeControllerTargetDistancTask>((BlendTreeControllerTrackBase<BlendTreeControllerTargetDistancTask> *)v0);
-  *(_QWORD *)v1 = &BlendTreeControllerTargetDistancTrack::`vftable';
+  *(_QWORD *)v1 = &BlendTreeControllerTargetDistancTrack::`vftable;
   *((_QWORD *)v1 + 3) = 0i64;
   *((_DWORD *)v1 + 8) = 0x40000000;
   return (BlendTreeControllerTargetDistancTrack *)v1;
@@ -256,8 +256,8 @@ void __fastcall PoseDriverDisableTrack::~PoseDriverDisableTrack(PoseDriverDisabl
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&PoseDriverDisableTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&PoseDriverDisableTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -268,7 +268,7 @@ void __fastcall PoseDriverDisableTrack::~PoseDriverDisableTrack(PoseDriverDisabl
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 629
@@ -292,7 +292,7 @@ void __fastcall AnimationBankReferenceTrack::~AnimationBankReferenceTrack(Animat
   char *v4; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&AnimationBankReferenceTrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&AnimationBankReferenceTrack::`vftable;
   if ( !(~LOBYTE(this->m_AnimationBankName.mOffset) & 1) )
   {
     if ( this->m_AnimationBankName.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
@@ -302,7 +302,7 @@ void __fastcall AnimationBankReferenceTrack::~AnimationBankReferenceTrack(Animat
         operator delete[](v2);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v3 = &v1->mMasterRate;
   if ( !(~LOBYTE(v1->mMasterRate.text.mOffset) & 1) )
   {
@@ -313,7 +313,7 @@ void __fastcall AnimationBankReferenceTrack::~AnimationBankReferenceTrack(Animat
         operator delete[](v4);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 649
@@ -332,8 +332,8 @@ void __fastcall AnimationBankPriorityTrack::~AnimationBankPriorityTrack(Animatio
   char *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&AnimationBankPriorityTrack::`vftable';
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&AnimationBankPriorityTrack::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
   v2 = &this->mMasterRate;
   if ( !(~LOBYTE(v2->text.mOffset) & 1) )
   {
@@ -344,7 +344,7 @@ void __fastcall AnimationBankPriorityTrack::~AnimationBankPriorityTrack(Animatio
         operator delete[](v3);
     }
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 675

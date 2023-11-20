@@ -9,6 +9,6 @@ void __fastcall hkpCdPointCollector::reset(hkpCdPointCollector *this)
 // RVA: 0x9DC50
 void __fastcall hkpCdPointCollector::~hkpCdPointCollector(hkpCdPointCollector *this)
 {
-  this->vfptr = (hkpCdPointCollectorVtbl *)&hkpCdPointCollector::`vftable';
+  this->vfptr = (hkpCdPointCollectorVtbl *)&hkpCdPointCollector::`vftable;
 }
 

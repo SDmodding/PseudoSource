@@ -7,16 +7,16 @@ void __fastcall OSuite::ZHttpStreamWriter::ZHttpStreamWriter(OSuite::ZHttpStream
   v1 = this;
   OSuite::ZHttpWriter::ZHttpWriter((OSuite::ZHttpWriter *)&this->vfptr);
   v1->m_httpConnection = 0i64;
-  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpStreamWriter::`vftable'{for `OSuite::ZObject'};
-  v1->vfptr = (OSuite::IWriterVtbl *)&OSuite::ZHttpStreamWriter::`vftable'{for `OSuite::IWriter'};
+  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpStreamWriter::`vftable{for `OSuite::ZObject};
+  v1->vfptr = (OSuite::IWriterVtbl *)&OSuite::ZHttpStreamWriter::`vftable{for `OSuite::IWriter};
 }
 
 // File Line: 24
 // RVA: 0xEDF0F0
 void __fastcall OSuite::ZHttpStreamWriter::~ZHttpStreamWriter(OSuite::ZHttpStreamWriter *this)
 {
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpStreamWriter::`vftable'{for `OSuite::ZObject'};
-  this->vfptr = (OSuite::IWriterVtbl *)&OSuite::ZHttpStreamWriter::`vftable'{for `OSuite::IWriter'};
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpStreamWriter::`vftable{for `OSuite::ZObject};
+  this->vfptr = (OSuite::IWriterVtbl *)&OSuite::ZHttpStreamWriter::`vftable{for `OSuite::IWriter};
   OSuite::ZHttpWriter::~ZHttpWriter((OSuite::ZHttpWriter *)&this->vfptr);
 }
 

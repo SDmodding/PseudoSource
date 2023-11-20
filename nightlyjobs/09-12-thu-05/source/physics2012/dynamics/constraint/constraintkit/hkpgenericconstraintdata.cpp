@@ -9,7 +9,7 @@ void __fastcall hkpGenericConstraintData::hkpGenericConstraintData(hkpGenericCon
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_userData = 0i64;
   v2 = &this->m_atoms.m_bridgeAtom;
-  *(_QWORD *)&v2[-1].m_type.m_storage = &hkpGenericConstraintData::`vftable';
+  *(_QWORD *)&v2[-1].m_type.m_storage = &hkpGenericConstraintData::`vftable;
   v2->m_type.m_storage = 1;
   v1->m_scheme.m_data.m_data = 0i64;
   v1->m_scheme.m_data.m_size = 0;
@@ -41,7 +41,7 @@ void __fastcall hkpGenericConstraintData::hkpGenericConstraintData(hkpGenericCon
   v2 = this;
   hkpConstraintData::hkpConstraintData((hkpConstraintData *)&this->vfptr, f);
   v3.m_finishing = fa;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpGenericConstraintData::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpGenericConstraintData::`vftable;
   if ( fa )
   {
     hkpBridgeConstraintAtom::init(&v2->m_atoms.m_bridgeAtom, v2->m_atoms.m_bridgeAtom.m_constraintData);
@@ -64,7 +64,7 @@ void __fastcall hkpGenericConstraintData::~hkpGenericConstraintData(hkpGenericCo
   int v6; // er8
   int v7; // er8
 
-  this->vfptr = (hkBaseObjectVtbl *)&hkpGenericConstraintData::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpGenericConstraintData::`vftable;
   v1 = this;
   v2 = 0;
   if ( this->m_scheme.m_motors.m_size > 0 )
@@ -114,7 +114,7 @@ void __fastcall hkpGenericConstraintData::~hkpGenericConstraintData(hkpGenericCo
       16 * v7);
   v1->m_scheme.m_data.m_data = 0i64;
   v1->m_scheme.m_data.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 53

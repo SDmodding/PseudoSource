@@ -7,14 +7,14 @@ void __fastcall UFG::RegionContainmentInfo::RegionContainmentInfo(UFG::RegionCon
   UFG::qSymbol *v3; // rbx
 
   v1 = this;
-  this->vfptr = (UFG::RegionContainmentInfoVtbl *)&UFG::RegionContainmentInfo::`vftable';
+  this->vfptr = (UFG::RegionContainmentInfoVtbl *)&UFG::RegionContainmentInfo::`vftable;
   this->m_regionsContainedIn.p = 0i64;
   *(_QWORD *)&this->m_regionsContainedIn.size = 0i64;
   v2 = this->m_regionsContainedIn.p;
   if ( v2 )
   {
     v3 = v2 - 1;
-    `eh vector destructor iterator'(v2, 4ui64, v2[-1].mUID, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v2, 4ui64, v2[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v3);
   }
   v1->m_regionsContainedIn.p = 0i64;
@@ -32,12 +32,12 @@ void __fastcall UFG::RegionContainmentInfo::~RegionContainmentInfo(UFG::RegionCo
   UFG::qSymbol *v5; // rbx
 
   v1 = this;
-  this->vfptr = (UFG::RegionContainmentInfoVtbl *)&UFG::RegionContainmentInfo::`vftable';
+  this->vfptr = (UFG::RegionContainmentInfoVtbl *)&UFG::RegionContainmentInfo::`vftable;
   v2 = this->m_regionsContainedIn.p;
   if ( v2 )
   {
     v3 = v2 - 1;
-    `eh vector destructor iterator'(v2, 4ui64, v2[-1].mUID, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v2, 4ui64, v2[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v3);
   }
   v1->m_regionsContainedIn.p = 0i64;
@@ -46,7 +46,7 @@ void __fastcall UFG::RegionContainmentInfo::~RegionContainmentInfo(UFG::RegionCo
   if ( v4 )
   {
     v5 = v4 - 1;
-    `eh vector destructor iterator'(v4, 4ui64, v4[-1].mUID, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v4, 4ui64, v4[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v5);
   }
   v1->m_regionsContainedIn.p = 0i64;

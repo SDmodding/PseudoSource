@@ -13,18 +13,18 @@ void __fastcall Render::DynamicLightInstance::~DynamicLightInstance(Render::Dyna
   UFG::qNode<Render::FXComponentInstance,Render::FXComponentInstance> *v9; // rax
 
   v1 = this;
-  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::DynamicLightInstance::`vftable';
+  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::DynamicLightInstance::`vftable;
   Render::DynamicLightInstance::Deactivate(this, 0);
-  v2 = `UFG::qGetResourceInventory<Render::DynamicLightSettings>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Render::DynamicLightSettings>'::`2'::result )
+  v2 = `UFG::qGetResourceInventory<Render::DynamicLightSettings>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Render::DynamicLightSettings>::`2::result )
   {
     v3 = UFG::qResourceWarehouse::Instance();
     v2 = UFG::qResourceWarehouse::GetInventory(v3, 0xD6CD7114);
-    `UFG::qGetResourceInventory<Render::DynamicLightSettings>'::`2'::result = v2;
+    `UFG::qGetResourceInventory<Render::DynamicLightSettings>::`2::result = v2;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mSettingsHandle.mPrev, v2);
   UFG::qResourceHandle::~qResourceHandle((UFG::qResourceHandle *)&v1->mSettingsHandle.mPrev);
-  v1->mLight.vfptr = (UFG::qSafePointerNode<Render::LightSafePointer>Vtbl *)&UFG::qSafePointerNode<Render::LightSafePointer>::`vftable';
+  v1->mLight.vfptr = (UFG::qSafePointerNode<Render::LightSafePointer>Vtbl *)&UFG::qSafePointerNode<Render::LightSafePointer>::`vftable;
   UFG::qSafePointerNode<UFG::DynamicCoverCorner>::SetAllPointersToNull((UFG::qSafePointerNode<UFG::ParkourHandle> *)&v1->mLight);
   v4 = &v1->mLight.m_SafePointerList;
   UFG::qList<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList,1,0>::DeleteNodes((UFG::qList<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList,1,0> *)&v1->mLight.m_SafePointerList);
@@ -34,7 +34,7 @@ void __fastcall Render::DynamicLightInstance::~DynamicLightInstance(Render::Dyna
   v6->mPrev = v5;
   v4->mNode.mPrev = &v4->mNode;
   v4->mNode.mNext = &v4->mNode;
-  v1->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable';
+  v1->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable;
   v7 = (UFG::qNode<Render::FXComponentInstance,Render::FXComponentInstance> *)&v1->mPrev;
   v8 = v1->mPrev;
   v9 = v1->mNext;
@@ -61,22 +61,22 @@ void __fastcall Render::DynamicLightInstance::Init(Render::DynamicLightInstance 
   this->mSettingsId = settingsId;
   if ( !v2 )
   {
-    v4 = `UFG::qGetResourceInventory<Render::DynamicLightSettings>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Render::DynamicLightSettings>'::`2'::result )
+    v4 = `UFG::qGetResourceInventory<Render::DynamicLightSettings>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Render::DynamicLightSettings>::`2::result )
     {
       v5 = UFG::qResourceWarehouse::Instance();
       v4 = UFG::qResourceWarehouse::GetInventory(v5, 0xD6CD7114);
-      `UFG::qGetResourceInventory<Render::DynamicLightSettings>'::`2'::result = v4;
+      `UFG::qGetResourceInventory<Render::DynamicLightSettings>::`2::result = v4;
     }
     UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v3->mSettingsHandle.mPrev, v4);
   }
-  v6 = `UFG::qGetResourceInventory<Render::DynamicLightSettings>'::`2'::result;
+  v6 = `UFG::qGetResourceInventory<Render::DynamicLightSettings>::`2::result;
   v7 = v3->mSettingsId;
-  if ( !`UFG::qGetResourceInventory<Render::DynamicLightSettings>'::`2'::result )
+  if ( !`UFG::qGetResourceInventory<Render::DynamicLightSettings>::`2::result )
   {
     v8 = UFG::qResourceWarehouse::Instance();
     v6 = UFG::qResourceWarehouse::GetInventory(v8, 0xD6CD7114);
-    `UFG::qGetResourceInventory<Render::DynamicLightSettings>'::`2'::result = v6;
+    `UFG::qGetResourceInventory<Render::DynamicLightSettings>::`2::result = v6;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v3->mSettingsHandle.mPrev, 0xD6CD7114, v7, v6);
   v3->mIsFlickeringLightOn = 0;
@@ -111,13 +111,13 @@ void __fastcall Render::DynamicLightInstance::Activate(Render::DynamicLightInsta
   {
     if ( !this->mSettingsHandle.mData )
     {
-      v2 = `UFG::qGetResourceInventory<Render::DynamicLightSettings>'::`2'::result;
+      v2 = `UFG::qGetResourceInventory<Render::DynamicLightSettings>::`2::result;
       v3 = this->mSettingsId;
-      if ( !`UFG::qGetResourceInventory<Render::DynamicLightSettings>'::`2'::result )
+      if ( !`UFG::qGetResourceInventory<Render::DynamicLightSettings>::`2::result )
       {
         v4 = UFG::qResourceWarehouse::Instance();
         v2 = UFG::qResourceWarehouse::GetInventory(v4, 0xD6CD7114);
-        `UFG::qGetResourceInventory<Render::DynamicLightSettings>'::`2'::result = v2;
+        `UFG::qGetResourceInventory<Render::DynamicLightSettings>::`2::result = v2;
       }
       UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v1->mSettingsHandle.mPrev, 0xD6CD7114, v3, v2);
     }
@@ -190,12 +190,12 @@ void __fastcall Render::DynamicLightInstance::Deactivate(Render::DynamicLightIns
   if ( this->mIsActive )
   {
     this->mIsActive = 0;
-    v3 = `UFG::qGetResourceInventory<Render::DynamicLightSettings>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Render::DynamicLightSettings>'::`2'::result )
+    v3 = `UFG::qGetResourceInventory<Render::DynamicLightSettings>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Render::DynamicLightSettings>::`2::result )
     {
       v4 = UFG::qResourceWarehouse::Instance();
       v3 = UFG::qResourceWarehouse::GetInventory(v4, 0xD6CD7114);
-      `UFG::qGetResourceInventory<Render::DynamicLightSettings>'::`2'::result = v3;
+      `UFG::qGetResourceInventory<Render::DynamicLightSettings>::`2::result = v3;
     }
     UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v2->mSettingsHandle.mPrev, v3);
     *(_QWORD *)&v2->mLight.light.mColor.x = 0i64;
@@ -283,13 +283,13 @@ void __fastcall Render::DynamicLightInstance::UpdateLight(Render::DynamicLightIn
   v5 = this;
   if ( !this->mSettingsHandle.mData )
   {
-    v6 = `UFG::qGetResourceInventory<Render::DynamicLightSettings>'::`2'::result;
+    v6 = `UFG::qGetResourceInventory<Render::DynamicLightSettings>::`2::result;
     v7 = this->mSettingsId;
-    if ( !`UFG::qGetResourceInventory<Render::DynamicLightSettings>'::`2'::result )
+    if ( !`UFG::qGetResourceInventory<Render::DynamicLightSettings>::`2::result )
     {
       v8 = UFG::qResourceWarehouse::Instance();
       v6 = UFG::qResourceWarehouse::GetInventory(v8, 0xD6CD7114);
-      `UFG::qGetResourceInventory<Render::DynamicLightSettings>'::`2'::result = v6;
+      `UFG::qGetResourceInventory<Render::DynamicLightSettings>::`2::result = v6;
     }
     UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v5->mSettingsHandle.mPrev, 0xD6CD7114, v7, v6);
   }

@@ -109,7 +109,7 @@ void __fastcall UFG::qSafePointerNode<NISInstance>::qSafePointerNode<NISInstance
   UFG::qSafePointerNode<NISInstance>Vtbl *v3; // rdx
   UFG::qNode<UFG::qSafePointerBase<NISInstance>,UFG::qSafePointerNodeList> *v4; // rcx
 
-  this->vfptr = (UFG::qSafePointerNode<NISInstance>Vtbl *)&UFG::qSafePointerNode<NISInstance>::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<NISInstance>Vtbl *)&UFG::qSafePointerNode<NISInstance>::`vftable;
   v1 = &this->m_SafePointerList;
   v1->mNode.mPrev = &v1->mNode;
   v1->mNode.mNext = &v1->mNode;
@@ -140,7 +140,7 @@ void __fastcall UFG::qSafePointerNode<UFG::GetInPedFormationNode>::~qSafePointer
   UFG::qList<UFG::qSafePointerBase<UFG::GetInPedFormationNode>,UFG::qSafePointerNodeList,1,0> *v4; // [rsp+40h] [rbp+8h]
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::GetInPedFormationNode>Vtbl *)&UFG::qSafePointerNode<UFG::GetInPedFormationNode>::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::GetInPedFormationNode>Vtbl *)&UFG::qSafePointerNode<UFG::GetInPedFormationNode>::`vftable;
   UFG::qSafePointerNode<UFG::DynamicCoverCorner>::SetAllPointersToNull((UFG::qSafePointerNode<UFG::ParkourHandle> *)this);
   v4 = &v1->m_SafePointerList;
   UFG::qList<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList,1,0>::DeleteNodes((UFG::qList<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList,1,0> *)&v1->m_SafePointerList);

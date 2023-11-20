@@ -10,7 +10,7 @@ __int64 dynamic_initializer_for__gDefaultCullLayer__()
   gDefaultCullLayer.mFrameCullBuckets.mNode.mNext = &gDefaultCullLayer.mFrameCullBuckets.mNode;
   gDefaultCullLayer.mPersistentCullBuckets.mNode.mPrev = &gDefaultCullLayer.mPersistentCullBuckets.mNode;
   gDefaultCullLayer.mPersistentCullBuckets.mNode.mNext = &gDefaultCullLayer.mPersistentCullBuckets.mNode;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     gDefaultCullLayer.mCullResultBuckets,
     8ui64,
     16,
@@ -43,7 +43,7 @@ __int64 dynamic_initializer_for__gDefaultOcclusionLayer__()
   gDefaultOcclusionLayer.mFrameCullBuckets.mNode.mNext = &gDefaultOcclusionLayer.mFrameCullBuckets.mNode;
   gDefaultOcclusionLayer.mPersistentCullBuckets.mNode.mPrev = &gDefaultOcclusionLayer.mPersistentCullBuckets.mNode;
   gDefaultOcclusionLayer.mPersistentCullBuckets.mNode.mNext = &gDefaultOcclusionLayer.mPersistentCullBuckets.mNode;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     gDefaultOcclusionLayer.mCullResultBuckets,
     8ui64,
     16,
@@ -262,7 +262,7 @@ void __fastcall CullLayer::CullLayer(CullLayer *this, CullLayer::CullLayerType t
   v7 = &this->mPersistentCullBuckets;
   v7->mNode.mPrev = &v7->mNode;
   v7->mNode.mNext = &v7->mNode;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     this->mCullResultBuckets,
     8ui64,
     16,
@@ -309,7 +309,7 @@ void __fastcall CullLayer::~CullLayer(CullLayer *this)
     v1->mNode.mNext = &v1->mNode;
     --v2->mNumCullLayers;
   }
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     &v1[5],
     8ui64,
     16,
@@ -469,7 +469,7 @@ CullManager *__fastcall CullManager::Instance()
   if ( !(_S1_2 & 1) )
   {
     _S1_2 |= 1u;
-    `eh vector constructor iterator'(
+    `eh vector constructor iterator(
       sCullManager.mCullLayers,
       0x10ui64,
       2,

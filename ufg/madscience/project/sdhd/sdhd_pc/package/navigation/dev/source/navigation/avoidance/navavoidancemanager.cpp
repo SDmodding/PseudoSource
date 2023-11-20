@@ -9,7 +9,7 @@ void UFG::NavAvoidanceManager::CreateInstance(void)
     v0 = (UFG::NavAvoidanceManager *)UFG::qMalloc(0x10ui64, "NavAvoidanceManager", 0i64);
     if ( v0 )
     {
-      v0->vfptr = (UFG::NavAvoidanceManagerVtbl *)&UFG::NavAvoidanceManager::`vftable';
+      v0->vfptr = (UFG::NavAvoidanceManagerVtbl *)&UFG::NavAvoidanceManager::`vftable;
       v0->mpAvoidanceStrategy = 0i64;
     }
     UFG::NavAvoidanceManager::mspAvoidanceManager = v0;

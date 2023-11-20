@@ -11,7 +11,7 @@ void __fastcall CAkLayer::~CAkLayer(CAkLayer *this)
   void *v7; // rdx
 
   v1 = this;
-  this->vfptr = (CAkIndexableVtbl *)&CAkLayer::`vftable';
+  this->vfptr = (CAkIndexableVtbl *)&CAkLayer::`vftable;
   v2 = 0;
   for ( i = 1i64; v1->m_RTPCBitArray.m_iBitArray; ++v2 )
   {
@@ -73,7 +73,7 @@ CAkLayer *__fastcall CAkLayer::Create(unsigned int in_ulID)
   if ( result )
   {
     CAkIndexable::CAkIndexable((CAkIndexable *)&result->vfptr, v1);
-    v3->vfptr = (CAkIndexableVtbl *)&CAkLayer::`vftable';
+    v3->vfptr = (CAkIndexableVtbl *)&CAkLayer::`vftable;
     v3->m_assocs.m_pItems = 0i64;
     *(_QWORD *)&v3->m_assocs.m_uLength = 0i64;
     v3->m_RTPCBitArray.m_iBitArray = 0;

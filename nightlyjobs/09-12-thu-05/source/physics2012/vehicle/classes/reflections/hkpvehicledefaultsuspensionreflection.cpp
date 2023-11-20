@@ -66,7 +66,7 @@ hkClass *__fastcall hkpVehicleDefaultSuspension::staticClass()
 void __fastcall finishLoadedObjecthkpVehicleDefaultSuspension(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpVehicleDefaultSuspension::`vftable';
+    *(_QWORD *)p = &hkpVehicleDefaultSuspension::`vftable;
 }
 
 // File Line: 118
@@ -80,7 +80,7 @@ void __fastcall cleanupLoadedObjecthkpVehicleDefaultSuspension(void *p)
 // RVA: 0xE257E0
 void **__fastcall getVtablehkpVehicleDefaultSuspension()
 {
-  return &hkpVehicleDefaultSuspension::`vftable';
+  return &hkpVehicleDefaultSuspension::`vftable;
 }
 
 // File Line: 144

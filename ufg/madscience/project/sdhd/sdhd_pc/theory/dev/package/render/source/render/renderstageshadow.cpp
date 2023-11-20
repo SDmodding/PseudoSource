@@ -328,121 +328,121 @@ void __fastcall UFG::RenderStageShadow::RenderStageShadow(UFG::RenderStageShadow
   BYTE4(v44[1].mNode.mParent) = 4;
   v46 = UFG::qResourceWarehouse::Instance();
   UFG::qResourceWarehouse::Add(v46, v45);
-  v47 = `UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result )
+  v47 = `UFG::qGetResourceInventory<Illusion::RasterState>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::RasterState>::`2::result )
   {
     v48 = UFG::qResourceWarehouse::Instance();
     v47 = UFG::qResourceWarehouse::GetInventory(v48, 0x3BC715E0u);
-    `UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result = v47;
+    `UFG::qGetResourceInventory<Illusion::RasterState>::`2::result = v47;
   }
   UFG::qResourceHandle::Init(v4, 0x3BC715E0u, 0x455DCC70u, v47);
-  v49 = `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result )
+  v49 = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Shader>::`2::result )
   {
     v50 = UFG::qResourceWarehouse::Instance();
     v49 = UFG::qResourceWarehouse::GetInventory(v50, 0x8B5561A1);
-    `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result = v49;
+    `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = v49;
   }
   UFG::qResourceHandle::Init(
     (UFG::qResourceHandle *)&v3->mCharacterShadowCollectorShaderHandle.mPrev,
     0x8B5561A1,
     0x17B8B4A8u,
     v49);
-  v51 = `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result )
+  v51 = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Shader>::`2::result )
   {
     v52 = UFG::qResourceWarehouse::Instance();
     v51 = UFG::qResourceWarehouse::GetInventory(v52, 0x8B5561A1);
-    `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result = v51;
+    `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = v51;
   }
   UFG::qResourceHandle::Init(
     (UFG::qResourceHandle *)&v3->mCharacterShadowCollectorLowShaderHandle.mPrev,
     0x8B5561A1,
     0x2915C547u,
     v51);
-  v53 = `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result )
+  v53 = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Shader>::`2::result )
   {
     v54 = UFG::qResourceWarehouse::Instance();
     v53 = UFG::qResourceWarehouse::GetInventory(v54, 0x8B5561A1);
-    `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result = v53;
+    `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = v53;
   }
   UFG::qResourceHandle::Init(
     (UFG::qResourceHandle *)&v3->mCharacterShadowCollectorHighShaderHandle.mPrev,
     0x8B5561A1,
     0xD5D6A024,
     v53);
-  v55 = `UFG::qGetResourceInventory<Illusion::AlphaState>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::AlphaState>'::`2'::result )
+  v55 = `UFG::qGetResourceInventory<Illusion::AlphaState>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::AlphaState>::`2::result )
   {
     v56 = UFG::qResourceWarehouse::Instance();
     v55 = UFG::qResourceWarehouse::GetInventory(v56, 0x12C800F2u);
-    `UFG::qGetResourceInventory<Illusion::AlphaState>'::`2'::result = v55;
+    `UFG::qGetResourceInventory<Illusion::AlphaState>::`2::result = v55;
   }
   UFG::qResourceHandle::Init(
     (UFG::qResourceHandle *)&v3->mCharacterShadowCollectorAlphaStateHandle.mPrev,
     0x12C800F2u,
     0x2782CCE6u,
     v55);
-  v57 = `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result )
+  v57 = `UFG::qGetResourceInventory<Illusion::Texture>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Texture>::`2::result )
   {
     v58 = UFG::qResourceWarehouse::Instance();
     v57 = UFG::qResourceWarehouse::GetInventory(v58, 0x8B43FABF);
-    `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result = v57;
+    `UFG::qGetResourceInventory<Illusion::Texture>::`2::result = v57;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v3->mNoiseTextureHandle.mPrev, 0x8B43FABF, 0x952102D8, v57);
-  v59 = `UFG::qGetResourceInventory<Illusion::AlphaState>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::AlphaState>'::`2'::result )
+  v59 = `UFG::qGetResourceInventory<Illusion::AlphaState>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::AlphaState>::`2::result )
   {
     v60 = UFG::qResourceWarehouse::Instance();
     v59 = UFG::qResourceWarehouse::GetInventory(v60, 0x12C800F2u);
-    `UFG::qGetResourceInventory<Illusion::AlphaState>'::`2'::result = v59;
+    `UFG::qGetResourceInventory<Illusion::AlphaState>::`2::result = v59;
   }
   UFG::qResourceHandle::Init(
     (UFG::qResourceHandle *)&v3->mAlphaStateNoColourWriteHandle.mPrev,
     0x12C800F2u,
     0x91A2DD53,
     v59);
-  v61 = `UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result )
+  v61 = `UFG::qGetResourceInventory<Illusion::RasterState>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::RasterState>::`2::result )
   {
     v62 = UFG::qResourceWarehouse::Instance();
     v61 = UFG::qResourceWarehouse::GetInventory(v62, 0x3BC715E0u);
-    `UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result = v61;
+    `UFG::qGetResourceInventory<Illusion::RasterState>::`2::result = v61;
   }
   UFG::qResourceHandle::Init(
     (UFG::qResourceHandle *)&v3->mRasterStateInvertCullingHandle.mPrev,
     0x3BC715E0u,
     0xBC9FAF09,
     v61);
-  v63 = `UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result )
+  v63 = `UFG::qGetResourceInventory<Illusion::RasterState>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::RasterState>::`2::result )
   {
     v64 = UFG::qResourceWarehouse::Instance();
     v63 = UFG::qResourceWarehouse::GetInventory(v64, 0x3BC715E0u);
-    `UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result = v63;
+    `UFG::qGetResourceInventory<Illusion::RasterState>::`2::result = v63;
   }
   UFG::qResourceHandle::Init(
     (UFG::qResourceHandle *)&v3->mRasterStateDoubleSidedHandle.mPrev,
     0x3BC715E0u,
     0x940FB8EC,
     v63);
-  v65 = `UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result )
+  v65 = `UFG::qGetResourceInventory<Illusion::RasterState>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::RasterState>::`2::result )
   {
     v66 = UFG::qResourceWarehouse::Instance();
     v65 = UFG::qResourceWarehouse::GetInventory(v66, 0x3BC715E0u);
-    `UFG::qGetResourceInventory<Illusion::RasterState>'::`2'::result = v65;
+    `UFG::qGetResourceInventory<Illusion::RasterState>::`2::result = v65;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v3->mRasterStateNormalHandle.mPrev, 0x3BC715E0u, 0x20688F05u, v65);
   v67 = UFG::qStringHash32("VertexDecl.Slim", 0xFFFFFFFF);
-  v68 = `UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result )
+  v68 = `UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result )
   {
     v69 = UFG::qResourceWarehouse::Instance();
     v68 = UFG::qResourceWarehouse::GetInventory(v69, 0x3E5FDA3Eu);
-    `UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result = v68;
+    `UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result = v68;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v3->mCloudVolumePrimitiveVertexDecl.mPrev, 0x3E5FDA3Eu, v67, v68);
 }
@@ -789,21 +789,21 @@ UFG::ShadowRenderQueueTaskResults *__fastcall UFG::RenderStageShadow::SubmitScen
   if ( !simpleInit_1 )
   {
     v12 = UFG::qStringHashUpper32("DR_EMITDEPTH_ALPHA", 0xFFFFFFFF);
-    v13 = `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result )
+    v13 = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::Shader>::`2::result )
     {
       v14 = UFG::qResourceWarehouse::Instance();
       v13 = UFG::qResourceWarehouse::GetInventory(v14, 0x8B5561A1);
-      `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result = v13;
+      `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = v13;
     }
     UFG::qResourceHandle::Init((UFG::qResourceHandle *)&simpleHandleAlpha_0.mPrev, 0x8B5561A1, v12, v13);
     v15 = UFG::qStringHashUpper32("DR_EMITDEPTH", 0xFFFFFFFF);
-    v16 = `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result )
+    v16 = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::Shader>::`2::result )
     {
       v17 = UFG::qResourceWarehouse::Instance();
       v16 = UFG::qResourceWarehouse::GetInventory(v17, 0x8B5561A1);
-      `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result = v16;
+      `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = v16;
     }
     UFG::qResourceHandle::Init((UFG::qResourceHandle *)&simpleHandle_1.mPrev, 0x8B5561A1, v15, v16);
     simpleInit_1 = 1;
@@ -1328,7 +1328,7 @@ LABEL_37:
   arg.mPrev = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
   arg.mNext = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
   v86 = &ptr.mStateArgs;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     ptr.mStateArgs.mStateArgs,
     0x10ui64,
     128,
@@ -1855,7 +1855,7 @@ LABEL_73:
     arg.mPrev = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
     arg.mNext = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
     *(_QWORD *)&vertex_count = (char *)&ptr + 1048;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       ptr.mStateArgs.mStateArgs,
       0x10ui64,
       128,
@@ -1930,7 +1930,7 @@ void __fastcall UFG::RenderStageShadow::DownsampleShadows(UFG::RenderStageShadow
   Render::View::Draw(&v14, &poly, v5->mMatDepthDownsampleShadow, 0i64);
   Render::View::EndTarget(&v14);
   v18 = &ptr.mStateArgs;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     ptr.mStateArgs.mStateArgs,
     0x10ui64,
     128,
@@ -2341,7 +2341,7 @@ LABEL_52:
       (UFG::qList<Illusion::RenderQueue,Illusion::RenderQueue,1,0> *)(v11 + 216),
       composite_cull_layera);
   v89 = &ptr.mStateArgs;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     ptr.mStateArgs.mStateArgs,
     0x10ui64,
     128,
@@ -2509,7 +2509,7 @@ void __fastcall UFG::RenderStageShadow::RenderCharacterShadowsIntoCollector(UFG:
   v7 = this;
   RenderQueueLayer::RenderQueueLayer(&v28);
   LayerSubmitContext::LayerSubmitContext(&ptr);
-  ptr.vfptr = (Illusion::SubmitContextVtbl *)&UFG::CharacterCollectorSubmitContext::`vftable';
+  ptr.vfptr = (Illusion::SubmitContextVtbl *)&UFG::CharacterCollectorSubmitContext::`vftable;
   v30 = v6;
   v28.mSerializationList = v4;
   ptr.mQueueMode = 0;
@@ -2593,7 +2593,7 @@ void __fastcall UFG::RenderStageShadow::RenderCharacterShadowsIntoCollector(UFG:
   arg.mPrev = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
   arg.mNext = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
   v32 = &ptr.mStateArgs;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     ptr.mStateArgs.mStateArgs,
     0x10ui64,
     128,
@@ -3473,12 +3473,12 @@ void __fastcall UFG::RenderStageShadow::RenderCharacterShadows(UFG::RenderStageS
       }
     }
   }
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     ptr.mStateArgs.mStateArgs,
     0x10ui64,
     128,
     (void (__fastcall *)(void *))UFG::qList<Render::Decal,Render::Decal,0,0>::~qList<Render::Decal,Render::Decal,0,0>);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     v229.mStateArgs.mStateArgs,
     0x10ui64,
     128,
@@ -3620,7 +3620,7 @@ void __fastcall UFG::RenderStageShadow::BlurCollector(UFG::RenderStageShadow *th
     arg.mNext = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
   }
   poly.mVertices = (Render::vDynamic *)&ptr.mStateArgs;
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     ptr.mStateArgs.mStateArgs,
     0x10ui64,
     128,

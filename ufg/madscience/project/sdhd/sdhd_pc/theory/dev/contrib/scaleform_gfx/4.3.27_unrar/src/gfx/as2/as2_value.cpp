@@ -610,7 +610,7 @@ Scaleform::GFx::ASString *__fastcall Scaleform::GFx::AS2::Value::ToStringImpl(Sc
           Scaleform::GFx::AS2::Value::ToFunction(&v54, &v40, v5);
           if ( v40.Function )
           {
-            *(_QWORD *)destStr = &Scaleform::GFx::AS2::FnCall::`vftable';
+            *(_QWORD *)destStr = &Scaleform::GFx::AS2::FnCall::`vftable;
             v46 = &v53;
             v47 = v20;
             v50 = 0;
@@ -856,7 +856,7 @@ LABEL_49:
       Scaleform::GFx::AS2::Value::ToFunction(&v23, &result, v2);
       if ( result.Function )
       {
-        v22.vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>Vtbl *)&Scaleform::GFx::AS2::FnCall::`vftable';
+        v22.vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>Vtbl *)&Scaleform::GFx::AS2::FnCall::`vftable;
         v22.Result = &v21;
         v22.ThisPtr = v9;
         v22.ThisFunctionRef.Flags = 0;
@@ -2460,7 +2460,7 @@ Scaleform::GFx::AS2::Value *__fastcall Scaleform::GFx::AS2::Value::ToPrimitive(S
       Scaleform::GFx::AS2::Value::ToFunction(&v35, &resulta, v4);
       if ( resulta.Function )
       {
-        v36.vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>Vtbl *)&Scaleform::GFx::AS2::FnCall::`vftable';
+        v36.vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>Vtbl *)&Scaleform::GFx::AS2::FnCall::`vftable;
         v36.Result = &v;
         v36.ThisPtr = v21;
         v36.ThisFunctionRef.Flags = 0;
@@ -2585,7 +2585,7 @@ char __fastcall Scaleform::GFx::AS2::Value::GetPropertyValue(Scaleform::GFx::AS2
     return 0;
   }
   v.T.Type = 0;
-  v8.vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>Vtbl *)&Scaleform::GFx::AS2::FnCall::`vftable';
+  v8.vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>Vtbl *)&Scaleform::GFx::AS2::FnCall::`vftable;
   v8.Result = &v;
   v8.ThisPtr = pthis;
   v8.ThisFunctionRef.Flags = 0;
@@ -2640,7 +2640,7 @@ void __fastcall Scaleform::GFx::AS2::Value::SetPropertyValue(Scaleform::GFx::AS2
       v9 = ((_QWORD)((char *)v6->Stack.pCurrent - (char *)v6->Stack.pPageStart) >> 5)
          + 32 * v6->Stack.Pages.Data.Size
          - 32;
-      v13.vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>Vtbl *)&Scaleform::GFx::AS2::FnCall::`vftable';
+      v13.vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>Vtbl *)&Scaleform::GFx::AS2::FnCall::`vftable;
       v13.Result = &v12;
       v13.ThisPtr = v5;
       v13.ThisFunctionRef.Flags = 0;

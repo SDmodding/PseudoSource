@@ -22,7 +22,7 @@ void __fastcall UFG::UIGfxTexture::UIGfxTexture(UFG::UIGfxTexture *this, Scalefo
     0,
     pimage,
     0i64);
-  v7->vfptr = (Scaleform::RefCountImplCoreVtbl *)&UFG::UIGfxTexture::`vftable';
+  v7->vfptr = (Scaleform::RefCountImplCoreVtbl *)&UFG::UIGfxTexture::`vftable;
   UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v7->Texture0.mUFGTexture.mPrev);
   v7->NeedsCacheFlush = 0;
   v7->TextureFlags |= 4u;
@@ -33,12 +33,12 @@ void __fastcall UFG::UIGfxTexture::UIGfxTexture(UFG::UIGfxTexture *this, Scalefo
   v7->pTextures->mIsWarehouseTexture = 1;
   v9 = v6->mNode.mUID;
   v10 = v7->pTextures;
-  v11 = `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result )
+  v11 = `UFG::qGetResourceInventory<Illusion::Texture>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Texture>::`2::result )
   {
     v12 = UFG::qResourceWarehouse::Instance();
     v11 = UFG::qResourceWarehouse::GetInventory(v12, 0x8B43FABF);
-    `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result = v11;
+    `UFG::qGetResourceInventory<Illusion::Texture>::`2::result = v11;
   }
   UFG::qResourceHandle::Init(
     (UFG::qResourceHandle *)&v10->mUFGTexture.mPrev,
@@ -64,7 +64,7 @@ void __fastcall UFG::UIGfxTexture::~UIGfxTexture(UFG::UIGfxTexture *this)
   Scaleform::Render::RenderBuffer *v10; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&UFG::UIGfxTexture::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&UFG::UIGfxTexture::`vftable;
   v2 = &this->pManagerLocks.pObject->TextureMutex;
   Scaleform::Mutex::DoLock(v2);
   if ( (unsigned int)(v1->State - 2) <= 1 )
@@ -96,16 +96,16 @@ void __fastcall UFG::UIGfxTexture::~UIGfxTexture(UFG::UIGfxTexture *this)
     ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
   Scaleform::Mutex::Unlock(v2);
   v7 = (UFG::qResourceHandle *)&v1->Texture0.mUFGTexture.mPrev;
-  v8 = `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result )
+  v8 = `UFG::qGetResourceInventory<Illusion::Texture>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Texture>::`2::result )
   {
     v9 = UFG::qResourceWarehouse::Instance();
     v8 = UFG::qResourceWarehouse::GetInventory(v9, 0x8B43FABF);
-    `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result = v8;
+    `UFG::qGetResourceInventory<Illusion::Texture>::`2::result = v8;
   }
   UFG::qResourceHandle::Close(v7, v8);
   UFG::qResourceHandle::~qResourceHandle(v7);
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Texture::`vftable';
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Texture::`vftable;
   v10 = (Scaleform::Render::RenderBuffer *)v1->pManagerLocks.pObject;
   if ( v10 )
     Scaleform::RefCountImpl::Release(v10);
@@ -233,12 +233,12 @@ LABEL_30:
     if ( !v20 )
       break;
     v23 = v20->mNode.mUID;
-    v24 = `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result )
+    v24 = `UFG::qGetResourceInventory<Illusion::Texture>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::Texture>::`2::result )
     {
       v25 = UFG::qResourceWarehouse::Instance();
       v24 = UFG::qResourceWarehouse::GetInventory(v25, 0x8B43FABF);
-      `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result = v24;
+      `UFG::qGetResourceInventory<Illusion::Texture>::`2::result = v24;
     }
     UFG::qResourceHandle::Init((UFG::qResourceHandle *)(v15 + 8), 0x8B43FABF, v23, v22, v24);
     UFG::qString::~qString(&v27);
@@ -312,23 +312,23 @@ LABEL_9:
   if ( v5->pFormat )
   {
 LABEL_18:
-    v15 = `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result;
+    v15 = `UFG::qGetResourceInventory<Illusion::Texture>::`2::result;
     v16 = v5->pTextures;
-    if ( !`UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result )
+    if ( !`UFG::qGetResourceInventory<Illusion::Texture>::`2::result )
     {
       v17 = UFG::qResourceWarehouse::Instance();
       v15 = UFG::qResourceWarehouse::GetInventory(v17, 0x8B43FABF);
-      `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result = v15;
+      `UFG::qGetResourceInventory<Illusion::Texture>::`2::result = v15;
     }
     UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v16->mUFGTexture.mPrev, v15);
-    v18 = `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result;
+    v18 = `UFG::qGetResourceInventory<Illusion::Texture>::`2::result;
     v19 = v10->mNode.mUID;
     v20 = v5->pTextures;
-    if ( !`UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result )
+    if ( !`UFG::qGetResourceInventory<Illusion::Texture>::`2::result )
     {
       v21 = UFG::qResourceWarehouse::Instance();
       v18 = UFG::qResourceWarehouse::GetInventory(v21, 0x8B43FABF);
-      `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result = v18;
+      `UFG::qGetResourceInventory<Illusion::Texture>::`2::result = v18;
     }
     UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v20->mUFGTexture.mPrev, 0x8B43FABF, v19, v18);
     v5->pTextures->Size.Width = v9;
@@ -413,21 +413,21 @@ void __fastcall UFG::UIGfxTexture::ApplyTexture(UFG::UIGfxTexture *this, __int64
     UFG::qStringHashUpper32("DEFAULT", 0xFFFFFFFF);
     UFG::qResourceHandle::qResourceHandle(&v17);
     v9 = DEFAULT_TEXTURE;
-    v10 = `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result )
+    v10 = `UFG::qGetResourceInventory<Illusion::Texture>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::Texture>::`2::result )
     {
       v11 = UFG::qResourceWarehouse::Instance();
       v10 = UFG::qResourceWarehouse::GetInventory(v11, 0x8B43FABF);
-      `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result = v10;
+      `UFG::qGetResourceInventory<Illusion::Texture>::`2::result = v10;
     }
     UFG::qResourceHandle::Init(&v17, 0x8B43FABF, v9, v10);
     v8 = v17.mData[3].mResourceHandles.mNode.mPrev;
-    v12 = `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result )
+    v12 = `UFG::qGetResourceInventory<Illusion::Texture>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::Texture>::`2::result )
     {
       v13 = UFG::qResourceWarehouse::Instance();
       v12 = UFG::qResourceWarehouse::GetInventory(v13, 0x8B43FABF);
-      `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result = v12;
+      `UFG::qGetResourceInventory<Illusion::Texture>::`2::result = v12;
     }
     UFG::qResourceHandle::Close(&v17, v12);
     UFG::qResourceHandle::~qResourceHandle(&v17);

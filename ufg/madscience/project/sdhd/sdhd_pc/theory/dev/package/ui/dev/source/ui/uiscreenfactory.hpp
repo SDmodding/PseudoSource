@@ -2,7 +2,7 @@
 // RVA: 0x5BDB00
 void __fastcall UFG::UIScreenFactoryBase::~UIScreenFactoryBase(UFG::UIScreenFactoryBase *this)
 {
-  this->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable';
+  this->vfptr = (UFG::UIScreenFactoryBaseVtbl *)&UFG::UIScreenFactoryBase::`vftable;
 }
 
 // File Line: 46
@@ -20,7 +20,7 @@ UFG::allocator::free_link *__fastcall UFG::UIScreenFactoryWrapper<UFG::UIHKScree
     v3 = result + 1;
     v3->mNext = v3;
     v3[1].mNext = v3;
-    v2->mNext = (UFG::allocator::free_link *)&UFG::UIScreen::`vftable';
+    v2->mNext = (UFG::allocator::free_link *)&UFG::UIScreen::`vftable;
     LODWORD(v2[11].mNext) = 0;
     v2[12].mNext = 0i64;
     v2[13].mNext = 0i64;
@@ -31,7 +31,7 @@ UFG::allocator::free_link *__fastcall UFG::UIScreenFactoryWrapper<UFG::UIHKScree
     v2[17].mNext = (UFG::allocator::free_link *)1120403456;
     LOBYTE(v2[3].mNext) = 0;
     --LODWORD(v2[15].mNext);
-    v2->mNext = (UFG::allocator::free_link *)&UFG::UIHKScreenScriptableList::`vftable';
+    v2->mNext = (UFG::allocator::free_link *)&UFG::UIHKScreenScriptableList::`vftable;
     result = v2;
   }
   return result;

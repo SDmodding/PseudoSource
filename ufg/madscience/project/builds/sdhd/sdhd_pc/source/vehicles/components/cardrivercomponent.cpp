@@ -42,8 +42,8 @@ void __fastcall UFG::CarHumanDriverComponent::CarHumanDriverComponent(UFG::CarHu
   v3 = (UFG::qNode<UFG::CarHumanDriverComponent,UFG::CarHumanDriverComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CarHumanDriverComponent::`vftable'{for `UFG::SimComponent'};
-  v2->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::CarHumanDriverComponent::`vftable'{for `UFG::UpdateInterface'};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CarHumanDriverComponent::`vftable{for `UFG::SimComponent};
+  v2->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::CarHumanDriverComponent::`vftable{for `UFG::UpdateInterface};
   v2->mNoCollision = -1.0;
   v4 = UFG::CarHumanDriverComponent::s_CarHumanDriverComponentList.mNode.mPrev;
   UFG::CarHumanDriverComponent::s_CarHumanDriverComponentList.mNode.mPrev->mNext = (UFG::qNode<UFG::CarHumanDriverComponent,UFG::CarHumanDriverComponent> *)&v2->mPrev;
@@ -83,8 +83,8 @@ void __fastcall UFG::CarHumanDriverComponent::~CarHumanDriverComponent(UFG::CarH
   UFG::qNode<UFG::CarHumanDriverComponent,UFG::CarHumanDriverComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CarHumanDriverComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::CarHumanDriverComponent::`vftable'{for `UFG::UpdateInterface'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CarHumanDriverComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::CarHumanDriverComponent::`vftable{for `UFG::UpdateInterface};
   if ( this == UFG::CarHumanDriverComponent::s_CarHumanDriverComponentpCurrentIterator )
     UFG::CarHumanDriverComponent::s_CarHumanDriverComponentpCurrentIterator = (UFG::CarHumanDriverComponent *)&this->mPrev[-25];
   v2 = (UFG::qNode<UFG::CarHumanDriverComponent,UFG::CarHumanDriverComponent> *)&this->mPrev;

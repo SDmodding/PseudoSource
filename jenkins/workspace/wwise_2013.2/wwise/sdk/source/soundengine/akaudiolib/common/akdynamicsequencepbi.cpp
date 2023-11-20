@@ -23,8 +23,8 @@ void __fastcall CAkDynamicSequencePBI::CAkDynamicSequencePBI(CAkDynamicSequenceP
     in_pBusLimiter);
   v15 = v14->m_pInstigator;
   v14->m_bRequestNextFromDynSeq = 1;
-  v14->vfptr = (CAkTransportAwareVtbl *)&CAkDynamicSequencePBI::`vftable'{for `CAkTransportAware'};
-  v14->vfptr = (ITransitionableVtbl *)&CAkContinuousPBI::`vftable'{for `ITransitionable'};
+  v14->vfptr = (CAkTransportAwareVtbl *)&CAkDynamicSequencePBI::`vftable{for `CAkTransportAware};
+  v14->vfptr = (ITransitionableVtbl *)&CAkContinuousPBI::`vftable{for `ITransitionable};
   v14->m_eDynamicSequenceType = in_eDynamicSequenceType;
   v14->m_startingNode = v15[6].key;
   v14->m_pDynSecCustomInfo = v15[7].vfptr;

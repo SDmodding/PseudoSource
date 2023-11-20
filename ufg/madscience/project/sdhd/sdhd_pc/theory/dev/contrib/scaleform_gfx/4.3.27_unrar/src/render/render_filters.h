@@ -4,15 +4,15 @@ void __fastcall Scaleform::Render::BlurFilterImpl::BlurFilterImpl(Scaleform::Ren
 {
   Scaleform::Render::BlurFilterParams *v2; // [rsp+30h] [rbp+18h]
 
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::Filter,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Filter::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::Filter,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Filter::`vftable;
   this->Type = type;
   this->Frozen = 0;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::BlurFilterImpl::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::BlurFilterImpl::`vftable;
   v2 = &this->Params;
   v2->Mode = 0;
   v2->Passes = 1;
@@ -37,15 +37,15 @@ void __fastcall Scaleform::Render::BlurFilterImpl::BlurFilterImpl(Scaleform::Ren
   Scaleform::Render::BlurFilterImpl *v3; // rbx
 
   v3 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::Filter,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Filter::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::Filter,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Filter::`vftable;
   this->Type = type;
   this->Frozen = 0;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::BlurFilterImpl::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::BlurFilterImpl::`vftable;
   Scaleform::Render::BlurFilterParams::BlurFilterParams(&this->Params, params);
   *(_QWORD *)&v3->Distance = 0i64;
 }
@@ -56,15 +56,15 @@ void __fastcall Scaleform::Render::BlurFilter::BlurFilter(Scaleform::Render::Blu
 {
   Scaleform::Render::BlurFilterParams *v4; // ST08_8
 
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::Filter,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Filter::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::Filter,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Filter::`vftable;
   this->Type = 0;
   this->Frozen = 0;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::BlurFilterImpl::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::BlurFilterImpl::`vftable;
   v4 = &this->Params;
   v4->Mode = 0;
   v4->Passes = 1;
@@ -79,7 +79,7 @@ void __fastcall Scaleform::Render::BlurFilter::BlurFilter(Scaleform::Render::Blu
   this->Params.Colors[1].Channels.Alpha = 0;
   *(_QWORD *)&this->Distance = 0i64;
   v4->Mode &= 0xFFFFFFF8;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::BlurFilter::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::BlurFilter::`vftable;
   this->Params.BlurX = blurx * 20.0;
   this->Params.BlurY = blury * 20.0;
   this->Params.Passes = passes;
@@ -94,15 +94,15 @@ void __fastcall Scaleform::Render::ShadowFilter::ShadowFilter(Scaleform::Render:
   float v8; // xmm6_4
 
   v6 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::Filter,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Filter::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::Filter,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Filter::`vftable;
   this->Type = 1;
   this->Frozen = 0;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::BlurFilterImpl::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::BlurFilterImpl::`vftable;
   v7 = &this->Params;
   v7->Mode = 0;
   v7->Passes = 1;
@@ -118,7 +118,7 @@ void __fastcall Scaleform::Render::ShadowFilter::ShadowFilter(Scaleform::Render:
   *(_QWORD *)&this->Distance = 0i64;
   v7->Mode &= 0xFFFFFFF9;
   v7->Mode |= 1u;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ShadowFilter::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ShadowFilter::`vftable;
   this->Params.BlurX = blurx * 20.0;
   this->Params.BlurY = blury * 20.0;
   this->Params.Passes = passes;
@@ -144,7 +144,7 @@ void __fastcall Scaleform::Render::ShadowFilter::ShadowFilter(Scaleform::Render:
     (Scaleform::Render::BlurFilterImpl *)&this->vfptr,
     Filter_Shadow,
     params);
-  v4->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ShadowFilter::`vftable';
+  v4->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ShadowFilter::`vftable;
   v4->Angle = angle;
   v4->Distance = dist * 20.0;
   v5 = sinf(angle) * (float)(dist * 20.0);
@@ -158,15 +158,15 @@ void __fastcall Scaleform::Render::GlowFilter::GlowFilter(Scaleform::Render::Glo
 {
   Scaleform::Render::BlurFilterParams *v4; // ST08_8
 
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::Filter,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Filter::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::Filter,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Filter::`vftable;
   this->Type = 2;
   this->Frozen = 0;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::BlurFilterImpl::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::BlurFilterImpl::`vftable;
   v4 = &this->Params;
   v4->Mode = 0;
   v4->Passes = 1;
@@ -182,7 +182,7 @@ void __fastcall Scaleform::Render::GlowFilter::GlowFilter(Scaleform::Render::Glo
   *(_QWORD *)&this->Distance = 0i64;
   v4->Mode &= 0xFFFFFFFA;
   v4->Mode |= 2u;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::GlowFilter::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::GlowFilter::`vftable;
   this->Params.BlurX = blurx * 20.0;
   this->Params.BlurY = blury * 20.0;
   this->Params.Passes = passes;
@@ -202,15 +202,15 @@ void __fastcall Scaleform::Render::BevelFilter::BevelFilter(Scaleform::Render::B
   float v6; // xmm8_4
 
   v4 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::Filter,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Filter::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::Filter,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Filter::`vftable;
   this->Type = 3;
   this->Frozen = 0;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::BlurFilterImpl::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::BlurFilterImpl::`vftable;
   v5 = &this->Params;
   v5->Mode = 0;
   v5->Passes = 1;
@@ -226,7 +226,7 @@ void __fastcall Scaleform::Render::BevelFilter::BevelFilter(Scaleform::Render::B
   *(_QWORD *)&this->Distance = 0i64;
   v5->Mode &= 0xFFFFFFFB;
   v5->Mode |= 3u;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::BevelFilter::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::BevelFilter::`vftable;
   this->Params.BlurX = blurx * 20.0;
   this->Params.BlurY = blury * 20.0;
   this->Params.Passes = passes;
@@ -254,7 +254,7 @@ void __fastcall Scaleform::Render::BevelFilter::BevelFilter(Scaleform::Render::B
     (Scaleform::Render::BlurFilterImpl *)&this->vfptr,
     Filter_Bevel,
     params);
-  v4->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::BevelFilter::`vftable';
+  v4->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::BevelFilter::`vftable;
   v4->Angle = angle;
   v4->Distance = dist * 20.0;
   v5 = sinf(angle) * (float)(dist * 20.0);

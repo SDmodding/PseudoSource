@@ -26,10 +26,10 @@ void __fastcall UFG::StateMachineEvent::StateMachineEvent(UFG::StateMachineEvent
   v5 = (UFG::qNode<UFG::Event,UFG::Event> *)&this->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  this->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+  this->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
   this->m_EventUID = v4;
   this->m_NamePTR = 0i64;
-  this->vfptr = (UFG::EventVtbl *)&UFG::StateMachineEvent::`vftable';
+  this->vfptr = (UFG::EventVtbl *)&UFG::StateMachineEvent::`vftable;
   this->mName = (UFG::qSymbol)name->mUID;
   v6 = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&this->mSender.mPrev;
   v6->mPrev = v6;
@@ -105,7 +105,7 @@ void __fastcall UFG::StateMachineComponent::StateMachineComponent(UFG::StateMach
   v6 = (UFG::qNode<UFG::StateMachineComponent,UFG::StateMachineComponent> *)&v5->mPrev;
   v6->mPrev = v6;
   v6->mNext = v6;
-  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StateMachineComponent::`vftable';
+  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StateMachineComponent::`vftable;
   v15 = &v5->mRigidBodyComponent;
   v15->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v15->mPrev;
   v15->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v15->mPrev;
@@ -236,7 +236,7 @@ void __fastcall UFG::StateMachineComponent::~StateMachineComponent(UFG::StateMac
   void (__fastcall *v43)(UFG::StateMachineComponent *, UFG::Event *); // [rsp+30h] [rbp-38h]
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StateMachineComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StateMachineComponent::`vftable;
   if ( this == UFG::StateMachineComponent::s_StateMachineComponentpCurrentIterator )
     UFG::StateMachineComponent::s_StateMachineComponentpCurrentIterator = (UFG::StateMachineComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::StateMachineComponent,UFG::StateMachineComponent> *)&this->mPrev;
@@ -1352,12 +1352,12 @@ LABEL_68:
         if ( v74 )
         {
           v75 = *v74;
-          v76 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-          if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+          v76 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+          if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
           {
             v77 = UFG::qResourceWarehouse::Instance();
             v76 = UFG::qResourceWarehouse::GetInventory(v77, 0xA2ADCD77);
-            `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v76;
+            `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v76;
           }
           UFG::qResourceHandle::Init((UFG::qResourceHandle *)(v75 + 136), 0xA2ADCD77, v73, v76);
         }
@@ -2607,7 +2607,7 @@ void __fastcall UFG::AttachedEffect::AttachedEffect(UFG::AttachedEffect *this, U
   v5 = (UFG::qNode<UFG::AttachedEffect,UFG::AttachedEffect> *)&this->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  this->vfptr = (UFG::AttachedEffectVtbl *)&UFG::AttachedEffect::`vftable';
+  this->vfptr = (UFG::AttachedEffectVtbl *)&UFG::AttachedEffect::`vftable;
   v6 = &this->mBodyTransform;
   v7 = bodyTransform->v0.y;
   v8 = bodyTransform->v0.z;
@@ -2701,7 +2701,7 @@ void __fastcall UFG::AttachedEffect::~AttachedEffect(UFG::AttachedEffect *this)
   UFG::qNode<UFG::AttachedEffect,UFG::AttachedEffect> *v12; // rax
 
   v1 = this;
-  this->vfptr = (UFG::AttachedEffectVtbl *)&UFG::AttachedEffect::`vftable';
+  this->vfptr = (UFG::AttachedEffectVtbl *)&UFG::AttachedEffect::`vftable;
   v2 = this->mInstanceUid;
   if ( v2 != -1 && Render::FXManager::IsEffectLooping(&Render::gFXManager, v2) )
     Render::FXManager::KillEffect(&Render::gFXManager, v1->mInstanceUid, 0);

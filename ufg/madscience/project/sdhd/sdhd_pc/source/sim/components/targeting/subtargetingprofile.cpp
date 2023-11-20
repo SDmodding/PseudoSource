@@ -1168,7 +1168,7 @@ LABEL_66:
 // RVA: 0x1543980
 __int64 dynamic_initializer_for__UFG::SubTargetingProfiles::ms_SubTargetingProfilePool__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     UFG::SubTargetingProfiles::ms_SubTargetingProfilePool.p,
     0xBC0ui64,
     10,

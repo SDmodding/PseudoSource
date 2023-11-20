@@ -4077,7 +4077,7 @@ void __usercall hkpWorldOperationUtil::replaceMotionObject(hkpRigidBody *body@<r
     {
       hkpMotion::hkpMotion(&inertiaLocal);
       inertiaLocal.m_deactivationRefPosition[1].m_quad.m128_u64[0] = 0i64;
-      inertiaLocal.vfptr = (hkBaseObjectVtbl *)&hkpMaxSizeMotion::`vftable';
+      inertiaLocal.vfptr = (hkBaseObjectVtbl *)&hkpMaxSizeMotion::`vftable;
       v14 = &v7->m_motion;
       v15 = 10i64;
       v16 = &v44.m128i_i8[8];
@@ -4134,7 +4134,7 @@ void __usercall hkpWorldOperationUtil::replaceMotionObject(hkpRigidBody *body@<r
     v24 = &v7->m_motion;
     v25 = 10i64;
     v26 = &v44.m128i_i8[8];
-    inertiaLocal.vfptr = (hkBaseObjectVtbl *)&hkpMaxSizeMotion::`vftable';
+    inertiaLocal.vfptr = (hkBaseObjectVtbl *)&hkpMaxSizeMotion::`vftable;
     do
     {
       v27 = v24->vfptr;
@@ -4215,7 +4215,7 @@ void __usercall hkpWorldOperationUtil::replaceMotionObject(hkpRigidBody *body@<r
       {
         hkpMotion::hkpMotion(v35);
         v36->m_savedMotion = 0i64;
-        v36->vfptr = (hkBaseObjectVtbl *)&hkpMaxSizeMotion::`vftable';
+        v36->vfptr = (hkBaseObjectVtbl *)&hkpMaxSizeMotion::`vftable;
       }
       else
       {

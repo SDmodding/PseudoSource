@@ -332,7 +332,7 @@ void __fastcall Scaleform::GFx::AS2::PlaceObject2EH::~PlaceObject2EH(Scaleform::
   Scaleform::Render::RenderBuffer *v6; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::ExecuteTagVtbl *)&Scaleform::GFx::AS2::PlaceObject2EH::`vftable';
+  this->vfptr = (Scaleform::GFx::ExecuteTagVtbl *)&Scaleform::GFx::AS2::PlaceObject2EH::`vftable;
   if ( this->pData[0] < 0 )
   {
     v2 = *(_QWORD *)&this->pData[1];
@@ -360,8 +360,8 @@ void __fastcall Scaleform::GFx::AS2::PlaceObject2EH::~PlaceObject2EH(Scaleform::
       Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, (void *)v2);
     }
   }
-  v1->vfptr = (Scaleform::GFx::ExecuteTagVtbl *)&Scaleform::GFx::PlaceObject2Tag::`vftable';
-  v1->vfptr = (Scaleform::GFx::ExecuteTagVtbl *)&Scaleform::GFx::ExecuteTag::`vftable';
+  v1->vfptr = (Scaleform::GFx::ExecuteTagVtbl *)&Scaleform::GFx::PlaceObject2Tag::`vftable;
+  v1->vfptr = (Scaleform::GFx::ExecuteTagVtbl *)&Scaleform::GFx::ExecuteTag::`vftable;
 }
 
 // File Line: 198
@@ -416,7 +416,7 @@ void __fastcall Scaleform::GFx::AS2::PlaceObject3EH::~PlaceObject3EH(Scaleform::
   Scaleform::Render::RenderBuffer *v6; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::ExecuteTagVtbl *)&Scaleform::GFx::AS2::PlaceObject3EH::`vftable';
+  this->vfptr = (Scaleform::GFx::ExecuteTagVtbl *)&Scaleform::GFx::AS2::PlaceObject3EH::`vftable;
   if ( this->pData[0] < 0 )
   {
     v2 = *(_QWORD *)&this->pData[1];
@@ -444,8 +444,8 @@ void __fastcall Scaleform::GFx::AS2::PlaceObject3EH::~PlaceObject3EH(Scaleform::
       Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, (void *)v2);
     }
   }
-  v1->vfptr = (Scaleform::GFx::ExecuteTagVtbl *)&Scaleform::GFx::PlaceObject3Tag::`vftable';
-  v1->vfptr = (Scaleform::GFx::ExecuteTagVtbl *)&Scaleform::GFx::ExecuteTag::`vftable';
+  v1->vfptr = (Scaleform::GFx::ExecuteTagVtbl *)&Scaleform::GFx::PlaceObject3Tag::`vftable;
+  v1->vfptr = (Scaleform::GFx::ExecuteTagVtbl *)&Scaleform::GFx::ExecuteTag::`vftable;
 }
 
 // File Line: 254
@@ -957,13 +957,13 @@ void __fastcall Scaleform::GFx::AS2Support::ReadButtonActions(Scaleform::GFx::AS
                                              48i64);
   if ( v7 )
   {
-    v7->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+    v7->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
     v7->RefCount = 1;
-    v7->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-    v7->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,258>::`vftable';
-    v7->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::ButtonActionBase,258>::`vftable';
-    v7->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ButtonActionBase::`vftable';
-    v7->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS2::ButtonAction::`vftable';
+    v7->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+    v7->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,258>::`vftable;
+    v7->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::ButtonActionBase,258>::`vftable;
+    v7->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ButtonActionBase::`vftable;
+    v7->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS2::ButtonAction::`vftable;
     v8 = &v7[1].RefCount;
     v9 = 0;
     *(_QWORD *)v8 = 0i64;
@@ -1051,13 +1051,13 @@ void __fastcall Scaleform::GFx::AS2Support::ReadButton2ActionConditions(Scalefor
                                         48i64);
     if ( v14 )
     {
-      v14->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::RefCountImplCore::`vftable';
+      v14->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::RefCountImplCore::`vftable;
       v14->RefCount.Value = 1;
-      v14->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::RefCountImpl::`vftable';
-      v14->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,258>::`vftable';
-      v14->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::ButtonActionBase,258>::`vftable';
-      v14->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::ButtonActionBase::`vftable';
-      v14->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::AS2::ButtonAction::`vftable';
+      v14->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::RefCountImpl::`vftable;
+      v14->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,258>::`vftable;
+      v14->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::ButtonActionBase,258>::`vftable;
+      v14->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::ButtonActionBase::`vftable;
+      v14->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::AS2::ButtonAction::`vftable;
       v25 = v14 + 1;
       v26 = (signed __int64)&v14[1];
       v25->vfptr = 0i64;

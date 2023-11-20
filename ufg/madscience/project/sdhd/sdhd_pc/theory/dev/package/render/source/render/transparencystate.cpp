@@ -2,7 +2,7 @@
 // RVA: 0x1452890
 __int64 dynamic_initializer_for__Render::TransparencySystem::msAlphaStateInHandle__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     Render::TransparencySystem::msAlphaStateInHandle,
     0x20ui64,
     16,
@@ -14,7 +14,7 @@ __int64 dynamic_initializer_for__Render::TransparencySystem::msAlphaStateInHandl
 // RVA: 0x14528D0
 __int64 dynamic_initializer_for__Render::TransparencySystem::msAlphaStateOutHandle__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     Render::TransparencySystem::msAlphaStateOutHandle,
     0x20ui64,
     16,
@@ -47,26 +47,26 @@ void __fastcall Render::TransparencySystem::Init(const unsigned int *alpha_state
     v6 = (unsigned int)(num_states - 1);
     do
     {
-      v7 = `UFG::qGetResourceInventory<Illusion::AlphaState>'::`2'::result;
+      v7 = `UFG::qGetResourceInventory<Illusion::AlphaState>::`2::result;
       v8 = *(unsigned int *)((char *)v5 + v4);
-      if ( !`UFG::qGetResourceInventory<Illusion::AlphaState>'::`2'::result )
+      if ( !`UFG::qGetResourceInventory<Illusion::AlphaState>::`2::result )
       {
         v9 = UFG::qResourceWarehouse::Instance();
         v7 = UFG::qResourceWarehouse::GetInventory(v9, 0x12C800F2u);
-        `UFG::qGetResourceInventory<Illusion::AlphaState>'::`2'::result = v7;
+        `UFG::qGetResourceInventory<Illusion::AlphaState>::`2::result = v7;
       }
       UFG::qResourceHandle::Init(
         (UFG::qResourceHandle *)&Render::TransparencySystem::msAlphaStateInHandle[v3 + 1].mPrev,
         0x12C800F2u,
         v8,
         v7);
-      v10 = `UFG::qGetResourceInventory<Illusion::AlphaState>'::`2'::result;
+      v10 = `UFG::qGetResourceInventory<Illusion::AlphaState>::`2::result;
       v11 = *v5;
-      if ( !`UFG::qGetResourceInventory<Illusion::AlphaState>'::`2'::result )
+      if ( !`UFG::qGetResourceInventory<Illusion::AlphaState>::`2::result )
       {
         v12 = UFG::qResourceWarehouse::Instance();
         v10 = UFG::qResourceWarehouse::GetInventory(v12, 0x12C800F2u);
-        `UFG::qGetResourceInventory<Illusion::AlphaState>'::`2'::result = v10;
+        `UFG::qGetResourceInventory<Illusion::AlphaState>::`2::result = v10;
       }
       UFG::qResourceHandle::Init(
         (UFG::qResourceHandle *)&Render::TransparencySystem::msAlphaStateOutHandle[v3 + 1].mPrev,

@@ -7,10 +7,10 @@ void __fastcall UFG::GameNavResourcePowerManagement::GameNavResourcePowerManagem
   UFG::qNode<UFG::qSafePointerBase<UFG::PowerManagementComponent>,UFG::qSafePointerNodeList> *v5; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::PowerManagementComponent>,UFG::qSafePointerNodeList> *v6; // rax
 
-  this->vfptr = (UFG::NavResourceVtbl *)&UFG::NavResource::`vftable';
+  this->vfptr = (UFG::NavResourceVtbl *)&UFG::NavResource::`vftable;
   this->m_name = (UFG::qSymbol)name->mUID;
   this->m_tag = -1;
-  this->vfptr = (UFG::NavResourceVtbl *)&UFG::GameNavResourcePowerManagement::`vftable';
+  this->vfptr = (UFG::NavResourceVtbl *)&UFG::GameNavResourcePowerManagement::`vftable;
   v3 = (UFG::qNode<UFG::qSafePointerBase<UFG::PowerManagementComponent>,UFG::qSafePointerNodeList> *)&this->mpPowerManagementComponent.mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
@@ -47,7 +47,7 @@ void __fastcall UFG::GameNavResourcePowerManagement::~GameNavResourcePowerManage
   UFG::qNode<UFG::qSafePointerBase<UFG::PowerManagementComponent>,UFG::qSafePointerNodeList> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::NavResourceVtbl *)&UFG::GameNavResourcePowerManagement::`vftable';
+  this->vfptr = (UFG::NavResourceVtbl *)&UFG::GameNavResourcePowerManagement::`vftable;
   v2 = &this->mpPowerManagementComponent;
   if ( this->mpPowerManagementComponent.m_pPointer )
   {
@@ -65,7 +65,7 @@ void __fastcall UFG::GameNavResourcePowerManagement::~GameNavResourcePowerManage
   v6->mPrev = v5;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::PowerManagementComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::PowerManagementComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (UFG::NavResourceVtbl *)&UFG::NavResource::`vftable';
+  v1->vfptr = (UFG::NavResourceVtbl *)&UFG::NavResource::`vftable;
 }
 
 // File Line: 19

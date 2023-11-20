@@ -8,7 +8,7 @@ void __fastcall hkProcessFactory::hkProcessFactory(hkProcessFactory *this)
   hkCriticalSection *v4; // rax
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkProcessFactory::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkProcessFactory::`vftable;
   this->m_freeTag = 0;
   this->m_name2creationFunction.m_data = 0i64;
   this->m_name2creationFunction.m_size = 0;
@@ -40,7 +40,7 @@ void __fastcall hkProcessFactory::~hkProcessFactory(hkProcessFactory *this)
 
   v1 = this->m_criticalSection;
   v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkProcessFactory::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkProcessFactory::`vftable;
   if ( v1 )
   {
     DeleteCriticalSection(&v1->m_section);
@@ -68,7 +68,7 @@ void __fastcall hkProcessFactory::~hkProcessFactory(hkProcessFactory *this)
       24 * (v6 & 0x3FFFFFFF));
   v2->m_name2creationFunction.m_data = 0i64;
   v2->m_name2creationFunction.m_capacityAndFlags = 2147483648;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 25

@@ -8,7 +8,7 @@ void __fastcall hkpCachingShapePhantom::hkpCachingShapePhantom(hkpCachingShapePh
   v4 = collisionFilterInfo;
   v5 = this;
   hkpShapePhantom::hkpShapePhantom((hkpShapePhantom *)&this->vfptr, shape, transform);
-  v5->vfptr = (hkBaseObjectVtbl *)&hkpCachingShapePhantom::`vftable';
+  v5->vfptr = (hkBaseObjectVtbl *)&hkpCachingShapePhantom::`vftable;
   v5->m_collisionDetails.m_capacityAndFlags = 2147483648;
   v5->m_collisionDetails.m_data = 0i64;
   v5->m_collisionDetails.m_size = 0;
@@ -30,8 +30,8 @@ void __fastcall hkpCachingShapePhantom::~hkpCachingShapePhantom(hkpCachingShapeP
 
   v1 = this;
   v7 = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpCachingShapePhantom::`vftable';
-  v6 = &hkpConstraintOwner::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpCachingShapePhantom::`vftable;
+  v6 = &hkpConstraintOwner::`vftable;
   v2 = this->m_collisionDetails.m_size - 1;
   v3 = v2;
   if ( v2 >= 0 )
@@ -531,7 +531,7 @@ void __fastcall hkpCachingShapePhantom::removeOverlappingCollidable(hkpCachingSh
   v3 = collidable;
   v4 = this;
   v25 = 0x1FFFF;
-  v24 = &hkpConstraintOwner::`vftable';
+  v24 = &hkpConstraintOwner::`vftable;
   if ( !v2 )
   {
     v5 = this->m_collisionDetails.m_size - 1;
@@ -624,7 +624,7 @@ void __fastcall hkpCachingShapePhantom::updateShapeCollectionFilter(hkpCachingSh
   v12 = v3[4];
   v4 = v3[5];
   v7 = 0x1FFFF;
-  v6 = &hkpConstraintOwner::`vftable';
+  v6 = &hkpConstraintOwner::`vftable;
   v13 = v4;
   if ( this->m_collisionDetails.m_size > 0 )
   {

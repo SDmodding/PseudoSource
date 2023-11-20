@@ -47,7 +47,7 @@ void __fastcall UFG::RoadSpaceComponent::RoadSpaceComponent(UFG::RoadSpaceCompon
   v2 = (UFG::qNode<UFG::RoadSpaceComponent,UFG::RoadSpaceComponent> *)&v1->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::RoadSpaceComponent::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::RoadSpaceComponent::`vftable;
   UFG::NavGuide::NavGuide(&v1->m_NavGuide);
   *(_QWORD *)&v1->m_DestNavRadius = 0x40000000i64;
   v1->m_NavWanderDestPos.y = 0.0;
@@ -61,7 +61,7 @@ void __fastcall UFG::RoadSpaceComponent::RoadSpaceComponent(UFG::RoadSpaceCompon
   v1->m_NavWanderCenter.z = v4;
   UFG::RoadNetworkGuide::RoadNetworkGuide(&v1->mGuide);
   UFG::WayFinderClient::WayFinderClient((UFG::WayFinderClient *)&v1->mWayClient.vfptr);
-  v1->mWayClient.vfptr = (UFG::WayFinderClientVtbl *)&UFG::VehicleWayFinderClient::`vftable';
+  v1->mWayClient.vfptr = (UFG::WayFinderClientVtbl *)&UFG::VehicleWayFinderClient::`vftable;
   v1->mWayClient.m_RoadNetworkType = 0;
   v1->mWayClient.m_LaneFlags = -1;
   v1->mWayClient.m_RoadGuide = 0i64;
@@ -153,7 +153,7 @@ void __fastcall UFG::RoadSpaceComponent::~RoadSpaceComponent(UFG::RoadSpaceCompo
   UFG::VehicleWayFinderClient *v18; // [rsp+48h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::RoadSpaceComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::RoadSpaceComponent::`vftable;
   v2 = (UFG::SimObjectVehicle *)this->m_pChaseTarget.m_pPointer;
   if ( v2 )
   {
@@ -217,7 +217,7 @@ void __fastcall UFG::RoadSpaceComponent::~RoadSpaceComponent(UFG::RoadSpaceCompo
   if ( v9 )
   {
     v10 = (char *)&v9[-1].fCurvature;
-    `eh vector destructor iterator'(v9, 0x20ui64, LODWORD(v9[-1].fCurvature), (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v9, 0x20ui64, LODWORD(v9[-1].fCurvature), (void (__fastcall *)(void *))_);
     operator delete[](v10);
   }
   UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->m_pSubject);
@@ -239,8 +239,8 @@ void __fastcall UFG::RoadSpaceComponent::~RoadSpaceComponent(UFG::RoadSpaceCompo
   v11->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v11->mPrev;
   v1->m_pChaseTarget.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v1->m_pChaseTarget.mPrev;
   v18 = &v1->mWayClient;
-  v18->vfptr = (UFG::WayFinderClientVtbl *)&UFG::VehicleWayFinderClient::`vftable';
-  v18->vfptr = (UFG::WayFinderClientVtbl *)&UFG::WayFinderClient::`vftable';
+  v18->vfptr = (UFG::WayFinderClientVtbl *)&UFG::VehicleWayFinderClient::`vftable;
+  v18->vfptr = (UFG::WayFinderClientVtbl *)&UFG::WayFinderClient::`vftable;
   UFG::RoadNetworkGuide::~RoadNetworkGuide(&v1->mGuide);
   UFG::NavGuide::~NavGuide(&v1->m_NavGuide);
   v16 = v6->mPrev;

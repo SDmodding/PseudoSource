@@ -231,7 +231,7 @@ __int64 UFG::_dynamic_initializer_for__gqReflectResourceInventory__()
     0x616A903Fu,
     0,
     0);
-  UFG::gqReflectResourceInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::qReflectResourceInventory::`vftable';
+  UFG::gqReflectResourceInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::qReflectResourceInventory::`vftable;
   return atexit(UFG::_dynamic_atexit_destructor_for__gqReflectResourceInventory__);
 }
 

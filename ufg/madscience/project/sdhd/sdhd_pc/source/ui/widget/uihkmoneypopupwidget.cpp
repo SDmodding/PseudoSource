@@ -106,7 +106,7 @@ void __fastcall UFG::UIHKMoneyPopupWidget::Flash_Show(UFG::UIHKMoneyPopupWidget 
     if ( v6 )
     {
       this->mIsVisible = 1;
-      `eh vector constructor iterator'(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       if ( ((unsigned int)pargs.Type >> 6) & 1 )
       {
         (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
@@ -143,7 +143,7 @@ void __fastcall UFG::UIHKMoneyPopupWidget::Flash_Show(UFG::UIHKMoneyPopupWidget 
         if ( !UFG::HudAudio::m_instance )
         {
 LABEL_14:
-          `eh vector destructor iterator'(
+          `eh vector destructor iterator(
             &pargs,
             0x30ui64,
             2,

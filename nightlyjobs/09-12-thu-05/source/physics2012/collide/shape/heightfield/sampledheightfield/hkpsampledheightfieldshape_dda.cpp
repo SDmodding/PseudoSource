@@ -248,7 +248,7 @@ void __fastcall hkpSampledHeightFieldShape::castRayDdaInternal(hkpSampledHeightF
   v19 = _mm_mul_ps(v14, v8->m_from.m_quad);
   v20 = _mm_mul_ps(v8->m_to.m_quad, v14);
   v16 = _mm_xor_si128(
-          (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v15),
+          (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v15),
           _mm_cvttps_epi32(v15));
   v159 = (unsigned __int128)_mm_packs_epi32(v16, v16);
   v154 = (__m128i)v19;

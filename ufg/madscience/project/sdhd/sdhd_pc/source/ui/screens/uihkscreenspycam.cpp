@@ -13,7 +13,7 @@ void __fastcall UFG::UIHKScreenSpyCam::UIHKScreenSpyCam(UFG::UIHKScreenSpyCam *t
   v2 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   v3 = 0i64;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
@@ -25,12 +25,12 @@ void __fastcall UFG::UIHKScreenSpyCam::UIHKScreenSpyCam(UFG::UIHKScreenSpyCam *t
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKTaskableScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKTaskableScreen::`vftable;
   this->mFinished = 0;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKMinigameScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKMinigameScreen::`vftable;
   *(_QWORD *)&this->mfAlphaValue = 1109393408i64;
   ++UFG::UIHKMinigameScreen::mNumMinigameScreens;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenSpyCam::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenSpyCam::`vftable;
   *(_WORD *)&this->mbControlsAllowed = 0;
   *(_WORD *)&this->mUpdateHelpbar = 0;
   v4 = UFG::qSymbol::create_from_string(&result, "SurveillanceCamera");
@@ -57,7 +57,7 @@ void __fastcall UFG::UIHKScreenSpyCam::~UIHKScreenSpyCam(UFG::UIHKScreenSpyCam *
   unsigned int v10; // eax
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenSpyCam::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenSpyCam::`vftable;
   v2 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseScreen(v2, "SpyCam");
   UFG::RenderWorld::VisualTreatmentPostEffect_StopAllVisualTreatments();
@@ -256,12 +256,12 @@ bool __fastcall UFG::UIHKScreenSpyCam::handleMessage(UFG::UIHKScreenSpyCam *this
             *(_QWORD *)&data.MessageIds[4] = 0i64;
             UFG::UIHKHelpBarWidget::Show(v17, &data);
             UFG::qString::~qString(&data.CustomTexturePack);
-            `eh vector destructor iterator'(
+            `eh vector destructor iterator(
               data.Icons,
               0x28ui64,
               6,
               (void (__fastcall *)(void *))UFG::qString::~qString);
-            `eh vector destructor iterator'(
+            `eh vector destructor iterator(
               data.Captions,
               0x28ui64,
               6,
@@ -395,12 +395,12 @@ LABEL_24:
     v19 = &gGlobalOverlaySentinel;
   UFG::UIHKHelpBarWidget::Show(&v19->HelpBar, &data);
   UFG::qString::~qString((UFG::qString *)&data.MessageIds[4]);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     &data.Captions[5].mStringHash32,
     0x28ui64,
     6,
     (void (__fastcall *)(void *))UFG::qString::~qString);
-  `eh vector destructor iterator'(&data.Buttons[4], 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+  `eh vector destructor iterator(&data.Buttons[4], 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
   if ( ((unsigned int)value.Type >> 6) & 1 )
     (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&value.pObjectInterface->vfptr->gap8[8])(
       value.pObjectInterface,

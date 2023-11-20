@@ -2,7 +2,7 @@
 // RVA: 0x8A3590
 void __fastcall Scaleform::GFx::ButtonActionBase::~ButtonActionBase(Scaleform::GFx::ButtonActionBase *this)
 {
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ButtonActionBase::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ButtonActionBase::`vftable;
   Scaleform::RefCountImplCore::~RefCountImplCore((Scaleform::RefCountImplCore *)&this->vfptr);
 }
 

@@ -46,7 +46,7 @@ void __fastcall finishLoadedObjecthkaAnimationBinding(void *p, int finishing)
   if ( p )
   {
     v2 = (hkStringPtr *)((char *)p + 16);
-    v2[-2].m_stringAndFlag = (const char *)&hkaAnimationBinding::`vftable';
+    v2[-2].m_stringAndFlag = (const char *)&hkaAnimationBinding::`vftable;
     hkStringPtr::hkStringPtr(v2, (hkFinishLoadedObjectFlag)finishing);
   }
 }
@@ -65,7 +65,7 @@ void **__fastcall getVtablehkaAnimationBinding()
   hkStringPtr v1; // [rsp+30h] [rbp-58h]
 
   hkStringPtr::hkStringPtr(&v1, 0);
-  return &hkaAnimationBinding::`vftable';
+  return &hkaAnimationBinding::`vftable;
 }
 
 // File Line: 137

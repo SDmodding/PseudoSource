@@ -2,7 +2,7 @@
 // RVA: 0xBF3190
 void __fastcall hkaiNavVolume::hkaiNavVolume(hkaiNavVolume *this, hkFinishLoadedObjectFlag f)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiNavVolume::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiNavVolume::`vftable;
 }
 
 // File Line: 25

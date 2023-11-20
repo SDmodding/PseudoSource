@@ -3,7 +3,7 @@
 void __fastcall hkaiEdgeGeometry::hkaiEdgeGeometry(hkaiEdgeGeometry *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiEdgeGeometry::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiEdgeGeometry::`vftable;
   this->m_edges.m_data = 0i64;
   this->m_edges.m_size = 0;
   this->m_edges.m_capacityAndFlags = 2147483648;

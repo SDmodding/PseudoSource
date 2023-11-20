@@ -101,12 +101,12 @@ bool __fastcall UFG::TSHUD::Coro_text_xy(SSInvokedCoroutine *pScope)
   if ( !v1->i_update_count && !sFont.mNameUID )
   {
     v10 = UFG::qStringHash32(*(const char **)v7->i_user_data, 0xFFFFFFFF);
-    v11 = `UFG::qGetResourceInventory<Render::Font>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Render::Font>'::`2'::result )
+    v11 = `UFG::qGetResourceInventory<Render::Font>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Render::Font>::`2::result )
     {
       v12 = UFG::qResourceWarehouse::Instance();
       v11 = UFG::qResourceWarehouse::GetInventory(v12, 0x69FCCB4Cu);
-      `UFG::qGetResourceInventory<Render::Font>'::`2'::result = v11;
+      `UFG::qGetResourceInventory<Render::Font>::`2::result = v11;
     }
     UFG::qResourceHandle::Init((UFG::qResourceHandle *)&sFont.mPrev, 0x69FCCB4Cu, v10, v11);
   }
@@ -171,12 +171,12 @@ bool __fastcall UFG::TSHUD::Coro_text_xyz(SSInvokedCoroutine *pScope)
   if ( !v1->i_update_count && !sFont_0.mNameUID )
   {
     v9 = UFG::qStringHash32(*(const char **)v6->i_user_data, 0xFFFFFFFF);
-    v10 = `UFG::qGetResourceInventory<Render::Font>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Render::Font>'::`2'::result )
+    v10 = `UFG::qGetResourceInventory<Render::Font>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Render::Font>::`2::result )
     {
       v11 = UFG::qResourceWarehouse::Instance();
       v10 = UFG::qResourceWarehouse::GetInventory(v11, 0x69FCCB4Cu);
-      `UFG::qGetResourceInventory<Render::Font>'::`2'::result = v10;
+      `UFG::qGetResourceInventory<Render::Font>::`2::result = v10;
     }
     UFG::qResourceHandle::Init((UFG::qResourceHandle *)&sFont_0.mPrev, 0x69FCCB4Cu, v9, v10);
   }
@@ -253,7 +253,7 @@ void __fastcall UFG::TSHUD::MthdC_flash_inventory_icon(SSInvokedMethod *pScope, 
       {
         LODWORD(v5->mNext) = 1;
         v6 = (UFG::qString *)&v5[1];
-        `eh vector constructor iterator'(&v5[1], 0x28ui64, 1, (void (__fastcall *)(void *))UFG::qString::qString);
+        `eh vector constructor iterator(&v5[1], 0x28ui64, 1, (void (__fastcall *)(void *))UFG::qString::qString);
       }
       else
       {
@@ -268,7 +268,7 @@ void __fastcall UFG::TSHUD::MthdC_flash_inventory_icon(SSInvokedMethod *pScope, 
       {
         LODWORD(v7->mNext) = 1;
         v8 = (signed __int64)&v7[1];
-        `eh vector constructor iterator'(&v7[1], 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+        `eh vector constructor iterator(&v7[1], 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       }
       else
       {

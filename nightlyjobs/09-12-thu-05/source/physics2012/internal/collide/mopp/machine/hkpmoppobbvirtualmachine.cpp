@@ -457,7 +457,7 @@ void __fastcall hkpMoppObbVirtualMachine::queryObb(hkpMoppObbVirtualMachine *thi
   v7 = code;
   v8 = _mm_sub_ps(BvToWorld->m_translation.m_quad, code->m_info.m_offset.m_quad);
   v9 = _mm_and_ps(extent->m_quad, (__m128)xmmword_141687F20[0]);
-  v10 = _mm_and_ps(extent->m_quad, (__m128)`hkVector4f::getComponent'::`2'::indexToMask[0]);
+  v10 = _mm_and_ps(extent->m_quad, (__m128)`hkVector4f::getComponent::`2::indexToMask[0]);
   v11 = _mm_and_ps(extent->m_quad, (__m128)xmmword_141687F10);
   v12 = _mm_or_ps(_mm_shuffle_ps(v10, v10, 78), v10);
   v13 = _mm_or_ps(_mm_shuffle_ps(v9, v9, 78), v9);
@@ -496,10 +496,10 @@ void __fastcall hkpMoppObbVirtualMachine::queryObb(hkpMoppObbVirtualMachine *thi
           v16);
   v18 = _mm_mul_ps(_mm_add_ps(v8, v15), v16);
   v19 = _mm_xor_si128(
-          (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v17),
+          (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v17),
           _mm_cvttps_epi32(v17));
   v20 = _mm_xor_si128(
-          (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v18),
+          (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v18),
           _mm_cvttps_epi32(v18));
   v21 = _mm_cvtsi128_si32(v19) - 1;
   v6->m_xLo = v21;

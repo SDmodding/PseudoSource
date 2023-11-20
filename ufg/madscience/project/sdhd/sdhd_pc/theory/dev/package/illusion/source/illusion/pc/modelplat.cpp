@@ -80,7 +80,7 @@ void __fastcall Illusion::BufferD3DResourceInventory::BufferD3DResourceInventory
     0x45E061F6u,
     0,
     0);
-  v1->vfptr = (UFG::qResourceInventoryVtbl *)&Illusion::BufferD3DResourceInventory::`vftable';
+  v1->vfptr = (UFG::qResourceInventoryVtbl *)&Illusion::BufferD3DResourceInventory::`vftable;
   UFG::qBaseTreeRB::qBaseTreeRB(&v1->mOnLoadQueue.mTree);
   UFG::qBaseTreeRB::qBaseTreeRB(&v1->mOnUnloadQueue.mTree);
   UFG::qBaseTreeRB::qBaseTreeRB(&v1->mHighPriorityLoadQueue.mTree);
@@ -182,7 +182,7 @@ LABEL_14:
         if ( !*v13 )
         {
           UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(v10, (UFG::qBaseNodeVariableRB<unsigned __int64> *)v11);
-          Illusion::TextureQueueNode::`scalar deleting destructor'(v12, 1);
+          Illusion::TextureQueueNode::`scalar deleting destructor(v12, 1);
         }
       }
     }
@@ -273,12 +273,12 @@ LABEL_35:
         v3->vfptr->Add((UFG::qResourceInventory *)&v3->vfptr, (UFG::qResourceData *)&v9->mNode);
       }
     }
-    v34 = `UFG::qGetResourceInventory<Illusion::BufferD3DResource>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Illusion::BufferD3DResource>'::`2'::result )
+    v34 = `UFG::qGetResourceInventory<Illusion::BufferD3DResource>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Illusion::BufferD3DResource>::`2::result )
     {
       v35 = UFG::qResourceWarehouse::Instance();
       v34 = UFG::qResourceWarehouse::GetInventory(v35, 0x171246ADu);
-      `UFG::qGetResourceInventory<Illusion::BufferD3DResource>'::`2'::result = v34;
+      `UFG::qGetResourceInventory<Illusion::BufferD3DResource>::`2::result = v34;
     }
     UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v4->mBufferD3DResourceHandle.mPrev, 0x171246ADu, v8, v34);
   }
@@ -348,7 +348,7 @@ LABEL_11:
           UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
             (UFG::qBaseTreeVariableRB<unsigned __int64> *)&v3->mOnLoadQueue,
             (UFG::qBaseNodeVariableRB<unsigned __int64> *)v6);
-          Illusion::TextureQueueNode::`scalar deleting destructor'(v7, 1);
+          Illusion::TextureQueueNode::`scalar deleting destructor(v7, 1);
         }
         return;
       }
@@ -367,7 +367,7 @@ LABEL_11:
         UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
           (UFG::qBaseTreeVariableRB<unsigned __int64> *)&v3->mLoadingQueue,
           v13);
-        Illusion::TextureQueueNode::`scalar deleting destructor'((Illusion::TextureQueueNode *)v13, 1);
+        Illusion::TextureQueueNode::`scalar deleting destructor((Illusion::TextureQueueNode *)v13, 1);
       }
     }
   }
@@ -399,7 +399,7 @@ LABEL_26:
         UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
           (UFG::qBaseTreeVariableRB<unsigned __int64> *)&v3->mOnLoadQueue,
           v18);
-        Illusion::TextureQueueNode::`scalar deleting destructor'((Illusion::TextureQueueNode *)v18, 1);
+        Illusion::TextureQueueNode::`scalar deleting destructor((Illusion::TextureQueueNode *)v18, 1);
       }
     }
   }
@@ -575,9 +575,9 @@ void __fastcall Illusion::BufferD3DResourceInventory::ProcessQueuedLoads(Illusio
         v13 = v11 + 1;
         v13->mNext = v13;
         v13[1].mNext = v13;
-        v12->vfptr = (Illusion::AsyncD3DCreationTaskVtbl *)&Illusion::AsyncD3DCreationTask::`vftable';
+        v12->vfptr = (Illusion::AsyncD3DCreationTaskVtbl *)&Illusion::AsyncD3DCreationTask::`vftable;
         v12->mTask = 0i64;
-        v12->vfptr = (Illusion::AsyncD3DCreationTaskVtbl *)&Illusion::BufferLoader::`vftable';
+        v12->vfptr = (Illusion::AsyncD3DCreationTaskVtbl *)&Illusion::BufferLoader::`vftable;
         v12[1].vfptr = (Illusion::AsyncD3DCreationTaskVtbl *)v9;
       }
       else
@@ -663,9 +663,9 @@ void __fastcall Illusion::BufferD3DResourceInventory::ProcessQueuedLoads(Illusio
         v30 = v28 + 1;
         v30->mNext = v30;
         v30[1].mNext = v30;
-        v29->vfptr = (Illusion::AsyncD3DCreationTaskVtbl *)&Illusion::AsyncD3DCreationTask::`vftable';
+        v29->vfptr = (Illusion::AsyncD3DCreationTaskVtbl *)&Illusion::AsyncD3DCreationTask::`vftable;
         v29->mTask = 0i64;
-        v29->vfptr = (Illusion::AsyncD3DCreationTaskVtbl *)&Illusion::BufferLoader::`vftable';
+        v29->vfptr = (Illusion::AsyncD3DCreationTaskVtbl *)&Illusion::BufferLoader::`vftable;
         v29[1].vfptr = (Illusion::AsyncD3DCreationTaskVtbl *)v26;
       }
       else

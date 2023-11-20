@@ -39,8 +39,8 @@ Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl::XML> *__fastcall Scalefo
   if ( v4 )
   {
     Scaleform::GFx::AS3::Instance::Instance(v4, (Scaleform::GFx::AS3::InstanceTraits::Traits *)&v2->vfptr);
-    v5->pNode = (Scaleform::GFx::ASStringNode *)&Scaleform::GFx::AS3::Instances::fl::Object::`vftable';
-    v5->pNode = (Scaleform::GFx::ASStringNode *)&Scaleform::GFx::AS3::Instances::fl::XML::`vftable';
+    v5->pNode = (Scaleform::GFx::ASStringNode *)&Scaleform::GFx::AS3::Instances::fl::Object::`vftable;
+    v5->pNode = (Scaleform::GFx::ASStringNode *)&Scaleform::GFx::AS3::Instances::fl::XML::`vftable;
     Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateEmptyString(
       (Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *)v2->pVM->StringManagerRef->Builtins,
       v5 + 7);
@@ -58,6 +58,6 @@ Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl::XML> *__fastcall Scalefo
 // RVA: 0x789CB0
 void __fastcall Scaleform::GFx::AS3::Instances::fl::XMLElement::CallBack::~CallBack(Scaleform::GFx::AS3::Instances::fl::XMLElement::CallBack *this)
 {
-  this->vfptr = (Scaleform::GFx::AS3::Instances::fl::XMLElement::CallBackVtbl *)&Scaleform::GFx::AS3::Instances::fl::XMLElement::CallBack::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::Instances::fl::XMLElement::CallBackVtbl *)&Scaleform::GFx::AS3::Instances::fl::XMLElement::CallBack::`vftable;
 }
 

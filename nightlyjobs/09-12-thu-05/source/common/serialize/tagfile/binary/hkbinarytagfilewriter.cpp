@@ -1,6 +1,6 @@
 // File Line: 109
 // RVA: 0xE50710
-void __fastcall `anonymous namespace'::Writer::Writer(Writer *this, hkStreamWriter *sw, hkTagfileWriter::AddDataObjectListener *listener, hkTagfileWriter::Options *options)
+void __fastcall `anonymous namespace::Writer::Writer(Writer *this, hkStreamWriter *sw, hkTagfileWriter::AddDataObjectListener *listener, hkTagfileWriter::Options *options)
 {
   hkTagfileWriter::AddDataObjectListener *v4; // rdi
   hkTagfileWriter::Options *v5; // r14
@@ -101,14 +101,14 @@ void __fastcall `anonymous namespace'::Writer::Writer(Writer *this, hkStreamWrit
 
 // File Line: 124
 // RVA: 0xE50A10
-void __fastcall `anonymous namespace'::Writer::~Writer(Writer *this)
+void __fastcall `anonymous namespace::Writer::~Writer(Writer *this)
 {
   Writer *v1; // rbx
   int v2; // eax
   int v3; // er8
 
   v1 = this;
-  `anonymous namespace'::Writer::ListenerCache::~ListenerCache(&this->m_listenerCache);
+  `anonymous namespace::Writer::ListenerCache::~ListenerCache(&this->m_listenerCache);
   v2 = v1->m_details.m_capacityAndFlags;
   v1->m_details.m_size = 0;
   if ( v2 >= 0 )
@@ -127,7 +127,7 @@ void __fastcall `anonymous namespace'::Writer::~Writer(Writer *this)
       v3 & 0x3FFFFFFF);
   v1->m_bitfieldBuf.m_data = 0i64;
   v1->m_bitfieldBuf.m_capacityAndFlags = 2147483648;
-  hkMapBase<hkDataObject_Handle,int,`anonymous namespace'::Writer::HandleOps>::clearAndDeallocate(
+  hkMapBase<hkDataObject_Handle,int,`anonymous namespace::Writer::HandleOps>::clearAndDeallocate(
     (hkMapBase<hkDataObject_Handle,int,HandleOps> *)&v1->m_detailIndexFromObject,
     (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr);
   hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::~hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>(&v1->m_doneClasses.m_map);
@@ -137,7 +137,7 @@ void __fastcall `anonymous namespace'::Writer::~Writer(Writer *this)
 
 // File Line: 129
 // RVA: 0xE52D90
-void __fastcall `anonymous namespace'::Writer::writeInt(Writer *this, __int64 i)
+void __fastcall `anonymous namespace::Writer::writeInt(Writer *this, __int64 i)
 {
   Writer *v2; // rdi
   unsigned __int64 v3; // rbx
@@ -173,7 +173,7 @@ void __fastcall `anonymous namespace'::Writer::writeInt(Writer *this, __int64 i)
 
 // File Line: 174
 // RVA: 0xE53190
-void __fastcall `anonymous namespace'::Writer::writeString(Writer *this, const char *s)
+void __fastcall `anonymous namespace::Writer::writeString(Writer *this, const char *s)
 {
   const char *v2; // rsi
   Writer *v3; // rdi
@@ -191,7 +191,7 @@ void __fastcall `anonymous namespace'::Writer::writeString(Writer *this, const c
     if ( v4 == -1 )
     {
       v5 = hkString::strLen(v2);
-      `anonymous namespace'::Writer::writeInt(v3, (signed int)v5);
+      `anonymous namespace::Writer::writeInt(v3, (signed int)v5);
       hkOArchive::writeRaw(&v3->m_oa, v2, v5);
       hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::insert(
         &v3->m_writtenStrings.m_map,
@@ -200,7 +200,7 @@ void __fastcall `anonymous namespace'::Writer::writeString(Writer *this, const c
     }
     else
     {
-      `anonymous namespace'::Writer::writeInt(v3, -v4);
+      `anonymous namespace::Writer::writeInt(v3, -v4);
     }
   }
   else
@@ -211,7 +211,7 @@ void __fastcall `anonymous namespace'::Writer::writeString(Writer *this, const c
 
 // File Line: 226
 // RVA: 0xE52A70
-unsigned __int64 __fastcall `anonymous namespace'::Writer::writeClass(Writer *this, hkDataClass *klass)
+unsigned __int64 __fastcall `anonymous namespace::Writer::writeClass(Writer *this, hkDataClass *klass)
 {
   Writer *v2; // rsi
   hkDataClass *v3; // rbx
@@ -265,7 +265,7 @@ unsigned __int64 __fastcall `anonymous namespace'::Writer::writeClass(Writer *th
   if ( (result & 0x80000000) != 0i64 )
   {
     klassa.m_impl = (hkDataClassImpl *)((__int64 (*)(void))v3->m_impl->vfptr[4].__vecDelDtor)();
-    v6 = `anonymous namespace'::Writer::writeClass(v2, &klassa);
+    v6 = `anonymous namespace::Writer::writeClass(v2, &klassa);
     v7 = v3->m_impl->vfptr;
     LODWORD(className) = v6;
     v8 = ((__int64 (*)(void))v7[2].__vecDelDtor)();
@@ -327,12 +327,12 @@ unsigned __int64 __fastcall `anonymous namespace'::Writer::writeClass(Writer *th
       hkDataClass::getAllDeclaredMemberInfo(v3, &minfos);
       hkOArchive::write8u(&v2->m_oa, 4);
       v17 = (const char *)((__int64 (*)(void))v3->m_impl->vfptr[2].__vecDelDtor)();
-      `anonymous namespace'::Writer::writeString(v2, v17);
+      `anonymous namespace::Writer::writeString(v2, v17);
       v18 = ((__int64 (*)(void))v3->m_impl->vfptr[3].__vecDelDtor)();
-      `anonymous namespace'::Writer::writeInt(v2, v18);
+      `anonymous namespace::Writer::writeInt(v2, v18);
       ((void (*)(void))v3->m_impl->vfptr[3].__vecDelDtor)();
-      `anonymous namespace'::Writer::writeInt(v2, (signed int)className);
-      `anonymous namespace'::Writer::writeInt(v2, v11);
+      `anonymous namespace::Writer::writeInt(v2, (signed int)className);
+      `anonymous namespace::Writer::writeInt(v2, v11);
       if ( v11 > 0 )
       {
         klassa.m_impl = 0i64;
@@ -341,12 +341,12 @@ unsigned __int64 __fastcall `anonymous namespace'::Writer::writeClass(Writer *th
         while ( 1 )
         {
           v20 = minfos.m_data;
-          `anonymous namespace'::Writer::writeString(v2, minfos.m_data[v19].m_name);
+          `anonymous namespace::Writer::writeString(v2, minfos.m_data[v19].m_name);
           v21 = hkTypeManager::getLegacyType(v20[v19].m_type, (const char **)&className, (int *)&klassa);
           v22 = v21;
-          `anonymous namespace'::Writer::writeInt(v2, v21);
+          `anonymous namespace::Writer::writeInt(v2, v21);
           if ( v22 & 0x20 )
-            `anonymous namespace'::Writer::writeInt(v2, SLODWORD(klassa.m_impl));
+            `anonymous namespace::Writer::writeInt(v2, SLODWORD(klassa.m_impl));
           if ( (v22 & 0xFu) - 8 > 1 )
             goto LABEL_23;
           if ( !className )
@@ -355,7 +355,7 @@ unsigned __int64 __fastcall `anonymous namespace'::Writer::writeClass(Writer *th
           v24 = ((__int64 (*)(void))v37->m_impl->vfptr[1].__vecDelDtor)();
           v25 = (*(__int64 (__fastcall **)(__int64, char *))(*(_QWORD *)v24 + 72i64))(v24, className);
           v26 = (const char *)(*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v25 + 16i64))(v25);
-          `anonymous namespace'::Writer::writeString(v2, v26);
+          `anonymous namespace::Writer::writeString(v2, v26);
 LABEL_24:
           ++v19;
           if ( !--v35.m_impl )
@@ -378,7 +378,7 @@ LABEL_24:
                   v35.m_impl = (hkDataClassImpl *)(*(__int64 (__fastcall **)(_QWORD *, const char *))(v30 + 72))(
                                                     v31,
                                                     v32);
-                  `anonymous namespace'::Writer::writeClass(v2, &v35);
+                  `anonymous namespace::Writer::writeClass(v2, &v35);
                   v27 = v33;
                 }
                 v23 = v37;
@@ -411,7 +411,7 @@ LABEL_30:
 
 // File Line: 333
 // RVA: 0xE504E0
-signed __int64 __usercall `anonymous namespace'::Writer::worthWriting<hkDataObject_Value>@<rax>(Writer *this@<rcx>, hkDataObject_Value *value@<rdx>, float a3@<xmm0>)
+signed __int64 __usercall `anonymous namespace::Writer::worthWriting<hkDataObject_Value>@<rax>(Writer *this@<rcx>, hkDataObject_Value *value@<rdx>, float a3@<xmm0>)
 {
   hkDataObject_Value *v3; // rbx
   signed __int64 result; // rax
@@ -483,7 +483,7 @@ signed __int64 __usercall `anonymous namespace'::Writer::worthWriting<hkDataObje
 
 // File Line: 379
 // RVA: 0xE50650
-void __fastcall `anonymous namespace'::Writer::MemberWriteFlags::MemberWriteFlags(Writer::MemberWriteFlags *this, int nm)
+void __fastcall `anonymous namespace::Writer::MemberWriteFlags::MemberWriteFlags(Writer::MemberWriteFlags *this, int nm)
 {
   int v2; // esi
   Writer::MemberWriteFlags *v3; // rbx
@@ -526,7 +526,7 @@ void __fastcall `anonymous namespace'::Writer::MemberWriteFlags::MemberWriteFlag
 
 // File Line: 389
 // RVA: 0xE516B0
-void __fastcall `anonymous namespace'::Writer::MemberWriteFlags::fromBytes(Writer::MemberWriteFlags *this, const char *inb, int numBytes)
+void __fastcall `anonymous namespace::Writer::MemberWriteFlags::fromBytes(Writer::MemberWriteFlags *this, const char *inb, int numBytes)
 {
   int v3; // ebp
   __int64 v4; // r14
@@ -620,7 +620,7 @@ void __fastcall `anonymous namespace'::Writer::MemberWriteFlags::fromBytes(Write
 
 // File Line: 409
 // RVA: 0xE52640
-void __fastcall `anonymous namespace'::Writer::MemberWriteFlags::toBytes(Writer::MemberWriteFlags *this, char *out)
+void __fastcall `anonymous namespace::Writer::MemberWriteFlags::toBytes(Writer::MemberWriteFlags *this, char *out)
 {
   int v2; // ebp
   char *v3; // r14
@@ -687,7 +687,7 @@ void __fastcall `anonymous namespace'::Writer::MemberWriteFlags::toBytes(Writer:
 
 // File Line: 465
 // RVA: 0xE51A20
-void __fastcall `anonymous namespace'::Writer::scanArray(Writer *this, hkDataArray *arrToScan, hkArray<Writer::TodoItem,hkContainerTempAllocator> *objsTodo, unsigned int immediate)
+void __fastcall `anonymous namespace::Writer::scanArray(Writer *this, hkDataArray *arrToScan, hkArray<Writer::TodoItem,hkContainerTempAllocator> *objsTodo, unsigned int immediate)
 {
   Writer *v4; // rdi
   hkArray<Writer::TodoItem,hkContainerTempAllocator> *v5; // rsi
@@ -754,7 +754,7 @@ void __fastcall `anonymous namespace'::Writer::scanArray(Writer *this, hkDataArr
   if ( v7 == 6 )
   {
     ((void (*)(void))v6->m_impl->vfptr[6].__vecDelDtor)();
-    `anonymous namespace'::Writer::writeClass(v4, (hkDataClass *)&arrToScana);
+    `anonymous namespace::Writer::writeClass(v4, (hkDataClass *)&arrToScana);
     if ( ((signed int (*)(void))arrToScana.m_impl->vfptr[9].__vecDelDtor)() <= 0 )
       return;
     while ( 1 )
@@ -787,7 +787,7 @@ void __fastcall `anonymous namespace'::Writer::scanArray(Writer *this, hkDataArr
               ++v39->m_externalCount;
               ++v39->m_count;
             }
-            `anonymous namespace'::Writer::scanObjectForPointers(v57, &objToScan, v5, 1u);
+            `anonymous namespace::Writer::scanObjectForPointers(v57, &objToScan, v5, 1u);
             v40 = objToScan.m_impl;
             if ( objToScan.m_impl )
             {
@@ -818,7 +818,7 @@ void __fastcall `anonymous namespace'::Writer::scanArray(Writer *this, hkDataArr
               ++v22->m_externalCount;
               ++v22->m_count;
             }
-            `anonymous namespace'::Writer::scanArray(v4, &v47, v5, (unsigned int)retaddr);
+            `anonymous namespace::Writer::scanArray(v4, &v47, v5, (unsigned int)retaddr);
             v23 = v47.m_impl;
             if ( v47.m_impl )
             {
@@ -954,7 +954,7 @@ LABEL_50:
         ++v11->m_externalCount;
         ++v11->m_count;
       }
-      `anonymous namespace'::Writer::scanArray(v57, &arrToScana, v5, (unsigned int)retaddr);
+      `anonymous namespace::Writer::scanArray(v57, &arrToScana, v5, (unsigned int)retaddr);
       v12 = arrToScana.m_impl;
       if ( arrToScana.m_impl )
       {
@@ -969,7 +969,7 @@ LABEL_50:
 
 // File Line: 555
 // RVA: 0xE51ED0
-void __fastcall `anonymous namespace'::Writer::scanObjectForPointers(Writer *this, hkDataObject *objToScan, hkArray<Writer::TodoItem,hkContainerTempAllocator> *objsTodo, unsigned int immediate)
+void __fastcall `anonymous namespace::Writer::scanObjectForPointers(Writer *this, hkDataObject *objToScan, hkArray<Writer::TodoItem,hkContainerTempAllocator> *objsTodo, unsigned int immediate)
 {
   unsigned int v4; // esi
   hkArray<Writer::TodoItem,hkContainerTempAllocator> *v5; // rdi
@@ -1036,7 +1036,7 @@ void __fastcall `anonymous namespace'::Writer::scanObjectForPointers(Writer *thi
             ++v19->m_externalCount;
             ++v19->m_count;
           }
-          `anonymous namespace'::Writer::scanObjectForPointers(v33, &objToScana, v5, 1u);
+          `anonymous namespace::Writer::scanObjectForPointers(v33, &objToScana, v5, 1u);
           v22 = objToScana.m_impl;
           if ( objToScana.m_impl )
           {
@@ -1128,7 +1128,7 @@ LABEL_19:
           ++v9->m_externalCount;
           ++v9->m_count;
         }
-        `anonymous namespace'::Writer::scanArray(v33, &arrToScan, v5, v4);
+        `anonymous namespace::Writer::scanArray(v33, &arrToScan, v5, v4);
         if ( v10 )
         {
           --v10->m_externalCount;
@@ -1145,7 +1145,7 @@ LABEL_23:
 
 // File Line: 605
 // RVA: 0xE521D0
-void __fastcall `anonymous namespace'::Writer::scanObjectTree(Writer *this, hkDataWorld *world, hkDataObject *topObj, unsigned int topIsStruct)
+void __fastcall `anonymous namespace::Writer::scanObjectTree(Writer *this, hkDataWorld *world, hkDataObject *topObj, unsigned int topIsStruct)
 {
   hkDataObject *v4; // rbx
   hkDataWorld *v5; // r12
@@ -1242,7 +1242,7 @@ void __fastcall `anonymous namespace'::Writer::scanObjectTree(Writer *this, hkDa
     if ( v43 || v15 )
     {
       ((void (__fastcall *)(hkDataWorld *, hkDataObject *, __int64 *))v5->vfptr[5].__vecDelDtor)(v5, &object, &v43);
-      `anonymous namespace'::Writer::ListenerCache::callListenerAndCache(&v6->m_listenerCache, &objToScan, &object);
+      `anonymous namespace::Writer::ListenerCache::callListenerAndCache(&v6->m_listenerCache, &objToScan, &object);
       v17 = objToScan.m_impl;
       if ( objToScan.m_impl )
       {
@@ -1251,15 +1251,15 @@ void __fastcall `anonymous namespace'::Writer::scanObjectTree(Writer *this, hkDa
                             (unsigned int)&v51);
         v19 = *v18;
         v48 = *v18;
-        if ( (unsigned int)hkMapBase<hkDataObject_Handle,int,`anonymous namespace'::HandleOps>::getWithDefault(
+        if ( (unsigned int)hkMapBase<hkDataObject_Handle,int,`anonymous namespace::HandleOps>::getWithDefault(
                              (hkMapBase<hkDataObject_Handle,int,HandleOps> *)&v6->m_detailIndexFromObject,
                              (hkDataObject_Handle *)&v48,
                              -1) == -1 )
         {
           klass.m_impl = (hkDataClassImpl *)((__int64 (__fastcall *)(hkDataObjectImpl *))v17->vfptr[2].__vecDelDtor)(v17);
-          `anonymous namespace'::Writer::writeClass(v6, &klass);
+          `anonymous namespace::Writer::writeClass(v6, &klass);
           v20 = ((__int64 (*)(void))klass.m_impl->vfptr[9].__vecDelDtor)();
-          `anonymous namespace'::Writer::MemberWriteFlags::MemberWriteFlags(&v40, v20);
+          `anonymous namespace::Writer::MemberWriteFlags::MemberWriteFlags(&v40, v20);
           for ( i = ((unsigned int (__fastcall *)(hkDataObjectImpl *))v17->vfptr[5].__vecDelDtor)(v17);
                 v17->vfptr[6].__vecDelDtor((hkDataRefCounted *)&v17->vfptr, i);
                 i = (unsigned int)v17->vfptr[7].__vecDelDtor((hkDataRefCounted *)&v17->vfptr, i) )
@@ -1268,7 +1268,7 @@ void __fastcall `anonymous namespace'::Writer::scanObjectTree(Writer *this, hkDa
               v17,
               &value,
               (unsigned int)i);
-            if ( (unsigned int)`anonymous namespace'::Writer::worthWriting<hkDataObject_Value>(
+            if ( (unsigned int)`anonymous namespace::Writer::worthWriting<hkDataObject_Value>(
                                  v6,
                                  &value,
                                  *(float *)&v19) )
@@ -1326,8 +1326,8 @@ void __fastcall `anonymous namespace'::Writer::scanObjectTree(Writer *this, hkDa
               1);
           }
           v6->m_bitfieldBuf.m_size += v32;
-          `anonymous namespace'::Writer::MemberWriteFlags::toBytes(&v40, &v6->m_bitfieldBuf.m_data[v30]);
-          `anonymous namespace'::Writer::scanObjectForPointers(
+          `anonymous namespace::Writer::MemberWriteFlags::toBytes(&v40, &v6->m_bitfieldBuf.m_data[v30]);
+          `anonymous namespace::Writer::scanObjectForPointers(
             v6,
             &objToScan,
             (hkArray<Writer::TodoItem,hkContainerTempAllocator> *)&array,
@@ -1366,7 +1366,7 @@ void __fastcall `anonymous namespace'::Writer::scanObjectTree(Writer *this, hkDa
 
 // File Line: 669
 // RVA: 0xE50AE0
-void __usercall `anonymous namespace'::Writer::_writeArrayItems(Writer *this@<rcx>, hkDataArray *arr@<rdx>, int asize@<r8d>, float a4@<xmm0>)
+void __usercall `anonymous namespace::Writer::_writeArrayItems(Writer *this@<rcx>, hkDataArray *arr@<rdx>, int asize@<r8d>, float a4@<xmm0>)
 {
   Writer *v4; // rbx
   int v5; // esi
@@ -1460,7 +1460,7 @@ void __usercall `anonymous namespace'::Writer::_writeArrayItems(Writer *this@<rc
         v10 = arra.m_impl;
       }
       v11 = ((__int64 (__fastcall *)(hkDataArrayImpl *))v10->vfptr[5].__vecDelDtor)(v10);
-      `anonymous namespace'::Writer::_writeArrayItems(v4, &arra, v11);
+      `anonymous namespace::Writer::_writeArrayItems(v4, &arra, v11);
       v12 = arra.m_impl;
       if ( arra.m_impl )
       {
@@ -1502,7 +1502,7 @@ void __usercall `anonymous namespace'::Writer::_writeArrayItems(Writer *this@<rc
             v17 = (*((__int64 (__fastcall **)(hkDataRefCountedVtbl *, _QWORD))v68.m_impl->vfptr->__vecDelDtor + 17))(
                     v68.m_impl->vfptr,
                     (unsigned int)l);
-            `anonymous namespace'::Writer::writeInt(v4, v17);
+            `anonymous namespace::Writer::writeInt(v4, v17);
           }
         }
         else
@@ -1513,7 +1513,7 @@ void __usercall `anonymous namespace'::Writer::_writeArrayItems(Writer *this@<rc
             v19 = (*((__int64 (__fastcall **)(hkDataRefCountedVtbl *, _QWORD))v68.m_impl->vfptr->__vecDelDtor + 19))(
                     v68.m_impl->vfptr,
                     (unsigned int)m);
-            `anonymous namespace'::Writer::writeInt(v4, v19);
+            `anonymous namespace::Writer::writeInt(v4, v19);
           }
         }
         break;
@@ -1524,7 +1524,7 @@ void __usercall `anonymous namespace'::Writer::_writeArrayItems(Writer *this@<rc
                                + 13))(
                                 v68.m_impl->vfptr,
                                 (unsigned int)n);
-          `anonymous namespace'::Writer::writeString(v4, v50);
+          `anonymous namespace::Writer::writeString(v4, v50);
         }
         break;
       case 6:
@@ -1577,7 +1577,7 @@ void __usercall `anonymous namespace'::Writer::_writeArrayItems(Writer *this@<rc
         }
         v32 = (*((__int64 (**)(void))v68.m_impl->vfptr->__vecDelDtor + 6))();
         (*(void (__fastcall **)(__int64, char **))(*(_QWORD *)v32 + 96i64))(v32, &v59);
-        `anonymous namespace'::Writer::MemberWriteFlags::MemberWriteFlags(&v65, nma);
+        `anonymous namespace::Writer::MemberWriteFlags::MemberWriteFlags(&v65, nma);
         arra.m_impl = 0i64;
         if ( v58 > 0 )
         {
@@ -1604,7 +1604,7 @@ void __usercall `anonymous namespace'::Writer::_writeArrayItems(Writer *this@<rc
                 {
                   value.m_impl = v36;
                   value.m_index = v37;
-                  if ( (unsigned int)`anonymous namespace'::Writer::worthWriting<hkDataArray_Value>(v67, &value, a4) )
+                  if ( (unsigned int)`anonymous namespace::Writer::worthWriting<hkDataArray_Value>(v67, &value, a4) )
                     break;
                   if ( ++v37 >= ((signed int (__fastcall *)(hkDataArrayImpl *))v36->vfptr[5].__vecDelDtor)(v36) )
                     goto LABEL_59;
@@ -1648,7 +1648,7 @@ LABEL_59:
           v39 = (int)arra.m_impl;
         }
         nbytes = v39;
-        `anonymous namespace'::Writer::MemberWriteFlags::toBytes(&v65, v38);
+        `anonymous namespace::Writer::MemberWriteFlags::toBytes(&v65, v38);
         hkOArchive::writeRaw(&v4->m_oa, array, (unsigned int)nbytes);
         nbytes = 0;
         if ( v64 >= 0 )
@@ -1677,7 +1677,7 @@ LABEL_59:
                 ++v44->m_externalCount;
                 ++v44->m_count;
               }
-              `anonymous namespace'::Writer::_writeArrayItems(v4, &v68, v5);
+              `anonymous namespace::Writer::_writeArrayItems(v4, &v68, v5);
               v45 = v68.m_impl;
               if ( v68.m_impl )
               {
@@ -1722,7 +1722,7 @@ LABEL_59:
             ++v47->m_externalCount;
             ++v47->m_count;
           }
-          `anonymous namespace'::Writer::writeObjectReference(v67, (hkDataObject *)&arra);
+          `anonymous namespace::Writer::writeObjectReference(v67, (hkDataObject *)&arra);
           if ( v48 )
           {
             --v48->m_externalCount;
@@ -1747,8 +1747,8 @@ LABEL_59:
             v52 = arra.m_impl;
           }
           v53 = ((signed int (__fastcall *)(hkDataArrayImpl *))v52->vfptr[5].__vecDelDtor)(v52);
-          `anonymous namespace'::Writer::writeInt(v67, v53);
-          `anonymous namespace'::Writer::_writeArrayItems(v67, &arra, v53);
+          `anonymous namespace::Writer::writeInt(v67, v53);
+          `anonymous namespace::Writer::_writeArrayItems(v67, &arra, v53);
           v54 = arra.m_impl;
           if ( arra.m_impl )
           {
@@ -1787,7 +1787,7 @@ LABEL_59:
               LODWORD(arra.m_impl) = 4;
             }
 LABEL_35:
-            `anonymous namespace'::Writer::writeInt(v4, v22);
+            `anonymous namespace::Writer::writeInt(v4, v22);
           }
           if ( v5 > 0 )
           {
@@ -1812,7 +1812,7 @@ LABEL_35:
 
 // File Line: 844
 // RVA: 0xE52750
-void __usercall `anonymous namespace'::Writer::writeBinaryValue(Writer *this@<rcx>, hkDataObject_Value *value@<rdx>, hkDataClass_MemberInfo *minfo@<r8>, float a4@<xmm0>)
+void __usercall `anonymous namespace::Writer::writeBinaryValue(Writer *this@<rcx>, hkDataObject_Value *value@<rdx>, hkDataClass_MemberInfo *minfo@<r8>, float a4@<xmm0>)
 {
   Writer *v4; // r14
   hkDataClass_MemberInfo *v5; // rbp
@@ -1868,7 +1868,7 @@ void __usercall `anonymous namespace'::Writer::writeBinaryValue(Writer *this@<rc
       ++v10->m_count;
     }
     v12 = ((__int64 (__fastcall *)(hkDataArrayImpl *))v10->vfptr[5].__vecDelDtor)(v10);
-    `anonymous namespace'::Writer::_writeArrayItems(v4, &arr, v12, a4);
+    `anonymous namespace::Writer::_writeArrayItems(v4, &arr, v12, a4);
 LABEL_26:
     --v11[5];
     v26 = (*((_DWORD *)v11 + 3))-- == 1;
@@ -1888,7 +1888,7 @@ LABEL_26:
       ++v13->m_count;
     }
     v15 = ((signed int (__fastcall *)(hkDataArrayImpl *))v13->vfptr[5].__vecDelDtor)(v13);
-    `anonymous namespace'::Writer::writeInt(v4, v15);
+    `anonymous namespace::Writer::writeInt(v4, v15);
     v16 = v5->m_type->m_parent;
     if ( v16->m_subType == 6 && !hkTypeManager::Type::getTypeName(v16) )
     {
@@ -1904,9 +1904,9 @@ LABEL_26:
               (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&v4->m_doneClasses,
               v24,
               0i64);
-      `anonymous namespace'::Writer::writeInt(v4, v25);
+      `anonymous namespace::Writer::writeInt(v4, v25);
     }
-    `anonymous namespace'::Writer::_writeArrayItems(v4, &arr, v15, a4);
+    `anonymous namespace::Writer::_writeArrayItems(v4, &arr, v15, a4);
     --v14->m_externalCount;
     v26 = v14->m_count-- == 1;
     if ( v26 )
@@ -1926,13 +1926,13 @@ LABEL_26:
         break;
       case 4:
         v28 = (__int64)v6->m_impl->vfptr[12].__vecDelDtor((hkDataRefCounted *)v6->m_impl, (unsigned int)v6->m_handle);
-        `anonymous namespace'::Writer::writeInt(v4, v28);
+        `anonymous namespace::Writer::writeInt(v4, v28);
         break;
       case 5:
         v35 = (const char *)v6->m_impl->vfptr[11].__vecDelDtor(
                               (hkDataRefCounted *)v6->m_impl,
                               (unsigned int)v6->m_handle);
-        `anonymous namespace'::Writer::writeString(v4, v35);
+        `anonymous namespace::Writer::writeString(v4, v35);
         break;
       case 6:
         v33 = (hkDataArrayImpl *)v6->m_impl->vfptr[13].__vecDelDtor(
@@ -1944,7 +1944,7 @@ LABEL_26:
           ++v33->m_externalCount;
           ++v33->m_count;
         }
-        `anonymous namespace'::Writer::writeStructReal(v4, (hkDataObject *)&arr);
+        `anonymous namespace::Writer::writeStructReal(v4, (hkDataObject *)&arr);
         v34 = arr.m_impl;
         if ( arr.m_impl )
         {
@@ -1965,7 +1965,7 @@ LABEL_26:
           ++v32->m_externalCount;
           ++v32->m_count;
         }
-        `anonymous namespace'::Writer::writeObjectReference(v4, &obj);
+        `anonymous namespace::Writer::writeObjectReference(v4, &obj);
         if ( v11 )
           goto LABEL_26;
         break;
@@ -1989,7 +1989,7 @@ LABEL_26:
 
 // File Line: 946
 // RVA: 0xE52F80
-void __fastcall `anonymous namespace'::Writer::writeObjectReference(Writer *this, hkDataObject *obj)
+void __fastcall `anonymous namespace::Writer::writeObjectReference(Writer *this, hkDataObject *obj)
 {
   hkDataObject *v2; // rbx
   Writer *v3; // rdi
@@ -2007,7 +2007,7 @@ void __fastcall `anonymous namespace'::Writer::writeObjectReference(Writer *this
     if ( obj->m_impl )
     {
       v9 = *(__m128i *)obj->m_impl->vfptr[1].__vecDelDtor((hkDataRefCounted *)obj->m_impl, (unsigned int)&v9);
-      v4 = hkMapBase<hkDataObject_Handle,int,`anonymous namespace'::HandleOps>::getWithDefault(
+      v4 = hkMapBase<hkDataObject_Handle,int,`anonymous namespace::HandleOps>::getWithDefault(
              (hkMapBase<hkDataObject_Handle,int,HandleOps> *)&v3->m_listenerCache.m_indexFromHandle,
              (hkDataObject_Handle *)&v9,
              -1);
@@ -2032,11 +2032,11 @@ void __fastcall `anonymous namespace'::Writer::writeObjectReference(Writer *this
     _mm_store_si128(&v9, v9);
   }
   v9 = *v6;
-  v7 = hkMapBase<hkDataObject_Handle,int,`anonymous namespace'::HandleOps>::getWithDefault(
+  v7 = hkMapBase<hkDataObject_Handle,int,`anonymous namespace::HandleOps>::getWithDefault(
          (hkMapBase<hkDataObject_Handle,int,HandleOps> *)&v3->m_detailIndexFromObject,
          (hkDataObject_Handle *)&v9,
          -1);
-  `anonymous namespace'::Writer::writeInt(v3, v3->m_details.m_data[v7].objectRememberTag);
+  `anonymous namespace::Writer::writeInt(v3, v3->m_details.m_data[v7].objectRememberTag);
   if ( v5 )
   {
     --v5->m_externalCount;
@@ -2048,7 +2048,7 @@ void __fastcall `anonymous namespace'::Writer::writeObjectReference(Writer *this
 
 // File Line: 957
 // RVA: 0xE52E20
-void __fastcall `anonymous namespace'::Writer::writeObjectReal(Writer *this, hkDataObject *obj)
+void __fastcall `anonymous namespace::Writer::writeObjectReal(Writer *this, hkDataObject *obj)
 {
   hkDataObject *v2; // r14
   Writer *v3; // rdi
@@ -2067,7 +2067,7 @@ void __fastcall `anonymous namespace'::Writer::writeObjectReal(Writer *this, hkD
   if ( this->m_listenerCache.m_listener
     && obj->m_impl
     && (v12 = *(__m128i *)obj->m_impl->vfptr[1].__vecDelDtor((hkDataRefCounted *)obj->m_impl, (unsigned int)&v12),
-        v4 = hkMapBase<hkDataObject_Handle,int,`anonymous namespace'::HandleOps>::getWithDefault(
+        v4 = hkMapBase<hkDataObject_Handle,int,`anonymous namespace::HandleOps>::getWithDefault(
                (hkMapBase<hkDataObject_Handle,int,HandleOps> *)&v3->m_listenerCache.m_indexFromHandle,
                (hkDataObject_Handle *)&v12,
                -1),
@@ -2096,7 +2096,7 @@ void __fastcall `anonymous namespace'::Writer::writeObjectReal(Writer *this, hkD
     _mm_store_si128(&v12, v12);
   }
   v12 = *v7;
-  v8 = &v3->m_details.m_data[(signed int)hkMapBase<hkDataObject_Handle,int,`anonymous namespace'::HandleOps>::getWithDefault(
+  v8 = &v3->m_details.m_data[(signed int)hkMapBase<hkDataObject_Handle,int,`anonymous namespace::HandleOps>::getWithDefault(
                                            (hkMapBase<hkDataObject_Handle,int,HandleOps> *)&v3->m_detailIndexFromObject,
                                            (hkDataObject_Handle *)&v12,
                                            -1)];
@@ -2110,8 +2110,8 @@ void __fastcall `anonymous namespace'::Writer::writeObjectReal(Writer *this, hkD
            v10,
            0xFFFFFFFFFFFFFFFFui64);
   }
-  `anonymous namespace'::Writer::writeInt(v3, v6);
-  `anonymous namespace'::Writer::_writeMembersCommon(v3, v2, v8);
+  `anonymous namespace::Writer::writeInt(v3, v6);
+  `anonymous namespace::Writer::_writeMembersCommon(v3, v2, v8);
   --v5.m_impl->m_externalCount;
   v11 = v5.m_impl->m_count-- == 1;
   if ( v11 )
@@ -2120,7 +2120,7 @@ void __fastcall `anonymous namespace'::Writer::writeObjectReal(Writer *this, hkD
 
 // File Line: 970
 // RVA: 0xE53240
-void __fastcall `anonymous namespace'::Writer::writeStructReal(Writer *this, hkDataObject *obj)
+void __fastcall `anonymous namespace::Writer::writeStructReal(Writer *this, hkDataObject *obj)
 {
   Writer *v2; // rdi
   hkDataObjectImpl *v3; // rcx
@@ -2143,16 +2143,16 @@ void __fastcall `anonymous namespace'::Writer::writeStructReal(Writer *this, hkD
     _mm_store_si128(&v7, v7);
   }
   v7 = *v5;
-  v6 = hkMapBase<hkDataObject_Handle,int,`anonymous namespace'::HandleOps>::getWithDefault(
+  v6 = hkMapBase<hkDataObject_Handle,int,`anonymous namespace::HandleOps>::getWithDefault(
          (hkMapBase<hkDataObject_Handle,int,HandleOps> *)&v2->m_detailIndexFromObject,
          (hkDataObject_Handle *)&v7,
          -1);
-  `anonymous namespace'::Writer::_writeMembersCommon(v2, v4, &v2->m_details.m_data[v6]);
+  `anonymous namespace::Writer::_writeMembersCommon(v2, v4, &v2->m_details.m_data[v6]);
 }
 
 // File Line: 983
 // RVA: 0xE51250
-void __fastcall `anonymous namespace'::Writer::_writeMembersCommon(Writer *this, hkDataObject *obj, Writer::ObjectDetails *details)
+void __fastcall `anonymous namespace::Writer::_writeMembersCommon(Writer *this, hkDataObject *obj, Writer::ObjectDetails *details)
 {
   Writer *v3; // r15
   Writer::ObjectDetails *v4; // rsi
@@ -2186,12 +2186,12 @@ void __fastcall `anonymous namespace'::Writer::_writeMembersCommon(Writer *this,
   v7 = v6;
   v8 = (*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v6 + 72i64))(v6);
   v9 = v8;
-  `anonymous namespace'::Writer::MemberWriteFlags::MemberWriteFlags(&v24, v8);
+  `anonymous namespace::Writer::MemberWriteFlags::MemberWriteFlags(&v24, v8);
   v10 = &v3->m_bitfieldBuf.m_data[v4->bitfieldStartIndex];
   v11 = &v3->m_bitfieldBuf.m_data[v4->bitfieldStartIndex];
   LODWORD(v4) = (signed int)((v24.m_flags.m_size + 7) & 0xFFFFFFF8) / 8;
   hkOArchive::writeRaw(&v3->m_oa, v11, (unsigned int)v4);
-  `anonymous namespace'::Writer::MemberWriteFlags::fromBytes(&v24, v10, (int)v4);
+  `anonymous namespace::Writer::MemberWriteFlags::fromBytes(&v24, v10, (int)v4);
   v12 = (unsigned int)v4 | 0x80000000;
   if ( v12 >= 0 )
     hkContainerTempAllocator::s_alloc.vfptr->bufFree(
@@ -2252,7 +2252,7 @@ void __fastcall `anonymous namespace'::Writer::_writeMembersCommon(Writer *this,
           v5->m_impl,
           &value,
           v20->m_name);
-        `anonymous namespace'::Writer::writeBinaryValue(v3, &value, v20);
+        `anonymous namespace::Writer::writeBinaryValue(v3, &value, v20);
       }
       ++v18;
       v19 += 32i64;
@@ -2277,7 +2277,7 @@ void __fastcall `anonymous namespace'::Writer::_writeMembersCommon(Writer *this,
 
 // File Line: 1048
 // RVA: 0xE53080
-hkResult *__fastcall `anonymous namespace'::Writer::writeObjectTree(Writer *this, hkResult *result, hkDataObject *topObj)
+hkResult *__fastcall `anonymous namespace::Writer::writeObjectTree(Writer *this, hkResult *result, hkDataObject *topObj)
 {
   Writer *v3; // rdi
   hkDataObject *v4; // rbx
@@ -2299,8 +2299,8 @@ hkResult *__fastcall `anonymous namespace'::Writer::writeObjectTree(Writer *this
   hkOArchive::write32(&v3->m_oa, -804128050);
   hkOArchive::write8u(&v3->m_oa, 2);
   hkOArchive::write8u(&v3->m_oa, 8);
-  `anonymous namespace'::Writer::writeString(v3, "hk_2013.2.0-r1");
-  `anonymous namespace'::Writer::scanObjectTree(v3, v7, v4, 0);
+  `anonymous namespace::Writer::writeString(v3, "hk_2013.2.0-r1");
+  `anonymous namespace::Writer::scanObjectTree(v3, v7, v4, 0);
   v8 = 1;
   if ( v3->m_details.m_size > 1 )
   {
@@ -2310,7 +2310,7 @@ hkResult *__fastcall `anonymous namespace'::Writer::writeObjectTree(Writer *this
       if ( v3->m_details.m_data[v9].objectRememberTag != -1 )
       {
         v7->vfptr[5].__vecDelDtor((hkBaseObject *)&v7->vfptr, (unsigned int)&obj);
-        `anonymous namespace'::Writer::writeObjectReal(v3, &obj);
+        `anonymous namespace::Writer::writeObjectReal(v3, &obj);
         v10 = obj.m_impl;
         if ( obj.m_impl )
         {
@@ -2332,7 +2332,7 @@ hkResult *__fastcall `anonymous namespace'::Writer::writeObjectTree(Writer *this
 
 // File Line: 1081
 // RVA: 0xE50930
-void __fastcall `anonymous namespace'::Writer::ListenerCache::~ListenerCache(Writer::ListenerCache *this)
+void __fastcall `anonymous namespace::Writer::ListenerCache::~ListenerCache(Writer::ListenerCache *this)
 {
   int v1; // edi
   Writer::ListenerCache *v2; // rbx
@@ -2378,14 +2378,14 @@ void __fastcall `anonymous namespace'::Writer::ListenerCache::~ListenerCache(Wri
       8 * v8);
   v2->m_cachedObjects.m_data = 0i64;
   v2->m_cachedObjects.m_capacityAndFlags = 2147483648;
-  hkMapBase<hkDataObject_Handle,int,`anonymous namespace'::Writer::HandleOps>::clearAndDeallocate(
+  hkMapBase<hkDataObject_Handle,int,`anonymous namespace::Writer::HandleOps>::clearAndDeallocate(
     (hkMapBase<hkDataObject_Handle,int,HandleOps> *)&v2->m_indexFromHandle,
     (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr);
 }
 
 // File Line: 1103
 // RVA: 0xE51470
-hkDataObject *__fastcall `anonymous namespace'::Writer::ListenerCache::callListenerAndCache(Writer::ListenerCache *this, hkDataObject *result, hkDataObject *object)
+hkDataObject *__fastcall `anonymous namespace::Writer::ListenerCache::callListenerAndCache(Writer::ListenerCache *this, hkDataObject *result, hkDataObject *object)
 {
   hkDataObject *v3; // rsi
   hkDataObject *v4; // rbx
@@ -2426,7 +2426,7 @@ LABEL_15:
   v6 = (__m128i *)object->m_impl->vfptr[1].__vecDelDtor((hkDataRefCounted *)object->m_impl, (unsigned int)&v27);
   v7 = *v6;
   v27 = *v6;
-  v8 = hkMapBase<hkDataObject_Handle,int,`anonymous namespace'::HandleOps>::getWithDefault(
+  v8 = hkMapBase<hkDataObject_Handle,int,`anonymous namespace::HandleOps>::getWithDefault(
          (hkMapBase<hkDataObject_Handle,int,HandleOps> *)&v5->m_indexFromHandle,
          (hkDataObject_Handle *)&v27,
          -1);
@@ -2544,13 +2544,13 @@ hkResult *__fastcall hkBinaryTagfileWriter::save(hkBinaryTagfileWriter *this, hk
   v6 = stream;
   v7 = obj;
   v8 = result;
-  `anonymous namespace'::Writer::Writer(&v10, stream, userListener, options);
-  `anonymous namespace'::Writer::writeObjectTree(&v10, &resulta, v7);
+  `anonymous namespace::Writer::Writer(&v10, stream, userListener, options);
+  `anonymous namespace::Writer::writeObjectTree(&v10, &resulta, v7);
   v6->vfptr[2].__first_virtual_table_function__((hkBaseObject *)&v6->vfptr);
   v8->m_enum = *(_BYTE *)((__int64 (__fastcall *)(hkStreamWriter *, hkResult *))v6->vfptr[1].__first_virtual_table_function__)(
                            v6,
                            &resulta) == 0;
-  `anonymous namespace'::Writer::~Writer(&v10);
+  `anonymous namespace::Writer::~Writer(&v10);
   return v8;
 }
 

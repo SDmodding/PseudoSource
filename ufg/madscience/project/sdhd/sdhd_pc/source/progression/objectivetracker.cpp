@@ -154,7 +154,7 @@ signed __int64 __fastcall UFG::FindCoronaTypeByName(UFG::qString *name)
   {
     ++v3;
     ++v2;
-    if ( (signed __int64)v3 >= (signed __int64)&`anonymous namespace'::gDebugGUI_ProgressionView_Colour_Locked )
+    if ( (signed __int64)v3 >= (signed __int64)&`anonymous namespace::gDebugGUI_ProgressionView_Colour_Locked )
       return 0xFFFFFFFFi64;
   }
   return v2;
@@ -215,7 +215,7 @@ void __fastcall UFG::ObjectiveIndicator::ObjectiveIndicator(UFG::ObjectiveIndica
   this->mNode.mChild[0] = 0i64;
   this->mNode.mChild[1] = 0i64;
   this->mNode.mUID = v7;
-  this->vfptr = (UFG::ObjectiveIndicatorVtbl *)&UFG::ObjectiveIndicator::`vftable';
+  this->vfptr = (UFG::ObjectiveIndicatorVtbl *)&UFG::ObjectiveIndicator::`vftable;
   this->mIdentifier = (UFG::qSymbol)identifier->mUID;
   UFG::qSharedString::qSharedString(&this->mBlipType, blip->mData);
   v8 = &v6->mpEffectTransform;
@@ -245,7 +245,7 @@ void __fastcall UFG::ObjectiveIndicator::~ObjectiveIndicator(UFG::ObjectiveIndic
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v11; // rax
 
   v1 = this;
-  this->vfptr = (UFG::ObjectiveIndicatorVtbl *)&UFG::ObjectiveIndicator::`vftable';
+  this->vfptr = (UFG::ObjectiveIndicatorVtbl *)&UFG::ObjectiveIndicator::`vftable;
   if ( this->mEnabled )
   {
     this->mEnabled = 0;
@@ -464,7 +464,7 @@ void __fastcall UFG::Objective::Objective(UFG::Objective *this, unsigned int loa
   v11->mNode.mChild[0] = 0i64;
   v11->mNode.mChild[1] = 0i64;
   v11->mNode.mUID = v12;
-  v11->vfptr = (UFG::ObjectiveVtbl *)&UFG::Objective::`vftable';
+  v11->vfptr = (UFG::ObjectiveVtbl *)&UFG::Objective::`vftable;
   v11->mpGameSlice = v9;
   UFG::qString::qString(&v11->mIdentifier, v8);
   UFG::qString::qString(&v11->mCaption, caption);
@@ -489,7 +489,7 @@ void __fastcall UFG::Objective::~Objective(UFG::Objective *this)
   UFG::qBaseNodeVariableRB<unsigned __int64> *v5; // rdx
 
   v1 = this;
-  this->vfptr = (UFG::ObjectiveVtbl *)&UFG::Objective::`vftable';
+  this->vfptr = (UFG::ObjectiveVtbl *)&UFG::Objective::`vftable;
   v2 = (Render::Skinning *)&this->mIndicators;
   if ( this->mIndicators.mTree.mCount )
   {

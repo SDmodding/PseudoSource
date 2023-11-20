@@ -31,7 +31,7 @@ hkClass *__fastcall hkaiPathFollowingProperties::staticClass()
 void __fastcall finishLoadedObjecthkaiPathFollowingProperties(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiPathFollowingProperties::`vftable';
+    *(_QWORD *)p = &hkaiPathFollowingProperties::`vftable;
 }
 
 // File Line: 103
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkaiPathFollowingProperties(void *p)
 // RVA: 0xBB7260
 void **__fastcall getVtablehkaiPathFollowingProperties()
 {
-  return &hkaiPathFollowingProperties::`vftable';
+  return &hkaiPathFollowingProperties::`vftable;
 }
 
 // File Line: 129

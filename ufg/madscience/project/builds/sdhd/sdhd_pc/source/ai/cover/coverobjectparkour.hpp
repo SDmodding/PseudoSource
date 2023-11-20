@@ -10,7 +10,7 @@ void __fastcall UFG::CoverObjectParkour::~CoverObjectParkour(UFG::CoverObjectPar
   UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::CoverObjectBaseVtbl *)&UFG::CoverObjectParkour::`vftable';
+  this->vfptr = (UFG::CoverObjectBaseVtbl *)&UFG::CoverObjectParkour::`vftable;
   v2 = &this->m_pParkourHandle;
   if ( this->m_pParkourHandle.m_pPointer )
   {
@@ -28,7 +28,7 @@ void __fastcall UFG::CoverObjectParkour::~CoverObjectParkour(UFG::CoverObjectPar
   v6->mPrev = v5;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (UFG::CoverObjectBaseVtbl *)&UFG::CoverObjectBase::`vftable';
+  v1->vfptr = (UFG::CoverObjectBaseVtbl *)&UFG::CoverObjectBase::`vftable;
 }
 
 // File Line: 97

@@ -12,8 +12,8 @@ void __fastcall Scaleform::GFx::Stream::Stream(Scaleform::GFx::Stream *this, con
   v6 = bufSize;
   v7 = pbuffer;
   v8 = this;
-  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::Stream>Vtbl *)&Scaleform::GFx::LogBase<Scaleform::GFx::Stream>::`vftable';
-  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::Stream>Vtbl *)&Scaleform::GFx::Stream::`vftable';
+  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::Stream>Vtbl *)&Scaleform::GFx::LogBase<Scaleform::GFx::Stream>::`vftable;
+  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::Stream>Vtbl *)&Scaleform::GFx::Stream::`vftable;
   this->pInput.pObject = 0i64;
   Scaleform::StringDH::StringDH(&this->FileName, pheap);
   v8->pBuffer = (char *)v7;
@@ -51,13 +51,13 @@ void __fastcall Scaleform::GFx::Stream::~Stream(Scaleform::GFx::Stream *this)
   Scaleform::Render::RenderBuffer *v2; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::Stream>Vtbl *)&Scaleform::GFx::Stream::`vftable';
+  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::Stream>Vtbl *)&Scaleform::GFx::Stream::`vftable;
   if ( !_InterlockedDecrement((volatile signed __int32 *)((this->FileName.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
     ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
   v2 = (Scaleform::Render::RenderBuffer *)v1->pInput.pObject;
   if ( v2 )
     Scaleform::RefCountImpl::Release(v2);
-  v1->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::Stream>Vtbl *)&Scaleform::GFx::LogBase<Scaleform::GFx::Stream>::`vftable';
+  v1->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::Stream>Vtbl *)&Scaleform::GFx::LogBase<Scaleform::GFx::Stream>::`vftable;
 }
 
 // File Line: 66

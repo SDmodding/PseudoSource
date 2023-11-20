@@ -7,7 +7,7 @@ void __fastcall UFG::UIHKScreenUnlockables::UIHKScreenUnlockables(UFG::UIHKScree
   v1 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -18,9 +18,9 @@ void __fastcall UFG::UIHKScreenUnlockables::UIHKScreenUnlockables(UFG::UIHKScree
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKTaskableScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKTaskableScreen::`vftable;
   this->mFinished = 0;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenUnlockables::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenUnlockables::`vftable;
   this->mWindowState = 0;
   this->isLoadingTexture = 0;
   this->callActionScriptLoadTexture = 0;
@@ -37,7 +37,7 @@ void __fastcall UFG::UIHKScreenUnlockables::~UIHKScreenUnlockables(UFG::UIHKScre
   UFG::UIScreenTextureManager *v4; // rax
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenUnlockables::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenUnlockables::`vftable;
   v2 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseScreen(v2, "Unlockables");
   v3 = v1->mRewardTexturePack.mData;
@@ -116,7 +116,7 @@ void __fastcall UFG::UIHKScreenUnlockables::PopulateFileList(UFG::UIHKScreenUnlo
       v15 = (UFG::qSymbol *)UFG::qSymbol::qSymbol(&v19, v12);
       v16 = UFG::GameStatTracker::Instance();
       v17 = UFG::GameStatTracker::GetStat(v16, Collectible_Bio, v15);
-      `eh vector constructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       if ( (v22 >> 6) & 1 )
       {
         (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v21 + 16i64))(
@@ -143,7 +143,7 @@ void __fastcall UFG::UIHKScreenUnlockables::PopulateFileList(UFG::UIHKScreenUnlo
       v30 = 6;
       v31 = v18;
       Scaleform::GFx::Movie::Invoke(v1, "Unlockables_AddItem", 0i64, (Scaleform::GFx::Value *)&ptr, 3u);
-      `eh vector destructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+      `eh vector destructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
       UFG::qString::~qString(&v33);
       ++v6;
     }
@@ -184,7 +184,7 @@ void __fastcall UFG::UIHKScreenUnlockables::PopulateViews(UFG::UIHKScreenUnlocka
   v2 = windowState;
   v3 = this;
   v4 = this->mRenderable->m_movie.pObject;
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( v2 )
   {
     switch ( v2 )
@@ -296,7 +296,7 @@ void __fastcall UFG::UIHKScreenUnlockables::PopulateViews(UFG::UIHKScreenUnlocka
     Scaleform::GFx::Movie::Invoke(v4, "SetupUnlockablesView", 0i64, (Scaleform::GFx::Value *)&ptr, 3u);
   }
   Scaleform::GFx::Movie::Invoke(v4, "Unlockables_Refresh", 0i64, 0i64, 0);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 117
@@ -343,8 +343,8 @@ void __fastcall UFG::UIHKScreenUnlockables::init(UFG::UIHKScreenUnlockables *thi
   *(_QWORD *)&dataa.MessageIds[4] = 0i64;
   UFG::UIHKHelpBarWidget::Show(v5, &dataa);
   UFG::qString::~qString(&dataa.CustomTexturePack);
-  `eh vector destructor iterator'(dataa.Icons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
-  `eh vector destructor iterator'(dataa.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+  `eh vector destructor iterator(dataa.Icons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+  `eh vector destructor iterator(dataa.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
 }
 
 // File Line: 137
@@ -399,7 +399,7 @@ void __fastcall UFG::UIHKScreenUnlockables::update(UFG::UIHKScreenUnlockables *t
     pval.Type = 0;
     Scaleform::GFx::Movie::GetVariable(v3, &pval, "gUnlockableBioId");
     UFG::qString::FormatEx(&result, "Unlockables_Attachment_%02d", (unsigned int)(signed int)*(double *)&pval.pNext);
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     v4 = result.mData;
     if ( (v7 >> 6) & 1 )
     {
@@ -409,7 +409,7 @@ void __fastcall UFG::UIHKScreenUnlockables::update(UFG::UIHKScreenUnlockables *t
     v7 = 6;
     v8 = v4;
     Scaleform::GFx::Movie::Invoke(v3, "LoadRewardTexture", 0i64, (Scaleform::GFx::Value *)&ptr, 1u);
-    `eh vector constructor iterator'(&pval.Type, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&pval.Type, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( (v10 >> 6) & 1 )
     {
       (*(void (__fastcall **)(unsigned __int64, Scaleform::GFx::Value::ValueType *, __int64))(*(_QWORD *)pval.DataAux
@@ -438,8 +438,8 @@ void __fastcall UFG::UIHKScreenUnlockables::update(UFG::UIHKScreenUnlockables *t
     Scaleform::GFx::Movie::Invoke(v3, "SetupUnlockablesView", 0i64, (Scaleform::GFx::Value *)((char *)&pval + 24), 3u);
     Scaleform::GFx::Movie::Invoke(v3, "Unlockables_Refresh", 0i64, 0i64, 0);
     v2->callActionScriptLoadTexture = 0;
-    `eh vector destructor iterator'(&pval.Type, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&pval.Type, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     UFG::qString::~qString(&result);
     if ( ((unsigned int)pval.Type >> 6) & 1 )
       (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value *))&pval.pObjectInterface->vfptr->gap8[8])(

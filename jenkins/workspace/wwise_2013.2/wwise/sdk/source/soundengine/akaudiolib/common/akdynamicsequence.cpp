@@ -10,7 +10,7 @@ void __fastcall CAkDynamicSequence::CAkDynamicSequence(CAkDynamicSequence *this,
   v4 = in_playingID;
   v5 = this;
   CAkIndexable::CAkIndexable((CAkIndexable *)&this->vfptr, in_playingID);
-  v5->vfptr = (CAkIndexableVtbl *)&CAkDynamicSequence::`vftable';
+  v5->vfptr = (CAkIndexableVtbl *)&CAkDynamicSequence::`vftable;
   v5->m_playList.m_pItems = 0i64;
   *(_QWORD *)&v5->m_playList.m_uLength = 0i64;
   InitializeCriticalSection(&v5->m_lockPlaylist.m_csLock);
@@ -46,7 +46,7 @@ void __fastcall CAkDynamicSequence::~CAkDynamicSequence(CAkDynamicSequence *this
   AkExternalSourceArray *v7; // rcx
 
   v1 = this;
-  this->vfptr = (CAkIndexableVtbl *)&CAkDynamicSequence::`vftable';
+  this->vfptr = (CAkIndexableVtbl *)&CAkDynamicSequence::`vftable;
   if ( this->m_playList.m_pItems )
   {
     AkArray<AK::SoundEngine::DynamicSequence::PlaylistItem,AK::SoundEngine::DynamicSequence::PlaylistItem const &,ArrayPoolDefault,4,AkArrayAllocatorDefault>::RemoveAll((AkArray<AK::SoundEngine::DynamicSequence::PlaylistItem,AK::SoundEngine::DynamicSequence::PlaylistItem const &,ArrayPoolDefault,4,AkArrayAllocatorDefault> *)&this->m_playList.m_pItems);

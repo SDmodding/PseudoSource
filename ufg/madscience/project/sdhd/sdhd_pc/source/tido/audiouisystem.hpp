@@ -14,7 +14,7 @@ void __fastcall UFG::AudioUIScreen::~AudioUIScreen(UFG::AudioUIScreen *this)
   Illusion::Buffer **v3; // rbx
   UFG::qBaseNodeVariableRB<unsigned __int64> *v4; // rdx
 
-  this->vfptr = (UFG::AudioUIScreenVtbl *)&UFG::AudioUIScreen::`vftable';
+  this->vfptr = (UFG::AudioUIScreenVtbl *)&UFG::AudioUIScreen::`vftable;
   v1 = (Render::Skinning *)&this->mInputList;
   if ( this->mInputList.mTree.mCount )
   {

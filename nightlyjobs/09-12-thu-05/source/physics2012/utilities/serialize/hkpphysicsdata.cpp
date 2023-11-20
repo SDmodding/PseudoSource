@@ -3,7 +3,7 @@
 void __fastcall hkpPhysicsData::hkpPhysicsData(hkpPhysicsData *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpPhysicsData::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpPhysicsData::`vftable;
   this->m_systems.m_capacityAndFlags = 2147483648;
   this->m_systems.m_data = 0i64;
   this->m_systems.m_size = 0;
@@ -47,7 +47,7 @@ void __fastcall hkpPhysicsData::populateFromWorld(hkpPhysicsData *this, hkpWorld
     if ( v9 )
     {
       hkpPhysicsSystem::hkpPhysicsSystem(v9);
-      v10->vfptr = (hkBaseObjectVtbl *)&hkpPhysicsSystemWithContacts::`vftable';
+      v10->vfptr = (hkBaseObjectVtbl *)&hkpPhysicsSystemWithContacts::`vftable;
       v10->m_contacts.m_data = 0i64;
       v10->m_contacts.m_size = 0;
       v10->m_contacts.m_capacityAndFlags = 2147483648;
@@ -75,7 +75,7 @@ void __fastcall hkpPhysicsData::~hkpPhysicsData(hkpPhysicsData *this)
   int v5; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpPhysicsData::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpPhysicsData::`vftable;
   v2 = this->m_worldCinfo;
   if ( v2 )
     hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
@@ -100,7 +100,7 @@ void __fastcall hkpPhysicsData::~hkpPhysicsData(hkpPhysicsData *this)
       8 * v5);
   v1->m_systems.m_data = 0i64;
   v1->m_systems.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 68
@@ -179,7 +179,7 @@ LABEL_8:
   v12 = v2->m_worldCinfo;
   if ( v12 && v12->m_collisionFilter.m_pntr )
     hkpWorld::updateCollisionFilterOnWorld(v8, 0, HK_UPDATE_COLLECTION_FILTER_PROCESS_SHAPE_COLLECTIONS);
-  v15.vfptr = (hkBaseObjectVtbl *)&hkpWorldCinfo::`vftable';
+  v15.vfptr = (hkBaseObjectVtbl *)&hkpWorldCinfo::`vftable;
   if ( v15.m_memoryWatchDog.m_pntr )
     hkReferencedObject::removeReference((hkReferencedObject *)&v15.m_memoryWatchDog.m_pntr->vfptr);
   v15.m_memoryWatchDog.m_pntr = 0i64;

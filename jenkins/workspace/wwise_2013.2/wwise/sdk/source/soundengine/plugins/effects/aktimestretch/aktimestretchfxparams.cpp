@@ -7,7 +7,7 @@ AK::IAkPluginParam *__fastcall CreateTimeStretchFXParams(AK::IAkPluginMemAlloc *
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 24ui64);
   if ( result )
   {
-    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkTimeStretchFXParams::`vftable';
+    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkTimeStretchFXParams::`vftable;
     result[1].vfptr = (AK::IAkRTPCSubscriberVtbl *)2048;
     LODWORD(result[2].vfptr) = 0;
     HIDWORD(result[2].vfptr) = 1065353216;
@@ -19,7 +19,7 @@ AK::IAkPluginParam *__fastcall CreateTimeStretchFXParams(AK::IAkPluginMemAlloc *
 // RVA: 0xAECA90
 void __fastcall CAkTimeStretchFXParams::CAkTimeStretchFXParams(CAkTimeStretchFXParams *this)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkTimeStretchFXParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkTimeStretchFXParams::`vftable;
   *(_QWORD *)&this->m_Params.uWindowSize = 2048i64;
   this->m_Params.fTimeStretchRandom = 0.0;
   this->m_Params.fOutputGain = 1.0;
@@ -29,14 +29,14 @@ void __fastcall CAkTimeStretchFXParams::CAkTimeStretchFXParams(CAkTimeStretchFXP
 // RVA: 0xAECAC0
 void __fastcall CAkTimeStretchFXParams::~CAkTimeStretchFXParams(CAkTimeStretchFXParams *this)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable;
 }
 
 // File Line: 35
 // RVA: 0xAECAE0
 void __fastcall CAkTimeStretchFXParams::CAkTimeStretchFXParams(CAkTimeStretchFXParams *this, CAkTimeStretchFXParams *in_rCopy)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkTimeStretchFXParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkTimeStretchFXParams::`vftable;
   *(_QWORD *)&this->m_Params.uWindowSize = 2048i64;
   this->m_Params.fOutputGain = 1.0;
   this->m_Params.fTimeStretchRandom = 0.0;
@@ -57,7 +57,7 @@ AK::IAkPluginParam *__fastcall CAkTimeStretchFXParams::Clone(CAkTimeStretchFXPar
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 24ui64);
   if ( result )
   {
-    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkTimeStretchFXParams::`vftable';
+    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkTimeStretchFXParams::`vftable;
     result[1].vfptr = (AK::IAkRTPCSubscriberVtbl *)2048;
     LODWORD(result[2].vfptr) = 0;
     HIDWORD(result[2].vfptr) = 1065353216;

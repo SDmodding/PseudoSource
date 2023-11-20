@@ -498,7 +498,7 @@ void __fastcall hkp3AxisSweep::updateAabbs(hkp3AxisSweep *this, hkpBroadPhaseHan
            (__m128)0i64);
     v10 = _mm_sub_epi32(
             _mm_xor_si128(
-              (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v9),
+              (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v9),
               _mm_cvttps_epi32(v9)),
             (__m128i)_xmm);
     v11 = _mm_min_ps(
@@ -506,7 +506,7 @@ void __fastcall hkp3AxisSweep::updateAabbs(hkp3AxisSweep *this, hkpBroadPhaseHan
             hkp3AxisSweep::MaxVal);
     v148 = (unsigned __int128)_mm_add_epi16(
                                 _mm_packs_epi32(v10, v10),
-                                (__m128i)`hkIntVector::setConvertSaturateS32ToU16'::`2'::offset2);
+                                (__m128i)`hkIntVector::setConvertSaturateS32ToU16::`2::offset2);
     v12 = v148 & 0xFFFE;
     v13 = _mm_max_ps(v11, (__m128)0i64);
     v154 = WORD1(v148) & 0xFFFE;
@@ -514,13 +514,13 @@ void __fastcall hkp3AxisSweep::updateAabbs(hkp3AxisSweep *this, hkpBroadPhaseHan
     v145 = WORD2(v148) & 0xFFFE;
     v14 = _mm_sub_epi32(
             _mm_xor_si128(
-              (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v13),
+              (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v13),
               _mm_cvttps_epi32(v13)),
             (__m128i)_xmm);
     v146 = v148 & 0xFFFE;
     v149 = (unsigned __int128)_mm_add_epi16(
                                 _mm_packs_epi32(v14, v14),
-                                (__m128i)`hkIntVector::setConvertSaturateS32ToU16'::`2'::offset2);
+                                (__m128i)`hkIntVector::setConvertSaturateS32ToU16::`2::offset2);
     v15 = (unsigned __int16)v149 | 1;
     v150 = WORD2(v149) | 1;
     v16 = (*objects)->m_id;
@@ -2105,7 +2105,7 @@ void __usercall hkp3AxisSweep::hkp3AxisSweep(hkp3AxisSweep *this@<rcx>, hkVector
   hkpBroadPhase::hkpBroadPhase((hkpBroadPhase *)&this->vfptr, 0, 272, 4123);
   v9 = (signed __int64)v8->m_axis;
   v10 = (signed __int64)&v8->m_nodes;
-  v8->vfptr = (hkBaseObjectVtbl *)&hkp3AxisSweep::`vftable';
+  v8->vfptr = (hkBaseObjectVtbl *)&hkp3AxisSweep::`vftable;
   *(_QWORD *)v10 = 0i64;
   *(_DWORD *)(v10 + 8) = 0;
   *(_DWORD *)(v10 + 12) = 2147483648;
@@ -2139,7 +2139,7 @@ void __usercall hkp3AxisSweep::hkp3AxisSweep(hkp3AxisSweep *this@<rcx>, hkVector
   v16 = 23i64;
   v8->m_offsetHigh = 0i64;
   v17 = _mm_load_si128((const __m128i *)&_xmm);
-  v18 = _mm_load_si128((const __m128i *)&`hkIntVector::setConvertSaturateS32ToU16'::`2'::offset2);
+  v18 = _mm_load_si128((const __m128i *)&`hkIntVector::setConvertSaturateS32ToU16::`2::offset2);
   v19 = (__m128)LODWORD(FLOAT_11_0);
   do
   {
@@ -2160,7 +2160,7 @@ void __usercall hkp3AxisSweep::hkp3AxisSweep(hkp3AxisSweep *this@<rcx>, hkVector
             (__m128)0i64);
     v23 = _mm_sub_epi32(
             _mm_xor_si128(
-              (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v22),
+              (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v22),
               _mm_cvttps_epi32(v22)),
             v17);
     if ( ((unsigned __int16)*(_OWORD *)&_mm_add_epi16(_mm_packs_epi32(v23, v23), v18) | 1u) >= 0xC )
@@ -2336,7 +2336,7 @@ void __fastcall hkp3AxisSweep::~hkp3AxisSweep(hkp3AxisSweep *this)
   int v11; // eax
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkp3AxisSweep::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkp3AxisSweep::`vftable;
   v2 = 0;
   if ( this->m_numMarkers > 0 )
   {
@@ -3611,28 +3611,28 @@ void __fastcall hkp3AxisSweep::addObject(hkp3AxisSweep *this, hkpBroadPhaseHandl
            hkAabbUtil::hkAabbUint32MaxVal),
          (__m128)0i64);
   v8 = _mm_add_ps(
-         *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31,
-         *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31);
-  v9 = (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v7);
+         *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31,
+         *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31);
+  v9 = (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v7);
   v10 = _mm_or_si128(
           _mm_add_epi32(
             _mm_cvttps_epi32(
               _mm_max_ps(
-                _mm_sub_ps(v7, _mm_and_ps((__m128)v9, *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31)),
+                _mm_sub_ps(v7, _mm_and_ps((__m128)v9, *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31)),
                 (__m128)0i64)),
             _mm_slli_epi32(v9, 0x1Fu)),
           (__m128i)_mm_cmpleps(v8, v7));
   v11 = _mm_add_ps(this->m_offsetHigh32bit.m_quad, aabbIn->m_max.m_quad);
   _mm_store_si128((__m128i *)&v14, v10);
   v12 = _mm_max_ps(_mm_min_ps(_mm_mul_ps(v11, this->m_scale32bit.m_quad), hkAabbUtil::hkAabbUint32MaxVal), (__m128)0i64);
-  v13 = (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v12);
+  v13 = (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v12);
   _mm_store_si128(
     (__m128i *)&v15,
     _mm_or_si128(
       _mm_add_epi32(
         _mm_cvttps_epi32(
           _mm_max_ps(
-            _mm_sub_ps(v12, _mm_and_ps((__m128)v13, *(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31)),
+            _mm_sub_ps(v12, _mm_and_ps((__m128)v13, *(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31)),
             (__m128)0i64)),
         _mm_slli_epi32(v13, 0x1Fu)),
       (__m128i)_mm_cmpleps(v8, v12)));
@@ -4334,7 +4334,7 @@ void __fastcall hkp3AxisSweep::addObjectBatch(hkp3AxisSweep *this, hkArrayBase<h
                 (__m128)0i64);
         v31 = _mm_sub_epi32(
                 _mm_xor_si128(
-                  (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v30),
+                  (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v30),
                   _mm_cvttps_epi32(v30)),
                 (__m128i)_xmm);
         v32 = _mm_min_ps(
@@ -4344,19 +4344,19 @@ void __fastcall hkp3AxisSweep::addObjectBatch(hkp3AxisSweep *this, hkArrayBase<h
                 hkp3AxisSweep::MaxVal);
         *(_QWORD *)&result[0].m_enum = (unsigned __int128)_mm_add_epi16(
                                                             _mm_packs_epi32(v31, v31),
-                                                            (__m128i)`hkIntVector::setConvertSaturateS32ToU16'::`2'::offset2);
+                                                            (__m128i)`hkIntVector::setConvertSaturateS32ToU16::`2::offset2);
         v159 = result[0].m_enum & 0xFFFE;
         v33 = _mm_max_ps(v32, (__m128)0i64);
         v160 = HIWORD(result[0].m_enum) & 0xFFFE;
         v161 = result[1].m_enum & 0xFFFE;
         v34 = _mm_sub_epi32(
                 _mm_xor_si128(
-                  (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v33),
+                  (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v33),
                   _mm_cvttps_epi32(v33)),
                 (__m128i)_xmm);
         v149 = (unsigned __int128)_mm_add_epi16(
                                     _mm_packs_epi32(v34, v34),
-                                    (__m128i)`hkIntVector::setConvertSaturateS32ToU16'::`2'::offset2);
+                                    (__m128i)`hkIntVector::setConvertSaturateS32ToU16::`2::offset2);
         v162 = (unsigned __int16)v149 | 1;
         v163 = WORD1(v149) | 1;
         v164 = WORD2(v149) | 1;
@@ -4434,25 +4434,25 @@ void __fastcall hkp3AxisSweep::addObjectBatch(hkp3AxisSweep *this, hkArrayBase<h
             (__m128)0i64);
     v55 = _mm_sub_epi32(
             _mm_xor_si128(
-              (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v54),
+              (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v54),
               _mm_cvttps_epi32(v54)),
             (__m128i)_xmm);
     v56 = _mm_min_ps(_mm_mul_ps(_mm_add_ps(v42->m_offsetHigh.m_quad, v22), v42->m_scale.m_quad), hkp3AxisSweep::MaxVal);
     *(_QWORD *)&result[0].m_enum = (unsigned __int128)_mm_add_epi16(
                                                         _mm_packs_epi32(v55, v55),
-                                                        (__m128i)`hkIntVector::setConvertSaturateS32ToU16'::`2'::offset2);
+                                                        (__m128i)`hkIntVector::setConvertSaturateS32ToU16::`2::offset2);
     v57 = result[0].m_enum & 0xFFFE;
     v160 = HIWORD(result[0].m_enum) & 0xFFFE;
     v58 = _mm_max_ps(v56, (__m128)0i64);
     v161 = result[1].m_enum & 0xFFFE;
     v59 = _mm_sub_epi32(
             _mm_xor_si128(
-              (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v58),
+              (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v58),
               _mm_cvttps_epi32(v58)),
             (__m128i)_xmm);
     v149 = (unsigned __int128)_mm_add_epi16(
                                 _mm_packs_epi32(v59, v59),
-                                (__m128i)`hkIntVector::setConvertSaturateS32ToU16'::`2'::offset2);
+                                (__m128i)`hkIntVector::setConvertSaturateS32ToU16::`2::offset2);
     v60 = (unsigned __int16)v149 | 1;
     v163 = WORD1(v149) | 1;
     v61 = v42->m_numMarkers == 0;
@@ -6167,12 +6167,12 @@ void __fastcall hkp3AxisSweep::querySingleAabb(hkp3AxisSweep *this, hkAabb *aabb
           (__m128)0i64);
   v15 = _mm_sub_epi32(
           _mm_xor_si128(
-            (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v14),
+            (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v14),
             _mm_cvttps_epi32(v14)),
           (__m128i)_xmm);
   v52 = (unsigned __int128)_mm_add_epi16(
                              _mm_packs_epi32(v15, v15),
-                             (__m128i)`hkIntVector::setConvertSaturateS32ToU16'::`2'::offset2);
+                             (__m128i)`hkIntVector::setConvertSaturateS32ToU16::`2::offset2);
   v16 = v52 & 0xFFFE;
   v17 = _mm_max_ps(
           _mm_min_ps(
@@ -6181,12 +6181,12 @@ void __fastcall hkp3AxisSweep::querySingleAabb(hkp3AxisSweep *this, hkAabb *aabb
           (__m128)0i64);
   v18 = _mm_sub_epi32(
           _mm_xor_si128(
-            (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v17),
+            (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v17),
             _mm_cvttps_epi32(v17)),
           (__m128i)_xmm);
   v54 = (unsigned __int128)_mm_add_epi16(
                              _mm_packs_epi32(v18, v18),
-                             (__m128i)`hkIntVector::setConvertSaturateS32ToU16'::`2'::offset2);
+                             (__m128i)`hkIntVector::setConvertSaturateS32ToU16::`2::offset2);
   v19 = (unsigned __int16)v54 | 1;
   if ( v6->m_numMarkers )
   {
@@ -6436,12 +6436,12 @@ void __fastcall hkp3AxisSweep::querySingleAabbWithCollector(hkp3AxisSweep *this,
           (__m128)0i64);
   v15 = _mm_sub_epi32(
           _mm_xor_si128(
-            (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v14),
+            (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v14),
             _mm_cvttps_epi32(v14)),
           (__m128i)_xmm);
   v44 = (unsigned __int128)_mm_add_epi16(
                              _mm_packs_epi32(v15, v15),
-                             (__m128i)`hkIntVector::setConvertSaturateS32ToU16'::`2'::offset2);
+                             (__m128i)`hkIntVector::setConvertSaturateS32ToU16::`2::offset2);
   v16 = v44 & 0xFFFE;
   v17 = _mm_max_ps(
           _mm_min_ps(
@@ -6450,12 +6450,12 @@ void __fastcall hkp3AxisSweep::querySingleAabbWithCollector(hkp3AxisSweep *this,
           (__m128)0i64);
   v18 = _mm_sub_epi32(
           _mm_xor_si128(
-            (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v17),
+            (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v17),
             _mm_cvttps_epi32(v17)),
           (__m128i)_xmm);
   v45 = (unsigned __int128)_mm_add_epi16(
                              _mm_packs_epi32(v18, v18),
-                             (__m128i)`hkIntVector::setConvertSaturateS32ToU16'::`2'::offset2);
+                             (__m128i)`hkIntVector::setConvertSaturateS32ToU16::`2::offset2);
   v19 = (unsigned __int16)v45 | 1;
   if ( v6->m_numMarkers )
   {
@@ -6693,7 +6693,7 @@ void __fastcall hkp3AxisSweep::calcAabbCache(hkp3AxisSweep *this, hkAabb *aabb, 
           (__m128)0i64);
   v17 = _mm_sub_epi32(
           _mm_xor_si128(
-            (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v16),
+            (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v16),
             _mm_cvttps_epi32(v16)),
           (__m128i)_xmm);
   v18 = _mm_min_ps(
@@ -6701,19 +6701,19 @@ void __fastcall hkp3AxisSweep::calcAabbCache(hkp3AxisSweep *this, hkAabb *aabb, 
           hkp3AxisSweep::MaxVal);
   v19 = (unsigned __int128)_mm_add_epi16(
                              _mm_packs_epi32(v17, v17),
-                             (__m128i)`hkIntVector::setConvertSaturateS32ToU16'::`2'::offset2);
+                             (__m128i)`hkIntVector::setConvertSaturateS32ToU16::`2::offset2);
   v20 = v19 & 0xFFFE;
   v58 = WORD1(v19) & 0xFFFE;
   v21 = _mm_max_ps(v18, (__m128)0i64);
   v59 = WORD2(v19) & 0xFFFE;
   v22 = _mm_sub_epi32(
           _mm_xor_si128(
-            (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v21),
+            (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v21),
             _mm_cvttps_epi32(v21)),
           (__m128i)_xmm);
   v23 = (unsigned __int128)_mm_add_epi16(
                              _mm_packs_epi32(v22, v22),
-                             (__m128i)`hkIntVector::setConvertSaturateS32ToU16'::`2'::offset2);
+                             (__m128i)`hkIntVector::setConvertSaturateS32ToU16::`2::offset2);
   v24 = (unsigned __int16)v23 | 1;
   v60 = WORD1(v23) | 1;
   v25 = v6->m_numMarkers == 0;
@@ -7401,12 +7401,12 @@ void __fastcall hkp3AxisSweep::castRay(hkp3AxisSweep *this, hkpBroadPhase::hkpCa
   v6 = rayInput;
   v7 = this;
   v8 = _mm_max_ps(_mm_min_ps(_mm_mul_ps(v4, this->m_scale.m_quad), hkp3AxisSweep::MaxVal), (__m128)0i64);
-  v9 = (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v8);
+  v9 = (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v8);
   v10 = _mm_cvttps_epi32(v8);
   v11 = _mm_sub_epi32(_mm_xor_si128(v9, v10), (__m128i)_xmm);
   v129 = (hkp3AxisSweep *)*(_OWORD *)&_mm_add_epi16(
                                         _mm_packs_epi32(v11, v11),
-                                        (__m128i)`hkIntVector::setConvertSaturateS32ToU16'::`2'::offset2);
+                                        (__m128i)`hkIntVector::setConvertSaturateS32ToU16::`2::offset2);
   v115.m128i_i32[0] = (unsigned __int16)v129;
   v115.m128i_i32[1] = WORD1(v129);
   v115.m128i_i32[2] = WORD2(v129);
@@ -7707,7 +7707,7 @@ LABEL_68:
       v121 = v124;
       v71 = 0;
       v122 = v125;
-      v72 = (__m128 *)`hkVector4f::getComponent'::`2'::indexToMask;
+      v72 = (__m128 *)`hkVector4f::getComponent::`2::indexToMask;
       LODWORD(v73) = 1;
       v74 = (__int128 *)&v117;
       v75 = v6->m_toStriding * v66;
@@ -8032,24 +8032,24 @@ void __fastcall hkp3AxisSweep::castAabb(hkp3AxisSweep *this, hkpBroadPhase::hkpC
          (__m128)0i64);
   v9 = _mm_sub_epi32(
          _mm_xor_si128(
-           (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v8),
+           (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v8),
            _mm_cvttps_epi32(v8)),
          (__m128i)_xmm);
   v9.m128i_i64[0] = (unsigned __int128)_mm_add_epi16(
                                          _mm_packs_epi32(v9, v9),
-                                         (__m128i)`hkIntVector::setConvertSaturateS32ToU16'::`2'::offset2);
+                                         (__m128i)`hkIntVector::setConvertSaturateS32ToU16::`2::offset2);
   v10 = _mm_min_ps(_mm_mul_ps(_mm_add_ps(v6, this->m_offsetLow.m_quad), this->m_scale.m_quad), hkp3AxisSweep::MaxVal);
   v99.m128_i32[0] = v9.m128i_u16[0];
   v99.m128_i32[1] = v9.m128i_u16[1];
   v11 = _mm_max_ps(v10, (__m128)0i64);
-  v12 = (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32'::`2'::two31, v11);
+  v12 = (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v11);
   v13 = _mm_cvttps_epi32(v11);
   v99.m128_i32[2] = v9.m128i_u16[2];
   v99.m128_i32[3] = v9.m128i_u16[3];
   v14 = _mm_sub_epi32(_mm_xor_si128(v12, v13), (__m128i)_xmm);
   v15 = (unsigned __int128)_mm_add_epi16(
                              _mm_packs_epi32(v14, v14),
-                             (__m128i)`hkIntVector::setConvertSaturateS32ToU16'::`2'::offset2);
+                             (__m128i)`hkIntVector::setConvertSaturateS32ToU16::`2::offset2);
   v98.m128_i32[0] = (unsigned __int16)v15;
   v98.m128_i32[1] = WORD1(v15);
   v98.m128_i32[2] = WORD2(v15);

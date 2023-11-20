@@ -84,7 +84,7 @@ void __fastcall UFG::RadarComponent::RadarComponent(UFG::RadarComponent *this, U
   v4 = (UFG::qNode<UFG::RadarComponent,UFG::RadarComponent> *)&v3->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::RadarComponent::`vftable';
+  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::RadarComponent::`vftable;
   v3->mRadarHighlightType = UFG::gNullQSymbol;
   v5 = UFG::RadarComponent::s_RadarComponentList.mNode.mPrev;
   UFG::RadarComponent::s_RadarComponentList.mNode.mPrev->mNext = (UFG::qNode<UFG::RadarComponent,UFG::RadarComponent> *)&v3->mPrev;
@@ -114,7 +114,7 @@ void __fastcall UFG::RadarComponent::~RadarComponent(UFG::RadarComponent *this)
   UFG::qNode<UFG::RadarComponent,UFG::RadarComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::RadarComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::RadarComponent::`vftable;
   if ( this == UFG::RadarComponent::s_RadarComponentpCurrentIterator )
     UFG::RadarComponent::s_RadarComponentpCurrentIterator = (UFG::RadarComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::RadarComponent,UFG::RadarComponent> *)&this->mPrev;

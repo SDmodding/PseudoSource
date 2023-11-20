@@ -11,8 +11,8 @@ void __fastcall hkpTriSampledHeightFieldCollection::hkpTriSampledHeightFieldColl
     (hkpShapeCollection *)&this->vfptr,
     TRI_SAMPLED_HEIGHT_FIELD_COLLECTION,
     COLLECTION_TRISAMPLED_HEIGHTFIELD);
-  v4->vfptr = (hkBaseObjectVtbl *)&hkpTriSampledHeightFieldCollection::`vftable'{for `hkpShape'};
-  v4->vfptr = (hkpShapeContainerVtbl *)&hkpTriSampledHeightFieldCollection::`vftable'{for `hkpShapeContainer'};
+  v4->vfptr = (hkBaseObjectVtbl *)&hkpTriSampledHeightFieldCollection::`vftable{for `hkpShape};
+  v4->vfptr = (hkpShapeContainerVtbl *)&hkpTriSampledHeightFieldCollection::`vftable{for `hkpShapeContainer};
   v4->m_weldingInfo.m_capacityAndFlags = 2147483648;
   v4->m_weldingInfo.m_data = 0i64;
   v4->m_weldingInfo.m_size = 0;
@@ -32,8 +32,8 @@ void __fastcall hkpTriSampledHeightFieldCollection::hkpTriSampledHeightFieldColl
   v3 = flag.m_finishing;
   v2 = this;
   hkpShapeCollection::hkpShapeCollection((hkpShapeCollection *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpTriSampledHeightFieldCollection::`vftable'{for `hkpShape'};
-  v2->vfptr = (hkpShapeContainerVtbl *)&hkpTriSampledHeightFieldCollection::`vftable'{for `hkpShapeContainer'};
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpTriSampledHeightFieldCollection::`vftable{for `hkpShape};
+  v2->vfptr = (hkpShapeContainerVtbl *)&hkpTriSampledHeightFieldCollection::`vftable{for `hkpShapeContainer};
   if ( v3 )
   {
     v2->m_type.m_storage = 6;
@@ -49,8 +49,8 @@ void __fastcall hkpTriSampledHeightFieldCollection::~hkpTriSampledHeightFieldCol
   int v2; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpTriSampledHeightFieldCollection::`vftable'{for `hkpShape'};
-  this->vfptr = (hkpShapeContainerVtbl *)&hkpTriSampledHeightFieldCollection::`vftable'{for `hkpShapeContainer'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkpTriSampledHeightFieldCollection::`vftable{for `hkpShape};
+  this->vfptr = (hkpShapeContainerVtbl *)&hkpTriSampledHeightFieldCollection::`vftable{for `hkpShapeContainer};
   hkReferencedObject::removeReference((hkReferencedObject *)&this->m_heightfield->vfptr);
   v2 = v1->m_weldingInfo.m_capacityAndFlags;
   v1->m_weldingInfo.m_size = 0;
@@ -61,8 +61,8 @@ void __fastcall hkpTriSampledHeightFieldCollection::~hkpTriSampledHeightFieldCol
       2 * (v2 & 0x3FFFFFFF));
   v1->m_weldingInfo.m_data = 0i64;
   v1->m_weldingInfo.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkpShapeContainerVtbl *)&hkpShapeContainer::`vftable';
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkpShapeContainerVtbl *)&hkpShapeContainer::`vftable;
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 57
@@ -139,7 +139,7 @@ hkpShape *__usercall hkpTriSampledHeightFieldCollection::getChildShape@<rax>(hkp
     *(_DWORD *)&(*v5)[32] = v11;
     *(_QWORD *)&(*v5)[24] = 0i64;
     a4 = 0i64;
-    *(_QWORD *)v5 = &hkpTriangleShape::`vftable';
+    *(_QWORD *)v5 = &hkpTriangleShape::`vftable;
     *(_DWORD *)&(*v5)[40] = 393216;
     *(_OWORD *)&(*v5)[96] = 0i64;
   }

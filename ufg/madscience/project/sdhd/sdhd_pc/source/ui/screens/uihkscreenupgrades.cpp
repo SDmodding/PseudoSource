@@ -20,7 +20,7 @@ void __fastcall UFG::UIHKScreenUpgrades::UIHKScreenUpgrades(UFG::UIHKScreenUpgra
   v1 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -31,7 +31,7 @@ void __fastcall UFG::UIHKScreenUpgrades::UIHKScreenUpgrades(UFG::UIHKScreenUpgra
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenUpgrades::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenUpgrades::`vftable;
   *(_WORD *)&this->mCanUpgrade = 0;
   this->mIsKeyboardController = 0;
   this->mState = 0;
@@ -60,7 +60,7 @@ void __fastcall UFG::UIHKScreenUpgrades::~UIHKScreenUpgrades(UFG::UIHKScreenUpgr
   unsigned int v7; // eax
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenUpgrades::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenUpgrades::`vftable;
   v2 = UFG::UIHKScreenGlobalOverlay::mThis;
   if ( !UFG::UIHKScreenGlobalOverlay::mThis )
     v2 = &gGlobalOverlaySentinel;
@@ -322,12 +322,12 @@ LABEL_24:
     v22 = &gGlobalOverlaySentinel;
   UFG::UIHKHelpBarWidget::Show(&v22->HelpBar, &data);
   UFG::qString::~qString((UFG::qString *)&data.MessageIds[4]);
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     &data.Captions[5].mStringHash32,
     0x28ui64,
     6,
     (void (__fastcall *)(void *))UFG::qString::~qString);
-  `eh vector destructor iterator'(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+  `eh vector destructor iterator(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
 }
 
 // File Line: 194
@@ -1239,8 +1239,8 @@ void __fastcall UFG::UIHKScreenUpgrades::Flash_InitText(UFG::UIHKScreenUpgrades 
 
   v99 = this;
   v93 = -2i64;
-  `eh vector constructor iterator'(ptr, 0x28ui64, 12, (void (__fastcall *)(void *))UFG::qString::qString);
-  `eh vector constructor iterator'(v95, 0x28ui64, 12, (void (__fastcall *)(void *))UFG::qString::qString);
+  `eh vector constructor iterator(ptr, 0x28ui64, 12, (void (__fastcall *)(void *))UFG::qString::qString);
+  `eh vector constructor iterator(v95, 0x28ui64, 12, (void (__fastcall *)(void *))UFG::qString::qString);
   caption = &customWorldMapCaption;
   v1 = &customWorldMapCaption;
   v2 = 0;
@@ -1647,8 +1647,8 @@ LABEL_123:
     v91.pObjectInterface = 0i64;
   }
   v91.Type = 0;
-  `eh vector destructor iterator'(v95, 0x28ui64, 12, (void (__fastcall *)(void *))UFG::qString::~qString);
-  `eh vector destructor iterator'(ptr, 0x28ui64, 12, (void (__fastcall *)(void *))UFG::qString::~qString);
+  `eh vector destructor iterator(v95, 0x28ui64, 12, (void (__fastcall *)(void *))UFG::qString::~qString);
+  `eh vector destructor iterator(ptr, 0x28ui64, 12, (void (__fastcall *)(void *))UFG::qString::~qString);
 }
 
 // File Line: 987
@@ -1897,7 +1897,7 @@ LABEL_7:
     Scaleform::GFx::Movie::SetVariable(v2, "mc_healthUpgradeDisplay.mc_info.tf_maxHealth.text", &value, 1i64);
     UFG::qString::~qString(&v44);
   }
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( UFG::UIHKScreenUpgrades::mUpgradesType )
   {
     switch ( UFG::UIHKScreenUpgrades::mUpgradesType )
@@ -2004,7 +2004,7 @@ LABEL_72:
   value.mValue.NValue = (double)v38;
   Scaleform::GFx::Movie::SetVariable(v2, "gMeleeUpgradePoints", &value, 1i64);
   Scaleform::GFx::Movie::Invoke(v2, "Init", 0i64, (Scaleform::GFx::Value *)&ptr, 1u);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   if ( ((unsigned int)value.Type >> 6) & 1 )
     (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&value.pObjectInterface->vfptr->gap8[8])(
       value.pObjectInterface,
@@ -2039,7 +2039,7 @@ void __fastcall UFG::UIHKScreenUpgrades::Flash_RefreshCursor(UFG::UIHKScreenUpgr
   v19 = -2i64;
   v1 = this;
   v2 = this->mRenderable->m_movie.pObject;
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   v3 = UFG::UIHKScreenUpgrades::mUpgradesType;
   v4 = (double)v1->mCursorXPos[UFG::UIHKScreenUpgrades::mUpgradesType];
   if ( (v9 >> 6) & 1 )
@@ -2071,7 +2071,7 @@ void __fastcall UFG::UIHKScreenUpgrades::Flash_RefreshCursor(UFG::UIHKScreenUpgr
   v17 = 2;
   LOBYTE(v18) = v6;
   Scaleform::GFx::Movie::Invoke(v2, "SetCursorPos", 0i64, (Scaleform::GFx::Value *)&ptr, 3u);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 1115
@@ -2085,7 +2085,7 @@ void __fastcall UFG::UIHKScreenUpgrades::Flash_HandleUpgradeSelected(UFG::UIHKSc
 
   v1 = this;
   v2 = this->mRenderable->m_movie.pObject;
-  `eh vector constructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   v3 = (double)v1->mCursorYPos[UFG::UIHKScreenUpgrades::mUpgradesType];
   if ( ((unsigned int)pargs.Type >> 6) & 1 )
   {
@@ -2098,7 +2098,7 @@ void __fastcall UFG::UIHKScreenUpgrades::Flash_HandleUpgradeSelected(UFG::UIHKSc
   pargs.Type = 5;
   pargs.mValue.NValue = v3;
   Scaleform::GFx::Movie::Invoke(v2, "HandleUpgradeSelected", 0i64, &pargs, 1u);
-  `eh vector destructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 1127
@@ -2111,7 +2111,7 @@ void __fastcall UFG::UIHKScreenUpgrades::Flash_SetSelectedTab(UFG::UIHKScreenUpg
 
   v2 = caption;
   v3 = this->mRenderable->m_movie.pObject;
-  `eh vector constructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( ((unsigned int)pargs.Type >> 6) & 1 )
   {
     (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
@@ -2123,7 +2123,7 @@ void __fastcall UFG::UIHKScreenUpgrades::Flash_SetSelectedTab(UFG::UIHKScreenUpg
   pargs.Type = 6;
   *(_QWORD *)&pargs.mValue.NValue = v2;
   Scaleform::GFx::Movie::Invoke(v3, "TabMenuWidgetList_JumpToItem", 0i64, &pargs, 1u);
-  `eh vector destructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 1183

@@ -72,7 +72,7 @@ void __fastcall UFG::TSUI_HUD_Race::MthdC_start_countdown(SSInvokedMethod *pScop
     v4 = v2 + 1;
     v4->mNext = v4;
     v4[1].mNext = v4;
-    v3->vfptr = (UFG::UIScreenInvokeVtbl *)&UFG::UIScreenInvoke::`vftable';
+    v3->vfptr = (UFG::UIScreenInvokeVtbl *)&UFG::UIScreenInvoke::`vftable;
     UFG::qString::qString(&v3->command, &customWorldMapCaption);
   }
   else

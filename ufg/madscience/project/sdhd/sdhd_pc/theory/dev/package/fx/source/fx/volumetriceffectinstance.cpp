@@ -9,10 +9,10 @@ void __fastcall Render::VolumetricEffectInstance::VolumetricEffectInstance(Rende
   v2 = (UFG::qNode<Render::FXComponentInstance,Render::FXComponentInstance> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable';
+  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable;
   *(_QWORD *)&this->mForceSuspendState = 0i64;
   *(_WORD *)&this->mIsActive = 0;
-  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::VolumetricEffectInstance::`vftable';
+  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::VolumetricEffectInstance::`vftable;
   this->mOwnedVolumes.p = 0i64;
   *(_QWORD *)&this->mOwnedVolumes.size = 0i64;
   UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&this->mSettingsHandle.mPrev);
@@ -33,14 +33,14 @@ void __fastcall Render::VolumetricEffectInstance::~VolumetricEffectInstance(Rend
   UFG::qNode<Render::FXComponentInstance,Render::FXComponentInstance> *v7; // rax
 
   v1 = this;
-  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::VolumetricEffectInstance::`vftable';
+  this->vfptr = (Render::FXComponentInstanceVtbl *)&Render::VolumetricEffectInstance::`vftable;
   Render::VolumetricEffectInstance::Deactivate(this, 0);
-  v2 = `UFG::qGetResourceInventory<Render::VolumetricEffectSettings>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Render::VolumetricEffectSettings>'::`2'::result )
+  v2 = `UFG::qGetResourceInventory<Render::VolumetricEffectSettings>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Render::VolumetricEffectSettings>::`2::result )
   {
     v3 = UFG::qResourceWarehouse::Instance();
     v2 = UFG::qResourceWarehouse::GetInventory(v3, 0xE4B8F46A);
-    `UFG::qGetResourceInventory<Render::VolumetricEffectSettings>'::`2'::result = v2;
+    `UFG::qGetResourceInventory<Render::VolumetricEffectSettings>::`2::result = v2;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mSettingsHandle.mPrev, v2);
   UFG::qResourceHandle::~qResourceHandle((UFG::qResourceHandle *)&v1->mSettingsHandle.mPrev);
@@ -49,7 +49,7 @@ void __fastcall Render::VolumetricEffectInstance::~VolumetricEffectInstance(Rend
     operator delete[](v4);
   v1->mOwnedVolumes.p = 0i64;
   *(_QWORD *)&v1->mOwnedVolumes.size = 0i64;
-  v1->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable';
+  v1->vfptr = (Render::FXComponentInstanceVtbl *)&Render::FXComponentInstance::`vftable;
   v5 = (UFG::qNode<Render::FXComponentInstance,Render::FXComponentInstance> *)&v1->mPrev;
   v6 = v1->mPrev;
   v7 = v1->mNext;
@@ -76,22 +76,22 @@ void __fastcall Render::VolumetricEffectInstance::Init(Render::VolumetricEffectI
   this->mSettingsId = settingsId;
   if ( !v2 )
   {
-    v4 = `UFG::qGetResourceInventory<Render::VolumetricEffectSettings>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Render::VolumetricEffectSettings>'::`2'::result )
+    v4 = `UFG::qGetResourceInventory<Render::VolumetricEffectSettings>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Render::VolumetricEffectSettings>::`2::result )
     {
       v5 = UFG::qResourceWarehouse::Instance();
       v4 = UFG::qResourceWarehouse::GetInventory(v5, 0xE4B8F46A);
-      `UFG::qGetResourceInventory<Render::VolumetricEffectSettings>'::`2'::result = v4;
+      `UFG::qGetResourceInventory<Render::VolumetricEffectSettings>::`2::result = v4;
     }
     UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v3->mSettingsHandle.mPrev, v4);
   }
-  v6 = `UFG::qGetResourceInventory<Render::VolumetricEffectSettings>'::`2'::result;
+  v6 = `UFG::qGetResourceInventory<Render::VolumetricEffectSettings>::`2::result;
   v7 = v3->mSettingsId;
-  if ( !`UFG::qGetResourceInventory<Render::VolumetricEffectSettings>'::`2'::result )
+  if ( !`UFG::qGetResourceInventory<Render::VolumetricEffectSettings>::`2::result )
   {
     v8 = UFG::qResourceWarehouse::Instance();
     v6 = UFG::qResourceWarehouse::GetInventory(v8, 0xE4B8F46A);
-    `UFG::qGetResourceInventory<Render::VolumetricEffectSettings>'::`2'::result = v6;
+    `UFG::qGetResourceInventory<Render::VolumetricEffectSettings>::`2::result = v6;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v3->mSettingsHandle.mPrev, 0xE4B8F46A, v7, v6);
 }
@@ -127,12 +127,12 @@ void __fastcall Render::VolumetricEffectInstance::Deactivate(Render::VolumetricE
   if ( this->mIsActive && !willLoopImmediately )
   {
     this->mIsActive = 0;
-    v3 = `UFG::qGetResourceInventory<Render::VolumetricEffectSettings>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<Render::VolumetricEffectSettings>'::`2'::result )
+    v3 = `UFG::qGetResourceInventory<Render::VolumetricEffectSettings>::`2::result;
+    if ( !`UFG::qGetResourceInventory<Render::VolumetricEffectSettings>::`2::result )
     {
       v4 = UFG::qResourceWarehouse::Instance();
       v3 = UFG::qResourceWarehouse::GetInventory(v4, 0xE4B8F46A);
-      `UFG::qGetResourceInventory<Render::VolumetricEffectSettings>'::`2'::result = v3;
+      `UFG::qGetResourceInventory<Render::VolumetricEffectSettings>::`2::result = v3;
     }
     UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v2->mSettingsHandle.mPrev, v3);
     if ( v2->mIsSuspended )
@@ -183,13 +183,13 @@ void __fastcall Render::VolumetricEffectInstance::Update(Render::VolumetricEffec
   v4 = this;
   if ( !this->mSettingsHandle.mData )
   {
-    v5 = `UFG::qGetResourceInventory<Render::VolumetricEffectSettings>'::`2'::result;
+    v5 = `UFG::qGetResourceInventory<Render::VolumetricEffectSettings>::`2::result;
     v6 = this->mSettingsId;
-    if ( !`UFG::qGetResourceInventory<Render::VolumetricEffectSettings>'::`2'::result )
+    if ( !`UFG::qGetResourceInventory<Render::VolumetricEffectSettings>::`2::result )
     {
       v7 = UFG::qResourceWarehouse::Instance();
       v5 = UFG::qResourceWarehouse::GetInventory(v7, 0xE4B8F46A);
-      `UFG::qGetResourceInventory<Render::VolumetricEffectSettings>'::`2'::result = v5;
+      `UFG::qGetResourceInventory<Render::VolumetricEffectSettings>::`2::result = v5;
     }
     UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v4->mSettingsHandle.mPrev, 0xE4B8F46A, v6, v5);
     *(_QWORD *)&v4->mActivateTime = LODWORD(sim_time);

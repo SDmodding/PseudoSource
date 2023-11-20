@@ -106,7 +106,7 @@ void __fastcall UFG::Conversation::Conversation(UFG::Conversation *this, unsigne
   this->mNode.mChild[0] = 0i64;
   this->mNode.mChild[1] = 0i64;
   this->mNode.mUID = uid;
-  this->vfptr = (UFG::ConversationVtbl *)&UFG::Conversation::`vftable';
+  this->vfptr = (UFG::ConversationVtbl *)&UFG::Conversation::`vftable;
   this->m_activeElement = 0i64;
   *(_QWORD *)&this->m_state = 0i64;
   *(_DWORD *)&this->m_curLine = 0;
@@ -145,7 +145,7 @@ void __fastcall UFG::Conversation::~Conversation(UFG::Conversation *this)
   UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *v8; // rax
 
   v1 = this;
-  this->vfptr = (UFG::ConversationVtbl *)&UFG::Conversation::`vftable';
+  this->vfptr = (UFG::ConversationVtbl *)&UFG::Conversation::`vftable;
   v2 = &this->m_animationBanks;
   UFG::qList<UFG::FractureConnectivity::Connection,UFG::FractureConnectivity::Connection,1,0>::DeleteNodes((UFG::qList<UFG::qReflectField,UFG::qReflectField,1,0> *)&this->m_animationBanks);
   v3 = v2->mNode.mPrev;
@@ -497,7 +497,7 @@ LABEL_10:
   {
     v6 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&this[1].vfptr[4].PrintDebugInfo);
     UFG::qPrintf(
-      "CONV DEBUG: %s : %6u : Playing '%s'\n",
+      "CONV DEBUG: %s : %6u : Playing %s\n",
       UFG::TidoGame::sm_timeStampStr.mData,
       UFG::Metrics::msInstance.mSimFrameCount,
       v6);
@@ -569,7 +569,7 @@ char __fastcall UFG::Conversation::Stop(UFG::Conversation *this, bool stoppedAft
     {
       v2 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&this[1].vfptr[4].PrintDebugInfo);
       UFG::qPrintf(
-        "CONV DEBUG: %s : %6u : Stopping '%s'\n",
+        "CONV DEBUG: %s : %6u : Stopping %s\n",
         UFG::TidoGame::sm_timeStampStr.mData,
         UFG::Metrics::msInstance.mSimFrameCount,
         v2);
@@ -777,7 +777,7 @@ void __fastcall UFG::Conversation::Destroy(UFG::Conversation *this)
   {
     v9 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v1[1].vfptr[4].PrintDebugInfo);
     UFG::qPrintf(
-      "CONV DEBUG: %s : %6u : Forcing Finish '%s'\n",
+      "CONV DEBUG: %s : %6u : Forcing Finish %s\n",
       UFG::TidoGame::sm_timeStampStr.mData,
       UFG::Metrics::msInstance.mSimFrameCount,
       v9);
@@ -1028,7 +1028,7 @@ char __fastcall UFG::Conversation::ForceFinish(UFG::Conversation *this, _BOOL8 a
   {
     v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&this[1].vfptr[4].PrintDebugInfo);
     UFG::qPrintf(
-      "CONV DEBUG: %s : %6u : Forcing Finish '%s'\n",
+      "CONV DEBUG: %s : %6u : Forcing Finish %s\n",
       UFG::TidoGame::sm_timeStampStr.mData,
       UFG::Metrics::msInstance.mSimFrameCount,
       v3);
@@ -1082,7 +1082,7 @@ bool __usercall UFG::Conversation::Update@<al>(UFG::Conversation *this@<rcx>, fl
   {
     v4 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&this[1].vfptr[4].PrintDebugInfo);
     UFG::qPrintf(
-      "CONV DEBUG: %s : %6u : Updating state '%s' :: %s -> %s\n",
+      "CONV DEBUG: %s : %6u : Updating state %s :: %s -> %s\n",
       UFG::TidoGame::sm_timeStampStr.mData,
       UFG::Metrics::msInstance.mSimFrameCount,
       v4,
@@ -1226,7 +1226,7 @@ char __fastcall UFG::Conversation::OnStop(UFG::Conversation *this, _BOOL8 a2)
   {
     v4 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&this[1].vfptr[4].PrintDebugInfo);
     UFG::qPrintf(
-      "CONV DEBUG: %s : %6u : Processing stop '%s'\n",
+      "CONV DEBUG: %s : %6u : Processing stop %s\n",
       UFG::TidoGame::sm_timeStampStr.mData,
       UFG::Metrics::msInstance.mSimFrameCount,
       v4);
@@ -1285,7 +1285,7 @@ char __fastcall UFG::Conversation::OnFinish(UFG::Conversation *this, _BOOL8 a2)
   {
     v4 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&this[1].vfptr[4].PrintDebugInfo);
     UFG::qPrintf(
-      "CONV DEBUG: %s : %6u : Finish state processed '%s'\n",
+      "CONV DEBUG: %s : %6u : Finish state processed %s\n",
       UFG::TidoGame::sm_timeStampStr.mData,
       UFG::Metrics::msInstance.mSimFrameCount,
       v4);
@@ -1779,7 +1779,7 @@ void __fastcall UFG::ScriptedConversation::ScriptedConversation(UFG::ScriptedCon
   v3 = symbol;
   v4 = this;
   UFG::Conversation::Conversation((UFG::Conversation *)&this->vfptr, uid, 0);
-  v4->vfptr = (UFG::ConversationVtbl *)&UFG::ScriptedConversation::`vftable';
+  v4->vfptr = (UFG::ConversationVtbl *)&UFG::ScriptedConversation::`vftable;
   v4->m_script = 0i64;
   *((_BYTE *)&v4->0 + 168) &= 0xFDu;
   UFG::ScriptedConversation::SetupScript(v4, v3);
@@ -1818,7 +1818,7 @@ void __fastcall UFG::AmbientConversation::AmbientConversation(UFG::AmbientConver
 
   v2 = this;
   UFG::Conversation::Conversation((UFG::Conversation *)&this->vfptr, uid, eConversationType_Ambient);
-  v2->vfptr = (UFG::ConversationVtbl *)&UFG::AmbientConversation::`vftable';
+  v2->vfptr = (UFG::ConversationVtbl *)&UFG::AmbientConversation::`vftable;
   *((_BYTE *)&v2->0 + 168) |= 4u;
   v2->m_linePriority = 5;
 }
@@ -2110,7 +2110,7 @@ void __fastcall UFG::AmbientConversationConfigurator::LoadDefinitionFile(float a
                       v47 = v45 + 1;
                       v47->mNext = v47;
                       v47[1].mNext = v47;
-                      v45->mNext = (UFG::allocator::free_link *)&UFG::AmbientConversationConfigurator::Action::`vftable';
+                      v45->mNext = (UFG::allocator::free_link *)&UFG::AmbientConversationConfigurator::Action::`vftable;
                       *(UFG::allocator::free_link **)((char *)&v45[3].mNext + 4) = 0i64;
                       BYTE4(v45[4].mNext) = 0;
                     }
@@ -2430,7 +2430,7 @@ void __fastcall UFG::AmbientConversationConfigurator::SetupConversation(UFG::Con
           v20 = 0i64;
         v21 = *(_DWORD *)(v20 + 144);
         v22 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v4->m_Name);
-        UFG::qPrintf("AmbConv:: Ambient ped in more than 1 ambient conversation: '%s' %u\n", v22, v21);
+        UFG::qPrintf("AmbConv:: Ambient ped in more than 1 ambient conversation: %s %u\n", v22, v21);
         UFG::Conversation::ForceFinish((UFG::Conversation *)v20, v23);
       }
     }
@@ -3053,7 +3053,7 @@ void __fastcall UFG::ConversationElement::AddInterruptPoint(UFG::ConversationEle
     v6 = v5 + 1;
     v6->mNext = v6;
     v6[1].mNext = v6;
-    v5->mNext = (UFG::allocator::free_link *)&UFG::ConversationElementInterruption::`vftable';
+    v5->mNext = (UFG::allocator::free_link *)&UFG::ConversationElementInterruption::`vftable;
     LODWORD(v5[3].mNext) = 0;
     HIDWORD(v5[3].mNext) = v3;
     *(float *)&v5[4].mNext = point;
@@ -3090,12 +3090,12 @@ UFG::allocator::free_link *__fastcall UFG::ConversationElement::AddEmotionReques
     v10 = v8 + 1;
     v10->mNext = v10;
     v10[1].mNext = v10;
-    v9->mNext = (UFG::allocator::free_link *)&UFG::ConversationElementInterruption::`vftable';
+    v9->mNext = (UFG::allocator::free_link *)&UFG::ConversationElementInterruption::`vftable;
     LODWORD(v9[3].mNext) = 1;
     HIDWORD(v9[3].mNext) = v6;
     *(float *)&v9[4].mNext = point;
     BYTE4(v9[4].mNext) &= 0xFEu;
-    v9->mNext = (UFG::allocator::free_link *)&UFG::ConversationElementEmotionRequest::`vftable';
+    v9->mNext = (UFG::allocator::free_link *)&UFG::ConversationElementEmotionRequest::`vftable;
     BYTE4(v9[5].mNext) = onListener;
     LODWORD(v9[5].mNext) = UFG::ConversationElementEmotionRequest::LookupEmotion(v5);
   }
@@ -3135,12 +3135,12 @@ UFG::allocator::free_link *__fastcall UFG::ConversationElement::AddEmotionReques
     v10 = v8 + 1;
     v10->mNext = v10;
     v10[1].mNext = v10;
-    v9->mNext = (UFG::allocator::free_link *)&UFG::ConversationElementInterruption::`vftable';
+    v9->mNext = (UFG::allocator::free_link *)&UFG::ConversationElementInterruption::`vftable;
     LODWORD(v9[3].mNext) = 1;
     HIDWORD(v9[3].mNext) = v6;
     *(float *)&v9[4].mNext = point;
     BYTE4(v9[4].mNext) &= 0xFEu;
-    v9->mNext = (UFG::allocator::free_link *)&UFG::ConversationElementEmotionRequest::`vftable';
+    v9->mNext = (UFG::allocator::free_link *)&UFG::ConversationElementEmotionRequest::`vftable;
     BYTE4(v9[5].mNext) = onListener;
     LODWORD(v9[5].mNext) = v5;
   }
@@ -3220,12 +3220,12 @@ UFG::allocator::free_link *__fastcall UFG::ConversationElement::AddActionRequest
     v10 = v8 + 1;
     v10->mNext = v10;
     v10[1].mNext = v10;
-    v9->mNext = (UFG::allocator::free_link *)&UFG::ConversationElementInterruption::`vftable';
+    v9->mNext = (UFG::allocator::free_link *)&UFG::ConversationElementInterruption::`vftable;
     LODWORD(v9[3].mNext) = 2;
     HIDWORD(v9[3].mNext) = v6;
     *(float *)&v9[4].mNext = point;
     BYTE4(v9[4].mNext) &= 0xFEu;
-    v9->mNext = (UFG::allocator::free_link *)&UFG::ConversationElementActionRequest::`vftable';
+    v9->mNext = (UFG::allocator::free_link *)&UFG::ConversationElementActionRequest::`vftable;
     LODWORD(v9[5].mNext) = v5;
     v9[6].mNext = 0i64;
     v9[7].mNext = 0i64;
@@ -3695,12 +3695,12 @@ void __fastcall UFG::ConversationElementActionRequest::ConversationElementAction
   v8 = (UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *)&this->mPrev;
   v8->mPrev = v8;
   v8->mNext = v8;
-  this->vfptr = (UFG::ConversationElementInterruptionVtbl *)&UFG::ConversationElementInterruption::`vftable';
+  this->vfptr = (UFG::ConversationElementInterruptionVtbl *)&UFG::ConversationElementInterruption::`vftable;
   this->m_type = 2;
   this->m_id = id;
   this->m_point = time;
   *((_BYTE *)&this->0 + 36) &= 0xFEu;
-  this->vfptr = (UFG::ConversationElementInterruptionVtbl *)&UFG::ConversationElementActionRequest::`vftable';
+  this->vfptr = (UFG::ConversationElementInterruptionVtbl *)&UFG::ConversationElementActionRequest::`vftable;
   this->m_target = 0i64;
   this->m_targetInst = 0i64;
   this->m_playOnListener = onListener;
@@ -3708,7 +3708,7 @@ void __fastcall UFG::ConversationElementActionRequest::ConversationElementAction
   Intention::GetActionRequest(action_request_name, &action_request);
   v9 = v5;
   LODWORD(v5) = action_request;
-  UFG::qPrintf("Added action request: id: %3d   %10u --> '%s'\n", v6, action_request, v9, -2i64);
+  UFG::qPrintf("Added action request: id: %3d   %10u --> %s\n", v6, action_request, v9, -2i64);
   v7->m_actionRequest = (unsigned int)v5;
 }
 
@@ -3968,7 +3968,7 @@ void __fastcall UFG::ScriptedConversationElement::~ScriptedConversationElement(U
   UFG::NonCharacterDialogueContainer *v5; // rcx
 
   v1 = this;
-  this->vfptr = (UFG::ConversationElementVtbl *)&UFG::ScriptedConversationElement::`vftable';
+  this->vfptr = (UFG::ConversationElementVtbl *)&UFG::ScriptedConversationElement::`vftable;
   v2 = this->m_script;
   if ( v2 )
   {
@@ -4045,7 +4045,7 @@ void __fastcall UFG::ScriptedConversationElement::CreateNonCharacterContainer(UF
     if ( v5 )
     {
       UFG::AudioEntity::AudioEntity((UFG::AudioEntity *)v5);
-      v6->mNext = (UFG::allocator::free_link *)&UFG::NonCharacterDialogueContainer::`vftable';
+      v6->mNext = (UFG::allocator::free_link *)&UFG::NonCharacterDialogueContainer::`vftable;
       v6[40].mNext = 0i64;
     }
     else
@@ -4450,9 +4450,9 @@ char __fastcall UFG::NonCharacterDialogueContainer::PlayLine(UFG::NonCharacterDi
           }
           if ( v14 )
           {
-            v14->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::AudioEventCallbackObject::`vftable';
+            v14->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::AudioEventCallbackObject::`vftable;
             v14->m_next = 0i64;
-            v14->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::SubtitleCallback::`vftable';
+            v14->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::SubtitleCallback::`vftable;
           }
           if ( *v13 )
             UFG::AudioEvent::AddCallback(*v13, v14);
@@ -4557,7 +4557,7 @@ UFG::ScriptedConversation *__fastcall UFG::ConversationManager::AddScriptedConve
   {
     v9 = *(_QWORD *)(v8 + 176);
     v10 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)v1);
-    UFG::qPrintf("Added scripted conversation '%s': 0x%08x  0x%08x\n", v10, v8, v9);
+    UFG::qPrintf("Added scripted conversation %s: 0x%08x  0x%08x\n", v10, v8, v9);
   }
   if ( v8 )
     v6 = (UFG::qBaseNodeRB *)(v8 + 8);
@@ -4905,7 +4905,7 @@ void UFG::ConversationManager::StopAllScriptedConversations(void)
       {
         v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)(*(_QWORD *)(v2 + 176) + 72i64));
         UFG::qPrintf(
-          "CONV DEBUG: %s : %6u : Forcing Finish '%s'\n",
+          "CONV DEBUG: %s : %6u : Forcing Finish %s\n",
           UFG::TidoGame::sm_timeStampStr.mData,
           UFG::Metrics::msInstance.mSimFrameCount,
           v3);

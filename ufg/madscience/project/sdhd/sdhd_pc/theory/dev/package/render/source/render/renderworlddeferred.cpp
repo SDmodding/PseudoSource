@@ -151,12 +151,12 @@ void LoadLightCardInfo()
       gLightCardTextureUID = UFG::qStringHashUpper32(v4, 0xFFFFFFFF);
       UFG::qResourceHandle::qResourceHandle(&v36);
       v5 = gLightCardTextureUID;
-      v6 = `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result )
+      v6 = `UFG::qGetResourceInventory<Illusion::Texture>::`2::result;
+      if ( !`UFG::qGetResourceInventory<Illusion::Texture>::`2::result )
       {
         v7 = UFG::qResourceWarehouse::Instance();
         v6 = UFG::qResourceWarehouse::GetInventory(v7, 0x8B43FABF);
-        `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result = v6;
+        `UFG::qGetResourceInventory<Illusion::Texture>::`2::result = v6;
       }
       UFG::qResourceHandle::Init(&v36, 0x8B43FABF, v5, v6);
       v8 = SimpleXML::XMLNode::GetChildCount(v3);
@@ -235,12 +235,12 @@ void LoadLightCardInfo()
       }
       SimpleXML::XMLDocument::~XMLDocument(v1);
       operator delete[](v1);
-      v27 = `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result )
+      v27 = `UFG::qGetResourceInventory<Illusion::Texture>::`2::result;
+      if ( !`UFG::qGetResourceInventory<Illusion::Texture>::`2::result )
       {
         v28 = UFG::qResourceWarehouse::Instance();
         v27 = UFG::qResourceWarehouse::GetInventory(v28, 0x8B43FABF);
-        `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result = v27;
+        `UFG::qGetResourceInventory<Illusion::Texture>::`2::result = v27;
       }
       UFG::qResourceHandle::Close(&v36, v27);
       UFG::qResourceHandle::~qResourceHandle(&v36);
@@ -454,95 +454,95 @@ void __fastcall InitDeferredRendering(UFG::RenderContext *render_context)
   v39 = UFG::qResourceWarehouse::Instance();
   UFG::qResourceWarehouse::Add(v39, (UFG::qResourceData *)&v33->mNode);
   v40 = UFG::qStringHashUpper32("DR_sphere", 0xFFFFFFFF);
-  v41 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  v41 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v42 = UFG::qResourceWarehouse::Instance();
     v41 = UFG::qResourceWarehouse::GetInventory(v42, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v41;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v41;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&gDeferredSphere.mPrev, 0xA2ADCD77, v40, v41);
   v43 = UFG::qStringHashUpper32("DR_cube", 0xFFFFFFFF);
-  v44 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  v44 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v45 = UFG::qResourceWarehouse::Instance();
     v44 = UFG::qResourceWarehouse::GetInventory(v45, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v44;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v44;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&gDeferredCube.mPrev, 0xA2ADCD77, v43, v44);
   v46 = UFG::qStringHashUpper32("DR_Cone", 0xFFFFFFFF);
-  v47 = `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Model>'::`2'::result )
+  v47 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
   {
     v48 = UFG::qResourceWarehouse::Instance();
     v47 = UFG::qResourceWarehouse::GetInventory(v48, 0xA2ADCD77);
-    `UFG::qGetResourceInventory<Illusion::Model>'::`2'::result = v47;
+    `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v47;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&gDeferredCone.mPrev, 0xA2ADCD77, v46, v47);
   v49 = UFG::qStringHashUpper32("Blit", 0xFFFFFFFF);
-  v50 = `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Material>'::`2'::result )
+  v50 = `UFG::qGetResourceInventory<Illusion::Material>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Material>::`2::result )
   {
     v51 = UFG::qResourceWarehouse::Instance();
     v50 = UFG::qResourceWarehouse::GetInventory(v51, 0xB4C26312);
-    `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result = v50;
+    `UFG::qGetResourceInventory<Illusion::Material>::`2::result = v50;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&gMatBlit.mPrev, 0xB4C26312, v49, v50);
   v52 = UFG::qStringHashUpper32("StencilMaterial", 0xFFFFFFFF);
-  v53 = `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Material>'::`2'::result )
+  v53 = `UFG::qGetResourceInventory<Illusion::Material>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Material>::`2::result )
   {
     v54 = UFG::qResourceWarehouse::Instance();
     v53 = UFG::qResourceWarehouse::GetInventory(v54, 0xB4C26312);
-    `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result = v53;
+    `UFG::qGetResourceInventory<Illusion::Material>::`2::result = v53;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&gMatStencil.mPrev, 0xB4C26312, v52, v53);
   v55 = UFG::qStringHashUpper32("StencilMaterialNear", 0xFFFFFFFF);
-  v56 = `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Material>'::`2'::result )
+  v56 = `UFG::qGetResourceInventory<Illusion::Material>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Material>::`2::result )
   {
     v57 = UFG::qResourceWarehouse::Instance();
     v56 = UFG::qResourceWarehouse::GetInventory(v57, 0xB4C26312);
-    `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result = v56;
+    `UFG::qGetResourceInventory<Illusion::Material>::`2::result = v56;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&gMatStencilNear.mPrev, 0xB4C26312, v55, v56);
   v58 = UFG::qStringHashUpper32("StencilMaterialNoClear", 0xFFFFFFFF);
-  v59 = `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Material>'::`2'::result )
+  v59 = `UFG::qGetResourceInventory<Illusion::Material>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Material>::`2::result )
   {
     v60 = UFG::qResourceWarehouse::Instance();
     v59 = UFG::qResourceWarehouse::GetInventory(v60, 0xB4C26312);
-    `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result = v59;
+    `UFG::qGetResourceInventory<Illusion::Material>::`2::result = v59;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&gMatStencilNoClear.mPrev, 0xB4C26312, v58, v59);
   v61 = UFG::qStringHashUpper32("StencilMaterialNearNoClear", 0xFFFFFFFF);
-  v62 = `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Material>'::`2'::result )
+  v62 = `UFG::qGetResourceInventory<Illusion::Material>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Material>::`2::result )
   {
     v63 = UFG::qResourceWarehouse::Instance();
     v62 = UFG::qResourceWarehouse::GetInventory(v63, 0xB4C26312);
-    `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result = v62;
+    `UFG::qGetResourceInventory<Illusion::Material>::`2::result = v62;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&gMatStencilNearNoClear.mPrev, 0xB4C26312, v61, v62);
   LoadLightCardInfo();
   g_windIndex = Illusion::StateSystem::AddParam(&Illusion::gStateSystem, "sbWindSettings", 0);
   v64 = UFG::qStringHash32("VertexDecl.LightCard", 0xFFFFFFFF);
-  v65 = `UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result )
+  v65 = `UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result )
   {
     v66 = UFG::qResourceWarehouse::Instance();
     v65 = UFG::qResourceWarehouse::GetInventory(v66, 0x3E5FDA3Eu);
-    `UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result = v65;
+    `UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result = v65;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&gLightCardVertexDecl.mPrev, 0x3E5FDA3Eu, v64, v65);
   v67 = UFG::qStringHash32("VertexDecl.Slim", 0xFFFFFFFF);
-  v68 = `UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result )
+  v68 = `UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result )
   {
     v69 = UFG::qResourceWarehouse::Instance();
     v68 = UFG::qResourceWarehouse::GetInventory(v69, 0x3E5FDA3Eu);
-    `UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result = v68;
+    `UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result = v68;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&gIrradianceVolumePrimitiveVertexDecl.mPrev, 0x3E5FDA3Eu, v67, v68);
 }

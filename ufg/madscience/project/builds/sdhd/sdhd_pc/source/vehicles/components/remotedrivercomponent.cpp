@@ -33,8 +33,8 @@ void __fastcall UFG::RemoteDriverComponent::RemoteDriverComponent(UFG::RemoteDri
   v3 = (UFG::qNode<UFG::RemoteDriverComponent,UFG::RemoteDriverComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::RemoteDriverComponent::`vftable'{for `UFG::SimComponent'};
-  v2->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::RemoteDriverComponent::`vftable'{for `UFG::UpdateInterface'};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::RemoteDriverComponent::`vftable{for `UFG::SimComponent};
+  v2->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::RemoteDriverComponent::`vftable{for `UFG::UpdateInterface};
   *(_WORD *)&v2->mIsInAir = 0;
   v4 = UFG::RemoteDriverComponent::s_RemoteDriverComponentList.mNode.mPrev;
   UFG::RemoteDriverComponent::s_RemoteDriverComponentList.mNode.mPrev->mNext = (UFG::qNode<UFG::RemoteDriverComponent,UFG::RemoteDriverComponent> *)&v2->mPrev;
@@ -63,8 +63,8 @@ void __fastcall UFG::RemoteDriverComponent::~RemoteDriverComponent(UFG::RemoteDr
   UFG::qNode<UFG::RemoteDriverComponent,UFG::RemoteDriverComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::RemoteDriverComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::RemoteDriverComponent::`vftable'{for `UFG::UpdateInterface'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::RemoteDriverComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::RemoteDriverComponent::`vftable{for `UFG::UpdateInterface};
   if ( this == UFG::RemoteDriverComponent::s_RemoteDriverComponentpCurrentIterator )
     UFG::RemoteDriverComponent::s_RemoteDriverComponentpCurrentIterator = (UFG::RemoteDriverComponent *)&this->mPrev[-19];
   v2 = (UFG::qNode<UFG::RemoteDriverComponent,UFG::RemoteDriverComponent> *)&this->mPrev;

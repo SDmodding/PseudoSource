@@ -21,15 +21,15 @@ void __fastcall Illusion::ShaderUser::Init(Illusion::ShaderUser *this, Illusion:
   UFG::qResourceInventory *v18; // rax
   UFG::qResourceWarehouse *v19; // rax
 
-  v2 = `UFG::qGetResourceInventory<Illusion::ShaderTemplate>'::`2'::result;
+  v2 = `UFG::qGetResourceInventory<Illusion::ShaderTemplate>::`2::result;
   v3 = shader->mNode.mUID;
   v4 = shader;
   v5 = this;
-  if ( !`UFG::qGetResourceInventory<Illusion::ShaderTemplate>'::`2'::result )
+  if ( !`UFG::qGetResourceInventory<Illusion::ShaderTemplate>::`2::result )
   {
     v6 = UFG::qResourceWarehouse::Instance();
     v2 = UFG::qResourceWarehouse::GetInventory(v6, 0x1FD4E5C5u);
-    `UFG::qGetResourceInventory<Illusion::ShaderTemplate>'::`2'::result = v2;
+    `UFG::qGetResourceInventory<Illusion::ShaderTemplate>::`2::result = v2;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v5->mShaderTemplateHandle.mPrev, 0x1FD4E5C5u, v3, v2);
   v7 = v4->mNode.mUID;
@@ -51,44 +51,44 @@ void __fastcall Illusion::ShaderUser::Init(Illusion::ShaderUser *this, Illusion:
       || v8 == 114301520
       || v8 == -398646125 )
     {
-      v12 = `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result )
+      v12 = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
+      if ( !`UFG::qGetResourceInventory<Illusion::Shader>::`2::result )
       {
         v13 = UFG::qResourceWarehouse::Instance();
         v12 = UFG::qResourceWarehouse::GetInventory(v13, 0x8B5561A1);
-        `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result = v12;
+        `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = v12;
       }
       UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v5->mOverride_OutputDepth.mPrev, 0x8B5561A1, 0x71A51007u, v12);
-      v14 = `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result )
+      v14 = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
+      if ( !`UFG::qGetResourceInventory<Illusion::Shader>::`2::result )
       {
         v15 = UFG::qResourceWarehouse::Instance();
         v14 = UFG::qResourceWarehouse::GetInventory(v15, 0x8B5561A1);
-        `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result = v14;
+        `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = v14;
       }
       UFG::qResourceHandle::Init(
         (UFG::qResourceHandle *)&v5->mOverride_OutputDepthAlpha.mPrev,
         0x8B5561A1,
         0xF5C6CFC5,
         v14);
-      v16 = `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result )
+      v16 = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
+      if ( !`UFG::qGetResourceInventory<Illusion::Shader>::`2::result )
       {
         v17 = UFG::qResourceWarehouse::Instance();
         v16 = UFG::qResourceWarehouse::GetInventory(v17, 0x8B5561A1);
-        `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result = v16;
+        `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = v16;
       }
       UFG::qResourceHandle::Init(
         (UFG::qResourceHandle *)&v5->mOverride_OutputDepthAlphaWind.mPrev,
         0x8B5561A1,
         0xF5C6CFC5,
         v16);
-      v18 = `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result;
-      if ( !`UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result )
+      v18 = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
+      if ( !`UFG::qGetResourceInventory<Illusion::Shader>::`2::result )
       {
         v19 = UFG::qResourceWarehouse::Instance();
         v18 = UFG::qResourceWarehouse::GetInventory(v19, 0x8B5561A1);
-        `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result = v18;
+        `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = v18;
       }
       UFG::qResourceHandle::Init(
         (UFG::qResourceHandle *)&v5->mOverride_OutputDepthWind.mPrev,
@@ -185,13 +185,13 @@ void __fastcall Illusion::ShaderUser::Close(Illusion::ShaderUser *this)
   Illusion::ShaderUser *v2; // rbx
   UFG::qResourceWarehouse *v3; // rax
 
-  v1 = `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result;
+  v1 = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
   v2 = this;
-  if ( !`UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result )
+  if ( !`UFG::qGetResourceInventory<Illusion::Shader>::`2::result )
   {
     v3 = UFG::qResourceWarehouse::Instance();
     v1 = UFG::qResourceWarehouse::GetInventory(v3, 0x8B5561A1);
-    `UFG::qGetResourceInventory<Illusion::Shader>'::`2'::result = v1;
+    `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = v1;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v2->mOverride_OutputDepth.mPrev, v1);
 }

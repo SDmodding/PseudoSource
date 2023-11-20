@@ -22,7 +22,7 @@ CAkActionSetState *__fastcall CAkActionSetState::Create(AkActionType in_eActionT
   if ( result )
   {
     CAkAction::CAkAction((CAkAction *)&result->vfptr, v2, v3);
-    v5->vfptr = (CAkIndexableVtbl *)&CAkActionSetState::`vftable';
+    v5->vfptr = (CAkIndexableVtbl *)&CAkActionSetState::`vftable;
     *(_QWORD *)&v5->m_ulStateGroupID = 0i64;
     CAkAction::AddToIndex((CAkAction *)&v5->vfptr);
     result = v5;

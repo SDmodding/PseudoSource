@@ -16,7 +16,7 @@ void __fastcall UFG::VehicleOwnershipComponent::VehicleOwnershipComponent(UFG::V
   v2 = this;
   v3 = UFG::qStringHash32("VehicleOwnershipComponent", 0xFFFFFFFF);
   UFG::SimComponent::SimComponent((UFG::SimComponent *)&v2->vfptr, v3);
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleOwnershipComponent::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleOwnershipComponent::`vftable;
   v4 = &v2->m_PriorityLockComponent;
   v4->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v4->mPrev;
   v4->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v4->mPrev;

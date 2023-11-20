@@ -34,7 +34,7 @@ hkpCollisionAgent *__fastcall hkpSphereBoxAgent::createBoxSphereAgent(hkpCdBody 
   if ( result )
   {
     *(_DWORD *)&result->m_memSizeAndFlags = 0x1FFFF;
-    result->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgentLinearCast<hkpSphereBoxAgent>::`vftable';
+    result->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgentLinearCast<hkpSphereBoxAgent>::`vftable;
     result->m_contactMgr = v4;
     LOWORD(result[1].vfptr) = -1;
   }
@@ -55,7 +55,7 @@ hkpCollisionAgent *__fastcall hkpSphereBoxAgent::createSphereBoxAgent(hkpCdBody 
   if ( result )
   {
     *(_DWORD *)&result->m_memSizeAndFlags = 0x1FFFF;
-    result->vfptr = (hkBaseObjectVtbl *)&hkpSphereBoxAgent::`vftable';
+    result->vfptr = (hkBaseObjectVtbl *)&hkpSphereBoxAgent::`vftable;
     result->m_contactMgr = v4;
     LOWORD(result[1].vfptr) = -1;
   }
@@ -183,7 +183,7 @@ void __fastcall hkpSphereBoxAgent::processCollision(hkpSphereBoxAgent *this, hkp
                                                                  _mm_and_ps(
                                                                    _mm_cmpleps(v39, v37),
                                                                    *(__m128 *)&hkVector4fComparison_maskToComparison_359[28]))];
-    v41 = _mm_and_ps((__m128)`hkVector4f::getComponent'::`2'::indexToMask[v40], (__m128)v25);
+    v41 = _mm_and_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[v40], (__m128)v25);
     v42 = _mm_or_ps(_mm_shuffle_ps(v41, v41, 78), v41);
     v43 = _mm_xor_ps(
             (__m128)_mm_slli_epi32(
@@ -383,7 +383,7 @@ void __fastcall hkpSphereBoxAgent::getClosestPoints(hkpSphereBoxAgent *this, hkp
                                                                  _mm_and_ps(
                                                                    _mm_cmpleps(v33, v32),
                                                                    *(__m128 *)&hkVector4fComparison_maskToComparison_359[28]))];
-    v35 = _mm_and_ps((__m128)`hkVector4f::getComponent'::`2'::indexToMask[v34], (__m128)v21);
+    v35 = _mm_and_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[v34], (__m128)v21);
     v36 = _mm_or_ps(_mm_shuffle_ps(v35, v35, 78), v35);
     v31 = _mm_xor_ps(
             (__m128)_mm_slli_epi32(
@@ -537,7 +537,7 @@ void __fastcall hkpSphereBoxAgent::staticGetClosestPoints(hkpCdBody *bodyA, hkpC
                                                                  _mm_and_ps(
                                                                    _mm_cmpleps(v33, v32),
                                                                    *(__m128 *)&hkVector4fComparison_maskToComparison_359[28]))];
-    v35 = _mm_and_ps((__m128)`hkVector4f::getComponent'::`2'::indexToMask[v34], (__m128)v21);
+    v35 = _mm_and_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[v34], (__m128)v21);
     v36 = _mm_or_ps(_mm_shuffle_ps(v35, v35, 78), v35);
     v31 = _mm_xor_ps(
             (__m128)_mm_slli_epi32(

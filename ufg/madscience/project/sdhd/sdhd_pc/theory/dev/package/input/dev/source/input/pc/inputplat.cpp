@@ -197,10 +197,10 @@ void __fastcall UFG::DispatchUIMouseEvent(unsigned int uMsg, int mouse_x, int mo
     v8 = v6 + 1;
     v8->mNext = v8;
     v8[1].mNext = v8;
-    v7->mNext = (UFG::allocator::free_link *)&UFG::Event::`vftable';
+    v7->mNext = (UFG::allocator::free_link *)&UFG::Event::`vftable;
     v7[4].mNext = (UFG::allocator::free_link *)"UIScreenMouseInput";
     LODWORD(v7[3].mNext) = UFG::qStringHash32("UIScreenMouseInput", 0xFFFFFFFF);
-    v7->mNext = (UFG::allocator::free_link *)&UFG::UIMouseEvent::`vftable';
+    v7->mNext = (UFG::allocator::free_link *)&UFG::UIMouseEvent::`vftable;
     v7[7].mNext = 0i64;
     v7[8].mNext = 0i64;
     LODWORD(v7[9].mNext) = 0;
@@ -589,7 +589,7 @@ __int64 __fastcall UFG::InputPlat_MsgProc(HWND__ *hWnd, unsigned int uMsg, unsig
               v54 = v52 + 1;
               v54->mNext = v54;
               v54[1].mNext = v54;
-              v53->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+              v53->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
               v53->m_NamePTR = "UIScreenTextInput";
               v53->m_EventUID = UFG::qStringHash32("UIScreenTextInput", 0xFFFFFFFF);
             }
@@ -618,7 +618,7 @@ __int64 __fastcall UFG::InputPlat_MsgProc(HWND__ *hWnd, unsigned int uMsg, unsig
           v69 = v67 + 1;
           v69->mNext = v69;
           v69[1].mNext = v69;
-          v68->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+          v68->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
           v68->m_NamePTR = "UIScreenTextInput";
           v68->m_EventUID = UFG::qStringHash32("UIScreenTextInput", 0xFFFFFFFF);
         }
@@ -678,7 +678,7 @@ __int64 __fastcall UFG::InputPlat_MsgProc(HWND__ *hWnd, unsigned int uMsg, unsig
           v66 = v64 + 1;
           v66->mNext = v66;
           v66[1].mNext = v66;
-          v65->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+          v65->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
           v65->m_NamePTR = "UIScreenTextInput";
           v65->m_EventUID = UFG::qStringHash32("UIScreenTextInput", 0xFFFFFFFF);
         }
@@ -1234,8 +1234,8 @@ void __fastcall UFG::Left_Stick_Click_Deadzone_Handler(UFG::Controller *controll
   v6 = (signed __int16 *)_RTDynamicCast(
                            controller,
                            0,
-                           &UFG::Controller `RTTI Type Descriptor',
-                           &UFG::Gamepad `RTTI Type Descriptor',
+                           &UFG::Controller `RTTI Type Descriptor,
+                           &UFG::Gamepad `RTTI Type Descriptor,
                            0);
   v8 = 0;
   if ( (float)((float)((float)v6[1062] * 0.000030517578) * (float)((float)v6[1062] * 0.000030517578)) < 0.85000002 )
@@ -1700,8 +1700,8 @@ void __fastcall UFG::Gamepad_IAD_Func(UFG::Controller *controller, UFG::InputAct
   v7 = (signed __int16 *)_RTDynamicCast(
                            controller,
                            0,
-                           &UFG::Controller `RTTI Type Descriptor',
-                           &UFG::Gamepad `RTTI Type Descriptor',
+                           &UFG::Controller `RTTI Type Descriptor,
+                           &UFG::Gamepad `RTTI Type Descriptor,
                            0);
   v8 = v3->mButton;
   if ( (unsigned int)v8 < 0x80 )
@@ -2234,7 +2234,7 @@ void __fastcall UFG::Two_Axis_Keyboard_IAD_Func(UFG::Controller *controller, UFG
     v32 = __PAIR__(LODWORD(v12), LODWORD(v13));
   if ( (_DWORD)v6 == 18 )
   {
-    LOWORD(v21) = GetKeyState('\x12');
+    LOWORD(v21) = GetKeyState(\x12);
     v12 = UFG::qVector2::msZero.y;
     v13 = UFG::qVector2::msZero.x;
     v20 = (v21 >> 15) & 1;
@@ -2711,7 +2711,7 @@ UFG::RawPadData *__fastcall UFG::DxController::ReadRawPadData(UFG::DxController 
   UFG::RawPadData *result; // rax
 
   v1 = &this->mRemoteData;
-  v2 = _RTDynamicCast(this, 0, &UFG::DxController `RTTI Type Descriptor', &UFG::Gamepad `RTTI Type Descriptor', 0);
+  v2 = _RTDynamicCast(this, 0, &UFG::DxController `RTTI Type Descriptor, &UFG::Gamepad `RTTI Type Descriptor, 0);
   v3 = v2;
   v1->mGetXIState_Gamepad_wButtons = v2[1060];
   v1->mGetState_lRx = *((_DWORD *)v2 + 464);
@@ -2757,7 +2757,7 @@ void __fastcall UFG::DxController::SetRawPadData(UFG::DxController *this, const 
 // RVA: 0xA3AA80
 void __fastcall UFG::DxController::~DxController(UFG::DxController *this)
 {
-  this->vfptr = (UFG::ControllerVtbl *)&UFG::DxController::`vftable';
+  this->vfptr = (UFG::ControllerVtbl *)&UFG::DxController::`vftable;
   UFG::Controller::~Controller((UFG::Controller *)&this->vfptr);
 }
 
@@ -2780,12 +2780,12 @@ void __fastcall UFG::Keyboard::Keyboard(UFG::Keyboard *this, int index, HWND__ *
   v6 = index;
   v7 = this;
   UFG::Controller::Controller((UFG::Controller *)&this->vfptr, index);
-  v7->vfptr = (UFG::ControllerVtbl *)&UFG::DxController::`vftable';
+  v7->vfptr = (UFG::ControllerVtbl *)&UFG::DxController::`vftable;
   v7->mXinputUserIndex = -1;
   memset(&v7->mState, 0, 0x110ui64);
   *(_QWORD *)&v7->mXinputState.dwPacketNumber = 0i64;
   *(_QWORD *)&v7->mXinputState.Gamepad.sThumbLX = 0i64;
-  v7->vfptr = (UFG::ControllerVtbl *)&UFG::Keyboard::`vftable';
+  v7->vfptr = (UFG::ControllerVtbl *)&UFG::Keyboard::`vftable;
   (*(void (__fastcall **)(void *, GUID *, IDirectInputDevice8A **, _QWORD, signed __int64))(*(_QWORD *)v4 + 24i64))(
     v4,
     &GUID_SysKeyboard,
@@ -2865,12 +2865,12 @@ void __fastcall UFG::Gamepad::Gamepad(UFG::Gamepad *this, int index, HWND__ *hWn
   v7 = hWnd;
   v8 = this;
   UFG::Controller::Controller((UFG::Controller *)&this->vfptr, index);
-  v8->vfptr = (UFG::ControllerVtbl *)&UFG::DxController::`vftable';
+  v8->vfptr = (UFG::ControllerVtbl *)&UFG::DxController::`vftable;
   v8->mXinputUserIndex = xinput_user_index;
   memset(&v8->mState, 0, 0x110ui64);
   *(_QWORD *)&v8->mXinputState.dwPacketNumber = 0i64;
   *(_QWORD *)&v8->mXinputState.Gamepad.sThumbLX = 0i64;
-  v8->vfptr = (UFG::ControllerVtbl *)&UFG::Gamepad::`vftable';
+  v8->vfptr = (UFG::ControllerVtbl *)&UFG::Gamepad::`vftable;
   v9 = &v8->mDevice;
   v10 = 0;
   v8->mDevice = 0i64;
@@ -3260,7 +3260,7 @@ void __fastcall UFG::DxInputSystem::DxInputSystem(UFG::DxInputSystem *this, HWND
   v2 = h;
   v3 = this;
   UFG::InputSystem::InputSystem((UFG::InputSystem *)&this->vfptr);
-  v3->vfptr = (UFG::InputSystemVtbl *)&UFG::DxInputSystem::`vftable';
+  v3->vfptr = (UFG::InputSystemVtbl *)&UFG::DxInputSystem::`vftable;
   v3->hWnd = v2;
   UFG::DxInputSystem::InitDirectInput(v3);
   *(_WORD *)&v3->mbSentDisconnectMsg = 0;

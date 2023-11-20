@@ -4,7 +4,7 @@ void __fastcall Scaleform::Render::DICommand::~DICommand(Scaleform::Render::DICo
 {
   Scaleform::Render::DrawableImage *v1; // rcx
 
-  this->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  this->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   v1 = this->pImage.pObject;
   if ( v1 )
     ((void (*)(void))v1->vfptr[2].__vecDelDtor)();
@@ -37,8 +37,8 @@ bool __fastcall Scaleform::Render::DICommandQueue::AddCommand_NTS<Scaleform::Ren
     Scaleform::Render::DICommand_SourceRect::DICommand_SourceRect(
       v3,
       (Scaleform::Render::DICommand_SourceRect *)&v2->vfptr);
-    v4->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_SourceRectImpl<Scaleform::Render::DICommand_ApplyFilter>::`vftable';
-    v4->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_ApplyFilter::`vftable';
+    v4->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_SourceRectImpl<Scaleform::Render::DICommand_ApplyFilter>::`vftable;
+    v4->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_ApplyFilter::`vftable;
     v5 = v2->pFilter.pObject;
     if ( v5 )
       _InterlockedExchangeAdd(&v5->RefCount, 1u);
@@ -56,25 +56,25 @@ void __fastcall Scaleform::Render::DICommandQueue::ExecuteCommand::ExecuteComman
   Scaleform::Event *v3; // [rsp+48h] [rbp+10h]
 
   v2 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::ThreadCommand,2>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ThreadCommand::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::DICommandQueue::ExecuteCommand::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::ThreadCommand,2>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ThreadCommand::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::DICommandQueue::ExecuteCommand::`vftable;
   this->pQueue = queue;
   v3 = &this->ExecuteDone;
-  v3->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  v3->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   v3->RefCount = 1;
-  v3->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  v3->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-  v3->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Waitable,2>::`vftable';
-  v3->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Waitable::`vftable';
+  v3->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  v3->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  v3->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Waitable,2>::`vftable;
+  v3->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Waitable::`vftable;
   this->ExecuteDone.pHandlers = 0i64;
-  this->ExecuteDone.vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable';
-  v3->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Event::`vftable'{for `Scaleform::Waitable'};
-  this->ExecuteDone.vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Event::`vftable'{for `Scaleform::AcquireInterface'};
+  this->ExecuteDone.vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::AcquireInterface::`vftable;
+  v3->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Event::`vftable{for `Scaleform::Waitable};
+  this->ExecuteDone.vfptr = (Scaleform::AcquireInterfaceVtbl *)&Scaleform::Event::`vftable{for `Scaleform::AcquireInterface};
   Scaleform::Mutex::Mutex(&this->ExecuteDone.StateMutex, 1, 0);
   Scaleform::WaitCondition::WaitCondition(&v2->ExecuteDone.StateWaitCondition);
   v2->ExecuteDone.State = 0;
@@ -126,11 +126,11 @@ void __fastcall Scaleform::Render::DICommand_SourceRect::DICommand_SourceRect(Sc
   v6 = source;
   v7 = image;
   v8 = this;
-  this->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  this->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( image )
     ((void (__fastcall *)(Scaleform::Render::DrawableImage *))image->vfptr[1].__vecDelDtor)(image);
   v8->pImage.pObject = v7;
-  v8->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_SourceRect::`vftable';
+  v8->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_SourceRect::`vftable;
   if ( v6 )
     ((void (__fastcall *)(Scaleform::Render::DrawableImage *))v6->vfptr[1].__vecDelDtor)(v6);
   v8->pSource.pObject = v6;
@@ -200,12 +200,12 @@ void __fastcall Scaleform::Render::DICommand_Draw::DICommand_Draw(Scaleform::Ren
   v5 = root;
   v6 = image;
   v7 = this;
-  this->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  this->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( image )
     ((void (__fastcall *)(Scaleform::Render::DrawableImage *))image->vfptr[1].__vecDelDtor)(image);
   v7->pImage.pObject = v6;
-  v7->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommandImpl<Scaleform::Render::DICommand_Draw,Scaleform::Render::DICommand>::`vftable';
-  v7->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_Draw::`vftable';
+  v7->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommandImpl<Scaleform::Render::DICommand_Draw,Scaleform::Render::DICommand>::`vftable;
+  v7->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_Draw::`vftable;
   v7->pRoot = v5;
   *(_QWORD *)&v7->ClipRect.x1 = 0i64;
   *(_QWORD *)&v7->ClipRect.x2 = 0i64;
@@ -256,11 +256,11 @@ void __fastcall Scaleform::Render::DICommand_ColorTransform::DICommand_ColorTran
   v7 = this;
   v8 = rect->y1;
   v9 = rect->x1;
-  this->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  this->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( image )
     ((void (__fastcall *)(Scaleform::Render::DrawableImage *))image->vfptr[1].__vecDelDtor)(image);
   v7->pImage.pObject = v6;
-  v7->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_SourceRect::`vftable';
+  v7->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_SourceRect::`vftable;
   if ( v6 )
     ((void (__fastcall *)(Scaleform::Render::DrawableImage *))v6->vfptr[1].__vecDelDtor)(v6);
   v7->pSource.pObject = v6;
@@ -273,8 +273,8 @@ void __fastcall Scaleform::Render::DICommand_ColorTransform::DICommand_ColorTran
   v7->SourceRect.y2 = v10;
   v7->DestPoint.x = v9;
   v7->DestPoint.y = v8;
-  v7->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_SourceRectImpl<Scaleform::Render::DICommand_ColorTransform>::`vftable';
-  v7->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_ColorTransform::`vftable';
+  v7->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_SourceRectImpl<Scaleform::Render::DICommand_ColorTransform>::`vftable;
+  v7->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_ColorTransform::`vftable;
   *(_OWORD *)&v7->Cx.M[0][0] = *(_OWORD *)&v4->M[0][0];
   *(_OWORD *)&v7->Cx.M[1][0] = *(_OWORD *)&v4->M[1][0];
 }
@@ -299,10 +299,10 @@ void __fastcall Scaleform::Render::DICommand_Compare::DICommand_Compare(Scalefor
   v8 = (int *)image->vfptr[5].__vecDelDtor((Scaleform::RefCountImplCore *)image, (unsigned int)&v11);
   v9 = v8[1];
   v10 = *v8;
-  v7->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  v7->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   ((void (__fastcall *)(Scaleform::Render::DrawableImage *))v6->vfptr[1].__vecDelDtor)(v6);
   v7->pImage.pObject = v6;
-  v7->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_SourceRect::`vftable';
+  v7->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_SourceRect::`vftable;
   if ( v5 )
     ((void (__fastcall *)(Scaleform::Render::DrawableImage *))v5->vfptr[1].__vecDelDtor)(v5);
   v7->pSource.pObject = v5;
@@ -310,8 +310,8 @@ void __fastcall Scaleform::Render::DICommand_Compare::DICommand_Compare(Scalefor
   v7->SourceRect.x2 = v10;
   v7->SourceRect.y2 = v9;
   v7->DestPoint = 0i64;
-  v7->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_SourceRectImpl<Scaleform::Render::DICommand_Compare>::`vftable';
-  v7->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_Compare::`vftable';
+  v7->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_SourceRectImpl<Scaleform::Render::DICommand_Compare>::`vftable;
+  v7->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_Compare::`vftable;
   if ( v4 )
     ((void (__fastcall *)(Scaleform::Render::DrawableImage *))v4->vfptr[1].__vecDelDtor)(v4);
   v7->pImageCompare1.pObject = v4;
@@ -398,8 +398,8 @@ void __fastcall Scaleform::Render::DICommand_PaletteMap::DICommand_PaletteMap(Sc
     source,
     sr,
     dp);
-  v6->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_SourceRectImpl<Scaleform::Render::DICommand_PaletteMap>::`vftable';
-  v6->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_PaletteMap::`vftable';
+  v6->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_SourceRectImpl<Scaleform::Render::DICommand_PaletteMap>::`vftable;
+  v6->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_PaletteMap::`vftable;
   v6->ChannelMask = 0;
   v7 = (unsigned int *)Scaleform::Memory::pGlobalHeap->vfptr->Alloc(Scaleform::Memory::pGlobalHeap, 4096ui64, 0i64);
   v6->Channels = v7;
@@ -537,8 +537,8 @@ void __fastcall Scaleform::Render::DICommand_PaletteMap::DICommand_PaletteMap(Sc
   Scaleform::Render::DICommand_SourceRect::DICommand_SourceRect(
     (Scaleform::Render::DICommand_SourceRect *)&this->vfptr,
     (Scaleform::Render::DICommand_SourceRect *)&other->vfptr);
-  v3->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_SourceRectImpl<Scaleform::Render::DICommand_PaletteMap>::`vftable';
-  v3->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_PaletteMap::`vftable';
+  v3->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_SourceRectImpl<Scaleform::Render::DICommand_PaletteMap>::`vftable;
+  v3->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_PaletteMap::`vftable;
   v3->ChannelMask = v2->ChannelMask;
   v4 = (unsigned int *)Scaleform::Memory::pGlobalHeap->vfptr->Alloc(Scaleform::Memory::pGlobalHeap, 4096ui64, 0i64);
   v3->Channels = v4;
@@ -577,14 +577,14 @@ void __fastcall Scaleform::Render::DICommand_PaletteMap::~DICommand_PaletteMap(S
   Scaleform::Render::DrawableImage *v3; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_PaletteMap::`vftable';
+  this->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_PaletteMap::`vftable;
   if ( this->Channels )
     ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
   v1->Channels = 0i64;
   v2 = v1->pSource.pObject;
   if ( v2 )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *))v2->vfptr[2].__vecDelDtor)(v2);
-  v1->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  v1->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   v3 = v1->pImage.pObject;
   if ( v3 )
     ((void (*)(void))v3->vfptr[2].__vecDelDtor)();
@@ -607,12 +607,12 @@ void __fastcall Scaleform::Render::DICommand_PerlinNoise::DICommand_PerlinNoise(
 
   v12 = image;
   v13 = this;
-  this->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  this->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   if ( image )
     ((void (__fastcall *)(Scaleform::Render::DrawableImage *))image->vfptr[1].__vecDelDtor)(image);
   v13->pImage.pObject = v12;
-  v13->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommandImpl<Scaleform::Render::DICommand_PerlinNoise,Scaleform::Render::DICommand>::`vftable';
-  v13->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_PerlinNoise::`vftable';
+  v13->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommandImpl<Scaleform::Render::DICommand_PerlinNoise,Scaleform::Render::DICommand>::`vftable;
+  v13->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_PerlinNoise::`vftable;
   v13->FrequencyX = frequencyX;
   v13->FrequencyY = frequencyY;
   v13->NumOctaves = octaves;
@@ -641,13 +641,13 @@ void __fastcall Scaleform::Render::DICommand_PerlinNoise::DICommand_PerlinNoise(
 
   v2 = other;
   v3 = this;
-  this->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  this->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   v4 = other->pImage.pObject;
   if ( v4 )
     ((void (__cdecl *)(Scaleform::Render::DrawableImage *))v4->vfptr[1].__vecDelDtor)(v4);
   v3->pImage.pObject = v2->pImage.pObject;
-  v3->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommandImpl<Scaleform::Render::DICommand_PerlinNoise,Scaleform::Render::DICommand>::`vftable';
-  v3->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_PerlinNoise::`vftable';
+  v3->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommandImpl<Scaleform::Render::DICommand_PerlinNoise,Scaleform::Render::DICommand>::`vftable;
+  v3->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_PerlinNoise::`vftable;
   v3->FrequencyX = v2->FrequencyX;
   v3->FrequencyY = v2->FrequencyY;
   v3->NumOctaves = v2->NumOctaves;
@@ -715,10 +715,10 @@ void __fastcall Scaleform::Render::DICommand_Scroll::DICommand_Scroll(Scaleform:
   v7 = this;
   v8 = *(_DWORD *)((__int64)image->vfptr[5].__vecDelDtor((Scaleform::RefCountImplCore *)image, (unsigned int)&v11) + 4);
   v9 = *(_DWORD *)v6->vfptr[5].__vecDelDtor((Scaleform::RefCountImplCore *)&v6->vfptr, (unsigned int)&v10);
-  v7->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable';
+  v7->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand::`vftable;
   ((void (__fastcall *)(Scaleform::Render::DrawableImage *))v6->vfptr[1].__vecDelDtor)(v6);
   v7->pImage.pObject = v6;
-  v7->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_SourceRect::`vftable';
+  v7->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_SourceRect::`vftable;
   ((void (__fastcall *)(Scaleform::Render::DrawableImage *))v6->vfptr[1].__vecDelDtor)(v6);
   v7->pSource.pObject = v6;
   *(_QWORD *)&v7->SourceRect.x1 = 0i64;
@@ -726,8 +726,8 @@ void __fastcall Scaleform::Render::DICommand_Scroll::DICommand_Scroll(Scaleform:
   v7->SourceRect.y2 = v8;
   v7->DestPoint.x = v5;
   v7->DestPoint.y = v4;
-  v7->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_SourceRectImpl<Scaleform::Render::DICommand_Scroll>::`vftable';
-  v7->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_Scroll::`vftable';
+  v7->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_SourceRectImpl<Scaleform::Render::DICommand_Scroll>::`vftable;
+  v7->vfptr = (Scaleform::Render::DICommandVtbl *)&Scaleform::Render::DICommand_Scroll::`vftable;
   v7->X = v5;
   v7->Y = v4;
 }

@@ -18,7 +18,7 @@ void __fastcall UFG::UIHKScreenDialogBox::UIHKScreenDialogBox(UFG::UIHKScreenDia
 
   v1 = this;
   UFG::UIScreenDialogBox::UIScreenDialogBox((UFG::UIScreenDialogBox *)&this->vfptr);
-  v1->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenDialogBox::`vftable';
+  v1->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenDialogBox::`vftable;
   UFG::UIHKDepthOfFieldWidget::UIHKDepthOfFieldWidget(&v1->DOF);
   if ( UFG::gInputSystem && UFG::gActiveControllerNum != -1 )
   {
@@ -42,7 +42,7 @@ void __fastcall UFG::UIHKScreenDialogBox::~UIHKScreenDialogBox(UFG::UIHKScreenDi
   UFG::UIHKScreenGlobalOverlay *v5; // rax
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenDialogBox::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenDialogBox::`vftable;
   v2 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseScreen(v2, "DialogBox");
   if ( UFG::gInputSystem )
@@ -137,8 +137,8 @@ void __fastcall UFG::UIHKScreenDialogBox::update(UFG::UIHKScreenDialogBox *this,
     *(_QWORD *)&data.MessageIds[4] = 0i64;
     UFG::UIHKHelpBarWidget::Show(v4, &data);
     UFG::qString::~qString(&data.CustomTexturePack);
-    `eh vector destructor iterator'(data.Icons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
-    `eh vector destructor iterator'(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+    `eh vector destructor iterator(data.Icons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+    `eh vector destructor iterator(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
   }
   UFG::UIScreen::update((UFG::UIScreen *)&v2->vfptr, elapsed);
 }

@@ -67,7 +67,7 @@ void __fastcall UFG::UIHKPhoneTraceSignalBarWidget::Update(UFG::UIHKPhoneTraceSi
       }
       if ( UFG::UIHKScreenPhoneTraceMinigame::gPhoneTraceEnabled )
         return;
-      `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       if ( (v13 >> 6) & 1 )
       {
         (*(void (__fastcall **)(__int64, char *, __int64))(*(_QWORD *)v12 + 16i64))(v12, &ptr, v14);
@@ -87,7 +87,7 @@ void __fastcall UFG::UIHKPhoneTraceSignalBarWidget::Update(UFG::UIHKPhoneTraceSi
       }
       if ( !UFG::UIHKScreenPhoneTraceMinigame::gPhoneTraceEnabled )
         return;
-      `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       if ( (v13 >> 6) & 1 )
       {
         (*(void (__fastcall **)(__int64, char *, __int64))(*(_QWORD *)v12 + 16i64))(v12, &ptr, v14);
@@ -98,7 +98,7 @@ void __fastcall UFG::UIHKPhoneTraceSignalBarWidget::Update(UFG::UIHKPhoneTraceSi
       Scaleform::GFx::Movie::Invoke(v3, "TraceSignalBar_SetCanTrace", 0i64, (Scaleform::GFx::Value *)&ptr, 1u);
       v2->mState = 3;
     }
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     return;
   }
   if ( !v2->mTextureLoaded )
@@ -112,7 +112,7 @@ LABEL_10:
     UFG::UIHKPhoneTraceSignalBarWidget::Flash_Show(v2, screen);
     v2->mVisible = 1;
   }
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   v8 = (double)v2->mDistanceStrength;
   v9 = 0;
   if ( (v13 >> 6) & 1 )
@@ -136,7 +136,7 @@ LABEL_10:
   Scaleform::GFx::Movie::Invoke(v3, "TraceSignalBar_Set", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
   LOBYTE(v9) = UFG::UIHKScreenPhoneTraceMinigame::gPhoneTraceEnabled != 0;
   v2->mState = v9 + 2;
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }2->mState
 
 // File Line: 135
@@ -239,7 +239,7 @@ void __fastcall UFG::UIHKPhoneTraceSignalBarWidget::Flash_Show(UFG::UIHKPhoneTra
     v3 = screen->mRenderable->m_movie.pObject;
     if ( v3 )
     {
-      `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       v4 = (double)v2->mDistanceStrength;
       if ( (v8 >> 6) & 1 )
       {
@@ -263,7 +263,7 @@ void __fastcall UFG::UIHKPhoneTraceSignalBarWidget::Flash_Show(UFG::UIHKPhoneTra
       v12 = 5;
       v13 = v5;
       Scaleform::GFx::Movie::Invoke(v3, "TraceSignalBar_Show", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-      `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+      `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     }
   }
 }

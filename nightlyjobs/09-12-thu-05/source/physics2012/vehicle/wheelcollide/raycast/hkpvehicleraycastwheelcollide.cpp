@@ -4,12 +4,12 @@ void __fastcall hkpVehicleRayCastWheelCollide::hkpVehicleRayCastWheelCollide(hkp
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_alreadyUsed.m_bool = 0;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpVehicleRayCastWheelCollide::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpVehicleRayCastWheelCollide::`vftable;
   this->m_wheelCollisionFilterInfo = 0;
   this->m_phantom = 0i64;
-  this->m_rejectRayChassisListener.vfptr = (hkBaseObjectVtbl *)&hkpRejectChassisListener::`vftable'{for `hkReferencedObject'};
+  this->m_rejectRayChassisListener.vfptr = (hkBaseObjectVtbl *)&hkpRejectChassisListener::`vftable{for `hkReferencedObject};
   *(_DWORD *)&this->m_rejectRayChassisListener.m_memSizeAndFlags = 0x1FFFF;
-  this->m_rejectRayChassisListener.vfptr = (hkpPhantomOverlapListenerVtbl *)&hkpRejectChassisListener::`vftable'{for `hkpPhantomOverlapListener'};
+  this->m_rejectRayChassisListener.vfptr = (hkpPhantomOverlapListenerVtbl *)&hkpRejectChassisListener::`vftable{for `hkpPhantomOverlapListener};
   *(_WORD *)&this->m_alreadyUsed.m_bool = 256;
 }
 
@@ -121,7 +121,7 @@ void __fastcall hkpVehicleRayCastWheelCollide::~hkpVehicleRayCastWheelCollide(hk
   hkpPhantomOverlapListener *v3; // rdx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpVehicleRayCastWheelCollide::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpVehicleRayCastWheelCollide::`vftable;
   v2 = this->m_phantom;
   if ( v2 )
   {
@@ -136,7 +136,7 @@ void __fastcall hkpVehicleRayCastWheelCollide::~hkpVehicleRayCastWheelCollide(hk
     hkReferencedObject::removeReference((hkReferencedObject *)&v1->m_phantom->vfptr);
   }
   hkpRejectChassisListener::~hkpRejectChassisListener(&v1->m_rejectRayChassisListener);
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 86

@@ -6,12 +6,12 @@ void __fastcall Scaleform::GFx::TextureGlyphData::TextureGlyphData(Scaleform::GF
   unsigned __int64 v4; // rsi
   unsigned __int64 v5; // rbx
 
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,261>::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseNTS<Scaleform::GFx::TextureGlyphData,261>::`vftable';
-  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::TextureGlyphData::`vftable';
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,261>::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountBaseNTS<Scaleform::GFx::TextureGlyphData,261>::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::TextureGlyphData::`vftable;
   this->PackTextureConfig.NominalSize = 48;
   this->PackTextureConfig.PadPixels = 3;
   this->PackTextureConfig.TextureWidth = 1024;
@@ -36,7 +36,7 @@ void __fastcall Scaleform::GFx::TextureGlyphData::TextureGlyphData(Scaleform::GF
 // RVA: 0x8A85F0
 void __fastcall Scaleform::GFx::TextureGlyphData::TextureGlyphVisitor::~TextureGlyphVisitor(Scaleform::GFx::TextureGlyphData::TextureGlyphVisitor *this)
 {
-  this->vfptr = (Scaleform::GFx::TextureGlyphData::TextureGlyphVisitorVtbl *)&Scaleform::GFx::TextureGlyphData::TextureGlyphVisitor::`vftable';
+  this->vfptr = (Scaleform::GFx::TextureGlyphData::TextureGlyphVisitorVtbl *)&Scaleform::GFx::TextureGlyphData::TextureGlyphVisitor::`vftable;
 }
 
 // File Line: 260

@@ -6,14 +6,14 @@ void __fastcall PoseNode::PoseNode(PoseNode *this)
   UFG::qNode<PoseNode,PoseNode> *v2; // rax
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable';
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
   UFG::qSafePointerNode<PoseNode>::qSafePointerNode<PoseNode>((UFG::qSafePointerNode<PoseNode> *)&this->vfptr);
   v2 = (UFG::qNode<PoseNode,PoseNode> *)&v1->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PoseNode::`vftable'{for `Expression::IMemberMap'};
-  v1->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&PoseNode::`vftable'{for `UFG::qSafePointerNode<PoseNode>'};
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PoseNode::`vftable{for `Expression::IMemberMap};
+  v1->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&PoseNode::`vftable{for `UFG::qSafePointerNode<PoseNode>};
   v1->mParent.mOffset = 0i64;
   v1->mPriority = 0;
   *(_QWORD *)&v1->mName.mUID = -1i64;
@@ -65,8 +65,8 @@ void __fastcall PoseNodeParent::~PoseNodeParent(PoseNodeParent *this)
   char *v11; // rcx
 
   v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&PoseNodeParent::`vftable'{for `Expression::IMemberMap'};
-  this->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&PoseNodeParent::`vftable'{for `UFG::qSafePointerNode<PoseNode>'};
+  this->vfptr = (Expression::IMemberMapVtbl *)&PoseNodeParent::`vftable{for `Expression::IMemberMap};
+  this->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&PoseNodeParent::`vftable{for `UFG::qSafePointerNode<PoseNode>};
   v2 = &this->mChildren;
   v3 = (int *)&this->mChildren.mNode.mNext[-3].mNext;
   v4 = &this->mNetPoseSequence;
@@ -614,16 +614,16 @@ void __fastcall PoseNodeRoot::PoseNodeRoot(PoseNodeRoot *this)
 
   v1 = this;
   PoseNode::PoseNode((PoseNode *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PoseNodeParent::`vftable'{for `Expression::IMemberMap'};
-  v1->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&PoseNodeParent::`vftable'{for `UFG::qSafePointerNode<PoseNode>'};
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PoseNodeParent::`vftable{for `Expression::IMemberMap};
+  v1->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&PoseNodeParent::`vftable{for `UFG::qSafePointerNode<PoseNode>};
   v1->mChildrenSerialized.mCount = 0;
   v1->mChildrenSerialized.mData.mOffset = 0i64;
   v2 = &v1->mChildren;
   v2->mNode.mPrev = &v2->mNode;
   v2->mNode.mNext = &v2->mNode;
   v1->mLocalTime = 0.0;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PoseNodeRoot::`vftable'{for `Expression::IMemberMap'};
-  v1->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&PoseNodeRoot::`vftable'{for `UFG::qSafePointerNode<PoseNode>'};
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PoseNodeRoot::`vftable{for `Expression::IMemberMap};
+  v1->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&PoseNodeRoot::`vftable{for `UFG::qSafePointerNode<PoseNode>};
 }
 
 // File Line: 707
@@ -641,8 +641,8 @@ void __fastcall PoseNodeRoot::Create()
 // RVA: 0x299F70
 void __fastcall BlendNode::~BlendNode(BlendNode *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&BlendNode::`vftable'{for `Expression::IMemberMap'};
-  this->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&BlendNode::`vftable'{for `UFG::qSafePointerNode<PoseNode>'};
+  this->vfptr = (Expression::IMemberMapVtbl *)&BlendNode::`vftable{for `Expression::IMemberMap};
+  this->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&BlendNode::`vftable{for `UFG::qSafePointerNode<PoseNode>};
   PoseNodeParent::~PoseNodeParent((PoseNodeParent *)&this->vfptr);
 }
 
@@ -680,16 +680,16 @@ void __fastcall BlendNode::BlendNode(BlendNode *this)
 
   v1 = this;
   PoseNode::PoseNode((PoseNode *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PoseNodeParent::`vftable'{for `Expression::IMemberMap'};
-  v1->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&PoseNodeParent::`vftable'{for `UFG::qSafePointerNode<PoseNode>'};
+  v1->vfptr = (Expression::IMemberMapVtbl *)&PoseNodeParent::`vftable{for `Expression::IMemberMap};
+  v1->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&PoseNodeParent::`vftable{for `UFG::qSafePointerNode<PoseNode>};
   v1->mChildrenSerialized.mCount = 0;
   v1->mChildrenSerialized.mData.mOffset = 0i64;
   v2 = &v1->mChildren;
   v2->mNode.mPrev = &v2->mNode;
   v2->mNode.mNext = &v2->mNode;
   v1->mLocalTime = 0.0;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&BlendNode::`vftable'{for `Expression::IMemberMap'};
-  v1->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&BlendNode::`vftable'{for `UFG::qSafePointerNode<PoseNode>'};
+  v1->vfptr = (Expression::IMemberMapVtbl *)&BlendNode::`vftable{for `Expression::IMemberMap};
+  v1->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&BlendNode::`vftable{for `UFG::qSafePointerNode<PoseNode>};
   v1->mWeightSet = 0i64;
   v1->mWeightSetMask = 0i64;
   *(_DWORD *)&v1->mStarted = 0;
@@ -706,16 +706,16 @@ void __fastcall BlendNode::BlendNode(BlendNode *this, float blendInTime)
 
   v2 = this;
   PoseNode::PoseNode((PoseNode *)&this->vfptr);
-  v2->vfptr = (Expression::IMemberMapVtbl *)&PoseNodeParent::`vftable'{for `Expression::IMemberMap'};
-  v2->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&PoseNodeParent::`vftable'{for `UFG::qSafePointerNode<PoseNode>'};
+  v2->vfptr = (Expression::IMemberMapVtbl *)&PoseNodeParent::`vftable{for `Expression::IMemberMap};
+  v2->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&PoseNodeParent::`vftable{for `UFG::qSafePointerNode<PoseNode>};
   v2->mChildrenSerialized.mCount = 0;
   v2->mChildrenSerialized.mData.mOffset = 0i64;
   v3 = &v2->mChildren;
   v3->mNode.mPrev = &v3->mNode;
   v3->mNode.mNext = &v3->mNode;
   v2->mLocalTime = 0.0;
-  v2->vfptr = (Expression::IMemberMapVtbl *)&BlendNode::`vftable'{for `Expression::IMemberMap'};
-  v2->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&BlendNode::`vftable'{for `UFG::qSafePointerNode<PoseNode>'};
+  v2->vfptr = (Expression::IMemberMapVtbl *)&BlendNode::`vftable{for `Expression::IMemberMap};
+  v2->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&BlendNode::`vftable{for `UFG::qSafePointerNode<PoseNode>};
   v2->mWeightSet = 0i64;
   v2->mWeightSetMask = 0i64;
   *(_DWORD *)&v2->mStarted = 0;
@@ -834,8 +834,8 @@ void __fastcall BlendAddNode::BlendAddNode(BlendAddNode *this, float blendInTime
 
   v2 = this;
   BlendNode::BlendNode((BlendNode *)&this->vfptr, blendInTime);
-  v2->vfptr = (Expression::IMemberMapVtbl *)&BlendAddNode::`vftable'{for `Expression::IMemberMap'};
-  v2->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&BlendAddNode::`vftable'{for `UFG::qSafePointerNode<PoseNode>'};
+  v2->vfptr = (Expression::IMemberMapVtbl *)&BlendAddNode::`vftable{for `Expression::IMemberMap};
+  v2->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&BlendAddNode::`vftable{for `UFG::qSafePointerNode<PoseNode>};
   v2->mKeepBlend = 1;
 }
 
@@ -851,8 +851,8 @@ BlendAddNode *__fastcall BlendAddNode::Create()
   if ( !v0 )
     return 0i64;
   BlendNode::BlendNode((BlendNode *)v0);
-  *(_QWORD *)v1 = &BlendAddNode::`vftable'{for `Expression::IMemberMap'};
-  *((_QWORD *)v1 + 2) = &BlendAddNode::`vftable'{for `UFG::qSafePointerNode<PoseNode>'};
+  *(_QWORD *)v1 = &BlendAddNode::`vftable{for `Expression::IMemberMap};
+  *((_QWORD *)v1 + 2) = &BlendAddNode::`vftable{for `UFG::qSafePointerNode<PoseNode>};
   v1[155] = 1;
   return (BlendAddNode *)v1;
 }
@@ -878,8 +878,8 @@ PoseNode *__fastcall BlendAddNode::Clone(BlendAddNode *this)
   if ( v2 )
   {
     BlendNode::BlendNode((BlendNode *)v2);
-    *(_QWORD *)v3 = &BlendAddNode::`vftable'{for `Expression::IMemberMap'};
-    *((_QWORD *)v3 + 2) = &BlendAddNode::`vftable'{for `UFG::qSafePointerNode<PoseNode>'};
+    *(_QWORD *)v3 = &BlendAddNode::`vftable{for `Expression::IMemberMap};
+    *((_QWORD *)v3 + 2) = &BlendAddNode::`vftable{for `UFG::qSafePointerNode<PoseNode>};
     v3[155] = 1;
   }
   else
@@ -913,8 +913,8 @@ BlendSubNode *__fastcall BlendSubNode::Create()
   if ( !v0 )
     return 0i64;
   BlendNode::BlendNode((BlendNode *)v0);
-  *(_QWORD *)v1 = &BlendSubNode::`vftable'{for `Expression::IMemberMap'};
-  *((_QWORD *)v1 + 2) = &BlendSubNode::`vftable'{for `UFG::qSafePointerNode<PoseNode>'};
+  *(_QWORD *)v1 = &BlendSubNode::`vftable{for `Expression::IMemberMap};
+  *((_QWORD *)v1 + 2) = &BlendSubNode::`vftable{for `UFG::qSafePointerNode<PoseNode>};
   v1[155] = 1;
   return (BlendSubNode *)v1;
 }
@@ -933,8 +933,8 @@ PoseNode *__fastcall BlendSubNode::Clone(BlendSubNode *this)
   if ( v2 )
   {
     BlendNode::BlendNode((BlendNode *)v2);
-    *(_QWORD *)v3 = &BlendSubNode::`vftable'{for `Expression::IMemberMap'};
-    *((_QWORD *)v3 + 2) = &BlendSubNode::`vftable'{for `UFG::qSafePointerNode<PoseNode>'};
+    *(_QWORD *)v3 = &BlendSubNode::`vftable{for `Expression::IMemberMap};
+    *((_QWORD *)v3 + 2) = &BlendSubNode::`vftable{for `UFG::qSafePointerNode<PoseNode>};
     v3[155] = 1;
   }
   else
@@ -959,8 +959,8 @@ void __fastcall BlendPhaseNode::BlendPhaseNode(BlendPhaseNode *this, float blend
 
   v2 = this;
   BlendNode::BlendNode((BlendNode *)&this->vfptr, blendInTime);
-  v2->vfptr = (Expression::IMemberMapVtbl *)&BlendPhaseNode::`vftable'{for `Expression::IMemberMap'};
-  v2->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&BlendPhaseNode::`vftable'{for `UFG::qSafePointerNode<PoseNode>'};
+  v2->vfptr = (Expression::IMemberMapVtbl *)&BlendPhaseNode::`vftable{for `Expression::IMemberMap};
+  v2->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&BlendPhaseNode::`vftable{for `UFG::qSafePointerNode<PoseNode>};
   v2->mHoldPose = 0;
   v2->mKeepBlend = 1;
 }
@@ -993,8 +993,8 @@ PoseNode *__fastcall BlendPhaseNode::Clone(BlendPhaseNode *this)
   if ( v2 )
   {
     BlendNode::BlendNode((BlendNode *)v2);
-    *(_QWORD *)v3 = &BlendPhaseNode::`vftable'{for `Expression::IMemberMap'};
-    *((_QWORD *)v3 + 2) = &BlendPhaseNode::`vftable'{for `UFG::qSafePointerNode<PoseNode>'};
+    *(_QWORD *)v3 = &BlendPhaseNode::`vftable{for `Expression::IMemberMap};
+    *((_QWORD *)v3 + 2) = &BlendPhaseNode::`vftable{for `UFG::qSafePointerNode<PoseNode>};
     v3[176] = 0;
     v3[155] = 1;
   }

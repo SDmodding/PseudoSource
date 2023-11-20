@@ -9,7 +9,7 @@ void __fastcall Render::RenderPassCollector::RenderPassCollector(Render::RenderP
 
   v1 = this;
   v2 = 4i64;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     this,
     0x20ui64,
     4,

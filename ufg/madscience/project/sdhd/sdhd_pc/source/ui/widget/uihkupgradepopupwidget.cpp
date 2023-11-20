@@ -62,7 +62,7 @@ void __fastcall UFG::UIHKUpgradePopupWidget::Update(UFG::UIHKUpgradePopupWidget 
                 }
                 else
                 {
-                  `eh vector constructor iterator'(
+                  `eh vector constructor iterator(
                     &ptr,
                     0x30ui64,
                     2,
@@ -86,7 +86,7 @@ void __fastcall UFG::UIHKUpgradePopupWidget::Update(UFG::UIHKUpgradePopupWidget 
                   Scaleform::GFx::Movie::Invoke(v4, "UpgradePopup_Show", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
                   v3->mDisplayTime = 0.0;
                   v3->mVisible = 1;
-                  `eh vector destructor iterator'(
+                  `eh vector destructor iterator(
                     &ptr,
                     0x30ui64,
                     2,
@@ -104,7 +104,7 @@ void __fastcall UFG::UIHKUpgradePopupWidget::Update(UFG::UIHKUpgradePopupWidget 
           {
             if ( !v3->mVisible )
             {
-              `eh vector constructor iterator'(
+              `eh vector constructor iterator(
                 &ptr,
                 0x30ui64,
                 2,
@@ -128,7 +128,7 @@ void __fastcall UFG::UIHKUpgradePopupWidget::Update(UFG::UIHKUpgradePopupWidget 
               Scaleform::GFx::Movie::Invoke(v4, "UpgradePopup_Show", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
               v3->mDisplayTime = 0.0;
               v3->mVisible = 1;
-              `eh vector destructor iterator'(
+              `eh vector destructor iterator(
                 &ptr,
                 0x30ui64,
                 2,

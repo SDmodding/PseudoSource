@@ -141,7 +141,7 @@ void __fastcall UFG::HDDmanager::HDDSaveNext(UFG::HDDmanager *this)
 
   callback_param = this;
   v2 = Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)this->mFileContainer);
-  UFG::qPrintf("Writing '%s', File Size %d\n", v2[3].vfptr, *(unsigned int *)&v2[6].m_memSizeAndFlags);
+  UFG::qPrintf("Writing %s, File Size %d\n", v2[3].vfptr, *(unsigned int *)&v2[6].m_memSizeAndFlags);
   callback_param->mStatus = 2;
   UFG::qWriteAsync(
     (const char *)v2[3].vfptr,
@@ -222,7 +222,7 @@ void __fastcall UFG::HDDmanager::HDDLoadNext(UFG::HDDmanager *this)
 
   v1 = this;
   v2 = Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)this->mFileContainer);
-  UFG::qPrintf("Loading '%s' File Size = %d\n", v2[3].vfptr, *(unsigned int *)&v2[6].m_memSizeAndFlags);
+  UFG::qPrintf("Loading %s File Size = %d\n", v2[3].vfptr, *(unsigned int *)&v2[6].m_memSizeAndFlags);
   v1->mStatus = 3;
   UFG::qReadEntireFileAsync(
     (const char *)v2[3].vfptr,
@@ -358,7 +358,7 @@ void __fastcall UFG::HDDmanager::HDDDeleteNext(UFG::HDDmanager *this)
   do
   {
     v2 = Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)v1->mFileContainer);
-    UFG::qPrintf("Deleting '%s'\n", v2[3].vfptr);
+    UFG::qPrintf("Deleting %s\n", v2[3].vfptr);
     v1->mStatus = 4;
     if ( (unsigned __int8)UFG::qDeleteFile((const char *)v2[3].vfptr) )
     {

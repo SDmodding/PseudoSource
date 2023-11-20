@@ -7,7 +7,7 @@ AK::IAkPluginParam *__fastcall CreateParametricEQFXParams(AK::IAkPluginMemAlloc 
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 80ui64);
   if ( result )
   {
-    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkParameterEQFXParams::`vftable';
+    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkParameterEQFXParams::`vftable;
     WORD2(result[9].vfptr) = 257;
     BYTE6(result[9].vfptr) = 1;
   }
@@ -18,7 +18,7 @@ AK::IAkPluginParam *__fastcall CreateParametricEQFXParams(AK::IAkPluginMemAlloc 
 // RVA: 0xACE910
 void __fastcall CAkParameterEQFXParams::CAkParameterEQFXParams(CAkParameterEQFXParams *this)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkParameterEQFXParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkParameterEQFXParams::`vftable;
   *(_WORD *)this->m_bBandDirty = 257;
   this->m_bBandDirty[2] = 1;
 }
@@ -27,14 +27,14 @@ void __fastcall CAkParameterEQFXParams::CAkParameterEQFXParams(CAkParameterEQFXP
 // RVA: 0xACE930
 void __fastcall CAkParameterEQFXParams::~CAkParameterEQFXParams(CAkParameterEQFXParams *this)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable;
 }
 
 // File Line: 37
 // RVA: 0xACE950
 void __fastcall CAkParameterEQFXParams::CAkParameterEQFXParams(CAkParameterEQFXParams *this, CAkParameterEQFXParams *in_rCopy)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkParameterEQFXParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkParameterEQFXParams::`vftable;
   this->m_Params.Band[0].eFilterType = in_rCopy->m_Params.Band[0].eFilterType;
   this->m_Params.Band[0].fGain = in_rCopy->m_Params.Band[0].fGain;
   this->m_Params.Band[0].fFrequency = in_rCopy->m_Params.Band[0].fFrequency;
@@ -67,7 +67,7 @@ AK::IAkPluginParam *__fastcall CAkParameterEQFXParams::Clone(CAkParameterEQFXPar
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 80ui64);
   if ( result )
   {
-    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkParameterEQFXParams::`vftable';
+    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkParameterEQFXParams::`vftable;
     LODWORD(result[1].vfptr) = v2->m_Params.Band[0].eFilterType;
     HIDWORD(result[1].vfptr) = LODWORD(v2->m_Params.Band[0].fGain);
     *(float *)&result[2].vfptr = v2->m_Params.Band[0].fFrequency;

@@ -25,7 +25,7 @@ __int64 dynamic_initializer_for__UFG::UIHKMissionRewardsHeaderWidget::GamesliceT
 // RVA: 0x5C9910
 void __fastcall UFG::UIHKMissionRewardsHeaderWidget::~UIHKMissionRewardsHeaderWidget(UFG::UIHKMissionRewardsHeaderWidget *this)
 {
-  this->vfptr = (UFG::UIHKMissionRewardsHeaderWidgetVtbl *)&UFG::UIHKMissionRewardsHeaderWidget::`vftable';
+  this->vfptr = (UFG::UIHKMissionRewardsHeaderWidgetVtbl *)&UFG::UIHKMissionRewardsHeaderWidget::`vftable;
 }
 
 // File Line: 34
@@ -199,7 +199,7 @@ void __fastcall UFG::UIHKMissionRewardsHeaderWidget::Flash_Show(UFG::UIHKMission
   v2 = screen->mRenderable->m_movie.pObject;
   if ( v2 )
   {
-    `eh vector constructor iterator'(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     v3 = UFG::UIHKMissionRewardsHeaderWidget::Caption.mData;
     if ( ((unsigned int)pargs.Type >> 6) & 1 )
     {
@@ -222,7 +222,7 @@ void __fastcall UFG::UIHKMissionRewardsHeaderWidget::Flash_Show(UFG::UIHKMission
     Scaleform::GFx::Movie::Invoke(v2, "showMissionComplete", 0i64, &pargs, 2u);
     if ( UFG::UIHKMissionRewardsHeaderWidget::GamesliceType.mUID == qSymbol_Mission_20.mUID )
       UFG::TiDo::GetIsInstantiated();
-    `eh vector destructor iterator'(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 

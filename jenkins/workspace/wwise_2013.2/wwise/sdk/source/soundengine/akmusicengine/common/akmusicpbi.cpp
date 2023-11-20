@@ -24,9 +24,9 @@ void __fastcall CAkMusicPBI::CAkMusicPBI(CAkMusicPBI *this, CAkMusicCtx *in_pare
   *((_DWORD *)v14 + 144) &= 0xFFFFFFFC;
   *((_BYTE *)&v14->0 + 374) &= 0xDFu;
   v14->m_ulStopOffset = -1;
-  v14->vfptr = (CAkTransportAwareVtbl *)&CAkMusicPBI::`vftable'{for `CAkTransportAware'};
-  v14->vfptr = (ITransitionableVtbl *)&CAkContinuousPBI::`vftable'{for `ITransitionable'};
-  v14->vfptr = (CAkChildCtxVtbl *)&CAkMusicPBI::`vftable';
+  v14->vfptr = (CAkTransportAwareVtbl *)&CAkMusicPBI::`vftable{for `CAkTransportAware};
+  v14->vfptr = (ITransitionableVtbl *)&CAkContinuousPBI::`vftable{for `ITransitionable};
+  v14->vfptr = (CAkChildCtxVtbl *)&CAkMusicPBI::`vftable;
   v14->m_pSrcInfo = in_pSrcInfo;
 }
 

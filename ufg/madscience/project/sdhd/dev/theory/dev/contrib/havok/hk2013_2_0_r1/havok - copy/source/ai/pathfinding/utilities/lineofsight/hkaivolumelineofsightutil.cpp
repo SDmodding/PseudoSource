@@ -209,7 +209,7 @@ $lineOfSightFailure:
   }
   v18 = v4->m_startCellKey;
   v19 = v4->m_startPoint.m_quad;
-  v20 = (__m128)`hkIntVector::convertU32ToF32'::`2'::two16;
+  v20 = (__m128)`hkIntVector::convertU32ToF32::`2::two16;
   *(_DWORD *)&portal[32] = -1;
   v85 = -1;
   v83 = 0i64;
@@ -244,7 +244,7 @@ $lineOfSightFailure:
             _mm_add_ps(
               _mm_mul_ps(
                 _mm_cvtepi32_ps(_mm_srli_epi32(v30, 0x10u)),
-                (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                (__m128)`hkIntVector::convertU32ToF32::`2::two16),
               _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v30, 0x10u), 0x10u)))),
           v32);
   v34 = _mm_add_ps(
@@ -253,7 +253,7 @@ $lineOfSightFailure:
             _mm_add_ps(
               _mm_mul_ps(
                 _mm_cvtepi32_ps(_mm_srli_epi32(v28, 0x10u)),
-                (__m128)`hkIntVector::convertU32ToF32'::`2'::two16),
+                (__m128)`hkIntVector::convertU32ToF32::`2::two16),
               _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v28, 0x10u), 0x10u)))),
           v32);
   if ( v29 && v18 == v4->m_endCellKey )
@@ -270,7 +270,7 @@ $lineOfSightFailure:
     *(_QWORD *)portal = &portal[32];
     if ( !(unsigned __int8)v29->vfptr[2].__vecDelDtor((hkBaseObject *)&v29->vfptr, (unsigned int)&v81) )
       goto LABEL_20;
-    v20 = (__m128)`hkIntVector::convertU32ToF32'::`2'::two16;
+    v20 = (__m128)`hkIntVector::convertU32ToF32::`2::two16;
     LODWORD(v21) = v77;
     v22 = -1;
   }
@@ -384,7 +384,7 @@ LABEL_50:
         goto LABEL_54;
       if ( !rayGoesThroughPortal(&v4->m_startPoint, &v4->m_endPoint, (hkAabb *)portal) )
       {
-        v20 = (__m128)`hkIntVector::convertU32ToF32'::`2'::two16;
+        v20 = (__m128)`hkIntVector::convertU32ToF32::`2::two16;
         v41 = (__m128)xmmword_141A711B0;
         v22 = v94;
         goto LABEL_54;
@@ -409,7 +409,7 @@ LABEL_50:
         if ( !(unsigned __int8)v74->vfptr[2].__vecDelDtor((hkBaseObject *)&v74->vfptr, (unsigned int)portal) )
         {
           v43 = SWORD3(v79);
-          v20 = (__m128)`hkIntVector::convertU32ToF32'::`2'::two16;
+          v20 = (__m128)`hkIntVector::convertU32ToF32::`2::two16;
           v41 = (__m128)xmmword_141A711B0;
           v22 = v94;
           goto LABEL_57;
@@ -426,7 +426,7 @@ LABEL_50:
           hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v6, 4);
         v6->m_data[v6->m_size++] = v40;
       }
-      v20 = (__m128)`hkIntVector::convertU32ToF32'::`2'::two16;
+      v20 = (__m128)`hkIntVector::convertU32ToF32::`2::two16;
       v79 = v81;
       v22 = v40;
       v41 = (__m128)xmmword_141A711B0;

@@ -29,7 +29,7 @@ __int64 UFG::_dynamic_initializer_for__ui_mission_fail__()
 // RVA: 0x1566F50
 __int64 dynamic_initializer_for__UFG::UIHKScreenMissionFailed::mData__()
 {
-  UFG::UIHKScreenMissionFailed::mData.vfptr = (UFG::UICommandDataVtbl *)&UFG::UIHKMissionFailedData::`vftable';
+  UFG::UIHKScreenMissionFailed::mData.vfptr = (UFG::UICommandDataVtbl *)&UFG::UIHKMissionFailedData::`vftable;
   dword_14208EB48 = 0;
   UFG::qString::qString(&stru_14208EB50);
   UFG::qString::qString(&stru_14208EB78);
@@ -47,7 +47,7 @@ void __fastcall UFG::UIHKScreenMissionFailed::UIHKScreenMissionFailed(UFG::UIHKS
   v1 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -58,7 +58,7 @@ void __fastcall UFG::UIHKScreenMissionFailed::UIHKScreenMissionFailed(UFG::UIHKS
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenMissionFailed::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenMissionFailed::`vftable;
   *(_QWORD *)&this->mState = 0i64;
   this->mSelectedOption = 1;
   this->mCanCancelMission = 0;
@@ -75,7 +75,7 @@ void __fastcall UFG::UIHKScreenMissionFailed::~UIHKScreenMissionFailed(UFG::UIHK
   UFG::UIHKScreenGlobalOverlay *v4; // rax
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenMissionFailed::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenMissionFailed::`vftable;
   UFG::SoundBankManager::QueueBankForUnload((UFG::qWiseSymbol *)&ui_mission_fail.mUID);
   v2 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseScreen(v2, "Dialog_MissionFailed");
@@ -373,7 +373,7 @@ void __fastcall UFG::UIHKScreenMissionFailed::Flash_SetTitleText(UFG::UIHKScreen
   v3 = this->mRenderable->m_movie.pObject;
   if ( v3 )
   {
-    `eh vector constructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( ((unsigned int)pargs.Type >> 6) & 1 )
     {
       (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
@@ -385,7 +385,7 @@ void __fastcall UFG::UIHKScreenMissionFailed::Flash_SetTitleText(UFG::UIHKScreen
     pargs.Type = 6;
     *(_QWORD *)&pargs.mValue.NValue = v2;
     Scaleform::GFx::Movie::Invoke(v3, "MissionFailed_SetTitleText", 0i64, &pargs, 1u);
-    `eh vector destructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 
@@ -401,7 +401,7 @@ void __fastcall UFG::UIHKScreenMissionFailed::Flash_SetBodyText(UFG::UIHKScreenM
   v3 = this->mRenderable->m_movie.pObject;
   if ( v3 )
   {
-    `eh vector constructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( ((unsigned int)pargs.Type >> 6) & 1 )
     {
       (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
@@ -413,7 +413,7 @@ void __fastcall UFG::UIHKScreenMissionFailed::Flash_SetBodyText(UFG::UIHKScreenM
     pargs.Type = 6;
     *(_QWORD *)&pargs.mValue.NValue = v2;
     Scaleform::GFx::Movie::Invoke(v3, "MissionFailed_SetBodyText", 0i64, &pargs, 1u);
-    `eh vector destructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 
@@ -429,7 +429,7 @@ void __fastcall UFG::UIHKScreenMissionFailed::Flash_SetHintText(UFG::UIHKScreenM
   v3 = this->mRenderable->m_movie.pObject;
   if ( v3 )
   {
-    `eh vector constructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( ((unsigned int)pargs.Type >> 6) & 1 )
     {
       (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
@@ -441,7 +441,7 @@ void __fastcall UFG::UIHKScreenMissionFailed::Flash_SetHintText(UFG::UIHKScreenM
     pargs.Type = 6;
     *(_QWORD *)&pargs.mValue.NValue = v2;
     Scaleform::GFx::Movie::Invoke(v3, "MissionFailed_SetHintText", 0i64, &pargs, 1u);
-    `eh vector destructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 
@@ -457,7 +457,7 @@ void __fastcall UFG::UIHKScreenMissionFailed::Flash_PlayIntro(UFG::UIHKScreenMis
   v3 = this->mRenderable->m_movie.pObject;
   if ( v3 )
   {
-    `eh vector constructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( ((unsigned int)pargs.Type >> 6) & 1 )
     {
       (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
@@ -469,7 +469,7 @@ void __fastcall UFG::UIHKScreenMissionFailed::Flash_PlayIntro(UFG::UIHKScreenMis
     pargs.Type = 5;
     pargs.mValue.NValue = (double)v2;
     Scaleform::GFx::Movie::Invoke(v3, "MissionFailed_PlayIntro", 0i64, &pargs, 1u);
-    `eh vector destructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 
@@ -485,7 +485,7 @@ void __fastcall UFG::UIHKScreenMissionFailed::Flash_PlayOutro(UFG::UIHKScreenMis
   v3 = this->mRenderable->m_movie.pObject;
   if ( v3 )
   {
-    `eh vector constructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( ((unsigned int)pargs.Type >> 6) & 1 )
     {
       (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
@@ -497,7 +497,7 @@ void __fastcall UFG::UIHKScreenMissionFailed::Flash_PlayOutro(UFG::UIHKScreenMis
     pargs.Type = 5;
     pargs.mValue.NValue = (double)v2;
     Scaleform::GFx::Movie::Invoke(v3, "MissionFailed_PlayOutro", 0i64, &pargs, 1u);
-    `eh vector destructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 
@@ -513,7 +513,7 @@ void __fastcall UFG::UIHKScreenMissionFailed::Flash_SetNumButtons(UFG::UIHKScree
   v3 = this->mRenderable->m_movie.pObject;
   if ( v3 )
   {
-    `eh vector constructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( ((unsigned int)pargs.Type >> 6) & 1 )
     {
       (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
@@ -525,7 +525,7 @@ void __fastcall UFG::UIHKScreenMissionFailed::Flash_SetNumButtons(UFG::UIHKScree
     pargs.Type = 5;
     pargs.mValue.NValue = (double)v2;
     Scaleform::GFx::Movie::Invoke(v3, "MissionFailed_SetNumButtons", 0i64, &pargs, 1u);
-    `eh vector destructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 
@@ -547,7 +547,7 @@ void __fastcall UFG::UIHKScreenMissionFailed::Flash_SetButtonHighlight(UFG::UIHK
   v5 = this->mRenderable->m_movie.pObject;
   if ( v5 )
   {
-    `eh vector constructor iterator'(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( ((unsigned int)pargs.Type >> 6) & 1 )
     {
       (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
@@ -566,7 +566,7 @@ void __fastcall UFG::UIHKScreenMissionFailed::Flash_SetButtonHighlight(UFG::UIHK
     v9 = 2;
     LOBYTE(v10) = v3;
     Scaleform::GFx::Movie::Invoke(v5, "MissionFailed_SetButtonHighlight", 0i64, &pargs, 2u);
-    `eh vector destructor iterator'(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 

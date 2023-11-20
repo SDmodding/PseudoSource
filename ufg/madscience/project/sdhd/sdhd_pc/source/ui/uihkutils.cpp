@@ -366,7 +366,7 @@ void __fastcall UFG::UI::ScreenInitCallback(UFG::UIScreen *screen)
   v2 = v1->mRenderable->m_movie.pObject;
   pargs.pObjectInterface = 0i64;
   pargs.Type = 0;
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   v3 = gUIHorizontalResolution;
   if ( (v13 >> 6) & 1 )
   {
@@ -439,7 +439,7 @@ void __fastcall UFG::UI::ScreenInitCallback(UFG::UIScreen *screen)
   pargs.Type = 2;
   pargs.mValue.BValue = v9;
   Scaleform::GFx::Movie::Invoke(v2, "HandleButtonsSwapped", 0i64, &pargs, 1u);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   if ( ((unsigned int)pargs.Type >> 6) & 1 )
     (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
       pargs.pObjectInterface,

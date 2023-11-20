@@ -944,7 +944,7 @@ signed __int64 __fastcall hkpBoxBoxCollisionDetection::findClosestPoint(hkpBoxBo
       v5->m_featureIdA = v26;
       v4->m_featureIndexA = v26;
       hkMatrix3f::setTranspose(&v75, (hkMatrix3f *)&v7->m_aTb.m_rotation.m_col0);
-      v27 = _mm_and_ps((__m128)`hkVector4f::getComponent'::`2'::indexToMask[v26], v7->m_dinA.m_quad);
+      v27 = _mm_and_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[v26], v7->m_dinA.m_quad);
       v28 = _mm_or_ps(_mm_shuffle_ps(v27, v27, 78), v27);
       v29 = (__m128i)_mm_cmpltps(_mm_or_ps(_mm_shuffle_ps(v28, v28, 177), v28), (__m128)0i64);
       _mm_store_si128((__m128i *)&v4->m_normalIsFlipped, v29);
@@ -1008,7 +1008,7 @@ LABEL_11:
                               0x1Fu),
                     v4->m_vA.m_quad),
                   v7->m_radiusA.m_quad),
-                (__m128)`hkVector4f::getComponent'::`2'::indexToMask[v4->m_featureIndexA]);
+                (__m128)`hkVector4f::getComponent::`2::indexToMask[v4->m_featureIndexA]);
         goto LABEL_22;
       }
       goto LABEL_44;
@@ -1017,7 +1017,7 @@ LABEL_11:
       break;
     v5->m_featureIdA = v26;
     v4->m_featureIndexA = v26;
-    v36 = _mm_and_ps((__m128)`hkVector4f::getComponent'::`2'::indexToMask[v26 - 4], v7->m_dinB.m_quad);
+    v36 = _mm_and_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[v26 - 4], v7->m_dinB.m_quad);
     v37 = *((__m128 *)&v7->m_bodyA + (signed int)(v26 - 4) + 4i64);
     v38 = _mm_or_ps(_mm_shuffle_ps(v36, v36, 78), v36);
     v39 = (__m128i)_mm_cmpltps(_mm_or_ps(_mm_shuffle_ps(v38, v38, 177), v38), (__m128)0i64);
@@ -1088,7 +1088,7 @@ LABEL_20:
                             0x1Fu),
                   v4->m_vB.m_quad),
                 v7->m_radiusB.m_quad),
-              (__m128)`hkVector4f::getComponent'::`2'::indexToMask[v4->m_featureIndexA - 4i64]);
+              (__m128)`hkVector4f::getComponent::`2::indexToMask[v4->m_featureIndexA - 4i64]);
 LABEL_22:
       v52 = _mm_or_ps(_mm_shuffle_ps(v51, v51, 78), v51);
       v4->m_distance.m_real = _mm_or_ps(_mm_shuffle_ps(v52, v52, 177), v52);
@@ -1096,7 +1096,7 @@ LABEL_22:
     }
 LABEL_44:
     --v8;
-    v74 = (__m128)`hkVector4f::getComponent'::`2'::indexToMask[v26 & 3];
+    v74 = (__m128)`hkVector4f::getComponent::`2::indexToMask[v26 & 3];
     v7->m_sepDist[(unsigned __int64)v26 >> 2] = (hkVector4f)_mm_or_ps(
                                                               _mm_and_ps(v74, (__m128)xmmword_141A712F0),
                                                               _mm_andnot_ps(
@@ -1259,8 +1259,8 @@ char __fastcall hkpBoxBoxCollisionDetection::isValidEdgeEdge(hkpBoxBoxCollisionD
          query.m_quad);
   v7 = _mm_mul_ps(v6, v2.m_quad);
   v8 = fpp->m_featureIndexA & 0xF;
-  v9 = _mm_and_ps((__m128)`hkVector4f::getComponent'::`2'::indexToMask[fpp->m_featureIndexB & 0xF], v5.m_quad);
-  v10 = (__m128)`hkVector4f::getComponent'::`2'::indexToMask[fpp->m_featureIndexA & 0xF];
+  v9 = _mm_and_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[fpp->m_featureIndexB & 0xF], v5.m_quad);
+  v10 = (__m128)`hkVector4f::getComponent::`2::indexToMask[fpp->m_featureIndexA & 0xF];
   v11 = _mm_mul_ps(
           _mm_xor_ps(
             (__m128)_mm_slli_epi32(
@@ -1272,7 +1272,7 @@ char __fastcall hkpBoxBoxCollisionDetection::isValidEdgeEdge(hkpBoxBoxCollisionD
   v13 = _mm_mul_ps(
           _mm_mul_ps(_mm_or_ps(_mm_shuffle_ps(v12, v12, 177), v12), (__m128)xmmword_141A710D0),
           *((__m128 *)&this->m_bodyA + (fpp->m_featureIndexB & 0xF) + 4i64));
-  v14 = _mm_and_ps((__m128)`hkVector4f::getComponent'::`2'::indexToMask[fpp->m_featureIndexA & 0xF], v2.m_quad);
+  v14 = _mm_and_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[fpp->m_featureIndexA & 0xF], v2.m_quad);
   v15 = _mm_add_ps(
           _mm_add_ps(
             _mm_mul_ps(_mm_shuffle_ps(v11, v11, 85), this->m_aTb.m_rotation.m_col1.m_quad),
@@ -1323,12 +1323,12 @@ char __fastcall hkpBoxBoxCollisionDetection::isValidEdgeEdge(hkpBoxBoxCollisionD
     v18 = 1;
   if ( v18 | v39 )
     return 0;
-  v43 = (__m128)`hkVector4f::getComponent'::`2'::indexToMask[v8];
-  v44 = _mm_and_ps(v7, (__m128)`hkVector4f::getComponent'::`2'::indexToMask[v8]);
+  v43 = (__m128)`hkVector4f::getComponent::`2::indexToMask[v8];
+  v44 = _mm_and_ps(v7, (__m128)`hkVector4f::getComponent::`2::indexToMask[v8]);
   v45 = _mm_or_ps(_mm_shuffle_ps(v44, v44, 78), v44);
   v46 = _mm_or_ps(
           _mm_and_ps(_mm_add_ps(_mm_or_ps(_mm_shuffle_ps(v45, v45, 177), v45), _mm_mul_ps(v41, v22)), v43),
-          _mm_andnot_ps((__m128)`hkVector4f::getComponent'::`2'::indexToMask[v8], v7));
+          _mm_andnot_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[v8], v7));
   v47 = _mm_or_ps(_mm_and_ps(_mm_mul_ps(v22, (__m128)xmmword_141A711B0), v43), _mm_andnot_ps(v43, (__m128)0i64));
   v48 = _mm_sub_ps(_mm_mul_ps(_mm_shuffle_ps(v13, v13, 201), v47), _mm_mul_ps(_mm_shuffle_ps(v47, v47, 201), v13));
   v49 = _mm_shuffle_ps(v48, v48, 201);
@@ -1838,7 +1838,7 @@ LABEL_17:
           v41 = (unsigned __int8)v12->m_contactPoints[0].m_featureIdA - 4;
           v42 = _mm_and_ps(
                   _mm_sub_ps(_mm_xor_ps((__m128)v36, v40), v5->m_radiusB.m_quad),
-                  (__m128)`hkVector4f::getComponent'::`2'::indexToMask[v39]);
+                  (__m128)`hkVector4f::getComponent::`2::indexToMask[v39]);
           v38[2].m128_i32[0] = v12->m_contactPoints[0].m_contactPointId;
           v43 = _mm_or_ps(_mm_shuffle_ps(v42, v42, 78), v42);
           v44 = _mm_or_ps(_mm_shuffle_ps(v43, v43, 177), v43);
@@ -1891,7 +1891,7 @@ LABEL_17:
                 _mm_sub_ps(
                   _mm_xor_ps((__m128)_mm_slli_epi32(_mm_srli_epi32(v15, 0x1Fu), 0x1Fu), (__m128)v20),
                   v5->m_radiusA.m_quad),
-                (__m128)`hkVector4f::getComponent'::`2'::indexToMask[v23]);
+                (__m128)`hkVector4f::getComponent::`2::indexToMask[v23]);
         v22[2].m128_i32[0] = v12->m_contactPoints[0].m_contactPointId;
         v26 = _mm_or_ps(_mm_shuffle_ps(v25, v25, 78), v25);
         v27 = _mm_or_ps(_mm_shuffle_ps(v26, v26, 177), v26);
@@ -2325,12 +2325,12 @@ LABEL_68:
                         (__m128)xmmword_141A86090));
     v141 = hkVector4Comparison_maskToLastIndex[(signed int)v127];
     v142 = 0;
-    v143 = (__m128)`hkVector4f::getComponent'::`2'::indexToMask[v139];
+    v143 = (__m128)`hkVector4f::getComponent::`2::indexToMask[v139];
     LODWORD(v144) = 16 * (1 << hkVector4Comparison_maskToLastIndex[(signed int)v127]);
     v145 = _mm_and_ps(v138, v143);
     planeMaskB = 16 * (1 << hkVector4Comparison_maskToLastIndex[(signed int)v127]);
     v146 = _mm_or_ps(_mm_shuffle_ps(v145, v145, 78), v145);
-    v147 = (__m128)`hkVector4f::getComponent'::`2'::indexToMask[(unsigned __int8)hkVector4Comparison_maskToLastIndex[(signed int)v127]];
+    v147 = (__m128)`hkVector4f::getComponent::`2::indexToMask[(unsigned __int8)hkVector4Comparison_maskToLastIndex[(signed int)v127]];
     v148 = 0;
     v149 = _mm_and_ps(v136, v147);
     v150 = _mm_or_ps(_mm_shuffle_ps(v149, v149, 78), v149);
@@ -2423,7 +2423,7 @@ LABEL_101:
                    _mm_sub_ps(
                      _mm_xor_ps((__m128)_mm_slli_epi32(_mm_srli_epi32(v168, 0x1Fu), 0x1Fu), (__m128)v173),
                      v5->m_radiusA.m_quad),
-                   (__m128)`hkVector4f::getComponent'::`2'::indexToMask[(unsigned __int8)v162.m_featureIdA]);
+                   (__m128)`hkVector4f::getComponent::`2::indexToMask[(unsigned __int8)v162.m_featureIdA]);
           v175 = _mm_or_ps(_mm_shuffle_ps(v174, v174, 78), v174);
           v176 = _mm_or_ps(_mm_shuffle_ps(v175, v175, 177), v175);
           if ( v176.m128_f32[0] < (float)(v159.m128_f32[0] - 0.00000011920929) )
@@ -2659,7 +2659,7 @@ LABEL_133:
         v214 = (__m128)_mm_slli_epi32(_mm_srli_epi32(_mm_cmpeq_epi32(v206, (__m128i)0i64), 0x1Fu), 0x1Fu);
         v215 = _mm_and_ps(
                  _mm_sub_ps(_mm_xor_ps(v214, (__m128)v213), v5->m_radiusB.m_quad),
-                 (__m128)`hkVector4f::getComponent'::`2'::indexToMask[(unsigned __int8)v245.m_featureIdA - 4i64]);
+                 (__m128)`hkVector4f::getComponent::`2::indexToMask[(unsigned __int8)v245.m_featureIdA - 4i64]);
         v216 = _mm_or_ps(_mm_shuffle_ps(v215, v215, 78), v215);
         v217 = _mm_or_ps(_mm_shuffle_ps(v216, v216, 177), v216);
         if ( v217.m128_f32[0] < (float)(v159.m128_f32[0] - 0.00000011920929) )

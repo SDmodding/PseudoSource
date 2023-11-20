@@ -137,7 +137,7 @@ Scaleform::Render::ContextImpl::EntryData *__fastcall Scaleform::Render::Context
 // RVA: 0x949F60
 void __fastcall Scaleform::Render::ContextImpl::EntryData::~EntryData(Scaleform::Render::ContextImpl::EntryData *this)
 {
-  this->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::ContextImpl::EntryData::`vftable';
+  this->vfptr = (Scaleform::Render::ContextImpl::EntryDataVtbl *)&Scaleform::Render::ContextImpl::EntryData::`vftable;
 }
 
 // File Line: 312
@@ -791,12 +791,12 @@ void __fastcall Scaleform::Render::ContextImpl::RTHandle::HandleData::HandleData
 {
   Scaleform::Render::ContextImpl::ContextLock *v3; // rax
 
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,69>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::ContextImpl::RTHandle::HandleData,69>::`vftable';
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ContextImpl::RTHandle::HandleData::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,69>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::ContextImpl::RTHandle::HandleData,69>::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ContextImpl::RTHandle::HandleData::`vftable;
   v3 = context->pCaptureLock.pObject;
   if ( v3 )
     _InterlockedExchangeAdd(&v3->RefCount, 1u);
@@ -815,7 +815,7 @@ void __fastcall Scaleform::Render::ContextImpl::RTHandle::HandleData::~HandleDat
   Scaleform::Render::ContextImpl::ContextLock *v4; // rcx
 
   v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ContextImpl::RTHandle::HandleData::`vftable';
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::ContextImpl::RTHandle::HandleData::`vftable;
   v2 = &this->pContextLock.pObject->LockObject.cs;
   EnterCriticalSection(v2);
   if ( v1->pContextLock.pObject->pContext )
@@ -834,7 +834,7 @@ void __fastcall Scaleform::Render::ContextImpl::RTHandle::HandleData::~HandleDat
   v4 = v1->pContextLock.pObject;
   if ( v4 && _InterlockedExchangeAdd(&v4->RefCount, 0xFFFFFFFF) == 1 && v4 )
     v4->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v4->vfptr, 1u);
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
 }
 
 // File Line: 677
@@ -1042,9 +1042,9 @@ void __fastcall Scaleform::Render::ContextImpl::RenderNotify::~RenderNotify(Scal
   Scaleform::Render::ContextImpl::RenderNotify *v1; // rbx
 
   v1 = this;
-  this->vfptr = (Scaleform::Render::ContextImpl::RenderNotifyVtbl *)&Scaleform::Render::ContextImpl::RenderNotify::`vftable';
+  this->vfptr = (Scaleform::Render::ContextImpl::RenderNotifyVtbl *)&Scaleform::Render::ContextImpl::RenderNotify::`vftable;
   Scaleform::Render::ContextImpl::RenderNotify::ReleaseAllContextData(this);
-  v1->ServiceCommandInstance.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable';
+  v1->ServiceCommandInstance.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
 }
 
 // File Line: 797
@@ -1144,7 +1144,7 @@ void __fastcall Scaleform::Render::ContextImpl::RenderNotify::ReleaseAllContextD
 // RVA: 0x949530
 void __fastcall Scaleform::Render::ContextImpl::ContextCaptureNotify::~ContextCaptureNotify(Scaleform::Render::ContextImpl::ContextCaptureNotify *this)
 {
-  this->vfptr = (Scaleform::Render::ContextImpl::ContextCaptureNotifyVtbl *)&Scaleform::Render::ContextImpl::ContextCaptureNotify::`vftable';
+  this->vfptr = (Scaleform::Render::ContextImpl::ContextCaptureNotifyVtbl *)&Scaleform::Render::ContextImpl::ContextCaptureNotify::`vftable;
   if ( this->pOwnedContext )
     Scaleform::Render::ContextImpl::Context::RemoveCaptureNotify(this->pOwnedContext, this);
 }
@@ -1809,8 +1809,8 @@ LABEL_19:
       break;
     v20 = 1;
     v21 = 0i64;
-    v19 = &Scaleform::Event::`vftable'{for `Scaleform::Waitable'};
-    v22 = &Scaleform::Event::`vftable'{for `Scaleform::AcquireInterface'};
+    v19 = &Scaleform::Event::`vftable{for `Scaleform::Waitable};
+    v22 = &Scaleform::Event::`vftable{for `Scaleform::AcquireInterface};
     Scaleform::Mutex::Mutex(&pmutex, 1, 0);
     Scaleform::WaitCondition::WaitCondition(&v26);
     v23 = 0;
@@ -1842,12 +1842,12 @@ LABEL_19:
       }
       Scaleform::Mutex::Unlock(&pmutex);
     }
-    v19 = &Scaleform::Event::`vftable'{for `Scaleform::Waitable'};
-    v22 = &Scaleform::Event::`vftable'{for `Scaleform::AcquireInterface'};
+    v19 = &Scaleform::Event::`vftable{for `Scaleform::Waitable};
+    v22 = &Scaleform::Event::`vftable{for `Scaleform::AcquireInterface};
     Scaleform::WaitCondition::~WaitCondition(&v26);
     Scaleform::Mutex::~Mutex(&pmutex);
-    v22 = &Scaleform::AcquireInterface::`vftable';
-    v19 = &Scaleform::Waitable::`vftable';
+    v22 = &Scaleform::AcquireInterface::`vftable;
+    v19 = &Scaleform::Waitable::`vftable;
     v15 = (__int64)v21;
     if ( v21 && !_InterlockedDecrement(v21) && v15 )
     {
@@ -1861,7 +1861,7 @@ LABEL_19:
           v17);
       Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, (void *)v15);
     }
-    v19 = &Scaleform::RefCountImplCore::`vftable';
+    v19 = &Scaleform::RefCountImplCore::`vftable;
   }
 }
 

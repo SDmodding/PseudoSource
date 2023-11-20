@@ -26,7 +26,7 @@ void __fastcall UFG::GetInFormationComponent::GetInFormationComponent(UFG::GetIn
   v5 = (UFG::qNode<UFG::GetInFormationComponent,UFG::GetInFormationComponent> *)&v4->mPrev;
   v5->mPrev = v5;
   v5->mNext = v5;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::GetInFormationComponent::`vftable';
+  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::GetInFormationComponent::`vftable;
   v6 = &v4->m_NodeList;
   v6->mNode.mPrev = &v6->mNode;
   v6->mNode.mNext = &v6->mNode;
@@ -62,7 +62,7 @@ void __fastcall UFG::GetInFormationComponent::~GetInFormationComponent(UFG::GetI
   UFG::qNode<UFG::GetInFormationComponent,UFG::GetInFormationComponent> *v12; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::GetInFormationComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::GetInFormationComponent::`vftable;
   v2 = (UFG::qList<UFG::HasAttackRequestNode,UFG::HasAttackRequestNode,1,0> *)&this->m_NodeList;
   v3 = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> **)&this->m_NodeList.mNode.mNext[-2].mNext;
   v4 = &this->m_BoundComponentHandles.mNode.mNext;
@@ -373,7 +373,7 @@ void __fastcall UFG::GetInFormationNode::GetInFormationNode(UFG::GetInFormationN
   v9->mPrev = v9;
   v9->mNext = v9;
   UFG::qSafePointerNode<UFG::GetInFormationNode>::qSafePointerNode<UFG::GetInFormationNode>((UFG::qSafePointerNode<UFG::GetInFormationNode> *)&this->vfptr);
-  v8->vfptr = (UFG::qSafePointerNode<UFG::GetInFormationNode>Vtbl *)&UFG::GetInFormationNode::`vftable';
+  v8->vfptr = (UFG::qSafePointerNode<UFG::GetInFormationNode>Vtbl *)&UFG::GetInFormationNode::`vftable;
   v10 = &v8->m_pTargetFormationManagerComponent;
   v10->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v10->mPrev;
   v10->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v10->mPrev;
@@ -442,7 +442,7 @@ void __fastcall UFG::GetInFormationNode::~GetInFormationNode(UFG::GetInFormation
   UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v16; // rax
 
   v1 = (UFG::qSafePointerNode<UFG::ParkourHandle> *)this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::GetInFormationNode>Vtbl *)&UFG::GetInFormationNode::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::GetInFormationNode>Vtbl *)&UFG::GetInFormationNode::`vftable;
   v2 = &this->m_pOwner;
   if ( this->m_pOwner.m_pPointer )
   {
@@ -477,7 +477,7 @@ void __fastcall UFG::GetInFormationNode::~GetInFormationNode(UFG::GetInFormation
   v11->__vecDelDtor = (void *(__fastcall *)(UFG::qSafePointerNode<UFG::ParkourHandle> *, unsigned int))v10;
   *v7 = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)v7;
   v1[3].vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&v1[2].m_SafePointerList.mNode.mNext;
-  v1->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::GetInFormationNode>::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::GetInFormationNode>::`vftable;
   UFG::qSafePointerNode<UFG::DynamicCoverCorner>::SetAllPointersToNull(v1);
   UFG::qList<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList,1,0>::DeleteNodes(&v1->m_SafePointerList);
   v12 = v1->m_SafePointerList.mNode.mPrev;

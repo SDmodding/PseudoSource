@@ -155,7 +155,7 @@ void __fastcall UFG::UIHKActionButtonWidget::Flash_Show(UFG::UIHKActionButtonWid
     v6 = screen->mRenderable->m_movie.pObject;
     if ( v6 )
     {
-      `eh vector constructor iterator'(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+      `eh vector constructor iterator(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
       if ( (v10 >> 6) & 1 )
       {
         (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v9 + 16i64))(v9, &ptr, v8);
@@ -185,7 +185,7 @@ void __fastcall UFG::UIHKActionButtonWidget::Flash_Show(UFG::UIHKActionButtonWid
       v20 = 2;
       LOBYTE(v21) = v24;
       Scaleform::GFx::Movie::Invoke(v6, "ActionButton_Show", 0i64, (Scaleform::GFx::Value *)&ptr, 4u);
-      `eh vector destructor iterator'(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+      `eh vector destructor iterator(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     }
   }
 }

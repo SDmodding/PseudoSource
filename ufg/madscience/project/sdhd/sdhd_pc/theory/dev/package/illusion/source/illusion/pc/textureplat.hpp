@@ -51,12 +51,12 @@ void __fastcall Illusion::TexturePlat::~TexturePlat(Illusion::TexturePlat *this)
 
   v1 = this;
   v2 = (UFG::qResourceHandle *)&this->mTextureD3DResourceHandle.mPrev;
-  v3 = `UFG::qGetResourceInventory<Illusion::TextureD3DResource>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::TextureD3DResource>'::`2'::result )
+  v3 = `UFG::qGetResourceInventory<Illusion::TextureD3DResource>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::TextureD3DResource>::`2::result )
   {
     v4 = UFG::qResourceWarehouse::Instance();
     v3 = UFG::qResourceWarehouse::GetInventory(v4, 0xEF77C5F7);
-    `UFG::qGetResourceInventory<Illusion::TextureD3DResource>'::`2'::result = v3;
+    `UFG::qGetResourceInventory<Illusion::TextureD3DResource>::`2::result = v3;
   }
   UFG::qResourceHandle::Close(v2, v3);
   UFG::qResourceHandle::~qResourceHandle(v2);

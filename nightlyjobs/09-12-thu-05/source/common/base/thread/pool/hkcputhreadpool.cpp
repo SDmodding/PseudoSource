@@ -57,7 +57,7 @@ void __fastcall hkCpuThreadPool::hkCpuThreadPool(hkCpuThreadPool *this, hkCpuThr
   v3 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   v4 = this->m_workerThreads;
-  this->vfptr = (hkBaseObjectVtbl *)&hkCpuThreadPool::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkCpuThreadPool::`vftable;
   v5 = 11;
   do
   {
@@ -173,7 +173,7 @@ void __fastcall hkCpuThreadPool::~hkCpuThreadPool(hkCpuThreadPool *this)
   signed __int64 v6; // rbx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkCpuThreadPool::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkCpuThreadPool::`vftable;
   hkCpuThreadPool::waitForCompletion(this);
   v2 = 0;
   v3 = 0;
@@ -210,7 +210,7 @@ void __fastcall hkCpuThreadPool::~hkCpuThreadPool(hkCpuThreadPool *this)
     --v5;
   }
   while ( v5 >= 0 );
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 218

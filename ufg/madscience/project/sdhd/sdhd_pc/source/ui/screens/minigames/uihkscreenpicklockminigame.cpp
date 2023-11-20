@@ -11,7 +11,7 @@ void __fastcall UFG::UIHKScreenPickLockMinigame::UIHKScreenPickLockMinigame(UFG:
   v1 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -22,12 +22,12 @@ void __fastcall UFG::UIHKScreenPickLockMinigame::UIHKScreenPickLockMinigame(UFG:
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKTaskableScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKTaskableScreen::`vftable;
   this->mFinished = 0;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKMinigameScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKMinigameScreen::`vftable;
   *(_QWORD *)&this->mfAlphaValue = 1109393408i64;
   ++UFG::UIHKMinigameScreen::mNumMinigameScreens;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenPickLockMinigame::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenPickLockMinigame::`vftable;
   UFG::UIHKScreenPickLockMinigame::m_bWon = 0;
   this->mSavedControllerMode = UFG::gInputSystem->mControllers[UFG::gActiveControllerNum]->m_ActiveMapSet;
   UFG::SetInputMode(IM_UI_ONLY, UFG::gInputSystem->mControllers[UFG::gActiveControllerNum]->mControllerIndex);
@@ -55,7 +55,7 @@ void __fastcall UFG::UIHKScreenPickLockMinigame::~UIHKScreenPickLockMinigame(UFG
   UFG::qWiseSymbol v10; // [rsp+60h] [rbp+18h]
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenPickLockMinigame::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenPickLockMinigame::`vftable;
   v2 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseScreen(v2, "PickLockMinigame");
   v3 = UFG::UIHKScreenGlobalOverlay::mThis;
@@ -248,7 +248,7 @@ void __fastcall UFG::UIHKScreenPickLockMinigame::update(UFG::UIHKScreenPickLockM
         v13 = 0.0;
       v2->m_fLeftStickX = v13;
     }
-    `eh vector constructor iterator'(
+    `eh vector constructor iterator(
       &pval.mValue,
       0x30ui64,
       3,
@@ -320,7 +320,7 @@ void __fastcall UFG::UIHKScreenPickLockMinigame::update(UFG::UIHKScreenPickLockM
       pval.pObjectInterface = 0i64;
     }
     LODWORD(pval.pPrev) = 0;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       &pval.mValue,
       0x30ui64,
       3,
@@ -411,7 +411,7 @@ void __fastcall UFG::UIHKScreenPickLockMinigame::refreshDifficulty(UFG::UIHKScre
   Scaleform::GFx::Value pargs; // [rsp+38h] [rbp-50h]
 
   v1 = this->mRenderable->m_movie.pObject;
-  `eh vector constructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   v2 = (double)UFG::UIHKScreenPickLockMinigame::m_iDifficulty;
   if ( ((unsigned int)pargs.Type >> 6) & 1 )
   {
@@ -425,6 +425,6 @@ void __fastcall UFG::UIHKScreenPickLockMinigame::refreshDifficulty(UFG::UIHKScre
   pargs.mValue.NValue = v2;
   if ( v1 )
     Scaleform::GFx::Movie::Invoke(v1, "setDifficulty", 0i64, &pargs, 1u);
-  `eh vector destructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 

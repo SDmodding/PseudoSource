@@ -16,12 +16,12 @@ void __fastcall UEL::UnaryExpression::UnaryExpression(UEL::UnaryExpression *this
   UFG::qOffset64<UEL::Expression *> *v3; // rax
   char *v4; // r8
 
-  this->vfptr = (UEL::ExpressionVtbl *)&UEL::Expression::`vftable';
+  this->vfptr = (UEL::ExpressionVtbl *)&UEL::Expression::`vftable;
   this->mType.mValue = 0;
   this->mValueType.mBaseType.mValue = 0;
   this->mValueType.mDetailedType = UFG::gNullQSymbol;
   *(_DWORD *)&this->mResolved = 0;
-  this->vfptr = (UEL::ExpressionVtbl *)&UEL::UnaryExpression::`vftable';
+  this->vfptr = (UEL::ExpressionVtbl *)&UEL::UnaryExpression::`vftable;
   v3 = &this->mExpression;
   if ( expression )
     v4 = (char *)((char *)expression - (char *)v3);

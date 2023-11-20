@@ -17,7 +17,7 @@ void __fastcall hkpAabbPhantom::hkpAabbPhantom(hkpAabbPhantom *this, hkAabb *aab
   v5->m_phantomListeners.m_size = 0;
   v5->m_phantomListeners.m_capacityAndFlags = 2147483648;
   v5->m_collidable.m_ownerOffset = -32;
-  v5->vfptr = (hkBaseObjectVtbl *)&hkpAabbPhantom::`vftable';
+  v5->vfptr = (hkBaseObjectVtbl *)&hkpAabbPhantom::`vftable;
   v5->m_overlappingCollidables.m_data = 0i64;
   v5->m_overlappingCollidables.m_size = 0;
   v5->m_overlappingCollidables.m_capacityAndFlags = 2147483648;
@@ -35,7 +35,7 @@ void __fastcall hkpAabbPhantom::~hkpAabbPhantom(hkpAabbPhantom *this)
   int v2; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpAabbPhantom::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpAabbPhantom::`vftable;
   v2 = this->m_overlappingCollidables.m_capacityAndFlags;
   this->m_overlappingCollidables.m_size = 0;
   if ( v2 >= 0 )

@@ -30,8 +30,8 @@ void __fastcall UFG::HudComponent::HudComponent(UFG::HudComponent *this, unsigne
   v7 = (UFG::qNode<UFG::HudComponent,UFG::HudComponent> *)&v6->mPrev;
   v7->mPrev = v7;
   v7->mNext = v7;
-  v6->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HudComponent::`vftable'{for `UFG::SimComponent'};
-  v6->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::HudComponent::`vftable'{for `UFG::UpdateInterface'};
+  v6->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HudComponent::`vftable{for `UFG::SimComponent};
+  v6->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::HudComponent::`vftable{for `UFG::UpdateInterface};
   UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0>::RebindingComponentHandle<UFG::TransformNodeComponent,0>(&v6->mRootTransformComponent);
   UFG::RebindingComponentHandle<UFG::HealthComponent,0>::RebindingComponentHandle<UFG::HealthComponent,0>(&v6->mHealthComponent);
   UFG::qString::qString(&v6->mSymbolName);
@@ -72,8 +72,8 @@ void __fastcall UFG::HudComponent::HudComponent(UFG::HudComponent *this, unsigne
   v9 = (UFG::qNode<UFG::HudComponent,UFG::HudComponent> *)&v8->mPrev;
   v9->mPrev = v9;
   v9->mNext = v9;
-  v8->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HudComponent::`vftable'{for `UFG::SimComponent'};
-  v8->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::HudComponent::`vftable'{for `UFG::UpdateInterface'};
+  v8->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HudComponent::`vftable{for `UFG::SimComponent};
+  v8->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::HudComponent::`vftable{for `UFG::UpdateInterface};
   UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0>::RebindingComponentHandle<UFG::TransformNodeComponent,0>(&v8->mRootTransformComponent);
   UFG::RebindingComponentHandle<UFG::HealthComponent,0>::RebindingComponentHandle<UFG::HealthComponent,0>(&v8->mHealthComponent);
   UFG::qString::qString(&v8->mSymbolName);
@@ -103,8 +103,8 @@ void __fastcall UFG::HudComponent::~HudComponent(UFG::HudComponent *this)
   UFG::qNode<UFG::HudComponent,UFG::HudComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HudComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::HudComponent::`vftable'{for `UFG::UpdateInterface'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HudComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::HudComponent::`vftable{for `UFG::UpdateInterface};
   if ( this == UFG::HudComponent::s_HudComponentpCurrentIterator )
     UFG::HudComponent::s_HudComponentpCurrentIterator = (UFG::HudComponent *)&this->mPrev[-5].mNext;
   v2 = (UFG::qNode<UFG::HudComponent,UFG::HudComponent> *)&this->mPrev;

@@ -8,7 +8,7 @@ void __fastcall hkpWorldCinfo::hkpWorldCinfo(hkpWorldCinfo *this)
   hkReferencedObject *v4; // rcx
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpWorldCinfo::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpWorldCinfo::`vftable;
   this->m_collisionFilter.m_pntr = 0i64;
   this->m_convexListFilter.m_pntr = 0i64;
   this->m_memoryWatchDog.m_pntr = 0i64;
@@ -140,7 +140,7 @@ LABEL_11:
 // RVA: 0xD55140
 void __fastcall hkpWorldCinfo::hkpWorldCinfo(hkpWorldCinfo *this, hkFinishLoadedObjectFlag flag)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkpWorldCinfo::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpWorldCinfo::`vftable;
   if ( flag.m_finishing )
   {
     if ( this->m_contactRestingVelocity == 0.0 )

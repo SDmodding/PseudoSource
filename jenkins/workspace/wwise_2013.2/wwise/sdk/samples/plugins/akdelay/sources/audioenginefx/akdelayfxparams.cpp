@@ -6,7 +6,7 @@ AK::IAkPluginParam *__fastcall CreateDelayFXParams(AK::IAkPluginMemAlloc *in_pAl
 
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 32ui64);
   if ( result )
-    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkDelayFXParams::`vftable';
+    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkDelayFXParams::`vftable;
   return result;
 }
 
@@ -21,7 +21,7 @@ AK::IAkPluginParam *__fastcall CAkDelayFXParams::Clone(CAkDelayFXParams *this, A
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 32ui64);
   if ( result )
   {
-    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkDelayFXParams::`vftable';
+    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkDelayFXParams::`vftable;
     *(float *)&result[1].vfptr = v2->RTPC.fFeedback;
     HIDWORD(result[1].vfptr) = LODWORD(v2->RTPC.fWetDryMix);
     *(float *)&result[2].vfptr = v2->RTPC.fOutputLevel;

@@ -101,7 +101,7 @@ hkClass *__fastcall hkpPoweredChainMapper::staticClass()
 void __fastcall finishLoadedObjecthkpPoweredChainMapper(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpPoweredChainMapper::`vftable';
+    *(_QWORD *)p = &hkpPoweredChainMapper::`vftable;
 }
 
 // File Line: 171
@@ -115,7 +115,7 @@ void __fastcall cleanupLoadedObjecthkpPoweredChainMapper(void *p)
 // RVA: 0xE0B520
 void **__fastcall getVtablehkpPoweredChainMapper()
 {
-  return &hkpPoweredChainMapper::`vftable';
+  return &hkpPoweredChainMapper::`vftable;
 }
 
 // File Line: 197

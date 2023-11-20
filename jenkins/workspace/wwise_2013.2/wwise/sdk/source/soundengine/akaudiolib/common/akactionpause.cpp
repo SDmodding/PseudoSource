@@ -14,7 +14,7 @@ CAkActionPause *__fastcall CAkActionPause::Create(AkActionType in_eActionType, u
   if ( result )
   {
     CAkActionActive::CAkActionActive((CAkActionActive *)&result->vfptr, v2, v3);
-    v5->vfptr = (CAkIndexableVtbl *)&CAkActionPause::`vftable';
+    v5->vfptr = (CAkIndexableVtbl *)&CAkActionPause::`vftable;
     v5->m_bPausePendingResume = 1;
     CAkAction::AddToIndex((CAkAction *)&v5->vfptr);
     result = v5;

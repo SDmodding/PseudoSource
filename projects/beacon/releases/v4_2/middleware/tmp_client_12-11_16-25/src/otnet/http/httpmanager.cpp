@@ -10,7 +10,7 @@ void __fastcall OSuite::ZHttpManager::ZHttpManager(OSuite::ZHttpManager *this)
   OSuite::ZHttpRequestManager *v6; // rax
 
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpManager::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpManager::`vftable;
   v2 = (OSuite::ZHttpConnectionManager *)OSuite::ZObject::operator new(0x40ui64);
   v3 = 0i64;
   if ( v2 )
@@ -47,7 +47,7 @@ void __fastcall OSuite::ZHttpManager::~ZHttpManager(OSuite::ZHttpManager *this)
   OSuite::ZHttpConnectionManager *v3; // rcx
 
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpManager::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpManager::`vftable;
   v2 = this->m_httpRequestManager;
   if ( v2 )
     v2->vfptr->__vecDelDtor((OSuite::ZObject *)&v2->vfptr, 1u);

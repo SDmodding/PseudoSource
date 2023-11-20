@@ -4,7 +4,7 @@ void __fastcall hkpBvTreeAgent::hkpBvTreeAgent(hkpBvTreeAgent *this, hkpContactM
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_contactMgr = mgr;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpBvTreeAgent::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpBvTreeAgent::`vftable;
   this->m_collisionPartners.m_capacityAndFlags = 2147483648;
   this->m_collisionPartners.m_data = 0i64;
   this->m_collisionPartners.m_size = 0;
@@ -84,7 +84,7 @@ hkpBvTreeAgent *__fastcall hkpBvTreeAgent::createBvTreeShapeAgent(hkpCdBody *bod
   if ( result )
   {
     hkpBvTreeAgent::hkpBvTreeAgent(result, v4);
-    v7->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpBvTreeAgent>::`vftable';
+    v7->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpBvTreeAgent>::`vftable;
     result = (hkpBvTreeAgent *)v7;
   }
   return result;
@@ -133,7 +133,7 @@ void __fastcall hkpBvTreeAgent::createBvBvAgent(hkpCdBody *bodyA, hkpCdBody *bod
     if ( v8 )
     {
       hkpBvTreeAgent::hkpBvTreeAgent(v8, v4);
-      v9->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpBvTreeAgent>::`vftable';
+      v9->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpBvTreeAgent>::`vftable;
     }
   }
   else

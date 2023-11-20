@@ -1992,7 +1992,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextField::restrictSet(
         if ( LOBYTE(v4[3].vfptr) )
         {
           LOBYTE(v4[3].vfptr) = 0;
-          Scaleform::GFx::Text::EditorKit::RestrictParams::`scalar deleting destructor'(v5, 1);
+          Scaleform::GFx::Text::EditorKit::RestrictParams::`scalar deleting destructor(v5, 1);
         }
         *(_QWORD *)&v4[2].RefCount = 0i64;
       }
@@ -2497,7 +2497,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextField::getCharBound
          &pCharRect,
          charIndex) )
   {
-    `eh vector constructor iterator'(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::Value);
     v5 = (float)(pCharRect.x1 * 0.050000001);
     v6 = ptr;
     if ( (char)(ptr & 0x1F) > 9 )
@@ -2556,7 +2556,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextField::getCharBound
       v4->pTraits.pObject->pVM[1].ExceptionObj.value.VS._1.VObj,
       4u,
       (Scaleform::GFx::AS3::Value *)&ptr);
-    `eh vector destructor iterator'(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
   }
 }
 
@@ -2735,7 +2735,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextField::getLineMetri
          lineIndex,
          &pmetrics) )
   {
-    `eh vector constructor iterator'(&ptr, 0x20ui64, 6, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x20ui64, 6, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::Value);
     v5 = (double)(pmetrics.Ascent / 0x14);
     v6 = ptr;
     if ( (char)(ptr & 0x1F) > 9 )
@@ -2844,7 +2844,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextField::getLineMetri
         }
       }
     }
-    `eh vector destructor iterator'(&ptr, 0x20ui64, 6, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x20ui64, 6, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
   }
 }
 
@@ -3540,7 +3540,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
       v5,
       v2,
       &Scaleform::GFx::AS3::fl_text::TextFieldCI);
-    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_text::TextField::`vftable';
+    v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_text::TextField::`vftable;
   }
   else
   {
@@ -3555,7 +3555,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
       v7,
       v2,
       &Scaleform::GFx::AS3::fl_text::TextFieldCI);
-    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_text::TextField::`vftable';
+    v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_text::TextField::`vftable;
   }
   else
   {

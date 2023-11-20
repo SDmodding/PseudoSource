@@ -332,10 +332,10 @@ void __fastcall Scaleform::GFx::AS3::Traits::Traits(Scaleform::GFx::AS3::Traits 
 
   v5 = this;
   v6 = _vm->GC.GC;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::RefCountBaseGC<328>::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::RefCountBaseGC<328>::`vftable;
   this->RefCount = 1;
   this->pRCCRaw = (unsigned __int64)v6;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::GASRefCountBase::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::GASRefCountBase::`vftable;
   v7 = (Scaleform::GFx::AS3::Slots *)&this->FirstOwnSlotNum;
   v7->FirstOwnSlotNum = 0i64;
   v7->Parent = 0i64;
@@ -344,7 +344,7 @@ void __fastcall Scaleform::GFx::AS3::Traits::Traits(Scaleform::GFx::AS3::Traits 
   v8->Data.Size = 0i64;
   v8->Data.Policy.Capacity = 0i64;
   this->Set.mHash.pTable = 0i64;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Traits::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Traits::`vftable;
   this->FirstOwnSlotInd.Index = 0i64;
   this->FixedValueSlotNumber = 0i64;
   this->MemSize = 0;
@@ -400,10 +400,10 @@ void __fastcall Scaleform::GFx::AS3::Traits::Traits(Scaleform::GFx::AS3::Traits 
 
   v2 = this;
   v3 = _vm->GC.GC;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::RefCountBaseGC<328>::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::RefCountBaseGC<328>::`vftable;
   this->RefCount = 1;
   this->pRCCRaw = (unsigned __int64)v3;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::GASRefCountBase::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::GASRefCountBase::`vftable;
   v4 = (Scaleform::GFx::AS3::Slots *)&this->FirstOwnSlotNum;
   v4->FirstOwnSlotNum = 0i64;
   v4->Parent = 0i64;
@@ -412,7 +412,7 @@ void __fastcall Scaleform::GFx::AS3::Traits::Traits(Scaleform::GFx::AS3::Traits 
   v5->Data.Size = 0i64;
   v5->Data.Policy.Capacity = 0i64;
   v2->Set.mHash.pTable = 0i64;
-  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Traits::`vftable';
+  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Traits::`vftable;
   v2->FirstOwnSlotInd.Index = 0i64;
   v2->FixedValueSlotNumber = 0i64;
   v2->MemSize = 0;
@@ -445,7 +445,7 @@ void __fastcall Scaleform::GFx::AS3::Traits::~Traits(Scaleform::GFx::AS3::Traits
   unsigned int v7; // eax
 
   v1 = this;
-  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Traits::`vftable';
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Traits::`vftable;
   v2 = (void **)&this->InitScope.Data.Data;
   Scaleform::ConstructorMov<Scaleform::GFx::AS3::Value>::DestructArray(
     this->InitScope.Data.Data,
@@ -457,7 +457,7 @@ void __fastcall Scaleform::GFx::AS3::Traits::~Traits(Scaleform::GFx::AS3::Traits
     if ( v1->pVTable.Owner )
     {
       v1->pVTable.Owner = 0;
-      Scaleform::GFx::AS3::VTable::`scalar deleting destructor'(v3, 1u);
+      Scaleform::GFx::AS3::VTable::`scalar deleting destructor(v3, 1u);
     }
     v1->pVTable.pObject = 0i64;
   }
@@ -2380,7 +2380,7 @@ Scaleform::GFx::AS3::VTable *__fastcall Scaleform::GFx::AS3::Traits::GetVT(Scale
       if ( v1->pVTable.Owner )
       {
         v1->pVTable.Owner = 0;
-        Scaleform::GFx::AS3::VTable::`scalar deleting destructor'(v7, 1);
+        Scaleform::GFx::AS3::VTable::`scalar deleting destructor(v7, 1);
       }
     }
     v1->pVTable.pObject = (Scaleform::GFx::AS3::VTable *)v5;
@@ -2484,7 +2484,7 @@ void __fastcall Scaleform::GFx::AS3::ClassTraits::Traits::Traits(Scaleform::GFx:
     (Scaleform::GFx::AS3::Traits *)&v7->vfptr,
     1,
     0);
-  v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::Traits::`vftable';
+  v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::Traits::`vftable;
   v5->ITraits.pObject = 0i64;
   v8 = (Scaleform::GFx::AS3::Instances::fl::XMLList **)v4->TraitsClassClass.pObject->ITraits.pObject;
   if ( !v8[17] )
@@ -2527,7 +2527,7 @@ void __fastcall Scaleform::GFx::AS3::ClassTraits::Traits::Traits(Scaleform::GFx:
     (Scaleform::GFx::AS3::Traits *)&pt->vfptr,
     1,
     0);
-  v4->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::Traits::`vftable';
+  v4->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::Traits::`vftable;
   v4->ITraits.pObject = 0i64;
   v5 = (Scaleform::GFx::AS3::Instances::fl::XMLList **)v3->TraitsClassClass.pObject->ITraits.pObject;
   if ( !v5[17] )

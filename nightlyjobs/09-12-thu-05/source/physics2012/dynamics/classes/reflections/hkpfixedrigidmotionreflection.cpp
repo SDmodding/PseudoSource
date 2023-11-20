@@ -32,10 +32,10 @@ void __fastcall finishLoadedObjecthkpFixedRigidMotion(void *p, int finishing)
 {
   if ( p )
   {
-    *(_QWORD *)p = &hkpMotion::`vftable';
+    *(_QWORD *)p = &hkpMotion::`vftable;
     if ( finishing )
       *((_WORD *)p + 153) = 16256;
-    *(_QWORD *)p = &hkpFixedRigidMotion::`vftable';
+    *(_QWORD *)p = &hkpFixedRigidMotion::`vftable;
   }
 }
 
@@ -50,7 +50,7 @@ void __fastcall cleanupLoadedObjecthkpFixedRigidMotion(void *p)
 // RVA: 0xD50E30
 void **__fastcall getVtablehkpFixedRigidMotion()
 {
-  return &hkpFixedRigidMotion::`vftable';
+  return &hkpFixedRigidMotion::`vftable;
 }
 
 // File Line: 90

@@ -7,9 +7,9 @@ void __fastcall CAkMusicCtx::CAkMusicCtx(CAkMusicCtx *this, CAkMusicCtx *in_pare
   v2 = this;
   CAkChildCtx::CAkChildCtx((CAkChildCtx *)&this->vfptr, in_parent);
   v2->m_uRegisteredNotif = 0;
-  v2->vfptr = (CAkChildCtxVtbl *)&CAkMusicCtx::`vftable'{for `CAkChildCtx'};
-  v2->vfptr = (CAkTransportAwareVtbl *)&CAkMusicCtx::`vftable'{for `CAkTransportAware'};
-  v2->vfptr = (ITransitionableVtbl *)&CAkSegmentCtx::`vftable'{for `ITransitionable'};
+  v2->vfptr = (CAkChildCtxVtbl *)&CAkMusicCtx::`vftable{for `CAkChildCtx};
+  v2->vfptr = (CAkTransportAwareVtbl *)&CAkMusicCtx::`vftable{for `CAkTransportAware};
+  v2->vfptr = (ITransitionableVtbl *)&CAkSegmentCtx::`vftable{for `ITransitionable};
   v2->m_listChildren.m_pFirst = 0i64;
   *((_BYTE *)&v2->m_PBTrans + 16) &= 0xFCu;
   v2->m_PBTrans.pvPSTrans = 0i64;
@@ -31,16 +31,16 @@ void __fastcall CAkMusicCtx::~CAkMusicCtx(CAkMusicCtx *this)
 
   v1 = this->m_PBTrans.pvPSTrans;
   v2 = this;
-  this->vfptr = (CAkChildCtxVtbl *)&CAkMusicCtx::`vftable'{for `CAkChildCtx'};
-  this->vfptr = (CAkTransportAwareVtbl *)&CAkMusicCtx::`vftable'{for `CAkTransportAware'};
-  this->vfptr = (ITransitionableVtbl *)&CAkSegmentCtx::`vftable'{for `ITransitionable'};
+  this->vfptr = (CAkChildCtxVtbl *)&CAkMusicCtx::`vftable{for `CAkChildCtx};
+  this->vfptr = (CAkTransportAwareVtbl *)&CAkMusicCtx::`vftable{for `CAkTransportAware};
+  this->vfptr = (ITransitionableVtbl *)&CAkSegmentCtx::`vftable{for `ITransitionable};
   if ( v1 )
     CAkTransitionManager::RemoveTransitionUser(g_pTransitionManager, v1, (ITransitionable *)&this->vfptr);
   v3 = v2->m_PBTrans.pvPRTrans;
   if ( v3 )
     CAkTransitionManager::RemoveTransitionUser(g_pTransitionManager, v3, (ITransitionable *)&v2->vfptr);
   v2->m_listChildren.m_pFirst = 0i64;
-  v2->vfptr = (CAkTransportAwareVtbl *)&CAkTransportAware::`vftable';
+  v2->vfptr = (CAkTransportAwareVtbl *)&CAkTransportAware::`vftable;
   CAkChildCtx::~CAkChildCtx((CAkChildCtx *)&v2->vfptr);
 }
 

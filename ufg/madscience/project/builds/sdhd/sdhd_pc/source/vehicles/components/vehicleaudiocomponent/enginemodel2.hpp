@@ -9,7 +9,7 @@ void __fastcall UFG::EngineModelInput::~EngineModelInput(UFG::EngineModelInput *
   UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *v5; // rax
 
   v1 = this;
-  this->vfptr = (UFG::EngineModelInputVtbl *)&UFG::EngineModelInput::`vftable';
+  this->vfptr = (UFG::EngineModelInputVtbl *)&UFG::EngineModelInput::`vftable;
   v2 = this->m_eventController.m_pEvent;
   if ( v2 )
     UFG::AudioEvent::OnControllerDestroy(v2);
@@ -30,7 +30,7 @@ void __fastcall UFG::EngineModelOutput::~EngineModelOutput(UFG::EngineModelOutpu
   UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *v2; // rcx
   UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *v3; // rax
 
-  this->vfptr = (UFG::EngineModelOutputVtbl *)&UFG::EngineModelOutput::`vftable';
+  this->vfptr = (UFG::EngineModelOutputVtbl *)&UFG::EngineModelOutput::`vftable;
   v1 = (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *)&this->mPrev;
   v2 = this->mPrev;
   v3 = v1->mNext;
@@ -44,7 +44,7 @@ void __fastcall UFG::EngineModelOutput::~EngineModelOutput(UFG::EngineModelOutpu
 // RVA: 0x66C040
 void __fastcall UFG::Base_EngineState::~Base_EngineState(UFG::Base_EngineState *this)
 {
-  this->vfptr = (UFG::Base_EngineStateVtbl *)&UFG::Base_EngineState::`vftable';
+  this->vfptr = (UFG::Base_EngineStateVtbl *)&UFG::Base_EngineState::`vftable;
 }
 
 // File Line: 496

@@ -8,7 +8,7 @@ void __fastcall UFG::NavGuide::NavGuide(UFG::NavGuide *this)
   signed __int64 v4; // [rsp+48h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (UFG::NavGuideVtbl *)&UFG::NavGuide::`vftable';
+  this->vfptr = (UFG::NavGuideVtbl *)&UFG::NavGuide::`vftable;
   v2 = UFG::qVector3::msZero.y;
   v3 = UFG::qVector3::msZero.z;
   this->m_Pos.x = UFG::qVector3::msZero.x;
@@ -18,9 +18,9 @@ void __fastcall UFG::NavGuide::NavGuide(UFG::NavGuide *this)
   this->m_PathQueryState = 0;
   UFG::FindPathDeferredQuery::FindPathDeferredQuery(&this->m_PathQueryInput);
   v4 = (signed __int64)&v1->m_PathQueryOutput;
-  *(_OWORD *)v4 = (unsigned __int64)&UFG::DaemonQueryOutput::`vftable';
+  *(_OWORD *)v4 = (unsigned __int64)&UFG::DaemonQueryOutput::`vftable;
   *(_DWORD *)(v4 + 16) = 0;
-  *(_QWORD *)v4 = &UFG::FindPathOutput::`vftable';
+  *(_QWORD *)v4 = &UFG::FindPathOutput::`vftable;
   v1->m_PathQueryOutput.m_pPath.m_pNavPath = 0i64;
   *(_QWORD *)&v1->m_NavParams.m_flags = 65280i64;
   v1->m_NavParams.m_fRadius = 2.0;
@@ -38,7 +38,7 @@ void __fastcall UFG::NavGuide::~NavGuide(UFG::NavGuide *this)
   bool v6; // zf
 
   v1 = this;
-  this->vfptr = (UFG::NavGuideVtbl *)&UFG::NavGuide::`vftable';
+  this->vfptr = (UFG::NavGuideVtbl *)&UFG::NavGuide::`vftable;
   v2 = (UFG::DaemonQueryInput *)&this->m_PathQueryInput.vfptr;
   v3 = UFG::DaemonManager::Instance();
   UFG::DaemonManager::CancelQuery(v3, v2);
@@ -50,8 +50,8 @@ void __fastcall UFG::NavGuide::~NavGuide(UFG::NavGuide *this)
     if ( v6 )
       v5->vfptr->__vecDelDtor(v5, 1u);
   }
-  v4->vfptr = (UFG::DaemonQueryOutputVtbl *)&UFG::DaemonQueryOutput::`vftable';
-  v2->vfptr = (UFG::DaemonQueryInputVtbl *)&UFG::DaemonQueryInput::`vftable';
+  v4->vfptr = (UFG::DaemonQueryOutputVtbl *)&UFG::DaemonQueryOutput::`vftable;
+  v2->vfptr = (UFG::DaemonQueryInputVtbl *)&UFG::DaemonQueryInput::`vftable;
 }
 
 // File Line: 86
@@ -98,7 +98,7 @@ void __fastcall UFG::NavGuide::FindPath(UFG::NavGuide *this, UFG::qVector3 *star
   v10.m128_f32[0] = (float)(UFG::qVector3::msDirUp.y * 0.1) + v5->y;
   v9.m128_f32[0] = (float)(UFG::qVector3::msDirUp.z * 0.1) + v5->z;
   v11 = (__m128)LODWORD(UFG::qVector3::msDirUp.x);
-  v25.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable';
+  v25.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable;
   v11.m128_f32[0] = (float)(UFG::qVector3::msDirUp.x * 0.1) + v5->x;
   LODWORD(v25.m_vPosition.y) = v10.m128_i32[0];
   v12 = v6->m_NavParams.m_fRadius;
@@ -127,7 +127,7 @@ void __fastcall UFG::NavGuide::FindPath(UFG::NavGuide *this, UFG::qVector3 *star
     v6->m_PathQueryInput.m_npFrom.m_bValid = 0;
   }
   v17 = (__m128)LODWORD(UFG::qVector3::msDirUp.z);
-  v26.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable';
+  v26.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable;
   v26.m_bValid = 0;
   *(_QWORD *)&v26.m_packedKey = -1i64;
   v18 = (__m128)LODWORD(UFG::qVector3::msDirUp.y);

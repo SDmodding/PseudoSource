@@ -543,7 +543,7 @@ void __fastcall Scaleform::GFx::AS3::VM::exec_nextname(Scaleform::GFx::AS3::VM *
   v4 = &v2->value;
   v5 = !v3;
   if ( v3 )
-    v4 = (Scaleform::GFx::AS3::Value::VU *)&`Scaleform::GFx::AS3::ToType<long>'::`2'::tmp;
+    v4 = (Scaleform::GFx::AS3::Value::VU *)&`Scaleform::GFx::AS3::ToType<long>::`2::tmp;
   v6.Index = (unsigned int)v4->VS._1.VStr;
   v7 = v1->OpStack.pCurrent;
   if ( (v7->Flags & 0x1F) > 9 )
@@ -1259,7 +1259,7 @@ void __usercall Scaleform::GFx::AS3::VM::exec_hasnext(Scaleform::GFx::AS3::VM *t
   v5 = &v3->value;
   v6 = !v4;
   if ( v4 )
-    v5 = (Scaleform::GFx::AS3::Value::VU *)&`Scaleform::GFx::AS3::ToType<long>'::`2'::tmp;
+    v5 = (Scaleform::GFx::AS3::Value::VU *)&`Scaleform::GFx::AS3::ToType<long>::`2::tmp;
   v7 = (unsigned int)v5->VS._1.VStr;
   v8 = v2->OpStack.pCurrent;
   if ( (v8->Flags & 0x1F) > 9 )
@@ -1314,7 +1314,7 @@ void __usercall Scaleform::GFx::AS3::VM::exec_nextvalue(Scaleform::GFx::AS3::VM 
   v5 = &v3->value;
   v6 = !v4;
   if ( v4 )
-    v5 = (Scaleform::GFx::AS3::Value::VU *)&`Scaleform::GFx::AS3::ToType<long>'::`2'::tmp;
+    v5 = (Scaleform::GFx::AS3::Value::VU *)&`Scaleform::GFx::AS3::ToType<long>::`2::tmp;
   v7 = (unsigned int)v5->VS._1.VStr;
   v8 = v2->OpStack.pCurrent;
   if ( (v8->Flags & 0x1F) > 9 )

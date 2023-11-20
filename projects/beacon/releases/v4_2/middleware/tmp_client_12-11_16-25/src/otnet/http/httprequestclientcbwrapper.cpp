@@ -44,9 +44,9 @@ void __fastcall OSuite::ZOnStartedHttpRequest::ZOnStartedHttpRequest(OSuite::ZOn
 {
   this->m_pHttpRequest = pHttpRequest;
   this->m_onSucessState = 2;
-  this->vfptr = (OSuite::ICallback<void,void>Vtbl *)&OSuite::ZOnStartedHttpRequest::`vftable'{for `OSuite::ICallback<void,void>'};
+  this->vfptr = (OSuite::ICallback<void,void>Vtbl *)&OSuite::ZOnStartedHttpRequest::`vftable{for `OSuite::ICallback<void,void>};
   this->m_onFailureHttpError = 11;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOnStartedHttpRequest::`vftable'{for `OSuite::ZObject'};
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOnStartedHttpRequest::`vftable{for `OSuite::ZObject};
   this->m_bReturnCode = 0;
 }
 
@@ -76,9 +76,9 @@ void __fastcall OSuite::ZOnDataAvailableHttpRequest::ZOnDataAvailableHttpRequest
 {
   this->m_pHttpRequest = pHttpRequest;
   this->m_onSucessState = 32;
-  this->vfptr = (OSuite::ICallback<void,void>Vtbl *)&OSuite::ZOnDataAvailableHttpRequest::`vftable'{for `OSuite::ICallback<void,void>'};
+  this->vfptr = (OSuite::ICallback<void,void>Vtbl *)&OSuite::ZOnDataAvailableHttpRequest::`vftable{for `OSuite::ICallback<void,void>};
   this->m_onFailureHttpError = 5;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOnStartedHttpRequest::`vftable'{for `OSuite::ZObject'};
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOnStartedHttpRequest::`vftable{for `OSuite::ZObject};
   this->m_bReturnCode = 0;
 }
 
@@ -114,9 +114,9 @@ void __fastcall OSuite::ZOnDataNeededHttpRequest::ZOnDataNeededHttpRequest(OSuit
 {
   this->m_pHttpRequest = pHttpRequest;
   this->m_onSucessState = 8;
-  this->vfptr = (OSuite::ICallback<void,void>Vtbl *)&OSuite::ZOnDataNeededHttpRequest::`vftable'{for `OSuite::ICallback<void,void>'};
+  this->vfptr = (OSuite::ICallback<void,void>Vtbl *)&OSuite::ZOnDataNeededHttpRequest::`vftable{for `OSuite::ICallback<void,void>};
   this->m_onFailureHttpError = 4;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOnStartedHttpRequest::`vftable'{for `OSuite::ZObject'};
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOnStartedHttpRequest::`vftable{for `OSuite::ZObject};
   this->m_bReturnCode = 0;
 }
 
@@ -150,9 +150,9 @@ void __fastcall OSuite::ZOnFinishedHttpRequest::ZOnFinishedHttpRequest(OSuite::Z
 {
   this->m_onFailureHttpError = 0;
   this->m_pHttpRequest = pHttpRequest;
-  this->vfptr = (OSuite::ICallback<void,void>Vtbl *)&OSuite::ZOnFinishedHttpRequest::`vftable'{for `OSuite::ICallback<void,void>'};
+  this->vfptr = (OSuite::ICallback<void,void>Vtbl *)&OSuite::ZOnFinishedHttpRequest::`vftable{for `OSuite::ICallback<void,void>};
   this->m_onSucessState = 1024;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOnStartedHttpRequest::`vftable'{for `OSuite::ZObject'};
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOnStartedHttpRequest::`vftable{for `OSuite::ZObject};
   this->m_bReturnCode = 0;
 }
 

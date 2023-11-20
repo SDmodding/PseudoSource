@@ -9,7 +9,7 @@ void __fastcall hkpWorldObject::hkpWorldObject(hkpWorldObject *this, hkFinishLoa
   v4 = flag.m_finishing;
   v2 = (char)this;
   v3 = &this->m_collidable;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpWorldObject::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpWorldObject::`vftable;
   if ( flag.m_finishing )
   {
     *(_DWORD *)&this->m_collidable.m_boundingVolumeData.m_numChildShapeAabbs = 0;
@@ -40,7 +40,7 @@ void __fastcall hkpWorldObject::hkpWorldObject(hkpWorldObject *this, hkpShape *s
   v3 = &this->m_collidable;
   v4 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpWorldObject::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpWorldObject::`vftable;
   this->m_world = 0i64;
   this->m_userData = 0i64;
   v5 = shape;

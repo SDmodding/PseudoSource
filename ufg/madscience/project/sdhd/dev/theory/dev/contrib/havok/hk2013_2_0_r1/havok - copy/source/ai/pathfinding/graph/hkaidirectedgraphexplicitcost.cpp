@@ -3,7 +3,7 @@
 void __fastcall hkaiDirectedGraphExplicitCost::hkaiDirectedGraphExplicitCost(hkaiDirectedGraphExplicitCost *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiDirectedGraphExplicitCost::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiDirectedGraphExplicitCost::`vftable;
   this->m_positions.m_capacityAndFlags = 2147483648;
   this->m_positions.m_data = 0i64;
   this->m_positions.m_size = 0;
@@ -29,7 +29,7 @@ void __fastcall hkaiDirectedGraphExplicitCost::hkaiDirectedGraphExplicitCost(hka
 // RVA: 0xBE71D0
 void __fastcall hkaiDirectedGraphExplicitCost::hkaiDirectedGraphExplicitCost(hkaiDirectedGraphExplicitCost *this, hkFinishLoadedObjectFlag f)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiDirectedGraphExplicitCost::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiDirectedGraphExplicitCost::`vftable;
 }
 
 // File Line: 37

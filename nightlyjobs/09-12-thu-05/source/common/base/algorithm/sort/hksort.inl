@@ -174,7 +174,7 @@ void __fastcall hkAlgorithm::explicitStackQuickSort<unsigned int,hkcdDynamicTree
           do
           {
             v12 = v5->m_tree->m_nodes.m_data;
-            v13 = (__m128)`hkVector4f::getComponent'::`2'::indexToMask[v5->m_axis];
+            v13 = (__m128)`hkVector4f::getComponent::`2::indexToMask[v5->m_axis];
             v14 = _mm_and_ps(
                     _mm_mul_ps(_mm_add_ps(v12[v11].m_aabb.m_max.m_quad, v12[v11].m_aabb.m_min.m_quad), v3),
                     v13);

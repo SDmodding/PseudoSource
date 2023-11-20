@@ -173,12 +173,12 @@ void __fastcall Render::RainManager::BuildRainDropPrimitive(Render::RainManager 
   v54 = this;
   v1 = sRainDropVertexDeclUID;
   v2 = this;
-  v3 = `UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result )
+  v3 = `UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result )
   {
     v4 = UFG::qResourceWarehouse::Instance();
     v3 = UFG::qResourceWarehouse::GetInventory(v4, 0x3E5FDA3Eu);
-    `UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result = v3;
+    `UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result = v3;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v2->mRainDropVertexDecl.mPrev, 0x3E5FDA3Eu, v1, v3);
   v52 = UFG::qMalloc(0x6400ui64, sRainDropVertexBufferName, 0x10ui64);
@@ -386,12 +386,12 @@ void __fastcall Render::RainManager::InitRainDrops(Render::RainManager *this)
 
   v1 = sRainDropTextureUID;
   v2 = this;
-  v3 = `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result )
+  v3 = `UFG::qGetResourceInventory<Illusion::Texture>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Texture>::`2::result )
   {
     v4 = UFG::qResourceWarehouse::Instance();
     v3 = UFG::qResourceWarehouse::GetInventory(v4, 0x8B43FABF);
-    `UFG::qGetResourceInventory<Illusion::Texture>'::`2'::result = v3;
+    `UFG::qGetResourceInventory<Illusion::Texture>::`2::result = v3;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v2->mRainDropTexture.mPrev, 0x8B43FABF, v1, v3);
   v5 = Illusion::Factory::NewAlphaState("Illusion.AlphaState.Modulated", sRainDropAlphaStateUID, 0i64, 0i64, 0i64);
@@ -448,12 +448,12 @@ void __fastcall Render::RainManager::InitRainDrops(Render::RainManager *this)
   LODWORD(v13[3].mNode.mChild[0]) = 0;
   v19 = UFG::qResourceWarehouse::Instance();
   UFG::qResourceWarehouse::Add(v19, (UFG::qResourceData *)&v13->mNode);
-  v20 = `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::Material>'::`2'::result )
+  v20 = `UFG::qGetResourceInventory<Illusion::Material>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::Material>::`2::result )
   {
     v21 = UFG::qResourceWarehouse::Instance();
     v20 = UFG::qResourceWarehouse::GetInventory(v21, 0xB4C26312);
-    `UFG::qGetResourceInventory<Illusion::Material>'::`2'::result = v20;
+    `UFG::qGetResourceInventory<Illusion::Material>::`2::result = v20;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v2->mRainDropMaterial.mPrev, 0xB4C26312, v11, v20);
   Render::RainManager::BuildRainDropPrimitive(v2);
@@ -637,7 +637,7 @@ LABEL_26:
       while ( v4 < v3->mNumElements );
     }
   }
-  `eh vector destructor iterator'(&ptr, 4ui64, 3, (void (__fastcall *)(void *))_);
+  `eh vector destructor iterator(&ptr, 4ui64, 3, (void (__fastcall *)(void *))_);
 }
 
 // File Line: 314

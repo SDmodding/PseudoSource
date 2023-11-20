@@ -22,7 +22,7 @@ void __fastcall UFG::UIHKScreenPauseMenu::UIHKScreenPauseMenu(UFG::UIHKScreenPau
   v2 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -37,13 +37,13 @@ void __fastcall UFG::UIHKScreenPauseMenu::UIHKScreenPauseMenu(UFG::UIHKScreenPau
   v4 = (UFG::qNode<UFG::OnlineManagerObserver,UFG::OnlineManagerObserver> *)&v3->mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
-  v3->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::OnlineManagerObserver::`vftable';
-  v1->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenPauseMenu::`vftable'{for `UFG::UIScreen'};
-  v3->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::UIHKScreenPauseMenu::`vftable'{for `UFG::OnlineManagerObserver'};
+  v3->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::OnlineManagerObserver::`vftable;
+  v1->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenPauseMenu::`vftable{for `UFG::UIScreen};
+  v3->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::UIHKScreenPauseMenu::`vftable{for `UFG::OnlineManagerObserver};
   v1->mState = 0;
   v1->mInfoTickerSet = 0;
   UFG::UIPropertySetMenu::UIPropertySetMenu((UFG::UIPropertySetMenu *)&v1->mMenu.vfptr);
-  v1->mMenu.vfptr = (UFG::UIPropertySetMenuVtbl *)&UFG::UIPropertySetMenuMainNav::`vftable';
+  v1->mMenu.vfptr = (UFG::UIPropertySetMenuVtbl *)&UFG::UIPropertySetMenuMainNav::`vftable;
   v1->mConfirmationMsgId = 0;
   UFG::MoviePlayer::MoviePlayer(&v1->HKUIMovie);
 }
@@ -66,9 +66,9 @@ void __fastcall UFG::UIHKScreenPauseMenu::~UIHKScreenPauseMenu(UFG::UIHKScreenPa
   UFG::qNode<UFG::OnlineManagerObserver,UFG::OnlineManagerObserver> *v12; // rax
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenPauseMenu::`vftable'{for `UFG::UIScreen'};
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenPauseMenu::`vftable{for `UFG::UIScreen};
   v2 = (UFG::OnlineManagerObserver *)&this->vfptr;
-  this->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::UIHKScreenPauseMenu::`vftable'{for `UFG::OnlineManagerObserver'};
+  this->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::UIHKScreenPauseMenu::`vftable{for `UFG::OnlineManagerObserver};
   v3 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseScreen(v3, "PauseMenu");
   if ( UFG::gInputSystem )
@@ -94,7 +94,7 @@ void __fastcall UFG::UIHKScreenPauseMenu::~UIHKScreenPauseMenu(UFG::UIHKScreenPa
   UFG::OSuiteManager::UnRegisterObserver(v9, v2);
   UFG::MoviePlayer::~MoviePlayer(&v1->HKUIMovie);
   UFG::UIPropertySetMenu::~UIPropertySetMenu((UFG::UIPropertySetMenu *)&v1->mMenu.vfptr);
-  v2->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::OnlineManagerObserver::`vftable';
+  v2->vfptr = (UFG::OnlineManagerObserverVtbl *)&UFG::OnlineManagerObserver::`vftable;
   v10 = (UFG::qNode<UFG::OnlineManagerObserver,UFG::OnlineManagerObserver> *)&v2->mPrev;
   v11 = v2->mPrev;
   v12 = v2->mNext;
@@ -178,14 +178,14 @@ void __fastcall UFG::UIHKScreenPauseMenu::init(UFG::UIHKScreenPauseMenu *this, U
     v54 = v5;
     if ( v5 )
     {
-      *(_QWORD *)v5 = &Scaleform::RefCountImplCore::`vftable';
+      *(_QWORD *)v5 = &Scaleform::RefCountImplCore::`vftable;
       v5[2] = 1;
-      *(_QWORD *)v5 = &Scaleform::RefCountImpl::`vftable';
-      *(_QWORD *)v5 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable';
-      *(_QWORD *)v5 = &Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable';
-      *(_QWORD *)v5 = &Scaleform::GFx::State::`vftable';
+      *(_QWORD *)v5 = &Scaleform::RefCountImpl::`vftable;
+      *(_QWORD *)v5 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+      *(_QWORD *)v5 = &Scaleform::RefCountBase<Scaleform::GFx::State,2>::`vftable;
+      *(_QWORD *)v5 = &Scaleform::GFx::State::`vftable;
       v5[4] = 3;
-      *(_QWORD *)v5 = &Scaleform::GFx::ActionControl::`vftable';
+      *(_QWORD *)v5 = &Scaleform::GFx::ActionControl::`vftable;
       v5[6] = 8;
     }
     else
@@ -200,7 +200,7 @@ void __fastcall UFG::UIHKScreenPauseMenu::init(UFG::UIHKScreenPauseMenu *this, U
     if ( v5 )
       Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v5);
   }
-  v48 = &UFG::UIPropertySetMenuData::`vftable';
+  v48 = &UFG::UIPropertySetMenuData::`vftable;
   UFG::qString::qString(&v50);
   UFG::qString::qString(&v51);
   v49 = v2;
@@ -359,7 +359,7 @@ void __fastcall UFG::UIHKScreenPauseMenu::init(UFG::UIHKScreenPauseMenu *this, U
   if ( !v47 || !v47->mActionTrue )
     v4 = 0;
   v2->mIgnoreButtonOnce = v4;
-  v48 = &UFG::UIPropertySetMenuData::`vftable';
+  v48 = &UFG::UIPropertySetMenuData::`vftable;
   UFG::qString::~qString(&v51);
   UFG::qString::~qString(&v50);
 }
@@ -967,7 +967,7 @@ void __fastcall UFG::UIHKScreenPauseMenu::PopulateInfoTicker(UFG::UIHKScreenPaus
   v2 = UFG::OSuiteTickerManager::Instance();
   if ( UFG::OSuiteTickerManager::IsTickerAvailable(v2, v3) )
   {
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( (v11 >> 6) & 1 )
     {
       (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v10 + 16i64))(v10, &ptr, v12);
@@ -990,7 +990,7 @@ void __fastcall UFG::UIHKScreenPauseMenu::PopulateInfoTicker(UFG::UIHKScreenPaus
       0i64,
       (Scaleform::GFx::Value *)&ptr,
       2u);
-    `eh vector constructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( ((unsigned int)pargs.Type >> 6) & 1 )
     {
       (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
@@ -1002,13 +1002,13 @@ void __fastcall UFG::UIHKScreenPauseMenu::PopulateInfoTicker(UFG::UIHKScreenPaus
     pargs.Type = 2;
     pargs.mValue.BValue = 1;
     Scaleform::GFx::Movie::Invoke(v1->mRenderable->m_movie.pObject, "PauseMenu_ShowTicker", 0i64, &pargs, 1u);
-    `eh vector destructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     v6 = 2;
     v7 = (Scaleform::GFx::Value *)&ptr;
   }
   else
   {
-    `eh vector constructor iterator'(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( ((unsigned int)pargs.Type >> 6) & 1 )
     {
       (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
@@ -1023,7 +1023,7 @@ void __fastcall UFG::UIHKScreenPauseMenu::PopulateInfoTicker(UFG::UIHKScreenPaus
     v6 = 1;
     v7 = &pargs;
   }
-  `eh vector destructor iterator'(v7, 0x30ui64, v6, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(v7, 0x30ui64, v6, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 835
@@ -1081,7 +1081,7 @@ void __fastcall UFG::UIHKScreenPauseMenu::Flash_DisplayInfo(UFG::UIHKScreenPause
     v10 = UFG::GameStatTracker::GetStat(v9, CopXP);
     v11 = UFG::GameStatTracker::Instance();
     v12 = UFG::GameStatTracker::GetStat(v11, TriadXP);
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     v13 = v31.mData;
     if ( (v16 >> 6) & 1 )
     {
@@ -1121,7 +1121,7 @@ void __fastcall UFG::UIHKScreenPauseMenu::Flash_DisplayInfo(UFG::UIHKScreenPause
     v27 = 5;
     v28 = (double)v12;
     Scaleform::GFx::Movie::Invoke(v1, "PauseMenu_DisplayInfo", 0i64, (Scaleform::GFx::Value *)&ptr, 4u);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     UFG::qString::~qString(&v31);
     UFG::qString::~qString(&string);
   }
@@ -1165,8 +1165,8 @@ void __fastcall UFG::UIHKScreenPauseMenu::UpdateHelpBar(UFG::UIHKScreenPauseMenu
   *(_QWORD *)&data.MessageIds[4] = 0i64;
   UFG::UIHKHelpBarWidget::Show(v3, &data);
   UFG::qString::~qString(&data.CustomTexturePack);
-  `eh vector destructor iterator'(data.Icons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
-  `eh vector destructor iterator'(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+  `eh vector destructor iterator(data.Icons, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+  `eh vector destructor iterator(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
   if ( UFG::UIHKScreenGlobalOverlay::mThis )
     v1 = UFG::UIHKScreenGlobalOverlay::mThis;
   v7 = (signed __int64)&v1->HelpBar;

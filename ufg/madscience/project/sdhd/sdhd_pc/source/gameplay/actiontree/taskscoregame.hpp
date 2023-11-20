@@ -13,7 +13,7 @@ void __fastcall DamageTask::~DamageTask(DamageTask *this)
   UFG::qNode<ITask,ITask> *v9; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&DamageTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&DamageTask::`vftable;
   v2 = &this->mpSource;
   if ( this->mpSource.m_pPointer )
   {
@@ -31,7 +31,7 @@ void __fastcall DamageTask::~DamageTask(DamageTask *this)
   v6->mPrev = v5;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v8 = v1->mPrev;
   v9 = v1->mNext;

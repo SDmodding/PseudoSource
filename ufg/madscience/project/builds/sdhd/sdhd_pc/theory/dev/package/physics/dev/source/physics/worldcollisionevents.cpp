@@ -57,11 +57,11 @@ void __fastcall UFG::CollisionEvent::CollisionEvent(UFG::CollisionEvent *this)
   v3 = (UFG::qNode<UFG::Event,UFG::Event> *)&this->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  this->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+  this->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
   this->m_EventUID = v2;
   this->m_NamePTR = 0i64;
-  this->vfptr = (UFG::EventVtbl *)&UFG::CollisionEvent::`vftable';
-  `eh vector constructor iterator'(
+  this->vfptr = (UFG::EventVtbl *)&UFG::CollisionEvent::`vftable;
+  `eh vector constructor iterator(
     this->mSimObject,
     0x18ui64,
     2,
@@ -79,7 +79,7 @@ void __fastcall UFG::BulletCollisionEvent::BulletCollisionEvent(UFG::BulletColli
 
   v1 = this;
   UFG::CollisionEvent::CollisionEvent((UFG::CollisionEvent *)&this->vfptr);
-  v1->vfptr = (UFG::EventVtbl *)&UFG::BulletCollisionEvent::`vftable';
+  v1->vfptr = (UFG::EventVtbl *)&UFG::BulletCollisionEvent::`vftable;
   v1->m_EventUID = UFG::gBulletCollisionEventChannel.mUID;
 }
 
@@ -114,12 +114,12 @@ void __fastcall UFG::CollisionEvent::CollisionEvent(UFG::CollisionEvent *this, U
   v15 = (UFG::qNode<UFG::Event,UFG::Event> *)&this->mPrev;
   v15->mPrev = v15;
   v15->mNext = v15;
-  this->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable';
+  this->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
   this->m_EventUID = v14;
   this->m_NamePTR = 0i64;
-  this->vfptr = (UFG::EventVtbl *)&UFG::CollisionEvent::`vftable';
+  this->vfptr = (UFG::EventVtbl *)&UFG::CollisionEvent::`vftable;
   this->mType = type;
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     this->mSimObject,
     0x18ui64,
     2,
@@ -312,8 +312,8 @@ void __fastcall UFG::WorldCollisionListener::Initialize(hkpWorld *world)
   v2 = UFG::qMemoryPool::Allocate(&gPhysicsMemoryPool, 0x10ui64, "WorldCollisionListener", 0i64, 1u);
   if ( v2 )
   {
-    *(_QWORD *)v2 = &hkpContactListener::`vftable';
-    *(_QWORD *)v2 = &UFG::WorldCollisionListener::`vftable';
+    *(_QWORD *)v2 = &hkpContactListener::`vftable;
+    *(_QWORD *)v2 = &UFG::WorldCollisionListener::`vftable;
     *((_QWORD *)v2 + 1) = 0i64;
   }
   UFG::WorldCollisionListener::mInstance = (UFG::WorldCollisionListener *)v2;

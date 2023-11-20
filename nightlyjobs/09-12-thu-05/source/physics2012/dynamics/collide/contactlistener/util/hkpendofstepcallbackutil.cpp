@@ -3,8 +3,8 @@
 void __fastcall hkpEndOfStepCallbackUtil::hkpEndOfStepCallbackUtil(hkpEndOfStepCallbackUtil *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpEndOfStepCallbackUtil::`vftable'{for `hkReferencedObject'};
-  this->vfptr = (hkpWorldPostSimulationListenerVtbl *)&hkpEndOfStepCallbackUtil::`vftable'{for `hkpWorldPostSimulationListener'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkpEndOfStepCallbackUtil::`vftable{for `hkReferencedObject};
+  this->vfptr = (hkpWorldPostSimulationListenerVtbl *)&hkpEndOfStepCallbackUtil::`vftable{for `hkpWorldPostSimulationListener};
   this->m_sequenceNumber = 0;
   this->m_deterministicOrder.m_bool = 0;
   this->m_collisions.m_data = 0i64;

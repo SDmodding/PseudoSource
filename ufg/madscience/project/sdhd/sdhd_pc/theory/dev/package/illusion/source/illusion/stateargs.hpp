@@ -33,7 +33,7 @@ void __fastcall Illusion::StateArg::ExecuteSetStateBlock<Render::cbLocalTransfor
 // RVA: 0x2ADA0
 void __fastcall Illusion::StateArgs::~StateArgs(Illusion::StateArgs *this)
 {
-  `eh vector destructor iterator'(
+  `eh vector destructor iterator(
     this->mStateArgs,
     0x10ui64,
     128,

@@ -109,7 +109,7 @@ void __fastcall hkSimpleLocalFrame::~hkSimpleLocalFrame(hkSimpleLocalFrame *this
   v1 = this->m_children.m_size;
   v2 = 0i64;
   v3 = this;
-  for ( this->vfptr = (hkBaseObjectVtbl *)&hkSimpleLocalFrame::`vftable'; v2 < v1; ++v2 )
+  for ( this->vfptr = (hkBaseObjectVtbl *)&hkSimpleLocalFrame::`vftable; v2 < v1; ++v2 )
     hkReferencedObject::removeReference((hkReferencedObject *)&v3->m_children.m_data[v2]->vfptr);
   v4 = (hkReferencedObject *)&v3->m_group->vfptr;
   if ( v4 )
@@ -124,7 +124,7 @@ void __fastcall hkSimpleLocalFrame::~hkSimpleLocalFrame(hkSimpleLocalFrame *this
       8 * v5);
   v3->m_children.m_data = 0i64;
   v3->m_children.m_capacityAndFlags = 2147483648;
-  v3->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v3->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 98

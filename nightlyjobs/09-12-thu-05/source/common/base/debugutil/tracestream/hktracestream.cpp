@@ -10,7 +10,7 @@ hkReferencedObject *__fastcall hkTraceStreamcreate()
   if ( !result )
     return 0i64;
   *(_DWORD *)&result->m_memSizeAndFlags = 0x1FFFF;
-  result->vfptr = (hkBaseObjectVtbl *)&hkTraceStream::`vftable';
+  result->vfptr = (hkBaseObjectVtbl *)&hkTraceStream::`vftable;
   *(_DWORD *)(&result[2].m_referenceCount + 1) = 2147483648;
   result[2].vfptr = 0i64;
   *(_DWORD *)&result[2].m_memSizeAndFlags = 0;

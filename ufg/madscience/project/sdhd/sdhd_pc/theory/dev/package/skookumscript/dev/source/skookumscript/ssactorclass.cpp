@@ -158,7 +158,7 @@ ASymbol *__fastcall SSActorClass::new_instance(SSActorClass *this)
     if ( v1 )
       v3 = v1;
     SSDataInstance::SSDataInstance((SSDataInstance *)v2, (SSClass *)&v3->vfptr);
-    *(_QWORD *)&v2->i_uid = &SSActor::`vftable';
+    *(_QWORD *)&v2->i_uid = &SSActor::`vftable;
     v2[20].i_uid = 0;
     *(_QWORD *)&v2[22].i_uid = 0i64;
     v2[24].i_uid = 0;

@@ -2,7 +2,7 @@
 // RVA: 0xA23750
 void __fastcall UFG::UIScreenFactory::UIScreenFactory(UFG::UIScreenFactory *this)
 {
-  this->vfptr = (UFG::UIScreenFactoryVtbl *)&UFG::UIScreenFactory::`vftable';
+  this->vfptr = (UFG::UIScreenFactoryVtbl *)&UFG::UIScreenFactory::`vftable;
   UFG::qBaseTreeRB::qBaseTreeRB(&this->m_factoryList.mTree);
 }
 
@@ -12,7 +12,7 @@ void __fastcall UFG::UIScreenFactory::~UIScreenFactory(UFG::UIScreenFactory *thi
 {
   Render::Skinning *v1; // rbx
 
-  this->vfptr = (UFG::UIScreenFactoryVtbl *)&UFG::UIScreenFactory::`vftable';
+  this->vfptr = (UFG::UIScreenFactoryVtbl *)&UFG::UIScreenFactory::`vftable;
   v1 = (Render::Skinning *)&this->m_factoryList;
   UFG::qTreeRB<UFG::UIScreenFactoryNode,UFG::UIScreenFactoryNode,1>::DeleteAll(&this->m_factoryList);
   UFG::qBaseTreeRB::~qBaseTreeRB(v1);
@@ -49,7 +49,7 @@ UFG::allocator::free_link *__fastcall UFG::UIScreenFactory::createScreen(UFG::UI
   v9 = v7 + 1;
   v9->mNext = v9;
   v9[1].mNext = v9;
-  v8->mNext = (UFG::allocator::free_link *)&UFG::UIScreen::`vftable';
+  v8->mNext = (UFG::allocator::free_link *)&UFG::UIScreen::`vftable;
   LODWORD(v8[11].mNext) = 0;
   v8[12].mNext = 0i64;
   v8[13].mNext = 0i64;

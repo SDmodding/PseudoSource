@@ -109,7 +109,7 @@ void __fastcall UFG::UIHK_PDAIncomingTextWidget::Activate(UFG::UIHK_PDAIncomingT
   {
     LODWORD(v14->mNext) = 3;
     v15 = (signed __int64)&v14[1];
-    `eh vector constructor iterator'(&v14[1], 0x28ui64, 3, (void (__fastcall *)(void *))UFG::qString::qString);
+    `eh vector constructor iterator(&v14[1], 0x28ui64, 3, (void (__fastcall *)(void *))UFG::qString::qString);
   }
   else
   {
@@ -174,7 +174,7 @@ void __fastcall UFG::UIHK_PDAIncomingTextWidget::Activate(UFG::UIHK_PDAIncomingT
   {
     LODWORD(v25->mNext) = 4;
     v26 = (signed __int64)&v25[1];
-    `eh vector constructor iterator'(&v25[1], 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&v25[1], 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   }
   else
   {
@@ -348,7 +348,7 @@ LABEL_23:
       v6 = v4 + 1;
       v6->mNext = v6;
       v6[1].mNext = v6;
-      v5->vfptr = (UFG::UIScreenInvokeVtbl *)&UFG::UIScreenInvoke::`vftable';
+      v5->vfptr = (UFG::UIScreenInvokeVtbl *)&UFG::UIScreenInvoke::`vftable;
       UFG::qString::qString(&v5->command, &customWorldMapCaption);
     }
     else

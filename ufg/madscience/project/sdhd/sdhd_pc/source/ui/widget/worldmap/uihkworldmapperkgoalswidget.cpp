@@ -112,7 +112,7 @@ void __fastcall UFG::UIHKWorldMapPerkGoalsWidget::Flash_AddGoal(UFG::UIHKWorldMa
     {
       v7 = 0i64;
     }
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 5, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 5, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     if ( (v12 >> 6) & 1 )
     {
       (*(void (__fastcall **)(__int64, char *, __int64))(*(_QWORD *)v11 + 16i64))(v11, &ptr, v13);
@@ -155,7 +155,7 @@ void __fastcall UFG::UIHKWorldMapPerkGoalsWidget::Flash_AddGoal(UFG::UIHKWorldMa
     v27 = 5;
     v28 = (double)v32;
     Scaleform::GFx::Movie::Invoke(v6, "PerkGoals_AddGoal", 0i64, (Scaleform::GFx::Value *)&ptr, 5u);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 5, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 5, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 

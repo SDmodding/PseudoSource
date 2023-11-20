@@ -32,8 +32,8 @@ void __fastcall finishLoadedObjecthkpRejectChassisListener(void *p, int finishin
 {
   if ( p )
   {
-    *(_QWORD *)p = &hkpRejectChassisListener::`vftable'{for `hkReferencedObject'};
-    *((_QWORD *)p + 2) = &hkpRejectChassisListener::`vftable'{for `hkpPhantomOverlapListener'};
+    *(_QWORD *)p = &hkpRejectChassisListener::`vftable{for `hkReferencedObject};
+    *((_QWORD *)p + 2) = &hkpRejectChassisListener::`vftable{for `hkpPhantomOverlapListener};
   }
 }
 
@@ -48,7 +48,7 @@ void __fastcall cleanupLoadedObjecthkpRejectChassisListener(void *p)
 // RVA: 0xE24F90
 void **__fastcall getVtablehkpRejectChassisListener()
 {
-  return &hkpRejectChassisListener::`vftable'{for `hkReferencedObject'};
+  return &hkpRejectChassisListener::`vftable{for `hkReferencedObject};
 }
 
 // File Line: 97

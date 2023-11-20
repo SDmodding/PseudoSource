@@ -11,7 +11,7 @@ void __fastcall OSuite::TMap<OSuite::ZString,OSuite::ZString>::TMap<OSuite::ZStr
   unsigned __int64 v8; // rax
 
   v2 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TMap<OSuite::ZString,OSuite::ZString>::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TMap<OSuite::ZString,OSuite::ZString>::`vftable;
   this->m_nHashSize = nHashSize;
   v3 = 0i64;
   this->m_nCount = 0i64;
@@ -35,7 +35,7 @@ void __fastcall OSuite::TMap<OSuite::ZString,OSuite::ZString>::TMap<OSuite::ZStr
   {
     LODWORD(v5->mNext) = v4;
     v3 = (signed __int64)&v5[1];
-    `eh vector constructor iterator'(
+    `eh vector constructor iterator(
       &v5[1],
       0x28ui64,
       v4,
@@ -50,7 +50,7 @@ void __fastcall OSuite::TMap<OSuite::ZString,OSuite::ZString>::~TMap<OSuite::ZSt
 {
   OSuite::TOrderedMap<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString> > *v1; // rcx
 
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TMap<OSuite::ZString,OSuite::ZString>::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TMap<OSuite::ZString,OSuite::ZString>::`vftable;
   v1 = this->m_pLists;
   if ( v1 )
   {

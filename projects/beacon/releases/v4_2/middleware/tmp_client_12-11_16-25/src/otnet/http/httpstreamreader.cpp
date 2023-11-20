@@ -3,8 +3,8 @@
 void __fastcall OSuite::ZHttpStreamReader::ZHttpStreamReader(OSuite::ZHttpStreamReader *this)
 {
   this->m_nChunkSize = -1;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpStreamReader::`vftable'{for `OSuite::ZObject'};
-  this->vfptr = (OSuite::IReaderVtbl *)&OSuite::ZHttpStreamReader::`vftable'{for `OSuite::IReader'};
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpStreamReader::`vftable{for `OSuite::ZObject};
+  this->vfptr = (OSuite::IReaderVtbl *)&OSuite::ZHttpStreamReader::`vftable{for `OSuite::IReader};
   this->m_httpConnection = 0i64;
   this->m_nBytesRead = 0i64;
   this->m_nContentLength = 0i64;
@@ -15,8 +15,8 @@ void __fastcall OSuite::ZHttpStreamReader::ZHttpStreamReader(OSuite::ZHttpStream
 // RVA: 0xEE1D48
 void __fastcall OSuite::ZHttpStreamReader::~ZHttpStreamReader(OSuite::ZHttpStreamReader *this)
 {
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpStreamReader::`vftable'{for `OSuite::ZObject'};
-  this->vfptr = (OSuite::IReaderVtbl *)&OSuite::ZHttpStreamReader::`vftable'{for `OSuite::IReader'};
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpStreamReader::`vftable{for `OSuite::ZObject};
+  this->vfptr = (OSuite::IReaderVtbl *)&OSuite::ZHttpStreamReader::`vftable{for `OSuite::IReader};
 }
 
 // File Line: 35

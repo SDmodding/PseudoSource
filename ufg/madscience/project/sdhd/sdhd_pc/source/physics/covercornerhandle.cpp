@@ -90,12 +90,12 @@ LABEL_15:
     if ( !v13 )
       goto LABEL_15;
   }
-  v16 = `UFG::qGetResourceInventory<UFG::CoverDataResource>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::CoverDataResource>'::`2'::result )
+  v16 = `UFG::qGetResourceInventory<UFG::CoverDataResource>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::CoverDataResource>::`2::result )
   {
     v17 = UFG::qResourceWarehouse::Instance();
     v16 = UFG::qResourceWarehouse::GetInventory(v17, 0x8DADDB7E);
-    `UFG::qGetResourceInventory<UFG::CoverDataResource>'::`2'::result = v16;
+    `UFG::qGetResourceInventory<UFG::CoverDataResource>::`2::result = v16;
   }
   UFG::qResourceHandle::Init(v4, 0x8DADDB7E, v11->mNode.mUID, v16);
   v3->m_uCoverCornerIndex = v15;
@@ -128,23 +128,23 @@ UFG::CoverCornerHandle *__fastcall UFG::CoverCornerHandle::operator=(UFG::CoverC
   if ( v4 )
   {
     v5 = v4->mNode.mUID;
-    v6 = `UFG::qGetResourceInventory<UFG::CoverDataResource>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<UFG::CoverDataResource>'::`2'::result )
+    v6 = `UFG::qGetResourceInventory<UFG::CoverDataResource>::`2::result;
+    if ( !`UFG::qGetResourceInventory<UFG::CoverDataResource>::`2::result )
     {
       v7 = UFG::qResourceWarehouse::Instance();
       v6 = UFG::qResourceWarehouse::GetInventory(v7, 0x8DADDB7E);
-      `UFG::qGetResourceInventory<UFG::CoverDataResource>'::`2'::result = v6;
+      `UFG::qGetResourceInventory<UFG::CoverDataResource>::`2::result = v6;
     }
     UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v2->m_ResourceHandle.mPrev, 0x8DADDB7E, v5, v6);
   }
   else
   {
-    v8 = `UFG::qGetResourceInventory<UFG::CoverDataResource>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<UFG::CoverDataResource>'::`2'::result )
+    v8 = `UFG::qGetResourceInventory<UFG::CoverDataResource>::`2::result;
+    if ( !`UFG::qGetResourceInventory<UFG::CoverDataResource>::`2::result )
     {
       v9 = UFG::qResourceWarehouse::Instance();
       v8 = UFG::qResourceWarehouse::GetInventory(v9, 0x8DADDB7E);
-      `UFG::qGetResourceInventory<UFG::CoverDataResource>'::`2'::result = v8;
+      `UFG::qGetResourceInventory<UFG::CoverDataResource>::`2::result = v8;
     }
     UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v2->m_ResourceHandle.mPrev, v8);
   }
@@ -204,12 +204,12 @@ UFG::CoverCornerHandle *__fastcall UFG::CoverCornerHandle::operator=(UFG::CoverC
   v7->mPrev = v6;
   rhs.m_pDynamicCoverCorner.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::DynamicCoverCorner>,UFG::qSafePointerNodeList> *)&rhs.m_pDynamicCoverCorner.mPrev;
   rhs.m_pDynamicCoverCorner.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::DynamicCoverCorner>,UFG::qSafePointerNodeList> *)&rhs.m_pDynamicCoverCorner.mPrev;
-  v8 = `UFG::qGetResourceInventory<UFG::CoverDataResource>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<UFG::CoverDataResource>'::`2'::result )
+  v8 = `UFG::qGetResourceInventory<UFG::CoverDataResource>::`2::result;
+  if ( !`UFG::qGetResourceInventory<UFG::CoverDataResource>::`2::result )
   {
     v9 = UFG::qResourceWarehouse::Instance();
     v8 = UFG::qResourceWarehouse::GetInventory(v9, 0x8DADDB7E);
-    `UFG::qGetResourceInventory<UFG::CoverDataResource>'::`2'::result = v8;
+    `UFG::qGetResourceInventory<UFG::CoverDataResource>::`2::result = v8;
   }
   UFG::qResourceHandle::Close((UFG::qResourceHandle *)&rhs.m_ResourceHandle.mPrev, v8);
   UFG::qResourceHandle::~qResourceHandle((UFG::qResourceHandle *)&rhs.m_ResourceHandle.mPrev);

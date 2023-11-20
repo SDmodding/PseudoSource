@@ -10,7 +10,7 @@ void __fastcall UFG::UIHKScreenCockFight::UIHKScreenCockFight(UFG::UIHKScreenCoc
   v1 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -21,12 +21,12 @@ void __fastcall UFG::UIHKScreenCockFight::UIHKScreenCockFight(UFG::UIHKScreenCoc
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKTaskableScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKTaskableScreen::`vftable;
   this->mFinished = 0;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKMinigameScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKMinigameScreen::`vftable;
   *(_QWORD *)&this->mfAlphaValue = 1109393408i64;
   ++UFG::UIHKMinigameScreen::mNumMinigameScreens;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenCockFight::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenCockFight::`vftable;
   this->mState = 0;
   this->mIsReady = 0;
   this->mSelectedFighterIndex = 1;
@@ -90,7 +90,7 @@ void __fastcall UFG::UIHKScreenCockFight::~UIHKScreenCockFight(UFG::UIHKScreenCo
   UFG::qString *v28; // [rsp+70h] [rbp+18h]
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenCockFight::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenCockFight::`vftable;
   if ( UFG::gInputSystem )
   {
     if ( UFG::gActiveControllerNum != -1 )
@@ -159,7 +159,7 @@ void __fastcall UFG::UIHKScreenCockFight::~UIHKScreenCockFight(UFG::UIHKScreenCo
   if ( v14 )
   {
     v15 = &v14[-1].mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v14,
       0x28ui64,
       v14[-1].mStringHash32,
@@ -172,7 +172,7 @@ void __fastcall UFG::UIHKScreenCockFight::~UIHKScreenCockFight(UFG::UIHKScreenCo
   if ( v16 )
   {
     v17 = &v16[-1].mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v16,
       0x28ui64,
       v16[-1].mStringHash32,
@@ -185,7 +185,7 @@ void __fastcall UFG::UIHKScreenCockFight::~UIHKScreenCockFight(UFG::UIHKScreenCo
   if ( v18 )
   {
     v19 = &v18[-1].mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v18,
       0x28ui64,
       v18[-1].mStringHash32,
@@ -198,7 +198,7 @@ void __fastcall UFG::UIHKScreenCockFight::~UIHKScreenCockFight(UFG::UIHKScreenCo
   if ( v20 )
   {
     v21 = &v20[-1].mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v20,
       0x28ui64,
       v20[-1].mStringHash32,
@@ -211,7 +211,7 @@ void __fastcall UFG::UIHKScreenCockFight::~UIHKScreenCockFight(UFG::UIHKScreenCo
   if ( v22 )
   {
     v23 = &v22[-1].mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v22,
       0x28ui64,
       v22[-1].mStringHash32,
@@ -224,7 +224,7 @@ void __fastcall UFG::UIHKScreenCockFight::~UIHKScreenCockFight(UFG::UIHKScreenCo
   if ( v24 )
   {
     v25 = &v24[-1].mStringHash32;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v24,
       0x28ui64,
       v24[-1].mStringHash32,
@@ -497,7 +497,7 @@ void __fastcall UFG::UIHKScreenCockFight::RefreshFighterList(UFG::UIHKScreenCock
   UFG::qString::~qString(v5);
   for ( i = 0; i < v1->mFighterArray.size; ++i )
   {
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     v7 = (__int64)v1->mFighterArray.p[i]->name.mData;
     if ( (v17 >> 6) & 1 )
     {
@@ -534,7 +534,7 @@ void __fastcall UFG::UIHKScreenCockFight::RefreshFighterList(UFG::UIHKScreenCock
     v28 = 5;
     v29 = v10;
     Scaleform::GFx::Movie::Invoke(v1->mMovie, "CockFight_AddFighter", 0i64, (Scaleform::GFx::Value *)&ptr, 4u);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
   UFG::qString::qString(&v31, "CockFight_GotoFighterSelect");
   v12 = (UFG::qString *)v11;
@@ -596,7 +596,7 @@ void __fastcall UFG::UIHKScreenCockFight::UpdateBetAmount(UFG::UIHKScreenCockFig
 
   v21 = -2i64;
   v1 = this;
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   v2 = (double)(signed int)v1->mCurrentBet;
   if ( (v8 >> 6) & 1 )
   {
@@ -638,7 +638,7 @@ void __fastcall UFG::UIHKScreenCockFight::UpdateBetAmount(UFG::UIHKScreenCockFig
   v19 = 5;
   v20 = v5;
   Scaleform::GFx::Movie::Invoke(v1->mMovie, "CockFight_UpdateBetAmount", 0i64, (Scaleform::GFx::Value *)&ptr, 4u);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 251
@@ -855,7 +855,7 @@ void __fastcall UFG::UIHKScreenCockFight::SetFightOver(UFG::UIHKScreenCockFight 
   v2 = win;
   v3 = this;
   this->mState = 4;
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   if ( (v26 >> 6) & 1 )
   {
     (*(void (__fastcall **)(__int64, char *, __int64))(*(_QWORD *)v25 + 16i64))(v25, &ptr, v27);
@@ -917,7 +917,7 @@ void __fastcall UFG::UIHKScreenCockFight::SetFightOver(UFG::UIHKScreenCockFight 
     pval.pObjectInterface = 0i64;
   }
   pval.Type = 0;
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 402
@@ -1015,7 +1015,7 @@ void __fastcall UFG::UIHKScreenCockFight::ShowHelpBar(UFG::UIHKScreenCockFight *
     *(_QWORD *)&data.MessageIds[2] = 0i64;
     UFG::UIHKHelpBarWidget::Show(v12, &data);
     UFG::qString::~qString((UFG::qString *)&data.MessageIds[4]);
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       &data.Captions[5].mStringHash32,
       0x28ui64,
       6,
@@ -1045,7 +1045,7 @@ void __fastcall UFG::UIHKScreenCockFight::ShowHelpBar(UFG::UIHKScreenCockFight *
     *(_QWORD *)&data.MessageIds[2] = 0i64;
     UFG::UIHKHelpBarWidget::Show(v10, &data);
     UFG::qString::~qString((UFG::qString *)&data.MessageIds[4]);
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       &data.Captions[5].mStringHash32,
       0x28ui64,
       6,
@@ -1075,13 +1075,13 @@ void __fastcall UFG::UIHKScreenCockFight::ShowHelpBar(UFG::UIHKScreenCockFight *
     *(_QWORD *)&data.MessageIds[2] = 0i64;
     UFG::UIHKHelpBarWidget::Show(v8, &data);
     UFG::qString::~qString((UFG::qString *)&data.MessageIds[4]);
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       &data.Captions[5].mStringHash32,
       0x28ui64,
       6,
       (void (__fastcall *)(void *))UFG::qString::~qString);
 LABEL_21:
-    `eh vector destructor iterator'(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+    `eh vector destructor iterator(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
     return;
   }
   if ( v3 == 2 )
@@ -1106,12 +1106,12 @@ LABEL_21:
     *(_QWORD *)&data.MessageIds[2] = 0i64;
     UFG::UIHKHelpBarWidget::Show(v4, &data);
     UFG::qString::~qString((UFG::qString *)&data.MessageIds[4]);
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       &data.Captions[5].mStringHash32,
       0x28ui64,
       6,
       (void (__fastcall *)(void *))UFG::qString::~qString);
-    `eh vector destructor iterator'(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
+    `eh vector destructor iterator(data.Captions, 0x28ui64, 6, (void (__fastcall *)(void *))UFG::qString::~qString);
     v6 = UFG::UIHKScreenGlobalOverlay::mThis;
     if ( !UFG::UIHKScreenGlobalOverlay::mThis )
       v6 = &gGlobalOverlaySentinel;

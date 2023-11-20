@@ -59,7 +59,7 @@ void __fastcall hkDefaultMemoryTracker::hkDefaultMemoryTracker(hkDefaultMemoryTr
   signed __int64 v4; // rsi
 
   v2 = this;
-  this->vfptr = (hkMemoryTrackerVtbl *)&hkDefaultMemoryTracker::`vftable';
+  this->vfptr = (hkMemoryTrackerVtbl *)&hkDefaultMemoryTracker::`vftable;
   this->m_deletedMap.m_map.m_elem = 0i64;
   this->m_deletedMap.m_map.m_numElems = 0;
   this->m_deletedMap.m_map.m_hashMod = -1;

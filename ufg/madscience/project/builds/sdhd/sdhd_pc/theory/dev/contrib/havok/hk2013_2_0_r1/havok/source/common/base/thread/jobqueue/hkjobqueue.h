@@ -2,7 +2,7 @@
 // RVA: 0x9D7B0
 void __fastcall hkExternalJobProfiler::~hkExternalJobProfiler(hkExternalJobProfiler *this)
 {
-  this->vfptr = (hkExternalJobProfilerVtbl *)&hkExternalJobProfiler::`vftable';
+  this->vfptr = (hkExternalJobProfilerVtbl *)&hkExternalJobProfiler::`vftable;
 }
 
 // File Line: 155

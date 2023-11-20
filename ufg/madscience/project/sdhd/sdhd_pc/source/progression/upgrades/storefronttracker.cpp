@@ -3585,7 +3585,7 @@ void __fastcall UFG::StoreFrontTracker::LoadMissionItem(UFG::StoreFrontTracker *
     else
     {
       v12 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)v4);
-      UFG::qPrintf("Cannot find mission item '%s'.", v12);
+      UFG::qPrintf("Cannot find mission item %s.", v12);
     }
     UFG::PropertySetHandle::~PropertySetHandle(&handle);
   }
@@ -3909,7 +3909,7 @@ void __fastcall UFG::StoreFrontTracker::ResetEquipment(UFG::StoreFrontTracker *t
     UFG::PropertySetHandle::Null(&v58->mProperties);
     v58->mInventoryType = 0;
     UFG::StoreFront::SetData(&v58->mCurrentStore, 0, 0, 0i64, 0i64);
-    `eh vector destructor iterator'(&entityComponentName, 4ui64, 9, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(&entityComponentName, 4ui64, 9, (void (__fastcall *)(void *))_);
   }
 }
 
@@ -4214,7 +4214,7 @@ __int64 dynamic_initializer_for__UFG::StoreMeshHelper::sMeshLoader__()
 // RVA: 0x151B520
 __int64 dynamic_initializer_for__UFG::StoreMeshHelper::sModelPaths__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     UFG::StoreMeshHelper::sModelPaths,
     4ui64,
     16,
@@ -4226,7 +4226,7 @@ __int64 dynamic_initializer_for__UFG::StoreMeshHelper::sModelPaths__()
 // RVA: 0x151B590
 __int64 dynamic_initializer_for__UFG::StoreMeshHelper::sTextureSetPaths__()
 {
-  `eh vector constructor iterator'(
+  `eh vector constructor iterator(
     UFG::StoreMeshHelper::sTextureSetPaths,
     4ui64,
     16,

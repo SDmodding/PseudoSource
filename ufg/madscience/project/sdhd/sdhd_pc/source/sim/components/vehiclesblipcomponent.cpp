@@ -57,7 +57,7 @@ void __fastcall UFG::VehiclesBlipComponent::VehiclesBlipComponent(UFG::VehiclesB
   v3 = (UFG::qNode<UFG::VehiclesBlipComponent,UFG::VehiclesBlipComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehiclesBlipComponent::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehiclesBlipComponent::`vftable;
   v4 = UFG::VehiclesBlipComponent::s_VehiclesBlipComponentList.mNode.mPrev;
   UFG::VehiclesBlipComponent::s_VehiclesBlipComponentList.mNode.mPrev->mNext = (UFG::qNode<UFG::VehiclesBlipComponent,UFG::VehiclesBlipComponent> *)&v2->mPrev;
   v3->mPrev = v4;
@@ -81,7 +81,7 @@ void __fastcall UFG::VehiclesBlipComponent::~VehiclesBlipComponent(UFG::Vehicles
   UFG::qNode<UFG::VehiclesBlipComponent,UFG::VehiclesBlipComponent> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehiclesBlipComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehiclesBlipComponent::`vftable;
   if ( this == UFG::VehiclesBlipComponent::s_VehiclesBlipComponentpCurrentIterator )
     UFG::VehiclesBlipComponent::s_VehiclesBlipComponentpCurrentIterator = (UFG::VehiclesBlipComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::VehiclesBlipComponent,UFG::VehiclesBlipComponent> *)&this->mPrev;

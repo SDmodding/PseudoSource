@@ -3,7 +3,7 @@
 void __fastcall hkpMoppDefaultSplitter::hkpMoppDefaultSplitter(hkpMoppDefaultSplitter *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpMoppDefaultSplitter::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpMoppDefaultSplitter::`vftable;
   this->m_freeNodes.m_elems = 0i64;
   this->m_freeNodes.m_freeElems = 0;
   this->m_freeTerminals.m_elems = 0i64;
@@ -16,7 +16,7 @@ void __fastcall hkpMoppDefaultSplitter::hkpMoppDefaultSplitter(hkpMoppDefaultSpl
 // RVA: 0xDF8D50
 void __fastcall hkpMoppDefaultSplitter::~hkpMoppDefaultSplitter(hkpMoppDefaultSplitter *this)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 149

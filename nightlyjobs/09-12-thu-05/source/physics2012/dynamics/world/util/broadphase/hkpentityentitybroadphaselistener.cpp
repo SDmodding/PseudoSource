@@ -4,8 +4,8 @@ void __fastcall hkpEntityEntityBroadPhaseListener::hkpEntityEntityBroadPhaseList
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_world = world;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpEntityEntityBroadPhaseListener::`vftable'{for `hkReferencedObject'};
-  this->vfptr = (hkpBroadPhaseListenerVtbl *)&hkpEntityEntityBroadPhaseListener::`vftable'{for `hkpBroadPhaseListener'};
+  this->vfptr = (hkBaseObjectVtbl *)&hkpEntityEntityBroadPhaseListener::`vftable{for `hkReferencedObject};
+  this->vfptr = (hkpBroadPhaseListenerVtbl *)&hkpEntityEntityBroadPhaseListener::`vftable{for `hkpBroadPhaseListener};
 }
 
 // File Line: 29

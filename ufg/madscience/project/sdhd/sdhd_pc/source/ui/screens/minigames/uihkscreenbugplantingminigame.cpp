@@ -13,7 +13,7 @@ void __fastcall UFG::UIHKScreenBugPlantingMinigame::UIHKScreenBugPlantingMinigam
   v3 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
   this->mLoadThread = 0i64;
@@ -24,12 +24,12 @@ void __fastcall UFG::UIHKScreenBugPlantingMinigame::UIHKScreenBugPlantingMinigam
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --v2->mInputEnabled;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKTaskableScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKTaskableScreen::`vftable;
   this->mFinished = 0;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKMinigameScreen::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKMinigameScreen::`vftable;
   *(_QWORD *)&this->mfAlphaValue = 1109393408i64;
   ++UFG::UIHKMinigameScreen::mNumMinigameScreens;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenBugPlantingMinigame::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenBugPlantingMinigame::`vftable;
   v4 = (hkgpIndexedMesh::EdgeBarrier *)UFG::gInputSystem;
   if ( UFG::gInputSystem && UFG::gActiveControllerNum != -1 )
   {
@@ -74,7 +74,7 @@ void __fastcall UFG::UIHKScreenBugPlantingMinigame::~UIHKScreenBugPlantingMiniga
   UFG::qWiseSymbol v11; // [rsp+60h] [rbp+18h]
 
   v1 = this;
-  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenBugPlantingMinigame::`vftable';
+  this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenBugPlantingMinigame::`vftable;
   v2 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseScreen(v2, "BugPlantingMinigame");
   v3 = UFG::UIHKScreenGlobalOverlay::mThis;
@@ -406,7 +406,7 @@ LABEL_77:
   if ( !v35 || (v36 = 1, !v35->mActionTrue) )
     v36 = 0;
   v3->mbAButton = v36;
-  `eh vector constructor iterator'(&ptr, 0x30ui64, 5, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  `eh vector constructor iterator(&ptr, 0x30ui64, 5, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
   v37 = v3->m_fLeftStickX;
   if ( (ptr >> 6) & 1 )
   {
@@ -565,7 +565,7 @@ LABEL_77:
   }
   pval.Type = 0;
   UFG::UIScreen::update((UFG::UIScreen *)&v3->vfptr, v2);
-  `eh vector destructor iterator'(&ptr, 0x30ui64, 5, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(&ptr, 0x30ui64, 5, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 249

@@ -4,7 +4,7 @@ void __fastcall hkpSimpleBreakableMaterial::hkpSimpleBreakableMaterial(hkpSimple
 {
   this->m_strength = strength;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpSimpleBreakableMaterial::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpSimpleBreakableMaterial::`vftable;
   this->m_typeAndFlags = 17;
   this->m_properties = 0i64;
 }
@@ -20,7 +20,7 @@ hkClass *__fastcall hkpSimpleBreakableMaterial::getClassType(hkpSimpleBreakableM
 // RVA: 0xD7A390
 void __fastcall hkpSimpleBreakableMaterial::hkpSimpleBreakableMaterial(hkpSimpleBreakableMaterial *this, hkFinishLoadedObjectFlag flag)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkpSimpleBreakableMaterial::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpSimpleBreakableMaterial::`vftable;
   if ( flag.m_finishing )
     this->m_typeAndFlags = 17;
 }
@@ -30,11 +30,11 @@ void __fastcall hkpSimpleBreakableMaterial::hkpSimpleBreakableMaterial(hkpSimple
 void __fastcall hkpSimpleBreakableMaterial::hkpSimpleBreakableMaterial(hkpSimpleBreakableMaterial *this, hkpSimpleBreakableMaterial *other)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpBreakableMaterial::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpBreakableMaterial::`vftable;
   this->m_strength = other->m_strength;
   this->m_typeAndFlags = other->m_typeAndFlags;
   this->m_properties = other->m_properties;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpSimpleBreakableMaterial::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpSimpleBreakableMaterial::`vftable;
 }
 
 // File Line: 50

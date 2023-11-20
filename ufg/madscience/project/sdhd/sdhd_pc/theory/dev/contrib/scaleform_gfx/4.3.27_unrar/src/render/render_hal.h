@@ -13,7 +13,7 @@ void __fastcall Scaleform::Render::StereoImplBase::SetParams(Scaleform::Render::
 // RVA: 0x94AE20
 void __fastcall Scaleform::Render::HALNotify::~HALNotify(Scaleform::Render::HALNotify *this)
 {
-  this->vfptr = (Scaleform::Render::HALNotifyVtbl *)&Scaleform::Render::HALNotify::`vftable';
+  this->vfptr = (Scaleform::Render::HALNotifyVtbl *)&Scaleform::Render::HALNotify::`vftable;
 }
 
 // File Line: 251

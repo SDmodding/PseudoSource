@@ -577,8 +577,8 @@ Scaleform::Render::Matrix2x4<float> *__fastcall Scaleform::Render::Matrix2x4<flo
   v8.m128_f32[1] = dst[5] - v12;
   Scaleform::Render::Matrix2x4<float>::Invert(this);
   result = v6;
-  v14 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v;
-  v15 = _mm_and_ps(v8, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v);
+  v14 = (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v;
+  v15 = _mm_and_ps(v8, (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v);
   v16 = _mm_mul_ps(_mm_shuffle_ps(v8, v8, 0), *(__m128 *)&v6->M[0][0]);
   *(__m128 *)&v6->M[0][0] = _mm_and_ps(
                               _mm_add_ps(
@@ -587,8 +587,8 @@ Scaleform::Render::Matrix2x4<float> *__fastcall Scaleform::Render::Matrix2x4<flo
                                   _mm_mul_ps(_mm_shuffle_ps(v7, v7, 0), *(__m128 *)&v6->M[0][0])),
                                 _mm_and_ps(
                                   v7,
-                                  (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>'::`2'::v)),
-                              (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>'::`2'::v);
+                                  (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<0,0,0,4294967295>::`2::v)),
+                              (__m128)`Scaleform::SIMD::SSE::InstructionSet::Constant<4294967295,4294967295,0,4294967295>::`2::v);
   *(__m128 *)&v6->M[1][0] = _mm_and_ps(
                               _mm_add_ps(
                                 _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v8, v8, 85), *(__m128 *)&v6->M[1][0]), v16),

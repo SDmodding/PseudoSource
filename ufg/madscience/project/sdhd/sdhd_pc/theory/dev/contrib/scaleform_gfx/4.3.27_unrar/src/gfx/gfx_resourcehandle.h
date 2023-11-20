@@ -153,7 +153,7 @@ Scaleform::GFx::Resource *__fastcall Scaleform::GFx::ResourceHandle::GetResource
 // RVA: 0x8A3A20
 void __fastcall Scaleform::GFx::ResourceData::DataInterface::~DataInterface(Scaleform::GFx::ResourceData::DataInterface *this)
 {
-  this->vfptr = (Scaleform::GFx::ResourceData::DataInterfaceVtbl *)&Scaleform::GFx::ResourceData::DataInterface::`vftable';
+  this->vfptr = (Scaleform::GFx::ResourceData::DataInterfaceVtbl *)&Scaleform::GFx::ResourceData::DataInterface::`vftable;
 }
 
 // File Line: 378

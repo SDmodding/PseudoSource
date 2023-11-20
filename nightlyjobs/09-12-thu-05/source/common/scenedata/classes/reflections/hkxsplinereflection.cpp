@@ -78,7 +78,7 @@ hkClass *__fastcall hkxSpline::staticClass()
 void __fastcall finishLoadedObjecthkxSpline(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkxSpline::`vftable';
+    *(_QWORD *)p = &hkxSpline::`vftable;
 }
 
 // File Line: 137
@@ -92,7 +92,7 @@ void __fastcall cleanupLoadedObjecthkxSpline(void *p)
 // RVA: 0xE33280
 void **__fastcall getVtablehkxSpline()
 {
-  return &hkxSpline::`vftable';
+  return &hkxSpline::`vftable;
 }
 
 // File Line: 163

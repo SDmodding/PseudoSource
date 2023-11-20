@@ -37,14 +37,14 @@ void __fastcall UFG::ModelData::ModelData(UFG::ModelData *this, MemImageLoadFlag
   v3->mBaseNode.mNeighbours[0] = &v3->mBaseNode;
   v3->mBaseNode.mNeighbours[1] = &v3->mBaseNode;
   v3->mBaseNode.mUID = v4;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable;
   v24 = &this->mHandles;
   v24->mNode.mPrev = &v24->mNode;
   v24->mNode.mNext = &v24->mNode;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::ModelAssetData,UFG::qReflectObject>::`vftable';
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::ModelAssetData::`vftable';
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::ModelData,UFG::ModelAssetData>::`vftable';
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::ModelData::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::ModelAssetData,UFG::qReflectObject>::`vftable;
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::ModelAssetData::`vftable;
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::ModelData,UFG::ModelAssetData>::`vftable;
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::ModelData::`vftable;
   this->mModels.mData.mFlags = 2;
   v5 = 0;
   if ( this->mModels.mData.mNumItems )
@@ -57,12 +57,12 @@ void __fastcall UFG::ModelData::ModelData(UFG::ModelData *this, MemImageLoadFlag
         *(_DWORD *)(v6 + 12) = 2;
         *(_DWORD *)(v6 + 28) = 2;
         UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)(v6 + 40));
-        v7 = `UFG::qGetResourceInventory<Illusion::BonePalette>'::`2'::result;
-        if ( !`UFG::qGetResourceInventory<Illusion::BonePalette>'::`2'::result )
+        v7 = `UFG::qGetResourceInventory<Illusion::BonePalette>::`2::result;
+        if ( !`UFG::qGetResourceInventory<Illusion::BonePalette>::`2::result )
         {
           v8 = UFG::qResourceWarehouse::Instance();
           v7 = UFG::qResourceWarehouse::GetInventory(v8, 0x50A819E3u);
-          `UFG::qGetResourceInventory<Illusion::BonePalette>'::`2'::result = v7;
+          `UFG::qGetResourceInventory<Illusion::BonePalette>::`2::result = v7;
         }
         UFG::qResourceHandle::Init((UFG::qResourceHandle *)(v6 + 40), 0x50A819E3u, *(_DWORD *)(v6 + 64), v7);
         v9 = 0;
@@ -81,36 +81,36 @@ void __fastcall UFG::ModelData::ModelData(UFG::ModelData *this, MemImageLoadFlag
               v13 = (UFG::qResourceHandle *)(v11 + 88);
               UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)(v11 + 88));
               v14 = (UFG::qResourceHandle *)(v11 + 120);
-              `eh vector constructor iterator'(
+              `eh vector constructor iterator(
                 v14,
                 0x20ui64,
                 4,
                 (void (__fastcall *)(void *))Illusion::BufferHandle::BufferHandle);
-              v15 = `UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result;
-              if ( !`UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result )
+              v15 = `UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result;
+              if ( !`UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result )
               {
                 v16 = UFG::qResourceWarehouse::Instance();
                 v15 = UFG::qResourceWarehouse::GetInventory(v16, 0x3E5FDA3Eu);
-                `UFG::qGetResourceInventory<Illusion::VertexDecl>'::`2'::result = v15;
+                `UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result = v15;
               }
               UFG::qResourceHandle::Init(v12, 0x3E5FDA3Eu, v12->mNameUID, v15);
-              v17 = `UFG::qGetResourceInventory<Illusion::Buffer>'::`2'::result;
-              if ( !`UFG::qGetResourceInventory<Illusion::Buffer>'::`2'::result )
+              v17 = `UFG::qGetResourceInventory<Illusion::Buffer>::`2::result;
+              if ( !`UFG::qGetResourceInventory<Illusion::Buffer>::`2::result )
               {
                 v18 = UFG::qResourceWarehouse::Instance();
                 v17 = UFG::qResourceWarehouse::GetInventory(v18, 0x92CDEC8F);
-                `UFG::qGetResourceInventory<Illusion::Buffer>'::`2'::result = v17;
+                `UFG::qGetResourceInventory<Illusion::Buffer>::`2::result = v17;
               }
               UFG::qResourceHandle::Init(v13, 0x92CDEC8F, v13->mNameUID, v17);
               v19 = 4i64;
               do
               {
-                v20 = `UFG::qGetResourceInventory<Illusion::Buffer>'::`2'::result;
-                if ( !`UFG::qGetResourceInventory<Illusion::Buffer>'::`2'::result )
+                v20 = `UFG::qGetResourceInventory<Illusion::Buffer>::`2::result;
+                if ( !`UFG::qGetResourceInventory<Illusion::Buffer>::`2::result )
                 {
                   v21 = UFG::qResourceWarehouse::Instance();
                   v20 = UFG::qResourceWarehouse::GetInventory(v21, 0x92CDEC8F);
-                  `UFG::qGetResourceInventory<Illusion::Buffer>'::`2'::result = v20;
+                  `UFG::qGetResourceInventory<Illusion::Buffer>::`2::result = v20;
                 }
                 UFG::qResourceHandle::Init(v14, 0x92CDEC8F, v14->mNameUID, v20);
                 ++v14;
@@ -150,23 +150,23 @@ void __fastcall UFG::ModelData::~ModelData(UFG::ModelData *this)
   UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *v9; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::ModelData::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::ModelData::`vftable;
   v2 = 0;
   if ( this->mModels.mData.mNumItems )
   {
     do
-      Illusion::rModel::`scalar deleting destructor'(&v1->mModels.mData.mItems[v2++], 0);
+      Illusion::rModel::`scalar deleting destructor(&v1->mModels.mData.mItems[v2++], 0);
     while ( v2 < v1->mModels.mData.mNumItems );
   }
   if ( !(v1->mModels.mData.mFlags & 2) )
   {
     v3 = v1->mModels.mData.mItems;
     if ( v3 )
-      Illusion::rModel::`vector deleting destructor'(v3, 3);
+      Illusion::rModel::`vector deleting destructor(v3, 3);
   }
   v1->mModels.mData.mItems = 0i64;
   *(_QWORD *)&v1->mModels.mData.mNumItems = 0i64;
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable';
+  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable;
   v4 = &v1->mHandles;
   for ( i = (UFG::qReflectHandleBase *)v4->mNode.mNext;
         i != (UFG::qReflectHandleBase *)v4;
@@ -207,14 +207,14 @@ void __fastcall UFG::CollisionData::CollisionData(UFG::CollisionData *this, MemI
   v2->mBaseNode.mNeighbours[0] = &v2->mBaseNode;
   v2->mBaseNode.mNeighbours[1] = &v2->mBaseNode;
   v2->mBaseNode.mUID = v3;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable;
   v5 = &this->mHandles;
   v5->mNode.mPrev = &v5->mNode;
   v5->mNode.mNext = &v5->mNode;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::ModelAssetData,UFG::qReflectObject>::`vftable';
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::ModelAssetData::`vftable';
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::CollisionData,UFG::ModelAssetData>::`vftable';
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::CollisionData::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::ModelAssetData,UFG::qReflectObject>::`vftable;
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::ModelAssetData::`vftable;
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::CollisionData,UFG::ModelAssetData>::`vftable;
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::CollisionData::`vftable;
   v4 = &this->mCollisionMeshBundle;
   UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&this->mCollisionMeshBundle.mPrev);
   v4->mOwner = 0i64;
@@ -238,14 +238,14 @@ void __fastcall UFG::FreeRunData::FreeRunData(UFG::FreeRunData *this, MemImageLo
   v2->mBaseNode.mNeighbours[0] = &v2->mBaseNode;
   v2->mBaseNode.mNeighbours[1] = &v2->mBaseNode;
   v2->mBaseNode.mUID = v3;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable;
   v4 = &this->mHandles;
   v4->mNode.mPrev = &v4->mNode;
   v4->mNode.mNext = &v4->mNode;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::ModelAssetData,UFG::qReflectObject>::`vftable';
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::ModelAssetData::`vftable';
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::FreeRunData,UFG::ModelAssetData>::`vftable';
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::FreeRunData::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::ModelAssetData,UFG::qReflectObject>::`vftable;
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::ModelAssetData::`vftable;
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::FreeRunData,UFG::ModelAssetData>::`vftable;
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::FreeRunData::`vftable;
   UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&this->mParkourContainerBundle.mPrev);
 }
 
@@ -266,14 +266,14 @@ void __fastcall UFG::CoverData::CoverData(UFG::CoverData *this, MemImageLoadFlag
   v2->mBaseNode.mNeighbours[0] = &v2->mBaseNode;
   v2->mBaseNode.mNeighbours[1] = &v2->mBaseNode;
   v2->mBaseNode.mUID = v3;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable;
   v4 = &this->mHandles;
   v4->mNode.mPrev = &v4->mNode;
   v4->mNode.mNext = &v4->mNode;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::ModelAssetData,UFG::qReflectObject>::`vftable';
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::ModelAssetData::`vftable';
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::CoverData,UFG::ModelAssetData>::`vftable';
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::CoverData::`vftable';
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::ModelAssetData,UFG::qReflectObject>::`vftable;
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::ModelAssetData::`vftable;
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::CoverData,UFG::ModelAssetData>::`vftable;
+  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::CoverData::`vftable;
   UFG::qResourceHandle::qResourceHandle(&this->mDynamicCoverResource);
 }
 

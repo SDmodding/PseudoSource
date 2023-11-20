@@ -2,7 +2,7 @@
 // RVA: 0xA6FB20
 void __fastcall CAkPBIAware::~CAkPBIAware(CAkPBIAware *this)
 {
-  this->vfptr = (CAkIndexableVtbl *)&CAkPBIAware::`vftable';
+  this->vfptr = (CAkIndexableVtbl *)&CAkPBIAware::`vftable;
   CAkIndexable::~CAkIndexable((CAkIndexable *)&this->vfptr);
 }
 

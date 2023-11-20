@@ -23,8 +23,8 @@ ActionNodeImplementation *__fastcall TrackLibraryNode::CreateClone(TrackLibraryN
   if ( v2 )
   {
     ActionNodeImplementation::ActionNodeImplementation((ActionNodeImplementation *)v2);
-    v3->vfptr = (Expression::IMemberMapVtbl *)&ActionNodePlayable::`vftable';
-    v3->vfptr = (Expression::IMemberMapVtbl *)&TrackLibraryNode::`vftable';
+    v3->vfptr = (Expression::IMemberMapVtbl *)&ActionNodePlayable::`vftable;
+    v3->vfptr = (Expression::IMemberMapVtbl *)&TrackLibraryNode::`vftable;
   }
   else
   {
@@ -55,7 +55,7 @@ void __fastcall ExecuteTrackLibraryTrack::ExecuteTrackLibraryTrack(ExecuteTrackL
   NodeRefTrack<ExecuteTrackLibraryTask>::NodeRefTrack<ExecuteTrackLibraryTask>(
     (NodeRefTrack<ExecuteTrackLibraryTask> *)&this->vfptr,
     ExecuteTrackLibraryTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ExecuteTrackLibraryTrack::`vftable';
+  v1->vfptr = (Expression::IMemberMapVtbl *)&ExecuteTrackLibraryTrack::`vftable;
 }
 
 // File Line: 107

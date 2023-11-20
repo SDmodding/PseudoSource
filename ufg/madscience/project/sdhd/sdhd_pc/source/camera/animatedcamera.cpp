@@ -33,7 +33,7 @@ void __fastcall UFG::AnimatedCameraComponent::AnimatedCameraComponent(UFG::Anima
   v3 = (UFG::qNode<UFG::AnimatedCameraComponent,UFG::AnimatedCameraComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AnimatedCameraComponent::`vftable';
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AnimatedCameraComponent::`vftable;
   UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0>::RebindingComponentHandle<UFG::TransformNodeComponent,0>(&v2->mTransformNode);
   UFG::RebindingComponentHandle<UFG::CameraAnimationComponent,0>::RebindingComponentHandle<UFG::CameraAnimationComponent,0>(&v2->mAnimation);
   UFG::RebindingComponentHandle<UFG::CameraSubject,0>::RebindingComponentHandle<UFG::CameraSubject,0>(&v2->mTarget);
@@ -80,7 +80,7 @@ void __fastcall UFG::AnimatedCameraComponent::~AnimatedCameraComponent(UFG::Anim
   UFG::qNode<UFG::AnimatedCameraComponent,UFG::AnimatedCameraComponent> *v11; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AnimatedCameraComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AnimatedCameraComponent::`vftable;
   if ( this == UFG::AnimatedCameraComponent::s_AnimatedCameraComponentpCurrentIterator )
     UFG::AnimatedCameraComponent::s_AnimatedCameraComponentpCurrentIterator = (UFG::AnimatedCameraComponent *)&this->mPrev[-78];
   v2 = (UFG::qNode<UFG::AnimatedCameraComponent,UFG::AnimatedCameraComponent> *)&this->mPrev;

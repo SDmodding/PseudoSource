@@ -72,13 +72,13 @@ hkpCollisionAgent *__fastcall hkpCapsuleTriangleAgent::createTriangleCapsuleAgen
     result->m_contactMgr = v5;
     result->m_memSizeAndFlags = -1;
     result->m_referenceCount = 1;
-    result->vfptr = (hkBaseObjectVtbl *)&hkpCapsuleTriangleAgent::`vftable';
+    result->vfptr = (hkBaseObjectVtbl *)&hkpCapsuleTriangleAgent::`vftable;
     WORD2(result[1].vfptr) = -1;
     LODWORD(result[1].vfptr) = -1;
     hkpCollideTriangleUtil::setupPointTriangleDistanceCache(
       (hkVector4f *)&v4->m_shape[1].m_type,
       (hkpCollideTriangleUtil::PointTriangleDistanceCache *)&result[1].m_memSizeAndFlags);
-    v8->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgentLinearCast<hkpCapsuleTriangleAgent>::`vftable';
+    v8->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgentLinearCast<hkpCapsuleTriangleAgent>::`vftable;
     result = v8;
   }
   return result;
@@ -104,7 +104,7 @@ hkpCollisionAgent *__fastcall hkpCapsuleTriangleAgent::createCapsuleTriangleAgen
     result->m_contactMgr = v4;
     result->m_memSizeAndFlags = -1;
     result->m_referenceCount = 1;
-    result->vfptr = (hkBaseObjectVtbl *)&hkpCapsuleTriangleAgent::`vftable';
+    result->vfptr = (hkBaseObjectVtbl *)&hkpCapsuleTriangleAgent::`vftable;
     WORD2(result[1].vfptr) = -1;
     LODWORD(result[1].vfptr) = -1;
     hkpCollideTriangleUtil::setupPointTriangleDistanceCache(

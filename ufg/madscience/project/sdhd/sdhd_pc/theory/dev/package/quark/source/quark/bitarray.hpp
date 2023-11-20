@@ -8,7 +8,7 @@ void __fastcall UFG::BitArray::BitArray(UFG::BitArray *this, int numBits)
   unsigned int v5; // er8
 
   this->mNumBits = numBits;
-  this->vfptr = (UFG::BitArrayVtbl *)&UFG::BitArray::`vftable';
+  this->vfptr = (UFG::BitArrayVtbl *)&UFG::BitArray::`vftable;
   v2 = this;
   this->mNumWords = ((unsigned int)numBits >> 5) + 1;
   v3 = 4i64 * (((unsigned int)numBits >> 5) + 1);

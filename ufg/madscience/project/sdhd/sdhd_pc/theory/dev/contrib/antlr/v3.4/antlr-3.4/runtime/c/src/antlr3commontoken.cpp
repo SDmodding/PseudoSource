@@ -398,9 +398,9 @@ ANTLR3_STRING_struct *__fastcall toString(ANTLR3_COMMON_TOKEN_struct *token)
       (*(void (__fastcall **)(__int64, const char *))(v5 + 56))(v5, "-Stop: ");
       v8 = v1->getStopIndex(v1);
       (*(void (__fastcall **)(__int64, __int64))(v5 + 120))(v5, v8);
-      (*(void (__fastcall **)(__int64, const char *))(v5 + 56))(v5, ") ='");
+      (*(void (__fastcall **)(__int64, const char *))(v5 + 56))(v5, ") =");
       (*(void (__fastcall **)(__int64, ANTLR3_STRING_struct *))(v5 + 88))(v5, v3);
-      (*(void (__fastcall **)(__int64, const char *))(v5 + 56))(v5, "', type<");
+      (*(void (__fastcall **)(__int64, const char *))(v5 + 56))(v5, ", type<");
       (*(void (__fastcall **)(__int64, _QWORD))(v5 + 120))(v5, v1->type);
       (*(void (__fastcall **)(__int64, const char *))(v5 + 56))(v5, "> ");
       if ( v1->getChannel(v1) )

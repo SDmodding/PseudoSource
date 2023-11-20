@@ -341,7 +341,7 @@ void __fastcall UFG::UIHK_PDARootMenuWidget::Flash_Show(UFG::UIHK_PDARootMenuWid
   if ( v3 )
   {
     UFG::UIHK_PDARootMenuWidget::Flash_SetGlobals(this, screen);
-    `eh vector constructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     v4 = (double)(signed int)v2->mIntroIndex;
     if ( (v7 >> 6) & 1 )
     {
@@ -351,7 +351,7 @@ void __fastcall UFG::UIHK_PDARootMenuWidget::Flash_Show(UFG::UIHK_PDARootMenuWid
     v7 = 5;
     v8 = v4;
     Scaleform::GFx::Movie::Invoke(v3, "Smartphone_AnimateIntro", 0i64, (Scaleform::GFx::Value *)&ptr, 1u);
-    `eh vector destructor iterator'(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 

@@ -10,7 +10,7 @@ void __fastcall OSuite::SteamOnlineAuthentication::SteamOnlineAuthentication(OSu
   v1 = this;
   OSuite::IOnlineAuthentication::IOnlineAuthentication((OSuite::IOnlineAuthentication *)&this->vfptr);
   clock = 0i64;
-  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::SteamOnlineAuthentication::`vftable';
+  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::SteamOnlineAuthentication::`vftable;
   OSuite::ZClock::ZClock(&v1->m_Clock, &clock);
   v2 = (hkEntitySelectorAll *)OSuite::GameInterface();
   v1->m_stTicket.m_eProvider = hkaReferencePoseAnimation::getNumOriginalFrames(v2, v3);
@@ -23,7 +23,7 @@ void __fastcall OSuite::SteamOnlineAuthentication::~SteamOnlineAuthentication(OS
   OSuite::SteamOnlineAuthentication *v1; // rbx
 
   v1 = this;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::SteamOnlineAuthentication::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::SteamOnlineAuthentication::`vftable;
   OSuite::ZOEdmBase::CleanTempData((_DWORD)this + 120);
   OSuite::IOnlineAuthentication::~IOnlineAuthentication((OSuite::IOnlineAuthentication *)&v1->vfptr);
 }

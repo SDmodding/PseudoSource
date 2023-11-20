@@ -9,7 +9,7 @@ void __fastcall UFG::UITiledMapGPS::UITiledMapGPS(UFG::UITiledMapGPS *this)
   v1 = this;
   v2 = &this->mWayFinderClient;
   UFG::WayFinderClient::WayFinderClient((UFG::WayFinderClient *)&this->mWayFinderClient.vfptr);
-  v2->vfptr = (UFG::WayFinderClientVtbl *)&UFG::MiniMapWayFinderClient::`vftable';
+  v2->vfptr = (UFG::WayFinderClientVtbl *)&UFG::MiniMapWayFinderClient::`vftable;
   v2->m_LastLaneIndex = -1;
   *(_WORD *)&v2->m_AllowFootPaths = 1;
   v2->m_LaneFlags = 64;

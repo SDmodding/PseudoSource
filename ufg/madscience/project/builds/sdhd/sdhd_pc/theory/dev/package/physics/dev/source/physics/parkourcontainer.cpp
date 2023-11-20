@@ -342,7 +342,7 @@ void __fastcall UFG::ParkourContainerInventory::ParkourContainerInventory(UFG::P
     0xBDE53ECA,
     0,
     0);
-  v1->vfptr = (UFG::qResourceInventoryVtbl *)&UFG::ParkourContainerInventory::`vftable';
+  v1->vfptr = (UFG::qResourceInventoryVtbl *)&UFG::ParkourContainerInventory::`vftable;
   v1->mAddParkourContainerCallback = 0i64;
   v1->mRemoveParkourContainerCallback = 0i64;
 }
@@ -403,7 +403,7 @@ void __fastcall UFG::ParkourContainerBundleInventory::ParkourContainerBundleInve
     0x12D3A53Du,
     0,
     0);
-  v1->vfptr = (UFG::qResourceInventoryVtbl *)&UFG::ParkourContainerBundleInventory::`vftable';
+  v1->vfptr = (UFG::qResourceInventoryVtbl *)&UFG::ParkourContainerBundleInventory::`vftable;
 }
 
 // File Line: 320

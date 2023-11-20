@@ -6,7 +6,7 @@ void __fastcall hkpConvexVerticesShape::hkpConvexVerticesShape(hkpConvexVertices
   *(_DWORD *)&this->m_type.m_storage = 1029;
   this->m_radius = radius;
   this->m_userData = 0i64;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpConvexVerticesShape::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpConvexVerticesShape::`vftable;
   this->m_rotatedVertices.m_data = 0i64;
   this->m_rotatedVertices.m_size = 0;
   this->m_rotatedVertices.m_capacityAndFlags = 2147483648;
@@ -38,7 +38,7 @@ void __fastcall hkpConvexVerticesShape::hkpConvexVerticesShape(hkpConvexVertices
   v5 = planeEquations;
   this->m_radius = radius;
   this->m_userData = 0i64;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpConvexVerticesShape::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpConvexVerticesShape::`vftable;
   this->m_rotatedVertices.m_data = 0i64;
   this->m_rotatedVertices.m_size = 0;
   this->m_rotatedVertices.m_capacityAndFlags = 2147483648;
@@ -93,7 +93,7 @@ void __fastcall hkpConvexVerticesShape::hkpConvexVerticesShape(hkpConvexVertices
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   *(_DWORD *)&this->m_type.m_storage = 1029;
   this->m_radius = radius;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpConvexVerticesShape::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpConvexVerticesShape::`vftable;
   this->m_userData = 0i64;
   this->m_rotatedVertices.m_data = rotatedVertices;
   v7 = (signed int)((numVertices + 3) & 0xFFFFFFFC) / 4;
@@ -124,7 +124,7 @@ void __fastcall hkpConvexVerticesShape::hkpConvexVerticesShape(hkpConvexVertices
   v3 = flag.m_finishing;
   v2 = this;
   hkpConvexShape::hkpConvexShape((hkpConvexShape *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpConvexVerticesShape::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpConvexVerticesShape::`vftable;
   if ( v3 )
     v2->m_type.m_storage = 5;
 }
@@ -139,7 +139,7 @@ void __fastcall hkpConvexVerticesShape::~hkpConvexVerticesShape(hkpConvexVertice
   int v4; // eax
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpConvexVerticesShape::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpConvexVerticesShape::`vftable;
   v2 = this->m_connectivity;
   if ( v2 )
     hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
@@ -161,7 +161,7 @@ void __fastcall hkpConvexVerticesShape::~hkpConvexVerticesShape(hkpConvexVertice
       48 * (v4 & 0x3FFFFFFF));
   v1->m_rotatedVertices.m_data = 0i64;
   v1->m_rotatedVertices.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 168

@@ -28,8 +28,8 @@ void __fastcall UFG::TurfComponent::TurfComponent(UFG::TurfComponent *this, unsi
   v3 = (UFG::qNode<UFG::TurfComponent,UFG::TurfComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TurfComponent::`vftable'{for `UFG::SimComponent'};
-  v2->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::TurfComponent::`vftable'{for `UFG::UpdateInterface'};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TurfComponent::`vftable{for `UFG::SimComponent};
+  v2->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::TurfComponent::`vftable{for `UFG::UpdateInterface};
   v2->m_SpawnedRackets.p = 0i64;
   *(_QWORD *)&v2->m_SpawnedRackets.size = 0i64;
   v2->mSpawnedSafehouseRacket = 0i64;
@@ -92,8 +92,8 @@ void __fastcall UFG::TurfComponent::~TurfComponent(UFG::TurfComponent *this)
   UFG::qNode<UFG::TurfComponent,UFG::TurfComponent> *v16; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TurfComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::TurfComponent::`vftable'{for `UFG::UpdateInterface'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TurfComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::TurfComponent::`vftable{for `UFG::UpdateInterface};
   UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>(&this->mTransformNodeComponent);
   UFG::qReflectHandleBase::~qReflectHandleBase((UFG::qReflectHandleBase *)&v1->mCurrentTurfTemplate.mPrev);
   v2 = v1->m_PrefabSceneObjs.p;
@@ -122,7 +122,7 @@ void __fastcall UFG::TurfComponent::~TurfComponent(UFG::TurfComponent *this)
   if ( v8 )
   {
     v9 = &v8[-1].m_pPointer;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v8,
       0x18ui64,
       (int)v8[-1].m_pPointer,
@@ -135,7 +135,7 @@ void __fastcall UFG::TurfComponent::~TurfComponent(UFG::TurfComponent *this)
   if ( v10 )
   {
     v11 = &v10[-1].mBlockIndex;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v10,
       0x48ui64,
       v10[-1].mBlockIndex,
@@ -2061,7 +2061,7 @@ void __fastcall UFG::TurfComponent::DeSpawn(UFG::TurfComponent *this)
   if ( v6 )
   {
     v7 = &v6[-1].m_pPointer;
-    `eh vector destructor iterator'(
+    `eh vector destructor iterator(
       v6,
       0x18ui64,
       (int)v6[-1].m_pPointer,
@@ -2215,7 +2215,7 @@ void __fastcall UFG::TurfComponent::ClearRacket(UFG::TurfComponent *this, UFG::S
     if ( v15 )
     {
       v16 = &v15[-1].m_pPointer;
-      `eh vector destructor iterator'(
+      `eh vector destructor iterator(
         v15,
         0x18ui64,
         (int)v15[-1].m_pPointer,

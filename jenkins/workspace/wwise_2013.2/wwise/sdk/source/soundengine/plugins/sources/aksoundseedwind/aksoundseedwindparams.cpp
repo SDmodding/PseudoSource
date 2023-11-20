@@ -7,7 +7,7 @@ AK::IAkPluginParam *__fastcall CreateSoundSeedWindParams(AK::IAkPluginMemAlloc *
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 240ui64);
   if ( result )
   {
-    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkSoundSeedWindParams::`vftable';
+    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkSoundSeedWindParams::`vftable;
     result[1].vfptr = 0i64;
     result[2].vfptr = 0i64;
     result[3].vfptr = 0i64;
@@ -33,7 +33,7 @@ AK::IAkPluginParam *__fastcall CreateSoundSeedWindParams(AK::IAkPluginMemAlloc *
 // RVA: 0xAD4400
 void __fastcall CAkSoundSeedWindParams::CAkSoundSeedWindParams(CAkSoundSeedWindParams *this)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkSoundSeedWindParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkSoundSeedWindParams::`vftable;
   this->m_Curves[0].m_pArrayGraphPoints = 0i64;
   *(_QWORD *)&this->m_Curves[0].m_ulArraySize = 0i64;
   this->m_Curves[1].m_pArrayGraphPoints = 0i64;
@@ -64,7 +64,7 @@ void __fastcall CAkSoundSeedWindParams::~CAkSoundSeedWindParams(CAkSoundSeedWind
 
   v1 = this->m_pDeflectors;
   v2 = this;
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkSoundSeedWindParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkSoundSeedWindParams::`vftable;
   if ( v1 )
     ((void (*)(void))this->m_pAllocator->vfptr->Free)();
   v3 = (signed __int64)v2->m_Curves;
@@ -81,7 +81,7 @@ void __fastcall CAkSoundSeedWindParams::~CAkSoundSeedWindParams(CAkSoundSeedWind
     --v4;
   }
   while ( v4 );
-  v2->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable';
+  v2->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable;
 }
 
 // File Line: 46
@@ -105,7 +105,7 @@ void __fastcall CAkSoundSeedWindParams::CAkSoundSeedWindParams(CAkSoundSeedWindP
 
   v3 = this;
   v4 = 0;
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkSoundSeedWindParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkSoundSeedWindParams::`vftable;
   this->m_Curves[0].m_pArrayGraphPoints = 0i64;
   *(_QWORD *)&this->m_Curves[0].m_ulArraySize = 0i64;
   this->m_Curves[1].m_pArrayGraphPoints = 0i64;

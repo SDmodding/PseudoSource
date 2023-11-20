@@ -6,7 +6,7 @@ void __fastcall RumbleMixBus::RumbleMixBus(RumbleMixBus *this)
 
   v1 = this;
   RumbleBusBase::RumbleBusBase((RumbleBusBase *)&this->vfptr);
-  v1->vfptr = (AK::IAkPluginVtbl *)&RumbleMixBus::`vftable';
+  v1->vfptr = (AK::IAkPluginVtbl *)&RumbleMixBus::`vftable;
   v1->m_pRumbleDevice = 0i64;
   v1->m_oCurrent = 0i64;
 }

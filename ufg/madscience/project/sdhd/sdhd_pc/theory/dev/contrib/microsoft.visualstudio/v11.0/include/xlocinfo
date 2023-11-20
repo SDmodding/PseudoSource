@@ -26,7 +26,7 @@ void __fastcall std::_Locinfo::_Locinfo(std::_Locinfo *this, const char *_Pch)
   {
     _What = "bad locale name";
     std::exception::exception(&pExceptionObject, (const char *const *)&_What);
-    pExceptionObject.vfptr = (std::exceptionVtbl *)&std::runtime_error::`vftable';
+    pExceptionObject.vfptr = (std::exceptionVtbl *)&std::runtime_error::`vftable;
     CxxThrowException(&pExceptionObject, &TI2_AVruntime_error_std__);
   }
   std::_Locinfo::_Locinfo_ctor(v3, v2);

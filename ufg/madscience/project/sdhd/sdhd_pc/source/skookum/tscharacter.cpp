@@ -13,7 +13,7 @@ void __fastcall UFG::TSCharacter::TSCharacter(UFG::TSCharacter *this, ASymbol *n
 
   v3 = this;
   SSActor::SSActor((SSActor *)&this->vfptr, name, pClass, 1);
-  v3->vfptr = (SSObjectBaseVtbl *)&UFG::TSActor::`vftable';
+  v3->vfptr = (SSObjectBaseVtbl *)&UFG::TSActor::`vftable;
   UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0>::RebindingComponentHandle<UFG::TransformNodeComponent,0>(&v3->mTransformNodeComponent);
   v3->mpComponent = 0i64;
   v3->m_audioController.m_pEvent = 0i64;
@@ -21,7 +21,7 @@ void __fastcall UFG::TSCharacter::TSCharacter(UFG::TSCharacter *this, ASymbol *n
   v9->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v9->mPrev;
   v9->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v9->mPrev;
   v3->mpSimObj.m_pPointer = 0i64;
-  v3->vfptr = (SSObjectBaseVtbl *)&UFG::TSCharacter::`vftable';
+  v3->vfptr = (SSObjectBaseVtbl *)&UFG::TSCharacter::`vftable;
   v3->mModeFlags = 0;
   v3->mTargetThreshold = 0.5;
   v3->mpNavigationThread.i_obj_p = 0i64;
@@ -68,7 +68,7 @@ void __fastcall UFG::TSCharacter::~TSCharacter(UFG::TSCharacter *this)
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v6; // rax
 
   v1 = this;
-  this->vfptr = (SSObjectBaseVtbl *)&UFG::TSCharacter::`vftable';
+  this->vfptr = (SSObjectBaseVtbl *)&UFG::TSCharacter::`vftable;
   UFG::TSCharacter::ClearTarget(this);
   UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->mAICharacterControllerBaseComponent);
   UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->mAIScriptInterfaceComponent);
@@ -4145,13 +4145,13 @@ bool __fastcall UFG::TSCharacter::Coro_move_to_actor(UFG::TSCharacter *this, SSI
       UFG::TSCharacter::SetTarget(v2, &out, v2->mMoveToActorThreshold);
       v24 = (float *)v2->mpTargetNode.m_pPointer;
       UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v2->mpTargetNode.m_pPointer);
-      npDestination.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable';
+      npDestination.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable;
       v25 = v24[45];
       v26 = v24[46];
       v27 = v24[44];
       npDestination.m_bValid = 0;
       *(_QWORD *)&npDestination.m_packedKey = -1i64;
-      npDestination.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable';
+      npDestination.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable;
       npDestination.m_vPosition.y = v25;
       npDestination.m_vPosition.z = v26;
       npDestination.m_vPosition.x = v27;
@@ -5590,14 +5590,14 @@ char __fastcall UFG::TSCharacter::PathToTarget(UFG::TSCharacter *this, SSInvoked
 LABEL_25:
       v13 = (UFG::TransformNodeComponent *)v8->mpTargetNode.m_pPointer;
       UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v8->mpTargetNode.m_pPointer);
-      npDestination.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable';
+      npDestination.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable;
       LOBYTE(v11) = v7 == eSCRIPT_COMMAND_MOVE_DIRECTLY_TO_POSITION;
       v14 = v13->mWorldTransform.v3.y;
       v15 = v13->mWorldTransform.v3.z;
       v16 = v13->mWorldTransform.v3.x;
       npDestination.m_bValid = 0;
       *(_QWORD *)&npDestination.m_packedKey = -1i64;
-      npDestination.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable';
+      npDestination.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable;
       npDestination.m_vPosition.x = v16;
       npDestination.m_vPosition.y = v14;
       npDestination.m_vPosition.z = v15;

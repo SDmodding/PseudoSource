@@ -18,7 +18,7 @@ void __fastcall UFG::ThugsEncounter::ThugsEncounter(UFG::ThugsEncounter *this)
   v2 = (UFG::qNode<UFG::ThugsEncounter,UFG::ThugsEncounter> *)&v1->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  v1->vfptr = (UFG::qSafePointerNode<UFG::EncounterBase>Vtbl *)&UFG::ThugsEncounter::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::EncounterBase>Vtbl *)&UFG::ThugsEncounter::`vftable;
   v1->mpOwnerGameSlice = 0i64;
   *(_DWORD *)&v1->mIsStarted = 0;
   v1->mCanEnterExitVehicle = 2;
@@ -41,7 +41,7 @@ void __fastcall UFG::ThugsEncounter::~ThugsEncounter(UFG::ThugsEncounter *this)
   UFG::qNode<UFG::ThugsEncounter,UFG::ThugsEncounter> *v6; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::EncounterBase>Vtbl *)&UFG::ThugsEncounter::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::EncounterBase>Vtbl *)&UFG::ThugsEncounter::`vftable;
   if ( this == UFG::ThugsEncounter::s_ThugsEncounterpCurrentIterator )
     UFG::ThugsEncounter::s_ThugsEncounterpCurrentIterator = (UFG::ThugsEncounter *)&this->mPrev[-201];
   v2 = (UFG::qNode<UFG::ThugsEncounter,UFG::ThugsEncounter> *)&this->mPrev;

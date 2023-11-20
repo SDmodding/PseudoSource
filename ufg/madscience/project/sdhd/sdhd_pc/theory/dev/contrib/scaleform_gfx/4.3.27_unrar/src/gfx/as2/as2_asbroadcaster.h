@@ -9,6 +9,6 @@ signed __int64 __fastcall Scaleform::GFx::AS2::AsBroadcaster::GetObjectType(Scal
 // RVA: 0x6D1D10
 void __fastcall Scaleform::GFx::AS2::AsBroadcaster::InvokeCallback::~InvokeCallback(Scaleform::GFx::AS2::AsBroadcaster::InvokeCallback *this)
 {
-  this->vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)&Scaleform::GFx::AS2::AsBroadcaster::InvokeCallback::`vftable';
+  this->vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)&Scaleform::GFx::AS2::AsBroadcaster::InvokeCallback::`vftable;
 }
 

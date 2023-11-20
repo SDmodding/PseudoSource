@@ -7,7 +7,7 @@ void __fastcall hkpCapsuleShape::hkpCapsuleShape(hkpCapsuleShape *this, hkVector
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   *(_DWORD *)&this->m_type.m_storage = 1028;
   this->m_radius = radius;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpCapsuleShape::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpCapsuleShape::`vftable;
   this->m_userData = 0i64;
   v4 = _mm_shuffle_ps((__m128)LODWORD(radius), (__m128)LODWORD(radius), 0);
   this->m_vertexA.m_quad = _mm_shuffle_ps(vertexA->m_quad, _mm_unpackhi_ps(vertexA->m_quad, v4), 196);
@@ -22,7 +22,7 @@ void __fastcall hkpCapsuleShape::hkpCapsuleShape(hkpCapsuleShape *this, hkFinish
 
   v2 = this;
   hkpConvexShape::hkpConvexShape((hkpConvexShape *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpCapsuleShape::`vftable';
+  v2->vfptr = (hkBaseObjectVtbl *)&hkpCapsuleShape::`vftable;
   v2->m_type.m_storage = 4;
 }
 

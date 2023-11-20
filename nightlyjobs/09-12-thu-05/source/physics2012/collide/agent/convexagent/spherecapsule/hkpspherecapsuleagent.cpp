@@ -34,7 +34,7 @@ hkpCollisionAgent *__fastcall hkpSphereCapsuleAgent::createCapsuleSphereAgent(hk
   if ( result )
   {
     *(_DWORD *)&result->m_memSizeAndFlags = 0x1FFFF;
-    result->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgentLinearCast<hkpSphereCapsuleAgent>::`vftable';
+    result->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgentLinearCast<hkpSphereCapsuleAgent>::`vftable;
     result->m_contactMgr = v4;
     LOWORD(result[1].vfptr) = -1;
   }
@@ -55,7 +55,7 @@ hkpCollisionAgent *__fastcall hkpSphereCapsuleAgent::createSphereCapsuleAgent(hk
   if ( result )
   {
     *(_DWORD *)&result->m_memSizeAndFlags = 0x1FFFF;
-    result->vfptr = (hkBaseObjectVtbl *)&hkpSphereCapsuleAgent::`vftable';
+    result->vfptr = (hkBaseObjectVtbl *)&hkpSphereCapsuleAgent::`vftable;
     result->m_contactMgr = v4;
     LOWORD(result[1].vfptr) = -1;
   }

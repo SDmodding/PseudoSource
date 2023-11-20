@@ -31,7 +31,7 @@ hkClass *__fastcall hkaiJumpAnalyzer::staticClass()
 void __fastcall finishLoadedObjecthkaiJumpAnalyzer(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiJumpAnalyzer::`vftable';
+    *(_QWORD *)p = &hkaiJumpAnalyzer::`vftable;
 }
 
 // File Line: 71
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkaiJumpAnalyzer(void *p)
 // RVA: 0xC32330
 void **__fastcall getVtablehkaiJumpAnalyzer()
 {
-  return &hkaiJumpAnalyzer::`vftable';
+  return &hkaiJumpAnalyzer::`vftable;
 }
 
 // File Line: 97

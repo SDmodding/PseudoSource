@@ -6,7 +6,7 @@ void __fastcall CAkSrcFileBase::CAkSrcFileBase(CAkSrcFileBase *this, CAkPBI *in_
 
   v2 = this;
   CAkSrcBaseEx::CAkSrcBaseEx((CAkSrcBaseEx *)&this->vfptr, in_pCtx);
-  v2->vfptr = (CAkVPLNodeVtbl *)&CAkSrcFileBase::`vftable';
+  v2->vfptr = (CAkVPLNodeVtbl *)&CAkSrcFileBase::`vftable;
   *((_BYTE *)v2 + 126) &= 0xC0u;
   v2->m_pStream = 0i64;
   v2->m_pNextAddress = 0i64;
@@ -27,7 +27,7 @@ void __fastcall CAkSrcFileBase::~CAkSrcFileBase(CAkSrcFileBase *this)
 
   v1 = (*((_BYTE *)this + 126) & 0x10) == 0;
   v2 = this;
-  this->vfptr = (CAkVPLNodeVtbl *)&CAkSrcFileBase::`vftable';
+  this->vfptr = (CAkVPLNodeVtbl *)&CAkSrcFileBase::`vftable;
   if ( !v1 )
   {
     v3 = this->m_pAnalysisData;

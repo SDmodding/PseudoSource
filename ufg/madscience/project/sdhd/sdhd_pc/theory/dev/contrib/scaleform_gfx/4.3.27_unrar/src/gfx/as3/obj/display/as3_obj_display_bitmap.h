@@ -68,7 +68,7 @@ Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_display::Bitmap> *__fastc
     Scaleform::GFx::AS3::Instances::fl_display::DisplayObject::DisplayObject(
       v4,
       (Scaleform::GFx::AS3::InstanceTraits::Traits *)&v2->vfptr);
-    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_display::Bitmap::`vftable';
+    v5->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_display::Bitmap::`vftable;
     v5[1].vfptr = 0i64;
     LODWORD(v5[1]._pRCC) = 0;
     BYTE4(v5[1].pRCCRaw) = 1;

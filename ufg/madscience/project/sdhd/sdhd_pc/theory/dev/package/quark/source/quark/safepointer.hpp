@@ -224,7 +224,7 @@ void __fastcall UFG::qSafePointerNode<UFG::RagdollComponent>::qSafePointerNode<U
   UFG::qSafePointerNode<UFG::RagdollComponent>Vtbl *v3; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::RagdollComponent>,UFG::qSafePointerNodeList> *v4; // rcx
 
-  this->vfptr = (UFG::qSafePointerNode<UFG::RagdollComponent>Vtbl *)&UFG::qSafePointerNode<UFG::RagdollComponent>::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::RagdollComponent>Vtbl *)&UFG::qSafePointerNode<UFG::RagdollComponent>::`vftable;
   v1 = &this->m_SafePointerList;
   v1->mNode.mPrev = &v1->mNode;
   v1->mNode.mNext = &v1->mNode;
@@ -255,7 +255,7 @@ void __fastcall UFG::qSafePointerNode<Creature>::~qSafePointerNode<Creature>(UFG
   UFG::qList<UFG::qSafePointerBase<Creature>,UFG::qSafePointerNodeList,1,0> *v4; // [rsp+40h] [rbp+8h]
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<Creature>Vtbl *)&UFG::qSafePointerNode<Creature>::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<Creature>Vtbl *)&UFG::qSafePointerNode<Creature>::`vftable;
   UFG::qSafePointerNode<UFG::DynamicCoverCorner>::SetAllPointersToNull((UFG::qSafePointerNode<UFG::ParkourHandle> *)this);
   v4 = &v1->m_SafePointerList;
   UFG::qList<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList,1,0>::DeleteNodes((UFG::qList<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList,1,0> *)&v1->m_SafePointerList);
@@ -319,7 +319,7 @@ void __fastcall UFG::qSafePointerNodeWithCallbacks<UFG::EncounterBase>::qSafePoi
 
   v1 = this;
   UFG::qSafePointerNode<UFG::EncounterBase>::qSafePointerNode<UFG::EncounterBase>((UFG::qSafePointerNode<UFG::EncounterBase> *)&this->vfptr);
-  v1->vfptr = (UFG::qSafePointerNode<UFG::EncounterBase>Vtbl *)&UFG::qSafePointerNodeWithCallbacks<UFG::EncounterBase>::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::EncounterBase>Vtbl *)&UFG::qSafePointerNodeWithCallbacks<UFG::EncounterBase>::`vftable;
   v2 = &v1->m_SafePointerWithCallbackList;
   v2->mNode.mPrev = &v2->mNode;
   v2->mNode.mNext = &v2->mNode;
@@ -351,7 +351,7 @@ void __fastcall UFG::qSafePointerNodeWithCallbacks<UFG::SpawnRegion>::~qSafePoin
   UFG::qNode<UFG::qSafePointerBase<UFG::SpawnRegion>,UFG::qSafePointerNodeList> *v5; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SpawnRegion>Vtbl *)&UFG::qSafePointerNodeWithCallbacks<UFG::SpawnRegion>::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SpawnRegion>Vtbl *)&UFG::qSafePointerNodeWithCallbacks<UFG::SpawnRegion>::`vftable;
   UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::SetAllPointersToNull((UFG::qSafePointerNodeWithCallbacks<UFG::SimObject> *)this);
   UFG::qList<UFG::qSafePointerWithCallbacksBase<UFG::SpawnRegion>,UFG::qSafePointerNodeList,1,0>::DeleteNodes((UFG::qList<UFG::qSafePointerWithCallbacksBase<UFG::EncounterBase>,UFG::qSafePointerNodeList,1,0> *)&v1->m_SafePointerWithCallbackList);
   v2 = v1->m_SafePointerWithCallbackList.mNode.mPrev;
@@ -360,7 +360,7 @@ void __fastcall UFG::qSafePointerNodeWithCallbacks<UFG::SpawnRegion>::~qSafePoin
   v3->mPrev = v2;
   v1->m_SafePointerWithCallbackList.mNode.mPrev = &v1->m_SafePointerWithCallbackList.mNode;
   v1->m_SafePointerWithCallbackList.mNode.mNext = &v1->m_SafePointerWithCallbackList.mNode;
-  v1->vfptr = (UFG::qSafePointerNode<UFG::SpawnRegion>Vtbl *)&UFG::qSafePointerNode<UFG::SpawnRegion>::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::SpawnRegion>Vtbl *)&UFG::qSafePointerNode<UFG::SpawnRegion>::`vftable;
   UFG::qSafePointerNode<UFG::DynamicCoverCorner>::SetAllPointersToNull((UFG::qSafePointerNode<UFG::ParkourHandle> *)v1);
   UFG::qList<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList,1,0>::DeleteNodes((UFG::qList<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList,1,0> *)&v1->m_SafePointerList);
   v4 = v1->m_SafePointerList.mNode.mPrev;

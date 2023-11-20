@@ -6,7 +6,7 @@ void __fastcall hkXmlLexAnalyzer::hkXmlLexAnalyzer(hkXmlLexAnalyzer *this, hkStr
 
   v2 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkXmlLexAnalyzer::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkXmlLexAnalyzer::`vftable;
   hkParserBuffer::hkParserBuffer(&this->m_buffer, reader);
   v2->m_state = 0;
 }
@@ -84,7 +84,7 @@ LABEL_2:
       return 10;
     }
   }
-  return hkXmlLexAnalyzer::_handleError(v1, "Didn't hit terminating \"");
+  return hkXmlLexAnalyzer::_handleError(v1, "Didnt hit terminating \"");
 }
 
 // File Line: 96

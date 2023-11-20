@@ -39,8 +39,8 @@ void __fastcall UFG::HumanDriverComponent::HumanDriverComponent(UFG::HumanDriver
   v3 = (UFG::qNode<UFG::HumanDriverComponent,UFG::HumanDriverComponent> *)&v2->mPrev;
   v3->mPrev = v3;
   v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HumanDriverComponent::`vftable'{for `UFG::SimComponent'};
-  v2->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::HumanDriverComponent::`vftable'{for `UFG::UpdateInterface'};
+  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HumanDriverComponent::`vftable{for `UFG::SimComponent};
+  v2->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::HumanDriverComponent::`vftable{for `UFG::UpdateInterface};
   UFG::SimpleTimer::SimpleTimer(&v2->mHangTime);
   UFG::SimpleTimer::SimpleTimer(&v2->mMaxSpeedTime);
   v4 = 0i64;
@@ -83,8 +83,8 @@ void __fastcall UFG::HumanDriverComponent::~HumanDriverComponent(UFG::HumanDrive
   UFG::qNode<UFG::HumanDriverComponent,UFG::HumanDriverComponent> *v7; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HumanDriverComponent::`vftable'{for `UFG::SimComponent'};
-  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::HumanDriverComponent::`vftable'{for `UFG::UpdateInterface'};
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::HumanDriverComponent::`vftable{for `UFG::SimComponent};
+  this->vfptr = (UFG::UpdateInterfaceVtbl *)&UFG::HumanDriverComponent::`vftable{for `UFG::UpdateInterface};
   if ( this == UFG::HumanDriverComponent::s_HumanDriverComponentpCurrentIterator )
     UFG::HumanDriverComponent::s_HumanDriverComponentpCurrentIterator = (UFG::HumanDriverComponent *)&this->mPrev[-19];
   v2 = (UFG::qNode<UFG::HumanDriverComponent,UFG::HumanDriverComponent> *)&this->mPrev;

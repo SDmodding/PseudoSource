@@ -6,7 +6,7 @@ AK::IAkPluginParam *__fastcall CreateFlangerFXParams(AK::IAkPluginMemAlloc *in_p
 
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 72ui64);
   if ( result )
-    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkFlangerFXParams::`vftable';
+    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkFlangerFXParams::`vftable;
   return result;
 }
 
@@ -14,21 +14,21 @@ AK::IAkPluginParam *__fastcall CreateFlangerFXParams(AK::IAkPluginMemAlloc *in_p
 // RVA: 0xAF92B0
 void __fastcall CAkFlangerFXParams::CAkFlangerFXParams(CAkFlangerFXParams *this)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkFlangerFXParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkFlangerFXParams::`vftable;
 }
 
 // File Line: 28
 // RVA: 0xAF92D0
 void __fastcall CAkFlangerFXParams::~CAkFlangerFXParams(CAkFlangerFXParams *this)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable;
 }
 
 // File Line: 33
 // RVA: 0xAF92F0
 void __fastcall CAkFlangerFXParams::CAkFlangerFXParams(CAkFlangerFXParams *this, CAkFlangerFXParams *in_rCopy)
 {
-  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkFlangerFXParams::`vftable';
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkFlangerFXParams::`vftable;
   this->m_Params.RTPC.fDryLevel = in_rCopy->m_Params.RTPC.fDryLevel;
   this->m_Params.RTPC.fFfwdLevel = in_rCopy->m_Params.RTPC.fFfwdLevel;
   this->m_Params.RTPC.fFbackLevel = in_rCopy->m_Params.RTPC.fFbackLevel;
@@ -68,7 +68,7 @@ AK::IAkPluginParam *__fastcall CAkFlangerFXParams::Clone(CAkFlangerFXParams *thi
   result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 72ui64);
   if ( result )
   {
-    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkFlangerFXParams::`vftable';
+    result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkFlangerFXParams::`vftable;
     *(float *)&result[1].vfptr = v2->m_Params.RTPC.fDryLevel;
     HIDWORD(result[1].vfptr) = LODWORD(v2->m_Params.RTPC.fFfwdLevel);
     *(float *)&result[2].vfptr = v2->m_Params.RTPC.fFbackLevel;

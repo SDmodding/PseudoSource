@@ -49,7 +49,7 @@ void __fastcall DestructionSetDefinitionTask::Begin(DestructionSetDefinitionTask
           if ( v11 )
           {
             UFG::qReflectObjectType<UFG::StateMachineDefinition,UFG::qReflectObject>::qReflectObjectType<UFG::StateMachineDefinition,UFG::qReflectObject>((UFG::qReflectObjectType<UFG::StateMachineDefinition,UFG::qReflectObject> *)v11);
-            v12->mNext = (UFG::allocator::free_link *)&UFG::StateMachineDefinition::`vftable';
+            v12->mNext = (UFG::allocator::free_link *)&UFG::StateMachineDefinition::`vftable;
             v12[11].mNext = 0i64;
             v12[10].mNext = 0i64;
             LODWORD(v12[12].mNext) = -1;

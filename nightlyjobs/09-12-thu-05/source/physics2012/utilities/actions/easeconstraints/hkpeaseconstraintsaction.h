@@ -7,7 +7,7 @@ void __fastcall hkpEaseConstraintsAction::~hkpEaseConstraintsAction(hkpEaseConst
   int v3; // er8
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpEaseConstraintsAction::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkpEaseConstraintsAction::`vftable;
   v2 = this->m_originalLimits.m_capacityAndFlags;
   this->m_originalLimits.m_size = 0;
   if ( v2 >= 0 )

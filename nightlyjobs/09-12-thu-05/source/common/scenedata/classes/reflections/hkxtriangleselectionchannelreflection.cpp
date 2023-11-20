@@ -31,7 +31,7 @@ hkClass *__fastcall hkxTriangleSelectionChannel::staticClass()
 void __fastcall finishLoadedObjecthkxTriangleSelectionChannel(void *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkxTriangleSelectionChannel::`vftable';
+    *(_QWORD *)p = &hkxTriangleSelectionChannel::`vftable;
 }
 
 // File Line: 68
@@ -45,7 +45,7 @@ void __fastcall cleanupLoadedObjecthkxTriangleSelectionChannel(void *p)
 // RVA: 0xE33620
 void **__fastcall getVtablehkxTriangleSelectionChannel()
 {
-  return &hkxTriangleSelectionChannel::`vftable';
+  return &hkxTriangleSelectionChannel::`vftable;
 }
 
 // File Line: 94

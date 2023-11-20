@@ -27,14 +27,14 @@ void __fastcall CharacterRigidBody::CharacterRigidBody(CharacterRigidBody *this,
 
   v2 = info;
   v3 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
-  this->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
+  this->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkpEntityListenerVtbl *)&hkpEntityListener::`vftable';
-  this->vfptr = (hkpWorldPostSimulationListenerVtbl *)&hkpWorldPostSimulationListener::`vftable';
-  this->vfptr = (hkBaseObjectVtbl *)&CharacterRigidBody::`vftable'{for `hkReferencedObject'};
-  this->vfptr = (hkpEntityListenerVtbl *)&CharacterRigidBody::`vftable'{for `hkpEntityListener'};
-  this->vfptr = (hkpWorldPostSimulationListenerVtbl *)&CharacterRigidBody::`vftable'{for `hkpWorldPostSimulationListener'};
+  this->vfptr = (hkpEntityListenerVtbl *)&hkpEntityListener::`vftable;
+  this->vfptr = (hkpWorldPostSimulationListenerVtbl *)&hkpWorldPostSimulationListener::`vftable;
+  this->vfptr = (hkBaseObjectVtbl *)&CharacterRigidBody::`vftable{for `hkReferencedObject};
+  this->vfptr = (hkpEntityListenerVtbl *)&CharacterRigidBody::`vftable{for `hkpEntityListener};
+  this->vfptr = (hkpWorldPostSimulationListenerVtbl *)&CharacterRigidBody::`vftable{for `hkpWorldPostSimulationListener};
   *(_DWORD *)&this->m_isPlayer = 256;
   this->m_superMassive = 0;
   this->m_verticalContactPoints.m_data = 0i64;
@@ -136,9 +136,9 @@ void __fastcall CharacterRigidBody::~CharacterRigidBody(CharacterRigidBody *this
   hkSimplePropertyValue result; // [rsp+48h] [rbp+10h]
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&CharacterRigidBody::`vftable'{for `hkReferencedObject'};
-  this->vfptr = (hkpEntityListenerVtbl *)&CharacterRigidBody::`vftable'{for `hkpEntityListener'};
-  this->vfptr = (hkpWorldPostSimulationListenerVtbl *)&CharacterRigidBody::`vftable'{for `hkpWorldPostSimulationListener'};
+  this->vfptr = (hkBaseObjectVtbl *)&CharacterRigidBody::`vftable{for `hkReferencedObject};
+  this->vfptr = (hkpEntityListenerVtbl *)&CharacterRigidBody::`vftable{for `hkpEntityListener};
+  this->vfptr = (hkpWorldPostSimulationListenerVtbl *)&CharacterRigidBody::`vftable{for `hkpWorldPostSimulationListener};
   hkpEntity::removeEntityListener((hkpEntity *)&this->m_character->vfptr, (hkpEntityListener *)&this->vfptr);
   hkpWorldObject::removeProperty((hkpWorldObject *)&v1->m_character->vfptr, &result, 0x1130u);
   hkReferencedObject::removeReference((hkReferencedObject *)&v1->m_character->vfptr);
@@ -151,10 +151,10 @@ void __fastcall CharacterRigidBody::~CharacterRigidBody(CharacterRigidBody *this
       48 * (v2 & 0x3FFFFFFF));
   v1->m_verticalContactPoints.m_data = 0i64;
   v1->m_verticalContactPoints.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkpWorldPostSimulationListenerVtbl *)&hkpWorldPostSimulationListener::`vftable';
-  v1->vfptr = (hkpEntityListenerVtbl *)&hkpEntityListener::`vftable';
-  v1->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable';
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkpWorldPostSimulationListenerVtbl *)&hkpWorldPostSimulationListener::`vftable;
+  v1->vfptr = (hkpEntityListenerVtbl *)&hkpEntityListener::`vftable;
+  v1->vfptr = (hkBaseObjectVtbl *)&hkReferencedObject::`vftable;
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 222

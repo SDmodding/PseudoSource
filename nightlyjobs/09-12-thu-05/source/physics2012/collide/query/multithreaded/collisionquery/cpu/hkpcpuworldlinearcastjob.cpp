@@ -106,9 +106,9 @@ __int64 __fastcall hkCpuWorldLinearCastJob(hkJobQueue *jobQueue, hkJobQueue::Job
   v28 = 2139095022;
   v44 = FLOAT_1_1920929eN7;
   v29 = 0i64;
-  v31 = &hkCpuWorldLinearCastCollector::`vftable';
+  v31 = &hkCpuWorldLinearCastCollector::`vftable;
   v9 = 0;
-  v27 = &hkpFixedBufferCdPointCollector::`vftable';
+  v27 = &hkpFixedBufferCdPointCollector::`vftable;
   v32 = *(_QWORD *)(v8 + 24);
   v33 = &v27;
   v37 = *(_QWORD *)v8;
@@ -131,7 +131,7 @@ __int64 __fastcall hkCpuWorldLinearCastJob(hkJobQueue *jobQueue, hkJobQueue::Job
       v52 = 0i64;
       v12 = *(_DWORD *)(v10 + v11 + 48);
       v13 = *(_QWORD *)(v10 + v11 + 40);
-      v27 = &hkpFixedBufferCdPointCollector::`vftable';
+      v27 = &hkpFixedBufferCdPointCollector::`vftable;
       v29 = v13;
       v30 = v12;
       v28 = 2139095022;

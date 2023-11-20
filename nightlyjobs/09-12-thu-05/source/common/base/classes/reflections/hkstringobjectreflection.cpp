@@ -35,7 +35,7 @@ void __fastcall finishLoadedObjecthkStringObject(void *p, int finishing)
   if ( p )
   {
     v2 = (hkStringPtr *)((char *)p + 16);
-    v2[-2].m_stringAndFlag = (const char *)&hkStringObject::`vftable';
+    v2[-2].m_stringAndFlag = (const char *)&hkStringObject::`vftable;
     hkStringPtr::hkStringPtr(v2, (hkFinishLoadedObjectFlag)finishing);
   }
 }
@@ -54,7 +54,7 @@ void **__fastcall getVtablehkStringObject()
   hkStringPtr v1; // [rsp+30h] [rbp-18h]
 
   hkStringPtr::hkStringPtr(&v1, 0);
-  return &hkStringObject::`vftable';
+  return &hkStringObject::`vftable;
 }
 
 // File Line: 94

@@ -80,7 +80,7 @@ void __fastcall finishLoadedObjecthkpPrismaticConstraintData(void *p, int finish
     v2 = finishing;
     v3 = (char *)p;
     hkpConstraintData::hkpConstraintData((hkpConstraintData *)p, (hkFinishLoadedObjectFlag)finishing);
-    *(_QWORD *)v3 = &hkpPrismaticConstraintData::`vftable';
+    *(_QWORD *)v3 = &hkpPrismaticConstraintData::`vftable;
     hkpPrismaticConstraintData::Atoms::Atoms(
       (hkpPrismaticConstraintData::Atoms *)(v3 + 32),
       (hkFinishLoadedObjectFlag)v2);
@@ -102,7 +102,7 @@ hkBaseObjectVtbl *__fastcall getVtablehkpPrismaticConstraintData()
   hkpPrismaticConstraintData::Atoms v2; // [rsp+40h] [rbp-108h]
 
   hkpConstraintData::hkpConstraintData(&v1, 0);
-  v1.vfptr = (hkBaseObjectVtbl *)&hkpPrismaticConstraintData::`vftable';
+  v1.vfptr = (hkBaseObjectVtbl *)&hkpPrismaticConstraintData::`vftable;
   hkpPrismaticConstraintData::Atoms::Atoms(&v2, 0);
   return v1.vfptr;
 }

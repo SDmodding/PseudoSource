@@ -5,7 +5,7 @@ void __fastcall hkaiNavMeshCutter::hkaiNavMeshCutter(hkaiNavMeshCutter *this)
   hkaiNavMeshCutter *v1; // rbx
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshCutter::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshCutter::`vftable;
   this->m_meshInfos.m_data = 0i64;
   this->m_meshInfos.m_size = 0;
   this->m_meshInfos.m_capacityAndFlags = 2147483648;
@@ -33,7 +33,7 @@ void __fastcall hkaiNavMeshCutter::hkaiNavMeshCutter(hkaiNavMeshCutter *this)
 // RVA: 0xBEF2C0
 void __fastcall hkaiNavMeshCutter::hkaiNavMeshCutter(hkaiNavMeshCutter *this, hkFinishLoadedObjectFlag f)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshCutter::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiNavMeshCutter::`vftable;
 }
 
 // File Line: 72

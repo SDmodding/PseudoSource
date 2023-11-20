@@ -28,7 +28,7 @@ void __fastcall UFG::DropShadowComponent::DropShadowComponent(UFG::DropShadowCom
   v2 = (UFG::qNode<UFG::DropShadowComponent,UFG::DropShadowComponent> *)&v1->mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::DropShadowComponent::`vftable';
+  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::DropShadowComponent::`vftable;
   v1->mShadowTextureID = 0;
   v1->mScale.x = 0.75;
   v1->mScale.y = 0.75;

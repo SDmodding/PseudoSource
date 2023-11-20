@@ -14,7 +14,7 @@ void __fastcall UFG::TSCharacterSearch::~TSCharacterSearch(UFG::TSCharacterSearc
   if ( v2 )
   {
     v3 = v2 - 1;
-    `eh vector destructor iterator'(v2, 4ui64, v2[-1].mUID, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v2, 4ui64, v2[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v3);
   }
   v1->mCharacterTypes.p = 0i64;
@@ -28,7 +28,7 @@ void __fastcall UFG::TSCharacterSearch::~TSCharacterSearch(UFG::TSCharacterSearc
   if ( v5 )
   {
     v6 = v5 - 1;
-    `eh vector destructor iterator'(v5, 4ui64, v5[-1].mUID, (void (__fastcall *)(void *))_);
+    `eh vector destructor iterator(v5, 4ui64, v5[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v6);
   }
   v1->mFactions.p = 0i64;

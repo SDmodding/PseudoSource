@@ -8,14 +8,14 @@ void __fastcall OSuite::ZAtomEntry::UploadRequest::UploadRequest(OSuite::ZAtomEn
 
   v3 = this;
   v4 = externalStatus;
-  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZAtomEntry::Request::`vftable';
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZAtomEntry::Request::`vftable;
   v5 = pAttachment;
   OSuite::SCallbackData::SCallbackData(&this->m_CbData);
   v3->m_clientCallback.m_Closure.m_pthis = 0i64;
   v3->m_clientCallback.m_Closure.m_pFunction = 0i64;
   v3->m_externalStatus = v4;
   v3->m_pAttachment = v5;
-  v3->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZAtomEntry::UploadRequest::`vftable';
+  v3->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZAtomEntry::UploadRequest::`vftable;
   OSuite::ZStringBuilder::ZStringBuilder((OSuite::ZStringBuilder *)&v3->m_entrycontent, 0x400ui64);
   v3->m_readerOwnership = 1;
 }

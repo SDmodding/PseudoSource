@@ -23,7 +23,7 @@ void __fastcall TargetJumpTask::~TargetJumpTask(TargetJumpTask *this)
   UFG::qNode<ITask,ITask> *v19; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&TargetJumpTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&TargetJumpTask::`vftable;
   v2 = &this->m_pTargetSimObject;
   if ( this->m_pTargetSimObject.m_pPointer )
   {
@@ -75,7 +75,7 @@ void __fastcall TargetJumpTask::~TargetJumpTask(TargetJumpTask *this)
   v16->mPrev = v15;
   v12->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v12->mPrev;
   v1->m_pCharacterPhysicsComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->m_pCharacterPhysicsComponent.mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v17 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v18 = v1->mPrev;
   v19 = v1->mNext;
@@ -100,7 +100,7 @@ void __fastcall TargetPlayTask::~TargetPlayTask(TargetPlayTask *this)
   UFG::qNode<ITask,ITask> *v9; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&TargetPlayTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&TargetPlayTask::`vftable;
   v2 = &this->mTarget;
   if ( this->mTarget.m_pPointer )
   {
@@ -118,7 +118,7 @@ void __fastcall TargetPlayTask::~TargetPlayTask(TargetPlayTask *this)
   v6->mPrev = v5;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v8 = v1->mPrev;
   v9 = v1->mNext;
@@ -143,7 +143,7 @@ void __fastcall TargetSyncPositionTask::~TargetSyncPositionTask(TargetSyncPositi
   UFG::qNode<ITask,ITask> *v9; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&TargetSyncPositionTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&TargetSyncPositionTask::`vftable;
   v2 = &this->mSimObjectTarget;
   if ( this->mSimObjectTarget.m_pPointer )
   {
@@ -161,7 +161,7 @@ void __fastcall TargetSyncPositionTask::~TargetSyncPositionTask(TargetSyncPositi
   v6->mPrev = v5;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v8 = v1->mPrev;
   v9 = v1->mNext;
@@ -186,7 +186,7 @@ void __fastcall TargetAttackRightsTask::~TargetAttackRightsTask(TargetAttackRigh
   UFG::qNode<ITask,ITask> *v9; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&TargetAttackRightsTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&TargetAttackRightsTask::`vftable;
   v2 = &this->mTargetAttackRightsComponent;
   if ( this->mTargetAttackRightsComponent.m_pPointer )
   {
@@ -204,7 +204,7 @@ void __fastcall TargetAttackRightsTask::~TargetAttackRightsTask(TargetAttackRigh
   v6->mPrev = v5;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v8 = v1->mPrev;
   v9 = v1->mNext;
@@ -229,7 +229,7 @@ void __fastcall TargetFractureStrengthTask::~TargetFractureStrengthTask(TargetFr
   UFG::qNode<ITask,ITask> *v9; // rax
 
   v1 = this;
-  this->vfptr = (ITaskVtbl *)&TargetFractureStrengthTask::`vftable';
+  this->vfptr = (ITaskVtbl *)&TargetFractureStrengthTask::`vftable;
   v2 = &this->mRigidBody;
   if ( this->mRigidBody.m_pPointer )
   {
@@ -247,7 +247,7 @@ void __fastcall TargetFractureStrengthTask::~TargetFractureStrengthTask(TargetFr
   v6->mPrev = v5;
   v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
   v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable';
+  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
   v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
   v8 = v1->mPrev;
   v9 = v1->mNext;

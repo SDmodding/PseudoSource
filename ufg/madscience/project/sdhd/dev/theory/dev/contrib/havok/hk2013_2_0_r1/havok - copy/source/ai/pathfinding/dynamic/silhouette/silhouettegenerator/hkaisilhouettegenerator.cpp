@@ -4,7 +4,7 @@ void __fastcall hkaiSilhouetteGenerator::hkaiSilhouetteGenerator(hkaiSilhouetteG
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_lazyRecomputeDisplacementThreshold = 0.1;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteGenerator::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteGenerator::`vftable;
   this->m_userData = 0i64;
   this->m_type.m_storage = type;
   this->m_forceGenerateOntoPpu = 0;
@@ -18,7 +18,7 @@ void __fastcall hkaiSilhouetteGenerator::hkaiSilhouetteGenerator(hkaiSilhouetteG
 // RVA: 0xC09DE0
 void __fastcall hkaiSilhouetteGenerator::hkaiSilhouetteGenerator(hkaiSilhouetteGenerator *this, hkFinishLoadedObjectFlag f)
 {
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteGenerator::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteGenerator::`vftable;
 }
 
 // File Line: 33
@@ -29,12 +29,12 @@ void __fastcall hkaiSilhouetteGenerator::~hkaiSilhouetteGenerator(hkaiSilhouette
   hkaiConvexSilhouetteSet *v2; // rcx
 
   v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteGenerator::`vftable';
+  this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteGenerator::`vftable;
   v2 = this->m_cachedSilhouettes.m_pntr;
   if ( v2 )
     hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
   v1->m_cachedSilhouettes.m_pntr = 0i64;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable';
+  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 38

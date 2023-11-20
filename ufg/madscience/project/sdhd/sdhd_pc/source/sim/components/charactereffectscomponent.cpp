@@ -51,7 +51,7 @@ void __fastcall UFG::CharacterEffectsComponent::CharacterEffectsComponent(UFG::C
   v7 = (UFG::qNode<UFG::CharacterEffectsComponent,UFG::CharacterEffectsComponent> *)&v6->mPrev;
   v7->mPrev = v7;
   v7->mNext = v7;
-  v6->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CharacterEffectsComponent::`vftable';
+  v6->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CharacterEffectsComponent::`vftable;
   *(_WORD *)&v6->InvulnerableToFire = 256;
   UFG::RebindingComponentHandle<UFG::CharacterAnimationComponent,0>::RebindingComponentHandle<UFG::CharacterAnimationComponent,0>(&v6->mCharacterAnimationComponent);
   UFG::RebindingComponentHandle<UFG::CharacterPhysicsComponent,0>::RebindingComponentHandle<UFG::CharacterPhysicsComponent,0>(&v6->mCharacterPhysicsComponent);
@@ -106,7 +106,7 @@ void __fastcall UFG::CharacterEffectsComponent::~CharacterEffectsComponent(UFG::
   UFG::qNode<UFG::CharacterEffectsComponent,UFG::CharacterEffectsComponent> *v11; // rax
 
   v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CharacterEffectsComponent::`vftable';
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CharacterEffectsComponent::`vftable;
   if ( this == UFG::CharacterEffectsComponent::s_CharacterEffectsComponentpCurrentIterator )
     UFG::CharacterEffectsComponent::s_CharacterEffectsComponentpCurrentIterator = (UFG::CharacterEffectsComponent *)&this->mPrev[-4];
   v2 = (UFG::qNode<UFG::CharacterEffectsComponent,UFG::CharacterEffectsComponent> *)&this->mPrev;

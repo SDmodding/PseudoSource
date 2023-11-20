@@ -1052,12 +1052,12 @@ void __fastcall UFG::TSWorld::MthdC_get_closest_sidewalk_position(SSInvokedMetho
       v23 = 0;
     }
     *v2 = (SSInstance *)SSBoolean::pool_new(v23);
-    v24 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result;
-    if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result )
+    v24 = `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result;
+    if ( !`UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result )
     {
       v25 = UFG::qResourceWarehouse::Instance();
       v24 = UFG::qResourceWarehouse::GetInventory(v25, 0x43E99F7Eu);
-      `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>'::`2'::result = v24;
+      `UFG::qGetResourceInventory<UFG::AISidewalkSectionResource>::`2::result = v24;
     }
     UFG::qResourceHandle::Close(&v30, v24);
     UFG::qResourceHandle::~qResourceHandle(&v30);
@@ -2037,12 +2037,12 @@ bool __fastcall UFG::TSWorld::Coro_render_override_environment(SSInvokedCoroutin
     *(float *)&v5->i_user_data = v9 - UFG::Metrics::msRealTimeDelta_Accurate;
   }
   v7->m_OverrideStateBlockAmount = v6;
-  v13 = `UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result;
-  if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result )
+  v13 = `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result;
+  if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result )
   {
     v14 = UFG::qResourceWarehouse::Instance();
     v13 = UFG::qResourceWarehouse::GetInventory(v14, 0x4D04C7F2u);
-    `UFG::qGetResourceInventory<Illusion::StateBlock>'::`2'::result = v13;
+    `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result = v13;
   }
   UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v8->mOverrideStateBlockHandle.mPrev, 0x4D04C7F2u, v2, v13);
   return v6 == v4;
